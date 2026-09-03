@@ -37,6 +37,25 @@ enough to run the component in a normal browser:
   API key under Settings → AI Autofill Access; there's no session-provided
   fallback outside the Artifacts runtime.
 
-A published Claude Artifact version of this app — with real shared community
-storage and photo-based autofill wired to the Artifacts runtime instead —
-is available separately; ask for the link if you don't have it.
+## Published Artifact version
+
+https://claude.ai/code/artifact/a0f33b89-9214-44b7-8132-78d3594612ac
+
+A separate, standalone build of the same app, published as a Claude Artifact
+so it needs no install step and gets real shared community storage. It
+differs from `src/DialInCollective.jsx` in a few ways forced by what a
+published Artifact page can and can't do:
+
+- **Community storage is real** — the Artifact's `db` capability backs the
+  shared recipe-aggregate buckets, so "the community's" data in that build
+  actually is shared across everyone who opens it (equipment, coffees, and
+  shot history stay private to each viewer's browser, same as this build).
+- **Roaster-URL autofill is gone.** A published Artifact page can't fetch an
+  arbitrary external URL, so reading a roaster's product page by link isn't
+  possible there. The URL field still exists for saving a reference link.
+- **Screenshot autofill still works**, using the Artifact `sample`
+  capability (Claude on the viewer's own account) instead of a hand-built
+  Anthropic API call — no API key needed, unlike this repo's build.
+- Icons are inlined as plain SVG path data instead of importing
+  `lucide-react`, since a published Artifact page can only load a script
+  from a small CDN allowlist.
