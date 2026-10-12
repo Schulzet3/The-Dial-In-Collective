@@ -2,7 +2,7 @@ import * as C from '../lib/constants.js';
 import * as M from '../lib/model.js';
 import * as E from '../lib/engine.js';
 import * as U from '../lib/ui.js';
-import {createCloudClient,secureOrigin} from './client.js';
+import {createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT} from './client.js';
 import {IndexedStore,Outbox} from './outbox.js';
 import {hydrate,applyPending,shotPayload} from './mapping.js';
 import {CLOUD_CONFIG} from './config.js';
@@ -63,11 +63,12 @@ class CloudApp {
  }
  auth(){
   const email=()=>field('Email','email','',{type:'email',required:true,extra:'autocomplete="email"'});
-  const password=(fresh=false)=>field(fresh?'New password':'Password','password','',{type:'password',required:true,extra:`autocomplete="${fresh?'new-password':'current-password'}" ${fresh?'minlength="12"':''}`});
-  if(this.recovery)return `<section class=welcome><h2>Choose a new password</h2><form id=auth-password>${password(true)}<button class="primary full space-top">Save password</button></form></section>`;
+  const freshHint=`<p class="helper" id="password-requirements">${e(PASSWORD_HINT)}</p>`;
+  const password=(fresh=false)=>field(fresh?'New password':'Password','password','',{type:'password',required:true,extra:`autocomplete="${fresh?'new-password':'current-password'}" ${fresh?'minlength="8" aria-describedby="password-requirements"':''}`});
+  if(this.recovery)return `<section class=welcome><h2>Choose a new password</h2><form id=auth-password>${password(true)}${freshHint}<button class="primary full space-top">Save password</button></form></section>`;
   if(this.identity)return `<section class=welcome><h2>Your invitation</h2><p class=helper>${e(this.identity.email)}</p><p class=helper>${this.status?.emailVerified?'Use the beta invitation supplied for your account.':'Verify your email before requesting beta access.'}</p><form id=auth-invite>${field('Invitation code','token','',{required:true})}<button class="primary full space-top">Use invitation</button></form>${button('Sign out','signout','','text-button')}</section>`;
   const reset=this.authView==='reset',signup=this.authView==='signup';
-  return `<section class="welcome cloud-auth"><h2>${reset?'Reset your password':signup?'Create your account':'Welcome back'}</h2><p class=helper>Your coffee, wherever you brew.</p><form id="auth-${this.authView}">${email()}${reset?'':password(signup)}<button class="primary full space-top">${reset?'Send recovery email':signup?'Create account':'Sign in'}</button></form><div class=row-actions>${button(signup||reset?'Back to sign in':'Create an account','auth-view',`data-view="${signup||reset?'signin':'signup'}"`,'text-button')}${!reset?button('Forgot password?','auth-view','data-view="reset"','text-button'):''}</div></section>`;
+  return `<section class="welcome cloud-auth"><h2>${reset?'Reset your password':signup?'Create your account':'Welcome back'}</h2><p class=helper>Your coffee, wherever you brew.</p><form id="auth-${this.authView}">${email()}${reset?'':password(signup)}${signup?freshHint:''}<button class="primary full space-top">${reset?'Send recovery email':signup?'Create account':'Sign in'}</button></form><div class=row-actions>${button(signup||reset?'Back to sign in':'Create an account','auth-view',`data-view="${signup||reset?'signin':'signup'}"`,'text-button')}${!reset?button('Forgot password?','auth-view','data-view="reset"','text-button'):''}</div></section>`;
  }
  coffees(){
   const s=this.state,setup=M.activeSetup(s),w=M.workspace(s);
@@ -121,7 +122,8 @@ class CloudApp {
  change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
-   if(id==='auth-signin'){await this.client.signIn(d.email,d.password);this.identity=await this.client.identity();await this.connect();}
+   if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
+    if(id==='auth-signin'){await this.client.signIn(d.email,d.password);this.identity=await this.client.identity();await this.connect();}
    else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.authView='signin';this.notice='Check your email to confirm your address. Beta access also needs an invitation.';this.render();}
    else if(id==='auth-reset'){this.notice=await this.client.requestReset(d.email);this.render();}
    else if(id==='auth-password'){await this.client.setPassword(d.password);this.recovery=false;this.notice='Password updated.';await this.connect();}

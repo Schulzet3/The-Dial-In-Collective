@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {Outbox} from '../site/cloud/outbox.js';
 import {patchAcknowledgement} from '../site/cloud/cache.js';
-import {CloudError,createCloudClient,secureOrigin} from '../site/cloud/client.js';
+import {CloudError,createCloudClient,secureOrigin,validateNewPassword} from '../site/cloud/client.js';
 import {hydrate,applyPending,shotPayload} from '../site/cloud/mapping.js';
 import * as M from '../site/lib/model.js';import * as E from '../site/lib/engine.js';
 import {rawFixture,rawShot,OWNER,TIME} from './cloud-fixtures/raw.js';
@@ -40,3 +40,16 @@ test('signout scope only affects current device',async()=>{const f=authFixture()
 test('admission comes from server, not user metadata',async()=>{const f=authFixture();await f.c.status();assert.equal(f.calls[0].name,'dic_session_status');f.c.dispose();});
 test('browser writes bind original queue owner at server boundary',async()=>{const f=authFixture();await f.c.mutate({id:'mutation',owner:OWNER,action:'save_shot',payload:{id:'shot'}});assert.equal(f.calls[0].name,'dic_apply_client_change');assert.equal(f.calls[0].p.expected_owner,OWNER);f.c.dispose();});
 test('hydration restores latest-shot advice to the main recommendation',()=>{const r=rawFixture();r.shots=[rawShot({feed_mode:'standard',grind_setting:1,extraction:4,is_dialed_in:false,personal_family_id:null})];const s=hydrate(r),rec=E.recommendation(s,'coffee');assert.ok(s.shots[0].suggestion);assert.equal(rec.grind.source,'Next setting to try');assert.equal(rec.grind.value,1.2);});
+
+test('new passwords accept exactly 8 characters with uppercase and a special character',()=>{
+ assert.equal(validateNewPassword('Latte@12'),null);
+ assert.equal(validateNewPassword('Coffee!A'),null);
+ assert.equal(validateNewPassword('Coffee 1!'),null);
+});
+test('new password validation rejects too short, lowercase only, and missing symbols',()=>{
+ assert.match(validateNewPassword('Short!A'),/8 characters/);
+ assert.match(validateNewPassword('coffeebar!'),/uppercase/);
+ assert.match(validateNewPassword('Coffee123'),/special/);
+ assert.match(validateNewPassword('Coffee🙂12'),/special/);
+ assert.match(validateNewPassword(''),/8 characters/);
+});

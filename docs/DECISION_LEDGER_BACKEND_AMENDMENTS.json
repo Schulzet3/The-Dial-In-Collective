@@ -5,37 +5,59 @@
   "source": "Explicit user approvals in the continuing project conversation.",
   "decisions": [
     {
-      "id": "B001", "status": "Locked", "topic": "External beta release scope",
+      "id": "B001",
+      "status": "Locked",
+      "topic": "External beta release scope",
       "decision": "Build real accounts, cloud syncing and shared community data before hosting the external beta.",
       "relationship": "Phase transition after the local-first prototype, not a reversal of the approved prototype work."
     },
     {
-      "id": "B002", "status": "Locked", "topic": "Development budget",
+      "id": "B002",
+      "status": "Locked",
+      "topic": "Development budget",
       "decision": "Use Supabase Free for development. No paid projects, branches, upgrades or domain purchase without explicit approval."
     },
     {
-      "id": "B003", "status": "Locked", "topic": "Automatic backup destination",
+      "id": "B003",
+      "status": "Locked",
+      "topic": "Automatic backup destination",
       "decision": "Google Drive is the primary automatic backup destination. Preserve database and application code independently.",
       "implementation_status": "Folder created previously. Unattended credentials, schedule, encryption, alerts and restore drill are not configured by the foundation migrations.",
       "proposed_tuning": "Nightly encrypted exports and approximately 30 days retention remain the proposed starting configuration, not a claim of a running backup job."
     },
     {
-      "id": "B004", "status": "Locked", "topic": "Repository access",
+      "id": "B004",
+      "status": "Locked",
+      "topic": "Repository access",
       "decision": "Repository is private. Development changes use development/backend-foundation. Never commit credentials or personal database exports, regardless of visibility.",
       "verified_repository": "Schulzet3/The-Dial-In-Collective"
     },
     {
-      "id": "B005", "status": "Locked", "topic": "Preserve working local app",
+      "id": "B005",
+      "status": "Locked",
+      "topic": "Preserve working local app",
       "decision": "Keep the tested prototype look and feel and personal workflow. Backend changes do not silently replace its local data or publish its demo records."
     },
     {
-      "id": "B006", "status": "Locked", "topic": "Deferred complexity",
+      "id": "B006",
+      "status": "Locked",
+      "topic": "Deferred complexity",
       "decision": "Pressure/flow profiling minutiae remain deferred. Existing approved advanced-feature and history semantics remain recorded for later, not discarded."
     },
     {
-      "id": "B007", "status": "Locked", "topic": "Local Mac delivery queue",
+      "id": "B007",
+      "status": "Locked",
+      "topic": "Local Mac delivery queue",
       "decision": "Retain the requested double-click Mac launcher and Documents-folder updater for the next applicable local distribution.",
       "implementation_status": "Not implemented by the cloud database foundation."
+    },
+    {
+      "id": "B008",
+      "status": "Locked",
+      "topic": "Account password requirements",
+      "decision": "New passwords must have at least 8 characters, one uppercase letter (A-Z) and one allowed special character. No lowercase or digit requirement. Apply to account creation and password recovery; do not impose new creation rules when signing into an existing account.",
+      "relationship": "Explicitly replaces the previously unapproved 12-character new-password form minimum. Email verification, private user data, and all other locked access decisions remain in force.",
+      "implementation_status": "Owner test frontend changed and unit tests added. Supabase Auth project password length and required character settings must be checked for compatibility before real signup and recovery verification."
     }
   ],
   "implementation_constraints": [

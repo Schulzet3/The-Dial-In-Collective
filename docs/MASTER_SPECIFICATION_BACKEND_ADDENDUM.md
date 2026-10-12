@@ -13,6 +13,11 @@ Google Drive is the approved automatic backup destination. The agreed folder is 
 
 ## Identity and access
 
+### Account password policy (owner-approved 2026-10-12)
+
+New account passwords and password recovery must require at least **8 characters, one uppercase letter (A-Z), and one supported special character**. Do not additionally require a digit or lowercase letter. This explicitly replaces the unapproved 12-character client-side limit. Existing sign-ins are not subject to a new-password validation gate. Apply clear inline guidance and validate before submitting a new password. Ensure the Supabase Auth project settings do not reject passwords that meet this policy; final server-side settings and real email/signup/reset tests remain a separate verification step.
+
+
 Keep email-based accounts, password recovery, persistent sessions, minimal personal fields, and a revocable/replaceable beta admission link. Credentials remain managed by Supabase Auth; never store them in application preference tables or GitHub. New accounts are pending until admitted. User-supplied metadata cannot grant membership or administration.
 
 Raw personal shots, free-text notes, preferences, workspaces, setup names and identity mappings are owner-protected. Community views expose only qualifying structured shot information and optional equipment details. Admin review permissions do not give routine access to another user's private notes or raw history. Only verified canonical coffee information is visible to ordinary admitted users. Users submit proposals/evidence; they cannot overwrite canonical facts or approve their own proposals directly.

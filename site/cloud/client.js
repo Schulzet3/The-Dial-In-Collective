@@ -30,3 +30,13 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin}={}
   dispose(){subscription.unsubscribe();listeners.clear();}
  };
 }
+
+// New-password policy explicitly approved for the owner test.
+export const PASSWORD_HINT='At least 8 characters, one uppercase letter (A-Z), and one special character.';
+const PASSWORD_SYMBOLS="!@#$%^&*()_+-=[]{};'\\:\"|<>?,./`~";
+export function validateNewPassword(value){
+ if(typeof value!=='string'||value.length<8)return 'Use at least 8 characters.';
+ if(!/[A-Z]/.test(value))return 'Include at least one uppercase letter (A-Z).';
+ if(![...value].some(character=>PASSWORD_SYMBOLS.includes(character)))return 'Include at least one special character (such as !, @, or #).';
+ return null;
+}
