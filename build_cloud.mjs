@@ -5,7 +5,7 @@ const root=path.dirname(fileURLToPath(import.meta.url));
 const {SUPABASE_URL:url,SUPABASE_PUBLISHABLE_KEY:key}=process.env;
 if(!url||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)||!key?.startsWith('sb_publishable_'))throw new Error('Provide SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY to the build environment. Never use service-role, database or backup credentials.');
 await rm(path.join(root,'dist'),{recursive:true,force:true});
-const files=['styles.css','icon.svg','cloud/client.js','cloud/cache.js','cloud/outbox.js','cloud/mapping.js','cloud/main.js','cloud/confirmation.js','lib/constants.js','lib/model.js','lib/engine.js','lib/ui.js'];
+const files=['styles.css','icon.svg','cloud/client.js','cloud/cache.js','cloud/outbox.js','cloud/mapping.js','cloud/main.js','cloud/confirmation.js','cloud/import-entry.js','cloud/import-integration.js','cloud/import-ui.js','cloud/import-preview.js','cloud/import.css','lib/constants.js','lib/model.js','lib/engine.js','lib/ui.js'];
 for(const file of files){const dst=path.join(root,'dist',file);await mkdir(path.dirname(dst),{recursive:true});await copyFile(path.join(root,'site',file),dst);}
 await mkdir(path.join(root,'dist/vendor'),{recursive:true});
 await copyFile(path.join(root,'node_modules/@supabase/supabase-js/dist/umd/supabase.js'),path.join(root,'dist/vendor/supabase.js'));
