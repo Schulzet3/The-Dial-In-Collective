@@ -1,0 +1,22 @@
+{
+  "product": "The Dial In Collective",
+  "amendment": "private-backup-courier",
+  "status": "Implementation staged; no schedule or disaster recovery verified",
+  "source": "Owner explicitly approved using a private Google Apps Script rather than public OAuth/app domain, then authorized Google Drive and stored Actions read-only token",
+  "preservation": "This adds an implementation record to locked B003 and B004 without replacing or weakening any Locked decisions.",
+  "decisions": [
+    {
+      "id": "B003-implementation-1",
+      "status": "Approved implementation, not recovery verified",
+      "topic": "Google Drive backup authorization",
+      "decision": "A standalone owner-authorized Google Apps Script with drive.file permission transfers encrypted artifacts from the private GitHub Actions worker into a script-owned private Google Drive folder. No custom domain, public OAuth app, or removal of Netlify SSO is needed.",
+      "implementation_status": "User confirmed Apps Script script properties; separate connected Drive metadata verified folder exists. GitHub worker staged on development/backend-foundation only; decryption key, database credentials, schedule, actual backup and restore not installed/verified.",
+      "safeguards": [
+        "Never put credentials, database passwords, encryption identity, or personal backups in the repository or this chat.",
+        "Staged GitHub workflow must not be enabled on default branch before owner configures scoped secrets and offline decryption key.",
+        "Restore test including Auth and non-database settings remains mandatory before enabling private.import_control.saves_enabled.",
+        "No original Mac/iPhone prototype or local records are modified."
+      ]
+    }
+  ]
+}

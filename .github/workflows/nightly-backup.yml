@@ -1,0 +1,37 @@
+name: DIC encrypted database backup
+
+# Staged on development only. Scheduled workflows run from the default branch.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 9 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dic-private-encrypted-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SUPABASE_PROJECT_REF: azviqqejypsefzilgonr
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      BACKUP_AGE_RECIPIENT: ${{ vars.BACKUP_AGE_RECIPIENT }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install age encryption
+        run: sudo apt-get update -qq && sudo apt-get install -y age
+      - name: Encrypted PostgreSQL snapshot
+        run: bash scripts/backups/create-nightly-encrypted-dump.sh
+      - name: Upload ciphertext only
+        uses: actions/upload-artifact@v4
+        with:
+          name: dic-encrypted-nightly-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic-nightly-${{ github.run_id }}/encrypted/backup.age
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
