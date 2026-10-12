@@ -1,0 +1,9 @@
+# Owner development preview only; no site is deployed by this file alone.
+[build]
+  command = "npm test && npm run build:cloud"
+  publish = "dist"
+[build.environment]
+  NODE_VERSION = "22"
+# Add only SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY to build environment.
+# Exact HTTPS callbacks, email delivery and intended owner admission must be
+# configured and tested before sending a login link. Do not invite beta users yet.
