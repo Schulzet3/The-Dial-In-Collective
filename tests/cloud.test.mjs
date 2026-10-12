@@ -3,6 +3,7 @@ import {Outbox} from '../site/cloud/outbox.js';
 import {patchAcknowledgement} from '../site/cloud/cache.js';
 import {CloudError,createCloudClient,secureOrigin,validateNewPassword} from '../site/cloud/client.js';
 import {hydrate,applyPending,shotPayload} from '../site/cloud/mapping.js';
+import {emailConfirmationView} from '../site/cloud/confirmation.js';
 import * as M from '../site/lib/model.js';import * as E from '../site/lib/engine.js';
 import {rawFixture,rawShot,OWNER,TIME} from './cloud-fixtures/raw.js';
 class Store{constructor(){this.events=[];this.receipts=[];this.seq=0;}async put(e){const old=this.events.find(x=>x.id===e.id&&x.owner===e.owner);this.events=this.events.filter(x=>!(x.id===e.id&&x.owner===e.owner));this.events.push({...structuredClone(e),sequence:old?.sequence||++this.seq});}async list(owner){return structuredClone(this.events.filter(x=>x.owner===owner).sort((a,b)=>a.sequence-b.sequence));}async acknowledge(event,result){this.receipts.push({event,result});this.events=this.events.filter(x=>!(x.id===event.id&&x.owner===event.owner));}}
@@ -52,4 +53,26 @@ test('new password validation rejects too short, lowercase only, and missing sym
  assert.match(validateNewPassword('Coffee123'),/special/);
  assert.match(validateNewPassword('Coffee🙂12'),/special/);
  assert.match(validateNewPassword(''),/8 characters/);
+});
+
+test('email verification is a prominent dedicated screen with a sign-in route',()=>{
+ const page=emailConfirmationView('person@example.com');
+ assert.match(page,/<h2[^>]*>Check your email to confirm your address<\/h2>/);
+ assert.match(page,/We requested a verification link for/);
+ assert.match(page,/person@example\.com/);
+ assert.match(page,/data-view="signin"/);
+ assert.match(page,/data-view="signup"/);
+ assert.doesNotMatch(page,/id="auth-signup"/);
+});
+test('confirmation page safely escapes the submitted email',()=>{
+ const page=emailConfirmationView('a<script>@example.com');
+ assert.doesNotMatch(page,/<script>/);
+ assert.match(page,/a&lt;script&gt;@example\.com/);
+});
+test('signup uses confirmation page rather than a temporary inline notice',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const file=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ assert.match(file,/this\.authView='check-email'/);
+ assert.match(file,/return emailConfirmationView\(this\.confirmationEmail\)/);
+ assert.doesNotMatch(file,/this\.notice='Check your email to confirm your address\./);
 });

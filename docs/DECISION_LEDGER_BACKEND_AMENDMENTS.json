@@ -58,6 +58,14 @@
       "decision": "New passwords must have at least 8 characters, one uppercase letter (A-Z) and one allowed special character. No lowercase or digit requirement. Apply to account creation and password recovery; do not impose new creation rules when signing into an existing account.",
       "relationship": "Explicitly replaces the previously unapproved 12-character new-password form minimum. Email verification, private user data, and all other locked access decisions remain in force.",
       "implementation_status": "Owner test frontend changed and unit tests added. Supabase Auth project password length and required character settings must be checked for compatibility before real signup and recovery verification."
+    },
+    {
+      "id": "B009",
+      "status": "Locked",
+      "topic": "Email confirmation visibility",
+      "decision": "After successful registration, show a dedicated, prominent Check your email to confirm your address screen with the submitted address, confirmation guidance, and an explicit return-to-sign-in action; do not rely solely on a transient notice.",
+      "relationship": "Owner-approved signup UX refinement. Email verification and beta invitation requirements remain unchanged.",
+      "implementation_status": "Dedicated view and unit checks committed; hosted deploy and manual email-path verification required."
     }
   ],
   "implementation_constraints": [

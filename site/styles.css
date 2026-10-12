@@ -60,3 +60,19 @@ dialog{color:var(--ink);background:var(--surface);border:1px solid var(--line);p
 }
 
 .settings-save-status { padding: 10px 18px; flex-shrink: 0; font-size: 12px; line-height: 1.5; color: var(--accent-text); background: var(--well); border-bottom: 1px solid var(--line); }
+
+
+/* Dedicated, accessible confirmation step after account registration. */
+.email-confirmation{max-width:510px;margin:0 auto;padding:48px 0 15px;text-align:center}
+.confirmation-icon{width:76px;height:76px;display:grid;place-items:center;color:var(--accent);background:var(--well);border:1px solid var(--line);border-radius:22px;margin:0 auto 24px}
+.email-confirmation .eyebrow{margin-bottom:12px}
+.email-confirmation h2{font-size:clamp(30px,6vw,40px);line-height:1.14;letter-spacing:-.035em;margin:0 auto 21px;max-width:490px}
+.confirmation-intro{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 3px}
+.confirmation-address{font-size:16px;font-weight:600;overflow-wrap:anywhere;margin:0 0 26px}
+.confirmation-instructions{border:1px solid var(--line);background:var(--well);border-radius:12px;padding:20px;text-align:left;font-size:14px;line-height:1.65;margin:0 auto 24px}
+.confirmation-instructions strong{display:block;margin-bottom:5px}
+.confirmation-instructions p{margin:0;color:var(--muted)}
+.confirmation-buttons{display:flex;flex-direction:column;align-items:stretch;max-width:390px;gap:10px;margin:0 auto}
+.confirmation-buttons .text-button{justify-content:center}
+#confirmation-title:focus{outline:none}
+@media(max-width:480px){.email-confirmation{padding-top:35px}.email-confirmation h2{font-size:30px}.confirmation-instructions{padding:16px}}
