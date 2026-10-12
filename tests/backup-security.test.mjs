@@ -10,6 +10,8 @@ test('staged backup encrypts before uploading and blocks unbacked Storage object
   assert.match(sh,/storage.objects/);
   assert.match(sh,/if \[\[ "\$OBJECT_COUNT" != 0 \]\]/);
   assert.match(sh,/age --encrypt --recipient/);
+  assert.match(sh,/ssh-ed25519/);
+  assert.match(sh,/Expected an age X25519 or SSH Ed25519 public recipient/);
   assert.match(yml,/secrets.SUPABASE_DB_URL/);
   assert.match(yml,/vars.BACKUP_AGE_RECIPIENT/);
   assert.match(yml,/upload-artifact@v4/);

@@ -13,8 +13,11 @@ case "$SUPABASE_DB_URL" in
   *"$SUPABASE_PROJECT_REF"*) ;;
   *) echo "::error::Database URL does not reference the approved Supabase project."; exit 1 ;;
 esac
-if ! [[ "$BACKUP_AGE_RECIPIENT" =~ ^age1[a-z0-9]{20,}$ ]]; then
-  echo "::error::Expected an age X25519 public recipient."
+# Dedicated SSH Ed25519 public keys are supported by age too. MacOS can
+# generate these locally using ssh-keygen without installing extra software.
+# The corresponding SSH private key NEVER goes on the runner.
+if ! [[ "$BACKUP_AGE_RECIPIENT" =~ ^age1[a-z0-9]{20,}$ || "$BACKUP_AGE_RECIPIENT" =~ ^ssh-ed25519[[:space:]][A-Za-z0-9+/]+={0,2}$ ]]; then
+  echo "::error::Expected an age X25519 or SSH Ed25519 public recipient."
   exit 1
 fi
 

@@ -9,3 +9,7 @@ The GitHub workflow, if reviewed and later enabled on `main`, produces a Postgre
 The workflow must fail closed if Supabase Storage contains file objects, as PostgreSQL backup alone does not capture object bytes. A verified restore additionally requires application configuration and Auth integration, backups/retention and failure notification tests. Neither preview validation nor a checksum suffices.
 
 Do not merge into default branch or turn on schedules until private backup secrets and the recipient are configured. Do not enable the server import gate until actual independent restore verification. The previous Locked decisions and original phone prototype are unchanged.
+
+## Owner recovery key setup (macOS, no package install required)
+
+Generate a **dedicated** SSH Ed25519 key pair in a private directory using macOS's built-in `ssh-keygen`. GitHub's encrypted exporter supports its **public** SSH recipient through the age CLI; the corresponding **private** key stays offline on the owner's Mac and must be copied to separate offline media for recovery after Mac loss. The dedicated key must not be added to GitHub SSH authentication or used for normal sign-ins. The public key is safe to configure as a GitHub Actions repository variable. An empty passphrase protects only via the Mac's local file permissions and disk encryption; if the Mac is compromised, private backup decryption can be compromised. GitHub's backup schedule and restoration gate remain inactive.
