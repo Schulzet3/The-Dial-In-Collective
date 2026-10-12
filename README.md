@@ -4,28 +4,37 @@ Better espresso through shared experience.
 
 ## Development status
 
-This branch contains the first applied cloud database foundation. It does **not** yet replace the local v0.2.0 prototype or provide a hosted beta.
+This branch contains the applied cloud database foundation, authenticated owner APIs, and an owner-development frontend. **It is not a hosted beta or a replacement for the working local v0.2.0 prototype.** No real account or shot data has been migrated. Automated backups are not running.
 
-- [Verified backend checkpoint and remaining work](docs/BACKEND_CHECKPOINT.md)
+- [Current account/cloud checkpoint and remaining gates](docs/CLOUD_OWNER_TEST_CHECKPOINT.md)
+- [Earlier backend foundation checkpoint](docs/BACKEND_CHECKPOINT.md)
 - [Master Specification backend addendum](docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md)
 - [Decision Ledger backend amendments](docs/DECISION_LEDGER_BACKEND_AMENDMENTS.json)
+- [Cloud implementation status ledger](docs/DECISION_LEDGER_CLOUD_IMPLEMENTATION_STATUS.json)
 - [Applied migrations](supabase/migrations/)
-- [60-check database security/integrity suite](supabase/tests/security_foundation.sql)
 
-The existing Master Specification, Decision Ledger and prototype addendum remain authoritative for unchanged requirements. Preserve Locked decisions; document changes explicitly. Keep the experience sleek, clean and centered on **Log Shot -> Rate -> Recommendation**.
+The Master Specification, Decision Ledger and accepted subsequent amendments remain authoritative. Preserve Locked decisions; document changes explicitly. Keep the experience sleek, clean and centered on **Log Shot -> Rate -> Recommendation**. Missing controls in this owner-development harness are unfinished integrations, not decisions to remove beta features.
 
-## Database testing
+## Owner-development build
 
-On a development/test Supabase database with all migrations applied, use the migration role:
+Node.js 22 or newer:
 
 ```sh
-psql "$TEST_DATABASE_URL" -v ON_ERROR_STOP=1 -f supabase/tests/security_foundation.sql
+npm install
+npm test
+npm run build:cloud
 ```
 
-The suite creates temporary synthetic users/data and rolls the transaction back. It is not a browser-login or synchronization test. Never paste credentials into chat or commit connection strings, exports or backup files.
+The build requires `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` in its environment. Those are public browser coordinates, not privileged keys. Never put database passwords, service-role keys, SMTP credentials, backup keys or personal exports in source or frontend configuration.
 
-## Deployment boundary
+`npm test` runs 32 cloud unit/adapter tests without network access. The exact official Supabase SDK is pinned in package.json; dependency installation and the complete bundle still need a network-enabled verification run. Generate and review the dependency lockfile there before a beta release.
 
-Source is on `development/backend-foundation`. Database migrations were applied to the existing empty development project; no paid preview branch was created. No real account or shot data was seeded, and the user's local app was not changed.
+`build_cloud.mjs` creates a clean, allowlisted `dist/`; `netlify.toml` describes the intended build but does not deploy a site by itself. Configure the actual HTTPS URL, Supabase callbacks, email delivery and owner admission before providing a login link. Do not deploy `site/` or the repository root directly.
 
-Real authentication UI, invitation admission, syncing, cloud community calculations, hosted delivery and Google Drive backup/restore remain the next implementation stages. No automated backup is currently running.
+## Tests and boundaries
+
+`tests/browser/cloud_owner_qa.py` is a 19-check injected Chromium harness requiring Python Playwright and `/usr/bin/chromium`. It uses synthetic fixtures, mock authentication/backend responses and a memory store. It does not prove actual email/password login, native offline persistence or real-device synchronization.
+
+`supabase/tests/security_foundation.sql` records the earlier 60-check foundation suite. Some direct-write expectations were intentionally superseded by the newer version-checked mutation APIs; update those assertions before using it as a current gate. The current checkpoint records the additional live-database role assertions and their scope. All database testing remains restricted to controlled synthetic fixtures with rollback; never casually run it against a populated beta database.
+
+Source remains on `development/backend-foundation`; main and the existing local installation were not changed. No paid database branch or domain was created. Full community processing, backup/restore, remaining prototype feature parity and end-to-end hosted verification are still required before external beta testing.
