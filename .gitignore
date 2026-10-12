@@ -1,0 +1,25 @@
+# Credentials and local service configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+token.json
+service-account*.json
+supabase/.temp/
+
+# User data, backups and local exports must never be committed
+backups/
+exports/
+*.dump
+*.backup
+*.sql.gz
+*Prototype_Import*.json
+Pasted text*.txt
+
+# Build/local development artifacts
+node_modules/
+.DS_Store
+*.log
+coverage/
