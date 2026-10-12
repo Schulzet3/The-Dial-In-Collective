@@ -1,0 +1,46 @@
+{
+  "project": "The Dial In Collective",
+  "checkpoint": "cloud-owner-development-1",
+  "branch": "development/backend-foundation",
+  "authority": "Master Specification, Decision Ledger, backend addendum and accepted subsequent user amendments remain authoritative.",
+  "purpose": "Implementation status only; no new or silently superseded product decisions.",
+  "approved_direction": {
+    "development_plan": "Supabase Free",
+    "external_beta_requires": ["real accounts", "cloud synchronization", "shared community data", "verified recovery and privacy safeguards"],
+    "backup_destination": "Google Drive",
+    "current_local_prototype": "Preserve v0.2.0 and the user's existing browser data unchanged",
+    "visual_reference": "Existing JSX/screenshots and accepted prototype UI",
+    "pressure_and_flow_profile_minutiae": "Deferred"
+  },
+  "implementation": [
+    {"area": "Account and invitation APIs", "status": "Implemented and database-role tested", "remaining": "Real email delivery, signup/login/recovery/session verification and intended owner provisioning"},
+    {"area": "Core relational writes and reads", "status": "Implemented for owner development", "controls": ["owner binding", "stable mutation IDs", "duplicate replay protection", "atomic writes", "expected revision conflicts", "private notes", "immutable equipment provenance"]},
+    {"area": "Cloud interface", "status": "Source committed; mocked mobile workflows tested", "remaining": "Network-enabled dependency build, HTTPS deployment and actual browser verification"},
+    {"area": "Offline changes", "status": "Queue/cache code implemented; adapter tests passed", "remaining": "Native IndexedDB, real account switching, offline cold start, multi-device tests and conflict-resolution UI"},
+    {"area": "Community and admin", "status": "Database foundation only; not operational in owner screen", "remaining": "Canonical verification, quality/outlier handling, contributor-balanced summaries and complete admin workflow"},
+    {"area": "Google Drive backups", "status": "Destination folder exists; automation not configured", "remaining": "Unattended authorization, encryption, scheduling, coverage, alerts, retention and actual restore drill"},
+    {"area": "Prototype feature parity", "status": "Incomplete cloud binding; requirements retained", "remaining": ["experiments", "bag and basket management", "hardware version and recalibration actions", "Custom targets", "full coffee edits", "AI extraction", "production import/recovery"]}
+  ],
+  "verification": {
+    "combined_local_node_tests_passed": 89,
+    "committed_cloud_node_tests_passed": 32,
+    "mocked_chromium_ui_checks_passed": 19,
+    "current_database_role_checks_passed": 36,
+    "database_check_breakdown": {"workspace_and_core": 31, "originating_account_binding": 5},
+    "security_advisor_findings": 0,
+    "application_tables_without_rls": 0,
+    "real_auth_users_or_shots_migrated": 0,
+    "test_data_rolled_back": true,
+    "applied_migrations_committed_and_hash_matched": 11,
+    "earlier_60_check_foundation_suite": "Historical; direct-write expectations need updating for the controlled mutation API"
+  },
+  "release_gates": {
+    "hosted_url_exists": false,
+    "owner_login_verified": false,
+    "official_sdk_install_and_bundle_verified": false,
+    "native_device_sync_verified": false,
+    "backup_restore_verified": false,
+    "full_beta_feature_parity": false,
+    "external_beta_ready": false
+  }
+}
