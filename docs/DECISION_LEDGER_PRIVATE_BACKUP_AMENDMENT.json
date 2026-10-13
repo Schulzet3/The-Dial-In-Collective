@@ -1,7 +1,7 @@
 {
   "product": "The Dial In Collective",
   "amendment": "private-backup-courier",
-  "status": "Encrypted production-connection export smoke tests passed; manual-only recovery export staged on main; no Google Drive transfer or restored backup verified",
+  "status": "Live encrypted export to private Google Drive confirmed; GitHub daily schedule enabled; Apps Script polling and actual disaster recovery not yet verified",
   "source": "Owner explicitly approved using a private Google Apps Script rather than public OAuth/app domain, then authorized Google Drive and stored Actions read-only token",
   "preservation": "This adds an implementation record to locked B003 and B004 without replacing or weakening any Locked decisions.",
   "decisions": [
@@ -10,7 +10,7 @@
       "status": "Approved implementation, not recovery verified",
       "topic": "Google Drive backup authorization",
       "decision": "A standalone owner-authorized Google Apps Script with drive.file permission transfers encrypted artifacts from the private GitHub Actions worker into a script-owned private Google Drive folder. No custom domain, public OAuth app, or removal of Netlify SSO is needed.",
-      "implementation_status": "Two dev GitHub Actions runs verified live PostgreSQL TLS connection, dump, age encryption and private artifacts. Main has only the manual dispatch version of the same backup workflow and script, committed without altering coffee app code. GitHub workflow on main not yet run, no nightly schedule enabled, no Drive upload or isolated restore verified. Owner reports a secure second copy of private recovery key.",
+      "implementation_status": "Manual main-branch backup workflow run 38438265941 succeeded; encrypted ZIP artifact 11833663348 was downloaded by user-authorized Apps Script syncPrivateBackups and independently found in private Google Drive file 1b3NKkm30GxW3JQnz2MWecvHWsaKxZ7Kn with matching 119241-byte size. GitHub main workflow now has 09:23 UTC daily schedule as of commit 062bdc96a73168a2cb343f0f87439ef2bf94400e. Apps Script trigger has not yet been installed/verified; private-key decryption and isolated restore still pending; import server gate remains false.",
       "safeguards": [
         "Never put credentials, database passwords, encryption identity, or personal backups in the repository or this chat.",
         "Staged GitHub workflow must not be enabled on default branch before owner configures scoped secrets and offline decryption key.",
@@ -29,7 +29,9 @@
       "successful TLS-required updated Actions run 38434157066",
       "live project still has zero Storage object bytes",
       "import gate remains closed",
-      "minimal manual-only backup workflow and encrypted export script installed on main, without merging development UI"
+      "minimal manual-only backup workflow and encrypted export script installed on main, without merging development UI",
+      "manual GitHub main-branch run 38438265941 produced ciphertext and Apps Script transferred it into intended Google Drive folder",
+      "daily 09:23 UTC GitHub Actions schedule present on main"
     ],
     "not_verified": [
       "unattended GitHub scheduled runs on main",
@@ -39,7 +41,7 @@
       "download/decrypt/restore drill including Auth and app tables",
       "configuration restoration and uploaded Storage bytes when present",
       "retention and failure notifications",
-      "successful manual main branch GitHub workflow dispatch, then courier upload from its artifact"
+      "continuous Google Drive transfer (Apps Script time trigger pending)"
     ],
     "locked_decisions_changed": [],
     "operator_note": "Owner confirmed private key stored in second secure location (location/material never shared). Never enable import or external beta merely due to working export."
