@@ -15,7 +15,8 @@ concurrency:
 
 jobs:
   backup:
-    runs-on: ubuntu-latest
+    # Explicit LTS runner: prevent unreviewed ubuntu-latest migration to 26.04.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       SUPABASE_PROJECT_REF: azviqqejypsefzilgonr
