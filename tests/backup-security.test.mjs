@@ -14,7 +14,9 @@ test('staged backup encrypts before uploading and blocks unbacked Storage object
   assert.match(sh,/Expected an age X25519 or SSH Ed25519 public recipient/);
   assert.match(yml,/secrets.SUPABASE_DB_URL/);
   assert.match(yml,/vars.BACKUP_AGE_RECIPIENT/);
-  assert.match(yml,/upload-artifact@v4/);
+  assert.match(yml,/upload-artifact@v7/);
+  assert.match(yml,/checkout@v7/);
+  assert.match(sh,/PGSSLMODE=require/);
   assert.match(yml,/encrypted\/backup\.age/);
   assert.doesNotMatch(yml,/plain\/database.dump/);
 });
