@@ -14,7 +14,8 @@ concurrency:
 
 jobs:
   isolated-restore:
-    runs-on: ubuntu-latest
+    # Fixed LTS runner; prevent unreviewed ubuntu-latest 26.04 transition.
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
       SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
