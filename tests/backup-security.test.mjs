@@ -17,6 +17,10 @@ test('staged backup encrypts before uploading and blocks unbacked Storage object
   assert.match(yml,/upload-artifact@v7/);
   assert.match(yml,/checkout@v7/);
   assert.match(sh,/PGSSLMODE=require/);
+  assert.match(sh,/app-source\.tar\.gz/);
+  assert.match(sh,/app_source_sha256/);
+  assert.match(yml,/ref: development\/backend-foundation/);
+  assert.match(yml,/path: backup-app-source/);
   assert.match(yml,/encrypted\/backup\.age/);
   assert.doesNotMatch(yml,/plain\/database.dump/);
 });
