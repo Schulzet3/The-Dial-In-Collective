@@ -120,10 +120,11 @@
           "push-only smoke tests excluded from courier proof"
         ],
         "task_update": "confirmed successful by automation tool 2026-10-13",
-        "notification_delivery": "NOT VERIFIED; notification and email channels reported disabled; owner must enable them and confirm actual alert",
-        "last_execution": "not yet observed",
+        "notification_delivery": "UNVERIFIED: Owner-supplied 2026-10-13 screenshot clearly shows ChatGPT Settings > Notifications > Tasks set to Push, Email. Despite this, the task metadata reports notifications_enabled=false and email_enabled=false. Do not ask owner to re-enable settings; investigate task delivery separately.",
+        "last_execution": "The six-hour watch reports a last_run_time at 2026-10-13T22:31:34Z, but no delivered alert verified. The one-time Dial In Alert Test reports is_enabled=false, last_run_time=null after scheduled time; reason not yet verified.",
         "source_inclusive_drive_delivery": "NOT VERIFIED; newest Drive artifact remained older database-only ZIP",
-        "locked_decisions_changed": []
+        "locked_decisions_changed": [],
+        "owner_notification_preferences_verified": "Push and Email enabled for Tasks in screenshot; this is preferences evidence, not proof that a notification arrived."
       }
     }
   }
