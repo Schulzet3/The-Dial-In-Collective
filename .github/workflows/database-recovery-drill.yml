@@ -1,12 +1,6 @@
 name: DIC weekly recovery verification
 
 on:
-  # Automatically run once on installation; remove this trigger after validation.
-  push:
-    branches:
-      - main
-    paths:
-      - .github/workflows/database-recovery-drill.yml
   workflow_dispatch:
   schedule:
     - cron: '43 10 * * 0'
