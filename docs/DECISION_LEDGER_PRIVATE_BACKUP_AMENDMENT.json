@@ -1,7 +1,7 @@
 {
   "product": "The Dial In Collective",
   "amendment": "private-backup-courier",
-  "status": "Nightly encrypted Drive backup established; 35 first-party tables and core Auth users/identities restored in disposable CI; app-source encrypted source bundle verified on dev and promoted to main; full provider settings and external beta still pending",
+  "status": "Daily encrypted DB+code backup verified in GitHub; 30-day GitHub and Drive retention configured; weekly full first-party/Auth row restore verified on main; full Supabase provider recovery and external beta still gated.",
   "source": "Owner explicitly approved using a private Google Apps Script rather than public OAuth/app domain, then authorized Google Drive and stored Actions read-only token",
   "preservation": "This adds an implementation record to locked B003 and B004 without replacing or weakening any Locked decisions.",
   "decisions": [
@@ -88,6 +88,28 @@
       "private beta sign-in barrier remains enabled",
       "community and remaining functionality not represented as fully working"
     ],
-    "locked_product_requirements_changed": []
+    "locked_product_requirements_changed": [],
+    "reliability_update": {
+      "timestamp": "2026-10-13",
+      "locked_decisions_changed": [],
+      "github_artifact_retention_days_for_new_runs": 30,
+      "drive_retention_days_approx": 30,
+      "nightly_export_utc": "09:23 daily",
+      "weekly_restore_utc": "10:43 Sunday",
+      "weekly_restore_run_id": 38475063706,
+      "weekly_restore_result": "Passed for all 35 first-party public/private tables and core Auth users/identities; every restored table's row count matched the source; provider-managed Supabase services not restored.",
+      "main_source_inclusive_export_run_id": 38475327361,
+      "main_source_inclusive_export_artifact_id": 11853582739,
+      "main_source_inclusive_export_status": "GitHub ciphertext generated; Google Drive receipt pending qualifying scheduled/manual event",
+      "out_of_band_daily_monitor": "Alerts on failed, inaccessible, or stale (>36h) GitHub/Drive backups. Independent of Apps Script's own status alerts.",
+      "release_and_full_recovery_remaining": [
+        "Custom SMTP for outside recipients",
+        "real cross-account email + device login and privacy tests",
+        "hosted admin portal/workflows and community qualification",
+        "new source-inclusive scheduled Google Drive artifact not yet confirmed",
+        "provider secrets/configuration and future Storage bytes not automatically recreated",
+        "historical import live gate still closed"
+      ]
+    }
   }
 }
