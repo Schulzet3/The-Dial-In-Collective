@@ -2,6 +2,11 @@ name: DIC encrypted database backup
 
 # Staged on development only. Scheduled workflows run from the default branch.
 on:
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - .github/workflows/nightly-backup.yml
   workflow_dispatch:
   schedule:
     - cron: '23 9 * * *'
@@ -24,6 +29,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          persist-credentials: false
+      - name: Checkout current cloud app source for independent offsite recovery
+        uses: actions/checkout@v7
+        with:
+          ref: development/backend-foundation
+          path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
         run: sudo apt-get update -qq && sudo apt-get install -y age
