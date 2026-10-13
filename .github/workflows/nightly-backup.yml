@@ -25,6 +25,12 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+      - name: Checkout current cloud app source for independent recovery
+        uses: actions/checkout@v7
+        with:
+          ref: development/backend-foundation
+          path: backup-app-source
+          persist-credentials: false
       - name: Install age encryption
         run: sudo apt-get update -qq && sudo apt-get install -y age
       - name: Encrypted PostgreSQL snapshot
