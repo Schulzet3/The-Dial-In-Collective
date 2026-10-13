@@ -28,13 +28,15 @@ jobs:
       SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
       BACKUP_AGE_RECIPIENT: ${{ vars.BACKUP_AGE_RECIPIENT }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Install age encryption
         run: sudo apt-get update -qq && sudo apt-get install -y age
       - name: Encrypted PostgreSQL snapshot
         run: bash scripts/backups/create-nightly-encrypted-dump.sh
       - name: Upload ciphertext only
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dic-encrypted-nightly-${{ github.run_id }}
           path: ${{ runner.temp }}/dic-nightly-${{ github.run_id }}/encrypted/backup.age
