@@ -79,12 +79,21 @@ done
 # No published ports and no network connectivity from the restore target.
 docker run -d --rm --name "$CONTAINER" --network none \
   --env POSTGRES_HOST_AUTH_METHOD=trust postgres:17-alpine >/dev/null
+# Docker's postgres image starts a temporary Unix-socket-only server during
+# initdb, shuts it down, then starts the real server. A socket readiness probe
+# can pass against that temporary server and race its shutdown.
+# TCP on container loopback becomes ready only when the final server is up.
+# --network none keeps the target isolated from all external networks.
 ready=0
-for i in $(seq 1 35); do
-  if docker exec -u postgres "$CONTAINER" pg_isready -U postgres -q; then ready=1; break; fi
+for i in $(seq 1 50); do
+  if docker exec -u postgres "$CONTAINER" pg_isready -h 127.0.0.1 -U postgres -q; then ready=1; break; fi
   sleep 1
 done
-[[ "$ready" == 1 ]] || { echo "::error::Isolated Postgres failed to start"; exit 1; }
+[[ "$ready" == 1 ]] || {
+  echo "::error::Final isolated PostgreSQL did not become TCP-ready";
+  docker logs "$CONTAINER" 2>&1 | tail -n 80 || true
+  exit 1
+}
 docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres \
  -c 'CREATE SCHEMA auth; CREATE SCHEMA private;
      CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql AS $$ SELECT NULL::uuid $$;' >/dev/null
