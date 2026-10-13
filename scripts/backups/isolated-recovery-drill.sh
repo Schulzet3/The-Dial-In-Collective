@@ -28,13 +28,19 @@ docker run --rm --user "$(id -u):$(id -g)" --env SUPABASE_DB_URL \
              (select count(*) from public.library_entries),
              (select count(*) from public.shots)" > /out/expected-counts.txt
 '
+# Rebuild EVERY first-party public/private table plus the core Auth identity pair.
+# Constraints, RLS and functions are versioned in source migrations and need a
+# separate managed-Supabase configuration check.
 awk '
 /^[0-9]+;/ {
   if ($0 ~ / (TABLE|TABLE DATA) auth (users|identities) / ||
-      $0 ~ / (TABLE|TABLE DATA) private (beta_members|import_control) / ||
-      $0 ~ / (TABLE|TABLE DATA) public (account_preferences|coffees|setups|library_entries|shots) /)
+      $0 ~ / (TABLE|TABLE DATA) (private|public) [A-Za-z_0-9]+ /)
     print $0
 }' "$OUT/contents.toc" > "$OUT/recovery.toc"
+SOURCE_TABLE_COUNT=$(grep -Ec ' TABLE DATA (public|private) [A-Za-z_0-9]+ ' "$OUT/contents.toc")
+if [[ "$SOURCE_TABLE_COUNT" -lt 30 ]]; then
+  echo "::error::Snapshot unexpectedly contains fewer than 30 first-party tables"; exit 1
+fi
 for tbl in "auth users" "auth identities" "private beta_members" "private import_control" \
  "public account_preferences" "public coffees" "public setups" \
  "public library_entries" "public shots"; do
@@ -79,7 +85,14 @@ RESTORED=$(printf '%s' "$RESTORED" | tr -d '[:space:]')
 if [[ "$RESTORED" != "$EXPECTED" ]]; then
   echo "::error::Restored account and app table row counts do not match"; exit 1
 fi
-echo "PASS: Isolated PostgreSQL 17 restored nine Auth/application tables and their data."
-echo "PASS: Recovered row counts match source snapshot."
+RESTORED_TABLE_COUNT=$(docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
+  -U postgres -d postgres --tuples-only --no-align \
+  --command="select count(*) from information_schema.tables where table_schema in ('private','public') and table_type='BASE TABLE'")
+RESTORED_TABLE_COUNT=$(printf '%s' "$RESTORED_TABLE_COUNT" | tr -d '[:space:]')
+if [[ "$RESTORED_TABLE_COUNT" != "$SOURCE_TABLE_COUNT" ]]; then
+  echo "::error::Not all public/private tables restored"; exit 1
+fi
+echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables were restored with data."
+echo "PASS: Auth users/identities and nine representative row counts agree with the source snapshot."
 echo "LIMIT: Core-data test only, not full managed Supabase configuration recovery."
 echo "INFO: No plaintext uploaded; disposable PostgreSQL and local dump deleted."
