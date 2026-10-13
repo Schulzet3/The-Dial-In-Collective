@@ -26,7 +26,8 @@ mkdir -p "$OUT/plain" "$OUT/encrypted"
 trap 'rm -rf "$OUT/plain" "$OUT/bundle.tar.gz"' EXIT
 
 # PostgreSQL 17 matches the live project. Use caller's uid for readability.
-docker run --rm --user "$(id -u):$(id -g)" --env SUPABASE_DB_URL \
+# Require TLS in transit to the Supabase session pooler; never silently fall back to cleartext.
+docker run --rm --user "$(id -u):$(id -g)" --env SUPABASE_DB_URL --env PGSSLMODE=require \
   --volume "$OUT/plain:/out" postgres:17-alpine sh -euc '
     pg_dump --dbname="$SUPABASE_DB_URL" --format=custom \
       --no-owner --no-privileges --file=/out/database.dump
