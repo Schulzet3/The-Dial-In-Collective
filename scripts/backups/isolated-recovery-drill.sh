@@ -41,6 +41,31 @@ SOURCE_TABLE_COUNT=$(grep -Ec ' TABLE DATA (public|private) [A-Za-z_0-9]+ ' "$OU
 if [[ "$SOURCE_TABLE_COUNT" -lt 30 ]]; then
   echo "::error::Snapshot unexpectedly contains fewer than 30 first-party tables"; exit 1
 fi
+# Query every first-party table count from the live source. Only table names and
+# counts are retained, never user records or plaintext backup artifacts.
+cat > "$OUT/table-list-query.sql" <<'SQL'
+select format('select %L, count(*) from %I.%I;',
+              schemaname || '.' || tablename, schemaname, tablename)
+from pg_tables
+where schemaname in ('public', 'private')
+order by schemaname, tablename;
+SQL
+docker run --rm --user "$(id -u):$(id -g)" \
+  --env SUPABASE_DB_URL --env PGSSLMODE=require \
+  --volume "$OUT:/out" postgres:17-alpine sh -euc '
+  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
+    --file=/out/table-list-query.sql > /out/table-count-selects.sql
+  printf "%s\n" \
+    "select '\''auth.users'\'', count(*) from auth.users;" \
+    "select '\''auth.identities'\'', count(*) from auth.identities;" \
+    >> /out/table-count-selects.sql
+  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
+    --file=/out/table-count-selects.sql > /out/expected-all-counts.tsv
+'
+if [[ "$(wc -l < "$OUT/expected-all-counts.tsv")" -ne $((SOURCE_TABLE_COUNT + 2)) ]]; then
+  echo "::error::Source table inventory does not match the expected database scope"; exit 1
+fi
+
 for tbl in "auth users" "auth identities" "private beta_members" "private import_control" \
  "public account_preferences" "public coffees" "public setups" \
  "public library_entries" "public shots"; do
@@ -92,7 +117,15 @@ RESTORED_TABLE_COUNT=$(printf '%s' "$RESTORED_TABLE_COUNT" | tr -d '[:space:]')
 if [[ "$RESTORED_TABLE_COUNT" != "$SOURCE_TABLE_COUNT" ]]; then
   echo "::error::Not all public/private tables restored"; exit 1
 fi
+docker cp "$OUT/table-count-selects.sql" "$CONTAINER:/tmp/table-count-selects.sql" >/dev/null
+docker exec -u root "$CONTAINER" chmod 644 /tmp/table-count-selects.sql
+docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
+  -U postgres -d postgres --tuples-only --no-align \
+  --file=/tmp/table-count-selects.sql > "$OUT/restored-all-counts.tsv"
+if ! cmp -s "$OUT/expected-all-counts.tsv" "$OUT/restored-all-counts.tsv"; then
+  echo "::error::At least one restored app/Auth table row count differs from source"; exit 1
+fi
 echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables were restored with data."
-echo "PASS: Auth users/identities and nine representative row counts agree with the source snapshot."
+echo "PASS: All first-party table row counts and core Auth counts agree with source."
 echo "LIMIT: Core-data test only, not full managed Supabase configuration recovery."
 echo "INFO: No plaintext uploaded; disposable PostgreSQL and local dump deleted."
