@@ -1,9 +1,10 @@
 name: DIC encrypted database backup
 
-# Staged on development only. Scheduled workflows run from the default branch.
+# Nightly encrypted export to private GitHub artifacts. Apps Script forwards ciphertext to Drive.
 on:
-  # Manual validation only until Drive transfer and restore are demonstrated.
   workflow_dispatch:
+  schedule:
+    - cron: '23 9 * * *'
 
 permissions:
   contents: read
