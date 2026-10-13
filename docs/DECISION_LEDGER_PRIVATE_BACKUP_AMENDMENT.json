@@ -101,7 +101,7 @@
       "main_source_inclusive_export_run_id": 38475327361,
       "main_source_inclusive_export_artifact_id": 11853582739,
       "main_source_inclusive_export_status": "GitHub ciphertext generated; Google Drive receipt pending qualifying scheduled/manual event",
-      "out_of_band_daily_monitor": "Alerts on failed, inaccessible, or stale (>36h) GitHub/Drive backups. Independent of Apps Script's own status alerts.",
+      "out_of_band_daily_monitor": "Now a six-hour condition watch; delivery NOT VERIFIED until user enables account task notifications and observes a real alert.",
       "release_and_full_recovery_remaining": [
         "Custom SMTP for outside recipients",
         "real cross-account email + device login and privacy tests",
@@ -109,7 +109,22 @@
         "new source-inclusive scheduled Google Drive artifact not yet confirmed",
         "provider secrets/configuration and future Storage bytes not automatically recreated",
         "historical import live gate still closed"
-      ]
+      ],
+      "backup_health_watch": {
+        "task_id": "6aceaafdbc4881919890772458c7ecf3",
+        "schedule": "every six hours, condition watch",
+        "checks": [
+          "latest eligible scheduled/manual main backup success and ciphertext artifact",
+          "GitHub/Drive failures, access and >36-hour staleness",
+          "eligible backup not in Drive after six hours",
+          "push-only smoke tests excluded from courier proof"
+        ],
+        "task_update": "confirmed successful by automation tool 2026-10-13",
+        "notification_delivery": "NOT VERIFIED; notification and email channels reported disabled; owner must enable them and confirm actual alert",
+        "last_execution": "not yet observed",
+        "source_inclusive_drive_delivery": "NOT VERIFIED; newest Drive artifact remained older database-only ZIP",
+        "locked_decisions_changed": []
+      }
     }
   }
 }
