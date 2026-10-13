@@ -1,7 +1,7 @@
 {
   "product": "The Dial In Collective",
   "amendment": "private-backup-courier",
-  "status": "Encrypted GitHub-to-Google-Drive backup delivered; Mac key decryption and dump hash verified; isolated database restore and operations still pending",
+  "status": "Nightly encrypted Drive backup established; 35 first-party tables and core Auth users/identities restored in disposable CI; app-source encrypted source bundle verified on dev and promoted to main; full provider settings and external beta still pending",
   "source": "Owner explicitly approved using a private Google Apps Script rather than public OAuth/app domain, then authorized Google Drive and stored Actions read-only token",
   "preservation": "This adds an implementation record to locked B003 and B004 without replacing or weakening any Locked decisions.",
   "decisions": [
@@ -47,5 +47,47 @@
     "locked_decisions_changed": [],
     "operator_note": "Owner confirmed private key stored in second secure location (location/material never shared). Never enable import or external beta merely due to working export.",
     "restore_compatibility_caution": "Raw pg_dump includes Supabase internals and locally used supabase_vault; official Supabase docs advise filtered portable export for migrations. Ensure actual isolated restoration is faithful and fails closed for missing data."
+  },
+  "verification_2026_10_13": {
+    "source_inclusive_dev_backup": {
+      "run_id": 38454332010,
+      "success": true,
+      "contains": [
+        "database.dump",
+        "manifest.json",
+        "toc.txt",
+        "storage-object-count.txt",
+        "app-source.tar.gz"
+      ],
+      "promoted_to_main_workflow_commit": "d7a02937175fb7e04134652315a6856af331be6e",
+      "main_offsite_snapshot_confirmed": false
+    },
+    "isolated_recovery": {
+      "run_id": 38454798657,
+      "success": true,
+      "scope": "All 35 first-party public/private table DDL and rows plus auth.users and auth.identities in disposable network-isolated PostgreSQL 17; nine representative source counts matched",
+      "not_restored": [
+        "full hosted Supabase settings",
+        "provider-managed triggers/indexes/row level policies",
+        "Netlify configuration secrets",
+        "Supabase Storage object bytes (currently none)"
+      ],
+      "plaintext_artifact_uploaded": false
+    },
+    "real_database_rollback_role_tests": {
+      "count": 30,
+      "result": "pass",
+      "real_user_count_after": 1,
+      "coffee_and_shot_count_after": 0,
+      "import_enabled_after": false
+    },
+    "release_blockers": [
+      "custom SMTP for non-project-team signup confirmation and recovery",
+      "live external account email + signup/invitation and account-isolation browser tests",
+      "new source-inclusive main artifact must reach owner Drive",
+      "private beta sign-in barrier remains enabled",
+      "community and remaining functionality not represented as fully working"
+    ],
+    "locked_product_requirements_changed": []
   }
 }
