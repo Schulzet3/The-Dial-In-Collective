@@ -1,6 +1,6 @@
 # Private backup implementation checkpoint
 
-Status: Staged only. No automatic Google Drive backups or successful restore have been verified. The live import gate remains OFF.
+Status (2026-10-13): Database-export/encryption path **verified twice using the real private GitHub Actions secret**; automatic Google Drive delivery, decryption/restore, and full disaster recovery **not verified**. The workflow remains staged on development/backend-foundation; its one-time branch push test trigger was removed. The live import gate remains OFF.
 
 Approved backup destination: private Google Drive owned by the project owner. A standalone, owner-authorized Google Apps Script with `drive.file` permission has created `DIC Automated Encrypted Backups`; the private GitHub Actions reader token and alert email were added to its Script Properties. The Apps Script transfer schedule is not yet installed.
 
@@ -8,8 +8,16 @@ The GitHub workflow, if reviewed and later enabled on `main`, produces a Postgre
 
 The workflow must fail closed if Supabase Storage contains file objects, as PostgreSQL backup alone does not capture object bytes. A verified restore additionally requires application configuration and Auth integration, backups/retention and failure notification tests. Neither preview validation nor a checksum suffices.
 
-Do not merge into default branch or turn on schedules until private backup secrets and the recipient are configured. Do not enable the server import gate until actual independent restore verification. The previous Locked decisions and original phone prototype are unchanged.
+Do not merge into default branch or turn on schedules until the owner has separately preserved the recovery private key, reviewed the restored-data coverage, and authorized activation. Do not enable the server import gate until actual independent restore verification. The previous Locked decisions and original phone prototype are unchanged.
 
 ## Owner recovery key setup (macOS, no package install required)
 
 Generate a **dedicated** SSH Ed25519 key pair in a private directory using macOS's built-in `ssh-keygen`. GitHub's encrypted exporter supports its **public** SSH recipient through the age CLI; the corresponding **private** key stays offline on the owner's Mac and must be copied to separate offline media for recovery after Mac loss. The dedicated key must not be added to GitHub SSH authentication or used for normal sign-ins. The public key is safe to configure as a GitHub Actions repository variable. An empty passphrase protects only via the Mac's local file permissions and disk encryption; if the Mac is compromised, private backup decryption can be compromised. GitHub's backup schedule and restoration gate remain inactive.
+
+## Live GitHub Actions verification: 2026-10-13
+
+- Test 1: [workflow run 38433662181](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/38433662181), **success**, established connection to the real Supabase project with `SUPABASE_DB_URL`, PostgreSQL 17 custom-format database dump, required Auth/application/Storage table-of-contents checks, zero Storage objects, age encryption to configured public SSH recipient, and upload of ciphertext to a private GitHub Actions artifact. This confirms the owner's URL-encoded database-password representation is accepted by this actual connection, without revealing its value.
+- Test 2: [workflow run 38434157066](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/38434157066), **success**, enforced `PGSSLMODE=require` for database transport and upgraded to Node 24-compatible `actions/checkout@v7` and `actions/upload-artifact@v7`. The run had no GitHub warnings or errors. Encrypted artifact ID 11832033465, 119237 bytes, GitHub SHA-256 digest verified as metadata (not yet independently downloaded), expires after three days.
+- These were deliberate, single-use `push` tests scoped to the development branch. The temporary push event was removed. The `schedule` and `workflow_dispatch` hooks stay staged only on the development branch, so no automatic scheduled export is operating. No backend schema, application tables, data or import gate was changed.
+- The authorized Drive folder `DIC Automated Encrypted Backups` remains private and contains **no verified encrypted backup** from these tests. The Apps Script courier intentionally accepts only successful schedule/manual workflow runs on `main`, not development-branch push tests, preserving its source-provenance policy.
+- Still required: user keeps at least one independent, securely stored copy of the **private** decryption key; authorized promotion of the schedule to the default branch; user-installed Apps Script time trigger; proof of GitHub ciphertext delivery to Drive; independent download/hash verification and decryption; isolated restore of Auth+application state; inventory/restore of configuration and future Storage object bytes; alerts/retention tests; and only then the deliberate import-gate decision.

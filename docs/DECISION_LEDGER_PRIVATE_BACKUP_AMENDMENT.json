@@ -1,7 +1,7 @@
 {
   "product": "The Dial In Collective",
   "amendment": "private-backup-courier",
-  "status": "Implementation staged; no schedule or disaster recovery verified",
+  "status": "Database-export and encryption verified twice; Drive transfer, schedules, and isolated restore not yet verified",
   "source": "Owner explicitly approved using a private Google Apps Script rather than public OAuth/app domain, then authorized Google Drive and stored Actions read-only token",
   "preservation": "This adds an implementation record to locked B003 and B004 without replacing or weakening any Locked decisions.",
   "decisions": [
@@ -10,7 +10,7 @@
       "status": "Approved implementation, not recovery verified",
       "topic": "Google Drive backup authorization",
       "decision": "A standalone owner-authorized Google Apps Script with drive.file permission transfers encrypted artifacts from the private GitHub Actions worker into a script-owned private Google Drive folder. No custom domain, public OAuth app, or removal of Netlify SSO is needed.",
-      "implementation_status": "User confirmed Apps Script script properties; separate connected Drive metadata verified folder exists. GitHub worker staged on development/backend-foundation only; decryption key, database credentials, schedule, actual backup and restore not installed/verified.",
+      "implementation_status": "The owner saved the private Actions-reader token in Apps Script and the URL-encoded Supabase Session pooler URI as the SUPABASE_DB_URL GitHub repository secret, and supplied the public SSH/age recipient via BACKUP_AGE_RECIPIENT. Two dev-branch GitHub Actions runs proved real PostgreSQL 17 dump, inclusion of Auth and app data TOC, encryption and private artifact upload; second run required TLS. One-time test trigger removed. Script-owned Drive folder exists but transfer, scheduling, key redundancy and disaster recovery are still unverified.",
       "safeguards": [
         "Never put credentials, database passwords, encryption identity, or personal backups in the repository or this chat.",
         "Staged GitHub workflow must not be enabled on default branch before owner configures scoped secrets and offline decryption key.",
@@ -18,5 +18,27 @@
         "No original Mac/iPhone prototype or local records are modified."
       ]
     }
-  ]
+  ],
+  "implementation_verification": {
+    "checked_at": "2026-10-13",
+    "verified": [
+      "real Supabase session-pooler authentication with percent-encoded password in URI",
+      "PostgreSQL 17 pg_dump with required Auth and application tables checked",
+      "age encryption to owner's SSH Ed25519 public recipient before private artifact upload",
+      "successful GitHub Actions run 38433662181",
+      "successful TLS-required updated Actions run 38434157066",
+      "live project still has zero Storage object bytes",
+      "import gate remains closed"
+    ],
+    "not_verified": [
+      "unattended GitHub scheduled runs on main",
+      "user-installed Apps Script poller trigger",
+      "Google Drive courier artifact download, digest check, and upload",
+      "offline recovery private-key redundancy",
+      "download/decrypt/restore drill including Auth and app tables",
+      "configuration restoration and uploaded Storage bytes when present",
+      "retention and failure notifications"
+    ],
+    "locked_decisions_changed": []
+  }
 }
