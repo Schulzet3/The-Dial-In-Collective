@@ -141,6 +141,27 @@
         "follow_up": "One-time automated delivery check scheduled about 3h15m after successful backup.",
         "locked_decisions_changed": []
       }
+    },
+    "ubuntu_runner_mitigation": {
+      "status": "Implemented on dev and main; dev smoke tests passed; first post-change main scheduled/dispatch run pending",
+      "github_advisory_url": "https://github.com/actions/runner-images/issues/14748",
+      "effective_runner": "ubuntu-24.04",
+      "affected_workflows": [
+        "main:.github/workflows/nightly-backup.yml",
+        "main:.github/workflows/database-recovery-drill.yml",
+        "development/backend-foundation:.github/workflows/nightly-backup.yml",
+        "development/backend-foundation:.github/workflows/database-recovery-drill.yml"
+      ],
+      "passed_dev_backup_run": 38479304768,
+      "initial_dev_restore_run": 38479310631,
+      "initial_dev_restore_result": "Failed on local transient PostgreSQL container shutdown during Docker initialization; unrelated to evidence of permanent hosted Supabase outage",
+      "fix": "Wait for TCP-ready final PostgreSQL server over localhost inside --network none container; avoid temporary Unix-socket-only initdb server readiness false-positive",
+      "passed_dev_restore_run": 38479513765,
+      "passed_dev_restore_scope": "All 35 first-party public/private tables and core Auth users/identities restored in disposable network-isolated PostgreSQL; all row counts matched",
+      "main_post_change_workflow_execution": "Not yet observed",
+      "production_configs_changed": "Runner OS pin and isolated recovery readiness only; no service secrets, raw data, import gate, or site access changes",
+      "future_review": "Test Ubuntu 26.04 on development before controlled promotion; continue security patches on 24.04 while supported",
+      "locked_decisions_changed": []
     }
   }
 }
