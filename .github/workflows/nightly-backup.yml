@@ -2,6 +2,12 @@ name: DIC encrypted database backup
 
 # Staged on development only. Scheduled workflows run from the default branch.
 on:
+  # Temporary branch-scoped one-run integration test; remove after verifying.
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - .github/workflows/nightly-backup.yml
   workflow_dispatch:
   schedule:
     - cron: '23 9 * * *'
