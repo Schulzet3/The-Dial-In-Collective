@@ -1,0 +1,26 @@
+name: DIC isolated database recovery drill
+
+on:
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - .github/workflows/database-recovery-drill.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      SUPABASE_PROJECT_REF: azviqqejypsefzilgonr
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Restore real snapshot in a disposable, network-isolated PostgreSQL
+        run: bash scripts/backups/isolated-recovery-drill.sh
