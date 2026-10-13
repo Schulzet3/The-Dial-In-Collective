@@ -1,7 +1,7 @@
 {
   "product": "The Dial In Collective",
   "amendment": "private-backup-courier",
-  "status": "Live encrypted export to private Google Drive confirmed; GitHub daily schedule enabled; Apps Script polling and actual disaster recovery not yet verified",
+  "status": "Encrypted GitHub-to-Google-Drive backup delivered; Mac key decryption and dump hash verified; isolated database restore and operations still pending",
   "source": "Owner explicitly approved using a private Google Apps Script rather than public OAuth/app domain, then authorized Google Drive and stored Actions read-only token",
   "preservation": "This adds an implementation record to locked B003 and B004 without replacing or weakening any Locked decisions.",
   "decisions": [
@@ -10,7 +10,7 @@
       "status": "Approved implementation, not recovery verified",
       "topic": "Google Drive backup authorization",
       "decision": "A standalone owner-authorized Google Apps Script with drive.file permission transfers encrypted artifacts from the private GitHub Actions worker into a script-owned private Google Drive folder. No custom domain, public OAuth app, or removal of Netlify SSO is needed.",
-      "implementation_status": "Manual main-branch backup workflow run 38438265941 succeeded; encrypted ZIP artifact 11833663348 was downloaded by user-authorized Apps Script syncPrivateBackups and independently found in private Google Drive file 1b3NKkm30GxW3JQnz2MWecvHWsaKxZ7Kn with matching 119241-byte size. GitHub main workflow now has 09:23 UTC daily schedule as of commit 062bdc96a73168a2cb343f0f87439ef2bf94400e. Apps Script trigger has not yet been installed/verified; private-key decryption and isolated restore still pending; import server gate remains false.",
+      "implementation_status": "Manual main-branch backup workflow run 38438265941 succeeded; encrypted ZIP artifact 11833663348 was downloaded by user-authorized Apps Script syncPrivateBackups and independently found in private Google Drive file 1b3NKkm30GxW3JQnz2MWecvHWsaKxZ7Kn with matching 119241-byte size. GitHub main workflow now has 09:23 UTC daily schedule as of commit 062bdc96a73168a2cb343f0f87439ef2bf94400e. Apps Script trigger has not yet been installed/verified; private-key decryption and isolated restore still pending; import server gate remains false. Owner ran local verifier on 2026-10-13: exact ciphertext matched GitHub, age decryption succeeded with offline private recovery key, manifest/database checksum and essential table inventory matched. pg_restore unavailable locally; no isolated PostgreSQL restore yet. Owner reports Apps Script polling trigger installation via successful run; first unattended Drive delivery not independently verified.",
       "safeguards": [
         "Never put credentials, database passwords, encryption identity, or personal backups in the repository or this chat.",
         "Staged GitHub workflow must not be enabled on default branch before owner configures scoped secrets and offline decryption key.",
@@ -31,19 +31,21 @@
       "import gate remains closed",
       "minimal manual-only backup workflow and encrypted export script installed on main, without merging development UI",
       "manual GitHub main-branch run 38438265941 produced ciphertext and Apps Script transferred it into intended Google Drive folder",
-      "daily 09:23 UTC GitHub Actions schedule present on main"
+      "daily 09:23 UTC GitHub Actions schedule present on main",
+      "Owner's Mac locally decrypted matching encrypted Drive backup using private key, verified recovered dump checksum and TOC text; user-provided screenshot shows PASS",
+      "Owner reports successful execution of Apps Script installPrivateBackupPoller, but trigger UI not directly inspected"
     ],
     "not_verified": [
       "unattended GitHub scheduled runs on main",
-      "user-installed Apps Script poller trigger",
-      "Google Drive courier artifact download, digest check, and upload",
-      "offline recovery private-key redundancy",
-      "download/decrypt/restore drill including Auth and app tables",
       "configuration restoration and uploaded Storage bytes when present",
       "retention and failure notifications",
-      "continuous Google Drive transfer (Apps Script time trigger pending)"
+      "continuous Google Drive transfer (Apps Script time trigger pending)",
+      "isolated real PostgreSQL/Supabase restore of plaintext backup, Auth and application state",
+      "automatic overnight Drive upload cycle and alert/retention drills",
+      "independent non-database configuration and initial iPhone source recovery verification"
     ],
     "locked_decisions_changed": [],
-    "operator_note": "Owner confirmed private key stored in second secure location (location/material never shared). Never enable import or external beta merely due to working export."
+    "operator_note": "Owner confirmed private key stored in second secure location (location/material never shared). Never enable import or external beta merely due to working export.",
+    "restore_compatibility_caution": "Raw pg_dump includes Supabase internals and locally used supabase_vault; official Supabase docs advise filtered portable export for migrations. Ensure actual isolated restoration is faithful and fails closed for missing data."
   }
 }
