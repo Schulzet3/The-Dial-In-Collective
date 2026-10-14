@@ -32,6 +32,22 @@
       "status": "Locked",
       "topic": "Recovery options",
       "decision": "Manual export and import remain available under a collapsed Recovery options section in Settings; cloud sync and automatic offsite backups are the normal behavior."
+    },
+    {
+      "id": "OPS-20261014-01",
+      "status": "Locked",
+      "topic": "Automatic publishing and multi-system revision consistency",
+      "decision": "After the user-approved development changes pass required tests and safety checks, promptly publish them to the existing SSO-protected owner Netlify site, without a separate per-change approval request. Keep GitHub implementation, applied Supabase migrations, Netlify deployed commit, and specification/decision ledger consistent; verify the published deploy. When publishing is blocked, disclose the blocker and request only the smallest required user action, never claim it is live.",
+      "safeguards": "Preserve all other Locked decisions: SSO access, beta admission, import recovery gate, database RLS and data integrity, private production constraints, and original local prototype. Automated publication is for owner development, not authorization to launch external beta or apply unrelated migrations. A failed deploy never replaces the currently published site.",
+      "operational_release_source": "development/backend-foundation",
+      "acceptance_checks": [
+        "GitHub code and spec/ledger recorded",
+        "Tests and build green",
+        "Required Supabase migrations applied and schema/source matched",
+        "Netlify latest ready/published commit matches GitHub approved head",
+        "Netlify SSO remains required; existing import gate unchanged"
+      ],
+      "implementation_status": "Git-linked Netlify confirmed by owner screenshot, latest deploy still stale at time of request; Netlify branch/build settings remain to be verified."
     }
   ],
   "unchanged_release_gates": [
@@ -39,5 +55,5 @@
     "private beta access/Netlify SSO",
     "canonical coffee/admin/community verification"
   ],
-  "implementation_status": "Staged on feature branch; not equivalent to a verified deployment."
+  "implementation_status": "Previous five UX refinements merged to development/backend-foundation and applied backend migration verified; automated publishing gate being configured and live deploy not yet confirmed."
 }
