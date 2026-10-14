@@ -124,6 +124,7 @@ begin
            select 1 from public.coffee_sources src
            where src.coffee_id=c.id and src.source_kind='roaster_page'
              and search_source is not null
+             and src.checked_at>=now()-interval '120 days'
              and private.dic_source_key(src.source_url)=search_source
          ) as curated_url_match
   from public.coffees c where c.verification_state='verified'
@@ -139,8 +140,8 @@ begin
  ), ranked as (
   select s.*,
     case
-      when s.exact_brand and s.curated_url_match
-        and (search_release is null or s.release_key is null or s.release_key=search_release)
+      when s.exact_brand and s.exact_title and s.curated_url_match
+        and (search_release is null or (s.release_key is not null and s.release_key=search_release))
         and s.compatible_origin then 'official_url'
       when s.exact_brand and s.exact_title and search_release is not null
         and s.release_key=search_release and search_source is null
