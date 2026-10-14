@@ -113,7 +113,7 @@ begin
  from private.dic_roaster_directory d where d.canonical_key=search_roaster;
  registered:=registered_name is not null;
 
- with similar as (
+ with candidates_scanned as (
   select c.id,c.name,c.roaster,c.release_label,c.origin,c.process,c.verification_state,
          private.dic_canonical_roaster_key(c.roaster) as brand_key,
          private.dic_coffee_key(c.name) as title_key,
@@ -134,7 +134,7 @@ begin
      (s.title_key=search_name) as exact_title,
      (requested_origin is null or s.origin is null
        or private.dic_coffee_key(requested_origin)=private.dic_coffee_key(s.origin)) as compatible_origin
-   from similar s
+   from candidates_scanned s
    where (s.brand_key=search_roaster or s.brand_similarity>=0.70)
      and (s.title_key=search_name or s.title_similarity>=0.43)
  ), ranked as (
