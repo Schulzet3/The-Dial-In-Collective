@@ -80,7 +80,7 @@ class CloudApp {
   const list=M.visibleCoffees(s,this.sort,this.search,this.tempCoffee);
   return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(this.pending.length?`${this.pending.length} pending`:this.syncState==='synced'?'Cloud synced':'Offline','sync','','text-button')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`Search & sort ${icon('chevron',14)}`,'search-toggle',`aria-expanded="${this.searchOpen}"`,'browse-toggle')}${this.searchOpen?`<div class=search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
    const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));const local=shots.filter(sh=>sh.setupVersionId===v.id&&sh.style===p.style),last=local[0];const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;
-   return `<article class="coffee-card ${open?'is-open':''} ${w.currentCoffeeId===c.id?'is-current':''}"><button class=coffee-toggle data-action=expand data-id="${e(c.id)}" aria-expanded="${open}"><div class=coffee-title-area><div class=coffee-title>${e(c.name)}${w.currentCoffeeId===c.id?'<span class=current-mark>Current</span>':''}${success?'<span class=status-badge>Dialed In</span>':''}</div><div class=coffee-subtitle>${e(c.roaster)} · ${e(c.origin)}</div></div>${icon('chevron')}</button>${open?`<div class=coffee-body><div class=style-row>${styleBadge(p.style)}${button('Change Style','style',`data-id="${e(c.id)}"`,'text-button')}</div><div class=recipe-label>${success?'Your Dialed In Window':'Starting recommendation'}</div>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}${rec.reasons?.length?`<p class=recipe-reason>${e(rec.reasons[0])}</p>`:''}${button(`${icon('plus',16)} Log a Shot`,'log',`data-id="${e(c.id)}"`,'primary full log-cta')}${last&&(!success||this.justSavedId===last.id)?`<section class=feedback-panel><h3>${e(advice.title)}</h3><p class=helper>${e(advice.text)}</p>${chips(last.tasteScales)}${radar(last.tasteScales)}</section>`:''}<details class=inline-disclosure data-retain="facts-${e(c.id)}"><summary>Coffee details</summary><dl class=coffee-facts>${[['Roaster',c.roaster],['Origin',c.origin],['Elevation',c.elevationM],['Roast level',c.roastLevel],['Process',c.process],['Variety',c.variety],['Producer',c.producer],['Tasting notes',c.tastingNotes]].filter(x=>x[1]).map(([k,val])=>`<div><dt>${e(k)}</dt><dd>${e(val)}</dd></div>`).join('')}</dl><p class=helper>${c.status==='verified'?'Verified coffee record':'Submitted for verification; currently visible only in your library.'}</p></details><details class=inline-disclosure data-retain="history-${e(c.id)}"><summary>Shot History (${shots.length})</summary>${shots.map(sh=>shotCard(sh,{expanded:this.shotExpanded.has(sh.id),activeVersionId:v.id,unit:v.tempUnit})).join('')}</details></div>`:''}</article>`;
+   return `<article class="coffee-card ${open?'is-open':''} ${w.currentCoffeeId===c.id?'is-current':''}"><button class=coffee-toggle data-action=expand data-id="${e(c.id)}" aria-expanded="${open}"><div class=coffee-title-area><div class=coffee-title>${e(c.name)}${w.currentCoffeeId===c.id?'<span class=current-mark>Current</span>':''}${success?'<span class=status-badge>Dialed In</span>':''}</div><div class=coffee-subtitle>${e(c.roaster)} · ${e(c.origin)}</div></div>${icon('chevron')}</button>${open?`<div class=coffee-body><div class=style-row>${styleBadge(p.style)}${button('Change Style','style',`data-id="${e(c.id)}"`,'text-button')}</div><div class=recipe-label>${success?'Your Dialed In Window':'Starting recommendation'}</div>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}${rec.reasons?.length?`<p class=recipe-reason>${e(rec.reasons[0])}</p>`:''}${button(`${icon('plus',16)} Log a Shot`,'log',`data-id="${e(c.id)}"`,'primary full log-cta')}${last&&(!success||this.justSavedId===last.id)?`<section class=feedback-panel><h3>${e(advice.title)}</h3><p class=helper>${e(advice.text)}</p>${chips(last.tasteScales)}${radar(last.tasteScales)}</section>`:''}<details class=inline-disclosure data-retain="facts-${e(c.id)}"><summary>Coffee details</summary><dl class=coffee-facts>${[['Roaster',c.roaster],['Origin',c.origin],['Elevation',c.elevationM],['Roast level',c.roastLevel],['Process',c.process],['Variety',c.variety],['Producer',c.producer],['Tasting notes',c.tastingNotes]].filter(x=>x[1]).map(([k,val])=>`<div><dt>${e(k)}</dt><dd>${e(val)}</dd></div>`).join('')}</dl><p class=helper>${c.status==='verified'?'Verified coffee record':'Saved privately while identity is checked.'}</p>${c.status==='pending'?button('Check for a verified match','check-pending-match',`data-id="${e(c.id)}"`,'ghost compact'):''}</details><details class=inline-disclosure data-retain="history-${e(c.id)}"><summary>Shot History (${shots.length})</summary>${shots.map(sh=>shotCard(sh,{expanded:this.shotExpanded.has(sh.id),activeVersionId:v.id,unit:v.tempUnit})).join('')}</details></div>`:''}</article>`;
   }).join('')||'<p class="helper space-top">Add your first test coffee to get started.</p>'}`;
  }
  settings(){
@@ -118,21 +118,37 @@ class CloudApp {
    <p class="helper space-top">Renaming does not change your equipment history, shots, or recommendations.</p>
    <button class="primary full space-top">Save name</button></form>`);
  }
- showAdd(){this.addCoffeeDraft=null;this.show('New Coffee',`<form id=new-coffee>${field('Name / Bag Label','name','',{required:true})}${field('Roaster','roaster','',{required:true})}${field('Roaster Page URL','source_url','',{type:'url'})}${field('Release / harvest (if shown)','release_label','')}<details class=advanced open><summary>Optional coffee details</summary><div class=form-grid>${field('Origin','origin')}${select('Roast level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>${field('Tasting notes','tasting_notes')}</details><button class="primary full space-top">Add coffee</button><p class="helper space-top">Manual entry is active in this owner test. AI source extraction is not connected here yet.</p></form>`);}
- async finishCoffeeAdd(d,matched,chosenId=null){
-   if(chosenId){
-    await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:uuid()},{onlineOnly:true});
-    const library=this.raw?.library?.find(x=>x.coffee_id===chosenId);
-    this.tempCoffee=library?.id||null;
-    if(library)this.expanded.add(library.id);
-    sheet.close();this.notice='Added existing verified coffee. No duplicate was created.';this.render();return;
-   }
-   const lid=uuid(),{source_url,proposed_data}=proposalWithRecognizedRoaster(d,matched);
-   await this.mutate('submit_coffee',{library_entry_id:lid,source_url,proposed_data},{onlineOnly:true});
-   this.tempCoffee=lid;this.expanded.add(lid);sheet.close();
-   this.notice=matched?.roaster?.recognized?'Roaster recognized; this coffee is Pending until its release is verified.':'Coffee added as Pending. You can log shots while verification continues.';
-   this.render();
+ showAdd(){this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.show('New Coffee',`<form id=new-coffee>${field('Name / Bag Label','name','',{required:true})}${field('Roaster','roaster','',{required:true})}${field('Roaster Page URL','source_url','',{type:'url'})}${field('Release / harvest (if shown)','release_label','')}<details class=advanced open><summary>Optional coffee details</summary><div class=form-grid>${field('Origin','origin')}${select('Roast level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>${field('Tasting notes','tasting_notes')}</details><button class="primary full space-top">Add coffee</button><p class="helper space-top">Manual entry is active in this owner test. AI source extraction is not connected here yet.</p></form>`);}
+ async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){
+  if(chosenId){
+   await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:uuid()},{onlineOnly:true});
+   const library=this.raw?.library?.find(x=>x.coffee_id===chosenId);
+   this.tempCoffee=library?.id||null;
+   if(library)this.expanded.add(library.id);
+   sheet.close();this.notice='Added the existing verified coffee. No duplicate was created.';this.render();return;
   }
+  const lid=uuid(),{source_url,proposed_data}=proposalWithRecognizedRoaster(d,matched);
+  await this.mutate('submit_coffee',{library_entry_id:lid,source_url,proposed_data,confirmed_distinct:confirmedDistinct},{onlineOnly:true});
+  this.tempCoffee=lid;this.expanded.add(lid);sheet.close();
+  const entry=this.raw?.library?.find(x=>x.id===lid);
+  const proposal=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
+  if(entry?.coffee_id){
+   this.notice='Coffee automatically approved and added to the shared catalog.';
+  }else{
+   this.notice='Coffee saved. Checking official roaster evidence when available; you can log shots now.';
+   if(proposal?.id&&proposal?.source_url&&this.client.verifyCoffeeSource){
+    try{
+     const checked=await this.client.verifyCoffeeSource(proposal.id);
+     if(checked?.status==='verified'){
+      await this.sync();this.notice='Official source verified. Your coffee is now in the shared catalog.';
+     }else if(checked?.reason==='needs_confirmation'){
+      this.notice='Coffee saved. A possible duplicate needs confirmation; nothing was merged.';
+     }else this.notice='Coffee saved for private use. Official-source verification is pending.';
+    }catch{this.notice='Coffee saved for private use. Official-source checks can be retried later.';}
+   }
+  }
+  this.render();
+ }
   showLog(cid,editing=null){
   const c=this.state.coffees.find(c=>c.id===cid),v=M.activeVersion(this.state);this.logCoffee=cid;this.editing=editing;
   this.draft=editing?C.clone(editing):E.prefill(this.state,cid);this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
@@ -148,14 +164,31 @@ class CloudApp {
    if(a==='open-admin'){location.assign('/admin.html');return;}
    if(a==='rename-setup'){this.showRenameSetup(id);return;}
    if(a==='add'){this.showAdd();return;}
+    if(a==='check-pending-match'){
+     const entry=this.raw?.library?.find(x=>x.id===id);
+     const submission=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
+     if(!submission||submission.status!=='pending')throw new Error('This coffee is no longer Pending.');
+     const matched=await this.client.findCoffeeMatches({...submission.proposed_data,source_url:submission.source_url});
+     if(!matched?.candidates?.length){
+      this.notice='No verified match yet. Your coffee and shot history remain safe.';this.render();return;
+     }
+     this.pendingMergeSubmissionId=submission.id;this.addCoffeeMatches=matched;
+     this.show('Is this the same coffee?',matchReviewMarkup(matched,{pending:true}));return;
+    }
     if(a==='choose-coffee-match'||a==='add-distinct-coffee'){
+     if(this.pendingMergeSubmissionId){
+      if(a==='add-distinct-coffee'){this.pendingMergeSubmissionId=null;sheet.close();return;}
+      if(!this.addCoffeeMatches?.candidates?.some(c=>c.id===id))throw new Error('That verified match was not offered.');
+      await this.mutate('confirm_coffee_existing',{submission_id:this.pendingMergeSubmissionId,coffee_id:id},{onlineOnly:true});
+      this.pendingMergeSubmissionId=null;sheet.close();this.notice='Matched to the original verified coffee. Your original shots are preserved.';this.render();return;
+     }
      if(this.addingCoffee)return;
      if(!this.addCoffeeDraft)throw new Error('Add Coffee details were lost. Please enter them again.');
      const idToUse=a==='choose-coffee-match'?id:null;
      if(idToUse && !this.addCoffeeMatches?.candidates?.some(c=>c.id===idToUse))
       throw new Error('That verified coffee is not in the current match list.');
      this.addingCoffee=true;
-     try{await this.finishCoffeeAdd(this.addCoffeeDraft,this.addCoffeeMatches,idToUse);}
+     try{await this.finishCoffeeAdd(this.addCoffeeDraft,this.addCoffeeMatches,idToUse,{confirmedDistinct:a==='add-distinct-coffee'});}
      finally{this.addingCoffee=false;}
      return;
     }
