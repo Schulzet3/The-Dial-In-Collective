@@ -23,6 +23,12 @@ create table private.dic_coffee_aliases(
  created_at timestamptz not null default now(),
  primary key(coffee_id,alias_key)
 );
+create table private.dic_coffee_first_entry(
+ coffee_id uuid primary key references public.coffees(id),
+ first_seen_at timestamptz not null,
+ first_submission_id uuid not null references public.coffee_submissions(id),
+ primary_name text not null check(length(primary_name) between 1 and 200)
+);
 create table private.dic_coffee_audit(
  id bigint generated always as identity primary key,
  coffee_id uuid references public.coffees(id),
@@ -33,9 +39,10 @@ create table private.dic_coffee_audit(
  created_at timestamptz not null default now()
 );
 alter table private.dic_coffee_aliases enable row level security;
+alter table private.dic_coffee_first_entry enable row level security;
 alter table private.dic_coffee_audit enable row level security;
-revoke all on private.dic_coffee_aliases,private.dic_coffee_audit from public,anon,authenticated;
-grant all on private.dic_coffee_aliases,private.dic_coffee_audit to service_role;
+revoke all on private.dic_coffee_aliases,private.dic_coffee_first_entry,private.dic_coffee_audit from public,anon,authenticated;
+grant all on private.dic_coffee_aliases,private.dic_coffee_first_entry,private.dic_coffee_audit to service_role;
 
 -- Untrusted input never overwrites canonical names. The first actual entry
 -- is the authority for the displayed name; later spellings are aliases.
@@ -52,6 +59,21 @@ begin
  end if;
  if s.status not in ('pending','conflict') then
   raise exception using errcode='23514',message='Submission is already resolved.';
+ end if;
+ -- The global display name belongs to whichever *original submission* was first.
+ -- An older Pending submission may have been verified later than this canonical.
+ if s.created_at < coalesce((select first_seen_at from private.dic_coffee_first_entry
+                            where coffee_id=canonical),target.created_at) then
+  if private.dic_coffee_key(s.proposed_data->>'name') is distinct from private.dic_coffee_key(target.name) then
+   insert into private.dic_coffee_aliases(coffee_id,alias_key,original_name,origin_kind)
+    values(canonical,private.dic_coffee_key(target.name),target.name,'user_confirmed')
+    on conflict(coffee_id,alias_key) do nothing;
+  end if;
+  update public.coffees set name=left(s.proposed_data->>'name',200) where id=canonical;
+  insert into private.dic_coffee_first_entry(coffee_id,first_seen_at,first_submission_id,primary_name)
+   values(canonical,s.created_at,s.id,left(s.proposed_data->>'name',200))
+   on conflict(coffee_id) do update set first_seen_at=excluded.first_seen_at,
+     first_submission_id=excluded.first_submission_id,primary_name=excluded.primary_name;
  end if;
  select * into l from public.library_entries where owner_id=s.owner_id and submission_id=s.id for update;
  if not found then raise exception using errcode='23514',message='Original library entry is missing.';end if;
@@ -197,6 +219,8 @@ begin
    'verified',s.created_at)
  returning * into c;
  cid:=c.id;
+ insert into private.dic_coffee_first_entry(coffee_id,first_seen_at,first_submission_id,primary_name)
+ values(cid,s.created_at,s.id,c.name);
  -- No source-kind claim is made from the user's URL alone.
  source_kind:=case when method='official_verified' then 'roaster_page'
                    when evidence->>'official_page_confirmed'='true' then 'roaster_page'
