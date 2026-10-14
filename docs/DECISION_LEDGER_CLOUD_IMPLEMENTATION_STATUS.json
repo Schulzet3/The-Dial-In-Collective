@@ -140,7 +140,7 @@
   },
   "coffee_verification_2026_10_14": {
     "authority": "Explicitly approved owner Locked coffee verification rule; independent current Supabase checks",
-    "status": "Core schema and user/admin promotion RPCs applied; first owner catalog committed. Source Edge worker staged for deployment/test; not yet confirmed live.",
+    "status": "Supabase canonical catalog, admin/user mutation paths, compatibility RPC, rate-limited service-only source functions applied. Supabase Edge verifier v2 ACTIVE with JWT verification required. All four owner coffees approved and 14 shots preserved. GitHub PR CI green. Not yet Netlify-published or tested with real external user HTTP page fetch.",
     "verified_catalog_count": 4,
     "original_library_entries": 4,
     "preserved_owner_shots": 14,
@@ -160,6 +160,25 @@
       "import saving disabled",
       "private account data",
       "external beta blocked"
+    ],
+    "source_edge": {
+      "name": "dic-verify-coffee",
+      "version": 2,
+      "verify_jwt": true,
+      "status": "ACTIVE",
+      "deployed_file": "supabase/functions/dic-verify-coffee/index.ts",
+      "validation": "GitHub 106 Node tests, including deterministic Product/SSRF cases; 29 synthetic phone UI checks. Real external registered-user source fetch/approval not independently exercised."
+    },
+    "migrations_applied": [
+      "20261014221324_dic_coffee_auto_catalog",
+      "20261014222202_dic_source_worker_target",
+      "20261014222802_dic_unified_coffee_rpc_compat"
+    ],
+    "migration_sync": "All three applied Supabase SQL texts byte-for-byte match GitHub source.",
+    "pending_issues": [
+      "Post-import encrypted offsite backup freshness not yet reverified",
+      "Source verifier needs actual real-user/JWT/roaster page validation after owner UI release",
+      "Verified-to-verified canonical conflicts require separate audited reconciliation without touching shot IDs"
     ]
   }
 }
