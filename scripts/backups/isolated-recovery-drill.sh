@@ -220,5 +220,5 @@ echo "PASS: Application RLS, policies, indexes, triggers, functions and signup t
 
 echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables were restored with data."
 echo "PASS: All first-party table row counts and core Auth counts agree with source."
-echo "LIMIT: Core-data test only, not full managed Supabase configuration recovery."
+echo "LIMIT: First-party application schema and core Auth data only; hosted Supabase services, provider-managed settings, and external secrets are not restored."
 echo "INFO: No plaintext uploaded; disposable PostgreSQL and local dump deleted."
