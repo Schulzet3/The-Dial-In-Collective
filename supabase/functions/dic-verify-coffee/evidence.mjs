@@ -1,0 +1,121 @@
+// Deterministic official-product evidence parser. No AI calls, no HTML execution.
+// This file is shared by Deno Edge and the Node regression suite.
+export function normalizeWords(value) {
+ return String(value??'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
+  .toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+}
+function decodeHtml(value) {
+ return String(value??'').replace(/&#(?:x([0-9a-f]+)|([0-9]+));/gi,(_m,h,d)=>{
+  const code=Number.parseInt(h||d,h?16:10);
+  return code>0&&code<=0x10ffff?String.fromCodePoint(code):'';
+ }).replace(/&(?:amp|quot|apos|lt|gt|nbsp);/gi,v=>({
+  '&amp;':'&','&quot;':'"','&apos;':"'",'&lt;':'<','&gt;':'>','&nbsp;':' '
+ })[v.toLowerCase()]||v);
+}
+export function officialProductUrl(raw,registeredDomain) {
+ if(typeof raw!=='string'||raw.length>4000||!registeredDomain||!/^[a-z0-9-]+(?:\.[a-z0-9-]+)+$/.test(registeredDomain))return null;
+ try {
+  const u=new URL(raw);
+  if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||!['',null].includes(u.hash))return null;
+  if(![registeredDomain,'www.'+registeredDomain].includes(u.hostname.toLowerCase()))return null;
+  if(!/^\/(?:products|product)\/[a-z0-9][a-z0-9._~%+-]*(?:\/)?$/i.test(u.pathname))return null;
+  if(u.search.length>600)return null;
+  return u.toString();
+ } catch {return null;}
+}
+function walkProduct(data,products,limit=0) {
+ if(limit>8||!data||typeof data!=='object')return;
+ if(Array.isArray(data)){for(const d of data.slice(0,30))walkProduct(d,products,limit+1);return;}
+ const types=Array.isArray(data['@type'])?data['@type']:[data['@type']];
+ if(types.some(t=>String(t||'').toLowerCase()==='product')&&typeof data.name==='string')
+  products.push({name:decodeHtml(data.name),description:decodeHtml(data.description||''),url:typeof data.url==='string'?data.url:null,kind:'jsonld_product',attributes:data.additionalProperty});
+ if(Array.isArray(data['@graph']))walkProduct(data['@graph'],products,limit+1);
+}
+function metas(html) {
+ const out={};
+ for(const tag of html.match(/<meta\b[^>]{0,1800}>/gi)||[]){
+  const attributes={};
+  for(const x of tag.matchAll(/([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi))
+   attributes[x[1].toLowerCase()]=decodeHtml(x[2]??x[3]);
+  const key=(attributes.property||attributes.name||'').toLowerCase();
+  if(key==='og:title'||key==='og:type'||key==='description')out[key]=attributes.content||'';
+ }
+ return out;
+}
+function hasReleaseProof(entered,product){
+ if(!entered)return true;
+ const value=normalizeWords(entered);
+ const snippet=normalizeWords(product.name+' '+product.description.slice(0,1000));
+ if(!value)return true;
+ // Full release name or exact year in the product identity/description, never
+ // in a footer copyright or unrelated recommended-products carousel.
+ if((' '+snippet+' ').includes(' '+value+' '))return true;
+ const years=[...value.matchAll(/\b(?:19|20)\d\d\b/g)].map(x=>x[0]);
+ return years.length>0&&years.every(y=>(' '+snippet+' ').includes(' '+y+' '));
+}
+export function productNameMatches(entered,productName) {
+ const q=normalizeWords(entered),p=normalizeWords(productName);
+ if(q.length<4||!p)return false;
+ if(p===q)return true;
+ if(!(' '+p+' ').includes(' '+q+' '))return false;
+ // Critical qualifiers cannot be silently introduced (including different
+ // harvest years or decaf status). Matching Bavyeyi IV in longer official
+ // "Burundi | Bavyeyi IV | Bourbon | Natural" remains allowed.
+ for(const t of ['decaf','decaffeinated','caffeine free']){
+  if((' '+p+' ').includes(' '+t+' ')!==(' '+q+' ').includes(' '+t+' '))return false;
+ }
+ const qyears=(q.match(/\b(?:19|20)\d\d\b/g)||[]).sort();
+ const pyears=(p.match(/\b(?:19|20)\d\d\b/g)||[]).sort();
+ if(pyears.length&&JSON.stringify(qyears)!==JSON.stringify(pyears))return false;
+ return true;
+}
+export function extractOfficialEvidence(html,submitted) {
+ if(typeof html!=='string'||html.length>950000)return {ok:false,reason:'page_too_large'};
+ const products=[];
+ for(const [,attrs,payload] of html.matchAll(/<script\b([^>]{0,1000})>([\s\S]*?)<\/script\s*>/gi)){
+  if(!/\btype\s*=\s*["']application\/ld\+json["']/i.test(attrs)||payload.length>180000)continue;
+  try{walkProduct(JSON.parse(payload),products);}catch{ /* Broken source markup never becomes approval evidence. */ }
+ }
+ const meta=metas(html);
+ if(/^product(?:\.|$)/i.test(meta['og:type']||'')&&meta['og:title']){
+  products.push({name:meta['og:title'],description:meta.description||'',url:null,kind:'official_product_page',attributes:null});
+ }
+ const same=products.filter(p=>productNameMatches(submitted.name,p.name)&&hasReleaseProof(submitted.release_label,p));
+ if(same.length!==1){
+  // Multiple Product nodes can refer to multiple related items, not one.
+  // Accept a matching JSON-LD Product over redundant same-title OG metadata.
+  const strong=same.filter(x=>x.kind==='jsonld_product');
+  if(strong.length!==1)return {ok:false,reason:same.length?'ambiguous_product':'product_title_not_verified'};
+  same.splice(0,same.length,strong[0]);
+ }
+ const chosen=same[0];
+ if(chosen.url&&submitted.source_url){
+  try{
+   const declared=new URL(submitted.source_url),linked=new URL(chosen.url,declared.origin);
+   if(linked.hostname!==declared.hostname&&linked.hostname!=='www.'+declared.hostname&&declared.hostname!=='www.'+linked.hostname)
+    return {ok:false,reason:'structured_product_url_mismatch'};
+   if(linked.pathname.replace(/\/$/,'')!==declared.pathname.replace(/\/$/,''))
+    return {ok:false,reason:'structured_product_url_mismatch'};
+  }catch{return {ok:false,reason:'invalid_product_url'};}
+ }
+ let officialProcess='';
+ if(Array.isArray(chosen.attributes)){
+  for(const row of chosen.attributes){
+   if(String(row?.name||'').toLowerCase()==='process') officialProcess=String(row?.value||'');
+  }
+ }
+ const expected=normalizeWords(submitted.process||''),actual=normalizeWords(officialProcess);
+ const incompatibleProcess=Boolean(expected&&actual&&expected!==actual);
+ if(incompatibleProcess)return {ok:false,reason:'process_conflict'};
+ const release=String(submitted.release_label||'').trim();
+ return {
+  ok:true,
+  evidence_kind:chosen.kind,
+  product_name:chosen.name.slice(0,250),
+  title_matches:true,
+  release_label:release||null,
+  contradictory_facts:false,
+  verified_fields:{name:chosen.name.slice(0,200),...(actual?{process:officialProcess.slice(0,100)}:{})},
+  evidence_excerpt:'Official product metadata: '+chosen.name.slice(0,160)
+ };
+}
