@@ -122,7 +122,7 @@
   },
   "coffee_identity_alias_2026_10_14": {
     "requirement_basis": "Canonical Master Specification sections 8.3, 9.1–9.4, 10.4, 11 and 32. No new policy choice silently created.",
-    "status": "Feature branch implementation and rollback-only SQL tests; full CI and live migration to verify.",
+    "status": "Supabase migration 20261014215731 dic_roaster_identity_matching applied and rollback-only SQL safety test passed; Add Coffee UI feature tested on GitHub PR. Netlify deployment intentionally withheld.",
     "requirements": [
       "Five Sweet Bloom example spellings map to one brand identity, without proving any individual product.",
       "Only unique exact verified canonical coffee/releases with authoritative source evidence may be reused without manual approval.",
@@ -133,6 +133,9 @@
     "verified_catalog_at_checkpoint": 0,
     "pending_submissions_at_checkpoint": 4,
     "remaining": "Build the source-backed scalable coffee verification process; monitor observed false-positive/false-negative matches in real data before claiming automatic coverage.",
-    "locked_decisions_changed": []
+    "locked_decisions_changed": [],
+    "backend_evidence": "Role-gated matching RPC: source-backed candidate lookup, five Sweet Bloom aliases, source tracking URL invariance, unique release selection, mismatched/unknown release confirmation. Anonymous and unadmitted users denied; no actual coffee or shot rows changed.",
+    "source_version": "supabase/migrations/20261014215731_dic_roaster_identity_matching.sql",
+    "remains_unverified": "No live catalog coffees are verified yet. Brand normalization cannot by itself establish verification of a particular product/harvest."
   }
 }
