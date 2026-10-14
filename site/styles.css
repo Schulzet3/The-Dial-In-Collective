@@ -76,3 +76,24 @@ dialog{color:var(--ink);background:var(--surface);border:1px solid var(--line);p
 .confirmation-buttons .text-button{justify-content:center}
 #confirmation-title:focus{outline:none}
 @media(max-width:480px){.email-confirmation{padding-top:35px}.email-confirmation h2{font-size:30px}.confirmation-instructions{padding:16px}}
+
+/* Shot history: measured values, setup, basket and feed stay above the compass. */
+.shot-overview{flex:1;min-width:0;display:grid;gap:5px}
+.shot-context{display:flex;align-items:center;gap:4px 11px;flex-wrap:wrap;margin-top:2px}
+.shot-context-item{font-size:11px;color:var(--muted);line-height:1.5;overflow-wrap:anywhere}
+.shot-context-item:first-child{color:var(--ink);font-weight:600}
+.shot-overview .shot-meta{margin-top:0;gap:7px}
+.shot-body .taste-chips{margin:12px 0 8px}
+.shot-body .note{margin:10px 0}
+.shot-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px}
+.shot-actions button{min-height:40px;white-space:nowrap}
+.shot-actions button:last-child:not(:first-child){margin-left:auto}
+.settings-setup{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px;margin-top:20px}
+.settings-setup strong,.settings-setup small{display:block}
+.settings-setup strong{font-size:15px}
+.switch-info{min-width:0;overflow-wrap:anywhere}
+.switch-actions{display:flex;gap:7px;flex-shrink:0}
+.settings-recovery{display:grid;gap:8px}
+.settings-recovery button{justify-content:flex-start}
+.recovery-options{margin-top:20px}
+@media(max-width:370px){.shot-context{gap:3px 8px}.shot-actions{gap:8px}.shot-actions .compact{padding:9px 11px;font-size:12px}.switch-row{flex-wrap:wrap}.switch-actions{margin-left:auto}}
