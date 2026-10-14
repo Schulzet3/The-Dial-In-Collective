@@ -5,10 +5,10 @@ import {officialProductUrl,productNameMatches,extractOfficialEvidence,normalizeW
 
 const official='sweetbloomcoffee.com';
 const html=(title,description='',productUrl='https://sweetbloomcoffee.com/products/hambela')=>
- \`<html><head><meta property="og:type" content="product"><meta property="og:title" content="\${title}"></head>
- <body><script type="application/ld+json">\${JSON.stringify({'@context':'https://schema.org','@graph':[
+ `<html><head><meta property="og:type" content="product"><meta property="og:title" content="${title}"></head>
+ <body><script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@graph':[
  {'@type':'WebSite',name:'Sweet Bloom'}, {'@type':'Product',name:title,description,url:productUrl}
- ]})}</script></body></html>\`;
+ ]})}</script></body></html>`;
 
 test('known official product path is allowed; outside domain and redirect-like URL blocked',()=>{
  assert.equal(officialProductUrl('https://sweetbloomcoffee.com/products/hambela',official),
