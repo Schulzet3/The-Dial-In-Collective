@@ -105,7 +105,7 @@ end $$;
 create function private.dic_promote_pending_coffee(sid uuid,method text,evidence jsonb default '{}'::jsonb,distinct_confirmed boolean default false)
 returns jsonb language plpgsql security definer set search_path='' as $$
 declare
- s public.coffee_submissions; c public.coffees; cid uuid; locked_key text;
+ s public.coffee_submissions; new_c public.coffees; cid uuid; locked_key text;
  raw jsonb; roaster_text text; known_name text; brandkey text; official_host text; host text;
  product_name text; source_title text; namekey text; existed uuid; same_url uuid;
  existing_count integer; declared_release text; official_release text; conflicting boolean;
@@ -177,7 +177,7 @@ begin
  -- Protect against two users simultaneously submitting the same product.
  locked_key:=brandkey||':'||namekey;
  perform pg_advisory_xact_lock(hashtextextended(locked_key,9460));
- select id into same_url from public.coffees c
+ select c.id into same_url from public.coffees c
  where c.verification_state='verified' and c.merged_into_id is null
   and private.dic_canonical_roaster_key(c.roaster)=brandkey
   and private.dic_coffee_key(c.name)=namekey
@@ -217,10 +217,10 @@ begin
    nullif(btrim(raw->>'tasting_notes'),''),nullif(btrim(raw->>'summary'),''),nullif(btrim(raw->>'espressoNotes'),''),
    case when jsonb_typeof(raw->'roaster_recipe')='object' then raw->'roaster_recipe' else null end,
    'verified',s.created_at)
- returning * into c;
- cid:=c.id;
+ returning * into new_c;
+ cid:=new_c.id;
  insert into private.dic_coffee_first_entry(coffee_id,first_seen_at,first_submission_id,primary_name)
- values(cid,s.created_at,s.id,c.name);
+ values(cid,s.created_at,s.id,new_c.name);
  -- No source-kind claim is made from the user's URL alone.
  source_kind:=case when method='official_verified' then 'roaster_page'
                    when evidence->>'official_page_confirmed'='true' then 'roaster_page'
@@ -240,7 +240,7 @@ begin
  if not found then raise exception using errcode='23514',message='Original personal library entry was not preserved.';end if;
  insert into private.dic_coffee_audit(coffee_id,submission_id,actor_id,event_kind,evidence)
  values(cid,sid,auth.uid(),method,coalesce(evidence,'{}'::jsonb));
- return jsonb_build_object('ok',true,'status','verified','coffee_id',cid,'canonical_name',c.name,
+ return jsonb_build_object('ok',true,'status','verified','coffee_id',cid,'canonical_name',new_c.name,
     'reused',false);
 end $$;
 revoke all on function private.dic_link_pending_coffee(uuid,uuid,text,jsonb),
