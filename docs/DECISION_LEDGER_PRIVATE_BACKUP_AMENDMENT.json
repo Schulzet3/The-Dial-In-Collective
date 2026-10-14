@@ -167,10 +167,19 @@
       "fix": "Wait for TCP-ready final PostgreSQL server over localhost inside --network none container; avoid temporary Unix-socket-only initdb server readiness false-positive",
       "passed_dev_restore_run": 38479513765,
       "passed_dev_restore_scope": "All 35 first-party public/private tables and core Auth users/identities restored in disposable network-isolated PostgreSQL; all row counts matched",
-      "main_post_change_workflow_execution": "Not yet observed",
+      "main_post_change_workflow_execution": "PASS: backup push 38496025978, recovery push 38496021835 on ubuntu-24.04",
       "production_configs_changed": "Runner OS pin and isolated recovery readiness only; no service secrets, raw data, import gate, or site access changes",
       "future_review": "Test Ubuntu 26.04 on development before controlled promotion; continue security patches on 24.04 while supported",
       "locked_decisions_changed": []
+    },
+    "production_runner_smoke_test": {
+      "date_utc": "2026-10-14",
+      "main_backup_run_id": 38496025978,
+      "main_backup_result": "PASS (push smoke event; not courier eligible)",
+      "main_recovery_run_id": 38496021835,
+      "main_recovery_result": "PASS on ubuntu-24.04 with final PostgreSQL readiness fix; all-table count check as implemented",
+      "automatic_regression_triggers": "Both main backup/recovery workflows now have push triggers on their workflow + corresponding backup/restore script; scheduled/manual triggers retained",
+      "no_locked_decisions_changed": true
     }
   }
 }
