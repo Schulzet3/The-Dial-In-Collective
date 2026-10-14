@@ -306,6 +306,7 @@ begin
  return response;
 end $$;
 revoke all on function private.dic_submit_coffee_auto(uuid,jsonb) from public,anon,authenticated;
+grant execute on function private.dic_submit_coffee_auto(uuid,jsonb) to authenticated;
 
 -- The owner controls which Pending entry to reconcile; no foreign account can
 -- forge this confirmation. Preserve the library ID and associated shot history.
@@ -358,6 +359,8 @@ begin
  return response;
 end $$;
 revoke all on function private.dic_confirm_coffee_existing(uuid,jsonb) from public,anon,authenticated;
+grant execute on function private.dic_confirm_coffee_existing(uuid,jsonb) to authenticated;
+grant execute on function private.dic_promote_pending_coffee(uuid,text,jsonb,boolean) to authenticated;
 
 -- Role-bounded APIs. Only the signed-in owner/admin may approve their own
 -- coffee; external fetched evidence enters through a service-role-only RPC.
