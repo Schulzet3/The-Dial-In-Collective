@@ -361,6 +361,7 @@ end $$;
 revoke all on function private.dic_confirm_coffee_existing(uuid,jsonb) from public,anon,authenticated;
 grant execute on function private.dic_confirm_coffee_existing(uuid,jsonb) to authenticated;
 grant execute on function private.dic_promote_pending_coffee(uuid,text,jsonb,boolean) to authenticated;
+grant execute on function private.dic_promote_pending_coffee(uuid,text,jsonb,boolean) to service_role;
 
 -- Role-bounded APIs. Only the signed-in owner/admin may approve their own
 -- coffee; external fetched evidence enters through a service-role-only RPC.
