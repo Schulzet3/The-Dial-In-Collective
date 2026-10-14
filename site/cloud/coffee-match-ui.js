@@ -2,7 +2,7 @@
 // unverified submission or infer coffee/release identity from a roaster name.
 import {e,button} from '../lib/ui.js';
 export function nextCoffeeAction(result){
- if(typeof result?.exact_id==='string'&&/^[0-9a-f-]{36}$/i.test(result.exact_id)&&result?.classification==='exact_verified')return 'reuse_verified';
+ if(typeof result?.exact_id==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(result.exact_id)&&result?.classification==='exact_verified')return 'reuse_verified';
  if(result?.classification==='needs_confirmation'&&Array.isArray(result?.candidates)&&result.candidates.length)return 'ask_user';
  return 'submit_pending';
 }
