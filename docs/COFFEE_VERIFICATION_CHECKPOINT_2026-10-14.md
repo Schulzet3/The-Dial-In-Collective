@@ -35,3 +35,13 @@ Three source-backed roaster product-page evidence records were added separately.
 - If a user already has multiple personal entries for the *same* canonical coffee, automated merge stops instead of rewriting existing shots and family statistics. A follow-up reconciliation routine must handle that exceptional case.
 - The reviewer must not claim a source was checked unless the actual live endpoint ran successfully. GitHub tests, Supabase migration tests and initial manual sources are separate evidence types.
 - No Netlify deployment while the verified credit snapshot reports zero credits. When budget returns, release the GitHub-tested source in one batched, SSO-protected publish.
+
+## Implementation verification update
+
+**Supabase backend active:** migrated admin/ordinary-tenant atomic coffee mutation paths, user-confirmed matching, oldest-entry naming, service-only product checks, and retry budget are applied. Legacy `dic_mutate` is now routed through the same protected smart submission path rather than bypassing automatic approval. All three migration SQL contents were checked against Supabase migration history and matched exactly.
+
+**Verified Edge deployment:** `dic-verify-coffee` version **2**, status **ACTIVE**, `verify_jwt=true`, was deployed from this GitHub source. It enforces trusted official hosts, no-follow redirects, an allowlisted product path, restricted query parameters, 950 kB/10 second fetch budget, and server-side authenticated-submission ownership. The function does not request Netlify credits.
+
+**Tests:** Node/cloud build tests **106/106 passed**, synthetic 390-pixel browser regression **29 passed**. SQL rollback-only tests proved admin own auto-approval, ordinary Pending, account/role separation, user confirmation preserving library IDs and first-entered spelling, idempotency, official verification, and source fetch rate cap. Actual authenticated external-roaster HTTP source promotion has **not** yet been end-to-end tested with a real signed-in non-admin account; do not represent it as empirically validated. Netlify deployment intentionally withheld pending credit purchase.
+
+**Outstanding hardening:** source-backed extraction covers approved official-host Product/OG structured metadata; it does not auto-verify every roaster/product template. The confirmed offsite encrypted snapshot must be renewed after the owner database migration, and any future already-verified-to-already-verified canonical consolidation needs audited, provenance-safe treatment to avoid splitting/reclassifying community evidence.
