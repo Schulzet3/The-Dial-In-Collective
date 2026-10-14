@@ -47,7 +47,21 @@
         "Netlify latest ready/published commit matches GitHub approved head",
         "Netlify SSO remains required; existing import gate unchanged"
       ],
-      "implementation_status": "Git-linked Netlify confirmed by owner screenshot, latest deploy still stale at time of request; Netlify branch/build settings remain to be verified."
+      "implementation_status": "Git-linked Netlify confirmed by owner screenshot, latest deploy still stale at time of request; Netlify branch/build settings remain to be verified.",
+      "amended_by": "OPS-20261014-02",
+      "amendment_note": "The owner changed the release cadence on 2026-10-14: publishing remains automatic after testing but must be deliberately batched to preserve Netlify Free credits, not triggered on every intermediate GitHub commit. All non-cadence safeguards remain Locked."
+    },
+    {
+      "id": "OPS-20261014-02",
+      "status": "Implementing in GitHub. Netlify is presently credit-paused; effectiveness on a live Netlify build remains to be confirmed after a future funded billing cycle.",
+      "topic": "Credit-aware, batched Netlify publishing",
+      "owner_approval_date": "2026-10-14",
+      "decision": "Replace per-intermediate-commit publication with one intentionally consolidated, tested owner-preview production release per finished bundle. Carry out intermediate development, review, Node/mobile regression tests, and Supabase migrations in GitHub/Supabase without routine billable Netlify production publishes. Continue automatic publication after the bundle has passed gates only when a fresh, verified Netlify credit balance is sufficient; verify the published SHA and protections.",
+      "deployment_controls": "A Git-connected production deploy must have explicit 'Release DIC: ... [dic-publish]' commit subject, run the existing test/build command, and pass the fail-closed credit snapshot gate. Non-release pushes are skipped; 0-credit PR/branch previews are permitted. Netlify build hooks can bypass ignore and must not be used for unreviewed releases.",
+      "current_credit_snapshot": "Owner Netlify screenshot 2026-10-14: Free 300 included; 22 production deploys used 330 credits; 0.1 requests; 0.1 bandwidth; 330.2 total, zero remaining. Free production publishing paused. This is not proof of a charge or debt.",
+      "data_accuracy_caveat": "Netlify connector cannot retrieve live billing totals: docs/NETLIFY_CREDIT_LEDGER.json is a point-in-time verified ledger. Refresh from provider before each intended release or billing-cycle reset. Never claim a stale balance is current.",
+      "financial_constraints": "No upgrade, credit purchase, auto-recharge, new provider, or changed visitor access without separate owner approval.",
+      "unchanged_requirements": "Preserve SSO, owner preview/beta gates, RLS, import guard, database restoration obligations, Master Specification and all other Locked decisions."
     }
   ],
   "unchanged_release_gates": [
@@ -55,5 +69,5 @@
     "private beta access/Netlify SSO",
     "canonical coffee/admin/community verification"
   ],
-  "implementation_status": "Previous five UX refinements merged to development/backend-foundation and applied backend migration verified; automated publishing gate being configured and live deploy not yet confirmed."
+  "implementation_status": "Owner UX/backend changes complete in development; user-approved credit-aware release batching and verified credit ledger staged in GitHub, with live Netlify production still paused."
 }

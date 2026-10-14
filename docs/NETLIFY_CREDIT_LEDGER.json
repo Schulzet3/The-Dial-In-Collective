@@ -1,0 +1,36 @@
+{
+  "product": "The Dial In Collective",
+  "provider": "Netlify",
+  "account_plan": "Free",
+  "accounting_note": "Point-in-time observations from Netlify Billing. Not a live billing API connection. Update only from a verified current Netlify balance; never assume a monthly reset date.",
+  "monthly_included_credits": 300,
+  "production_deploy_credits_each": 15,
+  "snapshots": [
+    {
+      "observed_date": "2026-10-14",
+      "source": "Owner-provided screenshot of Netlify Credit usage breakdown",
+      "credit_period_label": "Current billing period as shown; exact reset date not supplied",
+      "production_deploy_count": 22,
+      "production_deploy_credits": 330,
+      "ai_inference_credits": 0,
+      "compute_credits": 0,
+      "web_request_credits": 0.1,
+      "bandwidth_credits": 0.1,
+      "observed_total_used_credits": 330.2,
+      "observed_remaining_credits": 0,
+      "production_deployments_paused": true
+    }
+  ],
+  "release_policy": {
+    "approved_owner_preview_branch": "development/backend-foundation",
+    "production_deploy_minimum_balance": 15,
+    "maximum_snapshot_age_days": 7,
+    "must_pass_tests_before_release": true,
+    "release_marker": "Release DIC: ... [dic-publish]",
+    "budget_rule": "Only one tested, deliberately batched production release per approved bundle. Do not publish at a reported balance below 15, on stale/unknown data, or if CI is failing. Keep provider privacy and recovery safeguards.",
+    "manual_refresh_required": "Refresh the latest Netlify team usage snapshot before release or after the billing cycle resets. Current Netlify connector does not expose the live billing balance.",
+    "credits_on_free_plan_are_hard_limit": true,
+    "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval."
+  },
+  "reconciliation": "After each confirmed Netlify publish, verify deploy SHA and refresh this ledger from Netlify's usage breakdown. A GitHub commit, deploy request or skipped build does not prove a billable Netlify production deploy."
+}

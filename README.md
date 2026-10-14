@@ -13,6 +13,7 @@ This branch contains the applied cloud database foundation, authenticated owner 
 - [Locked owner-approved UX refinements (October 14)](docs/DECISION_LEDGER_2026_10_14_UX.json)
 - [Cloud implementation status ledger](docs/DECISION_LEDGER_CLOUD_IMPLEMENTATION_STATUS.json)
 - [Applied migrations](supabase/migrations/)
+- [Netlify credit ledger and deliberate release policy](docs/NETLIFY_CREDIT_LEDGER.json)
 
 The Master Specification, Decision Ledger and accepted subsequent amendments remain authoritative. Preserve Locked decisions; document changes explicitly. Keep the experience sleek, clean and centered on **Log Shot -> Rate -> Recommendation**. Missing controls in this owner-development harness are unfinished integrations, not decisions to remove beta features.
 
@@ -39,3 +40,7 @@ The build requires `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` in its environm
 `supabase/tests/security_foundation.sql` records the earlier 60-check foundation suite. Some direct-write expectations were intentionally superseded by the newer version-checked mutation APIs; update those assertions before using it as a current gate. The current checkpoint records the additional live-database role assertions and their scope. All database testing remains restricted to controlled synthetic fixtures with rollback; never casually run it against a populated beta database.
 
 Source remains on `development/backend-foundation`; main and the existing local installation were not changed. No paid database branch or domain was created. Full community processing, backup/restore, remaining prototype feature parity and end-to-end hosted verification are still required before external beta testing.
+
+## Credit-aware releases
+
+GitHub Actions (plus rollback-only database tests) handle iterative development without Netlify production credits. The owner-approved production branch is `development/backend-foundation`; Netlify builds only intentional `Release DIC: ... [dic-publish]` commits and only after the latest verified billing snapshot records at least 15 remaining credits. Every other source/documentation commit skips Netlify production publishing. Netlify's 2026-10-14 screenshot reported **330.2 / 300 credits used; 0 remaining**. The ledger is a provider-observed snapshot, **not a live billing API**. Refresh the snapshot after the Netlify billing cycle renews and before the next production release; never override the gate or buy credits without approval.
