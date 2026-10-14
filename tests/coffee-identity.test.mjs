@@ -53,7 +53,7 @@ test('untrusted catalog strings cannot inject script, markup, or fake buttons',(
 test('client and UI use the server matcher before existing verified or pending actions',()=>{
  const cloud=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  const client=readFileSync(new URL('../site/cloud/client.js',import.meta.url),'utf8');
- const source=readFileSync(new URL('../supabase/plans/dic_roaster_identity_matching.sql',import.meta.url),'utf8');
+ const source=readFileSync(new URL('../supabase/migrations/20261014215731_dic_roaster_identity_matching.sql',import.meta.url),'utf8');
  assert.match(cloud,/this\.client\.findCoffeeMatches\(d\)/);
  assert.match(cloud,/add_verified_coffee/);
  assert.match(cloud,/submit_coffee/);
