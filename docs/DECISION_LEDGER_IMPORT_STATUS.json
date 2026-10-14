@@ -224,5 +224,41 @@
     "encrypted_post_import_backup": "NOT YET VERIFIED: last scheduled main encrypted offsite artifact predates import",
     "complete_hosted_provider_recovery_verified": false,
     "locked_decisions_changed": []
+  },
+  "owner_directed_historical_feed_correction_2026_10_14": {
+    "status": "PASS: all 14 imported historical shots corrected from unknown to slow",
+    "authority": "Owner explicitly requested all historical records be marked slow-fed, after affirming intentional earlier grind/temperature edits",
+    "nature": "User-authorized observation correction, not an automatic assumption about previously unknown feed; no change to the original Locked policy that unconfirmed feed stays unknown",
+    "live_counts_after": {
+      "shots_total": 14,
+      "slow_shots": 14,
+      "unknown_shots": 0,
+      "standard_shots": 0,
+      "original_source_feed_unknown_shots": 14,
+      "changed_audit_events": 14,
+      "personal_coffees": 4,
+      "personal_families": 4,
+      "dialed_in_shots": 8,
+      "community_shots": 0,
+      "owner_count": 1
+    },
+    "safeguards": [
+      "Dry-run transaction verified 14 corrections and 14 audit entries then rolled back",
+      "Production atomic guarded transaction matched exact count, owner, source hash and unchanged downstream fields",
+      "Every corrected shot retains original measurements/notes/links and recorded immutable provenance",
+      "Archive in private.import_batches retains full original source with 14 unknown feed values and verified SHA-256",
+      "Four personal families, current coffee and all-green shot count unchanged",
+      "No community shots published",
+      "No original v0.2.0 data touched",
+      "Import gate remains closed and all first-party tables retain RLS"
+    ],
+    "existing_setup_preference": {
+      "track_slow_feed": true,
+      "slow_feed": false,
+      "changed": false,
+      "note": "Future shot default was not changed by user request for existing records"
+    },
+    "offsite_status": "New post-edit encrypted GitHub-to-Google-Drive source-inclusive backup still needs confirmation after next eligible run; previous verified offsite backup predates import",
+    "locked_product_decisions_changed": []
   }
 }
