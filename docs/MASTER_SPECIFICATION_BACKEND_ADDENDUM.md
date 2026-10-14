@@ -63,3 +63,12 @@ No real account, coffee, shot, secret, backup or prototype demo fixture was seed
 8. Preserve the queued Mac double-click launcher and safer Documents-folder updater for local distributions; these were not part of the database milestone.
 
 No new product question is required to complete this foundation. Infrastructure authorization/configuration steps will be requested individually when needed.
+
+
+## Approved owner-only import exception, 2026-10-14
+
+The owner explicitly approved a **one-time, existing admitted-account-only** historical-data import before full managed Supabase reconstruction, following live server validation and confirmed independent local recovery-copy download. This is a limited change to the *order* of owner-only testing, not a relaxation of other Locked requirements or external-beta recovery obligations. This approval is recorded in the updated canonical Master Specification v1.0 **Appendix A** and Decision Ledger approved amendment `OWNER-IMPORT-20261014` in the owner's ChatGPT Library. No other of the 79 baseline Locked decisions was modified.
+
+Security implementation must keep `private.import_control.recovery_verified_at` **NULL** while managed-service restoration remains unverified. A server-side exception must be bound to the existing unique enabled member's UUID, be valid for no more than 24 hours, and re-lock automatically in the same transaction on first successful, atomic, idempotent owner import. It must refuse another owner even if admitted in the future. All existing owner checks, the reviewed file's hash, acknowledgement of recovery download, RLS policies, Netlify SSO, private original phone/Mac records and no-credit-card/no-domain constraints remain unchanged.
+
+No real data was imported simply by granting approval. After authenticated UI commit, verify exact history and idempotence, then produce a **new** encrypted source-inclusive backup and confirm Drive delivery and offline restoration of nonzero imported rows. Full hosted Supabase configuration, SMTP, external multiuser signup/privacy, admins, and real beta device tests remain mandatory before external beta.
