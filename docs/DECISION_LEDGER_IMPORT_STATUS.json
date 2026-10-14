@@ -119,5 +119,32 @@
     "import_gate_enabled": false,
     "note": "Still requires explicit owner decision and original full-recovery acceptance. No production data writes were performed.",
     "locked_decisions_changed": []
+  },
+  "owner_import_exception_approved_2026_10_14": {
+    "status": "APPROVED - implementing with fail-closed owner-only server gate; no import yet",
+    "decision_id": "OWNER-IMPORT-20261014",
+    "authority": "Owner explicit approval on 2026-10-14",
+    "scope": "One-time import for existing admitted owner only; narrow exception to hosted recovery sequencing",
+    "existing_locked_decisions_changed": [],
+    "app_service_recovery_verified": false,
+    "server_gate_requirements": [
+      "Do not set private.import_control.recovery_verified_at",
+      "Allow ONLY current singular admitted beta owner UUID",
+      "Enforce <=24h expiry",
+      "Relock after first successful import",
+      "Do not disable Netlify SSO, admission, RLS, backup, Auth safeguards"
+    ],
+    "required_user_checks": [
+      "Revalidate exact reviewed backup after gate opens",
+      "Original files and independent local recovery JSON already confirmed saved",
+      "Owner must explicitly confirm import in authenticated UI"
+    ],
+    "after_import": [
+      "Account-bound coffee, shot, family and source archive counts",
+      "Exact retry idempotency",
+      "Daily encrypted source-inclusive post-import GitHub to private Drive delivery",
+      "Isolated recovery of nonzero imported rows",
+      "Full hosted-service recovery before external beta"
+    ]
   }
 }
