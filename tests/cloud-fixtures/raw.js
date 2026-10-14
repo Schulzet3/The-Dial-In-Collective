@@ -2,7 +2,7 @@ export const OWNER='a1111111-1111-4111-8111-111111111111';
 export const TIME='2026-10-01T12:00:00Z';
 export function rawFixture(){return {
  preferences:{owner_id:OWNER,theme:'light',tasting_preferences:'clarity',active_setup_id:'setup',revision:1},
- setups:[{id:'setup',owner_id:OWNER,name:'Test Home',active_version_id:'version',created_at:TIME}],
+ setups:[{id:'setup',owner_id:OWNER,name:'Test Home',active_version_id:'version',revision:1,created_at:TIME}],
  versions:[{id:'version',owner_id:OWNER,setup_id:'setup',machine_model:'Test machine',grinder_model:'Test grinder',burr_set:'Test burrs',created_at:TIME}],
  setupPreferences:[{setup_id:'setup',setup_version_id:'version',calibration_id:'cal',default_basket_version_id:'basketv',track_temperature:false,track_slow_feed:false,multiple_baskets:false,slow_feed:false,temperature_unit:'F',revision:1}],
  calibrations:[{id:'cal',setup_id:'setup',grinder_model:'Test grinder',burr_set:'Test burrs',finest_setting:0,coarsest_setting:5,created_at:TIME}],
