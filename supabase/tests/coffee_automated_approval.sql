@@ -68,6 +68,7 @@ begin
     or not exists(select 1 from public.coffee_submissions where id=pending and status='merged') then
   raise exception 'User confirmation rewrote or abandoned the original library ID';
  end if;
+ execute 'reset role';
  if (select name from public.coffees where id=admin_coffee)<>'Hambella Test 2026' then
   raise exception 'The earliest original spelling was not retained globally';
  end if;
@@ -75,6 +76,7 @@ begin
    and alias_key=private.dic_coffee_key('Hambela Test 2026')) then
   raise exception 'The later canonical spelling was not retained as an alias';
  end if;
+ execute 'set local role authenticated';
  role_denied:=false;
  begin
   perform public.dic_admin_approve_own_coffee(pending);
