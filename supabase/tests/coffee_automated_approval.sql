@@ -51,9 +51,11 @@ begin
  if (select name from public.coffees where id=admin_coffee)<>'Hambela Test 2026' then
   raise exception 'Admin original coffee name was silently changed';
  end if;
+ execute 'reset role';
  if not exists(select 1 from private.dic_coffee_audit where coffee_id=admin_coffee and event_kind='admin_approved') then
   raise exception 'Admin approval provenance was not recorded';
  end if;
+ execute 'set local role authenticated';
 
  perform set_config('request.jwt.claim.sub',member::text,true);
  perform set_config('request.jwt.claims',jsonb_build_object('sub',member,'role','authenticated')::text,true);
