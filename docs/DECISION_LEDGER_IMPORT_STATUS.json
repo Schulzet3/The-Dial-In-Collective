@@ -11,8 +11,8 @@
     "private complete-source and pre-import archive",
     "recovery package download"
   ],
-  "live_save_enabled": false,
-  "blocker": "Verified external cloud backup and disaster recovery is required before real history is imported.",
+  "live_save_enabled": true,
+  "blocker": "Owner-only explicitly approved 24-hour exception is active; full hosted-service restoration remains required for external beta. No personal import yet.",
   "limitations": {
     "adapter": "One setup and one equipment version; no experiments; initially empty cloud workspace; personal prototype schema 1",
     "legacy_derived_fields": "Preserved in original source archive, not replayed as new evidence or activated as unsupported preferences"
@@ -121,7 +121,7 @@
     "locked_decisions_changed": []
   },
   "owner_import_exception_approved_2026_10_14": {
-    "status": "APPROVED - implementing with fail-closed owner-only server gate; no import yet",
+    "status": "ACTIVE for the one existing admitted owner only; 24h expiry; one commit auto-relocks",
     "decision_id": "OWNER-IMPORT-20261014",
     "authority": "Owner explicit approval on 2026-10-14",
     "scope": "One-time import for existing admitted owner only; narrow exception to hosted recovery sequencing",
@@ -145,6 +145,27 @@
       "Daily encrypted source-inclusive post-import GitHub to private Drive delivery",
       "Isolated recovery of nonzero imported rows",
       "Full hosted-service recovery before external beta"
-    ]
+    ],
+    "activated_utc": "2026-10-14T15:24:57.902877Z",
+    "expires_utc": "2026-10-15T15:24:57.902877Z",
+    "migration_version": "20261014152014",
+    "migration_file": "supabase/migrations/20261014152014_dic_owner_only_import_exception.sql",
+    "test_file": "supabase/tests/owner_only_import_exception.sql",
+    "verification": {
+      "legacy_import_role_tests_passed": 30,
+      "owner_exception_role_tests_passed": 8,
+      "synthetic_records_rolled_back": true,
+      "live_owner_grant_scoped_to_sole_enabled_member": true,
+      "live_recovery_verified_at": null,
+      "live_precommit_import_batches": 0,
+      "live_precommit_coffees": 0,
+      "live_precommit_shots": 0,
+      "matching_fresh_scheduled_main_backup_run_id": 38581684328,
+      "matching_offsite_artifact_id": 11902823017,
+      "offsite_ciphertext_size_bytes": 256130,
+      "post_import_restore_verified": false
+    },
+    "next_action": "Owner must reselect reviewed original personal JSON (NOT download recovery wrapper), validate again after gate unlock, save/verify recovery copy, acknowledge original local app retained, and explicitly Confirm import in hosted app",
+    "external_beta_release_allowed": false
   }
 }
