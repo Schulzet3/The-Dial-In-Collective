@@ -51,6 +51,9 @@ jobs:
       - name: Fail if any development-only or private source leaks into dist
         run: |
           test -s dist/index.html
+          test -s dist/admin.html
+          test -s dist/admin/main.js
+          test -s dist/admin/view.js
           test -s dist/vendor/supabase.js
           test -s dist/cloud/config.js
           test ! -e dist/docs

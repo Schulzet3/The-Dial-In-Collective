@@ -1,0 +1,28 @@
+/* Quiet administrative workspace, separated from the shot-logging surface. */
+.admin-shell{max-width:920px;margin:0 auto;padding:26px 20px 64px}
+.admin-top{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:4px 0 22px;border-bottom:1px solid var(--line)}
+.admin-top a{font-size:13px;color:var(--accent);text-decoration:none;font-weight:650}
+.admin-brand{font-weight:750;letter-spacing:-.025em;font-size:16px}
+.admin-brand small{font-weight:450;color:var(--muted);margin-left:6px}
+.admin-nav{display:flex;align-items:center;gap:16px}
+.admin-intro{padding:29px 0 18px}
+.admin-intro h1{font-size:32px;line-height:1.1;letter-spacing:-.04em;margin:8px 0}
+.admin-intro p{max-width:560px;color:var(--muted);font-size:14px;line-height:1.55}
+.admin-eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:11px;color:var(--accent);font-weight:750}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin-bottom:24px}
+.admin-stat{border:1px solid var(--line);border-radius:15px;padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--surface)}
+.admin-stat span{font-size:12px;color:var(--muted)}.admin-stat strong{font-size:25px;font-weight:750;font-variant-numeric:tabular-nums}
+.admin-panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:0 0 18px}
+.admin-panel h2{font-size:17px;letter-spacing:-.02em;margin:0 0 7px}
+.admin-section-header{padding:0 0 11px}
+.admin-queue-item{border-top:1px solid var(--line);padding:16px 0}
+.admin-queue-title{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.admin-queue-title h3{font-size:16px;margin:5px 0 2px;letter-spacing:-.015em;overflow-wrap:anywhere}
+.admin-state{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);font-weight:750}
+.admin-date,.admin-subtle{color:var(--muted);font-size:11px;white-space:nowrap}
+.admin-facts{display:flex;flex-wrap:wrap;gap:5px 16px;margin:10px 0;font-size:12px}
+.admin-facts b{font-weight:650}
+.admin-source{font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+.admin-source span{color:var(--ink)}.admin-empty{padding:23px 0}
+.admin-health p{font-size:13px;color:var(--muted);line-height:1.5}
+@media(max-width:500px){.admin-shell{padding:16px 12px 48px}.admin-panel{padding:14px}.admin-intro h1{font-size:28px}.admin-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-nav{gap:8px}}
