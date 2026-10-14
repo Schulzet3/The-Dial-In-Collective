@@ -70,3 +70,13 @@ Live read-only check before planning (2026-10-14): one existing Auth user; zero 
 7. Defer any unverified outside-project email confirmation/reset and real external-account invitation to the custom-SMTP phase. The custom domain purchase remains optional for current owner-only testing. No general public release or removal of Netlify SSO during this phase.
 
 **Current result:** Planned/partially pretested, **not** an actual import. All Locked product decisions, free-tier cost restrictions, server import gate, and original prototype preservation remain unchanged.
+
+## Owner-reported live import validation — 2026-10-14
+
+Owner reports finding the **reviewed original JSON** on their own device and that the hosted **Import Backup → Validate import** action succeeded. This confirmation is **owner-reported**; the actual file bytes, UI screen/result details and expected per-coffee preview counts were not transferred into this chat and were not independently inspected.
+
+Follow-up read-only Supabase check after owner's report confirms `auth.users=1`, `public.coffees=0`, `public.shots=0`, `public.setups=0`, `public.library_entries=0`, `private.import_batches=0`, zero missing RLS across public/private, `private.import_control.saves_enabled=false`, and `recovery_verified_at=NULL`. This is consistent with the intentional rolled-back server-side preview, but a zero-row state alone cannot verify the exact content shown in the owner's browser.
+
+**Next owner action:** While the validated import panel is open, click **Save recovery copy**, then confirm the JSON file is present in Mac Downloads and retain it separately alongside the original reviewed backup and untouched prototype. The dedicated panel makes this download available on successful validation even while the import save gate remains locked. Do not mark recovered copy as independently verified until the owner checks the actual file; selecting the button is not sufficient.
+
+**Next engineering action:** Complete the remaining independent full-recovery/configuration acceptance evidence and real Auth/privacy checks before proposing a controlled gate enablement. No evidence here authorizes toggling the live database gate, importing personal rows through a privileged bypass, changing admission controls, or releasing an external beta. Keep this milestone in the implementation ledger without altering canonical Locked decisions.
