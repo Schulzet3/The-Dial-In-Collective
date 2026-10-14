@@ -13,6 +13,7 @@ This branch contains the applied cloud database foundation, authenticated owner 
 - [Locked owner-approved UX refinements (October 14)](docs/DECISION_LEDGER_2026_10_14_UX.json)
 - [Cloud implementation status ledger](docs/DECISION_LEDGER_CLOUD_IMPLEMENTATION_STATUS.json)
 - [Applied migrations](supabase/migrations/)
+- [Admin read-only milestone and access gates](docs/ADMIN_FOUNDATION_CHECKPOINT_2026-10-14.md)
 - [Netlify credit ledger and deliberate release policy](docs/NETLIFY_CREDIT_LEDGER.json)
 
 The Master Specification, Decision Ledger and accepted subsequent amendments remain authoritative. Preserve Locked decisions; document changes explicitly. Keep the experience sleek, clean and centered on **Log Shot -> Rate -> Recommendation**. Missing controls in this owner-development harness are unfinished integrations, not decisions to remove beta features.
