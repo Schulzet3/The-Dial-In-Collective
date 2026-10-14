@@ -8,7 +8,7 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem+';',t)
   return t
- for name in ['constants','model','engine','ui','client','cache','outbox','mapping','shot_card']:
+ for name in ['constants','model','engine','ui','client','cache','outbox','mapping','confirmation','shot_card']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
