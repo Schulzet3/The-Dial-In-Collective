@@ -1,6 +1,6 @@
 import {CloudError} from './client.js';
 import {patchAcknowledgement} from './cache.js';
-export const ACTIONS=new Set(['create_setup','save_preferences','submit_coffee','add_verified_coffee','save_shot','hide_shot','select_setup','set_style','save_setup_settings','make_current']);
+export const ACTIONS=new Set(['create_setup','save_preferences','submit_coffee','add_verified_coffee','save_shot','hide_shot','select_setup','set_style','save_setup_settings','make_current','rename_setup']);
 export class Outbox {
  constructor({store,remote,identity,uuid=()=>crypto.randomUUID(),now=()=>new Date().toISOString(),notify=()=>{}}){Object.assign(this,{store,remote,identity,uuid,now,notify});this.running=null;}
  async enqueue(action,payload){
