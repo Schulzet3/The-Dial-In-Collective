@@ -265,6 +265,16 @@ RESTORED_LEGACY_SHOTS=$(docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR
 if [[ "$RESTORED_ARCHIVE_COUNT" -gt 0 && "$RESTORED_LEGACY_SHOTS" -gt 0 ]]; then
   echo "PASS: Nonzero imported historical shots and private original-source archive restored."
 fi
+# Aggregate counts only: show whether the recovered isolated database
+# includes the owner's newly verified canonical coffee catalog.
+RESTORED_VERIFIED_COFFEES=$(docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
+  -U postgres -d postgres --tuples-only --no-align \
+  --command="select count(*) from public.coffees where verification_state='verified'")
+RESTORED_VERIFIED_COFFEES=$(printf '%s' "$RESTORED_VERIFIED_COFFEES" | tr -d '[:space:]')
+if ! [[ "$RESTORED_VERIFIED_COFFEES" =~ ^[0-9]+$ ]]; then
+  echo "::error::Could not inspect restored verified-coffee count"; exit 1
+fi
+echo "PASS: Restored snapshot contains $RESTORED_VERIFIED_COFFEES verified canonical coffees and $RESTORED_LEGACY_SHOTS historical imported shots."
 
 echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables were restored with data."
 echo "PASS: All first-party table row counts and core Auth counts agree with source."
