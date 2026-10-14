@@ -11,8 +11,8 @@
     "private complete-source and pre-import archive",
     "recovery package download"
   ],
-  "live_save_enabled": true,
-  "blocker": "Owner-only explicitly approved 24-hour exception is active; full hosted-service restoration remains required for external beta. No personal import yet.",
+  "live_save_enabled": false,
+  "blocker": "Historical owner import completed successfully and exception relocked; exact post-import encrypted offsite backup and full managed recovery remain pending.",
   "limitations": {
     "adapter": "One setup and one equipment version; no experiments; initially empty cloud workspace; personal prototype schema 1",
     "legacy_derived_fields": "Preserved in original source archive, not replayed as new evidence or activated as unsupported preferences"
@@ -167,5 +167,62 @@
     },
     "next_action": "Owner must reselect reviewed original personal JSON (NOT download recovery wrapper), validate again after gate unlock, save/verify recovery copy, acknowledge original local app retained, and explicitly Confirm import in hosted app",
     "external_beta_release_allowed": false
+  },
+  "live_import_completed_2026_10_14": {
+    "status": "Confirmed one atomic owner-only import; private archive and full original source retained",
+    "imported_at_utc": "2026-10-14T18:09:26.744289Z",
+    "observed": {
+      "original_source_coffees": 4,
+      "personal_library_coffees": 4,
+      "shots": 14,
+      "personal_families": 4,
+      "setups": 1,
+      "bags": 4,
+      "private_import_batches": 1,
+      "dialed_in_shots": 8,
+      "original_missing_grind": 1,
+      "unknown_feed": 14
+    },
+    "coffee_counts": [
+      {
+        "name": "Bavyeyi IV",
+        "shots": 6,
+        "families": 1
+      },
+      {
+        "name": "David Armijos",
+        "shots": 3,
+        "families": 1
+      },
+      {
+        "name": "Yirgacheffe",
+        "shots": 5,
+        "families": 2,
+        "current": true
+      },
+      {
+        "name": "Hambela",
+        "roaster": "Sweet Bloom",
+        "shots": 0,
+        "current": false
+      }
+    ],
+    "original_archive_hash_verified": true,
+    "owner_only_privacy_sql_rolled_back": true,
+    "second_admitted_user_sees_owner_shots": 0,
+    "second_admitted_user_sees_owner_coffees": 0,
+    "anonymous_select_denied": true,
+    "gate_autorelocked": true,
+    "recovery_verified_at": null,
+    "source_to_live_observation_comparison": "All 14 IDs, timestamps, dose, yield, time, styles, ratings, notes and ownership links match. One grind setting and temperature differ due to an audited post-import app update at 2026-10-14T18:10:51Z. The initial insertion matched source null grind and 89.4C, and a later app update set 0.3 and 89.44444444444444C. No automatic reversal.",
+    "recovery_test_development_run": 38613853532,
+    "recovery_test_development_passed": true,
+    "recovery_test_restored_nonzero_history_and_archive": true,
+    "recovery_test_row_payload_fingerprints_match": true,
+    "recovery_test_main_run": 38616130613,
+    "recovery_test_main_result": "awaiting run confirmation",
+    "encrypted_post_import_backup": "NOT YET VERIFIED: last scheduled main encrypted offsite artifact predates import",
+    "complete_hosted_provider_recovery_verified": false,
+    "locked_decisions_changed": []
   }
 }
