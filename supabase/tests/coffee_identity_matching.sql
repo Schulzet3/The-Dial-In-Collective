@@ -4,7 +4,7 @@ begin;
 do $coffee_identity_tests$
 declare
  actor uuid; c2025 uuid:=gen_random_uuid();c2026 uuid:=gen_random_uuid();
- proof uuid:=gen_random_uuid(); item text; found jsonb; k text;
+ third uuid:=gen_random_uuid(); item text; found jsonb; k text;
  bad boolean;
 before_coffees int; before_submissions int; before_shots int;
 begin
@@ -33,6 +33,8 @@ begin
  insert into public.coffees(id,name,roaster,release_label,origin,verification_state) values
  (c2025,'Wuri','Sweet Bloom Coffee Roasters','2025 harvest','Gedeb, Ethiopia','verified'),
  (c2026,'Wuri','Sweet Bloom','2026 harvest','Gedeb, Ethiopia','verified');
+ insert into public.coffees(id,name,roaster,release_label,origin,verification_state)
+ values(third,'Wuri','Unknown Coffee Roasters','2026 harvest','Gedeb, Ethiopia','verified');
  insert into public.coffee_sources(coffee_id,source_url,source_kind,checked_at) values
  (c2025,'https://sweetbloomcoffee.com/products/wuri-2025','roaster_page',now()),
  (c2026,'https://sweetbloomcoffee.com/products/wuri-2026','roaster_page',now());
@@ -59,6 +61,10 @@ begin
  if found->>'classification'='exact_verified' then raise exception 'Conflicting origin auto-linked';end if;
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","release_label":"2025 harvest","source_url":"https://www.sweetbloomcoffee.com/products/wuri-2025/?utm_source=mail"}'::jsonb);
  if found->>'exact_id'<>c2025::text then raise exception 'Curated product URL with tracking not matched: %',found;end if;
+ found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","source_url":"https://sweetbloomcoffee.com/products/wuri-2026"}'::jsonb);
+ if found->>'classification'='exact_verified' then raise exception 'Missing harvest auto-linked despite canonical release label';end if;
+ found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Unknown Coffee Roasters","release_label":"2026 harvest"}'::jsonb);
+ if found->>'classification'='exact_verified' then raise exception 'Unreviewed roaster identity auto-linked on label';end if;
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","release_label":"2026 harvest","source_url":"https://sweetbloomcoffee.com/products/wuri-2025"}'::jsonb);
  if found->>'classification'='exact_verified' then raise exception 'Conflicting product URL auto-linked';end if;
  found:=public.dic_find_coffee_matches('{"name":"Uraga","roaster":"Sweet Bloom"}'::jsonb);
@@ -70,7 +76,7 @@ begin
  end if;
  execute 'reset role';
  -- Check no read-operation mutated application data.
- if (select count(*) from public.coffees)<>before_coffees+2
+ if (select count(*) from public.coffees)<>before_coffees+3
     or (select count(*) from public.coffee_submissions)<>before_submissions
     or (select count(*) from public.shots)<>before_shots then
    raise exception 'Read-only matcher mutated application records';
