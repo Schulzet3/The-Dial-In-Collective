@@ -36,14 +36,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install pinned direct dependencies
-        run: npm install --ignore-scripts --no-audit --no-fund
-      - name: Export dependency lockfile for controlled source commit
-        run: |
-          test -s package-lock.json
-          echo DIC_PACKAGE_LOCK_BEGIN
-          cat package-lock.json
-          echo DIC_PACKAGE_LOCK_END
+      - name: Install exact locked dependency tree
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run all checked-in Node tests
         run: npm test
       - name: Build static beta assets with nonfunctional public test coordinates
