@@ -1,6 +1,12 @@
 name: DIC weekly recovery verification
 
 on:
+  # Self-test recovery changes before the next weekly production drill.
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/database-recovery-drill.yml
+      - scripts/backups/isolated-recovery-drill.sh
   workflow_dispatch:
   schedule:
     - cron: '43 10 * * 0'
