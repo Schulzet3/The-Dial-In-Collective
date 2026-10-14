@@ -97,3 +97,13 @@ dialog{color:var(--ink);background:var(--surface);border:1px solid var(--line);p
 .settings-recovery button{justify-content:flex-start}
 .recovery-options{margin-top:20px}
 @media(max-width:370px){.shot-context{gap:3px 8px}.shot-actions{gap:8px}.shot-actions .compact{padding:9px 11px;font-size:12px}.switch-row{flex-wrap:wrap}.switch-actions{margin-left:auto}}
+
+/* Review likely verified coffee matches without slowing ordinary Add Coffee. */
+.coffee-matches{display:grid;gap:9px;margin:17px 0 19px}
+.coffee-match{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 14px;border:1px solid var(--line);background:var(--surface);border-radius:12px}
+.coffee-match-text{display:grid;gap:3px;min-width:0;overflow-wrap:anywhere}
+.coffee-match-text strong{font-size:14px;line-height:1.35}
+.coffee-match-text span{font-size:12px;color:var(--muted)}
+.coffee-match-text small{font-size:11px;color:var(--muted)}
+.coffee-match button{flex-shrink:0}
+@media(max-width:350px){.coffee-match{align-items:stretch;flex-direction:column}.coffee-match button{width:100%}}

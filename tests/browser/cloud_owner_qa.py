@@ -5,13 +5,13 @@ ROOT=Path(__file__).resolve().parents[2];SITE=ROOT/'site';OUT=ROOT/'qa_artifacts
 def bundle():
  s='(()=>{const Modules={};\n'
  def imports(t):
-  t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem};',t)
-  t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem+';',t)
+  t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
+  t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','client','cache','outbox','mapping','confirmation','shot_card']:
+ for name in ['constants','model','engine','ui','client','cache','outbox','mapping','confirmation','shot_card','coffee-match-ui']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
-  t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
+  t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
  t=(SITE/'cloud/main.js').read_text();t=t.replace("import {CLOUD_CONFIG} from './config.js';","const CLOUD_CONFIG={enabled:false};").replace('startCloudApp();','').replace('export {CloudApp};','');t=re.sub(r'\bexport\s+','',imports(t))
  s+=t+'\nwindow.__CloudApp=CloudApp;window.__Modules=Modules;})();';return s
 fixture=(ROOT/'tests/cloud-fixtures/raw.js').read_text().replace('export ','')
@@ -31,8 +31,19 @@ window.__client={
  async signIn(email){window.__who={id:OWNER,email};return {};},async signUp(){return {};},
  async requestReset(){return 'If that address has an account, a recovery email has been requested.';},async setPassword(){return {};},
  async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
- async status(){return {admitted:window.__admitted,admin:false};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
+ async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
  async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
+ if(e.action==='submit_coffee'){
+  const submission='11111111-1111-4111-8111-000000000099';
+  r.submissions.push({id:submission,owner_id:OWNER,status:'pending',proposed_data:d.proposed_data,source_url:d.source_url,revision:1,created_at:TIME});
+  r.library.push({id:d.library_entry_id,owner_id:OWNER,submission_id:submission,coffee_id:null,created_at:TIME});
+  return {ok:true,library_entry_id:d.library_entry_id,submission_id:submission};
+ }
+ if(e.action==='add_verified_coffee'){
+  let entry=r.library.find(x=>x.coffee_id===d.coffee_id);
+  if(!entry){entry={id:d.library_entry_id,owner_id:OWNER,coffee_id:d.coffee_id,submission_id:null,created_at:TIME};r.library.push(entry);}
+  return {ok:true,library_entry_id:entry.id};
+ }
  if(e.action==='save_preferences'){r.preferences={...r.preferences,theme:d.theme,tasting_preferences:d.tasting_preferences,revision:r.preferences.revision+1};return {ok:true,record:r.preferences};}
  if(e.action==='rename_setup'){
    const setup=r.setups.find(x=>x.id===d.setup_id);
@@ -113,6 +124,36 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Close',exact=True).click();page.evaluate('window.__offline=false;window.__app.sync()');page.wait_for_function('window.__memory.events.length===0');assert page.evaluate('window.__raw.shots.length')==2;checks.append('Reconnect sends pending shot once')
  assert not page.evaluate('window.__raw.setupPreferences[0].slow_feed')
  checks.append('Turning Slow Feed off persists after cloud synchronization')
+ page.evaluate("""window.__matchResponse={
+    classification:'needs_confirmation',exact_id:null,
+    roaster:{recognized:true,canonical_name:'Sweet Bloom'},
+    candidates:[{id:'12345678-1234-4123-8123-123456789abc',name:'Wuri',roaster:'Sweet Bloom',release_label:'2026 harvest',origin:'Gedeb'}]
+  }""")
+ page.get_by_role('button',name='Add Coffee',exact=False).click()
+ page.locator('#new-coffee [name=name]').fill('Wuri')
+ page.locator('#new-coffee [name=roaster]').fill('Sweet-Bloom')
+ page.locator('#new-coffee [name=release_label]').fill('2027 harvest')
+ old_submission_count=page.evaluate('window.__raw.submissions.length')
+ page.get_by_role('button',name='Add coffee',exact=True).click()
+ assert page.locator('#sheet-title').inner_text()=='Check for an existing coffee'
+ assert page.evaluate('window.__raw.submissions.length')==old_submission_count
+ assert page.locator('[data-action=choose-coffee-match]').count()==1
+ checks.append('A likely duplicate prompts confirmation rather than writing or merging')
+ page.get_by_role('button',name='This is a different coffee').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
+ assert page.evaluate('window.__raw.submissions.at(-1).proposed_data.roaster')=='Sweet Bloom'
+ assert page.evaluate('window.__raw.submissions.at(-1).proposed_data.release_label')=='2027 harvest'
+ checks.append('Different release stays Pending under the recognized canonical roaster')
+ page.evaluate("""window.__raw.coffees.push({id:'12345678-1234-4123-8123-123456789abc',name:'Wuri',roaster:'Sweet Bloom',origin:'Gedeb',verification_state:'verified'});window.__matchResponse={classification:'exact_verified',exact_id:'12345678-1234-4123-8123-123456789abc',roaster:{recognized:true,canonical_name:'Sweet Bloom'},candidates:[]};""")
+ page.get_by_role('button',name='Add Coffee',exact=False).click()
+ page.locator('#new-coffee [name=name]').fill('Wuri')
+ page.locator('#new-coffee [name=roaster]').fill('Sweet Bloom Coffee Roasters')
+ page.get_by_role('button',name='Add coffee',exact=True).click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
+ assert page.evaluate('window.__raw.library.some(x=>x.coffee_id==="12345678-1234-4123-8123-123456789abc")')
+ checks.append('Exact verified coffee reuses canonical ID without new Pending submission')
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
  assert not errors,errors;checks.append('No browser JavaScript exceptions')
  b.close()
