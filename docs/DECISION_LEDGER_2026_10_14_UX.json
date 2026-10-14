@@ -1,0 +1,43 @@
+{
+  "product": "The Dial In Collective",
+  "date": "2026-10-14",
+  "scope": "Additive Locked decisions. All previous Locked decisions preserved.",
+  "decisions": [
+    {
+      "id": "UX-20261014-01",
+      "status": "Locked",
+      "topic": "Setup rename",
+      "decision": "Every admitted user may rename any of their own setups. Preserve equipment history and shot provenance."
+    },
+    {
+      "id": "UX-20261014-02",
+      "status": "Locked",
+      "topic": "Slow Feed default",
+      "decision": "The last explicitly logged Slow Feed choice persists per setup across cloud sessions. Standard Feed makes the next default off; offline stale uploads cannot undo newer selections; unknown historical feed remains unknown. Preference is recorded on the active setup version."
+    },
+    {
+      "id": "UX-20261014-03",
+      "status": "Locked",
+      "topic": "History actions",
+      "decision": "Edit is the primary left action; Make Current Recipe is a separate right action. Eligible Dialed In shots automatically refine their family window; Make Current explicitly chooses a preferred family/example."
+    },
+    {
+      "id": "UX-20261014-04",
+      "status": "Locked",
+      "topic": "Shot card presentation",
+      "decision": "Use shot-card width and height efficiently to group measurements, setup, basket dose, feed, style, date and badges above sensory detail without crowding."
+    },
+    {
+      "id": "UX-20261014-05",
+      "status": "Locked",
+      "topic": "Recovery options",
+      "decision": "Manual export and import remain available under a collapsed Recovery options section in Settings; cloud sync and automatic offsite backups are the normal behavior."
+    }
+  ],
+  "unchanged_release_gates": [
+    "verified offsite restore before real historical import",
+    "private beta access/Netlify SSO",
+    "canonical coffee/admin/community verification"
+  ],
+  "implementation_status": "Staged on feature branch; not equivalent to a verified deployment."
+}
