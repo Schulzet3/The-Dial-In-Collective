@@ -104,3 +104,9 @@ GitHub's [runner-images issue #14748](https://github.com/actions/runner-images/i
 **Build reproducibility gap:** The current source tree contains `package.json` with pinned direct SDK version but no checked-in `package-lock.json`. New CI currently uses `npm install`. Generate/review a dependency lockfile and switch CI to `npm ci` before public beta to eliminate floating transitive dependency resolution. Do not overstate the current 65 unit tests as end-to-end coverage.
 
 **No new Locked product decisions**, no credentials or raw data committed, no historical import or SSO setting changed.
+
+## Reproducible cloud dependencies VERIFIED — 2026-10-13 19:33 Mountain
+
+The remote Node 22 CI environment generated `package-lock.json` using standard npm resolution with **10 locked package entries**, including exact `@supabase/supabase-js` **2.117.3**, registry integrity metadata, and no private dependencies. The lockfile was committed to `development/backend-foundation` and the new `.github/workflows/cloud-beta-ci.yml` now uses **`npm ci --ignore-scripts --no-audit --no-fund`**, rather than floating `npm install`. The temporary lockfile-printing CI step was removed immediately after controlled commit.
+
+**PASS:** [CI run 38496342756](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/38496342756) completed successfully against the checked-in lockfile with npm ci, all **65 Node tests**, static `build:cloud`, and guardrails excluding private files from `dist`. This solves the preceding lockfile gap without installing anything on the owner's Mac. It is still not real external signup, live browser/devices, or full admin acceptance.
