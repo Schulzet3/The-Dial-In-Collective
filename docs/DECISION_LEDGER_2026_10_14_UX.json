@@ -62,6 +62,17 @@
       "data_accuracy_caveat": "Netlify connector cannot retrieve live billing totals: docs/NETLIFY_CREDIT_LEDGER.json is a point-in-time verified ledger. Refresh from provider before each intended release or billing-cycle reset. Never claim a stale balance is current.",
       "financial_constraints": "No upgrade, credit purchase, auto-recharge, new provider, or changed visitor access without separate owner approval.",
       "unchanged_requirements": "Preserve SSO, owner preview/beta gates, RLS, import guard, database restoration obligations, Master Specification and all other Locked decisions."
+    },
+    {
+      "id": "COFFEE-20261014-01",
+      "status": "Locked",
+      "topic": "Automatic verified coffee approval and earliest canonical naming",
+      "owner_approval_date": "2026-10-14",
+      "decision": "Owner-administrator's own new coffees auto-approve atomically after duplicate/conflict checks. Other admitted users' nonconflicting new entries are always saved atomically; trusted official roaster source evidence can auto-verify them. Fuzzy near-matches ask the user before reuse or merging; the earliest entered original coffee name remains the shared canonical display name. Admin review only for genuinely uncertain/irreconcilable conflicts. Preserve library IDs and shots on merges.",
+      "amends": "Prior rule that all new coffee entries must remain Pending until admin review is superseded only where the owning admin explicitly enters a coffee or a new user's coffee passes the trusted official-source automated verification. Unknown/uncertain or source-unverified releases remain usable Pending and not community eligible.",
+      "integrity": "First submitted spelling retained globally; no older canonical changed merely because a later user spelled a roaster/coffee differently. Protect different harvests, source variants, producer/origin conflicts, account isolation and all shot/family relationships. Explicit stable-id confirmation is allowed only for compatible Pending-to-canonical matches.",
+      "operational": "No service subscription required, no AI calls; source workers limited to curated official HTTPS product URLs, JWT authorization, manual redirect rejection, bounded HTML and rate limits. GitHub/Supabase remain source of truth while Netlify credit-paused.",
+      "implementation_status": "Core Supabase auto catalog and source worker target applied; real owner's four coffee submissions approved; Edge function and browser CI integration under test, Netlify intentionally unpublished."
     }
   ],
   "unchanged_release_gates": [
