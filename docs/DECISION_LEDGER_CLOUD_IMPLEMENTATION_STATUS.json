@@ -119,5 +119,20 @@
     "data_change_scope": "Only insert of the existing verified owner's user ID into private.app_admins; no changes to Auth credentials, coffee/shot data, beta admissions, RLS, or import gate.",
     "authentication_test": "PASS: simulated authenticated owner session has admin=true and reads four whitelisted pending submission summaries. Non-admin/anon access denied in rollback-only test.",
     "netlify_state": "No build/publish; admin page unavailable until later deliberately batched deployment."
+  },
+  "coffee_identity_alias_2026_10_14": {
+    "requirement_basis": "Canonical Master Specification sections 8.3, 9.1–9.4, 10.4, 11 and 32. No new policy choice silently created.",
+    "status": "Feature branch implementation and rollback-only SQL tests; full CI and live migration to verify.",
+    "requirements": [
+      "Five Sweet Bloom example spellings map to one brand identity, without proving any individual product.",
+      "Only unique exact verified canonical coffee/releases with authoritative source evidence may be reused without manual approval.",
+      "Near duplicates/ambiguous release identity require user confirmation; preserve separate Pending entry on user choice.",
+      "New unverified coffee remains privately loggable; never published as community evidence.",
+      "No new Netlify production deployment while out of credits."
+    ],
+    "verified_catalog_at_checkpoint": 0,
+    "pending_submissions_at_checkpoint": 4,
+    "remaining": "Build the source-backed scalable coffee verification process; monitor observed false-positive/false-negative matches in real data before claiming automatic coverage.",
+    "locked_decisions_changed": []
   }
 }
