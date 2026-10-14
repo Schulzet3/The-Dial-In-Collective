@@ -181,5 +181,29 @@
       "automatic_regression_triggers": "Both main backup/recovery workflows now have push triggers on their workflow + corresponding backup/restore script; scheduled/manual triggers retained",
       "no_locked_decisions_changed": true
     }
+  },
+  "verification_2026_10_14": {
+    "event": "Owner data recovery copy saved and first-party/Auth schema restore drill broadened",
+    "owner_json_recovery_copy": "Owner reports downloaded and retained; not inspected by assistant",
+    "verified_development_schema_run": 38579439103,
+    "verified_main_schema_run": 38579702304,
+    "app_recovered": {
+      "tables": 35,
+      "rls_tables": 35,
+      "policies": 37,
+      "indexes": 91,
+      "app_triggers": 19,
+      "functions": 29,
+      "auth_user_provisioning_triggers": 1
+    },
+    "auth_core_users_and_identities_row_counts": "All matched live source",
+    "scope_limit": "No complete second running Supabase project, hosted provider-managed configuration, Netlify/GitHub/Google credentials or exact encrypted Drive artifact restore",
+    "import_gate_remains_false": true,
+    "existing_product_decisions_changed": [],
+    "remaining_release_gates": [
+      "Full hosted provider/operational configuration recovery acceptance or explicit owner-only exception",
+      "Genuine Auth/email and cross-account privacy tests before external beta",
+      "Post-owner-import nonzero-data encrypted offsite and isolated restore drill"
+    ]
   }
 }
