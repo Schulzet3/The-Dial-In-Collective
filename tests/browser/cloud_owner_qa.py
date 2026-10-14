@@ -63,7 +63,14 @@ with sync_playwright() as p:
  css=(SITE/'styles.css').read_text().split('\n',1)[1]
  page.set_content('<!doctype html><html><head><meta name="theme-color" content="#f3ece0"><style>'+css+'</style></head><body><div id=app></div><dialog id=sheet aria-labelledby=sheet-title></dialog><div id=toasts role=status></div></body></html>')
  page.add_script_tag(content=bundle());page.add_script_tag(content=fixture+'\n'+mock)
- page.get_by_role('button',name='Sign in',exact=True).wait_for();checks.append('Sign-in view loads without local app state')
+ try:
+  page.get_by_role('button',name='Sign in',exact=True).wait_for()
+ except Exception:
+  print('BOOT BODY:',page.locator('body').inner_text()[:1800])
+  print('BOOT PAGE ERRORS:',errors)
+  print('BUNDLE START:',bundle()[:1000])
+  raise
+ checks.append('Sign-in view loads without local app state')
  page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign in',exact=True).click();page.get_by_role('button',name='Use invitation').wait_for();checks.append('Pending account remains outside workspace')
  page.locator('[name=token]').fill('synthetic-not-real-token');page.get_by_role('button',name='Use invitation').click();page.get_by_role('button',name='Settings',exact=True).wait_for();checks.append('Admitted account hydrates cloud workspace')
  assert page.locator('.current-mark').count()==0;checks.append('No pin before first logged shot')
