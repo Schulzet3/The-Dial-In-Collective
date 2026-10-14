@@ -1,5 +1,5 @@
 from pathlib import Path
-import re,json
+import re,json,shutil
 from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[2];SITE=ROOT/'site';OUT=ROOT/'qa_artifacts/cloud';OUT.mkdir(parents=True,exist_ok=True)
 def bundle():
@@ -58,7 +58,7 @@ window.__app=new window.__CloudApp(window.__client,window.__store);window.__app.
 '''
 checks=[]
 with sync_playwright() as p:
- b=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox'])
+ b=p.chromium.launch(executable_path=shutil.which('chromium') or shutil.which('chromium-browser') or None,headless=True,args=['--no-sandbox'])
  page=b.new_page(viewport={'width':390,'height':844});page.set_default_timeout(5000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  css=(SITE/'styles.css').read_text().split('\n',1)[1]
  page.set_content('<!doctype html><html><head><meta name="theme-color" content="#f3ece0"><style>'+css+'</style></head><body><div id=app></div><dialog id=sheet aria-labelledby=sheet-title></dialog><div id=toasts role=status></div></body></html>')
