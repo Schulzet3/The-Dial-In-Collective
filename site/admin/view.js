@@ -2,7 +2,7 @@
 // explicitly whitelisted coffee metadata, never owner IDs or private notes.
 import {e} from '../lib/ui.js';
 
-export const formatCount=value=>Number.isSafeInteger(Number(value))&&Number(value)>=0?String(Number(value)):'—';
+export const formatCount=value=>value!=null&&value!==''&&Number.isSafeInteger(Number(value))&&Number(value)>=0?String(Number(value)):'—';
 export function renderAdminDenied(message='Administrator access required.'){
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back to app</a></header>
  <section class="admin-panel admin-empty"><h1>Admin access unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
