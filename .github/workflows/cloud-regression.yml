@@ -1,0 +1,40 @@
+name: DIC cloud UX regression checks
+
+on:
+  push:
+    branches:
+      - development/backend-foundation
+      - work/setup-feed-history-recovery-20261014
+    paths:
+      - 'site/**'
+      - 'tests/**'
+      - 'build_cloud.mjs'
+      - 'package.json'
+      - '.github/workflows/cloud-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cloud-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install locked runtime dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Cloud unit and regression tests
+        run: npm test
+      - name: Syntax check
+        run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js
+      - name: Build allowlisted cloud preview
+        run: npm run build:cloud
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_build_only_not_for_deployment
