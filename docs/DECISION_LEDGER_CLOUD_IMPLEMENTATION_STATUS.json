@@ -110,11 +110,14 @@
   },
   "admin_foundation_2026_10_14": {
     "scope": "Read-only server-authorized admin dashboard; no approvals, invites, publication, or new admins.",
-    "status": "In development review. Must pass role denial tests and migration verification before claiming Supabase activation.",
+    "status": "Read-only Supabase admin RPC applied and tested; private admin interface code merged to development, not Netlify-published.",
     "intended_hosted_view": "/admin.html (not deployed while Netlify credits exhausted)",
-    "current_admin_assignments": "0 verified before implementation; cannot operate until owner is explicitly assigned an administrator role.",
-    "preserved_product_rule": "Only genuine pending coffee/identity conflicts and serious abuse cases demand admin attention; no ordinary shot moderation.",
-    "live_data_not_modified": true,
-    "locked_decisions_changed": []
+    "current_admin_assignments": "Exactly one existing owner administrator assigned on 2026-10-14, after explicit owner authorization and strict sole-member/imported-data verification.",
+    "preserved_product_rule": "Verified, nonconflicting coffees and ordinary user-resolvable fuzzy matches do not need admin approval. Real duplicate/identity conflicts and new coffees lacking automated/source verification remain reviewable Pending. Personal shots may be logged while Pending, not published to community.",
+    "live_data_not_modified": false,
+    "locked_decisions_changed": [],
+    "data_change_scope": "Only insert of the existing verified owner's user ID into private.app_admins; no changes to Auth credentials, coffee/shot data, beta admissions, RLS, or import gate.",
+    "authentication_test": "PASS: simulated authenticated owner session has admin=true and reads four whitelisted pending submission summaries. Non-admin/anon access denied in rollback-only test.",
+    "netlify_state": "No build/publish; admin page unavailable until later deliberately batched deployment."
   }
 }
