@@ -96,6 +96,7 @@ class CloudApp {
     ${checkbox('track_slow_feed','Track Slow Feeding',v.advanced.slowFeed)}
     <button class="primary full">Save advanced options</button></form></details>`:''}
    <div class=settings-links>
+    ${this.status?.admin?button('Admin dashboard','open-admin','','ghost'):''}
     ${button('Cloud sync details','sync','','ghost')}
     ${button('Add another setup','new-setup','','ghost')}
     ${button('Sign out on this device','signout','','ghost')}
@@ -129,6 +130,7 @@ class CloudApp {
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
    if(a==='new-setup'){this.showSetup();return;}
+   if(a==='open-admin'){location.assign('/admin.html');return;}
    if(a==='rename-setup'){this.showRenameSetup(id);return;}
    if(a==='add'){this.showAdd();return;}
    if(a==='expand'){if(this.expanded.has(id)){this.expanded.delete(id);if(this.tempCoffee===id)this.tempCoffee=null;}else this.expanded.add(id);this.render();return;}
