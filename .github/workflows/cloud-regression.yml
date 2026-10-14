@@ -33,7 +33,7 @@ jobs:
       - name: Cloud unit and regression tests
         run: npm test
       - name: Syntax check
-        run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js && node --check site/admin/main.js
+        run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js && node --check site/admin/main.js && node --check site/cloud/coffee-match-ui.js
       - name: Build allowlisted cloud preview
         run: npm run build:cloud
         env:
