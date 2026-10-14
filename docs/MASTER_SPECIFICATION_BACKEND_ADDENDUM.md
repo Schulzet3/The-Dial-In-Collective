@@ -82,3 +82,12 @@ No real data was imported simply by granting approval. After authenticated UI co
 - Keep import/export under a collapsed Recovery options disclosure in Settings, not prominent routine controls. Cloud sync is normal; the development cache export is not a full user-data portability or restore service.
 
 These are additive Locked decisions, leaving every unrelated Master Specification/Decision Ledger requirement intact. Preserve the historic import recovery gate, Netlify private beta protection, and community verification requirements.
+
+
+## Approved automatic owner-release procedure (2026-10-14)
+
+**Locked user instruction:** For all future requested and approved development updates, publish promptly to the existing, SSO-protected Netlify owner preview after required tests pass. Treat a task as incomplete until GitHub source, applied Supabase migrations (when needed), Netlify's actually published commit, and the Master Specification/Decision Ledger are checked and consistent. The approved publishing target is the existing Netlify project, and the development source branch remains `development/backend-foundation`; do not silently deploy from or merge into `main`.
+
+Workflow: (1) update applicable Locked records and implementation in a reviewable Git commit; (2) validate schema/role security, required migrations, Node and mobile browser regressions, and the static build; (3) merge accepted code to the development branch; (4) publish on the existing Git-connected Netlify site with its build-time `npm test && npm run build:cloud` gate; (5) verify the deployed commit equals the accepted GitHub head and that Netlify SSO and import-save restrictions persist. A failed/pending build leaves the previously published site unchanged and must be reported. Stop rather than silently bypassing a test, access control, import gate or data migration safety condition.
+
+The owner explicitly does **not** want to give a new per-change publishing approval each time the work and tests are done. This authorization does not launch the external beta, authorize public visitor access, enable historical import writes, or relax restoration, account, admin, community and privacy release requirements. If the Netlify integration prevents auto publishing, diagnose and request one minimal action; an unverified deployment is never described as live.
