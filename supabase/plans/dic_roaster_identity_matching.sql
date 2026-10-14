@@ -141,9 +141,10 @@ begin
   select s.*,
     case
       when s.exact_brand and s.exact_title and s.curated_url_match
-        and (search_release is null or (s.release_key is not null and s.release_key=search_release))
+        and ( (search_release is null and s.release_key is null)
+          or (search_release is not null and s.release_key=search_release) )
         and s.compatible_origin then 'official_url'
-      when s.exact_brand and s.exact_title and search_release is not null
+      when registered and s.exact_brand and s.exact_title and search_release is not null
         and s.release_key=search_release and search_source is null
         and s.compatible_origin then 'exact_release'
       when s.exact_brand and s.exact_title then 'same_name'
