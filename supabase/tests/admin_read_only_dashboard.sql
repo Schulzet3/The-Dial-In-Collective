@@ -38,6 +38,7 @@ begin
     raise exception 'Private identity, note or raw auth field leaked';
   end if;
   if jsonb_array_length(got->'queue')>50 then raise exception 'Admin query was not bounded'; end if;
+  execute 'reset role';
   if (select count(*) from private.app_admins)<>greatest(1,real_admin_count) then raise exception 'Unexpected admin mutation'; end if;
   execute 'reset role';
 
