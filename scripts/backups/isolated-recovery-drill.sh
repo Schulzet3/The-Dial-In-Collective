@@ -218,6 +218,54 @@ if [[ "$LIVE_METADATA" != "$RESTORED_METADATA" ]]; then
 fi
 echo "PASS: Application RLS, policies, indexes, triggers, functions and signup trigger match the live metadata counts ($LIVE_METADATA)."
 
+# ROW_FINGERPRINT_CONTENT_RESTORE_CHECK
+# Row counts alone do not establish payload fidelity. Compare canonicalized
+# per-row JSON fingerprints for every public/private table and core Auth pair.
+# Hash files stay in runner-private scratch space and are deleted on exit;
+# neither the private data nor the fingerprints are uploaded or printed.
+cat > "$OUT/row-fingerprint-generator.sql" <<'SQL'
+select format(
+  'select %L, md5(coalesce(string_agg(md5(to_jsonb(t)::text), %L order by md5(to_jsonb(t)::text)), %L)) from %I.%I t;',
+  schemaname || '.' || tablename, '', '', schemaname, tablename)
+from (
+ select schemaname,tablename from pg_tables where schemaname in ('public','private')
+ union all
+ select 'auth'::text, 'users'::text
+ union all
+ select 'auth'::text, 'identities'::text
+) inventory
+order by schemaname,tablename;
+SQL
+docker run --rm --user "$(id -u):$(id -g)" \
+  --env SUPABASE_DB_URL --env PGSSLMODE=require \
+  --volume "$OUT:/out" postgres:17-alpine sh -euc '
+  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
+    --file=/out/row-fingerprint-generator.sql > /out/table-row-fingerprints.sql
+  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
+    --file=/out/table-row-fingerprints.sql > /out/source-row-fingerprints.tsv
+'
+if [[ "$(wc -l < "$OUT/source-row-fingerprints.tsv")" -ne $((SOURCE_TABLE_COUNT+2)) ]]; then
+  echo "::error::Expected every first-party and core Auth table in row fingerprint verification"; exit 1
+fi
+docker cp "$OUT/table-row-fingerprints.sql" "$CONTAINER:/tmp/table-row-fingerprints.sql" >/dev/null
+docker exec -u root "$CONTAINER" chmod 644 /tmp/table-row-fingerprints.sql
+docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres \
+  --tuples-only --no-align --file=/tmp/table-row-fingerprints.sql \
+  > "$OUT/restored-row-fingerprints.tsv"
+if ! cmp -s "$OUT/source-row-fingerprints.tsv" "$OUT/restored-row-fingerprints.tsv"; then
+  echo "::error::Restored first-party/Auth row content fingerprints disagree with source"; exit 1
+fi
+echo "PASS: All first-party/Auth table row payload fingerprints match live source without exposing user data."
+RESTORED_ARCHIVE_COUNT=$(docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
+  -U postgres -d postgres --tuples-only --no-align \
+  --command="select count(*) from private.import_batches")
+RESTORED_LEGACY_SHOTS=$(docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
+  -U postgres -d postgres --tuples-only --no-align \
+  --command="select count(*) from public.shots where legacy_import")
+if [[ "$RESTORED_ARCHIVE_COUNT" -gt 0 && "$RESTORED_LEGACY_SHOTS" -gt 0 ]]; then
+  echo "PASS: Nonzero imported historical shots and private original-source archive restored."
+fi
+
 echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables were restored with data."
 echo "PASS: All first-party table row counts and core Auth counts agree with source."
 echo "LIMIT: First-party application schema and core Auth data only; hosted Supabase services, provider-managed settings, and external secrets are not restored."
