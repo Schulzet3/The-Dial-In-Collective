@@ -21,6 +21,8 @@ test('known official product path is allowed; outside domain and redirect-like U
   'https://sweetbloomcoffee.com@127.0.0.1/products/hambela',
   'https://127.0.0.1/products/hambela',
   'https://sweetbloomcoffee.com:8443/products/hambela',
+  'https://sweetbloomcoffee.com/products/hambela?redirect=https://internal.test',
+  'https://sweetbloomcoffee.com/products/hambela?next=http://127.0.0.1',
   'https://sweetbloomcoffee.com/admin',
   'https://sweetbloomcoffee.com/collections/all',
   'file:///etc/passwd',
