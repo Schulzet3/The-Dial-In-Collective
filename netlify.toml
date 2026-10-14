@@ -1,4 +1,6 @@
-# Owner development preview only; no site is deployed by this file alone.
+# Existing private Git-connected Netlify owner preview. Publish tested changes
+# from development/backend-foundation; keep Netlify SSO required.
+# Netlify deployment status must be checked after GitHub CI passes.
 [build]
   command = "npm test && npm run build:cloud"
   publish = "dist"
