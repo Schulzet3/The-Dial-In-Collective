@@ -43,7 +43,7 @@ alter table private.dic_source_attempts enable row level security;
 revoke all on private.dic_source_attempts from public,anon,authenticated;
 grant all on private.dic_source_attempts to service_role;
 create function public.dic_source_claim(submission_id uuid) returns jsonb
-language plpgsql security definer set search_path='' as $
+language plpgsql security definer set search_path='' as $claim$
 declare actor uuid; existing private.dic_source_attempts; total_24h integer;
 begin
  if current_setting('request.jwt.claim.role',true) is distinct from 'service_role' then
@@ -71,7 +71,7 @@ begin
    attempts=case when private.dic_source_attempts.window_started_at<now()-interval '24 hours'
       then 1 else private.dic_source_attempts.attempts+1 end;
  return jsonb_build_object('allowed',true);
-end $;
+end $claim$;
 revoke all on function public.dic_source_claim(uuid) from public,anon,authenticated;
 grant execute on function public.dic_source_claim(uuid) to service_role;
 
