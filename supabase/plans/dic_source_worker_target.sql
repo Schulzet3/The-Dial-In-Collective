@@ -53,7 +53,7 @@ begin
  where id=submission_id and status in ('pending','conflict');
  if actor is null then return jsonb_build_object('allowed',false,'reason','not_pending');end if;
  perform pg_advisory_xact_lock(hashtextextended(actor::text,9470));
- select * into existing from private.dic_source_attempts where submission_id=dic_source_claim.submission_id for update;
+ select attempts.* into existing from private.dic_source_attempts as attempts where attempts.submission_id=dic_source_claim.submission_id for update;
  select coalesce(sum(attempts),0) into total_24h from private.dic_source_attempts
  where owner_id=actor and window_started_at>now()-interval '24 hours';
  if total_24h>=30 then return jsonb_build_object('allowed',false,'reason','account_budget');end if;
