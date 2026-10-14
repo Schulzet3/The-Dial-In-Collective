@@ -12,6 +12,16 @@ on:
       - 'build_cloud.mjs'
       - 'package.json'
       - '.github/workflows/cloud-regression.yml'
+  pull_request:
+    branches:
+      - development/backend-foundation
+    paths:
+      - 'site/**'
+      - 'supabase/**'
+      - 'tests/**'
+      - 'build_cloud.mjs'
+      - 'package.json'
+      - '.github/workflows/cloud-regression.yml'
   workflow_dispatch:
 
 permissions:
