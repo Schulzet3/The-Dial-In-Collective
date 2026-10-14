@@ -290,7 +290,7 @@ begin
    proposal:=jsonb_set(proposal,'{roaster_as_entered}',to_jsonb(proposal->>'roaster'),true);
    proposal:=jsonb_set(proposal,'{roaster}',to_jsonb(managed_name),true);
   end if;
-  insert into public.coffee_submissions(owner_id,proposed_data,source_url) values(u,proposal,source)
+  insert into public.coffee_submissions(owner_id,proposed_data,source_url,created_at) values(u,proposal,source,clock_timestamp())
    returning id into sid;
   insert into public.library_entries(id,owner_id,submission_id) values(lid,u,sid);
   response:=jsonb_build_object('ok',true,'status','pending','library_entry_id',lid,
