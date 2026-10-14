@@ -2,6 +2,12 @@ name: DIC encrypted database backup
 
 # Nightly encrypted export to private GitHub artifacts. Apps Script forwards ciphertext to Drive.
 on:
+  # Smoke-test changes to backup infrastructure; Drive courier ignores push tests.
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/nightly-backup.yml
+      - scripts/backups/create-nightly-encrypted-dump.sh
   workflow_dispatch:
   schedule:
     - cron: '23 9 * * *'
