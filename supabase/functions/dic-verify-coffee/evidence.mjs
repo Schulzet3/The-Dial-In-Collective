@@ -20,6 +20,11 @@ export function officialProductUrl(raw,registeredDomain) {
   if(![registeredDomain,'www.'+registeredDomain].includes(u.hostname.toLowerCase()))return null;
   if(!/^\/(?:products|product)\/[a-z0-9][a-z0-9._~%+-]*(?:\/)?$/i.test(u.pathname))return null;
   if(u.search.length>600)return null;
+  for(const [key,value] of u.searchParams){
+   const lower=key.toLowerCase();
+   if(!(lower==='variant'||lower==='srsltid'||lower==='gclid'||lower==='fbclid'||
+       lower==='msclkid'||/^utm_[a-z0-9_]{1,60}$/.test(lower))||value.length>200)return null;
+  }
   return u.toString();
  } catch {return null;}
 }
