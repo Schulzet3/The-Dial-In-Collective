@@ -147,6 +147,22 @@ awk '
 test -s "$OUT/recovery-metadata.toc" || {
   echo "::error::No application metadata found in database dump"; exit 1;
 }
+# App foreign keys reference auth.users(id). Restore the source core Auth key
+# constraints/indexes too; bare auth tables have no unique keys and cannot
+# support faithful app foreign-key recovery. This does not start Supabase Auth.
+awk '
+/^[0-9]+;/ && / (CONSTRAINT|INDEX) auth (users|identities) / {
+  print
+}' "$OUT/contents.toc" > "$OUT/recovery-auth-keys.toc"
+test -s "$OUT/recovery-auth-keys.toc" || {
+  echo "::error::Core Auth primary key metadata missing in database dump"; exit 1;
+}
+docker cp "$OUT/recovery-auth-keys.toc" "$CONTAINER:/tmp/recovery-auth-keys.toc" >/dev/null
+docker exec -u root "$CONTAINER" chmod 644 /tmp/recovery-auth-keys.toc
+docker exec -u postgres "$CONTAINER" pg_restore --exit-on-error \
+  --no-owner --no-privileges -L /tmp/recovery-auth-keys.toc \
+  -U postgres -d postgres /tmp/database.dump >/dev/null
+
 # Supabase's managed project provides these roles. The offline database creates
 # inert NOLOGIN stubs for policy SQL; no authentication services are started.
 docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres \
