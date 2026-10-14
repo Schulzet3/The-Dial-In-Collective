@@ -9,9 +9,9 @@ export function installNativeImport(App,dom=globalThis.document,Panel=ImportPane
  const settings=App.prototype.settings,click=App.prototype.click;
  App.prototype.settings=function(...args){
   const result=settings.apply(this,args);
-  const links=dom.querySelector('#sheet .settings-links');
+  const links=dom.querySelector('#sheet .settings-recovery');
   if(links&&!links.querySelector('[data-action="import-backup"]')){
-   const button=dom.createElement('button');button.type='button';button.className='ghost';button.dataset.action='import-backup';button.textContent='Import Backup';
+   const button=dom.createElement('button');button.type='button';button.className='ghost';button.dataset.action='import-backup';button.textContent='Import backup';
    links.insertBefore(button,links.firstChild);
   }
   return result;

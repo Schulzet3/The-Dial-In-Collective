@@ -4,12 +4,13 @@ Better espresso through shared experience.
 
 ## Development status
 
-This branch contains the applied cloud database foundation, authenticated owner APIs, and an owner-development frontend. **It is not a hosted beta or a replacement for the working local v0.2.0 prototype.** No real account or shot data has been migrated. Automated backups are not running.
+This branch contains the applied cloud database foundation, authenticated owner APIs, and an owner-development frontend. **This is a private, hosted owner-development preview, not an external beta or a replacement for the local v0.2.0 prototype.** As of October 14, an approved owner-only import preserves 14 historical shots on the live development database. GitHub encrypted backup and recovery workflows have passed, but full platform restore, continuous offsite monitoring, and public beta requirements remain separate release gates.
 
 - [Current account/cloud checkpoint and remaining gates](docs/CLOUD_OWNER_TEST_CHECKPOINT.md)
 - [Earlier backend foundation checkpoint](docs/BACKEND_CHECKPOINT.md)
 - [Master Specification backend addendum](docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md)
 - [Decision Ledger backend amendments](docs/DECISION_LEDGER_BACKEND_AMENDMENTS.json)
+- [Locked owner-approved UX refinements (October 14)](docs/DECISION_LEDGER_2026_10_14_UX.json)
 - [Cloud implementation status ledger](docs/DECISION_LEDGER_CLOUD_IMPLEMENTATION_STATUS.json)
 - [Applied migrations](supabase/migrations/)
 

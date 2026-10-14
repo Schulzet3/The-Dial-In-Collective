@@ -1,0 +1,65 @@
+name: DIC cloud UX regression checks
+
+on:
+  push:
+    branches:
+      - development/backend-foundation
+      - work/setup-feed-history-recovery-20261014
+    paths:
+      - 'site/**'
+      - 'tests/**'
+      - 'build_cloud.mjs'
+      - 'package.json'
+      - '.github/workflows/cloud-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cloud-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Install locked runtime dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Cloud unit and regression tests
+        run: npm test
+      - name: Syntax check
+        run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js
+      - name: Build allowlisted cloud preview
+        run: npm run build:cloud
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_build_only_not_for_deployment
+
+  mobile-browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install Playwright and Chromium
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Exercise 390px phone UX with synthetic accounts
+        run: python tests/browser/cloud_owner_qa.py
+      - name: Retain synthetic phone screenshots for review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-cloud-phone-qa-${{ github.run_id }}
+          path: qa_artifacts/cloud/
+          if-no-files-found: warn
+          retention-days: 7

@@ -72,3 +72,13 @@ The owner explicitly approved a **one-time, existing admitted-account-only** his
 Security implementation must keep `private.import_control.recovery_verified_at` **NULL** while managed-service restoration remains unverified. A server-side exception must be bound to the existing unique enabled member's UUID, be valid for no more than 24 hours, and re-lock automatically in the same transaction on first successful, atomic, idempotent owner import. It must refuse another owner even if admitted in the future. All existing owner checks, the reviewed file's hash, acknowledgement of recovery download, RLS policies, Netlify SSO, private original phone/Mac records and no-credit-card/no-domain constraints remain unchanged.
 
 No real data was imported simply by granting approval. After authenticated UI commit, verify exact history and idempotence, then produce a **new** encrypted source-inclusive backup and confirm Drive delivery and offline restoration of nonzero imported rows. Full hosted Supabase configuration, SMTP, external multiuser signup/privacy, admins, and real beta device tests remain mandatory before external beta.
+
+## Approved product refinements (2026-10-14)
+
+- Every admitted user can rename their own equipment setups, without creating an equipment version or altering prior shot hardware provenance.
+- Slow Feed is remembered per setup, from the most recent explicitly logged condition. Switching it OFF makes Standard Feed the next default. The active equipment version stores the preference. Cloud synchronization must guard against stale offline uploads, and historical Unknown must stay Unknown.
+- Edit remains on the left and is the primary shot-history action. Make Current Recipe is separate on the right: a deliberate preferred-family/example choice, not a necessary step after each successful shot. Eligible Dialed In observations automatically inform their recipe-family windows.
+- Place shot values and setup, Basket Dose, feed, style, date, and status within a compact header above the sensory ratings/radar. Make optimal use of phone width without crowding.
+- Keep import/export under a collapsed Recovery options disclosure in Settings, not prominent routine controls. Cloud sync is normal; the development cache export is not a full user-data portability or restore service.
+
+These are additive Locked decisions, leaving every unrelated Master Specification/Decision Ledger requirement intact. Preserve the historic import recovery gate, Netlify private beta protection, and community verification requirements.
