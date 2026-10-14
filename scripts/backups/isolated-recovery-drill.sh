@@ -143,9 +143,16 @@ awk '
 /^[0-9]+;/ &&
 / (FUNCTION|PROCEDURE|AGGREGATE|SEQUENCE|SEQUENCE OWNED BY|DEFAULT|CONSTRAINT|FK CONSTRAINT|INDEX|TRIGGER|ROW SECURITY|POLICY|VIEW|MATERIALIZED VIEW|TYPE|DOMAIN) (public|private) / {
   print
+}
+# First-party signup provisioning trigger is attached to the managed Auth table.
+/^[0-9]+;/ && / TRIGGER auth users dic_auth_user_created / {
+  print
 }' "$OUT/contents.toc" > "$OUT/recovery-metadata.toc"
 test -s "$OUT/recovery-metadata.toc" || {
   echo "::error::No application metadata found in database dump"; exit 1;
+}
+grep -Fq ' TRIGGER auth users dic_auth_user_created ' "$OUT/recovery-metadata.toc" || {
+  echo "::error::The first-party Auth signup provisioning trigger is missing from the dump"; exit 1;
 }
 # App foreign keys reference auth.users(id). Restore the source core Auth key
 # constraints/indexes too; bare auth tables have no unique keys and cannot
@@ -189,7 +196,9 @@ select concat_ws('|',
   join pg_namespace n on n.oid=c.relnamespace
   where n.nspname in ('public','private') and not t.tgisinternal),
  (select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-  where n.nspname in ('public','private')));
+  where n.nspname in ('public','private')),
+ (select count(*) from pg_trigger t where t.tgrelid='auth.users'::regclass
+  and t.tgname='dic_auth_user_created' and not t.tgisinternal));
 SQL
 docker run --rm --user "$(id -u):$(id -g)" \
   --env SUPABASE_DB_URL --env PGSSLMODE=require \
@@ -207,7 +216,7 @@ if [[ "$LIVE_METADATA" != "$RESTORED_METADATA" ]]; then
   echo "::error::First-party schema metadata mismatch: live=$LIVE_METADATA restored=$RESTORED_METADATA"
   exit 1
 fi
-echo "PASS: Application RLS, policies, indexes, triggers, and functions match the live metadata counts ($LIVE_METADATA)."
+echo "PASS: Application RLS, policies, indexes, triggers, functions and signup trigger match the live metadata counts ($LIVE_METADATA)."
 
 echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables were restored with data."
 echo "PASS: All first-party table row counts and core Auth counts agree with source."
