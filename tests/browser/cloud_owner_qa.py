@@ -31,7 +31,7 @@ window.__client={
  async signIn(email){window.__who={id:OWNER,email};return {};},async signUp(){return {};},
  async requestReset(){return 'If that address has an account, a recovery email has been requested.';},async setPassword(){return {};},
  async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
- async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
+ async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
  async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
  if(e.action==='submit_coffee'){
   const submission='11111111-1111-4111-8111-000000000099';
