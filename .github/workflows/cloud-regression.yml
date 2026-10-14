@@ -7,6 +7,7 @@ on:
       - work/setup-feed-history-recovery-20261014
     paths:
       - 'site/**'
+      - 'supabase/migrations/**'
       - 'tests/**'
       - 'build_cloud.mjs'
       - 'package.json'
@@ -32,7 +33,7 @@ jobs:
       - name: Cloud unit and regression tests
         run: npm test
       - name: Syntax check
-        run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js
+        run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js && node --check site/admin/main.js
       - name: Build allowlisted cloud preview
         run: npm run build:cloud
         env:
