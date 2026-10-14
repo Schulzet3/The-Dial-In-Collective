@@ -1,0 +1,58 @@
+name: DIC cloud app build and tests
+
+# Independent, secret-free check before any hosted beta release.
+# Netlify also runs npm test and build:cloud on development deploys.
+on:
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - '.github/workflows/cloud-beta-ci.yml'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'build_cloud.mjs'
+      - 'site/**'
+      - 'tests/**'
+  pull_request:
+    branches:
+      - development/backend-foundation
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dic-cloud-beta-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned direct dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund
+      - name: Run all checked-in Node tests
+        run: npm test
+      - name: Build static beta assets with nonfunctional public test coordinates
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
+        run: npm run build:cloud
+      - name: Fail if any development-only or private source leaks into dist
+        run: |
+          test -s dist/index.html
+          test -s dist/vendor/supabase.js
+          test -s dist/cloud/config.js
+          test ! -e dist/docs
+          test ! -e dist/tests
+          test ! -e dist/supabase
+          test ! -e dist/scripts
+          test ! -e dist/.github
+          echo "PASS: Cloud app tests/build complete; no private source trees published."
