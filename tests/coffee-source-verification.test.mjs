@@ -87,12 +87,12 @@ test('page size, badly formed markup and ambiguous products fail safely',()=>{
 test('source worker only deploys behind verified JWT and uses service-only database APIs',async()=>{
  const {readFileSync}=await import('node:fs');
  const f=readFileSync(new URL('../supabase/functions/dic-verify-coffee/index.ts',import.meta.url),'utf8');
- assert.match(f,/\\.auth\\.getUser\\(token\\)/);
+ assert.ok(f.includes('.auth.getUser(token)'));
  assert.match(f,/dic_source_check_target/);
  assert.match(f,/dic_source_claim/);
  assert.match(f,/dic_trusted_source_verify/);
  assert.match(f,/redirect:'manual'/);
- assert.match(f,/AbortSignal\\.timeout\\(10000\\)/);
+ assert.ok(f.includes('AbortSignal.timeout(10000)'));
  assert.match(f,/const link=officialProductUrl/);
- assert.doesNotMatch(f,/fetch\\(target\\.source_url/);
+ assert.ok(!f.includes('fetch(target.source_url'));
 });
