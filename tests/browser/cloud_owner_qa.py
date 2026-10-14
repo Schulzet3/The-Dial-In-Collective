@@ -5,13 +5,13 @@ ROOT=Path(__file__).resolve().parents[2];SITE=ROOT/'site';OUT=ROOT/'qa_artifacts
 def bundle():
  s='(()=>{const Modules={};\n'
  def imports(t):
-  t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem};',t)
-  t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem+';',t)
+  t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
+  t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','client','cache','outbox','mapping','confirmation','shot_card']:
+ for name in ['constants','model','engine','ui','client','cache','outbox','mapping','confirmation','shot_card','coffee-match-ui']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
-  t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
+  t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
  t=(SITE/'cloud/main.js').read_text();t=t.replace("import {CLOUD_CONFIG} from './config.js';","const CLOUD_CONFIG={enabled:false};").replace('startCloudApp();','').replace('export {CloudApp};','');t=re.sub(r'\bexport\s+','',imports(t))
  s+=t+'\nwindow.__CloudApp=CloudApp;window.__Modules=Modules;})();';return s
 fixture=(ROOT/'tests/cloud-fixtures/raw.js').read_text().replace('export ','')
@@ -31,7 +31,7 @@ window.__client={
  async signIn(email){window.__who={id:OWNER,email};return {};},async signUp(){return {};},
  async requestReset(){return 'If that address has an account, a recovery email has been requested.';},async setPassword(){return {};},
  async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
- async status(){return {admitted:window.__admitted,admin:false};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
+ async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return {classification:'new_pending',roaster:{recognized:false}};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
  async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
  if(e.action==='save_preferences'){r.preferences={...r.preferences,theme:d.theme,tasting_preferences:d.tasting_preferences,revision:r.preferences.revision+1};return {ok:true,record:r.preferences};}
  if(e.action==='rename_setup'){
