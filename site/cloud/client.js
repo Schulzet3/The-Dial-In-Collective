@@ -26,6 +26,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin}={}
   async redeemInvite(token){assertSecure();const r=unwrap(await sdk.rpc('dic_redeem_invite',{token:token.trim()}));if(!r?.ok)throw new CloudError({verify_email:'Verify your email first.',invalid_invite:'This invitation is invalid, expired or exhausted.',rate_limited:'Too many attempts. Try again later.',access_revoked:'Your access was revoked. Contact the administrator.'}[r?.code]||'Invitation could not be accepted.',r?.code);return r;},
   async read(){assertSecure();return unwrap(await sdk.rpc('dic_read_personal_state'));},
    async findCoffeeMatches(payload){assertSecure();return unwrap(await sdk.rpc('dic_find_coffee_matches',{payload}));},
+   async verifyCoffeeSource(submissionId){assertSecure();return unwrap(await sdk.functions.invoke('dic-verify-coffee',{body:{submission_id:submissionId}}));},
   async mutate(e){assertSecure();return unwrap(await sdk.rpc('dic_apply_client_change',{expected_owner:e.owner,mutation_id:e.id,action:e.action,payload:e.payload}));},
   async previewImport(owner,backup){assertSecure();if(!owner)throw new CloudError('Sign in before importing.','signed_out');return unwrap(await sdk.rpc('dic_preview_import',{expected_owner:owner,backup}));},
   async commitImport(owner,backup,reviewHash,recoverySaved){assertSecure();if(!owner)throw new CloudError('Sign in before importing.','signed_out');return unwrap(await sdk.rpc('dic_commit_import',{expected_owner:owner,backup,review_hash:reviewHash,recovery_saved:recoverySaved===true}));},
