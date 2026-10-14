@@ -14,7 +14,7 @@ export function proposalWithRecognizedRoaster(d,result){
  if(canonical && canonical!==entered) return {source_url,proposed_data:{...facts,roaster:canonical,roaster_as_entered:entered}};
  return {source_url,proposed_data:facts};
 }
-export function matchReviewMarkup(result){
+export function matchReviewMarkup(result,{pending=false}={}){
  const choices=Array.isArray(result?.candidates)?result.candidates.slice(0,6):[];
  return `<p class="helper">This may be an existing verified coffee. Different harvests or releases can be distinct, even when the roaster and name match.</p>
   <div class="coffee-matches">${choices.map(c=>`<div class="coffee-match">
@@ -23,5 +23,5 @@ export function matchReviewMarkup(result){
    ${button('Use existing','choose-coffee-match',`data-id="${e(c.id)}"`,'secondary compact')}
   </div>`).join('')}</div>
   <p class="helper">If this is a different release, you can still add it and log shots immediately. It stays private while its identity is verified.</p>
-  ${button('This is a different coffee','add-distinct-coffee','','ghost full')}`;
+  ${button(pending?'Keep this coffee separate':'This is a different coffee','add-distinct-coffee','','ghost full')}`;
 }
