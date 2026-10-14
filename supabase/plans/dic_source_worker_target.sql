@@ -64,7 +64,7 @@ begin
  end if;
  insert into private.dic_source_attempts(submission_id,owner_id,started_at,window_started_at,attempts)
  values(dic_source_claim.submission_id,actor,now(),now(),1)
- on conflict(submission_id) do update set
+ on conflict on constraint dic_source_attempts_pkey do update set
    started_at=now(),
    window_started_at=case when private.dic_source_attempts.window_started_at<now()-interval '24 hours'
       then now() else private.dic_source_attempts.window_started_at end,
