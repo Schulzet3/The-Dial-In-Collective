@@ -134,6 +134,65 @@ docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
 if ! cmp -s "$OUT/expected-all-counts.tsv" "$OUT/restored-all-counts.tsv"; then
   echo "::error::At least one restored app/Auth table row count differs from source"; exit 1
 fi
+# FIRST_PARTY_METADATA_RESTORE_CHECK
+# Rebuild app-owned functional schema in the same disposable database. This is
+# distinct from provider-managed Supabase Auth/Storage service restoration.
+# Only SQL objects from public/private are selected; no secrets or user data
+# are written to the GitHub workspace or uploaded as artifacts.
+awk '
+/^[0-9]+;/ &&
+/ (FUNCTION|PROCEDURE|AGGREGATE|SEQUENCE|SEQUENCE OWNED BY|DEFAULT|CONSTRAINT|FK CONSTRAINT|INDEX|TRIGGER|ROW SECURITY|POLICY|VIEW|MATERIALIZED VIEW|TYPE|DOMAIN) (public|private) / {
+  print
+}' "$OUT/contents.toc" > "$OUT/recovery-metadata.toc"
+test -s "$OUT/recovery-metadata.toc" || {
+  echo "::error::No application metadata found in database dump"; exit 1;
+}
+# Supabase's managed project provides these roles. The offline database creates
+# inert NOLOGIN stubs for policy SQL; no authentication services are started.
+docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres \
+  -c 'CREATE ROLE anon NOLOGIN; CREATE ROLE authenticated NOLOGIN; CREATE ROLE service_role NOLOGIN;' >/dev/null
+docker cp "$OUT/recovery-metadata.toc" "$CONTAINER:/tmp/recovery-metadata.toc" >/dev/null
+docker exec -u root "$CONTAINER" chmod 644 /tmp/recovery-metadata.toc
+docker exec -u postgres "$CONTAINER" pg_restore --exit-on-error \
+  --no-owner --no-privileges -L /tmp/recovery-metadata.toc \
+  -U postgres -d postgres /tmp/database.dump >/dev/null
+
+# Compare all first-party policies, indexes, noninternal triggers and functions
+# and RLS-enabled table counts against the unchanged hosted source. Totals
+# reveal no personal records, descriptions, secret material or user IDs.
+cat > "$OUT/app-schema-inventory.sql" <<'SQL'
+select concat_ws('|',
+ (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace
+  where n.nspname in ('public','private') and c.relkind in ('r','p')),
+ (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace
+  where n.nspname in ('public','private') and c.relkind in ('r','p') and c.relrowsecurity),
+ (select count(*) from pg_policy p join pg_class c on c.oid=p.polrelid
+  join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('public','private')),
+ (select count(*) from pg_indexes where schemaname in ('public','private')),
+ (select count(*) from pg_trigger t join pg_class c on c.oid=t.tgrelid
+  join pg_namespace n on n.oid=c.relnamespace
+  where n.nspname in ('public','private') and not t.tgisinternal),
+ (select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace
+  where n.nspname in ('public','private')));
+SQL
+docker run --rm --user "$(id -u):$(id -g)" \
+  --env SUPABASE_DB_URL --env PGSSLMODE=require \
+  --volume "$OUT:/out" postgres:17-alpine sh -euc '
+  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
+    --file=/out/app-schema-inventory.sql > /out/live-app-metadata.txt
+'
+docker cp "$OUT/app-schema-inventory.sql" "$CONTAINER:/tmp/app-schema-inventory.sql" >/dev/null
+docker exec -u root "$CONTAINER" chmod 644 /tmp/app-schema-inventory.sql
+docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres \
+ --tuples-only --no-align --file=/tmp/app-schema-inventory.sql > "$OUT/restored-app-metadata.txt"
+LIVE_METADATA=$(tr -d '[:space:]' < "$OUT/live-app-metadata.txt")
+RESTORED_METADATA=$(tr -d '[:space:]' < "$OUT/restored-app-metadata.txt")
+if [[ "$LIVE_METADATA" != "$RESTORED_METADATA" ]]; then
+  echo "::error::First-party schema metadata mismatch: live=$LIVE_METADATA restored=$RESTORED_METADATA"
+  exit 1
+fi
+echo "PASS: Application RLS, policies, indexes, triggers, and functions match the live metadata counts ($LIVE_METADATA)."
+
 echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables were restored with data."
 echo "PASS: All first-party table row counts and core Auth counts agree with source."
 echo "LIMIT: Core-data test only, not full managed Supabase configuration recovery."
