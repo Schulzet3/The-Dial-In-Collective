@@ -1,9 +1,9 @@
 {
   "product": "The Dial In Collective",
   "provider": "Netlify",
-  "account_plan": "Free",
-  "accounting_note": "Point-in-time observations from Netlify Billing. Not a live billing API connection. Update only from a verified current Netlify balance; never assume a monthly reset date.",
-  "monthly_included_credits": 300,
+  "account_plan": "Personal (paid through current billing period; downgrade to Free scheduled)",
+  "accounting_note": "Owner-provided Netlify Usage & Billing screenshot dated 2026-10-15. Current Personal plan has 1,000 deployable plan credits during Oct 15-Nov 14, 2026. An additional 29.6 operational credits are not spendable on production deployments. Owner scheduled a downgrade to Free after this billing period. Recheck actual balance and plan after Nov 14; future 300 Free credits/month are owner-reported, not presently available. Do not interpret the 1,029.6 total displayed as deployable credits. Snapshot is not a live billing API connection.",
+  "monthly_included_credits": 1000,
   "production_deploy_credits_each": 15,
   "snapshots": [
     {
@@ -19,6 +19,26 @@
       "observed_total_used_credits": 330.2,
       "observed_remaining_credits": 0,
       "production_deployments_paused": true
+    },
+    {
+      "observed_date": "2026-10-15",
+      "source": "Owner-provided Netlify Personal plan Usage & Billing screenshot 2026-10-15; owner confirms already scheduled downgrade",
+      "credit_period_label": "Oct 15 - Nov 14, 2026",
+      "active_plan": "Personal",
+      "pending_plan": "Free (after current Personal billing period)",
+      "production_deploy_count": 0,
+      "production_deploy_credits": 0,
+      "observed_total_used_credits": 0,
+      "observed_remaining_credits": 1000,
+      "observed_personal_plan_credits_total": 1000,
+      "operational_credits_remaining": 29.6,
+      "operational_credits_not_usable_for_production_deploy": true,
+      "operational_credits_expires": "2026-11-11",
+      "plan_credits_expires": "2026-11-14",
+      "observed_dashboard_total_available": 1029.6,
+      "auto_recharge_enabled": false,
+      "production_deployments_paused": false,
+      "note": "Production deployments must consume Personal plan credits, not operational credits. Observed existing current deploy dated Oct 13. No new production deploy undertaken as part of this ledger update."
     }
   ],
   "release_policy": {
@@ -27,10 +47,18 @@
     "maximum_snapshot_age_days": 7,
     "must_pass_tests_before_release": true,
     "release_marker": "Release DIC: ... [dic-publish]",
-    "budget_rule": "Only one tested, deliberately batched production release per approved bundle. Do not publish at a reported balance below 15, on stale/unknown data, or if CI is failing. Keep provider privacy and recovery safeguards.",
+    "budget_rule": "One fully tested, deliberately batched production release per approved bundle. Production credits come only from the 1,000 Personal plan credits, never the 29.6 operational credits. No deploy on stale/unknown billing data or failing CI. Do not exhaust credits or alter SSO, beta restrictions, or recovery controls.",
     "manual_refresh_required": "Refresh the latest Netlify team usage snapshot before release or after the billing cycle resets. Current Netlify connector does not expose the live billing balance.",
     "credits_on_free_plan_are_hard_limit": true,
-    "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval."
+    "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
+    "no_unattended_paid_topups": true,
+    "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum."
   },
-  "reconciliation": "After each confirmed Netlify publish, verify deploy SHA and refresh this ledger from Netlify's usage breakdown. A GitHub commit, deploy request or skipped build does not prove a billable Netlify production deploy."
+  "reconciliation": "After each confirmed Netlify publish, verify deploy SHA and refresh this ledger from Netlify's usage breakdown. A GitHub commit, deploy request or skipped build does not prove a billable Netlify production deploy.",
+  "scheduled_plan_change": {
+    "plan": "Free",
+    "timing": "After current Oct 15-Nov 14 Personal period",
+    "source": "Owner confirmation and Netlify Billing UI: 'This team will be downgraded to Free in a month'",
+    "followup": "After downgrade, verify actual included Free credits and refresh this ledger; do not auto-upgrade or auto-recharge."
+  }
 }
