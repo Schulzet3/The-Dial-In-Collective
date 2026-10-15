@@ -29,3 +29,12 @@
 6. Only after actual real-user checks may we describe the feature as verified end-to-end. Log any fails and avoid unreviewed repeat production deploys.
 
 **Release is prepared but not published.** A credit purchase is not required for backups, SQL tests, isolated recovery or GitHub CI. One controlled Netlify publish is required to put the new browser experience in front of the owner.
+
+## Zero-Netlify pre-release privacy verification (2026-10-14)
+
+- Live populated-catalog Supabase SQL regressions `supabase/tests/coffee_automated_approval.sql` and `supabase/tests/coffee_identity_matching.sql` both **PASS**; no test mutations persisted.
+- Original admin regression was updated for the now-actually-promoted owner; a separate synthetic admitted nonadmin is denied the admin overview while the existing owner receives sanitized/limited data. **PASS**, fully rolled back.
+- New `supabase/tests/pre_release_cross_account.sql` **PASS**: the temporary confirmed admitted user sees verified coffee suggestions but zero owner shots, library, private submissions, administrator view, original archive or trusted source-verifier access. The real owner still sees the same baseline. This is a simulated database role, **not a genuine Auth-issued JWT or HTTP login**.
+- Mobile regression CI now uses `npm ci` with committed lockfile, and Ubuntu 24.04 to match reproducible cloud CI.
+- Detailed safe owner/invited-user steps and explicit gating are in [REAL_ACCOUNT_ACCEPTANCE_2026-10-14.md](REAL_ACCOUNT_ACCEPTANCE_2026-10-14.md).
+- **Blocked only for real-user acceptance:** a newer production browser release needs actual Netlify credits and owner confirmation; a meaningful distinct outside user also requires approved invite flow and custom SMTP/email receipt. No Netlify publish, beta invitation or persistent external account was created during these checks.
