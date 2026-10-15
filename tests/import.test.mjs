@@ -41,4 +41,4 @@ test('settings integration is installed once and preserves standard clicks',asyn
  await app.click({target:{closest:()=>({dataset:{action:'import-backup'}})}});assert.equal(app.opened,1);
  app.click({target:{closest:()=>({dataset:{action:'log'}})}});assert.equal(app.clicked,true);
 });
-test('entry starts only the existing app and adds native import',async()=>{const code=await readFile(new URL('../site/cloud/import-entry.js',import.meta.url),'utf8');assert.match(code,/installNativeImport\(CloudApp\)/);assert.doesNotMatch(code,/startCloudApp\(/);});
+test('beta entry starts the app without mounting manual Recovery UI',async()=>{const code=await readFile(new URL('../site/cloud/import-entry.js',import.meta.url),'utf8');assert.match(code,/import '\.\/main\.js'/);assert.doesNotMatch(code,/installNativeImport\(CloudApp\)/);});

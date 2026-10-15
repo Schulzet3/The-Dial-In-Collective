@@ -2,7 +2,7 @@ import {e,button,icon,shotSummary,styleBadge,humanDate,chips,radar} from '../lib
 
 // Measurements and context stay above the taste details; historical readings
 // remain distinct from model-derived recipe windows.
-export const feedLabel=mode=>mode==='slow'?'Slow Feed':mode==='standard'?'Standard Feed':'Feed not recorded';
+export const feedLabel=mode=>mode==='slow'?'Slow Feed':mode==='standard'?'Standard Feed':'Feed Not Recorded';
 
 export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={}){
  const recordUnit=shot.snapshot?.tempUnit||unit;
@@ -20,7 +20,7 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
     <div class="shot-context">${context.map(item=>`<span class="shot-context-item">${e(item)}</span>`).join('')}</div>
     <div class="shot-meta">${styleBadge(shot.style)}
      <span class="shot-date">${e(humanDate(shot.timestamp))}</span>
-     ${shot.cloudPending?'<span class="preview-pill">Pending sync</span>':shot.dialedIn?'<span class="status-badge">Dialed In</span>':''}
+     ${shot.cloudPending?'<span class="preview-pill">Pending Sync</span>':shot.dialedIn?'<span class="status-badge">Dialed In</span>':''}
     </div>
    </div>${icon('chevron',15)}
   </button>

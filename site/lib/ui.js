@@ -1,6 +1,7 @@
 import {SCALES,tasteSeverity,tasteLabel,tempDisplay,round} from './constants.js';
 export const e = x => String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths={
+ signout:'M9 4H4v16h5m5-12 4 4-4 4m-6-4h10',
  coffee:'M4 8h12v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8Zm12 1h2a3 3 0 1 1 0 6h-2M7 3v2m4-2v2m4-2v2',
  plus:'M12 5v14M5 12h14',close:'m6 6 12 12M6 18 18 6',chevron:'m6 9 6 6 6-6',
  settings:'M9.5 2h5l.5 3 2 .9 2.5-1.1L22 9.1 19.8 11v2l2.2 1.9-2.5 4.3-2.5-1.1-2 .9-.5 3h-5L9 19l-2-.9-2.5 1.1L2 14.9 4.2 13v-2L2 9.1l2.5-4.3L7 5.9 9 5l.5-3ZM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8',

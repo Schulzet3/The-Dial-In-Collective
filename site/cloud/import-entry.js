@@ -1,5 +1,3 @@
-// main.js already starts exactly one CloudApp. Install its import extension
-// synchronously before authentication's first asynchronous response completes.
-import {CloudApp} from './main.js';
-import {installNativeImport} from './import-integration.js';
-installNativeImport(CloudApp);
+// User-approved beta UI: manual recovery actions are not mounted.
+// Historical importer source and closed server guards are retained.
+import './main.js';

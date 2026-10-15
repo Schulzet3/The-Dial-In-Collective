@@ -8,11 +8,11 @@ test('admin dashboard is genuinely read-only and makes no approval/delete offers
   counts:{pending_coffees:4,conflicts:1,verified_coffees:5,active_accounts:1,shot_records:14},
   queue_total:1,queue:[{id:'test',status:'pending',name:'Example',roaster:'Roaster',created_at:'2026-10-14T00:00:00Z'}]
  });
- assert.match(html,/Review queue/);
- assert.match(html,/Pending coffee verification/);
+ assert.match(html,/Review Queue/);
+ assert.match(html,/Pending Coffee Verification/);
  assert.match(html,/read-only/);
  assert.doesNotMatch(html,/data-action="approve"|data-action="merge"|data-action="reject"|>Delete</);
- assert.match(html,/Logged shots/);
+ assert.match(html,/Logged Shots/);
  assert.match(html,/The Dial In Collective/);
 });
 test('untrusted coffee fields are HTML escaped, not executable or clickable',()=>{
@@ -38,7 +38,7 @@ test('invalid and missing aggregates cannot display misleading numbers',()=>{
 test('administrator denial never renders protected queue',()=>{
  const html=renderAdminDenied('<script>bad</script>');
  assert.doesNotMatch(html,/<script>/);
- assert.match(html,/Admin access unavailable/);
+ assert.match(html,/Admin Access Unavailable/);
  assert.match(html,/server-side/);
 });
 test('admin page uses the same persisted Supabase session and verifies admin RPC',async()=>{
@@ -52,7 +52,7 @@ test('admin page uses the same persisted Supabase session and verifies admin RPC
  assert.match(main,/dic_admin_dashboard/);
  assert.match(builder,/admin\.html/);
  assert.match(builder,/admin\/main\.js/);
- assert.match(app,/this\.status\?\.admin\?button\('Admin dashboard'/);
+ assert.match(app,/this\.status\?\.admin/);assert.match(app,/Admin Dashboard/);
 });
 test('the proposed SQL never grants admin rights or enables mutation operations',async()=>{
  const sql=await readFile(new URL('../supabase/migrations/20261014211500_dic_admin_read_only_dashboard.sql',import.meta.url),'utf8');

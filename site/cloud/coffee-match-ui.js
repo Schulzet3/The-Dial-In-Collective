@@ -20,8 +20,8 @@ export function matchReviewMarkup(result,{pending=false}={}){
   <div class="coffee-matches">${choices.map(c=>`<div class="coffee-match">
    <div class="coffee-match-text"><strong>${e(c.name||'Coffee')}</strong><span>${e(c.roaster||'')}${c.release_label?` · ${e(c.release_label)}`:''}</span>
    ${c.origin?`<small>${e(c.origin)}</small>`:''}</div>
-   ${button('Use existing','choose-coffee-match',`data-id="${e(c.id)}"`,'secondary compact')}
+   ${button('Use Existing','choose-coffee-match',`data-id="${e(c.id)}"`,'secondary compact')}
   </div>`).join('')}</div>
   <p class="helper">If this is a different release, you can still add it and log shots immediately. It stays private while its identity is verified.</p>
-  ${button(pending?'Keep this coffee separate':'This is a different coffee','add-distinct-coffee','','ghost full')}`;
+  ${button(pending?'Keep This Coffee Separate':'This Is A Different Coffee','add-distinct-coffee','','ghost full')}`;
 }

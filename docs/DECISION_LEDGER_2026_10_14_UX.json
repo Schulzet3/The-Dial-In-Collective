@@ -31,7 +31,9 @@
       "id": "UX-20261014-05",
       "status": "Locked",
       "topic": "Recovery options",
-      "decision": "Manual export and import remain available under a collapsed Recovery options section in Settings; cloud sync and automatic offsite backups are the normal behavior."
+      "decision": "Manual export and import remain available under a collapsed Recovery options section in Settings; cloud sync and automatic offsite backups are the normal behavior.",
+      "amended_by": "VISUAL-20261015-01",
+      "amendment_note": "Owner approved removal of routine Recovery UI on 2026-10-15. Original policy retained as decision history."
     },
     {
       "id": "OPS-20261014-01",
@@ -92,6 +94,24 @@
       "decision": "Provide accessible instructions and/or a video walkthrough that covers the functions available in the launched app. Keep it friendly to beginners and emphasize Log Shot -> Rate -> Recommendation.",
       "remaining_open": "Written versus video format, placement, and timing are not locked. Build against the released feature set so material stays accurate; differentiate member and admin features.",
       "implementation_status": "Roadmap recorded; no content/video published and no hosting changes."
+    },
+    {
+      "id": "VISUAL-20261015-01",
+      "status": "Locked",
+      "topic": "Coordinated visual refinement, simpler beta Settings and no-publish review",
+      "owner_approval_date": "2026-10-15",
+      "decision": "Vibrant filled badges and clear borders in Light/Dark; consistent controls and dividers; prominent Search & Sort button; cleaner ff ligatures; Title Case for standalone UI labels excluding sentences, units and user content; grouped Settings and Sign Out last; Admin inherits saved appearance. Remove routine Recovery Options UI rather than enabling unrestricted historical imports.",
+      "amends": "UX-20261014-05 visible Recovery UI only; backend import gate and operator recovery unchanged. Earlier request to unlock repeat imports withdrawn.",
+      "preserved": [
+        "Recommendation calculations",
+        "Shot and coffee identity/history",
+        "Private data and server authorization",
+        "Encrypted backups and operator recovery",
+        "Password reset",
+        "Emergency pending-sync download"
+      ],
+      "implementation_status": "Staged browser review; not Netlify-published. Screenshots use synthetic accounts and data.",
+      "release_hold": "No Netlify deployment until owner approves screenshots and the next consolidated release."
     }
   ],
   "unchanged_release_gates": [

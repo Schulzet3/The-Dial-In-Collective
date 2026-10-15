@@ -32,8 +32,8 @@ test('probable duplicates require a deliberate user confirmation',()=>{
  assert.equal(nextCoffeeAction({classification:'needs_confirmation',candidates:[{id}]}),'ask_user');
  assert.equal(nextCoffeeAction({classification:'needs_confirmation',candidates:[]}),'submit_pending');
  const html=matchReviewMarkup({candidates:[{id,name:'Wuri',roaster:'Sweet Bloom',release_label:'2026 harvest',origin:'Gedeb'}]});
- assert.match(html,/Use existing/);
- assert.match(html,/This is a different coffee/);
+ assert.match(html,/Use Existing/);
+ assert.match(html,/This Is A Different Coffee/);
  assert.match(html,/Different harvests or releases can be distinct/);
  assert.doesNotMatch(html,/data-action="approve"|data-action="merge"/);
 });
@@ -58,7 +58,7 @@ test('client and UI use the server matcher before existing verified or pending a
  assert.match(cloud,/add_verified_coffee/);
  assert.match(cloud,/submit_coffee/);
  assert.match(cloud,/matchReviewMarkup\(matched\)/);
- assert.match(cloud,/Release \/ harvest/);
+ assert.match(cloud,/Release \/ Harvest/);
  assert.match(client,/rpc\('dic_find_coffee_matches',\{payload\}\)/);
  assert.match(source,/private\.is_member\(\)/);
  assert.match(source,/create function public\.dic_find_coffee_matches\(payload jsonb\)/);

@@ -8,7 +8,7 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','client','cache','outbox','mapping','confirmation','shot_card','coffee-match-ui']:
+ for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','coffee-match-ui']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
@@ -71,31 +71,31 @@ checks=[]
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=shutil.which('chromium') or shutil.which('chromium-browser') or None,headless=True,args=['--no-sandbox'])
  page=b.new_page(viewport={'width':390,'height':844});page.set_default_timeout(5000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
- css=(SITE/'styles.css').read_text().split('\n',1)[1]
+ css=(SITE/'styles.css').read_text().split('\n',1)[1]+'\n'+(SITE/'visual.css').read_text()
  page.set_content('<!doctype html><html><head><meta name="theme-color" content="#f3ece0"><style>'+css+'</style></head><body><div id=app></div><dialog id=sheet aria-labelledby=sheet-title></dialog><div id=toasts role=status></div></body></html>')
  page.add_script_tag(content=bundle());page.add_script_tag(content=fixture+'\n'+mock)
  try:
-  page.get_by_role('button',name='Sign in',exact=True).wait_for()
+  page.get_by_role('button',name='Sign In',exact=True).wait_for()
  except Exception:
   print('BOOT BODY:',page.locator('body').inner_text()[:1800])
   print('BOOT PAGE ERRORS:',errors)
   print('BUNDLE START:',bundle()[:1000])
   raise
  checks.append('Sign-in view loads without local app state')
- page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign in',exact=True).click();page.get_by_role('button',name='Use invitation').wait_for();checks.append('Pending account remains outside workspace')
- page.locator('[name=token]').fill('synthetic-not-real-token');page.get_by_role('button',name='Use invitation').click();page.get_by_role('button',name='Settings',exact=True).wait_for();checks.append('Admitted account hydrates cloud workspace')
+ page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign In',exact=True).click();page.get_by_role('button',name='Use Invitation').wait_for();checks.append('Pending account remains outside workspace')
+ page.locator('[name=token]').fill('synthetic-not-real-token');page.get_by_role('button',name='Use Invitation').click();page.get_by_role('button',name='Settings',exact=True).wait_for();checks.append('Admitted account hydrates cloud workspace')
  assert page.locator('.current-mark').count()==0;checks.append('No pin before first logged shot')
  page.get_by_role('button',name='Settings',exact=True).click()
- assert page.locator('.recovery-options').evaluate('(x)=>!x.open');checks.append('Recovery options collapsed by default')
- page.locator('.recovery-options summary').click();assert page.locator('.settings-recovery [data-action=export]').count()==1;checks.append('Recovery export tucked into advanced disclosure')
+ assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')
+ assert page.locator('.settings-signout').count()==1;checks.append('Sign Out follows Cloud Sync in Settings')
  page.get_by_role('button',name='Rename',exact=True).click();page.locator('#rename-setup [name=name]').fill('Home Espresso')
- page.get_by_role('button',name='Save name',exact=True).click();page.wait_for_function('!document.querySelector("#sheet").open')
+ page.get_by_role('button',name='Save Name',exact=True).click();page.wait_for_function('!document.querySelector("#sheet").open')
  assert 'Home Espresso' in page.locator('.setup-switch').inner_text();checks.append('Setup can be renamed without recreating equipment')
- page.locator('[data-action=expand]').click();page.get_by_role('button',name='Log a Shot',exact=False).wait_for();checks.append('Coffee expansion is inline')
+ page.locator('[data-action=expand]').click();page.get_by_role('button',name='Log A Shot',exact=False).wait_for();checks.append('Coffee expansion is inline')
  page.screenshot(path=str(OUT/'cloud_home_light.png'),full_page=True)
- page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=tasting_preferences]').fill('Fruity clarity');page.get_by_role('button',name='Save preferences',exact=True).click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();assert page.locator('#sheet').evaluate('(x)=>x.open');checks.append('Preference save leaves Settings open')
- page.get_by_text('Advanced setup options',exact=True).click();page.locator('[name=track_temperature]').check();page.locator('[name=track_slow_feed]').check();page.get_by_role('button',name='Save advanced options').click();page.get_by_role('alert').filter(has_text='Advanced settings saved').wait_for();assert page.locator('#sheet details.advanced:not(.recovery-options)').evaluate('(x)=>x.open');checks.append('Advanced save preserves open sheet and section')
- page.get_by_role('button',name='Close',exact=True).click();page.get_by_role('button',name='Log a Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
+ page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=tasting_preferences]').fill('Fruity clarity');page.get_by_role('button',name='Save Preferences',exact=True).click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();assert page.locator('#sheet').evaluate('(x)=>x.open');checks.append('Preference save leaves Settings open')
+ page.get_by_text('Advanced Setup Options',exact=True).click();page.locator('[name=track_temperature]').check();page.locator('[name=track_slow_feed]').check();page.get_by_role('button',name='Save Advanced Options').click();page.get_by_role('alert').filter(has_text='Advanced settings saved').wait_for();assert page.locator('#sheet details.advanced:not(.recovery-options)').evaluate('(x)=>x.open');checks.append('Advanced save preserves open sheet and section')
+ page.get_by_role('button',name='Close',exact=True).click();page.get_by_role('button',name='Log A Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
  assert page.locator('[name=temperature]').input_value()=='';checks.append('Temperature is optional, not fabricated in actual input')
  assert not page.locator('[name=slowFeed]').is_checked();page.locator('[name=slowFeed]').check();checks.append('New Slow Feed entry can be selected explicitly')
  page.locator('[name=yieldG]').fill('50');page.locator('[name=timeS]').fill('100');page.locator('[name=grindSetting]').fill('0');page.locator('[name=notes]').fill('Synthetic private note')
@@ -112,15 +112,15 @@ with sync_playwright() as p:
  assert edit and current and edit['x']+edit['width']<current['x']
  checks.append('Shot history keeps setup and Slow Feed above taste; Edit and Make Current separately spaced')
  page.screenshot(path=str(OUT/'cloud_history_light.png'),full_page=True)
- page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=theme]').select_option('dark');page.get_by_role('button',name='Save preferences').click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();page.get_by_role('button',name='Close',exact=True).click();assert page.locator('html').get_attribute('data-theme')=='dark';checks.append('Dark appearance persists through save without closing Settings')
+ page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=theme]').select_option('dark');page.get_by_role('button',name='Save Preferences').click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();page.get_by_role('button',name='Close',exact=True).click();assert page.locator('html').get_attribute('data-theme')=='dark';checks.append('Dark appearance persists through save without closing Settings')
  page.screenshot(path=str(OUT/'cloud_home_dark.png'),full_page=True)
- page.evaluate('window.__offline=true');page.get_by_role('button',name='Log a Shot',exact=False).click()
+ page.evaluate('window.__offline=true');page.get_by_role('button',name='Log A Shot',exact=False).click()
  assert page.locator('[name=slowFeed]').is_checked();page.locator('[name=slowFeed]').uncheck()
  checks.append('Next shot preselects last logged Slow Feed setting and can turn it off')
  assert page.locator('[name=grindSetting]').input_value()=='0';page.locator('[name=yieldG]').fill('51');page.locator('[name=timeS]').fill('21')
  for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]').click()
  page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.wait_for_function('!document.querySelector("#sheet").open');assert page.evaluate('window.__memory.events.length')==1;checks.append('Offline shot retained in pending queue and shown locally')
- page.get_by_role('button',name='Settings',exact=True).click();page.get_by_role('button',name='Sign out on this device').click();assert page.evaluate('window.__who!==null');checks.append('Pending changes prevent accidental signout')
+ page.get_by_role('button',name='Settings',exact=True).click();page.get_by_role('button',name='Sign Out On This Device').click();assert page.evaluate('window.__who!==null');checks.append('Pending changes prevent accidental signout')
  page.get_by_role('button',name='Close',exact=True).click();page.evaluate('window.__offline=false;window.__app.sync()');page.wait_for_function('window.__memory.events.length===0');assert page.evaluate('window.__raw.shots.length')==2;checks.append('Reconnect sends pending shot once')
  assert not page.evaluate('window.__raw.setupPreferences[0].slow_feed')
  checks.append('Turning Slow Feed off persists after cloud synchronization')
@@ -134,12 +134,12 @@ with sync_playwright() as p:
  page.locator('#new-coffee [name=roaster]').fill('Sweet-Bloom')
  page.locator('#new-coffee [name=release_label]').fill('2027 harvest')
  old_submission_count=page.evaluate('window.__raw.submissions.length')
- page.get_by_role('button',name='Add coffee',exact=True).click()
- assert page.locator('#sheet-title').inner_text()=='Check for an existing coffee'
+ page.locator('#new-coffee').get_by_role('button',name='Add Coffee',exact=True).click()
+ assert page.locator('#sheet-title').inner_text()=='Check For An Existing Coffee'
  assert page.evaluate('window.__raw.submissions.length')==old_submission_count
  assert page.locator('[data-action=choose-coffee-match]').count()==1
  checks.append('A likely duplicate prompts confirmation rather than writing or merging')
- page.get_by_role('button',name='This is a different coffee').click()
+ page.get_by_role('button',name='This Is A Different Coffee').click()
  page.wait_for_function('!document.querySelector("#sheet").open')
  assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
  assert page.evaluate('window.__raw.submissions.at(-1).proposed_data.roaster')=='Sweet Bloom'
@@ -149,7 +149,7 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Add Coffee',exact=False).click()
  page.locator('#new-coffee [name=name]').fill('Wuri')
  page.locator('#new-coffee [name=roaster]').fill('Sweet Bloom Coffee Roasters')
- page.get_by_role('button',name='Add coffee',exact=True).click()
+ page.locator('#new-coffee').get_by_role('button',name='Add Coffee',exact=True).click()
  page.wait_for_function('!document.querySelector("#sheet").open')
  assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
  assert page.evaluate('window.__raw.library.some(x=>x.coffee_id==="12345678-1234-4123-8123-123456789abc")')

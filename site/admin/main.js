@@ -1,10 +1,12 @@
 import {CLOUD_CONFIG} from '../cloud/config.js';
 import {secureOrigin} from '../cloud/client.js';
 import {e} from '../lib/ui.js';
+import {applyAppearance,readAppearance} from '../cloud/appearance.js';
+applyAppearance(readAppearance(),{remember:false});
 import {renderAdminDashboard,renderAdminDenied} from './view.js';
 
 const root=document.querySelector('#admin-root');
-const notice=message=>`<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back to app</a></header><section class="admin-panel admin-empty"><h1>Admin dashboard unavailable</h1><p>${e(message)}</p></section>`;
+const notice=message=>`<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header><section class="admin-panel admin-empty"><h1>Admin Dashboard Unavailable</h1><p>${e(message)}</p></section>`;
 async function start(){
  try {
   secureOrigin();
@@ -19,6 +21,11 @@ async function start(){
    root.innerHTML=renderAdminDenied();return;
   }
   async function refresh(){
+   try{
+    const {data:preferences,error:appearanceError}=await sdk.from('account_preferences').select('theme').eq('owner_id',identity.user.id).maybeSingle();
+    if(!appearanceError&&preferences?.theme)applyAppearance(preferences.theme);
+   }catch{/* Cosmetic fallback only; administrator authorization stays mandatory. */}
+
    const trigger=document.querySelector('#admin-refresh');if(trigger)trigger.disabled=true;
    const {data,error}=await sdk.rpc('dic_admin_dashboard');
    if(error)throw error;

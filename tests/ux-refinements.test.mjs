@@ -51,7 +51,7 @@ test('shot overview moves setup/basket/feed above compass and separates Edit and
  assert.match(html,/class="primary compact" data-action="edit"/);
  assert.match(html,/class="ghost compact" data-action="make-current"/);
  assert.doesNotMatch(shotCard(sh,{expanded:true,activeVersionId:'other'}),/data-action="make-current"/);
- assert.equal(feedLabel(null),'Feed not recorded');
+ assert.equal(feedLabel(null),'Feed Not Recorded');
 });
 test('new successful shots adjust recommendation windows without Make Current',()=>{
  const raw=rawFixture();
@@ -70,12 +70,11 @@ test('rename_setup acknowledgement only updates the setup display record',()=>{
  assert.equal(next.versions[0].machine_model,'Test machine');
  assert.equal(raw.setups[0].name,'Test Home');
 });
-test('Settings keeps both manual recovery controls collapsed and offers rename',async()=>{
+test('Settings follows approved sections and removes routine Recovery UI',async()=>{
  const main=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
- const extension=await readFile(new URL('../site/cloud/import-integration.js',import.meta.url),'utf8');
- assert.match(main,/class="advanced recovery-options"/);
- assert.match(main,/class=settings-recovery/);
- assert.match(main,/button\('Rename','rename-setup'/);
- assert.match(extension,/\.settings-recovery/);
- assert.doesNotMatch(extension,/\.settings-links/);
+ const settings=main.slice(main.indexOf(' settings(){'),main.indexOf(' showSetup(){'));
+ assert.doesNotMatch(settings,/recovery-options|import-backup|settings-recovery/);
+ assert.match(settings,/button\('Rename','rename-setup'/);
+ for(const [a,b] of [['Active Setup','Add Another Setup'],['Add Another Setup','Advanced Setup Options'],['Admin Dashboard','Cloud Sync Details'],['Cloud Sync Details','Sign Out On This Device']])assert.ok(settings.indexOf(a)<settings.indexOf(b));
+ assert.match(settings,/settings-signout/);
 });

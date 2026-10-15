@@ -4,8 +4,8 @@ import {e} from '../lib/ui.js';
 
 export const formatCount=value=>value!=null&&value!==''&&Number.isSafeInteger(Number(value))&&Number(value)>=0?String(Number(value)):'—';
 export function renderAdminDenied(message='Administrator access required.'){
- return `<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back to app</a></header>
- <section class="admin-panel admin-empty"><h1>Admin access unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
+ return `<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header>
+ <section class="admin-panel admin-empty"><h1>Admin Access Unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
 }
 export function renderAdminDashboard(data={}){
  const stats=data?.counts||{};
@@ -22,15 +22,15 @@ export function renderAdminDashboard(data={}){
   ${item.source_url?`<p class="admin-source">Evidence URL (review manually): <span>${e(item.source_url)}</span></p>`:''}
   <p class="admin-subtle">Review-only preview · No decision has been applied</p>
  </article>`;
- return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back to app</a></div></header>
- <section class="admin-intro"><span class="admin-eyebrow">Private operator dashboard</span><h1>Review queue</h1>
+ return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
+ <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Only genuine coffee identity and source conflicts require attention. This first milestone is read-only.</p></section>
  <section class="admin-stats" aria-label="Application status">
- ${stat('Pending coffees',stats.pending_coffees)}${stat('Conflicts',stats.conflicts)}
- ${stat('Verified coffees',stats.verified_coffees)}${stat('Admitted accounts',stats.active_accounts)}
- ${stat('Logged shots',stats.shot_records)}
+ ${stat('Pending Coffees',stats.pending_coffees)}${stat('Conflicts',stats.conflicts)}
+ ${stat('Verified Coffees',stats.verified_coffees)}${stat('Admitted Accounts',stats.active_accounts)}
+ ${stat('Logged Shots',stats.shot_records)}
  </section>
- <section class="admin-panel"><div class="admin-section-header"><div><h2>Pending coffee verification</h2>
+ <section class="admin-panel"><div class="admin-section-header"><div><h2>Pending Coffee Verification</h2>
  <p class="helper">${formatCount(total)} outstanding · oldest first</p></div></div>
  ${queue.length?queue.map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
  ${total>queue.length?'<p class="helper">Showing the first 50. Further queue navigation will be added before the beta.</p>':''}

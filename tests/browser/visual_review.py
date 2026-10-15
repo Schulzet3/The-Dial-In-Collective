@@ -1,0 +1,139 @@
+"""Private browser screenshots of actual app code with isolated synthetic accounts.
+No live Supabase/Netlify request, screenshot-specific UI, or production mutation.
+Optional DIC_FONT_DIR supplies private rendering fonts (never published as artifacts).
+"""
+from pathlib import Path
+import os,json,base64,re,shutil
+from playwright.sync_api import sync_playwright
+ROOT=Path(__file__).resolve().parents[2]; SITE=ROOT/'site'
+OUT=Path(os.environ.get('DIC_SCREENSHOT_DIR',str(ROOT/'qa_artifacts/visual-review')));OUT.mkdir(parents=True,exist_ok=True)
+FONT_DIR=Path(os.environ.get('DIC_FONT_DIR','/mnt/data/dic-render-assets'))
+# Use the existing synthetic CloudApp adapter; its imports are bundled unchanged.
+base=(ROOT/'tests/browser/cloud_owner_qa.py').read_text().split('checks=[]')[0]
+ctx={'__file__':str(ROOT/'tests/browser/cloud_owner_qa.py')};exec(base,ctx)
+style=(SITE/'styles.css').read_text().split('\n',1)[1]+'\n'+(SITE/'visual.css').read_text()
+font_css=''
+for family,file in [('Fraunces','Fraunces.ttf'),('JetBrains Mono','JetBrainsMono.ttf')]:
+ p=FONT_DIR/file
+ if p.exists():font_css+=f"@font-face{{font-family:'{family}';src:url(data:font/ttf;base64,{base64.b64encode(p.read_bytes()).decode()}) format('truetype');font-weight:100 900;font-style:normal;font-display:block;}}\n"
+setup='''
+window.__admitted=true;window.__who={id:OWNER,email:'review@example.invalid'};
+window.__client.status=async()=>({authenticated:true,admitted:true,admin:true,emailVerified:true});
+window.__raw.preferences.theme=MODE;
+window.__raw.preferences.tasting_preferences='Sweet, balanced espresso with fruit-forward clarity.';
+window.__raw.setups[0].name='Home Espresso';
+window.__raw.setupPreferences[0].track_temperature=true;
+window.__raw.setupPreferences[0].track_slow_feed=true;
+window.__raw.setupPreferences[0].slow_feed=true;
+window.__raw.submissions[0].proposed_data={name:'Yirgacheffe',roaster:'Example Roaster',origin:'Yirgacheffe, Ethiopia',roast_level:'Light-Medium',elevation_m:'1700-2200',process:'Washed',variety:'Heirloom',tasting_notes:'Berries, floral, citrus'};
+window.__raw.submissions[0].status='approved';
+window.__raw.coffees=[{id:'verified-coffee',name:'Yirgacheffe',roaster:'Example Roaster',origin:'Yirgacheffe, Ethiopia',roast_level:'Light-Medium',process:'Washed',variety:'Heirloom',tasting_notes:'Berries, floral, citrus',verification_state:'verified'}];
+window.__raw.library[0].coffee_id='verified-coffee';
+window.__raw.workspaces[0].current_library_entry_id='coffee';
+window.__raw.shots=[rawShot({id:'review-a',grind_setting:1,temperature_c:89.4,feed_mode:'slow',pulled_at:'2026-10-14T14:00:00Z'}),rawShot({id:'review-b',yield_g:51,time_s:23,grind_setting:1,temperature_c:89.4,feed_mode:'slow',pulled_at:'2026-10-13T14:00:00Z'}),rawShot({id:'review-c',yield_g:36.5,time_s:30.5,grind_setting:.4,style:'Traditional',temperature_c:89.4,feed_mode:'standard',personal_family_id:'trad-family',pulled_at:'2026-10-12T14:00:00Z'})];
+window.__raw.notes=[{owner_id:OWNER,shot_id:'review-a',notes:'Sweet berry finish with a clean, silky body.'}];
+window.__raw.families=[{id:'family',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.8}},created_at:TIME}];
+window.__raw.recipePreferences=[{setup_version_id:'version',library_entry_id:'coffee',style:'Turbo',current_family_id:'family',revision:1}];
+window.__raw.submissions.push({id:'sub-two',proposed_data:{name:'Honey Process',roaster:'Example Roaster',origin:'Costa Rica',roast_level:'Medium'},status:'pending'});
+window.__raw.library.push({id:'coffee-two',owner_id:OWNER,submission_id:'sub-two',created_at:TIME});
+window.__app.identity=window.__who;window.__app.connect();
+'''
+checks=[];errors=[];manifest=[]
+def check(condition,label):
+ assert condition,label
+ checks.append(label)
+def fonts(page):
+ page.evaluate('()=>document.fonts.ready');page.wait_for_timeout(60)
+def shot(page,name,selector=None):
+ fonts(page)
+ dest=OUT/(name+'.png')
+ if selector:
+  # Resize the review viewport to capture all modal content, then reset scroll.
+  height=page.locator('.sheet-content').evaluate('(e)=>e.scrollHeight')+page.locator('.sheet-header').evaluate('(e)=>e.offsetHeight')+130
+  page.set_viewport_size({'width':page.viewport_size['width'],'height':max(980,int(height*1.1))})
+  page.locator('.sheet-content').evaluate('(e)=>e.scrollTop=0')
+  page.locator(selector).screenshot(path=str(dest),animations='disabled')
+ else:page.screenshot(path=str(dest),full_page=True,animations='disabled')
+ manifest.append({'name':name,'file':dest.name})
+def boot(browser,mode,width=430,height=980,admin=False):
+ page=browser.new_page(viewport={'width':width,'height':height},device_scale_factor=2,color_scheme=mode)
+ page.set_default_timeout(7000);page.on('pageerror',lambda e:errors.append(str(e)))
+ # No actual service endpoint can be fetched by these fixtures.
+ page.route('**/*',lambda route:route.abort())
+ html='<div id="app"></div><dialog id="sheet" aria-labelledby="sheet-title"></dialog><div id="toasts" class="toasts" role="status"></div>'
+ page.set_content('<!doctype html><html><head><meta name="theme-color" content="#f4eee4"><style>'+font_css+style+'</style></head><body>'+html+'</body></html>')
+ page.add_script_tag(content=ctx['bundle']());page.add_script_tag(content=ctx['fixture']+'\n'+ctx['mock'])
+ page.add_script_tag(content='const MODE='+json.dumps(mode)+';\n'+setup)
+ page.locator('.current-mark').wait_for();fonts(page)
+ return page
+with sync_playwright() as p:
+ browser=p.chromium.launch(executable_path=shutil.which('chromium') or shutil.which('chromium-browser') or None,headless=True,args=['--no-sandbox'])
+ for mode in ['light','dark']:
+  page=boot(browser,mode)
+  check(page.locator('html').get_attribute('data-theme')==mode,mode+': saved appearance applied')
+  check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': home has no overflow')
+  check(page.locator('.browse-toggle').evaluate('(e)=>getComputedStyle(e).borderTopStyle')=='solid',mode+': Search & Sort is visibly outlined')
+  check(page.locator('.status-badge').first.evaluate('(e)=>parseFloat(getComputedStyle(e).borderTopWidth)>=1'),mode+': status badge has a distinct edge')
+  check(page.locator('.workspace-bar h2').evaluate('(e)=>getComputedStyle(e).fontVariantLigatures')=='none',mode+': display ligatures disabled')
+  shot(page,'01-home-'+mode)
+  page.locator('[data-action=search-toggle]').click();check(page.locator('.search-tools').is_visible(),mode+': Search & Sort expands')
+  shot(page,'02-search-'+mode)
+  page.locator('[data-action=search-toggle]').click()
+  page.locator('[data-action=settings]').click()
+  check(page.locator('.recovery-options').count()==0,mode+': Recovery Options removed')
+  check(page.locator('.settings-signout').locator('[data-action=signout]').count()==1,mode+': Sign Out is last and icon-labelled')
+  check(page.locator('.settings-row[data-action=new-setup]').count()==1,mode+': Add Another Setup grouped with active setup')
+  shot(page,'03-settings-'+mode,'#sheet')
+  page.locator('.settings-advanced summary').click();shot(page,'04-settings-advanced-'+mode,'#sheet')
+  page.locator('[data-action=close]').click();page.locator('[data-action=log]').first.click()
+  check(page.locator('[name=yieldG]').input_value()=='',mode+': actual yield remains blank')
+  check(page.locator('[name=timeS]').input_value()=='',mode+': actual time remains blank')
+  page.locator('[name=yieldG]').fill('50');page.locator('[name=timeS]').fill('22')
+  for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]').click()
+  # Tall review viewport captures the entire actual scrollable form without altering its CSS.
+  page.set_viewport_size({'width':430,'height':1700});shot(page,'05-log-shot-'+mode,'#sheet')
+  page.locator('[data-action=close]').click();page.set_viewport_size({'width':430,'height':980})
+  page.locator('details[data-retain="history-coffee"] summary').click();page.locator('[data-action=shot-expand]').first.click()
+  check(page.locator('.shot-body [data-action=edit]').count()==1,mode+': historical Edit preserved')
+  check(page.locator('.shot-body [data-action=make-current]').count()==1,mode+': Make Current Recipe remains separate')
+  shot(page,'06-history-'+mode)
+  page.locator('[data-action=add]').click();shot(page,'07-add-coffee-'+mode,'#sheet');page.locator('[data-action=close]').click()
+  page.locator('[data-action=sync]').first.click();check(page.locator('#sheet [data-action=export]').count()==0,mode+': no routine recovery export when synced');shot(page,'08-sync-'+mode,'#sheet');page.locator('[data-action=close]').click()
+  page.locator('[data-action=style]').first.click();shot(page,'09-style-'+mode,'#sheet');page.locator('[data-action=close]').click()
+  # Denied/non-admin front-end fixture. Real user authorization is a separate gate.
+  page.evaluate('window.__app.status.admin=false;window.__app.settings()')
+  check(page.locator('[data-action=open-admin]').count()==0,mode+': non-admin Settings has no Admin Dashboard link')
+  page.locator('[data-action=close]').click()
+  # Capture real auth page markup with synthetic signed-out state.
+  page.evaluate('window.__app.identity=null;window.__app.status=null;window.__app.authView="signin";window.__app.render()')
+  shot(page,'10-sign-in-'+mode)
+  page.evaluate('window.__app.authView="check-email";window.__app.confirmationEmail="review@example.invalid";window.__app.render()')
+  shot(page,'11-confirm-email-'+mode)
+  page.close()
+  # Actual administrator JS running against an isolated read-only SDK fixture.
+  page=browser.new_page(viewport={'width':1120,'height':1050},device_scale_factor=2,color_scheme=mode);page.set_default_timeout(7000)
+  page.on('pageerror',lambda e:errors.append(str(e)));page.route('**/*',lambda route:route.abort())
+  page.set_content('<html><head><meta name="theme-color"><style>'+font_css+(SITE/'styles.css').read_text().split('\n',1)[1]+(SITE/'admin/styles.css').read_text()+ (SITE/'visual.css').read_text()+'</style></head><body><main id="admin-root" class="admin-shell"></main></body></html>')
+  main=(SITE/'admin/main.js').read_text()
+  main=re.sub(r"^import .*?;\n",'',main,flags=re.M)
+  shared=(SITE/'cloud/appearance.js').read_text().replace('export ','')
+  view=(SITE/'admin/view.js').read_text();view=re.sub(r"^import .*?;\n",'',view,flags=re.M).replace('export ','')
+  sdk='''const CLOUD_CONFIG={enabled:true};const secureOrigin=()=>{};let requests=[];const sdk={auth:{getUser:async()=>({data:{user:{id:'review-owner'}}})},from:()=>({select:()=>({eq:()=>({maybeSingle:async()=>({data:{theme:MODE}})})})}),rpc:async(name)=>{requests.push(name);return {data:name==='dic_session_status'?{authenticated:true,admitted:true,admin:true}:{counts:{pending_coffees:0,conflicts:0,verified_coffees:4,active_accounts:1,shot_records:14},queue_total:0,queue:[]}}}};globalThis.supabase={createClient:()=>sdk};'''
+  escaped="const e=x=>String(x??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));"
+  page.add_script_tag(content='const MODE='+json.dumps(mode)+';'+escaped+shared+view+sdk+main)
+  page.locator('#admin-refresh').wait_for();check(page.locator('html').get_attribute('data-theme')==mode,mode+': Admin reads saved account appearance')
+  page.locator('#admin-refresh').click();check(page.evaluate('requests.filter(x=>x==="dic_admin_dashboard").length')>=2,mode+': Admin Refresh remains read-only')
+  check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin has no horizontal overflow')
+  shot(page,'12-admin-'+mode)
+  page.set_viewport_size({'width':390,'height':1100});shot(page,'13-admin-mobile-'+mode)
+  check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin mobile has no horizontal overflow')
+  page.close()
+ for width in [320,375,390,768,1280]:
+  page=boot(browser,'dark',width,1100)
+  check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),f'{width}px: home no horizontal overflow')
+  page.locator('[data-action=settings]').click();check(page.locator('#sheet').evaluate('(e)=>e.scrollWidth<=e.clientWidth'),f'{width}px: Settings fits')
+  page.close()
+ browser.close()
+check(not errors,'No JavaScript exceptions during visual review')
+report={'passed':len(checks),'checks':checks,'screenshots':manifest,'fonts_loaded_from_files':(FONT_DIR/'Fraunces.ttf').exists(),'scope':'Chromium renders actual edited app/admin code with mocked authentication and synthetic records. Not real nonadmin Auth verification. No production writes or Netlify deploy.'}
+(OUT/'review-results.json').write_text(json.dumps(report,indent=2));print(json.dumps({'passed':len(checks),'screenshots':len(manifest),'output':str(OUT)},indent=2))
