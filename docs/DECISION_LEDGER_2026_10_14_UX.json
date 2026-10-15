@@ -73,6 +73,24 @@
       "integrity": "First submitted spelling retained globally; no older canonical changed merely because a later user spelled a roaster/coffee differently. Protect different harvests, source variants, producer/origin conflicts, account isolation and all shot/family relationships. Explicit stable-id confirmation is allowed only for compatible Pending-to-canonical matches.",
       "operational": "No service subscription required, no AI calls; source workers limited to curated official HTTPS product URLs, JWT authorization, manual redirect rejection, bounded HTML and rate limits. GitHub/Supabase remain source of truth while Netlify credit-paused.",
       "implementation_status": "Core Supabase auto catalog and source worker target applied; real owner's four coffee submissions approved; Edge function and browser CI integration under test, Netlify intentionally unpublished."
+    },
+    {
+      "id": "DOMAIN-20261014-01",
+      "status": "Locked",
+      "topic": "App hostname and future homepage",
+      "owner_approval_date": "2026-10-14",
+      "decision": "Use https://app.dialincollective.com for the application and admin portal on the existing protected Netlify site. Reserve dialincollective.com for a future homepage; until ready, redirect the apex to the app only after verified TLS, login callbacks, and SSO.",
+      "constraints": "No new site, purchase, extra production deployment, weakening of auth/SSO/beta restrictions, or changes to the independent auth.dialincollective.com email subdomain. DNS, HTTPS and Supabase redirects must be verified separately.",
+      "implementation_status": "Owner approved the hostname plan. Netlify hostname association, Cloudflare web DNS, and apex redirect have not yet been verified; connected tools do not expose those changes."
+    },
+    {
+      "id": "DOCS-20261014-01",
+      "status": "Approved future deliverable",
+      "topic": "User education and walkthrough",
+      "owner_approval_date": "2026-10-14",
+      "decision": "Provide accessible instructions and/or a video walkthrough that covers the functions available in the launched app. Keep it friendly to beginners and emphasize Log Shot -> Rate -> Recommendation.",
+      "remaining_open": "Written versus video format, placement, and timing are not locked. Build against the released feature set so material stays accurate; differentiate member and admin features.",
+      "implementation_status": "Roadmap recorded; no content/video published and no hosting changes."
     }
   ],
   "unchanged_release_gates": [
