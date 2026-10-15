@@ -189,5 +189,25 @@
     "isolated_restore": "Separate live-source isolated PostgreSQL run 38651515568 passed all 41 application/private tables and core Auth fingerprints, including 4 verified coffees and 14 historical shots.",
     "limitations": "Not a direct restore of the exact Drive ciphertext into hosted Supabase; hosted Auth/SMTP/OAuth/configuration and genuine non-admin-user browser workflow are outstanding.",
     "impact": "No change to Locked product requirements; no Netlify publishing, billing, key transfer or import gate changes."
+  },
+  "real_account_preflight_2026_10_14": {
+    "state": "Database authorization/practical privacy preflight PASS; real external HTTP Auth/email/session and source-verification E2E still outstanding.",
+    "checked_against_live_catalog": {
+      "verified_canonical_coffees": 4,
+      "owner_historical_shots": 14,
+      "original_owner_library_entries": 4,
+      "admitted_real_accounts": 1
+    },
+    "validated_sql": [
+      "supabase/tests/coffee_automated_approval.sql — passed against populated catalog in rollback-only transaction",
+      "supabase/tests/coffee_identity_matching.sql — passed against populated catalog in rollback-only transaction",
+      "supabase/tests/admin_read_only_dashboard.sql — corrected for existing actual owner admin, passed distinct role isolation and sanitized view in rollback",
+      "supabase/tests/pre_release_cross_account.sql — passed cross-account RLS, global catalog visibility and protected verifier role isolation in rollback"
+    ],
+    "automated_build_change": "Reproducible cloud-regression CI now uses npm ci (checked-in dependency lockfile) and explicit ubuntu-24.04.",
+    "next_human_gate": "After owner reports newly available Netlify production credits, publish a single owner-approved release; owner signs in privately, confirms 4 coffees/14 historical shots/admin, then separately invite an authorized real nonadmin after custom SMTP confirmed.",
+    "ownership_security": "No passwords, session JWTs, refresh tokens, Auth secrets or private backup keys should be given to ChatGPT or committed to GitHub.",
+    "release_guard": "No Netlify publish and no loosening SSO, RLS, import gate or admission.",
+    "locked_decisions_changed": []
   }
 }

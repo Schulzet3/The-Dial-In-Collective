@@ -11,6 +11,7 @@ on:
       - 'tests/**'
       - 'build_cloud.mjs'
       - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/cloud-regression.yml'
   pull_request:
     branches:
@@ -21,6 +22,7 @@ on:
       - 'tests/**'
       - 'build_cloud.mjs'
       - 'package.json'
+      - 'package-lock.json'
       - '.github/workflows/cloud-regression.yml'
   workflow_dispatch:
 
@@ -29,7 +31,7 @@ permissions:
 
 jobs:
   cloud-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
@@ -39,7 +41,7 @@ jobs:
         with:
           node-version: '22'
       - name: Install locked runtime dependencies
-        run: npm install --ignore-scripts --no-audit --no-fund
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Cloud unit and regression tests
         run: npm test
       - name: Syntax check
@@ -51,7 +53,7 @@ jobs:
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_build_only_not_for_deployment
 
   mobile-browser-qa:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
