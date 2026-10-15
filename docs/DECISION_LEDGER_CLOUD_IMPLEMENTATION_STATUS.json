@@ -176,9 +176,18 @@
     ],
     "migration_sync": "All three applied Supabase SQL texts byte-for-byte match GitHub source.",
     "pending_issues": [
-      "Post-import encrypted offsite backup freshness not yet reverified",
+      "Post-import encrypted offsite ZIP delivered, hash-matched, owner-reported decrypted/integrity PASS 6/6; separate fresh-source isolated restore passed; full hosted provider recovery remains outstanding.",
       "Source verifier needs actual real-user/JWT/roaster page validation after owner UI release",
       "Verified-to-verified canonical conflicts require separate audited reconciliation without touching shot IDs"
     ]
+  },
+  "backup_private_key_verification_2026_10_14": {
+    "status": "Completed for owner-development recovery milestone; owner-reported local verifier PASS 6/6 on latest extracted backup.age.",
+    "artifact": "dic-nightly-11934399256.zip, encrypted backup.age",
+    "delivery": "Private Google Drive and original GitHub ZIP independently checksum-matched (SHA-256 4cd62b5ee672712e2b12fb0aebc690acfb74b6a9124c6cdd7fea1131adb4c121).",
+    "decryption": "User explicitly reported all six checks passing using their previously saved private key and the corrected Mac verifier. No decrypted content, terminal output or private key received.",
+    "isolated_restore": "Separate live-source isolated PostgreSQL run 38651515568 passed all 41 application/private tables and core Auth fingerprints, including 4 verified coffees and 14 historical shots.",
+    "limitations": "Not a direct restore of the exact Drive ciphertext into hosted Supabase; hosted Auth/SMTP/OAuth/configuration and genuine non-admin-user browser workflow are outstanding.",
+    "impact": "No change to Locked product requirements; no Netlify publishing, billing, key transfer or import gate changes."
   }
 }
