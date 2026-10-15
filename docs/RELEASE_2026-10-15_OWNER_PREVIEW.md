@@ -21,7 +21,7 @@ This file records release intent and preflight evidence; creating it is **not** 
 This deliberately marked commit requests **one** production deployment. No routine development commit should deploy. Netlify must run `npm test && npm run build:cloud` with published secret-free assets. Keep team SSO, RLS, beta admission, recovery gates and owner data intact. Do not remove SSO before actual owner and genuine invited nonadmin browser checks pass. Avoid unnecessary redeployments.
 
 ## After publish — checks not yet completed
-- [ ] Netlify shows one newly published **ready** deployment with commit SHA equal to this release commit; HTTPS and SSO remain active.
+- [x] Verified 2026-10-15: Netlify published deployment `6ad1065eb1608955698efb7b` in `ready` state with SHA `acc7a47c9dc33a412fcf7cd82b0c7d09796a44c8`, HTTPS `https://app.dialincollective.com`, required Netlify team SSO, and 0 secret-scan matches across 122 scanned files.
 - [ ] Owner signs in on `app.dialincollective.com` to the **new** build; confirms all 4 coffees, all 14 shots, Settings, admin dashboard, and Log Shot → Rate → Recommendation without fabricated owner data.
 - [ ] Test real password-reset redirect on the new hostname; verify source-backed coffee behavior using genuine sessions.
 - [ ] Owner-approved outside participant registers/confirms by Resend and demonstrates nonadmin RLS and no admin access; only then consider removing the Netlify SSO gate.

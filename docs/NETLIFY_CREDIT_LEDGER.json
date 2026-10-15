@@ -52,9 +52,22 @@
     "credits_on_free_plan_are_hard_limit": true,
     "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
     "no_unattended_paid_topups": true,
-    "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum."
+    "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
+    "post_release_billing_refresh_needed": true,
+    "last_published_release": {
+      "deploy_id": "6ad1065eb1608955698efb7b",
+      "published_commit_sha": "acc7a47c9dc33a412fcf7cd82b0c7d09796a44c8",
+      "published_at_utc": "2026-10-15T16:59:22.534Z",
+      "netlify_status": "ready",
+      "sso_protected": true,
+      "primary_hostname": "https://app.dialincollective.com",
+      "scanned_files": 122,
+      "secret_scan_matches": 0,
+      "actual_credits_deducted": "Not yet independently confirmed in Netlify Billing after publish",
+      "planned_cost_credits": 15
+    }
   },
-  "reconciliation": "After each confirmed Netlify publish, verify deploy SHA and refresh this ledger from Netlify's usage breakdown. A GitHub commit, deploy request or skipped build does not prove a billable Netlify production deploy.",
+  "reconciliation": "The 1000-plan-credit screenshot predates the successful 2026-10-15 owner-preview publish. Keep its 1000 remaining as a historical pre-deploy observation, NOT a claimed current balance. Block further marked production releases until a fresh post-deploy provider billing snapshot is recorded and post_release_billing_refresh_needed is explicitly cleared. GitHub documentation-only edits must continue skipping production publication.",
   "scheduled_plan_change": {
     "plan": "Free",
     "timing": "After current Oct 15-Nov 14 Personal period",

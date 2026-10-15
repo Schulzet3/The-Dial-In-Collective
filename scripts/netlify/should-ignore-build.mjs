@@ -25,6 +25,8 @@ export function decide({context,branch,subject,ledger,today}){
     return {ignore:true,reason:'Credit snapshot missing or internally inconsistent'};
   if(remaining<cost)
     return {ignore:true,reason:'Insufficient verified Netlify credits for production release'};
+  if(ledger.release_policy?.post_release_billing_refresh_needed===true)
+    return {ignore:true,reason:'Post-release Netlify credit refresh required before another production deploy'};
   const date=snapshot?.observed_date, d=typeof date==='string'?Date.parse(date+'T00:00:00Z'):NaN;
   const now=typeof today==='string'?Date.parse(today+'T00:00:00Z'):NaN;
   if(!Number.isFinite(d)||!Number.isFinite(now)||(now-d)/86400000<0||

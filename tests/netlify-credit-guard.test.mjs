@@ -4,11 +4,14 @@ import {readFileSync} from 'node:fs';
 import {decide} from '../scripts/netlify/should-ignore-build.mjs';
 
 const ledger=JSON.parse(readFileSync(new URL('../docs/NETLIFY_CREDIT_LEDGER.json',import.meta.url),'utf8'));
+const simulatedFreshLedger=structuredClone(ledger);
+simulatedFreshLedger.release_policy.post_release_billing_refresh_needed=false;
 const baseline={context:'production',branch:'development/backend-foundation',
- subject:'Release DIC: bundled tested fixes [dic-publish]',today:'2026-10-15',ledger};
+ subject:'Release DIC: bundled tested fixes [dic-publish]',today:'2026-10-15',ledger:simulatedFreshLedger};
 
 function withUsage(used,date='2026-10-15',remaining=Math.max(0,ledger.monthly_included_credits-used)){
  const copy=structuredClone(ledger);
+ copy.release_policy.post_release_billing_refresh_needed=false;
  copy.snapshots[copy.snapshots.length-1]={...copy.snapshots.at(-1),
   observed_total_used_credits:used,observed_remaining_credits:remaining,observed_date:date};
  return copy;
@@ -35,6 +38,12 @@ test('owner-confirmed Personal plan gives 1000 deployable credits until Nov 14',
  assert.equal(snapshot.operational_credits_not_usable_for_production_deploy,true);
  assert.equal(snapshot.auto_recharge_enabled,false);
  assert.equal(ledger.scheduled_plan_change.plan,'Free');
+});
+
+test('a completed production release requires new observed credits before another release',()=>{
+ const r=decide({...baseline,ledger});
+ assert.equal(r.ignore,true);
+ assert.match(r.reason,/refresh/);
 });
 
 test('current verified plan credits permit only a marked release',()=>{
