@@ -81,7 +81,8 @@
       "owner_approval_date": "2026-10-14",
       "decision": "Use https://app.dialincollective.com for the application and admin portal on the existing protected Netlify site. Reserve dialincollective.com for a future homepage; until ready, redirect the apex to the app only after verified TLS, login callbacks, and SSO.",
       "constraints": "No new site, purchase, extra production deployment, weakening of auth/SSO/beta restrictions, or changes to the independent auth.dialincollective.com email subdomain. DNS, HTTPS and Supabase redirects must be verified separately.",
-      "implementation_status": "Owner approved the hostname plan. Netlify hostname association, Cloudflare web DNS, and apex redirect have not yet been verified; connected tools do not expose those changes."
+      "implementation_status": "Verified 2026-10-15: app.dialincollective.com is the existing Netlify project's primary domain with Let's Encrypt HTTPS; owner opened app and completed real existing-account sign-in; Supabase Site URL and Redirect allowlist updated by owner while preserving netlify.app fallback; Cloudflare apex dialincollective.com redirects to app domain; existing Resend Auth sender and Cloudflare support forwarding were each confirmed via real email receipts. Existing Netlify team SSO remains enabled. Updated cloud UI and outside-user login are still awaiting a single controlled release and real nonadmin acceptance.",
+      "verification_basis": "Owner-confirmed browser/screenshots plus connected Netlify site/deploy state, not a new production deployment."
     },
     {
       "id": "DOCS-20261014-01",
