@@ -1,0 +1,22 @@
+name: DIC private visual review
+on:
+  push:
+    branches: [work/visual-refresh-20261015]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Archive tracked source only for private local review
+        run: git archive --format=tar.gz HEAD -o /tmp/dic-visual-source.tar.gz
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dic-visual-source
+          path: /tmp/dic-visual-source.tar.gz
+          retention-days: 1

@@ -6,6 +6,9 @@ import {readFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 
 export function decide({context,branch,subject,ledger,today}){
+  // Owner requested screenshots before any Netlify publication, including previews.
+  if(branch==='work/visual-refresh-20261015')
+    return {ignore:true,reason:'Private visual review: no Netlify deployment authorized'};
   if(context==='deploy-preview'||context==='branch-deploy')
     return {ignore:false,reason:'No-credit preview/branch build'};
   if(context!=='production')
