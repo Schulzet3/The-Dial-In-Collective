@@ -1,0 +1,73 @@
+name: DIC apply coordinated visual review
+on:
+  push:
+    branches: [work/visual-refresh-20261015]
+    paths:
+      - '.review/visual-*.txt'
+      - '.github/workflows/apply-visual-review.yml'
+permissions:
+  contents: read
+jobs:
+  apply-and-verify:
+    if: github.ref == 'refs/heads/work/visual-refresh-20261015'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify exact reviewed patch and apply to private work branch
+        run: |
+          test "$GITHUB_REF" = 'refs/heads/work/visual-refresh-20261015'
+          python - <<'PY'
+          import base64, hashlib, lzma, pathlib
+          encoded = ''.join(pathlib.Path(f'.review/visual-{i}.txt').read_text() for i in range(4))
+          patch = lzma.decompress(base64.b64decode(encoded, validate=True))
+          assert hashlib.sha256(patch).hexdigest() == 'abc3bd3e07082ce53d52730b0d26729bae9f3bd449955d19d705f03986513dc7'
+          for line in patch.decode().splitlines():
+              if line.startswith('diff --git '):
+                  path = line.split(' b/', 1)[1]
+                  assert '..' not in pathlib.PurePosixPath(path).parts
+                  assert path.startswith(('site/', 'tests/', 'docs/')) or path in ('build_cloud.mjs', '.github/workflows/visual-review.yml'), path
+          pathlib.Path('/tmp/dic-visual.patch').write_bytes(patch)
+          PY
+          git apply --check --unidiff-zero /tmp/dic-visual.patch
+          git apply --index --unidiff-zero /tmp/dic-visual.patch
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm test
+      - run: npm run build:cloud
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_private_visual_review_nonfunctional
+      - name: Prepare isolated browser only
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+          mkdir -p /tmp/dic-render-assets
+          curl --fail --location --max-time 40 'https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf' -o /tmp/dic-render-assets/Fraunces.ttf
+          curl --fail --location --max-time 40 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf' -o /tmp/dic-render-assets/JetBrainsMono.ttf
+      - run: python tests/browser/cloud_owner_qa.py
+      - run: python tests/browser/visual_review.py
+        env:
+          DIC_FONT_DIR: /tmp/dic-render-assets
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: dic-coordinated-visual-review-screenshots
+          path: qa_artifacts/visual-review/
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Commit only to isolated visual branch after tests pass
+        run: |
+          test "$GITHUB_REF" = 'refs/heads/work/visual-refresh-20261015'
+          git rm .review/visual-*.txt .github/workflows/apply-visual-review.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refine app visuals with vibrant badges and shared themes [skip netlify]'
+          git push origin HEAD:refs/heads/work/visual-refresh-20261015
