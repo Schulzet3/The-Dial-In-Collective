@@ -1,6 +1,6 @@
 # Managed Supabase recovery drill — October 16, 2026
 
-**Latest acceptance (2026-10-16): CORE HOSTED RESTORE PASS** — new Supabase and protected Netlify application rebuilt, real archived Auth account/data restored, owner logged in using original account and verified four coffees, 14 shots and working Admin Dashboard. **Some wider disaster scenarios remain NOT VERIFIED** (see final acceptance section). Earlier PARTIAL checkpoints below are chronological evidence only; their former 'next' steps are superseded.
+**FINAL OPERATIONAL STATUS (2026-10-16): CORE HOSTED RESTORE PASS; TEMPORARY PROJECTS DELETED AND VERIFIED** — new Supabase and protected Netlify application rebuilt, real archived Auth account/data restored, owner logged in using original account and verified four coffees, 14 shots and working Admin Dashboard. **Some wider disaster scenarios remain NOT VERIFIED** (see final acceptance section). Earlier PARTIAL checkpoints below are chronological evidence only; their former 'next' steps are superseded.
 
 ## Authorization, cost and separation
 
@@ -176,3 +176,19 @@ After owner acceptance and temporary Supabase pause submission, another independ
 The owner's source Cloudflare BIND export `dialincollective.com.txt` was finally received and the actual **11/11 app/mail DNS records** validated against earlier screenshot inventory. Its full DKIM TXT entries (2048/1024-bit RSA public keys), original domain-ownership verification string, exact MX priorities **route1 38 / route2 2 / route3 92**, NS/SOA, proxy flags and SPF are preserved in a private owner-download `DIC_DNS_Recovery_Verified_2026-10-16.zip` (SHA-256 `1860c9dc4f2112bfc0e3ec2649e206e7a9f759615183a6bdee8087752d461916`). Source SHA-256 `03fce53bd1c2b892df03d0583a5e5f86827a82aa84961ecfce55622f52852598`. Offline parsing and ZIP integrity check PASS. Exact private TXT text deliberately not stored in GitHub documentation. See [DNS_PROVIDER_FAILOVER_READINESS_2026-10-16.md](DNS_PROVIDER_FAILOVER_READINESS_2026-10-16.md).
 
 **DNS documentation PASS is distinct from an actual live alternate DNS-provider cutover**, which remains NOT TESTED; Cloudflare proprietary redirect/email-forwarding services are not contained in BIND export. The user's successful managed Supabase+Netlify full archived-account restore remains independently PASS. No live DNS changes, provider subscription purchases, or product-decision changes. Temporary project cleanup is still authorized without doing a high-risk production nameserver migration.
+
+
+## FINAL TEARDOWN VERIFIED — recovery projects deleted after owner acceptance — 2026-10-16
+
+**Owner reported completion of the previously requested three cleanup actions.** Independent provider verification after the report:
+
+| Target | Provider-verifiable result | Provenance |
+| --- | --- | --- |
+| **Supabase recovery** `bgstplvefumsnplhqpvd` | **REMOVED** from Supabase's project list. A direct project-details lookup returns a permissions error after deletion. | The provider lists only `azviqqejypsefzilgonr` (production), which remains `ACTIVE_HEALTHY`. |
+| **Netlify recovery** `fd4a4dba-0c71-4b06-be63-9f5f689aba1b` / `dic-recovery-20261016` | **DELETED** from Netlify's sites list; direct project-details lookup returns **404**. | Netlify lists only production `153277f2-e19e-4862-b9a6-f2e18ccde271`, original deploy `6ad24660d0c6bdff2c065586` remains `ready` and production visitor-access settings remain unchanged. |
+| **Resend recovery-only Sending key** | **Owner reports revoked/deleted. NOT independently verified** (no connected Resend key-administration API). | Owner's earlier “Done” followed the explicit instructions to revoke **DIC Recovery Test** specifically and not the production SMTP key. |
+| **Encrypted scheduled backup workflow** | **PRESENT** at `.github/workflows/nightly-backup.yml` on `main`; untouched. | GitHub source check after teardown. |
+
+The temporary projects were expressly created for **disposable**, isolated disaster-recovery testing. Their deletion **does not remove** production database, application deployment, encrypted GitHub/Drive archives, owner Mac private recovery identity (`~/.dic-backup/`), complete DNS zone export, or documented procedures. The earlier steps in this chronological report that refer to an *active* or *paused* recovery project are **historical** and superseded by this final teardown checkpoint.
+
+**Final classification:** Hosted rebuild, verified exact archived app/Auth data, recovery-email confirmation, real restored admin/browser access **PASS**, post-test disposable resource teardown **PASS for Supabase/Netlify, owner-confirmed for recovery Resend key**. Other exceptional disaster scenarios explicitly **NOT VERIFIED**, not represented as product/Locked requirements waived. DNS cutover was neither needed nor performed. Return attention to pending product beta acceptance: authentic nonadmin New Coffee URL→verification/Pending, phone Safari/offline/multi-device behavior, and other documented security/readiness gates. No need to create another recovery project just for housekeeping.
