@@ -17,7 +17,8 @@ test('standalone literal UI labels keep approved Title Case for both themes',()=
  const bad=[];
  for(const {source,text} of labels){
   if(sentence(text))continue;
-  const lowered=[...text.matchAll(/(?:^|[\s/·(-])([a-z])/g)].map(x=>x[1]);
+  const normal=text.replace(/\s*\((?:g|s|kg|mL|ml|°F|°C)\)/g,''); // SI measurement units are lowercase by design.
+  const lowered=[...normal.matchAll(/(?:^|[\s/·(-])([a-z])/g)].map(x=>x[1]);
   if(lowered.length)bad.push(source+': '+text);
  }
  assert.deepEqual(bad,[]);
