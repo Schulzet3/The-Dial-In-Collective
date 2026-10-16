@@ -61,7 +61,7 @@
     "maximum_snapshot_age_days": 7,
     "must_pass_tests_before_release": true,
     "release_marker": "Release DIC: ... [dic-publish]",
-    "budget_rule": "One fully tested, deliberately batched production release per approved bundle. Production credits come only from the 1,000 Personal plan credits, never the 29.6 operational credits. No deploy on stale/unknown billing data or failing CI. Do not exhaust credits or alter SSO, beta restrictions, or recovery controls.",
+    "budget_rule": "One fully tested, deliberately batched production release per approved bundle. Production credits come only from the 1,000 Personal plan credits, never the 29.6 operational credits. No deploy on stale/unknown billing data or failing CI. Do not exhaust credits, reinstate the explicitly removed production Netlify login, weaken non-production SSO, or alter beta restrictions or recovery controls without owner approval.",
     "manual_refresh_required": "Refresh the latest Netlify team usage snapshot before release or after the billing cycle resets. Current Netlify connector does not expose the live billing balance.",
     "credits_on_free_plan_are_hard_limit": true,
     "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
@@ -81,11 +81,20 @@
       "planned_cost_credits": 15
     }
   },
-  "reconciliation": "The October 16 owner-observed 985-credit snapshot is now historical PRE-RELEASE evidence. Verified publication of 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8 consumed a planned 15 credits, but the actual remaining balance has not been read from Billing. Do not record 970 as observed. Further production releases are blocked until a fresh provider snapshot is recorded and the refresh flag is cleared.",
+  "reconciliation": "The October 16 owner-observed 985-credit snapshot is now historical PRE-RELEASE evidence. Verified publication of 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8 consumed a planned 15 credits, but the actual remaining balance has not been read from Billing. Do not record 970 as observed. Further production releases are blocked until a fresh provider snapshot is recorded and the refresh flag is cleared. Subsequent to the published release, the owner explicitly approved removing extra Netlify team SSO from PRODUCTION only. Non-production previews retain SSO. The deployment SHA did not change. This is recorded in current_visitor_access_as_of_2026_10_16; do not treat the older deployment metadata sso_protected=true as current or unilaterally reinstate it.",
   "scheduled_plan_change": {
     "plan": "Free",
     "timing": "After current Oct 15-Nov 14 Personal period",
     "source": "Owner confirmation and Netlify Billing UI: 'This team will be downgraded to Free in a month'",
     "followup": "After downgrade, verify actual included Free credits and refresh this ledger; do not auto-upgrade or auto-recharge."
+  },
+  "current_visitor_access_as_of_2026_10_16": {
+    "source": "Verified live Netlify site visitor controls after explicit owner-approved SSO removal, and owner-confirmed incognito browser entry",
+    "production_requires_netlify_team_sso": false,
+    "nonproduction_requires_netlify_team_sso": true,
+    "production_login": "Supabase email/password, verified-email member invite, Row Level Security and server-checked administrator role",
+    "historical_release_metadata_note": "last_published_release.sso_protected=true records the access configuration AT October 16 15:44 UTC publication. The owner later approved removing the extra Netlify login from production only, without redeployment. It is not the current setting.",
+    "do_not_restore_global_team_sso_without_owner_approval": true,
+    "current_credit_balance": "UNKNOWN to connector; earlier owner-observed 985 snapshot cannot be treated as a live balance"
   }
 }
