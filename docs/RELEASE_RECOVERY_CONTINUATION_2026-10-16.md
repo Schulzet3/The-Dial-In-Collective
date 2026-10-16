@@ -143,3 +143,8 @@ The owner explicitly approved a **one-time encrypted transfer and isolated cloud
 ## Hosted-provider reconstruction inventory completed — 2026-10-16 (read-only)
 
 Collected live Netlify visitor access, published release, env **names/scopes**, build config; Supabase project/region/Postgres/migrations/extensions/Edge versions/storage count; reconciled older source comments with latest owner-approved production-only SSO removal and independently verified backup/alert evidence. No credentials copied, new services funded, secrets modified or live deploy performed. **Remaining dependency:** actual Supabase Auth Site URL/redirect allowlist and SMTP/provider settings, Cloudflare/DNS reconstruction, vault credentials and replacement hosted Supabase/Netlify account-configuration drill. Start with owner screenshot of Supabase Authentication → URL Configuration. [Secret-free hosted provider recovery inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md).
+
+
+## Owner screenshot: Supabase Auth callback configuration verified — October 16
+
+Dashboard **Authentication → URL Configuration** shows Site URL `https://app.dialincollective.com/` and exactly two redirect allowlist entries `https://the-dial-in-collective.netlify.app/` and `https://app.dialincollective.com/`; no wildcards. Current app's signup/password-reset redirect calculation uses the page's actual `location.pathname`+`location.origin`; root production matches allowed URL. No settings changed. Keep old Netlify redirect allowed pending separate review. Next read-only checkpoint: Supabase Authentication → SMTP Settings (mask credentials). See [Hosted provider inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md).
