@@ -164,3 +164,8 @@ The separate, still-existing recovery Netlify project **`dic-recovery-20261016` 
 The earlier exact 44-table managed restore and owner real-browser login remain the durable evidence of successful scoped reconstruction; optional unrehearsed password reset, new-shot write/recommendation, recovery-specific invitation redemption, and real DNS cutover/failure conditions remain explicitly **NOT VERIFIED**. No production backup, production site, production Resend/DNS credentials or Locked product decision was changed by pausing this temporary project.
 
 **Teardown status:** isolated Supabase **PAUSING** (verified); Netlify recovery **EXISTS** (verified); temporary Resend API key **not revoked by assistant**; permanent delete actions **require owner dashboard**.
+
+
+## Later recovery pause confirmed INACTIVE — 2026-10-16
+
+After owner acceptance and temporary Supabase pause submission, another independent provider read shows the **temporary** Supabase recovery project `bgstplvefumsnplhqpvd` now reports `INACTIVE` (formerly `PAUSING`), whereas live production `azviqqejypsefzilgonr` remains `ACTIVE_HEALTHY`. Recovery Netlify `fd4a4dba-0c71-4b06-be63-9f5f689aba1b` still exists and is team-SSO-protected. **Permanent deletion was not executed by the assistant**, and neither was Resend recovery-key revocation. They must be manually completed by owner in the exact recovery projects/accounts. New [DNS provider portability package](DNS_PROVIDER_FAILOVER_READINESS_2026-10-16.md) demonstrates a safe documented migration path while explicitly withholding a claim of alternate-provider DNS cutover; full DNS migration is **not** prerequisite to tearing down this already-tested isolated Supabase/Netlify instance.
