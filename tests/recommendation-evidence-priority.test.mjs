@@ -97,3 +97,13 @@ test('explicit post-taste adjustment remains a single target',()=>{
  assert.equal(rec.grind.value,1.1);
  assert.equal(rec.grind.range,undefined);
 });
+
+test('fresh unrated-cache shot computes a precise next Grind from taste feedback',()=>{
+ const {s,target}=create();
+ s.shots.push(good('unsuccessful',target.id,{dialedIn:false,grindSetting:1.2,timeS:10,
+  tasteScales:{extraction:2,body:2,clarity:3,sweetness:2,astringency:1},suggestion:null}));
+ const rec=recommendation(s,target.id);
+ assert.equal(rec.source,'Adjustment from your latest taste rating');
+ assert.equal(rec.grind.range,undefined);
+ assert.notEqual(rec.grind.value,1.2);
+});

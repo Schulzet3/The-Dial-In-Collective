@@ -39,3 +39,5 @@ The existing no-text-shadow, cloud privacy, recovery, and no-Netlify-deploy Lock
 **NEW-COFFEE-URL-VERIFY-CURRENT — Implementation status, no product policy change:** New Coffee URL is passed to catalog matching; after a new coffee is submitted, a trusted official-source verification function may read bounded official product metadata and approve when authenticated owner, roaster host, matching release, and conflict checks pass. It does **not** automatically populate missing form fields or promise verification for every URL. Proposed future streamlined “Paste → Identify → Preview → Confirm” extraction is not yet approved as implemented functionality.
 
 No Netlify publish, account access, database policy or backup alterations are part of this review.
+
+**ENGINE-TASTE-RECOMMENDATION-SYNC-05 — Implementation correction:** Recompute deterministic next-shot advice when a newly logged shot has no cached derived suggestion yet (common immediately after offline logging). The recipe grid's Grind center now matches the post-shot feedback instead of incorrectly retaining an unproven starting band. Persisted source data, user tasting ratings and provenance are unchanged.

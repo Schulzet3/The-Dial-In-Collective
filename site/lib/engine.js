@@ -173,8 +173,10 @@ export function recommendation(s,coffeeId,options={}) {
  const exp=s.experiments.find(e=>e.id===p.experiments[style]&&e.status==='active');rec.experimentId=exp?.id||null;
  // Advice takes over only during initial dialing or an explicitly active experiment.
  const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&(!exp||sh.experimentId===exp.id)).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
- if(!options.ignoreAdvice&&last?.suggestion && (!hasLocalSuccess(s,coffeeId,style)||exp)){
-  const a=last.suggestion;
+ if(!options.ignoreAdvice&&last && (!hasLocalSuccess(s,coffeeId,style)||exp)){
+  // Keep the recipe card consistent with fresh taste feedback, even before a
+  // derived suggestion is cached (e.g. immediately after an offline shot).
+  const a=last.suggestion||nextAdvice(s,last,rec);
   if(a.next){rec.reasons=[];rec.source='Adjustment from your latest taste rating';if(a.next.grindSetting!=null)rec.grind={value:a.next.grindSetting,source:'Next setting to try',proven:false};if(a.next.yieldCenter!=null){rec.yield={low:Math.max(5,round(a.next.yieldCenter-1)),high:round(a.next.yieldCenter+1),center:round(a.next.yieldCenter)};rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};}if(a.next.tempC!=null)rec.tempC=a.next.tempC;}
   if(exp){rec.source='Experiment starting window';rec.established=false;}
  }
