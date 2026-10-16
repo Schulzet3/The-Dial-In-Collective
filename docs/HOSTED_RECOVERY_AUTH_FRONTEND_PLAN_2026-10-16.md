@@ -1,6 +1,6 @@
 # Recovery-only Auth, email and frontend reconstruction plan — 2026-10-16
 
-**Status: prepared, NOT YET APPLIED.** The new independent managed recovery Supabase project `bgstplvefumsnplhqpvd` has a reconstructed database/Edge backend. This is the remaining provider configuration plan, not approval to modify production.
+**Status: recovery frontend PUBLISHED (verified 2026-10-16 22:06 UTC); hosted Auth configuration and actual managed data restoration NOT YET COMPLETE.** The new independent managed recovery Supabase project `bgstplvefumsnplhqpvd` has a reconstructed database/Edge backend. This is the remaining provider configuration plan, not approval to modify production.
 
 ## Nonsecret recovery inputs already verified in production
 
@@ -38,3 +38,15 @@ A separate Netlify staging site should remain SSO-protected, never link or overw
 6. Reconcile logged/Auth-data snapshot, mark full or partial provider recoverability exactly, archive or delete disposable project only after user confirms evidence is preserved and no test data is needed.
 
 **Do not claim the full hosted disaster-recovery drill is passed until those last steps are actually observed.**
+
+
+## October 16 recovery frontend publication — independently verified
+
+- User confirmed the extracted recovery-only static ZIP was manually published to the separate Netlify site `dic-recovery-20261016`.
+- Independently checked Netlify project ID `fd4a4dba-0c71-4b06-be63-9f5f689aba1b`: current deploy **`6ad29fd7a4349d2132a0528c`**, **ready**, published **2026-10-16 22:06:19 UTC**, production-context manual deploy with no connected branch/commit ref, HTTPS `https://dic-recovery-20261016.netlify.app/`.
+- Site Netlify team SSO remains **required for all deploys**. Live production `app.dialincollective.com` still reports its original deploy `6ad24660d0c6bdff2c065586` as `ready`, with additional Netlify SSO only for nonproduction previews. No change to Cloudflare/custom domain.
+- Dedicated recovery Supabase project `bgstplvefumsnplhqpvd` is `ACTIVE_HEALTHY`; recovery Edge preview/verification endpoints active and JWT-required. Existing recovery-only provider public env variable names were already configured. Source package was checked before manual upload for a recovery-only Supabase config; **Netlify does not expose uploaded asset bytes through the current connector**, so static file contents at the published URL have not been independently re-read.
+- Actual incremental Netlify credit deduction for this manual publication has **not** been independently observed. Last owner screenshot immediately prior was **970 / 1000** Personal credits and **29.2 / 30** Operational, auto-recharge disabled; do not claim a new post-publication balance without fresh evidence.
+- **Next owner-only settings change, recovery project exclusively:** Supabase dashboard → `DIC Isolated Recovery Drill 2026-10-16` (`bgstplvefumsnplhqpvd`) → Authentication → URL Configuration. Set **Site URL** `https://dic-recovery-20261016.netlify.app/` and add an exact **Redirect URL** `https://dic-recovery-20261016.netlify.app/`. Do not add production hostname as a recovery sign-in target, do not change the live project, and do not use a wildcard. Owner should confirm save before configuring new-project SMTP/password settings.
+- Thereafter restore the real archived Auth user + 14 shots into the new managed project through an owner-controlled secure key workflow and test live recovery-site email/Auth paths. No tests should conflate a brand-new synthetic account with successful restoration of the original archived account.
+
