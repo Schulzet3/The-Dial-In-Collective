@@ -1,5 +1,7 @@
 # Consolidated owner release: ready-to-publish checklist
 
+**HISTORICAL OCTOBER 14 CHECKPOINT:** The consolidated October 16 release **was published** (Netlify deploy `6ad24660d0c6bdff2c065586`, SHA `4e7d4a834dd92ec79f8cd99b373374fc0a584ef8`). Owner and second-account real browser checks, automatic encrypted backup→Drive, and exact ciphertext isolated PostgreSQL restoration were completed afterward. The October 14 plan's 0-credit/no-release/no-second-user statements are NOT current. Preserve original checklist for audit; use [CURRENT_STATUS.md](CURRENT_STATUS.md) for today's gates.
+
 **Prepared:** 2026-10-14. **Netlify publishing intentionally paused** until the owner reports the paid plan is active and a current verified credit balance is recorded. GitHub testing and Supabase database work require no Netlify deploy.
 
 ## Source and backend
