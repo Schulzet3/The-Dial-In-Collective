@@ -112,6 +112,23 @@
       ],
       "implementation_status": "Staged browser review; not Netlify-published. Screenshots use synthetic accounts and data.",
       "release_hold": "No Netlify deployment until owner approves screenshots and the next consolidated release."
+    },
+    {
+      "id": "OPS-20261016-CONSOLIDATED-RELEASE",
+      "status": "Locked",
+      "topic": "One consolidated protected owner-preview release",
+      "owner_approval_date": "2026-10-16",
+      "decision": "Publish the current consolidated work after tests, then perform real beta-account/integration and complete hosted recovery verification.",
+      "amends": "The earlier VISUAL-20261015-01 and review-11 release holds are superseded only for this coordinated owner-approved release; ordinary branch/preview publication remains blocked.",
+      "preserved": [
+        "Existing Netlify site and development/backend-foundation production branch",
+        "Netlify team SSO",
+        "Credit guard and one deliberate release",
+        "Beta admission and RLS",
+        "Closed import/recovery gate",
+        "Owner data and all other Locked product requirements"
+      ],
+      "implementation_status": "Release preflight in progress; migration, Edge functions and Netlify publication not yet verified."
     }
   ],
   "unchanged_release_gates": [
@@ -119,5 +136,5 @@
     "private beta access/Netlify SSO",
     "canonical coffee/admin/community verification"
   ],
-  "implementation_status": "Owner UX/backend changes complete in development; user-approved credit-aware release batching and verified credit ledger staged in GitHub, with live Netlify production still paused."
+  "implementation_status": "Consolidated owner release approved October 16; source/SQL validation and coordinated publication in progress. Public beta and complete hosted recovery remain unverified."
 }

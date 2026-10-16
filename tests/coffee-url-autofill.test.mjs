@@ -110,7 +110,7 @@ test('URL is first visual step but remaining fields retain compact paired layout
 test('official URL cannot rebind an older Coffee ID for an unknown harvest through verification',()=>{
  const sql=read('supabase/migrations/20261016053000_dic_url_first_and_autofill_preview.sql');
  const promoted=sql.slice(sql.lastIndexOf('create or replace function private.dic_promote_pending_coffee'));
- assert.match(promoted,/select count\(\*\),min\(c\.id\) into same_url_count,same_url/);
+ assert.match(promoted,/select count\(\*\),min\(c\.id::text\)::uuid into same_url_count,same_url/);
  assert.match(promoted,/declared_release is not null/);
  assert.match(promoted,/same_url_count=1 and same_url is not null/);
  assert.match(promoted,/private\.dic_coffee_key\(c\.process\)=private\.dic_coffee_key\(raw->>'process'\)/);
@@ -118,3 +118,4 @@ test('official URL cannot rebind an older Coffee ID for an unknown harvest throu
  assert.match(promoted,/current_setting\('request\.jwt\.claim\.role',true\) is distinct from 'service_role'/);
  assert.match(promoted,/not private\.is_admin\(\)/);
 });
+

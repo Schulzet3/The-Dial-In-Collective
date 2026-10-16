@@ -7,7 +7,8 @@ docker run -d --rm --network none --name "$DIC_SQL_CONTAINER" \
   -e POSTGRES_DB=dic_ci -e POSTGRES_HOST_AUTH_METHOD=trust postgres:17.11 >/dev/null
 ready=false
 for attempt in {1..60}; do
-  if docker exec "$DIC_SQL_CONTAINER" pg_isready -U postgres -d dic_ci >/dev/null 2>&1; then ready=true; break; fi
+  # Initialization uses a temporary socket-only server. Wait for final TCP readiness.
+  if docker exec "$DIC_SQL_CONTAINER" pg_isready -h 127.0.0.1 -U postgres -d dic_ci >/dev/null 2>&1; then ready=true; break; fi
   sleep 1
 done
 test "$ready" = true
