@@ -52,4 +52,5 @@ test('all badge and pending-sync lettering is clean, without blurred halos, stro
  assert.match(css,/\.status-badge,\.style-badge,\.preview-pill,\.admin-state,\.sync-indicator\[data-sync-state=pending\]\{text-shadow:none\}/);
  assert.doesNotMatch(css, /text-shadow:(?!none)[^;}]+/i);
  assert.doesNotMatch(css, /(?:-webkit-)?text-stroke\s*:/i);
+ assert.match(css, /\*,\*::before,\*::after\{text-shadow:none!important\}/);
 });

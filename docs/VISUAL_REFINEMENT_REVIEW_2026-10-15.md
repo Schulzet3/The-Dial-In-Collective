@@ -1,4 +1,4 @@
-# Coordinated visual refinement - review 4: crisp badge lettering
+# Coordinated visual refinement - review 5: clean, shadow-free typography and edges
 
 **State:** implemented on `work/visual-refresh-20261015` for owner screenshot review only. No Netlify deployment, SSO removal, production migration, import unlock or test-account creation is authorized here. Production remains on its existing release.
 
@@ -12,6 +12,9 @@ The owner requested exact original dark badge colors rather than the first revie
 
 ## Later owner-approved lettering amendment
 White badge lettering in Dark and black in Light explicitly supersedes the original JSX lettering requirement, but not the original badge fills. The later owner-requested adjustment removes text halos/shadows/strokes entirely for the cleaner original app appearance. Some raw text/fill pairs fall below WCAG 4.5:1 and have not passed an independent accessibility audit. See [specification](MASTER_SPECIFICATION_BADGE_LETTERING_ADDENDUM.md) and [ledger](DECISION_LEDGER_BADGE_LETTERING_AMENDMENT.json).
+
+## App-wide no-shadow rule
+The owner rejected text shadows **anywhere in the app**, not only on badges. The visual review now globally disables text shadows on all elements and pseudo-elements in both themes; removes decorative card, dialog and toast box shadows; and uses strong borders and clear separation instead of faux text glow. Plain black badge letters in Light and white in Dark remain. The change is recorded as Locked decision `VISUAL-NO-TEXT-SHADOWS-04` in the [lettering amendment](DECISION_LEDGER_BADGE_LETTERING_AMENDMENT.json).
 
 ## Verification boundary
 - The original recommendation engine, data model, Supabase migrations, API permissions and Cloud client are unchanged.

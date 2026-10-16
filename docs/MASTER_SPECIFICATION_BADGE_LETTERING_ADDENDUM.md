@@ -5,3 +5,9 @@ Owner-approved amendment to `VISUAL-BADGES-LEGACY-DARK-01`: retain the exact ori
 **Later owner-approved amendment `VISUAL-BADGES-CLEAN-03`:** Do not use any text shadows, halos, strokes, or background overlays on badge lettering. Badge text must be crisp like the original app, retaining black in Light and white in Dark. This explicitly supersedes the earlier text-halo suggestion; preserve the original badge fills and defined outlines. Some text/fill combinations do not intrinsically reach WCAG 4.5:1 contrast, and an independent accessibility audit is still required. Keep sensory taste-chip contrast treatment unchanged, and preserve readable body/actions and the Log Shot -> Rate -> Recommendation workflow.
 
 Review branch only: `work/visual-refresh-20261015`. No Netlify deployment, database or access changes before owner approval.
+
+## Later owner-approved global rule: `VISUAL-NO-TEXT-SHADOWS-04`
+
+**No text shadows anywhere in the app**, including badges, links, labels, ratings, action buttons, forms, overlays and Admin screens, in either theme. Do not reintroduce text glows, strokes, faux backgrounds behind glyphs, or decorative flourish to simulate contrast. Make text legible with appropriate font weight, clear solid fills, spacing, and conventional borders. Prefer clean, border-defined surfaces over decorative box shadows. Do not alter theme-specific black/white badge text or exact JSX badge fills without further owner approval. Existing WCAG contrast caveat remains.
+
+This expands the scope of `VISUAL-BADGES-CLEAN-03` from badge lettering to the entire application. No Netlify deployment is authorized during screenshot review.

@@ -13,7 +13,7 @@
  --badge-lungo:#bed3e4;--badge-lungo-ink:#000000;--badge-lungo-line:#588fbb;
  --badge-custom:#588fbb;--badge-custom-ink:#000000;--badge-custom-line:#2c506d;
  --badge-pending:#e5bc6b;--badge-pending-ink:#000000;--badge-pending-line:#c87f45;
- --danger:#ac2b3c;--radius:16px;--card-shadow:0 2px 6px #3b251207;
+ --danger:#ac2b3c;--radius:16px;--card-shadow:none;
  --s0:#6cbb58;--s1:#efcb39;--s2:#efa339;--s3:#e47444;--s4:#c72923;
 }
 :root[data-theme=dark]{
@@ -21,7 +21,7 @@
  --line:#705239;--line-strong:#ab7850;--accent:#eea052;--accent-text:#ffb66d;
  --action:#ed994b;--action-ink:#211207;--action-line:#ffbf80;--focus:#90ccff;
  --green:#97e979;--blue:#a3d6ff;--blue-soft:#243d50;
- --danger:#ff8996;--card-shadow:0 2px 8px #0002;
+ --danger:#ff8996;--card-shadow:none;
  /* Keep original badge fills; white lettering in Dark mode. */
  --badge-green-ink:#ffffff;--badge-turbo-ink:#ffffff;--badge-trad-ink:#ffffff;--badge-ristretto-ink:#ffffff;--badge-lungo-ink:#ffffff;--badge-custom-ink:#ffffff;--badge-pending-ink:#ffffff;
 
@@ -62,12 +62,14 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .search-tools input,.search-tools select{background:var(--surface);font-size:15px}
 .coffee-card{border:1.5px solid var(--line);background:var(--surface);margin-bottom:14px;border-radius:16px;box-shadow:var(--card-shadow)}
 .coffee-card.is-open{border-color:var(--line-strong)}
-.coffee-card.is-current{border:1.5px solid var(--accent);box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 12%,transparent)}
+.coffee-card.is-current{border:2px solid var(--accent);box-shadow:none}
 .coffee-toggle{padding:18px 20px}.coffee-title{gap:8px;font-size:17px;font-weight:650}
 .coffee-subtitle{font-size:13px;line-height:1.5;margin-top:7px;color:var(--muted)}
 .coffee-body{padding:0 20px 20px}
 .coffee-toggle>svg{width:18px;height:18px;color:var(--accent-text)}
 .status-badge,.style-badge,.preview-pill,.admin-state{border:1.5px solid;display:inline-flex;gap:5px;align-items:center;justify-content:center;border-radius:999px;padding:3px 10px;font-size:12px;line-height:1.45;font-weight:700;letter-spacing:0;text-transform:none;white-space:nowrap;min-height:27px}
+/* Owner-locked app-wide rule: never use text shadows, text effects or decorative glows. */
+*,*::before,*::after{text-shadow:none!important}
 .status-badge,.style-badge,.preview-pill,.admin-state,.sync-indicator[data-sync-state=pending]{text-shadow:none}
 .status-badge{background:var(--badge-green);color:var(--badge-green-ink);border-color:var(--badge-green-line)}
 .style-badge,.style-turbo{background:var(--badge-turbo);color:var(--badge-turbo-ink);border-color:var(--badge-turbo-line)}

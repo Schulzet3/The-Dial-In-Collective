@@ -27,6 +27,20 @@
       ],
       "accessibility_note": "Some badge text/solid fill combinations have insufficient raw WCAG contrast. Do not imply compliance; investigate legibility alternatives with the owner if needed.",
       "release_hold": "Private visual review only; no Netlify publishing without owner approval."
+    },
+    {
+      "id": "VISUAL-NO-TEXT-SHADOWS-04",
+      "status": "Locked",
+      "amends": "VISUAL-BADGES-CLEAN-03 scope expanded from badge lettering to all app text",
+      "decision": "Prohibit text shadows, text halos, strokes and text glow throughout the entire app in Light and Dark, including Admin, authentication, rating controls, and any future UI. Remove decorative card and dialog shadows in favor of solid borders and spacing while keeping focus outlines.",
+      "preserves": [
+        "Original dark JSX badge fills",
+        "White badge lettering in Dark and black in Light",
+        "Accessibility caveat for raw text contrast",
+        "All existing business logic, permissions and backend Locked decisions"
+      ],
+      "implementation_status": "Staged on work/visual-refresh-20261015 for repeatable synthetic screenshot review.",
+      "release_hold": "Do not deploy to Netlify or remove SSO until owner authorizes release."
     }
   ]
 }
