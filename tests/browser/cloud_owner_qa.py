@@ -106,11 +106,14 @@ with sync_playwright() as p:
  assert page.locator('.feedback-panel').count()==1;checks.append('Latest result and radar visible after save')
  page.get_by_text('Shot History (1)',exact=True).click();page.locator('[data-action=shot-expand]').click();assert page.locator('.shot-body .radar').count()==1;checks.append('Shot details expand inline with radar and notes')
  header=page.locator('.shot-overview').first.inner_text()
- assert 'Home Espresso' in header and 'Basket Dose' in header and 'Slow Feed' in header
- edit=page.locator('.shot-body [data-action=edit]').first.bounding_box()
+ assert 'Home Espresso' not in header and 'Basket Dose' not in header and 'Slow Feed' not in header
+ assert page.locator('.shot-record-context').get_by_text('Home Espresso',exact=True).count()==1
+ assert page.locator('.shot-record-context').get_by_text('Slow Feed',exact=True).count()==1
+ assert page.locator('.shot-record-context').get_by_text('Basket Dose',exact=True).count()==1
+ edit=page.locator('.shot-summary-actions [data-action=edit]').first.bounding_box()
  current=page.locator('.shot-body [data-action=make-current]').first.bounding_box()
- assert edit and current and edit['x']+edit['width']<current['x']
- checks.append('Shot history keeps setup and Slow Feed above taste; Edit and Make Current separately spaced')
+ assert edit and current and edit['y']+edit['height']<current['y']
+ checks.append('Shot summary stays compact, context follows taste and Edit is distinct from Make Current')
  page.screenshot(path=str(OUT/'cloud_history_light.png'),full_page=True)
  page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=theme]').select_option('dark');page.get_by_role('button',name='Save Preferences').click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();page.get_by_role('button',name='Close',exact=True).click();assert page.locator('html').get_attribute('data-theme')=='dark';checks.append('Dark appearance persists through save without closing Settings')
  page.screenshot(path=str(OUT/'cloud_home_dark.png'),full_page=True)
