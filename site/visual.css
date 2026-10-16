@@ -22,9 +22,7 @@
  --action:#ed994b;--action-ink:#211207;--action-line:#ffbf80;--focus:#90ccff;
  --green:#97e979;--blue:#a3d6ff;--blue-soft:#243d50;
  --danger:#ff8996;--card-shadow:none;
- /* Keep original badge fills; white lettering in Dark mode. */
- --badge-green-ink:#ffffff;--badge-turbo-ink:#ffffff;--badge-trad-ink:#ffffff;--badge-ristretto-ink:#ffffff;--badge-lungo-ink:#ffffff;--badge-custom-ink:#ffffff;--badge-pending-ink:#ffffff;
-
+ /* Original dark badge fills and black text inherit in both themes. */
 }
 body{font-size:15px;line-height:1.5}
 h1,h2,h3,.coffee-title{font-variant-ligatures:none;font-feature-settings:'liga' 0,'clig' 0,'dlig' 0}
@@ -67,7 +65,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .coffee-subtitle{font-size:13px;line-height:1.5;margin-top:7px;color:var(--muted)}
 .coffee-body{padding:0 20px 20px}
 .coffee-toggle>svg{width:18px;height:18px;color:var(--accent-text)}
-.status-badge,.style-badge,.preview-pill,.admin-state{border:1.5px solid;display:inline-flex;gap:5px;align-items:center;justify-content:center;border-radius:999px;padding:3px 10px;font-size:12px;line-height:1.45;font-weight:700;letter-spacing:0;text-transform:none;white-space:nowrap;min-height:27px}
+.status-badge,.style-badge,.preview-pill,.admin-state{border:0;display:inline-flex;gap:5px;align-items:center;justify-content:center;border-radius:999px;padding:3px 10px;font-size:13px;line-height:1.45;font-weight:600;letter-spacing:0;text-transform:none;white-space:nowrap;min-height:27px}
 /* Owner-locked app-wide rule: never use text shadows, text effects or decorative glows. */
 *,*::before,*::after{text-shadow:none!important}
 .status-badge,.style-badge,.preview-pill,.admin-state,.sync-indicator[data-sync-state=pending]{text-shadow:none}
@@ -156,7 +154,7 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
  .workspace-bar h2{font-size:28px}.workspace-bar{gap:10px}.setup-switch{font-size:12px;padding:8px 10px}.workspace-bar .eyebrow{font-size:12px}
  .coffee-toggle{padding:16px 14px}.coffee-body{padding:0 14px 16px}.coffee-title{font-size:16px;gap:6px}.coffee-subtitle{font-size:12px}
  .recipe-grid{padding:14px;gap:17px 12px}.metric-value{font-size:18px}.metric-label{font-size:12px}.metric-sub{font-size:12px}.style-row{margin-bottom:15px}
- .status-badge,.style-badge{font-size:11px;padding:3px 8px;min-height:26px}.current-mark{font-size:10px}
+ .status-badge,.style-badge{font-size:12px;padding:3px 8px;min-height:26px}.current-mark{font-size:10px}
  .sheet-header{padding:18px 17px 14px}.sheet-header h2{font-size:25px}.sheet-content{padding:18px 17px 23px}
  .shot-toggle{padding:12px}.shot-numbers{font-size:13px}.shot-context-item{font-size:12px}.shot-body{padding:0 12px 13px}
  .cloud-auth{margin-top:24px;padding:23px 19px}.cloud-auth h2{font-size:28px}.scale-control>small{width:50px}
@@ -174,3 +172,6 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 .scale-control>small{grid-row:2;width:auto!important;font-size:12px;line-height:1.35}
 .scale-control>small:first-child{text-align:left}.scale-control>small:last-child{text-align:right}
 @media(max-width:360px){.scale-control>div{gap:6px}.app-nav .sync-indicator{font-size:10px;padding:5px 7px}}
+
+/* New Coffee: six metadata fields retain two columns, with no visual divider. */
+#new-coffee .coffee-detail-grid{margin-top:16px;margin-bottom:16px}

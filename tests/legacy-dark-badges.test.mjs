@@ -18,7 +18,7 @@ for (const [index,mode] of ['Light','Dark'].entries()) {
  for (const [name,[fill,ink]] of Object.entries(original)) {
   test(`${mode} ${name} keeps original JSX dark fill with approved theme lettering`, () => {
    assert.equal(effective[`badge-${name}`],fill);
-   assert.equal(effective[`badge-${name}-ink`],index===0?'#000000':'#FFFFFF');
+   assert.equal(effective[`badge-${name}-ink`],'#000000');
    assert.equal(reference.badges[name].background,fill);
    assert.equal(reference.badges[name].color,ink);
   });
@@ -27,9 +27,9 @@ for (const [index,mode] of ['Light','Dark'].entries()) {
   assert.deepEqual([0,1,2,3,4].map(i=>effective[`s${i}`]),reference.taste_ramp);
  });
 }
-test('theme changes preserve badge fills and borders but override lettering', () => {
+test('theme changes preserve badge fills and uniform black lettering', () => {
  assert.equal(scopes.length,2);
- assert.deepEqual(Object.keys(scopes[1]).filter(k=>k.startsWith('badge-')).sort(),Object.keys(original).map(k=>`badge-${k}-ink`).sort());
+ assert.deepEqual(Object.keys(scopes[1]).filter(k=>k.startsWith('badge-')),[]);
 });
 test('source reference identifies the project JSX and distinguishes new status colors', () => {
  assert.equal(reference.source_file,'dial-in-collective.jsx');
@@ -37,8 +37,8 @@ test('source reference identifies the project JSX and distinguishes new status c
  assert.match(reference.notes.join(' '),/no badge counterpart/);
  assert.match(reference.notes.join(' '),/not copied legacy borders/);
 });
-test('badge outline width and shared source colors are applied to component selectors', () => {
- assert.match(css,/\.status-badge,\.style-badge,\.preview-pill,\.admin-state\{border:1\.5px solid;/);
+test('borderless original-style pills and original fills are used consistently', () => {
+ assert.match(css,/\.status-badge,\.style-badge,\.preview-pill,\.admin-state\{border:0;/);
  for (const [selector,name] of [['traditional','trad'],['ristretto','ristretto'],['lungo','lungo'],['custom','custom']]) {
   assert.ok(css.includes(`.style-${selector}{background:var(--badge-${name});color:var(--badge-${name}-ink);border-color:var(--badge-${name}-line)}`));
  }
