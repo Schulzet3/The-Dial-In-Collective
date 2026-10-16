@@ -2,7 +2,7 @@
   "product": "The Dial In Collective",
   "provider": "Netlify",
   "account_plan": "Personal (paid through current billing period; downgrade to Free scheduled)",
-  "accounting_note": "Owner-provided Netlify Usage & Billing screenshot dated 2026-10-15. Current Personal plan has 1,000 deployable plan credits during Oct 15-Nov 14, 2026. An additional 29.6 operational credits are not spendable on production deployments. Owner scheduled a downgrade to Free after this billing period. Recheck actual balance and plan after Nov 14; future 300 Free credits/month are owner-reported, not presently available. Do not interpret the 1,029.6 total displayed as deployable credits. Snapshot is not a live billing API connection.",
+  "accounting_note": "Latest owner-observed snapshot is October 16, 2026: 985 of 1000 Personal plan production credits remain through November 14. Separate 29.3 operational credits cannot fund production deploys. Evidence carried from the attached hosted recovery handoff; not a live billing API response. Preserve no purchases and no auto-recharge.",
   "monthly_included_credits": 1000,
   "production_deploy_credits_each": 15,
   "snapshots": [
@@ -39,6 +39,20 @@
       "auto_recharge_enabled": false,
       "production_deployments_paused": false,
       "note": "Production deployments must consume Personal plan credits, not operational credits. Observed existing current deploy dated Oct 13. No new production deploy undertaken as part of this ledger update."
+    },
+    {
+      "observed_date": "2026-10-16",
+      "source": "Owner-provided Netlify screenshot recorded in DIC_Hosted_Recovery_Readiness_2026-10-16.md; carried forward from the previous approved release session. Screenshot not independently re-viewed in this session; current published deploy independently confirmed unchanged.",
+      "credit_period_label": "Oct 15 - Nov 14, 2026",
+      "active_plan": "Personal",
+      "observed_total_used_credits": 15,
+      "observed_remaining_credits": 985,
+      "observed_personal_plan_credits_total": 1000,
+      "operational_credits_remaining": 29.3,
+      "operational_credits_not_usable_for_production_deploy": true,
+      "plan_credits_expires": "2026-11-14",
+      "production_deployments_paused": false,
+      "note": "Owner approved one consolidated SSO-protected release on 2026-10-16. This documentation commit does not publish. Schema/Edge validation and coordinated release remain required."
     }
   ],
   "release_policy": {
@@ -53,7 +67,7 @@
     "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
     "no_unattended_paid_topups": true,
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
-    "post_release_billing_refresh_needed": true,
+    "post_release_billing_refresh_needed": false,
     "last_published_release": {
       "deploy_id": "6ad1065eb1608955698efb7b",
       "published_commit_sha": "acc7a47c9dc33a412fcf7cd82b0c7d09796a44c8",
@@ -67,7 +81,7 @@
       "planned_cost_credits": 15
     }
   },
-  "reconciliation": "The 1000-plan-credit screenshot predates the successful 2026-10-15 owner-preview publish. Keep its 1000 remaining as a historical pre-deploy observation, NOT a claimed current balance. Block further marked production releases until a fresh post-deploy provider billing snapshot is recorded and post_release_billing_refresh_needed is explicitly cleared. GitHub documentation-only edits must continue skipping production publication.",
+  "reconciliation": "October 16 owner screenshot, documented in the attached recovery handoff, reconciles the October 15 published release to 985 remaining production credits. Netlify published deploy remains 6ad1065eb1608955698efb7b at this check. One approved tested release may consume 15 credits; verify actual post-release billing again after publishing. All non-release commits must continue skipping publication.",
   "scheduled_plan_change": {
     "plan": "Free",
     "timing": "After current Oct 15-Nov 14 Personal period",
