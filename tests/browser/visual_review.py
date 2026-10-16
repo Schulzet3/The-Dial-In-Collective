@@ -116,6 +116,31 @@ with sync_playwright() as p:
   shot(page,'07-add-coffee-'+mode,'#sheet');page.locator('[data-action=close]').click()
   page.locator('[data-action=sync]').first.click();check(page.locator('#sheet [data-action=export]').count()==0,mode+': no routine recovery export when synced');shot(page,'08-sync-'+mode,'#sheet');page.locator('[data-action=close]').click()
   page.locator('[data-action=style]').first.click();shot(page,'09-style-'+mode,'#sheet');page.locator('[data-action=close]').click()
+  # An unproven coffee, sourced from a similar coffee's genuine synthetic
+  # success on the same setup. Never use the owner's real cloud data here.
+  page.evaluate("""()=>{
+    const a=window.__app,s=a.state,c=s.coffees.find(x=>x.id==='coffee-two');
+    c.name='Wuri (Synthetic)';c.roastLevel='Light-Medium';c.process='Washed';
+    c.origin='Gedeb, Ethiopia';c.tastingNotes='Floral, citrus, berry';
+    const ws=s.setups[0].workspaces[s.setups[0].activeVersionId];
+    ws.coffees[c.id]={style:'Turbo',currentFamilies:{},referenceFamilies:{},favoriteShots:{},basketId:'basketv',experiments:{}};
+    a.expanded.clear();a.expanded.add(c.id);
+    a.render();
+  }""")
+  check(page.locator('.coffee-card.is-open .recipe-label').inner_text()=='Starting Recommendation',mode+': unproven coffee has a starting recipe')
+  check('similar' in page.locator('.coffee-card.is-open .recipe-reason').inner_text().lower(),mode+': starting recipe cites personal similar-coffee evidence')
+  shot(page,'09b-starting-recommendation-'+mode,'.coffee-card.is-open')
+  page.evaluate("""()=>{
+    const a=window.__app,s=a.state,c=s.coffees.find(x=>x.id==='coffee-two');
+    const example={...s.shots[0],id:'review-undialed',coffeeId:c.id,style:'Turbo',
+      timestamp:'2026-10-15T19:00:00Z',yieldG:50,timeS:10,grindSetting:1.2,
+      dialedIn:false,familyId:null,suggestion:null,notes:'Needs more sweetness',
+      tasteScales:{extraction:2,body:2,clarity:3,sweetness:2,astringency:1}};
+    s.shots.push(example);a.render();
+  }""")
+  check(page.locator('.coffee-card.is-open .feedback-panel').count()==1,mode+': non-green shot generates next-shot guidance')
+  check('Try grind' in page.locator('.coffee-card.is-open .feedback-panel').inner_text(),mode+': non-green shot has specific grinder recommendation')
+  shot(page,'09c-next-shot-recommendation-'+mode,'.coffee-card.is-open')
   # Denied/non-admin front-end fixture. Real user authorization is a separate gate.
   page.evaluate('window.__app.status.admin=false;window.__app.settings()')
   check(page.locator('[data-action=open-admin]').count()==0,mode+': non-admin Settings has no Admin Dashboard link')
