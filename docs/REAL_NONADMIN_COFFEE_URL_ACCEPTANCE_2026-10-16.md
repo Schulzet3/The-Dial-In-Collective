@@ -2,6 +2,12 @@
 
 **Status: PRE-FLIGHT PASS, genuine user-driven product URL and browser submission PENDING.** This is the next remaining real beta acceptance gate after hosted recovery completion. No production data was changed while preparing this checkpoint. The owner will use the already confirmed/admitted non-admin test account, not the administrator account or an invented new user.
 
+## Product-corrected test prerequisite, owner question on 2026-10-16
+
+**Current test is DEFERRED pending implementation of universal safe URL extraction.** The 2026-10-16 baseline below is still valid as evidence of deployed behavior. However, earlier suggestions to choose a URL from one of the four already-curated roasters were **not consistent with the original Locked Add Coffee requirements**. The Master Specification sections 9, 10, 11, 12 and Ledger require URL/screenshot extraction as first-class input without a product-level roaster count limit; user-device Claude BYOK remains optional. The four-domain trust directory is still appropriate for current **automatic canonical Verified promotion**, but **must not be treated as a hard limit on trying to extract the webpage's available facts**. See [universal extraction implementation gap](UNIVERSAL_ROASTER_URL_EXTRACTION_GAP_2026-10-16.md).
+
+Once safely implemented and deliberately published, the genuine nonadmin acceptance should begin with an official product URL from a **previously unknown roaster**, verify best-effort metadata and trustworthy citation/provenance, avoid blank-field fabrication and silent canonical merges, and confirm no automatic Verified designation without genuine official-domain/release evidence. Include old curated-domain regression. Until deployed, the current product will safely refuse unknown domains for preview; do not mislabel the broader acceptance PASS.
+
 ## Production baseline: read-only Supabase query, 2026-10-16
 
 - Active production Supabase project: `azviqqejypsefzilgonr`; app `https://app.dialincollective.com`; published Git SHA `4e7d4a834dd92ec79f8cd99b373374fc0a584ef8`.
