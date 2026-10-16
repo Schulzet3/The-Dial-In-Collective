@@ -93,7 +93,8 @@ test('URL-first SQL prioritizes official URL evidence but cannot use URL alone a
  assert.match(sql,/official_url_review/);
  assert.match(sql,/match_kind in \('official_url','exact_release'\)/);
  assert.match(sql,/s\.exact_brand and s\.exact_title and s\.curated_url_match/);
- assert.match(sql,/s\.release_key=search_release/);
+ assert.match(sql,/search_release is not null and s\.release_key=search_release/);
+ assert.match(sql,/s\.compatible_process/);
  assert.match(sql,/service_role/);
  assert.match(sql,/attempts>=25/);
 });

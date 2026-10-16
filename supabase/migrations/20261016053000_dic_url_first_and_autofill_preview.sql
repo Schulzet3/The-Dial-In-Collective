@@ -1,9 +1,10 @@
 -- Staged URL-first evidence ranking; a URL is not the canonical Coffee UUID.
--- Reused links, conflicting titles/releases and ambiguous candidates need review.
+-- Reused links, missing release evidence, conflicting titles/processes and ambiguous candidates need review.
+-- A URL with unknown release may be the same product, but cannot auto-link.
 create or replace function private.dic_find_coffee_matches(p jsonb) returns jsonb
 language plpgsql stable security definer set search_path='' as $$
 declare
- requested_roaster text; requested_name text; requested_release text; requested_origin text;
+ requested_roaster text; requested_name text; requested_release text; requested_origin text; requested_process text;
  search_roaster text; search_name text; search_release text; search_source text;
  registered_name text; registered boolean; candidates jsonb; exact_id uuid; exact_count int;
 begin
@@ -20,6 +21,7 @@ begin
  requested_roaster:=btrim(p->>'roaster');requested_name:=btrim(p->>'name');
  requested_release:=nullif(btrim(coalesce(p->>'release_label','')),'');
  requested_origin:=nullif(btrim(coalesce(p->>'origin','')),'');
+ requested_process:=nullif(btrim(coalesce(p->>'process','')),'');
  search_roaster:=private.dic_canonical_roaster_key(requested_roaster);
  search_name:=private.dic_coffee_key(requested_name);
  search_release:=private.dic_coffee_key(requested_release);
@@ -51,7 +53,9 @@ begin
      (s.brand_key=search_roaster) as exact_brand,
      (s.title_key=search_name) as exact_title,
      (requested_origin is null or s.origin is null
-       or private.dic_coffee_key(requested_origin)=private.dic_coffee_key(s.origin)) as compatible_origin
+       or private.dic_coffee_key(requested_origin)=private.dic_coffee_key(s.origin)) as compatible_origin,
+     (requested_process is null or s.process is null or
+       private.dic_coffee_key(requested_process)=private.dic_coffee_key(s.process)) as compatible_process
    from candidates_scanned s
    where s.curated_url_match
      or ((s.brand_key=search_roaster or s.brand_similarity>=0.70)
@@ -60,13 +64,12 @@ begin
   select s.*,
     case
       when s.exact_brand and s.exact_title and s.curated_url_match
-        and ( (search_release is null and s.release_key is null)
-          or (search_release is not null and s.release_key=search_release) )
-        and s.compatible_origin then 'official_url'
+        and search_release is not null and s.release_key=search_release
+        and s.compatible_origin and s.compatible_process then 'official_url'
       when s.curated_url_match then 'official_url_review'
       when registered and s.exact_brand and s.exact_title and search_release is not null
         and s.release_key=search_release and search_source is null
-        and s.compatible_origin then 'exact_release'
+        and s.compatible_origin and s.compatible_process then 'exact_release'
       when s.exact_brand and s.exact_title then 'same_name'
       when s.exact_brand then 'similar_name'
       else 'similar_roaster'
