@@ -16,9 +16,9 @@ const original = {
 for (const [index,mode] of ['Light','Dark'].entries()) {
  const effective = {...scopes[0],...scopes[index]};
  for (const [name,[fill,ink]] of Object.entries(original)) {
-  test(`${mode} ${name} uses the reviewed original JSX dark fill and text`, () => {
+  test(`${mode} ${name} keeps original JSX dark fill with approved theme lettering`, () => {
    assert.equal(effective[`badge-${name}`],fill);
-   assert.equal(effective[`badge-${name}-ink`],ink);
+   assert.equal(effective[`badge-${name}-ink`],index===0?'#000000':'#FFFFFF');
    assert.equal(reference.badges[name].background,fill);
    assert.equal(reference.badges[name].color,ink);
   });
@@ -27,9 +27,9 @@ for (const [index,mode] of ['Light','Dark'].entries()) {
   assert.deepEqual([0,1,2,3,4].map(i=>effective[`s${i}`]),reference.taste_ramp);
  });
 }
-test('theme changes cannot replace badge fill, ink or outline tokens', () => {
+test('theme changes preserve badge fills and borders but override lettering', () => {
  assert.equal(scopes.length,2);
- assert.deepEqual(Object.keys(scopes[1]).filter(k=>k.startsWith('badge-')),[]);
+ assert.deepEqual(Object.keys(scopes[1]).filter(k=>k.startsWith('badge-')).sort(),Object.keys(original).map(k=>`badge-${k}-ink`).sort());
 });
 test('source reference identifies the project JSX and distinguishes new status colors', () => {
  assert.equal(reference.source_file,'dial-in-collective.jsx');
@@ -47,3 +47,5 @@ test('taste chip lettering preserves original ink and white on the darkest red',
  assert.match(css,/\.taste-chip\{[^}]*color:#1a120d\}/);
  assert.match(css,/\.taste-chip\.severity-4\{color:#fff\}/);
 });
+
+test('opposite-color text halos aid badge lettering in both themes',()=>{assert.match(css,/\.status-badge,\.style-badge,\.preview-pill,\.admin-state\{text-shadow:/);assert.match(css,/:root\[data-theme=dark\] \.status-badge/);assert.match(css,/:root\[data-theme=dark\] \.sync-indicator\[data-sync-state=pending\]/);});

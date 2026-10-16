@@ -10,7 +10,8 @@ const luminance=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(x=>x<=.04
 const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
 for(const [i,mode] of ['light','dark'].entries()){
  const v={...scopes[0],...scopes[i]};
- for(const badge of ['green','turbo','trad','ristretto','lungo','custom','pending'])test(`${mode} ${badge} filled badge exceeds 4.5:1 text contrast`,()=>assert.ok(contrast(v[`badge-${badge}-ink`],v[`badge-${badge}`])>=4.5));
+ // Exact original fills plus owner-requested black/white lettering have some sub-AA pairs; halos aid visual edges, not WCAG certification.
+ for(const badge of ['green','turbo','trad','ristretto','lungo','custom','pending'])test(`${mode} ${badge} uses approved theme lettering`,()=>assert.equal(v[`badge-${badge}-ink`].toLowerCase(),mode==='light'?'#000000':'#ffffff'));
  test(`${mode} primary action text exceeds 4.5:1 contrast`,()=>assert.ok(contrast(v['action-ink'],v.action)>=4.5));
  test(`${mode} body, muted and link text are legible on surfaces`,()=>{for(const key of ['ink','muted','accent-text'])assert.ok(contrast(v[key],v.surface)>=4.5);});
 }

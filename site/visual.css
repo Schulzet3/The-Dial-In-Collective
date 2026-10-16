@@ -1,18 +1,18 @@
 /* Coordinated visual refinement - private review, not a release.
    Shared tokens give light/dark the same clear hierarchy without altering data. */
 :root{
- /* Exact legacy dark badge fills/text; shared by both themes. See docs/BADGE_PALETTE_SOURCE.json. */
+ /* Original JSX dark badge fills shared by both themes; owner-approved theme-specific lettering. */
  --bg:#f4eee4;--surface:#fffdf9;--well:#ede1ce;--ink:#2d2018;--muted:#675545;
  --line:#c9b396;--line-strong:#ab825c;--accent:#b55d25;--accent-text:#914014;
  --action:#da813c;--action-ink:#241306;--action-line:#984610;--focus:#1b669d;
  --green:#296523;--blue:#155b90;--blue-soft:#d8eafa;
- --badge-green:#6cbb58;--badge-green-ink:#1a120d;--badge-green-line:#3e732f;
- --badge-turbo:#92b6d3;--badge-turbo-ink:#1a120d;--badge-turbo-line:#3e7098;
- --badge-trad:#3e7098;--badge-trad-ink:#ffffff;--badge-trad-line:#92b6d3;
- --badge-ristretto:#2c506d;--badge-ristretto-ink:#ffffff;--badge-ristretto-line:#588fbb;
- --badge-lungo:#bed3e4;--badge-lungo-ink:#1a120d;--badge-lungo-line:#588fbb;
- --badge-custom:#588fbb;--badge-custom-ink:#1a120d;--badge-custom-line:#2c506d;
- --badge-pending:#e5bc6b;--badge-pending-ink:#1a120d;--badge-pending-line:#c87f45;
+ --badge-green:#6cbb58;--badge-green-ink:#000000;--badge-green-line:#3e732f;
+ --badge-turbo:#92b6d3;--badge-turbo-ink:#000000;--badge-turbo-line:#3e7098;
+ --badge-trad:#3e7098;--badge-trad-ink:#000000;--badge-trad-line:#92b6d3;
+ --badge-ristretto:#2c506d;--badge-ristretto-ink:#000000;--badge-ristretto-line:#588fbb;
+ --badge-lungo:#bed3e4;--badge-lungo-ink:#000000;--badge-lungo-line:#588fbb;
+ --badge-custom:#588fbb;--badge-custom-ink:#000000;--badge-custom-line:#2c506d;
+ --badge-pending:#e5bc6b;--badge-pending-ink:#000000;--badge-pending-line:#c87f45;
  --danger:#ac2b3c;--radius:16px;--card-shadow:0 2px 6px #3b251207;
  --s0:#6cbb58;--s1:#efcb39;--s2:#efa339;--s3:#e47444;--s4:#c72923;
 }
@@ -22,7 +22,9 @@
  --action:#ed994b;--action-ink:#211207;--action-line:#ffbf80;--focus:#90ccff;
  --green:#97e979;--blue:#a3d6ff;--blue-soft:#243d50;
  --danger:#ff8996;--card-shadow:0 2px 8px #0002;
- /* Badge and taste colors intentionally inherit the JSX dark palette above. */
+ /* Keep original badge fills; white lettering in Dark mode. */
+ --badge-green-ink:#ffffff;--badge-turbo-ink:#ffffff;--badge-trad-ink:#ffffff;--badge-ristretto-ink:#ffffff;--badge-lungo-ink:#ffffff;--badge-custom-ink:#ffffff;--badge-pending-ink:#ffffff;
+
 }
 body{font-size:15px;line-height:1.5}
 h1,h2,h3,.coffee-title{font-variant-ligatures:none;font-feature-settings:'liga' 0,'clig' 0,'dlig' 0}
@@ -49,7 +51,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .app-nav .local-label{letter-spacing:normal;text-transform:none}
 .sync-indicator{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--muted);font-size:11px;font-weight:600;padding:6px 9px;min-height:32px}
 .sync-indicator[data-sync-state=synced]{color:var(--green);border-color:var(--badge-green-line)}
-.sync-indicator[data-sync-state=pending]{color:var(--badge-pending-ink);background:var(--badge-pending);border-color:var(--badge-pending-line)}
+.sync-indicator[data-sync-state=pending]{color:var(--badge-pending-ink);background:var(--badge-pending);border-color:var(--badge-pending-line);text-shadow:0 0 2px #ffffff,0 0 3px #ffffff}
+:root[data-theme=dark] .sync-indicator[data-sync-state=pending]{text-shadow:0 0 2px #101010,0 0 3px #101010}
 .workspace-bar{margin:0 0 20px;gap:16px}.workspace-bar h2{font-size:30px}
 .eyebrow{font-size:12px;text-transform:none;letter-spacing:.025em;font-weight:600;margin-bottom:5px}
 .setup-switch{max-width:55%;min-height:42px;border:1.5px solid var(--line-strong);border-radius:10px;background:var(--surface);font-size:13px;font-weight:550}
@@ -66,6 +69,8 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .coffee-body{padding:0 20px 20px}
 .coffee-toggle>svg{width:18px;height:18px;color:var(--accent-text)}
 .status-badge,.style-badge,.preview-pill,.admin-state{border:1.5px solid;display:inline-flex;gap:5px;align-items:center;justify-content:center;border-radius:999px;padding:3px 10px;font-size:12px;line-height:1.45;font-weight:700;letter-spacing:0;text-transform:none;white-space:nowrap;min-height:27px}
+.status-badge,.style-badge,.preview-pill,.admin-state{text-shadow:0 0 2px #ffffff,0 0 3px #ffffff}
+:root[data-theme=dark] .status-badge,:root[data-theme=dark] .style-badge,:root[data-theme=dark] .preview-pill,:root[data-theme=dark] .admin-state{text-shadow:0 0 2px #101010,0 0 3px #101010,0 1px 1px #101010}
 .status-badge{background:var(--badge-green);color:var(--badge-green-ink);border-color:var(--badge-green-line)}
 .style-badge,.style-turbo{background:var(--badge-turbo);color:var(--badge-turbo-ink);border-color:var(--badge-turbo-line)}
 .style-traditional{background:var(--badge-trad);color:var(--badge-trad-ink);border-color:var(--badge-trad-line)}
