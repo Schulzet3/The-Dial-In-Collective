@@ -53,6 +53,22 @@
       "plan_credits_expires": "2026-11-14",
       "production_deployments_paused": false,
       "note": "Owner approved one consolidated SSO-protected release on 2026-10-16. This documentation commit does not publish. Schema/Edge validation and coordinated release remain required."
+    },
+    {
+      "observed_date": "2026-10-16",
+      "source": "Owner uploaded fresh Netlify Credit balance dashboard screenshot in this project chat (after production publication); read directly from screenshot",
+      "credit_period_label": "Oct 14 - Nov 14, 2026 Personal grant",
+      "active_plan": "Personal",
+      "observed_total_used_credits": 30,
+      "observed_remaining_credits": 970,
+      "observed_personal_plan_credits_total": 1000,
+      "operational_credits_remaining": 29.2,
+      "operational_credits_not_usable_for_production_deploy": true,
+      "operational_credits_expires": "2026-11-11",
+      "plan_credits_expires": "2026-11-14",
+      "auto_recharge_enabled": false,
+      "production_deployments_paused": false,
+      "note": "Fresh actual post-release balance, confirming prior 985 prepublication->970 postpublication (15-credit decline). Recovery-specific staging build has not yet been deployed. This is an owner-observed provider UI snapshot, not live Netlify API billing."
     }
   ],
   "release_policy": {
@@ -67,7 +83,7 @@
     "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
     "no_unattended_paid_topups": true,
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
-    "post_release_billing_refresh_needed": true,
+    "post_release_billing_refresh_needed": false,
     "last_published_release": {
       "deploy_id": "6ad24660d0c6bdff2c065586",
       "published_commit_sha": "4e7d4a834dd92ec79f8cd99b373374fc0a584ef8",
@@ -81,7 +97,7 @@
       "planned_cost_credits": 15
     }
   },
-  "reconciliation": "The October 16 owner-observed 985-credit snapshot is now historical PRE-RELEASE evidence. Verified publication of 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8 consumed a planned 15 credits, but the actual remaining balance has not been read from Billing. Do not record 970 as observed. Further production releases are blocked until a fresh provider snapshot is recorded and the refresh flag is cleared. Subsequent to the published release, the owner explicitly approved removing extra Netlify team SSO from PRODUCTION only. Non-production previews retain SSO. The deployment SHA did not change. This is recorded in current_visitor_access_as_of_2026_10_16; do not treat the older deployment metadata sso_protected=true as current or unilaterally reinstate it.",
+  "reconciliation": "Owner's NEW 2026-10-16 Netlify Usage screenshot explicitly shows 970 of 1000 Personal deploy credits remaining (expires 2026-11-14), 29.2/30 operational credits remaining (expires 2026-11-11), and auto recharge disabled. The earlier owner-observed pre-release 985 snapshot is historical. The 15-credit decrease supports one planned October 16 production release. Current deployed SHA 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8 remains unchanged and extra production SSO remains disabled by approved owner decision; development previews require team SSO. A dedicated recovery-staging build may use credits only with owner-approved isolated-test scope; do not alter production to do so. Future billing state can change after this screenshot and must be rechecked before any later releases.",
   "scheduled_plan_change": {
     "plan": "Free",
     "timing": "After current Oct 15-Nov 14 Personal period",
