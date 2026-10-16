@@ -77,3 +77,46 @@ Prepared owner-download ZIP `DIC_Hosted_Recovery_Rewrap_2026-10-16.zip`, 446385 
 **Pending owner handoff:** Download new Mac helper ZIP, unzip, run `bash "$HOME/Downloads/DIC_Hosted_Recovery_Rewrap_2026-10-16/DIC_Hosted_Recovery_Rewrap.command"`, and attach **only** generated `DIC_Hosted_Recovery_Handoff_*.zip` here. Do not send old already-uploaded `DIC_Restore_Test_2026-10-16.zip`: its test private key is gone; the previous ciphertext cannot be decrypted anew. The helper ZIP is a conversation artifact, not uploaded into GitHub or Drive. If the ephemeral private identity disappears before the owner sends the handoff, generate a **new** identity and helper; do not claim old key still available.
 
 **Next operator steps after genuine encrypted upload:** Decrypt in isolated runtime, validate original archive source/manifest/checksums, and reconstruct original archived Auth user and 14 shots into the **existing isolated hosted Supabase project `bgstplvefumsnplhqpvd` only**. Account for the newly confirmed but not admitted separate test user already present; do not silently reset it or production. Match 44 table row counts to original snapshot with clearly stated retained staging additions. Validate new-project JWT/signin and recovered-history rendering with owner; fully tear down plaintext and one-time private key after passing. Never turn on the historical import-save gate. Current managed restore remains **PENDING**, not completed.
+
+
+## ACTUAL hosted encrypted snapshot import — PASS, October 16 (newer than earlier PARTIAL notes)
+
+**Source:** Owner provided encrypted handoff `DIC_Hosted_Recovery_Handoff_2026-10-16.zip`; ZIP SHA-256 `1330f860b59391020f6c67dcd60b67183d0038e89af93ed3be978d4542aea6d3`, single age ciphertext member (443,079 B), ZIP CRC PASS. The **new one-time recovery identity** successfully decrypted it. The actual inside-archive `database.dump` SHA-256 **`ac03773899c5e0ae686c619a6f9864ef6201db0a88db6aea23b296ccdd09155d` MATCHED** the verified original GitHub/Drive export and `manifest.json` (`dic-age-postgres-v1`, original project `azviqqejypsefzilgonr`, snapshot **2026-10-16 15:46:40 UTC**, exact app source commit `4e7d4a834dd92ec79f8cd99b373374fc0a584ef8`). This is the older snapshot intentionally containing **one original admin and 14 shots**, not the live database's later 16 shots/two admitted users.
+
+**Safe transport and deployment:** From the actual custom pg_dump, selected the **42 public/private app tables plus `auth.users` and `auth.identities`**, total **44 backed-up table streams and 141 archive rows**. Provider-specific Auth sessions/refresh tokens, platform migration tables, Vault and Storage system metadata were not replayed; managed services were provisioned fresh. Decoded COPY fields in memory into typed restore rows, transported a temporary **GPG/PGP AES-256-encrypted, compressed** JSON bundle via temporary encrypted-only private Library holding files, and invoked Supabase's connected SQL executor **only against** `bgstplvefumsnplhqpvd`. No original user's plaintext data or permanent Mac age/SSH private key was put in GitHub, Library or a user-facing chat message. Supabase evaluated the one-time encrypted payload in a short restore transaction; the one-time transport passphrase was not recorded in the project document.
+
+**Recovery-only adaptations to a real managed provider:**
+- Real GoTrue/Auth has provider-generated columns, so imported **only the source's explicit pg_dump columns** (not implicit generated fields); `private.shot_audit.id` / `private.dic_coffee_audit.id` use `GENERATED ALWAYS` identities and required a provider-supported `OVERRIDING SYSTEM VALUE` restore. Initial failed attempts rolled back atomically and left **0 imported shots**, **1 original staging test user**, and all **5 shot triggers enabled**.
+- Only the **isolated recovery** project's four newly seeded roaster directory entries/aliases were replaced by the corresponding **original archived identities**, preserving source-backed references. The existing singleton import control was replaced by its original `saves_enabled=false` row.
+- In the single checked transaction, `public.shots`' user-defined write-side triggers were temporarily disabled to avoid duplicating 29 archived audit events or mutating original equipment/provenance values; the five triggers were re-enabled **before commit**. The normal Auth account trigger was left enabled, and auto-created defaults for the restored owner alone were replaced with archived originals. The previously email-confirmed **separate recovery test user** was preserved.
+- A fully populated 44-table import ran first inside **`BEGIN … ROLLBACK`** and passed checks on **all 141 rows** using typed column-specific semantic comparisons plus 44/44 table counts. Independent post-rollback read showed unchanged target and triggers. The same procedure then **COMMITTED**, with all validations applied before commit. Recovery audit-identity sequence highwaters were aligned to existing records (coffee audit `4`, shot audit `169`).
+
+### Actual read-only post-commit acceptance
+
+| Check | New hosted recovery project | Live production at the same read-only check |
+| --- | ---: | ---: |
+| Confirmed Auth users / identities | **2 / 2** (one archived owner + one separate fresh pending tester) | 2 / 2 |
+| Administrators | **1 restored owner** | 1 |
+| Admitted / unadmitted members | **1 / 1** | 2 / 0 |
+| Verified coffees | **4** | 4 |
+| Owner shots | **14** | 16 |
+| Archived legacy-imported shots | **14** | 14 |
+| Library entries | **4** | 4 |
+| Approved submissions | **4** | 4 |
+| Shot audit rows | **29** | 32 |
+| Import batches | **1** | 1 |
+| Mutation receipts | **14** | 16 |
+| Roaster directory / aliases | **4 / 4** | 4 / 4 |
+| Historical import saving | **disabled** | disabled |
+| Storage objects | 0 | 0 |
+| Enabled shot triggers | **5** | 5 |
+
+Database security was independently rechecked after import: **42/42 RLS-enabled tables, 40 policies, 99 indexes, 19 ordinary first-party triggers, 48 app/private functions, 85 validated first-party FKs (0 invalid), and live `ensure_rls` guard**. There is no evidence of any production database/write, custom-domain, hosted Netlify production or payment change.
+
+A rollback-only **actual restored-account** role simulation passed: original owner was admitted/admin, saw **14 private shots and 4 library entries**, could access the sanitized Admin Dashboard; the separate real confirmed recovery test user remained **unadmitted, nonadmin**, and was rejected by private-state and administrator RPCs. This is an in-database JWT-claim/role simulation, **not yet the final real HTTP/password login acceptance**.
+
+**Cleanup complete to the tested scope:** The one-time age decryption identity, one-time GPG transport passphrase, encrypted staging payload and temporary local processing directory were deleted from the active container after the successful import. The two transient, encrypted-only Library transport files were moved to **Library trash** (this does not assert permanent deletion from provider retention). The owner's permanent recovery key remains on the Mac and was never transferred. Original user-uploaded encrypted handoff ZIP remains attached for provenance.
+
+**Next distinct acceptance before FULL hosted DR:** Sign into the **protected recovery Netlify site** `https://dic-recovery-20261016.netlify.app/` as the **original archived administrator** using the original password (or a recovery-only password reset if it changed after the snapshot). Verify actual display of four coffees/14 shots and Admin Dashboard in the browser, then fresh session/refresh and optionally password-reset and another-user isolation HTTP paths. Do not use the separate pending tester or redeem another invitation simply to test restored admin access. Do not request another Mac key rewrap: data import passed. All Locked security and admission decisions remain unchanged.
+
+**Status: HOSTED DATABASE/CORE AUTH ROW RESTORATION PASS; FULL END-TO-END HOSTED DISASTER RECOVERY still PARTIAL until real restored-account browser login is accepted and remaining provider continuity checks close.**
