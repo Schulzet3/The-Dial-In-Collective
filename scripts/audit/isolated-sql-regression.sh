@@ -16,9 +16,14 @@ run_sql tests/sql/bootstrap.sql
 for migration in supabase/migrations/*.sql; do
   echo "Applying $migration to isolated PostgreSQL"
   run_sql "$migration"
+  # The foundation suite tests original direct-column grants, intentionally
+  # replaced by revision-checked APIs in subsequent migrations.
+  if [[ "$migration" == *20261012015655_dic_internal_function_access.sql ]]; then
+    run_sql supabase/tests/security_foundation.sql
+  fi
 done
 run_sql tests/sql/owner-fixture.sql
-for regression in security_foundation coffee_identity_matching coffee_automated_approval admin_read_only_dashboard url_preview_release; do
+for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard url_preview_release; do
   echo "Running $regression"
   run_sql "supabase/tests/$regression.sql"
 done
