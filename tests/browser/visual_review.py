@@ -73,7 +73,7 @@ with sync_playwright() as p:
   check(page.locator('html').get_attribute('data-theme')==mode,mode+': saved appearance applied')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': home has no overflow')
   check(page.locator('.browse-toggle').evaluate('(e)=>getComputedStyle(e).borderTopStyle')=='solid',mode+': Search & Sort is visibly outlined')
-  check(page.locator('.status-badge').first.evaluate('(e)=>parseFloat(getComputedStyle(e).borderTopWidth)>=1'),mode+': status badge has a distinct edge')
+  check(page.locator('.status-badge').first.evaluate('(e)=>getComputedStyle(e).borderTopWidth==="0px"'),mode+': status badge is flat and borderless like original')
   check(page.locator('.workspace-bar h2').evaluate('(e)=>getComputedStyle(e).fontVariantLigatures')=='none',mode+': display ligatures disabled')
   shot(page,'01-home-'+mode)
   page.locator('[data-action=search-toggle]').click();check(page.locator('.search-tools').is_visible(),mode+': Search & Sort expands')
