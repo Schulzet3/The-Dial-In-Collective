@@ -1,0 +1,50 @@
+name: DIC one-time recovery-only frontend archive
+
+# Produces a static staging ZIP from the exact VERIFIED published app source.
+# No production deployments, GitHub secrets, Supabase service keys, or auth emails.
+# Contains a deliberately INVALID publishable-key placeholder which MUST be
+# replaced locally before the archive is deployed.
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/dic-one-time-recovery-frontend-package.yml
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Run pinned-release tests and assemble isolated recovery assets
+        env:
+          SUPABASE_URL: https://bgstplvefumsnplhqpvd.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_REPLACE_BEFORE_RECOVERY_DEPLOY_INVALID
+        run: |
+          set -euo pipefail
+          npm test
+          npm run build:cloud
+          test -f dist/index.html
+          test -f dist/cloud/config.js
+          grep -q 'REPLACE_BEFORE_RECOVERY_DEPLOY_INVALID' dist/cloud/config.js
+          test ! -f dist/.env
+          (cd dist && zip -q -r "${RUNNER_TEMP}/dic-one-time-recovery-frontend-PLACEHOLDER.zip" .)
+          sha256sum "${RUNNER_TEMP}/dic-one-time-recovery-frontend-PLACEHOLDER.zip"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dic-recovery-frontend-PLACEHOLDER
+          path: ${{ runner.temp }}/dic-one-time-recovery-frontend-PLACEHOLDER.zip
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
