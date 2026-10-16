@@ -1,8 +1,10 @@
 # DNS-provider portability and safe recovery — 2026-10-16
 
+**LATEST 2026-10-16 PASS: The actual Cloudflare BIND zone export has now been received and cross-verified. All 11 app/mail record values, including formerly truncated DKIM/verification TXT values and the 3 MX priorities, are complete in the owner's private verified package. This is an offline source-integrity and current-configuration recovery proof, NOT an alternate nameserver cutover.**
+
 **Current conclusion: A new DNS provider is NOT required before deleting the completed disposable Supabase/Netlify recovery test.** The owner successfully signed into a fully rebuilt hosted Supabase+Netlify application with exact archived Auth/admin, 4 coffees and 14 shots. A registrar nameserver move is a **distinct, higher-risk failover test, not part of that verified core hosted recovery**. Do not change production nameservers, Cloudflare rules, existing inbound email, production Netlify/Supabase configuration, Resend keys, or the apex redirect merely to test migration.
 
-## Portable documentation artifact (sanitized)
+## Earlier screenshot-only portability package (historical, superseded by exact export)
 
 Prepared a private conversation ZIP **`DIC_DNS_Recovery_Readiness_2026-10-16.zip`** (6,147 bytes, SHA-256 `ca545693c628b06b7e15f0ccbdb53ac7a007f8198d4ec703feb969733fffae20`) containing:
 - `READ_ME_FIRST.md`: Cloudflare-to-other-provider dependency and failover steps, protection and cleanup instructions.
@@ -11,7 +13,7 @@ Prepared a private conversation ZIP **`DIC_DNS_Recovery_Readiness_2026-10-16.zip
 
 **No BIND DNS import file is offered until a real Cloudflare zone export supplies full record data.** The package must never be deployed as an incomplete or provider-portable zone.
 
-## Observed records from prior project evidence
+## Earlier screenshot-only record observations (superseded by actual export)
 
 | Type | Name | Observed value / honest gap | Scope |
 |---|---|---|---|
@@ -31,7 +33,7 @@ Inbound forwarding owner-accepted: `support@dialincollective.com`, **catch-all O
 
 The 11-record screenshot contains **no visible `_dmarc` TXT**; review this separately as optional security hardening, not as proof current Resend or Cloudflare mail routing is broken. There is no reason to add new DNS changes as a prerequisite to cleanup.
 
-## Recommended **one-time, read-only export** before future failover
+## Historical export instructions (COMPLETED in later verification)
 
 From logged-in Cloudflare account: select `dialincollective.com` → DNS → Records → Import and Export → **Export**, download **original BIND zone file**. Store privately alongside the owner's encrypted backup and `~/.dic-backup/` recovery-key escrow. This supplies full DKIM TXT strings, exact MX priorities, and verification text missing from screenshots. Treat owner-uploaded export as reference; do not commit any long provider-specific verification token into public docs unnecessarily. The export **does not capture Redirect Rules or Email Routing's target/catch-all**: back those up separately in secure recovery instructions.
 
@@ -53,3 +55,24 @@ Already authorized for removal after core hosted recovery success:
 - Downloaded Mac one-time rewrap/helper/ciphertext/website ZIPs can be discarded, but **never remove** owner's permanent private recovery identity in `~/.dic-backup/`, second offline escrow, normal nightly encrypted artifacts, Google Drive originals, or the recovery workflow/docs.
 
 Source-of-truth product decisions (including the temporarily-302 apex reserved for future homepage) remain unchanged. Sources: [Cloudflare DNS export](https://developers.cloudflare.com/dns/manage-dns-records/how-to/import-and-export/), [Cloudflare redirects](https://developers.cloudflare.com/fundamentals/manage-domains/redirect-domain/), [Cloudflare email routing domains](https://developers.cloudflare.com/email-service/configuration/domains/), [Netlify external DNS](https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns/). For prior owner screenshot/acceptance evidence, see [hosted provider inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md). For exact administered/Auth restore results see [managed hosted restoration report](HOSTED_RECOVERY_MANAGED_SUPABASE_DRILL_2026-10-16.md).
+
+
+## Completed owner-provided Cloudflare zone export — exact-record verification PASS, 2026-10-16
+
+**Source:** `dialincollective.com.txt`, exported by owner's Cloudflare dashboard at `2026-10-16 23:19:52` (timezone not stated in header). Exact original **2,630-byte** source SHA-256: `03fce53bd1c2b892df03d0583a5e5f86827a82aa84961ecfce55622f52852598`. The unmodified original source is preserved in a new user-download ZIP `DIC_DNS_Recovery_Verified_2026-10-16.zip` (**9,219 bytes**, SHA-256 `1860c9dc4f2112bfc0e3ec2649e206e7a9f759615183a6bdee8087752d461916`). No original TXT text or verification token is committed to GitHub; the owner's privately downloaded ZIP has all exact values.
+
+**11 of 11 previously inventoried DNS records matched exactly.** The BIND export also contains one Cloudflare SOA and two Cloudflare NS records, for **14 total RRs**. The exact CNAME, SPF, A target and proxy tags matched the previous screenshot-based observations. Newly resolved facts:
+
+| Record | Source-verified finding |
+| --- | --- |
+| `cf2024-1._domainkey` TXT | Full two-chunk concatenated TXT recovered; **2,048-bit RSA public key**, TXT-value SHA-256 `7edf37256212f306d474921bcabff1e6abea831924737f785c040c8e6b5e8241` |
+| `resend._domainkey.auth` TXT | Complete provider-managed **1,024-bit RSA public key**, TXT-value SHA-256 `13b1922cec31857214aa96ae004ac0cd58c5eb435f793c1fa316681908dcd849`. Do not unilaterally replace/change provider DNS. |
+| `subdomain-owner-verification` TXT | Exact **32-character** value recovered and preserved in private package; SHA-256 `b4fbf74b00d40c4305de346dc484cafb69ccce8c3b3da3167d280028f5f3ddcb` |
+| MX `route1.mx.cloudflare.net.` | **Priority 38** |
+| MX `route2.mx.cloudflare.net.` | **Priority 2** |
+| MX `route3.mx.cloudflare.net.` | **Priority 92** |
+| Nameservers | `dara.ns.cloudflare.com.`, `yew.ns.cloudflare.com.` (current-zone export, not portable new-provider NS) |
+
+**Offline verification:** Parsed the exported zone and its TXT multi-string content, independently decoded the complete DKIM RSA public keys, and matched the previous 11-record inventory. The ZIP includes `records.json`, `README.md`, original source, `manifest_sha256.json`, and a **no-network standard-Python** `verify_export.py`; execution and ZIP CRC checks **PASS**. Source preserves Cloudflare `cf-proxied:true` for apex `192.0.2.1` and `cf-proxied:false` for app/Resend CNAMEs. Cloudflare's TTL `1` fields are not generalized into alternate DNS TTL policies. No `_dmarc` RR appears in this exact 11-record export (optional hardening review, not proof working sender mail is broken).
+
+**Important distinction:** This closes the previous missing TXT-key/MX-priority **documentation gap**. It does **not** export Cloudflare's HTTP Redirect Rule or private `support@` Email Routing target, prove a second provider's NS/DS/HTTPS/forwarding, or authorize modifying the live domain. The Cloudflare export's SOA owner lacks a final dot, and both SOA and NS must be replaced for a real alternative zone. The `192.0.2.1` origin is a **proximied Cloudflare-only redirect placeholder**; never use it as a production origin on a different authoritative provider. The owner-confirmed existing root 302 rule and support-email routing are separately preserved above. A real alternative-provider cutover remains **NOT TESTED** and is not required for cleaning up the successful temporary Supabase/Netlify hosted-recovery drill.
