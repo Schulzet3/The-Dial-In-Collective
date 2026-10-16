@@ -138,3 +138,8 @@ The owner explicitly approved a **one-time encrypted transfer and isolated cloud
 ## Verified Apps Script synthetic backup alert delivery — October 16
 
 **PASS (owner confirmed):** Existing `sendBackupAlert_()` was invoked by a test-only Apps Script function and its unmistakably labeled test message was received at the configured alert inbox. The scheduled GitHub→Drive backup and SHA matching were independently verified on consecutive days. This closes synthetic email-delivery testing only. **Still not tested:** actual failed-backup catch execution, 36-hour stale warning, and resilience when Apps Script itself stops; the current code cannot alert if its own trigger never fires. A separately scheduled independent watchdog is recommended. [Detailed audit](AUTOMATED_BACKUP_DELIVERY_ALERT_AUDIT_2026-10-16.md). No live backup or production service was deliberately disrupted.
+
+
+## Hosted-provider reconstruction inventory completed — 2026-10-16 (read-only)
+
+Collected live Netlify visitor access, published release, env **names/scopes**, build config; Supabase project/region/Postgres/migrations/extensions/Edge versions/storage count; reconciled older source comments with latest owner-approved production-only SSO removal and independently verified backup/alert evidence. No credentials copied, new services funded, secrets modified or live deploy performed. **Remaining dependency:** actual Supabase Auth Site URL/redirect allowlist and SMTP/provider settings, Cloudflare/DNS reconstruction, vault credentials and replacement hosted Supabase/Netlify account-configuration drill. Start with owner screenshot of Supabase Authentication → URL Configuration. [Secret-free hosted provider recovery inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md).
