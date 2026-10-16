@@ -171,3 +171,8 @@ Resend's domain Events timeline shows **Partially verified** for `auth.dialincol
 **Distinct remaining work:** Full rebuild of the managed hosted Supabase Auth/JWT/API roles/secrets/email/Netlify configuration in a **new isolated provider project**, with any cost explicitly approved before provisioning; actual nonadmin coffee-entry URL/pending/source-validation HTTP flow; device-specific/offline/multidevice sync acceptance; provider credential recovery access planning (no secret disclosure); optional auth/DMARC/retention hardening. Do not conflate optional hygiene with broken current functionality. Avoid collecting further Cloudflare/Auth/Resend screenshots simply to restate existing settings. For complete provenance see [reconciled hosted provider inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md).
 
 **No provider settings, database rows, production deployment, billing, Locked product choices, or security gates changed in this audit.**
+
+
+## Completed cleanup: one-time GitHub restore toolkit removed — October 16
+
+One-time public-only `.github/workflows/one-time-isolated-restore-toolkit.yml` was successfully **deleted from `main`** in commit `e9822d271dbe1ace9e89d7ea9a7f769bc72b486f` following the exact encrypted snapshot restore. Earlier paragraphs reporting a blocked attempt are historical and now superseded; no remaining one-time workflow cleanup required. Persistent scheduled backup and recovery drill workflows remain intact. Project duplicate `Build Web App(1).pdf` is byte-identical to `Build Web App.pdf`, but current Project attachment controls do not permit deleting it from this chat; keep it and deduplicate indexing/read it only once.
