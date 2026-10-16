@@ -99,3 +99,15 @@ This verifies the authorized offsite ciphertext copy. It does not verify decrypt
 - Production import saving remains disabled. There was no mutation of user data or any environment during this evidence review. No Netlify deployment or credit spend took place.
 
 **Next recovery gate:** Observe first scheduled encrypted backup and the automatically delivered private Drive copy **with the current two user accounts and shot data**, validate age/failure alerts/retention, and perform an isolated restoration of the actual ciphertext with private-key custody preserved. Keep operator-recovery steps separate from the ordinary beta Settings interface under the newer Locked UI amendment.
+
+
+## Exact-archive isolated-restore preflight — owner direction, October 16
+
+The owner expressly instructed to proceed using the **most recent already verified backup** and not delay testing to capture the two newer shots or second Auth account.
+
+- Selected original GitHub artifact: run \`38926581554\`, artifact \`12056578138\`, \`dic-nightly-12056578138.zip\`, created 2026-10-16 15:46 UTC.
+- Downloaded original archive from GitHub Actions to an independent isolated review environment: 443225 bytes, SHA-256 \`e1f4ce1705a7a5dc903b24967f27b1e97ee219854dc5e52cb4d2aa1e655add6f\`; matches GitHub manifest and previously checksum-matched private Drive counterpart. ZIP central directory/CRC fully PASS. Sole member \`backup.age\`, 443091 bytes, SHA-256 \`705346ef5f81a7489e5c76a75120301a1bb0c7480c4ff7eafa049c23694dcc99\`. Header is valid age-v1 SSH-Ed25519 encrypted format.
+- Expected observed post-export inventory in that backup run: **1 Auth user, 14 shots, 4 verified coffees, 4 library entries, 4 approved submissions**. These are run-time counts, not verified restored data. The newer two shots and second account will not be present by user choice.
+- **Exact ciphertext NOT YET DECRYPTED/RESTORED.** The sole existing private SSH/age recovery identity was intentionally retained on the owner's Mac and not transferred to ChatGPT, GitHub, Drive or Supabase. Having valid ciphertext and public recipient alone is insufficient to decrypt. Do not substitute fresh-source re-dumps or transaction-based tests for proof of restoring this exact encrypted archive.
+- No live production writes, new paid Supabase instance, Netlify deployment, private-key transfer, or extra hardware/software requirement occurred during this preflight.
+- To complete an exact-archive drill while respecting offline key custody, explicitly agree on a one-time **local decrypt and re-encrypt to an ephemeral test-only recipient**, then transfer only the separately encrypted archive to an isolated testing environment whose handling of decrypted Auth/coffee data is owner-authorized. Alternative: entirely local isolated PostgreSQL restore controlled by the owner. Never ask the owner to paste their permanent recovery key or upload plaintext into chat.
