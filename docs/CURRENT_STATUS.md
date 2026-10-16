@@ -56,6 +56,8 @@ The first real user signup/invite, separate nonadmin Admin Access Unavailable, e
 
 Use the existing second confirmed/admitted nonadmin account for a **genuine** New Coffee URL → independent identity/release match → trusted source preview/verification or Pending flow; verify that owner-coffee data and community canonical records aren't silently altered. Confirm one-candidate vs ambiguous vs different-release safeguards using actual reputable coffee source data when possible. Avoid fabricated community results.
 
+**2026-10-16 preflight completed (read-only):** 4 Verified global coffees, 4 original admin submissions, 4 admin library entries, 0 pending/conflict, existing nonadmin 0 coffees/submissions/shots, owner 16 total shots; preview quota previously unused, 2 admitted verified users and import saving off. Published source has explicit official URL preview → applied suggestions → release-sensitive match → nonadmin Pending or trusted-source Verified path. All four recognized official roaster hosts are inventoried. **Real nonadmin browser acceptance has NOT yet run.** First case awaits one real new coffee's official product URL; avoid fictitious submissions or needless redeploys. See [real nonadmin coffee URL acceptance checkpoint](REAL_NONADMIN_COFFEE_URL_ACCEPTANCE_2026-10-16.md).
+
 ### 3. Real mobile/offline sync & core product parity
 
 Actual iPhone Safari/PWA, reconnection after offline shot creation, durable queued state, account switching, multi-device edits/conflicts, recommendation history/current recipe behavior, accessibility, equipment/recipe families and agreed engine tiers need separate real-world acceptance. Existing synthetic Chromium and SQL tests are useful but not substitutes.
