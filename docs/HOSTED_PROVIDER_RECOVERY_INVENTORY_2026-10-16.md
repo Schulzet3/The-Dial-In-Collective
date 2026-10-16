@@ -25,8 +25,8 @@
 
 - App uses Supabase email/password, confirmed-email beta admission and strict private data isolation; expected new-password policy is minimum 8 characters, at least one uppercase and one special character, no extra digit/lowercase requirement. The owner verified real signup/confirmation and a separate test member.
 - Prior owner records document Resend Free transactional sending via `no-reply@auth.dialincollective.com`, Cloudflare-based DNS for `dialincollective.com`, a root-domain redirect to the app, and Cloudflare support-email forwarding. These are **historical configuration facts**, not a freshly collected provider configuration export.
-- **Missing or unverified for full reconstruction:** confirmation/signup/recovery options, production SMTP identity and sending limits, password/have-I-been-pwned setting, JWT signing-key rotation approach, Supabase project service keys and Edge Function secret names, provider-level Auth templates/settings, storage policies beyond database snapshot, Cloudflare complete DNS/MX/SPF/DKIM/DMARC records and page rules, Resend provider verification/settings, domain registrar recovery access, and encrypted owner-vault inventory of credentials. **Supabase Auth Site URL and redirect allowlist are now verified below.** None of these credentials belong in GitHub/chat.
-- **Next owner-assisted read-only checkpoint:** Supabase Dashboard → Authentication → SMTP Settings. Capture whether custom SMTP is enabled, sender name/address, host and port (redact any credential, username or API key). Independently verify SMTP setup before planning provider recreation.
+- **Missing or unverified for full reconstruction:** confirmation/signup/recovery options, SMTP password/key custody and sending limits, password/have-I-been-pwned setting, JWT signing-key rotation approach, Supabase project service keys and Edge Function secret names, provider-level Auth templates/settings, storage policies beyond database snapshot, Cloudflare complete DNS/MX/SPF/DKIM/DMARC records and page rules, Resend provider domain verification/settings, domain registrar recovery access, and encrypted owner-vault inventory of credentials. **Supabase Auth Site URL, redirect allowlist, and nonsecret SMTP settings are verified below.** None of these credentials belong in GitHub/chat.
+- **Next owner-assisted read-only checkpoint:** Resend Dashboard → Domains → `auth.dialincollective.com`. Capture domain verification status and DNS authentication records (SPF, DKIM and any supplied MX/DMARC), omitting or redacting any API key. Then compare against Cloudflare public DNS and its zone configuration.
 
 ### Supabase Auth URL configuration — verified from owner dashboard screenshot 2026-10-16
 
@@ -39,6 +39,19 @@
 - This screenshot **does not verify** custom SMTP, URL delivery outside the existing tested signup, email templates, or Auth provider secrets.
 - No provider settings were changed, and this is a state-capture checkpoint, **not a new Locked product decision**.
 
+### Supabase Auth SMTP configuration — verified from owner dashboard screenshot 2026-10-16
+
+- **Custom SMTP:** enabled.
+- **Sender email:** `no-reply@auth.dialincollective.com`.
+- **Sender display name:** `The Dial In Collective`.
+- **SMTP host:** `smtp.resend.com`.
+- **SMTP port:** `465`.
+- **SMTP username:** `resend` (standard provider identifier, not a secret).
+- **SMTP credential:** present in Supabase but hidden in the dashboard screenshot; the value and its ownership/rotation/recovery remain unverified. Never request it in chat or include it in GitHub.
+- The owner's genuine second-account signup verification email was successfully delivered earlier, consistent with this live configuration. The screenshot itself proves the settings shown, not an independent SMTP login/delivery event or reproducible provider recovery.
+- **Hosted restore dependency:** Rebuild requires access to the owner-controlled Resend account, domain verification, ability to create or recover a suitable SMTP API credential, and re-enter it directly in a new secure Supabase dashboard. Never export an SMTP password or API token to the GitHub recovery repository, plain notes, or screenshots. Record only credential **location/custodian**, never its value.
+- No production provider settings were modified; this is state capture, not a new Locked product decision.
+
 ## Backups and monitoring: passed with remaining boundaries
 
 - GitHub scheduled encrypted dump runs on main; configured 30-day GitHub artifact retention. Owner's Apps Script courier polls GitHub every 3 hours, selects trusted successful schedule/manual runs and SHA-verifies ciphertext to a private Drive folder. Oct 15 and 16 scheduled archives independently downloaded from Drive byte-for-byte matched GitHub SHA-256 and ZIP CRC; manual post-release backup separately identified.
@@ -48,4 +61,4 @@
 
 ## Next acceptance gate
 
-Supabase Auth URL settings are documented and verified. Next capture SMTP sender/provider settings, then Cloudflare/DNS and secure credential inventory. Only after a cost quote and the owner's explicit agreement should a new hosted recovery instance be provisioned. A disposable local PostgreSQL restore is not a full hosted provider reconstruction.
+Supabase Auth URL and nonsecret SMTP settings are documented and verified. Next verify Resend sending-domain records/status, Cloudflare DNS configuration, and secure credential custody. Only after a cost quote and the owner's explicit agreement should a new hosted recovery instance be provisioned. A disposable local PostgreSQL restore is not a full hosted provider reconstruction.
