@@ -1,4 +1,4 @@
-# Coordinated visual refinement - review 6: original flat badges and simplified New Coffee
+# Coordinated visual refinement - review 7: original badge treatment and shot-history restoration
 
 **State:** implemented on `work/visual-refresh-20261015` for owner screenshot review only. No Netlify deployment, SSO removal, production migration, import unlock or test-account creation is authorized here. Production remains on its existing release.
 
@@ -30,3 +30,7 @@ No release marker is included in this change. The Netlify build guard explicitly
 
 ## Review 6: owner-requested targeted adjustments
 Original dark JSX badge fills are unchanged. All badge text is plain black in both themes; badge outlines are removed to match the flat clean style of the earlier app, while other interface boundaries stay defined. This later owner decision supersedes previous white-on-Dark text and bold badge-border treatments only. The New Coffee dialog has one continuous form without `Optional Coffee Details` or its divider; all inputs survive, including the six side-by-side metadata fields. The browser review includes assertions for absence of the heading and persistence of two-column form layout. Contrast limitations on black text over the darkest blue are disclosed; this is not WCAG approval.
+
+## Review 7: original JSX alignment and recommendation hierarchy
+The owner approved the badge reference preview (white text on Traditional/Ristretto; black text on green/lighter blue/gold, original fill colors, flat borderless pills) and supplied original-app screenshots for shot-history density, date layout and contextual notes. Shot History is restored to one-line measurement summary and right-hand numeric date where space permits; setup/basket/feed are revealed only at the bottom after expansion, with Expand All / Collapse All per coffee. Redundant local recipe-family explanatory sentence removed; no recipe calculations or cloud policy changes in this UI batch.
+Canonical Master Specification Section 25.2 remains the recommendation-engine hierarchy. The current beta only partially implements the agreed eight tiers. Before claiming more specific coffee/community evidence, perform a verified engine rollout with tests; never infer weak coffee-density or process claims merely from origin/elevation. Screenshots use synthetic data; no public release.

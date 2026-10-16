@@ -40,15 +40,20 @@ test('stale offline shots cannot roll back the newer default',()=>{
  const next=patchAcknowledgement(raw,{owner:OWNER,action:'save_shot',payload:{}},{record:stale});
  assert.equal(next.setupPreferences[0].slow_feed,false);
 });
-test('shot overview moves setup/basket/feed above compass and separates Edit and Make Current',()=>{
+test('shot history is compact and equipment context only appears at bottom when expanded',()=>{
  const raw=rawFixture();raw.shots=[rawShot({feed_mode:'slow'})];
  const sh=hydrate(raw).shots[0],html=shotCard(sh,{expanded:true,activeVersionId:'version'});
- assert.ok(html.indexOf('Test Home')<html.indexOf('class="radar"'));
- assert.ok(html.indexOf('18 g Basket Dose')<html.indexOf('class="radar"'));
- assert.ok(html.indexOf('Slow Feed')<html.indexOf('class="radar"'));
+ assert.ok(html.indexOf('Test Home')>html.indexOf('class="radar"'));
+ assert.match(html,/class="shot-topline"/);
+ assert.match(html,/class="shot-date">\d{1,2}\/\d{1,2}\/\d{4}<\/span>/);
+ assert.ok(html.indexOf('18 g')>html.indexOf('class="radar"'));
+ assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/Test Home|Basket Dose/);
+ assert.ok(html.indexOf('Slow Feed')>html.indexOf('class="radar"'));
  assert.ok(html.indexOf('data-action="edit"')<html.indexOf('data-action="make-current"'));
+ assert.match(html,/class="shot-summary-actions"/);
  assert.match(html,/class="shot-actions"/);
- assert.match(html,/class="primary compact" data-action="edit"/);
+ assert.match(html,/class="text-button" data-action="edit"/);
+ assert.match(shotCard(sh,{expanded:false,activeVersionId:'version'}),/data-action="edit"/);
  assert.match(html,/class="ghost compact" data-action="make-current"/);
  assert.doesNotMatch(shotCard(sh,{expanded:true,activeVersionId:'other'}),/data-action="make-current"/);
  assert.equal(feedLabel(null),'Feed Not Recorded');

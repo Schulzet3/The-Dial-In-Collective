@@ -18,7 +18,7 @@ for (const [index,mode] of ['Light','Dark'].entries()) {
  for (const [name,[fill,ink]] of Object.entries(original)) {
   test(`${mode} ${name} keeps original JSX dark fill with approved theme lettering`, () => {
    assert.equal(effective[`badge-${name}`],fill);
-   assert.equal(effective[`badge-${name}-ink`],'#000000');
+   assert.equal(effective[`badge-${name}-ink`],['trad','ristretto'].includes(name)?'#FFFFFF':'#000000');
    assert.equal(reference.badges[name].background,fill);
    assert.equal(reference.badges[name].color,ink);
   });

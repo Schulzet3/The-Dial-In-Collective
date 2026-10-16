@@ -8,8 +8,8 @@
  --green:#296523;--blue:#155b90;--blue-soft:#d8eafa;
  --badge-green:#6cbb58;--badge-green-ink:#000000;--badge-green-line:#3e732f;
  --badge-turbo:#92b6d3;--badge-turbo-ink:#000000;--badge-turbo-line:#3e7098;
- --badge-trad:#3e7098;--badge-trad-ink:#000000;--badge-trad-line:#92b6d3;
- --badge-ristretto:#2c506d;--badge-ristretto-ink:#000000;--badge-ristretto-line:#588fbb;
+ --badge-trad:#3e7098;--badge-trad-ink:#ffffff;--badge-trad-line:#92b6d3;
+ --badge-ristretto:#2c506d;--badge-ristretto-ink:#ffffff;--badge-ristretto-line:#588fbb;
  --badge-lungo:#bed3e4;--badge-lungo-ink:#000000;--badge-lungo-line:#588fbb;
  --badge-custom:#588fbb;--badge-custom-ink:#000000;--badge-custom-line:#2c506d;
  --badge-pending:#e5bc6b;--badge-pending-ink:#000000;--badge-pending-line:#c87f45;
@@ -65,7 +65,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .coffee-subtitle{font-size:13px;line-height:1.5;margin-top:7px;color:var(--muted)}
 .coffee-body{padding:0 20px 20px}
 .coffee-toggle>svg{width:18px;height:18px;color:var(--accent-text)}
-.status-badge,.style-badge,.preview-pill,.admin-state{border:0;display:inline-flex;gap:5px;align-items:center;justify-content:center;border-radius:999px;padding:3px 10px;font-size:13px;line-height:1.45;font-weight:600;letter-spacing:0;text-transform:none;white-space:nowrap;min-height:27px}
+.status-badge,.style-badge,.preview-pill,.admin-state{border:0;display:inline-flex;gap:5px;align-items:center;justify-content:center;border-radius:999px;padding:3px 10px;font-size:13px;line-height:1.45;font-weight:500;letter-spacing:0;text-transform:none;white-space:nowrap;min-height:27px}
 /* Owner-locked app-wide rule: never use text shadows, text effects or decorative glows. */
 *,*::before,*::after{text-shadow:none!important}
 .status-badge,.style-badge,.preview-pill,.admin-state,.sync-indicator[data-sync-state=pending]{text-shadow:none}
@@ -175,3 +175,28 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 
 /* New Coffee: six metadata fields retain two columns, with no visual divider. */
 #new-coffee .coffee-detail-grid{margin-top:16px;margin-bottom:16px}
+
+/* Original JSX shot history: concise measurement/date line, flat color badges,
+   and equipment provenance shown only at the bottom of expanded details. */
+.history-actions{display:flex;justify-content:flex-end;margin:0 0 9px}
+.history-actions .text-button{min-height:38px;padding:6px 2px;font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.shot-toggle{align-items:center;gap:10px}
+.shot-overview{min-width:0;flex:1;gap:7px}
+.shot-topline{display:flex;align-items:baseline;justify-content:space-between;min-width:0;gap:12px}
+.shot-numbers{flex:1;min-width:0;overflow-x:auto;white-space:nowrap;scrollbar-width:none;font-size:13px;line-height:1.6}
+.shot-numbers::-webkit-scrollbar{display:none}
+.shot-date{white-space:nowrap;flex-shrink:0;font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.shot-overview .shot-meta{margin-top:0;gap:7px;display:flex;flex-wrap:wrap}
+.shot-note{margin:1px 14px 0}
+.shot-summary-actions{padding:0 14px 10px;display:flex;align-items:center;gap:12px}
+.shot-summary-actions .text-button{min-height:36px;padding:3px 0;font-size:13px}
+.shot-body{padding:4px 14px 14px}
+.shot-body .shot-actions{justify-content:flex-end;padding-top:10px;margin-top:6px;border:0}
+.shot-record-context{margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 15px}
+.shot-record-context>div{min-width:0}.shot-record-context dt{font-size:11px;color:var(--muted)}
+.shot-record-context dd{margin:2px 0 0;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:590px){
+ .shot-topline{flex-wrap:wrap;gap:1px}
+ .shot-numbers{flex-basis:100%;font-size:12px}
+ .shot-date{margin-left:auto}
+}

@@ -108,7 +108,7 @@ export function recommendation(s,coffeeId,options={}) {
   rec.time=stats(used.map(x=>x.timeS),{singleWidth:CONFIG.singleTimeHalfWidth});
   rec.familyId=chosen.id;rec.observations=used.length;rec.established=local.length>0;
   rec.source=local.length?'Your dialed in window':'Starting reference from your other setup';
-  rec.reasons=[local.length?'Based on your successful shots in this recipe family.':'Your own successful recipe, adapted to this basket. Not yet proven on this setup.'];
+  rec.reasons=local.length?[]:['Your own successful recipe, adapted to this basket. Not yet proven on this setup.'];
  } else if(style!=='Custom') {
   // Weak cross-style ratio residual only: no copied time or grind numbers.
   const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&RATIOS[sh.style]);

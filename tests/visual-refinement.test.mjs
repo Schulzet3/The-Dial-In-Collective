@@ -11,7 +11,7 @@ const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)
 for(const [i,mode] of ['light','dark'].entries()){
  const v={...scopes[0],...scopes[i]};
  // Exact original dark-JSX badge fills and plain black text; darker blue pairs warrant contrast review.
- for(const badge of ['green','turbo','trad','ristretto','lungo','custom','pending'])test(`${mode} ${badge} uses approved theme lettering`,()=>assert.equal(v[`badge-${badge}-ink`].toLowerCase(),'#000000'));
+ for(const badge of ['green','turbo','trad','ristretto','lungo','custom','pending'])test(`${mode} ${badge} uses approved original JSX lettering`,()=>assert.equal(v[`badge-${badge}-ink`].toLowerCase(),['trad','ristretto'].includes(badge)?'#ffffff':'#000000'));
  test(`${mode} primary action text exceeds 4.5:1 contrast`,()=>assert.ok(contrast(v['action-ink'],v.action)>=4.5));
  test(`${mode} body, muted and link text are legible on surfaces`,()=>{for(const key of ['ink','muted','accent-text'])assert.ok(contrast(v[key],v.surface)>=4.5);});
 }
