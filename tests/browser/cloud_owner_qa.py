@@ -110,10 +110,10 @@ with sync_playwright() as p:
  assert page.locator('.shot-record-context').get_by_text('Home Espresso',exact=True).count()==1
  assert page.locator('.shot-record-context').get_by_text('Slow Feed',exact=True).count()==1
  assert page.locator('.shot-record-context').get_by_text('Basket Dose',exact=True).count()==1
- edit=page.locator('.shot-summary-actions [data-action=edit]').first.bounding_box()
+ edit=page.locator('.shot-body [data-action=edit]').first.bounding_box()
  current=page.locator('.shot-body [data-action=make-current]').first.bounding_box()
- assert edit and current and edit['y']+edit['height']<current['y']
- checks.append('Shot summary stays compact, context follows taste and Edit is distinct from Make Current')
+ assert edit and current and edit['x']+edit['width']<current['x'] and abs(edit['y']-current['y'])<5
+ checks.append('Shot history keeps compact bottom-row Edit and Make Current buttons and equipment context')
  page.screenshot(path=str(OUT/'cloud_history_light.png'),full_page=True)
  page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=theme]').select_option('dark');page.get_by_role('button',name='Save Preferences').click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();page.get_by_role('button',name='Close',exact=True).click();assert page.locator('html').get_attribute('data-theme')=='dark';checks.append('Dark appearance persists through save without closing Settings')
  page.screenshot(path=str(OUT/'cloud_home_dark.png'),full_page=True)

@@ -104,7 +104,12 @@ with sync_playwright() as p:
   page.locator('[data-action=shot-toggle-all]').click()
   check(page.locator('[data-action=shot-expand][aria-expanded=true]').count()==0,mode+': all three history rows collapse')
   page.locator('[data-action=shot-expand]').first.click()
-  check(page.locator('.shot-summary-actions [data-action=edit]').count()==3,mode+': every saved shot has a visible Edit link')
+  check(page.locator('.shot-body [data-action=edit]').count()==1,mode+': Edit appears only in expanded details')
+  check(page.locator('.shot-body [data-action=edit]').first.evaluate('(e)=>e.getBoundingClientRect().height')<=38,mode+': Edit is compact')
+  check(page.locator('.shot-body [data-action=make-current]').first.evaluate('(e)=>e.getBoundingClientRect().height')<=38,mode+': Make Current Recipe is compact')
+  check(page.locator('.shot-body .taste-chip').first.evaluate('(e)=>getComputedStyle(e).fontWeight')==page.locator('.shot-meta .style-badge').first.evaluate('(e)=>getComputedStyle(e).fontWeight'),mode+': taste badge lettering matches style')
+  check(int(page.locator('.shot-body .radar text').first.evaluate('(e)=>getComputedStyle(e).fontWeight'))>=600,mode+': radar labels have medium emphasis')
+  check(page.locator('.shot-topline .shot-date').first.evaluate('(e)=>{const d=e.getBoundingClientRect(),t=e.closest(".shot-topline").getBoundingClientRect();return Math.abs(d.left-t.left)<3}'),mode+': mobile date aligns left')
   check(page.locator('.shot-body [data-action=make-current]').count()==1,mode+': Make Current Recipe remains separate')
   shot(page,'06-history-'+mode)
   page.set_viewport_size({'width':900,'height':950})
@@ -133,6 +138,7 @@ with sync_playwright() as p:
   }""")
   check(page.locator('.coffee-card.is-open .recipe-label').inner_text()=='Starting Recommendation',mode+': unproven coffee has a starting recipe')
   check('similar' in page.locator('.coffee-card.is-open .recipe-reason').inner_text().lower(),mode+': starting recipe cites personal similar-coffee evidence')
+  check('–' in page.locator('.coffee-card.is-open .metric').filter(has=page.locator('.metric-label',has_text='Grind')).locator('.metric-value').inner_text(),mode+': unproven Grind has a narrow range')
   shot(page,'09b-starting-recommendation-'+mode,'.coffee-card.is-open')
   page.evaluate("""()=>{
     const a=window.__app,s=a.state,c=s.coffees.find(x=>x.id==='coffee-two');
@@ -144,6 +150,7 @@ with sync_playwright() as p:
   }""")
   check(page.locator('.coffee-card.is-open .feedback-panel').count()==1,mode+': non-green shot generates next-shot guidance')
   check('Try grind' in page.locator('.coffee-card.is-open .feedback-panel').inner_text(),mode+': non-green shot has specific grinder recommendation')
+  check('–' not in page.locator('.coffee-card.is-open .metric').filter(has=page.locator('.metric-label',has_text='Grind')).locator('.metric-value').inner_text(),mode+': explicit next-shot Grind is a specific setting')
   shot(page,'09c-next-shot-recommendation-'+mode,'.coffee-card.is-open')
   # Denied/non-admin front-end fixture. Real user authorization is a separate gate.
   page.evaluate('window.__app.status.admin=false;window.__app.settings()')

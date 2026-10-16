@@ -65,3 +65,35 @@ test('exact-coffee cross-style success takes priority over similar other coffees
  assert.equal(rec.observations,0);
  assert.doesNotMatch(rec.reasons.join(' '),/similar Light coffee/i);
 });
+
+test('unproven personal Grind has a calibrated starting interval',()=>{
+ const {s,target}=create();s.shots.push(good('neighbor','other-coffee',{grindSetting:1.3}));
+ const rec=recommendation(s,target.id);
+ assert.ok(rec.grind.range);
+ assert.ok(rec.grind.range.low<=rec.grind.value&&rec.grind.range.high>=rec.grind.value);
+ assert.ok(rec.grind.range.high-rec.grind.range.low<=1);
+ assert.equal(rec.grind.proven,false);
+});
+test('pure grinder baseline also has a bounded uncertainty interval',()=>{
+ const {s,target}=create();const rec=recommendation(s,target.id);
+ assert.ok(rec.grind.range);
+ assert.ok(rec.grind.range.low>=0&&rec.grind.range.high<=5);
+ assert.match(rec.grind.source,/range starting estimate/);
+});
+test('a Dialed In grinder result retains a proven precise value',()=>{
+ const {s,target}=create();
+ s.families.push({id:'own-family',coffeeId:target.id,style:'Turbo'});
+ s.shots.push(good('own',target.id,{familyId:'own-family',grindSetting:1.1}));
+ const rec=recommendation(s,target.id);
+ assert.equal(rec.grind.value,1.1);
+ assert.equal(rec.grind.proven,true);
+ assert.equal(rec.grind.range,undefined);
+});
+test('explicit post-taste adjustment remains a single target',()=>{
+ const {s,target}=create();const sh=good('under',target.id,{dialedIn:false,grindSetting:1.3,timeS:10});
+ sh.suggestion={next:{grindSetting:1.1,yieldCenter:50}};
+ s.shots.push(sh);
+ const rec=recommendation(s,target.id);
+ assert.equal(rec.grind.value,1.1);
+ assert.equal(rec.grind.range,undefined);
+});

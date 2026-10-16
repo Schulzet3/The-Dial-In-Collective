@@ -178,6 +178,15 @@ export function recommendation(s,coffeeId,options={}) {
   if(a.next){rec.reasons=[];rec.source='Adjustment from your latest taste rating';if(a.next.grindSetting!=null)rec.grind={value:a.next.grindSetting,source:'Next setting to try',proven:false};if(a.next.yieldCenter!=null){rec.yield={low:Math.max(5,round(a.next.yieldCenter-1)),high:round(a.next.yieldCenter+1),center:round(a.next.yieldCenter)};rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};}if(a.next.tempC!=null)rec.tempC=a.next.tempC;}
   if(exp){rec.source='Experiment starting window';rec.established=false;}
  }
+ if(!rec.established&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
+  const step=grindStep(v);
+  // A calibrated starting search band is NOT a statistical confidence interval.
+  // A pure espresso-scale heuristic is intentionally less precise than personal evidence.
+  const half=rec.grind.source==='Espresso range starting estimate'?step*2:step;
+  const lo=Math.min(v.grinderMin,v.grinderMax),hi=Math.max(v.grinderMin,v.grinderMax);
+  const low=round(clamp(rec.grind.value-half,lo,hi)),high=round(clamp(rec.grind.value+half,lo,hi));
+  if(low<high)rec.grind.range={low,high};
+ }
  return rec;
 }
 export function prefill(s,coffeeId,options={}) {

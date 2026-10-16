@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {hydrate} from '../site/cloud/mapping.js';
 import {patchAcknowledgement} from '../site/cloud/cache.js';
 import {shotCard,feedLabel} from '../site/cloud/shot_card.js';
+import {shotSummary,recipeGrid} from '../site/lib/ui.js';
 import * as E from '../site/lib/engine.js';
 import {rawFixture,rawShot,OWNER,TIME} from './cloud-fixtures/raw.js';
 
@@ -50,11 +51,12 @@ test('shot history is compact and equipment context only appears at bottom when 
  assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/Test Home|Basket Dose/);
  assert.ok(html.indexOf('Slow Feed')>html.indexOf('class="radar"'));
  assert.ok(html.indexOf('data-action="edit"')<html.indexOf('data-action="make-current"'));
- assert.match(html,/class="shot-summary-actions"/);
+ assert.ok(html.indexOf('data-action="edit"')>html.indexOf('class="shot-record-context"'));
+ assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/data-action="edit"/);
  assert.match(html,/class="shot-actions"/);
- assert.match(html,/class="text-button" data-action="edit"/);
- assert.match(shotCard(sh,{expanded:false,activeVersionId:'version'}),/data-action="edit"/);
- assert.match(html,/class="ghost compact" data-action="make-current"/);
+ assert.match(html,/class="primary compact history-edit" data-action="edit"/);
+ assert.match(html,/class="ghost compact history-make-current" data-action="make-current"/);
+ assert.match(html,/class="shot-actions"/);
  assert.doesNotMatch(shotCard(sh,{expanded:true,activeVersionId:'other'}),/data-action="make-current"/);
  assert.equal(feedLabel(null),'Feed Not Recorded');
 });
@@ -82,4 +84,16 @@ test('Settings follows approved sections and removes routine Recovery UI',async(
  assert.match(settings,/button\('Rename','rename-setup'/);
  for(const [a,b] of [['Active Setup','Add Another Setup'],['Add Another Setup','Advanced Setup Options'],['Admin Dashboard','Cloud Sync Details'],['Cloud Sync Details','Sign Out On This Device']])assert.ok(settings.indexOf(a)<settings.indexOf(b));
  assert.match(settings,/settings-signout/);
+});
+
+test('shot summary labels Grind in Title Case without altering notes',()=>{
+ assert.match(shotSummary({doseG:18,yieldG:50,timeS:22,grindSetting:1.3}),/Grind 1\.3/);
+ assert.doesNotMatch(shotSummary({doseG:18,yieldG:50,timeS:22,grindSetting:1.3}),/ grind /);
+});
+test('unproven grinder range is shown with a single suggested starting center',()=>{
+ const raw=rawFixture(),s=hydrate(raw),rec=E.recommendation(s,'coffee');
+ assert.ok(rec.grind.range,'starting grind should be a band');
+ const html=recipeGrid(rec);
+ assert.match(html,/Try [0-9]/);
+ assert.match(html,/Grind/);
 });

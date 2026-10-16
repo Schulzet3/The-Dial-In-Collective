@@ -26,11 +26,13 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
    </div>${icon('chevron',15)}
   </button>
   ${shot.notes?`<p class="note shot-note">${e(shot.notes)}</p>`:''}
-  ${canEdit?`<div class="shot-summary-actions">${button('Edit','edit',`data-id="${e(shot.id)}"`,'text-button')}</div>`:''}
   ${expanded?`<div class="shot-body">
    ${chips(shot.tasteScales)}${radar(shot.tasteScales)}
-   ${canChoose?`<div class="shot-actions">${button('Make Current Recipe','make-current',`data-id="${e(shot.id)}"`,'ghost compact')}</div>`:''}
    ${context.length?`<dl class="shot-record-context">${context.map(([label,value])=>`<div><dt>${e(label)}</dt><dd>${e(value)}</dd></div>`).join('')}</dl>`:''}
+   ${canEdit?`<div class="shot-actions">
+    ${button('Edit','edit',`data-id="${e(shot.id)}"`,'primary compact history-edit')}
+    ${canChoose?button('Make Current Recipe','make-current',`data-id="${e(shot.id)}"`,'ghost compact history-make-current'):''}
+   </div>`:''}
   </div>`:''}
  </section>`;
 }
