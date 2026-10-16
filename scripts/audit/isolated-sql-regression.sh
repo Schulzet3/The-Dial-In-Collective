@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -euo pipefail
+# No Supabase credentials, production connections, ports, or production data.
+DIC_SQL_CONTAINER="dic-sql-${GITHUB_RUN_ID:-local}-${GITHUB_RUN_ATTEMPT:-1}"
+trap 'docker rm -f "$DIC_SQL_CONTAINER" >/dev/null 2>&1 || true' EXIT
+docker run -d --rm --network none --name "$DIC_SQL_CONTAINER" \
+  -e POSTGRES_DB=dic_ci -e POSTGRES_HOST_AUTH_METHOD=trust postgres:17.11 >/dev/null
+ready=false
+for attempt in {1..60}; do
+  if docker exec "$DIC_SQL_CONTAINER" pg_isready -U postgres -d dic_ci >/dev/null 2>&1; then ready=true; break; fi
+  sleep 1
+done
+test "$ready" = true
+run_sql() { docker exec -i "$DIC_SQL_CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d dic_ci < "$1"; }
+run_sql tests/sql/bootstrap.sql
+for migration in supabase/migrations/*.sql; do
+  echo "Applying $migration to isolated PostgreSQL"
+  run_sql "$migration"
+done
+run_sql tests/sql/owner-fixture.sql
+for regression in security_foundation coffee_identity_matching coffee_automated_approval admin_read_only_dashboard url_preview_release; do
+  echo "Running $regression"
+  run_sql "supabase/tests/$regression.sql"
+done
+echo 'PASS: all checked-in migrations plus SQL security, identity, approval, admin and preview regressions; no hosted connection.'

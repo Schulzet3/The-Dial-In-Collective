@@ -105,18 +105,18 @@ end $$;
 
 create or replace function public.dic_roaster_preview_target(host text)
 returns jsonb language plpgsql stable security definer set search_path='' as $$
-declare actual text; found private.dic_roaster_directory;
+declare actual text; roaster_row private.dic_roaster_directory;
 begin
  if current_setting('request.jwt.claim.role',true) is distinct from 'service_role' then
   raise exception using errcode='42501',message='Trusted preview worker only.';
  end if;
  actual:=lower(btrim(coalesce(host,'')));
  if length(actual)>253 or actual !~ '^[a-z0-9-]+(\.[a-z0-9-]+)+$' then return null; end if;
- select * into found from private.dic_roaster_directory
+ select * into roaster_row from private.dic_roaster_directory
  where official_domain=actual order by verified_at desc limit 1;
  if not found then return null; end if;
- return jsonb_build_object('canonical_name',found.canonical_name,
-  'official_domain',found.official_domain);
+ return jsonb_build_object('canonical_name',roaster_row.canonical_name,
+  'official_domain',roaster_row.official_domain);
 end $$;
 revoke all on function public.dic_roaster_preview_target(text) from public,anon,authenticated;
 grant execute on function public.dic_roaster_preview_target(text) to service_role;
@@ -241,7 +241,7 @@ begin
  -- Protect against two users simultaneously submitting the same product.
  locked_key:=brandkey||':'||namekey;
  perform pg_advisory_xact_lock(hashtextextended(locked_key,9460));
- select count(*),min(c.id) into same_url_count,same_url from public.coffees c
+ select count(*),min(c.id::text)::uuid into same_url_count,same_url from public.coffees c
  where c.verification_state='verified' and c.merged_into_id is null
   and private.dic_canonical_roaster_key(c.roaster)=brandkey
   and private.dic_coffee_key(c.name)=namekey
@@ -313,3 +313,4 @@ begin
  return jsonb_build_object('ok',true,'status','verified','coffee_id',cid,'canonical_name',new_c.name,
     'reused',false);
 end $$;
+

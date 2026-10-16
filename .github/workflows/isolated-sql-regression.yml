@@ -1,0 +1,25 @@
+name: DIC isolated SQL release regression
+on:
+  push:
+    branches: [work/visual-refresh-20261015, development/backend-foundation]
+    paths:
+      - 'supabase/migrations/**'
+      - 'supabase/tests/**'
+      - 'tests/sql/**'
+      - 'scripts/audit/isolated-sql-regression.sh'
+      - '.github/workflows/isolated-sql-regression.yml'
+  pull_request:
+    branches: [development/backend-foundation]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sql:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Apply and exercise schema in network-isolated PostgreSQL 17.11
+        run: bash scripts/audit/isolated-sql-regression.sh
