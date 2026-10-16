@@ -76,3 +76,8 @@ The following are **historical snapshots**, not current task lists: `docs/BACKEN
 - Each new milestone must record evidence, UTC/local time when known, true scope and confidence level, and whether the state was observed on a provider vs reported by owner.
 - Update this status index and relevant detailed report after the milestone. Modify the Master Specification and Decision Ledger **only if a product decision changes**, with explicit owner approval and supersession trail.
 - One owner question at a time; minimize unnecessary clicks/screenshots, subscription costs and Netlify production deploys; protect the fast **Log Shot → Rate → Recommendation** experience.
+
+### Obsolete-file cleanup (October 16)
+
+- **Deleted successfully** from GitHub `main`: the used-once public-only `.github/workflows/one-time-isolated-restore-toolkit.yml` (commit `e9822d271dbe1ace9e89d7ea9a7f769bc72b486f`); daily encrypted backup and routine recovery workflows remain.
+- **Could not delete** the byte-identical `Build Web App(1).pdf` from Project files because the Project attachment API does not support that mutation. It remains an original source, explicitly duplicate-indexed, with no requirement for owner action.
