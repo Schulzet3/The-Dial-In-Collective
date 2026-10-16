@@ -1,34 +1,28 @@
 /* Coordinated visual refinement - private review, not a release.
    Shared tokens give light/dark the same clear hierarchy without altering data. */
 :root{
+ /* Exact legacy dark badge fills/text; shared by both themes. See docs/BADGE_PALETTE_SOURCE.json. */
  --bg:#f4eee4;--surface:#fffdf9;--well:#ede1ce;--ink:#2d2018;--muted:#675545;
  --line:#c9b396;--line-strong:#ab825c;--accent:#b55d25;--accent-text:#914014;
  --action:#da813c;--action-ink:#241306;--action-line:#984610;--focus:#1b669d;
  --green:#296523;--blue:#155b90;--blue-soft:#d8eafa;
- --badge-green:#64cf42;--badge-green-ink:#16310c;--badge-green-line:#31771c;
- --badge-turbo:#62b9f1;--badge-turbo-ink:#112b3c;--badge-turbo-line:#286d9e;
- --badge-trad:#245f9b;--badge-trad-ink:#ffffff;--badge-trad-line:#123b65;
- --badge-ristretto:#2c3b73;--badge-ristretto-ink:#ffffff;--badge-ristretto-line:#17234d;
- --badge-lungo:#4acbd0;--badge-lungo-ink:#10373b;--badge-lungo-line:#1c737b;
- --badge-custom:#7a37b0;--badge-custom-ink:#ffffff;--badge-custom-line:#49206a;
- --badge-pending:#f7c353;--badge-pending-ink:#452904;--badge-pending-line:#936016;
+ --badge-green:#6cbb58;--badge-green-ink:#1a120d;--badge-green-line:#3e732f;
+ --badge-turbo:#92b6d3;--badge-turbo-ink:#1a120d;--badge-turbo-line:#3e7098;
+ --badge-trad:#3e7098;--badge-trad-ink:#ffffff;--badge-trad-line:#92b6d3;
+ --badge-ristretto:#2c506d;--badge-ristretto-ink:#ffffff;--badge-ristretto-line:#588fbb;
+ --badge-lungo:#bed3e4;--badge-lungo-ink:#1a120d;--badge-lungo-line:#588fbb;
+ --badge-custom:#588fbb;--badge-custom-ink:#1a120d;--badge-custom-line:#2c506d;
+ --badge-pending:#e5bc6b;--badge-pending-ink:#1a120d;--badge-pending-line:#c87f45;
  --danger:#ac2b3c;--radius:16px;--card-shadow:0 2px 6px #3b251207;
- --s0:#64cf42;--s1:#e0ba22;--s2:#e99623;--s3:#e46632;--s4:#b6282b;
+ --s0:#6cbb58;--s1:#efcb39;--s2:#efa339;--s3:#e47444;--s4:#c72923;
 }
 :root[data-theme=dark]{
  --bg:#171009;--surface:#231a11;--well:#302216;--ink:#f6ead9;--muted:#cdbbA6;
  --line:#705239;--line-strong:#ab7850;--accent:#eea052;--accent-text:#ffb66d;
  --action:#ed994b;--action-ink:#211207;--action-line:#ffbf80;--focus:#90ccff;
  --green:#97e979;--blue:#a3d6ff;--blue-soft:#243d50;
- --badge-green:#82df50;--badge-green-ink:#15320b;--badge-green-line:#b6f295;
- --badge-turbo:#86d0ff;--badge-turbo-ink:#132c3f;--badge-turbo-line:#bedfff;
- --badge-trad:#2568a5;--badge-trad-ink:#ffffff;--badge-trad-line:#73b6ee;
- --badge-ristretto:#384d8b;--badge-ristretto-ink:#ffffff;--badge-ristretto-line:#96ade8;
- --badge-lungo:#64dbe0;--badge-lungo-ink:#113339;--badge-lungo-line:#abeff2;
- --badge-custom:#8651c1;--badge-custom-ink:#ffffff;--badge-custom-line:#c6a1f4;
- --badge-pending:#f8cd62;--badge-pending-ink:#3e2907;--badge-pending-line:#ffe3a0;
  --danger:#ff8996;--card-shadow:0 2px 8px #0002;
- --s0:#82df50;--s1:#f5d146;--s2:#f5ab3f;--s3:#f38352;--s4:#bf3538;
+ /* Badge and taste colors intentionally inherit the JSX dark palette above. */
 }
 body{font-size:15px;line-height:1.5}
 h1,h2,h3,.coffee-title{font-variant-ligatures:none;font-feature-settings:'liga' 0,'clig' 0,'dlig' 0}
@@ -101,7 +95,7 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .shot-body{padding:0 14px 14px}.shot-actions{border-top:1px solid var(--line);padding-top:12px;margin-top:12px;gap:10px}
 .shot-actions .compact{min-height:40px}.note{font-size:14px}
 .radar text{font-size:11px}.radar-grid{stroke-width:1.1}.radar-result{stroke:var(--ink)}
-.taste-chips{gap:6px;flex-wrap:wrap}.taste-chip{border:1px solid color-mix(in srgb,var(--ink) 45%,transparent);font-size:11px;line-height:1.4;min-height:24px;padding:3px 8px;font-weight:650;color:#21180a}
+.taste-chips{gap:6px;flex-wrap:wrap}.taste-chip{border:1px solid color-mix(in srgb,var(--ink) 45%,transparent);font-size:11px;line-height:1.4;min-height:24px;padding:3px 8px;font-weight:650;color:#1a120d}
 .taste-chip.severity-4{color:#fff}
 .feedback-panel{margin-top:16px;padding:15px;border:1px solid var(--line);background:var(--well);border-radius:12px}
 .feedback-panel h3{font:650 16px/1.4 var(--sans);margin-bottom:7px}

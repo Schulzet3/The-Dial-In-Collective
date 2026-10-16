@@ -1,0 +1,28 @@
+{
+  "source_file": "dial-in-collective.jsx",
+  "source_sha256": "54971f6286175aba7554351096c6d3640fec0211b4cef78fa13503d3c18ee980",
+  "theme": "Original dark palette in both Light and Dark modes",
+  "source_lines": {
+    "dark_variables": "49-77",
+    "style_mapping": "253-273",
+    "dialed_badge": "3825-3828",
+    "taste_chip_text": "5120-5133"
+  },
+  "badges": {
+    "green": {"background": "#6CBB58", "color": "#1A120D", "source_token": "--sc-dialed", "border": "#3E732F"},
+    "turbo": {"background": "#92B6D3", "color": "#1A120D", "source_token": "--sc-blue-light", "border": "#3E7098"},
+    "trad": {"background": "#3E7098", "color": "#FFFFFF", "source_token": "--sc-blue-dark", "border": "#92B6D3"},
+    "ristretto": {"background": "#2C506D", "color": "#FFFFFF", "source_token": "--sc-blue-xdark", "border": "#588FBB"},
+    "lungo": {"background": "#BED3E4", "color": "#1A120D", "source_token": "--sc-blue-xlight", "border": "#588FBB"},
+    "custom": {"background": "#588FBB", "color": "#1A120D", "source_token": "--sc-blue-mid", "border": "#2C506D"},
+    "pending": {"background": "#E5BC6B", "color": "#1A120D", "source_token": "--sc-gold", "border": "#C87F45"}
+  },
+  "taste_ramp": ["#6CBB58", "#EFCB39", "#EFA339", "#E47444", "#C72923"],
+  "taste_ink": "#1A120D",
+  "notes": [
+    "The six original badge kinds have exact JSX dark fill/text pairs.",
+    "Pending/Conflict/Pending Sync have no badge counterpart in the JSX: their gold is mapped from the original dark --sc-gold token.",
+    "Borders remain the newer review design; their colors are coordinated outlines, not copied legacy borders.",
+    "Shared taste-ramp variables also color rating controls and the taste compass; the original meanings and calculations are unchanged."
+  ]
+}

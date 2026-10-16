@@ -1,15 +1,18 @@
-# Coordinated visual refinement - review 1
+# Coordinated visual refinement - review 2: source-matched badges
 
 **State:** implemented on `work/visual-refresh-20261015` for owner screenshot review only. No Netlify deployment, SSO removal, production migration, import unlock or test-account creation is authorized here. Production remains on its existing release.
 
 ## Included
-Vibrant bordered green/blue/navy/teal/purple badges; stronger card and input edges; visible full-width Search & Sort toggle; coherent primary/secondary actions and selected states; title-case interface labels without reformatting personal names or units; simplified heading ligatures; consistent Settings dividers; Add Another Setup adjacent to Active Setup; Sign Out last with its icon; saved Light/Dark/System shared with the read-only admin page. Taste controls now place endpoint labels below the targets to avoid overlap.
+Original JSX dark-mode green and graduated blue badge fills/lettering, identical in Light and Dark; defined coordinated badge borders; stronger card and input edges; visible full-width Search & Sort toggle; coherent primary/secondary actions and selected states; title-case interface labels without reformatting personal names or units; simplified heading ligatures; consistent Settings dividers; Add Another Setup adjacent to Active Setup; Sign Out last with its icon; saved Light/Dark/System shared with the read-only admin page. Taste controls place endpoint labels below the targets to avoid overlap.
 
 The routine Recovery UI has been removed by explicit amendment to `UX-20261014-05`. The closed server import gate, historical importer source, automatic encrypted backup system and operator recovery remain intact. An emergency Save Pending Changes action remains only when there are unsynced local changes. Password-reset functionality remains.
 
+## Badge revision source and scope
+The owner requested exact original dark badge colors rather than the first review's brighter palette. [Source manifest](BADGE_PALETTE_SOURCE.json) records the JSX fingerprint, variable mapping and exact colors. [Master Specification addendum](MASTER_SPECIFICATION_BADGE_COLORS_ADDENDUM.md) and [Decision Ledger amendment](DECISION_LEDGER_BADGE_COLORS_AMENDMENT.json) record this refinement. The original Custom blue replaces review 1's purple; original Lungo pale blue replaces review 1's teal. Dialed In, Ristretto, Traditional and Turbo also use their original dark fills and text. New pending statuses use the source's dark gold, as a documented mapping rather than an original badge match. The taste ramp uses original dark values in both modes. No layout or calculation changes are included in this revision.
+
 ## Verification boundary
 - The original recommendation engine, data model, Supabase migrations, API permissions and Cloud client are unchanged.
-- Node tests cover the approved UI, existing behavior, appearance fallback, account-scoped admin theme fetch and palette text contrast.
+- Node tests cover the approved UI, existing behavior, appearance fallback, account-scoped admin theme fetch, palette text contrast and exact legacy color matching in both themes.
 - Existing synthetic 390px regression covers shot logging, required ratings, mutation replay, offline queue, signout protection, coffee identity confirmation and layout.
 - `tests/browser/visual_review.py` captures real Chromium renders of app/admin source in both modes. It tests home, Search & Sort, Settings, Log Shot, history, Add Coffee, sync, styles, sign-in, confirmation, read-only Admin and narrow widths. Account/backend responses are mock fixtures; no production data is used.
 - Private rendering font files are used only to load the real fonts for screenshots. They are not included in the review deliverables or app source.
