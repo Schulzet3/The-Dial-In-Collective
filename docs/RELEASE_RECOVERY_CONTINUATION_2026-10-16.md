@@ -38,3 +38,11 @@ Recreate an isolated hosted Supabase/Auth and protected Netlify environment; cap
 - The 985-credit screenshot predates this release. Actual post-release billing is unknown; the ledger refresh flag is re-enabled, blocking another production release until a fresh snapshot is recorded.
 
 **Next acceptance:** owner login on the new build and Log Shot → Rate → Recommendation; then an owner-selected genuine nonadmin account with delivered email, correct redirect/admission, account isolation and admin denial. Keep SSO. Full hosted Supabase/Netlify/DNS/email reconstruction and exact encrypted-archive restoration are still incomplete.
+
+## Post-release encrypted archive and offsite upload blocker
+
+The source-pinned backup workflow [38926581554](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/38926581554) succeeded after publication. GitHub artifact `12056578138`, filename `dic-nightly-12056578138.zip`, is 443225 bytes. Independent download matched provider SHA-256 `e1f4ce1705a7a5dc903b24967f27b1e97ee219854dc5e52cb4d2aa1e655add6f`; ZIP CRC passed and sole member is `backup.age`. It has not been decrypted/restored in this session.
+
+An attempted manual upload of this new ciphertext to the existing Drive folder was rejected by automatic approval review: sensitive organizational backup, destination/explicit payload authorization not sufficiently established. **No new offsite upload succeeded.** A read-only follow-up confirms the folder is named `DIC Automated Encrypted Backups`, is not shared, and has only an owner permission. Prior-context search nevertheless found differing Google account references and no exact user approval for this folder/manual-upload scope. Obtain explicit destination confirmation before retrying; do not work around the rejection. Earlier October 16 Drive copies remain independently checksum-verified, but predate this release.
+
+Destination awaiting confirmation: https://drive.google.com/drive/folders/1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf . No backup keys, plaintext or credentials were exposed. This push-triggered verification run does not qualify for the Apps Script courier, which handles scheduled/manual-dispatch runs. Do not relabel the run or trigger an indirect transfer to bypass the rejected manual upload.
