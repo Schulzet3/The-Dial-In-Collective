@@ -1,5 +1,27 @@
 # Consolidated release and recovery continuation — October 16, 2026
 
+## Current handoff for return to chat — October 16, 10:27 America/Denver
+
+Trevor reports: “I am signed in and refreshed the page. Everything is still there.” This confirms, by owner observation, that the existing signed-in session still displays the expected coffees and shot history after refresh on the published build. It is not evidence of a fresh sign-in, a complete new-shot flow, or another user's access.
+
+The owner asked to finish the necessary Work Mode housekeeping and return to ordinary chat promptly. This handoff records the completed work and outstanding checks so discussion can continue without another deployment.
+
+**Completed and saved**
+- Protected application release is live at https://app.dialincollective.com, release SHA `4e7d4a834dd92ec79f8cd99b373374fc0a584ef8`, Netlify deploy `6ad24660d0c6bdff2c065586`. Release/build, mobile and isolated SQL checks passed; existing production data fingerprints were unchanged.
+- Owner now confirms expected data remains visible after refreshing the signed-in app.
+- Exact-release backup is pinned and the approved private offsite copy is independently checksum-verified: https://drive.google.com/file/d/1aRSQAhBEFDJumavdz_kOQdsXOI0gekB5/view .
+- Canonical product decisions remain in `docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md` and `docs/DECISION_LEDGER_2026_10_14_UX.json`, alongside the existing specifications and addenda. This handoff changes no Locked decision.
+
+**Unverified or unfinished**
+1. Owner's complete Log Shot → Rate → Recommendation acceptance on the released build and a fresh authentication attempt.
+2. Genuine owner-selected nonadmin signup, email delivery/confirmation, admission, account isolation and admin denial.
+3. Decryption/restoration of this exact encrypted backup; complete isolated hosted Supabase/Auth/Netlify/DNS/email reconstruction; automated courier execution, retention and delivered failure alerts.
+4. Current Netlify billing balance after the release. The user's additional workspace credits are not evidence of a Netlify credit balance.
+
+Keep the existing team SSO protection, beta admission and disabled historical-import saving. Refresh the billing ledger before any additional production release. Never ask for the private recovery key in chat. Further user acceptance and planning can continue in ordinary chat; technical execution remains available when needed. No additional production deployment was performed to create this handoff.
+
+The sections below are chronological evidence. Their earlier pending/rejected checkpoints are superseded by the later verified release and approved offsite-upload records.
+
 ## Authorization and protected state
 
 Owner approved the consolidated release, then real beta-account/integration and complete hosted recovery verification in the preceding session, and requested continuation in this session. GitHub writes now succeed. Supabase migration/Edge deployment and Netlify publication are not yet performed at this checkpoint.
