@@ -1,5 +1,7 @@
 # The Dial In Collective — offsite recovery and release runbook
 
+**CURRENT STATUS, NOT ANOTHER SETUP CHECKLIST:** See [CURRENT_STATUS.md](CURRENT_STATUS.md) before following dated steps in this runbook. Actual October 16 encrypted artifact **was successfully restored** into isolated PostgreSQL with app/Auth row and policy checks. Two scheduled GitHub→Drive SHA matching transfers and synthetic Apps Script alert mail also passed; owner confirmed real nonadmin invitation/auth, root redirect and support email. The runbook's older 'pending' entries are historical and should not cause repeat setup. **New isolated hosted Supabase/Netlify service rebuild is still outstanding**, and must remain cost/owner-authorization gated.
+
 This operational guide supplements, and does not replace, the Locked Master Specification and Decision Ledger. Never copy database passwords, age private recovery identities, GitHub tokens, Netlify API keys, or downloaded user datasets into this repository.
 
 ## What nightly encrypted Drive archives contain
