@@ -1,5 +1,7 @@
 # Owner and external-user acceptance runbook
 
+**HISTORICAL PLAN — superseded operational status (October 16):** Owner's live published Log Shot → Rate → Recommendation and refresh passed. A genuine second confirmed/admitted nonadmin account used a one-time invitation, showed an empty personal workspace, and received **Admin Access Unavailable** from `/admin.html` (owner screenshot). Production Netlify extra SSO was deliberately removed afterward. Do **not** request these completed first real-account checks again. The remaining **different** tests are live nonadmin New Coffee URL/source approval or Pending flow, multi-device/offline and complete hosted provider recovery. Read [CURRENT_STATUS.md](CURRENT_STATUS.md). Preserve all below steps as the original October 14 plan and evidence, not as today's checklist.
+
 **Prepared 2026-10-14; not yet executed using real Supabase-issued user sessions.**
 This supplements the Locked Master Specification, Decision Ledger, and `CONSOLIDATED_OWNER_RELEASE_CHECKLIST_2026-10-14.md`. It never authorizes an unreviewed extra Netlify deploy, a new paid service, an external public beta, or a permanent test account.
 
