@@ -104,7 +104,7 @@ with sync_playwright() as p:
   page.locator('[data-action=shot-toggle-all]').click()
   check(page.locator('[data-action=shot-expand][aria-expanded=true]').count()==0,mode+': all three history rows collapse')
   page.locator('[data-action=shot-expand]').first.click()
-  check(page.locator('.shot-summary-actions [data-action=edit]').count()==1,mode+': historical Edit shown outside expansion')
+  check(page.locator('.shot-summary-actions [data-action=edit]').count()==3,mode+': every saved shot has a visible Edit link')
   check(page.locator('.shot-body [data-action=make-current]').count()==1,mode+': Make Current Recipe remains separate')
   shot(page,'06-history-'+mode)
   page.locator('[data-action=add]').click()
