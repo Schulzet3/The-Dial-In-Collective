@@ -73,3 +73,28 @@
 ## Next acceptance gate
 
 Supabase Auth URL, nonsecret SMTP and Resend sending-domain record statuses are now documented. Next verify Cloudflare DNS authoritative records, root-domain redirect/support forwarding, and secure credential custody. Only after a cost quote and the owner's explicit agreement should a new hosted recovery instance be provisioned. A disposable local PostgreSQL restore is not a full hosted provider reconstruction.
+
+
+### Cloudflare authoritative zone screenshot — 2026-10-16, read-only verification
+
+Owner supplied Cloudflare `dialincollective.com` → DNS → Records screenshot, showing **11 of 200 records**. Values below were visually verified from that dashboard screenshot. This does not establish live public DNS propagation, redirect rules, or the email-forwarding routing rules.
+
+| Type | Owner-relative DNS name | Value shown | Cloudflare proxy/TTL |
+|---|---|---|---|
+| A | apex `dialincollective.com` | `192.0.2.1` (documentation-range placeholder; may be used only with Cloudflare HTTP redirect rules) | Proxied / Auto |
+| CNAME | `app` | `the-dial-in-collective.netlify.app` | DNS Only / Auto |
+| CNAME | `rsend.auth` | `rsend.forge.rmta.net` | DNS Only / 1 hour |
+| CNAME | `send.auth` | `send.forge.rmta.net` | DNS Only / 1 hour |
+| MX | apex | `route3.mx.cloudflare.net` | DNS Only / Auto |
+| MX | apex | `route2.mx.cloudflare.net` | DNS Only / Auto |
+| MX | apex | `route1.mx.cloudflare.net` | DNS Only / Auto |
+| TXT | `cf2024-1._domainkey` | `v=DKIM1; h=sha256; k=rsa; p=...` **truncated screenshot** | DNS Only / Auto |
+| TXT | apex | `v=spf1 include:_spf.mx.cloudflare.net ~all` | DNS Only / Auto |
+| TXT | `resend._domainkey.auth` | `p=MIGfMA0GCSq...` **truncated screenshot** | DNS Only / 1 hour |
+| TXT | `subdomain-owner-verification` | Verification text present; do not reproduce unnecessary token-like value | DNS Only / Auto |
+
+The `resend._domainkey.auth` DKIM and both `rsend.auth` / `send.auth` sending CNAME names/targets match the earlier Resend dashboard screenshot; their **Resend provider statuses were Verified**. Full DKIM TXT key cannot be independently reconstructed from screenshots and must be preserved via provider/Cloudflare export, not invented. The apex SPF and MX records relate to Cloudflare mail routing and should not be conflated with authentication-subdomain sender policies.
+
+**Open discrepancy:** The Resend dashboard *suggested* an optional `_dmarc` TXT record with `v=DMARC1; p=none;`, but **no `_dmarc` record appears in the entire 11-record Cloudflare screenshot**. Record missing/absence requires deliberate later review; do not claim DMARC was deployed or silently modify DNS. Current real signup email delivery and Resend verified sending records support outbound functionality independent of this optional suggestion.
+
+**Next read-only check:** Cloudflare → Rules → Redirect Rules: verify apex/root redirects to `https://app.dialincollective.com/` and does not interfere with `auth.` or `app.`. After that, verify Cloudflare Email Routing → Routing rules for `support@dialincollective.com` (do not expose the private destination address in project docs). A proxied A record to `192.0.2.1` by itself does not establish the expected homepage redirect. No provider change was made in this capture.
