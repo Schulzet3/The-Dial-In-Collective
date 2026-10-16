@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   package:
+    if: "!contains(github.event.head_commit.message, '[mac-age-only]')"
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -32,3 +33,16 @@ jobs:
           if-no-files-found: error
           retention-days: 1
           compression-level: 0
+
+  mac-age-hashes:
+    if: contains(github.event.head_commit.message, '[mac-age-only]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check hashes of age official macOS packages
+        run: |
+          set -euo pipefail
+          for arch in amd64 arm64; do
+            curl --retry 3 -fLsS "https://github.com/FiloSottile/age/releases/download/v1.2.1/age-v1.2.1-darwin-${arch}.tar.gz" -o "age-v1.2.1-darwin-${arch}.tar.gz"
+            sha256sum "age-v1.2.1-darwin-${arch}.tar.gz"
+          done
