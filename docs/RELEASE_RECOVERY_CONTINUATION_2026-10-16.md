@@ -1,5 +1,7 @@
 # Consolidated release and recovery continuation — October 16, 2026
 
+**CURRENT-STATUS PRECEDENCE — October 16:** Read [CURRENT_STATUS.md](CURRENT_STATUS.md) first. This lengthy document preserves successive, dated work-mode and chat handoffs; earlier “next step” sections intentionally remain as historical evidence. Do not follow those earlier steps where later acceptance has already passed (real nonadmin invite, privacy/admin denial, production Netlify SSO removal, automatic Drive delivery, exact encrypted backup restoration, synthetic alert delivery, Cloudflare root redirect and support mail). No re-approval or repeat screenshot is required for a test already evidenced. Complete hosted-managed-provider reconstruction remains unverified.
+
 ## Current handoff for return to chat — October 16, 10:27 America/Denver
 
 Trevor reports: “I am signed in and refreshed the page. Everything is still there.” This confirms, by owner observation, that the existing signed-in session still displays the expected coffees and shot history after refresh on the published build. It is not evidence of a fresh sign-in, a complete new-shot flow, or another user's access.
