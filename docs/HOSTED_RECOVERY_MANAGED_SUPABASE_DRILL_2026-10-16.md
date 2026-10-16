@@ -1,6 +1,6 @@
 # Managed Supabase recovery drill — October 16, 2026
 
-**Overall status: PARTIAL PASS — new isolated managed Supabase project reconstructed and database/Edge security validated. NOT yet a full hosted application/data/Auth/Netlify recovery.**
+**Latest acceptance (2026-10-16): CORE HOSTED RESTORE PASS** — new Supabase and protected Netlify application rebuilt, real archived Auth account/data restored, owner logged in using original account and verified four coffees, 14 shots and working Admin Dashboard. **Some wider disaster scenarios remain NOT VERIFIED** (see final acceptance section). Earlier PARTIAL checkpoints below are chronological evidence only; their former 'next' steps are superseded.
 
 ## Authorization, cost and separation
 
@@ -120,3 +120,30 @@ A rollback-only **actual restored-account** role simulation passed: original own
 **Next distinct acceptance before FULL hosted DR:** Sign into the **protected recovery Netlify site** `https://dic-recovery-20261016.netlify.app/` as the **original archived administrator** using the original password (or a recovery-only password reset if it changed after the snapshot). Verify actual display of four coffees/14 shots and Admin Dashboard in the browser, then fresh session/refresh and optionally password-reset and another-user isolation HTTP paths. Do not use the separate pending tester or redeem another invitation simply to test restored admin access. Do not request another Mac key rewrap: data import passed. All Locked security and admission decisions remain unchanged.
 
 **Status: HOSTED DATABASE/CORE AUTH ROW RESTORATION PASS; FULL END-TO-END HOSTED DISASTER RECOVERY still PARTIAL until real restored-account browser login is accepted and remaining provider continuity checks close.**
+
+
+## Final owner acceptance, unresolved scope and teardown — 2026-10-16
+
+**Owner-accepted real-browser PASS:** After the exact encrypted backup was restored into separate managed Supabase `bgstplvefumsnplhqpvd`, the owner **signed into the protected Netlify recovery website using the original recovered administrator account** and explicitly confirmed **all restored coffees/shots were present** and **Admin Dashboard opened**. This is genuine owner-observed frontend login and restored account access (not an independently instrumented HTTP/browser assertion). It supplements the earlier real *new test account* email-confirmation and recovery-hostname redirect PASS and 44-table/141-row actual database restore PASS.
+
+**Independent read-only final inventory before any teardown** (recover/live):
+- Recovery: 2 confirmed Auth accounts (restored admin + separate unadmitted test user), 1 administrator, 1 admitted account, **4 verified coffees, 14 shots, 4 library entries**, 42 first-party tables with RLS on, historical import disabled.
+- Production: 2 confirmed Auth accounts, 1 administrator, **2 admitted**, **4 verified coffees, 16 shots, 4 library entries**, RLS on and historical import disabled.
+- Published production Netlify deploy `6ad24660d0c6bdff2c065586` and team SSO restricted to nonproduction remained unchanged; separate recovery Netlify project `fd4a4dba-0c71-4b06-be63-9f5f689aba1b` still had ready deploy `6ad29fd7a4349d2132a0528c` with team SSO for all deployments at last read.
+- The `main` nightly encrypted GitHub backup workflow remains configured and untouched. Previously verified source-inclusive GitHub → private Google Drive ciphertext copies plus owner-held Mac recovery key remain the durable recovery sources. Do **not** delete these originals.
+
+**What remains explicitly NOT VERIFIED, not secretly waived:**
+1. *Real recovery-specific password reset on the restored admin* (recovery SMTP real new-account confirmation already passed; production password recovery previously passed).
+2. *New shot WRITE → taste rate → recommendation → refresh against the recovered hosted instance.* The recovered owner's existing history readback and SQL data/RLS checks passed, and production's real Log Shot → Rate → Recommendation previously passed. Distinguish these evidence scopes.
+3. *Inviting and redeeming a new recovery-project beta code and wider nonadmin browser HTTP isolation.* Production had a real confirmed second nonadmin account and invitation; recovery had correct admission gate and a rollback-only role/RLS test, but the owner elected not to repeat the invite redemption on the recovery clone.
+4. *An actual outage/failover including moving apex/app DNS, registering/rebuilding new Cloudflare/Resend mail zones from scratch, new provider credentials/registrar account continuity, and real backup failure/overdue alert.* Current authoritative DNS/inbound support-email configuration was already user-verified/documented; disrupting it in production solely for a drill was not authorized.
+
+**Decision accounting:** This event **closes the end-to-end *core hosted rebuild + exact original data/Auth recovery* drill as PASS**, not every hypothetical disaster/provider failover scenario. It does not alter the Master Specification, Decision Ledger, password standards, or other Locked product requirements. Any future product release gate demanding the additional unverified scenarios remains open until explicitly accepted or separately tested. Deletion of only the disposable drill resources is permissible after archiving this evidence.
+
+**Disposable resources prepared for teardown** (not production):
+- Supabase `DIC Isolated Recovery Drill 2026-10-16` **`bgstplvefumsnplhqpvd`**. A pause can be done through the existing connected Supabase action (reversible); permanent deletion must be performed by the owner from project settings because the available connector has no delete-project action. Deletion destroys all restored rehearsal data, so it must be based on the already verified original offsite backup.
+- Netlify `dic-recovery-20261016`, **`fd4a4dba-0c71-4b06-be63-9f5f689aba1b`**, HTTPS recovery site. Delete only this project from Netlify Project configuration → Danger zone; available connected tool cannot delete a Netlify project. The live `the-dial-in-collective` Netlify project must stay untouched.
+- Resend **recovery-only Sending-access API key** created for the fresh Supabase staging SMTP, not the original production SMTP key. **Revoke/delete the key in Resend after the final sending tests**; removing merely the local copy does not invalidate its remote ability to send. Keep the shared `auth.dialincollective.com` sender domain, production API key, and Cloudflare DNS unchanged.
+- Discard local **one-time Mac rewrap helper ZIP**, one-time ciphertext output ZIP, extracted recovery static ZIP, and copies of the throwaway *recovery-only* Resend key when done. **Never delete `~/.dic-backup/` owner permanent private key**, its secure backup, original encrypted offsite archives, GitHub backup workflow, or source/restore instructions. One-time runner/toolkit workflows were already deleted from GitHub `main`; one-time transfer staging files have been moved to Library trash and ephemeral keys destroyed.
+
+**Teardown result:** To be recorded *separately after actual pause/deletion/revocation*. This paragraph is a readiness checkpoint and is **not** evidence that providers or keys have already been removed.
