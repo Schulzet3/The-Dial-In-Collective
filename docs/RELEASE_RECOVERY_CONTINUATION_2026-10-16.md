@@ -148,3 +148,8 @@ Collected live Netlify visitor access, published release, env **names/scopes**, 
 ## Owner screenshot: Supabase Auth callback configuration verified — October 16
 
 Dashboard **Authentication → URL Configuration** shows Site URL `https://app.dialincollective.com/` and exactly two redirect allowlist entries `https://the-dial-in-collective.netlify.app/` and `https://app.dialincollective.com/`; no wildcards. Current app's signup/password-reset redirect calculation uses the page's actual `location.pathname`+`location.origin`; root production matches allowed URL. No settings changed. Keep old Netlify redirect allowed pending separate review. Next read-only checkpoint: Supabase Authentication → SMTP Settings (mask credentials). See [Hosted provider inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md).
+
+
+## Owner screenshot: Supabase Resend SMTP settings verified — October 16
+
+Dashboard **Authentication → SMTP Settings** shows custom SMTP ON, sender `no-reply@auth.dialincollective.com`, sender name `The Dial In Collective`, host `smtp.resend.com`, port `465`, username `resend`, and a stored masked password. The existing second account independently received genuine verification mail previously. No API key/password was viewed, copied, or changed. Recovery still requires access to Resend account/domain verification and owner-held replacement credential, plus accurate DNS. Next owner-assisted step: Resend → Domains → auth.dialincollective.com verified status and DNS records (no API keys). Details in [hosted recovery inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md).
