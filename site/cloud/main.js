@@ -40,7 +40,21 @@ class CloudApp {
    await this.sync();
   }catch(err){if(epoch===this.epoch){this.notice=err.message;this.syncState='offline';this.render();}}
  }
- async sync(){if(this.flushing)return this.flushing;this.flushing=this.doSync().finally(()=>this.flushing=null);return this.flushing;}
+ async sync(){
+  const owner=this.identity?.id,epoch=this.epoch;
+  // An old account's inflight sync must not block the new account forever or
+  // accidentally satisfy its required cache/state refresh.
+  while(this.flushing){
+   if(this.flushingOwner===owner&&this.flushingEpoch===epoch)return this.flushing;
+   try{await this.flushing;}catch{/* New identity can retry independently. */}
+   if(this.identity?.id!==owner||this.epoch!==epoch)return;
+  }
+  this.flushingOwner=owner;this.flushingEpoch=epoch;
+  const task=this.doSync().finally(()=>{
+   if(this.flushing===task){this.flushing=null;this.flushingOwner=null;this.flushingEpoch=null;}
+  });
+  this.flushing=task;return task;
+ }
  async doSync(){
   const who=this.identity,epoch=this.epoch;if(!who||!this.status?.admitted)return;
   const outcome=await this.queue.flush();if(epoch!==this.epoch||who.id!==this.identity?.id)return;

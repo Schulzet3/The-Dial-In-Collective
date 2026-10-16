@@ -155,6 +155,12 @@
       "amends": "Safe URL-first matching implementation only, not the owner's URL-first priority",
       "decision": "Do not automatically reuse a canonical coffee based on an official product URL when harvest/release labels are unknown, even if both records omit them. Require explicit release equality and compatible roaster, bag title, origin and process; otherwise URL match is a high-priority user-confirmation candidate.",
       "reason": "Roasters can reuse product URLs for distinct harvests; protect canonical Coffee IDs and historical shots."
+    },
+    {
+      "id": "CLOUD-SYNC-ACCOUNT-RACE-20261016",
+      "status": "Implementation hardening",
+      "decision": "Separate sync tasks by account and identity epoch: wait out overlaps with a previous account, then start fresh for the current account; still coalesce duplicate same-account attempts and keep owner-bound IndexedDB/outbox protections.",
+      "not_a_product_policy_change": true
     }
   ]
 }

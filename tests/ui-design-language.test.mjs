@@ -46,10 +46,11 @@ test('button roles are standardized by shared CSS tokens without reskinning orig
  assert.match(css,/\.radar text\{[^}]+font-weight:600/);
  assert.match(css,/\*,\*::before,\*::after\{text-shadow:none!important\}/);
 });
-test('review-requested recommendation captions are deliberately retained pending approval',()=>{
+test('owner-approved recipe captions keep Basket-based and remove redundant Temperature subcaption',()=>{
  const code=read('site/lib/ui.js');
  assert.match(code,/'Basket-based'/);
- assert.match(code,/'Recommendation','thermometer'/);
+ assert.match(code,/'','thermometer'/);
+ assert.doesNotMatch(code,/'Recommendation','thermometer'/);
 });
 
 test('New Coffee full-width fields keep consistent gaps beside the efficient paired metadata grid',()=>{

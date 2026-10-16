@@ -157,6 +157,22 @@ with sync_playwright() as p:
  assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
  assert page.evaluate('window.__raw.library.some(x=>x.coffee_id==="12345678-1234-4123-8123-123456789abc")')
  checks.append('Exact verified coffee reuses canonical ID without new Pending submission')
+ # Account switches must not reuse a previous account's still-running sync.
+ switch=page.evaluate("""async () => {
+   const app=window.__app,previous=app.identity,prevEpoch=app.epoch,original=app.doSync;
+   let releaseOld,firstRuns=0,nextRuns=0;
+   app.doSync=()=>{firstRuns++;return new Promise(resolve=>{releaseOld=resolve;});};
+   const first=app.sync(),duplicate=app.sync();
+   app.identity={id:'other-synthetic-owner'};app.epoch++;
+   app.doSync=async()=>{nextRuns++;};
+   const switched=app.sync();
+   releaseOld();
+   await Promise.all([first,duplicate,switched]);
+   app.identity=previous;app.epoch=prevEpoch;app.doSync=original;
+   return {firstRuns,nextRuns,clear:app.flushing===null};
+  }""")
+ assert switch=={'firstRuns':1,'nextRuns':1,'clear':True},switch
+ checks.append('Cross-account inflight synchronization never satisfies the next account cache refresh')
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
  assert not errors,errors;checks.append('No browser JavaScript exceptions')
  b.close()

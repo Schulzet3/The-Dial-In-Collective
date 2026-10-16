@@ -21,10 +21,14 @@ jobs:
           python-version: '3.12'
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
+      - name: Lint all active JavaScript and review scripts
+        run: npm exec --yes --package=eslint@9.39.1 -- eslint .
       - run: npm run build:cloud
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_private_visual_review_nonfunctional
+      - name: Verify every shipped file and transitive module import
+        run: node scripts/audit/site-integrity.mjs --dist
       - name: Prepare isolated browser only
         run: |
           python -m pip install playwright==1.55.0
