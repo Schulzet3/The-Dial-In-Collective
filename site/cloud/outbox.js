@@ -32,13 +32,41 @@ export class Outbox {
 }
 export class IndexedStore {
  constructor(idb=globalThis.indexedDB){this.idb=idb;this.promise=null;}
- db(){return this.promise ||= new Promise((resolve,reject)=>{
-  if(!this.idb)return reject(new CloudError('Offline storage is unavailable. No change was queued.','storage_unavailable'));
-  const r=this.idb.open('dic_cloud_owner_test_v1',1);
-  r.onupgradeneeded=()=>{r.result.createObjectStore('events',{keyPath:['owner','id']});r.result.createObjectStore('receipts',{keyPath:['owner','id']});r.result.createObjectStore('meta');r.result.createObjectStore('cache');};
-  r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result);
- });}
- async transaction(stores,fn){const db=await this.db();return new Promise((resolve,reject)=>{const tx=db.transaction(stores,'readwrite');fn(tx);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new CloudError('Local write was interrupted.','storage_failed'));});}
+ db(){
+  if(this.promise)return this.promise;
+  // A temporary IndexedDB open failure must not permanently poison offline
+  // storage for the lifetime of the tab. Keep the existing database name
+  // unchanged to preserve every user's queued events and receipts.
+  const opening=new Promise((resolve,reject)=>{
+   if(!this.idb)return reject(new CloudError('Offline storage is unavailable. No change was queued.','storage_unavailable'));
+   let request;
+   try{request=this.idb.open('dic_cloud_owner_test_v1',1);}
+   catch(error){reject(error);return;}
+   request.onupgradeneeded=()=>{const db=request.result;
+    for(const [name,options] of [['events',{keyPath:['owner','id']}],['receipts',{keyPath:['owner','id']}],['meta',undefined],['cache',undefined]]){
+     if(!db.objectStoreNames.contains(name))db.createObjectStore(name,options);
+    }
+   };
+   request.onerror=()=>reject(request.error);
+   request.onblocked=()=>reject(new CloudError('Offline storage is blocked by another open app tab. Close old tabs and retry.','storage_blocked'));
+   request.onsuccess=()=>resolve(request.result);
+  });
+  this.promise=opening.catch(error=>{this.promise=null;throw error;});
+  return this.promise;
+ }
+ async transaction(stores,fn){
+  const db=await this.db();
+  return new Promise((resolve,reject)=>{
+   let tx;
+   try{
+    tx=db.transaction(stores,'readwrite');
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error||new CloudError('Local write failed.','storage_failed'));
+    tx.onabort=()=>reject(tx.error||new CloudError('Local write was interrupted.','storage_failed'));
+    fn(tx);
+   }catch(error){try{tx?.abort();}catch{}reject(error);}
+  });
+ }
  put(event){return this.transaction(['events','meta'],tx=>{const events=tx.objectStore('events'),meta=tx.objectStore('meta');const exists=events.get([event.owner,event.id]);exists.onsuccess=()=>{if(exists.result){events.put({...event,sequence:exists.result.sequence});return;}const r=meta.get('sequence');r.onsuccess=()=>{const sequence=(r.result||0)+1;meta.put(sequence,'sequence');events.put({...event,sequence});};};});}
  async list(owner){const db=await this.db();return new Promise((resolve,reject)=>{const r=db.transaction('events').objectStore('events').getAll();r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result.filter(e=>e.owner===owner).sort((a,b)=>a.sequence-b.sequence));});}
  acknowledge(event,result){return this.transaction(['events','receipts','cache'],tx=>{tx.objectStore('receipts').put({owner:event.owner,id:event.id,event:structuredClone(event),result,at:new Date().toISOString()});const cache=tx.objectStore('cache'),r=cache.get(event.owner);r.onsuccess=()=>{if(r.result)cache.put({...r.result,snapshot:patchAcknowledgement(r.result.snapshot,event,result),needsRefresh:true},event.owner);};tx.objectStore('events').delete([event.owner,event.id]);});}
