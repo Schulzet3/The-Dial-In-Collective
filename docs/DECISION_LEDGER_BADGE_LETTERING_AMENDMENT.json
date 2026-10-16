@@ -41,6 +41,31 @@
       ],
       "implementation_status": "Staged on work/visual-refresh-20261015 for repeatable synthetic screenshot review.",
       "release_hold": "Do not deploy to Netlify or remove SSO until owner authorizes release."
+    },
+    {
+      "id": "VISUAL-BADGES-ORIGINAL-BLACK-05",
+      "status": "Locked",
+      "amends": "VISUAL-BADGES-THEME-TEXT-02 color choice and VISUAL-BADGES-CLEAN-03 badge outline treatment only",
+      "decision": "Use original dark-JSX badge fills in both modes, uniform black (#000000) text in both modes, and flat borderless pill shapes closer to the original app. Maintain no text shadows, haloes or glyph effects. Non-badge cards, fields and sections retain the approved clear borders.",
+      "preserves": [
+        "Original dark JSX background colors",
+        "Global no-text-shadow decision",
+        "Engine/data/security unchanged"
+      ],
+      "accessibility_note": "Deep blue fill with black letters can fall below WCAG AA contrast; separate owner-led refinement may be required.",
+      "implementation_status": "Staged for synthetic screenshot review; not published."
+    },
+    {
+      "id": "UX-NEW-COFFEE-SINGLE-SECTION-01",
+      "status": "Locked",
+      "amends": "New Coffee form grouping visual only",
+      "decision": "Remove Optional Coffee Details heading, disclosure and divider. Keep all existing New Coffee inputs in one continuous form and retain existing two-column six-field grid plus full-width Tasting Notes.",
+      "preserves": [
+        "All optional and required inputs",
+        "All validation and submission logic",
+        "Responsive paired-field layout"
+      ],
+      "release_hold": "Review screenshots only; no Netlify publishing."
     }
   ]
 }

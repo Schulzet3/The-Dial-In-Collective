@@ -1,4 +1,4 @@
-# Coordinated visual refinement - review 5: clean, shadow-free typography and edges
+# Coordinated visual refinement - review 6: original flat badges and simplified New Coffee
 
 **State:** implemented on `work/visual-refresh-20261015` for owner screenshot review only. No Netlify deployment, SSO removal, production migration, import unlock or test-account creation is authorized here. Production remains on its existing release.
 
@@ -27,3 +27,6 @@ These are not real nonadministrator account/email acceptance tests, an independe
 
 ## Review hold
 No release marker is included in this change. The Netlify build guard explicitly rejects production, branch and deploy-preview contexts for this review branch. Do not merge or publish until owner screenshot feedback is resolved.
+
+## Review 6: owner-requested targeted adjustments
+Original dark JSX badge fills are unchanged. All badge text is plain black in both themes; badge outlines are removed to match the flat clean style of the earlier app, while other interface boundaries stay defined. This later owner decision supersedes previous white-on-Dark text and bold badge-border treatments only. The New Coffee dialog has one continuous form without `Optional Coffee Details` or its divider; all inputs survive, including the six side-by-side metadata fields. The browser review includes assertions for absence of the heading and persistence of two-column form layout. Contrast limitations on black text over the darkest blue are disclosed; this is not WCAG approval.
