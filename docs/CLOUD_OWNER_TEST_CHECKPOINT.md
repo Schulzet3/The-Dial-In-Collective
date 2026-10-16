@@ -1,5 +1,7 @@
 # The Dial In Collective: account and cloud development checkpoint
 
+**HISTORICAL EARLY CLOUD CHECKPOINT:** The published Oct 16 Netlify app, real owner/second-account Auth checks, working SMTP/redirects, automatic encrypted GitHub→Drive backups and exact ciphertext isolated PostgreSQL restoration supersede this document's earlier 'not yet live' claims. It remains technical provenance, NOT current readiness. Read [CURRENT_STATUS.md](CURRENT_STATUS.md) and the later Locked requirements before requesting new work.
+
 ## Readiness
 
 **Development code, not a released beta. There is no hosted login URL yet.** No actual owner/tester account has been provisioned, no real user data has been migrated, and no automated Google Drive backup is running. The local v0.2.0 prototype remains unchanged.
