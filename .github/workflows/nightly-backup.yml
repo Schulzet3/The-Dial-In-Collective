@@ -32,10 +32,11 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - name: Checkout current cloud app source for independent recovery
+      - name: Checkout verified published release for independent recovery
         uses: actions/checkout@v7
         with:
-          ref: development/backend-foundation
+          # Verified Netlify published SHA; advance only after the next release is verified.
+          ref: 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8
           path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
