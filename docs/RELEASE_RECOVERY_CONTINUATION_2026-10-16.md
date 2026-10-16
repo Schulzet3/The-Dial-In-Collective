@@ -46,3 +46,15 @@ The source-pinned backup workflow [38926581554](https://github.com/Schulzet3/The
 An attempted manual upload of this new ciphertext to the existing Drive folder was rejected by automatic approval review: sensitive organizational backup, destination/explicit payload authorization not sufficiently established. **No new offsite upload succeeded.** A read-only follow-up confirms the folder is named `DIC Automated Encrypted Backups`, is not shared, and has only an owner permission. Prior-context search nevertheless found differing Google account references and no exact user approval for this folder/manual-upload scope. Obtain explicit destination confirmation before retrying; do not work around the rejection. Earlier October 16 Drive copies remain independently checksum-verified, but predate this release.
 
 Destination awaiting confirmation: https://drive.google.com/drive/folders/1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf . No backup keys, plaintext or credentials were exposed. This push-triggered verification run does not qualify for the Apps Script courier, which handles scheduled/manual-dispatch runs. Do not relabel the run or trigger an indirect transfer to bypass the rejected manual upload.
+
+## Offsite upload blocker resolved — explicit owner approval
+
+The owner answered “Yes I approve” after being shown the exact encrypted filename, connected Google account and destination folder. That explicit approval authorizes this manual ciphertext upload and resolves the blocker recorded above.
+
+- Uploaded `dic-nightly-12056578138.zip` at `2026-10-16T16:06:26.923Z`.
+- Drive file: https://drive.google.com/file/d/1aRSQAhBEFDJumavdz_kOQdsXOI0gekB5/view .
+- Verified parent: `1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf` (`DIC Automated Encrypted Backups`).
+- Read-back metadata: 443225 bytes, `application/zip`, `shared=false`, only an owner permission.
+- Independently downloaded the new Drive file after upload. SHA-256 `e1f4ce1705a7a5dc903b24967f27b1e97ee219854dc5e52cb4d2aa1e655add6f` matches the original GitHub archive exactly; ZIP CRC passes; sole member `backup.age`.
+
+This verifies the authorized offsite ciphertext copy. It does not verify decryption, restoration of this exact archive, automated courier execution/alerts, genuine nonadmin authentication, or complete hosted reconstruction. No plaintext backup or private recovery key was uploaded. The application release and access restrictions are unchanged.
