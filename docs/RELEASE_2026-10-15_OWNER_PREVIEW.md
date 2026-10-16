@@ -1,5 +1,7 @@
 # Owner preview release checkpoint — October 15, 2026
 
+**HISTORICAL OCTOBER 15 RELEASE EVIDENCE:** The newer consolidated October 16 production release superseded this deployment plan; it is ready and uses the custom domain. Production's additional Netlify SSO was subsequently removed under a later Locked owner decision, while non-production previews remain Netlify SSO-protected and app-side Supabase Auth/invite/RLS remains. Real nonadmin invitation, admin denial, private-workspace isolation and restore checks later passed. Do not reuse October 15 unchecked boxes as new demands; see [CURRENT_STATUS.md](CURRENT_STATUS.md).
+
 This file records release intent and preflight evidence; creating it is **not** proof of an actual Netlify publish. After deployment, compare the Netlify published SHA to this release commit. This release remains owner-only and SSO-protected, **not** an external beta.
 
 ## Owner-approved deployment target
