@@ -98,3 +98,11 @@ test('source worker only deploys behind verified JWT and uses service-only datab
  assert.match(f,/const link=officialProductUrl/);
  assert.ok(!f.includes('fetch(target.source_url'));
 });
+
+test('official verifier allows the custom beta app origin while rejecting wildcard origins',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const source=readFileSync(new URL('../supabase/functions/dic-verify-coffee/index.ts',import.meta.url),'utf8');
+ assert.match(source,/'https:\/\/app\.dialincollective\.com'/);
+ assert.match(source,/if\(origin&&!allowOrigins\.has\(origin\)\)/);
+ assert.doesNotMatch(source,/Access-Control-Allow-Origin':\s*'\*'/);
+});

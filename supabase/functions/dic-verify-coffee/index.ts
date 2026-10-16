@@ -5,6 +5,7 @@ import {createClient} from 'npm:@supabase/supabase-js@2.117.3';
 import {extractOfficialEvidence,officialProductUrl} from './evidence.mjs';
 
 const allowOrigins=new Set([
+ 'https://app.dialincollective.com',
  'https://the-dial-in-collective.netlify.app',
  'http://localhost:5173',
  'http://localhost:8888',

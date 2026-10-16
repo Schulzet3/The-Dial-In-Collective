@@ -50,3 +50,6 @@ This report distinguishes: observed code/test facts, safe branch-only correction
 Latest private-branch GitHub Actions `visual-review` should show: Node tests pass, ESLint pass, allowlisted build and site-integrity pass, synthetic cloud browser QA pass, and multi-theme browser screenshots pass. A successful CI run is evidence for local correctness only; production access, external SMTP, live roaster parsing and complete disaster recovery are separate release gates.
 
 **Release status:** keep changes on the private review branch for product-owner inspection; no production deployment or live DB schema change.
+
+## Audit follow-up: official verifier origin inconsistency
+The active source-verifier Edge function's CORS allowlist omitted the custom-domain login origin `https://app.dialincollective.com`, while the new URL-preview Edge function already listed it. Stage the custom origin in `supabase/functions/dic-verify-coffee/index.ts` and add a regression assertion for exact origin filtering. No wildcard CORS, JWT relaxation, unauthorized access or live Edge deployment. Live source verification on the custom domain must be retested after a separately approved function release.
