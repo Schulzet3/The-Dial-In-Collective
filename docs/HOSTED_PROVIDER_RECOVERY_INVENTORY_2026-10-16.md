@@ -52,6 +52,17 @@
 - **Hosted restore dependency:** Rebuild requires access to the owner-controlled Resend account, domain verification, ability to create or recover a suitable SMTP API credential, and re-enter it directly in a new secure Supabase dashboard. Never export an SMTP password or API token to the GitHub recovery repository, plain notes, or screenshots. Record only credential **location/custodian**, never its value.
 - No production provider settings were modified; this is state capture, not a new Locked product decision.
 
+### Resend sending-domain DNS verification — owner screenshot 2026-10-16
+
+- Domain being inspected: `auth.dialincollective.com` in Resend Domains. The timeline shows `Missing records` (earlier historical event) and the currently highlighted `Partially verified`; `Domain verified` is not marked complete. **Do not describe the overall domain as fully verified.**
+- Resend's official March 2026 product guidance defines `Partially verified` as one of two separate capabilities—**sending or receiving**—being verified. For DIC, Resend is the outbound Supabase Auth SMTP sender, and inbound support routing belongs to Cloudflare. The partial badge is not itself a failed outbound SMTP configuration. Source: https://resend.com/changelog/domain-verification-events . **Receiving capability is not proven by this screenshot**; do not enable it merely to achieve a full-status badge.
+- `Enable Sending`: **ON**.
+- **DKIM:** TXT at dashboard-relative name `resend._domainkey.auth`, TTL `Auto`, **Verified**. The long TXT public key was visually truncated; do not invent or copy an incomplete key into recovery instructions.
+- **Sending/SPF subsection:** CNAME `rsend.auth` → `rsend.forge.rmta.net` and CNAME `send.auth` → `send.forge.rmta.net`; both DNS Only, TTL Auto, **Verified**.
+- **DMARC (Optional):** screenshot displays TXT `_dmarc` with `v=DMARC1; p=none;` and TTL Auto. Its verification/status cell is not visibly confirmed, and the owner has not separately shown a live Cloudflare zone export; whether the record is deployed at the root or a subdomain cannot be conclusively inferred from the dashboard-relative name alone. The `p=none` value is a monitoring policy, **not a reject/quarantine enforcement policy**.
+- Real signup verification mail to the second account succeeded earlier through Supabase's connected SMTP configuration. This corroborates **functional outbound sending**, but does not prove separate incoming mail functionality.
+- Screenshots are accurate **read-only account configuration evidence**. No DNS provider/API query was successfully completed in this review. Next verify matching Cloudflare DNS records and support forwarding, without changing entries.
+
 ## Backups and monitoring: passed with remaining boundaries
 
 - GitHub scheduled encrypted dump runs on main; configured 30-day GitHub artifact retention. Owner's Apps Script courier polls GitHub every 3 hours, selects trusted successful schedule/manual runs and SHA-verifies ciphertext to a private Drive folder. Oct 15 and 16 scheduled archives independently downloaded from Drive byte-for-byte matched GitHub SHA-256 and ZIP CRC; manual post-release backup separately identified.
@@ -61,4 +72,4 @@
 
 ## Next acceptance gate
 
-Supabase Auth URL and nonsecret SMTP settings are documented and verified. Next verify Resend sending-domain records/status, Cloudflare DNS configuration, and secure credential custody. Only after a cost quote and the owner's explicit agreement should a new hosted recovery instance be provisioned. A disposable local PostgreSQL restore is not a full hosted provider reconstruction.
+Supabase Auth URL, nonsecret SMTP and Resend sending-domain record statuses are now documented. Next verify Cloudflare DNS authoritative records, root-domain redirect/support forwarding, and secure credential custody. Only after a cost quote and the owner's explicit agreement should a new hosted recovery instance be provisioned. A disposable local PostgreSQL restore is not a full hosted provider reconstruction.
