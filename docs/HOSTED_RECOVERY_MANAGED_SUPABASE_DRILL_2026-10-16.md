@@ -147,3 +147,20 @@ A rollback-only **actual restored-account** role simulation passed: original own
 - Discard local **one-time Mac rewrap helper ZIP**, one-time ciphertext output ZIP, extracted recovery static ZIP, and copies of the throwaway *recovery-only* Resend key when done. **Never delete `~/.dic-backup/` owner permanent private key**, its secure backup, original encrypted offsite archives, GitHub backup workflow, or source/restore instructions. One-time runner/toolkit workflows were already deleted from GitHub `main`; one-time transfer staging files have been moved to Library trash and ephemeral keys destroyed.
 
 **Teardown result:** To be recorded *separately after actual pause/deletion/revocation*. This paragraph is a readiness checkpoint and is **not** evidence that providers or keys have already been removed.
+
+
+## Recovery teardown started — Supabase Free project paused (2026-10-16)
+
+After owner-confirmed recovered administrator browser acceptance and the owner's request to clean up the temporary recovery infrastructure, the connected Supabase provider accepted a **pause request** for only **`bgstplvefumsnplhqpvd`** (`DIC Isolated Recovery Drill 2026-10-16`): `{"success":true}`. The immediate follow-up provider read returned `PAUSING`; **do not represent the project as permanently deleted** or already fully `PAUSED` until independently observed. Simultaneous provider read independently confirmed production Supabase **`azviqqejypsefzilgonr` = `ACTIVE_HEALTHY`**.
+
+The separate, still-existing recovery Netlify project **`dic-recovery-20261016` / `fd4a4dba-0c71-4b06-be63-9f5f689aba1b`** still showed a `ready` deploy and team SSO required for **all** versions. It has not yet been deleted because the connected Netlify project-management API does not support project deletion. The restored recovery Supabase instance no longer serves the recovery app once fully paused.
+
+**Remaining manual cleanup requested of owner:**
+1. Delete **only** the separate recovery Netlify project via `https://app.netlify.com/projects/dic-recovery-20261016` → Project configuration → Danger zone → Delete project. Do not delete the live `the-dial-in-collective` project.
+2. Delete **only** temporary Supabase project `bgstplvefumsnplhqpvd` in the Supabase Dashboard → project settings → General → Delete project, if permanent teardown is desired after the pause. Free paused projects do not count against the free active-project limit. Deletion irreversibly removes the recovery copy of the data, not the original verified backups or production database.
+3. In `https://resend.com/api-keys`, select **only** the separately created `DIC Recovery Test` Sending-access token (actual name as shown by owner) and delete/revoke it; then delete the owner's local/password-manager copy of the **temporary token**. Simply deleting its local copy does not revoke a key still active in Resend. Do not delete production SMTP token, `auth.dialincollective.com` sending domain, or its Cloudflare DKIM/CNAME.
+4. Delete downloaded one-time Mac recovery rewrap/handoff ZIPs and extracted recovery-site ZIP if no longer desired. Do not delete `~/.dic-backup/` permanent recovery private key, original Drive/GitHub encrypted source-inclusive backups, GitHub automated scheduled backup workflow, or documented recovery RLS guard and runbooks.
+
+The earlier exact 44-table managed restore and owner real-browser login remain the durable evidence of successful scoped reconstruction; optional unrehearsed password reset, new-shot write/recommendation, recovery-specific invitation redemption, and real DNS cutover/failure conditions remain explicitly **NOT VERIFIED**. No production backup, production site, production Resend/DNS credentials or Locked product decision was changed by pausing this temporary project.
+
+**Teardown status:** isolated Supabase **PAUSING** (verified); Netlify recovery **EXISTS** (verified); temporary Resend API key **not revoked by assistant**; permanent delete actions **require owner dashboard**.
