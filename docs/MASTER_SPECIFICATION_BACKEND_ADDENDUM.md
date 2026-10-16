@@ -146,3 +146,10 @@ The owner approved publishing the current consolidated work, followed by genuine
 
 Before release, execute the staged URL-first SQL in isolated PostgreSQL; static Node source assertions are insufficient. Record the published Git SHA and deployed function versions. Real Auth-issued nonadmin session, email/redirect, account isolation and admin-denial acceptance remain outstanding until observed. Use owner-held keys locally for encrypted-archive restore; never request the private recovery key in chat.
 
+
+
+## Owner-approved production Netlify SSO removal — 2026-10-16
+
+**Locked amendment, production only:** After the owner verified a genuine second confirmed nonadministrator account using a one-use, expiring beta invitation, the owner explicitly requested removing Netlify's additional team-login gate. The existing production site at `https://app.dialincollective.com` now uses the application's Supabase Auth sign-in, confirmed-email check, beta invitation/admission process, per-account RLS isolation, and administrator authorization as its access controls. Publicly reachable sign-in/signup frontend assets do **not** grant admitted membership, administrator access, private shots, or canonical write privileges. New accounts remain pending until an invite is redeemed. All previous protected-account and historical-import requirements remain Locked.
+
+Netlify visitor protection was updated in place to require **SSO for non-production deployments only**, with no site password, thereby removing extra Netlify SSO from the production deploy. The October 16 published deployment and SHA remain unchanged, and no billable redeploy was needed. The earlier all-deploy SSO requirement is superseded only for production access; preview/branch deployments remain team-SSO-protected. The owner-reported successful real nonadmin signup/invitation workflow is evidence for admission; do not claim full cross-account browser/HTTP authorization, role-denial, or complete hosted disaster recovery without separately observing each test. Preserve limited beta enrollment, production server-side access controls, and the credit-aware release gate.
