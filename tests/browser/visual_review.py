@@ -123,6 +123,7 @@ with sync_playwright() as p:
   check(page.locator('#new-coffee summary').count()==0,mode+': no Optional Coffee Details heading')
   check(page.locator('#new-coffee .coffee-detail-grid').count()==1,mode+': metadata grid remains')
   check(page.locator('#new-coffee .coffee-detail-grid .field').count()==6,mode+': six coffee metadata fields retained')
+  check(page.locator('#new-coffee>label.field').first.evaluate('(el)=>getComputedStyle(el).marginBottom')=='13px',mode+': full-width New Coffee fields have readable spacing')
   columns=page.locator('#new-coffee .coffee-detail-grid').evaluate('(el)=>getComputedStyle(el).gridTemplateColumns.split(" ").length')
   check(columns==2,mode+': metadata fields remain side by side')
   shot(page,'07-add-coffee-'+mode,'#sheet')

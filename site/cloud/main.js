@@ -126,7 +126,7 @@ class CloudApp {
   this.show('New Coffee',`<form id=new-coffee>
    <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
     <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary compact')}
-     <span class="helper">Optional · Check the official product page before typing</span></div>
+     <span class="helper">Optional · Official coffee product page</span></div>
    </div>
    <div id="coffee-url-feedback" aria-live="polite"></div>
    ${field('Name / Bag Label','name','',{required:true})}
@@ -135,7 +135,7 @@ class CloudApp {
    <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
    ${field('Tasting Notes','tasting_notes')}
    <button class="primary full space-top">Add Coffee</button>
-   <p class="helper space-top">Autofill uses structured metadata from recognized official roaster pages. Review everything before saving; missing details can be entered manually.</p>
+   <p class="helper space-top">Check all suggested information before saving. Missing details can be entered manually.</p>
   </form>`);
  }
  async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){
@@ -207,7 +207,7 @@ class CloudApp {
       throw new Error('The URL has changed. Check it again before applying details.');
      const {filled,skipped}=applyCoffeeUrlFields(form,this.coffeeUrlPreview);
      const feedback=form.querySelector('#coffee-url-feedback');
-     feedback.innerHTML=`<div class="coffee-url-message" role="status">${filled} field${filled===1?'':'s'} filled from official product metadata. ${skipped?'Existing entries were left unchanged. ':''}Review the coffee and release before selecting Add Coffee.</div>`;
+     feedback.innerHTML=`<div class="coffee-url-message" role="status">${filled} field${filled===1?'':'s'} filled. ${skipped?'Your existing entries were preserved. ':''}Review the coffee and release before adding.</div>`;
      this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;
      return;
     }

@@ -51,3 +51,9 @@ test('review-requested recommendation captions are deliberately retained pending
  assert.match(code,/'Basket-based'/);
  assert.match(code,/'Recommendation','thermometer'/);
 });
+
+test('New Coffee full-width fields keep consistent gaps beside the efficient paired metadata grid',()=>{
+ const css=read('site/visual.css');
+ assert.match(css,/#new-coffee>label\.field\{margin-bottom:13px\}/);
+ assert.match(css,/#new-coffee \.coffee-detail-grid\{margin-top:16px;margin-bottom:16px\}/);
+});
