@@ -6,6 +6,8 @@ import {decide} from '../scripts/netlify/should-ignore-build.mjs';
 const ledger=JSON.parse(readFileSync(new URL('../docs/NETLIFY_CREDIT_LEDGER.json',import.meta.url),'utf8'));
 const simulatedFreshLedger=structuredClone(ledger);
 simulatedFreshLedger.release_policy.post_release_billing_refresh_needed=false;
+// Freeze the unit-test billing example; operational snapshots may advance.
+simulatedFreshLedger.snapshots=[ledger.snapshots.find(snapshot=>snapshot.observed_date==='2026-10-15')];
 const baseline={context:'production',branch:'development/backend-foundation',
  subject:'Release DIC: bundled tested fixes [dic-publish]',today:'2026-10-15',ledger:simulatedFreshLedger};
 
@@ -26,7 +28,7 @@ test('preserve the 2026-10-14 exhausted Free screenshot as historical evidence',
 });
 
 test('owner-confirmed Personal plan gives 1000 deployable credits until Nov 14',()=>{
- const snapshot=ledger.snapshots.at(-1);
+ const snapshot=ledger.snapshots.find(snapshot=>snapshot.observed_date==='2026-10-15');
  assert.equal(ledger.monthly_included_credits,1000);
  assert.match(ledger.account_plan,/Personal/);
  assert.equal(snapshot.active_plan,'Personal');
@@ -41,7 +43,9 @@ test('owner-confirmed Personal plan gives 1000 deployable credits until Nov 14',
 });
 
 test('a completed production release requires new observed credits before another release',()=>{
- const r=decide({...baseline,ledger});
+ const postReleaseLedger=structuredClone(simulatedFreshLedger);
+ postReleaseLedger.release_policy.post_release_billing_refresh_needed=true;
+ const r=decide({...baseline,ledger:postReleaseLedger});
  assert.equal(r.ignore,true);
  assert.match(r.reason,/refresh/);
 });
