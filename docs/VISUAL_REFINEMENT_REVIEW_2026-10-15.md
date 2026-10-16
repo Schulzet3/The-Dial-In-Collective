@@ -1,4 +1,4 @@
-# Coordinated visual refinement - review 3: theme-specific badge lettering
+# Coordinated visual refinement - review 4: crisp badge lettering
 
 **State:** implemented on `work/visual-refresh-20261015` for owner screenshot review only. No Netlify deployment, SSO removal, production migration, import unlock or test-account creation is authorized here. Production remains on its existing release.
 
@@ -11,7 +11,7 @@ The routine Recovery UI has been removed by explicit amendment to `UX-20261014-0
 The owner requested exact original dark badge colors rather than the first review's brighter palette. [Source manifest](BADGE_PALETTE_SOURCE.json) records the JSX fingerprint, variable mapping and exact colors. [Master Specification addendum](MASTER_SPECIFICATION_BADGE_COLORS_ADDENDUM.md) and [Decision Ledger amendment](DECISION_LEDGER_BADGE_COLORS_AMENDMENT.json) record this refinement. The original Custom blue replaces review 1's purple; original Lungo pale blue replaces review 1's teal. Dialed In, Ristretto, Traditional and Turbo also use their original dark fills and text. New pending statuses use the source's dark gold, as a documented mapping rather than an original badge match. The taste ramp uses original dark values in both modes. No layout or calculation changes are included in this revision.
 
 ## Later owner-approved lettering amendment
-White badge lettering in Dark and black in Light explicitly supersedes the original JSX lettering requirement, but not the original badge fills. Contrasting text halos improve legibility; some raw text/fill pairs fall below WCAG 4.5:1 and have not passed an independent accessibility audit. See [specification](MASTER_SPECIFICATION_BADGE_LETTERING_ADDENDUM.md) and [ledger](DECISION_LEDGER_BADGE_LETTERING_AMENDMENT.json).
+White badge lettering in Dark and black in Light explicitly supersedes the original JSX lettering requirement, but not the original badge fills. The later owner-requested adjustment removes text halos/shadows/strokes entirely for the cleaner original app appearance. Some raw text/fill pairs fall below WCAG 4.5:1 and have not passed an independent accessibility audit. See [specification](MASTER_SPECIFICATION_BADGE_LETTERING_ADDENDUM.md) and [ledger](DECISION_LEDGER_BADGE_LETTERING_AMENDMENT.json).
 
 ## Verification boundary
 - The original recommendation engine, data model, Supabase migrations, API permissions and Cloud client are unchanged.

@@ -48,4 +48,8 @@ test('taste chip lettering preserves original ink and white on the darkest red',
  assert.match(css,/\.taste-chip\.severity-4\{color:#fff\}/);
 });
 
-test('opposite-color text halos aid badge lettering in both themes',()=>{assert.match(css,/\.status-badge,\.style-badge,\.preview-pill,\.admin-state\{text-shadow:/);assert.match(css,/:root\[data-theme=dark\] \.status-badge/);assert.match(css,/:root\[data-theme=dark\] \.sync-indicator\[data-sync-state=pending\]/);});
+test('all badge and pending-sync lettering is clean, without blurred halos, strokes or shadows',()=>{
+ assert.match(css,/\.status-badge,\.style-badge,\.preview-pill,\.admin-state,\.sync-indicator\[data-sync-state=pending\]\{text-shadow:none\}/);
+ assert.doesNotMatch(css, /text-shadow:(?!none)[^;}]+/i);
+ assert.doesNotMatch(css, /(?:-webkit-)?text-stroke\s*:/i);
+});
