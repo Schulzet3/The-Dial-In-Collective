@@ -8,7 +8,7 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','coffee-match-ui']:
+ for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','coffee-match-ui','coffee-url-autofill']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
@@ -31,7 +31,7 @@ window.__client={
  async signIn(email){window.__who={id:OWNER,email};return {};},async signUp(){return {};},
  async requestReset(){return 'If that address has an account, a recovery email has been requested.';},async setPassword(){return {};},
  async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
- async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
+ async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async previewCoffeeUrl(){return {ok:false,reason:'unrecognized_official_roaster'};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
  async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
  if(e.action==='submit_coffee'){
   const submission='11111111-1111-4111-8111-000000000099';

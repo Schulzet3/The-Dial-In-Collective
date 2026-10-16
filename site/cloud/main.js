@@ -10,6 +10,7 @@ import {emailConfirmationView} from './confirmation.js';
 import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
+import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,shotSummary,humanDate}=U;
 const root=document.querySelector('#app'),sheet=document.querySelector('#sheet');
 const uuid=()=>crypto.randomUUID();
@@ -17,6 +18,7 @@ function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0});
+  this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{this.syncState=r.state;}});
  }
  async init(){
@@ -120,7 +122,22 @@ class CloudApp {
    <p class="helper space-top">Renaming does not change your equipment history, shots, or recommendations.</p>
    <button class="primary full space-top">Save Name</button></form>`);
  }
- showAdd(){this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.show('New Coffee',`<form id=new-coffee>${field('Name / Bag Label','name','',{required:true})}${field('Roaster','roaster','',{required:true})}${field('Roaster Page URL','source_url','',{type:'url'})}${field('Release / Harvest (If Shown)','release_label','')}<div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>${field('Tasting Notes','tasting_notes')}<button class="primary full space-top">Add Coffee</button><p class="helper space-top">Add the details from your bag. An official roaster link helps verify the coffee; AI extraction is not available yet.</p></form>`);}
+ showAdd(){this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;
+  this.show('New Coffee',`<form id=new-coffee>
+   <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
+    <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary compact')}
+     <span class="helper">Optional · Check the official product page before typing</span></div>
+   </div>
+   <div id="coffee-url-feedback" aria-live="polite"></div>
+   ${field('Name / Bag Label','name','',{required:true})}
+   ${field('Roaster','roaster','',{required:true})}
+   ${field('Release / Harvest (If Shown)','release_label','')}
+   <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
+   ${field('Tasting Notes','tasting_notes')}
+   <button class="primary full space-top">Add Coffee</button>
+   <p class="helper space-top">Autofill uses structured metadata from recognized official roaster pages. Review everything before saving; missing details can be entered manually.</p>
+  </form>`);
+ }
  async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){
   if(chosenId){
    await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:uuid()},{onlineOnly:true});
@@ -166,6 +183,34 @@ class CloudApp {
    if(a==='open-admin'){location.assign('/admin.html');return;}
    if(a==='rename-setup'){this.showRenameSetup(id);return;}
    if(a==='add'){this.showAdd();return;}
+    if(a==='preview-coffee-url'){
+     const form=sheet.querySelector('#new-coffee'),panel=form?.querySelector('#coffee-url-feedback');
+     if(!form||!panel||this.coffeeUrlBusy)return;
+     const raw=String(form.elements.source_url.value||'').trim();
+     if(!raw){panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'invalid_url'});return;}
+     this.coffeeUrlBusy=true;this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;
+     const original=target.textContent;target.disabled=true;target.textContent='Checking URL...';
+     try{
+      const found=await this.client.previewCoffeeUrl(raw);
+      if(!sheet.open||sheet.querySelector('#new-coffee')!==form||form.elements.source_url.value.trim()!==raw)return;
+      this.coffeeUrlPreview=found?.ok?found:null;
+      this.coffeeUrlPreviewInput=found?.ok?raw:null;
+      panel.innerHTML=coffeeUrlPreviewMarkup(found);
+     }catch(error){
+      if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
+     }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
+     return;
+    }
+    if(a==='apply-coffee-url'){
+     const form=sheet.querySelector('#new-coffee');
+     if(!form||!this.coffeeUrlPreview||form.elements.source_url.value.trim()!==this.coffeeUrlPreviewInput)
+      throw new Error('The URL has changed. Check it again before applying details.');
+     const {filled,skipped}=applyCoffeeUrlFields(form,this.coffeeUrlPreview);
+     const feedback=form.querySelector('#coffee-url-feedback');
+     feedback.innerHTML=`<div class="coffee-url-message" role="status">${filled} field${filled===1?'':'s'} filled from official product metadata. ${skipped?'Existing entries were left unchanged. ':''}Review the coffee and release before selecting Add Coffee.</div>`;
+     this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;
+     return;
+    }
     if(a==='check-pending-match'){
      const entry=this.raw?.library?.find(x=>x.id===id);
      const submission=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
@@ -213,7 +258,7 @@ class CloudApp {
    if(a==='signout'){if((await this.queue.pending()).length)throw new Error('Changes are waiting to sync. Open Cloud Sync Details to save pending changes and finish syncing before signing out.');await this.client.signOut();this.identity=null;this.status=null;this.raw=null;this.state=M.blankState();this.epoch++;sheet.close();this.render();return;}
   }catch(err){this.error(err);}
  }
- input(ev){if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+ input(ev){if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
  change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{

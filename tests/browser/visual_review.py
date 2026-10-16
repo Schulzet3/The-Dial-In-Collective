@@ -76,6 +76,7 @@ with sync_playwright() as p:
   check(page.locator('.status-badge').first.evaluate('(e)=>getComputedStyle(e).borderTopWidth==="0px"'),mode+': status badge is flat and borderless like original')
   check(page.locator('.workspace-bar h2').evaluate('(e)=>getComputedStyle(e).fontVariantLigatures')=='none',mode+': display ligatures disabled')
   shot(page,'01-home-'+mode)
+  shot(page,'01b-recipe-metric-captions-'+mode,'.coffee-card.is-open .recipe-grid')
   page.locator('[data-action=search-toggle]').click();check(page.locator('.search-tools').is_visible(),mode+': Search & Sort expands')
   shot(page,'02-search-'+mode)
   page.locator('[data-action=search-toggle]').click()
@@ -122,7 +123,35 @@ with sync_playwright() as p:
   check(page.locator('#new-coffee .coffee-detail-grid .field').count()==6,mode+': six coffee metadata fields retained')
   columns=page.locator('#new-coffee .coffee-detail-grid').evaluate('(el)=>getComputedStyle(el).gridTemplateColumns.split(" ").length')
   check(columns==2,mode+': metadata fields remain side by side')
-  shot(page,'07-add-coffee-'+mode,'#sheet');page.locator('[data-action=close]').click()
+  shot(page,'07-add-coffee-'+mode,'#sheet')
+  # Use a synthetic result instead of making any external HTTP request.
+  # Preview must not overwrite entered facts until the user explicitly applies.
+  page.evaluate("""()=>{
+    window.__app.client.previewCoffeeUrl=async (source_url)=>({
+      ok:true,source_url,source:'official_roaster_product_metadata',
+      fields:{name:'Hambela',roaster:'Sweet Bloom',release_label:'2026 Harvest',
+        origin:'Guji, Ethiopia',process:'Washed',variety:'Heirloom',
+        elevation_m:'1,900–2,100 m',tasting_notes:'Berry, floral, citrus'},
+      match:{classification:'exact_verified',exact_id:'12345678-1234-1234-1234-123456789012',candidates:[]}
+    });
+  }""")
+  page.locator('#new-coffee [name=source_url]').fill('https://sweetbloomcoffee.com/products/hambela')
+  page.locator('#new-coffee [name=variety]').fill('Local Bag Entry')
+  page.locator('[data-action=preview-coffee-url]').click()
+  page.locator('.coffee-url-preview').wait_for()
+  check(page.locator('#new-coffee [name=name]').input_value()=='',mode+': URL lookup requires confirmation before changing fields')
+  check(page.locator('.coffee-url-preview .coffee-match-alert').count()==1,mode+': URL previews existing verified-coffee match')
+  shot(page,'07b-url-autofill-preview-'+mode,'#sheet')
+  page.locator('[data-action=apply-coffee-url]').click()
+  check(page.locator('#new-coffee [name=name]').input_value()=='Hambela',mode+': official product Name auto-filled after approval')
+  check(page.locator('#new-coffee [name=roaster]').input_value()=='Sweet Bloom',mode+': canonical Roaster auto-filled after approval')
+  check(page.locator('#new-coffee [name=origin]').input_value()=='Guji, Ethiopia',mode+': source-backed Origin filled')
+  check(page.locator('#new-coffee [name=process]').input_value()=='Washed',mode+': recognized Process field filled')
+  check(page.locator('#new-coffee [name=variety]').input_value()=='Local Bag Entry',mode+': typed Variety never overwritten')
+  check(page.locator('#new-coffee [name=source_url]').input_value()=='https://sweetbloomcoffee.com/products/hambela',mode+': official URL retained in form')
+  check(page.locator('#new-coffee .coffee-detail-grid .field').count()==6,mode+': original two-column details preserved after autofill')
+  shot(page,'07c-url-autofill-applied-'+mode,'#sheet')
+  page.locator('[data-action=close]').click()
   page.locator('[data-action=sync]').first.click();check(page.locator('#sheet [data-action=export]').count()==0,mode+': no routine recovery export when synced');shot(page,'08-sync-'+mode,'#sheet');page.locator('[data-action=close]').click()
   page.locator('[data-action=style]').first.click();shot(page,'09-style-'+mode,'#sheet');page.locator('[data-action=close]').click()
   # An unproven coffee, sourced from a similar coffee's genuine synthetic

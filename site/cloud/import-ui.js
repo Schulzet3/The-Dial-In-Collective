@@ -15,12 +15,12 @@ export class ImportPanel {
   const app=this.app;
   app.show('Import Backup',`<section id=native-import-panel>
    <p class=helper>Import into <strong>${e(app.identity?.email||'your account')}</strong>. Choose the reviewed backup or a personal local-prototype backup. File selection alone does not upload or save anything.</p>
-   <label class="field import-zone"><span>Backup file</span><input id=import-file type=file accept=".json,.txt,application/json,text/plain"><small>Up to 2 MB. One setup / one equipment version in this first importer.</small></label>
+   <label class="field import-zone"><span>Backup File</span><input id=import-file type=file accept=".json,.txt,application/json,text/plain"><small>Up to 2 MB. One setup / one equipment version in this first importer.</small></label>
    <div id=import-review></div><p id=import-status class=helper role=status aria-live=polite></p>
-   <div class="import-actions"><button type=button id=import-validate class="primary full" disabled>Validate import</button>
-   <button type=button id=import-recovery class="ghost full" hidden>Save recovery copy</button>
+   <div class="import-actions"><button type=button id=import-validate class="primary full" disabled>Validate Import</button>
+   <button type=button id=import-recovery class="ghost full" hidden>Save Recovery Copy</button>
    <label id=import-ack-label class=checkline hidden><input type=checkbox id=import-ack><span>I saved the recovery copy and kept my original iPhone data.</span></label>
-   <button type=button id=import-confirm class="primary full" hidden disabled>Confirm import</button>
+   <button type=button id=import-confirm class="primary full" hidden disabled>Confirm Import</button>
    <button type=button id=import-back class="text-button">Back to Settings</button></div>
   </section>`);
   document.querySelector('#import-file').addEventListener('change',ev=>this.choose(ev.target.files?.[0]));
@@ -38,7 +38,7 @@ export class ImportPanel {
   document.querySelector('#import-recovery').hidden=!valid;
   document.querySelector('#import-ack-label').hidden=!valid||!this.review?.canImport;
   const button=document.querySelector('#import-confirm');button.hidden=!valid;button.disabled=this.busy||!this.review?.canImport||!this.recoverySaved||!this.downloaded;
-  button.textContent=this.review&&!this.review?.canImport?'Import locked until recovery is verified':'Confirm import';
+  button.textContent=this.review&&!this.review?.canImport?'Import locked until recovery is verified':'Confirm Import';
  }
  async choose(file){
   if(!file)return;const g=++this.generation;this.source=null;this.review=null;this.summary=null;this.downloaded=false;this.recoverySaved=false;this.busy=false;

@@ -40,3 +40,10 @@ An unproven coffee can conservatively use this user's **own successful shots** o
 
 ## Review 10: compact actions, typography and unproven grinder search bands
 As requested: Shot History labels Grind consistently; mobile date aligns with left-hand measurements; Edit and Make Current Recipe move into a compact bottom action row within expanded details. Taste chips use badge-level font weight and radar axes gain modest weight. An unproven starting grinder suggestion uses a bounded calibrated band plus a Try center, rather than claiming one exact setting. Proven successful Grind and explicit next-shot instructions keep a precise setting. The website's New Coffee URL matching and guarded post-submit official-source verification are present, but automatic extraction/fill is not. Continue screenshot review before publishing.
+
+## Review 11 — URL preview and consistent controls
+- New Coffee starts with Roaster Page URL and Autofill From URL. An opt-in source preview shows proposed structured fields and possible existing-catalog matches; Apply Suggested Details fills only blank fields. Preview uses fictional official metadata in screenshots; live service remains undeployed.
+- Staged backend matching prioritizes URL candidates even if spelling differs, but treats mismatching releases or names as review-only. The immutable canonical Coffee UUID is NOT generated from a URL.
+- Shared button tokens and improved type/casing reduce inconsistent overrides while retaining the original badge palette. All five sensory ratings and recommendation targets remain.
+- Basket-based under Dose and Recommendation under Temperature are preserved verbatim for owner decision.
+- No Netlify/Supabase deployment or RLS/auth policy change. Production integration and real roaster metadata coverage remain unverified until staged deployment and testing.

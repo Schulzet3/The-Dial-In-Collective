@@ -1,6 +1,9 @@
 /* Coordinated visual refinement - private review, not a release.
    Shared tokens give light/dark the same clear hierarchy without altering data. */
+/* Shared control tokens: one definition for all themes and action tiers. */
 :root{
+ --control-height:46px;--control-compact-height:36px;--control-radius:10px;
+ --control-font:14px;--control-compact-font:12px;--control-weight:600;--secondary-copy-font:13px;
  /* Original JSX dark badge fills shared by both themes; owner-approved theme-specific lettering. */
  --bg:#f4eee4;--surface:#fffdf9;--well:#ede1ce;--ink:#2d2018;--muted:#675545;
  --line:#c9b396;--line-strong:#ab825c;--accent:#b55d25;--accent-text:#914014;
@@ -31,13 +34,13 @@ h1,h2{letter-spacing:-.025em}
 button,a,input,select,textarea,summary{transition:background-color .14s ease,border-color .14s ease,box-shadow .14s ease}
 button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-.primary,.secondary,.ghost,.danger{border-radius:10px;min-height:46px;font-size:14px;font-weight:600;padding:11px 16px}
+.primary,.secondary,.ghost,.danger{border-radius:var(--control-radius);min-height:var(--control-height);font-size:var(--control-font);font-weight:var(--control-weight);padding:11px 16px}
 .primary{background:var(--action);color:var(--action-ink);border:1.5px solid var(--action-line)}
 .secondary{background:var(--surface);border:1.5px solid var(--line-strong);color:var(--ink)}
 .ghost{background:transparent;border:1.5px solid var(--line);color:var(--accent-text)}
 .ghost:hover,.secondary:hover{background:var(--well);border-color:var(--accent)}
-.compact{min-height:38px;padding:7px 12px;font-size:13px}
-.text-button{font-size:13px;min-height:40px;font-weight:550}
+.compact{min-height:var(--control-compact-height);padding:7px 12px;font-size:var(--control-compact-font)}
+.text-button{font-size:var(--secondary-copy-font);min-height:40px;font-weight:500}
 .icon-button{border:1px solid var(--line);border-radius:10px;min-width:42px;min-height:42px;background:var(--surface)}
 .icon-button:hover{border-color:var(--accent)}
 .app-header{padding:22px 20px 19px;border-bottom:1px solid var(--line)}
@@ -96,9 +99,9 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px soli
 .shot-secondary,.shot-context-item{font-size:12px}.shot-context{gap:4px 11px}
 .shot-meta{gap:7px}.shot-date{font-size:12px;color:var(--muted)}
 .shot-body{padding:0 14px 14px}.shot-actions{border-top:1px solid var(--line);padding-top:12px;margin-top:12px;gap:10px}
-.shot-actions .compact{min-height:40px}.note{font-size:14px}
-.radar text{font-size:11px}.radar-grid{stroke-width:1.1}.radar-result{stroke:var(--ink)}
-.taste-chips{gap:6px;flex-wrap:wrap}.taste-chip{border:1px solid color-mix(in srgb,var(--ink) 45%,transparent);font-size:11px;line-height:1.4;min-height:24px;padding:3px 8px;font-weight:650;color:#1a120d}
+.note{font-size:14px}
+.radar text{font-size:11px;font-weight:600}.radar-grid{stroke-width:1.1}.radar-result{stroke:var(--ink)}
+.taste-chips{gap:6px;flex-wrap:wrap}.taste-chip{border:1px solid color-mix(in srgb,var(--ink) 45%,transparent);font-size:11px;line-height:1.4;min-height:24px;padding:3px 8px;font-weight:500;color:#1a120d}
 .taste-chip.severity-4{color:#fff}
 .feedback-panel{margin-top:16px;padding:15px;border:1px solid var(--line);background:var(--well);border-radius:12px}
 .feedback-panel h3{font:650 16px/1.4 var(--sans);margin-bottom:7px}
@@ -153,7 +156,7 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
  .header-actions .icon-button{min-width:40px;min-height:40px}.shell{padding:0 14px 26px}.app-nav{gap:16px;margin-bottom:20px}.app-nav>button{font-size:13px}
  .workspace-bar h2{font-size:28px}.workspace-bar{gap:10px}.setup-switch{font-size:12px;padding:8px 10px}.workspace-bar .eyebrow{font-size:12px}
  .coffee-toggle{padding:16px 14px}.coffee-body{padding:0 14px 16px}.coffee-title{font-size:16px;gap:6px}.coffee-subtitle{font-size:12px}
- .recipe-grid{padding:14px;gap:17px 12px}.metric-value{font-size:18px}.metric-label{font-size:12px}.metric-sub{font-size:12px}.style-row{margin-bottom:15px}
+ .recipe-grid{padding:14px;gap:17px 12px}.metric-value{font-size:18px}.metric-label{font-size:12px}.metric-sub{font-size:13px}.style-row{margin-bottom:15px}
  .status-badge,.style-badge{font-size:12px;padding:3px 8px;min-height:26px}.current-mark{font-size:10px}
  .sheet-header{padding:18px 17px 14px}.sheet-header h2{font-size:25px}.sheet-content{padding:18px 17px 23px}
  .shot-toggle{padding:12px}.shot-numbers{font-size:13px}.shot-context-item{font-size:12px}.shot-body{padding:0 12px 13px}
@@ -188,10 +191,8 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 .shot-date{white-space:nowrap;flex-shrink:0;font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}
 .shot-overview .shot-meta{margin-top:0;gap:7px;display:flex;flex-wrap:wrap}
 .shot-note{margin:1px 14px 0}
-.shot-summary-actions{padding:0 14px 10px;display:flex;align-items:center;gap:12px}
-.shot-summary-actions .text-button{min-height:36px;padding:3px 0;font-size:13px}
 .shot-body{padding:4px 14px 14px}
-.shot-body .shot-actions{justify-content:flex-end;padding-top:10px;margin-top:6px;border:0}
+
 .shot-record-context{margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 15px}
 .shot-record-context>div{min-width:0}.shot-record-context dt{font-size:11px;color:var(--muted)}
 .shot-record-context dd{margin:2px 0 0;font-size:12px;overflow-wrap:anywhere}
@@ -202,11 +203,30 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 }
 
 /* Owner review: compact original-app controls and readable labels. No shadows. */
-.taste-chip{font-weight:500}
-.radar text{font-weight:600}
 .shot-body .shot-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:13px 0 0;padding:10px 0 0;border-top:1px solid var(--line)}
 .shot-body .shot-actions .history-edit,
 .shot-body .shot-actions .history-make-current{font-size:12px;line-height:1.3;font-weight:600;min-height:34px;padding:6px 11px;border-radius:9px;white-space:nowrap}
 .shot-body .shot-actions .history-edit{background:var(--action);color:var(--action-ink);border:1px solid var(--action-line)}
 .shot-body .shot-actions .history-make-current{background:transparent;color:var(--ink);border:1px solid var(--line-strong);margin-left:auto}
 @media(max-width:590px){.shot-topline .shot-date{margin-left:0;align-self:flex-start}}
+
+/* Official URL-assisted New Coffee entry: obvious, progressive and reversible. */
+.coffee-url-first{border:1px solid var(--line-strong);border-radius:12px;background:var(--well);padding:13px 13px 11px;margin:0 0 15px}
+.coffee-url-first .field>span{font-weight:600}
+.coffee-url-actions{display:flex;flex-wrap:wrap;align-items:center;gap:7px 13px;margin-top:9px}
+.coffee-url-actions .secondary{background:var(--surface);min-height:36px;padding:6px 11px}
+.coffee-url-actions .helper{margin:0;font-size:12px;flex:1;min-width:150px}
+#coffee-url-feedback:empty{display:none}
+.coffee-url-message{margin:0 0 15px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:11px 12px;font-size:13px;line-height:1.5}
+.coffee-url-preview{margin:0 0 16px;padding:14px;border:1px solid var(--line-strong);border-radius:11px;background:var(--surface)}
+.coffee-url-preview-title{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+.coffee-url-preview-title strong{font-size:14px;font-weight:600}
+.coffee-source-label{font-size:11px;line-height:1.3;padding:4px 7px;border:1px solid var(--badge-green-line);border-radius:999px;background:var(--badge-green);color:var(--badge-green-ink);font-weight:500}
+.coffee-url-preview p.helper{margin:0 0 10px;font-size:13px}
+.coffee-url-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 15px;margin:0 0 12px}
+.coffee-url-fields div{min-width:0;overflow-wrap:anywhere}
+.coffee-url-fields dt{font-size:11px;color:var(--muted);font-weight:500}
+.coffee-url-fields dd{margin:1px 0 0;font-size:13px;line-height:1.5;font-weight:500}
+.coffee-url-preview .coffee-match-alert{padding-top:10px;border-top:1px solid var(--line);font-weight:500}
+.coffee-url-preview [data-action=apply-coffee-url]{min-height:36px}
+@media(max-width:410px){.coffee-url-fields{grid-template-columns:1fr}.coffee-url-actions .helper{font-size:12px}}

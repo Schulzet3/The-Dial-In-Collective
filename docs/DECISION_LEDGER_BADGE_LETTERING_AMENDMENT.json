@@ -129,6 +129,25 @@
       "decision": "After a newly rated shot, compute nextAdvice if no cached suggestion is present, so the recipe grid and latest feedback show a consistent specific next-shot grind rather than an initial uncertainty band.",
       "not_a_policy_change": true,
       "release_hold": "Private review branch only"
+    },
+    {
+      "id": "COFFEE-URL-FIRST-20261015",
+      "status": "Locked",
+      "amends": "Extends existing official-source precedence without changing canonical Coffee UUID rules",
+      "decision": "Give checked official roaster product URL first rank for lookup. If absent or ambiguous, use roaster and bag name plus release facts. Do not merge automatically when URLs are reused, names differ, or release details conflict. Keep separate canonical UUID per distinct harvest/lot.",
+      "release_hold": "SQL migration staged only, live Supabase untouched."
+    },
+    {
+      "id": "NEW-COFFEE-URL-AUTOFILL-20261015",
+      "status": "Locked",
+      "decision": "Optional URL first in New Coffee, with Autofill From URL button, read-only official product metadata preview and Apply Suggested Details confirmation that fills only blank fields. Unknown hosts/manual entry stay supported, no automatic overwrite or invented facts. Keep two-column details, required Name/Roaster at submit, Pending Coffee, and optional device-only Claude AI policy.",
+      "release_hold": "New Edge function not deployed; synthetic previews for owner review."
+    },
+    {
+      "id": "UI-CONSISTENCY-GUARD-20261015",
+      "status": "Locked",
+      "decision": "Consolidate shared controls with CSS variables, remove superseded selectors, Title Case standalone labels with a regression check, preserve sensory inputs/recommendations, original badge palette and no text shadows. Retain Basket-based Dose and Recommendation Temperature captions for owner review.",
+      "release_hold": "No Netlify publication until owner approval."
     }
   ]
 }
