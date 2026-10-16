@@ -32,3 +32,18 @@ Historical owner-driven setup shows:
 **Next safe test:** Obtain a copy of `Code.gs` *source only* (without Script Properties, keys, recovery identities or tokens). Inspect the courier's actual failure-handler. Add or identify a one-time, no-production-failure test that invokes the exact handler with a clearly marked `TEST` message and, after user runs it in their existing Apps Script project, verify delivered alert in the intended inbox and record execution timestamp. Then review installed trigger and repeat-alert suppression, without altering the live GitHub/Supabase workflow.
 
 **No production writes, deployment, or state changes were made by this verification.**
+
+
+## Apps Script courier source reviewed — follow-up, October 16
+
+The owner supplied the complete `Code.gs` source in chat for review (no private Script Properties or credentials included). **Confirmed from source, not from an Apps Script execution trace**:
+
+- `installPrivateBackupPoller()`: checks the read-only GitHub token and `DIC_ALERT_EMAIL` existence, ensures a backup folder, installs exactly one `syncPrivateBackups` time trigger with `everyHours(3)`, and initializes `DIC_STARTED_AT`.
+- `syncPrivateBackups()`: obtains script lock; calls the locked courier; on exception invokes `sendBackupAlert_('Backup transfer error', ...)` before rethrowing.
+- `syncPrivateBackupsLocked_()`: lists GitHub artifacts, filters trusted successful `schedule`/`workflow_dispatch` runs on main (push-only runs are intentionally ignored), checks GitHub provider SHA-256, uploads only encrypted ZIP bytes, verifies Drive MD5/size, records `DIC_LAST_SUCCESS_AT`, calls retention after new copies, then `checkBackupFreshness_()`.
+- `checkBackupFreshness_()`: warns if no verified upload within 36 hours of the most recent successful upload (or initial installation); suppresses duplicate stale warnings for 24 hours.
+- `sendBackupAlert_()`: reads `DIC_ALERT_EMAIL` and calls `MailApp.sendEmail()` with a subject beginning `The Dial In Collective - `.
+- `retainRecentBackups_()`: 30-day Drive expiry, preserves newest two; cleanup is invoked only if the poller saved a new backup, so expiry during a stalled courier is not independently enforced.
+- **Caveats:** If Apps Script trigger execution stops completely, its own fault-detection method cannot execute. The actual trigger installation/status, Script Properties and actual delivered emails have not yet been independently read. Repeated ordinary courier failures might send a message each 3-hour poll; 24-hour deduplication applies only to stale-backup alerts. The list query is limited to the first 100 GitHub artifacts. These are engineering observations, not authorization to change Locked behavior.
+
+**Safe next validation:** Add a temporary no-side-effect `testBackupAlert` function in the existing Apps Script editor. It should validate that `DIC_ALERT_EMAIL` exists and invoke the exact existing `sendBackupAlert_()` with a `[TEST]` subject/body; do not call the backup sync, edit any script properties, fabricate a real error, or touch actual backups. Owner runs this manually; Gmail recipient confirms actual delivery. The current `Code.gs` has no built-in synthetic alert test function.
