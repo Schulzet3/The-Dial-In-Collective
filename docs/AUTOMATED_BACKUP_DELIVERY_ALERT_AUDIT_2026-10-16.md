@@ -1,6 +1,6 @@
 # DIC scheduled backup / Drive courier / failure-alert verification — 2026-10-16
 
-**Summary:** PASS: two sequential scheduled encrypted GitHub backup artifacts were automatically generated and identical ciphertext files appeared in the script-owned private Google Drive folder. Exact byte SHA-256 checks passed. **NOT VERIFIED:** actual Apps Script execution logs, failure-alert branch, receipt by the configured recipient, alert deduplication or overdue-backup behavior.
+**CURRENT RESULT — PASS with precise limits:** Two consecutive scheduled encrypted GitHub artifacts were transferred to private Drive with exact byte SHA-256 matches. The owner also **received a clearly labeled test alert** generated through the existing Apps Script `sendBackupAlert_()` function, and a separate independent daily read-only backup watchdog was enabled. **Still unverified:** actual failed-transfer or 36-hour-overdue-trigger execution, Apps Script's own trigger health, real 30-day Drive expiration. See the dated evidence below and [CURRENT_STATUS.md](CURRENT_STATUS.md); do not request a duplicate synthetic alert email.
 
 ## Scheduled GitHub export (read-only provider evidence)
 
