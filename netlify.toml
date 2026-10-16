@@ -6,7 +6,7 @@
   publish = "dist"
   # Ignore automatic production builds unless this is a deliberately marked,
   # fully tested release with a fresh verified balance of at least 15 credits.
-  # Branch/deploy previews still work without production deployment credits.
+  # No branch/deploy preview publication without an explicit future approval.
   ignore = "node ./scripts/netlify/should-ignore-build.mjs"
 [build.environment]
   NODE_VERSION = "22"

@@ -161,6 +161,18 @@
       "status": "Implementation hardening",
       "decision": "Separate sync tasks by account and identity epoch: wait out overlaps with a previous account, then start fresh for the current account; still coalesce duplicate same-account attempts and keep owner-bound IndexedDB/outbox protections.",
       "not_a_product_policy_change": true
+    },
+    {
+      "id": "VISUAL-TEMP-CAPTION-20261016",
+      "status": "Locked",
+      "amends": "UI-CONSISTENCY-GUARD-20261015 caption decision only",
+      "decision": "Retain Basket-based beneath Dose with its exact capitalization; remove the Recommendation subtitle beneath Temperature; do not remove temperature targets or meaningful recommendations."
+    },
+    {
+      "id": "OPS-PREVIEW-RELEASE-HOLD-20261016",
+      "status": "Implementation hardening",
+      "decision": "Fail closed for Netlify deploy-preview and branch-deploy build contexts during owner-wide no-publish hold, retaining existing production release marker and credit gate.",
+      "not_a_product_policy_change": true
     }
   ]
 }

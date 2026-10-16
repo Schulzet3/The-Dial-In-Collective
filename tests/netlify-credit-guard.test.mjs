@@ -99,9 +99,11 @@ test('a production build on any other branch is ignored',()=>{
  assert.equal(decide({...baseline,branch:'main',ledger:withUsage(0)}).ignore,true);
 });
 
-test('non-production previews preserve the existing guard behavior',()=>{
+test('the owner release hold forbids automatic preview and branch publication',()=>{
  for(const context of ['deploy-preview','branch-deploy']){
-  assert.equal(decide({...baseline,context}).ignore,false);
+  const result=decide({...baseline,context});
+  assert.equal(result.ignore,true);
+  assert.match(result.reason,/release hold|unapproved/i);
  }
 });
 

@@ -10,7 +10,7 @@ export function decide({context,branch,subject,ledger,today}){
   if(branch==='work/visual-refresh-20261015')
     return {ignore:true,reason:'Private visual review: no Netlify deployment authorized'};
   if(context==='deploy-preview'||context==='branch-deploy')
-    return {ignore:false,reason:'No-credit preview/branch build'};
+    return {ignore:true,reason:'Owner release hold: no unapproved Netlify preview or branch publication'};
   if(context!=='production')
     return {ignore:true,reason:'Unknown/unapproved Netlify context'};
   if(branch!=='development/backend-foundation')
