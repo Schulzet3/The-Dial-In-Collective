@@ -57,7 +57,7 @@ Prior evidence: [Exact encrypted archive restore](EXACT_ENCRYPTED_BACKUP_ISOLATE
 
 **This is the next recovery workstream and remains a Locked pre-external-beta requirement.**
 
-**Next recovery step:** The owner **reported saving** the recovery project's Supabase Auth Site URL and exact redirect as `https://dic-recovery-20261016.netlify.app/` (not independently retrieved through the Auth settings API). Configure a recovery-only Resend SMTP credential directly in the **isolated** Supabase Authentication → SMTP Settings; then verify the confirmation callback with a genuine recovery-user account and complete archived account/data restoration before claiming full hosted recovery. Do not repeat production SMTP/DNS testing. See [recovery Auth/frontend plan](HOSTED_RECOVERY_AUTH_FRONTEND_PLAN_2026-10-16.md).
+**Next recovery step:** The owner **reported saving** the recovery project's Supabase Auth Site URL/redirect and the **separate recovery-only Resend SMTP configuration** directly in recovery Supabase. Provider SMTP values weren't independently retrieved, and real email delivery against this **new project** is still unverified. Using the second owner-controlled email, test one fresh signup confirmation sent **from recovery** and ensure its link returns only to `https://dic-recovery-20261016.netlify.app/`. Do not repeat the working production signup test. Then restore the actual archived account/data and check managed Auth. See [recovery Auth/frontend plan](HOSTED_RECOVERY_AUTH_FRONTEND_PLAN_2026-10-16.md).
 
 ### 2. Member coffee lifecycle acceptance
 
