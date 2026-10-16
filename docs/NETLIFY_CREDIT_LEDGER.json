@@ -67,21 +67,21 @@
     "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
     "no_unattended_paid_topups": true,
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
-    "post_release_billing_refresh_needed": false,
+    "post_release_billing_refresh_needed": true,
     "last_published_release": {
-      "deploy_id": "6ad1065eb1608955698efb7b",
-      "published_commit_sha": "acc7a47c9dc33a412fcf7cd82b0c7d09796a44c8",
-      "published_at_utc": "2026-10-15T16:59:22.534Z",
+      "deploy_id": "6ad24660d0c6bdff2c065586",
+      "published_commit_sha": "4e7d4a834dd92ec79f8cd99b373374fc0a584ef8",
+      "published_at_utc": "2026-10-16T15:44:45.260Z",
       "netlify_status": "ready",
       "sso_protected": true,
       "primary_hostname": "https://app.dialincollective.com",
-      "scanned_files": 122,
+      "scanned_files": 153,
       "secret_scan_matches": 0,
-      "actual_credits_deducted": "Not yet independently confirmed in Netlify Billing after publish",
+      "actual_credits_deducted": "Not independently confirmed in Netlify Billing after October 16 publication",
       "planned_cost_credits": 15
     }
   },
-  "reconciliation": "October 16 owner screenshot, documented in the attached recovery handoff, reconciles the October 15 published release to 985 remaining production credits. Netlify published deploy remains 6ad1065eb1608955698efb7b at this check. One approved tested release may consume 15 credits; verify actual post-release billing again after publishing. All non-release commits must continue skipping publication.",
+  "reconciliation": "The October 16 owner-observed 985-credit snapshot is now historical PRE-RELEASE evidence. Verified publication of 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8 consumed a planned 15 credits, but the actual remaining balance has not been read from Billing. Do not record 970 as observed. Further production releases are blocked until a fresh provider snapshot is recorded and the refresh flag is cleared.",
   "scheduled_plan_change": {
     "plan": "Free",
     "timing": "After current Oct 15-Nov 14 Personal period",
