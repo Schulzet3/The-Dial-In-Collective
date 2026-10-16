@@ -25,8 +25,19 @@
 
 - App uses Supabase email/password, confirmed-email beta admission and strict private data isolation; expected new-password policy is minimum 8 characters, at least one uppercase and one special character, no extra digit/lowercase requirement. The owner verified real signup/confirmation and a separate test member.
 - Prior owner records document Resend Free transactional sending via `no-reply@auth.dialincollective.com`, Cloudflare-based DNS for `dialincollective.com`, a root-domain redirect to the app, and Cloudflare support-email forwarding. These are **historical configuration facts**, not a freshly collected provider configuration export.
-- **Missing or unverified for full reconstruction:** actual Supabase Auth *Site URL and redirect allowlist*, confirmation/signup/recovery options, production SMTP identity and sending limits, password/have-I-been-pwned setting, JWT signing-key rotation approach, Supabase project service keys and Edge Function secret names, provider-level Auth templates/settings, storage policies beyond database snapshot, Cloudflare complete DNS/MX/SPF/DKIM/DMARC records and page rules, Resend provider verification/settings, domain registrar recovery access, and encrypted owner-vault inventory of credentials. None of these credentials belong in GitHub/chat.
-- **Recommended first owner-assisted read-only checkpoint:** open Supabase Dashboard → this project → Authentication → URL Configuration. Provide a screenshot of just **Site URL and Redirect URLs**. Redact any token/secret if displayed. Compare allowed Auth callbacks with `https://app.dialincollective.com` and document exact values. Do not edit settings yet.
+- **Missing or unverified for full reconstruction:** confirmation/signup/recovery options, production SMTP identity and sending limits, password/have-I-been-pwned setting, JWT signing-key rotation approach, Supabase project service keys and Edge Function secret names, provider-level Auth templates/settings, storage policies beyond database snapshot, Cloudflare complete DNS/MX/SPF/DKIM/DMARC records and page rules, Resend provider verification/settings, domain registrar recovery access, and encrypted owner-vault inventory of credentials. **Supabase Auth Site URL and redirect allowlist are now verified below.** None of these credentials belong in GitHub/chat.
+- **Next owner-assisted read-only checkpoint:** Supabase Dashboard → Authentication → SMTP Settings. Capture whether custom SMTP is enabled, sender name/address, host and port (redact any credential, username or API key). Independently verify SMTP setup before planning provider recreation.
+
+### Supabase Auth URL configuration — verified from owner dashboard screenshot 2026-10-16
+
+- **Site URL:** `https://app.dialincollective.com/`.
+- **Allowed redirect URL 1:** `https://the-dial-in-collective.netlify.app/`.
+- **Allowed redirect URL 2:** `https://app.dialincollective.com/`.
+- Total allowlisted redirects: **2**, exactly as displayed, with no wildcard rules in the screenshot.
+- The current production domain equals the Site URL and appears explicitly as an allowed redirect. The historical Netlify default domain remains permitted for existing fallback/rollback references; preserve it until a deliberate future review rather than silently removing or changing live Auth settings.
+- Cross-checked app source `site/cloud/main.js` constructs its signup/reset `redirectUrl` as `new URL(location.pathname,location.origin).href`; `site/cloud/client.js` uses that for email confirmation and reset. For current production home page this resolves to `https://app.dialincollective.com/`, an exact allowlisted URL.
+- This screenshot **does not verify** custom SMTP, URL delivery outside the existing tested signup, email templates, or Auth provider secrets.
+- No provider settings were changed, and this is a state-capture checkpoint, **not a new Locked product decision**.
 
 ## Backups and monitoring: passed with remaining boundaries
 
@@ -37,4 +48,4 @@
 
 ## Next acceptance gate
 
-Document and verify Supabase Auth URL settings first, then sender/provider/DNS and secure credential inventory. Only after a cost quote and the owner's explicit agreement should a new hosted recovery instance be provisioned. A disposable local PostgreSQL restore is not a full hosted provider reconstruction.
+Supabase Auth URL settings are documented and verified. Next capture SMTP sender/provider settings, then Cloudflare/DNS and secure credential inventory. Only after a cost quote and the owner's explicit agreement should a new hosted recovery instance be provisioned. A disposable local PostgreSQL restore is not a full hosted provider reconstruction.
