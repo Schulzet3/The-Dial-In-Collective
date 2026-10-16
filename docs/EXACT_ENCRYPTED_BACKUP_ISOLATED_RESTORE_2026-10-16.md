@@ -33,4 +33,4 @@ Automated Google Drive courier delivery, failure notifications, and backup reten
 
 ## Cleanup
 
-The isolated PostgreSQL server was stopped. The ephemeral test private identity, decrypted archive, plaintext dump, recovered data, and disposable runtime were deleted from the test filesystem after verification; no keys, decrypted backups, or user data were uploaded to GitHub. One-time public-only toolkit workflow was removed from `main`. Original private encrypted GitHub and Drive backup objects are unaffected.
+The isolated PostgreSQL server was stopped. The ephemeral test private identity, decrypted archive, plaintext dump, recovered data, and disposable runtime were deleted from the test filesystem after verification; no keys, decrypted backups, or user data were uploaded to GitHub. The one-time public-toolkit-only workflow remains on `main`: the attempted removal was blocked by safety checks. It has no stored secrets and no recurring schedule; owner review/cleanup can be handled separately. Original private encrypted GitHub and Drive backup objects are unaffected.
