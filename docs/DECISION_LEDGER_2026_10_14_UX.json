@@ -129,6 +129,15 @@
         "Owner data and all other Locked product requirements"
       ],
       "implementation_status": "Published 2026-10-16T15:44:45.260Z: Netlify 6ad24660d0c6bdff2c065586, SHA 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8, SSO all. Supabase URL-first migration 20261016154252, preview v1 and verifier v3 active with JWT checks. 198 tests, browser QA, isolated SQL and five live rollback-only suites passed. Existing data fingerprints unchanged."
+    },
+    {
+      "id": "ACCESS-20261016-PRODUCTION-SSO",
+      "status": "Locked",
+      "topic": "Production visitor access after real invitation test",
+      "owner_approval_date": "2026-10-16",
+      "decision": "Remove the additional Netlify team SSO login for production app.dialincollective.com, preserving Supabase email-password sign-in, email verification, beta invitation/admission, RLS account isolation, and nonadmin/admin role checks. Netlify SSO stays enabled for non-production deployments.",
+      "amends": "Earlier all-deploy team SSO access decision only; does not supersede beta admission, RLS, administrator protection, historical import lock, or recovery checks.",
+      "implementation_status": "Applied in Netlify visitor controls on 2026-10-16: requiresSSOTeamLogin=true and whichProjectsRequireSSOTeamLogin=non_production. No new Netlify deploy. Real nonadmin signup and invite success confirmed by owner; full negative cross-account browser tests remain outstanding."
     }
   ],
   "unchanged_release_gates": [
