@@ -1,14 +1,15 @@
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
 // roaster verification and never promotes a canonical record.
 import {extractRoastVisualEvidence} from './roast-level-evidence.mjs';
+import {extractLayoutEvidence} from './coffee-product-layouts.mjs';
 const FIELD_ALIASES={
- origin:['origin','country','country of origin','region','coffee origin'],
- elevation_m:['elevation','altitude','elevation m','altitude masl','grown at'],
- process:['process','processing','processing method','processing style'],
- variety:['variety','varietal','cultivar','varieties','varietals'],
- producer:['producer','farm','farmer','grower','cooperative','co-op'],
+ origin:['origin','country','country of origin','region','coffee origin','région','location','growing region'],
+ elevation_m:['elevation','altitude','elevation m','altitude masl','grown at','altitude (masl)'],
+ process:['process','processing','processing method','processing style','traitement','treatment','process method'],
+ variety:['variety','varietal','cultivar','varieties','varietals','variété','variété(s)'],
+ producer:['producer','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station'],
  roast_level:['roast','roast level','roast profile'],
- tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes'],
+ tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of'],
  release_label:['harvest','harvest year','crop year','lot','lot number','release','release year']
 };
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
@@ -79,8 +80,12 @@ function jsonProducts(html){
 function samePage(raw,target){
  try{
   const a=new URL(raw,target),b=new URL(target);
-  return a.hostname.toLowerCase()===b.hostname.toLowerCase()&&
-   a.pathname.replace(/\/+$/,'')===b.pathname.replace(/\/+$/,'');
+  const host=x=>x.toLowerCase().replace(/^www\./,'');
+  const path=x=>x.replace(/\/+$/,'');
+  if(host(a.hostname)!==host(b.hostname))return false;
+  if(path(a.pathname)===path(b.pathname))return true;
+  const handle=x=>x.match(/\/(?:products)\/([^/]+)\/?$/i)?.[1]||'';
+  return !!handle(a.pathname)&&handle(a.pathname)===handle(b.pathname);
  }catch{return false;}
 }
 const ROAST=['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
@@ -136,7 +141,7 @@ function productDetails(fields,p){
  }
  for(const tag of Array.isArray(p.tags)?p.tags.slice(0,60):[]){
   if(typeof tag!=='string')continue;
-  const m=tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)s*[:=]s*(.{2,130})$/i);
+  const m=tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i);
   if(m)addField(fields,m[1],m[2]);
  }
 }
@@ -251,7 +256,8 @@ function explicitEspressoRecipe(html){
 function productHeading(html){
  const matches=[...html.matchAll(/<h1\b[^>]*>([\s\S]{0,400}?)<\/h1>/gi)]
   .map(m=>clean(m[1],170)).filter(x=>x&&!/^(shop|home|coffee|products|search|menu)$/i.test(x));
- return matches.length===1?matches[0]:'';
+ const distinct=[...new Set(matches.map(x=>x.toLowerCase()))];
+ return distinct.length===1?matches[0]:'';
 }
 function removeSiteSuffix(title,site){
  const raw=clean(title,200),siteName=clean(site,120);
@@ -271,7 +277,7 @@ function labeledPairs(html,fields){
  // Only parse bounded labeled blocks, never arbitrary text across the page.
  for(const m of html.matchAll(/<(?:p|li)\b[^>]*>([\s\S]{0,550}?)<\/(?:p|li)>/gi)){
   const str=clean(m[1],420);
-  const label=str.match(/^([A-Za-z][A-Za-z /-]{1,32})\s*[:\-–]\s*(.{2,300})$/);
+  const label=str.match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|]|\s+[-–]\s+)\s*(.{2,300})$/u);
   if(label)addField(fields,label[1],label[2]);
  }
 }
@@ -316,6 +322,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
   fields.roaster=siteName;
  labeledPairs(html,fields);
+ // Source-backed storefront layouts beyond JSON-LD: metrics, localized
+ // labels, reversed Onyx captions, honest extra facts and product notes.
+ const roaster_details=extractLayoutEvidence(html,{
+  fields,addField:(key,value)=>addField(fields,key,value),clean
+ });
  // Coffee-specific product and brand metadata may be present in HTML meta tags
  // rather than JSON-LD (but never trust unrelated generic SEO prose).
  for(const [k,v] of Object.entries(meta)){
@@ -337,6 +348,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
   ...(roaster_recipe?{roaster_recipe}:{}),
+  ...(Object.keys(roaster_details).length?{roaster_details}:{}),
   ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),
   ...(roast_evidence.value?{roast_source:roast_evidence.source}:{}),
   note:'Best-effort webpage suggestions. The roaster, lot and release still require verification.'};
