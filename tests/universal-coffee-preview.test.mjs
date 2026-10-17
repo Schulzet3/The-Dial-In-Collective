@@ -120,6 +120,8 @@ test('Sweet Bloom Wuri-style page extracts H1, labeled info and exact espresso r
  assert.equal(r.fields.roaster,'Sweet Bloom Coffee');
  assert.equal(r.fields.process,'Washed');
  assert.equal(r.fields.variety,'Heirloom');
+ assert.equal(r.fields.origin,'Gedeb, Ethiopia');
+ assert.equal(r.fields.tasting_notes,'citra hops, mandarin, sugarcane');
  assert.equal(r.fields.elevation_m,'2000-2100 masl');
  assert.equal(r.fields.release_label,undefined);
  assert.deepEqual(r.roaster_recipe,{dose_g:18.5,yield_g:36,time_s_min:20,time_s_max:22});
