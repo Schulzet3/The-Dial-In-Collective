@@ -89,8 +89,8 @@ export function extractRoastVisualEvidence(html){
  // The heading must be nearby; avoid unrelated site-wide filter controls.
  for(const m of page.matchAll(/(?:Roast\s+Level|Roast\s+Profile)\b[\s\S]{0,2600}/gi)){
   const snippet=m[0].slice(0,2600).split(/<\/(?:section|fieldset|article)>/i)[0];
-  for(const item of snippet.matchAll(/<(?:span|div|button|label|option|li)\b([^>]{0,850})>([\s\S]{0,160}?)<\/(?:span|div|button|label|option|li)>/gi)){
-   const a=attrs(item[1]),v=plain(item[2]);
+  for(const item of snippet.matchAll(/<(span|div|button|label|option|li)\b([^>]{0,850})>([^<>]{1,120})<\/\1>/gi)){
+   const a=attrs(item[2]),v=plain(item[3]);
    const state=[a.class,a['aria-pressed'],a['aria-selected'],a['aria-current'],a['data-selected'],a['data-state']].filter(Boolean).join(' ');
    if(/(?:^|[\s_-])(?:selected|active|current|checked|is-active|is-selected)(?:$|[\s_-])|\btrue\b/i.test(state))
     offer(v,'selected_roast_indicator');
