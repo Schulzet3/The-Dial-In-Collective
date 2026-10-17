@@ -61,9 +61,15 @@ function walk(value,out,depth=0,budget={n:0}){
   return;
  }
  const types=Array.isArray(value['@type'])?value['@type']:[value['@type']];
- if(types.some(t=>String(t||'').toLowerCase()==='product')&&typeof value.name==='string'){
+ // A Shopify ProductGroup is the release-level parent and its child
+ // Products are purchase variants (size/grind), not separate coffees.
+ // Only an explicit named ProductGroup with its own product URL may become
+ // the parent candidate. Same-page matching happens before selection.
+ if(types.some(t=>String(t||'').toLowerCase()==='product')&&typeof value.name==='string')
   out.push(value);
- }
+ else if(types.some(t=>String(t||'').toLowerCase()==='productgroup')&&
+         typeof value.name==='string'&&typeof value.url==='string')
+  out.push(value);
  for(const key of ['@graph','mainEntity','itemListElement','hasVariant','isVariantOf','offers']){
   if(value[key])walk(value[key],out,depth+1,budget);
  }

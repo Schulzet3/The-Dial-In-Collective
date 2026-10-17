@@ -44,9 +44,11 @@ function publicProductIdentityDiagnostic(html,url,roaster){
  const og=(html.match(/<meta\b[^>]*property=["']og:title["'][^>]*>/i)||[])[0]||'';
  const main=productNodes.filter(x=>match(x.url));
  const onyxStatNames=[...new Set([...html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']([^"']+)/gi)].map(x=>x[1]))].slice(0,30);
+ const publicStats=[...html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']([^"']+)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)].slice(0,20)
+  .map(m=>({key:m[1],first:m[2].replace(/<br\s*\/?\s*>/gi,' | ').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,215)}));
  return {roaster,og:og.slice(0,200),script_count:jsonInfo.length,json_script_sizes:jsonInfo.map(x=>x.bytes).slice(0,20),
   parsed_product_count:productNodes.length,matched_count:main.length,matched_names:main.map(x=>x.name).slice(0,25),
-  first_products:productNodes.slice(0,18),onyxStatNames};
+  first_products:productNodes.slice(0,18),onyxStatNames,publicStats};
 }
 const summarize=async ([roaster,url])=>{
  if(!safeCoffeeUrl(url))return {roaster,status:'invalid_target'};

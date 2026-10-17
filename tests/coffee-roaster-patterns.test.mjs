@@ -227,6 +227,23 @@ test('live PERC Product variants do not displace exact canonical product identit
  assert.equal(r.fields.origin,'Pitalito');
  assert.equal(r.roaster_details.agtron,'74.7');
 });
+test('PERC JSON-LD ProductGroup parent wins over size/grind variant Products only when URL matches',()=>{
+ const url='https://perccoffee.com/products/colombia-franky-hoyos-adv-washed';
+ const graph={'@context':'https://schema.org','@graph':[
+  {'@type':'ProductGroup',name:'Colombia Franky Hoyos Adv Washed',url,
+   hasVariant:[{'@type':'Product',name:'Colombia Franky Hoyos Adv Washed - 13oz / Whole'},
+   {'@type':'Product',name:'Colombia Franky Hoyos Adv Washed - 2lb / Ground'}]},
+  {'@type':'Product',name:'Another Coffee',url:'https://perccoffee.com/products/other-coffee'}
+ ]};
+ const html=head('Colombia Franky Hoyos Adv Washed','PERC COFFEE')+
+  '<script type="application/ld+json">'+JSON.stringify(graph)+'</script>'+
+  '<h2>ORIGIN</h2><h6>Pitalito</h6>'+tail;
+ const good=preview(html,url+'?variant=53562522829114');
+ assert.equal(good.ok,true);
+ assert.equal(good.fields.name,'Colombia Franky Hoyos Adv Washed');
+ const unrelated=preview(html,'https://perccoffee.com/products/third-coffee');
+ assert.equal(unrelated.ok,false,'unrelated ProductGroup cannot be silently chosen');
+});
 test('live Proud Mary product specification links and ratio remain purely source-reported',()=>{
  const url='https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural';
  const html=head('HONDURAS | Ovidio Gomez | Catuai | Natural','Proud Mary Coffee')+
