@@ -7,7 +7,7 @@ import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mj
 
 const targets=[
  ['Proud Mary Ovidio Gomez','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
- ['Queen City Banko Gotiti','https://queencitycollectivecoffee.com/products/banko-gotiti-natural-ethiopia'],
+ ['Queen City Banko Gotiti Washed','https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia'],
  ['Queen City homepage negative control','https://queencitycollectivecoffee.com/'],
  ['Onyx Mullugeta Muntasha','https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural-26?variant=43228176810082'],
  ['PERC Franky Hoyos','https://perccoffee.com/products/colombia-franky-hoyos-adv-washed?variant=53562522829114'],
