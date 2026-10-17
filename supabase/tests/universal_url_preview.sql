@@ -16,16 +16,37 @@ begin
  got:=public.dic_claim_universal_preview();
  if got->>'reason' is distinct from 'preview_cooldown' then raise exception 'Immediate repeat not limited: %',got; end if;
  execute 'reset role';
+ perform set_config('request.jwt.claim.role','service_role',true);
+ execute 'set local role service_role';
+ got:=public.dic_url_preview_claim(owner_account);
+ if got->>'reason' is distinct from 'preview_cooldown'
+ then raise exception 'Official preview bypassed generic preview cooldown: %',got;end if;
+ execute 'reset role';
+ perform set_config('request.jwt.claim.role','authenticated',true);execute 'set local role authenticated';
+ execute 'reset role';
 
- update private.dic_universal_preview_attempts
- set last_attempt_at=now()-interval '4 seconds' where owner_id=owner_account;
+ update private.dic_url_preview_attempts
+ set last_attempt_at=now()-interval '31 seconds' where owner_id=owner_account;
  execute 'set local role authenticated';
  got:=public.dic_claim_universal_preview();
  if got->>'allowed' is distinct from 'true' then raise exception 'Cooldown did not reset: %',got; end if;
  execute 'reset role';
+ update private.dic_url_preview_attempts set last_attempt_at=now()-interval '31 seconds'
+ where owner_id=owner_account;
+ perform set_config('request.jwt.claim.role','service_role',true);
+ execute 'set local role service_role';
+ got:=public.dic_url_preview_claim(owner_account);
+ if got->>'allowed' is distinct from 'true'
+ then raise exception 'Shared official preview claim failed: %',got;end if;
+ execute 'reset role';
+ perform set_config('request.jwt.claim.role','authenticated',true);execute 'set local role authenticated';
+ got:=public.dic_claim_universal_preview();
+ if got->>'reason' is distinct from 'preview_cooldown'
+ then raise exception 'Generic preview bypassed official preview cooldown: %',got;end if;
+ execute 'reset role';
 
- update private.dic_universal_preview_attempts
- set attempts=60,last_attempt_at=now()-interval '5 seconds' where owner_id=owner_account;
+ update private.dic_url_preview_attempts
+ set attempts=60,last_attempt_at=now()-interval '31 seconds' where owner_id=owner_account;
  execute 'set local role authenticated';
  got:=public.dic_claim_universal_preview();
  if got->>'reason' is distinct from 'daily_preview_limit' then raise exception 'Daily cap not enforced: %',got; end if;
@@ -50,8 +71,8 @@ begin
  if not blocked then raise exception 'Anonymous role can invoke authenticated-only preview claim';end if;
  execute 'reset role';
 
- if (select count(*) from private.dic_universal_preview_attempts where owner_id=new_account)<>0
+ if (select count(*) from private.dic_url_preview_attempts where owner_id=new_account)<>0
  then raise exception 'Rejected account created quota state';end if;
 end $test$;
-select 'PASS: independent universal preview quota, role admission, cooldown and daily cap' as result;
+select 'PASS: shared official/universal quota, 30-second member cooldown, admission and daily cap' as result;
 rollback;
