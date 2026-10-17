@@ -20,3 +20,12 @@ create function auth.uid() returns uuid language sql stable as $$
   nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'sub')::uuid;
 $$;
 grant execute on function auth.uid() to anon,authenticated,service_role;
+
+-- Supabase's real auth.role() supports both legacy request.jwt.claim.role
+-- and the modern PostgREST request.jwt.claims JSON. Required for a realistic
+-- isolated-only member JWT regression; never apply bootstrap to production.
+create function auth.role() returns text language sql stable as $$
+ select coalesce(nullif(current_setting('request.jwt.claim.role',true),''),
+  nullif(current_setting('request.jwt.claims',true),'')::jsonb->>'role')::text;
+$$;
+grant execute on function auth.role() to anon,authenticated,service_role;
