@@ -79,10 +79,18 @@ function field(fields,label,value,add,extras,clean){
  else add(kind,raw);
 }
 function parsePairs(tokens,fields,add,extras,clean){
+ // Onyx-style all-caps DIV captions follow their metric values. Other sites
+ // (Proud Mary, PERC and SEY) put labels BEFORE values. Establish layout
+ // direction first, instead of mistaking the previous field's value for
+ // the next field's value.
+ const reverseLayout=tokens.filter((t,i)=>i>0&&t.tag==='div'&&
+  tokens[i-1].tag==='div'&&getKey(t.text)&&
+  /^[A-Z][A-Z ]{3,}$/.test(t.text)).length>=2;
  // First trust value-then-metric layouts (Onyx). A subsequent unrelated
  // metric must never overwrite an earlier explicit reverse-layout value.
  // Preserve exact category evidence without relying on numeric roast color.
  for(let i=1;i<tokens.length;i++){
+  if(!reverseLayout)break;
   const label=tokens[i],kind=getKey(label.text);
   if(!kind||!['roast_level','origin','variety','process','elevation_m','agtron','drying_method','harvest_season','preferred_extraction'].includes(kind))continue;
   const prior=tokens[i-1];
@@ -97,6 +105,7 @@ function parsePairs(tokens,fields,add,extras,clean){
  for(let i=0;i<tokens.length;i++){
   const tok=tokens[i],kind=getKey(tok.text);
   if(!kind)continue;
+  if(reverseLayout&&tok.tag==='div'&&/^[A-Z][A-Z ]{3,}$/.test(tok.text))continue;
   for(let j=i+1;j<Math.min(i+5,tokens.length);j++){
    const next=tokens[j];
    if(next.at-tok.end>650)break;
