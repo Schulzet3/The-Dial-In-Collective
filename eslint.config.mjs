@@ -1,10 +1,8 @@
-// ESLint is installed only on a disposable GitHub Actions runner.
- // This static audit deliberately avoids imposing style formatting on the
- // owner-approved compact UI and historical SQL/source records.
+// Development-only static checks; no formatter rewrites historical evidence.
 const knownGlobals=`
  AbortController AbortSignal AggregateError Array ArrayBuffer Atomics BigInt BigInt64Array
  BigUint64Array Blob Boolean BroadcastChannel Buffer CSS CSSStyleSheet CustomEvent
- DataView Date DOMException Document Element Error Event EventTarget File FileReader
+ DataView Date Deno DOMException Document Element Error Event EventTarget File FileReader
  Float32Array Float64Array FormData Function Headers HTMLElement IDBDatabase
  IDBFactory IDBKeyRange Image Infinity Intl Int16Array Int32Array Int8Array JSON Map
  Math MutationObserver NaN Number Object PerformanceObserver Promise Proxy Range
@@ -22,7 +20,7 @@ const globals=Object.fromEntries(knownGlobals.map(name=>[name,'readonly']));
 export default [
  {ignores:['dist/**','qa_artifacts/**','node_modules/**']},
  {
-  files:['site/**/*.js','tests/**/*.js','tests/**/*.mjs','scripts/**/*.mjs','build_cloud.mjs','supabase/functions/**/*.mjs'],
+  files:['site/**/*.js','tests/**/*.js','tests/**/*.mjs','scripts/**/*.mjs','build_cloud.mjs','src/**/*.mjs','netlify/functions/**/*.mjs','supabase/functions/**/*.mjs','supabase/functions/**/*.ts'],
   languageOptions:{ecmaVersion:'latest',sourceType:'module',globals},
   rules:{
    'no-undef':'error',

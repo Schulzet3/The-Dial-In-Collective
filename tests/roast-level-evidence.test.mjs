@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeRoastLabel,extractRoastVisualEvidence} from '../src/server/roast-level-evidence.mjs';
+import {normalizeRoastLabel} from '../src/server/roast-level-evidence.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 

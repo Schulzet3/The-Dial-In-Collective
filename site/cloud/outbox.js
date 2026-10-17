@@ -7,7 +7,7 @@ export class Outbox {
   if(!ACTIONS.has(action))throw new CloudError('Unsupported cloud action.','unsupported_action');
   const who=await this.identity();if(!who?.id)throw new CloudError('Sign in first.','signed_out');
   const event={owner:who.id,id:this.uuid(),action,payload:structuredClone(payload),createdAt:this.now(),status:'pending'};
-  await this.store.put(event);this.notify({state:'pending'});return event;
+  await this.store.put(event);this.notify({state:'pending',owner:who.id});return event;
  }
  async pending(){const who=await this.identity();return who?.id?(await this.store.list(who.id)):[];}
  async flush(){if(this.running)return this.running;this.running=this.run().finally(()=>this.running=null);return this.running;}
@@ -20,14 +20,14 @@ export class Outbox {
    try{r=await this.remote.mutate(event);}catch(error){
     const rejected=['22023','23514','23503','23505','23502','42501'].includes(error.code);
     if(rejected)await this.store.put({...event,status:'rejected',error:{code:error.code,message:error.message}});
-    const result={state:rejected?'rejected':'offline',sent};this.notify(result);return result;
+    const result={state:rejected?'rejected':'offline',sent};this.notify({...result,owner:who.id});return result;
    }
-   if(!r?.ok){const state=r?.code==='conflict'?'conflict':'rejected';await this.store.put({...event,status:state,result:r});this.notify({state});return {state,sent};}
+   if(!r?.ok){const state=r?.code==='conflict'?'conflict':'rejected';await this.store.put({...event,status:state,result:r});this.notify({state,owner:who.id});return {state,sent};}
    // A lost response is retried with the SAME immutable mutation ID + payload.
    await this.store.acknowledge(event,r);sent++;
   }
   if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
-  const result={state:'synced',sent,at:this.now()};this.notify(result);return result;
+  const result={state:'synced',sent,at:this.now()};this.notify({...result,owner:who.id});return result;
  }
 }
 export class IndexedStore {

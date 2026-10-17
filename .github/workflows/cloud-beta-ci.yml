@@ -10,6 +10,7 @@ on:
       - '.github/workflows/cloud-beta-ci.yml'
       - 'package.json'
       - 'package-lock.json'
+      - 'eslint.config.mjs'
       - 'build_cloud.mjs'
       - 'netlify.toml'
       - 'scripts/netlify/**'
@@ -17,6 +18,8 @@ on:
       - 'site/**'
       - 'src/server/**'
       - 'netlify/functions/**'
+      - 'supabase/functions/**'
+      - 'scripts/audit/**'
       - 'tests/**'
   pull_request:
     branches:
@@ -45,6 +48,8 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Run all checked-in Node tests
         run: npm test
+      - name: Lint browser, server, Edge and audit JavaScript
+        run: npm run lint
       - name: Build static beta assets with nonfunctional public test coordinates
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co

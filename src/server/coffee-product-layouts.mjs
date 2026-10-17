@@ -4,6 +4,7 @@
 // This is a parser, not a roaster-specific source-verification allowlist.
 // Never infer roast tier from an Agtron reading, roaster brand, hue or taste.
 import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
+import {productMarkup} from './coffee-product-scope.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
@@ -67,7 +68,9 @@ function field(fields,label,value,add,extras,clean){
  // the single-select field must never misrepresent a blended process.
  if(kind==='process'){
   const value=normalizedProcess(raw);
-  if(value)add(kind,value);
+  // Pass the original evidence so the shared conflict tracker can suppress
+  // a stale single-process fallback when the visible process is compound.
+  add(kind,raw);
   if(raw.length<=90&&raw.toLowerCase()!==value.toLowerCase())
     addExtra(extras,'processing_detail',raw.slice(0,160));
   return;
@@ -76,8 +79,7 @@ function field(fields,label,value,add,extras,clean){
  // must not become a numeric/identity field via a generic label.
  if(raw.length>175&&kind!=='tasting_notes')return;
  if(kind==='elevation_m'&&!/\b\d{3,4}\b/.test(raw))return;
- if(kind==='roast_level')add(kind,raw);
- else add(kind,raw);
+ add(kind,raw);
 }
 function parsePairs(tokens,fields,add,extras,clean){
  // Onyx-style all-caps DIV captions follow their metric values. Other sites
@@ -127,19 +129,10 @@ function parsePairs(tokens,fields,add,extras,clean){
 
 }
 function selectedMarkup(html){
- const s=String(html||'').replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi,' ')
-  .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi,' ')
-  .replace(/<nav\b[^>]*>[\s\S]*?<\/nav\s*>/gi,' ')
-  .replace(/<footer\b[^>]*>[\s\S]*?<\/footer\s*>/gi,' ');
- // Limit scanning to visible product-region markup. Preserve specification
- // blocks above the first product title (Proud Mary), but exclude related items.
- const start=Math.max(0,s.search(/<main\b|<article\b[^>]*\bproduct\b|<h1\b/i));
- let portion=s.slice(start,start+60000);
- const end=portion.search(/<h[2-5][^>]*>\s*(?:you may also like|related products|more coffees|customer reviews|recently viewed)\b/i);
- if(end>400)portion=portion.slice(0,end);
- return portion;
+ return productMarkup(html).slice(0,60000);
 }
 export function extractLayoutEvidence(html,{fields,addField,clean}){
+ html=productMarkup(html);
  const extras={},page=selectedMarkup(html);
  const onyxMetric=/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']roast-level["']/i.test(html);
  if(onyxMetric){

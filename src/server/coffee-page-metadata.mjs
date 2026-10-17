@@ -2,6 +2,7 @@
 // roaster verification and never promotes a canonical record.
 import {extractRoastVisualEvidence} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence} from './coffee-product-layouts.mjs';
+import {productMarkup} from './coffee-product-scope.mjs';
 const FIELD_ALIASES={
  origin:['origin','country','country of origin','region','coffee origin','région','location','growing region'],
  elevation_m:['elevation','altitude','elevation m','altitude masl','grown at','altitude (masl)'],
@@ -95,7 +96,7 @@ function samePage(raw,target){
  }catch{return false;}
 }
 const ROAST=['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
-const PROCESS=['Washed','Natural','Honey','Anaerobic','Other/Unknown'];
+const conflictsByFields=new WeakMap();
 function normalized(field,value){
  const s=textOf(value,field==='tasting_notes'?650:220);
  if(!s)return '';
@@ -121,8 +122,18 @@ function addField(fields,rawKey,value){
  // already-resolved internal field key such as release_label. Never drop a
  // supported canonical key just because its display synonym is absent.
  const key=Object.hasOwn(FIELD_ALIASES,rawKey)?rawKey:LOOKUP.get(keyOf(rawKey));
- if(!key||fields[key])return;
+ if(!key)return;
+ const conflicts=conflictsByFields.get(fields);
+ if(conflicts?.has(key))return;
  const s=normalized(key,value);
+ // Withhold contradictory categorical/release evidence instead of silently
+ // preferring stale JSON-LD. Compound processes must stay unsimplified.
+ const compound=key==='process'&&new Set(textOf(value).toLowerCase().match(/\b(?:washed|natural|honey|anaerobic)\b/g)||[]).size>1;
+ if(conflicts&&(compound||(s&&fields[key]&&['process','roast_level','release_label'].includes(key)&&
+    keyOf(s)!==keyOf(fields[key])))){
+  conflicts.add(key);delete fields[key];return;
+ }
+ if(fields[key])return;
  if(s)fields[key]=s;
 }
 function productDetails(fields,p){
@@ -362,18 +373,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
  if(!p||!textOf(p.name))return {ok:false,reason:'ambiguous_or_missing_product'};
- const fields={name:textOf(p.name,200)};
+ const fields={name:textOf(p.name,200)},conflicts=new Set();
+ conflictsByFields.set(fields,conflicts);
  productDetails(fields,p);
  const siteName=textOf(meta['og:site_name'],200);
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
   fields.roaster=siteName;
  // Avoid stray articles/related-product labels on custom Onyx storefronts.
  // The product's named a-stat metrics supply its selected factual labels.
- const onyxMetrics=/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']roast-level["']/i.test(html);
- if(!onyxMetrics)labeledPairs(html,fields);
+ const product=productMarkup(html);
+ const onyxMetrics=/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']roast-level["']/i.test(product);
+ if(!onyxMetrics)labeledPairs(product,fields);
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.
- const roaster_details=extractLayoutEvidence(html,{
+ const roaster_details=extractLayoutEvidence(product,{
   fields,addField:(key,value)=>addField(fields,key,value),clean
  });
  // Coffee-specific product and brand metadata may be present in HTML meta tags
@@ -383,19 +396,23 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    addField(fields,k.replace(/^(?:coffee|product)[:._-]/,''),v);
   }
  }
- if(!onyxMetrics)explicitNearbyFacts(html,fields);
- const roast_evidence=extractRoastVisualEvidence(html);
+ if(!onyxMetrics)explicitNearbyFacts(product,fields);
+ const roast_evidence=extractRoastVisualEvidence(product);
  if(roast_evidence.value){
   if(fields.roast_level&&fields.roast_level!==roast_evidence.value){
    delete fields.roast_level;
+   conflicts.add('roast_level');
    roast_evidence.hint='The page contains inconsistent roast values; select the correct level from the roaster’s label.';
    roast_evidence.value=null;
   }else if(!fields.roast_level)fields.roast_level=roast_evidence.value;
  }
- const roaster_recipe=explicitEspressoRecipe(html);
+ // Fallback extractors may directly set a field; a conflict remains final.
+ for(const field of conflicts)delete fields[field];
+ const roaster_recipe=explicitEspressoRecipe(product);
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
+  ...(conflicts.size?{conflicts:[...conflicts].sort()}:{}),
   ...(roaster_recipe?{roaster_recipe}:{}),
   ...(Object.keys(roaster_details).length?{roaster_details}:{}),
   ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),

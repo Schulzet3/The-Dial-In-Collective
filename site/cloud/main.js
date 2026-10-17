@@ -2,7 +2,7 @@ import * as C from '../lib/constants.js';
 import * as M from '../lib/model.js';
 import * as E from '../lib/engine.js';
 import * as U from '../lib/ui.js';
-import {createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT} from './client.js';
+import {CloudError,createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT} from './client.js';
 import {IndexedStore,Outbox} from './outbox.js';
 import {hydrate,applyPending,shotPayload} from './mapping.js';
 import {CLOUD_CONFIG} from './config.js';
@@ -11,7 +11,7 @@ import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
-const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,shotSummary,humanDate}=U;
+const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales}=U;
 const root=document.querySelector('#app'),sheet=document.querySelector('#sheet');
 const uuid=()=>crypto.randomUUID();
 function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`Dial_In_Collective_Pending_Changes_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
@@ -19,14 +19,39 @@ class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0});
   this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;
-  this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{this.syncState=r.state;}});
+  this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
+ }
+ async inSession(operation){
+  const owner=this.identity?.id,epoch=this.epoch;
+  const changed=()=>owner!==this.identity?.id||epoch!==this.epoch;
+  try{const result=await operation();if(changed())throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');return result;}
+  catch(error){if(changed())throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');throw error;}
+ }
+ resetAccount(){
+  this.epoch++;this.status=null;this.raw=null;this.state=M.blankState();this.pending=[];
+  this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
+  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;
+  this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
+  this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
+  this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;
+  sheet.close();sheet.innerHTML='';
+ }
+ authChanged(event,user){
+  const changed=this.identity?.id!==user?.id;
+  if(changed)this.resetAccount();
+  if(event==='PASSWORD_RECOVERY')this.recovery=true;
+  this.identity=user;
+  // Remove the former account's rendered records before the next network read.
+  if(changed||event==='SIGNED_OUT'||event==='PASSWORD_RECOVERY')this.render();
+  if(user&&event!=='TOKEN_REFRESHED')this.connect().catch(err=>this.error(err));
  }
  async init(){
   document.addEventListener('click',ev=>this.click(ev));document.addEventListener('submit',ev=>this.submit(ev));
   document.addEventListener('input',ev=>this.input(ev));document.addEventListener('change',ev=>this.change(ev));
   sheet.addEventListener('cancel',ev=>ev.preventDefault());
-  this.client.onAuthChange((event,user)=>{if(event==='PASSWORD_RECOVERY'){this.recovery=true;}if(this.identity?.id!==user?.id){this.epoch++;this.status=null;this.raw=null;this.state=M.blankState();this.expanded.clear();this.pending=[];sheet.close();}this.identity=user;if(event==='SIGNED_OUT'){this.status=null;this.render();}else if(user&&event!=='TOKEN_REFRESHED')this.connect().catch(err=>this.error(err));});
-  try{this.identity=await this.client.identity();}catch{/* Missing session is the normal signed-out state. */}
+  this.client.onAuthChange((event,user)=>this.authChanged(event,user));
+  const epoch=this.epoch;
+  try{const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;}catch{/* Missing session is the normal signed-out state. */}
   if(this.identity)await this.connect();else this.render();
   addEventListener('online',()=>this.sync().catch(err=>this.error(err)));
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)this.sync().catch(err=>this.error(err));});
@@ -36,7 +61,7 @@ class CloudApp {
   const user=this.identity,epoch=this.epoch;if(!user)return;
   try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;this.status=status;
    if(!status.admitted){this.raw=null;this.state=M.blankState();this.render();return;}
-   const cache=await this.store.readCache(user.id);if(cache&&epoch===this.epoch)this.raw=cache.snapshot;
+   const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
    await this.sync();
   }catch(err){if(epoch===this.epoch){this.notice=err.message;this.syncState='offline';this.render();}}
  }
@@ -58,8 +83,10 @@ class CloudApp {
  async doSync(){
   const who=this.identity,epoch=this.epoch;if(!who||!this.status?.admitted)return;
   const outcome=await this.queue.flush();if(epoch!==this.epoch||who.id!==this.identity?.id)return;
-  this.syncState=outcome.state;this.pending=await this.store.list(who.id);
-  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);this.raw=raw;}catch(err){this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
+  this.syncState=outcome.state;const pending=await this.store.list(who.id);
+  if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
+  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;}
+  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);
   if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)this.expanded.add(M.workspace(this.state).currentCoffeeId);
   this.render();
@@ -67,12 +94,12 @@ class CloudApp {
  async mutate(action,payload,{onlineOnly=false}={}){
   if(!this.identity||!this.status?.admitted)throw new Error('Sign in with beta access first.');
   if(onlineOnly&&(!navigator.onLine||this.pending.length))throw new Error('Reconnect and finish syncing before changing this setting. Offline shot logging remains available.');
-  await this.queue.enqueue(action,payload);this.pending=await this.store.list(this.identity.id);
+  await this.inSession(()=>this.queue.enqueue(action,payload));this.pending=await this.inSession(()=>this.store.list(this.identity.id));
   this.state=applyPending(hydrate(this.raw),this.pending);this.render();
-  await this.sync();
+  await this.inSession(()=>this.sync());
   if(onlineOnly&&this.pending.length)throw new Error('The change is preserved in the sync queue. Open Sync details to check its status.');
  }
- error(err){this.notice=err.message||'The change could not be completed.';const box=sheet.querySelector('[role=alert]');if(box)box.textContent=this.notice;else this.render();}
+ error(err){if(err.code==='account_changed')return;this.notice=err.message||'The change could not be completed.';const box=sheet.querySelector('[role=alert]');if(box)box.textContent=this.notice;else this.render();}
  theme(){applyAppearance(this.identity&&this.raw?this.state.theme:readAppearance());}
  show(title,body){sheet.innerHTML=`<div class=sheet-layout><header class=sheet-header><h2 id=sheet-title>${e(title)}</h2>${button(icon('close',21),'close','aria-label="Close"','icon-button')}</header><div class=sheet-content>${body}<div role=alert class=helper></div></div>`;if(!sheet.open)sheet.showModal();sheet.querySelector('[data-action=close]').focus({preventScroll:true});}
  render(){
@@ -171,13 +198,13 @@ class CloudApp {
    this.notice='Coffee saved. Checking official roaster evidence when available; you can log shots now.';
    if(proposal?.id&&proposal?.source_url&&this.client.verifyCoffeeSource){
     try{
-     const checked=await this.client.verifyCoffeeSource(proposal.id);
+     const checked=await this.inSession(()=>this.client.verifyCoffeeSource(proposal.id));
      if(checked?.status==='verified'){
-      await this.sync();this.notice='Official source verified. Your coffee is now in the shared catalog.';
+      await this.inSession(()=>this.sync());this.notice='Official source verified. Your coffee is now in the shared catalog.';
      }else if(checked?.reason==='needs_confirmation'){
       this.notice='Coffee saved. A possible duplicate needs confirmation; nothing was merged.';
      }else this.notice='Coffee saved for private use. Official-source verification is pending.';
-    }catch{this.notice='Coffee saved for private use. Official-source checks can be retried later.';}
+    }catch(error){if(error.code==='account_changed')throw error;this.notice='Coffee saved for private use. Official-source checks can be retried later.';}
    }
   }
   this.render();
@@ -205,7 +232,7 @@ class CloudApp {
      this.coffeeUrlBusy=true;this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;
      const original=target.textContent;target.disabled=true;target.textContent='Checking URL...';
      try{
-      const found=await this.client.previewCoffeeUrl(raw);
+      const found=await this.inSession(()=>this.client.previewCoffeeUrl(raw));
       if(!sheet.open||sheet.querySelector('#new-coffee')!==form||form.elements.source_url.value.trim()!==raw)return;
       this.coffeeUrlPreview=found?.ok?found:null;
       this.coffeeUrlPreviewInput=found?.ok?raw:null;
@@ -213,7 +240,7 @@ class CloudApp {
       // presses Add Coffee. Never overwrite typed facts or silently approve.
       if(found?.ok)applyCoffeeUrlFields(form,found);
       panel.innerHTML=coffeeUrlPreviewMarkup(found,{applied:!!found?.ok});
-     }catch(error){
+     }catch{
       if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
      }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
      return;
@@ -232,7 +259,7 @@ class CloudApp {
      const entry=this.raw?.library?.find(x=>x.id===id);
      const submission=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
      if(!submission||submission.status!=='pending')throw new Error('This coffee is no longer Pending.');
-     const matched=await this.client.findCoffeeMatches({...submission.proposed_data,source_url:submission.source_url});
+     const matched=await this.inSession(()=>this.client.findCoffeeMatches({...submission.proposed_data,source_url:submission.source_url}));
      if(!matched?.candidates?.length){
       this.notice='No verified match yet. Your coffee and shot history remain safe.';this.render();return;
      }
@@ -269,10 +296,10 @@ class CloudApp {
    if(a==='style'){const p=M.coffeeState(this.state,id);this.styleCoffee=id;this.styleRevision=this.raw.workspaceCoffees.find(x=>x.library_entry_id===id&&x.setup_version_id===M.activeVersion(this.state).id)?.revision||0;this.show('Shot Style',`<form id=style>${select('Style','style',C.STYLES.filter(s=>s!=='Custom'),p.style)}<p class="helper space-top">Styles are guidelines, not pass/fail rules.</p><button class="primary full">Use Style</button></form>`);return;}
    if(a==='make-current'){const sh=this.state.shots.find(x=>x.id===id),rp=this.raw.recipePreferences.find(x=>x.library_entry_id===sh.coffeeId&&x.setup_version_id===sh.setupVersionId&&x.style===sh.style);await this.mutate('make_current',{shot_id:id,expected_revision:rp?.revision||0},{onlineOnly:true});return;}
    if(a==='community'){this.show('Community',`<div class=preview-note>Community is not available in this private beta yet. Pending Coffees are not shared automatically.</div><p class=helper>The next community milestone connects verified coffees, contributor-balanced recommendations and actual review actions.</p>`);return;}
-   if(a==='sync'){const events=await this.queue.pending();this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
-   if(a==='sync-now'){await this.sync();this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
-   if(a==='export'){exportFile(await this.store.export(this.identity.id));return;}
-   if(a==='signout'){if((await this.queue.pending()).length)throw new Error('Changes are waiting to sync. Open Cloud Sync Details to save pending changes and finish syncing before signing out.');await this.client.signOut();this.identity=null;this.status=null;this.raw=null;this.state=M.blankState();this.epoch++;sheet.close();this.render();return;}
+   if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
+   if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
+   if(a==='export'){exportFile(await this.inSession(()=>this.store.export(this.identity.id)));return;}
+   if(a==='signout'){if((await this.inSession(()=>this.queue.pending())).length)throw new Error('Changes are waiting to sync. Open Cloud Sync Details to save pending changes and finish syncing before signing out.');const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
   }catch(err){this.error(err);}
  }
  input(ev){if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreview=null;this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
@@ -280,11 +307,11 @@ class CloudApp {
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
-    if(id==='auth-signin'){await this.client.signIn(d.email,d.password);this.identity=await this.client.identity();await this.connect();}
+    if(id==='auth-signin'){await this.client.signIn(d.email,d.password);const epoch=this.epoch;const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;await this.connect();}
    else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.confirmationEmail=d.email.trim();this.authView='check-email';this.notice='';this.render();root.querySelector('#confirmation-title')?.focus();}
    else if(id==='auth-reset'){this.notice=await this.client.requestReset(d.email);this.render();}
-   else if(id==='auth-password'){await this.client.setPassword(d.password);this.recovery=false;this.notice='Password updated.';await this.connect();}
-   else if(id==='auth-invite'){await this.client.redeemInvite(d.token);await this.connect();}
+   else if(id==='auth-password'){await this.inSession(()=>this.client.setPassword(d.password));this.recovery=false;this.notice='Password updated.';await this.connect();}
+   else if(id==='auth-invite'){await this.inSession(()=>this.client.redeemInvite(d.token));await this.connect();}
    else if(id==='new-setup'){await this.mutate('create_setup',{...d,id:uuid(),basket_dose_g:Number(d.basket_dose_g),finest_setting:Number(d.finest_setting),coarsest_setting:Number(d.coarsest_setting)},{onlineOnly:true});sheet.close();}
    else if(id==='rename-setup'){
     await this.mutate('rename_setup',{setup_id:this.renameSetupId,name:d.name,expected_revision:this.renameSetupRevision},{onlineOnly:true});
@@ -292,7 +319,7 @@ class CloudApp {
    }
    else if(id==='new-coffee'){
      // Lookup is read-only. No near-match is ever merged without confirmation.
-     const matched=await this.client.findCoffeeMatches(d);
+     const matched=await this.inSession(()=>this.client.findCoffeeMatches(d));
      const choice=nextCoffeeAction(matched);
      if(choice==='reuse_verified')await this.finishCoffeeAdd(d,matched,matched.exact_id);
      else if(choice==='ask_user'){

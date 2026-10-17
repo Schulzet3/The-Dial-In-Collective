@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
+import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
 const head=(title,brand='')=>'<html><head><meta property="og:type" content="product">'+
  '<meta property="og:title" content="'+title+'">'+

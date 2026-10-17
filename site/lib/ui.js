@@ -1,4 +1,4 @@
-import {SCALES,tasteSeverity,tasteLabel,tempDisplay,round} from './constants.js';
+import {SCALES,tasteSeverity,tasteLabel,tempDisplay} from './constants.js';
 export const e = x => String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths={
  signout:'M9 4H4v16h5m5-12 4 4-4 4m-6-4h10',

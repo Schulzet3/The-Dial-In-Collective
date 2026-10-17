@@ -1,6 +1,6 @@
 // Deterministic release gate for the minimal, allowlisted browser app.
 // No network calls, no third-party parser, no arbitrary source copied to dist.
-import {readFileSync,existsSync,readdirSync,statSync} from 'node:fs';
+import {readFileSync,existsSync,readdirSync} from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 

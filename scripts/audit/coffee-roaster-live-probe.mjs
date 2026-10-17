@@ -31,7 +31,7 @@ const summarize=async ([roaster,url])=>{
   const {name,roaster:foundRoaster,origin,roast_level,process,variety,producer,elevation_m,tasting_notes,release_label}=result.fields;
   return {roaster,status:'parsed',bytes:Buffer.byteLength(fetched.html),
    source_sha256:createHash('sha256').update(fetched.html).digest('hex'),
-   available:keys,name,foundRoaster,origin,roast_level,process,variety,producer,
+   available:keys,conflicts:result.conflicts||[],name,foundRoaster,origin,roast_level,process,variety,producer,
    elevation_m,tasting_notes,release_label,details:result.roaster_details||{},
    recipe:result.roaster_recipe||null,roast_hint:result.roast_hint||null};
  }catch(e){return {roaster,status:'probe_exception',exception_type:e?.name||'Error'};}

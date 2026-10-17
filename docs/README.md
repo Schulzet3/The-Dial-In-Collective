@@ -6,6 +6,8 @@ Start with [Current Status](CURRENT_STATUS.md), [Master Specification](MASTER_SP
 
 ## Latest implementation acceptance (2026-10-17)
 
+- [App-wide error sweep and readiness](APP_WIDE_ERROR_SWEEP_2026-10-17.md): account-transition privacy fixes, conservative extraction, bounded requests, lint/visual gates, fresh read-only provider evidence and explicit limitations. No publication.
+- [Queen City exact-URL extractor handoff](QUEEN_CITY_EXTRACTOR_AND_WORK_HANDOFF_2026-10-17.md): prior exact variant/canonical public-source acceptance and preserved pre-sweep evidence.
 - [Multi-roaster URL extractor current-source acceptance](COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md): eight of nine concrete coffee product URLs parsed live, 248 Node tests PASS, selected details and real storefront limitations. Owner approved production credits; current balance remains unverified under Locked guard.
 - [Seven-tier release and exact coffee migration sequence](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md): prior production compatibility schema passed, seven-tier frontend and five user corrections await credit-verified release.
 

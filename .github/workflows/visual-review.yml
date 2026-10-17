@@ -1,7 +1,17 @@
 name: DIC private visual review
 on:
   push:
-    branches: [work/visual-refresh-20261015]
+    branches: [work/visual-refresh-20261015, development/backend-foundation]
+    paths:
+      - 'site/**'
+      - 'tests/browser/**'
+      - 'tests/cloud-fixtures/**'
+      - 'eslint.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'build_cloud.mjs'
+      - 'scripts/audit/site-integrity.mjs'
+      - '.github/workflows/visual-review.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,7 +32,7 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm test
       - name: Lint all active JavaScript and review scripts
-        run: npm exec --yes --package=eslint@9.39.1 -- eslint .
+        run: npm run lint
       - run: npm run build:cloud
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co

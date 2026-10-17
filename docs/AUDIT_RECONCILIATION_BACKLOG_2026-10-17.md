@@ -6,7 +6,9 @@
 
 ## Subsequent owner decision (after original audit)
 
-Owner approved **12 URL preview claims per account per 24-hour budget window** (decision `COFFEE-URL-DAILY-20261016-02`). The canonical Master Specification and Decision Ledger are updated; isolated SQL/Node/UX CI passed, and production migration `dic_preview_daily_budget_12` version `20261017050220` was applied and read-back verified at 12 without a Netlify redeploy. The earlier “25 vs 10” lines below are **historic pre-decision audit text**. The separate roast-taxonomy question remains Open. [Current Status](CURRENT_STATUS.md) governs next actions.
+Owner approved **12 URL preview claims per account per 24-hour budget window** (decision `COFFEE-URL-DAILY-20261016-02`). The canonical Master Specification and Decision Ledger are updated; isolated SQL/Node/UX CI passed, and production migration `dic_preview_daily_budget_12` version `20261017050220` was applied and read-back verified at 12 without a Netlify redeploy. The owner subsequently Locked **seven roast categories and five exact coffee assignments** in [the roast amendment](DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json). The “25 vs 10”, five-roast and Open-taxonomy rows below preserve the original audit checkpoint; they are not current owner questions. [Current Status](CURRENT_STATUS.md) governs next actions.
+
+The later [app-wide error sweep](APP_WIDE_ERROR_SWEEP_2026-10-17.md) records implementation fixes and updated checks against the Queen City handoff. It does not erase the original findings or close unrelated feature gaps. The owner's latest instruction is **do not publish**.
 
 ## Outcome and accuracy boundary
 

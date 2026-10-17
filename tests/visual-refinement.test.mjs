@@ -20,7 +20,7 @@ test('unavailable local storage falls back without blocking app or Admin',()=>as
 test('Netlify cannot deploy this review branch in any context',()=>{for(const context of ['production','deploy-preview','branch-deploy'])assert.equal(decide({context,branch:'work/visual-refresh-20261015'}).ignore,true);});
 test('shared appearance is allowlisted and early theme bootstrap is used by both pages',()=>{for(const page of ['site/cloud.html','site/admin.html'])assert.match(read(page),/appearance-bootstrap\.js/);assert.match(read('build_cloud.mjs'),/cloud\/appearance\.js/);});
 test('Admin reads only current-account theme after authorization',()=>{const main=read('site/admin/main.js');assert.ok(main.indexOf('!status?.admin')<main.indexOf("from('account_preferences')"));assert.match(main,/select\('theme'\)\.eq\('owner_id',identity.user.id\)/);});
-test('search toggle and icon-labelled Sign Out preserve action semantics',()=>{const main=read('site/cloud/main.js');assert.match(main,/Search & Sort/);assert.match(main,/aria-controls="coffee-search-tools"/);assert.match(main,/icon\('signout',18\)/);assert.match(main,/if\(\(await this.queue.pending\(\)\).length\)/);});
+test('search toggle and icon-labelled Sign Out preserve action semantics',()=>{const main=read('site/cloud/main.js');assert.match(main,/Search & Sort/);assert.match(main,/aria-controls="coffee-search-tools"/);assert.match(main,/icon\('signout',18\)/);});
 test('style retains clean display ligatures and visible focus states',()=>{assert.match(css,/font-variant-ligatures:none/);assert.match(css,/:focus-visible/);assert.match(css,/prefers-reduced-motion/);});
 
 test('New Coffee has one continuous section and preserves side-by-side optional details',()=>{

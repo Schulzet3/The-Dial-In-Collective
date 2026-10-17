@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-import {readdirSync} from 'node:fs';
+import {readFileSync,readdirSync} from 'node:fs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const css=['site/styles.css','site/visual.css','site/cloud/import.css','site/admin/styles.css'];
 test('app-wide text shadows explicitly disabled for all elements in Light and Dark',()=>{

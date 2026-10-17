@@ -9,6 +9,19 @@ const json=(value,status=200)=>new Response(JSON.stringify(value),{
   'X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}
 });
 const envDefault=key=>globalThis.Netlify?.env?.get?.(key)??process.env[key];
+async function readRequest(request){
+ const max=4200;
+ if(Number(request.headers.get('content-length')||0)>max)throw new Error('request_too_large');
+ const reader=request.body?.getReader();if(!reader)throw new Error('missing_request');
+ const decoder=new TextDecoder(),chunks=[];let size=0;
+ try{
+  while(true){const {done,value}=await reader.read();if(done)break;
+   size+=value.byteLength;if(size>max){await reader.cancel();throw new Error('request_too_large');}
+   chunks.push(decoder.decode(value,{stream:true}));
+  }
+  chunks.push(decoder.decode());return JSON.parse(chunks.join(''));
+ }finally{reader.releaseLock();}
+}
 async function restCall(fetcher,base,key,token,path,method='GET'){
  const response=await fetcher(base+path,{
   method,signal:AbortSignal.timeout(6500),
@@ -39,10 +52,7 @@ export function createPreviewHandler({
    return json({ok:false,reason:'preview_unavailable'},503);
   let source_url;
   try{
-   if(Number(request.headers.get('content-length')||0)>4200)return json({ok:false,reason:'invalid_url'},400);
-   const raw=await request.text();
-   if(raw.length>4200)return json({ok:false,reason:'invalid_url'},400);
-   source_url=JSON.parse(raw)?.source_url;
+   source_url=(await readRequest(request))?.source_url;
   }catch{return json({ok:false,reason:'invalid_url'},400);}
   const validated=safeCoffeeUrl(source_url);
   if(!validated)return json({ok:false,reason:'invalid_url'},400);

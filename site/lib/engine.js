@@ -1,4 +1,4 @@
-import {CONFIG,RATIOS,TIMES,TEMPS,ROASTS,STYLES,roastIndex,num,round,clamp,norm,finite,newId,now,isDialed} from './constants.js';
+import {CONFIG,RATIOS,TIMES,TEMPS,roastIndex,num,round,clamp,norm,finite,newId,now,isDialed} from './constants.js';
 import {activeSetup,activeVersion,workspace,coffeeState,ensureCoffeeState,selectedBasket,feedMode,snapshot,hasLocalSuccess,validateShot,logAudit} from './model.js';
 export const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
 export function quantile(a,q) {const b=[...a].sort((x,y)=>x-y);if(!b.length)return null;const pos=(b.length-1)*q,lo=Math.floor(pos);return b[lo]+(b[Math.min(lo+1,b.length-1)]-b[lo])*(pos-lo);}

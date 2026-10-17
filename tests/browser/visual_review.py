@@ -128,7 +128,9 @@ with sync_playwright() as p:
   check(columns==2,mode+': metadata fields remain side by side')
   shot(page,'07-add-coffee-'+mode,'#sheet')
   # Use a synthetic result instead of making any external HTTP request.
-  # Preview must not overwrite entered facts until the user explicitly applies.
+  # Current published flow fills blanks on Autofill; Add Coffee remains explicit.
+  # Typed facts must survive the preview and no record may be saved by it.
+  library_count=page.evaluate('window.__raw.library.length')
   page.evaluate("""()=>{
     window.__app.client.previewCoffeeUrl=async (source_url)=>({
       ok:true,source_url,source:'official_roaster_product_metadata',
@@ -142,18 +144,17 @@ with sync_playwright() as p:
   page.locator('#new-coffee [name=variety]').fill('Local Bag Entry')
   page.locator('[data-action=preview-coffee-url]').click()
   page.locator('.coffee-url-preview').wait_for()
-  check(page.locator('#new-coffee [name=name]').input_value()=='',mode+': URL lookup requires confirmation before changing fields')
+  check(page.locator('#new-coffee [name=name]').input_value()=='Hambela',mode+': Autofill fills blank Name in one click')
   check(page.locator('.coffee-url-preview .coffee-match-alert').count()==1,mode+': URL previews existing verified-coffee match')
   shot(page,'07b-url-autofill-preview-'+mode,'#sheet')
-  page.locator('[data-action=apply-coffee-url]').click()
-  check(page.locator('#new-coffee [name=name]').input_value()=='Hambela',mode+': official product Name auto-filled after approval')
-  check(page.locator('#new-coffee [name=roaster]').input_value()=='Sweet Bloom',mode+': canonical Roaster auto-filled after approval')
+  check(page.locator('[data-action=apply-coffee-url]').count()==0,mode+': no redundant Apply step in current flow')
+  check(page.evaluate('window.__raw.library.length')==library_count,mode+': preview does not save a coffee')
+  check(page.locator('#new-coffee [name=roaster]').input_value()=='Sweet Bloom',mode+': source Roaster fills its blank field')
   check(page.locator('#new-coffee [name=origin]').input_value()=='Guji, Ethiopia',mode+': source-backed Origin filled')
   check(page.locator('#new-coffee [name=process]').input_value()=='Washed',mode+': recognized Process field filled')
   check(page.locator('#new-coffee [name=variety]').input_value()=='Local Bag Entry',mode+': typed Variety never overwritten')
   check(page.locator('#new-coffee [name=source_url]').input_value()=='https://sweetbloomcoffee.com/products/hambela',mode+': official URL retained in form')
   check(page.locator('#new-coffee .coffee-detail-grid .field').count()==6,mode+': original two-column details preserved after autofill')
-  shot(page,'07c-url-autofill-applied-'+mode,'#sheet')
   page.locator('[data-action=close]').click()
   page.locator('[data-action=sync]').first.click();check(page.locator('#sheet [data-action=export]').count()==0,mode+': no routine recovery export when synced');shot(page,'08-sync-'+mode,'#sheet');page.locator('[data-action=close]').click()
   page.locator('[data-action=style]').first.click();shot(page,'09-style-'+mode,'#sheet');page.locator('[data-action=close]').click()
@@ -202,7 +203,7 @@ with sync_playwright() as p:
   main=re.sub(r"^import .*?;\n",'',main,flags=re.M)
   shared=(SITE/'cloud/appearance.js').read_text().replace('export ','')
   view=(SITE/'admin/view.js').read_text();view=re.sub(r"^import .*?;\n",'',view,flags=re.M).replace('export ','')
-  sdk='''const CLOUD_CONFIG={enabled:true};const secureOrigin=()=>{};let requests=[];const sdk={auth:{getUser:async()=>({data:{user:{id:'review-owner'}}})},from:()=>({select:()=>({eq:()=>({maybeSingle:async()=>({data:{theme:MODE}})})})}),rpc:async(name)=>{requests.push(name);return {data:name==='dic_session_status'?{authenticated:true,admitted:true,admin:true}:{counts:{pending_coffees:0,conflicts:0,verified_coffees:4,active_accounts:1,shot_records:14},queue_total:0,queue:[]}}}};globalThis.supabase={createClient:()=>sdk};'''
+  sdk='''const CLOUD_CONFIG={enabled:true};const secureOrigin=()=>{};let requests=[];const sdk={auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),getUser:async()=>({data:{user:{id:'review-owner'}}})},from:()=>({select:()=>({eq:()=>({maybeSingle:async()=>({data:{theme:MODE}})})})}),rpc:async(name)=>{requests.push(name);return {data:name==='dic_session_status'?{authenticated:true,admitted:true,admin:true}:{counts:{pending_coffees:0,conflicts:0,verified_coffees:4,active_accounts:1,shot_records:14},queue_total:0,queue:[]}}}};globalThis.supabase={createClient:()=>sdk};'''
   escaped="const e=x=>String(x??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));"
   page.add_script_tag(content='const MODE='+json.dumps(mode)+';'+escaped+shared+view+sdk+main)
   page.locator('#admin-refresh').wait_for();check(page.locator('html').get_attribute('data-theme')==mode,mode+': Admin reads saved account appearance')
