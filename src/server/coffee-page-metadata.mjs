@@ -1,5 +1,6 @@
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
 // roaster verification and never promotes a canonical record.
+import {extractRoastVisualEvidence} from './roast-level-evidence.mjs';
 const FIELD_ALIASES={
  origin:['origin','country','country of origin','region','coffee origin'],
  elevation_m:['elevation','altitude','elevation m','altitude masl','grown at'],
@@ -113,9 +114,27 @@ function productDetails(fields,p){
  for(const row of Array.isArray(p.additionalProperty)?p.additionalProperty.slice(0,80):[]){
   addField(fields,row?.name,row?.value);
  }
+ // Merchant descriptions often embed origin/processing and roast level in a
+ // simple product specification, not in structured Product properties.
+ const description=String(p.description??'');
+ if(description&&description.length<=16000)labeledPairs(description,fields);
  for(const [key,value] of Object.entries(p)){
   if(['additionalProperty','offers','description','brand','manufacturer','image'].includes(key))continue;
   addField(fields,key,value);
+ }
+ const details=p.metafields??p.metadata??p.attributes??p.options??null;
+ if(details&&typeof details==='object'&&!Array.isArray(details)){
+  for(const [key,value] of Object.entries(details).slice(0,80)){
+   // Some Shopify theme metafields use {value:"Light"} / nested custom.
+   if(key==='custom'&&value&&typeof value==='object'&&!Array.isArray(value)){
+    for(const [sub,subValue] of Object.entries(value).slice(0,50))addField(fields,sub,subValue);
+   }else addField(fields,key,value);
+  }
+ }
+ for(const tag of Array.isArray(p.tags)?p.tags.slice(0,60):[]){
+  if(typeof tag!=='string')continue;
+  const m=tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)s*[:=]s*(.{2,130})$/i);
+  if(m)addField(fields,m[1],m[2]);
  }
 }
 function focusedProductText(html){
@@ -212,7 +231,7 @@ function shopifyProduct(html,target){
    const p=JSON.parse(m[2]);
    if(!p||typeof p!=='object'||typeof p.title!=='string')continue;
    if(p.url&&!samePage(p.url,target))continue;
-   out.push({name:p.title,brand:p.vendor||'',additionalProperty:[],description:p.description||''});
+   out.push({name:p.title,brand:p.vendor||'',additionalProperty:[],description:p.description||'',metafields:p.metafields||p.metadata||{},tags:p.tags||[],attributes:p.attributes||{},url:p.url||null});
   }catch{}
  }
  return out;
@@ -243,11 +262,28 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
   fields.roaster=siteName;
  labeledPairs(html,fields);
+ // Coffee-specific product and brand metadata may be present in HTML meta tags
+ // rather than JSON-LD (but never trust unrelated generic SEO prose).
+ for(const [k,v] of Object.entries(meta)){
+  if(/^(?:coffee[:._-]|product[:._-])(?:origin|process(?:ing)?|variety|producer|roast[_-]?level|harvest|elevation|tasting[_-]?notes)$/.test(k)){
+   addField(fields,k.replace(/^(?:coffee|product)[:._-]/,''),v);
+  }
+ }
  explicitNearbyFacts(html,fields);
+ const roast_evidence=extractRoastVisualEvidence(html);
+ if(roast_evidence.value){
+  if(fields.roast_level&&fields.roast_level!==roast_evidence.value){
+   delete fields.roast_level;
+   roast_evidence.hint='The page contains inconsistent roast values; select the correct level from the roaster’s label.';
+   roast_evidence.value=null;
+  }else if(!fields.roast_level)fields.roast_level=roast_evidence.value;
+ }
  const roaster_recipe=explicitEspressoRecipe(html);
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
   ...(roaster_recipe?{roaster_recipe}:{}),
+  ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),
+  ...(roast_evidence.value?{roast_source:roast_evidence.source}:{}),
   note:'Best-effort webpage suggestions. The roaster, lot and release still require verification.'};
 }
