@@ -134,11 +134,14 @@ test('published New Coffee preview click immediately populates blanks before Add
  assert.match(preview,/Review or correct them, then click Add Coffee/);
  assert.doesNotMatch(preview,/data-action="apply-coffee-url"/);
 });
-test('client fallback supports missing official metadata without treating quota denial as permission',()=>{
+test('client makes exactly one authenticated public-preview request per click with no double quota',()=>{
  const client=read('site/cloud/client.js');
- assert.match(client,/ambiguous_or_missing_product/);
- assert.match(client,/source_unavailable/);
- assert.match(client,/\/api\/coffee-preview/);
- assert.match(client,/getSession\(\)/);
- assert.doesNotMatch(client,/SUPABASE_SERVICE_ROLE_KEY/);
+ const begin=client.indexOf('async previewCoffeeUrl(source_url){');
+ const end=client.indexOf('async verifyCoffeeSource(',begin);
+ const preview=client.slice(begin,end);
+ assert.match(preview,/\/api\/coffee-preview/);
+ assert.match(preview,/getSession\(\)/);
+ assert.match(preview,/dic_find_coffee_matches/);
+ assert.doesNotMatch(preview,/sdk\.functions\.invoke\('dic-preview-coffee'/);
+ assert.doesNotMatch(preview,/SUPABASE_SERVICE_ROLE_KEY/);
 });
