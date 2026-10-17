@@ -6,7 +6,10 @@ Start with [Current Status](CURRENT_STATUS.md), [Master Specification](MASTER_SP
 
 ## Development gap audit and cross-session handoff
 
-- [Comprehensive GitHub Gap Audit (October 16)](DIC_Comprehensive_GitHub_Audit_Handoff_2026-10-16.md) is the 26-finding, evidence-labeled read-only review of the application, workflows and requirements at development SHA `c1e8d3175be836b4a7fc92d731729583e7ebe55d`. It distinguishes confirmed missing or unexposed capabilities, risks, incomplete acceptance, provider-access limitations, Open product questions and proposed priorities. **It is not a new product decision, a fresh production test, or an authorized GitHub issue backlog.** Verify current refs and source before acting.
+- [Current audit reconciliation and prioritized issue backlog](AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md): G01–G26 dispositions, #5 and #8–#30, verified corrections and execution order.
+- [Historical Open decision crosswalk](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md): all 20 original topics mapped without inventing approvals.
+
+- [Comprehensive GitHub Gap Audit (October 16)](DIC_Comprehensive_GitHub_Audit_Handoff_2026-10-16.md) is the 26-finding, evidence-labeled read-only review of the application, workflows and requirements at development SHA `c1e8d3175be836b4a7fc92d731729583e7ebe55d`. It distinguishes confirmed missing or unexposed capabilities, risks, incomplete acceptance, provider-access limitations, Open product questions and proposed priorities. **The original audit is not a new product decision or a fresh production test.** The owner subsequently authorized the current issue backlog linked above; its tracking supersedes the audit's earlier issue-count and authorization snapshot. Verify current refs and source before acting.
 
 ## Canonical source components and provenance
 

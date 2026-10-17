@@ -6,9 +6,11 @@
 
 The owner-approved GitHub documentation consolidation is complete in this revision: original requirements, all retrieved GitHub amendments, a scoped supersession map, this checkpoint, navigation and historical evidence are now available from the active development branch. The [continuity report](GITHUB_CONTINUITY_2026-10-17.md) records validation and provider-access limits. Both continuity commits were read back and verified. The subsequent exact test-shot purge is recorded below.
 
+**Latest GitHub reconciliation:** the supplied audit has been reviewed against development source; [all 26 findings are mapped to scoped tracking or completed documentation corrections](AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md). Existing #5 was corrected and 23 new prioritized issues were created. Feature execution remains pending; this checkpoint does not certify all features complete. The [20-topic crosswalk](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md) preserves original decisions.
+
 **Next product action:** ask **one** question about **25 versus 10 URL lookups per rolling 24 hours**. Do not apply either value without the owner's decision. Next, separately resolve the proposed six roast tiers and displayed naming. These questions were already being discussed; neither proposal is Locked. See the [latest extraction/product checkpoint](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md).
 
-**Latest operation authorization:** The owner explicitly authorized the exact production purge of hidden nonlegacy Hambela test shot `799509a3-a16d-4380-a439-8de2a5d880e2`, its note/detailed payloads and affected timestamps. **That operation is now committed and independently verified below.** The preceding continuity consolidation was documentation-only. No broader deletion, deployment, migration, provider-setting change or historical-backup purge is authorized.
+**Completed production exception:** The owner explicitly authorized the exact production purge of hidden nonlegacy Hambela test shot `799509a3-a16d-4380-a439-8de2a5d880e2`, its note/detailed payloads and affected timestamps. **That operation is now committed and independently verified below.** The preceding continuity consolidation was documentation-only. No broader deletion, deployment, migration, provider-setting change or historical-backup purge is authorized.
 
 ## Exact Hambela test shot purge verified 2026-10-17 UTC
 
@@ -67,6 +69,18 @@ Keep the existing five-value roast taxonomy and adjustable **60 per rolling 24 h
 The [Comprehensive GitHub Gap Audit / Cross-Session Handoff](DIC_Comprehensive_GitHub_Audit_Handoff_2026-10-16.md) examined the complete 189-entry development tree at `c1e8d3175be836b4a7fc92d731729583e7ebe55d` and the then-current GitHub branches, commits, workflows and work tracking. It records **26 evidence-labeled findings**, including unexposed Locked workflows (experiment confirmation, Custom style, bags/baskets, shot hide, screenshot/optional device-only Claude input), the placeholder Community screen and incomplete recommendation tiers, the absent installable/offline PWA shell, a source-level offline cold-open risk, and read-only admin tools. Real iPhone/multi-device acceptance, member coffee verification and certain external-provider controls remain separate limits, **not proven failures**.
 
 At the audit checkpoint there was **one open GitHub issue (#5) and no open pull requests**. The audit proposed a structured issue backlog, but **did not create or change issues, requirements or product decisions**. The 25-versus-10 daily URL budget and six-tier roast taxonomy remain Open; the prior real-account, Wuri private Pending save and hosted-recovery acceptance results remain valid for their recorded scopes. This archive is **a read-only source audit followed by documentation-only filing**, not new implementation, a fresh production/provider check, a build, a deploy or a release authorization. Recheck current source, issues and CI before execution.
+
+## Audit reconciled and scoped issue backlog created 2026-10-17 UTC
+
+The owner subsequently authorized reviewing the supplied audit, correcting GitHub and converting confirmed gaps to prioritized issues before moving to feature execution. This **supersedes only the old audit's no-issue-creation scope**; it does not change a product decision or authorize deployment/production writes.
+
+[Audit reconciliation and backlog](AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md) maps **all G01–G26**. **23 new issues #8–#30 plus existing #5** are open at the verified checkpoint, with source/spec references, acceptance criteria, dependencies and stated boundaries. Issue #5's empty-catalog and all-deploy SSO wording is corrected. G24's immediate documentation/comment/tracking correction is complete; implementation and real-acceptance gaps remain open in the issues.
+
+[Twenty-topic decision crosswalk](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md) distinguishes later approved constraints, provisional implementation and unresolved semantics without altering original 79 Locked/20 Open records. The current daily cap and roast taxonomy choices remain Open. Questions are one at a time, only when required; unrelated documentation/independent work need not wait.
+
+**Fresh local check:** 226/226 existing Node tests PASS on the reviewed runtime source. Netlify comments corrected with parsed executable settings unchanged. No runtime feature is newly claimed complete, no production database query/mutation repeated, no migration/Edge/frontend deployment or backup deletion. Existing ready production deploy and nonproduction-only SSO were read back unchanged.
+
+The audit is a historical source snapshot, not a live-provider/security certificate. Specifically: the **Hambela purge is already complete**, G12 concerns missing personal-hide UI; Wuri private Pending save passed but trusted Verified/roast-graphic acceptance remains distinct; G14 is a source-level offline risk, not a reproduced iPhone failure; G22/G25 are evidence/access limits.
 
 ## Genuine remaining work
 

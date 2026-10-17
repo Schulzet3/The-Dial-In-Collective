@@ -1,0 +1,49 @@
+# Historical Open Decision and Implementation Crosswalk
+
+**Reviewed:** 2026-10-17 UTC against development `f6f65f6d93b56703e006f8c6b96760646eaf929a`.  
+**Tracking:** [#8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) and the linked implementation issues.  
+**Authority:** [Master Specification](MASTER_SPECIFICATION.md), [Decision Ledger](DECISION_LEDGER.json), exact later approvals and scoped supersessions.
+
+This crosswalk preserves all **20 originally Open topics**. It records the strongest located governing evidence and the remaining implementation/acceptance work. It does not turn code, a suggested priority or a provisional algorithm into a Locked owner decision. Original baseline/addendum objects remain unchanged.
+
+## Current owner choices
+
+1. **25 or 10 URL previews per rolling 24 hours?** Current tuning remains 60/day; **account-wide >=30 seconds** stays Locked.
+2. Separately decide proposed six roast tiers/naming. Current five canonical values remain.
+
+Other unresolved historic semantics should be discussed **only when the relevant implementation requires them**, one question at a time. Do not restart resolved provider selection, successful account/recovery checks or harmless existing responsive behavior merely because a baseline entry was Open.
+
+## Twenty-topic mapping
+
+| Original entry | Topic | Reconciliation status | Governing evidence or remaining choice | Implementation and acceptance | Issue |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Make Current Recipe semantics | Resolved principle; implementation incomplete | UX-20261014-03 and backend Approved product refinements: explicit preferred family/example; success automatically informs windows. | site/lib/engine.js; site/cloud/main.js; tests/ux-refinements.test.mjs | [#10](https://github.com/Schulzet3/The-Dial-In-Collective/issues/10) |
+| 2 | New coffee before its first shot | Locked boundary; focus choreography not fully specified | Baseline §6 and backend Preserve product model: adding/browsing does not activate; only a saved shot normally changes Current. | site/cloud/main.js temporary focus; site/lib/model.js; tests/cloud.test.mjs | [#8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) |
+| 3 | Declined experiment all-green shot | Unresolved personal-family outcome | All-green community qualification is Locked; no located later explicit approval settles every personal-family effect after declining an experiment. | site/lib/engine.js auto family assignment is implementation evidence, not approval. | [#13](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) |
+| 4 | Experiment trigger comparison baseline | Unresolved exact semantics | Baseline §37.1D remains the named question. Current engine uses displayed recommendation centers; code is not a new Locked choice. | site/lib/engine.js experimentChanges | [#13](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) |
+| 5 | Grinder direction/scale | Unresolved beyond current scale | Baseline §37.1E and current model's increasing-coarseness assumption; no located approval for all alternate scale semantics. | site/lib/model.js and engine.js; direction acceptance remains. | [#17](https://github.com/Schulzet3/The-Dial-In-Collective/issues/17) |
+| 6 | Edit after community contribution | Resolved governing rule; pipeline incomplete | Backend Preserve product model: corrections replace/withdraw contribution; personal hiding alone preserves legitimate shared evidence. | supabase/migrations/20261012015600_dic_shots_recipes_community.sql; eligibility acceptance still pending. | [#9](https://github.com/Schulzet3/The-Dial-In-Collective/issues/9) |
+| 7 | Recipe-family scope across setups | Resolved principle; full behavior incomplete | Backend Preserve product model: ratio/coffee/style-centered families, setup-aware preferred families; hardware/feed alone are not new family identity. | site/lib/engine.js; recipe_preferences schema; full cross-setup family tests needed. | [#10](https://github.com/Schulzet3/The-Dial-In-Collective/issues/10) |
+| 8 | Robust window estimator | Exact numeric policy not demonstrated Locked | Baseline §37.2H; current small-N/quantile implementation is provisional algorithm evidence, not approval of every threshold. | site/lib/engine.js stats/config and personal windows. | [#8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) |
+| 9 | Adaptive grind experiment threshold | Partially constrained; experiment formula unresolved | ENGINE-UNPROVEN-GRIND-RANGE-04 fixes starting search bands, not every meaningful-experiment threshold formula. | site/lib/engine.js grindStep/experimentChanges; keep the two concepts separate. | [#13](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) |
+| 10 | Family sensory labeling | Unresolved design detail | Keep five strict green targets and preference-aware family goals; no located explicit replacement sensory model. | site/lib/constants.js; preferences/engine partial behavior. | [#8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) |
+| 11 | Time logic after style guidelines | Resolved governing rule; full tier coverage incomplete | Backend five-green definition and ENGINE-HIERARCHY-VERIFICATION-01: style/time cannot veto taste success. | site/lib/engine.js nextAdvice and regression evidence; missing hierarchy remains separate. | [#12](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12) |
+| 12 | Hard input bounds | Governance constrained; full exception policy not explicit | Backend says bounds are sanity guardrails, Basket Dose +/-1 g advisory. Do not canonize every coded numeric hard limit. | site/lib/model.js validation; SQL checks need intended-bound/exception review. | [#8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) |
+| 13 | Non-experiment bad-shot feedback | Implementation exists; complete owner semantics not established | UX approval protects non-intrusive fast loop; no located final resolution for every declined-experiment outcome. | site/cloud/main.js justSavedId feedback path; source existence is not acceptance. | [#13](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) |
+| 14 | Other expanded coffees on current change | Partly Locked; unrelated-card choice not established | Baseline §6 locks prior-current collapse; exact fate of unrelated reference cards was an Open detail. | site/cloud/main.js expanded state and saved-shot path; verify with focused UX fixture. | [#8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) |
+| 15 | Canonical match presentation | Later flow direction approved; real edge acceptance incomplete | COFFEE-URL-FIRST-20261015, NEW-COFFEE-URL-AUTOFILL-20261015, release-evidence safeguard and broad safe preview amendment. | site/cloud/coffee-match-ui.js, main.js and URL acceptance report. | [#5](https://github.com/Schulzet3/The-Dial-In-Collective/issues/5) |
+| 16 | Full screen versus sheet | Implemented responsive dialog; detailed acceptance pending | Baseline permits focused screens/sheets; reviewed app uses dialog. Do not reopen correct workflow merely because old Open entry exists. | site/cloud.html, main.js and responsive styles; real device/a11y checks. | [#26](https://github.com/Schulzet3/The-Dial-In-Collective/issues/26) |
+| 17 | Community note moderation | Deferred outside current V1 private-note publication | Backend explicitly excludes raw notes from projections and private-note publication from V1; public note policy still requires a future decision. | Projection/API source excludes raw notes; do not add public notes as a shortcut. | [#27](https://github.com/Schulzet3/The-Dial-In-Collective/issues/27) |
+| 18 | Additional advanced styles | Deferred beyond current five-style baseline | B006 / backend deferred complexity preserve tabled pressure/flow minutiae; existing five-style Custom support is separate. | site/lib/constants.js; hosted Custom gap is tracked separately. | [#14](https://github.com/Schulzet3/The-Dial-In-Collective/issues/14) |
+| 19 | Hosting/backend/auth provider | Resolved by explicit later stack/domain direction | B001–B004, DOMAIN-20261014-01 and approved hosted workflow specify Supabase/GitHub/Netlify/Drive; budget changes still need approval. | Current config, release evidence and provider inventory; do not ask provider-selection again. | [#27](https://github.com/Schulzet3/The-Dial-In-Collective/issues/27) |
+| 20 | Offline conflict resolution | Version/retention safeguards exist; complete resolution acceptance open | CLOUD-SYNC-ACCOUNT-RACE-20261016 and guarded mutation/outbox behavior preserve owner/epoch and stale-write protections; no approval for silent overwrite/discard. | site/cloud/outbox.js, main.js; actual separate-device resolution tests remain. | [#22](https://github.com/Schulzet3/The-Dial-In-Collective/issues/22) |
+
+## How to use the statuses
+
+- **Resolved principle** means an explicit later rule settles that principle, not that its implementation is complete.
+- **Implemented** is a code observation and never substitutes for approval of an unresolved product policy.
+- **Unresolved/not established** means no decisive later approval was located in the retrieved records. Unavailable prototype sources cannot be filled in from memory or guessed.
+- **Deferred** respects an explicit later V1 boundary; it does not delete the historical idea.
+- If a future owner answer materially changes behavior/data modeling, update both canonical requirements files with its approval and narrow supersession before implementation.
+
+The source audit's 79 Locked/20 Open baseline counts are preserved provenance, not current task counts. [#8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) remains open for the two current choices and any unresolved semantics as they become relevant; completing this mapping alone does not resolve them.

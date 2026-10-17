@@ -1,6 +1,19 @@
 # The Dial In Collective
 ## Comprehensive GitHub Gap Audit and Cross-Session Handoff
 
+## Latest reconciliation and authorized tracking October 17 UTC
+
+**Read [CURRENT_STATUS](CURRENT_STATUS.md) and the [reconciled backlog](AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md) before this original snapshot.** The owner subsequently authorized issue creation: 23 scoped issues #8–#30 now exist alongside updated #5 (24 open at the read-back checkpoint). The original “NOT YET CREATED”, no-issues authorization and one-open-issue statements below refer to the earlier audit date, not today's tracking.
+
+The exact Hambela shot was later permanently purged; [verified results](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md) supersede the hide-only/16-retained-row snapshot for that operation. Fifteen stored/visible shots remain, all 14 legacy shots and community contribution were preserved. Do not repeat that deletion or infer a general purge UI requirement.
+
+All 26 findings have been reconciled against newer GitHub source and classified as implementation gaps, source-level risks, Open choices or acceptance/provider evidence limits. [Twenty original Open topics](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md) are crosswalked without new approvals. G14 is not a reproduced iPhone failure; G22 is not proof provider settings are broken; safe Pending coffee does not itself indicate a failed verifier.
+
+The following audit body is preserved as **historical evidence**, including its original pinned SHAs, issue counts and no-production-test qualification. Its missing-feature findings remain tracked; backlog creation and documentation/comment corrections do not implement them.
+
+## Original audit snapshot retained
+
+
 **Prepared:** October 16, 2026 (America/Denver; some repository commits are dated October 17 UTC)  
 **Project:** The Dial In Collective  
 **Repository:** [Schulzet3/The-Dial-In-Collective](https://github.com/Schulzet3/The-Dial-In-Collective) (private; requires an authorized GitHub connection)  

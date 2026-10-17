@@ -10,6 +10,8 @@ The latest published application is [app.dialincollective.com](https://app.diali
 
 Hosted recovery and its disposable-project cleanup have passed for their documented scope. The genuine member Wuri preview and private Pending save also passed; roast was manually selected. Next product question is the daily URL lookup cap, followed separately by roast taxonomy. See Current Status for exact remaining acceptance limits; do not restart completed setup or recovery tests.
 
+The [reconciled audit backlog](docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md) now links all 26 findings to scoped issues or completed documentation corrections. The [decision crosswalk](docs/DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md) maps original Open topics without silently resolving them. These records track unfinished implementation and acceptance; they do not claim every feature is complete.
+
 ## Development
 
 Node.js 22 or newer:

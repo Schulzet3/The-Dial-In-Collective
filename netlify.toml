@@ -1,6 +1,6 @@
-# Existing private Git-connected Netlify owner preview. Publish tested changes
-# from development/backend-foundation; keep Netlify SSO required.
-# Netlify deployment status must be checked after GitHub CI passes.
+# Existing Git-connected application; approved source is development/backend-foundation.
+# Production uses Supabase Auth/admission/RLS; Netlify team SSO protects nonproduction.
+# Publish only a separately authorized tested release and verify its actual deploy.
 [build]
   command = "npm test && npm run build:cloud"
   publish = "dist"
@@ -10,6 +10,6 @@
   ignore = "node ./scripts/netlify/should-ignore-build.mjs"
 [build.environment]
   NODE_VERSION = "22"
-# Add only SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY to build environment.
-# Exact HTTPS callbacks, email delivery and intended owner admission must be
-# configured and tested before sending a login link. Do not invite beta users yet.
+# Build coordinates are SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY only.
+# HTTPS callbacks, SMTP and the first genuine invited member passed their recorded tests.
+# Keep confirmed email, beta admission, RLS and admin checks; see docs/CURRENT_STATUS.md.
