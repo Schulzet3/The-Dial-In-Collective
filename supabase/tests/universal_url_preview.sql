@@ -52,6 +52,30 @@ begin
  if got->>'reason' is distinct from 'daily_preview_limit' then raise exception 'Daily cap not enforced: %',got; end if;
  execute 'reset role';
 
+ -- PostgREST may set only the JSON claims GUC, not individual legacy role
+ -- or subject settings. Real admitted accounts must not be rejected as 503.
+ update private.dic_url_preview_attempts set attempts=0,
+  last_attempt_at=now()-interval '31 seconds' where owner_id=owner_account;
+ perform set_config('request.jwt.claim.role','',true);
+ perform set_config('request.jwt.claim.sub','',true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('role','authenticated','sub',owner_account)::text,true);
+ execute 'set local role authenticated';
+ if auth.role() is distinct from 'authenticated'
+  or auth.uid() is distinct from owner_account
+  or (public.dic_session_status()->>'admitted') is distinct from 'true'
+ then raise exception 'JSON-claims-only real member context failed'; end if;
+ got:=public.dic_claim_universal_preview();
+ if got->>'allowed' is distinct from 'true'
+ then raise exception 'JSON-only JWT role rejected real member: %',got; end if;
+ got:=public.dic_claim_universal_preview();
+ if got->>'reason' is distinct from 'preview_cooldown'
+ then raise exception 'JSON-only JWT claim could bypass 30-sec throttle';end if;
+ execute 'reset role';
+ perform set_config('request.jwt.claim.role','authenticated',true);
+ perform set_config('request.jwt.claim.sub',owner_account::text,true);
+ perform set_config('request.jwt.claims','',true);
+
  insert into auth.users(id,email,email_confirmed_at) values
  (new_account,new_account::text||'@example.invalid',now());
  if exists(select 1 from private.beta_members where owner_id=new_account and enabled)
@@ -74,5 +98,5 @@ begin
  if (select count(*) from private.dic_url_preview_attempts where owner_id=new_account)<>0
  then raise exception 'Rejected account created quota state';end if;
 end $test$;
-select 'PASS: shared official/universal quota, 30-second member cooldown, admission and daily cap' as result;
+select 'PASS: JSON-only JWT admitted-member authorization, cross-route 30-second cooldown, admission and daily cap' as result;
 rollback;
