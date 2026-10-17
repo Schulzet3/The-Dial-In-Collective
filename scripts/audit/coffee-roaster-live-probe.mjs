@@ -30,6 +30,12 @@ function diagnosticSummary(html){
   snippets[term]=matches.slice(0,2).map(m=>visible.slice(Math.max(0,m.index-85),m.index+270)
    .replace(/\s+/g,' ').slice(0,355));
  }
+ const targetedSnippets={};
+ for(const literal of ['Mullugeta Muntasha','product__title','product-title','product_title','product-json','application/json','\"title\":\"Ethiopia','Colombia Franky Hoyos','Product','meta-title','<title>']){
+  const position=html.toLowerCase().indexOf(literal.toLowerCase());
+  if(position>=0)targetedSnippets[literal]=html.slice(Math.max(0,position-95),position+370)
+   .replace(/\s+/g,' ').slice(0,450);
+ }
  const og=[...html.matchAll(/<meta\b[^>]{0,800}>/gi)]
   .map(m=>m[0]).filter(x=>/og:title|og:type|og:site_name/i.test(x)).slice(0,5)
   .map(x=>x.replace(/\s+/g,' ').slice(0,330));
@@ -46,7 +52,7 @@ function diagnosticSummary(html){
   };
   walk(raw);
  }
- return {headings,og,product_records:productRecords,snippets};
+ return {headings,og,product_records:productRecords,snippets,targetedSnippets};
 }
 const summarize=async ([roaster,url])=>{
  if(!safeCoffeeUrl(url))return {roaster,status:'invalid_target'};
