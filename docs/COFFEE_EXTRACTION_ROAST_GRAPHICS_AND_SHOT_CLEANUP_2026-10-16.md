@@ -1,5 +1,13 @@
 # Roast graphic extraction, Wuri acceptance and single shot cleanup (2026-10-16)
 
+## Latest reconciliation 2026-10-17 UTC
+
+The later owner-authorized **permanent purge** of exact Hambela test shot `799509a3-a16d-4380-a439-8de2a5d880e2` is **COMMITTED and independently verified**. The shot and empty note were deleted; two detailed audit snapshots were cleared while retaining metadata, and two mutation responses were replaced by replay-safe `record_purged` tombstones. Affected last-logged/feed timestamps were corrected. **15 stored / 15 visible shots remain, including all 14 legacy shots**; all other shot/note rows and the community contribution matched their pre-purge fingerprints across 42 protected table scopes. Historical backups were untouched.
+
+See the [exact purge evidence](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md) and [current status](CURRENT_STATUS.md). The original hide-only results and 16-retained-row counts below are historical checkpoints, superseded only for this shot's final storage state. This follow-up changes documentation only; it does not perform another production mutation or authorize further purges.
+
+## Original dated record retained
+
 **Status: WURI MEMBER SAVE PASS (private Pending); EXACTLY ONE HAMBELA SHOT HIDDEN VIA CANONICAL APP MUTATION PASS; ENHANCED EXTRACTION DEVELOPED + CI PASS, NOT YET DEPLOYED.** New daily lookup cap and six-tier roast taxonomy are **proposals, NOT Locked or implemented**. Retain all existing Locked decisions, 30-second account-wide preview cooldown, roster/security boundaries, and existing production release until next owner approval.
 
 ## Owner's actual Wuri acceptance and read-only production facts

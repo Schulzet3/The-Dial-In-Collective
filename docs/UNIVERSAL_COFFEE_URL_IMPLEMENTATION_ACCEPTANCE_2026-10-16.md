@@ -1,5 +1,15 @@
 # Universal coffee URL extraction — production published; real browser acceptance pending (2026-10-16)
 
+## Latest reconciliation 2026-10-17 UTC
+
+The later owner-authorized **permanent purge** of exact Hambela test shot `799509a3-a16d-4380-a439-8de2a5d880e2` is **COMMITTED and independently verified**. The shot and empty note were deleted; two detailed audit snapshots were cleared while retaining metadata, and two mutation responses were replaced by replay-safe `record_purged` tombstones. Affected last-logged/feed timestamps were corrected. **15 stored / 15 visible shots remain, including all 14 legacy shots**; all other shot/note rows and the community contribution matched their pre-purge fingerprints across 42 protected table scopes. Historical backups were untouched.
+
+See the [exact purge evidence](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md) and [current status](CURRENT_STATUS.md). The original hide-only results and 16-retained-row counts below are historical checkpoints, superseded only for this shot's final storage state. This follow-up changes documentation only; it does not perform another production mutation or authorize further purges.
+
+**URL acceptance clarification:** The later owner-observed Wuri preview and private Pending save passed; Light roast was selected manually. Earlier “Wuri retry pending” paragraphs below record the incident chronology, not the latest outcome. The enhanced roast-graphic parser remains development-only/unpublished; global Verified promotion is not claimed.
+
+## Original dated record retained
+
 **LATEST STATUS: PRODUCTION SUPABASE + EDGE + NETLIFY RELEASE VERIFIED PASS; REAL WURI BROWSER ACCEPTANCE PENDING.** This is a reconciliation of the original Locked Master Specification (URL/screenshot primary Add Coffee, any roaster, optional device-only Claude BYOK, canonical first, Pending until source-proven) rather than a new product decision. The owner observed that `https://sweetbloomcoffee.com/products/wuri` could not autofill from either existing account; this becomes the first required real browser regression after a deliberate release. This report does **not** declare the live Wuri endpoint accepted.
 
 ## Canonical reason and user-facing rule

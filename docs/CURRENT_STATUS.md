@@ -19,7 +19,7 @@ The owner-approved GitHub documentation consolidation is complete in this revisi
 - Hambela workspace `last_logged_at` corrected to **NULL** because no shots remain in that context. Setup `last_feed_shot_at` corrected to **2026-10-16T16:50:19.242Z** from the latest remaining eligible shot; Slow Feed stays true. Normal revisions advanced; all other fields and current-coffee pin unchanged.
 - Historical backups, original import/recovery evidence and unrelated records were **not purged**. The only remaining exact-UUID references in application tables are the two payload-free audit metadata rows.
 
-Detailed evidence, dependency preflight, transaction/replay checks and all comparison hashes: [exact purge report](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md). This supersedes the prior **16 retained rows** storage count for this shot; the earlier hide report remains valid historical evidence.
+Detailed evidence, dependency preflight, transaction/replay checks and all comparison hashes: [exact purge report](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md). The original [hide/extraction report](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md) and [URL acceptance history](UNIVERSAL_COFFEE_URL_IMPLEMENTATION_ACCEPTANCE_2026-10-16.md) also carry prominent final-purge reconciliation notes; their earlier bodies remain historical evidence. This supersedes the prior **16 retained rows** storage count for this shot; the earlier hide report remains valid historical evidence.
 
 ## Branches and release coordinates
 
