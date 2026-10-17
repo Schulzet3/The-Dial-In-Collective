@@ -35,3 +35,8 @@ Once safely implemented and deliberately published, the genuine nonadmin accepta
 - If an official URL is not available, choose a legitimate coffee with accurate manual fields for the Pending fallback case. Do not silently treat successful simulated SQL tests or the existence of the UI as a real user pass.
 - No new code deploy, Supabase migration, Auth invite, Cloudflare change, paid subscription or historical import switch is authorized by this test preparation.
 - This checkpoint adds no new Locked product decisions and does not modify the canonical specification/ledger.
+
+
+## Later progress: universal URL development implemented and CI-passed, still NOT live
+
+The original Wuri user report is now captured as a genuine pending acceptance case: `https://sweetbloomcoffee.com/products/wuri` fails to autofill on the existing production site for both owner and nonadmin accounts. A new protected Netlify public HTTPS preview, robust deterministic Product+HTML parser, exact Wuri regression, safe official H1 evidence, automatic blank-field autofill and separate rate quota are committed on the development branch; latest official app/UX and isolated SQL tests **PASS**. The user still must perform the actual live Wuri browser test after owner-approved coordinated migration/Edge/Netlify release; do not call this accepted yet. Preserve the pre-release production baseline of **4 global Verified coffees, 0 Pending, 4 personal library entries, and 16 total shots**. See [universal URL implementation evidence](UNIVERSAL_COFFEE_URL_IMPLEMENTATION_ACCEPTANCE_2026-10-16.md).
