@@ -8,9 +8,19 @@ The owner-approved GitHub documentation consolidation is complete in this revisi
 
 **Latest GitHub reconciliation:** the supplied audit has been reviewed against development source; [all 26 findings are mapped to scoped tracking or completed documentation corrections](AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md). Existing #5 was corrected and 23 new prioritized issues were created. Feature execution remains pending; this checkpoint does not certify all features complete. The [20-topic crosswalk](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md) preserves original decisions.
 
-**Next product action:** ask **one** question about **25 versus 10 URL lookups per rolling 24 hours**. Do not apply either value without the owner's decision. Next, separately resolve the proposed six roast tiers and displayed naming. These questions were already being discussed; neither proposal is Locked. See the [latest extraction/product checkpoint](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md).
+**Latest owner decision (Locked):** the owner chose **12 URL preview quota claims per account per 24-hour budget window** as the starting cap, with future increases only after real member feedback and explicit later approval. The at-least-30-second shared cooldown remains Locked. The 12-limit SQL migration and boundary tests were staged, not applied to production. Source: [dated owner decision](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json), [Master Specification](MASTER_SPECIFICATION.md), [Decision Ledger](DECISION_LEDGER.json). **Next separate product question:** whether to adopt six roast tiers and exact display wording; current five values remain unchanged.
 
 **Completed production exception:** The owner explicitly authorized the exact production purge of hidden nonlegacy Hambela test shot `799509a3-a16d-4380-a439-8de2a5d880e2`, its note/detailed payloads and affected timestamps. **That operation is now committed and independently verified below.** The preceding continuity consolidation was documentation-only. No broader deletion, deployment, migration, provider-setting change or historical-backup purge is authorized.
+
+## Owner-approved 12-per-24-hour URL budget — source staged, not live
+
+**Decision:** Owner approved `COFFEE-URL-DAILY-20261016-02` on October 16 Denver: start at **12 claims per admitted member account in each 24-hour budget window**, using the single shared quota for every roaster URL preview route, regardless of webpage extraction success. If members reach this limit, consider a higher allowance only after actual feedback and explicit owner approval. The account-wide minimum **30-second cooldown** and manual Add Coffee / Log Shot remain unchanged.
+
+**Source staged:** `supabase/migrations/20261017050000_dic_preview_daily_budget_12.sql`, plus updated isolated SQL boundary regressions and Node regression checks, at development source `19e94cd0a70fbde20b6c2e8023d20f3219282572`. The migration safely constrains existing counters above 12 to exhausted=12 without resetting window timestamps. It preserves service-only official claims and member/confirmed-email checks. **All three source CI workflows PASSED:** [app build/tests](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39004597447), [isolated SQL full migration chain](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39004597451), [UX regression](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39004597455). The SQL check uses network-isolated PostgreSQL; it is **not** proof of a production migration.
+
+**Production unchanged:** the live shared preview claim function/table cap remain **60**, last independently read before staging; no production migration, Netlify deploy or source/backup pin change was made. The current counter resets 24 hours from the first allowed claim in the window, rather than a strict trailing-per-event sliding 24 hours. Changing that accounting model is a distinct implementation decision, not part of this numeric adjustment.
+
+**Resume:** [GitHub issue #8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8) tracks one remaining roast taxonomy decision and the pending deliberate 12-limit production rollout. Do not reopen the settled 12-vs-25-vs-10 choice absent new owner feedback.
 
 ## Read-only connected-service audit — October 17, 2026 UTC
 
@@ -20,7 +30,7 @@ After the audit reconciliation, independent read-only GitHub, Supabase, Netlify,
 
 **Security/settings:** Supabase security advisor continues to warn leaked-password protection is disabled; the authenticated `SECURITY DEFINER` preview RPC explicitly checks identity, membership and verified email (intentional exposed authenticated operation); four private RLS/no-policy findings are informational, pending policy review. Performance advisor has six unindexed FK and 14 unused-index INFO findings, not evidence of immediate incident. Netlify production visitor controls and published SHA rechecked unchanged; live credit balance remains unverified. Cloudflare, Resend and Apps Script private settings could not be read from available connected management tools; linked Gmail search found no matching recent backup emails in that connected mailbox, which does **not** invalidate previously tested Apps Script delivery. [Security/provider scope: #27](https://github.com/Schulzet3/The-Dial-In-Collective/issues/27#issuecomment-6229840199).
 
-The **24 tracked open issues**, two explicit product questions and this checkpoint remain the source for resuming. Do not confuse documentation/issue tracking with implemented capabilities. **Next owner question remains one choice at a time: 25 vs 10 URL previews per rolling 24 hours (or retain today's 60)**; then separately the proposed six-tier roast taxonomy. No product decision, backup policy or provider setting changed during this read-only verification.
+This dated read-only audit changed no provider settings. **Subsequent owner approval supersedes its earlier 25/10 question:** the 12-limit policy is now Locked and staged in development as recorded above. One separate roast-taxonomy product decision remains Open. The 24 tracked GitHub issues remain the implementation backlog.
 
 ## Exact Hambela test shot purge verified 2026-10-17 UTC
 
@@ -72,7 +82,7 @@ Initial real signup/invite, nonadmin admin denial/empty workspace, root redirect
 
 The enhanced universal parser handles explicit semantic roast markers, accessible ALT/ARIA/SVG labels, selected states and product metadata. Ambiguous graphics, conflicts, unsupported Ultra Light and mixed-process facts leave a safe review hint/blank rather than inventing canonical values. It fetches no extra images or AI tokens. [Implementation and tests](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md).
 
-Keep the existing five-value roast taxonomy and adjustable **60 per rolling 24 hours** until an explicit owner decision. **At least 30 seconds between any account's known/unknown-roaster URL previews is Locked.** Manual coffee entry and shot logging remain available. Optional Claude BYOK stays device-only and optional; screenshot/OCR extraction is not newly claimed as implemented.
+Keep the existing five-value roast taxonomy while its separate owner question remains Open. The old **60/day budget is still in production until the tested 12-limit SQL migration is applied**. The approved future cap is **12 per account per 24-hour budget window**, with the account-wide >=30-second cooldown Locked. Manual coffee entry and shot logging remain available. Optional Claude BYOK stays device-only and optional; screenshot/OCR extraction is not newly claimed as implemented.
 
 ## Repository gap audit registered (documentation only)
 
@@ -104,7 +114,7 @@ The owner subsequently supplied these source attachments in this chat: `dial-in-
 
 ## Genuine remaining work
 
-1. Resolve daily URL budget, then roast taxonomy **one product question at a time**. Update both canonical requirements files on approval, preserve superseded rationale, implement/test compatibility in development. A later release needs its own applicable authorization; this task must not deploy.
+1. **12/day decision already recorded and tested in development; not yet deployed.** Confirm migration/release authorization and verify production quota when intentionally rolling it out. Ask the separate roast-taxonomy question **one at a time** and update both canonical requirements if approved. Batch any frontend publication under existing release/credit gates.
 2. After an approved future parser release, verify a real Wuri roast preview for the **new extraction scope**, plus genuine unknown-roaster/manual Pending fallback, trusted Verified promotion and release-conflict behavior. Do not fabricate community data or conflate preview with verification.
 3. Real iPhone Safari/PWA/offline reconnection, durable queued writes, account switching, multi-device conflicts, accessibility, experiment/family/current recipe behavior and the agreed recommendation evidence tiers still require distinct acceptance. Existing Node/synthetic Chromium/SQL tests are not substitutes.
 4. Admin is currently **read-only**. Writable conflict review and invite management remain planned. Full contributor-balanced community aggregation, related-release/similarity tiers and exact provenance need verified implementation. Do not infer completion from tables or UI.

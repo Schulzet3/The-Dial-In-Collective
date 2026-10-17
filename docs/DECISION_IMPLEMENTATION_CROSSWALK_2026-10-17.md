@@ -6,10 +6,10 @@
 
 This crosswalk preserves all **20 originally Open topics**. It records the strongest located governing evidence and the remaining implementation/acceptance work. It does not turn code, a suggested priority or a provisional algorithm into a Locked owner decision. Original baseline/addendum objects remain unchanged.
 
-## Current owner choices
+## Current owner decisions
 
-1. **25 or 10 URL previews per rolling 24 hours?** Current tuning remains 60/day; **account-wide >=30 seconds** stays Locked.
-2. Separately decide proposed six roast tiers/naming. Current five canonical values remain.
+1. **RESOLVED, Locked:** 12 URL preview quota claims per member account per 24-hour window, owner approved 2026-10-16 Denver. [Source](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json). Staged in development; production still uses 60/day until approved SQL rollout. **Account-wide >=30 seconds** remains Locked.
+2. **OPEN, separate question:** whether to adopt six roast tiers/naming. Current five canonical values remain.
 
 Other unresolved historic semantics should be discussed **only when the relevant implementation requires them**, one question at a time. Do not restart resolved provider selection, successful account/recovery checks or harmless existing responsive behavior merely because a baseline entry was Open.
 

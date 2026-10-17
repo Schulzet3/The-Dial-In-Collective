@@ -4,6 +4,10 @@
 **Reviewed development head:** `f6f65f6d93b56703e006f8c6b96760646eaf929a`; 191 tree entries / 163 file blobs, complete recursive response.  
 **Scope:** owner authorized correcting GitHub and converting the audit into scoped issues before moving to feature execution. No deployment, production data mutation, migration application, account action, provider change or spending in this reconciliation.
 
+## Subsequent owner decision (after original audit)
+
+Owner approved **12 URL preview claims per account per 24-hour budget window** (decision `COFFEE-URL-DAILY-20261016-02`). The canonical Master Specification and Decision Ledger are updated, and isolated SQL/Node/UX CI passed for the staged migration. Production remains at 60 until an authorized rollout. The earlier “25 vs 10” lines below are **historic pre-decision audit text**. The separate roast-taxonomy question remains Open. [Current Status](CURRENT_STATUS.md) governs next actions.
+
 ## Outcome and accuracy boundary
 
 The supplied audit accurately identifies substantial unfinished product work, but is a **dated source audit** rather than proof every capability is broken. Its snapshot predates the final Hambela purge and the approved issue backlog. It must not be used as a current deployment, account, shot-count or issue-count query.
