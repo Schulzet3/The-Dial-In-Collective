@@ -1,0 +1,1961 @@
+{
+  "product": "The Dial In Collective",
+  "consolidated_at_utc": "2026-10-17T04:08:54.429Z",
+  "purpose": "Canonical complete decision collection and scoped supersession guide. Documentation consolidation only; no new product decision.",
+  "authority": {
+    "baseline_locked_preserved": 79,
+    "baseline_open_preserved": 20,
+    "rules": [
+      "Latest explicit owner decision governs; preserve original text and narrow supersession scope.",
+      "Original status/implementation_status fields are retained verbatim as historical provenance, not claims about current completion.",
+      "CURRENT_STATUS.md governs operational completion only, never product requirements.",
+      "Open baseline questions may have later approved resolutions; do not reopen automatically or infer a resolution from code.",
+      "Source order is not a blanket last-file-wins rule; apply the explicit supersession map by topic."
+    ]
+  },
+  "source_checkpoint": {
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "branch": "development/backend-foundation",
+    "commit": "6f37e6647e8ab90afd1965112e90ef4f82bbef8a"
+  },
+  "baseline": {
+    "source_path": "docs/archive/requirements/The_Dial-In_Collective_Decision_Ledger_v1.0.json",
+    "library_file_id": "libfile_37624da12f148191aae99aefdb03ac23",
+    "version_id": "1",
+    "content": {
+      "project": "The Dial-In Collective",
+      "version": "1.0",
+      "as_of": "2026-09-08",
+      "source_precedence": [
+        "latest explicit product-owner decision",
+        "master specification / decision ledger",
+        "dial-in-collective(2).jsx for unsuperseded behavior",
+        "supplied screenshots for unsuperseded UX/visual behavior",
+        "supplied export backup as migration fixture",
+        "prior research reports once collected in project"
+      ],
+      "locked": [
+        {
+          "status": "locked",
+          "area": "product",
+          "topic": "Core loop",
+          "decision": "Open app -> current coffee ready -> Log a Shot -> rate taste -> get recommendation -> done."
+        },
+        {
+          "status": "locked",
+          "area": "ux",
+          "topic": "Surface complexity",
+          "decision": "Keep routine experience clean; advanced data uses progressive disclosure."
+        },
+        {
+          "status": "locked",
+          "area": "release",
+          "topic": "Initial platform",
+          "decision": "Mobile-first PWA/private beta; no native app required initially."
+        },
+        {
+          "status": "locked",
+          "area": "auth",
+          "topic": "Login",
+          "decision": "Email + password; secure persistent sessions; immutable internal user id."
+        },
+        {
+          "status": "locked",
+          "area": "beta",
+          "topic": "Access",
+          "decision": "Revocable/replacable private signup URL without affecting existing users."
+        },
+        {
+          "status": "locked",
+          "area": "ai",
+          "topic": "Provider",
+          "decision": "Claude only in V1; modular provider layer for future additions."
+        },
+        {
+          "status": "locked",
+          "area": "ai",
+          "topic": "BYOK",
+          "decision": "Claude key is optional and stored on device only; app works without it."
+        },
+        {
+          "status": "locked",
+          "area": "ai",
+          "topic": "Primary purpose",
+          "decision": "Coffee extraction/structuring from roaster URLs/screenshots; no AI required per shot."
+        },
+        {
+          "status": "locked",
+          "area": "coffee_identity",
+          "topic": "Canonical id",
+          "decision": "Use true stable canonical coffee/release IDs, not mutable shared keys."
+        },
+        {
+          "status": "locked",
+          "area": "coffee_identity",
+          "topic": "Related releases",
+          "decision": "Different harvest/lot/release is separate record; related releases linked."
+        },
+        {
+          "status": "locked",
+          "area": "coffee_identity",
+          "topic": "Availability",
+          "decision": "Archive/unavailable status never deletes historical coffee identity."
+        },
+        {
+          "status": "locked",
+          "area": "coffee_data",
+          "topic": "Canonical facts",
+          "decision": "Coffee facts have one validated Collective record; users propose corrections."
+        },
+        {
+          "status": "locked",
+          "area": "coffee_data",
+          "topic": "Source hierarchy",
+          "decision": "Exact official roaster source first; secondary sources only for verified exact coffee."
+        },
+        {
+          "status": "locked",
+          "area": "coffee_data",
+          "topic": "Missing values",
+          "decision": "Leave blank when unverified; do not invent."
+        },
+        {
+          "status": "locked",
+          "area": "coffee_data",
+          "topic": "Verification",
+          "decision": "Strong non-conflicting updates may auto-apply; conflicts go to admin with audit history."
+        },
+        {
+          "status": "locked",
+          "area": "add_coffee",
+          "topic": "Inputs",
+          "decision": "URL and/or screenshots remain primary new-coffee inputs."
+        },
+        {
+          "status": "locked",
+          "area": "add_coffee",
+          "topic": "Dedup",
+          "decision": "Canonical DB checked before AI; exact match adds directly; fuzzy match requires user confirmation."
+        },
+        {
+          "status": "locked",
+          "area": "add_coffee",
+          "topic": "Pending",
+          "decision": "No AI key/new coffee -> Pending Coffee; user may log immediately; private until approval."
+        },
+        {
+          "status": "locked",
+          "area": "images",
+          "topic": "Retention",
+          "decision": "Discard user screenshots after extraction; retain structured data/source and official image where appropriate."
+        },
+        {
+          "status": "locked",
+          "area": "shots",
+          "topic": "Raw source",
+          "decision": "Store every individual shot; aggregates are derived/cache."
+        },
+        {
+          "status": "locked",
+          "area": "shots",
+          "topic": "Community eligibility",
+          "decision": "Only Dialed-In/all-green shots contribute to community and appear as Community Shots."
+        },
+        {
+          "status": "locked",
+          "area": "shots",
+          "topic": "History",
+          "decision": "All shots remain in personal history unless user hides/deletes personally."
+        },
+        {
+          "status": "locked",
+          "area": "shots",
+          "topic": "Dialed persistence",
+          "decision": "Coffee remains Dialed In after later bad/experimental shots."
+        },
+        {
+          "status": "locked",
+          "area": "shots",
+          "topic": "Dialed definition",
+          "decision": "All required sensory markers pure green; style time/ratio ranges do not veto."
+        },
+        {
+          "status": "locked",
+          "area": "sensory",
+          "topic": "Required",
+          "decision": "All five sensory scales must be actively rated; nothing preselected."
+        },
+        {
+          "status": "locked",
+          "area": "sensory",
+          "topic": "Green targets",
+          "decision": "Extraction=3, Body=3, Clarity=5, Sweetness=5, Astringency=1 under current ramp."
+        },
+        {
+          "status": "locked",
+          "area": "community",
+          "topic": "Visibility",
+          "decision": "Show anonymous individual Community Shots plus aggregates; no visible persistent contributor id."
+        },
+        {
+          "status": "locked",
+          "area": "community",
+          "topic": "Durability",
+          "decision": "Legitimate qualifying community contributions persist after personal deletion/account deletion."
+        },
+        {
+          "status": "locked",
+          "area": "community",
+          "topic": "Counts",
+          "decision": "Surface qualifying shot count separately from unique contributor count when useful."
+        },
+        {
+          "status": "locked",
+          "area": "community",
+          "topic": "Weighting",
+          "decision": "Use diminishing contributor weight, capped around ~2 contributor-equivalents; configurable."
+        },
+        {
+          "status": "locked",
+          "area": "community",
+          "topic": "Aggregation",
+          "decision": "Use robust statistics rather than simple raw mean/sum-count only."
+        },
+        {
+          "status": "locked",
+          "area": "community",
+          "topic": "Confidence",
+          "decision": "Subtle Early Data / Moderate Confidence / Strong Confidence via progressive disclosure."
+        },
+        {
+          "status": "locked",
+          "area": "validation",
+          "topic": "Outliers",
+          "decision": "Withhold extreme outlier temporarily, ask user to confirm; accept plausible confirmed unusual shots."
+        },
+        {
+          "status": "locked",
+          "area": "admin",
+          "topic": "Queue",
+          "decision": "Keep admin queue high signal; automate ordinary matches and validation."
+        },
+        {
+          "status": "locked",
+          "area": "equipment",
+          "topic": "Multiple setups",
+          "decision": "One simple default plus optional additional setups; remember last/default."
+        },
+        {
+          "status": "locked",
+          "area": "equipment",
+          "topic": "Historical snapshot",
+          "decision": "Every shot is tied to setup and immutable setup snapshot/version."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Dose",
+          "decision": "Required; prefill last actual for coffee+setup, else setup Usual Dose."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Yield",
+          "decision": "Required; always blank on new shot."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Time",
+          "decision": "Required; always blank on new shot."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Grind",
+          "decision": "Required; prior actual only for coffee+setup+style; otherwise blank actual field."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Suggested grind",
+          "decision": "Show separately; Use Recommendation copies it; preserve recommendation-origin metadata."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Temperature",
+          "decision": "Optional/toggleable; actual prefill from exact style then other-style actual same coffee/setup; otherwise blank."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Suggested temp",
+          "decision": "Show separately; Use Recommendation copies it; no judgment for deviation."
+        },
+        {
+          "status": "locked",
+          "area": "shot_log",
+          "topic": "Recommendation display",
+          "decision": "Keep recommendations visible for confirmation even if user enters another value."
+        },
+        {
+          "status": "locked",
+          "area": "recipe",
+          "topic": "Successful window",
+          "decision": "Repeated successful shots form a range/window plus robust centerpoint rather than one magic number."
+        },
+        {
+          "status": "locked",
+          "area": "recipe",
+          "topic": "Families",
+          "decision": "Materially different successful recipes remain separate families; do not average into one wide range."
+        },
+        {
+          "status": "locked",
+          "area": "recipe",
+          "topic": "Alternates",
+          "decision": "Preserve old successful families; current prominent, alternates collapsed."
+        },
+        {
+          "status": "locked",
+          "area": "recipe",
+          "topic": "Preferences",
+          "decision": "Different families may be recommended to different users based on taste preferences."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Trigger thresholds",
+          "decision": "Initial meaningful change: dose .5g, yield 5g, time 5s, temp 2C/~4F, adaptive grind, any style change."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Any one trigger",
+          "decision": "Any single threshold crossing is enough to offer experiment flow."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Prompt timing",
+          "decision": "Prompt after rating, not while entering shot."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Confirmation",
+          "decision": "Only create Experiment workspace if user confirms."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "UI",
+          "decision": "Use subtle Experiment badge and lightly separated panel; established recipe remains intact."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Continuity",
+          "decision": "Subsequent Log a Shot stays in active experiment until End Experiment or promotion."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Candidate",
+          "decision": "First green materially different shot -> candidate family; second successful repeat -> confirmed alternate."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Make current early",
+          "decision": "User may Make Current Recipe after first successful candidate."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "End",
+          "decision": "Ending failed experiment returns to prior preferred recipe."
+        },
+        {
+          "status": "locked",
+          "area": "experiment",
+          "topic": "Successful not preferred",
+          "decision": "Green experiment remains valid/community-eligible even if user returns to old preferred recipe."
+        },
+        {
+          "status": "locked",
+          "area": "styles",
+          "topic": "No reclassification",
+          "decision": "Remove rigid automatic styleFromNumbers reclassification."
+        },
+        {
+          "status": "locked",
+          "area": "styles",
+          "topic": "Guidelines",
+          "decision": "Style ranges are starting guidelines/reference points, not hard rules."
+        },
+        {
+          "status": "locked",
+          "area": "styles",
+          "topic": "Recommended style",
+          "decision": "Preselect Recommended for you on Add Coffee with short one-line reason; user may change."
+        },
+        {
+          "status": "locked",
+          "area": "styles",
+          "topic": "Set",
+          "decision": "Traditional, Turbo, Ristretto, Lungo, Custom for current V1 baseline."
+        },
+        {
+          "status": "locked",
+          "area": "bags",
+          "topic": "V1 fields",
+          "decision": "Bag Details only optional Roast Date + Frozen; tucked in expanded coffee view."
+        },
+        {
+          "status": "locked",
+          "area": "bags",
+          "topic": "Frozen",
+          "decision": "Frozen pauses age-related logic; batch-frozen bag can remain Frozen while shots are logged."
+        },
+        {
+          "status": "locked",
+          "area": "bags",
+          "topic": "New bag",
+          "decision": "New bag archives prior active by default; carries forward coffee-level recipe/window as starting point."
+        },
+        {
+          "status": "locked",
+          "area": "navigation",
+          "topic": "Focused screens",
+          "decision": "Settings/Add Coffee/Log Shot use focused screens or sheets."
+        },
+        {
+          "status": "locked",
+          "area": "history",
+          "topic": "Inline shot detail",
+          "decision": "Shot detail expands inline; multiple shots can be expanded for comparison."
+        },
+        {
+          "status": "locked",
+          "area": "dial_in_ui",
+          "topic": "Not dialed",
+          "decision": "Show previous shot radar, tasting chips, and recommendations prominently."
+        },
+        {
+          "status": "locked",
+          "area": "dial_in_ui",
+          "topic": "Established experiment",
+          "decision": "Bring back prominent radar/recommendation workspace only for a confirmed experiment."
+        },
+        {
+          "status": "locked",
+          "area": "current_coffee",
+          "topic": "Meaning",
+          "decision": "Viewing does not change current; logging a shot does."
+        },
+        {
+          "status": "locked",
+          "area": "current_coffee",
+          "topic": "App open",
+          "decision": "Current coffee pinned at top, expanded, Log a Shot ready."
+        },
+        {
+          "status": "locked",
+          "area": "current_coffee",
+          "topic": "Switch",
+          "decision": "Logging shot on another coffee makes it current and collapses prior current."
+        },
+        {
+          "status": "locked",
+          "area": "library",
+          "topic": "Sort",
+          "decision": "Recent default + A-Z only; current coffee remains pinned outside search."
+        },
+        {
+          "status": "locked",
+          "area": "library",
+          "topic": "Search",
+          "decision": "Search/sort tucked under caret menu; one search box, no filters."
+        },
+        {
+          "status": "locked",
+          "area": "library",
+          "topic": "Search fields",
+          "decision": "Search name, roaster, origin, producer, roast, elevation, process, variety, tasting notes."
+        },
+        {
+          "status": "locked",
+          "area": "library",
+          "topic": "Search current",
+          "decision": "During search, current coffee is hidden if it does not match; clearing search restores pin."
+        },
+        {
+          "status": "locked",
+          "area": "offline",
+          "topic": "Basic support",
+          "decision": "View saved coffees/log shots offline and auto-sync later; lookup/community/AI online."
+        },
+        {
+          "status": "locked",
+          "area": "migration",
+          "topic": "Priority",
+          "decision": "New architecture first, one-time current-export importer second."
+        },
+        {
+          "status": "locked",
+          "area": "research",
+          "topic": "Evidence discipline",
+          "decision": "Preserve evidence hierarchy, confidence labels, claim audits, and seven research modules."
+        }
+      ],
+      "open": [
+        {
+          "status": "open",
+          "area": "recipe",
+          "topic": "Make Current Recipe semantics",
+          "question": "Exact shot target vs preferred recipe-family/window centerpoint."
+        },
+        {
+          "status": "open",
+          "area": "current_coffee",
+          "topic": "Newly added coffee before first shot",
+          "question": "How Add Coffee focus interacts with existing pinned current coffee."
+        },
+        {
+          "status": "open",
+          "area": "experiment",
+          "topic": "Declined experiment all-green shot",
+          "question": "How a meaningful green shot affects personal family/window if user says No, just log it."
+        },
+        {
+          "status": "open",
+          "area": "experiment",
+          "topic": "Trigger comparison baseline",
+          "question": "Compare thresholds to family center, window edge, last shot, or displayed recommendation."
+        },
+        {
+          "status": "open",
+          "area": "equipment",
+          "topic": "Grinder direction/scale",
+          "question": "Support higher=finer, wraparound/multi-turn, stepped/stepless, real increment."
+        },
+        {
+          "status": "open",
+          "area": "community",
+          "topic": "Edit after contribution",
+          "question": "How corrected edited shot updates durable anonymous contribution without conflating personal deletion."
+        },
+        {
+          "status": "open",
+          "area": "recipe",
+          "topic": "Family scope",
+          "question": "Formal keying by coffee + setup + style/family and preferred recipe per setup."
+        },
+        {
+          "status": "open",
+          "area": "statistics",
+          "topic": "Robust window estimator",
+          "question": "Small-N vs large-N threshold and exact robust estimator."
+        },
+        {
+          "status": "open",
+          "area": "experiment",
+          "topic": "Adaptive grind threshold",
+          "question": "General formula for meaningful change across grinder ranges."
+        },
+        {
+          "status": "open",
+          "area": "preferences",
+          "topic": "Family sensory labeling",
+          "question": "How to empirically distinguish clarity/body-oriented families while all-green structured ratings are strict."
+        },
+        {
+          "status": "open",
+          "area": "engine",
+          "topic": "Time logic after guideline change",
+          "question": "Rework mechanical time correction so green shot is not corrected merely for target miss."
+        },
+        {
+          "status": "open",
+          "area": "validation",
+          "topic": "Hard input bounds",
+          "question": "Which current plausibility bounds hard-block vs warn/confirm."
+        },
+        {
+          "status": "open",
+          "area": "ux",
+          "topic": "Non-experiment bad shot feedback",
+          "question": "What brief post-save feedback appears on an already dialed coffee when user declines experiment."
+        },
+        {
+          "status": "open",
+          "area": "ux",
+          "topic": "Other expanded coffees on current change",
+          "question": "Whether unrelated expanded reference cards remain open."
+        },
+        {
+          "status": "open",
+          "area": "add_coffee",
+          "topic": "Canonical match presentation",
+          "question": "Exact screen choreography for exact/fuzzy matches."
+        },
+        {
+          "status": "open",
+          "area": "ux",
+          "topic": "Full screen vs sheet",
+          "question": "Responsive choice for Settings/Add Coffee/Log Shot."
+        },
+        {
+          "status": "open",
+          "area": "public",
+          "topic": "Community note moderation",
+          "question": "Abuse/PII/reporting before public launch."
+        },
+        {
+          "status": "open",
+          "area": "profiles",
+          "topic": "Additional advanced styles",
+          "question": "Whether research profiles become first-class beyond current five."
+        },
+        {
+          "status": "open",
+          "area": "technical",
+          "topic": "Hosting/backend/auth provider",
+          "question": "Provider stack, budget, domain, operational preferences."
+        },
+        {
+          "status": "open",
+          "area": "sync",
+          "topic": "Offline conflict resolution",
+          "question": "Conflict policy for edits/logs across devices."
+        }
+      ],
+      "change_control": {
+        "ask_questions_one_at_a_time": true,
+        "update_spec_for_material_decisions": true,
+        "preserve_superseded_rationale": true,
+        "do_not_silently_infer_requirement_from_implementation": true
+      },
+      "approved_amendments": [
+        {
+          "id": "OWNER-IMPORT-20261014",
+          "status": "Locked",
+          "date": "2026-10-14",
+          "approved_by": "Owner, explicit chat approval after comparison of full hosted reconstruction first vs owner-only personal-history import first",
+          "supersedes": "Only the sequence of the full hosted recovery prerequisite for the one existing owner-only historical import; no other existing Locked decision is overridden",
+          "decision": "Permit a one-time import of the owner-reviewed local-prototype data into the pre-existing private, authenticated, admitted owner cloud account before proof of a complete hosted Supabase reconstruction. Keep complete hosted-platform recovery mandatory before external beta.",
+          "technical_scope": {
+            "server_enforced_owner_id": "Unique currently admitted account resolved inside private Supabase schema, never encoded in a public frontend or GitHub file",
+            "allowed_number_of_commits": 1,
+            "eligibility": "Owner-only and initially empty workspace, backed by owner download of independent recovery copy",
+            "expiration": "24 hours after grant; immediately close after one successful commit",
+            "recovery_verified_at": "MUST remain NULL until complete hosted recovery is truly verified",
+            "public_access": "No change to Netlify team SSO, member admission, registration, RLS, community visibility, or auth requirements",
+            "source_protection": "No change to original v0.2.0 device data or reviewed backup files",
+            "no_paid_domain_or_services": true
+          },
+          "prior_evidence": [
+            "Owner validated reviewed JSON in hosted app",
+            "Owner confirmed independent import recovery JSON was downloaded",
+            "Approved encrypted DB and source ZIP delivered automatically to private Drive",
+            "Isolated main recovery run 38579702304 passed with 35 first-party tables plus core Auth rows, 37 policies, 91 indexes, 19 app triggers, 29 functions and one signup trigger"
+          ],
+          "limitations": [
+            "No complete hosted Supabase rebuild or nonsecret provider configuration recreation verified",
+            "Offsite encrypted ZIP presence and size checked, not full restoration from that exact ciphertext",
+            "Owner browser/real-device imported data not yet verified"
+          ],
+          "post_import_gates": [
+            "Account-bound counts and mappings, history and current coffee verified",
+            "Idempotence and app Log Shot -> Rate -> Recommendation smoke test",
+            "New encrypted source-inclusive backup automatically transferred to Drive with nonempty personal records",
+            "Isolated restore of nonzero imported rows verified",
+            "Full hosted-service disaster recovery, SMTP, external-auth/privacy and admin acceptance before external beta"
+          ],
+          "does_not_change_existing_locked_decisions": true
+        }
+      ]
+    }
+  },
+  "decision_sources": [
+    {
+      "path": "docs/DECISION_LEDGER_BACKEND_AMENDMENTS.json",
+      "git_blob_sha": "4538d98ac67c0b5807958ec9c341d954b4b9f142",
+      "content": {
+        "product": "The Dial In Collective",
+        "checkpoint": "backend-foundation-1",
+        "scope": "Additive supplement to existing Master Specification, Decision Ledger and prototype amendments; not a replacement or reconstructed full ledger.",
+        "source": "Explicit user approvals in the continuing project conversation.",
+        "decisions": [
+          {
+            "id": "B001",
+            "status": "Locked",
+            "topic": "External beta release scope",
+            "decision": "Build real accounts, cloud syncing and shared community data before hosting the external beta.",
+            "relationship": "Phase transition after the local-first prototype, not a reversal of the approved prototype work."
+          },
+          {
+            "id": "B002",
+            "status": "Locked",
+            "topic": "Development budget",
+            "decision": "Use Supabase Free for development. No paid projects, branches, upgrades or domain purchase without explicit approval."
+          },
+          {
+            "id": "B003",
+            "status": "Locked",
+            "topic": "Automatic backup destination",
+            "decision": "Google Drive is the primary automatic backup destination. Preserve database and application code independently.",
+            "implementation_status": "Folder created previously. Unattended credentials, schedule, encryption, alerts and restore drill are not configured by the foundation migrations.",
+            "proposed_tuning": "Nightly encrypted exports and approximately 30 days retention remain the proposed starting configuration, not a claim of a running backup job."
+          },
+          {
+            "id": "B004",
+            "status": "Locked",
+            "topic": "Repository access",
+            "decision": "Repository is private. Development changes use development/backend-foundation. Never commit credentials or personal database exports, regardless of visibility.",
+            "verified_repository": "Schulzet3/The-Dial-In-Collective"
+          },
+          {
+            "id": "B005",
+            "status": "Locked",
+            "topic": "Preserve working local app",
+            "decision": "Keep the tested prototype look and feel and personal workflow. Backend changes do not silently replace its local data or publish its demo records."
+          },
+          {
+            "id": "B006",
+            "status": "Locked",
+            "topic": "Deferred complexity",
+            "decision": "Pressure/flow profiling minutiae remain deferred. Existing approved advanced-feature and history semantics remain recorded for later, not discarded."
+          },
+          {
+            "id": "B007",
+            "status": "Locked",
+            "topic": "Local Mac delivery queue",
+            "decision": "Retain the requested double-click Mac launcher and Documents-folder updater for the next applicable local distribution.",
+            "implementation_status": "Not implemented by the cloud database foundation."
+          },
+          {
+            "id": "B008",
+            "status": "Locked",
+            "topic": "Account password requirements",
+            "decision": "New passwords must have at least 8 characters, one uppercase letter (A-Z) and one allowed special character. No lowercase or digit requirement. Apply to account creation and password recovery; do not impose new creation rules when signing into an existing account.",
+            "relationship": "Explicitly replaces the previously unapproved 12-character new-password form minimum. Email verification, private user data, and all other locked access decisions remain in force.",
+            "implementation_status": "Owner test frontend changed and unit tests added. Supabase Auth project password length and required character settings must be checked for compatibility before real signup and recovery verification."
+          },
+          {
+            "id": "B009",
+            "status": "Locked",
+            "topic": "Email confirmation visibility",
+            "decision": "After successful registration, show a dedicated, prominent Check your email to confirm your address screen with the submitted address, confirmation guidance, and an explicit return-to-sign-in action; do not rely solely on a transient notice.",
+            "relationship": "Owner-approved signup UX refinement. Email verification and beta invitation requirements remain unchanged.",
+            "implementation_status": "Dedicated view and unit checks committed; hosted deploy and manual email-path verification required."
+          }
+        ],
+        "implementation_constraints": [
+          "Private beta access is denied until membership is established by a trusted server flow; user metadata cannot grant roles.",
+          "Raw notes and account identity are excluded from shared projections.",
+          "All-green status is computed in the database; style timing does not veto it.",
+          "Community projections remain pending until the trusted quality-verification pipeline is implemented. This is staged implementation, not a new user-facing manual-approval requirement.",
+          "Numeric bounds follow the prototype sanity guardrails; Basket Dose +/-1 g is advisory.",
+          "Future API/schema transitions require additional tests. The foundation does not yet implement signup UX, sync, clustering workers, backup scheduling or production restore."
+        ],
+        "test_checkpoint": {
+          "database_permission_and_integrity_checks": 60,
+          "result": "passed",
+          "temporary_fixtures_rolled_back": true,
+          "security_advisor_remaining_findings": 0,
+          "live_browser_auth_and_sync_tested": false
+        }
+      }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+      "git_blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+      "content": {
+        "product": "The Dial In Collective",
+        "date": "2026-10-14",
+        "scope": "Additive Locked decisions. All previous Locked decisions preserved.",
+        "decisions": [
+          {
+            "id": "UX-20261014-01",
+            "status": "Locked",
+            "topic": "Setup rename",
+            "decision": "Every admitted user may rename any of their own setups. Preserve equipment history and shot provenance."
+          },
+          {
+            "id": "UX-20261014-02",
+            "status": "Locked",
+            "topic": "Slow Feed default",
+            "decision": "The last explicitly logged Slow Feed choice persists per setup across cloud sessions. Standard Feed makes the next default off; offline stale uploads cannot undo newer selections; unknown historical feed remains unknown. Preference is recorded on the active setup version."
+          },
+          {
+            "id": "UX-20261014-03",
+            "status": "Locked",
+            "topic": "History actions",
+            "decision": "Edit is the primary left action; Make Current Recipe is a separate right action. Eligible Dialed In shots automatically refine their family window; Make Current explicitly chooses a preferred family/example."
+          },
+          {
+            "id": "UX-20261014-04",
+            "status": "Locked",
+            "topic": "Shot card presentation",
+            "decision": "Use shot-card width and height efficiently to group measurements, setup, basket dose, feed, style, date and badges above sensory detail without crowding."
+          },
+          {
+            "id": "UX-20261014-05",
+            "status": "Locked",
+            "topic": "Recovery options",
+            "decision": "Manual export and import remain available under a collapsed Recovery options section in Settings; cloud sync and automatic offsite backups are the normal behavior.",
+            "amended_by": "VISUAL-20261015-01",
+            "amendment_note": "Owner approved removal of routine Recovery UI on 2026-10-15. Original policy retained as decision history."
+          },
+          {
+            "id": "OPS-20261014-01",
+            "status": "Locked",
+            "topic": "Automatic publishing and multi-system revision consistency",
+            "decision": "After the user-approved development changes pass required tests and safety checks, promptly publish them to the existing SSO-protected owner Netlify site, without a separate per-change approval request. Keep GitHub implementation, applied Supabase migrations, Netlify deployed commit, and specification/decision ledger consistent; verify the published deploy. When publishing is blocked, disclose the blocker and request only the smallest required user action, never claim it is live.",
+            "safeguards": "Preserve all other Locked decisions: SSO access, beta admission, import recovery gate, database RLS and data integrity, private production constraints, and original local prototype. Automated publication is for owner development, not authorization to launch external beta or apply unrelated migrations. A failed deploy never replaces the currently published site.",
+            "operational_release_source": "development/backend-foundation",
+            "acceptance_checks": [
+              "GitHub code and spec/ledger recorded",
+              "Tests and build green",
+              "Required Supabase migrations applied and schema/source matched",
+              "Netlify latest ready/published commit matches GitHub approved head",
+              "Netlify SSO remains required; existing import gate unchanged"
+            ],
+            "implementation_status": "Git-linked Netlify confirmed by owner screenshot, latest deploy still stale at time of request; Netlify branch/build settings remain to be verified.",
+            "amended_by": "OPS-20261014-02",
+            "amendment_note": "The owner changed the release cadence on 2026-10-14: publishing remains automatic after testing but must be deliberately batched to preserve Netlify Free credits, not triggered on every intermediate GitHub commit. All non-cadence safeguards remain Locked."
+          },
+          {
+            "id": "OPS-20261014-02",
+            "status": "Implementing in GitHub. Netlify is presently credit-paused; effectiveness on a live Netlify build remains to be confirmed after a future funded billing cycle.",
+            "topic": "Credit-aware, batched Netlify publishing",
+            "owner_approval_date": "2026-10-14",
+            "decision": "Replace per-intermediate-commit publication with one intentionally consolidated, tested owner-preview production release per finished bundle. Carry out intermediate development, review, Node/mobile regression tests, and Supabase migrations in GitHub/Supabase without routine billable Netlify production publishes. Continue automatic publication after the bundle has passed gates only when a fresh, verified Netlify credit balance is sufficient; verify the published SHA and protections.",
+            "deployment_controls": "A Git-connected production deploy must have explicit 'Release DIC: ... [dic-publish]' commit subject, run the existing test/build command, and pass the fail-closed credit snapshot gate. Non-release pushes are skipped; 0-credit PR/branch previews are permitted. Netlify build hooks can bypass ignore and must not be used for unreviewed releases.",
+            "current_credit_snapshot": "Owner Netlify screenshot 2026-10-14: Free 300 included; 22 production deploys used 330 credits; 0.1 requests; 0.1 bandwidth; 330.2 total, zero remaining. Free production publishing paused. This is not proof of a charge or debt.",
+            "data_accuracy_caveat": "Netlify connector cannot retrieve live billing totals: docs/NETLIFY_CREDIT_LEDGER.json is a point-in-time verified ledger. Refresh from provider before each intended release or billing-cycle reset. Never claim a stale balance is current.",
+            "financial_constraints": "No upgrade, credit purchase, auto-recharge, new provider, or changed visitor access without separate owner approval.",
+            "unchanged_requirements": "Preserve SSO, owner preview/beta gates, RLS, import guard, database restoration obligations, Master Specification and all other Locked decisions."
+          },
+          {
+            "id": "COFFEE-20261014-01",
+            "status": "Locked",
+            "topic": "Automatic verified coffee approval and earliest canonical naming",
+            "owner_approval_date": "2026-10-14",
+            "decision": "Owner-administrator's own new coffees auto-approve atomically after duplicate/conflict checks. Other admitted users' nonconflicting new entries are always saved atomically; trusted official roaster source evidence can auto-verify them. Fuzzy near-matches ask the user before reuse or merging; the earliest entered original coffee name remains the shared canonical display name. Admin review only for genuinely uncertain/irreconcilable conflicts. Preserve library IDs and shots on merges.",
+            "amends": "Prior rule that all new coffee entries must remain Pending until admin review is superseded only where the owning admin explicitly enters a coffee or a new user's coffee passes the trusted official-source automated verification. Unknown/uncertain or source-unverified releases remain usable Pending and not community eligible.",
+            "integrity": "First submitted spelling retained globally; no older canonical changed merely because a later user spelled a roaster/coffee differently. Protect different harvests, source variants, producer/origin conflicts, account isolation and all shot/family relationships. Explicit stable-id confirmation is allowed only for compatible Pending-to-canonical matches.",
+            "operational": "No service subscription required, no AI calls; source workers limited to curated official HTTPS product URLs, JWT authorization, manual redirect rejection, bounded HTML and rate limits. GitHub/Supabase remain source of truth while Netlify credit-paused.",
+            "implementation_status": "Core Supabase auto catalog and source worker target applied; real owner's four coffee submissions approved; Edge function and browser CI integration under test, Netlify intentionally unpublished."
+          },
+          {
+            "id": "DOMAIN-20261014-01",
+            "status": "Locked",
+            "topic": "App hostname and future homepage",
+            "owner_approval_date": "2026-10-14",
+            "decision": "Use https://app.dialincollective.com for the application and admin portal on the existing protected Netlify site. Reserve dialincollective.com for a future homepage; until ready, redirect the apex to the app only after verified TLS, login callbacks, and SSO.",
+            "constraints": "No new site, purchase, extra production deployment, weakening of auth/SSO/beta restrictions, or changes to the independent auth.dialincollective.com email subdomain. DNS, HTTPS and Supabase redirects must be verified separately.",
+            "implementation_status": "Verified 2026-10-15: app.dialincollective.com is the existing Netlify project's primary domain with Let's Encrypt HTTPS; owner opened app and completed real existing-account sign-in; Supabase Site URL and Redirect allowlist updated by owner while preserving netlify.app fallback; Cloudflare apex dialincollective.com redirects to app domain; existing Resend Auth sender and Cloudflare support forwarding were each confirmed via real email receipts. Existing Netlify team SSO remains enabled. Updated cloud UI and outside-user login are still awaiting a single controlled release and real nonadmin acceptance.",
+            "verification_basis": "Owner-confirmed browser/screenshots plus connected Netlify site/deploy state, not a new production deployment."
+          },
+          {
+            "id": "DOCS-20261014-01",
+            "status": "Approved future deliverable",
+            "topic": "User education and walkthrough",
+            "owner_approval_date": "2026-10-14",
+            "decision": "Provide accessible instructions and/or a video walkthrough that covers the functions available in the launched app. Keep it friendly to beginners and emphasize Log Shot -> Rate -> Recommendation.",
+            "remaining_open": "Written versus video format, placement, and timing are not locked. Build against the released feature set so material stays accurate; differentiate member and admin features.",
+            "implementation_status": "Roadmap recorded; no content/video published and no hosting changes."
+          },
+          {
+            "id": "VISUAL-20261015-01",
+            "status": "Locked",
+            "topic": "Coordinated visual refinement, simpler beta Settings and no-publish review",
+            "owner_approval_date": "2026-10-15",
+            "decision": "Vibrant filled badges and clear borders in Light/Dark; consistent controls and dividers; prominent Search & Sort button; cleaner ff ligatures; Title Case for standalone UI labels excluding sentences, units and user content; grouped Settings and Sign Out last; Admin inherits saved appearance. Remove routine Recovery Options UI rather than enabling unrestricted historical imports.",
+            "amends": "UX-20261014-05 visible Recovery UI only; backend import gate and operator recovery unchanged. Earlier request to unlock repeat imports withdrawn.",
+            "preserved": [
+              "Recommendation calculations",
+              "Shot and coffee identity/history",
+              "Private data and server authorization",
+              "Encrypted backups and operator recovery",
+              "Password reset",
+              "Emergency pending-sync download"
+            ],
+            "implementation_status": "Published in the consolidated October 16 owner-approved protected release; see OPS-20261016-CONSOLIDATED-RELEASE. Genuine owner/nonadmin browser acceptance remains outstanding.",
+            "release_hold": "No Netlify deployment until owner approves screenshots and the next consolidated release."
+          },
+          {
+            "id": "OPS-20261016-CONSOLIDATED-RELEASE",
+            "status": "Locked",
+            "topic": "One consolidated protected owner-preview release",
+            "owner_approval_date": "2026-10-16",
+            "decision": "Publish the current consolidated work after tests, then perform real beta-account/integration and complete hosted recovery verification.",
+            "amends": "The earlier VISUAL-20261015-01 and review-11 release holds are superseded only for this coordinated owner-approved release; ordinary branch/preview publication remains blocked.",
+            "preserved": [
+              "Existing Netlify site and development/backend-foundation production branch",
+              "Netlify team SSO",
+              "Credit guard and one deliberate release",
+              "Beta admission and RLS",
+              "Closed import/recovery gate",
+              "Owner data and all other Locked product requirements"
+            ],
+            "implementation_status": "Published 2026-10-16T15:44:45.260Z: Netlify 6ad24660d0c6bdff2c065586, SHA 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8, SSO all. Supabase URL-first migration 20261016154252, preview v1 and verifier v3 active with JWT checks. 198 tests, browser QA, isolated SQL and five live rollback-only suites passed. Existing data fingerprints unchanged."
+          },
+          {
+            "id": "ACCESS-20261016-PRODUCTION-SSO",
+            "status": "Locked",
+            "topic": "Production visitor access after real invitation test",
+            "owner_approval_date": "2026-10-16",
+            "decision": "Remove the additional Netlify team SSO login for production app.dialincollective.com, preserving Supabase email-password sign-in, email verification, beta invitation/admission, RLS account isolation, and nonadmin/admin role checks. Netlify SSO stays enabled for non-production deployments.",
+            "amends": "Earlier all-deploy team SSO access decision only; does not supersede beta admission, RLS, administrator protection, historical import lock, or recovery checks.",
+            "implementation_status": "Applied in Netlify visitor controls on 2026-10-16: requiresSSOTeamLogin=true and whichProjectsRequireSSOTeamLogin=non_production. No new Netlify deploy. Real nonadmin signup and invite success confirmed by owner; full negative cross-account browser tests remain outstanding."
+          }
+        ],
+        "unchanged_release_gates": [
+          "verified offsite restore before real historical import",
+          "private beta access/Netlify SSO",
+          "canonical coffee/admin/community verification"
+        ],
+        "implementation_status": "October 16 consolidated owner preview is published and service versions verified. Real external-account acceptance and full hosted recovery remain incomplete; SSO and import lock remain."
+      }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_BADGE_COLORS_AMENDMENT.json",
+      "git_blob_sha": "5f59911af0203b94d8868990f98ffcce01006f0b",
+      "content": {
+        "product": "The Dial In Collective",
+        "authority": "Owner-approved amendment supplement to the canonical Decision Ledger; preserve unrelated Locked decisions.",
+        "decisions": [
+          {
+            "id": "VISUAL-BADGES-LEGACY-DARK-01",
+            "status": "Locked",
+            "amends": "VISUAL-20261015-01 badge/taste palette only",
+            "approval": "Owner requests all badge colors in both modes match the old app dark mode, using the project JSX rather than visual approximations.",
+            "decision": "Use exact dark-mode fill and lettering colors from dial-in-collective.jsx for Dialed In and all five shot styles in both themes. Keep the newer defined borders, layout and typography. Apply the original dark taste ramp consistently.",
+            "source_manifest": "docs/BADGE_PALETTE_SOURCE.json",
+            "new_status_mapping": "Pending/Conflict/Pending Sync use original dark gold; there is no direct JSX badge counterpart. Borders are the retained review treatment, not copied legacy borders.",
+            "specification": "docs/MASTER_SPECIFICATION_BADGE_COLORS_ADDENDUM.md",
+            "implementation_status": "Staged on the isolated visual-review branch; screenshot approval and full review remain pending.",
+            "release_hold": "No Netlify deployment until owner approves the next consolidated release; no changes to live access controls, data or account permissions."
+          }
+        ]
+      }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_BADGE_LETTERING_AMENDMENT.json",
+      "git_blob_sha": "938526f04f2432bedcc9b489d8d5bae93892903f",
+      "content": {
+        "product": "The Dial In Collective",
+        "authority": "Owner-approved supplement to the canonical Decision Ledger",
+        "decisions": [
+          {
+            "id": "VISUAL-BADGES-THEME-TEXT-02",
+            "status": "Locked",
+            "amends": "VISUAL-BADGES-LEGACY-DARK-01 original lettering only",
+            "decision": "Use black (#000000) badge text in Light and white (#FFFFFF) in Dark for all shot-style, Dialed In, pending and admin badges. Preserve exact original JSX dark badge fills in both themes and existing defined borders.",
+            "accessibility_note": "Raw text/fill pairs sometimes fall short of 4.5:1. Previously proposed halos are superseded by VISUAL-BADGES-CLEAN-03, in favor of crisp lettering with no text effects. No independent WCAG audit is claimed.",
+            "preserved": [
+              "Original JSX badge fills",
+              "Sensory taste chip colors and behavior",
+              "Recommendation calculations and all backend/data/security decisions"
+            ],
+            "release_hold": "Screenshots and owner approval required before Netlify release."
+          },
+          {
+            "id": "VISUAL-BADGES-CLEAN-03",
+            "status": "Locked",
+            "amends": "VISUAL-BADGES-THEME-TEXT-02 text halo treatment only",
+            "decision": "Remove all badge lettering shadows, halos, strokes, and background overlays in both Light and Dark. Retain plain black text in Light, plain white text in Dark, original JSX dark badge fills in both modes, and distinct solid badge borders.",
+            "preserves": [
+              "Original palette",
+              "Theme-specific text colors",
+              "No impact on app data, engine, account privacy, or other Locked decisions"
+            ],
+            "accessibility_note": "Some badge text/solid fill combinations have insufficient raw WCAG contrast. Do not imply compliance; investigate legibility alternatives with the owner if needed.",
+            "release_hold": "Private visual review only; no Netlify publishing without owner approval."
+          },
+          {
+            "id": "VISUAL-NO-TEXT-SHADOWS-04",
+            "status": "Locked",
+            "amends": "VISUAL-BADGES-CLEAN-03 scope expanded from badge lettering to all app text",
+            "decision": "Prohibit text shadows, text halos, strokes and text glow throughout the entire app in Light and Dark, including Admin, authentication, rating controls, and any future UI. Remove decorative card and dialog shadows in favor of solid borders and spacing while keeping focus outlines.",
+            "preserves": [
+              "Original dark JSX badge fills",
+              "White badge lettering in Dark and black in Light",
+              "Accessibility caveat for raw text contrast",
+              "All existing business logic, permissions and backend Locked decisions"
+            ],
+            "implementation_status": "Staged on work/visual-refresh-20261015 for repeatable synthetic screenshot review.",
+            "release_hold": "Do not deploy to Netlify or remove SSO until owner authorizes release."
+          },
+          {
+            "id": "VISUAL-BADGES-ORIGINAL-BLACK-05",
+            "status": "Locked",
+            "amends": "VISUAL-BADGES-THEME-TEXT-02 color choice and VISUAL-BADGES-CLEAN-03 badge outline treatment only",
+            "decision": "Use original dark-JSX badge fills in both modes, uniform black (#000000) text in both modes, and flat borderless pill shapes closer to the original app. Maintain no text shadows, haloes or glyph effects. Non-badge cards, fields and sections retain the approved clear borders.",
+            "preserves": [
+              "Original dark JSX background colors",
+              "Global no-text-shadow decision",
+              "Engine/data/security unchanged"
+            ],
+            "accessibility_note": "Deep blue fill with black letters can fall below WCAG AA contrast; separate owner-led refinement may be required.",
+            "implementation_status": "Staged for synthetic screenshot review; not published."
+          },
+          {
+            "id": "UX-NEW-COFFEE-SINGLE-SECTION-01",
+            "status": "Locked",
+            "amends": "New Coffee form grouping visual only",
+            "decision": "Remove Optional Coffee Details heading, disclosure and divider. Keep all existing New Coffee inputs in one continuous form and retain existing two-column six-field grid plus full-width Tasting Notes.",
+            "preserves": [
+              "All optional and required inputs",
+              "All validation and submission logic",
+              "Responsive paired-field layout"
+            ],
+            "release_hold": "Review screenshots only; no Netlify publishing."
+          },
+          {
+            "id": "VISUAL-BADGES-ORIGINAL-REFERENCE-06",
+            "status": "Locked",
+            "amends": "VISUAL-BADGES-ORIGINAL-BLACK-05 ink on Traditional/Ristretto only",
+            "decision": "Use the exact original dark-JSX flat badge palette in Light and Dark. Use crisp white ink for Ristretto and Traditional; crisp black ink for Turbo, Custom, Lungo, Dialed In and mapped gold statuses. Do not add badge or text shadows, glyph effects or borders.",
+            "source": "Original project dial-in-collective.jsx STYLE_BADGE mapping and owner-approved side-by-side HTML."
+          },
+          {
+            "id": "UX-HISTORY-ORIGINAL-REFERENCE-02",
+            "status": "Locked",
+            "decision": "Restore original JSX Shot History density: single-line shot summary on wider viewports, numeric US M/D/YYYY date at right, style/status badges, collapsed notes and visible Edit link. Responsive phone layout may put date on next line. Setup/basket/feed only at bottom when expanded; add per-coffee contextual Expand All / Collapse All. Preserve historic measurements, context and Make Current Recipe separation.",
+            "source": "Owner-supplied old-app screenshots and JSX."
+          },
+          {
+            "id": "UX-RECIPE-EXPLANATION-01",
+            "status": "Locked",
+            "decision": "Remove redundant reason 'Based on your successful shots in this recipe family.' from successful windows; only retain meaningful explanatory copy and specific measured advice."
+          },
+          {
+            "id": "ENGINE-HIERARCHY-VERIFICATION-01",
+            "status": "Locked",
+            "decision": "Keep Section 25.2 eight-tier recommendation evidence hierarchy, with personal successful exact coffee/setup/style first and own grinder calibration prioritized for grind. Do not silently claim unimplemented community/similarity evidence sources. Specific next-shot targets should be evidence-based and never fabricated; distinguish a generic roast/style starting baseline from proven exact-coffee personal history.",
+            "implementation_status": "UI reconciliation in progress; full evidence-tier audit/integration remains an explicit work item, not complete.",
+            "release_hold": "All work private branch; no Netlify release without owner approval."
+          },
+          {
+            "id": "ENGINE-PERSONAL-SIMILAR-02",
+            "status": "Locked",
+            "amends": "Implements existing Master Specification Section 25.2 tier 5; not a change to tier ordering",
+            "decision": "For unproven coffee ratio/time, lightly blend personal successful same-setup/style/feed and same-roast similar-coffee evidence, favoring shared process/origin/variety and basket. Keep exact successful personal history above this tier. Attribute real counts/provenance; never invent community participation or silently transfer unknown feed.",
+            "release_hold": "Private review branch, no Netlify release.",
+            "remaining_work": "Exact coffee community, related releases, similar community and robust contributor-balanced aggregation remain unimplemented and must not be represented as production-ready."
+          },
+          {
+            "id": "UX-HISTORY-CONTROLS-04",
+            "status": "Locked",
+            "amends": "UX-HISTORY-ORIGINAL-REFERENCE-02 Edit placement and mobile date, without changing historic data",
+            "decision": "Capitalize Grind in shot summary; align mobile date left; show small (34px) orange Edit and outlined Make Current Recipe buttons side by side at the bottom only when history detail is expanded. Keep Notes, setup, basket dose and feed intact.",
+            "release_hold": "Only private preview branch until owner approves Netlify publication."
+          },
+          {
+            "id": "VISUAL-TASTE-RADAR-04",
+            "status": "Locked",
+            "decision": "Taste chip font weight matches ordinary badges (500); radar axis labels are slightly heavier (600), with no shadows or glow; preserve all existing badge colors."
+          },
+          {
+            "id": "ENGINE-UNPROVEN-GRIND-RANGE-04",
+            "status": "Locked",
+            "decision": "Show unproven Grind recommendations as narrow calibrated search intervals (plus a Try center), not absolute settings. One grinder-step half-width for personal evidence and two-step half-width for heuristic-only starting guidance, bounded by grinder calibration. Keep proven and explicit next-shot grind settings as single values.",
+            "limitation": "Starting band is a heuristic adjustment interval, not measured confidence or a proven successful range.",
+            "preserves": [
+              "Eight-tier evidence hierarchy",
+              "Log Shot measured grind input and user choice",
+              "Proven Dialed In recipe windows"
+            ]
+          },
+          {
+            "id": "ENGINE-TASTE-RECOMMENDATION-SYNC-05",
+            "status": "Implementation correction",
+            "decision": "After a newly rated shot, compute nextAdvice if no cached suggestion is present, so the recipe grid and latest feedback show a consistent specific next-shot grind rather than an initial uncertainty band.",
+            "not_a_policy_change": true,
+            "release_hold": "Private review branch only"
+          },
+          {
+            "id": "COFFEE-URL-FIRST-20261015",
+            "status": "Locked",
+            "amends": "Extends existing official-source precedence without changing canonical Coffee UUID rules",
+            "decision": "Give checked official roaster product URL first rank for lookup. If absent or ambiguous, use roaster and bag name plus release facts. Do not merge automatically when URLs are reused, names differ, or release details conflict. Keep separate canonical UUID per distinct harvest/lot.",
+            "release_hold": "SQL migration staged only, live Supabase untouched."
+          },
+          {
+            "id": "NEW-COFFEE-URL-AUTOFILL-20261015",
+            "status": "Locked",
+            "decision": "Optional URL first in New Coffee, with Autofill From URL button, read-only official product metadata preview and Apply Suggested Details confirmation that fills only blank fields. Unknown hosts/manual entry stay supported, no automatic overwrite or invented facts. Keep two-column details, required Name/Roaster at submit, Pending Coffee, and optional device-only Claude AI policy.",
+            "release_hold": "New Edge function not deployed; synthetic previews for owner review."
+          },
+          {
+            "id": "UI-CONSISTENCY-GUARD-20261015",
+            "status": "Locked",
+            "decision": "Consolidate shared controls with CSS variables, remove superseded selectors, Title Case standalone labels with a regression check, preserve sensory inputs/recommendations, original badge palette and no text shadows. Retain Basket-based Dose and Recommendation Temperature captions for owner review.",
+            "release_hold": "No Netlify publication until owner approval."
+          },
+          {
+            "id": "COFFEE-URL-RELEASE-EVIDENCE-20261015",
+            "status": "Locked",
+            "amends": "Safe URL-first matching implementation only, not the owner's URL-first priority",
+            "decision": "Do not automatically reuse a canonical coffee based on an official product URL when harvest/release labels are unknown, even if both records omit them. Require explicit release equality and compatible roaster, bag title, origin and process; otherwise URL match is a high-priority user-confirmation candidate.",
+            "reason": "Roasters can reuse product URLs for distinct harvests; protect canonical Coffee IDs and historical shots."
+          },
+          {
+            "id": "CLOUD-SYNC-ACCOUNT-RACE-20261016",
+            "status": "Implementation hardening",
+            "decision": "Separate sync tasks by account and identity epoch: wait out overlaps with a previous account, then start fresh for the current account; still coalesce duplicate same-account attempts and keep owner-bound IndexedDB/outbox protections.",
+            "not_a_product_policy_change": true
+          },
+          {
+            "id": "VISUAL-TEMP-CAPTION-20261016",
+            "status": "Locked",
+            "amends": "UI-CONSISTENCY-GUARD-20261015 caption decision only",
+            "decision": "Retain Basket-based beneath Dose with its exact capitalization; remove the Recommendation subtitle beneath Temperature; do not remove temperature targets or meaningful recommendations."
+          },
+          {
+            "id": "OPS-PREVIEW-RELEASE-HOLD-20261016",
+            "status": "Implementation hardening",
+            "decision": "Fail closed for Netlify deploy-preview and branch-deploy build contexts during owner-wide no-publish hold, retaining existing production release marker and credit gate.",
+            "not_a_product_policy_change": true
+          }
+        ]
+      }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_2026_10_16_URL_PREVIEW.json",
+      "git_blob_sha": "c06eefa3a6614825d1a5ad8befc00911578e797f",
+      "content": {
+        "product": "The Dial In Collective",
+        "date": "2026-10-16",
+        "scope": "Additive Locked product decision from owner: all coffee URL preview paths; retain all original Master Specification and Decision Ledger decisions.",
+        "decisions": [
+          {
+            "id": "COFFEE-URL-20261016-01",
+            "status": "Locked",
+            "area": "add_coffee",
+            "topic": "URL preview per-user cooldown",
+            "decision": "Enforce at least 30 seconds between all roaster URL preview/metadata lookup requests from the same admitted member account, whether the roaster is already trusted or previously unknown. The quota must be account-wide across preview paths, not separately bypassable by known/unknown domain fallbacks. A member can still manually add a coffee and log shots during cooldown."
+          }
+        ],
+        "implementation_notes": "60 lookups per rolling 24-hour window is a reversible anti-abuse engineering default, NOT a Locked product requirement. User explicitly authorized publishing this release without asking for another Netlify credit verification; do not fictionalize billing evidence or change canonical cost-control policies. URL/screenshot first, optional device-local Claude BYOK, community Verified provenance and Pending personal use remain unchanged."
+      }
+    }
+  ],
+  "implementation_and_recovery_sources": [
+    {
+      "path": "docs/DECISION_LEDGER_CLOUD_IMPLEMENTATION_STATUS.json",
+      "git_blob_sha": "1e67ac6ca073a27ff13468de36575bd5ae7e4bef",
+      "classification": "Historical implementation evidence; retain any expressly approved implementation constraints, but do not promote tuning/status into Locked product decisions.",
+      "content": {
+        "project": "The Dial In Collective",
+        "checkpoint": "cloud-owner-development-1",
+        "branch": "development/backend-foundation",
+        "authority": "Master Specification, Decision Ledger, backend addendum and accepted subsequent user amendments remain authoritative.",
+        "purpose": "Implementation status only; no new or silently superseded product decisions.",
+        "approved_direction": {
+          "development_plan": "Supabase Free",
+          "external_beta_requires": [
+            "real accounts",
+            "cloud synchronization",
+            "shared community data",
+            "verified recovery and privacy safeguards"
+          ],
+          "backup_destination": "Google Drive",
+          "current_local_prototype": "Preserve v0.2.0 and the user's existing browser data unchanged",
+          "visual_reference": "Existing JSX/screenshots and accepted prototype UI",
+          "pressure_and_flow_profile_minutiae": "Deferred"
+        },
+        "implementation": [
+          {
+            "area": "Account and invitation APIs",
+            "status": "Implemented and database-role tested",
+            "remaining": "Real email delivery, signup/login/recovery/session verification and intended owner provisioning"
+          },
+          {
+            "area": "Core relational writes and reads",
+            "status": "Implemented for owner development",
+            "controls": [
+              "owner binding",
+              "stable mutation IDs",
+              "duplicate replay protection",
+              "atomic writes",
+              "expected revision conflicts",
+              "private notes",
+              "immutable equipment provenance"
+            ]
+          },
+          {
+            "area": "Cloud interface",
+            "status": "Source committed; mocked mobile workflows tested",
+            "remaining": "Network-enabled dependency build, HTTPS deployment and actual browser verification"
+          },
+          {
+            "area": "Offline changes",
+            "status": "Queue/cache code implemented; adapter tests passed",
+            "remaining": "Native IndexedDB, real account switching, offline cold start, multi-device tests and conflict-resolution UI"
+          },
+          {
+            "area": "Community and admin",
+            "status": "Database foundation only; not operational in owner screen",
+            "remaining": "Canonical verification, quality/outlier handling, contributor-balanced summaries and complete admin workflow"
+          },
+          {
+            "area": "Google Drive backups",
+            "status": "Destination folder exists; automation not configured",
+            "remaining": "Unattended authorization, encryption, scheduling, coverage, alerts, retention and actual restore drill"
+          },
+          {
+            "area": "Prototype feature parity",
+            "status": "Incomplete cloud binding; requirements retained",
+            "remaining": [
+              "experiments",
+              "bag and basket management",
+              "hardware version and recalibration actions",
+              "Custom targets",
+              "full coffee edits",
+              "AI extraction",
+              "production import/recovery"
+            ]
+          }
+        ],
+        "verification": {
+          "combined_local_node_tests_passed": 89,
+          "committed_cloud_node_tests_passed": 32,
+          "mocked_chromium_ui_checks_passed": 19,
+          "current_database_role_checks_passed": 36,
+          "database_check_breakdown": {
+            "workspace_and_core": 31,
+            "originating_account_binding": 5
+          },
+          "security_advisor_findings": 0,
+          "application_tables_without_rls": 0,
+          "real_auth_users_or_shots_migrated": 0,
+          "test_data_rolled_back": true,
+          "applied_migrations_committed_and_hash_matched": 11,
+          "earlier_60_check_foundation_suite": "Historical; direct-write expectations need updating for the controlled mutation API"
+        },
+        "release_gates": {
+          "hosted_url_exists": false,
+          "owner_login_verified": false,
+          "official_sdk_install_and_bundle_verified": false,
+          "native_device_sync_verified": false,
+          "backup_restore_verified": false,
+          "full_beta_feature_parity": false,
+          "external_beta_ready": false
+        },
+        "release_validation_2026_10_13": {
+          "authority": "Implementation checkpoint only; preserves canonical Master Specification and Locked Decision Ledger",
+          "github_development_ci_run_id": 38495991205,
+          "github_development_ci_result": "PASS: 65/65 Node tests, Node 22 build:cloud, private source omission; placeholder-only public build config",
+          "ci_workflow": ".github/workflows/cloud-beta-ci.yml",
+          "no_lockfile": "RESOLVED: committed package-lock.json and changed CI to npm ci; exact dependency graph including @supabase/supabase-js 2.117.3.",
+          "external_smtp": "BLOCKED: default Supabase email restricted to team accounts; require owner-approved sender domain/provider setup and live outside-account verification",
+          "real_user_and_admin_testing": "Not yet passed; no full external-user/browser/admin/community end-to-end validation",
+          "no_locked_decisions_changed": true,
+          "reproducible_install_ci_run_id": 38496342756,
+          "reproducible_install_result": "PASS: npm ci, all 65 Node tests, build:cloud, no private source paths in dist",
+          "locked_decisions_changed": []
+        },
+        "admin_foundation_2026_10_14": {
+          "scope": "Read-only server-authorized admin dashboard; no approvals, invites, publication, or new admins.",
+          "status": "Read-only Supabase admin RPC applied and tested; private admin interface code merged to development, not Netlify-published.",
+          "intended_hosted_view": "/admin.html (not deployed while Netlify credits exhausted)",
+          "current_admin_assignments": "Exactly one existing owner administrator assigned on 2026-10-14, after explicit owner authorization and strict sole-member/imported-data verification.",
+          "preserved_product_rule": "Verified, nonconflicting coffees and ordinary user-resolvable fuzzy matches do not need admin approval. Real duplicate/identity conflicts and new coffees lacking automated/source verification remain reviewable Pending. Personal shots may be logged while Pending, not published to community.",
+          "live_data_not_modified": false,
+          "locked_decisions_changed": [],
+          "data_change_scope": "Only insert of the existing verified owner's user ID into private.app_admins; no changes to Auth credentials, coffee/shot data, beta admissions, RLS, or import gate.",
+          "authentication_test": "PASS: simulated authenticated owner session has admin=true and reads four whitelisted pending submission summaries. Non-admin/anon access denied in rollback-only test.",
+          "netlify_state": "No build/publish; admin page unavailable until later deliberately batched deployment."
+        },
+        "coffee_identity_alias_2026_10_14": {
+          "requirement_basis": "Canonical Master Specification sections 8.3, 9.1–9.4, 10.4, 11 and 32. No new policy choice silently created.",
+          "status": "Supabase migration 20261014215731 dic_roaster_identity_matching applied and rollback-only SQL safety test passed; Add Coffee UI feature tested on GitHub PR. Netlify deployment intentionally withheld.",
+          "requirements": [
+            "Five Sweet Bloom example spellings map to one brand identity, without proving any individual product.",
+            "Only unique exact verified canonical coffee/releases with authoritative source evidence may be reused without manual approval.",
+            "Near duplicates/ambiguous release identity require user confirmation; preserve separate Pending entry on user choice.",
+            "New unverified coffee remains privately loggable; never published as community evidence.",
+            "No new Netlify production deployment while out of credits."
+          ],
+          "verified_catalog_at_checkpoint": 0,
+          "pending_submissions_at_checkpoint": 4,
+          "remaining": "Build the source-backed scalable coffee verification process; monitor observed false-positive/false-negative matches in real data before claiming automatic coverage.",
+          "locked_decisions_changed": [],
+          "backend_evidence": "Role-gated matching RPC: source-backed candidate lookup, five Sweet Bloom aliases, source tracking URL invariance, unique release selection, mismatched/unknown release confirmation. Anonymous and unadmitted users denied; no actual coffee or shot rows changed.",
+          "source_version": "supabase/migrations/20261014215731_dic_roaster_identity_matching.sql",
+          "remains_unverified": "No live catalog coffees are verified yet. Brand normalization cannot by itself establish verification of a particular product/harvest."
+        },
+        "coffee_verification_2026_10_14": {
+          "authority": "Explicitly approved owner Locked coffee verification rule; independent current Supabase checks",
+          "status": "Supabase canonical catalog, admin/user mutation paths, compatibility RPC, rate-limited service-only source functions applied. Supabase Edge verifier v2 ACTIVE with JWT verification required. All four owner coffees approved and 14 shots preserved. GitHub PR CI green. Not yet Netlify-published or tested with real external user HTTP page fetch.",
+          "verified_catalog_count": 4,
+          "original_library_entries": 4,
+          "preserved_owner_shots": 14,
+          "approved_owner_submissions": 4,
+          "checked_official_products": [
+            "Sweet Bloom Hambela",
+            "Proud Mary Bavyeyi IV",
+            "Orinoco Yirgacheffe"
+          ],
+          "unconfirmed_official_product": "Queen City David Armijos original direct page unreachable; admin authority is the actual verification source.",
+          "dedup_policy": "Similar roaster and product names are candidates, not proof. Earliest submitted name wins globally after a safe user confirmation; IDs remain intact.",
+          "release_gate": "No Netlify production publish while credit screenshot says zero remaining.",
+          "needed": "Edge deployment test and external JWT/HTML verification proof; verified offsite backup of post-import and post-promotion database; more curated roaster sources.",
+          "unchanged_gates": [
+            "SSO",
+            "RLS",
+            "import saving disabled",
+            "private account data",
+            "external beta blocked"
+          ],
+          "source_edge": {
+            "name": "dic-verify-coffee",
+            "version": 2,
+            "verify_jwt": true,
+            "status": "ACTIVE",
+            "deployed_file": "supabase/functions/dic-verify-coffee/index.ts",
+            "validation": "GitHub 106 Node tests, including deterministic Product/SSRF cases; 29 synthetic phone UI checks. Real external registered-user source fetch/approval not independently exercised."
+          },
+          "migrations_applied": [
+            "20261014221324_dic_coffee_auto_catalog",
+            "20261014222202_dic_source_worker_target",
+            "20261014222802_dic_unified_coffee_rpc_compat"
+          ],
+          "migration_sync": "All three applied Supabase SQL texts byte-for-byte match GitHub source.",
+          "pending_issues": [
+            "Post-import encrypted offsite ZIP delivered, hash-matched, owner-reported decrypted/integrity PASS 6/6; separate fresh-source isolated restore passed; full hosted provider recovery remains outstanding.",
+            "Source verifier needs actual real-user/JWT/roaster page validation after owner UI release",
+            "Verified-to-verified canonical conflicts require separate audited reconciliation without touching shot IDs"
+          ]
+        },
+        "backup_private_key_verification_2026_10_14": {
+          "status": "Completed for owner-development recovery milestone; owner-reported local verifier PASS 6/6 on latest extracted backup.age.",
+          "artifact": "dic-nightly-11934399256.zip, encrypted backup.age",
+          "delivery": "Private Google Drive and original GitHub ZIP independently checksum-matched (SHA-256 4cd62b5ee672712e2b12fb0aebc690acfb74b6a9124c6cdd7fea1131adb4c121).",
+          "decryption": "User explicitly reported all six checks passing using their previously saved private key and the corrected Mac verifier. No decrypted content, terminal output or private key received.",
+          "isolated_restore": "Separate live-source isolated PostgreSQL run 38651515568 passed all 41 application/private tables and core Auth fingerprints, including 4 verified coffees and 14 historical shots.",
+          "limitations": "Not a direct restore of the exact Drive ciphertext into hosted Supabase; hosted Auth/SMTP/OAuth/configuration and genuine non-admin-user browser workflow are outstanding.",
+          "impact": "No change to Locked product requirements; no Netlify publishing, billing, key transfer or import gate changes."
+        },
+        "real_account_preflight_2026_10_14": {
+          "state": "Database authorization/practical privacy preflight PASS; real external HTTP Auth/email/session and source-verification E2E still outstanding.",
+          "checked_against_live_catalog": {
+            "verified_canonical_coffees": 4,
+            "owner_historical_shots": 14,
+            "original_owner_library_entries": 4,
+            "admitted_real_accounts": 1
+          },
+          "validated_sql": [
+            "supabase/tests/coffee_automated_approval.sql — passed against populated catalog in rollback-only transaction",
+            "supabase/tests/coffee_identity_matching.sql — passed against populated catalog in rollback-only transaction",
+            "supabase/tests/admin_read_only_dashboard.sql — corrected for existing actual owner admin, passed distinct role isolation and sanitized view in rollback",
+            "supabase/tests/pre_release_cross_account.sql — passed cross-account RLS, global catalog visibility and protected verifier role isolation in rollback"
+          ],
+          "automated_build_change": "Reproducible cloud-regression CI now uses npm ci (checked-in dependency lockfile) and explicit ubuntu-24.04.",
+          "next_human_gate": "After owner reports newly available Netlify production credits, publish a single owner-approved release; owner signs in privately, confirms 4 coffees/14 historical shots/admin, then separately invite an authorized real nonadmin after custom SMTP confirmed.",
+          "ownership_security": "No passwords, session JWTs, refresh tokens, Auth secrets or private backup keys should be given to ChatGPT or committed to GitHub.",
+          "release_guard": "No Netlify publish and no loosening SSO, RLS, import gate or admission.",
+          "locked_decisions_changed": []
+        }
+      }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_IMPORT_STATUS.json",
+      "git_blob_sha": "df2110e6f165d4ed9bbece14f3520f5ccc3130db",
+      "classification": "Historical implementation evidence; retain any expressly approved implementation constraints, but do not promote tuning/status into Locked product decisions.",
+      "content": {
+        "product": "The Dial In Collective",
+        "checkpoint": "native-import-review-1",
+        "authority": "Implementation status supplement. Preserve all Locked requirements; no product scope is silently superseded.",
+        "requested": "Native import with preview, duplicate protection and confirmation, preserving the reviewed October 6 baseline and added Sweet Bloom coffee.",
+        "implemented": [
+          "Settings import entry",
+          "local source validation",
+          "owner-bound database dry run",
+          "atomic idempotent commit endpoint",
+          "private complete-source and pre-import archive",
+          "recovery package download"
+        ],
+        "live_save_enabled": false,
+        "blocker": "Historical owner import completed successfully and exception relocked; exact post-import encrypted offsite backup and full managed recovery remain pending.",
+        "limitations": {
+          "adapter": "One setup and one equipment version; no experiments; initially empty cloud workspace; personal prototype schema 1",
+          "legacy_derived_fields": "Preserved in original source archive, not replayed as new evidence or activated as unsupported preferences"
+        },
+        "verification": {
+          "new_node_checks": 27,
+          "database_role_checks": 30,
+          "injected_chromium_checks": 18,
+          "real_iphone_verified": false,
+          "external_restore_verified": false,
+          "real_user_records_imported": 0
+        },
+        "unchanged": [
+          "Supabase Free",
+          "Google Drive backup destination",
+          "eight-character uppercase/symbol password policy",
+          "Settings persistence",
+          "Current Coffee only after logging or explicit migration restoration",
+          "slow feed is an equipment condition",
+          "unknown history remains unknown",
+          "pressure and flow profiling deferred"
+        ],
+        "pre_domain_owner_testing_2026_10_14": {
+          "status": "Plan recorded; no owner data imported; live server gate remains closed",
+          "owner_request": "Complete available app/backend/privacy/admin/recovery testing and real owner import before any custom-domain purchase",
+          "scope": "Pre-domain owner-only test, not an external beta release decision",
+          "live_verified": {
+            "auth_users": 1,
+            "coffees": 0,
+            "library_entries": 0,
+            "setups": 0,
+            "shots": 0,
+            "import_batches": 0,
+            "import_gate_saves_enabled": false,
+            "recovery_verified_at": null,
+            "first_party_tables": 35,
+            "tables_missing_rls": 0
+          },
+          "prerequisites": [
+            "Existing backup/recovery Locked acceptance gates verified before enabling live imports",
+            "Reviewed private source backup kept separately outside ChatGPT and GitHub",
+            "Owner-account live server preview of 4 coffees / 14 shots / 4 families",
+            "Pre-import recovery copy verified locally"
+          ],
+          "after_gate": [
+            "Owner-mediated atomic idempotent import",
+            "Counts and Current Coffee confirmed without invented values",
+            "Owner login/reload/device flow confirmed",
+            "Nonzero-data encrypted offsite backup and isolated restore verified"
+          ],
+          "deferred_until_external_beta": [
+            "Third-party SMTP delivery and genuine outside-user email confirmation/reset",
+            "Cross-account live external user testing where no authorized outside user exists",
+            "Removal of Netlify SSO"
+          ],
+          "cost_approval": "No domain or paid service purchase approved",
+          "locked_decisions_changed": []
+        },
+        "owner_validation_2026_10_14": {
+          "claim": "Owner reports the original reviewed JSON was found and the hosted Import Backup validation succeeded",
+          "evidence_level": "owner report only; UI summary/file not directly inspected",
+          "live_readback_after_validation": {
+            "auth_users": 1,
+            "coffees": 0,
+            "shots": 0,
+            "setups": 0,
+            "library_entries": 0,
+            "import_batches": 0,
+            "missing_rls_tables": 0,
+            "import_gate_saves_enabled": false,
+            "recovery_verified_at": null
+          },
+          "import_committed": false,
+          "required_owner_next_step": "Download and verify local Save recovery copy JSON from validated Import Backup panel; preserve original and iPhone prototype",
+          "remaining_gate": "Independent complete hosted recovery/configuration testing and deliberate owner-approved gate enablement",
+          "paid_domain_required_now": false,
+          "locked_decisions_changed": []
+        },
+        "owner_recovery_download_2026_10_14": {
+          "owner_confirmation": "Owner confirmed Save recovery copy downloaded successfully after live import validation",
+          "file_byte_or_hash_independently_checked": false,
+          "cloud_import_performed": false,
+          "source_and_v0_2_prototype_unchanged": true,
+          "live_gate_still_closed": true,
+          "locked_decisions_changed": []
+        },
+        "application_schema_recovery_2026_10_14": {
+          "status": "Passed on development and main, using disposable network-isolated PostgreSQL",
+          "development_run_id": 38579439103,
+          "production_run_id": 38579702304,
+          "source_data_scope": "35 first-party tables and core auth.users/auth.identities row-count-equal; actual SQL definitions restored",
+          "app_metadata_scope": {
+            "rls_enabled_tables": 35,
+            "rls_policies": 37,
+            "indexes": 91,
+            "triggers": 19,
+            "functions": 29,
+            "auth_signup_trigger": 1
+          },
+          "provider_hosted_rebuild_verified": false,
+          "from_exact_encrypted_drive_zip": false,
+          "first_party_schema_and_auth_core_recovery_verified": true,
+          "external_signup_smtp_and_account_tests_verified": false,
+          "import_gate_enabled": false,
+          "note": "Still requires explicit owner decision and original full-recovery acceptance. No production data writes were performed.",
+          "locked_decisions_changed": []
+        },
+        "owner_import_exception_approved_2026_10_14": {
+          "status": "ACTIVE for the one existing admitted owner only; 24h expiry; one commit auto-relocks",
+          "decision_id": "OWNER-IMPORT-20261014",
+          "authority": "Owner explicit approval on 2026-10-14",
+          "scope": "One-time import for existing admitted owner only; narrow exception to hosted recovery sequencing",
+          "existing_locked_decisions_changed": [],
+          "app_service_recovery_verified": false,
+          "server_gate_requirements": [
+            "Do not set private.import_control.recovery_verified_at",
+            "Allow ONLY current singular admitted beta owner UUID",
+            "Enforce <=24h expiry",
+            "Relock after first successful import",
+            "Do not disable Netlify SSO, admission, RLS, backup, Auth safeguards"
+          ],
+          "required_user_checks": [
+            "Revalidate exact reviewed backup after gate opens",
+            "Original files and independent local recovery JSON already confirmed saved",
+            "Owner must explicitly confirm import in authenticated UI"
+          ],
+          "after_import": [
+            "Account-bound coffee, shot, family and source archive counts",
+            "Exact retry idempotency",
+            "Daily encrypted source-inclusive post-import GitHub to private Drive delivery",
+            "Isolated recovery of nonzero imported rows",
+            "Full hosted-service recovery before external beta"
+          ],
+          "activated_utc": "2026-10-14T15:24:57.902877Z",
+          "expires_utc": "2026-10-15T15:24:57.902877Z",
+          "migration_version": "20261014152014",
+          "migration_file": "supabase/migrations/20261014152014_dic_owner_only_import_exception.sql",
+          "test_file": "supabase/tests/owner_only_import_exception.sql",
+          "verification": {
+            "legacy_import_role_tests_passed": 30,
+            "owner_exception_role_tests_passed": 8,
+            "synthetic_records_rolled_back": true,
+            "live_owner_grant_scoped_to_sole_enabled_member": true,
+            "live_recovery_verified_at": null,
+            "live_precommit_import_batches": 0,
+            "live_precommit_coffees": 0,
+            "live_precommit_shots": 0,
+            "matching_fresh_scheduled_main_backup_run_id": 38581684328,
+            "matching_offsite_artifact_id": 11902823017,
+            "offsite_ciphertext_size_bytes": 256130,
+            "post_import_restore_verified": false
+          },
+          "next_action": "Owner must reselect reviewed original personal JSON (NOT download recovery wrapper), validate again after gate unlock, save/verify recovery copy, acknowledge original local app retained, and explicitly Confirm import in hosted app",
+          "external_beta_release_allowed": false
+        },
+        "live_import_completed_2026_10_14": {
+          "status": "Confirmed one atomic owner-only import; private archive and full original source retained",
+          "imported_at_utc": "2026-10-14T18:09:26.744289Z",
+          "observed": {
+            "original_source_coffees": 4,
+            "personal_library_coffees": 4,
+            "shots": 14,
+            "personal_families": 4,
+            "setups": 1,
+            "bags": 4,
+            "private_import_batches": 1,
+            "dialed_in_shots": 8,
+            "original_missing_grind": 1,
+            "unknown_feed": 14
+          },
+          "coffee_counts": [
+            {
+              "name": "Bavyeyi IV",
+              "shots": 6,
+              "families": 1
+            },
+            {
+              "name": "David Armijos",
+              "shots": 3,
+              "families": 1
+            },
+            {
+              "name": "Yirgacheffe",
+              "shots": 5,
+              "families": 2,
+              "current": true
+            },
+            {
+              "name": "Hambela",
+              "roaster": "Sweet Bloom",
+              "shots": 0,
+              "current": false
+            }
+          ],
+          "original_archive_hash_verified": true,
+          "owner_only_privacy_sql_rolled_back": true,
+          "second_admitted_user_sees_owner_shots": 0,
+          "second_admitted_user_sees_owner_coffees": 0,
+          "anonymous_select_denied": true,
+          "gate_autorelocked": true,
+          "recovery_verified_at": null,
+          "source_to_live_observation_comparison": "All 14 IDs, timestamps, dose, yield, time, styles, ratings, notes and ownership links match. One grind setting and temperature differ due to an audited post-import app update at 2026-10-14T18:10:51Z. The initial insertion matched source null grind and 89.4C, and a later app update set 0.3 and 89.44444444444444C. No automatic reversal.",
+          "recovery_test_development_run": 38613853532,
+          "recovery_test_development_passed": true,
+          "recovery_test_restored_nonzero_history_and_archive": true,
+          "recovery_test_row_payload_fingerprints_match": true,
+          "recovery_test_main_run": 38616130613,
+          "recovery_test_main_result": "awaiting run confirmation",
+          "encrypted_post_import_backup": "NOT YET VERIFIED: last scheduled main encrypted offsite artifact predates import",
+          "complete_hosted_provider_recovery_verified": false,
+          "locked_decisions_changed": []
+        },
+        "owner_directed_historical_feed_correction_2026_10_14": {
+          "status": "PASS: all 14 imported historical shots corrected from unknown to slow",
+          "authority": "Owner explicitly requested all historical records be marked slow-fed, after affirming intentional earlier grind/temperature edits",
+          "nature": "User-authorized observation correction, not an automatic assumption about previously unknown feed; no change to the original Locked policy that unconfirmed feed stays unknown",
+          "live_counts_after": {
+            "shots_total": 14,
+            "slow_shots": 14,
+            "unknown_shots": 0,
+            "standard_shots": 0,
+            "original_source_feed_unknown_shots": 14,
+            "changed_audit_events": 14,
+            "personal_coffees": 4,
+            "personal_families": 4,
+            "dialed_in_shots": 8,
+            "community_shots": 0,
+            "owner_count": 1
+          },
+          "safeguards": [
+            "Dry-run transaction verified 14 corrections and 14 audit entries then rolled back",
+            "Production atomic guarded transaction matched exact count, owner, source hash and unchanged downstream fields",
+            "Every corrected shot retains original measurements/notes/links and recorded immutable provenance",
+            "Archive in private.import_batches retains full original source with 14 unknown feed values and verified SHA-256",
+            "Four personal families, current coffee and all-green shot count unchanged",
+            "No community shots published",
+            "No original v0.2.0 data touched",
+            "Import gate remains closed and all first-party tables retain RLS"
+          ],
+          "existing_setup_preference": {
+            "track_slow_feed": true,
+            "slow_feed": false,
+            "changed": false,
+            "note": "Future shot default was not changed by user request for existing records"
+          },
+          "offsite_status": "New post-edit encrypted GitHub-to-Google-Drive source-inclusive backup still needs confirmation after next eligible run; previous verified offsite backup predates import",
+          "locked_product_decisions_changed": []
+        }
+      }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_PRIVATE_BACKUP_AMENDMENT.json",
+      "git_blob_sha": "e4768d093762f690d55808979aba7c8240ae99f8",
+      "classification": "Historical implementation evidence; retain any expressly approved implementation constraints, but do not promote tuning/status into Locked product decisions.",
+      "content": {
+        "product": "The Dial In Collective",
+        "amendment": "private-backup-courier",
+        "status": "Daily encrypted DB+code backup verified in GitHub; 30-day GitHub and Drive retention configured; weekly full first-party/Auth row restore verified on main; full Supabase provider recovery and external beta still gated.",
+        "source": "Owner explicitly approved using a private Google Apps Script rather than public OAuth/app domain, then authorized Google Drive and stored Actions read-only token",
+        "preservation": "This adds an implementation record to locked B003 and B004 without replacing or weakening any Locked decisions.",
+        "decisions": [
+          {
+            "id": "B003-implementation-1",
+            "status": "Approved implementation, not recovery verified",
+            "topic": "Google Drive backup authorization",
+            "decision": "A standalone owner-authorized Google Apps Script with drive.file permission transfers encrypted artifacts from the private GitHub Actions worker into a script-owned private Google Drive folder. No custom domain, public OAuth app, or removal of Netlify SSO is needed.",
+            "implementation_status": "Manual main-branch backup workflow run 38438265941 succeeded; encrypted ZIP artifact 11833663348 was downloaded by user-authorized Apps Script syncPrivateBackups and independently found in private Google Drive file 1b3NKkm30GxW3JQnz2MWecvHWsaKxZ7Kn with matching 119241-byte size. GitHub main workflow now has 09:23 UTC daily schedule as of commit 062bdc96a73168a2cb343f0f87439ef2bf94400e. Apps Script trigger has not yet been installed/verified; private-key decryption and isolated restore still pending; import server gate remains false. Owner ran local verifier on 2026-10-13: exact ciphertext matched GitHub, age decryption succeeded with offline private recovery key, manifest/database checksum and essential table inventory matched. pg_restore unavailable locally; no isolated PostgreSQL restore yet. Owner reports Apps Script polling trigger installation via successful run; first unattended Drive delivery not independently verified.",
+            "safeguards": [
+              "Never put credentials, database passwords, encryption identity, or personal backups in the repository or this chat.",
+              "Staged GitHub workflow must not be enabled on default branch before owner configures scoped secrets and offline decryption key.",
+              "Restore test including Auth and non-database settings remains mandatory before enabling private.import_control.saves_enabled.",
+              "No original Mac/iPhone prototype or local records are modified."
+            ]
+          }
+        ],
+        "implementation_verification": {
+          "checked_at": "2026-10-13",
+          "verified": [
+            "real Supabase session-pooler authentication with percent-encoded password in URI",
+            "PostgreSQL 17 pg_dump with required Auth and application tables checked",
+            "age encryption to owner's SSH Ed25519 public recipient before private artifact upload",
+            "successful GitHub Actions run 38433662181",
+            "successful TLS-required updated Actions run 38434157066",
+            "live project still has zero Storage object bytes",
+            "import gate remains closed",
+            "minimal manual-only backup workflow and encrypted export script installed on main, without merging development UI",
+            "manual GitHub main-branch run 38438265941 produced ciphertext and Apps Script transferred it into intended Google Drive folder",
+            "daily 09:23 UTC GitHub Actions schedule present on main",
+            "Owner's Mac locally decrypted matching encrypted Drive backup using private key, verified recovered dump checksum and TOC text; user-provided screenshot shows PASS",
+            "Owner reports successful execution of Apps Script installPrivateBackupPoller, but trigger UI not directly inspected"
+          ],
+          "not_verified": [
+            "unattended GitHub scheduled runs on main",
+            "configuration restoration and uploaded Storage bytes when present",
+            "retention and failure notifications",
+            "continuous Google Drive transfer (Apps Script time trigger pending)",
+            "isolated real PostgreSQL/Supabase restore of plaintext backup, Auth and application state",
+            "automatic overnight Drive upload cycle and alert/retention drills",
+            "independent non-database configuration and initial iPhone source recovery verification"
+          ],
+          "locked_decisions_changed": [],
+          "operator_note": "Owner confirmed private key stored in second secure location (location/material never shared). Never enable import or external beta merely due to working export.",
+          "restore_compatibility_caution": "Raw pg_dump includes Supabase internals and locally used supabase_vault; official Supabase docs advise filtered portable export for migrations. Ensure actual isolated restoration is faithful and fails closed for missing data."
+        },
+        "verification_2026_10_13": {
+          "source_inclusive_dev_backup": {
+            "run_id": 38454332010,
+            "success": true,
+            "contains": [
+              "database.dump",
+              "manifest.json",
+              "toc.txt",
+              "storage-object-count.txt",
+              "app-source.tar.gz"
+            ],
+            "promoted_to_main_workflow_commit": "d7a02937175fb7e04134652315a6856af331be6e",
+            "main_offsite_snapshot_confirmed": false
+          },
+          "isolated_recovery": {
+            "run_id": 38454798657,
+            "success": true,
+            "scope": "All 35 first-party public/private table DDL and rows plus auth.users and auth.identities in disposable network-isolated PostgreSQL 17; nine representative source counts matched",
+            "not_restored": [
+              "full hosted Supabase settings",
+              "provider-managed triggers/indexes/row level policies",
+              "Netlify configuration secrets",
+              "Supabase Storage object bytes (currently none)"
+            ],
+            "plaintext_artifact_uploaded": false
+          },
+          "real_database_rollback_role_tests": {
+            "count": 30,
+            "result": "pass",
+            "real_user_count_after": 1,
+            "coffee_and_shot_count_after": 0,
+            "import_enabled_after": false
+          },
+          "release_blockers": [
+            "custom SMTP for non-project-team signup confirmation and recovery",
+            "live external account email + signup/invitation and account-isolation browser tests",
+            "new source-inclusive main artifact must reach owner Drive",
+            "private beta sign-in barrier remains enabled",
+            "community and remaining functionality not represented as fully working"
+          ],
+          "locked_product_requirements_changed": [],
+          "reliability_update": {
+            "timestamp": "2026-10-13",
+            "locked_decisions_changed": [],
+            "github_artifact_retention_days_for_new_runs": 30,
+            "drive_retention_days_approx": 30,
+            "nightly_export_utc": "09:23 daily",
+            "weekly_restore_utc": "10:43 Sunday",
+            "weekly_restore_run_id": 38475063706,
+            "weekly_restore_result": "Passed for all 35 first-party public/private tables and core Auth users/identities; every restored table's row count matched the source; provider-managed Supabase services not restored.",
+            "main_source_inclusive_export_run_id": 38475327361,
+            "main_source_inclusive_export_artifact_id": 11853582739,
+            "main_source_inclusive_export_status": "PASS: eligible manually dispatched main run 38478825183 produced source-inclusive encrypted artifact 11856901593 and Drive courier delivered file 1a1vFx3gQaUndO0V8AoEO7IG5cFIcpMSt at 2026-10-14T00:20:14Z (243225 bytes). Independently listed in authorized private Drive folder; matching size/name. Independent Drive digest and full hosted recovery NOT verified.",
+            "out_of_band_daily_monitor": "Now a six-hour condition watch; delivery NOT VERIFIED until user enables account task notifications and observes a real alert.",
+            "release_and_full_recovery_remaining": [
+              "Custom SMTP for outside recipients",
+              "real cross-account email + device login and privacy tests",
+              "hosted admin portal/workflows and community qualification",
+              "new source-inclusive scheduled Google Drive artifact not yet confirmed",
+              "provider secrets/configuration and future Storage bytes not automatically recreated",
+              "historical import live gate still closed"
+            ],
+            "backup_health_watch": {
+              "task_id": "6aceaafdbc4881919890772458c7ecf3",
+              "schedule": "every six hours, condition watch",
+              "checks": [
+                "latest eligible scheduled/manual main backup success and ciphertext artifact",
+                "GitHub/Drive failures, access and >36-hour staleness",
+                "eligible backup not in Drive after six hours",
+                "push-only smoke tests excluded from courier proof"
+              ],
+              "task_update": "confirmed successful by automation tool 2026-10-13",
+              "notification_delivery": "UNVERIFIED: Owner-supplied 2026-10-13 screenshot clearly shows ChatGPT Settings > Notifications > Tasks set to Push, Email. Despite this, the task metadata reports notifications_enabled=false and email_enabled=false. Do not ask owner to re-enable settings; investigate task delivery separately.",
+              "last_execution": "The six-hour watch reports a last_run_time at 2026-10-13T22:31:34Z, but no delivered alert verified. The one-time Dial In Alert Test reports is_enabled=false, last_run_time=null after scheduled time; reason not yet verified.",
+              "source_inclusive_drive_delivery": "PASS: source-inclusive backup file 1a1vFx3gQaUndO0V8AoEO7IG5cFIcpMSt received automatically in authorized Drive folder, 243225 bytes, 2026-10-14T00:20:14Z.",
+              "locked_decisions_changed": [],
+              "owner_notification_preferences_verified": "Push and Email enabled for Tasks in screenshot; this is preferences evidence, not proof that a notification arrived."
+            },
+            "manual_main_source_inclusive_provenance": {
+              "run_id": 38478825183,
+              "event": "workflow_dispatch",
+              "branch": "main",
+              "completed_utc": "2026-10-13T22:36:23Z",
+              "workflow_result": "success",
+              "encrypted_artifact_id": 11856901593,
+              "encrypted_artifact_size_bytes": 243225,
+              "artifact_sha256": "ffb58740c813a94d8ee8742bef85c4ca53a4c5a493dc09e4f993d42fcf7b5524",
+              "github_retention_until_utc": "2026-11-12T22:36:19Z",
+              "source_archive_status": "Script contract and successful execution confirm nonempty app-source.tar.gz in age-encrypted bundle, without exposing plaintext.",
+              "offsite_drive_status": "PASS: authorized private Drive folder contains matching dic-nightly-11856901593.zip, file 1a1vFx3gQaUndO0V8AoEO7IG5cFIcpMSt, size 243225 bytes, created 2026-10-14T00:20:14Z; receipt after GitHub 22:36 UTC workflow (~1h44m).",
+              "follow_up": "Completed private Drive folder verification; one-time follow-up task disabled. Hash equality of Drive ZIP and hosted full recovery not independently tested.",
+              "locked_decisions_changed": []
+            },
+            "source_inclusive_drive_verified": {
+              "status": "PASS - verified file presence, filename/artifact provenance and size; independent Drive digest and new decryption not tested",
+              "github_run": 38478825183,
+              "artifact_id": 11856901593,
+              "drive_file_id": "1a1vFx3gQaUndO0V8AoEO7IG5cFIcpMSt",
+              "drive_created_utc": "2026-10-14T00:20:14.681Z",
+              "size_bytes": 243225,
+              "locked_decisions_changed": []
+            }
+          },
+          "ubuntu_runner_mitigation": {
+            "status": "Implemented on dev and main; dev smoke tests passed; first post-change main scheduled/dispatch run pending",
+            "github_advisory_url": "https://github.com/actions/runner-images/issues/14748",
+            "effective_runner": "ubuntu-24.04",
+            "affected_workflows": [
+              "main:.github/workflows/nightly-backup.yml",
+              "main:.github/workflows/database-recovery-drill.yml",
+              "development/backend-foundation:.github/workflows/nightly-backup.yml",
+              "development/backend-foundation:.github/workflows/database-recovery-drill.yml"
+            ],
+            "passed_dev_backup_run": 38479304768,
+            "initial_dev_restore_run": 38479310631,
+            "initial_dev_restore_result": "Failed on local transient PostgreSQL container shutdown during Docker initialization; unrelated to evidence of permanent hosted Supabase outage",
+            "fix": "Wait for TCP-ready final PostgreSQL server over localhost inside --network none container; avoid temporary Unix-socket-only initdb server readiness false-positive",
+            "passed_dev_restore_run": 38479513765,
+            "passed_dev_restore_scope": "All 35 first-party public/private tables and core Auth users/identities restored in disposable network-isolated PostgreSQL; all row counts matched",
+            "main_post_change_workflow_execution": "PASS: backup push 38496025978, recovery push 38496021835 on ubuntu-24.04",
+            "production_configs_changed": "Runner OS pin and isolated recovery readiness only; no service secrets, raw data, import gate, or site access changes",
+            "future_review": "Test Ubuntu 26.04 on development before controlled promotion; continue security patches on 24.04 while supported",
+            "locked_decisions_changed": []
+          },
+          "production_runner_smoke_test": {
+            "date_utc": "2026-10-14",
+            "main_backup_run_id": 38496025978,
+            "main_backup_result": "PASS (push smoke event; not courier eligible)",
+            "main_recovery_run_id": 38496021835,
+            "main_recovery_result": "PASS on ubuntu-24.04 with final PostgreSQL readiness fix; all-table count check as implemented",
+            "automatic_regression_triggers": "Both main backup/recovery workflows now have push triggers on their workflow + corresponding backup/restore script; scheduled/manual triggers retained",
+            "no_locked_decisions_changed": true
+          }
+        },
+        "verification_2026_10_14": {
+          "event": "Owner data recovery copy saved and first-party/Auth schema restore drill broadened",
+          "owner_json_recovery_copy": "Owner reports downloaded and retained; not inspected by assistant",
+          "verified_development_schema_run": 38579439103,
+          "verified_main_schema_run": 38579702304,
+          "app_recovered": {
+            "tables": 35,
+            "rls_tables": 35,
+            "policies": 37,
+            "indexes": 91,
+            "app_triggers": 19,
+            "functions": 29,
+            "auth_user_provisioning_triggers": 1
+          },
+          "auth_core_users_and_identities_row_counts": "All matched live source",
+          "scope_limit": "No complete second running Supabase project, hosted provider-managed configuration, Netlify/GitHub/Google credentials or exact encrypted Drive artifact restore",
+          "import_gate_remains_false": true,
+          "existing_product_decisions_changed": [],
+          "remaining_release_gates": [
+            "Full hosted provider/operational configuration recovery acceptance or explicit owner-only exception",
+            "Genuine Auth/email and cross-account privacy tests before external beta",
+            "Post-owner-import nonzero-data encrypted offsite and isolated restore drill"
+          ]
+        }
+      }
+    }
+  ],
+  "scoped_supersessions": [
+    {
+      "topic": "Product name",
+      "current": "The Dial In Collective; dial in, dialed in and dialing in without hyphens.",
+      "source": "docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md",
+      "scope": "Current product wording only. Historical filenames and quotations are preserved."
+    },
+    {
+      "topic": "Production access",
+      "current": "ACCESS-20261016-PRODUCTION-SSO",
+      "supersedes": "Earlier all-deploy Netlify SSO requirements",
+      "scope": "Production's extra Netlify login only; nonproduction SSO, Supabase Auth, verified email, admission, RLS and admin checks remain."
+    },
+    {
+      "topic": "Publication cadence",
+      "current": "OPS-20261014-02",
+      "supersedes": "OPS-20261014-01 per-intermediate-commit cadence",
+      "scope": "Batch deliberate tested releases with verified credits. Ordinary source/docs pushes do not publish; prior 0-credit observations are historical."
+    },
+    {
+      "topic": "Release holds",
+      "current": "OPS-20261016-CONSOLIDATED-RELEASE and the later recorded universal-URL release",
+      "supersedes": "Prior screenshot/review holds for their specifically approved bundles",
+      "scope": "Consumed one-release approvals, not perpetual publication authorization. Current request explicitly prohibits deployment and production-data changes."
+    },
+    {
+      "topic": "Routine recovery UI",
+      "current": "VISUAL-20261015-01",
+      "supersedes": "UX-20261014-05 visible routine import/export controls",
+      "scope": "Remove routine Recovery Options UI only. Preserve historical import code, closed server save gate, password reset, emergency unsynced export and operator recovery."
+    },
+    {
+      "topic": "Badge lettering and shape",
+      "current": "VISUAL-BADGES-ORIGINAL-REFERENCE-06",
+      "supersedes": "Earlier uniform black / white-by-theme lettering and decorative badge borders",
+      "scope": "Exact original dark-JSX fills in both themes; white for Traditional/Ristretto, black for other mapped badges; flat pills; no shadows. Non-badge boundaries stay defined."
+    },
+    {
+      "topic": "Text effects",
+      "current": "VISUAL-NO-TEXT-SHADOWS-04",
+      "supersedes": "Earlier text-halo suggestions",
+      "scope": "No text shadows, halos, glyph strokes or glow anywhere, including admin. Preserve existing contrast caveat."
+    },
+    {
+      "topic": "Shot history controls",
+      "current": "UX-HISTORY-CONTROLS-04",
+      "supersedes": "UX-HISTORY-ORIGINAL-REFERENCE-02 Edit placement and phone date placement",
+      "scope": "Grind capitalized; phone date left; compact expanded-only Edit left / Make Current Recipe right; immutable hardware context and literal notes preserved."
+    },
+    {
+      "topic": "Recipe captions",
+      "current": "VISUAL-TEMP-CAPTION-20261016",
+      "supersedes": "UI-CONSISTENCY-GUARD-20261015 Temperature subtitle",
+      "scope": "Keep Basket-based under Dose, remove Recommendation under Temperature; retain calculated target and meaningful evidence."
+    },
+    {
+      "topic": "Coffee approval",
+      "current": "COFFEE-20261014-01",
+      "supersedes": "Unconditional Pending-until-admin rule",
+      "scope": "Owning admin exception and trusted release-specific automated verification only; unresolved member entries stay private Pending and usable."
+    },
+    {
+      "topic": "URL extraction breadth",
+      "current": "Universal roaster URL preview section of docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md",
+      "supersedes": "Known official host restriction as a user-facing read-only preview gate",
+      "scope": "Safe authenticated extraction from any public HTTPS roaster; trusted official-source Verified promotion remains separate. Do not weaken SSRF/bounds or infer screenshot/OCR implementation."
+    },
+    {
+      "topic": "URL preview cooldown",
+      "current": "COFFEE-URL-20261016-01",
+      "supersedes": "COFFEE-URL-SECURITY-20261015 12-second preview cooldown and route-specific bypass",
+      "scope": "Shared account-wide >=30 seconds on known and unknown roaster previews. Manual entry/logging remain available; current 60/rolling-day budget is engineering tuning, not Locked. Old 25/day is not silently reinstated."
+    },
+    {
+      "topic": "Owner historical import",
+      "current": "OWNER-IMPORT-20261014",
+      "supersedes": "Hosted recovery first only for one original owner's already-completed import",
+      "scope": "One-use, expiring owner-only exception, now closed. Does not authorize repeat imports or new data writes; later successful hosted recovery is acceptance evidence, not a blanket import unlock."
+    }
+  ],
+  "open_current_owner_decisions": [
+    {
+      "id": "OPEN-URL-DAILY-CAP",
+      "status": "Open",
+      "question": "25 or 10 URL lookups per rolling day?",
+      "current_implementation": "60 per rolling 24 hours; shared >=30-second cooldown remains Locked.",
+      "next": true,
+      "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md"
+    },
+    {
+      "id": "OPEN-ROAST-TAXONOMY",
+      "status": "Open",
+      "question": "Adopt six roast tiers and displayed naming?",
+      "current_implementation": "Light, Light-Medium, Medium, Medium-Dark, Dark.",
+      "proposal": "Ultra Light, Light, Medium Light, Medium, Medium Dark, Dark; not adopted.",
+      "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md"
+    }
+  ],
+  "source_limits": [
+    "The v0.2.0 prototype workshop addendum is referenced by historic reports but was not found as a standalone source in this retrieval. Its decisions already recorded in available baseline/addenda remain preserved; do not reconstruct unavailable text or claim exhaustive recovery of unseen chats.",
+    "Nine earlier research report bodies are not supplied by the available August archive manifests. No new research verification is claimed."
+  ],
+  "change_control": {
+    "ask_one_product_question_at_a_time": true,
+    "explicit_owner_approval_for_supersession": true,
+    "update_master_specification_and_ledger_before_behavior_change": true,
+    "preserve_source_evidence": true
+  }
+}

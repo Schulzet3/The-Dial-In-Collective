@@ -1,0 +1,656 @@
+{
+  "project": "The Dial-In Collective",
+  "version": "1.0",
+  "as_of": "2026-09-08",
+  "source_precedence": [
+    "latest explicit product-owner decision",
+    "master specification / decision ledger",
+    "dial-in-collective(2).jsx for unsuperseded behavior",
+    "supplied screenshots for unsuperseded UX/visual behavior",
+    "supplied export backup as migration fixture",
+    "prior research reports once collected in project"
+  ],
+  "locked": [
+    {
+      "status": "locked",
+      "area": "product",
+      "topic": "Core loop",
+      "decision": "Open app -> current coffee ready -> Log a Shot -> rate taste -> get recommendation -> done."
+    },
+    {
+      "status": "locked",
+      "area": "ux",
+      "topic": "Surface complexity",
+      "decision": "Keep routine experience clean; advanced data uses progressive disclosure."
+    },
+    {
+      "status": "locked",
+      "area": "release",
+      "topic": "Initial platform",
+      "decision": "Mobile-first PWA/private beta; no native app required initially."
+    },
+    {
+      "status": "locked",
+      "area": "auth",
+      "topic": "Login",
+      "decision": "Email + password; secure persistent sessions; immutable internal user id."
+    },
+    {
+      "status": "locked",
+      "area": "beta",
+      "topic": "Access",
+      "decision": "Revocable/replacable private signup URL without affecting existing users."
+    },
+    {
+      "status": "locked",
+      "area": "ai",
+      "topic": "Provider",
+      "decision": "Claude only in V1; modular provider layer for future additions."
+    },
+    {
+      "status": "locked",
+      "area": "ai",
+      "topic": "BYOK",
+      "decision": "Claude key is optional and stored on device only; app works without it."
+    },
+    {
+      "status": "locked",
+      "area": "ai",
+      "topic": "Primary purpose",
+      "decision": "Coffee extraction/structuring from roaster URLs/screenshots; no AI required per shot."
+    },
+    {
+      "status": "locked",
+      "area": "coffee_identity",
+      "topic": "Canonical id",
+      "decision": "Use true stable canonical coffee/release IDs, not mutable shared keys."
+    },
+    {
+      "status": "locked",
+      "area": "coffee_identity",
+      "topic": "Related releases",
+      "decision": "Different harvest/lot/release is separate record; related releases linked."
+    },
+    {
+      "status": "locked",
+      "area": "coffee_identity",
+      "topic": "Availability",
+      "decision": "Archive/unavailable status never deletes historical coffee identity."
+    },
+    {
+      "status": "locked",
+      "area": "coffee_data",
+      "topic": "Canonical facts",
+      "decision": "Coffee facts have one validated Collective record; users propose corrections."
+    },
+    {
+      "status": "locked",
+      "area": "coffee_data",
+      "topic": "Source hierarchy",
+      "decision": "Exact official roaster source first; secondary sources only for verified exact coffee."
+    },
+    {
+      "status": "locked",
+      "area": "coffee_data",
+      "topic": "Missing values",
+      "decision": "Leave blank when unverified; do not invent."
+    },
+    {
+      "status": "locked",
+      "area": "coffee_data",
+      "topic": "Verification",
+      "decision": "Strong non-conflicting updates may auto-apply; conflicts go to admin with audit history."
+    },
+    {
+      "status": "locked",
+      "area": "add_coffee",
+      "topic": "Inputs",
+      "decision": "URL and/or screenshots remain primary new-coffee inputs."
+    },
+    {
+      "status": "locked",
+      "area": "add_coffee",
+      "topic": "Dedup",
+      "decision": "Canonical DB checked before AI; exact match adds directly; fuzzy match requires user confirmation."
+    },
+    {
+      "status": "locked",
+      "area": "add_coffee",
+      "topic": "Pending",
+      "decision": "No AI key/new coffee -> Pending Coffee; user may log immediately; private until approval."
+    },
+    {
+      "status": "locked",
+      "area": "images",
+      "topic": "Retention",
+      "decision": "Discard user screenshots after extraction; retain structured data/source and official image where appropriate."
+    },
+    {
+      "status": "locked",
+      "area": "shots",
+      "topic": "Raw source",
+      "decision": "Store every individual shot; aggregates are derived/cache."
+    },
+    {
+      "status": "locked",
+      "area": "shots",
+      "topic": "Community eligibility",
+      "decision": "Only Dialed-In/all-green shots contribute to community and appear as Community Shots."
+    },
+    {
+      "status": "locked",
+      "area": "shots",
+      "topic": "History",
+      "decision": "All shots remain in personal history unless user hides/deletes personally."
+    },
+    {
+      "status": "locked",
+      "area": "shots",
+      "topic": "Dialed persistence",
+      "decision": "Coffee remains Dialed In after later bad/experimental shots."
+    },
+    {
+      "status": "locked",
+      "area": "shots",
+      "topic": "Dialed definition",
+      "decision": "All required sensory markers pure green; style time/ratio ranges do not veto."
+    },
+    {
+      "status": "locked",
+      "area": "sensory",
+      "topic": "Required",
+      "decision": "All five sensory scales must be actively rated; nothing preselected."
+    },
+    {
+      "status": "locked",
+      "area": "sensory",
+      "topic": "Green targets",
+      "decision": "Extraction=3, Body=3, Clarity=5, Sweetness=5, Astringency=1 under current ramp."
+    },
+    {
+      "status": "locked",
+      "area": "community",
+      "topic": "Visibility",
+      "decision": "Show anonymous individual Community Shots plus aggregates; no visible persistent contributor id."
+    },
+    {
+      "status": "locked",
+      "area": "community",
+      "topic": "Durability",
+      "decision": "Legitimate qualifying community contributions persist after personal deletion/account deletion."
+    },
+    {
+      "status": "locked",
+      "area": "community",
+      "topic": "Counts",
+      "decision": "Surface qualifying shot count separately from unique contributor count when useful."
+    },
+    {
+      "status": "locked",
+      "area": "community",
+      "topic": "Weighting",
+      "decision": "Use diminishing contributor weight, capped around ~2 contributor-equivalents; configurable."
+    },
+    {
+      "status": "locked",
+      "area": "community",
+      "topic": "Aggregation",
+      "decision": "Use robust statistics rather than simple raw mean/sum-count only."
+    },
+    {
+      "status": "locked",
+      "area": "community",
+      "topic": "Confidence",
+      "decision": "Subtle Early Data / Moderate Confidence / Strong Confidence via progressive disclosure."
+    },
+    {
+      "status": "locked",
+      "area": "validation",
+      "topic": "Outliers",
+      "decision": "Withhold extreme outlier temporarily, ask user to confirm; accept plausible confirmed unusual shots."
+    },
+    {
+      "status": "locked",
+      "area": "admin",
+      "topic": "Queue",
+      "decision": "Keep admin queue high signal; automate ordinary matches and validation."
+    },
+    {
+      "status": "locked",
+      "area": "equipment",
+      "topic": "Multiple setups",
+      "decision": "One simple default plus optional additional setups; remember last/default."
+    },
+    {
+      "status": "locked",
+      "area": "equipment",
+      "topic": "Historical snapshot",
+      "decision": "Every shot is tied to setup and immutable setup snapshot/version."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Dose",
+      "decision": "Required; prefill last actual for coffee+setup, else setup Usual Dose."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Yield",
+      "decision": "Required; always blank on new shot."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Time",
+      "decision": "Required; always blank on new shot."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Grind",
+      "decision": "Required; prior actual only for coffee+setup+style; otherwise blank actual field."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Suggested grind",
+      "decision": "Show separately; Use Recommendation copies it; preserve recommendation-origin metadata."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Temperature",
+      "decision": "Optional/toggleable; actual prefill from exact style then other-style actual same coffee/setup; otherwise blank."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Suggested temp",
+      "decision": "Show separately; Use Recommendation copies it; no judgment for deviation."
+    },
+    {
+      "status": "locked",
+      "area": "shot_log",
+      "topic": "Recommendation display",
+      "decision": "Keep recommendations visible for confirmation even if user enters another value."
+    },
+    {
+      "status": "locked",
+      "area": "recipe",
+      "topic": "Successful window",
+      "decision": "Repeated successful shots form a range/window plus robust centerpoint rather than one magic number."
+    },
+    {
+      "status": "locked",
+      "area": "recipe",
+      "topic": "Families",
+      "decision": "Materially different successful recipes remain separate families; do not average into one wide range."
+    },
+    {
+      "status": "locked",
+      "area": "recipe",
+      "topic": "Alternates",
+      "decision": "Preserve old successful families; current prominent, alternates collapsed."
+    },
+    {
+      "status": "locked",
+      "area": "recipe",
+      "topic": "Preferences",
+      "decision": "Different families may be recommended to different users based on taste preferences."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Trigger thresholds",
+      "decision": "Initial meaningful change: dose .5g, yield 5g, time 5s, temp 2C/~4F, adaptive grind, any style change."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Any one trigger",
+      "decision": "Any single threshold crossing is enough to offer experiment flow."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Prompt timing",
+      "decision": "Prompt after rating, not while entering shot."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Confirmation",
+      "decision": "Only create Experiment workspace if user confirms."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "UI",
+      "decision": "Use subtle Experiment badge and lightly separated panel; established recipe remains intact."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Continuity",
+      "decision": "Subsequent Log a Shot stays in active experiment until End Experiment or promotion."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Candidate",
+      "decision": "First green materially different shot -> candidate family; second successful repeat -> confirmed alternate."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Make current early",
+      "decision": "User may Make Current Recipe after first successful candidate."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "End",
+      "decision": "Ending failed experiment returns to prior preferred recipe."
+    },
+    {
+      "status": "locked",
+      "area": "experiment",
+      "topic": "Successful not preferred",
+      "decision": "Green experiment remains valid/community-eligible even if user returns to old preferred recipe."
+    },
+    {
+      "status": "locked",
+      "area": "styles",
+      "topic": "No reclassification",
+      "decision": "Remove rigid automatic styleFromNumbers reclassification."
+    },
+    {
+      "status": "locked",
+      "area": "styles",
+      "topic": "Guidelines",
+      "decision": "Style ranges are starting guidelines/reference points, not hard rules."
+    },
+    {
+      "status": "locked",
+      "area": "styles",
+      "topic": "Recommended style",
+      "decision": "Preselect Recommended for you on Add Coffee with short one-line reason; user may change."
+    },
+    {
+      "status": "locked",
+      "area": "styles",
+      "topic": "Set",
+      "decision": "Traditional, Turbo, Ristretto, Lungo, Custom for current V1 baseline."
+    },
+    {
+      "status": "locked",
+      "area": "bags",
+      "topic": "V1 fields",
+      "decision": "Bag Details only optional Roast Date + Frozen; tucked in expanded coffee view."
+    },
+    {
+      "status": "locked",
+      "area": "bags",
+      "topic": "Frozen",
+      "decision": "Frozen pauses age-related logic; batch-frozen bag can remain Frozen while shots are logged."
+    },
+    {
+      "status": "locked",
+      "area": "bags",
+      "topic": "New bag",
+      "decision": "New bag archives prior active by default; carries forward coffee-level recipe/window as starting point."
+    },
+    {
+      "status": "locked",
+      "area": "navigation",
+      "topic": "Focused screens",
+      "decision": "Settings/Add Coffee/Log Shot use focused screens or sheets."
+    },
+    {
+      "status": "locked",
+      "area": "history",
+      "topic": "Inline shot detail",
+      "decision": "Shot detail expands inline; multiple shots can be expanded for comparison."
+    },
+    {
+      "status": "locked",
+      "area": "dial_in_ui",
+      "topic": "Not dialed",
+      "decision": "Show previous shot radar, tasting chips, and recommendations prominently."
+    },
+    {
+      "status": "locked",
+      "area": "dial_in_ui",
+      "topic": "Established experiment",
+      "decision": "Bring back prominent radar/recommendation workspace only for a confirmed experiment."
+    },
+    {
+      "status": "locked",
+      "area": "current_coffee",
+      "topic": "Meaning",
+      "decision": "Viewing does not change current; logging a shot does."
+    },
+    {
+      "status": "locked",
+      "area": "current_coffee",
+      "topic": "App open",
+      "decision": "Current coffee pinned at top, expanded, Log a Shot ready."
+    },
+    {
+      "status": "locked",
+      "area": "current_coffee",
+      "topic": "Switch",
+      "decision": "Logging shot on another coffee makes it current and collapses prior current."
+    },
+    {
+      "status": "locked",
+      "area": "library",
+      "topic": "Sort",
+      "decision": "Recent default + A-Z only; current coffee remains pinned outside search."
+    },
+    {
+      "status": "locked",
+      "area": "library",
+      "topic": "Search",
+      "decision": "Search/sort tucked under caret menu; one search box, no filters."
+    },
+    {
+      "status": "locked",
+      "area": "library",
+      "topic": "Search fields",
+      "decision": "Search name, roaster, origin, producer, roast, elevation, process, variety, tasting notes."
+    },
+    {
+      "status": "locked",
+      "area": "library",
+      "topic": "Search current",
+      "decision": "During search, current coffee is hidden if it does not match; clearing search restores pin."
+    },
+    {
+      "status": "locked",
+      "area": "offline",
+      "topic": "Basic support",
+      "decision": "View saved coffees/log shots offline and auto-sync later; lookup/community/AI online."
+    },
+    {
+      "status": "locked",
+      "area": "migration",
+      "topic": "Priority",
+      "decision": "New architecture first, one-time current-export importer second."
+    },
+    {
+      "status": "locked",
+      "area": "research",
+      "topic": "Evidence discipline",
+      "decision": "Preserve evidence hierarchy, confidence labels, claim audits, and seven research modules."
+    }
+  ],
+  "open": [
+    {
+      "status": "open",
+      "area": "recipe",
+      "topic": "Make Current Recipe semantics",
+      "question": "Exact shot target vs preferred recipe-family/window centerpoint."
+    },
+    {
+      "status": "open",
+      "area": "current_coffee",
+      "topic": "Newly added coffee before first shot",
+      "question": "How Add Coffee focus interacts with existing pinned current coffee."
+    },
+    {
+      "status": "open",
+      "area": "experiment",
+      "topic": "Declined experiment all-green shot",
+      "question": "How a meaningful green shot affects personal family/window if user says No, just log it."
+    },
+    {
+      "status": "open",
+      "area": "experiment",
+      "topic": "Trigger comparison baseline",
+      "question": "Compare thresholds to family center, window edge, last shot, or displayed recommendation."
+    },
+    {
+      "status": "open",
+      "area": "equipment",
+      "topic": "Grinder direction/scale",
+      "question": "Support higher=finer, wraparound/multi-turn, stepped/stepless, real increment."
+    },
+    {
+      "status": "open",
+      "area": "community",
+      "topic": "Edit after contribution",
+      "question": "How corrected edited shot updates durable anonymous contribution without conflating personal deletion."
+    },
+    {
+      "status": "open",
+      "area": "recipe",
+      "topic": "Family scope",
+      "question": "Formal keying by coffee + setup + style/family and preferred recipe per setup."
+    },
+    {
+      "status": "open",
+      "area": "statistics",
+      "topic": "Robust window estimator",
+      "question": "Small-N vs large-N threshold and exact robust estimator."
+    },
+    {
+      "status": "open",
+      "area": "experiment",
+      "topic": "Adaptive grind threshold",
+      "question": "General formula for meaningful change across grinder ranges."
+    },
+    {
+      "status": "open",
+      "area": "preferences",
+      "topic": "Family sensory labeling",
+      "question": "How to empirically distinguish clarity/body-oriented families while all-green structured ratings are strict."
+    },
+    {
+      "status": "open",
+      "area": "engine",
+      "topic": "Time logic after guideline change",
+      "question": "Rework mechanical time correction so green shot is not corrected merely for target miss."
+    },
+    {
+      "status": "open",
+      "area": "validation",
+      "topic": "Hard input bounds",
+      "question": "Which current plausibility bounds hard-block vs warn/confirm."
+    },
+    {
+      "status": "open",
+      "area": "ux",
+      "topic": "Non-experiment bad shot feedback",
+      "question": "What brief post-save feedback appears on an already dialed coffee when user declines experiment."
+    },
+    {
+      "status": "open",
+      "area": "ux",
+      "topic": "Other expanded coffees on current change",
+      "question": "Whether unrelated expanded reference cards remain open."
+    },
+    {
+      "status": "open",
+      "area": "add_coffee",
+      "topic": "Canonical match presentation",
+      "question": "Exact screen choreography for exact/fuzzy matches."
+    },
+    {
+      "status": "open",
+      "area": "ux",
+      "topic": "Full screen vs sheet",
+      "question": "Responsive choice for Settings/Add Coffee/Log Shot."
+    },
+    {
+      "status": "open",
+      "area": "public",
+      "topic": "Community note moderation",
+      "question": "Abuse/PII/reporting before public launch."
+    },
+    {
+      "status": "open",
+      "area": "profiles",
+      "topic": "Additional advanced styles",
+      "question": "Whether research profiles become first-class beyond current five."
+    },
+    {
+      "status": "open",
+      "area": "technical",
+      "topic": "Hosting/backend/auth provider",
+      "question": "Provider stack, budget, domain, operational preferences."
+    },
+    {
+      "status": "open",
+      "area": "sync",
+      "topic": "Offline conflict resolution",
+      "question": "Conflict policy for edits/logs across devices."
+    }
+  ],
+  "change_control": {
+    "ask_questions_one_at_a_time": true,
+    "update_spec_for_material_decisions": true,
+    "preserve_superseded_rationale": true,
+    "do_not_silently_infer_requirement_from_implementation": true
+  },
+  "approved_amendments": [
+    {
+      "id": "OWNER-IMPORT-20261014",
+      "status": "Locked",
+      "date": "2026-10-14",
+      "approved_by": "Owner, explicit chat approval after comparison of full hosted reconstruction first vs owner-only personal-history import first",
+      "supersedes": "Only the sequence of the full hosted recovery prerequisite for the one existing owner-only historical import; no other existing Locked decision is overridden",
+      "decision": "Permit a one-time import of the owner-reviewed local-prototype data into the pre-existing private, authenticated, admitted owner cloud account before proof of a complete hosted Supabase reconstruction. Keep complete hosted-platform recovery mandatory before external beta.",
+      "technical_scope": {
+        "server_enforced_owner_id": "Unique currently admitted account resolved inside private Supabase schema, never encoded in a public frontend or GitHub file",
+        "allowed_number_of_commits": 1,
+        "eligibility": "Owner-only and initially empty workspace, backed by owner download of independent recovery copy",
+        "expiration": "24 hours after grant; immediately close after one successful commit",
+        "recovery_verified_at": "MUST remain NULL until complete hosted recovery is truly verified",
+        "public_access": "No change to Netlify team SSO, member admission, registration, RLS, community visibility, or auth requirements",
+        "source_protection": "No change to original v0.2.0 device data or reviewed backup files",
+        "no_paid_domain_or_services": true
+      },
+      "prior_evidence": [
+        "Owner validated reviewed JSON in hosted app",
+        "Owner confirmed independent import recovery JSON was downloaded",
+        "Approved encrypted DB and source ZIP delivered automatically to private Drive",
+        "Isolated main recovery run 38579702304 passed with 35 first-party tables plus core Auth rows, 37 policies, 91 indexes, 19 app triggers, 29 functions and one signup trigger"
+      ],
+      "limitations": [
+        "No complete hosted Supabase rebuild or nonsecret provider configuration recreation verified",
+        "Offsite encrypted ZIP presence and size checked, not full restoration from that exact ciphertext",
+        "Owner browser/real-device imported data not yet verified"
+      ],
+      "post_import_gates": [
+        "Account-bound counts and mappings, history and current coffee verified",
+        "Idempotence and app Log Shot -> Rate -> Recommendation smoke test",
+        "New encrypted source-inclusive backup automatically transferred to Drive with nonempty personal records",
+        "Isolated restore of nonzero imported rows verified",
+        "Full hosted-service disaster recovery, SMTP, external-auth/privacy and admin acceptance before external beta"
+      ],
+      "does_not_change_existing_locked_decisions": true
+    }
+  ]
+}
