@@ -106,3 +106,26 @@ test('official verifier allows the custom beta app origin while rejecting wildca
  assert.match(source,/if\(origin&&!allowOrigins\.has\(origin\)\)/);
  assert.doesNotMatch(source,/Access-Control-Allow-Origin':\s*'\*'/);
 });
+
+test('metadata-poor official Wuri product with one matching H1 can verify exact 2026 release',()=>{
+ const page='<html><head><title>Wuri – Sweet Bloom Coffee</title></head><body>'+
+  '<nav>Shop Coffee</nav><main><h1>Wuri</h1><h4>Heirloom Variety</h4>'+
+  '<p>Our last washed Ethiopian selection for 2026 comes from Wuri washing station.</p>'+
+  '<h3>Espresso</h3><p>COFFEE IN 18.5g ESPRESSO OUT 36g BREW TIME 20-22s</p></main></body></html>';
+ const input={name:'Wuri',roaster:'Sweet Bloom Coffee',release_label:'2026',
+  source_url:'https://sweetbloomcoffee.com/products/wuri'};
+ const verified=extractOfficialEvidence(page,input);
+ assert.equal(verified.ok,true);
+ assert.equal(verified.evidence_kind,'official_product_page');
+ assert.equal(verified.product_name,'Wuri');
+ assert.equal(verified.release_label,'2026');
+ assert.equal(verified.title_matches,true);
+ const falseTitle=extractOfficialEvidence(page,{...input,name:'Wurist'});
+ assert.equal(falseTitle.ok,false);
+ const falseYear=extractOfficialEvidence(page,{...input,release_label:'2025'});
+ assert.equal(falseYear.ok,false);
+ const badPage=extractOfficialEvidence(page,{...input,source_url:'https://sweetbloomcoffee.com/admin'});
+ assert.equal(badPage.ok,false);
+ const doubled=extractOfficialEvidence(page.replace('</main>','<h1>Wuri Blend</h1></main>'),input);
+ assert.equal(doubled.ok,false);
+});
