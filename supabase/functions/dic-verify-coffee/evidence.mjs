@@ -61,7 +61,7 @@ function uniqueProductHeading(html,sourceUrl,meta){
  if(headings.length!==1)return null;
  const heading=headings[0];
  const local=html.slice(heading.index,heading.index+4800);
- const bounded=local.split(/<h[2-4]\b[^>]*>\s*(?:more coffees|related products|you may also like)/i)[0];
+ const bounded=local.split(/<footer\b|<h[2-4]\b[^>]*>\s*(?:more coffees|related products|you may also like)/i)[0];
  const description=decodeHtml(bounded.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ')
   .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ')
   .replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')).slice(0,1000);
