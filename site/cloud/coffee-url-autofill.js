@@ -7,8 +7,8 @@ export const autofillFields=[
  ['tasting_notes','Tasting Notes']
 ];
 const reasons={
- invalid_url:'Enter a secure HTTPS link to the official coffee product page.',
- unrecognized_official_roaster:'This roaster is not in the verified official-source directory yet. Enter the coffee details manually; you can still add it.',
+ invalid_url:'Enter a secure HTTPS link to a public coffee product page.',
+ unrecognized_official_roaster:'This source could not be recognized or accessed. Enter coffee details manually if needed.',
  unsupported_official_product_url:'That link is not a supported official coffee product page. Try the specific product page or enter details manually.',
  ambiguous_or_missing_product:'We could not identify one specific coffee from the page metadata. Enter the details manually to avoid mixing different releases.',
  source_unavailable:'The roaster page is temporarily unavailable. You can enter the details manually.',
@@ -26,9 +26,13 @@ export function coffeeUrlPreviewMarkup(result){
  const fields=autofillFields.filter(([name])=>typeof result.fields?.[name]==='string'&&result.fields[name].trim());
  const existing=result.match?.classification==='exact_verified'?'This page also matches an existing verified coffee. Choosing Add Coffee will reuse its canonical record after the identity check.':
   result.match?.classification==='needs_confirmation'?'A similar verified coffee exists. You will be asked to confirm the right release before linking any records.':'';
+ const official=result.source==='official_roaster_product_metadata';
+ const heading=official?'Details Found On Official Roaster Page':'Suggested Details From Webpage';
+ const sourceLabel=official?'Official Source Preview':'Unverified Page';
+ const caution=official?'Review these suggestions; a page preview alone does not verify the exact release.':'The webpage is not yet a verified official source. Review these extracted suggestions and leave unconfirmed facts blank.';
  return `<section class="coffee-url-preview">
-  <div class="coffee-url-preview-title"><strong>Details Found On Official Roaster Page</strong><span class="coffee-source-label">Source Checked</span></div>
-  <p class="helper">Review these suggestions before applying them. Fields you already entered will not be overwritten.</p>
+  <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
+  <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.fields[key])}</dd></div>`).join('')}</dl>
   ${existing?`<p class="helper coffee-match-alert">${e(existing)}</p>`:''}
   ${button('Apply Suggested Details','apply-coffee-url','','secondary compact')}
