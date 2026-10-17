@@ -134,7 +134,7 @@ test('unknown schema.org Product yields correctly labeled proposed, not Verified
  assert.equal(r.fields.origin,'Sidama, Ethiopia');
  assert.equal(r.fields.process,'Washed');
  assert.equal(r.fields.variety,'Heirloom');
- assert.equal(r.fields.roast_level,'Light-Medium');
+ assert.equal(r.fields.roast_level,'Medium-Light');
  assert.equal(r.fields.release_label,'2026');
  assert.equal(r.fields.tasting_notes,'Peach, bergamot, honey');
  assert.equal(r.fields.producer,undefined);
