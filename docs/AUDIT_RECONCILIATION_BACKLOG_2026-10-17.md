@@ -103,6 +103,12 @@ GitHub branch protection/rulesets, live Netlify billing/build-hook configuration
 
 Missing research bodies/workshop material remain unavailable in the retrieved source; no citations, approvals or evidence were invented. The old original Open list is an audit trail, not a command to ask 20 questions again.
 
+## Final handoff checkpoint
+
+The reconciliation was committed as [c752cd0960e5672e1da6bb2492b30fa2ce8ebdf9](https://github.com/Schulzet3/The-Dial-In-Collective/commit/c752cd0960e5672e1da6bb2492b30fa2ce8ebdf9). Its parent/tree, seven-file diff, all changed content/blob hashes and expected development ref passed read-back. [CI run 39003676568](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39003676568) completed success for that exact SHA. All 24 open issue bodies were checked; #8's crosswalk criteria are marked complete while its unresolved choices remain open. No deployment occurred and production stayed on the same ready deploy.
+
+The owner subsequently supplied these source attachments in this chat: `dial-in-collective.jsx`; `Espresso_Recommendation_Engine_Handoff.zip`; `Espresso_Recommendation_Engine_Available_Archive_2026-08-21.zip`; `Espresso Extraction Windows by Roast Level and Shot Style.pdf`; `Old 2.pdf`; `Old Chat.pdf`; `Recommend email domain hosting.pdf`; `Build Web App.pdf`; and `DIC Backup Watchdog.pdf`. This final handoff records attachment availability only: their contents and whether they recover the missing original research/workshop material were **not newly inspected or imported in this checkpoint**. Do not certify source recovery from filenames, publish raw private chat exports, or let older attachments override later Locked decisions. Continue source recovery under [#30](https://github.com/Schulzet3/The-Dial-In-Collective/issues/30); if these attachments are absent in another chat, obtain the named files before making content claims.
+
 ## Resuming
 
 Read [CURRENT_STATUS](CURRENT_STATUS.md), this backlog and [decision crosswalk](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md), then the actual issue and current source. Keep Log Shot → Rate → Recommendation fast. Preserve all Locked decisions and the exact purge evidence. Commit/ref/content read-back is required before reporting GitHub edits complete.
