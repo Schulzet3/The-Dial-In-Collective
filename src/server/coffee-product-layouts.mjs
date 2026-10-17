@@ -44,6 +44,10 @@ function addExtra(extras,kind,value){
 function field(fields,label,value,add,extras,clean){
  const kind=getKey(label),raw=cleanValue(value,clean,260);
  if(!kind||!isInfoText(raw))return;
+ // An adjacent coffee story is never a producer/variety/origin name.
+ if(['producer','variety','origin','release_label'].includes(kind)&&
+   (/[.!?]\s*$/.test(raw)||raw.split(/\s+/).length>17))return;
+ if(kind==='variety'&&/\b(?:masl|meters?|agtron)\b/i.test(raw))return;
  if(kind==='agtron'){
   const x=raw.match(/(?:\b(?:agtron)\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)\b|\b(\d{1,3}(?:\.\d{1,2})?)\s*(?:agtron)\b)/i);
   if(x)addExtra(extras,'agtron',x[1]||x[2]);
@@ -75,8 +79,21 @@ function field(fields,label,value,add,extras,clean){
  else add(kind,raw);
 }
 function parsePairs(tokens,fields,add,extras,clean){
- // Actual storefront sections often render plain headings next to their
- // values, with a small icon/span between them. Never cross a new label.
+ // First trust value-then-metric layouts (Onyx). A subsequent unrelated
+ // metric must never overwrite an earlier explicit reverse-layout value.
+ // Preserve exact category evidence without relying on numeric roast color.
+ for(let i=1;i<tokens.length;i++){
+  const label=tokens[i],kind=getKey(label.text);
+  if(!kind||!['roast_level','origin','variety','process','elevation_m','agtron','drying_method','harvest_season','preferred_extraction'].includes(kind))continue;
+  const prior=tokens[i-1];
+  if(label.at-prior.end>260||getKey(prior.text)||!isInfoText(prior.text))continue;
+  if(kind==='roast_level'&&!/^(Ultra Light|Very Light|Light|Light-Medium|Medium.Light|Medium|Medium-Dark|Dark)$/i.test(prior.text))continue;
+  if(kind==='elevation_m'&&!/\b\d{3,4}\b/.test(prior.text))continue;
+  if(kind==='variety'&&/\b(?:masl|meters?|agtron)\b/i.test(prior.text))continue;
+  field(fields,label.text,prior.text,add,extras,clean);
+ }
+ // Also support heading-then-value sections (PERC and SEY), but never
+ // convert unlabeled Light/Medium spectrum endpoints into a roast choice.
  for(let i=0;i<tokens.length;i++){
   const tok=tokens[i],kind=getKey(tok.text);
   if(!kind)continue;
@@ -87,22 +104,17 @@ function parsePairs(tokens,fields,add,extras,clean){
    if(!isInfoText(next.text))continue;
    // Skip decorative SVG and empty layout blocks; do not combine values.
    if(next.text.length>190 && kind!=='tasting_notes')break;
+   if(kind==='roast_level'){
+    const labels=tokens.slice(i+1,i+6).filter(x=>
+     /^(?:Ultra Light|Very Light|Light|Light-Medium|Medium.Light|Medium|Medium-Dark|Dark)$/i.test(x.text));
+    if(labels.length!==1)break;
+   }
+   if(kind==='variety'&&/\b(?:masl|meters?|agtron)\b/i.test(next.text))break;
    field(fields,tok.text,next.text,add,extras,clean);
    break;
   }
  }
- // Onyx-like product metrics put the value ABOVE a caption, e.g.
- // "Ultra Light / ROAST LEVEL" or "Natural / PROCESS METHOD".
- for(let i=1;i<tokens.length;i++){
-  const label=tokens[i],kind=getKey(label.text);
-  if(!kind||!['roast_level','origin','variety','process','elevation_m','agtron','drying_method','harvest_season','preferred_extraction'].includes(kind))continue;
-  const prior=tokens[i-1];
-  if(label.at-prior.end>260||getKey(prior.text)||!isInfoText(prior.text))continue;
-  // A preceding unrelated number cannot be a roast level.
-  if(kind==='roast_level'&&!/^(Ultra Light|Very Light|Light|Light-Medium|Medium.Light|Medium|Medium-Dark|Dark)$/i.test(prior.text))continue;
-  if(kind==='elevation_m'&&!/\b\d{3,4}\b/.test(prior.text))continue;
-  field(fields,label.text,prior.text,add,extras,clean);
- }
+
 }
 function selectedMarkup(html){
  const s=String(html||'').replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi,' ')

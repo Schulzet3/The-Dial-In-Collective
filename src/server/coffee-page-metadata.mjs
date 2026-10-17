@@ -111,7 +111,10 @@ function normalized(field,value){
  return s;
 }
 function addField(fields,rawKey,value){
- const key=LOOKUP.get(keyOf(rawKey));
+ // Layout extractors may pass either a visible roaster label or an
+ // already-resolved internal field key such as release_label. Never drop a
+ // supported canonical key just because its display synonym is absent.
+ const key=Object.hasOwn(FIELD_ALIASES,rawKey)?rawKey:LOOKUP.get(keyOf(rawKey));
  if(!key||fields[key])return;
  const s=normalized(key,value);
  if(s)fields[key]=s;
