@@ -41,7 +41,7 @@ for(let i=0;i<targets.length;i+=2){
   console.log('[DIC ROASTER SMOKE] '+JSON.stringify(item));
  }
 }
-// Recheck current production-like extraction after structured product fixes.
+// Third read-only public-page check after strict Onyx data scoping and PERC identity deconfliction.
 console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
  parsed:results.filter(x=>x.status==='parsed').length,
  blocked:results.filter(x=>x.status!=='parsed').map(x=>({roaster:x.roaster,status:x.status})),

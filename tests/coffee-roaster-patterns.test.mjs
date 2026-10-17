@@ -64,7 +64,7 @@ test('Onyx reversed metric labels give actual Ultra Light and Agtron without inf
  assert.equal(r.roaster_details.agtron,'133');
  assert.equal(r.fields.producer,undefined,'unrelated educational text is not a coffee producer');
  assert.equal(r.roaster_details.preferred_extraction,'Filter & Espresso','explicit product stat takes priority over unrelated guide titles');
- assert.equal(r.roaster_details.drying_method,undefined,'no false article fields');
+ assert.equal(r.roaster_details.drying_method,'Raised-Bed Dried','specific source metric overrides unrelated guide text');
  assert.equal(r.roaster_details.drying_method,'Raised-Bed Dried');
  assert.equal(r.roaster_details.harvest_season,'November');
  assert.equal(r.roaster_details.preferred_extraction,'Filter & Espresso');
