@@ -155,8 +155,11 @@ function explicitNearbyFacts(html,fields){
   if(v)fields.variety=clean(v[1],100);
  }
  if(!fields.process){
-  const p=near.match(/\b(fully washed|washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i);
-  if(p)fields.process=normalized('process',p[1]);
+  const combo=/\b(washed|natural|honey|anaerobic)\s*(?:&|and|\/|,)\s*(washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i.test(near);
+  if(!combo){
+   const p=near.match(/\b(fully washed|washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i);
+   if(p)fields.process=normalized('process',p[1]);
+  }
  }
  if(!fields.elevation_m){
   const m=near.match(/\b(\d{3,4}\s*(?:[-–]\s*\d{3,4})?)\s*m(?:asl|eters?\s*(?:above sea level)?)/i);
