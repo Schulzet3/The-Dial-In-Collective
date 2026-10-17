@@ -118,6 +118,54 @@ function productDetails(fields,p){
   addField(fields,key,value);
  }
 }
+function focusedProductText(html){
+ const h1=[...html.matchAll(/<h1\b[^>]*>([\s\S]{0,320}?)<\/h1>/gi)];
+ const start=h1.length===1?h1[0].index:0;
+ let crop=html.slice(start,start+25000);
+ const end=crop.search(/<h[2-4][^>]*>\s*(?:more coffees|you may also like|related products|shop similar)/i);
+ if(end>400)crop=crop.slice(0,end);
+ return clean(crop,6500);
+}
+function explicitNearbyFacts(html,fields){
+ const near=focusedProductText(html).slice(0,2600);
+ if(!fields.variety){
+  const v=near.match(/\b(Heirloom|Bourbon|Typica|Caturra|Catuai|Catuaí|Gesha|Geisha|SL28|SL34|Pacamara|Castillo|Bourbon Sidra)\s+variet(?:y|ies)\b/i);
+  if(v)fields.variety=clean(v[1],100);
+ }
+ if(!fields.process){
+  const p=near.match(/\b(fully washed|washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i);
+  if(p)fields.process=normalized('process',p[1]);
+ }
+ if(!fields.elevation_m){
+  const m=near.match(/\b(\d{3,4}\s*(?:[-–]\s*\d{3,4})?)\s*m(?:asl|eters?\s*(?:above sea level)?)/i);
+  if(m)fields.elevation_m=m[1].replace(/\s+/g,' ').trim()+' masl';
+ }
+ // Never infer harvest/producer/roast from surrounding promotional prose.
+}
+function explicitEspressoRecipe(html){
+ const text=focusedProductText(html);
+ const i=text.search(/\bEspresso\b/i);
+ if(i<0)return null;
+ const snippet=text.slice(i,i+750);
+ const dose=snippet.match(/\bCOFFEE\s+IN\s*:?\s*(\d{1,2}(?:\.\d)?)\s*g\b/i);
+ const yieldMass=snippet.match(/\bESPRESSO\s+OUT\s*:?\s*(\d{1,3}(?:\.\d)?)\s*g\b/i);
+ const time=snippet.match(/\bBREW\s+TIME\s*:?\s*(\d{1,2}(?:\.\d)?)\s*(?:[-–]\s*(\d{1,2}(?:\.\d)?))?\s*s(?:ec|econds?)?\b/i);
+ if(!dose||!yieldMass||!time)return null;
+ const input=Number(dose[1]),output=Number(yieldMass[1]),first=Number(time[1]),last=Number(time[2]||time[1]);
+ if(input<5||input>40||output<5||output>150||first<5||first>80||last<first||last>80)return null;
+ return {dose_g:input,yield_g:output,time_s_min:first,time_s_max:last};
+}
+function productHeading(html){
+ const matches=[...html.matchAll(/<h1\b[^>]*>([\s\S]{0,400}?)<\/h1>/gi)]
+  .map(m=>clean(m[1],170)).filter(x=>x&&!/^(shop|home|coffee|products|search|menu)$/i.test(x));
+ return matches.length===1?matches[0]:'';
+}
+function removeSiteSuffix(title,site){
+ const raw=clean(title,200),siteName=clean(site,120);
+ if(!siteName||!raw.toLowerCase().endsWith(siteName.toLowerCase()))return raw;
+ const stem=raw.slice(0,-siteName.length).replace(/[\s|–—-]+$/g,'').trim();
+ return stem||raw;
+}
 function labeledPairs(html,fields){
  // Structured specifications: <dt>Label</dt><dd>Value</dd>,
  // <tr><th>Label</th><td>Value</td></tr> and common flat key:value.
@@ -163,8 +211,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   let likelyPath=false;
   try{likelyPath=/\/(products?|coffee|coffees|beans?|shop)\/[^/]+/i.test(new URL(source_url).pathname);}catch{}
   const ogType=String(meta['og:type']||'');
-  if((/^product(?:\.|$)/i.test(ogType)||likelyPath)&&meta['og:title'])
-   p={name:meta['og:title'],brand:meta['og:site_name']||'',additionalProperty:[],description:meta.description||''};
+  if(/^product(?:\.|$)/i.test(ogType)||likelyPath){
+   const title=productHeading(html)||removeSiteSuffix(meta['og:title']||'',meta['og:site_name']);
+   if(title)p={name:title,brand:meta['og:site_name']||'',additionalProperty:[],description:meta.description||''};
+  }
  }
  if(!p||!textOf(p.name))return {ok:false,reason:'ambiguous_or_missing_product'};
  const fields={name:textOf(p.name,200)};
@@ -173,8 +223,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
   fields.roaster=siteName;
  labeledPairs(html,fields);
+ explicitNearbyFacts(html,fields);
+ const roaster_recipe=explicitEspressoRecipe(html);
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
+  ...(roaster_recipe?{roaster_recipe}:{}),
   note:'Best-effort webpage suggestions. The roaster, lot and release still require verification.'};
 }
