@@ -52,6 +52,10 @@ test('Onyx reversed metric labels give actual Ultra Light and Agtron without inf
  '<div>Ultra Light</div><div>ROAST LEVEL</div>'+
  '<div>Agtron #133</div><div>AGTRON</div>'+
  '<div>Natural</div><div>PROCESS METHOD</div>'+
+ '<div class="a-stat" data-name="country"><p>Ethiopia<br><label>ORIGIN</label></p></div>'+
+ '<div class="a-stat" data-name="ferment"><p>Natural<br><label>PROCESS METHOD</label></p></div>'+
+ '<div class="a-stat" data-name="season"><p>November<br><label>HARVEST SEASON</label></p></div>'+
+ '<div class="a-stat" data-name="roaster"><p>Loring S70 Peregrine<br><label>PRODUCTION ROASTER</label></p></div>'+
  '<div>Landrace</div><div>VARIETY</div>'+
  '<div>2150 MASL</div><div>ELEVATION</div>'+
  '<div>Raised-Bed Dried</div><div>DRYING METHOD</div>'+
@@ -61,6 +65,9 @@ test('Onyx reversed metric labels give actual Ultra Light and Agtron without inf
  assert.equal(r.fields.process,'Natural');
  assert.equal(r.fields.variety,'Landrace');
  assert.equal(r.fields.elevation_m,'2150 MASL');
+ assert.equal(r.fields.origin,'Ethiopia');
+ assert.equal(r.roaster_details.harvest_season,'November');
+ assert.equal(r.roaster_details.production_roaster,'Loring S70 Peregrine');
  assert.equal(r.roaster_details.agtron,'133');
  assert.equal(r.fields.producer,undefined,'unrelated educational text is not a coffee producer');
  assert.equal(r.roaster_details.preferred_extraction,'Filter & Espresso','explicit product stat takes priority over unrelated guide titles');

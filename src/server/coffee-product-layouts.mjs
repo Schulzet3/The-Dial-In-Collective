@@ -4,7 +4,7 @@
 // This is a parser, not a roaster-specific source-verification allowlist.
 // Never infer roast tier from an Agtron reading, roaster brand, hue or taste.
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
-const allowedExtra=new Set(['agtron','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail']);
+const allowedExtra=new Set(['agtron','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
  'Tasting Notes':'tasting_notes','Taste Notes':'tasting_notes','Cup Notes':'tasting_notes',
  'Reminds Us Of':'tasting_notes','Notes':'tasting_notes',
@@ -21,7 +21,7 @@ const aliases=new Map(Object.entries({
  'Roast Color':'agtron','Agtron':'agtron','Ground Agtron':'agtron',
  'Best Rested':'recommended_rest','Recommended Rest':'recommended_rest',
  'Drying Method':'drying_method','Harvest Season':'harvest_season',
- 'Preferred Extraction':'preferred_extraction',
+ 'Preferred Extraction':'preferred_extraction','Production Roaster':'production_roaster',
  'Process Detail':'processing_detail'
  }).map(([key,value])=>[key.replace(/[\p{M}]/gu,'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''),value]));
 const getKey=str=>aliases.get(String(str||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''));
@@ -58,7 +58,7 @@ function field(fields,label,value,add,extras,clean){
   if(m)addExtra(extras,kind,m[1]?m[1]+'–'+m[2]+' days':m[3]+' days');
   return;
  }
- if(kind==='harvest_season'||kind==='drying_method'||kind==='preferred_extraction'){
+ if(kind==='harvest_season'||kind==='drying_method'||kind==='preferred_extraction'||kind==='production_roaster'){
   addExtra(extras,kind,raw.slice(0,105));return;
  }
  if(kind==='processing_detail'){addExtra(extras,kind,raw.slice(0,160));return;}
@@ -145,7 +145,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   // Onyx publishes many general education sections on the product URL.
   // The actual coffee has named a-stat fields. Only read those source
   // blocks, never a distant paragraph titled "Producer"/"Extraction".
-  for(const m of html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["'](roast-level|variety|process-method|elevation|origin|harvest-season)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)){
+  for(const m of html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["'](roast-level|variety|process-method|elevation|origin|harvest-season|method|country|season|ferment|roaster)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)){
    const kind=m[1],p=m[2],label=(p.match(/<label\b[^>]*>([^<>]{2,75})<\/label>/i)||[])[1];
    if(!label)continue;
    const value=p.split(/<br\s*\/?\s*>/i)[0];
@@ -165,7 +165,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  }
  // PERC Shopify layouts render headings and values several nested elements
  // apart; no arbitrary cross-heading pairing is allowed.
- for(const m of page.matchAll(/<h2\b[^>]*>([\s\S]{1,85}?)<\/h2>((?:(?!<h2\b)[\s\S]){0,2100}?)<h6\b[^>]*>([^<>]{2,190})<\/h6>/gi)){
+ for(const m of html.matchAll(/<h2\b[^>]*>([\s\S]{1,85}?)<\/h2>((?:(?!<h2\b)[\s\S]){0,5200}?)<h6\b[^>]*>([^<>]{2,190})<\/h6>/gi)){
   const label=clean(m[1],75);
   if(getKey(label))field(fields,label,m[3],addField,extras,clean);
  }

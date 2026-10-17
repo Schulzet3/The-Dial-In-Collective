@@ -33,7 +33,7 @@ export function coffeeUrlPreviewMarkup(result,{applied=false}={}){
  // Noncanonical supplementary facts remain visible in a compact disclosure,
  // not silently saved as a roast classification or verified source metadata.
  const detailsLabels={
-  agtron:'Roaster Agtron',recommended_rest:'Recommended Rest',
+  agtron:'Roaster Agtron',production_roaster:'Production Roaster',recommended_rest:'Recommended Rest',
   drying_method:'Drying Method',harvest_season:'Harvest Season',
   preferred_extraction:'Preferred Extraction',processing_detail:'Processing Detail'
  };
