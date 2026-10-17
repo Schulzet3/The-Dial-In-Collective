@@ -24,7 +24,7 @@ for migration in supabase/migrations/*.sql; do
   fi
 done
 run_sql tests/sql/owner-fixture.sql
-for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard url_preview_release; do
+for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard url_preview_release universal_url_preview; do
   echo "Running $regression"
   run_sql "supabase/tests/$regression.sql"
 done
