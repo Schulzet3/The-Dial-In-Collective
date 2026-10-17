@@ -28,12 +28,9 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
    async findCoffeeMatches(payload){assertSecure();return unwrap(await sdk.rpc('dic_find_coffee_matches',{payload}));},
    async previewCoffeeUrl(source_url){
     assertSecure();
-    const official=unwrap(await sdk.functions.invoke('dic-preview-coffee',{body:{source_url}}));
-    // Retain the trusted fast path for curated verified roaster domains.
-    // Universal page extraction is a separate, unverified preview service,
-    // never a shortcut around canonical matching/source promotion.
-    const broaden=new Set(['unrecognized_official_roaster','unsupported_official_product_url','ambiguous_or_missing_product','source_unavailable','source_fetch_failed','preview_unavailable']);
-    if(official?.ok||!broaden.has(official?.reason))return official;
+    // One URL lookup and one shared per-account rate claim. Do NOT invoke the
+    // legacy curated preview first: two fetches would defeat the >=30-second
+    // cooldown and unnecessarily consume member/provider requests.
     const {data,error}=await sdk.auth.getSession();
     const token=data?.session?.access_token;
     if(error||!token)throw new CloudError('Sign in before checking a coffee URL.','sign_in_required');
