@@ -119,3 +119,26 @@ test('official URL cannot rebind an older Coffee ID for an unknown harvest throu
  assert.match(promoted,/not private\.is_admin\(\)/);
 });
 
+
+test('published New Coffee preview click immediately populates blanks before Add Coffee',()=>{
+ const main=read('site/cloud/main.js');
+ const at=main.indexOf("if(a==='preview-coffee-url')");
+ const end=main.indexOf("if(a==='apply-coffee-url')",at);
+ assert.ok(at>0&&end>at);
+ const handler=main.slice(at,end);
+ assert.match(handler,/applyCoffeeUrlFields\(form,found\)/);
+ assert.match(handler,/coffeeUrlPreviewMarkup\(found,\{applied:!!found\?\.ok\}\)/);
+ const preview=coffeeUrlPreviewMarkup({ok:true,source:'unverified_public_page',
+  fields:{name:'Wuri',roaster:'Sweet Bloom'}},{applied:true});
+ assert.match(preview,/Unverified Page/);
+ assert.match(preview,/Review or correct them, then click Add Coffee/);
+ assert.doesNotMatch(preview,/data-action="apply-coffee-url"/);
+});
+test('client fallback supports missing official metadata without treating quota denial as permission',()=>{
+ const client=read('site/cloud/client.js');
+ assert.match(client,/ambiguous_or_missing_product/);
+ assert.match(client,/source_unavailable/);
+ assert.match(client,/\/api\/coffee-preview/);
+ assert.match(client,/getSession\(\)/);
+ assert.doesNotMatch(client,/SUPABASE_SERVICE_ROLE_KEY/);
+});
