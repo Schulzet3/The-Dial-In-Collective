@@ -30,12 +30,24 @@ export function coffeeUrlPreviewMarkup(result,{applied=false}={}){
  const heading=official?'Details Found On Official Roaster Page':'Suggested Details From Webpage';
  const sourceLabel=official?'Official Source Preview':'Unverified Page';
  const caution=official?'Review these suggestions; a page preview alone does not verify the exact release.':'The webpage is not yet a verified official source. Review these extracted suggestions and leave unconfirmed facts blank.';
+ // Noncanonical supplementary facts remain visible in a compact disclosure,
+ // not silently saved as a roast classification or verified source metadata.
+ const detailsLabels={
+  agtron:'Roaster Agtron',recommended_rest:'Recommended Rest',
+  drying_method:'Drying Method',harvest_season:'Harvest Season',
+  preferred_extraction:'Preferred Extraction',processing_detail:'Processing Detail'
+ };
+ const extras=Object.entries(detailsLabels).filter(([key])=>typeof result.roaster_details?.[key]==='string'&&result.roaster_details[key]);
+ const fullRecipe=!!(result.roaster_recipe&&Number.isFinite(result.roaster_recipe.dose_g)&&Number.isFinite(result.roaster_recipe.yield_g)&&Number.isFinite(result.roaster_recipe.time_s_min));
+ const publishedRecipe=fullRecipe?`${e(result.roaster_recipe.dose_g)} g in, ${e(result.roaster_recipe.yield_g)} g out, ${e(result.roaster_recipe.time_s_min)}–${e(result.roaster_recipe.time_s_max)} s${result.roaster_recipe.temperature?', '+e(result.roaster_recipe.temperature):''}`:
+  Number.isFinite(result.roaster_recipe?.ratio)?'Espresso ratio 1:'+e(result.roaster_recipe.ratio)+' (dose and time not supplied)':'';
  return `<section class="coffee-url-preview">
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.fields[key])}</dd></div>`).join('')}</dl>
   ${result.roast_hint?`<p class="helper" role="note"><strong>Roast graphic:</strong> ${e(result.roast_hint)}</p>`:''}
-  ${result.roaster_recipe?`<p class="helper"><strong>Roaster's published espresso recipe:</strong> ${e(result.roaster_recipe.dose_g)} g in, ${e(result.roaster_recipe.yield_g)} g out, ${e(result.roaster_recipe.time_s_min)}–${e(result.roaster_recipe.time_s_max)} s. Reference only; not applied or saved automatically.</p>`:''}
+  ${publishedRecipe?`<p class="helper"><strong>Roaster's published espresso ${fullRecipe?'recipe':'reference'}:</strong> ${publishedRecipe}. Reference only; not applied or saved automatically.</p>`:''}
+  ${extras.length?`<details class="coffee-url-supplement"><summary>Other published details (${extras.length})</summary><dl class="coffee-url-fields">${extras.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.roaster_details[key])}</dd></div>`).join('')}</dl><p class="helper">Source information only. Not a calibrated roast classification or saved coffee field.</p></details>`:''}
   ${existing?`<p class="helper coffee-match-alert">${e(existing)}</p>`:''}
   ${applied?'<p class="helper">Available details filled into the form. Review or correct them, then click Add Coffee.</p>':button('Apply Suggested Details','apply-coffee-url','','secondary compact')}
  </section>`;

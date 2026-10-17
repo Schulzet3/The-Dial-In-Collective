@@ -204,7 +204,39 @@ function explicitNearbyFacts(html,fields){
  // Never infer harvest or roast from surrounding promotional prose.
 }
 function explicitEspressoRecipe(html){
+ // Some roasters publish equipment-specific Espresso recipes alongside V60
+ // and AeroPress recipes. Scope strictly to the named Espresso heading, not
+ // the adjacent filter method, and never invent missing dose/yield/time.
+ for(const h of html.matchAll(/<h([2-6])\b[^>]{0,400}>([^<>]{0,95}\bEspresso\b[^<>]{0,65})<\/h\1>/gi)){
+  const title=clean(h[2],85);
+  if(!/\bEspresso\b/i.test(title)||/^(?:Espresso\s*\|\s*Filter|Espresso Recipe|Filter\s*(?:&|and)\s*Espresso)$/i.test(title))continue;
+  let block=html.slice(h.index+h[0].length,h.index+h[0].length+2100);
+  const next=block.search(/<h[2-4]\b/i);if(next>80)block=block.slice(0,next);
+  const recipe=clean(block,1600);
+  const dose=recipe.match(/\bDOSE\s*:?\s*(\d{1,2}(?:\.\d)?)\s*g\b/i);
+  const yieldG=recipe.match(/\bYIELD\s*:?\s*(\d{1,3}(?:\.\d)?)\s*g\b/i);
+  const time=recipe.match(/\bTIME\s*:?\s*(?:(\d):)?(\d{1,2})(?:\s*(?:s|sec|seconds))?\b/i);
+  if(!dose||!yieldG||!time)continue;
+  const input=Number(dose[1]),output=Number(yieldG[1]);
+  const seconds=Number(time[2])+(time[1]?60*Number(time[1]):0);
+  if(input<5||input>40||output<5||output>150||seconds<5||seconds>80)continue;
+  const result={dose_g:input,yield_g:output,time_s_min:seconds,time_s_max:seconds,
+   method:title};
+  const temp=recipe.match(/\bTEMP\s*:?\s*(\d{2,3}(?:\.\d)?)\s*°?\s*(F|C)\b/i);
+  if(temp&&Number(temp[1])>=40&&Number(temp[1])<=220)
+   result.temperature=temp[1]+'°'+temp[2].toUpperCase();
+  return result;
+ }
+ // Proud Mary provides an Espresso 1:2.5 alongside Filter 1:16 but does
+ // NOT publish the dose, output mass or seconds. Expose a ratio reference
+ // without fabricating a full recipe or inserting a default dose.
  const text=focusedProductText(html);
+ const ratioOnly=text.match(/\bEspresso\s*\|\s*Filter\b[\s\S]{0,130}?\bRatio\s*1\s*:\s*(\d(?:\.\d{1,2})?)\s*\|\s*1\s*:/i);
+ if(ratioOnly){
+  const ratio=Number(ratioOnly[1]);
+  if(ratio>=1&&ratio<=5)return {ratio,method:'Espresso'};
+ }
+
  const i=text.search(/\bEspresso\b/i);
  if(i<0)return null;
  const snippet=text.slice(i,i+750);
