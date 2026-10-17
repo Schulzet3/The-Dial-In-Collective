@@ -129,3 +129,12 @@ test('metadata-poor official Wuri product with one matching H1 can verify exact 
  const doubled=extractOfficialEvidence(page.replace('</main>','<h1>Wuri Blend</h1></main>'),input);
  assert.equal(doubled.ok,false);
 });
+
+test('official H1 release proof ignores a footer-only copyright year',()=>{
+ const page='<html><main><h1>Wuri</h1><p>Washed coffee in Ethiopia.</p></main>'+
+  '<footer>Copyright 2026 Sweet Bloom Coffee</footer></html>';
+ const found=extractOfficialEvidence(page,{name:'Wuri',release_label:'2026',
+  source_url:'https://sweetbloomcoffee.com/products/wuri'});
+ assert.equal(found.ok,false);
+ assert.equal(found.reason,'product_title_not_verified');
+});
