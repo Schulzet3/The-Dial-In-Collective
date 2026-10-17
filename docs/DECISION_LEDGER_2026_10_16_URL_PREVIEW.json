@@ -1,0 +1,15 @@
+{
+  "product": "The Dial In Collective",
+  "date": "2026-10-16",
+  "scope": "Additive Locked product decision from owner: all coffee URL preview paths; retain all original Master Specification and Decision Ledger decisions.",
+  "decisions": [
+    {
+      "id": "COFFEE-URL-20261016-01",
+      "status": "Locked",
+      "area": "add_coffee",
+      "topic": "URL preview per-user cooldown",
+      "decision": "Enforce at least 30 seconds between all roaster URL preview/metadata lookup requests from the same admitted member account, whether the roaster is already trusted or previously unknown. The quota must be account-wide across preview paths, not separately bypassable by known/unknown domain fallbacks. A member can still manually add a coffee and log shots during cooldown."
+    }
+  ],
+  "implementation_notes": "60 lookups per rolling 24-hour window is a reversible anti-abuse engineering default, NOT a Locked product requirement. User explicitly authorized publishing this release without asking for another Netlify credit verification; do not fictionalize billing evidence or change canonical cost-control policies. URL/screenshot first, optional device-local Claude BYOK, community Verified provenance and Pending personal use remain unchanged."
+}
