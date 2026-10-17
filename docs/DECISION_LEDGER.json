@@ -1145,6 +1145,30 @@
         ],
         "implementation_notes": "60 lookups per rolling 24-hour window is a reversible anti-abuse engineering default, NOT a Locked product requirement. User explicitly authorized publishing this release without asking for another Netlify credit verification; do not fictionalize billing evidence or change canonical cost-control policies. URL/screenshot first, optional device-local Claude BYOK, community Verified provenance and Pending personal use remain unchanged."
       }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json",
+      "git_blob_sha": "b2e5c623df319a4d509ad11832f8281ab3ca0b0c",
+      "content": {
+        "product": "The Dial In Collective",
+        "owner_decision_local_date": "2026-10-16",
+        "scope": "Additive owner-approved preview quota setting. Preserve existing Locked 30-second shared account cooldown, source/identity protection, private Pending verification, manual coffee entry and shot logging.",
+        "decisions": [
+          {
+            "id": "COFFEE-URL-DAILY-20261016-02",
+            "status": "Locked",
+            "topic": "Initial account-wide daily URL preview budget",
+            "decision": "Start with at most 12 successful URL preview quota claims per admitted member account per 24-hour budget window, shared by known-roaster and unknown-roaster preview routes. This limit replaces the former 60-claim engineering default; it does not replace or weaken the at-least-30-second cooldown.",
+            "revision_policy": "If the owner or another member reaches this limit during real use, review feedback and consider a higher limit. Do not automatically increase it or grant individual exceptions without a subsequent explicit owner decision.",
+            "unaffected": "Manual Add Coffee and Log Shot remain available when automatic previews are limited. Preview never globally verifies a coffee without trusted source checks."
+          }
+        ],
+        "implementation_boundary": {
+          "original_historical_ledger_objects": "Retain verbatim; this decision supersedes the 60/day engineering default in current requirements only.",
+          "production": "Decision approved; any production database migration requires normal change/test and release authorization. Until applied, production retains its previous 60/day setting.",
+          "window_precision": "The existing counter resets 24 hours after the first claim in a window; a strict sliding per-event lookback would be a separate algorithm change. Do not silently broaden migration scope."
+        }
+      }
     }
   ],
   "implementation_and_recovery_sources": [
@@ -1928,24 +1952,24 @@
       "current": "OWNER-IMPORT-20261014",
       "supersedes": "Hosted recovery first only for one original owner's already-completed import",
       "scope": "One-use, expiring owner-only exception, now closed. Does not authorize repeat imports or new data writes; later successful hosted recovery is acceptance evidence, not a blanket import unlock."
+    },
+    {
+      "topic": "URL preview daily budget",
+      "current": "COFFEE-URL-DAILY-20261016-02",
+      "supersedes": "Existing 60/day engineering default and superseded earlier 25/day numeric tuning",
+      "scope": "Owner-Locked starting 12 allowed claims per admitted account per 24-hour budget window, shared by known/unknown sources; >=30-second shared cooldown, manual entry/logging, and source verification remain unchanged. Future increases require owner approval. Production application awaits separate release checks.",
+      "source": "docs/DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json"
     }
   ],
   "open_current_owner_decisions": [
-    {
-      "id": "OPEN-URL-DAILY-CAP",
-      "status": "Open",
-      "question": "25 or 10 URL lookups per rolling day?",
-      "current_implementation": "60 per rolling 24 hours; shared >=30-second cooldown remains Locked.",
-      "next": true,
-      "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md"
-    },
     {
       "id": "OPEN-ROAST-TAXONOMY",
       "status": "Open",
       "question": "Adopt six roast tiers and displayed naming?",
       "current_implementation": "Light, Light-Medium, Medium, Medium-Dark, Dark.",
       "proposal": "Ultra Light, Light, Medium Light, Medium, Medium Dark, Dark; not adopted.",
-      "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md"
+      "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md",
+      "next": true
     }
   ],
   "source_limits": [
@@ -1957,5 +1981,30 @@
     "explicit_owner_approval_for_supersession": true,
     "update_master_specification_and_ledger_before_behavior_change": true,
     "preserve_source_evidence": true
+  },
+  "resolved_current_owner_decisions": [
+    {
+      "historical_open_record": {
+        "id": "OPEN-URL-DAILY-CAP",
+        "status": "Open",
+        "question": "25 or 10 URL lookups per rolling day?",
+        "current_implementation": "60 per rolling 24 hours; shared >=30-second cooldown remains Locked.",
+        "next": true,
+        "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md"
+      },
+      "resolution_id": "COFFEE-URL-DAILY-20261016-02",
+      "resolution": "Owner explicitly chose 12 per account per 24-hour budget window instead of 25, 10 or the 60-default.",
+      "owner_decision_local_date": "2026-10-16"
+    }
+  ],
+  "current_owner_approved_daily_budget": {
+    "id": "COFFEE-URL-DAILY-20261016-02",
+    "status": "Locked",
+    "claims_per_window": 12,
+    "window_hours": 24,
+    "implementation": "Source change pending database migration and independently verified production rollout",
+    "earlier_engineering_default": 60,
+    "unchanged_cooldown_seconds": 30,
+    "feedback_reevaluation": "Increase only after explicit owner approval following actual member feedback"
   }
 }

@@ -24,12 +24,22 @@ Current product copy uses **The Dial In Collective** and **dial in**, without hy
 | Coffee approval | COFFEE-20261014-01 | Owning admin exception and trusted release-specific automated verification only; unresolved member entries stay private Pending and usable. |
 | URL extraction breadth | Universal roaster URL preview section of docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md | Safe authenticated extraction from any public HTTPS roaster; trusted official-source Verified promotion remains separate. Do not weaken SSRF/bounds or infer screenshot/OCR implementation. |
 | URL preview cooldown | COFFEE-URL-20261016-01 | Shared account-wide >=30 seconds on known and unknown roaster previews. Manual entry/logging remain available; current 60/rolling-day budget is engineering tuning, not Locked. Old 25/day is not silently reinstated. |
+| Daily URL preview budget | COFFEE-URL-DAILY-20261016-02 | Owner-approved starting cap of 12 allowed URL preview quota claims per admitted member account per 24-hour budget window, shared by known and unknown roaster preview paths; may be raised after actual member feedback only by a later explicit owner decision. Supersedes the adjustable 60/day engineering setting, not the Locked >=30-second account-wide cooldown. |
 | Owner historical import | OWNER-IMPORT-20261014 | One-use, expiring owner-only exception, now closed. Does not authorize repeat imports or new data writes; later successful hosted recovery is acceptance evidence, not a blanket import unlock. |
+
+## Owner-approved daily URL budget (Locked, October 16, 2026 local)
+
+The owner explicitly chose **12 URL preview quota claims per admitted member account per 24-hour budget window** as the starting limit, instead of the earlier 60/day adjustable engineering setting or proposed 25/10. Known-roaster and unknown-roaster preview paths must share the same account limit; a successful quota claim counts even when external webpage extraction subsequently fails. When this limit affects the owner or members during real use, review actual feedback and **consider** raising it with a subsequent explicit decision; do not silently or automatically raise it.
+
+**Unchanged:** the separate owner-Locked minimum **30 seconds between URL preview requests across all paths**, private Pending and trusted Verified handling, network/SSRF protections, and access to manual Add Coffee and Log Shot during cooldown or daily limits. This additive decision does not imply approval to deploy or alter production data without the established release process.
+
+**Implementation precision:** the current stored counter window resets 24 hours after the first allowed claim within that window. This is a 24-hour per-account budget window, not an independently verified strict trailing-24-hour event history. The approved number change should not silently rewrite the accounting algorithm; any strict sliding-window enhancement should be separately assessed.
+
+Authority: [COFFEE-URL-DAILY-20261016-02](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json). Older preserved source paragraphs describing 25/day or 60/day remain historical and are superseded **only for this daily budget setting**.
 
 ## Open product questions, not adopted requirements
 
-1. Next owner question: **25 or 10 URL lookups per rolling 24 hours?** Production currently uses the adjustable 60/day budget. The account-wide >=30-second cooldown remains Locked.
-2. Separately decide whether to adopt the proposed six roast tiers and naming. Current stored choices remain Light / Light-Medium / Medium / Medium-Dark / Dark. Ultra Light is not silently coerced into Light.
+1. Separately decide whether to adopt the proposed six roast tiers and naming. Current stored choices remain Light / Light-Medium / Medium / Medium-Dark / Dark. Ultra Light is not silently coerced into Light.
 
 These remain Open as recorded in the [roast extraction report](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md). This consolidation does not ask them again or implement either proposal.
 
