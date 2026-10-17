@@ -223,9 +223,10 @@ test('Netlify endpoint uses rate limiting, private server-only import paths and 
  assert.doesNotMatch(endpoint,/service_role|SUPABASE_SERVICE_ROLE_KEY/);
  assert.doesNotMatch(endpoint,/dic_trusted_source_verify/);
  const migration=read('supabase/migrations/20261016235900_dic_universal_coffee_preview_quota.sql');
- assert.match(migration,/private.dic_universal_preview_attempts/);
+ assert.match(migration,/private.dic_url_preview_attempts/);
  assert.match(migration,/private.is_member\(\)/);
  assert.match(migration,/attempts>=60/);
- assert.match(migration,/interval '3 seconds'/);
+ assert.match(migration,/interval '30 seconds'/);
+ assert.match(migration,/private.dic_shared_preview_claim/);
  assert.match(migration,/revoke all on function/);
 });
