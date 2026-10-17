@@ -2,7 +2,7 @@
 
 Start with [Current Status](CURRENT_STATUS.md), [Master Specification](MASTER_SPECIFICATION.md), and [Decision Ledger](DECISION_LEDGER.json), on `development/backend-foundation`. The canonical specification includes the complete recovered baseline and available GitHub specification addenda; the consolidated ledger preserves original objects and scoped supersessions. Historical statuses never reopen passed acceptance or override Locked decisions.
 
-[GitHub continuity report](GITHUB_CONTINUITY_2026-10-17.md) describes this documentation consolidation, verification boundaries and provider limits. [AGENTS](../AGENTS.md) defines future handoffs. The next owner product question is the daily URL budget; ask it separately from roast taxonomy. The prior continuity/audit work was documentation-only; the subsequent owner-authorized exact Hambela purge is recorded below. No deployment is part of the purge.
+[GitHub continuity report](GITHUB_CONTINUITY_2026-10-17.md) describes this documentation consolidation, verification boundaries and provider limits. [AGENTS](../AGENTS.md) defines future handoffs. The owner has now Locked both the 12-preview budget (live) and the seven roast categories with five specific coffee assignments (production rollout pending). Start with [seven-tier rollout checkpoint](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md) and Current Status; do not re-ask the decided product questions. The prior continuity/audit work was documentation-only; the subsequent owner-authorized exact Hambela purge is recorded below. No deployment is part of the purge.
 
 ## Development gap audit and cross-session handoff
 
@@ -19,6 +19,8 @@ The files below remain at their existing locations as preserved decision source 
 - [DECISION_LEDGER_2026_10_14_UX.json](DECISION_LEDGER_2026_10_14_UX.json)
 - [DECISION_LEDGER_2026_10_16_URL_PREVIEW.json](DECISION_LEDGER_2026_10_16_URL_PREVIEW.json)
 - [DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json) (12-claim owner decision; production applied and independently verified)
+- [DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json](DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json) (seven Title Case roast levels and exact five coffee choices, Locked)
+- [SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md) (tested rollout order, production schema live, data and frontend pending)
 - [DECISION_LEDGER_BACKEND_AMENDMENTS.json](DECISION_LEDGER_BACKEND_AMENDMENTS.json)
 - [DECISION_LEDGER_BADGE_COLORS_AMENDMENT.json](DECISION_LEDGER_BADGE_COLORS_AMENDMENT.json)
 - [DECISION_LEDGER_BADGE_LETTERING_AMENDMENT.json](DECISION_LEDGER_BADGE_LETTERING_AMENDMENT.json)

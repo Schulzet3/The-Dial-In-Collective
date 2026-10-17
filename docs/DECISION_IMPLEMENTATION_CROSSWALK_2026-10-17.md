@@ -9,7 +9,7 @@ This crosswalk preserves all **20 originally Open topics**. It records the stron
 ## Current owner decisions
 
 1. **RESOLVED, Locked:** 12 URL preview quota claims per member account per 24-hour window, owner approved 2026-10-16 Denver. [Source](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json). Production migration `dic_preview_daily_budget_12` (version `20261017050220`) applied; live CHECK and shared claim function verified to enforce 12. No Netlify redeploy. **Account-wide >=30 seconds** remains Locked.
-2. **OPEN, separate question:** whether to adopt six roast tiers/naming. Current five canonical values remain.
+2. **RESOLVED/Locked:** Owner approved seven Title Case tiers (Ultra Light, Very Light, Light, Medium-Light, Medium, Medium-Dark, Dark) plus five specific coffee corrections, see [amendment](DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json). Seven-tier code and guarded data migration are staged; phase-one Supabase schema was applied, existing coffee values and five-tier published frontend are unchanged pending credit-aware release.
 
 Other unresolved historic semantics should be discussed **only when the relevant implementation requires them**, one question at a time. Do not restart resolved provider selection, successful account/recovery checks or harmless existing responsive behavior merely because a baseline entry was Open.
 

@@ -2087,7 +2087,7 @@
       "Light-Medium": "Medium-Light"
     },
     "prior_rules": "Retain five previous canonical category meanings and default recipe numbers. New Ultra Light and Very Light reuse Light priors pending data.",
-    "implementation": "STAGED: final SQL/UI/data migration not yet complete or live; current database and published frontend remain five-tier.",
+    "implementation": "PARTIAL: seven-tier app source + SQL tests passed CI; phase-one backwards-compatible Supabase migration applied and read-back verified. Netlify frontend/Edge parser release and owner-coffee reclassifications NOT yet done; guarded final strict SQL migration staged but NOT applied.",
     "coffee_reclassifications": [
       {
         "coffee": "Hambela",
@@ -2119,6 +2119,30 @@
         "target": "Very Light",
         "scope": "private Pending; preserve original proposal evidence"
       }
-    ]
+    ],
+    "rollout": {
+      "approved_source_commit": "756d38f3f1a38b7c69230b2b1f3de5b7e1e86138",
+      "guarded_data_migration_source_commit": "9cd5c4be4f7642eaf60b7b9d4474bcc82fe0d04e",
+      "verified_passed_ci_runs": [
+        39006585559,
+        39006585609,
+        39006759139,
+        39006759100
+      ],
+      "phase_one_live": {
+        "migration": "dic_seven_roast_tier_compatibility",
+        "version": "20261017053258",
+        "status": "APPLIED_VERIFIED",
+        "data_changed": false
+      },
+      "phase_two_pending": {
+        "migration": "dic_seven_roast_owner_data",
+        "file": "supabase/migrations/20261017064000_dic_seven_roast_owner_data.sql",
+        "status": "STAGED_NOT_APPLIED",
+        "prerequisite": "Netlify published frontend seven-tier support confirmed, release/billing approved"
+      },
+      "verified_production_app_sha": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
+      "credit_guard": "Refresh Netlify current actual balance; post_release_billing_refresh_needed remains true"
+    }
   }
 }
