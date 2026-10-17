@@ -140,6 +140,36 @@ function selectedMarkup(html){
 }
 export function extractLayoutEvidence(html,{fields,addField,clean}){
  const extras={},page=selectedMarkup(html);
+ // Proud Mary renders certain product attributes with the value inside an
+ // <a> rather than a <p>. Read text only; never follow javascript: hrefs.
+ for(const block of page.matchAll(/<div\b[^>]*class=["'][^"']*meta-info[^"']*["'][^>]*>([\s\S]{0,1150}?)<\/div>/gi)){
+  const m=block[1].match(/<p\b[^>]*class=["'][^"']*meta-title[^"']*["'][^>]*>([^<>]{2,90})<\/p>[\s\S]{0,380}?<(?:a|p)\b[^>]*>([^<>]{1,220})<\/(?:a|p)>/i);
+  if(m)field(fields,clean(m[1],80),m[2],addField,extras,clean);
+ }
+ // PERC Shopify layouts render headings and values several nested elements
+ // apart; no arbitrary cross-heading pairing is allowed.
+ for(const m of page.matchAll(/<h2\b[^>]*>([\s\S]{1,85}?)<\/h2>((?:(?!<h2\b)[\s\S]){0,2100}?)<h6\b[^>]*>([^<>]{2,190})<\/h6>/gi)){
+  const label=clean(m[1],75);
+  if(getKey(label))field(fields,label,m[3],addField,extras,clean);
+ }
+ // Onyx uses a named product metric followed by a <label> inside the same
+ // compact <p>, e.g. "Ultra Light<br>Agtron #133<br><label>ROAST LEVEL".
+ // Only the explicit selected value counts, not Agtron inferred darkness.
+ for(const m of html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["'](?:roast-level|variety|process-method|elevation|origin|harvest-season)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)){
+  const label=(m[1].match(/<label\b[^>]*>([^<>]{2,75})<\/label>/i)||[])[1];
+  if(!label)continue;
+  const first=m[1].split(/<br\s*\/?\s*>/i)[0];
+  field(fields,clean(label,80),first,addField,extras,clean);
+  const agtron=(m[1].match(/\bAgtron\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)/i)||[])[1];
+  if(agtron)addExtra(extras,'agtron',agtron);
+ }
+ // SEY encodes process in a release-specific product title component:
+ // ETHIOPIAN LANDRACE - WASHED, never as a generic roast/brand heuristic.
+ const sey=(html.match(/<span\b[^>]*class=["'][^"']*coffeeTitle_varietyProcess[^"']*["'][^>]*>([^<>]{3,140})<\/span>/i)||[])[1];
+ if(sey){
+  const m=clean(sey,140).match(/\s[-–]\s(Washed|Natural|Honey|Anaerobic)\s*$/i);
+  if(m&&!fields.process)addField('process',m[1]);
+ }
  const tokens=[...page.matchAll(leaf)].slice(0,850).map(m=>({
   at:m.index,end:m.index+m[0].length,tag:m[1].toLowerCase(),text:clean(m[2],260)
  })).filter(m=>m.text);

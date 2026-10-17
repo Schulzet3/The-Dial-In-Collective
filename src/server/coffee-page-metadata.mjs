@@ -239,6 +239,13 @@ function explicitEspressoRecipe(html){
  // NOT publish the dose, output mass or seconds. Expose a ratio reference
  // without fabricating a full recipe or inserting a default dose.
  const text=focusedProductText(html);
+ // Proud Mary uses its product-specific meta-info block and often puts
+ // this before the H1 and far from the short main-title crop.
+ const compact=html.match(/<p\b[^>]*class=["'][^"']*meta-title[^"']*["'][^>]*>\s*Espresso\s*\|\s*Filter\s*<\/p>[\s\S]{0,450}?<p\b[^>]*>\s*Ratio\s*1\s*:\s*(\d(?:\.\d{1,2})?)\s*\|\s*1\s*:\s*\d/i);
+ if(compact){
+  const ratio=Number(compact[1]);
+  if(ratio>=1&&ratio<=5)return {ratio,method:'Espresso'};
+ }
  const ratioOnly=text.match(/\bEspresso\s*\|\s*Filter\b[\s\S]{0,130}?\bRatio\s*1\s*:\s*(\d(?:\.\d{1,2})?)\s*\|\s*1\s*:/i);
  if(ratioOnly){
   const ratio=Number(ratioOnly[1]);
@@ -277,11 +284,17 @@ function labeledPairs(html,fields){
  for(const m of html.matchAll(/<tr\b[^>]*>\s*<(?:th|td)\b[^>]*>([\s\S]{0,200}?)<\/(?:th|td)>\s*<td\b[^>]*>([\s\S]{0,800}?)<\/td>/gi)){
   addField(fields,clean(m[1],80),clean(m[2],600));
  }
- // Only parse bounded labeled blocks, never arbitrary text across the page.
- for(const m of html.matchAll(/<(?:p|li)\b[^>]*>([\s\S]{0,550}?)<\/(?:p|li)>/gi)){
-  const str=clean(m[1],420);
-  const label=str.match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|]|\s+[-–]\s+)\s*(.{2,300})$/u);
-  if(label)addField(fields,label[1],label[2]);
+ // On some pages a single coffee-info paragraph uses line breaks for
+ // multiple labeled fields. Parse each explicitly delimited part separately,
+ // instead of turning every later fact into a massive "Tasting Notes" value.
+ // Shopify SEO description metadata is intentionally excluded.
+ for(const m of html.matchAll(/<(?:p|li)\b[^>]*>([\s\S]{0,900}?)<\/(?:p|li)>/gi)){
+  const parts=m[1].split(/<br\s*\/?\s*>/gi);
+  for(const part of parts.slice(0,14)){
+   const str=clean(part,420);
+   const label=str.match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|]|\s+[-–]\s+)\s*(.{2,300})$/u);
+   if(label)addField(fields,label[1],label[2]);
+  }
  }
 }
 function shopifyProduct(html,target){
@@ -308,14 +321,41 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const selected=linked.length?linked:unlinked;
  const unique=[...new Map(selected.map(p=>[keyOf(textOf(p.name)),p]).filter(([key])=>key)).values()];
  let p=unique.length===1?unique[0]:null;
- if(unique.length>1)return {ok:false,reason:'ambiguous_or_missing_product'};
+ if(unique.length>1){
+  // Shopify's JSON-LD graph can list a current Product followed by eight
+  // purchase/size variants, all assigned its canonical URL. The exact
+  // product title in og:title is required; unrelated products stay rejected.
+  const ogName=clean(meta['og:title']||'',200);
+  const exact=unique.filter(row=>keyOf(textOf(row.name))===keyOf(ogName));
+  if(exact.length===1&&unique.every(row=>{
+   const name=textOf(row.name);
+   return keyOf(name)===keyOf(ogName)||name.startsWith(ogName+' - ');
+  }))p=exact[0];
+  else return {ok:false,reason:'ambiguous_or_missing_product'};
+ }
  if(!p){
   let likelyPath=false;
   try{likelyPath=/\/(products?|coffee|coffees|beans?|shop)\/[^/]+/i.test(new URL(source_url).pathname);}catch{}
   const ogType=String(meta['og:type']||'');
   if(/^product(?:\.|$)/i.test(ogType)||likelyPath){
-   const title=productHeading(html)||removeSiteSuffix(meta['og:title']||'',meta['og:site_name']);
-   if(title)p={name:title,brand:meta['og:site_name']||'',additionalProperty:[],description:meta.description||''};
+   let title=productHeading(html)||removeSiteSuffix(meta['og:title']||'',meta['og:site_name']);
+   let brand=meta['og:site_name']||'';
+   // Onyx does not emit a conventional Product JSON-LD/H1/og:title on the
+   // observed product page. Its canonical URL matches the exact handle and
+   // HTML <title> is a release-specific name followed by the roaster. Do
+   // not create an identity from the URL slug or a category page alone.
+   if(!title&&likelyPath){
+    const canonical=(html.match(/<link\b[^>]{0,950}\brel\s*=\s*["']canonical["'][^>]*>/i)||[])[0]||'';
+    const declared=attrs(canonical).href||'';
+    if(declared&&samePage(declared,source_url)){
+     const rawTitle=clean((html.match(/<title\b[^>]*>([\s\S]{1,240}?)<\/title>/i)||[])[1]||'',200);
+     const bits=rawTitle.split(/\s+[–—]\s+/);
+     if(bits.length===2&&bits[0].length>3&&bits[1].length>2&&bits[1].length<100){
+      title=bits[0];brand=bits[1];
+     }
+    }
+   }
+   if(title)p={name:title,brand,additionalProperty:[],description:meta.description||''};
   }
  }
  if(!p||!textOf(p.name))return {ok:false,reason:'ambiguous_or_missing_product'};

@@ -188,3 +188,73 @@ test('Agtron alone, unrelated marketing and HTML in supplemental details never m
  assert.doesNotMatch(rendered,/<script>/);
  assert.match(rendered,/&lt;script&gt;/);
 });
+
+test('live Onyx custom product markup parses explicitly labeled Ultra Light without JSON-LD or OG',()=>{
+ const link='https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural-26';
+ const html='<html><head><title>Ethiopia Mullugeta Muntasha Natural &ndash; Onyx Coffee Lab</title>'+
+  '<link rel="canonical" href="'+link+'"></head><body><main>'+
+  '<div class="a-stat" data-name="roast-level" data-stat-id="agtron"><span class="stat-text">'+
+  '<p>Ultra Light<br>Agtron #133<br><label>ROAST LEVEL</label></p></span></div>'+
+  '<div class="a-stat" data-name="variety"><span class="stat-text"><p>Landrace<br><label>VARIETY</label></p></span></div>'+
+  '</main></body></html>';
+ const r=preview(html,link+'?variant=43228176810082');
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.name,'Ethiopia Mullugeta Muntasha Natural');
+ assert.equal(r.fields.roaster,'Onyx Coffee Lab');
+ assert.equal(r.fields.roast_level,'Ultra Light');
+ assert.equal(r.fields.variety,'Landrace');
+ assert.equal(r.roaster_details.agtron,'133');
+});
+test('live PERC Product variants do not displace exact canonical product identity',()=>{
+ const url='https://perccoffee.com/products/colombia-franky-hoyos-adv-washed';
+ const raw=[
+  {'@type':'Product',name:'Colombia Franky Hoyos Adv Washed',url},
+  {'@type':'Product',name:'Colombia Franky Hoyos Adv Washed - 13oz / Whole',url},
+  {'@type':'Product',name:'Colombia Franky Hoyos Adv Washed - 5lb / Ground',url}
+ ];
+ const html='<html><head><meta property="og:title" content="Colombia Franky Hoyos Adv Washed">'+
+  '<meta property="og:type" content="product"></head><body>'+
+  '<script type="application/ld+json">'+JSON.stringify(raw)+'</script>'+
+  '<main><h2>ORIGIN</h2><rte-formatter><h6>Pitalito</h6></rte-formatter>'+
+  '<h2>ROAST COLOR</h2><rte-formatter><h6>74.7 Agtron</h6></rte-formatter></main></body></html>';
+ const r=preview(html,url+'?variant=53562522829114');
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.name,'Colombia Franky Hoyos Adv Washed');
+ assert.equal(r.fields.origin,'Pitalito');
+ assert.equal(r.roaster_details.agtron,'74.7');
+});
+test('live Proud Mary product specification links and ratio remain purely source-reported',()=>{
+ const url='https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural';
+ const html=head('HONDURAS | Ovidio Gomez | Catuai | Natural','Proud Mary Coffee')+
+  '<h1>HONDURAS | Ovidio Gomez | Catuai | Natural</h1>'+
+  '<div class="meta-info"><p class="meta-title">Variety</p>'+
+  '<a href="javascript:;">Catuai</a></div>'+
+  '<div class="meta-info"><p class="meta-title">Producer</p>'+
+  '<a href="javascript:;">Ovidio Gomez</a></div>'+
+  '<div class="meta-info"><p class="meta-title">Espresso | Filter</p>'+
+  '<p>Ratio 1:2.5 | 1:16</p></div>'+tail;
+ const r=preview(html,url);
+ assert.equal(r.fields.variety,'Catuai');
+ assert.equal(r.fields.producer,'Ovidio Gomez');
+ assert.equal(r.roaster_recipe.ratio,2.5);
+ assert.equal(r.roaster_recipe.dose_g,undefined);
+});
+test('live Little Wolf product paragraph with br-separated facts never contaminates tasting notes',()=>{
+ const html=head('Tegu','Little Wolf Coffee')+
+ '<h1>Tegu</h1><p>Tasting Notes: Lime, White Tea, Vibrant<br>'+
+ 'Origin: Kenya - Nyeri<br>Farm/Co-op: Tegu<br>Process: Washed<br>'+
+ 'Elevation: 1700m<br>Varietal: SL28, SL34, Batian, Ruiru 11</p>'+tail;
+ const r=preview(html,'https://littlewolf.coffee/products/tegu');
+ assert.equal(r.fields.tasting_notes,'Lime, White Tea, Vibrant');
+ assert.equal(r.fields.origin,'Kenya - Nyeri');
+ assert.equal(r.fields.producer,'Tegu');
+ assert.equal(r.fields.process,'Washed');
+ assert.equal(r.fields.elevation_m,'1700m');
+ assert.equal(r.fields.variety,'SL28, SL34, Batian, Ruiru 11');
+});
+test('live SEY explicit variety-process component may establish Washed without inventing roast level',()=>{
+ const r=coffee('2026 Chorso Bule','seycoffee.com/products/2026-chorso-bule-highest-elevation-project-ethiopia',
+ '<div><span class="coffeeTitle_varietyProcess">ETHIOPIAN LANDRACE - WASHED</span></div>');
+ assert.equal(r.fields.process,'Washed');
+ assert.equal(r.fields.roast_level,undefined);
+});
