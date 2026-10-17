@@ -6,7 +6,7 @@ const unwrap=r=>{if(r.error)throw new CloudError(r.error.message,r.error.code||'
 export function secureOrigin(location=globalThis.location,secure=globalThis.isSecureContext){
  if(!secure||!(location.protocol==='https:'||['localhost','127.0.0.1','[::1]'].includes(location.hostname)))throw new CloudError('Use HTTPS or localhost for account access. The plain Wi-Fi address is not safe for passwords.','insecure_origin');
 }
-export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin}={}){
+export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,previewFetch=globalThis.fetch,previewPath='/api/coffee-preview'}={}){
  let cached=null;const listeners=new Set();
  const subscription=sdk.auth.onAuthStateChange((event,session)=>{
   cached=session?.user?{id:session.user.id,email:session.user.email}:null;
@@ -26,7 +26,35 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin}={}
   async redeemInvite(token){assertSecure();const r=unwrap(await sdk.rpc('dic_redeem_invite',{token:token.trim()}));if(!r?.ok)throw new CloudError({verify_email:'Verify your email first.',invalid_invite:'This invitation is invalid, expired or exhausted.',rate_limited:'Too many attempts. Try again later.',access_revoked:'Your access was revoked. Contact the administrator.'}[r?.code]||'Invitation could not be accepted.',r?.code);return r;},
   async read(){assertSecure();return unwrap(await sdk.rpc('dic_read_personal_state'));},
    async findCoffeeMatches(payload){assertSecure();return unwrap(await sdk.rpc('dic_find_coffee_matches',{payload}));},
-   async previewCoffeeUrl(source_url){assertSecure();return unwrap(await sdk.functions.invoke('dic-preview-coffee',{body:{source_url}}));},
+   async previewCoffeeUrl(source_url){
+    assertSecure();
+    const official=unwrap(await sdk.functions.invoke('dic-preview-coffee',{body:{source_url}}));
+    // Retain the trusted fast path for curated verified roaster domains.
+    // Universal page extraction is a separate, unverified preview service,
+    // never a shortcut around canonical matching/source promotion.
+    const broaden=new Set(['unrecognized_official_roaster','unsupported_official_product_url','ambiguous_or_missing_product']);
+    if(official?.ok||!broaden.has(official?.reason))return official;
+    const {data,error}=await sdk.auth.getSession();
+    const token=data?.session?.access_token;
+    if(error||!token)throw new CloudError('Sign in before checking a coffee URL.','sign_in_required');
+    let page;
+    try{
+     const response=await previewFetch(previewPath,{
+      method:'POST',credentials:'same-origin',referrerPolicy:'no-referrer',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+      body:JSON.stringify({source_url})
+     });
+     page=await response.json();
+     if(!response.ok&&!page?.reason)page={ok:false,reason:'preview_unavailable'};
+    }catch{return {ok:false,reason:'preview_unavailable'};}
+    if(!page?.ok)return page||{ok:false,reason:'preview_unavailable'};
+    try{
+     const match=unwrap(await sdk.rpc('dic_find_coffee_matches',{
+      payload:{...page.fields,source_url:page.source_url||source_url}
+     }));
+     return {...page,match};
+    }catch{return {...page,match:null};}
+   },
    async verifyCoffeeSource(submissionId){assertSecure();return unwrap(await sdk.functions.invoke('dic-verify-coffee',{body:{submission_id:submissionId}}));},
   async mutate(e){assertSecure();return unwrap(await sdk.rpc('dic_apply_client_change',{expected_owner:e.owner,mutation_id:e.id,action:e.action,payload:e.payload}));},
   async previewImport(owner,backup){assertSecure();if(!owner)throw new CloudError('Sign in before importing.','signed_out');return unwrap(await sdk.rpc('dic_preview_import',{expected_owner:owner,backup}));},
