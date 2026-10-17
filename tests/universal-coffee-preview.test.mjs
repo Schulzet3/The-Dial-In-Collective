@@ -65,13 +65,13 @@ test('connection-time pinned DNS check rejects any mixed or private A answer',as
   });
  });
 });
-const mockRequest=({status=200,type='text/html',body='<html>coffee</html>'}={})=>{
+const mockRequest=({status=200,type='text/html',body='<html>coffee</html>',location=null}={})=>{
  const seen=[];
  const request=(options,callback)=>{
   const req=new EventEmitter();
   req.end=()=>{
    const res=new EventEmitter();
-   res.statusCode=status;res.headers={'content-type':type};
+   res.statusCode=status;res.headers={'content-type':type,...(location?{location}:{})};
    res.destroy=()=>{};
    queueMicrotask(()=>{
     callback(res);
@@ -98,6 +98,32 @@ test('secure fetch uses pinned TLS, refuses redirects and bounds body',async()=>
  assert.equal(Object.keys(options.headers).some(k=>/authorization|cookie|apikey/i.test(k)),false);
  assert.equal((await fetchPublicCoffeeHtml(productURL,{request:mockRequest({status:302}).request})).reason,'redirect_requires_review');
  assert.equal((await fetchPublicCoffeeHtml(productURL,{request:mockRequest({body:'x'.repeat(MAX_HTML_BYTES+1)}).request})).reason,'page_too_large');
+});
+test('HTTPS redirects can be followed only through fresh validated pinned connections',async()=>{
+ const bad=mockRequest({status:302,location:'https://127.0.0.1/secrets'});
+ const blocked=await fetchPublicCoffeeHtml(productURL,{request:bad.request});
+ assert.equal(blocked.reason,'redirect_requires_review');
+ assert.equal(bad.seen.length,1);
+ const downgrade=mockRequest({status:301,location:'http://unknownartisanroaster.com/coffee'});
+ assert.equal((await fetchPublicCoffeeHtml(productURL,{request:downgrade.request})).reason,'redirect_requires_review');
+ let count=0;
+ const original=[];
+ const safeRequest=(options,cb)=>{
+  original.push(options);
+  const opts=count++===0?{status:302,location:'/products/new-lot'}:
+   {status:200,body:'<html><h1>New Lot</h1></html>'};
+  return mockRequest(opts).request(options,cb);
+ };
+ const redirected=await fetchPublicCoffeeHtml(productURL,{request:safeRequest});
+ assert.equal(redirected.ok,true);
+ assert.equal(original.length,2);
+ assert.equal(original[0].hostname,original[1].hostname);
+ assert.equal(typeof original[1].lookup,'function');
+ assert.equal(redirected.source_url,'https://unknownartisanroaster.com/products/new-lot');
+ const infinite=mockRequest({status:302,location:'/products/loop'});
+ const loop=await fetchPublicCoffeeHtml(productURL,{request:infinite.request});
+ assert.equal(loop.reason,'redirect_requires_review');
+ assert.equal(infinite.seen.length,3);
 });
 test('unknown schema.org Product yields correctly labeled proposed, not Verified facts',()=>{
  const r=extractPublicCoffeeFacts(wrap(product),{source_url:productURL});
