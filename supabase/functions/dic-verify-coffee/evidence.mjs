@@ -47,6 +47,27 @@ function metas(html) {
  }
  return out;
 }
+function uniqueProductHeading(html,sourceUrl,meta){
+ // Metadata-poor roasters often publish an obvious product H1 but omit JSON-LD.
+ // Use H1 ONLY for an already trusted, exact-host official /products/{slug}
+ // source verified by the calling worker (not for arbitrary scraped webpages).
+ try{
+  const url=new URL(sourceUrl);
+  if(!/^\/(?:products|product)\/[a-z0-9][a-z0-9._~%+-]*\/?$/i.test(url.pathname))return null;
+ }catch{return null;}
+ const headings=[...html.matchAll(/<h1\b[^>]{0,400}>([\s\S]{0,320}?)<\/h1>/gi)]
+  .map(x=>({index:x.index,name:decodeHtml(x[1].replace(/<[^>]*>/g,' ')).replace(/\s+/g,' ').trim()}))
+  .filter(x=>x.name&&!/^(shop|products?|coffees?|search|home|menu)$/i.test(x.name));
+ if(headings.length!==1)return null;
+ const heading=headings[0];
+ const local=html.slice(heading.index,heading.index+4800);
+ const bounded=local.split(/<h[2-4]\b[^>]*>\s*(?:more coffees|related products|you may also like)/i)[0];
+ const description=decodeHtml(bounded.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ')
+  .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ')
+  .replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')).slice(0,1000);
+ return {name:heading.name,description:description||meta.description||'',url:sourceUrl,
+  kind:'official_product_page',attributes:null};
+}
 function hasReleaseProof(entered,product){
  if(!entered)return true;
  const value=normalizeWords(entered);
@@ -84,6 +105,12 @@ export function extractOfficialEvidence(html,submitted) {
  const meta=metas(html);
  if(/^product(?:\.|$)/i.test(meta['og:type']||'')&&meta['og:title']){
   products.push({name:meta['og:title'],description:meta.description||'',url:null,kind:'official_product_page',attributes:null});
+ }
+ // Accept a single exact official product heading only when structured metadata
+ // is absent. Never let a weak H1 override contradictory JSON-LD/OG products.
+ if(!products.length&&submitted.source_url){
+  const heading=uniqueProductHeading(html,submitted.source_url,meta);
+  if(heading)products.push(heading);
  }
  const same=products.filter(p=>productNameMatches(submitted.name,p.name)&&hasReleaseProof(submitted.release_label,p));
  if(same.length!==1){
