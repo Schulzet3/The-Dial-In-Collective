@@ -3,6 +3,7 @@
 // PERC, SEY, The Picky Chemist, Black & White, Little Wolf and Heart.
 // This is a parser, not a roaster-specific source-verification allowlist.
 // Never infer roast tier from an Agtron reading, roaster brand, hue or taste.
+import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
@@ -157,6 +158,11 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   }
   return extras;
  }
+ // Paired identity/processing specifications preserve station names, accents
+ // and narrative processing facts without guessing from importer biographies.
+ const delimited=extractDelimitedCoffeeSpecs(page,{clean});
+ for(const [key,value] of Object.entries(delimited.fields))addField(key,value);
+ for(const [key,value] of Object.entries(delimited.details))addExtra(extras,key,value);
  // Proud Mary renders certain product attributes with the value inside an
  // <a> rather than a <p>. Read text only; never follow javascript: hrefs.
  for(const block of page.matchAll(/<div\b[^>]*class=["'][^"']*meta-info[^"']*["'][^>]*>([\s\S]{0,1150}?)<\/div>/gi)){
@@ -204,20 +210,6 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   const p=r.match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|]|\s+[-–]\s+)\s*(.{2,230})$/u);
   if(p)field(fields,p[1],p[2],addField,extras,clean);
  }
- // Queen City product descriptions use two adjacent explicit facts:
- // "Natural-processed heirloom varietals // 2170 masl". Never infer
- // process from marketing copy; only this clearly delimited specification.
- for(const r of rows){
-  const match=r.match(/^((?:fully\s+)?(?:washed|natural|honey|anaerobic)(?:-processed)?\s+[\w -]{2,85})\s*\/\/\s*(\d[\d,]*(?:\+)?\s*(?:masl|m))$/i);
-  if(match){
-   if(!fields.process){
-    const p=normalizedProcess(match[1]);if(p)addField('process',p);
-   }
-   if(!fields.elevation_m)addField('elevation_m',match[2]);
-   const varietal=match[1].match(/\b(heirloom|landrace|field blend)\s+varietals?\b/i);
-   if(varietal&&!fields.variety)addField('variety',varietal[1]);
-  }
- }
  // Only when the product title itself ends in an explicit processing tag,
  // use that value as a fallback; "Ultra Light" is NEVER inferred from title
  // brand, flavor notes or an unlabeled chart.
@@ -226,14 +218,6 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   const title=h1?clean(h1[1],250):'';
   const m=title.match(/(?:\s[-|]\s|\s\/\/\s)(Washed|Natural|Honey|Anaerobic)\s*$/i);
   if(m)addField('process',m[1]);
- }
- // Queen City-style "Banko Gotiti CWS // Gedeb, ... Ethiopia" is a
- // discrete country/locality specification; never concatenate other products.
- if(!fields.origin){
-  for(const r of rows){
-   const m=r.match(/^.{3,65}\s+\/\/\s+([A-Za-zÀ-ÿ' -]{3,55}(?:,\s*[A-Za-zÀ-ÿ' -]{3,50}){1,4})$/);
-   if(m&&!/^(?:more|other)\s+coffees?\b/i.test(m[1])){addField('origin',m[1]);break;}
-  }
  }
  // "In the cup we find ..." is explicit tasting prose. Strip punctuation
  // after one short sentence; do not turn the whole page into tasting notes.
