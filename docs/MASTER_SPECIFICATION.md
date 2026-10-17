@@ -24,6 +24,7 @@ Current product copy uses **The Dial In Collective** and **dial in**, without hy
 | Coffee approval | COFFEE-20261014-01 | Owning admin exception and trusted release-specific automated verification only; unresolved member entries stay private Pending and usable. |
 | URL extraction breadth | Universal roaster URL preview section of docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md | Safe authenticated extraction from any public HTTPS roaster; trusted official-source Verified promotion remains separate. Do not weaken SSRF/bounds or infer screenshot/OCR implementation. |
 | URL preview cooldown | COFFEE-URL-20261016-01 | Shared account-wide >=30 seconds on known and unknown roaster previews. Manual entry/logging remain available; current 60/rolling-day budget is engineering tuning, not Locked. Old 25/day is not silently reinstated. |
+| Roast taxonomy and named-coffee choices | ROAST-TAXONOMY-20261016-01; COFFEE-ROAST-20261016-02 | Exactly seven Title Case levels, Ultra Light / Very Light / Light / Medium-Light / Medium / Medium-Dark / Dark. Preserve the previous five levels' meanings and proven recipe priors; only Medium-Light is a new display spelling for old Light-Medium. Owner-approved five-coffee classifications are limited to the named records, including private Pending Wuri; no other coffee, shot, history or membership changes authorized. |
 | Daily URL preview budget | COFFEE-URL-DAILY-20261016-02 | Owner-approved starting cap of 12 allowed URL preview quota claims per admitted member account per 24-hour budget window, shared by known and unknown roaster preview paths; may be raised after actual member feedback only by a later explicit owner decision. Supersedes the adjustable 60/day engineering setting, not the Locked >=30-second account-wide cooldown. |
 | Owner historical import | OWNER-IMPORT-20261014 | One-use, expiring owner-only exception, now closed. Does not authorize repeat imports or new data writes; later successful hosted recovery is acceptance evidence, not a blanket import unlock. |
 
@@ -37,11 +38,21 @@ The owner explicitly chose **12 URL preview quota claims per admitted member acc
 
 Authority: [COFFEE-URL-DAILY-20261016-02](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json). Older preserved source paragraphs describing 25/day or 60/day remain historical and are superseded **only for this daily budget setting**.
 
+## Owner-approved seven roast tiers (Locked, October 16, 2026 local)
+
+**Seven categories, lightest to darkest, using the owner's capitalization and spelling:** **Ultra Light → Very Light → Light → Medium-Light → Medium → Medium-Dark → Dark**.
+
+The prior five category meanings are preserved. The former **Light-Medium** is equivalent to current **Medium-Light**, not a new roast intensity. Previous Light, Medium, Medium-Dark and Dark retain their meaning. The two newly introduced labels **Ultra Light** and **Very Light** are lighter than Light; they do not silently move any previously stored Light coffee. Roaster source descriptions and original submission evidence are retained verbatim. To avoid false precision, the two new categories initially share the old Light starting recipe priors until adequate taste/shot data supports evidence-based differentiation; the existing five categories retain their exact baseline ratios, time bands, temperatures and treatment. The seven labels are guides, not laboratory Agtron intervals, quality grades or rigid success/failure conditions.
+
+**Exact owner-authorized records:** Sweet Bloom **Hambela: Light**; Orinoco Coffee & Tea **Yirgacheffe: Medium-Light**; Proud Mary **Bavyeyi IV: Very Light**; Queen City Collective Coffee **David Armijos: Very Light**; Sweet Bloom private **Pending Wuri: Very Light**. The owner expressly provided those choices, not the roasters. Preserve existing globally Verified identities, library/shot IDs, taste/notes, family histories, private source records, contributor relationships, owner/member boundaries and Wuri's private Pending status. If updating Wuri's user-submitted current proposal, capture the previous manual Light choice and reason in an access-controlled audit, not by rewriting public or official source claims. No new verified coffee publication or automatic merge.
+
+**Compatibility and rollout:** Read old Light-Medium as Medium-Light; never replace unknown roast facts with an inference based solely on the roaster. New Coffee picker, URL extraction, verified-source promotion, immutable historic imports, server CHECK constraints, recommendation arrays, UI and tests must be coordinated. A production data reclassification **must not occur before the published app supports all seven labels**, because the current published five-value engine otherwise falls back to Medium priors for novel values. Preserve the previously Locked release/credit and multi-account privacy controls. A staged code change is not a deployed feature.
+
+Authority: [dated seven-tier Decision Ledger amendment](DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json). [Research and owner-confirmation history](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8#issuecomment-6230107778).
+
 ## Open product questions, not adopted requirements
 
-1. Separately decide whether to adopt the proposed six roast tiers and naming. Current stored choices remain Light / Light-Medium / Medium / Medium-Dark / Dark. Ultra Light is not silently coerced into Light.
-
-These remain Open as recorded in the [roast extraction report](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md). This consolidation does not ask them again or implement either proposal.
+The seven-tier taxonomy and all five named coffee classifications are now **Locked** by explicit owner approval. No pending roast-tier vote remains. Future changes to category meanings, starting priors, individual member records or user-facing release status require the ordinary separate approval and testing controls. Other independent backlog items are not resolved by this decision.
 
 ## Source provenance and limits
 

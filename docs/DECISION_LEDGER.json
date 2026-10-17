@@ -1169,6 +1169,38 @@
           "window_precision": "The existing counter resets 24 hours after the first claim in a window; a strict sliding per-event lookback would be a separate algorithm change. Do not silently broaden migration scope."
         }
       }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json",
+      "git_blob_sha": "49245b21244eb2068e7e136ecca7175c93595844",
+      "content": {
+        "product": "The Dial In Collective",
+        "owner_approval_local_date": "2026-10-16 (America/Denver)",
+        "status": "Locked",
+        "scope": "Owner's explicit seven-tier roast-level taxonomy and exact five-coffee reassignment. Narrowly supersedes only the existing five roast labels and numeric/display lookup compatibility, not the shot model or coffee approval/privacy/identity decisions.",
+        "decisions": [
+          {
+            "id": "ROAST-TAXONOMY-20261016-01",
+            "status": "Locked",
+            "topic": "Seven canonical roast levels",
+            "decision": "Use exactly seven Title Case roast levels in increasing darkness: Ultra Light, Very Light, Light, Medium-Light, Medium, Medium-Dark, Dark.",
+            "old_five_meanings": "Preserve prior five categories' meanings and initial espresso ratio/time/temperature recommendations; add Ultra Light and Very Light lighter than Light, and use Medium-Light as the renamed equivalent of old Light-Medium.",
+            "aliases": "Accept stored historic Light-Medium as equivalent to Medium-Light in caches, historical imports and read-time compatibility. Preserve literal source and original submission text for provenance; do not silently relabel factual historical evidence.",
+            "unknown": "Allow no roast level when unverified; do not infer Ultra Light or Very Light from a roaster's reputation, flavor wording or ambiguous roast graphics.",
+            "recommendations": "The two new tiers may initially share existing Light priors rather than inventing scientifically precise new numbers; preserve previously established recipe history, successful shot priority and conservative cross-roast confidence."
+          },
+          {
+            "id": "COFFEE-ROAST-20261016-02",
+            "status": "Locked",
+            "topic": "Owner-approved existing coffee assignments",
+            "decision": "Assign Sweet Bloom Hambela to Light, Orinoco Yirgacheffe to Medium-Light, Proud Mary Bavyeyi IV to Very Light, Queen City David Armijos to Very Light, and private Pending Sweet Bloom Wuri to Very Light.",
+            "affected_scope": "Exactly four existing Verified coffees and one existing private Pending Wuri proposal. Preserve names, roaster, source provenance, source field_values, coffee and library identity IDs, all shots/ratings/recipes/community projections, Pending status, member ownership, revision controls and audit history.",
+            "provenance": "The owner explicitly provided these subjective espresso-oriented category choices; they are member/owner preferences, not claims that each roaster officially uses the seven-tier taxonomy."
+          }
+        ],
+        "rollout_boundary": "Update canonical documents and tests first; stage backwards-compatible SQL schema and application code; preserve historic old-roast read compatibility; never write new labels into production until production app can interpret them. Perform controlled source release and scoped audited data reclassification only after all required credit/release/security checks. No new domain, paid service, automatic promotion or backup deletion.",
+        "linked_review": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/8#issuecomment-6230107778"
+      }
     }
   ],
   "implementation_and_recovery_sources": [
@@ -1959,19 +1991,22 @@
       "supersedes": "Existing 60/day engineering default and superseded earlier 25/day numeric tuning",
       "scope": "Owner-Locked starting 12 allowed claims per admitted account per 24-hour budget window, shared by known/unknown sources; >=30-second shared cooldown, manual entry/logging, and source verification remain unchanged. Future increases require owner approval. Production applied with separate SQL-only migration and verified checks; no Netlify deploy.",
       "source": "docs/DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json"
-    }
-  ],
-  "open_current_owner_decisions": [
+    },
     {
-      "id": "OPEN-ROAST-TAXONOMY",
-      "status": "Open",
-      "question": "Adopt six roast tiers and displayed naming?",
-      "current_implementation": "Light, Light-Medium, Medium, Medium-Dark, Dark.",
-      "proposal": "Ultra Light, Light, Medium Light, Medium, Medium Dark, Dark; not adopted.",
-      "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md",
-      "next": true
+      "topic": "Seven-level roast scale",
+      "current": "ROAST-TAXONOMY-20261016-01",
+      "supersedes": "Historic five-category canonical naming and the rejected/unapproved six-tier proposal",
+      "scope": "Seven exact Title Case categories; former Light-Medium means Medium-Light; preserve existing five categories' numerical starting priors and meanings; add Ultra Light and Very Light with conservative fallback priors, avoid inventing taste/roaster evidence. Source/read compatibility plus frontend/server promotion/DB CHECK must be updated together.",
+      "source": "docs/DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json"
+    },
+    {
+      "topic": "Five named coffee roast-level corrections",
+      "current": "COFFEE-ROAST-20261016-02",
+      "scope": "Owner expressly designated four Verified catalog coffees and private Pending Wuri; never silently reclassify other coffees or promote Wuri, change source evidence, ownership or shot/community history. Apply after frontend support release.",
+      "source": "docs/DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json"
     }
   ],
+  "open_current_owner_decisions": [],
   "source_limits": [
     "The v0.2.0 prototype workshop addendum is referenced by historic reports but was not found as a standalone source in this retrieval. Its decisions already recorded in available baseline/addenda remain preserved; do not reconstruct unavailable text or claim exhaustive recovery of unseen chats.",
     "Nine earlier research report bodies are not supplied by the available August archive manifests. No new research verification is claimed."
@@ -1994,6 +2029,23 @@
       },
       "resolution_id": "COFFEE-URL-DAILY-20261016-02",
       "resolution": "Owner explicitly chose 12 per account per 24-hour budget window instead of 25, 10 or the 60-default.",
+      "owner_decision_local_date": "2026-10-16"
+    },
+    {
+      "historical_open_record": {
+        "id": "OPEN-ROAST-TAXONOMY",
+        "status": "Open",
+        "question": "Adopt six roast tiers and displayed naming?",
+        "current_implementation": "Light, Light-Medium, Medium, Medium-Dark, Dark.",
+        "proposal": "Ultra Light, Light, Medium Light, Medium, Medium Dark, Dark; not adopted.",
+        "source": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md",
+        "next": true
+      },
+      "resolution_ids": [
+        "ROAST-TAXONOMY-20261016-01",
+        "COFFEE-ROAST-20261016-02"
+      ],
+      "resolution": "Owner approved seven Title Case levels and exact five coffee mappings; supersedes historic six-tier proposal",
       "owner_decision_local_date": "2026-10-16"
     }
   ],
@@ -2018,5 +2070,55 @@
       ],
       "netlify_deploy_required": false
     }
+  },
+  "current_owner_approved_roast_taxonomy": {
+    "id": "ROAST-TAXONOMY-20261016-01",
+    "status": "Locked",
+    "labels": [
+      "Ultra Light",
+      "Very Light",
+      "Light",
+      "Medium-Light",
+      "Medium",
+      "Medium-Dark",
+      "Dark"
+    ],
+    "legacy_alias": {
+      "Light-Medium": "Medium-Light"
+    },
+    "prior_rules": "Retain five previous canonical category meanings and default recipe numbers. New Ultra Light and Very Light reuse Light priors pending data.",
+    "implementation": "STAGED: final SQL/UI/data migration not yet complete or live; current database and published frontend remain five-tier.",
+    "coffee_reclassifications": [
+      {
+        "coffee": "Hambela",
+        "roaster": "Sweet Bloom",
+        "target": "Light",
+        "scope": "Verified"
+      },
+      {
+        "coffee": "Yirgacheffe",
+        "roaster": "Orinoco Coffee & Tea",
+        "target": "Medium-Light",
+        "scope": "Verified"
+      },
+      {
+        "coffee": "Bavyeyi IV",
+        "roaster": "Proud Mary",
+        "target": "Very Light",
+        "scope": "Verified"
+      },
+      {
+        "coffee": "David Armijos",
+        "roaster": "Queen City Collective Coffee",
+        "target": "Very Light",
+        "scope": "Verified"
+      },
+      {
+        "coffee": "Wuri",
+        "roaster": "Sweet Bloom",
+        "target": "Very Light",
+        "scope": "private Pending; preserve original proposal evidence"
+      }
+    ]
   }
 }
