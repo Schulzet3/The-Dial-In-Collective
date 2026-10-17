@@ -2,7 +2,12 @@
 
 Start with [Current Status](CURRENT_STATUS.md), [Master Specification](MASTER_SPECIFICATION.md), and [Decision Ledger](DECISION_LEDGER.json), on `development/backend-foundation`. The canonical specification includes the complete recovered baseline and available GitHub specification addenda; the consolidated ledger preserves original objects and scoped supersessions. Historical statuses never reopen passed acceptance or override Locked decisions.
 
-[GitHub continuity report](GITHUB_CONTINUITY_2026-10-17.md) describes this documentation consolidation, verification boundaries and provider limits. [AGENTS](../AGENTS.md) defines future handoffs. The owner has now Locked both the 12-preview budget (live) and the seven roast categories with five specific coffee assignments (production rollout pending). Start with [seven-tier rollout checkpoint](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md) and Current Status; do not re-ask the decided product questions. The prior continuity/audit work was documentation-only; the subsequent owner-authorized exact Hambela purge is recorded below. No deployment is part of the purge.
+[GitHub continuity report](GITHUB_CONTINUITY_2026-10-17.md) describes this documentation consolidation, verification boundaries and provider limits. [AGENTS](../AGENTS.md) defines future handoffs. The owner has now Locked both the 12-preview budget (live) and the seven roast categories with five specific coffee assignments (production rollout pending). Start with [seven-tier rollout checkpoint](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md) and Current Status; do not re-ask the decided product questions. The subsequent multi-roaster extractor work passed 8/9 live product URLs and is documented in [roaster extractor acceptance](COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md); no new production publication yet. The prior continuity/audit work was documentation-only; the subsequent owner-authorized exact Hambela purge is recorded below. No deployment is part of the purge.
+
+## Latest implementation acceptance (2026-10-17)
+
+- [Multi-roaster URL extractor current-source acceptance](COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md): eight of nine concrete coffee product URLs parsed live, 248 Node tests PASS, selected details and real storefront limitations. Owner approved production credits; current balance remains unverified under Locked guard.
+- [Seven-tier release and exact coffee migration sequence](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md): prior production compatibility schema passed, seven-tier frontend and five user corrections await credit-verified release.
 
 ## Development gap audit and cross-session handoff
 
