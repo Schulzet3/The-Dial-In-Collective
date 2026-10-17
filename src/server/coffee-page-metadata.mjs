@@ -140,15 +140,25 @@ function explicitNearbyFacts(html,fields){
   const m=near.match(/\b(\d{3,4}\s*(?:[-–]\s*\d{3,4})?)\s*m(?:asl|eters?\s*(?:above sea level)?)/i);
   if(m)fields.elevation_m=m[1].replace(/\s+/g,' ').trim()+' masl';
  }
- // Some coffee labels print "Gedeb, Ethiopia" followed by a short, explicit
- // comma-separated list immediately before "washed process". These are only
- // proposals shown to the user, not authoritative catalog facts.
- const origin=near.slice(0,600).match(/\b([A-Z][a-z'-]{2,}(?:\s+[A-Z][a-z'-]{2,}){0,3}),\s*([A-Z][a-z'-]{3,}(?:\s+[A-Z][a-z'-]{2,}){0,3})\b/);
- if(origin&&!fields.origin)fields.origin=clean(origin[1]+', '+origin[2],160);
- if(origin&&!fields.tasting_notes){
-  const afterOrigin=near.slice(origin.index+origin[0].length,origin.index+origin[0].length+260);
-  const notes=afterOrigin.match(/^\s*([a-z][a-z' -]{2,45}(?:,\s*[a-z][a-z' -]{2,45}){2,5})\s+(?:washed|natural|honey|anaerobic)\s+process\b/i);
-  if(notes)fields.tasting_notes=clean(notes[1],320);
+ // Some coffee labels place "Gedeb, Ethiopia" and a flavor list in
+ // adjacent product <p> elements. Read the discrete elements, never combine
+ // navigation/header words into a fabricated origin.
+ let focused=html;
+ const h1=html.match(/<h1\b[^>]*>[\s\S]{0,320}?<\/h1>/i);
+ if(h1)focused=html.slice(h1.index,h1.index+16000);
+ const paragraphs=[...focused.matchAll(/<p\b[^>]{0,350}>([\s\S]{1,450}?)<\/p>/gi)]
+  .map(m=>clean(m[1],200)).filter(Boolean).slice(0,24);
+ const originIndex=paragraphs.findIndex(p=>/^[A-Z][A-Za-z'-]{2,}(?:\s+[A-Z][A-Za-z'-]{2,}){0,3},\s*[A-Z][A-Za-z'-]{3,}(?:\s+[A-Z][A-Za-z'-]{2,}){0,3}$/.test(p));
+ if(originIndex>=0){
+  if(!fields.origin)fields.origin=paragraphs[originIndex];
+  if(!fields.tasting_notes){
+   const candidate=paragraphs[originIndex+1]||'';
+   const following=paragraphs[originIndex+2]||'';
+   if(/^[a-z][a-z' -]{2,45}(?:,\s*[a-z][a-z' -]{2,45}){2,5}$/i.test(candidate)&&
+     /\b(?:washed|natural|honey|anaerobic)\s+process\b/i.test(following)){
+    fields.tasting_notes=candidate;
+   }
+  }
  }
  // Never infer harvest/producer/roast from surrounding promotional prose.
 }
