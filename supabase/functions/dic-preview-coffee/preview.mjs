@@ -61,7 +61,9 @@ const fieldsByKey={
  tastingnotes:'tasting_notes',tastenotes:'tasting_notes',flavornotes:'tasting_notes',flavournotes:'tasting_notes',cupnotes:'tasting_notes',
  harvest:'release_label',harvestyear:'release_label',cropyear:'release_label',lot:'release_label',releaselabel:'release_label'
 };
-const roastMap=new Map(['Light','Light-Medium','Medium','Medium-Dark','Dark'].map(v=>[normalizeWords(v),v]));
+const roastMap=new Map(['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'].map(v=>[normalizeWords(v),v]));
+// Legacy equivalent spelling is a read-time alias; source prose is retained.
+roastMap.set(normalizeWords('Light-Medium'),'Medium-Light');
 const processMap=new Map(['Washed','Natural','Honey','Anaerobic','Other/Unknown'].map(v=>[normalizeWords(v),v]));
 export function extractProductPreview(html,{source_url,roaster}={}){
  if(typeof html!=='string'||html.length>950000||!source_url||!roaster)return {ok:false,reason:'invalid_source'};

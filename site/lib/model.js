@@ -1,4 +1,4 @@
-import {SCHEMA_VERSION,CONFIG,STYLES,ROASTS,newId,now,clone,num,isDialed,round,norm,canonicalUrl} from './constants.js';
+import {SCHEMA_VERSION,CONFIG,STYLES,ROASTS,canonicalRoastLevel,newId,now,clone,num,isDialed,round,norm,canonicalUrl} from './constants.js';
 export const blankWorkspace = () => ({currentCoffeeId:null, recent:{}, coffees:{}});
 export const blankCoffeeState = () => ({style:'Traditional',currentFamilies:{},referenceFamilies:{},favoriteShots:{},basketId:null,experiments:{}});
 export function blankState(mode='personal') {
@@ -101,7 +101,7 @@ export function addCoffee(s,data) {
 export function pickCoffee(d) {
  const obj={};for(const k of ['name','roaster','origin','elevationM','roastLevel','process','variety','producer','tastingNotes','roasterUrl','release','summary','espressoNotes'])obj[k]=String(d[k]??'').trim().slice(0,k==='summary'?2000:1000);
  if(obj.roasterUrl&&!canonicalUrl(obj.roasterUrl))throw new Error('Use an http or https product URL.');
- if(obj.roastLevel&&!ROASTS.includes(obj.roastLevel))obj.roastLevel='';
+ obj.roastLevel=canonicalRoastLevel(obj.roastLevel);
  obj.roasterRecipe=d.roasterRecipe && num(d.roasterRecipe.ratio)>0?clone(d.roasterRecipe):null;
  if(d.provenance)obj.provenance=clone(d.provenance);
  return obj;

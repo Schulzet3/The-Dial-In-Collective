@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {hydrate} from '../site/cloud/mapping.js';
 import {rawFixture} from './cloud-fixtures/raw.js';
-import {recommendation,personalSimilarCoffeeReference} from '../site/lib/engine.js';
+import {recommendation,personalSimilarCoffeeReference,baseline,suggestedStyle} from '../site/lib/engine.js';
+import {ROASTS,canonicalRoastLevel,roastIndex,RATIOS,TEMPS} from '../site/lib/constants.js';
 import {activeVersion} from '../site/lib/model.js';
 
 const create=()=>{
@@ -106,4 +107,41 @@ test('fresh unrated-cache shot computes a precise next Grind from taste feedback
  assert.equal(rec.source,'Adjustment from your latest taste rating');
  assert.equal(rec.grind.range,undefined);
  assert.notEqual(rec.grind.value,1.2);
+});
+
+test('seven Title Case tiers retain all former five recipe ratios and temperatures',()=>{
+ assert.deepEqual(ROASTS,['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark']);
+ assert.equal(canonicalRoastLevel('Light-Medium'),'Medium-Light');
+ const old=[
+  ['Light',2.5,3.0,1.5,3.2,95,[25,32]],
+  ['Medium-Light',2.35,2.8,1.4,3.0,94,[25,32]],
+  ['Medium',2.0,2.6,1.3,2.8,93,[25,32]],
+  ['Medium-Dark',1.9,2.4,1.2,2.6,91.5,[22,28]],
+  ['Dark',1.8,2.2,1.1,2.5,90,[22,28]]
+ ];
+ for(const [label,trad,turbo,ristretto,lungo,temp,time] of old){
+  const i=roastIndex(label),r=baseline({roastLevel:label},'Traditional',18);
+  assert.deepEqual([RATIOS.Traditional[i],RATIOS.Turbo[i],RATIOS.Ristretto[i],RATIOS.Lungo[i],TEMPS[i]],[trad,turbo,ristretto,lungo,temp]);
+  assert.equal(r.ratio.center,trad);
+  assert.deepEqual([r.time.low,r.time.high],time);
+  assert.equal(r.tempC,temp);
+ }
+ for(const label of ['Ultra Light','Very Light']){
+  assert.equal(baseline({roastLevel:label},'Traditional',18).ratio.center,2.5);
+  assert.equal(baseline({roastLevel:label},'Traditional',18).tempC,95);
+  assert.equal(suggestedStyle({roastLevel:label},'clarity').style,'Turbo');
+ }
+ assert.equal(baseline({roastLevel:'unknown'},'Traditional',18).ratio.center,2);
+});
+test('neighboring new light tiers offer only unproven conservative references',()=>{
+ const {s,target}=create();
+ target.roastLevel='Ultra Light';
+ s.coffees.find(c=>c.id==='other-coffee').roastLevel='Very Light';
+ const before=recommendation(s,target.id);
+ s.shots.push(good('neighbor','other-coffee'));
+ const after=recommendation(s,target.id);
+ assert.equal(after.established,false);
+ assert.equal(after.observations,1);
+ assert.match(after.reasons[0],/Cautious starting reference/);
+ assert.ok(after.ratio.center<before.ratio.center);
 });

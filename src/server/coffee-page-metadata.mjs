@@ -83,14 +83,14 @@ function samePage(raw,target){
    a.pathname.replace(/\/+$/,'')===b.pathname.replace(/\/+$/,'');
  }catch{return false;}
 }
-const ROAST=['Light','Light-Medium','Medium','Medium-Dark','Dark'];
+const ROAST=['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
 const PROCESS=['Washed','Natural','Honey','Anaerobic','Other/Unknown'];
 function normalized(field,value){
  const s=textOf(value,field==='tasting_notes'?650:220);
  if(!s)return '';
  if(field==='roast_level'){
   const norm=s.toLowerCase().replace(/[\s_-]/g,'');
-  return ROAST.find(x=>x.toLowerCase().replace(/-/g,'')===norm)||'';
+  return norm==='lightmedium'?'Medium-Light':ROAST.find(x=>x.toLowerCase().replace(/[\s-]/g,'')===norm)||'';
  }
  if(field==='process'){
   const norm=s.toLowerCase();

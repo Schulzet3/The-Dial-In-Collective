@@ -10,22 +10,23 @@ const product=part=>'<html><head><meta property="og:site_name" content="New Roas
  '<h2>More coffees</h2><p>Dark Blend</p></main></body></html>';
 const asPreview=part=>extractPublicCoffeeFacts(product(part),{source_url:url});
 
-test('roast-label normalization respects the current canonical taxonomy',()=>{
+test('explicit roast evidence respects seven Title Case tiers and legacy aliases',()=>{
  for(const [label,want] of Object.entries({
-  'Light':'Light','light roast':'Light',
-  'Light-Medium':'Light-Medium','Medium Light':'Light-Medium','medium-light roast':'Light-Medium',
+  'Ultra Light':'Ultra Light','ultra-light roast':'Ultra Light',
+  'Very Light':'Very Light','very light roast':'Very Light','Light':'Light','light roast':'Light',
+  'Light-Medium':'Medium-Light','Medium Light':'Medium-Light','medium-light roast':'Medium-Light',
   'Medium':'Medium','Medium-Dark':'Medium-Dark','Medium Dark':'Medium-Dark',
   'Dark Roast':'Dark'
  })){
   assert.equal(normalizeRoastLabel(label),want,label);
  }
- for(const s of ['Ultra Light','Ultra-light','Very Light','Light Medium Dark','Cinnamon Roast','French Roast','Light to Medium']){
+ for(const s of ['Extra Light','Nordic Light','Light Medium Dark','Cinnamon Roast','French Roast','Light to Medium']){
   assert.equal(normalizeRoastLabel(s),null,s);
  }
 });
 test('read explicit HTML data-roast-level in the product region',()=>{
  const r=asPreview('<div class="coffee-roast" data-roast-level="Medium Light"><span>Roast</span></div>');
- assert.equal(r.fields.roast_level,'Light-Medium');
+ assert.equal(r.fields.roast_level,'Medium-Light');
  assert.equal(r.roast_source,'product_attribute');
 });
 test('accessible roast icon and inline SVG title carry exact roast information without fetching images',()=>{
@@ -60,7 +61,7 @@ test('visual percent marker is a hint only, not interpreted as universally stand
 test('a product-specific roast meta field is stronger than unrelated page text',()=>{
  const r=extractPublicCoffeeFacts('<html><head><meta name="product:roast_level" content="medium-light"></head><body>'+
  '<h1>Wuri</h1><p>Enjoy this coffee. Shop medium and dark elsewhere!</p></body></html>',{source_url:url});
- assert.equal(r.fields.roast_level,'Light-Medium');
+ assert.equal(r.fields.roast_level,'Medium-Light');
 });
 test('Shopify merchant JSON includes explicit roast metafields, tags and labeled description',()=>{
  const data={
@@ -82,7 +83,7 @@ test('JSON-LD merchant description may contain labeled roast and origin evidence
   '<tr><th>Process</th><td>Washed</td></tr></table>'
  };
  const r=asPreview('<script type="application/ld+json">'+JSON.stringify(schema)+'</script>');
- assert.equal(r.fields.roast_level,'Light-Medium');
+ assert.equal(r.fields.roast_level,'Medium-Light');
  assert.equal(r.fields.process,'Washed');
 });
 test('conflicting source signals require manual review without guessing',()=>{
@@ -94,10 +95,14 @@ test('conflicting source signals require manual review without guessing',()=>{
  assert.equal(r.fields.roast_level,undefined);
  assert.match(r.roast_hint,/inconsistent|Conflicting/i);
 });
-test('Ultra Light unknown category is preserved as hint, never silently forced into Light',()=>{
- const r=asPreview('<figure data-roast-level="Ultra Light"></figure>');
+test('Ultra Light and Very Light require explicit evidence, while generic Extra Light stays a hint',()=>{
+ for(const label of ['Ultra Light','Very Light']){
+  const r=asPreview('<figure data-roast-level="'+label+'"></figure>');
+  assert.equal(r.fields.roast_level,label);
+ }
+ const r=asPreview('<figure data-roast-level="Extra Light"></figure>');
  assert.equal(r.fields.roast_level,undefined);
- assert.match(r.roast_hint,/Ultra Light/);
+ assert.match(r.roast_hint,/Extra Light/);
 });
 test('untrusted graphic markup remains escaped in preview',()=>{
  const r=asPreview('<h2>Roast Level</h2><span>Light</span><span>Medium</span>'+

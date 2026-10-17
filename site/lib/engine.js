@@ -1,4 +1,4 @@
-import {CONFIG,RATIOS,TIMES,TEMPS,ROASTS,STYLES,num,round,clamp,norm,finite,newId,now,isDialed} from './constants.js';
+import {CONFIG,RATIOS,TIMES,TEMPS,ROASTS,STYLES,roastIndex,num,round,clamp,norm,finite,newId,now,isDialed} from './constants.js';
 import {activeSetup,activeVersion,workspace,coffeeState,ensureCoffeeState,selectedBasket,feedMode,snapshot,hasLocalSuccess,validateShot,logAudit} from './model.js';
 export const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
 export function quantile(a,q) {const b=[...a].sort((x,y)=>x-y);if(!b.length)return null;const pos=(b.length-1)*q,lo=Math.floor(pos);return b[lo]+(b[Math.min(lo+1,b.length-1)]-b[lo])*(pos-lo);}
@@ -15,13 +15,13 @@ export function readPreference(text) {
  return clarity.length>body.length?'clarity':body.length>clarity.length?'body':null;
 }
 export function suggestedStyle(coffee,preferences='') {
- const p=readPreference(preferences),light=['Light','Light-Medium'].includes(coffee.roastLevel);
+ const p=readPreference(preferences),light=roastIndex(coffee.roastLevel)>=0&&roastIndex(coffee.roastLevel)<=3;
  if(light&&p==='clarity')return {style:'Turbo',reason:'Light roast and your preference for clarity suggest a Turbo starting point.'};
  return {style:'Traditional',reason:p==='body'?'A conventional starting point for your preference for body.':'A balanced starting point; choose any style you prefer.'};
 }
 export function baseline(coffee,style,dose,preferences='') {
- const index=ROASTS.indexOf(coffee.roastLevel),r=index<0?2:index;
- let ratio=RATIOS[style]?.[r]??2;let time=TIMES[style]?.[r>=3?1:0]||[25,32];let temp=TEMPS[r];
+ const index=roastIndex(coffee.roastLevel),r=index<0?roastIndex('Medium'):index;
+ let ratio=RATIOS[style]?.[r]??2;let time=TIMES[style]?.[r>=roastIndex('Medium-Dark')?1:0]||[25,32];let temp=TEMPS[r];
  const reasons=[];const pref=readPreference(preferences);
  if(style==='Traditional'&&coffee.roasterRecipe?.ratio>0){ratio=ratio*.35+coffee.roasterRecipe.ratio*.65;reasons.push('Starting ratio informed by the roaster recipe.');}
  if(pref&&style!=='Custom'){ratio+=pref==='clarity'?.15:-.15;reasons.push(`Ratio nudged by your preference for ${pref}.`);}
@@ -63,8 +63,16 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  if(cross.length)return {value:round(quantile(cross.map(sh=>sh.grindSetting),.5)),source:'Starting reference from matching grinder and burrs',proven:false};
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id);
  if(sameOld.length)return {value:translateGrind(sameOld.sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0],v),source:'Estimated from previous calibration',proven:false};
- const similar=current.filter(sh=>sh.coffeeId!==c.id&&c.roastLevel&&s.coffees.find(x=>x.id===sh.coffeeId)?.roastLevel===c.roastLevel);
+ const rank=roastIndex(c.roastLevel);
+ const similar=current.filter(sh=>sh.coffeeId!==c.id&&rank>=0&&roastIndex(s.coffees.find(x=>x.id===sh.coffeeId)?.roastLevel)===rank);
  if(similar.length)return {value:round(quantile(similar.map(sh=>sh.grindSetting),.5)),source:`From ${similar.length} successful shot${similar.length===1?'':'s'} on your similar coffees`,proven:false};
+ // Neighbor tiers may inform a strictly lower-confidence prior only when
+ // one side is a NEW lightest category. Preserve five old tiers' matching.
+ const nearby=current.filter(sh=>{
+  const other=roastIndex(s.coffees.find(x=>x.id===sh.coffeeId)?.roastLevel);
+  return sh.coffeeId!==c.id&&rank>=0&&other>=0&&Math.abs(other-rank)===1&&(rank<2||other<2);
+ });
+ if(nearby.length)return {value:round(quantile(nearby.map(sh=>sh.grindSetting),.5)),source:'Nearby light-roast reference, unproven on this coffee',proven:false};
  return {value:round(v.grinderMin+(v.grinderMax-v.grinderMin)*(style==='Turbo'?.75:.5)),source:'Espresso range starting estimate',proven:false};
 }
 export function learnSensitivity(shots) {
@@ -91,33 +99,38 @@ function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
 // shot style and known feed condition; same roast, then closer metadata and basket.
 // Unverified/unsuccessful shots and community records cannot seed this reference.
 export function personalSimilarCoffeeReference(s,coffee,version,style,feed,basketId){
- if(!norm(coffee?.roastLevel))return null;
+ const targetRank=roastIndex(coffee?.roastLevel);
+ if(targetRank<0)return null;
  const byId=new Map(s.coffees.map(c=>[c.id,c]));
- const matches=[];
+ const matches=[],nearby=[];
  for(const sh of s.shots){
   if(sh.hidden||!sh.dialedIn||sh.coffeeId===coffee.id||
      sh.setupVersionId!==version.id||sh.style!==style||sh.feedMode!==feed||
      !finite(sh.yieldG)||!finite(sh.doseG)||!finite(sh.timeS)||sh.doseG<=0||
      sh.timeS<=0)continue;
   const other=byId.get(sh.coffeeId);
-  if(!other||norm(other.roastLevel)!==norm(coffee.roastLevel))continue;
+  const rank=roastIndex(other?.roastLevel);
+  if(rank<0)continue;
+  const distance=Math.abs(rank-targetRank);
+  if(distance>1||(distance===1&&targetRank>=2&&rank>=2))continue;
   let similarity=1;
   if(coffee.process&&other.process&&norm(coffee.process)===norm(other.process))similarity+=2;
   if(coffee.origin&&other.origin&&norm(coffee.origin)===norm(other.origin))similarity+=2;
   if(coffee.variety&&other.variety&&norm(coffee.variety)===norm(other.variety))similarity+=1;
   if(sh.basketId===basketId)similarity+=1;
-  matches.push({sh,similarity});
+  (distance===0?matches:nearby).push({sh,similarity});
  }
- if(!matches.length)return null;
- const highest=Math.max(...matches.map(x=>x.similarity));
- const strongest=matches.filter(x=>x.similarity>=highest-1);
+ const chosen=matches.length?matches:nearby;
+ if(!chosen.length)return null;
+ const highest=Math.max(...chosen.map(x=>x.similarity));
+ const strongest=chosen.filter(x=>x.similarity>=highest-1);
  const sameBasket=strongest.filter(x=>x.sh.basketId===basketId);
  const eligible=sameBasket.length?sameBasket:strongest;
  return {ratio:quantile(eligible.map(x=>x.sh.yieldG/x.sh.doseG),.5),
   time:quantile(eligible.map(x=>x.sh.timeS),.5),
   count:eligible.length,
   coffees:new Set(eligible.map(x=>x.sh.coffeeId)).size,
-  closeness:highest};
+  closeness:highest,nearby:!matches.length};
 }
 export function recommendation(s,coffeeId,options={}) {
  const c=s.coffees.find(c=>c.id===coffeeId),v=activeVersion(s),p=coffeeState(s,coffeeId);
@@ -142,7 +155,7 @@ export function recommendation(s,coffeeId,options={}) {
  if(!chosen&&provisional){
   // Conservative shrinkage toward the existing roast/style prior avoids
   // treating a small number of similar coffees as an exact recipe.
-  const weight=Math.min(.5,.16+.07*Math.min(provisional.count,3)+.025*Math.max(0,provisional.closeness-1));
+  const weight=Math.min(.5,.16+.07*Math.min(provisional.count,3)+.025*Math.max(0,provisional.closeness-1))*(provisional.nearby?.5:1);
   const ratioCenter=round(rec.ratio.center+(provisional.ratio-rec.ratio.center)*weight,2);
   const ratioHalf=(rec.ratio.high-rec.ratio.low)/2;
   rec.ratio={low:round(Math.max(.8,ratioCenter-ratioHalf),2),center:ratioCenter,high:round(ratioCenter+ratioHalf,2)};
@@ -152,7 +165,7 @@ export function recommendation(s,coffeeId,options={}) {
   rec.source='Your successful similar coffees on this setup';
   rec.observations=provisional.count;
   rec.established=false;
-  rec.reasons.unshift(`Starting reference from ${provisional.count} successful ${style} shot${provisional.count===1?'':'s'} on ${provisional.coffees} similar ${c.roastLevel} coffee${provisional.coffees===1?'':'s'} on this setup.`);
+  rec.reasons.unshift(provisional.nearby?`Cautious starting reference from ${provisional.count} successful ${style} shot${provisional.count===1?'':'s'} on nearby light-roast coffees; not proven for ${c.roastLevel}.`:`Starting reference from ${provisional.count} successful ${style} shot${provisional.count===1?'':'s'} on ${provisional.coffees} similar ${c.roastLevel} coffee${provisional.coffees===1?'':'s'} on this setup.`);
  }
  if(chosen){
   const all=familyShots(s,chosen.id),local=all.filter(sh=>sh.setupVersionId===v.id),used=local.length?local:all;
@@ -164,7 +177,7 @@ export function recommendation(s,coffeeId,options={}) {
  } else if(style!=='Custom') {
   // Weak cross-style ratio residual only: no copied time or grind numbers.
   const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&RATIOS[sh.style]);
-  if(other.length){const r=Math.max(0,ROASTS.indexOf(c.roastLevel));const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
+  if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
  rec.tempC=temperatureGuidance(s,c,style,v,rec.tempC,rec.familyId);

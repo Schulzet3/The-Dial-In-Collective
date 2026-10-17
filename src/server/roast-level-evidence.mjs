@@ -1,8 +1,7 @@
 // Extract only evidence-backed roast levels from untrusted PUBLIC page markup.
 // Never guess a category from a mere Light-to-Medium graphic axis or roast
-// colour photograph. The canonical taxonomy remains unchanged until approved.
+// colour photograph. Explicit labels follow the owner's Locked seven tiers.
 const MAX_LABEL=90;
-const LABELS=['Light','Light-Medium','Medium','Medium-Dark','Dark'];
 function plain(s){
  return String(s??'').replace(/<[^>]*>/g,' ').replace(/&(?:nbsp|#160);/gi,' ')
   .replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'")
@@ -15,12 +14,13 @@ export function normalizeRoastLabel(value){
   .replace(/\s+roast$/,'')
   .replace(/[\u2010-\u2015]/g,'-').replace(/[_-]+/g,' ').replace(/\s+/g,' ').trim();
  const lookup=new Map([
-  ['light','Light'],['light medium','Light-Medium'],['medium light','Light-Medium'],
+  ['ultra light','Ultra Light'],['very light','Very Light'],['light','Light'],
+  ['light medium','Medium-Light'],['medium light','Medium-Light'],
   ['medium','Medium'],['medium dark','Medium-Dark'],['dark medium','Medium-Dark'],
   ['dark','Dark']
  ]);
- // No implicit "ultra light" mapping. User is currently deciding whether
- // to expand the Locked 5-tier taxonomy to 6 tiers.
+ // Never infer an Ultra Light roast from a roaster's brand/reputation,
+ // flavor profile, marketing terms or an unlabeled graphical marker.
  return lookup.get(v)||null;
 }
 export function roastLabelHint(value){
@@ -28,7 +28,7 @@ export function roastLabelHint(value){
  if(!v||v.length>70||!/(?:light|medium|dark|blonde|city)/i.test(v))return '';
  if(normalizeRoastLabel(v))return '';
  // Strictly represent roaster-provided text; no silent canonical coercion.
- if(/^(?:ultra[\s-]?light|extra[\s-]?light|very[\s-]?light|nordic[\s-]?light)\s*(?:roast)?$/i.test(v))
+ if(/^(?:extra[\s-]?light|nordic[\s-]?light)\s*(?:roast)?$/i.test(v))
   return 'Roaster describes the coffee as '+v+'. Choose the closest supported level manually.';
  return '';
 }
@@ -41,9 +41,9 @@ function attrs(tag){
 }
 function roastLabelInPhrase(s){
  const v=plain(s);
- const p=v.match(/\b(?:roast(?:ing)?\s*(?:level|profile|degree)|roast)\s*[:\-–]?\s*((?:ultra\s*light|extra\s*light|very\s*light|light[\s-]?medium|medium[\s-]?light|medium[\s-]?dark|light|medium|dark))\b/i);
+ const p=v.match(/\b(?:roast(?:ing)?\s*(?:level|profile|degree)|roast)\s*[:\-–]?\s*((?:ultra[\s-]*light|very[\s-]*light|light[\s-]?medium|medium[\s-]?light|medium[\s-]?dark|light|medium|dark))\b/i);
  if(p)return normalizeRoastLabel(p[1]);
- const q=v.match(/^((?:ultra\s*light|extra\s*light|very\s*light|light[\s-]?medium|medium[\s-]?light|medium[\s-]?dark|light|medium|dark))\s+roast\b/i);
+ const q=v.match(/^((?:ultra[\s-]*light|very[\s-]*light|light[\s-]?medium|medium[\s-]?light|medium[\s-]?dark|light|medium|dark))\s+roast\b/i);
  return q?normalizeRoastLabel(q[1]):null;
 }
 function cropProduct(html){

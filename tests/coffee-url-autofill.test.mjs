@@ -25,6 +25,17 @@ test('URL preview only fetches allowlisted HTTPS host and plausible product path
   assert.equal(officialPreviewUrl(u,'sweetbloomcoffee.com'),null,u);
  }
 });
+test('trusted official preview supports seven roast levels and historic synonyms',()=>{
+ for(const [source,expected] of [
+  ['Ultra Light','Ultra Light'],['Very Light','Very Light'],
+  ['Light-Medium','Medium-Light'],['Medium Light','Medium-Light'],
+  ['Medium-Dark','Medium-Dark']
+ ]){
+  const html=product({additionalProperty:[{name:'Roast Level',value:source}]});
+  const r=extractProductPreview(html,{source_url:link,roaster:'Sweet Bloom'});
+  assert.equal(r.fields.roast_level,expected,source);
+ }
+});
 test('trusted official product JSON-LD extracts only supported explicit fields',()=>{
  const result=extractProductPreview(product(),{source_url:link,roaster:'Sweet Bloom'});
  assert.equal(result.ok,true);

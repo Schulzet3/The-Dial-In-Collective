@@ -23,7 +23,7 @@ export function hydrate(raw){
  }
  for(const l of rows(raw,'library')){
   const canonical=rows(raw,'coffees').find(c=>c.id===l.coffee_id);const proposal=rows(raw,'submissions').find(p=>p.id===l.submission_id);const data=canonical||proposal?.proposed_data||{};
-  s.coffees.push({id:l.id,name:data.name||'Coffee under review',roaster:data.roaster||'',origin:data.origin||'',roastLevel:data.roast_level||data.roastLevel||'',elevationM:data.elevation_m||data.elevationM||'',process:data.process||'',variety:data.variety||'',producer:data.producer||'',tastingNotes:data.tasting_notes||data.tastingNotes||'',roasterUrl:proposal?.source_url||'',roasterRecipe:data.roaster_recipe||data.roasterRecipe||null,createdAt:l.created_at,hidden:!!l.hidden_at,status:canonical?'verified':'pending',bags:[],activeBagId:null});
+  s.coffees.push({id:l.id,name:data.name||'Coffee under review',roaster:data.roaster||'',origin:data.origin||'',roastLevel:C.canonicalRoastLevel(data.roast_level||data.roastLevel)||'',elevationM:data.elevation_m||data.elevationM||'',process:data.process||'',variety:data.variety||'',producer:data.producer||'',tastingNotes:data.tasting_notes||data.tastingNotes||'',roasterUrl:proposal?.source_url||'',roasterRecipe:data.roaster_recipe||data.roasterRecipe||null,createdAt:l.created_at,hidden:!!l.hidden_at,status:canonical?'verified':'pending',bags:[],activeBagId:null});
  }
  s.families=rows(raw,'families').map(f=>({id:f.id,coffeeId:f.library_entry_id,style:f.style,seedRatio:number(f.statistics?.ratio?.center),createdAt:f.created_at}));
  for(const sh of rows(raw,'shots')){

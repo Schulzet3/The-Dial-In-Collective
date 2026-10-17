@@ -1,7 +1,13 @@
 export const APP_VERSION = '0.1.0';
 export const SCHEMA_VERSION = 1;
 export const STYLES = ['Traditional', 'Turbo', 'Ristretto', 'Lungo', 'Custom'];
-export const ROASTS = ['Light', 'Light-Medium', 'Medium', 'Medium-Dark', 'Dark'];
+// Owner-Locked seven-tier Title Case scale. Original source records remain literal.
+export const ROASTS = ['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
+export function canonicalRoastLevel(value){
+ const s=String(value??'').trim();
+ return s==='Light-Medium'?'Medium-Light':ROASTS.includes(s)?s:'';
+}
+export const roastIndex=value=>ROASTS.indexOf(canonicalRoastLevel(value));
 export const PROCESSES = ['Washed', 'Natural', 'Honey', 'Anaerobic', 'Other/Unknown'];
 export const SCALES = [
   { key: 'extraction', label: 'Extraction', low: 'Sour', high: 'Bitter', ideal: 3, hint: 'Balanced for this coffee and style.' },
@@ -19,11 +25,14 @@ export const STYLE_COPY = {
 };
 // Starting priors preserved from the supplied JSX, NOT pass/fail rules.
 export const RATIOS = {
- Traditional: [2.5, 2.35, 2.0, 1.9, 1.8], Turbo: [3.0, 2.8, 2.6, 2.4, 2.2],
- Ristretto: [1.5, 1.4, 1.3, 1.2, 1.1], Lungo: [3.2, 3.0, 2.8, 2.6, 2.5], Custom: [2,2,2,2,2]
+ // Until evidence differentiates their targets, two new light tiers inherit
+ // the existing Light priors; no invented precision or shifting old targets.
+ Traditional: [2.5,2.5,2.5,2.35,2.0,1.9,1.8], Turbo: [3.0,3.0,3.0,2.8,2.6,2.4,2.2],
+ Ristretto: [1.5,1.5,1.5,1.4,1.3,1.2,1.1], Lungo: [3.2,3.2,3.2,3.0,2.8,2.6,2.5],
+ Custom: [2,2,2,2,2,2,2]
 };
 export const TIMES = {Traditional: [[25,32],[22,28]], Turbo:[[12,18],[12,18]], Ristretto:[[20,25],[18,23]], Lungo:[[30,40],[28,36]], Custom:[[25,32],[25,32]]};
-export const TEMPS = [95,94,93,91.5,90];
+export const TEMPS = [95,95,95,94,93,91.5,90];
 export const CONFIG = {
   // Prototype tuning values. These are application heuristics, not scientific limits.
   ratioFamilyDistance: 0.25,
