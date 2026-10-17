@@ -34,6 +34,7 @@ export function coffeeUrlPreviewMarkup(result){
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.fields[key])}</dd></div>`).join('')}</dl>
+  ${result.roaster_recipe?`<p class="helper"><strong>Roaster's published espresso recipe:</strong> ${e(result.roaster_recipe.dose_g)} g in, ${e(result.roaster_recipe.yield_g)} g out, ${e(result.roaster_recipe.time_s_min)}–${e(result.roaster_recipe.time_s_max)} s. Reference only; not applied or saved automatically.</p>`:''}
   ${existing?`<p class="helper coffee-match-alert">${e(existing)}</p>`:''}
   ${button('Apply Suggested Details','apply-coffee-url','','secondary compact')}
  </section>`;
