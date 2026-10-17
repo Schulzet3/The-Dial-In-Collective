@@ -94,11 +94,14 @@ function normalized(field,value){
  }
  if(field==='process'){
   const norm=s.toLowerCase();
-  if(norm.includes('anaerobic'))return 'Anaerobic';
-  if(norm.includes('honey'))return 'Honey';
-  if(norm.includes('washed'))return 'Washed';
-  if(norm.includes('natural'))return 'Natural';
-  return '';
+  // Different components of a blend can have different processes; the
+  // canonical single-select field must not silently say "Washed" if the
+  // roaster actually says "Washed & Natural".
+  const found=[
+   ['Anaerobic',/\banaerobic\b/],['Honey',/\bhoney\b/],
+   ['Washed',/\bwashed\b/],['Natural',/\bnatural\b/]
+  ].filter(([,re])=>re.test(norm)).map(([name])=>name);
+  return found.length===1?found[0]:'';
  }
  return s;
 }
@@ -179,7 +182,20 @@ function explicitNearbyFacts(html,fields){
    }
   }
  }
- // Never infer harvest/producer/roast from surrounding promotional prose.
+ // A heading such as "850 small scale producers" next to an explicit
+ // "PRODUCER" metric identifies a producer group, not the crop year.
+ if(!fields.producer){
+  for(const m of html.matchAll(/<h[2-4]\b[^>]*>([\s\S]{1,200}?)<\/h[2-4]>/gi)){
+   const label=clean(m[1],120);
+   if(!/^(?:\d{1,5}\s+)?(?:small[ -]?scale\s+)?(?:small[ -]?holder\s+)?(?:producers?|farmers?|cooperatives?|[A-Z][A-Za-z' ]{2,50})$/i.test(label))continue;
+   const following=html.slice(m.index+m[0].length,m.index+m[0].length+450);
+   if(/\bPRODUCER\b/i.test(clean(following,200))){
+    fields.producer=label;
+    break;
+   }
+  }
+ }
+ // Never infer harvest or roast from surrounding promotional prose.
 }
 function explicitEspressoRecipe(html){
  const text=focusedProductText(html);
