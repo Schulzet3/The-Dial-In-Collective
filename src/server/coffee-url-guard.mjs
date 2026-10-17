@@ -72,10 +72,10 @@ function decodeBody(bytes,encoding){
  }catch{return null;}
  return null;
 }
-export function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=guardedLookup()}={}){
+export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=guardedLookup()}={},redirectsRemaining=2){
  const url=safeCoffeeUrl(raw);
  if(!url)return Promise.resolve({ok:false,reason:'invalid_url'});
- return new Promise(resolve=>{
+ const result=await new Promise(resolve=>{
   let settled=false;
   const finish=(value)=>{if(settled)return;settled=true;clearTimeout(timer);resolve(value);};
   const timer=setTimeout(()=>{req?.destroy();finish({ok:false,reason:'source_unavailable'});},11_000);
@@ -89,7 +89,7 @@ export function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=guardedL
      'User-Agent':'DialInCollective-CoffeePreview/1.0',Connection:'close'}
    },res=>{
     const status=res.statusCode||0;
-    if(status>=300&&status<400){res.destroy();finish({ok:false,reason:'redirect_requires_review'});return;}
+    if(status>=300&&status<400){const target=res.headers.location;res.destroy();finish({ok:false,reason:'redirect_requires_review',redirect:typeof target==='string'?target:null});return;}
     if(status<200||status>=300){res.destroy();finish({ok:false,reason:'source_unavailable'});return;}
     const mime=String(res.headers['content-type']||'').toLowerCase();
     if(!mime.includes('text/html')&&!mime.includes('application/xhtml+xml')){
@@ -119,4 +119,13 @@ export function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=guardedL
    req.end();
   }catch{finish({ok:false,reason:'source_fetch_failed'});}
  });
+ if(result.redirect&&redirectsRemaining>0){
+  let destination;
+  try{destination=new URL(result.redirect,url).toString();}catch{return {ok:false,reason:'redirect_requires_review'};}
+  if(!safeCoffeeUrl(destination))return {ok:false,reason:'redirect_requires_review'};
+  // A new HTTPS request independently revalidates and pins its DNS records
+  // at connect time. No Supabase credentials, cookies or raw caller headers.
+  return fetchPublicCoffeeHtml(destination,{request,lookup},redirectsRemaining-1);
+ }
+ return result.redirect?{ok:false,reason:'redirect_requires_review'}:result;
 }
