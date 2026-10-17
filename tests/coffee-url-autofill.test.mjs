@@ -139,7 +139,8 @@ test('client makes exactly one authenticated public-preview request per click wi
  const begin=client.indexOf('async previewCoffeeUrl(source_url){');
  const end=client.indexOf('async verifyCoffeeSource(',begin);
  const preview=client.slice(begin,end);
- assert.match(preview,/\/api\/coffee-preview/);
+ assert.match(client,/previewPath='\/api\/coffee-preview'/);
+ assert.match(preview,/previewFetch\(previewPath/);
  assert.match(preview,/getSession\(\)/);
  assert.match(preview,/dic_find_coffee_matches/);
  assert.doesNotMatch(preview,/sdk\.functions\.invoke\('dic-preview-coffee'/);
