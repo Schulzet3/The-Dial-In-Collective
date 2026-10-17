@@ -45,8 +45,19 @@ begin
  then raise exception 'Generic preview bypassed official preview cooldown: %',got;end if;
  execute 'reset role';
 
+ -- The 12th shared claim succeeds, then every route denies claim 13.
  update private.dic_url_preview_attempts
- set attempts=60,last_attempt_at=now()-interval '31 seconds' where owner_id=owner_account;
+ set attempts=11,last_attempt_at=now()-interval '31 seconds' where owner_id=owner_account;
+ execute 'set local role authenticated';
+ got:=public.dic_claim_universal_preview();
+ if got->>'allowed' is distinct from 'true'
+ then raise exception '12th account preview claim failed: %',got;end if;
+ execute 'reset role';
+ if (select attempts from private.dic_url_preview_attempts where owner_id=owner_account)<>12
+ then raise exception 'Boundary claim did not set exactly 12';end if;
+
+ update private.dic_url_preview_attempts
+ set attempts=12,last_attempt_at=now()-interval '31 seconds' where owner_id=owner_account;
  execute 'set local role authenticated';
  got:=public.dic_claim_universal_preview();
  if got->>'reason' is distinct from 'daily_preview_limit' then raise exception 'Daily cap not enforced: %',got; end if;

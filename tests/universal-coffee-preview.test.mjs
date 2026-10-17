@@ -241,3 +241,21 @@ test('Netlify endpoint uses rate limiting, private server-only import paths and 
  assert.match(migration,/private.dic_shared_preview_claim/);
  assert.match(migration,/revoke all on function/);
 });
+
+
+test('approved 12-claim account budget keeps shared 30-second cooldown and legacy route protection',()=>{
+ const migration=read('supabase/migrations/20261017050000_dic_preview_daily_budget_12.sql');
+ assert.match(migration,/COFFEE-URL-DAILY-20261016-02/);
+ assert.match(migration,/check \(attempts between 0 and 12\)/i);
+ assert.match(migration,/rec\.attempts>=12/);
+ assert.match(migration,/last_attempt_at>clock-interval '30 seconds'/);
+ assert.match(migration,/window_started_at<clock-interval '24 hours'/);
+ assert.match(migration,/private\.dic_shared_preview_claim\(account_id uuid\)/);
+ assert.match(migration,/revoke all on function private\.dic_shared_preview_claim\(uuid\)/);
+ assert.match(migration,/set attempts=12 where attempts>12/);
+ const memberSql=read('supabase/tests/universal_url_preview.sql');
+ assert.match(memberSql,/set attempts=11,last_attempt_at/);
+ assert.match(memberSql,/Boundary claim did not set exactly 12/);
+ const serviceSql=read('supabase/tests/url_preview_release.sql');
+ assert.match(serviceSql,/set attempts=12,last_attempt_at/);
+});

@@ -36,7 +36,7 @@ begin
  got:=public.dic_url_preview_claim(second_user);
  if got->>'allowed' is distinct from 'true' then raise exception 'Quota leaked across accounts'; end if;
  execute 'reset role';
- update private.dic_url_preview_attempts set attempts=60,last_attempt_at=now()-interval '1 minute' where owner_id=actor;
+ update private.dic_url_preview_attempts set attempts=12,last_attempt_at=now()-interval '1 minute' where owner_id=actor;
  execute 'set local role service_role';
  got:=public.dic_url_preview_claim(actor);
  if got->>'reason' is distinct from 'daily_preview_limit' then raise exception 'Daily quota failed'; end if;
