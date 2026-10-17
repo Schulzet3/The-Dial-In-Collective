@@ -51,6 +51,12 @@ The enhanced universal parser handles explicit semantic roast markers, accessibl
 
 Keep the existing five-value roast taxonomy and adjustable **60 per rolling 24 hours** until an explicit owner decision. **At least 30 seconds between any account's known/unknown-roaster URL previews is Locked.** Manual coffee entry and shot logging remain available. Optional Claude BYOK stays device-only and optional; screenshot/OCR extraction is not newly claimed as implemented.
 
+## Repository gap audit registered (documentation only)
+
+The [Comprehensive GitHub Gap Audit / Cross-Session Handoff](DIC_Comprehensive_GitHub_Audit_Handoff_2026-10-16.md) examined the complete 189-entry development tree at `c1e8d3175be836b4a7fc92d731729583e7ebe55d` and the then-current GitHub branches, commits, workflows and work tracking. It records **26 evidence-labeled findings**, including unexposed Locked workflows (experiment confirmation, Custom style, bags/baskets, shot hide, screenshot/optional device-only Claude input), the placeholder Community screen and incomplete recommendation tiers, the absent installable/offline PWA shell, a source-level offline cold-open risk, and read-only admin tools. Real iPhone/multi-device acceptance, member coffee verification and certain external-provider controls remain separate limits, **not proven failures**.
+
+At the audit checkpoint there was **one open GitHub issue (#5) and no open pull requests**. The audit proposed a structured issue backlog, but **did not create or change issues, requirements or product decisions**. The 25-versus-10 daily URL budget and six-tier roast taxonomy remain Open; the prior real-account, Wuri private Pending save and hosted-recovery acceptance results remain valid for their recorded scopes. This archive is **a read-only source audit followed by documentation-only filing**, not new implementation, a fresh production/provider check, a build, a deploy or a release authorization. Recheck current source, issues and CI before execution.
+
 ## Genuine remaining work
 
 1. Resolve daily URL budget, then roast taxonomy **one product question at a time**. Update both canonical requirements files on approval, preserve superseded rationale, implement/test compatibility in development. A later release needs its own applicable authorization; this task must not deploy.

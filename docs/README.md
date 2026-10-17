@@ -4,6 +4,10 @@ Start with [Current Status](CURRENT_STATUS.md), [Master Specification](MASTER_SP
 
 [GitHub continuity report](GITHUB_CONTINUITY_2026-10-17.md) describes this documentation consolidation, verification boundaries and provider limits. [AGENTS](../AGENTS.md) defines future handoffs. The next owner product question is the daily URL budget; ask it separately from roast taxonomy. No deployment or production-data change is part of this work.
 
+## Development gap audit and cross-session handoff
+
+- [Comprehensive GitHub Gap Audit (October 16)](DIC_Comprehensive_GitHub_Audit_Handoff_2026-10-16.md) is the 26-finding, evidence-labeled read-only review of the application, workflows and requirements at development SHA `c1e8d3175be836b4a7fc92d731729583e7ebe55d`. It distinguishes confirmed missing or unexposed capabilities, risks, incomplete acceptance, provider-access limitations, Open product questions and proposed priorities. **It is not a new product decision, a fresh production test, or an authorized GitHub issue backlog.** Verify current refs and source before acting.
+
 ## Canonical source components and provenance
 
 The files below remain at their existing locations as preserved decision source components. Read their full content through the consolidated canonical files and apply explicit supersession scopes; earlier wording does not win merely because it says Locked.
