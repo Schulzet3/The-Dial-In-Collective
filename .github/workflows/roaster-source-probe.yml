@@ -1,0 +1,23 @@
+name: DIC controlled public roaster source probe
+on:
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - scripts/audit/coffee-roaster-live-probe.mjs
+      - .github/workflows/roaster-source-probe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unprivileged-public-pages:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Safely probe only public HTTPS coffee sources
+        run: node scripts/audit/coffee-roaster-live-probe.mjs
