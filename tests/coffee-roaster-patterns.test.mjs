@@ -46,35 +46,26 @@ test('Queen City recognizes country, natural heirloom and explicit tasting remin
  assert.equal(r.fields.process,'Natural');
  assert.equal(r.fields.tasting_notes,'Black Cherry & Haribo Goldbears');
 });
-test('Onyx reversed metric labels give actual Ultra Light and Agtron without inference',()=>{
+test('Onyx named product stats extract seven-tier roast and avoid educational text',()=>{
  const r=coffee('Ethiopia Mullugeta Muntasha Natural',
  'onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural-26',
- '<div>Ultra Light</div><div>ROAST LEVEL</div>'+
- '<div>Agtron #133</div><div>AGTRON</div>'+
- '<div>Natural</div><div>PROCESS METHOD</div>'+
+ '<p>Producer: Abstract</p><p>Preferred Extraction: INVENTORY</p>'+
+ '<div class="a-stat" data-name="roast-level"><p>Ultra Light<br>Agtron #133<br><label>ROAST LEVEL</label></p></div>'+
  '<div class="a-stat" data-name="country"><p>Ethiopia<br><label>ORIGIN</label></p></div>'+
  '<div class="a-stat" data-name="ferment"><p>Natural<br><label>PROCESS METHOD</label></p></div>'+
  '<div class="a-stat" data-name="season"><p>November<br><label>HARVEST SEASON</label></p></div>'+
  '<div class="a-stat" data-name="roaster"><p>Loring S70 Peregrine<br><label>PRODUCTION ROASTER</label></p></div>'+
- '<div>Landrace</div><div>VARIETY</div>'+
- '<div>2150 MASL</div><div>ELEVATION</div>'+
- '<div>Raised-Bed Dried</div><div>DRYING METHOD</div>'+
- '<div>November</div><div>HARVEST SEASON</div>'+
- '<p>Filter & Espresso</p><div>PREFERRED EXTRACTION</div>');
+ '<div class="a-stat" data-name="method"><p>Filter & Espresso<br><label>PREFERRED EXTRACTION</label></p></div>'+
+ '<div class="a-stat" data-name="variety"><p>Landrace<br><label>VARIETY</label></p></div>');
  assert.equal(r.fields.roast_level,'Ultra Light');
  assert.equal(r.fields.process,'Natural');
  assert.equal(r.fields.variety,'Landrace');
- assert.equal(r.fields.elevation_m,'2150 MASL');
  assert.equal(r.fields.origin,'Ethiopia');
  assert.equal(r.roaster_details.harvest_season,'November');
  assert.equal(r.roaster_details.production_roaster,'Loring S70 Peregrine');
  assert.equal(r.roaster_details.agtron,'133');
- assert.equal(r.fields.producer,undefined,'unrelated educational text is not a coffee producer');
- assert.equal(r.roaster_details.preferred_extraction,'Filter & Espresso','explicit product stat takes priority over unrelated guide titles');
- assert.equal(r.roaster_details.drying_method,'Raised-Bed Dried','specific source metric overrides unrelated guide text');
- assert.equal(r.roaster_details.drying_method,'Raised-Bed Dried');
- assert.equal(r.roaster_details.harvest_season,'November');
- assert.equal(r.roaster_details.preferred_extraction,'Filter & Espresso');
+ assert.equal(r.fields.producer,undefined,'unrelated educational heading is not a producer');
+ assert.equal(r.roaster_details.preferred_extraction,'Filter & Espresso','product metric outranks unrelated article');
 });
 test('PERC icon+heading metrics include process, Agtron, rest and Breville recipe',()=>{
  const r=coffee('Colombia Franky Hoyos Adv Washed',

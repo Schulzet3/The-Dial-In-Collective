@@ -17,46 +17,12 @@ const targets=[
  ['Little Wolf Tegu','https://littlewolf.coffee/products/tegu'],
  ['Heart Phono','https://www.heartroasters.com/products/phono']
 ];
-function publicProductIdentityDiagnostic(html,url,roaster){
- const productNodes=[];
- const scripts=[...html.matchAll(/<script\b([^>]{0,1000})>([\s\S]*?)<\/script\s*>/gi)];
- const jsonInfo=[];
- for(const [,attributes,payload] of scripts){
-  if(!/\btype\s*=\s*["']application\/ld\+json["']/i.test(attributes))continue;
-  jsonInfo.push({bytes:payload.length});
-  if(payload.length>250000)continue;
-  let data;try{data=JSON.parse(payload)}catch{continue}
-  const walk=(x,depth=0)=>{
-   if(depth>9||productNodes.length>90||!x||typeof x!=='object')return;
-   if(Array.isArray(x)){for(const p of x.slice(0,80))walk(p,depth+1);return;}
-   const types=Array.isArray(x['@type'])?x['@type']:[x['@type']];
-   if(types.some(t=>String(t||'').toLowerCase()==='product')&&typeof x.name==='string')
-    productNodes.push({name:x.name.slice(0,110),url:String(x.url||'').slice(0,210)});
-   for(const k of ['@graph','mainEntity','itemListElement','hasVariant','isVariantOf','offers'])
-    if(x[k])walk(x[k],depth+1);
-  };
-  walk(data);
- }
- const base=new URL(url),match=u=>{
-  try{const x=new URL(u,base);return x.hostname.replace(/^www\./,'')===base.hostname.replace(/^www\./,'')&&
-   x.pathname.replace(/\/+$/,'')===base.pathname.replace(/\/+$/,'')}catch{return false}
- };
- const og=(html.match(/<meta\b[^>]*property=["']og:title["'][^>]*>/i)||[])[0]||'';
- const main=productNodes.filter(x=>match(x.url));
- const onyxStatNames=[...new Set([...html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']([^"']+)/gi)].map(x=>x[1]))].slice(0,30);
- const publicStats=[...html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']([^"']+)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)].slice(0,20)
-  .map(m=>({key:m[1],first:m[2].replace(/<br\s*\/?\s*>/gi,' | ').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,215)}));
- return {roaster,og:og.slice(0,200),script_count:jsonInfo.length,json_script_sizes:jsonInfo.map(x=>x.bytes).slice(0,20),
-  parsed_product_count:productNodes.length,matched_count:main.length,matched_names:main.map(x=>x.name).slice(0,25),
-  first_products:productNodes.slice(0,18),onyxStatNames,publicStats};
-}
 const summarize=async ([roaster,url])=>{
  if(!safeCoffeeUrl(url))return {roaster,status:'invalid_target'};
  try{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
-  if(/PERC|Onyx/.test(roaster))console.log('[DIC PUBLIC PRODUCT DEBUG] '+JSON.stringify(publicProductIdentityDiagnostic(fetched.html,url,roaster)));
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Summarize only extracted public coffee facts, never cache raw HTML.
   const keys=Object.keys(result.fields||{});
@@ -75,7 +41,7 @@ for(let i=0;i<targets.length;i+=2){
   console.log('[DIC ROASTER SMOKE] '+JSON.stringify(item));
  }
 }
-// Third read-only public-page check after strict Onyx data scoping and PERC identity deconfliction.
+// Final no-credentials multi-roaster acceptance after bounded layout and ProductGroup fixes.
 console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
  parsed:results.filter(x=>x.status==='parsed').length,
  blocked:results.filter(x=>x.status!=='parsed').map(x=>({roaster:x.roaster,status:x.status})),
