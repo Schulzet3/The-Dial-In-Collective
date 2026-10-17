@@ -140,6 +140,23 @@ function selectedMarkup(html){
 }
 export function extractLayoutEvidence(html,{fields,addField,clean}){
  const extras={},page=selectedMarkup(html);
+ const onyxMetric=/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']roast-level["']/i.test(html);
+ if(onyxMetric){
+  // Onyx publishes many general education sections on the product URL.
+  // The actual coffee has named a-stat fields. Only read those source
+  // blocks, never a distant paragraph titled "Producer"/"Extraction".
+  for(const m of html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["'](roast-level|variety|process-method|elevation|origin|harvest-season)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)){
+   const kind=m[1],p=m[2],label=(p.match(/<label\b[^>]*>([^<>]{2,75})<\/label>/i)||[])[1];
+   if(!label)continue;
+   const value=p.split(/<br\s*\/?\s*>/i)[0];
+   field(fields,clean(label,80),value,addField,extras,clean);
+   if(kind==='roast-level'){
+    const num=(p.match(/\bAgtron\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)/i)||[])[1];
+    if(num)addExtra(extras,'agtron',num);
+   }
+  }
+  return extras;
+ }
  // Proud Mary renders certain product attributes with the value inside an
  // <a> rather than a <p>. Read text only; never follow javascript: hrefs.
  for(const block of page.matchAll(/<div\b[^>]*class=["'][^"']*meta-info[^"']*["'][^>]*>([\s\S]{0,1150}?)<\/div>/gi)){

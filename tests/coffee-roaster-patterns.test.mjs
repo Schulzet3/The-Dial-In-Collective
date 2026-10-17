@@ -62,6 +62,9 @@ test('Onyx reversed metric labels give actual Ultra Light and Agtron without inf
  assert.equal(r.fields.variety,'Landrace');
  assert.equal(r.fields.elevation_m,'2150 MASL');
  assert.equal(r.roaster_details.agtron,'133');
+ assert.equal(r.fields.producer,undefined,'unrelated educational text is not a coffee producer');
+ assert.equal(r.roaster_details.preferred_extraction,undefined,'unrelated guide titles are not extraction evidence');
+ assert.equal(r.roaster_details.drying_method,undefined,'no false article fields');
  assert.equal(r.roaster_details.drying_method,'Raised-Bed Dried');
  assert.equal(r.roaster_details.harvest_season,'November');
  assert.equal(r.roaster_details.preferred_extraction,'Filter & Espresso');
@@ -193,6 +196,7 @@ test('live Onyx custom product markup parses explicitly labeled Ultra Light with
  const link='https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural-26';
  const html='<html><head><title>Ethiopia Mullugeta Muntasha Natural &ndash; Onyx Coffee Lab</title>'+
   '<link rel="canonical" href="'+link+'"></head><body><main>'+
+  '<p>Producer: Abstract</p><p>Preferred Extraction: INVENTORY</p><p>Drying Method: ABSTRACT</p>'+
   '<div class="a-stat" data-name="roast-level" data-stat-id="agtron"><span class="stat-text">'+
   '<p>Ultra Light<br>Agtron #133<br><label>ROAST LEVEL</label></p></span></div>'+
   '<div class="a-stat" data-name="variety"><span class="stat-text"><p>Landrace<br><label>VARIETY</label></p></span></div>'+

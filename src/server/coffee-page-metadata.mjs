@@ -327,10 +327,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   // product title in og:title is required; unrelated products stay rejected.
   const ogName=clean(meta['og:title']||'',200);
   const exact=unique.filter(row=>keyOf(textOf(row.name))===keyOf(ogName));
-  if(exact.length===1&&unique.every(row=>{
-   const name=textOf(row.name);
-   return keyOf(name)===keyOf(ogName)||name.startsWith(ogName+' - ');
-  }))p=exact[0];
+  if(exact.length===1&&exact[0].url&&samePage(exact[0].url,source_url))p=exact[0];
   else return {ok:false,reason:'ambiguous_or_missing_product'};
  }
  if(!p){
@@ -364,7 +361,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const siteName=textOf(meta['og:site_name'],200);
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
   fields.roaster=siteName;
- labeledPairs(html,fields);
+ // Avoid stray articles/related-product labels on custom Onyx storefronts.
+ // The product's named a-stat metrics supply its selected factual labels.
+ const onyxMetrics=/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']roast-level["']/i.test(html);
+ if(!onyxMetrics)labeledPairs(html,fields);
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.
  const roaster_details=extractLayoutEvidence(html,{
@@ -377,7 +377,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    addField(fields,k.replace(/^(?:coffee|product)[:._-]/,''),v);
   }
  }
- explicitNearbyFacts(html,fields);
+ if(!onyxMetrics)explicitNearbyFacts(html,fields);
  const roast_evidence=extractRoastVisualEvidence(html);
  if(roast_evidence.value){
   if(fields.roast_level&&fields.roast_level!==roast_evidence.value){
