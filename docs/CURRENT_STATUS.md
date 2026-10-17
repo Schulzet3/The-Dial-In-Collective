@@ -4,11 +4,22 @@
 
 ## Resume here
 
-The owner-approved GitHub documentation consolidation is complete in this revision: original requirements, all retrieved GitHub amendments, a scoped supersession map, this checkpoint, navigation and historical evidence are now available from the active development branch. The [continuity report](GITHUB_CONTINUITY_2026-10-17.md) records validation and provider-access limits. GitHub commit and ref read-back must succeed before completion is reported.
+The owner-approved GitHub documentation consolidation is complete in this revision: original requirements, all retrieved GitHub amendments, a scoped supersession map, this checkpoint, navigation and historical evidence are now available from the active development branch. The [continuity report](GITHUB_CONTINUITY_2026-10-17.md) records validation and provider-access limits. Both continuity commits were read back and verified. The subsequent exact test-shot purge is recorded below.
 
 **Next product action:** ask **one** question about **25 versus 10 URL lookups per rolling 24 hours**. Do not apply either value without the owner's decision. Next, separately resolve the proposed six roast tiers and displayed naming. These questions were already being discussed; neither proposal is Locked. See the [latest extraction/product checkpoint](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md).
 
-**This task's boundary:** documentation changes only. No Netlify deployment, Supabase migration/Edge deployment, production-data mutation, signup/invitation action, provider reconfiguration, new subscription or backup deletion is authorized by this continuation.
+**Latest operation authorization:** The owner explicitly authorized the exact production purge of hidden nonlegacy Hambela test shot `799509a3-a16d-4380-a439-8de2a5d880e2`, its note/detailed payloads and affected timestamps. **That operation is now committed and independently verified below.** The preceding continuity consolidation was documentation-only. No broader deletion, deployment, migration, provider-setting change or historical-backup purge is authorized.
+
+## Exact Hambela test shot purge verified 2026-10-17 UTC
+
+**COMMITTED; independent post-commit checks PASS at 2026-10-17T04:24:15.0808+00:00.** At the owner's explicit request, permanently removed only Sweet Bloom Hambela test shot `799509a3-a16d-4380-a439-8de2a5d880e2` (hidden, nonlegacy, 18 g / 48.8 g / 25.2 s) and its one empty note. Cleared the two detailed audit before/after payloads while retaining original metadata; replaced two cached mutation responses with payload-free `record_purged` tombstones, preserving mutation IDs/request hashes/timestamps. Replaying the original hide request returns the tombstone without recreating data.
+
+- **15 stored / 15 visible shots remain, including all 14 legacy shots.** Full-row SHA-256 checks confirm all other shots/notes and the **1 community shot + 1 contribution link** unchanged.
+- **42 protected table-scope fingerprints PASS** across preflight, rollback dry run, committed transaction and independent post-commit reads. Only the exact authorized row scopes changed; no schema, policy, trigger or deployment alteration.
+- Hambela workspace `last_logged_at` corrected to **NULL** because no shots remain in that context. Setup `last_feed_shot_at` corrected to **2026-10-16T16:50:19.242Z** from the latest remaining eligible shot; Slow Feed stays true. Normal revisions advanced; all other fields and current-coffee pin unchanged.
+- Historical backups, original import/recovery evidence and unrelated records were **not purged**. The only remaining exact-UUID references in application tables are the two payload-free audit metadata rows.
+
+Detailed evidence, dependency preflight, transaction/replay checks and all comparison hashes: [exact purge report](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md). This supersedes the prior **16 retained rows** storage count for this shot; the earlier hide report remains valid historical evidence.
 
 ## Branches and release coordinates
 
@@ -19,7 +30,7 @@ The owner-approved GitHub documentation consolidation is complete in this revisi
 | Default `main` | Backup operations; older application tree. Do not merge development into it or deploy its app. |
 | Production frontend | Netlify `6ad2c872ad7a8fa78dc410dc`, ready; source `f08dfda99f46b25240cb8cc35c46d2c3c76344b8`, published `2026-10-17T01:02:27.862Z` (Oct 16 Denver). **Read back from provider during this consolidation.** |
 | Latest tested app enhancement | Roast graphic extraction, source `3b98b086babeff2b47a4d218ecd4c1fee02887ff`; GitHub [run 38994786401](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/38994786401) completed success, 226/226 Node tests recorded. Run status and SHA rechecked; count from existing detailed evidence. **Unpublished.** |
-| Production URL authorization correction | Existing SQL migration `20261017020000_dic_universal_preview_claims_json_auth.sql`; prior evidence records successful production application and rollback-only role/cooldown tests. No database query or migration performed in this docs task. |
+| Production URL authorization correction | Existing SQL migration `20261017020000_dic_universal_preview_claims_json_auth.sql`; prior evidence records successful production application and rollback-only role/cooldown tests. This is prior release evidence; the later exact shot purge did not apply a migration. |
 | Backup source pin | `main:.github/workflows/nightly-backup.yml` still pins published app `f08dfda99f46b25240cb8cc35c46d2c3c76344b8`; cron `23 9 * * *` UTC, 30-day GitHub artifact retention. Workflow read back; untouched. |
 | Visitor protection | Netlify read-back confirms SSO `non_production`, no site password. Production relies on Supabase email/password, confirmed email, admission, RLS and admin checks. No access setting changed. |
 
@@ -27,13 +38,13 @@ A development/documentation SHA need not equal the published frontend SHA. A SQL
 
 ## Completed milestones — exact scope
 
-The detailed reports below are prior acceptance evidence, reconciled here. Unless a row explicitly says provider read-back above, its data/security result is **not a new live test in this documentation task**.
+The dated milestones below preserve earlier acceptance evidence. The exact Hambela purge section above is a **new live production verification** under explicit owner authorization; other results retain their stated dates and scopes.
 
 | Milestone | Accepted evidence | Limits |
 | --- | --- | --- |
 | Core logging and accounts | Owner completed Log Shot → Rate → Recommendation and persisted reload/login; real second account confirmed email, redeemed one-use invitation, saw an empty private workspace and Admin Access Unavailable. [Real-account record](REAL_ACCOUNT_ACCEPTANCE_2026-10-14.md), [later provider inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md). | Full adversarial HTTP/multi-device security and all engine tiers are not certified. |
 | Wuri URL preview and save | Admitted nonadmin successfully previewed and saved the official Wuri URL; prior independent SQL found visible personal library entry, correct source/metadata and **private Pending**, not global Verified. Roast Light was selected manually. [Acceptance](UNIVERSAL_COFFEE_URL_IMPLEMENTATION_ACCEPTANCE_2026-10-16.md), [latest report](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md). | No claim of successful graphic extraction or trusted Verified promotion. Do not ask for the same first Wuri save again. |
-| Shot cleanup | Explicit prior owner request hid exactly one Hambela shot through canonical audited mutation: **15 visible / 16 retained shot rows**, two audit entries for that shot. [Report](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md). | Historical evidence, no new data change in this task. This is not authority for further cleanup. |
+| Shot cleanup and subsequent exact purge | Original audited hide left 15 visible / 16 retained rows. The owner's later exact purge now leaves **15 stored / 15 visible**, 14 legacy, two payload-free audit metadata rows and two replay-safe receipt tombstones. [Verified purge](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md); [historical hide](COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md). | Only the named test shot/note/payloads and two affected timestamp contexts changed; all other shots/community records verified unchanged. No broader cleanup authorization. |
 | Real SMTP/domain/support | Owner received password reset and new-member confirmation mail; app TLS, Supabase callback settings, apex 302 redirect and support forwarding were tested. [Inventory](HOSTED_PROVIDER_RECOVERY_INVENTORY_2026-10-16.md). | No new mail send or DNS change. Root is reserved for a future homepage; preserve `auth` sending subdomain. |
 | Automatic encrypted backup delivery | October 15/16 **schedule-event** GitHub archives matched corresponding private Drive copies by SHA-256 and ZIP CRC. Manual release exports are separate. [Delivery/alert audit](AUTOMATED_BACKUP_DELIVERY_ALERT_AUDIT_2026-10-16.md). | Those dated runs do not prove future delivery. Retention/expiry and genuine failure/staleness remain distinct monitoring concerns. |
 | Exact ciphertext restore | Selected October 16 encrypted archive genuinely decrypted/restored in fresh isolated PostgreSQL; 44/44 first-party/Auth streams and security structures verified. [Exact restore](EXACT_ENCRYPTED_BACKUP_ISOLATED_RESTORE_2026-10-16.md). | Archive intentionally represents 1 account / 14 shots. |

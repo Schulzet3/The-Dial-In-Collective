@@ -2,7 +2,7 @@
 
 Start with [Current Status](CURRENT_STATUS.md), [Master Specification](MASTER_SPECIFICATION.md), and [Decision Ledger](DECISION_LEDGER.json), on `development/backend-foundation`. The canonical specification includes the complete recovered baseline and available GitHub specification addenda; the consolidated ledger preserves original objects and scoped supersessions. Historical statuses never reopen passed acceptance or override Locked decisions.
 
-[GitHub continuity report](GITHUB_CONTINUITY_2026-10-17.md) describes this documentation consolidation, verification boundaries and provider limits. [AGENTS](../AGENTS.md) defines future handoffs. The next owner product question is the daily URL budget; ask it separately from roast taxonomy. No deployment or production-data change is part of this work.
+[GitHub continuity report](GITHUB_CONTINUITY_2026-10-17.md) describes this documentation consolidation, verification boundaries and provider limits. [AGENTS](../AGENTS.md) defines future handoffs. The next owner product question is the daily URL budget; ask it separately from roast taxonomy. The prior continuity/audit work was documentation-only; the subsequent owner-authorized exact Hambela purge is recorded below. No deployment is part of the purge.
 
 ## Development gap audit and cross-session handoff
 
@@ -28,6 +28,8 @@ The files below remain at their existing locations as preserved decision source 
 Original recovered requirements and unavailable-source limits are indexed in [archive/README](archive/README.md). The [pre-consolidation status](CURRENT_STATUS_PRE_CONTINUITY_2026-10-16.md) is retained in full.
 
 ## Operational and acceptance evidence
+
+- [EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md)
 
 Each report may contain chronological earlier states. Read its latest reconciliation; do not treat the initial unfinished checkpoint as current.
 
