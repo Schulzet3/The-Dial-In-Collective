@@ -6,7 +6,7 @@
 
 ## Subsequent owner decision (after original audit)
 
-Owner approved **12 URL preview claims per account per 24-hour budget window** (decision `COFFEE-URL-DAILY-20261016-02`). The canonical Master Specification and Decision Ledger are updated, and isolated SQL/Node/UX CI passed for the staged migration. Production remains at 60 until an authorized rollout. The earlier “25 vs 10” lines below are **historic pre-decision audit text**. The separate roast-taxonomy question remains Open. [Current Status](CURRENT_STATUS.md) governs next actions.
+Owner approved **12 URL preview claims per account per 24-hour budget window** (decision `COFFEE-URL-DAILY-20261016-02`). The canonical Master Specification and Decision Ledger are updated; isolated SQL/Node/UX CI passed, and production migration `dic_preview_daily_budget_12` version `20261017050220` was applied and read-back verified at 12 without a Netlify redeploy. The earlier “25 vs 10” lines below are **historic pre-decision audit text**. The separate roast-taxonomy question remains Open. [Current Status](CURRENT_STATUS.md) governs next actions.
 
 ## Outcome and accuracy boundary
 

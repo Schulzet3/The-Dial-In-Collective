@@ -8,7 +8,7 @@ See the [exact purge evidence](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md) and 
 
 ## Original dated record retained
 
-**Later decision reconciliation:** The earlier 25 vs 10 daily preview cap proposal below has been **resolved** by the owner's 2026-10-16 Denver approval of **12 claims per member per 24-hour budget window**. The source migration and regression tests are staged and passed CI; production has not yet applied the 12-limit. [Canonical new decision](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json); [current operational status](CURRENT_STATUS.md). The six-tier roast idea remains unapproved.
+**Later decision reconciliation:** The earlier 25 vs 10 daily preview cap proposal below has been **resolved** by the owner's 2026-10-16 Denver approval of **12 claims per member per 24-hour budget window**. The migration and regression tests passed CI, and SQL-only production migration `dic_preview_daily_budget_12` was applied and independently verified (max 12, unchanged 30-second cooldown). Enhanced roast-graphic parser remains unpublished. [Canonical new decision](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json); [current operational status](CURRENT_STATUS.md). The six-tier roast idea remains unapproved.
 
 **Status: WURI MEMBER SAVE PASS (private Pending); EXACTLY ONE HAMBELA SHOT HIDDEN VIA CANONICAL APP MUTATION PASS; ENHANCED EXTRACTION DEVELOPED + CI PASS, NOT YET DEPLOYED.** New daily lookup cap and six-tier roast taxonomy are **proposals, NOT Locked or implemented**. Retain all existing Locked decisions, 30-second account-wide preview cooldown, roster/security boundaries, and existing production release until next owner approval.
 

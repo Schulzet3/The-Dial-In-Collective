@@ -1957,7 +1957,7 @@
       "topic": "URL preview daily budget",
       "current": "COFFEE-URL-DAILY-20261016-02",
       "supersedes": "Existing 60/day engineering default and superseded earlier 25/day numeric tuning",
-      "scope": "Owner-Locked starting 12 allowed claims per admitted account per 24-hour budget window, shared by known/unknown sources; >=30-second shared cooldown, manual entry/logging, and source verification remain unchanged. Future increases require owner approval. Production application awaits separate release checks.",
+      "scope": "Owner-Locked starting 12 allowed claims per admitted account per 24-hour budget window, shared by known/unknown sources; >=30-second shared cooldown, manual entry/logging, and source verification remain unchanged. Future increases require owner approval. Production applied with separate SQL-only migration and verified checks; no Netlify deploy.",
       "source": "docs/DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json"
     }
   ],
@@ -2002,9 +2002,21 @@
     "status": "Locked",
     "claims_per_window": 12,
     "window_hours": 24,
-    "implementation": "Source change pending database migration and independently verified production rollout",
+    "implementation": "LIVE in production Supabase after isolated SQL/build/UX CI PASS; migration dic_preview_daily_budget_12 version 20261017050220, live SQL read-back verified CHECK attempts 0..12, shared rec.attempts>=12 and >=30-second cooldown. No Netlify deploy.",
     "earlier_engineering_default": 60,
     "unchanged_cooldown_seconds": 30,
-    "feedback_reevaluation": "Increase only after explicit owner approval following actual member feedback"
+    "feedback_reevaluation": "Increase only after explicit owner approval following actual member feedback",
+    "production_migration": {
+      "name": "dic_preview_daily_budget_12",
+      "version": "20261017050220",
+      "status": "APPLIED_VERIFIED",
+      "checks": [
+        "CHECK attempts between 0 and 12",
+        "shared claim function attempts>=12",
+        "30-second account-wide cooldown unchanged",
+        "15 existing shots and 1 community shot with 1 contribution retained"
+      ],
+      "netlify_deploy_required": false
+    }
   }
 }
