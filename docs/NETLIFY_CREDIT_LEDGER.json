@@ -2,7 +2,7 @@
   "product": "The Dial In Collective",
   "provider": "Netlify",
   "account_plan": "Personal (paid through current billing period; downgrade to Free scheduled)",
-  "accounting_note": "Latest owner-observed snapshot is October 16, 2026: 985 of 1000 Personal plan production credits remain through November 14. Separate 29.3 operational credits cannot fund production deploys. Evidence carried from the attached hosted recovery handoff; not a live billing API response. Preserve no purchases and no auto-recharge.",
+  "accounting_note": "Last owner-observed 2026-10-16 snapshot showed 970 of 1000 Personal plan production credits; owner explicitly confirmed there were ample credits and instructed proceeding with this 2026-10-16 universal URL release WITHOUT another billing verification. Actual credit balance after publication is not measured. No purchase or recharge authorized.",
   "monthly_included_credits": 1000,
   "production_deploy_credits_each": 15,
   "snapshots": [
@@ -83,21 +83,30 @@
     "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
     "no_unattended_paid_topups": true,
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
-    "post_release_billing_refresh_needed": false,
+    "post_release_billing_refresh_needed": true,
     "last_published_release": {
-      "deploy_id": "6ad24660d0c6bdff2c065586",
-      "published_commit_sha": "4e7d4a834dd92ec79f8cd99b373374fc0a584ef8",
-      "published_at_utc": "2026-10-16T15:44:45.260Z",
+      "deploy_id": "6ad2c872ad7a8fa78dc410dc",
+      "published_commit_sha": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
+      "published_at_utc": "2026-10-17T01:02:27.862Z",
       "netlify_status": "ready",
-      "sso_protected": true,
+      "production_requires_netlify_team_sso": false,
+      "nonproduction_requires_netlify_team_sso": true,
       "primary_hostname": "https://app.dialincollective.com",
-      "scanned_files": 153,
+      "scanned_files": 172,
       "secret_scan_matches": 0,
-      "actual_credits_deducted": "Not independently confirmed in Netlify Billing after October 16 publication",
+      "published_functions": [
+        "coffee-url-preview"
+      ],
+      "actual_credits_deducted": "NOT MEASURED: owner approved release without refreshed billing review",
       "planned_cost_credits": 15
+    },
+    "owner_waived_balance_check_for_this_release": {
+      "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
+      "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
+      "verified_billing_balance": "Not measured"
     }
   },
-  "reconciliation": "Owner's NEW 2026-10-16 Netlify Usage screenshot explicitly shows 970 of 1000 Personal deploy credits remaining (expires 2026-11-14), 29.2/30 operational credits remaining (expires 2026-11-11), and auto recharge disabled. The earlier owner-observed pre-release 985 snapshot is historical. The 15-credit decrease supports one planned October 16 production release. Current deployed SHA 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8 remains unchanged and extra production SSO remains disabled by approved owner decision; development previews require team SSO. A dedicated recovery-staging build may use credits only with owner-approved isolated-test scope; do not alter production to do so. Future billing state can change after this screenshot and must be rechecked before any later releases.",
+  "reconciliation": "Latest provider-verified production Netlify deploy is 6ad2c872ad7a8fa78dc410dc from SHA f08dfda99f46b25240cb8cc35c46d2c3c76344b8, published 2026-10-17 01:02 UTC (Oct 16 US Mountain), with one authenticated URL preview function, ready/0 secrets matches. User explicitly waived a fresh credit-balance check for this approved release; old 970 snapshot is historical, not today's verified balance. Post-release actual credits are unknown, and the next release must refresh billing or obtain separate owner authorization. No provider plan change, paid purchase or automatic recharge.",
   "scheduled_plan_change": {
     "plan": "Free",
     "timing": "After current Oct 15-Nov 14 Personal period",
