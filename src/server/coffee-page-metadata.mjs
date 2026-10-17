@@ -140,6 +140,16 @@ function explicitNearbyFacts(html,fields){
   const m=near.match(/\b(\d{3,4}\s*(?:[-–]\s*\d{3,4})?)\s*m(?:asl|eters?\s*(?:above sea level)?)/i);
   if(m)fields.elevation_m=m[1].replace(/\s+/g,' ').trim()+' masl';
  }
+ // Some coffee labels print "Gedeb, Ethiopia" followed by a short, explicit
+ // comma-separated list immediately before "washed process". These are only
+ // proposals shown to the user, not authoritative catalog facts.
+ const origin=near.slice(0,600).match(/\b([A-Z][a-z'-]{2,}(?:\s+[A-Z][a-z'-]{2,}){0,3}),\s*([A-Z][a-z'-]{3,}(?:\s+[A-Z][a-z'-]{2,}){0,3})\b/);
+ if(origin&&!fields.origin)fields.origin=clean(origin[1]+', '+origin[2],160);
+ if(origin&&!fields.tasting_notes){
+  const afterOrigin=near.slice(origin.index+origin[0].length,origin.index+origin[0].length+260);
+  const notes=afterOrigin.match(/^\s*([a-z][a-z' -]{2,45}(?:,\s*[a-z][a-z' -]{2,45}){2,5})\s+(?:washed|natural|honey|anaerobic)\s+process\b/i);
+  if(notes)fields.tasting_notes=clean(notes[1],320);
+ }
  // Never infer harvest/producer/roast from surrounding promotional prose.
 }
 function explicitEspressoRecipe(html){
