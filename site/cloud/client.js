@@ -32,7 +32,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
     // Retain the trusted fast path for curated verified roaster domains.
     // Universal page extraction is a separate, unverified preview service,
     // never a shortcut around canonical matching/source promotion.
-    const broaden=new Set(['unrecognized_official_roaster','unsupported_official_product_url','ambiguous_or_missing_product']);
+    const broaden=new Set(['unrecognized_official_roaster','unsupported_official_product_url','ambiguous_or_missing_product','source_unavailable','source_fetch_failed','preview_unavailable']);
     if(official?.ok||!broaden.has(official?.reason))return official;
     const {data,error}=await sdk.auth.getSession();
     const token=data?.session?.access_token;
