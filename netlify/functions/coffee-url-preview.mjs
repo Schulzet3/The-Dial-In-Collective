@@ -59,9 +59,10 @@ export function createPreviewHandler({
     return json({ok:false,reason:claim?.reason||'preview_unavailable'},claim?.reason==='preview_cooldown'||claim?.reason==='daily_preview_limit'?429:503);
    const page=await readHtml(validated.toString());
    if(!page?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
-   const preview=extract(page.html,{source_url:validated.toString()});
+   const finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
+   const preview=extract(page.html,{source_url:finalUrl});
    if(!preview?.ok)return json({ok:false,reason:preview?.reason||'ambiguous_or_missing_product'});
-   return json({...preview,source_url:validated.toString(),verification:'unverified',
+   return json({...preview,source_url:validated.toString(),...(finalUrl!==validated.toString()?{resolved_url:finalUrl}:{}),verification:'unverified',
     note:'Suggestions from a public page; exact roaster and release need verification.'});
   }catch{return json({ok:false,reason:'preview_unavailable'},503);}
  };
