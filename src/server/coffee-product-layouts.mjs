@@ -158,7 +158,9 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  for(const [key,value] of Object.entries(delimited.details))addExtra(extras,key,value);
  // Proud Mary renders certain product attributes with the value inside an
  // <a> rather than a <p>. Read text only; never follow javascript: hrefs.
- for(const block of page.matchAll(/<div\b[^>]*class=["'][^"']*meta-info[^"']*["'][^>]*>([\s\S]{0,1150}?)<\/div>/gi)){
+ // Named widgets can follow large decorative SVGs. Scan the bounded product
+ // scope, not the shorter generic-token window, so valid late facts survive.
+ for(const block of html.matchAll(/<div\b[^>]*class=["'][^"']*meta-info[^"']*["'][^>]*>([\s\S]{0,1150}?)<\/div>/gi)){
   const m=block[1].match(/<p\b[^>]*class=["'][^"']*meta-title[^"']*["'][^>]*>([^<>]{2,90})<\/p>[\s\S]{0,380}?<(?:a|p)\b[^>]*>([^<>]{1,220})<\/(?:a|p)>/i);
   if(m)field(fields,clean(m[1],80),m[2],addField,extras,clean);
  }

@@ -2,13 +2,13 @@
 
 Updated: 2026-10-17. Active application/documentation branch: `development/backend-foundation`. `main` remains backup operations.
 
-**The owner's app-wide error sweep has produced confirmed development fixes and passing local regression/browser checks. Do not publish. Full beta readiness is not established.** GitHub commit/read-back and current-source Actions acceptance are the remaining checkpoint in this pass. See [the complete sweep report](APP_WIDE_ERROR_SWEEP_2026-10-17.md) for findings, verification boundaries and unresolved limitations.
+**The owner's app-wide error sweep has produced confirmed development fixes and passing regression/browser checks. Do not publish. Full beta readiness is not established.** Initial implementation commit `035337e03f2391d4acbfce2607ed4342ef01bfe7` passed all four Actions workflows. A final parser/workflow follow-up is being checked before the handoff. See [the complete sweep report](APP_WIDE_ERROR_SWEEP_2026-10-17.md) for findings, verification boundaries and unresolved limitations.
 
 ## Development checkpoint
 
 Baseline source: `d788572438bae2e4c23f4264e783f798a733bbb7`, following [the Queen City handoff](QUEEN_CITY_EXTRACTOR_AND_WORK_HANDOFF_2026-10-17.md). Confirmed fixes cover account-switch privacy races, stale admin data after auth changes, unrelated/conflicting coffee-page evidence and an unbounded incoming request read. Unused bindings were removed, lint coverage expanded and the visual workflow connected to the active branch. Its stale two-step autofill test now checks current behavior without changing that behavior.
 
-Local evidence: **290 Node tests pass; zero lint errors/warnings; cloud build and 26-asset import graph pass; 30 synthetic mobile checks and 117 visual checks pass, with 36 screenshots.** The browser fixtures use mock services and storage, not real member login or native IndexedDB. No fresh production SQL test or arbitrary-site/device completeness is claimed. GitHub Actions links will be added after the implementation commit passes.
+Local evidence: **291 Node tests pass; zero lint errors/warnings; cloud build and 26-asset import graph pass; 30 synthetic mobile checks and 117 visual checks pass, with 36 screenshots.** Initial implementation Actions confirmed the 290-test version plus mobile/visual/build/source checks. Field-by-field review then caught and corrected a Proud Mary scope regression before release, adding the 291st test and live assertions. Deprecated v4 workflow action references were replaced. The browser fixtures use mock services and storage, not real member login or native IndexedDB. No fresh production SQL test or arbitrary-site/device completeness is claimed.
 
 The older Locked Apply Suggested Details wording and later published one-click autofill behavior need a narrow decision-record reconciliation if no later explicit approval resolves them. Both historical wording and current product behavior remain intact; the optional Apply helper was not removed. This does not reopen the already-decided quota or roast categories.
 
@@ -36,6 +36,6 @@ The sweep fixes are staged for release review; **the complete beta is not ready 
 
 ## Exact next action
 
-Finish the implementation commit/read-back and inspect its unit/lint/build, mobile, visual and controlled public-source Actions results; record the exact SHA and links here. Then stop without publishing and report the remaining limits to the owner. For a later authorized release, follow [the ordered seven-tier rollout](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md), coordinate the official Edge parser, verify the compatible frontend before the approved data correction, and update main's backup pin only after successful release verification.
+Finish the final parser/workflow follow-up's commit/read-back and Actions checks; record the exact SHA and links here. Then stop without publishing and report the remaining limits to the owner. For a later authorized release, follow [the ordered seven-tier rollout](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md), coordinate the official Edge parser, verify the compatible frontend before the approved data correction, and update main's backup pin only after successful release verification.
 
 The [complete pre-sweep status](CURRENT_STATUS_PRE_SWEEP_2026-10-17.md), [pre-Queen City status](CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md), [purge report](EXACT_HAMBELA_TEST_SHOT_PURGE_2026-10-17.md) and [documentation index](README.md) preserve historical acceptance and provider coordinates. Earlier next-action text does not override this status or the owner's current no-publish instruction.

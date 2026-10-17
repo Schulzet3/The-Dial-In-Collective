@@ -54,6 +54,9 @@ console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
 const queen=results.find(x=>x.roaster==='Queen City Banko Gotiti Washed');
 const canonical=results.find(x=>x.roaster==='Queen City canonical identity control');
 const home=results.find(x=>x.roaster==='Queen City homepage negative control');
+const proud=results.find(x=>x.roaster==='Proud Mary Ovidio Gomez');
+assert.equal(proud?.producer,'Ovidio Gomez','Proud Mary late product widgets must remain in scope');
+assert.equal(proud?.variety,'Catuai','Proud Mary variety must survive decorative markup');
 assert.equal(queen?.status,'parsed','Exact owner-provided variant failed to parse');
 assert.equal(canonical?.status,'parsed','Canonical Queen City product failed to parse');
 assert.equal(queen.producer,'Banko Gotiti CWS');
