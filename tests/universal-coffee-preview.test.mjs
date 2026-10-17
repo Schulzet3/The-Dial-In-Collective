@@ -26,7 +26,7 @@ const wuri='<html><head><meta property="og:title" content="Wuri – Sweet Bloom 
  '<meta property="og:site_name" content="Sweet Bloom Coffee"></head><body><nav>Shop Current Coffee</nav>'+
  '<main><h1>Wuri</h1><h4>Heirloom Variety</h4><p>Gedeb, Ethiopia</p>'+
  '<p>citra hops, mandarin, sugarcane</p><p>washed process</p>'+
- '<div><h2>2000-2100 masl</h2>Elevation</div>'+
+ '<div><h2>2000-2100 masl</h2>Elevation</div><h2>850 small scale producers</h2><span>PRODUCER</span>'+
  '<p>Our last washed offering from Ethiopia for 2026 comes from the Wuri washing station.</p>'+
  '<h3>Espresso</h3><p>COFFEE IN 18.5g</p><p>ESPRESSO OUT 36g</p><p>BREW TIME 20-22s</p>'+
  '</main><h2>More coffees</h2><p>Different Coffee from 2027</p></body></html>';
@@ -149,12 +149,23 @@ test('Sweet Bloom Wuri-style page extracts H1, labeled info and exact espresso r
  assert.equal(r.fields.origin,'Gedeb, Ethiopia');
  assert.equal(r.fields.tasting_notes,'citra hops, mandarin, sugarcane');
  assert.equal(r.fields.elevation_m,'2000-2100 masl');
+ assert.equal(r.fields.producer,'850 small scale producers');
  assert.equal(r.fields.release_label,undefined);
  assert.deepEqual(r.roaster_recipe,{dose_g:18.5,yield_g:36,time_s_min:20,time_s_max:22});
  const markup=coffeeUrlPreviewMarkup(r);
  assert.match(markup,/Unverified Page/);
  assert.match(markup,/Roaster's published espresso recipe/);
  assert.match(markup,/Reference only/);
+});
+test('blend descriptors never get forced into a single inaccurate processing category',()=>{
+ const data={'@type':'Product',name:'Blend 9.2',url:productURL,
+  additionalProperty:[{name:'Process',value:'Washed & Natural'}]};
+ const r=extractPublicCoffeeFacts(wrap(data),{source_url:productURL});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.process,undefined);
+ const html='<html><body><h1>Blend 9.2</h1><p>washed & natural process</p></body></html>';
+ const fallback=extractPublicCoffeeFacts(html,{source_url:productURL});
+ assert.equal(fallback.fields.process,undefined);
 });
 test('conflicting unlabeled product JSON-LD is ambiguous; other product URL cannot win',()=>{
  const a={...product,name:'Alpha',url:productURL},b={...product,name:'Beta',url:productURL};
