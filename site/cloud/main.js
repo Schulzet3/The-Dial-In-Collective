@@ -209,7 +209,10 @@ class CloudApp {
       if(!sheet.open||sheet.querySelector('#new-coffee')!==form||form.elements.source_url.value.trim()!==raw)return;
       this.coffeeUrlPreview=found?.ok?found:null;
       this.coffeeUrlPreviewInput=found?.ok?raw:null;
-      panel.innerHTML=coffeeUrlPreviewMarkup(found);
+      // One click populates available blanks, then the member reviews and
+      // presses Add Coffee. Never overwrite typed facts or silently approve.
+      if(found?.ok)applyCoffeeUrlFields(form,found);
+      panel.innerHTML=coffeeUrlPreviewMarkup(found,{applied:!!found?.ok});
      }catch(error){
       if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
      }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
