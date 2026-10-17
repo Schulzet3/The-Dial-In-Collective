@@ -11,10 +11,15 @@ begin
   if (select roast_level from public.coffees where id=cid) is distinct from tier
    then raise exception 'Unexpected normalized roast %',tier;end if;
  end loop;
- -- Nonbreaking first stage permits the historical stored spelling until
- -- the deployed app can read all new values and the existing row is updated.
- insert into public.coffees(name,roaster,roast_level,verification_state)
- values('Prior spelling compatibility','CI Test Roaster','Light-Medium','verified');
+ -- Final canonical CHECK rejects old Light-Medium as a new table value.
+ -- Original submitted words and official source evidence are not rewritten.
+ rejected:=false;
+ begin
+  insert into public.coffees(name,roaster,roast_level,verification_state)
+  values('Legacy spelling rejected','CI Test Roaster','Light-Medium','verified');
+ exception when check_violation then rejected:=true;
+ end;
+ if not rejected then raise exception 'Obsolete canonical label accepted';end if;
  begin
   insert into public.coffees(name,roaster,roast_level,verification_state)
   values('Invalid value','CI Test Roaster','Ultra-Medium','verified');
@@ -30,5 +35,5 @@ begin
   or position('not private.is_admin()' in body)=0
  then raise exception 'Trusted promotion lost roast support or privilege guard';end if;
 end $roast_test$;
-select 'PASS: seven roast categories, legacy alias compatibility, invalid reject and trusted promotion guard' as result;
+select 'PASS: seven roast categories, original source evidence retained, invalid reject and trusted promotion guard' as result;
 rollback;
