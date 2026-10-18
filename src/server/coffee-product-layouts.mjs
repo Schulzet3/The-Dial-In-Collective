@@ -7,6 +7,7 @@
 import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron} from './agtron-roast.mjs';
+import {extractProductFlavorEvidence} from './coffee-flavor-evidence.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','agtron_scale','agtron_sample','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
@@ -137,7 +138,7 @@ function parsePairs(tokens,fields,add,extras,clean){
 // Read the description belonging to the selected coffee, never the
 // navbar, unrelated recommendations, an Agtron FAQ, or another product.
 // Product title inference is permitted only when the story corroborates it.
-function detailedCoffeeNarrative(page,fields,extras,clean){
+function detailedCoffeeNarrative(page,fields,extras,clean,addField){
  // Nested heading icons/spans on actual PERC pages can prevent a plain
  // "<h2>THE DEETS!</h2>" token match. First prefer structured section
  // boundaries, then fall back to the BOUNDED, current-product-only
@@ -159,6 +160,13 @@ function detailedCoffeeNarrative(page,fields,extras,clean){
   story=tail.slice(0,5000);
  }
  if(!story||story.length<35)return;
+ // Only the selected product's own bounded coffee story can supply
+ // narrative tasting notes. Don't pull sensory prose from processing FAQs.
+ if(!fields.tasting_notes){
+  const tasting=story.match(/\b(?:with|featuring|showing|reveals?)\s+(?:tasting\s+)?notes?\s+of\s+([^.!?;]{8,150})(?=[.!?;]|$)/i);
+  if(tasting&&/\b(?:coffee|cup|taste|flavo[u]?r|profile)\b/i.test(story.slice(Math.max(0,tasting.index-115),tasting.index)))
+   addField('tasting_notes',tasting[1].trim());
+ }
  const heading=(page.match(/<h1\b[^>]*>([\s\S]{1,260}?)<\/h1>/i)||[])[1]||'';
  // fields.name is already the matched source Product identity; storefront
  // H1 text may be nested, elided, or a short SEO heading. Require the
@@ -207,6 +215,10 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
     const num=(p.match(/\bAgtron\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)/i)||[])[1];
     if(num)addExtra(extras,'agtron',num);
    }
+  }
+  if(!fields.tasting_notes){
+   const found=extractProductFlavorEvidence(html,{clean});
+   if(found)addField('tasting_notes',found);
   }
   return extras;
  }
@@ -283,6 +295,10 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  // A large product's decorative HTML can push its story beyond the
  // 60 KB metric-token window. The full source is still already bounded,
  // stripped of navigation and unrelated products by productMarkup().
- detailedCoffeeNarrative(html,fields,extras,clean);
+ detailedCoffeeNarrative(html,fields,extras,clean,addField);
+ if(!fields.tasting_notes){
+  const found=extractProductFlavorEvidence(html,{clean});
+  if(found)addField('tasting_notes',found);
+ }
  return extras;
 }

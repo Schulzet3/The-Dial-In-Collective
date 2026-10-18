@@ -6,7 +6,6 @@ import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-g
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
-import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 
 const targets=[
  ['Proud Mary Ovidio Gomez','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
@@ -31,23 +30,6 @@ const summarize=async ([roaster,url])=>{
  try{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
-  // Temporary bounded, public-product-only markup evidence for researching
-  // tasting-note storefront structures. Do not retain full roaster HTML.
-  const scope=productMarkup(fetched.html);
-  const shape=/(PERC|Onyx|Heart|Black & White|Sweet Bloom)/i.test(roaster);
-  if(shape){
-   const needles=['Strawberry','Orange Cake','fig, caramel','TAKE A SIP','guava, raspberry','citra hops'];
-   for(const needle of needles){
-    const at=scope.toLowerCase().indexOf(needle.toLowerCase());
-    if(at>=0){
-     console.log('[DIC FLAVOR SHAPE] '+JSON.stringify({
-      roaster,needle,
-      excerpt:scope.slice(Math.max(0,at-230),Math.min(scope.length,at+250))
-     }));
-     break;
-    }
-   }
-  }
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Digest only, never the page body. Facts below are public source data.
@@ -80,6 +62,14 @@ const canonical=results.find(x=>x.roaster==='Queen City canonical identity contr
 const home=results.find(x=>x.roaster==='Queen City homepage negative control');
 const proud=results.find(x=>x.roaster==='Proud Mary Ovidio Gomez');
 const mara=results.find(x=>x.roaster==='PERC Kenya Mara Estate');
+const franky=results.find(x=>x.roaster==='PERC Franky Hoyos');
+const onyx=results.find(x=>x.roaster==='Onyx Mullugeta Muntasha');
+const sweetWuri=results.find(x=>x.roaster==='Sweet Bloom Wuri');
+const sweetUraga=results.find(x=>x.roaster==='Sweet Bloom Uraga');
+const heart=results.find(x=>x.roaster==='Heart Phono');
+const blackWhite=results.find(x=>x.roaster==='Black & White Los Altos');
+const seyYaye=results.find(x=>x.roaster==='SEY Yaye Arbegona');
+const queenNatural=results.find(x=>x.roaster==='Queen City Banko Gotiti Natural');
 assert.equal(mara?.status,'parsed','PERC exact owner-reported product failed to parse');
 assert.equal(mara.producer,'Mara Estate','Mara Estate must be corroborated by its on-product story');
 assert.equal(mara.process,'Anaerobic','Adv Natural and 96-hour sealed fermentation must not collapse to Natural');
@@ -87,6 +77,20 @@ assert.equal(mara.details.agtron,'78.4','Keep exact PERC numeric roast reading')
 assert.equal(mara.roast_level,'Light','Agtron 78.4 must map provisionally to Light assuming ground Gourmet');
 assert.match(mara.roast_hint||'',/Provisional/,'PERC does not state Gourmet/Commercial scale or sample form');
 assert.match(mara.details.processing_detail||'',/96-hour/,'Preserve distinct anaerobic fermentation timing');
+assert.match(mara.tasting_notes||'',/strawberry.*guava.*honeydew.*sweet cream/i,'PERC Mara story tasting notes must be extracted');
+assert.match(franky?.tasting_notes||'',/orange cake.*marmalade.*bubblegum/i,'PERC Franky own-story tasting notes');
+assert.match(onyx?.tasting_notes||'',/strawberry.*honeysuckle.*pink lemonade.*peach/i,'Onyx selected product tasting notes');
+assert.match(sweetWuri?.tasting_notes||'',/citra hops.*mandarin.*sugarcane/i,'Sweet Bloom Wuri named flavor elements');
+assert.match(sweetUraga?.tasting_notes||'',/guava.*raspberry.*milk chocolate/i,'Sweet Bloom Uraga named flavor elements');
+assert.ok(!/^since\s+\d{4}$/i.test(sweetWuri?.producer||''),'Sweet Bloom relationship year is not producer');
+assert.ok(!/^since\s+\d{4}$/i.test(sweetUraga?.producer||''),'Sweet Bloom relationship year is not producer');
+assert.match(heart?.tasting_notes||'',/fig.*caramel.*cream/i,'Heart product metadata tasting notes');
+assert.match(blackWhite?.tasting_notes||'',/apricots.*pecan.*milk chocolate/i,'Black & White named cup description');
+assert.match(seyYaye?.tasting_notes||'',/watermelon.*florality.*berries/i,'Second SEY coffee tasting notes regression');
+if(queenNatural?.status==='parsed'){
+ assert.match(queenNatural.tasting_notes||'',/Black Cherry.*Haribo Goldbears/i,'Second Queen City release notes');
+ assert.equal(queenNatural.process,'Natural');
+}
 assert.equal(mara.recipe?.dose_g,16);
 assert.equal(mara.recipe?.yield_g,40);
 assert.equal(mara.recipe?.time_s_min,26);
@@ -110,5 +114,6 @@ for(const key of ['name','foundRoaster','origin','producer','variety','process',
  assert.equal(queen[key],canonical[key],'Variant/canonical mismatch: '+key);
 }
 assert.equal(home?.status,'ambiguous_or_missing_product','Homepage must not invent a product');
+console.log('[DIC MULTI-ROASTER FLAVOR ACCEPTANCE] PASS: independently sourced tasting notes on PERC, Sweet Bloom, SEY, Onyx, Heart, Black & White; Sweet Bloom relationship years are not producers. Queen City Natural may be independently unavailable.');
 console.log('[DIC PERC MARA ACCEPTANCE] PASS: corroborated estate, anaerobic natural fermentation, exact 78.4 numeric and provisional Light, original PERC espresso recipe.');
 console.log('[DIC QUEEN CITY ACCEPTANCE] PASS: exact variant and canonical identity, eight factual fields, source-only processing details, absent unsupported values, homepage negative control.');

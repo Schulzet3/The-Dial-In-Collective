@@ -11,7 +11,7 @@ const FIELD_ALIASES={
  variety:['variety','varietal','cultivar','varieties','varietals','variété','variété(s)'],
  producer:['producer','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station'],
  roast_level:['roast','roast level','roast profile'],
- tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of'],
+ tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of','tastes like','flavor profile','flavour profile','cupping notes'],
  release_label:['harvest','harvest year','crop year','lot','lot number','release','release year']
 };
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
@@ -131,6 +131,9 @@ function addField(fields,rawKey,value){
  const conflicts=conflictsByFields.get(fields);
  if(conflicts?.has(key))return;
  const s=normalized(key,value);
+ // Storefront reverse-layout metrics can accidentally assign the RELATIONSHIP
+ // year to the neighboring PRODUCER label (observed on Wuri / Uraga).
+ if(key==='producer'&&/^(?:since|est(?:ablished)?\.?|founded)\s+(?:19|20)\d{2}$/i.test(s))return;
  // Withhold contradictory categorical/release evidence instead of silently
  // preferring stale JSON-LD. Compound processes must stay unsimplified.
  const anaerobicNatural=key==='process'&&/\b(?:anaerobic[\s-]+natural|natural[\s-]+anaerobic)\b/i.test(textOf(value));
