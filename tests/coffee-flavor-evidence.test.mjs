@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
+import {applyCoffeeUrlFields,coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 
 const url=(path)=>'https://'+path;
@@ -155,7 +155,20 @@ test('HTML escapes are handled as displayed notes, and field extraction never re
  const r=preview('sweetbloomcoffee.com/products/uraga','Sweet Bloom Coffee',
   '<em class="product__ingredients">guava, raspberry &amp; milk chocolate</em>','Uraga');
  assert.equal(r.fields.tasting_notes,'guava, raspberry & milk chocolate');
- // The one-click application routine is tested against actual DOM in existing
- // tests; this deterministic test proves source preview itself is read-only.
- assert.equal(typeof applyCoffeeUrlFields,'function');
+ const markup=coffeeUrlPreviewMarkup(r);
+ assert.match(markup,/<dt>Tasting Notes<\/dt><dd>guava, raspberry &amp; milk chocolate<\/dd>/);
+ // Crucial end-to-end boundary: real extracted tasting_notes goes into the
+ // actual textarea field immediately on Autofill, without ever submitting.
+ let changed=0;
+ const notes={value:'',tagName:'TEXTAREA',dispatchEvent(){changed++;}};
+ const name={value:'My manually entered bag name',tagName:'INPUT',dispatchEvent(){changed++;}};
+ const form={elements:{namedItem(key){return {tasting_notes:notes,name}[key]||null;}}};
+ assert.deepEqual(applyCoffeeUrlFields(form,r),{filled:1,skipped:1});
+ assert.equal(notes.value,'guava, raspberry & milk chocolate');
+ assert.equal(name.value,'My manually entered bag name');
+ assert.equal(changed,1);
+ // A subsequent lookup cannot erase or replace manually corrected notes.
+ notes.value='Manually corrected flavors';
+ assert.deepEqual(applyCoffeeUrlFields(form,r),{filled:0,skipped:2});
+ assert.equal(notes.value,'Manually corrected flavors');
 });
