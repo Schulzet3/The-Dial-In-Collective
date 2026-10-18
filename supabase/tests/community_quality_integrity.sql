@@ -339,7 +339,7 @@ begin
   'https://roaster.example.invalid/correction');
  if result->>'kind'<>'correction_requested' then
   raise exception 'Verified correction request was not recorded: %',result;end if;
- result:=public.dic_edit_my_coffee(library,pre_revision,
+ result:=public.dic_edit_my_coffee(library,pre_revision+100,
   '{"name":"Another Name","roaster":"Fixture Roaster"}'::jsonb,null);
  if result->>'code'<>'conflict' then
   raise exception 'Stale verified correction should conflict: %',result;end if;
