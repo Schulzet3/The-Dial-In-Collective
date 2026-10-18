@@ -28,7 +28,7 @@ test('Community page renders server-sanitized counts and measurements with progr
  assert.match(html,/1:2\.77/);
  assert.match(html,/1 qualifying shots · 1 contributors/);
  assert.match(html,/Early Data/);
- assert.match(html,/Ratings & Community Evidence/);
+ assert.match(html,/community-rating-grid/);
  assert.match(html,/aria-label="Filter Community shots by style"/);
  assert.doesNotMatch(html,/owner_id|contributor_id|shot_id|PRIVATE:/);
  const filtered=communityPage({shots:[row],total:1,style:'Traditional'});

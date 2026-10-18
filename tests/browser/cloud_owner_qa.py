@@ -212,26 +212,80 @@ with sync_playwright() as p:
  assert page.evaluate("""window.__raw.submissions.some(x=>x.canonical_coffee_id==='12345678-1234-4123-8123-123456789abc'&&x.status==='pending'&&x.proposed_data.producer==='Correction Producer')""")
  checks.append('Verified coffee correction requests preserve canonical facts and shot history')
 
- # Community browsing is driven by sanitized eligible-only server results.
+
+ # Community uses one card per coffee; opening it reveals compact anonymous
+ # shot rows, each with independent native inline rating/evidence expansion.
  page.evaluate("""async () => {
-   window.__communityShots=[{
-    coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',style:'Turbo',
-    observed_on:'2026-10-16',dose_g:18,yield_g:49.8,time_s:21.1,ratio:2.7667,
-    extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
-    shot_count:1,contributor_count:1
-   }];
+   window.__communityShots=[
+    {
+     coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',style:'Turbo',
+     observed_on:'2026-10-17',dose_g:18,yield_g:50.1,time_s:21.8,ratio:2.783,
+     extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
+     shot_count:2,contributor_count:1,owner_id:'SECRET-OWNER',notes:'SECRET-PRIVATE-NOTE'
+    },
+    {
+     coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',style:'Turbo',
+     observed_on:'2026-10-16',dose_g:18,yield_g:49.8,time_s:21.1,ratio:2.7667,
+     extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
+     shot_count:2,contributor_count:1
+    },
+    {
+     coffee_name:'Other',roaster:'Example Roaster',style:'Traditional',
+     observed_on:'2026-10-15',dose_g:18,yield_g:38,time_s:28,ratio:2.111,
+     extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
+     shot_count:1,contributor_count:1
+    }
+   ];
    await window.__app.sync();
  }""")
+ private_shots_open_before=page.evaluate('window.__app.shotExpanded.size')
  page.locator('[data-action=community]').click()
- page.locator('.community-card').first.wait_for()
- assert page.locator('.community-card').count()==1
- assert 'Yirgacheffe' in page.locator('.community-card').inner_text()
- assert 'PRIVATE:' not in page.locator('.community-page').inner_text()
- page.locator('.community-card summary').first.click()
- assert '1 contributors' in page.locator('.community-card').inner_text()
- checks.append('Mobile Community browsing includes sanitized approved shots and contributor evidence')
+ page.locator('details.community-coffee-card').first.wait_for()
+ assert page.locator('details.community-coffee-card').count()==2
+ assert page.locator('details.community-shot').count()==3
+ assert page.locator('details.community-coffee-card[open]').count()==0
+ assert page.locator('details.community-shot[open]').count()==0
+ assert page.locator('details.community-shot:visible').count()==0
+ checks.append('Community starts with one collapsed coffee card per verified coffee')
+ coffee=page.locator('details.community-coffee-card').filter(has_text='Yirgacheffe')
+ assert coffee.count()==1 and '2 shots' in coffee.inner_text()
+ coffee.locator(':scope > summary').click()
+ assert coffee.evaluate('(el)=>el.open')
+ assert coffee.locator('details.community-shot:visible').count()==2
+ assert coffee.locator('details.community-shot[open]').count()==0
+ checks.append('One tap on Community coffee reveals both compact shot rows, with ratings collapsed')
+ page.screenshot(path=str(OUT/'community_coffee_compact_mobile.png'),full_page=True)
+ first=coffee.locator('details.community-shot').first
+ second=coffee.locator('details.community-shot').nth(1)
+ first.locator(':scope > summary').click()
+ assert first.evaluate('(el)=>el.open')
+ assert first.locator('.community-rating-grid').is_visible()
+ assert '2 qualifying shots' in first.inner_text()
+ assert not second.evaluate('(el)=>el.open')
+ second.locator(':scope > summary').click()
+ assert first.evaluate('(el)=>el.open') and second.evaluate('(el)=>el.open')
+ checks.append('Each Community shot expands separately and two shot details can stay open')
+ assert 'SECRET-OWNER' not in page.locator('.community-page').inner_text()
+ assert 'SECRET-PRIVATE-NOTE' not in page.locator('.community-page').inner_text()
+ checks.append('Community cards omit private member IDs and notes even if added to an untrusted fixture')
  page.screenshot(path=str(OUT/'community_eligible_mobile.png'),full_page=True)
+ # Native details are keyboard-toggleable; Coffee filter still scopes the groups.
+ coffee.locator(':scope > summary').focus()
+ page.keyboard.press('Enter')
+ assert not coffee.evaluate('(el)=>el.open')
+ page.keyboard.press('Enter')
+ assert coffee.evaluate('(el)=>el.open')
+ checks.append('Community coffee group is keyboard-operable without custom click handlers')
+ page.locator('#community-style').select_option('Traditional')
+ assert page.locator('details.community-coffee-card').count()==1
+ assert 'Other' in page.locator('details.community-coffee-card').inner_text()
+ page.locator('#community-style').select_option('all')
+ checks.append('Style filtering groups qualifying Community shots without duplicate cards')
+ assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.locator('[data-action=home]').click()
+ assert page.evaluate('window.__app.shotExpanded.size')==private_shots_open_before
+ checks.append('Personal Coffee shot expansion state remains unchanged by Community browsing')
+
  page.evaluate("""async () => {
    const sh=window.__raw.shots[0];
    window.__reviews=[{shot_id:sh.id,revision:sh.revision,
