@@ -13,6 +13,7 @@ const targets=[
  ['Queen City homepage negative control','https://queencitycollectivecoffee.com/'],
  ['Onyx Mullugeta Muntasha','https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural-26?variant=43228176810082'],
  ['PERC Franky Hoyos','https://perccoffee.com/products/colombia-franky-hoyos-adv-washed?variant=53562522829114'],
+ ['PERC Kenya Mara Estate','https://perccoffee.com/products/kenya-mara-estate'],
  ['Picky Chemist Gesha Village','https://en.thepickychemist.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey'],
  ['SEY Chorso Bule','https://www.seycoffee.com/collections/coffee/products/2026-chorso-bule-highest-elevation-project-ethiopia'],
  ['Black & White Los Altos','https://www.blackwhiteroasters.com/products/r-los-altos-washed'],
@@ -55,6 +56,18 @@ const queen=results.find(x=>x.roaster==='Queen City Banko Gotiti Washed');
 const canonical=results.find(x=>x.roaster==='Queen City canonical identity control');
 const home=results.find(x=>x.roaster==='Queen City homepage negative control');
 const proud=results.find(x=>x.roaster==='Proud Mary Ovidio Gomez');
+const mara=results.find(x=>x.roaster==='PERC Kenya Mara Estate');
+assert.equal(mara?.status,'parsed','PERC exact owner-reported product failed to parse');
+assert.equal(mara.producer,'Mara Estate','Mara Estate must be corroborated by its on-product story');
+assert.equal(mara.process,'Anaerobic','Adv Natural and 96-hour sealed fermentation must not collapse to Natural');
+assert.equal(mara.details.agtron,'78.4','Keep exact PERC numeric roast reading');
+assert.equal(mara.roast_level,'Light','Agtron 78.4 must map provisionally to Light assuming ground Gourmet');
+assert.match(mara.roast_hint||'',/Provisional/,'PERC does not state Gourmet/Commercial scale or sample form');
+assert.match(mara.details.processing_detail||'',/96-hour/,'Preserve distinct anaerobic fermentation timing');
+assert.equal(mara.recipe?.dose_g,16);
+assert.equal(mara.recipe?.yield_g,40);
+assert.equal(mara.recipe?.time_s_min,26);
+
 assert.equal(proud?.producer,'Ovidio Gomez','Proud Mary late product widgets must remain in scope');
 assert.equal(proud?.variety,'Catuai','Proud Mary variety must survive decorative markup');
 assert.equal(queen?.status,'parsed','Exact owner-provided variant failed to parse');
@@ -74,4 +87,5 @@ for(const key of ['name','foundRoaster','origin','producer','variety','process',
  assert.equal(queen[key],canonical[key],'Variant/canonical mismatch: '+key);
 }
 assert.equal(home?.status,'ambiguous_or_missing_product','Homepage must not invent a product');
+console.log('[DIC PERC MARA ACCEPTANCE] PASS: corroborated estate, anaerobic natural fermentation, exact 78.4 numeric and provisional Light, original PERC espresso recipe.');
 console.log('[DIC QUEEN CITY ACCEPTANCE] PASS: exact variant and canonical identity, eight factual fields, source-only processing details, absent unsupported values, homepage negative control.');
