@@ -80,6 +80,20 @@ test('PERC Kenya Mara Estate reads its full narrative, preserves processing subt
  assert.match(markup,/Roaster Agtron/);
  assert.match(markup,/Review or correct them, then click Add Coffee/);
 });
+test('large decorative markup before the PERC coffee story does not hide its real product narrative',()=>{
+ const original=page('Kenya Mara Estate','Adv Natural','78.4 Agtron',maraStory);
+ // Real PERC has >70 KB of on-product layout HTML before THE DEETS! heading.
+ // Continue to ignore scripts/nav and related-products, but read the bounded
+ // matched product narrative beyond the shorter metrics-token window.
+ const padded=original.replace('<h2>THE DEETS!</h2>',
+  '<div class="decorative" aria-hidden="true">'+('<svg width="1" height="1"><path d="M0,0 L1,1"/></svg>'.repeat(1900))+'</div><h2>THE DEETS!</h2>');
+ assert.ok(padded.indexOf('THE DEETS')>60000);
+ const r=facts(padded);
+ assert.equal(r.fields.producer,'Mara Estate');
+ assert.equal(r.fields.process,'Anaerobic');
+ assert.match(r.roaster_details.processing_detail,/96-hour/);
+ assert.equal(r.fields.roast_level,'Light');
+});
 test('nested visual PERC headings still expose the selected product story',()=>{
  const html=page('Kenya Mara Estate','Adv Natural','78.4 Agtron',maraStory)
   .replace('<h2>THE DEETS!</h2>','<h2><span class="icon"></span><span>THE <em>DEETS!</em></span></h2>')

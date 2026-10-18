@@ -277,6 +277,9 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   const m=txt.match(/\b(?:in the cup we find|notes of)\s+([A-Za-zÀ-ÿ][^.!?;]{8,130})[.!?;]/i);
   if(m&&/\b(?:and|,)\b/i.test(m[1]))addField('tasting_notes',m[1].trim());
  }
- detailedCoffeeNarrative(page,fields,extras,clean);
+ // A large product's decorative HTML can push its story beyond the
+ // 60 KB metric-token window. The full source is still already bounded,
+ // stripped of navigation and unrelated products by productMarkup().
+ detailedCoffeeNarrative(html,fields,extras,clean);
  return extras;
 }
