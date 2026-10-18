@@ -40,6 +40,14 @@ test('installable manifest is explicitly allowlisted and worker is generated, no
  const manifest=JSON.parse(readFileSync(path.join(root,'site/manifest.webmanifest'),'utf8'));
  assert.equal(manifest.id,'/');assert.equal(manifest.scope,'/');
  assert.equal(manifest.display,'standalone');
+ for(const size of [192,512]){
+  const p=path.join(root,'site','icon-'+size+'.png'),bytes=readFileSync(p);
+  assert.equal(bytes.toString('hex',0,8),'89504e470d0a1a0a');
+  assert.equal(bytes.readUInt32BE(16),size);
+  assert.equal(bytes.readUInt32BE(20),size);
+  assert.ok(manifest.icons.some(icon=>icon.src==='/icon-'+size+'.png'&&icon.sizes===size+'x'+size&&icon.type==='image/png'));
+ }
+ assert.match(readFileSync(path.join(root,'site','cloud.html'),'utf8'),/rel="apple-touch-icon"/);
  assert.match(readFileSync(path.join(root,'site/cloud.html'),'utf8'),/rel="manifest"/);
 });
 test('packaged browser routes never point at retired entrypoints',()=>{

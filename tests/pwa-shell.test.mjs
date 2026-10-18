@@ -8,7 +8,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const template=readFileSync(path.join(root,'scripts/pwa/service-worker.template.txt'),'utf8');
 function mockWorker(){
  const handlers=new Map(),calls=[],cached={status:'cached'};
- const routes=['/','/index.html','/icon.svg','/manifest.webmanifest','/cloud/main.js','/vendor/supabase.js'];
+ const routes=['/','/index.html','/icon.svg','/icon-192.png','/icon-512.png','/manifest.webmanifest','/cloud/main.js','/vendor/supabase.js'];
  const storage={async open(name){calls.push({type:'open',name});return {
   async addAll(paths){calls.push({type:'add',paths});},
   async match(path){calls.push({type:'match',path});return cached;}};},

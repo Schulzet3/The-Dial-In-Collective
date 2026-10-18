@@ -94,6 +94,7 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
     return (await c.keys()).map(x=>new URL(x.url).pathname);
    }""")
    assert '/index.html' in paths and '/cloud/main.js' in paths
+   assert '/icon-192.png' in paths and '/icon-512.png' in paths
    assert not any(x.startswith(('/api/','/auth/','/rest/','/admin')) for x in paths),paths
    page.close()
 
