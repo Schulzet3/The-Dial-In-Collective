@@ -1,0 +1,18 @@
+{
+  "product": "The Dial In Collective",
+  "decision_id": "NEW-COFFEE-URL-AUTOFILL-20261017-01",
+  "owner_approval_date": "2026-10-17 (America/Denver)",
+  "status": "Locked",
+  "topic": "One-click Roaster Page URL Autofill followed by manual review and Add Coffee",
+  "decision": "After pasting a coffee product URL, the member clicks Autofill From URL once. Safe supported data fills only empty form fields. The member may edit or add anything, reviews all entries, then explicitly clicks Add Coffee. There is no additional Apply Suggested Details step.",
+  "supersedes": "Only the separate Apply Suggested Details confirmation click named in original Locked NEW-COFFEE-URL-AUTOFILL-20261015; historical decision retained verbatim and every other Locked protection preserved.",
+  "unchanged": [
+    "Previously entered values are never overwritten by Autofill",
+    "URL preview and field filling do not save or approve a coffee",
+    "Identity/release verification and user confirmation still occur when Add Coffee is submitted",
+    "Conflicting/unavailable source facts remain blank or marked for review",
+    "Manual Add Coffee and shot logging continue during URL preview limits or failures",
+    "Admitted/verified accounts only, 12 preview quota claims/account per 24-hour budget window, at least 30-second cooldown, strict HTTPS/SSRF and bounded source, private Pending isolation, historically stable shot data"
+  ],
+  "staged_implementation": "Existing published behavior already fills blanks immediately in one click. Development cleanup removes dead Apply handler/button paths, after which updated CI must pass. Documentation commits do not publish."
+}

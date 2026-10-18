@@ -1,4 +1,4 @@
-import {e,button} from '../lib/ui.js';
+import {e} from '../lib/ui.js';
 
 export const autofillFields=[
  ['name','Name / Bag Label'],['roaster','Roaster'],['release_label','Release / Harvest'],
@@ -21,7 +21,7 @@ const reasons={
  not_html:'The URL must point to a coffee product web page, not a download.',
  admitted_member_required:'Sign in with an admitted beta account to check URLs.'
 };
-export function coffeeUrlPreviewMarkup(result,{applied=false}={}){
+export function coffeeUrlPreviewMarkup(result){
  if(!result?.ok)return `<div class="coffee-url-message" role="status">${e(reasons[result?.reason]||'We could not retrieve trustworthy details. Enter the coffee information manually.')}</div>`;
  const fields=autofillFields.filter(([name])=>typeof result.fields?.[name]==='string'&&result.fields[name].trim());
  const existing=result.match?.classification==='exact_verified'?'This page also matches an existing verified coffee. Choosing Add Coffee will reuse its canonical record after the identity check.':
@@ -50,7 +50,7 @@ export function coffeeUrlPreviewMarkup(result,{applied=false}={}){
   ${publishedRecipe?`<p class="helper"><strong>Roaster's published espresso ${fullRecipe?'recipe':'reference'}:</strong> ${publishedRecipe}. Reference only; not applied or saved automatically.</p>`:''}
   ${extras.length?`<details class="coffee-url-supplement"><summary>Other published details (${extras.length})</summary><dl class="coffee-url-fields">${extras.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.roaster_details[key])}</dd></div>`).join('')}</dl><p class="helper">Source information only. Not a calibrated roast classification or saved coffee field.</p></details>`:''}
   ${existing?`<p class="helper coffee-match-alert">${e(existing)}</p>`:''}
-  ${applied?'<p class="helper">Available details filled into the form. Review or correct them, then click Add Coffee.</p>':button('Apply Suggested Details','apply-coffee-url','','secondary compact')}
+  <p class="helper">Available details filled into the form. Review or correct them, then click Add Coffee.</p>
  </section>`;
 }
 export function applyCoffeeUrlFields(form,result){

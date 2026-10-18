@@ -62,13 +62,14 @@ test('multiple unrelated Product nodes do not become a made-up single coffee',()
  const result=extractProductPreview(html,{source_url:link,roaster:'Sweet Bloom'});
  assert.equal(result.ok,false);
 });
-test('autofill preview escapes user-controlled source fields and never applies automatically',()=>{
+test('autofill preview escapes external fields and never submits a coffee',()=>{
  const result={ok:true,source_url:link,fields:{name:'<script>alert(1)</script>',roaster:'Sweet Bloom',origin:'Guji, Ethiopia'},
   match:{classification:'needs_confirmation',candidates:[]}};
  const html=coffeeUrlPreviewMarkup(result);
  assert.ok(html.includes('&lt;script&gt;'));
  assert.ok(!html.includes('<script>'));
- assert.match(html,/Apply Suggested Details/);
+ assert.match(html,/Review or correct them, then click Add Coffee/);
+  assert.doesNotMatch(html,/Apply Suggested Details|apply-coffee-url/);
  assert.match(html,/similar verified coffee/);
 });
 test('applying structured fields fills blanks only, preserving typed details and select values',()=>{
@@ -134,13 +135,14 @@ test('official URL cannot rebind an older Coffee ID for an unknown harvest throu
 test('published New Coffee preview click immediately populates blanks before Add Coffee',()=>{
  const main=read('site/cloud/main.js');
  const at=main.indexOf("if(a==='preview-coffee-url')");
- const end=main.indexOf("if(a==='apply-coffee-url')",at);
+ const end=main.indexOf("if(a==='check-pending-match')",at);
  assert.ok(at>0&&end>at);
  const handler=main.slice(at,end);
  assert.match(handler,/applyCoffeeUrlFields\(form,found\)/);
- assert.match(handler,/coffeeUrlPreviewMarkup\(found,\{applied:!!found\?\.ok\}\)/);
+ assert.match(handler,/coffeeUrlPreviewMarkup\(found\)/);
+  assert.doesNotMatch(main,/if\(a==='apply-coffee-url'\)/);
  const preview=coffeeUrlPreviewMarkup({ok:true,source:'unverified_public_page',
-  fields:{name:'Wuri',roaster:'Sweet Bloom'}},{applied:true});
+  fields:{name:'Wuri',roaster:'Sweet Bloom'}});
  assert.match(preview,/Unverified Page/);
  assert.match(preview,/Review or correct them, then click Add Coffee/);
  assert.doesNotMatch(preview,/data-action="apply-coffee-url"/);

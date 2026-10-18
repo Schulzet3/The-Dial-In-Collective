@@ -1201,6 +1201,27 @@
         "rollout_boundary": "Update canonical documents and tests first; stage backwards-compatible SQL schema and application code; preserve historic old-roast read compatibility; never write new labels into production until production app can interpret them. Perform controlled source release and scoped audited data reclassification only after all required credit/release/security checks. No new domain, paid service, automatic promotion or backup deletion.",
         "linked_review": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/8#issuecomment-6230107778"
       }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_2026_10_17_ONE_CLICK_URL_AUTOFILL.json",
+      "content": {
+        "product": "The Dial In Collective",
+        "decision_id": "NEW-COFFEE-URL-AUTOFILL-20261017-01",
+        "owner_approval_date": "2026-10-17 (America/Denver)",
+        "status": "Locked",
+        "topic": "One-click Roaster Page URL Autofill followed by manual review and Add Coffee",
+        "decision": "After pasting a coffee product URL, the member clicks Autofill From URL once. Safe supported data fills only empty form fields. The member may edit or add anything, reviews all entries, then explicitly clicks Add Coffee. There is no additional Apply Suggested Details step.",
+        "supersedes": "Only the separate Apply Suggested Details confirmation click named in original Locked NEW-COFFEE-URL-AUTOFILL-20261015; historical decision retained verbatim and every other Locked protection preserved.",
+        "unchanged": [
+          "Previously entered values are never overwritten by Autofill",
+          "URL preview and field filling do not save or approve a coffee",
+          "Identity/release verification and user confirmation still occur when Add Coffee is submitted",
+          "Conflicting/unavailable source facts remain blank or marked for review",
+          "Manual Add Coffee and shot logging continue during URL preview limits or failures",
+          "Admitted/verified accounts only, 12 preview quota claims/account per 24-hour budget window, at least 30-second cooldown, strict HTTPS/SSRF and bounded source, private Pending isolation, historically stable shot data"
+        ],
+        "staged_implementation": "Existing published behavior already fills blanks immediately in one click. Development cleanup removes dead Apply handler/button paths, after which updated CI must pass. Documentation commits do not publish."
+      }
     }
   ],
   "implementation_and_recovery_sources": [
@@ -2004,6 +2025,13 @@
       "current": "COFFEE-ROAST-20261016-02",
       "scope": "Owner expressly designated four Verified catalog coffees and private Pending Wuri; never silently reclassify other coffees or promote Wuri, change source evidence, ownership or shot/community history. Apply after frontend support release.",
       "source": "docs/DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json"
+    },
+    {
+      "topic": "Roaster Page URL Autofill application timing",
+      "current": "NEW-COFFEE-URL-AUTOFILL-20261017-01",
+      "supersedes": "Only the separate Apply Suggested Details confirmation click within NEW-COFFEE-URL-AUTOFILL-20261015",
+      "scope": "One click on Autofill From URL fills available blank fields. User then reviews/edits and explicitly Add Coffee; no separate Apply step, automatic save, data overwrite, verification bypass, changed quotas or weaker source security. Preserve original decision unchanged as history.",
+      "source": "docs/DECISION_LEDGER_2026_10_17_ONE_CLICK_URL_AUTOFILL.json"
     }
   ],
   "open_current_owner_decisions": [],
@@ -2144,5 +2172,19 @@
       "verified_production_app_sha": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
       "credit_guard": "Refresh Netlify current actual balance; post_release_billing_refresh_needed remains true"
     }
+  },
+  "current_owner_approved_url_autofill": {
+    "id": "NEW-COFFEE-URL-AUTOFILL-20261017-01",
+    "status": "Locked",
+    "steps": [
+      "Paste URL",
+      "Autofill From URL",
+      "Review/edit/complete fields",
+      "Add Coffee"
+    ],
+    "separate_apply_step": false,
+    "auto_save": false,
+    "overwrite_existing_values": false,
+    "implementation": "Published behavior already one-click; dead Apply UI/handler cleanup staged, pending fresh CI"
   }
 }
