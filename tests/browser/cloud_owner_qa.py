@@ -265,6 +265,12 @@ with sync_playwright() as p:
  second.locator(':scope > summary').click()
  assert first.evaluate('(el)=>el.open') and second.evaluate('(el)=>el.open')
  checks.append('Each Community shot expands separately and two shot details can stay open')
+ # Existing app render preservation applies to Community native disclosures.
+ page.evaluate('window.__app.render()')
+ coffee=page.locator('details.community-coffee-card').filter(has_text='Yirgacheffe')
+ assert coffee.evaluate('(el)=>el.open')
+ assert coffee.locator('details.community-shot[open]').count()==2
+ checks.append('Grouped coffee and individually expanded shots survive ordinary rerenders')
  assert 'SECRET-OWNER' not in page.locator('.community-page').inner_text()
  assert 'SECRET-PRIVATE-NOTE' not in page.locator('.community-page').inner_text()
  checks.append('Community cards omit private member IDs and notes even if added to an untrusted fixture')
@@ -280,7 +286,11 @@ with sync_playwright() as p:
  assert page.locator('details.community-coffee-card').count()==1
  assert 'Other' in page.locator('details.community-coffee-card').inner_text()
  page.locator('#community-style').select_option('all')
- checks.append('Style filtering groups qualifying Community shots without duplicate cards')
+ page.locator('#community-coffee').select_option(label='Orinoco Coffee & Tea · Yirgacheffe')
+ assert page.locator('details.community-coffee-card').count()==1
+ assert page.locator('details.community-shot').count()==2
+ page.locator('#community-coffee').select_option('all')
+ checks.append('Style and coffee filters keep shots grouped under their exact public coffee')
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
  page.locator('[data-action=home]').click()
  assert page.evaluate('window.__app.shotExpanded.size')==private_shots_open_before
