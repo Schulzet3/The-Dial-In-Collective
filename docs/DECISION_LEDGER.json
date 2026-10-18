@@ -1222,6 +1222,45 @@
         ],
         "staged_implementation": "Existing published behavior already fills blanks immediately in one click. Development cleanup removes dead Apply handler/button paths, after which updated CI must pass. Documentation commits do not publish."
       }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json",
+      "git_blob_sha": "70e24dac7b6fd69d6179960dda0eb3acc2005b4f",
+      "content": {
+        "product": "The Dial In Collective",
+        "recorded_at_local": "2026-10-17 (America/Denver)",
+        "source": "Owner's direct Oct 17 message, Netlify credit screenshot, and ChatGPT Notifications screenshot",
+        "decisions": [
+          {
+            "id": "OPS-CREDIT-OWNER-MONITORING-20261017-01",
+            "status": "Locked",
+            "topic": "Netlify credits owner-managed",
+            "approval": "Owner will monitor Netlify balances and proactively advise if credits are low. Do not repeatedly ask for credit screenshots or require a live billing connector for every subsequent release. Owner-provided Oct 17 screenshot records 940 of 1000 Personal credits; 28.8 of 30 operational credits, which cannot pay for deployments; auto recharge off. Personal credits expire Nov 14, operational Nov 11, 2026.",
+            "scope": "Supersedes ONLY the prior assistant-managed per-release billing screenshot/maximum-seven-day credit refresh requirement during the known current Personal grant. Keep the known 15-credit minimum, no purchases/automatic top-ups, fail closed on known insufficient/tampered credit data or expired known grant, and secure provider state. Owner may change monitoring approach later. Do not infer a perpetual known balance from the dated screenshot.",
+            "release_guard": "Allow owner-monitored known grant through its expiration without nagging for a new screenshot; never on a mere ordinary docs/source push, and never without current separately explicit owner publication permission and the existing deliberate tagged release process."
+          },
+          {
+            "id": "OPS-PER-RELEASE-OWNER-APPROVAL-20261017-01",
+            "status": "Locked",
+            "topic": "Explicit permission before every publication",
+            "approval": "DO NOT publish unless owner explicitly approves that release. Ask before initiating any production publishing, Supabase Edge function deployment or coordinated production data rollout. Past consent to use credits, past release approval or a verified balance does not approve a later release.",
+            "preserve": "All pre-release tests, version/source verification, beta access, SSO distinction, authenticated/private data, recovery pin, release marker and nonproduction deployment holds. Docs/source/CI commits must use skip-Netlify/no-publish discipline."
+          },
+          {
+            "id": "OPS-BACKUP-WATCH-CADENCE-20261017-01",
+            "status": "Approved operational preference",
+            "topic": "Daily backup-health watch without repeating full restore",
+            "approval": "Keep daily DIC Backup Watchdog (11 a.m. America/Denver) and disable redundant six-hour Dial In Backup Health. Do not repeatedly test or reconstruct the hosted system: full encrypted provider restore has already passed. Automated daily detection of a missing/stale GitHub backup, Drive copy, or integrity evidence is cheap and useful; deeper restore exercises are periodic/risk-based, for example quarterly or after material recovery changes, not daily. Preserve all existing encrypted archives and separate Apps Script delivery/failure alerting."
+          },
+          {
+            "id": "OPS-TASK-NOTIFICATIONS-OWNER-UI-20261017",
+            "status": "Confirmed UI evidence",
+            "topic": "ChatGPT Tasks notification preferences",
+            "observation": "User screenshot shows ChatGPT Settings → Notifications → Tasks = Push, Email, unchanged throughout prior questioning. Some scheduler metadata returned notifications_enabled=false/email_enabled=false for each task; these booleans do not establish that account-level Tasks notifications are off or that an alert failed. Do not ask the owner to re-enable these settings repeatedly; actual failure notification delivery was not tested by this UI screenshot."
+          }
+        ],
+        "unapproved_actions": "NO Netlify publication, SQL data mutation, Edge deployment, plan purchase, automatic credit recharge, or backup archive deletion is authorized by this documentation/guard alignment."
+      }
     }
   ],
   "implementation_and_recovery_sources": [
@@ -2032,6 +2071,27 @@
       "supersedes": "Only the separate Apply Suggested Details confirmation click within NEW-COFFEE-URL-AUTOFILL-20261015",
       "scope": "One click on Autofill From URL fills available blank fields. User then reviews/edits and explicitly Add Coffee; no separate Apply step, automatic save, data overwrite, verification bypass, changed quotas or weaker source security. Preserve original decision unchanged as history.",
       "source": "docs/DECISION_LEDGER_2026_10_17_ONE_CLICK_URL_AUTOFILL.json"
+    },
+    {
+      "topic": "Netlify credit balance monitoring",
+      "current": "OPS-CREDIT-OWNER-MONITORING-20261017-01",
+      "supersedes": "Only the assistant-requested fresh screenshot/7-day balance refresh requirement of OPS-20261014-02 and earlier credit ledger policy",
+      "scope": "Owner self-monitors and proactively reports low funds. Current screenshot proves 940/1000 Personal, grant expiration Nov 14, 2026. Assistant should stop repeatedly seeking screenshots. Known 15-minimum/expired/invalid evidence blocks remain; release CI, explicit marker and separate owner approval still required.",
+      "source": "docs/DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json"
+    },
+    {
+      "topic": "Approval before Netlify/Edge/data publication",
+      "current": "OPS-PER-RELEASE-OWNER-APPROVAL-20261017-01",
+      "supersedes": "Any interpretation that an earlier credit-use or finished-work approval permanently authorizes another production release",
+      "scope": "Ask owner and obtain affirmative per-release permission before executing any new production publication or the coordinated live data rollout. Ordinary docs/dev pushes and CI checks must never publish; keep all security/recovery gates.",
+      "source": "docs/DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json"
+    },
+    {
+      "topic": "Daily backup monitoring and restore exercise cadence",
+      "current": "OPS-BACKUP-WATCH-CADENCE-20261017-01",
+      "supersedes": "Operational duplication of daily and six-hour backup checks and repeated need to prove full hosted restore every day",
+      "scope": "Keep exception-only daily backup watchdog; six-hour duplicate disabled at owner preference. Prior full recovery drill remains accepted. Periodic restore exercises are risk-based; owner-confirmed Task Push+Email preferences not to be questioned again. Do not delete archives.",
+      "source": "docs/DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json"
     }
   ],
   "open_current_owner_decisions": [],
@@ -2192,5 +2252,22 @@
       39093195794,
       39093195764
     ]
+  },
+  "current_owner_release_preferences": {
+    "credit_monitoring": "owner_managed; no repetitive assistant screenshot requests",
+    "last_observed_personal_credits": 940,
+    "last_observed_date": "2026-10-17",
+    "last_observed_operational_credits": 28.8,
+    "current_personal_grant_expires": "2026-11-14",
+    "minimum_known_credits_for_deploy": 15,
+    "explicit_approval_required_before_each_production_publish": true,
+    "release_marker_required": "Release DIC: ... [dic-publish]",
+    "changes_not_authorized": "No production deployment or data mutation in this documentation update",
+    "backup_health_watch": "DIC Backup Watchdog daily 11:00 America/Denver",
+    "redundant_watch": "Dial In Backup Health (six-hour) disabled at owner's choice",
+    "chatgpt_tasks_account_notifications": "Push and Email enabled per owner screenshot",
+    "provider_delivery_visibility": "Task metadata booleans false do not prove account notification preferences off; no failure alert has been induced",
+    "full_restore": "Successfully tested previously; no daily repetition. Periodic/risk-based only.",
+    "decision_source": "docs/DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json"
   }
 }

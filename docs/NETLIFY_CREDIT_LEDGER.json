@@ -69,6 +69,22 @@
       "auto_recharge_enabled": false,
       "production_deployments_paused": false,
       "note": "Fresh actual post-release balance, confirming prior 985 prepublication->970 postpublication (15-credit decline). Recovery-specific staging build has not yet been deployed. This is an owner-observed provider UI snapshot, not live Netlify API billing."
+    },
+    {
+      "observed_date": "2026-10-17",
+      "source": "Owner-provided current Netlify Credit balance dashboard screenshot in this chat, 2026-10-17 about 9:20 p.m. America/Denver; screenshot read directly. The Netlify management plugin cannot query the balance.",
+      "credit_period_label": "Oct 14 - Nov 14, 2026 Personal grant",
+      "active_plan": "Personal",
+      "observed_total_used_credits": 60,
+      "observed_remaining_credits": 940,
+      "observed_personal_plan_credits_total": 1000,
+      "operational_credits_remaining": 28.8,
+      "operational_credits_limit": 30,
+      "operational_credits_not_usable_for_production_deploy": true,
+      "operational_credits_expires": "2026-11-11",
+      "plan_credits_expires": "2026-11-14",
+      "auto_recharge_enabled": false,
+      "note": "Owner now manages all ongoing credit monitoring and will notify when balance becomes low; assistant must not ask for routine additional balance screenshots. Screenshot is a dated balance, not API live billing; explicit release approval still required every time. No Netlify deploy in this change."
     }
   ],
   "release_policy": {
@@ -77,13 +93,13 @@
     "maximum_snapshot_age_days": 7,
     "must_pass_tests_before_release": true,
     "release_marker": "Release DIC: ... [dic-publish]",
-    "budget_rule": "One fully tested, deliberately batched production release per approved bundle. Production credits come only from the 1,000 Personal plan credits, never the 29.6 operational credits. No deploy on stale/unknown billing data or failing CI. Do not exhaust credits, reinstate the explicitly removed production Netlify login, weaken non-production SSO, or alter beta restrictions or recovery controls without owner approval.",
-    "manual_refresh_required": "Refresh the latest Netlify team usage snapshot before release or after the billing cycle resets. Current Netlify connector does not expose the live billing balance.",
+    "budget_rule": "One fully tested deliberate release per individually approved bundle. Current deployable Personal plan credits are owner-monitored, not the separate operational allowance. Known insufficiency below 15 credits, credit data tampering, or an expired known grant blocks publishing. Never infer current billing from a dated screenshot. Keep user-authorized publish marker; no automatic source/docs or preview deployment. No plan purchases, unapproved recharge, weakening beta SSO, access, data privacy or recovery controls.",
+    "manual_refresh_required": "Owner assumes monitoring of Netlify credits and promises to alert when low; do not ask for routine screenshots or require a new billing read for each release during the current unexpired credit grant. After a known plan-grant expiration, verify that the applicable plan and credit availability are still valid, with the owner's consent. The plugin does not expose live credits.",
     "credits_on_free_plan_are_hard_limit": true,
-    "purchase_permission": "No plan upgrades or credit purchases without the owner's separate approval.",
+    "purchase_permission": "No plan upgrades, manual credit purchases or automatic recharges without separate explicit owner approval.",
     "no_unattended_paid_topups": true,
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
-    "post_release_billing_refresh_needed": true,
+    "post_release_billing_refresh_needed": false,
     "last_published_release": {
       "deploy_id": "6ad2c872ad7a8fa78dc410dc",
       "published_commit_sha": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
@@ -104,7 +120,14 @@
       "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
       "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
       "verified_billing_balance": "Not measured"
-    }
+    },
+    "credit_monitoring_mode": "owner_managed",
+    "owner_monitoring_approval": "OPS-CREDIT-OWNER-MONITORING-20261017-01",
+    "explicit_publish_approval_per_release": true,
+    "owner_release_approval": "OPS-PER-RELEASE-OWNER-APPROVAL-20261017-01",
+    "maximum_snapshot_age_days_scope": "Historical operator-verified model only. Owner-managed mode waives repeated seven-day screenshot requests through the current grant expiration while retaining 15-credit and explicit publication permission.",
+    "current_known_plan_expires": "2026-11-14",
+    "owner_assumes_proactive_low_credit_notice": true
   },
   "reconciliation": "Latest provider-verified production Netlify deploy is 6ad2c872ad7a8fa78dc410dc from SHA f08dfda99f46b25240cb8cc35c46d2c3c76344b8, published 2026-10-17 01:02 UTC (Oct 16 US Mountain), with one authenticated URL preview function, ready/0 secrets matches. User explicitly waived a fresh credit-balance check for this approved release; old 970 snapshot is historical, not today's verified balance. Post-release actual credits are unknown, and the next release must refresh billing or obtain separate owner authorization. No provider plan change, paid purchase or automatic recharge.",
   "scheduled_plan_change": {
@@ -121,5 +144,14 @@
     "historical_release_metadata_note": "last_published_release.sso_protected=true records the access configuration AT October 16 15:44 UTC publication. The owner later approved removing the extra Netlify login from production only, without redeployment. It is not the current setting.",
     "do_not_restore_global_team_sso_without_owner_approval": true,
     "current_credit_balance": "UNKNOWN to connector; earlier owner-observed 985 snapshot cannot be treated as a live balance"
+  },
+  "last_owner_credit_monitoring_decision": {
+    "source": "docs/DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json",
+    "snapshot_date": "2026-10-17",
+    "current_balance_personal_observed": 940,
+    "current_balance_operational_observed": 28.8,
+    "approval_per_release_required": true,
+    "assistant_requested_screenshot_each_release": false,
+    "currently_published_deploy_unchanged": true
   }
 }
