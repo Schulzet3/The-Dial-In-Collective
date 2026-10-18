@@ -233,7 +233,7 @@ test('Netlify endpoint uses rate limiting, private server-only import paths and 
  const endpoint=read('netlify/functions/coffee-url-preview.mjs');
  assert.doesNotMatch(endpoint,/service_role|SUPABASE_SERVICE_ROLE_KEY/);
  assert.doesNotMatch(endpoint,/dic_trusted_source_verify/);
- const migration=read('supabase/migrations/20261016235900_dic_universal_coffee_preview_quota.sql');
+ const migration=read('supabase/migrations/20261017005739_dic_universal_coffee_preview_shared_30s.sql');
  assert.match(migration,/private.dic_url_preview_attempts/);
  assert.match(migration,/private.is_member\(\)/);
  assert.match(migration,/attempts>=60/);
@@ -244,7 +244,7 @@ test('Netlify endpoint uses rate limiting, private server-only import paths and 
 
 
 test('approved 12-claim account budget keeps shared 30-second cooldown and legacy route protection',()=>{
- const migration=read('supabase/migrations/20261017050000_dic_preview_daily_budget_12.sql');
+ const migration=read('supabase/migrations/20261017050220_dic_preview_daily_budget_12.sql');
  assert.match(migration,/COFFEE-URL-DAILY-20261016-02/);
  assert.match(migration,/check \(attempts between 0 and 12\)/i);
  assert.match(migration,/rec\.attempts>=12/);
