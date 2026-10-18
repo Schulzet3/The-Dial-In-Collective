@@ -6,6 +6,8 @@
 
 **Next:** [#9 server-owned community eligibility/withdrawal](https://github.com/Schulzet3/The-Dial-In-Collective/issues/9), then [#11 safe anonymous Community browsing](https://github.com/Schulzet3/The-Dial-In-Collective/issues/11). Community is not yet available, and the wider PWA/recommendation/beta acceptance backlog stays open. `main` recovery source pin now references the published extractor source. A follow-up GitHub-to-Drive transfer was not verified as part of this release. The full previous status with superseded release wording is [archived here](archive/CURRENT_STATUS_PRE_PERC_OWNER_ACCEPTANCE_2026-10-18.md).
 
+**Newest development checkpoint, not published (2026-10-18 UTC):** [Community #9 quality, privacy and lifecycle engineering](COMMUNITY_ELIGIBILITY_DEVELOPMENT_2026-10-18.md) is implemented with [network-isolated SQL CI PASS 39100628654](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39100628654). Production still has one pending-quality projection and zero eligible; **no live migration**. #9 stays open for separately approved publication/real account tests; #11 still disabled. The current status supersedes the earlier “next: implement #9” wording above without erasing dated evidence.
+
 ## Latest implementation acceptance (2026-10-17)
 
 - [App-wide error sweep and readiness](APP_WIDE_ERROR_SWEEP_2026-10-17.md): account-transition privacy fixes, conservative extraction, bounded requests, lint/visual gates, fresh read-only provider evidence and explicit limitations. No publication.
