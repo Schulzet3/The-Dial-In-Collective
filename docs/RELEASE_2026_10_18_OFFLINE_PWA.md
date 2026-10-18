@@ -2,6 +2,10 @@
 
 **CURRENT: PUBLISHED / VERIFIED READY / APPROVAL CONSUMED.** This release is live as a single authorized Git-connected Netlify production deployment. The original preflight language immediately below records the historical prepublication state; the verified result is in the postflight section.
 
+## New real-device owner observation — partial acceptance (2026-10-18)
+
+After the separate live publication, the owner reported a successful **actual iPhone Home Screen** cold reopen while offline, following the directed Safari installation/sign-in/Airplane Mode/no-Wi-Fi procedure. Saved coffees appeared. The corner cloud indicator changed to **grey “Offline”** while disconnected, then **green “Synched”** when back online, matching user expectations; owner described it as working perfectly. **PASS (owner observed):** installed offline read/launch and visible network/sync-state transitions. **NOT VERIFIED:** an actual offline-created shot transmitted exactly once, JWT/session expiry, iOS version and WebKit update behavior, account switching, storage eviction or cross-device conflicts. Green “Synched” is an indicator label, **not independently inspected server receipt**. No production data mutation or new Netlify deployment occurred as a result of the user feedback. Evidence is an owner report, not an authenticated synthetic test or provider readback of their device.
+
 **Date:** 2026-10-18 UTC. **Owner authorization:** explicit reply **“yes proceed.”** to “Do you approve one production deployment of the tested offline/PWA improvements?” The assistant is authorized for **one** controlled release of the PWA source bundle on the existing Netlify production branch; estimated **15** Personal-plan credits. No extra release, beta signup, new SQL/Edge migrations, Auth/access changes, data edits, purchases, recharge, or account changes authorized. **Preflight state:** APPROVED, not yet deployed. After publication, append exact independent receipts; never infer deployment from GitHub alone.
 
 ## Source and change boundary
