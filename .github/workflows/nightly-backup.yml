@@ -35,8 +35,8 @@ jobs:
       - name: Checkout verified published release for independent recovery
         uses: actions/checkout@v7
         with:
-          # Verified Netlify PERC extractor published 2026-10-18 UTC; READY deploy 6ad4541c0e2686c05d66a4f2 and ACTIVE JWT-protected preview Edge v3.
-          ref: 2d790f9b4d49fdbce5eb8649d69d262f88fef07b
+          # Verified current Netlify production READY deploy 6ad5030aaae6cba42933a800 on 2026-10-18 UTC; approved required-confirmation retry; exact published source.
+          ref: d54f84103285cfb0185e1d806efe9e8c6064b72d
           path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
