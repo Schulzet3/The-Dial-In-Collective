@@ -1,15 +1,19 @@
--- UNPUBLISHED DEVELOPMENT DRAFT. Owner has NOT approved hosted SQL changes.
--- Promotion to formal migration MUST use 'supabase migration new' CLI when
--- available, with separate owner-approved database/release permissions.
--- An isolated PostgreSQL CI process applies this after published migrations.
--- No private contributor/member/shot identifiers, URLs, account data, notes,
--- equipment or source details are in the new member-only projection.
--- release_key is a SHA-256-derived stable opaque key of verified canonical
--- coffee.id, NOT a user ID and not used in any auth decision.
--- release_label, origin, process, producer, variety and roast level come
--- ONLY from the existing verified canonical coffee row. There is NO verified
--- release_date field; shot observed_on is not a harvest or release date.
--- Existing exact-release/style distinct-contributor count logic is untouched.
+-- DIC Community canonical-release grouping, approved FOR SOURCE PREPARATION ONLY.
+-- Generated with the official Supabase CLI migration new command in isolated
+-- GitHub Actions run 39171647492; no hosted schema change has occurred.
+-- Apply to hosted Supabase only after separate explicit owner approval,
+-- with read-only baseline snapshot, safety checks and postflight verification.
+--
+-- This additive replacement of the EXISTING admitted-member-gated read-only
+-- function provides a stable opaque SHA-256 release key derived from the
+-- canonical verified coffee UUID and six already-verifiable catalog facts.
+-- It does NOT disclose the raw coffee/member/contributor/shot UUID,
+-- source URLs, personal notes, equipment or user-specific data.
+-- A recorded shot date is not a coffee release date. No release_date is added.
+-- Keeps the same quality=eligible/verification=verified filters,
+-- per-exact-release+style evidence counts and bounded pagination.
+-- revoke/grant intentionally matches the preexisting authenticated-only
+-- access: membership remains checked by private.require_member() on every call.
 create or replace function public.dic_browse_community_shots(
  p_limit integer default 20,p_offset integer default 0
 ) returns jsonb language plpgsql stable security definer set search_path='' as $$
