@@ -175,6 +175,19 @@ with sync_playwright() as p:
  assert page.evaluate('window.__raw.submissions.at(-1).proposed_data.roaster')=='Sweet Bloom'
  assert page.evaluate('window.__raw.submissions.at(-1).proposed_data.release_label')=='2027 harvest'
  checks.append('Different release stays Pending under the recognized canonical roaster')
+ # Pending coffee details edit saves to this member's original submission only.
+ pending_lid=page.evaluate('window.__raw.library.at(-1).id')
+ pending_sel=f'[data-retain="facts-{pending_lid}"]'
+ page.locator(f'[data-action=expand][data-id="{pending_lid}"][aria-expanded=false]').count() and page.locator(f'[data-action=expand][data-id="{pending_lid}"]').click()
+ page.locator(pending_sel+' summary').click()
+ page.locator(f'[data-action=edit-coffee][data-id="{pending_lid}"]').click()
+ assert page.locator('#sheet-title').inner_text()=='Edit Coffee Details'
+ page.locator('#edit-coffee [name=producer]').fill('Edited Producer')
+ page.locator('#edit-coffee').get_by_role('button',name='Save Coffee Details').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.submissions.find(x=>x.id===window.__raw.library.at(-1).submission_id).proposed_data.producer')=='Edited Producer'
+ checks.append('Edit Coffee updates original Pending owner submission and preserves entry identity')
+
  page.evaluate("""window.__raw.coffees.push({id:'12345678-1234-4123-8123-123456789abc',name:'Wuri',roaster:'Sweet Bloom',origin:'Gedeb',verification_state:'verified'});window.__matchResponse={classification:'exact_verified',exact_id:'12345678-1234-4123-8123-123456789abc',roaster:{recognized:true,canonical_name:'Sweet Bloom'},candidates:[]};""")
  page.get_by_role('button',name='Add Coffee',exact=False).click()
  page.locator('#new-coffee [name=name]').fill('Wuri')
@@ -184,6 +197,20 @@ with sync_playwright() as p:
  assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
  assert page.evaluate('window.__raw.library.some(x=>x.coffee_id==="12345678-1234-4123-8123-123456789abc")')
  checks.append('Exact verified coffee reuses canonical ID without new Pending submission')
+ # A verified coffee is editable through a source-review correction request,
+ # never a silent overwrite of the canonical catalog shared by everyone.
+ verified_lid=page.evaluate("""window.__raw.library.find(x=>x.coffee_id==='12345678-1234-4123-8123-123456789abc').id""")
+ page.locator(f'[data-action=expand][data-id="{verified_lid}"][aria-expanded=false]').count() and page.locator(f'[data-action=expand][data-id="{verified_lid}"]').click()
+ page.locator(f'[data-retain="facts-{verified_lid}"] summary').click()
+ page.locator(f'[data-action=edit-coffee][data-id="{verified_lid}"]').click()
+ assert page.locator('#sheet-title').inner_text()=='Suggest Coffee Corrections'
+ page.locator('#edit-coffee [name=producer]').fill('Correction Producer')
+ page.locator('#edit-coffee').get_by_role('button',name='Submit Correction For Review').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate("""window.__raw.coffees.find(x=>x.id==='12345678-1234-4123-8123-123456789abc').producer""")!= 'Correction Producer'
+ assert page.evaluate("""window.__raw.submissions.some(x=>x.canonical_coffee_id==='12345678-1234-4123-8123-123456789abc'&&x.status==='pending'&&x.proposed_data.producer==='Correction Producer')""")
+ checks.append('Verified coffee correction requests preserve canonical facts and shot history')
+
  # Community browsing is driven by sanitized eligible-only server results.
  page.evaluate("""async () => {
    window.__communityShots=[{
