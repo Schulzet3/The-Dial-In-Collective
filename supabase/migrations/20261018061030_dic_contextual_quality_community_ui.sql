@@ -202,6 +202,13 @@ begin
  return entries;
 end $$;
 
+-- Defense in depth: the preexisting admitted-member RLS constrained ROWS
+-- but not sensitive equipment/model COLUMNS on community_shots.
+-- The new strictly allowlisted RPC is the only member read path. Retain
+-- service_role/postgres and internal function privileges for quality review.
+revoke select on table public.community_shots from authenticated;
+revoke select on table public.community_shots from anon;
+
 -- Narrow sanitized browse feed. No shot identifiers, contributor handles,
 -- personal notes, private links or user-entered equipment/setup names.
 -- Read-only authenticated RPC, RLS-independent because membership is checked.
