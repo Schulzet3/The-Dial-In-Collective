@@ -30,6 +30,8 @@ The files below remain at their existing locations as preserved decision source 
 - [DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json](DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json) (12-claim owner decision; production applied and independently verified)
 - [DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json](DECISION_LEDGER_2026_10_16_SEVEN_ROAST_TIERS.json) (seven Title Case roast levels and exact five coffee choices, Locked)
 - [DECISION_LEDGER_2026_10_17_ONE_CLICK_URL_AUTOFILL.json](DECISION_LEDGER_2026_10_17_ONE_CLICK_URL_AUTOFILL.json) (one-click Autofill → edit/review → Add Coffee; separate Apply step superseded, Locked)
+- [DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json](DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json) (Agtron-backed roast suggestions, same-product Estate and anaerobic evidence, Locked; development only)
+- [AGTRON_AND_PERC_NARRATIVE_EXTRACTION_2026-10-17.md](AGTRON_AND_PERC_NARRATIVE_EXTRACTION_2026-10-17.md) (manufacturer chart, exact PERC source, tests, limits and future release gate)
 - [DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json](DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json) (owner-monitored Netlify credits, approval before each release, daily backup watch and Notifications screenshot, Locked and operational)
 - [SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md](SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md) (tested rollout order, production schema live, data and frontend pending)
 - [DECISION_LEDGER_BACKEND_AMENDMENTS.json](DECISION_LEDGER_BACKEND_AMENDMENTS.json)

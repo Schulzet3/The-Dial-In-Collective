@@ -1261,6 +1261,38 @@
         ],
         "unapproved_actions": "NO Netlify publication, SQL data mutation, Edge deployment, plan purchase, automatic credit recharge, or backup archive deletion is authorized by this documentation/guard alignment."
       }
+    },
+    {
+      "path": "docs/DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json",
+      "git_blob_sha": "3c8831a66fba9cb28838db7624d546f15d190b53",
+      "content": {
+        "product": "The Dial In Collective",
+        "decision_date": "2026-10-17 (America/Denver)",
+        "owner_directive": "When a roaster publishes an Agtron reading, use numerical roast-development evidence to suggest the closest of the seven approved roast categories. Read the selected coffee product's complete relevant story/specifications to identify a corroborated estate/farm producer and detailed fermentation processing rather than reducing verified anaerobic natural treatment to Natural.",
+        "decisions": [
+          {
+            "id": "COFFEE-ROAST-AGTRON-20261017-01",
+            "status": "Locked",
+            "topic": "Agtron-backed roast starting suggestion",
+            "rule": "Use the Agtron manufacturer ground-coffee Gourmet and Commercial named anchor correlations, choosing midpoint bands for our existing seven Title Case labels. Gourmet anchors (score:label) 95 Ultra Light, 85 Very Light, 75 Light, 65 Medium-Light, 55 Medium, 45 Medium-Dark, 35 Dark. Commercial anchors 71.7, 64.3, 56.9, 49.4, 42.0, 34.6, 27.1. A bare Agtron reading without scale or sample type may suggest a level using an EXPLICITLY DISCLOSED provisional Gourmet/ground assumption, never claim calibrated certainty; if sample is Whole Bean or reading is outside the usable roast-classification region, do not auto-classify. Explicit named roast labels and conflicts take precedence over provisional numeric guesses.",
+            "specific_result": "PERC Kenya Mara Estate 78.4 Agtron maps provisionally to Light if Gourmet ground: Light anchor 75 is closer than Very Light anchor 85. PERC does not identify scale/sample on the linked product page. Preserve numeric 78.4 as the source fact and explanatory hint.",
+            "privacy_and_history": "No automatic rewrite of an existing manually selected roast, Verified status, historical coffee/shot record, source evidence or release identity."
+          },
+          {
+            "id": "COFFEE-PRODUCT-NARRATIVE-20261017-02",
+            "status": "Locked",
+            "topic": "Read corroborated producer and fermentation detail",
+            "rule": "Read bounded, product-specific structured properties, metric blocks and narrative text together. When a selected coffee's title names an Estate/Farm and its own story corroborates that entity, offer it as producer. Never use roaster identity or a generic Farm suffix alone to silently establish producer. Distinguish base natural/washed drying from fermentation technique: explicit Anaerobic Natural with sealed anaerobic fermentation maps to canonical Anaerobic when existing process is Natural/absent, preserving exact original processing shorthand and fermentation duration as supplemental source detail. Do not invent processes from vague generic anaerobic terms, blends, FAQ articles, navigation or unrelated products.",
+            "specific_result": "PERC Kenya Mara Estate: producer Mara Estate, canonical Anaerobic due explicit natural + anaerobic 96-hour sealed-tank narrative; original process text Adv Natural remains disclosed as supplemental information. Do not equate 'ADV Natural' alone with anaerobic without independent narrative evidence."
+          }
+        ],
+        "scoped_supersessions": [
+          "Supersedes only historical extraction guidance that prohibited ANY Agtron roast suggestion. Unknown-scale scores now may provide a clearly labeled, reviewable provisional starting point while preserving all seven Locked roast-label meanings and coffee classification choices.",
+          "Does not add a new processing category, change the seven-tier taxonomy or authorize producer assertions on title alone. Original evidence and source audits remain intact."
+        ],
+        "implementation_state": "Development-only code + tests. The user has not approved a new production release. Edge function deployment also requires the newly staged companion agtron-roast.mjs module. Current live production is unchanged.",
+        "next_approval": "Explicit owner approval required before production Netlify or Supabase Edge deployment, as already Locked."
+      }
     }
   ],
   "implementation_and_recovery_sources": [
@@ -2092,6 +2124,19 @@
       "supersedes": "Operational duplication of daily and six-hour backup checks and repeated need to prove full hosted restore every day",
       "scope": "Keep exception-only daily backup watchdog; six-hour duplicate disabled at owner preference. Prior full recovery drill remains accepted. Periodic restore exercises are risk-based; owner-confirmed Task Push+Email preferences not to be questioned again. Do not delete archives.",
       "source": "docs/DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json"
+    },
+    {
+      "topic": "Agtron-backed roast preview in seven-tier taxonomy",
+      "current": "COFFEE-ROAST-AGTRON-20261017-01",
+      "supersedes": "Only earlier generic ban on Agtron-derived roast suggestions as stated in 2026-10-17 multi-roaster acceptance report",
+      "scope": "Allow strictly source-labeled numerical Agtron manufacturer ground-coffee Gourmet/Commercial anchor interpolation; unknown scale/sample yields explicit provisional Gourmet-ground suggestion. Preserve explicit roaster labels, member-entered selections, owner-approved existing coffees, all 7 labels, source provenance and no automatic Verified promotion.",
+      "source": "docs/DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json"
+    },
+    {
+      "topic": "Producer estate corroboration and anaerobic narrative extraction",
+      "current": "COFFEE-PRODUCT-NARRATIVE-20261017-02",
+      "scope": "Use bounded matched product narrative to validate title Estate/Farm producer, and choose Anaerobic when specific anaerobic-natural/fermentation evidence clarifies Natural; preserve source Adv Natural and 96h as extras. Do not create unsupported fields, infer from navigation/FAQ/other products, or automatically edit saved coffee/shot data.",
+      "source": "docs/DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json"
     }
   ],
   "open_current_owner_decisions": [],
@@ -2304,5 +2349,46 @@
       "date_utc": "2026-10-18",
       "future_release_permission": false
     }
+  },
+  "current_owner_approved_agtron_narrative": {
+    "ids": [
+      "COFFEE-ROAST-AGTRON-20261017-01",
+      "COFFEE-PRODUCT-NARRATIVE-20261017-02"
+    ],
+    "status": "Locked",
+    "scope": "New read-only URL preview suggestions, not historical coffee mutation.",
+    "agtron_gourmet_centers": [
+      95,
+      85,
+      75,
+      65,
+      55,
+      45,
+      35
+    ],
+    "agtron_commercial_centers": [
+      71.7,
+      64.3,
+      56.9,
+      49.4,
+      42,
+      34.6,
+      27.1
+    ],
+    "levels": [
+      "Ultra Light",
+      "Very Light",
+      "Light",
+      "Medium-Light",
+      "Medium",
+      "Medium-Dark",
+      "Dark"
+    ],
+    "agtron_78_4": "Light provisional, assuming ground Gourmet; the page does not state sample/scale.",
+    "canonical_process_for_mara": "Anaerobic",
+    "producer_for_mara": "Mara Estate, corroborated by matched product story",
+    "source_url": "https://perccoffee.com/products/kenya-mara-estate",
+    "implementation": "Development branch only, full test source staged and passed app and mobile CI as of a870bf700a1955b4b9028cdd058cfd4f7cef4bd9; no production Netlify/Edge deployment; personal existing coffee not modified.",
+    "release_requires_explicit_owner_approval": true
   }
 }

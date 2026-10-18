@@ -1,5 +1,7 @@
 # Coffee URL Extraction — Multi-Roaster Live Acceptance (2026-10-17 UTC)
 
+**Historical October 17 acceptance:** The paragraph below describes the original extractor at its test date and before the later approved seven-tier private-beta publication. **Subsequent development-only owner instruction on October 17/18:** explicit Agtron numerical evidence may now supply an honestly labeled *provisional* roast suggestion (rather than the blanket prohibition against using Agtron), and corroborated product narratives may clarify producer/farm and anaerobic treatment. This narrower later decision preserves all unrelated prohibitions on invented or unsupported facts. See [new owner amendment](DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json) and [PERC/Agtron research handoff](AGTRON_AND_PERC_NARRATIVE_EXTRACTION_2026-10-17.md). The later PERC-specific changes are **not yet published**; the source probe/results below remain dated evidence.
+
 **Current state:** Development implementation completed, independently tested on current public websites; **not yet deployed**. User explicitly requested better extraction and **approved using Netlify deployment credits**. Existing Locked release guard still requires a currently verified credit snapshot; the connected Netlify API does not disclose live billing, so **no release marker or production publish is yet authorized by the guard**.
 
 ## Design and security invariants
