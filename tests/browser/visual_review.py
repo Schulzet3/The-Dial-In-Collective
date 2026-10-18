@@ -87,7 +87,7 @@ with sync_playwright() as p:
   check(page.locator('.settings-signout').locator('[data-action=signout]').count()==1,mode+': Sign Out is last and icon-labelled')
   check(page.locator('.settings-row[data-action=new-setup]').count()==1,mode+': Add Another Setup grouped with active setup')
   shot(page,'03-settings-'+mode,'#sheet')
-  page.locator('.settings-advanced summary').click();shot(page,'04-settings-advanced-'+mode,'#sheet')
+  page.get_by_text('Advanced Setup Options',exact=True).click();shot(page,'04-settings-advanced-'+mode,'#sheet')
   page.locator('[data-action=close]').click();page.locator('[data-action=log]').first.click()
   check(page.locator('[name=yieldG]').input_value()=='',mode+': actual yield remains blank')
   check(page.locator('[name=timeS]').input_value()=='',mode+': actual time remains blank')
