@@ -138,12 +138,26 @@ function parsePairs(tokens,fields,add,extras,clean){
 // navbar, unrelated recommendations, an Agtron FAQ, or another product.
 // Product title inference is permitted only when the story corroborates it.
 function detailedCoffeeNarrative(page,fields,extras,clean){
- const headings=[...page.matchAll(/<h[2-5]\b[^>]{0,350}>([\s\S]{0,180}?)<\/h[2-5]\s*>/gi)];
+ // Nested heading icons/spans on actual PERC pages can prevent a plain
+ // "<h2>THE DEETS!</h2>" token match. First prefer structured section
+ // boundaries, then fall back to the BOUNDED, current-product-only
+ // plain-text segment between this coffee's story heading and its brew FAQ.
+ const headings=[...page.matchAll(/<h[2-5]\b[^>]{0,350}>([\s\S]{0,500}?)<\/h[2-5]\s*>/gi)];
  const section=headings.find(h=>/^(?:the deets!?|the story|about this coffee|coffee story|the details!?|about the coffee)$/i.test(clean(h[1],95)));
- if(!section)return;
- const after=page.slice(section.index+section[0].length,section.index+section[0].length+8500);
- const stop=after.search(/<h[2-5]\b[^>]*>[\s\S]{0,120}?(?:brew\s+recc?s|brew\s+recommendations?|what.s\s+agtron|related products|more coffees|you may also like)/i);
- const story=clean(stop>=0?after.slice(0,stop):after,5000);
+ let story='';
+ if(section){
+  const after=page.slice(section.index+section[0].length,section.index+section[0].length+8500);
+  const stop=after.search(/<h[2-5]\b[^>]*>[\s\S]{0,350}?(?:brew\s+recc?s|brew\s+recommendations?|what.s\s+agtron|related products|more coffees|you may also like)/i);
+  story=clean(stop>=0?after.slice(0,stop):after,5000);
+ }
+ if(!story||story.length<35){
+  const text=clean(page,12000),start=text.search(/\b(?:the deets|the story|about this coffee|coffee story|the details|about the coffee)\b/i);
+  if(start<0)return;
+  let tail=text.slice(start).slice(0,6200);
+  const stop=tail.search(/\b(?:brew\s+recc?s|brew\s+recommendations?|what.s\s+agtron|more stuff|related products|you may also like)\b/i);
+  if(stop>=0)tail=tail.slice(0,stop);
+  story=tail.slice(0,5000);
+ }
  if(!story||story.length<35)return;
  const heading=(page.match(/<h1\b[^>]*>([\s\S]{1,260}?)<\/h1>/i)||[])[1]||'';
  const title=clean(heading,150).replace(/^(?:Kenya|Ethiopia|Colombia|Brazil|Honduras|Rwanda|Burundi|Peru|Panama|Guatemala|Mexico|Costa Rica|Uganda|Nicaragua|Ecuador|Bolivia|Tanzania)\s+/i,'');

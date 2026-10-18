@@ -3,7 +3,6 @@
 // Uses the SAME connection-time DNS-pinned, bounded HTTPS guard as previews.
 import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 
@@ -26,19 +25,6 @@ const summarize=async ([roaster,url])=>{
  try{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
-  if(roaster==='PERC Kenya Mara Estate'){
-   const scoped=productMarkup(fetched.html);
-   const positions=arr=>Object.fromEntries(['the deets','anaerobic','mara estate','brew reccs','process','roast color'].map(term=>[term,arr.toLowerCase().indexOf(term)]));
-   const visible=scoped.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,15000);
-   // Only numeric offsets and booleans for public coffee-page structure.
-   // No raw page body is persisted or logged.
-   console.log('[DIC PERC STRUCTURE] '+JSON.stringify({
-    fullLength:fetched.html.length,scopedLength:scoped.length,visibleLength:visible.length,
-    rawPositions:positions(fetched.html),scopedPositions:positions(scoped),
-    visiblePositions:positions(visible),
-    headingTags:(scoped.match(/<h[2-5]\b[^>]*>/gi)||[]).length
-   }));
-  }
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Digest only, never the page body. Facts below are public source data.

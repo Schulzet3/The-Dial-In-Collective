@@ -80,6 +80,16 @@ test('PERC Kenya Mara Estate reads its full narrative, preserves processing subt
  assert.match(markup,/Roaster Agtron/);
  assert.match(markup,/Review or correct them, then click Add Coffee/);
 });
+test('nested visual PERC headings still expose the selected product story',()=>{
+ const html=page('Kenya Mara Estate','Adv Natural','78.4 Agtron',maraStory)
+  .replace('<h2>THE DEETS!</h2>','<h2><span class="icon"></span><span>THE <em>DEETS!</em></span></h2>')
+  .replace('<h2>BREW RECCS</h2>','<h2><span>BREW RECCS</span></h2>');
+ const r=facts(html);
+ assert.equal(r.fields.producer,'Mara Estate');
+ assert.equal(r.fields.process,'Anaerobic');
+ assert.equal(r.fields.roast_level,'Light');
+ assert.match(r.roaster_details.processing_detail,/96-hour/);
+});
 test('long on-product description does not truncate late fermentation evidence',()=>{
  const long='This harvest was hand sorted for consistency. '.repeat(73)+maraStory;
  const r=facts(page('Kenya Mara Estate','Adv Natural','78.4 Agtron',long));
