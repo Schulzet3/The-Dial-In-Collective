@@ -11,7 +11,7 @@ import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
-import {communityReviewBanner,communityPage as renderCommunityPage} from './community.js';
+import {communityReviewBanner,communityPage} from './community.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales}=U;
 const root=document.querySelector('#app'),sheet=document.querySelector('#sheet');
 const uuid=()=>crypto.randomUUID();
@@ -142,7 +142,7 @@ class CloudApp {
    +'<span class="local-label">'+button(icon('cloud',14)+' '+e(syncText),
      'sync','','sync-indicator')+'</span></nav>';
   return nav+communityReviewBanner(this.reviews,this.dismissedReviews)
-   +renderCommunityPage({shots:this.communityRows,total:this.communityTotal,
+   +communityPage({shots:this.communityRows,total:this.communityTotal,
     loading:this.communityLoading,error:this.communityError,
     style:this.communityStyle,coffee:this.communityCoffee});
  }
@@ -159,7 +159,7 @@ class CloudApp {
     throw new Error('Community data is temporarily unavailable.');
    this.communityRows=more?[...this.communityRows,...page.shots]:page.shots;
    this.communityTotal=Number(page.total);
-  }catch(err){
+  }catch{
    if(owner===this.identity?.id&&epoch===this.epoch)
     this.communityError='Community is temporarily unavailable. Your personal shots remain unchanged.';
   }finally{
