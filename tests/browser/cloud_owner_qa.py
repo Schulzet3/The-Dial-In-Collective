@@ -33,6 +33,31 @@ window.__client={
  async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
  async listCommunityReviews(){return window.__reviews||[];},async confirmCommunityOutlier(){window.__reviews=[];return {ok:true,state:'eligible'};},
  async browseCommunityShots(){return {shots:window.__communityShots||[],total:(window.__communityShots||[]).length};},
+
+ async editCoffeeDetails(entryId,expected,data,url){
+  const r=window.__raw,l=r.library.find(x=>x.id===entryId);
+  if(!l)throw Error('Coffee entry not found');
+  if(l.submission_id&&!l.coffee_id){
+   const sub=r.submissions.find(x=>x.id===l.submission_id);
+   if(sub.revision!==expected)return {ok:false,code:'conflict'};
+   sub.proposed_data={...sub.proposed_data,...data};sub.source_url=url;
+   sub.revision++;return {ok:true,kind:'updated_pending'};
+  }
+  const canon=r.coffees.find(x=>x.id===l.coffee_id);
+  let correction=r.submissions.find(x=>x.canonical_coffee_id===canon.id&&x.status==='pending');
+  if(correction){
+   if(correction.revision!==expected)return {ok:false,code:'conflict'};
+   correction.proposed_data={...data};correction.source_url=url;correction.revision++;
+  }else{
+   if(canon.revision!==expected)return {ok:false,code:'conflict'};
+   correction={id:'12345678-1234-4123-8123-000000000222',owner_id:OWNER,
+    canonical_coffee_id:canon.id,base_coffee_revision:canon.revision,
+    status:'pending',proposed_data:{...data},source_url:url,revision:1,updated_at:TIME};
+   r.submissions.push(correction);
+  }
+  return {ok:true,kind:'correction_requested'};
+ },
+
  async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async previewCoffeeUrl(){return {ok:false,reason:'unrecognized_official_roaster'};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
  async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
  if(e.action==='submit_coffee'){
@@ -187,6 +212,9 @@ with sync_playwright() as p:
    await window.__app.sync();
  }""")
  page.locator('.community-review-prompt').wait_for()
+ assert page.locator('#community-required-review').evaluate('(d)=>d.open')
+ assert page.locator('#community-required-review [data-action=community-dismiss-outlier]').count()==0
+ checks.append('Held shot opens mandatory modal without Later and cannot dismiss it')
  assert page.locator('[data-action=community-confirm-outlier]').count()==1
  assert page.locator('[data-action=community-correct-outlier]').count()==1
  checks.append('Member sees nonblocking outlier confirmation/correction prompt')
@@ -203,6 +231,7 @@ with sync_playwright() as p:
  page.wait_for_function('!document.querySelector("#sheet").open')
  page.locator('.community-review-prompt').wait_for()
  checks.append('Correct Shot opens original revision-checked form without changing data before Save')
+ assert page.locator('#community-required-review').evaluate('(d)=>d.open'), 'Closing Edit returns to mandatory review'
  page.locator('[data-action=community-confirm-outlier]').click()
  page.wait_for_function('!document.querySelector(".community-review-prompt")')
  checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
