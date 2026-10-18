@@ -219,12 +219,16 @@ with sync_playwright() as p:
    window.__communityShots=[
     {
      coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',style:'Turbo',
+     release_key:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+     release_label:'2025 Harvest',release_origin:'Ethiopia',release_process:'Washed',
      observed_on:'2026-10-17',dose_g:18,yield_g:50.1,time_s:21.8,ratio:2.783,
      extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
      shot_count:2,contributor_count:1,owner_id:'SECRET-OWNER',notes:'SECRET-PRIVATE-NOTE'
     },
     {
      coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',style:'Turbo',
+     release_key:'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb',
+     release_label:'2026 Harvest',release_origin:'Ethiopia',release_process:'Natural',
      observed_on:'2026-10-16',dose_g:18,yield_g:49.8,time_s:21.1,ratio:2.7667,
      extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
      shot_count:2,contributor_count:1
@@ -252,8 +256,13 @@ with sync_playwright() as p:
  coffee.locator(':scope > summary').click()
  assert coffee.evaluate('(el)=>el.open')
  assert coffee.locator('details.community-shot:visible').count()==2
+ assert coffee.locator('section.community-release').count()==2
+ assert '2025 Harvest' in coffee.locator('section.community-release').first.inner_text()
+ assert '2026 Harvest' in coffee.locator('section.community-release').nth(1).inner_text()
+ assert coffee.locator('section.community-release').first.locator('details.community-shot').count()==1
+ assert coffee.locator('section.community-release').nth(1).locator('details.community-shot').count()==1
  assert coffee.locator('details.community-shot[open]').count()==0
- checks.append('One tap on Community coffee reveals both compact shot rows, with ratings collapsed')
+ checks.append('One tap reveals two release-specific sections and both compact shot rows; ratings remain closed')
  page.screenshot(path=str(OUT/'community_coffee_compact_mobile.png'),full_page=True)
  first=coffee.locator('details.community-shot').first
  second=coffee.locator('details.community-shot').nth(1)

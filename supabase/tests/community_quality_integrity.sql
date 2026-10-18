@@ -259,6 +259,52 @@ begin
     or (public.dic_community_evidence_counts(c2,'Turbo')->>'shot_count')<>'1' then
   raise exception 'Two coffee releases were incorrectly combined';end if;
 
+ -- Both verified canonical releases have the SAME public name and roaster.
+ -- No private member or source IDs can escape through this member-only DTO.
+ perform set_config('request.jwt.claim.sub',us[5]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[5],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_browse_community_shots(40,0);
+ if (select count(distinct j.value->>'release_key')
+       from jsonb_array_elements(result->'shots') as j(value)
+       where j.value->>'coffee_name'='CI Exact Release 2026')<>2 then
+  raise exception 'Member browse combined different exact canonical releases';end if;
+ if not exists(select 1 from jsonb_array_elements(result->'shots') as j(value)
+       where j.value->>'release_key'=encode(sha256(convert_to(c1::text,'UTF8')),'hex')
+         and j.value->>'release_label'='2026 Harvest'
+         and j.value->>'release_origin'='Ethiopia'
+         and j.value->>'release_process'='Washed'
+         and j.value->>'release_producer'='Farm One'
+         and j.value->>'shot_count'='7'
+         and j.value->>'contributor_count'='6') then
+  raise exception 'First release public facts or per-release count mismatch';end if;
+ if not exists(select 1 from jsonb_array_elements(result->'shots') as j(value)
+       where j.value->>'release_key'=encode(sha256(convert_to(c2::text,'UTF8')),'hex')
+         and j.value->>'release_label'='2027 Harvest'
+         and j.value->>'release_process'='Natural'
+         and j.value->>'release_producer'='Farm Two'
+         and j.value->>'shot_count'='1'
+         and j.value->>'contributor_count'='1') then
+  raise exception 'Second release facts/count corrupted or merged';end if;
+ if exists(select 1 from jsonb_array_elements(result->'shots') as j(value)
+       where j.value ?| array['coffee_id','shot_id','owner_id','contributor_id',
+        'email','notes','source_url','machine_model','grinder_model',
+        'basket_model','setup_name','group_id','release_date'])
+  or result::text like '%@fixture.invalid%' or result::text like '%PRIVATE:%' then
+  raise exception 'Release grouping projection disclosed private identifiers or invented dates';end if;
+ execute 'reset role';
+ -- Paged responses still agree on count, and ID stays stable across pages.
+ perform set_config('request.jwt.claim.sub',us[5]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[5],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ if (public.dic_browse_community_shots(2,0)->>'total')::integer
+    is distinct from (public.dic_browse_community_shots(2,2)->>'total')::integer then
+  raise exception 'Paging total mutated after adding release context';end if;
+ execute 'reset role';
+
+
  -- A green shot logged under Pending remains private until its coffee is
  -- approved AND linked. No false automatic save or shot revision mutation.
  insert into public.coffee_submissions(owner_id,proposed_data)
