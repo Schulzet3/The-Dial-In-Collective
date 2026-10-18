@@ -25,7 +25,7 @@ class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
   this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;
-  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';
+  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
  }
@@ -41,7 +41,7 @@ class CloudApp {
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
-  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityStyle='all';this.communityCoffee='all';this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
+  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityStyle='all';this.communityCoffee='all';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   if(reviewSheet.open)reviewSheet.close();reviewSheet.replaceChildren();
   sheet.close();sheet.innerHTML='';
  }
@@ -220,7 +220,7 @@ class CloudApp {
      'sync','','sync-indicator')+'</span></nav>';
   return nav+communityPage({shots:this.communityRows,total:this.communityTotal,
     loading:this.communityLoading,error:this.communityError,
-    style:this.communityStyle,coffee:this.communityCoffee});
+    style:this.communityStyle,coffee:this.communityCoffee,revision:this.communityRevision});
  }
  async loadCommunity({more=false}={}){
   if(this.communityLoading||!this.identity||!this.status?.admitted)return;
@@ -235,6 +235,7 @@ class CloudApp {
     throw new Error('Community data is temporarily unavailable.');
    this.communityRows=more?[...this.communityRows,...page.shots]:page.shots;
    this.communityTotal=Number(page.total);
+   if(!more)this.communityRevision++; // Fresh results collapse old disclosures; Load More preserves open rows.
   }catch{
    if(owner===this.identity?.id&&epoch===this.epoch)
     this.communityError='Community is temporarily unavailable. Your personal shots remain unchanged.';

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {communityPage,communityReviewBanner} from '../site/cloud/community.js';
+import {communityPage,communityReviewBanner,communityCoffeeKey} from '../site/cloud/community.js';
 import {createCloudClient} from '../site/cloud/client.js';
 
 const row={
@@ -93,4 +93,49 @@ test('Community privacy disclosure explains durable anonymous evidence after acc
  const html=communityPage({shots:[row],total:1});
  assert.match(html,/may persist if personal shot history or the account is deleted/);
  assert.match(html,/private notes/);
+});
+
+test('Community groups shots by public coffee identity into collapsed coffee cards with compact nested shot rows',()=>{
+ const same={...row,observed_on:'2026-10-17',yield_g:50.1,shot_count:2};
+ const other={...row,roaster:'Sweet Bloom',coffee_name:'Wuri',style:'Traditional'};
+ const html=communityPage({shots:[row,same,other],total:3,revision:3});
+ assert.equal((html.match(/class="coffee-card community-coffee-card"/g)||[]).length,2);
+ assert.equal((html.match(/class="shot community-shot"/g)||[]).length,3);
+ assert.equal((html.match(/class="community-coffee-count">2 shots/g)||[]).length,1);
+ assert.doesNotMatch(html,/class="coffee-card community-coffee-card"[^>]*\sopen[\s>]/);
+ assert.doesNotMatch(html,/class="shot community-shot"[^>]*\sopen[\s>]/);
+ assert.match(html,/community-coffee:3:/);
+ assert.match(html,/community-shot:3:0:/);
+ assert.match(html,/community-shot:3:1:/);
+ assert.match(html,/community-shot:3:2:/);
+ assert.match(html,/Community Shot/);
+ assert.match(html,/Ratings/); // Ratings are inside each closed shot disclosure.
+ assert.doesNotMatch(html,/data-action="shot-expand"|data-action="make-current"|data-action="edit"/);
+});
+test('Community filters apply before grouping and only loaded shots count toward coffee cards',()=>{
+ const other={...row,style:'Traditional',coffee_name:'Other'};
+ const similar={...row,observed_on:'2026-10-17'};
+ const rows=[row,similar,other];
+ const coffee=communityCoffeeKey(row);
+ assert.equal(communityCoffeeKey(row),communityCoffeeKey(similar));
+ const html=communityPage({shots:rows,total:40,coffee,style:'Turbo',revision:4});
+ assert.equal((html.match(/class="coffee-card community-coffee-card"/g)||[]).length,1);
+ assert.equal((html.match(/class="shot community-shot"/g)||[]).length,2);
+ assert.match(html,/2 shots loaded/);
+ assert.match(html,/Showing 3 of 40 qualifying shots/);
+ assert.match(html,/Load More Shots/);
+ assert.match(html,/Filter Community shots by coffee/);
+ const again=communityPage({shots:rows,total:40,coffee,style:'Turbo',revision:4});
+ assert.equal(html,again,'same revision and rows preserve stable data-retain tokens across append rerenders');
+ assert.notEqual(html,communityPage({shots:rows,total:40,coffee,style:'Turbo',revision:5}),
+  'refresh revision deliberately invalidates stale open details');
+});
+test('Community grouping uses unambiguous public pairs and never renders raw private fields',()=>{
+ const a={...row,roaster:'A · B',coffee_name:'C',owner_id:'SECRET-OWNER',notes:'SECRET-NOTE'};
+ const b={...row,roaster:'A',coffee_name:'B · C',shot_id:'SECRET-SHOT'};
+ assert.notEqual(communityCoffeeKey(a),communityCoffeeKey(b));
+ const html=communityPage({shots:[a,b],total:2});
+ assert.equal((html.match(/class="coffee-card community-coffee-card"/g)||[]).length,2);
+ assert.doesNotMatch(html,/SECRET-OWNER|SECRET-NOTE|SECRET-SHOT|owner_id|shot_id/);
+ assert.doesNotMatch(html,/contributor_id|setup_name/);
 });
