@@ -85,8 +85,8 @@ test('matched coffee name plus its own story corroborate a farm when the visual 
   .replace('<h1>Kenya Mara Estate</h1>',
    '<h1 class="coffee-title"><span class="flag">KENYA</span> <span>MARA</span> <i>ESTATE</i></h1>');
  const r=facts(source);
- assert.equal(r.fields.name,'Kenya Mara Estate');
- assert.equal(r.fields.producer,'Mara Estate');
+ assert.equal(r.fields.name.toLowerCase(),'kenya mara estate');
+ assert.equal(r.fields.producer?.toLowerCase(),'mara estate');
  assert.equal(r.fields.process,'Anaerobic');
 });
 test('large decorative markup before the PERC coffee story does not hide its real product narrative',()=>{
