@@ -38,8 +38,8 @@ test('official process keeps ambiguous blends unspecified',()=>{
  assert.equal(r.fields.roast_level,undefined);
 });
 test('an Agtron score without matching scale/sample must be treated as provisional',()=>{
- const r=parse(product({agtron:'78.4 (Commercial Ground) Agtron'}));
- assert.equal(r.fields.roast_level,'Ultra Light');
+ const r=parse(product({agtron:'64.3 (Commercial Ground) Agtron'}));
+ assert.equal(r.fields.roast_level,'Very Light');
  assert.equal(r.roaster_details.agtron_scale,'commercial');
  assert.equal(r.roaster_details.agtron_sample,'ground');
  assert.doesNotMatch(r.roast_hint,/Provisional/);

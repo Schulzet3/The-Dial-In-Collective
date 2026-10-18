@@ -48,7 +48,9 @@ test('commercial, whole bean, out-of-range and implausible Agtron cannot be sile
  const commercial=interpretAgtron('60.6',{scale:'commercial',sample:'ground'});
  assert.equal(commercial.roast,'Very Light');
  assert.equal(commercial.provisional,false);
- assert.equal(interpretAgtron('78.4',{scale:'commercial',sample:'ground'}).roast,'Ultra Light');
+ assert.equal(interpretAgtron('78.4',{scale:'commercial',sample:'ground'}).roast,'');
+ assert.equal(interpretAgtron('100',{scale:'gourmet',sample:'ground'}).roast,'');
+ assert.equal(interpretAgtron('75.4',{scale:'commercial',sample:'ground'}).roast,'');
  assert.equal(interpretAgtron('78.4 Agtron Whole Bean').roast,'');
  assert.equal(interpretAgtron('Agtron #133').roast,'');
  assert.equal(interpretAgtron('Agtron #133').score,133);

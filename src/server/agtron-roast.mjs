@@ -35,10 +35,11 @@ export function interpretAgtron(raw,{scale='',sample=''}={}){
  const resolvedSample=isWhole!==isGround?(isWhole?'whole_bean':'ground'):'unspecified';
  const anchorScores=resolvedScale==='commercial'?AGTRON_COMMERCIAL_ANCHORS:AGTRON_GOURMET_ANCHORS.map(x=>x.score);
  let roast='';
- // The chart is for ground coffee; below 25 is outside the 7-level scale,
- // above 105 enters the manufacturer's underdeveloped/coffee-like zone.
+ // The chart is for ground coffee; below 25 is outside the seven-tier scale.
+ // A Gourmet 100 / Commercial 75.4 reading is already called Under-Developed
+ // by Agtron, not Ultra Light. Do not classify values past these anchors.
  if(resolvedSample!=='whole_bean'&&score>=25&&
-    score<=(resolvedScale==='commercial'?79:105)){
+    score<(resolvedScale==='commercial'?75.4:100)){
   const midpoints=anchorScores.slice(0,-1).map((x,i)=>(x+anchorScores[i+1])/2);
   const index=midpoints.findIndex(midpoint=>score>=midpoint);
   roast=AGTRON_GOURMET_ANCHORS[index<0?6:index].roast;

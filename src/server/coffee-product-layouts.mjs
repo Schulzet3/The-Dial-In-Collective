@@ -6,6 +6,7 @@
 // caveats. Never infer roast from brand, hue or tasting language.
 import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
+import {interpretAgtron} from './agtron-roast.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','agtron_scale','agtron_sample','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
@@ -52,18 +53,11 @@ function field(fields,label,value,add,extras,clean){
    (/[.!?]\s*$/.test(raw)||raw.split(/\s+/).length>17))return;
  if(kind==='variety'&&/\b(?:masl|meters?|agtron)\b/i.test(raw))return;
  if(kind==='agtron'){
-  const x=raw.match(/(?:\b(?:agtron)\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)\b|\b(\d{1,3}(?:\.\d{1,2})?)\s*(?:agtron)\b)/i);
-  if(x){
-   const score=Number(x[1]||x[2]);
-   // Do not turn out-of-range typos such as PERC's "666 Agtron"
-   // into plausible coffee-roast measurements.
-   if(score>=0&&score<=133){
-    addExtra(extras,'agtron',String(score));
-    if(/\bgourmet\b/i.test(raw)&&!/\bcommercial\b/i.test(raw))addExtra(extras,'agtron_scale','gourmet');
-    if(/\bcommercial\b/i.test(raw)&&!/\bgourmet\b/i.test(raw))addExtra(extras,'agtron_scale','commercial');
-    if(/\bground\b/i.test(raw)&&!/\bwhole[\s-]?bean\b/i.test(raw))addExtra(extras,'agtron_sample','ground');
-    if(/\bwhole[\s-]?bean\b/i.test(raw)&&!/\bground\b/i.test(raw))addExtra(extras,'agtron_sample','whole bean');
-   }
+  const score=interpretAgtron(raw);
+  if(score){
+   addExtra(extras,'agtron',score.display);
+   if(score.scale!=='unspecified')addExtra(extras,'agtron_scale',score.scale);
+   if(score.sample!=='unspecified')addExtra(extras,'agtron_sample',score.sample.replace('_',' '));
   }
   return;
  }
