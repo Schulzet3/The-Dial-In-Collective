@@ -74,6 +74,29 @@ test('long Onyx H1 with real audio markup still exposes this lot tasting notes',
  const full=extractPublicCoffeeFacts(source,{source_url:'https://onyxcoffeelab.com/products/ethiopia-lot-26'});
  assert.equal(full.fields.tasting_notes,'Strawberry, Honeysuckle, Pink Lemonade, Peach');
 });
+test('Onyx named elevation modal is product evidence, adjacent education is not',()=>{
+ const r=preview('onyxcoffeelab.com/products/ethiopia-lot','Onyx',
+  '<div class="a-stat" data-name="roast-level"><p>Ultra Light<br><label>ROAST LEVEL</label></p></div>'+
+  '<div class="a-stat-desc" data-stat-id="elevation"><h2>Elevation</h2><h4>2150 MASL</h4><p>General elevation article mentions 1800 MASL.</p></div>');
+ assert.equal(r.fields.elevation_m,'2150 MASL');
+ const bad=preview('onyxcoffeelab.com/products/other','Onyx',
+  '<div class="a-stat" data-name="roast-level"><p>Ultra Light<br><label>ROAST LEVEL</label></p></div>'+
+  '<div class="a-stat-desc" data-stat-id="origin"><h2>Elevation</h2><h4>2150 MASL</h4></div>');
+ assert.equal(bad.fields.elevation_m,undefined);
+});
+test('PERC explicitly named grower is captured only from its own coffee story',()=>{
+ for(const [name,grower,farm] of [
+  ['Colombia Franky Hoyos Adv Washed','Franky Hoyos','El Encanto'],
+  ['Outpost Coffee','Jhon Rodriguez','Rio Negro']]){
+  const x=preview('perccoffee.com/products/'+name.toLowerCase().replace(/\s+/g,'-'),'PERC COFFEE',
+   '<h2>THE DEETS!</h2><p>'+grower+' produces fantastic coffee at his farm, '+farm+
+   '. This is a wonderful lot with distinct sweetness.</p><h2>BREW RECCS</h2><p>Another farm</p>',name);
+  assert.equal(x.fields.producer,grower);
+ }
+ const noName=preview('perccoffee.com/products/unnamed','PERC COFFEE',
+  '<h2>THE DEETS!</h2><p>This coffee is grown at El Encanto farm.</p>');
+ assert.equal(noName.fields.producer,undefined);
+});
 test('Sweet Bloom Wuri and Uraga use product ingredient flavors, never relationship years as producers',()=>{
  for(const [title,fruits,process] of [
   ['Wuri','citra hops, mandarin, sugarcane','washed'],

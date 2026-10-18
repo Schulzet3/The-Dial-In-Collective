@@ -180,6 +180,12 @@ function detailedCoffeeNarrative(page,fields,extras,clean,addField){
   if(named&&clean(heading,200).toLocaleLowerCase().includes(named[1].toLocaleLowerCase()))
    fields.producer=named[1];
  }
+ // Only a named grower explicitly credited in the selected lot's narrative
+ // can fill producer when farm/estate corroboration was unavailable.
+ if(!fields.producer){
+  const grower=story.match(/\b([A-ZÀ-Ý][a-zà-ÿ'’.-]+(?:\s+[A-ZÀ-Ý][a-zà-ÿ'’.-]+){1,2})\s+produces\s+[^.!?]{0,125}?\bat\s+(?:his|her|their)\s+(?:farm|estate)\b/u);
+  if(grower)addField('producer',grower[1]);
+ }
  // Preserve Natural as the drying style, but choose the more informative
  // single-select Anaerobic only when THIS coffee's narrative explicitly
  // describes the anaerobic-natural fermentation.
@@ -215,6 +221,12 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
     const num=(p.match(/\bAgtron\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)/i)||[])[1];
     if(num)addExtra(extras,'agtron',num);
    }
+  }
+  // Named Onyx Elevation modal belongs to this matched product; skip all
+  // neighboring educational prose and unnamed numeric measures.
+  if(!fields.elevation_m){
+   const altitude=html.match(/<div\b[^>]{0,800}\bclass=["'][^"']*\ba-stat-desc\b[^"']*["'][^>]*\bdata-stat-id=["']elevation["'][^>]*>[\s\S]{0,650}?<h[2-5]\b[^>]*>\s*Elevation\s*<\/h[2-5]>[\s\S]{0,220}?<h[3-6]\b[^>]*>\s*(\d{3,4}\s*(?:MASL|m))\s*<\/h[3-6]>/i);
+   if(altitude)addField('elevation_m',altitude[1]);
   }
   if(!fields.tasting_notes){
    const found=extractProductFlavorEvidence(html,{clean});

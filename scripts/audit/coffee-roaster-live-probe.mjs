@@ -6,7 +6,6 @@ import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-g
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
-import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 
 const targets=[
  ['Proud Mary Ovidio Gomez','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
@@ -39,13 +38,6 @@ const summarize=async ([roaster,url])=>{
  try{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
-  if(roaster==='Onyx Mullugeta Muntasha'){
-   const scope=productMarkup(fetched.html);
-   const i=scope.indexOf('2150 MASL');
-   console.log('[DIC ONYX ELEVATION SHAPE] '+JSON.stringify({
-    at:i,context:i>=0?scope.slice(Math.max(0,i-280),i+220):''
-   }));
-  }
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Digest only, never the page body. Facts below are public source data.
@@ -79,6 +71,7 @@ const home=results.find(x=>x.roaster==='Queen City homepage negative control');
 const proud=results.find(x=>x.roaster==='Proud Mary Ovidio Gomez');
 const mara=results.find(x=>x.roaster==='PERC Kenya Mara Estate');
 const franky=results.find(x=>x.roaster==='PERC Franky Hoyos');
+const outpost=results.find(x=>x.roaster==='PERC Outpost Coffee');
 const onyx=results.find(x=>x.roaster==='Onyx Mullugeta Muntasha');
 const sweetWuri=results.find(x=>x.roaster==='Sweet Bloom Wuri');
 const sweetUraga=results.find(x=>x.roaster==='Sweet Bloom Uraga');
@@ -95,7 +88,11 @@ assert.match(mara.roast_hint||'',/Provisional/,'PERC does not state Gourmet/Comm
 assert.match(mara.details.processing_detail||'',/96-hour/,'Preserve distinct anaerobic fermentation timing');
 assert.match(mara.tasting_notes||'',/strawberry.*guava.*honeydew.*sweet cream/i,'PERC Mara story tasting notes must be extracted');
 assert.match(franky?.tasting_notes||'',/orange cake.*marmalade.*bubblegum/i,'PERC Franky own-story tasting notes');
+assert.equal(franky?.producer,'Franky Hoyos','PERC source names Franky grower');
+assert.equal(outpost?.producer,'Jhon Rodriguez','PERC source names Jhon grower');
+assert.match(outpost?.tasting_notes||'',/milk chocolate.*cherry syrup.*graham cracker.*marshmallow/i);
 assert.match(onyx?.tasting_notes||'',/strawberry.*honeysuckle.*pink lemonade.*peach/i,'Onyx selected product tasting notes');
+assert.equal(onyx?.elevation_m,'2150 MASL','Onyx matched elevation stat');
 assert.match(sweetWuri?.tasting_notes||'',/citra hops.*mandarin.*sugarcane/i,'Sweet Bloom Wuri named flavor elements');
 assert.match(sweetUraga?.tasting_notes||'',/guava.*raspberry.*milk chocolate/i,'Sweet Bloom Uraga named flavor elements');
 assert.ok(!/^since\s+\d{4}$/i.test(sweetWuri?.producer||''),'Sweet Bloom relationship year is not producer');
