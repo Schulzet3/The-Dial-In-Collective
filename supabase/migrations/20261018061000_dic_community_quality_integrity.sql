@@ -57,8 +57,11 @@ declare
  reason_code text;
  fp text;
  peer_count integer:=0;
+ own_count integer:=0;
  median_ratio numeric;
  median_time numeric;
+ own_ratio numeric;
+ own_time numeric;
 begin
  select * into c from public.community_shots where id=p_id for update;
  if c.id is null then return 'missing'; end if;
@@ -107,10 +110,27 @@ begin
     new_state:='held';reason_code:='source_mismatch';
   else
    fp:=private.dic_community_fingerprint(c);
-   -- Exact coffee/style peers, one latest eligible observation per DIFFERENT
-   -- contributor. A prolific member cannot manufacture a reference majority.
-   -- With <5 independent peers, robust comparison is not justified.
-   with peer as (
+   -- First compare the same member's earlier, visible green observations
+   -- on this exact coffee and equipment version, as required by §24.2.
+   -- Three personal precedents form a conservative contextual comparison;
+   -- if absent, fall back to five DIFFERENT community contributors.
+   select count(*)::integer,
+     percentile_cont(0.5) within group(order by x.ratio),
+     percentile_cont(0.5) within group(order by x.time_s)
+     into own_count,own_ratio,own_time
+   from public.shots x
+   where x.owner_id=s.owner_id and x.library_entry_id=s.library_entry_id
+     and x.setup_version_id=s.setup_version_id and x.style=s.style
+     and x.is_dialed_in and x.hidden_at is null and x.id<>s.id
+     and (x.pulled_at,x.id)<(s.pulled_at,s.id);
+
+   if own_count>=3 then
+     peer_count:=own_count;median_ratio:=own_ratio;median_time:=own_time;
+   else
+     -- Exact coffee/style peers, one latest eligible observation per DIFFERENT
+     -- contributor. A prolific member cannot manufacture a reference majority.
+     -- With <5 independent peers, robust comparison is not justified.
+     with peer as (
     select distinct on(link.contributor_id)
      other.ratio,other.time_s
     from public.community_shots other
@@ -126,8 +146,9 @@ begin
      percentile_cont(0.5) within group(order by ratio),
      percentile_cont(0.5) within group(order by time_s)
     into peer_count,median_ratio,median_time from peer;
+   end if;
 
-   if peer_count>=5 and (
+   if ((own_count>=3) or (peer_count>=5)) and (
        c.ratio>median_ratio*3 or c.ratio<median_ratio/3
        or c.time_s>median_time*4 or c.time_s<median_time/4
       ) and q.confirmed_fingerprint is distinct from fp then
