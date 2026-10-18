@@ -33,6 +33,15 @@ test('graph rejects missing production imports instead of silently emitting a br
   assert.throws(()=>validateSiteSource(temp),/Missing production asset/);
  }finally{rmSync(temp,{recursive:true,force:true});}
 });
+test('installable manifest is explicitly allowlisted and worker is generated, not copied',()=>{
+ const allowlist=fileAllowlist(root);
+ assert.ok(allowlist.has('manifest.webmanifest'));
+ assert.equal(allowlist.has('sw.js'),false);
+ const manifest=JSON.parse(readFileSync(path.join(root,'site/manifest.webmanifest'),'utf8'));
+ assert.equal(manifest.id,'/');assert.equal(manifest.scope,'/');
+ assert.equal(manifest.display,'standalone');
+ assert.match(readFileSync(path.join(root,'site/cloud.html'),'utf8'),/rel="manifest"/);
+});
 test('packaged browser routes never point at retired entrypoints',()=>{
  const cloud=readFileSync(path.join(root,'site/cloud.html'),'utf8');
  assert.doesNotMatch(cloud,/(?:import-entry\.js|import\.css)/);

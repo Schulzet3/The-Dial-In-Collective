@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const normalized=p=>path.posix.normalize(p.replaceAll('\\','/').replace(/^\.\//,''));
 const location=(base,p)=>normalized(path.posix.join(path.posix.dirname(base),p));
-const generated=new Set(['cloud/config.js','vendor/supabase.js','index.html','admin.html','_headers']);
+const generated=new Set(['cloud/config.js','vendor/supabase.js','index.html','admin.html','sw.js','_headers']);
 const htmlRoots={ 'cloud.html':'index.html','admin.html':'admin.html' };
 
 function filesUnder(rootDir,relative=''){
