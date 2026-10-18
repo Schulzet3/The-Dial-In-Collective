@@ -304,7 +304,7 @@ begin
    raise exception using errcode='22023',message='Coffee details must be text.';
   end if;
   value:=nullif(btrim(p_details->>k),'');
-  if length(value)>case when k='tasting_notes' then 2000 else 300 end then
+  if length(value)>(case when k='tasting_notes' then 2000 else 300 end) then
    raise exception using errcode='22023',message='Coffee detail is too long.';
   end if;
  end loop;
