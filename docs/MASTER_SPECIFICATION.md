@@ -223,6 +223,14 @@ The app may contain sophisticated recommendation, community, equipment, identity
 
 ---
 
+## 4.4 Breached-password protection for the invite-only beta (BETA-AUTH-BREACHCHECK-20261018-01 — Owner Locked, 2026-10-18)
+
+The owner explicitly elected to **continue on the existing Supabase Free plan without requiring leaked-password/breach-list protection for this private beta**. Do not make Supabase Pro+ or the leaked-password-protection advisor warning a gate to proceeding with currently approved private beta development, testing, or invitations. This is a conscious **limited-beta risk acceptance**, not a claim that breach checks are operational or that accounts and notes contain no private information. Do not silently upgrade Supabase, buy a subscription, disable existing protection or add a substitute authentication provider.
+
+**Every prior Locked authentication and privacy rule remains in force**: the password-based sign-in and recovery flows, email confirmation, minimum eight-character/new-password uppercase/supported-symbol rule (without imposing extra required digit/lowercase), Supabase secure token handling, invitation-only member admission, role/RLS protection, prevention of unauthorized account access, and keeping private shots, notes, email and equipment out of Community outputs. Existing admitted account credentials and sessions must not be invalidated. The independent real-account permission/privacy tests, verified backups, revocable invitations and all other applicable core beta acceptance requirements **are not waived**.
+
+Supabase's advisor will continue to report **`auth_leaked_password_protection` WARN** on Free. This is **acknowledged but not technically resolved**; revisit if there is an approved paid-tier decision, broader public launch, a higher-risk data model, or an actual compromise. This decision does **not** authorize the pending Community SQL migration or Netlify production deployment; both retain separate, explicit per-release approval requirements.
+
 # 5. Core information architecture and screen model
 
 The rebuild should reduce the current "everything expands inside everything" feeling while preserving the inline comparison interactions that are genuinely useful.

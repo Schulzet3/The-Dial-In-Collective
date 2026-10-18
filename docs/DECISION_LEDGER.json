@@ -2675,5 +2675,33 @@
       "no_provider_mutations": true,
       "related_issue": 27
     }
+  },
+  "current_owner_beta_breached_password_opt_out_20261018": {
+    "id": "BETA-AUTH-BREACHCHECK-20261018-01",
+    "status": "Owner Locked: intentionally OPTIONAL on existing Supabase Free for invite-only beta, not an implementation defect silently fixed",
+    "exact_owner_statement": "this is not sensitive data so leaked password protection is not necessary. proceed without it.",
+    "previous_assistant_question": "Should Supabase Pro and leaked-password protection be mandatory before beta, or retain Free and track warning as beta-security limitation?",
+    "owner_interpretation": "Do not require paid Supabase Pro or HaveIBeenPwned breach protection before testing/inviting the limited beta. Continue the existing release-readiness work without changing billing or Auth configuration.",
+    "risk_boundary": "The app still stores password-based logins, email identity, private coffee shots and personal notes. Do not assert accounts contain no sensitive or private data; this exemption covers only optional breached-password rejection.",
+    "preserves_locked": [
+      "Existing §4.2 primary password-based email authentication",
+      "2026-10-12 8+ uppercase+special new-password rule",
+      "verified email requirement",
+      "invitation-only member admission",
+      "RLS and genuine other-member privacy tests",
+      "encrypted backup and recovery controls",
+      "each production migration and Netlify publish requires separate owner approval"
+    ],
+    "server_advisor_observation": "auth_leaked_password_protection WARN remains on Free; Supabase docs state feature is Pro+",
+    "plan_or_auth_change_authorized": false,
+    "product_scope": "invite-only private beta only; reconsider for public launch, paid security review, or increased actual risk",
+    "source_refs": [
+      "docs/MASTER_SPECIFICATION.md §4.4",
+      "docs/CURRENT_STATUS.md",
+      "GitHub #27 for provider warning",
+      "#9 and #11 for real-account security",
+      "#28 for backup courier"
+    ],
+    "no_waiver_of_unrelated_beta_acceptance": true
   }
 }
