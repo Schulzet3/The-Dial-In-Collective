@@ -9,7 +9,7 @@ The owner answered “yes do it please” when explicitly asked to approve the p
 - Approved GitHub source head when migration executed: `8f9eefc093c76fa3942aba31a4763460bdad4eaa`, app/migration code derived from passing `146b0f7ad7a61949772e955dd7b8e7a413b7d957`.
 - Exact SQL Git Blob SHA: `7f6178347ee0452fb64a66981c6e3975650fd63c`, length 19,672 UTF-8 characters, SHA unchanged on path rename.
 - Prior development migration path: `supabase/migrations/20261018061000_dic_community_quality_integrity.sql`. **Corrected canonical GitHub path:** [`supabase/migrations/20261018054140_dic_community_quality_integrity.sql`](../supabase/migrations/20261018054140_dic_community_quality_integrity.sql), using the **actual Supabase migration version** so future `supabase db push` cannot inadvertently replay a different-version duplicate. Historical path exists in the Git history, not as a second active migration.
-- Verified source CI: [network-disconnected PostgreSQL 17.11 run `39100628654` SUCCESS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39100628654). A new isolated CI run on the reconciled filename is to be checked after this commit; do not declare it passed until the run reports success.
+- Verified source CI: [network-disconnected PostgreSQL 17.11 run `39100628654` SUCCESS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39100628654). **Post-reconciliation CI verified:** [SQL regression 39101569175 PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39101569175) and [cloud UX 39101569163 PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39101569163) on the exact migration-version-aligned commit `ce4c377b7740d6309aaeff102d24aa0360a9bde6`. Original SQL Blob SHA `7f6178347ee0452fb64a66981c6e3975650fd63c` unchanged.
 - `apply_migration(name='dic_community_quality_integrity')` returned `success=true`; subsequent live `list_migrations` confirmed version `20261018054140`, count 27.
 
 ## Live read-only postflight (before/after row comparison)
@@ -30,6 +30,12 @@ New `private.community_quality_checks` RLS **ON**, explicit client-deny policy. 
 
 **Supabase post-migration advisor:** Two new warnings for deliberately `SECURITY DEFINER`, `authenticated`-callable public RPCs. Confirmed both define `private.require_member()`, and outlier confirmation further checks `owner_id=u` and expected shot revision. They are intentionally privileged server functions that protect private links; they must still undergo **real user/other-account/anonymous authorization acceptance** before the issue closes. Existing provider warnings remain tracked in [#27](https://github.com/Schulzet3/The-Dial-In-Collective/issues/27). [Security-definer advisory documentation](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable).
 
+### Additional production read-only review
+
+The actual production database was checked using isolated, **read-only** SQL role simulations: an `anon` role was denied EXECUTE on `dic_community_evidence_counts`, and an `authenticated` role **without an admitted identity** received `insufficient_privilege`. Both checks PASS without writing production data. These are **not real owner/wrong-member HTTP session tests**, which remain open.
+
+A separate **non-identifying, read-only** query inspected the one Pending contribution's linkage: it belongs to a verified canonical coffee, has all-green source taste, matched source revision, matching library coffee identity and private contributor association, matching structured shot observations, and the original shot is not hidden (all fields 1 of 1). This is **preliminary source-integrity review only**, not confirmation against broader personal/community outliers, abuse, user intent or explicit owner approval to publish. No `dic_review_pending_community` call was made; its state remains `pending_quality`.
+
 ## Recovery and unchanged surfaces
 
 [GitHub encrypted backup snapshot `39099579576` SUCCESS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39099579576), created from the source pinned to prior verified published app and before this migration; verified encrypted snapshot and ciphertext artifact steps. This push-run **does not establish a fresh offsite Google Drive receipt**; prior owner reported receipt and full restore are separately recorded in [#28](https://github.com/Schulzet3/The-Dial-In-Collective/issues/28). The separate `main` nightly encrypted backup published-app source pin remains unchanged: `ebd2bed149f6c9fed998a861a0b8ac819fab98db`. A subsequent scheduled full database backup should include the newly installed schema; it has **not yet been independently observed**.
@@ -38,7 +44,7 @@ Netlify remains READY published app deploy `6ad4541c0e2686c05d66a4f2`, no branch
 
 ## Scope still open / follow-up
 
-1. Confirm renamed migration still passes the isolated SQL workflow on final repository SHA; log exact workflow run and any failures. This report predates that post-rename CI result.
+1. **Complete:** Renamed SQL file exactly matches applied hosted migration, and post-rename isolated SQL and cloud UX workflows succeeded (runs 39101569175 and 39101569163). Documentation-only follow-up commits do not change runnable app/SQL source.
 2. Verify authenticated member **and different-member** access plus denied unauthenticated access through a genuine client session, and approved/verified coffee, outlier correction/hide flows. Do not create or mutate real user shots for test convenience.
 3. Existing `pending_quality` row remains unchanged. An explicit quality review is required before choosing to process it through bounded internal maintenance; no bulk auto-promotion granted by this release.
 4. #9 issue stays open until genuine acceptance. #11 Community browsing still disabled. The automatic worker is triggered on **future** qualifying events, while the new private bounded maintenance routine for historical Pending rows is intentionally **not run** during this release.
