@@ -70,6 +70,27 @@ begin
  if (select count(*) from public.community_shots where coffee_id=c1 and quality_state='eligible')<>5 then
   raise exception 'Eligibility not limited to five vetted baseline samples';end if;
 
+ -- Sanitized member Community browse lists eligible source measurements only.
+ -- Counts distinguish successful shots from independent contributors.
+ perform set_config('request.jwt.claim.sub',us[5]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[5],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_browse_community_shots(20,0);
+ if (result->>'total')::integer<>5 or jsonb_array_length(result->'shots')<>5
+    or (result->'shots'->0->>'contributor_count')::integer<>5
+    or (result->'shots'->0->>'shot_count')::integer<>5 then
+  raise exception 'Sanitized browse counts incorrect: %',result;
+ end if;
+ if result::text like '%@fixture.invalid%' or result::text like '%PRIVATE:%'
+    or result::text like '%contributor_id%' or result::text like '%owner_id%'
+    or result::text like '%shot_id%' or result::text like '%machine_model%' then
+  raise exception 'PII or internal IDs leaked through browse feed';
+ end if;
+ if public.dic_my_community_outliers()<>'[]'::jsonb then
+  raise exception 'Non-owner can see another member''s held shot';end if;
+ execute 'reset role';
+
  -- A direct authenticated client can neither rewrite quality nor read
  -- the private contributor/quality tables.
  if has_function_privilege('authenticated','private.dic_review_community_shot(uuid)','EXECUTE')
@@ -102,6 +123,19 @@ begin
  end;
  execute 'reset role';
 
+ -- Member review inbox contains only their own held shot and version.
+ perform set_config('request.jwt.claim.sub',us[6]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[6],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_my_community_outliers();
+ if jsonb_array_length(result)<>1 or result->0->>'shot_id'<>sh[6]::text
+    or (result->0->>'revision')::bigint<>1
+    or result::text like '%@fixture.invalid%' then
+  raise exception 'Owner review inbox wrong: %',result;
+ end if;
+ execute 'reset role';
+
  -- Owner confirmation is both identity-bound and source-revision-bound.
  perform set_config('request.jwt.claim.sub',us[6]::text,true);
  perform set_config('request.jwt.claims',
@@ -114,6 +148,14 @@ begin
   raise exception 'Genuine member could not confirm plausible outlier: %',result;end if;
  result:=public.dic_confirm_community_outlier(sh[6],1);
  if result->>'ok'<>'false' then raise exception 'Confirmation not idempotently closed';end if;
+ execute 'reset role';
+
+ perform set_config('request.jwt.claim.sub',us[6]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[6],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ if public.dic_my_community_outliers()<>'[]'::jsonb then
+  raise exception 'Confirmed owner still sees unresolved prompt';end if;
  execute 'reset role';
 
  -- Personal Hide must NOT withdraw an already eligible anonymous contribution.
@@ -288,6 +330,16 @@ begin
  exception when invalid_parameter_value then denied:=true;
  end;
  if not denied then raise exception 'Unbounded worker limit accepted';end if;
+
+ perform set_config('request.jwt.claim.sub','',true);
+ execute 'set local role anon';
+ denied:=false;
+ begin
+  perform public.dic_browse_community_shots(20,0);
+ exception when insufficient_privilege then denied:=true;
+ end;
+ if not denied then raise exception 'Anonymous browsing was allowed';end if;
+ execute 'reset role';
 
  -- Revoke admission immediately suppresses both community reads and stats.
  perform set_config('request.jwt.claim.sub',us[1]::text,true);
