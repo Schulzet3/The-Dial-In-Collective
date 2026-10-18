@@ -1,5 +1,10 @@
 # Current Status — The Dial In Collective
 
+## AUTHORIZED RELEASE IN PROGRESS — secure offline PWA (October 18, 2026)
+
+**ONE PUBLICATION EXPLICITLY APPROVED:** Owner answered “yes proceed” to the separate 15-credit-estimate single release of the tested offline/PWA foundation. [Scoped release, preflight, controls and verification checklist](RELEASE_2026_10_18_OFFLINE_PWA.md). Before the marker, live production remained READY `6ad5030aaae6cba42933a800`, current GitHub development head `921793a9e69ec4d033ba93aa2ac61a0eb7149a88`; code-source CI was all green at `99d68767` with only documentation thereafter. Netlify owner-managed Personal credits have a known October 17 historical 940 balance/grant through November 14; current actual balance is not connector-verifiable. No SQL/Edge/auth changes, no production data writes; existing 15 shots/15 notes/one eligible Community contribution read back. **Do not call this published until Netlify independent deployment confirmation.** Approval covers one marker only and will be consumed if published.
+
+
 ## LATEST VERIFIED LIVE RELEASE — confirmation retry repair (2026-10-18)
 
 **PUBLISHED / CURRENT / READY:** [Netlify deployment `6ad5030aaae6cba42933a800`](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad5030aaae6cba42933a800) went live **2026-10-18 17:34:16 UTC** from exact GitHub commit **`d54f84103285cfb0185e1d806efe9e8c6064b72d`**, `development/backend-foundation`. The already-tested mandatory held-shot Confirm error recovery is live: visible failure in required modal, retryable Confirm, successful confirmation releases modal before refresh. The user authorized exactly **one** production deployment; future publishing needs fresh explicit permission. [Full release and checks](RELEASE_2026_10_18_CONFIRMATION_RETRY.md). **Earlier documentation sections below refer to the previously published release and are historical.**
