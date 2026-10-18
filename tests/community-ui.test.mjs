@@ -51,7 +51,7 @@ test('Review prompt is actionable, revision-bound, and unobtrusive when empty',(
   coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',
   dose_g:18,yield_g:50,time_s:62};
  const html=communityReviewBanner([review]);
- assert.match(html,/Is this extraction time correct/);
+ assert.match(html,/Are these shot measurements correct/);
  assert.match(html,/62\.0s/);
  assert.match(html,/community-confirm-outlier/);
  assert.match(html,/community-correct-outlier/);
