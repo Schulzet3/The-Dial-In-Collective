@@ -266,6 +266,37 @@ begin
  returning id into submission;
  insert into public.library_entries(owner_id,submission_id)
  values(us[1],submission) returning id into pending_library;
+ -- A member can edit own Pending coffee details without creating a second
+ -- library entry or exposing the Pending coffee to Community.
+ perform set_config('request.jwt.claim.sub',us[1]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_edit_my_coffee(pending_library,1,
+  '{"name":"CI Formerly Pending","roaster":"Fixture Roaster","producer":"Edited Farm"}'::jsonb,
+  'https://roaster.example.invalid/real-coffee');
+ if result->>'kind'<>'updated_pending' then
+  raise exception 'Own Pending details not updated: %',result;end if;
+ result:=public.dic_edit_my_coffee(pending_library,1,
+  '{"name":"Oops","roaster":"Fixture Roaster"}'::jsonb,null);
+ if result->>'code'<>'conflict' then
+  raise exception 'Stale Pending revision was accepted';end if;
+ execute 'reset role';
+ if (select proposed_data->>'producer' from public.coffee_submissions where id=submission)<>'Edited Farm'
+ or (select count(*) from public.library_entries where owner_id=us[1] and submission_id=submission)<>1 then
+  raise exception 'Edited Pending details or identity mismatch';end if;
+ perform set_config('request.jwt.claim.sub',us[2]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[2],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ denied:=false;
+ begin perform public.dic_edit_my_coffee(pending_library,2,
+  '{"name":"Hijack","roaster":"Fixture Roaster"}'::jsonb,null);
+ exception when insufficient_privilege then denied:=true;
+ end;
+ if not denied then raise exception 'Different owner could edit Pending coffee';end if;
+ execute 'reset role';
+
  pending_shot:=gen_random_uuid();
  insert into public.shots(
   id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
@@ -294,6 +325,32 @@ begin
  update public.coffees set verification_state='verified' where id=cp;
  if (select quality_state from public.community_shots where id=pending_projection)<>'eligible' then
   raise exception 'Restored verified source did not revalidate';end if;
+
+ -- Existing Verified facts never change through member Edit Coffee.
+ -- The server stores a revision-safe proposal for administrator source review.
+ select library_entry_id into library from public.shots where id=sh[1];
+ select revision into pre_revision from public.coffees where id=c1;
+ perform set_config('request.jwt.claim.sub',us[1]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_edit_my_coffee(library,pre_revision,
+  '{"name":"Proposed Different Name","roaster":"Fixture Roaster","producer":"Review Farm"}'::jsonb,
+  'https://roaster.example.invalid/correction');
+ if result->>'kind'<>'correction_requested' then
+  raise exception 'Verified correction request was not recorded: %',result;end if;
+ result:=public.dic_edit_my_coffee(library,pre_revision,
+  '{"name":"Another Name","roaster":"Fixture Roaster"}'::jsonb,null);
+ if result->>'code'<>'conflict' then
+  raise exception 'Stale verified correction should conflict: %',result;end if;
+ execute 'reset role';
+ if (select name from public.coffees where id=c1)<>'CI Exact Release 2026'
+ or (select count(*) from public.coffee_submissions
+    where owner_id=us[1] and canonical_coffee_id=c1 and status='pending'
+      and proposed_data->>'producer'='Review Farm')<>1 then
+  raise exception 'Member changed shared canonical facts or lost correction';end if;
+ if (select count(*) from private.contribution_links where shot_id=sh[1])<>1 then
+  raise exception 'Coffee correction changed historical shot association';end if;
 
  -- Detached contributions retain anonymous evidence, never the deleted
  -- owner's identity or private shot notes.
