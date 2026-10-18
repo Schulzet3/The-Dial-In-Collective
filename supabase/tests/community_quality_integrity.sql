@@ -346,7 +346,7 @@ begin
  execute 'reset role';
  if (select name from public.coffees where id=c1)<>'CI Exact Release 2026'
  or (select count(*) from public.coffee_submissions
-    where owner_id=us[1] and canonical_coffee_id=c1 and status='pending'
+    where owner_id=us[1] and canonical_coffee_id=c1 and public.coffee_submissions.status='pending'
       and proposed_data->>'producer'='Review Farm')<>1 then
   raise exception 'Member changed shared canonical facts or lost correction';end if;
  if (select count(*) from private.contribution_links where shot_id=sh[1])<>1 then
