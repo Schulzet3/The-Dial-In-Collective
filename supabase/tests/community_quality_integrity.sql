@@ -224,7 +224,14 @@ begin
     where id=(select contributor_id from private.contribution_links
       where community_shot_id=old_cid) and owner_id is not null)
  then raise exception 'Detached shared evidence/privacy retention failed';end if;
+ -- The detached owner no longer has a valid session; read counts as a
+ -- different admitted member to verify anonymous durability.
+ perform set_config('request.jwt.claim.sub',us[1]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
  totals:=public.dic_community_evidence_counts(c1,'Turbo');
+ execute 'reset role';
  if totals->>'shot_count'<>'7' or totals->>'contributor_count'<>'6' then
   raise exception 'Unique detached contributor was lost: %',totals;end if;
  if exists(select 1 from information_schema.columns
