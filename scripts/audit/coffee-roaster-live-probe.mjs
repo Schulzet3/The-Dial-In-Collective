@@ -6,6 +6,7 @@ import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-g
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
+import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 
 const targets=[
  ['Proud Mary Ovidio Gomez','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
@@ -17,6 +18,10 @@ const targets=[
  ['PERC Kenya Mara Estate','https://perccoffee.com/products/kenya-mara-estate'],
  ['Picky Chemist Gesha Village','https://en.thepickychemist.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey'],
  ['SEY Chorso Bule','https://www.seycoffee.com/collections/coffee/products/2026-chorso-bule-highest-elevation-project-ethiopia'],
+ ['SEY Yaye Arbegona','https://www.seycoffee.com/collections/coffee/products/2026-yaye-arbegona-ethiopia'],
+ ['Queen City Banko Gotiti Natural','https://queencitycollectivecoffee.com/products/banko-gotiti-natural-ethiopia'],
+ ['Sweet Bloom Wuri','https://sweetbloomcoffee.com/products/wuri'],
+ ['Sweet Bloom Uraga','https://sweetbloomcoffee.com/products/uraga'],
  ['Black & White Los Altos','https://www.blackwhiteroasters.com/products/r-los-altos-washed'],
  ['Little Wolf Tegu','https://littlewolf.coffee/products/tegu'],
  ['Heart Phono','https://www.heartroasters.com/products/phono']
@@ -26,6 +31,23 @@ const summarize=async ([roaster,url])=>{
  try{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
+  // Temporary bounded, public-product-only markup evidence for researching
+  // tasting-note storefront structures. Do not retain full roaster HTML.
+  const scope=productMarkup(fetched.html);
+  const shape=/(PERC|Onyx|Heart|Black & White|Sweet Bloom)/i.test(roaster);
+  if(shape){
+   const needles=['Strawberry','Orange Cake','fig, caramel','TAKE A SIP','guava, raspberry','citra hops'];
+   for(const needle of needles){
+    const at=scope.toLowerCase().indexOf(needle.toLowerCase());
+    if(at>=0){
+     console.log('[DIC FLAVOR SHAPE] '+JSON.stringify({
+      roaster,needle,
+      excerpt:scope.slice(Math.max(0,at-230),Math.min(scope.length,at+250))
+     }));
+     break;
+    }
+   }
+  }
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Digest only, never the page body. Facts below are public source data.
