@@ -26,7 +26,7 @@ done
 # Formal CLI-generated release migration is applied ONCE by the loop above.
 # No second draft application: privacy and identity regressions use final schema.
 run_sql tests/sql/owner-fixture.sql
-for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard url_preview_release universal_url_preview seven_roast_levels community_quality_integrity; do
+for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity; do
   echo "Running $regression"
   run_sql "supabase/tests/$regression.sql"
 done
