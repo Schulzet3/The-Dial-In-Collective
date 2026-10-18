@@ -1,4 +1,5 @@
-// Controlled one-shot public product URL smoke check. No member credentials,
+// Controlled one-shot public product URL smoke check. Includes a real late-story
+// PERC Mara Estate check beyond the short 60 KB display-token scan. No member credentials,
 // Supabase preview quota, raw HTML persistence, production writes or publishing.
 // Uses the SAME connection-time DNS-pinned, bounded HTTPS guard as previews.
 import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-guard.mjs';
