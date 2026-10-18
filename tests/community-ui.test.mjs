@@ -55,10 +55,10 @@ test('Review prompt is actionable, revision-bound, and unobtrusive when empty',(
  assert.match(html,/62\.0s/);
  assert.match(html,/community-confirm-outlier/);
  assert.match(html,/community-correct-outlier/);
- assert.match(html,/community-dismiss-outlier/);
+ assert.doesNotMatch(html,/community-dismiss-outlier|data-action="Later"|>Later</);
+ assert.match(html,/Required Measurement Check/);
  assert.match(html,/data-revision="7"/);
- assert.equal(communityReviewBanner([review],new Set(['abc:7'])),'');
- assert.notEqual(communityReviewBanner([{...review,revision:8}],new Set(['abc:7'])),'');
+ assert.match(communityReviewBanner([{...review,revision:8}]),/data-revision="8"/);
 });
 
 test('Supabase adapter uses narrow RPC names without raw account identity payloads',async()=>{
@@ -69,17 +69,20 @@ test('Supabase adapter uses narrow RPC names without raw account identity payloa
    calls.push([method,args]);
    if(method==='dic_my_community_outliers')return {data:[],error:null};
    if(method==='dic_confirm_community_outlier')return {data:{ok:true,state:'eligible'},error:null};
+   if(method==='dic_edit_my_coffee')return {data:{ok:true,kind:'updated_pending'},error:null};
    return {data:{shots:[row],total:1},error:null};
   }
  };
  const client=createCloudClient(sdk,{assertSecure:()=>{}});
  assert.deepEqual(await client.listCommunityReviews(),[]);
  assert.deepEqual(await client.confirmCommunityOutlier('abc',7),{ok:true,state:'eligible'});
+ assert.deepEqual(await client.editCoffeeDetails('coffee-lib',3,{name:'Coffee',roaster:'Roaster'},'https://roaster.invalid/coffee'),{ok:true,kind:'updated_pending'});
  const browse=await client.browseCommunityShots({limit:20,offset:0});
  assert.equal(browse.total,1);
  assert.deepEqual(calls,[
   ['dic_my_community_outliers',undefined],
   ['dic_confirm_community_outlier',{p_shot_id:'abc',p_expected_revision:7}],
+  ['dic_edit_my_coffee',{p_library_entry:'coffee-lib',p_expected_revision:3,p_details:{name:'Coffee',roaster:'Roaster'},p_source_url:'https://roaster.invalid/coffee'}],
   ['dic_browse_community_shots',{p_limit:20,p_offset:0}]
  ]);
  client.dispose();
