@@ -1,0 +1,268 @@
+-- Network-isolated PostgreSQL 17.11 integration test (dic_ci ONLY).
+-- Synthetic users, shots and coffees. All writes roll back. NEVER run on hosted.
+begin;
+do $test$
+declare
+ c1 uuid:=gen_random_uuid();c2 uuid:=gen_random_uuid();cp uuid:=gen_random_uuid();
+ us uuid[]:='{}'; sh uuid[]:='{}'; cs uuid[]:='{}'; setups uuid[]:='{}';
+ u uuid; setup uuid; version uuid; basket uuid; basket_version uuid; calib uuid;
+ library uuid; sid uuid; target uuid; pending_library uuid; pending_shot uuid;
+ submission uuid; pending_projection uuid; same_user_shot uuid; c2_shot uuid;
+ old_cid uuid; old_revision bigint; outcome text; result jsonb;
+ i integer; quality_count integer; pre_revision bigint;
+ status text; reason text; totals jsonb; denied boolean;
+ before_timestamp timestamptz;
+begin
+ if current_database()<>'dic_ci' then raise exception 'Only isolated dic_ci may execute community test'; end if;
+
+ -- Same roaster product URL may represent distinct verified releases.
+ insert into public.coffees(id,name,roaster,release_label,verification_state)
+ values(c1,'CI Exact Release 2026','Fixture Roaster','2026','verified'),
+       (c2,'CI Exact Release 2027','Fixture Roaster','2027','verified'),
+       (cp,'CI Formerly Pending','Fixture Roaster','2028','pending');
+ insert into public.coffee_sources(coffee_id,source_url,source_kind) values
+ (c1,'https://roaster.example.invalid/products/reusable','roaster_page'),
+ (c2,'https://roaster.example.invalid/products/reusable','roaster_page');
+
+ -- Five INDEPENDENT contributors establish a robust baseline. One member
+ -- alone cannot manufacture five reference observations.
+ for i in 1..6 loop
+  u:=gen_random_uuid();setup:=gen_random_uuid();version:=gen_random_uuid();
+  basket:=gen_random_uuid();basket_version:=gen_random_uuid();calib:=gen_random_uuid();
+  library:=gen_random_uuid();sid:=gen_random_uuid();
+  us:=array_append(us,u);setups:=array_append(setups,setup);sh:=array_append(sh,sid);
+  insert into auth.users(id,aud,role,email) values
+    (u,'authenticated','authenticated',u::text||'@fixture.invalid');
+  update private.beta_members set enabled=true,admitted_at=now() where owner_id=u;
+  insert into public.setups(id,owner_id,name) values(setup,u,'Personal setup');
+  insert into public.setup_versions(id,owner_id,setup_id,machine_model,grinder_model,burr_set)
+     values(version,u,setup,'Fixture Machine','Fixture Grinder','Fixture Burr');
+  insert into public.grinder_calibrations(
+    id,owner_id,setup_id,grinder_model,burr_set,finest_setting,coarsest_setting
+  ) values(calib,u,setup,'Fixture Grinder','Fixture Burr',0,5);
+  insert into public.baskets(id,owner_id,setup_id,name) values(basket,u,setup,'18 g');
+  insert into public.basket_versions(id,owner_id,setup_id,basket_id,basket_dose_g,model)
+    values(basket_version,u,setup,basket,18,'Fixture Basket');
+  insert into public.library_entries(id,owner_id,coffee_id) values(library,u,c1);
+  insert into public.shots(
+   id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+   calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+   extraction,body,clarity,sweetness,astringency,equipment_snapshot
+  ) values(sid,u,library,setup,version,basket_version,calib,
+    'Turbo',now(),18,42,case when i=6 then 145 else 25 end,1.1,
+    3,3,5,5,1,'{}');
+  insert into public.shot_notes(owner_id,shot_id,notes)
+    values(u,sid,'PRIVATE: '||u::text||'@fixture.invalid');
+  select community_shot_id into strict target from private.contribution_links
+    where shot_id=sid;
+  cs:=array_append(cs,target);
+  select quality_state into status from public.community_shots where id=target;
+  if i<6 and status<>'eligible' then
+   raise exception 'Normal verified green shot not eligible % %',i,status;
+  end if;
+  if i=6 and status<>'held' then
+   raise exception 'Extreme time not held for correction/confirmation: %',status;
+  end if;
+ end loop;
+ select reason into reason from private.community_quality_checks where community_shot_id=cs[6];
+ if reason<>'extreme_outlier' then raise exception 'Held reason lost: %',reason;end if;
+ if (select count(*) from public.community_shots where coffee_id=c1 and quality_state='eligible')<>5 then
+  raise exception 'Eligibility not limited to five vetted baseline samples';end if;
+
+ -- A direct authenticated client can neither rewrite quality nor read
+ -- the private contributor/quality tables.
+ if has_function_privilege('authenticated','private.dic_review_community_shot(uuid)','EXECUTE')
+  or has_function_privilege('anon','private.dic_review_pending_community(integer)','EXECUTE')
+  or has_table_privilege('authenticated','private.community_quality_checks','SELECT')
+ then raise exception 'Quality controls exposed to client roles';end if;
+
+ perform set_config('request.jwt.claim.sub',us[5]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[5],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ denied:=false;
+ begin
+  update public.community_shots set quality_state='eligible' where id=cs[6];
+ exception when insufficient_privilege then denied:=true;
+ end;
+ if not denied then raise exception 'Member directly promoted held contribution';end if;
+ result:=public.dic_confirm_community_outlier(sh[6],1);
+ if result->>'ok'<>'false' then
+  raise exception 'Another member confirmed someone else''s outlier';end if;
+
+ -- No notes, email or account link in the member-facing aggregate.
+ totals:=public.dic_community_evidence_counts(c1,'Turbo');
+ if totals->>'shot_count'<>'5' or totals->>'contributor_count'<>'5' then
+  raise exception 'Initial safe counts differ: %',totals;end if;
+ begin
+  perform count(*) from private.contribution_links;
+  raise exception 'Private contributor links readable by member';
+ exception when insufficient_privilege then null;
+ end;
+ execute 'reset role';
+
+ -- Owner confirmation is both identity-bound and source-revision-bound.
+ perform set_config('request.jwt.claim.sub',us[6]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[6],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_confirm_community_outlier(sh[6],100);
+ if result->>'ok'<>'false' then raise exception 'Stale revision confirmation worked';end if;
+ result:=public.dic_confirm_community_outlier(sh[6],1);
+ if result->>'ok'<>'true' or result->>'state'<>'eligible' then
+  raise exception 'Genuine member could not confirm plausible outlier: %',result;end if;
+ result:=public.dic_confirm_community_outlier(sh[6],1);
+ if result->>'ok'<>'false' then raise exception 'Confirmation not idempotently closed';end if;
+ execute 'reset role';
+
+ -- Personal Hide must NOT withdraw an already eligible anonymous contribution.
+ old_cid:=cs[6];
+ update public.shots set hidden_at=clock_timestamp() where id=sh[6];
+ if (select quality_state from public.community_shots where id=old_cid)<>'eligible' then
+  raise exception 'Personal Hide unexpectedly revoked a valid contribution';end if;
+
+ -- A material correction must invalidate previous confirmation and reuse
+ -- the exact immutable contribution ID (no duplicates or stale promotion).
+ update public.shots set time_s=155 where id=sh[6];
+ if (select quality_state from public.community_shots where id=old_cid)<>'held' then
+  raise exception 'Outlier confirmation incorrectly survived corrected measurement';end if;
+ update public.shots set time_s=25 where id=sh[6];
+ if (select quality_state from public.community_shots where id=old_cid)<>'eligible'
+ or (select count(*) from private.contribution_links where shot_id=sh[6])<>1 then
+  raise exception 'Ordinary corrected time did not re-qualify same projection';end if;
+ update public.shots set clarity=4 where id=sh[6];
+ if (select quality_state from public.community_shots where id=old_cid)<>'withdrawn' then
+  raise exception 'Non-green correction remained public';end if;
+ update public.shots set clarity=5 where id=sh[6];
+ if (select quality_state from public.community_shots where id=old_cid)<>'eligible' then
+  raise exception 'Restored green observation did not re-qualify';end if;
+
+ -- Reconciliation is stable without duplicate review rows or timestamp churn.
+ select reviewed_at into before_timestamp from private.community_quality_checks
+  where community_shot_id=cs[1];
+ perform private.dic_review_community_shot(cs[1]);
+ perform private.dic_review_community_shot(cs[1]);
+ if (select count(*) from private.community_quality_checks
+      where community_shot_id=cs[1])<>1
+    or (select reviewed_at from private.community_quality_checks
+        where community_shot_id=cs[1]) is distinct from before_timestamp then
+  raise exception 'Idempotent review duplicated or rewrote unchanged checkpoint';end if;
+
+ -- Multiple shots by one owner increase sample count but not contributors.
+ select library_entry_id,setup_id,setup_version_id,basket_version_id,calibration_id
+ into library,setup,version,basket_version,calib from public.shots where id=sh[1];
+ same_user_shot:=gen_random_uuid();
+ insert into public.shots(
+  id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+  calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+  extraction,body,clarity,sweetness,astringency,equipment_snapshot
+ ) values(same_user_shot,us[1],library,setup,version,basket_version,calib,
+  'Turbo',now(),18,43,26,1.2,3,3,5,5,1,'{}');
+ totals:=public.dic_community_evidence_counts(c1,'Turbo');
+ if totals->>'shot_count'<>'7' or totals->>'contributor_count'<>'6' then
+  raise exception 'Distinct contributor balancing count was incorrect: %',totals;end if;
+
+ -- Different verified RELEASE cannot leak into other release's count,
+ -- despite the identical source URL.
+ insert into public.library_entries(owner_id,coffee_id)
+  values(us[1],c2) returning id into library;
+ c2_shot:=gen_random_uuid();
+ insert into public.shots(
+  id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+  calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+  extraction,body,clarity,sweetness,astringency,equipment_snapshot
+ ) values(c2_shot,us[1],library,setup,version,basket_version,calib,
+  'Turbo',now(),18,42,25,1.1,3,3,5,5,1,'{}');
+ if (public.dic_community_evidence_counts(c1,'Turbo')->>'shot_count')<>'7'
+    or (public.dic_community_evidence_counts(c2,'Turbo')->>'shot_count')<>'1' then
+  raise exception 'Two coffee releases were incorrectly combined';end if;
+
+ -- A green shot logged under Pending remains private until its coffee is
+ -- approved AND linked. No false automatic save or shot revision mutation.
+ insert into public.coffee_submissions(owner_id,proposed_data)
+ values(us[1],'{"name":"CI Formerly Pending","roaster":"Fixture Roaster"}'::jsonb)
+ returning id into submission;
+ insert into public.library_entries(owner_id,submission_id)
+ values(us[1],submission) returning id into pending_library;
+ pending_shot:=gen_random_uuid();
+ insert into public.shots(
+  id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+  calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+  extraction,body,clarity,sweetness,astringency,equipment_snapshot
+ ) values(pending_shot,us[1],pending_library,setup,version,basket_version,calib,
+  'Traditional',now(),18,38,28,1.1,3,3,5,5,1,'{}');
+ if exists(select 1 from private.contribution_links where shot_id=pending_shot) then
+  raise exception 'Pending coffee contributed publicly';end if;
+ select revision into pre_revision from public.shots where id=pending_shot;
+ update public.library_entries set coffee_id=cp,submission_id=null
+ where id=pending_library;
+ if exists(select 1 from private.contribution_links where shot_id=pending_shot) then
+  raise exception 'Pending canonical catalog state published contribution';end if;
+ update public.coffees set verification_state='verified' where id=cp;
+ select community_shot_id into pending_projection from private.contribution_links
+  where shot_id=pending_shot;
+ if pending_projection is null or
+    (select quality_state from public.community_shots where id=pending_projection)<>'eligible' then
+  raise exception 'Verified Pending-coffee history not safely backfilled';end if;
+ if (select revision from public.shots where id=pending_shot)<>pre_revision then
+  raise exception 'Backfill modified original personal history revision';end if;
+ update public.coffees set verification_state='rejected' where id=cp;
+ if (select quality_state from public.community_shots where id=pending_projection)<>'held' then
+  raise exception 'Unverified release still exposed community row';end if;
+ update public.coffees set verification_state='verified' where id=cp;
+ if (select quality_state from public.community_shots where id=pending_projection)<>'eligible' then
+  raise exception 'Restored verified source did not revalidate';end if;
+
+ -- Detached contributions retain anonymous evidence, never the deleted
+ -- owner's identity or private shot notes.
+ delete from auth.users where id=us[6];
+ if not exists(select 1 from public.community_shots
+    where id=old_cid and quality_state='eligible')
+   or not exists(select 1 from private.contribution_links
+    where community_shot_id=old_cid and shot_id is null)
+   or exists(select 1 from private.contributors
+    where id=(select contributor_id from private.contribution_links
+      where community_shot_id=old_cid) and owner_id is not null)
+ then raise exception 'Detached shared evidence/privacy retention failed';end if;
+ totals:=public.dic_community_evidence_counts(c1,'Turbo');
+ if totals->>'shot_count'<>'7' or totals->>'contributor_count'<>'6' then
+  raise exception 'Unique detached contributor was lost: %',totals;end if;
+ if exists(select 1 from information_schema.columns
+   where table_schema='public' and table_name='community_shots'
+    and column_name in ('owner_id','shot_id','email','notes','contributor_id')) then
+  raise exception 'Personal identifier in public projection table';end if;
+
+ -- Old Pending rows are reviewable in small bounded maintenance batches.
+ update public.community_shots set quality_state='pending_quality' where id=cs[1];
+ result:=private.dic_review_pending_community(100);
+ if (result->>'eligible')::integer<1 or
+    (select quality_state from public.community_shots where id=cs[1])<>'eligible' then
+  raise exception 'Bounded maintenance failed: %',result;end if;
+ denied:=false;
+ begin perform private.dic_review_pending_community(0);
+ exception when invalid_parameter_value then denied:=true;
+ end;
+ if not denied then raise exception 'Unbounded worker limit accepted';end if;
+
+ -- Revoke admission immediately suppresses both community reads and stats.
+ perform set_config('request.jwt.claim.sub',us[1]::text,true);
+ perform set_config('request.jwt.claims',
+  jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ if (select count(*) from public.community_shots where coffee_id=c1)=0 then
+  raise exception 'Eligible rows not available to admitted member';end if;
+ execute 'reset role';
+ update private.beta_members set enabled=false where owner_id=us[1];
+ execute 'set local role authenticated';
+ denied:=false;
+ begin perform public.dic_community_evidence_counts(c1,'Turbo');
+ exception when insufficient_privilege then denied:=true;
+ end;
+ if not denied or exists(select 1 from public.community_shots where coffee_id=c1) then
+  raise exception 'Revoked member retained Community visibility';end if;
+ execute 'reset role';
+
+ raise notice 'PASS community: verified-only, five peers, outlier confirmation, identity, correction, hidden/deleted durability, Pending approval, contributor counts, RLS, idempotence';
+end $test$;
+select 'PASS: isolated community quality integration; no hosted writes' as result;
+rollback;
