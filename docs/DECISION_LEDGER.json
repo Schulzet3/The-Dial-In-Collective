@@ -2510,5 +2510,30 @@
       "no_product_decisions_superseded": true,
       "no_new_production_release": true
     }
+  },
+  "current_owner_approved_community_nested_layout_20261018": {
+    "id": "UX-COMMUNITY-GROUPING-20261018-01",
+    "status": "Locked; development implementation staged, not published",
+    "owner_answer": "B. Show compact Community shot rows when its coffee is opened, with individual detail expansion.",
+    "scope": "Community list renders one default-collapsed coffee card per verified coffee; opening a card reveals compact qualifying shot rows; any row may independently open ratings/evidence.",
+    "preserved_locked_behavior": "Personal Coffee screen shot history remains collapsed by default and unchanged; no automatic full shot-detail expansion, multiple shot comparison remains available.",
+    "pagination_and_counts": "Existing style/coffee filters and Load More; coffee header counts reflect loaded matching rows, labeled loaded when server more pages remain. Backend evidence per exact coffee+style remains separate from loaded rows.",
+    "privacy": "Only existing server-sanitized eligible DTOs; no member ID, private notes, source shot ID, account email, or setup name rendered.",
+    "known_limit": "Current DTO omits canonical coffee ID/release label; same public roaster+coffee name from distinct verified releases could be co-grouped; backend resolution needs separate owner-approved privacy review.",
+    "implements_without": "SQL migrations, Supabase Edge changes, Netlify deployment, data mutation, extra login controls, changes to original 79 Locked decisions",
+    "source_files": [
+      "site/cloud/community.js",
+      "site/cloud/main.js",
+      "site/styles.css",
+      "tests/community-ui.test.mjs",
+      "tests/browser/cloud_owner_qa.py"
+    ],
+    "development_commits": [
+      "8fe73fd5a8a7caf7051547b4488cab7e2eea8698",
+      "bc06ac5d147e8755c6ab347badc11d294bb2f783",
+      "1ac0061541b3ef79ccc2485afb5ef945086c7eb5"
+    ],
+    "release_permission": "NOT GIVEN; distinct future publish requires owner approval",
+    "acceptance": "Node unit/test + mobile Chromium/visual checks pending at initial documentation checkpoint; real member acceptance after publication separate"
   }
 }

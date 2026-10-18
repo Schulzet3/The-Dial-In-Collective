@@ -1056,6 +1056,17 @@ Users may browse individual qualifying anonymous Community Shots, including usef
 
 Display them as **Community Shot**, without a visible persistent contributor ID.
 
+### 22.3A Community coffee-first nested shots (UX-COMMUNITY-GROUPING-20261018-01 — Owner Locked)
+
+The owner explicitly selected **Option B** for Community, distinct from the personal Coffee workspace:
+
+- Render **one collapsed coffee card per verified coffee** in Community, visually aligned with the personal Coffee card. Tapping the card reveals **all currently loaded, filter-matching qualifying Community shots as compact rows** under that coffee.
+- Individual Community shot rows remain collapsed until tapped; tapping a row expands its ratings and community evidence **inline**, independently of other shot rows. More than one shot can be expanded for comparison. Never automatically expand full shot details simply because the parent coffee was opened.
+- Personal Coffee screen semantics are **unchanged**: pinned current coffee, its existing Shot History disclosure and individual shot-detail collapse/expansion behavior retain the original Locked workflow.
+- Preserve admitted-member-only, server-filtered/quality-eligible anonymous Community DTOs, protected private notes, setup names and member identities. Keep existing Style and Coffee filters and Load More Shots pagination. Use the number of **loaded, filter-matching rows** for a coffee-card count; indicate **loaded** when server paging is incomplete. Continue showing backend per-coffee+style shot and distinct-contributor evidence only inside shot details, without double-counting contributor totals across styles.
+- Implementation caveat: the current read-only sanitized RPC does **not** return a canonical verified coffee ID or release label. The frontend therefore groups by the exact **public roaster/name pair** (not ambiguous concatenated labels). Two different verified release IDs with identical public names/roasters cannot be disambiguated by this DTO. A distinct release-safe public group key would require a separately reviewed, owner-approved backend scope; do not add contributor identity or loosen privacy to solve it.
+- Implementation is private development until one new owner-approved publish; this decision is **not** a deploy/SQL/user-data authorization.
+
 ## 22.4 Counts to surface
 
 Where confidence/sample context is shown, distinguish:
