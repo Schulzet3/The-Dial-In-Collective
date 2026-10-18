@@ -101,6 +101,13 @@ const conflictsByFields=new WeakMap();
 function normalized(field,value){
  const s=textOf(value,field==='tasting_notes'?650:220);
  if(!s)return '';
+ if(field==='tasting_notes'){
+  // An explicit product flavor label sometimes includes a prose lead-in.
+  // Keep the roaster's actual listed notes, not the words "coffee with notes of".
+  // Remove only this anchored, clearly extraneous introductory phrase.
+  const labelled=s.match(/^(?:this )?coffee\s+(?:with|has)\s+(?:tasting\s+)?notes?\s+of\s+(.+)$/i);
+  return labelled?labelled[1].replace(/[.!?]+\s*$/,'').trim():s;
+ }
  if(field==='roast_level'){
   const norm=s.toLowerCase().replace(/[\s_-]/g,'');
   return norm==='lightmedium'?'Medium-Light':ROAST.find(x=>x.toLowerCase().replace(/[\s-]/g,'')===norm)||'';
