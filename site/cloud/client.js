@@ -17,6 +17,19 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
  return {
   cachedIdentity:()=>cached?{...cached}:null,
   async identity(){assertSecure();const r=unwrap(await sdk.auth.getUser());cached=r?.user?{id:r.user.id,email:r.user.email}:null;return cached?{...cached}:null;},
+  // A local SDK session may select its own cached workspace, never authorize a remote RPC.
+  async offlineIdentity(){
+   assertSecure();
+   if(globalThis.navigator?.onLine!==false)return null;
+   try{
+    const {data,error}=await sdk.auth.getSession();
+    const session=data?.session,user=session?.user;
+    if(error||!session?.access_token||!session?.refresh_token||!user?.id
+      ||!Number.isFinite(session.expires_at)
+      ||session.expires_at*1000<=Date.now()+30000)return null;
+    return {id:user.id,email:user.email||''};
+   }catch{return null;}
+  },
   async signIn(email,password){assertSecure();return unwrap(await sdk.auth.signInWithPassword({email:email.trim(),password}));},
   async signUp(email,password){assertSecure();return unwrap(await sdk.auth.signUp({email:email.trim(),password,options:{emailRedirectTo:redirectUrl}}));},
   async requestReset(email){assertSecure();unwrap(await sdk.auth.resetPasswordForEmail(email.trim(),{redirectTo:redirectUrl}));return 'If that address has an account, a recovery email has been requested.';},

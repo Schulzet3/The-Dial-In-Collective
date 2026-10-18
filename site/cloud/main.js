@@ -23,7 +23,7 @@ const uuid=()=>crypto.randomUUID();
 function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`Dial_In_Collective_Pending_Changes_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 class CloudApp {
  constructor(client,store=new IndexedStore()){
-  Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0});
+  Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
   this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -36,7 +36,7 @@ class CloudApp {
   catch(error){if(changed())throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');throw error;}
  }
  resetAccount(){
-  this.epoch++;this.status=null;this.raw=null;this.state=M.blankState();this.pending=[];
+  this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
@@ -62,16 +62,47 @@ class CloudApp {
   reviewSheet.addEventListener('cancel',ev=>ev.preventDefault());
   this.client.onAuthChange((event,user)=>this.authChanged(event,user));
   const epoch=this.epoch;
-  try{const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;}catch{/* Missing session is the normal signed-out state. */}
+  try{const identity=globalThis.navigator?.onLine===false?await this.client.offlineIdentity?.():await this.client.identity();if(epoch===this.epoch)this.identity=identity;}catch{/* Missing session is the normal signed-out state. */}
   if(this.identity)await this.connect();else this.render();
-  addEventListener('online',()=>this.sync().catch(err=>this.error(err)));
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)this.sync().catch(err=>this.error(err));});
+  // A returning connection must recheck beta admission before flushing locally queued shots.
+   addEventListener('online',()=>this.connect().catch(err=>this.error(err)));
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)(this.status?.admitted?this.sync():this.connect()).catch(err=>this.error(err));});
   this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.sync().catch(()=>{});},30000);
+ }
+ // Offline data is not an offline authorization token. Only the previously
+ // admitted owner's cached records may be viewed, and only NEW shots can queue.
+ async restoreOfflineCache(){
+  const user=this.identity,epoch=this.epoch;
+  if(!user||globalThis.navigator?.onLine!==false)return false;
+  const credential=await this.client.offlineIdentity?.();
+  if(epoch!==this.epoch||user.id!==this.identity?.id)return false;
+  if(credential?.id!==user.id){
+   this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
+   this.notice='Reconnect to verify your account before opening saved coffees.';this.render();return false;
+  }
+  const cache=await this.inSession(()=>this.store.readCache(user.id));
+  if(!cache?.snapshot||cache.owner!==user.id){
+   this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
+   this.notice='No verified offline workspace is saved for this account. Reconnect first.';this.render();return false;
+  }
+  const pending=await this.inSession(()=>this.store.list(user.id));
+  if(epoch!==this.epoch||user.id!==this.identity?.id)return false;
+  this.status=null;this.localOfflineOwner=user.id;this.raw=cache.snapshot;
+  this.pending=pending;this.state=applyPending(hydrate(this.raw),this.pending);
+  this.syncState='offline';this.reviews=[];this.reviewError='';
+  if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)this.expanded.add(M.workspace(this.state).currentCoffeeId);
+  this.notice='Offline workspace. New shots save on this device and sync after reconnecting.';
+  this.render();return true;
  }
  async connect(){
   const user=this.identity,epoch=this.epoch;if(!user)return;
-  try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;this.status=status;
-   if(!status.admitted){this.raw=null;this.state=M.blankState();this.render();return;}
+  if(globalThis.navigator?.onLine===false)return this.restoreOfflineCache();
+  try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;this.status=status;this.localOfflineOwner=null;
+   if(!status.admitted){
+    await this.inSession(()=>this.store.clearCache?.(user.id));
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    this.raw=null;this.state=M.blankState();this.pending=[];this.render();return;
+   }
    const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
    await this.sync();
   }catch(err){if(epoch===this.epoch){this.notice=err.message;this.syncState='offline';this.render();}}
@@ -106,7 +137,8 @@ class CloudApp {
   this.render();
  }
  async mutate(action,payload,{onlineOnly=false}={}){
-  if(!this.identity||!this.status?.admitted)throw new Error('Sign in with beta access first.');
+  const offlineShot=action==='save_shot'&&!payload.expected_revision&&this.identity?.id===this.localOfflineOwner&&globalThis.navigator?.onLine===false;
+  if(!this.identity||(!this.status?.admitted&&!offlineShot))throw new Error('Sign in with beta access first.');
   if(onlineOnly&&(!navigator.onLine||this.pending.length))throw new Error('Reconnect and finish syncing before changing this setting. Offline shot logging remains available.');
   await this.inSession(()=>this.queue.enqueue(action,payload));this.pending=await this.inSession(()=>this.store.list(this.identity.id));
   this.state=applyPending(hydrate(this.raw),this.pending);this.render();
@@ -152,7 +184,7 @@ class CloudApp {
  }
  render(){
   const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
-  this.theme();const connected=this.identity&&this.status?.admitted&&!this.recovery;
+  this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;
   root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20),'settings','aria-label="Settings"','icon-button'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
   for(const details of root.querySelectorAll('details[data-retain]'))if(openDetails.includes(details.dataset.retain))details.open=true;
   this.syncReviewDialog();
@@ -162,6 +194,7 @@ class CloudApp {
   const freshHint=`<p class="helper" id="password-requirements">${e(PASSWORD_HINT)}</p>`;
   const password=(fresh=false)=>field(fresh?'New Password':'Password','password','',{type:'password',required:true,extra:`autocomplete="${fresh?'new-password':'current-password'}" ${fresh?'minlength="8" aria-describedby="password-requirements"':''}`});
   if(this.recovery)return `<section class=welcome><h2>Choose A New Password</h2><form id=auth-password>${password(true)}${freshHint}<button class="primary full space-top">Save Password</button></form></section>`;
+  if(this.identity&&globalThis.navigator?.onLine===false)return `<section class=welcome><h2>Reconnect To Continue</h2><p class=helper>Your saved workspace is unavailable offline until a previously admitted account and local session can be confirmed.</p></section>`;
   if(this.identity)return `<section class=welcome><h2>Your Invitation</h2><p class=helper>${e(this.identity.email)}</p><p class=helper>${this.status?.emailVerified?'Use the beta invitation supplied for your account.':'Verify your email before requesting beta access.'}</p><form id=auth-invite>${field('Invitation Code','token','',{required:true})}<button class="primary full space-top">Use Invitation</button></form>${button('Sign Out','signout','','text-button')}</section>`;
   if(this.authView==='check-email')return emailConfirmationView(this.confirmationEmail);
   const reset=this.authView==='reset',signup=this.authView==='signup';
@@ -172,7 +205,8 @@ class CloudApp {
   if(!setup)return `<section class="welcome text-center"><h2>A better next shot.</h2><p class=helper>Add your equipment setup to start logging shots and dialing in.</p>${button('Set Up My Workspace','new-setup','','primary')}</section>`;
   if(this.view==='community')return this.communityScreen();
   const list=M.visibleCoffees(s,this.sort,this.search,this.tempCoffee);
-  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline'}`,'sync',`data-sync-state="${this.pending.length?'pending':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
+  const offlineOnly=!this.status?.admitted&&this.localOfflineOwner===this.identity?.id;
+  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${offlineOnly?'':button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline'}`,'sync',`data-sync-state="${this.pending.length?'pending':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${offlineOnly?'<p class="helper" role="status">Offline: saved coffees and shot logging are available. Coffee lookup and Community require a connection.</p>':button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
    const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));const local=shots.filter(sh=>sh.setupVersionId===v.id&&sh.style===p.style),last=local[0];const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;
    return `<article class="coffee-card ${open?'is-open':''} ${w.currentCoffeeId===c.id?'is-current':''}"><button class=coffee-toggle data-action=expand data-id="${e(c.id)}" aria-expanded="${open}"><div class=coffee-title-area><div class=coffee-title>${e(c.name)}${w.currentCoffeeId===c.id?'<span class=current-mark>Current</span>':''}${success?'<span class=status-badge>Dialed In</span>':''}</div><div class=coffee-subtitle>${e(c.roaster)} · ${e(c.origin)}</div></div>${icon('chevron')}</button>${open?`<div class=coffee-body><div class=style-row>${styleBadge(p.style)}${button('Change Style','style',`data-id="${e(c.id)}"`,'ghost compact')}</div><div class=recipe-label>${success?'Your Dialed In Window':'Starting Recommendation'}</div>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}${button(`${icon('plus',16)} Log A Shot`,'log',`data-id="${e(c.id)}"`,'primary full log-cta')}${rec.reasons?.length?`<p class=recipe-reason>${e(rec.reasons[0])}</p>`:''}${last&&(!success||this.justSavedId===last.id)?`<section class=feedback-panel><h3>${e(advice.title)}</h3><p class=helper>${e(advice.text)}</p>${chips(last.tasteScales)}${radar(last.tasteScales)}</section>`:''}<details class=inline-disclosure data-retain="facts-${e(c.id)}"><summary>Coffee Details</summary><dl class=coffee-facts>${[['Roaster',c.roaster],['Origin',c.origin],['Elevation',c.elevationM],['Roast Level',c.roastLevel],['Process',c.process],['Variety',c.variety],['Producer',c.producer],['Tasting Notes',c.tastingNotes]].filter(x=>x[1]).map(([k,val])=>`<div><dt>${e(k)}</dt><dd>${e(val)}</dd></div>`).join('')}</dl><p class=helper>${c.status==='verified'?'Verified coffee record':'Saved privately while identity is checked.'}</p>${button('Edit Coffee Details','edit-coffee',`data-id="${e(c.id)}"`,'ghost compact')}${c.status==='pending'?button('Check For A Verified Match','check-pending-match',`data-id="${e(c.id)}"`,'ghost compact'):''}${this.raw?.submissions?.some(sub=>sub.canonical_coffee_id&&sub.status==='pending'&&sub.canonical_coffee_id===this.raw?.library?.find(l=>l.id===c.id)?.coffee_id)?'<p class="helper">Correction pending review. The shared coffee record is unchanged.</p>':''}</details><details class=inline-disclosure data-retain="history-${e(c.id)}"><summary>Shot History (${shots.length})</summary>${shots.length?`<div class="history-actions">${button(shots.every(sh=>this.shotExpanded.has(sh.id))?'Collapse All':'Expand All','shot-toggle-all',`data-id="${e(c.id)}"`,'text-button')}</div>`:''}${shots.map(sh=>shotCard(sh,{expanded:this.shotExpanded.has(sh.id),activeVersionId:v.id,unit:v.tempUnit})).join('')}</details></div>`:''}</article>`;
   }).join('')||'<p class="helper space-top">Add your first coffee to get started.</p>'}`;
