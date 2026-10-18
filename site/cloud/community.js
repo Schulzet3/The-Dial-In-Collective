@@ -11,9 +11,9 @@ export function communityReviewBanner(reviews=[],dismissed=new Set()){
   <div class="community-review-icon">${icon('shield',20)}</div>
   <div class="community-review-text">
    <p class="eyebrow">Quick Measurement Check</p>
-   <h3 id="community-review-title">Is this extraction time correct?</h3>
+   <h3 id="community-review-title">Are these shot measurements correct?</h3>
    <p class="helper">${e(name)} · ${e(r.style)} · ${fmt(r.dose_g)}g → ${fmt(r.yield_g)}g in <strong>${fmt(r.time_s)}s</strong></p>
-   <p class="helper">This shot is Dialed In, but its measurements differ considerably from comparable shots. Confirm the value or correct a typo to include accurate data in Community. Unusual recipes are welcome.</p>
+   <p class="helper">This shot is Dialed In, but one or more measurements differ considerably from comparable shots. Confirm the value or correct a typo to include accurate data in Community. Unusual recipes are welcome.</p>
    <div class="community-review-actions">
     ${button('Yes, It’s Correct','community-confirm-outlier',`data-id="${e(r.shot_id)}" data-revision="${e(r.revision)}"`,'primary compact')}
     ${button('Correct Shot','community-correct-outlier',`data-id="${e(r.shot_id)}"`,'ghost compact')}
