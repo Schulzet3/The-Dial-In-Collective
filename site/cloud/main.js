@@ -14,11 +14,11 @@ import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill
 import {communityReviewBanner,communityPage} from './community.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales}=U;
 const root=document.querySelector('#app'),sheet=document.querySelector('#sheet');
-const reviewSheet=document.createElement('dialog');
+const reviewSheet=typeof document.createElement==='function'?document.createElement('dialog'):{open:false,dataset:{},setAttribute(){},replaceChildren(){},close(){},addEventListener(){},querySelector(){return null;}};
 reviewSheet.id='community-required-review';
 reviewSheet.className='community-required-review';
 reviewSheet.setAttribute('aria-label','Required shot measurement confirmation');
-document.body.append(reviewSheet);
+if(typeof document.createElement==='function')document.body.append(reviewSheet);
 const uuid=()=>crypto.randomUUID();
 function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`Dial_In_Collective_Pending_Changes_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 class CloudApp {
