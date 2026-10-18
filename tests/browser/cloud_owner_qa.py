@@ -1,503 +1,297 @@
-import * as C from '../lib/constants.js';
-import * as M from '../lib/model.js';
-import * as E from '../lib/engine.js';
-import * as U from '../lib/ui.js';
-import {CloudError,createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT} from './client.js';
-import {IndexedStore,Outbox} from './outbox.js';
-import {hydrate,applyPending,shotPayload} from './mapping.js';
-import {CLOUD_CONFIG} from './config.js';
-import {emailConfirmationView} from './confirmation.js';
-import {shotCard} from './shot_card.js';
-import {applyAppearance,readAppearance} from './appearance.js';
-import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
-import {communityReviewBanner,communityPage} from './community.js';
-const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales}=U;
-const root=document.querySelector('#app'),sheet=document.querySelector('#sheet');
-const reviewSheet=typeof document.createElement==='function'?document.createElement('dialog'):{open:false,dataset:{},setAttribute(){},replaceChildren(){},close(){},addEventListener(){},querySelector(){return null;}};
-reviewSheet.id='community-required-review';
-reviewSheet.className='community-required-review';
-reviewSheet.setAttribute('aria-label','Required shot measurement confirmation');
-if(typeof document.createElement==='function')document.body.append(reviewSheet);
-const uuid=()=>crypto.randomUUID();
-function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`Dial_In_Collective_Pending_Changes_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
-class CloudApp {
- constructor(client,store=new IndexedStore()){
-  Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0});
-  this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;
-  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';
-  this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
-  this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
- }
- async inSession(operation){
-  const owner=this.identity?.id,epoch=this.epoch;
-  const changed=()=>owner!==this.identity?.id||epoch!==this.epoch;
-  try{const result=await operation();if(changed())throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');return result;}
-  catch(error){if(changed())throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');throw error;}
- }
- resetAccount(){
-  this.epoch++;this.status=null;this.raw=null;this.state=M.blankState();this.pending=[];
-  this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
-  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;
-  this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
-  this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
-  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityStyle='all';this.communityCoffee='all';this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
-  if(reviewSheet.open)reviewSheet.close();reviewSheet.replaceChildren();
-  sheet.close();sheet.innerHTML='';
- }
- authChanged(event,user){
-  const changed=this.identity?.id!==user?.id;
-  if(changed)this.resetAccount();
-  if(event==='PASSWORD_RECOVERY')this.recovery=true;
-  this.identity=user;
-  // Remove the former account's rendered records before the next network read.
-  if(changed||event==='SIGNED_OUT'||event==='PASSWORD_RECOVERY')this.render();
-  if(user&&event!=='TOKEN_REFRESHED')this.connect().catch(err=>this.error(err));
- }
- async init(){
-  document.addEventListener('click',ev=>this.click(ev));document.addEventListener('submit',ev=>this.submit(ev));
-  document.addEventListener('input',ev=>this.input(ev));document.addEventListener('change',ev=>this.change(ev));
-  sheet.addEventListener('cancel',ev=>ev.preventDefault());
-  sheet.addEventListener('close',()=>this.syncReviewDialog());
-  reviewSheet.addEventListener('cancel',ev=>ev.preventDefault());
-  this.client.onAuthChange((event,user)=>this.authChanged(event,user));
-  const epoch=this.epoch;
-  try{const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;}catch{/* Missing session is the normal signed-out state. */}
-  if(this.identity)await this.connect();else this.render();
-  addEventListener('online',()=>this.sync().catch(err=>this.error(err)));
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)this.sync().catch(err=>this.error(err));});
-  this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.sync().catch(()=>{});},30000);
- }
- async connect(){
-  const user=this.identity,epoch=this.epoch;if(!user)return;
-  try{const status=await this.client.status();if(epoch!==this.epoch||user.id!==this.identity?.id)return;this.status=status;
-   if(!status.admitted){this.raw=null;this.state=M.blankState();this.render();return;}
-   const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
-   await this.sync();
-  }catch(err){if(epoch===this.epoch){this.notice=err.message;this.syncState='offline';this.render();}}
- }
- async sync(){
-  const owner=this.identity?.id,epoch=this.epoch;
-  // An old account's inflight sync must not block the new account forever or
-  // accidentally satisfy its required cache/state refresh.
-  while(this.flushing){
-   if(this.flushingOwner===owner&&this.flushingEpoch===epoch)return this.flushing;
-   try{await this.flushing;}catch{/* New identity can retry independently. */}
-   if(this.identity?.id!==owner||this.epoch!==epoch)return;
+from pathlib import Path
+import re,json,shutil
+from playwright.sync_api import sync_playwright
+ROOT=Path(__file__).resolve().parents[2];SITE=ROOT/'site';OUT=ROOT/'qa_artifacts/cloud';OUT.mkdir(parents=True,exist_ok=True)
+def bundle():
+ s='(()=>{const Modules={};\n'
+ def imports(t):
+  t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
+  t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
+  return t
+ for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill']:
+  folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
+  t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
+  t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
+ t=(SITE/'cloud/main.js').read_text();t=t.replace("import {CLOUD_CONFIG} from './config.js';","const CLOUD_CONFIG={enabled:false};").replace('startCloudApp();','').replace('export {CloudApp};','');t=re.sub(r'\bexport\s+','',imports(t))
+ s+=t+'\nwindow.__CloudApp=CloudApp;window.__Modules=Modules;})();';return s
+fixture=(ROOT/'tests/cloud-fixtures/raw.js').read_text().replace('export ','')
+mock='''
+if(!crypto.randomUUID){let id=0;crypto.randomUUID=()=> '11111111-1111-4111-8111-'+String(++id).padStart(12,'0');}
+window.__memory={events:[],receipts:[],cache:null,seq:0};
+window.__raw=rawFixture(); window.__who=null;window.__admitted=false;window.__offline=false;window.__calls=[];
+window.__store={
+ async readCache(){return window.__memory.cache;},async saveCache(owner,snapshot){window.__memory.cache={owner,snapshot:structuredClone(snapshot)};},
+ async list(owner){return structuredClone(window.__memory.events.filter(x=>x.owner===owner).sort((a,b)=>a.sequence-b.sequence));},
+ async put(e){const m=window.__memory;const i=m.events.findIndex(x=>x.owner===e.owner&&x.id===e.id);if(i>=0)m.events[i]={...e,sequence:m.events[i].sequence};else m.events.push({...structuredClone(e),sequence:++m.seq});},
+ async acknowledge(e,r){window.__memory.receipts.push({e,r});if(window.__memory.cache)window.__memory.cache.snapshot=window.__Modules.cache.patchAcknowledgement(window.__memory.cache.snapshot,e,r);window.__memory.events=window.__memory.events.filter(x=>x.id!==e.id);},
+ async export(){return structuredClone(window.__memory);}
+};
+window.__client={
+ onAuthChange(fn){window.__authEvent=fn;return ()=>{};},async identity(){return window.__who;},
+ async signIn(email){window.__who={id:OWNER,email};return {};},async signUp(){return {};},
+ async requestReset(){return 'If that address has an account, a recovery email has been requested.';},async setPassword(){return {};},
+ async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
+ async listCommunityReviews(){return window.__reviews||[];},async confirmCommunityOutlier(){window.__reviews=[];return {ok:true,state:'eligible'};},
+ async browseCommunityShots(){return {shots:window.__communityShots||[],total:(window.__communityShots||[]).length};},
+
+ async editCoffeeDetails(entryId,expected,data,url){
+  const r=window.__raw,l=r.library.find(x=>x.id===entryId);
+  if(!l)throw Error('Coffee entry not found');
+  if(l.submission_id&&!l.coffee_id){
+   const sub=r.submissions.find(x=>x.id===l.submission_id);
+   if(sub.revision!==expected)return {ok:false,code:'conflict'};
+   sub.proposed_data={...sub.proposed_data,...data};sub.source_url=url;
+   sub.revision++;return {ok:true,kind:'updated_pending'};
   }
-  this.flushingOwner=owner;this.flushingEpoch=epoch;
-  const task=this.doSync().finally(()=>{
-   if(this.flushing===task){this.flushing=null;this.flushingOwner=null;this.flushingEpoch=null;}
-  });
-  this.flushing=task;return task;
- }
- async doSync(){
-  const who=this.identity,epoch=this.epoch;if(!who||!this.status?.admitted)return;
-  const outcome=await this.queue.flush();if(epoch!==this.epoch||who.id!==this.identity?.id)return;
-  this.syncState=outcome.state;const pending=await this.store.list(who.id);
-  if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
-  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;}
-  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
-  this.state=applyPending(hydrate(this.raw),this.pending);
-  // A known flagged shot cannot be deferred. A failed refresh cannot erase
-  // an outstanding hold; queue/offline data remains recoverable.
-  if(!this.pending.length&&navigator.onLine){try{const held=await this.client.listCommunityReviews();if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.reviews=held;this.reviewError='';}catch{this.reviewError='Required shot reviews are temporarily unavailable. Reconnect and check Sync.';}}
-  if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)this.expanded.add(M.workspace(this.state).currentCoffeeId);
-  this.render();
- }
- async mutate(action,payload,{onlineOnly=false}={}){
-  if(!this.identity||!this.status?.admitted)throw new Error('Sign in with beta access first.');
-  if(onlineOnly&&(!navigator.onLine||this.pending.length))throw new Error('Reconnect and finish syncing before changing this setting. Offline shot logging remains available.');
-  await this.inSession(()=>this.queue.enqueue(action,payload));this.pending=await this.inSession(()=>this.store.list(this.identity.id));
-  this.state=applyPending(hydrate(this.raw),this.pending);this.render();
-  await this.inSession(()=>this.sync());
-  if(onlineOnly&&this.pending.length)throw new Error('The change is preserved in the sync queue. Open Sync details to check its status.');
- }
- error(err){
-  if(err.code==='account_changed')return;
-  this.notice=err.message||'The change could not be completed.';
-  // The closed Edit form still contains a stale alert node. Report errors
-  // within the currently visible modal, not behind a required review dialog.
-  const surface=sheet.open?sheet:reviewSheet.open?reviewSheet:null;
-  if(!surface){this.render();return;}
-  let alert=surface.querySelector('[role=alert]');
-  if(!alert){
-   alert=document.createElement('p');
-   alert.setAttribute('role','alert');
-   alert.className='helper';
-   (surface.querySelector('.community-review-text')||surface).append(alert);
-  }
-  alert.textContent=this.notice;
- }
- theme(){applyAppearance(this.identity&&this.raw?this.state.theme:readAppearance());}
- show(title,body){sheet.innerHTML=`<div class=sheet-layout><header class=sheet-header><h2 id=sheet-title>${e(title)}</h2>${button(icon('close',21),'close','aria-label="Close"','icon-button')}</header><div class=sheet-content>${body}<div role=alert class=helper></div></div>`;if(!sheet.open)sheet.showModal();sheet.querySelector('[data-action=close]').focus({preventScroll:true});}
- syncReviewDialog(){
-  const review=this.reviews[0];
-  const active=!!review&&!!this.identity&&!!this.status?.admitted
-   &&!this.recovery&&navigator.onLine&&this.syncState!=='offline'&&!this.pending.length;
-  if(!active){
-   if(reviewSheet.open)reviewSheet.close();
-   reviewSheet.replaceChildren();delete reviewSheet.dataset.key;return;
-  }
-  // Do not interrupt an in-progress form. Edit Shot can stack above the
-  // required dialog and closing Edit returns to this unresolved prompt.
-  if(sheet.open&&!reviewSheet.open)return;
-  const key=`${review.shot_id}:${review.revision}:${this.reviews.length}`;
-  if(reviewSheet.dataset.key!==key){
-   reviewSheet.innerHTML=communityReviewBanner(this.reviews);
-   reviewSheet.dataset.key=key;
-  }
-  if(!reviewSheet.open)reviewSheet.showModal();
-  reviewSheet.querySelector('[data-action=community-confirm-outlier]')?.focus({preventScroll:true});
- }
- render(){
-  const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
-  this.theme();const connected=this.identity&&this.status?.admitted&&!this.recovery;
-  root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20),'settings','aria-label="Settings"','icon-button'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
-  for(const details of root.querySelectorAll('details[data-retain]'))if(openDetails.includes(details.dataset.retain))details.open=true;
-  this.syncReviewDialog();
- }
- auth(){
-  const email=()=>field('Email','email','',{type:'email',required:true,extra:'autocomplete="email"'});
-  const freshHint=`<p class="helper" id="password-requirements">${e(PASSWORD_HINT)}</p>`;
-  const password=(fresh=false)=>field(fresh?'New Password':'Password','password','',{type:'password',required:true,extra:`autocomplete="${fresh?'new-password':'current-password'}" ${fresh?'minlength="8" aria-describedby="password-requirements"':''}`});
-  if(this.recovery)return `<section class=welcome><h2>Choose A New Password</h2><form id=auth-password>${password(true)}${freshHint}<button class="primary full space-top">Save Password</button></form></section>`;
-  if(this.identity)return `<section class=welcome><h2>Your Invitation</h2><p class=helper>${e(this.identity.email)}</p><p class=helper>${this.status?.emailVerified?'Use the beta invitation supplied for your account.':'Verify your email before requesting beta access.'}</p><form id=auth-invite>${field('Invitation Code','token','',{required:true})}<button class="primary full space-top">Use Invitation</button></form>${button('Sign Out','signout','','text-button')}</section>`;
-  if(this.authView==='check-email')return emailConfirmationView(this.confirmationEmail);
-  const reset=this.authView==='reset',signup=this.authView==='signup';
-  return `<section class="welcome cloud-auth"><h2>${reset?'Reset Your Password':signup?'Create Your Account':'Welcome Back'}</h2><p class=helper>Your coffee, wherever you brew.</p><form id="auth-${this.authView}">${email()}${reset?'':password(signup)}${signup?freshHint:''}<button class="primary full space-top">${reset?'Send Recovery Email':signup?'Create Account':'Sign In'}</button></form><div class=row-actions>${button(signup||reset?'Back To Sign In':'Create An Account','auth-view',`data-view="${signup||reset?'signin':'signup'}"`,'text-button')}${!reset?button('Forgot Password?','auth-view','data-view="reset"','text-button'):''}</div></section>`;
- }
- coffees(){
-  const s=this.state,setup=M.activeSetup(s),w=M.workspace(s);
-  if(!setup)return `<section class="welcome text-center"><h2>A better next shot.</h2><p class=helper>Add your equipment setup to start logging shots and dialing in.</p>${button('Set Up My Workspace','new-setup','','primary')}</section>`;
-  if(this.view==='community')return this.communityScreen();
-  const list=M.visibleCoffees(s,this.sort,this.search,this.tempCoffee);
-  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline'}`,'sync',`data-sync-state="${this.pending.length?'pending':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
-   const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));const local=shots.filter(sh=>sh.setupVersionId===v.id&&sh.style===p.style),last=local[0];const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;
-   return `<article class="coffee-card ${open?'is-open':''} ${w.currentCoffeeId===c.id?'is-current':''}"><button class=coffee-toggle data-action=expand data-id="${e(c.id)}" aria-expanded="${open}"><div class=coffee-title-area><div class=coffee-title>${e(c.name)}${w.currentCoffeeId===c.id?'<span class=current-mark>Current</span>':''}${success?'<span class=status-badge>Dialed In</span>':''}</div><div class=coffee-subtitle>${e(c.roaster)} · ${e(c.origin)}</div></div>${icon('chevron')}</button>${open?`<div class=coffee-body><div class=style-row>${styleBadge(p.style)}${button('Change Style','style',`data-id="${e(c.id)}"`,'ghost compact')}</div><div class=recipe-label>${success?'Your Dialed In Window':'Starting Recommendation'}</div>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}${button(`${icon('plus',16)} Log A Shot`,'log',`data-id="${e(c.id)}"`,'primary full log-cta')}${rec.reasons?.length?`<p class=recipe-reason>${e(rec.reasons[0])}</p>`:''}${last&&(!success||this.justSavedId===last.id)?`<section class=feedback-panel><h3>${e(advice.title)}</h3><p class=helper>${e(advice.text)}</p>${chips(last.tasteScales)}${radar(last.tasteScales)}</section>`:''}<details class=inline-disclosure data-retain="facts-${e(c.id)}"><summary>Coffee Details</summary><dl class=coffee-facts>${[['Roaster',c.roaster],['Origin',c.origin],['Elevation',c.elevationM],['Roast Level',c.roastLevel],['Process',c.process],['Variety',c.variety],['Producer',c.producer],['Tasting Notes',c.tastingNotes]].filter(x=>x[1]).map(([k,val])=>`<div><dt>${e(k)}</dt><dd>${e(val)}</dd></div>`).join('')}</dl><p class=helper>${c.status==='verified'?'Verified coffee record':'Saved privately while identity is checked.'}</p>${button('Edit Coffee Details','edit-coffee',`data-id="${e(c.id)}"`,'ghost compact')}${c.status==='pending'?button('Check For A Verified Match','check-pending-match',`data-id="${e(c.id)}"`,'ghost compact'):''}${this.raw?.submissions?.some(sub=>sub.canonical_coffee_id&&sub.status==='pending'&&sub.canonical_coffee_id===this.raw?.library?.find(l=>l.id===c.id)?.coffee_id)?'<p class="helper">Correction pending review. The shared coffee record is unchanged.</p>':''}</details><details class=inline-disclosure data-retain="history-${e(c.id)}"><summary>Shot History (${shots.length})</summary>${shots.length?`<div class="history-actions">${button(shots.every(sh=>this.shotExpanded.has(sh.id))?'Collapse All':'Expand All','shot-toggle-all',`data-id="${e(c.id)}"`,'text-button')}</div>`:''}${shots.map(sh=>shotCard(sh,{expanded:this.shotExpanded.has(sh.id),activeVersionId:v.id,unit:v.tempUnit})).join('')}</details></div>`:''}</article>`;
-  }).join('')||'<p class="helper space-top">Add your first coffee to get started.</p>'}`;
- }
- communityScreen(){
-  const syncText=this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline';
-  const nav='<nav class="app-nav">'
-   +button(icon('coffee',16)+' Coffees','home','','')
-   +button(icon('users',16)+' Community','community','','active')
-   +'<span class="local-label">'+button(icon('cloud',14)+' '+e(syncText),
-     'sync','','sync-indicator')+'</span></nav>';
-  return nav+communityPage({shots:this.communityRows,total:this.communityTotal,
-    loading:this.communityLoading,error:this.communityError,
-    style:this.communityStyle,coffee:this.communityCoffee});
- }
- async loadCommunity({more=false}={}){
-  if(this.communityLoading||!this.identity||!this.status?.admitted)return;
-  const owner=this.identity.id,epoch=this.epoch;
-  const offset=more?this.communityRows.length:0;
-  this.communityLoading=true;this.communityError='';this.render();
-  try{
-   if(!navigator.onLine)throw new Error('Connect to the internet to browse Community shots.');
-   const page=await this.inSession(()=>this.client.browseCommunityShots({limit:20,offset}));
-   if(owner!==this.identity?.id||epoch!==this.epoch)return;
-   if(!Array.isArray(page?.shots)||!Number.isFinite(Number(page.total)))
-    throw new Error('Community data is temporarily unavailable.');
-   this.communityRows=more?[...this.communityRows,...page.shots]:page.shots;
-   this.communityTotal=Number(page.total);
-  }catch{
-   if(owner===this.identity?.id&&epoch===this.epoch)
-    this.communityError='Community is temporarily unavailable. Your personal shots remain unchanged.';
-  }finally{
-   if(owner===this.identity?.id&&epoch===this.epoch){
-    this.communityLoading=false;this.render();
-   }
-  }
- }
- settings(){
-  const v=M.activeVersion(this.state),setup=M.activeSetup(this.state),pref=this.raw?.preferences;
-  this.prefRevision=pref?.revision;
-  this.show('Settings',`<p class="settings-account helper">${e(this.identity.email)}</p>
-   <section class="settings-section settings-preferences" aria-labelledby="preferences-heading">
-    <h3 class="settings-heading" id="preferences-heading">Preferences</h3>
-    <form id=preferences>${select('Appearance','theme',[{value:'system',label:'System'},{value:'light',label:'Light'},{value:'dark',label:'Dark'}],this.state.theme)}
-     <label class="field space-top"><span>Tasting Preferences</span><textarea name=tasting_preferences>${e(this.state.preferences)}</textarea></label>
-     <button class="primary full space-top">Save Preferences</button></form>
-   </section>
-   <section class="settings-section" aria-labelledby="setup-heading">
-    <h3 class="settings-heading" id="setup-heading">Your Setup</h3>
-    ${setup?`<div class="settings-setup"><div><small>Active Setup</small><strong>${e(setup.name)}</strong></div>${button('Rename','rename-setup',`data-id="${e(setup.id)}"`,'ghost compact')}</div>`:''}
-    ${button(`${icon('plus',18)}<span>Add Another Setup</span>${icon('chevron',16)}`,'new-setup','','settings-row')}
-    ${v?`<details class="advanced settings-advanced"><summary>Advanced Setup Options</summary><form id=advanced>
-     ${checkbox('track_temperature','Track Brew Temperature',v.advanced.temperature)}
-     ${select('Temperature Units','temperature_unit',['F','C'],v.tempUnit)}
-     ${checkbox('track_slow_feed','Track Slow Feeding',v.advanced.slowFeed)}
-     <button class="primary full">Save Advanced Options</button></form></details>`:''}
-   </section>
-   ${this.status?.admin?`<section class="settings-section settings-admin" aria-label="Administration"><h3 class="settings-heading">Administration</h3>${button(`${icon('shield',18)}<span>Admin Dashboard</span>${icon('chevron',16)}`,'open-admin','','settings-row')}</section>`:''}
-   <section class="settings-section" aria-label="Community and privacy">
-    <details class="advanced settings-advanced">
-     <summary>Community &amp; Privacy</summary>
-     <p class="helper">Dialed-In shots from verified coffees contribute anonymously after validation. Qualifying contributions may remain even if you hide a personal shot or delete your account; private notes, account names, and personal setup details are never shared.</p>
-    </details>
-   </section>
-   <section class="settings-section settings-system" aria-label="Cloud Sync">
-    ${button(`${icon('cloud',18)}<span>Cloud Sync Details</span>${icon('chevron',16)}`,'sync','','settings-row')}
-   </section>
-   <div class="settings-signout">${button(`${icon('signout',18)}<span>Sign Out On This Device</span>`,'signout','','settings-row signout-row')}</div>`);
-  const sp=this.raw?.setupPreferences.find(p=>p.setup_version_id===v?.id);this.setupPrefRevision=sp?.revision;
- }
- showSetup(){this.show('New Setup',`<form id=new-setup>${field('Setup Name','name','',{required:true,placeholder:'Home'})}<div class="form-grid space-top">${field('Basket Dose (g)','basket_dose_g','',{required:true,type:'number',step:'.1',min:5,max:40})}${field('Finest Espresso Setting','finest_setting','',{required:true,type:'number',step:'.1',min:0})}${field('Coarsest Espresso Setting','coarsest_setting','',{required:true,type:'number',step:'.1',min:0})}</div><details class=advanced><summary>Equipment Details (Optional)</summary>${field('Machine','machine_model')}${field('Grinder','grinder_model')}${field('Burr Set','burr_set')}${field('Basket Model','basket_model')}</details><button class="primary full space-top">Create Setup</button></form>`);}
- showRenameSetup(id){
-  const setup=this.state.setups.find(x=>x.id===id),record=this.raw?.setups?.find(x=>x.id===id);
-  if(!setup||!record)throw new Error('Refresh your cloud data before renaming this setup.');
-  this.renameSetupId=id;this.renameSetupRevision=record.revision;
-  this.show('Rename Setup',`<form id=rename-setup>${field('Setup Name','name',setup.name,{required:true,extra:'maxlength="100" autocomplete="off"'})}
-   <p class="helper space-top">Renaming does not change your equipment history, shots, or recommendations.</p>
-   <button class="primary full space-top">Save Name</button></form>`);
- }
- showEditCoffee(id){
-  const c=this.state.coffees.find(x=>x.id===id);
-  const entry=this.raw?.library?.find(l=>l.id===id);
-  if(!c||!entry)throw new Error('Refresh this coffee before editing.');
-  const original=this.raw?.submissions?.find(x=>x.id===entry.submission_id);
-  const canonical=this.raw?.coffees?.find(x=>x.id===entry.coffee_id);
-  const correction=canonical?this.raw?.submissions?.filter(x=>x.canonical_coffee_id===canonical.id&&x.status==='pending')
-   .sort((a,b)=>(b.updated_at||'').localeCompare(a.updated_at||''))[0]:null;
-  const source=correction||original;
-  if(!canonical&&source?.status!=='pending')throw new Error('This coffee submission is no longer editable.');
-  const data=source?.proposed_data||canonical||{};
-  this.editCoffeeId=id;this.editCoffeeRevision=source?.revision||canonical?.revision;
-  if(!this.editCoffeeRevision)throw new Error('Coffee revision unavailable. Refresh and retry.');
-  this.show(canonical?'Suggest Coffee Corrections':'Edit Coffee Details',`<form id=edit-coffee>
-   ${field('Coffee Name','name',data.name||'',{required:true})}
-   ${field('Roaster','roaster',data.roaster||'',{required:true})}
-   ${field('Release / Harvest (If Shown)','release_label',data.release_label||'')}
-   <div class="form-grid coffee-detail-grid">
-    ${field('Origin','origin',data.origin||'')}
-    ${select('Roast Level','roast_level',['',...C.ROASTS],C.canonicalRoastLevel(data.roast_level||'')||'')}
-    ${field('Elevation','elevation_m',data.elevation_m||'')}
-    ${select('Process','process',['',...C.PROCESSES],data.process||'')}
-    ${field('Variety','variety',data.variety||'')}
-    ${field('Producer','producer',data.producer||'')}
-   </div>
-   ${field('Tasting Notes','tasting_notes',data.tasting_notes||'')}
-   ${field('Official Source URL (Optional)','source_url',source?.source_url||'',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
-   <p class="helper space-top">${canonical?'Verified coffee corrections are submitted for review, not immediately applied to shared facts. Your historical shots remain intact.':'Your Pending coffee details update immediately for your account without changing saved shots.'}</p>
-   <button class="primary full space-top" type="submit">${canonical?'Submit Correction For Review':'Save Coffee Details'}</button>
-  </form>`);
- }
- showAdd(){this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.coffeeUrlPreviewInput=null;
-  this.show('New Coffee',`<form id=new-coffee>
-   <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
-    <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary compact')}
-     <span class="helper">Optional · Official coffee product page</span></div>
-   </div>
-   <div id="coffee-url-feedback" aria-live="polite"></div>
-   ${field('Name / Bag Label','name','',{required:true})}
-   ${field('Roaster','roaster','',{required:true})}
-   ${field('Release / Harvest (If Shown)','release_label','')}
-   <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
-   ${field('Tasting Notes','tasting_notes')}
-   <button class="primary full space-top">Add Coffee</button>
-   <p class="helper space-top">Check all suggested information before saving. Missing details can be entered manually.</p>
-  </form>`);
- }
- async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){
-  if(chosenId){
-   await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:uuid()},{onlineOnly:true});
-   const library=this.raw?.library?.find(x=>x.coffee_id===chosenId);
-   this.tempCoffee=library?.id||null;
-   if(library)this.expanded.add(library.id);
-   sheet.close();this.notice='Added the existing verified coffee. No duplicate was created.';this.render();return;
-  }
-  const lid=uuid(),{source_url,proposed_data}=proposalWithRecognizedRoaster(d,matched);
-  await this.mutate('submit_coffee',{library_entry_id:lid,source_url,proposed_data,confirmed_distinct:confirmedDistinct},{onlineOnly:true});
-  this.tempCoffee=lid;this.expanded.add(lid);sheet.close();
-  const entry=this.raw?.library?.find(x=>x.id===lid);
-  const proposal=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
-  if(entry?.coffee_id){
-   this.notice='Coffee automatically approved and added to the shared catalog.';
+  const canon=r.coffees.find(x=>x.id===l.coffee_id);
+  let correction=r.submissions.find(x=>x.canonical_coffee_id===canon.id&&x.status==='pending');
+  if(correction){
+   if(correction.revision!==expected)return {ok:false,code:'conflict'};
+   correction.proposed_data={...data};correction.source_url=url;correction.revision++;
   }else{
-   this.notice='Coffee saved. Checking official roaster evidence when available; you can log shots now.';
-   if(proposal?.id&&proposal?.source_url&&this.client.verifyCoffeeSource){
-    try{
-     const checked=await this.inSession(()=>this.client.verifyCoffeeSource(proposal.id));
-     if(checked?.status==='verified'){
-      await this.inSession(()=>this.sync());this.notice='Official source verified. Your coffee is now in the shared catalog.';
-     }else if(checked?.reason==='needs_confirmation'){
-      this.notice='Coffee saved. A possible duplicate needs confirmation; nothing was merged.';
-     }else this.notice='Coffee saved for private use. Official-source verification is pending.';
-    }catch(error){if(error.code==='account_changed')throw error;this.notice='Coffee saved for private use. Official-source checks can be retried later.';}
-   }
+   if(canon.revision!==expected)return {ok:false,code:'conflict'};
+   correction={id:'12345678-1234-4123-8123-000000000222',owner_id:OWNER,
+    canonical_coffee_id:canon.id,base_coffee_revision:canon.revision,
+    status:'pending',proposed_data:{...data},source_url:url,revision:1,updated_at:TIME};
+   r.submissions.push(correction);
   }
-  this.render();
+  return {ok:true,kind:'correction_requested'};
+ },
+
+ async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async previewCoffeeUrl(){return {ok:false,reason:'unrecognized_official_roaster'};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
+ async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
+ if(e.action==='submit_coffee'){
+  const submission='11111111-1111-4111-8111-000000000099';
+  r.submissions.push({id:submission,owner_id:OWNER,status:'pending',proposed_data:d.proposed_data,source_url:d.source_url,revision:1,created_at:TIME});
+  r.library.push({id:d.library_entry_id,owner_id:OWNER,submission_id:submission,coffee_id:null,created_at:TIME});
+  return {ok:true,library_entry_id:d.library_entry_id,submission_id:submission};
  }
-  showLog(cid,editing=null){
-  const c=this.state.coffees.find(c=>c.id===cid),v=M.activeVersion(this.state);this.logCoffee=cid;this.editing=editing;
-  this.draft=editing?C.clone(editing):E.prefill(this.state,cid);this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
-  const d=this.draft,rec=E.recommendation(this.state,cid);this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1'})}${!editing?button('Use Recommendation','use-temp','','use-recommendation'):''}</div>`:''}</div>${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><p class=helper role=alert></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
+ if(e.action==='add_verified_coffee'){
+  let entry=r.library.find(x=>x.coffee_id===d.coffee_id);
+  if(!entry){entry={id:d.library_entry_id,owner_id:OWNER,coffee_id:d.coffee_id,submission_id:null,created_at:TIME};r.library.push(entry);}
+  return {ok:true,library_entry_id:entry.id};
  }
- readDraft(){const f=sheet.querySelector('#shot');if(!f)return;for(const key of ['doseG','yieldG','timeS','grindSetting'])this.draft[key]=f.elements[key].value;this.draft.notes=f.elements.notes.value;if(f.elements.temperature)this.draft.tempC=C.tempInput(f.elements.temperature.value,this.logUnit);if(f.elements.slowFeed)this.draft.feedMode=f.elements.slowFeed.checked?'slow':'standard';}
- async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
-  try{
-   if(a==='close'){sheet.close();return;}
-   if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
-   if(a==='settings'){this.settings();return;}
-   if(a==='new-setup'){this.showSetup();return;}
-   if(a==='open-admin'){location.assign('/admin.html');return;}
-   if(a==='rename-setup'){this.showRenameSetup(id);return;}
-   if(a==='add'){this.showAdd();return;}
-    if(a==='preview-coffee-url'){
-     const form=sheet.querySelector('#new-coffee'),panel=form?.querySelector('#coffee-url-feedback');
-     if(!form||!panel||this.coffeeUrlBusy)return;
-     const raw=String(form.elements.source_url.value||'').trim();
-     if(!raw){panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'invalid_url'});return;}
-     this.coffeeUrlBusy=true;this.coffeeUrlPreviewInput=null;
-     const original=target.textContent;target.disabled=true;target.textContent='Checking URL...';
-     try{
-      const found=await this.inSession(()=>this.client.previewCoffeeUrl(raw));
-      if(!sheet.open||sheet.querySelector('#new-coffee')!==form||form.elements.source_url.value.trim()!==raw)return;
-      
-      this.coffeeUrlPreviewInput=found?.ok?raw:null;
-      // One click populates available blanks, then the member reviews and
-      // presses Add Coffee. Never overwrite typed facts or silently approve.
-      if(found?.ok)applyCoffeeUrlFields(form,found);
-      panel.innerHTML=coffeeUrlPreviewMarkup(found);
-     }catch{
-      if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
-     }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
-     return;
-    }
-    if(a==='check-pending-match'){
-     const entry=this.raw?.library?.find(x=>x.id===id);
-     const submission=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
-     if(!submission||submission.status!=='pending')throw new Error('This coffee is no longer Pending.');
-     const matched=await this.inSession(()=>this.client.findCoffeeMatches({...submission.proposed_data,source_url:submission.source_url}));
-     if(!matched?.candidates?.length){
-      this.notice='No verified match yet. Your coffee and shot history remain safe.';this.render();return;
-     }
-     this.pendingMergeSubmissionId=submission.id;this.addCoffeeMatches=matched;
-     this.show('Is this the same coffee?',matchReviewMarkup(matched,{pending:true}));return;
-    }
-    if(a==='choose-coffee-match'||a==='add-distinct-coffee'){
-     if(this.pendingMergeSubmissionId){
-      if(a==='add-distinct-coffee'){this.pendingMergeSubmissionId=null;sheet.close();return;}
-      if(!this.addCoffeeMatches?.candidates?.some(c=>c.id===id))throw new Error('That verified match was not offered.');
-      await this.mutate('confirm_coffee_existing',{submission_id:this.pendingMergeSubmissionId,coffee_id:id},{onlineOnly:true});
-      this.pendingMergeSubmissionId=null;sheet.close();this.notice='Matched to the original verified coffee. Your original shots are preserved.';this.render();return;
-     }
-     if(this.addingCoffee)return;
-     if(!this.addCoffeeDraft)throw new Error('Add Coffee Details were lost. Please enter them again.');
-     const idToUse=a==='choose-coffee-match'?id:null;
-     if(idToUse && !this.addCoffeeMatches?.candidates?.some(c=>c.id===idToUse))
-      throw new Error('That verified coffee is not in the current match list.');
-     this.addingCoffee=true;
-     try{await this.finishCoffeeAdd(this.addCoffeeDraft,this.addCoffeeMatches,idToUse,{confirmedDistinct:a==='add-distinct-coffee'});}
-     finally{this.addingCoffee=false;}
-     return;
-    }
-   if(a==='expand'){if(this.expanded.has(id)){this.expanded.delete(id);if(this.tempCoffee===id)this.tempCoffee=null;}else this.expanded.add(id);this.render();return;}
-   if(a==='shot-expand'){this.shotExpanded.has(id)?this.shotExpanded.delete(id):this.shotExpanded.add(id);this.render();return;}
-   if(a==='shot-toggle-all'){const ids=this.state.shots.filter(sh=>sh.coffeeId===id&&!sh.hidden).map(sh=>sh.id);const collapse=ids.length>0&&ids.every(shotId=>this.shotExpanded.has(shotId));for(const shotId of ids){if(collapse)this.shotExpanded.delete(shotId);else this.shotExpanded.add(shotId);}this.render();return;}
-   if(a==='search-toggle'){this.searchOpen=!this.searchOpen;if(!this.searchOpen)this.search='';this.render();return;}
-   if(a==='log'){this.showLog(id);return;}
-   if(a==='edit-coffee'){if(this.pending.length)throw new Error('Finish syncing before editing coffee details.');this.showEditCoffee(id);return;}
-   if(a==='edit'){if(this.pending.length)throw new Error('Finish syncing before editing existing shots.');const sh=this.state.shots.find(x=>x.id===id);this.showLog(sh.coffeeId,sh);return;}
-   if(a==='rate'){this.readDraft();this.draft.tasteScales[target.dataset.key]=Number(target.dataset.value);sheet.querySelector('#ratings').innerHTML=scales(this.draft.tasteScales);const alert=sheet.querySelector('[role=alert]');if(alert)alert.textContent='';return;}
-   if(a==='use-grind'||a==='use-temp'){this.readDraft();const r=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});if(a==='use-grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;else sheet.querySelector('[name=temperature]').value=C.tempDisplay(r.tempC,this.logUnit);this.readDraft();return;}
-   if(a==='switch'){this.show('Your Workspaces',this.state.setups.map(x=>`<div class="switch-row"><div class="switch-info"><strong>${e(x.name)}</strong>${x.id===this.state.activeSetupId?'<small>Current Setup</small>':''}</div><div class="switch-actions">${button('Use','choose-setup',`data-id="${e(x.id)}"`,'secondary compact')}${button('Rename','rename-setup',`data-id="${e(x.id)}"`,'ghost compact')}</div></div>`).join(''));return;}
-   if(a==='choose-setup'){await this.mutate('select_setup',{setup_id:id,expected_revision:this.raw.preferences.revision},{onlineOnly:true});this.expanded.clear();const pin=M.workspace(this.state).currentCoffeeId;if(pin)this.expanded.add(pin);sheet.close();this.render();return;}
-   if(a==='style'){const p=M.coffeeState(this.state,id);this.styleCoffee=id;this.styleRevision=this.raw.workspaceCoffees.find(x=>x.library_entry_id===id&&x.setup_version_id===M.activeVersion(this.state).id)?.revision||0;this.show('Shot Style',`<form id=style>${select('Style','style',C.STYLES.filter(s=>s!=='Custom'),p.style)}<p class="helper space-top">Styles are guidelines, not pass/fail rules.</p><button class="primary full">Use Style</button></form>`);return;}
-   if(a==='make-current'){const sh=this.state.shots.find(x=>x.id===id),rp=this.raw.recipePreferences.find(x=>x.library_entry_id===sh.coffeeId&&x.setup_version_id===sh.setupVersionId&&x.style===sh.style);await this.mutate('make_current',{shot_id:id,expected_revision:rp?.revision||0},{onlineOnly:true});return;}
-   if(a==='community'){this.view='community';await this.loadCommunity();return;}
-   if(a==='home'){this.view='coffees';this.render();return;}
-   if(a==='community-refresh'){await this.loadCommunity();return;}
-   if(a==='community-more'){await this.loadCommunity({more:true});return;}
-   if(a==='community-correct-outlier'){
-    if(this.pending.length)throw new Error('Finish syncing before editing an existing shot.');
-    const review=this.reviews.find(r=>r.shot_id===id);
-    const sh=this.state.shots.find(x=>x.id===id);
-    if(!review||!sh||sh.revision!==Number(review.revision))throw new Error('Refresh the shot before correcting it.');
-    this.view='coffees';this.expanded.add(sh.coffeeId);this.render();this.showLog(sh.coffeeId,sh);return;
+ if(e.action==='save_preferences'){r.preferences={...r.preferences,theme:d.theme,tasting_preferences:d.tasting_preferences,revision:r.preferences.revision+1};return {ok:true,record:r.preferences};}
+ if(e.action==='rename_setup'){
+   const setup=r.setups.find(x=>x.id===d.setup_id);
+   if(!setup)throw Error('Setup is not accessible');
+   setup.name=d.name.trim();setup.revision=(setup.revision||1)+1;
+   return {ok:true,record:structuredClone(setup)};
+  }
+  if(e.action==='save_setup_settings'){r.setupPreferences[0]={...r.setupPreferences[0],...d,revision:r.setupPreferences[0].revision+1};return {ok:true,record:r.setupPreferences[0]};}
+ if(e.action==='save_shot'){
+  const existing=r.shots.find(x=>x.id===d.id);const sh=rawShot({...existing,...d,extraction:d.taste.extraction,body:d.taste.body,clarity:d.taste.clarity,sweetness:d.taste.sweetness,astringency:d.taste.astringency,is_dialed_in:window.__Modules.constants.isDialed(d.taste),revision:existing?existing.revision+1:2});
+  r.shots=r.shots.filter(x=>x.id!==d.id);r.shots.push(sh);r.notes=r.notes.filter(x=>x.shot_id!==d.id);r.notes.push({owner_id:OWNER,shot_id:d.id,notes:d.notes});r.workspaces[0].current_library_entry_id=d.library_entry_id||'coffee';r.workspaceCoffees[0].last_logged_at=TIME;
+   if(!existing&&r.setupPreferences[0].track_slow_feed&&['slow','standard'].includes(d.feed_mode)){
+    const pref=r.setupPreferences[0],at=d.pulled_at;
+    if(!pref.last_feed_shot_at||Date.parse(at)>=Date.parse(pref.last_feed_shot_at)){pref.slow_feed=d.feed_mode==='slow';pref.last_feed_shot_at=at;}
    }
-   if(a==='community-confirm-outlier'){
-    if(!navigator.onLine||this.pending.length)throw new Error('Reconnect and finish syncing before confirming a measurement.');
-    const review=this.reviews.find(r=>r.shot_id===id);
-    if(!review||Number(review.revision)!==Number(target.dataset.revision))throw new Error('Refresh this shot before confirming.');
-    target.disabled=true;
-    let result;
-    try{
-     result=await this.inSession(()=>this.client.confirmCommunityOutlier(id,review.revision));
-     if(!result?.ok)throw new Error('This shot changed or no longer needs review. Please refresh.');
-    }catch(error){target.disabled=false;throw error;}
-    this.reviews=this.reviews.filter(r=>r.shot_id!==id);
-    // Server confirmation succeeded; dismiss the required modal before
-    // refreshing, so a subsequent network error cannot trap the member.
-    this.syncReviewDialog();
-    await this.inSession(()=>this.sync());
-    this.notice='Unusual extraction confirmed. Your qualifying anonymous Community observation is saved.';
-    this.render();return;
-   }
-   if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
-   if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
-   if(a==='export'){exportFile(await this.inSession(()=>this.store.export(this.identity.id)));return;}
-   if(a==='signout'){if((await this.inSession(()=>this.queue.pending())).length)throw new Error('Changes are waiting to sync. Open Cloud Sync Details to save pending changes and finish syncing before signing out.');const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
-  }catch(err){this.error(err);}
+  r.families=[{id:'family',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.78}},created_at:TIME}];r.recipePreferences=[{setup_version_id:'version',library_entry_id:'coffee',style:'Turbo',current_family_id:'family',revision:1}];return {ok:true,record:sh};
  }
- input(ev){if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.render();}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
- async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
-  try{
-   if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
-    if(id==='auth-signin'){await this.client.signIn(d.email,d.password);const epoch=this.epoch;const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;await this.connect();}
-   else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.confirmationEmail=d.email.trim();this.authView='check-email';this.notice='';this.render();root.querySelector('#confirmation-title')?.focus();}
-   else if(id==='auth-reset'){this.notice=await this.client.requestReset(d.email);this.render();}
-   else if(id==='auth-password'){await this.inSession(()=>this.client.setPassword(d.password));this.recovery=false;this.notice='Password updated.';await this.connect();}
-   else if(id==='auth-invite'){await this.inSession(()=>this.client.redeemInvite(d.token));await this.connect();}
-   else if(id==='new-setup'){await this.mutate('create_setup',{...d,id:uuid(),basket_dose_g:Number(d.basket_dose_g),finest_setting:Number(d.finest_setting),coarsest_setting:Number(d.coarsest_setting)},{onlineOnly:true});sheet.close();}
-   else if(id==='rename-setup'){
-    await this.mutate('rename_setup',{setup_id:this.renameSetupId,name:d.name,expected_revision:this.renameSetupRevision},{onlineOnly:true});
-    sheet.close();this.notice='Setup Name saved.';this.render();
-   }
-   else if(id==='new-coffee'){
-     // Lookup is read-only. No near-match is ever merged without confirmation.
-     const matched=await this.inSession(()=>this.client.findCoffeeMatches(d));
-     const choice=nextCoffeeAction(matched);
-     if(choice==='reuse_verified')await this.finishCoffeeAdd(d,matched,matched.exact_id);
-     else if(choice==='ask_user'){
-      this.addCoffeeDraft=d;this.addCoffeeMatches=matched;
-      this.show('Check For An Existing Coffee',matchReviewMarkup(matched));
-     }
-     else await this.finishCoffeeAdd(d,matched);
-    }
-   else if(id==='edit-coffee'){
-    if(!navigator.onLine||this.pending.length)throw new Error('Reconnect and sync before editing coffee details.');
-    if(!this.editCoffeeId||!this.editCoffeeRevision)throw new Error('Refresh coffee details before editing.');
-    const {source_url,...details}=d;
-    const result=await this.inSession(()=>this.client.editCoffeeDetails(
-      this.editCoffeeId,this.editCoffeeRevision,details,source_url||null
-    ));
-    if(!result?.ok)throw new Error(result?.code==='conflict'?'Coffee details changed on another device. Refresh and try again.':'Coffee details could not be saved.');
-    sheet.close();await this.inSession(()=>this.sync());
-    this.notice=result.kind==='correction_requested'?'Coffee correction submitted for review. The verified shared coffee remains unchanged.':'Pending coffee details saved without changing shot history.';
-    this.render();
-   }
-   else if(id==='preferences'){await this.mutate('save_preferences',{...d,expected_revision:this.prefRevision},{onlineOnly:true});this.prefRevision=this.raw.preferences.revision;sheet.querySelector('[role=alert]').textContent='Preferences saved.';}
-   else if(id==='advanced'){await this.mutate('save_setup_settings',{setup_id:M.activeSetup(this.state).id,setup_version_id:M.activeVersion(this.state).id,expected_revision:this.setupPrefRevision,track_temperature:'track_temperature' in d,track_slow_feed:'track_slow_feed' in d,temperature_unit:d.temperature_unit},{onlineOnly:true});this.setupPrefRevision=this.raw.setupPreferences.find(x=>x.setup_version_id===M.activeVersion(this.state).id).revision;sheet.querySelector('[role=alert]').textContent='Advanced settings saved.';}
-   else if(id==='style'){await this.mutate('set_style',{setup_id:M.activeSetup(this.state).id,setup_version_id:M.activeVersion(this.state).id,library_entry_id:this.styleCoffee,style:d.style,expected_revision:this.styleRevision},{onlineOnly:true});sheet.close();}
-   else if(id==='shot'){
-    this.readDraft();const d=this.draft,validation=M.validateShot(d);if(validation.length)throw new Error(validation.join(' '));const dose=this.editing?.snapshot.basketDoseG||M.selectedBasket(this.state,this.logCoffee)?.doseG;
-    if(Math.abs(Number(d.doseG)-dose)>1&&!confirm(`This is outside ${dose-1}-${dose+1} g for this Basket Dose. Log anyway? Changing the basket record is not connected in this development screen yet.`))return;
-    let payload;if(this.editing){payload={id:d.id,expected_revision:this.editing.revision,dose_g:Number(d.doseG),yield_g:Number(d.yieldG),time_s:Number(d.timeS),grind_setting:Number(d.grindSetting),temperature_c:C.num(d.tempC),taste:d.tasteScales,notes:d.notes};}else payload=shotPayload(this.state,this.logCoffee,d);
-    await this.mutate('save_shot',payload);this.expanded=new Set([this.logCoffee]);this.tempCoffee=null;this.justSavedId=d.id;sheet.close();this.notice=this.pending.length?'Saved on this device; waiting to sync.':'Shot saved to your cloud account.';this.render();
-   }
-  }catch(err){this.error(err);}finally{this.busy=false;form.querySelectorAll('button').forEach(b=>b.disabled=false);}
+ if(e.action==='set_style'){r.workspaceCoffees[0].selected_style=d.style;r.workspaceCoffees[0].revision++;return {ok:true,record:r.workspaceCoffees[0]};}
+ return {ok:true};
  }
-}
-export async function startCloudApp(){
- try{
-  secureOrigin();if(!CLOUD_CONFIG.enabled)throw new Error('Cloud testing is not configured for this build. Your local app is unchanged.');
-  if(!globalThis.supabase?.createClient)throw new Error('Build the pinned Supabase SDK assets before deploying this owner test.');
-  const sdk=globalThis.supabase.createClient(CLOUD_CONFIG.supabaseUrl,CLOUD_CONFIG.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'dic_cloud_auth_v1'}});
-  const client=createCloudClient(sdk,{redirectUrl:new URL(location.pathname,location.origin).href});const app=new CloudApp(client);await app.init();return app;
- }catch(err){root.innerHTML=`<main class="shell welcome"><h1>The Dial In Collective</h1><h2 class=space-top>Cloud setup in progress</h2><p class=helper>${e(err.message)}</p></main>`;}
-}
-startCloudApp();
-export {CloudApp};
+};
+window.__app=new window.__CloudApp(window.__client,window.__store);window.__app.init();
+'''
+checks=[]
+with sync_playwright() as p:
+ b=p.chromium.launch(executable_path=shutil.which('chromium') or shutil.which('chromium-browser') or None,headless=True,args=['--no-sandbox'])
+ page=b.new_page(viewport={'width':390,'height':844});page.set_default_timeout(5000);errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+ css=(SITE/'styles.css').read_text().split('\n',1)[1]+'\n'+(SITE/'visual.css').read_text()
+ page.set_content('<!doctype html><html><head><meta name="theme-color" content="#f3ece0"><style>'+css+'</style></head><body><div id=app></div><dialog id=sheet aria-labelledby=sheet-title></dialog><div id=toasts role=status></div></body></html>')
+ page.add_script_tag(content=bundle());page.add_script_tag(content=fixture+'\n'+mock)
+ try:
+  page.get_by_role('button',name='Sign In',exact=True).wait_for()
+ except Exception:
+  print('BOOT BODY:',page.locator('body').inner_text()[:1800])
+  print('BOOT PAGE ERRORS:',errors)
+  print('BUNDLE START:',bundle()[:1000])
+  raise
+ checks.append('Sign-in view loads without local app state')
+ page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign In',exact=True).click();page.get_by_role('button',name='Use Invitation').wait_for();checks.append('Pending account remains outside workspace')
+ page.locator('[name=token]').fill('synthetic-not-real-token');page.get_by_role('button',name='Use Invitation').click();page.get_by_role('button',name='Settings',exact=True).wait_for();checks.append('Admitted account hydrates cloud workspace')
+ assert page.locator('.current-mark').count()==0;checks.append('No pin before first logged shot')
+ page.get_by_role('button',name='Settings',exact=True).click()
+ assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')
+ assert page.locator('.settings-signout').count()==1;checks.append('Sign Out follows Cloud Sync in Settings')
+ page.get_by_role('button',name='Rename',exact=True).click();page.locator('#rename-setup [name=name]').fill('Home Espresso')
+ page.get_by_role('button',name='Save Name',exact=True).click();page.wait_for_function('!document.querySelector("#sheet").open')
+ assert 'Home Espresso' in page.locator('.setup-switch').inner_text();checks.append('Setup can be renamed without recreating equipment')
+ page.locator('[data-action=expand]').click();page.get_by_role('button',name='Log A Shot',exact=False).wait_for();checks.append('Coffee expansion is inline')
+ page.screenshot(path=str(OUT/'cloud_home_light.png'),full_page=True)
+ page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=tasting_preferences]').fill('Fruity clarity');page.get_by_role('button',name='Save Preferences',exact=True).click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();assert page.locator('#sheet').evaluate('(x)=>x.open');checks.append('Preference save leaves Settings open')
+ page.get_by_text('Advanced Setup Options',exact=True).click();page.locator('[name=track_temperature]').check();page.locator('[name=track_slow_feed]').check();page.get_by_role('button',name='Save Advanced Options').click();page.get_by_role('alert').filter(has_text='Advanced settings saved').wait_for();assert page.locator('#sheet details.advanced:has(summary:text-is("Advanced Setup Options"))').evaluate('(x)=>x.open');checks.append('Advanced save preserves open sheet and section')
+ page.get_by_role('button',name='Close',exact=True).click();page.get_by_role('button',name='Log A Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
+ assert page.locator('[name=temperature]').input_value()=='';checks.append('Temperature is optional, not fabricated in actual input')
+ assert not page.locator('[name=slowFeed]').is_checked();page.locator('[name=slowFeed]').check();checks.append('New Slow Feed entry can be selected explicitly')
+ page.locator('[name=yieldG]').fill('50');page.locator('[name=timeS]').fill('100');page.locator('[name=grindSetting]').fill('0');page.locator('[name=notes]').fill('Synthetic private note')
+ page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.get_by_role('alert').filter(has_text='Rate').first.wait_for();checks.append('All five sensory ratings required before save')
+ for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]').click()
+ page.screenshot(path=str(OUT/'cloud_log_light.png'),full_page=True)
+ page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.wait_for_function('!document.querySelector("#sheet").open');assert page.locator('.current-mark').count()==1;checks.append('Saving shot closes log and pins coffee')
+ assert page.locator('.feedback-panel').count()==1;checks.append('Latest result and radar visible after save')
+ page.get_by_text('Shot History (1)',exact=True).click();page.locator('[data-action=shot-expand]').click();assert page.locator('.shot-body .radar').count()==1;checks.append('Shot details expand inline with radar and notes')
+ header=page.locator('.shot-overview').first.inner_text()
+ assert 'Home Espresso' not in header and 'Basket Dose' not in header and 'Slow Feed' not in header
+ assert page.locator('.shot-record-context').get_by_text('Home Espresso',exact=True).count()==1
+ assert page.locator('.shot-record-context').get_by_text('Slow Feed',exact=True).count()==1
+ assert page.locator('.shot-record-context').get_by_text('Basket Dose',exact=True).count()==1
+ edit=page.locator('.shot-body [data-action=edit]').first.bounding_box()
+ current=page.locator('.shot-body [data-action=make-current]').first.bounding_box()
+ assert edit and current and edit['x']+edit['width']<current['x'] and abs(edit['y']-current['y'])<5
+ checks.append('Shot history keeps compact bottom-row Edit and Make Current buttons and equipment context')
+ page.screenshot(path=str(OUT/'cloud_history_light.png'),full_page=True)
+ page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=theme]').select_option('dark');page.get_by_role('button',name='Save Preferences').click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();page.get_by_role('button',name='Close',exact=True).click();assert page.locator('html').get_attribute('data-theme')=='dark';checks.append('Dark appearance persists through save without closing Settings')
+ page.screenshot(path=str(OUT/'cloud_home_dark.png'),full_page=True)
+ page.evaluate('window.__offline=true');page.get_by_role('button',name='Log A Shot',exact=False).click()
+ assert page.locator('[name=slowFeed]').is_checked();page.locator('[name=slowFeed]').uncheck()
+ checks.append('Next shot preselects last logged Slow Feed setting and can turn it off')
+ assert page.locator('[name=grindSetting]').input_value()=='0';page.locator('[name=yieldG]').fill('51');page.locator('[name=timeS]').fill('21')
+ for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]').click()
+ page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.wait_for_function('!document.querySelector("#sheet").open');assert page.evaluate('window.__memory.events.length')==1;checks.append('Offline shot retained in pending queue and shown locally')
+ page.get_by_role('button',name='Settings',exact=True).click();page.get_by_role('button',name='Sign Out On This Device').click();assert page.evaluate('window.__who!==null');checks.append('Pending changes prevent accidental signout')
+ page.get_by_role('button',name='Close',exact=True).click();page.evaluate('window.__offline=false;window.__app.sync()');page.wait_for_function('window.__memory.events.length===0');assert page.evaluate('window.__raw.shots.length')==2;checks.append('Reconnect sends pending shot once')
+ assert not page.evaluate('window.__raw.setupPreferences[0].slow_feed')
+ checks.append('Turning Slow Feed off persists after cloud synchronization')
+ page.evaluate("""window.__matchResponse={
+    classification:'needs_confirmation',exact_id:null,
+    roaster:{recognized:true,canonical_name:'Sweet Bloom'},
+    candidates:[{id:'12345678-1234-4123-8123-123456789abc',name:'Wuri',roaster:'Sweet Bloom',release_label:'2026 harvest',origin:'Gedeb'}]
+  }""")
+ page.get_by_role('button',name='Add Coffee',exact=False).click()
+ page.locator('#new-coffee [name=name]').fill('Wuri')
+ page.locator('#new-coffee [name=roaster]').fill('Sweet-Bloom')
+ page.locator('#new-coffee [name=release_label]').fill('2027 harvest')
+ old_submission_count=page.evaluate('window.__raw.submissions.length')
+ page.locator('#new-coffee').get_by_role('button',name='Add Coffee',exact=True).click()
+ assert page.locator('#sheet-title').inner_text()=='Check For An Existing Coffee'
+ assert page.evaluate('window.__raw.submissions.length')==old_submission_count
+ assert page.locator('[data-action=choose-coffee-match]').count()==1
+ checks.append('A likely duplicate prompts confirmation rather than writing or merging')
+ page.get_by_role('button',name='This Is A Different Coffee').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
+ assert page.evaluate('window.__raw.submissions.at(-1).proposed_data.roaster')=='Sweet Bloom'
+ assert page.evaluate('window.__raw.submissions.at(-1).proposed_data.release_label')=='2027 harvest'
+ checks.append('Different release stays Pending under the recognized canonical roaster')
+ # Pending coffee details edit saves to this member's original submission only.
+ pending_lid=page.evaluate('window.__raw.library.at(-1).id')
+ pending_sel=f'[data-retain="facts-{pending_lid}"]'
+ page.locator(f'[data-action=expand][data-id="{pending_lid}"][aria-expanded=false]').count() and page.locator(f'[data-action=expand][data-id="{pending_lid}"]').click()
+ page.locator(pending_sel+' summary').click()
+ page.locator(f'[data-action=edit-coffee][data-id="{pending_lid}"]').click()
+ assert page.locator('#sheet-title').inner_text()=='Edit Coffee Details'
+ page.locator('#edit-coffee [name=producer]').fill('Edited Producer')
+ page.locator('#edit-coffee').get_by_role('button',name='Save Coffee Details').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.submissions.find(x=>x.id===window.__raw.library.at(-1).submission_id).proposed_data.producer')=='Edited Producer'
+ checks.append('Edit Coffee updates original Pending owner submission and preserves entry identity')
+
+ page.evaluate("""window.__raw.coffees.push({id:'12345678-1234-4123-8123-123456789abc',name:'Wuri',roaster:'Sweet Bloom',origin:'Gedeb',verification_state:'verified',revision:1});window.__matchResponse={classification:'exact_verified',exact_id:'12345678-1234-4123-8123-123456789abc',roaster:{recognized:true,canonical_name:'Sweet Bloom'},candidates:[]};""")
+ page.get_by_role('button',name='Add Coffee',exact=False).click()
+ page.locator('#new-coffee [name=name]').fill('Wuri')
+ page.locator('#new-coffee [name=roaster]').fill('Sweet Bloom Coffee Roasters')
+ page.locator('#new-coffee').get_by_role('button',name='Add Coffee',exact=True).click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
+ assert page.evaluate('window.__raw.library.some(x=>x.coffee_id==="12345678-1234-4123-8123-123456789abc")')
+ checks.append('Exact verified coffee reuses canonical ID without new Pending submission')
+ # A verified coffee is editable through a source-review correction request,
+ # never a silent overwrite of the canonical catalog shared by everyone.
+ verified_lid=page.evaluate("""window.__raw.library.find(x=>x.coffee_id==='12345678-1234-4123-8123-123456789abc').id""")
+ page.locator(f'[data-action=expand][data-id="{verified_lid}"][aria-expanded=false]').count() and page.locator(f'[data-action=expand][data-id="{verified_lid}"]').click()
+ page.locator(f'[data-retain="facts-{verified_lid}"] summary').click()
+ page.locator(f'[data-action=edit-coffee][data-id="{verified_lid}"]').click()
+ actual_title=page.locator('#sheet-title').inner_text()
+ assert actual_title=='Suggest Coffee Corrections',{'title':actual_title,'verified_lid':verified_lid,'raw_coffee':page.evaluate("window.__raw.library.find(x=>x.id==="+repr(verified_lid)+")"),'app_coffee':page.evaluate("window.__app.raw?.library?.find(x=>x.id==="+repr(verified_lid)+")")}
+ page.locator('#edit-coffee [name=producer]').fill('Correction Producer')
+ page.locator('#edit-coffee').get_by_role('button',name='Submit Correction For Review').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate("""window.__raw.coffees.find(x=>x.id==='12345678-1234-4123-8123-123456789abc').producer""")!= 'Correction Producer'
+ assert page.evaluate("""window.__raw.submissions.some(x=>x.canonical_coffee_id==='12345678-1234-4123-8123-123456789abc'&&x.status==='pending'&&x.proposed_data.producer==='Correction Producer')""")
+ checks.append('Verified coffee correction requests preserve canonical facts and shot history')
+
+ # Community browsing is driven by sanitized eligible-only server results.
+ page.evaluate("""async () => {
+   window.__communityShots=[{
+    coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',style:'Turbo',
+    observed_on:'2026-10-16',dose_g:18,yield_g:49.8,time_s:21.1,ratio:2.7667,
+    extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
+    shot_count:1,contributor_count:1
+   }];
+   await window.__app.sync();
+ }""")
+ page.locator('[data-action=community]').click()
+ page.locator('.community-card').first.wait_for()
+ assert page.locator('.community-card').count()==1
+ assert 'Yirgacheffe' in page.locator('.community-card').inner_text()
+ assert 'PRIVATE:' not in page.locator('.community-page').inner_text()
+ page.locator('.community-card summary').first.click()
+ assert '1 contributors' in page.locator('.community-card').inner_text()
+ checks.append('Mobile Community browsing includes sanitized approved shots and contributor evidence')
+ page.screenshot(path=str(OUT/'community_eligible_mobile.png'),full_page=True)
+ page.locator('[data-action=home]').click()
+ page.evaluate("""async () => {
+   const sh=window.__raw.shots[0];
+   window.__reviews=[{shot_id:sh.id,revision:sh.revision,
+    coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',
+    style:'Turbo',dose_g:18,yield_g:49.8,time_s:62}];
+   await window.__app.sync();
+ }""")
+ page.locator('.community-review-prompt').wait_for()
+ assert page.locator('#community-required-review').evaluate('(d)=>d.open')
+ assert page.locator('#community-required-review [data-action=community-dismiss-outlier]').count()==0
+ checks.append('Held shot opens mandatory modal without Later and cannot dismiss it')
+ assert page.locator('[data-action=community-confirm-outlier]').count()==1
+ assert page.locator('[data-action=community-correct-outlier]').count()==1
+ checks.append('Member sees nonblocking outlier confirmation/correction prompt')
+ page.screenshot(path=str(OUT/'community_review_mobile.png'),full_page=True)
+ # Correction uses the existing revision-checked shot form; merely opening it
+ # cannot mutate any shot or publish anything.
+ original_time=page.evaluate("window.__raw.shots[0].time_s")
+ page.locator('[data-action=community-correct-outlier]').click()
+ page.locator('#shot [name=timeS]').wait_for()
+ assert page.locator('#sheet-title').inner_text()=='Edit Shot'
+ assert abs(float(page.locator('#shot [name=timeS]').input_value())-original_time)<0.01
+ assert page.evaluate("window.__raw.shots[0].time_s")==original_time
+ page.locator('#sheet [data-action=close]').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ page.locator('.community-review-prompt').wait_for()
+ checks.append('Correct Shot opens original revision-checked form without changing data before Save')
+ assert page.locator('#community-required-review').evaluate('(d)=>d.open'), 'Closing Edit returns to mandatory review'
+ # A network error must never disable Confirm indefinitely or route its
+ # message to a stale, closed Edit Shot form behind the mandatory dialog.
+ page.evaluate("""window.__confirmOriginal=window.__client.confirmCommunityOutlier;
+  window.__client.confirmCommunityOutlier=async()=>{throw Error('Temporary review outage');};""")
+ page.locator('#community-required-review [data-action=community-confirm-outlier]').click()
+ page.locator('#community-required-review [role=alert]').filter(has_text='Temporary review outage').wait_for()
+ assert page.locator('#community-required-review [data-action=community-confirm-outlier]').is_enabled()
+ assert page.locator('#community-required-review').evaluate('(d)=>d.open')
+ checks.append('Required review reports transient failure visibly and allows a safe retry')
+ page.evaluate("window.__client.confirmCommunityOutlier=window.__confirmOriginal")
+ page.locator('[data-action=community-confirm-outlier]').click()
+ page.wait_for_function('!document.querySelector(".community-review-prompt")')
+ checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
+
+ # Account switches must not reuse a previous account's still-running sync.
+ switch=page.evaluate("""async () => {
+   const app=window.__app,previous=app.identity,prevEpoch=app.epoch,original=app.doSync;
+   let releaseOld,firstRuns=0,nextRuns=0;
+   app.doSync=()=>{firstRuns++;return new Promise(resolve=>{releaseOld=resolve;});};
+   const first=app.sync(),duplicate=app.sync();
+   app.identity={id:'other-synthetic-owner'};app.epoch++;
+   app.doSync=async()=>{nextRuns++;};
+   const switched=app.sync();
+   releaseOld();
+   await Promise.all([first,duplicate,switched]);
+   app.identity=previous;app.epoch=prevEpoch;app.doSync=original;
+   return {firstRuns,nextRuns,clear:app.flushing===null};
+  }""")
+ assert switch=={'firstRuns':1,'nextRuns':1,'clear':True},switch
+ checks.append('Cross-account inflight synchronization never satisfies the next account cache refresh')
+ assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
+ assert not errors,errors;checks.append('No browser JavaScript exceptions')
+ b.close()
+report={'passed':len(checks),'checks':checks,'caveats':['Injected browser harness with mocked backend/auth and in-memory storage; not live login/email or native IndexedDB','Original local app is untouched; deployment/backup/full feature parity not ready']}
+(OUT/'results.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
