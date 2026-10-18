@@ -8,6 +8,10 @@ The latest explicit owner decision governs. Preserve every unchanged Locked requ
 
 Current product copy uses **The Dial In Collective** and **dial in**, without hyphens. Historical source headings, filenames and quotations retain their original wording. The product remains sleek, simple and optimized for **Log Shot → Rate → Recommendation**.
 
+## Owner-Locked operating rule: GitHub as the live project record (2026-10-17)
+
+For **every** The Dial In Collective work session, record substantive actions, investigations, attempted changes, outcomes, tests, sources, decisions, errors, blockers and next steps in the private GitHub repository **as close to real time as possible**, not just at the end. GitHub is the canonical working log and seamless cross-chat/session handoff: a later work session must be able to resume by reading the branch's AGENTS, Current Status, Master Specification, Decision Ledger and relevant issues/commits, without asking for a separate handoff. Report incomplete or unverified work as such; never claim an unobserved test passed. Keep canonical documentation and issue states accurate after every meaningful milestone, commit and verify the actual result, and preserve all prior Locked product decisions and dated evidence. **GitHub write permission does not authorize production deployment, Supabase data mutation or spending.** Use the existing one-release approval and Netlify skip-marker controls. Never commit secrets, keys or private exports.
+
 ## Current scoped supersessions
 
 | Topic | Governing record | Exact scope |

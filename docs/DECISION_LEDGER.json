@@ -2399,5 +2399,13 @@
       "scale_missing": true,
       "one_other_product_blocked": "Picky Chemist oversized"
     }
+  },
+  "current_owner_github_continuity": {
+    "id": "OPS-GITHUB-LIVE-RECORD-20261017-01",
+    "status": "Locked operational requirement",
+    "source": "Owner's explicit 2026-10-17 project request: always update GitHub with everything done as close to real time as possible, for seamless transitions between chats.",
+    "requirement": "Use the private active development GitHub branch as canonical source of truth and ongoing running record. Record actions, investigations, implementations, decisions, test evidence, failures, uncertainties, deferred work and exact next step incrementally during every session. Update CURRENT_STATUS and relevant issues near each meaningful milestone and perform GitHub commit/ref/content verification. Future sessions resume directly from repository without separate handoff.",
+    "guardrails": "Never silently supersede Locked product choices. Record changes in both canonical product requirements files when needed. Commit documentation with skip-Netlify policy; no production Netlify deploy, database mutation, provider settings change or expense without explicit scoped authorization. Do not commit secrets or private files.",
+    "implementation": "AGENTS.md, docs/CURRENT_STATUS.md, docs/MASTER_SPECIFICATION.md, docs/DECISION_LEDGER.json and the issue tracker. Historic reports remain date-scoped rather than retroactively rewritten."
   }
 }

@@ -1,5 +1,6 @@
 # The Dial In Collective continuity
 
+- **GLOBAL OWNER-LOCKED REQUIREMENT: GitHub is the project source of truth and real-time running work record.** After each meaningful investigation, code/SQL/provider action, test, finding, approval, failure or change of plans, promptly log what was done, evidence/results, limitations, next action and current status in this repository as close to real time as possible. Keep Current Status and relevant issues accurate for seamless cross-chat continuation without separate handoff; verify every GitHub write. Do not wait until the entire session finishes. This does not grant publish, data mutation or spending approval.
 - Use `development/backend-foundation` for active application work and current documentation. The default `main` branch is the backup-operations branch, not current app source. Read branch refs before changing anything; never silently merge into main.
 - Start with `docs/CURRENT_STATUS.md`, then `docs/MASTER_SPECIFICATION.md` and `docs/DECISION_LEDGER.json`. Use `docs/README.md` to locate precise acceptance/recovery evidence.
 - Preserve every Locked decision. An implementation shortcut, historical checklist, or proposal cannot supersede it. Ask product questions one at a time; record an explicitly approved change in both canonical files with its narrow supersession scope before implementing it.
