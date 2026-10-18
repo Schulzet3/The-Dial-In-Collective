@@ -159,6 +159,42 @@ with sync_playwright() as p:
  assert page.evaluate('window.__raw.submissions.length')==old_submission_count+1
  assert page.evaluate('window.__raw.library.some(x=>x.coffee_id==="12345678-1234-4123-8123-123456789abc")')
  checks.append('Exact verified coffee reuses canonical ID without new Pending submission')
+ # Community browsing is driven by sanitized eligible-only server results.
+ page.evaluate("""async () => {
+   window.__communityShots=[{
+    coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',style:'Turbo',
+    observed_on:'2026-10-16',dose_g:18,yield_g:49.8,time_s:21.1,ratio:2.7667,
+    extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
+    shot_count:1,contributor_count:1
+   }];
+   await window.__app.sync();
+ }""")
+ page.locator('[data-action=community]').click()
+ page.locator('.community-card').first.wait_for()
+ assert page.locator('.community-card').count()==1
+ assert 'Yirgacheffe' in page.locator('.community-card').inner_text()
+ assert 'PRIVATE:' not in page.locator('.community-page').inner_text()
+ page.locator('.community-card summary').first.click()
+ assert '1 contributors' in page.locator('.community-card').inner_text()
+ checks.append('Mobile Community browsing includes sanitized approved shots and contributor evidence')
+ page.screenshot(path=str(OUT/'community_eligible_mobile.png'),full_page=True)
+ page.locator('[data-action=home]').click()
+ page.evaluate("""async () => {
+   const sh=window.__raw.shots[0];
+   window.__reviews=[{shot_id:sh.id,revision:sh.revision,
+    coffee_name:'Yirgacheffe',roaster:'Orinoco Coffee & Tea',
+    style:'Turbo',dose_g:18,yield_g:49.8,time_s:62}];
+   await window.__app.sync();
+ }""")
+ page.locator('.community-review-prompt').wait_for()
+ assert page.locator('[data-action=community-confirm-outlier]').count()==1
+ assert page.locator('[data-action=community-correct-outlier]').count()==1
+ checks.append('Member sees nonblocking outlier confirmation/correction prompt')
+ page.screenshot(path=str(OUT/'community_review_mobile.png'),full_page=True)
+ page.locator('[data-action=community-confirm-outlier]').click()
+ page.wait_for_function('!document.querySelector(".community-review-prompt")')
+ checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
+
  # Account switches must not reuse a previous account's still-running sync.
  switch=page.evaluate("""async () => {
    const app=window.__app,previous=app.identity,prevEpoch=app.epoch,original=app.doSync;
