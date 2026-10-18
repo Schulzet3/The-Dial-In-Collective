@@ -437,6 +437,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const explicit=fields.roast_level||'';
   if(!explicit&&!conflicts.has('roast_level')){
    fields.roast_level=agtron.roast;
+   roast_evidence.value=agtron.roast;
    roast_evidence.hint=agtronExplanation(agtron);
    roast_evidence.source=agtron.provisional?'agtron_provisional_review':'agtron_ground_anchor';
   }else if(explicit&&explicit!==agtron.roast){

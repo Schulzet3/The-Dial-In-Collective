@@ -1,6 +1,7 @@
 // Bounded, deterministic preview of metadata from a trusted official roaster URL.
 // Not a canonical verification; never writes public coffee facts or uses AI.
 import {normalizeWords} from '../dic-verify-coffee/evidence.mjs';
+import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 
 const trim=(v,max=240)=>String(v??'').replace(/<[^>]{0,800}>/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
 const urlHost=h=>String(h||'').toLowerCase().replace(/^www\./,'');
@@ -65,6 +66,13 @@ const roastMap=new Map(['Ultra Light','Very Light','Light','Medium-Light','Mediu
 // Legacy equivalent spelling is a read-time alias; source prose is retained.
 roastMap.set(normalizeWords('Light-Medium'),'Medium-Light');
 const processMap=new Map(['Washed','Natural','Honey','Anaerobic','Other/Unknown'].map(v=>[normalizeWords(v),v]));
+function officialProcess(value){
+ const words=normalizeWords(value);
+ if(/\b(?:anaerobic[\s-]+natural|natural[\s-]+anaerobic)\b/.test(words))return 'Anaerobic';
+ if(/^adv(?:anced)?\s+natural$/.test(words))return 'Natural';
+ if(/^adv(?:anced)?\s+washed$/.test(words))return 'Washed';
+ return processMap.get(words)||'';
+}
 export function extractProductPreview(html,{source_url,roaster}={}){
  if(typeof html!=='string'||html.length>950000||!source_url||!roaster)return {ok:false,reason:'invalid_source'};
  const products=[];
@@ -84,14 +92,41 @@ export function extractProductPreview(html,{source_url,roaster}={}){
  if(!candidate||!candidate.name)return {ok:false,reason:'ambiguous_or_missing_product'};
  const fields={name:trim(candidate.name,200),roaster:trim(roaster,200)};
  if(!fields.name||!fields.roaster)return {ok:false,reason:'missing_identity'};
+ const roaster_details={};
+ let numericAgtron=null;
  for(const row of candidate.attributes){
   const key=normalizeWords(row?.name).replace(/ /g,'');
+  if(/^(?:agtron|roastcolor|roastcolour|groundagtron|agtrongourmet|agtroncommercial)$/.test(key)){
+   const measured=interpretAgtron(row?.value,{scale:row?.name||''});
+   if(measured&&!numericAgtron){
+    numericAgtron=measured;
+    roaster_details.agtron=measured.display;
+    if(measured.scale!=='unspecified')roaster_details.agtron_scale=measured.scale;
+    if(measured.sample!=='unspecified')roaster_details.agtron_sample=measured.sample.replace('_',' ');
+   }
+   continue;
+  }
   const field=fieldsByKey[key];if(!field||fields[field])continue;
   const value=trim(row?.value,field==='tasting_notes'?700:200);if(!value)continue;
   if(field==='roast_level'){const mapped=roastMap.get(normalizeWords(value));if(mapped)fields[field]=mapped;}
-  else if(field==='process'){const mapped=processMap.get(normalizeWords(value));if(mapped)fields[field]=mapped;}
+  else if(field==='process'){const mapped=officialProcess(value);if(mapped)fields[field]=mapped;}
   else fields[field]=value;
  }
+ // Product JSON-LD descriptions belong to this selected lot, not other
+ // products. A named estate/farm must be corroborated by the lot narrative.
+ const narrative=trim(candidate.description||'',1200);
+ if(/\banaerobic[\s-]+natural\b/i.test(narrative)&&fields.process==='Natural')
+  fields.process='Anaerobic';
+ if(!fields.producer&&narrative){
+  const name=String(fields.name).replace(/^(?:Kenya|Ethiopia|Colombia|Peru|Rwanda|Honduras)\s+/i,'');
+  if(/^[\p{L}\p{M}][\p{L}\p{M}'’.-]*(?:\s+[\p{L}\p{M}'’.-]+){0,5}\s+(?:Estate|Farm)$/iu.test(name)&&
+     narrative.toLocaleLowerCase().includes(name.toLocaleLowerCase()))
+   fields.producer=name;
+ }
+ const roast_hint=numericAgtron?agtronExplanation(numericAgtron,fields.roast_level||''):'';
+ if(numericAgtron?.roast&&!fields.roast_level)fields.roast_level=numericAgtron.roast;
  return {ok:true,source:'official_roaster_product_metadata',fields,available:Object.keys(fields),
+  ...(Object.keys(roaster_details).length?{roaster_details}:{}),
+  ...(roast_hint?{roast_hint}:{}),
   note:'Official product metadata is a preview, not a confirmed canonical coffee identity.'};
 }
