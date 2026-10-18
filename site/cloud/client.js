@@ -58,6 +58,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
   async listCommunityReviews(){assertSecure();const items=unwrap(await sdk.rpc('dic_my_community_outliers'));return Array.isArray(items)?items:[];},
   async confirmCommunityOutlier(shotId,expectedRevision){assertSecure();return unwrap(await sdk.rpc('dic_confirm_community_outlier',{p_shot_id:shotId,p_expected_revision:expectedRevision}));},
   async browseCommunityShots({limit=20,offset=0}={}){assertSecure();return unwrap(await sdk.rpc('dic_browse_community_shots',{p_limit:limit,p_offset:offset}));},
+  async editCoffeeDetails(libraryEntryId,expectedRevision,details,sourceUrl){assertSecure();return unwrap(await sdk.rpc('dic_edit_my_coffee',{p_library_entry:libraryEntryId,p_expected_revision:expectedRevision,p_details:details,p_source_url:sourceUrl}));},
   async mutate(e){assertSecure();return unwrap(await sdk.rpc('dic_apply_client_change',{expected_owner:e.owner,mutation_id:e.id,action:e.action,payload:e.payload}));},
   async previewImport(owner,backup){assertSecure();if(!owner)throw new CloudError('Sign in before importing.','signed_out');return unwrap(await sdk.rpc('dic_preview_import',{expected_owner:owner,backup}));},
   async commitImport(owner,backup,reviewHash,recoverySaved){assertSecure();if(!owner)throw new CloudError('Sign in before importing.','signed_out');return unwrap(await sdk.rpc('dic_commit_import',{expected_owner:owner,backup,review_hash:reviewHash,recovery_saved:recoverySaved===true}));},
