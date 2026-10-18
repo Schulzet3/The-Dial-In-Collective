@@ -2,11 +2,12 @@
 // Representative source patterns: Proud Mary, Queen City Collective, Onyx,
 // PERC, SEY, The Picky Chemist, Black & White, Little Wolf and Heart.
 // This is a parser, not a roaster-specific source-verification allowlist.
-// Never infer roast tier from an Agtron reading, roaster brand, hue or taste.
+// Roast can be suggested from an Agtron reading only with scale/sample
+// caveats. Never infer roast from brand, hue or tasting language.
 import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
-const allowedExtra=new Set(['agtron','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
+const allowedExtra=new Set(['agtron','agtron_scale','agtron_sample','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
  'Tasting Notes':'tasting_notes','Taste Notes':'tasting_notes','Cup Notes':'tasting_notes',
  'Reminds Us Of':'tasting_notes','Notes':'tasting_notes',
@@ -52,7 +53,18 @@ function field(fields,label,value,add,extras,clean){
  if(kind==='variety'&&/\b(?:masl|meters?|agtron)\b/i.test(raw))return;
  if(kind==='agtron'){
   const x=raw.match(/(?:\b(?:agtron)\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)\b|\b(\d{1,3}(?:\.\d{1,2})?)\s*(?:agtron)\b)/i);
-  if(x)addExtra(extras,'agtron',x[1]||x[2]);
+  if(x){
+   const score=Number(x[1]||x[2]);
+   // Do not turn out-of-range typos such as PERC's "666 Agtron"
+   // into plausible coffee-roast measurements.
+   if(score>=0&&score<=133){
+    addExtra(extras,'agtron',String(score));
+    if(/\bgourmet\b/i.test(raw)&&!/\bcommercial\b/i.test(raw))addExtra(extras,'agtron_scale','gourmet');
+    if(/\bcommercial\b/i.test(raw)&&!/\bgourmet\b/i.test(raw))addExtra(extras,'agtron_scale','commercial');
+    if(/\bground\b/i.test(raw)&&!/\bwhole[\s-]?bean\b/i.test(raw))addExtra(extras,'agtron_sample','ground');
+    if(/\bwhole[\s-]?bean\b/i.test(raw)&&!/\bground\b/i.test(raw))addExtra(extras,'agtron_sample','whole bean');
+   }
+  }
   return;
  }
  if(kind==='recommended_rest'){
@@ -127,6 +139,42 @@ function parsePairs(tokens,fields,add,extras,clean){
   }
  }
 
+}
+// Read the description belonging to the selected coffee, never the
+// navbar, unrelated recommendations, an Agtron FAQ, or another product.
+// Product title inference is permitted only when the story corroborates it.
+function detailedCoffeeNarrative(page,fields,extras,clean){
+ const headings=[...page.matchAll(/<h[2-5]\b[^>]{0,350}>([\s\S]{0,180}?)<\/h[2-5]\s*>/gi)];
+ const section=headings.find(h=>/^(?:the deets!?|the story|about this coffee|coffee story|the details!?|about the coffee)$/i.test(clean(h[1],95)));
+ if(!section)return;
+ const after=page.slice(section.index+section[0].length,section.index+section[0].length+8500);
+ const stop=after.search(/<h[2-5]\b[^>]*>[\s\S]{0,120}?(?:brew\s+recc?s|brew\s+recommendations?|what.s\s+agtron|related products|more coffees|you may also like)/i);
+ const story=clean(stop>=0?after.slice(0,stop):after,5000);
+ if(!story||story.length<35)return;
+ const heading=(page.match(/<h1\b[^>]*>([\s\S]{1,260}?)<\/h1>/i)||[])[1]||'';
+ const title=clean(heading,150).replace(/^(?:Kenya|Ethiopia|Colombia|Brazil|Honduras|Rwanda|Burundi|Peru|Panama|Guatemala|Mexico|Costa Rica|Uganda|Nicaragua|Ecuador|Bolivia|Tanzania)\s+/i,'');
+ const farm=title.match(/^([\p{L}\p{M}][\p{L}\p{M}'’.-]*(?:\s+[\p{L}\p{M}'’.-]+){0,5}\s+(?:Estate|Farm))$/iu);
+ if(!fields.producer&&farm&&story.toLocaleLowerCase().includes(farm[1].toLocaleLowerCase()))
+  fields.producer=farm[1];
+ if(!fields.producer){
+  const named=story.match(/\b(?:from|grown\s+(?:at|on)|produced\s+(?:by|at))\s+([\p{L}\p{M}][\p{L}\p{M}'’.-]*(?:\s+[\p{L}\p{M}'’.-]+){0,5}\s+(?:Estate|Farm))\b/iu);
+  if(named&&clean(heading,200).toLocaleLowerCase().includes(named[1].toLocaleLowerCase()))
+   fields.producer=named[1];
+ }
+ // Preserve Natural as the drying style, but choose the more informative
+ // single-select Anaerobic only when THIS coffee's narrative explicitly
+ // describes the anaerobic-natural fermentation.
+ const isAnaerobicNatural=/\banaerobic[\s-]+natural\b/i.test(story);
+ const oxygenLimited=/\bferment(?:ed|ing)?\s+anaerobically\b/i.test(story)&&
+  /\b(?:sealed\s+tanks?|oxygen[\s-]+limited)\b/i.test(story);
+ if((isAnaerobicNatural||oxygenLimited)&&(fields.process==='Natural'||!fields.process)){
+  if(extras.processing_detail&&
+     !/^(?:adv(?:anced)?[\s-]+natural|natural(?:[\s-]+processed)?)$/i.test(extras.processing_detail))return;
+  fields.process='Anaerobic';
+  const hours=story.match(/\b(\d{1,3})\s*(?:[- ]hours?|h)\b/i);
+  const original=extras.processing_detail||'Natural';
+  extras.processing_detail=`${original}; anaerobic natural${hours?', '+hours[1]+'-hour sealed-tank fermentation':''}`.slice(0,160);
+ }
 }
 function selectedMarkup(html){
  return productMarkup(html).slice(0,60000);
@@ -221,5 +269,6 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   const m=txt.match(/\b(?:in the cup we find|notes of)\s+([A-Za-zÀ-ÿ][^.!?;]{8,130})[.!?;]/i);
   if(m&&/\b(?:and|,)\b/i.test(m[1]))addField('tasting_notes',m[1].trim());
  }
+ detailedCoffeeNarrative(page,fields,extras,clean);
  return extras;
 }

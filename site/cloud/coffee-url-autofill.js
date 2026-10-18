@@ -33,7 +33,7 @@ export function coffeeUrlPreviewMarkup(result){
  // Noncanonical supplementary facts remain visible in a compact disclosure,
  // not silently saved as a roast classification or verified source metadata.
  const detailsLabels={
-  agtron:'Roaster Agtron',production_roaster:'Production Roaster',recommended_rest:'Recommended Rest',
+  agtron:'Roaster Agtron',agtron_scale:'Agtron Scale',agtron_sample:'Agtron Sample',production_roaster:'Production Roaster',recommended_rest:'Recommended Rest',
   drying_method:'Drying Method',harvest_season:'Harvest Season',
   preferred_extraction:'Preferred Extraction',processing_detail:'Processing Detail'
  };
@@ -48,7 +48,7 @@ export function coffeeUrlPreviewMarkup(result){
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.fields[key])}</dd></div>`).join('')}</dl>
   ${result.roast_hint?`<p class="helper" role="note"><strong>Roast graphic:</strong> ${e(result.roast_hint)}</p>`:''}
   ${publishedRecipe?`<p class="helper"><strong>Roaster's published espresso ${fullRecipe?'recipe':'reference'}:</strong> ${publishedRecipe}. Reference only; not applied or saved automatically.</p>`:''}
-  ${extras.length?`<details class="coffee-url-supplement"><summary>Other published details (${extras.length})</summary><dl class="coffee-url-fields">${extras.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.roaster_details[key])}</dd></div>`).join('')}</dl><p class="helper">Source information only. Not a calibrated roast classification or saved coffee field.</p></details>`:''}
+  ${extras.length?`<details class="coffee-url-supplement"><summary>Other published details (${extras.length})</summary><dl class="coffee-url-fields">${extras.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.roaster_details[key])}</dd></div>`).join('')}</dl><p class="helper">Source details are for review. Agtron-derived levels may assume Gourmet ground-coffee readings; supplementary measurements are not saved as coffee fields.</p></details>`:''}
   ${existing?`<p class="helper coffee-match-alert">${e(existing)}</p>`:''}
   <p class="helper">Available details filled into the form. Review or correct them, then click Add Coffee.</p>
  </section>`;

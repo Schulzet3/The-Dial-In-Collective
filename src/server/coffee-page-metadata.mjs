@@ -3,6 +3,7 @@
 import {extractRoastVisualEvidence} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence} from './coffee-product-layouts.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
+import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 const FIELD_ALIASES={
  origin:['origin','country','country of origin','region','coffee origin','région','location','growing region'],
  elevation_m:['elevation','altitude','elevation m','altitude masl','grown at','altitude (masl)'],
@@ -105,6 +106,10 @@ function normalized(field,value){
   return norm==='lightmedium'?'Medium-Light':ROAST.find(x=>x.toLowerCase().replace(/[\s-]/g,'')===norm)||'';
  }
  if(field==='process'){
+  // This is one anaerobic treatment with a natural drying subtype,
+  // not an ambiguous Washed & Natural blend.
+  if(/\b(?:anaerobic[\s-]+natural|natural[\s-]+anaerobic)\b/i.test(s))
+   return 'Anaerobic';
   const norm=s.toLowerCase();
   // Different components of a blend can have different processes; the
   // canonical single-select field must not silently say "Washed" if the
@@ -128,7 +133,8 @@ function addField(fields,rawKey,value){
  const s=normalized(key,value);
  // Withhold contradictory categorical/release evidence instead of silently
  // preferring stale JSON-LD. Compound processes must stay unsimplified.
- const compound=key==='process'&&new Set(textOf(value).toLowerCase().match(/\b(?:washed|natural|honey|anaerobic)\b/g)||[]).size>1;
+ const anaerobicNatural=key==='process'&&/\b(?:anaerobic[\s-]+natural|natural[\s-]+anaerobic)\b/i.test(textOf(value));
+ const compound=key==='process'&&!anaerobicNatural&&new Set(textOf(value).toLowerCase().match(/\b(?:washed|natural|honey|anaerobic)\b/g)||[]).size>1;
  if(conflicts&&(compound||(s&&fields[key]&&['process','roast_level','release_label'].includes(key)&&
     keyOf(s)!==keyOf(fields[key])))){
   conflicts.add(key);delete fields[key];return;
@@ -389,6 +395,21 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const roaster_details=extractLayoutEvidence(product,{
   fields,addField:(key,value)=>addField(fields,key,value),clean
  });
+ // JSON-LD additionalProperty can publish numeric roast color without an
+ // HTML metric. Retain the measured value from this matched Product only.
+ if(!roaster_details.agtron){
+  const attrs=Array.isArray(p.additionalProperty)?p.additionalProperty:[];
+  const evidence=attrs.find(row=>/^(?:ground\s+)?(?:agtron|roast\s+colou?r|agtron\s+(?:gourmet|commercial))$/i.test(String(row?.name||'').trim()));
+  if(evidence){
+   const reading=interpretAgtron(evidence.value,{scale:evidence.name});
+   if(reading){
+    roaster_details.agtron=reading.display;
+    if(reading.scale!=='unspecified')roaster_details.agtron_scale=reading.scale;
+    if(reading.sample!=='unspecified')roaster_details.agtron_sample=reading.sample.replace('_',' ');
+   }
+  }
+ }
+
  // Coffee-specific product and brand metadata may be present in HTML meta tags
  // rather than JSON-LD (but never trust unrelated generic SEO prose).
  for(const [k,v] of Object.entries(meta)){
@@ -405,6 +426,22 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roast_evidence.hint='The page contains inconsistent roast values; select the correct level from the roaster’s label.';
    roast_evidence.value=null;
   }else if(!fields.roast_level)fields.roast_level=roast_evidence.value;
+ }
+ // Agtron's manufacturer reference uses GROUND coffee and has two scales.
+ // Show exact score and a reviewable seven-tier suggestion; an unspecified
+ // scale/sample is provisional. Explicit labels and source conflicts win.
+ const agtron=interpretAgtron(roaster_details.agtron||'',{
+  scale:roaster_details.agtron_scale||'',sample:roaster_details.agtron_sample||''
+ });
+ if(agtron?.roast){
+  const explicit=fields.roast_level||'';
+  if(!explicit&&!conflicts.has('roast_level')){
+   fields.roast_level=agtron.roast;
+   roast_evidence.hint=agtronExplanation(agtron);
+   roast_evidence.source=agtron.provisional?'agtron_provisional_review':'agtron_ground_anchor';
+  }else if(explicit&&explicit!==agtron.roast){
+   roast_evidence.hint=agtronExplanation(agtron,explicit);
+  }
  }
  // Fallback extractors may directly set a field; a conflict remains final.
  for(const field of conflicts)delete fields[field];
