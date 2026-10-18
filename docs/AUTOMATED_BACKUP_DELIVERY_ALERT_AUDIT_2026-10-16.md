@@ -2,6 +2,12 @@
 
 **CURRENT RESULT — PASS with precise limits:** Two consecutive scheduled encrypted GitHub artifacts were transferred to private Drive with exact byte SHA-256 matches. The owner also **received a clearly labeled test alert** generated through the existing Apps Script `sendBackupAlert_()` function, and a separate independent daily read-only backup watchdog was enabled. **Still unverified:** actual failed-transfer or 36-hour-overdue-trigger execution, Apps Script's own trigger health, real 30-day Drive expiration. See the dated evidence below and [CURRENT_STATUS.md](CURRENT_STATUS.md); do not request a duplicate synthetic alert email.
 
+## October 18 cross-check — active real trigger, prior synthetic alert receipt, offsite SHA-256 and recovery
+
+**Owner-provided screenshot (2026-10-18):** Google Apps Script Triggers lists the **Head**-deployed **time-based `syncPrivateBackups`** trigger, Owned by Me; **Last run `Oct 18, 2026, 3:20:07 PM` (screen-local, no timezone inferred)** and **0% displayed error rate**. This directly resolves earlier uncertainty about whether a trigger is installed and recently running; it does **not** demonstrate the background script's built-in failure-notification setting or a true exception event.
+
+**Do not repeat** the already successful [Oct16 owner-confirmed `testBackupAlert()` delivered email](#synthetic-failure-alert-delivery--owner-acceptance-2026-10-16). That test invoked the real `sendBackupAlert_()` handler without tampering with the backup. Full [new audit](REAL_ACCOUNT_PRIVACY_AND_PROVIDER_SECURITY_AUDIT_2026-10-18.md) records the October 18 exact GitHub/Drive encrypted ZIP SHA-256 PASS, independently completed network-isolated restore, Netlify/Supabase checks, and the key remaining negative. **Separate ChatGPT daily `DIC Backup Watchdog` is enabled but its task metadata reports notifications_enabled=false/email_enabled=false; its alert delivery is NOT proven.** The earlier six-hour `Dial In Backup Health` is disabled; do not create a duplicate watch or claim its status is current.
+
 ## Scheduled GitHub export (read-only provider evidence)
 
 The `.github/workflows/nightly-backup.yml` file on `main` contains `on.schedule: cron '23 9 * * *'` plus `workflow_dispatch`; it uses `actions/upload-artifact@v7`, encrypted `backup.age` only, with GitHub artifact retention set to 30 days. Schedule times are nominal; actual observed dispatch occurred later, so alert thresholds should tolerate provider latency.

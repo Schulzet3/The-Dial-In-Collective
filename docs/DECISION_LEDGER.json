@@ -2729,5 +2729,75 @@
     ],
     "risk_scope": "No changes to production data, backup source pin, archives, triggers or keys; encrypted ciphertext compared only",
     "issue": 28
+  },
+  "independent_live_privacy_and_provider_audit_20261018": {
+    "status": "PASS actual production row-level and admitted-member SQL role/claim simulations, Apps Script owner-observed trigger/email-alert, read-only provider audit; true signed JWT HTTP and some provider failure/setting verification OPEN",
+    "report": "docs/REAL_ACCOUNT_PRIVACY_AND_PROVIDER_SECURITY_AUDIT_2026-10-18.md",
+    "baseline_locked_unchanged": 79,
+    "baseline_open_unchanged": 20,
+    "live_accounts": {
+      "actual_admitted_and_email_confirmed": 2,
+      "admin_personal_shots": 16,
+      "admin_personal_notes": 16,
+      "nonadmin_personal_shots": 0,
+      "nonadmin_personal_notes": 0,
+      "foreign_rows_across_15_owner_read_rls_tables_for_each": 0,
+      "personal_state_rpc_foreign_notes_or_shots": 0,
+      "eligible_anonymous_community_dto_rows": 2,
+      "forbidden_community_fields": 0,
+      "anonymous_and_unadmitted_denied": true,
+      "nonadmin_dashboard_denied": true,
+      "forged_user_metadata_admin_denied": true,
+      "execution": "production BEGIN READ ONLY, SET LOCAL ROLE authenticated/anon, transaction-local simulated request.jwt.claims, ROLLBACK; NOT signed HTTP JWT"
+    },
+    "apps_script": {
+      "owner_trigger_screenshot_last_run_local": "2026-10-18 3:20:07 PM",
+      "function": "syncPrivateBackups",
+      "deployment": "Head",
+      "event": "Time-based",
+      "error_rate_display": "0%",
+      "observed_existing_only": true,
+      "owner_inbox_synthetic_alert_pass_20261016": true,
+      "archive_drive_sha256_match_20261018": true,
+      "restore_weekly_run_39134655253": "PASS",
+      "real_failure_induced": false
+    },
+    "independent_watchdog": {
+      "title": "DIC Backup Watchdog",
+      "enabled": true,
+      "last_run_utc": "2026-10-18T17:41:09Z",
+      "notifications_enabled": false,
+      "email_enabled": false,
+      "delivery_verified": false,
+      "owner_notification_ui_action_required": true
+    },
+    "restricted_provider_settings": {
+      "netlify_deploy_current": "6ad5197d42cc6608b98712a4",
+      "nonproduction_sso_on": true,
+      "production_extra_sso_off": true,
+      "site_env_public_keys_only": [
+        "SUPABASE_URL",
+        "SUPABASE_PUBLISHABLE_KEY"
+      ],
+      "team_env_variables": 0,
+      "netlify_team_enforce_mfa": "not_enforced, individual account MFA unknown",
+      "private_github_rulesets": "403 GitHub Pro/private-repo paywall",
+      "branch_protection": "403 integration lacks permission",
+      "cloudflare": "Owner BIND export Oct16 11/11 records verified; current live DNSSEC/DMARC control panel inaccessible",
+      "resend": "Historical sending-domain DKIM source verified; actual keys/SMTP deliverability status not independently accessible",
+      "billing_and_credits": "Owner-managed, no live connector balance",
+      "supabase_breach_check": "Free tier optional for limited beta by owner Locked §4.4; warning remains not enabled"
+    },
+    "no_live_writes": true,
+    "no_provider_edits": true,
+    "no_new_notifications_or_email_sent": true,
+    "no_purchases": true,
+    "no_deploy": true,
+    "open_scope": [
+      "#9 and #11 signed JWT/member browser negative acceptance",
+      "#28 genuine triggered transfer failure and 36h overdue notifications, live retention and task notification delivery",
+      "#27 restricted dashboard provider settings and owner account MFA",
+      "beta product feature issues unrelated to privacy"
+    ]
   }
 }
