@@ -2,7 +2,7 @@
   "product": "The Dial In Collective",
   "provider": "Netlify",
   "account_plan": "Personal (paid through current billing period; downgrade to Free scheduled)",
-  "accounting_note": "Last owner screenshot (2026-10-17) showed 940 of 1000 Personal credits BEFORE approved Oct 17/18 release. New Netlify deployment 6ad443189d070656c813ef63 is READY; plan cost estimated 15 credits, but actual charge/balance after new release was NOT independently read. Owner monitors remaining credits and will alert when low; require explicit owner approval again for any future publish.",
+  "accounting_note": "Most recent owner-provided Personal snapshot: 940/1000 credits as of 2026-10-17 (historical), current grant through 2026-11-14. Exact READY/current Netlify publication 6ad5030aaae6cba42933a800 from d54f84103285cfb0185e1d806efe9e8c6064b72d on 2026-10-18 17:34 UTC; estimated cost 15 credits, actual charge/current balance not accessible via connector. Owner monitors further balance under existing Locked grant, no purchases or recharge.",
   "monthly_included_credits": 1000,
   "production_deploy_credits_each": 15,
   "snapshots": [
@@ -101,6 +101,47 @@
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
     "post_release_billing_refresh_needed": false,
     "last_published_release": {
+      "deploy_id": "6ad5030aaae6cba42933a800",
+      "published_commit_sha": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
+      "published_at_utc": "2026-10-18T17:34:16.118Z",
+      "netlify_status": "ready/current",
+      "context": "production",
+      "branch": "development/backend-foundation",
+      "primary_hostname": "https://app.dialincollective.com",
+      "production_requires_netlify_team_sso": false,
+      "nonproduction_requires_netlify_team_sso": true,
+      "scanned_files": 212,
+      "secret_scan_matches": 0,
+      "published_functions": [
+        "coffee-url-preview"
+      ],
+      "previous_function_binary_unchanged": true,
+      "planned_cost_credits": 15,
+      "actual_credits_deducted": "UNKNOWN: Netlify connector does not expose live billing",
+      "approval_exhausted": true
+    },
+    "owner_waived_balance_check_for_this_release": {
+      "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
+      "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
+      "verified_billing_balance": "Not measured"
+    },
+    "credit_monitoring_mode": "owner_managed",
+    "owner_monitoring_approval": "OPS-CREDIT-OWNER-MONITORING-20261017-01",
+    "explicit_publish_approval_per_release": true,
+    "owner_release_approval": "OPS-PER-RELEASE-OWNER-APPROVAL-20261017-01",
+    "maximum_snapshot_age_days_scope": "Historical operator-verified model only. Owner-managed mode waives repeated seven-day screenshot requests through the current grant expiration while retaining 15-credit and explicit publication permission.",
+    "current_known_plan_expires": "2026-11-14",
+    "owner_assumes_proactive_low_credit_notice": true,
+    "last_individually_authorized_release": {
+      "scope": "one mandatory Community confirmation RPC-error retry frontend fix",
+      "owner_reply": "Yes approved. Do it",
+      "authorized_in_current_conversation": true,
+      "commit": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
+      "deploy_id": "6ad5030aaae6cba42933a800",
+      "authorization_exhausted": true,
+      "next_release_requires_new_explicit_owner_approval": true
+    },
+    "previous_published_release": {
       "deploy_id": "6ad443189d070656c813ef63",
       "published_commit_sha": "d8ced8f74c682466445ede58bfc45497b10c30ce",
       "published_at_utc": "2026-10-18T03:55:20.509Z",
@@ -116,19 +157,7 @@
       "actual_credits_deducted": "NOT MEASURED: owner monitors; planned 15 credits",
       "planned_cost_credits": 15
     },
-    "owner_waived_balance_check_for_this_release": {
-      "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
-      "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
-      "verified_billing_balance": "Not measured"
-    },
-    "credit_monitoring_mode": "owner_managed",
-    "owner_monitoring_approval": "OPS-CREDIT-OWNER-MONITORING-20261017-01",
-    "explicit_publish_approval_per_release": true,
-    "owner_release_approval": "OPS-PER-RELEASE-OWNER-APPROVAL-20261017-01",
-    "maximum_snapshot_age_days_scope": "Historical operator-verified model only. Owner-managed mode waives repeated seven-day screenshot requests through the current grant expiration while retaining 15-credit and explicit publication permission.",
-    "current_known_plan_expires": "2026-11-14",
-    "owner_assumes_proactive_low_credit_notice": true,
-    "last_individually_authorized_release": {
+    "previous_individually_authorized_release": {
       "scope": "seven roast labels, exact five coffee changes, expanded URL extractor, one-click Autofill, final app fixes",
       "authorized_in_current_conversation": true,
       "commit": "d8ced8f74c682466445ede58bfc45497b10c30ce",
@@ -137,7 +166,7 @@
       "next_release_requires_new_explicit_owner_approval": true
     }
   },
-  "reconciliation": "Latest provider-verified production Netlify deploy is 6ad2c872ad7a8fa78dc410dc from SHA f08dfda99f46b25240cb8cc35c46d2c3c76344b8, published 2026-10-17 01:02 UTC (Oct 16 US Mountain), with one authenticated URL preview function, ready/0 secrets matches. User explicitly waived a fresh credit-balance check for this approved release; old 970 snapshot is historical, not today's verified balance. Post-release actual credits are unknown, and the next release must refresh billing or obtain separate owner authorization. No provider plan change, paid purchase or automatic recharge.",
+  "reconciliation": "Live Netlify current READY 6ad5030aaae6cba42933a800 from d54f84103285cfb0185e1d806efe9e8c6064b72d on 2026-10-18 17:34 UTC; only a tested mandatory outlier retry UI hotfix released. Netlify visitor access unchanged, 212 files/zero secrets. Supabase migrations, Edge functions and member history unchanged. Latest backup-only main recovery source pin 24cf8be2a8b8332bac75ba87d7d745152d7a7e22; encrypted GitHub backup 39150331467 SUCCESS. Historical previous release data is preserved separately.",
   "scheduled_plan_change": {
     "plan": "Free",
     "timing": "After current Oct 15-Nov 14 Personal period",
@@ -161,5 +190,29 @@
     "approval_per_release_required": true,
     "assistant_requested_screenshot_each_release": false,
     "currently_published_deploy_unchanged": true
+  },
+  "latest_publication_20261018": {
+    "published_sha": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
+    "deploy_id": "6ad5030aaae6cba42933a800",
+    "published_at_utc": "2026-10-18T17:34:16.118Z",
+    "verified_state": "Netlify production current/ready",
+    "ci_runs_pass": [
+      39144628914,
+      39144628910,
+      39144628921
+    ],
+    "postflight": "21 edge 200 responses including cloud/main.js; 15 shots/15 notes/1 eligible Community unchanged",
+    "backup_pin_commit": "24cf8be2a8b8332bac75ba87d7d745152d7a7e22",
+    "backup_run": 39150331467,
+    "backup_status": "success",
+    "backup_artifact": 12144424733,
+    "latest_observed_personal_credit_balance": {
+      "observed_date": "2026-10-17",
+      "remaining": 940
+    },
+    "actual_credit_balance": "unverified",
+    "offsite_push_backup_delivery": "unverified; not a scheduled courier receipt",
+    "authenticated_live_member_acceptance": "pending #34, #9, #11",
+    "permission_for_next_release": false
   }
 }

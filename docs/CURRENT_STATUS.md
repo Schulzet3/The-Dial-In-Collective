@@ -1,5 +1,13 @@
 # Current Status — The Dial In Collective
 
+## LATEST VERIFIED LIVE RELEASE — confirmation retry repair (2026-10-18)
+
+**PUBLISHED / CURRENT / READY:** [Netlify deployment `6ad5030aaae6cba42933a800`](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad5030aaae6cba42933a800) went live **2026-10-18 17:34:16 UTC** from exact GitHub commit **`d54f84103285cfb0185e1d806efe9e8c6064b72d`**, `development/backend-foundation`. The already-tested mandatory held-shot Confirm error recovery is live: visible failure in required modal, retryable Confirm, successful confirmation releases modal before refresh. The user authorized exactly **one** production deployment; future publishing needs fresh explicit permission. [Full release and checks](RELEASE_2026_10_18_CONFIRMATION_RETRY.md). **Earlier documentation sections below refer to the previously published release and are historical.**
+
+Provider postflight: **212 deploy files scanned, zero secrets, one changed asset, original `coffee-url-preview` function binary unchanged**; initial post-release window **21 HTTP 200** requests including new deployed `/cloud/main.js`, no 4xx/5xx; production Netlify SSO OFF, nonproduction SSO ON. Supabase **28 migrations**, **2 JWT-protected Edge functions unchanged**; 15 personal shots, 15 private notes, 4 canonical coffees, 4 workspace coffees, 1 eligible Yirgacheffe Community row, 0 Pending/held, 1 quality review and 1 contributor link. No schema/Edge/member-data mutation.
+
+Backup: [`main` `24cf8be2a8b8332bac75ba87d7d745152d7a7e22`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/24cf8be2a8b8332bac75ba87d7d745152d7a7e22) pins the exact published source. [Encrypted backup 39150331467 PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39150331467) including artifact `12144424733` (914,543 bytes); **push-only GitHub artifact is not a new verified Google Drive receipt**. Credit charge estimated **15**; actual latest owner-managed Netlify balance unavailable through connector. **Unverified:** real owner/other-member production session with injected RPC failure, #34 acceptance; #9/#11 cross-account; Cloudflare/Resend settings; Drive digest and courier. No claim all app roadmap features are complete. Existing **79 Locked/20 original Open** baseline preserved.
+
 
 ## Independent cross-provider audit — October 18, 2026 (LATEST)
 

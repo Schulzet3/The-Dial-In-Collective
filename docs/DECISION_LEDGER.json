@@ -2427,5 +2427,35 @@
     "required_behavior": "After authenticated online review returns a held extreme outlier, require immediate Confirm Measurement or Correct Shot; no defer/close/ESC/navigation bypass of a known hold. Confirmation owner+revision+fingerprint bound; correction uses existing owner/revision checked Edit Shot and downstream recomputation. Preserve previously recorded raw/history and privacy.",
     "coffee_edit_rule": "Owner may revise own pending coffee proposal with version check. Verified globally shared canonical coffee details require an owner-scoped source/audit correction request, not direct user mutation or identity merging.",
     "release_scope": "One owner-approved coordinated Supabase SQL and Netlify app release; no automatic historical pending quality promotion, billing or unrelated configuration changes."
+  },
+  "current_owner_scoped_confirmation_retry_release_20261018": {
+    "id": "OPS-COMMUNITY-RETRY-RELEASE-20261018",
+    "status": "Approved, published; authorization exhausted",
+    "source": "Owner answered 'Yes approved. Do it' to explicitly scoped deployment permission",
+    "scope": "Exactly one existing Netlify production publish of tested mandatory shot outlier Confirm error/retry fix",
+    "not_authorized": [
+      "new SQL or Edge migrations",
+      "new account data/test shots",
+      "second deploy",
+      "security settings/billing changes",
+      "unrelated features"
+    ],
+    "tested_code_sha": "19d7592e182fddc76dc5716a41b7e5e6f3d3bfbb",
+    "ci_pass": [
+      39144628914,
+      39144628910,
+      39144628921
+    ],
+    "published_sha": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
+    "netlify_deploy": "6ad5030aaae6cba42933a800",
+    "published_utc": "2026-10-18T17:34:16.118Z",
+    "verified_current_ready": true,
+    "encrypted_backup_source_pin": "24cf8be2a8b8332bac75ba87d7d745152d7a7e22",
+    "encrypted_backup_run": 39150331467,
+    "original_locked_decisions_preserved": true,
+    "product_decision_supersession": "none",
+    "remaining_auth_browser_acceptance": "open #34/#9/#11",
+    "new_release_approval_required": true,
+    "release_receipt": "docs/RELEASE_2026_10_18_CONFIRMATION_RETRY.md"
   }
 }
