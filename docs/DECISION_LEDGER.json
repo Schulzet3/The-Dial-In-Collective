@@ -2513,7 +2513,7 @@
   },
   "current_owner_approved_community_nested_layout_20261018": {
     "id": "UX-COMMUNITY-GROUPING-20261018-01",
-    "status": "Locked; development implementation staged, not published",
+    "status": "Locked; full development Node/mobile/Chromium/visual CI PASS; NOT published",
     "owner_answer": "B. Show compact Community shot rows when its coffee is opened, with individual detail expansion.",
     "scope": "Community list renders one default-collapsed coffee card per verified coffee; opening a card reveals compact qualifying shot rows; any row may independently open ratings/evidence.",
     "preserved_locked_behavior": "Personal Coffee screen shot history remains collapsed by default and unchanged; no automatic full shot-detail expansion, multiple shot comparison remains available.",
@@ -2534,6 +2534,31 @@
       "1ac0061541b3ef79ccc2485afb5ef945086c7eb5"
     ],
     "release_permission": "NOT GIVEN; distinct future publish requires owner approval",
-    "acceptance": "Node unit/test + mobile Chromium/visual checks pending at initial documentation checkpoint; real member acceptance after publication separate"
+    "acceptance": "Synthetic dev CI PASS; requires separately approved production release then genuine second-account UI acceptance.",
+    "final_source_sha": "79e6f172f247ec76da07bb7d559190cb0183bca2",
+    "intermediate_failure_and_resolution": {
+      "first_run": 39162344895,
+      "description": "One obsolete literal heading expectation (344/345 tests), not app runtime failure",
+      "fixed_commit": "1ac0061541b3ef79ccc2485afb5ef945086c7eb5"
+    },
+    "final_tests": [
+      {
+        "run": 39162660186,
+        "result": "PASS",
+        "scope": "Node unit/lint/static build"
+      },
+      {
+        "run": 39162660203,
+        "result": "PASS",
+        "scope": "cloud regression including synthetic 390px mobile"
+      },
+      {
+        "run": 39162660213,
+        "result": "PASS",
+        "scope": "Chromium grouped card/shot interaction, keyboard, filters, privacy, visual screenshots"
+      }
+    ],
+    "css_cleanup_sha": "79e6f172f247ec76da07bb7d559190cb0183bca2",
+    "owner_publish_authorization": "NOT GIVEN; ask one question before production release; no SQL/Edge/account updates"
   }
 }
