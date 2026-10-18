@@ -55,7 +55,7 @@ test('admin page uses the same persisted Supabase session and verifies admin RPC
  assert.match(app,/this\.status\?\.admin/);assert.match(app,/Admin Dashboard/);
 });
 test('the proposed SQL never grants admin rights or enables mutation operations',async()=>{
- const sql=await readFile(new URL('../supabase/migrations/20261014211500_dic_admin_read_only_dashboard.sql',import.meta.url),'utf8');
+ const sql=await readFile(new URL('../supabase/migrations/20261014212829_dic_admin_read_only_dashboard.sql',import.meta.url),'utf8');
  assert.match(sql,/private\.is_admin\(\)/);
  assert.match(sql,/security definer set search_path=''/);
  assert.match(sql,/security invoker set search_path=''/);
