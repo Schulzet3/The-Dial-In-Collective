@@ -2490,6 +2490,25 @@
     "direct_pwa_http_body_test": "not verified: runtime could not resolve public host",
     "new_drive_delivery": "not yet verified",
     "new_release_approval_required": true,
-    "release_receipt": "docs/RELEASE_2026_10_18_OFFLINE_PWA.md"
+    "release_receipt": "docs/RELEASE_2026_10_18_OFFLINE_PWA.md",
+    "real_iphone_offline_sync_acceptance": {
+      "status": "PASS for real offline queued shot and on-reconnect durable server persistence, additional isolation and multi-device open",
+      "owner_report": "Real shot logged while offline showed 1 Pending; after reconnect showed Synched. Owner confirmed worked great.",
+      "provider_read_only": "16 total unique shots and 16 private notes vs previously 15/15; 1 newly created and 1 newly pulled since 2026-10-18 19:10:03.616 UTC; corresponding note present.",
+      "not_independently_verified": [
+        "iPhone network trace and signed JWT",
+        "client mutation receipt",
+        "real separate account cache isolation",
+        "iOS expired session/eviction",
+        "multi-device stale conflict and app update"
+      ],
+      "next_feature_dependency_order": [
+        "#10 alternate recipe families",
+        "#12 evidence tiers",
+        "#13 experiment lifecycle"
+      ],
+      "no_product_decisions_superseded": true,
+      "no_new_production_release": true
+    }
   }
 }
