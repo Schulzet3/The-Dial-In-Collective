@@ -1,0 +1,29 @@
+# One-shot source-only official CLI migration name. No DB credentials and no deployment.
+name: DIC invitation migration filename via official CLI
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/dic-invite-cli-migration-prep.yml'
+permissions:
+  contents: read
+jobs:
+  filename:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Use official Supabase CLI without project credentials
+        run: |
+          set -euo pipefail
+          npx --yes supabase@latest --version
+          npx --yes supabase@latest migration new dic_admin_beta_invitation_controls
+          echo 'GENERATED_CLI_FILE:'
+          find supabase/migrations -maxdepth 1 -type f -name '*_dic_admin_beta_invitation_controls.sql' -print
+          test "$(find supabase/migrations -maxdepth 1 -type f -name '*_dic_admin_beta_invitation_controls.sql' | wc -l)" -eq 1
+          echo 'No SQL deployed and no file pushed.'
