@@ -40,7 +40,7 @@ export function communityPage({shots=[],total=0,loading=false,error='',style='al
    <div><p class="eyebrow">The Collective</p><h2 id="community-heading">Community Shots</h2></div>
    ${button(`${icon('arrow',15)} Refresh`,'community-refresh','','ghost compact')}
   </div>
-  <p class="helper">Dialed-In observations from verified coffees. No names, accounts or private notes are shared. Measurements and styles are guidance, not pass/fail rules.</p>
+  <p class="helper">Dialed-In observations from verified coffees. No account names, private notes or custom setup details are shared. Qualifying anonymous contributions may persist if personal shot history or the account is deleted. Styles are guidelines, not pass/fail rules.</p>
   ${error?`<p class="preview-note" role="alert">${e(error)}</p>`:''}
   ${shots.length?`<div class="community-filters">
     <label class="field"><span>Style</span><select id="community-style" aria-label="Filter Community shots by style">

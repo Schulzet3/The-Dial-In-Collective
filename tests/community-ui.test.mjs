@@ -84,3 +84,10 @@ test('Supabase adapter uses narrow RPC names without raw account identity payloa
  ]);
  client.dispose();
 });
+
+
+test('Community privacy disclosure explains durable anonymous evidence after account deletion',()=>{
+ const html=communityPage({shots:[row],total:1});
+ assert.match(html,/may persist if personal shot history or the account is deleted/);
+ assert.match(html,/private notes/);
+});

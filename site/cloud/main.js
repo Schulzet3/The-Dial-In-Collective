@@ -189,6 +189,12 @@ class CloudApp {
      <button class="primary full">Save Advanced Options</button></form></details>`:''}
    </section>
    ${this.status?.admin?`<section class="settings-section settings-admin" aria-label="Administration"><h3 class="settings-heading">Administration</h3>${button(`${icon('shield',18)}<span>Admin Dashboard</span>${icon('chevron',16)}`,'open-admin','','settings-row')}</section>`:''}
+   <section class="settings-section" aria-label="Community and privacy">
+    <details class="advanced settings-advanced">
+     <summary>Community &amp; Privacy</summary>
+     <p class="helper">Dialed-In shots from verified coffees contribute anonymously after validation. Qualifying contributions may remain even if you hide a personal shot or delete your account; private notes, account names, and personal setup details are never shared.</p>
+    </details>
+   </section>
    <section class="settings-section settings-system" aria-label="Cloud Sync">
     ${button(`${icon('cloud',18)}<span>Cloud Sync Details</span>${icon('chevron',16)}`,'sync','','settings-row')}
    </section>
