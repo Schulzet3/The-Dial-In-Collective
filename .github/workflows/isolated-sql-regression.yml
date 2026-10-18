@@ -7,6 +7,8 @@ on:
       - 'supabase/tests/**'
       - 'tests/sql/**'
       - 'scripts/audit/isolated-sql-regression.sh'
+      - 'scripts/audit/verify-migration-baseline.mjs'
+      - 'docs/SUPABASE_PRODUCTION_MIGRATION_BASELINE_2026-10-18.json'
       - '.github/workflows/isolated-sql-regression.yml'
   pull_request:
     branches: [development/backend-foundation]
@@ -21,5 +23,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+      - name: Verify all production-applied migration filenames and exact SQL byte hashes
+        run: node scripts/audit/verify-migration-baseline.mjs
       - name: Apply and exercise schema in network-isolated PostgreSQL 17.11
         run: bash scripts/audit/isolated-sql-regression.sh
