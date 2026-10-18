@@ -2560,5 +2560,37 @@
     ],
     "css_cleanup_sha": "79e6f172f247ec76da07bb7d559190cb0183bca2",
     "owner_publish_authorization": "NOT GIVEN; ask one question before production release; no SQL/Edge/account updates"
+  },
+  "current_owner_approved_community_release_context_20261018": {
+    "id": "UX-COMMUNITY-RELEASE-CONTEXT-20261018-01",
+    "status": "Owner Locked; development staged; NO hosted changes",
+    "owner_answer": "A. Use other verified release details when dates are unavailable. Proceed with the release grouping in development, preserve separate canonical release identities, and do not publish yet.",
+    "supersedes_only": "§22.3A historical frontend-only identity caveat, now addressed by planned server-sanitized canonical release key; preserves all other prior Locked Community and personal Coffee behaviors.",
+    "parent_group": "public roaster+coffee name",
+    "child_group": "stable SHA-256 of verified canonical coffee.id; never contributor/shot/user",
+    "one_tap": "coffee opens all loaded compact shot rows; release headings not additional disclosure; individual ratings stay collapsed",
+    "release_description": [
+      "release_label if verified",
+      "origin",
+      "process",
+      "producer",
+      "variety",
+      "roast level",
+      "Release details unavailable if nothing verified"
+    ],
+    "release_date_caveat": "No release_date column; no invented date; observed_on and created_at are not release dates; release ordinals not chronological.",
+    "backend_scope": "read-only, admitted-only dic_browse_community_shots additive sanitized DTO from verified canonical facts, privacy and per-release/style contributor evidence unchanged",
+    "security": "do not expose raw IDs, account notes, owner identity, source shot IDs, equipment or nonverified facts; explicit revoke and authenticated-only grant",
+    "partial_legacy": "No release key means do not falsely claim release identity; show unknown identity when mixed",
+    "delivery": "Development ONLY; SQL draft under supabase/drafts until Supabase CLI migration is generated in release prep, no production SQL, Netlify deployment, invitations, data writes or new credits",
+    "source_commits": [
+      "5c7bb704edbf60f015d7ac5afe16138ebb4385e8",
+      "5b3136faf6652fee593449526147a6ff365900f4",
+      "18b998ae0f2d572f55ada55a3b5ebd49d31a511e",
+      "f14511c62d531d2114662ddb353da3f33de84418"
+    ],
+    "verification": "CI checks pending at this checkpoint; isolated synthetic SQL, Node and Chromium tests required; real member acceptance after separately approved publication",
+    "previous_locked_count": 79,
+    "previous_open_count": 20
   }
 }
