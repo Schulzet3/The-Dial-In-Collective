@@ -10,7 +10,7 @@ declare
  submission uuid; pending_projection uuid; same_user_shot uuid; c2_shot uuid;
  old_cid uuid; old_revision bigint; outcome text; result jsonb;
  i integer; quality_count integer; pre_revision bigint;
- status text; reason text; totals jsonb; denied boolean;
+ status text; reason_value text; totals jsonb; denied boolean;
  before_timestamp timestamptz;
 begin
  if current_database()<>'dic_ci' then raise exception 'Only isolated dic_ci may execute community test'; end if;
@@ -64,8 +64,8 @@ begin
    raise exception 'Extreme time not held for correction/confirmation: %',status;
   end if;
  end loop;
- select reason into reason from private.community_quality_checks where community_shot_id=cs[6];
- if reason<>'extreme_outlier' then raise exception 'Held reason lost: %',reason;end if;
+ select q.reason into reason_value from private.community_quality_checks q where community_shot_id=cs[6];
+ if reason_value<>'extreme_outlier' then raise exception 'Held reason lost: %',reason_value;end if;
  if (select count(*) from public.community_shots where coffee_id=c1 and quality_state='eligible')<>5 then
   raise exception 'Eligibility not limited to five vetted baseline samples';end if;
 
