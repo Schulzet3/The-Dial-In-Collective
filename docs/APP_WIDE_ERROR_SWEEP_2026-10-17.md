@@ -2,7 +2,7 @@
 
 Date: 2026-10-17. Active branch: `development/backend-foundation`.
 
-**Development fixes and local regression checks completed. No publication. Full beta readiness is not established.** Exact GitHub Actions/source evidence is recorded in the final checkpoint below after read-back. This report does not certify every possible input, device, provider setting or future website as error-free.
+**The available-source sweep, confirmed development fixes and applicable local/GitHub checks are complete. No publication. Full beta readiness is not established.** Final tested code: `670a104eb670049b001b4ab182b05edeb2a2de5c`. Exact Actions/source evidence follows below. Restricted provider settings and the unresolved items in this report are not certified checked or fixed. This is not a claim that every possible input, device or future website is error-free.
 
 ## Source, authority and scope
 
@@ -29,6 +29,7 @@ The targeted failure cases were reproduced against baseline code before the init
 | Check | Result and boundary |
 | --- | --- |
 | Dependency installation and audit | Exact runtime lockfile installed; npm audit reported zero known vulnerabilities in the nine-package dependency tree. This is a registry advisory result, not proof of no vulnerabilities. |
+| Available dependency update | Final `npm outdated --json` reports pinned `@supabase/supabase-js` 2.117.3, with 2.118.0 available. The [official 2.118.0 release](https://github.com/supabase/supabase-js/releases/tag/v2.118.0) lists PostgREST type-generation and Storage upload features plus upstream CI dependency fixes; no fix for a confirmed app problem was identified. The tested runtime pin is retained. This sweep does not claim every dependency is the newest release. |
 | Node regressions | 291 tests pass, 0 fail, 0 skipped; 274 baseline tests plus 17 new cases. Local runtime Node 24.19.0; Actions exercises Node 22. |
 | Lint | ESLint 10.13.0: zero lint errors/warnings across configured browser, server, Edge and audit modules. Environment-level npm proxy notices are not source lint findings. |
 | Build/import integrity | Allowlisted cloud build with a nonfunctional public test key; 26 shipped assets and every transitive import reachable. No docs, SQL, tests, backup scripts or privileged material shipped. |
@@ -79,4 +80,14 @@ Actual Actions on that SHA all passed:
 - [Active-branch visual gate, integrity and 117-check/36-screenshot review](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39070423151).
 - [Bounded public-source probe](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39070423136): nine of eleven requests parsed, representing eight distinct coffees. Queen City's variant/canonical eight facts and supplemental descriptions passed; homepage was rejected and Picky Chemist remained oversized. No member quota was consumed.
 
-**Follow-up found before release:** comparing actual field output, not just a green job, showed the new scope lost Proud Mary's Producer and Variety behind a long decorative prelude. Replaying identical public HTML against baseline and new code confirmed the regression. Named product widgets now scan the already bounded/isolated product scope, while generic token scanning remains short. A long-SVG regression and live Proud Mary assertions prevent recurrence. Same-response comparisons for Onyx, PERC, SEY, Black & White, Little Wolf and Heart showed no field differences from baseline. This follow-up brings local tests to 291; its exact commit and Actions result are pending the final checkpoint. No deployed application was affected.
+**Follow-up found before release:** comparing actual field output, not just a green job, showed the new scope lost Proud Mary's Producer and Variety behind a long decorative prelude. Replaying identical public HTML against baseline and new code confirmed the regression. Named product widgets now scan the already bounded/isolated product scope, while generic token scanning remains short. A long-SVG regression and live Proud Mary assertions prevent recurrence. Same-response comparisons for Onyx, PERC, SEY, Black & White, Little Wolf and Heart showed no field differences from baseline. No deployed application was affected.
+
+Final code commit: [`670a104eb670049b001b4ab182b05edeb2a2de5c`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/670a104eb670049b001b4ab182b05edeb2a2de5c). All seven follow-up file contents were independently fetched and matched; branch advancement again used the expected head without force. Actual follow-up Actions all passed:
+
+- [291 Node tests, zero-warning lint, locked install and static build](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39070714855).
+- [Final cloud regression and synthetic mobile QA](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39070714841).
+- [Final live roaster probe](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39070714862), including restored Proud Mary Producer/Variety assertions and Queen City acceptance. Nine product URL responses parsed across eight coffees; the homepage negative control and oversized Picky Chemist result remained correct. The deprecated-action warnings were absent from this updated job.
+
+The visual UI and harness files are unchanged from the successful [117-check visual run](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39070423151); the follow-up did not trigger another visual run because its scoped paths did not change. This is explicit inherited evidence, not a claimed new 291-test visual run.
+
+[#29](https://github.com/Schulzet3/The-Dial-In-Collective/issues/29) is closed with actual active-branch gate evidence. #8, #27 and #28 were updated with this checkpoint and remain open. Other feature/provider issues were not closed. Final handoff changes are documentation only and do not alter the tested code. Netlify read-back after the code commits still returned the same READY published deploy and nonproduction-only SSO. No release/credit guard, canonical decision, production row, migration, Edge version or main-branch backup pin changed.
