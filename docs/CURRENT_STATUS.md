@@ -14,7 +14,7 @@ All changed file contents were fetched back from their exact GitHub commits and 
 
 The runtime dependency audit reports no known vulnerabilities. A final freshness check found Supabase SDK 2.118.0 available; the tested 2.117.3 pin is retained after reviewing the upstream release notes, which identify no fix for a confirmed app problem. See the report for the exact update boundary.
 
-**Owner approved and Locked one-click URL Autofill on October 17:** Autofill immediately fills available blank fields, the member reviews/edits, then selects Add Coffee. No separate Apply Suggested Details step. The historical October 15 wording remains preserved with a narrow explicit supersession in [the amendment](DECISION_LEDGER_2026_10_17_ONE_CLICK_URL_AUTOFILL.json). Obsolete hidden Apply UI/handler is removed in staged source, pending fresh CI. Quota and roast decisions remain unchanged.
+**Owner approved and Locked one-click URL Autofill on October 17:** Autofill immediately fills available blank fields, the member reviews/edits, then selects Add Coffee. No separate Apply Suggested Details step. The historical October 15 wording remains preserved with a narrow explicit supersession in [the amendment](DECISION_LEDGER_2026_10_17_ONE_CLICK_URL_AUTOFILL.json). Obsolete hidden Apply UI/handler was removed in staged source at `8f877ddd7ead0aaddab57877409443c70ecafb7d`. Fresh GitHub tests PASSED: cloud app/lint/build run 39093195785, mobile/UX regression run 39093195794, and full visual review run 39093195764. No publication or provider changes occurred. Quota and roast decisions remain unchanged.
 
 ## October 17 owner confirmation and read-only provider checks
 
