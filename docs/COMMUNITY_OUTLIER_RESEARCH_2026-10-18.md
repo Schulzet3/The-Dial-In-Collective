@@ -49,3 +49,11 @@ New `public.dic_my_community_outliers()` returns only the admitted owner's outst
 Development SQL integration fixtures test extreme 62-second time against prior same-owner shots and peer groups, user confirmation, role permissions, correction, verified canonical coffee, Pending exclusion, deletion/hide behavior and distinct contributor counts. Site tests check zero-leak Community DTOs, prompt actions and mobile UI. Record **actual** Actions run IDs, outcomes and limitations in [issue #9](https://github.com/Schulzet3/The-Dial-In-Collective/issues/9), [issue #11](https://github.com/Schulzet3/The-Dial-In-Collective/issues/11) and [CURRENT_STATUS](CURRENT_STATUS.md), never claim hosted test success from isolated fixture results.
 
 **No scientific source establishes that 3.5 modified Z is optimal for this app's espresso measurements; a genuine field-data evaluation remains necessary.**
+
+## Verified development acceptance — October 18 UTC
+
+- **SQL and security:** [`39103955572` PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39103955572), including contextual MAD, owner confirmation, version/correction, distinct-contributor cohorts, PENDING/private exclusions and RLS in disposable PostgreSQL.
+- **App code / lint / browser:** [`39103920744` build + lint + Node PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39103920744), [`39103920750` mobile UX PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39103920750), [`39103920739` visual PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39103920739). The last mobile test opened **Correct Shot** and confirmed no change until Save, then used the explicit confirmation action.
+- Exact tested SQL head: `e69fad3b70fd64324cfcb08a812121f39febc7d4`; app/browser head: `f8915520837753078637d8ebbeb46d7f90f54587`. Subsequent commits unrelated to this feature must not be described as tested without scope review.
+- **Production excluded:** Current hosted DB does **not** have `dic_my_community_outliers` or `dic_browse_community_shots`, new MAD migration is not installed and app prompt is not published; existing original Yirgacheffe Pending row and personal history remain intact. No claim of genuine signed-in member acceptance or empirically calibrated espresso outlier limit.
+
