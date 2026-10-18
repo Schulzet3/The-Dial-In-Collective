@@ -14,25 +14,25 @@ const targets=[
  ['Queen City canonical identity control','https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia'],
  ['Queen City homepage negative control','https://queencitycollectivecoffee.com/'],
  ['Onyx Mullugeta Muntasha','https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural-26?variant=43228176810082'],
- ['Onyx Mullugeta archive','https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural']
+ ['Onyx Mullugeta archive','https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural'],
  ['PERC Franky Hoyos','https://perccoffee.com/products/colombia-franky-hoyos-adv-washed?variant=53562522829114'],
  ['PERC Kenya Mara Estate','https://perccoffee.com/products/kenya-mara-estate'],
  ['PERC Nestor Lasso Ombligon','https://perccoffee.com/products/colombia-nestor-lasso-ombligon-1'],
- ['PERC Outpost Coffee','https://perccoffee.com/products/outpost-coffee']
+ ['PERC Outpost Coffee','https://perccoffee.com/products/outpost-coffee'],
  ['Picky Chemist Gesha Village','https://en.thepickychemist.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey'],
  ['SEY Chorso Bule','https://www.seycoffee.com/collections/coffee/products/2026-chorso-bule-highest-elevation-project-ethiopia'],
  ['SEY Yaye Arbegona','https://www.seycoffee.com/collections/coffee/products/2026-yaye-arbegona-ethiopia'],
- ['SEY Kedida Gubata','https://www.seycoffee.com/collections/coffee/products/2026-kedida-gubata-ethiopia']
+ ['SEY Kedida Gubata','https://www.seycoffee.com/collections/coffee/products/2026-kedida-gubata-ethiopia'],
  ['Queen City Banko Gotiti Natural','https://queencitycollectivecoffee.com/products/banko-gotiti-natural-ethiopia'],
  ['Queen City Sonia Bolanos','https://queencitycollectivecoffee.com/products/sonia-bolanos-colombia'],
- ['Queen City Belafonte','https://queencitycollectivecoffee.com/products/belafonte']
+ ['Queen City Belafonte','https://queencitycollectivecoffee.com/products/belafonte'],
  ['Sweet Bloom Wuri','https://sweetbloomcoffee.com/products/wuri'],
  ['Sweet Bloom Uraga','https://sweetbloomcoffee.com/products/uraga'],
- ['Sweet Bloom Felix Zaragoza','https://sweetbloomcoffee.com/products/felix-zaragoza']
+ ['Sweet Bloom Felix Zaragoza','https://sweetbloomcoffee.com/products/felix-zaragoza'],
  ['Black & White Los Altos','https://www.blackwhiteroasters.com/products/r-los-altos-washed'],
  ['Little Wolf Tegu','https://littlewolf.coffee/products/tegu'],
- ['Heart Phono','https://www.heartroasters.com/products/phono']
- ['Heart Ethiopia Halo','https://www.heartroasters.com/products/ethiopia-halo']
+ ['Heart Phono','https://www.heartroasters.com/products/phono'],
+ ['Heart Ethiopia Halo','https://www.heartroasters.com/products/ethiopia-halo'],
 ];
 const summarize=async ([roaster,url])=>{
  if(!safeCoffeeUrl(url))return {roaster,status:'invalid_target'};
