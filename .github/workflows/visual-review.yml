@@ -47,6 +47,8 @@ jobs:
           curl --fail --location --max-time 40 'https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf' -o /tmp/dic-render-assets/Fraunces.ttf
           curl --fail --location --max-time 40 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf' -o /tmp/dic-render-assets/JetBrainsMono.ttf
       - run: python tests/browser/cloud_owner_qa.py
+      - name: Verify real service-worker cached cold reopen in isolated Chromium
+        run: python tests/browser/pwa_offline_qa.py
       - run: python tests/browser/visual_review.py
         env:
           DIC_FONT_DIR: /tmp/dic-render-assets
