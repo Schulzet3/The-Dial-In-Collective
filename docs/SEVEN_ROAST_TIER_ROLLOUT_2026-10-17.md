@@ -1,6 +1,6 @@
 # Seven Roast Tiers — Owner Approval, Test Evidence and Production Rollout
 
-**Checkpoint:** 2026-10-17 UTC / 2026-10-16 America/Denver. **Partial implementation; not yet a published seven-tier feature.** Do not mistake a successfully expanded database CHECK for updated user-facing coffee classifications.
+**Original pre-release checkpoint:** 2026-10-17 UTC / 2026-10-16 America/Denver; at that time implementation was partial. **Superseded by the owner's separately authorized verified production release of 2026-10-18 UTC.** Full receipts and preserving historical acceptance below: [published release report](RELEASE_2026_10_17_SEVEN_TIER_EXTRACTOR.md). The five coffee corrections are now LIVE; release source `d8ced8f74c682466445ede58bfc45497b10c30ce`, Netlify READY `6ad443189d070656c813ef63`, Edge v2 JWT enabled, strict seven-only SQL migration `20261018035732`, main backup pin `6a0983cc2411bd81d0682acb44e922992cf2482a` with push smoke PASS. Real device and new offsite scheduled delivery still require separate acceptance. Do not mistake a successfully expanded database CHECK for updated user-facing coffee classifications.
 
 ## Locked product decisions
 

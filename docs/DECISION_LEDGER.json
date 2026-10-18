@@ -2175,7 +2175,7 @@
       "Light-Medium": "Medium-Light"
     },
     "prior_rules": "Retain five previous canonical category meanings and default recipe numbers. New Ultra Light and Very Light reuse Light priors pending data.",
-    "implementation": "PARTIAL: seven-tier app source + SQL tests passed CI; phase-one backwards-compatible Supabase migration applied and read-back verified. Netlify frontend/Edge parser release and owner-coffee reclassifications NOT yet done; guarded final strict SQL migration staged but NOT applied.",
+    "implementation": "LIVE verified: approved Netlify source d8ced8f74c682466445ede58bfc45497b10c30ce (deploy 6ad443189d070656c813ef63 READY); Edge dic-preview-coffee v2 ACTIVE JWT=true; guarded catalog owner migration dic_seven_roast_owner_data (20261018035732) applied; owner mappings and strict seven-only CHECK read back; shots/notes/source/community/Pending preserved. No genuine iPhone/mobile acceptance claimed.",
     "coffee_reclassifications": [
       {
         "coffee": "Hambela",
@@ -2226,11 +2226,32 @@
       "phase_two_pending": {
         "migration": "dic_seven_roast_owner_data",
         "file": "supabase/migrations/20261017064000_dic_seven_roast_owner_data.sql",
-        "status": "STAGED_NOT_APPLIED",
-        "prerequisite": "Netlify published frontend seven-tier support confirmed, release/billing approved"
+        "status": "APPLIED_VERIFIED",
+        "prerequisite": "SATISFIED: published compatible Netlify source, Edge v2, explicit owner approval",
+        "migration_version": "20261018035732",
+        "applied_data": "3 Verified coffee corrections, 1 private Pending Wuri correction, Hambela no-op, 4 private old/new audit events"
       },
-      "verified_production_app_sha": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
-      "credit_guard": "Refresh Netlify current actual balance; post_release_billing_refresh_needed remains true"
+      "verified_production_app_sha": "d8ced8f74c682466445ede58bfc45497b10c30ce",
+      "credit_guard": "Owner actively monitors Personal credits (940 observed before release), approval explicitly obtained for this one release only; actual postrelease debit unavailable.",
+      "production_deploy": {
+        "id": "6ad443189d070656c813ef63",
+        "state": "ready",
+        "published_at_utc": "2026-10-18T03:55:20.509Z",
+        "commit": "d8ced8f74c682466445ede58bfc45497b10c30ce"
+      },
+      "official_edge": {
+        "slug": "dic-preview-coffee",
+        "version": 2,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "preview_source_sha": "ed655e35e920068b02a2c4a22b2f723dd9fdf07f"
+      },
+      "backup_main_pin": {
+        "commit": "6a0983cc2411bd81d0682acb44e922992cf2482a",
+        "push_smoke_run": 39095494956,
+        "push_smoke": "PASS",
+        "next_scheduled_drive_archive": "PENDING_NEEDS_OBSERVATION"
+      }
     }
   },
   "current_owner_approved_url_autofill": {
@@ -2245,7 +2266,7 @@
     "separate_apply_step": false,
     "auto_save": false,
     "overwrite_existing_values": false,
-    "implementation": "One-click behavior already published; dead Apply handler and markup removed at staged development source 8f877ddd7ead0aaddab57877409443c70ecafb7d; source CI PASS (app/lint/build 39093195785, mobile/UX 39093195794, visual 39093195764). No Netlify publish or Supabase write.",
+    "implementation": "LIVE as part of Netlify READY deploy 6ad443189d070656c813ef63 at published source d8ced8f74c682466445ede58bfc45497b10c30ce; no separate Apply step, filling only blanks before user reviews/edits and Add Coffee.",
     "verified_code_sha": "8f877ddd7ead0aaddab57877409443c70ecafb7d",
     "passed_ci_runs": [
       39093195785,
@@ -2274,6 +2295,14 @@
       39094069387,
       39094069348
     ],
-    "release_status": "Staged/tested in development only; prior Netlify production unchanged; fresh owner authorization required for any publication"
+    "release_status": "Staged/tested in development only; prior Netlify production unchanged; fresh owner authorization required for any publication",
+    "last_explicitly_approved_published_bundle": {
+      "approval": "Owner wrote: publish and update Github please",
+      "scope": "single seven-tier roast + five coffee corrections + extractor + one-click + app sweep private-beta release",
+      "published_sha": "d8ced8f74c682466445ede58bfc45497b10c30ce",
+      "deploy_id": "6ad443189d070656c813ef63",
+      "date_utc": "2026-10-18",
+      "future_release_permission": false
+    }
   }
 }
