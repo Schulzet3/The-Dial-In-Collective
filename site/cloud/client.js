@@ -53,6 +53,11 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
     }catch{return {...page,match:null};}
    },
    async verifyCoffeeSource(submissionId){assertSecure();return unwrap(await sdk.functions.invoke('dic-verify-coffee',{body:{submission_id:submissionId}}));},
+  // Authenticated, least-field Community endpoints. Never send owner IDs or
+  // session tokens to the UI; Supabase membership is checked server-side.
+  async listCommunityReviews(){assertSecure();const items=unwrap(await sdk.rpc('dic_my_community_outliers'));return Array.isArray(items)?items:[];},
+  async confirmCommunityOutlier(shotId,expectedRevision){assertSecure();return unwrap(await sdk.rpc('dic_confirm_community_outlier',{p_shot_id:shotId,p_expected_revision:expectedRevision}));},
+  async browseCommunityShots({limit=20,offset=0}={}){assertSecure();return unwrap(await sdk.rpc('dic_browse_community_shots',{p_limit:limit,p_offset:offset}));},
   async mutate(e){assertSecure();return unwrap(await sdk.rpc('dic_apply_client_change',{expected_owner:e.owner,mutation_id:e.id,action:e.action,payload:e.payload}));},
   async previewImport(owner,backup){assertSecure();if(!owner)throw new CloudError('Sign in before importing.','signed_out');return unwrap(await sdk.rpc('dic_preview_import',{expected_owner:owner,backup}));},
   async commitImport(owner,backup,reviewHash,recoverySaved){assertSecure();if(!owner)throw new CloudError('Sign in before importing.','signed_out');return unwrap(await sdk.rpc('dic_commit_import',{expected_owner:owner,backup,review_hash:reviewHash,recovery_saved:recoverySaved===true}));},
