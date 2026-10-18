@@ -188,7 +188,7 @@ with sync_playwright() as p:
  assert page.evaluate('window.__raw.submissions.find(x=>x.id===window.__raw.library.at(-1).submission_id).proposed_data.producer')=='Edited Producer'
  checks.append('Edit Coffee updates original Pending owner submission and preserves entry identity')
 
- page.evaluate("""window.__raw.coffees.push({id:'12345678-1234-4123-8123-123456789abc',name:'Wuri',roaster:'Sweet Bloom',origin:'Gedeb',verification_state:'verified'});window.__matchResponse={classification:'exact_verified',exact_id:'12345678-1234-4123-8123-123456789abc',roaster:{recognized:true,canonical_name:'Sweet Bloom'},candidates:[]};""")
+ page.evaluate("""window.__raw.coffees.push({id:'12345678-1234-4123-8123-123456789abc',name:'Wuri',roaster:'Sweet Bloom',origin:'Gedeb',verification_state:'verified',revision:1});window.__matchResponse={classification:'exact_verified',exact_id:'12345678-1234-4123-8123-123456789abc',roaster:{recognized:true,canonical_name:'Sweet Bloom'},candidates:[]};""")
  page.get_by_role('button',name='Add Coffee',exact=False).click()
  page.locator('#new-coffee [name=name]').fill('Wuri')
  page.locator('#new-coffee [name=roaster]').fill('Sweet Bloom Coffee Roasters')
