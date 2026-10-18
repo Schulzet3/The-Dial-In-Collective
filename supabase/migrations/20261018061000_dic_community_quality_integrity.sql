@@ -170,12 +170,62 @@ create trigger dic_recheck_after_link
  after insert or update of shot_id,source_revision on private.contribution_links
  for each row execute function private.dic_recheck_after_link();
 
+-- Shared backfill for verified coffee approval and canonical-library linkage.
+-- It never updates personal shot records merely to rebuild community evidence.
+create function private.dic_backfill_library_contributions(
+ p_owner uuid,p_entry uuid,p_canonical uuid
+) returns void language plpgsql security definer set search_path='' as $
+declare s public.shots; existing uuid; new_contribution uuid; contributor uuid;
+        verified text;
+begin
+ select verification_state into verified from public.coffees where id=p_canonical;
+ for s in select * from public.shots where owner_id=p_owner
+          and library_entry_id=p_entry order by pulled_at,id
+ loop
+  select community_shot_id into existing
+  from private.contribution_links where shot_id=s.id;
+  if existing is not null then
+   if p_canonical is null or verified is distinct from 'verified' then
+    update public.community_shots set quality_state='held',updated_at=clock_timestamp()
+      where id=existing and quality_state<>'withdrawn';
+   elsif s.is_dialed_in then
+    update public.community_shots set
+      coffee_id=p_canonical,family_id=null,quality_state='pending_quality',
+      updated_at=clock_timestamp() where id=existing and quality_state<>'withdrawn';
+    perform private.dic_review_community_shot(existing);
+   end if;
+  elsif s.is_dialed_in and verified='verified' then
+   select id into contributor from private.contributors where owner_id=s.owner_id;
+   if contributor is null then
+    raise exception using errcode='23514', message='Missing private community contributor.';
+   end if;
+   insert into public.community_shots(
+    coffee_id,style,dose_g,yield_g,time_s,temperature_c,
+    extraction,body,clarity,sweetness,astringency,
+    machine_model,grinder_model,burr_set,basket_model,basket_dose_g,
+    grind_setting,feed_mode,observed_on
+   ) values(
+    p_canonical,s.style,s.dose_g,s.yield_g,s.time_s,s.temperature_c,
+    s.extraction,s.body,s.clarity,s.sweetness,s.astringency,
+    s.equipment_snapshot->>'machine_model',
+    s.equipment_snapshot->>'grinder_model',s.equipment_snapshot->>'burr_set',
+    s.equipment_snapshot->>'basket_model',
+    (s.equipment_snapshot->>'basket_dose_g')::numeric,
+    s.grind_setting,s.feed_mode,(s.pulled_at at time zone 'UTC')::date
+   ) returning id into new_contribution;
+   insert into private.contribution_links(
+     community_shot_id,shot_id,contributor_id,source_revision
+   ) values(new_contribution,s.id,contributor,s.revision);
+  end if;
+ end loop;
+end $;
+
 -- Canonical identity state changes immediately withdraw public visibility.
 -- A verified transition then reevaluates every linked projection. Different
 -- releases are NEVER silently coalesced or reassigned by a roaster URL.
 create function private.dic_on_community_coffee_verification() returns trigger
 language plpgsql security definer set search_path='' as $$
-declare target uuid;
+declare target uuid; lib record;
 begin
  if row(new.verification_state,new.merged_into_id)
     is not distinct from row(old.verification_state,old.merged_into_id)
@@ -186,6 +236,9 @@ begin
        updated_at=clock_timestamp()
    where coffee_id=new.id and quality_state<>'withdrawn';
  if new.verification_state='verified' then
+  for lib in select owner_id,id from public.library_entries where coffee_id=new.id loop
+   perform private.dic_backfill_library_contributions(lib.owner_id,lib.id,new.id);
+  end loop;
   for target in select id from public.community_shots
                  where coffee_id=new.id and quality_state='pending_quality'
   loop perform private.dic_review_community_shot(target); end loop;
@@ -201,50 +254,11 @@ create trigger dic_on_community_coffee_verification
 -- Create missing projections against the *new canonical coffee identity*.
 create function private.dic_on_library_coffee_change() returns trigger
 language plpgsql security definer set search_path='' as $$
-declare s public.shots; existing uuid; new_contribution uuid; contributor uuid;
-        verified text;
 begin
- if old.coffee_id is not distinct from new.coffee_id then return new;end if;
- select verification_state into verified from public.coffees where id=new.coffee_id;
- for s in select * from public.shots where owner_id=new.owner_id
-          and library_entry_id=new.id order by pulled_at,id
- loop
-  select community_shot_id into existing
-  from private.contribution_links where shot_id=s.id;
-  if existing is not null then
-   if new.coffee_id is null or verified is distinct from 'verified' then
-    update public.community_shots set quality_state='held',updated_at=clock_timestamp()
-      where id=existing and quality_state<>'withdrawn';
-   else
-    update public.community_shots set
-      coffee_id=new.coffee_id,family_id=null,quality_state='pending_quality',
-      updated_at=clock_timestamp() where id=existing and quality_state<>'withdrawn';
-    perform private.dic_review_community_shot(existing);
-   end if;
-  elsif s.is_dialed_in and verified='verified' then
-   select id into contributor from private.contributors where owner_id=s.owner_id;
-   if contributor is null then
-    raise exception using errcode='23514', message='Missing private community contributor.';
-   end if;
-   insert into public.community_shots(
-    coffee_id,style,dose_g,yield_g,time_s,temperature_c,
-    extraction,body,clarity,sweetness,astringency,
-    machine_model,grinder_model,burr_set,basket_model,basket_dose_g,
-    grind_setting,feed_mode,observed_on
-   ) values(
-    new.coffee_id,s.style,s.dose_g,s.yield_g,s.time_s,s.temperature_c,
-    s.extraction,s.body,s.clarity,s.sweetness,s.astringency,
-    s.equipment_snapshot->>'machine_model',
-    s.equipment_snapshot->>'grinder_model',s.equipment_snapshot->>'burr_set',
-    s.equipment_snapshot->>'basket_model',
-    (s.equipment_snapshot->>'basket_dose_g')::numeric,
-    s.grind_setting,s.feed_mode,(s.pulled_at at time zone 'UTC')::date
-   ) returning id into new_contribution;
-   insert into private.contribution_links(
-     community_shot_id,shot_id,contributor_id,source_revision
-   ) values(new_contribution,s.id,contributor,s.revision);
-  end if;
- end loop;
+ if old.coffee_id is distinct from new.coffee_id then
+  perform private.dic_backfill_library_contributions(
+    new.owner_id,new.id,new.coffee_id);
+ end if;
  return new;
 end $$;
 create trigger dic_on_library_coffee_change
@@ -333,6 +347,8 @@ revoke all on function private.dic_review_community_shot(uuid)
 revoke all on function private.dic_recheck_after_link()
  from public,anon,authenticated;
 revoke all on function private.dic_on_community_coffee_verification()
+ from public,anon,authenticated;
+revoke all on function private.dic_backfill_library_contributions(uuid,uuid,uuid)
  from public,anon,authenticated;
 revoke all on function private.dic_on_library_coffee_change()
  from public,anon,authenticated;
