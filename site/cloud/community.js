@@ -47,7 +47,7 @@ const fact=value=>typeof value==='string'?value.trim():'';
 export function communityReleaseDetails(sh){
  const label=fact(sh.release_label);
  const candidates=[label,fact(sh.release_origin),fact(sh.release_process),
-  fact(sh.release_producer),fact(sh.release_variety)];
+  fact(sh.release_producer),fact(sh.release_variety),fact(sh.release_roast_level)];
  const unique=[];
  for(const value of candidates){
   if(value&&!unique.some(existing=>existing.toLowerCase()===value.toLowerCase()))
