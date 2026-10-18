@@ -16,11 +16,11 @@ begin
  if current_database()<>'dic_ci' then raise exception 'Only isolated dic_ci may execute community test'; end if;
 
  -- Same roaster product URL may represent distinct verified releases.
- insert into public.coffees(id,name,roaster,release_label,verification_state)
- values(c1,'CI Exact Release 2026','Fixture Roaster','2026','verified'),
-       (c2,'CI Exact Release 2027','Fixture Roaster','2027','verified'),
-       (cp,'CI Formerly Pending','Fixture Roaster','2028','pending'),
-       (c3,'CI Personal Outlier','Fixture Roaster','2029','verified');
+ insert into public.coffees(id,name,roaster,release_label,origin,process,producer,verification_state)
+ values(c1,'CI Exact Release 2026','Fixture Roaster','2026 Harvest','Ethiopia','Washed','Farm One','verified'),
+       (c2,'CI Exact Release 2026','Fixture Roaster','2027 Harvest','Ethiopia','Natural','Farm Two','verified'),
+       (cp,'CI Formerly Pending','Fixture Roaster','2028',null,null,null,'pending'),
+       (c3,'CI Personal Outlier','Fixture Roaster','2029',null,null,null,'verified');
  insert into public.coffee_sources(coffee_id,source_url,source_kind) values
  (c1,'https://roaster.example.invalid/products/reusable','roaster_page'),
  (c2,'https://roaster.example.invalid/products/reusable','roaster_page');

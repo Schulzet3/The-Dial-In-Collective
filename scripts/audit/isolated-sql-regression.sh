@@ -23,6 +23,8 @@ for migration in supabase/migrations/*.sql; do
     run_sql supabase/tests/security_foundation.sql
   fi
 done
+# Source-only proposed projection, network-isolated and disposable. Never hosted.
+run_sql supabase/drafts/dic_community_release_projection.sql
 run_sql tests/sql/owner-fixture.sql
 for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard url_preview_release universal_url_preview seven_roast_levels community_quality_integrity; do
   echo "Running $regression"
