@@ -2769,7 +2769,11 @@
       "notifications_enabled": false,
       "email_enabled": false,
       "delivery_verified": false,
-      "owner_notification_ui_action_required": true
+      "owner_notification_ui_action_required": false,
+      "owner_global_tasks_ui_verified": "Push, Email — owner supplied three screenshots, latest 2026-10-18 circa 17:31 screen-local",
+      "no_repeat_request": true,
+      "task_specific_flags_discrepancy": "Automations metadata notifications_enabled=false/email_enabled=false conflicts with owner verified global Tasks=Push, Email UI; unknown interpretation, do not infer notifications actually disabled",
+      "actual_alert_delivery_observed": false
     },
     "restricted_provider_settings": {
       "netlify_deploy_current": "6ad5197d42cc6608b98712a4",
@@ -2799,5 +2803,23 @@
       "#27 restricted dashboard provider settings and owner account MFA",
       "beta product feature issues unrelated to privacy"
     ]
+  },
+  "owner_tasks_notification_screen_evidence_20261018": {
+    "status": "OWNER VERIFIED GLOBAL TASKS NOTIFICATIONS ON (Push AND Email). DO NOT ASK AGAIN.",
+    "screenshots_received": 3,
+    "owner_exact_instruction": "I have notifications enabled and I've sent you 2 screenshots. This is the 3rd time. Do not ask me again.",
+    "latest_screenshot_date": "2026-10-18",
+    "latest_screenshot_time_screen_local": "5:31 PM",
+    "ui_route": "ChatGPT Settings → Notifications → ChatGPT → Tasks",
+    "observed_ui_preference": "Push, Email",
+    "confidence": "direct repeated owner-supplied screenshots",
+    "lower_level_task_flag_conflict": "DIC Backup Watchdog task metadata notifications_enabled=false,email_enabled=false despite global UI; unexplained, not user settings failure",
+    "task_enabled_and_ran": true,
+    "actual_condition_watch_alert_delivered": "not independently verified; do not extrapolate from screenshot",
+    "permitted_followup": "independently monitor actual delivered alert only if naturally occurs; no more screenshots or owner settings confirmation",
+    "not_permitted": "ask owner for any further Tasks notification setting screenshots/checks; disable current watchdog or create redundant alert; induce backup failures",
+    "repository_issue": 28,
+    "changes_to_app_providers_automations": "none",
+    "canonical_decisions_preserved": true
   }
 }
