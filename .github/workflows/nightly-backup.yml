@@ -35,8 +35,8 @@ jobs:
       - name: Checkout verified published release for independent recovery
         uses: actions/checkout@v7
         with:
-          # Verified Netlify published SHA; advance only after the next release is verified.
-          ref: f08dfda99f46b25240cb8cc35c46d2c3c76344b8
+          # Verified Netlify published 2026-10-18 UTC release; pin only changed after Netlify READY and production coffee checks.
+          ref: d8ced8f74c682466445ede58bfc45497b10c30ce
           path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
