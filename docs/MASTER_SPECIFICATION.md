@@ -1143,6 +1143,11 @@ When evaluating an extreme shot, compare in this order where possible:
 
 Legitimate unconventional espresso should not be deleted merely for being unusual.
 
+### Current implementation note: reviewed outlier heuristics (2026-10-18)
+
+The owner requested a research-backed replacement of an **unvalidated** 4× median-time / 3× ratio *code heuristic*. Per NIST, scaled median absolute deviation (MAD) and a modified Z-score threshold can label a **potential anomaly**, not prove a measurement false. Long blooming profiles can be legitimate. Staged development code compares comparable same-coffee/style/setup user history first, then distinct contributors on the exact approved coffee/style, with minimum cohorts and practical floors to prevent false alarms. It **withholds only for member confirmation or correction**, never automatically rejects unusual Dialed-In shots because of extraction-style guidelines. The exact thresholds and sample minimums are **provisional tunable implementation parameters, not new Locked extraction targets or scientific standards**; no new product decision replaces §§16/22–24. See [Research](COMMUNITY_OUTLIER_RESEARCH_2026-10-18.md). The next production migration and new Community UI still require fresh owner publication approval.
+
+
 ---
 
 # 25. Recommendation engine - governing principles
