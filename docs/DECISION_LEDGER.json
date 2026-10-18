@@ -2596,11 +2596,11 @@
     "draft_only": false,
     "production_application": "NONE; 28 hosted migrations; original browse function unchanged as read-only verified",
     "required_prep_before_publish": [
-      "Recheck latest hosted DB/Netlify state and backups immediately before live change.",
-      "Obtain explicit permission for one scoped production migration plus one Netlify release.",
-      "Use individually tracked Supabase.apply_migration rather than unreviewed CLI db push due seven historic version/name differences (#35).",
-      "After SQL, inspect hosted generated version, exact function and grants/row counts; stop if failed.",
-      "Only then publish one marker, verify Netlify and real member UX/privacy, backup pin and running record."
+      "Recheck latest hosted provider state, authorizations and encrypted-backup evidence immediately before live change.",
+      "Obtain explicit owner permission for one scoped production migration and separately credit-aware Netlify release.",
+      "After authorization, prefer linked CLI migration list and db push --dry-run; if unavailable, use Supabase apply_migration for only audited function, verify provider-added version, and reconcile GitHub filename and baseline manifest.",
+      "Verify privileged RPC member/anon grants, quality criteria, counts and exact new SQL bytes; stop on any mismatch.",
+      "Only then issue one frontend deploy marker; verify Netlify, real member UX/security, backup pin and running record."
     ],
     "formal_migration": "supabase/migrations/20261018221843_dic_community_release_context.sql",
     "migration_blob_sha": "868c1963a2917a69007504699cbc0efb6ae6faa9",
@@ -2613,7 +2613,8 @@
       "private_visual_ui_only": 39170987386
     },
     "migration_history_issue": 35,
-    "prepared_release_runbook": "docs/COMMUNITY_RELEASE_GROUPING_PRODUCTION_READINESS_2026-10-18.md"
+    "prepared_release_runbook": "docs/COMMUNITY_RELEASE_GROUPING_PRODUCTION_READINESS_2026-10-18.md",
+    "migration_history_resolution": "28 applied migrations exact hosted version/name/blob-SHA/byte parity in GitHub, CI-enforced, no production DB history modification. New migration unapplied."
   },
   "current_owner_preparation_community_release_20261018": {
     "source_owner_message": "do wverything you need to to get it ready for prod.",
@@ -2629,7 +2630,41 @@
       "private_visual_ui_only": 39170987386
     },
     "live_state": "unchanged, not published",
-    "historical_migration_drift": "#35",
-    "next_authorization": "both one production SQL migration and one Netlify release with credit controls"
+    "historical_migration_drift": "Reconciled GitHub source to all 28 exact hosted version/name/SQL-byte records; #35 historical divergence resolved; live CLI linked dry-run not run.",
+    "next_authorization": "both one production SQL migration and one Netlify release with credit controls",
+    "history_reconciliation_report": "docs/SUPABASE_MIGRATION_HISTORY_RECONCILIATION_2026-10-18.md",
+    "migration_baseline": "docs/SUPABASE_PRODUCTION_MIGRATION_BASELINE_2026-10-18.json",
+    "migration_guard": "scripts/audit/verify-migration-baseline.mjs",
+    "security_and_courier_limits": "Supabase leaked-password protection disabled; member JWT negatives and Drive archive receipt unresolved. No provider Auth/account settings changed.",
+    "release_gate": "No production migration/Netlify publish without separate explicit owner approval; provider-assigned future migration version must be reconciled and verified before publish."
+  },
+  "migration_history_reconciliation_20261018": {
+    "status": "FIXED in GitHub, 28/28 production-applied versions/name/SQL bytes verified; production unchanged",
+    "source_owner_request": "can you fix all the infrastructure issues before deployment?",
+    "referenced_report": "docs/SUPABASE_MIGRATION_HISTORY_RECONCILIATION_2026-10-18.md",
+    "issue": 35,
+    "seven_renames_commit": "0184d94a88834d03437cf86bc7a0a33792efc181",
+    "two_source_line_endings_only": true,
+    "baseline_guard_commit": "26a63b583b5e37ab5e4b47347ab8ce51577d1a2e",
+    "test_path_corrections": [
+      "5255e817c98cc0597c074f7cca44d9cead7882ac",
+      "7891fc22f995bbdca902ca6766d88875b43d843a"
+    ],
+    "verified_checks": {
+      "isolated_sql": 39173038464,
+      "node_build": 39173210144,
+      "cloud_mobile": 39173210150
+    },
+    "hosted_migration_count": 28,
+    "unpublished_candidate": "20261018221843_dic_community_release_context.sql",
+    "effect_on_locked_decisions": "none; original 79 Locked and 20 Open preserved",
+    "verified_production_mutations": "none",
+    "external_limits": [
+      "no linked CLI db push --dry-run evidence",
+      "Auth leaked-password protection disabled",
+      "real-member JWT negative acceptance open",
+      "offsite Drive courier bytes not independently proven",
+      "other restricted provider controls owner-managed"
+    ]
   }
 }
