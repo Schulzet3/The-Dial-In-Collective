@@ -191,6 +191,18 @@ with sync_playwright() as p:
  assert page.locator('[data-action=community-correct-outlier]').count()==1
  checks.append('Member sees nonblocking outlier confirmation/correction prompt')
  page.screenshot(path=str(OUT/'community_review_mobile.png'),full_page=True)
+ # Correction uses the existing revision-checked shot form; merely opening it
+ # cannot mutate any shot or publish anything.
+ original_time=page.evaluate("window.__raw.shots[0].time_s")
+ page.locator('[data-action=community-correct-outlier]').click()
+ page.locator('#shot [name=timeS]').wait_for()
+ assert page.locator('#sheet-title').inner_text()=='Edit Shot'
+ assert abs(float(page.locator('#shot [name=timeS]').input_value())-original_time)<0.01
+ assert page.evaluate("window.__raw.shots[0].time_s")==original_time
+ page.locator('#sheet [data-action=close]').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ page.locator('.community-review-prompt').wait_for()
+ checks.append('Correct Shot opens original revision-checked form without changing data before Save')
  page.locator('[data-action=community-confirm-outlier]').click()
  page.wait_for_function('!document.querySelector(".community-review-prompt")')
  checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
