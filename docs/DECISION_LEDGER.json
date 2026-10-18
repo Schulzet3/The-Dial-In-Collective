@@ -2563,7 +2563,7 @@
   },
   "current_owner_approved_community_release_context_20261018": {
     "id": "UX-COMMUNITY-RELEASE-CONTEXT-20261018-01",
-    "status": "Owner Locked; development implemented and isolated SQL/Node/mobile/Chromium CI PASS; NOT deployed",
+    "status": "Locked product decision; production-release CANDIDATE CI PASS; NOT APPLIED / NOT PUBLISHED",
     "owner_answer": "A. Use other verified release details when dates are unavailable. Proceed with the release grouping in development, preserve separate canonical release identities, and do not publish yet.",
     "supersedes_only": "§22.3A historical frontend-only identity caveat, now addressed by planned server-sanitized canonical release key; preserves all other prior Locked Community and personal Coffee behaviors.",
     "parent_group": "public roaster+coffee name",
@@ -2582,25 +2582,54 @@
     "backend_scope": "read-only, admitted-only dic_browse_community_shots additive sanitized DTO from verified canonical facts, privacy and per-release/style contributor evidence unchanged",
     "security": "do not expose raw IDs, account notes, owner identity, source shot IDs, equipment or nonverified facts; explicit revoke and authenticated-only grant",
     "partial_legacy": "No release key means do not falsely claim release identity; show unknown identity when mixed",
-    "delivery": "Development ONLY; SQL draft under supabase/drafts until Supabase CLI migration is generated in release prep, no production SQL, Netlify deployment, invitations, data writes or new credits",
+    "delivery": "Development source preparation completed; official CLI-generated formal migration present, temporary draft/workflow removed, SQL runs once in CI; no hosted SQL or Netlify deployment; separate explicit authorization required.",
     "source_commits": [
       "5c7bb704edbf60f015d7ac5afe16138ebb4385e8",
       "5b3136faf6652fee593449526147a6ff365900f4",
       "18b998ae0f2d572f55ada55a3b5ebd49d31a511e",
       "f14511c62d531d2114662ddb353da3f33de84418"
     ],
-    "verification": "PASS synthetic: SQL 39170903892; Node/lint/build 39170987753; cloud mobile 39170987378; private Chromium/visual 39170987386. Genuine member/provider JWT and real release data acceptance unverified.",
+    "verification": "PASS full isolated SQL/Node/cloud mobile on formal migration e9c5f1f3; PASS private visual on identical UI source f14511c6; live JWT/member acceptance after owner-approved deploy only.",
     "previous_locked_count": 79,
     "previous_open_count": 20,
     "source_doc_checkpoint": "318a13cf86e02484ee8d1e8dc4eb6b3248dbd235",
-    "draft_only": true,
-    "production_application": "NONE",
+    "draft_only": false,
+    "production_application": "NONE; 28 hosted migrations; original browse function unchanged as read-only verified",
     "required_prep_before_publish": [
-      "Use Supabase CLI migration new to create formal versioned migration from staged SQL draft",
-      "Remove duplicate draft application from isolated regression runner",
-      "Re-run CI, independent anonymous and other-member JWT privacy acceptance",
-      "Explicitly approve production SQL and exactly one Netlify release with credit safeguards",
-      "Verify exact hosted projection, existing source counts and backup"
-    ]
+      "Recheck latest hosted DB/Netlify state and backups immediately before live change.",
+      "Obtain explicit permission for one scoped production migration plus one Netlify release.",
+      "Use individually tracked Supabase.apply_migration rather than unreviewed CLI db push due seven historic version/name differences (#35).",
+      "After SQL, inspect hosted generated version, exact function and grants/row counts; stop if failed.",
+      "Only then publish one marker, verify Netlify and real member UX/privacy, backup pin and running record."
+    ],
+    "formal_migration": "supabase/migrations/20261018221843_dic_community_release_context.sql",
+    "migration_blob_sha": "868c1963a2917a69007504699cbc0efb6ae6faa9",
+    "generated_by_cli_workflow": 39171647492,
+    "preparation_commit": "e9c5f1f317d711a9140bfa1c5607e58a94dc2537",
+    "final_ci": {
+      "isolated_sql": 39171752472,
+      "node_build": 39171752491,
+      "cloud_mobile": 39171752538,
+      "private_visual_ui_only": 39170987386
+    },
+    "migration_history_issue": 35,
+    "prepared_release_runbook": "docs/COMMUNITY_RELEASE_GROUPING_PRODUCTION_READINESS_2026-10-18.md"
+  },
+  "current_owner_preparation_community_release_20261018": {
+    "source_owner_message": "do wverything you need to to get it ready for prod.",
+    "approved_scope": "preproduction technical readiness only, no production SQL or publication",
+    "status": "Completed code/test/CLI promotion and documented release candidate; production approval still required.",
+    "cli_generation_run": 39171647492,
+    "cli_generated_migration": "supabase/migrations/20261018221843_dic_community_release_context.sql",
+    "source_candidate_commit": "e9c5f1f317d711a9140bfa1c5607e58a94dc2537",
+    "isolated_ci": {
+      "isolated_sql": 39171752472,
+      "node_build": 39171752491,
+      "cloud_mobile": 39171752538,
+      "private_visual_ui_only": 39170987386
+    },
+    "live_state": "unchanged, not published",
+    "historical_migration_drift": "#35",
+    "next_authorization": "both one production SQL migration and one Netlify release with credit controls"
   }
 }
