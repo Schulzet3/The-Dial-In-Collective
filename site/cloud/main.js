@@ -11,6 +11,7 @@ import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
+import {communityReviewBanner,communityPage as renderCommunityPage} from './community.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales}=U;
 const root=document.querySelector('#app'),sheet=document.querySelector('#sheet');
 const uuid=()=>crypto.randomUUID();
@@ -19,6 +20,8 @@ class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0});
   this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;
+  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';
+  this.reviews=[];this.dismissedReviews=new Set();
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
  }
  async inSession(operation){
@@ -33,7 +36,7 @@ class CloudApp {
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
-  this.coffeeUrlPreviewInput=null;
+  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityStyle='all';this.communityCoffee='all';this.reviews=[];this.dismissedReviews.clear();
   sheet.close();sheet.innerHTML='';
  }
  authChanged(event,user){
@@ -88,6 +91,9 @@ class CloudApp {
   try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;}
   catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);
+  // Optional review inbox never blocks ordinary Shot → Rate → Recommendation.
+  // Ignore absent endpoints until the separately approved backend rollout.
+  if(!this.pending.length&&navigator.onLine){try{const pending=await this.client.listCommunityReviews();if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.reviews=pending;}catch{this.reviews=[];}}
   if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)this.expanded.add(M.workspace(this.state).currentCoffeeId);
   this.render();
  }
@@ -121,11 +127,46 @@ class CloudApp {
  coffees(){
   const s=this.state,setup=M.activeSetup(s),w=M.workspace(s);
   if(!setup)return `<section class="welcome text-center"><h2>A better next shot.</h2><p class=helper>Add your equipment setup to start logging shots and dialing in.</p>${button('Set Up My Workspace','new-setup','','primary')}</section>`;
+  if(this.view==='community')return this.communityScreen();
   const list=M.visibleCoffees(s,this.sort,this.search,this.tempCoffee);
-  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline'}`,'sync',`data-sync-state="${this.pending.length?'pending':this.syncState}"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
+  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline'}`,'sync',`data-sync-state="${this.pending.length?'pending':this.syncState}"`,'sync-indicator')}</span></nav>${communityReviewBanner(this.reviews,this.dismissedReviews)}<div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded="${this.searchOpen}" aria-controls="coffee-search-tools"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value="${e(this.search)}" aria-label="Search coffee information" placeholder="Name, origin, notes..."><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{
    const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));const local=shots.filter(sh=>sh.setupVersionId===v.id&&sh.style===p.style),last=local[0];const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;
    return `<article class="coffee-card ${open?'is-open':''} ${w.currentCoffeeId===c.id?'is-current':''}"><button class=coffee-toggle data-action=expand data-id="${e(c.id)}" aria-expanded="${open}"><div class=coffee-title-area><div class=coffee-title>${e(c.name)}${w.currentCoffeeId===c.id?'<span class=current-mark>Current</span>':''}${success?'<span class=status-badge>Dialed In</span>':''}</div><div class=coffee-subtitle>${e(c.roaster)} · ${e(c.origin)}</div></div>${icon('chevron')}</button>${open?`<div class=coffee-body><div class=style-row>${styleBadge(p.style)}${button('Change Style','style',`data-id="${e(c.id)}"`,'ghost compact')}</div><div class=recipe-label>${success?'Your Dialed In Window':'Starting Recommendation'}</div>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}${button(`${icon('plus',16)} Log A Shot`,'log',`data-id="${e(c.id)}"`,'primary full log-cta')}${rec.reasons?.length?`<p class=recipe-reason>${e(rec.reasons[0])}</p>`:''}${last&&(!success||this.justSavedId===last.id)?`<section class=feedback-panel><h3>${e(advice.title)}</h3><p class=helper>${e(advice.text)}</p>${chips(last.tasteScales)}${radar(last.tasteScales)}</section>`:''}<details class=inline-disclosure data-retain="facts-${e(c.id)}"><summary>Coffee Details</summary><dl class=coffee-facts>${[['Roaster',c.roaster],['Origin',c.origin],['Elevation',c.elevationM],['Roast Level',c.roastLevel],['Process',c.process],['Variety',c.variety],['Producer',c.producer],['Tasting Notes',c.tastingNotes]].filter(x=>x[1]).map(([k,val])=>`<div><dt>${e(k)}</dt><dd>${e(val)}</dd></div>`).join('')}</dl><p class=helper>${c.status==='verified'?'Verified coffee record':'Saved privately while identity is checked.'}</p>${c.status==='pending'?button('Check For A Verified Match','check-pending-match',`data-id="${e(c.id)}"`,'ghost compact'):''}</details><details class=inline-disclosure data-retain="history-${e(c.id)}"><summary>Shot History (${shots.length})</summary>${shots.length?`<div class="history-actions">${button(shots.every(sh=>this.shotExpanded.has(sh.id))?'Collapse All':'Expand All','shot-toggle-all',`data-id="${e(c.id)}"`,'text-button')}</div>`:''}${shots.map(sh=>shotCard(sh,{expanded:this.shotExpanded.has(sh.id),activeVersionId:v.id,unit:v.tempUnit})).join('')}</details></div>`:''}</article>`;
   }).join('')||'<p class="helper space-top">Add your first coffee to get started.</p>'}`;
+ }
+ communityScreen(){
+  const syncText=this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline';
+  const nav='<nav class="app-nav">'
+   +button(icon('coffee',16)+' Coffees','home','','')
+   +button(icon('users',16)+' Community','community','','active')
+   +'<span class="local-label">'+button(icon('cloud',14)+' '+e(syncText),
+     'sync','','sync-indicator')+'</span></nav>';
+  return nav+communityReviewBanner(this.reviews,this.dismissedReviews)
+   +renderCommunityPage({shots:this.communityRows,total:this.communityTotal,
+    loading:this.communityLoading,error:this.communityError,
+    style:this.communityStyle,coffee:this.communityCoffee});
+ }
+ async loadCommunity({more=false}={}){
+  if(this.communityLoading||!this.identity||!this.status?.admitted)return;
+  const owner=this.identity.id,epoch=this.epoch;
+  const offset=more?this.communityRows.length:0;
+  this.communityLoading=true;this.communityError='';this.render();
+  try{
+   if(!navigator.onLine)throw new Error('Connect to the internet to browse Community shots.');
+   const page=await this.inSession(()=>this.client.browseCommunityShots({limit:20,offset}));
+   if(owner!==this.identity?.id||epoch!==this.epoch)return;
+   if(!Array.isArray(page?.shots)||!Number.isFinite(Number(page.total)))
+    throw new Error('Community data is temporarily unavailable.');
+   this.communityRows=more?[...this.communityRows,...page.shots]:page.shots;
+   this.communityTotal=Number(page.total);
+  }catch(err){
+   if(owner===this.identity?.id&&epoch===this.epoch)
+    this.communityError='Community is temporarily unavailable. Your personal shots remain unchanged.';
+  }finally{
+   if(owner===this.identity?.id&&epoch===this.epoch){
+    this.communityLoading=false;this.render();
+   }
+  }
  }
  settings(){
   const v=M.activeVersion(this.state),setup=M.activeSetup(this.state),pref=this.raw?.preferences;
@@ -285,7 +326,30 @@ class CloudApp {
    if(a==='choose-setup'){await this.mutate('select_setup',{setup_id:id,expected_revision:this.raw.preferences.revision},{onlineOnly:true});this.expanded.clear();const pin=M.workspace(this.state).currentCoffeeId;if(pin)this.expanded.add(pin);sheet.close();this.render();return;}
    if(a==='style'){const p=M.coffeeState(this.state,id);this.styleCoffee=id;this.styleRevision=this.raw.workspaceCoffees.find(x=>x.library_entry_id===id&&x.setup_version_id===M.activeVersion(this.state).id)?.revision||0;this.show('Shot Style',`<form id=style>${select('Style','style',C.STYLES.filter(s=>s!=='Custom'),p.style)}<p class="helper space-top">Styles are guidelines, not pass/fail rules.</p><button class="primary full">Use Style</button></form>`);return;}
    if(a==='make-current'){const sh=this.state.shots.find(x=>x.id===id),rp=this.raw.recipePreferences.find(x=>x.library_entry_id===sh.coffeeId&&x.setup_version_id===sh.setupVersionId&&x.style===sh.style);await this.mutate('make_current',{shot_id:id,expected_revision:rp?.revision||0},{onlineOnly:true});return;}
-   if(a==='community'){this.show('Community',`<div class=preview-note>Community is not available in this private beta yet. Pending Coffees are not shared automatically.</div><p class=helper>The next community milestone connects verified coffees, contributor-balanced recommendations and actual review actions.</p>`);return;}
+   if(a==='community'){this.view='community';await this.loadCommunity();return;}
+   if(a==='home'){this.view='coffees';this.render();return;}
+   if(a==='community-refresh'){await this.loadCommunity();return;}
+   if(a==='community-more'){await this.loadCommunity({more:true});return;}
+   if(a==='community-dismiss-outlier'){const review=this.reviews.find(r=>r.shot_id===id);if(review)this.dismissedReviews.add(id+':'+review.revision);this.render();return;}
+   if(a==='community-correct-outlier'){
+    if(this.pending.length)throw new Error('Finish syncing before editing an existing shot.');
+    const review=this.reviews.find(r=>r.shot_id===id);
+    const sh=this.state.shots.find(x=>x.id===id);
+    if(!review||!sh||sh.revision!==Number(review.revision))throw new Error('Refresh the shot before correcting it.');
+    this.view='coffees';this.expanded.add(sh.coffeeId);this.render();this.showLog(sh.coffeeId,sh);return;
+   }
+   if(a==='community-confirm-outlier'){
+    if(!navigator.onLine||this.pending.length)throw new Error('Reconnect and finish syncing before confirming a measurement.');
+    const review=this.reviews.find(r=>r.shot_id===id);
+    if(!review||Number(review.revision)!==Number(target.dataset.revision))throw new Error('Refresh this shot before confirming.');
+    target.disabled=true;
+    const result=await this.inSession(()=>this.client.confirmCommunityOutlier(id,review.revision));
+    if(!result?.ok)throw new Error('This shot changed or no longer needs review. Please refresh.');
+    this.reviews=this.reviews.filter(r=>r.shot_id!==id);
+    await this.inSession(()=>this.sync());
+    this.notice='Unusual extraction confirmed. Your qualifying anonymous Community observation is saved.';
+    this.render();return;
+   }
    if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
    if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
    if(a==='export'){exportFile(await this.inSession(()=>this.store.export(this.identity.id)));return;}
@@ -293,7 +357,7 @@ class CloudApp {
   }catch(err){this.error(err);}
  }
  input(ev){if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
+ change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.render();}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
