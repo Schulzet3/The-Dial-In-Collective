@@ -2563,7 +2563,7 @@
   },
   "current_owner_approved_community_release_context_20261018": {
     "id": "UX-COMMUNITY-RELEASE-CONTEXT-20261018-01",
-    "status": "Owner Locked; development staged; NO hosted changes",
+    "status": "Owner Locked; development implemented and isolated SQL/Node/mobile/Chromium CI PASS; NOT deployed",
     "owner_answer": "A. Use other verified release details when dates are unavailable. Proceed with the release grouping in development, preserve separate canonical release identities, and do not publish yet.",
     "supersedes_only": "§22.3A historical frontend-only identity caveat, now addressed by planned server-sanitized canonical release key; preserves all other prior Locked Community and personal Coffee behaviors.",
     "parent_group": "public roaster+coffee name",
@@ -2589,8 +2589,18 @@
       "18b998ae0f2d572f55ada55a3b5ebd49d31a511e",
       "f14511c62d531d2114662ddb353da3f33de84418"
     ],
-    "verification": "CI checks pending at this checkpoint; isolated synthetic SQL, Node and Chromium tests required; real member acceptance after separately approved publication",
+    "verification": "PASS synthetic: SQL 39170903892; Node/lint/build 39170987753; cloud mobile 39170987378; private Chromium/visual 39170987386. Genuine member/provider JWT and real release data acceptance unverified.",
     "previous_locked_count": 79,
-    "previous_open_count": 20
+    "previous_open_count": 20,
+    "source_doc_checkpoint": "318a13cf86e02484ee8d1e8dc4eb6b3248dbd235",
+    "draft_only": true,
+    "production_application": "NONE",
+    "required_prep_before_publish": [
+      "Use Supabase CLI migration new to create formal versioned migration from staged SQL draft",
+      "Remove duplicate draft application from isolated regression runner",
+      "Re-run CI, independent anonymous and other-member JWT privacy acceptance",
+      "Explicitly approve production SQL and exactly one Netlify release with credit safeguards",
+      "Verify exact hosted projection, existing source counts and backup"
+    ]
   }
 }
