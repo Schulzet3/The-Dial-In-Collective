@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {communityPage,communityReviewBanner,communityCoffeeKey} from '../site/cloud/community.js';
+import {communityPage,communityReviewBanner,communityCoffeeKey,communityReleaseKey,communityReleaseDetails} from '../site/cloud/community.js';
 import {createCloudClient} from '../site/cloud/client.js';
 
 const row={
@@ -138,4 +138,86 @@ test('Community grouping uses unambiguous public pairs and never renders raw pri
  assert.equal((html.match(/class="coffee-card community-coffee-card"/g)||[]).length,2);
  assert.doesNotMatch(html,/SECRET-OWNER|SECRET-NOTE|SECRET-SHOT|owner_id|shot_id/);
  assert.doesNotMatch(html,/contributor_id|setup_name/);
+});
+
+test('two distinct canonical releases stay within one named coffee but never share a release subgroup',()=>{
+ const r2025={...row,release_key:'a'.repeat(64),release_label:'2025 Harvest',
+  release_origin:'Ethiopia, Yirgacheffe',release_process:'Washed',shot_count:2,contributor_count:1};
+ const r2026={...row,release_key:'b'.repeat(64),release_label:'2026 Harvest',
+  release_origin:'Ethiopia, Yirgacheffe',release_process:'Natural',observed_on:'2026-10-18',
+  shot_count:1,contributor_count:1};
+ const html=communityPage({shots:[r2025,{...r2025,observed_on:'2026-10-17'},r2026],total:3,revision:8});
+ assert.equal((html.match(/class="coffee-card community-coffee-card"/g)||[]).length,1);
+ assert.equal((html.match(/class="community-release"/g)||[]).length,2);
+ assert.equal((html.match(/class="shot community-shot"/g)||[]).length,3);
+ assert.match(html,/2025 Harvest · Ethiopia, Yirgacheffe · Washed/);
+ assert.match(html,/2026 Harvest · Ethiopia, Yirgacheffe · Natural/);
+ const sections=html.split('<section class="community-release"').slice(1);
+ assert.equal((sections[0].match(/class="shot community-shot"/g)||[]).length,2);
+ assert.equal((sections[1].match(/class="shot community-shot"/g)||[]).length,1);
+ assert.match(sections[0],/2 qualifying shots · 1 contributors/);
+ assert.match(sections[1],/1 qualifying shots · 1 contributors/);
+ assert.doesNotMatch(html,/class="community-release"[^>]*\sopen[\s>]/);
+ assert.doesNotMatch(html,/class="shot community-shot"[^>]*\sopen[\s>]/);
+ assert.doesNotMatch(html,/data-id="a{64}"|data-id="b{64}"/);
+});
+test('single canonical release keeps one-tap compact rows without extra release header',()=>{
+ const sh={...row,release_key:'c'.repeat(64),release_label:'2025 Harvest'};
+ const html=communityPage({shots:[sh,{...sh,observed_on:'2026-10-17'}],total:2});
+ assert.equal((html.match(/class="community-release"/g)||[]).length,0);
+ assert.equal((html.match(/class="shot community-shot"/g)||[]).length,2);
+ assert.equal((html.match(/class="coffee-card community-coffee-card"/g)||[]).length,1);
+});
+test('verified facts display instead of invented release date, and unknown dates remain unknown',()=>{
+ const sh={...row,release_key:'d'.repeat(64),release_origin:'Guji, Ethiopia',
+  release_process:'Natural',release_producer:'A Farm',release_variety:'Heirloom'};
+ assert.equal(communityReleaseDetails(sh),'Guji, Ethiopia · Natural · A Farm · Heirloom');
+ assert.equal(communityReleaseDetails({...sh,release_origin:null,release_process:null,
+  release_producer:null,release_variety:null}),'Release details unavailable');
+ const html=communityPage({shots:[sh,{...sh,release_key:'e'.repeat(64),
+  release_origin:null,release_process:null,release_producer:null,release_variety:null}],
+  total:2});
+ assert.match(html,/Guji, Ethiopia · Natural · A Farm · Heirloom/);
+ assert.match(html,/Release 2 · Release details unavailable/);
+ assert.doesNotMatch(html,/Harvest 2026|released on 2026-10-16/);
+ assert.match(html,/2026-10-16/,'shot observation date remains on compact shot only');
+});
+test('canonical identity never depends on mutable release text, dates or grouping label',()=>{
+ const same={...row,release_key:'c'.repeat(64),release_label:'Harvest 2025'};
+ const renamed={...same,release_label:'Lot X',release_origin:'Other'};
+ const different={...same,release_key:'d'.repeat(64)};
+ assert.equal(communityReleaseKey(same),communityReleaseKey(renamed));
+ assert.notEqual(communityReleaseKey(same),communityReleaseKey(different));
+ assert.equal(communityCoffeeKey(same),communityCoffeeKey(different));
+ assert.equal(communityReleaseKey({...same,release_key:'malicious\" onmouseover=\"alert(1)'}),null);
+ const hostile={...same,release_key:'d'.repeat(64),release_label:'<img src=x onerror=alert(1)>'};
+ const html=communityPage({shots:[same,hostile],total:2});
+ assert.match(html,/&lt;img src=x onerror=alert\(1\)&gt;/);
+ assert.doesNotMatch(html,/<img src=x/);
+});
+test('legacy DTO absent release key fails closed on release identity without inventing source fields',()=>{
+ const known={...row,release_key:'a'.repeat(64)};
+ const old={...row,release_key:null,observed_on:'2026-10-17'};
+ const html=communityPage({shots:[known,old],total:2});
+ assert.equal((html.match(/class="community-release"/g)||[]).length,2);
+ assert.match(html,/Release identity unavailable/);
+ assert.doesNotMatch(html,/2026 Harvest|2025 Harvest/);
+ const onlyOld=communityPage({shots:[row,{...row,observed_on:'2026-10-17'}],total:2});
+ assert.equal((onlyOld.match(/class="community-release"/g)||[]).length,0,
+  'legacy single-family feed still shows compact rows, without pretending release boundaries are verified');
+});
+test('release sections honor style/coffee filtering, pagination and independent private identity',()=>{
+ const rows=[
+ {...row,release_key:'a'.repeat(64),style:'Turbo',release_label:'2024 Lot'},
+ {...row,release_key:'b'.repeat(64),style:'Traditional',release_label:'2025 Lot',
+  owner_id:'SECRET-OWNER',private_notes:'SECRET-NOTE',contributor_id:'SECRET-PERSON'},
+ {...row,release_key:'b'.repeat(64),style:'Turbo',release_label:'2025 Lot'},
+ {...row,release_key:'a'.repeat(64),style:'Turbo',release_label:'2024 Lot',observed_on:'2026-10-15'}
+ ];
+ const html=communityPage({shots:rows,total:20,style:'Turbo',coffee:communityCoffeeKey(row),revision:2});
+ assert.equal((html.match(/class="community-release"/g)||[]).length,2);
+ assert.equal((html.match(/class="shot community-shot"/g)||[]).length,3);
+ assert.match(html,/3 shots loaded/);
+ assert.match(html,/1 shot loaded/);
+ assert.doesNotMatch(html,/SECRET-OWNER|SECRET-NOTE|SECRET-PERSON|private_notes|contributor_id/);
 });

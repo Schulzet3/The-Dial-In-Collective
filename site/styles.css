@@ -131,7 +131,15 @@ dialog{color:var(--ink);background:var(--surface);border:1px solid var(--line);p
 .community-coffee-card[open]>.community-coffee-toggle>svg,.community-shot[open]>.community-shot-toggle>svg{transform:rotate(180deg)}
 .community-coffee-count{font-size:11px;font-weight:500;color:var(--muted)}
 .community-coffee-body{padding-top:1px}
-.community-coffee-body>.community-shot{margin:8px 0}
+.community-coffee-body>.community-shot,.community-release>.community-shot{margin:8px 0}
+.community-release{border-top:1px solid var(--line);padding:12px 0 4px}
+.community-release:first-child{border-top:0}
+.community-release-heading{display:flex;align-items:start;justify-content:space-between;gap:10px;margin:0 1px 9px}
+.community-release-caption{display:flex;flex-wrap:wrap;gap:5px 9px;min-width:0;line-height:1.35}
+.community-release-number{font-size:12px;font-weight:650;flex-shrink:0}
+.community-release-facts{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.community-release-count{font-size:11px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+@media(max-width:480px){.community-release-heading{flex-wrap:wrap}}
 .community-shot-overview{flex:1;min-width:0}
 .community-shot .shot-topline{display:flex;gap:4px 10px;flex-wrap:wrap;align-items:baseline;justify-content:space-between}
 .community-shot .shot-numbers{white-space:normal;overflow-wrap:anywhere}

@@ -30,13 +30,58 @@ const confidence=(people,shots)=>{
 };
 
 
-/** The backend omits canonical coffee and contributor IDs by design.
- * Match the exact public roaster + name pair, not a joined display label.
- * Identically named distinct canonical releases need separate backend scope. */
+/** Parent: exact public roaster/name. Child: stable anonymous key derived
+ * server-side from the VERIFIED canonical coffee release ID. Never aggregate
+ * distinct releases or expose source shots, member identities or raw UUIDs.
+ * Old DTOs lack release keys and remain explicitly indeterminate. */
 export const communityCoffeeKey=sh=>JSON.stringify([
  String(sh.roaster||''),String(sh.coffee_name||'')
 ]);
 const communityCoffeeLabel=sh=>[sh.roaster,sh.coffee_name].filter(Boolean).join(' · ')||'Verified Coffee';
+export const communityReleaseKey=sh=>
+ typeof sh.release_key==='string'&&/^[a-f0-9]{64}$/.test(sh.release_key)
+  ? sh.release_key : null;
+const fact=value=>typeof value==='string'?value.trim():'';
+/** Canonical verified facts only. There is no release-date column; an
+ * observed_on date is a SHOT date and must never become a release date. */
+export function communityReleaseDetails(sh){
+ const label=fact(sh.release_label);
+ const candidates=[label,fact(sh.release_origin),fact(sh.release_process),
+  fact(sh.release_producer),fact(sh.release_variety)];
+ const unique=[];
+ for(const value of candidates){
+  if(value&&!unique.some(existing=>existing.toLowerCase()===value.toLowerCase()))
+   unique.push(value);
+ }
+ return unique.slice(0,4).join(' · ')||'Release details unavailable';
+}
+/** Keep unknown-identity DTOs distinct from known verified release keys.
+ * The legacy RPC cannot prove two observations belong to the same release. */
+function releaseGroups(items){
+ const releases=new Map();
+ for(const entry of items){
+  const id=communityReleaseKey(entry.sh);
+  const key=id?'known:'+id:'identity-unavailable';
+  if(!releases.has(key))releases.set(key,{key,verified:!!id,example:entry.sh,items:[]});
+  releases.get(key).items.push(entry);
+ }
+ return [...releases.values()];
+}
+function communityReleaseSection(release,ordinal,revision,incomplete){
+ const count=release.items.length;
+ const label=release.verified?communityReleaseDetails(release.example):'Release identity unavailable';
+ const description=`Release ${ordinal+1} · ${label}`;
+ return `<section class="community-release" aria-label="${e(description)}">
+  <div class="community-release-heading">
+   <div class="community-release-caption">
+    <span class="community-release-number">Release ${ordinal+1}</span>
+    <span class="community-release-facts">${e(label)}</span>
+   </div>
+   <span class="community-release-count">${count} ${count===1?'shot':'shots'}${incomplete?' loaded':''}</span>
+  </div>
+  ${release.items.map(entry=>communityShotRow(entry,revision)).join('')}
+ </section>`;
+}
 function communityShotRow({sh,index},revision){
  const ratings=[['Extraction',sh.extraction],['Body',sh.body],['Clarity',sh.clarity],
   ['Sweetness',sh.sweetness],['Dryness',sh.astringency]];
@@ -80,7 +125,7 @@ export function communityPage({shots=[],total=0,loading=false,error='',style='al
    <div><p class="eyebrow">The Collective</p><h2 id="community-heading">Community Shots</h2></div>
    ${button(`${icon('arrow',15)} Refresh`,'community-refresh','','ghost compact')}
   </div>
-  <p class="helper">Tap a coffee to see its qualifying shots, then tap a shot to view its ratings and evidence. Only verified Dialed-In observations appear here. No account names, private notes or custom setup details are shared. Qualifying anonymous contributions may persist if personal shot history or the account is deleted. Styles are guidelines, not pass/fail rules.</p>
+  <p class="helper">Tap a coffee to see its qualifying shots, organized by verified release when needed. Tap a shot to view its ratings and evidence. Only verified Dialed-In observations appear here. No account names, private notes or custom setup details are shared. Qualifying anonymous contributions may persist if personal shot history or the account is deleted. Styles are guidelines, not pass/fail rules.</p>
   ${error?`<p class="preview-note" role="alert">${e(error)}</p>`:''}
   ${shots.length?`<div class="community-filters">
    <label class="field"><span>Style</span><select id="community-style" aria-label="Filter Community shots by style">
@@ -100,6 +145,10 @@ export function communityPage({shots=[],total=0,loading=false,error='',style='al
     const count=group.items.length;
     const shown=`${count} ${count===1?'shot':'shots'}${incomplete?' loaded':''}`;
     const groupKey=`community-coffee:${revision}:${group.key}`;
+    const releases=releaseGroups(group.items);
+    const rows=releases.length>1
+      ? releases.map((release,i)=>communityReleaseSection(release,i,revision,incomplete)).join('')
+      : group.items.map(entry=>communityShotRow(entry,revision)).join('');
     return `<details class="coffee-card community-coffee-card" data-retain="${e(groupKey)}">
      <summary class="coffee-toggle community-coffee-toggle">
       <div class="coffee-title-area">
@@ -107,7 +156,7 @@ export function communityPage({shots=[],total=0,loading=false,error='',style='al
        <div class="coffee-subtitle">${e(group.roaster)}</div>
       </div>${icon('chevron')}
      </summary>
-     <div class="coffee-body community-coffee-body">${group.items.map(entry=>communityShotRow(entry,revision)).join('')}</div>
+     <div class="coffee-body community-coffee-body">${rows}</div>
     </details>`;
    }).join('')}
   </div>
