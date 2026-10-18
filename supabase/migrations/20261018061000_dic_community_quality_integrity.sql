@@ -174,7 +174,7 @@ create trigger dic_recheck_after_link
 -- It never updates personal shot records merely to rebuild community evidence.
 create function private.dic_backfill_library_contributions(
  p_owner uuid,p_entry uuid,p_canonical uuid
-) returns void language plpgsql security definer set search_path='' as $
+) returns void language plpgsql security definer set search_path='' as $$
 declare s public.shots; existing uuid; new_contribution uuid; contributor uuid;
         verified text;
 begin
@@ -218,7 +218,7 @@ begin
    ) values(new_contribution,s.id,contributor,s.revision);
   end if;
  end loop;
-end $;
+end $$;
 
 -- Canonical identity state changes immediately withdraw public visibility.
 -- A verified transition then reevaluates every linked projection. Different
