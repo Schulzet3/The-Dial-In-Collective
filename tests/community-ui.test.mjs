@@ -109,7 +109,7 @@ test('Community groups shots by public coffee identity into collapsed coffee car
  assert.match(html,/community-shot:3:1:/);
  assert.match(html,/community-shot:3:2:/);
  assert.match(html,/Community Shot/);
- assert.match(html,/Ratings/); // Ratings are inside each closed shot disclosure.
+ assert.match(html,/community-rating-grid/); // Ratings are nested in each closed native disclosure.
  assert.doesNotMatch(html,/data-action="shot-expand"|data-action="make-current"|data-action="edit"/);
 });
 test('Community filters apply before grouping and only loaded shots count toward coffee cards',()=>{
