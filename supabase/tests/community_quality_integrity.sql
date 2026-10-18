@@ -3,7 +3,7 @@
 begin;
 do $test$
 declare
- c1 uuid:=gen_random_uuid();c2 uuid:=gen_random_uuid();cp uuid:=gen_random_uuid();
+ c1 uuid:=gen_random_uuid();c2 uuid:=gen_random_uuid();cp uuid:=gen_random_uuid();c3 uuid:=gen_random_uuid();
  us uuid[]:='{}'; sh uuid[]:='{}'; cs uuid[]:='{}'; setups uuid[]:='{}';
  u uuid; setup uuid; version uuid; basket uuid; basket_version uuid; calib uuid;
  library uuid; sid uuid; target uuid; pending_library uuid; pending_shot uuid;
@@ -19,7 +19,8 @@ begin
  insert into public.coffees(id,name,roaster,release_label,verification_state)
  values(c1,'CI Exact Release 2026','Fixture Roaster','2026','verified'),
        (c2,'CI Exact Release 2027','Fixture Roaster','2027','verified'),
-       (cp,'CI Formerly Pending','Fixture Roaster','2028','pending');
+       (cp,'CI Formerly Pending','Fixture Roaster','2028','pending'),
+       (c3,'CI Personal Outlier','Fixture Roaster','2029','verified');
  insert into public.coffee_sources(coffee_id,source_url,source_kind) values
  (c1,'https://roaster.example.invalid/products/reusable','roaster_page'),
  (c2,'https://roaster.example.invalid/products/reusable','roaster_page');
@@ -161,6 +162,44 @@ begin
  totals:=public.dic_community_evidence_counts(c1,'Turbo');
  if totals->>'shot_count'<>'7' or totals->>'contributor_count'<>'6' then
   raise exception 'Distinct contributor balancing count was incorrect: %',totals;end if;
+
+ -- Own prior green shots on this exact coffee/setup take precedence over
+ -- community peers. A fourth unusual shot is held even with ONE contributor
+ -- (and no five-member public reference cohort) until the owner confirms.
+ insert into public.library_entries(owner_id,coffee_id)
+   values(us[1],c3) returning id into library;
+ for i in 1..4 loop
+  sid:=gen_random_uuid();
+  insert into public.shots(
+   id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+   calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+   extraction,body,clarity,sweetness,astringency,equipment_snapshot
+  ) values(sid,us[1],library,setup,version,basket_version,calib,
+    'Turbo',now()+i*interval '1 minute',18,42,
+    case when i=4 then 155 else 25 end,1.1,3,3,5,5,1,'{}');
+  if i=4 then
+   select community_shot_id into target from private.contribution_links
+     where shot_id=sid;
+   if (select quality_state from public.community_shots where id=target)<>'held'
+   or (select reason from private.community_quality_checks
+       where community_shot_id=target)<>'extreme_outlier' then
+    raise exception 'Own preceding three green shots were ignored for outlier detection';
+   end if;
+   perform set_config('request.jwt.claim.sub',us[1]::text,true);
+   perform set_config('request.jwt.claims',
+    jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
+   execute 'set local role authenticated';
+   result:=public.dic_confirm_community_outlier(sid,1);
+   if result->>'ok'<>'true' then
+    raise exception 'Owner could not affirm their plausible unconventional espresso: %',result;
+   end if;
+   execute 'reset role';
+  end if;
+ end loop;
+ totals:=public.dic_community_evidence_counts(c3,'Turbo');
+ if totals->>'shot_count'<>'4' or totals->>'contributor_count'<>'1' then
+  raise exception 'Personal-priority review or count wrong: %',totals;
+ end if;
 
  -- Different verified RELEASE cannot leak into other release's count,
  -- despite the identical source URL.
