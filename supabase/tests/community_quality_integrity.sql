@@ -96,6 +96,8 @@ begin
  if has_function_privilege('authenticated','private.dic_review_community_shot(uuid)','EXECUTE')
   or has_function_privilege('anon','private.dic_review_pending_community(integer)','EXECUTE')
   or has_table_privilege('authenticated','private.community_quality_checks','SELECT')
+  or has_table_privilege('authenticated','public.community_shots','SELECT')
+  or has_column_privilege('authenticated','public.community_shots','machine_model','SELECT')
  then raise exception 'Quality controls exposed to client roles';end if;
 
  perform set_config('request.jwt.claim.sub',us[5]::text,true);
@@ -346,8 +348,8 @@ begin
  perform set_config('request.jwt.claims',
   jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
  execute 'set local role authenticated';
- if (select count(*) from public.community_shots where coffee_id=c1)=0 then
-  raise exception 'Eligible rows not available to admitted member';end if;
+ if (public.dic_browse_community_shots(20,0)->>'total')::integer=0 then
+  raise exception 'Sanitized eligible rows unavailable to admitted member';end if;
  execute 'reset role';
  update private.beta_members set enabled=false where owner_id=us[1];
  execute 'set local role authenticated';
@@ -355,8 +357,12 @@ begin
  begin perform public.dic_community_evidence_counts(c1,'Turbo');
  exception when insufficient_privilege then denied:=true;
  end;
- if not denied or exists(select 1 from public.community_shots where coffee_id=c1) then
-  raise exception 'Revoked member retained Community visibility';end if;
+ if not denied then raise exception 'Revoked member retained Community aggregate access';end if;
+ denied:=false;
+ begin perform public.dic_browse_community_shots(20,0);
+ exception when insufficient_privilege then denied:=true;
+ end;
+ if not denied then raise exception 'Revoked member retained Community browsing';end if;
  execute 'reset role';
 
  raise notice 'PASS community: verified-only, five peers, outlier confirmation, identity, correction, hidden/deleted durability, Pending approval, contributor counts, RLS, idempotence';
