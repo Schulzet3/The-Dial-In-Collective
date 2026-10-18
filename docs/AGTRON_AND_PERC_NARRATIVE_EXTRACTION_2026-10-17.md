@@ -41,6 +41,14 @@ Agtron is objective within a specified analyzer, scale, preparation and calibrat
 - Preserve original member-entered form fields; URL Autofill fills blank fields only and requires the later explicit **Add Coffee** click. `roaster_details` and `roast_hint` are preview details and are **not written into unsupported storage columns**.
 - Both generic Netlify product extraction and the trusted official Supabase Edge parser share **identical** bounded Agtron implementation. If updating `dic-preview-coffee` at a future owner-approved publication, supply `dic-preview-coffee/agtron-roast.mjs` in addition to existing `index.ts`, `preview.mjs` and relative `dic-verify-coffee/evidence.mjs`; retain `verify_jwt=true`, roaster host checks and response-size protections.
 
+## Additional live product acceptance — verified after engineering fixes
+
+The first **real-site**, credential-free PERC Kenya Mara Estate probe disclosed two differences from synthetic fixtures: the product story occurs around **72 KB** into the product-scoped HTML (beyond the older 60 KB UI metric scan) and the visible H1 can be differently structured/cased from the matched schema Product identity. After fixes, the narrative reader uses the safely bounded full product scope while all quick facts still use the existing short window; Estate/Farm producer only succeeds after corroboration with that same release's story. The intermediate failed probe runs are preserved in GitHub rather than represented as passing.
+
+**Final live public-source run [39098106507](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39098106507): PASS**, PERC Mara Estate source from actual page returns producer **Mara Estate**, process **Anaerobic**, extra **Adv Natural; anaerobic natural, 96-hour sealed-tank fermentation**, `roaster_details.agtron="78.4"`, provisional **Light** assuming Gourmet ground, and the roaster's **16g/40g/26s/205°F** espresso recipe. All other accepted roaster-page checks held; the irrelevant homepage was safely rejected and Picky Chemist remained too large. This does not prove perfect future extraction of every possible roaster or run with a member's auth token. The test did not consume any member URL preview quota.
+
+**Final checked-in application SHA:** `ce7255c1d41bf5dc0c13c954058ea659d112a8e4`. [Cloud app test/lint/build run 39098191137](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39098191137) PASS (**312 Node tests, zero failed; lint no warnings**), [mobile/UX run 39098190895](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39098190895) PASS. [Open deployment/acceptance issue #32](https://github.com/Schulzet3/The-Dial-In-Collective/issues/32) records the exact next gate and Edge helper dependency. **No production publication.**
+
 ## Test and rollout boundary
 
 Development code:

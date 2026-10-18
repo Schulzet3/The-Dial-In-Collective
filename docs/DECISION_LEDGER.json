@@ -2388,7 +2388,16 @@
     "canonical_process_for_mara": "Anaerobic",
     "producer_for_mara": "Mara Estate, corroborated by matched product story",
     "source_url": "https://perccoffee.com/products/kenya-mara-estate",
-    "implementation": "Development branch only, full test source staged and passed app and mobile CI as of a870bf700a1955b4b9028cdd058cfd4f7cef4bd9; no production Netlify/Edge deployment; personal existing coffee not modified.",
-    "release_requires_explicit_owner_approval": true
+    "implementation": "Development-only FINAL source ce7255c1d41bf5dc0c13c954058ea659d112a8e4, app tests/lint/build 39098191137 PASS (312/312), mobile/UX 39098190895 PASS; actual bounded HTTPS roaster probe 39098106507 PASS (source code 1a76870, app extractor logic unchanged after except case-insensitive test). PERC exact producer Mara Estate, Anaerobic, processing_detail 'Adv Natural; anaerobic natural, 96-hour sealed-tank fermentation', Agtron 78.4 -> Light provisional, roaster espresso 16/40/26/205. No Netlify/Edge production deploy, no account data edit.",
+    "release_requires_explicit_owner_approval": true,
+    "release_issue": 32,
+    "real_page_probe": {
+      "run_id": 39098106507,
+      "source_sha": "1a76870ad40c4d3cacb837c52db5e086a476bab7",
+      "conclusion": "success",
+      "observed_product": "Kenya Mara Estate",
+      "scale_missing": true,
+      "one_other_product_blocked": "Picky Chemist oversized"
+    }
   }
 }
