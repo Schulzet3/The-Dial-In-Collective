@@ -149,3 +149,15 @@ dialog{color:var(--ink);background:var(--surface);border:1px solid var(--line);p
  .community-rating-grid span{font-size:10px}
  .community-review-actions button{flex:1 1 auto}
 }
+
+/* Mandatory, revision-bound shot review is separate from editable Shot dialog. */
+.community-required-review{width:min(580px,calc(100vw - 28px));max-width:580px;max-height:calc(100dvh - 28px);padding:0;border:0;border-radius:17px;overflow:auto;background:transparent;box-shadow:none;color:inherit}
+.community-required-review::backdrop{background:rgba(8,16,22,.68);backdrop-filter:blur(3px)}
+.community-required-review .community-review-prompt{margin:0;padding:22px 20px;background:var(--surface);border:1px solid var(--line);border-radius:17px}
+.community-required-review .community-review-text h3{font-size:20px}
+.community-required-review .community-review-actions{margin-top:18px}
+.community-required-review .community-review-actions button{min-height:44px}
+@media(max-width:440px){
+ .community-required-review .community-review-prompt{padding:17px 14px}
+ .community-required-review .community-review-text h3{font-size:18px}
+}
