@@ -70,4 +70,3 @@ begin
 end $$;
 revoke all on function public.dic_apply_client_change(uuid,uuid,text,jsonb) from public,anon,authenticated;
 grant execute on function public.dic_apply_client_change(uuid,uuid,text,jsonb) to authenticated;
-
