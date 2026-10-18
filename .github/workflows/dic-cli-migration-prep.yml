@@ -1,0 +1,32 @@
+# One-time migration filename generation with the real Supabase CLI.
+# No secrets, no database access, no write token, no publish or deployment.
+# Remove workflow after promoting the draft into the CLI-generated filename.
+name: DIC isolated CLI migration preparation
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/dic-cli-migration-prep.yml'
+permissions:
+  contents: read
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Generate filename using official Supabase CLI, without any remote project
+        run: |
+          set -euo pipefail
+          npx --yes supabase@latest --version
+          npx --yes supabase@latest migration --help >/dev/null
+          npx --yes supabase@latest migration new dic_community_release_context
+          printf 'CLI_MIGRATION_PATH='
+          find supabase/migrations -maxdepth 1 -type f -name '*_dic_community_release_context.sql' -printf '%p\n'
+          test "$(find supabase/migrations -maxdepth 1 -type f -name '*_dic_community_release_context.sql' | wc -l)" -eq 1
+          echo 'Generated locally only: no repo push, SQL apply, project link, database connection, or Netlify deployment.'
