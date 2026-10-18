@@ -57,3 +57,8 @@ Development SQL integration fixtures test extreme 62-second time against prior s
 - Exact tested SQL head: `e69fad3b70fd64324cfcb08a812121f39febc7d4`; app/browser head: `f8915520837753078637d8ebbeb46d7f90f54587`. Subsequent commits unrelated to this feature must not be described as tested without scope review.
 - **Production excluded:** Current hosted DB does **not** have `dic_my_community_outliers` or `dic_browse_community_shots`, new MAD migration is not installed and app prompt is not published; existing original Yirgacheffe Pending row and personal history remain intact. No claim of genuine signed-in member acceptance or empirically calibrated espresso outlier limit.
 
+
+## Published acceptance — October 18 2026 UTC
+
+The owner-approved contextual MAD review, required Confirm/Correct modal **without Later**, existing Shot History Edit, new safe Edit Coffee Details and sanitized Community browsing have been **published** to Netlify READY deploy `6ad46be2f45996b6f3f821fd` and Supabase migration `20261018064703_dic_contextual_quality_community_ui`. This supersedes only this report's older *development-only* state descriptions, not the research cautions or Locked shot-quality policy. Complete provider checks, exact commit, honest limitations and owner acceptance gate: [production release receipt](RELEASE_2026_10_18_MANDATORY_OUTLIER_AND_COFFEE_EDIT.md). No blanket removal of Pending-coffee verification or old Yirgacheffe Pending quality data was permitted; historical independent quality review remains open.
+
