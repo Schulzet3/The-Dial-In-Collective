@@ -80,6 +80,15 @@ test('PERC Kenya Mara Estate reads its full narrative, preserves processing subt
  assert.match(markup,/Roaster Agtron/);
  assert.match(markup,/Review or correct them, then click Add Coffee/);
 });
+test('matched coffee name plus its own story corroborate a farm when the visual H1 markup differs',()=>{
+ const source=page('Kenya Mara Estate','Adv Natural','78.4 Agtron',maraStory)
+  .replace('<h1>Kenya Mara Estate</h1>',
+   '<h1 class="coffee-title"><span class="flag">KENYA</span> <span>MARA</span> <i>ESTATE</i></h1>');
+ const r=facts(source);
+ assert.equal(r.fields.name,'Kenya Mara Estate');
+ assert.equal(r.fields.producer,'Mara Estate');
+ assert.equal(r.fields.process,'Anaerobic');
+});
 test('large decorative markup before the PERC coffee story does not hide its real product narrative',()=>{
  const original=page('Kenya Mara Estate','Adv Natural','78.4 Agtron',maraStory);
  // Real PERC has >70 KB of on-product layout HTML before THE DEETS! heading.

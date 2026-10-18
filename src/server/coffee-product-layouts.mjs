@@ -160,7 +160,10 @@ function detailedCoffeeNarrative(page,fields,extras,clean){
  }
  if(!story||story.length<35)return;
  const heading=(page.match(/<h1\b[^>]*>([\s\S]{1,260}?)<\/h1>/i)||[])[1]||'';
- const title=clean(heading,150).replace(/^(?:Kenya|Ethiopia|Colombia|Brazil|Honduras|Rwanda|Burundi|Peru|Panama|Guatemala|Mexico|Costa Rica|Uganda|Nicaragua|Ecuador|Bolivia|Tanzania)\s+/i,'');
+ // fields.name is already the matched source Product identity; storefront
+ // H1 text may be nested, elided, or a short SEO heading. Require the
+ // same producer entity to occur in THIS product's story regardless.
+ const title=clean(fields.name||heading,150).replace(/^(?:Kenya|Ethiopia|Colombia|Brazil|Honduras|Rwanda|Burundi|Peru|Panama|Guatemala|Mexico|Costa Rica|Uganda|Nicaragua|Ecuador|Bolivia|Tanzania)\s+/i,'');
  const farm=title.match(/^([\p{L}\p{M}][\p{L}\p{M}'’.-]*(?:\s+[\p{L}\p{M}'’.-]+){0,5}\s+(?:Estate|Farm))$/iu);
  if(!fields.producer&&farm&&story.toLocaleLowerCase().includes(farm[1].toLocaleLowerCase()))
   fields.producer=farm[1];
