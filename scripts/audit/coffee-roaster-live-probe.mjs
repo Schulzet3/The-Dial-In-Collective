@@ -6,6 +6,7 @@ import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-g
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
+import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 
 const targets=[
  ['Proud Mary Ovidio Gomez','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
@@ -30,6 +31,20 @@ const summarize=async ([roaster,url])=>{
  try{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
+  if(/^(?:Onyx Mullugeta|Sweet Bloom)/.test(roaster)){
+   const scoped=productMarkup(fetched.html);
+   const h1=scoped.match(/<h1\b[^>]*>/i);
+   const h1Close=h1?scoped.indexOf('</h1>',h1.index+h1[0].length):-1;
+   const marker=roaster.startsWith('Onyx')?'tasting-notes':'product__ingredients';
+   const flavorIndex=scoped.indexOf(marker);
+   console.log('[DIC FLAVOR DIAGNOSTIC] '+JSON.stringify({
+    roaster,scopeLength:scoped.length,firstH1:h1?.index??-1,
+    firstH1Close:h1Close,h1Length:h1&&h1Close>=0?h1Close-h1.index:-1,
+    markerIndex:flavorIndex,markerAfterH1:h1Close>=0?flavorIndex-h1Close:null,
+    firstH1Tag:h1?.[0].slice(0,140)||'',
+    markerMarkup:flavorIndex>=0?scoped.slice(Math.max(0,flavorIndex-80),flavorIndex+200):''
+   }));
+  }
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Digest only, never the page body. Facts below are public source data.

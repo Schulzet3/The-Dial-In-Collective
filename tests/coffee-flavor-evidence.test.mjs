@@ -28,7 +28,7 @@ test('nested PERC story heading and later decorations do not hide clear flavor e
  const extra='<div aria-hidden="true">'+('<svg><path d="0,1"/></svg>'.repeat(1900))+'</div>';
  const r=preview('perccoffee.com/products/colombia-franky-hoyos-adv-washed','PERC COFFEE',
   extra+'<h2><span>THE <em>DEETS!</em></span></h2>'+
-  '<p>Flavor profile: coffee with notes of orange cake, marmalade, and bubblegum vibes.</p>'+
+  '<p>This lot is a coffee with notes of orange cake, marmalade, and bubblegum vibes.</p>'+
   '<h2><span>BREW RECCS</span></h2><p>Notes of 10g water.</p>',
   'Colombia Franky Hoyos Adv Washed');
  assert.match(r.fields.tasting_notes||'',/^orange cake, marmalade, and bubblegum vibes$/);
