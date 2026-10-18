@@ -4,7 +4,7 @@ import {e,button,icon,fmt,styleBadge} from '../lib/ui.js';
 const num=value=>Number.isFinite(Number(value))?Number(value):0;
 
 export function communityReviewBanner(reviews=[],dismissed=new Set()){
- const pending=reviews.filter(r=>r?.shot_id&&!dismissed.has(r.shot_id));
+ const pending=reviews.filter(r=>r?.shot_id&&!dismissed.has(`${r.shot_id}:${r.revision}`));
  if(!pending.length)return '';
  const r=pending[0], name=[r.roaster,r.coffee_name].filter(Boolean).join(' · ');
  return `<section class="community-review-prompt" aria-labelledby="community-review-title">
