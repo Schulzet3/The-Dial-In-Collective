@@ -1,0 +1,22 @@
+# Coordinated private-beta release — 2026-10-17 Denver
+
+**Owner authorization:** In this conversation the owner expressly directed **"publish and update Github please"** in response to the exact proposed package: improved multi-roaster URL extractor, seven Title Case roast categories, five named coffee classifications, one-click Autofill and completed Work/app fixes. This authorizes **this release only** and preserves the Locked rule to seek explicit approval for every subsequent publication. Do not turn it into general automatic deployment permission.
+
+## Pre-release verification
+
+- App branch: `development/backend-foundation`; confirmed source at `2fa6aa11f377a86d56f6e18be8535ee00a353dcc`, ahead of last passing code SHA `54f35496c593ba7ddf8e32b1822f13c7ff3a8225` by **documentation changes only**.
+- Current production Netlify deployment before release: `6ad2c872ad7a8fa78dc410dc` (`f08dfda99f46b25240cb8cc35c46d2c3c76344b8`), READY, production extra Netlify team SSO off and nonproduction SSO on.
+- Source CI: [cloud app, lint, Node and build 39094069387](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39094069387) PASS; [UX/mobile 39094069348](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39094069348) PASS; [visual 39093195764](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39093195764) PASS; published/public-roaster source probe evidence also recorded in [app-wide sweep](APP_WIDE_ERROR_SWEEP_2026-10-17.md).
+- Owner-managed Netlify budget: 940 Personal credits last observed October 17, grant expiring November 14, 2026; expected deliberate release 15 credits, operational credits not deployable. No further routine screenshot required, no purchase/recharge.
+- Production Supabase schema compatibility already migrated: `dic_seven_roast_tier_compatibility` (`20261017053258`). Read-only catalog preflight shows exactly one each of the four Verified named coffees at their expected previous roast values, and one private Pending Wuri with exactly one owned private library relationship. Existing shots/community untouched.
+- **Community browsing is NOT included.** Current Community nav opens an unavailable/private-beta placeholder, with one preexisting backend community shot/link. [Eligibility #9](https://github.com/Schulzet3/The-Dial-In-Collective/issues/9) and [browsing #11](https://github.com/Schulzet3/The-Dial-In-Collective/issues/11) remain open.
+
+## Deployment order and verification gate
+
+1. Push a single GitHub commit with exact **`Release DIC: ... [dic-publish]`** message on `development/backend-foundation`; Netlify's production credit guard is designed to allow only this marker. **Creating this note alone is not proof of deployment.**
+2. Independently confirm new Netlify READY/current deploy with expected release commit, check published frontend actually contains seven canonical roast values and updated extractor/one-click Autofill and existing production SSO rules; if not proven **STOP and do not mutate coffee data**.
+3. Deploy the existing Supabase `dic-preview-coffee` Edge Function using exact checked-in `index.ts` and `preview.mjs` and `verify_jwt=true`, keeping official host/SSRF, 950 KB source limit and member checks.
+4. Apply precisely `supabase/migrations/20261017064000_dic_seven_roast_owner_data.sql` after frontend confirmation and fresh SQL preflight. It atomically asserts the exact four Verified coffees and one private Pending Wuri, reclassifies Yirgacheffe, Bavyeyi IV, David Armijos and Pending Wuri, leaves Hambela Light, records private audit and enforces seven-value catalog CHECK. It must not alter original source facts, owner membership, notes, shot/community/library IDs or backups.
+5. Read-back both providers and all five coffee classifications. Update [CURRENT_STATUS](CURRENT_STATUS.md), [issue #8](https://github.com/Schulzet3/The-Dial-In-Collective/issues/8), and backup source-reference workflow on `main` only after actual published source and production data checks. Preserve immutable archive history. Monitor new encryption/Drive artifact in normal scheduled cadence; no arbitrary hosted restore or extra release.
+
+**Release state at creation of this note: PENDING.** Do not use this preflight documentation as a completion receipt. Subsequent dated evidence must record actual observed Netlify deploy ID, production source commit and Supabase/Edge versions, failures or limitations.
