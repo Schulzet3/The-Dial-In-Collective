@@ -263,13 +263,14 @@ with sync_playwright() as p:
  # A network error must never disable Confirm indefinitely or route its
  # message to a stale, closed Edit Shot form behind the mandatory dialog.
  page.evaluate("""window.__confirmOriginal=window.__client.confirmCommunityOutlier;
-  window.__client.confirmCommunityOutlier=async()=>{throw Error('Temporary review outage');};""")
+  window.__client.confirmCommunityOutlier=async()=>{throw Error('Temporary review outage');};
+  true;""")
  page.locator('#community-required-review [data-action=community-confirm-outlier]').click()
  page.locator('#community-required-review [role=alert]').filter(has_text='Temporary review outage').wait_for()
  assert page.locator('#community-required-review [data-action=community-confirm-outlier]').is_enabled()
  assert page.locator('#community-required-review').evaluate('(d)=>d.open')
  checks.append('Required review reports transient failure visibly and allows a safe retry')
- page.evaluate("window.__client.confirmCommunityOutlier=window.__confirmOriginal")
+ page.evaluate("window.__client.confirmCommunityOutlier=window.__confirmOriginal; true")
  page.locator('[data-action=community-confirm-outlier]').click()
  page.wait_for_function('!document.querySelector(".community-review-prompt")')
  checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
