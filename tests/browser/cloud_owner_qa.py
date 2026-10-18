@@ -203,7 +203,8 @@ with sync_playwright() as p:
  page.locator(f'[data-action=expand][data-id="{verified_lid}"][aria-expanded=false]').count() and page.locator(f'[data-action=expand][data-id="{verified_lid}"]').click()
  page.locator(f'[data-retain="facts-{verified_lid}"] summary').click()
  page.locator(f'[data-action=edit-coffee][data-id="{verified_lid}"]').click()
- assert page.locator('#sheet-title').inner_text()=='Suggest Coffee Corrections'
+ actual_title=page.locator('#sheet-title').inner_text()
+ assert actual_title=='Suggest Coffee Corrections',{'title':actual_title,'verified_lid':verified_lid,'raw_coffee':page.evaluate("window.__raw.library.find(x=>x.id==="+repr(verified_lid)+")"),'app_coffee':page.evaluate("window.__app.raw?.library?.find(x=>x.id==="+repr(verified_lid)+")")}
  page.locator('#edit-coffee [name=producer]').fill('Correction Producer')
  page.locator('#edit-coffee').get_by_role('button',name='Submit Correction For Review').click()
  page.wait_for_function('!document.querySelector("#sheet").open')
