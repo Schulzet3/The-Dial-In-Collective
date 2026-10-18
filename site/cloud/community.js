@@ -3,21 +3,20 @@
 import {e,button,icon,fmt,styleBadge} from '../lib/ui.js';
 const num=value=>Number.isFinite(Number(value))?Number(value):0;
 
-export function communityReviewBanner(reviews=[],dismissed=new Set()){
- const pending=reviews.filter(r=>r?.shot_id&&!dismissed.has(`${r.shot_id}:${r.revision}`));
+export function communityReviewBanner(reviews=[]){
+ const pending=reviews.filter(r=>r?.shot_id);
  if(!pending.length)return '';
  const r=pending[0], name=[r.roaster,r.coffee_name].filter(Boolean).join(' · ');
  return `<section class="community-review-prompt" aria-labelledby="community-review-title">
   <div class="community-review-icon">${icon('shield',20)}</div>
   <div class="community-review-text">
-   <p class="eyebrow">Quick Measurement Check</p>
+   <p class="eyebrow">Required Measurement Check</p>
    <h3 id="community-review-title">Are these shot measurements correct?</h3>
    <p class="helper">${e(name)} · ${e(r.style)} · ${fmt(r.dose_g)}g → ${fmt(r.yield_g)}g in <strong>${fmt(r.time_s)}s</strong></p>
-   <p class="helper">This shot is Dialed In, but one or more measurements differ considerably from comparable shots. Confirm the value or correct a typo to include accurate data in Community. Unusual recipes are welcome.</p>
+   <p class="helper">Your Dialed-In shot has unusual measurements. Please confirm they're correct or edit the original shot before continuing. An unconventional extraction can still qualify for Community.</p>
    <div class="community-review-actions">
     ${button('Yes, It’s Correct','community-confirm-outlier',`data-id="${e(r.shot_id)}" data-revision="${e(r.revision)}"`,'primary compact')}
     ${button('Correct Shot','community-correct-outlier',`data-id="${e(r.shot_id)}"`,'ghost compact')}
-    ${button('Later','community-dismiss-outlier',`data-id="${e(r.shot_id)}"`,'text-button')}
    </div>
    ${pending.length>1?`<p class="helper">${pending.length-1} other measurement${pending.length===2?'':'s'} awaiting review.</p>`:''}
   </div>
