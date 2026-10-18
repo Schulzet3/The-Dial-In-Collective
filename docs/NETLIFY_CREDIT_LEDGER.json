@@ -2,7 +2,7 @@
   "product": "The Dial In Collective",
   "provider": "Netlify",
   "account_plan": "Personal (paid through current billing period; downgrade to Free scheduled)",
-  "accounting_note": "Most recent owner-provided Personal snapshot: 940/1000 credits as of 2026-10-17 (historical), current grant through 2026-11-14. Exact READY/current Netlify publication 6ad5030aaae6cba42933a800 from d54f84103285cfb0185e1d806efe9e8c6064b72d on 2026-10-18 17:34 UTC; estimated cost 15 credits, actual charge/current balance not accessible via connector. Owner monitors further balance under existing Locked grant, no purchases or recharge.",
+  "accounting_note": "Latest Netlify production READY/current 6ad5197d42cc6608b98712a4 from 415136c3a31d67f97b9ec53cb96b5b057eb704fe published 2026-10-18 19:10 UTC under one explicitly approved PWA release; planned charge 15 Personal credits, actual charge and current balance unavailable through connector. Last owner-provided 940/1000 was October 17 (historical), current grant through 2026-11-14. Owner monitors and notifies on low credits, no purchases or recharge; approval consumed. Post-release encrypted GitHub backup 39157642936 succeeded; push-only offsite courier receipt unverified.",
   "monthly_included_credits": 1000,
   "production_deploy_credits_each": 15,
   "snapshots": [
@@ -101,24 +101,27 @@
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
     "post_release_billing_refresh_needed": false,
     "last_published_release": {
-      "deploy_id": "6ad5030aaae6cba42933a800",
-      "published_commit_sha": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
-      "published_at_utc": "2026-10-18T17:34:16.118Z",
+      "deploy_id": "6ad5197d42cc6608b98712a4",
+      "published_commit_sha": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
+      "published_at_utc": "2026-10-18T19:10:03.616Z",
       "netlify_status": "ready/current",
-      "context": "production",
       "branch": "development/backend-foundation",
+      "context": "production",
       "primary_hostname": "https://app.dialincollective.com",
       "production_requires_netlify_team_sso": false,
       "nonproduction_requires_netlify_team_sso": true,
-      "scanned_files": 212,
+      "scanned_files": 221,
       "secret_scan_matches": 0,
       "published_functions": [
         "coffee-url-preview"
       ],
       "previous_function_binary_unchanged": true,
       "planned_cost_credits": 15,
-      "actual_credits_deducted": "UNKNOWN: Netlify connector does not expose live billing",
-      "approval_exhausted": true
+      "actual_credits_deducted": "UNKNOWN: connector does not expose live billing",
+      "current_remaining_credits": "UNKNOWN: owner-managed",
+      "approval_exhausted": true,
+      "encrypted_backup_source_pin": "570e05529eb7874bbcd216502acb1139755bfa01",
+      "encrypted_backup_run": 39157642936
     },
     "owner_waived_balance_check_for_this_release": {
       "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
@@ -133,11 +136,11 @@
     "current_known_plan_expires": "2026-11-14",
     "owner_assumes_proactive_low_credit_notice": true,
     "last_individually_authorized_release": {
-      "scope": "one mandatory Community confirmation RPC-error retry frontend fix",
-      "owner_reply": "Yes approved. Do it",
+      "scope": "one tested secure offline PWA shell, owner-bound offline shot logging and 192/512 PNG Home Screen icon production release",
+      "owner_reply": "yes proceed.",
       "authorized_in_current_conversation": true,
-      "commit": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
-      "deploy_id": "6ad5030aaae6cba42933a800",
+      "commit": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
+      "deploy_id": "6ad5197d42cc6608b98712a4",
       "authorization_exhausted": true,
       "next_release_requires_new_explicit_owner_approval": true
     },
@@ -178,17 +181,58 @@
       ],
       "scope": "single git-connected Netlify production publication of offline/PWA public shell, icons, cached-owner offline reopening, new-shot offline queue",
       "estimated_credits": 15,
-      "current_actual_credit_balance": "UNKNOWN; owner-monitored valid grant through 2026-11-14; 2026-10-17 940/1000 historical",
-      "publication_status": "approved pending exact GitHub publish marker and independent Netlify READY/current confirmation",
-      "approval_consumed": false,
+      "current_actual_credit_balance": "UNKNOWN; owner-managed grant, historical Oct 17 snapshot is not updated",
+      "publication_status": "published_ready_current",
+      "approval_consumed": true,
       "permissions_not_granted": [
         "additional releases",
         "production SQL/Edge writes",
         "Auth/SSO changes",
         "history edits",
         "purchases/recharges"
-      ]
-    }
+      ],
+      "release_marker_commit": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
+      "deploy_id": "6ad5197d42cc6608b98712a4",
+      "published_at_utc": "2026-10-18T19:10:03.616Z",
+      "backup_main_pin": "570e05529eb7874bbcd216502acb1139755bfa01",
+      "backup_success_run": 39157642936,
+      "backup_artifact_id": 12147861247,
+      "backup_bytes": 940373,
+      "drive_delivery": "NOT VERIFIED: push-only backup has no newly observed offsite courier receipt"
+    },
+    "historical_published_release_records": [
+      {
+        "deploy_id": "6ad5030aaae6cba42933a800",
+        "published_commit_sha": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
+        "published_at_utc": "2026-10-18T17:34:16.118Z",
+        "netlify_status": "ready/current",
+        "context": "production",
+        "branch": "development/backend-foundation",
+        "primary_hostname": "https://app.dialincollective.com",
+        "production_requires_netlify_team_sso": false,
+        "nonproduction_requires_netlify_team_sso": true,
+        "scanned_files": 212,
+        "secret_scan_matches": 0,
+        "published_functions": [
+          "coffee-url-preview"
+        ],
+        "previous_function_binary_unchanged": true,
+        "planned_cost_credits": 15,
+        "actual_credits_deducted": "UNKNOWN: Netlify connector does not expose live billing",
+        "approval_exhausted": true
+      }
+    ],
+    "historical_scoped_owner_authorizations": [
+      {
+        "scope": "one mandatory Community confirmation RPC-error retry frontend fix",
+        "owner_reply": "Yes approved. Do it",
+        "authorized_in_current_conversation": true,
+        "commit": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
+        "deploy_id": "6ad5030aaae6cba42933a800",
+        "authorization_exhausted": true,
+        "next_release_requires_new_explicit_owner_approval": true
+      }
+    ]
   },
   "reconciliation": "Live Netlify current READY 6ad5030aaae6cba42933a800 from d54f84103285cfb0185e1d806efe9e8c6064b72d on 2026-10-18 17:34 UTC; only a tested mandatory outlier retry UI hotfix released. Netlify visitor access unchanged, 212 files/zero secrets. Supabase migrations, Edge functions and member history unchanged. Latest backup-only main recovery source pin 24cf8be2a8b8332bac75ba87d7d745152d7a7e22; encrypted GitHub backup 39150331467 SUCCESS. Historical previous release data is preserved separately.",
   "scheduled_plan_change": {
@@ -216,27 +260,46 @@
     "currently_published_deploy_unchanged": true
   },
   "latest_publication_20261018": {
-    "published_sha": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
-    "deploy_id": "6ad5030aaae6cba42933a800",
-    "published_at_utc": "2026-10-18T17:34:16.118Z",
-    "verified_state": "Netlify production current/ready",
-    "ci_runs_pass": [
-      39144628914,
-      39144628910,
-      39144628921
-    ],
-    "postflight": "21 edge 200 responses including cloud/main.js; 15 shots/15 notes/1 eligible Community unchanged",
-    "backup_pin_commit": "24cf8be2a8b8332bac75ba87d7d745152d7a7e22",
-    "backup_run": 39150331467,
-    "backup_status": "success",
-    "backup_artifact": 12144424733,
-    "latest_observed_personal_credit_balance": {
-      "observed_date": "2026-10-17",
-      "remaining": 940
-    },
-    "actual_credit_balance": "unverified",
-    "offsite_push_backup_delivery": "unverified; not a scheduled courier receipt",
-    "authenticated_live_member_acceptance": "pending #34, #9, #11",
-    "permission_for_next_release": false
-  }
+    "name": "Secure offline PWA and Home Screen install",
+    "deploy_id": "6ad5197d42cc6608b98712a4",
+    "source_sha": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
+    "status": "ready/current",
+    "published_at_utc": "2026-10-18T19:10:03.616Z",
+    "estimated_credits": 15,
+    "actual_charge": "UNKNOWN",
+    "known_credits": "Owner-managed Personal grant expires November 14, historical screenshot October 17 940",
+    "encrypted_backup_main_pin": "570e05529eb7874bbcd216502acb1139755bfa01",
+    "encrypted_backup_run": 39157642936,
+    "encrypted_backup_artifact_id": 12147861247,
+    "encrypted_backup_artifact_size": 940373,
+    "offsite_delivery": "not verified on new push-only artifact",
+    "approval_exhausted": true,
+    "release_receipt": "docs/RELEASE_2026_10_18_OFFLINE_PWA.md"
+  },
+  "historical_publications_20261018": [
+    {
+      "published_sha": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
+      "deploy_id": "6ad5030aaae6cba42933a800",
+      "published_at_utc": "2026-10-18T17:34:16.118Z",
+      "verified_state": "Netlify production current/ready",
+      "ci_runs_pass": [
+        39144628914,
+        39144628910,
+        39144628921
+      ],
+      "postflight": "21 edge 200 responses including cloud/main.js; 15 shots/15 notes/1 eligible Community unchanged",
+      "backup_pin_commit": "24cf8be2a8b8332bac75ba87d7d745152d7a7e22",
+      "backup_run": 39150331467,
+      "backup_status": "success",
+      "backup_artifact": 12144424733,
+      "latest_observed_personal_credit_balance": {
+        "observed_date": "2026-10-17",
+        "remaining": 940
+      },
+      "actual_credit_balance": "unverified",
+      "offsite_push_backup_delivery": "unverified; not a scheduled courier receipt",
+      "authenticated_live_member_acceptance": "pending #34, #9, #11",
+      "permission_for_next_release": false
+    }
+  ]
 }
