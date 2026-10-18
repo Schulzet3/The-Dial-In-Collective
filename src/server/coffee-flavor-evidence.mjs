@@ -1,7 +1,7 @@
 // Bounded product-specific flavor evidence. No AI, cross-page navigation,
 // guessed flavor dictionary or related-product tasting notes.
 const topOfProduct=(html)=>{
- const match=/<h1\b[^>]*>[\s\S]{0,2000}?<\/h1>/i.exec(html);
+ const match=/<h1\b[^>]*>[\s\S]{0,12000}?<\/h1>/i.exec(html);
  return match?html.slice(match.index+match[0].length,match.index+match[0].length+16000):'';
 };
 function shortFlavorList(raw,clean){

@@ -4,6 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
+import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 
 const url=(path)=>'https://'+path;
 function preview(path,brand,body,title='Example Coffee'){
@@ -42,6 +43,37 @@ test('Onyx named multi-span tasting-note container is product-specific',()=>{
  assert.equal(r.fields.tasting_notes,'Strawberry, Honeysuckle, Pink Lemonade, Peach');
  assert.equal(r.fields.roast_level,'Ultra Light');
 });
+test('product scope never mistakes the custom main-product-selector for an HTML main',()=>{
+ const html='<main><h1>Wuri</h1><em class="product__ingredients">citra hops, mandarin, sugarcane</em>'+
+  '<main-product-selector class="selector">Size</main-product-selector>'+
+  '<h2>More coffees</h2><p>Another coffee tasting notes</p></main>';
+ const once=productMarkup(html);
+ const twice=productMarkup(once);
+ assert.match(twice,/citra hops, mandarin, sugarcane/);
+ assert.doesNotMatch(twice,/Another coffee tasting notes/);
+ assert.match(twice,/main-product-selector/);
+});
+test('long Onyx H1 with real audio markup still exposes this lot tasting notes',()=>{
+ const long='<audio src="'+('lot-sound'.repeat(700))+'"></audio>';
+ const r=preview('onyxcoffeelab.com/products/ethiopia-lot-26','Onyx',
+  '<p class="tasting-notes kapra"><span class="note">Strawberry</span>'+
+  '<span class="note">Honeysuckle</span><span class="note">Pink Lemonade</span>'+
+  '<span class="note">Peach</span></p>'+
+  '<div class="a-stat" data-name="roast-level"><p>Ultra Light<br><label>ROAST LEVEL</label></p></div>',
+  'Ethiopia Mullugeta Muntasha Natural');
+ // The fixture's long H1 is inserted after the product title markup,
+ // preserving the shape of Onyx audio metadata within its main title.
+ const source='<html><head><meta property="og:type" content="product">'+
+  '<meta property="og:title" content="Ethiopia Mullugeta Muntasha Natural">'+
+  '<meta property="og:site_name" content="Onyx"></head><body><main>'+
+  '<h1 class="blinds-text">Ethiopia Mullugeta Muntasha Natural'+long+'</h1>'+
+  '<p class="tasting-notes kapra"><span class="note">Strawberry</span><span class="note">Honeysuckle</span>'+
+  '<span class="note">Pink Lemonade</span><span class="note">Peach</span></p>'+
+  '<div class="a-stat" data-name="roast-level"><p>Ultra Light<br><label>ROAST LEVEL</label></p></div></main></body></html>';
+ assert.equal(r.fields.tasting_notes,'Strawberry, Honeysuckle, Pink Lemonade, Peach');
+ const full=extractPublicCoffeeFacts(source,{source_url:'https://onyxcoffeelab.com/products/ethiopia-lot-26'});
+ assert.equal(full.fields.tasting_notes,'Strawberry, Honeysuckle, Pink Lemonade, Peach');
+});
 test('Sweet Bloom Wuri and Uraga use product ingredient flavors, never relationship years as producers',()=>{
  for(const [title,fruits,process] of [
   ['Wuri','citra hops, mandarin, sugarcane','washed'],
@@ -52,7 +84,8 @@ test('Sweet Bloom Wuri and Uraga use product ingredient flavors, never relations
    '<em class="product__ingredients">'+fruits+'</em>'+
    '<p class="product__process">'+process+' process</p>'+
    '<h2>Since 2026</h2><div>PRODUCER</div>'+
-   '<h2>850 Small Holder Farmers</h2><div>PRODUCER</div>',title);
+   '<h2>850 Small Holder Farmers</h2><div>PRODUCER</div>'+ 
+   '<main-product-selector class="selector">Size</main-product-selector>',title);
   assert.equal(r.fields.tasting_notes,fruits);
   assert.notEqual(r.fields.producer?.toLowerCase(),'since 2026');
  }
