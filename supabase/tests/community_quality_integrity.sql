@@ -163,12 +163,11 @@ begin
  if totals->>'shot_count'<>'7' or totals->>'contributor_count'<>'6' then
   raise exception 'Distinct contributor balancing count was incorrect: %',totals;end if;
 
- -- Own prior green shots on this exact coffee/setup take precedence over
- -- community peers. A fourth unusual shot is held even with ONE contributor
- -- (and no five-member public reference cohort) until the owner confirms.
+ -- Five preceding own coffee/style/setup shots establish stable context.
+ -- A sixth 62-second shot is held for confirmation, not automatically rejected.
  insert into public.library_entries(owner_id,coffee_id)
    values(us[1],c3) returning id into library;
- for i in 1..4 loop
+ for i in 1..6 loop
   sid:=gen_random_uuid();
   insert into public.shots(
    id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
@@ -176,14 +175,14 @@ begin
    extraction,body,clarity,sweetness,astringency,equipment_snapshot
   ) values(sid,us[1],library,setup,version,basket_version,calib,
     'Turbo',now()+i*interval '1 minute',18,42,
-    case when i=4 then 155 else 25 end,1.1,3,3,5,5,1,'{}');
-  if i=4 then
+    case when i=6 then 62 else 25 end,1.1,3,3,5,5,1,'{}');
+  if i=6 then
    select community_shot_id into target from private.contribution_links
      where shot_id=sid;
    if (select quality_state from public.community_shots where id=target)<>'held'
    or (select reason from private.community_quality_checks
        where community_shot_id=target)<>'extreme_outlier' then
-    raise exception 'Own preceding three green shots were ignored for outlier detection';
+    raise exception 'Five prior green shots were ignored for the 62-second outlier review';
    end if;
    perform set_config('request.jwt.claim.sub',us[1]::text,true);
    perform set_config('request.jwt.claims',
@@ -197,7 +196,7 @@ begin
   end if;
  end loop;
  totals:=public.dic_community_evidence_counts(c3,'Turbo');
- if totals->>'shot_count'<>'4' or totals->>'contributor_count'<>'1' then
+ if totals->>'shot_count'<>'6' or totals->>'contributor_count'<>'1' then
   raise exception 'Personal-priority review or count wrong: %',totals;
  end if;
 
