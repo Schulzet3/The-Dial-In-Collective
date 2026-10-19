@@ -38,12 +38,12 @@
 - **Limited invitation-only technical pilot** is separate from a complete beta and must not misrepresent missing P0 recommendation and Experiment capabilities.
 - **Permanent admin and admitted members**, single-use non-expiring/until-revoked administrator-issued invitations, reversible **Remove/Restore Access** without hard-deleting shots; initial real owner issue/revoke PASS, remaining member QA OPEN.
 - **Mandatory anomalous shot review** offers Confirm Measurement or Correct Shot and does not allow Later while online/synced; device-offline queued changes remain recoverable.
-- **Product spelling:** The Dial In Collective, dial in, dialed in (hyphenless user-facing copy).
+- **Product spelling:** The Dial In Collective, dial in, dialed in (hyphenless user-facing copy).\n- **Owner-approved future onboarding guide and/or walkthrough** when UI stabilizes is now tracked in [#37](https://github.com/Schulzet3/The-Dial-In-Collective/issues/37); written vs video format/timing not yet chosen. Optional AI Coach, pricing and public-marketing site are deferred aspirations, not presently authorized V1 features.
 - **Cloudflare/Resend** operational setup has historically tested password-reset email and support forwarding; current restricted settings are NOT independently audited by the available connectors.
 
 ## Latest production vs development evidence
 - Live Netlify READY from app SHA `40b97f33bb1d828943e88d88ca0978c37baea18c` (October 19, 2026), two latest production migrations applied, 4 coffees / 16 shots, 2 admitted members / 1 admin.
-- Development HEAD following the first October 19 audit archive commit: `04f557c1b7b20079268a80bd0270fd12b581b93a`. No application behavior code has changed since the published release. Documentation cleanup is not a deployment.
+- The first October 19 audit archive commit was `04f557c1b7b20079268a80bd0270fd12b581b93a`; the subsequent crosswalk and index commits likewise only edit documentation. No application behavior code has changed since the published release. Documentation cleanup is not a deployment.
 - Database 30 migrations vs exactly 30 versioned SQL source files. Latest CI pre-cleanup run `39201458325` passed. Do not claim a new production code test or real user acceptance where none occurred.
 
 ## Next decision triage
