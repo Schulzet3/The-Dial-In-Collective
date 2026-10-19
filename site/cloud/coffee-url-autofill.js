@@ -35,12 +35,20 @@ export function coffeeUrlPreviewMarkup(result){
  const detailsLabels={
   agtron:'Roaster Agtron',agtron_scale:'Agtron Scale',agtron_sample:'Agtron Sample',production_roaster:'Production Roaster',recommended_rest:'Recommended Rest',
   drying_method:'Drying Method',harvest_season:'Harvest Season',
-  preferred_extraction:'Preferred Extraction',processing_detail:'Processing Detail',farm:'Farm / Estate',named_producer:'Named Producer / Grower'
+  preferred_extraction:'Preferred Extraction',processing_detail:'Processing Detail',farm:'Farm / Estate',named_producer:'Named Producer / Grower',blend_components:'Blend Components'
  };
  const extras=Object.entries(detailsLabels).filter(([key])=>typeof result.roaster_details?.[key]==='string'&&result.roaster_details[key]);
- const fullRecipe=!!(result.roaster_recipe&&Number.isFinite(result.roaster_recipe.dose_g)&&Number.isFinite(result.roaster_recipe.yield_g)&&Number.isFinite(result.roaster_recipe.time_s_min));
- const publishedRecipe=fullRecipe?`${e(result.roaster_recipe.dose_g)} g in, ${e(result.roaster_recipe.yield_g)} g out, ${e(result.roaster_recipe.time_s_min)}–${e(result.roaster_recipe.time_s_max)} s${result.roaster_recipe.temperature?', '+e(result.roaster_recipe.temperature):''}`:
-  Number.isFinite(result.roaster_recipe?.ratio)?'Espresso ratio 1:'+e(result.roaster_recipe.ratio)+' (dose and time not supplied)':'';
+ const recipe=result.roaster_recipe||{};
+ const validYield=Number.isFinite(recipe.yield_g)||
+  (Number.isFinite(recipe.yield_g_min)&&Number.isFinite(recipe.yield_g_max)&&recipe.yield_g_max>=recipe.yield_g_min);
+ const fullRecipe=Number.isFinite(recipe.dose_g)&&Number.isFinite(recipe.time_s_min)&&validYield;
+ const doseText=Number.isFinite(recipe.dose_g_max)?e(recipe.dose_g)+'–'+e(recipe.dose_g_max):
+  e(recipe.dose_g)+(Number.isFinite(recipe.dose_tolerance_g)?' ± '+e(recipe.dose_tolerance_g):'');
+ const outputText=Number.isFinite(recipe.yield_g)?e(recipe.yield_g):e(recipe.yield_g_min)+'–'+e(recipe.yield_g_max);
+ const publishedRecipe=fullRecipe?
+  doseText+' g in, '+outputText+' g out, '+e(recipe.time_s_min)+'–'+e(recipe.time_s_max)+' s'+
+  (recipe.temperature?', '+e(recipe.temperature):recipe.temperature_reference?', temperature guidance: '+e(recipe.temperature_reference):''):
+  Number.isFinite(recipe.ratio)?'Espresso ratio 1:'+e(recipe.ratio)+' (dose and time not supplied)':'';
  return `<section class="coffee-url-preview">
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
