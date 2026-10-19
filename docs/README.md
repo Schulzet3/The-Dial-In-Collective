@@ -5,6 +5,7 @@
 1. [Current Status](CURRENT_STATUS.md) — current published SHA, production counts, safety, next action.
 2. [Master Specification](MASTER_SPECIFICATION.md) — canonical requirements and Locked product decisions.
 3. [Decision Ledger](DECISION_LEDGER.json) — original 79 Locked / 20 Open items plus later scoped changes.
+4. [Active decision and requirement reconciliation](ACTIVE_DECISION_AND_REQUIREMENT_RECONCILIATION_2026-10-19.md) — all 20 original Open questions reconciled to later owner decisions and open work.
 4. [Global Reconciliation Audit, October 19](GLOBAL_RECONCILIATION_AUDIT_2026-10-19.md) — cross-platform evidence, gaps and provider limits.
 5. [Live GitHub Issues](https://github.com/Schulzet3/The-Dial-In-Collective/issues) — per-feature open/completed status, real QA and priority.
 6. [AGENTS — continuity rules](../AGENTS.md) — exact repository/change-control method.
