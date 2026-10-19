@@ -36,7 +36,8 @@ function foundGrower(paragraphs){
   ];
   for(const re of patterns){
    const m=re.exec(paragraph);
-   if(m&&m[1]&&!BAD_PERSON.test(m[1]))return m[1];
+   if(m&&m[1]&&!BAD_PERSON.test(m[1])&&
+       m[1].split(/\s+/).every(part=>/^\p{Lu}/u.test(part)))return m[1];
   }
  }
  return '';
