@@ -10,6 +10,8 @@
 
 **Important new backup preflight result:** The scheduled archive independently matched to Google Drive was created 2026-10-18 **13:23 UTC**, whereas the owner’s new actual offline-persisted shot was created approximately **19:51 UTC**. That scheduled offsite archive cannot contain the later shot; the later push-only backup around 19:11 UTC also predates it. A newer encrypted offsite archive covering the newest shot has **not** been independently verified. Before any production migration, verify the next genuinely scheduled run, corresponding Drive copy and recoverability as scoped in [the release gate](TECHNICAL_PILOT_RELEASE_GATE_2026-10-18.md). Do not trigger or expose a plaintext backup without explicit authorization. Netlify credit balance is owner-managed and not exposed by the connector, so verify safe availability near the specific release approval without treating an old screenshot as live funds.
 
+**Tracking:** [pilot tracking issue #36](https://github.com/Schulzet3/The-Dial-In-Collective/issues/36) is the operational pilot release/acceptance tracker; no required gate has been waived.
+
 **Next authorization gate:** Once source/backup/security/credit readiness is documented, ask owner separately to approve **both exact migration files** plus **one controlled Netlify production publish**. Stop on any migration/permission/privacy/backup drift and never use general pilot approval as a publish marker. Following release: genuine signed-in admin code issuance/revocation/member Remove/Restore; verified single-use account admission and negative checks; 2-account isolation, mobile/offline/PWA and Community browse acceptance; offsite backup including the new release source. Only then invite the agreed tester cohort.
 
 ---

@@ -1,6 +1,6 @@
 # Controlled limited technical pilot — pre-release gate (October 18, 2026)
 
-**STATUS: OWNER HAS APPROVED THE TECHNICAL PILOT MILESTONE ONLY — NO PRODUCTION SQL OR FRONTEND RELEASE AUTHORIZATION.** [Owner-Locked scope](MASTER_SPECIFICATION.md) / [Decision Ledger](DECISION_LEDGER.json) `PILOT-INVITE-ONLY-TECHNICAL-20261018-01`; [operational plan](INVITE_ONLY_TECHNICAL_PILOT_LAUNCH_PLAN_2026-10-18.md) / [live status](CURRENT_STATUS.md). Each checkbox below is a distinct evidence requirement; previous green CI, real iPhone tests and screenshots must not be mislabeled as other, untested checks.
+**STATUS: OWNER HAS APPROVED THE TECHNICAL PILOT MILESTONE ONLY — NO PRODUCTION SQL OR FRONTEND RELEASE AUTHORIZATION.** [Owner-Locked scope](MASTER_SPECIFICATION.md) / [Decision Ledger](DECISION_LEDGER.json) `PILOT-INVITE-ONLY-TECHNICAL-20261018-01`; [operational plan](INVITE_ONLY_TECHNICAL_PILOT_LAUNCH_PLAN_2026-10-18.md) / [live status](CURRENT_STATUS.md). Track status and required release/acceptance in [pilot tracking issue #36](https://github.com/Schulzet3/The-Dial-In-Collective/issues/36). Each checkbox below is a distinct evidence requirement; previous green CI, real iPhone tests and screenshots must not be mislabeled as other, untested checks.
 
 ## Baseline known from live read-only preflight
 
