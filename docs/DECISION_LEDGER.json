@@ -2847,7 +2847,7 @@
     "detailed_report": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md"
   },
   "admin_beta_invitation_controls_dev_20261018": {
-    "status": "Implemented in private source, SQL/Node/mobile tests completed or in progress; do not claim deployed",
+    "status": "Source implementation, CLI migration, isolated SQL, Node/lint/build, mobile Chromium, full visual all PASS; NOT DEPLOYED. Owner code-default choice and separate release approval pending.",
     "migration": "supabase/migrations/20261018235549_dic_admin_beta_invitation_controls.sql",
     "generated_official_cli_run": 39178514283,
     "model": "private.beta_invites existing hashes/use limits, add issued_by/label; private.admin_access_events no secrets; member-access soft revocation",
@@ -2876,10 +2876,26 @@
       "isolated_SQL": 39178869416,
       "node_lint_build": 39179606340,
       "cloud_browser": 39179606335,
-      "visual": "new final visual CI pending after workflow cleanup; earlier 39179111606 passed before latest test scripts"
+      "visual": 39179973587,
+      "mobile_browser": 39179606335,
+      "sql": 39178869416,
+      "node": 39179606340
     },
     "current_live_invites_usable": 0,
     "current_live_admin_roles": 1,
-    "next_gate": "Owner answers ONE question: default one-use vs unlimited reusable; then exact SQL production and Netlify one-deploy approval plus credits/backups, real auth browser acceptance, no data change before approval"
+    "next_gate": "Owner answers ONE question: default one-use vs unlimited reusable; then exact SQL production and Netlify one-deploy approval plus credits/backups, real auth browser acceptance, no data change before approval",
+    "temp_cli_workflow_removed": true,
+    "final_hosted_readback": {
+      "applied_migrations": 28,
+      "admin_accounts": 1,
+      "admitted_members": 2,
+      "usable_invite_codes": 0,
+      "personal_shots": 16,
+      "personal_notes": 16,
+      "eligible_community": 2,
+      "admin_event_audit_tables": 0,
+      "netlify_current": "6ad5197d42cc6608b98712a4"
+    },
+    "actual_signed_http_admin_acceptance": "Not yet possible; requires separately approved production migration/deploy."
   }
 }
