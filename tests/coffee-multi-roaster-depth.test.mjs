@@ -132,3 +132,22 @@ test('Multi-origin/multi-producer displayed facts escape malicious input, never 
  assert.doesNotMatch(visible,/<img\s+src=x/i);
  assert.match(visible,/&lt;img/);
 });
+
+test('Inline roaster Components percentage lists support plus and semicolon separators',()=>{
+ const plus=parse('roaster.test-site.com','products/inline','Inline Blend','Roaster',
+  '<p>Components: 60% Kenya - Finca River - Natural + 40% Peru - Finca Forest - Washed</p>');
+ assert.equal(plus.fields.origin,'Kenya, Peru');
+ assert.equal(plus.fields.producer,'Finca River, Finca Forest');
+ assert.equal(plus.fields.process,'Other/Unknown');
+ const semi=parse('roaster.test-site.com','products/inline-semicolon','Inline Semicolon','Roaster',
+  '<p>Components: 70% Brazil - Natural; 30% Ethiopia - Washed</p>');
+ assert.equal(semi.fields.origin,'Brazil, Ethiopia');
+ assert.equal(semi.fields.process,'Other/Unknown');
+});
+test('Incomplete percentage list cannot establish an entire blend composition',()=>{
+ const r=parse('roaster.test-site.com','products/incomplete','Incomplete Blend','Roaster',
+  '<p>Components: 60% Brazil - Natural + 20% Ethiopia - Washed</p>');
+ assert.equal(r.fields.origin,undefined);
+ assert.equal(r.fields.process,undefined);
+ assert.equal(r.roaster_details?.blend_components,undefined);
+});
