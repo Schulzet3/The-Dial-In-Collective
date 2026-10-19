@@ -85,3 +85,49 @@ test('Unverified multi-process roaster blends preserve exact parts without fake 
  assert.equal(r.fields.origin,'Brazil, Guatemala');
  assert.equal(r.fields.roast_level,'Medium');
 });
+
+test('Blend preserves two explicit farms and multiple origins with stable deduplication',()=>{
+ const r=parse('another-roaster.test-site.com','products/duo-farm','Dual Farm Blend','Another Roaster',
+  '<h2>Product Composition</h2><p>Components:</p>'+
+  '<ul><li>35% Panama - Finca Deborah - Natural</li>'+
+  '<li>25% Panama - Finca Deborah - Washed</li>'+
+  '<li>40% Colombia - Hacienda La Esperanza - Washed</li></ul>');
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.origin,'Panama, Colombia');
+ assert.equal(r.fields.producer,'Finca Deborah, Hacienda La Esperanza');
+ assert.equal(r.fields.process,'Other/Unknown');
+ assert.equal(r.roaster_details.processing_detail,'Natural, Washed');
+ assert.equal(r.roaster_details.blend_components.split('Finca Deborah').length-1,2,
+  'The exact components remain intact even though aggregate producer is unique');
+});
+test('Explicit producer labels in components do not collapse into a single producer',()=>{
+ const r=parse('another-roaster.test-site.com','products/roaster-team','Team Blend','Another Roaster',
+  '<p>Components:</p><p>55% Peru - Producer: Alicia Torres - Washed<br>'+
+  '45% Ecuador - Producer: Juan Vega - Natural</p>');
+ assert.equal(r.fields.origin,'Peru, Ecuador');
+ assert.equal(r.fields.producer,'Alicia Torres, Juan Vega');
+ assert.equal(r.fields.process,'Other/Unknown');
+});
+test('One known processing method with another component unspecified does not invent a shared method',()=>{
+ const r=parse('another-roaster.test-site.com','products/partial','Partial Blend','Another Roaster',
+  '<p>Components:</p><p>60% Kenya - Factory B<br>40% Ethiopia - Station A - Washed</p>');
+ assert.equal(r.fields.origin,'Kenya, Ethiopia');
+ assert.equal(r.fields.process,undefined,'A single listed method does not establish the others');
+ assert.equal(r.fields.producer,undefined,'Unlabeled station names do not become producer facts');
+});
+test('Explicit paired methods select Other/Unknown, while anaerobic natural stays Anaerobic',()=>{
+ const mixed=parse('another-roaster.test-site.com','products/mixed','Mixed Coffee','Another Roaster',
+  '<p>Process: Washed & Natural</p>');
+ const single=parse('another-roaster.test-site.com','products/single','Single Coffee','Another Roaster',
+  '<p>Process: Anaerobic Natural</p>');
+ assert.equal(mixed.fields.process,'Other/Unknown');
+ assert.equal(single.fields.process,'Anaerobic');
+});
+test('Multi-origin/multi-producer displayed facts escape malicious input, never HTML',()=>{
+ const r=parse('another-roaster.test-site.com','products/multi','Multi','Another Roaster',
+  '<p>Components:</p><p>50% Kenya - Farm: Finca High - Washed<br>'+
+  '50% Peru - Farm: Finca Low - Natural</p>');
+ const visible=coffeeUrlPreviewMarkup({...r,fields:{...r.fields,producer:'Finca A <img src=x onerror=alert(1)>, Finca B'}});
+ assert.doesNotMatch(visible,/<img\s+src=x/i);
+ assert.match(visible,/&lt;img/);
+});
