@@ -60,13 +60,13 @@ begin
  issued:=public.dic_admin_issue_invite('First tester',1);
  token:=issued->>'invite_code';
  id_single:=(issued->>'id')::uuid;
- if token !~ '^dic-[a-f0-9]{48}$' or (issued->>'max_uses')::int<>1 then
+ if token !~ '^dic-[a-f0-9]{64}$' or (issued->>'max_uses')::int<>1 then
   raise exception 'One-use admin invitation not high-entropy';
  end if;
  issued:=public.dic_admin_issue_invite('Reusable group',null);
  permanent_token:=issued->>'invite_code';
  id_reusable:=(issued->>'id')::uuid;
- if permanent_token !~ '^dic-[a-f0-9]{48}$' or issued->'max_uses'<>'null'::jsonb then
+ if permanent_token !~ '^dic-[a-f0-9]{64}$' or issued->'max_uses'<>'null'::jsonb then
   raise exception 'Never-expiring reusable invitation incorrect';
  end if;
  listing:=public.dic_admin_access_overview();

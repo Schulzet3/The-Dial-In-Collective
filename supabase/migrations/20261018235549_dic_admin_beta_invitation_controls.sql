@@ -84,8 +84,11 @@ begin
     and (max_uses is null or uses<max_uses))>=50 then
   raise exception using errcode='22023',message='Revoke an unused invite before creating more.';
  end if;
- -- 192 bits of PostgreSQL CSPRNG entropy; never store or list plaintext.
- plaintext:='dic-'||pg_catalog.encode(extensions.gen_random_bytes(24),'hex');
+ -- Two built-in cryptographic version-4 UUIDs: ~244 bits unpredictable.
+ -- Core PostgreSQL implementation avoids pgcrypto extension schema differences.
+ -- Never store or list plaintext invitation codes.
+ plaintext:='dic-'||pg_catalog.replace(pg_catalog.gen_random_uuid()::text,'-','')
+  ||pg_catalog.replace(pg_catalog.gen_random_uuid()::text,'-','');
  insert into private.beta_invites(token_hash,label,issued_by,expires_at,max_uses)
  values(pg_catalog.encode(pg_catalog.sha256(pg_catalog.convert_to(plaintext,'UTF8')),'hex'),
   clean_label,actor,null,p_max_uses)
