@@ -2821,5 +2821,65 @@
     "repository_issue": 28,
     "changes_to_app_providers_automations": "none",
     "canonical_decisions_preserved": true
+  },
+  "current_owner_permanent_admin_and_beta_invitation_access_20261018": {
+    "id": "ACCESS-PERMANENT-20261018-01",
+    "status": "Owner Locked for no-expiry accounts, owner admin bypass after admission, revocable/non-expiring codes and admin controls; default code reuse selection is still an Open choice; dev-only",
+    "owner_exact_words": "Can you Build the self-service admin invitation controls now so I can generate invite codes as needed for this initial beta? Can you please also confirm that my admin account will never require an invite code and will never expire? That needs to be a permanent account. In fact I want all accounts/invite codes to be permanent (with the option to remove them from the admin portal). Is that a good plan?",
+    "verified_current_server_model": "One active administrator role and admitted member row; no admin/member expiration columns; already admitted enabled member signs in without new invite; no immortal Supabase session guarantee.",
+    "locked_requirements": [
+      "Admin admission and role never time-expire or require recurring beta code after initial admission",
+      "All successfully admitted accounts have no automatic expiry and remain until deliberate admin access revocation",
+      "Every administrator protected against any admin portal remove-access API action",
+      "Admin portal supports issue/view metadata/revoke beta codes and remove/restore nonadmin membership",
+      "New portal-issued invitations never automatically expire by time and have owner-chosen redeem capacity",
+      "Invite revocation does not alter existing admitted users or anonymous historical contributions",
+      "Server checks server-owned admin role and membership, denies anon/ordinary member and stores only SHA-256 code hashes; secure one-time code display"
+    ],
+    "owner_interpretation": "Permanence means no calendar expiration. Invitation redemption use limit is a separate security property; both single-use and reusable are available.",
+    "code_usage_default": "TEMPORARY implementation default one use; owner must select default one-use vs reusable; no Product Locked default yet",
+    "account_removal": "Admin-only soft access revocation, restore possible; does not delete auth.users or shots/notes; hard deletion remains separate unasked product decision",
+    "no_absolute_vendor_lifetime_claim": "Supabase session token refresh and user-initiated sign-out still apply; privileged provider operator or product shutdown can remove accounts.",
+    "existing_baseline_preserved": true,
+    "production_migrations_applied": 0,
+    "no_live_invites_created": true,
+    "code_source": "development/backend-foundation",
+    "detailed_report": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md"
+  },
+  "admin_beta_invitation_controls_dev_20261018": {
+    "status": "Implemented in private source, SQL/Node/mobile tests completed or in progress; do not claim deployed",
+    "migration": "supabase/migrations/20261018235549_dic_admin_beta_invitation_controls.sql",
+    "generated_official_cli_run": 39178514283,
+    "model": "private.beta_invites existing hashes/use limits, add issued_by/label; private.admin_access_events no secrets; member-access soft revocation",
+    "functions": [
+      "dic_admin_access_overview",
+      "dic_admin_issue_invite",
+      "dic_admin_revoke_invite",
+      "dic_admin_set_member_access"
+    ],
+    "secure_code_entropy": "two server-generated v4 UUIDs about 244 random bits, one-time plaintext response, SHA256 stored",
+    "default_selected": "one person until owner changes",
+    "alternative": "five redemptions or unlimited until revoked, both no expiration",
+    "protect_admin_server": "private.app_admins check forbids changing ANY administrator in portal RPC",
+    "provenance": [
+      "655a5c7f5ee6a87c9b5d6c9acf1cb80b7ea1c5cb",
+      "10f2eb105803ed30dc3475b4b40ac1dd689a0aee",
+      "264e8fed0b1649a8105b421de1c59965115137f1",
+      "412bbb39ca9bf26a09f407009b27f9e885609742",
+      "7744acfa77e7b03b3bbc238e56a2867ebb2f3742",
+      "a56803388d7ff2e83f2953de798cd8d5e8c23206",
+      "98fd46cef5891883ca880de560f561b9d89fc6af",
+      "3091d975f8de7652c57446df79f72f4da991fc95",
+      "b37e432b07c64a9b45ed1ed9a093e2e1a3af9eca"
+    ],
+    "tests": {
+      "isolated_SQL": 39178869416,
+      "node_lint_build": 39179606340,
+      "cloud_browser": 39179606335,
+      "visual": "new final visual CI pending after workflow cleanup; earlier 39179111606 passed before latest test scripts"
+    },
+    "current_live_invites_usable": 0,
+    "current_live_admin_roles": 1,
+    "next_gate": "Owner answers ONE question: default one-use vs unlimited reusable; then exact SQL production and Netlify one-deploy approval plus credits/backups, real auth browser acceptance, no data change before approval"
   }
 }
