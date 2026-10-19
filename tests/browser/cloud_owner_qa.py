@@ -115,6 +115,7 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Settings',exact=True).click()
  assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')
  assert page.locator('.settings-signout').count()==1;checks.append('Sign Out follows Cloud Sync in Settings')
+ assert page.locator('#claude-key-options').count()==0;checks.append('Removed AI settings stay absent on mobile')
  page.get_by_role('button',name='Rename',exact=True).click();page.locator('#rename-setup [name=name]').fill('Home Espresso')
  page.get_by_role('button',name='Save Name',exact=True).click();page.wait_for_function('!document.querySelector("#sheet").open')
  assert 'Home Espresso' in page.locator('.setup-switch').inner_text();checks.append('Setup can be renamed without recreating equipment')
