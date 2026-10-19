@@ -89,6 +89,22 @@ test('applying structured fields fills blanks only, preserving typed details and
  assert.equal(fields.process.value,'Washed');
  assert.equal(fields.roast_level.value,'');
 });
+test('multi-origin and named-farm values populate only blanks with Other/Unknown selected',()=>{
+ const fields={
+  origin:{value:'',tagName:'INPUT',dispatchEvent(){}},
+  producer:{value:'',tagName:'INPUT',dispatchEvent(){}},
+  process:{value:'',tagName:'SELECT',options:[{value:''},{value:'Washed'},{value:'Other/Unknown'}],dispatchEvent(){}},
+  name:{value:'My Coffee',tagName:'INPUT',dispatchEvent(){}}
+ };
+ const form={elements:{namedItem(key){return fields[key]||null;}}};
+ const result={ok:true,fields:{name:'Dead Reckoning',
+  origin:'Ethiopia, Colombia, Peru',producer:'Finca Deborah, Hacienda La Esperanza',process:'Other/Unknown'}};
+ assert.deepEqual(applyCoffeeUrlFields(form,result),{filled:3,skipped:1});
+ assert.equal(fields.name.value,'My Coffee');
+ assert.equal(fields.origin.value,'Ethiopia, Colombia, Peru');
+ assert.equal(fields.producer.value,'Finca Deborah, Hacienda La Esperanza');
+ assert.equal(fields.process.value,'Other/Unknown');
+});
 test('server preview checks admitted Auth and official host before remote fetching',()=>{
  const server=read('supabase/functions/dic-preview-coffee/index.ts');
  assert.match(server,/dic_session_status/);
