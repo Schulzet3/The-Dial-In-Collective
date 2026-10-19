@@ -42,6 +42,8 @@ test('Tim Wendelboe storefront Cultivar, Flavour Notes and Harvest Date labels a
  assert.equal(r.fields.origin,'Kenya');
  assert.equal(r.fields.release_label,'December 2025');
  assert.equal(r.fields.process,'Washed');
+ assert.equal(r.roaster_details?.named_producer,undefined,'Producer groups must not be misread as named humans');
+ assert.equal(r.roaster_details?.processing_detail,undefined,'General picking/sorting is not a process method');
 });
 test('Explicit Spanish coffee labels and processing values work without accent loss',()=>{
  const r=parse('roastlatin.example.com','products/finca-sol','Finca Sol','Coffee Roasters',
