@@ -72,6 +72,14 @@ console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
 
 // This deliberately opt-in live acceptance reports drift instead of a green
 // run that merely printed an error. The broader roaster inventory stays visible.
+const subscription=results.find(x=>x.roaster==='Corvus Dead Reckoning Subscription');
+if(subscription?.status==='parsed'){
+ assert.equal(subscription.recipe?.yield_g_min,40,
+  'Second Corvus storefront format must keep the lower roaster espresso yield');
+ assert.equal(subscription.recipe?.yield_g_max,48,
+  'Second Corvus storefront format must keep the upper roaster espresso yield');
+ assert.equal(subscription.recipe?.time_s_max,32,'Keep the second published time range');
+}
 const dead=results.find(x=>x.roaster==='Corvus Dead Reckoning Blend');
 if(dead?.status==='parsed'){
  assert.match(dead.details.blend_components||'',/40% Ethiopia.*20% Colombia.*20% Peru/i,
