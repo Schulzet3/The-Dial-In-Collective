@@ -76,8 +76,7 @@ test('no direct client-side table insert, privileged access only via member-gate
 const source=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8')
  .replace(/^import .*?;\n/gm,'')
  .replace(/start\(\);\s*$/,'globalThis.started=start();');
-const defer=()=>{let resolve;const promise=new Promise(r=>{resolve=r;});return {promise,resolve};};
-async function flush(){for(let i=0;i<12;i++)await new Promise(resolve=>setImmediate(resolve));}
+async function flush(){for(let i=0;i<32;i++)await Promise.resolve();}
 function boot(){
  const calls=[],events={};
  let authChange,role={authenticated:true,admitted:true,admin:true};
