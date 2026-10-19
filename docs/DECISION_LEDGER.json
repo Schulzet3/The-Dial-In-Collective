@@ -2838,14 +2838,15 @@
     ],
     "owner_interpretation": "Permanent accounts persist until explicit admin disable; owner clarified each newly generated invitation is valid for exactly ONE email/account creation, then spent. Cannot generate reusable, 5-use or unlimited codes via admin RPC.",
     "code_usage_default": "RESOLVED AND LOCKED: ALL new invite codes max_uses=1 on server and UI; one account per code",
-    "account_removal": "Admin-only soft access revocation, restore possible; does not delete auth.users or shots/notes; hard deletion remains separate unasked product decision",
+    "account_removal": "Owner clarification ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01: initial beta supports ONLY administrator Remove Access / Restore Access for nonadmins, preserving live Auth account and personal shots/notes/Community history. Hard Auth account delete is NOT needed/authorized; FK cascade risk remains for any future external deletion.",
     "no_absolute_vendor_lifetime_claim": "Supabase session token refresh and user-initiated sign-out still apply; privileged provider operator or product shutdown can remove accounts.",
     "existing_baseline_preserved": true,
     "production_migrations_applied": 0,
     "no_live_invites_created": true,
     "code_source": "development/backend-foundation",
     "detailed_report": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md",
-    "previous_multiuse_choice": "SUPERSEDED for NEW portal-generated codes only, existing historical invite use/expiry rows unchanged"
+    "previous_multiuse_choice": "SUPERSEDED for NEW portal-generated codes only, existing historical invite use/expiry rows unchanged",
+    "account_removal_latest_owner_decision": "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01"
   },
   "admin_beta_invitation_controls_dev_20261018": {
     "status": "Single-use-only owner Locked source implementation and final SQL/Node/mobile/visual checks PASS; NOT LIVE; separate SQL/Netlify release permission required.",
@@ -2919,7 +2920,7 @@
     "required_backend": "Every NEW portal-generated invitation max_uses=1, expires_at NULL, only one distinct email-confirmed auth.users account can be admitted per code; no client-selectable multiuse capacity and no backend multiuse issue parameter.",
     "administrative_protection": "Existing one administrator role and admitted membership do not time-expire or require another invite; all app admin identities cannot be disabled through new UI or server RPC.",
     "member_permanence": "Members admitted once retain account/shot/notes and access indefinitely unless admin disables; Supabase login session may require renewal; no promise of immunity from host admin/deletion/outage.",
-    "removal_definition": "Safe reversible Remove Access (enabled=false), not hard delete of auth.users or deletion of shots/notes. Physical erasure requires separate owner decision.",
+    "removal_definition": "Admin-only reversible Remove Access (enabled=false), not physical deletion; same Auth identity and shots/notes/Community history retained. Owner expressly declined beta hard-delete on 2026-10-18 (ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01).",
     "historical_compatibility": "Do not modify historic issued/redeemed invite rows, token hashes, or existing admission, member/shot data. Preserve server-side rate-limit, admin gating, email-verified requirements.",
     "specifically_supersedes": "Only earlier §4.5 multiuse (5/unlimited) new-code options and Open default; does not supersede any other Locked requirements or 79-baseline decisions.",
     "explicit_release_permission": "NONE; development source/tests only. Hosted SQL, Netlify publish, real code generation/account actions each require separate authorization.",
@@ -2935,5 +2936,35 @@
     },
     "live_state": "production 28 applied migrations, 0 usable invite codes, 1 permanent admin, no controls yet",
     "release_permission": "NOT GRANTED; both new migrations and one Netlify publish require explicit owner approval"
+  },
+  "current_owner_beta_member_soft_remove_only_20261018": {
+    "id": "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01",
+    "status": "Owner Locked; existing admin portal Remove Access/Restore Access already implements this in development; hard-delete development explicitly canceled; NO live publish",
+    "exact_owner_clarification": "I don’t think we need an actual account deletion, remove Access would be sufficient, don’t you?",
+    "previous_request": "Yes, I want to preserve the shots entered by a user, even if their account is deleted",
+    "clarified_interpretation": "For initial beta, no actual account deletion. Remove/Restore Access is sufficient; preserve existing Auth identity, private shots/notes/recipes and anonymous Community history intact.",
+    "access_model": "admin-only toggle private.beta_members.enabled with server-side private.is_admin and administrator self/other-admin protection",
+    "preserve_when_disabled": [
+      "Supabase auth.users account record and email identity (not deleted)",
+      "personally saved shots and ratings",
+      "private notes",
+      "saved coffees, setups and recipes",
+      "durable anonymous Community contributions/quality history",
+      "past invitations, audit and identity relationships"
+    ],
+    "security_on_remove": "Member RLS/member-gated RPC checks must deny disabled user even if an issued access JWT is not yet expired; do not pretend provider tokens immediately expire.",
+    "hard_deletion": "NOT IN BETA ADMIN PORTAL, NOT AUTHORIZED OR IMPLEMENTED; current production FK cascade on auth.users would risk shots; no schema migration or deletion tool needed for this clarified product scope",
+    "future_legal_privacy_work": "Separate owner-reviewed user-requested erasure/anonymization and history-retention policy if ever needed; not an implicit waiver of applicable privacy duties",
+    "supersedes": "Only earlier possible interpretation that this beta requires physical Auth-user deletion while preserving shots. Does not supersede 79 baseline Locked, 20 baseline Open or single-use invitation decision.",
+    "changes_this_turn": "Removed temporary no-longer-required CLI migration-name workflow before any retention migration/source/production change; documented scope and verified existing admin SQL/UI tests",
+    "existing_source": "supabase/migrations/20261018235549_dic_admin_beta_invitation_controls.sql, site/admin/main.js, site/admin/view.js, supabase/tests/admin_invitation_controls.sql, tests/admin-invitation-controls.test.mjs",
+    "final_existing_ci": {
+      "sql": 39180899489,
+      "node": 39180868722,
+      "mobile": 39180868739,
+      "visual": 39180868840
+    },
+    "production_state": "28 hosted migrations, previous Netlify deploy, 2 admitted members/one admin, no new invite codes; no production changes",
+    "new_release_authority": "NONE, still requires explicit scoped SQL + one Netlify publishing approval"
   }
 }
