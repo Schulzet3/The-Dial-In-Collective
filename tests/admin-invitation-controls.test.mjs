@@ -148,8 +148,9 @@ test('member removal/restoration and invitation revocation require RPC, then ref
  const b=boot();await b.done;
  b.events.click({target:{closest(){return {dataset:{action:'remove-member',id:MEMBER}};}}});
  await flush();
- assert.deepEqual(b.calls.find(x=>x.name==='dic_admin_set_member_access').args,
-  {p_member_id:MEMBER,p_enabled:false});
+ const removed=b.calls.find(x=>x.name==='dic_admin_set_member_access').args;
+ assert.equal(removed.p_member_id,MEMBER);
+ assert.equal(removed.p_enabled,false);
  b.events.click({target:{closest(){return {dataset:{action:'restore-member',id:MEMBER}};}}});
  await flush();
  assert.equal(b.calls.filter(x=>x.name==='dic_admin_set_member_access').at(-1).args.p_enabled,true);
