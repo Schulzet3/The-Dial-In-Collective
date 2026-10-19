@@ -3012,7 +3012,7 @@
   },
   "current_owner_approved_pilot_release_20261018": {
     "id": "PILOT-APPROVED-ONE-TIME-RELEASE-20261018-01",
-    "status": "OWNER SPECIFIC RELEASE APPROVAL; EXECUTION PENDING FRESH BACKUP, MIGRATION HISTORY AND SECURITY PREFLIGHT",
+    "status": "OWNER-AUTHORIZED ONE-TIME RELEASE EXECUTED; PRODUCTION SQL AND NETLIFY READY; SIGNED LIVE ADMIN/MEMBER ACCEPTANCE OPEN",
     "exact_owner_message": "Apply the two pending migrations, publish the updated app, and complete real-account acceptance testing please. Approved to deploy.",
     "approved_on_utc": "2026-10-19T03:57:48.375Z",
     "authorized_exact_sql_in_order": [
@@ -3036,6 +3036,30 @@
     ],
     "history": "Owner's earlier consent approved pilot milestone only, this statement separately approves first two-migration + single frontend bundle; earlier release approvals consumed.",
     "tracked_issue": 36,
-    "source_head": "8975084a53870ab9c56a5142b7ae47ef8020b642"
+    "source_head": "8975084a53870ab9c56a5142b7ae47ef8020b642",
+    "release_consumed": true,
+    "production_sql_applied": [
+      {
+        "version": "20261019041437",
+        "name": "dic_community_release_context",
+        "sha": "868c1963a2917a69007504699cbc0efb6ae6faa9"
+      },
+      {
+        "version": "20261019041452",
+        "name": "dic_admin_beta_invitation_controls",
+        "sha": "782d470485601e2a7f9f898e23e5dbd091a58647"
+      }
+    ],
+    "current_netlify_deployment": {
+      "id": "6ad599e539cf6e672af21352",
+      "source_sha": "40b97f33bb1d828943e88d88ca0978c37baea18c",
+      "status": "READY/current",
+      "published_utc": "2026-10-19T04:17:56.215Z",
+      "secret_scanner_matches": 0
+    },
+    "live_postflight": "30/30 Supabase migrations; 16 shots/notes, 2 enabled members, 1 admin, 2 Community, no usable new codes; anon admin and Community EXECUTE denied",
+    "backup_status": "Owner Google Drive backup.age exact ciphertext match before SQL; postrelease main encrypted backup source pin moved to 40b97f33; latest scheduled offsite receipt after publish pending",
+    "genuine_member_acceptance": "UNVERIFIED: requires user-mediated live signed browser admin and second-member sign-in; synthetic/role tests not a substitute",
+    "reuse_permission": "NONE — this one release approval has been consumed"
   }
 }

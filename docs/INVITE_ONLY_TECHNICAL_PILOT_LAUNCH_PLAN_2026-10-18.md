@@ -1,6 +1,10 @@
-# Invite-only technical pilot — owner-approved milestone, not a production launch
+# Invite-only technical pilot — production deployed, authentic member acceptance pending
 
-## OWNER DECISION — LIMITED TECHNICAL PILOT MILESTONE APPROVED; NOT RELEASED (2026-10-18)
+## UPDATE: ONE APPROVED LIMITED PILOT RELEASE PUBLISHED (2026-10-19 UTC)
+
+Both release context and admin invitation migrations now installed, exact Supabase assigned versions `20261019041437` and `20261019041452`, live 30 historical migrations. [READY/current Netlify production](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad599e539cf6e672af21352) from `40b97f33`, no private data loss and no new real codes issued. Isolated SQL/Node/mobile tests pass, live signed-in admin and second-member checks remain **pending** before inviting beta testers. Original production hold below is a preserved historical proposal, not a current denial of the now-consumed release approval. #24/#36 carry the remaining acceptance. Existing §41 core-beta acceptance and all Locked decisions remain intact.
+
+## HISTORICAL OWNER DECISION — LIMITED TECHNICAL PILOT MILESTONE APPROVED; THEN UNPUBLISHED (2026-10-18)
 
 **Exact approval:** “I approve proceeding toward a limited invitation-only technical pilot, while preserving all locked decisions and requiring my separate approval before publishing or applying production migrations.” This resolves the prior **pilot-or-full-beta sequencing** question **in favor of a limited private technical pilot**. Locked as `PILOT-INVITE-ONLY-TECHNICAL-20261018-01` in [Master Spec](MASTER_SPECIFICATION.md) and [Decision Ledger](DECISION_LEDGER.json). This is **NOT** a decision that §41 full-beta requirements are complete/deferred, and not a live release permission. Suggested 3–5 testers / one-week cohort below remains optional, not yet expressly selected.
 
