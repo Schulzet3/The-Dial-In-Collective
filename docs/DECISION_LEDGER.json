@@ -3009,5 +3009,33 @@
     "source": "docs/INVITE_ONLY_TECHNICAL_PILOT_LAUNCH_PLAN_2026-10-18.md",
     "execution_gate": "docs/TECHNICAL_PILOT_RELEASE_GATE_2026-10-18.md",
     "historical_79_locked_and_20_open_preserved": true
+  },
+  "current_owner_approved_pilot_release_20261018": {
+    "id": "PILOT-APPROVED-ONE-TIME-RELEASE-20261018-01",
+    "status": "OWNER SPECIFIC RELEASE APPROVAL; EXECUTION PENDING FRESH BACKUP, MIGRATION HISTORY AND SECURITY PREFLIGHT",
+    "exact_owner_message": "Apply the two pending migrations, publish the updated app, and complete real-account acceptance testing please. Approved to deploy.",
+    "approved_on_utc": "2026-10-19T03:57:48.375Z",
+    "authorized_exact_sql_in_order": [
+      "20261018221843_dic_community_release_context.sql",
+      "20261018235549_dic_admin_beta_invitation_controls.sql"
+    ],
+    "authorized_publish": "Exactly one controlled credit-aware production Netlify publish from development/backend-foundation, only after both SQL migrations and security checks pass.",
+    "authorized_acceptance": "Genuine signed-admin and regular-member browser acceptance using proper user-mediated authentication; no copying credentials or tokens to Github/chat.",
+    "preconditions": [
+      "new encrypted offsite copy after last saved 16th shot",
+      "check production migration history SQL bytes and data/roles",
+      "current credit guard/available owner-managed balance",
+      "verify prior and new SQL version/privileges before frontend build"
+    ],
+    "explicit_non_authorizations": [
+      "future repeat production publish without new owner approval",
+      "destructive account deletion or artificial production shots",
+      "waive original Locked specs or untested real signed-JWT negatives",
+      "issue/distribute invitations to unapproved recipients",
+      "change Cloudflare, Resend, Apps Script, Supabase plan or recovery secrets"
+    ],
+    "history": "Owner's earlier consent approved pilot milestone only, this statement separately approves first two-migration + single frontend bundle; earlier release approvals consumed.",
+    "tracked_issue": 36,
+    "source_head": "8975084a53870ab9c56a5142b7ae47ef8020b642"
   }
 }
