@@ -5,6 +5,7 @@ import {extractLayoutEvidence} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence} from './coffee-blend-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
+import {semanticCoffeeSourceText} from './coffee-semantic-source.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 const FIELD_ALIASES={
@@ -348,7 +349,7 @@ function shopifyProduct(html,target){
  }
  return out;
 }
-export function extractPublicCoffeeFacts(html,{source_url}={}){
+export function extractPublicCoffeeFacts(html,{source_url,include_semantic_text=false}={}){
  if(typeof html!=='string'||html.length>1_000_000||!source_url)return {ok:false,reason:'invalid_source'};
  const meta=pageMeta(html);
  const all=[...jsonProducts(html),...shopifyProduct(html,source_url)];
@@ -484,6 +485,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
   ...(conflicts.size?{conflicts:[...conflicts].sort()}:{}),
   ...(roaster_recipe?{roaster_recipe}:{}),
+ ...(include_semantic_text?{semantic_text:semanticCoffeeSourceText(product,{name:fields.name,roaster:fields.roaster})}:{}),
   ...(Object.keys(roaster_details).length?{roaster_details}:{}),
   ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),
   ...(roast_evidence.value?{roast_source:roast_evidence.source}:{}),
