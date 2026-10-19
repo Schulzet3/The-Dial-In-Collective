@@ -3117,5 +3117,30 @@
     "production_release_authorization": "CONSUMED; requires fresh owner approval for future release",
     "owner_managed_netlify_credits": "LOCKED; no balance/screenshot requests",
     "initial_baseline_79_locked_and_20_open_unchanged": true
+  },
+  "current_owner_approved_extractor_semantic_byok_20261019": {
+    "decision_id": "EXTRACTOR-CLAUDE-BYOK-20261019",
+    "status": "Locked",
+    "owner_decision_date": "2026-10-19",
+    "owner_instruction": "Yes to optional AI fallback, but improve the existing extractor as much as possible first; then publish/deploy the fully tested updated app.",
+    "scope": "Extract source-backed details from exact public roaster product pages with reliable deterministic interpretation and optional Claude-only user BYOK semantic fallback. One new guarded production deployment authorized after verified tests.",
+    "preserve": [
+      "Initial deterministic URL extraction and free keyless experience",
+      "Claude-only V1 with per-account key stored on the user's own device, never in Supabase/server",
+      "One-click blank-only Autofill, human Add Coffee, no auto-verification",
+      "12 allowed URL previews per user per 24h; >=30s shared cooldown",
+      "HTTPS pinned-DNS SSRF bounds, redirects, 900KB max response and other security protections",
+      "All original 79 Locked decisions, historical shots/coffees, release-aware identity, seven roast tiers",
+      "Per-release consent and owner-managed Netlify credit guard"
+    ],
+    "implementation": "See docs/UNIVERSAL_EXTRACTOR_AND_CLAUDE_BYOK_2026-10-19.md and issue #33. Optional Claude calls require the user's locally entered key, explicit enablement and missing fields; no model costs otherwise.",
+    "non_authorizations": [
+      "unbounded or app-funded AI tokens",
+      "other provider than Claude",
+      "Supabase production SQL, Edge deployment, historical data writes",
+      "Cloudflare, Resend, Google Apps Script changes",
+      "public beta launch or unrelated product features"
+    ],
+    "publication": "PENDING final CI/mobile/visual checks and actual Netlify READY/current SHA; release approval applies only once"
   }
 }
