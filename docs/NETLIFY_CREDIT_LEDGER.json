@@ -101,35 +101,30 @@
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
     "post_release_billing_refresh_needed": false,
     "last_published_release": {
-      "deploy_id": "6ad599e539cf6e672af21352",
-      "published_commit_sha": "40b97f33bb1d828943e88d88ca0978c37baea18c",
-      "published_at_utc": "2026-10-19T04:17:56.215Z",
+      "deploy_id": "6ad68002ec0aba2b3c69a522",
+      "published_commit_sha": "81374b418d77eec19782e40552c6a40575b4d8c4",
+      "published_at_utc": "2026-10-19T20:39:49.577Z",
       "netlify_status": "ready/current",
       "branch": "development/backend-foundation",
       "context": "production",
       "primary_hostname": "https://app.dialincollective.com",
       "production_requires_netlify_team_sso": false,
       "nonproduction_requires_netlify_team_sso": true,
-      "scanned_files": 235,
+      "scanned_files": 249,
       "secret_scan_matches": 0,
       "published_functions": [
         "coffee-url-preview"
       ],
       "planned_cost_credits": 15,
-      "actual_credits_deducted": "UNKNOWN: provider connector cannot read actual billing; owner manages credit usage",
-      "current_remaining_credits": "UNKNOWN; last 940 remaining owner screenshot Oct 17 is historical",
+      "actual_credits_deducted": "UNKNOWN: provider connector has no live billing; owner manages credits",
+      "current_remaining_credits": "UNKNOWN: Oct 17 last observed 940 credits was historical; Personal grant expires 2026-11-14",
       "approval_exhausted": true,
-      "release_scope": "Community release grouping + admin single-use invitation/Remove Access controls, two approved migrations and one deploy",
-      "supabase_migrations_applied": [
-        "20261019041437_dic_community_release_context",
-        "20261019041452_dic_admin_beta_invitation_controls"
-      ],
-      "encrypted_backup_source_pin": "1b7bc0716961999f550d1805797f3100615e9188",
-      "encrypted_backup_run": 39198804626,
-      "encrypted_backup_artifact_id": 12163455524,
-      "postrelease_offsite_delivery": "NOT VERIFIED: push-only archive is not scheduled Apps Script courier",
-      "real_account_acceptance": "Owner-admin Generate Code and Revoke Code PASS, live nonadmin/redeem/Remove-Restore still pending",
-      "acceptance_report": "docs/LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md"
+      "release_scope": "Deterministic universal roaster URL extraction only, no AI/BYOK implementation; exact blend countries and named producers; mixed process Other/Unknown",
+      "supabase_migrations_applied": [],
+      "encrypted_backup_source_pin": "NOT VERIFIED for SHA 81374b41; prior main pin refers to 40b97f33",
+      "postrelease_offsite_delivery": "NOT VERIFIED: new SHA GitHub encrypted pin and scheduled Drive courier/restore pending #28",
+      "real_account_acceptance": "Signed-in Corvus owner member browser Autofill pending; safe public HTML probe and isolated CI verified",
+      "acceptance_report": "docs/UNIVERSAL_EXTRACTOR_AND_CLAUDE_BYOK_2026-10-19.md"
     },
     "owner_waived_balance_check_for_this_release": {
       "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
@@ -377,5 +372,45 @@
     },
     "postrelease_backup": "GitHub encrypted push run 39198804626 PASS; scheduled Drive delivery pending",
     "report": "docs/LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md"
+  },
+  "latest_publication_20261019_deterministic_extractor": {
+    "name": "Deterministic universal roaster source extraction, blends and roaster espresso ranges",
+    "deploy_id": "6ad68002ec0aba2b3c69a522",
+    "source_sha": "81374b418d77eec19782e40552c6a40575b4d8c4",
+    "tested_source_sha": "4de4dc5fbdc9c7a86a3ea4f9eb28d903411136c2",
+    "status": "READY/current",
+    "published_at_utc": "2026-10-19T20:39:49.577Z",
+    "authorization_consumed": true,
+    "planned_cost_credits": 15,
+    "actual_debit": "UNKNOWN (provider cannot report live credits)",
+    "owner_monitoring": "Locked owner-managed credits; last dated screenshot Oct 17 940, grant expires Nov 14",
+    "no_ai_runtime": true,
+    "ci_runs": {
+      "node_lint_build": 39320786487,
+      "mobile_cloud": 39320786249,
+      "visual": 39320386964,
+      "live_public_roaster": 39320640613
+    },
+    "checked_urls": 31,
+    "parsed_urls": 25,
+    "production_data_counts": {
+      "coffees": 4,
+      "library_entries": 5,
+      "shots": 16,
+      "notes": 16,
+      "community": 2,
+      "users": 2,
+      "migrations": 30
+    },
+    "production_data_unchanged": true,
+    "production_sql_or_edge_changes": false,
+    "deployed_function": "coffee-url-preview",
+    "secret_scan_matches": 0,
+    "user_browser_acceptance": "unverified",
+    "direct_http_from_runtime": "unavailable (DNS/web tool could not access domain)",
+    "new_encrypted_source_backup": "pending; prior pin for 40b97f33",
+    "scheduled_drive_courier": "pending",
+    "report": "docs/UNIVERSAL_EXTRACTOR_AND_CLAUDE_BYOK_2026-10-19.md",
+    "prior_production_deploy": "6ad599e539cf6e672af21352"
   }
 }
