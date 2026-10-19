@@ -57,7 +57,7 @@ test('removed member retains identity and restore access control, admin stays pr
 });
 test('no direct client-side table insert, privileged access only via member-gated RPC',()=>{
  const js=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8');
- const sql=readFileSync(new URL('../supabase/migrations/20261018235549_dic_admin_beta_invitation_controls.sql',import.meta.url),'utf8');
+ const sql=readFileSync(new URL('../supabase/migrations/20261019041452_dic_admin_beta_invitation_controls.sql',import.meta.url),'utf8');
  assert.match(js,/sdk\.auth\.getUser\(\)/);
  assert.match(js,/dic_session_status/);
  assert.match(js,/dic_admin_issue_invite/);
