@@ -2,8 +2,8 @@
 -- isolated run 39178514283; DO NOT apply to hosted DB until separately approved.
 -- Existing admitted accounts/admin assignments, member data, user sessions,
 -- current invitation rows, and previous migration content remain unchanged.
--- Beta accounts do NOT have expiration dates. Codes have no expiration by default,
--- but redemption limits and explicit revocation still apply.
+-- Beta accounts have no expiration; newly issued codes admit only one account,
+-- have no calendar expiry and can still be revoked before use.
 
 alter table private.beta_invites
  add column label text not null default '' check(char_length(label)<=80),
@@ -62,7 +62,7 @@ begin
  );
 end $$;
 
-create function private.dic_admin_issue_invite(p_label text default '',p_max_uses integer default 1)
+create function private.dic_admin_issue_invite(p_label text default '')
 returns jsonb language plpgsql volatile security definer set search_path='' as $$
 declare
  actor uuid:=auth.uid();
@@ -73,8 +73,7 @@ begin
  if actor is null or not private.is_admin() then
   raise exception using errcode='42501',message='Administrator access required.';
  end if;
- if char_length(clean_label)>80 or
-   (p_max_uses is not null and (p_max_uses<1 or p_max_uses>100)) then
+ if char_length(clean_label)>80 then
   raise exception using errcode='22023',message='Invite settings are invalid.';
  end if;
  -- Serializes the bounded active-token issuance across concurrent admins.
@@ -84,6 +83,7 @@ begin
     and (max_uses is null or uses<max_uses))>=50 then
   raise exception using errcode='22023',message='Revoke an unused invite before creating more.';
  end if;
+ -- Server always issues exactly one redemption per code. No client use-limit parameter.
  -- Two built-in cryptographic version-4 UUIDs: ~244 bits unpredictable.
  -- Core PostgreSQL implementation avoids pgcrypto extension schema differences.
  -- Never store or list plaintext invitation codes.
@@ -91,12 +91,12 @@ begin
   ||pg_catalog.replace(pg_catalog.gen_random_uuid()::text,'-','');
  insert into private.beta_invites(token_hash,label,issued_by,expires_at,max_uses)
  values(pg_catalog.encode(pg_catalog.sha256(pg_catalog.convert_to(plaintext,'UTF8')),'hex'),
-  clean_label,actor,null,p_max_uses)
+  clean_label,actor,null,1)
  returning id into new_id;
  insert into private.admin_access_events(actor_id,action,invite_id)
  values(actor,'issue_invite',new_id);
  return jsonb_build_object('ok',true,'id',new_id,
-  'invite_code',plaintext,'label',clean_label,'max_uses',p_max_uses,
+  'invite_code',plaintext,'label',clean_label,'max_uses',1,
   'expires_at',null);
 end $$;
 
@@ -160,13 +160,13 @@ end $$;
 
 revoke all on function
  private.dic_admin_access_overview(),
- private.dic_admin_issue_invite(text,integer),
+ private.dic_admin_issue_invite(text),
  private.dic_admin_revoke_invite(uuid),
  private.dic_admin_set_member_access(uuid,boolean)
  from public,anon,authenticated;
 grant execute on function
  private.dic_admin_access_overview(),
- private.dic_admin_issue_invite(text,integer),
+ private.dic_admin_issue_invite(text),
  private.dic_admin_revoke_invite(uuid),
  private.dic_admin_set_member_access(uuid,boolean) to authenticated;
 
@@ -174,9 +174,9 @@ create function public.dic_admin_access_overview() returns jsonb
 language sql stable security invoker set search_path='' as $$
  select private.dic_admin_access_overview();
 $$;
-create function public.dic_admin_issue_invite(p_label text default '',p_max_uses integer default 1)
+create function public.dic_admin_issue_invite(p_label text default '')
 returns jsonb language sql volatile security invoker set search_path='' as $$
- select private.dic_admin_issue_invite(p_label,p_max_uses);
+ select private.dic_admin_issue_invite(p_label);
 $$;
 create function public.dic_admin_revoke_invite(p_invite_id uuid) returns jsonb
 language sql volatile security invoker set search_path='' as $$
@@ -188,16 +188,16 @@ returns jsonb language sql volatile security invoker set search_path='' as $$
 $$;
 revoke all on function
  public.dic_admin_access_overview(),
- public.dic_admin_issue_invite(text,integer),
+ public.dic_admin_issue_invite(text),
  public.dic_admin_revoke_invite(uuid),
  public.dic_admin_set_member_access(uuid,boolean)
  from public,anon,authenticated;
 grant execute on function
  public.dic_admin_access_overview(),
- public.dic_admin_issue_invite(text,integer),
+ public.dic_admin_issue_invite(text),
  public.dic_admin_revoke_invite(uuid),
  public.dic_admin_set_member_access(uuid,boolean) to authenticated;
-comment on function public.dic_admin_issue_invite(text,integer) is
+comment on function public.dic_admin_issue_invite(text) is
  'Admitted admin only: generate high-entropy invitation server-side, return plaintext once, store only SHA-256 and audit without secret.';
 comment on function public.dic_admin_set_member_access(uuid,boolean) is
  'Admitted admin only: revoke/restore nonadmin member app admission without deleting personal history. All administrators protected.';

@@ -45,7 +45,7 @@ window.__sdk={
   if(name==='dic_admin_access_overview')return {data:structuredClone(window.__access)};
   if(name==='dic_admin_issue_invite'){
    const m={id:INVITE,label:args.p_label,created_at:'2026-10-18',
-      status:'active',uses:0,max_uses:args.p_max_uses,expires_at:null};
+      status:'active',uses:0,max_uses:1,expires_at:null};
    window.__access.invites=[m];window.__access.invites_total=1;
    return {data:{ok:true,id:INVITE,invite_code:SECRET}};
   }
@@ -81,14 +81,14 @@ with sync_playwright() as p:
  page.screenshot(path=str(OUT/"admin_invitations_empty_mobile.png"),full_page=True)
 
  page.locator("#admin-invite-label").fill("Small user group")
- page.locator("#admin-invite-uses").select_option("unlimited")
  page.get_by_role("button",name="Generate Code").click()
  page.locator("#admin-new-code").wait_for()
  code=page.locator("#admin-new-code").inner_text()
  assert code=="dic-"+("d"*64)
  assert page.get_by_text("Never expires").count()==1
- assert page.get_by_text("Reusable until revoked").count()==1
- assert page.evaluate("window.__calls.find(x=>x.name==='dic_admin_issue_invite').args.p_max_uses") is None
+ assert page.get_by_text("One code admits one verified account, once.",exact=False).count()==1
+ assert page.locator('#admin-invite-uses').count()==0
+ assert page.evaluate("Object.keys(window.__calls.find(x=>x.name==='dic_admin_issue_invite').args).join(',')")=="p_label"
  page.screenshot(path=str(OUT/"admin_invitation_generated_mobile.png"),full_page=True)
 
  page.get_by_role("button",name="Refresh",exact=True).click()
@@ -111,5 +111,5 @@ with sync_playwright() as p:
  page.get_by_role("heading",name="Admin Access Unavailable").wait_for()
  assert code not in page.locator("body").inner_text()
  assert not errors, errors
- print("PASS: isolated Chromium 390px admin invitation create, no-expiry reusable code, code-once privacy, revoke, member access remove/restore, protected administrator, sign-out redaction. All identities and codes synthetic.")
+ print("PASS: isolated Chromium 390px admin invitation create, no-expiry single-use code, code-once privacy, revoke, member access remove/restore, protected administrator, sign-out redaction. All identities and codes synthetic.")
  browser.close()

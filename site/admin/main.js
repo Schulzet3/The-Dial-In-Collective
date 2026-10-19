@@ -79,10 +79,8 @@ async function start(){
    guarded(async()=>{
     const form=event.target;
     const label=String(form.elements.namedItem('label')?.value||'').trim();
-    const choice=String(form.elements.namedItem('uses')?.value||'1');
-    if(!['1','5','unlimited'].includes(choice))throw new Error('Invalid invite usage selection.');
-    const p_max_uses=choice==='unlimited'?null:Number(choice);
-    const data=await adminRpc('dic_admin_issue_invite',{p_label:label,p_max_uses});
+    // A code is always single-use; no client-selectable or server-accepted capacity.
+    const data=await adminRpc('dic_admin_issue_invite',{p_label:label});
     if(!data?.invite_code)throw new Error('No code returned. Review invitations before retrying.');
     issued=data; // displayed once only; never stored to disk or GitHub.
     await refresh();

@@ -10,7 +10,7 @@ const MEMBER='20000000-0000-4000-8000-000000000001';
 const INVITE='30000000-0000-4000-8000-000000000001';
 const SECRET='dic-'+('a'.repeat(64));
 const state={
- invites:[{id:INVITE,label:'First Group',status:'active',created_at:'2026-10-18',uses:0,max_uses:null,expires_at:null}],
+ invites:[{id:INVITE,label:'First Group',status:'active',created_at:'2026-10-18',uses:0,max_uses:1,expires_at:null}],
  invites_total:1,
  members:[{id:ADMIN,email:'admin@fixture.invalid',admin:true,enabled:true},
   {id:MEMBER,email:'member@fixture.invalid',admin:false,enabled:true}],
@@ -20,8 +20,8 @@ test('admin code issue list is metadata-only and existing admin cannot be disabl
  const html=renderAdminAccessPanel(state);
  assert.match(html,/Beta Invitations/);
  assert.match(html,/Never expires/);
- assert.match(html,/Reusable until revoked/);
- assert.match(html,/One person \(recommended\)/);
+ assert.match(html,/One code admits one verified account, once/);
+ assert.doesNotMatch(html,/id="admin-invite-uses"|Up to 5 people|Reusable until revoked/);
  assert.match(html,/Administrator · Permanent access/);
  assert.match(html,/Protected/);
  assert.match(html,/data-action="remove-member"/);
@@ -69,6 +69,8 @@ test('no direct client-side table insert, privileged access only via member-gate
  assert.match(sql,/revoke all on function/);
  assert.match(sql,/to authenticated/);
  assert.match(sql,/expires_at,max_uses/);
+ assert.match(sql,/clean_label,actor,null,1\)/);
+ assert.doesNotMatch(sql,/dic_admin_issue_invite\(text,integer\)|p_max_uses/);
  assert.match(sql,/Administrator accounts cannot be removed here/);
  assert.doesNotMatch(sql,/delete from auth\.users|drop table|drop policy/);
 });
@@ -129,12 +131,13 @@ test('admin can issue and copy a code once, refreshing clears it; no code in lis
  assert.match(b.root.innerHTML,/Administrator · Permanent access/);
  const form={
   id:'admin-invite-form',
-  elements:{namedItem(name){return {value:name==='uses'?'unlimited':'Group test'};}}
+  elements:{namedItem(name){return {value:name==='label'?'First tester':''};}}
  };
  b.events.submit({target:form,preventDefault(){}});
  await flush();
  assert.match(b.root.innerHTML,new RegExp(SECRET));
- assert.equal(b.calls.find(x=>x.name==='dic_admin_issue_invite').args.p_max_uses,null);
+ assert.deepEqual(JSON.parse(JSON.stringify(b.calls.find(x=>x.name==='dic_admin_issue_invite').args)),{p_label:'First tester'});
+ assert.doesNotMatch(b.root.innerHTML,/id="admin-invite-uses"/);
  b.events.click({target:{closest(){return {dataset:{action:'copy-invite'}};}}});
  await flush();
  assert.deepEqual(b.clipboard,[SECRET]);
@@ -159,7 +162,7 @@ test('member removal/restoration and invitation revocation require RPC, then ref
 });
 test('cross-tab account change immediately removes one-time invitation and denies stale render',async()=>{
  const b=boot();await b.done;
- b.events.submit({target:{id:'admin-invite-form',elements:{namedItem(name){return {value:name==='uses'?'1':''};}}},preventDefault(){}});
+ b.events.submit({target:{id:'admin-invite-form',elements:{namedItem(name){return {value:name==='label'?'Single tester':''};}}},preventDefault(){}});
  await flush();assert.match(b.root.innerHTML,new RegExp(SECRET));
  b.signOut();
  assert.match(b.root.innerHTML,/Admin Access Unavailable/);

@@ -73,14 +73,10 @@ export function renderAdminAccessPanel(access={},issued=null){
   <p class="helper">Create and revoke private invitations. Codes never expire automatically; already admitted accounts stay permanent.</p></div>
   <form id="admin-invite-form" class="admin-invite-form" autocomplete="off">
    <label for="admin-invite-label">Label (optional)<input id="admin-invite-label" name="label" maxlength="80" placeholder="e.g., Testing friends"></label>
-   <label for="admin-invite-uses">Code usage<select id="admin-invite-uses" name="uses">
-    <option value="1">One person (recommended)</option>
-    <option value="5">Up to 5 people</option>
-    <option value="unlimited">Reusable until revoked</option>
-   </select></label>
+   <p class="admin-invite-rule helper">One code admits one verified account, once. No automatic expiry.</p>
    <button type="submit">Generate Code</button>
   </form>
-  <p class="admin-invite-footnote helper">Codes have no expiration date. A used-up code cannot admit more people, but everyone who joined keeps their account. Reusable codes should be shared carefully.</p>
+  <p class="admin-invite-footnote helper">Unused codes never expire by date and can be revoked at any time. After one account uses a code, it cannot be used again. Already admitted accounts stay active until you remove their access.</p>
   ${secret}
   <p id="admin-action-notice" class="admin-action-notice" role="alert" aria-live="assertive"></p>
   <h3>Existing Codes <span class="helper">${formatCount(access.invites_total)}</span></h3>
