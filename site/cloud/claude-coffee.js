@@ -51,6 +51,8 @@ export function acceptClaudeFacts(reply,source,existing={}){
   if(!FIELDS.has(field)||out[field]||existing[field]||value.length<2||value.length>200||
    quote.length<7||quote.length>350||!text.includes(normalized(quote))||!supports(quote,value,field))continue;
   if(field==='roast_level'&&!ROAST.has(value))continue;
+  if(field==='roast_level'&&!/\b(?:roast|agtron)\b/i.test(quote))continue;
+  if(field==='release_label'&&!/\b(?:harvest|crop|lot|release)\b/i.test(quote))continue;
   if(field==='process'&&!PROCESS.has(value))continue;
   if(field==='elevation_m'&&!/\d{3,4}.*(?:m\b|masl\b|meters?|metres?|msnm\b)/i.test(value))continue;
   if(field==='tasting_notes'&&!/(?:,|&|\band\b)/i.test(value))continue;
@@ -62,7 +64,10 @@ export function acceptClaudeFacts(reply,source,existing={}){
 export function shouldUseClaude(preview,account,store=storeDefault()){
  if(!preview?.ok||typeof preview.semantic_text!=='string'||preview.semantic_text.length<120)return false;
  const {enabled,key}=readClaudeKey(account,store);
- return enabled&&!!key&&['origin','producer','process','variety','tasting_notes','release_label'].some(k=>!preview.fields?.[k]);
+ const basic=['origin','producer','process','variety','tasting_notes'].some(k=>!preview.fields?.[k]);
+ const dated=!preview.fields?.release_label&&/\b(?:harvest|crop year|lot number|lot #)\b/i.test(preview.semantic_text);
+ const elevated=!preview.fields?.elevation_m&&/\b(?:elevation|altitude|masl|meters above sea level)\b/i.test(preview.semantic_text);
+ return enabled&&!!key&&(basic||dated||elevated);
 }
 export async function enhanceWithClaude(preview,{account,store=storeDefault(),fetcher=fetch}={}){
  if(!shouldUseClaude(preview,account,store))return {...preview,claude_enhancement:'not_requested'};
@@ -88,7 +93,12 @@ export async function enhanceWithClaude(preview,{account,store=storeDefault(),fe
   if(!response.ok)return {...preview,claude_enhancement:'unavailable'};
   const data=await response.json();
   const tool=(data.content||[]).find(x=>x.type==='tool_use'&&x.name==='extract_coffee_facts');
-  const accepted=acceptClaudeFacts(tool?.input,preview.semantic_text,preview.fields||{});
+  const protectedFacts={...(preview.fields||{})};
+  if(preview.roaster_details?.blend_components){
+   protectedFacts.origin=protectedFacts.origin||'(composite blend)';
+   protectedFacts.process=protectedFacts.process||'(composite blend)';
+  }
+  const accepted=acceptClaudeFacts(tool?.input,preview.semantic_text,protectedFacts);
   return {...preview,fields:{...preview.fields,...accepted.fields},
    claude_enhancement:Object.keys(accepted.fields).length?'supplemented':'no_additional_facts',
    ...(accepted.evidence.length?{claude_evidence:accepted.evidence}:{}),
