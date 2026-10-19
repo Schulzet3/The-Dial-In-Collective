@@ -70,7 +70,7 @@ export function createPreviewHandler({
    const page=await readHtml(validated.toString());
    if(!page?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
    const finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
-   const preview=extract(page.html,{source_url:finalUrl});
+   const preview=extract(page.html,{source_url:finalUrl,include_semantic_text:true});
    if(!preview?.ok)return json({ok:false,reason:preview?.reason||'ambiguous_or_missing_product'});
    return json({...preview,source_url:validated.toString(),...(finalUrl!==validated.toString()?{resolved_url:finalUrl}:{}),verification:'unverified',
     note:'Suggestions from a public page; exact roaster and release need verification.'});
