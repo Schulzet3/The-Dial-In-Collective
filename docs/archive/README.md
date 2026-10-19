@@ -21,3 +21,8 @@ The available August archive has nine report pointers, not nine complete researc
 ## How old statements are interpreted
 
 "Not yet deployed", "no emails", "SSO all", "0 credits", "hosted recovery missing", and "Wuri retry pending" are historical states where later dated evidence records success. Conversely, a test plan or proposal is never proof of completion. Preserve failed-attempt evidence and exact scope; current provider limitations stay explicit in Current Status.
+
+## October 19, 2026 global reconciliation archive
+- [Complete cumulative Current Status before audit](CURRENT_STATUS_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md) retains the entire previous running timeline verbatim (including historical claims subsequently superseded).
+- [Complete previous documentation index](DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md) retains all dated references verbatim. Links in this preserved file were authored relative to docs/, not docs/archive/; use the [current docs index](../README.md) for active navigation and resolved paths.
+- [Current status](../CURRENT_STATUS.md) and [Global audit](../GLOBAL_RECONCILIATION_AUDIT_2026-10-19.md) are the active concise front doors. Canonical requirements remain untouched.
