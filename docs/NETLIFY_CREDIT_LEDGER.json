@@ -374,14 +374,14 @@
   },
   "latest_publication_20261019_deterministic_extractor": {
     "name": "Deterministic universal roaster source extraction, blends and roaster espresso ranges",
-    "deploy_id": "6ad68002ec0aba2b3c69a522",
-    "source_sha": "81374b418d77eec19782e40552c6a40575b4d8c4",
+    "deploy_id": "6ad6801b20c067ef4f2e3729",
+    "source_sha": "8769508fc234f4fb63f89920b5a936d259936abf",
     "tested_source_sha": "4de4dc5fbdc9c7a86a3ea4f9eb28d903411136c2",
     "status": "READY/current",
-    "published_at_utc": "2026-10-19T20:39:49.577Z",
+    "published_at_utc": "2026-10-19T20:40:10.443Z",
     "authorization_consumed": true,
-    "planned_cost_credits": 15,
-    "actual_debit": "UNKNOWN (provider cannot report live credits)",
+    "planned_cost_credits": "15 credits per release; two READY builds may have cost up to 30 estimated credits, actual debit UNKNOWN",
+    "actual_debit": "UNKNOWN: Netlify connector cannot read live billing",
     "owner_monitoring": "Locked owner-managed credits; last dated screenshot Oct 17 940, grant expires Nov 14",
     "no_ai_runtime": true,
     "ci_runs": {
@@ -407,10 +407,15 @@
     "secret_scan_matches": 0,
     "user_browser_acceptance": "unverified",
     "direct_http_from_runtime": "unavailable (DNS/web tool could not access domain)",
-    "new_encrypted_source_backup": "pending; prior pin for 40b97f33",
-    "scheduled_drive_courier": "pending",
-    "report": "docs/UNIVERSAL_EXTRACTOR_AND_CLAUDE_BYOK_2026-10-19.md",
-    "prior_production_deploy": "6ad599e539cf6e672af21352"
+    "new_encrypted_source_backup": "GitHub encrypted push-only source pin independently confirmed for current SHA 8769508f; main pin 26f86e181279b81cad7c8f6eba2638531c01cc03; workflow PASS 39321544753, artifact 12220751175; scheduled Drive courier and full recovery still unverified",
+    "scheduled_drive_courier": "UNVERIFIED",
+    "report": "docs/RELEASE_2026_10_19_DETERMINISTIC_ROASTER_EXTRACTOR.md",
+    "prior_production_deploy": "6ad68002ec0aba2b3c69a522",
+    "previous_same_code_deploy": {
+      "id": "6ad68002ec0aba2b3c69a522",
+      "source_sha": "81374b418d77eec19782e40552c6a40575b4d8c4",
+      "relationship": "Documentation-only changes, no application-code changes"
+    }
   },
   "latest_deterministic_extractor_publication_20261019": {
     "release_name": "Deterministic universal multi-roaster URL extractor without AI",
