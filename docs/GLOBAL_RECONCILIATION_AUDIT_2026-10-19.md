@@ -47,6 +47,11 @@ Initial live inventory: 36 issues (26 open/10 closed). This audit additionally r
 
 **Open proposal, not authorized:** #31 SEYspro-inspired Fast-Flow vs sixth espresso style. No change to Locked shot style taxonomy without owner decision.
 
+## Follow-up source review: SECURITY DEFINER RPCs and dormant imports
+- Read the deployed PostgreSQL definitions of the five authenticated public SECURITY DEFINER functions cited by Supabase's security advisor. Each uses `SET search_path TO ''`. Community browsing, evidence counts, personal outlier listing and outlier confirmation use `private.require_member()`; the universal-preview budget RPC checks `auth.uid()`, authenticated role and `private.is_member()`. Outlier confirmation also checks the requesting user's shot ownership. These scoped source guards were **verified**, but complete signed ordinary-member/browser negative acceptance remains OPEN. Do not disable member-only RPCs merely to silence a generic advisor.
+- Inspected `build_cloud.mjs`, `scripts/audit/site-integrity.mjs`, the dormant native import modules and import tests. The historical/native import UI remains intentionally available in source/test, but is excluded from `dist` through an explicit build allowlist and regression assertions. It is not a proven shipped-code orphan requiring deletion.
+- The original top-level `README.md` also incorrectly described the October 17 deploy as current and newer roast/category changes as unpublished. Its full content is archived verbatim in `docs/archive/ROOT_README_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md`; the live root entry page now links this current audit and the actual October 19 READY release.
+
 ## Documentation cleanup performed
 - The previously cumulative CURRENT_STATUS (~115 KB) and chronological docs/README index (~35 KB) are stored verbatim under docs/archive as dated snapshots. They contained valid *historical* milestones but many superseded 'latest', 'not live' or pending statements.
 - Active docs/CURRENT_STATUS is a concise current snapshot and next-action guide, and docs/README is a curated live index. No original evidence report, historical decision object, account data, migration, test or secret was deleted.
