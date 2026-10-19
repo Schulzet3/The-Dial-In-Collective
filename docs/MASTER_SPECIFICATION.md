@@ -20,10 +20,27 @@ The owner explicitly requested **remove the Later option** from a flagged Commun
 
 Owner has approved **one coordinated release** of these tested changes and the staged contextual outlier/Community UI; that specific release approval is consumed upon successful publication. Keep provider credits, backup, Netlify release marker, authentication, RLS and no-mass-historical-promotion safeguards. **There is no authorization to auto-promote the existing legacy Pending Yirgacheffe projection.**
 
+## Owner-Locked limited invitation-only technical pilot milestone (PILOT-INVITE-ONLY-TECHNICAL-20261018-01; October 18, 2026)
+
+**Exact owner approval:** “I approve proceeding toward a limited invitation-only technical pilot, while preserving all locked decisions and requiring my separate approval before publishing or applying production migrations.”
+
+**Approved scope:** Prepare for a **small, trusted, invitation-only technical/early-access pilot** of the functioning cloud/PWA app so actual testers can provide usability, workflow and reliability feedback while outstanding full-beta implementation continues. Label invitations and tester expectations **“Limited Technical Pilot”**, **not** “complete beta”, “finished recommendation engine”, “public launch” or a waiver of the required functionality. The previously suggested **3–5 testers / one week** is an optional operator proposal, **not** an owner-selected headcount or timeline.
+
+**Scope boundary:** This is a new, expressly owner-approved pre-beta *milestone*, not a replacement of §3, §4, §16–19, §22, §25, §41 or any of the 79 original Locked decisions. The §41 twenty-item core-beta acceptance gate is **unchanged**. P0 [#10 alternate recipe families](https://github.com/Schulzet3/The-Dial-In-Collective/issues/10), [#12 complete evidence/provenance-weighted recommendations](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12), and [#13 post-rating Experiment lifecycle](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) stay required for the specification-complete beta and cannot be represented as done in pilot communications.
+
+**Authorized now:** Source/documentation and release-runbook preparation, read-only provider/security/privacy/recovery checks, already-permitted development-only tests, issue triage, one-at-a-time owner planning questions, and preparing honest tester instructions. Preserve fastest Log Shot → Rate → Recommendation, existing admin/member isolation, historical data/shot notes, and the existing closed historical import gate.
+
+**Not authorized by this approval:** Applying **either** production migration, executing live SQL writes, issuing/redeeming a new real invite, adding/removing a real account or member, changing production Auth/SMTP/DNS/Netlify settings, uploading a production frontend, enabling public registration, consuming Netlify deployment credits, buying/upgrading services, sending invitations, or weakening private-beta/Recovery/CI safeguards. A **new, specific owner authorization** is mandatory for production migrations and publication; the prior releases' consent is exhausted. Do not conflate agreement on a pilot milestone with production authorization.
+
+**Admission/privacy requirements remain:** Supabase verified email + member admission + admin/server RLS and anonymous sanitized Community data. Every **new** admin-issued invite admits exactly **one verified account**, is non-calendar-expiring until redeemed and is revocable while unused. Already-admitted members do not need another invite. Owner may use administrator-only **Remove Access / Restore Access** without hard deletion or loss of shots. Keep the owner-accepted Free-plan leaked-password-protection limitation accurately disclosed, never describe it as “fixed”. Perform actual signed-in account negative tests before sending new pilot codes.
+
+**Release readiness and safety:** Both staged migrations are source/isolated-CI complete but **unapplied**, and the current live Netlify deploy remains the previous published PWA. A fresh encrypted offsite backup covering the most recently saved offline shot, actual credit availability, production SQL/source parity, user privacy checks, and separate owner release approval are prerequisites. Execute and verify exact migrations *in order* and perform **one** credit-aware deployment only after that distinct authorization; stop on drift or loss of membership/privacy integrity. [Pilot plan](INVITE_ONLY_TECHNICAL_PILOT_LAUNCH_PLAN_2026-10-18.md) and [pilot pre-release gate](TECHNICAL_PILOT_RELEASE_GATE_2026-10-18.md) carry the living checklist.
+
 ## Current scoped supersessions
 
 | Topic | Governing record | Exact scope |
 | --- | --- | --- |
+| Limited technical pilot milestone | PILOT-INVITE-ONLY-TECHNICAL-20261018-01 (owner-approved October 18) | Add a **limited trusted invite-only early-access testing phase** without waiving §41 full-beta acceptance or any prior Locked requirement; this preparation approval does not authorize SQL migrations, real invitations/accounts, production publication, credit consumption or provider settings changes. |
 | Product name | The Dial In Collective; dial in, dialed in and dialing in without hyphens. | Current product wording only. Historical filenames and quotations are preserved. |
 | Production access | ACCESS-20261016-PRODUCTION-SSO | Production's extra Netlify login only; nonproduction SSO, Supabase Auth, verified email, admission, RLS and admin checks remain. |
 | Owner-managed Netlify credits | OPS-CREDIT-OWNER-MONITORING-20261017-01 | Owner monitors the remaining Personal plan balance and will alert when low; no recurring credit screenshot requests. Owner observed 940/1000 Personal credits on Oct 17, 2026 (expires Nov 14); operational credits are not deployable. Known insufficient funds or expired grant still block; no unauthorized plan change or purchase. The former assistant-managed seven-day refresh requirement is narrowly superseded. |
@@ -2045,6 +2062,8 @@ A beta build is not ready unless all of these are true:
 18. Account/private data is separate from durable anonymous community data.
 19. Claude is optional; no key still permits Pending Coffee and shot logging.
 20. Imported Bavyeyi data produces the expected successful window/family behavior.
+
+**Distinct owner-approved technical pilot (2026-10-18):** A deliberately labeled *limited invitation-only technical pilot* may precede completion of this section, solely to test existing functionality with trusted users. It **does not meet, alter, defer or waive** this section’s complete-beta acceptance criteria; #10/#12/#13 and remaining safety/UX acceptance remain open. A separate specific owner approval is still required before any live migration, app publication, or real invitation.
 
 ---
 

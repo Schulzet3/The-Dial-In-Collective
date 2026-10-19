@@ -2000,6 +2000,12 @@
   ],
   "scoped_supersessions": [
     {
+      "topic": "Limited invitation-only technical pilot",
+      "current": "PILOT-INVITE-ONLY-TECHNICAL-20261018-01",
+      "supersedes": "None of the prior Locked requirements; adds a separate, explicitly non-complete-beta early-access milestone",
+      "scope": "Owner approved preparing a small trusted invite-only technical pilot, not declaring the §41 complete beta. #10/#12/#13 remain required and unfinished. No production SQL migration, Netlify publication, paid credits/purchases, real invitations/accounts, public admission or provider configuration changes may occur without a separate specific owner authorization."
+    },
+    {
       "topic": "Product name",
       "current": "The Dial In Collective; dial in, dialed in and dialing in without hyphens.",
       "source": "docs/MASTER_SPECIFICATION_BACKEND_ADDENDUM.md",
@@ -2966,5 +2972,42 @@
     },
     "production_state": "28 hosted migrations, previous Netlify deploy, 2 admitted members/one admin, no new invite codes; no production changes",
     "new_release_authority": "NONE, still requires explicit scoped SQL + one Netlify publishing approval"
+  },
+  "current_owner_approved_invite_only_technical_pilot_20261018": {
+    "id": "PILOT-INVITE-ONLY-TECHNICAL-20261018-01",
+    "status": "OWNER LOCKED — pilot milestone and preparation approved; NOT launched, NOT authorized to publish or migrate",
+    "owner_exact_approval": "I approve proceeding toward a limited invitation-only technical pilot, while preserving all locked decisions and requiring my separate approval before publishing or applying production migrations.",
+    "approved_milestone": "Limited private technical/early-access pilot to solicit real user feedback on currently functioning Log Shot → Rate → Recommendation and cloud/mobile/offline/Community flows while building remaining required features.",
+    "precise_scope": "Preparation, planning, read-only checks, development-only tests, documentation, authentic but non-production safeguards and issue triage.",
+    "non_authorization": [
+      "production Supabase DDL/migration or user-data write",
+      "Netlify production publish, redeploy, preview/publication, deployment-credit charge or billing changes",
+      "real invitation/account creation, issuance, revocation or tester outreach",
+      "Cloudflare/Resend/Apps Script/other provider configuration changes",
+      "public beta release or waiving §41 core-beta criteria"
+    ],
+    "beta_status": "NOT specification-complete. §41 all 20 acceptance criteria remain; no amendment, grandfathering or waiver.",
+    "retained_core_p0": [
+      "#10 alternate preferred recipe families and windows",
+      "#12 complete tiered recommendations, provenance and contributor balance",
+      "#13 post-rating experiments and candidate/confirmation lifecycle"
+    ],
+    "unchanged_account_locks": [
+      "ACCESS-PERMANENT-20261018-01",
+      "ACCESS-SINGLE-USE-CODES-20261018-01",
+      "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01"
+    ],
+    "suggested_cohort": "3–5 trusted testers over approximately one week (historical recommendation only, NOT yet owner-selected headcount/duration).",
+    "planned_migrations_in_order": [
+      "20261018221843_dic_community_release_context.sql",
+      "20261018235549_dic_admin_beta_invitation_controls.sql"
+    ],
+    "release_consent": "Must be obtained separately per specific dual-migration + one credit-aware production deploy after fresh backup and security/SQL/credit preflight; this owner statement is NOT that consent.",
+    "current_prod_snapshot": "28 applied migrations, 16 shots/16 notes, 2 admitted, 1 admin, 0 usable invites, 2 Community entries, previous Netlify READY source 415136c3, both candidate migrations unapplied.",
+    "backup_freshness_caveat": "Last independently verified scheduled offsite ciphertext artifact was created October 18 13:23 UTC; owner's latest real offline shot was server-persisted October 18 19:51 UTC after that artifact. A newer matching encrypted offsite backup covering that shot is not verified yet and must be checked before production SQL.",
+    "communication_rule": "Clearly label pilot early access and avoid representing P0 features, signed-browser negative acceptance, unrestricted public signups or full provider disaster recovery as complete.",
+    "source": "docs/INVITE_ONLY_TECHNICAL_PILOT_LAUNCH_PLAN_2026-10-18.md",
+    "execution_gate": "docs/TECHNICAL_PILOT_RELEASE_GATE_2026-10-18.md",
+    "historical_79_locked_and_20_open_preserved": true
   }
 }
