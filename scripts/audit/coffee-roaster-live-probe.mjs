@@ -79,6 +79,7 @@ if(subscription?.status==='parsed'){
  assert.equal(subscription.recipe?.yield_g_max,48,
   'Second Corvus storefront format must keep the upper roaster espresso yield');
  assert.equal(subscription.recipe?.time_s_max,32,'Keep the second published time range');
+ assert.equal(subscription.origin,undefined,'Do not transplant primary blend components into the subscription page');
 }
 const dead=results.find(x=>x.roaster==='Corvus Dead Reckoning Blend');
 if(dead?.status==='parsed'){
