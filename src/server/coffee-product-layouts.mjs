@@ -78,7 +78,8 @@ function field(fields,label,value,add,extras,clean){
   // Pass the original evidence so the shared conflict tracker can suppress
   // a stale single-process fallback when the visible process is compound.
   add(kind,raw);
-  if(raw.length<=90&&raw.toLowerCase()!==value.toLowerCase())
+  if(raw.length<=90&&raw.toLowerCase()!==value.toLowerCase()&&
+     /\b(?:washed|natural|honey|anaerobic|lavado|lavada|miel|ferment|maceration|carbonic|thermal shock|dried|drying)\b/i.test(raw))
     addExtra(extras,'processing_detail',raw.slice(0,160));
   return;
  }
