@@ -78,6 +78,7 @@ if(dead?.status==='parsed'){
   'Dead Reckoning should retain exact multi-country blend list');
  assert.equal(dead.origin,'Ethiopia, Colombia, Peru','Preserve each distinct source-backed origin once');
  assert.equal(dead.process,'Other/Unknown','Keep multi-method blends in approved Other/Unknown selector');
+ assert.equal(dead.roast_level,undefined,'Do not invent a blend roast from marketing');
  assert.equal(dead.details.processing_detail,'Natural, Washed','Retain all observed blend methods');
  assert.equal(dead.producer,undefined,'Component lot names alone are not producer proof');
  assert.equal(dead.recipe?.dose_g,18,'Keep explicit 18g espresso dose');
