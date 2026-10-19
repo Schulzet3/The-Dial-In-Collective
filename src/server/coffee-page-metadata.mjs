@@ -20,6 +20,15 @@ const FIELD_ALIASES={
 };
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
+function readableRoaster(s){
+ const raw=String(s||'').trim();
+ // Some Shopify sites publish an internal host slug (tim-wendelboe-no)
+ // instead of a public-facing roaster. Drop only a terminal country TLD.
+ if(!/^[a-z]+(?:-[a-z]+){2,}$/.test(raw))return raw;
+ const parts=raw.split('-');
+ if(parts.at(-1).length===2)parts.pop();
+ return parts.map(part=>part[0].toUpperCase()+part.slice(1)).join(' ');
+}
 function entities(s){
  const replace={'amp':'&','quot':'"','apos':"'",'lt':'<','gt':'>','nbsp':' ','ndash':'–','mdash':'—','bull':'•'};
  return String(s??'').replace(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/gi,(s,key)=>{
@@ -158,7 +167,7 @@ function addField(fields,rawKey,value){
 }
 function productDetails(fields,p){
  const brand=textOf(p.brand??p.manufacturer);
- if(brand&&!fields.roaster)fields.roaster=brand;
+ if(brand&&!fields.roaster)fields.roaster=readableRoaster(brand);
  for(const row of Array.isArray(p.additionalProperty)?p.additionalProperty.slice(0,80):[]){
   addField(fields,row?.name,row?.value);
  }
@@ -398,7 +407,7 @@ export function extractPublicCoffeeFacts(html,{source_url,include_semantic_text=
  productDetails(fields,p);
  const siteName=textOf(meta['og:site_name'],200);
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
-  fields.roaster=siteName;
+  fields.roaster=readableRoaster(siteName);
  // Avoid stray articles/related-product labels on custom Onyx storefronts.
  // The product's named a-stat metrics supply its selected factual labels.
  const product=productMarkup(html);
