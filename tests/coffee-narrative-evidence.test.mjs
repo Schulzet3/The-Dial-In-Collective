@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
+import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 const target='https://www.corvuscoffee.com/products/echo-gesha';
 const base='<html><head><meta property="og:type" content="product"><meta property="og:title" content="Echo Gesha"><meta property="og:site_name" content="Corvus Coffee"></head><body><nav><p>Producer: Wrong Navigation</p></nav><main><h1>Echo Gesha</h1>';
 const tail='<h2>You may also like</h2><h4>Finca Unrelated, Kenya</h4><p>Tasting Notes: Wrong Coffee</p></main><footer>Producer: Wrong Footer</footer></body></html>';
