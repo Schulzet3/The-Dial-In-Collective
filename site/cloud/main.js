@@ -11,7 +11,6 @@ import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
-import {readClaudeKey,saveClaudeKey,removeClaudeKey,shouldUseClaude,enhanceWithClaude} from './claude-coffee.js';
 import {communityReviewBanner,communityPage} from './community.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales}=U;
 const root=document.querySelector('#app'),sheet=document.querySelector('#sheet');
@@ -256,18 +255,6 @@ class CloudApp {
      <label class="field space-top"><span>Tasting Preferences</span><textarea name=tasting_preferences>${e(this.state.preferences)}</textarea></label>
      <button class="primary full space-top">Save Preferences</button></form>
    </section>
-   <section class="settings-section" aria-label="Optional Claude extraction">
-    <details class="advanced settings-advanced">
-     <summary>Claude Coffee Extraction (Optional)</summary>
-     <p class="helper">When enabled, Autofill first reads the roaster webpage without AI. Claude is called only when source details remain missing. Your personal Claude API key stays in this browser's device storage and is sent directly to Claude, never to The Dial In Collective servers. Claude may charge your API account per request. Verify every suggested fact.</p>
-     <p class="helper">Status: ${readClaudeKey(this.identity.id).enabled?'Enabled for this account on this device':'Off'}</p>
-     <div id="claude-key-options">${field('Claude API Key','claude_api_key','',{type:'password',placeholder:'sk-ant-...',extra:'autocomplete="off"'})}
-      ${checkbox('claude_enabled','Enable Claude when basic extraction leaves gaps',readClaudeKey(this.identity.id).enabled)}
-      <div class="coffee-url-actions">${button('Save Claude Settings','save-claude-key','','secondary compact')}
-       ${button('Forget Key','forget-claude-key','','ghost compact')}</div>
-     </div>
-    </details>
-   </section>
    <section class="settings-section" aria-labelledby="setup-heading">
     <h3 class="settings-heading" id="setup-heading">Your Setup</h3>
     ${setup?`<div class="settings-setup"><div><small>Active Setup</small><strong>${e(setup.name)}</strong></div>${button('Rename','rename-setup',`data-id="${e(setup.id)}"`,'ghost compact')}</div>`:''}
@@ -388,19 +375,6 @@ class CloudApp {
    if(a==='close'){sheet.close();return;}
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
-   if(a==='save-claude-key'){
-    const controls=sheet.querySelector('#claude-key-options');
-    const value=String(controls?.querySelector('[name=claude_api_key]')?.value||'');
-    const enabled=controls?.querySelector('[name=claude_enabled]')?.checked===true;
-    const okay=saveClaudeKey(this.identity?.id,value,enabled);
-    this.notice=okay?'Local Claude preferences saved for this account and device.':'Please enter a valid Claude API key beginning sk-ant-. Nothing was saved.';
-    this.settings();return;
-   }
-   if(a==='forget-claude-key'){
-    removeClaudeKey(this.identity?.id);
-    this.notice='Claude key cleared from this browser for your account.';
-    this.settings();return;
-   }
    if(a==='new-setup'){this.showSetup();return;}
    if(a==='open-admin'){location.assign('/admin.html');return;}
    if(a==='rename-setup'){this.showRenameSetup(id);return;}
@@ -421,19 +395,6 @@ class CloudApp {
       // presses Add Coffee. Never overwrite typed facts or silently approve.
       if(found?.ok)applyCoffeeUrlFields(form,found);
       panel.innerHTML=coffeeUrlPreviewMarkup(found);
-      // Local Claude BYOK is OPTIONAL and happens after the deterministic
-      // fields are visible. Even if the user types while it runs, only still-
-      // blank fields are eligible. No second protected URL/quota request.
-      const account=this.identity?.id;
-      if(found?.ok&&shouldUseClaude(found,account)){
-       target.textContent='Reading additional details...';
-       const enriched=await enhanceWithClaude(found,{account});
-       if(sheet.open&&sheet.querySelector('#new-coffee')===form&&
-          form.elements.source_url.value.trim()===raw&&account===this.identity?.id){
-        applyCoffeeUrlFields(form,enriched);
-        panel.innerHTML=coffeeUrlPreviewMarkup(enriched);
-       }
-      }
      }catch{
       if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
      }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
