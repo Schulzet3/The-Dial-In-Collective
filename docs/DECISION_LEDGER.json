@@ -2848,7 +2848,7 @@
     "previous_multiuse_choice": "SUPERSEDED for NEW portal-generated codes only, existing historical invite use/expiry rows unchanged"
   },
   "admin_beta_invitation_controls_dev_20261018": {
-    "status": "Previous multiuse source/test PASS, now superseded for new codes by owner Locked single-use clarification; code/SQL/test revision IN PROGRESS, no production changes.",
+    "status": "Single-use-only owner Locked source implementation and final SQL/Node/mobile/visual checks PASS; NOT LIVE; separate SQL/Netlify release permission required.",
     "migration": "supabase/migrations/20261018235549_dic_admin_beta_invitation_controls.sql",
     "generated_official_cli_run": 39178514283,
     "model": "private.beta_invites existing hashes/use limits, add issued_by/label; private.admin_access_events no secrets; member-access soft revocation",
@@ -2859,8 +2859,8 @@
       "dic_admin_set_member_access"
     ],
     "secure_code_entropy": "two server-generated v4 UUIDs about 244 random bits, one-time plaintext response, SHA256 stored",
-    "default_selected": "Owner Locked one-use only (not a selectable default)",
-    "alternative": "No new multiuse or unlimited portal codes permitted",
+    "default_selected": "RESOLVED one use, not a selectable option",
+    "alternative": "5/unlimited new-code issuance REMOVED and unsupported by admin issuance RPC",
     "protect_admin_server": "private.app_admins check forbids changing ANY administrator in portal RPC",
     "provenance": [
       "655a5c7f5ee6a87c9b5d6c9acf1cb80b7ea1c5cb",
@@ -2880,11 +2880,15 @@
       "visual": 39179973587,
       "mobile_browser": 39179606335,
       "sql": 39178869416,
-      "node": 39179606340
+      "node": 39179606340,
+      "final_sql": 39180899489,
+      "final_node": 39180868722,
+      "final_mobile": 39180868739,
+      "final_visual": 39180868840
     },
     "current_live_invites_usable": 0,
     "current_live_admin_roles": 1,
-    "next_gate": "Enforce single-use in both frontend and server, rerun isolated SQL/Node/mobile/visual; then separately approve BOTH production migrations and exactly one Netlify publish. No production authorization now.",
+    "next_gate": "Separate owner approval for both staged Community and admin migrations plus exactly one Netlify release; perform fresh preflight and real signed admin/member acceptance before distributing beta codes.",
     "temp_cli_workflow_removed": true,
     "final_hosted_readback": {
       "applied_migrations": 28,
@@ -2897,11 +2901,19 @@
       "admin_event_audit_tables": 0,
       "netlify_current": "6ad5197d42cc6608b98712a4"
     },
-    "actual_signed_http_admin_acceptance": "Not yet possible; requires separately approved production migration/deploy."
+    "actual_signed_http_admin_acceptance": "Not yet possible; requires separately approved production migration/deploy.",
+    "server_new_codes": "dic_admin_issue_invite(text) only; no integer usage override, max_uses=1, expires_at=NULL; checked replay prevention",
+    "final_ci": {
+      "sql": 39180899489,
+      "node": 39180868722,
+      "mobile": 39180868739,
+      "visual": 39180868840
+    },
+    "initial_sql_failed_test": "39180868888 initial regression test wrongly asserted lack of correct one-parameter signature; fixed 3723316a, subsequent 39180899489 PASS"
   },
   "current_owner_single_use_beta_invites_20261018": {
     "id": "ACCESS-SINGLE-USE-CODES-20261018-01",
-    "status": "OWNER LOCKED, source implementation follow-up pending CI, NOT DEPLOYED",
+    "status": "OWNER LOCKED; DEVELOPER IMPLEMENTED; SQL/NODE/MOBILE/VISUAL CI ALL PASS; NOT PUBLISHED",
     "exact_owner_answer": "Can you confirm that I can generate the codes and remove accounts as needed from within the app’s admin portal? I agree that each code should only be usable for one email/account creation.",
     "required_ui": "Self-service admin portal Generate Code, copy once, view status, Revoke Code, and Remove Access / Restore Access for nonadmin existing member accounts.",
     "required_backend": "Every NEW portal-generated invitation max_uses=1, expires_at NULL, only one distinct email-confirmed auth.users account can be admitted per code; no client-selectable multiuse capacity and no backend multiuse issue parameter.",
@@ -2910,6 +2922,18 @@
     "removal_definition": "Safe reversible Remove Access (enabled=false), not hard delete of auth.users or deletion of shots/notes. Physical erasure requires separate owner decision.",
     "historical_compatibility": "Do not modify historic issued/redeemed invite rows, token hashes, or existing admission, member/shot data. Preserve server-side rate-limit, admin gating, email-verified requirements.",
     "specifically_supersedes": "Only earlier §4.5 multiuse (5/unlimited) new-code options and Open default; does not supersede any other Locked requirements or 79-baseline decisions.",
-    "explicit_release_permission": "NONE; development source/tests only. Hosted SQL, Netlify publish, real code generation/account actions each require separate authorization."
+    "explicit_release_permission": "NONE; development source/tests only. Hosted SQL, Netlify publish, real code generation/account actions each require separate authorization.",
+    "source_commits": [
+      "f1af82d95f72a4396d82ff4e48429fa25e5bb6b0",
+      "3723316aea42d7bb11556409ecec0d92db09954d"
+    ],
+    "final_ci": {
+      "sql": 39180899489,
+      "node": 39180868722,
+      "mobile": 39180868739,
+      "visual": 39180868840
+    },
+    "live_state": "production 28 applied migrations, 0 usable invite codes, 1 permanent admin, no controls yet",
+    "release_permission": "NOT GRANTED; both new migrations and one Netlify publish require explicit owner approval"
   }
 }
