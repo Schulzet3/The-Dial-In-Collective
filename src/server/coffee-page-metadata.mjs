@@ -2,6 +2,7 @@
 // roaster verification and never promotes a canonical record.
 import {extractRoastVisualEvidence} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence} from './coffee-product-layouts.mjs';
+import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 const FIELD_ALIASES={
@@ -405,6 +406,17 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const roaster_details=extractLayoutEvidence(product,{
   fields,addField:(key,value)=>addField(fields,key,value),clean
  });
+ // Supplement explicit page labels with current-coffee narrative evidence.
+ // The canonical Process selector is coarse; keep complex fermentation and
+ // farm/grower attributions as reviewable, noncanonical details.
+ const narrative=extractNarrativeCoffeeEvidence(product,{name:fields.name,fields});
+ for(const [key,value] of Object.entries(narrative.fields)){
+  if(key==='process'&&fields.process&&fields.process!==value)continue;
+  addField(fields,key,value);
+ }
+ for(const [key,value] of Object.entries(narrative.details)){
+  if(!roaster_details[key]&&value)roaster_details[key]=value;
+ }
  // JSON-LD additionalProperty can publish numeric roast color without an
  // HTML metric. Retain the measured value from this matched Product only.
  if(!roaster_details.agtron){
