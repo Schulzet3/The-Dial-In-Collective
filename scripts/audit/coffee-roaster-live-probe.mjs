@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 
 const targets=[
+ ['Corvus Echo Gesha','https://www.corvuscoffee.com/products/echo-gesha'],
  ['Proud Mary Ovidio Gomez','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
  ['Queen City Banko Gotiti Washed','https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia?variant=52819513737447'],
  ['Queen City canonical identity control','https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia'],
@@ -65,6 +66,14 @@ console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
 
 // This deliberately opt-in live acceptance reports drift instead of a green
 // run that merely printed an error. The broader roaster inventory stays visible.
+const corvus=results.find(x=>x.roaster==='Corvus Echo Gesha');
+if(corvus?.status==='parsed'){
+ assert.match(corvus.name||'',/Echo Gesha/i);
+ assert.equal(corvus.origin,'Panama');
+ assert.equal(corvus.details.farm,'Finca Deborah');
+ assert.match(corvus.details.processing_detail||'',/Carbonic Maceration/i);
+ assert.equal(corvus.roast_level,undefined,'Do not invent an unstated roast category');
+} else console.log('[DIC CORVUS LIMIT] '+JSON.stringify({status:corvus?.status,detail:'No extraction claim until current public product HTML is available'}));
 const queen=results.find(x=>x.roaster==='Queen City Banko Gotiti Washed');
 const canonical=results.find(x=>x.roaster==='Queen City canonical identity control');
 const home=results.find(x=>x.roaster==='Queen City homepage negative control');
