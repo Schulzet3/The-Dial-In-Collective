@@ -81,7 +81,8 @@ test('Unverified multi-process roaster blends preserve exact parts without fake 
   '<p>Components:</p><ul><li>60% Brazil - Bourbon - Natural</li><li>40% Guatemala - Caturra - Washed</li></ul>'+
   '<p>Roast: Medium</p>');
  assert.match(r.roaster_details.blend_components,/60% Brazil.*40% Guatemala/);
- assert.equal(r.fields.process,undefined);
+ assert.equal(r.fields.process,'Other/Unknown');
+ assert.equal(r.roaster_details.processing_detail,'Natural, Washed');
  assert.equal(r.fields.origin,'Brazil, Guatemala');
  assert.equal(r.fields.roast_level,'Medium');
 });
