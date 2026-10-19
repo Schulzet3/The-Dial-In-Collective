@@ -145,7 +145,7 @@ test('whole-bean measurements must not auto-classify using the ground chart',()=
 });
 test('generic fermentation, blends and Adv Washed alone do not become anaerobic',()=>{
  const blend=facts(page('Kenya Mara Estate','Washed & Natural','78.4 Agtron',maraStory));
- assert.equal(blend.fields.process,undefined);
+ assert.equal(blend.fields.process,'Other/Unknown');
  const washed=facts(page('Kenya Mara Estate','Adv Washed','78.4 Agtron','Washed lot that slowly develops sweetness during fermentation.'));
  assert.equal(washed.fields.process,'Washed');
 });
