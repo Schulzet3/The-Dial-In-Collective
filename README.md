@@ -2,19 +2,28 @@
 
 Better espresso through shared experience.
 
-**Active application and documentation branch: `development/backend-foundation`.** The default `main` branch runs backup operations and does not contain the current application.
+> **Start here:** [Current Status](docs/CURRENT_STATUS.md) for the latest verified deployment and next action, [Master Specification](docs/MASTER_SPECIFICATION.md) and [Decision Ledger](docs/DECISION_LEDGER.json) for the canonical Locked product requirements, and [October 19 global audit](docs/GLOBAL_RECONCILIATION_AUDIT_2026-10-19.md) for verified cross-service findings and outstanding gaps. The [active 20-topic decision crosswalk](docs/ACTIVE_DECISION_AND_REQUIREMENT_RECONCILIATION_2026-10-19.md) and [live issues](https://github.com/Schulzet3/The-Dial-In-Collective/issues) distinguish approved decisions, implementation and real-account acceptance. [Documentation Index](docs/README.md) and [AGENTS.md](AGENTS.md) control seamless cross-chat handoff.
 
-Start with [Current Status](docs/CURRENT_STATUS.md) for the next action, then [Master Specification](docs/MASTER_SPECIFICATION.md) and [Decision Ledger](docs/DECISION_LEDGER.json) for canonical requirements. [Documentation Index](docs/README.md) locates dated evidence and historical records. [AGENTS.md](AGENTS.md) defines the handoff workflow.
+## Repository and live application
 
-The latest published application is [app.dialincollective.com](https://app.dialincollective.com), deploy `6ad2c872ad7a8fa78dc410dc`, source `f08dfda99f46b25240cb8cc35c46d2c3c76344b8`. Provider read-back during the October 17 error sweep confirms it remains ready. Newer development source includes seven roast categories, extractor improvements and the [app-wide error-sweep fixes](docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md); these are **not published**. The owner's current instruction is **do not publish**.
+- **Active application/source/docs branch:** `development/backend-foundation`; it is not `main`.
+- **Default `main`:** deliberate dedicated encrypted backup and isolated-recovery workflows. Do not merge these branches by habit or delete this architecture.
+- **Published site:** [app.dialincollective.com](https://app.dialincollective.com). **Verified October 19, 2026:** Netlify READY/current deploy [6ad599e539cf6e672af21352](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad599e539cf6e672af21352), source commit `40b97f33bb1d828943e88d88ca0978c37baea18c`.
+- **Data baseline at that audit:** Supabase ACTIVE_HEALTHY; 30 hosted/versioned migrations, 4 coffees, 16 personal shots with 16 notes, 2 eligible sanitized Community rows, 2 admitted members, 1 protected administrator.
+- **Access:** production uses Supabase Auth, verified email, beta admission and row-level security; the redundant Netlify login was deliberately removed from production. Nonproduction Netlify previews remain SSO-protected.
+- **Current backlog:** [37 tracked GitHub issues, 27 open and 10 closed](https://github.com/Schulzet3/The-Dial-In-Collective/issues), including deliberately deferred [future beginner guide/video #37](https://github.com/Schulzet3/The-Dial-In-Collective/issues/37). Some P0 recommendation/recipe/Experiment work remains; a working **limited technical pilot** is not a specification-complete beta. Older status snapshots live under [docs/archive](docs/archive/README.md), never as a second active source of truth.
 
-Hosted recovery and its disposable-project cleanup have passed for their documented scope. The genuine member Wuri preview and private Pending save also passed; roast was manually selected. The owner has already Locked the 12-preview budget and seven roast categories. The compatible frontend and exact coffee corrections still await the ordered release in Current Status; do not reopen those decisions or restart completed recovery tests.
+## Mandatory decisions and release protection
 
-The [reconciled audit backlog](docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md) now links all 26 findings to scoped issues or completed documentation corrections. The [decision crosswalk](docs/DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md) maps original Open topics without silently resolving them. These records track unfinished implementation and acceptance; they do not claim every feature is complete.
+Preserve all Locked decisions, historical shots, and provenance. Do not silently adopt suggestions, archived plans, or unapproved espresso style names. The shortest **Log Shot → Rate → Recommendation** workflow takes precedence over additional complexity.
 
-## Development
+Netlify credits are owner-managed. **Each distinct production migration, deployment, provider setting change or release requires the applicable separately explicit owner approval.** The prior October 19 pilot release approval has been consumed. Ordinary development and documentation commits are not permission to publish. GitHub’s `[dic-publish]` build guard and `[skip netlify]` bookkeeping markers help prevent accidental costly production deployments; direct provider/manual publishes can bypass source gates, so still require human controls. See [Current Status](docs/CURRENT_STATUS.md).
 
-Node.js 22.13 or newer (including the pinned lint tool):
+Cloudflare and Resend email/domain setups have historically passed owner-observed tests, but their **current private account settings** and Google Apps Script courier execution cannot be certified from these GitHub/Netlify/Supabase connectors. The exact next scheduled postrelease Drive backup receipt and full current backup restoration are not yet verified. See [audit findings](docs/GLOBAL_RECONCILIATION_AUDIT_2026-10-19.md), [courier issue #28](https://github.com/Schulzet3/The-Dial-In-Collective/issues/28) and [restricted settings issue #27](https://github.com/Schulzet3/The-Dial-In-Collective/issues/27).
+
+## Local / isolated development
+
+Node.js 22 or newer. Development commands (on an authorized source checkout; **do not** run isolated fixtures against the populated production database):
 
 ```sh
 npm ci --ignore-scripts --no-audit --no-fund
@@ -24,14 +33,6 @@ npm run build:cloud
 node scripts/audit/site-integrity.mjs --dist
 ```
 
-The build needs `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`, which are public browser coordinates. Never put privileged keys, database passwords, SMTP credentials, recovery identities or personal exports in source or frontend configuration. `build_cloud.mjs` produces allowlisted `dist/`; do not publish `site/` or the repository root.
+The frontend build requires **publishable** `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` coordinates only. Do not place privileged service-role, database, Auth, SMTP or backup credentials, member IDs, personal exports or recovery keys in committed source or `dist`. `build_cloud.mjs` builds a constrained allowlisted public `dist/`. The older manual import/recovery UI sources are **deliberately not shipped**; their exclusion is enforced by `scripts/audit/site-integrity.mjs`. Preserve their historical recovery/testing context rather than deleting them without an approved replacement.
 
-GitHub Actions runs iterative checks, including path-filtered visual review on the active branch. The [latest audit evidence](docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md) distinguishes local tests, actual Actions runs and production observations. Synthetic browser tests use mock accounts. SQL suites require isolated fixtures; do not run them casually against a populated production database.
-
-## Release and data boundaries
-
-Preserve all Locked decisions. Product copy uses **The Dial In Collective** without hyphens. Distinguish development commits from live releases and SQL/Edge deployments. Production's extra Netlify login is off; nonproduction previews retain team SSO. Supabase sign-in, email confirmation, admission, RLS and admin checks remain required.
-
-Only a separately authorized tested bundle, deliberate release marker and sufficient verified credits may publish under existing release controls. Netlify billing is not exposed by the connected read tools, and historical ledger balances are not live balances. Build hooks/manual publishes can bypass source controls; do not use them to circumvent the gate.
-
-The current sweep changes development code, tests and documentation only. **No deployment, production-data mutation, migration or provider setting change** is part of this pass. The scheduled encrypted backup on `main` remains pinned to the verified published application SHA.
+**Last checked:** October 19, 2026. For changes after this dated README, check [Current Status](docs/CURRENT_STATUS.md), [GitHub commits](https://github.com/Schulzet3/The-Dial-In-Collective/commits/development/backend-foundation), [issue tracker](https://github.com/Schulzet3/The-Dial-In-Collective/issues), and the actual Netlify/Supabase providers. Do not treat a prior approval or old issue heading as today's status.
