@@ -1,6 +1,9 @@
 name: DIC encrypted database backup
 
 # Nightly encrypted export to private GitHub artifacts. Apps Script forwards ciphertext to Drive.
+# Approved pilot preflight backup: comment-only push triggers one fresh encrypted
+# recovery archive before migrating production; standard nightly behavior unchanged.
+# The Apps Script courier ignores push runs; manually verify a private offsite copy.
 on:
   # Smoke-test changes to backup infrastructure; Drive courier ignores push tests.
   push:
