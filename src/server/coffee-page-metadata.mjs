@@ -8,11 +8,11 @@ import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 const FIELD_ALIASES={
- origin:['origin','country','country of origin','region','coffee origin','région','location','growing region','país','pais','país de origen','origine','pays','región'],
+ origin:['origin','origins','countries','country','country of origin','region','coffee origin','région','location','growing region','país','pais','país de origen','origine','pays','región'],
  elevation_m:['elevation','altitude','elevation m','altitude masl','grown at','altitude (masl)','altura','altitud'],
  process:['process','processing','processing method','processing style','traitement','treatment','process method','proceso','procesamiento','processo'],
  variety:['variety','varietal','cultivar','cultivars','varieties','varietals','variété','variété(s)','variedad','variedades'],
- producer:['producer','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station','productor','productora','finca','produtor'],
+ producer:['producer','producers','farms','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station','productor','productora','finca','produtor'],
  roast_level:['roast','roast level','roast profile'],
  tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of','tastes like','flavor profile','flavour profile','cupping notes','notas de cata','notas de sabor','sabores'],
  release_label:['harvest','harvest year','harvest date','crop year','lot','lot number','release','release year','cosecha','fecha de cosecha']
@@ -137,6 +137,11 @@ function normalized(field,value){
    ['Anaerobic',/\b(?:anaerobic|anaerobico|anaerobica)\b/],['Honey',/\b(?:honey|miel)\b/],
    ['Washed',/\b(?:washed|lavado|lavada)\b/],['Natural',/\bnatural\b/]
   ].filter(([,re])=>re.test(norm)).map(([name])=>name);
+  if(/^(?:other\\?\/unknown|other|unknown|mixed)$/i.test(norm.trim()))return 'Other/Unknown';
+  // Explicitly combined methods (not an anaerobic-natural single process)
+  // use the approved dropdown's Other/Unknown while retaining source text.
+  if(found.length>1&&/\s(?:and|&)\s|\s*[+,\/|]\s*|\s*;\s*|\s*,\s*/i.test(norm))
+   return 'Other/Unknown';
   return found.length===1?found[0]:'';
  }
  return s;
@@ -155,10 +160,15 @@ function addField(fields,rawKey,value){
  if(key==='producer'&&/^(?:since|est(?:ablished)?\.?|founded)\s+(?:19|20)\d{2}$/i.test(s))return;
  // Withhold contradictory categorical/release evidence instead of silently
  // preferring stale JSON-LD. Compound processes must stay unsimplified.
- const anaerobicNatural=key==='process'&&/\b(?:anaerobic[\s-]+natural|natural[\s-]+anaerobic)\b/i.test(textOf(value));
- const compound=key==='process'&&!anaerobicNatural&&new Set(textOf(value).toLowerCase().match(/\b(?:washed|natural|honey|anaerobic)\b/g)||[]).size>1;
- if(conflicts&&(compound||(s&&fields[key]&&['process','roast_level','release_label'].includes(key)&&
-    keyOf(s)!==keyOf(fields[key])))){
+ // A truly mixed-process product is explicitly Other/Unknown, not blank.
+ // Once its mixture is documented, a narrower single-method summary should
+ // not override it. Contradictory single methods still require review.
+ if(key==='process'&&s==='Other/Unknown'){
+  fields.process='Other/Unknown';return;
+ }
+ if(key==='process'&&fields.process==='Other/Unknown')return;
+ if(conflicts&&(s&&fields[key]&&['process','roast_level','release_label'].includes(key)&&
+    keyOf(s)!==keyOf(fields[key]))){
   conflicts.add(key);delete fields[key];return;
  }
  if(fields[key])return;
@@ -484,8 +494,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const blend=extractCoffeeBlendEvidence(product);
  if(blend){
   roaster_details.blend_components=blend.display;
-  if(blend.multi_country)delete fields.origin;
-  if(blend.multi_process)delete fields.process;
+  // List distinct evidenced countries in first-seen order, never label a
+  // multi-origin blend with only one of its components' countries.
+  if(blend.multi_country)fields.origin=blend.origins.join(', ');
+  else if(!fields.origin&&blend.origins.length===1)fields.origin=blend.origins[0];
+  // Only genuinely named farms/producers are used. An unlabeled component
+  // coffee name alone is not enough evidence to assert its producer.
+  if(blend.multi_producer)fields.producer=blend.producers.join(', ');
+  else if(!fields.producer&&blend.producers.length===1)fields.producer=blend.producers[0];
+  if(blend.multi_process){
+   fields.process='Other/Unknown';
+   roaster_details.processing_detail=blend.processes.join(', ');
+  }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
  const roaster_recipe=explicitEspressoRecipe(product)||extractProductEspressoReference(product);
  // An extracted value is a suggestion, never proof of an official source.
