@@ -89,7 +89,13 @@ if(tim?.status==='parsed'){
  assert.match(tim.variety||'',/SL28/i);
  assert.match(tim.tasting_notes||'',/Blackcurrants/i);
  assert.equal(tim.process,'Washed');
+ assert.equal(tim.foundRoaster,'Tim Wendelboe');
+ assert.equal(tim.details.named_producer,undefined,'Smallholder producer group is not an individual grower');
+ assert.equal(tim.details.processing_detail,undefined,'Picking and sorting must not be labeled a process type');
 } else console.log('[DIC TIM WENDELBOE LIMIT] '+JSON.stringify({status:tim?.status}));
+const raven=results.find(x=>x.roaster==='Echo Raven Mexico');
+if(raven?.status==='parsed')
+ assert.equal(raven.details.named_producer,undefined,'Coffee growers from is not a named human producer');
 const corvus=results.find(x=>x.roaster==='Corvus Echo Gesha');
 if(corvus?.status==='parsed'){
  assert.match(corvus.name||'',/Echo Gesha/i);
