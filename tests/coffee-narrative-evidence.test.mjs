@@ -6,7 +6,7 @@ const target='https://www.corvuscoffee.com/products/echo-gesha';
 const base='<html><head><meta property="og:type" content="product"><meta property="og:title" content="Echo Gesha"><meta property="og:site_name" content="Corvus Coffee"></head><body><nav><p>Producer: Wrong Navigation</p></nav><main><h1>Echo Gesha</h1>';
 const tail='<h2>You may also like</h2><h4>Finca Unrelated, Kenya</h4><p>Tasting Notes: Wrong Coffee</p></main><footer>Producer: Wrong Footer</footer></body></html>';
 const echo='<h3>Cascara Infused Carbonic Maceration</h3><h4>Finca Deborah, Panama</h4>'+
- '<p>Jamison Savage has taken the queen of varieties and married her to wine processing, producing some of the most wildly beautiful coffees we have discovered.</p>'+
+ '<p>Jamison Savage has taken the queen of varieties and married her to wine processing, producing some of the most wildly beautiful experimental Geishas we have discovered.</p>'+
  '<p>Echo carries the torch of a well-crafted Carbonic Maceration coffee and elevates it even further. Whole cherries rest in tanks with cascara, pressurized with CO2 to build a pre-fermentation environment, before the coffee is washed clean and dried.</p>'+
  '<p>Tasting notes: Jasmine, Cabernet Grape, and Tropical</p>';
 const parse=body=>extractPublicCoffeeFacts(base+body+tail,{source_url:target});
@@ -37,7 +37,7 @@ test('No grower, farm or processing invented from unrelated paragraphs',()=>{
  '<p>Generic washed coffee advice. The espresso ratio should be 1:2.</p>');
  assert.equal(r.fields.producer,undefined);
  assert.equal(r.fields.process,undefined);
- assert.equal(r.roaster_details.named_producer,undefined);
+ assert.equal(r.roaster_details?.named_producer,undefined);
  assert.equal(r.roaster_recipe,undefined);
 });
 test('A plain Washed field remains Washed even when unrelated prose mentions other methods',()=>{
