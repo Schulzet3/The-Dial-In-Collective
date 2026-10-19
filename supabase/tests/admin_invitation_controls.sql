@@ -69,8 +69,8 @@ begin
  if second_token !~ '^dic-[a-f0-9]{64}$' or (issued->>'max_uses')::integer<>1 then
   raise exception 'Second invitation not single use';
  end if;
- if to_regprocedure('public.dic_admin_issue_invite(text)') is not null
-    or to_regprocedure('private.dic_admin_issue_invite(text)') is not null then
+ if to_regprocedure('public.dic_admin_issue_invite(text,integer)') is not null
+    or to_regprocedure('private.dic_admin_issue_invite(text,integer)') is not null then
   raise exception 'Multi-use invitation overload still accessible';
  end if;
  listing:=public.dic_admin_access_overview();
