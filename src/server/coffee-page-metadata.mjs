@@ -8,17 +8,17 @@ import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 const FIELD_ALIASES={
- origin:['origin','country','country of origin','region','coffee origin','région','location','growing region'],
- elevation_m:['elevation','altitude','elevation m','altitude masl','grown at','altitude (masl)'],
- process:['process','processing','processing method','processing style','traitement','treatment','process method'],
- variety:['variety','varietal','cultivar','varieties','varietals','variété','variété(s)'],
- producer:['producer','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station'],
+ origin:['origin','country','country of origin','region','coffee origin','région','location','growing region','país','pais','país de origen','origine','pays','región'],
+ elevation_m:['elevation','altitude','elevation m','altitude masl','grown at','altitude (masl)','altura','altitud'],
+ process:['process','processing','processing method','processing style','traitement','treatment','process method','proceso','procesamiento','processo'],
+ variety:['variety','varietal','cultivar','cultivars','varieties','varietals','variété','variété(s)','variedad','variedades'],
+ producer:['producer','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station','productor','productora','finca','produtor'],
  roast_level:['roast','roast level','roast profile'],
- tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of','tastes like','flavor profile','flavour profile','cupping notes'],
- release_label:['harvest','harvest year','crop year','lot','lot number','release','release year']
+ tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of','tastes like','flavor profile','flavour profile','cupping notes','notas de cata','notas de sabor','sabores'],
+ release_label:['harvest','harvest year','harvest date','crop year','lot','lot number','release','release year','cosecha','fecha de cosecha']
 };
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
-function keyOf(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
+function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
 function entities(s){
  const replace={'amp':'&','quot':'"','apos':"'",'lt':'<','gt':'>','nbsp':' ','ndash':'–','mdash':'—','bull':'•'};
  return String(s??'').replace(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/gi,(s,key)=>{
@@ -120,13 +120,13 @@ function normalized(field,value){
   // not an ambiguous Washed & Natural blend.
   if(/\b(?:anaerobic[\s-]+natural|natural[\s-]+anaerobic)\b/i.test(s))
    return 'Anaerobic';
-  const norm=s.toLowerCase();
+  const norm=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   // Different components of a blend can have different processes; the
   // canonical single-select field must not silently say "Washed" if the
   // roaster actually says "Washed & Natural".
   const found=[
-   ['Anaerobic',/\banaerobic\b/],['Honey',/\bhoney\b/],
-   ['Washed',/\bwashed\b/],['Natural',/\bnatural\b/]
+   ['Anaerobic',/\b(?:anaerobic|anaerobico|anaerobica)\b/],['Honey',/\b(?:honey|miel)\b/],
+   ['Washed',/\b(?:washed|lavado|lavada)\b/],['Natural',/\bnatural\b/]
   ].filter(([,re])=>re.test(norm)).map(([name])=>name);
   return found.length===1?found[0]:'';
  }
