@@ -101,27 +101,35 @@
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
     "post_release_billing_refresh_needed": false,
     "last_published_release": {
-      "deploy_id": "6ad5197d42cc6608b98712a4",
-      "published_commit_sha": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
-      "published_at_utc": "2026-10-18T19:10:03.616Z",
+      "deploy_id": "6ad599e539cf6e672af21352",
+      "published_commit_sha": "40b97f33bb1d828943e88d88ca0978c37baea18c",
+      "published_at_utc": "2026-10-19T04:17:56.215Z",
       "netlify_status": "ready/current",
       "branch": "development/backend-foundation",
       "context": "production",
       "primary_hostname": "https://app.dialincollective.com",
       "production_requires_netlify_team_sso": false,
       "nonproduction_requires_netlify_team_sso": true,
-      "scanned_files": 221,
+      "scanned_files": 235,
       "secret_scan_matches": 0,
       "published_functions": [
         "coffee-url-preview"
       ],
-      "previous_function_binary_unchanged": true,
       "planned_cost_credits": 15,
-      "actual_credits_deducted": "UNKNOWN: connector does not expose live billing",
-      "current_remaining_credits": "UNKNOWN: owner-managed",
+      "actual_credits_deducted": "UNKNOWN: provider connector cannot read actual billing; owner manages credit usage",
+      "current_remaining_credits": "UNKNOWN; last 940 remaining owner screenshot Oct 17 is historical",
       "approval_exhausted": true,
-      "encrypted_backup_source_pin": "570e05529eb7874bbcd216502acb1139755bfa01",
-      "encrypted_backup_run": 39157642936
+      "release_scope": "Community release grouping + admin single-use invitation/Remove Access controls, two approved migrations and one deploy",
+      "supabase_migrations_applied": [
+        "20261019041437_dic_community_release_context",
+        "20261019041452_dic_admin_beta_invitation_controls"
+      ],
+      "encrypted_backup_source_pin": "1b7bc0716961999f550d1805797f3100615e9188",
+      "encrypted_backup_run": 39198804626,
+      "encrypted_backup_artifact_id": 12163455524,
+      "postrelease_offsite_delivery": "NOT VERIFIED: push-only archive is not scheduled Apps Script courier",
+      "real_account_acceptance": "Owner-admin Generate Code and Revoke Code PASS, live nonadmin/redeem/Remove-Restore still pending",
+      "acceptance_report": "docs/LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md"
     },
     "owner_waived_balance_check_for_this_release": {
       "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
@@ -136,13 +144,14 @@
     "current_known_plan_expires": "2026-11-14",
     "owner_assumes_proactive_low_credit_notice": true,
     "last_individually_authorized_release": {
-      "scope": "one tested secure offline PWA shell, owner-bound offline shot logging and 192/512 PNG Home Screen icon production release",
-      "owner_reply": "yes proceed.",
+      "scope": "Limited invitation-only technical pilot; two migration SQL files and one production Netlify publish",
+      "owner_reply": "Apply the two pending migrations, publish the updated app, and complete real-account acceptance testing please. Approved to deploy.",
       "authorized_in_current_conversation": true,
-      "commit": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
-      "deploy_id": "6ad5197d42cc6608b98712a4",
+      "commit": "40b97f33bb1d828943e88d88ca0978c37baea18c",
+      "deploy_id": "6ad599e539cf6e672af21352",
       "authorization_exhausted": true,
-      "next_release_requires_new_explicit_owner_approval": true
+      "next_release_requires_new_explicit_owner_approval": true,
+      "remaining_acceptance": "Real first/second account redemption, nonadmin denial and Remove/Restore with data retention are pending"
     },
     "previous_published_release": {
       "deploy_id": "6ad443189d070656c813ef63",
@@ -220,6 +229,29 @@
         "planned_cost_credits": 15,
         "actual_credits_deducted": "UNKNOWN: Netlify connector does not expose live billing",
         "approval_exhausted": true
+      },
+      {
+        "deploy_id": "6ad5197d42cc6608b98712a4",
+        "published_commit_sha": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
+        "published_at_utc": "2026-10-18T19:10:03.616Z",
+        "netlify_status": "ready/current",
+        "branch": "development/backend-foundation",
+        "context": "production",
+        "primary_hostname": "https://app.dialincollective.com",
+        "production_requires_netlify_team_sso": false,
+        "nonproduction_requires_netlify_team_sso": true,
+        "scanned_files": 221,
+        "secret_scan_matches": 0,
+        "published_functions": [
+          "coffee-url-preview"
+        ],
+        "previous_function_binary_unchanged": true,
+        "planned_cost_credits": 15,
+        "actual_credits_deducted": "UNKNOWN: connector does not expose live billing",
+        "current_remaining_credits": "UNKNOWN: owner-managed",
+        "approval_exhausted": true,
+        "encrypted_backup_source_pin": "570e05529eb7874bbcd216502acb1139755bfa01",
+        "encrypted_backup_run": 39157642936
       }
     ],
     "historical_scoped_owner_authorizations": [
@@ -229,6 +261,17 @@
         "authorized_in_current_conversation": true,
         "commit": "d54f84103285cfb0185e1d806efe9e8c6064b72d",
         "deploy_id": "6ad5030aaae6cba42933a800",
+        "authorization_exhausted": true,
+        "next_release_requires_new_explicit_owner_approval": true
+      }
+    ],
+    "historical_consumed_release_authorizations": [
+      {
+        "scope": "one tested secure offline PWA shell, owner-bound offline shot logging and 192/512 PNG Home Screen icon production release",
+        "owner_reply": "yes proceed.",
+        "authorized_in_current_conversation": true,
+        "commit": "415136c3a31d67f97b9ec53cb96b5b057eb704fe",
+        "deploy_id": "6ad5197d42cc6608b98712a4",
         "authorization_exhausted": true,
         "next_release_requires_new_explicit_owner_approval": true
       }
@@ -301,5 +344,38 @@
       "authenticated_live_member_acceptance": "pending #34, #9, #11",
       "permission_for_next_release": false
     }
-  ]
+  ],
+  "latest_publication_20261019": {
+    "name": "Technical pilot Community grouping and administrator single-use invites",
+    "deploy_id": "6ad599e539cf6e672af21352",
+    "source_sha": "40b97f33bb1d828943e88d88ca0978c37baea18c",
+    "status": "READY/current",
+    "published_at_utc": "2026-10-19T04:17:56.215Z",
+    "versions": [
+      "20261019041437",
+      "20261019041452"
+    ],
+    "authorization_consumed": true,
+    "estimated_deploy_credits": 15,
+    "actual_debit": "UNKNOWN",
+    "owner_monitoring": "Locked owner-managed balance; do not request screenshots",
+    "live_data": {
+      "shots": 16,
+      "notes": 16,
+      "community": 2,
+      "members": 2,
+      "admins": 1,
+      "migrations": 30,
+      "active_codes": 0
+    },
+    "qa": {
+      "owner_portal_visible": true,
+      "code_generated": 1,
+      "code_revoked": 1,
+      "code_redeemed": 0,
+      "other_member_lifecycle_untested": true
+    },
+    "postrelease_backup": "GitHub encrypted push run 39198804626 PASS; scheduled Drive delivery pending",
+    "report": "docs/LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md"
+  }
 }

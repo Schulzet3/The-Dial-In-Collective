@@ -1,4 +1,9 @@
-# Community nested shots / canonical release sections — production release preparation
+# Community nested shots / canonical release sections — historical production preparation
+
+## CURRENT PRODUCTION STATUS (2026-10-19 UTC)
+
+This Community SQL was applied under hosted version `20261019041437_dic_community_release_context` with exact original SHA-1 source bytes retained and published in READY Netlify deploy `6ad599e539cf6e672af21352`, source `40b97f33`. SQL confirms 2 eligible Community rows and unchanged personal 16 shots/notes; anonymous Community RPC EXECUTE remains denied. The separately deployed owner administrator generated and revoked one disposable invitation in genuine signed-in production, but authentic **ordinary-member Community browse/privacy and cross-account boundary tests remain open**. Historical “not applied/not published” statements below describe the pre-release preparation stage only. [Live QA handoff](LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md) · [#11](https://github.com/Schulzet3/The-Dial-In-Collective/issues/11) · [#36](https://github.com/Schulzet3/The-Dial-In-Collective/issues/36).
+
 
 **Source inspection:** 2026-10-18 UTC. **State: SOURCE AND ISOLATED TESTS READY; NOT APPLIED; NOT PUBLISHED.** Owner approved doing everything needed to **prepare** for production, not changing live SQL or publishing. The production release requires **separate explicit consent** to (1) apply one scoped SQL function replacement and (2) make one credit-aware Netlify production deployment. Do not infer production launch authorization from approval of preparation.
 

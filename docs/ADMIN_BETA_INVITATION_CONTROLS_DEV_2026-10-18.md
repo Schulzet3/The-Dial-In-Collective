@@ -1,4 +1,9 @@
-# Administrator invitation codes & permanent member access — development handoff
+# Administrator invitation codes & permanent member access — historical development handoff
+
+## CURRENT PRODUCTION UPDATE: ISSUANCE AND REVOCATION PASS (2026-10-19 UTC)
+
+The earlier development-only feature has been **installed and published** with hosted Supabase migration `20261019041452_dic_admin_beta_invitation_controls` and READY Netlify production deployment `6ad599e539cf6e672af21352` at source `40b97f33`. Owner authenticated into the production admin portal, saw Beta Invitations and Member Access, **generated** one disposable Pilot QA invitation, then **revoked** it. Independent read-only hosted metadata: `max_uses=1`, no automatic expiry, never redeemed, 1 issue/1 revoke audit record, **0 active invitations**; existing 16 shots/notes, 2 Community contributions, 2 admitted members and 1 protected admin retained. **NOT YET VERIFIED** live first redemption/reuse denial or live Remove Access/Restore Access with history, ordinary-account denial, or clipboard copy action. This is a partial live acceptance, not complete beta. [Current verified handoff](LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md) · issues [#24](https://github.com/Schulzet3/The-Dial-In-Collective/issues/24) and [#36](https://github.com/Schulzet3/The-Dial-In-Collective/issues/36) remain OPEN. Original “development only/not published” language below is a historical stage, not today's deployment status. Owner-approved single release was consumed; no further publish is authorized.
+
 
 ## LATEST OWNER DECISION — reversible removal only, preserve all shots (2026-10-18)
 
