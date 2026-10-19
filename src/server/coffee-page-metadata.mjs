@@ -3,6 +3,8 @@
 import {extractRoastVisualEvidence} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
+import {extractCoffeeBlendEvidence} from './coffee-blend-evidence.mjs';
+import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 const FIELD_ALIASES={
@@ -468,7 +470,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  }
  // Fallback extractors may directly set a field; a conflict remains final.
  for(const field of conflicts)delete fields[field];
- const roaster_recipe=explicitEspressoRecipe(product);
+ // An explicitly listed multi-component blend cannot be represented as one
+ // country or processing category. Retain component facts for review.
+ const blend=extractCoffeeBlendEvidence(product);
+ if(blend){
+  roaster_details.blend_components=blend.display;
+  if(blend.multi_country)delete fields.origin;
+  if(blend.multi_process)delete fields.process;
+ }
+ const roaster_recipe=explicitEspressoRecipe(product)||extractProductEspressoReference(product);
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
