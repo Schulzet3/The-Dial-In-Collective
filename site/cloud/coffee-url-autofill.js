@@ -24,6 +24,9 @@ const reasons={
 export function coffeeUrlPreviewMarkup(result){
  if(!result?.ok)return `<div class="coffee-url-message" role="status">${e(reasons[result?.reason]||'We could not retrieve trustworthy details. Enter the coffee information manually.')}</div>`;
  const fields=autofillFields.filter(([name])=>typeof result.fields?.[name]==='string'&&result.fields[name].trim());
+ const claudeQuotes=Array.isArray(result.claude_evidence)?result.claude_evidence.slice(0,12).filter(x=>x&&typeof x.evidence==='string'&&typeof x.field==='string'):[];
+ const claudeMarkup=result.claude_enhancement==='supplemented'?'<details class="coffee-url-supplement"><summary>Claude source evidence ('+claudeQuotes.length+')</summary><dl class="coffee-url-fields">'+claudeQuotes.map(x=>'<div><dt>'+e(x.field.replace(/_/g,' '))+'</dt><dd>'+e(x.evidence)+'</dd></div>').join('')+'</dl><p class="helper">These are unverified interpretations of quoted roaster text. Check the page and bag before saving.</p></details>':
+  result.claude_enhancement==='unavailable'?'<p class="helper" role="status">Claude was unavailable. Deterministic webpage details remain available; you can finish manually.</p>':'';
  const existing=result.match?.classification==='exact_verified'?'This page also matches an existing verified coffee. Choosing Add Coffee will reuse its canonical record after the identity check.':
   result.match?.classification==='needs_confirmation'?'A similar verified coffee exists. You will be asked to confirm the right release before linking any records.':'';
  const official=result.source==='official_roaster_product_metadata';
@@ -57,6 +60,7 @@ export function coffeeUrlPreviewMarkup(result){
   ${result.roast_hint?`<p class="helper" role="note"><strong>Roast graphic:</strong> ${e(result.roast_hint)}</p>`:''}
   ${publishedRecipe?`<p class="helper"><strong>Roaster's published espresso ${fullRecipe?'recipe':'reference'}:</strong> ${publishedRecipe}. Reference only; not applied or saved automatically.</p>`:''}
   ${extras.length?`<details class="coffee-url-supplement"><summary>Other published details (${extras.length})</summary><dl class="coffee-url-fields">${extras.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.roaster_details[key])}</dd></div>`).join('')}</dl><p class="helper">Source details are for review. Agtron-derived levels may assume Gourmet ground-coffee readings; supplementary measurements are not saved as coffee fields.</p></details>`:''}
+  ${claudeMarkup}
   ${existing?`<p class="helper coffee-match-alert">${e(existing)}</p>`:''}
   <p class="helper">Available details filled into the form. Review or correct them, then click Add Coffee.</p>
  </section>`;
