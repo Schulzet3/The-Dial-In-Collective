@@ -11,8 +11,8 @@ test('Corvus blended espresso retains components, dose tolerance, output/time ra
   '<p>Tasting Notes: Dark Chocolate, Red Berries</p>'+
   '<p>Espresso Parameter Recommendation:</p><p>Dose: 18g +/- 0.2g<br>Output: 40g-48g<br>Time: 24s-32s<br>Water temp: Just off boil (around 200° in Colorado)</p>');
  assert.equal(r.ok,true);
- assert.equal(r.fields.origin,undefined);
- assert.equal(r.fields.process,undefined);
+ assert.equal(r.fields.origin,'Ethiopia, Colombia, Peru');
+ assert.equal(r.fields.process,'Other/Unknown');
  assert.equal(r.fields.roast_level,undefined);
  assert.match(r.roaster_details.blend_components,/40% Ethiopia.*20% Colombia.*20% Peru/);
  assert.equal(r.fields.tasting_notes,'Dark Chocolate, Red Berries');
@@ -82,6 +82,6 @@ test('Unverified multi-process roaster blends preserve exact parts without fake 
   '<p>Roast: Medium</p>');
  assert.match(r.roaster_details.blend_components,/60% Brazil.*40% Guatemala/);
  assert.equal(r.fields.process,undefined);
- assert.equal(r.fields.origin,undefined);
+ assert.equal(r.fields.origin,'Brazil, Guatemala');
  assert.equal(r.fields.roast_level,'Medium');
 });
