@@ -35,7 +35,7 @@ export function coffeeUrlPreviewMarkup(result){
  const detailsLabels={
   agtron:'Roaster Agtron',agtron_scale:'Agtron Scale',agtron_sample:'Agtron Sample',production_roaster:'Production Roaster',recommended_rest:'Recommended Rest',
   drying_method:'Drying Method',harvest_season:'Harvest Season',
-  preferred_extraction:'Preferred Extraction',processing_detail:'Processing Detail'
+  preferred_extraction:'Preferred Extraction',processing_detail:'Processing Detail',farm:'Farm / Estate',named_producer:'Named Producer / Grower'
  };
  const extras=Object.entries(detailsLabels).filter(([key])=>typeof result.roaster_details?.[key]==='string'&&result.roaster_details[key]);
  const fullRecipe=!!(result.roaster_recipe&&Number.isFinite(result.roaster_recipe.dose_g)&&Number.isFinite(result.roaster_recipe.yield_g)&&Number.isFinite(result.roaster_recipe.time_s_min));
