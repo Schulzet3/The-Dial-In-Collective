@@ -137,7 +137,7 @@ function normalized(field,value){
    ['Anaerobic',/\b(?:anaerobic|anaerobico|anaerobica)\b/],['Honey',/\b(?:honey|miel)\b/],
    ['Washed',/\b(?:washed|lavado|lavada)\b/],['Natural',/\bnatural\b/]
   ].filter(([,re])=>re.test(norm)).map(([name])=>name);
-  if(/^(?:other\\?\/unknown|other|unknown|mixed)$/i.test(norm.trim()))return 'Other/Unknown';
+  if(/^(?:other\s*\/\s*unknown|other|unknown|mixed)$/i.test(norm.trim()))return 'Other/Unknown';
   // Explicitly combined methods (not an anaerobic-natural single process)
   // use the approved dropdown's Other/Unknown while retaining source text.
   if(found.length>1&&/\s(?:and|&)\s|\s*[+,\/|]\s*|\s*;\s*|\s*,\s*/i.test(norm))
