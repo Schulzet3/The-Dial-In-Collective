@@ -3142,5 +3142,29 @@
       "public beta launch or unrelated product features"
     ],
     "publication": "PENDING final CI/mobile/visual checks and actual Netlify READY/current SHA; release approval applies only once"
+  },
+  "current_owner_extractor_deterministic_only_20261019": {
+    "decision_id": "EXTRACTOR-DETERMINISTIC-ONLY-20261019",
+    "status": "Locked",
+    "order": "Explicitly later owner decision than EXTRACTOR-CLAUDE-BYOK-20261019",
+    "owner_source": "2026-10-19 20:24 UTC GitHub issue #33 owner-request supersession",
+    "supersedes_only": "2026-10-19 proposal to implement new Claude/AI API runtime, on-device key settings, backend semantic-text payload, Claude calls and related browser/build/QA tests in the current extractor release.",
+    "decision": "Completely remove the newly introduced Claude integration and focus on making the existing deterministic product-page extractor as robust as possible, including product-bound narrative, separate named farms/producers, multi-component country deduplication in source order, honest multi-process handling and exact roaster espresso recipes.",
+    "blend_rules": {
+      "origin": "Keep all distinct source-confirmed countries/regions in the existing text field in first-seen order; do not flatten to one country or repeat names.",
+      "producer": "Keep distinct explicitly named producers only; never infer a producer from unlabeled lot/component names.",
+      "mixed_process": "When source explicitly shows more than one method, set canonical process to existing Other/Unknown; retain each method and complete component detail as review-only evidence."
+    },
+    "unchanged": [
+      "All 79 baseline Locked decisions and earlier source evidence remain preserved",
+      "Future V1 AI provider Claude-only and optional device-local BYOK architectural rule remains historical but is not deployed or active now",
+      "12 allowed URL preview claims/24h and >=30s shared account cooldown",
+      "Authenticated HTTPS pinned-DNS SSRF and 900 KB guards",
+      "One-click blank-only autofill, review, Add Coffee and nonverified Pending logic",
+      "No new Supabase migration, Edge deployment, member data modification, API purchase or fee",
+      "Owner's single production deploy authorization remains valid only for tested deterministic-only bundle"
+    ],
+    "current_state": "No new AI runtime in branch; deterministic-only source and tests staged, not published. The earlier same-day AI approval/implementation is superseded in this scope.",
+    "tracked_issue": 33
   }
 }
