@@ -68,6 +68,8 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Exercise 390px phone UX with synthetic accounts
         run: python tests/browser/cloud_owner_qa.py
+      - name: Exercise owner-only admin invitations and member access in 390px Chromium
+        run: python tests/browser/admin_invitation_qa.py
       - name: Retain synthetic phone screenshots for review
         if: always()
         uses: actions/upload-artifact@v7
