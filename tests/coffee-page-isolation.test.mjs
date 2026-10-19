@@ -27,10 +27,10 @@ test('stale structured process and current explicit process are withheld on conf
  const r=parse('<script type="application/ld+json">'+JSON.stringify(product)+'</script><main><h1>Current Coffee</h1><p>Process: Natural</p></main>');
  assert.equal(r.fields.process,undefined);assert.ok(r.conflicts.includes('process'));
 });
-test('a compound process does not fall back to the washed component from stale metadata',()=>{
+test('explicit mixed processing resolves to Other/Unknown despite stale one-process metadata',()=>{
  const product={"@type":"Product",name:'Current Coffee',url,additionalProperty:[{name:'Process',value:'Washed'}]};
  for(const body of ['<p>Process: Washed & Natural</p>','<h2>Process</h2><p>Washed & Natural</p>']){
   const r=parse('<script type="application/ld+json">'+JSON.stringify(product)+'</script><main><h1>Current Coffee</h1>'+body+'</main>');
-  assert.equal(r.fields.process,undefined);assert.ok(r.conflicts.includes('process'));
+  assert.equal(r.fields.process,'Other/Unknown');assert.ok(!r.conflicts?.includes('process'));
  }
 });
