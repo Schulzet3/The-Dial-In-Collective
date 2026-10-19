@@ -9,6 +9,12 @@ import assert from 'node:assert/strict';
 
 const targets=[
  ['Corvus Echo Gesha','https://www.corvuscoffee.com/products/echo-gesha'],
+ ['Corvus Dead Reckoning Blend','https://www.corvuscoffee.com/products/dead-reckoning-blend'],
+ ['Corvus Dead Reckoning Subscription','https://www.corvuscoffee.com/products/dead-reckoning-subscription'],
+ ['Corvus Hacienda Mario','https://www.corvuscoffee.com/products/hacienda-la-esmeralda-mario'],
+ ['Tim Wendelboe Gachatha','https://timwendelboe.no/products/gachatha'],
+ ['Tim Wendelboe Gachatha Espresso','https://timwendelboe.no/products/gachatha-espresso'],
+ ['Echo Raven Mexico','https://echoravencoffee.com/products/mexico'],
  ['Proud Mary Ovidio Gomez','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
  ['Queen City Banko Gotiti Washed','https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia?variant=52819513737447'],
  ['Queen City canonical identity control','https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia'],
@@ -62,10 +68,28 @@ for(let i=0;i<targets.length;i+=2){
 console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
  parsed:results.filter(x=>x.status==='parsed').length,
  blocked:results.filter(x=>x.status!=='parsed').map(x=>({roaster:x.roaster,status:x.status})),
- note:'Two Queen City product links represent the same coffee. Current anonymous HTTPS source checks are distinct from authenticated browser acceptance. No user quota was consumed.'}));
+ note:'Some same-roaster URLs intentionally represent separate releases or formats. Two Queen City product links represent the same coffee. Current anonymous HTTPS source checks are distinct from authenticated browser acceptance. No user quota was consumed.'}));
 
 // This deliberately opt-in live acceptance reports drift instead of a green
 // run that merely printed an error. The broader roaster inventory stays visible.
+const dead=results.find(x=>x.roaster==='Corvus Dead Reckoning Blend');
+if(dead?.status==='parsed'){
+ assert.match(dead.details.blend_components||'',/40% Ethiopia.*20% Colombia.*20% Peru/i,
+  'Dead Reckoning should retain exact multi-country blend list');
+ assert.equal(dead.origin,undefined,'A multi-origin blend is not a single-country coffee');
+ assert.equal(dead.process,undefined,'Mixed natural and washed components have no single process');
+ assert.equal(dead.recipe?.dose_g,18,'Keep explicit 18g espresso dose');
+ assert.equal(dead.recipe?.yield_g_min,40,'Keep roaster-published output range lower bound');
+ assert.equal(dead.recipe?.yield_g_max,48,'Keep roaster-published output range upper bound');
+ assert.equal(dead.recipe?.time_s_min,24,'Keep roaster-published extraction start time');
+ assert.equal(dead.recipe?.time_s_max,32,'Keep roaster-published extraction end time');
+} else console.log('[DIC CORVUS BLEND LIMIT] '+JSON.stringify({status:dead?.status}));
+const tim=results.find(x=>x.roaster==='Tim Wendelboe Gachatha');
+if(tim?.status==='parsed'){
+ assert.match(tim.variety||'',/SL28/i);
+ assert.match(tim.tasting_notes||'',/Blackcurrants/i);
+ assert.equal(tim.process,'Washed');
+} else console.log('[DIC TIM WENDELBOE LIMIT] '+JSON.stringify({status:tim?.status}));
 const corvus=results.find(x=>x.roaster==='Corvus Echo Gesha');
 if(corvus?.status==='parsed'){
  assert.match(corvus.name||'',/Echo Gesha/i);
