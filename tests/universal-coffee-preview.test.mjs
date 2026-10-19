@@ -162,7 +162,7 @@ test('blend descriptors never get forced into a single inaccurate processing cat
   additionalProperty:[{name:'Process',value:'Washed & Natural'}]};
  const r=extractPublicCoffeeFacts(wrap(data),{source_url:productURL});
  assert.equal(r.ok,true);
- assert.equal(r.fields.process,undefined);
+ assert.equal(r.fields.process,'Other/Unknown');
  const html='<html><body><h1>Blend 9.2</h1><p>washed & natural process</p></body></html>';
  const fallback=extractPublicCoffeeFacts(html,{source_url:productURL});
  assert.equal(fallback.fields.process,undefined);
