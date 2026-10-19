@@ -1,8 +1,11 @@
-# Invite-only technical pilot — production deployed, authentic member acceptance pending
+# Invite-only technical pilot — published; real owner invitation issue and revoke passed
+
+**Latest production QA:** Owner successfully generated and revoked a disposable `Pilot QA` code; read-only Supabase verification confirms one issue, one revoke, 0 usable active codes, 16 shots/notes and 2 Community observations intact. [Verified QA and handoff](LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md). Real verified-email redemption, nonadmin restrictions, Remove/Restore and postrelease scheduled offsite receipt remain open in issues #24/#36. This does not constitute completion of full beta, nor does it authorize any future deployment or change owner-managed Netlify credits.
+
 
 ## UPDATE: ONE APPROVED LIMITED PILOT RELEASE PUBLISHED (2026-10-19 UTC)
 
-Both release context and admin invitation migrations now installed, exact Supabase assigned versions `20261019041437` and `20261019041452`, live 30 historical migrations. [READY/current Netlify production](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad599e539cf6e672af21352) from `40b97f33`, no private data loss and no new real codes issued. Isolated SQL/Node/mobile tests pass, live signed-in admin and second-member checks remain **pending** before inviting beta testers. Original production hold below is a preserved historical proposal, not a current denial of the now-consumed release approval. #24/#36 carry the remaining acceptance. Existing §41 core-beta acceptance and all Locked decisions remain intact.
+Both release context and admin invitation migrations now installed, exact Supabase assigned versions `20261019041437` and `20261019041452`, live 30 historical migrations. [READY/current Netlify production](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad599e539cf6e672af21352) from `40b97f33`, no private data loss; subsequently one disposable test invitation was issued and revoked, leaving no active codes. Isolated SQL/Node/mobile tests pass, live signed-in admin and second-member checks remain **pending** before inviting beta testers. Original production hold below is a preserved historical proposal, not a current denial of the now-consumed release approval. #24/#36 carry the remaining acceptance. Existing §41 core-beta acceptance and all Locked decisions remain intact.
 
 ## HISTORICAL OWNER DECISION — LIMITED TECHNICAL PILOT MILESTONE APPROVED; THEN UNPUBLISHED (2026-10-18)
 

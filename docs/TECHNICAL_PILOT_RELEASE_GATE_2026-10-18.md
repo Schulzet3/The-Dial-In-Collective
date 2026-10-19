@@ -1,3 +1,18 @@
+## UPDATE: LIVE INVITE GENERATE/REVOKE ACCEPTED; MEMBER LIFECYCLE PENDING (2026-10-19)
+
+- [x] Actual signed-in owner sees Beta Invitations/Generate Code and Member Access.
+- [x] Owner-generated disposable Pilot QA invite has server-side `max_uses=1`, `expires_at=NULL`, and one issue audit record.
+- [x] Owner revoked disposable test code; independent SQL confirms one revoked and zero currently usable invitations, one revoke audit record, and unchanged 16 shots/notes, 2 Community observations, 2 active members, 1 admin.
+- [ ] Real verified-email first redemption / different second account cannot reuse; revoked-code negative redemption not tested.
+- [ ] Clipboard Copy Code actual success not tested.
+- [ ] Authenticated nonadmin access denied from Admin Portal/RPCs and only sanitized eligible Community visible: not live tested.
+- [ ] Production Remove Access then Restore Access retains account, personal and anonymous Community data and prevents gated access while disabled: not live tested.
+- [ ] New postrelease scheduled Drive courier encrypted backup independently verified: still pending (GitHub push-only backup success is not delivery proof).
+
+**Canonical evidence and handoff:** [live admin acceptance](LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md), issues #24/#36. Completed one-time Netlify deploy approval is **consumed**. Historical unchecked prelaunch criteria below are preserved as prior snapshots, not a claim that migrations/deployment have not happened. No new permission to deploy, modify members or expose secrets.
+
+---
+
 ## RELEASE COMPLETED; REAL-ACCOUNT ACCEPTANCE REMAINS OPEN (2026-10-19 UTC)
 
 **This document's older unchecked pre-release list is historical and is superseded on completed gates by this verified release receipt.** Following separate owner consent, both migrations applied successfully as **`20261019041437` Community** and **`20261019041452` admin controls**, original SQL bytes matched; migrated historical source manifest now 30/30. [Netlify deploy `6ad599e539cf6e672af21352`](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad599e539cf6e672af21352) READY/current, exact source `40b97f33bb1d828943e88d88ca0978c37baea18c`. Owner's Drive `backup.age` matched pre-SQL encrypted GitHub backup entry byte-for-byte; newest source pin updated on backup-only main. All 16 shots/16 notes, 2 admitted users, 1 admin, 2 eligible Community contributions preserved; no actual user/invite/member edits. 30 total migrations, anonymous user cannot execute Community browse or admin issue. SQL/Node/mobile final CI all passed; Netlify secret scan empty. **The one-off release permission has been consumed**; additional publishing is not authorized automatically. Netlify credit balance continues owner-managed with no recurring request.
