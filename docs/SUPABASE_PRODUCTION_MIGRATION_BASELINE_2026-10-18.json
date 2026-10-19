@@ -1,9 +1,9 @@
 {
-  "status": "Read-only snapshot of actual production-applied migrations, not permission to edit production history",
-  "checked_on_utc_date": "2026-10-18",
+  "status": "Production-applied 30 migration exact-version/name/source-byte baseline verified after owner-approved pilot release SQL; historical first 28 unchanged.",
+  "checked_on_utc_date": "2026-10-19",
   "authority": "Supabase supabase_migrations.schema_migrations: version/name/statements[1], git blob SHA-1 calculated using bytea (does not modify schema)",
-  "last_applied_version": "20261018064703",
-  "hosted_applied_count": 28,
+  "last_applied_version": "20261019041452",
+  "hosted_applied_count": 30,
   "records": [
     {
       "version": "20261009190246",
@@ -172,7 +172,18 @@
       "name": "dic_contextual_quality_community_ui",
       "bytes": 20069,
       "git_blob_sha": "801221c8a492edfd19441c9403e463f043361e22"
+    },
+    {
+      "version": "20261019041437",
+      "name": "dic_community_release_context",
+      "bytes": 4966,
+      "git_blob_sha": "868c1963a2917a69007504699cbc0efb6ae6faa9"
+    },
+    {
+      "version": "20261019041452",
+      "name": "dic_admin_beta_invitation_controls",
+      "bytes": 10214,
+      "git_blob_sha": "782d470485601e2a7f9f898e23e5dbd091a58647"
     }
-  ],
-  "unapplied_candidate": "20261018221843_dic_community_release_context.sql"
+  ]
 }
