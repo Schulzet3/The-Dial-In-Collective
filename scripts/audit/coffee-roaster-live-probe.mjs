@@ -76,8 +76,10 @@ const dead=results.find(x=>x.roaster==='Corvus Dead Reckoning Blend');
 if(dead?.status==='parsed'){
  assert.match(dead.details.blend_components||'',/40% Ethiopia.*20% Colombia.*20% Peru/i,
   'Dead Reckoning should retain exact multi-country blend list');
- assert.equal(dead.origin,undefined,'A multi-origin blend is not a single-country coffee');
- assert.equal(dead.process,undefined,'Mixed natural and washed components have no single process');
+ assert.equal(dead.origin,'Ethiopia, Colombia, Peru','Preserve each distinct source-backed origin once');
+ assert.equal(dead.process,'Other/Unknown','Keep multi-method blends in approved Other/Unknown selector');
+ assert.equal(dead.details.processing_detail,'Natural, Washed','Retain all observed blend methods');
+ assert.equal(dead.producer,undefined,'Component lot names alone are not producer proof');
  assert.equal(dead.recipe?.dose_g,18,'Keep explicit 18g espresso dose');
  assert.equal(dead.recipe?.yield_g_min,40,'Keep roaster-published output range lower bound');
  assert.equal(dead.recipe?.yield_g_max,48,'Keep roaster-published output range upper bound');
