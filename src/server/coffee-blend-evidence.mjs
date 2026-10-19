@@ -36,11 +36,14 @@ export function extractCoffeeBlendEvidence(html){
  if(typeof html!=='string'||html.length>1_000_000)return null;
  const page=productMarkup(html);
  const marker=/<(?:p|h[2-6]|strong|b)\b[^>]{0,350}>\s*(?:<strong\b[^>]*>)?\s*Components?\s*:\s*(?:<\/strong>\s*)?<\/(?:p|h[2-6]|strong|b)>/i.exec(page)||
-  /<(?:p|strong|b)\b[^>]*>\s*Components?\s*:\s*(?:<br\s*\/?>)/i.exec(page);
+  /<(?:p|strong|b)\b[^>]*>\s*Components?\s*:\s*(?:<br\s*\/?>)/i.exec(page)||
+  /<(?:p|li)\b[^>]*>\s*Components?\s*:\s*(?=\d{1,3}\s*%\s+)/i.exec(page);
  if(!marker)return null;
  let tail=page.slice(marker.index+marker[0].length,marker.index+marker[0].length+2500);
  tail=tail.split(/<(?:h[2-6]|p|strong)\b[^>]*>\s*(?:tasting\s+notes?|espresso(?:\s+parameter)?|brew(?:ing)?\s+tips|about this coffee)\s*:/i)[0];
- const rows=tail.replace(/<\/(?:p|li|div)>|<br\s*\/?>/gi,'\n').split(/\n/).map(clean).filter(Boolean).slice(0,20);
+ const rows=tail.replace(/<\/(?:p|li|div)>|<br\s*\/?>/gi,'\n')
+  .split(/\n|\s*[;]\s*(?=\d{1,3}\s*%)|\s+\+\s+(?=\d{1,3}\s*%)/)
+  .map(clean).filter(Boolean).slice(0,20);
  const components=[];
  for(const row of rows){
   const m=/^(\d{1,3})\s*%\s+(.{3,180})$/.exec(row);
