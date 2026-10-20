@@ -17,16 +17,37 @@ export function auditLatestCommit({paths,subject}){
   errors.push('Release marker commit must only contain reviewed documentation/authorization, not last-second code');
  return errors;
 }
+// Audit *every* pushed commit, not only HEAD: an old unjournaled commit
+// cannot be hidden by a later documentation-only commit in the same push.
+export function auditCommitRange(commits){
+ return commits.flatMap(c=>auditLatestCommit(c).map(error=>(c.sha||'unknown')+': '+error));
+}
 export function verifyLatestCommit(){
- let subject='',out='';
+ const base=process.env.DIC_BASE_SHA?.trim(),head=process.env.DIC_HEAD_SHA?.trim()||'HEAD';
+ const isSha=s=>/^[0-9a-f]{40}$/.test(s||'');
+ const hashes=[];
+ const run=(args)=>execFileSync('git',args,{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
  try{
-  subject=execFileSync('git',['log','-1','--format=%s'],{encoding:'utf8'}).trim();
-  out=execFileSync('git',['show','--pretty=format:','--name-only','HEAD'],{encoding:'utf8'});
- }catch(error){throw Error('Git commit metadata unavailable; cannot validate required continuity: '+String(error.message));}
- const paths=out.split(/\r?\n/).filter(Boolean);
- const errors=auditLatestCommit({subject,paths});
+  // Pushes provide event.before, PRs provide base SHA; a fresh branch's all-zero
+  // before has no ancestor to compare, so check HEAD and flag that limitation.
+  if(isSha(base)&&!/^[0]+$/.test(base)){
+   if(!isSha(head))throw Error('Missing exact Git head SHA');
+   run(['merge-base','--is-ancestor',base,head]);
+   const all=run(['rev-list','--reverse',base+'..'+head]).split(/\r?\n/).filter(Boolean);
+   if(!all.length||all.length>400)throw Error('Git commit range missing or exceeds bounded 400-commit audit');
+   hashes.push(...all);
+  }else hashes.push(head);
+ }catch(error){throw Error('Git commit range unavailable; fail closed rather than skip missing approvals: '+String(error.message));}
+ const entries=[];
+ for(const hash of hashes){
+  try{
+   entries.push({sha:hash,subject:run(['log','-1','--format=%s',hash]),
+    paths:run(['diff-tree','--root','--no-commit-id','--name-only','-r',hash]).split(/\r?\n/).filter(Boolean)});
+  }catch(error){throw Error('Cannot inspect commit '+hash+': '+String(error.message));}
+ }
+ const errors=auditCommitRange(entries);
  if(errors.length)throw Error('Continuity checkpoint failed:\n'+errors.map(s=>' - '+s).join('\n'));
- return {subject,pathCount:paths.length,checkpointRequired:paths.some(p=>/^(site\/|scripts\/|tests\/)/.test(p))};
+ return {commitCount:entries.length,lastCommit:entries.at(-1)?.sha,checkedPaths:entries.reduce((n,e)=>n+e.paths.length,0)};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{console.log('[DIC same-commit continuity] PASS '+JSON.stringify(verifyLatestCommit()));}
