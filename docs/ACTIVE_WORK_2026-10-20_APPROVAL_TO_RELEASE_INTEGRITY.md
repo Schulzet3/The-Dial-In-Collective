@@ -101,3 +101,7 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 ## Safe initial owner-grant/consumption files
 - Created empty `docs/RELEASE_AUTHORIZATIONS.json` (NO owner production grant) and `docs/RELEASE_CONSUMPTION.json` (NO claimed releases). Only the release controller, after independently verified protection and provider cutover, may produce a release commit with a claimed grant. These files contain no tokens. No development code is published.
+
+## Netlify production build now fail-closes on consumed owner grant
+- Updated `scripts/netlify/should-ignore-build.mjs`: **all** development branch pushes, including legacy `[dic-publish]` markers, are ignored. Only `release/production` with exact `Release DIC: DIC-YYYYMMDD-<unique-id> [dic-publish]` subject, current valid credit policy, verified approval coverage, matching single-use `docs/RELEASE_CONSUMPTION.json` latest claim and its explicit, time-limited source-bound owner grant may build. Unknown/missing grant/claim or tampered ID fails closed.
+- Updated `tests/netlify-credit-guard.test.mjs` with dedicated-branch baseline and rejected dev/legacy marker scenarios. Existing current **live Netlify still uses previously published old branch/guard** until separately authorized provider cutover; this development code alone cannot change that setting. Pending CI after this commit.

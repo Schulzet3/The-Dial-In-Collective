@@ -7,6 +7,7 @@
 import {readFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {checkRepository,readTracked} from '../audit/approval-coverage.mjs';
+import {assertProductionClaim} from '../release/one-use-claim.mjs';
 
 export function decide({context,branch,subject,ledger,today}){
   // Do not publish previews or production without a deliberate, separately
@@ -17,9 +18,11 @@ export function decide({context,branch,subject,ledger,today}){
     return {ignore:true,reason:'Owner release hold: no unapproved Netlify preview or branch publication'};
   if(context!=='production')
     return {ignore:true,reason:'Unknown/unapproved Netlify context'};
-  if(branch!=='development/backend-foundation')
-    return {ignore:true,reason:'Not the approved owner preview production branch'};
-  if(!/^Release DIC: .+ \[dic-publish\]$/.test(subject||''))
+  // Development is NEVER a production publish source. Only an atomic approved
+  // update of the dedicated release ref may trigger a Netlify production build.
+  if(branch!=='release/production')
+    return {ignore:true,reason:'Not the dedicated atomic production release branch'};
+  if(!/^Release DIC: DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63} \[dic-publish\]$/.test(subject||''))
     return {ignore:true,reason:'No explicit, tested release marker'};
   if(!ledger||ledger.provider!=='Netlify'||!Array.isArray(ledger.snapshots)||!ledger.snapshots.length)
     return {ignore:true,reason:'Netlify credit ledger unavailable'};
@@ -75,9 +78,16 @@ function run(){
     // A commit marker alone is NOT the owner's new release authorization.
     // Fail closed when inventory/code/test anchors or release consent drift.
     checkRepository();
-    const approved=JSON.parse(readTracked('docs/APPROVAL_COVERAGE_MATRIX.json'));
-    if(approved.production?.owner_approval_for_new_release!=='GRANTED')
-     throw Error('No fresh, separately recorded owner authorization in approval matrix');
+    const grants=JSON.parse(readTracked('docs/RELEASE_AUTHORIZATIONS.json'));
+    const consumed=JSON.parse(readTracked('docs/RELEASE_CONSUMPTION.json'));
+    if(grants.schema_version!==1||!Array.isArray(grants.grants))
+     throw Error('No versioned owner grant file');
+    const last=consumed.consumed?.at(-1);
+    if(!last)throw Error('No consumed release claim');
+    const approved=grants.grants.filter(x=>x.id===last.id);
+    if(approved.length!==1)throw Error('Missing or duplicated owner grant');
+    assertProductionClaim({ledger:consumed,grant:approved[0],commitSubject:subject,
+     sourceSha:last.tested_source_sha,nowIso:new Date().toISOString()});
    }catch(error){
     decision={ignore:true,reason:'Approval or implementation coverage failed: '+String(error.message).slice(0,260)};
    }
