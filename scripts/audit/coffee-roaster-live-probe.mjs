@@ -1,4 +1,6 @@
-// Controlled one-shot public product URL smoke check. Includes a real late-story
+// Controlled one-shot public product URL smoke check.
+// Re-run after static Ecwid/Shopify product transport and matched-field changes;
+// old source observations are not assumed to remain accurate. Includes a real late-story
 // PERC Mara Estate check beyond the short 60 KB display-token scan. No member credentials,
 // Supabase preview quota, raw HTML persistence, production writes or publishing.
 // Uses the SAME connection-time DNS-pinned, bounded HTTPS guard as previews.
