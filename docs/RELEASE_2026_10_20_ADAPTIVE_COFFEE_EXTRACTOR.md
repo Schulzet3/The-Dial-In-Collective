@@ -1,5 +1,5 @@
 # Owner-authorized release: adaptive coffee extractor + approved current UI — October 20, 2026
-**STATUS: preflight tests passing; production deployment not yet requested by a publish marker.** Update this same document after provider-confirmed READY/current and actual source SHA, not on a projected result.
+**STATUS: PUBLISHED, independent Netlify provider READY/current confirmed October 20, 2026, 18:49:49.810 UTC.** One owner-approved release marker issued and consumed. Live signed-in member field-by-field acceptance and billed credits remain unverified.
 
 ## Owner-approved single release scope
 Owner explicitly requested: implement recommendations 1–3, test everything, and publish all confirmed changes to the live app on GitHub, Supabase and Netlify.
@@ -18,10 +18,10 @@ Publish exactly once via the established GitHub-linked production branch `develo
 - **Fail-safe:** If Git-connected Netlify returns failed/blocked/not-READY, do NOT mark published. Keep prior READY version; report blocker. If it goes READY but browser data is wrong, fix forward with a *separately authorized* release; do not silently perform an extra publish.
 
 ## Postflight receipt (to complete only after provider evidence)
-- Actual published Netlify deploy: **PENDING**
-- Actual production source SHA: **PENDING**
-- Recorded `[dic-publish]` marker commit: **PENDING**
-- Secret scan, function availability and direct read-only live tests: **PENDING**
-- Supabase preflight/postflight counts: **preflight 4/18/18/2, postflight PENDING**
-- Encrypted backup main branch source pin + new artifact: **PENDING**
-- Post-release source-to-bag owner acceptance on native phone: **UNVERIFIED**.
+- Actual published Netlify deploy: **`6ad7b7b7d5e244c52f066869` — READY/current**, confirmed via Netlify deploy and project APIs.
+- Actual production source SHA: **`3eec4836192463c53bb9b911a02a7b5afce5ea05`**; after preflight the only commits were the audit report and release-marker `CURRENT_STATUS` documentation. No application source change after tested `b2385d5`.
+- Recorded `[dic-publish]` marker commit: **[`3eec48361924`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/3eec4836192463c53bb9b911a02a7b5afce5ea05)**, single marker on `development/backend-foundation`; no second marker authorized.
+- Secret scan and function: **264 scanned files, 0 secrets; `coffee-url-preview` registered in deployed Netlify function list**. Direct signed-in front-end extraction still **UNVERIFIED**; provider shows application production access is without Netlify team SSO (nonproduction SSO retained).
+- Supabase preflight/postflight counts: **4 coffees / 18 shots / 18 notes / 2 sanitized Community rows, unchanged**; also 6 library entries, 5 enabled members, 1 admin, 0 orphan shot notes. No migrations, Edge functions, Auth, live coffee or shot data changed in this release.
+- Encrypted backup main branch source pin: **PENDING** (last successful snapshot on `main` references previous production source; re-pin to the exact new SHA under backup-operations safeguards). Latest successful encrypted GitHub artifact from [39438651913](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39438651913) exists, but latest offsite Drive and isolated-archive restore **UNVERIFIED**.
+- Post-release source-to-bag owner acceptance on native phone: **UNVERIFIED**. Netlify actual bill debit and current balance cannot be independently read. Do not issue another release marker under this consumed owner approval. See [full source audit and remaining gaps](AUDIT_AND_RELEASE_PREFLIGHT_2026-10-20.md).
