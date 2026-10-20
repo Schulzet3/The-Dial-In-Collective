@@ -8,7 +8,7 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','alternate-recipes','community','coffee-match-ui','coffee-url-autofill']:
+ for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
@@ -358,10 +358,11 @@ with sync_playwright() as p:
  page.wait_for_function('!document.querySelector(".community-review-prompt")')
  checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
 
- # Synthetic alternate-family scenario: exercise the *actual* CloudApp render
- # and version-checked existing Make Current action without real member writes.
+ # One visible recipe despite distinct internal successful families. The
+ # first auto-Current is not an explicit favorite; changing stated preferences
+ # changes automatic selection without mutating any production-style records.
  page.evaluate("""() => {
-  const r=rawFixture();
+  const r=rawFixture();r.preferences.tasting_preferences='bright citrus clarity';
   r.families=[
    {id:'family-short',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.0}},created_at:TIME},
    {id:'family-long',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.8}},created_at:TIME}
@@ -378,20 +379,27 @@ with sync_playwright() as p:
   window.__app.state=window.__Modules.mapping.hydrate(window.__app.raw);
   window.__app.view='coffees';window.__app.expanded.add('coffee');window.__app.render();
  }""")
- assert page.locator('.alternate-recipes').count()==1
- assert not page.locator('.alternate-recipes').evaluate('(d)=>d.open'), 'Alternates should be collapsed'
- assert page.get_by_text('Alternate Dialed-In Recipes (1)').count()==1
- page.locator('.alternate-recipes > summary').click()
- assert page.locator('.alternate-recipe').count()==1
- assert '1:2.83' in page.locator('.alternate-recipe-head').inner_text()
- assert page.locator('.alternate-recipe [data-action=make-current]').count()==1
+ assert page.locator('.alternate-recipes, [data-action="choose-family"]').count()==0
+ assert page.locator('.recipe-grid').count()==1
+ assert '1:2.83' in page.locator('.recipe-grid').first.inner_text()
  assert page.evaluate("window.__raw.recipePreferences[0].current_family_id")=='family-short'
- page.locator('.alternate-recipe [data-action=make-current]').click()
- page.wait_for_function("window.__raw.recipePreferences[0].current_family_id==='family-long'")
- page.wait_for_function("window.__app.state.setups[0].workspaces.version.coffees.coffee.currentFamilies.Turbo==='family-long'")
- assert page.locator('.alternate-recipes').count()==1
- checks.append('Collapsed alternate-family list and existing revision-checked Make Current work end to end in 390px synthetic CloudApp')
-
+ assert page.evaluate("window.__raw.recipePreferences[0].favorite_shot_id")==None
+ checks.append('Two successful families yield one visible, clarity-matched recipe without a preference write')
+ page.evaluate("window.__app.state.preferences='rich body syrupy';window.__app.render()")
+ assert '1:2.03' in page.locator('.recipe-grid').first.inner_text()
+ page.evaluate("window.__app.state.preferences='bright citrus clarity';window.__app.render()")
+ assert '1:2.83' in page.locator('.recipe-grid').first.inner_text()
+ checks.append('Changing local preference adjusts only the automatic family choice')
+ page.get_by_text('Shot History (4)',exact=True).click()
+ page.locator('[data-action="shot-expand"][data-id="short-b"]').click()
+ assert page.locator('.shot-body [data-action="make-current"][data-id="short-b"]').count()==1
+ page.locator('.shot-body [data-action="make-current"][data-id="short-b"]').click()
+ page.wait_for_function("window.__raw.recipePreferences[0].favorite_shot_id==='short-b'")
+ page.wait_for_function("window.__app.state.setups[0].workspaces.version.coffees.coffee.currentFamilies.Turbo==='family-short'")
+ assert '1:2.03' in page.locator('.recipe-grid').first.inner_text()
+ assert len(page.evaluate("window.__raw.shots"))==4
+ assert page.locator('.alternate-recipes').count()==0
+ checks.append('Explicit Make Current preference overrides clarity heuristic and preserves both families and all shot records')
 
  # Account switches must not reuse a previous account's still-running sync.
  switch=page.evaluate("""async () => {
