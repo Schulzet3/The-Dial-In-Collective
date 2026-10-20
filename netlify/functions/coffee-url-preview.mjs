@@ -4,6 +4,7 @@
 import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {extractEcwidProduct,ecwidProductRequest,sameEcwidTitle} from '../../src/server/coffee-ecwid-snapshot.mjs';
+import {shopifyProductRequest,extractShopifyProduct,mergeShopifyPreview} from '../../src/server/coffee-shopify-ajax.mjs';
 
 const json=(value,status=200)=>new Response(JSON.stringify(value),{
  status,headers:{'Content-Type':'application/json;charset=utf-8','Cache-Control':'no-store',
@@ -75,7 +76,14 @@ export function createPreviewHandler({
    let preview=knownEcwid?await extractEcwidProduct(finalUrl,'',{readJson,extract}):null;
    if(!preview?.ok){
     const page=await readHtml(validated.toString());
-    if(!page?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
+    if(!page?.ok){
+     // Some Shopify pages exceed the HTML bound or refuse HTML, while their
+     // public exact-handle product JSON may still be safely accessible.
+     const fromShopify=shopifyProductRequest(finalUrl)?
+      await extractShopifyProduct(finalUrl,{readJson,extract}):null;
+     if(!fromShopify?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
+     preview=fromShopify;
+    }else{
     finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
     const embeddedEcwid=!knownEcwid?ecwidProductRequest(finalUrl,page.html):null;
     if(embeddedEcwid)
@@ -86,6 +94,11 @@ export function createPreviewHandler({
      // heading or an unrelated product card as the selected coffee.
      if(embeddedEcwid&&preview?.ok&&!sameEcwidTitle(preview.fields?.name,embeddedEcwid.expectedName))
       preview={ok:false,reason:'ambiguous_or_missing_product'};
+    }
+    if(shopifyProductRequest(finalUrl)&&(!preview?.ok||!preview.fields?.tasting_notes)){
+     const fromShopify=await extractShopifyProduct(finalUrl,{readJson,extract});
+     preview=mergeShopifyPreview(preview,fromShopify);
+    }
     }
    }
    if(!preview?.ok)return json({ok:false,reason:preview?.reason||'ambiguous_or_missing_product'});

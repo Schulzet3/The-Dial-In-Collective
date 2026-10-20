@@ -5,6 +5,7 @@ import {EventEmitter} from 'node:events';
 import {safeCoffeeUrl,isGlobalIpv4,guardedLookup,fetchPublicCoffeeHtml,fetchPublicCoffeeJson,MAX_HTML_BYTES} from '../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {ecwidProductRequest,extractEcwidSnapshotData,extractEcwidProduct,sameEcwidTitle} from '../src/server/coffee-ecwid-snapshot.mjs';
+import {shopifyProductRequest,extractShopifyAjaxData,extractShopifyProduct,mergeShopifyPreview} from '../src/server/coffee-shopify-ajax.mjs';
 import {createPreviewHandler,config} from '../netlify/functions/coffee-url-preview.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
@@ -451,4 +452,79 @@ test('unknown Ecwid store shell uses product snapshot first, not shop-wide SEO',
  assert.equal(result.fields.origin,'Brazil');
  assert.equal(pages,1);
  assert.deepEqual(called,['https://storefront.ecwid.com/product-page/12345678/987654321/static-code']);
+});
+
+test('Shopify Ajax canonical product handle and locale are strictly validated',()=>{
+ const paths=[
+  ['https://somecoffee.com/products/hambela','https://somecoffee.com/products/hambela.js'],
+  ['https://somecoffee.com/collections/espresso/products/hambela?variant=123','https://somecoffee.com/products/hambela.js'],
+  ['https://somecoffee.com/en-ca/products/hambela','https://somecoffee.com/en-ca/products/hambela.js']
+ ];
+ for(const [source,dest] of paths)assert.equal(shopifyProductRequest(source)?.url,dest);
+ for(const input of ['https://somecoffee.com/collections/espresso','https://somecoffee.com/admin/api/products/hambela',
+  'https://somecoffee.com/products/hambela.json','https://somecoffee.com/products/hambela?token=ok#fragment',
+  'http://somecoffee.com/products/hambela','https://127.0.0.1/products/hambela'])
+  assert.equal(shopifyProductRequest(input),null,input);
+});
+test('Shopify public product JSON parses only the exact handle and explicit source labels',()=>{
+ const request=shopifyProductRequest('https://coffee.example-shop.com/products/wuri');
+ const payload={title:'Wuri',handle:'wuri',vendor:'Example Roaster',
+  description:'<p>Origin: Ethiopia<br>Process: Washed</p>'+
+   '<p>Variety: Heirloom</p><p>Tasting Notes: Mango, mandarin, sugarcane</p>',
+  tags:['Roast Level: Light','Coffee','Seasonal']};
+ const parsed=extractShopifyAjaxData(payload,request);
+ assert.equal(parsed?.fields.name,'Wuri');
+ assert.equal(parsed.fields.roaster,'Example Roaster');
+ assert.equal(parsed.fields.origin,'Ethiopia');
+ assert.equal(parsed.fields.process,'Washed');
+ assert.equal(parsed.fields.variety,'Heirloom');
+ assert.equal(parsed.fields.roast_level,'Light');
+ assert.equal(parsed.fields.tasting_notes,'Mango, mandarin, sugarcane');
+ assert.equal(parsed.fields.producer,undefined);
+ assert.equal(extractShopifyAjaxData({...payload,handle:'unrelated'},request),null);
+ assert.equal(extractShopifyAjaxData({...payload,description:'<script>malicious</script>Origin: Ethiopia'},request)?.ok,true);
+ assert.equal(extractShopifyAjaxData({...payload,description:'x'.repeat(20001)},request)?.fields.origin,undefined);
+});
+test('Shopify independent source disagreement is withheld instead of silently merged',()=>{
+ const previous={ok:true,source:'unverified_public_page',
+  fields:{name:'Wuri',roaster:'Example Roaster',origin:'Ethiopia',process:'Washed',tasting_notes:''},
+  available:['name','roaster','origin','process']};
+ const ajax={ok:true,fields:{name:'Wuri',origin:'Colombia',process:'Washed',tasting_notes:'Peach, mango'}};
+ const combined=mergeShopifyPreview(previous,ajax);
+ assert.equal(combined.ok,true);
+ assert.equal(combined.fields.origin,undefined);
+ assert.deepEqual(combined.conflicts,['origin']);
+ assert.equal(combined.fields.process,'Washed');
+ assert.equal(combined.fields.tasting_notes,'Peach, mango');
+ assert.equal(mergeShopifyPreview(previous,{ok:true,fields:{name:'Not Wuri',origin:'Brazil'}}),previous);
+});
+test('Shopify fallback retrieves a bounded public JSON product when HTML source unavailable',async()=>{
+ const url='https://my-roaster.coffee/products/berry-lot';
+ const data={handle:'berry-lot',title:'Berry Lot',vendor:'My Roaster',
+  description:'<p>Origin: Kenya</p><p>Tasting Notes: Blackcurrant, bergamot</p>'};
+ let htmlReads=0,jsonReads=0;
+ const apiFetch=async path=>({ok:true,json:async()=>path.endsWith('/auth/v1/user')?
+  identityJson():path.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:{allowed:true}});
+ const handler=createPreviewHandler({apiFetch,env:approvedEnv,
+  readHtml:async()=>{htmlReads++;return {ok:false,reason:'page_too_large'};},
+  readJson:async path=>{jsonReads++;assert.equal(path,'https://my-roaster.coffee/products/berry-lot.js');return {ok:true,json:JSON.stringify(data)};}});
+ const req=new Request('https://app.dialincollective.com/api/coffee-preview',{
+  method:'POST',headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',
+   'origin':'https://app.dialincollective.com'},body:JSON.stringify({source_url:url})});
+ const result=await (await handler(req)).json();
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.name,'Berry Lot');
+ assert.equal(result.fields.origin,'Kenya');
+ assert.equal(result.fields.tasting_notes,'Blackcurrant, bergamot');
+ assert.equal(htmlReads,1);assert.equal(jsonReads,1);
+ assert.equal(result.verification,'unverified');
+});
+test('Shopify public JSON is fetched with pinned TLS and no credentials',async()=>{
+ const url='https://example-roaster.org/products/wuri';
+ const mock=mockRequest({type:'application/json',body:JSON.stringify({title:'Wuri',handle:'wuri',vendor:'Example Roaster'})});
+ const result=await extractShopifyProduct(url,{readJson:p=>fetchPublicCoffeeJson(p,{request:mock.request})});
+ assert.equal(result?.fields.name,'Wuri');
+ assert.equal(mock.seen[0].servername,'example-roaster.org');
+ assert.equal(mock.seen[0].path,'/products/wuri.js');
+ assert.equal(Object.keys(mock.seen[0].headers).some(k=>/authorization|cookie|apikey/i.test(k)),false);
 });
