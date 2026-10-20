@@ -67,7 +67,7 @@ export async function extractShopifyProduct(raw,{
 }={}){
  const request=shopifyProductRequest(raw);if(!request)return null;
  try{
-  const response=await readJson(request.url);
+  const response=await readJson(request.url,{shopifyProduct:true});
   if(!response?.ok||typeof response.json!=='string'||Buffer.byteLength(response.json)>MAX_HTML_BYTES)return null;
   return extractShopifyAjaxData(JSON.parse(response.json),request,{extract});
  }catch{return null;}

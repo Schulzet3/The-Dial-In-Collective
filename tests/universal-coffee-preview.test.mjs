@@ -528,3 +528,23 @@ test('Shopify public JSON is fetched with pinned TLS and no credentials',async()
  assert.equal(mock.seen[0].path,'/products/wuri.js');
  assert.equal(Object.keys(mock.seen[0].headers).some(k=>/authorization|cookie|apikey/i.test(k)),false);
 });
+
+test('Shopify product .js MIME compatibility does not execute arbitrary JavaScript',async()=>{
+ const url='https://coffee-example.com/products/ethiopia.js';
+ const valid=mockRequest({type:'application/javascript; charset=utf-8',
+  body:JSON.stringify({handle:'ethiopia',title:'Ethiopia',vendor:'Roaster'})});
+ const read=await fetchPublicCoffeeJson(url,{shopifyProduct:true,request:valid.request});
+ assert.equal(read.ok,true);
+ assert.deepEqual(JSON.parse(read.json),{handle:'ethiopia',title:'Ethiopia',vendor:'Roaster'});
+ assert.equal(valid.seen[0].headers.Accept,'application/json,text/javascript,application/javascript');
+ assert.equal((await fetchPublicCoffeeJson(url,{request:valid.request})).reason,'not_html');
+ const js=mockRequest({type:'text/javascript',body:'globalThis.exploit=true;'});
+ const rejected=await extractShopifyProduct('https://coffee-example.com/products/ethiopia',{
+  readJson:uri=>fetchPublicCoffeeJson(uri,{shopifyProduct:true,request:js.request})
+ });
+ assert.equal(rejected,null,'Executable script is never evaluated, only strict JSON is parsed');
+ assert.equal((await fetchPublicCoffeeJson('https://coffee-example.com/static/other.js',
+  {shopifyProduct:true,request:valid.request})).reason,'invalid_url');
+ assert.equal((await fetchPublicCoffeeJson(url,{shopifyProduct:true,
+  request:mockRequest({type:'text/html',body:'<html>wrong</html>'}).request})).reason,'not_html');
+});
