@@ -42,7 +42,7 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  if(!result?.ok||norm(result.fields?.name)!==norm(data.title))return null;
  return result;
 }
-export function mergeShopifyPreview(base,extra){
+export function mergePublicProductPreview(base,extra){
  if(!extra?.ok)return base;
  if(!base?.ok)return extra;
  if(norm(base.fields?.name)!==norm(extra.fields?.name))return base;
@@ -62,6 +62,8 @@ export function mergeShopifyPreview(base,extra){
   ...(conflicts.size?{conflicts:[...conflicts].sort()}:{}),
   ...(base.roaster_recipe?{}:extra.roaster_recipe?{roaster_recipe:extra.roaster_recipe}:{})};
 }
+// Backwards-compatible name for existing extractor consumers/tests.
+export const mergeShopifyPreview=mergePublicProductPreview;
 export async function extractShopifyProduct(raw,{
  readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts
 }={}){

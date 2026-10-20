@@ -6,6 +6,7 @@ import {safeCoffeeUrl,isGlobalIpv4,guardedLookup,fetchPublicCoffeeHtml,fetchPubl
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {ecwidProductRequest,extractEcwidSnapshotData,extractEcwidProduct,sameEcwidTitle} from '../src/server/coffee-ecwid-snapshot.mjs';
 import {shopifyProductRequest,extractShopifyAjaxData,extractShopifyProduct,mergeShopifyPreview} from '../src/server/coffee-shopify-ajax.mjs';
+import {wooProductRequest,extractWooStoreData,extractWooProduct} from '../src/server/coffee-woocommerce-store.mjs';
 import {createPreviewHandler,config} from '../netlify/functions/coffee-url-preview.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
@@ -547,4 +548,59 @@ test('Shopify product .js MIME compatibility does not execute arbitrary JavaScri
   {shopifyProduct:true,request:valid.request})).reason,'invalid_url');
  assert.equal((await fetchPublicCoffeeJson(url,{shopifyProduct:true,
   request:mockRequest({type:'text/html',body:'<html>wrong</html>'}).request})).reason,'not_html');
+});
+
+test('Woo public Store API lookup accepts only exact, secure product slugs',()=>{
+ const url='https://roaster.example-coffee.com/product/ethiopia-ambela/';
+ const target=wooProductRequest(url);
+ assert.equal(target.slug,'ethiopia-ambela');
+ assert.equal(target.api,'https://roaster.example-coffee.com/wp-json/wc/store/v1/products/ethiopia-ambela');
+ for(const src of ['https://roaster.example-coffee.com/wp-admin','https://roaster.example-coffee.com/shop/ethiopia-ambela',
+ 'https://roaster.example-coffee.com/product-category/coffee',
+ 'https://roaster.example-coffee.com/product/coffee?nonce=x#frag','http://roaster.example-coffee.com/product/coffee',
+ 'https://127.0.0.1/product/coffee'])assert.equal(wooProductRequest(src),null,src);
+});
+test('Woo public Store API selects exact published product and bounded attributes, no secrets',()=>{
+ const req=wooProductRequest('https://new-roaster.coffee/product/kenya-sidama');
+ const product={id:123,name:'Kenya Sidama',slug:'kenya-sidama',
+  permalink:'https://new-roaster.coffee/product/kenya-sidama/',
+  description:'<p>Tasting Notes: Lime, cranberry, cacao</p>',
+  short_description:'<p>Origin: Kenya<br>Process: Washed</p>',
+  attributes:[{name:'Roast Level',terms:[{name:'Light'}]},{name:'Variety',terms:[{name:'SL28'}]}]};
+ const out=extractWooStoreData(product,req);
+ assert.equal(out?.ok,true);
+ assert.equal(out.fields.name,'Kenya Sidama');
+ assert.equal(out.fields.origin,'Kenya');
+ assert.equal(out.fields.process,'Washed');
+ assert.equal(out.fields.roast_level,'Light');
+ assert.equal(out.fields.variety,'SL28');
+ assert.equal(out.fields.tasting_notes,'Lime, cranberry, cacao');
+ assert.equal(out.fields.producer,undefined);
+ assert.equal(extractWooStoreData({...product,slug:'someone-else'},req),null);
+ assert.equal(extractWooStoreData({...product,is_password_protected:true},req),null);
+ assert.equal(extractWooStoreData({...product,permalink:'https://other-roaster.com/product/kenya-sidama/'},req),null);
+ assert.equal(extractWooStoreData({...product,permalink:'https://new-roaster.coffee/product/other-coffee/'},req),null);
+});
+test('Woo product JSON fallback honors member admission/quota and strict field source',async()=>{
+ const url='https://new-roaster.coffee/product/kenya-sidama';
+ const product={name:'Kenya Sidama',slug:'kenya-sidama',permalink:url,
+  description:'<p>Origin: Kenya</p><p>Tasting Notes: Lime, cranberry, cacao</p>'};
+ let htmlCalls=0,jsonCalls=0,apiCalls=0;
+ const apiFetch=async endpoint=>{apiCalls++;return {ok:true,json:async()=>endpoint.endsWith('/auth/v1/user')?
+  identityJson():endpoint.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:{allowed:true}};};
+ const handler=createPreviewHandler({apiFetch,env:approvedEnv,
+  readHtml:async()=>{htmlCalls++;return {ok:false,reason:'page_too_large'};},
+  readJson:async endpoint=>{jsonCalls++;assert.equal(endpoint,'https://new-roaster.coffee/wp-json/wc/store/v1/products/kenya-sidama');
+   return {ok:true,json:JSON.stringify(product)};}});
+ const req=new Request('https://app.dialincollective.com/api/coffee-preview',{
+  method:'POST',headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',
+   'origin':'https://app.dialincollective.com'},body:JSON.stringify({source_url:url})});
+ const response=await handler(req),body=await response.json();
+ assert.equal(response.status,200);
+ assert.equal(body.fields.name,'Kenya Sidama');
+ assert.equal(body.fields.origin,'Kenya');
+ assert.equal(body.fields.tasting_notes,'Lime, cranberry, cacao');
+ assert.equal(body.verification,'unverified');
+ assert.equal(htmlCalls,1);assert.equal(jsonCalls,1);assert.equal(apiCalls,3);
+ assert.equal(await extractWooProduct(url,{readJson:async()=>({ok:true,json:'unexpected JS'})}),null);
 });
