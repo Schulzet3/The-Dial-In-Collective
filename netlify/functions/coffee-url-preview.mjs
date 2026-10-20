@@ -1,7 +1,8 @@
 // Authenticated, bounded public HTTPS product metadata preview for any roaster.
 // Unlike canonical verification, it NEVER creates/approves a public coffee.
 // Existing Supabase publishing and trusted source rules are untouched.
-import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-guard.mjs';
+import {safeCoffeeUrl,fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,isCoffeeProductDetailUrl} from '../../src/server/coffee-url-guard.mjs';
+import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {extractEcwidProduct,ecwidProductRequest,sameEcwidTitle} from '../../src/server/coffee-ecwid-snapshot.mjs';
 import {shopifyProductRequest,extractShopifyProduct,mergePublicProductPreview} from '../../src/server/coffee-shopify-ajax.mjs';
@@ -36,7 +37,7 @@ async function restCall(fetcher,base,key,token,path,method='GET'){
  return response.json();
 }
 export function createPreviewHandler({
- apiFetch=fetch,readHtml=fetchPublicCoffeeHtml,readJson,extract=extractPublicCoffeeFacts,env=envDefault
+ apiFetch=fetch,readHtml=fetchPublicCoffeeHtml,readLargeHtml=fetchPublicCoffeeProductRetry,readJson,extract=extractPublicCoffeeFacts,env=envDefault
 }={}){
  return async request=>{
   if(request.method!=='POST')return json({ok:false,reason:'method_not_allowed'},405);
@@ -76,7 +77,16 @@ export function createPreviewHandler({
    let finalUrl=validated.toString();
    let preview=knownEcwid?await extractEcwidProduct(finalUrl,'',{readJson,extract}):null;
    if(!preview?.ok){
-    const page=await readHtml(validated.toString());
+    // One bounded size retry for eligible product-detail URLs only.
+    // The same 15-second budget spans the initial read, safe redirects
+    // and the optional larger retry; normal requests retain the 11s cap.
+    const deadlineAt=Date.now()+15_000;
+    let page=await readHtml(validated.toString(),{deadlineAt});
+    if(page?.reason==='page_too_large'&&
+       isCoffeeProductDetailUrl(validated.toString())&&
+       isCoffeeProductDetailUrl(page.source_url||validated.toString())){
+     page=await readLargeHtml(page.source_url||validated.toString(),{deadlineAt});
+    }
     if(!page?.ok){
      // Some Shopify pages exceed the HTML bound or refuse HTML, while their
      // public exact-handle product JSON may still be safely accessible.
@@ -91,7 +101,11 @@ export function createPreviewHandler({
     if(embeddedEcwid)
      preview=await extractEcwidProduct(finalUrl,page.html,{readJson,extract});
     if(!preview?.ok){
-     preview=extract(page.html,{source_url:finalUrl});
+     const compact=compactCoffeeProductHtml(page.html);
+     preview=extract(compact||page.html,{source_url:finalUrl});
+     // Do not turn a cleaning limitation into a false negative.
+     if(!preview?.ok&&compact&&compact!==page.html)
+      preview=extract(page.html,{source_url:finalUrl});
      // For an identified Ecwid deep link, avoid treating the general shop
      // heading or an unrelated product card as the selected coffee.
      if(embeddedEcwid&&preview?.ok&&!sameEcwidTitle(preview.fields?.name,embeddedEcwid.expectedName))

@@ -54,7 +54,7 @@ function cropProduct(html){
  return body.slice(0,42000);
 }
 export function extractRoastVisualEvidence(html){
- if(typeof html!=='string'||html.length>1_000_000)return {value:null,confidence:'none',source:null,hint:''};
+ if(typeof html!=='string'||html.length>2_000_000)return {value:null,confidence:'none',source:null,hint:''};
  const page=cropProduct(html),found=[],hints=[];
  const offer=(value,source,confidence='explicit')=>{
   const v=normalizeRoastLabel(value)||roastLabelInPhrase(value);

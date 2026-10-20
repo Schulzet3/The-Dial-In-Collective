@@ -7,6 +7,19 @@ import {isIP} from 'node:net';
 import {gunzipSync,inflateSync,brotliDecompressSync} from 'node:zlib';
 
 export const MAX_HTML_BYTES=900_000;
+export const MAX_PRODUCT_RETRY_BYTES=2_000_000;
+// The expanded limit is available ONLY to an explicitly shaped product page.
+// Category and homepage paths must never receive the larger response budget.
+export function isCoffeeProductDetailUrl(raw){
+ const u=safeCoffeeUrl(raw);if(!u)return false;
+ const parts=u.pathname.split('/').filter(Boolean);
+ const tail=parts.at(-1)||'',parent=(parts.at(-2)||'').toLowerCase();
+ if(!/^[a-z0-9][a-z0-9._%+~-]{3,155}$/i.test(tail))return false;
+ if(/^(?:all|coffee|coffees|beans|products|new|featured|collection|collections|shop|store|category|sale|search)$/i.test(tail))return false;
+ if(parent==='shop'||parent==='store')return /-p\d{6,14}$/i.test(tail);
+ return ['product','products','product-page','coffee','coffees','beans'].includes(parent);
+}
+
 const MAX_URL_LENGTH=3000;
 const BLOCKED_TLDS=new Set(['localhost','local','internal','test','invalid','example','onion','arpa','home','lan','corp']);
 function ipv4Parts(ip){
@@ -63,19 +76,34 @@ export function guardedLookup(resolve=systemLookup){
   });
  };
 }
-function decodeBody(bytes,encoding){
+function decodeBody(bytes,encoding,cap){
  try{
-  if(!encoding||encoding==='identity')return bytes;
-  if(encoding==='gzip')return gunzipSync(bytes,{maxOutputLength:MAX_HTML_BYTES});
-  if(encoding==='deflate')return inflateSync(bytes,{maxOutputLength:MAX_HTML_BYTES});
-  if(encoding==='br')return brotliDecompressSync(bytes,{maxOutputLength:MAX_HTML_BYTES});
- }catch{return null;}
- return null;
+  let decoded;
+  // Maximum output is enforced by zlib *during* decompression. A tiny
+  // compression bomb can never inflate unboundedly before the size check.
+  const options={maxOutputLength:cap+1};
+  if(!encoding||encoding==='identity')decoded=bytes;
+  else if(encoding==='gzip')decoded=gunzipSync(bytes,options);
+  else if(encoding==='deflate')decoded=inflateSync(bytes,options);
+  else if(encoding==='br')decoded=brotliDecompressSync(bytes,options);
+  else return {reason:'not_html'};
+  return decoded.length>cap?{reason:'page_too_large'}:{body:decoded};
+ }catch(error){
+  return {reason:error?.code==='ERR_BUFFER_TOO_LARGE'?'page_too_large':'not_html'};
+ }
 }
-export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=guardedLookup(),responseType='html'}={},redirectsRemaining=2){
+export async function fetchPublicCoffeeHtml(raw,{
+ request=https.request,lookup=guardedLookup(),responseType='html',
+ maxBytes=MAX_HTML_BYTES,deadlineAt=null
+}={},redirectsRemaining=2){
  if(!['html','json','shopify_json'].includes(responseType))return {ok:false,reason:'invalid_source'};
  const url=safeCoffeeUrl(raw);
- if(!url)return Promise.resolve({ok:false,reason:'invalid_url'});
+ if(!url)return {ok:false,reason:'invalid_url'};
+ if(maxBytes!==MAX_HTML_BYTES&&
+    !(maxBytes===MAX_PRODUCT_RETRY_BYTES&&responseType==='html'&&isCoffeeProductDetailUrl(url.toString())))
+  return {ok:false,reason:'invalid_source'};
+ const remaining=deadlineAt==null?11_000:Math.min(11_000,Math.floor(deadlineAt-Date.now()));
+ if(remaining<=0)return {ok:false,reason:'source_unavailable'};
  // Narrow HTML-in-JS MIME compatibility to the documented public product
  // endpoint, never general third-party scripts or untrusted executable code.
  if(responseType==='shopify_json'&&!/^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?products\/[a-z0-9][a-z0-9-]{0,155}\.js$/i.test(url.pathname))
@@ -83,16 +111,16 @@ export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=gu
  const result=await new Promise(resolve=>{
   let settled=false;
   const finish=(value)=>{if(settled)return;settled=true;clearTimeout(timer);resolve(value);};
-  const timer=setTimeout(()=>{req?.destroy();finish({ok:false,reason:'source_unavailable'});},11_000);
+  const timer=setTimeout(()=>{req?.destroy();finish({ok:false,reason:'source_unavailable'});},remaining);
   let req;
   try{
    req=request({
     protocol:'https:',hostname:url.hostname,servername:url.hostname,port:443,
     path:url.pathname+url.search,method:'GET',lookup,family:4,agent:false,
-    rejectUnauthorized:true,timeout:10_000,maxHeaderSize:12_000,
+    rejectUnauthorized:true,timeout:Math.min(10_000,remaining),maxHeaderSize:12_000,
     headers:{Accept:responseType==='html'?'text/html,application/xhtml+xml':
      responseType==='shopify_json'?'application/json,text/javascript,application/javascript':'application/json',
-     'Accept-Encoding':'identity',
+     'Accept-Encoding':'gzip, br',
      'User-Agent':'DialInCollective-CoffeePreview/1.0',Connection:'close'}
    },res=>{
     const status=res.statusCode||0;
@@ -107,20 +135,20 @@ export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=gu
      res.destroy();finish({ok:false,reason:'not_html'});return;
     }
     const length=Number(res.headers['content-length']||0);
-    if(length>MAX_HTML_BYTES){res.destroy();finish({ok:false,reason:'page_too_large'});return;}
+    if(length>maxBytes){res.destroy();finish({ok:false,reason:'page_too_large',source_url:url.toString()});return;}
     const chunks=[];let total=0;
     res.on('data',chunk=>{
      total+=chunk.length;
-     if(total>MAX_HTML_BYTES){
-      res.destroy();finish({ok:false,reason:'page_too_large'});return;
+     if(total>maxBytes){
+      res.destroy();finish({ok:false,reason:'page_too_large',source_url:url.toString()});return;
      }
      chunks.push(chunk);
     });
     res.on('end',()=>{
      if(settled)return;
-     const body=decodeBody(Buffer.concat(chunks),String(res.headers['content-encoding']||'').toLowerCase());
-     if(!body){finish({ok:false,reason:'not_html'});return;}
-     if(body.length>MAX_HTML_BYTES){finish({ok:false,reason:'page_too_large'});return;}
+     const decoded=decodeBody(Buffer.concat(chunks),String(res.headers['content-encoding']||'').toLowerCase().trim(),maxBytes);
+     if(!decoded.body){finish({ok:false,reason:decoded.reason,source_url:url.toString()});return;}
+     const body=decoded.body;
      finish({ok:true,...(responseType!=='html'?{json:body.toString('utf8')}:{html:body.toString('utf8')}),source_url:url.toString()});
     });
     res.on('error',()=>finish({ok:false,reason:'source_fetch_failed'}));
@@ -136,7 +164,7 @@ export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=gu
   if(!safeCoffeeUrl(destination))return {ok:false,reason:'redirect_requires_review'};
   // A new HTTPS request independently revalidates and pins its DNS records
   // at connect time. No Supabase credentials, cookies or raw caller headers.
-  return fetchPublicCoffeeHtml(destination,{request,lookup,responseType},redirectsRemaining-1);
+  return fetchPublicCoffeeHtml(destination,{request,lookup,responseType,maxBytes,deadlineAt},redirectsRemaining-1);
  }
  return result.redirect?{ok:false,reason:'redirect_requires_review'}:result;
 }
@@ -147,3 +175,11 @@ export const fetchPublicCoffeeJson=(url,options={})=>{
  const {shopifyProduct=false,...rest}=options;
  return fetchPublicCoffeeHtml(url,{...rest,responseType:shopifyProduct?'shopify_json':'json'});
 };
+
+// Explicit, product-shaped second fetch. Never apply a 2 MB cap to JSON,
+// catalog roots, arbitrary redirects, or the default 900 KB request.
+export function fetchPublicCoffeeProductRetry(raw,options={}){
+ if(!isCoffeeProductDetailUrl(raw))return Promise.resolve({ok:false,reason:'invalid_url'});
+ const {request,lookup,deadlineAt}=options;
+ return fetchPublicCoffeeHtml(raw,{request,lookup,deadlineAt,maxBytes:MAX_PRODUCT_RETRY_BYTES});
+}

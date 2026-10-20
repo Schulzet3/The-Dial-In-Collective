@@ -1,7 +1,7 @@
 // Text parsers must share the same product scope. Structured JSON is read
 // separately; scripts, navigation and recommendation cards are never facts.
 export function productMarkup(html){
- if(typeof html!=='string'||html.length>1_000_000)return '';
+ if(typeof html!=='string'||html.length>2_000_000)return '';
  let page=html.replace(/<!--[\s\S]*?-->/g,' ')
   .replace(/<(script|style|nav|footer|aside|template|noscript)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,' ');
  // Keep product specifications before the H1, which some storefronts use.

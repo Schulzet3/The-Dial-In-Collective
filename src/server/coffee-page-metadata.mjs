@@ -402,7 +402,7 @@ function shopifyProduct(html,target){
  return out;
 }
 export function extractPublicCoffeeFacts(html,{source_url}={}){
- if(typeof html!=='string'||html.length>1_000_000||!source_url)return {ok:false,reason:'invalid_source'};
+ if(typeof html!=='string'||html.length>2_000_000||!source_url)return {ok:false,reason:'invalid_source'};
  const meta=pageMeta(html);
  const all=[...jsonProducts(html),...shopifyProduct(html,source_url)];
  const linked=all.filter(p=>p.url&&samePage(p.url,source_url));

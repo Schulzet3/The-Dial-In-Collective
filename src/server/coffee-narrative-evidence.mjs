@@ -66,7 +66,7 @@ function locationFromHeadings(headings){
  return null;
 }
 export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
- if(typeof html!=='string'||html.length>1_000_000||!name)return {fields:{},details:{}};
+ if(typeof html!=='string'||html.length>2_000_000||!name)return {fields:{},details:{}};
  const page=scopedPage(html);
  if(!page)return {fields:{},details:{}};
  const headings=[...page.matchAll(/<h([2-6])\b[^>]*>([\s\S]{1,500}?)<\/h\1>/gi)]

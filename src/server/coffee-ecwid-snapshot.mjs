@@ -14,7 +14,7 @@ const normalize=value=>String(value||'').normalize('NFKD')
 export const sameEcwidTitle=(a,b)=>!!normalize(a)&&normalize(a)===normalize(b);
 const publicStoreIds=html=>{
  const all=new Set();
- if(typeof html!=='string'||html.length>1_000_000)return all;
+ if(typeof html!=='string'||html.length>2_000_000)return all;
  // An actual script-src reference, not a free-floating marketing mention.
  for(const tag of html.match(/<script\b[^>]{0,1800}>/gi)||[]){
   const source=tag.match(/\bsrc\s*=\s*["'](https:\/\/app\.ecwid\.com\/script\.js\?\d{5,14}(?:&[^"'<>]{0,260})?)["']/i)?.[1];
