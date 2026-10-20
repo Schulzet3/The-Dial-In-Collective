@@ -995,6 +995,19 @@ This is the active dial-in workspace.
 
 A remaining UX detail is open regarding how much brief feedback to show for a non-green shot on an already dialed-in coffee when the user chooses "No, just log it." See Open Questions.
 
+## 19.3 Next-shot recommendation: one deliberate adjustment (owner-approved; presentation pending)
+
+**RECOMMENDATION-SINGLE-INTENTIONAL-CHANGE-20261019 — Locked.** Specific next-shot advice should recommend only **one intentional adjustable setting/attribute** change at a time while stating what otherwise stays constant, so the next comparison more clearly isolates the likely effect. Show an actionable exact adjustment when supported by evidence (e.g. an illustrative finer grind 2.5 → 2.4); otherwise do not invent false precision. This is an approach to better identifying cause and effect, **not a guarantee of controlled scientific causation**. Shot time may change naturally as an *outcome* and should be observed/logged rather than portrayed as an independently fixed setting.
+
+- A starting recipe or established recipe window may still show several target measurements simultaneously; that is not an instruction to change several variables on the next shot.
+- No new rule blocks user-directed experimentation, changes the meaning of a measured result or silently edits previously recorded shots.
+- **Copy constraint — Locked:** Do **not** display the proposed badge/text **“One adjustment at a time”**. It was rejected as visible UI clutter, not as an algorithmic concept. The initial side-by-side Change/Keep metric-card graphic was also too busy.
+- **Layout choice still Open:** Compare **A: unboxed, compact grind delta + one quiet “keep” sentence** vs **B: recommendation wording with only a small lowercase i icon explaining the one-change rationale**, aligned with the accepted grinder-range help interaction. Do not imply either is owner-approved or implemented until a further owner choice. Avoid duplicate explanatory cards and redundant headers.
+- Keep the recommendation panel fast to scan and compatible with the approved Log Shot → Rate → Recommendation flow and all existing Locked evidence, history and experiment rules.
+
+Source: owner conversation on the next-shot recommendation, recorded in [issue #39](https://github.com/Schulzet3/The-Dial-In-Collective/issues/39) on 2026-10-19/20. This decision approves the **principle and prohibition on visible badge copy**, not a specific widget, icon, comparison format, code change, release or production migration.
+
+
 ---
 
 # 20. Shot History
