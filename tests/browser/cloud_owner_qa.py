@@ -125,6 +125,31 @@ with sync_playwright() as p:
  assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')
  assert page.locator('.settings-signout').count()==1;checks.append('Sign Out follows Cloud Sync in Settings')
  assert page.locator('#claude-key-options').count()==0;checks.append('Removed AI settings stay absent on mobile')
+ # Regression for the real approved New Setup control. Source-string checks
+ # alone previously said this was "done" without opening it on a phone.
+ page.get_by_role('button',name='Add Another Setup').click()
+ assert page.locator('#sheet-title').inner_text()=='New Setup'
+ assert page.locator('#new-setup #grinder-range-heading').inner_text()=='Grinder Espresso Range'
+ info=page.locator('#new-setup [data-action="grinder-range-info"]')
+ assert info.count()==1 and info.is_visible()
+ assert info.get_attribute('aria-expanded')=='false'
+ assert page.locator('#grinder-range-description').is_hidden()
+ assert page.locator('#new-setup [name="finest_setting"]').count()==1
+ assert page.locator('#new-setup [name="coarsest_setting"]').count()==1
+ assert page.locator('#new-setup [name="basket_dose_g"]').count()==1
+ info.click()
+ assert info.get_attribute('aria-expanded')=='true'
+ assert page.locator('#grinder-range-description').is_visible()
+ assert page.locator('#grinder-range-description').inner_text()=="Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range."
+ page.screenshot(path=str(OUT/'cloud_new_setup_info_open_390px.png'),full_page=True)
+ info.click()
+ assert info.get_attribute('aria-expanded')=='false'
+ assert page.locator('#grinder-range-description').is_hidden()
+ assert page.locator('#new-setup [name="finest_setting"]').input_value()==''
+ assert page.locator('#new-setup [name="coarsest_setting"]').input_value()==''
+ page.locator('#sheet [data-action="close"]').click()
+ page.get_by_role('button',name='Settings',exact=True).click()
+ checks.append('Real 390px New Setup grinder i opens and closes exact help, preserves inputs; no setup created')
  page.get_by_role('button',name='Rename',exact=True).click();page.locator('#rename-setup [name=name]').fill('Home Espresso')
  page.get_by_role('button',name='Save Name',exact=True).click();page.wait_for_function('!document.querySelector("#sheet").open')
  assert 'Home Espresso' in page.locator('.setup-switch').inner_text();checks.append('Setup can be renamed without recreating equipment')
