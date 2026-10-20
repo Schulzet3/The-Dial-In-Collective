@@ -46,7 +46,10 @@ export function mergeShopifyPreview(base,extra){
  if(!extra?.ok)return base;
  if(!base?.ok)return extra;
  if(norm(base.fields?.name)!==norm(extra.fields?.name))return base;
- const fields={...extra.fields,...base.fields};
+ const fields={...extra.fields};
+ // Empty source fields must not erase supported facts from the other read.
+ for(const [key,value] of Object.entries(base.fields||{}))
+  if(typeof value==='string'?value.trim():value!=null)fields[key]=value;
  const conflicts=new Set([...(base.conflicts||[]),...(extra.conflicts||[])]);
  for(const key of ['origin','roast_level','process','variety','producer','release_label']){
   if(base.fields?.[key]&&extra.fields?.[key]&&norm(base.fields[key])!==norm(extra.fields[key])){
