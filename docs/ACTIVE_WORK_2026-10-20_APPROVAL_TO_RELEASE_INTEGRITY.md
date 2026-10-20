@@ -1,0 +1,32 @@
+# ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
+
+> **Live work journal / recovery checkpoint.** This is created FIRST, before making unrelated app code edits. Append exact checks, code SHAs, failures, issue decisions and next actions as they happen. Live notes do not replace the Master Specification or Decision Ledger. No user secrets or original private chat transcripts are committed here.
+
+## Owner instructions and scope
+
+Owner reported: *"I checked on a registered users phone and confirmed. we can mark 11 closed"* and that **grinder setup i icons / other approved adjustments were not visible**. Asked for all available conversation/document/code/plugin evidence to be reconciled against actual release state; implement **confirmed already-approved** missing items; provide interruption-proof, real-time GitHub work logs and a durable prevention mechanism.
+
+Current request **does not explicitly approve a fresh Netlify production deployment, SQL migration, beta member mutation or paid plan upgrade**; prior one-time release permissions were consumed. Respect owner-Locked per-release approval and reject inconsistent/unverified changes.
+
+## Initial independently verified state
+
+- Application source branch `development/backend-foundation` starts at **`af859b31d5fce87771f926f358d590286ef0942f`**, after #10 (one visible internal-family recipe) development and #11 priority documentation. Backup-only `main` is NOT live application source.
+- Netlify provider's latest READY/current production deploy **`6ad7be20bf672d5c8936f19a`**, exact source **`e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`**. Latest #10 implementation remains unpublished.
+- Repository tree 269 tracked files / ~3.1MB, 49+ active JS/TS modules, 40 existing numbered issues before today's follow-up. All previous test-success claims are scoped to their particular commit; no automatic proof of live owner's installed UI.
+- Owner-Locked grinder helper **`UX-GRINDER-RANGE-INFO-20261019`** is explicitly scoped to **New Setup**, with heading **Grinder Espresso Range**, lowercase i button, exact text: *Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range.* The current live **source at exact deployed SHA already includes this inside `showSetup()`**, `site/cloud/main.js` lines ~282–300 and `site/visual.css` ~240–250. `showSetup` is triggered by both first-run **Set Up My Workspace** and Settings **Add Another Setup**. No equivalent current grinder-range panel exists on **Settings → Your Setup** or Rename Setup. These screens are distinct; do not falsely infer deployed New Setup has no i, or invent permission to expose/edit grinder range in Settings beyond the Locked New Setup scope.
+- Prior UI test `tests/ux-refinements.test.mjs` checks only **source string presence for New Setup**; it did not exercise an installed-device *actual open-and-toggle* with a live signed-in member or Settings. This is a **release acceptance coverage gap**, not proof that the exact published New Setup markup lacked the icon.
+- Issue #39 controls the distinct approved **Next Shot Recommendation** Option A arrow + small lowercase i (earlier B proposal superseded); issue #40 owner explicitly **rejected** other New Coffee, navigation, logging and settings redesign proposals beyond enlarged Autofill button. Do NOT implement rejected mockups in the name of 'all approved changes'.
+- Owner first-hand confirmed real member phone Community browsing today. #11 CLOSED on explicit direction, but genuine signed **two-account API negative privacy/admin isolation** remains separately **OPEN in new [#41](https://github.com/Schulzet3/The-Dial-In-Collective/issues/41)**. Do not claim it passed.
+- Available local project exports through ~Oct16 are **Old Chat.pdf** (194 pages), **Old 2.pdf** (33), **Build Web App.pdf** (66), **DIC Backup Watchdog.pdf** (11), **Recommend email domain hosting.pdf** (16), plus research PDF, two historical ZIP handoffs, old JSX/TXT. They contain ~17,677 extracted lines across 6 PDFs; ~373 user segments identifiable from five exported conversations. **These are NOT every ChatGPT chat ever created.** Other later project conversations are partially available from GitHub issues, recorded decisions and relevant recalled context. Do not claim exhaustive line-by-line access to absent chats.
+- Available original approved pattern in GitHub issue #39 / Decision Ledger, not a speculative retrospective: *Grinder Espresso Range* heading and icon text, minimal Next Shot Option A arrow/info; retain 36px tap target. Numeric grinder-scale direction changes (#17) still unapproved.
+
+## Current work checkpoint — investigation phase (no app changes yet)
+
+**Next actions (resume in order):**
+1. Reconcile available chat extracts/ZIPs, canonical Master Specification and Decision Ledger and GitHub open/closed issue inventory into a traceable approval ledger. Separate explicit user approval from proposed/archived/outstanding work.
+2. Add **real mobile browser interaction coverage** for New Setup i disclosure, responsive contrast and action. Preserve all fields. Diagnose owner route mismatch (New Setup vs existing Settings) and ask ONE exact clarifying question before implementing a new Settings editing screen or re-scoping a Locked decision.
+3. Build a **machine-checkable approval-to-implementation/release matrix** and preflight check that fails if a locked approved UI control disappears or claims live status without proof; wire to GitHub CI and Netlify release guard *without triggering a build*. Make the matrix include each affected screen, exact copy/selector, source test, browser acceptance, production deployed SHA and owner/device confirmation.
+4. Independently inspect current GitHub/Netlify/Supabase read-only, backup and provider/plugin availability; no write to live data. CI/test all changes; log failed attempts and exact run IDs.
+5. Preserve #10 development one-visible-recipe as-is, and ensure every finished change and unresolved issue is recorded in this file, CURRENT_STATUS, Ledger when a decision changes, and issue comments. No premature deploy.
+
+**Limitations:** No tool can guarantee retrieving messages from other conversations never uploaded/connected; GUI/installed PWA user state is not independently accessible from provider source alone. Our mitigation must fail closed, retain source provenance, and explicitly flag missing evidence rather than asserting a mathematically perfect guarantee.
