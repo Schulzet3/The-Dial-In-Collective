@@ -227,18 +227,34 @@
     {
       "id": "controlled_netlify_release",
       "decision_key": "current_owner_pwa_freshness_extractor_reliability_release_20261020",
-      "scope": "Every production publish requires separately approved one-use marker; previous consent consumed",
+      "scope": "Only dedicated release/production can publish after unique grant, consumed claim, exact release marker and valid credits; development always skipped",
       "implementation": "published_source",
       "device_acceptance": "PROVIDER_SHA_READY_CONFIRMED",
       "issue": 38,
       "assertions": [
         {
           "path": "scripts/netlify/should-ignore-build.mjs",
-          "contains": "^Release DIC: .+"
+          "contains": "^Release DIC: DIC-"
         },
         {
           "path": "netlify.toml",
           "contains": "scripts/netlify/should-ignore-build.mjs"
+        },
+        {
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "contains": "release/production"
+        },
+        {
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "contains": "assertProductionClaim"
+        },
+        {
+          "path": "scripts/release/one-use-claim.mjs",
+          "contains": "planSingleUseClaim"
+        },
+        {
+          "path": "tests/one-use-git-race.test.mjs",
+          "contains": "exactly ONE winner"
         }
       ]
     }
