@@ -324,6 +324,13 @@ function productHeading(html){
  const distinct=[...new Set(matches.map(x=>x.toLowerCase()))];
  return distinct.length===1?matches[0]:'';
 }
+// A shop-wide SEO heading on a deep Ecwid/Wix URL is not proof that any
+// individual coffee is selected. Never invent product identity from it.
+function genericStorefrontHeading(value){
+ const s=clean(value,180);
+ return /^(?:store|shop|catalog|online store|products?|all products?|shop all)(?:\s*[|:\u2013\u2014-].*)?$/i.test(s)||
+  /^.{2,90}?\s*[:|\u2013\u2014-]\s*(?:store|shop|catalog|online store|products?|all products?)$/i.test(s);
+}
 function removeSiteSuffix(title,site){
  const raw=clean(title,200),siteName=clean(site,120);
  if(!siteName||!raw.toLowerCase().endsWith(siteName.toLowerCase()))return raw;
@@ -391,6 +398,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const ogType=String(meta['og:type']||'');
   if(/^product(?:\.|$)/i.test(ogType)||likelyPath){
    let title=productHeading(html)||removeSiteSuffix(meta['og:title']||'',meta['og:site_name']);
+   if(genericStorefrontHeading(title))title='';
    let brand=meta['og:site_name']||'';
    // Onyx does not emit a conventional Product JSON-LD/H1/og:title on the
    // observed product page. Its canonical URL matches the exact handle and

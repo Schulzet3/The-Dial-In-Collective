@@ -275,3 +275,27 @@ test('public product snapshot JSON shares safe pinned TLS and bounded reads',asy
  assert.equal((await fetchPublicCoffeeHtml(url,{request:req.request})).reason,'not_html');
  assert.equal((await fetchPublicCoffeeJson('https://127.0.0.1/secret',{request:req.request})).reason,'invalid_url');
 });
+
+test('Wix/Ecwid shop-shell SEO title must not become a nonexistent coffee',()=>{
+ const url='https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068';
+ const shell='<html><head><title>Mango Tree Coffee: Store</title>'+
+  '<meta property="og:title" content="Mango Tree Coffee: Store">'+
+  '<meta property="og:site_name" content="mangotreecoffee">'+
+  '<meta property="og:type" content="website"></head><body>'+
+  '<main><p>Shop</p><p>Another coffee</p></main></body></html>';
+ const preview=extractPublicCoffeeFacts(shell,{source_url:url});
+ assert.equal(preview.ok,false);
+ assert.equal(preview.reason,'ambiguous_or_missing_product');
+});
+test('real product evidence remains eligible even when site OG title says Store',()=>{
+ const url='https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068';
+ const html='<html><head><meta property="og:title" content="Mango Tree Coffee: Store">'+
+  '<meta property="og:site_name" content="Mango Tree Coffee">'+
+  '<meta property="og:type" content="website"></head><body>'+
+  '<main><h1>Mango Tree Blend</h1><p>Origin: Colombia, Brazil</p>'+
+  '<p>Tasting Notes: Chocolate, caramel</p></main></body></html>';
+ const preview=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(preview.ok,true);
+ assert.equal(preview.fields.name,'Mango Tree Blend');
+ assert.equal(preview.fields.origin,'Colombia, Brazil');
+});
