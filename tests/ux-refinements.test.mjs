@@ -123,10 +123,12 @@ test('New Setup keeps grinder range copy behind an accessible lowercase i contro
 test('approved Option A arrow with i disclosure preserves prior setup helper',async()=>{
  const main=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  const css=await readFile(new URL('../site/visual.css',import.meta.url),'utf8');
- assert.match(main,/Next Shot Recommendation<\/span><button type="button" class="inline-info-button"/);
+ assert.match(main,/next-shot-label">\$\{advice\.next\?\x27Next Shot Recommendation\x27:\x27Shot Feedback\x27\}/);
+ assert.match(main,/class="inline-info-button" data-action="next-shot-info"/);
+ assert.match(main,/\$\{advice\.next\?`<button type="button"/);
  assert.match(main,/data-action="next-shot-info"/);
  assert.match(main,/aria-expanded="false" aria-controls="next-shot-info-\$\{e\(c\.id\)\}"/);
- assert.match(main,/class="next-shot-info-text helper" id="next-shot-info-\$\{e\(c\.id\)\}" hidden/);
+ assert.match(main,/\$\{advice\.next\?`<p class="next-shot-info-text helper" id="next-shot-info-\$\{e\(c\.id\)\}" hidden/);
  assert.match(main,/if\(a==='grinder-range-info'\|\|a==='next-shot-info'\)/);
  assert.match(main,/Changing only one setting helps isolate its effect/);
  assert.doesNotMatch(main,/One adjustment at a time/);
