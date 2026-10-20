@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {EventEmitter} from 'node:events';
 import {safeCoffeeUrl,isGlobalIpv4,guardedLookup,fetchPublicCoffeeHtml,fetchPublicCoffeeJson,MAX_HTML_BYTES} from '../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {ecwidProductRequest,extractEcwidSnapshotData,extractEcwidProduct} from '../src/server/coffee-ecwid-snapshot.mjs';
+import {ecwidProductRequest,extractEcwidSnapshotData,extractEcwidProduct,sameEcwidTitle} from '../src/server/coffee-ecwid-snapshot.mjs';
 import {createPreviewHandler,config} from '../netlify/functions/coffee-url-preview.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
@@ -379,4 +379,76 @@ test('Ecwid snapshot failure safely falls back to blank/manual rather than false
   readJson:async()=>({ok:true,json:JSON.stringify({...ecwidSnapshot,title:'A Different Coffee'})})
  });
  assert.equal(result,null);
+});
+
+test('generic Ecwid embeds across shop/store paths use only an actual public script-src ID',()=>{
+ const src='<script async src="https://app.ecwid.com/script.js?12345678&data_platform=code"></script>';
+ const paths=['shop','store','online-store','coffee','coffees','products'];
+ for(const prefix of paths){
+  const page='https://random-artisanroaster.com/'+prefix+'/2026-Natural-Gesha-p987654321';
+  const details=ecwidProductRequest(page,src);
+  assert.equal(details?.storeId,'12345678',prefix);
+  assert.equal(details?.productId,'987654321',prefix);
+  assert.equal(details?.expectedName,'2026 Natural Gesha',prefix);
+  assert.equal(details?.requestUrl,'https://storefront.ecwid.com/product-page/12345678/987654321/static-code');
+  assert.equal(ecwidProductRequest(page,''),null,'Unknown store must disclose its ID');
+  assert.equal(ecwidProductRequest(page,'Marketing mentions https://app.ecwid.com/script.js?12345678'),null);
+  assert.equal(ecwidProductRequest(page,'<script src="https://app.ecwid.com/script.js?12345678"></script>'+
+   '<script src="https://app.ecwid.com/script.js?99999999"></script>'),null,'Mixed store identities require manual review');
+ }
+ assert.equal(ecwidProductRequest('https://random-artisanroaster.com/shop/item-p987654321',src)?.productId,'987654321');
+ assert.equal(ecwidProductRequest('https://random-artisanroaster.com/collections/item-p987654321',src),null);
+ assert.equal(ecwidProductRequest('https://random-artisanroaster.com/shop/item-p987654321','<script src="http://app.ecwid.com/script.js?12345678"></script>'),null);
+ assert.equal(sameEcwidTitle('Coffee & Cacao','coffee-cacao'),true);
+ assert.equal(sameEcwidTitle('Blend Deluxe','Blend'),false);
+});
+test('selected Product description supplies explicit structured-label facts on new platforms',()=>{
+ const url='https://new-roaster.coffee/products/ethiopia-ambela';
+ const details={
+  '@context':'https://schema.org','@type':'Product',url,name:'Ethiopia Ambela',
+  brand:{'@type':'Brand',name:'New Roaster'},
+  description:'Origin: Ethiopia\\nProcess: Washed\\nVariety: Heirloom\\nRoast Level: Light\\nTasting Notes: Peach, jasmine, honey'
+ };
+ const r=extractPublicCoffeeFacts(wrap(details),{source_url:url});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.origin,'Ethiopia');
+ assert.equal(r.fields.process,'Washed');
+ assert.equal(r.fields.variety,'Heirloom');
+ assert.equal(r.fields.roast_level,'Light');
+ assert.equal(r.fields.tasting_notes,'Peach, jasmine, honey');
+ const htmlLabels={...details,description:'<p>Origin: Brazil<br>Process: Natural</p><p>Producer: Fazenda Sol</p>'};
+ const h=extractPublicCoffeeFacts(wrap(htmlLabels),{source_url:url});
+ assert.equal(h.fields.origin,'Brazil');
+ assert.equal(h.fields.process,'Natural');
+ assert.equal(h.fields.producer,'Fazenda Sol');
+ const unrelated={...details,url:'https://new-roaster.coffee/products/someone-else'};
+ assert.equal(extractPublicCoffeeFacts(wrap(unrelated),{source_url:url}).ok,false);
+});
+test('unknown Ecwid store shell uses product snapshot first, not shop-wide SEO',async()=>{
+ const url='https://random-artisanroaster.com/store/Blend-No-7-p987654321';
+ const shop='<html><head><meta property="og:title" content="Roaster Store">'+
+  '<meta property="og:type" content="website"></head><body><h1>Roaster Store</h1>'+
+  '<script src="https://app.ecwid.com/script.js?12345678"></script></body></html>';
+ const productData={...ecwidSnapshot,title:'Blend No 7',canonicalUrl:'',
+  jsonLDHtml:'<script type="application/ld+json">'+JSON.stringify({
+   '@type':'Product',url,name:'Blend No 7',brand:{'@type':'Brand',name:'Random Artisan'}
+  })+'</script>',ogTagsHtml:'<meta property="og:title" content="Blend No 7">',
+  htmlCode:'<h1>Blend No 7</h1><p>Origin: Brazil</p><p>Roast: Medium</p>'};
+ const called=[];let pages=0;
+ const apiFetch=async(u)=>({ok:true,json:async()=>u.endsWith('/auth/v1/user')?
+  identityJson():u.endsWith('/rpc/dic_session_status')?
+  {admitted:true,emailVerified:true}:{allowed:true}});
+ const handler=createPreviewHandler({apiFetch,env:approvedEnv,
+  readHtml:async()=>{pages++;return {ok:true,html:shop,source_url:url};},
+  readJson:async path=>{called.push(path);return {ok:true,json:JSON.stringify(productData)};}});
+ const request=new Request('https://app.dialincollective.com/api/coffee-preview',{
+  method:'POST',headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',
+   'origin':'https://app.dialincollective.com'},body:JSON.stringify({source_url:url})
+ });
+ const result=await (await handler(request)).json();
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.name,'Blend No 7');
+ assert.equal(result.fields.origin,'Brazil');
+ assert.equal(pages,1);
+ assert.deepEqual(called,['https://storefront.ecwid.com/product-page/12345678/987654321/static-code']);
 });

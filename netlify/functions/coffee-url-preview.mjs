@@ -3,7 +3,7 @@
 // Existing Supabase publishing and trusted source rules are untouched.
 import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {extractEcwidProduct,ecwidProductRequest} from '../../src/server/coffee-ecwid-snapshot.mjs';
+import {extractEcwidProduct,ecwidProductRequest,sameEcwidTitle} from '../../src/server/coffee-ecwid-snapshot.mjs';
 
 const json=(value,status=200)=>new Response(JSON.stringify(value),{
  status,headers:{'Content-Type':'application/json;charset=utf-8','Cache-Control':'no-store',
@@ -77,9 +77,16 @@ export function createPreviewHandler({
     const page=await readHtml(validated.toString());
     if(!page?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
     finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
-    preview=extract(page.html,{source_url:finalUrl});
-    if(!preview?.ok&&!knownEcwid)
-     preview=await extractEcwidProduct(finalUrl,page.html,{readJson,extract})||preview;
+    const embeddedEcwid=!knownEcwid?ecwidProductRequest(finalUrl,page.html):null;
+    if(embeddedEcwid)
+     preview=await extractEcwidProduct(finalUrl,page.html,{readJson,extract});
+    if(!preview?.ok){
+     preview=extract(page.html,{source_url:finalUrl});
+     // For an identified Ecwid deep link, avoid treating the general shop
+     // heading or an unrelated product card as the selected coffee.
+     if(embeddedEcwid&&preview?.ok&&!sameEcwidTitle(preview.fields?.name,embeddedEcwid.expectedName))
+      preview={ok:false,reason:'ambiguous_or_missing_product'};
+    }
    }
    if(!preview?.ok)return json({ok:false,reason:preview?.reason||'ambiguous_or_missing_product'});
    return json({...preview,source_url:validated.toString(),...(finalUrl!==validated.toString()?{resolved_url:finalUrl}:{}),verification:'unverified',

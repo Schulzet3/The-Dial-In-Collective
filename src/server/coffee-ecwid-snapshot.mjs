@@ -6,18 +6,27 @@
 import {safeCoffeeUrl,fetchPublicCoffeeJson,MAX_HTML_BYTES} from './coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from './coffee-page-metadata.mjs';
 
+// Verified from the public Mango Tree Ecwid iframe. Other stores are found
+// from their own public Ecwid script, never guessed or fetched from a catalog.
 const knownStores=new Map([['mangotreecoffee.org','6820274']]);
 const normalize=value=>String(value||'').normalize('NFKD')
  .replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+export const sameEcwidTitle=(a,b)=>!!normalize(a)&&normalize(a)===normalize(b);
 const publicStoreIds=html=>{
  const all=new Set();
  if(typeof html!=='string'||html.length>1_000_000)return all;
- for(const m of html.matchAll(/(?:app\.ecwid\.com\/script\.js\?|script\.js\?)(\d{5,14})(?=[^\d])/gi))all.add(m[1]);
+ // An actual script-src reference, not a free-floating marketing mention.
+ for(const tag of html.match(/<script\b[^>]{0,1800}>/gi)||[]){
+  const source=tag.match(/\bsrc\s*=\s*["'](https:\/\/app\.ecwid\.com\/script\.js\?\d{5,14}(?:&[^"'<>]{0,260})?)["']/i)?.[1];
+  const id=source?.match(/^https:\/\/app\.ecwid\.com\/script\.js\?(\d{5,14})(?:&|$)/i)?.[1];
+  if(id)all.add(id);
+ }
  return all;
 };
 export function ecwidProductRequest(raw,html=''){
  const url=safeCoffeeUrl(raw);if(!url)return null;
- const match=url.pathname.match(/^\/shop\/([a-z0-9._~%+-]+)-p(\d{6,14})\/?$/i);
+ // Ecwid's SEO-friendly product paths work on many shop root names.
+ const match=url.pathname.match(/^\/(?:shop|store|online-store|coffee|coffees|products)\/([a-z0-9._~%+-]+)-p(\d{6,14})\/?$/i);
  if(!match)return null;
  const host=url.hostname.replace(/^www\./,'');
  const configured=knownStores.get(host);
@@ -32,7 +41,7 @@ export function ecwidProductRequest(raw,html=''){
 }
 export function extractEcwidSnapshotData(data,request,{extract=extractPublicCoffeeFacts}={}){
  if(!data||typeof data!=='object'||!request||typeof data.title!=='string')return null;
- if(normalize(data.title)!==normalize(request.expectedName))return null;
+ if(!sameEcwidTitle(data.title,request.expectedName))return null;
  if(data.canonicalUrl){
   try{
    const canonical=safeCoffeeUrl(data.canonicalUrl),source=safeCoffeeUrl(request.sourceUrl);
@@ -47,7 +56,7 @@ export function extractEcwidSnapshotData(data,request,{extract=extractPublicCoff
   String(data.htmlCode||'')+'</main></body></html>';
  if(Buffer.byteLength(page)>MAX_HTML_BYTES)return null;
  const preview=extract(page,{source_url:request.sourceUrl});
- if(!preview?.ok||normalize(preview.fields?.name)!==normalize(data.title))return null;
+ if(!preview?.ok||!sameEcwidTitle(preview.fields?.name,data.title))return null;
  return preview;
 }
 export async function extractEcwidProduct(raw,html='',{

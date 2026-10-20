@@ -180,10 +180,19 @@ function productDetails(fields,p){
  for(const row of Array.isArray(p.additionalProperty)?p.additionalProperty.slice(0,80):[]){
   addField(fields,row?.name,row?.value);
  }
- // Merchant descriptions often embed origin/processing and roast level in a
- // simple product specification, not in structured Product properties.
+ // Product JSON-LD and storefront metadata may include HTML or plain-text
+ // labels, often separated by BR, newlines or semicolons (not HTML tables).
+ // Only the selected Product's explicitly labeled lines are evidence.
  const description=String(p.description??'');
- if(description&&description.length<=16000)labeledPairs(description,fields);
+ if(description&&description.length<=16000){
+  labeledPairs(description,fields);
+  const delimited=description.replace(/<br\s*\/?>|<\/(?:p|li|div)>/gi,'\n')
+   .replace(/<[^>]{0,800}>/g,' ');
+  for(const line of delimited.split(/\r?\n|\s*;\s*/).slice(0,45)){
+   const m=clean(line,450).match(/^([\p{L}][\p{L} .&/'-]{1,36})\s*[:：]\s*(.{2,270})$/u);
+   if(m&&LOOKUP.has(keyOf(m[1])))addField(fields,m[1],m[2]);
+  }
+ }
  for(const [key,value] of Object.entries(p)){
   if(['additionalProperty','offers','description','brand','manufacturer','image'].includes(key))continue;
   addField(fields,key,value);
