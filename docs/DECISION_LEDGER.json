@@ -3302,7 +3302,7 @@
   },
   "current_owner_approved_adaptive_extractor_production_release_20261020": {
     "decision_id": "EXTRACTOR-ADAPTIVE-RETRY-COMPRESSION-COMPACTION-20261020",
-    "status": "Locked; implemented and source-tested, production deploy pending exact receipt",
+    "status": "Locked; deployed READY/current 2026-10-20; single publication authorization consumed",
     "owner_source": "October 20 2026 explicit instruction: Go ahead and implement recommendations 1–3 then test everything and publish and deploy all confirmed changes to the live app now. @Supabase @Netlify @GitHub",
     "approved": [
       "Bounded HTML-only 2MB retry on a safe explicitly product-shaped URL after default 900KB size refusal",
@@ -3322,6 +3322,19 @@
     "release_gate": "CI full Node/lint/build, real roaster regression with Picky recovery and exact full-result HTML parity, Supabase read-only pre/post totals, Netlify Git publish one marker once, verify READY/current and source SHA; do not mask external Ecwid product-source change",
     "known_external_limitation": "On Oct20, Mango Tree Ecwid exact product snapshot returned public HTTP 200 JSON with blank title and no selected-product text with both gzip and identity. Store listing still contained Mango Tree Blend, but no matched product evidence was available. Do not invent/restore stale facts; manual entry remains.",
     "no_supabase_change_required": true,
-    "release_record": "docs/RELEASE_2026_10_20_ADAPTIVE_COFFEE_EXTRACTOR.md"
+    "release_record": "docs/RELEASE_2026_10_20_ADAPTIVE_COFFEE_EXTRACTOR.md",
+    "publication": {
+      "deployment_id": "6ad7b7b7d5e244c52f066869",
+      "source_sha": "3eec4836192463c53bb9b911a02a7b5afce5ea05",
+      "published_at_utc": "2026-10-20T18:49:49.810Z",
+      "netlify_state": "ready/current",
+      "marker_commit": "3eec4836192463c53bb9b911a02a7b5afce5ea05",
+      "single_use_approval_consumed": true,
+      "netlify_bill_actual": "UNVERIFIED",
+      "live_signed_in_member_acceptance": "UNVERIFIED",
+      "sql_edge_auth_changes": "NONE",
+      "data_pre_post": "4 coffees, 18 shots, 18 notes, 2 community projections, 5 enabled members; 0 orphan notes",
+      "record": "docs/RELEASE_2026_10_20_ADAPTIVE_COFFEE_EXTRACTOR.md"
+    }
   }
 }
