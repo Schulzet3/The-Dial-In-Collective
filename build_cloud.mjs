@@ -3,9 +3,13 @@ import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {validateSiteSource,validateDist} from './scripts/audit/site-integrity.mjs';
+import {checkRepository} from './scripts/audit/approval-coverage.mjs';
 const root=path.dirname(fileURLToPath(import.meta.url));
 const {SUPABASE_URL:url,SUPABASE_PUBLISHABLE_KEY:key}=process.env;
 if(!url||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)||!key?.startsWith('sb_publishable_'))throw new Error('Provide SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY to the build environment. Never use service-role, database or backup credentials.');
+// No Netlify or local cloud build can silently omit an approved UI contract.
+// This checks SOURCE, not owner device acceptance, before touching dist.
+checkRepository();
 validateSiteSource(root);
 await rm(path.join(root,'dist'),{recursive:true,force:true});
 const files=['visual.css','cloud/appearance.js','cloud/appearance-bootstrap.js','admin/styles.css','admin/view.js','admin/main.js','styles.css','icon.svg','icon-192.png','icon-512.png','manifest.webmanifest','cloud/client.js','cloud/cache.js','cloud/outbox.js','cloud/mapping.js','cloud/shot_card.js','cloud/community.js','cloud/coffee-match-ui.js','cloud/coffee-url-autofill.js','cloud/main.js','cloud/confirmation.js','lib/constants.js','lib/model.js','lib/engine.js','lib/ui.js'];

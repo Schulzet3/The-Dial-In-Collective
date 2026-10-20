@@ -6,6 +6,7 @@
 // the stale-snapshot rule remains enforced for non-owner-managed mode.
 import {readFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
+import {checkRepository,readTracked} from '../audit/approval-coverage.mjs';
 
 export function decide({context,branch,subject,ledger,today}){
   // Do not publish previews or production without a deliberate, separately
@@ -64,11 +65,23 @@ function run(){
   try{
     subject=execFileSync('git',['log','-1','--format=%s'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
   }catch{ /* Missing commit provenance: no production release. */ }
-  const decision=decide({
+  let decision=decide({
     context:process.env.CONTEXT||'',
     branch:process.env.BRANCH||'',
     subject,ledger,today:new Date().toISOString().slice(0,10)
   });
+  if(!decision.ignore){
+   try{
+    // A commit marker alone is NOT the owner's new release authorization.
+    // Fail closed when inventory/code/test anchors or release consent drift.
+    checkRepository();
+    const approved=JSON.parse(readTracked('docs/APPROVAL_COVERAGE_MATRIX.json'));
+    if(approved.production?.owner_approval_for_new_release!=='GRANTED')
+     throw Error('No fresh, separately recorded owner authorization in approval matrix');
+   }catch(error){
+    decision={ignore:true,reason:'Approval or implementation coverage failed: '+String(error.message).slice(0,260)};
+   }
+  }
   console.log('[DIC credit gate] '+(decision.ignore?'Skip build':'Allow build')+': '+decision.reason);
   process.exitCode=decision.ignore?0:1;
 }
