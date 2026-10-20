@@ -3336,5 +3336,38 @@
       "data_pre_post": "4 coffees, 18 shots, 18 notes, 2 community projections, 5 enabled members; 0 orphan notes",
       "record": "docs/RELEASE_2026_10_20_ADAPTIVE_COFFEE_EXTRACTOR.md"
     }
+  },
+  "current_owner_pwa_freshness_extractor_reliability_release_20261020": {
+    "decision_id": "PWA-STALE-CLIENT-AUTOFILL-EXTRACTOR-RELIABILITY-20261020",
+    "status": "Locked; single consolidated production publication authorized after source and public-source checks; not yet consumed",
+    "owner_source": "2026-10-20 owner request: UI still old, recheck all previously approved UX, improve deterministic URL extraction as far as reliably possible, then deploy all approved changes; user confirms their new invite codes and admitted members are intentional",
+    "approved": [
+      "Correct old PWA/browser presentation by allowing revisioned public shell updates while preserving offline reopening, queued shots and drafts",
+      "Make ONLY the previously approved existing New Coffee Autofill From URL button unambiguously larger (full width, higher touch target); other rejected mockups stay unchanged",
+      "Improve deterministic extraction for exact source-backed product facts across public roaster layouts/platforms and explicit French source flavor/lot labels, maintain strict safety and manual review",
+      "Publish once to live Netlify after 429 Node tests/lint/build/QA and real public-source probes pass"
+    ],
+    "preserves": [
+      "Prior 79 Locked product decisions and all later narrow supersessions",
+      "No AI integration, unknown product fabrication, browser remote script execution or arbitrary paid API consumption",
+      "No new auth, invite, member, shot, coffee, community, backup deletion, SQL/Edge changes or privacy relaxation",
+      "No changes to separate pending screen mockups, grinder-scale generalized direction, recommendation algorithm, Community eligibility, offline mutation semantics",
+      "900KB base body; maximum one 2MB product HTML retry; compression/decompression and SSRF DNS/TLS guards; 12 daily previews and shared 30s cooldown",
+      "Single release marker only, owner-managed 15-credit planned cost and no purchase or recharge"
+    ],
+    "source_preflight_sha": "ef06cc6e442d08dfe62df480214c2ea3d8a9268e",
+    "tests": {
+      "node_all": "429/429 PASS on CI run 39481478470",
+      "public": "31 URL inventory 25 parsed; adaptive 15 product parsed plus blocked homepage, exact French Picky 9 fields, run 39481478565",
+      "mobile": "synthetic 390px and visual review PASS on UI-only code f8c94d9, runs 39479766253 and 39479766224"
+    },
+    "release_record": "docs/RELEASE_2026_10_20_PWA_REFRESH_AND_EXTRACTOR_COMPLETENESS.md",
+    "deployment": "PENDING",
+    "known_limitations": [
+      "signed-in device acceptance not independently verified",
+      "provider current Netlify billing balance not readable",
+      "roaster pages may change or become inaccessible",
+      "offsite courier and full provider recovery still distinct work"
+    ]
   }
 }
