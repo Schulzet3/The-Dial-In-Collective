@@ -3,6 +3,7 @@
 // Existing Supabase publishing and trusted source rules are untouched.
 import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {extractEcwidProduct,ecwidProductRequest} from '../../src/server/coffee-ecwid-snapshot.mjs';
 
 const json=(value,status=200)=>new Response(JSON.stringify(value),{
  status,headers:{'Content-Type':'application/json;charset=utf-8','Cache-Control':'no-store',
@@ -33,7 +34,7 @@ async function restCall(fetcher,base,key,token,path,method='GET'){
  return response.json();
 }
 export function createPreviewHandler({
- apiFetch=fetch,readHtml=fetchPublicCoffeeHtml,extract=extractPublicCoffeeFacts,env=envDefault
+ apiFetch=fetch,readHtml=fetchPublicCoffeeHtml,readJson,extract=extractPublicCoffeeFacts,env=envDefault
 }={}){
  return async request=>{
   if(request.method!=='POST')return json({ok:false,reason:'method_not_allowed'},405);
@@ -67,10 +68,19 @@ export function createPreviewHandler({
    const claim=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_claim_universal_preview','POST');
    if(claim?.allowed!==true)
     return json({ok:false,reason:claim?.reason||'preview_unavailable'},claim?.reason==='preview_cooldown'||claim?.reason==='daily_preview_limit'?429:503);
-   const page=await readHtml(validated.toString());
-   if(!page?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
-   const finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
-   const preview=extract(page.html,{source_url:finalUrl});
+   // A known public Ecwid store ID allows one small, product-specific
+   // read instead of retrieving a 600KB+ Wix catalog shell.
+   const knownEcwid=ecwidProductRequest(validated.toString());
+   let finalUrl=validated.toString();
+   let preview=knownEcwid?await extractEcwidProduct(finalUrl,'',{readJson,extract}):null;
+   if(!preview?.ok){
+    const page=await readHtml(validated.toString());
+    if(!page?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
+    finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
+    preview=extract(page.html,{source_url:finalUrl});
+    if(!preview?.ok&&!knownEcwid)
+     preview=await extractEcwidProduct(finalUrl,page.html,{readJson,extract})||preview;
+   }
    if(!preview?.ok)return json({ok:false,reason:preview?.reason||'ambiguous_or_missing_product'});
    return json({...preview,source_url:validated.toString(),...(finalUrl!==validated.toString()?{resolved_url:finalUrl}:{}),verification:'unverified',
     note:'Suggestions from a public page; exact roaster and release need verification.'});

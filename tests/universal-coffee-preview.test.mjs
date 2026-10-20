@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {EventEmitter} from 'node:events';
 import {safeCoffeeUrl,isGlobalIpv4,guardedLookup,fetchPublicCoffeeHtml,fetchPublicCoffeeJson,MAX_HTML_BYTES} from '../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {ecwidProductRequest,extractEcwidSnapshotData,extractEcwidProduct} from '../src/server/coffee-ecwid-snapshot.mjs';
 import {createPreviewHandler,config} from '../netlify/functions/coffee-url-preview.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
@@ -298,4 +299,84 @@ test('real product evidence remains eligible even when site OG title says Store'
  assert.equal(preview.ok,true);
  assert.equal(preview.fields.name,'Mango Tree Blend');
  assert.equal(preview.fields.origin,'Colombia, Brazil');
+});
+
+const mangoPageUrl='https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068';
+const mangoProduct={
+ '@context':'https://schema.org','@type':'Product',name:'Mango Tree Blend',url:mangoPageUrl,
+ brand:{'@type':'Brand',name:'Mango Tree Coffee'}
+};
+const ecwidSnapshot={
+ title:'Mango Tree Blend',canonicalUrl:'',
+ jsonLDHtml:'<script type="application/ld+json">'+JSON.stringify(mangoProduct)+'</script>',
+ ogTagsHtml:'<meta property="og:title" content="Mango Tree Blend">'+
+  '<meta property="og:site_name" content="Mango Tree Coffee">',
+ htmlCode:'<article><h1>Mango Tree Blend</h1>'+
+  '<p>Tasting Notes: Pear, Molasses, Brookside Chocolate Covered Acai</p>'+
+  '<p>Roast: Medium</p><p>Origins: Ethiopia and Brazil</p>'+
+  '</article><h2>You may also like</h2><p>Unrelated dark roast</p>'
+};
+test('public Ecwid transport target is strict, exact product URL and public store mapping',()=>{
+ const request=ecwidProductRequest(mangoPageUrl);
+ assert.equal(request.storeId,'6820274');
+ assert.equal(request.productId,'734210068');
+ assert.equal(request.expectedName,'Mango Tree Blend');
+ assert.equal(request.requestUrl,'https://storefront.ecwid.com/product-page/6820274/734210068/static-code');
+ assert.equal(ecwidProductRequest('https://www.mangotreecoffee.org/shop/'),null);
+ assert.equal(ecwidProductRequest('https://evil.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068'),null);
+ assert.equal(ecwidProductRequest('https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068#fragment'),null);
+ assert.equal(ecwidProductRequest('https://www.mangotreecoffee.org/shop/Other-Blend-p734210068')?.expectedName,'Other Blend');
+ assert.equal(ecwidProductRequest(mangoPageUrl,'<script src="https://app.ecwid.com/script.js?9999999"></script>'),null);
+});
+test('Mango Tree snapshot extracts exact published coffee details, not unrelated suggestions',()=>{
+ const req=ecwidProductRequest(mangoPageUrl);
+ const result=extractEcwidSnapshotData(ecwidSnapshot,req);
+ assert.equal(result?.ok,true);
+ assert.equal(result.fields.name,'Mango Tree Blend');
+ assert.equal(result.fields.roaster,'Mango Tree Coffee');
+ assert.equal(result.fields.roast_level,'Medium');
+ assert.equal(result.fields.origin,'Ethiopia and Brazil');
+ assert.equal(result.fields.tasting_notes,'Pear, Molasses, Brookside Chocolate Covered Acai');
+ for(const field of ['process','variety','producer','elevation_m','release_label'])
+  assert.equal(result.fields[field],undefined,'Do not invent unpublished '+field);
+ assert.equal(result.source,'unverified_public_page');
+});
+test('Ecwid rejects wrong title, other canonical product, malformed or oversized static output',()=>{
+ const req=ecwidProductRequest(mangoPageUrl);
+ assert.equal(extractEcwidSnapshotData({...ecwidSnapshot,title:'Other Blend'},req),null);
+ assert.equal(extractEcwidSnapshotData({...ecwidSnapshot,canonicalUrl:'https://www.mangotreecoffee.org/shop/Other-Blend-p999999999'},req),null);
+ assert.equal(extractEcwidSnapshotData({...ecwidSnapshot,htmlCode:'x'.repeat(MAX_HTML_BYTES)},req),null);
+ assert.equal(extractEcwidSnapshotData({...ecwidSnapshot,jsonLDHtml:null},req)?.ok,true);
+ assert.equal(extractEcwidSnapshotData({...ecwidSnapshot,htmlCode:'<h1>Wrong Blend</h1>',jsonLDHtml:''},req),null);
+});
+test('Ecwid preview returns only source-backed fields after member quota, no Wix shell fetch',async()=>{
+ const calls=[];let rawFetches=0,jsonReads=0;
+ const apiFetch=async(u,opt)=>{
+  calls.push({u,auth:!!opt.headers.Authorization});
+  const data=u.endsWith('/auth/v1/user')?identityJson():
+   u.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:
+   {allowed:true};
+  return {ok:true,json:async()=>data};
+ };
+ const handler=createPreviewHandler({apiFetch,env:approvedEnv,
+  readHtml:async()=>{rawFetches++;return {ok:true,html:'<title>Mango Tree Coffee: Store</title>'};},
+  readJson:async()=>{jsonReads++;return {ok:true,json:JSON.stringify(ecwidSnapshot)};}});
+ const req=new Request('https://app.dialincollective.com/api/coffee-preview',{
+  method:'POST',headers:{'content-type':'application/json','authorization':'Bearer user.jwt.value',
+   'origin':'https://app.dialincollective.com'},
+  body:JSON.stringify({source_url:mangoPageUrl})});
+ const response=await handler(req),result=await response.json();
+ assert.equal(response.status,200);
+ assert.equal(result.fields.name,'Mango Tree Blend');
+ assert.equal(result.fields.tasting_notes,'Pear, Molasses, Brookside Chocolate Covered Acai');
+ assert.equal(result.verification,'unverified');
+ assert.equal(rawFetches,0,'known Ecwid store should skip broad 662KB Wix page');
+ assert.equal(jsonReads,1);
+ assert.equal(calls.length,3,'session admission and quota must be checked first');
+});
+test('Ecwid snapshot failure safely falls back to blank/manual rather than false shop identity',async()=>{
+ const result=await extractEcwidProduct(mangoPageUrl,'',{
+  readJson:async()=>({ok:true,json:JSON.stringify({...ecwidSnapshot,title:'A Different Coffee'})})
+ });
+ assert.equal(result,null);
 });
