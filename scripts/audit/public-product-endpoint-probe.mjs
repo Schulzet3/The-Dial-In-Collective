@@ -3,7 +3,8 @@
 // Supabase quota, raw HTML dump, cookies, tokens or production mutations.
 // Pages and storefronts can change; every unavailable source is reported.
 import {extractEcwidProduct} from '../../src/server/coffee-ecwid-snapshot.mjs';
-import {extractShopifyProduct} from '../../src/server/coffee-shopify-ajax.mjs';
+import {extractShopifyProduct,shopifyProductRequest} from '../../src/server/coffee-shopify-ajax.mjs';
+import {fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
 const cases=[
  ['Mango Tree Blend','ecwid','https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068'],
  ['Corvus Echo Gesha','shopify','https://www.corvuscoffee.com/products/echo-gesha'],
@@ -18,8 +19,26 @@ for(const [name,platform,url] of cases){
   const ok=preview?.ok===true;
   const facts=ok?Object.fromEntries(Object.entries(preview.fields||{})
    .map(([k,v])=>[k,typeof v==='string'?v.slice(0,220):v])):{};
+  let shopifyDiagnostic=null;
+  if(platform==='shopify'&&!ok){
+   const target=shopifyProductRequest(url);
+   const data=target?await fetchPublicCoffeeJson(target.url):null;
+   let parsed=null;
+   if(data?.ok){
+    try{
+     const raw=JSON.parse(data.json);
+     parsed={handle:typeof raw.handle==='string'?raw.handle:null,
+      title:typeof raw.title==='string'?raw.title.slice(0,140):null,
+      has_description:typeof raw.description==='string'&&raw.description.length>0};
+    }catch{parsed={malformed_json:true};}
+   }
+   shopifyDiagnostic={path:target?.url?new URL(target.url).pathname:null,
+    transport:data?.ok?'json':data?.reason||'no_product_handle',
+    ...(parsed?{product:parsed}:{})};
+  }
   results.push({name,platform,ok,fields:facts,
-   conflict_keys:preview?.conflicts||[],reason:ok?null:'source_missing_unavailable_or_not_exact'});
+   conflict_keys:preview?.conflicts||[],reason:ok?null:'source_missing_unavailable_or_not_exact',
+   ...(shopifyDiagnostic?{diagnostic:shopifyDiagnostic}:{})});
  }catch(error){
   results.push({name,platform,ok:false,reason:'probe_exception',kind:String(error?.name||'Error')});
  }
