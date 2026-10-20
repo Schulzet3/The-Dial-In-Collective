@@ -12,6 +12,28 @@ try{
  if(fetched.ok){
   const html=fetched.html;
   summary.contains_product_id=html.includes(id);
+
+  // Restrict debug context to a few public product/storefront tokens. Never
+  // log the whole page or any credential-bearing query string.
+  const contextFor=(needle,limit=3)=>{
+   const hits=[];const lower=html.toLowerCase(),part=needle.toLowerCase();let start=0;
+   while(hits.length<limit){
+    const pos=lower.indexOf(part,start);if(pos<0)break;start=pos+part.length;
+    let value=html.slice(Math.max(0,pos-100),Math.min(html.length,pos+160));
+    value=value.replace(/(?:token|api[-_]?key|password|secret)\s*[:=]\s*["']?[^"'&\s<>]{1,240}/gi,'REDACTED')
+     .replace(/https?:\/\/[^\s"'<>]{1,500}/gi,'[PUBLIC_URL]').replace(/\s+/g,' ');
+    hits.push(value.slice(0,260));
+   }
+   return {count:lower.split(part).length-1,context:hits};
+  };
+  summary.public_markup_signals={
+   ecwid:contextFor('ecwid',5), productId:contextFor(id,5),
+   productName:contextFor('Mango Tree Blend',4),
+   storeId:contextFor('storeId',3),
+   scriptJs:contextFor('script.js?',3),
+   jsonld:contextFor('application/ld+json',3)
+  };
+
   const ids=new Set();
   for(const re of [
    /(?:app\.ecwid\.com\/script\.js\?|script\.js\?)(\d{5,14})(?=[^\d])/gi,
