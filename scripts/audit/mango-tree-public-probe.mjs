@@ -69,7 +69,7 @@ try{
     summary.static_title_matches_url=String(data.title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'')==='mangotreeblend';
     summary.static_has_target_name=[data.htmlCode,data.jsonLDHtml,data.ogTagsHtml].some(v=>typeof v==='string'&&/Mango Tree Blend/i.test(v));
     summary.static_has_tasting_label=typeof data.htmlCode==='string'&&/tasting notes/i.test(data.htmlCode);
-    if(true){
+    if(summary.static_has_target_name){
      const combined='<html><head>'+[data.metaDescriptionHtml,data.ogTagsHtml,data.jsonLDHtml]
       .filter(v=>typeof v==='string').join(' ')+'</head><body><main>'+
       String(data.htmlCode||'')+'</main></body></html>';
