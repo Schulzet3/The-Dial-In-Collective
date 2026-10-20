@@ -65,6 +65,8 @@ try{
     // Empty canonicalUrl occurs on Ecwid snapshots. Inspect only as a
     // candidate until the exact product identity can be independently checked.
     summary.static_keys=Object.keys(data).sort();
+    summary.static_product_title=typeof data.title==='string'?data.title.slice(0,160):null;
+    summary.static_title_matches_url=String(data.title||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g,'')==='mangotreeblend';
     summary.static_has_target_name=[data.htmlCode,data.jsonLDHtml,data.ogTagsHtml].some(v=>typeof v==='string'&&/Mango Tree Blend/i.test(v));
     summary.static_has_tasting_label=typeof data.htmlCode==='string'&&/tasting notes/i.test(data.htmlCode);
     if(true){
