@@ -56,6 +56,12 @@ const cases=[
  ['Black White Los Altos','https://www.blackwhiteroasters.com/products/r-los-altos-washed'],
  ['Proud Mary Ovidio','https://proudmarycoffee.com/collections/wild/products/honduras-ovidio-gomez-catuai-natural'],
  ['Park City Ethiopia','https://pcroaster.com/product/ethiopia-single-origin/'],
+ ['Corvus Dead Reckoning','https://www.corvuscoffee.com/products/dead-reckoning-blend'],
+ ['Tim Wendelboe Gachatha','https://timwendelboe.no/products/gachatha'],
+ ['PERC Franky Hoyos','https://perccoffee.com/products/colombia-franky-hoyos-adv-washed?variant=53562522829114'],
+ ['Sweet Bloom Uraga','https://sweetbloomcoffee.com/products/uraga'],
+ ['SEY Chorso Bule','https://www.seycoffee.com/collections/coffee/products/2026-chorso-bule-highest-elevation-project-ethiopia'],
+ ['Queen City Natural','https://queencitycollectivecoffee.com/products/banko-gotiti-natural-ethiopia'],
  ['Queen City homepage negative control','https://queencitycollectivecoffee.com/']
 ];
 const median=a=>a.length?a.slice().sort((x,y)=>x-y)[Math.floor(a.length/2)]:null;
@@ -106,25 +112,29 @@ try{
   const first=Buffer.from(html).subarray(0,262144).toString('utf8');
   const early=parseTrial(parser.extractPublicCoffeeFacts,first,url,1);
   const stripped=stripNonProductScripts(html),stripBytes=Buffer.byteLength(stripped);
-  const compact=stripBytes<=BASE?parseTrial(baseParse,stripped,url,1):
+  const compact=stripBytes<=BASE?parseTrial(baseParse,stripped,url,3):
    {ok:false,reason:'still_over_900kb',fields:[]};
   const entry={name,source_bytes:bytes,wire_bytes:fetched.wire_bytes,
    fetch_ms,at_900kb:{ok:small.ok,reason:small.reason,fields:small.fields,
     median_ms:small.median_ms,median_cpu_ms:small.median_cpu_ms,heap_delta_bytes:small.heap_delta_bytes},
    at_2mb:{ok:large.ok,reason:large.reason,fields:large.fields,
     median_ms:large.median_ms,median_cpu_ms:large.median_cpu_ms,heap_delta_bytes:large.heap_delta_bytes},
-   head_256kb:{ok:early.ok,complete:same(large.data,early.data),fields:early.fields},
+   head_256kb:{ok:early.ok,complete:same(large.data,early.data),fields:early.fields,median_ms:early.median_ms},
    strip_scripts:{bytes:stripBytes,under_900kb:stripBytes<=BASE,
-    ok:compact.ok,complete:same(large.data,compact.data),fields:compact.fields}};
+    ok:compact.ok,complete:same(large.data,compact.data),fields:compact.fields,
+    median_ms:compact.median_ms,median_cpu_ms:compact.median_cpu_ms,heap_delta_bytes:compact.heap_delta_bytes}};
   results.push(entry);console.log('[DIC 2MB SAMPLE] '+JSON.stringify(entry));
   if(name.includes('homepage negative control')&&large.ok)
    throw Error('False product match on homepage');
-  if(['Picky Chemist Gesha','Mango Tree Blend','PERC Kenya Mara','Queen City Banko'].includes(name)){
+  if(['Picky Chemist Gesha','Mango Tree Blend','PERC Kenya Mara','Queen City Banko','Corvus Echo Gesha','SEY Yaye Arbegona','Onyx Mullugeta','Sweet Bloom Wuri','Heart Phono'].includes(name)){
    const t=performance.now(),compressed=await zipped.fetchPublicCoffeeHtml(url);
    compressedRuns.push({name,status:compressed.ok?'ok':compressed.reason,
     fetch_ms:round(performance.now()-t),wire_bytes:compressed.wire_bytes??null,
     decoded_bytes:compressed.decoded_bytes??null,
-    exact_same_html:compressed.ok?digest(compressed.html)===digest(html):null});
+    exact_same_html:compressed.ok?digest(compressed.html)===digest(html):null,
+    same_extracted_fields:compressed.ok?same(large.data,
+     parseTrial(parser.extractPublicCoffeeFacts,compressed.html,url,1).data):null,
+    wire_saving_percent:compressed.ok?round(100*(1-compressed.wire_bytes/bytes)):null});
   }
  }
  for(const [name,url,fn] of [
@@ -150,6 +160,8 @@ try{
    JSON.stringify(x.at_900kb.fields)!==JSON.stringify(x.at_2mb.fields)).map(x=>x.name),
   head_256kb_exact_fields:read.filter(x=>x.head_256kb.complete).length,
   script_stripping_exact_fields:read.filter(x=>x.strip_scripts.complete).length,
+  median_full_parse_ms:round(median(read.filter(x=>x.at_2mb.ok).map(x=>x.at_2mb.median_ms))),
+  median_stripped_parse_ms:round(median(read.filter(x=>x.strip_scripts.complete).map(x=>x.strip_scripts.median_ms))),
   oversized_shrunk_below_900kb:above.filter(x=>x.strip_scripts.under_900kb).length,
   compression:compressedRuns,platform_endpoints:platformRuns,
   security_changed:false,production_source_unchanged:true};
