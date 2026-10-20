@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
+  "coverage_policy": "Any NEW current_owner_ decision key requires deliberate classification in this inventory before CI/build can pass; anchors verify source presence, NOT live user-device acceptance or every baseline behavior.",
+  "owner_decision_key_inventory": [
+    "current_owner_approved_adaptive_extractor_production_release_20261020",
+    "current_owner_approved_agtron_narrative",
+    "current_owner_approved_community_nested_layout_20261018",
+    "current_owner_approved_community_release_context_20261018",
+    "current_owner_approved_daily_budget",
+    "current_owner_approved_extractor_2mb_isolated_study_20261019",
+    "current_owner_approved_extractor_semantic_byok_20261019",
+    "current_owner_approved_invite_only_technical_pilot_20261018",
+    "current_owner_approved_pilot_release_20261018",
+    "current_owner_approved_roast_taxonomy",
+    "current_owner_approved_url_autofill",
+    "current_owner_autofill_button_only_20261019",
+    "current_owner_beta_breached_password_opt_out_20261018",
+    "current_owner_beta_member_soft_remove_only_20261018",
+    "current_owner_extractor_deterministic_only_20261019",
+    "current_owner_github_continuity",
+    "current_owner_grinder_range_info_20261019",
+    "current_owner_one_visible_recipe_internal_families_20261020",
+    "current_owner_outlier_research_20261018",
+    "current_owner_permanent_admin_and_beta_invitation_access_20261018",
+    "current_owner_preparation_community_release_20261018",
+    "current_owner_pwa_freshness_extractor_reliability_release_20261020",
+    "current_owner_recommendation_display_choice_20261019",
+    "current_owner_recommendation_single_intentional_change_20261019",
+    "current_owner_release_preferences",
+    "current_owner_required_outlier_review",
+    "current_owner_scoped_confirmation_retry_release_20261018",
+    "current_owner_scoped_pwa_release_20261018",
+    "current_owner_single_use_beta_invites_20261018"
+  ],
+  "production": {
+    "netlify_deploy_id": "6ad7be20bf672d5c8936f19a",
+    "exact_source_sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+    "owner_approval_for_new_release": "NOT_GRANTED"
+  },
+  "contracts": [
+    {
+      "id": "grinder_range_new_setup",
+      "decision_key": "current_owner_grinder_range_info_20261019",
+      "scope": "New Setup only; no existing-settings editor was approved",
+      "implementation": "published_source",
+      "device_acceptance": "REPORTED_MISSING_ON_A_PHONE: location ambiguous",
+      "issue": 39,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "within": [
+            " showSetup(){",
+            " showRenameSetup("
+          ],
+          "contains": "<h3 id=\"grinder-range-heading\">Grinder Espresso Range</h3>"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "within": [
+            " showSetup(){",
+            " showRenameSetup("
+          ],
+          "contains": "data-action=\"grinder-range-info\""
+        },
+        {
+          "path": "site/cloud/main.js",
+          "within": [
+            " showSetup(){",
+            " showRenameSetup("
+          ],
+          "contains": "Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range."
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "description.hidden=!description.hidden;"
+        },
+        {
+          "path": "site/visual.css",
+          "contains": ".inline-info-button:focus-visible"
+        },
+        {
+          "path": "tests/browser/cloud_owner_qa.py",
+          "contains": "Real 390px New Setup grinder i opens and closes exact help"
+        }
+      ]
+    },
+    {
+      "id": "next_shot_minimal_arrow_and_info",
+      "decision_key": "current_owner_recommendation_display_choice_20261019",
+      "scope": "Next Shot Recommendation card only; explicit single-change choice",
+      "implementation": "published_source",
+      "device_acceptance": "NOT_INDEPENDENTLY_VERIFIED",
+      "issue": 39,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "data-action=\"next-shot-info\""
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Changing only one setting helps isolate its effect"
+        },
+        {
+          "path": "site/lib/ui.js",
+          "contains": "nextShotGuidance"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "One adjustment at a time"
+        },
+        {
+          "path": "tests/ux-refinements.test.mjs",
+          "contains": "approved Option A arrow with i disclosure"
+        }
+      ]
+    },
+    {
+      "id": "coffee_url_autofill_button_only",
+      "decision_key": "current_owner_autofill_button_only_20261019",
+      "scope": "ONLY prominent full-width New Coffee Autofill button; no other #40 concept",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_CONFIRMED_APP_LOOKS_BETTER_NOT_FIELD_BY_FIELD",
+      "issue": 40,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')"
+        },
+        {
+          "path": "site/visual.css",
+          "contains": ".coffee-url-actions .coffee-url-autofill-button{width:100%;flex:1 0 100%;min-height:56px;"
+        },
+        {
+          "path": "tests/ux-refinements.test.mjs",
+          "contains": "Autofill From URL"
+        }
+      ]
+    },
+    {
+      "id": "community_nested_release_grouping",
+      "decision_key": "current_owner_approved_community_release_context_20261018",
+      "scope": "Sanitized Community coffee card/release grouping already deployed",
+      "implementation": "published_source_and_migration",
+      "device_acceptance": "OWNER_OBSERVED_REGISTERED_MEMBER_BROWSING; PRIVATE_CROSS_ACCOUNT_API_UNVERIFIED_ISSUE_41",
+      "issue": 11,
+      "assertions": [
+        {
+          "path": "site/cloud/community.js",
+          "contains": "community-coffee-card"
+        },
+        {
+          "path": "site/cloud/community.js",
+          "contains": "community-coffee-body"
+        },
+        {
+          "path": "tests/community-ui.test.mjs",
+          "contains": "release"
+        }
+      ]
+    },
+    {
+      "id": "pwa_shell_refresh",
+      "decision_key": "current_owner_pwa_freshness_extractor_reliability_release_20261020",
+      "scope": "Atomic revisioned service worker, online nav refresh with offline fallback",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_CONFIRMED_UPDATED_APP_APPEARANCE",
+      "assertions": [
+        {
+          "path": "scripts/pwa/service-worker.template.txt",
+          "contains": "self.skipWaiting()"
+        },
+        {
+          "path": "scripts/pwa/service-worker.template.txt",
+          "contains": "cache:'no-store'"
+        },
+        {
+          "path": "tests/pwa-shell.test.mjs",
+          "contains": "online navigation revalidates HTML"
+        }
+      ]
+    },
+    {
+      "id": "internal_single_visible_recipe",
+      "decision_key": "current_owner_one_visible_recipe_internal_families_20261020",
+      "scope": "One visible family; distinct internal recipe evidence; NOT yet deployed",
+      "implementation": "DEVELOPMENT_ONLY",
+      "device_acceptance": "NOT_DEPLOYED",
+      "issue": 10,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "absent": "alternateRecipesMarkup("
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "chooseRecipeFamily("
+        },
+        {
+          "path": "tests/recipe-family-selection.test.mjs",
+          "contains": "explicit Make Current favorite overrides"
+        }
+      ]
+    },
+    {
+      "id": "original_badges_no_shadows",
+      "decision_key": "current_owner_grinder_range_info_20261019",
+      "scope": "Related owner-Locked visual constraints; full original badge decisions in Master Spec/older Decision Ledger",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_REPORTED_APP_LOOKS_BETTER",
+      "assertions": [
+        {
+          "path": "site/visual.css",
+          "contains": ".status-badge,.style-badge"
+        },
+        {
+          "path": "site/visual.css",
+          "contains": "text-shadow:none"
+        },
+        {
+          "path": "tests/legacy-dark-badges.test.mjs",
+          "contains": "badge"
+        }
+      ]
+    },
+    {
+      "id": "controlled_netlify_release",
+      "decision_key": "current_owner_pwa_freshness_extractor_reliability_release_20261020",
+      "scope": "Every production publish requires separately approved one-use marker; previous consent consumed",
+      "implementation": "published_source",
+      "device_acceptance": "PROVIDER_SHA_READY_CONFIRMED",
+      "issue": 38,
+      "assertions": [
+        {
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "contains": "[dic-publish]"
+        },
+        {
+          "path": "netlify.toml",
+          "contains": "scripts/netlify/should-ignore-build.mjs"
+        }
+      ]
+    }
+  ],
+  "active_gap_flags": [
+    {
+      "id": "existing_setup_settings_not_new_setup",
+      "status": "OWNER_CLARIFICATION_NEEDED",
+      "reason": "Existing Setup Settings has no editable grinder-range heading/fields; earlier approval explicitly named New Setup only. Owner reports missing on phone; route not established. Do not silently widen scope.",
+      "issue": 39
+    },
+    {
+      "id": "real_cross_account_api_acceptance",
+      "status": "OPEN",
+      "reason": "Member-phone Community browsing verified by owner; genuine two-account API JWT negative isolation not independently tested.",
+      "issue": 41
+    },
+    {
+      "id": "multi_worker_release_guard",
+      "status": "OPEN",
+      "reason": "Git marker and credit guard are not atomic consumed-once locks across workers.",
+      "issue": 38
+    },
+    {
+      "id": "all_chat_transcript_coverage",
+      "status": "UNPROVABLE",
+      "reason": "Project archives contain many exported messages, but not guaranteed every conversation; canonical GitHub logging and enforceable review inventory are necessary."
+    }
+  ]
+}
