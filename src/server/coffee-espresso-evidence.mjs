@@ -8,7 +8,7 @@ function flatten(html){
 }
 function boundedSection(html){
  const page=productMarkup(html);
- if(!page||page.length>1_000_000)return '';
+ if(!page||page.length>2_000_000)return '';
  // Only a named ESPRESSO recommendation section can supply all three
  // numeric fields; don't borrow V60, AeroPress or generic brewing guidance.
  const header=/(?:Espresso\s+(?:Parameter\s+)?Recommendations?|(?:Recommended\s+)?Espresso\s+(?:Parameters|Recipe|Guide|Settings))\s*:/i.exec(flatten(page));
@@ -29,7 +29,7 @@ function measure(block,label,unit){
  return single?[number(single[1]),number(single[1])]:null;
 }
 export function extractProductEspressoReference(html){
- if(typeof html!=='string'||html.length>1_000_000)return null;
+ if(typeof html!=='string'||html.length>2_000_000)return null;
  const section=boundedSection(html);
  if(!section)return null;
  const dose=measure(section,'dose|coffee\\s+in','g|grams?');

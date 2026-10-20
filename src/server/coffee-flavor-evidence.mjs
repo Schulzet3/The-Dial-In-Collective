@@ -34,7 +34,7 @@ function sipComparisonNotes(html,clean){
  return shortFlavorList([...new Set(found)].join(', '),clean);
 }
 export function extractProductFlavorEvidence(html,{clean}={}){
- if(typeof html!=='string'||typeof clean!=='function'||html.length>1_000_000)return '';
+ if(typeof html!=='string'||typeof clean!=='function'||html.length>2_000_000)return '';
  // Named, merchant-owned product containers must be near the selected H1.
  // Avoid promotion of checkout/footer/related coffee names or vague SEO.
  const top=topOfProduct(html);

@@ -33,7 +33,7 @@ function producersInComponent(description){
  return unique(candidates.map(x=>x.slice(0,120)).filter(x=>x.length>=3));
 }
 export function extractCoffeeBlendEvidence(html){
- if(typeof html!=='string'||html.length>1_000_000)return null;
+ if(typeof html!=='string'||html.length>2_000_000)return null;
  const page=productMarkup(html);
  const marker=/<(?:p|h[2-6]|strong|b)\b[^>]{0,350}>\s*(?:<strong\b[^>]*>)?\s*Components?\s*:\s*(?:<\/strong>\s*)?<\/(?:p|h[2-6]|strong|b)>/i.exec(page)||
   /<(?:p|strong|b)\b[^>]*>\s*Components?\s*:\s*(?:<br\s*\/?>)/i.exec(page)||
