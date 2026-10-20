@@ -172,3 +172,17 @@ test('HTML escapes are handled as displayed notes, and field extraction never re
  assert.deepEqual(applyCoffeeUrlFields(form,r),{filled:0,skipped:2});
  assert.equal(notes.value,'Manually corrected flavors');
 });
+
+test('French selected-product tasting story yields only its literal named flavor notes',()=>{
+ const r=preview('en.examplecoffee.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey','Example Roaster',
+  '<p>Ce Gesha en process Honey issu du bloc Oma offre des notes florales éclatantes (bergamote), du citron confit et une sucrosité rappelant la pêche jaune.</p>'+
+  '<h2>RELATED PRODUCTS</h2><p>Notes florales éclatantes (abricot), du citron séché et une sucrosité rappelant la cerise.</p>',
+  'Ethiopia - Gesha Village - Lot #26/136 - Oma Honey');
+ assert.equal(r.fields.tasting_notes,'bergamote, citron confit, pêche jaune');
+ assert.equal(r.fields.release_label,'Lot #26/136');
+ const unrelated=preview('en.examplecoffee.com/product-page/other-lot','Example Roaster',
+  '<p>Only a Honey processing description.</p><h2>More Coffees</h2><p>Notes florales éclatantes (bergamote), du citron confit et une sucrosité rappelant la pêche jaune.</p>',
+  'Other Lot');
+ assert.equal(unrelated.fields.tasting_notes,undefined);
+ assert.equal(unrelated.fields.release_label,undefined);
+});

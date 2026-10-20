@@ -33,6 +33,25 @@ function sipComparisonNotes(html,clean){
  if(found.length<2||found.length>7)return '';
  return shortFlavorList([...new Set(found)].join(', '),clean);
 }
+// Explicit French sensory comparisons from the selected bag's short story.
+// Keep the literal flavor nouns instead of machine-translating or guessing a
+// dictionary. No neighboring coffee, general processing or education text.
+function frenchProductSensoryNotes(html,clean){
+ const after=topOfProduct(html).replace(/<svg\\b[^>]*>[\\s\\S]*?<\\/svg\\s*>/gi,' ');
+ for(const m of after.matchAll(/<p\\b[^>]{0,350}>([\\s\\S]{30,1600}?)<\\/p\\s*>/gi)){
+  const prose=clean(m[1],780);
+  const cue=/\\bnotes?\\s+florales?[^.!?()]{0,90}\\(([\\p{L}\\p{M}'’ -]{2,40})\\)/iu.exec(prose);
+  if(!cue)continue;
+  const tail=prose.slice(cue.index+cue[0].length, cue.index+cue[0].length+170);
+  const citrus=/\\bdu\\s+([\\p{L}\\p{M}'’ -]{3,45}?)\\s+et\\s+une\\s+sucrosit/iu.exec(tail);
+  const fruit=/\\brappelant\\s+la\\s+([\\p{L}\\p{M}'’ -]{3,45})(?=[.!?]|$)/iu.exec(tail);
+  if(!citrus||!fruit)continue;
+  const names=[cue[1],citrus[1],fruit[1]].map(s=>s.trim());
+  const accepted=shortFlavorList(names.join(', '),clean);
+  if(accepted)return accepted;
+ }
+ return '';
+}
 export function extractProductFlavorEvidence(html,{clean}={}){
  if(typeof html!=='string'||typeof clean!=='function'||html.length>2_000_000)return '';
  // Named, merchant-owned product containers must be near the selected H1.
@@ -54,5 +73,7 @@ export function extractProductFlavorEvidence(html,{clean}={}){
  // similarly named shipping, processing, roasting or producer biographies.
  const sip=sipComparisonNotes(html,clean);
  if(sip)return sip;
+ const french=frenchProductSensoryNotes(html,clean);
+ if(french)return french;
  return '';
 }

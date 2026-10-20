@@ -301,3 +301,16 @@ test('generic geographic grower groups are not asserted as a named producer',()=
  assert.equal(result.fields.producer,undefined);
  assert.equal(result.fields.origin,'Mexico');
 });
+
+test('exact lot IDs explicitly published in product names are extracted without guessing harvest',()=>{
+ const selected='<html><head><meta property="og:type" content="product">'+
+  '<meta property="og:title" content="Ethiopia - Gesha Village - Lot #26/136 - Oma Honey">'+
+  '<meta property="og:site_name" content="The Picky Chemist"></head><body><main>'+
+  '<h1>Ethiopia - Gesha Village - Lot #26/136 - Oma Honey</h1>'+ 
+  '<p>Producer: Gesha Village Coffee Estate</p></main></body></html>';
+ const data=extractPublicCoffeeFacts(selected,{source_url:'https://roaster.coffee/product-page/gesha-lot-26-136'});
+ assert.equal(data.fields.release_label,'Lot #26/136');
+ const ordinary=selected.replaceAll('Lot #26/136','2026').replaceAll('Lot #26/136','2026');
+ const unchanged=extractPublicCoffeeFacts(ordinary,{source_url:'https://roaster.coffee/product-page/gesha-lot-26-136'});
+ assert.equal(unchanged.fields.release_label,undefined);
+});

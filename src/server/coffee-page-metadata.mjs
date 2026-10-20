@@ -449,6 +449,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const fields={name:textOf(p.name,200)},conflicts=new Set();
  conflictsByFields.set(fields,conflicts);
  productDetails(fields,p);
+ // An actual, literal lot number in the selected Product title is stronger
+ // than an inferred harvest based on a URL, SKU, publication date or country.
+ // Preserve exact source text; never manufacture release identifiers.
+ if(!fields.release_label){
+  const lot=textOf(p.name,200).match(/\\bLot\\s*#?\\s*\\d{1,4}(?:[\\/-]\\d{1,4}){0,2}\\b/i);
+  if(lot)fields.release_label=lot[0].replace(/\\s+/g,' ').trim();
+ }
  const siteName=textOf(meta['og:site_name'],200);
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
   fields.roaster=readableRoaster(siteName);
