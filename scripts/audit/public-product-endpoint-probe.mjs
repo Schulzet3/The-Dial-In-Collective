@@ -6,6 +6,11 @@ import {extractEcwidProduct} from '../../src/server/coffee-ecwid-snapshot.mjs';
 import {extractShopifyProduct,shopifyProductRequest} from '../../src/server/coffee-shopify-ajax.mjs';
 import {extractWooProduct} from '../../src/server/coffee-woocommerce-store.mjs';
 import {fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
+import {ecwidProductRequest} from '../../src/server/coffee-ecwid-snapshot.mjs';
+import {mkdtempSync,readFileSync,writeFileSync,rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {pathToFileURL} from 'node:url';
 const cases=[
  ['Mango Tree Blend','ecwid','https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068'],
  ['Corvus Echo Gesha','shopify','https://www.corvuscoffee.com/products/echo-gesha'],
@@ -50,6 +55,41 @@ for(const [name,platform,url] of cases){
 console.log('[DIC PUBLIC PRODUCT ENDPOINTS] '+JSON.stringify({attempts:results.length,
  parsed:results.filter(x=>x.ok).length,results,source_type:'public_no_token',
  no_raw_page_retention:true,production_mutations:0,authentication_requests:0}));
+// Temporary, isolated identity-encoding diagnostic to distinguish a current
+// Ecwid product-source change from gzip/br transport incompatibility.
+async function mangoEncodingEvidence(){
+ const url='https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068';
+ const exact=ecwidProductRequest(url);
+ if(!exact)return {recognized:false};
+ const compressed=await fetchPublicCoffeeJson(exact.requestUrl);
+ const path=mkdtempSync(join(tmpdir(),'dic-encoding-check-'));
+ try{
+  const source=readFileSync(new URL('../../src/server/coffee-url-guard.mjs',import.meta.url),'utf8');
+  const search="'Accept-Encoding':'gzip, br'";
+  if(source.split(search).length!==2)throw Error('Transport changed, cannot compare');
+  const file=join(path,'guard.mjs');
+  writeFileSync(file,source.replace(search,"'Accept-Encoding':'identity'"));
+  const guard=await import(pathToFileURL(file).href);
+  const identity=await guard.fetchPublicCoffeeJson(exact.requestUrl);
+  const digest=response=>{
+   if(!response?.ok)return {status:response?.reason||'missing'};
+   try{
+    const data=JSON.parse(response.json);
+    return {status:'ok',size:Buffer.byteLength(response.json),
+     title:typeof data.title==='string'?data.title:null,
+     hasTargetProduct:[data.title,data.htmlCode,data.metaDescriptionHtml,data.jsonLDHtml,data.ogTagsHtml]
+      .some(s=>typeof s==='string'&&/Mango Tree Blend/i.test(s)),
+     htmlLength:String(data.htmlCode||'').length,
+     jsonLdLength:String(data.jsonLDHtml||'').length,
+     titleHtmlLength:String(data.titleHtml||'').length,
+     lastUpdated:data.lastUpdated||null};
+   }catch{return {status:'invalid_json'};}
+  };
+  return {recognized:true,compressed:digest(compressed),identity:digest(identity)};
+ }finally{rmSync(path,{recursive:true,force:true});}
+}
+console.log('[DIC ECWID ENCODING DIFFERENCE] '+JSON.stringify(await mangoEncodingEvidence()));
+
 const mango=results.find(x=>x.name==='Mango Tree Blend');
 if(mango?.ok){
  if(mango.fields.name!=='Mango Tree Blend'||mango.fields.roast_level!=='Medium'||
