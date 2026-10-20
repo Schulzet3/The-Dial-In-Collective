@@ -110,8 +110,25 @@ function samePage(raw,target){
 }
 const ROAST=['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
 const conflictsByFields=new WeakMap();
+// Some merchants flatten <br>-separated specifications into one field.
+// Stop at the NEXT explicit key, including concatenated CamelCase labels:
+// e.g. "Lime, Tea Origin: Kenya" or "GedebElevation: 1900m".
+// We intentionally do not guess flavor/origin facts from arbitrary prose.
+function cleanTrailingProductLabels(text){
+ const key=/(?:Tasting Notes?|Flavou?r Notes?|Cupping Notes?|Origin|Country(?: of Origin)?|Region|Elevation|Altitude|Farm\/Co-?op|Farm|Producer|Variet(?:y|ies|al|als)|Process(?:ing)?(?: Method)?|Roast(?: Level)?|Harvest(?: Year)?|Shipping|Quantity)\s*:/gi;
+ let first=text.length;
+ for(const match of text.matchAll(key)){
+  // The leading label can legitimately be the value if a source already
+  // retained it. Only subsequent key-value blocks are contamination.
+  if(match.index>0&&match.index<first)first=match.index;
+ }
+ return text.slice(0,first).trim();
+}
 function normalized(field,value){
- const s=textOf(value,field==='tasting_notes'?650:220);
+ const raw=textOf(value,field==='tasting_notes'?650:220);
+ if(!raw)return '';
+ const s=['tasting_notes','origin','producer','variety','elevation_m','release_label'].includes(field)?
+  cleanTrailingProductLabels(raw):raw;
  if(!s)return '';
  if(field==='tasting_notes'){
   // An explicit product flavor label sometimes includes a prose lead-in.
@@ -157,7 +174,8 @@ function addField(fields,rawKey,value){
  const s=normalized(key,value);
  // Storefront reverse-layout metrics can accidentally assign the RELATIONSHIP
  // year to the neighboring PRODUCER label (observed on Wuri / Uraga).
- if(key==='producer'&&/^(?:since|est(?:ablished)?\.?|founded)\s+(?:19|20)\d{2}$/i.test(s))return;
+ if(key==='producer'&&(/^(?:since|est(?:ablished)?\.?|founded)\s+(?:19|20)\d{2}$/i.test(s)||
+   /^(?:coffee\s+)?growers?\s+from\b/i.test(s)))return;
  // Withhold contradictory categorical/release evidence instead of silently
  // preferring stale JSON-LD. Compound processes must stay unsimplified.
  // A truly mixed-process product is explicitly Other/Unknown, not blank.

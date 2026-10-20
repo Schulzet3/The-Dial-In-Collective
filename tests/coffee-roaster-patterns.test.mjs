@@ -277,3 +277,27 @@ test('live SEY explicit variety-process component may establish Washed without i
  assert.equal(r.fields.process,'Washed');
  assert.equal(r.fields.roast_level,undefined);
 });
+
+test('live roaster flattened labels never contaminate flavor notes or origin values',()=>{
+ const base='https://littlewolf.coffee/products/tegu';
+ const html=head('Tegu','Little Wolf Coffee')+
+  '<h1>Tegu</h1><p>Tasting Notes: Lime, White Tea, Vibrant Origin: Kenya - NyeriFarm/Co-op: Tegu'+
+  'Process: WashedElevation: 1700m</p>'+tail;
+ const result=preview(html,base);
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.tasting_notes,'Lime, White Tea, Vibrant');
+ const heart=head('Ethiopia Halo','Heart Roasters')+
+  '<h1>Ethiopia Halo</h1><p>Origin: GedebElevation: 1900-2200m Varietals: HeirloomProcess: Fully washed</p>'+tail;
+ const h=preview(heart,'https://www.heartroasters.com/products/ethiopia-halo');
+ assert.equal(h.fields.origin,'Gedeb');
+ assert.doesNotMatch(h.fields.origin,/Elevation|Varietals|Process/i);
+});
+test('generic geographic grower groups are not asserted as a named producer',()=>{
+ const data=head('Mexico','Echo Raven')+
+  '<h1>Mexico</h1><p>Producer: Coffee growers from Chiapas and Oaxaca</p>'+
+  '<p>Origin: Mexico</p>'+tail;
+ const result=preview(data,'https://echoravencoffee.com/products/mexico');
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.producer,undefined);
+ assert.equal(result.fields.origin,'Mexico');
+});
