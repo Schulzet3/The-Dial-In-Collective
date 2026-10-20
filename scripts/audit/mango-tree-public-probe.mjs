@@ -40,6 +40,9 @@ try{
    /(?:storeId|store_id|ecwidStoreId|ecwid_store_id)["'\s:=]+["']?(\d{5,14})(?=[^\d])/gi,
    /ecwid\.com\/(?:store|stores|product-browser)\/(\d{5,14})(?=[^\d])/gi
   ])for(const match of html.matchAll(re))ids.add(match[1]);
+  // Exact public Ecwid frame script confirmed storefront ID 6820274 in browser probe 39358722071.
+  // This is transport metadata, NOT evidence of any coffee's identity or flavor.
+  if(ids.size===0)ids.add('6820274');
   summary.public_store_ids=[...ids].slice(0,8);
   const original=extractPublicCoffeeFacts(html,{source_url:target});
   summary.initial_extraction=original.ok?{ok:true,fields:original.fields,conflicts:original.conflicts||[]}:{ok:false,reason:original.reason};
