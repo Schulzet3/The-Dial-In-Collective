@@ -5,16 +5,24 @@ import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
-const root=resolve(fileURLToPath(new URL('../..',import.meta.url)));
 export const readTracked=(path)=>{
  if(!/^[a-zA-Z0-9_./-]+$/.test(path)||path.startsWith('/')||
     path.split('/').includes('..'))throw Error('Invalid tracked path: '+path);
  return readFileSync(new URL('../../'+path,import.meta.url),'utf8');
 };
+export function baselineFingerprint(content){
+ const text=JSON.stringify(content);let hash=2166136261;
+ for(let i=0;i<text.length;i++)hash=Math.imul(hash^text.charCodeAt(i),16777619);
+ return (hash>>>0).toString(16).padStart(8,'0');
+}
 export function auditApprovalCoverage({matrix,ledger,credits,source=readTracked}){
  const errors=[];
  const record=(id,message)=>errors.push(id+': '+message);
  if(matrix.schema_version!==1)record('manifest','unsupported schema');
+ const baseline=ledger.baseline?.content,original=matrix.original_baseline;
+ if(!baseline||!original||baseline.locked?.length!==original.locked_count||
+  baseline.open?.length!==original.open_count||baselineFingerprint(baseline)!==original.fnv1a32)
+  record('baseline','original Locked/Open decision corpus changed without explicit documented inventory update');
  const expected=Object.keys(ledger).filter(key=>key.startsWith('current_owner_')).sort();
  const actual=matrix.owner_decision_key_inventory||[];
  if(new Set(actual).size!==actual.length||JSON.stringify(actual)!==JSON.stringify(expected))

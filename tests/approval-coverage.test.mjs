@@ -37,3 +37,11 @@ test('unverified cross-user privacy and duplicated worker publishes remain expli
  m.active_gap_flags=m.active_gap_flags.filter(x=>x.id!=='multi_worker_release_guard');
  assert.match(check({matrix:m}).join(' '),/open_gaps/);
 });
+
+test('all original baseline Locked/Open decisions are preserved as an immutable corpus',()=>{
+ const entry=matrix.original_baseline;
+ assert.equal(entry.locked_count,79);assert.equal(entry.open_count,20);
+ const modified=structuredClone(ledger);
+ modified.baseline.content.locked[0].decision='Core loop unexpectedly changed';
+ assert.match(check({ledger:modified}).join(' '),/baseline/);
+});
