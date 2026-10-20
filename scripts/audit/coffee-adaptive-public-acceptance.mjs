@@ -8,6 +8,8 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,isCoffeeProductDetai
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {extractEcwidProduct,ecwidProductRequest} from '../../src/server/coffee-ecwid-snapshot.mjs';
+import {shopifyProductRequest,extractShopifyProduct,mergePublicProductPreview} from '../../src/server/coffee-shopify-ajax.mjs';
+import {wooProductRequest,extractWooProduct} from '../../src/server/coffee-woocommerce-store.mjs';
 
 const targets=[
  ['Picky Chemist Gesha','https://en.thepickychemist.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey'],
@@ -36,6 +38,9 @@ const safeSummary=(x,name,retryReason,byteCount)=>({
  recipePublished:Boolean(x?.roaster_recipe),
  detailsCount:Object.keys(x?.roaster_details||{}).length
 });
+// Independently check the actual public product API enrichment on four vendors,
+// with no auth tokens and without treating extra API data as canonical proof.
+const enrichmentTargets=new Set(['PERC Kenya Mara','Sweet Bloom Wuri','Heart Phono','Park City Ethiopia']);
 const results=[];
 for(let i=0;i<targets.length;i+=2){
  const batch=await Promise.all(targets.slice(i,i+2).map(async([name,url])=>{
@@ -64,8 +69,22 @@ for(let i=0;i<targets.length;i+=2){
     assert.equal(typeof original.fields.name,'string');
     assert.ok(original.fields.name.length>2);
    }
+   let enrichment=null;
+   if(original.ok&&enrichmentTargets.has(name)){
+    const source=shopifyProductRequest(effectiveUrl)?
+     await extractShopifyProduct(effectiveUrl,{deadlineAt:Date.now()+11_000}):
+     wooProductRequest(effectiveUrl)?
+      await extractWooProduct(effectiveUrl,{deadlineAt:Date.now()+11_000}):null;
+    const combined=mergePublicProductPreview(original,source);
+    assert.equal(combined.fields?.name,original.fields?.name,
+     'An independent public API must never replace the selected HTML product');
+    const gained=Object.keys(combined.fields||{}).filter(key=>!original.fields[key]);
+    enrichment={publicApiAvailable:Boolean(source?.ok),gained,conflicts:combined.conflicts||[],
+     fieldsAfterMerge:Object.keys(combined.fields||{})};
+    console.log('[DIC PUBLIC PRODUCT ENRICHMENT] '+JSON.stringify({name,...enrichment}));
+   }
    return {...safeSummary(original,name,retried?'page_too_large':'',Buffer.byteLength(page.html)),
-    retried,compactBytes:Buffer.byteLength(clean)};
+    retried,compactBytes:Buffer.byteLength(clean),...(enrichment?{enrichment}:{})};
   }catch(error){
    // A drift assertion deliberately fails the workflow: never mark failed
    // extracted facts as a successful public smoke.
@@ -109,6 +128,8 @@ const summary={total:results.length,
  fullResultParityForAllParsed:true,
  initialCapBytes:MAX_HTML_BYTES,
  retryCapBytes:MAX_PRODUCT_RETRY_BYTES,
+ corroboratedPublicEndpointChecks:results.filter(x=>x.enrichment).length,
+ corroboratedAdditionalFields:results.filter(x=>x.enrichment).flatMap(x=>x.enrichment.gained.map(y=>x.name+':'+y)),
  supabaseMutations:0,deploys:0};
 console.log('[DIC ADAPTIVE SUMMARY] '+JSON.stringify(summary));
 assert.equal(summary.negativeControl,'ambiguous_or_missing_product','Homepage negative control must remain rejected');
