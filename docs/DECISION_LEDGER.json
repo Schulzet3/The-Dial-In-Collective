@@ -2143,6 +2143,13 @@
       "current": "COFFEE-PRODUCT-NARRATIVE-20261017-02",
       "scope": "Use bounded matched product narrative to validate title Estate/Farm producer, and choose Anaerobic when specific anaerobic-natural/fermentation evidence clarifies Natural; preserve source Adv Natural and 96h as extras. Do not create unsupported fields, infer from navigation/FAQ/other products, or automatically edit saved coffee/shot data.",
       "source": "docs/DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json"
+    },
+    {
+      "topic": "Alternate recipe family interface and preference-aware single window",
+      "current": "RECIPE-FAMILY-INTERNAL-ONE-VISIBLE-20261020",
+      "supersedes": "Only prior Locked requirement to DISPLAY collapsed Alternate Dialed-In Recipes and optional visible custom family names; no change to keeping distinct internal successful families, experiment lifecycle or human Make Current",
+      "scope": "Show exactly one current recipe; internal ratio-led families preserved. Respect explicit manual saved favorite, compatible setup/basket/feed/calibration and repeated successes; use clarity/body only as low-confidence ratio tie-breaker. No new screen, auto save, fake sensory class, data mutation or Netlify deployment.",
+      "source": "Explicit owner instruction 2026-10-20, documented in current_owner_one_visible_recipe_internal_families_20261020"
     }
   ],
   "open_current_owner_decisions": [],
@@ -3396,5 +3403,56 @@
       "roaster pages may change or become inaccessible",
       "offsite courier and full provider recovery still distinct work"
     ]
+  },
+  "current_owner_one_visible_recipe_internal_families_20261020": {
+    "id": "RECIPE-FAMILY-INTERNAL-ONE-VISIBLE-20261020",
+    "status": "Locked; implemented and tested in development; not deployed",
+    "owner_instruction": "I definitely prefer option two that you recommended especially if you can identify which approach most closely matches the users preferences for taste and equipment. Let's go with that. Build and test it.",
+    "owner_decision": "One visible best-matched preferred/recommended recipe window per coffee/style/current setup; distinct successful recipe families retained internally, never merged. No Alternate Dialed-In Recipes disclosure.",
+    "explicit_user_choice": "Existing Make Current Recipe chooses a successful shot's family window, keeps the favorite example, and overrides all automatic ranking while the favorite remains an eligible visible all-green shot on the active setup.",
+    "automatic_priority": [
+      "exact same active setup/basket/feed/calibration",
+      "repeatable compatible all-green personal evidence",
+      "weak and clearly explained stated clarity/body ratio-direction proxy only among otherwise comparable family evidence",
+      "stable existing auto-current preference as final tiebreaker; no fabricated sensory labels"
+    ],
+    "preserve": [
+      "all shot IDs, notes, histories, ownership, privacy and successful family records",
+      "same style and coffee release boundaries",
+      "app-wide green rating criteria, shot style thresholds as guidelines, family ratio clustering heuristic 0.25 without defining universal meaningful difference",
+      "all existing offline and authenticated revision-checked Make Current flows",
+      "one visible window, clean Log Shot -> Rate -> Recommendation",
+      "existing manually favorited family until favorited shot is no longer eligible"
+    ],
+    "supersedes_only": [
+      "previous required collapsed Alternate Dialed-In Recipes interface in Master Specification 7.2 and 17.4 and issue #10",
+      "optional naming of alternate recipe families as an immediate visible interface requirement; future workshop only"
+    ],
+    "not_completed": [
+      "Cross-user/community source and provenance family ranking: issue #12",
+      "Experimental candidate/confirmed lifecycle: issue #13",
+      "Proving same-ratio different time or temperature family significance",
+      "Real authenticated hosted multi-family test",
+      "Production publication and recovery for this code"
+    ],
+    "source_commit": "413ca0e5b31330cc00a6c7972bc44178129c26bd",
+    "verified_ci": [
+      {
+        "id": 39498670329,
+        "scope": "439/439 Node, zero-warning lint and cloud build",
+        "state": "passed"
+      },
+      {
+        "id": 39498670205,
+        "scope": "390px account/browser and UX regression",
+        "state": "passed"
+      },
+      {
+        "id": 39498670046,
+        "scope": "private visual and offline PWA review",
+        "state": "passed"
+      }
+    ],
+    "deployment": "NOT authorized; current production remains e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60"
   }
 }

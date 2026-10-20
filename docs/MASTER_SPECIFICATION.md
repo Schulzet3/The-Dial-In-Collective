@@ -8,6 +8,18 @@ The latest explicit owner decision governs. Preserve every unchanged Locked requ
 
 Current product copy uses **The Dial In Collective** and **dial in**, without hyphens. Historical source headings, filenames and quotations retain their original wording. The product remains sleek, simple and optimized for **Log Shot → Rate → Recommendation**.
 
+## Owner-Locked recipe UI supersession — ONE visible recipe, internal successful families (October 20, 2026)
+
+**Explicit owner instruction:** “I definitely prefer option two that you recommended especially if you can identify which approach most closely matches the users preferences for taste and equipment. Let's go with that. Build and test it.”
+
+**Active decision:** The coffee card must show **one** best-matching recommended/preferred recipe window, not a standalone or collapsed “Alternate Dialed-In Recipes” list. Internally retain distinct successful coffee/release + style ratio families and all historical successful shots. Never merge materially different proven approaches into an invented median. Keep Shot History and its existing revision-checked **Make Current Recipe** action: a successful current-setup shot explicitly selected by the user picks its durable **family/window**, retaining the chosen shot as a favorite example, and outranks automatic rankings. First-success auto-seeding of `current_family_id` without a saved favorite shot **does not imply a manual choice**.
+
+**Automatic selection when there is no valid explicit favorite:** Prioritize successful shots on the active setup, basket, feed condition and calibration; next consider repeated compatible evidence (a candidate one-shot success remains valid but cannot displace comparably equipped repeated success on an unverified flavor guess); then use the user's stated clarity/body preference as a **low-confidence ratio-direction tie-breaker** among otherwise comparable successful families. A longer ratio can cautiously suggest clarity and a shorter ratio body, but identical all-green sensory ratings do **not** prove that either family tastes fruitier, sweeter, fuller or clearer. Explain such heuristic influence briefly and never declare an unmeasured sensory profile confirmed. When no preference is expressed or evidence is inadequate, use stronger compatible personal evidence and existing preference state. For other setups, recipe ratio may be a cautiously labeled reference, **not a measured local time, grind or temperature**. Preserve offline behavior, style separation, taste success definition, member privacy, family clustering and community qualification.
+
+**Boundaries:** This replaces ONLY the earlier explicit alternate-family disclosure/UI and its optional family-name workshop idea as a near-term implementation requirement. Do not add required family naming, new preference questions, extra routine screens or a UI list. The existing ratio-led server clustering threshold (0.25) is an implementation heuristic, **not an owner-approved universal definition of significance**; classifying same-ratio different time/temperature approaches remains unresolved. Shared community family learning and provenance tiers remain open [#12](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12); experiment candidate/confirmed lifecycle remains open [#13](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13). Personal client-family selection alone does **not** implement cross-user preference matching or close either issue. No production deploy, database change, external subscription, billing or new invitations authorized by “Build and test it.”
+
+**Implementation evidence (development only):** [source commit `413ca0e`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/413ca0e5b31330cc00a6c7972bc44178129c26bd), [439/439 Node/lint/build](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39498670329), [390px owner browser and account checks](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39498670205), and [private visual and offline PWA review](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39498670046) all PASS. Synthetic data, not live multi-family accounts. See [Decision Ledger](DECISION_LEDGER.json) and [Current Status](CURRENT_STATUS.md).
+
 ## Owner-Locked operating rule: GitHub as the live project record (2026-10-17)
 
 For **every** The Dial In Collective work session, record substantive actions, investigations, attempted changes, outcomes, tests, sources, decisions, errors, blockers and next steps in the private GitHub repository **as close to real time as possible**, not just at the end. GitHub is the canonical working log and seamless cross-chat/session handoff: a later work session must be able to resume by reading the branch's AGENTS, Current Status, Master Specification, Decision Ledger and relevant issues/commits, without asking for a separate handoff. Report incomplete or unverified work as such; never claim an unobserved test passed. Keep canonical documentation and issue states accurate after every meaningful milestone, commit and verify the actual result, and preserve all prior Locked product decisions and dated evidence. **GitHub write permission does not authorize production deployment, Supabase data mutation or spending.** Use the existing one-release approval and Netlify skip-marker controls. Never commit secrets, keys or private exports.
@@ -26,7 +38,7 @@ Owner has approved **one coordinated release** of these tested changes and the s
 
 **Approved scope:** Prepare for a **small, trusted, invitation-only technical/early-access pilot** of the functioning cloud/PWA app so actual testers can provide usability, workflow and reliability feedback while outstanding full-beta implementation continues. Label invitations and tester expectations **“Limited Technical Pilot”**, **not** “complete beta”, “finished recommendation engine”, “public launch” or a waiver of the required functionality. The previously suggested **3–5 testers / one week** is an optional operator proposal, **not** an owner-selected headcount or timeline.
 
-**Scope boundary:** This is a new, expressly owner-approved pre-beta *milestone*, not a replacement of §3, §4, §16–19, §22, §25, §41 or any of the 79 original Locked decisions. The §41 twenty-item core-beta acceptance gate is **unchanged**. P0 [#10 alternate recipe families](https://github.com/Schulzet3/The-Dial-In-Collective/issues/10), [#12 complete evidence/provenance-weighted recommendations](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12), and [#13 post-rating Experiment lifecycle](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) stay required for the specification-complete beta and cannot be represented as done in pilot communications.
+**Scope boundary:** This is a new, expressly owner-approved pre-beta *milestone*, not a replacement of §3, §4, §16–19, §22, §25, §41 or any of the 79 original Locked decisions. The §41 twenty-item core-beta acceptance gate is **unchanged**. P0 [#10 internal successful recipe families](https://github.com/Schulzet3/The-Dial-In-Collective/issues/10), [#12 complete evidence/provenance-weighted recommendations](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12), and [#13 post-rating Experiment lifecycle](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) stay required for the specification-complete beta and cannot be represented as done in pilot communications.
 
 **Authorized now:** Source/documentation and release-runbook preparation, read-only provider/security/privacy/recovery checks, already-permitted development-only tests, issue triage, one-at-a-time owner planning questions, and preparing honest tester instructions. Preserve fastest Log Shot → Rate → Recommendation, existing admin/member isolation, historical data/shot notes, and the existing closed historical import gate.
 
@@ -397,7 +409,7 @@ The expanded card should prioritize:
 3. If not dialed in: previous-shot feedback and next recommendation.
 4. If an experiment is active: Experiment panel.
 5. Shot History.
-6. Alternate Dialed-In Recipes, collapsed by default.
+6. Shot History retains other successful approaches; no separate Alternate Recipes control.
 7. Coffee facts and source/roaster details.
 8. Community detail behind progressive disclosure.
 9. Optional Bag Details behind progressive disclosure.
@@ -878,12 +890,13 @@ A user can mark a successful recipe as their current/preferred recipe.
 
 This is a preference state, not a deletion of other successful recipes.
 
-## 17.4 Alternate Dialed-In Recipes
+## 17.4 Internal successful families — one visible recipe (owner supersession October 20)
 
-- Preserve older successful recipe families when a new one becomes preferred.
-- Show only the current recipe prominently.
-- Put others behind a collapsed control such as **Alternate Dialed-In Recipes (2)**.
-- Any alternate can later become current again.
+- Preserve all other successful families and raw shots **internally** whenever a new recipe becomes preferred.
+- Show **one** recommended/preferred successful family/window in the expanded coffee card, with normal Shot History below.
+- **Do not render** the previously proposed collapsed Alternate Dialed-In Recipes UI.
+- Users can select another visible, successful shot in Shot History with **Make Current Recipe**; that explicitly chooses its family/window and outranks automatic taste/equipment heuristics.
+- No mandatory recipe naming or new post-success interaction. Previous alternate-list proposal remains in Git history and the scoped supersession record.
 
 ## 17.5 Recipe families
 
@@ -961,7 +974,7 @@ If the user confirms:
 ## 18.5 Candidate and confirmation lifecycle
 
 - First materially different **all-green** experimental shot -> **Candidate Recipe Family**.
-- Second successful repeat -> **Confirmed Alternate Dialed-In Recipe Family**.
+- Second successful repeat -> **Confirmed internal successful recipe family** (not a separate routine UI card).
 - User may choose **Make Current Recipe** immediately after the first successful candidate if they love it.
 - Candidate/confirmed status and current/preferred status are separate concepts.
 
@@ -971,7 +984,7 @@ If an experiment produces an all-green result but the user decides the old recip
 
 - The successful experimental shot remains valid.
 - It remains community-eligible.
-- It may remain a candidate/alternate recipe family.
+- It may remain a candidate or another valid internal recipe family.
 - Ending the experiment only changes the user's active preference/workspace; it does not invalidate the successful shot.
 
 ---
@@ -1297,15 +1310,9 @@ The current app's taste-preference nudging is liked and should be preserved/evol
 
 ## 25.5 Preference-aware family selection
 
-When multiple successful recipe families exist, the engine may recommend different families to different users based on preferences such as:
+When multiple successful families exist, the engine selects **one visible window** using first an explicitly chosen favorite from the active setup, then compatible equipment and repeatable all-green history, then a cautiously labeled clarity/body ratio-direction tie-breaker when evidence is otherwise comparable. The user always retains final choice through Shot History's existing **Make Current Recipe**.
 
-- clarity;
-- fruit-forward expression;
-- body;
-- richness/texture;
-- other preference signals.
-
-The user always retains final choice.
+Preferences such as clarity, fruit-forward expression, body or richness/texture remain useful **user-provided preferences**, but the five all-green quality ratings do not measure whether any family actually tastes brighter, fruitier or fuller. Until family-specific sensory preference data exists, never attribute those tastes as confirmed or use unsupported flavor classification. Full cross-user/Community family evidence selection remains a separate #12 integration milestone.
 
 ## 25.6 Mechanical vs sensory feedback
 
@@ -1680,7 +1687,7 @@ The workshop resolved many important contradictions. The following still require
 
 ### A. Meaning of "Make Current Recipe"
 
-We have established that a user can make a successful shot/family current and that the old family remains as an alternate.
+The October 20 owner supersession establishes that a successful shot selects its family/window with that shot retained as an optional favorite example. Older families stay separate **internally**, without an Alternate Recipes display.
 
 Still to define precisely:
 
@@ -2086,7 +2093,7 @@ A beta build is not ready unless all of these are true:
 9. Repeated green shots build a successful window and robust centerpoint.
 10. Materially different green recipes can remain separate families.
 11. Experiment prompts occur after rating and only start the Experiment workspace if the user confirms.
-12. Candidate/confirmed alternate recipe lifecycle works.
+12. Candidate/confirmed **internal** successful recipe-family lifecycle works while the card shows one recommendation.
 13. Old successful recipes are never destroyed merely because a new one becomes current.
 14. Shot details expand inline and multiple shots can be compared.
 15. Current coffee stays pinned outside search.
