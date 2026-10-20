@@ -2526,7 +2526,7 @@
   },
   "current_owner_approved_community_nested_layout_20261018": {
     "id": "UX-COMMUNITY-GROUPING-20261018-01",
-    "status": "Locked; full development Node/mobile/Chromium/visual CI PASS; NOT published",
+    "status": "Locked; nested Community coffee-card UI published; owner observed registered-member browsing 2026-10-20; cross-account API negatives remain in #41",
     "owner_answer": "B. Show compact Community shot rows when its coffee is opened, with individual detail expansion.",
     "scope": "Community list renders one default-collapsed coffee card per verified coffee; opening a card reveals compact qualifying shot rows; any row may independently open ratings/evidence.",
     "preserved_locked_behavior": "Personal Coffee screen shot history remains collapsed by default and unchanged; no automatic full shot-detail expansion, multiple shot comparison remains available.",
@@ -2572,11 +2572,17 @@
       }
     ],
     "css_cleanup_sha": "79e6f172f247ec76da07bb7d559190cb0183bca2",
-    "owner_publish_authorization": "NOT GIVEN; ask one question before production release; no SQL/Edge/account updates"
+    "owner_publish_authorization": "NOT GIVEN; ask one question before production release; no SQL/Edge/account updates",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Locked; full development Node/mobile/Chromium/visual CI PASS; NOT published",
+      "evidence": "Netlify deploy 6ad7be20bf672d5c8936f19a published source e7e16e5; site/cloud/community.js nested coffee card; owner phone confirmation 2026-10-20",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "current_owner_approved_community_release_context_20261018": {
     "id": "UX-COMMUNITY-RELEASE-CONTEXT-20261018-01",
-    "status": "Locked product decision; production-release CANDIDATE CI PASS; NOT APPLIED / NOT PUBLISHED",
+    "status": "Locked; Supabase migration applied and UI published; real owner member-phone browse accepted, signed multi-account privacy proof remains open in #41",
     "owner_answer": "A. Use other verified release details when dates are unavailable. Proceed with the release grouping in development, preserve separate canonical release identities, and do not publish yet.",
     "supersedes_only": "§22.3A historical frontend-only identity caveat, now addressed by planned server-sanitized canonical release key; preserves all other prior Locked Community and personal Coffee behaviors.",
     "parent_group": "public roaster+coffee name",
@@ -2627,12 +2633,18 @@
     },
     "migration_history_issue": 35,
     "prepared_release_runbook": "docs/COMMUNITY_RELEASE_GROUPING_PRODUCTION_READINESS_2026-10-18.md",
-    "migration_history_resolution": "28 applied migrations exact hosted version/name/blob-SHA/byte parity in GitHub, CI-enforced, no production DB history modification. New migration unapplied."
+    "migration_history_resolution": "28 applied migrations exact hosted version/name/blob-SHA/byte parity in GitHub, CI-enforced, no production DB history modification. New migration unapplied.",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Locked product decision; production-release CANDIDATE CI PASS; NOT APPLIED / NOT PUBLISHED",
+      "evidence": "Hosted migration 20261019041437 dic_community_release_context; production Community source e7e16e5; owner member-phone browse report",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "current_owner_preparation_community_release_20261018": {
     "source_owner_message": "do wverything you need to to get it ready for prod.",
     "approved_scope": "preproduction technical readiness only, no production SQL or publication",
-    "status": "Completed code/test/CLI promotion and documented release candidate; production approval still required.",
+    "status": "Completed preparation and later owner-authorized release was applied/published; historic pre-release hold consumed; remaining real-account security acceptance in #41",
     "cli_generation_run": 39171647492,
     "cli_generated_migration": "supabase/migrations/20261018221843_dic_community_release_context.sql",
     "source_candidate_commit": "e9c5f1f317d711a9140bfa1c5607e58a94dc2537",
@@ -2649,7 +2661,13 @@
     "migration_baseline": "docs/SUPABASE_PRODUCTION_MIGRATION_BASELINE_2026-10-18.json",
     "migration_guard": "scripts/audit/verify-migration-baseline.mjs",
     "security_and_courier_limits": "Supabase leaked-password protection disabled; member JWT negatives and Drive archive receipt unresolved. No provider Auth/account settings changed.",
-    "release_gate": "No production migration/Netlify publish without separate explicit owner approval; provider-assigned future migration version must be reconciled and verified before publish."
+    "release_gate": "No production migration/Netlify publish without separate explicit owner approval; provider-assigned future migration version must be reconciled and verified before publish.",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Completed code/test/CLI promotion and documented release candidate; production approval still required.",
+      "evidence": "Hosted migrations 20261019041437 and 20261019041452; Netlify READY source e7e16e5; owner registered-member Community browse accepted",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "migration_history_reconciliation_20261018": {
     "status": "FIXED in GitHub, 28/28 production-applied versions/name/SQL bytes verified; production unchanged",
@@ -2837,7 +2855,7 @@
   },
   "current_owner_permanent_admin_and_beta_invitation_access_20261018": {
     "id": "ACCESS-PERMANENT-20261018-01",
-    "status": "Owner Locked: durable admin/members, no code calendar expiry, NEW CODES ALWAYS SINGLE-USE; admin issue/revoke, member access remove/restore; dev only, release unapproved.",
+    "status": "Owner Locked; admin issue/revoke and soft member controls deployed; member redemption evidenced by owner-new-users report; real multi-account negative/privacy and soft Remove/Restore acceptance still open",
     "owner_exact_words": "Can you Build the self-service admin invitation controls now so I can generate invite codes as needed for this initial beta? Can you please also confirm that my admin account will never require an invite code and will never expire? That needs to be a permanent account. In fact I want all accounts/invite codes to be permanent (with the option to remove them from the admin portal). Is that a good plan?",
     "verified_current_server_model": "One active administrator role and admitted member row; no admin/member expiration columns; already admitted enabled member signs in without new invite; no immortal Supabase session guarantee.",
     "locked_requirements": [
@@ -2859,7 +2877,13 @@
     "code_source": "development/backend-foundation",
     "detailed_report": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md",
     "previous_multiuse_choice": "SUPERSEDED for NEW portal-generated codes only, existing historical invite use/expiry rows unchanged",
-    "account_removal_latest_owner_decision": "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01"
+    "account_removal_latest_owner_decision": "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Owner Locked: durable admin/members, no code calendar expiry, NEW CODES ALWAYS SINGLE-USE; admin issue/revoke, member access remove/restore; dev only, release unapproved.",
+      "evidence": "Hosted migration 20261019041452 dic_admin_beta_invitation_controls and earlier owner admin Generate/Revoke acceptance 2026-10-19; current membership 5 enabled, 8 historical invitations; user explicitly confirmed new members are real",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "admin_beta_invitation_controls_dev_20261018": {
     "status": "Single-use-only owner Locked source implementation and final SQL/Node/mobile/visual checks PASS; NOT LIVE; separate SQL/Netlify release permission required.",
