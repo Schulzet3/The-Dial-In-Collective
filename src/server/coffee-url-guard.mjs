@@ -72,7 +72,8 @@ function decodeBody(bytes,encoding){
  }catch{return null;}
  return null;
 }
-export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=guardedLookup()}={},redirectsRemaining=2){
+export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=guardedLookup(),responseType='html'}={},redirectsRemaining=2){
+ if(!['html','json'].includes(responseType))return {ok:false,reason:'invalid_source'};
  const url=safeCoffeeUrl(raw);
  if(!url)return Promise.resolve({ok:false,reason:'invalid_url'});
  const result=await new Promise(resolve=>{
@@ -85,14 +86,15 @@ export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=gu
     protocol:'https:',hostname:url.hostname,servername:url.hostname,port:443,
     path:url.pathname+url.search,method:'GET',lookup,family:4,agent:false,
     rejectUnauthorized:true,timeout:10_000,maxHeaderSize:12_000,
-    headers:{Accept:'text/html,application/xhtml+xml','Accept-Encoding':'identity',
+    headers:{Accept:responseType==='json'?'application/json':'text/html,application/xhtml+xml','Accept-Encoding':'identity',
      'User-Agent':'DialInCollective-CoffeePreview/1.0',Connection:'close'}
    },res=>{
     const status=res.statusCode||0;
     if(status>=300&&status<400){const target=res.headers.location;res.destroy();finish({ok:false,reason:'redirect_requires_review',redirect:typeof target==='string'?target:null});return;}
     if(status<200||status>=300){res.destroy();finish({ok:false,reason:'source_unavailable'});return;}
     const mime=String(res.headers['content-type']||'').toLowerCase();
-    if(!mime.includes('text/html')&&!mime.includes('application/xhtml+xml')){
+    if(responseType==='json'?!/^(?:application\/json|application\/[a-z0-9.-]+\+json)(?:\s*;|$)/i.test(mime):
+       (!mime.includes('text/html')&&!mime.includes('application/xhtml+xml'))){
      res.destroy();finish({ok:false,reason:'not_html'});return;
     }
     const length=Number(res.headers['content-length']||0);
@@ -110,7 +112,7 @@ export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=gu
      const body=decodeBody(Buffer.concat(chunks),String(res.headers['content-encoding']||'').toLowerCase());
      if(!body){finish({ok:false,reason:'not_html'});return;}
      if(body.length>MAX_HTML_BYTES){finish({ok:false,reason:'page_too_large'});return;}
-     finish({ok:true,html:body.toString('utf8'),source_url:url.toString()});
+     finish({ok:true,...(responseType==='json'?{json:body.toString('utf8')}:{html:body.toString('utf8')}),source_url:url.toString()});
     });
     res.on('error',()=>finish({ok:false,reason:'source_fetch_failed'}));
    });
@@ -125,7 +127,10 @@ export async function fetchPublicCoffeeHtml(raw,{request=https.request,lookup=gu
   if(!safeCoffeeUrl(destination))return {ok:false,reason:'redirect_requires_review'};
   // A new HTTPS request independently revalidates and pins its DNS records
   // at connect time. No Supabase credentials, cookies or raw caller headers.
-  return fetchPublicCoffeeHtml(destination,{request,lookup},redirectsRemaining-1);
+  return fetchPublicCoffeeHtml(destination,{request,lookup,responseType},redirectsRemaining-1);
  }
  return result.redirect?{ok:false,reason:'redirect_requires_review'}:result;
 }
+
+// Ecwid public JSON snapshots inherit all existing HTTPS/DNS/size/time guards.
+export const fetchPublicCoffeeJson=(url,options={})=>fetchPublicCoffeeHtml(url,{...options,responseType:'json'});

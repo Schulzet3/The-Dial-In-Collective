@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {EventEmitter} from 'node:events';
-import {safeCoffeeUrl,isGlobalIpv4,guardedLookup,fetchPublicCoffeeHtml,MAX_HTML_BYTES} from '../src/server/coffee-url-guard.mjs';
+import {safeCoffeeUrl,isGlobalIpv4,guardedLookup,fetchPublicCoffeeHtml,fetchPublicCoffeeJson,MAX_HTML_BYTES} from '../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {createPreviewHandler,config} from '../netlify/functions/coffee-url-preview.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
@@ -258,4 +258,20 @@ test('approved 12-claim account budget keeps shared 30-second cooldown and legac
  assert.match(memberSql,/Boundary claim did not set exactly 12/);
  const serviceSql=read('supabase/tests/url_preview_release.sql');
  assert.match(serviceSql,/set attempts=12,last_attempt_at/);
+});
+
+test('public product snapshot JSON shares safe pinned TLS and bounded reads',async()=>{
+ const url='https://storefront.ecwid.com/product-page/12345678/734210068/static-code';
+ const req=mockRequest({type:'application/json; charset=utf-8',body:'{"canonicalUrl":"https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068"}'});
+ const response=await fetchPublicCoffeeJson(url,{request:req.request});
+ assert.equal(response.ok,true);
+ assert.equal(typeof response.json,'string');
+ assert.equal(req.seen[0].servername,'storefront.ecwid.com');
+ assert.equal(req.seen[0].headers.Accept,'application/json');
+ assert.equal(typeof req.seen[0].lookup,'function');
+ assert.equal(Object.keys(req.seen[0].headers).some(k=>/authorization|cookie|apikey/i.test(k)),false);
+ assert.equal((await fetchPublicCoffeeJson(url,{request:mockRequest({type:'text/html'}).request})).reason,'not_html');
+ assert.equal((await fetchPublicCoffeeJson(url,{request:mockRequest({type:'application/json',body:'x'.repeat(MAX_HTML_BYTES+1)}).request})).reason,'page_too_large');
+ assert.equal((await fetchPublicCoffeeHtml(url,{request:req.request})).reason,'not_html');
+ assert.equal((await fetchPublicCoffeeJson('https://127.0.0.1/secret',{request:req.request})).reason,'invalid_url');
 });
