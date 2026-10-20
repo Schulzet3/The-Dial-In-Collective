@@ -385,7 +385,7 @@ with sync_playwright() as p:
  assert page.locator('.alternate-recipe').count()==1
  assert '1:2.83' in page.locator('.alternate-recipe-head').inner_text()
  assert page.locator('.alternate-recipe [data-action=make-current]').count()==1
- assert page.evaluate("window.__raw.recipePreferences[0].current_family_id")==='family-short'
+ assert page.evaluate("window.__raw.recipePreferences[0].current_family_id")=='family-short'
  page.locator('.alternate-recipe [data-action=make-current]').click()
  page.wait_for_function("window.__raw.recipePreferences[0].current_family_id==='family-long'")
  page.wait_for_function("window.__app.state.setups[0].workspaces.version.coffees.coffee.currentFamilies.Turbo==='family-long'")
