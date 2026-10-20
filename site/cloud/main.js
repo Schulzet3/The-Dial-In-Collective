@@ -341,7 +341,7 @@ class CloudApp {
  showAdd(){this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.coffeeUrlPreviewInput=null;
   this.show('New Coffee',`<form id=new-coffee>
    <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
-    <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary compact')}
+    <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}
      <span class="helper">Optional · Official coffee product page</span></div>
    </div>
    <div id="coffee-url-feedback" aria-live="polite"></div>

@@ -83,6 +83,11 @@ The owner supplied an updated Netlify Usage & Billing screenshot showing **940 /
 
 Authority: [owner monitoring and publication preferences](DECISION_LEDGER_2026_10_17_RELEASE_AND_BACKUP_PREFS.json) and [point-in-time Netlify credit ledger](NETLIFY_CREDIT_LEDGER.json). The original historical approval/screenshot paragraphs remain unchanged for provenance. **No production release is authorized by this policy edit.**
 
+
+### New Coffee Autofill button prominence — Locked (October 19/20, 2026)
+
+**Decision `NEW-COFFEE-AUTOFILL-BUTTON-ONLY-20261019`:** On the current New Coffee screen, enlarge the existing **Autofill From URL** button so it is prominent and full-width in the URL section. Leave the rest of New Coffee's URL field, helper, order, all coffee detail fields, Save/Add actions and behavior unchanged. Explicitly reject the other proposed screen #2 modifications (including hiding optional fields). The owner requested **no changes** to UI concept screens **#1 Coffee Library, #3 Grinder Setup, #4 Shot Recommendation, or #5 Settings**. The prior Locked grinder help and arrow/info guidance remain. Implement/test in development; publish separately only with owner authorization. All other possible new i-icons and beginner UX suggestions remain proposals, not implemented.
+
 ## One-click Roaster Page URL Autofill (Locked, October 17, 2026 local)
 
 Explicit owner approval: **Paste Roaster Page URL → Autofill From URL (one click) → review, correct or complete the coffee details → Add Coffee**. When safe source data is returned, Autofill immediately fills available **blank fields only**, preserving all user-entered values. A separate `Apply Suggested Details` button is not part of the approved flow. Autofill alone never saves or verifies a coffee, merges canonical identities, skips any release/duplicate confirmation, or overwrites fields the member already edited. Manual entry and Log Shot remain available if URLs fail, exceed limits or provide ambiguous data. The account-wide 12-claim/24-hour quota, minimum 30-second cooldown, HTTPS/SSRF/bounded-fetch requirements and Pending/member privacy remain unchanged.

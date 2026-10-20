@@ -182,3 +182,15 @@ test('evenness advice isolates distribution instead of adjusting tamp too',()=>{
  assert.match(advice.text,/distributing the grounds more evenly/);
  assert.match(advice.text,/keeping tamp and recipe settings unchanged/);
 });
+
+test('owner-approved URL Autofill emphasis changes only the New Coffee button',async()=>{
+ const main=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ const css=await readFile(new URL('../site/visual.css',import.meta.url),'utf8');
+ const match=main.match(/\$\{button\('Autofill From URL','preview-coffee-url','','([^']+)'\)\}/g)||[];
+ assert.deepEqual(match,["\$\{button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}"]);
+ assert.match(css,/\.coffee-url-actions \.coffee-url-autofill-button\{width:100%;flex:1 0 100%;min-height:46px;/);
+ assert.match(main,/<div class="form-grid coffee-detail-grid">/);
+ assert.match(main,/<button class="primary full space-top">Add Coffee<\/button>/);
+ assert.match(main,/<span class="helper">Optional · Official coffee product page<\/span>/);
+ assert.doesNotMatch(main,/More Coffee Details<\/summary>/);
+});
