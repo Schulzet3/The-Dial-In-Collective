@@ -8,7 +8,7 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill']:
+ for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','alternate-recipes','community','coffee-match-ui','coffee-url-autofill']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
@@ -87,6 +87,15 @@ window.__client={
     if(!pref.last_feed_shot_at||Date.parse(at)>=Date.parse(pref.last_feed_shot_at)){pref.slow_feed=d.feed_mode==='slow';pref.last_feed_shot_at=at;}
    }
   r.families=[{id:'family',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.78}},created_at:TIME}];r.recipePreferences=[{setup_version_id:'version',library_entry_id:'coffee',style:'Turbo',current_family_id:'family',revision:1}];return {ok:true,record:sh};
+ }
+ if(e.action==='make_current'){
+  const sh=r.shots.find(x=>x.id===d.shot_id);
+  const pref=sh?r.recipePreferences.find(x=>x.library_entry_id===sh.library_entry_id&&
+   x.setup_version_id===sh.setup_version_id&&x.style===sh.style):null;
+  if(!sh||!sh.is_dialed_in||sh.hidden_at||!pref||pref.revision!==d.expected_revision)
+   return {ok:false,code:'conflict'};
+  pref.current_family_id=sh.personal_family_id;pref.favorite_shot_id=sh.id;pref.revision++;
+  return {ok:true,record:structuredClone(pref)};
  }
  if(e.action==='set_style'){r.workspaceCoffees[0].selected_style=d.style;r.workspaceCoffees[0].revision++;return {ok:true,record:r.workspaceCoffees[0]};}
  return {ok:true};
@@ -348,6 +357,41 @@ with sync_playwright() as p:
  page.locator('[data-action=community-confirm-outlier]').click()
  page.wait_for_function('!document.querySelector(".community-review-prompt")')
  checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
+
+ # Synthetic alternate-family scenario: exercise the *actual* CloudApp render
+ # and version-checked existing Make Current action without real member writes.
+ page.evaluate("""() => {
+  const r=rawFixture();
+  r.families=[
+   {id:'family-short',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.0}},created_at:TIME},
+   {id:'family-long',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.8}},created_at:TIME}
+  ];
+  r.recipePreferences=[{setup_id:'setup',setup_version_id:'version',
+   library_entry_id:'coffee',style:'Turbo',current_family_id:'family-short',revision:2}];
+  r.shots=[
+   rawShot({id:'short-a',personal_family_id:'family-short',yield_g:36,time_s:23,feed_mode:'standard'}),
+   rawShot({id:'short-b',personal_family_id:'family-short',yield_g:37,time_s:24,feed_mode:'standard',pulled_at:'2026-10-02T12:00:00Z'}),
+   rawShot({id:'long-a',personal_family_id:'family-long',yield_g:50,time_s:20,feed_mode:'standard',pulled_at:'2026-10-03T12:00:00Z'}),
+   rawShot({id:'long-b',personal_family_id:'family-long',yield_g:52,time_s:22,feed_mode:'standard',pulled_at:'2026-10-04T12:00:00Z'})
+  ];
+  window.__raw=r;window.__app.raw=structuredClone(r);
+  window.__app.state=window.__Modules.mapping.hydrate(window.__app.raw);
+  window.__app.view='coffees';window.__app.expanded.add('coffee');window.__app.render();
+ }""")
+ assert page.locator('.alternate-recipes').count()==1
+ assert not page.locator('.alternate-recipes').evaluate('(d)=>d.open'), 'Alternates should be collapsed'
+ assert page.get_by_text('Alternate Dialed-In Recipes (1)').count()==1
+ page.locator('.alternate-recipes > summary').click()
+ assert page.locator('.alternate-recipe').count()==1
+ assert '1:2.83' in page.locator('.alternate-recipe-head').inner_text()
+ assert page.locator('.alternate-recipe [data-action=make-current]').count()==1
+ assert page.evaluate("window.__raw.recipePreferences[0].current_family_id")==='family-short'
+ page.locator('.alternate-recipe [data-action=make-current]').click()
+ page.wait_for_function("window.__raw.recipePreferences[0].current_family_id==='family-long'")
+ page.wait_for_function("window.__app.state.setups[0].workspaces.version.coffees.coffee.currentFamilies.Turbo==='family-long'")
+ assert page.locator('.alternate-recipes').count()==1
+ checks.append('Collapsed alternate-family list and existing revision-checked Make Current work end to end in 390px synthetic CloudApp')
+
 
  # Account switches must not reuse a previous account's still-running sync.
  switch=page.evaluate("""async () => {
