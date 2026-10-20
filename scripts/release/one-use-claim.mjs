@@ -6,7 +6,6 @@ export const RELEASE_BRANCH='release/production';
 export const CONTROL_SCHEMA=1;
 const SHA=/^[a-f0-9]{40}$/;
 const ID=/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/;
-const has=Object.hasOwn;
 function reject(reason){throw new Error('Release denied: '+reason);}
 export function validateReleaseGrant(grant,{releaseId,sourceSha,nowIso}={}){
  if(!grant||typeof grant!=='object'||Array.isArray(grant))reject('missing owner grant');

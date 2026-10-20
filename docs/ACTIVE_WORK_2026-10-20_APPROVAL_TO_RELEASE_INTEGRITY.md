@@ -87,3 +87,6 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 ## Concurrent Git release claim test (inert)
 - Added `tests/one-use-git-race.test.mjs` using a LOCAL temporary bare Git repository, two cloned writers racing non-force updates to the same `release/production` ref and a stale writer attempting to rewind. Acceptance: exactly one push wins, loser and rewind fail. This test cannot spend Netlify credits or mutate hosted refs, and does not substitute for production branch protection/admin cutover.
 - Pending CI run readback; next implement the actual owner-authorized GitHub release entrypoint behind explicit empty-grant and external-readiness gates.
+
+## CI correction: unused test helper
+- In early new release-core CI run `39517716719`, all **459 Node tests passed**, but zero-warning ESLint found one unused `has` constant in `scripts/release/one-use-claim.mjs`. Removed the unused value in this same-journal commit; no release protocol behavior changed. Await next complete CI. No production branch, build or credentials touched.
