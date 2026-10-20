@@ -98,3 +98,6 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 ## Controlled release runner refspec correctness fix
 - Corrected multi-ref `git fetch` to explicitly set both remote-tracking refs and read `origin/development/backend-foundation` by name. Using `FETCH_HEAD` with multiple refspecs would be ambiguous and could select the release branch instead of the owner-grant source. This fix makes the development head immutable and exact. No release branch push performed.
+
+## Safe initial owner-grant/consumption files
+- Created empty `docs/RELEASE_AUTHORIZATIONS.json` (NO owner production grant) and `docs/RELEASE_CONSUMPTION.json` (NO claimed releases). Only the release controller, after independently verified protection and provider cutover, may produce a release commit with a claimed grant. These files contain no tokens. No development code is published.
