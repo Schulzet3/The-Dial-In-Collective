@@ -42,6 +42,17 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  if(!result?.ok||norm(result.fields?.name)!==norm(data.title))return null;
  return result;
 }
+function originParts(value){
+ return String(value||'').split(/\s*(?:,|\/|;|&|\band\b)\s*/i)
+  .map(part=>norm(part)).filter(Boolean);
+}
+function compatibleOrigins(a,b){
+ const first=originParts(a),second=originParts(b);
+ if(!first.length||!second.length)return null;
+ const subset=(small,large)=>small.every(segment=>large.includes(segment));
+ if(!subset(first,second)&&!subset(second,first))return null;
+ return first.length>=second.length?a:b;
+}
 export function mergePublicProductPreview(base,extra){
  if(!extra?.ok)return base;
  if(!base?.ok)return extra;
@@ -53,6 +64,11 @@ export function mergePublicProductPreview(base,extra){
  const conflicts=new Set([...(base.conflicts||[]),...(extra.conflicts||[])]);
  for(const key of ['origin','roast_level','process','variety','producer','release_label']){
   if(base.fields?.[key]&&extra.fields?.[key]&&norm(base.fields[key])!==norm(extra.fields[key])){
+   // "Gedeb, Ethiopia" and "Ethiopia" are compatible levels of geographic
+   // precision, not contradictory countries. Keep the more specific sourced
+   // origin; genuinely divergent blends/harvests remain conflicts.
+   const origin=key==='origin'?compatibleOrigins(base.fields[key],extra.fields[key]):null;
+   if(origin){fields.origin=origin;continue;}
    delete fields[key];conflicts.add(key);
   }
  }
@@ -65,11 +81,11 @@ export function mergePublicProductPreview(base,extra){
 // Backwards-compatible name for existing extractor consumers/tests.
 export const mergeShopifyPreview=mergePublicProductPreview;
 export async function extractShopifyProduct(raw,{
- readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts
+ readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts,deadlineAt=null
 }={}){
  const request=shopifyProductRequest(raw);if(!request)return null;
  try{
-  const response=await readJson(request.url,{shopifyProduct:true});
+  const response=await readJson(request.url,{shopifyProduct:true,deadlineAt});
   if(!response?.ok||typeof response.json!=='string'||Buffer.byteLength(response.json)>MAX_HTML_BYTES)return null;
   return extractShopifyAjaxData(JSON.parse(response.json),request,{extract});
  }catch{return null;}

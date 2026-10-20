@@ -210,3 +210,11 @@ test('unauthenticated and denied member accounts cause ZERO external network rea
  assert.equal((await app(request(valid,false))).status,401);
  assert.equal(calls,0);
 });
+
+test('product-only text/plain HTML is conditionally accepted; ordinary text and non-product URLs are not',async()=>{
+ const product=fakeHttpReply({body:productSource,mime:'text/plain; charset=utf-8'});
+ assert.equal((await fetchPublicCoffeeHtml(valid,{request:product.request})).ok,true);
+ assert.equal((await fetchPublicCoffeeHtml(valid,{request:fakeHttpReply({body:'plain text',mime:'text/plain'}).request})).reason,'not_html');
+ assert.equal((await fetchPublicCoffeeHtml(unrelated,{request:fakeHttpReply({body:productSource,mime:'text/plain'}).request})).reason,'not_html');
+ assert.equal((await fetchPublicCoffeeJson(valid,{request:fakeHttpReply({body:productSource,mime:'text/plain'}).request})).reason,'not_html');
+});

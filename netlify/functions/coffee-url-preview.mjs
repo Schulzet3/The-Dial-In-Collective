@@ -73,14 +73,23 @@ export function createPreviewHandler({
     return json({ok:false,reason:claim?.reason||'preview_unavailable'},claim?.reason==='preview_cooldown'||claim?.reason==='daily_preview_limit'?429:503);
    // A known public Ecwid store ID allows one small, product-specific
    // read instead of retrieving a 600KB+ Wix catalog shell.
+   const deadlineAt=Date.now()+15_000;
+   const sources={readJson,extract,deadlineAt};
+   const publicProduct=async url=>{
+    if(shopifyProductRequest(url)){
+     const shopify=await extractShopifyProduct(url,sources);
+     if(shopify?.ok)return shopify;
+    }
+    if(wooProductRequest(url))return extractWooProduct(url,sources);
+    return null;
+   };
    const knownEcwid=ecwidProductRequest(validated.toString());
    let finalUrl=validated.toString();
-   let preview=knownEcwid?await extractEcwidProduct(finalUrl,'',{readJson,extract}):null;
+   let preview=knownEcwid?await extractEcwidProduct(finalUrl,'',sources):null;
    if(!preview?.ok){
     // One bounded size retry for eligible product-detail URLs only.
     // The same 15-second budget spans the initial read, safe redirects
     // and the optional larger retry; normal requests retain the 11s cap.
-    const deadlineAt=Date.now()+15_000;
     let page=await readHtml(validated.toString(),{deadlineAt});
     if(page?.reason==='page_too_large'&&
        isCoffeeProductDetailUrl(validated.toString())&&
@@ -90,16 +99,14 @@ export function createPreviewHandler({
     if(!page?.ok){
      // Some Shopify pages exceed the HTML bound or refuse HTML, while their
      // public exact-handle product JSON may still be safely accessible.
-     const fromPublic=shopifyProductRequest(finalUrl)?
-      await extractShopifyProduct(finalUrl,{readJson,extract}):
-      wooProductRequest(finalUrl)?await extractWooProduct(finalUrl,{readJson,extract}):null;
+     const fromPublic=await publicProduct(finalUrl);
      if(!fromPublic?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
      preview=fromPublic;
     }else{
     finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
     const embeddedEcwid=!knownEcwid?ecwidProductRequest(finalUrl,page.html):null;
     if(embeddedEcwid)
-     preview=await extractEcwidProduct(finalUrl,page.html,{readJson,extract});
+     preview=await extractEcwidProduct(finalUrl,page.html,sources);
     if(!preview?.ok){
      const compact=compactCoffeeProductHtml(page.html);
      preview=extract(compact||page.html,{source_url:finalUrl});
@@ -111,10 +118,14 @@ export function createPreviewHandler({
      if(embeddedEcwid&&preview?.ok&&!sameEcwidTitle(preview.fields?.name,embeddedEcwid.expectedName))
       preview={ok:false,reason:'ambiguous_or_missing_product'};
     }
-    if(!preview?.ok||!preview.fields?.tasting_notes){
-     const fromPublic=shopifyProductRequest(finalUrl)?
-      await extractShopifyProduct(finalUrl,{readJson,extract}):
-      wooProductRequest(finalUrl)?await extractWooProduct(finalUrl,{readJson,extract}):null;
+    // Public exact-product endpoints often expose structured specs absent from
+    // otherwise valid HTML. Enrich only sparse source evidence, never overwrite
+    // confidently selected facts or call merchant/customer/admin APIs.
+    const facts=['origin','process','roast_level','elevation_m','variety','producer','tasting_notes'];
+    const sparse=!preview?.ok||!preview.fields?.tasting_notes||
+     facts.filter(k=>typeof preview.fields?.[k]==='string'&&preview.fields[k].trim()).length<5;
+    if(sparse&&Date.now()<deadlineAt){
+     const fromPublic=await publicProduct(finalUrl);
      preview=mergePublicProductPreview(preview,fromPublic);
     }
     }

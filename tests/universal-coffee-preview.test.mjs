@@ -499,6 +499,50 @@ test('Shopify independent source disagreement is withheld instead of silently me
  assert.equal(combined.fields.tasting_notes,'Peach, mango');
  assert.equal(mergeShopifyPreview(previous,{ok:true,fields:{name:'Not Wuri',origin:'Brazil'}}),previous);
 });
+test('cross-platform product enrichment preserves more precise compatible origins but rejects divergent countries',()=>{
+ const base={ok:true,fields:{name:'Wuri',roaster:'Roaster',origin:'Gedeb, Ethiopia',process:'Washed'}};
+ const compatible={ok:true,fields:{name:'Wuri',origin:'Ethiopia',tasting_notes:'Peach, sugarcane'}};
+ const good=mergeShopifyPreview(base,compatible);
+ assert.equal(good.fields.origin,'Gedeb, Ethiopia');
+ assert.equal(good.fields.tasting_notes,'Peach, sugarcane');
+ assert.equal(good.conflicts,undefined);
+ const more=mergeShopifyPreview({ok:true,fields:{name:'Wuri',origin:'Ethiopia'}},
+  {ok:true,fields:{name:'Wuri',origin:'Gedeb, Ethiopia'}});
+ assert.equal(more.fields.origin,'Gedeb, Ethiopia');
+ const bad=mergeShopifyPreview(base,{ok:true,fields:{name:'Wuri',origin:'Gedeb, Colombia'}});
+ assert.equal(bad.fields.origin,undefined);
+ assert.deepEqual(bad.conflicts,['origin']);
+ const blend=mergeShopifyPreview(base,{ok:true,fields:{name:'Wuri',origin:'Ethiopia, Colombia'}});
+ assert.equal(blend.fields.origin,'Ethiopia, Colombia');
+});
+
+test('sparse but valid Shopify HTML enriches missing structured facts from exact-handle public JSON',async()=>{
+ const url='https://coffee-example.com/products/mountain-lot';
+ const page='<html><head><meta property="og:type" content="product"><meta property="og:title" content="Mountain Lot">'+
+  '<meta property="og:site_name" content="Coffee Example"></head><body><main><h1>Mountain Lot</h1>'+
+  '<p>Origin: Gedeb, Ethiopia</p></main></body></html>';
+ let calls=0;
+ const client=async endpoint=>({ok:true,json:async()=>endpoint.endsWith('/auth/v1/user')?
+  identityJson():endpoint.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:{allowed:true}});
+ const handler=createPreviewHandler({apiFetch:client,env:approvedEnv,
+  readHtml:async()=>({ok:true,html:page,source_url:url}),
+  readJson:async endpoint=>{calls++;assert.equal(endpoint,'https://coffee-example.com/products/mountain-lot.js');
+   return {ok:true,json:JSON.stringify({title:'Mountain Lot',handle:'mountain-lot',vendor:'Coffee Example',
+    description:'<p>Origin: Ethiopia</p><p>Process: Washed</p><p>Tasting Notes: Jasmine, peach</p>',
+    tags:['Variety: Heirloom']})};}});
+ const req=new Request('https://app.dialincollective.com/api/coffee-preview',{
+  method:'POST',headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',
+   'origin':'https://app.dialincollective.com'},body:JSON.stringify({source_url:url})});
+ const found=await (await handler(req)).json();
+ assert.equal(found.ok,true);
+ assert.equal(found.fields.name,'Mountain Lot');
+ assert.equal(found.fields.origin,'Gedeb, Ethiopia');
+ assert.equal(found.fields.process,'Washed');
+ assert.equal(found.fields.variety,'Heirloom');
+ assert.equal(found.fields.tasting_notes,'Jasmine, peach');
+ assert.equal(calls,1);
+});
+
 test('Shopify fallback retrieves a bounded public JSON product when HTML source unavailable',async()=>{
  const url='https://my-roaster.coffee/products/berry-lot';
  const data={handle:'berry-lot',title:'Berry Lot',vendor:'My Roaster',
@@ -555,6 +599,9 @@ test('Woo public Store API lookup accepts only exact, secure product slugs',()=>
  const target=wooProductRequest(url);
  assert.equal(target.slug,'ethiopia-ambela');
  assert.equal(target.api,'https://roaster.example-coffee.com/wp-json/wc/store/v1/products/ethiopia-ambela');
+ assert.equal(wooProductRequest('https://roaster.example-coffee.com/en/product/ethiopia-ambela/')?.slug,'ethiopia-ambela');
+ assert.equal(wooProductRequest('https://roaster.example-coffee.com/coffees/ethiopia-ambela/')?.api,
+  'https://roaster.example-coffee.com/wp-json/wc/store/v1/products/ethiopia-ambela');
  for(const src of ['https://roaster.example-coffee.com/wp-admin','https://roaster.example-coffee.com/shop/ethiopia-ambela',
  'https://roaster.example-coffee.com/product-category/coffee',
  'https://roaster.example-coffee.com/product/coffee?nonce=x#frag','http://roaster.example-coffee.com/product/coffee',

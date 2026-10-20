@@ -9,7 +9,9 @@ const normalize=v=>String(v||'').normalize('NFKD')
  .replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'');
 export function wooProductRequest(raw){
  const url=safeCoffeeUrl(raw);if(!url)return null;
- const m=url.pathname.match(/^\/product\/([a-z0-9][a-z0-9-]{0,155})\/?$/i);
+ // Woo merchants can localize or customize the public product permalink base.
+ // Keep the allowlist narrow and always require exact slug AND returned permalink.
+ const m=url.pathname.match(/^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?(?:product|coffee|coffees|beans)\/([a-z0-9][a-z0-9-]{0,155})\/?$/i);
  if(!m)return null;
  const slug=m[1].toLowerCase();
  const api=new URL('/wp-json/wc/store/v1/products/'+slug,url.origin).toString();
@@ -49,10 +51,10 @@ export function extractWooStoreData(data,request,{extract=extractPublicCoffeeFac
  const result=extract(html,{source_url:request.sourceUrl});
  return result?.ok&&normalize(result.fields?.name)===normalize(data.name)?result:null;
 }
-export async function extractWooProduct(raw,{readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts}={}){
+export async function extractWooProduct(raw,{readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts,deadlineAt=null}={}){
  const request=wooProductRequest(raw);if(!request)return null;
  try{
-  const result=await readJson(request.api);
+  const result=await readJson(request.api,{deadlineAt});
   if(!result?.ok||typeof result.json!=='string'||Buffer.byteLength(result.json)>MAX_HTML_BYTES)return null;
   return extractWooStoreData(JSON.parse(result.json),request,{extract});
  }catch{return null;}

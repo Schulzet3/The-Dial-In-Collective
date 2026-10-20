@@ -60,12 +60,12 @@ export function extractEcwidSnapshotData(data,request,{extract=extractPublicCoff
  return preview;
 }
 export async function extractEcwidProduct(raw,html='',{
- readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts
+ readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts,deadlineAt=null
 }={}){
  const request=ecwidProductRequest(raw,html);
  if(!request)return null;
  try{
-  const response=await readJson(request.requestUrl);
+  const response=await readJson(request.requestUrl,{deadlineAt});
   if(!response?.ok||typeof response.json!=='string'||Buffer.byteLength(response.json)>MAX_HTML_BYTES)return null;
   const data=JSON.parse(response.json);
   return extractEcwidSnapshotData(data,request,{extract});

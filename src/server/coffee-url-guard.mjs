@@ -129,8 +129,13 @@ export async function fetchPublicCoffeeHtml(raw,{
     const mime=String(res.headers['content-type']||'').toLowerCase();
     const jsonMime=/^(?:application\/json|application\/[a-z0-9.-]+\+json)(?:\s*;|$)/i.test(mime);
     const shopifyJsMime=/^(?:application|text)\/(?:x-)?javascript(?:\s*;|$)/i.test(mime);
+    // Some public coffee product hosts accidentally serve HTML as text/plain.
+    // Admit ONLY explicit product URLs and verify that the body is HTML after
+    // bounded reading. Never relax MIME checks on JSON, catalogs or homepages.
+    const plainProductHtml=responseType==='html'&&/^text\/plain(?:\s*;|$)/i.test(mime)&&
+     isCoffeeProductDetailUrl(url.toString());
     if(responseType==='html'?
-       (!mime.includes('text/html')&&!mime.includes('application/xhtml+xml')):
+       (!mime.includes('text/html')&&!mime.includes('application/xhtml+xml')&&!plainProductHtml):
        !(jsonMime||(responseType==='shopify_json'&&shopifyJsMime))){
      res.destroy();finish({ok:false,reason:'not_html'});return;
     }
@@ -149,6 +154,9 @@ export async function fetchPublicCoffeeHtml(raw,{
      const decoded=decodeBody(Buffer.concat(chunks),String(res.headers['content-encoding']||'').toLowerCase().trim(),maxBytes);
      if(!decoded.body){finish({ok:false,reason:decoded.reason,source_url:url.toString()});return;}
      const body=decoded.body;
+     if(plainProductHtml&&!/<(?:!doctype\s+html|html|head|body|main|article|h1)\b/i.test(body.toString('utf8',0,2048))){
+      finish({ok:false,reason:'not_html',source_url:url.toString()});return;
+     }
      finish({ok:true,...(responseType!=='html'?{json:body.toString('utf8')}:{html:body.toString('utf8')}),source_url:url.toString()});
     });
     res.on('error',()=>finish({ok:false,reason:'source_fetch_failed'}));
