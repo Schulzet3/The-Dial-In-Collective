@@ -5,6 +5,7 @@ on:
       - development/backend-foundation
     paths:
       - scripts/audit/coffee-roaster-live-probe.mjs
+      - scripts/audit/mango-tree-public-probe.mjs
       - src/server/coffee-product-layouts.mjs
       - src/server/coffee-page-metadata.mjs
       - src/server/agtron-roast.mjs
@@ -14,7 +15,7 @@ permissions:
   contents: read
 jobs:
   unprivileged-public-pages:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]')
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]') || contains(github.event.head_commit.message, '[dic-mango-probe]')
     runs-on: ubuntu-latest
     timeout-minutes: 4
     steps:
@@ -25,4 +26,8 @@ jobs:
         with:
           node-version: '22'
       - name: Safely probe only public HTTPS coffee sources
+        if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]')
         run: node scripts/audit/coffee-roaster-live-probe.mjs
+      - name: Diagnose Mango Tree public product only
+        if: contains(github.event.head_commit.message, '[dic-mango-probe]')
+        run: node scripts/audit/mango-tree-public-probe.mjs
