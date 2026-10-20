@@ -188,7 +188,7 @@ test('owner-approved URL Autofill emphasis changes only the New Coffee button',a
  const css=await readFile(new URL('../site/visual.css',import.meta.url),'utf8');
  const match=main.match(/\$\{button\('Autofill From URL','preview-coffee-url','','([^']+)'\)\}/g)||[];
  assert.deepEqual(match,["\$\{button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}"]);
- assert.match(css,/\.coffee-url-actions \.coffee-url-autofill-button\{width:100%;flex:1 0 100%;min-height:46px;/);
+ assert.match(css,/\.coffee-url-actions \.coffee-url-autofill-button\{width:100%;flex:1 0 100%;min-height:56px;padding:14px 18px;font-size:16px;/);
  assert.match(main,/<div class="form-grid coffee-detail-grid">/);
  assert.match(main,/<button class="primary full space-top">Add Coffee<\/button>/);
  assert.match(main,/<span class="helper">Optional · Official coffee product page<\/span>/);
