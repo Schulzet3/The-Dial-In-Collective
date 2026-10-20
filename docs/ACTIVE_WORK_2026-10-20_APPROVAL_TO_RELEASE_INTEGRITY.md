@@ -90,3 +90,8 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 ## CI correction: unused test helper
 - In early new release-core CI run `39517716719`, all **459 Node tests passed**, but zero-warning ESLint found one unused `has` constant in `scripts/release/one-use-claim.mjs`. Removed the unused value in this same-journal commit; no release protocol behavior changed. Await next complete CI. No production branch, build or credentials touched.
+
+## Controlled release runner prepared behind external readiness flags (no deployment)
+- Implemented `scripts/release/controlled-release-runner.mjs`, invoked ONLY in a manually dispatched GitHub Actions workflow on the protected default `main` branch, with three external readiness variables and a unique release ID plus exact tested source SHA. It independently fetches GitHub exact-commit CI, checks an owner-approved source-bound grant, builds a release commit with consumption ledger, and does ONE non-force Git push to `release/production` based on previously read release head. No fallback/retry on rejection; readback mandatory. It prints no token and does not call Netlify.
+- Guarded by tests `tests/controlled-release-runner.test.mjs`: local execution and missing branch/readiness flags fail before Git/network. **Runner is NOT installed as runnable workflow on main; Netlify still watches dev.** It cannot publish as currently configured.
+- Next step: add empty grant list and Netlify release-branch source guard, test CI; create controlled workflow on main only after exact source and staged proof. Admin must upgrade to GitHub Pro and configure rules; Netlify branch cutover separate owner action.
