@@ -83,3 +83,7 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 - Added `scripts/release/one-use-claim.mjs`: immutable exact ID/source-bound owner grant validation; finite approval expiry, exact release branch, 15-credit cap; consumed-history replay/source rejection; exact production marker and readiness gates requiring independent branch/Netlify/runner checks. **No network/provider calls** or release branch changes; this is not yet a working production release controller.
 - Six Node tests in `tests/one-use-claim.test.mjs` prove a valid claim, replay denial, same-source duplicate denial, missing approval/expiry/credit denial, tamper denial, and required checks/hosted controls failing closed.
 - Next add an isolated bare-Git **real fast-forward race** test (two concurrent attempts, one winner) and protected, separate-branch orchestration; do not publish to current Netlify branch. GitHub Pro account and Project UI settings remain owner actions.
+
+## Concurrent Git release claim test (inert)
+- Added `tests/one-use-git-race.test.mjs` using a LOCAL temporary bare Git repository, two cloned writers racing non-force updates to the same `release/production` ref and a stale writer attempting to rewind. Acceptance: exactly one push wins, loser and rewind fail. This test cannot spend Netlify credits or mutate hosted refs, and does not substitute for production branch protection/admin cutover.
+- Pending CI run readback; next implement the actual owner-authorized GitHub release entrypoint behind explicit empty-grant and external-readiness gates.
