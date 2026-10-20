@@ -8,7 +8,7 @@ const ledger=JSON.parse(file('docs/DECISION_LEDGER.json'));
 const credits=JSON.parse(file('docs/NETLIFY_CREDIT_LEDGER.json'));
 const check=(changes={})=>auditApprovalCoverage({matrix,ledger,credits,...changes});
 test('every current owner decision is inventoried and approved UI source/contracts exist',()=>{
- assert.equal(checkRepository().ownerDecisions,29);
+ assert.equal(checkRepository().ownerDecisions,30);
  assert.deepEqual(check(),[]);
 });
 test('forgotten owner-approved decision key fails closed until classified',()=>{

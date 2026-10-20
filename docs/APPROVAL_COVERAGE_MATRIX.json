@@ -24,6 +24,7 @@
     "current_owner_outlier_research_20261018",
     "current_owner_permanent_admin_and_beta_invitation_access_20261018",
     "current_owner_preparation_community_release_20261018",
+    "current_owner_protected_continuity_single_use_release_20261020",
     "current_owner_pwa_freshness_extractor_reliability_release_20261020",
     "current_owner_recommendation_display_choice_20261019",
     "current_owner_recommendation_single_intentional_change_20261019",
@@ -265,6 +266,23 @@
       "id": "all_chat_transcript_coverage",
       "status": "UNPROVABLE",
       "reason": "Project archives contain many exported messages, but not guaranteed every conversation; canonical GitHub logging and enforceable review inventory are necessary."
+    },
+    {
+      "id": "github_private_branch_protection",
+      "status": "BLOCKED",
+      "reason": "Owner must enable private GitHub Pro eligibility and required checks for dev/release branches; repo currently protected:false; integration cannot PATCH protection.",
+      "issue": 38
+    },
+    {
+      "id": "netlify_release_branch_cutover",
+      "status": "BLOCKED",
+      "reason": "Current production watches development; requires owner to move Git CD to dedicated release/production branch AFTER inert workflow tests.",
+      "issue": 38
+    },
+    {
+      "id": "chatgpt_project_settings",
+      "status": "OWNER_ACTION_REQUIRED",
+      "reason": "Project instructions saved to GitHub file; no Project settings editor is exposed, user must paste and save."
     }
   ],
   "original_baseline": {

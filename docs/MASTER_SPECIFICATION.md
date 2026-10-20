@@ -8,6 +8,18 @@ The latest explicit owner decision governs. Preserve every unchanged Locked requ
 
 Current product copy uses **The Dial In Collective** and **dial in**, without hyphens. Historical source headings, filenames and quotations retain their original wording. The product remains sleek, simple and optimized for **Log Shot → Rate → Recommendation**.
 
+## Protected source, verified continuity and atomic release — owner Locked October 20, 2026
+
+**Owner approval:** Every material owner instruction, test, decision, code/provider action and interruption checkpoint must be durably recorded/read back in GitHub before further mutation. All sessions begin by reconciling the latest verified development SHA, CI, decisions and provider deployment. Missing/unavailable records remain UNVERIFIED, not invented. Code/test/CI commits must include the GitHub journal in the SAME commit.
+
+**Mandatory private GitHub protection:** Require approval/continuity, Node/lint/build, mobile browser, private visual and applicable security checks on protected `development/backend-foundation`; disallow deletion, force pushes, silent bypass and unreviewed updates. Keep repository PRIVATE. `main` remains backup operations.
+
+**One-use release authority:** Publishing to Netlify must use a separate protected `release/production` branch, changed only by a serialized authorized workflow. Each owner grant has one immutable unique release ID bound to the exact tested source SHA; a non-force remote Git push of a descendant commit with a consumed-ID ledger is the atomic claim. Two competing claims must produce at most one accepted ref update. A re-run for an already consumed release ID may not push or trigger another production build. CI must test the race and deny stale/unapproved source and altered release scope. Any failed production build retry requires separately reviewed owner permission. Static `[dic-publish]` markers on ongoing development are prohibited after controlled cutover.
+
+**Separate operational gates:** Required GitHub branch protection and Netlify production-branch selection must be independently configured and verified. The existing account has a private unprotected branch; GitHub rulesets API returns 403 requiring GitHub Pro or a public repository, and GitHub app integration cannot administer branch protection. Do not buy Pro, make the repo public, change Netlify settings, publish, or write SQL/member data on this request without explicit further authorization. Until settings and race/actual provider tests pass, mark #38 OPEN / release protection not complete.
+
+**ChatGPT Project settings:** Canonical ready-to-paste [Project instructions](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) are approved, but saving this file does NOT update Project UI settings. The owner must paste/save or grant a supported settings editor in another execution environment.
+
 ## Owner-Locked recipe UI supersession — ONE visible recipe, internal successful families (October 20, 2026)
 
 **Explicit owner instruction:** “I definitely prefer option two that you recommended especially if you can identify which approach most closely matches the users preferences for taste and equipment. Let's go with that. Build and test it.”

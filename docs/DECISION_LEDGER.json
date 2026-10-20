@@ -3478,5 +3478,32 @@
       }
     ],
     "deployment": "NOT authorized; current production remains e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60"
+  },
+  "current_owner_protected_continuity_single_use_release_20261020": {
+    "decision_id": "OPS-PROTECTED-BRANCH-ATOMIC-RELEASE-20261020",
+    "status": "Locked; development implementation authorized; final configuration BLOCKED pending GitHub Pro/admin and Netlify branch switch; no production publish",
+    "owner_source": "Owner explicitly requested Project instructions, mandatory private branch required checks, and issue #38's atomic single-use production release protection on October 20, 2026.",
+    "approved": [
+      "GitHub write-before-work and same-commit contemporaneous journal",
+      "Session-start verification of latest source head, CI, interruptions and Netlify deployed commit",
+      "Private protected application and release branches, mandatory CI and no bypass/force pushes",
+      "Unique explicit owner grant bound to tested source SHA, one non-force release branch update, serialized workflow, replay denial",
+      "Inert concurrent race tests and source/CI/backend release gate inspection"
+    ],
+    "not_authorized": [
+      "GitHub Pro billing purchase",
+      "Public GitHub visibility",
+      "Netlify production branch cutover or new billable build without separate owner confirmation",
+      "SQL/Edge/Auth/user/shot changes",
+      "ChatGPT Project settings UI change by an unavailable tool"
+    ],
+    "blockers": [
+      "GET rulesets 403 requires GitHub Pro or public private repository",
+      "GET branch protection 403 Resource not accessible by integration",
+      "No ChatGPT Project instructions editing tool connected",
+      "Netlify connector cannot change production branch"
+    ],
+    "instructions_file": "docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md",
+    "issue": 38
   }
 }
