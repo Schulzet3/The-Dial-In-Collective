@@ -53,9 +53,10 @@ export async function executeSingleUseRelease(settings=process.env){
  const token=settings.GITHUB_TOKEN;
  if(!token)throw Error('GitHub Actions write token missing');
  // Read the current remote refs. No force, no rebases, no automatic retries.
- git(['fetch','--no-tags','origin','development/backend-foundation',
+ git(['fetch','--no-tags','origin',
+  '+refs/heads/development/backend-foundation:refs/remotes/origin/development/backend-foundation',
   '+refs/heads/'+RELEASE_BRANCH+':refs/remotes/origin/'+RELEASE_BRANCH]);
- const developmentHead=git(['rev-parse','FETCH_HEAD']);
+ const developmentHead=git(['rev-parse','refs/remotes/origin/development/backend-foundation']);
  const releaseHead=git(['rev-parse','refs/remotes/origin/'+RELEASE_BRANCH]);
  if(!SHA.test(developmentHead)||!SHA.test(releaseHead))throw Error('Exact remote branches unavailable');
  git(['merge-base','--is-ancestor',sha,developmentHead]);
