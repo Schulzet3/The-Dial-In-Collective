@@ -113,7 +113,9 @@ test('New Setup keeps grinder range copy behind an accessible lowercase i contro
  for(const name of ['finest_setting','coarsest_setting']){
   assert.match(form,new RegExp("field\\('"+(name==='finest_setting'?'Finest':'Coarsest')+" Espresso Setting','"+name+"'"));
  }
- assert.match(main,/if\(a==='grinder-range-info'\)\{[\s\S]*?description\.hidden=!description\.hidden;[\s\S]*?target\.setAttribute\('aria-expanded',String\(!description\.hidden\)\)/);
+ assert.match(main,/if\(a==='grinder-range-info'\|\|a==='next-shot-info'\)\{/);
+ assert.match(main,/description\.hidden=!description\.hidden;/);
+ assert.match(main,/target\.setAttribute\('aria-expanded',String\(!description\.hidden\)\)/);
  assert.match(css,/\.inline-info-button:focus-visible/);
  assert.match(css,/#new-setup \.grinder-range-description\[hidden\]\{display:none\}/);
 });
