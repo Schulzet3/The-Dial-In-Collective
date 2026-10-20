@@ -2,12 +2,11 @@
 // fetch and parser, no Supabase credentials, JWTs, member quota, browser JS,
 // database mutation, raw HTML retention or production deployment.
 import assert from 'node:assert/strict';
-import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,isCoffeeProductDetailUrl,
+import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,isCoffeeProductDetailUrl,fetchPublicCoffeeJson,
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {extractEcwidProduct,ecwidProductRequest} from '../../src/server/coffee-ecwid-snapshot.mjs';
-import {fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
 
 const targets=[
  ['Picky Chemist Gesha','https://en.thepickychemist.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey'],
