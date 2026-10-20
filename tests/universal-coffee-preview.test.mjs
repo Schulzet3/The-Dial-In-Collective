@@ -407,7 +407,7 @@ test('selected Product description supplies explicit structured-label facts on n
  const details={
   '@context':'https://schema.org','@type':'Product',url,name:'Ethiopia Ambela',
   brand:{'@type':'Brand',name:'New Roaster'},
-  description:'Origin: Ethiopia\\nProcess: Washed\\nVariety: Heirloom\\nRoast Level: Light\\nTasting Notes: Peach, jasmine, honey'
+  description:'Origin: Ethiopia\nProcess: Washed\nVariety: Heirloom\nRoast Level: Light\nTasting Notes: Peach, jasmine, honey'
  };
  const r=extractPublicCoffeeFacts(wrap(details),{source_url:url});
  assert.equal(r.ok,true);
