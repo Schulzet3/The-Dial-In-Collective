@@ -11,6 +11,7 @@
 7. [AGENTS — continuity rules](../AGENTS.md) — exact repository/change-control method.
 
 ## Current operating records
+- [October 20 owner-authorized adaptive extractor production release preflight and eventual verified receipt](RELEASE_2026_10_20_ADAPTIVE_COFFEE_EXTRACTOR.md)
 - [900 KB vs 2 MB isolated benchmark and other safe extractor options (October 20)](EXTRACTOR_SIZE_BENCHMARK_2026-10-20.md)
 - [Extractor platform coverage, security limits and cleanup (October 20)](EXTRACTOR_PLATFORM_COVERAGE_AND_SECURITY_2026-10-20.md)
 - [New Coffee Autofill button approved only; other mockups unchanged (issue #40)](https://github.com/Schulzet3/The-Dial-In-Collective/issues/40)

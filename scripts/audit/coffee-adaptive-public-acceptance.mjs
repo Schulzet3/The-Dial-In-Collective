@@ -1,3 +1,4 @@
+// Product identity, unverified labeling and bounded decoding remain release gates.
 // Unprivileged public product HTML acceptance for the ACTUAL adaptive URL
 // fetch and parser, no Supabase credentials, JWTs, member quota, browser JS,
 // database mutation, raw HTML retention or production deployment.
