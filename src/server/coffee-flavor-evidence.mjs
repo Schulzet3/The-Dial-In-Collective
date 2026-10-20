@@ -37,14 +37,14 @@ function sipComparisonNotes(html,clean){
 // Keep the literal flavor nouns instead of machine-translating or guessing a
 // dictionary. No neighboring coffee, general processing or education text.
 function frenchProductSensoryNotes(html,clean){
- const after=topOfProduct(html).replace(/<svg\\b[^>]*>[\\s\\S]*?<\\/svg\\s*>/gi,' ');
- for(const m of after.matchAll(/<p\\b[^>]{0,350}>([\\s\\S]{30,1600}?)<\\/p\\s*>/gi)){
+ const after=topOfProduct(html).replace(/<svg\b[^>]*>[\s\S]*?<\/svg\s*>/gi,' ');
+ for(const m of after.matchAll(/<p\b[^>]{0,350}>([\s\S]{30,1600}?)<\/p\s*>/gi)){
   const prose=clean(m[1],780);
-  const cue=/\\bnotes?\\s+florales?[^.!?()]{0,90}\\(([\\p{L}\\p{M}'’ -]{2,40})\\)/iu.exec(prose);
+  const cue=/\bnotes?\s+florales?[^.!?()]{0,90}\(([\p{L}\p{M}'’ -]{2,40})\)/iu.exec(prose);
   if(!cue)continue;
   const tail=prose.slice(cue.index+cue[0].length, cue.index+cue[0].length+170);
-  const citrus=/\\bdu\\s+([\\p{L}\\p{M}'’ -]{3,45}?)\\s+et\\s+une\\s+sucrosit/iu.exec(tail);
-  const fruit=/\\brappelant\\s+la\\s+([\\p{L}\\p{M}'’ -]{3,45})(?=[.!?]|$)/iu.exec(tail);
+  const citrus=/\bdu\s+([\p{L}\p{M}'’ -]{3,45}?)\s+et\s+une\s+sucrosit/iu.exec(tail);
+  const fruit=/\brappelant\s+la\s+([\p{L}\p{M}'’ -]{3,45})(?=[.!?]|$)/iu.exec(tail);
   if(!citrus||!fruit)continue;
   const names=[cue[1],citrus[1],fruit[1]].map(s=>s.trim());
   const accepted=shortFlavorList(names.join(', '),clean);
