@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {hydrate} from '../site/cloud/mapping.js';
 import {patchAcknowledgement} from '../site/cloud/cache.js';
 import {shotCard,feedLabel} from '../site/cloud/shot_card.js';
-import {shotSummary,recipeGrid} from '../site/lib/ui.js';
+import {shotSummary,recipeGrid,nextShotAdjustment,nextShotGuidance,nextShotTitle} from '../site/lib/ui.js';
 import * as E from '../site/lib/engine.js';
 import {rawFixture,rawShot,OWNER,TIME} from './cloud-fixtures/raw.js';
 
@@ -114,6 +114,67 @@ test('New Setup keeps grinder range copy behind an accessible lowercase i contro
   assert.match(form,new RegExp("field\\('"+(name==='finest_setting'?'Finest':'Coarsest')+" Espresso Setting','"+name+"'"));
  }
  assert.match(main,/if\(a==='grinder-range-info'\)\{[\s\S]*?description\.hidden=!description\.hidden;[\s\S]*?target\.setAttribute\('aria-expanded',String\(!description\.hidden\)\)/);
- assert.match(css,/#new-setup \.grinder-range-info-button:focus-visible/);
+ assert.match(css,/\.inline-info-button:focus-visible/);
  assert.match(css,/#new-setup \.grinder-range-description\[hidden\]\{display:none\}/);
+});
+
+test('approved Option A arrow with i disclosure preserves prior setup helper',async()=>{
+ const main=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ const css=await readFile(new URL('../site/visual.css',import.meta.url),'utf8');
+ assert.match(main,/Next Shot Recommendation<\/span><button type="button" class="inline-info-button"/);
+ assert.match(main,/data-action="next-shot-info"/);
+ assert.match(main,/aria-expanded="false" aria-controls="next-shot-info-\$\{e\(c\.id\)\}"/);
+ assert.match(main,/class="next-shot-info-text helper" id="next-shot-info-\$\{e\(c\.id\)\}" hidden/);
+ assert.match(main,/if\(a==='grinder-range-info'\|\|a==='next-shot-info'\)/);
+ assert.match(main,/Changing only one setting helps isolate its effect/);
+ assert.doesNotMatch(main,/One adjustment at a time/);
+ assert.match(css,/\.inline-info-button:focus-visible/);
+ assert.match(css,/\.feedback-panel \.next-shot-arrow/);
+ assert.doesNotMatch(css,/\.grinder-range-info-button/);
+});
+test('single grind adjustment shows the actual arrow and unchanged variables',()=>{
+ const shot={doseG:18,yieldG:40,grindSetting:2.5,tempC:93};
+ const advice={title:'Try a little finer',text:'Try grind 2.4. Keep dose and yield similar, then taste again.',next:{grindSetting:2.4,yieldCenter:40}};
+ assert.equal(nextShotTitle(advice),'Try grinding slightly finer');
+ assert.deepEqual(nextShotAdjustment(advice,shot,true,'C'),{label:'Grind',before:'2.5',after:'2.4',unit:'',keep:'dose, yield, and temperature'});
+ const html=nextShotGuidance(advice,shot,true,'C');
+ assert.match(html,/2\.5<\/span>/);
+ assert.match(html,/2\.4<\/span>/);
+ assert.match(html,/next-shot-arrow/);
+ assert.match(html,/Keep dose, yield, and temperature unchanged\./);
+ assert.match(nextShotGuidance(advice,{...shot,tempC:null},true,'C'),/Keep dose and yield unchanged\./);
+ assert.doesNotMatch(html,/One adjustment at a time|Time.*unchanged/);
+});
+test('yield and temperature arrows follow measurement units',()=>{
+ const shot={doseG:18,yieldG:40,grindSetting:2.5,tempC:93};
+ const yieldHtml=nextShotGuidance({text:'A longer yield',next:{grindSetting:2.5,yieldCenter:42}},shot,true,'C');
+ assert.match(yieldHtml,/40\.0.*42\.0/);
+ assert.match(yieldHtml,/next-shot-unit">g/);
+ assert.match(yieldHtml,/Keep dose, grind, and temperature unchanged/);
+ const tempHtml=nextShotGuidance({text:'Cooler',next:{grindSetting:2.5,yieldCenter:40,tempC:92}},shot,true,'F');
+ assert.match(tempHtml,/199.*198/);
+ assert.match(tempHtml,/°F/);
+ assert.match(tempHtml,/Keep dose, grind, and yield unchanged/);
+});
+test('multi-change, unknown, prep, and successful shots never invent an arrow',()=>{
+ const shot={doseG:18,yieldG:40,grindSetting:2.5,tempC:null};
+ const mixed={text:'Try a different recipe.',next:{grindSetting:2.4,yieldCenter:42}};
+ assert.equal(nextShotAdjustment(mixed,shot),null);
+ assert.doesNotMatch(nextShotGuidance(mixed,shot),/next-shot-arrow/);
+ assert.match(nextShotGuidance(mixed,shot),/Try a different recipe/);
+ assert.equal(nextShotAdjustment({next:{tempC:92}},shot,true,'F'),null);
+ assert.equal(nextShotAdjustment({next:{grindSetting:2.4,flowMode:'slow'}},shot),null);
+ assert.match(nextShotGuidance({text:'Focus on distribution.',next:{grindSetting:2.5,yieldCenter:40}},shot),/Focus on distribution/);
+ assert.match(nextShotGuidance({text:'Dialed in.',next:null},shot),/Dialed in/);
+ assert.equal(nextShotTitle({title:'Try a little coarser'}),'Try grinding slightly coarser');
+});
+test('evenness advice isolates distribution instead of adjusting tamp too',()=>{
+ const s=hydrate(rawFixture());
+ const shot={coffeeId:'coffee',setupVersionId:'version',basketId:'basketv',calibrationId:'cal',
+  style:'Turbo',feedMode:'standard',doseG:18,yieldG:40,timeS:21,grindSetting:2.5,
+  tasteScales:{extraction:2,body:3,clarity:1,sweetness:3,astringency:1}};
+ const advice=E.nextAdvice(s,shot,E.recommendation(s,'coffee'));
+ assert.equal(advice.title,'Check evenness first');
+ assert.match(advice.text,/distributing the grounds more evenly/);
+ assert.match(advice.text,/keeping tamp and recipe settings unchanged/);
 });

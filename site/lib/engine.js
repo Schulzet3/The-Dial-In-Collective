@@ -216,7 +216,7 @@ export function nextAdvice(s,shot,rec) {
  if(isDialed(t))return {title:'Dialed in. Nicely done.',text:'Balanced, sweet and clean for your taste. This shot adds to your successful recipe window.',next:null};
  const step=grindStep(v),fast=shot.timeS<rec.time.low,slow=shot.timeS>rec.time.high;
  const direction=t.extraction<3?'finer':t.extraction>3?'coarser':null;
- if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try a more even distribution and level tamp before changing several settings. Dryness or muddled flavors can have more than one cause.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG}};
+ if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG}};
  if((direction==='finer'&&fast)||(direction==='coarser'&&slow)){
   const pairs=s.shots.filter(x=>x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
   const exact=pairs.filter(x=>x.coffeeId===shot.coffeeId),sens=learnSensitivity(exact)||learnSensitivity(pairs);

@@ -47,6 +47,45 @@ export function recipeGrid(rec,showTemp=false,unit='F') {
  const stat=(label,value,sub,ico)=>`<div class="metric"><div class="metric-label">${icon(ico,15)} ${label}</div><div class="metric-value">${value}</div>${sub?`<div class="metric-sub">${sub}</div>`:''}</div>`;
  return `<div class="recipe-grid">${stat('Dose',`${fmt(rec.doseG)} <span class="unit">g</span>`,'Basket-based','scale')}${stat('Yield',range(rec.yield,'g'),`Center ${fmt(rec.yield.center)} g \u00b7 1:${fmt(rec.ratio.center,2)}`,'drop')}${stat('Time',range(rec.time,'s'),`Center ${fmt(rec.time.center)} s`,'clock')}${stat('Grind',rec.grind.range?range(rec.grind.range):fmt(rec.grind.value),`${rec.grind.range?`Try ${fmt(rec.grind.value)} · `:''}${e(rec.grind.source)}`,'settings')}${showTemp?stat('Temperature',`${tempDisplay(rec.tempC,unit)}<span class="unit">\u00b0${unit}</span>`,'','thermometer'):''}</div>`;
 }
+
+// Show before → after only for one measured, controllable adjustment.
+// Shot time is an observed result. Never invent a previous actual value.
+export function nextShotAdjustment(advice,shot,showTemp=false,unit='F'){
+ const next=advice?.next;if(!next||!shot||typeof next!=='object')return null;
+ const before={grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:shot.tempC,doseG:shot.doseG};
+ if(Object.keys(next).some(k=>!(k in before)))return null;
+ const changes=[];
+ for(const key of Object.keys(next)){
+  if(next[key]==null)continue;
+  if(!Number.isFinite(next[key])||!Number.isFinite(before[key]))return null;
+  if(Math.abs(next[key]-before[key])>1e-8)changes.push(key);
+ }
+ if(changes.length!==1)return null;
+ const key=changes[0];if(key==='tempC'&&(!showTemp||!Number.isFinite(shot.tempC)))return null;
+ const names={grindSetting:'Grind',yieldCenter:'Yield',tempC:'Temperature',doseG:'Dose'};
+ const units={grindSetting:'',yieldCenter:'g',tempC:`°${unit}`,doseG:'g'};
+ const format=n=>key==='tempC'?String(tempDisplay(n,unit)):fmt(n);
+ const controls=[['doseG','dose'],['grindSetting','grind'],['yieldCenter','yield'],['tempC','temperature']];
+ const unchanged=controls.filter(([k])=>k!==key&&(k!=='tempC'||(showTemp&&Number.isFinite(shot.tempC)))).map(([,name])=>name);
+ const keep=unchanged.length===3?`${unchanged[0]}, ${unchanged[1]}, and ${unchanged[2]}`:
+  unchanged.length===2?`${unchanged[0]} and ${unchanged[1]}`:unchanged.join('');
+ return {label:names[key],before:format(before[key]),after:format(next[key]),unit:units[key],keep};
+}
+export function nextShotTitle(advice){
+ if(advice?.title==='Try a little finer')return 'Try grinding slightly finer';
+ if(advice?.title==='Try a little coarser')return 'Try grinding slightly coarser';
+ return advice?.title||'Next Shot';
+}
+export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
+ const adjustment=nextShotAdjustment(advice,shot,showTemp,unit);
+ if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>`;
+ const {label,before,after,unit:measure,keep}=adjustment;
+ const spoken=e(`${label} from ${before} to ${after}${measure?' '+measure:''}`);
+ const source=advice?.text?.includes('Sized from your own comparable adjustments.')?
+  '<p class="next-shot-evidence">Adjustment sized from your comparable shots.</p>':'';
+ return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}`;
+}
+
 export function chips(t){return `<div class="taste-chips">${SCALES.map(sc=>`<span class="taste-chip severity-${tasteSeverity(sc,t?.[sc.key])??4}">${e(sc.label==='Astringency / Dryness'?'Dryness':sc.label)}${sc.ideal===3&&t?.[sc.key]!==3?`: ${e(tasteLabel(sc,t?.[sc.key]))}`:''}</span>`).join('')}</div>`;}
 export function radar(t) {
  const cx=140,cy=125,r=80,pt=(i,n)=>{const a=(i*72-90)*Math.PI/180;return [cx+Math.cos(a)*n,cy+Math.sin(a)*n];};
