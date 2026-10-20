@@ -4,18 +4,22 @@
 // Pages and storefronts can change; every unavailable source is reported.
 import {extractEcwidProduct} from '../../src/server/coffee-ecwid-snapshot.mjs';
 import {extractShopifyProduct,shopifyProductRequest} from '../../src/server/coffee-shopify-ajax.mjs';
+import {extractWooProduct} from '../../src/server/coffee-woocommerce-store.mjs';
 import {fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
 const cases=[
  ['Mango Tree Blend','ecwid','https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068'],
  ['Corvus Echo Gesha','shopify','https://www.corvuscoffee.com/products/echo-gesha'],
  ['PERC Mara Estate','shopify','https://perccoffee.com/products/kenya-mara-estate'],
  ['Sweet Bloom Wuri','shopify','https://sweetbloomcoffee.com/products/wuri'],
- ['Heart Phono','shopify','https://www.heartroasters.com/products/phono']
+ ['Heart Phono','shopify','https://www.heartroasters.com/products/phono'],
+ ['Makers Colombia San Agustin','woo','https://makerscoffee.com/product/colombia-san-agustin/'],
+ ['Park City Ethiopia','woo','https://pcroaster.com/product/ethiopia-single-origin/']
 ];
 const results=[];
 for(const [name,platform,url] of cases){
  try{
-  const preview=platform==='ecwid'?await extractEcwidProduct(url):await extractShopifyProduct(url);
+  const preview=platform==='ecwid'?await extractEcwidProduct(url):
+   platform==='woo'?await extractWooProduct(url):await extractShopifyProduct(url);
   const ok=preview?.ok===true;
   const facts=ok?Object.fromEntries(Object.entries(preview.fields||{})
    .map(([k,v])=>[k,typeof v==='string'?v.slice(0,220):v])):{};
