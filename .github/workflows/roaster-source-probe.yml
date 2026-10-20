@@ -6,6 +6,7 @@ on:
     paths:
       - scripts/audit/coffee-roaster-live-probe.mjs
       - scripts/audit/public-product-endpoint-probe.mjs
+      - scripts/audit/coffee-extractor-2mb-study.mjs
       - src/server/coffee-product-layouts.mjs
       - src/server/coffee-page-metadata.mjs
       - src/server/coffee-shopify-ajax.mjs
@@ -17,9 +18,9 @@ permissions:
   contents: read
 jobs:
   unprivileged-public-pages:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]') || contains(github.event.head_commit.message, '[dic-platform-probe]')
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]') || contains(github.event.head_commit.message, '[dic-platform-probe]') || contains(github.event.head_commit.message, '[dic-size-study]')
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -33,3 +34,6 @@ jobs:
       - name: Check public platform-specific product endpoints without tokens
         if: contains(github.event.head_commit.message, '[dic-platform-probe]')
         run: node scripts/audit/public-product-endpoint-probe.mjs
+      - name: Read-only isolated source-size benchmark
+        if: contains(github.event.head_commit.message, '[dic-size-study]')
+        run: node --expose-gc scripts/audit/coffee-extractor-2mb-study.mjs
