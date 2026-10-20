@@ -233,3 +233,16 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 
 /* Preserve breathing room between full-width New Coffee fields without altering the paired grid. */
 #new-coffee>label.field{margin-bottom:13px}
+
+
+/* New Setup: optional, keyboard-accessible explanation beside the grinder range heading. */
+#new-setup .setup-basket-field{max-width:300px}
+#new-setup .grinder-range-section{margin-top:19px}
+#new-setup .grinder-range-heading{display:flex;align-items:center;gap:5px;margin:0 0 11px}
+#new-setup .grinder-range-heading h3{font:600 14px/1.45 var(--sans);margin:0}
+#new-setup .grinder-range-info-button{appearance:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--muted);cursor:pointer;flex-shrink:0}
+#new-setup .grinder-range-info-button span{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border:1px solid currentColor;border-radius:50%;font:600 12px/1 var(--sans)}
+#new-setup .grinder-range-info-button:hover{color:var(--accent-text);background:var(--well)}
+#new-setup .grinder-range-info-button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#new-setup .grinder-range-description{margin:0 0 13px;padding:11px 12px;border-radius:9px;background:var(--well);color:var(--ink);font-size:13px}
+#new-setup .grinder-range-description[hidden]{display:none}

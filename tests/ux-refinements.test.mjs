@@ -97,3 +97,23 @@ test('unproven grinder range is shown with a single suggested starting center',(
  assert.match(html,/Try [0-9]/);
  assert.match(html,/Grind/);
 });
+
+
+test('New Setup keeps grinder range copy behind an accessible lowercase i control',async()=>{
+ const main=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ const form=main.slice(main.indexOf(' showSetup(){'),main.indexOf(' showRenameSetup('));
+ const css=await readFile(new URL('../site/visual.css',import.meta.url),'utf8');
+ assert.match(form,/Grinder Espresso Range/);
+ assert.match(form,/data-action="grinder-range-info"/);
+ assert.match(form,/aria-label="About Grinder Espresso Range"/);
+ assert.match(form,/aria-expanded="false" aria-controls="grinder-range-description"/);
+ assert.match(form,/id="grinder-range-description" hidden/);
+ assert.match(form,/Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range\./);
+ assert.match(form,/aria-hidden="true">i<\/span>/);
+ for(const name of ['finest_setting','coarsest_setting']){
+  assert.match(form,new RegExp("field\\('"+(name==='finest_setting'?'Finest':'Coarsest')+" Espresso Setting','"+name+"'"));
+ }
+ assert.match(main,/if\(a==='grinder-range-info'\)\{[\s\S]*?description\.hidden=!description\.hidden;[\s\S]*?target\.setAttribute\('aria-expanded',String\(!description\.hidden\)\)/);
+ assert.match(css,/#new-setup \.grinder-range-info-button:focus-visible/);
+ assert.match(css,/#new-setup \.grinder-range-description\[hidden\]\{display:none\}/);
+});

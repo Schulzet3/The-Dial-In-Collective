@@ -660,6 +660,20 @@ The current app defines an espresso range for the grinder and normalizes communi
 
 A final product decision is still needed on grinder direction and discrete/stepless handling. See the Open Questions register.
 
+
+## 13.6 Grinder range help — approved October 19, 2026
+
+**UX-GRINDER-RANGE-INFO-20261019 — Locked.** On **New Setup**, group the existing two required numeric fields (**Finest Espresso Setting** and **Coarsest Espresso Setting**) under the heading **Grinder Espresso Range**. Place a small, lowercase **i** information control directly beside that heading. The description is collapsed by default and opens when the icon is clicked/tapped:
+
+> Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range.
+
+The icon must be accessible to touch, keyboard, and assistive technology; showing the text must not submit the form, replace field values, or introduce constant onboarding clutter. The owner favors this unobtrusive information pattern elsewhere when a concise explanation is useful, but has not authorized a blanket rewrite of other screens.
+
+**Preserved behavior:** Keep both required field names, their stored meanings and validations, the existing lower-number=finer / higher-number=coarser orientation, calibrated history, snapshots and engine computations unchanged. The owner's observation that larger numbers correspond to coarser settings is consistent with the current app's convention, but does **not** establish manufacturer universality; the unresolved wider grinder-scale compatibility issue (#17, §37.1E) remains Open. No higher-is-finer toggle, new database field, or historical reinterpretation is authorized by this copy decision.
+
+**Separate open product question:** Visual presentation of “one intentional variable at a time” within next-shot feedback remains proposed in issue #39; do not change recommendation logic or copy as part of this setup-only approval.
+
+
 ---
 
 # 14. Shot logging - core UX

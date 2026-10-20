@@ -3201,5 +3201,26 @@
       ]
     },
     "tracked_issue": 33
+  },
+  "current_owner_grinder_range_info_20261019": {
+    "decision_id": "UX-GRINDER-RANGE-INFO-20261019",
+    "status": "Locked",
+    "owner_source": "2026-10-19 owner approval in The Dial In Collective chat; tracked in GitHub issue #39",
+    "scope": "New Setup — grinder range explanatory copy and information interaction only",
+    "heading": "Grinder Espresso Range",
+    "icon": "Lowercase i next to heading; tap/click/keyboard toggles description; collapsed by default",
+    "exact_help_text": "Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range.",
+    "preserved": [
+      "Existing Finest Espresso Setting and Coarsest Espresso Setting fields and numeric validation",
+      "Existing higher number coarser / lower number finer calibration interpretation (not a verified universal standard)",
+      "Every saved setup, shot snapshot and recommendation-engine calculation",
+      "Fast Log Shot → Rate → Recommendation and all original Locked decisions"
+    ],
+    "not_authorized": [
+      "Grinder direction/step/multi-turn scale generalization (issue #17 remains open)",
+      "Recommendation-screen one-variable copy or logic (issue #39 pending)",
+      "Production publication, migration, provider changes or data mutation"
+    ],
+    "implementation": "Development-only New Setup source, CSS and focused UI test; needs independent CI result and per-release publication approval."
   }
 }

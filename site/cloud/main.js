@@ -278,7 +278,26 @@ class CloudApp {
    <div class="settings-signout">${button(`${icon('signout',18)}<span>Sign Out On This Device</span>`,'signout','','settings-row signout-row')}</div>`);
   const sp=this.raw?.setupPreferences.find(p=>p.setup_version_id===v?.id);this.setupPrefRevision=sp?.revision;
  }
- showSetup(){this.show('New Setup',`<form id=new-setup>${field('Setup Name','name','',{required:true,placeholder:'Home'})}<div class="form-grid space-top">${field('Basket Dose (g)','basket_dose_g','',{required:true,type:'number',step:'.1',min:5,max:40})}${field('Finest Espresso Setting','finest_setting','',{required:true,type:'number',step:'.1',min:0})}${field('Coarsest Espresso Setting','coarsest_setting','',{required:true,type:'number',step:'.1',min:0})}</div><details class=advanced><summary>Equipment Details (Optional)</summary>${field('Machine','machine_model')}${field('Grinder','grinder_model')}${field('Burr Set','burr_set')}${field('Basket Model','basket_model')}</details><button class="primary full space-top">Create Setup</button></form>`);}
+ showSetup(){
+  this.show('New Setup',`<form id=new-setup>
+   ${field('Setup Name','name','',{required:true,placeholder:'Home'})}
+   <div class="setup-basket-field space-top">${field('Basket Dose (g)','basket_dose_g','',{required:true,type:'number',step:'.1',min:5,max:40})}</div>
+   <section class="grinder-range-section" aria-labelledby="grinder-range-heading">
+    <div class="grinder-range-heading">
+     <h3 id="grinder-range-heading">Grinder Espresso Range</h3>
+     <button type="button" class="grinder-range-info-button" data-action="grinder-range-info" aria-label="About Grinder Espresso Range" aria-expanded="false" aria-controls="grinder-range-description"><span aria-hidden="true">i</span></button>
+    </div>
+    <p class="helper grinder-range-description" id="grinder-range-description" hidden>Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range.</p>
+    <div class="form-grid">
+     ${field('Finest Espresso Setting','finest_setting','',{required:true,type:'number',step:'.1',min:0})}
+     ${field('Coarsest Espresso Setting','coarsest_setting','',{required:true,type:'number',step:'.1',min:0})}
+    </div>
+   </section>
+   <details class=advanced><summary>Equipment Details (Optional)</summary>
+    ${field('Machine','machine_model')}${field('Grinder','grinder_model')}${field('Burr Set','burr_set')}${field('Basket Model','basket_model')}
+   </details>
+   <button class="primary full space-top">Create Setup</button></form>`);
+ }
  showRenameSetup(id){
   const setup=this.state.setups.find(x=>x.id===id),record=this.raw?.setups?.find(x=>x.id===id);
   if(!setup||!record)throw new Error('Refresh your cloud data before renaming this setup.');
@@ -376,6 +395,15 @@ class CloudApp {
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
    if(a==='new-setup'){this.showSetup();return;}
+   if(a==='grinder-range-info'){
+    const description=sheet.querySelector('#grinder-range-description');
+    if(description){
+     description.hidden=!description.hidden;
+     target.setAttribute('aria-expanded',String(!description.hidden));
+    }
+    return;
+   }
+
    if(a==='open-admin'){location.assign('/admin.html');return;}
    if(a==='rename-setup'){this.showRenameSetup(id);return;}
    if(a==='add'){this.showAdd();return;}
