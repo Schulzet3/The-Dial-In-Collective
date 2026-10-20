@@ -6,7 +6,8 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,isCoffeeProductDetai
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {extractEcwidProduct} from '../../src/server/coffee-ecwid-snapshot.mjs';
+import {extractEcwidProduct,ecwidProductRequest,extractEcwidSnapshotData} from '../../src/server/coffee-ecwid-snapshot.mjs';
+import {fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
 
 const targets=[
  ['Picky Chemist Gesha','https://en.thepickychemist.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey'],
@@ -74,8 +75,27 @@ for(let i=0;i<targets.length;i+=2){
  }));
  for(const item of batch){results.push(item);console.log('[DIC ADAPTIVE SOURCE] '+JSON.stringify(item));}
 }
-const mango=await extractEcwidProduct('https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068');
-assert.equal(mango?.ok,true,'Mango Tree exact Ecwid static product must still work');
+const mangoURL='https://www.mangotreecoffee.org/shop/Mango-Tree-Blend-p734210068';
+const mango=await extractEcwidProduct(mangoURL);
+if(!mango?.ok){
+ const target=ecwidProductRequest(mangoURL);
+ const r=target?await fetchPublicCoffeeJson(target.requestUrl):null;
+ let snapshotState=null;
+ if(r?.ok){
+  try{
+   const data=JSON.parse(r.json);
+   const trial=extractEcwidSnapshotData(data,target);
+   snapshotState={title:typeof data?.title==='string'?data.title:null,
+    keys:Object.keys(data||{}).slice(0,22),size:Buffer.byteLength(r.json),
+    staticSourceMatch:Boolean(trial?.ok),canonicalDeclared:Boolean(data?.canonicalUrl)};
+  }catch{snapshotState={reason:'malformed_public_JSON'};}
+ }
+ console.log('[DIC MANGO DIAGNOSTIC] '+JSON.stringify({
+  targetValid:!!target,transport:r?.ok?'ok':r?.reason||'missing',
+  snapshot:snapshotState,noSecrets:true
+ }));
+ throw Error('Mango Tree public Ecwid transport/product mismatch: investigate before deployment');
+}
 assert.equal(mango.fields?.name,'Mango Tree Blend');
 assert.equal(mango.fields?.roast_level,'Medium');
 console.log('[DIC ADAPTIVE ECWID] '+JSON.stringify({name:mango.fields?.name,fields:Object.keys(mango.fields||{})}));
