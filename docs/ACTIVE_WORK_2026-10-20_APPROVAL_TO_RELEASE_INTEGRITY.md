@@ -30,3 +30,10 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 5. Preserve #10 development one-visible-recipe as-is, and ensure every finished change and unresolved issue is recorded in this file, CURRENT_STATUS, Ledger when a decision changes, and issue comments. No premature deploy.
 
 **Limitations:** No tool can guarantee retrieving messages from other conversations never uploaded/connected; GUI/installed PWA user state is not independently accessible from provider source alone. Our mitigation must fail closed, retain source provenance, and explicitly flag missing evidence rather than asserting a mathematically perfect guarantee.
+
+## Work entry: checked coverage contract and browser proof (development)
+- Real production source at published SHA matches the approved **New Setup-only** i icon and help, but Settings presents only active setup name/rename/advanced toggles. This is a **scope/route mismatch**, not a missing New Setup source change; owner-device route still needs clarification.
+- Added actual 390px New Setup open/toggle/toggle-back browser QA at commit `d8ca82746b8929316c615f582e18a058316cbc6f` with screenshot artifact and no setup mutation (CI still pending at this journal update).
+- Created machine-readable 29-key current-owner decision inventory + eight high-value approved UI/rollout source contracts at `docs/APPROVAL_COVERAGE_MATRIX.json` (commit `f766305ddf42496418d60aa0d61dad56653dc6b0`). Deliberately tracks four unresolved gaps rather than claiming full-device acceptance.
+- Owner's #11 phone acceptance closed the browsing issue; a **separate P0 #41** preserves genuine two-account API privacy/admin negatives; only simulated SQL-role acceptance has been previously verified.
+- Next: validate matrix with an executable fail-closed test, hook into release/build preflight, reconcile historically stale decision implementation statuses with live migration evidence, and make CI run on docs/ledger changes. No publish.
