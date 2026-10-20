@@ -62,14 +62,19 @@ try{
      valid=u.hostname.replace(/^www\./,'')==='mangotreecoffee.org'&&u.pathname.endsWith('-p'+id);
     }catch{}
     summary.matches_exact_product=valid;
-    if(valid){
+    // Empty canonicalUrl occurs on Ecwid snapshots. Inspect only as a
+    // candidate until the exact product identity can be independently checked.
+    summary.static_keys=Object.keys(data).sort();
+    summary.static_has_target_name=[data.htmlCode,data.jsonLDHtml,data.ogTagsHtml].some(v=>typeof v==='string'&&/Mango Tree Blend/i.test(v));
+    summary.static_has_tasting_label=typeof data.htmlCode==='string'&&/tasting notes/i.test(data.htmlCode);
+    if(true){
      const combined='<html><head>'+[data.metaDescriptionHtml,data.ogTagsHtml,data.jsonLDHtml]
       .filter(v=>typeof v==='string').join(' ')+'</head><body><main>'+
       String(data.htmlCode||'')+'</main></body></html>';
      if(Buffer.byteLength(combined)>900000)summary.extraction={ok:false,reason:'page_too_large'};
      else{
       const parsed=extractPublicCoffeeFacts(combined,{source_url:target});
-      summary.extraction=parsed.ok?{ok:true,fields:parsed.fields,roaster_details:parsed.roaster_details||{},
+      summary.extraction=parsed.ok?{ok:true,identity_provisionally_unverified:!valid,fields:parsed.fields,roaster_details:parsed.roaster_details||{},
        roaster_recipe:parsed.roaster_recipe||null,conflicts:parsed.conflicts||[]}:{ok:false,reason:parsed.reason};
      }
     }
