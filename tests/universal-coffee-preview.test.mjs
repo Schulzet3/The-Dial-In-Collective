@@ -513,7 +513,8 @@ test('cross-platform product enrichment preserves more precise compatible origin
  assert.equal(bad.fields.origin,undefined);
  assert.deepEqual(bad.conflicts,['origin']);
  const blend=mergeShopifyPreview(base,{ok:true,fields:{name:'Wuri',origin:'Ethiopia, Colombia'}});
- assert.equal(blend.fields.origin,'Ethiopia, Colombia');
+ assert.equal(blend.fields.origin,undefined,'Do not assume a single-country lot is the same as a multi-country blend');
+ assert.deepEqual(blend.conflicts,['origin']);
 });
 
 test('sparse but valid Shopify HTML enriches missing structured facts from exact-handle public JSON',async()=>{
