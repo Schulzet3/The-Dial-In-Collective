@@ -11,8 +11,9 @@
 7. [AGENTS — continuity rules](../AGENTS.md) — exact repository/change-control method.
 
 ## Current operating records
+- [900 KB vs 2 MB isolated benchmark and other safe extractor options (October 20)](EXTRACTOR_SIZE_BENCHMARK_2026-10-20.md)
 - [Extractor platform coverage, security limits and cleanup (October 20)](EXTRACTOR_PLATFORM_COVERAGE_AND_SECURITY_2026-10-20.md)
-- [Beginner UI concepts and i-icon proposals (unapproved, issue #40)](https://github.com/Schulzet3/The-Dial-In-Collective/issues/40)
+- [New Coffee Autofill button approved only; other mockups unchanged (issue #40)](https://github.com/Schulzet3/The-Dial-In-Collective/issues/40)
 - [Release and Recovery Runbook](RELEASE_AND_RECOVERY_RUNBOOK.md)
 - [Netlify Credit Ledger](NETLIFY_CREDIT_LEDGER.json) — historical owner-managed snapshot, not live balance.
 - [Supabase Migration Baseline](SUPABASE_PRODUCTION_MIGRATION_BASELINE_2026-10-18.json) and [migration history evidence](SUPABASE_MIGRATION_HISTORY_RECONCILIATION_2026-10-18.md)

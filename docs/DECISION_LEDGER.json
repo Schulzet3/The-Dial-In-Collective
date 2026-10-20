@@ -3280,5 +3280,24 @@
     ],
     "implementation": "Small CSS plus unique action button class in development, acceptance pending CI",
     "publication": "Unpublished, requires owner release consent"
+  },
+  "current_owner_approved_extractor_2mb_isolated_study_20261019": {
+    "decision_id": "EXTRACTOR-2MB-NONPRODUCTION-BENCHMARK-20261019",
+    "status": "Owner-approved one-time study completed; production changes unapproved",
+    "owner_source": "October 2026 user expressly approved isolated nonproduction benchmark of 900 KB versus 2 MB and testing creative alternative extraction approaches",
+    "authorization": "Temporary GitHub Actions runner module copies only, no provider/source/runtime size-cap update",
+    "confirmed_results": "Expanded 20 URL same-source simulation parsed 16 at 900 KB versus 17 at 2 MB (Picky Chemist only), 17/17 product-parsed fields unchanged after test-only stripping, 13/17 full fact parity on first 256 KB, nine compressed sources ~76%-88% fewer network body bytes",
+    "evidence": "docs/EXTRACTOR_SIZE_BENCHMARK_2026-10-20.md; public CI runs 39368679767 and 39368880810",
+    "unresolved": [
+      "No authorization to raise the production cap",
+      "No approval yet to change Accept-Encoding or strip input in deployed parser",
+      "Netlify end-to-end cost and member-authenticated field-by-field checks still unverified"
+    ],
+    "preserved": [
+      "Original security/SSRF/TLS/global-address/private-IP protection",
+      "12 previews/day and >=30-second cooldown",
+      "No modification or deletion of historical member data",
+      "Production release remains separate owner approval"
+    ]
   }
 }
