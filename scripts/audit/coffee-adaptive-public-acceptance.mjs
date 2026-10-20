@@ -69,6 +69,12 @@ for(let i=0;i<targets.length;i+=2){
     assert.equal(typeof original.fields.name,'string');
     assert.ok(original.fields.name.length>2);
    }
+   if(original.ok&&name==='Picky Chemist Gesha'){
+    assert.equal(original.fields.release_label,'Lot #26/136',
+     'The selected coffee title explicitly publishes its release lot');
+    assert.match(original.fields.tasting_notes||'',/bergamote.*citron confit.*pêche jaune/i,
+     'The selected French coffee story explicitly names three floral, citrus and peach descriptors');
+   }
    let enrichment=null;
    if(original.ok&&enrichmentTargets.has(name)){
     const source=shopifyProductRequest(effectiveUrl)?
