@@ -12,6 +12,7 @@
 8. [AGENTS — continuity rules](../AGENTS.md) — exact repository/change-control method.
 
 ## Current operating records
+- [October 21 consolidated deployment readiness, backups and blockers](RELEASE_READINESS_2026-10-21.md) — authoritative preflight for pending admin/duplicate-first and recipe-source release, before any production SQL or Netlify publication.
 - [Active GitHub Free/private continuity and release safety plan](GITHUB_FREE_PRIVATE_CONTINUITY_AND_RELEASE_PLAN_2026-10-20.md) — owner refuses Pro/public; advisory CI, manual controls, remaining release risks.
 - [Project instructions ready to paste](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) — owner applies these in ChatGPT Project settings.
 - [Oct20 forensic approval-gap and continuity investigation](APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md) — verified evidence, root causes, missing sources, and remaining safeguards.
