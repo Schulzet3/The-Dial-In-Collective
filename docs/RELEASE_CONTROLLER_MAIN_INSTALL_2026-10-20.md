@@ -15,3 +15,7 @@ The release controller has NO Netlify API token, build hook or CLI deployment; i
 **Source/test receipt:** last reviewed development code from `994a4d9f91e2475a96df42a46564c06e29f1c8d7`; GitHub Node/lint/build PASS `39518608025`, approval/continuity PASS `39518607963`. GitHub Pro/private branch rule and Netlify source changes are NOT independently available from current integration, and the current app stays untouched.
 
 See app development documentation `docs/MASTER_SPECIFICATION.md`, `docs/APPROVAL_COVERAGE_MATRIX.json`, `docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md` and issue #38. Do NOT enable this controller or consider #38 closed before the owner's manual hosted settings are confirmed.
+
+## Main-branch controller checks installed (October 20)
+- Added `.github/workflows/release-controller-ci.yml` on EVERY main push and PR, with required job name `release-controller-validate`. It checks Node source syntax and runs four source-equivalent test modules copied from the reviewed development app branch, including a **real disposable bare-Git remote race**. Tests have no Netlify token, SQL credentials or production deploy calls. Manual release workflow remains separately inert and without any release grants.
+- **GitHub admin blocker remains:** The main branch is `protected:false`, so this workflow is *not yet a mandatory required status*. Owner GitHub Pro/private branch rules and account settings must activate it. Do not claim #38 complete based on green CI alone.

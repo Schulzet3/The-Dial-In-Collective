@@ -1,0 +1,34 @@
+name: DIC protected main release-controller acceptance
+# Unit and inert real-Git race acceptance run on every main ops change and PR.
+# This never contacts Netlify or publishes source; no secrets required.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dic-release-controller-ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  release-controller-validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Syntax validation (no external calls)
+        run: node --check scripts/release/one-use-claim.mjs && node --check scripts/release/controlled-release-runner.mjs
+      - name: Verify one-use authorization, replay denial and real disposable-Git race
+        run: node --test tests/one-use-claim.test.mjs tests/one-use-git-race.test.mjs tests/controlled-release-runner.test.mjs tests/exclusive-release-workflow.test.mjs
+      - name: Enforce unique manual-only production dispatch policy
+        run: |
+          test -f .github/workflows/dic-single-use-release.yml
+          ! grep -E '^  (push|pull_request|schedule):' .github/workflows/dic-single-use-release.yml
+          test -f docs/RELEASE_CONTROLLER_MAIN_INSTALL_2026-10-20.md
