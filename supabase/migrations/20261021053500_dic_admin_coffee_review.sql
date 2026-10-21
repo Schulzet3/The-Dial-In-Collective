@@ -3,6 +3,16 @@
 -- decisions retain label provenance, audit rows, version checks and historical IDs.
 -- This helper is copied from the independently read back live definition and only
 -- admits the server-guarded admin_reviewed method. Existing methods stay unchanged.
+
+-- Retain all six historical audit categories, add distinct manually reviewed
+-- non-owner canonical approval and duplicate-reconciliation event provenance.
+alter table private.dic_coffee_audit
+  drop constraint dic_coffee_audit_event_kind_check;
+alter table private.dic_coffee_audit
+  add constraint dic_coffee_audit_event_kind_check
+  check (event_kind in ('admin_approved','official_verified','user_confirmed',
+    'canonical_reused','needs_review','owner_roast_reclassified',
+    'admin_reviewed','admin_reviewed_merge'));
 CREATE OR REPLACE FUNCTION private.dic_promote_pending_coffee(sid uuid, method text, evidence jsonb DEFAULT '{}'::jsonb, distinct_confirmed boolean DEFAULT false)
  RETURNS jsonb
  LANGUAGE plpgsql
