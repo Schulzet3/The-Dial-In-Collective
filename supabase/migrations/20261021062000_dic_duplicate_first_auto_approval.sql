@@ -63,6 +63,10 @@ begin
    from candidates_scanned s
    where (s.brand_key=search_roaster or s.brand_similarity>=0.70)
      and (s.title_key=search_name or s.title_similarity>=0.43)
+     -- Explicitly different nonempty harvest/lot labels are different
+     -- releases, not fuzzy duplicates. Missing labels remain ambiguous.
+     and (search_release is null or s.release_key is null
+       or s.release_key=search_release)
  ), ranked as (
   select s.*,
     case
