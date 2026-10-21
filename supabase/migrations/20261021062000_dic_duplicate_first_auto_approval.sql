@@ -72,7 +72,11 @@ begin
     case
       when s.exact_brand and s.exact_title and s.curated_url_match
         and search_release is not null and s.release_key=search_release
-        and s.compatible_origin then 'official_url'
+        and s.compatible_origin
+        and (nullif(btrim(coalesce(p->>'process','')),'') is null
+          or s.process is null
+          or private.dic_coffee_key(p->>'process')=private.dic_coffee_key(s.process))
+        then 'official_url'
       when s.exact_brand and s.exact_title and search_release is not null
         and s.release_key=search_release and s.compatible_origin
         and (nullif(btrim(coalesce(p->>'process','')),'') is null
