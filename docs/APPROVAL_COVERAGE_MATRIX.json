@@ -151,7 +151,7 @@
       "decision_key": "current_owner_approved_community_release_context_20261018",
       "scope": "Sanitized Community coffee card/release grouping already deployed",
       "implementation": "published_source_and_migration",
-      "device_acceptance": "OWNER_OBSERVED_REGISTERED_MEMBER_BROWSING; PRIVATE_CROSS_ACCOUNT_API_UNVERIFIED_ISSUE_41",
+      "device_acceptance": "OWNER_MEMBER_BROWSE_ACCEPTED; SCOPED_REAL_CROSS_ACCOUNT_ROLE_ACCEPTANCE_CLOSED_ISSUE_41",
       "issue": 11,
       "assertions": [
         {
@@ -192,9 +192,9 @@
     {
       "id": "internal_single_visible_recipe",
       "decision_key": "current_owner_one_visible_recipe_internal_families_20261020",
-      "scope": "One visible family; distinct internal recipe evidence; NOT yet deployed",
-      "implementation": "DEVELOPMENT_ONLY",
-      "device_acceptance": "NOT_DEPLOYED",
+      "scope": "One visible family and distinct internal recipe evidence included in published application source; remaining candidate lifecycle and real multi-family acceptance tracked in #10/#13",
+      "implementation": "published_source",
+      "device_acceptance": "NOT_INDEPENDENTLY_VERIFIED_FOR_THIS_FEATURE",
       "issue": 10,
       "assertions": [
         {
@@ -297,8 +297,8 @@
       "id": "duplicate_first_catalog_auto_approval",
       "decision_key": "current_owner_duplicate_first_automatic_catalog_approval_20261021",
       "scope": "Only genuinely distinct member coffee auto approval and safe same-release reuse; hold genuine duplicate conflict; source provenance separate; keep Mango Pending",
-      "implementation": "DEVELOPMENT_TESTED_SOURCE_c6976b1fc86ed5e6b38c0c38831950fca017b3a4_487_NODE_ALL_SQL_BROWSER_PASS",
-      "device_acceptance": "PRODUCTION_SQL_AND_NETLIFY_UNAPPLIED; AUTHENTICATED_OWNER_DEVICE_NOT_TESTED",
+      "implementation": "published_source_and_migrations; Netlify READY/current 6ad92fd1d706315f29032892 at release commit 1e79c4585c49ab517abb912887ee05ed7f4c4c4d, tested application c6976b1fc86ed5e6b38c0c38831950fca017b3a4; DIC-20261021-BETA-COFFEE-01 consumed",
+      "device_acceptance": "AUTHENTICATED_ADMIN_AND_NONADMIN_WORKFLOW_ACCEPTANCE_NOT_YET_VERIFIED",
       "issue": 43,
       "assertions": [
         {
@@ -331,8 +331,8 @@
     },
     {
       "id": "multi_worker_release_guard",
-      "status": "OPEN",
-      "reason": "Git marker and credit guard are not atomic consumed-once locks across workers.",
+      "status": "OPEN_RESIDUAL_BYPASS_RISK",
+      "reason": "Single-use grant/consumption and a non-force Git compare-and-swap claim are implemented and the original authorized claim was consumed. GitHub Free/private CI cannot prevent direct-writer bypass or provider-admin redeploy; native Actions final push failed and is tracked in #44. Keep #38 open with this narrower, evidence-based scope.",
       "issue": 38
     },
     {
@@ -348,19 +348,19 @@
     },
     {
       "id": "netlify_release_branch_cutover",
-      "status": "BLOCKED",
-      "reason": "Production SQL migrations now applied and verified, but Netlify current live remains e7e16e5. Dedicated release/production Git branch and Netlify production branch cutover remain outstanding; no connector setter. Owner urgent release consent is active and preapproved, but no production publish has occurred.",
+      "status": "COMPLETED_VERIFIED_20261021",
+      "reason": "Netlify production follows release/production and current READY deploy 6ad92fd1d706315f29032892 serves release 1e79c4585c49ab517abb912887ee05ed7f4c4c4d. The one approved release grant is consumed; cutover must not be repeated as pending work.",
       "issue": 38
     },
     {
       "id": "chatgpt_project_settings",
-      "status": "OWNER_ACTION_REQUIRED",
-      "reason": "Project instructions saved to GitHub file; no Project settings editor is exposed, user must paste and save."
+      "status": "OWNER_REPORTED_SAVED",
+      "reason": "Owner confirmed Project instructions were saved, recorded in the active work journal and issue #12 comment 6304881257. This is owner-report evidence; no direct Project-settings API readback is available. Do not ask for the same save again."
     },
     {
       "id": "github_free_private_no_paid_upgrade",
       "status": "LOCKED_POLICY_WITH_RESIDUAL_RISK",
-      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; retain advisory CI, exact SHA check, work journal and inert one-use controller. No branch protection guarantee.",
+      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; advisory CI, exact source readback, same-commit journal and single-use non-force release claim are compensating controls. Release cutover and one consumed claim are verified, with native Actions push transport and direct-writer/provider bypass risks still open.",
       "issue": 38
     }
   ],

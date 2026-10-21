@@ -247,7 +247,38 @@
         "verify_jwt": true,
         "updated_at": 1792300123394
       }
-    ]
+    ],
+    "anonymous_column_accessible_tables": 0,
+    "direct_member_column_writable_tables": 0,
+    "source_migration_aliases": [
+      {
+        "source_file": "20261021053500_dic_admin_coffee_review.sql",
+        "applied_provider_version": "20261021165214",
+        "name": "dic_admin_coffee_review"
+      },
+      {
+        "source_file": "20261021062000_dic_duplicate_first_auto_approval.sql",
+        "applied_provider_version": "20261021165302",
+        "name": "dic_duplicate_first_auto_approval"
+      }
+    ],
+    "function_reconciliation": {
+      "baseline_source": "c9829d157ef4f430d24af7056ab32661ba8629f5",
+      "project_functions": 77,
+      "exact_body_matches_after_recorded_migration_rewrites": 76,
+      "reviewed_equivalent_recovery_guard": "public.rls_auto_enable: keyword case/format differ; same recovery-script operations",
+      "explained_rewrites": [
+        "20261012183845_dic_import_qualified_validation.sql: nodes.k/nodes.val qualification",
+        "20261014152014_dic_owner_only_import_exception.sql: owner exception guard and epilogue"
+      ],
+      "unexplained_live_body_drift": 0,
+      "scope": "Observed applied baseline only; the new source-worker audit migration is staged and deliberately differs from live definitions."
+    },
+    "staged_audit_migration": {
+      "file": "20261021221455_dic_source_worker_auth_and_admission.sql",
+      "status": "SOURCE_ONLY_NOT_APPLIED",
+      "edge_coordination": "Updated dic-verify-coffee must carry submission_revision; deploy compatible Edge first, then migration under a future exact approval."
+    }
   },
   "limitations": [
     "Provider metadata/read-only aggregates are not new authenticated device acceptance.",

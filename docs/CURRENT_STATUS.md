@@ -1,4 +1,14 @@
 # CURRENT STATUS — The Dial In Collective
+
+## October21 three-pass project audit: integration and independent verification in progress
+
+- The available-history audit covers915 development commit metadata records through0a964, all318 baseline tracked files,79 original Locked/20 Open decisions,55 amendment records,35 current-owner records,38 issues plus8 PRs, and190 discussion/review entries. These are provenance inventories, not counts of completed features. Missing full chats/nine source reports/failed JSX remain explicit in #30.
+- Current production is independently verified at Netlify READY6ad92fd1d706315f29032892, release1e79c4585c49ab517abb912887ee05ed7f4c4c4d, tested applicationc6976b1fc86ed5e6b38c0c38831950fca017b3a4. Supabase has32 applied migrations, with the two October21 source filenames mapped to actual provider versions20261021165214/20261021165302. The original release grant is consumed. Current credits remain unknown. See [provider readback](audits/2026-10-21-provider-readback.json).
+- The source audit repairs explicit-access-denial/cache handling, stale coffee revision selection, precision/next-shot consistency, source evidence identity/units, service-worker authorization and release/backup/control gaps. New source changes are awaiting combined CI; the new source-worker migration and Edge changes have NOT been applied to Supabase.
+- Concurrent commit3e8806ddff5247a4042e970309b6ea5a10195f91 and issue#47 arrived during the audit and were recovered without overwriting the other thread. Its admin explorer is an additional unfinished development tranche with missing backend/permission-contract work. It is NOT ready for publication. Earlier baseline inventory totals retain their date; current deltas are recorded separately.
+- Completed acceptance remains completed: #11, #34 and #41 are closed within their recorded scopes. The full recommendation evidence hierarchy (#12) is already approved for development; further family/experiment, bag/custom/equipment, hide-shot and device-specific gaps remain distinct work. Current-state ledger/matrix text is being reconciled without changing original Locked wording or historical receipts.
+- Next: finish independent checks, commit integrated repairs with same-commit journal, verify exact GitHub CI and update existing issue leads. A passing audit is not a production grant or a claim that the full product backlog is complete.
+
 ## 2026-10-21 — Issue #47 Admin explorer STAGED; NOT ready for publish
 - Admin metric order, clickable section navigation, paginated list UI, guarded edit forms and URL preview adapter are staged in development only. **RPCs and database migration are not yet installed or tested**, so full creator attribution and cross-account detail editing are not operational. Never publish this partial UI. See active work journal and Issue #47 for open server access/consent validation. No live app/backend change.
 
