@@ -1,4 +1,10 @@
 # CURRENT STATUS — The Dial In Collective
+
+## 2026-10-21 final issue #47 predeployment evidence — source READY FOR RELEASE REVIEW, NOT PRODUCTION APPROVED
+- Owner requested code/build/test and expressly NOT deployment. Implemented new admin tile and section ordering, protected owner-visible paged details/notes, audited editable shot/coffee records and URL metadata preview on development source. Final staged source before this documentation commit `a6bcbe4518a52d4f194fa0217445b1fcc7d53d08`.
+- Source JS/frontend unchanged from `e0016d6c2d37d05b6dfcd9b1fef28150af5eb59a`: exact CI app/Node `39686964748` SUCCESS, mobile UX `39686964982` SUCCESS, private browser visual `39686964560` SUCCESS. Exact backend candidate and full isolated SQL+signed HTTP `39687471679` SUCCESS after correcting real partial-shot edit bug. Approval continuity `39687471847` SUCCESS. No tests disabled to pass.
+- `supabase/migrations/20261021222700_dic_admin_content_review.sql` new development candidate NOT applied to Supabase; new server-gated RPC is required before those UI views work on production. No new release grant. Member consent independently unverified beyond owner assertion; real admin-device acceptance pending; canonical identity and shot provenance protected. Full handoff `docs/ADMIN_PORTAL_RELEASE_CANDIDATE_2026-10-21.md` and Issue #47. Other historical status entries below are dated and superseded by this newest verified checkpoint.
+
 ## Issue #47 — fixture shadow disambiguation (2026-10-21T22:34:11.165Z)
 - Shot update reached postcondition verification in isolated SQL; ambiguous unqualified local `shot_id`/`setup_id` in TEST only corrected with explicit PL/pgSQL fixture label. Await exact current CI. No production change.
 
