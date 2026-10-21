@@ -16,17 +16,20 @@ begin
  values(member_id,true,now())
  on conflict(owner_id) do update set enabled=true,admitted_at=now();
 
- -- Ordinary member: save genuine Pending, no automatic verification from URL alone.
+ -- A genuine unresolved duplicate can be Pending even under the new
+ -- distinct-coffee auto-approval rule. Construct a synthetic old Pending
+ -- directly rather than incorrectly expecting an otherwise unique new
+ -- member coffee to remain Pending.
+ insert into public.coffee_submissions(owner_id,source_url,proposed_data)
+ values(member_id,'https://sweetbloomcoffee.com/products/test-admin-manual-only',
+ jsonb_build_object('name','Admin Manual 2026 Unique','roaster','Sweet Bloom'))
+ returning id into pending_id;
+ original_library:=gen_random_uuid();
+ insert into public.library_entries(id,owner_id,submission_id)
+ values(original_library,member_id,pending_id);
  perform set_config('request.jwt.claim.sub',member_id::text,true);
  perform set_config('request.jwt.claims',jsonb_build_object('sub',member_id,'role','authenticated')::text,true);
  execute 'set local role authenticated';
- got:=public.dic_apply_client_change(member_id,gen_random_uuid(),'submit_coffee',
- jsonb_build_object('library_entry_id',gen_random_uuid(),
- 'source_url','https://sweetbloomcoffee.com/products/test-admin-manual-only',
- 'proposed_data',jsonb_build_object('name','Admin Manual 2026 Unique','roaster','Sweet Bloom')));
- if got->>'status'<>'pending' then raise exception 'URL alone incorrectly verified %',got;end if;
- pending_id:=(got->>'submission_id')::uuid;
- original_library:=(got->>'library_entry_id')::uuid;
  denied:=false;
  begin
   perform public.dic_admin_review_coffee(pending_id,1,'approve','Ordinary user must be denied',null);
@@ -75,16 +78,12 @@ begin
  if (select count(*) from public.shots)<>before_shots then raise exception 'Existing shots changed';end if;
  if (select count(*) from public.coffees)<>before_coffees+1 then raise exception 'Unexpected canonical count';end if;
 
- -- Another Pending record can be held without deleting member data.
- perform set_config('request.jwt.claim.sub',member_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',member_id,'role','authenticated')::text,true);
- execute 'set local role authenticated';
- got:=public.dic_apply_client_change(member_id,gen_random_uuid(),'submit_coffee',
- jsonb_build_object('library_entry_id',gen_random_uuid(),
- 'proposed_data',jsonb_build_object('name','Needs Evidence 2026 Unique','roaster','Unlisted Roaster')));
- if got->>'status'<>'pending' then raise exception 'Expected second Pending';end if;
- hold_id:=(got->>'submission_id')::uuid;
- execute 'reset role';
+ -- An existing unresolved conflict can be held without deleting member data.
+ insert into public.coffee_submissions(owner_id,proposed_data)
+ values(member_id,jsonb_build_object('name','Potential Conflict 2026','roaster','Unlisted Roaster'))
+ returning id into hold_id;
+ insert into public.library_entries(id,owner_id,submission_id)
+ values(gen_random_uuid(),member_id,hold_id);
 
  perform set_config('request.jwt.claim.sub',admin_id::text,true);
  perform set_config('request.jwt.claims',jsonb_build_object('sub',admin_id,'role','authenticated')::text,true);
