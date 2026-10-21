@@ -29,6 +29,9 @@ jobs:
       - name: Verify exact chat request commit, owner grant, source CI and guarded nonforce claim
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIC_PUSH_FORCED: ${{ github.event.forced }}
+          DIC_PUSH_AFTER_SHA: ${{ github.event.after }}
+          DIC_PUSH_BEFORE_SHA: ${{ github.event.before }}
           DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED: ${{ vars.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED }}
           DIC_PRIVATE_FREE_COMPENSATING_MODE: 'YES'
           DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED: ${{ vars.DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED }}

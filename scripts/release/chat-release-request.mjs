@@ -9,7 +9,8 @@ const ID=/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/;
 const ALLOWED_PATHS=[CHAT_REQUEST_PATH,OPS_JOURNAL_PATH].sort();
 const REQUIRED=['schema_version','release_id','tested_source_sha',
  'expected_release_head_sha','expected_development_head_sha',
- 'owner_approval_source','created_at_utc','backup_evidence','credit_evidence'];
+ 'owner_approval_source','created_at_utc','backup_evidence','credit_evidence',
+ 'mode','expected_main_parent_sha'];
 const REQ_BACKUP=['artifact_id','encrypted_sha256','owner_private_offsite_file_id',
  'archive_completed_at_utc','verified_at_utc','latest_observed_data_write_at_utc'];
 const REQ_CREDIT=['observed_remaining_credits','observed_at_utc','source'];
@@ -19,7 +20,8 @@ const exactly=(obj,keys)=>!!obj&&typeof obj==='object'&&!Array.isArray(obj)&&
 const validDate=(v)=>typeof v==='string'&&Number.isFinite(Date.parse(v));
 export function validateChatReleaseRequest({
  request,changedPaths,commitSubject,nowIso,expectedDevelopmentHead,
- expectedReleaseHead,ownerApprovalSource
+ expectedReleaseHead,ownerApprovalSource,eventBeforeSha,commitParentSha,
+ eventHeadSha,checkedOutHeadSha
 }={}){
  if(!exactly(request,REQUIRED)||request.schema_version!==1)
   deny('unknown fields or malformed request schema');
@@ -27,13 +29,21 @@ export function validateChatReleaseRequest({
   [...new Set(changedPaths)].sort().join('|')!==ALLOWED_PATHS.join('|')||
   changedPaths.length!==ALLOWED_PATHS.length)
   deny('request commit must change only the request and contemporaneous ops journal');
- if(typeof commitSubject!=='string'||!commitSubject.includes('[skip netlify]')||
-    commitSubject.includes('[dic-publish]'))
-  deny('chat request commit must not publish or omit skip marker');
  if(!ID.test(request.release_id))deny('release ID format');
+ if(commitSubject!=='ops(release-request): '+request.release_id+' [skip netlify]')
+  deny('chat request requires exact nonpublishing ID-bound commit subject');
+ if(!['validate_only','publish'].includes(request.mode))
+  deny('release mode must be validate_only or publish');
  if(!SHA.test(request.tested_source_sha)||!SHA.test(request.expected_release_head_sha)||
-    !SHA.test(request.expected_development_head_sha))
+    !SHA.test(request.expected_development_head_sha)||
+    !SHA.test(request.expected_main_parent_sha))
   deny('source or expected Git ref SHA format');
+ if(!SHA.test(eventBeforeSha||'')||eventBeforeSha==='0'.repeat(40)||
+    !SHA.test(commitParentSha||'')||!SHA.test(eventHeadSha||'')||
+    !SHA.test(checkedOutHeadSha||'')||
+    request.expected_main_parent_sha!==eventBeforeSha||
+    commitParentSha!==eventBeforeSha||eventHeadSha!==checkedOutHeadSha)
+  deny('pushed event, single parent, request main lease or checked-out commit mismatch');
  if(typeof request.owner_approval_source!=='string'||
     request.owner_approval_source.length<12)deny('owner approval provenance absent');
  if(ownerApprovalSource!==undefined&&request.owner_approval_source!==ownerApprovalSource)
@@ -62,10 +72,10 @@ export function validateChatReleaseRequest({
  const archived=Date.parse(backup.archive_completed_at_utc);
  const verified=Date.parse(backup.verified_at_utc);
  const latestWrite=Date.parse(backup.latest_observed_data_write_at_utc);
- if(archived<latestWrite||archived>verified||archived>now+60_000)
-  deny('encrypted archive does not cover latest observed user data write');
  if(verified>now+60_000||now-verified>2*60*60*1000)
   deny('backup verification is stale or future-dated');
+ if(archived<latestWrite||archived>verified||archived>now+60_000)
+  deny('encrypted archive does not cover latest observed user data write');
  const credit=request.credit_evidence;
  if(!exactly(credit,REQ_CREDIT)||!Number.isSafeInteger(credit.observed_remaining_credits)||
     credit.observed_remaining_credits<15||!validDate(credit.observed_at_utc)||
@@ -79,4 +89,18 @@ export function validateChatReleaseRequest({
  return {releaseId:request.release_id,testedSourceSha:request.tested_source_sha,
   expectedReleaseHeadSha:request.expected_release_head_sha,
   expectedDevelopmentHeadSha:request.expected_development_head_sha};
+}
+
+// Validate the actual signed push envelope and append-only request journal.
+export function assertChatPushEnvelope({eventForced,eventAfterSha,eventHeadSha,
+ remoteMainSha,request,previousJournal,currentJournal}={}){
+ if(eventForced!=='false')deny('forced or unknown push event refused');
+ if(!SHA.test(eventAfterSha||'')||eventAfterSha!==eventHeadSha||remoteMainSha!==eventHeadSha)
+  deny('event after or current remote main differs from request commit');
+ if(typeof previousJournal!=='string'||typeof currentJournal!=='string'||
+  !currentJournal.startsWith(previousJournal))deny('ops journal must preserve prior history');
+ const appended=currentJournal.slice(previousJournal.length);
+ if(!appended.includes(request.release_id)||!appended.includes(request.tested_source_sha)||
+  !appended.includes(request.mode))deny('new journal appendix must bind request ID, source and mode');
+ return true;
 }
