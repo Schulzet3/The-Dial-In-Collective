@@ -110,7 +110,7 @@ async function start(){
     guarded(async()=>{
      const result=await adminRpc('dic_admin_coffee_candidates',{p_submission_id:id});
      const candidates=Array.isArray(result?.candidates)?result.candidates:[];
-     if(!candidates.length)throw new Error('No compatible verified coffee was found. Approve as distinct only after checking the source.');
+     if(!candidates.length)throw new Error('No compatible approved coffee found. Approve as distinct only after checking this is not a duplicate.');
      mergeChoices[id]=candidates;await refresh();
     });return;
    }

@@ -236,7 +236,7 @@ begin
  if p_action='approve' then
    if p_canonical_id is not null then raise exception using errcode='22023',message='Approve cannot take a merge target.';end if;
    result:=private.dic_promote_pending_coffee(s.id,'admin_reviewed',
-     jsonb_build_object('reason',reason_text,'verification_method','manual_administrator'),false);
+     jsonb_build_object('reason',reason_text,'verification_method','manual_administrator'),true);
    if coalesce((result->>'ok')::boolean,false) is not true then
      return result; -- unresolved near-match stays Pending, no false approval audit
    end if;
