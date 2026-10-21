@@ -1,5 +1,11 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 ~17:09Z — tested Free/private release runner installed in main OPS; Netlify cutover STILL REQUIRED
+- Release-source GitHub branch `release/production` seeded at exactly previous published e7e16e5, grant `DIC-20261021-BETA-COFFEE-01` ready/unconsumed. Development release runner corrected nonexistent `review` CI check to real `sql`, exact four development checks SUCCESS at `74e17a1e65f55b219ac4f11379e2cebe271f394b`. Main backup/ops copied byte-identical controller/workflow/claim at `a8c85ea9f3ba4af24fb03b67188e5278091ca41a` with SAME-COMMIT ops journal; readback confirmed.
+- Manual Free/private compensation requires owner acknowledged grant, real five green exact-SHA checks, non-force CAS and one consumption, not mandatory protected GitHub checks. **Production frontend remains OLD**; connected Netlify tool cannot change production Git branch; need one-time independent UI/Work cutover and two readiness Actions variables before a serialized dispatch. No unguarded publish.
+- SQL 2/2 already APPLIED and backed up. Stop asking for general SQL/frontend release permission. See `FAST_BETA_RELEASE_PROTOCOL_2026-10-21.md` for exact operator-only remaining steps. Never claim elapsed-time gain until actual live deploy verified.
+
+
 ## 2026-10-21 — expedited beta release protocol documented; frontend remains unpublished
 - [Fast release protocol](FAST_BETA_RELEASE_PROTOCOL_2026-10-21.md) captures the verified GitHub-to-Drive backup transfer fix, both live SQL migrations, reused exact-source passing checks, one-grant-only release flow and one-time Netlify/provider branch restriction.
 - This is documentation, NOT a Netlify release or a working provider controller. No provider settings, customer data, credits or deployment changed by this entry. Previously authorized frontend remains pending; do not repeat general release consent.
