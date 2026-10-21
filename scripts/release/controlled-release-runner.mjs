@@ -1,5 +1,7 @@
 // Controlled GitHub Actions release runner (private, inert until manual cutover).
-// Intended to execute ONLY from GitHub's protected default 'main' branch.
+// ONLY serialized manually dispatched 'main' ops workflow.
+// GitHub private Free checks are advisory, not enforced. Use exact approved
+// grant, live five-check API readback and atomic non-force one-use claim.
 // Does NOT create Netlify deploys; one NON-FORCE push to release/production
 // is the single atomic claim. Never retry a failed push automatically.
 import {execFileSync} from 'node:child_process';
@@ -56,10 +58,12 @@ export async function executeSingleUseRelease(settings=process.env){
  if(settings.GITHUB_ACTIONS!=='true'||settings.GITHUB_REF!=='refs/heads/main'||
   settings.GITHUB_EVENT_NAME!=='workflow_dispatch'||settings.GITHUB_REPOSITORY!==REPO)
   throw Error('Release is only valid in dispatched, controlled main-branch GitHub Actions');
- if(settings.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED!=='YES'||
+ const enforcedProtection=settings.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED==='YES';
+ const privateFreeMode=settings.DIC_PRIVATE_FREE_COMPENSATING_MODE==='YES';
+ if((!enforcedProtection&&!privateFreeMode)||
   settings.DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED!==RELEASE_BRANCH||
   settings.DIC_RELEASE_CONTROLLER_VERIFIED!=='YES')
-  throw Error('Hosted branch protection/Netlify cutover/controller not independently enabled');
+  throw Error('Hosted Netlify cutover and private Free controller not independently enabled');
  const id=settings.INPUT_RELEASE_ID||'',sha=settings.INPUT_TESTED_SOURCE_SHA||'';
  if(!SHA.test(sha)||!/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/.test(id))
   throw Error('Missing exact release ID or 40-character source SHA');
@@ -82,9 +86,14 @@ export async function executeSingleUseRelease(settings=process.env){
   throw new Error('Tested source lacks protected dedicated-release build gate');
  const approvals=json(git(['show',developmentHead+':docs/RELEASE_AUTHORIZATIONS.json']),'Owner grants');
  const grant=sourceGrant(approvals,id);
+ if(!enforcedProtection&&(!privateFreeMode||
+    grant.owner_private_free_compensating_controls!==true))
+  throw Error('Owner-signed private Free residual-control acceptance missing');
  const statuses=await ciForSha(sha,token);
  assertReadyForRelease({requiredChecks:statuses,flags:{
-  githubPrivateBranchProtectionVerified:true,
+  githubPrivateBranchProtectionVerified:enforcedProtection,
+  githubPrivateFreeCompensatingControlsVerified:privateFreeMode&&
+    grant.owner_private_free_compensating_controls===true,
   netlifyProductionBranchVerified:true,defaultBranchRunnerVerified:true}});
  const oldRaw=initialLedgerOnMissing({releaseHead,
   readLedger:()=>git(['show',releaseHead+':docs/RELEASE_CONSUMPTION.json'])});
