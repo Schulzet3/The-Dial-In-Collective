@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## 2026-10-21 — Issue #47 Admin explorer STAGED; NOT ready for publish
+- Admin metric order, clickable section navigation, paginated list UI, guarded edit forms and URL preview adapter are staged in development only. **RPCs and database migration are not yet installed or tested**, so full creator attribution and cross-account detail editing are not operational. Never publish this partial UI. See active work journal and Issue #47 for open server access/consent validation. No live app/backend change.
+
 
 ## 2026-10-21 21:34Z — FULL CURRENT OWNER-APPROVED RELEASE LIVE; native chat-runner push fallback open
 - **Netlify independently published production READY/current deploy `6ad92fd1d706315f29032892` from release commit `1e79c4585c49ab517abb912887ee05ed7f4c4c4d` on 2026-10-21 21:34:34.367Z.** Exactly one consumed grant `DIC-20261021-BETA-COFFEE-01` is bound to tested application SHA `c6976b1fc86ed5e6b38c0c38831950fca017b3a4`; 307 original source file blobs matched, and only four claim/ledger documentation blobs differ. Latest Supabase read: 22 shots, 22 shot notes, 4 coffees, 7 submissions, 2 Community shots, 5 beta member rows; both previously approved SQL migrations remain applied. No new SQL, Edge, Auth, deletion, or additional release. The site/asset shell cannot be authenticated from connector; owner device acceptance remains unverified.

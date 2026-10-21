@@ -1,17 +1,18 @@
 // Pure, safely escaped administrator view. The database returns only
 // explicitly whitelisted coffee metadata, never owner IDs or private notes.
 import {e} from '../lib/ui.js';
+import {renderAdminRecordCollection} from './records.js';
 
 export const formatCount=value=>value!=null&&value!==''&&Number.isSafeInteger(Number(value))&&Number(value)>=0?String(Number(value)):'—';
 export function renderAdminDenied(message='Administrator access required.'){
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header>
  <section class="admin-panel admin-empty"><h1>Admin Access Unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
 }
-export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={}){
+export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={}){
  const stats=data?.counts||{};
  const queue=Array.isArray(data?.queue)?data.queue:[];
  const total=Number(data?.queue_total)||0;
- const stat=(label,value)=>`<div class="admin-stat"><span>${e(label)}</span><strong>${formatCount(value)}</strong></div>`;
+ const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong>${formatCount(value)}</strong><small>View all →</small></a>`;
  const preview=item=>`<article class="admin-queue-item">
   <div class="admin-queue-title"><div><span class="admin-state">${e(item.status==='conflict'?'Conflict':'Pending')}</span>
    <h3>${e(item.name||'Unnamed coffee')}</h3><p class="helper">${e(item.roaster||'Roaster not supplied')}</p></div>
@@ -32,16 +33,21 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
  <section class="admin-stats" aria-label="Application status">
- ${stat('Pending Coffees',stats.pending_coffees)}${stat('Conflicts',stats.conflicts)}
- ${stat('Approved Coffees',stats.verified_coffees)}${stat('Admitted Accounts',stats.active_accounts)}
- ${stat('Logged Shots',stats.shot_records)}
+ ${stat('Pending Coffees',stats.pending_coffees,'pending')}${stat('Conflicts',stats.conflicts,'conflicts')}
+ ${stat('Approved Coffees',stats.verified_coffees,'approved')}${stat('Logged Shots',stats.shot_records,'shots')}
+ ${stat('Admitted Accounts',stats.active_accounts,'accounts')}
  </section>
- ${access?renderAdminAccessPanel(access,issued):''}
- <section class="admin-panel"><div class="admin-section-header"><div><h2>Pending Coffee Review</h2>
- <p class="helper">${formatCount(total)} outstanding · oldest first</p></div></div>
- ${queue.length?queue.map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
- ${total>queue.length?'<p class="helper">Showing the first 50. Further queue navigation will be added before the beta.</p>':''}
+ <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1"><h2>Pending Coffee Review</h2>
+ ${queue.filter(item=>item.status!=='conflict').length?queue.filter(item=>item.status!=='conflict').map(preview).join(''):'<p class="admin-empty helper">No pending coffee submissions.</p>'}
+ ${renderAdminRecordCollection('pending',records.pending)}
  </section>
+ <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1"><h2>Conflicts</h2>
+ ${queue.filter(item=>item.status==='conflict').length?queue.filter(item=>item.status==='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee conflicts.</p>'}
+ ${renderAdminRecordCollection('conflicts',records.conflicts)}
+ </section>
+ ${renderAdminRecordCollection('approved',records.approved)}
+ ${renderAdminRecordCollection('shots',records.shots)}
+ <section id="admin-accounts" tabindex="-1"><h2 class="admin-accounts-title">Accounts</h2>${access?renderAdminAccessPanel(access,issued):'<p class="helper">Account list unavailable.</p>'}</section>
  <section class="admin-panel admin-health"><h2>Infrastructure</h2><p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p></section>`;
 }
 
