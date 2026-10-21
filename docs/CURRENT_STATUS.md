@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 — security regression expansion, still source-only
+- New admin RPC migration candidate now applies in isolated PostgreSQL (first run `39685464088` PASS); new explicit transaction-rolled-back administrator permission, edit/audit, page bounds and canonical identity tests added next. One previous admin invitation VM test failed only because an unavailable new listing incorrectly hid an older account list; corrected. No hosted SQL, user data, Netlify credit or production change. Next: verify exact CI/isolated test results, resolve remaining errors, request later separate release approval.
+
 ## 2026-10-21 Issue #47 — admin record explorer development, backend staged NOT APPLIED
 - Exact owner-approved DEV scope in both canonical Master Spec and Decision Ledger; staged secure administrator records/listing and audited edits in migration candidate, not yet isolated-DB tested or applied. Fixes first app CI failures by registering new admin/records.js in cloud build allowlist and keeping legacy empty-queue copy. No live production/database/auth/notes changes. Pending full security/test and release readiness; separate publish approval mandatory. See Issue #47 and active journal.
 

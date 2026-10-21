@@ -15,11 +15,12 @@ const fields={
 const string=v=>v==null?'':String(v);
 const attr=(name,value)=>' '+name+'="'+e(string(value))+'"';
 const date=v=>string(v).slice(0,10);
-const rowFields=(item,shot)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
+const rowFields=(item,shot,approved)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
  const value=string(item[key]);
  const multiline=['notes','tasting_notes','summary','espressoNotes'].includes(key);
+ const readonly=approved&&['name','roaster','release_label'].includes(key)?' readonly title="Canonical identity requires separate review"':'';
  const input=multiline?'<textarea name="'+e(key)+'" rows="2" maxlength="8000">'+e(value)+'</textarea>':
-  '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+(['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
+  '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+readonly+' ' +(['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
  return '<label>'+e(label)+input+'</label>';
 }).join('');
 export function renderAdminRecord(item,kind){
@@ -39,7 +40,7 @@ export function renderAdminRecord(item,kind){
   (item.source_url?'<p class="admin-source">Source: '+e(item.source_url)+'</p>':'')+
   (enabled?'<button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Edit Details</button>':'')+
   (enabled?'<form hidden class="admin-record-editor" data-record-form '+attr('data-id',id)+attr('data-type',type)+
-     attr('data-revision',rev)+'><div class="admin-record-grid">'+rowFields(item,shot)+'</div>'+
+     attr('data-revision',rev)+'><div class="admin-record-grid">'+rowFields(item,shot,approved)+'</div>'+
      (!shot?'<label>Source URL (optional)<input name="source_url" type="url"'+attr('value',item.source_url||'')+'></label>'+
       '<button type="button" class="ghost compact" data-action="extract-coffee-url"'+attr('data-id',id)+'>Autofill Blanks From URL</button>'+
       '<p class="helper">Preview fills only empty inputs; inspect and save changes explicitly. Extraction alone never verifies official evidence.</p>':'')+

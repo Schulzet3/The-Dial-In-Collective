@@ -55,8 +55,8 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  * plaintext token: freshly generated secrets appear once per browser tab. */
 export function renderAdminAccessPanel(access={},issued=null,accountPage=null){
  const invites=Array.isArray(access?.invites)?access.invites:[];
- const members=Array.isArray(accountPage?.items)?accountPage.items:Array.isArray(access?.members)?access.members:[];
- const offset=accountPage?.offset||0,total=Number(accountPage?.total)||Number(access.members_total)||0;
+ const members=Array.isArray(accountPage?.items)&&!accountPage?.error?accountPage.items:Array.isArray(access?.members)?access.members:[];
+ const offset=accountPage?.error?0:(accountPage?.offset||0),total=accountPage?.error?Number(access.members_total)||0:Number(accountPage?.total)||Number(access.members_total)||0;
  const inviteRows=invites.map(row=>{
   const state=['active','revoked','used','expired'].includes(row.status)?row.status:'unknown';
   const count=formatCount(row.uses)+' / '+(row.max_uses==null?'Unlimited':formatCount(row.max_uses));
