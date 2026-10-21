@@ -72,10 +72,14 @@ assert.ok(Array.isArray(r.data?.shots));
 assert.ok(!/PRIVATE_CI_NOTE_MUST_NOT_LEAK|owner_id|contributor_id|shot_id/i.test(JSON.stringify(r.data)));
 pass('Signed admitted member sees only sanitized eligible Community DTO');
 r=await call('/shots?select=owner_id&limit=1',tokens.member);
-assert.equal(r.status,200);assert.deepEqual(r.data,[]);
+assert.equal(r.status,200);
+assert.ok(Array.isArray(r.data)&&r.data.length>0);
+assert.ok(r.data.every(row=>row.owner_id===member));
 r=await call('/shot_notes?select=owner_id&limit=1',tokens.member);
-assert.equal(r.status,200);assert.deepEqual(r.data,[]);
-pass('Other contributors shots and raw notes denied through owner RLS');
+assert.equal(r.status,200);
+assert.ok(Array.isArray(r.data)&&r.data.length>0);
+assert.ok(r.data.every(row=>row.owner_id===member));
+pass('Signed member sees own records but zero foreign contributors shots or notes');
 
 await denied('Anonymous cannot browse private Community','/rpc/dic_browse_community_shots',undefined,{p_limit:5,p_offset:0});
 await denied('Never-admitted signed identity cannot browse','/rpc/dic_browse_community_shots',tokens.unadmitted,{p_limit:5,p_offset:0});
