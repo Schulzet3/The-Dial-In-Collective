@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "issue": 34,
+  "state": "CLOSED_COMPLETED",
+  "owner_observed": "2026-10-20 MDT",
+  "published_source_sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+  "netlify_deploy_id": "6ad7be20bf672d5c8936f19a",
+  "original_baseline": {
+    "shots": 18,
+    "notes": 18,
+    "community": 2
+  },
+  "qa_source": {
+    "synthetic_owner_entered_shots": 2,
+    "outlier_seconds": 75,
+    "revision": 4,
+    "green": true,
+    "held_reason_before": "extreme_outlier"
+  },
+  "failed_attempt": {
+    "trigger": "Chrome DevTools exact confirmation RPC URL Block",
+    "owner_ui": [
+      "required review modal stayed visible",
+      "TypeError: Failed to fetch visible in active dialog",
+      "Confirm button reenabled"
+    ],
+    "browser_request_blocked": true,
+    "server_request_reached": false,
+    "provider_held_count_before_retry": 1,
+    "result": "PASS_CONTROLLED_BROWSER_TRANSPORT_FAILURE"
+  },
+  "retry": {
+    "owner_report": "Retry succeeded",
+    "authenticated_post_http": 200,
+    "provider_minute_utc": "2026-10-21T04:50:00Z",
+    "sql_reviewed_at_utc": "2026-10-21T04:50:54.399421Z",
+    "qa_quality": "eligible",
+    "qa_reason": "valid",
+    "qa_review_outcome": "eligible",
+    "fingerprint_present": true,
+    "result": "PASS_REAL_HOSTED_SAME_MODAL_RETRY"
+  },
+  "final_totals": {
+    "shots": 20,
+    "notes": 20,
+    "community": 4,
+    "eligible": 4,
+    "held": 0
+  },
+  "limitations": [
+    "Not an actual Supabase outage; failure was Chrome request blockade",
+    "Edge logs aggregate route/method/role/http status without exact JWT subject",
+    "Owner screenshot/report supplies active dialog and retry experience",
+    "Other #9 Correct/foreign-member/revision-conflict/hide remain open"
+  ],
+  "qa_deletion_status": "NOT_AUTHORIZED_OR_PERFORMED",
+  "qa_contributions_remain_live": true,
+  "issue_closed_at_utc": "2026-10-21T04:54:35Z",
+  "historical_records_preserved": true,
+  "no_private_identifiers_stored": true
+}

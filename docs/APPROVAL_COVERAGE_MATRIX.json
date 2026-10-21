@@ -258,6 +258,33 @@
           "contains": "exactly ONE winner"
         }
       ]
+    },
+    {
+      "id": "mandatory_held_shot_confirm_failure_retry_live",
+      "decision_key": "current_owner_required_outlier_review",
+      "scope": "Required held extreme-outlier Confirm modal, visible Chrome blocked-fetch error, reenabled retry and real signed-owner same-modal HTTP200 successful Confirm. Does not verify Correct Shot or provider outage.",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_CHROME_REAL_HOSTED_BLOCKED_FETCH_RETRY_PASS_20261021_0450UTC",
+      "issue": 34,
+      "acceptance_evidence": "docs/acceptance/2026-10-20-community-confirmation-retry-owner-report.json",
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "if(a==='community-confirm-outlier'){"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "target.disabled=false;throw error;"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "this.syncReviewDialog();"
+        },
+        {
+          "path": "site/cloud/client.js",
+          "contains": "async confirmCommunityOutlier(shotId,expectedRevision)"
+        }
+      ]
     }
   ],
   "active_gap_flags": [
