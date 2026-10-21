@@ -13,6 +13,7 @@ const request={
  backup_evidence:{
   artifact_id:12345,encrypted_sha256:'a'.repeat(64),
   owner_private_offsite_file_id:'private-drive-file-123',
+  archive_completed_at_utc:'2026-10-21T17:40:00Z',
   verified_at_utc:'2026-10-21T17:57:00Z',
   latest_observed_data_write_at_utc:'2026-10-21T17:00:00Z'},
  credit_evidence:{observed_remaining_credits:100,
@@ -56,6 +57,10 @@ test('old or future dated request, bad backup evidence and missing private copy 
   verified_at_utc:'2026-10-21T12:00:00Z'}}}),/backup verification is stale/);
  assert.throws(()=>validate({...base,request:{...request,backup_evidence:{...request.backup_evidence,
   owner_private_offsite_file_id:''}}}),/backup evidence/);
+ assert.throws(()=>validate({...base,request:{...request,backup_evidence:{...request.backup_evidence,
+  archive_completed_at_utc:'2026-10-21T16:00:00Z'}}}),/archive does not cover/);
+ assert.throws(()=>validate({...base,request:{...request,backup_evidence:{...request.backup_evidence,
+  archive_completed_at_utc:'2026-10-21T18:10:00Z'}}}),/archive does not cover/);
 });
 test('credit evidence below ceiling, stale or forged extra fields refuses release',()=>{
  assert.throws(()=>validate({...base,request:{...request,credit_evidence:{...request.credit_evidence,
