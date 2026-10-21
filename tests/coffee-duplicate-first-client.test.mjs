@@ -35,3 +35,13 @@ test('coffee status UX differentiates catalog approval from independently verifi
  assert.doesNotMatch(ui,/\?'Verified coffee record'/);
  assert.match(ui,/Coffee automatically approved and added to the shared catalog\./);
 });
+
+test('member autoapproval cannot bypass duplicates or assert trusted official source evidence',async()=>{
+ const sql=await load('supabase/migrations/20261021062000_dic_duplicate_first_auto_approval.sql');
+ const fixture=await load('supabase/tests/coffee_duplicate_first_auto_approval.sql');
+ assert.match(sql,/method in \('official_verified','member_auto_approved'\) or not distinct_confirmed/);
+ assert.match(sql,/when method='official_verified' and jsonb_typeof\(evidence->'verified_fields'\)='object'/);
+ assert.match(sql,/when method='official_verified' then 'roaster_page'/);
+ assert.match(fixture,/Member bypassed duplicate gate via direct confirmed distinct/);
+ assert.match(fixture,/Member forged trusted coffee source provenance/);
+});

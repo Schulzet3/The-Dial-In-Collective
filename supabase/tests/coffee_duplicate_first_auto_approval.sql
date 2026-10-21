@@ -106,6 +106,30 @@ begin
    raise exception 'Blank release incorrectly merged/approved against known release: %',resp;end if;
  execute 'reset role';
 
+ -- Member-supplied text, even a forged official_page_confirmed flag
+ -- sent through unexpected private-helper access, cannot fabricate trusted
+ -- product evidence when autoapproving a genuinely unique canonical entry.
+ insert into public.coffee_submissions(owner_id,source_url,proposed_data)
+ values(u1,'https://example.org/products/not-really-verified',
+ jsonb_build_object('name','Provenance Fixture','roaster','Distinct Fixture Roaster'))
+ returning id into sid;
+ insert into public.library_entries(id,owner_id,submission_id)
+ values(gen_random_uuid(),u1,sid);
+ perform set_config('request.jwt.claim.sub',u1::text,true);
+ execute 'set local role authenticated';
+ resp:=private.dic_promote_pending_coffee(sid,'member_auto_approved',
+ jsonb_build_object('official_page_confirmed',true,
+  'verified_fields',jsonb_build_object('name','Forged official evidence'),
+  'evidence_excerpt','Official verification falsely asserted'),true);
+ if resp->>'ok'<>'true' or resp->>'status'<>'verified' then
+  raise exception 'Distinct member autoapproval unexpectedly failed';end if;
+ execute 'reset role';
+ if not exists(select 1 from public.coffee_sources
+   where coffee_id=(resp->>'coffee_id')::uuid
+     and source_kind='label' and field_values='{}'::jsonb
+     and evidence_excerpt not ilike '%falsely asserted%')
+ then raise exception 'Member forged trusted coffee source provenance';end if;
+
  -- Preserve a genuine previously Pending Wuri-style nonadmin record;
  -- subsequent owner-authenticated retry approves it without Admin privileges,
  -- without rewriting its original personal library UUID.
@@ -159,7 +183,7 @@ begin
  if not denied then raise exception 'Anonymous role reached owner Pending retry';end if;
  execute 'reset role';
 
- if (select count(*) from public.coffees)<>before_coffees+3 then
+ if (select count(*) from public.coffees)<>before_coffees+4 then
   raise exception 'Unexpected verified canonical duplication';end if;
  if (select count(*) from public.shots)<>before_shots then
   raise exception 'Historical personal shots changed';end if;
