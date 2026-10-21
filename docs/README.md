@@ -41,3 +41,5 @@
 
 ## Guardrails
 Do not delete originals, rewrite source evidence, alter Locked decisions without an explicit approved scoped supersession, publish from an ordinary commit, spend Netlify credits without per-release authorization, or change existing private shot data as part of documentation/cleanup.
+
+- [Fast beta release protocol](FAST_BETA_RELEASE_PROTOCOL_2026-10-21.md): emergency backend completion, reusing CI/backup evidence and outstanding one-time provider routing.

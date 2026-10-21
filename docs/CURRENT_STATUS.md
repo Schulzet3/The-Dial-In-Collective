@@ -1,5 +1,10 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 — expedited beta release protocol documented; frontend remains unpublished
+- [Fast release protocol](FAST_BETA_RELEASE_PROTOCOL_2026-10-21.md) captures the verified GitHub-to-Drive backup transfer fix, both live SQL migrations, reused exact-source passing checks, one-grant-only release flow and one-time Netlify/provider branch restriction.
+- This is documentation, NOT a Netlify release or a working provider controller. No provider settings, customer data, credits or deployment changed by this entry. Previously authorized frontend remains pending; do not repeat general release consent.
+
+
 ## 2026-10-21 16:55Z — explicit one-use production grant PREPARED, not consumed
 - Release ID **DIC-20261021-BETA-COFFEE-01**, tested source **c6976b1f**, maximum 1 Netlify build, 15-credit ceiling, expires 2026-10-28 23:59 UTC, recorded in RELEASE_AUTHORIZATIONS.json. SQL migrations 2/2 already live. Consumption remains empty. Frontend remains old until dedicated Netlify release branch/routing is independently verified and one atomic release pushes successfully. Do not treat grant creation as deployment.
 
