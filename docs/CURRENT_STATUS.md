@@ -1,4 +1,10 @@
 # CURRENT STATUS — The Dial In Collective
+
+## Issue #9 exact QA purge COMPLETE — 2026-10-20 MDT / 2026-10-21 UTC
+- Owner explicitly authorized permanent removal of precisely TEMP QA #9/#34 BASELINE and OUTLIER, following the exact detailed scope question; authorization single-use and now exhausted. Canonical Master Specification/Decision Ledger exception recorded before SQL; GitHub journal contains guarded SQL and scoped provider readback.
+- Two synthetic 18g/50.5g/21.4s original owner-created QA shots were deleted in a guarded single transaction together with 2 notes, 2 synthetic eligible Community projections, 2 links, 2 quality checks. Eight target audit snapshot payloads sanitized with action/date/identity metadata retained; six target mutation response payloads tombstoned with replay keys preserved.
+- Independent Supabase postcommit SQL **18 shots / 18 notes / 2 eligible Community / 2 contributor links / 2 quality checks**, **zero residual QA shots, QA notes or QA Community IDs**, 8 audit metadata rows sanitized, 6 QA receipt tombstones. Originals/backups preserved. No deployment, migration, member/provider-setting changes. #34 remains CLOSED; #9 remains OPEN for wrong-member, stale revision and hide/detach acceptance; no new user browser tests requested. GitHub is source of truth; this is production database verification, not proof of deployed UX.
+
 **Verified: 2026-10-20 UTC.** This is the authoritative **latest** project operational checkpoint. The full prior 30 KB running status was preserved unchanged in [the archive](archive/CURRENT_STATUS_SNAPSHOT_BEFORE_PWA_REFRESH_RELEASE_2026-10-20.md); older sections there and old issue descriptions are historical, not current. The [Master Specification](MASTER_SPECIFICATION.md) and [Decision Ledger](DECISION_LEDGER.json) govern all Locked product decisions.
 
 
