@@ -1,5 +1,5 @@
-// Controlled GitHub Actions release runner (private, inert until manual cutover).
-// ONLY serialized manually dispatched 'main' ops workflow.
+// Controlled GitHub Actions release runner (private, inert until hosted cutover).
+// Serialized main OPS Actions: explicit manual fallback OR verified narrow chat request.
 // GitHub private Free checks are advisory, not enforced. Use exact approved
 // grant, live five-check API readback and atomic non-force one-use claim.
 // Does NOT create Netlify deploys; one NON-FORCE push to release/production
@@ -9,6 +9,7 @@ import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,RELEASE_BRANCH} from './one-use-claim.mjs';
+import {validateChatReleaseRequest,CHAT_REQUEST_PATH} from './chat-release-request.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -55,16 +56,36 @@ const setBlob=(path,content,env)=>{
  git(['update-index','--add','--cacheinfo','100644,'+sha+','+path],{env});
 };
 export async function executeSingleUseRelease(settings=process.env){
+ const chatPush=settings.GITHUB_EVENT_NAME==='push';
  if(settings.GITHUB_ACTIONS!=='true'||settings.GITHUB_REF!=='refs/heads/main'||
-  settings.GITHUB_EVENT_NAME!=='workflow_dispatch'||settings.GITHUB_REPOSITORY!==REPO)
-  throw Error('Release is only valid in dispatched, controlled main-branch GitHub Actions');
+  !['workflow_dispatch','push'].includes(settings.GITHUB_EVENT_NAME)||
+  settings.GITHUB_REPOSITORY!==REPO)
+  throw Error('Release is only valid in controlled main-branch GitHub Actions');
+ // On push, never trust INPUT_* environment variables or simply having a file.
+ // Require the *exact* event commit to create/update only a request and journal.
+ let chatRequest;
+ if(chatPush){
+  if(!SHA.test(settings.GITHUB_SHA||'')||
+     git(['rev-parse','HEAD'])!==settings.GITHUB_SHA)
+   throw Error('Chat release request commit SHA does not match checked-out HEAD');
+  const parents=git(['rev-list','--parents','-n','1','HEAD']).split(/\s+/);
+  if(parents.length!==2)throw Error('Chat release requests require one parent');
+  const changedPaths=git(['diff-tree','--no-commit-id','--name-only','-r','HEAD'])
+   .split(/\r?\n/).filter(Boolean);
+  const request=json(git(['show','HEAD:'+CHAT_REQUEST_PATH]),'Chat release request');
+  const commitSubject=git(['log','-1','--format=%s','HEAD']);
+  validateChatReleaseRequest({request,changedPaths,commitSubject,
+   nowIso:new Date().toISOString()});
+  chatRequest=request;
+ }
  const enforcedProtection=settings.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED==='YES';
  const privateFreeMode=settings.DIC_PRIVATE_FREE_COMPENSATING_MODE==='YES';
  if((!enforcedProtection&&!privateFreeMode)||
   settings.DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED!==RELEASE_BRANCH||
   settings.DIC_RELEASE_CONTROLLER_VERIFIED!=='YES')
   throw Error('Hosted Netlify cutover and private Free controller not independently enabled');
- const id=settings.INPUT_RELEASE_ID||'',sha=settings.INPUT_TESTED_SOURCE_SHA||'';
+ const id=chatPush?chatRequest.release_id:(settings.INPUT_RELEASE_ID||'');
+ const sha=chatPush?chatRequest.tested_source_sha:(settings.INPUT_TESTED_SOURCE_SHA||'');
  if(!SHA.test(sha)||!/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/.test(id))
   throw Error('Missing exact release ID or 40-character source SHA');
  const token=settings.GITHUB_TOKEN;
@@ -89,6 +110,15 @@ export async function executeSingleUseRelease(settings=process.env){
  if(!enforcedProtection&&(!privateFreeMode||
     grant.owner_private_free_compensating_controls!==true))
   throw Error('Owner-signed private Free residual-control acceptance missing');
+ if(chatPush)validateChatReleaseRequest({
+  request:chatRequest,
+  changedPaths:git(['diff-tree','--no-commit-id','--name-only','-r','HEAD'])
+   .split(/\r?\n/).filter(Boolean),
+  commitSubject:git(['log','-1','--format=%s','HEAD']),
+  expectedDevelopmentHead:developmentHead,expectedReleaseHead:releaseHead,
+  ownerApprovalSource:grant.approval_source,
+  nowIso:new Date().toISOString()
+ });
  const statuses=await ciForSha(sha,token);
  assertReadyForRelease({requiredChecks:statuses,flags:{
   githubPrivateBranchProtectionVerified:enforcedProtection,
