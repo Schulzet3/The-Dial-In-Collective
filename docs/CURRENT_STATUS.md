@@ -1,5 +1,10 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 — GREEN main chat-trigger controller installed; LIVE release STILL UNVERIFIED
+- Verified main OPS commit **459100e66268a722a11138c46bb2e0e64894269d** contains main-only path-filtered `dic-chat-approved-release.yml`, guarded runner, helper, tests and same-commit journal; GitHub CI run **39657363607** `release-controller-validate` SUCCESS. This fixes the old `workflow_dispatch`-only limitation **at source/test level**, but end-to-end approval-from-chat→Netlify READY is **NOT TESTED/ACCEPTED**. No valid request or manual release from this parallel chat. `release/production` still old `e7e16e5`, provider Netlify old READY `6ad7be20bf672d5c8936f19a`, exact release grant ledger still empty. Concurrent Work owns one-time Netlify branch/readiness and release, protect against duplicate execution.
+- Exact [new-chat handoff](HANDS_FREE_RELEASE_PARALLEL_CHAT_HANDOFF_2026-10-21.md) updated with main install/CI receipts, open PR #45 and reviewer #5604703033 finding; check latest before acting.
+
+
 ## 2026-10-21 — new acceptance gate: after Work, ordinary chat must initiate future approved releases automatically
 - Owner expressly requires **no manual GitHub, Netlify or Supabase workflow steps for future ordinary updates** after one Work setup. **NOT VERIFIED**: main release controller still uses `workflow_dispatch` only, and connected chat tools cannot dispatch. Latest authorized Work scope now includes a guarded path-filtered request-file `push` trigger available through ordinary chat GitHub writes, inert negative/replay acceptance, then ONE currently authorized real source-bound release with Netlify READY verification. No new unlimited future publishing permission. Recorded in Master Specification and Decision Ledger as `OPS-HANDS-FREE-APPROVED-RELEASE-20261021`; Issue #44 remains OPEN until proven. Existing strict per-release owner chat approval, privacy, backup and budget controls remain.
 
