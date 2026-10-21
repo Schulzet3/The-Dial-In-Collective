@@ -78,6 +78,11 @@ begin
         and (nullif(btrim(coalesce(p->>'process','')),'') is null
           or s.process is null
           or private.dic_coffee_key(p->>'process')=private.dic_coffee_key(s.process))
+        -- Official source URLs take priority; an exact-release label with
+        -- a different existing verified product URL is not sufficient.
+        and (search_source is null or s.curated_url_match or
+          not exists(select 1 from public.coffee_sources src
+           where src.coffee_id=s.id and src.source_kind='roaster_page'))
         then 'exact_release'
       when s.exact_brand and s.exact_title then 'same_name'
       when s.exact_brand then 'similar_name'
