@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {executeSingleUseRelease,initialLedgerOnMissing,RELEASE_GENESIS_SHA,MINIMUM_GUARDED_SOURCE_SHA} from '../scripts/release/controlled-release-runner.mjs';
-test('release controller cannot operate outside default-branch manually dispatched hosted Actions',async()=>{
- await assert.rejects(executeSingleUseRelease({}),/only valid in dispatched/);
+test('release controller cannot operate outside controlled main OPS Actions',async()=>{
+ await assert.rejects(executeSingleUseRelease({}),/only valid in controlled main-branch/);
  await assert.rejects(executeSingleUseRelease({GITHUB_ACTIONS:'true',GITHUB_REF:'refs/heads/development/backend-foundation',
   GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'Schulzet3/The-Dial-In-Collective'}),/only valid/);
 });
@@ -17,6 +17,18 @@ test('missing actual Netlify cutover and Free/private mode stop BEFORE Git comma
  await assert.rejects(executeSingleUseRelease({...base,DIC_PRIVATE_FREE_COMPENSATING_MODE:'YES',
   DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED:'release/production',DIC_RELEASE_CONTROLLER_VERIFIED:'YES',
   INPUT_RELEASE_ID:'not-valid',INPUT_TESTED_SOURCE_SHA:'a'.repeat(40)}),/Missing exact release ID/);
+});
+
+test('chat push cannot impersonate manual event or run without an exact GitHub request commit',async()=>{
+ const base={GITHUB_ACTIONS:'true',GITHUB_REF:'refs/heads/main',
+  GITHUB_EVENT_NAME:'push',GITHUB_REPOSITORY:'Schulzet3/The-Dial-In-Collective',
+  DIC_PRIVATE_FREE_COMPENSATING_MODE:'YES',
+  DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED:'release/production',
+  DIC_RELEASE_CONTROLLER_VERIFIED:'YES'};
+ await assert.rejects(executeSingleUseRelease(base),/Chat release request commit SHA/);
+ await assert.rejects(executeSingleUseRelease({...base,GITHUB_SHA:'bad'}),/Chat release request commit SHA/);
+ await assert.rejects(executeSingleUseRelease({...base,GITHUB_REF:'refs/heads/development/backend-foundation'}),
+  /only valid in controlled main-branch/);
 });
 
 test('an absent consumed ledger is allowed ONLY at independently verified production genesis',()=>{
