@@ -58,10 +58,11 @@ begin
   or resp->>'reused'<>'true'
  then raise exception 'Exact same-release canonical auto-reuse failed: %',resp;end if;
 
- -- Explicitly different harvest is a distinct canonical release even with
- -- same roaster/name, and cannot be silently merged into 2026.
+ -- An identical reused product URL across a DIFFERENT harvest must
+ -- still create a distinct canonical release (never cross-merge).
  resp:=public.dic_apply_client_change(u2,gen_random_uuid(),'submit_coffee',
  jsonb_build_object('library_entry_id',gen_random_uuid(),
+  'source_url','https://example.org/products/caramel-blossom',
   'proposed_data',jsonb_build_object('roaster','Synthetic Test Roaster',
   'name','Caramel Blossom','release_label','2027','origin','Ethiopia','process','Washed')));
  if resp->>'ok'<>'true' or resp->>'status'<>'verified' or
