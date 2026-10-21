@@ -9,7 +9,10 @@ test('admin dashboard offers guarded manual review without destructive delete',(
   queue_total:1,queue:[{id:'test',status:'pending',name:'Example',roaster:'Roaster',created_at:'2026-10-14T00:00:00Z'}]
  });
  assert.match(html,/Review Queue/);
- assert.match(html,/Pending Coffee Verification/);
+ assert.match(html,/Pending Coffee Review/);
+ assert.match(html,/Approved Coffees/);
+ assert.match(html,/Unique coffees are approved automatically/);
+ assert.doesNotMatch(html,/Pending Coffee Verification|Source-backed coffees can verify automatically/);
  assert.match(html,/data-action="review-approve"/);
  assert.match(html,/data-action="review-merge-prepare"/);
  assert.match(html,/data-action="review-hold"/);

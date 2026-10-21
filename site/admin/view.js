@@ -25,19 +25,19 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
    <button type="button" class="ghost compact" data-action="review-merge-prepare" data-id="${e(String(item.id||''))}">Resolve Duplicate</button>
    <button type="button" class="ghost compact" data-action="review-hold" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Hold for Clarification</button>
   </div>
-  ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Verified coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
+  ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
   <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
  </article>`;
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
- <p>Only genuine coffee identity and source conflicts require attention. Source-backed coffees can verify automatically; manual review is for unresolved cases.</p></section>
+ <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
  <section class="admin-stats" aria-label="Application status">
  ${stat('Pending Coffees',stats.pending_coffees)}${stat('Conflicts',stats.conflicts)}
- ${stat('Verified Coffees',stats.verified_coffees)}${stat('Admitted Accounts',stats.active_accounts)}
+ ${stat('Approved Coffees',stats.verified_coffees)}${stat('Admitted Accounts',stats.active_accounts)}
  ${stat('Logged Shots',stats.shot_records)}
  </section>
  ${access?renderAdminAccessPanel(access,issued):''}
- <section class="admin-panel"><div class="admin-section-header"><div><h2>Pending Coffee Verification</h2>
+ <section class="admin-panel"><div class="admin-section-header"><div><h2>Pending Coffee Review</h2>
  <p class="helper">${formatCount(total)} outstanding · oldest first</p></div></div>
  ${queue.length?queue.map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
  ${total>queue.length?'<p class="helper">Showing the first 50. Further queue navigation will be added before the beta.</p>':''}
