@@ -159,7 +159,7 @@ begin
  values(cid,sid,auth.uid(),method,coalesce(evidence,'{}'::jsonb));
  return jsonb_build_object('ok',true,'status','verified','coffee_id',cid,'canonical_name',new_c.name,
     'reused',false);
-end $function$
+end $function$;
 
 
 create or replace function private.dic_admin_coffee_candidates(p_submission_id uuid)
@@ -269,6 +269,11 @@ $dic$;
 -- Explicit privileges: private implementations are not Data API endpoints.
 revoke all on function private.dic_admin_coffee_candidates(uuid) from public,anon,authenticated;
 revoke all on function private.dic_admin_review_coffee(uuid,bigint,text,text,uuid) from public,anon,authenticated;
+-- Public SQL-invoker wrappers need authenticated role EXECUTE on their
+-- private definer implementations; both check live membership and admin status.
+-- Private schema is not exposed by PostgREST, and anon remains denied.
+grant execute on function private.dic_admin_coffee_candidates(uuid) to authenticated;
+grant execute on function private.dic_admin_review_coffee(uuid,bigint,text,text,uuid) to authenticated;
 revoke all on function public.dic_admin_coffee_candidates(uuid) from public,anon,authenticated;
 revoke all on function public.dic_admin_review_coffee(uuid,bigint,text,text,uuid) from public,anon,authenticated;
 grant execute on function public.dic_admin_coffee_candidates(uuid) to authenticated;
@@ -327,5 +332,5 @@ begin
       'explanation', 'Backup results are verified in GitHub/Drive; this SQL endpoint does not assert backup freshness.'
     )
   );
-end $function$
+end $function$;
 
