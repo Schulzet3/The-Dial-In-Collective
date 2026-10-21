@@ -8,7 +8,7 @@ const ledger=JSON.parse(file('docs/DECISION_LEDGER.json'));
 const credits=JSON.parse(file('docs/NETLIFY_CREDIT_LEDGER.json'));
 const check=(changes={})=>auditApprovalCoverage({matrix,ledger,credits,...changes});
 test('every current owner decision is inventoried and approved UI source/contracts exist',()=>{
- assert.equal(checkRepository().ownerDecisions,30);
+ assert.equal(checkRepository().ownerDecisions,31);
  assert.deepEqual(check(),[]);
 });
 test('forgotten owner-approved decision key fails closed until classified',()=>{
@@ -44,4 +44,14 @@ test('all original baseline Locked/Open decisions are preserved as an immutable 
  const modified=structuredClone(ledger);
  modified.baseline.content.locked[0].decision='Core loop unexpectedly changed';
  assert.match(check({ledger:modified}).join(' '),/baseline/);
+});
+
+test('owner explicitly rules out GitHub Pro/public; Project instructions reflect advisory Free/private controls',()=>{
+ const instructions=file('docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md');
+ const spec=file('docs/MASTER_SPECIFICATION.md');
+ assert.match(instructions,/Keep the repository \*\*private on GitHub Free\*\*/);
+ assert.match(instructions,/Do not recommend or initiate GitHub Pro/);
+ assert.match(instructions,/checks are advisory/);
+ assert.match(spec,/Owner-Locked GitHub Free\/private operating constraint/);
+ assert.ok(Object.hasOwn(ledger,'current_owner_github_free_private_no_upgrade_20261020'));
 });

@@ -8,6 +8,16 @@ The latest explicit owner decision governs. Preserve every unchanged Locked requ
 
 Current product copy uses **The Dial In Collective** and **dial in**, without hyphens. Historical source headings, filenames and quotations retain their original wording. The product remains sleek, simple and optimized for **Log Shot → Rate → Recommendation**.
 
+## Owner-Locked GitHub Free/private operating constraint — later October 20, 2026
+
+**Latest explicit owner instruction:** “I'm not going to upgrade Github so do whatever you can without pro and without making the repository public.” **Keep this repository PRIVATE on GitHub Free. No GitHub Pro, paid upgrade, or public visibility recommendation/purchase is authorized.** This is a narrow supersession of the **prior plan to require a GitHub Pro account as the next action** and any statement that such a purchase is required to continue work. It does **not** waive requirements for accurate work records, original Locked product decisions, privacy, one-time release permission, tested exact release source, deployment verification or backup integrity.
+
+**Verified limitation and accepted compensating operating model:** `development/backend-foundation` and `main` were both reported `protected:false`; private rulesets returned 403 requiring an upgrade or public visibility. Do not mislabel advisory GitHub Actions CI as mandatory repository branch protection. Private GitHub Free cannot give us a verified no-bypass branch rule in the current account. Preserve existing working protections: GitHub-first work logging, same-commit journal, per-push CI, test and visual check review, explicit `[skip netlify]` for non-release pushes, grant/consumption ledger and serial non-force release-controller code. Require a human check of test results and production provider receipts before any separately approved release. None of these individually guarantees protection from direct Git writes or manual/CLI/provider release bypass.
+
+**Fail closed, without Pro:** Development and documentation can proceed without a subscription. Keep the current production app unchanged and default-main manual release controller inert until the owner separately approves an operational alternative for this Free/private environment and the Netlify production source/other provider controls are verified. Never set readiness flags solely to bypass a disabled protection; #38 remains OPEN with honest limitations. Do not create release markers, switch Netlify branches, touch customer data, or spend credits in a continuity-only request.
+
+**Updated ChatGPT Project instructions** are preserved at [CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md); the owner must paste/save them in ChatGPT Project Settings because connected tools cannot edit that UI.
+
 ## Protected source, verified continuity and atomic release — owner Locked October 20, 2026
 
 **Owner approval:** Every material owner instruction, test, decision, code/provider action and interruption checkpoint must be durably recorded/read back in GitHub before further mutation. All sessions begin by reconciling the latest verified development SHA, CI, decisions and provider deployment. Missing/unavailable records remain UNVERIFIED, not invented. Code/test/CI commits must include the GitHub journal in the SAME commit.

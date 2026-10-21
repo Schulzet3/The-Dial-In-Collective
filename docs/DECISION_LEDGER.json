@@ -3505,5 +3505,21 @@
     ],
     "instructions_file": "docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md",
     "issue": 38
+  },
+  "current_owner_github_free_private_no_upgrade_20261020": {
+    "decision_id": "OPS-GITHUB-FREE-PRIVATE-NO-UPGRADE-20261020",
+    "status": "LOCKED: private GitHub Free; no Pro/no public; advisory CI and manual release controls only until independently verified",
+    "explicit_owner_quote": "I'm not going to upgrade Github so do whatever you can without pro and without making the repository public.",
+    "supersedes": "Only the previous instruction/proposal to upgrade to GitHub Pro or publicize the repository to enable protected-branch required checks; does not supersede release consent/data privacy or source-of-truth requirements",
+    "requirements": [
+      "Do not suggest or perform GitHub Pro/billing upgrade or make repository public unless owner expressly reverses this decision",
+      "Resume development using available Free/private CI, GitHub logging, fail-closed Netlify source guard and manually verified release approval",
+      "Mark unprotected branch CI as advisory, NEVER mandatory/enforced",
+      "Do not unlock inert production controller by fake readiness flags or call #38 complete",
+      "Keep one-grant/one-source/one-release, fail-closed data/prod changes and exact receipts"
+    ],
+    "source": "Explicit owner October 20, 2026 chat instruction",
+    "scope": "Account/hosting operational constraint; no new product UX decision and no production deploy authorization",
+    "linked_issue": 38
   }
 }

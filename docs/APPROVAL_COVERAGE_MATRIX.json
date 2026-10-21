@@ -19,6 +19,7 @@
     "current_owner_beta_member_soft_remove_only_20261018",
     "current_owner_extractor_deterministic_only_20261019",
     "current_owner_github_continuity",
+    "current_owner_github_free_private_no_upgrade_20261020",
     "current_owner_grinder_range_info_20261019",
     "current_owner_one_visible_recipe_internal_families_20261020",
     "current_owner_outlier_research_20261018",
@@ -285,8 +286,8 @@
     },
     {
       "id": "github_private_branch_protection",
-      "status": "BLOCKED",
-      "reason": "Owner must enable private GitHub Pro eligibility and required checks for dev/release branches; repo currently protected:false; integration cannot PATCH protection.",
+      "status": "UNAVAILABLE_ON_OWNER_APPROVED_PRIVATE_FREE_PLAN",
+      "reason": "Owner explicitly declined GitHub Pro and public source. Branches protected:false and private rulesets 403; GitHub Actions CI is advisory, not a mandatory block. No alternate enforcement is claimed. Keep #38 open.",
       "issue": 38
     },
     {
@@ -299,6 +300,12 @@
       "id": "chatgpt_project_settings",
       "status": "OWNER_ACTION_REQUIRED",
       "reason": "Project instructions saved to GitHub file; no Project settings editor is exposed, user must paste and save."
+    },
+    {
+      "id": "github_free_private_no_paid_upgrade",
+      "status": "LOCKED_POLICY_WITH_RESIDUAL_RISK",
+      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; retain advisory CI, exact SHA check, work journal and inert one-use controller. No branch protection guarantee.",
+      "issue": 38
     }
   ],
   "original_baseline": {
