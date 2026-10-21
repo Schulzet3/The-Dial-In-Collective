@@ -1,5 +1,11 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 16:49Z — NEW owner-approved two live migrations; offsite backup now VERIFIED
+- User expressly authorizes **two named production SQL migrations in order**: `20261021053500_dic_admin_coffee_review.sql` and `20261021062000_dic_duplicate_first_auto_approval.sql`, with genuine Wuri owner check **after** backend and frontend release instead of before. This narrowly supersedes the old Wuri-first blocker, not data/security or other Locked decisions. Existing one-time Netlify production consent reiterated (still unconsumed).
+- **Backup gate resolved:** Github encrypted run 39482660006 attempt4, artifact 12356293654, copied into owner-only, not-shared Google Drive file **1_qP5KuE_3MRU-oYYPL8fUbyfv6htL0ly**; independently downloaded and verified exact **1,190,308 bytes**, sha256 **1a1163504592d55088bfd26acb0bf57db67f61a663670ad119c2d0e4902f5069**, `unzip -t` PASS encrypted-only member. Latest shot at 14:49Z preceded 15:20Z backup; Supabase latest read remains 22 shots/notes. No decrypted restore of attempt4; previous historical restore evidence preserved.
+- Authorized backend application and a safe one-use Netlify release may proceed **only with exact source, preserved security and provider gating**. Frontend was NOT live at this checkpoint. Earlier sections below are dated snapshots, not newer consent status.
+
+
 ## 2026-10-21 16:28Z — authorized release recovery: production held, new backup covered live 22 shots
 - The owner's **one consolidated production publish directive remains active and unconsumed**; do not ask them to re-authorize general deployment. Tested application source `c6976b1fc86ed5e6b38c0c38831950fca017b3a4` has 487/487 Node, PostgreSQL regression, cloud UX and approval/continuity PASS; subsequent six commits to prior recovery head 83c2d294 only touched docs.
 - **Current read-only production:** Netlify READY deploy `6ad7be20bf672d5c8936f19a` still publishes old source `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`. Supabase ACTIVE_HEALTHY PG17.11, 30 migrations; 22 shots, 22 notes, 4 canonical coffees, 2 Community, 3 Pending and 0 admin reviews. Newest shot created/updated 14:49:43Z. No migration or frontend release.

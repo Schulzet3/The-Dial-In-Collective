@@ -3566,5 +3566,31 @@
       5,
       43
     ]
+  },
+  "current_owner_expedited_two_migrations_and_production_20261021": {
+    "decision_id": "OPS-EXPEDITED-BETA-RELEASE-20261021",
+    "status": "OWNER APPROVED: exactly two named live SQL migrations in order and one preexisting authorized tested Netlify app release; execution/prod acceptance require independent readback",
+    "owner_instruction_at_local": "2026-10-21 10:44 America/Denver",
+    "owner_quote": "Applying the two tested production migrations. Literally, you need to do whatever you need to do and figure it out. This needs to be live now.",
+    "owner_release_intent": "Existing one-use consolidated production Netlify publish consent explicitly reiterated; not unlimited recurring permission.",
+    "exact_sql_in_order": [
+      "20261021053500_dic_admin_coffee_review.sql",
+      "20261021062000_dic_duplicate_first_auto_approval.sql"
+    ],
+    "exact_tested_source_sha": "c6976b1fc86ed5e6b38c0c38831950fca017b3a4",
+    "supersedes_only": [
+      "Prior requirement to finish Wuri genuinely signed-in member acceptance before applying first named production admin migration; that acceptance is now ordered after backend AND frontend release.",
+      "Previously absent distinct owner authorization for the second named live duplicate-first schema migration; now expressly granted in this instruction."
+    ],
+    "preserves": [
+      "GitHub private Free and advisory status-check limits, no upgrade/public visibility",
+      "A fresh independently verified encrypted recoverable snapshot and private offsite copy before live DDL",
+      "No automatic Pending Wuri/Mango/Decaf backfills or unauthorized member-data edits",
+      "One unique release ID, one tested source, one GitHub non-force serialized claim, independently verified production SHA and limited Netlify credits",
+      "No broad/provider-account-billing change, paid purchase, credentials leak, RLS relaxation, or arbitrary future release approvals",
+      "Journal and issue readbacks and genuine device acceptance only after publication"
+    ],
+    "operations_improvement": "Prepare backups and tests before release approval; perform only checks invalidated by new source/data; one guarded SQL sequence, one frontend publish, targeted postflight and receipt. Eliminate repetitive previously passing browser tests, release consent loops and redundant backup exports.",
+    "status_detail": "Store actual applied migration ids, latest GitHub head, provider source and published SHA in CURRENT_STATUS and journal. The exact instructions are authorization, not evidence that the migration or frontend already happened."
   }
 }
