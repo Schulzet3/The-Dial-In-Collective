@@ -5,6 +5,10 @@ declare
  admin_id uuid:='10000000-0000-4000-8000-000000000001';
  member_id uuid:=gen_random_uuid();
  pending_id uuid;canonical_id uuid;rev bigint;data jsonb;denied boolean;before_count bigint;
+ setup_id uuid:=gen_random_uuid(); version_id uuid:=gen_random_uuid();
+ basket_id uuid:=gen_random_uuid();basket_version_id uuid:=gen_random_uuid();
+ calibration_id uuid:=gen_random_uuid();library_id uuid:=gen_random_uuid();
+ shot_id uuid:=gen_random_uuid();shot_rev bigint;
 begin
  if current_database()<>'dic_ci' then raise exception 'Disposable database only';end if;
  select count(*) into before_count from public.shots;
@@ -84,7 +88,68 @@ begin
  if data->>'ok'<>'true' or (select summary from public.coffees where id=canonical_id)<>'Improved descriptive detail'
  then raise exception 'Approved descriptive correction failed';end if;
  if (select count(*) from public.shots)<>before_count then raise exception 'Shot history altered by coffee corrections';end if;
+ -- Build a real synthetic member's shot/notes with valid immutable equipment
+ -- provenance as the disposable postgres fixture owner, never as admin.
  execute 'reset role';
+ insert into public.setups(id,owner_id,name) values(setup_id,member_id,'Fixture setup');
+ insert into public.setup_versions(id,owner_id,setup_id,machine_model,grinder_model,burr_set)
+ values(version_id,member_id,setup_id,'Test Machine','Test Grinder','Test Burr');
+ insert into public.grinder_calibrations(id,owner_id,setup_id,grinder_model,burr_set,finest_setting,coarsest_setting)
+ values(calibration_id,member_id,setup_id,'Test Grinder','Test Burr',0,5);
+ insert into public.baskets(id,owner_id,setup_id,name) values(basket_id,member_id,setup_id,'18 g');
+ insert into public.basket_versions(id,owner_id,setup_id,basket_id,basket_dose_g,model)
+ values(basket_version_id,member_id,setup_id,basket_id,18,'Test Basket');
+ insert into public.library_entries(id,owner_id,coffee_id) values(library_id,member_id,canonical_id);
+ insert into public.shots(id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+  calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+  extraction,body,clarity,sweetness,astringency,equipment_snapshot,is_dialed_in)
+ values(shot_id,member_id,library_id,setup_id,version_id,basket_version_id,
+  calibration_id,'Turbo',now(),18,42,25,1.1,3,3,5,5,1,'{}',false)
+ returning revision into shot_rev;
+ insert into public.shot_notes(owner_id,shot_id,notes) values(member_id,shot_id,'Private original note');
+ -- Ordinary member cannot edit via administrator-only RPC.
+ perform set_config('request.jwt.claim.sub',member_id::text,true);
+ execute 'set local role authenticated';
+ denied:=false;
+ begin perform public.dic_admin_edit_shot(shot_id,shot_rev,
+  '{"dose_g":"18","yield_g":"42","time_s":"26","notes":"Changed by fake member"}'::jsonb,
+  'Member cannot change foreign history','shot');
+ exception when insufficient_privilege then denied:=true;end;
+ if not denied then raise exception 'Regular member reached privileged shot correction';end if;
+ execute 'reset role';
+ perform set_config('request.jwt.claim.sub',admin_id::text,true);
+ execute 'set local role authenticated';
+ data:=public.dic_admin_records('shots',0,50);
+ if not exists(select 1 from jsonb_array_elements(data->'items') i
+   where i->>'id'=shot_id::text and i->>'creator_email'='only-for-admin-test@fixture.invalid'
+   and i->>'notes'='Private original note') then
+  raise exception 'Admin cannot view member shot with its private notes and creator';end if;
+ denied:=false;
+ begin perform public.dic_admin_edit_shot(shot_id,shot_rev+1,
+  '{"dose_g":"18","yield_g":"42","time_s":"26","notes":"Stale"}'::jsonb,
+  'Stale administrator shot correction','shot');
+ exception when serialization_failure then denied:=true;end;
+ if not denied then raise exception 'Stale administrator shot revision accepted';end if;
+ data:=public.dic_admin_edit_shot(shot_id,shot_rev,
+  '{"dose_g":"18","yield_g":"42","time_s":"26","notes":"Audited operator correction"}'::jsonb,
+  'Correct timed shot and private notes','shot');
+ if data->>'ok'<>'true' then raise exception 'Admin shot correction rejected';end if;
+ execute 'reset role';
+ if (select time_s from public.shots where id=shot_id)<>26
+  or (select notes from public.shot_notes where shot_id=shot_id and owner_id=member_id)<>'Audited operator correction'
+  or (select owner_id from public.shots where id=shot_id)<>member_id
+  or (select setup_id from public.shots where id=shot_id)<>setup_id then
+  raise exception 'Correction changed provenance or failed member shot/notes update';end if;
+ if not exists(select 1 from private.admin_content_edits where record_id=shot_id
+   and record_kind='shot' and actor_id=admin_id and subject_owner_id=member_id
+   and before_values->>'notes'='Private original note'
+   and after_values->>'notes'='Audited operator correction') then
+  raise exception 'Admin shot correction missing original/updated private note audit';end if;
+ if (select count(*) from public.shots)<>before_count+1 then
+  raise exception 'Admin correction changed number of original shots';end if;
+ -- Anon denial below retains original administrator subject and invokes a
+ -- role check; all records from this synthetic fixture roll back.
+
  -- Not even a forged administrator subject may call via the anonymous database role.
  execute 'set local role anon';
  denied:=false;
@@ -96,5 +161,5 @@ begin
    or has_function_privilege('anon','public.dic_admin_edit_shot(uuid,bigint,jsonb,text,text)','EXECUTE') then
   raise exception 'Anonymous granted admin RPC execute';end if;
 end $admin_content$;
-select 'PASS: admin-only record enumeration, creator attribution, permission negatives, stale edit denial, audited coffee corrections; synthetic rows rolled back' as result;
+select 'PASS: admin-only pagination, creator attribution, private shot notes, member/anon denial, revision race, audited coffee/shot corrections, immutable provenance; synthetic records rolled back' as result;
 rollback;

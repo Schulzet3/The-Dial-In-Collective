@@ -202,10 +202,11 @@ with sync_playwright() as p:
   main=(SITE/'admin/main.js').read_text()
   main=re.sub(r"^import .*?;\n",'',main,flags=re.M)
   shared=(SITE/'cloud/appearance.js').read_text().replace('export ','')
+  records=(SITE/'admin/records.js').read_text();records=re.sub(r"^import .*?;\n",'',records,flags=re.M).replace('export ','')
   view=(SITE/'admin/view.js').read_text();view=re.sub(r"^import .*?;\n",'',view,flags=re.M).replace('export ','')
   sdk='''const CLOUD_CONFIG={enabled:true};const secureOrigin=()=>{};let requests=[];const sdk={auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),getUser:async()=>({data:{user:{id:'review-owner'}}})},from:()=>({select:()=>({eq:()=>({maybeSingle:async()=>({data:{theme:MODE}})})})}),rpc:async(name)=>{requests.push(name);return {data:name==='dic_session_status'?{authenticated:true,admitted:true,admin:true}:{counts:{pending_coffees:0,conflicts:0,verified_coffees:4,active_accounts:1,shot_records:14},queue_total:0,queue:[]}}}};globalThis.supabase={createClient:()=>sdk};'''
   escaped="const e=x=>String(x??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));"
-  page.add_script_tag(content='const MODE='+json.dumps(mode)+';'+escaped+shared+view+sdk+main)
+  page.add_script_tag(content='const MODE='+json.dumps(mode)+';'+escaped+shared+records+view+sdk+main)
   page.locator('#admin-refresh').wait_for();check(page.locator('html').get_attribute('data-theme')==mode,mode+': Admin reads saved account appearance')
   page.locator('#admin-refresh').click();check(page.evaluate('requests.filter(x=>x==="dic_admin_dashboard").length')>=2,mode+': Admin Refresh remains read-only')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin has no horizontal overflow')

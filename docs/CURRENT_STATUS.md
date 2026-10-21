@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 — isolated shot-edit scenario and admin visual harness (2026-10-21T22:30:00.108Z)
+- Added rollback-only end-to-end SQL acceptance for real synthetic member shot notes, denied non-admin edit, creator attribution, admin stale revision rejection, real audited time/notes correction and provenance preservation. Fixed visual screenshot's inlined admin records.js dependency. This remains predeployment development only; awaiting CI and device acceptance before release planning.
+
 ## Issue #47 — duplicate review list and synthetic mobile QA adapter corrected
 - Pending/Conflict cards now link to one primary paged list with review actions collapsed instead of two duplicated visible lists. Browser test loads new pure records.js dependency. Other live/privacy/credit boundaries unchanged. Await isolated SQL and exact refreshed CI, not yet release-ready.
 
