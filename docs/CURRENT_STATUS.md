@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 targeted audit test setup correction (2026-10-21T22:25:54.856Z)
+- Application CI green; isolated PostgreSQL privilege denial reflected intentionally private canonical catalog INSERT. Synthetic fixture setup corrected to privileged postgres without changing actual production migration or member permissions. No production deployment, no hosted mutation; staging is not release-ready until verified.
+
 ## Issue #47 — audit-fixture role verification and no-warning lint correction
 - Development remains unreleased. Real isolated SQL test now switches only test's privileged inspection to postgres instead of weakening private audit RLS; last unused catch binding removed. Await exact new CI. No production database or Netlify action.
 

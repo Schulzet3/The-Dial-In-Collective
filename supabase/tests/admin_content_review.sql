@@ -68,9 +68,10 @@ begin
    and before_values->'proposed_data'->>'origin' is null
    and after_values->'proposed_data'->>'origin'='Kenya') then
   raise exception 'Audit did not preserve before/after';end if;
- execute 'set local role authenticated'; -- original admin identity remains in signed claim
+ -- Build synthetic canonical fixture as postgres; normal members cannot INSERT catalog.
  insert into public.coffees(name,roaster,verification_state)
  values('Canonical Fixture','Fixture Roaster','verified') returning id,revision into canonical_id,rev;
+ execute 'set local role authenticated'; -- resume authenticated administrator for RPCs
  denied:=false;
  begin perform public.dic_admin_edit_coffee(canonical_id,rev,
    '{"name":"Rewritten Identity","roaster":"Fixture Roaster"}'::jsonb,
