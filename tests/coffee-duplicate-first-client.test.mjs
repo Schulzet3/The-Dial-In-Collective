@@ -31,7 +31,7 @@ test('admin approval distinct permits exact audited manual override of ambiguous
 });
 test('coffee status UX differentiates catalog approval from independently verified source',async()=>{
  const ui=await load('site/cloud/main.js');
- assert.match(ui,/\?'Approved coffee':'Pending: possible duplicate needs review\.'/);
+ assert.match(ui,/\?'Approved coffee':'Pending approval · your shots stay private\.'/);
  assert.doesNotMatch(ui,/\?'Verified coffee record'/);
  assert.match(ui,/Coffee automatically approved and added to the shared catalog\./);
 });
