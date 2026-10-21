@@ -18,6 +18,10 @@ test('chat release enforces same single-use controller and truthful Free private
  assert.match(file,/DIC_PRIVATE_FREE_COMPENSATING_MODE: 'YES'/);
  assert.match(file,/DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED/);
  assert.match(file,/DIC_RELEASE_CONTROLLER_VERIFIED/);
+ assert.match(file,/DIC_PUSH_BEFORE_SHA:.*github\.event\.before/);
+ assert.match(controller,/mode==='validate_only'/);
+ assert.match(controller,/RELEASE_CLAIM_RECEIPT\.json/);
+ assert.match(controller,/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY\.md/);
  assert.match(manual,/workflow_dispatch:/);
  assert.doesNotMatch(manual,/\n\s{2}(?:push|pull_request|schedule):/);
  assert.match(controller,/validateChatReleaseRequest/);
