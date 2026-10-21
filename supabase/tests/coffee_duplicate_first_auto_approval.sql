@@ -33,18 +33,19 @@ begin
  if not exists (select 1 from public.library_entries where id=lid
   and owner_id=u1 and coffee_id=cid and submission_id is null)
  then raise exception 'Original personal library entry changed or lost'; end if;
- if not exists(select 1 from private.dic_coffee_audit a
-   where a.coffee_id=cid and a.event_kind='member_auto_approved')
- then raise exception 'Member autoapproval audit missing'; end if;
- if not exists(select 1 from public.coffee_sources where coffee_id=cid and source_kind='label')
- or exists(select 1 from public.coffee_sources where coffee_id=cid and source_kind='roaster_page')
- then raise exception 'Unverified member URL falsely claimed trusted official source';end if;
  replayed:=public.dic_apply_client_change(u1,req,'submit_coffee',jsonb_build_object(
  'library_entry_id',lid,'source_url','https://example.org/products/caramel-blossom',
  'proposed_data',jsonb_build_object('roaster','Synthetic Test Roaster',
   'name','Caramel Blossom','release_label','2026','origin','Ethiopia','process','Washed')));
  if resp<>replayed then raise exception 'Idempotent same-mutation replay failed'; end if;
  execute 'reset role';
+ if not exists(select 1 from private.dic_coffee_audit a
+   where a.coffee_id=cid and a.event_kind='member_auto_approved')
+ then raise exception 'Member autoapproval audit missing'; end if;
+ if not exists(select 1 from public.coffee_sources where coffee_id=cid and source_kind='label')
+ or exists(select 1 from public.coffee_sources where coffee_id=cid and source_kind='roaster_page')
+ then raise exception 'Unverified member URL falsely claimed trusted official source';end if;
+
 
  -- Separate real admitted nonadmin reuse on exact same explicit release.
  perform set_config('request.jwt.claim.sub',u2::text,true);

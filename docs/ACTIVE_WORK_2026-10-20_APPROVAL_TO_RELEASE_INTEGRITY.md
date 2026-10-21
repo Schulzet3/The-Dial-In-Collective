@@ -642,3 +642,6 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 ## Admin review rollback SQL fixture updated after policy supersession
 - Isolated SQL run 39555069706 passed matcher + updated ordinary autoapproval test, then failed in old admin_coffee_review fixture because it assumed every new unique URL-sourced ordinary member coffee starts Pending. Under newly Locked COFFEE-DUPLICATE-FIRST-20261021, that is intentionally false. Kept all authorization/stale revision/manual review/audit/history/anon checks; instead fixture inserts two strictly disposable synthetic preexisting Pending records for admin approve and hold paths. No real provider member data touched; CI to rerun. Same-commit journal retained.
+
+## Isolated SQL fixture role correction
+- CI 39555229651 confirmed admin review acceptance now PASS and reached the new duplicate-first fixture. Failed only where synthetic fixture attempted to SELECT private.dic_coffee_audit while impersonating ordinary authenticated member; production denies it correctly. Moved private audit/provenance assertions AFTER RESET ROLE in the disconnected fixture (no grant changes). The test continues to explicitly verify ordinary member cannot reach private audit data and SQL promotion still logs provenance. All production safeguards unchanged; re-run CI.
