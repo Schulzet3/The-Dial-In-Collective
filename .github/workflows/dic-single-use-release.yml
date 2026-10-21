@@ -1,0 +1,42 @@
+name: DIC single-use owner-approved production release
+# Manual only. This workflow does not run on push, pull_request or schedule.
+# Install on default BACKUP/OPS branch 'main' after owner GitHub Pro/branch
+# protection and Netlify dedicated production-branch cutover are verified.
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: "Explicit unique owner approval (DIC-YYYYMMDD-...); must exist in approved grant file"
+        required: true
+        type: string
+      tested_source_sha:
+        description: "Exact 40-character tested development commit SHA"
+        required: true
+        type: string
+permissions:
+  contents: write
+  checks: read
+concurrency:
+  group: dic-exclusive-one-use-production-publish
+  cancel-in-progress: false
+jobs:
+  atomic-release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Verify exact grant, CI, GitHub private protections, Netlify branch and make ONE nonforce release push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_RELEASE_ID: ${{ inputs.release_id }}
+          INPUT_TESTED_SOURCE_SHA: ${{ inputs.tested_source_sha }}
+          DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED: ${{ vars.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED }}
+          DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED: ${{ vars.DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED }}
+          DIC_RELEASE_CONTROLLER_VERIFIED: ${{ vars.DIC_RELEASE_CONTROLLER_VERIFIED }}
+        run: node scripts/release/controlled-release-runner.mjs

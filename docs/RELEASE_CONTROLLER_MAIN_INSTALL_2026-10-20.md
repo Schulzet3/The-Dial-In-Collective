@@ -1,0 +1,17 @@
+# Protected default-branch single-use release controller — installation receipt
+**Installed in backup/operations branch `main` on 2026-10-20. INERT until owner configuration.**
+
+The controlled GitHub Actions workflow `.github/workflows/dic-single-use-release.yml` is manual `workflow_dispatch` only, not activated on pushes, PRs, scheduled backups or routine work sessions. It requires exact inputs `release_id` and `tested_source_sha` and a matching explicit, expiring owner grant in the protected application branch.
+
+**The configuration variables MUST ALL remain unset until independent verification:**
+- `DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED=YES`: private GitHub Pro-enabled `development/backend-foundation`, `main`, and dedicated release branch have appropriate required status/check and force-push prevention rules; no unapproved bypass.
+- `DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED=release/production`: Netlify project actual Git-linked production branch has been switched from ongoing development to the exact dedicated release branch; release branch was initialized at actual current deployed production source safely.
+- `DIC_RELEASE_CONTROLLER_VERIFIED=YES`: isolated successful Git ref race, grant validation and CI result tests verified; GitHub Actions permissions allow ONLY the intended non-force ref write and rejection on replay. Review how protection rules interact with the bot before setting.
+
+**No owner release grant exists.** `docs/RELEASE_AUTHORIZATIONS.json` on development starts `grants: []`, consumed ledger `[]`; this workflow will fail closed if manually started now. Do NOT set any readiness variable merely to silence an error. Do NOT test by moving the real Netlify production branch or writing a release marker until owner expressly approves the cutover and controls are verified.
+
+The release controller has NO Netlify API token, build hook or CLI deployment; it performs exactly one non-force remote Git push to `release/production` upon all checks passing. It cannot guarantee that a Netlify administrator won't manually redeploy the same commit; provider-side permissions and branch settings are separate safeguards.
+
+**Source/test receipt:** last reviewed development code from `994a4d9f91e2475a96df42a46564c06e29f1c8d7`; GitHub Node/lint/build PASS `39518608025`, approval/continuity PASS `39518607963`. GitHub Pro/private branch rule and Netlify source changes are NOT independently available from current integration, and the current app stays untouched.
+
+See app development documentation `docs/MASTER_SPECIFICATION.md`, `docs/APPROVAL_COVERAGE_MATRIX.json`, `docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md` and issue #38. Do NOT enable this controller or consider #38 closed before the owner's manual hosted settings are confirmed.
