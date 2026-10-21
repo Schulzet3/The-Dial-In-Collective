@@ -1,6 +1,12 @@
 # CURRENT STATUS — The Dial In Collective
 **Verified: 2026-10-20 UTC.** This is the authoritative **latest** project operational checkpoint. The full prior 30 KB running status was preserved unchanged in [the archive](archive/CURRENT_STATUS_SNAPSHOT_BEFORE_PWA_REFRESH_RELEASE_2026-10-20.md); older sections there and old issue descriptions are historical, not current. The [Master Specification](MASTER_SPECIFICATION.md) and [Decision Ledger](DECISION_LEDGER.json) govern all Locked product decisions.
 
+## Active priority — owner-assisted #9/#41 read-only account acceptance (2026-10-20 America/Denver)
+- Owner now explicitly requests existing administrator and non-admin browser sign-in, read-only API/privacy checks, and GitHub documentation. No production data, account/settings, deployments or paid changes authorized.
+- Recovered HEAD `31600d0c823c95236cac3b828c903bd6320a1663`; latest continuity CI 39524958109 SUCCESS. Netlify independently confirmed current deploy `6ad7be20bf672d5c8936f19a` / source `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`; Supabase ACTIVE_HEALTHY.
+- Production sign-in page is open in the Work-mode cloud browser, awaiting owner sign-in. **No authenticated acceptance result yet.** Next: administrator sign-in, verify read-only API contracts/capability, record actual redacted receipts, then repeat using the existing non-admin account. Active journal has scope and handoff detail.
+- #9/#41 stay OPEN. #9 held-shot mutation/retry/hide lifecycle and unavailable disabled/nonadmitted real sessions cannot be represented as passed by this read-only session. #12 development remains deferred while this owner-directed acceptance work is active.
+
 ## Owner confirmation — ChatGPT Project instructions applied; #12 next (2026-10-20)
 - Owner explicitly reports **ChatGPT Project instructions have been updated/saved**. Mark this as **OWNER-REPORTED acceptance**, not independently read from ChatGPT settings (no Project-settings access in this connection). No need to ask the owner to paste them again.
 - After reconciliation, the next development item is [issue #12](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12): integrate complete exact/related/similar personal and Community recommendation evidence hierarchy with contributor-balanced aggregation, truthful source/provenance/confidence, and strict grinder/basket/calibration/style compatibility. Keep one visible recipe and internal family separation from #10.
