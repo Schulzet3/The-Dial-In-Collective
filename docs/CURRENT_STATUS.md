@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 — duplicate review list and synthetic mobile QA adapter corrected
+- Pending/Conflict cards now link to one primary paged list with review actions collapsed instead of two duplicated visible lists. Browser test loads new pure records.js dependency. Other live/privacy/credit boundaries unchanged. Await isolated SQL and exact refreshed CI, not yet release-ready.
+
 ## Issue #47 targeted audit test setup correction (2026-10-21T22:25:54.856Z)
 - Application CI green; isolated PostgreSQL privilege denial reflected intentionally private canonical catalog INSERT. Synthetic fixture setup corrected to privileged postgres without changing actual production migration or member permissions. No production deployment, no hosted mutation; staging is not release-ready until verified.
 

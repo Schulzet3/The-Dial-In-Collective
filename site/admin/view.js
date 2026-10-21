@@ -1,5 +1,5 @@
-// Pure, safely escaped administrator view. The database returns only
-// explicitly whitelisted coffee metadata, never owner IDs or private notes.
+// Pure escaped administrator view. Legacy review overview is sanitized;
+// separate live-admin-only records RPC can include creator identity and notes.
 import {e} from '../lib/ui.js';
 import {renderAdminRecordCollection} from './records.js';
 
@@ -37,11 +37,11 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  ${stat('Admitted Accounts',stats.active_accounts,'accounts')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1"><h2>Pending Coffee Review</h2>
- ${queue.filter(item=>item.status!=='conflict').length?queue.filter(item=>item.status!=='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
+ ${Array.isArray(records.pending?.items)&&!records.pending?.error?`<details class="admin-review-details"><summary>Pending review actions (${queue.filter(item=>item.status!=='conflict').length})</summary>${queue.filter(item=>item.status!=='conflict').map(preview).join('')}</details>`:queue.filter(item=>item.status!=='conflict').length?queue.filter(item=>item.status!=='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
  ${renderAdminRecordCollection('pending',records.pending)}
  </section>
  <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1"><h2>Conflicts</h2>
- ${queue.filter(item=>item.status==='conflict').length?queue.filter(item=>item.status==='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee conflicts.</p>'}
+ ${Array.isArray(records.conflicts?.items)&&!records.conflicts?.error?`<details class="admin-review-details"><summary>Conflict review actions (${queue.filter(item=>item.status==='conflict').length})</summary>${queue.filter(item=>item.status==='conflict').map(preview).join('')}</details>`:queue.filter(item=>item.status==='conflict').length?queue.filter(item=>item.status==='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee conflicts.</p>'}
  ${renderAdminRecordCollection('conflicts',records.conflicts)}
  </section>
  ${renderAdminRecordCollection('approved',records.approved)}
