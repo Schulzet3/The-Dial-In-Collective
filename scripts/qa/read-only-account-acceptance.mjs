@@ -18,7 +18,7 @@ async function runReadOnlyAccountAcceptance(env, loadConfig) {
  // SELECT from STABLE, read-only private helpers. No other POST is permitted.
  const readPostRPCs=['dic_session_status','dic_read_personal_state'];
  const checks=[];
- const report={version:1,started_at:new Date().toISOString(),expected_role:expectedRole,reviewed_source:'e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60',checks,unverified:['administrator mutation RPC denials (no mutation endpoint invoked)','genuine disabled/nonadmitted account sessions','held-shot confirmation/correction/retry/hide/version-conflict lifecycle','cross-account timing/races and persistent offline cache isolation','all canonical releases beyond currently returned eligible rows','current production source must be independently checked against reviewed_source']};
+ const report={version:2,started_at:new Date().toISOString(),expected_role:expectedRole,reviewed_source:'e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60',checks,unverified:['administrator mutation RPC denials (no mutation endpoint invoked)','genuine disabled/nonadmitted account sessions','held-shot confirmation/correction/retry/hide/version-conflict lifecycle','cross-account timing/races and persistent offline cache isolation','all canonical releases beyond currently returned eligible rows','current production source must be independently checked against reviewed_source']};
  function add(name,pass,r,extra={}){checks.push({name,result:pass?'PASS':'FAIL',http_status:r?.status??null,error_class:r?.code??null,...extra});}
  async function request(path,{mode='member',method='GET'}={}){
   const url=new URL(path,project);
@@ -53,9 +53,18 @@ async function runReadOnlyAccountAcceptance(env, loadConfig) {
  add('personal_state_only_current_owner',stateOwned,state,{schema_present:validState});
  for(const table of ownerTables){
   const r=await request('/rest/v1/'+table+'?'+new URLSearchParams({select:'owner_id',owner_id:'neq.'+uid,limit:'1'}));
+  if(table==='coffee_submissions'&&expectedRole==='admin'){
+   // This is intentionally NOT an owner-only table for admitted administrators.
+   // Source: 20261009192735_dic_coffee_catalog.sql submission_read policy;
+   // security_foundation.sql #38 explicitly requires cross-owner admin review.
+   // Record this as outside owner-isolation scope, never an isolation PASS.
+   const valid=r.ok&&Array.isArray(r.data)&&r.data.length<=1&&r.data.every(row=>typeof row?.owner_id==='string'&&row.owner_id!==uid);
+   add('foreign_owner_read:'+table,valid,r,{result:valid?'NOT_APPLICABLE':'FAIL',outcome:valid?'ADMIN_REVIEW_ACCESS':'UNEXPECTED_RESPONSE',observed_rows:Array.isArray(r.data)?r.data.length:null});
+   continue;
+  }
   const empty=r.ok&&Array.isArray(r.data)&&r.data.length===0;
   const blocked=denied(r);
-  add('foreign_owner_read:'+table,empty||blocked,r,{outcome:empty?'NO_FOREIGN_ROW':blocked?'ACCESS_DENIED':'UNEXPECTED_RESPONSE'});
+  add('foreign_owner_read:'+table,empty||blocked,r,{outcome:empty?'NO_FOREIGN_ROW':blocked?'ACCESS_DENIED':'UNEXPECTED_RESPONSE',observed_rows:Array.isArray(r.data)?r.data.length:null});
  }
  const topKeys=['shots','total','offset','page_size'];
  const fields=['coffee_name','roaster','release_key','release_label','release_origin','release_process','release_producer','release_variety','release_roast_level','style','observed_on','dose_g','yield_g','ratio','time_s','extraction','body','clarity','sweetness','astringency','shot_count','contributor_count'];
@@ -90,7 +99,7 @@ async function runReadOnlyAccountAcceptance(env, loadConfig) {
  const currentSession=JSON.parse(env.localStorage.getItem('dic_cloud_auth_v1')||'null');
  add('identity_unchanged_through_run',finalIdentity.ok&&finalIdentity.data?.id===uid&&currentSession?.user?.id===uid,finalIdentity);
  report.finished_at=new Date().toISOString();
- report.summary={passed:checks.filter(x=>x.result==='PASS').length,failed:checks.filter(x=>x.result==='FAIL').length,acceptance:'PARTIAL_READ_ONLY_EVIDENCE_ONLY'};
+ report.summary={passed:checks.filter(x=>x.result==='PASS').length,failed:checks.filter(x=>x.result==='FAIL').length,not_applicable:checks.filter(x=>x.result==='NOT_APPLICABLE').length,acceptance:'PARTIAL_READ_ONLY_EVIDENCE_ONLY'};
  return report;
 }
 

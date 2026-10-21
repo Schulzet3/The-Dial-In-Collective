@@ -37,6 +37,7 @@ function fixture({role='admin',serverRole=role,leak='',expired=false,transport=f
    else if(name==='dic_admin_dashboard')r=role==='admin'?{status:200,ok:true,data:{review_only:true,counts:{},private_test:email}}:denied();
    else if(name==='dic_admin_access_overview')r=role==='admin'?{status:200,ok:true,data:{members:[{id:other,email}],invites:[]}}:denied();
    else if(name==='community_shots')r=denied();
+   else if(name==='coffee_submissions')r={status:200,ok:true,data:role==='admin'||leak==='submission'?[{owner_id:other}]:[]};
    else r={status:200,ok:true,data:leak==='foreign'&&name==='shots'?[{owner_id:other}]:[]};
    return {status:r.status,ok:r.ok,json:async()=>r.data};
   }};
@@ -46,6 +47,7 @@ test('both roles: bounded read requests, reviewed POSTs only, and no secret/reco
  for(const role of ['admin','member']){
   const f=fixture({role});const report=await run(f.env,f.loadConfig);
   assert.equal(report.summary.failed,0);assert.ok(report.summary.passed>25);
+  assert.equal(report.summary.not_applicable,role==='admin'?1:0);
   const output=JSON.stringify(report);for(const secret of [uid,other,token,email,'private note text'])assert.ok(!output.includes(secret));
   assert.ok(f.requests.length<45);
   for(const {url,options}of f.requests){
@@ -56,6 +58,15 @@ test('both roles: bounded read requests, reviewed POSTs only, and no secret/reco
    assert.ok(!/issue_invite|revoke_invite|set_member_access|apply_client_change|confirm_community|commit_import|redeem_invite/.test(url));
   }
  }
+});
+test('admin submission review is outside owner-isolation scope; member exposure still fails',async()=>{
+ const admin=fixture({role:'admin'});const a=await run(admin.env,admin.loadConfig);
+ const adminCheck=a.checks.find(x=>x.name==='foreign_owner_read:coffee_submissions');
+ assert.equal(adminCheck.result,'NOT_APPLICABLE');assert.equal(adminCheck.outcome,'ADMIN_REVIEW_ACCESS');assert.equal(adminCheck.observed_rows,1);
+ const member=fixture({role:'member',leak:'submission'});const m=await run(member.env,member.loadConfig);
+ const memberCheck=m.checks.find(x=>x.name==='foreign_owner_read:coffee_submissions');
+ assert.equal(memberCheck.result,'FAIL');assert.equal(memberCheck.observed_rows,1);assert.ok(m.summary.failed>0);
+ assert.ok(!JSON.stringify(m).includes(other));
 });
 test('foreign personal/table/held rows and schema or value leaks fail without leaking values',async()=>{
  for(const leak of ['personal','foreign','held','community','email','identity']){
