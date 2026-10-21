@@ -57,10 +57,16 @@ export function assertProductionClaim({ledger,grant,commitSubject,sourceSha,nowI
  return true;
 }
 export function assertReadyForRelease({requiredChecks,flags}={}){
- if(!flags||flags.githubPrivateBranchProtectionVerified!==true||
-  flags.netlifyProductionBranchVerified!==true||flags.defaultBranchRunnerVerified!==true)
+ if(!flags||flags.netlifyProductionBranchVerified!==true||
+    flags.defaultBranchRunnerVerified!==true)
   reject('mandatory hosted configuration not independently verified');
- for(const check of ['approval','validate','cloud-tests','mobile-browser-qa','review']){
+ // GitHub Free/private has only advisory CI; never call its branches protected.
+ // An explicitly acknowledged Free/private compensating mode is allowed after
+ // five actual exact-SHA GitHub checks and an atomic one-use NON-FORCE claim.
+ if(flags.githubPrivateBranchProtectionVerified!==true&&
+    flags.githubPrivateFreeCompensatingControlsVerified!==true)
+  reject('private Free compensating controls or enforced protection not verified');
+ for(const check of ['approval','validate','cloud-tests','mobile-browser-qa','sql']){
   if(requiredChecks?.[check]!=='success')reject('required CI not green: '+check);
  }
  return true;

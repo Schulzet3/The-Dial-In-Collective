@@ -46,12 +46,19 @@ test('damaged ledger, reuse and forged deploy subject are rejected',()=>{
  assert.throws(()=>assertProductionClaim({ledger,grant,sourceSha:OTHER,nowIso:NOW,
   commitSubject:'Release DIC: '+ID+' [dic-publish]'}),/does not match/);
 });
-test('fail closed until branch rules, Netlify source and five CI statuses independently verified',()=>{
+test('free private compensating release requires genuine exact-source five green checks and routed production',()=>{
  const good={approval:'success',validate:'success','cloud-tests':'success',
-  'mobile-browser-qa':'success',review:'success'};
- const flags={githubPrivateBranchProtectionVerified:true,netlifyProductionBranchVerified:true,
-  defaultBranchRunnerVerified:true};
+  'mobile-browser-qa':'success',sql:'success'};
+ const flags={githubPrivateBranchProtectionVerified:false,
+  githubPrivateFreeCompensatingControlsVerified:true,
+  netlifyProductionBranchVerified:true,defaultBranchRunnerVerified:true};
  assert.equal(assertReadyForRelease({requiredChecks:good,flags}),true);
- assert.throws(()=>assertReadyForRelease({requiredChecks:good,flags:{...flags,netlifyProductionBranchVerified:false}}),/not independently verified/);
- assert.throws(()=>assertReadyForRelease({requiredChecks:{...good,review:'missing'},flags}),/not green: review/);
+ assert.throws(()=>assertReadyForRelease({requiredChecks:good,flags:{
+  ...flags,githubPrivateFreeCompensatingControlsVerified:false}}),/compensating controls/);
+ assert.throws(()=>assertReadyForRelease({requiredChecks:good,flags:{
+  ...flags,netlifyProductionBranchVerified:false}}),/not independently verified/);
+ assert.throws(()=>assertReadyForRelease({requiredChecks:{...good,sql:'missing'},flags}),/not green: sql/);
+ assert.equal(assertReadyForRelease({requiredChecks:good,flags:{
+  ...flags,githubPrivateBranchProtectionVerified:true,
+  githubPrivateFreeCompensatingControlsVerified:false}}),true);
 });
