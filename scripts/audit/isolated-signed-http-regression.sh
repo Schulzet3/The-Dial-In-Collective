@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 # No hosted credentials, no public ingress, no account/shot/provider modifications.
+# Isolated CI-only network; internal-only bridge prevented host loopback port forwarding.
 # This runs only on disposable GitHub Actions runners; no deployment.
 test "$GITHUB_ACTIONS" = true
 NET="dic-ci-http-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
@@ -11,7 +12,9 @@ cleanup() {
  docker network rm "$NET" >/dev/null 2>&1 || true
 }
 trap cleanup EXIT
-docker network create --internal "$NET" >/dev/null
+# The disposable bridge permits runner-loopback HTTP to PostgREST while
+# PostgreSQL has NO host-published port. No credential/project URL is present.
+docker network create "$NET" >/dev/null
 docker run -d --rm --name "$PG" --network "$NET" \
  -e POSTGRES_DB=dic_ci -e POSTGRES_HOST_AUTH_METHOD=trust postgres:17.11 >/dev/null
 ready=false
