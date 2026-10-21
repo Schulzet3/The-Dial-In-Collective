@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "result": "PASS_ACCEPTED_SCOPED_ROLE_AUTHORIZATION",
+  "issue": 41,
+  "user_authorization": "one temporary production Auth account for genuine never-admitted session denial then owner deletion, no existing account mutation",
+  "owner_reported_run_time_utc": "2026-10-21T03:39:08.485Z",
+  "source": {
+    "published_sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+    "netlify_deploy_id": "6ad7be20bf672d5c8936f19a",
+    "github_branch": "development/backend-foundation"
+  },
+  "checks": [
+    {
+      "name": "signed_verified_never_admitted_session_status",
+      "owner_http": 200,
+      "owner_verified": {
+        "authenticated": true,
+        "admitted": false,
+        "admin": false
+      },
+      "provider_observed_authenticated_post_http": 200,
+      "result": "PASS"
+    },
+    {
+      "name": "never_admitted_personal_state_denied",
+      "owner_http": 403,
+      "owner_error_code": "42501",
+      "provider_observed_authenticated_post_http": 403,
+      "result": "PASS"
+    },
+    {
+      "name": "owner_performed_temporary_auth_account_delete",
+      "provider_auth_accounts_before": 6,
+      "provider_auth_accounts_after": 5,
+      "provider_beta_memberships_after": 5,
+      "provider_never_admitted_after": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "existing_records_preserved",
+      "shots": 18,
+      "notes": 18,
+      "eligible_community": 2,
+      "contribution_links": 2,
+      "invitations": 8,
+      "admin_access_events": 9,
+      "orphaned_shots": 0,
+      "orphaned_notes": 0,
+      "orphaned_auth_identities": 0,
+      "orphaned_auth_sessions": 0,
+      "result": "PASS"
+    }
+  ],
+  "supabase_http_window": "2026-10-21T03:37:00Z/2026-10-21T03:41:00Z",
+  "provenance_note": "Provider HTTP logs expose minute, route, HTTP, JWT role and method only; status booleans, SQLSTATE and browser identity are owner-reported, temporally corroborated not independently JWT-subject correlated.",
+  "remaining_nonblocking": "At 03:35Z signup auto-created one unlinked contributor placeholder, after user delete owner_id NULL due to FK ON DELETE SET NULL; zero contribution links. A distinct older empty placeholder was already present. Investigate only after separately approved maintenance scope; tracked #42.",
+  "external_mutations_this_session": "None. Owner had already removed the authorized fixture before verification.",
+  "related_open_issues": [
+    9,
+    34,
+    27,
+    38,
+    42
+  ],
+  "no_personal_identifiers_recorded": true
+}
