@@ -269,8 +269,8 @@
     },
     {
       "id": "real_cross_account_api_acceptance",
-      "status": "LIVE_DISABLED_REMOVE_RESTORE_PASS_OTHER_LIVE_GATES_OPEN",
-      "reason": "Owner-tested live nonadmin Remove Access and Restore Access: UI changed immediately both ways without refresh. Provider authenticated personal-state HTTP 403 at 03:04 UTC then HTTP 200 twice after admin restore at 03:07; audit one remove and one restore; current 5 active, 0 disabled, shots/notes 18/18. Logs aggregate role/status, not subject linkage. Live never-admitted and ordinary-member admin mutation denials remain NOT RUN. Previous real read reports and isolated 32/32 signed tests preserved. #41 OPEN.",
+      "status": "LIVE_ADMIN_MUTATION_DENIAL_PASS_UNADMITTED_ACCOUNT_OPEN",
+      "reason": "Real owner-run nonadmin signed administrator mutation negative **2/2 PASS** (2026-10-21T03:17:45.688Z): invitation creation and member-access change, HTTP 403/SQLSTATE 42501 each. Independent live Supabase request logs show two authenticated POST 403 at 03:17Z and two OPTIONS 200 CORS preflights (NOT successful mutations). Counts before/after: 8 invitations / 9 admin audit events, 5 active/0 disabled, 18 shots/18 notes/2 Community unchanged. SQLSTATE and subject are owner-reported/temporally corroborated, not available in aggregate provider logs. Earlier real member read-only 33/33 PASS, live disabled-member Remove/Restore PASS, isolated JWT 32/32 PASS unchanged. #41 OPEN only for authentic never-admitted signed-session rejection (plus wider beta scope originally reserved); #9/#34 genuine live held-shot flows remain separate.",
       "issue": 41
     },
     {
