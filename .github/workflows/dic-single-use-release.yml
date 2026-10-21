@@ -1,10 +1,9 @@
 name: DIC single-use owner-approved production release
 # Manual only. This workflow does not run on push, pull_request or schedule.
-# Dormant until Free/private compensating controls, exact owner release grant
-# and production-branch provider source are independently verified. Do not
-# suggest GitHub Pro or making this private repository public; the current
-# protection flags intentionally prevent dispatch until a reviewed safe
-# Free/private controller replaces the unattainable protected-branch check.
+# Private GitHub Free cannot enforce required checks or branch protection.
+# Manual serialized controller verifies exact owner release grant, live CI,
+# one-use non-force claim and independent Netlify production-branch setting.
+# NEVER pretend GitHub checks are enforced or publish on development commits.
 on:
   workflow_dispatch:
     inputs:
@@ -34,12 +33,14 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
-      - name: Verify exact grant, CI, GitHub private protections, Netlify branch and make ONE nonforce release push
+      - name: Verify exact grant, live CI, private Free mode, Netlify branch and ONE nonforce push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_RELEASE_ID: ${{ inputs.release_id }}
           INPUT_TESTED_SOURCE_SHA: ${{ inputs.tested_source_sha }}
           DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED: ${{ vars.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED }}
+          # This explicitly denotes advisory CI+grant+CAS, NOT protected refs.
+          DIC_PRIVATE_FREE_COMPENSATING_MODE: 'YES'
           DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED: ${{ vars.DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED }}
           DIC_RELEASE_CONTROLLER_VERIFIED: ${{ vars.DIC_RELEASE_CONTROLLER_VERIFIED }}
         run: node scripts/release/controlled-release-runner.mjs
