@@ -1,5 +1,5 @@
 # The Dial In Collective — Documentation Index
-**Current as of 2026-10-20.** This is the short, actionable index. The previous 34 KB running index is preserved [as a dated archival snapshot](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md), not discarded. Statements inside dated reports remain true only for their historical checkpoint. Never interpret a prior "unpublished" milestone as current without checking [Current Status](CURRENT_STATUS.md).
+**Current as of 2026-10-21.** This is the short, actionable index. The previous 34 KB running index is preserved [as a dated archival snapshot](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md), not discarded. Statements inside dated reports remain true only for their historical checkpoint. Never interpret a prior "unpublished" milestone as current without checking [Current Status](CURRENT_STATUS.md).
 
 ## Read first
 1. [Active per-commit Work Journal](ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) — read FIRST to resume interrupted sessions, current exact attempts and blockers.
