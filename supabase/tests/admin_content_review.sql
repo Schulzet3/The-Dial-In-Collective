@@ -62,11 +62,13 @@ begin
    'Operator corrected source and origin','submission');
  if data->>'ok'<>'true' or (select proposed_data->>'origin' from public.coffee_submissions where id=pending_id)<>'Kenya'
  then raise exception 'Audited correction did not persist';end if;
+ execute 'reset role'; -- test harness inspects protected audit as superuser, never grant it to members
  if not exists(select 1 from private.admin_content_edits where record_id=pending_id
    and actor_id=admin_id and subject_owner_id=member_id
    and before_values->'proposed_data'->>'origin' is null
    and after_values->'proposed_data'->>'origin'='Kenya') then
   raise exception 'Audit did not preserve before/after';end if;
+ execute 'set local role authenticated'; -- original admin identity remains in signed claim
  insert into public.coffees(name,roaster,verification_state)
  values('Canonical Fixture','Fixture Roaster','verified') returning id,revision into canonical_id,rev;
  denied:=false;

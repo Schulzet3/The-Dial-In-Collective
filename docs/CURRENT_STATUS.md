@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 — audit-fixture role verification and no-warning lint correction
+- Development remains unreleased. Real isolated SQL test now switches only test's privileged inspection to postgres instead of weakening private audit RLS; last unused catch binding removed. Await exact new CI. No production database or Netlify action.
+
 ## Issue #47 — targeted CI remediation ongoing (2026-10-21T22:23:03.219Z)
 - All Node test assertions succeeded at prior SHA, but lint warned twice and new disposable SQL fixture duplicated member row created by auth trigger; fixed in source with same-commit journal. Production unchanged. Await exact current SHA lint/build/isolated SQL results; never mark release-ready on incomplete checks.
 
