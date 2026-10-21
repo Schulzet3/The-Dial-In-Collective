@@ -1,5 +1,8 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 16:55Z — explicit one-use production grant PREPARED, not consumed
+- Release ID **DIC-20261021-BETA-COFFEE-01**, tested source **c6976b1f**, maximum 1 Netlify build, 15-credit ceiling, expires 2026-10-28 23:59 UTC, recorded in RELEASE_AUTHORIZATIONS.json. SQL migrations 2/2 already live. Consumption remains empty. Frontend remains old until dedicated Netlify release branch/routing is independently verified and one atomic release pushes successfully. Do not treat grant creation as deployment.
+
 ## 2026-10-21 16:53Z — PRODUCTION BACKEND DEPLOYED: two migrations, frontend NOT YET PUBLISHED
 - **Explicit two-migration production permission is recorded in both canonical files** under `OPS-EXPEDITED-BETA-RELEASE-20261021`; old Wuri-before-SQL order narrowly superseded, actual Wuri member-device acceptance remains due AFTER frontend publication.
 - **SUPABASE COMPLETE:** from EXACT tested `c6976b1fc86ed5e6b38c0c38831950fca017b3a4`, applied admin review `20261021053500_dic_admin_coffee_review.sql` (remote version **20261021165214**) then duplicate-first member approval `20261021062000_dic_duplicate_first_auto_approval.sql` (remote version **20261021165302**); both server `success:true` and independent migration list readback show 32 total. Server RPCs `dic_admin_review_coffee`, `dic_admin_coffee_candidates`, `dic_member_retry_pending_approval` and private automatic submission installed. Authenticated role can EXECUTE guarded RPCs; anonymous cannot EXECUTE sampled admin/retry functions. Existing WARN/INFO advisors unchanged; not an authenticated owner-device acceptance.

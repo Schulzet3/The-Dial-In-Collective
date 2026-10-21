@@ -1,5 +1,24 @@
 {
   "schema_version": 1,
-  "grants": [],
+  "grants": [
+    {
+      "id": "DIC-20261021-BETA-COFFEE-01",
+      "tested_source_sha": "c6976b1fc86ed5e6b38c0c38831950fca017b3a4",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "estimated_credits_limit": 15,
+      "approved_at_utc": "2026-10-21T16:44:00Z",
+      "expires_at_utc": "2026-10-28T23:59:00Z",
+      "approval_source": "Explicit Oct 21 owner production SQL+Netlify command documented in commit 23b2737381daafd398010117328a15ca2b0ece83",
+      "scope": "Exactly one Netlify production publication of already-tested c6976b1f code after approved production SQL migration1+2 now applied; no Edge/Auth/member-data writes, no future releases, no upgrades",
+      "sql_evidence": [
+        "20261021165214 dic_admin_coffee_review",
+        "20261021165302 dic_duplicate_first_auto_approval"
+      ],
+      "owner_private_free_compensating_controls": true
+    }
+  ],
   "policy": "Grants are only created after a separate explicit owner release approval. Each unique release ID is bound to one tested SHA, max 1 publication, 15-credit ceiling and finite expiration. Empty until next approved release."
 }
