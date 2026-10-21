@@ -57,7 +57,7 @@ export function renderAdminRecordCollection(kind,page={}){
   '<div class="admin-pagination"><span class="helper">Showing '+e(String(offset+1))+'–'+e(String(Math.min(total,offset+loaded.length)))+' of '+e(String(total))+'</span>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(Math.max(0,offset-50))+'" '+(offset===0?'disabled':'')+'>Previous</button>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(offset+50)+'" '+(offset+loaded.length>=total?'disabled':'')+'>Next</button></div>':'';
- return '<section class="admin-panel admin-record-section" id="admin-'+e(kind)+'" tabindex="-1">'+
+ return '<section class="admin-panel admin-record-section" '+((kind==='approved'||kind==='shots')?'id="admin-'+e(kind)+'" tabindex="-1"':'')+'>'+
  '<div class="admin-section-header"><h2>'+e(title)+'</h2><p class="helper">All records, page by page · creator and revision shown where available.</p></div>'+
  error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind)).join(''):'<p class="admin-empty helper">No records to show.</p>')+
  pagination+'</section>';

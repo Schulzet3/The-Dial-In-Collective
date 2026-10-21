@@ -38,7 +38,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  ${stat('Admitted Accounts',stats.active_accounts,'accounts')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1"><h2>Pending Coffee Review</h2>
- ${queue.filter(item=>item.status!=='conflict').length?queue.filter(item=>item.status!=='conflict').map(preview).join(''):'<p class="admin-empty helper">No pending coffee submissions.</p>'}
+ ${queue.filter(item=>item.status!=='conflict').length?queue.filter(item=>item.status!=='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
  ${renderAdminRecordCollection('pending',records.pending)}
  </section>
  <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1"><h2>Conflicts</h2>
@@ -47,15 +47,16 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  </section>
  ${renderAdminRecordCollection('approved',records.approved)}
  ${renderAdminRecordCollection('shots',records.shots)}
- <section id="admin-accounts" tabindex="-1"><h2 class="admin-accounts-title">Accounts</h2>${access?renderAdminAccessPanel(access,issued):'<p class="helper">Account list unavailable.</p>'}</section>
+ <section id="admin-accounts" tabindex="-1"><h2 class="admin-accounts-title">Accounts</h2>${access?renderAdminAccessPanel(access,issued,records.accounts):'<p class="helper">Account list unavailable.</p>'}</section>
  <section class="admin-panel admin-health"><h2>Infrastructure</h2><p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p></section>`;
 }
 
 /** Strictly administrator-only UI projection. The list never contains a
  * plaintext token: freshly generated secrets appear once per browser tab. */
-export function renderAdminAccessPanel(access={},issued=null){
+export function renderAdminAccessPanel(access={},issued=null,accountPage=null){
  const invites=Array.isArray(access?.invites)?access.invites:[];
- const members=Array.isArray(access?.members)?access.members:[];
+ const members=Array.isArray(accountPage?.items)?accountPage.items:Array.isArray(access?.members)?access.members:[];
+ const offset=accountPage?.offset||0,total=Number(accountPage?.total)||Number(access.members_total)||0;
  const inviteRows=invites.map(row=>{
   const state=['active','revoked','used','expired'].includes(row.status)?row.status:'unknown';
   const count=formatCount(row.uses)+' / '+(row.max_uses==null?'Unlimited':formatCount(row.max_uses));
@@ -99,6 +100,6 @@ export function renderAdminAccessPanel(access={},issued=null){
   <h2 id="admin-members-heading">Member Access <span class="helper">${formatCount(access.members_total)}</span></h2>
   <p class="helper">No automatic account expiration. Remove or restore access without deleting saved shots and notes. Administrator accounts cannot be removed here.</p>
   <ul class="admin-member-list">${memberRows||'<li class="helper">No admitted members yet.</li>'}</ul>
-  ${Number(access.members_total)>members.length?'<p class="helper">Showing the 50 most recently admitted members.</p>':''}
+  ${offset>0||offset+members.length<total?`<div class="admin-pagination"><span class="helper">Showing ${offset+1}–${offset+members.length} of ${total}</span><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${Math.max(0,offset-50)}" ${offset===0?'disabled':''}>Previous</button><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${offset+50}" ${offset+members.length>=total?'disabled':''}>Next</button></div>`:''}
  </section>`;
 }

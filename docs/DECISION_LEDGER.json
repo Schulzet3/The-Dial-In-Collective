@@ -3635,5 +3635,26 @@
       38,
       44
     ]
+  },
+  "current_owner_admin_records_edit_20261021": {
+    "decision_id": "OPS-ADMIN-RECORDS-EDIT-20261021",
+    "status": "OWNER APPROVED DEV/BUILD/TEST ONLY; NOT APPROVED FOR PRODUCTION SQL OR DEPLOYMENT",
+    "owner_instruction_at_local": "2026-10-21 16:08 America/Denver",
+    "scope": "Reorder five admin dashboard cards and sections, clickable anchors, paged category listings with creator identity/email, operator-only notes and shots plus audited corrections, coffee corrections and server-owned URL preview fill blanks only",
+    "permission": "Only current server-validated admitted administrator; no public or ordinary member rights; passwords/session tokens/auth secrets never returned",
+    "owner_consent_assertion": "Owner states all users consented to admin reading/editing data including notes, passwords excepted; direct member consent records not independently checked",
+    "supersedes_only": [
+      "Old minimal read-only administrator dashboard scope, exclusively for NEW narrow admin-only RPC; original dic_admin_dashboard sanitized read-only endpoint remains unchanged"
+    ],
+    "preserves": [
+      "79 original Locked baseline items and 20 Open items",
+      "private/member RLS isolation and Community DTO anonymity",
+      "immutable shot provenance, per-record revision checks, before/after audits, original member data retention",
+      "official roaster evidence cannot be invented from an extractor preview",
+      "no live SQL/Edge/Auth/Netlify or member data mutation without separate owner approval",
+      "GitHub Free private and single-use release guard"
+    ],
+    "implementation": "STAGED source candidate; isolated SQL and real signed-admin/member acceptance still required",
+    "linked_issue": 47
   }
 }

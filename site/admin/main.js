@@ -12,7 +12,7 @@ async function start(){
  let issued=null; // generated code exists only in live tab memory
  let busy=false;
  let mergeChoices=Object.create(null);
- let recordPages=Object.fromEntries(['pending','conflicts','approved','shots'].map(k=>[k,0]));
+ let recordPages=Object.fromEntries(['pending','conflicts','approved','shots','accounts'].map(k=>[k,0]));
  let records={};
  try {
   secureOrigin();
@@ -58,12 +58,12 @@ async function start(){
    const trigger=root.querySelector('#admin-refresh');if(trigger)trigger.disabled=true;
    const [dashboard,access,...pages]=await Promise.all([
     adminRpc('dic_admin_dashboard'),adminRpc('dic_admin_access_overview'),
-    ...['pending','conflicts','approved','shots'].map(async kind=>{
+    ...['pending','conflicts','approved','shots','accounts'].map(async kind=>{
      try{return await adminRpc('dic_admin_records',{p_kind:kind,p_offset:recordPages[kind],p_limit:50});}
      catch(error){return {items:[],total:0,offset:0,error:'Detailed listing not available until the new administrator database migration is installed.'};}
     })
    ]);
-   records=Object.fromEntries(['pending','conflicts','approved','shots'].map((kind,i)=>[kind,pages[i]]));
+   records=Object.fromEntries(['pending','conflicts','approved','shots','accounts'].map((kind,i)=>[kind,pages[i]]));
    if(invalidated)return;
    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records);
   }
@@ -115,7 +115,7 @@ async function start(){
    const action=button.dataset.action||'refresh';
    if(action==='record-page'){
     const kind=button.dataset.kind,offset=Number(button.dataset.offset);
-    if(!['pending','conflicts','approved','shots'].includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
+    if(!['pending','conflicts','approved','shots','accounts'].includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
     guarded(async()=>{recordPages[kind]=offset;await refresh();root.querySelector('#admin-'+kind)?.scrollIntoView?.({block:'start'});});return;
    }
    if(action==='edit-toggle'){

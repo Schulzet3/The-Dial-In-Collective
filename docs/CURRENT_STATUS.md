@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## 2026-10-21 Issue #47 — admin record explorer development, backend staged NOT APPLIED
+- Exact owner-approved DEV scope in both canonical Master Spec and Decision Ledger; staged secure administrator records/listing and audited edits in migration candidate, not yet isolated-DB tested or applied. Fixes first app CI failures by registering new admin/records.js in cloud build allowlist and keeping legacy empty-queue copy. No live production/database/auth/notes changes. Pending full security/test and release readiness; separate publish approval mandatory. See Issue #47 and active journal.
+
 ## 2026-10-21 — Issue #47 Admin explorer STAGED; NOT ready for publish
 - Admin metric order, clickable section navigation, paginated list UI, guarded edit forms and URL preview adapter are staged in development only. **RPCs and database migration are not yet installed or tested**, so full creator attribution and cross-account detail editing are not operational. Never publish this partial UI. See active work journal and Issue #47 for open server access/consent validation. No live app/backend change.
 
