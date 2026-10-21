@@ -9,6 +9,19 @@ import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,RELEASE_BRANCH} from './one-use-claim.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
+// The protected release ref must first be seeded at the independently
+// verified current published source, with NO unapproved build. These two
+// pinned hashes prevent stale/legacy build guards or silent claim history loss.
+export const RELEASE_GENESIS_SHA='e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60';
+export const MINIMUM_GUARDED_SOURCE_SHA='994a4d9f91e2475a96df42a46564c06e29f1c8d7';
+export function initialLedgerOnMissing({releaseHead,readLedger}){
+ try{return readLedger();}
+ catch{
+  if(releaseHead!==RELEASE_GENESIS_SHA)
+   throw new Error('Consumption ledger missing from NON-GENESIS release: no replay recovery permitted');
+  return JSON.stringify({schema_version:1,consumed:[]});
+ }
+}
 const git=(args,{input,env}={})=>execFileSync('git',args,{encoding:'utf8',input,
  stdio:['pipe','pipe','pipe'],env:env||process.env}).trim();
 const json=(s,label)=>{try{return JSON.parse(s);}catch{throw Error(label+' is not valid JSON');}};
@@ -60,14 +73,21 @@ export async function executeSingleUseRelease(settings=process.env){
  const releaseHead=git(['rev-parse','refs/remotes/origin/'+RELEASE_BRANCH]);
  if(!SHA.test(developmentHead)||!SHA.test(releaseHead))throw Error('Exact remote branches unavailable');
  git(['merge-base','--is-ancestor',sha,developmentHead]);
+ // Exclude historically green application SHAs which still had the old
+ // development-branch publication guard. Never silently deploy an old build.
+ git(['merge-base','--is-ancestor',MINIMUM_GUARDED_SOURCE_SHA,sha]);
+ const checkedGuard=git(['show',sha+':scripts/netlify/should-ignore-build.mjs']);
+ if(!checkedGuard.includes("branch!=='release/production'")||
+    !checkedGuard.includes('assertProductionClaim'))
+  throw new Error('Tested source lacks protected dedicated-release build gate');
  const approvals=json(git(['show',developmentHead+':docs/RELEASE_AUTHORIZATIONS.json']),'Owner grants');
  const grant=sourceGrant(approvals,id);
  const statuses=await ciForSha(sha,token);
  assertReadyForRelease({requiredChecks:statuses,flags:{
   githubPrivateBranchProtectionVerified:true,
   netlifyProductionBranchVerified:true,defaultBranchRunnerVerified:true}});
- const oldRaw=(()=>{try{return git(['show',releaseHead+':docs/RELEASE_CONSUMPTION.json']);}
-  catch{return '{"schema_version":1,"consumed":[]}';}})();
+ const oldRaw=initialLedgerOnMissing({releaseHead,
+  readLedger:()=>git(['show',releaseHead+':docs/RELEASE_CONSUMPTION.json'])});
  const ledger=json(oldRaw,'Release ledger');
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
