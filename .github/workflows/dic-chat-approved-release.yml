@@ -1,0 +1,36 @@
+name: DIC chat-approved single-use production request
+# Free/private compensating controls are advisory; no GitHub Free protected refs.
+# A source commit by itself NEVER publishes. Only a NEW approved request
+# commit touching exactly the request plus its contemporaneous ops journal
+# can invoke the already-reviewed single-use runner after hosted cutover.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/RELEASE_REQUEST.json'
+permissions:
+  contents: write
+  checks: read
+concurrency:
+  group: dic-exclusive-one-use-production-publish
+  cancel-in-progress: false
+jobs:
+  chat-approved-request:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Verify exact chat request commit, owner grant, source CI and guarded nonforce claim
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED: ${{ vars.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED }}
+          DIC_PRIVATE_FREE_COMPENSATING_MODE: 'YES'
+          DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED: ${{ vars.DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED }}
+          DIC_RELEASE_CONTROLLER_VERIFIED: ${{ vars.DIC_RELEASE_CONTROLLER_VERIFIED }}
+        run: node scripts/release/controlled-release-runner.mjs
