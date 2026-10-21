@@ -56,6 +56,8 @@ test('old or future dated request, bad backup evidence and missing private copy 
  assert.throws(()=>validate({...base,request:{...request,backup_evidence:{...request.backup_evidence,
   archive_completed_at_utc:'2026-10-21T11:30:00Z',
   latest_observed_data_write_at_utc:'2026-10-21T11:00:00Z',
+  archive_completed_at_utc:'2026-10-21T11:30:00Z',
+  latest_observed_data_write_at_utc:'2026-10-21T11:00:00Z',
   verified_at_utc:'2026-10-21T12:00:00Z'}}}),/backup verification is stale/);
  assert.throws(()=>validate({...base,request:{...request,backup_evidence:{...request.backup_evidence,
   owner_private_offsite_file_id:''}}}),/backup evidence/);
