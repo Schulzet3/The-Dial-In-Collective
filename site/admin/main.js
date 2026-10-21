@@ -11,6 +11,7 @@ async function start(){
  let invalidated=false;
  let issued=null; // generated code exists only in live tab memory
  let busy=false;
+ let mergeChoices=Object.create(null);
  try {
   secureOrigin();
   if(!CLOUD_CONFIG.enabled||!globalThis.supabase?.createClient)throw new Error('Cloud access is not configured.');
@@ -22,7 +23,7 @@ async function start(){
   sdk.auth.onAuthStateChange((event,session)=>{
    const next=session?.user?.id||null;
    if(event==='SIGNED_OUT'||(owner!==undefined&&next!==owner)){
-    issued=null;invalidated=true;root.innerHTML=renderAdminDenied('Your session changed. Return to the main app and reopen Admin.');
+    issued=null;mergeChoices=Object.create(null);invalidated=true;root.innerHTML=renderAdminDenied('Your session changed. Return to the main app and reopen Admin.');
    }
    owner=next;
   });
@@ -41,7 +42,7 @@ async function start(){
    const {data,error}=await sdk.rpc(name,args);
    if(invalidated)throw new Error('Your session changed. Return to the app.');
    if(error)throw error;
-   if(data?.ok===false)throw new Error('The administrator action was rejected.');
+   if(data?.ok===false)throw new Error(data.code==='needs_confirmation'?'Possible existing coffee. Resolve the duplicate before approval.':'The administrator action was rejected.');
    return data;
   }
   async function refresh(){
@@ -57,7 +58,7 @@ async function start(){
     adminRpc('dic_admin_dashboard'),adminRpc('dic_admin_access_overview')
    ]);
    if(invalidated)return;
-   root.innerHTML=renderAdminDashboard(dashboard,access,issued);
+   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices);
   }
   function actionMessage(message){
    if(invalidated)return;
@@ -105,6 +106,33 @@ async function start(){
    }
    const id=button.dataset.id||'';
    if(!/^[0-9a-f]{8}-[0-9a-f-]{27,}$/.test(id))return;
+   if(action==='review-merge-prepare'){
+    guarded(async()=>{
+     const result=await adminRpc('dic_admin_coffee_candidates',{p_submission_id:id});
+     const candidates=Array.isArray(result?.candidates)?result.candidates:[];
+     if(!candidates.length)throw new Error('No compatible approved coffee found. Approve as distinct only after checking this is not a duplicate.');
+     mergeChoices[id]=candidates;await refresh();
+    });return;
+   }
+   if(['review-approve','review-merge','review-hold'].includes(action)){
+    const revision=Number(button.dataset.revision);
+    if(!Number.isSafeInteger(revision)||revision<1)return;
+    const decision=action==='review-approve'?'approve':action==='review-merge'?'merge':'hold';
+    const selected=decision==='merge'?root.querySelector('#admin-merge-'+id)?.value:null;
+    if(decision==='merge'&&!mergeChoices[id]?.some(c=>c.id===selected))return;
+    const reason=globalThis.prompt?.('Required audit reason for this coffee decision:','');
+    if(!reason||reason.trim().length<8)return;
+    if(!globalThis.confirm?.('Apply '+decision+' to this submitted coffee? The decision is logged and cannot overwrite another member’s shots.'))return;
+    guarded(async()=>{
+     const result=await adminRpc('dic_admin_review_coffee',{
+      p_submission_id:id,p_expected_revision:revision,p_action:decision,
+      p_reason:reason.trim(),p_canonical_id:selected||null
+     });
+     if(!result?.ok)throw new Error('The review did not complete. Refresh before retrying.');
+     delete mergeChoices[id];issued=null;await refresh();
+     actionMessage(decision==='hold'?'Coffee held for clarification.':'Coffee reviewed successfully.');
+    });return;
+   }
    if(action==='revoke-invite'){
     if(!globalThis.confirm?.('Revoke this invitation code? Existing accounts keep access.'))return;
     guarded(async()=>{

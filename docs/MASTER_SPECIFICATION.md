@@ -8,6 +8,40 @@ The latest explicit owner decision governs. Preserve every unchanged Locked requ
 
 Current product copy uses **The Dial In Collective** and **dial in**, without hyphens. Historical source headings, filenames and quotations retain their original wording. The product remains sleek, simple and optimized for **Log Shot → Rate → Recommendation**.
 
+## Owner-Locked GitHub Free/private operating constraint — later October 20, 2026
+
+**Latest explicit owner instruction:** “I'm not going to upgrade Github so do whatever you can without pro and without making the repository public.” **Keep this repository PRIVATE on GitHub Free. No GitHub Pro, paid upgrade, or public visibility recommendation/purchase is authorized.** This is a narrow supersession of the **prior plan to require a GitHub Pro account as the next action** and any statement that such a purchase is required to continue work. It does **not** waive requirements for accurate work records, original Locked product decisions, privacy, one-time release permission, tested exact release source, deployment verification or backup integrity.
+
+**Verified limitation and accepted compensating operating model:** `development/backend-foundation` and `main` were both reported `protected:false`; private rulesets returned 403 requiring an upgrade or public visibility. Do not mislabel advisory GitHub Actions CI as mandatory repository branch protection. Private GitHub Free cannot give us a verified no-bypass branch rule in the current account. Preserve existing working protections: GitHub-first work logging, same-commit journal, per-push CI, test and visual check review, explicit `[skip netlify]` for non-release pushes, grant/consumption ledger and serial non-force release-controller code. Require a human check of test results and production provider receipts before any separately approved release. None of these individually guarantees protection from direct Git writes or manual/CLI/provider release bypass.
+
+**Fail closed, without Pro:** Development and documentation can proceed without a subscription. Keep the current production app unchanged and default-main manual release controller inert until the owner separately approves an operational alternative for this Free/private environment and the Netlify production source/other provider controls are verified. Never set readiness flags solely to bypass a disabled protection; #38 remains OPEN with honest limitations. Do not create release markers, switch Netlify branches, touch customer data, or spend credits in a continuity-only request.
+
+**Updated ChatGPT Project instructions** are preserved at [CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md); the owner must paste/save them in ChatGPT Project Settings because connected tools cannot edit that UI.
+
+## Protected source, verified continuity and atomic release — owner Locked October 20, 2026
+
+**Owner approval:** Every material owner instruction, test, decision, code/provider action and interruption checkpoint must be durably recorded/read back in GitHub before further mutation. All sessions begin by reconciling the latest verified development SHA, CI, decisions and provider deployment. Missing/unavailable records remain UNVERIFIED, not invented. Code/test/CI commits must include the GitHub journal in the SAME commit.
+
+**Mandatory private GitHub protection:** Require approval/continuity, Node/lint/build, mobile browser, private visual and applicable security checks on protected `development/backend-foundation`; disallow deletion, force pushes, silent bypass and unreviewed updates. Keep repository PRIVATE. `main` remains backup operations.
+
+**One-use release authority:** Publishing to Netlify must use a separate protected `release/production` branch, changed only by a serialized authorized workflow. Each owner grant has one immutable unique release ID bound to the exact tested source SHA; a non-force remote Git push of a descendant commit with a consumed-ID ledger is the atomic claim. Two competing claims must produce at most one accepted ref update. A re-run for an already consumed release ID may not push or trigger another production build. CI must test the race and deny stale/unapproved source and altered release scope. Any failed production build retry requires separately reviewed owner permission. Static `[dic-publish]` markers on ongoing development are prohibited after controlled cutover.
+
+**Separate operational gates:** Required GitHub branch protection and Netlify production-branch selection must be independently configured and verified. The existing account has a private unprotected branch; GitHub rulesets API returns 403 requiring GitHub Pro or a public repository, and GitHub app integration cannot administer branch protection. Do not buy Pro, make the repo public, change Netlify settings, publish, or write SQL/member data on this request without explicit further authorization. Until settings and race/actual provider tests pass, mark #38 OPEN / release protection not complete.
+
+**ChatGPT Project settings:** Canonical ready-to-paste [Project instructions](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) are approved, but saving this file does NOT update Project UI settings. The owner must paste/save or grant a supported settings editor in another execution environment.
+
+## Owner-Locked recipe UI supersession — ONE visible recipe, internal successful families (October 20, 2026)
+
+**Explicit owner instruction:** “I definitely prefer option two that you recommended especially if you can identify which approach most closely matches the users preferences for taste and equipment. Let's go with that. Build and test it.”
+
+**Active decision:** The coffee card must show **one** best-matching recommended/preferred recipe window, not a standalone or collapsed “Alternate Dialed-In Recipes” list. Internally retain distinct successful coffee/release + style ratio families and all historical successful shots. Never merge materially different proven approaches into an invented median. Keep Shot History and its existing revision-checked **Make Current Recipe** action: a successful current-setup shot explicitly selected by the user picks its durable **family/window**, retaining the chosen shot as a favorite example, and outranks automatic rankings. First-success auto-seeding of `current_family_id` without a saved favorite shot **does not imply a manual choice**.
+
+**Automatic selection when there is no valid explicit favorite:** Prioritize successful shots on the active setup, basket, feed condition and calibration; next consider repeated compatible evidence (a candidate one-shot success remains valid but cannot displace comparably equipped repeated success on an unverified flavor guess); then use the user's stated clarity/body preference as a **low-confidence ratio-direction tie-breaker** among otherwise comparable successful families. A longer ratio can cautiously suggest clarity and a shorter ratio body, but identical all-green sensory ratings do **not** prove that either family tastes fruitier, sweeter, fuller or clearer. Explain such heuristic influence briefly and never declare an unmeasured sensory profile confirmed. When no preference is expressed or evidence is inadequate, use stronger compatible personal evidence and existing preference state. For other setups, recipe ratio may be a cautiously labeled reference, **not a measured local time, grind or temperature**. Preserve offline behavior, style separation, taste success definition, member privacy, family clustering and community qualification.
+
+**Boundaries:** This replaces ONLY the earlier explicit alternate-family disclosure/UI and its optional family-name workshop idea as a near-term implementation requirement. Do not add required family naming, new preference questions, extra routine screens or a UI list. The existing ratio-led server clustering threshold (0.25) is an implementation heuristic, **not an owner-approved universal definition of significance**; classifying same-ratio different time/temperature approaches remains unresolved. Shared community family learning and provenance tiers remain open [#12](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12); experiment candidate/confirmed lifecycle remains open [#13](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13). Personal client-family selection alone does **not** implement cross-user preference matching or close either issue. No production deploy, database change, external subscription, billing or new invitations authorized by “Build and test it.”
+
+**Implementation evidence (development only):** [source commit `413ca0e`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/413ca0e5b31330cc00a6c7972bc44178129c26bd), [439/439 Node/lint/build](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39498670329), [390px owner browser and account checks](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39498670205), and [private visual and offline PWA review](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39498670046) all PASS. Synthetic data, not live multi-family accounts. See [Decision Ledger](DECISION_LEDGER.json) and [Current Status](CURRENT_STATUS.md).
+
 ## Owner-Locked operating rule: GitHub as the live project record (2026-10-17)
 
 For **every** The Dial In Collective work session, record substantive actions, investigations, attempted changes, outcomes, tests, sources, decisions, errors, blockers and next steps in the private GitHub repository **as close to real time as possible**, not just at the end. GitHub is the canonical working log and seamless cross-chat/session handoff: a later work session must be able to resume by reading the branch's AGENTS, Current Status, Master Specification, Decision Ledger and relevant issues/commits, without asking for a separate handoff. Report incomplete or unverified work as such; never claim an unobserved test passed. Keep canonical documentation and issue states accurate after every meaningful milestone, commit and verify the actual result, and preserve all prior Locked product decisions and dated evidence. **GitHub write permission does not authorize production deployment, Supabase data mutation or spending.** Use the existing one-release approval and Netlify skip-marker controls. Never commit secrets, keys or private exports.
@@ -26,7 +60,7 @@ Owner has approved **one coordinated release** of these tested changes and the s
 
 **Approved scope:** Prepare for a **small, trusted, invitation-only technical/early-access pilot** of the functioning cloud/PWA app so actual testers can provide usability, workflow and reliability feedback while outstanding full-beta implementation continues. Label invitations and tester expectations **“Limited Technical Pilot”**, **not** “complete beta”, “finished recommendation engine”, “public launch” or a waiver of the required functionality. The previously suggested **3–5 testers / one week** is an optional operator proposal, **not** an owner-selected headcount or timeline.
 
-**Scope boundary:** This is a new, expressly owner-approved pre-beta *milestone*, not a replacement of §3, §4, §16–19, §22, §25, §41 or any of the 79 original Locked decisions. The §41 twenty-item core-beta acceptance gate is **unchanged**. P0 [#10 alternate recipe families](https://github.com/Schulzet3/The-Dial-In-Collective/issues/10), [#12 complete evidence/provenance-weighted recommendations](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12), and [#13 post-rating Experiment lifecycle](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) stay required for the specification-complete beta and cannot be represented as done in pilot communications.
+**Scope boundary:** This is a new, expressly owner-approved pre-beta *milestone*, not a replacement of §3, §4, §16–19, §22, §25, §41 or any of the 79 original Locked decisions. The §41 twenty-item core-beta acceptance gate is **unchanged**. P0 [#10 internal successful recipe families](https://github.com/Schulzet3/The-Dial-In-Collective/issues/10), [#12 complete evidence/provenance-weighted recommendations](https://github.com/Schulzet3/The-Dial-In-Collective/issues/12), and [#13 post-rating Experiment lifecycle](https://github.com/Schulzet3/The-Dial-In-Collective/issues/13) stay required for the specification-complete beta and cannot be represented as done in pilot communications.
 
 **Authorized now:** Source/documentation and release-runbook preparation, read-only provider/security/privacy/recovery checks, already-permitted development-only tests, issue triage, one-at-a-time owner planning questions, and preparing honest tester instructions. Preserve fastest Log Shot → Rate → Recommendation, existing admin/member isolation, historical data/shot notes, and the existing closed historical import gate.
 
@@ -397,7 +431,7 @@ The expanded card should prioritize:
 3. If not dialed in: previous-shot feedback and next recommendation.
 4. If an experiment is active: Experiment panel.
 5. Shot History.
-6. Alternate Dialed-In Recipes, collapsed by default.
+6. Shot History retains other successful approaches; no separate Alternate Recipes control.
 7. Coffee facts and source/roaster details.
 8. Community detail behind progressive disclosure.
 9. Optional Bag Details behind progressive disclosure.
@@ -878,12 +912,13 @@ A user can mark a successful recipe as their current/preferred recipe.
 
 This is a preference state, not a deletion of other successful recipes.
 
-## 17.4 Alternate Dialed-In Recipes
+## 17.4 Internal successful families — one visible recipe (owner supersession October 20)
 
-- Preserve older successful recipe families when a new one becomes preferred.
-- Show only the current recipe prominently.
-- Put others behind a collapsed control such as **Alternate Dialed-In Recipes (2)**.
-- Any alternate can later become current again.
+- Preserve all other successful families and raw shots **internally** whenever a new recipe becomes preferred.
+- Show **one** recommended/preferred successful family/window in the expanded coffee card, with normal Shot History below.
+- **Do not render** the previously proposed collapsed Alternate Dialed-In Recipes UI.
+- Users can select another visible, successful shot in Shot History with **Make Current Recipe**; that explicitly chooses its family/window and outranks automatic taste/equipment heuristics.
+- No mandatory recipe naming or new post-success interaction. Previous alternate-list proposal remains in Git history and the scoped supersession record.
 
 ## 17.5 Recipe families
 
@@ -961,7 +996,7 @@ If the user confirms:
 ## 18.5 Candidate and confirmation lifecycle
 
 - First materially different **all-green** experimental shot -> **Candidate Recipe Family**.
-- Second successful repeat -> **Confirmed Alternate Dialed-In Recipe Family**.
+- Second successful repeat -> **Confirmed internal successful recipe family** (not a separate routine UI card).
 - User may choose **Make Current Recipe** immediately after the first successful candidate if they love it.
 - Candidate/confirmed status and current/preferred status are separate concepts.
 
@@ -971,7 +1006,7 @@ If an experiment produces an all-green result but the user decides the old recip
 
 - The successful experimental shot remains valid.
 - It remains community-eligible.
-- It may remain a candidate/alternate recipe family.
+- It may remain a candidate or another valid internal recipe family.
 - Ending the experiment only changes the user's active preference/workspace; it does not invalidate the successful shot.
 
 ---
@@ -1297,15 +1332,9 @@ The current app's taste-preference nudging is liked and should be preserved/evol
 
 ## 25.5 Preference-aware family selection
 
-When multiple successful recipe families exist, the engine may recommend different families to different users based on preferences such as:
+When multiple successful families exist, the engine selects **one visible window** using first an explicitly chosen favorite from the active setup, then compatible equipment and repeatable all-green history, then a cautiously labeled clarity/body ratio-direction tie-breaker when evidence is otherwise comparable. The user always retains final choice through Shot History's existing **Make Current Recipe**.
 
-- clarity;
-- fruit-forward expression;
-- body;
-- richness/texture;
-- other preference signals.
-
-The user always retains final choice.
+Preferences such as clarity, fruit-forward expression, body or richness/texture remain useful **user-provided preferences**, but the five all-green quality ratings do not measure whether any family actually tastes brighter, fruitier or fuller. Until family-specific sensory preference data exists, never attribute those tastes as confirmed or use unsupported flavor classification. Full cross-user/Community family evidence selection remains a separate #12 integration milestone.
 
 ## 25.6 Mechanical vs sensory feedback
 
@@ -1680,7 +1709,7 @@ The workshop resolved many important contradictions. The following still require
 
 ### A. Meaning of "Make Current Recipe"
 
-We have established that a user can make a successful shot/family current and that the old family remains as an alternate.
+The October 20 owner supersession establishes that a successful shot selects its family/window with that shot retained as an optional favorite example. Older families stay separate **internally**, without an Alternate Recipes display.
 
 Still to define precisely:
 
@@ -2086,7 +2115,7 @@ A beta build is not ready unless all of these are true:
 9. Repeated green shots build a successful window and robust centerpoint.
 10. Materially different green recipes can remain separate families.
 11. Experiment prompts occur after rating and only start the Experiment workspace if the user confirms.
-12. Candidate/confirmed alternate recipe lifecycle works.
+12. Candidate/confirmed **internal** successful recipe-family lifecycle works while the card shows one recommendation.
 13. Old successful recipes are never destroyed merely because a new one becomes current.
 14. Shot details expand inline and multiple shots can be compared.
 15. Current coffee stays pinned outside search.
@@ -2273,6 +2302,21 @@ The authenticated, admitted-only `dic_find_coffee_matches` RPC returns only veri
 
 As of this checkpoint Supabase has **0 canonical verified coffees and 4 Pending submissions**. Therefore deterministic identity matching is implemented, but no honest "most coffees auto-verified" coverage claim is possible yet. A subsequent curated/source-backed product-catalog ingestion and verification pipeline (exact roaster product pages, extract/release metadata with provenance, cross-check aliases and conflicts, preserve audit history) is required before a large share of new submissions can be verified automatically. Such a source acquisition stage must not make arbitrary HTTP/DNS fetches from untrusted user URLs or treat a model-generated guess as evidence. Preserve existing Admin-only access, all other Locked decisions, data integrity and the Netlify 0-credit publish gate.
 
+
+## LOCKED amendment COFFEE-DUPLICATE-FIRST-20261021 — owner-approved simplified coffee approval (October 20 MDT / Oct 21 UTC)
+
+The owner explicitly accepted the proposed simplified workflow and ordered implementation. **Supersession scope:** the October 14 rule that only an owner-admin's own coffees may be approved without external roaster verification, and Section 11's default Pending status for otherwise unique coffees when AI or URL evidence is unavailable. Preserve their historical text below; this later Locked decision governs conflicts.
+
+- Every admitted member's genuinely distinct coffee with valid roaster and coffee name is **automatically catalog-approved** after backend duplicate/conflict checks, regardless of whether added by successful URL Autofill, manual entry or an unknown roaster. No manual review merely because a product source is unverified, missing, inaccessible or outside the trusted directory.
+- An unequivocal unique match to an existing approved *same release/lot* reuses the original canonical coffee ID atomically and preserves earliest original submission name, aliases, personal library IDs, shots, recipes, offline history and audits. A same-name product URL reused in another harvest/lot must never merge silently. Exact roaster/name plus corroborating release/lot and compatible origin/process or verified release-compatible official URL are preferred evidence; ambiguous zero-release cases need confirmation.
+- A plausible duplicate or contradictory origin/process/release creates (or retains) a usable **Pending** coffee, blocked from Community until resolved, with minimal friction. Offer normal safe fuzzy match candidates to member for confirmation and escalate only actual ambiguity to the admin queue; never silently force an incorrect merge or create a second approved canonical record merely to avoid review. Saving a Pending coffee never discards private history.
+- The admin can approve a distinct candidate, choose a compatible existing verified canonical ID, or hold an ambiguous identity with a clear reason; enforce live server membership/admin role, revision checks, conservative matching and audit provenance. Member-initiated genuinely safe matching may auto-link when deterministic.
+- **Catalog approval and independently verified official-source evidence are two distinct concepts.** Existing database verification_state = verified continues to mean *approved canonical catalog identity*, retaining existing section 22 approved-canonical Community eligibility for qualifying Dialed-In shots and other quality/privacy controls. Verified roaster_page proof may only originate from trusted service-side checks; merely supplied URL/Autofill/manual metadata remains labeled as unverified user source or label, not asserted official evidence. No browser-provided flag grants trust.
+- Preserve existing SSRF/DNS/TLS/redirect/size checks, Auth/RLS/beta admission, private notes and Community anonymity, exact release separation, source provenance, historic shot records and 79 baseline Locked decisions. Never fabricate missing release, roast or producer facts or rewrite approved canonical metadata on an ordinary new submission.
+- **Existing Pending submissions are not bulk-approved by migration.** Owner reserves Mango Tree Blend Pending for a later real manual Admin test; Wuri / Sweet Bloom is an existing nonadmin Pending member source-acceptance fixture. Mango manual approval does not prove nonadmin automatic approval. Existing Pending may be safely rechecked only with member ownership or a separately authorized review action.
+
+**Production grant and gates:** Owner has authorized one coordinated @Netlify production publication of these changes and already-approved pending work after tests, backup and exact tested source SHA are verified. This is a *single-use source/SHA-bound deployment permission*, not ongoing release authority. It does not authorize a paid purchase, unreviewed provider settings, arbitrary SQL/Edge/Auth writes or bulk historic record mutations. The previously named administrator-review migration remains separately conditionally authorized; new SQL for this amendment needs its own specific production approval under project rules. Never publish an interface expecting unavailable backend capabilities.
+
 ## Locked amendment: automatic coffee approval with canonical-first identity (2026-10-14)
 
 **Explicit new owner decision:** Only the owner-administrator's **own** coffee entries are automatically approved on submit, after conservative match/conflict checks. This is the administrator exception to the older global Pending rule. It does not permit unauthenticated, non-admitted, or other-member users to grant themselves approvals.
@@ -2433,3 +2477,7 @@ This **scoped exception** amends historical lines that said *every page* exceedi
 Owner reports the New Coffee URL button still visually old after Netlify published prior release. Under a **single newly authorized production release**, fix the PWA public-shell freshness path: precache a complete revision and allow installation to activate; revalidate public HTML when online, retain offline cached reopening, and check for service-worker updates on app foreground. Do not clear saved data, signed-in accounts, queued shots, client draft forms or force immediate active-tab reloads. Existing browser sessions may require close/reopen after deployment. Increase **only** the existing full-width New Coffee `Autofill From URL` button to a conspicuous 56 px minimum/16 px bold control, with existing form, fields, and interactions otherwise unchanged. Preserve previously Locked grinder help and next-shot minimalist arrow/info and explicitly rejected proposed mockup redesigns. No new general UX change is authorized.
 
 Improve the existing deterministic URL extractor only through bounded, source-corroborated techniques: product-specific public Shopify/Woo/Ecwid information, more precise yet noncontradictory geographic origins, approved localized Woo exact-product permalink matching, conditional genuine-HTML MIME recovery, explicit French product-story flavors, and literal lot identifiers. Keep missing/contradictory coffee data blank for user review. Preserve all existing Auth, quota, TLS/SSRF and size-limit gates, no paid model or browser execution, no auto-verified records or silent saves. Source acceptance: [2026-10-20 new release receipt](RELEASE_2026_10_20_PWA_REFRESH_AND_EXTRACTOR_COMPLETENESS.md) and new Ledger key `current_owner_pwa_freshness_extractor_reliability_release_20261020`. Latest owner confirms that added invitation codes/new members are real; no test-data deletion.
+
+## Owner-approved narrow exception: purge two TEMP QA #9/#34 synthetic shots (October 20/21, 2026)
+
+Explicit owner instruction: **“Fine remove the shots now please”**, following the exact two-shot destructive-cleanup authorization request. This is a **single-use, exceptionally narrow supersession of the general durable Community-contribution/history-retention rule** only for the two synthetic records labeled **TEMP QA #9/#34 BASELINE** and **TEMP QA #9/#34 OUTLIER**. Their authentic member-operated confirmation/correction acceptance evidence remains retained in redacted GitHub reports. Authorized action: revalidate both shot IDs and ownership; permanently delete only those two synthetic source shots, their two notes, two synthetic eligible Community projections, two contribution links and associated quality checks; sanitize only the eight corresponding audit before/after shot payloads and six matching mutation-receipt response payloads while preserving safe audit action/time/identity/replay metadata and explicit tombstones; adjust only any derived recency/feed pointer demonstrably tied to those shots. Retain all eighteen earlier original shots and notes, two real eligible Community projections, other members' data, unaffected private history, coffee/library/setup records, originals/backups and historical evidence. No blanket Community deletion, no removal of backups, no other Locked product-rule change, no release or provider settings authorization. Any mismatch fails closed before SQL. Actual deletion completion requires separately verified transaction and post-write count/identity readbacks. Issue #9 remains open for unverified negative edge cases; do not require further repetitive owner browser tests now.

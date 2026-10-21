@@ -64,7 +64,8 @@ begin
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","source_url":"https://sweetbloomcoffee.com/products/wuri-2026"}'::jsonb);
  if found->>'classification'='exact_verified' then raise exception 'Missing harvest auto-linked despite canonical release label';end if;
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Unknown Coffee Roasters","release_label":"2026 harvest"}'::jsonb);
- if found->>'classification'='exact_verified' then raise exception 'Unreviewed roaster identity auto-linked on label';end if;
+ if found->>'classification'<>'exact_verified' or found->>'exact_id'<>third::text then
+  raise exception 'Distinct roaster exact explicit release should auto-reuse canonical: %',found;end if;
  found:=public.dic_find_coffee_matches('{"name":"Wuri","roaster":"Sweet Bloom","release_label":"2026 harvest","source_url":"https://sweetbloomcoffee.com/products/wuri-2025"}'::jsonb);
  if found->>'classification'='exact_verified' then raise exception 'Conflicting product URL auto-linked';end if;
  found:=public.dic_find_coffee_matches('{"name":"Uraga","roaster":"Sweet Bloom"}'::jsonb);

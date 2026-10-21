@@ -88,6 +88,15 @@ window.__client={
    }
   r.families=[{id:'family',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.78}},created_at:TIME}];r.recipePreferences=[{setup_version_id:'version',library_entry_id:'coffee',style:'Turbo',current_family_id:'family',revision:1}];return {ok:true,record:sh};
  }
+ if(e.action==='make_current'){
+  const sh=r.shots.find(x=>x.id===d.shot_id);
+  const pref=sh?r.recipePreferences.find(x=>x.library_entry_id===sh.library_entry_id&&
+   x.setup_version_id===sh.setup_version_id&&x.style===sh.style):null;
+  if(!sh||!sh.is_dialed_in||sh.hidden_at||!pref||pref.revision!==d.expected_revision)
+   return {ok:false,code:'conflict'};
+  pref.current_family_id=sh.personal_family_id;pref.favorite_shot_id=sh.id;pref.revision++;
+  return {ok:true,record:structuredClone(pref)};
+ }
  if(e.action==='set_style'){r.workspaceCoffees[0].selected_style=d.style;r.workspaceCoffees[0].revision++;return {ok:true,record:r.workspaceCoffees[0]};}
  return {ok:true};
  }
@@ -116,6 +125,31 @@ with sync_playwright() as p:
  assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')
  assert page.locator('.settings-signout').count()==1;checks.append('Sign Out follows Cloud Sync in Settings')
  assert page.locator('#claude-key-options').count()==0;checks.append('Removed AI settings stay absent on mobile')
+ # Regression for the real approved New Setup control. Source-string checks
+ # alone previously said this was "done" without opening it on a phone.
+ page.get_by_role('button',name='Add Another Setup').click()
+ assert page.locator('#sheet-title').inner_text()=='New Setup'
+ assert page.locator('#new-setup #grinder-range-heading').inner_text()=='Grinder Espresso Range'
+ info=page.locator('#new-setup [data-action="grinder-range-info"]')
+ assert info.count()==1 and info.is_visible()
+ assert info.get_attribute('aria-expanded')=='false'
+ assert page.locator('#grinder-range-description').is_hidden()
+ assert page.locator('#new-setup [name="finest_setting"]').count()==1
+ assert page.locator('#new-setup [name="coarsest_setting"]').count()==1
+ assert page.locator('#new-setup [name="basket_dose_g"]').count()==1
+ info.click()
+ assert info.get_attribute('aria-expanded')=='true'
+ assert page.locator('#grinder-range-description').is_visible()
+ assert page.locator('#grinder-range-description').inner_text()=="Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range."
+ page.screenshot(path=str(OUT/'cloud_new_setup_info_open_390px.png'),full_page=True)
+ info.click()
+ assert info.get_attribute('aria-expanded')=='false'
+ assert page.locator('#grinder-range-description').is_hidden()
+ assert page.locator('#new-setup [name="finest_setting"]').input_value()==''
+ assert page.locator('#new-setup [name="coarsest_setting"]').input_value()==''
+ page.locator('#sheet [data-action="close"]').click()
+ page.get_by_role('button',name='Settings',exact=True).click()
+ checks.append('Real 390px New Setup grinder i opens and closes exact help, preserves inputs; no setup created')
  page.get_by_role('button',name='Rename',exact=True).click();page.locator('#rename-setup [name=name]').fill('Home Espresso')
  page.get_by_role('button',name='Save Name',exact=True).click();page.wait_for_function('!document.querySelector("#sheet").open')
  assert 'Home Espresso' in page.locator('.setup-switch').inner_text();checks.append('Setup can be renamed without recreating equipment')
@@ -348,6 +382,49 @@ with sync_playwright() as p:
  page.locator('[data-action=community-confirm-outlier]').click()
  page.wait_for_function('!document.querySelector(".community-review-prompt")')
  checks.append('Confirmed member outlier resolves inline prompt without changing ordinary shot flow')
+
+ # One visible recipe despite distinct internal successful families. The
+ # first auto-Current is not an explicit favorite; changing stated preferences
+ # changes automatic selection without mutating any production-style records.
+ page.evaluate("""() => {
+  const r=rawFixture();r.preferences.tasting_preferences='bright citrus clarity';
+  r.families=[
+   {id:'family-short',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.0}},created_at:TIME},
+   {id:'family-long',library_entry_id:'coffee',style:'Turbo',statistics:{ratio:{center:2.8}},created_at:TIME}
+  ];
+  r.recipePreferences=[{setup_id:'setup',setup_version_id:'version',
+   library_entry_id:'coffee',style:'Turbo',current_family_id:'family-short',revision:2}];
+  r.shots=[
+   rawShot({id:'short-a',personal_family_id:'family-short',yield_g:36,time_s:23,feed_mode:'standard'}),
+   rawShot({id:'short-b',personal_family_id:'family-short',yield_g:37,time_s:24,feed_mode:'standard',pulled_at:'2026-10-02T12:00:00Z'}),
+   rawShot({id:'long-a',personal_family_id:'family-long',yield_g:50,time_s:20,feed_mode:'standard',pulled_at:'2026-10-03T12:00:00Z'}),
+   rawShot({id:'long-b',personal_family_id:'family-long',yield_g:52,time_s:22,feed_mode:'standard',pulled_at:'2026-10-04T12:00:00Z'})
+  ];
+  window.__raw=r;window.__app.raw=structuredClone(r);
+  window.__app.state=window.__Modules.mapping.hydrate(window.__app.raw);
+  window.__app.view='coffees';window.__app.expanded.add('coffee');window.__app.render();
+ }""")
+ assert page.locator('.alternate-recipes, [data-action="choose-family"]').count()==0
+ assert page.locator('.recipe-grid').count()==1
+ assert '1:2.83' in page.locator('.recipe-grid').first.inner_text()
+ assert page.evaluate("window.__raw.recipePreferences[0].current_family_id")=='family-short'
+ assert page.evaluate("window.__raw.recipePreferences[0].favorite_shot_id")==None
+ checks.append('Two successful families yield one visible, clarity-matched recipe without a preference write')
+ page.evaluate("window.__app.state.preferences='rich body syrupy';window.__app.render()")
+ assert '1:2.03' in page.locator('.recipe-grid').first.inner_text()
+ page.evaluate("window.__app.state.preferences='bright citrus clarity';window.__app.render()")
+ assert '1:2.83' in page.locator('.recipe-grid').first.inner_text()
+ checks.append('Changing local preference adjusts only the automatic family choice')
+ page.get_by_text('Shot History (4)',exact=True).click()
+ page.locator('[data-action="shot-expand"][data-id="short-b"]').click()
+ assert page.locator('.shot-body [data-action="make-current"][data-id="short-b"]').count()==1
+ page.locator('.shot-body [data-action="make-current"][data-id="short-b"]').click()
+ page.wait_for_function("window.__raw.recipePreferences[0].favorite_shot_id==='short-b'")
+ page.wait_for_function("window.__app.state.setups[0].workspaces.version.coffees.coffee.currentFamilies.Turbo==='family-short'")
+ assert '1:2.03' in page.locator('.recipe-grid').first.inner_text()
+ assert len(page.evaluate("window.__raw.shots"))==4
+ assert page.locator('.alternate-recipes').count()==0
+ checks.append('Explicit Make Current preference overrides clarity heuristic and preserves both families and all shot records')
 
  # Account switches must not reuse a previous account's still-running sync.
  switch=page.evaluate("""async () => {

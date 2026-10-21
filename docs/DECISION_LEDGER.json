@@ -2143,6 +2143,21 @@
       "current": "COFFEE-PRODUCT-NARRATIVE-20261017-02",
       "scope": "Use bounded matched product narrative to validate title Estate/Farm producer, and choose Anaerobic when specific anaerobic-natural/fermentation evidence clarifies Natural; preserve source Adv Natural and 96h as extras. Do not create unsupported fields, infer from navigation/FAQ/other products, or automatically edit saved coffee/shot data.",
       "source": "docs/DECISION_LEDGER_2026_10_17_AGTRON_PROCESS_AND_PRODUCER.json"
+    },
+    {
+      "topic": "Alternate recipe family interface and preference-aware single window",
+      "current": "RECIPE-FAMILY-INTERNAL-ONE-VISIBLE-20261020",
+      "supersedes": "Only prior Locked requirement to DISPLAY collapsed Alternate Dialed-In Recipes and optional visible custom family names; no change to keeping distinct internal successful families, experiment lifecycle or human Make Current",
+      "scope": "Show exactly one current recipe; internal ratio-led families preserved. Respect explicit manual saved favorite, compatible setup/basket/feed/calibration and repeated successes; use clarity/body only as low-confidence ratio tie-breaker. No new screen, auto save, fake sensory class, data mutation or Netlify deployment.",
+      "source": "Explicit owner instruction 2026-10-20, documented in current_owner_one_visible_recipe_internal_families_20261020"
+    },
+    {
+      "topic": "One-time purge of two TEMP QA #9/#34 synthetic Community observations",
+      "current": "QA-9-34-TWO-SHOT-EXCEPTION-20261020",
+      "supersedes": "Only normally durable retention of the explicitly identified two synthetic, never-real temporary QA shots and their two synthetic Community records; no original or third-party data, backups, or general retention behavior",
+      "scope": "Single owner-approved permanent deletion of BASELINE and OUTLIER QA shots and notes, two Community projections, links and quality checks; sanitize only eight matching audit shot payloads and six matching receipt response payloads to safe tombstones retaining identity/action/timestamps/replay metadata, confirm no favorites/reviews, protect 18 original shots/notes and 2 original Community records. No release or other SQL. Verify SQL before marking complete.",
+      "source": "Owner explicit 'Fine remove the shots now please' on 2026-10-20 MDT / 2026-10-21 UTC, following exact proposed two-record authorization",
+      "status": "Executed and independently verified in production; one-use approval exhausted"
     }
   ],
   "open_current_owner_decisions": [],
@@ -2519,7 +2534,7 @@
   },
   "current_owner_approved_community_nested_layout_20261018": {
     "id": "UX-COMMUNITY-GROUPING-20261018-01",
-    "status": "Locked; full development Node/mobile/Chromium/visual CI PASS; NOT published",
+    "status": "Locked; nested Community coffee-card UI published; owner observed registered-member browsing 2026-10-20; cross-account API negatives remain in #41",
     "owner_answer": "B. Show compact Community shot rows when its coffee is opened, with individual detail expansion.",
     "scope": "Community list renders one default-collapsed coffee card per verified coffee; opening a card reveals compact qualifying shot rows; any row may independently open ratings/evidence.",
     "preserved_locked_behavior": "Personal Coffee screen shot history remains collapsed by default and unchanged; no automatic full shot-detail expansion, multiple shot comparison remains available.",
@@ -2565,11 +2580,17 @@
       }
     ],
     "css_cleanup_sha": "79e6f172f247ec76da07bb7d559190cb0183bca2",
-    "owner_publish_authorization": "NOT GIVEN; ask one question before production release; no SQL/Edge/account updates"
+    "owner_publish_authorization": "NOT GIVEN; ask one question before production release; no SQL/Edge/account updates",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Locked; full development Node/mobile/Chromium/visual CI PASS; NOT published",
+      "evidence": "Netlify deploy 6ad7be20bf672d5c8936f19a published source e7e16e5; site/cloud/community.js nested coffee card; owner phone confirmation 2026-10-20",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "current_owner_approved_community_release_context_20261018": {
     "id": "UX-COMMUNITY-RELEASE-CONTEXT-20261018-01",
-    "status": "Locked product decision; production-release CANDIDATE CI PASS; NOT APPLIED / NOT PUBLISHED",
+    "status": "Locked; Supabase migration applied and UI published; real owner member-phone browse accepted, signed multi-account privacy proof remains open in #41",
     "owner_answer": "A. Use other verified release details when dates are unavailable. Proceed with the release grouping in development, preserve separate canonical release identities, and do not publish yet.",
     "supersedes_only": "§22.3A historical frontend-only identity caveat, now addressed by planned server-sanitized canonical release key; preserves all other prior Locked Community and personal Coffee behaviors.",
     "parent_group": "public roaster+coffee name",
@@ -2620,12 +2641,18 @@
     },
     "migration_history_issue": 35,
     "prepared_release_runbook": "docs/COMMUNITY_RELEASE_GROUPING_PRODUCTION_READINESS_2026-10-18.md",
-    "migration_history_resolution": "28 applied migrations exact hosted version/name/blob-SHA/byte parity in GitHub, CI-enforced, no production DB history modification. New migration unapplied."
+    "migration_history_resolution": "28 applied migrations exact hosted version/name/blob-SHA/byte parity in GitHub, CI-enforced, no production DB history modification. New migration unapplied.",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Locked product decision; production-release CANDIDATE CI PASS; NOT APPLIED / NOT PUBLISHED",
+      "evidence": "Hosted migration 20261019041437 dic_community_release_context; production Community source e7e16e5; owner member-phone browse report",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "current_owner_preparation_community_release_20261018": {
     "source_owner_message": "do wverything you need to to get it ready for prod.",
     "approved_scope": "preproduction technical readiness only, no production SQL or publication",
-    "status": "Completed code/test/CLI promotion and documented release candidate; production approval still required.",
+    "status": "Completed preparation and later owner-authorized release was applied/published; historic pre-release hold consumed; remaining real-account security acceptance in #41",
     "cli_generation_run": 39171647492,
     "cli_generated_migration": "supabase/migrations/20261018221843_dic_community_release_context.sql",
     "source_candidate_commit": "e9c5f1f317d711a9140bfa1c5607e58a94dc2537",
@@ -2642,7 +2669,13 @@
     "migration_baseline": "docs/SUPABASE_PRODUCTION_MIGRATION_BASELINE_2026-10-18.json",
     "migration_guard": "scripts/audit/verify-migration-baseline.mjs",
     "security_and_courier_limits": "Supabase leaked-password protection disabled; member JWT negatives and Drive archive receipt unresolved. No provider Auth/account settings changed.",
-    "release_gate": "No production migration/Netlify publish without separate explicit owner approval; provider-assigned future migration version must be reconciled and verified before publish."
+    "release_gate": "No production migration/Netlify publish without separate explicit owner approval; provider-assigned future migration version must be reconciled and verified before publish.",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Completed code/test/CLI promotion and documented release candidate; production approval still required.",
+      "evidence": "Hosted migrations 20261019041437 and 20261019041452; Netlify READY source e7e16e5; owner registered-member Community browse accepted",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "migration_history_reconciliation_20261018": {
     "status": "FIXED in GitHub, 28/28 production-applied versions/name/SQL bytes verified; production unchanged",
@@ -2830,7 +2863,7 @@
   },
   "current_owner_permanent_admin_and_beta_invitation_access_20261018": {
     "id": "ACCESS-PERMANENT-20261018-01",
-    "status": "Owner Locked: durable admin/members, no code calendar expiry, NEW CODES ALWAYS SINGLE-USE; admin issue/revoke, member access remove/restore; dev only, release unapproved.",
+    "status": "Owner Locked; admin issue/revoke and soft member controls deployed; member redemption evidenced by owner-new-users report; real multi-account negative/privacy and soft Remove/Restore acceptance still open",
     "owner_exact_words": "Can you Build the self-service admin invitation controls now so I can generate invite codes as needed for this initial beta? Can you please also confirm that my admin account will never require an invite code and will never expire? That needs to be a permanent account. In fact I want all accounts/invite codes to be permanent (with the option to remove them from the admin portal). Is that a good plan?",
     "verified_current_server_model": "One active administrator role and admitted member row; no admin/member expiration columns; already admitted enabled member signs in without new invite; no immortal Supabase session guarantee.",
     "locked_requirements": [
@@ -2852,7 +2885,13 @@
     "code_source": "development/backend-foundation",
     "detailed_report": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md",
     "previous_multiuse_choice": "SUPERSEDED for NEW portal-generated codes only, existing historical invite use/expiry rows unchanged",
-    "account_removal_latest_owner_decision": "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01"
+    "account_removal_latest_owner_decision": "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01",
+    "publication_state_reconciliation_20261020": {
+      "prior_status_exact": "Owner Locked: durable admin/members, no code calendar expiry, NEW CODES ALWAYS SINGLE-USE; admin issue/revoke, member access remove/restore; dev only, release unapproved.",
+      "evidence": "Hosted migration 20261019041452 dic_admin_beta_invitation_controls and earlier owner admin Generate/Revoke acceptance 2026-10-19; current membership 5 enabled, 8 historical invitations; user explicitly confirmed new members are real",
+      "remaining": "Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open",
+      "observed_from": "read-only Supabase migrations/provider API, current GitHub source and owner first-hand report"
+    }
   },
   "admin_beta_invitation_controls_dev_20261018": {
     "status": "Single-use-only owner Locked source implementation and final SQL/Node/mobile/visual checks PASS; NOT LIVE; separate SQL/Netlify release permission required.",
@@ -3339,7 +3378,7 @@
   },
   "current_owner_pwa_freshness_extractor_reliability_release_20261020": {
     "decision_id": "PWA-STALE-CLIENT-AUTOFILL-EXTRACTOR-RELIABILITY-20261020",
-    "status": "Locked; single consolidated production publication authorized after source and public-source checks; not yet consumed",
+    "status": "Locked; implemented/tested and published READY/current 2026-10-20; one-time release approval consumed",
     "owner_source": "2026-10-20 owner request: UI still old, recheck all previously approved UX, improve deterministic URL extraction as far as reliably possible, then deploy all approved changes; user confirms their new invite codes and admitted members are intentional",
     "approved": [
       "Correct old PWA/browser presentation by allowing revisioned public shell updates while preserving offline reopening, queued shots and drafts",
@@ -3362,12 +3401,170 @@
       "mobile": "synthetic 390px and visual review PASS on UI-only code f8c94d9, runs 39479766253 and 39479766224"
     },
     "release_record": "docs/RELEASE_2026_10_20_PWA_REFRESH_AND_EXTRACTOR_COMPLETENESS.md",
-    "deployment": "PENDING",
+    "deployment": {
+      "id": "6ad7be20bf672d5c8936f19a",
+      "source_sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+      "netlify_state": "ready/current",
+      "published_at_utc": "2026-10-20T19:17:09.405Z",
+      "registered_functions": [
+        "coffee-url-preview"
+      ],
+      "secret_scan_files": 265,
+      "secret_scan_matches": 0,
+      "one_marker_only": true,
+      "owner_release_consent_consumed": true,
+      "real_device_visual_acceptance": "UNVERIFIED",
+      "member_authenticated_field_acceptance": "UNVERIFIED",
+      "netlify_billing_debit": "UNKNOWN",
+      "production_data_pre_post": "4 coffees, 6 library, 18 shots, 18 notes, 2 community, 5 admitted members, 1 admin, 8 invitations of which 2 usable, 0 orphans; unchanged",
+      "no_sql_edge_auth_or_member_writes": true,
+      "encrypted_backup": {
+        "main_pin_commit": "7bc3a00840df0e4cfdf70e9a205414094b55e57d",
+        "published_source_sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+        "run_id": 39482660006,
+        "artifact_id": 12292356358,
+        "size_bytes": 1180698,
+        "github_job": "success",
+        "apps_script_drive_delivery": "UNVERIFIED: push-run excluded",
+        "isolated_archive_restore": "UNVERIFIED"
+      }
+    },
     "known_limitations": [
       "signed-in device acceptance not independently verified",
       "provider current Netlify billing balance not readable",
       "roaster pages may change or become inaccessible",
       "offsite courier and full provider recovery still distinct work"
+    ]
+  },
+  "current_owner_one_visible_recipe_internal_families_20261020": {
+    "id": "RECIPE-FAMILY-INTERNAL-ONE-VISIBLE-20261020",
+    "status": "Locked; implemented and tested in development; not deployed",
+    "owner_instruction": "I definitely prefer option two that you recommended especially if you can identify which approach most closely matches the users preferences for taste and equipment. Let's go with that. Build and test it.",
+    "owner_decision": "One visible best-matched preferred/recommended recipe window per coffee/style/current setup; distinct successful recipe families retained internally, never merged. No Alternate Dialed-In Recipes disclosure.",
+    "explicit_user_choice": "Existing Make Current Recipe chooses a successful shot's family window, keeps the favorite example, and overrides all automatic ranking while the favorite remains an eligible visible all-green shot on the active setup.",
+    "automatic_priority": [
+      "exact same active setup/basket/feed/calibration",
+      "repeatable compatible all-green personal evidence",
+      "weak and clearly explained stated clarity/body ratio-direction proxy only among otherwise comparable family evidence",
+      "stable existing auto-current preference as final tiebreaker; no fabricated sensory labels"
+    ],
+    "preserve": [
+      "all shot IDs, notes, histories, ownership, privacy and successful family records",
+      "same style and coffee release boundaries",
+      "app-wide green rating criteria, shot style thresholds as guidelines, family ratio clustering heuristic 0.25 without defining universal meaningful difference",
+      "all existing offline and authenticated revision-checked Make Current flows",
+      "one visible window, clean Log Shot -> Rate -> Recommendation",
+      "existing manually favorited family until favorited shot is no longer eligible"
+    ],
+    "supersedes_only": [
+      "previous required collapsed Alternate Dialed-In Recipes interface in Master Specification 7.2 and 17.4 and issue #10",
+      "optional naming of alternate recipe families as an immediate visible interface requirement; future workshop only"
+    ],
+    "not_completed": [
+      "Cross-user/community source and provenance family ranking: issue #12",
+      "Experimental candidate/confirmed lifecycle: issue #13",
+      "Proving same-ratio different time or temperature family significance",
+      "Real authenticated hosted multi-family test",
+      "Production publication and recovery for this code"
+    ],
+    "source_commit": "413ca0e5b31330cc00a6c7972bc44178129c26bd",
+    "verified_ci": [
+      {
+        "id": 39498670329,
+        "scope": "439/439 Node, zero-warning lint and cloud build",
+        "state": "passed"
+      },
+      {
+        "id": 39498670205,
+        "scope": "390px account/browser and UX regression",
+        "state": "passed"
+      },
+      {
+        "id": 39498670046,
+        "scope": "private visual and offline PWA review",
+        "state": "passed"
+      }
+    ],
+    "deployment": "NOT authorized; current production remains e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60"
+  },
+  "current_owner_protected_continuity_single_use_release_20261020": {
+    "decision_id": "OPS-PROTECTED-BRANCH-ATOMIC-RELEASE-20261020",
+    "status": "Locked; development implementation authorized; final configuration BLOCKED pending GitHub Pro/admin and Netlify branch switch; no production publish",
+    "owner_source": "Owner explicitly requested Project instructions, mandatory private branch required checks, and issue #38's atomic single-use production release protection on October 20, 2026.",
+    "approved": [
+      "GitHub write-before-work and same-commit contemporaneous journal",
+      "Session-start verification of latest source head, CI, interruptions and Netlify deployed commit",
+      "Private protected application and release branches, mandatory CI and no bypass/force pushes",
+      "Unique explicit owner grant bound to tested source SHA, one non-force release branch update, serialized workflow, replay denial",
+      "Inert concurrent race tests and source/CI/backend release gate inspection"
+    ],
+    "not_authorized": [
+      "GitHub Pro billing purchase",
+      "Public GitHub visibility",
+      "Netlify production branch cutover or new billable build without separate owner confirmation",
+      "SQL/Edge/Auth/user/shot changes",
+      "ChatGPT Project settings UI change by an unavailable tool"
+    ],
+    "blockers": [
+      "GET rulesets 403 requires GitHub Pro or public private repository",
+      "GET branch protection 403 Resource not accessible by integration",
+      "No ChatGPT Project instructions editing tool connected",
+      "Netlify connector cannot change production branch"
+    ],
+    "instructions_file": "docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md",
+    "issue": 38
+  },
+  "current_owner_github_free_private_no_upgrade_20261020": {
+    "decision_id": "OPS-GITHUB-FREE-PRIVATE-NO-UPGRADE-20261020",
+    "status": "LOCKED: private GitHub Free; no Pro/no public; advisory CI and manual release controls only until independently verified",
+    "explicit_owner_quote": "I'm not going to upgrade Github so do whatever you can without pro and without making the repository public.",
+    "supersedes": "Only the previous instruction/proposal to upgrade to GitHub Pro or publicize the repository to enable protected-branch required checks; does not supersede release consent/data privacy or source-of-truth requirements",
+    "requirements": [
+      "Do not suggest or perform GitHub Pro/billing upgrade or make repository public unless owner expressly reverses this decision",
+      "Resume development using available Free/private CI, GitHub logging, fail-closed Netlify source guard and manually verified release approval",
+      "Mark unprotected branch CI as advisory, NEVER mandatory/enforced",
+      "Do not unlock inert production controller by fake readiness flags or call #38 complete",
+      "Keep one-grant/one-source/one-release, fail-closed data/prod changes and exact receipts"
+    ],
+    "source": "Explicit owner October 20, 2026 chat instruction",
+    "scope": "Account/hosting operational constraint; no new product UX decision and no production deploy authorization",
+    "linked_issue": 38
+  },
+  "current_owner_approved_two_qa_shot_purge_20261020": {
+    "id": "QA-9-34-TWO-SHOT-EXCEPTION-20261020",
+    "status": "Locked (one-use exception)",
+    "owner_source": "Explicit owner approval: Fine remove the shots now please.",
+    "scope": "Exactly synthetic TEMP QA #9/#34 BASELINE and OUTLIER, 2 private shots/notes, 2 eligible Community projections/links/checks, 8 target audit snapshots and 6 target mutation-receipt responses sanitized to tombstones; retain original 18/18/2, all unrelated data and backups.",
+    "implementation_status": "Completed in one guarded SQL transaction; independently verified 18 shots, 18 notes, 2 eligible Community, 0 residual QA records; 8 sanitized audit rows and 6 receipt tombstones; no deployment."
+  },
+  "current_owner_duplicate_first_automatic_catalog_approval_20261021": {
+    "decision_id": "COFFEE-DUPLICATE-FIRST-20261021",
+    "status": "Locked, owner explicitly approved build/implementation; deployed and real-device acceptance not yet established",
+    "owner_quote": "I agree with your simplified workflow. Please Build, test, and implement it. Once you’ve done that, please publish all these changes (and any other pending updates) to @Netlify you are approved to deploy.",
+    "scope": "Any admitted member's genuinely distinct roaster/name coffee autoapproved without official product evidence; deterministic compatible same-release canonical reuse; Pending for genuine unresolved duplicates. Provenance separate from catalog approval.",
+    "supersedes": [
+      "Oct14 admin-only exception requiring independent official source for all other members' canonical approvals",
+      "Section11 default Pending when URL/AI cannot extract or externally verify a unique coffee"
+    ],
+    "preserved": [
+      "Only actual same-release ID merges and original first-submission name precedence",
+      "Historical personal IDs/shots/recipes/offline data and audit",
+      "Approved canonical Community eligibility under existing §22 quality/privacy checks",
+      "Source claim honesty, signed identity, SSRF/URL and rate controls",
+      "Mango reserved Pending for manual Admin acceptance",
+      "No bulk backfill of historical Pending records"
+    ],
+    "desired_automation": [
+      "distinct name+roaster with no plausible duplicates becomes catalog approved immediately",
+      "confidence-matched existing same release reuses ID and retained history",
+      "uncertain duplicate or contradictory harvest/lot/process/origin saved Pending and offered for user/admin conflict resolution",
+      "manual or URL-entered unique unknown roaster approved without independently checking URL; source evidence status separately labeled"
+    ],
+    "release_grant": "One tested/source-SHA-bound Netlify production publish including already approved pending work; backend must be approved, migrated and verified first; no paid purchase or arbitrary SQL/Edge/Auth/membership mutation.",
+    "sql_scope": "Existing named admin migration prior conditional consent only; any newly authored auto-approval schema migration requires separately scoped production consent.",
+    "linked_issues": [
+      5,
+      43
     ]
   }
 }

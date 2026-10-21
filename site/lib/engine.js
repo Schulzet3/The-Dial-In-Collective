@@ -41,6 +41,64 @@ export function assignFamily(s,shot) {
  if(!best){best={id:newId('family'),coffeeId:shot.coffeeId,style:shot.style,seedRatio:ratio,createdAt:now()};s.families.push(best);}
  return best.id;
 }
+// Distinct successful ratio families remain internal, never merged into one range.
+// Explicit favorite shots are authoritative; an automatically seeded Current is not.
+function recipeHardwareTier(sh,version,basket,feed){
+ if(sh.setupVersionId===version.id){
+  if(sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===version.calibrationId)return 6;
+  if(sh.basketId===basket.id&&sh.feedMode===feed)return 5;
+  if(sh.feedMode===feed&&sh.calibrationId===version.calibrationId)return 4;
+  if(sh.feedMode===feed)return 3;
+  return 2;
+ }
+ if(norm(version.grinder)&&norm(version.burrs)&&
+    norm(sh.snapshot?.grinder)===norm(version.grinder)&&
+    norm(sh.snapshot?.burrs)===norm(version.burrs))return 1;
+ return 0;
+}
+export function chooseRecipeFamily(s,coffeeId,style,version,basket,feed,p=coffeeState(s,coffeeId)){
+ const options=familiesFor(s,coffeeId,style).map(f=>{
+  const shots=familyShots(s,f.id).filter(sh=>sh.coffeeId===coffeeId&&sh.style===style&&
+   finite(sh.doseG)&&sh.doseG>0&&finite(sh.yieldG)&&finite(sh.timeS));
+  if(!shots.length)return null;
+  const tier=Math.max(...shots.map(sh=>recipeHardwareTier(sh,version,basket,feed)));
+  const matched=shots.filter(sh=>recipeHardwareTier(sh,version,basket,feed)===tier);
+  return {family:f,shots,tier,matched,ratio:quantile(matched.map(sh=>sh.yieldG/sh.doseG),.5)};
+ }).filter(Boolean);
+ if(!options.length)return null;
+ const preferredId=p.currentFamilies?.[style],favoriteId=p.favoriteShots?.[preferredId];
+ const manual=options.find(x=>x.family.id===preferredId&&favoriteId&&x.shots.some(sh=>
+  sh.id===favoriteId&&sh.setupVersionId===version.id&&!sh.cloudPending));
+ if(manual)return {...manual,basis:'manual',reason:options.length>1?'Your chosen successful recipe.':null};
+ const tier=Math.max(...options.map(x=>x.tier));
+ let relevant=options.filter(x=>x.tier===tier);
+ // A repeated success wins over an equally compatible one-shot candidate.
+ const repeated=relevant.filter(x=>x.matched.length>=2);
+ if(repeated.length)relevant=repeated;
+ const preference=readPreference(s.preferences);
+ const spread=Math.max(...relevant.map(x=>x.ratio))-Math.min(...relevant.map(x=>x.ratio));
+ let selected,basis;
+ if(preference&&relevant.length>=2&&spread>=CONFIG.ratioFamilyDistance){
+  selected=[...relevant].sort((a,b)=>(preference==='clarity'?b.ratio-a.ratio:a.ratio-b.ratio)||
+   b.matched.length-a.matched.length||a.family.id.localeCompare(b.family.id))[0];
+  basis='taste_proxy';
+ }else{
+  selected=[...relevant].sort((a,b)=>b.matched.length-a.matched.length||
+   Number(b.family.id===preferredId)-Number(a.family.id===preferredId)||
+   a.family.id.localeCompare(b.family.id))[0];
+  basis='equipment_evidence';
+ }
+ // Five all-green ratings do NOT identify family-specific flavor. The ratio
+ // direction is a transparent, low-confidence tie breaker, not measured taste.
+ const reason=options.length<2?null:basis==='taste_proxy'?
+  'Your '+preference+' preference slightly favors this '+
+   (preference==='clarity'?'longer':'shorter')+
+   '-ratio successful approach; taste differences are not verified.':
+  tier>=2?'Selected from your most compatible successful setup history.':
+  'Successful recipe reference from another setup; not yet proven on this setup.';
+ return {...selected,basis,reason};
+}
+
 export function setupSimilarity(a,b) {
  const w=CONFIG.similarity;return Object.entries(w).reduce((sum,[key,value])=>sum+(key==='basket' ? (a.basketDoseG&&b.basketDoseG&&a.basketDoseG===b.basketDoseG?value:0) : (norm(a[key])&&norm(a[key])===norm(b[key])?value:0)),0);
 }
@@ -61,7 +119,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  if(same.length)return {value:round(quantile(same.map(sh=>sh.grindSetting),.5)),source:'Reference from your other basket or setup',proven:false};
  const cross=qual.filter(sh=>sh.coffeeId===c.id&&sh.setupVersionId!==v.id&&(!familyId||sh.familyId===familyId));
  if(cross.length)return {value:round(quantile(cross.map(sh=>sh.grindSetting),.5)),source:'Starting reference from matching grinder and burrs',proven:false};
- const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id);
+ const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  if(sameOld.length)return {value:translateGrind(sameOld.sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0],v),source:'Estimated from previous calibration',proven:false};
  const rank=roastIndex(c.roastLevel);
  const similar=current.filter(sh=>sh.coffeeId!==c.id&&rank>=0&&roastIndex(s.coffees.find(x=>x.id===sh.coffeeId)?.roastLevel)===rank);
@@ -91,9 +149,14 @@ export function learnSensitivity(shots) {
  return slopes.length>=2?{secondsPerUnit:quantile(slopes,.5),samples:slopes.length}:null;
 }
 function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
- const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===c.id&&finite(sh.tempC)&& (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
- const exact=sh.filter(sh=>sh.style===style&&sh.familyId===familyId);if(exact.length)return mean(exact.map(x=>x.tempC));
- const match=sh.filter(sh=>sh.style===style);return match.length?mean(match.map(x=>x.tempC)):sh.length?mean(sh.map(x=>x.tempC)):defaultC;
+ const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===c.id&&finite(sh.tempC)&&
+  (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
+ if(familyId){
+  const exact=sh.filter(x=>x.style===style&&x.familyId===familyId&&x.setupVersionId===v.id);
+  return exact.length?mean(exact.map(x=>x.tempC)):defaultC;
+ }
+ const match=sh.filter(x=>x.style===style&&x.setupVersionId===v.id);
+ return match.length?mean(match.map(x=>x.tempC)):defaultC;
 }
 // Conservative personal fallback for an unproven coffee: same equipment setup,
 // shot style and known feed condition; same roast, then closer metadata and basket.
@@ -143,15 +206,8 @@ export function recommendation(s,coffeeId,options={}) {
  // higher-priority same-coffee cross-style evidence.
  const exactOther=s.shots.some(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style);
  const provisional=style==='Custom'||exactOther?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
- const fams=familiesFor(s,coffeeId,style);
- let chosen=fams.find(f=>f.id===p.currentFamilies[style])||fams.find(f=>f.id===p.referenceFamilies[style]);
- if(!chosen && fams.length){
-  const snap=snapshot(s,coffeeId,basket.id);
-  chosen=[...fams].sort((a,b)=>{
-   const score=f=>familyShots(s,f.id).reduce((sum,sh)=>sum+(sh.setupVersionId===v.id?3:1+setupSimilarity(sh.snapshot,snap)),0);
-   return score(b)-score(a);
-  })[0];
- }
+ const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
+ const chosen=familyChoice?.family||null;
  if(!chosen&&provisional){
   // Conservative shrinkage toward the existing roast/style prior avoids
   // treating a small number of similar coffees as an exact recipe.
@@ -168,12 +224,19 @@ export function recommendation(s,coffeeId,options={}) {
   rec.reasons.unshift(provisional.nearby?`Cautious starting reference from ${provisional.count} successful ${style} shot${provisional.count===1?'':'s'} on nearby light-roast coffees; not proven for ${c.roastLevel}.`:`Starting reference from ${provisional.count} successful ${style} shot${provisional.count===1?'':'s'} on ${provisional.coffees} similar ${c.roastLevel} coffee${provisional.coffees===1?'':'s'} on this setup.`);
  }
  if(chosen){
-  const all=familyShots(s,chosen.id),local=all.filter(sh=>sh.setupVersionId===v.id),used=local.length?local:all;
-  rec.ratio=stats(used.map(x=>x.yieldG/x.doseG),{singleWidth:CONFIG.singleYieldHalfWidth/basket.doseG});
-  rec.time=stats(used.map(x=>x.timeS),{singleWidth:CONFIG.singleTimeHalfWidth});
-  rec.familyId=chosen.id;rec.observations=used.length;rec.established=local.length>0;
+  const all=familyChoice.shots,local=all.filter(sh=>sh.setupVersionId===v.id);
+  const basketFeed=local.filter(sh=>sh.basketId===basket.id&&sh.feedMode===feed);
+  const feedLocal=local.filter(sh=>sh.feedMode===feed);
+  const ratioEvidence=basketFeed.length?basketFeed:feedLocal.length?feedLocal:local.length?local:all;
+  rec.ratio=stats(ratioEvidence.map(x=>x.yieldG/x.doseG),{singleWidth:CONFIG.singleYieldHalfWidth/basket.doseG});
+  // Time from another setup, basket or feed must not masquerade as local proof.
+  if(basketFeed.length)rec.time=stats(basketFeed.map(x=>x.timeS),{singleWidth:CONFIG.singleTimeHalfWidth});
+  rec.familyId=chosen.id;rec.observations=ratioEvidence.length;rec.established=local.length>0;
   rec.source=local.length?'Your dialed in window':'Starting reference from your other setup';
-  rec.reasons=local.length?[]:['Your own successful recipe, adapted to this basket. Not yet proven on this setup.'];
+  rec.familySelection={basis:familyChoice.basis,candidates:familiesFor(s,coffeeId,style).length,
+   equipmentTier:familyChoice.tier,reason:familyChoice.reason};
+  rec.reasons=familyChoice.reason?[familyChoice.reason]:local.length?[]:
+   ['Your successful ratio from another setup; time and grind remain starting estimates.'];
  } else if(style!=='Custom') {
   // Weak cross-style ratio residual only: no copied time or grind numbers.
   const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&RATIOS[sh.style]);

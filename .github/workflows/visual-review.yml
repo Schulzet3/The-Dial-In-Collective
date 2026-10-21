@@ -13,6 +13,8 @@ on:
       - 'build_cloud.mjs'
       - 'scripts/audit/site-integrity.mjs'
       - '.github/workflows/visual-review.yml'
+  pull_request:
+    branches: [development/backend-foundation]
   workflow_dispatch:
 permissions:
   contents: read

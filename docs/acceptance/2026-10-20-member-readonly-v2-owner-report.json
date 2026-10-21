@@ -1,0 +1,259 @@
+{
+  "version": 2,
+  "started_at": "2026-10-21T01:51:21.248Z",
+  "expected_role": "member",
+  "reviewed_source": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+  "checks": [
+    {
+      "name": "server_validated_current_identity",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null
+    },
+    {
+      "name": "expected_admitted_role",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null
+    },
+    {
+      "name": "personal_state_only_current_owner",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "schema_present": true
+    },
+    {
+      "name": "foreign_owner_read:account_preferences",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:bags",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:basket_versions",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:baskets",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:coffee_submissions",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:experiments",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:grinder_calibrations",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:library_entries",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:personal_recipe_families",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:recipe_preferences",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:setup_preferences",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:setup_versions",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:setups",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:shot_notes",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:shots",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:workspace_coffees",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "foreign_owner_read:workspace_state",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "outcome": "NO_FOREIGN_ROW",
+      "observed_rows": 0
+    },
+    {
+      "name": "community_exact_sanitized_schema",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "observed_rows": 2
+    },
+    {
+      "name": "community_no_raw_uuid_email_or_nested_payload",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null
+    },
+    {
+      "name": "held_reviews_only_own_known_shots",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null,
+      "observed_rows": 0
+    },
+    {
+      "name": "admin_read_authorization:dic_admin_dashboard",
+      "result": "PASS",
+      "http_status": 403,
+      "error_class": "42501"
+    },
+    {
+      "name": "admin_read_authorization:dic_admin_access_overview",
+      "result": "PASS",
+      "http_status": 403,
+      "error_class": "42501"
+    },
+    {
+      "name": "direct_community_table_denied",
+      "result": "PASS",
+      "http_status": 403,
+      "error_class": "42501"
+    },
+    {
+      "name": "anonymous_denied:dic_browse_community_shots",
+      "result": "PASS",
+      "http_status": 401,
+      "error_class": "42501"
+    },
+    {
+      "name": "anonymous_denied:dic_my_community_outliers",
+      "result": "PASS",
+      "http_status": 401,
+      "error_class": "42501"
+    },
+    {
+      "name": "anonymous_denied:dic_admin_dashboard",
+      "result": "PASS",
+      "http_status": 401,
+      "error_class": "42501"
+    },
+    {
+      "name": "anonymous_denied:dic_admin_access_overview",
+      "result": "PASS",
+      "http_status": 401,
+      "error_class": "42501"
+    },
+    {
+      "name": "anonymous_denied:dic_read_personal_state",
+      "result": "PASS",
+      "http_status": 401,
+      "error_class": "42501"
+    },
+    {
+      "name": "invalid_bearer_rejected",
+      "result": "PASS",
+      "http_status": 401,
+      "error_class": "PGRST301"
+    },
+    {
+      "name": "identity_unchanged_through_run",
+      "result": "PASS",
+      "http_status": 200,
+      "error_class": null
+    }
+  ],
+  "unverified": [
+    "administrator mutation RPC denials (no mutation endpoint invoked)",
+    "genuine disabled/nonadmitted account sessions",
+    "held-shot confirmation/correction/retry/hide/version-conflict lifecycle",
+    "cross-account timing/races and persistent offline cache isolation",
+    "all canonical releases beyond currently returned eligible rows",
+    "current production source must be independently checked against reviewed_source",
+    "positive held-review ownership case: no held row returned"
+  ],
+  "finished_at": "2026-10-21T01:51:25.747Z",
+  "summary": {
+    "passed": 33,
+    "failed": 0,
+    "not_applicable": 0,
+    "acceptance": "PARTIAL_READ_ONLY_EVIDENCE_ONLY"
+  }
+}

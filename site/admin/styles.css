@@ -47,3 +47,10 @@
 .admin-invite-row button,.admin-member-row button{flex:0 0 auto;white-space:nowrap}
 .admin-protected{color:var(--muted);font-size:11px;font-weight:700}
 @media(max-width:520px){.admin-invite-form{display:grid;grid-template-columns:1fr}.admin-invite-form button{width:100%}.admin-invite-row,.admin-member-row{align-items:flex-start;flex-direction:column}}
+
+/* Scoped pending-coffee review; never shown on the logging screen. */
+.admin-review-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.admin-review-actions button{min-height:40px;font-size:12px}
+.admin-candidates{display:flex;flex-wrap:wrap;gap:10px;align-items:end;padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0}
+.admin-candidates label{font-size:12px;display:grid;gap:6px;flex:1 1 200px}
+.admin-candidates select{padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);max-width:100%}

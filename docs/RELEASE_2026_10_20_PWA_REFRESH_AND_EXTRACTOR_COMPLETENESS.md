@@ -1,6 +1,6 @@
 # Release acceptance: current-UI freshness, Autofill prominence and deeper deterministic extractor — October 20, 2026
 
-**STATUS: SOURCE PREFLIGHT VERIFIED; new one-shot owner-approved PRODUCTION PUBLICATION PENDING.** Never interpret prior READY commits as this release. Add the exact new Netlify receipt and postflight here; GitHub is the durable running record.
+**STATUS: NEW PRODUCTION RELEASE VERIFIED READY/CURRENT (2026-10-20 19:17 UTC); single owner authorization consumed.** Earlier aborted / CI-failing intermediary commits were **not deployed**. Signed-in owner-device and full provider recovery acceptance still unverified.
 
 ## Owner request and Locked scope
 
@@ -24,6 +24,15 @@ Decisions preserved: New Coffee mockup choice ONLY enlarges the existing **Autof
 - **Exact source proof:** [429/429 Node tests, lint/build/integrity PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39481478470) on **`ef06cc6e442d08dfe62df480214c2ea3d8a9268e`**. Latest [real source probe PASS](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39481478565): conventional 31-URL broad inventory **25 parsed**, five URL sources unavailable/oversize, homepage intentionally rejected; separate adaptive 16-case run **15/15 product details parsed, 1 homepage deliberately rejected**, Picky oversized recovered, original vs HTML-compacted extraction **full object parity** on all parsed products. Four public Shopify/Woo endpoints independently corroborated full HTML fields with no conflicts; adding no new fields on those already-rich samples is expected, while synthetic sparse-product regression proves added fields when available.
 - **Mango Tree current source:** Exact selected-product Ecwid public snapshot recovered `Mango Tree Blend` with name, tasting notes, roast, origin and roaster on latest anonymous probe, correcting an earlier temporary **upstream empty-product state**. Treat availability as changeable; fail closed if upstream ceases exposing matching product data, never reuse stale facts.
 - The earlier syntax-error and incorrect expectation on intermediate commits were detected by CI and repaired; **none was deployed**.
+
+## Verified Netlify postflight — October 20, 19:17 UTC
+
+- **New** exact production deployment [`6ad7be20bf672d5c8936f19a`](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad7be20bf672d5c8936f19a) READY/current, published **2026-10-20T19:17:09.405Z**. Git commit `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`, message `Release DIC: PWA freshness, prominent URL Autofill and verified extractor coverage [dic-publish]`. App source was fully tested at `ef06cc6`; intervening source commits update ONLY Master Specification, Decision Ledger, Release README and Current Status metadata.
+- Registered `coffee-url-preview` Netlify function; **265 scanned files, 0 secret matches**, production Netlify no team SSO, nonproduction Netlify team SSO retained. One new release marker/one provider READY was recorded for this approval; no duplicate marker pushed and no Netlify environment changes.
+- Read-only Supabase postflight matches preflight **exactly**: 4 canonical coffees, 6 library entries, 18 shots, 18 notes, 2 Community projections, 5 enabled members, 1 admin, 8 invitation records/2 usable, 0 orphan notes. No Supabase schema, Edge, user, invitation, shot or coffee writes.
+- No direct signed-in iPhone field-by-field / old cached client inspection; **owner device acceptance pending**. Site source fetch via independent web runtime unavailable; Netlify provider commit receipt, CI and tests are independent evidence, not a browser screenshot of owner's live app.
+- Netlify actual remaining/charged credits **UNKNOWN**, estimated one 15-credit build; owner-managed ledger updated without changing historical screenshot. Full provider rollback/backup delivery not implied by READY.
+- **Latest backup postflight:** Backup-only `main` commit [`7bc3a008`](https://github.com/Schulzet3/The-Dial-In-Collective/commit/7bc3a00840df0e4cfdf70e9a205414094b55e57d) successfully pinned source checkout to the exact new production SHA; encrypted PostgreSQL+source backup [run 39482660006](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39482660006) **PASS** with ciphertext artifact `12292356358`, 1,180,698 bytes, expires 2026-11-19. This was a **push** run, deliberately excluded from Google Apps Script scheduled courier ingestion; current offsite receipt and direct decrypt/isolated restore of this exact artifact remain **UNVERIFIED**.
 
 ## Production and recovery gates
 

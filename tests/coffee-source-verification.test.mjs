@@ -138,3 +138,13 @@ test('official H1 release proof ignores a footer-only copyright year',()=>{
  assert.equal(found.ok,false);
  assert.equal(found.reason,'product_title_not_verified');
 });
+
+test('Pending official-source retry uses authenticated stored owner submission',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const source=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ assert.match(source,/Retry Official Source Check/);
+ assert.match(source,/if\(a==='retry-pending-source'\)/);
+ assert.match(source,/this\.client\.verifyCoffeeSource\(submission\.id\)/);
+ assert.match(source,/submission\.status!=='pending'/);
+ assert.doesNotMatch(source,/dic_trusted_source_verify/);
+});

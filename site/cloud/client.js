@@ -66,6 +66,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
     }catch{return {...page,match:null};}
    },
    async verifyCoffeeSource(submissionId){assertSecure();return unwrap(await sdk.functions.invoke('dic-verify-coffee',{body:{submission_id:submissionId}}));},
+   async memberRetryPendingApproval(submissionId,expectedRevision){assertSecure();return unwrap(await sdk.rpc('dic_member_retry_pending_approval',{p_submission_id:submissionId,p_expected_revision:expectedRevision}));},
   // Authenticated, least-field Community endpoints. Never send owner IDs or
   // session tokens to the UI; Supabase membership is checked server-side.
   async listCommunityReviews(){assertSecure();const items=unwrap(await sdk.rpc('dic_my_community_outliers'));return Array.isArray(items)?items:[];},

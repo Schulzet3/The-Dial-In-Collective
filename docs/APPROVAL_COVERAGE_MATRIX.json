@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
+  "coverage_policy": "Any NEW current_owner_ decision key requires deliberate classification in this inventory before CI/build can pass; anchors verify source presence, NOT live user-device acceptance or every baseline behavior.",
+  "owner_decision_key_inventory": [
+    "current_owner_approved_adaptive_extractor_production_release_20261020",
+    "current_owner_approved_agtron_narrative",
+    "current_owner_approved_community_nested_layout_20261018",
+    "current_owner_approved_community_release_context_20261018",
+    "current_owner_approved_daily_budget",
+    "current_owner_approved_extractor_2mb_isolated_study_20261019",
+    "current_owner_approved_extractor_semantic_byok_20261019",
+    "current_owner_approved_invite_only_technical_pilot_20261018",
+    "current_owner_approved_pilot_release_20261018",
+    "current_owner_approved_roast_taxonomy",
+    "current_owner_approved_two_qa_shot_purge_20261020",
+    "current_owner_approved_url_autofill",
+    "current_owner_autofill_button_only_20261019",
+    "current_owner_beta_breached_password_opt_out_20261018",
+    "current_owner_beta_member_soft_remove_only_20261018",
+    "current_owner_duplicate_first_automatic_catalog_approval_20261021",
+    "current_owner_extractor_deterministic_only_20261019",
+    "current_owner_github_continuity",
+    "current_owner_github_free_private_no_upgrade_20261020",
+    "current_owner_grinder_range_info_20261019",
+    "current_owner_one_visible_recipe_internal_families_20261020",
+    "current_owner_outlier_research_20261018",
+    "current_owner_permanent_admin_and_beta_invitation_access_20261018",
+    "current_owner_preparation_community_release_20261018",
+    "current_owner_protected_continuity_single_use_release_20261020",
+    "current_owner_pwa_freshness_extractor_reliability_release_20261020",
+    "current_owner_recommendation_display_choice_20261019",
+    "current_owner_recommendation_single_intentional_change_20261019",
+    "current_owner_release_preferences",
+    "current_owner_required_outlier_review",
+    "current_owner_scoped_confirmation_retry_release_20261018",
+    "current_owner_scoped_pwa_release_20261018",
+    "current_owner_single_use_beta_invites_20261018"
+  ],
+  "production": {
+    "netlify_deploy_id": "6ad7be20bf672d5c8936f19a",
+    "exact_source_sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+    "owner_approval_for_new_release": "GRANTED_ONCE_IN_CHAT_PENDING_BACKEND_AND_BRANCH_RELEASE_PREFLIGHT"
+  },
+  "contracts": [
+    {
+      "id": "grinder_range_new_setup",
+      "decision_key": "current_owner_grinder_range_info_20261019",
+      "scope": "New Setup only; no existing-settings editor was approved",
+      "implementation": "published_source",
+      "device_acceptance": "REPORTED_MISSING_ON_A_PHONE: location ambiguous",
+      "issue": 39,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "within": [
+            " showSetup(){",
+            " showRenameSetup("
+          ],
+          "contains": "<h3 id=\"grinder-range-heading\">Grinder Espresso Range</h3>"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "within": [
+            " showSetup(){",
+            " showRenameSetup("
+          ],
+          "contains": "data-action=\"grinder-range-info\""
+        },
+        {
+          "path": "site/cloud/main.js",
+          "within": [
+            " showSetup(){",
+            " showRenameSetup("
+          ],
+          "contains": "Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range."
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "description.hidden=!description.hidden;"
+        },
+        {
+          "path": "site/visual.css",
+          "contains": ".inline-info-button:focus-visible"
+        },
+        {
+          "path": "tests/browser/cloud_owner_qa.py",
+          "contains": "Real 390px New Setup grinder i opens and closes exact help"
+        }
+      ]
+    },
+    {
+      "id": "next_shot_minimal_arrow_and_info",
+      "decision_key": "current_owner_recommendation_display_choice_20261019",
+      "scope": "Next Shot Recommendation card only; explicit single-change choice",
+      "implementation": "published_source",
+      "device_acceptance": "NOT_INDEPENDENTLY_VERIFIED",
+      "issue": 39,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "data-action=\"next-shot-info\""
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Changing only one setting helps isolate its effect"
+        },
+        {
+          "path": "site/lib/ui.js",
+          "contains": "nextShotGuidance"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "One adjustment at a time"
+        },
+        {
+          "path": "tests/ux-refinements.test.mjs",
+          "contains": "approved Option A arrow with i disclosure"
+        }
+      ]
+    },
+    {
+      "id": "coffee_url_autofill_button_only",
+      "decision_key": "current_owner_autofill_button_only_20261019",
+      "scope": "ONLY prominent full-width New Coffee Autofill button; no other #40 concept",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_CONFIRMED_APP_LOOKS_BETTER_NOT_FIELD_BY_FIELD",
+      "issue": 40,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')"
+        },
+        {
+          "path": "site/visual.css",
+          "contains": ".coffee-url-actions .coffee-url-autofill-button{width:100%;flex:1 0 100%;min-height:56px;"
+        },
+        {
+          "path": "tests/ux-refinements.test.mjs",
+          "contains": "Autofill From URL"
+        }
+      ]
+    },
+    {
+      "id": "community_nested_release_grouping",
+      "decision_key": "current_owner_approved_community_release_context_20261018",
+      "scope": "Sanitized Community coffee card/release grouping already deployed",
+      "implementation": "published_source_and_migration",
+      "device_acceptance": "OWNER_OBSERVED_REGISTERED_MEMBER_BROWSING; PRIVATE_CROSS_ACCOUNT_API_UNVERIFIED_ISSUE_41",
+      "issue": 11,
+      "assertions": [
+        {
+          "path": "site/cloud/community.js",
+          "contains": "community-coffee-card"
+        },
+        {
+          "path": "site/cloud/community.js",
+          "contains": "community-coffee-body"
+        },
+        {
+          "path": "tests/community-ui.test.mjs",
+          "contains": "release"
+        }
+      ]
+    },
+    {
+      "id": "pwa_shell_refresh",
+      "decision_key": "current_owner_pwa_freshness_extractor_reliability_release_20261020",
+      "scope": "Atomic revisioned service worker, online nav refresh with offline fallback",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_CONFIRMED_UPDATED_APP_APPEARANCE",
+      "assertions": [
+        {
+          "path": "scripts/pwa/service-worker.template.txt",
+          "contains": "self.skipWaiting()"
+        },
+        {
+          "path": "scripts/pwa/service-worker.template.txt",
+          "contains": "cache:'no-store'"
+        },
+        {
+          "path": "tests/pwa-shell.test.mjs",
+          "contains": "online navigation revalidates HTML"
+        }
+      ]
+    },
+    {
+      "id": "internal_single_visible_recipe",
+      "decision_key": "current_owner_one_visible_recipe_internal_families_20261020",
+      "scope": "One visible family; distinct internal recipe evidence; NOT yet deployed",
+      "implementation": "DEVELOPMENT_ONLY",
+      "device_acceptance": "NOT_DEPLOYED",
+      "issue": 10,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "absent": "alternateRecipesMarkup("
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "chooseRecipeFamily("
+        },
+        {
+          "path": "tests/recipe-family-selection.test.mjs",
+          "contains": "explicit Make Current favorite overrides"
+        }
+      ]
+    },
+    {
+      "id": "original_badges_no_shadows",
+      "decision_key": "current_owner_grinder_range_info_20261019",
+      "scope": "Related owner-Locked visual constraints; full original badge decisions in Master Spec/older Decision Ledger",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_REPORTED_APP_LOOKS_BETTER",
+      "assertions": [
+        {
+          "path": "site/visual.css",
+          "contains": ".status-badge,.style-badge"
+        },
+        {
+          "path": "site/visual.css",
+          "contains": "text-shadow:none"
+        },
+        {
+          "path": "tests/legacy-dark-badges.test.mjs",
+          "contains": "badge"
+        }
+      ]
+    },
+    {
+      "id": "controlled_netlify_release",
+      "decision_key": "current_owner_pwa_freshness_extractor_reliability_release_20261020",
+      "scope": "Only dedicated release/production can publish after unique grant, consumed claim, exact release marker and valid credits; development always skipped",
+      "implementation": "published_source",
+      "device_acceptance": "PROVIDER_SHA_READY_CONFIRMED",
+      "issue": 38,
+      "assertions": [
+        {
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "contains": "^Release DIC: DIC-"
+        },
+        {
+          "path": "netlify.toml",
+          "contains": "scripts/netlify/should-ignore-build.mjs"
+        },
+        {
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "contains": "release/production"
+        },
+        {
+          "path": "scripts/netlify/should-ignore-build.mjs",
+          "contains": "assertProductionClaim"
+        },
+        {
+          "path": "scripts/release/one-use-claim.mjs",
+          "contains": "planSingleUseClaim"
+        },
+        {
+          "path": "tests/one-use-git-race.test.mjs",
+          "contains": "exactly ONE winner"
+        }
+      ]
+    },
+    {
+      "id": "mandatory_held_shot_confirm_failure_retry_live",
+      "decision_key": "current_owner_required_outlier_review",
+      "scope": "Required held extreme-outlier Confirm modal, visible Chrome blocked-fetch error, reenabled retry and real signed-owner same-modal HTTP200 successful Confirm. Does not verify Correct Shot or provider outage.",
+      "implementation": "published_source",
+      "device_acceptance": "OWNER_CHROME_REAL_HOSTED_BLOCKED_FETCH_RETRY_PASS_20261021_0450UTC",
+      "issue": 34,
+      "acceptance_evidence": "docs/acceptance/2026-10-20-community-confirmation-retry-owner-report.json",
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "if(a==='community-confirm-outlier'){"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "target.disabled=false;throw error;"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "this.syncReviewDialog();"
+        },
+        {
+          "path": "site/cloud/client.js",
+          "contains": "async confirmCommunityOutlier(shotId,expectedRevision)"
+        }
+      ]
+    },
+    {
+      "id": "duplicate_first_catalog_auto_approval",
+      "decision_key": "current_owner_duplicate_first_automatic_catalog_approval_20261021",
+      "scope": "Only genuinely distinct member coffee auto approval and safe same-release reuse; hold genuine duplicate conflict; source provenance separate; keep Mango Pending",
+      "implementation": "IMPLEMENTED_TESTED_DEVELOPMENT_ONLY_8d8043f2567a7f4a32b25b10ac3e78ed4f69d948",
+      "device_acceptance": "NOT_DEPLOYED_SQL_OR_NETLIFY_NOT_OWNER_DEVICE_ACCEPTED",
+      "issue": 43,
+      "assertions": [
+        {
+          "path": "supabase/migrations/20261021062000_dic_duplicate_first_auto_approval.sql",
+          "contains": "member_auto_approved"
+        },
+        {
+          "path": "supabase/tests/coffee_duplicate_first_auto_approval.sql",
+          "contains": "auto-approved distinct nonadmin"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Coffee automatically approved and added to the shared catalog."
+        }
+      ]
+    }
+  ],
+  "active_gap_flags": [
+    {
+      "id": "existing_setup_settings_not_new_setup",
+      "status": "OWNER_CLARIFICATION_NEEDED",
+      "reason": "Existing Setup Settings has no editable grinder-range heading/fields; earlier approval explicitly named New Setup only. Owner reports missing on phone; route not established. Do not silently widen scope.",
+      "issue": 39
+    },
+    {
+      "id": "real_cross_account_api_acceptance",
+      "status": "CLOSED_ACCEPTED_LIVE_ROLE_SECURITY_ISSUE41",
+      "reason": "Verified production owner-run authenticated member v2 33/33 current owner isolation, admin v1 original 32/1 mistaken review expectation preserved; genuine ordinary member admin read and 2/2 mutation 403/42501; genuine removed/restore existing session 403-to-200 and immediate UI; genuine newly registered never-admitted Auth session admitted=false status 200, protected read 403/42501, provider method/role/status correlated; owner's approved temporary Auth user removed through Dashboard and post-delete 5 Auth/5 enabled admitted/0 never admitted/0 disabled; 18 shots/18 notes/2 eligible Community, 8 invites/9 events and referential integrity unchanged. Supplemental disposable signed PostgREST 32/32 PASS, simulated phone retry not a genuine held case. Provider logs are aggregates, no exact JWT subject/error payload. One test-created unused contributor placeholder detached by FK ON DELETE SET NULL remains with no links, tracked separately in issue #42 and not a privacy leak or #41 authorization acceptance gap. Separate broader risks #27/#38 and live held-shot #9/#34 remain. GitHub Issue #41 closed 2026-10-21T03:49:19Z, independently read back; evidence commit f99222277a2931c46746d6ad6eaa2bc6e054b452, continuity CI 39540598220 SUCCESS. Never-admitted owner-created GoTrue account was deleted through Dashboard and final five-account/shot-history counts and all referential checks passed. The lone unlinked test-created contributor placeholder is non-blocking, tracked in #42 with future owner approval needed for SQL cleanup. Broader security #27/#38 and live held-shot #9/#34 remain open; no Locked requirement weakened.",
+      "issue": 41
+    },
+    {
+      "id": "multi_worker_release_guard",
+      "status": "OPEN",
+      "reason": "Git marker and credit guard are not atomic consumed-once locks across workers.",
+      "issue": 38
+    },
+    {
+      "id": "all_chat_transcript_coverage",
+      "status": "UNPROVABLE",
+      "reason": "Project archives contain many exported messages, but not guaranteed every conversation; canonical GitHub logging and enforceable review inventory are necessary."
+    },
+    {
+      "id": "github_private_branch_protection",
+      "status": "UNAVAILABLE_ON_OWNER_APPROVED_PRIVATE_FREE_PLAN",
+      "reason": "Owner explicitly declined GitHub Pro and public source. Branches protected:false and private rulesets 403; GitHub Actions CI is advisory, not a mandatory block. No alternate enforcement is claimed. Keep #38 open.",
+      "issue": 38
+    },
+    {
+      "id": "netlify_release_branch_cutover",
+      "status": "BLOCKED",
+      "reason": "Current production watches development; requires owner to move Git CD to dedicated release/production branch AFTER inert workflow tests.",
+      "issue": 38
+    },
+    {
+      "id": "chatgpt_project_settings",
+      "status": "OWNER_ACTION_REQUIRED",
+      "reason": "Project instructions saved to GitHub file; no Project settings editor is exposed, user must paste and save."
+    },
+    {
+      "id": "github_free_private_no_paid_upgrade",
+      "status": "LOCKED_POLICY_WITH_RESIDUAL_RISK",
+      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; retain advisory CI, exact SHA check, work journal and inert one-use controller. No branch protection guarantee.",
+      "issue": 38
+    }
+  ],
+  "original_baseline": {
+    "locked_count": 79,
+    "open_count": 20,
+    "fnv1a32": "aaaa90e5",
+    "note": "Noncryptographic mutation tripwire only; baseline 79 Locked/20 Open preserved verbatim, later supersessions reside in Master Specification and Ledger."
+  }
+}

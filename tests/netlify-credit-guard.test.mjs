@@ -9,8 +9,8 @@ simulatedFreshLedger.release_policy.post_release_billing_refresh_needed=false;
 simulatedFreshLedger.release_policy.credit_monitoring_mode='verified_snapshot';
 // Freeze the unit-test billing example; operational snapshots may advance.
 simulatedFreshLedger.snapshots=[ledger.snapshots.find(snapshot=>snapshot.observed_date==='2026-10-15')];
-const baseline={context:'production',branch:'development/backend-foundation',
- subject:'Release DIC: bundled tested fixes [dic-publish]',today:'2026-10-15',ledger:simulatedFreshLedger};
+const baseline={context:'production',branch:'release/production',
+ subject:'Release DIC: DIC-20261020-ONE123 [dic-publish]',today:'2026-10-15',ledger:simulatedFreshLedger};
 
 function withUsage(used,date='2026-10-15',remaining=Math.max(0,ledger.monthly_included_credits-used)){
  const copy=structuredClone(ledger);
@@ -104,6 +104,17 @@ test('tampered or inconsistent credit totals fail closed',()=>{
 test('a production build on any other branch is ignored',()=>{
  assert.equal(decide({...baseline,branch:'main',ledger:withUsage(0)}).ignore,true);
 });
+test('even a marker on ongoing development cannot trigger a production build',()=>{
+ const r=decide({...baseline,branch:'development/backend-foundation'});
+ assert.equal(r.ignore,true);
+ assert.match(r.reason,/dedicated atomic production/);
+});
+test('legacy release subjects without unique immutable IDs never publish',()=>{
+ const r=decide({...baseline,subject:'Release DIC: old generic label [dic-publish]'});
+ assert.equal(r.ignore,true);
+ assert.match(r.reason,/marker/);
+});
+
 
 test('the owner release hold forbids automatic preview and branch publication',()=>{
  for(const context of ['deploy-preview','branch-deploy']){
