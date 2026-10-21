@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 — actual partial shot edit regression repaired
+- Real isolated shot-correction fixture caught unsafe nulling of old grind/temperature on omitted patch fields. Staged only new privileged edit RPC fixed to preserve old values when fields are absent; test asserts old grind is retained. No hosted DB/table/shot/history change. Await green exact-SHA disconnected regression and browser/approval evidence before ready-to-publish.
+
 ## Issue #47 fixture generated-shot property corrected (2026-10-21T22:31:21.242Z)
 - Updated only disconnected test fixture to respect generated `shots.is_dialed_in` and retain all real integrity checks. App build green, isolated positive-shot test awaiting rerun. Production untouched.
 

@@ -136,6 +136,7 @@ begin
  if data->>'ok'<>'true' then raise exception 'Admin shot correction rejected';end if;
  execute 'reset role';
  if (select time_s from public.shots where id=shot_id)<>26
+  or (select grind_setting from public.shots where id=shot_id)<>1.1
   or (select notes from public.shot_notes where shot_id=shot_id and owner_id=member_id)<>'Audited operator correction'
   or (select owner_id from public.shots where id=shot_id)<>member_id
   or (select setup_id from public.shots where id=shot_id)<>setup_id then

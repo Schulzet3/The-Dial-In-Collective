@@ -145,8 +145,10 @@ begin
    dose_g=coalesce(nullif(p_details->>'dose_g','')::numeric,oldshot.dose_g),
    yield_g=coalesce(nullif(p_details->>'yield_g','')::numeric,oldshot.yield_g),
    time_s=coalesce(nullif(p_details->>'time_s','')::numeric,oldshot.time_s),
-   grind_setting=nullif(p_details->>'grind_setting','')::numeric,
-   temperature_c=nullif(p_details->>'temperature_c','')::numeric,
+   grind_setting=case when p_details ? 'grind_setting'
+    then nullif(p_details->>'grind_setting','')::numeric else oldshot.grind_setting end,
+   temperature_c=case when p_details ? 'temperature_c'
+    then nullif(p_details->>'temperature_c','')::numeric else oldshot.temperature_c end,
    extraction=coalesce(nullif(p_details->>'extraction','')::smallint,oldshot.extraction),
    body=coalesce(nullif(p_details->>'body','')::smallint,oldshot.body),
    clarity=coalesce(nullif(p_details->>'clarity','')::smallint,oldshot.clarity),
