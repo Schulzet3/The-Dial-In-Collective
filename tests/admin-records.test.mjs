@@ -88,4 +88,33 @@ test('complete record pages place the legacy review preview in closed disclosure
  assert.doesNotMatch(html,/<details[^>]*\bopen\b/);
  assert.match(html,/Pending review actions \(1\)/);
  assert.match(html,/Conflict review actions \(1\)/);
+ assert.equal((html.match(/data-action="review-approve"/g)||[]).length,2);
+ assert.equal((html.match(/data-action="review-merge-prepare"/g)||[]).length,2);
+ assert.equal((html.match(/data-action="review-hold"/g)||[]).length,2);
+});
+test('empty complete review pages have one titled section and one empty message',()=>{
+ const html=renderAdminDashboard({queue:[]},null,null,{},
+  {pending:{items:[],total:0,offset:0},conflicts:{items:[],total:0,offset:0}});
+ for(const [kind,title,message] of [['pending','Pending Coffee Review','No pending coffee submissions.'],
+  ['conflicts','Conflicts','No coffee conflicts.']]){
+  const section=html.match(new RegExp('<section[^>]*id="admin-'+kind+'"[^>]*>([\\s\\S]*?)</section>'))?.[1];
+  assert.ok(section);
+  assert.equal((section.match(/<h2>/g)||[]).length,1);
+  assert.ok(section.includes('<h2>'+title+'</h2>'));
+  assert.equal(section.split(message).length-1,1);
+  assert.doesNotMatch(section,/<section|<details|No records to show/);
+ }
+ assert.doesNotMatch(html,/<h2>(pending|conflicts)<\/h2>/);
+});
+test('unavailable detail pages preserve independent review actions without false empty lists',()=>{
+ const html=renderAdminDashboard({queue:[{id:'pending',name:'Coffee needing review',status:'pending'}]},null,null,{},
+  {pending:{items:[],error:'Detailed listing unavailable'},conflicts:{items:[],error:'Detailed listing unavailable'}});
+ assert.match(html,/Coffee needing review/);
+ assert.match(html,/data-action="review-approve"/);
+ assert.match(html,/data-action="review-merge-prepare"/);
+ assert.match(html,/data-action="review-hold"/);
+ assert.equal((html.match(/Detailed listing unavailable/g)||[]).length,2);
+ assert.doesNotMatch(html,/<details|No pending coffee submissions|No coffee conflicts/);
+ const standalone=renderAdminRecordCollection('pending',{items:[],total:0});
+ assert.match(standalone,/<h2>Pending Coffees<\/h2>/);
 });

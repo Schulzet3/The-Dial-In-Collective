@@ -33,6 +33,19 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
   <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
  </article>`;
+ const reviewSection=(kind,label,empty)=>{
+  const rows=queue.filter(item=>(item.status==='conflict')===(kind==='conflicts'));
+  const page=records[kind],complete=Array.isArray(page?.items)&&!page.error;
+  let content='';
+  if(rows.length){
+   const actions=rows.map(preview).join('');
+   content=complete?`<details class="admin-review-details"><summary>${label} review actions (${rows.length})</summary>${actions}</details>`:actions;
+  }else if(!complete&&!page?.error){
+   content=`<p class="admin-empty helper">${empty}</p>`;
+  }
+  if(complete||page?.error)content+=renderAdminRecordCollection(kind,page,{embedded:true});
+  return content;
+ };
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
@@ -42,12 +55,10 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  ${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1"><h2>Pending Coffee Review</h2>
- ${Array.isArray(records.pending?.items)&&!records.pending?.error?`<details class="admin-review-details"><summary>Pending review actions (${queue.filter(item=>item.status!=='conflict').length})</summary>${queue.filter(item=>item.status!=='conflict').map(preview).join('')}</details>`:queue.filter(item=>item.status!=='conflict').length?queue.filter(item=>item.status!=='conflict').map(preview).join(''):'<p class="admin-empty helper">No pending coffee submissions.</p>'}
- ${renderAdminRecordCollection('pending',records.pending)}
+ ${reviewSection('pending','Pending','No pending coffee submissions.')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1"><h2>Conflicts</h2>
- ${Array.isArray(records.conflicts?.items)&&!records.conflicts?.error?`<details class="admin-review-details"><summary>Conflict review actions (${queue.filter(item=>item.status==='conflict').length})</summary>${queue.filter(item=>item.status==='conflict').map(preview).join('')}</details>`:queue.filter(item=>item.status==='conflict').length?queue.filter(item=>item.status==='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee conflicts.</p>'}
- ${renderAdminRecordCollection('conflicts',records.conflicts)}
+ ${reviewSection('conflicts','Conflict','No coffee conflicts.')}
  </section>
  ${renderAdminRecordCollection('approved',records.approved)}
  ${renderAdminRecordCollection('shots',records.shots)}

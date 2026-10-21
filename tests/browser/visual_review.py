@@ -208,15 +208,88 @@ with sync_playwright() as p:
   shared=(SITE/'cloud/appearance.js').read_text().replace('export ','')
   records=(SITE/'admin/records.js').read_text();records=re.sub(r"^import .*?;\n",'',records,flags=re.M).replace('export ','')
   view=(SITE/'admin/view.js').read_text();view=re.sub(r"^import .*?;\n",'',view,flags=re.M).replace('export ','')
-  sdk='''const CLOUD_CONFIG={enabled:true};const secureOrigin=()=>{};let requests=[];const sdk={auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),getUser:async()=>({data:{user:{id:'review-owner'}}})},from:()=>({select:()=>({eq:()=>({maybeSingle:async()=>({data:{theme:MODE}})})})}),rpc:async(name)=>{requests.push(name);return {data:name==='dic_session_status'?{authenticated:true,admitted:true,admin:true}:{counts:{pending_coffees:0,conflicts:0,verified_coffees:4,active_accounts:1,shot_records:14},queue_total:0,queue:[]}}}};globalThis.supabase={createClient:()=>sdk};'''
+  sdk=r'''
+const CLOUD_CONFIG={enabled:true};const secureOrigin=()=>{};let requests=[];
+const fixtureId=(group,index)=>group+'0000000-0000-4000-8000-'+String(index).padStart(12,'0');
+const fixtureTime='2026-10-21T12:00:00Z';
+const fixtureCoffee={revision:3,roaster:'Synthetic Roaster',release_label:'2026 Harvest',
+ origin:'Guji, Ethiopia',process:'Washed',roast_level:'Light-Medium',variety:'Heirloom',
+ producer:'Synthetic producer',elevation_m:'1800-2000',tasting_notes:'Berry, floral, citrus',
+ summary:'Synthetic coffee record for isolated visual review.',espressoNotes:'18 g in, 50 g out.',
+ source_url:'https://fixture.invalid/coffee',creator_email:'tester@synthetic.invalid',created_at:fixtureTime};
+const fixtureShot={revision:2,coffee_name:'Synthetic Washed Coffee',style:'Turbo',dose_g:18,yield_g:50,
+ time_s:22,grind_setting:1.1,temperature_c:91,extraction:3,body:3,clarity:5,sweetness:5,astringency:1,
+ notes:'Synthetic private note: sweet berry finish.',creator_email:'tester@synthetic.invalid',pulled_at:fixtureTime};
+const fixtureRows={
+ pending:[{...fixtureCoffee,id:fixtureId('4',1),name:'Synthetic Pending Coffee',status:'pending'}],
+ conflicts:[{...fixtureCoffee,id:fixtureId('4',2),name:'Synthetic Conflict Coffee',status:'conflict'}],
+ approved:[{...fixtureCoffee,id:fixtureId('5',1),name:'Synthetic Washed Coffee'},
+  {...fixtureCoffee,id:fixtureId('5',2),name:'Synthetic Natural Coffee',process:'Natural'}],
+ shots:[{...fixtureShot,id:fixtureId('6',1)},
+  {...fixtureShot,id:fixtureId('6',2),coffee_name:'Synthetic Natural Coffee',hidden_at:fixtureTime,
+   notes:'Synthetic retained note on a hidden shot.'}],
+ accounts:[{id:fixtureId('1',1),email:'operator@synthetic.invalid',admin:true,enabled:true},
+  {id:fixtureId('2',1),email:'tester@synthetic.invalid',admin:false,enabled:false}]
+};
+const sdk={
+ auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),
+  getUser:async()=>({data:{user:{id:fixtureId('1',1)}}})},
+ from:()=>({select:()=>({eq:()=>({maybeSingle:async()=>({data:{theme:MODE}})})})}),
+ rpc:async(name,args={})=>{
+  requests.push(name);
+  if(name==='dic_session_status')return {data:{authenticated:true,admitted:true,admin:true}};
+  if(name==='dic_admin_dashboard')return {data:{
+   // Legacy aggregates exclude the hidden shot and removed member and include
+   // one merged coffee. Successful detail pages supply their own exact totals.
+   counts:{pending_coffees:1,conflicts:1,verified_coffees:3,active_accounts:1,shot_records:1},
+   queue_total:2,queue:structuredClone([...fixtureRows.pending,...fixtureRows.conflicts])}};
+  if(name==='dic_admin_access_overview')return {data:{invites:[],invites_total:0,
+   members:structuredClone(fixtureRows.accounts),members_total:fixtureRows.accounts.length}};
+  if(name==='dic_admin_records'){
+   const rows=fixtureRows[args.p_kind];
+   if(!rows)throw Error('Unknown synthetic record kind');
+   return {data:{kind:args.p_kind,items:structuredClone(rows.slice(args.p_offset,args.p_offset+args.p_limit)),
+    total:rows.length,offset:args.p_offset,limit:args.p_limit}};
+  }
+  throw Error('Unexpected visual-fixture RPC '+name);
+ }
+};
+globalThis.supabase={createClient:()=>sdk};
+'''
   escaped="const e=x=>String(x??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));"
   page.add_script_tag(content='const MODE='+json.dumps(mode)+';'+escaped+shared+client+records+view+sdk+main)
   page.locator('#admin-refresh').wait_for();check(page.locator('html').get_attribute('data-theme')==mode,mode+': Admin reads saved account appearance')
   page.locator('#admin-refresh').click();check(page.evaluate('requests.filter(x=>x==="dic_admin_dashboard").length')>=2,mode+': Admin Refresh remains read-only')
+  page.wait_for_function("document.querySelector('#admin-refresh')?.disabled===false && document.querySelectorAll('#admin-approved > .admin-record').length===2")
+  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','2'],mode+': Admin cards match complete record totals')
+  for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
+   check(page.locator('#admin-'+kind+' > .admin-record').count()==total,mode+': '+kind+' records are populated')
+  check(page.locator('#admin-pending > h2').all_text_contents()==['Pending Coffee Review'] and page.locator('#admin-conflicts > h2').all_text_contents()==['Conflicts'],mode+': review sections have one readable heading')
+  check(page.locator('#admin-pending > section, #admin-conflicts > section').count()==0,mode+': review records have no duplicate nested panel')
+  check(page.locator('#admin-approved .admin-queue-title strong').first.inner_text()=='tester@synthetic.invalid',mode+': record creator attribution is visible')
+  check(page.locator('#admin-shots .admin-record-note').first.inner_text()=='Notes: Synthetic private note: sweet berry finish.',mode+': synthetic private shot notes are visible')
+  check(page.locator('.admin-member-row').count()==2 and page.get_by_role('button',name='Restore Access',exact=True).count()==1,mode+': complete accounts include the removed synthetic member')
+  check(page.locator('.admin-pagination').count()==0,mode+': complete short lists do not show misleading pagination')
+  review=page.locator('#admin-pending .admin-review-details')
+  review.locator('summary').click()
+  check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare','review-hold']),mode+': independent approval actions remain available')
+  review.locator('summary').click()
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin has no horizontal overflow')
   shot(page,'12-admin-'+mode)
   page.set_viewport_size({'width':390,'height':1100});shot(page,'13-admin-mobile-'+mode)
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin mobile has no horizontal overflow')
+  coffee=page.locator('#admin-approved > .admin-record').first
+  coffee.get_by_role('button',name='Edit Details',exact=True).click()
+  coffee_editor=coffee.locator('[data-record-form]');coffee_editor.wait_for(state='visible')
+  check(all(not coffee_editor.locator('[name="'+field+'"]').is_editable() for field in ['name','roaster','release_label']),mode+': approved identity remains readonly in the open editor')
+  check(coffee_editor.locator('[name="origin"]').input_value()=='Guji, Ethiopia' and coffee_editor.locator('[name="origin"]').is_editable(),mode+': descriptive coffee values are editable')
+  shot_record=page.locator('#admin-shots > .admin-record').first
+  shot_record.get_by_role('button',name='Edit Details',exact=True).click()
+  shot_editor=shot_record.locator('[data-record-form]');shot_editor.wait_for(state='visible')
+  check(shot_editor.locator('[name="notes"]').input_value()=='Synthetic private note: sweet berry finish.' and shot_editor.locator('[name="notes"]').is_editable(),mode+': shot editor retains the original synthetic private note')
+  check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': populated mobile editors fit the viewport')
+  shot(page,'14-admin-editors-mobile-'+mode)
+  check(all(name in ['dic_session_status','dic_admin_dashboard','dic_admin_access_overview','dic_admin_records'] for name in page.evaluate('requests')),mode+': visual editor inspection makes no mutation RPC')
   page.close()
  for width in [320,375,390,768,1280]:
   page=boot(browser,'dark',width,1100)

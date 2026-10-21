@@ -49,8 +49,8 @@ export function renderAdminRecord(item,kind){
      '<div class="admin-review-actions"><button type="submit">Save Audited Correction</button><button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Cancel</button></div></form>':'')+
   '</article>';
 }
-export function renderAdminRecordCollection(kind,page={}){
- const title=({approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
+export function renderAdminRecordCollection(kind,page={},{embedded=false}={}){
+ const title=({pending:'Pending Coffees',conflicts:'Conflicts',approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
  const loaded=Array.isArray(page.items)?page.items:[];
  const offset=Number.isSafeInteger(page.offset)&&page.offset>=0?page.offset:0;
  const total=Number.isSafeInteger(Number(page.total))&&Number(page.total)>=0?Number(page.total):0;
@@ -61,8 +61,13 @@ export function renderAdminRecordCollection(kind,page={}){
   '<div class="admin-pagination"><span class="helper">'+e(range)+'</span>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(Math.max(0,offset-50))+'" '+(offset===0?'disabled':'')+'>Previous</button>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(offset+50)+'" '+(offset+loaded.length>=total?'disabled':'')+'>Next</button></div>':'';
+ const empty=({pending:'No pending coffee submissions.',conflicts:'No coffee conflicts.'})[kind]||'No records to show.';
+ const content=error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind)).join(''):
+  page.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>')+pagination;
+ const description='<p class="helper">All records, page by page · creator and revision shown where available.</p>';
+ // Pending and Conflicts already have titled outer sections containing the
+ // independent approval actions. Embed their records without another panel.
+ if(embedded)return (page.error?'':description)+content;
  return '<section class="admin-panel admin-record-section" '+((kind==='approved'||kind==='shots')?'id="admin-'+e(kind)+'" tabindex="-1"':'')+'>'+
- '<div class="admin-section-header"><h2>'+e(title)+'</h2><p class="helper">All records, page by page · creator and revision shown where available.</p></div>'+
- error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind)).join(''):'<p class="admin-empty helper">No records to show.</p>')+
- pagination+'</section>';
+ '<div class="admin-section-header"><h2>'+e(title)+'</h2>'+description+'</div>'+content+'</section>';
 }
