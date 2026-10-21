@@ -1,5 +1,7 @@
 # Application audit — three passes, 2026-10-21
 
+> **Current completion:** PR #48 is merged at `663cc6d779fec99ee788f655d75ebc8d96593a18`; all five required workflows passed before and after merge. Final results are 575 Node tests, 151 visual assertions and 38 captures, with complete isolated SQL/HTTP/recovery checks. See **Final integrated application result** below and the [completion receipt](2026-10-21-completion-receipt.json). The opening scope/counts and earlier entries are preserved historical checkpoints, including earlier missing-source and pending-CI statements. The new administrator source is reviewed and tested; production installation and real-account/device acceptance remain open.
+
 ## Outcome and scope
 
 Three distinct application audit passes are complete. Confirmed defects were corrected in source. Final application verification covers **47 test files / 474 individual cases: 474 passed, zero failed, zero skipped**. **47 JavaScript/MJS/TypeScript files also pass syntax checks.** This is source and synthetic regression evidence; it does not establish deployment, new real-device acceptance, or completion of the remaining approved features.
@@ -168,3 +170,13 @@ Late application-owned changes are site/admin/view.js, site/admin/records.js, te
 ## Final administrator count consistency — October 21, 2026
 
 Successful record-list totals now drive the matching metric cards, including zero. When a page is missing, invalid or unavailable, the older overview remains an explicit fallback. This aligns hidden-shot, removed-admitted-account and merged-canonical counting with the records reached by the links. Existing labels and order remain unchanged. Two targeted regressions were added; the final administrator-records file passed 9/9 cases, zero skips. The earlier 571-case root full run and 31-case administrator receipt precede these two cases; exact final CI will provide the combined result.
+
+## Final integrated application result — 2026-10-21T23:18:35Z
+
+The preceding counts and missing-source statements remain historical checkpoints. The later reviewed administrator migration and permission contract resolve the earlier source-absence gap; production installation and real-account/device acceptance remain open. Final audit source `d366ec4afee6cf47be6611d9c2e37ca2a1954bc5` was merged in [PR #48](https://github.com/Schulzet3/The-Dial-In-Collective/pull/48) as `663cc6d779fec99ee788f655d75ebc8d96593a18`. The actual merge tree `c8819ad71ceaf795db60e245bf373c959a102fa2` equals the tested candidate tree and preserves both parent histories.
+
+All five required workflows passed on the final source and again on the actual merged commit. Final combined Node 22.23.3 suite: **575 passed, zero failures/skips**; the separate Node 18 ignore-runtime suite passed 30 cases. Pinned lint/build, shipped-source boundaries, complete isolated PostgreSQL 17.11 execution (34 migrations/17 suites), 32 signed isolated HTTP assertions and six recovery scenarios passed. The focused final six-file administrator run passed 35 cases before integration.
+
+The final independent visual review found and repaired raw nested headings and duplicate empty panels. A realistic populated RPC fixture now exercises creator attribution, private notes, immutable canonical identity, editable values and accurate list/card totals while preserving every original assertion and independent approval control. Final browser results: 50 mobile owner-flow checks, actual localhost service-worker cold offline reopening and 151 visual assertions/38 captures. All six final administrator captures passed native-resolution inspection; the other 32 are byte-identical to the prior reviewed set. See the [final visual result](2026-10-21-final-visual-results.json) and [completion receipt](2026-10-21-completion-receipt.json).
+
+These synthetic/isolated results do not close hosted account, real-device, accessibility or unfinished product issues. No audit application publication, hosted SQL/Edge/Auth action, live member-data mutation or provider-setting change occurred. Historical failures, existing accepted flows and the documented failed-cache-deletion/full-offline-reload limit remain preserved.

@@ -1,5 +1,7 @@
 # Release, CI, backup and operational audit
 
+> **Current completion:** The later snapshot-consistency source fix passed all six actual PostgreSQL scenarios. The development counterpart is merged in PR #48; tested operations PR #49 remains unmerged because automatic approval review requires explicit approval of its read-only live backup and separate isolated recovery effects. See **Final recovery source and integration disposition** below and the [completion receipt](2026-10-21-completion-receipt.json). Earlier counts and follow-up statements remain historical checkpoints; the native final-push cause and offsite delivery acceptance remain open.
+
 Prepared 2026-10-21 UTC by the release/operations audit worker. This is a local
 evidence report for the root reviewer, who owns GitHub/provider writes and the
 canonical journal. The source changes below have not themselves been described
@@ -192,3 +194,13 @@ remains live, and no grant was replayed or Netlify credit spent by this audit.
 Native transport acceptance, operational backup/offsite refresh and recovery
 snapshot-consistent comparison remain precisely bounded follow-ups, not claims
 of completion.
+
+## Final recovery source and integration disposition — 2026-10-21T23:18:35Z
+
+The earlier 74-test receipt and listed follow-ups are historical checkpoints. The snapshot-consistency source defect was subsequently repaired: pg_dump and every expected count/schema/payload inventory now share one exported read-only repeatable-read snapshot. PostgreSQL 17.11 passed six actual disconnected concurrency/corruption/failure scenarios, including a mutation control proving omission of the snapshot is detected. No private payload fingerprint is logged. See [recovery review](2026-10-21-recovery-snapshot-review.md).
+
+Application/development definitions were integrated in [PR #48](https://github.com/Schulzet3/The-Dial-In-Collective/pull/48) at `663cc6d779fec99ee788f655d75ebc8d96593a18`. All five required workflows passed on final source `d366ec4afee6cf47be6611d9c2e37ca2a1954bc5` and the actual merge. The full app result is 575 Node cases, plus 30 Node 18 ignore-stage cases; complete isolated SQL/signed HTTP/recovery execution passed. Matching sparse-main definitions, dependencies and tests are atomically prepared in [PR #49](https://github.com/Schulzet3/The-Dial-In-Collective/pull/49) at `fcfb3d1b8b91bb593d9bd7ee6963068f43cdec9c`. Its exact [run 39689422083](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39689422083) passed 38 Node 22 cases and all six real PostgreSQL scenarios. All 27 changed files were read back, and an independent review matched every one of the 33 candidate files and its six relative imports.
+
+**The operations fixes are not installed on main.** Automatic approval review rejected PR #49's attempted merge because the existing main push filters would read/export the live database into a new encrypted private GitHub artifact and run the isolated recovery workflow. Main remains `f8726e330648c4a3e82de88d75b6978ffee37d44`; no live export/recovery ran. Explicit owner approval of those concrete effects is required; no direct ref write, trigger change or equivalent dispatch may bypass the hold.
+
+The original native final-push rejection cause remains unproven; improved diagnostics are source changes, not an end-to-end release-transport acceptance receipt. A future separately authorized release is needed for that observation. A later successful push smoke backup would also not establish an offsite receipt because the Drive courier ignores push artifacts. Current credit balance, restricted provider settings and natural alert delivery retain their existing evidence gaps. Existing grants, archives and production release are preserved. Exact CI/merge and hold receipts are in the [completion record](2026-10-21-completion-receipt.json).

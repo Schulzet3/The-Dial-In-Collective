@@ -1,79 +1,98 @@
 {
   "schema_version": 1,
-  "as_of_utc": "2026-10-21T23:05:00Z",
-  "status": "THREE_PASSES_COMPLETE_FINAL_ADMIN_PRESENTATION_SOURCE_READY_EXACT_CI_PENDING",
+  "as_of_utc": "2026-10-21T23:18:35Z",
+  "status": "THREE_PASSES_COMPLETE_APPLICATION_MERGED_OPERATIONS_MERGE_HELD",
   "application": {
-    "reviewed_head": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
-    "tree": "7b62dfc3af113f8aed4e824b082c09addba66dfb",
-    "tested_merge_commit": "3ac5300fbf954993c58aa0c11e9d0581f4eef1c1",
+    "reviewed_head": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+    "tree": "c8819ad71ceaf795db60e245bf373c959a102fa2",
+    "tested_merge_commit": "32ddf59981b2072c96c38d71d78e0f228ae2c49d",
     "synthetic_merge_tree_equals_head": true,
     "pr": 48,
-    "merged": false,
+    "merged": true,
     "workflows": [
       {
-        "id": 39690072140,
-        "name": "DIC approval, implementation and continuity contract",
-        "status": "completed",
-        "conclusion": "success",
-        "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
-        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072140"
-      },
-      {
-        "id": 39690072164,
-        "name": "DIC cloud app build and tests",
-        "status": "completed",
-        "conclusion": "success",
-        "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
-        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072164"
-      },
-      {
-        "id": 39690072166,
+        "id": 39691380654,
         "name": "DIC cloud UX regression checks",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380654",
         "status": "completed",
         "conclusion": "success",
-        "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
-        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072166"
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
       },
       {
-        "id": 39690072139,
+        "id": 39691380609,
+        "name": "DIC cloud app build and tests",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380609",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 39691380667,
+        "name": "DIC approval, implementation and continuity contract",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380667",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 39691380621,
         "name": "DIC isolated SQL release regression",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380621",
         "status": "completed",
         "conclusion": "success",
-        "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
-        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072139"
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
       },
       {
-        "id": 39690072223,
+        "id": 39691380805,
         "name": "DIC private visual review",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380805",
         "status": "completed",
         "conclusion": "success",
-        "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
-        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072223"
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
       }
     ],
     "tests": {
-      "node22": 573,
+      "node22_version": "22.23.3",
+      "node22": 575,
       "failures": 0,
       "skipped": 0,
-      "node18_ignore_stage": "PASS",
+      "node18_version": "18.20.8",
+      "node18_ignore_stage": 30,
+      "node18_failures": 0,
+      "node18_skipped": 0,
+      "pinned_lint_and_build": "PASS",
+      "shipped_assets_and_private_source_boundary": "PASS",
+      "postgres_version": "17.11",
       "migrations": 34,
       "sql_suites": 17,
       "signed_postgrest_http_assertions": 32,
       "snapshot_scenarios": 6,
       "mobile_owner_checks": 50,
-      "visual_assertions": 117,
-      "screenshots": 36
+      "visual_assertions": 151,
+      "screenshots": 38,
+      "service_worker_cold_offline_reopen": "PASS_ACTUAL_LOCALHOST_BROWSER",
+      "http_scope": "Actual HMAC-signed HTTP requests to isolated PostgREST with synthetic identities; not hosted GoTrue or production sessions.",
+      "browser_scope": "Chromium with synthetic accounts and records; not real device or live administrator/member acceptance."
     },
     "exact_file_readbacks": {
       "integrated_checkpoint": 97,
-      "browser_followup": 12
+      "browser_followup": 12,
+      "final_presentation_followup": 14,
+      "all_byte_and_git_blob_hash_matches": true,
+      "count_boundary": "Per-commit changed-file checks overlap; do not sum them as unique files. PR #48 has 120 changed paths."
     },
     "visual_review": {
-      "artifact_id": 12387733069,
-      "sha256": "9267f3993e160d2dffa83061abdcbad2552f7601c3ffcf0287e09a08f174be58",
-      "native_admin_images_reviewed": 4,
-      "other_images_reviewed_in_contact_sheets": 32,
-      "result": "No blocking captured layout defect; raw lowercase internal headings and redundant empty panels confirmed. Synthetic legacy records fixture did not visually certify populated current record pages; narrow source/fixture follow-up pending."
+      "workflow_run": 39691380805,
+      "artifact_id": 12388379058,
+      "archive_bytes": 9371547,
+      "archive_sha256": "0075721a2811d1abe9c54eadfc7bfffe3e43cf119c514fd357d1205a86e16e6d",
+      "sanitized_report": "docs/audits/2026-10-21-final-visual-results.json",
+      "sanitized_report_sha256": "2cee29c8f0f4396369f3ad52e8c7341a0155aab2bd3dca526cacd95d4eb7c53b",
+      "native_admin_images_reviewed": 6,
+      "other_images_byte_identical_to_previous_reviewed_artifact": 32,
+      "total_captures": 38,
+      "result": "PASS: final six administrator captures inspected at native resolution; prior heading/duplicate-empty-panel defects corrected, populated lists and mobile editors present, no blocking captured clipping or overlap. Other 32 captures exactly match the earlier reviewed set.",
+      "scope": "Synthetic Chromium artifact; not real-account, device or accessibility acceptance."
     },
     "final_presentation_followup": {
       "source_files": [
@@ -89,14 +108,122 @@
       "focused_test_skipped": 0,
       "existing_visual_assertions_preserved": true,
       "configured_captures": 38,
-      "runtime_result": "NEXT_EXACT_GITHUB_CI_REQUIRED",
+      "runtime_result": "ALL_FIVE_EXACT_SOURCE_WORKFLOWS_AND_ALL_FIVE_POST_MERGE_WORKFLOWS_PASS",
       "fixes": [
         "One titled pending/conflict section and one truthful empty state; listing errors are not empty results.",
         "Independent approval/duplicate/hold controls preserved in detail/fallback states.",
         "Correct per-RPC synthetic fixture shapes and populated creator/notes/coffee/shot/account pages; contrasting legacy aggregates prove successful list totals drive cards.",
         "Original 36 captures retained; mobile editable/readonly field inspection added in light and dark."
-      ]
-    }
+      ],
+      "source_head": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+      "merge_commit": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+    },
+    "merge_commit": "663cc6d779fec99ee788f655d75ebc8d96593a18",
+    "merge_tree": "c8819ad71ceaf795db60e245bf373c959a102fa2",
+    "merge_parents": [
+      "5ab369e6755d26e0e2e2c22724722a14ed8535d6",
+      "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+    ],
+    "actual_merge_tree_equals_tested_tree": true,
+    "merge_ref_and_parents_readback_exact": true,
+    "target_branch": "development/backend-foundation",
+    "pr_changed_files": 120,
+    "check_jobs": [
+      {
+        "id": 119538124546,
+        "name": "review",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123933,
+        "name": "cloud-tests",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123923,
+        "name": "validate",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123788,
+        "name": "approval",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123580,
+        "name": "mobile-browser-qa",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123376,
+        "name": "sql",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      }
+    ],
+    "post_merge_workflows": [
+      {
+        "id": 39691957997,
+        "name": "DIC isolated SQL release regression",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957997",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957863,
+        "name": "DIC controlled public roaster source probe",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957863",
+        "status": "completed",
+        "conclusion": "skipped",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957868,
+        "name": "DIC private visual review",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957868",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957623,
+        "name": "DIC cloud app build and tests",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957623",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957624,
+        "name": "DIC approval, implementation and continuity contract",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957624",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957727,
+        "name": "DIC cloud UX regression checks",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957727",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      }
+    ],
+    "required_workflows_before_and_after_merge": "ALL_FIVE_SUCCESS",
+    "optional_workflow_boundary": "The controlled public-roaster probe was skipped by design on the merge. It is not one of the five required workflows; Node test skip counts below remain zero."
   },
   "issues": {
     "count": 20,
@@ -248,7 +375,138 @@
         "body_readback_exact": true,
         "state": "open"
       }
-    ]
+    ],
+    "final_readback_at_utc": "2026-10-21T23:15:47Z",
+    "current_evidence_links_branch": "development/backend-foundation",
+    "final_readback": [
+      {
+        "number": 5,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 9,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 10,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 12,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 21,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 22,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 23,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 24,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 25,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 27,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 28,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 30,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 33,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 36,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 38,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 39,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 40,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 43,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 44,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 47,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      }
+    ],
+    "original_bodies_and_former_titles_preserved": true,
+    "accepted_issues_untouched": [
+      11,
+      34,
+      41
+    ],
+    "invitation_policy": "New invitation codes are single-use and nonexpiring before redemption; historical calendar-expiry acceptance is superseded."
   },
   "operations": {
     "pr": 49,
@@ -264,7 +522,12 @@
     "hold_reason": "Merging existing main backup/recovery paths triggers a read-only live database export, a new encrypted private GitHub artifact and isolated recovery. Automatic approval review requires explicit owner approval of those concrete effects.",
     "no_bypass": true,
     "native_release_transport_acceptance": "UNPROVEN",
-    "new_offsite_copy_receipt": "NOT_ESTABLISHED"
+    "new_offsite_copy_receipt": "NOT_ESTABLISHED",
+    "candidate_tree": "e4b23a4db65e8636b1317fa0b8d592340a96b19d",
+    "installed_on_main": false,
+    "live_export_or_restore_executed": false,
+    "approval_question": "May I merge PR #49, which will run the existing read-only live database backup into an encrypted artifact in this private GitHub repository and separately run the isolated database-recovery check?",
+    "backup_and_recovery_evidence_boundary": "The encrypted backup and recovery workflows each capture live data read-only. The recovery workflow restores its separately captured snapshot into an isolated target; it does not decrypt or restore the newly uploaded encrypted backup artifact."
   },
   "production": {
     "checked_at_utc": "2026-10-21T23:01:15Z",
@@ -276,6 +539,122 @@
     "applied_migrations": 32,
     "new_audit_migrations_applied": false,
     "prior_grant_consumed": true,
-    "provider_changes_by_audit": false
+    "provider_changes_by_audit": false,
+    "unapplied_audit_migrations": [
+      "20261021221455_dic_source_worker_auth_and_admission.sql",
+      "20261021224447_dic_admin_content_review.sql"
+    ]
+  },
+  "historical_application_checkpoints": [
+    {
+      "as_of_utc": "2026-10-21T23:05:00Z",
+      "scope": "Earlier d556656 integration and the subsequently resolved final presentation follow-up; preserved history, not current pending work.",
+      "receipt": {
+        "reviewed_head": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+        "tree": "7b62dfc3af113f8aed4e824b082c09addba66dfb",
+        "tested_merge_commit": "3ac5300fbf954993c58aa0c11e9d0581f4eef1c1",
+        "synthetic_merge_tree_equals_head": true,
+        "pr": 48,
+        "merged": false,
+        "workflows": [
+          {
+            "id": 39690072140,
+            "name": "DIC approval, implementation and continuity contract",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072140"
+          },
+          {
+            "id": 39690072164,
+            "name": "DIC cloud app build and tests",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072164"
+          },
+          {
+            "id": 39690072166,
+            "name": "DIC cloud UX regression checks",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072166"
+          },
+          {
+            "id": 39690072139,
+            "name": "DIC isolated SQL release regression",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072139"
+          },
+          {
+            "id": 39690072223,
+            "name": "DIC private visual review",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072223"
+          }
+        ],
+        "tests": {
+          "node22": 573,
+          "failures": 0,
+          "skipped": 0,
+          "node18_ignore_stage": "PASS",
+          "migrations": 34,
+          "sql_suites": 17,
+          "signed_postgrest_http_assertions": 32,
+          "snapshot_scenarios": 6,
+          "mobile_owner_checks": 50,
+          "visual_assertions": 117,
+          "screenshots": 36
+        },
+        "exact_file_readbacks": {
+          "integrated_checkpoint": 97,
+          "browser_followup": 12
+        },
+        "visual_review": {
+          "artifact_id": 12387733069,
+          "sha256": "9267f3993e160d2dffa83061abdcbad2552f7601c3ffcf0287e09a08f174be58",
+          "native_admin_images_reviewed": 4,
+          "other_images_reviewed_in_contact_sheets": 32,
+          "result": "No blocking captured layout defect; raw lowercase internal headings and redundant empty panels confirmed. Synthetic legacy records fixture did not visually certify populated current record pages; narrow source/fixture follow-up pending."
+        },
+        "final_presentation_followup": {
+          "source_files": [
+            "site/admin/records.js",
+            "site/admin/view.js"
+          ],
+          "test_files": [
+            "tests/admin-records.test.mjs",
+            "tests/browser/visual_review.py"
+          ],
+          "focused_test_pass": 35,
+          "focused_test_fail": 0,
+          "focused_test_skipped": 0,
+          "existing_visual_assertions_preserved": true,
+          "configured_captures": 38,
+          "runtime_result": "NEXT_EXACT_GITHUB_CI_REQUIRED",
+          "fixes": [
+            "One titled pending/conflict section and one truthful empty state; listing errors are not empty results.",
+            "Independent approval/duplicate/hold controls preserved in detail/fallback states.",
+            "Correct per-RPC synthetic fixture shapes and populated creator/notes/coffee/shot/account pages; contrasting legacy aggregates prove successful list totals drive cards.",
+            "Original 36 captures retained; mobile editable/readonly field inspection added in light and dark."
+          ]
+        }
+      }
+    }
+  ],
+  "completion_boundary": {
+    "three_available_evidence_review_passes": "COMPLETE",
+    "confirmed_application_repairs": "MERGED_AND_TESTED",
+    "operations_integration": "TESTED_PR_READY_EXPLICIT_EFFECTS_APPROVAL_REQUIRED",
+    "all_product_requirements_complete": false,
+    "unavailable_history_recovered": false,
+    "future_error_free_guarantee": false,
+    "remaining_work_register": "docs/audits/2026-10-21-requirement-traceability.md",
+    "docs_commit_note": "This receipt records the tested application merge. Its final documentation-only commit is identified by the containing Git commit; it cannot contain its own commit hash."
   }
 }

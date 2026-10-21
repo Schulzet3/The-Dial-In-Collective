@@ -35,6 +35,8 @@
 ## October 21 three-pass audit
 
 - [Complete three-pass audit and repair record](audits/2026-10-21-three-pass-audit.md) — scope, all three passes, confirmed repairs, execution receipts and remaining boundaries.
+- [Final completion receipt](audits/2026-10-21-completion-receipt.json) — merged application refs, all five exact workflows before/after merge, issue readbacks, unchanged production and held operations integration.
+- [Final visual verification](audits/2026-10-21-final-visual-results.json) — 151 assertions and 38 capture names; artifact hashes and independent inspection scope are in the completion receipt.
 - [Application and data-behavior audit](audits/2026-10-21-application-audit.md), [release and workflow audit](audits/2026-10-21-release-audit.md), and [recovery snapshot follow-up](audits/2026-10-21-recovery-snapshot-review.md) — three-pass findings, source repairs and bounded verification receipts.
 - [History, continuity and duplicate-work audit](audits/2026-10-21-history-audit.md) — reviewed inventory, confirmed status drift, historical navigation repairs, preserved evidence and remaining work.
 - [Complete requirement and issue traceability](audits/2026-10-21-requirement-traceability.md) and [source-record JSON](audits/2026-10-21-requirement-traceability.json) — all 79 original Locked requirements, 20 original Open questions, later decisions and dated issue dispositions, including the separate concurrent #47 request.

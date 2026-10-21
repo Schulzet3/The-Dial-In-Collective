@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "as_of_utc": "2026-10-21",
+  "as_of_utc": "2026-10-21T23:18:35Z",
   "review_scope": "Historical requirements and issue reconciliation; source/SQL/CI/live proof must use the separate audit receipts. Inclusion is not a test PASS.",
   "recovery_source_sha": "c9829d157ef4f430d24af7056ab32661ba8629f5",
   "audit_scope_commit": "f2432bf08a803ba370ff1940d3121305bbce2459",
@@ -2209,7 +2209,7 @@
         "id": "OPS-TASK-NOTIFICATIONS-OWNER-UI-20261017",
         "status": "Confirmed UI evidence",
         "topic": "ChatGPT Tasks notification preferences",
-        "observation": "User screenshot shows ChatGPT Settings → Notifications → Tasks = Push, Email, unchanged throughout prior questioning. Some scheduler metadata returned notifications_enabled=false/email_enabled=false for each task; these booleans do not establish that account-level Tasks notifications are off or that an alert failed. Do not ask the owner to re-enable these settings repeatedly; actual failure notification delivery was not tested by this UI screenshot."
+        "observation": "User screenshot shows ChatGPT Settings \u2192 Notifications \u2192 Tasks = Push, Email, unchanged throughout prior questioning. Some scheduler metadata returned notifications_enabled=false/email_enabled=false for each task; these booleans do not establish that account-level Tasks notifications are off or that an alert failed. Do not ask the owner to re-enable these settings repeatedly; actual failure notification delivery was not tested by this UI screenshot."
       },
       "supersession_references": [],
       "classification": "PRESERVED_PROVENANCE_APPLY_LATEST_NARROW_SUPERSESSION"
@@ -2521,7 +2521,7 @@
         "id": "COMMUNITY-QUALITY-REVIEW-RESEARCH-20261018",
         "status": "Owner-directed implementation refinement, development-only; thresholds tunable, not Locked scientific rules",
         "source": "Owner asked to research unsupported >4x extraction-time median heuristic, amend if needed, build in-app confirm/correct and Community browsing.",
-        "research": "Prior 4x time and 3x ratio multiples were unsourced coding heuristics. NIST outlier detection §1.3.5.17 modified Z >3.5/MAD flags potential anomalies only, and espresso bloom profiles make long extractions legitimate.",
+        "research": "Prior 4x time and 3x ratio multiples were unsourced coding heuristics. NIST outlier detection \u00a71.3.5.17 modified Z >3.5/MAD flags potential anomalies only, and espresso bloom profiles make long extractions legitimate.",
         "approved_intent": "All-green shots on verified coffees contribute automatically after source/quality checks; if sufficiently unusual, ask user to verify or correct, never auto-reject an unconventional legitimate shot solely due to extraction time/ratio.",
         "staged_implementation": "Five comparable own prior shots or five distinct other contributors; scaled MAD score >3.5 and practical floors; revision/fingerprint-bound member confirmation, private review inbox; sanitized Community browser RPC only; revoke direct authenticated projection table SELECT. All figures provisional development heuristics.",
         "releases": "As of this record NOT deployed to live. Real Yirgacheffe quality state remains pending; read-only dry run shows 1 prior matching personal shot and 0 independent eligible contributors, so not statistically flaggable. A further coordinated Supabase/Netlify production release needs fresh explicit owner approval.",
@@ -2715,7 +2715,7 @@
         "id": "UX-COMMUNITY-RELEASE-CONTEXT-20261018-01",
         "status": "Locked; Supabase migration applied and UI published; real owner member-phone browse accepted, signed multi-account privacy proof remains open in #41",
         "owner_answer": "A. Use other verified release details when dates are unavailable. Proceed with the release grouping in development, preserve separate canonical release identities, and do not publish yet.",
-        "supersedes_only": "§22.3A historical frontend-only identity caveat, now addressed by planned server-sanitized canonical release key; preserves all other prior Locked Community and personal Coffee behaviors.",
+        "supersedes_only": "\u00a722.3A historical frontend-only identity caveat, now addressed by planned server-sanitized canonical release key; preserves all other prior Locked Community and personal Coffee behaviors.",
         "parent_group": "public roaster+coffee name",
         "child_group": "stable SHA-256 of verified canonical coffee.id; never contributor/shot/user",
         "one_tap": "coffee opens all loaded compact shot rows; release headings not additional disclosure; individual ratings stay collapsed",
@@ -2822,7 +2822,7 @@
         "owner_interpretation": "Do not require paid Supabase Pro or HaveIBeenPwned breach protection before testing/inviting the limited beta. Continue the existing release-readiness work without changing billing or Auth configuration.",
         "risk_boundary": "The app still stores password-based logins, email identity, private coffee shots and personal notes. Do not assert accounts contain no sensitive or private data; this exemption covers only optional breached-password rejection.",
         "preserves_locked": [
-          "Existing §4.2 primary password-based email authentication",
+          "Existing \u00a74.2 primary password-based email authentication",
           "2026-10-12 8+ uppercase+special new-password rule",
           "verified email requirement",
           "invitation-only member admission",
@@ -2834,7 +2834,7 @@
         "plan_or_auth_change_authorized": false,
         "product_scope": "invite-only private beta only; reconsider for public launch, paid security review, or increased actual risk",
         "source_refs": [
-          "docs/MASTER_SPECIFICATION.md §4.4",
+          "docs/MASTER_SPECIFICATION.md \u00a74.4",
           "docs/CURRENT_STATUS.md",
           "GitHub #27 for provider warning",
           "#9 and #11 for real-account security",
@@ -2891,14 +2891,14 @@
       "record": {
         "id": "ACCESS-SINGLE-USE-CODES-20261018-01",
         "status": "OWNER LOCKED; DEPLOYED; LIVE OWNER ADMIN GENERATE/REVOKE PASSED; redeem and member Remove/Restore acceptance pending",
-        "exact_owner_answer": "Can you confirm that I can generate the codes and remove accounts as needed from within the app’s admin portal? I agree that each code should only be usable for one email/account creation.",
+        "exact_owner_answer": "Can you confirm that I can generate the codes and remove accounts as needed from within the app\u2019s admin portal? I agree that each code should only be usable for one email/account creation.",
         "required_ui": "Self-service admin portal Generate Code, copy once, view status, Revoke Code, and Remove Access / Restore Access for nonadmin existing member accounts.",
         "required_backend": "Every NEW portal-generated invitation max_uses=1, expires_at NULL, only one distinct email-confirmed auth.users account can be admitted per code; no client-selectable multiuse capacity and no backend multiuse issue parameter.",
         "administrative_protection": "Existing one administrator role and admitted membership do not time-expire or require another invite; all app admin identities cannot be disabled through new UI or server RPC.",
         "member_permanence": "Members admitted once retain account/shot/notes and access indefinitely unless admin disables; Supabase login session may require renewal; no promise of immunity from host admin/deletion/outage.",
         "removal_definition": "Admin-only reversible Remove Access (enabled=false), not physical deletion; same Auth identity and shots/notes/Community history retained. Owner expressly declined beta hard-delete on 2026-10-18 (ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01).",
         "historical_compatibility": "Do not modify historic issued/redeemed invite rows, token hashes, or existing admission, member/shot data. Preserve server-side rate-limit, admin gating, email-verified requirements.",
-        "specifically_supersedes": "Only earlier §4.5 multiuse (5/unlimited) new-code options and Open default; does not supersede any other Locked requirements or 79-baseline decisions.",
+        "specifically_supersedes": "Only earlier \u00a74.5 multiuse (5/unlimited) new-code options and Open default; does not supersede any other Locked requirements or 79-baseline decisions.",
         "explicit_release_permission": "NONE; development source/tests only. Hosted SQL, Netlify publish, real code generation/account actions each require separate authorization.",
         "source_commits": [
           "f1af82d95f72a4396d82ff4e48429fa25e5bb6b0",
@@ -2926,7 +2926,7 @@
       "record": {
         "id": "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01",
         "status": "OWNER LOCKED; DEPLOYED (server-only Remove/Restore); real nonadmin live Remove/Restore retention acceptance still pending",
-        "exact_owner_clarification": "I don’t think we need an actual account deletion, remove Access would be sufficient, don’t you?",
+        "exact_owner_clarification": "I don\u2019t think we need an actual account deletion, remove Access would be sufficient, don\u2019t you?",
         "previous_request": "Yes, I want to preserve the shots entered by a user, even if their account is deleted",
         "clarified_interpretation": "For initial beta, no actual account deletion. Remove/Restore Access is sufficient; preserve existing Auth identity, private shots/notes/recipes and anonymous Community history intact.",
         "access_model": "admin-only toggle private.beta_members.enabled with server-side private.is_admin and administrator self/other-admin protection",
@@ -2960,22 +2960,22 @@
       "tracking_id": "current_owner_approved_invite_only_technical_pilot_20261018",
       "source": "docs/DECISION_LEDGER.json#/current_owner_approved_invite_only_technical_pilot_20261018",
       "decision_id": "PILOT-INVITE-ONLY-TECHNICAL-20261018-01",
-      "recorded_status": "OWNER LOCKED — pilot milestone and preparation approved; NOT launched, NOT authorized to publish or migrate",
+      "recorded_status": "OWNER LOCKED \u2014 pilot milestone and preparation approved; NOT launched, NOT authorized to publish or migrate",
       "issues": [],
       "record": {
         "id": "PILOT-INVITE-ONLY-TECHNICAL-20261018-01",
-        "status": "OWNER LOCKED — pilot milestone and preparation approved; NOT launched, NOT authorized to publish or migrate",
+        "status": "OWNER LOCKED \u2014 pilot milestone and preparation approved; NOT launched, NOT authorized to publish or migrate",
         "owner_exact_approval": "I approve proceeding toward a limited invitation-only technical pilot, while preserving all locked decisions and requiring my separate approval before publishing or applying production migrations.",
-        "approved_milestone": "Limited private technical/early-access pilot to solicit real user feedback on currently functioning Log Shot → Rate → Recommendation and cloud/mobile/offline/Community flows while building remaining required features.",
+        "approved_milestone": "Limited private technical/early-access pilot to solicit real user feedback on currently functioning Log Shot \u2192 Rate \u2192 Recommendation and cloud/mobile/offline/Community flows while building remaining required features.",
         "precise_scope": "Preparation, planning, read-only checks, development-only tests, documentation, authentic but non-production safeguards and issue triage.",
         "non_authorization": [
           "production Supabase DDL/migration or user-data write",
           "Netlify production publish, redeploy, preview/publication, deployment-credit charge or billing changes",
           "real invitation/account creation, issuance, revocation or tester outreach",
           "Cloudflare/Resend/Apps Script/other provider configuration changes",
-          "public beta release or waiving §41 core-beta criteria"
+          "public beta release or waiving \u00a741 core-beta criteria"
         ],
-        "beta_status": "NOT specification-complete. §41 all 20 acceptance criteria remain; no amendment, grandfathering or waiver.",
+        "beta_status": "NOT specification-complete. \u00a741 all 20 acceptance criteria remain; no amendment, grandfathering or waiver.",
         "retained_core_p0": [
           "#10 alternate preferred recipe families and windows",
           "#12 complete tiered recommendations, provenance and contributor balance",
@@ -2986,7 +2986,7 @@
           "ACCESS-SINGLE-USE-CODES-20261018-01",
           "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01"
         ],
-        "suggested_cohort": "3–5 trusted testers over approximately one week (historical recommendation only, NOT yet owner-selected headcount/duration).",
+        "suggested_cohort": "3\u20135 trusted testers over approximately one week (historical recommendation only, NOT yet owner-selected headcount/duration).",
         "planned_migrations_in_order": [
           "20261018221843_dic_community_release_context.sql",
           "20261018235549_dic_admin_beta_invitation_controls.sql"
@@ -3058,7 +3058,7 @@
         "live_postflight": "30/30 Supabase migrations; 16 shots/notes, 2 enabled members, 1 admin, 2 Community, no usable new codes; anon admin and Community EXECUTE denied",
         "backup_status": "Owner Google Drive backup.age exact ciphertext match before SQL; postrelease main encrypted backup source pin moved to 40b97f33; latest scheduled offsite receipt after publish pending",
         "genuine_member_acceptance": "UNVERIFIED: requires user-mediated live signed browser admin and second-member sign-in; synthetic/role tests not a substitute",
-        "reuse_permission": "NONE — this one release approval has been consumed",
+        "reuse_permission": "NONE \u2014 this one release approval has been consumed",
         "current_live_acceptance": "Owner-admin portal, one Generate Code and one Revoke Code confirmed in production; 1 issued, 1 revoked, 0 active, 16/16 original data counts intact. Genuine first redemption, second-account denial, member Remove/Restore and postrelease offsite backup remain unverified.",
         "live_acceptance_report": "docs/LIVE_ADMIN_INVITATION_ACCEPTANCE_2026-10-19.md"
       }
@@ -3173,7 +3173,7 @@
         "decision_id": "UX-GRINDER-RANGE-INFO-20261019",
         "status": "Locked",
         "owner_source": "2026-10-19 owner approval in The Dial In Collective chat; tracked in GitHub issue #39",
-        "scope": "New Setup — grinder range explanatory copy and information interaction only",
+        "scope": "New Setup \u2014 grinder range explanatory copy and information interaction only",
         "heading": "Grinder Espresso Range",
         "icon": "Lowercase i next to heading; tap/click/keyboard toggles description; collapsed by default",
         "exact_help_text": "Enter the range of grind settings you would normally use for espresso, not the grinder's entire adjustment range.",
@@ -3181,7 +3181,7 @@
           "Existing Finest Espresso Setting and Coarsest Espresso Setting fields and numeric validation",
           "Existing higher number coarser / lower number finer calibration interpretation (not a verified universal standard)",
           "Every saved setup, shot snapshot and recommendation-engine calculation",
-          "Fast Log Shot → Rate → Recommendation and all original Locked decisions"
+          "Fast Log Shot \u2192 Rate \u2192 Recommendation and all original Locked decisions"
         ],
         "not_authorized": [
           "Grinder direction/step/multi-turn scale generalization (issue #17 remains open)",
@@ -3305,7 +3305,7 @@
       "record": {
         "decision_id": "EXTRACTOR-ADAPTIVE-RETRY-COMPRESSION-COMPACTION-20261020",
         "status": "Locked; deployed READY/current 2026-10-20; single publication authorization consumed",
-        "owner_source": "October 20 2026 explicit instruction: Go ahead and implement recommendations 1–3 then test everything and publish and deploy all confirmed changes to the live app now. @Supabase @Netlify @GitHub",
+        "owner_source": "October 20 2026 explicit instruction: Go ahead and implement recommendations 1\u20133 then test everything and publish and deploy all confirmed changes to the live app now. @Supabase @Netlify @GitHub",
         "approved": [
           "Bounded HTML-only 2MB retry on a safe explicitly product-shaped URL after default 900KB size refusal",
           "Gzip/Brotli via existing TLS-pinned transport with compressed and decompressed caps",
@@ -3552,7 +3552,7 @@
       "record": {
         "decision_id": "COFFEE-DUPLICATE-FIRST-20261021",
         "status": "Locked, owner explicitly approved build/implementation; deployed and real-device acceptance not yet established",
-        "owner_quote": "I agree with your simplified workflow. Please Build, test, and implement it. Once you’ve done that, please publish all these changes (and any other pending updates) to @Netlify you are approved to deploy.",
+        "owner_quote": "I agree with your simplified workflow. Please Build, test, and implement it. Once you\u2019ve done that, please publish all these changes (and any other pending updates) to @Netlify you are approved to deploy.",
         "scope": "Any admitted member's genuinely distinct roaster/name coffee autoapproved without official product evidence; deterministic compatible same-release canonical reuse; Pending for genuine unresolved duplicates. Provenance separate from catalog approval.",
         "supersedes": [
           "Oct14 admin-only exception requiring independent official source for all other members' canonical approvals",
@@ -3561,7 +3561,7 @@
         "preserved": [
           "Only actual same-release ID merges and original first-submission name precedence",
           "Historical personal IDs/shots/recipes/offline data and audit",
-          "Approved canonical Community eligibility under existing §22 quality/privacy checks",
+          "Approved canonical Community eligibility under existing \u00a722 quality/privacy checks",
           "Source claim honesty, signed identity, SSRF/URL and rate controls",
           "Mango reserved Pending for manual Admin acceptance",
           "No bulk backfill of historical Pending records"
@@ -3640,7 +3640,7 @@
       "record": {
         "decision_id": "OPS-HANDS-FREE-APPROVED-RELEASE-20261021",
         "status": "LOCKED: owner requires after one Work setup zero manual provider navigation/workflow dispatch for routine authorized future releases; setup and acceptance NOT yet verified",
-        "owner_quote": "To confirm, once I complete this work session, you will be able to handle all development, testing, implementation, building, preflight, deployment to live app production, etc. Without manual input from me? Like we did in literally every other app update since the beginning? I need you to make sure that’s the case. No excuses or exceptions",
+        "owner_quote": "To confirm, once I complete this work session, you will be able to handle all development, testing, implementation, building, preflight, deployment to live app production, etc. Without manual input from me? Like we did in literally every other app update since the beginning? I need you to make sure that\u2019s the case. No excuses or exceptions",
         "operational_intent": "Chat-originated, assistant-executed, approved updates through test, backup, preflight, serialized single-use release, Netlify READY and verification; no manual owner GitHub/Netlify actions after initial Work setup.",
         "implementation_gap": "Current main workflow only has manual workflow_dispatch; ordinary connected GitHub tool lacks dispatch or Actions variable writes; preceding Work handoff insufficient for repeating fully hands-free releases.",
         "accepted_implementation_scope": [
@@ -3955,7 +3955,7 @@
       ],
       "comment_count_retrieved": 1,
       "latest_comment_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/25#issuecomment-6230601943",
-      "latest_comment_body": "Owner-approved URL extractor enhancement is **implemented and accepted in development, NOT published**.\n\n- Full app Node tests: 248/248 PASS, build PASS (run 39009070904). Cloud UX PASS (39009070902). Previous seven-tier SQL full migration chain PASS (39006759139).\n- Current public HTML acceptance [run 39009156328](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39009156328): **8/9 concrete product pages parsed** (Proud Mary Ovidio Gomez, Queen City Banko Gotiti Washed, Onyx Mullugeta Muntasha, PERC Franky Hoyos, SEY Chorso Bule, Black & White Los Altos, Little Wolf Tegu, Heart Phono). Queen City homepage correctly returned ambiguous/missing product rather than fabricating one. The Picky Chemist Wix product page exceeded the **unchanged 900 KB protected fetch ceiling**; synthetic French label parsing works, but do not claim live success.\n- Important regression corrections: Shopify ProductGroup vs size/grind variants (PERC); exact Onyx seven-tier Ultra Light product metric, #133 Agtron and explicit scoped product details, rejecting unrelated educational text; PERC specialty processing/rest/Breville Espresso 16g→40g/25s/205°F; Proud Mary 1:2.5 ratio without fabricated dose or time; Queen City split delimiter; Little Wolf stale OG data excluded and actual product paragraph split; SEY explicit Washed. Extra product facts are displayed as escaped optional source details, not persisted into unsupported canonical fields.\n- Security/UX preserved: no secret use; HTTPS DNS-pinned no redirect to private hosts; 900 KB max response; 12/day shared account preview quota, >=30s cooldown; manual input fallback; no auto Verified promotion; all five old roast priors and seven owner-Locked labels preserved.\n- Source/staged details: [acceptance report](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md), [Current Status](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/CURRENT_STATUS.md).\n- User explicitly approved spending Netlify credits and publishing after safe completion, but Netlify **current balance is not accessible** through connector. `docs/NETLIFY_CREDIT_LEDGER.json` still requires a post-release refreshed, verified credit snapshot (`post_release_billing_refresh_needed=true`). The last 970/1000 observation is historical; do not silently clear it or bypass Locked build guard. **No production release marker or Netlify deployment performed.**\n- Once live billing is verified (>=15 Personal credits), publish one intentional release of the seven-tier frontend and this improved extractor, confirm real production, then apply guarded owner-approved five-coffee corrections (Wuri stays private Pending), verify 15 retained shots/community invariants and coordinate JWT-protected trusted Edge parser and published-source encrypted backup pin.\n\nThis record is a milestone in staging, not a claim that real member acceptance or production publication passed."
+      "latest_comment_body": "Owner-approved URL extractor enhancement is **implemented and accepted in development, NOT published**.\n\n- Full app Node tests: 248/248 PASS, build PASS (run 39009070904). Cloud UX PASS (39009070902). Previous seven-tier SQL full migration chain PASS (39006759139).\n- Current public HTML acceptance [run 39009156328](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39009156328): **8/9 concrete product pages parsed** (Proud Mary Ovidio Gomez, Queen City Banko Gotiti Washed, Onyx Mullugeta Muntasha, PERC Franky Hoyos, SEY Chorso Bule, Black & White Los Altos, Little Wolf Tegu, Heart Phono). Queen City homepage correctly returned ambiguous/missing product rather than fabricating one. The Picky Chemist Wix product page exceeded the **unchanged 900 KB protected fetch ceiling**; synthetic French label parsing works, but do not claim live success.\n- Important regression corrections: Shopify ProductGroup vs size/grind variants (PERC); exact Onyx seven-tier Ultra Light product metric, #133 Agtron and explicit scoped product details, rejecting unrelated educational text; PERC specialty processing/rest/Breville Espresso 16g\u219240g/25s/205\u00b0F; Proud Mary 1:2.5 ratio without fabricated dose or time; Queen City split delimiter; Little Wolf stale OG data excluded and actual product paragraph split; SEY explicit Washed. Extra product facts are displayed as escaped optional source details, not persisted into unsupported canonical fields.\n- Security/UX preserved: no secret use; HTTPS DNS-pinned no redirect to private hosts; 900 KB max response; 12/day shared account preview quota, >=30s cooldown; manual input fallback; no auto Verified promotion; all five old roast priors and seven owner-Locked labels preserved.\n- Source/staged details: [acceptance report](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md), [Current Status](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/CURRENT_STATUS.md).\n- User explicitly approved spending Netlify credits and publishing after safe completion, but Netlify **current balance is not accessible** through connector. `docs/NETLIFY_CREDIT_LEDGER.json` still requires a post-release refreshed, verified credit snapshot (`post_release_billing_refresh_needed=true`). The last 970/1000 observation is historical; do not silently clear it or bypass Locked build guard. **No production release marker or Netlify deployment performed.**\n- Once live billing is verified (>=15 Personal credits), publish one intentional release of the seven-tier frontend and this improved extractor, confirm real production, then apply guarded owner-approved five-coffee corrections (Wuri stays private Pending), verify 15 retained shots/community invariants and coordinate JWT-protected trusted Edge parser and published-source encrypted backup pin.\n\nThis record is a milestone in staging, not a claim that real member acceptance or production publication passed."
     },
     {
       "number": 26,
@@ -4001,7 +4001,7 @@
       "related_issues": [],
       "comment_count_retrieved": 12,
       "latest_comment_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/28#issuecomment-6276958560",
-      "latest_comment_body": "2026-10-19 current extractor release backup continuity: published Netlify SHA `8769508fc234f4fb63f89920b5a936d259936abf` now pinned on dedicated backup-only `main` by commit `26f86e181279b81cad7c8f6eba2638531c01cc03`. Encrypted GitHub Actions backup [run 39321544753](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39321544753) PASSED with private ciphertext artifact ID `12220751175`, ZIP SHA-256 `0ffd754669b6c35bbc8e1da6f68dcb82034da980a33d345329aee41eba72041e`. Push-only artifact does **not** establish scheduled Google Apps Script→Drive courier delivery, alert functioning, independent checksum of remote copy or full isolated restore. Those remain open. Preserve older archives."
+      "latest_comment_body": "2026-10-19 current extractor release backup continuity: published Netlify SHA `8769508fc234f4fb63f89920b5a936d259936abf` now pinned on dedicated backup-only `main` by commit `26f86e181279b81cad7c8f6eba2638531c01cc03`. Encrypted GitHub Actions backup [run 39321544753](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39321544753) PASSED with private ciphertext artifact ID `12220751175`, ZIP SHA-256 `0ffd754669b6c35bbc8e1da6f68dcb82034da980a33d345329aee41eba72041e`. Push-only artifact does **not** establish scheduled Google Apps Script\u2192Drive courier delivery, alert functioning, independent checksum of remote copy or full isolated restore. Those remain open. Preserve older archives."
     },
     {
       "number": 29,
@@ -4058,7 +4058,7 @@
       ],
       "comment_count_retrieved": 3,
       "latest_comment_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/32#issuecomment-6245961349",
-      "latest_comment_body": "## Production publication verified — 2026-10-18 UTC\n\n- **Netlify published:** READY/CURRENT [deploy 6ad4541c0e2686c05d66a4f2](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad4541c0e2686c05d66a4f2), source [ebd2bed149f6c9fed998a861a0b8ac819fab98db](https://github.com/Schulzet3/The-Dial-In-Collective/commit/ebd2bed149f6c9fed998a861a0b8ac819fab98db), published 2026-10-18T05:08:00.011Z, app.dialincollective.com; 196 files secret-scanned, zero leaks reported; new Netlify `coffee-url-preview` function deployed.\n- **Supabase official Edge:** `dic-preview-coffee` ACTIVE v3, `verify_jwt=true` and all four source modules deployed including `agtron-roast.mjs`. `dic-verify-coffee` ACTIVE v4 unchanged.\n- **Data preservation read-back:** 15 shots; 15 notes; 4 canonical coffees; 4 workspace coffees; 1 community shot. No SQL change or member coffee edit.\n- **GitHub running status:** updated [CURRENT_STATUS.md](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/CURRENT_STATUS.md) via commit `bfc3f5b72706710550cefd7c84b19b3a51599a2b`. Updated separate `main` nightly encrypted app-source pin to exact published SHA via commit [901b36b](https://github.com/Schulzet3/The-Dial-In-Collective/commit/901b36bce50b5590e67594a333b6d12db84f64db). The following scheduled backup/Drive transfer has not yet been checked.\n- **Remaining acceptance:** authenticated production user to open Add Coffee -> URL Autofill with official PERC Kenya Mara Estate link; verify the preview shows producer Mara Estate, process Anaerobic, 78.4 Agtron and a *provisional* Gourmet-ground Light suggestion without overwriting filled fields. Synthetic and real public source tests passed prior to publication, but user-authenticated browser acceptance is **not** claimed done. Existing saved PERC record was not located in queried server tables and was not modified.\n- **Release authorization consumed.** No future release approved, no new credentials shared, no Netlify plan purchase, no confirmation of actual 15-credit deduction from connector. Keep this issue open until owner acceptance.\n"
+      "latest_comment_body": "## Production publication verified \u2014 2026-10-18 UTC\n\n- **Netlify published:** READY/CURRENT [deploy 6ad4541c0e2686c05d66a4f2](https://app.netlify.com/projects/the-dial-in-collective/deploys/6ad4541c0e2686c05d66a4f2), source [ebd2bed149f6c9fed998a861a0b8ac819fab98db](https://github.com/Schulzet3/The-Dial-In-Collective/commit/ebd2bed149f6c9fed998a861a0b8ac819fab98db), published 2026-10-18T05:08:00.011Z, app.dialincollective.com; 196 files secret-scanned, zero leaks reported; new Netlify `coffee-url-preview` function deployed.\n- **Supabase official Edge:** `dic-preview-coffee` ACTIVE v3, `verify_jwt=true` and all four source modules deployed including `agtron-roast.mjs`. `dic-verify-coffee` ACTIVE v4 unchanged.\n- **Data preservation read-back:** 15 shots; 15 notes; 4 canonical coffees; 4 workspace coffees; 1 community shot. No SQL change or member coffee edit.\n- **GitHub running status:** updated [CURRENT_STATUS.md](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/CURRENT_STATUS.md) via commit `bfc3f5b72706710550cefd7c84b19b3a51599a2b`. Updated separate `main` nightly encrypted app-source pin to exact published SHA via commit [901b36b](https://github.com/Schulzet3/The-Dial-In-Collective/commit/901b36bce50b5590e67594a333b6d12db84f64db). The following scheduled backup/Drive transfer has not yet been checked.\n- **Remaining acceptance:** authenticated production user to open Add Coffee -> URL Autofill with official PERC Kenya Mara Estate link; verify the preview shows producer Mara Estate, process Anaerobic, 78.4 Agtron and a *provisional* Gourmet-ground Light suggestion without overwriting filled fields. Synthetic and real public source tests passed prior to publication, but user-authenticated browser acceptance is **not** claimed done. Existing saved PERC record was not located in queried server tables and was not modified.\n- **Release authorization consumed.** No future release approved, no new credentials shared, no Netlify plan purchase, no confirmation of actual 15-credit deduction from connector. Keep this issue open until owner acceptance.\n"
     },
     {
       "number": 33,
@@ -4074,7 +4074,7 @@
       ],
       "comment_count_retrieved": 23,
       "latest_comment_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6299303046",
-      "latest_comment_body": "**Oct 20 second release — source and live provider receipt.** Added exact-product sparse Shopify/Woo supplement with global request deadline, carefully compatible multi-part origins, localized Woo permalink checks, product-only text/plain HTML validation and narrow source-explicit French taste/lot handling. Public run [39481478565](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39481478565) PASS: 25/31 broad URL inventory, 15/15 adaptive selected products (plus rejected homepage), Picky recoverable 2MB and now **nine source-backed fields**, Mango Ecwid valid again, source-compaction parity. [429/429 Node tests / lint / build](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39481478470) PASS. Netlify **READY/current deploy `6ad7be20bf672d5c8936f19a`**, source `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`, function present, 0 secret matches. No AI, no SQL/Edge/data writes. Remaining: roaster-owned source drift and actual signed-in member field-by-field iOS acceptance; do not close until those checks and scope triage. Details in `docs/RELEASE_2026_10_20_PWA_REFRESH_AND_EXTRACTOR_COMPLETENESS.md`."
+      "latest_comment_body": "**Oct 20 second release \u2014 source and live provider receipt.** Added exact-product sparse Shopify/Woo supplement with global request deadline, carefully compatible multi-part origins, localized Woo permalink checks, product-only text/plain HTML validation and narrow source-explicit French taste/lot handling. Public run [39481478565](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39481478565) PASS: 25/31 broad URL inventory, 15/15 adaptive selected products (plus rejected homepage), Picky recoverable 2MB and now **nine source-backed fields**, Mango Ecwid valid again, source-compaction parity. [429/429 Node tests / lint / build](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39481478470) PASS. Netlify **READY/current deploy `6ad7be20bf672d5c8936f19a`**, source `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`, function present, 0 secret matches. No AI, no SQL/Edge/data writes. Remaining: roaster-owned source drift and actual signed-in member field-by-field iOS acceptance; do not close until those checks and scope triage. Details in `docs/RELEASE_2026_10_20_PWA_REFRESH_AND_EXTRACTOR_COMPLETENESS.md`."
     },
     {
       "number": 34,
@@ -4166,7 +4166,7 @@
       ],
       "comment_count_retrieved": 7,
       "latest_comment_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/39#issuecomment-6302593239",
-      "latest_comment_body": "**2026-10-20 independent user-reported grinder info omission triage.** At Netlify production deploy `6ad7be20bf672d5c8936f19a`, exact source `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`, **New Setup** already has the owner-Locked **Grinder Espresso Range** heading, small lowercase `i`, exact hidden text and toggle handler. The same source on development contains it. HOWEVER, **Settings → Your Setup** has only the active setup name/Rename/Advanced options, no editable grinder-range panel or icon. The canonical decision `UX-GRINDER-RANGE-INFO-20261019` explicitly scopes the icon to **New Setup only**. We will not silently extend editing hardware on existing setup or implement unresolved grinder direction/scale #17. Added a real synthetic 390px phone browser acceptance opening Settings→Add Another Setup→New Setup, toggling the i to reveal exact text, toggling back, and preserving unsaved numeric fields, with screenshot; CI runs 39502967215 and 39502967269 PASS. Await ONE owner clarification: did the missing i appear on **Add Another Setup/New Setup**, or the **existing Settings → Your Setup** screen? Important: this is a route/scope ambiguity, not proof that a Netlify source change was omitted. No production change, SQL or build credits incurred. [Current work journal](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md), [coverage matrix](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/APPROVAL_COVERAGE_MATRIX.json)."
+      "latest_comment_body": "**2026-10-20 independent user-reported grinder info omission triage.** At Netlify production deploy `6ad7be20bf672d5c8936f19a`, exact source `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`, **New Setup** already has the owner-Locked **Grinder Espresso Range** heading, small lowercase `i`, exact hidden text and toggle handler. The same source on development contains it. HOWEVER, **Settings \u2192 Your Setup** has only the active setup name/Rename/Advanced options, no editable grinder-range panel or icon. The canonical decision `UX-GRINDER-RANGE-INFO-20261019` explicitly scopes the icon to **New Setup only**. We will not silently extend editing hardware on existing setup or implement unresolved grinder direction/scale #17. Added a real synthetic 390px phone browser acceptance opening Settings\u2192Add Another Setup\u2192New Setup, toggling the i to reveal exact text, toggling back, and preserving unsaved numeric fields, with screenshot; CI runs 39502967215 and 39502967269 PASS. Await ONE owner clarification: did the missing i appear on **Add Another Setup/New Setup**, or the **existing Settings \u2192 Your Setup** screen? Important: this is a route/scope ambiguity, not proof that a Netlify source change was omitted. No production change, SQL or build credits incurred. [Current work journal](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md), [coverage matrix](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/APPROVAL_COVERAGE_MATRIX.json)."
     },
     {
       "number": 40,
@@ -4241,7 +4241,7 @@
       ],
       "comment_count_retrieved": 9,
       "latest_comment_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/44#issuecomment-6327135722",
-      "latest_comment_body": "### 2026-10-21 21:34Z — production LIVE; Issue #44 remains OPEN for native Actions final-push defect\n\nOwner-approved unique grant `DIC-20261021-BETA-COFFEE-01` successfully published on Netlify **READY/current** deploy `6ad92fd1d706315f29032892` (`2026-10-21T21:34:34.367Z`), site `https://app.dialincollective.com`, branch `release/production`, immutable release commit `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`, underlying tested source `c6976b1fc86ed5e6b38c0c38831950fca017b3a4`. Recursive Git tree verified original source file blobs match and only four expected release claim/ledger docs changed. One-use consumed ledger on release ref and development now has exactly ONE ID. Supabase after deploy: 22 shots/22 notes, 4 coffees, 7 submissions, 2 Community, 5 beta-member records; SQL migrations 2/2 applied. Zero Netlify secret scan matches. No paid upgrades, public repo, extra SQL or Auth mutation.\n\nChat-trigger workflow **is installed** and inert validate_only tested PASS (`39659012218`). Genuine publish Actions run `39679465858` validated and constructed the correct immutable claim but git push failed (stderr hidden); prior stale-head release attempt safely refused (`39659224589`). Rather than create a second grant or build, this chat independently reverified exact Git source tree and completed **the same generated claim** with GitHub connector `update_ref(force:false, expected_sha=e7e16e5...)`. Netlify then published it READY. This is successful ordinary-chat-assisted release with preserved one-use invariants, NOT proof native Actions autonomous final push is fixed. Investigate GitHub workflow-path permission or other host rejection, surface safe sanitized stderr, test fix inertly and in next separately approved release. GitHub Free/private enforcement limitations remain; future publication requires fresh owner approval. Actual Netlify credit debit inaccessible; estimate 15, last Work observation 790. Real owner device acceptance pending. Source/docs ledger reconciliation at dev `c9829d157ef4f430d24af7056ab32661ba8629f5` (CI underway). Keep issue OPEN."
+      "latest_comment_body": "### 2026-10-21 21:34Z \u2014 production LIVE; Issue #44 remains OPEN for native Actions final-push defect\n\nOwner-approved unique grant `DIC-20261021-BETA-COFFEE-01` successfully published on Netlify **READY/current** deploy `6ad92fd1d706315f29032892` (`2026-10-21T21:34:34.367Z`), site `https://app.dialincollective.com`, branch `release/production`, immutable release commit `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`, underlying tested source `c6976b1fc86ed5e6b38c0c38831950fca017b3a4`. Recursive Git tree verified original source file blobs match and only four expected release claim/ledger docs changed. One-use consumed ledger on release ref and development now has exactly ONE ID. Supabase after deploy: 22 shots/22 notes, 4 coffees, 7 submissions, 2 Community, 5 beta-member records; SQL migrations 2/2 applied. Zero Netlify secret scan matches. No paid upgrades, public repo, extra SQL or Auth mutation.\n\nChat-trigger workflow **is installed** and inert validate_only tested PASS (`39659012218`). Genuine publish Actions run `39679465858` validated and constructed the correct immutable claim but git push failed (stderr hidden); prior stale-head release attempt safely refused (`39659224589`). Rather than create a second grant or build, this chat independently reverified exact Git source tree and completed **the same generated claim** with GitHub connector `update_ref(force:false, expected_sha=e7e16e5...)`. Netlify then published it READY. This is successful ordinary-chat-assisted release with preserved one-use invariants, NOT proof native Actions autonomous final push is fixed. Investigate GitHub workflow-path permission or other host rejection, surface safe sanitized stderr, test fix inertly and in next separately approved release. GitHub Free/private enforcement limitations remain; future publication requires fresh owner approval. Actual Netlify credit debit inaccessible; estimate 15, last Work observation 790. Real owner device acceptance pending. Source/docs ledger reconciliation at dev `c9829d157ef4f430d24af7056ab32661ba8629f5` (CI underway). Keep issue OPEN."
     }
   ],
   "deferred_without_dedicated_issue": [
@@ -4566,7 +4566,7 @@
       "created_at": "2026-10-21T22:08:59Z",
       "updated_at": "2026-10-21T22:08:59Z",
       "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/47",
-      "body": "## Owner instruction — 2026-10-21 16:08 America/Denver (predeployment only)\n\n**Approved scope: DEVELOP, BUILD, TEST, NOT PUBLISH.** Reorder admin dashboard cards and sections: Pending Coffees, Conflicts, Approved Coffees, Logged Shots, Accounts. Cards navigate to complete corresponding listings. Creator attribution per record, administrator editing of member-shot/notes and coffee details, optional pending/approved coffee enrichment using existing URL extractor. No password exposure. Owner asserts users consented to sharing all non-password data including notes. Preserve all historical originals, revision controls, audit, and role checks.\n\n**Security and Locked policies:** The current site/admin/view.js expressly excludes owner IDs and private notes. Review canonical spec and ledger; a proposed alteration to locked private-member data needs an explicit narrowly scoped supersession recorded in both canonical files. Until authorized, stage safe UI and backend changes separately. No live Supabase/Auth/SQL/Edge/member mutations, no Netlify build/deploy; separate future production approval remains required.\n\n**Recovered intake:** development/backend-foundation HEAD 0a9646a5348de58fba4f8bf13a31ff8fa52ab8bd, advisory approval CI 39684049016 SUCCESS. Prior current status Netlify READY 6ad92fd1 / published 1e79c458; recheck live providers. Issue created to durably capture instructions before unrelated work.\n\n**Next:** review actual active work journal, master spec, ledger, approvals, affected tests and admin RPC schema; implement permitted work in same-commit journaled commits, CI and private recovery; report exact ready-to-publish scope and open product decision(s).",
+      "body": "## Owner instruction \u2014 2026-10-21 16:08 America/Denver (predeployment only)\n\n**Approved scope: DEVELOP, BUILD, TEST, NOT PUBLISH.** Reorder admin dashboard cards and sections: Pending Coffees, Conflicts, Approved Coffees, Logged Shots, Accounts. Cards navigate to complete corresponding listings. Creator attribution per record, administrator editing of member-shot/notes and coffee details, optional pending/approved coffee enrichment using existing URL extractor. No password exposure. Owner asserts users consented to sharing all non-password data including notes. Preserve all historical originals, revision controls, audit, and role checks.\n\n**Security and Locked policies:** The current site/admin/view.js expressly excludes owner IDs and private notes. Review canonical spec and ledger; a proposed alteration to locked private-member data needs an explicit narrowly scoped supersession recorded in both canonical files. Until authorized, stage safe UI and backend changes separately. No live Supabase/Auth/SQL/Edge/member mutations, no Netlify build/deploy; separate future production approval remains required.\n\n**Recovered intake:** development/backend-foundation HEAD 0a9646a5348de58fba4f8bf13a31ff8fa52ab8bd, advisory approval CI 39684049016 SUCCESS. Prior current status Netlify READY 6ad92fd1 / published 1e79c458; recheck live providers. Issue created to durably capture instructions before unrelated work.\n\n**Next:** review actual active work journal, master spec, ledger, approvals, affected tests and admin RPC schema; implement permitted work in same-commit journaled commits, CI and private recovery; report exact ready-to-publish scope and open product decision(s).",
       "comments_at_fetch": 0
     },
     "classification": "CONCURRENT_PREDEPLOYMENT_REQUEST_PARTIAL_UI_BACKEND_AND_PRIVACY_CONTRACT_UNFINISHED",
@@ -4627,18 +4627,26 @@
       "suite_count": 17,
       "exit_code": 0,
       "integrated_hosted_ci": {
-        "head": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
-        "workflow_conclusions": "ALL_FIVE_SUCCESS",
-        "node_tests": 573,
+        "head": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+        "tree": "c8819ad71ceaf795db60e245bf373c959a102fa2",
+        "merge_commit": "663cc6d779fec99ee788f655d75ebc8d96593a18",
+        "workflow_conclusions": "ALL_FIVE_SUCCESS_BEFORE_AND_AFTER_MERGE",
+        "node_tests": 575,
+        "node_failures": 0,
+        "node_skipped": 0,
         "migrations": 34,
         "sql_suites": 17,
         "signed_http_assertions": 32,
-        "visual_assertions": 117,
-        "note": "Later visual inspection identified narrow headings/empty-panel polish and legacy fixture coverage; final follow-up and exact CI are tracked in completion receipt."
+        "visual_assertions": 151,
+        "screenshots": 38,
+        "final_native_admin_capture_inspections": 6,
+        "other_captures_identical_to_previously_reviewed": 32,
+        "receipt": "docs/audits/2026-10-21-completion-receipt.json",
+        "note": "Final heading/empty-panel and populated-fixture corrections passed exact CI and were merged. Synthetic HTTP/browser evidence remains separate from hosted account/device acceptance."
       }
     },
     "remaining_acceptance": [
-      "Initial exact integrated core, continuity, SQL, signed HTTP and Chromium workflows passed at d556656140aed478bd1a1c83c6b2b2734cdfad69. Complete the narrow final presentation/realistic visual-fixture follow-up and its exact CI; see completion receipt.",
+      "Source integration and all five exact application workflows are complete at the recorded final source and actual merge. Remaining acceptance below concerns hosted real accounts/devices and a separately authorized release, not pending source CI.",
       "Hosted real-account administrator/member behavior and owner-device acceptance for the expanded controls remain unperformed. Thirty-two actual HMAC-signed isolated HTTP checks are synthetic acceptance, not hosted GoTrue sessions; do not repeat already accepted unrelated role flows.",
       "Production SQL/Netlify application requires separately scoped owner authorization; the consumed prior release grant cannot be reused."
     ],
@@ -4656,7 +4664,7 @@
     }
   },
   "final_issue_dispositions_20261021": {
-    "as_of_utc": "2026-10-21T23:02:00Z",
+    "as_of_utc": "2026-10-21T23:15:47Z",
     "preserves_original_inventory": true,
     "issue_bodies_readback_exact": true,
     "all_existing_states_preserved": true,
@@ -4806,6 +4814,130 @@
         "body_readback_exact": true,
         "state": "open"
       }
-    ]
+    ],
+    "current_evidence_links_branch": "development/backend-foundation",
+    "final_readback": [
+      {
+        "number": 5,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 9,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 10,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 12,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 21,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 22,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 23,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 24,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 25,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 27,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 28,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 30,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 33,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 36,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 38,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 39,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 40,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 43,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 44,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 47,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      }
+    ],
+    "original_bodies_and_former_titles_preserved": true
   }
 }
