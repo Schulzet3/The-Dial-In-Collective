@@ -2,11 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validateChatReleaseRequest as validate,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH}
  from '../scripts/release/chat-release-request.mjs';
-const S='1'.repeat(40),D='2'.repeat(40),R='3'.repeat(40);
+const S='1'.repeat(40),D='2'.repeat(40),R='3'.repeat(40),M='4'.repeat(40),E='5'.repeat(40);
 const NOW='2026-10-21T18:00:00Z';
 const APPROVAL="Owner's exact release grant in GitHub source-of-truth";
 const request={
- schema_version:1,release_id:'DIC-20261021-EXAMPLE1',
+ schema_version:1,mode:'validate_only',expected_main_parent_sha:M,
+ release_id:'DIC-20261021-EXAMPLE1',
  tested_source_sha:S,expected_release_head_sha:R,
  expected_development_head_sha:D,owner_approval_source:APPROVAL,
  created_at_utc:'2026-10-21T17:58:00Z',
@@ -19,7 +20,8 @@ const request={
   observed_at_utc:'2026-10-21T17:57:00Z',source:'Private Netlify billing dashboard'}
 };
 const base={request,changedPaths:[CHAT_REQUEST_PATH,OPS_JOURNAL_PATH],
- commitSubject:'ops: one approved chat release request [skip netlify]',
+ commitSubject:'ops(release-request): DIC-20261021-EXAMPLE1 [skip netlify]',
+ eventBeforeSha:M,commitParentSha:M,eventHeadSha:E,checkedOutHeadSha:E,
  nowIso:NOW,expectedReleaseHead:R,expectedDevelopmentHead:D,
  ownerApprovalSource:APPROVAL};
 test('one precisely scoped, recently checked approved request passes inert validation',()=>{
@@ -37,8 +39,9 @@ test('missing request, unknown fields and additional/absent commit paths fail cl
   assert.throws(()=>validate({...base,changedPaths:paths}),/only the request/);
 });
 test('never permit an unmarked or publishing request commit',()=>{
- for(const commitSubject of ['ops request','Release DIC: DIC-20261021-EXAMPLE1 [dic-publish]'])
-  assert.throws(()=>validate({...base,commitSubject}),/skip marker|must not publish/);
+ for(const commitSubject of ['ops request','Release DIC: DIC-20261021-EXAMPLE1 [dic-publish]',
+  'ops(release-request): DIC-20261021-WRONG1 [skip netlify]'])
+  assert.throws(()=>validate({...base,commitSubject}),/exact nonpublishing/);
 });
 test('stale branch heads, changed grant and malformed SHA/ID fail closed',()=>{
  assert.throws(()=>validate({...base,expectedReleaseHead:'4'.repeat(40)}),/release HEAD moved/);
@@ -64,4 +67,17 @@ test('credit evidence below ceiling, stale or forged extra fields refuses releas
   observed_at_utc:'2026-10-18T10:00:00Z'}}}),/credit check stale/);
  assert.throws(()=>validate({...base,request:{...request,credit_evidence:{...request.credit_evidence,
   extraneous:'yes'}}}),/credit budget/);
+});
+
+test('single commit lease, dry-run or publish modes and replay/stale event cannot be forged',()=>{
+ assert.equal(validate(base).releaseId,request.release_id);
+ assert.equal(validate({...base,request:{...request,mode:'publish'}}).releaseId,request.release_id);
+ for(const req of [{mode:'auto'},{expected_main_parent_sha:S}]){
+  assert.throws(()=>validate({...base,request:{...request,...req}}),/mode|mismatch/);
+ }
+ for(const mutation of [{eventBeforeSha:S},{commitParentSha:S},
+  {eventHeadSha:S},{checkedOutHeadSha:S}]){
+  assert.throws(()=>validate({...base,...mutation}),/pushed event/);
+ }
+ assert.throws(()=>validate({...base,eventBeforeSha:'0'.repeat(40)}),/pushed event/);
 });

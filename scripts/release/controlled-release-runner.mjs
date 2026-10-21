@@ -9,7 +9,7 @@ import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,RELEASE_BRANCH} from './one-use-claim.mjs';
-import {validateChatReleaseRequest,CHAT_REQUEST_PATH} from './chat-release-request.mjs';
+import {validateChatReleaseRequest,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -70,11 +70,16 @@ export async function executeSingleUseRelease(settings=process.env){
    throw Error('Chat release request commit SHA does not match checked-out HEAD');
   const parents=git(['rev-list','--parents','-n','1','HEAD']).split(/\s+/);
   if(parents.length!==2)throw Error('Chat release requests require one parent');
+  if(!SHA.test(settings.DIC_PUSH_BEFORE_SHA||'')||
+     settings.DIC_PUSH_BEFORE_SHA!==parents[1])
+   throw Error('Chat release multi-commit or stale before-SHA event refused');
   const changedPaths=git(['diff-tree','--no-commit-id','--name-only','-r','HEAD'])
    .split(/\r?\n/).filter(Boolean);
   const request=json(git(['show','HEAD:'+CHAT_REQUEST_PATH]),'Chat release request');
   const commitSubject=git(['log','-1','--format=%s','HEAD']);
   validateChatReleaseRequest({request,changedPaths,commitSubject,
+   eventBeforeSha:settings.DIC_PUSH_BEFORE_SHA,commitParentSha:parents[1],
+   eventHeadSha:settings.GITHUB_SHA,checkedOutHeadSha:git(['rev-parse','HEAD']),
    nowIso:new Date().toISOString()});
   chatRequest=request;
  }
@@ -117,6 +122,9 @@ export async function executeSingleUseRelease(settings=process.env){
   commitSubject:git(['log','-1','--format=%s','HEAD']),
   expectedDevelopmentHead:developmentHead,expectedReleaseHead:releaseHead,
   ownerApprovalSource:grant.approval_source,
+  eventBeforeSha:settings.DIC_PUSH_BEFORE_SHA,
+  commitParentSha:git(['rev-list','--parents','-n','1','HEAD']).split(/\s+/)[1],
+  eventHeadSha:settings.GITHUB_SHA,checkedOutHeadSha:git(['rev-parse','HEAD']),
   nowIso:new Date().toISOString()
  });
  const statuses=await ciForSha(sha,token);
@@ -131,6 +139,11 @@ export async function executeSingleUseRelease(settings=process.env){
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
   ledger,currentPublishedSourceSha:ledger.consumed.at(-1)?.tested_source_sha||releaseHead});
+ // A live end-to-end, guard-checked request preflight without any Git/Netlify
+ // write, credits or grant consumption. A later publish request must be a NEW
+ // exact two-file owner-authorized commit and re-checks ALL fresh evidence.
+ if(chatPush&&chatRequest.mode==='validate_only')
+  return {id,testedSourceSha:sha,status:'INERT_CHAT_RELEASE_PREFLIGHT_PASS_NO_GIT_PUSH'};
  const tmp=mkdtempSync(join(tmpdir(),'dic-release-index-'));
  try{
   const env={...process.env,GIT_INDEX_FILE:join(tmp,'index'),
@@ -139,6 +152,21 @@ export async function executeSingleUseRelease(settings=process.env){
   git(['read-tree',sha],{env});
   setBlob('docs/RELEASE_CONSUMPTION.json',JSON.stringify(planned,null,2)+'\n',env);
   setBlob('docs/RELEASE_AUTHORIZATIONS.json',JSON.stringify(approvals,null,2)+'\n',env);
+  // Preserve the latest canonical development journal in the release tree,
+  // append the contemporaneous *GitHub claim*, and do not claim Netlify READY.
+  const claimReceipt={schema_version:1,release_id:id,tested_source_sha:sha,
+   previous_release_head_sha:releaseHead,claimed_at_utc:nowIso,
+   status:'GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK',
+   granted_single_publication:true};
+  const journalPath='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
+  const latestJournal=git(['show',developmentHead+':'+journalPath]);
+  const newJournal=latestJournal.trimEnd()+'\n\n## Release controller claim — '+nowIso+
+   '\n- Approved release '+id+' from tested application SHA '+sha+
+   ' claimed exactly once against previous release ref '+releaseHead+
+   '. Five GitHub CI checks passed and one-use authorization ledger was written.\n'+
+   '- **Not yet a Netlify publication receipt:** independently check READY/current deployed SHA before marking Deployed.\n';
+  setBlob(journalPath,newJournal,env);
+  setBlob('docs/RELEASE_CLAIM_RECEIPT.json',JSON.stringify(claimReceipt,null,2)+'\n',env);
   const tree=git(['write-tree'],{env});
   const subject='Release DIC: '+id+' [dic-publish]';
   const commit=git(['commit-tree',tree,'-p',releaseHead,'-m',subject],{env});

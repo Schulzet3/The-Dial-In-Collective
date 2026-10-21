@@ -9,7 +9,8 @@ const ID=/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/;
 const ALLOWED_PATHS=[CHAT_REQUEST_PATH,OPS_JOURNAL_PATH].sort();
 const REQUIRED=['schema_version','release_id','tested_source_sha',
  'expected_release_head_sha','expected_development_head_sha',
- 'owner_approval_source','created_at_utc','backup_evidence','credit_evidence'];
+ 'owner_approval_source','created_at_utc','backup_evidence','credit_evidence',
+ 'mode','expected_main_parent_sha'];
 const REQ_BACKUP=['artifact_id','encrypted_sha256','owner_private_offsite_file_id',
  'verified_at_utc','latest_observed_data_write_at_utc'];
 const REQ_CREDIT=['observed_remaining_credits','observed_at_utc','source'];
@@ -19,7 +20,8 @@ const exactly=(obj,keys)=>!!obj&&typeof obj==='object'&&!Array.isArray(obj)&&
 const validDate=(v)=>typeof v==='string'&&Number.isFinite(Date.parse(v));
 export function validateChatReleaseRequest({
  request,changedPaths,commitSubject,nowIso,expectedDevelopmentHead,
- expectedReleaseHead,ownerApprovalSource
+ expectedReleaseHead,ownerApprovalSource,eventBeforeSha,commitParentSha,
+ eventHeadSha,checkedOutHeadSha
 }={}){
  if(!exactly(request,REQUIRED)||request.schema_version!==1)
   deny('unknown fields or malformed request schema');
@@ -27,13 +29,21 @@ export function validateChatReleaseRequest({
   [...new Set(changedPaths)].sort().join('|')!==ALLOWED_PATHS.join('|')||
   changedPaths.length!==ALLOWED_PATHS.length)
   deny('request commit must change only the request and contemporaneous ops journal');
- if(typeof commitSubject!=='string'||!commitSubject.includes('[skip netlify]')||
-    commitSubject.includes('[dic-publish]'))
-  deny('chat request commit must not publish or omit skip marker');
+ if(commitSubject!=='ops(release-request): '+request.release_id+' [skip netlify]')
+  deny('chat request requires exact nonpublishing ID-bound commit subject');
+ if(!['validate_only','publish'].includes(request.mode))
+  deny('release mode must be validate_only or publish');
  if(!ID.test(request.release_id))deny('release ID format');
  if(!SHA.test(request.tested_source_sha)||!SHA.test(request.expected_release_head_sha)||
-    !SHA.test(request.expected_development_head_sha))
+    !SHA.test(request.expected_development_head_sha)||
+    !SHA.test(request.expected_main_parent_sha))
   deny('source or expected Git ref SHA format');
+ if(!SHA.test(eventBeforeSha||'')||eventBeforeSha==='0'.repeat(40)||
+    !SHA.test(commitParentSha||'')||!SHA.test(eventHeadSha||'')||
+    !SHA.test(checkedOutHeadSha||'')||
+    request.expected_main_parent_sha!==eventBeforeSha||
+    commitParentSha!==eventBeforeSha||eventHeadSha!==checkedOutHeadSha)
+  deny('pushed event, single parent, request main lease or checked-out commit mismatch');
  if(typeof request.owner_approval_source!=='string'||
     request.owner_approval_source.length<12)deny('owner approval provenance absent');
  if(ownerApprovalSource!==undefined&&request.owner_approval_source!==ownerApprovalSource)
