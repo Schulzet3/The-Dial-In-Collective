@@ -1,6 +1,8 @@
 name: DIC single-use owner-approved production release
 # Manual only. This workflow does not run on push, pull_request or schedule.
-# Private GitHub Free cannot enforce required checks or branch protection.
+# Free/private compensating controls: advisory five-check CI, exact owner
+# grant, serialized controller and one-use non-force Git push. GitHub Free
+# cannot enforce required checks or branch protection.
 # Manual serialized controller verifies exact owner release grant, live CI,
 # one-use non-force claim and independent Netlify production-branch setting.
 # NEVER pretend GitHub checks are enforced or publish on development commits.
