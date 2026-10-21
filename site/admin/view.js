@@ -7,7 +7,7 @@ export function renderAdminDenied(message='Administrator access required.'){
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header>
  <section class="admin-panel admin-empty"><h1>Admin Access Unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
 }
-export function renderAdminDashboard(data={},access=null,issued=null){
+export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={}){
  const stats=data?.counts||{};
  const queue=Array.isArray(data?.queue)?data.queue:[];
  const total=Number(data?.queue_total)||0;
@@ -20,11 +20,17 @@ export function renderAdminDashboard(data={},access=null,issued=null){
    ['Release',item.release_label],['Origin',item.origin],['Process',item.process],['Roast',item.roast_level]
   ].filter(([,v])=>v).map(([k,v])=>`<span><b>${e(k)}:</b> ${e(v)}</span>`).join('')}</div>
   ${item.source_url?`<p class="admin-source">Evidence URL (review manually): <span>${e(item.source_url)}</span></p>`:''}
-  <p class="admin-subtle">Review-only preview · No decision has been applied</p>
+  <div class="admin-review-actions" aria-label="Review ${e(item.name||'coffee')}">
+   <button type="button" data-action="review-approve" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Approve Distinct Coffee</button>
+   <button type="button" class="ghost compact" data-action="review-merge-prepare" data-id="${e(String(item.id||''))}">Resolve Duplicate</button>
+   <button type="button" class="ghost compact" data-action="review-hold" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Hold for Clarification</button>
+  </div>
+  ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Verified coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
+  <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
  </article>`;
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
- <p>Only genuine coffee identity and source conflicts require attention. This first milestone is read-only.</p></section>
+ <p>Only genuine coffee identity and source conflicts require attention. Source-backed coffees can verify automatically; manual review is for unresolved cases.</p></section>
  <section class="admin-stats" aria-label="Application status">
  ${stat('Pending Coffees',stats.pending_coffees)}${stat('Conflicts',stats.conflicts)}
  ${stat('Verified Coffees',stats.verified_coffees)}${stat('Admitted Accounts',stats.active_accounts)}
@@ -36,7 +42,7 @@ export function renderAdminDashboard(data={},access=null,issued=null){
  ${queue.length?queue.map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
  ${total>queue.length?'<p class="helper">Showing the first 50. Further queue navigation will be added before the beta.</p>':''}
  </section>
- <section class="admin-panel admin-health"><h2>Infrastructure</h2><p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Coffee approvals, merges and abuse-review actions are not yet enabled. Invitation management is administrator-only.</p></section>`;
+ <section class="admin-panel admin-health"><h2>Infrastructure</h2><p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p></section>`;
 }
 
 /** Strictly administrator-only UI projection. The list never contains a
