@@ -3,7 +3,8 @@ begin;
 do $admin_coffee$
 declare
  admin_id uuid:='10000000-0000-4000-8000-000000000001';
- member_id uuid:=gen_random_uuid();
+ member_id uuid:=gen_random_uuid(); member2 uuid:=gen_random_uuid();
+ reviewed_coffee uuid; linked_library uuid; merge_submission uuid;
  pending_id uuid; hold_id uuid; original_library uuid; got jsonb; status text;
  rev bigint; denied boolean; before_shots integer; before_coffees integer;
 begin
@@ -66,6 +67,7 @@ begin
  if not exists(select 1 from public.library_entries where id=original_library
     and owner_id=member_id and submission_id is null and coffee_id=(got->>'coffee_id')::uuid)
  then raise exception 'Existing member library identity was not preserved';end if;
+ reviewed_coffee:=(got->>'coffee_id')::uuid;
  if not exists(select 1 from public.admin_reviews where submission_id=pending_id
      and reviewer_id=admin_id and action='approve')
  then raise exception 'Administrator approval audit absent';end if;
@@ -77,6 +79,48 @@ begin
  then raise exception 'Manual review falsely claimed independently checked roaster page';end if;
  if (select count(*) from public.shots)<>before_shots then raise exception 'Existing shots changed';end if;
  if (select count(*) from public.coffees)<>before_coffees+1 then raise exception 'Unexpected canonical count';end if;
+
+
+ -- Review a genuine same-release duplicate submitted by another admitted
+ -- member. The stable personal entry ID must be relinked, not deleted.
+ insert into auth.users(id,aud,role,email)
+ values(member2,'authenticated','authenticated',member2::text||'@example.invalid');
+ insert into private.beta_members(owner_id,enabled,admitted_at)
+ values(member2,true,now()) on conflict(owner_id)
+ do update set enabled=true,admitted_at=now();
+ insert into public.coffee_submissions(owner_id,proposed_data)
+ values(member2,jsonb_build_object('name','Admin Manual 2026 Unique',
+  'roaster','Sweet Bloom')) returning id into merge_submission;
+ linked_library:=gen_random_uuid();
+ insert into public.library_entries(id,owner_id,submission_id)
+ values(linked_library,member2,merge_submission);
+ perform set_config('request.jwt.claim.sub',admin_id::text,true);
+ execute 'set local role authenticated';
+ select revision into rev from public.coffee_submissions where id=merge_submission;
+ got:=public.dic_admin_coffee_candidates(merge_submission);
+ if not (got->'candidates') @> jsonb_build_array(jsonb_build_object(
+   'id',reviewed_coffee,'name','Admin Manual 2026 Unique','roaster','Sweet Bloom',
+   'release_label',null,'origin',null,'process',null)) then
+   raise exception 'Same release was not shown to administrator for merge: %',got;
+ end if;
+ got:=public.dic_admin_review_coffee(merge_submission,rev,'merge',
+  'Same coffee release and roaster, manually checked',reviewed_coffee);
+ if got->>'ok'<>'true' or got->>'coffee_id'<>reviewed_coffee::text
+    or got->>'reused'<>'true' then
+  raise exception 'Authorized reviewed canonical merge failed: %',got;end if;
+ execute 'reset role';
+ if not exists(select 1 from public.library_entries
+   where id=linked_library and owner_id=member2 and coffee_id=reviewed_coffee
+      and submission_id is null)
+ then raise exception 'Manual duplicate merge changed personal library identity';end if;
+ if not exists(select 1 from private.dic_coffee_audit
+   where submission_id=merge_submission and event_kind='admin_reviewed_merge')
+ then raise exception 'Manual duplicate merge provenance was missing';end if;
+ if not exists(select 1 from public.admin_reviews
+   where submission_id=merge_submission and reviewer_id=admin_id and action='merge')
+ then raise exception 'Manual duplicate merge administrator decision missing';end if;
+ if (select count(*) from public.coffees)<>before_coffees+1 then
+  raise exception 'Manual duplicate merge created an additional canonical';end if;
 
  -- An existing unresolved conflict can be held without deleting member data.
  insert into public.coffee_submissions(owner_id,proposed_data)
