@@ -8,7 +8,7 @@ grant anon,authenticated to authenticator;
 
 do $fixture$
 declare
- i integer; user_id uuid; shot_id uuid;
+ i integer; user_id uuid; fixture_shot uuid;
  setup_id uuid; version_id uuid; basket_id uuid; basket_version_id uuid;
  calib_id uuid; library_id uuid; community_id uuid; state text;
  coffee_id uuid:='30000000-0000-4000-8000-000000000001';
@@ -18,7 +18,7 @@ begin
   'Ethiopia','Washed','CI Producer','verified');
  for i in 1..6 loop
   user_id:=('40000000-0000-4000-8000-'||lpad(i::text,12,'0'))::uuid;
-  shot_id:=('50000000-0000-4000-8000-'||lpad(i::text,12,'0'))::uuid;
+  fixture_shot:=('50000000-0000-4000-8000-'||lpad(i::text,12,'0'))::uuid;
   setup_id:=gen_random_uuid(); version_id:=gen_random_uuid();
   basket_id:=gen_random_uuid();basket_version_id:=gen_random_uuid();
   calib_id:=gen_random_uuid();library_id:=gen_random_uuid();
@@ -43,13 +43,13 @@ begin
    setup_version_id,basket_version_id,calibration_id,style,pulled_at,
    dose_g,yield_g,time_s,grind_setting,extraction,body,clarity,
    sweetness,astringency,equipment_snapshot)
-  values(shot_id,user_id,library_id,setup_id,version_id,basket_version_id,
+  values(fixture_shot,user_id,library_id,setup_id,version_id,basket_version_id,
    calib_id,'Turbo',now(),18,42,case when i=6 then 145 else 25 end,
    1.1,3,3,5,5,1,'{}');
   insert into public.shot_notes(owner_id,shot_id,notes)
-  values(user_id,shot_id,'PRIVATE_CI_NOTE_MUST_NOT_LEAK');
+  values(user_id,fixture_shot,'PRIVATE_CI_NOTE_MUST_NOT_LEAK');
   select community_shot_id into strict community_id from private.contribution_links
-   where private.contribution_links.shot_id=shot_id;
+   where private.contribution_links.shot_id=fixture_shot;
   select quality_state into strict state from public.community_shots
    where id=community_id;
   if (i<6 and state<>'eligible') or (i=6 and state<>'held') then
