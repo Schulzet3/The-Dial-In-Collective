@@ -11,7 +11,6 @@ export function renderAdminDenied(message='Administrator access required.'){
 export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={}){
  const stats=data?.counts||{};
  const queue=Array.isArray(data?.queue)?data.queue:[];
- const total=Number(data?.queue_total)||0;
  const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong>${formatCount(value)}</strong><small>View all →</small></a>`;
  const preview=item=>`<article class="admin-queue-item">
   <div class="admin-queue-title"><div><span class="admin-state">${e(item.status==='conflict'?'Conflict':'Pending')}</span>

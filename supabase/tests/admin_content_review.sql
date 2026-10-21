@@ -11,7 +11,8 @@ begin
  insert into auth.users(id,aud,role,email)
  values(member_id,'authenticated','authenticated','only-for-admin-test@fixture.invalid');
  insert into private.beta_members(owner_id,enabled,admitted_at)
- values(member_id,true,now());
+ values(member_id,true,now()) on conflict(owner_id) do update
+ set enabled=true,admitted_at=now();
  insert into public.coffee_submissions(owner_id,proposed_data)
  values(member_id,jsonb_build_object('name','Admin Content Test','roaster','Test Roaster'))
  returning id,revision into pending_id,rev;

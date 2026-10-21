@@ -60,7 +60,7 @@ async function start(){
     adminRpc('dic_admin_dashboard'),adminRpc('dic_admin_access_overview'),
     ...['pending','conflicts','approved','shots','accounts'].map(async kind=>{
      try{return await adminRpc('dic_admin_records',{p_kind:kind,p_offset:recordPages[kind],p_limit:50});}
-     catch(error){return {items:[],total:0,offset:0,error:'Detailed listing not available until the new administrator database migration is installed.'};}
+     catch(_error){return {items:[],total:0,offset:0,error:'Detailed listing not available until the new administrator database migration is installed.'};}
     })
    ]);
    records=Object.fromEntries(['pending','conflicts','approved','shots','accounts'].map((kind,i)=>[kind,pages[i]]));

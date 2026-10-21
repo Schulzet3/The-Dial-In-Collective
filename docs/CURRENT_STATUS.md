@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 — targeted CI remediation ongoing (2026-10-21T22:23:03.219Z)
+- All Node test assertions succeeded at prior SHA, but lint warned twice and new disposable SQL fixture duplicated member row created by auth trigger; fixed in source with same-commit journal. Production unchanged. Await exact current SHA lint/build/isolated SQL results; never mark release-ready on incomplete checks.
+
 ## Issue #47 — security regression expansion, still source-only
 - New admin RPC migration candidate now applies in isolated PostgreSQL (first run `39685464088` PASS); new explicit transaction-rolled-back administrator permission, edit/audit, page bounds and canonical identity tests added next. One previous admin invitation VM test failed only because an unavailable new listing incorrectly hid an older account list; corrected. No hosted SQL, user data, Netlify credit or production change. Next: verify exact CI/isolated test results, resolve remaining errors, request later separate release approval.
 
