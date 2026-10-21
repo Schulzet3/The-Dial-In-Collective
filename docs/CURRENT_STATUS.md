@@ -1,5 +1,8 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 — new acceptance gate: after Work, ordinary chat must initiate future approved releases automatically
+- Owner expressly requires **no manual GitHub, Netlify or Supabase workflow steps for future ordinary updates** after one Work setup. **NOT VERIFIED**: main release controller still uses `workflow_dispatch` only, and connected chat tools cannot dispatch. Latest authorized Work scope now includes a guarded path-filtered request-file `push` trigger available through ordinary chat GitHub writes, inert negative/replay acceptance, then ONE currently authorized real source-bound release with Netlify READY verification. No new unlimited future publishing permission. Recorded in Master Specification and Decision Ledger as `OPS-HANDS-FREE-APPROVED-RELEASE-20261021`; Issue #44 remains OPEN until proven. Existing strict per-release owner chat approval, privacy, backup and budget controls remain.
+
 ## Owner operator authorization — no manual Netlify/GitHub configuration (October 21)
 - Latest owner instruction explicitly permits assistant to perform the previously identified one-time Netlify production branch `release/production` and GitHub Actions readiness/serialized dispatch via authenticated Work, without owner personally navigating settings. This is a narrow clarification of the existing one-use publication consent, documented in both canonical spec and ledger; safeguards/15-credit ceiling remain, and **no frontend release has occurred**. Latest exact Work execution runbook: `docs/WORK_BROWSER_RELEASE_EXECUTION_2026-10-21.md`.
 

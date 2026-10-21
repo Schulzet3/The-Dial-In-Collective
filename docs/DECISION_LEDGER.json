@@ -3607,5 +3607,33 @@
       ],
       "execution_state": "NOT CONFIGURED or PUBLISHED at this checkpoint; Netlify and GitHub connector tools lack needed site branch/Actions settings capabilities. An authenticated Work browser session is required unless new legitimate credentials/access are established."
     }
+  },
+  "current_owner_hands_free_release_from_chat_20261021": {
+    "decision_id": "OPS-HANDS-FREE-APPROVED-RELEASE-20261021",
+    "status": "LOCKED: owner requires after one Work setup zero manual provider navigation/workflow dispatch for routine authorized future releases; setup and acceptance NOT yet verified",
+    "owner_quote": "To confirm, once I complete this work session, you will be able to handle all development, testing, implementation, building, preflight, deployment to live app production, etc. Without manual input from me? Like we did in literally every other app update since the beginning? I need you to make sure that’s the case. No excuses or exceptions",
+    "operational_intent": "Chat-originated, assistant-executed, approved updates through test, backup, preflight, serialized single-use release, Netlify READY and verification; no manual owner GitHub/Netlify actions after initial Work setup.",
+    "implementation_gap": "Current main workflow only has manual workflow_dispatch; ordinary connected GitHub tool lacks dispatch or Actions variable writes; preceding Work handoff insufficient for repeating fully hands-free releases.",
+    "accepted_implementation_scope": [
+      "Change guarded operations controller so a narrowly validated owner-approved request committed from chat through connected GitHub can trigger a serialized one-use release; no manual dispatch for recurring releases.",
+      "Verify tested source, exact grant and expiry, available credits, encrypted backup, unchanged privacy and data records, safe Netlify production routing, non-force push, and actual published SHA.",
+      "Run fail-closed inert negative/replay tests and ONE previously authorized real production release after provider configuration, not extra billable test releases.",
+      "Document exact provider state, source SHA and measured speed in GitHub, mark rollout incomplete until post-release readback succeeds."
+    ],
+    "unchanged_locked_controls": [
+      "Private GitHub Free (CI advisory, no Pro/public repo)",
+      "Unique fresh explicit owner grant for EACH future production release with tested SHA and bounded credits",
+      "Separate explicit consent for unapproved paid purchases, new SQL/Edge/Auth/member-data changes and sensitive provider setting changes",
+      "Data/shot/offline history retention, backup recovery, explicit issue and journal receipts",
+      "Do not claim absolute guarantee in face of provider outage, lost credentials or expired sessions"
+    ],
+    "supersedes_only": [
+      "Prior operational plan requiring manual GitHub Actions workflow_dispatch for every future publication; once new audited chat-trigger exists, manual dispatch remains emergency fallback, not routine path."
+    ],
+    "acceptance": "Not yet met: require chat-triggered fail-closed acceptance and first real Netlify READY publish, plus proof future grant/request initiation needs no owner provider actions.",
+    "linked_issues": [
+      38,
+      44
+    ]
   }
 }

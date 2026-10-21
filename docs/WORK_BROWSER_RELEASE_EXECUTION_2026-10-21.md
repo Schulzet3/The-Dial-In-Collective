@@ -28,3 +28,14 @@
 
 - Explicitly state **published READY** with real Netlify deploy ID/current Git SHA and exact underlying tested source, or **NOT PUBLISHED** with precise provider blocker. Include actual provider configuration readback and credit effect when available; do not infer.
 - Never demand manual GitHub or Netlify settings navigation from owner. Owner's only participation, if necessary, is enabling Work and authenticating a logged-in browser if prompted. No generic release authorization repetition.
+
+
+## MANDATORY additional acceptance gate: future releases must run without owner/provider UI work
+
+**The prior Work runbook solves only today's manual dispatch and is not sufficient.** The main branch workflow currently is **manual `workflow_dispatch` only**, while the ordinary GitHub connector cannot dispatch. Work MUST design, test and install an assistant-triggerable **versioned GitHub release-request commit workflow** (or equally secure authenticated API path available in an ordinary subsequent chat) that triggers the existing serialized one-use release controller on `main` without further manual GitHub or Netlify UI. A normal code push must remain `[skip netlify]` and MUST NOT auto-deploy without a new explicit one-use grant/owner chat approval.
+
+For implementation, prefer a purpose-built `docs/RELEASE_REQUEST.json` request on main with `release_id`, exact `tested_source_sha`, `expected_release_head_sha` and owner approval reference, and a narrowly path-filtered main `push` trigger. Fail closed on extraneous commit paths, malformed/expired/duplicate grants, failing exact-source CI, wrong Netlify routing, missing backup/credit checks or changed release base. Keep existing manual dispatch as *fallback*, not the normal recurring requirement. Main remains operations only, never a deployment source.
+
+**Before concluding Work:** Show one fully automated dry-run of the chat-trigger validation with no Netlify spend; use the already-approved **DIC-20261021-BETA-COFFEE-01** to complete ONE actual source-bound release initiated via GitHub file write, *without* a human pressing Dispatch; independently verify production Netlify READY/current plus source and consumption ledgers. Validate denial of duplicate requests and no second billable build. Record actual elapsed approval-to-READY time. Only after all this, attest that routine future authorized releases can be launched from normal chat without any owner Netlify/GitHub actions. If not achieved, explicitly mark NOT COMPLETE and provide the specific verified blocker. The owner may still need to approve future releases in chat or log in again if required by provider authentication.
+
+This is the latest owner requirement; do not settle for a one-time manual release under the previous plan.
