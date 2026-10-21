@@ -10,6 +10,10 @@ test('missing actual Netlify cutover and Free/private mode stop BEFORE Git comma
  const base={GITHUB_ACTIONS:'true',GITHUB_REF:'refs/heads/main',GITHUB_EVENT_NAME:'workflow_dispatch',
   GITHUB_REPOSITORY:'Schulzet3/The-Dial-In-Collective'};
  await assert.rejects(executeSingleUseRelease(base),/not independently enabled/);
+ await assert.rejects(executeSingleUseRelease({...base,
+  DIC_PRIVATE_FREE_COMPENSATING_MODE:'YES',
+  DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED:'development/backend-foundation',
+  DIC_RELEASE_CONTROLLER_VERIFIED:'YES'}),/Netlify cutover/);
  await assert.rejects(executeSingleUseRelease({...base,DIC_PRIVATE_FREE_COMPENSATING_MODE:'YES',
   DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED:'release/production',DIC_RELEASE_CONTROLLER_VERIFIED:'YES',
   INPUT_RELEASE_ID:'not-valid',INPUT_TESTED_SOURCE_SHA:'a'.repeat(40)}),/Missing exact release ID/);
