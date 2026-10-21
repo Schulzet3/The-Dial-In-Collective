@@ -102,9 +102,9 @@ begin
  insert into public.library_entries(id,owner_id,coffee_id) values(library_id,member_id,canonical_id);
  insert into public.shots(id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
   calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
-  extraction,body,clarity,sweetness,astringency,equipment_snapshot,is_dialed_in)
+  extraction,body,clarity,sweetness,astringency,equipment_snapshot)
  values(shot_id,member_id,library_id,setup_id,version_id,basket_version_id,
-  calibration_id,'Turbo',now(),18,42,25,1.1,3,3,5,5,1,'{}',false)
+  calibration_id,'Turbo',now(),18,42,25,1.1,2,2,2,2,3,'{}')
  returning revision into shot_rev;
  insert into public.shot_notes(owner_id,shot_id,notes) values(member_id,shot_id,'Private original note');
  -- Ordinary member cannot edit via administrator-only RPC.

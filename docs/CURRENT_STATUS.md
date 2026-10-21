@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 fixture generated-shot property corrected (2026-10-21T22:31:21.242Z)
+- Updated only disconnected test fixture to respect generated `shots.is_dialed_in` and retain all real integrity checks. App build green, isolated positive-shot test awaiting rerun. Production untouched.
+
 ## Issue #47 — isolated shot-edit scenario and admin visual harness (2026-10-21T22:30:00.108Z)
 - Added rollback-only end-to-end SQL acceptance for real synthetic member shot notes, denied non-admin edit, creator attribution, admin stale revision rejection, real audited time/notes correction and provenance preservation. Fixed visual screenshot's inlined admin records.js dependency. This remains predeployment development only; awaiting CI and device acceptance before release planning.
 
