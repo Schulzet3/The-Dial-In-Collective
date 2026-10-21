@@ -83,6 +83,21 @@ begin
      and submission_id=sid and owner_id=u2 and coffee_id is null)
  then raise exception 'Pending personal coffee was not preserved';end if;
 
+ -- Even if a hostile authenticated member invokes the private helper with
+ -- distinct_confirmed=true, it cannot bypass actual existing canonical.
+ denied:=false;
+ begin
+  resp:=private.dic_promote_pending_coffee(sid,'member_auto_approved',
+    jsonb_build_object('official_page_confirmed',true,
+      'verified_fields',jsonb_build_object('name','Forged Product Data')),true);
+  if resp->>'code'='needs_confirmation' then denied:=true;end if;
+ exception when insufficient_privilege then denied:=true;
+ end;
+ if not denied then
+   raise exception 'Member bypassed duplicate gate via direct confirmed distinct';end if;
+ if (select status from public.coffee_submissions where id=sid)<>'pending' then
+   raise exception 'Failed member duplicate bypass changed Pending status';end if;
+
  -- Missing release vs known same-name canonical is ambiguous, not an auto-link.
  resp:=public.dic_apply_client_change(u2,gen_random_uuid(),'submit_coffee',
  jsonb_build_object('library_entry_id',gen_random_uuid(),

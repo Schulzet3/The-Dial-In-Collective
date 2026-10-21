@@ -237,7 +237,7 @@ begin
    and (private.dic_coffee_key(c.release_label) is null
      or private.dic_coffee_key(declared_release) is null
      or private.dic_coffee_key(c.release_label)=private.dic_coffee_key(declared_release));
- if existing_count>0 and (method='official_verified' or not distinct_confirmed) then
+ if existing_count>0 and (method in ('official_verified','member_auto_approved') or not distinct_confirmed) then
   insert into private.dic_coffee_audit(submission_id,actor_id,event_kind,evidence)
     values(sid,auth.uid(),'needs_review',
       jsonb_build_object('reason','potential_existing_release','method',method));
@@ -287,10 +287,11 @@ begin
  if nullif(s.source_url,'') is not null then
   insert into public.coffee_sources(coffee_id,source_url,source_kind,field_values,evidence_excerpt,checked_at)
    values(cid,s.source_url,source_kind,
-     case when jsonb_typeof(evidence->'verified_fields')='object' then evidence->'verified_fields'
+     case when method='official_verified' and jsonb_typeof(evidence->'verified_fields')='object' then evidence->'verified_fields'
           else '{}'::jsonb end,
-     left(coalesce(evidence->>'evidence_excerpt',
-       case when source_kind='label' then 'Member-supplied source URL; product page not independently verified.' else 'Official roaster product evidence checked.' end),12000),
+     left(case when method='official_verified' then
+       coalesce(evidence->>'evidence_excerpt','Official roaster product evidence checked.')
+     else 'Member-supplied source URL; product page not independently verified.' end,12000),
      now());
  end if;
  update public.coffee_submissions set status='approved',canonical_coffee_id=cid where id=sid;
