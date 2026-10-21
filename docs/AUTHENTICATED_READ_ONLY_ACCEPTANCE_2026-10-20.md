@@ -1,10 +1,18 @@
 # Issues #9 / #41: existing-account read-only acceptance
 
+## Current result — both existing account read phases received
+
+**Ordinary member v2: 33 PASS / 0 FAIL / 0 NOT_APPLICABLE.** [Original member report](acceptance/2026-10-20-member-readonly-v2-owner-report.json) ran October 20 19:51:21–19:51:25 America/Denver (October 21 01:51:21–01:51:25 UTC). All 17 foreign-owner table probes returned zero rows, including coffee_submissions. Administrator dashboard and access overview returned **403/42501**; direct Community table returned **403/42501**; five anonymous private-read endpoints returned **401/42501**; invalid bearer returned **401/PGRST301**. Current personal-state ownership, validated admitted nonadmin role, two sanitized 22-field Community DTOs with no raw UUID/email/nested payload, and account continuity all reported PASS.
+
+**Administrator v1: original 32 PASS / 1 FAIL preserved.** Its incorrect owner-isolation expectation for intentional administrator submission-review access is explained below. It is not retroactively rewritten as an all-pass report. Both role checks were validated against server status; differing admin true/false roles establish distinct role phases without publishing identities. The helper verified unchanged identity inside each phase. Reports are **owner-run authenticated HTTP evidence**, supplied by the owner; Work-mode did not independently capture raw traffic/signatures.
+
+**Read-only acceptance performed by this session is complete for the helper's explicit paths and currently returned rows. Full #9/#41 acceptance remains OPEN.** No additional repeat of these passed account checks is needed absent change/regression. Unrun checks retain their scope below; no authorization has been given for production mutation tests, account disablement or fixtures.
+
 ## Verified in Work-mode browser
 
 The owner signed into the existing administrator account. Independently observed: synced personal workspace, Settings Administration entry, and successfully rendered administrator dashboard. Aggregate dashboard counts: 5 admitted accounts, 18 saved shots, 4 verified coffees. No invitation, access, preference, account or shot action was submitted. Private account details visible to that administrator are intentionally omitted here.
 
-The browser automation exposes read-only DOM inspection but **no request transport** (`fetchAvailable:false`) or network-response capture. The app exposes no WebMCP tools. This is a limitation of the automation interface, not proof the real website lacks `fetch`. A dashboard UI result is not an independently captured HTTP status or payload. At that initial checkpoint, signed API negatives were NOT RUN. The owner has since supplied the administrator report below; nonadmin evidence remains pending.
+The browser automation exposes read-only DOM inspection but **no request transport** (`fetchAvailable:false`) or network-response capture. The app exposes no WebMCP tools. This is a limitation of the automation interface, not proof the real website lacks `fetch`. A dashboard UI result is not an independently captured HTTP status or payload. At that initial checkpoint, signed API negatives were NOT RUN. The owner has since supplied both administrator and nonadmin reports below.
 
 ## Owner-run helper
 
@@ -35,9 +43,9 @@ Reports contain role expectation, timestamps, status/error classes, fixed test n
 
 ## Remaining gates
 
-Both issues remain OPEN. One owner-run administrator API report has been received (see below); no nonadmin report or independent automated network capture exists. Administrator mutation-RPC denials are deliberately untested because no production mutation endpoint is invoked. Real disabled/nonadmitted sessions, any held-shot positive case, Confirm/Correct/error-retry/hide/version conflicts, timing/races, and offline cache isolation remain unverified. #9/#34 lifecycle cannot be completed by this read-only helper. Results cover only currently returned eligible rows, not every possible/future canonical release. No Locked decision or release permission is changed.
+Both issues remain OPEN. Both role-specific owner-run API reports have been received (see current result above); independent automated network capture remains unavailable. Administrator mutation-RPC denials are deliberately untested because no production mutation endpoint is invoked. Real disabled/nonadmitted sessions, any held-shot positive case, Confirm/Correct/error-retry/hide/version conflicts, timing/races, and offline cache isolation remain unverified. #9/#34 lifecycle cannot be completed by this read-only helper. Results cover only currently returned eligible rows, not every possible/future canonical release. No Locked decision or release permission is changed.
 
-Current next action: owner runs v2 in their own existing nonadmin browser, choosing `member`, and supplies only the redacted JSON. Keep PASS/FAIL/NOT RUN evidence separate and record every report in the active journal and relevant issues.
+Current next action: retain passed read results and complete the remaining unrun cases only with a naturally available case or a separately authorized isolated authenticated fixture. Current authorization does not permit creating/disabling production accounts, adding held shots or calling production mutation endpoints. Keep PASS/FAIL/NOT RUN evidence separate and record every report in the active journal and relevant issues.
 
 ## Administrator HTTP report received and v1 helper correction
 
@@ -49,8 +57,26 @@ Reported PASS evidence: validated identity/admitted administrator role, own-only
 
 Current count-only baseline for this table: 6 submissions, 4 admin-owned and 2 nonadmin-owned, 2 pending / 0 conflict. No owner IDs/proposal text/source URLs returned. These counts and the admin OR-policy explain why a nonempty foreign submission probe is expected. **The v1 report did not retain response shape/count**, so exact original payload shape is not independently certified, and its failure is not rewritten as a production isolation PASS.
 
-Helper **v2** now records a valid admin submission probe as `NOT_APPLICABLE / ADMIN_REVIEW_ACCESS` outside owner-only isolation scope. The member branch remains strict: a visible foreign submission FAILS. It includes only safe row counts in foreign-table probe receipts and separately counts not-applicable checks. Six local safety tests PASS, including explicit admin-review versus member-leak fixtures and continued admin raw-shot/notes protections; [v2 Node/lint/build/source-integrity 39529372356](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372356) and [approval/continuity 39529372348](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372348) SUCCESS on `c5fe2af5ae7bd8cc117200102c1137d7a3a1da2e`. Unchanged-UI UX 39529372485 still in progress at last readback. Existing v1 full-source build/lint/Node/UX/continuity CI all passed; last documentation continuity run 39526545543 also passed.
+Helper **v2** now records a valid admin submission probe as `NOT_APPLICABLE / ADMIN_REVIEW_ACCESS` outside owner-only isolation scope. The member branch remains strict: a visible foreign submission FAILS. It includes only safe row counts in foreign-table probe receipts and separately counts not-applicable checks. Six local safety tests PASS, including explicit admin-review versus member-leak fixtures and continued admin raw-shot/notes protections; [v2 Node/lint/build/source-integrity 39529372356](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372356) and [approval/continuity 39529372348](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372348) SUCCESS on `c5fe2af5ae7bd8cc117200102c1137d7a3a1da2e`. Unchanged-UI [UX 39529372485](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372485) subsequently read SUCCESS. Existing v1 full-source build/lint/Node/UX/continuity CI all passed; last documentation continuity run 39526545543 also passed.
 
 Provider source independently rechecked after receiving the report: current READY Netlify deploy `6ad7be20bf672d5c8936f19a` still publishes `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`, matching reviewed_source. This resolves that deployment-match question **at this check time**, not for future reports. No production records, policy, accounts, settings, provider configuration or deployments changed.
 
-**Next:** run v2 once using the existing **non-admin account**, choosing `member`, and return only its JSON report. No repeat of the administrator's already-passed checks is required. Both issues remain OPEN pending the member evidence and all remaining scope exclusions.
+**Historical next step fulfilled:** the nonadmin v2 report is now received and preserved above. Both issues remain OPEN only for the remaining scope exclusions; passed account-read checks need no repeat.
+
+## Post-member independent provider and continuity check
+
+- Netlify **current READY** `6ad7be20bf672d5c8936f19a`, exact published source `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`, still matches **both** report reviewed_source values. Provider metadata was independently read after member receipt; the report's static SHA was not used as proof of deployment.
+- Read-only aggregate baseline remains **18 shots, 18 notes, 2 eligible Community rows, 0 held, 5 enabled members, 1 admin**; 16 admin-owned and 2 nonadmin-owned shots. Foreign shot data exists for both phases, so those empty foreign-shot results are not explained by an empty database. No original IDs or private content returned. Other table-specific nonempty foreign fixtures were not exhaustively counted, so empty results on tables without foreign rows may be vacuous.
+- Helper v2 source `c5fe2af5ae7bd8cc117200102c1137d7a3a1da2e`: full Node/lint/build/leak guard [39529372356](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372356), approval [39529372348](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372348), cloud UX [39529372485](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529372485) all independently read SUCCESS. Latest prior docs continuity [39529503766](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39529503766) SUCCESS on `35e8310c7b886d2f64ec05a74df193e8790865f6`.
+- **No production mutation or release.** GitHub evidence/checklist/status changes only for this receipt. No credentials/private IDs were collected; original administrator and member report values stay intact.
+
+### Exact unresolved boundary
+
+| Remaining case | Current evidence and next permitted route |
+| --- | --- |
+| Ordinary member administrator mutation-RPC denial; wrong-member shot correction/confirmation denial | Not called in production under read-only scope. Review source/synthetic tests already separately recorded; require separately authorized safe authenticated environment for real mutation-path HTTP proof. |
+| Real nonadmitted/disabled signed identity denial | Anonymous/missing bearer and invalid bearer denials passed; these do not prove an actual disabled or nonadmitted account case. Existing appropriate sessions or an authorized isolated fixture needed; do not alter current membership. |
+| Held-shot positive ownership, Confirm/Correct/failure-retry/hide/version-conflict | Zero held rows. #9/#34 remain OPEN; await natural hold or separately approved isolated setup, preserving history. |
+| Wider releases, timing/races, persistent offline cache isolation | The reports cover current two DTOs and sequential reads only. Existing owner-reported phone browse/#11 acceptance is retained; no new general guarantee inferred. |
+
+No new product decision is needed to accept the performed read-only results, and no existing Locked security requirement is waived. Do not describe the entire beta or either open issue as complete.
