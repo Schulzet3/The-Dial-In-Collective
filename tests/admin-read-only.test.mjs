@@ -78,7 +78,8 @@ test('admin review UI requires signed-session RPC, reason and exact revision',as
  assert.match(sql,/insert into public\.admin_reviews/);
  assert.match(sql,/p_action not in \('approve','merge','hold'\)/);
  assert.match(sql,/revoke all on function private\.dic_admin_review_coffee/);
- assert.doesNotMatch(sql,/grant execute on function private\.dic_admin_review_coffee.*to authenticated/);
+ assert.match(sql,/grant execute on function private\.dic_admin_review_coffee.*to authenticated/);
+ assert.match(sql,/revoke all on function public\.dic_admin_review_coffee.*from public,anon,authenticated/);
 });
 test('manual review displays compatible duplicates and escapes candidate names',()=>{
  const html=renderAdminDashboard({queue_total:1,queue:[{
