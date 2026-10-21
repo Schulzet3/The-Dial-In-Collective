@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {executeSingleUseRelease,initialLedgerOnMissing,RELEASE_GENESIS_SHA,MINIMUM_GUARDED_SOURCE_SHA} from '../scripts/release/controlled-release-runner.mjs';
 test('release controller cannot operate outside controlled main OPS Actions',async()=>{
- await assert.rejects(executeSingleUseRelease({}),/only valid in dispatched/);
+ await assert.rejects(executeSingleUseRelease({}),/only valid in controlled main-branch/);
  await assert.rejects(executeSingleUseRelease({GITHUB_ACTIONS:'true',GITHUB_REF:'refs/heads/development/backend-foundation',
   GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_REPOSITORY:'Schulzet3/The-Dial-In-Collective'}),/only valid/);
 });
