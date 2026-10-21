@@ -1,5 +1,12 @@
 # Production release readiness — The Dial In Collective
-**Date:** October 21, 2026 (MDT) · **Status:** IMPLEMENTED/TESTED DEVELOPMENT; NOT DEPLOYED
+**Date:** October 21, 2026 (MDT) · **Status:** PRODUCTION SQL 2/2 APPLIED AND VERIFIED; NETLIFY FRONTEND NOT DEPLOYED
+
+
+## Live backend migration receipt — 2026-10-21 16:53Z
+- Owner express approval and required Wuri-after-deploy sequence recorded in both canonical files as OPS-EXPEDITED-BETA-RELEASE-20261021; see active journal for exact quote.
+- First exact SQL GitHub tested blob `fd46ce3d89a5cd0115a1d0dc683fadd9cd727ed1` applied, migration version `20261021165214` admin coffee review; second tested blob `df5ca35e05110f3bb0ca2d3af65ae78a4b6358c7` applied as `20261021165302` duplicate-first approval. Supabase apply_migration success each, migration history read back in order; remote names match, 32 total. Stable shot/notes/member/coffee/community/invite counts verified.
+- Fresh 22-shot encrypted backup artifact4 owner-private Drive copy `1_qP5KuE_3MRU-oYYPL8fUbyfv6htL0ly` byte-for-byte SHA256 `1a1163504592d55088bfd26acb0bf57db67f61a663670ad119c2d0e4902f5069`; ZIP integrity PASS; encrypted-only, no new restore.
+- **Frontend still needs exact, safely controlled ONE Netlify production release.** Older earlier sections describe their dated state, not current SQL authorization. Protected Free/private branch unavailable, new routing not configured; no claim of published new frontend. See CURRENT_STATUS.
 
 ## Source of truth and verified source
 - Private GitHub Free repo `Schulzet3/The-Dial-In-Collective`; `development/backend-foundation` is application source, `main` is operations/backup.
