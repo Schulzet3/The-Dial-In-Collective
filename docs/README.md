@@ -12,7 +12,8 @@
 8. [AGENTS — continuity rules](../AGENTS.md) — exact repository/change-control method.
 
 ## Current operating records
-- [Private GitHub protected branch + exact-one-release owner actions](GITHUB_PROTECTED_RELEASE_OWNER_ACTIONS_2026-10-20.md) — required checks, account/Netlify blockers, safe activation, single-use actor enforcement.
+- [Active GitHub Free/private continuity and release safety plan](GITHUB_FREE_PRIVATE_CONTINUITY_AND_RELEASE_PLAN_2026-10-20.md) — owner refuses Pro/public; advisory CI, manual controls, remaining release risks.
+- [Project instructions ready to paste](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) — owner applies these in ChatGPT Project settings.
 - [Oct20 forensic approval-gap and continuity investigation](APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md) — verified evidence, root causes, missing sources, and remaining safeguards.
 - [Approved change/source/CI/production acceptance register](APPROVAL_COVERAGE_MATRIX.json) — enforced subset, 79 historical Locked unchanged, unverified gaps explicit.
 - [Always-on approval/continuity CI](../.github/workflows/approval-continuity.yml) — reads ALL commits in a push (up to 400), including docs-only; a failed check must stop later work.
