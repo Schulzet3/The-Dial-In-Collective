@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## P0 Issue #43 — Admin Pending Coffee approval missing (2026-10-20/21)
+Live SQL confirms two Pending other-member submissions: Sweet Bloom Wuri (trusted official domain, zero recorded source verification attempt) and Mango Tree Blend (uncurated roaster domain and general shop URL, zero recorded source attempt). Neither has a review. Existing Admin Dashboard deliberately read-only for coffee queue, with no approval controls; existing own-coffee admin RPC cannot approve another member's Pending submission. Locked Oct14 decision requires automatic verification for source-backed unambiguous submissions, NOT every import indiscriminately. New [#43](https://github.com/Schulzet3/The-Dial-In-Collective/issues/43) is OPEN to implement safely; no new production DB changes, Netlify publish or manual approval made by this investigation. Release needs separate consent.
+
+
 ## Issue #9 exact QA purge COMPLETE — 2026-10-20 MDT / 2026-10-21 UTC
 - Owner explicitly authorized permanent removal of precisely TEMP QA #9/#34 BASELINE and OUTLIER, following the exact detailed scope question; authorization single-use and now exhausted. Canonical Master Specification/Decision Ledger exception recorded before SQL; GitHub journal contains guarded SQL and scoped provider readback.
 - Two synthetic 18g/50.5g/21.4s original owner-created QA shots were deleted in a guarded single transaction together with 2 notes, 2 synthetic eligible Community projections, 2 links, 2 quality checks. Eight target audit snapshot payloads sanitized with action/date/identity metadata retained; six target mutation response payloads tombstoned with replay keys preserved.
