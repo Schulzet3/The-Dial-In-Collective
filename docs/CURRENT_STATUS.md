@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 — fixture shadow disambiguation (2026-10-21T22:34:11.165Z)
+- Shot update reached postcondition verification in isolated SQL; ambiguous unqualified local `shot_id`/`setup_id` in TEST only corrected with explicit PL/pgSQL fixture label. Await exact current CI. No production change.
+
 ## Issue #47 — actual partial shot edit regression repaired
 - Real isolated shot-correction fixture caught unsafe nulling of old grind/temperature on omitted patch fields. Staged only new privileged edit RPC fixed to preserve old values when fields are absent; test asserts old grind is retained. No hosted DB/table/shot/history change. Await green exact-SHA disconnected regression and browser/approval evidence before ready-to-publish.
 

@@ -1,6 +1,7 @@
 -- New Issue #47 admin content regression; disposable dic_ci only; rollback all fixture changes.
 begin;
 do $admin_content$
+<<fixture>>
 declare
  admin_id uuid:='10000000-0000-4000-8000-000000000001';
  member_id uuid:=gen_random_uuid();
@@ -137,9 +138,9 @@ begin
  execute 'reset role';
  if (select time_s from public.shots where id=shot_id)<>26
   or (select grind_setting from public.shots where id=shot_id)<>1.1
-  or (select notes from public.shot_notes where shot_id=shot_id and owner_id=member_id)<>'Audited operator correction'
+  or (select n.notes from public.shot_notes n where n.shot_id=fixture.shot_id and n.owner_id=member_id)<>'Audited operator correction'
   or (select owner_id from public.shots where id=shot_id)<>member_id
-  or (select setup_id from public.shots where id=shot_id)<>setup_id then
+  or (select s.setup_id from public.shots s where s.id=fixture.shot_id)<>fixture.setup_id then
   raise exception 'Correction changed provenance or failed member shot/notes update';end if;
  if not exists(select 1 from private.admin_content_edits where record_id=shot_id
    and record_kind='shot' and actor_id=admin_id and subject_owner_id=member_id
