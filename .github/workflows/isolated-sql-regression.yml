@@ -6,7 +6,9 @@ on:
       - 'supabase/migrations/**'
       - 'supabase/tests/**'
       - 'tests/sql/**'
+      - 'tests/qa/signed-http-acceptance.mjs'
       - 'scripts/audit/isolated-sql-regression.sh'
+      - 'scripts/audit/isolated-signed-http-regression.sh'
       - 'scripts/audit/verify-migration-baseline.mjs'
       - 'docs/SUPABASE_PRODUCTION_MIGRATION_BASELINE_2026-10-18.json'
       - '.github/workflows/isolated-sql-regression.yml'
@@ -27,3 +29,5 @@ jobs:
         run: node scripts/audit/verify-migration-baseline.mjs
       - name: Apply and exercise schema in network-isolated PostgreSQL 17.11
         run: bash scripts/audit/isolated-sql-regression.sh
+      - name: Verify actual signed bearer JWT authorization, held-shot ownership and correction against disposable PostgREST
+        run: bash scripts/audit/isolated-signed-http-regression.sh
