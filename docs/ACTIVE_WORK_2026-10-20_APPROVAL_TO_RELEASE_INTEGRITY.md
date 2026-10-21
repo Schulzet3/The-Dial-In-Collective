@@ -112,3 +112,8 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 ## New release guard contract drift discovered and corrected
 - On new dedicated-branch Netlify guard commit `6f59be93`, approval CI `39518283698`, Node run `39518283745` and cloud unit run `39518283713` correctly failed because prior machine contract expected the obsolete generic release marker `^Release DIC: .+`. Updated contract to assert the unique-ID `^Release DIC: DIC-`, dedicated release branch, consumed grant, pure state and true local Git race test. The failing checks prevented unintended publication. This is a source contract update, not a new decision or owner release permission.
+
+## GitHub Actions single-writer dispatch prepared in application development source
+- Added `.github/workflows/dic-single-use-release.yml` with **workflow_dispatch only**, two exact inputs (owner release ID, tested source SHA), repository-wide serialized concurrency `cancel-in-progress:false`, `contents:write` scoped for the single ref update, and explicit branch/Netlify readiness variables. It runs no Netlify CLI/build hook and creates **no** production commit unless all runner checks succeed.
+- Added `tests/exclusive-release-workflow.test.mjs` validating no scheduled/push trigger and correct readiness/token bindings.
+- The workflow is in **development source only**: GitHub manual dispatch requires the workflow on default `main`. It cannot yet be invoked as a production controller. After all tests pass, copy the reviewed exact script+workflow into main operations branch; keep readiness variables unset until the GitHub Pro and Netlify settings are genuinely verified.
