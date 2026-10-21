@@ -1,0 +1,721 @@
+DIC_SQL_FILE tests/sql/bootstrap.sql
+DO
+CREATE ROLE
+CREATE ROLE
+CREATE ROLE
+CREATE SCHEMA
+CREATE SCHEMA
+GRANT
+CREATE TABLE
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+Applying supabase/migrations/20261009190246_dic_identity_foundation.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261009190246_dic_identity_foundation.sql
+CREATE SCHEMA
+REVOKE
+GRANT
+ALTER DEFAULT PRIVILEGES
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+COMMENT
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+COMMENT
+DO
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE TABLE
+ALTER TABLE
+REVOKE
+GRANT
+GRANT
+CREATE POLICY
+CREATE POLICY
+CREATE FUNCTION
+REVOKE
+CREATE TRIGGER
+CREATE FUNCTION
+REVOKE
+CREATE TRIGGER
+CREATE FUNCTION
+REVOKE
+Applying supabase/migrations/20261009192735_dic_coffee_catalog.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261009192735_dic_coffee_catalog.sql
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+COMMENT
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+DO
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+GRANT
+CREATE POLICY
+Applying supabase/migrations/20261012015417_dic_equipment_workspaces.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012015417_dic_equipment_workspaces.sql
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+CREATE INDEX
+ALTER TABLE
+ALTER TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+DO
+COMMENT
+COMMENT
+Applying supabase/migrations/20261012015600_dic_shots_recipes_community.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012015600_dic_shots_recipes_community.sql
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+ALTER TABLE
+CREATE INDEX
+COMMENT
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+COMMENT
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+DO
+REVOKE
+GRANT
+CREATE POLICY
+CREATE POLICY
+CREATE POLICY
+CREATE TRIGGER
+CREATE TRIGGER
+CREATE FUNCTION
+REVOKE
+CREATE TRIGGER
+CREATE FUNCTION
+REVOKE
+CREATE TRIGGER
+CREATE FUNCTION
+REVOKE
+CREATE TRIGGER
+COMMENT
+Applying supabase/migrations/20261012015655_dic_internal_function_access.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012015655_dic_internal_function_access.sql
+DO
+ALTER DEFAULT PRIVILEGES
+DIC_SQL_FILE supabase/tests/security_foundation.sql
+BEGIN
+DO
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            test_results                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"tests": ["01 all application and internal tables have RLS", "02 no anonymous table privileges", "03 internal RLS event function not client callable", "04 RLS auto-enable trigger remains enabled", "05 auth trigger creates private preferences", "06 new accounts pending; metadata cannot grant membership or admin", "07 contributor mapping created privately", "08 reused URL can reference distinct releases without merging", "09 all-green Turbo remains dialed in at 100 seconds", "10 snapshot built from recorded versions, not client JSON", "11 non-green shot is excluded from community projection", "12 green projection held pending authoritative quality validation", "13 unspecified feed condition remains unknown", "14 community family must match coffee and style", "15 pending account cannot read private or community data", "16 pending account cannot submit catalog changes", "17 admitted user sees only their own preferences", "18 allowed preference update increments server revision", "19 cross-user preference update affects zero rows", "20 client cannot set server revision", "21 client cannot grant itself admin", "22 contributor/account mappings are inaccessible", "23 members see verified coffee facts and evidence only", "24 member can create owned pending evidence submission", "25 cannot submit on another account", "26 member cannot set submission approval status", "27 canonical coffee overwrite blocked", "28 library and workspaces are owner-isolated", "29 own green and non-green shots readable; other raw shots hidden", "30 shot notes remain owner-only", "31 pending community projections not readable", "32 community eligibility cannot be set by client", "33 raw shot mutation requires controlled API", "34 direct current-coffee state mutation blocked", "35 another member sees eligible shared shot, not held shot", "36 other members cannot read proposals or admin reviews", "37 raw-to-community links not exposed", "38 admitted admin can review submissions and decisions", "39 admin review role does not expose personal notes/history", "40 anonymous catalog read denied", "41 anonymous account read denied", "42 recorded basket version immutable", "43 recorded hardware version immutable", "44 recorded grinder calibration immutable", "45 old shot equipment provenance cannot be rewritten", "46 composite foreign key rejects another owner basket", "47 same-owner basket from wrong setup rejected", "48 calibration must match grinder and burr hardware", "49 new shot requires grind setting", "50 legacy shot may retain missing grind without fabrication", "51 Basket Dose +/-1 g is not hard-blocked by database", "52 corrected green shot replaces projection and returns to validation", "53 non-green edit withdraws prior shared contribution", "54 restored green shot reuses same contribution identity", "55 hiding personal shot does not withdraw community evidence", "56 shot creation and edits have internal audit trail", "57 community projection has no private identity or note fields", "58 membership revocation immediately removes application access", "59 account deletion removes linked private history", "60 account deletion detaches identity while retaining shared evidence"], "checks": 60, "status": "passed", "fixtures_rolled_back": true}
+(1 row)
+
+ROLLBACK
+Applying supabase/migrations/20261012021522_dic_beta_session_api.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012021522_dic_beta_session_api.sql
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+ALTER TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE POLICY
+CREATE POLICY
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+Applying supabase/migrations/20261012022200_dic_authenticated_core_api.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012022200_dic_authenticated_core_api.sql
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+Applying supabase/migrations/20261012023227_dic_hidden_shot_family_integrity.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012023227_dic_hidden_shot_family_integrity.sql
+CREATE FUNCTION
+REVOKE
+Applying supabase/migrations/20261012030019_dic_owner_workspace_actions.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012030019_dic_owner_workspace_actions.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+REVOKE
+REVOKE
+Applying supabase/migrations/20261012030729_dic_remember_feed_condition.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012030729_dic_remember_feed_condition.sql
+CREATE FUNCTION
+REVOKE
+CREATE TRIGGER
+Applying supabase/migrations/20261012030924_dic_bound_client_mutations.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012030924_dic_bound_client_mutations.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+Applying supabase/migrations/20261012183642_dic_native_import_review.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012183642_dic_native_import_review.sql
+CREATE TABLE
+INSERT 0 1
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE POLICY
+CREATE POLICY
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261012183845_dic_import_qualified_validation.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261012183845_dic_import_qualified_validation.sql
+DO
+DIC_SQL_FILE supabase/tests/native_import.sql
+BEGIN
+CREATE TABLE
+DO
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  result                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"scope": "Database role tests; not browser login or disaster recovery", "checks": ["Preview validates all records and computes taste success", "Missing grind and unknown feed preserved", "Backup readiness gate closed", "Commit cannot bypass recovery gate", "Cross-account request rejected", "Missing account binding rejected", "Raw import archives not directly client-readable", "Browser cannot enable import gate", "Preview leaves no persisted account records", "Exact reviewed-file hash required", "Recovery acknowledgement required", "Atomic confirmed import succeeds in controlled test", "Retry returns existing import rather than duplicating", "Duplicate retry keeps exact shot count", "Null grind is not converted to zero", "Zero grind and successful 100-second Turbo preserved", "Basket Dose recommendation does not block historical observation", "Original timestamp retains milliseconds", "Private shot note survives", "New cached coffee remains unverified and estimated", "Adding unlogged coffee does not replace Current Coffee", "Complete source including legacy metadata archived unchanged", "Legacy aggregate samples never become community shots", "Other member cannot see imported private history", "Late invalid record rolls back all earlier records", "Unsupported experiment is blocked rather than dropped", "Credential-bearing backup rejected", "Archived source reconstructs observations in isolated restore drill", "Non-admitted account cannot preview", "Anonymous API access denied"], "passed": 30, "fixtures": "rolled back"}
+(1 row)
+
+ROLLBACK
+Applying supabase/migrations/20261014152014_dic_owner_only_import_exception.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261014152014_dic_owner_only_import_exception.sql
+DO
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+COMMENT
+COMMENT
+DO
+DO
+DIC_SQL_FILE supabase/tests/owner_only_import_exception.sql
+BEGIN
+CREATE TABLE
+DO
+                                                                                                                                                                                                                                                                              result                                                                                                                                                                                                                                                                              
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"scope": "Synthetic users and sample rows, entirely rolled back", "checks": ["Expired exception fails closed even if saves_enabled is true", "Another admitted account cannot import", "Only approved owner sees valid import permission", "Exact review hash and recovery acknowledgement remain mandatory", "First approved owner import succeeds atomically", "Identical retry cannot duplicate rows", "Second different import refused after automatic relock", "Gate atomically relocked, recovery remains unverified, exact import counts"], "passed": 8}
+(1 row)
+
+ROLLBACK
+Applying supabase/migrations/20261014200634_dic_setup_rename_feed_memory.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261014200634_dic_setup_rename_feed_memory.sql
+ALTER TABLE
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+DIC_SQL_FILE supabase/tests/setup_rename_feed_memory.sql
+BEGIN
+DO
+                                                      result                                                       
+-------------------------------------------------------------------------------------------------------------------
+ PASS: setup rename, permission isolation, replay conflict, per-setup feed memory and stale/legacy shot guardrails
+(1 row)
+
+ROLLBACK
+Applying supabase/migrations/20261014212829_dic_admin_read_only_dashboard.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261014212829_dic_admin_read_only_dashboard.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261014215731_dic_roaster_identity_matching.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261014215731_dic_roaster_identity_matching.sql
+CREATE EXTENSION
+CREATE EXTENSION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE POLICY
+CREATE POLICY
+INSERT 0 1
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261014221324_dic_coffee_auto_catalog.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261014221324_dic_coffee_auto_catalog.sql
+INSERT 0 3
+INSERT 0 4
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+GRANT
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+Applying supabase/migrations/20261014222202_dic_source_worker_target.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261014222202_dic_source_worker_target.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+Applying supabase/migrations/20261014222802_dic_unified_coffee_rpc_compat.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261014222802_dic_unified_coffee_rpc_compat.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261016154252_dic_url_first_and_autofill_preview.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261016154252_dic_url_first_and_autofill_preview.sql
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE POLICY
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+CREATE FUNCTION
+Applying supabase/migrations/20261017005739_dic_universal_coffee_preview_shared_30s.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261017005739_dic_universal_coffee_preview_shared_30s.sql
+ALTER TABLE
+ALTER TABLE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261017015639_dic_universal_preview_jwt_role_compat.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261017015639_dic_universal_preview_jwt_role_compat.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261017050220_dic_preview_daily_budget_12.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261017050220_dic_preview_daily_budget_12.sql
+ALTER TABLE
+UPDATE 0
+ALTER TABLE
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+COMMENT
+Applying supabase/migrations/20261017053258_dic_seven_roast_tier_compatibility.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261017053258_dic_seven_roast_tier_compatibility.sql
+ALTER TABLE
+ALTER TABLE
+CREATE FUNCTION
+Applying supabase/migrations/20261018035732_dic_seven_roast_owner_data.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261018035732_dic_seven_roast_owner_data.sql
+ALTER TABLE
+ALTER TABLE
+DO
+ALTER TABLE
+ALTER TABLE
+Applying supabase/migrations/20261018054140_dic_community_quality_integrity.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261018054140_dic_community_quality_integrity.sql
+CREATE TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE POLICY
+COMMENT
+CREATE FUNCTION
+CREATE FUNCTION
+COMMENT
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE FUNCTION
+CREATE TRIGGER
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+REVOKE
+GRANT
+REVOKE
+REVOKE
+GRANT
+GRANT
+COMMENT
+COMMENT
+Applying supabase/migrations/20261018064703_dic_contextual_quality_community_ui.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261018064703_dic_contextual_quality_community_ui.sql
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+REVOKE
+CREATE FUNCTION
+REVOKE
+REVOKE
+GRANT
+GRANT
+COMMENT
+COMMENT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261019041437_dic_community_release_context.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261019041437_dic_community_release_context.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+Applying supabase/migrations/20261019041452_dic_admin_beta_invitation_controls.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261019041452_dic_admin_beta_invitation_controls.sql
+ALTER TABLE
+CREATE TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE POLICY
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+COMMENT
+COMMENT
+Applying supabase/migrations/20261021053500_dic_admin_coffee_review.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261021053500_dic_admin_coffee_review.sql
+ALTER TABLE
+ALTER TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+REVOKE
+GRANT
+GRANT
+REVOKE
+REVOKE
+GRANT
+GRANT
+Applying supabase/migrations/20261021062000_dic_duplicate_first_auto_approval.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261021062000_dic_duplicate_first_auto_approval.sql
+ALTER TABLE
+ALTER TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+REVOKE
+GRANT
+Applying supabase/migrations/20261021221455_dic_source_worker_auth_and_admission.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261021221455_dic_source_worker_auth_and_admission.sql
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+DO
+CREATE FUNCTION
+REVOKE
+GRANT
+Applying supabase/migrations/20261021222700_dic_admin_content_review.sql to isolated PostgreSQL
+DIC_SQL_FILE supabase/migrations/20261021222700_dic_admin_content_review.sql
+CREATE TABLE
+ALTER TABLE
+REVOKE
+GRANT
+CREATE POLICY
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+REVOKE
+GRANT
+GRANT
+REVOKE
+REVOKE
+REVOKE
+GRANT
+GRANT
+GRANT
+DIC_SQL_FILE tests/sql/owner-fixture.sql
+DO
+INSERT 0 1
+UPDATE 1
+INSERT 0 1
+Running coffee_identity_matching
+DIC_SQL_FILE supabase/tests/coffee_identity_matching.sql
+BEGIN
+DO
+                                                          result                                                           
+---------------------------------------------------------------------------------------------------------------------------
+ PASS: five brand aliases, safe coffee release matching, tracked URL invariance, fuzzy confirmation, privacy and no writes
+(1 row)
+
+ROLLBACK
+Running coffee_automated_approval
+DIC_SQL_FILE supabase/tests/coffee_automated_approval.sql
+BEGIN
+DO
+                                           result                                           
+--------------------------------------------------------------------------------------------
+ PASS: nonadmin distinct autoapproval, idempotence, fuzzy alias user merge,                +
+  earliest first entry, service-only source verification and unchanged history; rolled back
+(1 row)
+
+ROLLBACK
+Running admin_read_only_dashboard
+DIC_SQL_FILE supabase/tests/admin_read_only_dashboard.sql
+BEGIN
+DO
+                                                            result                                                             
+-------------------------------------------------------------------------------------------------------------------------------
+ PASS: existing owner admin allowed; separate admitted member and anon denied; sanitized queue; all synthetic data rolled back
+(1 row)
+
+ROLLBACK
+Running admin_coffee_review
+DIC_SQL_FILE supabase/tests/admin_coffee_review.sql
+BEGIN
+DO
+                                                              result                                                              
+----------------------------------------------------------------------------------------------------------------------------------
+ PASS: admin-only review, stale revision refusal, evidence labeling, safe hold, original library, anon/member denial; rolled back
+(1 row)
+
+ROLLBACK
+Running admin_content_review
+DIC_SQL_FILE supabase/tests/admin_content_review.sql
+BEGIN
+DO
+                                                                                                                              result                                                                                                                               
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ PASS: admin-only pagination, creator attribution, private notes, member/anon denial, stale revisions, partial corrections, nullable fields, immutable provenance, retained audits, full note limit and refreshed personal families; synthetic records rolled back
+(1 row)
+
+ROLLBACK
+Running coffee_duplicate_first_auto_approval
+DIC_SQL_FILE supabase/tests/coffee_duplicate_first_auto_approval.sql
+BEGIN
+DO
+                                            result                                            
+----------------------------------------------------------------------------------------------
+ PASS: auto-approved distinct nonadmin, same-release reuse, distinct year, duplicate Pending,+
+  idempotent replay, member-owned legacy retry, security and history unchanged; rolled back
+(1 row)
+
+ROLLBACK
+Running admin_invitation_controls
+DIC_SQL_FILE supabase/tests/admin_invitation_controls.sql
+BEGIN
+DO
+                                                                            result                                                                             
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+ PASS: administrator permanent, nonadmin/anon denied, strictly single-use never-expiring invites, revoke and nonadmin removal/restore; transaction rolled back
+(1 row)
+
+ROLLBACK
+Running url_preview_release
+DIC_SQL_FILE supabase/tests/url_preview_release.sql
+BEGIN
+DO
+                                                                   result                                                                    
+---------------------------------------------------------------------------------------------------------------------------------------------
+ PASS: trusted preview target, client denial, per-account quotas, release conflicts, ambiguity and source reuse with stable library identity
+(1 row)
+
+ROLLBACK
+Running universal_url_preview
+DIC_SQL_FILE supabase/tests/universal_url_preview.sql
+BEGIN
+DO
+                                                   result                                                   
+------------------------------------------------------------------------------------------------------------
+ PASS: JSON-only JWT admitted-member authorization, cross-route 30-second cooldown, admission and daily cap
+(1 row)
+
+ROLLBACK
+Running seven_roast_levels
+DIC_SQL_FILE supabase/tests/seven_roast_levels.sql
+BEGIN
+DO
+                                                   result                                                    
+-------------------------------------------------------------------------------------------------------------
+ PASS: seven roast categories, original source evidence retained, invalid reject and trusted promotion guard
+(1 row)
+
+ROLLBACK
+Running community_quality_integrity
+DIC_SQL_FILE supabase/tests/community_quality_integrity.sql
+BEGIN
+NOTICE:  PASS community: verified-only, five peers, outlier confirmation, identity, correction, hidden/deleted durability, Pending approval, contributor counts, RLS, idempotence
+DO
+                             result                             
+----------------------------------------------------------------
+ PASS: isolated community quality integration; no hosted writes
+(1 row)
+
+ROLLBACK
+Running pre_release_cross_account
+DIC_SQL_FILE supabase/tests/pre_release_cross_account.sql
+BEGIN
+ERROR:  Calibration does not match the recorded grinder and burrs.
+CONTEXT:  PL/pgSQL function private.capture_equipment_snapshot() line 8 at RAISE
+SQL statement "insert into public.shots(owner_id,library_entry_id,setup_id,setup_version_id,
+   basket_version_id,calibration_id,style,pulled_at,dose_g,yield_g,time_s,
+   grind_setting,temperature_c,extraction,body,clarity,sweetness,astringency,equipment_snapshot)
+  values(owner,library_id,setup_id,version_id,basket_version_id,calibration_id,
+   'Traditional',now()-make_interval(mins=>i),18,40,25,2,93.2,2,3,4,4,1,'{}')
+  returning id"
+PL/pgSQL function inline_code_block line 40 at SQL statement

@@ -2,7 +2,7 @@
 
 **Project:** The Dial In Collective  
 **Date:** October 21, 2026 UTC  
-**Status:** Three review passes completed; final integrated execution and GitHub delivery receipts are being attached below. Source changes are not a production release.
+**Status:** Three review passes completed. Integrated application source is in PR #48; core, SQL and signed HTTP CI passed, and the administrator browser harness repair is awaiting exact rerun. Operations PR #49 passed its own CI but its merge is held by automatic approval review. Source changes are not a production release.
 
 ## What this audit covers
 
@@ -64,7 +64,9 @@ Recovery capture uses one exported read-only repeatable-read snapshot for both p
 | Combined local Node suite | 571 passed, zero skipped, before the final two card-total regressions. Final card-total file: 9/9 passed. Hosted combined results will supersede this bounded checkpoint. |
 | Local pinned lint and cloud build | Passed. Local Node 24.19; hosted Node 18/22 gates are separate. |
 | Complete local SQL sequence | PASS: all 34 migrations and 17 suites on PostgreSQL 17.11, exit 0. Two earlier synthetic calibration fixture failures were retained and corrected without weakening real provenance constraints. The admin candidate then received a CLI-generated filename without changing SQL bytes. |
-| Hosted exact-commit CI | Pending final GitHub commit and PR. Includes approval, validate, cloud-tests, mobile-browser-qa, SQL/signed HTTP and visual checks. |
+| Hosted integrated application CI | Commit `7efd96f...`: approval run [39689178354](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39689178354) passed; validate run [39689178330](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39689178330) passed 573/573 Node 22 tests, lint/build and Node 18 ignore-stage checks; SQL run [39689178365](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39689178365) passed 34 migrations, 17 SQL suites, 32 signed HTTP assertions and six snapshot scenarios. |
+| Browser follow-up | Runs 39689178570 and 39689178310 stopped at the same missing actual denial classifier in their administrator harness. Cloud-owner 50-case checks and actual service-worker offline reopening passed. Both harnesses now load the real module, with every acceptance assertion preserved; exact repaired Chromium execution remains required. |
+| Sparse operations PR CI | PR #49 at `fcfb3d1...`: run [39689422083](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39689422083) passed 38/38 Node 22 tests and six network-isolated PostgreSQL snapshot scenarios. Main integration remains held as explained below. |
 | Live production and device acceptance | No deployment or new owner/device acceptance performed by this audit. Existing scoped acceptance is preserved. |
 
 The final source manifest and completion receipt identify the delivered hashes, exact checks, branch updates and any remaining gates. A passing synthetic test is not a real account/device observation.
@@ -84,3 +86,9 @@ One known storage-failure boundary remains: if cache deletion fails and the appl
 The independently observed production release is `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`, Netlify READY/current deploy `6ad92fd1d706315f29032892`, using tested application `c6976b1fc86ed5e6b38c0c38831950fca017b3a4`. Supabase has 32 applied migrations. The original `DIC-20261021-BETA-COFFEE-01` grant is consumed. The [sanitized provider receipt](2026-10-21-provider-readback.json) records counts, RLS/grant checks and the source-to-provider migration aliases.
 
 The audit changes development source and reviewed workflow definitions. It does not approve a new frontend publication, hosted SQL/Edge/Auth change, member-data mutation, provider-setting change or purchase. Those actions require their existing concrete approval and verification process.
+
+## Operations integration hold and next application gate
+
+[Application PR #48](https://github.com/Schulzet3/The-Dial-In-Collective/pull/48) contains the combined audit and preserved concurrent administrator work. Its first 97 changed files were read back exactly. The browser follow-up loads the actual `isAccessDenied` classifier instead of leaving a stripped import unresolved. The [focused harness receipt](2026-10-21-browser-harness-validation.json) distinguishes its 12 synthetic execution groups from actual Chromium acceptance. The [local SQL report](local_project_sql_verification.md), [receipt](local_project_sql_receipt.json), [executed input hashes](local_project_sql_20261021_attempt3_files.json) and [successful transcript](local_project_sql_20261021_attempt3.log) preserve the earlier independent runtime evidence. Failed synthetic fixture attempts are retained alongside them; they did not weaken provenance checks.
+
+[Operations PR #49](https://github.com/Schulzet3/The-Dial-In-Collective/pull/49) is fully prepared, has all 27 changed files read back, and passed its exact isolated CI. Automatic approval review rejected the attempted merge because existing main push filters would export the live database read-only into a new encrypted artifact in this private GitHub repository and run the isolated recovery workflow. The merge did not occur; main remains `f8726e330648c4a3e82de88d75b6978ffee37d44`. No live export or recovery smoke result is claimed. The concrete merge and its effects need explicit owner approval. Do not bypass that hold by changing triggers, direct ref writes or equivalent dispatches. The Drive courier ignores push runs, so a later successful GitHub smoke backup would still not establish a new offsite-copy receipt.
