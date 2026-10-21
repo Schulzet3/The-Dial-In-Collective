@@ -17,6 +17,10 @@ on:
         description: "Exact 40-character tested development commit SHA"
         required: true
         type: string
+      release_evidence_json:
+        description: "Fresh schema-v2 manual evidence JSON: exact grant/source/current refs, encrypted snapshot/offsite receipt and credit check"
+        required: true
+        type: string
 permissions:
   contents: write
   checks: read
@@ -40,6 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_RELEASE_ID: ${{ inputs.release_id }}
           INPUT_TESTED_SOURCE_SHA: ${{ inputs.tested_source_sha }}
+          INPUT_RELEASE_EVIDENCE_JSON: ${{ inputs.release_evidence_json }}
           DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED: ${{ vars.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED }}
           # This explicitly denotes advisory CI+grant+CAS, NOT protected refs.
           DIC_PRIVATE_FREE_COMPENSATING_MODE: 'YES'

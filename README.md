@@ -4,11 +4,22 @@
 
 Start here:
 
-1. [Current Status](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/CURRENT_STATUS.md): latest verified milestones, next action, open questions and provider-access limits.
-2. [Master Specification](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/MASTER_SPECIFICATION.md) and [Decision Ledger](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/DECISION_LEDGER.json): canonical requirements, preserved originals and explicit supersessions.
-3. [Documentation Index](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/README.md) and [AGENTS](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/AGENTS.md): evidence navigation and continuation rules.
+1. [Active application work journal](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md): read first for incomplete attempts and current blockers.
+2. [Current Status](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/CURRENT_STATUS.md): latest verified milestones, next action, open questions and provider-access limits.
+3. [Master Specification](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/MASTER_SPECIFICATION.md) and [Decision Ledger](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/DECISION_LEDGER.json): canonical requirements, preserved originals and explicit supersessions.
+4. [Documentation Index](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/README.md) and [AGENTS](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/AGENTS.md): evidence navigation and continuation rules.
 
-When continuing the project, review GitHub's active development branch and Current Status first. Preserve all Locked decisions. Ask product questions one at a time. Never treat an old checklist or an Open proposal as a new requirement or current completion state.
+When continuing the project, review GitHub's active development branch and its active journal before Current Status. Preserve all Locked decisions. Ask product questions one at a time. Never treat an old checklist or an Open proposal as a new requirement or current completion state.
+
+## Current operations — October 21, 2026
+
+Verified production is Netlify READY/current deploy `6ad92fd1d706315f29032892`, release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. The nightly source pin is updated to that exact published release. The original grant is consumed; main changes do not authorize another publication.
+
+The [operations journal](docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md) records the current audit repairs and actual CI/smoke outcomes. The [schema-2 evidence guide](docs/RELEASE_REQUEST_SCHEMA_V2.md) governs new release requests. The [application audit](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/audits/2026-10-21-three-pass-audit.md) records three-pass scope, findings, source repairs and unfinished requests.
+
+Existing main backup/recovery path triggers perform a live-read encrypted backup and isolated restore; their results need independent readback. A push-run backup is not a scheduled offsite receipt. Preserve all prior archives, private-Free policy and member data.
+
+## Historical navigation and provider observations (superseded)
 
 Documentation consolidation commit: [c1e8d3175be836b4a7fc92d731729583e7ebe55d](https://github.com/Schulzet3/The-Dial-In-Collective/commit/c1e8d3175be836b4a7fc92d731729583e7ebe55d). Its commit parent/tree, all 11 changed files and exact content/blob hashes, expected branch ref, and documentation-only diff were read back and verified from GitHub. The original ledger's 79 Locked and 20 Open entries plus all eight GitHub ledger objects were preserved. "Verified" describes these checks, not a commit signature.
 

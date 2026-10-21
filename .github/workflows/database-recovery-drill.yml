@@ -1,12 +1,14 @@
 name: DIC weekly recovery verification
 
 on:
-  # Self-test recovery changes before the next weekly production drill.
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - .github/workflows/database-recovery-drill.yml
       - scripts/backups/isolated-recovery-drill.sh
+      - scripts/backups/capture-recovery-snapshot.sh
+      - scripts/backups/assert-recovery-inventory.sh
   workflow_dispatch:
   schedule:
     - cron: '43 10 * * 0'
@@ -20,7 +22,7 @@ concurrency:
 
 jobs:
   isolated-restore:
-    # Fixed LTS runner; prevent unreviewed ubuntu-latest 26.04 transition.
+    # Pin OS so the Oct-Nov 2026 ubuntu-latest migration does not change backup behavior.
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
@@ -30,5 +32,5 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - name: Restore all user application tables to a disposable, network-isolated PostgreSQL
+      - name: Restore real snapshot in a disposable, network-isolated PostgreSQL
         run: bash scripts/backups/isolated-recovery-drill.sh

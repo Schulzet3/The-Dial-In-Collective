@@ -1,4 +1,13 @@
-# Protected default-branch single-use release controller — installation receipt
+# Default-branch single-use release controller — installation history
+
+## Current operating state — October 21, 2026
+
+The release controller and Netlify routing are installed, and the original owner grant was consumed by the independently verified release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. Native Actions final-push reliability remains issue #44; do not treat the supervised recovery as native acceptance. GitHub Free/private checks remain advisory. Current repairs and exact verification status are in the [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md).
+
+New manual requests require `release_evidence_json` under [schema 2](RELEASE_REQUEST_SCHEMA_V2.md), in addition to the unique owner grant and tested source. Historical request files and consumed approvals must not be replayed. The wording below records older installation checkpoints, including superseded inert/no-grant/provider-routing assumptions; it is not the present checklist.
+
+## Historical installation evidence (preserved)
+
 
 ## Latest owner policy supersession — GitHub Free/private, NO upgrade or public visibility (October 20, 2026)
 
