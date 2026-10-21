@@ -1,3 +1,8 @@
+# Locked protected release handoff (October 20, 2026)
+- Current owner-approved one-shot release control is **development implemented, hosted protections BLOCKED**, not COMPLETE. [Owner action/runbook](docs/GITHUB_PROTECTED_RELEASE_OWNER_ACTIONS_2026-10-20.md) and [Project instructions to paste](docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md). Do not publish until private GitHub Pro/required CI, isolated release actor, Netlify dedicated source and explicit grant are independently verified.
+- Exact source of last main inert release controller: `9128a05fdb4efc0ef1b0b06e0f3e0274dcc34501`. Current production unchanged `e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60`. The app development branch is **not** Netlify production authority after future dedicated release cutover.
+- GitHub private repo Rulesets API currently 403 requires GitHub Pro; branch protections integration lacks admin access. Do not try workarounds by making repository public or disabling a proper release branch rule. A bot direct-push mechanism needs a strictly authorized actor or PR-based merge design before declaring full at-most-one protection. Issue #38 OPEN.
+
 # Mandatory per-commit approval and handoff integrity (2026-10-20)
 
 - **First read:** [Live work checkpoint](docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) **before** CURRENT_STATUS, Master Specification, Decision Ledger, issue backlog, or source edits. It contains exact incomplete attempts, CI blockers, owner reports and next steps, not merely an end-of-session summary.
