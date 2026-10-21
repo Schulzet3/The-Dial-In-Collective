@@ -18,6 +18,7 @@
     "current_owner_autofill_button_only_20261019",
     "current_owner_beta_breached_password_opt_out_20261018",
     "current_owner_beta_member_soft_remove_only_20261018",
+    "current_owner_duplicate_first_automatic_catalog_approval_20261021",
     "current_owner_extractor_deterministic_only_20261019",
     "current_owner_github_continuity",
     "current_owner_github_free_private_no_upgrade_20261020",
@@ -284,6 +285,28 @@
         {
           "path": "site/cloud/client.js",
           "contains": "async confirmCommunityOutlier(shotId,expectedRevision)"
+        }
+      ]
+    },
+    {
+      "id": "duplicate_first_catalog_auto_approval",
+      "decision_key": "current_owner_duplicate_first_automatic_catalog_approval_20261021",
+      "scope": "Only genuinely distinct member coffee auto approval and safe same-release reuse; hold genuine duplicate conflict; source provenance separate; keep Mango Pending",
+      "implementation": "approved_pending_code",
+      "device_acceptance": "NOT_DEPLOYED_OR_ACCEPTED",
+      "issue": 43,
+      "assertions": [
+        {
+          "path": "supabase/migrations/20261021062000_dic_duplicate_first_auto_approval.sql",
+          "contains": "member_auto_approved"
+        },
+        {
+          "path": "supabase/tests/coffee_duplicate_first_auto_approval.sql",
+          "contains": "auto-approved distinct nonadmin"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Coffee automatically approved and added to the shared catalog."
         }
       ]
     }
