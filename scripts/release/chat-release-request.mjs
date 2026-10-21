@@ -11,7 +11,7 @@ const REQUIRED=['schema_version','release_id','tested_source_sha',
  'expected_release_head_sha','expected_development_head_sha',
  'owner_approval_source','created_at_utc','backup_evidence','credit_evidence'];
 const REQ_BACKUP=['artifact_id','encrypted_sha256','owner_private_offsite_file_id',
- 'verified_at_utc','latest_observed_data_write_at_utc'];
+ 'archive_completed_at_utc','verified_at_utc','latest_observed_data_write_at_utc'];
 const REQ_CREDIT=['observed_remaining_credits','observed_at_utc','source'];
 const deny=reason=>{throw new Error('Chat release request denied: '+reason);};
 const exactly=(obj,keys)=>!!obj&&typeof obj==='object'&&!Array.isArray(obj)&&
@@ -55,13 +55,17 @@ export function validateChatReleaseRequest({
     backup.artifact_id<=0||!HASH.test(backup.encrypted_sha256)||
     typeof backup.owner_private_offsite_file_id!=='string'||
     backup.owner_private_offsite_file_id.length<10||
+    !validDate(backup.archive_completed_at_utc)||
     !validDate(backup.verified_at_utc)||
     !validDate(backup.latest_observed_data_write_at_utc))
   deny('encrypted/offsite backup evidence missing or malformed');
+ const archived=Date.parse(backup.archive_completed_at_utc);
  const verified=Date.parse(backup.verified_at_utc);
- if(verified>now+60_000||verified<Date.parse(backup.latest_observed_data_write_at_utc)||
-    now-verified>2*60*60*1000)
-  deny('backup verification is stale or older than observed user data writes');
+ const latestWrite=Date.parse(backup.latest_observed_data_write_at_utc);
+ if(archived<latestWrite||archived>verified||archived>now+60_000)
+  deny('encrypted archive does not cover latest observed user data write');
+ if(verified>now+60_000||now-verified>2*60*60*1000)
+  deny('backup verification is stale or future-dated');
  const credit=request.credit_evidence;
  if(!exactly(credit,REQ_CREDIT)||!Number.isSafeInteger(credit.observed_remaining_credits)||
     credit.observed_remaining_credits<15||!validDate(credit.observed_at_utc)||
