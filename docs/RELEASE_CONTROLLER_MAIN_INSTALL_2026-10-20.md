@@ -1,4 +1,10 @@
 # Protected default-branch single-use release controller — installation receipt
+
+## Latest owner policy supersession — GitHub Free/private, NO upgrade or public visibility (October 20, 2026)
+
+Owner explicitly declined GitHub Pro and making the repository public. Earlier checklist and prerequisite suggestions in this historical ops file are **SUPERSEDED**: **DO NOT ask the owner to buy Pro, change repository visibility, or set a fake private-branch-protection verification flag**. Source of truth is the active app-branch [Master Specification](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/MASTER_SPECIFICATION.md), [Decision Ledger](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/DECISION_LEDGER.json), and [GitHub Free/private operating plan](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/GITHUB_FREE_PRIVATE_CONTINUITY_AND_RELEASE_PLAN_2026-10-20.md).
+
+The manual release controller on this unprotected `main` branch remains **INERT**. GitHub Actions testing is advisory on private GitHub Free; it does not prevent direct writer bypass. There are no grants or verified release readiness flags and Netlify still follows the prior development source; no owner authorization to deploy, switch Netlify branches, spend credits or change user data. Keep #38 OPEN and require separate owner acknowledgment of any future manual Free/private release procedure and its unavoidable risks.
 **Installed in backup/operations branch `main` on 2026-10-20. INERT until owner configuration.**
 
 The controlled GitHub Actions workflow `.github/workflows/dic-single-use-release.yml` is manual `workflow_dispatch` only, not activated on pushes, PRs, scheduled backups or routine work sessions. It requires exact inputs `release_id` and `tested_source_sha` and a matching explicit, expiring owner grant in the protected application branch.
