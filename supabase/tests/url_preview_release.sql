@@ -70,7 +70,7 @@ begin
  insert into public.library_entries(id,owner_id,submission_id) values(library_id,second_user,pending);
  perform set_config('request.jwt.claim.role','service_role',true);
  execute 'set local role service_role';
- got:=public.dic_trusted_source_verify(pending,jsonb_build_object('checked_url',url,'product_name','CI Release','title_matches',true,'evidence_kind','jsonld_product','release_label','2026'));
+ got:=public.dic_trusted_source_verify(pending,jsonb_build_object('checked_url',url,'product_name','CI Release','title_matches',true,'evidence_kind','jsonld_product','release_label','2026','submission_revision',1));
  if got->>'coffee_id' is distinct from candidate::text then raise exception 'Exact release source reuse failed: %',got; end if;
  execute 'reset role';
  if not exists(select 1 from public.library_entries where id=library_id and owner_id=second_user and coffee_id=candidate and submission_id is null) then raise exception 'Original library identity lost'; end if;

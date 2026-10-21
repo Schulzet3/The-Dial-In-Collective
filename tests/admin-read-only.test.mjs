@@ -38,7 +38,10 @@ test('invalid and missing aggregates cannot display misleading numbers',()=>{
  for(const bad of ['wat',null,undefined,-1])assert.equal(formatCount(bad),'—');
  assert.equal(formatCount(4),'4');
  assert.equal(formatCount(0),'0');
- assert.match(renderAdminDashboard(),/No coffee submissions need review/);
+ const html=renderAdminDashboard();
+ assert.match(html,/No pending coffee submissions/);assert.match(html,/No coffee conflicts/);
+ assert.doesNotMatch(html,/NaN|Infinity/);
+ assert.equal((html.match(/<strong>—<\/strong>/g)||[]).length,5);
 });
 test('administrator denial never renders protected queue',()=>{
  const html=renderAdminDenied('<script>bad</script>');

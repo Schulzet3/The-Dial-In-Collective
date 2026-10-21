@@ -8,6 +8,9 @@ SITE = ROOT / "site"
 OUT = ROOT / "qa_artifacts" / "cloud"
 OUT.mkdir(parents=True, exist_ok=True)
 
+records=(SITE / "admin" / "records.js").read_text()
+records=re.sub(r"^import .*?;\s*$", "", records, flags=re.M)
+records=re.sub(r"\bexport\s+", "", records)
 view=(SITE / "admin" / "view.js").read_text()
 view=re.sub(r"^import .*?;\s*$", "", view, flags=re.M)
 view=re.sub(r"\bexport\s+", "", view)
@@ -71,8 +74,10 @@ with sync_playwright() as p:
  errors=[]
  page.on("pageerror",lambda err: errors.append(str(err)))
  page.set_content('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>'+css+'</style></head><body><main id="admin-root" class="admin-shell"></main></body></html>')
- page.add_script_tag(content=mock+"\n"+view+"\n"+main)
+ page.add_script_tag(content=mock+"\n"+records+"\n"+view+"\n"+main)
  page.get_by_role("heading",name="Beta Invitations").wait_for()
+ assert page.locator(".admin-stats a").all_text_contents()[0].startswith("Pending Coffees")
+ assert [a.get_attribute("href") for a in page.locator(".admin-stats a").all()]==["#admin-pending","#admin-conflicts","#admin-approved","#admin-shots","#admin-accounts"]
  assert page.get_by_text("operator@synthetic.invalid").count()==1
  assert page.get_by_text("tester@synthetic.invalid").count()==1
  assert page.get_by_text("Protected",exact=True).count()==1

@@ -1,0 +1,136 @@
+{
+  "scope": "Late administrator delta after frozen three-pass application audit; root integrated incoming0a400f85 and incoming5ab369 view delta. Source-only, no deployment or real-account acceptance.",
+  "counts": {
+    "tests": 31,
+    "pass": 31,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "todo": 0
+  },
+  "test_files": 6,
+  "results": [
+    {
+      "path": "tests/admin-coffee-review.test.mjs",
+      "sha256": "1728d88fcb243ca9f1f13e5419caf5f6cad14f6bc2297fb037e00b63167ac846",
+      "exit_code": 0,
+      "counts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 review API has owner-independent admin permission and does not spoof official verification (19.849667ms)\n\u2139 tests 1\n\u2139 suites 0\n\u2139 pass 1\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 31.273339\n"
+    },
+    {
+      "path": "tests/admin-invitation-controls.test.mjs",
+      "sha256": "288fb39642307c3c2e021256b37f694b7c895ecdbc2aa64cae9f2f0bfc1b2e1d",
+      "exit_code": 0,
+      "counts": {
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 admin code issue list is metadata-only and existing admin cannot be disabled from UI (2.821252ms)\n\u2714 secret appears only when freshly returned by issuance, not upon subsequent overview (1.319326ms)\n\u2714 every operator-controlled label/email is escaped, not executable markup (0.971873ms)\n\u2714 removed member retains identity and restore access control, admin stays protected (0.557586ms)\n\u2714 no direct client-side table insert, privileged access only via member-gated RPC (1.347686ms)\n\u2714 admin can issue and copy a code once, refreshing clears it; no code in list (14.576466ms)\n\u2714 member removal/restoration and invitation revocation require RPC, then refresh (5.36454ms)\n\u2714 cross-tab account change immediately removes one-time invitation and denies stale render (3.63934ms)\n\u2714 admin cannot open portal without both server admin and admission status (2.509114ms)\n\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 53.485693\n"
+    },
+    {
+      "path": "tests/admin-read-only.test.mjs",
+      "sha256": "ee1459be7e814329fb18ef22110aba1966f807e7884af778d8bf817456073591",
+      "exit_code": 0,
+      "counts": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 admin dashboard offers guarded manual review without destructive delete (4.607282ms)\n\u2714 untrusted coffee fields are HTML escaped, not executable or clickable (0.56882ms)\n\u2714 invalid and missing aggregates cannot display misleading numbers (0.538529ms)\n\u2714 administrator denial never renders protected queue (0.186625ms)\n\u2714 admin page uses the same persisted Supabase session and verifies admin RPC (10.959926ms)\n\u2714 the proposed SQL never grants admin rights or enables mutation operations (2.176443ms)\n\u2714 admin review UI requires signed-session RPC, reason and exact revision (1.852115ms)\n\u2714 manual review displays compatible duplicates and escapes candidate names (0.587705ms)\n\u2139 tests 8\n\u2139 suites 0\n\u2139 pass 8\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 43.012206\n"
+    },
+    {
+      "path": "tests/admin-records.test.mjs",
+      "sha256": "a94f9164789883932d91132fd1536eb89d86396d7d2c3debe7d91b0a0da4d9a8",
+      "exit_code": 0,
+      "counts": {
+        "tests": 7,
+        "pass": 7,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 admin five metric cards navigate in exact owner order (5.625487ms)\n\u2714 records are escaped, creator displayed and fields editable only through a form (3.648069ms)\n\u2714 pagination includes a Next link and shows accurate total (0.465407ms)\n\u2714 an emptied record page reports an empty page and retains a Previous route (0.918152ms)\n\u2714 account-list failure exposes the overview fallback without a looping Next action (0.810064ms)\n\u2714 successful account pages preserve exact totals and handle a concurrently emptied page (0.324536ms)\n\u2714 complete record pages place the legacy review preview in closed disclosures (1.635582ms)\n\u2139 tests 7\n\u2139 suites 0\n\u2139 pass 7\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 56.851154\n"
+    },
+    {
+      "path": "tests/admin-session.test.mjs",
+      "sha256": "cdbc63f3426a6bc151896dea975cc0370a1b1cdf335e75151f3c62acd3971b59",
+      "exit_code": 0,
+      "counts": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 admin data disappears immediately when another tab signs out (7.334896ms)\n\u2714 a delayed admin response cannot restore private data after an account switch (3.825439ms)\n\u2714 administrator refresh can be retried after a temporary server failure (11.710202ms)\n\u2714 explicit administrator denial removes private records and prevents further actions (3.653832ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 40.076265\n"
+    },
+    {
+      "path": "tests/admin-url-enrichment.test.mjs",
+      "sha256": "ba0581abdad3e523afbd576ef6bb0cdb3b0705b3be59788532e0de1529aed2b5",
+      "exit_code": 0,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 approved coffee preview preserves readonly identity and typed facts while enriching editable blanks (12.875885ms)\n\u2714 a preview response for an earlier source URL cannot populate the replacement draft (6.253413ms)\n\u2139 tests 2\n\u2139 suites 0\n\u2139 pass 2\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 34.962177\n"
+    }
+  ],
+  "source_snapshots": [
+    {
+      "path": "site/admin/main.js",
+      "sha256": "646ce972b5162342e7c16a30ba2a5f0827069866c6f008a8f9bf82866b075005",
+      "syntax_exit_code": 0,
+      "syntax_output": ""
+    },
+    {
+      "path": "site/admin/view.js",
+      "sha256": "cef42e86d2cdec1c9496319d522dfca6d3702c8dabb1f4f320455503244c23a4",
+      "syntax_exit_code": 0,
+      "syntax_output": ""
+    },
+    {
+      "path": "site/admin/records.js",
+      "sha256": "8ef455e29fa3387135d8378918475e9f725cd0c48d5777e67e7debe1dfe75f2b",
+      "syntax_exit_code": 0,
+      "syntax_output": ""
+    },
+    {
+      "path": "build_cloud.mjs",
+      "sha256": "7abacf367e19d3868e2b4009bb5b90e8a6f871dd71238a20e90e78cbd5be81ea",
+      "syntax_exit_code": 0,
+      "syntax_output": ""
+    },
+    {
+      "path": "tests/admin-url-enrichment.test.mjs",
+      "sha256": "ba0581abdad3e523afbd576ef6bb0cdb3b0705b3be59788532e0de1529aed2b5",
+      "syntax_exit_code": 0,
+      "syntax_output": ""
+    },
+    {
+      "path": "tests/admin-records.test.mjs",
+      "sha256": "a94f9164789883932d91132fd1536eb89d86396d7d2c3debe7d91b0a0da4d9a8",
+      "syntax_exit_code": 0,
+      "syntax_output": ""
+    }
+  ]
+}

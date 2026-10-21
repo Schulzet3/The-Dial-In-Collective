@@ -41,6 +41,13 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+      # Netlify's ignore command runs before install on Node 18, independently
+      # of the application's configured Node 22. Exercise that real boundary.
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '18.20.8'
+      - name: Verify Netlify ignore guard on its pre-install Node 18 runtime
+        run: node --test tests/netlify-credit-guard.test.mjs tests/one-use-claim.test.mjs
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'

@@ -253,7 +253,19 @@ export function recommendation(s,coffeeId,options={}) {
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
   const a=last.suggestion||nextAdvice(s,last,rec);
-  if(a.next){rec.reasons=[];rec.source='Adjustment from your latest taste rating';if(a.next.grindSetting!=null)rec.grind={value:a.next.grindSetting,source:'Next setting to try',proven:false};if(a.next.yieldCenter!=null){rec.yield={low:Math.max(5,round(a.next.yieldCenter-1)),high:round(a.next.yieldCenter+1),center:round(a.next.yieldCenter)};rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};}if(a.next.tempC!=null)rec.tempC=a.next.tempC;}
+  if(a.next){
+   // An applied next-shot adjustment keeps every other measured control
+   // steady. Do not silently reset dose/temperature to starting defaults.
+   // The owner-Locked Dose caption remains unchanged; the initial starting
+   // recipe above still uses basket dose, while this adjustment uses actuals.
+   rec.reasons=[];rec.source='Adjustment from your latest taste rating';
+   rec.doseG=a.next.doseG??last.doseG;
+   rec.tempC=a.next.tempC??last.tempC??null;
+   rec.grind={value:a.next.grindSetting??last.grindSetting,source:'Next setting to try',proven:false};
+   const nextYield=a.next.yieldCenter??last.yieldG;
+   rec.yield={low:Math.max(5,round(nextYield-1)),high:round(nextYield+1),center:round(nextYield)};
+   rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};
+  }
   if(exp){rec.source='Experiment starting window';rec.established=false;}
  }
  if(!rec.established&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){

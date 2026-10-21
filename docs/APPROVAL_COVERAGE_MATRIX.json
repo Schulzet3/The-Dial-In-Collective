@@ -3,6 +3,7 @@
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "Any NEW current_owner_ decision key requires deliberate classification in this inventory before CI/build can pass; anchors verify source presence, NOT live user-device acceptance or every baseline behavior.",
   "owner_decision_key_inventory": [
+    "current_owner_admin_records_edit_20261021",
     "current_owner_approved_adaptive_extractor_production_release_20261020",
     "current_owner_approved_agtron_narrative",
     "current_owner_approved_community_nested_layout_20261018",
@@ -312,6 +313,39 @@
         {
           "path": "site/cloud/main.js",
           "contains": "Coffee automatically approved and added to the shared catalog."
+        }
+      ]
+    },
+    {
+      "id": "admin_approvable_record_explorer",
+      "decision_key": "current_owner_admin_records_edit_20261021",
+      "scope": "Admin portal only; no member/public pages, no live SQL",
+      "implementation": "Development source IMPLEMENTED; app/visual/mobile CI and isolated SQL PASS; new RPC NOT LIVE",
+      "device_acceptance": "NOT VERIFIED on real owner/user device or live signed session; synthetic Chromium only",
+      "assertions": [
+        {
+          "path": "site/admin/view.js",
+          "contains": "admin-accounts"
+        },
+        {
+          "path": "site/admin/records.js",
+          "contains": "Creator not available"
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "dic_admin_records"
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "dic_admin_edit_shot"
+        },
+        {
+          "path": "build_cloud.mjs",
+          "contains": "admin/records.js"
+        },
+        {
+          "path": "supabase/migrations/20261021224447_dic_admin_content_review.sql",
+          "contains": "private.dic_admin_edit_record"
         }
       ]
     }

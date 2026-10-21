@@ -449,6 +449,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const fields={name:textOf(p.name,200)},conflicts=new Set();
  conflictsByFields.set(fields,conflicts);
  productDetails(fields,p);
+ // Repeated JSON-LD/inline nodes may describe the same selected product.
+ // Deduplicating its title must not discard contradictory roast, process,
+ // or release evidence. Retain the chosen node's precedence for compatible
+ // facts, and run equivalent nodes through the same conflict checks.
+ const identity=keyOf(textOf(p.name));
+ for(const equivalent of selected){
+  if(equivalent!==p&&keyOf(textOf(equivalent.name))===identity)productDetails(fields,equivalent);
+ }
  // An actual, literal lot number in the selected Product title is stronger
  // than an inferred harvest based on a URL, SKU, publication date or country.
  // Preserve exact source text; never manufacture release identifiers.
@@ -504,6 +512,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  }
  if(!onyxMetrics)explicitNearbyFacts(product,fields);
  const roast_evidence=extractRoastVisualEvidence(product);
+ if(roast_evidence.confidence==='conflict'){
+  delete fields.roast_level;conflicts.add('roast_level');
+ }
  if(roast_evidence.value){
   if(fields.roast_level&&fields.roast_level!==roast_evidence.value){
    delete fields.roast_level;
