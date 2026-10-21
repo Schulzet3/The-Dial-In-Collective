@@ -2,7 +2,11 @@
 export class CloudError extends Error {
  constructor(message,code='cloud_error',details=null){super(message);this.name='CloudError';this.code=code;this.details=details;}
 }
-const unwrap=r=>{if(r.error)throw new CloudError(r.error.message,r.error.code||'request_failed');return r.data;};
+const unwrap=r=>{if(r.error){const error=new CloudError(r.error.message,r.error.code||'request_failed');error.status=r.status||r.error.status;throw error;}return r.data;};
+// An explicit authorization denial must not be treated as a temporary network
+// outage that permits a previously cached workspace to remain admitted.
+export const isAccessDenied=error=>['42501','PGRST301','PGRST302','PGRST303'].includes(error?.code)
+ ||[401,403].includes(Number(error?.status));
 export function secureOrigin(location=globalThis.location,secure=globalThis.isSecureContext){
  if(!secure||!(location.protocol==='https:'||['localhost','127.0.0.1','[::1]'].includes(location.hostname)))throw new CloudError('Use HTTPS or localhost for account access. The plain Wi-Fi address is not safe for passwords.','insecure_origin');
 }

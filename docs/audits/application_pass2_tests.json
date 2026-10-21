@@ -1,0 +1,590 @@
+{
+  "elapsed_seconds": 11.962,
+  "results": [
+    {
+      "file": "tests/account-transition.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 account switch during cache persistence cannot render the former owner snapshot (7.096051ms)\n\u2714 account switch during pending read cannot install the former owner queue or make another read (2.253069ms)\n\u2714 account switch during durable enqueue preserves the original event without rendering it for the next owner (10.990673ms)\n\u2714 pending-coffee match response is ignored after the account changes (3.901441ms)\n\u2714 account-change notification immediately clears rendered records while reconnecting (1.541776ms)\n\u2714 delayed sync-detail read cannot display the former account queue (1.598258ms)\n\u2714 sign-out preserves unsynced changes and does not call the auth service (1.786685ms)\n\u2714 late sign-out completion cannot erase a newer account session (0.733698ms)\n\u2139 tests 8\n\u2139 suites 0\n\u2139 pass 8\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 71.129386\n"
+    },
+    {
+      "file": "tests/admin-coffee-review.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 review API has owner-independent admin permission and does not spoof official verification (13.431777ms)\n\u2139 tests 1\n\u2139 suites 0\n\u2139 pass 1\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 29.300352\n"
+    },
+    {
+      "file": "tests/admin-invitation-controls.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 admin code issue list is metadata-only and existing admin cannot be disabled from UI (3.591325ms)\n\u2714 secret appears only when freshly returned by issuance, not upon subsequent overview (1.551039ms)\n\u2714 every operator-controlled label/email is escaped, not executable markup (1.040955ms)\n\u2714 removed member retains identity and restore access control, admin stays protected (0.706691ms)\n\u2714 no direct client-side table insert, privileged access only via member-gated RPC (3.160299ms)\n\u2714 admin can issue and copy a code once, refreshing clears it; no code in list (22.266975ms)\n\u2714 member removal/restoration and invitation revocation require RPC, then refresh (24.931357ms)\n\u2714 cross-tab account change immediately removes one-time invitation and denies stale render (3.960063ms)\n\u2714 admin cannot open portal without both server admin and admission status (6.625648ms)\n\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 111.209791\n"
+    },
+    {
+      "file": "tests/admin-read-only.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 admin dashboard offers guarded manual review without destructive delete (7.652386ms)\n\u2714 untrusted coffee fields are HTML escaped, not executable or clickable (1.966009ms)\n\u2714 invalid and missing aggregates cannot display misleading numbers (0.474769ms)\n\u2714 administrator denial never renders protected queue (0.27167ms)\n\u2714 admin page uses the same persisted Supabase session and verifies admin RPC (23.704013ms)\n\u2714 the proposed SQL never grants admin rights or enables mutation operations (1.278353ms)\n\u2714 admin review UI requires signed-session RPC, reason and exact revision (4.638284ms)\n\u2714 manual review displays compatible duplicates and escapes candidate names (0.600279ms)\n\u2139 tests 8\n\u2139 suites 0\n\u2139 pass 8\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 56.239333\n"
+    },
+    {
+      "file": "tests/admin-session.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 admin data disappears immediately when another tab signs out (15.145212ms)\n\u2714 a delayed admin response cannot restore private data after an account switch (5.511069ms)\n\u2714 administrator refresh can be retried after a temporary server failure (31.508996ms)\n\u2714 explicit administrator denial removes private records and prevents further actions (8.360307ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 86.863124\n"
+    },
+    {
+      "file": "tests/cloud-access-denial.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 explicit read denial clears admitted views and only the owner cache, preserving unsynced work (7.345149ms)\n\u2714 temporary connection failure still restores the matching owner cache and pending work (1.592576ms)\n\u2714 denied cache cleanup cannot blank a newly selected account (0.605299ms)\n\u2714 a denied owner cannot reopen leftover cache offline after storage cleanup fails (1.429223ms)\n\u2714 fresh read denial for an old account cannot revoke a replacement account (0.501387ms)\n\u2714 denial during required-review refresh also removes private workspace access (0.823654ms)\n\u2714 fresh admitted status restores eligibility after earlier denial (1.035482ms)\n\u2714 SDK HTTP denial is retained even when an error has no database code (1.541863ms)\n\u2139 tests 8\n\u2139 suites 0\n\u2139 pass 8\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 37.701609\n"
+    },
+    {
+      "file": "tests/cloud.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 37,
+        "pass": 37,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 new cloud workspace has full library but no pin (7.618177ms)\n\u2714 missing historical feed and temperature are not fabricated (3.631933ms)\n\u2714 pending coffee remains pending, not verified (0.633922ms)\n\u2714 initial log measurements yield/time/grind remain blank (0.486294ms)\n\u2714 recorded grind zero is preserved as a valid prior (0.896713ms)\n\u2714 new log disabled feed tracking means standard (1.255417ms)\n\u2714 new log enabled slow feed preserves actual condition (0.314596ms)\n\u2714 pending new shot renders once with pending mark and pin (11.359281ms)\n\u2714 acknowledged shot survives subsequent read failure through cache patch (4.587366ms)\n\u2714 acknowledged edit updates existing record without duplicate (1.128473ms)\n\u2714 cache patch does not claim server family stats it did not receive (1.631642ms)\n\u2714 outbox persists before making network call (1.605216ms)\n\u2714 same timestamp queue stays in insertion order (9.669162ms)\n\u2714 lost response retains exact event for idempotent retry (1.688375ms)\n\u2714 conflicts are retained and block later writes (1.724565ms)\n\u2714 no retry-overwrite of unresolved conflict (1.011904ms)\n\u2714 server validation rejection retains local event (1.001563ms)\n\u2714 account B cannot flush account A pending data (1.307338ms)\n\u2714 changing accounts stops in-flight queue before next event (1.329394ms)\n\u2714 signed-out queue cannot create new writes (0.843525ms)\n\u2714 unsupported actions fail closed (0.253252ms)\n\u2714 caller mutation cannot alter queued payload (0.258788ms)\n\u2714 concurrent flush calls only send one copy (1.8929ms)\n\u2714 disk failure does not claim queued/synced success (0.383694ms)\n\u2714 HTTPS/local development origins only for accounts (0.466417ms)\n\u2714 session profile strips untrusted metadata privileges (1.311481ms)\n\u2714 auth callbacks defer and strip tokens (0.816129ms)\n\u2714 password recovery uses app return URL (0.58081ms)\n\u2714 signout scope only affects current device (0.360741ms)\n\u2714 admission comes from server, not user metadata (0.357428ms)\n\u2714 browser writes bind original queue owner at server boundary (0.253723ms)\n\u2714 hydration restores latest-shot advice to the main recommendation (1.854238ms)\n\u2714 new passwords accept exactly 8 characters with uppercase and a special character (0.767018ms)\n\u2714 new password validation rejects too short, lowercase only, and missing symbols (0.766121ms)\n\u2714 email verification is a prominent dedicated screen with a sign-in route (0.466569ms)\n\u2714 confirmation page safely escapes the submitted email (0.217927ms)\n\u2714 signup uses confirmation page rather than a temporary inline notice (11.400895ms)\n\u2139 tests 37\n\u2139 suites 0\n\u2139 pass 37\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 91.009251\n"
+    },
+    {
+      "file": "tests/coffee-agtron-narrative.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 manufacturer ground Gourmet anchors map to exactly seven approved roast labels (17.072114ms)\n\u2714 commercial, whole bean, out-of-range and implausible Agtron cannot be silently equated (1.129526ms)\n\u2714 PERC Kenya Mara Estate reads its full narrative, preserves processing subtype and scores Light provisionally (82.008808ms)\n\u2714 matched coffee name plus its own story corroborate a farm when the visual H1 markup differs (14.504613ms)\n\u2714 large decorative markup before the PERC coffee story does not hide its real product narrative (37.307775ms)\n\u2714 nested visual PERC headings still expose the selected product story (3.728364ms)\n\u2714 long on-product description does not truncate late fermentation evidence (4.42881ms)\n\u2714 estate alone does not prove a producer and prose from related coffees cannot contaminate the product (15.107357ms)\n\u2714 explicit roaster roast wins over unqualified Agtron estimate and provenance is disclosed (4.133521ms)\n\u2714 whole-bean measurements must not auto-classify using the ground chart (2.412745ms)\n\u2714 generic fermentation, blends and Adv Washed alone do not become anaerobic (4.551478ms)\n\u2139 tests 11\n\u2139 suites 0\n\u2139 pass 11\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 219.364908\n"
+    },
+    {
+      "file": "tests/coffee-delimited-specs.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 19,
+        "pass": 19,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 nested Queen City spec yields station plus origin, processing, variety and elevation (31.535833ms)\n\u2714 two adjacent paragraphs preserve the Natural offering as a distinct process (2.662868ms)\n\u2714 Unicode producer, variety and localities retain their original spelling (0.858465ms)\n\u2714 altitude ranges and plus markers remain source facts, not invented midpoints (6.369724ms)\n\u2714 invalid altitude bounds, backwards ranges and malformed comma grouping are rejected (1.366267ms)\n\u2714 farm or station names containing Coffee are not mistaken for navigation (3.79558ms)\n\u2714 visible inline spans and entity-decoded ampersands do not split identity fields (1.194236ms)\n\u2714 no paired processing evidence means no invented producer or origin (0.414952ms)\n\u2714 do not combine identity and processing across a story or product heading (1.795946ms)\n\u2714 removed scripts do not corrupt paragraph offsets or heading boundaries (0.924956ms)\n\u2714 shipping locality and promotional prose never become coffee producer evidence (0.760196ms)\n\u2714 duplicate responsive markup is harmless; different source tuples fail closed (1.260014ms)\n\u2714 compound processing terms do not masquerade as cultivars or a single process (0.922067ms)\n\u2714 unrelated related-product and review sections cannot contribute fields (0.969216ms)\n\u2714 navigation, footer, template, scripts and noscript fallbacks are excluded (0.773662ms)\n\u2714 processing and drying wording is retained only from this matched lot narrative (2.235212ms)\n\u2714 processing text from another method, a distant article or an importer is not inherited (5.057877ms)\n\u2714 source window is bounded and invalid input fails safely (0.293329ms)\n\u2714 layout integration adds missing station and supplemental facts without replacing earlier fields (23.069149ms)\n\u2139 tests 19\n\u2139 suites 0\n\u2139 pass 19\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 121.214686\n"
+    },
+    {
+      "file": "tests/coffee-deterministic-only.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 owner supersession leaves no Claude/AI implementation in the running app (15.038153ms)\n\u2714 unverified deterministic preview does not provide scraped semantic data or model credentials (62.104389ms)\n\u2139 tests 2\n\u2139 suites 0\n\u2139 pass 2\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 101.744368\n"
+    },
+    {
+      "file": "tests/coffee-duplicate-first-client.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 member Pending retry is admitted, user-owned, backend-enforced and preserves source truth (20.238105ms)\n\u2714 admin approval distinct permits exact audited manual override of ambiguous duplicate, not bypass for ordinary member (6.495252ms)\n\u2714 coffee status UX differentiates catalog approval from independently verified source (6.351255ms)\n\u2714 member autoapproval cannot bypass duplicates or assert trusted official source evidence (15.00053ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 66.642535\n"
+    },
+    {
+      "file": "tests/coffee-edit-revision.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 new canonical correction uses current shared facts and canonical revision rather than original submission (12.057373ms)\n\u2714 existing pending correction retains its own revision and intentional empty source URL (1.212081ms)\n\u2714 correction selection uses the same timestamp and ID ordering as the server (16.801612ms)\n\u2714 unapproved private submission continues to use its own facts and revision (1.210725ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 51.324938\n"
+    },
+    {
+      "file": "tests/coffee-espresso-units.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 spelled-out espresso units produce finite measured recipe references (103.399381ms)\n\u2714 spelled-out units preserve explicit ranges and do not cross-match unrelated words (4.658521ms)\n\u2139 tests 2\n\u2139 suites 0\n\u2139 pass 2\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 134.89231\n"
+    },
+    {
+      "file": "tests/coffee-flavor-evidence.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 15,
+        "pass": 15,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 PERC lot narrative yields genuine flavor notes, not fermentation text or other coffees (90.403813ms)\n\u2714 nested PERC story heading and later decorations do not hide clear flavor evidence (37.532127ms)\n\u2714 Onyx named multi-span tasting-note container is product-specific (9.329945ms)\n\u2714 product scope never mistakes the custom main-product-selector for an HTML main (0.653822ms)\n\u2714 long Onyx H1 with real audio markup still exposes this lot tasting notes (4.218142ms)\n\u2714 Onyx named elevation modal is product evidence, adjacent education is not (9.712171ms)\n\u2714 PERC explicitly named grower is captured only from its own coffee story (8.783089ms)\n\u2714 Sweet Bloom Wuri and Uraga use product ingredient flavors, never relationship years as producers (2.703682ms)\n\u2714 Heart product-specific metadata tagline yields notes without displacing process (2.068705ms)\n\u2714 Black & White named TAKE A SIP comparisons yield only explicit flavor nouns (5.793919ms)\n\u2714 explicit flavor profile / tastes like labels remain highest-confidence structured evidence (0.999827ms)\n\u2714 reject unrelated notes, numeric specs and menu / footers, preserving truly unknown (1.441115ms)\n\u2714 a story of another coffee cannot populate a product with no tasting notes (1.464436ms)\n\u2714 HTML escapes are handled as displayed notes, and field extraction never requires a save (3.663263ms)\n\u2714 French selected-product tasting story yields only its literal named flavor notes (5.645074ms)\n\u2139 tests 15\n\u2139 suites 0\n\u2139 pass 15\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 204.807882\n"
+    },
+    {
+      "file": "tests/coffee-identity.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 brand recognition never equates to verification of the coffee product (4.808192ms)\n\u2714 unrecognized brands are never silently renamed (0.24585ms)\n\u2714 only authenticated server-classified verified identity selects automatically (1.553694ms)\n\u2714 probable duplicates require a deliberate user confirmation (1.004695ms)\n\u2714 untrusted catalog strings cannot inject script, markup, or fake buttons (0.469698ms)\n\u2714 client and UI use the server matcher before existing verified or pending actions (1.748731ms)\n\u2139 tests 6\n\u2139 suites 0\n\u2139 pass 6\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 28.803237\n"
+    },
+    {
+      "file": "tests/coffee-multi-roaster-depth.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 13,
+        "pass": 13,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 Corvus blended espresso retains components, dose tolerance, output/time range without invented single country (59.519439ms)\n\u2714 Tim Wendelboe storefront Cultivar, Flavour Notes and Harvest Date labels are recognized (21.146223ms)\n\u2714 Explicit Spanish coffee labels and processing values work without accent loss (1.801015ms)\n\u2714 Narrative growth altitude and explicitly credited grower are product-bound, without roast guess (28.193403ms)\n\u2714 Generic processing education, off-page cards and filter directions cannot create a roaster espresso recipe (7.574526ms)\n\u2714 Unverified multi-process roaster blends preserve exact parts without fake process (3.096989ms)\n\u2714 Blend preserves two explicit farms and multiple origins with stable deduplication (2.079493ms)\n\u2714 Explicit producer labels in components do not collapse into a single producer (3.322056ms)\n\u2714 One known processing method with another component unspecified does not invent a shared method (1.346775ms)\n\u2714 Explicit paired methods select Other/Unknown, while anaerobic natural stays Anaerobic (4.421599ms)\n\u2714 Multi-origin/multi-producer displayed facts escape malicious input, never HTML (1.596898ms)\n\u2714 Inline roaster Components percentage lists support plus and semicolon separators (1.583479ms)\n\u2714 Incomplete percentage list cannot establish an entire blend composition (0.823002ms)\n\u2139 tests 13\n\u2139 suites 0\n\u2139 pass 13\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 155.988608\n"
+    },
+    {
+      "file": "tests/coffee-narrative-evidence.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 Corvus Echo Gesha reads farm, grower, real fermentation stages and tasting notes (58.017761ms)\n\u2714 No grower, farm or processing invented from unrelated paragraphs (24.275036ms)\n\u2714 A plain Washed field remains Washed even when unrelated prose mentions other methods (7.022383ms)\n\u2714 Complex processing headline remains supplemental if an explicit canonical process is already present (3.139301ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 119.020785\n"
+    },
+    {
+      "file": "tests/coffee-page-isolation.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 unrelated hidden and navigation labels cannot become product facts (55.193147ms)\n\u2714 related products cannot fill absent facts even on a short page (0.920134ms)\n\u2714 explicit product widgets survive a long decorative prelude without borrowing navigation facts (20.418079ms)\n\u2714 stale structured process and current explicit process are withheld on conflict (3.038131ms)\n\u2714 explicit mixed processing resolves to Other/Unknown despite stale one-process metadata (5.290751ms)\n\u2714 same-product structured duplicates cannot silently erase conflicting process, roast or release evidence (1.333136ms)\n\u2714 equivalent structured nodes enrich compatible missing facts without treating purchase variants as the same coffee (0.9387ms)\n\u2714 same-title inline product state and JSON-LD retain a conflict instead of choosing one representation (0.786038ms)\n\u2714 contradictory explicit roast graphics suppress structured and Agtron fallback suggestions (1.796745ms)\n\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 100.524535\n"
+    },
+    {
+      "file": "tests/coffee-roaster-patterns.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 21,
+        "pass": 21,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 Proud Mary inline attributes and honest Espresso-only ratio (65.005186ms)\n\u2714 Queen City recognizes country, natural heirloom and explicit tasting reminder (28.941433ms)\n\u2714 Onyx named product stats extract seven-tier roast and avoid educational text (15.853788ms)\n\u2714 PERC icon+heading metrics include process, Agtron, rest and Breville recipe (24.004729ms)\n\u2714 The Picky Chemist uses French product details on English-language Wix page (28.070403ms)\n\u2714 SEY varietal/region/altitude/harvest headings and explicit process-tagged title (5.874789ms)\n\u2714 Black & White inline pipe-separated product data fields (8.020628ms)\n\u2714 Little Wolf colon specs and Farm/Co-op are recognized (6.793372ms)\n\u2714 Heart rotating single origin supports ordinary explicit metrics without inventing roast (1.763878ms)\n\u2714 Shopify collection alias JSON-LD is matched by exact handle, never by related product (8.347531ms)\n\u2714 Queen City homepage and generic category never invent a coffee identity (0.575379ms)\n\u2714 Agtron alone, unrelated marketing and HTML in supplemental details never make a roast classification or XSS (1.537721ms)\n\u2714 live Onyx custom product markup parses explicitly labeled Ultra Light without JSON-LD or OG (2.434318ms)\n\u2714 live PERC Product variants do not displace exact canonical product identity (1.971308ms)\n\u2714 PERC JSON-LD ProductGroup parent wins over size/grind variant Products only when URL matches (1.969752ms)\n\u2714 live Proud Mary product specification links and ratio remain purely source-reported (2.640976ms)\n\u2714 live Little Wolf product paragraph with br-separated facts never contaminates tasting notes (1.452831ms)\n\u2714 live SEY explicit variety-process component may establish Washed without inventing roast level (1.292142ms)\n\u2714 live roaster flattened labels never contaminate flavor notes or origin values (2.340357ms)\n\u2714 generic geographic grower groups are not asserted as a named producer (4.542408ms)\n\u2714 exact lot IDs explicitly published in product names are extracted without guessing harvest (2.107796ms)\n\u2139 tests 21\n\u2139 suites 0\n\u2139 pass 21\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 240.03426\n"
+    },
+    {
+      "file": "tests/coffee-source-verification.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 15,
+        "pass": 15,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 known official product path is allowed; outside domain and redirect-like URL blocked (7.136978ms)\n\u2714 all five Sweet Bloom roaster spellings are identity, not release proof (1.391631ms)\n\u2714 verified official Product JSON-LD yields bounded evidence not arbitrary HTML (4.33036ms)\n\u2714 source evidence must match actual coffee and not an unrelated product carousel (1.324802ms)\n\u2714 source verification will not fabricate release year using page copyright (1.38863ms)\n\u2714 a matching year cannot verify a contradictory or missing lot or named release (1.249176ms)\n\u2714 source with different official product URL cannot verify another catalog item (0.795513ms)\n\u2714 conflicting verified process rejects auto promotion (2.664507ms)\n\u2714 nonproduct pages never auto-approve, even if title is an exact string (0.679042ms)\n\u2714 page size, badly formed markup and ambiguous products fail safely (1.537722ms)\n\u2714 source worker only deploys behind verified JWT and uses service-only database APIs (4.349933ms)\n\u2714 official verifier allows the custom beta app origin while rejecting wildcard origins (1.593507ms)\n\u2714 metadata-poor official Wuri product with one matching H1 can verify exact 2026 release (6.874214ms)\n\u2714 official H1 release proof ignores a footer-only copyright year (1.532678ms)\n\u2714 Pending official-source retry uses authenticated stored owner submission (1.720258ms)\n\u2139 tests 15\n\u2139 suites 0\n\u2139 pass 15\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 62.386428\n"
+    },
+    {
+      "file": "tests/coffee-url-autofill.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 14,
+        "pass": 14,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 URL preview only fetches allowlisted HTTPS host and plausible product path (3.420765ms)\n\u2714 trusted official preview supports seven roast levels and historic synonyms (3.90434ms)\n\u2714 trusted official product JSON-LD extracts only supported explicit fields (1.090631ms)\n\u2714 different linked coffee is not misread as this product (0.810701ms)\n\u2714 multiple unrelated Product nodes do not become a made-up single coffee (0.480298ms)\n\u2714 autofill preview escapes external fields and never submits a coffee (1.510889ms)\n\u2714 applying structured fields fills blanks only, preserving typed details and select values (1.104821ms)\n\u2714 multi-origin and named-farm values populate only blanks with Other/Unknown selected (3.061785ms)\n\u2714 server preview checks admitted Auth and official host before remote fetching (1.086015ms)\n\u2714 URL-first SQL prioritizes official URL evidence but cannot use URL alone as Coffee UUID (0.616994ms)\n\u2714 URL is first visual step but remaining fields retain compact paired layout (0.937413ms)\n\u2714 official URL cannot rebind an older Coffee ID for an unknown harvest through verification (0.37293ms)\n\u2714 published New Coffee preview click immediately populates blanks before Add Coffee (0.78524ms)\n\u2714 client makes exactly one authenticated public-preview request per click with no double quota (0.351241ms)\n\u2139 tests 14\n\u2139 suites 0\n\u2139 pass 14\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 32.511345\n"
+    },
+    {
+      "file": "tests/community-ui.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 15,
+        "pass": 15,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 Community empty state does not claim pending/private data is shared (3.991225ms)\n\u2714 Community page renders server-sanitized counts and measurements with progressive disclosure (2.289255ms)\n\u2714 Community page safely escapes metadata strings and never outputs source identifiers (0.418237ms)\n\u2714 Review prompt is actionable, revision-bound, and unobtrusive when empty (1.308804ms)\n\u2714 Supabase adapter uses narrow RPC names without raw account identity payloads (3.932319ms)\n\u2714 Community privacy disclosure explains durable anonymous evidence after account deletion (0.439529ms)\n\u2714 Community groups shots by public coffee identity into collapsed coffee cards with compact nested shot rows (23.880502ms)\n\u2714 Community filters apply before grouping and only loaded shots count toward coffee cards (5.029816ms)\n\u2714 Community grouping uses unambiguous public pairs and never renders raw private fields (2.740776ms)\n\u2714 two distinct canonical releases stay within one named coffee but never share a release subgroup (3.929586ms)\n\u2714 single canonical release keeps one-tap compact rows without extra release header (0.610869ms)\n\u2714 verified facts display instead of invented release date, and unknown dates remain unknown (1.808665ms)\n\u2714 canonical identity never depends on mutable release text, dates or grouping label (0.459926ms)\n\u2714 legacy DTO absent release key fails closed on release identity without inventing source fields (0.357157ms)\n\u2714 release sections honor style/coffee filtering, pagination and independent private identity (0.979549ms)\n\u2139 tests 15\n\u2139 suites 0\n\u2139 pass 15\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 72.27152\n"
+    },
+    {
+      "file": "tests/extractor-adaptive-production.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 larger retry is allowed ONLY for explicit product-shaped HTTPS paths (10.12077ms)\n\u2714 compressed gzip/Brotli/deflate/identity responses preserve exact original HTML (24.14397ms)\n\u2714 decoded output is bounded EVEN when compressed wire size is tiny (87.949428ms)\n\u2714 malformed, unsupported, oversized and missing-HTML responses fail closed (3.501986ms)\n\u2714 expanded retries preserve TLS DNS pins, revalidate redirects, refuse private targets (1.567961ms)\n\u2714 expired common deadline prevents late second network attempts (0.656647ms)\n\u2714 compaction preserves Product JSON-LD, inline product JSON and visible coffee labels (47.172133ms)\n\u2714 member app fetches oversized specific product exactly twice, applying compact parsing (67.384229ms)\n\u2714 catalogs, untrusted redirects and nonoversize errors never trigger enlarged retry (13.060751ms)\n\u2714 unauthenticated and denied member accounts cause ZERO external network reads (2.976896ms)\n\u2714 product-only text/plain HTML is conditionally accepted; ordinary text and non-product URLs are not (1.088562ms)\n\u2139 tests 11\n\u2139 suites 0\n\u2139 pass 11\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 271.671961\n"
+    },
+    {
+      "file": "tests/extractor-size-study-boundary.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 read-only 2MB benchmark must not silently widen published 900KB safe-fetch limit (3.294766ms)\n\u2139 tests 1\n\u2139 suites 0\n\u2139 pass 1\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 12.058577\n"
+    },
+    {
+      "file": "tests/import.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 27,
+        "pass": 27,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 valid personal prototype has accurate coffee and shot counts (9.226414ms)\n\u2714 parser retains source and legacy metadata without rewriting (8.423336ms)\n\u2714 null grind remains distinct from measured zero (1.151359ms)\n\u2714 unknown feed is counted without claiming Standard Feed (1.527383ms)\n\u2714 unlogged coffee is included but not pinned (0.476794ms)\n\u2714 out-of-style times and advisory dose variance are allowed (1.514635ms)\n\u2714 invalid JSON is not imported (2.148568ms)\n\u2714 original raw export needs conversion instead of guessing (0.264085ms)\n\u2714 demo records are rejected (1.079741ms)\n\u2714 oversized file rejected before parse (9.381244ms)\n\u2714 nested credential data rejected without echoing its value (1.317497ms)\n\u2714 prototype pollution keys blocked (0.722197ms)\n\u2714 duplicate primary IDs blocked (2.463249ms)\n\u2714 duplicate legacy IDs blocked even when converted IDs differ (0.788026ms)\n\u2714 broken historical snapshots are rejected rather than overwritten (3.86663ms)\n\u2714 invalid numeric strings are not coerced into measurements (0.788187ms)\n\u2714 missing taste rating is not fabricated (0.526275ms)\n\u2714 fractional taste rating is rejected (0.952916ms)\n\u2714 multi-version export is blocked without silently dropping versions (1.113995ms)\n\u2714 experiment data is blocked without silent loss (1.706431ms)\n\u2714 current unlogged coffee is rejected (0.979537ms)\n\u2714 preview escapes coffee names and explains save gate (1.870414ms)\n\u2714 preview and commit APIs bind original owner and reviewed hash (2.042106ms)\n\u2714 missing identity rejected before any import network request (0.545986ms)\n\u2714 insecure import cannot call SDK (0.397222ms)\n\u2714 settings integration is installed once and preserves standard clicks (0.47483ms)\n\u2714 beta entry starts the app without mounting manual Recovery UI (15.653788ms)\n\u2139 tests 27\n\u2139 suites 0\n\u2139 pass 27\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 88.634181\n"
+    },
+    {
+      "file": "tests/legacy-dark-badges.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 21,
+        "pass": 21,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 Light green keeps original JSX dark fill with approved theme lettering (6.475438ms)\n\u2714 Light turbo keeps original JSX dark fill with approved theme lettering (0.523939ms)\n\u2714 Light trad keeps original JSX dark fill with approved theme lettering (0.270257ms)\n\u2714 Light ristretto keeps original JSX dark fill with approved theme lettering (1.194802ms)\n\u2714 Light lungo keeps original JSX dark fill with approved theme lettering (0.671704ms)\n\u2714 Light custom keeps original JSX dark fill with approved theme lettering (0.416437ms)\n\u2714 Light pending keeps original JSX dark fill with approved theme lettering (0.489252ms)\n\u2714 Light taste chips use the original dark five-color ramp (3.706011ms)\n\u2714 Dark green keeps original JSX dark fill with approved theme lettering (0.573515ms)\n\u2714 Dark turbo keeps original JSX dark fill with approved theme lettering (0.634319ms)\n\u2714 Dark trad keeps original JSX dark fill with approved theme lettering (1.418237ms)\n\u2714 Dark ristretto keeps original JSX dark fill with approved theme lettering (0.866085ms)\n\u2714 Dark lungo keeps original JSX dark fill with approved theme lettering (0.424915ms)\n\u2714 Dark custom keeps original JSX dark fill with approved theme lettering (0.474531ms)\n\u2714 Dark pending keeps original JSX dark fill with approved theme lettering (0.416008ms)\n\u2714 Dark taste chips use the original dark five-color ramp (0.24374ms)\n\u2714 theme changes preserve badge fills and uniform black lettering (3.923531ms)\n\u2714 source reference identifies the project JSX and distinguishes new status colors (0.964107ms)\n\u2714 borderless original-style pills and original fills are used consistently (0.33858ms)\n\u2714 taste chip lettering preserves original ink and white on the darkest red (0.476669ms)\n\u2714 all badge and pending-sync lettering is clean, without blurred halos, strokes or shadows (1.115385ms)\n\u2139 tests 21\n\u2139 suites 0\n\u2139 pass 21\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 62.764589\n"
+    },
+    {
+      "file": "tests/next-shot-control-consistency.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 latest-shot grind adjustment retains actual dose, yield and temperature in the recipe grid (16.450681ms)\n\u2714 yield and temperature adjustments preserve the other actual controls (1.088316ms)\n\u2714 distribution advice and unknown actual temperature do not introduce another setting change (1.611192ms)\n\u2714 fresh starting recipes and ignoreAdvice references retain their basket-based baseline (1.727118ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 39.932519\n"
+    },
+    {
+      "file": "tests/no-text-shadows.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 app-wide text shadows explicitly disabled for all elements in Light and Dark (4.895788ms)\n\u2714 no decorative surface, toast or modal shadows remain (2.207536ms)\n\u2714 interface JavaScript does not introduce text-shadow styles or text strokes (6.651371ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 36.774557\n"
+    },
+    {
+      "file": "tests/official-agtron-preview.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 5,
+        "pass": 5,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 official JWT preview interprets explicit Agtron, anaerobic product description and corroborated estate producer (15.723338ms)\n\u2714 official explicit roast wins over numeric inferred roast (5.142762ms)\n\u2714 official process keeps ambiguous blends unspecified (0.769816ms)\n\u2714 an Agtron score without matching scale/sample must be treated as provisional (0.681157ms)\n\u2714 the Edge Agtron algorithm is an identical copy of the app algorithm (1.87758ms)\n\u2139 tests 5\n\u2139 suites 0\n\u2139 pass 5\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 46.311505\n"
+    },
+    {
+      "file": "tests/offline-reopen.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 previously admitted matching owner with unexpired local session can reopen cached workspace offline (10.299458ms)\n\u2714 missing session, different account and missing owner-scoped cache deny offline reopen (1.822688ms)\n\u2714 offline cache allows only new shot queue, never account settings or an existing shot edit (44.472103ms)\n\u2714 fresh server non-admission clears cached snapshot while preserving durable outbox (6.805828ms)\n\u2714 inflight local cache read never installs a different account's records (3.434376ms)\n\u2714 offline SDK identity requires local unexpired session, token and same-origin secure context (1.707846ms)\n\u2139 tests 6\n\u2139 suites 0\n\u2139 pass 6\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 95.015178\n"
+    },
+    {
+      "file": "tests/offline-storage-resilience.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 temporary IndexedDB open errors do not permanently disable later attempts (8.88202ms)\n\u2714 blocked IndexedDB opening can be retried without losing queued owner records (0.54025ms)\n\u2714 transaction callback errors reject immediately and abort instead of hanging (1.849787ms)\n\u2714 database name is unchanged to preserve all existing offline writes (0.325304ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 22.334299\n"
+    },
+    {
+      "file": "tests/preview-request-bounds.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 oversized chunked requests are cancelled before reading the entire body (65.541622ms)\n\u2714 a bounded request still reaches admission and returns the original fields (83.985732ms)\n\u2139 tests 2\n\u2139 suites 0\n\u2139 pass 2\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 179.820754\n"
+    },
+    {
+      "file": "tests/pwa-shell.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 precache contains only static app shell, not remote API, admin or private records (14.692301ms)\n\u2714 worker never intercepts POST, API, admin, query strings or external hosts (4.678158ms)\n\u2714 worker only returns cached public path and deletes its own old revision (2.052532ms)\n\u2714 online navigation revalidates HTML; offline reopening falls back to the revisioned public cache (3.94073ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 44.840346\n"
+    },
+    {
+      "file": "tests/queen-city-url-preview.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 7,
+        "pass": 7,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 exact owner Queen City URL extracts all eight explicit canonical fields (42.433683ms)\n\u2714 variant, bare canonical and tracking links agree without using SKU or bag size as harvest (25.581963ms)\n\u2714 fermentation and drying are escaped source-only supplemental details, not espresso recipes (2.962253ms)\n\u2714 missing roast, harvest and espresso data stay absent despite brand, importer and copyright text (1.328274ms)\n\u2714 the same station Natural lot keeps its own processing and never inherits Washed (1.327976ms)\n\u2714 autofill preserves typed names and sends only supported fields to the form (2.196589ms)\n\u2714 a homepage or collection never becomes the product from a nonmatching linked JSON-LD node (1.587339ms)\n\u2139 tests 7\n\u2139 suites 0\n\u2139 pass 7\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 88.803609\n"
+    },
+    {
+      "file": "tests/recipe-family-selection.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 10,
+        "pass": 10,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 clarity uses only a cautious longer-ratio tie-breaker for equally strong compatible successes (19.322354ms)\n\u2714 body preference favors compatible shorter-ratio success, without inventing sensory findings (1.000935ms)\n\u2714 explicit Make Current favorite overrides auto taste and keeps one family window (1.319394ms)\n\u2714 invalid or hidden favorite is not a permanent recipe lock (2.099137ms)\n\u2714 confirmed local successes outrank single candidate even if candidate has preferred ratio (0.479507ms)\n\u2714 matching basket, feed and calibration outrank taste even when other family has more history (0.867216ms)\n\u2714 one family only, unrelated style and unverified/hidden shots cannot hijack chosen window (0.960783ms)\n\u2714 no compatible local time from another basket, feed or setup is presented as proven (0.674229ms)\n\u2714 changing taste preferences does not alter any stored shots/families or current preferences (1.363304ms)\n\u2714 family-grind reference cannot leak across ratio families during recalibration (1.020895ms)\n\u2139 tests 10\n\u2139 suites 0\n\u2139 pass 10\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 46.523\n"
+    },
+    {
+      "file": "tests/recommendation-evidence-priority.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 12,
+        "pass": 12,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 personal similar coffees improve starting yield/time but stay unproven (7.468079ms)\n\u2714 unsuccessful, hidden, wrong-style or wrong-feed shots never inform similar fallback (0.828833ms)\n\u2714 unknown roast does not fabricate a personal similar-coffee match (0.525593ms)\n\u2714 exact successful family always outranks another coffee in the same setup (2.495804ms)\n\u2714 exact-coffee cross-style success takes priority over similar other coffees (1.135288ms)\n\u2714 unproven personal Grind has a calibrated starting interval (0.621461ms)\n\u2714 pure grinder baseline also has a bounded uncertainty interval (0.411372ms)\n\u2714 a Dialed In grinder result retains a proven precise value (20.802167ms)\n\u2714 explicit post-taste adjustment remains a single target (1.543819ms)\n\u2714 fresh unrated-cache shot computes a precise next Grind from taste feedback (11.164808ms)\n\u2714 seven Title Case tiers retain all former five recipe ratios and temperatures (13.807532ms)\n\u2714 neighboring new light tiers offer only unproven conservative references (1.180267ms)\n\u2139 tests 12\n\u2139 suites 0\n\u2139 pass 12\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 88.536161\n"
+    },
+    {
+      "file": "tests/roast-level-evidence.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 12,
+        "pass": 12,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 explicit roast evidence respects seven Title Case tiers and legacy aliases (2.433865ms)\n\u2714 read explicit HTML data-roast-level in the product region (29.01484ms)\n\u2714 accessible roast icon and inline SVG title carry exact roast information without fetching images (13.898334ms)\n\u2714 discrete roast spectrum selected state is extracted only from a marked label (9.135198ms)\n\u2714 Wuri-like unlabeled graphic with Light and Medium endpoints remains uncertain (2.532098ms)\n\u2714 visual percent marker is a hint only, not interpreted as universally standardized roast (1.470832ms)\n\u2714 a product-specific roast meta field is stronger than unrelated page text (5.310338ms)\n\u2714 Shopify merchant JSON includes explicit roast metafields, tags and labeled description (6.261251ms)\n\u2714 JSON-LD merchant description may contain labeled roast and origin evidence (2.603942ms)\n\u2714 conflicting source signals require manual review without guessing (1.100686ms)\n\u2714 Ultra Light and Very Light require explicit evidence, while generic Extra Light stays a hint (3.175033ms)\n\u2714 untrusted graphic markup remains escaped in preview (1.901436ms)\n\u2139 tests 12\n\u2139 suites 0\n\u2139 pass 12\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 95.547285\n"
+    },
+    {
+      "file": "tests/shot-temperature-preservation.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 notes or rating edits preserve an untouched temperature in either display unit (8.684462ms)\n\u2714 intentional temperature changes and clears still update the draft (0.636559ms)\n\u2714 Use Recommendation copies the exact calculated temperature before rounded presentation (6.955343ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 35.162798\n"
+    },
+    {
+      "file": "tests/site-integrity.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 all production module imports and HTML local assets are in the build allowlist (18.357144ms)\n\u2714 inactive native import UI is preserved as source/tests but NEVER packaged (1.296515ms)\n\u2714 graph rejects missing production imports instead of silently emitting a broken PWA (27.098248ms)\n\u2714 installable manifest is explicitly allowlisted and worker is generated, not copied (1.444132ms)\n\u2714 packaged browser routes never point at retired entrypoints (1.972339ms)\n\u2714 all checked-in JS/MJS files parse under Node 22 (9454.196311ms)\n\u2139 tests 6\n\u2139 suites 0\n\u2139 pass 6\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 9522.972643\n"
+    },
+    {
+      "file": "tests/source-hygiene.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 3,
+        "pass": 3,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 active JavaScript and TypeScript source imports have no broken relative targets (25.304032ms)\n\u2714 exact duplicate active source files are only the required Node/Edge Agtron mirror (9.043079ms)\n\u2714 current owner decisions, index and visible help copy are synchronized (26.271528ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 88.722869\n"
+    },
+    {
+      "file": "tests/source-verifier-admission.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 5,
+        "pass": 5,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 revoked beta member cannot start any privileged verification operation (56.01081ms)\n\u2714 membership check errors fail closed before constructing the service client (1.819002ms)\n\u2714 invalid login never attempts membership or privileged operations (2.288397ms)\n\u2714 admitted user still cannot verify another owner submission (2.705174ms)\n\u2714 admitted owner retains the bounded claim, fetch and evidence verification path (10.725878ms)\n\u2139 tests 5\n\u2139 suites 0\n\u2139 pass 5\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 90.105766\n"
+    },
+    {
+      "file": "tests/ui-design-language.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 6,
+        "pass": 6,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 standalone literal UI labels keep approved Title Case for both themes (9.616332ms)\n\u2714 all known legacy import and confirmation actions now use Title Case (1.50976ms)\n\u2714 user-entered shot notes and coffee identity strings are escaped, never recased (1.222253ms)\n\u2714 button roles are standardized by shared CSS tokens without reskinning original badges (0.984295ms)\n\u2714 owner-approved recipe captions keep Basket-based and remove redundant Temperature subcaption (0.374356ms)\n\u2714 New Coffee full-width fields keep consistent gaps beside the efficient paired metadata grid (0.647511ms)\n\u2139 tests 6\n\u2139 suites 0\n\u2139 pass 6\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 51.049246\n"
+    },
+    {
+      "file": "tests/universal-coffee-preview.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 35,
+        "pass": 35,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 unknown public roaster URLs are allowed; private and unsafe hosts are rejected (10.326483ms)\n\u2714 global IPv4 test excludes local, carrier NAT, reserved, multicast and mapped IPv6 (0.312728ms)\n\u2714 connection-time pinned DNS check rejects any mixed or private A answer (1.62037ms)\n\u2714 secure fetch uses pinned TLS, refuses redirects and bounds body (4.029875ms)\n\u2714 HTTPS redirects can be followed only through fresh validated pinned connections (1.757228ms)\n\u2714 unknown schema.org Product yields correctly labeled proposed, not Verified facts (18.002077ms)\n\u2714 Sweet Bloom Wuri-style page extracts H1, labeled info and exact espresso recipe (36.822933ms)\n\u2714 blend descriptors never get forced into a single inaccurate processing category (10.909662ms)\n\u2714 conflicting unlabeled product JSON-LD is ambiguous; other product URL cannot win (1.751173ms)\n\u2714 auth/member/quota precede network fetch; returned web fields are unverified (49.762689ms)\n\u2714 bad origins and URL targets cannot trigger Supabase or external fetch (1.720227ms)\n\u2714 Netlify endpoint uses rate limiting, private server-only import paths and no promotion (0.882726ms)\n\u2714 approved 12-claim account budget keeps shared 30-second cooldown and legacy route protection (1.112036ms)\n\u2714 public product snapshot JSON shares safe pinned TLS and bounded reads (2.710884ms)\n\u2714 Wix/Ecwid shop-shell SEO title must not become a nonexistent coffee (0.372107ms)\n\u2714 real product evidence remains eligible even when site OG title says Store (1.629448ms)\n\u2714 public Ecwid transport target is strict, exact product URL and public store mapping (0.702271ms)\n\u2714 Mango Tree snapshot extracts exact published coffee details, not unrelated suggestions (1.561379ms)\n\u2714 Ecwid rejects wrong title, other canonical product, malformed or oversized static output (3.606844ms)\n\u2714 Ecwid preview returns only source-backed fields after member quota, no Wix shell fetch (2.775424ms)\n\u2714 Ecwid snapshot failure safely falls back to blank/manual rather than false shop identity (0.426193ms)\n\u2714 generic Ecwid embeds across shop/store paths use only an actual public script-src ID (1.019101ms)\n\u2714 selected Product description supplies explicit structured-label facts on new platforms (2.629155ms)\n\u2714 unknown Ecwid store shell uses product snapshot first, not shop-wide SEO (3.809899ms)\n\u2714 Shopify Ajax canonical product handle and locale are strictly validated (0.368889ms)\n\u2714 Shopify public product JSON parses only the exact handle and explicit source labels (3.511094ms)\n\u2714 Shopify independent source disagreement is withheld instead of silently merged (0.636326ms)\n\u2714 cross-platform product enrichment preserves more precise compatible origins but rejects divergent countries (0.698298ms)\n\u2714 sparse but valid Shopify HTML enriches missing structured facts from exact-handle public JSON (5.219536ms)\n\u2714 Shopify fallback retrieves a bounded public JSON product when HTML source unavailable (20.916291ms)\n\u2714 Shopify public JSON is fetched with pinned TLS and no credentials (0.966365ms)\n\u2714 Shopify product .js MIME compatibility does not execute arbitrary JavaScript (1.706004ms)\n\u2714 Woo public Store API lookup accepts only exact, secure product slugs (0.473131ms)\n\u2714 Woo public Store API selects exact published product and bounded attributes, no secrets (1.502159ms)\n\u2714 Woo product JSON fallback honors member admission/quota and strict field source (11.261093ms)\n\u2139 tests 35\n\u2139 suites 0\n\u2139 pass 35\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 217.801147\n"
+    },
+    {
+      "file": "tests/ux-refinements.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 16,
+        "pass": 16,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 Slow Feed defaults remain independent between home and office (5.655001ms)\n\u2714 cloud-acknowledged new shot updates cached feed; editing an old shot does not (5.444743ms)\n\u2714 stale offline shots cannot roll back the newer default (0.672393ms)\n\u2714 shot history is compact and equipment context only appears at bottom when expanded (55.745789ms)\n\u2714 new successful shots adjust recommendation windows without Make Current (3.722327ms)\n\u2714 rename_setup acknowledgement only updates the setup display record (0.786889ms)\n\u2714 Settings follows approved sections and removes routine Recovery UI (6.916514ms)\n\u2714 shot summary labels Grind in Title Case without altering notes (0.196474ms)\n\u2714 unproven grinder range is shown with a single suggested starting center (1.514114ms)\n\u2714 New Setup keeps grinder range copy behind an accessible lowercase i control (2.991083ms)\n\u2714 approved Option A arrow with i disclosure preserves prior setup helper (4.152632ms)\n\u2714 single grind adjustment shows the actual arrow and unchanged variables (2.456516ms)\n\u2714 yield and temperature arrows follow measurement units (0.90438ms)\n\u2714 multi-change, unknown, prep, and successful shots never invent an arrow (0.4503ms)\n\u2714 evenness advice isolates distribution instead of adjusting tamp too (0.761263ms)\n\u2714 owner-approved URL Autofill emphasis changes only the New Coffee button (10.71502ms)\n\u2139 tests 16\n\u2139 suites 0\n\u2139 pass 16\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 123.80656\n"
+    },
+    {
+      "file": "tests/visual-refinement.test.mjs",
+      "exit_code": 0,
+      "totals": {
+        "tests": 26,
+        "pass": 26,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "output": "\u2714 light green uses approved original JSX lettering (3.254385ms)\n\u2714 light turbo uses approved original JSX lettering (0.202828ms)\n\u2714 light trad uses approved original JSX lettering (0.183495ms)\n\u2714 light ristretto uses approved original JSX lettering (0.128482ms)\n\u2714 light lungo uses approved original JSX lettering (0.129538ms)\n\u2714 light custom uses approved original JSX lettering (0.303921ms)\n\u2714 light pending uses approved original JSX lettering (0.097911ms)\n\u2714 light primary action text exceeds 4.5:1 contrast (0.412432ms)\n\u2714 light body, muted and link text are legible on surfaces (0.248479ms)\n\u2714 dark green uses approved original JSX lettering (0.60482ms)\n\u2714 dark turbo uses approved original JSX lettering (0.50086ms)\n\u2714 dark trad uses approved original JSX lettering (0.318444ms)\n\u2714 dark ristretto uses approved original JSX lettering (0.096657ms)\n\u2714 dark lungo uses approved original JSX lettering (0.041754ms)\n\u2714 dark custom uses approved original JSX lettering (0.151263ms)\n\u2714 dark pending uses approved original JSX lettering (0.040307ms)\n\u2714 dark primary action text exceeds 4.5:1 contrast (0.054053ms)\n\u2714 dark body, muted and link text are legible on surfaces (0.230308ms)\n\u2714 appearance supports light/dark/system and safely normalizes untrusted values (0.367914ms)\n\u2714 unavailable local storage falls back without blocking app or Admin (0.131082ms)\n\u2714 Netlify cannot deploy this review branch in any context (0.509259ms)\n\u2714 shared appearance is allowlisted and early theme bootstrap is used by both pages (0.606761ms)\n\u2714 Admin reads only current-account theme after authorization (0.32956ms)\n\u2714 search toggle and icon-labelled Sign Out preserve action semantics (0.399751ms)\n\u2714 style retains clean display ligatures and visible focus states (1.03033ms)\n\u2714 New Coffee has one continuous section and preserves side-by-side optional details (0.692678ms)\n\u2139 tests 26\n\u2139 suites 0\n\u2139 pass 26\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 31.46476\n"
+    }
+  ]
+}

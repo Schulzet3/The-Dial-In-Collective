@@ -189,7 +189,7 @@ Update this document and the consolidated ledger together for explicit product d
 
 ## Source 1 — original v1.0 specification (including approved Appendix A)
 
-The following baseline is retained literally. Its original open questions/build sequence must be read with later approved amendments and current status.
+The following section integrates the original baseline with explicitly identified later owner-approved amendments and supersessions. The exact original v1.0 text remains in [the archived specification](archive/requirements/The_Dial-In_Collective_Master_Specification_v1.0.md). Its original open questions and build sequence must be read with those later amendments and current status.
 
 # The Dial-In Collective
 ## Master Product & Build Specification
@@ -2205,7 +2205,7 @@ Full hosted Supabase restoration and recreation/verification of provider Auth an
 
 ## Source 2 — MASTER_SPECIFICATION_BACKEND_ADDENDUM.md
 
-Original source blob: `abc4499bdf973ebcbb64086ba9c297b7a44183bb`. Retained literally; apply topic-specific supersessions above. Historical delivery/status paragraphs are not today's task list.
+Original source blob: `abc4499bdf973ebcbb64086ba9c297b7a44183bb`. The following section integrates the [original backend addendum](MASTER_SPECIFICATION_BACKEND_ADDENDUM.md) with explicitly identified later owner-approved amendments. Apply the topic-specific supersessions above. Historical delivery/status paragraphs are not today's task list.
 
 # The Dial In Collective
 ## Master Specification: cloud foundation addendum

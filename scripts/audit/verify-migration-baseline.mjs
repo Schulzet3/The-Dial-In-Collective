@@ -35,4 +35,4 @@ for(const name of files){
  if(!manifest.records.some(r=>r.version===version)&&version<=manifest.last_applied_version)
   fail('unexpected untracked/pending migration with old version '+name);
 }
-console.log('PASS: '+manifest.records.length+' production-applied migrations exact version/name/byte-for-byte Git blob parity; '+(files.length-manifest.records.length)+' later unapplied candidate(s). No hosted database accessed.');
+console.log('PASS: '+manifest.records.length+' migrations match the dated production baseline by exact version/name/byte-for-byte Git blob parity; '+(files.length-manifest.records.length)+' later file(s) outside this baseline. Their deployment state is not inferred. No hosted database accessed.');

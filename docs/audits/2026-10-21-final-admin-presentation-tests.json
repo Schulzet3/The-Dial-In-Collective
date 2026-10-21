@@ -1,0 +1,102 @@
+{
+  "scope": "Focused administrator presentation and controller checks only; source changes are unpublished. Real Chromium validation belongs to exact CI.",
+  "counts": {
+    "tests": 35,
+    "pass": 35,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "results": [
+    {
+      "path": "tests/admin-records.test.mjs",
+      "exit_code": 0,
+      "counts": {
+        "tests": 11,
+        "pass": 11,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "output": "\u2714 admin five metric cards navigate in exact owner order (6.282263ms)\n\u2714 metric counts match complete listings including hidden shots, removed accounts, unmerged coffees and zero (2.055285ms)\n\u2714 metric cards retain legacy counts only when complete page totals are unavailable or invalid (5.829555ms)\n\u2714 records are escaped, creator displayed and fields editable only through a form (1.460795ms)\n\u2714 pagination includes a Next link and shows accurate total (0.852622ms)\n\u2714 an emptied record page reports an empty page and retains a Previous route (0.751642ms)\n\u2714 account-list failure exposes the overview fallback without a looping Next action (2.252022ms)\n\u2714 successful account pages preserve exact totals and handle a concurrently emptied page (1.059211ms)\n\u2714 complete record pages place the legacy review preview in closed disclosures (8.448714ms)\n\u2714 empty complete review pages have one titled section and one empty message (2.442058ms)\n\u2714 unavailable detail pages preserve independent review actions without false empty lists (1.289858ms)\n\u2139 tests 11\n\u2139 suites 0\n\u2139 pass 11\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 64.109378\n"
+    },
+    {
+      "path": "tests/admin-read-only.test.mjs",
+      "exit_code": 0,
+      "counts": {
+        "tests": 8,
+        "pass": 8,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "output": "\u2714 admin dashboard offers guarded manual review without destructive delete (3.295477ms)\n\u2714 untrusted coffee fields are HTML escaped, not executable or clickable (0.770161ms)\n\u2714 invalid and missing aggregates cannot display misleading numbers (0.482266ms)\n\u2714 administrator denial never renders protected queue (0.285601ms)\n\u2714 admin page uses the same persisted Supabase session and verifies admin RPC (11.611845ms)\n\u2714 the proposed SQL never grants admin rights or enables mutation operations (1.644299ms)\n\u2714 admin review UI requires signed-session RPC, reason and exact revision (2.498679ms)\n\u2714 manual review displays compatible duplicates and escapes candidate names (0.367622ms)\n\u2139 tests 8\n\u2139 suites 0\n\u2139 pass 8\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 34.977822\n"
+    },
+    {
+      "path": "tests/admin-invitation-controls.test.mjs",
+      "exit_code": 0,
+      "counts": {
+        "tests": 9,
+        "pass": 9,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "output": "\u2714 admin code issue list is metadata-only and existing admin cannot be disabled from UI (15.535251ms)\n\u2714 secret appears only when freshly returned by issuance, not upon subsequent overview (3.141137ms)\n\u2714 every operator-controlled label/email is escaped, not executable markup (5.464396ms)\n\u2714 removed member retains identity and restore access control, admin stays protected (1.078087ms)\n\u2714 no direct client-side table insert, privileged access only via member-gated RPC (2.035824ms)\n\u2714 admin can issue and copy a code once, refreshing clears it; no code in list (17.003608ms)\n\u2714 member removal/restoration and invitation revocation require RPC, then refresh (8.296517ms)\n\u2714 cross-tab account change immediately removes one-time invitation and denies stale render (4.779891ms)\n\u2714 admin cannot open portal without both server admin and admission status (4.017367ms)\n\u2139 tests 9\n\u2139 suites 0\n\u2139 pass 9\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 101.14554\n"
+    },
+    {
+      "path": "tests/admin-session.test.mjs",
+      "exit_code": 0,
+      "counts": {
+        "tests": 4,
+        "pass": 4,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "output": "\u2714 admin data disappears immediately when another tab signs out (8.233355ms)\n\u2714 a delayed admin response cannot restore private data after an account switch (3.145228ms)\n\u2714 administrator refresh can be retried after a temporary server failure (12.654981ms)\n\u2714 explicit administrator denial removes private records and prevents further actions (4.58046ms)\n\u2139 tests 4\n\u2139 suites 0\n\u2139 pass 4\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 39.247832\n"
+    },
+    {
+      "path": "tests/admin-coffee-review.test.mjs",
+      "exit_code": 0,
+      "counts": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "output": "\u2714 review API has owner-independent admin permission and does not spoof official verification (8.202685ms)\n\u2139 tests 1\n\u2139 suites 0\n\u2139 pass 1\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 19.769909\n"
+    },
+    {
+      "path": "tests/admin-url-enrichment.test.mjs",
+      "exit_code": 0,
+      "counts": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      "output": "\u2714 approved coffee preview preserves readonly identity and typed facts while enriching editable blanks (12.920944ms)\n\u2714 a preview response for an earlier source URL cannot populate the replacement draft (6.442935ms)\n\u2139 tests 2\n\u2139 suites 0\n\u2139 pass 2\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 40.425601\n"
+    }
+  ],
+  "files": [
+    {
+      "path": "site/admin/records.js",
+      "sha256": "b5c1b209ab878085dc753d54edf9ed77900237017f25d4b1f22f6d6d440e1d38"
+    },
+    {
+      "path": "site/admin/view.js",
+      "sha256": "19d03ab82a9760f4383fb31ecec8537885ab22a80a6be4573090856cf10d0e12"
+    },
+    {
+      "path": "tests/admin-records.test.mjs",
+      "sha256": "7187ed3c5c58063c649a91857acf089185964dbe90b1f6cb17a157c8f0e47a71"
+    },
+    {
+      "path": "tests/browser/visual_review.py",
+      "sha256": "0fa7dfe6a68803fada4a90c1160fefe12b8119410a2adbb5f13cae1c16c0f079"
+    }
+  ]
+}

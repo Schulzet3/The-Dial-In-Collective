@@ -1,4 +1,4 @@
-import {CloudError} from './client.js';
+import {CloudError,isAccessDenied} from './client.js';
 import {patchAcknowledgement} from './cache.js';
 export const ACTIONS=new Set(['create_setup','save_preferences','submit_coffee','add_verified_coffee','save_shot','hide_shot','select_setup','set_style','save_setup_settings','make_current','rename_setup','confirm_coffee_existing']);
 export class Outbox {
@@ -15,12 +15,22 @@ export class Outbox {
   const who=await this.identity();if(!who?.id)return {state:'signed_out'};let sent=0;
   for(const event of await this.store.list(who.id)){
    if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
-   if(['conflict','rejected'].includes(event.status))return {state:event.status,sent};
+   if(['conflict','rejected'].includes(event.status))return {
+    state:event.status,sent,...(isAccessDenied(event.error||event.result)?{accessDenied:true,recheckAccess:true}:{})
+   };
    let r;
    try{r=await this.remote.mutate(event);}catch(error){
-    const rejected=['22023','23514','23503','23505','23502','42501'].includes(error.code);
-    if(rejected)await this.store.put({...event,status:'rejected',error:{code:error.code,message:error.message}});
-    const result={state:rejected?'rejected':'offline',sent};this.notify({...result,owner:who.id});return result;
+    const accessDenied=isAccessDenied(error);
+    const rejected=accessDenied||['22023','23514','23503','23505','23502'].includes(error.code);
+    if(rejected){
+     try{await this.store.put({...event,status:'rejected',error:{code:error.code,message:error.message,status:error.status}});}
+     catch(storageError){
+      // The original event is already durable. A failed error annotation must
+      // never hide a fresh authorization denial behind a storage/network error.
+      if(!accessDenied)throw storageError;
+     }
+    }
+    const result={state:rejected?'rejected':'offline',sent,...(accessDenied?{accessDenied:true}:{})};this.notify({...result,owner:who.id});return result;
    }
    if(!r?.ok){const state=r?.code==='conflict'?'conflict':'rejected';await this.store.put({...event,status:state,result:r});this.notify({state,owner:who.id});return {state,sent};}
    // A lost response is retried with the SAME immutable mutation ID + payload.

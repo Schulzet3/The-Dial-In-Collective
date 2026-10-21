@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied} from '../site/admin/view.js';
 import {e} from '../site/lib/ui.js';
+import {isAccessDenied} from '../site/cloud/client.js';
 
 const ADMIN='10000000-0000-4000-8000-000000000001';
 const MEMBER='20000000-0000-4000-8000-000000000001';
@@ -102,6 +103,7 @@ function boot(){
    if(name==='dic_session_status')return {data:role};
    if(name==='dic_admin_dashboard')return {data:{counts:{active_accounts:2},queue:[],queue_total:0}};
    if(name==='dic_admin_access_overview')return {data:structuredClone(state)};
+   if(name==='dic_admin_records')return {error:{code:'PGRST202',message:'Detailed record RPC is not yet deployed'}};
    if(name==='dic_admin_issue_invite')return {data:{ok:true,id:INVITE,invite_code:SECRET}};
    if(name==='dic_admin_revoke_invite')return {data:{ok:true,revoked:true}};
    if(name==='dic_admin_set_member_access')return {data:{ok:true,enabled:args.p_enabled}};
@@ -114,7 +116,7 @@ function boot(){
   supabase:{createClient:()=>sdk},
   CLOUD_CONFIG:{enabled:true},
   secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},
-  renderAdminDashboard,renderAdminDenied,e,
+  renderAdminDashboard,renderAdminDenied,e,isAccessDenied,
   navigator:{clipboard:{async writeText(s){clipboard.push(s);}}},
   confirm:()=>true
  });
@@ -176,7 +178,7 @@ test('admin cannot open portal without both server admin and admission status',a
  const context=vm.createContext({
   document:{querySelector:()=>root},supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},
   secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},
-  renderAdminDashboard,renderAdminDenied,e
+  renderAdminDashboard,renderAdminDenied,e,isAccessDenied
  });
  vm.runInContext(source,context);await context.started;
  assert.match(root.innerHTML,/Admin Access Unavailable/);

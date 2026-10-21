@@ -11,6 +11,11 @@ export function renderAdminDenied(message='Administrator access required.'){
 export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={}){
  const stats=data?.counts||{};
  const queue=Array.isArray(data?.queue)?data.queue:[];
+ const count=(kind,fallback)=>{
+  const page=records[kind];
+  return Array.isArray(page?.items)&&!page.error&&Number.isSafeInteger(page.total)&&page.total>=0
+   ?page.total:fallback;
+ };
  const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong>${formatCount(value)}</strong><small>View all →</small></a>`;
  const preview=item=>`<article class="admin-queue-item">
   <div class="admin-queue-title"><div><span class="admin-state">${e(item.status==='conflict'?'Conflict':'Pending')}</span>
@@ -28,21 +33,32 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
   <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
  </article>`;
+ const reviewSection=(kind,label,empty)=>{
+  const rows=queue.filter(item=>(item.status==='conflict')===(kind==='conflicts'));
+  const page=records[kind],complete=Array.isArray(page?.items)&&!page.error;
+  let content='';
+  if(rows.length){
+   const actions=rows.map(preview).join('');
+   content=complete?`<details class="admin-review-details"><summary>${label} review actions (${rows.length})</summary>${actions}</details>`:actions;
+  }else if(!complete&&!page?.error){
+   content=`<p class="admin-empty helper">${empty}</p>`;
+  }
+  if(complete||page?.error)content+=renderAdminRecordCollection(kind,page,{embedded:true});
+  return content;
+ };
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
  <section class="admin-stats" aria-label="Application status">
- ${stat('Pending Coffees',stats.pending_coffees,'pending')}${stat('Conflicts',stats.conflicts,'conflicts')}
- ${stat('Approved Coffees',stats.verified_coffees,'approved')}${stat('Logged Shots',stats.shot_records,'shots')}
- ${stat('Admitted Accounts',stats.active_accounts,'accounts')}
+ ${stat('Pending Coffees',count('pending',stats.pending_coffees),'pending')}${stat('Conflicts',count('conflicts',stats.conflicts),'conflicts')}
+ ${stat('Approved Coffees',count('approved',stats.verified_coffees),'approved')}${stat('Logged Shots',count('shots',stats.shot_records),'shots')}
+ ${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1"><h2>Pending Coffee Review</h2>
- ${Array.isArray(records.pending?.items)&&!records.pending?.error?`<details class="admin-review-details"><summary>Pending review actions (${queue.filter(item=>item.status!=='conflict').length})</summary>${queue.filter(item=>item.status!=='conflict').map(preview).join('')}</details>`:queue.filter(item=>item.status!=='conflict').length?queue.filter(item=>item.status!=='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee submissions need review.</p>'}
- ${renderAdminRecordCollection('pending',records.pending)}
+ ${reviewSection('pending','Pending','No pending coffee submissions.')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1"><h2>Conflicts</h2>
- ${Array.isArray(records.conflicts?.items)&&!records.conflicts?.error?`<details class="admin-review-details"><summary>Conflict review actions (${queue.filter(item=>item.status==='conflict').length})</summary>${queue.filter(item=>item.status==='conflict').map(preview).join('')}</details>`:queue.filter(item=>item.status==='conflict').length?queue.filter(item=>item.status==='conflict').map(preview).join(''):'<p class="admin-empty helper">No coffee conflicts.</p>'}
- ${renderAdminRecordCollection('conflicts',records.conflicts)}
+ ${reviewSection('conflicts','Conflict','No coffee conflicts.')}
  </section>
  ${renderAdminRecordCollection('approved',records.approved)}
  ${renderAdminRecordCollection('shots',records.shots)}
@@ -54,8 +70,17 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  * plaintext token: freshly generated secrets appear once per browser tab. */
 export function renderAdminAccessPanel(access={},issued=null,accountPage=null){
  const invites=Array.isArray(access?.invites)?access.invites:[];
- const members=Array.isArray(accountPage?.items)&&!accountPage?.error?accountPage.items:Array.isArray(access?.members)?access.members:[];
- const offset=accountPage?.error?0:(accountPage?.offset||0),total=accountPage?.error?Number(access.members_total)||0:Number(accountPage?.total)||Number(access.members_total)||0;
+ const hasAccountPage=Array.isArray(accountPage?.items)&&!accountPage?.error;
+ const members=hasAccountPage?accountPage.items:Array.isArray(access?.members)?access.members:[];
+ const offset=hasAccountPage&&Number.isSafeInteger(accountPage.offset)&&accountPage.offset>=0?accountPage.offset:0;
+ const totalValue=hasAccountPage?accountPage.total:access.members_total;
+ const total=Number.isSafeInteger(Number(totalValue))&&Number(totalValue)>=0?Number(totalValue):0;
+ const accountRange=members.length?'Showing '+String(offset+1)+'–'+String(offset+members.length)+' of '+String(total):
+  'No accounts on this page · '+String(total)+' total';
+ // An overview fallback is the first page only. Never offer Next when the
+ // paged endpoint failed, because it would repeat those same account rows.
+ const fallbackNotice=!hasAccountPage&&(accountPage?.error||total>members.length)
+  ?'<p class="helper" role="status">Complete account listing is temporarily unavailable. Showing '+e(String(members.length))+' most recent accounts.</p>':'';
  const inviteRows=invites.map(row=>{
   const state=['active','revoked','used','expired'].includes(row.status)?row.status:'unknown';
   const count=formatCount(row.uses)+' / '+(row.max_uses==null?'Unlimited':formatCount(row.max_uses));
@@ -96,9 +121,10 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null){
   ${Number(access.invites_total)>invites.length?'<p class="helper">Showing the 50 most recent codes.</p>':''}
  </section>
  <section class="admin-panel admin-access" aria-labelledby="admin-members-heading">
-  <h2 id="admin-members-heading">Member Access <span class="helper">${formatCount(access.members_total)}</span></h2>
+  <h2 id="admin-members-heading">Member Access <span class="helper">${formatCount(totalValue)}</span></h2>
   <p class="helper">No automatic account expiration. Remove or restore access without deleting saved shots and notes. Administrator accounts cannot be removed here.</p>
   <ul class="admin-member-list">${memberRows||'<li class="helper">No admitted members yet.</li>'}</ul>
-  ${offset>0||offset+members.length<total?`<div class="admin-pagination"><span class="helper">Showing ${offset+1}–${offset+members.length} of ${total}</span><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${Math.max(0,offset-50)}" ${offset===0?'disabled':''}>Previous</button><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${offset+50}" ${offset+members.length>=total?'disabled':''}>Next</button></div>`:''}
+  ${fallbackNotice}
+  ${hasAccountPage&&(offset>0||offset+members.length<total)?`<div class="admin-pagination"><span class="helper">${e(accountRange)}</span><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${Math.max(0,offset-50)}" ${offset===0?'disabled':''}>Previous</button><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${offset+50}" ${offset+members.length>=total?'disabled':''}>Next</button></div>`:''}
  </section>`;
 }

@@ -1,12 +1,16 @@
 name: DIC encrypted database backup
 
-# Staged on development only. Scheduled workflows run from the default branch.
+# Run operational backups from the default branch only. Development keeps the
+# same reviewed definition without creating a second backup on each code edit.
+# The private offsite courier ignores push smoke tests; verify their private
+# offsite copy independently before using one as release recovery evidence.
 on:
   push:
     branches:
-      - development/backend-foundation
+      - main
     paths:
       - .github/workflows/nightly-backup.yml
+      - scripts/backups/create-nightly-encrypted-dump.sh
   workflow_dispatch:
   schedule:
     - cron: '23 9 * * *'
@@ -31,10 +35,11 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - name: Checkout current cloud app source for independent offsite recovery
+      - name: Checkout verified live cloud app source for independent offsite recovery
         uses: actions/checkout@v7
         with:
-          ref: development/backend-foundation
+          # Update only after independent evidence confirms a newer live deploy.
+          ref: 1e79c4585c49ab517abb912887ee05ed7f4c4c4d
           path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
@@ -47,5 +52,5 @@ jobs:
           name: dic-encrypted-nightly-${{ github.run_id }}
           path: ${{ runner.temp }}/dic-nightly-${{ github.run_id }}/encrypted/backup.age
           if-no-files-found: error
-          retention-days: 3
+          retention-days: 30
           compression-level: 0

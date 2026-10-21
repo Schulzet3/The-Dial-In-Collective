@@ -23,11 +23,13 @@ test('two real non-force concurrent Git pushes to one release ref have exactly O
   git(seed,'remote','add','origin',remote);
   git(seed,'push','-q','origin','HEAD:refs/heads/release/production');
   const dirs=['one','two'].map(x=>join(temp,x));
-  for(const dir of dirs){
+  for(const [index,dir] of dirs.entries()){
    git(temp,'clone','-q','--branch','release/production',remote,dir);
    configure(dir);
-   git(dir,'commit','-q','--allow-empty','-m','Inert competing grant DIC-20261020-ONE123 [skip netlify]');
+   git(dir,'commit','-q','--allow-empty','-m','Inert competing grant DIC-20261020-ONE123 contender '+index+' [skip netlify]');
   }
+  assert.equal(new Set(dirs.map(dir=>git(dir,'rev-parse','HEAD'))).size,2,
+   'race contenders must be distinct commits even within one Git timestamp second');
   const old=git(seed,'rev-parse','HEAD');
   const attempts=await Promise.all(dirs.map(async dir=>{
    try{await exec('git',['-C',dir,'push','origin','HEAD:refs/heads/release/production']);

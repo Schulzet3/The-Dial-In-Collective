@@ -18,8 +18,9 @@ const date=v=>string(v).slice(0,10);
 const rowFields=(item,shot,approved)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
  const value=string(item[key]);
  const multiline=['notes','tasting_notes','summary','espressoNotes'].includes(key);
+ const maxLength=key==='notes'?16000:8000;
  const readonly=approved&&['name','roaster','release_label'].includes(key)?' readonly title="Canonical identity requires separate review"':'';
- const input=multiline?'<textarea name="'+e(key)+'" rows="2" maxlength="8000">'+e(value)+'</textarea>':
+ const input=multiline?'<textarea name="'+e(key)+'" rows="2" maxlength="'+maxLength+'">'+e(value)+'</textarea>':
   '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+readonly+' ' +(['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
  return '<label>'+e(label)+input+'</label>';
 }).join('');
@@ -48,18 +49,25 @@ export function renderAdminRecord(item,kind){
      '<div class="admin-review-actions"><button type="submit">Save Audited Correction</button><button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Cancel</button></div></form>':'')+
   '</article>';
 }
-export function renderAdminRecordCollection(kind,page={}){
- const title=({approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
+export function renderAdminRecordCollection(kind,page={},{embedded=false}={}){
+ const title=({pending:'Pending Coffees',conflicts:'Conflicts',approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
  const loaded=Array.isArray(page.items)?page.items:[];
  const offset=Number.isSafeInteger(page.offset)&&page.offset>=0?page.offset:0;
- const total=Number.isSafeInteger(Number(page.total))?Number(page.total):0;
+ const total=Number.isSafeInteger(Number(page.total))&&Number(page.total)>=0?Number(page.total):0;
  const error=page.error?'<p class="helper" role="status">'+e(page.error)+'</p>':'';
+ const range=loaded.length?'Showing '+String(offset+1)+'–'+String(offset+loaded.length)+' of '+String(total):
+  'No records on this page · '+String(total)+' total';
  const pagination=total>loaded.length||offset>0?
-  '<div class="admin-pagination"><span class="helper">Showing '+e(String(offset+1))+'–'+e(String(Math.min(total,offset+loaded.length)))+' of '+e(String(total))+'</span>'+
+  '<div class="admin-pagination"><span class="helper">'+e(range)+'</span>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(Math.max(0,offset-50))+'" '+(offset===0?'disabled':'')+'>Previous</button>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(offset+50)+'" '+(offset+loaded.length>=total?'disabled':'')+'>Next</button></div>':'';
+ const empty=({pending:'No pending coffee submissions.',conflicts:'No coffee conflicts.'})[kind]||'No records to show.';
+ const content=error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind)).join(''):
+  page.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>')+pagination;
+ const description='<p class="helper">All records, page by page · creator and revision shown where available.</p>';
+ // Pending and Conflicts already have titled outer sections containing the
+ // independent approval actions. Embed their records without another panel.
+ if(embedded)return (page.error?'':description)+content;
  return '<section class="admin-panel admin-record-section" '+((kind==='approved'||kind==='shots')?'id="admin-'+e(kind)+'" tabindex="-1"':'')+'>'+
- '<div class="admin-section-header"><h2>'+e(title)+'</h2><p class="helper">All records, page by page · creator and revision shown where available.</p></div>'+
- error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind)).join(''):'<p class="admin-empty helper">No records to show.</p>')+
- pagination+'</section>';
+ '<div class="admin-section-header"><h2>'+e(title)+'</h2>'+description+'</div>'+content+'</section>';
 }

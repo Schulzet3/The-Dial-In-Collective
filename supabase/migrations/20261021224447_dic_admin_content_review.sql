@@ -28,7 +28,7 @@ begin
  if auth.uid() is null or not private.is_admin() then
   raise exception using errcode='42501',message='Administrator required.';
  end if;
- if p_kind not in ('pending','conflicts','approved','shots','accounts')
+ if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts')
    or p_offset is null or p_offset<0 or p_offset>1000000
    or p_limit is null or p_limit<1 or p_limit>50 then
   raise exception using errcode='22023',message='Invalid listing parameters.';
@@ -121,7 +121,7 @@ begin
   raise exception using errcode='42501',message='Administrator required.';
  end if;
  reason_text:=btrim(coalesce(p_reason,''));
- if p_record_id is null or p_expected_revision is null or
+ if p_record_id is null or p_expected_revision is null or p_kind is null or
    p_kind not in ('shot','submission','approved') or
    length(reason_text) not between 8 and 1000 or
    jsonb_typeof(p_details) is distinct from 'object' or
@@ -141,14 +141,14 @@ begin
   select notes into notes_before from public.shot_notes
    where owner_id=oldshot.owner_id and shot_id=oldshot.id for update;
   snapshot:=jsonb_build_object('shot',to_jsonb(oldshot),'notes',notes_before);
+  -- Omitted correction fields retain the recorded measurement. Explicit NULL
+  -- still clears nullable values, subject to existing shot integrity checks.
   update public.shots set
    dose_g=coalesce(nullif(p_details->>'dose_g','')::numeric,oldshot.dose_g),
    yield_g=coalesce(nullif(p_details->>'yield_g','')::numeric,oldshot.yield_g),
    time_s=coalesce(nullif(p_details->>'time_s','')::numeric,oldshot.time_s),
-   grind_setting=case when p_details ? 'grind_setting'
-    then nullif(p_details->>'grind_setting','')::numeric else oldshot.grind_setting end,
-   temperature_c=case when p_details ? 'temperature_c'
-    then nullif(p_details->>'temperature_c','')::numeric else oldshot.temperature_c end,
+   grind_setting=case when p_details ? 'grind_setting' then nullif(p_details->>'grind_setting','')::numeric else oldshot.grind_setting end,
+   temperature_c=case when p_details ? 'temperature_c' then nullif(p_details->>'temperature_c','')::numeric else oldshot.temperature_c end,
    extraction=coalesce(nullif(p_details->>'extraction','')::smallint,oldshot.extraction),
    body=coalesce(nullif(p_details->>'body','')::smallint,oldshot.body),
    clarity=coalesce(nullif(p_details->>'clarity','')::smallint,oldshot.clarity),
@@ -156,12 +156,17 @@ begin
    astringency=coalesce(nullif(p_details->>'astringency','')::smallint,oldshot.astringency)
   where id=oldshot.id returning revision into revision_after;
   if p_details ? 'notes' then
-   if length(coalesce(p_details->>'notes',''))>8000 then
+   if length(coalesce(p_details->>'notes',''))>16000 then
     raise exception using errcode='22023',message='Notes too long.';end if;
    insert into public.shot_notes(owner_id,shot_id,notes)
     values(oldshot.owner_id,oldshot.id,coalesce(p_details->>'notes',''))
    on conflict(owner_id,shot_id) do update set notes=excluded.notes;
   end if;
+  -- Match the ordinary correction path: changed observations must update the
+  -- member's family statistics and clear unsupported Current references.
+  perform private.classify_personal_shot(oldshot.id);
+  -- Reclassification may update personal_family_id and bump revision again.
+  select revision into revision_after from public.shots where id=oldshot.id;
   after_snapshot:=jsonb_build_object(
    'shot',(select to_jsonb(x) from public.shots x where x.id=oldshot.id),
    'notes',(select x.notes from public.shot_notes x where x.owner_id=oldshot.owner_id and x.shot_id=oldshot.id));
@@ -203,13 +208,22 @@ begin
    raise exception using errcode='23514',message='Approved canonical identity cannot be rewritten here.';end if;
   select s.owner_id into record_owner from private.dic_coffee_first_entry f
    join public.coffee_submissions s on s.id=f.first_submission_id where f.coffee_id=oldcoffee.id;
-  snapshot:=to_jsonb(oldcoffee);
+  -- Retain exact source metadata alongside the canonical facts. A URL-only
+  -- correction must attribute the added evidence to this actor and revision.
+  snapshot:=to_jsonb(oldcoffee)||jsonb_build_object('sources',(
+   select coalesce(jsonb_agg(to_jsonb(cs) order by cs.checked_at,cs.id),'[]'::jsonb)
+   from public.coffee_sources cs where cs.coffee_id=oldcoffee.id));
+  -- A descriptive correction is partial: absent keys never erase other facts.
   update public.coffees set
-   origin=nullif(p_details->>'origin',''),process=nullif(p_details->>'process',''),
-   roast_level=nullif(p_details->>'roast_level',''),variety=nullif(p_details->>'variety',''),
-   producer=nullif(p_details->>'producer',''),elevation_m=nullif(p_details->>'elevation_m',''),
-   tasting_notes=nullif(p_details->>'tasting_notes',''),summary=nullif(p_details->>'summary',''),
-   espresso_notes=nullif(p_details->>'espressoNotes','')
+   origin=case when p_details ? 'origin' then nullif(p_details->>'origin','') else oldcoffee.origin end,
+   process=case when p_details ? 'process' then nullif(p_details->>'process','') else oldcoffee.process end,
+   roast_level=case when p_details ? 'roast_level' then nullif(p_details->>'roast_level','') else oldcoffee.roast_level end,
+   variety=case when p_details ? 'variety' then nullif(p_details->>'variety','') else oldcoffee.variety end,
+   producer=case when p_details ? 'producer' then nullif(p_details->>'producer','') else oldcoffee.producer end,
+   elevation_m=case when p_details ? 'elevation_m' then nullif(p_details->>'elevation_m','') else oldcoffee.elevation_m end,
+   tasting_notes=case when p_details ? 'tasting_notes' then nullif(p_details->>'tasting_notes','') else oldcoffee.tasting_notes end,
+   summary=case when p_details ? 'summary' then nullif(p_details->>'summary','') else oldcoffee.summary end,
+   espresso_notes=case when p_details ? 'espressoNotes' then nullif(p_details->>'espressoNotes','') else oldcoffee.espresso_notes end
    where id=oldcoffee.id returning revision into revision_after;
   if nullif(btrim(p_details->>'source_url'),'') is not null then
    if (p_details->>'source_url') !~ '^https://[^[:space:]]+$' then
@@ -219,7 +233,10 @@ begin
     values(oldcoffee.id,p_details->>'source_url','label','{}'::jsonb,'Administrator-supplied URL; not official verification.');
    end if;
   end if;
-  after_snapshot:=(select to_jsonb(x) from public.coffees x where x.id=oldcoffee.id);
+  after_snapshot:=(select to_jsonb(x) from public.coffees x where x.id=oldcoffee.id)
+   ||jsonb_build_object('sources',(
+    select coalesce(jsonb_agg(to_jsonb(cs) order by cs.checked_at,cs.id),'[]'::jsonb)
+    from public.coffee_sources cs where cs.coffee_id=oldcoffee.id));
  end if;
  insert into private.admin_content_edits(actor_id,subject_owner_id,record_kind,record_id,
   before_revision,reason,before_values,after_values)

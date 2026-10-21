@@ -1,6 +1,8 @@
-// Netlify production credit guard. Netlify's "ignore" convention is inverted:
-// exit 0 skips a build; exit 1 proceeds. Runs before dependency install on
-// Node 18, so use built-in Node modules only. Build hooks can bypass this guard.
+// Netlify production credit guard. Use only through the Bash adapter in
+// netlify.toml: exact stdout DIC_BUILD_ALLOWED plus exit 42 is its allow signal.
+// Every denial/interpreter failure maps to Netlify exit 0 (skip), and only the
+// explicit allow maps to Netlify exit 1. Runs before dependencies on Node 18.
+// Build hooks can bypass this guard.
 // Release intent and a coherent last known credit ledger are always required.
 // Owner explicitly monitors ongoing credits for the present unexpired grant;
 // the stale-snapshot rule remains enforced for non-owner-managed mode.
@@ -92,7 +94,8 @@ function run(){
     decision={ignore:true,reason:'Approval or implementation coverage failed: '+String(error.message).slice(0,260)};
    }
   }
-  console.log('[DIC credit gate] '+(decision.ignore?'Skip build':'Allow build')+': '+decision.reason);
-  process.exitCode=decision.ignore?0:1;
+  console.error('[DIC credit gate] '+(decision.ignore?'Skip build':'Allow build')+': '+decision.reason);
+  if(!decision.ignore)console.log('DIC_BUILD_ALLOWED');
+  process.exitCode=decision.ignore?0:42;
 }
 if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1]) run();

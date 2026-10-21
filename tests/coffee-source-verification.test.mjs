@@ -59,6 +59,35 @@ test('source verification will not fabricate release year using page copyright',
  const out=extractOfficialEvidence(sample,{name:'Hambela',release_label:'2026 harvest',source_url:'https://sweetbloomcoffee.com/products/hambela'});
  assert.equal(out.ok,false);
 });
+test('a matching year cannot verify a contradictory or missing lot or named release',()=>{
+ const page=html('Hambela','Harvest 2026. Lot 17, washed process.');
+ for(const release_label of ['Lot 42 2026','2026 Special Reserve','Batch 4 2026']){
+  const out=extractOfficialEvidence(page,{name:'Hambela',release_label});
+  assert.equal(out.ok,false,release_label);
+ }
+ assert.equal(extractOfficialEvidence(page,{name:'Hambela',release_label:'2026 harvest'}).ok,true);
+ const proved=html('Hambela','Our Lot 42 2026 release is washed.');
+ assert.equal(extractOfficialEvidence(proved,{name:'Hambela',release_label:'Lot 42 2026'}).ok,true);
+});
+test('release-year proof excludes company history and contradicting harvest evidence',()=>{
+ const page=html('Mango Tree Blend','Our company was founded in 2025. This product is from the 2024 harvest.');
+ for(const release_label of ['2025','2025 Harvest','Harvest 2025'])
+  assert.equal(extractOfficialEvidence(page,{name:'Mango Tree Blend',release_label}).ok,false,release_label);
+ assert.equal(extractOfficialEvidence(page,{name:'Mango Tree Blend',release_label:'2024 Harvest'}).ok,true);
+ const ambiguous=html('Hambela','Harvest 2025. Crop year: 2024.');
+ for(const release_label of ['2025','2024','2025 Harvest'])
+  assert.equal(extractOfficialEvidence(ambiguous,{name:'Hambela',release_label}).ok,false,release_label);
+ const unrelated=html('Hambela','Our roaster started in 2025. A washed Ethiopian coffee.');
+ assert.equal(extractOfficialEvidence(unrelated,{name:'Hambela',release_label:'2025'}).ok,false);
+});
+test('explicit release ranges and product identity remain bounded evidence',()=>{
+ const page=html('Hambela','Crop year: 2025/2026. Founded in 1988.');
+ assert.equal(extractOfficialEvidence(page,{name:'Hambela',release_label:'2025/2026 harvest'}).ok,true);
+ assert.equal(extractOfficialEvidence(page,{name:'Hambela',release_label:'2025'}).ok,false);
+ assert.equal(extractOfficialEvidence(html('Hambela 2025'),{name:'Hambela 2025',release_label:'2025'}).ok,true);
+ assert.equal(extractOfficialEvidence(html('Hambela 2025','Harvest 2024'),
+  {name:'Hambela 2025',release_label:'2025'}).ok,false);
+});
 test('source with different official product URL cannot verify another catalog item',()=>{
  const sample=html('Hambela','Guji natural','https://sweetbloomcoffee.com/products/different');
  const out=extractOfficialEvidence(sample,{name:'Hambela',source_url:'https://sweetbloomcoffee.com/products/hambela'});

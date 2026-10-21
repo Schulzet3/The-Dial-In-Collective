@@ -10,7 +10,7 @@ export function auditLatestCommit({paths,subject}){
  const marker=/^Release DIC: .+ \[dic-publish\]$/.test(subject||'');
  if(!marker&&!String(subject||'').includes('[skip netlify]'))
   errors.push('Unmarked commit: use [skip netlify] for nonrelease work; [dic-publish] requires its own owner-approved release');
- const code=items.filter(p=>/^(site\/|src\/server\/|netlify\/functions\/|supabase\/functions\/|scripts\/|tests\/|\.github\/workflows\/|build_cloud\.mjs$|netlify\.toml$|package(?:-lock)?\.json$)/.test(p));
+ const code=items.filter(p=>/^(site\/|src\/|netlify\/functions\/|supabase\/|scripts\/|tests\/|\.github\/(?:workflows|actions)\/|build_cloud\.mjs$|eslint\.config\.mjs$|netlify\.toml$|package(?:-lock)?\.json$)/.test(p));
  if(code.length&&!items.includes(work))
   errors.push('Code/CI change lacks SAME-COMMIT real-time GitHub work journal: '+code.slice(0,8).join(', '));
  if(marker&&code.length)
@@ -41,8 +41,13 @@ export function verifyLatestCommit(){
  const entries=[];
  for(const hash of hashes){
   try{
+   // Default diff-tree omits merge commits. Inspect the first-parent delta
+   // so code introduced only while resolving a merge cannot evade the log.
+   const parent=run(['log','-1','--format=%P',hash]).split(/\s+/)[0];
+   const diff=parent?['diff-tree','--no-commit-id','--name-only','-r',parent,hash]:
+    ['diff-tree','--root','--no-commit-id','--name-only','-r',hash];
    entries.push({sha:hash,subject:run(['log','-1','--format=%s',hash]),
-    paths:run(['diff-tree','--root','--no-commit-id','--name-only','-r',hash]).split(/\r?\n/).filter(Boolean)});
+    paths:run(diff).split(/\r?\n/).filter(Boolean)});
   }catch(error){throw Error('Cannot inspect commit '+hash+': '+String(error.message));}
  }
  const errors=auditCommitRange(entries);

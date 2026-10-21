@@ -68,13 +68,19 @@ Deno.serve(async req=>{
    global:{headers:{Authorization:'Bearer '+token}}});
   const {data:userResult,error:userError}=await userClient.auth.getUser(token);
   if(userError||!userResult?.user?.id)return json({ok:false,reason:'sign_in_required'},401,origin);
+  // A still-valid login token is not beta membership. Verify current access
+  // before any service-role read, fetch budget claim, or catalog promotion.
+  const {data:status,error:statusError}=await userClient.rpc('dic_session_status');
+  if(statusError||status?.admitted!==true)return json({ok:false,reason:'admitted_member_required'},403,origin);
   const privileged=createClient(base,secret,{auth:{persistSession:false,autoRefreshToken:false}});
   const {data:row,error:readError}=await privileged.from('coffee_submissions')
    .select('id,owner_id,status,canonical_coffee_id').eq('id',sid).maybeSingle();
   if(readError)return json({ok:false,reason:'verification_unavailable'},503,origin);
   if(!row||row.owner_id!==userResult.user.id)return json({ok:false,reason:'submission_not_accessible'},403,origin);
   if(row.status==='approved'||row.status==='merged')
-   return json({ok:true,status:'verified',coffee_id:row.canonical_coffee_id},200,origin);
+   // Canonical catalog approval can be manual/member approval. It does not
+   // establish official product evidence in this request.
+   return json({ok:true,status:'verified',source_verified:false,coffee_id:row.canonical_coffee_id},200,origin);
   if(!['pending','conflict'].includes(row.status))return json({ok:false,status:'pending',reason:'not_eligible'},200,origin);
   const {data:target,error:targetError}=await privileged.rpc('dic_source_check_target',{submission_id:sid});
   if(targetError||!target?.official_host)return json({ok:false,status:'pending',reason:'no_verified_roaster_source'},200,origin);
@@ -88,7 +94,7 @@ Deno.serve(async req=>{
   const inspected=extractOfficialEvidence(page.html,{...target,source_url:link});
   if(!inspected.ok)return json({ok:false,status:'pending',reason:inspected.reason},200,origin);
   const evidence={
-   ...inspected,checked_url:link,
+   ...inspected,checked_url:link,submission_revision:target.submission_revision,
    // Supabase checks the exact current submission URL and roaster domain again.
    official_page_confirmed:true
   };
@@ -96,7 +102,7 @@ Deno.serve(async req=>{
    {submission_id:sid,evidence});
   if(promoteError)return json({ok:false,status:'pending',reason:'verification_requires_review'},200,origin);
   if(!promoted?.ok)return json({ok:false,status:'pending',reason:promoted?.code||'needs_confirmation'},200,origin);
-  return json({ok:true,status:'verified',coffee_id:promoted.coffee_id,canonical_name:promoted.canonical_name},200,origin);
+  return json({ok:true,status:'verified',source_verified:promoted.already_verified!==true,coffee_id:promoted.coffee_id,canonical_name:promoted.canonical_name},200,origin);
  }catch{
   return json({ok:false,status:'pending',reason:'verification_failed'},200,origin);
  }
