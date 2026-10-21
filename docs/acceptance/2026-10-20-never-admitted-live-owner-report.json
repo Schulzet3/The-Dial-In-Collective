@@ -53,7 +53,7 @@
   ],
   "supabase_http_window": "2026-10-21T03:37:00Z/2026-10-21T03:41:00Z",
   "provenance_note": "Provider HTTP logs expose minute, route, HTTP, JWT role and method only; status booleans, SQLSTATE and browser identity are owner-reported, temporally corroborated not independently JWT-subject correlated.",
-  "remaining_nonblocking": "At 03:35Z signup auto-created one unlinked contributor placeholder, after user delete owner_id NULL due to FK ON DELETE SET NULL; zero contribution links. A distinct older empty placeholder was already present. Investigate only after separately approved maintenance scope; tracked #42.",
+  "remaining_nonblocking": "At 03:35Z signup auto-created one unlinked contributor placeholder, after user delete owner_id NULL due to FK ON DELETE SET NULL; zero contribution links. A distinct older empty placeholder was already present. Investigate only after separately approved maintenance scope; tracked #42. Follow-up GitHub #42 open; no production deletion approval issued for detached empty contributor.",
   "external_mutations_this_session": "None. Owner had already removed the authorized fixture before verification.",
   "related_open_issues": [
     9,
@@ -62,5 +62,15 @@
     38,
     42
   ],
-  "no_personal_identifiers_recorded": true
+  "no_personal_identifiers_recorded": true,
+  "issue41_close": {
+    "state": "closed",
+    "reason": "completed",
+    "closed_at_utc": "2026-10-21T03:49:19Z",
+    "verified": true,
+    "issue_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/41",
+    "evidence_commit_sha": "f99222277a2931c46746d6ad6eaa2bc6e054b452",
+    "ci_workflow_run_id": 39540598220,
+    "ci_result": "success"
+  }
 }
