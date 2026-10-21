@@ -13,7 +13,8 @@ begin
  insert into auth.users(id,aud,role,email)
  values(member_id,'authenticated','authenticated',member_id::text||'@example.invalid');
  insert into private.beta_members(owner_id,enabled,admitted_at)
- values(member_id,true,now());
+ values(member_id,true,now())
+ on conflict(owner_id) do update set enabled=true,admitted_at=now();
 
  -- Ordinary member: save genuine Pending, no automatic verification from URL alone.
  perform set_config('request.jwt.claim.sub',member_id::text,true);
