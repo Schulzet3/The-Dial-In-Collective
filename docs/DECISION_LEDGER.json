@@ -3768,5 +3768,16 @@
       "GitHub Free/private advisory checks and single-use separate release approval"
     ],
     "implementation": "Approved owner withdrawal → implemented and 6/6 exact-SHA CI tested at 03f87bab4a2a0086d1ecdc736cb2d714dd231792 → PR #65 merged source 4f77a7ff8b3d20a0ad7a48f223cdeeddeada919d, tested/merged tree byte-identical 99558f366ba0af981e3ebc0c55bd5365abc0f7db; NOT DEPLOYED, NOT DEVICE ACCEPTED"
+  },
+  "current_owner_retire_hide_shot_backend_20261021": {
+    "decision_id": "UX-RETIRE-HIDE-SHOT-BACKEND-20261021",
+    "status": "Locked",
+    "owner_source": "User: I'd prefer if you could remove it completely. Is that possible without other data loss? / do it / yes you have approval to apply production. Get it to 100% ready to deploy.",
+    "scope": "Disable new hide_shot enqueue and reject production hide_shot requests before old receipt replay. Preserve old queued records, original shots, notes, audit, Community and hidden_at schema. Keep other mutation routes working.",
+    "supersedes_only": [
+      "Previous retained active hide_shot server mutation allowance and new-enqueue allowance in UX-REMOVE-HIDE-SHOT-CONTROL-20261021"
+    ],
+    "authorizes": "Source, CI and narrow hosted SQL retirement only following backup and guard validation. Netlify production publication not authorized.",
+    "implementation": "Staged, CI pending; hosted SQL not applied"
   }
 }
