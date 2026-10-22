@@ -1,5 +1,10 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — production independently read back AFTER Issue #19 source merge
+- Netlify live project remains on current READY deploy `6ad968689f42fbe8e871e151` from published commit `eee687dd4d7fc19493139bc106e63c16849ac91d` on `release/production`; Issue #19 frontend NOT LIVE. Supabase project ACTIVE_HEALTHY, PostgreSQL 17.11, **35 applied** migrations, last `20261022041530` Hide Shot public guard; first-style migration `20261022053000` is NOT applied. Read-only provider calls, no mutations, Netlify credit spend or release.
+- Development merged & source tested via PR #71 at `83d289eef8c26b57329f3ef71bfae3fc018d53cd`; exact tested tree preserved, all 6 source checks green. Need separately authorized single-use source-bound release, backup/credit/provider gates before deploying ANY of the outstanding features, then real signed owner/device acceptance. Owner preference to stay private GitHub Free unchanged; CI advisory.
+
+
 ## October 21 MDT — Issue #19 fully SOURCE TESTED and MERGED, NOT DEPLOYED
 - PR #71 successfully merged with no force and both histories preserved at `83d289eef8c26b57329f3ef71bfae3fc018d53cd`, verified source candidate `0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2`, identical Git tree `c0ad5b7d364fde83e93820199cc39b8ac0659cb9`. Exact 6/6 required CI SUCCESS: approval `39726672939`, cloud `39726672918`, isolated PostgreSQL 17.11 `39726672909` including first-use/foreign-owner/rollback suite, cloud UX two jobs `39726672928`, visual/browser `39726672887` (real service-worker cold-open synthetic Chromium). Existing development docs handoff and proportionate-controls audit preserved. No Netlify production publish, no hosted source-worker/admin/first-style migrations applied by this work, no data mutations or owner-device acceptance. Issue #19 remains open for deployed/accepted states. New release requires fresh source-bound owner grant, provider/backup/credits preflight and separate consent. GitHub Free/private CI advisory.
 
