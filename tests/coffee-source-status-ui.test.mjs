@@ -34,6 +34,9 @@ test('new-coffee source check also requires explicit evidence before claiming of
    source_url:'https://example.invalid/products/coffee'},{classification:'new'});
   assert.equal(app.synced,true);
   if(flag===true)assert.match(app.notice,/Official source verified/);
-  else assert.equal(app.notice,'Coffee is already approved in the shared catalog.');
+  else assert.ok(app.notice.startsWith('Coffee is already approved in the shared catalog.'));
+  // No active setup exists in this mock. The coffee remains saved, with no
+  // pretend style success: the member receives a precise follow-up warning.
+  assert.match(app.notice,/Coffee was saved, but its starting style was not confirmed/);
  }
 });
