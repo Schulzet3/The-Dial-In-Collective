@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #19 SQL CI fix
+Owner reports Actions repaired. Reran five exact-source workflows on 73311b0; GitHub runners executed, cloud and approval passed, isolated SQL 39723155727 failed while applying staged first-style migration on malformed function dollar-quote delimiter. Corrected the two function opening delimiters and SQL-function closing delimiter to valid double-dollar quoting. No behavior, permission, hosted SQL, member data, provider or Netlify publication change. This SQL change and contemporaneous journal appear in the same commit. Fresh CI and isolated SQL authorization/rollback plus review required before safe merge; no acceptance claim yet.
+
+
 ## October 21 MDT — #19 offline first-open claim sync after admitted reconnect; CI blocker persists
 - Same-commit improvement closes identified cross-device gap: local owner-keyed pending first-open markers are replayed to the server when admitted device re-connects, and marked server-acknowledged; legacy shot/outbox records are unaffected. Disconnected devices cannot receive instantaneous cross-device consumption until they reconnect.
 - GitHub Actions PR #71 runs on `a542e9f7` and `970fb4d4` failed BEFORE runner assignment (0 runner, steps=[]), so source/app/SQL/browser workflows have NOT run. Preserve fail-closed release hold. Next exact-source CI after runner recovery, isolated SQL and real phone tests; no hosted SQL/provider/Netlify release authorization.
