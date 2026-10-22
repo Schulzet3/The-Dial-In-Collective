@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #19 offline PWA browser test adaptation
+After Actions runner recovery, visual workflow 39723155771 reached real Chromium and FAILED in `tests/browser/pwa_offline_qa.py` at previous `[data-action=log]` locator during first coffee expansion. New owner-Locked #19 UX intentionally substitutes `[data-action=first-shot-log]` before first-ever shot, so legacy test path is outdated. Changed PWA regression test to select first-shot-log when present and otherwise use normal log; preserves all subsequent offline shot persistence, isolation and sync assertions without bypassing behavior. Must run actual new-head CI including browser and SQL before merging. Same-commit journal; no hosted operations or release.
+
+
 ## October 21 MDT — Issue #19 SQL CI fix
 Owner reports Actions repaired. Reran five exact-source workflows on 73311b0; GitHub runners executed, cloud and approval passed, isolated SQL 39723155727 failed while applying staged first-style migration on malformed function dollar-quote delimiter. Corrected the two function opening delimiters and SQL-function closing delimiter to valid double-dollar quoting. No behavior, permission, hosted SQL, member data, provider or Netlify publication change. This SQL change and contemporaneous journal appear in the same commit. Fresh CI and isolated SQL authorization/rollback plus review required before safe merge; no acceptance claim yet.
 
