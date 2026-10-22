@@ -1,3 +1,7 @@
+# 2026-10-22 — authoritative credit rule and Project Instructions upkeep
+- Owner monitors all Netlify credits. No release queue, preflight, grant, source CI or Netlify ignore-build may demand a current credit balance, freshness window, minimum credit figure, screenshot or billing-plan availability before an otherwise-approved release. These older requirements are superseded by OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022. An actual provider quota failure is handled as a provider error; no automatic purchases/upgrades. One owner publish instruction still authorizes only the selected scope and one unique source-bound publication. Keep all non-financial checks.
+- OPS-PROACTIVE-PROJECT-INSTRUCTIONS-RECOMMENDATIONS-20261022: when a material standing workflow/policy changes, suggest exact Project Instructions replacement and update its GitHub copy, but do not claim the Project Setting was changed.
+
 # Automatic build → verified READY → batched owner-approved release
 
 ## One-instruction owner authorization, no repeated signoff (2026-10-22)
