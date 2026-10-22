@@ -106,7 +106,8 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    assert page.get_by_role('button',name='Community').count()==0,'Offline Community should not show stale data'
    assert page.get_by_role('button',name='Add Coffee').count()==0,'Online-only canonical lookup must stay disabled'
    page.locator('[data-action=expand]').first.click()
-   page.locator('[data-action=log]').click()
+   # Wait for either supported entry point: first-ever prompt or ordinary Log.
+   page.locator('[data-action=first-shot-log], [data-action=log]').first.click()
    page.locator('[name=yieldG]').fill('48')
    page.locator('[name=timeS]').fill('25')
    page.locator('[name=grindSetting]').fill('1')

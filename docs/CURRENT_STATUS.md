@@ -1,7 +1,22 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — PR #71 conflict reconciled on candidate branch; tests and merge pending
+- Owner approved repair of the conflict between first-expansion source PR #71 and two development-only documentation commits. Reconciliation uses genuine non-force two-parent ancestry (PR head `cb35bcb47d74acffb8fb107f4a9a448e4eba1753`, development `ba4711b5a23d3e1654a9b1592b2d61bad18cdf27`) preserving both histories, existing audit and all Locked requirements. The corrected SQL and offline/browser tests are staged; NO fresh exact-integrated-SHA GitHub Actions PASS is yet recorded, and no publication or hosted SQL approved. PR must remain draft/unmerged until checks and security review complete. See active journal/Issue #19 for status.
+
 ## October 21 MDT — HANDOFF: #19 first-expansion style PR #71 awaiting real CI
 - Owner handoff documentation-only. Latest development base `79a7e99d49112bf09a108ee131e97d5b2fcef898`; candidate PR #71 DRAFT open at `73311b0abbbecfad8ecee2ccedddf8e2bab8ca70`, unchanged and unmerged; original PR #63/#67 CLOSED without merge. Owner-Locked first expansion-only decision and tests/migration SPEC/LEDGER are in candidate PR, not development. Five workflows on latest feature SHA all fail before GitHub runner start (runner_id=0, steps=[]): full tests NOT executed. New `20261022053000` migration NOT applied and Netlify NOT published. Preserve protected backups/history and existing Hide Shot retirement. Read active journal top and Issue #57 handoff for full exact next steps; restore CI first, then review green 6/6, nonforce merge, fresh release grant and real-device acceptance. GitHub private Free checks advisory.
+
+
+## October 21 MDT — #19 first view offline receipt now syncs; CI still unavailable
+- Owner-private local first-open marker acknowledged on verified admitted reconnect; no claims of real-time synchronization between offline devices. Exact PR CI still cannot start runners (0 runner/no steps); source not verified for deployment. Staged SQL remains unapplied, production unchanged. Next run actual Actions, isolated SQL, visual review and only then merge.
+
+
+## October 21 MDT — Issue #19 CI blocked before runner execution; source corrected, rerun pending
+- PR #71 five workflows / six jobs failed to start runner (`runner_id=0`, `steps=[]`, missing logs); no application tests executed. Isolated SQL refactor uses private definer + public invoker; no hosted application. Static code compilation and mocked first-expansion behavior PASS; exact GitHub/isolated SQL/real device are NOT verified. Next restore CI runner availability, rerun exact SHA, then review source before merging. No Netlify release or provider writes.
+
+
+## October 21 MDT — #19 first-expansion-only recommended style, CI pending
+- Source staged on current development `79a7e99d49112bf09a108ee131e97d5b2fcef898`, preserving newer Hide Shot backend retirement and all Locked decisions. Owner expressly changes placement from Add Coffee to first intentional coffee expansion before first shot, seen only once per owner/private coffee with server plus offline persistence. Additional SQL `20261022053000_dic_first_coffee_style_prompt.sql` is UNAPPLIED; frontend NOT DEPLOYED; no owner-device acceptance. Original PR #63/#67 drafts remain superseded, not merged. Next: exact-source CI, security/SQL checks, reviewed nonforce merge and fresh release preflight under separate owner authorization.
 
 
 ## October 21 MDT — verified production Hide Shot retirement and explicit residual limitation

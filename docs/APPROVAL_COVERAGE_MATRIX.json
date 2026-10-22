@@ -24,6 +24,7 @@
     "current_owner_duplicate_first_automatic_catalog_approval_20261021",
     "current_owner_expedited_two_migrations_and_production_20261021",
     "current_owner_extractor_deterministic_only_20261019",
+    "current_owner_first_expansion_starting_style_20261021",
     "current_owner_github_continuity",
     "current_owner_github_free_private_no_upgrade_20261020",
     "current_owner_grinder_range_info_20261019",
@@ -423,6 +424,44 @@
       },
       "residual_limitation": "Internal privileged private.mutate legacy branch remains; ordinary member entry fully blocked in production; no physical column drop; site not released",
       "production_verified": true
+    },
+    {
+      "id": "first_coffee_expansion_one_time_style",
+      "decision_key": "current_owner_first_expansion_starting_style_20261021",
+      "scope": "First intentional expansion before any shot, never Add Coffee",
+      "implementation": "SOURCE_ONLY_STAGED_CI_PENDING",
+      "device_acceptance": "PENDING_POST_RELEASE_REAL_ACCOUNT_AND_DEVICE",
+      "issue": 19,
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "async expandCoffee(id)"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Recommended for you:"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "select('Starting Shot Style','starting_style'"
+        },
+        {
+          "path": "site/cloud/outbox.js",
+          "contains": "claimFirstStylePrompt(owner,libraryId)"
+        },
+        {
+          "path": "site/cloud/client.js",
+          "contains": "dic_claim_first_style_prompt"
+        },
+        {
+          "path": "supabase/migrations/20261022053000_dic_first_coffee_style_prompt.sql",
+          "contains": "private.require_member()"
+        },
+        {
+          "path": "tests/cloud-first-style-on-expand.test.mjs",
+          "contains": "once across reloads"
+        }
+      ]
     }
   ],
   "active_gap_flags": [
