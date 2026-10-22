@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — Issue #19 fully SOURCE TESTED and MERGED, NOT DEPLOYED
+- PR #71 successfully merged with no force and both histories preserved at `83d289eef8c26b57329f3ef71bfae3fc018d53cd`, verified source candidate `0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2`, identical Git tree `c0ad5b7d364fde83e93820199cc39b8ac0659cb9`. Exact 6/6 required CI SUCCESS: approval `39726672939`, cloud `39726672918`, isolated PostgreSQL 17.11 `39726672909` including first-use/foreign-owner/rollback suite, cloud UX two jobs `39726672928`, visual/browser `39726672887` (real service-worker cold-open synthetic Chromium). Existing development docs handoff and proportionate-controls audit preserved. No Netlify production publish, no hosted source-worker/admin/first-style migrations applied by this work, no data mutations or owner-device acceptance. Issue #19 remains open for deployed/accepted states. New release requires fresh source-bound owner grant, provider/backup/credits preflight and separate consent. GitHub Free/private CI advisory.
+
+
 ## October 21 MDT — PR #71 conflict reconciled on candidate branch; tests and merge pending
 - Owner approved repair of the conflict between first-expansion source PR #71 and two development-only documentation commits. Reconciliation uses genuine non-force two-parent ancestry (PR head `cb35bcb47d74acffb8fb107f4a9a448e4eba1753`, development `ba4711b5a23d3e1654a9b1592b2d61bad18cdf27`) preserving both histories, existing audit and all Locked requirements. The corrected SQL and offline/browser tests are staged; NO fresh exact-integrated-SHA GitHub Actions PASS is yet recorded, and no publication or hosted SQL approved. PR must remain draft/unmerged until checks and security review complete. See active journal/Issue #19 for status.
 
