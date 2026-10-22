@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Issue #52 scope addendum — owner-approved admin low-friction source changes, NOT deployed
+- New owner-Locked decision `UX-ADMIN-LOW-FRICTION-REVIEW-20261021`: Pending details always visible after top-level section open; approved names/roasters/releases editable by admin with a server-safe duplicate guard and immutable UUID/audit; ordinary Approve Distinct is one deliberate click with machine-authored audit reason, no redundant browser prompts. Original account privacy/role/RLS safeguards unchanged. Active development is isolated PR #53, no live SQL/Edge or Netlify authorization in this owner request. Exact CI pending.
+
+
 ## Issue #52 — source-only staging on isolated branch; no production release
 - Six principal Admin Portal panels native accessible and collapsed by default, dashboard stat shortcuts open/focus target, open state retained on refresh. Logged Shots nested into independent per-library-coffee groups (not name-based), including hidden/unknown/pending entries and paged boundaries. **New migration `20261022023000_dic_admin_shot_coffee_group_identity.sql` is not applied to live Supabase; feature NOT deployed.** Browser fixtures have been updated for disclosures; exact PR CI awaiting run. Current live provider remains previous approved `eee687dd...`, no new grant. See Issue #52 and journal.
 
