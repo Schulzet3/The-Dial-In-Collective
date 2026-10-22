@@ -1,3 +1,6 @@
+# 2026-10-22 — Issue #80 Community/extractor and Netlify source READY without publication
+- Merged PR #91 at ede403a0660b273a84c24d32b8137bd045c4e133 and PR #87 at 05dda786a729e1f65252449754f361a88f119b36, both source-tested with relevant passing pre/postmerge CI. Community search and exact-URL extractor reuse/noncharged transient failures are READY with migrations still staged; Netlify redundant npm test source is READY while published site unchanged. Duplicate PR #89/#90 closed as superseded, not discarded. PR #92 scoped same-commit journals merged 8c19b44065a246dc1f201c6a99a0fd07a0ee4fa7; latest postmerge CI still pending. Parent Issue #80 remains IN_PROGRESS for final scope reconciliation. No live database/Netlify/user data writes.
+
 # 2026-10-22 — Scoped journal PR #92 nonforce cross-stream reconciliation [TESTING]
 - Rebased by two-parent nonforce merge onto development Netlify-test-reuse commit 05dda786a729e1f65252449754f361a88f119b36; retained entire current development source, queue and unrelated changes. Applied only eight previously audited scoped-journal files and a same-commit active checkpoint entry. PR #92 exact SHA must pass before integration; no site release/SQL/provider changes.
 

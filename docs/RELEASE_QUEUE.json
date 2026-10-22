@@ -86,10 +86,10 @@
       "tests": [],
       "ci_runs": [],
       "blockers": [
-        "Broader Issue #80 engineering optimizations outside the four requested feature tranches remain independently IN_PROGRESS. Four requested child changes are verified separately for a future owner-authorized batch release."
+        "Owner-approved scoped journal source is safely merged, but its latest exact merged-SHA CI readback is pending at this checkpoint. Conditional premature prototype deletion, preflight consolidation, database-index removal and unsupported rendering changes are explicitly not performed without evidence of equal/better reliability."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "First dose and sign-out tranche merged safely and tracked separately READY. Future main.js changes must each have exact tested queue/source receipts."
+      "notes": "First dose and sign-out tranche merged safely and tracked separately READY. Future main.js changes must each have exact tested queue/source receipts. Completed child source tranches independently READY; parent awaits final scoped-journal postmerge exact CI and disposition register."
     },
     {
       "id": "DIC-Q-80-basket-signout",
@@ -261,8 +261,8 @@
       "issue": 80,
       "pr": 89,
       "title": "Server-side Community coffee and style search with stable filtered paging",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "ede403a0660b273a84c24d32b8137bd045c4e133",
       "scope_paths": [
         "site/cloud/client.js",
         "site/cloud/main.js",
@@ -270,50 +270,84 @@
         "supabase/migrations/20261022220100_dic_community_server_search.sql",
         "site/styles.css"
       ],
-      "tests": [],
-      "ci_runs": [],
-      "blockers": [
-        "Combined integration must pass exact-source SQL/privacy, browser/mobile, visual, Node and postmerge CI before READY."
+      "tests": [
+        "PR #91 exact source 70cceb6a23930fafbe743faf1d5dc8f53138c383 passed all five approval, Node/lint/build, isolated SQL/PostgreSQL 17.11, cloud/browser and visual Actions.",
+        "Nonforce merged to development at ede403a0660b273a84c24d32b8137bd045c4e133; all five postmerge relevant Actions PASS. Server-side privacy/role protection, quotas, 30-second cooldown and SSRF safeguards retained."
       ],
+      "ci_runs": [
+        39864528141,
+        39864528038,
+        39864528021,
+        39864528027,
+        39864528169,
+        39864764804,
+        39864764420,
+        39864764307,
+        39864764631,
+        39864765003
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Preserves existing browse function and sanitized DTO, eligible verified only and no owner IDs. Bound 80-character term and style across entire server data before count/page, 20-row stable paging, manual request not per-keystroke."
+      "notes": "Preserves existing browse function and sanitized DTO, eligible verified only and no owner IDs. Bound 80-character term and style across entire server data before count/page, 20-row stable paging, manual request not per-keystroke. Source READY; production SQL / Netlify remains unchanged and will require the next separate owner publish command."
     },
     {
       "id": "DIC-Q-80-extractor-cache-quota",
       "issue": 80,
       "pr": 90,
       "title": "Verified exact-URL and warm public-preview reuse; transient-retrieval quota correctness",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "ede403a0660b273a84c24d32b8137bd045c4e133",
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
         "supabase/migrations/20261022220200_dic_preview_two_phase_cache.sql"
       ],
-      "tests": [],
-      "ci_runs": [],
-      "blockers": [
-        "Combined integration must pass isolated SQL/privacy, extractor runtime, Node/browser and postmerge CI before READY."
+      "tests": [
+        "PR #91 exact source 70cceb6a23930fafbe743faf1d5dc8f53138c383 passed all five approval, Node/lint/build, isolated SQL/PostgreSQL 17.11, cloud/browser and visual Actions.",
+        "Nonforce merged to development at ede403a0660b273a84c24d32b8137bd045c4e133; all five postmerge relevant Actions PASS. Server-side privacy/role protection, quotas, 30-second cooldown and SSRF safeguards retained."
       ],
+      "ci_runs": [
+        39864528141,
+        39864528038,
+        39864528021,
+        39864528027,
+        39864528169,
+        39864764804,
+        39864764420,
+        39864764307,
+        39864764631,
+        39864765003
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Preserve 12/IP/min Netlify rateLimit, existing 12/member/24h quota and 30s cooldown across trusted/universal paths; verified unique canonical exact URL and short-lived public-only warm cache skip daily claim, but still enforce 30s cooldown; transient upstream failures do not debit member daily count; other outcomes complete ticket before releasing result. Existing shared trusted claim stays untouched. No production changes."
+      "notes": "Preserve 12/IP/min Netlify rateLimit, existing 12/member/24h quota and 30s cooldown across trusted/universal paths; verified unique canonical exact URL and short-lived public-only warm cache skip daily claim, but still enforce 30s cooldown; transient upstream failures do not debit member daily count; other outcomes complete ticket before releasing result. Existing shared trusted claim stays untouched. No production changes. Source READY; production SQL / Netlify remains unchanged and will require the next separate owner publish command."
     },
     {
       "id": "DIC-Q-80-netlify-test-reuse",
       "issue": 80,
       "pr": 87,
       "title": "Skip a second full Node suite during exact-source production publication",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "05dda786a729e1f65252449754f361a88f119b36",
       "scope_paths": [
         "netlify.toml"
       ],
-      "tests": [],
-      "ci_runs": [],
-      "blockers": [
-        "Await exact-source build, approval and browser CI and verified nonforce integration. Verify source-bound one-use release preflight still runs the full Node suite before authorized publication."
+      "tests": [
+        "PR #87 reconciled exact source 343a98bec7f169c2b3f21f515b1f56d4a5ea3c10 approval, Node/lint/build, isolated SQL, cloud/mobile and visual workflows all SUCCESS.",
+        "Nonforce merged 05dda786a729e1f65252449754f361a88f119b36; postmerge applicable approval, Node/build and cloud regression PASS. Full npm test remains mandatory in GitHub exact-source validation; only duplicate Netlify-time suite removed."
       ],
+      "ci_runs": [
+        39864865341,
+        39864865350,
+        39864865339,
+        39864865393,
+        39864865330,
+        39865837673,
+        39865838061,
+        39865837498
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Independent owner-approved CI deduplication. Netlify build remains `npm run build:cloud` with graph, source and approval checks; exact-source full `npm test` in GitHub stays mandatory; Netlify ignore build / one-use claim / published SHA contract unchanged. No production deployment."
+      "notes": "Independent owner-approved CI deduplication. Netlify build remains `npm run build:cloud` with graph, source and approval checks; exact-source full `npm test` in GitHub stays mandatory; Netlify ignore build / one-use claim / published SHA contract unchanged. No production deployment. Source READY; production SQL / Netlify remains unchanged and will require the next separate owner publish command."
     }
   ],
   "history": [],
