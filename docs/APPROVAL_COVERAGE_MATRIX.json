@@ -37,6 +37,7 @@
     "current_owner_recommendation_display_choice_20261019",
     "current_owner_recommendation_single_intentional_change_20261019",
     "current_owner_release_preferences",
+    "current_owner_remove_hide_shot_control_20261021",
     "current_owner_required_outlier_review",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
@@ -350,6 +351,36 @@
         {
           "path": "supabase/migrations/20261021224447_dic_admin_content_review.sql",
           "contains": "private.dic_admin_edit_record"
+        }
+      ]
+    },
+    {
+      "id": "hide_shot_personal_control_withdrawn",
+      "decision_key": "current_owner_remove_hide_shot_control_20261021",
+      "scope": "Owner explicitly removes Hide Shot user control from all member shot history; leaves existing historical data and server compatibility alone.",
+      "implementation": "SOURCE_STAGED_NOT_TESTED_OR_DEPLOYED",
+      "device_acceptance": "NOT APPLICABLE UNTIL FUTURE OWNER-APPROVED RELEASE",
+      "issue": 20,
+      "assertions": [
+        {
+          "path": "site/cloud/shot_card.js",
+          "contains": "Make Current Recipe"
+        },
+        {
+          "path": "site/cloud/shot_card.js",
+          "absent": "'Hide Shot','hide-shot'"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "if(a==='hide-shot')"
+        },
+        {
+          "path": "tests/cloud-shot-history-actions.test.mjs",
+          "contains": "Shot History exposes Edit and Make Current, never Hide Shot"
+        },
+        {
+          "path": "tests/browser/cloud_owner_qa.py",
+          "contains": "Shot History retains Edit/Make Current but has no Hide Shot control"
         }
       ]
     }

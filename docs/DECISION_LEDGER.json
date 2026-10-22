@@ -3749,5 +3749,24 @@
       "Separate exact-source production release authorization"
     ],
     "implementation": "Approved source/test only; IMPLEMENTED, 6/6 exact-SHA synthetic/isolated CI checks SUCCESS on 93427e9dbb03dacc35a0836d3c1ddc38265474e4; normal PR #64 merged development 31f5b7ebabf31a09c69a58860292f626f491dc34, identical tree 53cc65e2bed818ad7b1862d17eb5328baeb04861; production NOT DEPLOYED, owner-device NOT ACCEPTED"
+  },
+  "current_owner_remove_hide_shot_control_20261021": {
+    "decision_id": "UX-REMOVE-HIDE-SHOT-CONTROL-20261021",
+    "status": "Locked",
+    "owner_source": "Owner explicit instruction October 21 MDT: I don't want that option. Please remove it completely.",
+    "owner_request": "Remove user-facing Hide Shot affordance and all related client UI/handler paths; keep personal shot history and Edit/Make Current.",
+    "approval": "Source development/testing only; not a new Netlify, Supabase SQL/Edge/Auth or data release approval.",
+    "supersedes_only": [
+      "Baseline personal-shot user-facing hide/delete UI option in Master Specification §20/§21.2 and legacy baseline Locked history entry insofar as they require an exposed Hide Shot control",
+      "Issue #20 / PR #58 affirmative user-facing Hide Shot button/handler implementation and outstanding device acceptance for that UI"
+    ],
+    "not_retroactive": "Keep archived approval rationale and Sept 7–8 Option B data-retention choice as history. The historical retention decision did not expressly specify a Hide Shot button; do not claim it did.",
+    "preserves": [
+      "Original and existing hidden shot records, notes, family revisions, original Community contributors, anonymized Community durability, restoration integrity",
+      "Server-side role/RLS/revision/idempotency contract and any legacy queued hide_shot event compatibility; these are not offered as new user options",
+      "Current Edit, Make Current Recipe, shot expand, offline sync and account isolation",
+      "GitHub Free/private advisory checks and single-use separate release approval"
+    ],
+    "implementation": "Source work in progress; no publish, no live data changes"
   }
 }

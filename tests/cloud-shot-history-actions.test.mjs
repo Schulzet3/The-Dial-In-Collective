@@ -11,29 +11,26 @@ const sampleShot={
  notes:'Saved personal note',dialedIn:true,setupVersionId:'version',
  snapshot:{setupName:'Personal Setup',basketDoseG:18,tempUnit:'F'},revision:7
 };
-test('Hide Shot appears only in expanded synced personal shot details',()=>{
+test('Shot History exposes Edit and Make Current, never Hide Shot',()=>{
  const html=shotCard(sampleShot,{expanded:true,activeVersionId:'version'});
- assert.match(html,/data-action="hide-shot"/);
- assert.match(html,/Hide Shot/);
  assert.match(html,/data-action="edit"/);
  assert.match(html,/data-action="make-current"/);
- assert.doesNotMatch(shotCard(sampleShot,{expanded:false}),/data-action="hide-shot"/);
- assert.doesNotMatch(shotCard({...sampleShot,cloudPending:true},{expanded:true}),/data-action="hide-shot"/);
+ for(const rendered of [
+   html,
+   shotCard(sampleShot,{expanded:false,activeVersionId:'version'}),
+   shotCard({...sampleShot,cloudPending:true},{expanded:true,activeVersionId:'version'})
+ ]) {
+   assert.doesNotMatch(rendered,/hide-shot|Hide Shot|history-hide/i);
+ }
 });
-test('hide handler confirms and dispatches an owner revision guarded action without purge',()=>{
+test('personal client has no Hide Shot click route or hide mutation',()=>{
  const source=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
- const start=source.indexOf("if(a==='hide-shot')");
- const end=source.indexOf("if(a==='edit')",start);
- assert.ok(start>=0&&end>start);
- const action=source.slice(start,end);
- assert.match(action,/!navigator\.onLine\|\|this\.syncState==='offline'\|\|this\.pending\.length/);
- assert.match(action,/!x\.hidden&&!x\.cloudPending/);
- assert.match(action,/Number\.isSafeInteger\(Number\(sh\.revision\)\)/);
- assert.match(action,/globalThis\.confirm\?\.\('Hide this shot from your personal history/);
- assert.match(action,/this\.mutate\('hide_shot',\{id,expected_revision:Number\(sh\.revision\)\},\{onlineOnly:true\}\)/);
- assert.doesNotMatch(action,/delete_shot|purge|\.splice\(/);
+ const card=readFileSync(new URL('../site/cloud/shot_card.js',import.meta.url),'utf8');
+ assert.doesNotMatch(source,/if\(a==='hide-shot'\)/);
+ assert.doesNotMatch(source,/this\.mutate\('hide_shot'/);
+ assert.doesNotMatch(card,/hide-shot|Hide Shot|history-hide/i);
 });
-test('hide revision conflict is durable, not silently retried or leaked cross-account',async()=>{
+test('legacy already-queued hide mutation remains account isolated and conflict safe',async()=>{
  let owner='member-A',sent=0,acked=0;
  const saved=[];
  const store={

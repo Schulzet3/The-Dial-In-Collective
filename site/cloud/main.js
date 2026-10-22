@@ -539,18 +539,6 @@ class CloudApp {
    if(a==='search-toggle'){this.searchOpen=!this.searchOpen;if(!this.searchOpen)this.search='';this.render();return;}
    if(a==='log'){this.showLog(id);return;}
    if(a==='edit-coffee'){if(this.pending.length)throw new Error('Finish syncing before editing coffee details.');this.showEditCoffee(id);return;}
-   if(a==='hide-shot'){
-    if(!this.identity||!this.status?.admitted||!navigator.onLine||this.syncState==='offline'||this.pending.length)
-     throw new Error('Reconnect and finish syncing before hiding a shot. Your saved shot is unchanged.');
-    const sh=this.state.shots.find(x=>x.id===id&&!x.hidden&&!x.cloudPending);
-    if(!sh||!Number.isSafeInteger(Number(sh.revision))||Number(sh.revision)<1)
-     throw new Error('This shot changed or is not available. Refresh before hiding it.');
-    if(!globalThis.confirm?.('Hide this shot from your personal history? It is not permanently deleted. Qualifying anonymous Community data may remain.'))return;
-    await this.mutate('hide_shot',{id,expected_revision:Number(sh.revision)},{onlineOnly:true});
-    this.shotExpanded.delete(id);this.justSavedId=null;
-    this.notice='Shot hidden from your personal history. The original record is retained.';
-    this.render();return;
-   }
    if(a==='edit'){if(this.pending.length)throw new Error('Finish syncing before editing existing shots.');const sh=this.state.shots.find(x=>x.id===id);this.showLog(sh.coffeeId,sh);return;}
    if(a==='rate'){this.readDraft();this.draft.tasteScales[target.dataset.key]=Number(target.dataset.value);sheet.querySelector('#ratings').innerHTML=scales(this.draft.tasteScales);const alert=sheet.querySelector('[role=alert]');if(alert)alert.textContent='';return;}
    if(a==='use-grind'||a==='use-temp'){this.readDraft();const r=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});if(a==='use-grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;else{this.draft.tempC=r.tempC;sheet.querySelector('[name=temperature]').value=C.tempDisplay(r.tempC,this.logUnit);}this.readDraft();return;}
