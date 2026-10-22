@@ -200,31 +200,30 @@
         "site/admin/records.js"
       ],
       "tests": [
-        "PR #86 final source fd31d0ed74cb7178f4d0c3aa87cf02c6eadaed88 five/5 checks PASS (approval 39857973460, cloud build/test 39857973445, isolated SQL 39857973473, cloud browser 39857973494, visual 39857973457)",
-        "Nonforce merge verified 2af816e2800f3630b29ffa2000fdafb564affb59 with all scoped paths and unchanged unrelated branches",
-        "All four postmerge GitHub runs on exact merge SHA PASS: approval 39858276074, cloud Node/build 39858276033, cloud/mobile 39858276316, visual 39858276201",
-        "Synthetic browser tests verify collapsed sections send no listing/account overview, expanded sections fetch scoped 50-row pages and maintain account privacy; rapid second open during first RPC is not lost",
-        "No SQL, production Netlify, Auth, Edge, private member-data write or credential action"
+        "PR #86 final source fd31d0ed74cb7178f4d0c3aa87cf02c6eadaed88 passed five exact-source workflows including real browser, build, SQL and approval.",
+        "PR #86 nonforce merge 2af816e2800f3630b29ffa2000fdafb564affb59 confirmed and all four exact-source postmerge workflows PASS.",
+        "Rapid Admin disclosure expansion preserves both requested record loads; collapsed listings use no record RPC, account detail and invites restricted to expanded accounts.",
+        "Existing live Admin database function read-only verified identical to GitHub and duplicate migration statements identical; no SQL writes."
       ],
       "ci_runs": [
-        39857316510,
-        39857316592,
-        39857316498,
-        39857316623,
-        39857316773,
-        39858276074,
-        39858276033,
+        39857973494,
+        39857973473,
+        39857973460,
+        39857973457,
+        39857973445,
         39858276316,
-        39858276201
+        39858276201,
+        39858276074,
+        39858276033
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "READY, not published. Verified against current GitHub development commit 2af816e2 and all four postmerge runs. Includes on-demand Admin records, account/invite disclosure, race-safe queueing. Browser acceptance synthetic only, not actual owner-device sign-in. Parent #80 remains IN_PROGRESS for server-backed search, Community search, extractor and other refinements."
+      "notes": "Development READY, never published. Admin server-backed search is separate and incomplete. Both postmerge exact-source results and live head verified."
     },
     {
       "id": "DIC-Q-80-netlify-test-reuse",
       "issue": 80,
-      "pr": null,
+      "pr": 87,
       "title": "Skip a second full Node suite during exact-source production publication",
       "state": "TESTING",
       "merged_source_sha": null,

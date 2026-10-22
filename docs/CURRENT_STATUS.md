@@ -1,9 +1,7 @@
-# CURRENT STATUS — The Dial In Collective
+## 2026-10-22 — Issue #80 Admin lazy loading postmerge verified READY
+- PR #86 merged nonforce at 2af816e2800f3630b29ffa2000fdafb564affb59. Five premerge checks and four exact merged-source Actions checks PASS (approval 39858276074, Node/build 39858276033, mobile 39858276316, visual 39858276201). Queue DIC-Q-80-admin-lazy READY; initial CI regressions repaired, no producer/member data or site deployment. Admin search, Community search and extractor caching/quota remain IN_PROGRESS.
 
-## 2026-10-22 — Admin section lazy loading merged, verified READY, not deployed
-- Issue #80 PR #86 merged nonforce into development at `2af816e2800f3630b29ffa2000fdafb564affb59`. Final source candidate `fd31d0ed74cb7178f4d0c3aa87cf02c6eadaed88` passed five exact-source workflows (Node/lint/build, approval/queue, SQL, mobile browser and visual). All four postmerge workflows passed on exact merge SHA: 39858276074, 39858276033, 39858276316, 39858276201. Queue child `DIC-Q-80-admin-lazy` **READY**; it does not publish the website.
-- Collapsed Admin listings are fetched only after expansion. Opening multiple disclosures rapidly cannot silently discard the second load. Admin role/session checks, paged editing, creator attribution, invitation behavior and history preserved in source. Live SQL list function matches reviewed GitHub function exactly; duplicate migration-history entries 20261022162910 and 20261022165047 contain identical SQL and are left unchanged.
-- Separate source-only PR #87 Netlify duplicate test reuse remains **TESTING**, not deployed. Existing READY items all preserved. Community/Admin server search and extractor refinements remain IN_PROGRESS.
+# CURRENT STATUS — The Dial In Collective
 
 ## 2026-10-22 — Issue #80 independent outbox postmerge verified READY
 - The delayed postmerge browser/mobile Actions run **39849792808** completed **SUCCESS** at 20:44:34 UTC. All four exact merged-SHA workflows for `7ce3ecd587c0b9b6c14782d56feb93c3dccb46a6` are now PASS, on top of five/5 source PR tests. DIC-Q-80-outbox marked **READY**, together with prior DIC-Q-80-polling and DIC-Q-80-basket-signout. Existing two unrelated READY entries retained. No production release.
