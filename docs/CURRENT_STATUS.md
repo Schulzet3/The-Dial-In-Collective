@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — isolated Issue #19 source changes: suggested shot style
+- Source-only New Coffee editable recommended style, dynamic roast/Autofill update and safe setup-specific persistence of selection via existing server RPC. Tests/CI pending. No live release. See active journal and issue.
+
+
 ## October 21 MDT — verified optimization merge; source development only
 - Issue #50 first source optimization release completed at merge `8e09ecbe12aaeec7129097d6d546ec3baaf7253c` with identical five-green-tested tree `d3ed86cb625bbe2dc8332e6c196a0ded90f4f5e9`; 593/593 required Node tests, 299/299 targeted cloud, independent mobile+SQL+approval+visual success. Targeted secondary test stage 35.7–56.6% shorter in two runs, not a comparable whole deployment-cycle or 10× claim. Production still unchanged Netlify `6ad968689f42fbe8e871e151`; no new release grant. Full receipt `docs/audits/2026-10-21-optimization-final-merge-receipt.json`.
 

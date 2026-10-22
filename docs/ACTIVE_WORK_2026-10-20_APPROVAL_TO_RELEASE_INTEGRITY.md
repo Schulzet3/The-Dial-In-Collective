@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #19 development-only Add Coffee style selection, CI pending
+- Owner-approved §27.3 source scope recorded in Issue #19 comment 6331290543, branch starts from verified `f55feb70450901d8e0113e11affc7bb7bb35294a`. New Coffee includes preselected editable recommended style with a one-line factual roast/preference reason, URL Autofill and roast updates recalculate only absent manual choice. No invented community proof.
+- Existing version/revision-bound owner `set_style` RPC persists nondefault style after safe new/Pending or existing Verified coffee add; server explicitly does not alter Current/recency. Separate style failure leaves coffee saved and surfaces retry guidance rather than retrying coffee insertion. Custom target UI remains deferred #14. Regression tests added; exact GitHub CI not yet verified. No production/live SQL/Edge/Auth/member data/Netlify spending changes.
+
+
 ## October 21 MDT — optimization PR #54 MERGED, exact tested tree independently verified
 - Normal GitHub non-force PR merge at `8e09ecbe12aaeec7129097d6d546ec3baaf7253c` on `development/backend-foundation`, two parents `e392b551` and tested PR head `2268052832a53eb7a75ca52fbcdb9ebb60d3778d`. Independent Git tree readback: both merged and tested tree are byte-identical `d3ed86cb625bbe2dc8332e6c196a0ded90f4f5e9`. No force, no Netlify release.
 - On **one exact tested SHA** all five required GitHub checks SUCCESS: approval `39711524826`, validate `39711525001` (**593/593** Node), cloud-tests + mobile-browser-qa `39711524830` (targeted cloud **299/299**), isolated SQL `39711524828`; extra visual `39711524863` SUCCESS. These GitHub Free private checks are advisory, not enforced branch protection.

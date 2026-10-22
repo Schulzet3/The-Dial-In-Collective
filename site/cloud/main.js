@@ -11,6 +11,7 @@ import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
+import {AVAILABLE_NEW_COFFEE_STYLES,recommendNewCoffeeStyle,refreshNewCoffeeStyle} from './coffee-style-choice.js';
 import {communityReviewBanner,communityPage} from './community.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
 const NEXT_SHOT_INFO="Changing only one setting helps isolate its effect on your espresso's flavor. Keep the other settings consistent and compare the results. Shot time may change naturally; record what happens.";
@@ -371,6 +372,7 @@ class CloudApp {
   </form>`);
  }
  showAdd(){this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.coffeeUrlPreviewInput=null;
+  const initialStyle=recommendNewCoffeeStyle('',this.state.preferences);
   this.show('New Coffee',`<form id=new-coffee>
    <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
     <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}
@@ -382,20 +384,34 @@ class CloudApp {
    ${field('Release / Harvest (If Shown)','release_label','')}
    <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
    ${field('Tasting Notes','tasting_notes')}
+   ${select('Shot Style','style',AVAILABLE_NEW_COFFEE_STYLES,initialStyle.style)}
+   <p class="helper" id="new-coffee-style-suggestion">${e(`Recommended for you: ${initialStyle.style}. ${initialStyle.reason}`)}</p>
    <button class="primary full space-top">Add Coffee</button>
    <p class="helper space-top">Check all suggested information before saving. Missing details can be entered manually.</p>
   </form>`);
  }
+ async persistAddedStyle(lid,style){
+  if(!style||style==='Traditional')return true;
+  if(!AVAILABLE_NEW_COFFEE_STYLES.includes(style))return false;
+  const setup=M.activeSetup(this.state),v=M.activeVersion(this.state);
+  if(!setup||!v||!this.raw?.library?.some(x=>x.id===lid))return false;
+  const row=this.raw?.workspaceCoffees?.find(x=>x.library_entry_id===lid&&x.setup_version_id===v.id);
+  try{await this.mutate('set_style',{setup_id:setup.id,setup_version_id:v.id,library_entry_id:lid,style,expected_revision:row?.revision||0},{onlineOnly:true});return true;}
+  catch(error){if(error.code==='account_changed')throw error;return false;}
+ }
  async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){
   if(chosenId){
-   await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:uuid()},{onlineOnly:true});
-   const library=this.raw?.library?.find(x=>x.coffee_id===chosenId);
+   const lid=uuid();
+   await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:lid},{onlineOnly:true});
+   const library=this.raw?.library?.find(x=>x.id===lid)||this.raw?.library?.find(x=>x.coffee_id===chosenId);
+   const styleSaved=await this.persistAddedStyle(library?.id||lid,d.style);
    this.tempCoffee=library?.id||null;
    if(library)this.expanded.add(library.id);
-   sheet.close();this.notice='Added the existing verified coffee. No duplicate was created.';this.render();return;
+   sheet.close();this.notice=styleSaved?'Added the existing verified coffee. No duplicate was created.':'Coffee added, but selected Shot Style was not confirmed. Open Change Style to retry.';this.render();return;
   }
   const lid=uuid(),{source_url,proposed_data}=proposalWithRecognizedRoaster(d,matched);
   await this.mutate('submit_coffee',{library_entry_id:lid,source_url,proposed_data,confirmed_distinct:confirmedDistinct},{onlineOnly:true});
+  const styleSaved=await this.persistAddedStyle(lid,d.style);
   this.tempCoffee=lid;this.expanded.add(lid);sheet.close();
   const entry=this.raw?.library?.find(x=>x.id===lid);
   const proposal=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
@@ -416,6 +432,7 @@ class CloudApp {
     }catch(error){if(error.code==='account_changed')throw error;this.notice='Saved privately; source verification is unavailable and identity review can be retried.';}
    }
   }
+  if(!styleSaved)this.notice+=' Your selected Shot Style was not confirmed. Open Change Style to retry.';
   this.render();
  }
   showLog(cid,editing=null){
@@ -463,7 +480,7 @@ class CloudApp {
       this.coffeeUrlPreviewInput=found?.ok?raw:null;
       // One click populates available blanks, then the member reviews and
       // presses Add Coffee. Never overwrite typed facts or silently approve.
-      if(found?.ok)applyCoffeeUrlFields(form,found);
+      if(found?.ok){applyCoffeeUrlFields(form,found);refreshNewCoffeeStyle(form,this.state.preferences);}
       panel.innerHTML=coffeeUrlPreviewMarkup(found);
      }catch{
       if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
@@ -582,7 +599,15 @@ class CloudApp {
   }catch(err){this.error(err);}
  }
  input(ev){if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.render();}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
+ change(ev){
+  const form=ev.target.closest?.('#new-coffee');
+  if(form&&ev.target.name==='style')form.dataset.styleChanged='yes';
+  if(form&&ev.target.name==='roast_level')refreshNewCoffeeStyle(form,this.state.preferences);
+  if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}
+  if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.render();}
+  if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}
+  if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}
+ }
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
