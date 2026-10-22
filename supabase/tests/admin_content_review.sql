@@ -141,14 +141,27 @@ begin
   raise exception 'Audit did not preserve before/after';end if;
  rev:=(canonical_before->>'revision')::bigint;
  execute 'set local role authenticated'; -- original admin identity remains in signed claim
- denied:=false;
- begin perform public.dic_admin_edit_coffee(canonical_id,rev,
-   '{"name":"Rewritten Identity","roaster":"Fixture Roaster"}'::jsonb,
-   'Unauthorized identity rewrite','approved');
- exception when check_violation then denied:=true;end;
- if not denied then raise exception 'Approved canonical identity rewritten';end if;
  data:=public.dic_admin_edit_coffee(canonical_id,rev,
-   '{"name":"Canonical Fixture","roaster":"Fixture Roaster","release_label":"","summary":"Improved descriptive detail"}'::jsonb,
+   '{"name":"Rewritten Identity","roaster":"Fixture Roaster","release_label":"2026 Synthetic"}'::jsonb,
+   'Correct mislabelled canonical product identity','approved');
+ if data->>'ok'<>'true' or (select name from public.coffees where id=canonical_id)<>'Rewritten Identity'
+    or (select release_label from public.coffees where id=canonical_id)<>'2026 Synthetic'
+ then raise exception 'Admin canonical identity edit failed';end if;
+ -- Verify cross-owner references only as the disconnected privileged fixture.
+ -- Authenticated admin is intentionally denied another member's direct SELECT.
+ execute 'reset role';
+ if (select count(*) from public.library_entries where id=library_id and coffee_id=canonical_id)<>1
+    or (select count(*) from public.shots where id=shot_id and library_entry_id=library_id)<>1
+ then raise exception 'Identity correction detached member history';end if;
+ if not exists(select 1 from private.admin_content_edits where record_id=canonical_id
+     and record_kind='approved' and before_values->>'name'='Canonical Fixture'
+     and after_values->>'name'='Rewritten Identity') then
+   raise exception 'Before/after canonical audit lost original identity';end if;
+ select to_jsonb(c) into canonical_before from public.coffees c where c.id=canonical_id;
+ rev:=(data->>'revision')::bigint;
+ execute 'set local role authenticated';
+ data:=public.dic_admin_edit_coffee(canonical_id,rev,
+   '{"summary":"Improved descriptive detail"}'::jsonb,
    'Added useful descriptive detail','approved');
  if data->>'ok'<>'true' or (select summary from public.coffees where id=canonical_id)<>'Improved descriptive detail'
  then raise exception 'Approved descriptive correction failed';end if;

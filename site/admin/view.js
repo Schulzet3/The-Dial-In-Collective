@@ -1,14 +1,14 @@
 // Pure escaped administrator view. Legacy review overview is sanitized;
 // separate live-admin-only records RPC can include creator identity and notes.
 import {e} from '../lib/ui.js';
-import {renderAdminRecordCollection} from './records.js';
+import {adminDisclosure,renderAdminRecordCollection,renderAdminCoffeeFacts} from './records.js';
 
 export const formatCount=value=>value!=null&&value!==''&&Number.isSafeInteger(Number(value))&&Number(value)>=0?String(Number(value)):'—';
 export function renderAdminDenied(message='Administrator access required.'){
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header>
  <section class="admin-panel admin-empty"><h1>Admin Access Unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
 }
-export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={}){
+export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={},options={}){
  const stats=data?.counts||{};
  const queue=Array.isArray(data?.queue)?data.queue:[];
  const count=(kind,fallback)=>{
@@ -23,17 +23,15 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
    <button type="button" class="ghost compact" data-action="review-hold" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Hold for Clarification</button>
   </div>
   ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
-  <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
+  <p class="admin-subtle">Approve a distinct coffee with one click. Potential duplicate conflicts require review; every decision is recorded.</p>
 
  `;
  const preview=item=>`<article class="admin-queue-item">
   <div class="admin-queue-title"><div><span class="admin-state">${e(item.status==='conflict'?'Conflict':'Pending')}</span>
    <h3>${e(item.name||'Unnamed coffee')}</h3><p class="helper">${e(item.roaster||'Roaster not supplied')}</p></div>
    <span class="admin-date">${e(String(item.created_at||'').slice(0,10))}</span></div>
-  <div class="admin-facts">${[
-   ['Release',item.release_label],['Origin',item.origin],['Process',item.process],['Roast',item.roast_level]
-  ].filter(([,v])=>v).map(([k,v])=>`<span><b>${e(k)}:</b> ${e(v)}</span>`).join('')}</div>
-  ${item.source_url?`<p class="admin-source">Evidence URL (review manually): <span>${e(item.source_url)}</span></p>`:''}
+  ${renderAdminCoffeeFacts(item)}
+  
   ${reviewActions(item)}
  </article>`;
  const reviewSection=(kind,empty)=>{
@@ -52,16 +50,16 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  ${stat('Approved Coffees',count('approved',stats.verified_coffees),'approved')}${stat('Logged Shots',count('shots',stats.shot_records),'shots')}
  ${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
  </section>
- <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1"><h2>Pending Coffee Review</h2>
- ${reviewSection('pending','No pending coffee submissions.')}
+ <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1">
+ ${adminDisclosure('Pending Coffee Review','pending',count('pending',stats.pending_coffees),reviewSection('pending','No pending coffee submissions.'),{expanded:options.openSections?.has('pending')})}
  </section>
- <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1"><h2>Conflicts</h2>
- ${reviewSection('conflicts','No coffee conflicts.')}
+ <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1">
+ ${adminDisclosure('Conflicts','conflicts',count('conflicts',stats.conflicts),reviewSection('conflicts','No coffee conflicts.'),{expanded:options.openSections?.has('conflicts')})}
  </section>
- ${renderAdminRecordCollection('approved',records.approved)}
- ${renderAdminRecordCollection('shots',records.shots)}
- <section id="admin-accounts" tabindex="-1"><h2 class="admin-accounts-title">Accounts</h2>${access?renderAdminAccessPanel(access,issued,records.accounts,records.invites):'<p class="helper">Account list unavailable.</p>'}</section>
- <section class="admin-panel admin-health"><h2>Infrastructure</h2><p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p></section>`;
+ ${renderAdminRecordCollection('approved',records.approved,{expanded:options.openSections?.has('approved')})}
+ ${renderAdminRecordCollection('shots',records.shots,{expanded:options.openSections?.has('shots'),openCoffeeGroups:options.openCoffeeGroups})}
+ <section class="admin-panel admin-record-section" id="admin-accounts" tabindex="-1">${adminDisclosure('Accounts','accounts',count('accounts',stats.active_accounts),access?renderAdminAccessPanel(access,issued,records.accounts,records.invites):'<p class="helper">Account list unavailable.</p>',{expanded:options.openSections?.has('accounts')})}</section>
+ <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
 }
 
 /** Strictly administrator-only UI projection. The list never contains a

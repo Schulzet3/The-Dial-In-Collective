@@ -72,12 +72,16 @@ test('the proposed SQL never grants admin rights or enables mutation operations'
  assert.doesNotMatch(sql,/insert into private\.app_admins|update public\.coffees|alter policy|create policy/i);
 });
 
-test('admin review UI requires signed-session RPC, reason and exact revision',async()=>{
+test('admin review UI enforces exact revision, single-click approve and reasons for manual conflict decisions',async()=>{
  const main=await readFile(new URL('../site/admin/main.js',import.meta.url),'utf8');
  const sql=await readFile(new URL('../supabase/migrations/20261021053500_dic_admin_coffee_review.sql',import.meta.url),'utf8');
  assert.match(main,/dic_admin_review_coffee/);
  assert.match(main,/p_expected_revision:revision/);
- assert.match(main,/reason.trim\(\).length<8/);
+ assert.match(main,/if\(decision!=='approve'\)/);
+  assert.match(main,/if\(reason.length<8\)return/);
+  const updated=await readFile(new URL('../supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql',import.meta.url),'utf8');
+  assert.match(updated,/p_action='approve' and reason_text is null/);
+  assert.match(updated,/Administrator approved distinct coffee/);
  assert.match(sql,/private\.require_member\(\)/);
  assert.match(sql,/not private\.is_admin\(\)/);
  assert.match(sql,/s\.revision is distinct from p_expected_revision/);

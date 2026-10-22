@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {renderAdminRecord,renderAdminRecordCollection} from '../site/admin/records.js';
+import {renderAdminRecord,renderAdminRecordCollection,groupAdminShots} from '../site/admin/records.js';
 import {renderAdminDashboard,renderAdminAccessPanel} from '../site/admin/view.js';
 
 test('admin five metric cards navigate in exact owner order',()=>{
@@ -117,7 +117,8 @@ test('empty complete review pages have one titled section and one empty message'
   assert.equal((section.match(/<h2>/g)||[]).length,1);
   assert.ok(section.includes('<h2>'+title+'</h2>'));
   assert.equal(section.split(message).length-1,1);
-  assert.doesNotMatch(section,/<section|<details|No records to show/);
+  assert.match(section,/<details class="admin-disclosure" data-admin-section=/);
+  assert.doesNotMatch(section,/<section|No records to show/);
  }
  assert.doesNotMatch(html,/<h2>(pending|conflicts)<\/h2>/);
 });
@@ -129,7 +130,8 @@ test('unavailable detail pages preserve independent review actions without false
  assert.match(html,/data-action="review-merge-prepare"/);
  assert.match(html,/data-action="review-hold"/);
  assert.equal((html.match(/Detailed listing unavailable/g)||[]).length,2);
- assert.doesNotMatch(html,/<details|No pending coffee submissions|No coffee conflicts/);
+ assert.match(html,/<details class="admin-disclosure" data-admin-section="pending"/);
+ assert.doesNotMatch(html,/No pending coffee submissions|No coffee conflicts/);
  assert.match(html,/Detailed listing unavailable/);
  const standalone=renderAdminRecordCollection('pending',{items:[],total:0});
  assert.match(standalone,/<h2>Pending Coffees<\/h2>/);
@@ -149,4 +151,61 @@ test('invite listing failure retains safe original 50-row overview without loopi
   null,{items:[],total:60,offset:50,error:'Unavailable'});
  assert.match(html,/Original invite|Complete invitation history is temporarily unavailable/);
  assert.doesNotMatch(html,/data-kind="invites"/);
+});
+
+test('admin summaries expose counts and remain collapsed on initial render',()=>{
+ const html=renderAdminDashboard({counts:{shot_records:4}},null,null,{},{
+  pending:{items:[],total:0},conflicts:{items:[],total:0},
+  approved:{items:[],total:0},shots:{items:[],total:4}
+ });
+ for(const kind of ['pending','conflicts','approved','shots','accounts','infrastructure']){
+  const tag=html.match(new RegExp('<details class="admin-disclosure" data-admin-section="'+kind+'"[^>]*>'))?.[0];
+  assert.ok(tag,'missing '+kind);
+  assert.doesNotMatch(tag,/\sopen(?:\s|>)/);
+ }
+ assert.match(html,/data-admin-section="shots"[^>]*><summary[^>]*><h2>Logged Shots<\/h2><span class="admin-count">4<\/span>/);
+ const opened=renderAdminDashboard({},null,null,{}, {},{openSections:new Set(['shots','pending'])});
+ assert.match(opened,/data-admin-section="shots" open>/);
+ assert.doesNotMatch(opened,/data-admin-section="approved" open>/);
+});
+
+test('shots are nested by actual owner coffee entry, not the same coffee name',()=>{
+ const a='00000000-0000-4000-8000-0000000000a1',b='00000000-0000-4000-8000-0000000000b2';
+ const shot=(i,key)=>({id:'00000000-0000-4000-8000-00000000010'+i,revision:2,library_entry_id:key,
+  coffee_name:'Same Name',creator_email:'owner@example.invalid',notes:'<img onerror=bad>'});
+ const items=[shot(1,a),shot(2,a),shot(3,b),shot(4,null),shot(5,null)];
+ const groups=groupAdminShots(items);
+ assert.deepEqual(groups.map(g=>g.shots.length),[2,1,1,1]);
+ const html=renderAdminRecordCollection('shots',{items,total:55,offset:0});
+ assert.equal((html.match(/class="admin-coffee-group"/g)||[]).length,4);
+ assert.equal((html.match(/class="admin-queue-item admin-record"/g)||[]).length,5);
+ assert.match(html,/2 shots on this page/);
+ assert.match(html,/Showing 1–5 of 55/);
+ assert.match(html,/&lt;img onerror=bad&gt;/);
+ assert.doesNotMatch(html,/<img/);
+ const opened=renderAdminRecordCollection('shots',{items,total:5},{openCoffeeGroups:new Set(['library:'+a])});
+ assert.match(opened,/data-admin-coffee="library:00000000-0000-4000-8000-0000000000a1" open>/);
+});
+
+test('pending cards show every field without a secondary per-coffee disclosure',()=>{
+ const id='00000000-0000-4000-8000-000000000911';
+ const html=renderAdminDashboard({},null,null,{},{
+  pending:{items:[{id,revision:3,name:'<danger>',roaster:'Fixture Roaster',tasting_notes:'Berry & Floral',origin:'Ethiopia',espressoNotes:'18 g in'}],total:1,offset:0}
+ });
+ assert.match(html,/class="admin-coffee-facts"/);
+ for(const field of ['Coffee Name','Roaster','Release / Harvest','Origin','Process','Roast Level',
+  'Variety','Producer','Elevation','Tasting Notes','Summary','Espresso Notes','Source URL'])
+  assert.ok(html.includes(field),'missing '+field);
+ assert.match(html,/&lt;danger&gt;/);
+ assert.match(html,/Berry &amp; Floral/);
+ assert.doesNotMatch(html,/<danger>/);
+ assert.match(html,/data-action="review-approve"/);
+});
+test('approved identity editor fields are writable by the server-guarded operator',()=>{
+ const html=renderAdminRecord({id:'00000000-0000-4000-8000-000000000912',revision:3,
+   name:'New name',roaster:'New roaster',release_label:'Harvest 2026'},'approved');
+ for(const field of ['name','roaster','release_label']){
+  assert.match(html,new RegExp('<input name="'+field+'"[^>]*'));
+  assert.doesNotMatch(html,new RegExp('<input name="'+field+'"[^>]*readonly'));
+ }
 });

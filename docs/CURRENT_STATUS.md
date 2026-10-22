@@ -4,6 +4,15 @@
 - Issue #50 first source optimization release completed at merge `8e09ecbe12aaeec7129097d6d546ec3baaf7253c` with identical five-green-tested tree `d3ed86cb625bbe2dc8332e6c196a0ded90f4f5e9`; 593/593 required Node tests, 299/299 targeted cloud, independent mobile+SQL+approval+visual success. Targeted secondary test stage 35.7–56.6% shorter in two runs, not a comparable whole deployment-cycle or 10× claim. Production still unchanged Netlify `6ad968689f42fbe8e871e151`; no new release grant. Full receipt `docs/audits/2026-10-21-optimization-final-merge-receipt.json`.
 
 
+## Issue #52 scope addendum — owner-approved admin low-friction source changes, NOT deployed
+- New owner-Locked decision `UX-ADMIN-LOW-FRICTION-REVIEW-20261021`: Pending details always visible after top-level section open; approved names/roasters/releases editable by admin with a server-safe duplicate guard and immutable UUID/audit; ordinary Approve Distinct is one deliberate click with machine-authored audit reason, no redundant browser prompts. Original account privacy/role/RLS safeguards unchanged. Active development is isolated PR #53, no live SQL/Edge or Netlify authorization in this owner request. Exact CI pending.
+
+
+## Issue #52 — source-only staging on isolated branch; no production release
+- Six principal Admin Portal panels native accessible and collapsed by default, dashboard stat shortcuts open/focus target, open state retained on refresh. Logged Shots nested into independent per-library-coffee groups (not name-based), including hidden/unknown/pending entries and paged boundaries. **New migration `20261022023000_dic_admin_shot_coffee_group_identity.sql` is not applied to live Supabase; feature NOT deployed.** Browser fixtures have been updated for disclosures; exact PR CI awaiting run. Current live provider remains previous approved `eee687dd...`, no new grant. See Issue #52 and journal.
+
+
+
 ## October 21 MDT — Issue #50 source-only optimization read-only dossier (not deployed)
 - PR #54 cloud regression 299/299 PASS in 4.301s versus 587/587 in 9.904s prior duplicate full suite; 56.6% narrower test-stage reduction, full release validation unchanged. New offline, fail-closed source dossier and optimized development→release→postflight runbooks staged. CI on updated PR source pending; no 10× whole cycle claim, live Netlify source unchanged. See active journal and benchmark receipt.
 
