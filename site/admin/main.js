@@ -13,6 +13,7 @@ async function start(){
  let invalidated=false;
  let issued=null; // generated code exists only in live tab memory
  let busy=false;
+ let pendingSectionRefresh=false;
  let mergeChoices=Object.create(null);
  let recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));
  let records={};
@@ -20,7 +21,7 @@ async function start(){
  const openSections=new Set();
  const openCoffeeGroups=new Set();
  const invalidate=message=>{
-  issued=null;mergeChoices=Object.create(null);records={};access=null;invalidated=true;root.innerHTML=renderAdminDenied(message);
+  issued=null;mergeChoices=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
  try {
   secureOrigin();
@@ -95,7 +96,18 @@ async function start(){
    busy=true;
    try{await action();}
    catch(err){actionMessage(err.message||'The administrator action failed.');}
-   finally{busy=false;}
+   finally{
+    busy=false;
+    if(pendingSectionRefresh&&!invalidated){
+     pendingSectionRefresh=false;
+     guarded(()=>refresh());
+    }
+   }
+  }
+  function requestSectionRefresh(){
+   if(invalidated)return;
+   if(busy){pendingSectionRefresh=true;return;}
+   guarded(()=>refresh());
   }
   // Preserve operator disclosure state during re-render; toggle requires capture.
   root.addEventListener?.('toggle',event=>{
@@ -110,7 +122,7 @@ async function start(){
    if(details.open){
     const newOpen=!openSections.has(kind);
     openSections.add(kind);
-    if(newOpen&&kindsForSection(kind).length)guarded(()=>refresh());
+    if(newOpen&&kindsForSection(kind).length)requestSectionRefresh();
    }else openSections.delete(kind);
   },true);
   // Delegate actions from stable root, which survives refresh renders.
@@ -150,7 +162,7 @@ async function start(){
      event.preventDefault();
      const newOpen=!disclosure.open;
      disclosure.open=true;openSections.add(disclosure.dataset.adminSection);
-     if(newOpen)guarded(()=>refresh());
+     if(newOpen)requestSectionRefresh();
      disclosure.querySelector('summary')?.focus?.({preventScroll:true});
      section.scrollIntoView?.({block:'start'});
     }
