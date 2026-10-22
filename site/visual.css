@@ -293,3 +293,8 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
  .shot-record-context{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:350px){.shot-body .shot-record-context{grid-template-columns:1fr}.shot-toggle{gap:7px}}
+
+@media(min-width:700px){
+ .shot-topline{grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:12px}
+ .shot-topline .shot-date{justify-self:end;white-space:nowrap}
+}

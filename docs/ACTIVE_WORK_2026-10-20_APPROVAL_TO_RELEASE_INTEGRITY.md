@@ -2,6 +2,11 @@
 - Recorded consent in Issue #44 comment 6346939887 before implementation. Scoped new Locked decision OPS-STREAMLINED-RELEASE-20261022 appears in BOTH canonical sources. This SAME commit updates approval inventory, adds Sunday 08:00 UTC full-regression workflow, and drops duplicate lint from visual job. Never claim full automated release readiness or conditional destructive backup until independently wired and tested. Historical owner-device absence is NOT_REQUIRED, not PASSED. Existing production grant already consumed and no new deploy requested.
 - Next: read back commit SHA/files and CI; update main daily encrypted backup separately with same-commit ops journal; reconcile historical issue labels/gates, and implement tested pre-destructive snapshot/readiness report controller. No live SQL, Netlify or member data action.
 
+## 2026-10-22 — Issue #78 targeted desktop regression correction, still source-only
+- Recovered real visual-review failure on PR #79 SHA `c4ef279044e190d18b32b7f80d2822f7f4bef710`: browser screenshots light/dark expect shot summary and date to share the same row on 900px viewport. Previous mobile repair made `.shot-topline` single-column at all widths and failed that explicitly supported desktop behavior; the iPhone clipping checks still passed.
+- This SAME commit adds a wide-screen (>=700px) two-column grid with shrinkable summary and right-aligned date while retaining multiline responsive summary at narrow widths, plus a source assertion verifying mobile/desktop rules. Mobile screenshot-approved aesthetics and all data/Locked behavior preserved. No production actions.
+- Next: rerun all exact-SHA relevant GitHub checks, especially failing visual browser test, correct any further regression, integrate PR #79 nonforce, and update `DIC-Q-78` to READY only after verified merge and CI.
+
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
 ## October 22, 2026 — Issue #78 mobile visual acceptance correction (source only, NOT deployed)

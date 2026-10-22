@@ -65,3 +65,10 @@ test('mobile Shot History summary wraps rather than clipping Grind and keeps the
  assert.match(css,/\.shot-body \.taste-chip\{[^}]*max-width:100%;white-space:normal/);
  assert.match(css,/\.shot-body \.radar\{[^}]*max-width:100%/);
 });
+
+test('shot history summary preserves desktop one-row date while narrow cards can wrap',()=>{
+ const css=readFileSync(new URL('../site/visual.css',import.meta.url),'utf8');
+ assert.match(css,/@media\(min-width:700px\)\{\s*\.shot-topline\{grid-template-columns:minmax\(0,1fr\) auto;align-items:baseline/);
+ assert.match(css,/\.shot-topline \.shot-date\{justify-self:end;white-space:nowrap/);
+ assert.match(css,/\.shot-numbers\{[^}]*overflow:visible;white-space:normal/);
+});
