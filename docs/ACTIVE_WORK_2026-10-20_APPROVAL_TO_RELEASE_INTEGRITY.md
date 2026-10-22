@@ -1,5 +1,8 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #52 first CI failure correction, approval key inventory
+- PR #64 first source `8e0904e23470627e2b052438ca99bb558d547774` approval workflow `39718670584` and independent visual fast-check `39718670627` FAILED only owner approval inventory mismatch: new key was documented in the ledger and matrix detail, but not included in matrix `owner_decision_key_inventory`; script correctly failed closed. Added the actual owner key in sorted inventory, preserving all old inventory elements and existing static coverage checks. No test gate reduced, no runtime code or provider changes. Other source CI results were still pending at this checkpoint; all checks must rerun against new SHA. Same-commit journal and audit inventory change.
+
 ## October 21 MDT — owner #52 test contract aligned with newly approved narrow supersessions, CI PENDING
 - Extended existing Admin Node assertions to reject the now-superseded manual Merge/Hold reason/confirm and assert role/revision pathways and generated review reason strings. Added shot source assertions for >1 g warning+Confirm on both log/edit using proper basket reference, while ordinary routine edit remains direct Save. Updated isolated rollback-only SQL Hold fixture to null reason so actual private audit SQL must supply neutral provenance. No production SQL, Edge, Netlify, member records or billing changes.
 - Same commit includes this journal; exact head tests NOT yet executed or passed. Next open a source-only PR, collect full required workflow results, repair failing checks without weakening role/data constraints. Older documented 6/6 PR #61 checks do not certify this change.
