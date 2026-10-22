@@ -240,6 +240,25 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "New RPC preserves old dic_admin_records; query is bounded to 80 characters, case-insensitive literal substring, admin member gate and 50-row filtered counts; no production SQL applies absent publish approval."
+    },
+    {
+      "id": "DIC-Q-80-extractor-cache-quota",
+      "issue": 80,
+      "pr": null,
+      "title": "Verified exact-URL and warm public-preview reuse; transient-retrieval quota correctness",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify/functions/coffee-url-preview.mjs",
+        "supabase/migrations/20261022220200_dic_preview_two_phase_cache.sql"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source integration CI and disconnected SQL behavior tests pending; new additive member RPCs require coordinated, authorized database migration before future Netlify website publication."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Preserve 12/IP/min Netlify rateLimit, existing 12/member/24h quota and 30s cooldown across trusted/universal paths; verified unique canonical exact URL and short-lived public-only warm cache skip daily claim, but still enforce 30s cooldown; transient upstream failures do not debit member daily count; other outcomes complete ticket before releasing result. Existing shared trusted claim stays untouched. No production changes."
     }
   ],
   "history": [],
