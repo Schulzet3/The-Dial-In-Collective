@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — production release source-bound CI retest initiated
+- Final pending full-stack candidate adds **only** release-scope security assertions and a disposable SQL test trigger with contemporaneous journal. Neither application runtime logic nor existing owner/member records changed. Source-bounded GitHub checks must complete before production SQL/Edge/Netlify release. Full-stack approval covers the changes; no duplicate authorization required. Reference active journal and new Locked `OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021`.
+
+
 ## October 21 MDT — universal deployment consent now explicitly granted for complete pending frontend/backend release
 - **Owner source and scoped Locked supersession:** general deployment approval covers all then-pending frontend/backend changes including the exact two unapplied SQL migrations `20261021221455_dic_source_worker_auth_and_admission.sql`, `20261021224447_dic_admin_content_review.sql` and updated `dic-verify-coffee` Edge function, unless owner expressly excludes one. **Do not request duplicate per-component consent.** New canonical policy `OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021` in Master Specification and Decision Ledger; see AGENTS and active journal. Unrelated destructive live member mutations, purchases and bypassing safety/release gates remain prohibited.
 - Previous status paragraph saying “separate backend consent missing” is **historically superseded only as to authorization**. Deployment is NOT complete: still must verify source, SQL and Edge code/test compatibility, exact new SHA CI, current backup/Netlify credit evidence and correct controlled one-use branch transaction, then provider READY/current. No deployment or user-data mutation in this decision-recording Git commit.

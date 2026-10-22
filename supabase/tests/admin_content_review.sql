@@ -306,3 +306,7 @@ begin
 end $admin_content$;
 select 'PASS: admin-only pagination, creator attribution, private notes, member/anon denial, stale revisions, partial corrections, nullable fields, immutable provenance, exact source-history audits and deduplication, full note limit and refreshed personal families; synthetic records rolled back' as result;
 rollback;
+
+-- Release authorization checkpoint: full rollback-only admin content SQL regression
+-- is rerun for the exact new source SHA after explicit full-stack deployment approval.
+-- This comment does NOT assert live database installation or change SQL fixture behavior.
