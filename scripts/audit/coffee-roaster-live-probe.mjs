@@ -70,6 +70,10 @@ for(let i=0;i<targets.length;i+=2){
 console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
  parsed:results.filter(x=>x.status==='parsed').length,
  blocked:results.filter(x=>x.status!=='parsed').map(x=>({roaster:x.roaster,status:x.status})),
+ tasting_notes_present:results.filter(x=>x.status==='parsed'&&typeof x.tasting_notes==='string'&&x.tasting_notes.trim()).length,
+ parsed_missing_tasting_notes:results.filter(x=>x.status==='parsed'&&!x.tasting_notes).map(x=>({roaster:x.roaster,available:x.available})),
+ per_product_field_counts:results.map(x=>({roaster:x.roaster,status:x.status,fields:(x.available||[]).length,has_notes:Boolean(x.tasting_notes),has_recipe:Boolean(x.recipe)})),
+
  note:'Some same-roaster URLs intentionally represent separate releases or formats. Two Queen City product links represent the same coffee. Current anonymous HTTPS source checks are distinct from authenticated browser acceptance. No user quota was consumed.'}));
 
 // This deliberately opt-in live acceptance reports drift instead of a green

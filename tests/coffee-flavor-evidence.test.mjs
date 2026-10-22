@@ -186,3 +186,30 @@ test('French selected-product tasting story yields only its literal named flavor
  assert.equal(unrelated.fields.tasting_notes,undefined);
  assert.equal(unrelated.fields.release_label,undefined);
 });
+
+test('selected product flavor-profile chips become directly autofillable notes',()=>{
+ const r=preview('roaster.example.com/products/banko-2026','Example',
+  '<div class="product-flavor-profile"><span>Peach Brûlée</span><span>Cantaloupe</span><span>Honey</span></div>');
+ assert.equal(r.fields.tasting_notes,'Peach Brûlée, Cantaloupe, Honey');
+});
+test('labeled selected-product tasting-note bullet list retains discrete notes',()=>{
+ const r=preview('roaster.example.com/products/lot','Example',
+  '<ul data-testid="product-tasting-notes"><li>Blackcurrant</li><li>Orange Zest</li><li>Brown Sugar</li></ul>');
+ assert.equal(r.fields.tasting_notes,'Blackcurrant, Orange Zest, Brown Sugar');
+});
+test('unknown chips, processes, and related coffee are not promoted to tasting notes',()=>{
+ const misc=preview('roaster.example.com/products/lot','Example',
+  '<div class="selling-points"><span>Peach</span><span>Cantaloupe</span></div>');
+ assert.equal(misc.fields.tasting_notes,undefined);
+ const process=preview('roaster.example.com/products/lot','Example',
+  '<ul class="tasting-notes"><li>Natural process</li><li>Anaerobic fermentation</li></ul>');
+ assert.equal(process.fields.tasting_notes,undefined);
+ const other=preview('roaster.example.com/products/lot','Example',
+  '<h2>Related products</h2><div class="flavor-profile"><span>Peach</span><span>Melon</span></div>');
+ assert.equal(other.fields.tasting_notes,undefined);
+});
+test('a short product-local tasting notes paragraph survives escaped ampersands',()=>{
+ const r=preview('roaster.example.com/products/lot','Example',
+  '<p class="tasting-notes">Raspberry, Bergamot &amp; Cacao</p>');
+ assert.equal(r.fields.tasting_notes,'Raspberry, Bergamot & Cacao');
+});

@@ -6,7 +6,7 @@ const topOfProduct=(html)=>{
 };
 function shortFlavorList(raw,clean){
  const text=clean(raw,200).trim();
- if(text.length<5||text.length>150||/\b(?:masl|variet(?:y|ies|al)|farm(?:ers?)?|producers?|co-?op|elevation|processing|fermented|relationship|espresso|coffee in|brew time|roast level|subscribe|shipping|quantity)\b/i.test(text))return '';
+ if(text.length<5||text.length>150||/\b(?:masl|variet(?:y|ies|al)|farm(?:ers?)?|producers?|co-?op|elevation|process|processing|fermented|fermentation|natural|washed|anaerobic|relationship|espresso|coffee in|brew time|roast level|subscribe|shipping|quantity)\b/i.test(text))return '';
  if(/\d{2,}|[$@%]|\bhttps?:\b/i.test(text))return '';
  const parts=text.split(/\s*(?:,|&)\s*/).map(p=>p.trim().replace(/^and\s+/i,'')).filter(Boolean);
  if(parts.length<2||parts.length>7||parts.some(p=>p.length>38||p.split(/\s+/).length>4||/[.!?;:|/]/.test(p)))return '';
@@ -52,6 +52,33 @@ function frenchProductSensoryNotes(html,clean){
  }
  return '';
 }
+// Explicit flavor-profile markup for the *selected* product; never global SEO,
+// unlabeled marketing, footer content or nearby product recommendations.
+function labeledFlavorChips(top,clean){
+ const re=/<(p|div|ul|ol|section)\b([^>]{0,950})>([\s\S]{0,2300}?)<\/\1\s*>/gi;
+ const named=/\b(?:tasting[-_ ]?notes?|taste[-_ ]?notes?|flavou?r[-_ ]?notes?|flavou?r[-_ ]?profile|cupping[-_ ]?notes?)\b/i;
+ for(const m of top.matchAll(re)){
+  const props=[...m[2].matchAll(/\b(?:class|data-[\w-]+|aria-label)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)]
+   .map(x=>x[1]??x[2]??'');
+  if(!props.some(x=>named.test(x)))continue;
+  const body=m[3];
+  let value='';
+  if(/^(?:ul|ol)$/i.test(m[1])){
+   const parts=[...body.matchAll(/<li\b[^>]{0,350}>([\s\S]{1,320}?)<\/li\s*>/gi)]
+    .map(x=>clean(x[1],65)).filter(Boolean);
+   if(parts.length>=2&&parts.length<=7)value=parts.join(', ');
+  }else{
+   const parts=[...body.matchAll(/<(?:span|li)\b[^>]{0,350}>([^<>]{1,105})<\/(?:span|li)\s*>/gi)]
+    .map(x=>clean(x[1],65)).filter(Boolean);
+   value=parts.length>=2&&parts.length<=7?parts.join(', '):clean(body,175)
+    .replace(/^(?:tasting|taste|flavou?r|cupping)\s*(?:notes?|profile)\s*[:\u2014-]\s*/i,'');
+  }
+  const accepted=shortFlavorList(value,clean);
+  if(accepted)return accepted;
+ }
+ return '';
+}
+
 export function extractProductFlavorEvidence(html,{clean}={}){
  if(typeof html!=='string'||typeof clean!=='function'||html.length>2_000_000)return '';
  // Named, merchant-owned product containers must be near the selected H1.
@@ -71,6 +98,8 @@ export function extractProductFlavorEvidence(html,{clean}={}){
  }
  // Shopfront's explicitly named tasting-description region, never the
  // similarly named shipping, processing, roasting or producer biographies.
+ const chips=labeledFlavorChips(top,clean);
+ if(chips)return chips;
  const sip=sipComparisonNotes(html,clean);
  if(sip)return sip;
  const french=frenchProductSensoryNotes(html,clean);
