@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #52 / PR #55 visual regression correction (CI pending)
+- Owner continuation expressly requested remaining development work. Exact GitHub PR #55 source `ed877b9aa546253d0ea45b9c469861ade0176dad` passed approval, isolated SQL, cloud UX and app build, but visual run `39712589257` failed at stale fixture selector `#admin-approved > .admin-record`; nested disclosure structure now wraps records. Real log timeout in `tests/browser/visual_review.py:289`. Source-only correction uses descendant `#admin-approved .admin-record` and updates identity-edit assertion from old readonly policy to owner-Locked new admin edit policy `UX-ADMIN-LOW-FRICTION-REVIEW-20261021`. Existing note, overflow and no-mutation assertions retained. No runtime behavior changed.
+- This fixes **known fixture drift**, not proof of visual PASS until exact SHA CI reruns. Preserve all Locked security/admin/server restrictions and no production changes. Next: verify commit, 5+visual GitHub tests, avoid merging if further failure or concurrent edit.
+
+
 ## October 21 MDT — #52 lint input cleanup before exact final acceptance
 - Latest merge `691c78b34d5c07b0957afecd7d7f4ab3bed46555` has 4/6 check-runs SUCCESS (approval/cloud-tests/mobile-browser-qa/isolated-sql); validate and visual-review were still running their lint stages on last read. New admin canonical editing removed the previous need for the third `rowFields(...,approved)` parameter. The project's pinned ESLint config treats unused parameters as warnings and runs `--max-warnings 0`; proactively remove this unused parameter and its call argument to avoid a wasted lint failure, with zero rendered/runtime behavior change. Journal and source are in SAME commit. Earlier four PASS apply to parent SHA, not automatically to this new SHA; rerun exact code before concluding green.
 - Do not publish; no SQL/data/provider changes.

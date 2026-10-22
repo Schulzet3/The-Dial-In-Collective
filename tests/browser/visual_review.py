@@ -285,10 +285,10 @@ globalThis.supabase={createClient:()=>sdk};
   shot(page,'12-admin-'+mode)
   page.set_viewport_size({'width':390,'height':1100});shot(page,'13-admin-mobile-'+mode)
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin mobile has no horizontal overflow')
-  coffee=page.locator('#admin-approved > .admin-record').first
+  coffee=page.locator('#admin-approved .admin-record').first
   coffee.get_by_role('button',name='Edit Details',exact=True).click()
   coffee_editor=coffee.locator('[data-record-form]');coffee_editor.wait_for(state='visible')
-  check(all(not coffee_editor.locator('[name="'+field+'"]').is_editable() for field in ['name','roaster','release_label']),mode+': approved identity remains readonly in the open editor')
+  check(all(coffee_editor.locator('[name="'+field+'"]').is_editable() for field in ['name','roaster','release_label']),mode+': approved identity is editable only in the administrator editor')
   check(coffee_editor.locator('[name="origin"]').input_value()=='Guji, Ethiopia' and coffee_editor.locator('[name="origin"]').is_editable(),mode+': descriptive coffee values are editable')
   shot_record=page.locator('#admin-shots .admin-record').first
   shot_record.get_by_role('button',name='Edit Details',exact=True).click()
