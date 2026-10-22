@@ -4,8 +4,26 @@
 - Owner-safe Hide Shot affordance staged on `work/hide-shot-owner-safe-20261021`; original shot records preserved. Uses existing server-owner revision guard and asks for explicit confirmation. Code/CI verification pending. No Netlify or Supabase production mutation, and user-device acceptance is not claimed. Same-commit active journal holds implementation scope and next steps.
 
 
+
+
+## October 21 MDT — PR #55 source-only Admin redesign merged and independently verified
+- Owner-approved Issues #52/#47, narrow Locked admin decisions preserved in Master Specification, Decision Ledger and approval inventory. Five exact-head GitHub Actions SUCCESS on `adbaa99ac94d76d09d7990c7a35080410b7081a7`: approval `39716014307`, SQL `39716014408`, cloud/mobile `39716016857`, visual `39716014364`, Node/lint/build `39716014471`. Inspected key UI/server role-restricted SQL patches and no unapproved live provider actions.
+- Non-force normal GitHub PR #55 merge at `3b51aaba4b36a2beee3e38e8dc5e2916a944b2c8`, parents previous development `f55feb70450901d8e0113e11affc7bb7bb35294a` + exact tested PR head; merged and tested trees **byte-identical** `92a0eaa45743adbac86fee7cb8073aec854b900d`. Read back branch ref, Git commit/tree/parents and PR merged state independently.
+- Staged Admin panels (collapsed by default), complete Pending fields, approved identity editor, one-click distinct approval and shot grouping, with two source-only **UNAPPLIED** migrations `20261022023000_dic_admin_shot_coffee_group_identity.sql`, `20261022024000_dic_admin_fast_review_and_identity_edits.sql`. Never mark as published or owner-device accepted. Live production remains Netlify prior `6ad968689f42fbe8e871e151`, independent actual release consent used; Supabase 34 applied migrations. A future release requires new distinct owner instruction and exact SHA/preflight/backup/credit gates.
+- Concurrent owner-approved Issue #20 Hide Shot work is isolated on PR #58, source `1502e7bafa89b5ab168396b15fc287c945a67905`; verify its independent CI and reconcile against this admin merge. Main remaining P0s #9/#10/#12/#13 and real-device acceptance #21/#22/#26 are open. Program issue #57 tracks the resumed backlog; next avoid silent broad closure.
+
+
 ## October 21 MDT — verified optimization merge; source development only
 - Issue #50 first source optimization release completed at merge `8e09ecbe12aaeec7129097d6d546ec3baaf7253c` with identical five-green-tested tree `d3ed86cb625bbe2dc8332e6c196a0ded90f4f5e9`; 593/593 required Node tests, 299/299 targeted cloud, independent mobile+SQL+approval+visual success. Targeted secondary test stage 35.7–56.6% shorter in two runs, not a comparable whole deployment-cycle or 10× claim. Production still unchanged Netlify `6ad968689f42fbe8e871e151`; no new release grant. Full receipt `docs/audits/2026-10-21-optimization-final-merge-receipt.json`.
+
+
+## Issue #52 scope addendum — owner-approved admin low-friction source changes, NOT deployed
+- New owner-Locked decision `UX-ADMIN-LOW-FRICTION-REVIEW-20261021`: Pending details always visible after top-level section open; approved names/roasters/releases editable by admin with a server-safe duplicate guard and immutable UUID/audit; ordinary Approve Distinct is one deliberate click with machine-authored audit reason, no redundant browser prompts. Original account privacy/role/RLS safeguards unchanged. Active development is isolated PR #53, no live SQL/Edge or Netlify authorization in this owner request. Exact CI pending.
+
+
+## Issue #52 — source-only staging on isolated branch; no production release
+- Six principal Admin Portal panels native accessible and collapsed by default, dashboard stat shortcuts open/focus target, open state retained on refresh. Logged Shots nested into independent per-library-coffee groups (not name-based), including hidden/unknown/pending entries and paged boundaries. **New migration `20261022023000_dic_admin_shot_coffee_group_identity.sql` is not applied to live Supabase; feature NOT deployed.** Browser fixtures have been updated for disclosures; exact PR CI awaiting run. Current live provider remains previous approved `eee687dd...`, no new grant. See Issue #52 and journal.
+
 
 
 ## October 21 MDT — Issue #50 source-only optimization read-only dossier (not deployed)

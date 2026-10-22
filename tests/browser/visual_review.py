@@ -261,11 +261,16 @@ globalThis.supabase={createClient:()=>sdk};
   page.add_script_tag(content='const MODE='+json.dumps(mode)+';'+escaped+shared+client+records+view+sdk+main)
   page.locator('#admin-refresh').wait_for();check(page.locator('html').get_attribute('data-theme')==mode,mode+': Admin reads saved account appearance')
   page.locator('#admin-refresh').click();check(page.evaluate('requests.filter(x=>x==="dic_admin_dashboard").length')>=2,mode+': Admin Refresh remains read-only')
-  page.wait_for_function("document.querySelector('#admin-refresh')?.disabled===false && document.querySelectorAll('#admin-approved > .admin-record').length===2")
+  page.wait_for_function("document.querySelector('#admin-refresh')?.disabled===false && document.querySelectorAll('#admin-approved .admin-record').length===2")
   check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','2'],mode+': Admin cards match complete record totals')
+  check(page.locator('details.admin-disclosure:not([open])').count()==6,mode+': all admin sections collapsed initially')
+  for kind in ['pending','conflicts','approved','shots','accounts','infrastructure']:
+   page.locator('#admin-'+kind+' summary.admin-disclosure-summary').click()
+  for group in page.locator('#admin-shots details.admin-coffee-group').all():
+   group.locator('summary').click()
   for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
-   check(page.locator('#admin-'+kind+' > .admin-record').count()==total,mode+': '+kind+' records are populated')
-  check(page.locator('#admin-pending > h2').all_text_contents()==['Pending Coffee Review'] and page.locator('#admin-conflicts > h2').all_text_contents()==['Conflicts'],mode+': review sections have one readable heading')
+   check(page.locator('#admin-'+kind+' .admin-record').count()==total,mode+': '+kind+' records are populated')
+  check(page.locator('#admin-pending h2').all_text_contents()==['Pending Coffee Review'] and page.locator('#admin-conflicts h2').all_text_contents()==['Conflicts'],mode+': review sections have one readable heading')
   check(page.locator('#admin-pending > section, #admin-conflicts > section').count()==0,mode+': review records have no duplicate nested panel')
   check(page.locator('#admin-approved .admin-queue-title strong').first.inner_text()=='tester@synthetic.invalid',mode+': record creator attribution is visible')
   check(page.locator('#admin-shots .admin-record-note').first.inner_text()=='Notes: Synthetic private note: sweet berry finish.',mode+': synthetic private shot notes are visible')
@@ -273,19 +278,19 @@ globalThis.supabase={createClient:()=>sdk};
   check(page.locator('#admin-invites .admin-invite-row').count()==1 and page.get_by_text('Synthetic Used Invitation').count()==1,mode+': complete historical invitation listing renders without secret retrieval')
   check(page.locator('#admin-invites').get_by_text('Complete invitation history is temporarily unavailable').count()==0,mode+': invitation fixture exercises successful server listing, not fallback')
   check(page.locator('.admin-pagination').count()==0,mode+': complete short lists do not show misleading pagination')
-  review=page.locator('#admin-pending > .admin-record')
+  review=page.locator('#admin-pending .admin-record')
   check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare','review-hold']),mode+': each paginated coffee has review actions')
   check(page.locator('.admin-review-details').count()==0,mode+': duplicate legacy review actions omitted')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin has no horizontal overflow')
   shot(page,'12-admin-'+mode)
   page.set_viewport_size({'width':390,'height':1100});shot(page,'13-admin-mobile-'+mode)
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin mobile has no horizontal overflow')
-  coffee=page.locator('#admin-approved > .admin-record').first
+  coffee=page.locator('#admin-approved .admin-record').first
   coffee.get_by_role('button',name='Edit Details',exact=True).click()
   coffee_editor=coffee.locator('[data-record-form]');coffee_editor.wait_for(state='visible')
-  check(all(not coffee_editor.locator('[name="'+field+'"]').is_editable() for field in ['name','roaster','release_label']),mode+': approved identity remains readonly in the open editor')
+  check(all(coffee_editor.locator('[name="'+field+'"]').is_editable() for field in ['name','roaster','release_label']),mode+': approved identity is editable only in the administrator editor')
   check(coffee_editor.locator('[name="origin"]').input_value()=='Guji, Ethiopia' and coffee_editor.locator('[name="origin"]').is_editable(),mode+': descriptive coffee values are editable')
-  shot_record=page.locator('#admin-shots > .admin-record').first
+  shot_record=page.locator('#admin-shots .admin-record').first
   shot_record.get_by_role('button',name='Edit Details',exact=True).click()
   shot_editor=shot_record.locator('[data-record-form]');shot_editor.wait_for(state='visible')
   check(shot_editor.locator('[name="notes"]').input_value()=='Synthetic private note: sweet berry finish.' and shot_editor.locator('[name="notes"]').is_editable(),mode+': shot editor retains the original synthetic private note')
