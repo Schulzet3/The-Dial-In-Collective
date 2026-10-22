@@ -1,3 +1,5 @@
+> **Current supersession (October 21, 2026 MDT):** This historical audit is preserved as evidence, not the live UI backlog. Original Issue #20 Hide Shot control was expressly rejected by the owner after PR #58; it has been removed from development in tested PR #65 / merge `4f77a7ff8b3d20a0ad7a48f223cdeeddeada919d`. The original rows below are retained to avoid rewriting audit history. Owner did not give a separate affirmative approval of this named UI control. Hide/detach user-interface acceptance in #9 is superseded; other wrong-member/stale revision checks remain. Production remains unchanged, new UI not deployed. See canonical `UX-REMOVE-HIDE-SHOT-CONTROL-20261021`.
+
 # Project requirement and issue traceability — October 21, 2026
 
 Canonical sources: [Master Specification](../MASTER_SPECIFICATION.md), [Decision Ledger](../DECISION_LEDGER.json), [Current Status](../CURRENT_STATUS.md). [Audit overview](2026-10-21-history-audit.md).

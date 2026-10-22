@@ -51,17 +51,18 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
+          cache: 'npm'
       - name: Install exact locked dependency tree
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: node scripts/audit/measure-stage.mjs --name install --out qa_artifacts/ci-metrics/validate.jsonl -- npm ci --ignore-scripts --no-audit --no-fund
       - name: Run all checked-in Node tests
-        run: npm test
+        run: node scripts/audit/measure-stage.mjs --name full-tests --out qa_artifacts/ci-metrics/validate.jsonl -- npm test
       - name: Lint browser, server, Edge and audit JavaScript
-        run: npm run lint
+        run: node scripts/audit/measure-stage.mjs --name lint --out qa_artifacts/ci-metrics/validate.jsonl -- npm run lint
       - name: Build static beta assets with nonfunctional public test coordinates
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
-        run: npm run build:cloud
+        run: node scripts/audit/measure-stage.mjs --name build --out qa_artifacts/ci-metrics/validate.jsonl -- npm run build:cloud
       - name: Fail if any development-only or private source leaks into dist
         run: |
           test -s dist/index.html
@@ -77,3 +78,11 @@ jobs:
           test ! -e dist/scripts
           test ! -e dist/.github
           echo "PASS: Cloud app tests/build complete; no private source trees published."
+      - name: Retain source validation timing receipts even on failure
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-validate-timing-${{ github.run_id }}
+          path: qa_artifacts/ci-metrics/validate.jsonl
+          if-no-files-found: warn
+          retention-days: 7

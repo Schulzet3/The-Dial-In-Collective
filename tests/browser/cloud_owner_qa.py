@@ -167,6 +167,8 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.wait_for_function('!document.querySelector("#sheet").open');assert page.locator('.current-mark').count()==1;checks.append('Saving shot closes log and pins coffee')
  assert page.locator('.feedback-panel').count()==1;checks.append('Latest result and radar visible after save')
  page.get_by_text('Shot History (1)',exact=True).click();page.locator('[data-action=shot-expand]').click();assert page.locator('.shot-body .radar').count()==1;checks.append('Shot details expand inline with radar and notes')
+ assert page.locator('.shot-body [data-action=hide-shot]').count()==0 and page.get_by_role('button',name='Hide Shot',exact=True).count()==0
+ checks.append('Shot History retains Edit/Make Current but has no Hide Shot control')
  header=page.locator('.shot-overview').first.inner_text()
  assert 'Home Espresso' not in header and 'Basket Dose' not in header and 'Slow Feed' not in header
  assert page.locator('.shot-record-context').get_by_text('Home Espresso',exact=True).count()==1
@@ -425,6 +427,19 @@ with sync_playwright() as p:
  assert len(page.evaluate("window.__raw.shots"))==4
  assert page.locator('.alternate-recipes').count()==0
  checks.append('Explicit Make Current preference overrides clarity heuristic and preserves both families and all shot records')
+
+ # Sixth style must be an actual user choice and survive a server-style save.
+ page.locator('.style-row [data-action="style"]').first.click()
+ assert page.locator('#style select[name=style] option[value="Fast-Flow"]').count()==1
+ page.locator('#style select[name=style]').select_option('Fast-Flow')
+ page.locator('#style button.primary').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.locator('.style-row .style-fast-flow').count()==1
+ assert page.evaluate("window.__raw.workspaceCoffees[0].selected_style")=='Fast-Flow'
+ page.locator('[data-action=log]').first.click()
+ assert 'Fast-Flow' in page.locator('#shot .recipe-label').inner_text()
+ page.get_by_role('button',name='Close',exact=True).click()
+ checks.append('390px browser: sixth Fast-Flow style selected, saved to workspace and retained in new shot draft')
 
  # Account switches must not reuse a previous account's still-running sync.
  switch=page.evaluate("""async () => {

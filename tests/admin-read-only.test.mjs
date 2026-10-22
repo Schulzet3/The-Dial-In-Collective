@@ -72,12 +72,17 @@ test('the proposed SQL never grants admin rights or enables mutation operations'
  assert.doesNotMatch(sql,/insert into private\.app_admins|update public\.coffees|alter policy|create policy/i);
 });
 
-test('admin review UI requires signed-session RPC, reason and exact revision',async()=>{
+test('admin review UI enforces exact revision and one-click distinct, merge or hold decisions',async()=>{
  const main=await readFile(new URL('../site/admin/main.js',import.meta.url),'utf8');
  const sql=await readFile(new URL('../supabase/migrations/20261021053500_dic_admin_coffee_review.sql',import.meta.url),'utf8');
  assert.match(main,/dic_admin_review_coffee/);
  assert.match(main,/p_expected_revision:revision/);
- assert.match(main,/reason.trim\(\).length<8/);
+ assert.doesNotMatch(main,/Reason for |Apply .*submitted coffee/);
+ assert.doesNotMatch(main,/if\(decision!=='approve'\)/);
+ assert.match(main,/const reason=''/);
+  const updated=await readFile(new URL('../supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql',import.meta.url),'utf8');
+  assert.match(updated,/reason_text is null and p_action='approve'/);
+  assert.match(updated,/Administrator approved distinct coffee/);
  assert.match(sql,/private\.require_member\(\)/);
  assert.match(sql,/not private\.is_admin\(\)/);
  assert.match(sql,/s\.revision is distinct from p_expected_revision/);
@@ -96,4 +101,22 @@ test('manual review displays compatible duplicates and escapes candidate names',
  assert.match(html,/data-action="review-merge"/);
  assert.match(html,/&lt;script&gt;/);
  assert.doesNotMatch(html,/<script>|<img/);
+});
+
+test('routine admin Save requires no human correction reason or redundant confirmation',async()=>{
+ const main=await readFile(new URL('../site/admin/main.js',import.meta.url),'utf8');
+ const records=await readFile(new URL('../site/admin/records.js',import.meta.url),'utf8');
+ const migration=await readFile(new URL('../supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql',import.meta.url),'utf8');
+ const cloud=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ assert.match(records,/Save Changes/);
+ assert.doesNotMatch(records,/Reason for correction|name="reason"/);
+ assert.doesNotMatch(main,/Save this administrator correction\?/);
+ assert.match(main,/p_reason:''/);
+ assert.match(migration,/Administrator saved record changes/);
+ assert.match(migration,/insert into private\.admin_content_edits/);
+ assert.doesNotMatch(main,/if\(decision!=='approve'\)/);
+ assert.match(cloud,/Math\.abs\(actualDose-Number\(referenceDose\)\)>1/);
+ assert.match(cloud,/globalThis\.confirm\?\.\(warning\)/);
+ assert.match(cloud,/this\.editing\?\.snapshot\?\.basketDoseG/);
+ assert.match(cloud,/version\?\.baskets\?\.find/);
 });

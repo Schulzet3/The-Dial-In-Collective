@@ -32,17 +32,26 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
+          cache: 'npm'
       - name: Install locked runtime dependencies
-        run: npm ci --ignore-scripts --no-audit --no-fund
+        run: node scripts/audit/measure-stage.mjs --name install --out qa_artifacts/ci-metrics/cloud.jsonl -- npm ci --ignore-scripts --no-audit --no-fund
       - name: Cloud unit and regression tests
-        run: npm test
+        run: node scripts/audit/measure-stage.mjs --name cloud-tests --out qa_artifacts/ci-metrics/cloud.jsonl -- npm run test:cloud
       - name: Syntax check
         run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js && node --check site/admin/main.js && node --check site/cloud/coffee-match-ui.js
       - name: Build allowlisted cloud preview
-        run: npm run build:cloud
+        run: node scripts/audit/measure-stage.mjs --name build --out qa_artifacts/ci-metrics/cloud.jsonl -- npm run build:cloud
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_build_only_not_for_deployment
+      - name: Retain cloud regression timing receipts even on failure
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-cloud-timing-${{ github.run_id }}
+          path: qa_artifacts/ci-metrics/cloud.jsonl
+          if-no-files-found: warn
+          retention-days: 7
 
   mobile-browser-qa:
     runs-on: ubuntu-24.04

@@ -2158,6 +2158,21 @@
       "scope": "Single owner-approved permanent deletion of BASELINE and OUTLIER QA shots and notes, two Community projections, links and quality checks; sanitize only eight matching audit shot payloads and six matching receipt response payloads to safe tombstones retaining identity/action/timestamps/replay metadata, confirm no favorites/reviews, protect 18 original shots/notes and 2 original Community records. No release or other SQL. Verify SQL before marking complete.",
       "source": "Owner explicit 'Fine remove the shots now please' on 2026-10-20 MDT / 2026-10-21 UTC, following exact proposed two-record authorization",
       "status": "Executed and independently verified in production; one-use approval exhausted"
+    },
+    {
+      "topic": "Issue #19 recommended style placement",
+      "current": "UX-FIRST-EXPANSION-STYLE-20261021",
+      "supersedes": "Original §27.3 and baseline Add Coffee style timing only",
+      "scope": "One-time first manual coffee expansion instead of Add Coffee; preserve all other Locked decisions and data."
+    },
+    {
+      "id": "OPS-PROPORTIONATE-COFFEE-APP-CONTROLS-20261021",
+      "status": "Locked",
+      "date": "2026-10-21",
+      "title": "Proportionate coffee-app safeguards and release readiness",
+      "decision": "Owner approves loosening, changing or eliminating disproportionate protections and production release-readiness steps when it improves app efficiency or effectiveness, with narrowly scoped evidence and updated canonical decisions. This is not a fresh production publish authorization. Preserve credentials/identity/roles/data integrity/history/recovery and factual deployment verification.",
+      "supersedes": "Prior blanket interpretation that all existing safeguards/release checklist steps are permanently mandatory solely because previously Locked; each concrete replacement must be documented against its exact affected requirement.",
+      "approval": "Direct owner instruction 2026-10-21, recorded Issue #57 comment 6332524896"
     }
   ],
   "open_current_owner_decisions": [],
@@ -3634,7 +3649,18 @@
     "linked_issues": [
       38,
       44
-    ]
+    ],
+    "verification_20261022": {
+      "native_controller_run": 39706556610,
+      "conclusion": "SUCCESS",
+      "published_source": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+      "netlify_deploy": "6ad968689f42fbe8e871e151",
+      "current_ready_readback": true,
+      "original_failure_root_cause": "UNKNOWN_HISTORICAL",
+      "postrelease_credit_debit": "UNKNOWN",
+      "real_owner_device_acceptance": "PENDING",
+      "new_release_authorized": false
+    }
   },
   "current_owner_admin_records_edit_20261021": {
     "decision_id": "OPS-ADMIN-RECORDS-EDIT-20261021",
@@ -3688,5 +3714,165 @@
       "Actual CI, protected function roles, verified production readiness and owner device acceptance separate"
     ],
     "implementation": "POLICY RECORDED, all pending source already staged; this does not claim hosted deployment, migration application, new Edge version or published Netlify source"
+  },
+  "current_owner_admin_low_friction_review_20261021": {
+    "id": "UX-ADMIN-LOW-FRICTION-REVIEW-20261021",
+    "status": "Owner-Locked, approved SOURCE IMPLEMENTATION AND TESTING, NOT new deployment",
+    "owner_instruction": "Pending Coffees show all details without nested expansion; all approved coffee fields including name editable; ordinary Approve Distinct one click without an extra reason or confirm unless genuine conflict.",
+    "details": [
+      "Use single accessible top-level Pending disclosure with all coffee fields visible per card",
+      "Canonical fields name, roaster, release_label become editable to server-validated admin; record before/after and retain immutable UUID, all library/shot links",
+      "Ordinary admin Approve Distinct uses one deliberate button and server-generated audit reason; no browser reason prompt or second confirmation",
+      "Server performs existing role, revision and near-duplicate guard without adding user steps; conflicts surface clearly"
+    ],
+    "supersedes_only": [
+      "Read-only canonical name, roaster and release in Admin operator editor (NOT ordinary member/public paths)",
+      "Human-written reason and extra confirm required for uncomplicated Approve Distinct Coffee clicks"
+    ],
+    "preserves": [
+      "Account roles and user/member data access controls, RLS, MFA/secret handling",
+      "Server duplicate/release conflict checks; no silent merges; original UUID, notes and shot history",
+      "Before/after admin audits and a recorded reason (machine-supplied on ordinary approve)",
+      "Reason/consent for Hold, Merge, separately audited Edit remain under existing policy pending further owner scope",
+      "Fresh distinct owner approval for each deployment and no unrelated production mutations"
+    ],
+    "consent": "Owner asserts user consent for admin reading/editing; not independently verified or authority to remove account protections",
+    "stage": "SOURCE_ONLY_APPROVED_NOT_IMPLEMENTED_NOT_TESTED_NOT_DEPLOYED"
+  },
+  "current_owner_sitewide_low_friction_correction_20261021": {
+    "id": "UX-SITEWIDE-DIRECT-SAVE-20261021",
+    "status": "Locked — owner explicitly approved source implementation and testing, NOT new production deployment",
+    "owner_quote": "Yes. I'd like to eliminate the mandatory correction reason and confirmation site wide. Where else does it exist? Agreed it should give warning only if the edit creates a genuine identity conflict.",
+    "scope": "Routine Save changes to administrator and member editable coffee records, shot measurements, private notes and other ordinary record edits. Never require a human correction explanation or a second confirm; generate neutral server audit reason where needed, keep revision and before/after history. Remove advisory ±1g shot basket dose browser prompt, keep numeric validation.",
+    "supersedes_only": [
+      "Mandatory 8–1000 character human correction reason and secondary browser confirmation for ordinary administrator audited coffee/shot/note edits",
+      "Preserved separately audited Edit reason gate in UX-ADMIN-LOW-FRICTION-REVIEW-20261021",
+      "Extra browser Log anyway confirmation for nonblocking advisory ±1g basket dose deviation"
+    ],
+    "preserves": [
+      "Administrator/member role admission and RLS authorization; password/secrets; creator privacy in Community",
+      "All immutable record IDs, before/after correction snapshots, service-side neutral audit provenance, revision conflicts and uniqueness/near-duplicate release protections",
+      "Genuine conflict warnings and explicit consent for merge/hold ambiguous coffee identity and outlier Community confirmation",
+      "Explicit confirmations for revocation/removing access, bulk historical imports and other materially different non-edit actions",
+      "Private GitHub Free, no live provider change/paid topup, and fresh exact-SHA single-use owner consent for a later deployment"
+    ],
+    "implementation": "APPROVED → IMPLEMENTED → TESTED 6/6 → MERGED into development/backend-foundation e9dbd365a33c69de602ac34f4ac1334baa29e8de; exact tested source 10fd93e822037995a6bb66298f3b405bc019bdc1; tested and merged trees identical; NOT DEPLOYED, NOT OWNER DEVICE ACCEPTED"
+  },
+  "current_owner_admin_one_click_resolution_and_dose_warning_20261021": {
+    "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
+    "status": "Locked",
+    "approval": "Owner development and testing only; production release not approved",
+    "scope": "One click to Merge a previously identified valid duplicate into explicitly selected safe canonical coffee or Hold an existing submitted coffee; no human explanation or secondary confirmation. Actual new identity collisions are blocked and surfaced. Logging/editing dose >1g from correct basket reference requires warning and explicit confirm. Revocation and member removal keep warning/confirm. Historical import remains absent from routine Settings but server recovery retained.",
+    "supersedes_only": [
+      "Manual human reason and second browser confirmation for administrator existing Merge/Hold review actions",
+      "No extra confirmation for greater-than-1g basket dose deviation in UX-SITEWIDE-DIRECT-SAVE-20261021"
+    ],
+    "preserves": [
+      "Role, RLS, revision, canonical safe matching and detailed private audit",
+      "Original shot basket snapshot on edit and selected basket reference on new shot",
+      "No automatic merge of new conflicts, preserved member data and historical recovery gate",
+      "Existing invitation revoke and member-remove warning/confirm",
+      "Separate exact-source production release authorization"
+    ],
+    "implementation": "Approved source/test only; IMPLEMENTED, 6/6 exact-SHA synthetic/isolated CI checks SUCCESS on 93427e9dbb03dacc35a0836d3c1ddc38265474e4; normal PR #64 merged development 31f5b7ebabf31a09c69a58860292f626f491dc34, identical tree 53cc65e2bed818ad7b1862d17eb5328baeb04861; production NOT DEPLOYED, owner-device NOT ACCEPTED"
+  },
+  "current_owner_remove_hide_shot_control_20261021": {
+    "decision_id": "UX-REMOVE-HIDE-SHOT-CONTROL-20261021",
+    "status": "Locked",
+    "owner_source": "Owner explicit instruction October 21 MDT: I don't want that option. Please remove it completely.",
+    "owner_request": "Remove user-facing Hide Shot affordance and all related client UI/handler paths; keep personal shot history and Edit/Make Current.",
+    "approval": "Source development/testing only; not a new Netlify, Supabase SQL/Edge/Auth or data release approval.",
+    "supersedes_only": [
+      "Baseline personal-shot user-facing hide/delete UI option in Master Specification §20/§21.2 and legacy baseline Locked history entry insofar as they require an exposed Hide Shot control",
+      "Issue #20 / PR #58 affirmative user-facing Hide Shot button/handler implementation and outstanding device acceptance for that UI"
+    ],
+    "not_retroactive": "Keep archived approval rationale and Sept 7–8 Option B data-retention choice as history. The historical retention decision did not expressly specify a Hide Shot button; do not claim it did.",
+    "preserves": [
+      "Original and existing hidden shot records, notes, family revisions, original Community contributors, anonymized Community durability, restoration integrity",
+      "Server-side role/RLS/revision/idempotency contract and any legacy queued hide_shot event compatibility; these are not offered as new user options",
+      "Current Edit, Make Current Recipe, shot expand, offline sync and account isolation",
+      "GitHub Free/private advisory checks and single-use separate release approval"
+    ],
+    "implementation": "Approved owner withdrawal → implemented and 6/6 exact-SHA CI tested at 03f87bab4a2a0086d1ecdc736cb2d714dd231792 → PR #65 merged source 4f77a7ff8b3d20a0ad7a48f223cdeeddeada919d, tested/merged tree byte-identical 99558f366ba0af981e3ebc0c55bd5365abc0f7db; NOT DEPLOYED, NOT DEVICE ACCEPTED"
+  },
+  "current_owner_retire_hide_shot_backend_20261021": {
+    "decision_id": "UX-RETIRE-HIDE-SHOT-BACKEND-20261021",
+    "status": "Locked",
+    "owner_source": "User: I'd prefer if you could remove it completely. Is that possible without other data loss? / do it / yes you have approval to apply production. Get it to 100% ready to deploy.",
+    "scope": "Disable new hide_shot enqueue and reject production hide_shot requests before old receipt replay. Preserve old queued records, original shots, notes, audit, Community and hidden_at schema. Keep other mutation routes working.",
+    "supersedes_only": [
+      "Previous retained active hide_shot server mutation allowance and new-enqueue allowance in UX-REMOVE-HIDE-SHOT-CONTROL-20261021"
+    ],
+    "authorizes": "Source, CI and narrow hosted SQL retirement only following backup and guard validation. Netlify production publication not authorized.",
+    "implementation": "Public API guard applied as migration 20261022041530 and source filename aligned through PR69 at 21a0a7552e406da3c383f96d53c2323891c6f363; six exact-source checks passed at f447fd3dc7f73d6f2f6beb82b2763b80a786f833. Historical data-preservation counts remain the October21 receipt, not a new row audit. Frontend removal source remains unpublished.",
+    "residual_limitation": "Private internal hide_shot handler remains; owner explicitly deferred its removal in PR72 comment6333843360. Public wrapper contains rejection and authenticated direct EXECUTE is denied in October22 read-only catalog inspection. No claim that every privileged route is impossible. Do not reapply the public guard or implement deferred removal without renewed scope."
+  },
+  "current_owner_first_expansion_starting_style_20261021": {
+    "decision_id": "UX-FIRST-EXPANSION-STYLE-20261021",
+    "status": "Locked",
+    "owner_source": "Owner Oct 21 MDT: show Starting Shot Style recommendation only the first time newly added coffee is expanded before first shot; prepare for deployment.",
+    "approval": "Development and release-readiness only; no hosted mutation or Netlify publish.",
+    "scope": "No Starting Shot Style on Add Coffee; first intentional open displays editable Recommended for you and one-line reason once across owner account/devices, chosen private style reflected in first-shot log, never makes coffee Current merely by adding/viewing.",
+    "supersedes_only": [
+      "Master Specification §27.3 Add Coffee timing/picker only",
+      "Original baseline styles Recommended for you placement, Issue #19 earlier PR #63/#67 layout"
+    ],
+    "preserves": [
+      "All five original style names and separate Custom targets #14",
+      "Owner isolation and revision checked mutation, no shared coffee identity changes",
+      "All original shot history, offline queued events, Admin/direct Save and Hide Shot retired state",
+      "Independent exact source release consent and owner-device checks"
+    ],
+    "implementation": "PR71 merged 83d289eef8c26b57329f3ef71bfae3fc018d53cd after all six checks passed on 0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2, identical tree c0ad5b7d364fde83e93820199cc39b8ac0659cb9. Frontend and migration20261022053000 remain undeployed; real-owner/device acceptance pending. Issue73 repairs draft-context recomputation, with its own exact-source CI receipt required."
+  },
+  "current_owner_defer_private_hide_shot_retirement_20261021": {
+    "decision_id": "UX-DEFER-PRIVATE-HIDE-SHOT-RETIREMENT-20261021",
+    "status": "Locked",
+    "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/72#issuecomment-6333843360",
+    "recorded_at_utc": "2026-10-22T05:55:05Z",
+    "scope": "Close PR72 without merge and defer physical removal of the dormant private.mutate hide_shot allowlist/handler.",
+    "supersedes_only": [
+      "Earlier instruction/next action to complete private-code eradication under UX-RETIRE-HIDE-SHOT-BACKEND-20261021"
+    ],
+    "preserves": [
+      "Applied public hide_shot rejection and withdrawn UI",
+      "All existing records, permission boundaries, receipts and historical hidden_at data",
+      "Closed PR72 branch and candidate migration as historical evidence"
+    ],
+    "implementation": "DEFERRED_BY_OWNER; PR72 CLOSED_UNMERGED; candidate migration NOT_APPLIED and not part of current development.",
+    "future_authority": "Renewed scoped review/authorization required before internal retirement; no publication or production mutation implied.",
+    "read_only_verification_20261022": {
+      "private_handler_present": true,
+      "public_guard_present": true,
+      "authenticated_private_execute": false,
+      "all_privileged_routes_proven_impossible": false
+    }
+  },
+  "current_owner_fast_flow_hybrid_20261022": {
+    "decision_id": "UX-FAST-FLOW-HYBRID-20261022",
+    "status": "Locked",
+    "source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/31#issuecomment-6334319727",
+    "recorded_at_utc": "2026-10-22",
+    "owner_approval": "Option 3 hybrid explicitly chosen with instruction to develop and test ready for deployment; no approval to publish",
+    "scope": "Add Fast-Flow as sixth selectable style, distinct shot/family history, cautious ratio-only eligible Turbo reference when no direct Fast-Flow evidence",
+    "supersedes_only": [
+      "Prior five-style-only set, narrowly extended by Fast-Flow"
+    ],
+    "preserves": [
+      "Original five styles, priors, badges, Custom",
+      "Selected shot labels and full personal/Community/offline history",
+      "Non-hard style targets; minimal Log Shot Rate Recommendation flow",
+      "Separately gated production release and data safety"
+    ],
+    "research_limit": "Secondary-source example; full video transcripts unverified, 1:2.35 and 10-16s are illustrative",
+    "status_flow": {
+      "approved": true,
+      "implemented": "SOURCE_CANDIDATE",
+      "tested": "PENDING_CI",
+      "deployed": false,
+      "accepted": false
+    },
+    "source_branch": "work/fast-flow-hybrid-20261022",
+    "production_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d"
   }
 }

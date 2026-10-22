@@ -1,0 +1,963 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-22T06:29:30.570Z",
+  "scope_issue": 73,
+  "scope": "GitHub source/CI/documentation/backlog reconciliation; provider reads only; no release, production data/provider writes or credit spend.",
+  "original_intake": {
+    "development_sha": "5cf07be14b64449954a71f1e296d332b160d4032",
+    "main_sha": "69b0c266b06c8feec719474188ec0a2c1a05910f",
+    "release_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+    "branch_count": 34,
+    "inventory": "docs/audits/2026-10-22-branch-reconciliation-inventory.json"
+  },
+  "source_integration": {
+    "pull_request": 74,
+    "status": "MERGED",
+    "changed_paths": 13,
+    "exact_tested_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+    "merge_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+    "tree_sha": "a7d84671e81ae3af0de90c4198eda36bd794d0c0",
+    "merge_parents": [
+      "5cf07be14b64449954a71f1e296d332b160d4032",
+      "d38c52751b028bbb0fdd76ba06f2e09d11a0c071"
+    ],
+    "tested_and_merged_tree_identical": true,
+    "required_pr_workflows": 5,
+    "required_pr_jobs": 6,
+    "required_pr_conclusion": "SUCCESS",
+    "ci_runs": {
+      "approval": 39732735076,
+      "validate": 39732735077,
+      "cloud_and_mobile": 39732735160,
+      "sql": 39732735118,
+      "visual": 39732735154
+    },
+    "postmerge_ci_runs": {
+      "approval": 39733019368,
+      "validate": 39733019280,
+      "cloud_and_mobile": 39733019319,
+      "visual": 39733019338
+    },
+    "sql_postmerge_scope": "No separate postmerge SQL trigger; successful PR-only run applies to the identical merged Git tree.",
+    "controlled_public_source_probe": {
+      "run": 39733019307,
+      "conclusion": "skipped",
+      "interpretation": "Not a failed run and not a probe acceptance result."
+    },
+    "repairs": [
+      {
+        "id": "draft_recommendation_context",
+        "result": "Use Recommendation and Slow Feed retain selected draft style/basket/feed after preference interruption or state refresh."
+      },
+      {
+        "id": "draft_basket_dose_warning",
+        "result": "New shots compare dose to the submitted draft basket; historical edits and strict greater-than-1-g threshold retained."
+      },
+      {
+        "id": "source_dossier_grant_reporting",
+        "result": "Existing pure one-use validator filters invalid/expired/revoked/already-consumed-source grants; report remains HOLD and consumes no grant."
+      }
+    ],
+    "focused_regressions": {
+      "draft_context_and_dose": 7,
+      "draft_cases_failing_before_repairs": 6,
+      "historical_edit_guard_passed_before_and_after": true,
+      "source_dossier": 5,
+      "total_pass": 12
+    },
+    "deployed": false,
+    "owner_device_accepted": false
+  },
+  "operations_documentation": {
+    "pull_request": 75,
+    "status": "MERGED",
+    "changed_paths": 5,
+    "exact_tested_sha": "3a7ced7a2120ba9e1cf1fd0c4f55735f0bf47199",
+    "merge_sha": "57d6000085ba3346006a6e479c6be0133de6d3f4",
+    "tree_sha": "a49c472f1e69c0f430c1e19ef6637104b5578975",
+    "merge_parents": [
+      "69b0c266b06c8feec719474188ec0a2c1a05910f",
+      "3a7ced7a2120ba9e1cf1fd0c4f55735f0bf47199"
+    ],
+    "tested_and_merged_tree_identical": true,
+    "premerge_ci_run": 39732908195,
+    "postmerge_ci_run": 39733043000,
+    "conclusion": "SUCCESS",
+    "backup_or_release_triggered": false
+  },
+  "superseded_pull_requests": [
+    {
+      "number": 51,
+      "state": "closed",
+      "merged": false,
+      "closed_at": "2026-10-22T06:18:13Z",
+      "head": "6183ba170f64f1c3f8d8d8e86725eee7f1137ac0",
+      "head_ref": "work/tenfold-update-pipeline-20261021",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/51",
+      "disposition": "CLOSED_UNMERGED_SELECTIVELY_SUPERSEDED_BY_PR74"
+    },
+    {
+      "number": 68,
+      "state": "closed",
+      "merged": false,
+      "closed_at": "2026-10-22T06:18:18Z",
+      "head": "22c92f9eb7e56bc6c13e169c799ce852ea2a9ede",
+      "head_ref": "work/proportionate-release-policy-20261021",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/68",
+      "disposition": "CLOSED_UNMERGED_SELECTIVELY_SUPERSEDED_BY_PR74"
+    }
+  ],
+  "issues": {
+    "updated_open": [
+      {
+        "number": 9,
+        "title": "[P0] Verify remaining wrong-member and stale-revision Community acceptance",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:11Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/9",
+        "original_body_preserved": true
+      },
+      {
+        "number": 18,
+        "title": "[P1] Deferred optional screenshot extraction and device-local Claude BYOK",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:05Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/18",
+        "original_body_preserved": true
+      },
+      {
+        "number": 19,
+        "title": "[P1] Deploy and accept first-expansion starting-style recommendation",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:00Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/19",
+        "original_body_preserved": true
+      },
+      {
+        "number": 28,
+        "title": "[P2] Verify scheduled backup courier, retention and natural alert delivery",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:44Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/28",
+        "original_body_preserved": true
+      },
+      {
+        "number": 30,
+        "title": "[P2] Recover missing research bodies, workshop addendum and full transcripts",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:21Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/30",
+        "original_body_preserved": true
+      },
+      {
+        "number": 36,
+        "title": "[P1] Complete remaining limited-pilot device, invitation and backup acceptance",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:39Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/36",
+        "original_body_preserved": true
+      },
+      {
+        "number": 43,
+        "title": "[P0] Complete real administrator coffee-review and conflict acceptance",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:21:09Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/43",
+        "original_body_preserved": true
+      },
+      {
+        "number": 44,
+        "title": "[P0] Complete remaining credit/account and device evidence for one-action releases",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:33Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/44",
+        "original_body_preserved": true
+      },
+      {
+        "number": 47,
+        "title": "[P1] Complete signed-in acceptance of deployed admin records and paged editing",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:21:15Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/47",
+        "original_body_preserved": true
+      },
+      {
+        "number": 50,
+        "title": "[P0] Measure remaining 10× end-to-end release-cycle objective",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:27Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/50",
+        "original_body_preserved": true
+      },
+      {
+        "number": 52,
+        "title": "[P1] Deploy and accept admin disclosure, direct review and dose-warning refinements",
+        "state": "open",
+        "state_reason": null,
+        "updated_at": "2026-10-22T06:19:16Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/52",
+        "original_body_preserved": true
+      }
+    ],
+    "consolidated_duplicate": {
+      "number": 23,
+      "title": "[P1] Consolidated: admin review acceptance tracked in #43 and #47",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "updated_at": "2026-10-22T06:21:22Z",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/23",
+      "original_body_preserved": true,
+      "destination_issues": [
+        43,
+        47
+      ],
+      "destination_readback_before_closure": true,
+      "all_four_original_criteria_transferred": true,
+      "high_signal_conflict_quality": "UNVERIFIED_IN_43",
+      "paging_editor_privacy_acceptance": "PENDING_IN_47",
+      "acceptance_completed_by_closure": false
+    },
+    "previously_accepted_scopes_preserved": [
+      11,
+      34,
+      41
+    ],
+    "hide_ui_issue20_and_internal_retirement_pr72": "Remain closed; PR72 owner-deferred unmerged, dormant private code retained per owner decision."
+  },
+  "remaining_open_pull_requests": [
+    {
+      "number": 76,
+      "title": "Approval required: align encrypted backup source pin with verified production",
+      "head": "4473b7cb46c62a9197ff34e8a9ae3394a604d9d8",
+      "head_ref": "work/backup-published-source-pin-20261022",
+      "base": "main"
+    }
+  ],
+  "backup_pin_proposal": {
+    "pull_request": 76,
+    "status": "OPEN_GREEN_AWAITING_EXPLICIT_BACKUP_OPERATIONS_AUTHORIZATION",
+    "head_sha": "4473b7cb46c62a9197ff34e8a9ae3394a604d9d8",
+    "base_sha": "57d6000085ba3346006a6e479c6be0133de6d3f4",
+    "tree_sha": "360dd75b3b43ae5974c09ef3f54c3f7f29dbfbfc",
+    "parents": [
+      "a3b1c7bed7a483a9fca6474999f5ef81c7427cd6",
+      "57d6000085ba3346006a6e479c6be0133de6d3f4"
+    ],
+    "ahead_of_main": 2,
+    "behind_main": 0,
+    "changed_paths": [
+      ".github/workflows/nightly-backup.yml",
+      "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md",
+      "docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md"
+    ],
+    "changed_blob_shas": {
+      ".github/workflows/nightly-backup.yml": "e71d8ee3d0a97614a5ef5ff5fc9e691e747d5f9d",
+      "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md": "e7c3c6cbc91da1420789f9afa35140bf41a79938",
+      "docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md": "2755f8933eb1c08f8acbcc27bd41e5ab24db8bb6"
+    },
+    "source_pin_from": "1e79c4585c49ab517abb912887ee05ed7f4c4c4d",
+    "source_pin_to": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+    "functional_change": "One nightly-backup app-source checkout pin line; other two paths are contemporaneous journals.",
+    "inert_acceptance_run": 39733503577,
+    "inert_acceptance_job": "release-controller-validate",
+    "inert_acceptance_conclusion": "SUCCESS",
+    "spent_release_request_blob_unchanged": "7ee154d3a9135c103c1ef1fa6960426d5b749ce6",
+    "approval_rule": "main AGENTS.md item 4: explicit backup-operations authorization for path-triggered live-read encrypted database export and new private GitHub artifact. Earlier PR49 approval was scoped to that merge.",
+    "approval_needed": true,
+    "new_live_backup_export_performed": false,
+    "next_action": "Obtain approval for this exact reviewed merge/effect, refresh main/release/provider refs, merge without force, independently verify actual backup job and encrypted artifact.",
+    "evidence_limits": "Existing scheduled/offsite receipts remain established historical evidence. A new push artifact alone proves neither a new scheduled courier delivery nor restore of that exact encrypted artifact."
+  },
+  "branch_cleanup": {
+    "verified_at_utc": "2026-10-22T06:29:30.570Z",
+    "status": "COMPLETED_VERIFIED",
+    "mechanism": "GitHub branch UI delete with visible Deleted/Restore, followed by independent GitHub API inventory",
+    "removed_count": 15,
+    "branches_before": 37,
+    "branches_after": 23,
+    "removed": [
+      {
+        "name": "audit/operations-20261021",
+        "sha": "fcfb3d1b8b91bb593d9bd7ee6963068f43cdec9c",
+        "retainedBranch": "main",
+        "retainedSha": "57d6000085ba3346006a6e479c6be0133de6d3f4",
+        "prs": [
+          49
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 4,
+        "mergeBase": "fcfb3d1b8b91bb593d9bd7ee6963068f43cdec9c",
+        "protected": false
+      },
+      {
+        "name": "audit/three-pass-20261021",
+        "sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          48
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 87,
+        "mergeBase": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+        "protected": false
+      },
+      {
+        "name": "work/admin-collapsible-coffee-shots-20261021",
+        "sha": "adbaa99ac94d76d09d7990c7a35080410b7081a7",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          55,
+          53
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 42,
+        "mergeBase": "adbaa99ac94d76d09d7990c7a35080410b7081a7",
+        "protected": false
+      },
+      {
+        "name": "work/admin-review-dose-20261021",
+        "sha": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          64
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 28,
+        "mergeBase": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
+        "protected": false
+      },
+      {
+        "name": "work/align-hide-shot-provider-migration-20261021",
+        "sha": "f447fd3dc7f73d6f2f6beb82b2763b80a786f833",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          69
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 18,
+        "mergeBase": "f447fd3dc7f73d6f2f6beb82b2763b80a786f833",
+        "protected": false
+      },
+      {
+        "name": "work/hide-shot-owner-safe-20261021",
+        "sha": "abc990805d839ee7d000789a102b8de5922e7cdf",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          58
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 38,
+        "mergeBase": "abc990805d839ee7d000789a102b8de5922e7cdf",
+        "protected": false
+      },
+      {
+        "name": "work/issue19-first-expand-once-20261021",
+        "sha": "0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          71
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 5,
+        "mergeBase": "0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2",
+        "protected": false
+      },
+      {
+        "name": "work/optimization-sprint-20261021",
+        "sha": "2268052832a53eb7a75ca52fbcdb9ebb60d3778d",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          54
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 58,
+        "mergeBase": "2268052832a53eb7a75ca52fbcdb9ebb60d3778d",
+        "protected": false
+      },
+      {
+        "name": "work/pr72-safe-reconcile",
+        "sha": "5cf07be14b64449954a71f1e296d332b160d4032",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [],
+        "verifiedAhead": 0,
+        "verifiedBehind": 2,
+        "mergeBase": "5cf07be14b64449954a71f1e296d332b160d4032",
+        "protected": false
+      },
+      {
+        "name": "work/remove-hide-shot-control-20261021",
+        "sha": "03f87bab4a2a0086d1ecdc736cb2d714dd231792",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          65
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 25,
+        "mergeBase": "03f87bab4a2a0086d1ecdc736cb2d714dd231792",
+        "protected": false
+      },
+      {
+        "name": "work/retire-hide-shot-backend-20261021",
+        "sha": "86454065a0ad01ea2fd4214282e5416619c81215",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          66
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 20,
+        "mergeBase": "86454065a0ad01ea2fd4214282e5416619c81215",
+        "protected": false
+      },
+      {
+        "name": "work/sitewide-direct-save-current-20261021",
+        "sha": "10fd93e822037995a6bb66298f3b405bc019bdc1",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          61
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 34,
+        "mergeBase": "10fd93e822037995a6bb66298f3b405bc019bdc1",
+        "protected": false
+      },
+      {
+        "name": "work/visual-refresh-20261015",
+        "sha": "781a10033420ba737973cbbe5e3047e9ba1d4b04",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [],
+        "verifiedAhead": 0,
+        "verifiedBehind": 847,
+        "mergeBase": "781a10033420ba737973cbbe5e3047e9ba1d4b04",
+        "protected": false
+      },
+      {
+        "name": "work/github-reconciliation-20261022",
+        "sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+        "retainedBranch": "development/backend-foundation",
+        "retainedSha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "prs": [
+          74
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 1,
+        "mergeBase": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+        "protected": false
+      },
+      {
+        "name": "work/operations-docs-reconciliation-20261022",
+        "sha": "3a7ced7a2120ba9e1cf1fd0c4f55735f0bf47199",
+        "retainedBranch": "main",
+        "retainedSha": "57d6000085ba3346006a6e479c6be0133de6d3f4",
+        "prs": [
+          75
+        ],
+        "verifiedAhead": 0,
+        "verifiedBehind": 1,
+        "mergeBase": "3a7ced7a2120ba9e1cf1fd0c4f55735f0bf47199",
+        "protected": false
+      }
+    ],
+    "unexpected_removals": [],
+    "retained_tip_changes": [],
+    "concurrent_new_branches_preserved": [
+      {
+        "name": "work/fast-flow-hybrid-20261022",
+        "sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      }
+    ],
+    "retained_refs": [
+      {
+        "name": "claude/artifact-import-e8h9kx",
+        "sha": "85f54d3e21e72bb09734cf934519b194bfc9d49b",
+        "protected": false
+      },
+      {
+        "name": "development/backend-foundation",
+        "sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "protected": false
+      },
+      {
+        "name": "main",
+        "sha": "57d6000085ba3346006a6e479c6be0133de6d3f4",
+        "protected": false
+      },
+      {
+        "name": "release/production",
+        "sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+        "protected": false
+      },
+      {
+        "name": "test/chat-release-ci-20261021",
+        "sha": "9b32f3e98bb2221babdf68e1bbd819e1a943a298",
+        "protected": false
+      },
+      {
+        "name": "work/add-coffee-start-style-current-20261021",
+        "sha": "508e8767183e292a2beb1060e91af9362ef023bb",
+        "protected": false
+      },
+      {
+        "name": "work/add-coffee-starting-style-20261021",
+        "sha": "63e579ea711dd110f01aa718d441caa604b336e8",
+        "protected": false
+      },
+      {
+        "name": "work/add-coffee-style-recommendation-20261021",
+        "sha": "d4cdc3652f97733f4aae26b3277886ab0d71b587",
+        "protected": false
+      },
+      {
+        "name": "work/admin-read-only-foundation-20261014",
+        "sha": "9853418a1a299f8fcfba95364dd51094bb2bc18b",
+        "protected": false
+      },
+      {
+        "name": "work/authenticated-beta-readiness-20261014",
+        "sha": "be3c6b3966e4f711a9be0a0a6e9904fa8dfec8ea",
+        "protected": false
+      },
+      {
+        "name": "work/backup-published-source-pin-20261022",
+        "sha": "4473b7cb46c62a9197ff34e8a9ae3394a604d9d8",
+        "protected": false
+      },
+      {
+        "name": "work/chat-triggered-release-20261021",
+        "sha": "9b32f3e98bb2221babdf68e1bbd819e1a943a298",
+        "protected": false
+      },
+      {
+        "name": "work/coffee-verification-automation-20261014",
+        "sha": "a5f896808acb4f8971cb0fcaa4e34659a6c75a6a",
+        "protected": false
+      },
+      {
+        "name": "work/fast-flow-hybrid-20261022",
+        "sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "protected": false
+      },
+      {
+        "name": "work/issue19-style-successor-20261021",
+        "sha": "1b5624b06297fee3abc3c692ecf22fdb2fd02d1b",
+        "protected": false
+      },
+      {
+        "name": "work/netlify-credit-guard-20261014",
+        "sha": "7d41cffd4b5416cad900f110b265679ac9841645",
+        "protected": false
+      },
+      {
+        "name": "work/private-hide-shot-retirement-20261022",
+        "sha": "9a7159cb24c8e56da692f2de9234a7aa89175699",
+        "protected": false
+      },
+      {
+        "name": "work/proportionate-release-policy-20261021",
+        "sha": "22c92f9eb7e56bc6c13e169c799ce852ea2a9ede",
+        "protected": false
+      },
+      {
+        "name": "work/roaster-alias-matching-20261014",
+        "sha": "d44ab9d65630b6308794f824b4166ea481e2b605",
+        "protected": false
+      },
+      {
+        "name": "work/setup-feed-history-recovery-20261014",
+        "sha": "7a57a18043e5bfa63e25f0f7be8069aaac8d3dc9",
+        "protected": false
+      },
+      {
+        "name": "work/sitewide-direct-save-20261021",
+        "sha": "d6de025d7953c323b9cffbca2ed7a8ef0be5d5aa",
+        "protected": false
+      },
+      {
+        "name": "work/sitewide-direct-save-integrated-20261021",
+        "sha": "1c57fca19c53a146d87f07e004674dba35a18836",
+        "protected": false
+      },
+      {
+        "name": "work/tenfold-update-pipeline-20261021",
+        "sha": "6183ba170f64f1c3f8d8d8e86725eee7f1137ac0",
+        "protected": false
+      }
+    ],
+    "restoration": "Each removed reference can be recreated at its recorded SHA; every tip and all ancestors remain reachable from retained main/development history.",
+    "ui_visual_evidence": {
+      "path": "docs/audits/2026-10-22-branch-cleanup.jpg",
+      "bytes": 178464,
+      "mime_type": "image/jpeg",
+      "sha256": "7098cab47ac33c6b7328221a5c9a64334c3fa87e6aa252f5ff2542e68f25ca1a",
+      "git_blob_sha1": "6e6abd31557530778cf7595e170b5247cf9b6dd4",
+      "scope": "UI shows final four Deleted/Restore; independent API verifies all 15.",
+      "visible_deleted_refs": [
+        "work/admin-collapsible-coffee-shots-20261021",
+        "work/optimization-sprint-20261021",
+        "audit/three-pass-20261021",
+        "audit/operations-20261021"
+      ]
+    },
+    "original_inventory": "docs/audits/2026-10-22-branch-reconciliation-inventory.json",
+    "original_inventory_branch_count": 34,
+    "baseline_removed_count": 13,
+    "new_merged_work_refs_removed": 2,
+    "restoration_inventory": [
+      {
+        "name": "audit/operations-20261021",
+        "sha": "fcfb3d1b8b91bb593d9bd7ee6963068f43cdec9c",
+        "reachable_from_branch": "main",
+        "reachable_from_sha": "57d6000085ba3346006a6e479c6be0133de6d3f4"
+      },
+      {
+        "name": "audit/three-pass-20261021",
+        "sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/admin-collapsible-coffee-shots-20261021",
+        "sha": "adbaa99ac94d76d09d7990c7a35080410b7081a7",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/admin-review-dose-20261021",
+        "sha": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/align-hide-shot-provider-migration-20261021",
+        "sha": "f447fd3dc7f73d6f2f6beb82b2763b80a786f833",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/hide-shot-owner-safe-20261021",
+        "sha": "abc990805d839ee7d000789a102b8de5922e7cdf",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/issue19-first-expand-once-20261021",
+        "sha": "0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/optimization-sprint-20261021",
+        "sha": "2268052832a53eb7a75ca52fbcdb9ebb60d3778d",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/pr72-safe-reconcile",
+        "sha": "5cf07be14b64449954a71f1e296d332b160d4032",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/remove-hide-shot-control-20261021",
+        "sha": "03f87bab4a2a0086d1ecdc736cb2d714dd231792",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/retire-hide-shot-backend-20261021",
+        "sha": "86454065a0ad01ea2fd4214282e5416619c81215",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/sitewide-direct-save-current-20261021",
+        "sha": "10fd93e822037995a6bb66298f3b405bc019bdc1",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/visual-refresh-20261015",
+        "sha": "781a10033420ba737973cbbe5e3047e9ba1d4b04",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/github-reconciliation-20261022",
+        "sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+        "reachable_from_branch": "development/backend-foundation",
+        "reachable_from_sha": "259772b50ca98011a65b3efa9b07a03cda858339"
+      },
+      {
+        "name": "work/operations-docs-reconciliation-20261022",
+        "sha": "3a7ced7a2120ba9e1cf1fd0c4f55735f0bf47199",
+        "reachable_from_branch": "main",
+        "reachable_from_sha": "57d6000085ba3346006a6e479c6be0133de6d3f4"
+      }
+    ],
+    "all_removed_history_reachable_from_retained_refs": true,
+    "intake_comparison": {
+      "development_ahead_of_main": 1015,
+      "development_behind_main": 55,
+      "shared_operations_code_workflow_test_blobs_equal": 25,
+      "historical_squash_branches": 6
+    },
+    "boundary": "Main, development/backend-foundation, release/production, concurrent work, owner-deferred/private prototype and unique/squashed historical refs retained. No force push, ancestry rewrite, guard exception or app-into-main merge was performed."
+  },
+  "production_readback": {
+    "netlify": {
+      "verification": "Parent independently rechecked linked provider during this final handoff; sanitized metadata only.",
+      "deploy_id": "6ad968689f42fbe8e871e151",
+      "state": "ready",
+      "commit_ref": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+      "branch": "release/production",
+      "published_at": "2026-10-22T01:36:01.787Z"
+    },
+    "supabase": {
+      "verification": "Last independently checked read-only state in this reconciliation; no new write.",
+      "status": "ACTIVE_HEALTHY",
+      "postgres_version": "17.11",
+      "applied_migrations": 35,
+      "latest_migration": "20261022041530_dic_retire_hide_shot_action",
+      "first_style_migration_20261022053000_applied": false
+    },
+    "native_release_transport": {
+      "run": 39706556610,
+      "claim_step": "SUCCESS",
+      "scope": "One previously authorized consumed release; historical initial failure cause remains unproven."
+    },
+    "actual_postrelease_credit_account_effects": "UNKNOWN",
+    "owner_device_acceptance": "PENDING",
+    "new_publication": false,
+    "new_provider_or_member_data_write": false,
+    "new_credit_spend": false
+  },
+  "remaining_work": [
+    {
+      "issues": [
+        28,
+        36,
+        73
+      ],
+      "state": "AWAITING_EXACT_BACKUP_OPERATIONS_APPROVAL",
+      "detail": "Only open PR76 is fully prepared and inert-CI green; merging triggers a live encrypted database export/new GitHub artifact."
+    },
+    {
+      "issues": [
+        19,
+        52
+      ],
+      "state": "SOURCE_MERGED_NOT_DEPLOYED_NOT_ACCEPTED",
+      "detail": "Pending frontend/admin/first-style SQL requires a new explicit deployment instruction and exact-source single-use grant plus existing release checks."
+    },
+    {
+      "issues": [
+        9,
+        43,
+        47
+      ],
+      "state": "REAL_ACCOUNT_DEVICE_ACCEPTANCE_PENDING",
+      "detail": "Preserve completed scoped cases; remaining wrong-member/stale revision, high-signal review and administrative paging/editor/privacy evidence is not fabricated."
+    },
+    {
+      "issues": [
+        44
+      ],
+      "state": "POSTFLIGHT_DEBIT_ACCOUNT_DEVICE_EVIDENCE_PENDING",
+      "detail": "Native push succeeded; actual billing/account and signed-device evidence remains incomplete."
+    },
+    {
+      "issues": [
+        50
+      ],
+      "state": "TENFOLD_END_TO_END_OBJECTIVE_UNPROVEN",
+      "detail": "Source optimization and measured test-stage reductions do not establish 10x real release-cycle improvement."
+    },
+    {
+      "issues": [
+        30
+      ],
+      "state": "PARTIAL_SOURCE_RECOVERY",
+      "detail": "Supplied full JSX recovered; nine research originals, separate workshop addendum and full untruncated transcripts remain unavailable."
+    },
+    {
+      "issues": [
+        38
+      ],
+      "state": "PRIVATE_FREE_RESIDUAL_BYPASS_RISK",
+      "detail": "Advisory CI cannot enforce against direct writers/provider-admin redeploy."
+    }
+  ],
+  "workflow_readbacks": [
+    {
+      "id": 39732735076,
+      "name": "DIC approval, implementation and continuity contract",
+      "head_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39732735076",
+      "event": "pull_request",
+      "created_at": "2026-10-22T06:14:38Z",
+      "updated_at": "2026-10-22T06:14:50Z"
+    },
+    {
+      "id": 39732735077,
+      "name": "DIC cloud app build and tests",
+      "head_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39732735077",
+      "event": "pull_request",
+      "created_at": "2026-10-22T06:14:38Z",
+      "updated_at": "2026-10-22T06:15:12Z"
+    },
+    {
+      "id": 39732735160,
+      "name": "DIC cloud UX regression checks",
+      "head_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39732735160",
+      "event": "pull_request",
+      "created_at": "2026-10-22T06:14:38Z",
+      "updated_at": "2026-10-22T06:15:38Z"
+    },
+    {
+      "id": 39732735118,
+      "name": "DIC isolated SQL release regression",
+      "head_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39732735118",
+      "event": "pull_request",
+      "created_at": "2026-10-22T06:14:38Z",
+      "updated_at": "2026-10-22T06:15:28Z"
+    },
+    {
+      "id": 39732735154,
+      "name": "DIC private visual review",
+      "head_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39732735154",
+      "event": "pull_request",
+      "created_at": "2026-10-22T06:14:38Z",
+      "updated_at": "2026-10-22T06:16:26Z"
+    },
+    {
+      "id": 39733019368,
+      "name": "DIC approval, implementation and continuity contract",
+      "head_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39733019368",
+      "event": "push",
+      "created_at": "2026-10-22T06:17:24Z",
+      "updated_at": "2026-10-22T06:17:38Z"
+    },
+    {
+      "id": 39733019280,
+      "name": "DIC cloud app build and tests",
+      "head_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39733019280",
+      "event": "push",
+      "created_at": "2026-10-22T06:17:24Z",
+      "updated_at": "2026-10-22T06:18:07Z"
+    },
+    {
+      "id": 39733019319,
+      "name": "DIC cloud UX regression checks",
+      "head_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39733019319",
+      "event": "push",
+      "created_at": "2026-10-22T06:17:24Z",
+      "updated_at": "2026-10-22T06:18:40Z"
+    },
+    {
+      "id": 39733019338,
+      "name": "DIC private visual review",
+      "head_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39733019338",
+      "event": "push",
+      "created_at": "2026-10-22T06:17:24Z",
+      "updated_at": "2026-10-22T06:19:10Z"
+    },
+    {
+      "id": 39733019307,
+      "name": "DIC controlled public roaster source probe",
+      "head_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+      "status": "completed",
+      "conclusion": "skipped",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39733019307",
+      "event": "push",
+      "created_at": "2026-10-22T06:17:24Z",
+      "updated_at": "2026-10-22T06:17:25Z"
+    },
+    {
+      "id": 39732908195,
+      "name": "DIC main release-controller acceptance",
+      "head_sha": "3a7ced7a2120ba9e1cf1fd0c4f55735f0bf47199",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39732908195",
+      "event": "pull_request",
+      "created_at": "2026-10-22T06:16:17Z",
+      "updated_at": "2026-10-22T06:16:37Z"
+    },
+    {
+      "id": 39733043000,
+      "name": "DIC main release-controller acceptance",
+      "head_sha": "57d6000085ba3346006a6e479c6be0133de6d3f4",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39733043000",
+      "event": "push",
+      "created_at": "2026-10-22T06:17:39Z",
+      "updated_at": "2026-10-22T06:18:09Z"
+    },
+    {
+      "id": 39733503577,
+      "name": "DIC main release-controller acceptance",
+      "head_sha": "4473b7cb46c62a9197ff34e8a9ae3394a604d9d8",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39733503577",
+      "event": "pull_request",
+      "created_at": "2026-10-22T06:22:11Z",
+      "updated_at": "2026-10-22T06:22:42Z"
+    }
+  ],
+  "preservation": {
+    "prior_journal_and_status_entries": "Retained byte-for-byte below prepended current sections.",
+    "original_tranche_tested_and_merge_shas": "Retained; PR74 follow-up recorded separately in coverage.",
+    "master_specification_and_decision_ledger_changed_by_this_receipt": false,
+    "new_owner_product_decision": false,
+    "raw_provider_response_or_private_record_included": false
+  }
+}

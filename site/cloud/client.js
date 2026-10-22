@@ -42,6 +42,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
   async status(){assertSecure();return unwrap(await sdk.rpc('dic_session_status'));},
   async redeemInvite(token){assertSecure();const r=unwrap(await sdk.rpc('dic_redeem_invite',{token:token.trim()}));if(!r?.ok)throw new CloudError({verify_email:'Verify your email first.',invalid_invite:'This invitation is invalid, expired or exhausted.',rate_limited:'Too many attempts. Try again later.',access_revoked:'Your access was revoked. Contact the administrator.'}[r?.code]||'Invitation could not be accepted.',r?.code);return r;},
   async read(){assertSecure();return unwrap(await sdk.rpc('dic_read_personal_state'));},
+   async claimFirstStylePrompt(libraryEntryId){assertSecure();return unwrap(await sdk.rpc('dic_claim_first_style_prompt',{p_library_entry_id:libraryEntryId}));},
    async findCoffeeMatches(payload){assertSecure();return unwrap(await sdk.rpc('dic_find_coffee_matches',{payload}));},
    async previewCoffeeUrl(source_url){
     assertSecure();

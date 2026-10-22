@@ -58,7 +58,7 @@ begin
  if not denied then raise exception 'Stale admin revision was accepted';end if;
  got:=public.dic_admin_coffee_candidates(pending_id);
  if jsonb_typeof(got->'candidates')<>'array' then raise exception 'Candidates missing';end if;
- got:=public.dic_admin_review_coffee(pending_id,rev,'approve','Administrator checked original source label',null);
+ got:=public.dic_admin_review_coffee(pending_id,rev,'approve',null,null);
  if got->>'ok'<>'true' or got->>'status'<>'verified' then
   raise exception 'Admin reviewed distinct coffee not approved: %',got;
  end if;
@@ -69,7 +69,7 @@ begin
  then raise exception 'Existing member library identity was not preserved';end if;
  reviewed_coffee:=(got->>'coffee_id')::uuid;
  if not exists(select 1 from public.admin_reviews where submission_id=pending_id
-     and reviewer_id=admin_id and action='approve')
+     and reviewer_id=admin_id and action='approve' and reason='Administrator approved distinct coffee')
  then raise exception 'Administrator approval audit absent';end if;
  if not exists(select 1 from private.dic_coffee_audit where submission_id=pending_id
      and event_kind='admin_reviewed')
@@ -133,7 +133,7 @@ begin
  perform set_config('request.jwt.claims',jsonb_build_object('sub',admin_id,'role','authenticated')::text,true);
  execute 'set local role authenticated';
  select revision into rev from public.coffee_submissions where id=hold_id;
- got:=public.dic_admin_review_coffee(hold_id,rev,'hold','Need exact official product release source',null);
+ got:=public.dic_admin_review_coffee(hold_id,rev,'hold',null,null);
  if got->>'status'<>'conflict' then raise exception 'Hold did not mark conflict';end if;
  execute 'reset role';
  if not exists(select 1 from public.library_entries where owner_id=member_id and submission_id=hold_id)

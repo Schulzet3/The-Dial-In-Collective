@@ -14,6 +14,8 @@ async function start(){
  let mergeChoices=Object.create(null);
  let recordPages=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map(k=>[k,0]));
  let records={};
+ const openSections=new Set();
+ const openCoffeeGroups=new Set();
  const invalidate=message=>{
   issued=null;mergeChoices=Object.create(null);records={};invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
@@ -69,7 +71,7 @@ async function start(){
    ]);
    records=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map((kind,i)=>[kind,pages[i]]));
    if(invalidated)return;
-   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records);
+   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -85,18 +87,29 @@ async function start(){
    catch(err){actionMessage(err.message||'The administrator action failed.');}
    finally{busy=false;}
   }
+  // Preserve operator disclosure state during re-render; toggle requires capture.
+  root.addEventListener?.('toggle',event=>{
+   const details=event.target;
+   if(details?.matches?.('details[data-admin-coffee]')){
+    if(details.open)openCoffeeGroups.add(details.dataset.adminCoffee);
+    else openCoffeeGroups.delete(details.dataset.adminCoffee);
+    return;
+   }
+   if(!details?.matches?.('details[data-admin-section]'))return;
+   if(details.open)openSections.add(details.dataset.adminSection);
+   else openSections.delete(details.dataset.adminSection);
+  },true);
   // Delegate actions from stable root, which survives refresh renders.
   root.addEventListener?.('submit',event=>{
    if(event.target?.matches?.('[data-record-form]')){
     event.preventDefault();
     guarded(async()=>{
      const form=event.target,type=form.dataset.type,id=form.dataset.id;
-     const rev=Number(form.dataset.revision),reason=String(form.elements.namedItem('reason')?.value||'').trim();
-     if(!/^[0-9a-f-]{36}$/i.test(id)||!Number.isSafeInteger(rev)||rev<1||reason.length<8)throw new Error('A valid record, revision and correction reason are required.');
-     const changes=Object.fromEntries(Array.from(form.elements).filter(el=>el.name&&el.name!=='reason').map(el=>[el.name,el.value]));
-     if(!globalThis.confirm?.('Save this administrator correction? The original values will remain in the audit record.'))return;
+     const rev=Number(form.dataset.revision);
+     if(!/^[0-9a-f-]{36}$/i.test(id)||!Number.isSafeInteger(rev)||rev<1)throw new Error('A valid record and current revision are required.');
+     const changes=Object.fromEntries(Array.from(form.elements).filter(el=>el.name).map(el=>[el.name,el.value]));
      await adminRpc(type==='shot'?'dic_admin_edit_shot':'dic_admin_edit_coffee',{
-      p_record_id:id,p_expected_revision:rev,p_details:changes,p_reason:reason,p_kind:type
+      p_record_id:id,p_expected_revision:rev,p_details:changes,p_reason:'',p_kind:type
      });
      await refresh();actionMessage('Audited correction saved.');
     });return;
@@ -115,13 +128,24 @@ async function start(){
    });
   });
   root.addEventListener?.('click',event=>{
+   const card=event.target?.closest?.('a.admin-stat[href^="#admin-"]');
+   if(card && typeof card.getAttribute==='function'){
+    const section=root.querySelector('#'+card.getAttribute('href').slice(1));
+    const disclosure=section?.querySelector?.('details[data-admin-section]');
+    if(disclosure){
+     event.preventDefault();disclosure.open=true;openSections.add(disclosure.dataset.adminSection);
+     disclosure.querySelector('summary')?.focus?.({preventScroll:true});
+     section.scrollIntoView?.({block:'start'});
+    }
+    return;
+   }
    const button=event.target?.closest?.('[data-action],#admin-refresh');
    if(!button)return;
    const action=button.dataset.action||'refresh';
    if(action==='record-page'){
     const kind=button.dataset.kind,offset=Number(button.dataset.offset);
     if(!['pending','conflicts','approved','shots','accounts','invites'].includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
-    guarded(async()=>{recordPages[kind]=offset;await refresh();root.querySelector('#admin-'+kind)?.scrollIntoView?.({block:'start'});});return;
+    guarded(async()=>{recordPages[kind]=offset;const target=['accounts','invites'].includes(kind)?'accounts':kind;openSections.add(target);await refresh();root.querySelector('#admin-'+target)?.scrollIntoView?.({block:'start'});});return;
    }
    if(action==='edit-toggle'){
     const form=Array.from(root.querySelectorAll('[data-record-form]')).find(f=>f.dataset.id===button.dataset.id);
@@ -178,13 +202,13 @@ async function start(){
     const decision=action==='review-approve'?'approve':action==='review-merge'?'merge':'hold';
     const selected=decision==='merge'?root.querySelector('#admin-merge-'+id)?.value:null;
     if(decision==='merge'&&!mergeChoices[id]?.some(c=>c.id===selected))return;
-    const reason=globalThis.prompt?.('Required audit reason for this coffee decision:','');
-    if(!reason||reason.trim().length<8)return;
-    if(!globalThis.confirm?.('Apply '+decision+' to this submitted coffee? The decision is logged and cannot overwrite another member’s shots.'))return;
+    // Each deliberate resolution is one click. The server still checks role,
+    // current revision and canonical identity, and writes private audit provenance.
+    const reason='';
     guarded(async()=>{
      const result=await adminRpc('dic_admin_review_coffee',{
       p_submission_id:id,p_expected_revision:revision,p_action:decision,
-      p_reason:reason.trim(),p_canonical_id:selected||null
+      p_reason:reason,p_canonical_id:selected||null
      });
      if(!result?.ok)throw new Error('The review did not complete. Refresh before retrying.');
      delete mergeChoices[id];issued=null;await refresh();

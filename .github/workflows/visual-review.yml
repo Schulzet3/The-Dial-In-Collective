@@ -29,11 +29,14 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
+          cache: 'npm'
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm test
+      # Full test suite is verified by the required independent validate job.
+      # Visual review retains a fast security/regression check and unique browser acceptance.
+      - run: npm run check:fast
       - name: Lint all active JavaScript and review scripts
         run: npm run lint
       - run: npm run build:cloud
