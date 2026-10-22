@@ -32,17 +32,14 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
+          cache: npm
       - name: Install locked runtime dependencies
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Cloud unit and regression tests
-        run: npm test
+      # Full Node suite and build are asserted by DIC cloud app build and tests
+      # on the SAME SHA. This job independently checks cloud module syntax;
+      # the required release controller still rejects any failed full-suite check.
       - name: Syntax check
         run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js && node --check site/admin/main.js && node --check site/cloud/coffee-match-ui.js
-      - name: Build allowlisted cloud preview
-        run: npm run build:cloud
-        env:
-          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
-          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_build_only_not_for_deployment
 
   mobile-browser-qa:
     runs-on: ubuntu-24.04
@@ -54,6 +51,11 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - name: Cache pinned Chromium browser downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: dic-chromium-${{ runner.os }}-playwright-1.55.0-v1
       - name: Install Playwright and Chromium
         run: |
           python -m pip install playwright==1.55.0
