@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Issue #19 shipped-module graph regression caught before merge
+- Initial new style module missing in explicit dist allowlist, so cloud test 298/299 (site integrity FAIL). Source-only fix adding allowlisted module and regression staged; fresh exact CI pending. No release. See work journal and PR #56.
+
+
 ## October 21 MDT — isolated Issue #19 source changes: suggested shot style
 - Source-only New Coffee editable recommended style, dynamic roast/Autofill update and safe setup-specific persistence of selection via existing server RPC. Tests/CI pending. No live release. See active journal and issue.
 

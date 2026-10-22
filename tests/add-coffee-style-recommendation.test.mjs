@@ -25,6 +25,8 @@ test('style remains owner-scoped, revision-checked, and never makes coffee Curre
  assert.match(s,/await this\.mutate\('set_style'/);
  assert.match(s,/expected_revision:row\?\.revision\|\|0/);
  assert.match(s,/const styleSaved=await this\.persistAddedStyle\(lid,d\.style\)/);
+ const packaged=readFileSync(new URL('../build_cloud.mjs',import.meta.url),'utf8');
+ assert.match(packaged,/cloud\/coffee-style-choice\.js/);
  const sql=readFileSync(new URL('../supabase/migrations/20261012030019_dic_owner_workspace_actions.sql',import.meta.url),'utf8');
  assert.match(sql,/Viewing\/changing style does not alter recency or Current Coffee/);
 });

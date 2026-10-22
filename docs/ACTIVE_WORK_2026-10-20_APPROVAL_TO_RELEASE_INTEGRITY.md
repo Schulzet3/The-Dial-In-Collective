@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #19 initial CI fail closed on omitted shipped module; repair pending verification
+- Exact source `e1e4f70c7b5881c5dba0b9980b04fb663f9aef7a` cloud regression `39712517317` read back as **298/299 PASS, one FAIL** at `tests/site-integrity.test.mjs`: `cloud/main.js` imports new helper `cloud/coffee-style-choice.js` but `build_cloud.mjs` explicit asset list lacked the new module. The security/shipping integrity gate correctly prevented broken PWA output; no provider mutation/publish.
+- Minimal fix adds exact helper path to allowlisted dist copy and service-worker public shell, with explicit source regression in Add Coffee test. All behavior, owner-scoped version guard and existing tests retained. No bypass of `validateSiteSource` or file-integrity checks. Next: new exact-SHA PR five checks and visual before merging; no source/deployment acceptance claimed yet.
+
+
 ## October 21 MDT — Issue #19 development-only Add Coffee style selection, CI pending
 - Owner-approved §27.3 source scope recorded in Issue #19 comment 6331290543, branch starts from verified `f55feb70450901d8e0113e11affc7bb7bb35294a`. New Coffee includes preselected editable recommended style with a one-line factual roast/preference reason, URL Autofill and roast updates recalculate only absent manual choice. No invented community proof.
 - Existing version/revision-bound owner `set_style` RPC persists nondefault style after safe new/Pending or existing Verified coffee add; server explicitly does not alter Current/recency. Separate style failure leaves coffee saved and surfaces retry guidance rather than retrying coffee insertion. Custom target UI remains deferred #14. Regression tests added; exact GitHub CI not yet verified. No production/live SQL/Edge/Auth/member data/Netlify spending changes.
