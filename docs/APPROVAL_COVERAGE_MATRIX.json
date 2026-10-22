@@ -422,7 +422,16 @@
         "mutation_receipts": 44
       },
       "residual_limitation": "Internal privileged private.mutate legacy branch remains; ordinary member entry fully blocked in production; no physical column drop; site not released",
-      "production_verified": true
+      "production_verified": true,
+      "internal_retirement": {
+        "approved": true,
+        "implemented": true,
+        "isolated_tested": true,
+        "deployed": false,
+        "accepted": false,
+        "source_body_md5": "beabe070244e74dfdcbef99ba0dab2af",
+        "evidence": "38 migrations, 18 existing + 1 new SQL suite passed on isolated PGlite PostgreSQL 17.5. Exact CI and production readback pending."
+      }
     }
   ],
   "active_gap_flags": [

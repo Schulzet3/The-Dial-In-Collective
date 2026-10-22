@@ -3779,6 +3779,18 @@
     ],
     "authorizes": "Source, CI and narrow hosted SQL retirement only following backup and guard validation. Netlify production publication not authorized.",
     "implementation": "Source PR #66 normal merged a2cca542ab9919c54e623bd2e13b49ee17805611 from exact 6-green-tested 86454065a0ad01ea2fd4214282e5416619c81215, identical Git tree 49afb8a2287c3c6d063970992bb94a29d9e08daa. Owner-authorized production guard ACTUALLY APPLIED Supabase migration 20261022041530, direct SQLSTATE 22023 negative check passed, 22/0-hidden shots, 22 notes, 2 Community, 44 receipts all unchanged. GitHub migration filename aligned to applied version, final alignment CI pending. Frontend NOT DEPLOYED.",
-    "residual_limitation": "Private privileged internal mutate function still contains dormant hide_shot branch, auth direct EXECUTE denied, public wrapper now blocks it. Precise live SQL rewrite attempt blocked by tooling safety checks and was NOT applied. Hidden_at field retained without data loss. Follow-up via controlled review required for code eradication. No Netlify site release."
+    "residual_limitation": "Private privileged internal mutate function still contains dormant hide_shot branch, auth direct EXECUTE denied, public wrapper now blocks it. Precise live SQL rewrite attempt blocked by tooling safety checks and was NOT applied. Hidden_at field retained without data loss. Follow-up via controlled review required for code eradication. No Netlify site release.",
+    "internal_retirement_followup": {
+      "scope": "Owner explicitly authorizes removal of only the obsolete hide_shot allowlist and handler in private.mutate(uuid,text,jsonb), preserving all other behavior, permissions and all historical data.",
+      "supersedes": "Retaining obsolete internal hide_shot branch only; historical retention remains Locked.",
+      "status": "Approved; candidate implemented and isolated tests passed; exact CI and production application/readback pending.",
+      "migration": "20261022043331_dic_remove_private_hide_shot_branch.sql",
+      "tested_body_md5": "beabe070244e74dfdcbef99ba0dab2af",
+      "prohibitions": [
+        "Do not repeat 20261022041530",
+        "Do not publish website",
+        "Do not modify historical/member data"
+      ]
+    }
   }
 }
