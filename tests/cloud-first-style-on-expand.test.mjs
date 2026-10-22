@@ -21,6 +21,9 @@ test('first-shot suggestion absent from Add Coffee and appears only on intention
 });
 test('owner-scoped first view is durable once across reloads and devices',()=>{
  assert.match(idb,/first-style:'\+owner\+':'\+libraryId/);
+ assert.match(idb,/pendingFirstStylePrompts\(owner\)/);
+ assert.match(idb,/acknowledgeFirstStylePrompt\(owner,libraryId\)/);
+ assert.match(source,/syncFirstStylePrompts\(who.id\)/);
  assert.match(sql,/primary key\(owner_id,library_entry_id\)/);
  assert.match(sql,/private\.require_member\(\)/);
  assert.match(sql,/on conflict\(owner_id,library_entry_id\) do nothing/);
@@ -37,7 +40,8 @@ test('user style choice drives first shot while coffee facts remain shared only 
 test('only the first owner expansion shows the guidance; later opens do not',async()=>{
  const raw=rawFixture(),id=raw.library[0].id,seen=new Set();let remote=0;
  const app=new CloudApp({async claimFirstStylePrompt(){remote++;return {ok:true,show:remote===1};}},{
-  async claimFirstStylePrompt(owner,lid){const key=owner+':'+lid;if(seen.has(key))return false;seen.add(key);return true;}
+  async claimFirstStylePrompt(owner,lid){const key=owner+':'+lid;if(seen.has(key))return false;seen.add(key);return true;},
+  async acknowledgeFirstStylePrompt(){},async pendingFirstStylePrompts(){return [];}
  });
  app.identity={id:OWNER};app.status={admitted:true};app.raw=raw;app.state=hydrate(raw);
  app.state.shots=app.state.shots.filter(x=>x.coffeeId!==id);

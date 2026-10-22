@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — #19 offline first-open claim sync after admitted reconnect; CI blocker persists
+- Same-commit improvement closes identified cross-device gap: local owner-keyed pending first-open markers are replayed to the server when admitted device re-connects, and marked server-acknowledged; legacy shot/outbox records are unaffected. Disconnected devices cannot receive instantaneous cross-device consumption until they reconnect.
+- GitHub Actions PR #71 runs on `a542e9f7` and `970fb4d4` failed BEFORE runner assignment (0 runner, steps=[]), so source/app/SQL/browser workflows have NOT run. Preserve fail-closed release hold. Next exact-source CI after runner recovery, isolated SQL and real phone tests; no hosted SQL/provider/Netlify release authorization.
+
+
 ## October 21 MDT — #19 PR #71 first CI infrastructure rejection, isolated SQL API least privilege correction
 - PR #71 head `a542e9f75c402d4a718ca0d9c7da49e1966423e2` triggered six check jobs, ALL failed at runner provisioning within two seconds: GitHub reports `runner_id=0`, `runner_name=""`, `steps=[]` and log download BlobNotFound. This is **NOT an executed code/test failure**, but cannot claim green/source verified; exact root cause of runner rejection (quota/billing/config/provider) unverified. Do NOT bypass or merge. GitHub Free/private means advisory checks only.
 - Independent static V8 compilation of changed main/outbox/client source PASSED; mocked first view + collapse/reopen + selected Turbo first-shot transition PASSED (not a genuine browser/SQL/device test). Supabase live read-only confirmed `private.require_member()` exists as SECURITY DEFINER, authenticated has private schema usage and existing private mutation EXECUTE; 35 migrations applied, new `20261022053000` NOT hosted-applied. Security advisors show existing warnings, not caused by this unexecuted migration.

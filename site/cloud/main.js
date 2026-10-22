@@ -160,6 +160,7 @@ class CloudApp {
   try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;}
   catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);
+  await this.syncFirstStylePrompts(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;
   // A known flagged shot cannot be deferred. A failed refresh cannot erase
   // an outstanding hold; queue/offline data remains recoverable.
   if(!this.pending.length&&navigator.onLine){try{const held=await this.client.listCommunityReviews();if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.reviews=held;this.reviewError='';}catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.reviewError='Required shot reviews are temporarily unavailable. Reconnect and check Sync.';}}
@@ -421,7 +422,18 @@ class CloudApp {
   }
   this.render();
  }
-  async expandCoffee(id){
+  async syncFirstStylePrompts(owner){
+  if(!owner||!this.status?.admitted||globalThis.navigator?.onLine===false)return;
+  let ids=[];
+  try{ids=await this.inSession(()=>this.store.pendingFirstStylePrompts(owner));}catch{return;}
+  for(const id of ids){
+   try{
+    await this.inSession(()=>this.client.claimFirstStylePrompt(id));
+    await this.inSession(()=>this.store.acknowledgeFirstStylePrompt(owner,id));
+   }catch(error){if(error.code==='account_changed')throw error;break;}
+  }
+ }
+ async expandCoffee(id){
   if(this.expanded.has(id)){
    this.expanded.delete(id);if(this.tempCoffee===id)this.tempCoffee=null;
    if(this.firstStylePromptId===id)this.firstStylePromptId=null;
@@ -441,6 +453,7 @@ class CloudApp {
      // Atomic owner+coffee server claim prevents repeat across devices.
      const remote=await this.inSession(()=>this.client.claimFirstStylePrompt(id));
      first=first&&remote?.show===true;
+     await this.inSession(()=>this.store.acknowledgeFirstStylePrompt(owner,id));
     }catch(error){if(error.code==='account_changed')throw error;/* Retain local-first offline guidance. */}
    }
    if(first&&epoch===this.epoch&&this.identity?.id===owner&&this.expanded.has(id)&&

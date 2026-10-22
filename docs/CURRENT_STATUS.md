@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — #19 first view offline receipt now syncs; CI still unavailable
+- Owner-private local first-open marker acknowledged on verified admitted reconnect; no claims of real-time synchronization between offline devices. Exact PR CI still cannot start runners (0 runner/no steps); source not verified for deployment. Staged SQL remains unapplied, production unchanged. Next run actual Actions, isolated SQL, visual review and only then merge.
+
+
 ## October 21 MDT — Issue #19 CI blocked before runner execution; source corrected, rerun pending
 - PR #71 five workflows / six jobs failed to start runner (`runner_id=0`, `steps=[]`, missing logs); no application tests executed. Isolated SQL refactor uses private definer + public invoker; no hosted application. Static code compilation and mocked first-expansion behavior PASS; exact GitHub/isolated SQL/real device are NOT verified. Next restore CI runner availability, rerun exact SHA, then review source before merging. No Netlify release or provider writes.
 

@@ -85,9 +85,28 @@ export class IndexedStore {
   const key='first-style:'+owner+':'+libraryId;let first=false;
   await this.transaction(['meta'],tx=>{
    const store=tx.objectStore('meta'),request=store.get(key);
-   request.onsuccess=()=>{if(!request.result){first=true;store.put(true,key);}};
+   request.onsuccess=()=>{if(!request.result){first=true;store.put({seen:true,serverAck:false},key);}};
   });
   return first;
+ }
+ async pendingFirstStylePrompts(owner){
+  if(!owner)return [];
+  const db=await this.db(),prefix='first-style:'+owner+':';
+  return new Promise((resolve,reject)=>{
+   const ids=[],request=db.transaction('meta','readonly').objectStore('meta').openCursor();
+   request.onerror=()=>reject(request.error);
+   request.onsuccess=()=>{
+    const cursor=request.result;if(!cursor){resolve(ids);return;}
+    if(typeof cursor.key==='string'&&cursor.key.startsWith(prefix)&&!cursor.value?.serverAck)
+     ids.push(cursor.key.slice(prefix.length));
+    cursor.continue();
+   };
+  });
+ }
+ async acknowledgeFirstStylePrompt(owner,libraryId){
+  if(!owner||!libraryId)return;
+  const key='first-style:'+owner+':'+libraryId;
+  await this.transaction(['meta'],tx=>tx.objectStore('meta').put({seen:true,serverAck:true},key));
  }
  async readCache(owner){const db=await this.db();return new Promise((resolve,reject)=>{const r=db.transaction('cache').objectStore('cache').get(owner);r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result||null);});}
  saveCache(owner,snapshot){return this.transaction(['cache'],tx=>tx.objectStore('cache').put({owner,snapshot:structuredClone(snapshot),at:new Date().toISOString()},owner));}
