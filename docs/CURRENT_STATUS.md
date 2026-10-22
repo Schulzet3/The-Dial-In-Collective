@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — isolated Issue #50 CI optimization proposal (not merged/published)
+- Isolated branch `work/optimization-sprint-20261021`: adds cloud-targeted regression suite, fast inner-loop, CI stage-timing receipts, avoids redundant full Node suite in visual review while keeping full mandatory validate and five required checks. CI and measured performance pending; the actual Netlify production deployment remains unchanged. Details and same-commit documentation in active journal.
+
+
 ## October 21 MDT — source-only recovery of postrelease CI evidence drift
 - Prior `599bd560b9a4dc971fe8d5fa17c327126e99c62d` had 3 red workflows from stale credit-ledger current-release pointer; the immediately preceding pre-cache docs commit failed similarly. Provider/current coverage matrix match READY `6ad968689f42fbe8e871e151` / `eee687dd4d7fc19493139bc106e63c16849ac91d`. Ledger current pointer updated, prior entry/history and original dated credit snapshots preserved. No assertion weakened and no current billing spend invented. Exact fix CI pending; see active journal and Issue #50.
 
