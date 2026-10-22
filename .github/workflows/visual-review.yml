@@ -37,8 +37,7 @@ jobs:
       # Full test suite is verified by the required independent validate job.
       # Visual review retains a fast security/regression check and unique browser acceptance.
       - run: npm run check:fast
-      - name: Lint all active JavaScript and review scripts
-        run: npm run lint
+      # Duplicate lint omitted; source validate runs npm run lint.
       - run: npm run build:cloud
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co

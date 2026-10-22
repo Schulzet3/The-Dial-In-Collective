@@ -2173,6 +2173,15 @@
       "decision": "Owner approves loosening, changing or eliminating disproportionate protections and production release-readiness steps when it improves app efficiency or effectiveness, with narrowly scoped evidence and updated canonical decisions. This is not a fresh production publish authorization. Preserve credentials/identity/roles/data integrity/history/recovery and factual deployment verification.",
       "supersedes": "Prior blanket interpretation that all existing safeguards/release checklist steps are permanently mandatory solely because previously Locked; each concrete replacement must be documented against its exact affected requirement.",
       "approval": "Direct owner instruction 2026-10-21, recorded Issue #57 comment 6332524896"
+    },
+    {
+      "id": "OPS-STREAMLINED-RELEASE-20261022",
+      "status": "Locked",
+      "date": "2026-10-22",
+      "title": "Proportionate release process and owner-device gate retirement",
+      "decision": "Five-stage automated release; single release-specific owner approval; readiness report; risk-based CI and Sunday 08:00 UTC comprehensive tests; daily encrypted backup 08:00 UTC; automatic supplemental backup only for potentially destructive database operations without repeat owner prompt; owner-device acceptance no longer a deployment completion gate, including previous deployments.",
+      "supersedes": "Fresh encrypted backup for every non-destructive release; Full costly regression on every harmless change when targeted evidence suffices; Required owner-device signoff to mark verified production delivery complete",
+      "approval": "Owner 2026-10-22 direct approval, GitHub Issue #44 comment 6346939887"
     }
   ],
   "open_current_owner_decisions": [],
@@ -3943,5 +3952,25 @@
       "observed_at_utc": "2026-10-22T16:43:03Z",
       "source_request_sha": "7611c1d9e8f35a5faf3721720528783ac55f7bdc"
     }
+  },
+  "current_owner_streamlined_release_20261022": {
+    "decision_id": "OPS-STREAMLINED-RELEASE-20261022",
+    "status": "Locked",
+    "owner_source": "Owner 2026-10-22 direct approval, GitHub Issue #44 comment 6346939887",
+    "scope": "Five-stage automated release; single release-specific owner approval; readiness report; risk-based CI and Sunday 08:00 UTC comprehensive tests; daily encrypted backup 08:00 UTC; automatic supplemental backup only for potentially destructive database operations without repeat owner prompt; owner-device acceptance no longer a deployment completion gate, including previous deployments.",
+    "supersedes_only": [
+      "Fresh encrypted backup for every non-destructive release",
+      "Full costly regression on every harmless change when targeted evidence suffices",
+      "Required owner-device signoff to mark verified production delivery complete"
+    ],
+    "preserves": [
+      "Separate explicit publication consent with tested SHA and one-use grant",
+      "RLS and authenticated permissions, historical data, encrypted recovery and readback",
+      "Source tests and real production postflight truth; historical NOT TESTED cannot be represented as PASSED",
+      "Private GitHub Free advisory check limitation, credit ceiling and no new paid actions"
+    ],
+    "schedule": "Fixed MST: 01:00 MST = 08:00 UTC; during MDT clock shows 02:00; Sunday comprehensive run.",
+    "implementation_status": "PARTIALLY_IMPLEMENTED pending verification of main backup schedule and auto pre-destructive backup/release report",
+    "no_release_approval": true
   }
 }

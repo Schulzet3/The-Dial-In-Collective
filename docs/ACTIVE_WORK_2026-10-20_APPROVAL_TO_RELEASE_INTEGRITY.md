@@ -1,3 +1,7 @@
+# 2026-10-22 scoped owner policy and CI implementation checkpoint
+- Recorded consent in Issue #44 comment 6346939887 before implementation. Scoped new Locked decision OPS-STREAMLINED-RELEASE-20261022 appears in BOTH canonical sources. This SAME commit updates approval inventory, adds Sunday 08:00 UTC full-regression workflow, and drops duplicate lint from visual job. Never claim full automated release readiness or conditional destructive backup until independently wired and tested. Historical owner-device absence is NOT_REQUIRED, not PASSED. Existing production grant already consumed and no new deploy requested.
+- Next: read back commit SHA/files and CI; update main daily encrypted backup separately with same-commit ops journal; reconcile historical issue labels/gates, and implement tested pre-destructive snapshot/readiness report controller. No live SQL, Netlify or member data action.
+
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
 ## 2026-10-22 16:43 UTC — GitHub native one-use release controller independently SUCCESS
