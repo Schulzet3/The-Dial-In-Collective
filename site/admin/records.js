@@ -24,7 +24,7 @@ const rowFields=(item,shot,approved)=>fields[shot?'shots':'coffee'].map(([key,la
   '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+readonly+' ' +(['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
  return '<label>'+e(label)+input+'</label>';
 }).join('');
-export function renderAdminRecord(item,kind){
+export function renderAdminRecord(item,kind,{reviewActions=null}={}){
  const shot=kind==='shots',approved=kind==='approved';
  const id=string(item.id),title=shot?(item.coffee_name||'Shot record'):(item.name||'Unnamed coffee');
  const creator=item.creator_email||'Creator not available';
@@ -47,9 +47,10 @@ export function renderAdminRecord(item,kind){
       '<p class="helper">Preview fills only empty inputs; inspect and save changes explicitly. Extraction alone never verifies official evidence.</p>':'')+
      '<label>Reason for correction<input name="reason" required minlength="8" maxlength="1000" placeholder="Explain what needs correction"></label>'+
      '<div class="admin-review-actions"><button type="submit">Save Audited Correction</button><button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Cancel</button></div></form>':'')+
+  (typeof reviewActions==='function'?reviewActions(item):'')+
   '</article>';
 }
-export function renderAdminRecordCollection(kind,page={},{embedded=false}={}){
+export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewActions=null}={}){
  const title=({pending:'Pending Coffees',conflicts:'Conflicts',approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
  const loaded=Array.isArray(page.items)?page.items:[];
  const offset=Number.isSafeInteger(page.offset)&&page.offset>=0?page.offset:0;
@@ -62,7 +63,7 @@ export function renderAdminRecordCollection(kind,page={},{embedded=false}={}){
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(Math.max(0,offset-50))+'" '+(offset===0?'disabled':'')+'>Previous</button>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(offset+50)+'" '+(offset+loaded.length>=total?'disabled':'')+'>Next</button></div>':'';
  const empty=({pending:'No pending coffee submissions.',conflicts:'No coffee conflicts.'})[kind]||'No records to show.';
- const content=error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind)).join(''):
+ const content=error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind,{reviewActions})).join(''):
   page.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>')+pagination;
  const description='<p class="helper">All records, page by page · creator and revision shown where available.</p>';
  // Pending and Conflicts already have titled outer sections containing the

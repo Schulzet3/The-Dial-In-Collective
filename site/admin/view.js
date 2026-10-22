@@ -17,6 +17,15 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
    ?page.total:fallback;
  };
  const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong>${formatCount(value)}</strong><small>View all →</small></a>`;
+ const reviewActions=item=>`  <div class="admin-review-actions" aria-label="Review ${e(item.name||'coffee')}">
+   <button type="button" data-action="review-approve" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Approve Distinct Coffee</button>
+   <button type="button" class="ghost compact" data-action="review-merge-prepare" data-id="${e(String(item.id||''))}">Resolve Duplicate</button>
+   <button type="button" class="ghost compact" data-action="review-hold" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Hold for Clarification</button>
+  </div>
+  ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
+  <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
+
+ `;
  const preview=item=>`<article class="admin-queue-item">
   <div class="admin-queue-title"><div><span class="admin-state">${e(item.status==='conflict'?'Conflict':'Pending')}</span>
    <h3>${e(item.name||'Unnamed coffee')}</h3><p class="helper">${e(item.roaster||'Roaster not supplied')}</p></div>
@@ -25,26 +34,15 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
    ['Release',item.release_label],['Origin',item.origin],['Process',item.process],['Roast',item.roast_level]
   ].filter(([,v])=>v).map(([k,v])=>`<span><b>${e(k)}:</b> ${e(v)}</span>`).join('')}</div>
   ${item.source_url?`<p class="admin-source">Evidence URL (review manually): <span>${e(item.source_url)}</span></p>`:''}
-  <div class="admin-review-actions" aria-label="Review ${e(item.name||'coffee')}">
-   <button type="button" data-action="review-approve" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Approve Distinct Coffee</button>
-   <button type="button" class="ghost compact" data-action="review-merge-prepare" data-id="${e(String(item.id||''))}">Resolve Duplicate</button>
-   <button type="button" class="ghost compact" data-action="review-hold" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Hold for Clarification</button>
-  </div>
-  ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
-  <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
+  ${reviewActions(item)}
  </article>`;
- const reviewSection=(kind,label,empty)=>{
-  const rows=queue.filter(item=>(item.status==='conflict')===(kind==='conflicts'));
+ const reviewSection=(kind,empty)=>{
   const page=records[kind],complete=Array.isArray(page?.items)&&!page.error;
-  let content='';
-  if(rows.length){
-   const actions=rows.map(preview).join('');
-   content=complete?`<details class="admin-review-details"><summary>${label} review actions (${rows.length})</summary>${actions}</details>`:actions;
-  }else if(!complete&&!page?.error){
-   content=`<p class="admin-empty helper">${empty}</p>`;
-  }
-  if(complete||page?.error)content+=renderAdminRecordCollection(kind,page,{embedded:true});
-  return content;
+  // Page-2 and later records must retain the independent existing review RPCs.
+  if(complete)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions});
+  const rows=queue.filter(item=>(item.status==='conflict')===(kind==='conflicts'));
+  const fallback=rows.length?rows.map(preview).join(''):'<p class="admin-empty helper">'+e(empty)+'</p>';
+  return fallback+(page?.error?renderAdminRecordCollection(kind,page,{embedded:true}):'');
  };
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
@@ -55,10 +53,10 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  ${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1"><h2>Pending Coffee Review</h2>
- ${reviewSection('pending','Pending','No pending coffee submissions.')}
+ ${reviewSection('pending','No pending coffee submissions.')}
  </section>
  <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1"><h2>Conflicts</h2>
- ${reviewSection('conflicts','Conflict','No coffee conflicts.')}
+ ${reviewSection('conflicts','No coffee conflicts.')}
  </section>
  ${renderAdminRecordCollection('approved',records.approved)}
  ${renderAdminRecordCollection('shots',records.shots)}

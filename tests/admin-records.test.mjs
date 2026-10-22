@@ -80,17 +80,32 @@ test('successful account pages preserve exact totals and handle a concurrently e
  assert.match(noAccounts,/Member Access <span class="helper">0<\/span>/);
  assert.doesNotMatch(noAccounts,/data-kind="accounts"|old@fixture.invalid/);
 });
-test('complete record pages place the legacy review preview in closed disclosures',()=>{
- const html=renderAdminDashboard({queue:[{id:'pending',name:'Pending coffee',status:'pending'},
-  {id:'conflict',name:'Conflict coffee',status:'conflict'}]},null,null,{},
-  {pending:{items:[],total:0,offset:0},conflicts:{items:[],total:0,offset:0}});
- assert.equal((html.match(/<details class="admin-review-details">/g)||[]).length,2);
- assert.doesNotMatch(html,/<details[^>]*\bopen\b/);
- assert.match(html,/Pending review actions \(1\)/);
- assert.match(html,/Conflict review actions \(1\)/);
+test('every pending and conflict entry is actionable even on page two',()=>{
+ const pending='00000000-0000-4000-8000-000000000061',conflict='00000000-0000-4000-8000-000000000062';
+ const html=renderAdminDashboard({queue:[{id:'first-page',name:'Obsolete first-page',status:'pending'}]},
+  null,null,{},{
+   pending:{items:[{id:pending,revision:8,name:'Page 2 coffee',status:'pending',creator_email:'test@example.invalid'}],total:51,offset:50},
+   conflicts:{items:[{id:conflict,revision:9,name:'Page 2 conflict',status:'conflict'}],total:51,offset:50}
+  });
+ for(const id of [pending,conflict]){
+  for(const action of ['review-approve','review-merge-prepare','review-hold'])
+   assert.match(html,new RegExp('data-action="'+action+'" data-id="'+id+'"'));
+ }
  assert.equal((html.match(/data-action="review-approve"/g)||[]).length,2);
- assert.equal((html.match(/data-action="review-merge-prepare"/g)||[]).length,2);
- assert.equal((html.match(/data-action="review-hold"/g)||[]).length,2);
+ assert.doesNotMatch(html,/Obsolete first-page|admin-review-details/);
+ assert.match(html,/data-revision="8"/);assert.match(html,/data-revision="9"/);
+});
+test('complete lists show one set of current-revision actions and no duplicate queue cards',()=>{
+ const id='00000000-0000-4000-8000-000000000063';
+ const html=renderAdminDashboard({queue:[{id,revision:1,name:'Stale queue record',status:'pending'}]},
+  null,null,{},{
+   pending:{items:[{id,revision:2,name:'Current record',status:'pending'}],total:1,offset:0},
+   conflicts:{items:[],total:0,offset:0}
+  });
+ assert.equal((html.match(/data-action="review-approve"/g)||[]).length,1);
+ assert.equal((html.match(/class="admin-queue-item admin-record"/g)||[]).length,1);
+ assert.doesNotMatch(html,/Stale queue record|admin-review-details/);
+ assert.match(html,/data-action="review-approve" data-id="00000000-0000-4000-8000-000000000063" data-revision="2"/);
 });
 test('empty complete review pages have one titled section and one empty message',()=>{
  const html=renderAdminDashboard({queue:[]},null,null,{},
