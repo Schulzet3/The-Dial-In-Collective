@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — Fast-Flow new browser test selector fixed (pending exact-source CI)
+- New 390px browser regression initially timed out before saving due to test-only `button[type=submit]` locator; existing UI button is an implicit submit. Updated test locator to `#style button.primary` without weakening the save/draft assertions. Failing CI run 39735752502 retained; no application or SQL behavior changed. Rerun all source CI on corrected head before source merge; no publication.
+
+
 ## October 22 MDT — Fast-Flow evidence ordering corrected in source candidate
 - Corrected a confirmed exception: comparable Fast-Flow data now outranks weaker exact-coffee Turbo fallback when no direct Fast-Flow family exists. New regression added, exact-source checks pending. No provider/production change.
 

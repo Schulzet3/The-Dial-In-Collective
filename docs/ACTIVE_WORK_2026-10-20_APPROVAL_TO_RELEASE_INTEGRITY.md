@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 22 MDT — Fast-Flow mobile browser test selector repair; CI RE-RUN REQUIRED
+- PR #77 candidate `af1738fc8941d594888d34721b7db5f9c8d9fcb6` produced a real CI failure in synthetic 390px browser run 39735752502 at `#style button[type=submit]`: source Style form uses an implicit submit `<button class="primary full">Use Style</button>` without a `type=submit` attribute, so the newly introduced test selector waited until timeout before submitting. Corrected only the test to `#style button.primary`, still exercising the actual click/save/persist/draft path; no assertion loosened, no app/SQL/provider mutation. The prior failing run remains recorded; rerun exact-source browser, visual and required CI before merging. Same-commit journal with test change; production unchanged.
+
+
 ## October 22 MDT — Fast-Flow evidence-priority fix found during source review
 - On candidate `af1738fc8941d594888d34721b7db5f9c8d9fcb6`, independent algorithm review found a confirmed new-style ordering bug: old `exactOther` suppression would hide similar-coffee **Fast-Flow** success whenever the exact coffee had an established Turbo shot, causing the weaker cross-style Turbo reference to win. The owner-approved hybrid requires direct compatible same-style evidence first. Applied a narrow Fast-Flow-only exemption to legacy suppression (other styles' priority logic preserved), with a focused regression proving similar-coffee Fast-Flow evidence outranks same-coffee Turbo fallback without counting unverified results as established. No native historical records or SQL schema changes; same-commit journal.
 - Browser selector interaction regression from prior commit remains staged; the additional exact new source CI and browser/SQL checks must all pass before merge/release. No publication/hosted data/provider mutations.

@@ -432,7 +432,7 @@ with sync_playwright() as p:
  page.locator('.style-row [data-action="style"]').first.click()
  assert page.locator('#style select[name=style] option[value="Fast-Flow"]').count()==1
  page.locator('#style select[name=style]').select_option('Fast-Flow')
- page.locator('#style button[type=submit]').click()
+ page.locator('#style button.primary').click()
  page.wait_for_function('!document.querySelector("#sheet").open')
  assert page.locator('.style-row .style-fast-flow').count()==1
  assert page.evaluate("window.__raw.workspaceCoffees[0].selected_style")=='Fast-Flow'
