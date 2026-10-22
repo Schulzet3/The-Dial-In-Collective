@@ -3,9 +3,9 @@
 // source CI, unique grant, data recovery and credit state before any push.
 export const CHAT_REQUEST_PATH='docs/RELEASE_REQUEST.json';
 export const OPS_JOURNAL_PATH='docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md';
-// Schema 2 makes the conservative snapshot start explicit. Previously consumed
-// schema-1 requests remain historical receipts and must never be replayed.
-export const CHAT_REQUEST_SCHEMA=2;
+// Schema 3 supports risk-specific backup freshness; historical v1/v2
+// publication requests are immutable receipts, never silently replayed.
+export const CHAT_REQUEST_SCHEMA=3;
 const SHA=/^[a-f0-9]{40}$/;
 const HASH=/^[a-f0-9]{64}$/;
 const ID=/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/;
@@ -13,7 +13,7 @@ const ALLOWED_PATHS=[CHAT_REQUEST_PATH,OPS_JOURNAL_PATH].sort();
 const REQUIRED=['schema_version','release_id','tested_source_sha',
  'expected_release_head_sha','expected_development_head_sha',
  'owner_approval_source','created_at_utc','backup_evidence','credit_evidence',
- 'mode'];
+ 'database_change_risk','mode'];
 const REQ_BACKUP=['artifact_id','encrypted_sha256','owner_private_offsite_file_id',
  'snapshot_started_at_utc','archive_completed_at_utc','verified_at_utc',
  'latest_observed_data_write_at_utc'];
@@ -31,6 +31,8 @@ function validateRequestEvidence({
  if(!ID.test(request.release_id))deny('release ID format');
  if(!['validate_only','publish'].includes(request.mode))
   deny('release mode must be validate_only or publish');
+ if(!['none','non_destructive','potentially_destructive'].includes(request.database_change_risk))
+  deny('unknown database change risk; require server-side migration diff classification');
  if(!SHA.test(request.tested_source_sha)||!SHA.test(request.expected_release_head_sha)||
     !SHA.test(request.expected_development_head_sha)||
     !SHA.test(request[mainShaField]))
@@ -65,11 +67,13 @@ function validateRequestEvidence({
  const archived=Date.parse(backup.archive_completed_at_utc);
  const verified=Date.parse(backup.verified_at_utc);
  const latestWrite=Date.parse(backup.latest_observed_data_write_at_utc);
- if(verified>now+60_000||now-verified>2*60*60*1000)
+ const maxEvidenceAge=request.database_change_risk==='potentially_destructive'?2*60*60*1000:48*60*60*1000;
+ if(verified>now+60_000||now-verified>maxEvidenceAge)
   deny('backup verification is stale or future-dated');
  // An export can finish after a write while its earlier database snapshot
  // excludes that write. Its completion timestamp alone cannot prove coverage.
- if(latestWrite>started||started>archived||archived>verified||archived>now+60_000)
+ if(started>archived||archived>verified||archived>now+60_000||latestWrite>now+60_000||
+    (request.database_change_risk==='potentially_destructive'&&latestWrite>started))
   deny('encrypted archive does not cover latest observed user data write at snapshot start');
  const credit=request.credit_evidence;
  if(!exactly(credit,REQ_CREDIT)||!Number.isSafeInteger(credit.observed_remaining_credits)||

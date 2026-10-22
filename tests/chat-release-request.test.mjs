@@ -8,7 +8,7 @@ const S='1'.repeat(40),D='2'.repeat(40),R='3'.repeat(40),M='4'.repeat(40),E='5'.
 const NOW='2026-10-21T18:00:00Z';
 const APPROVAL="Owner's exact release grant in GitHub source-of-truth";
 const request={
- schema_version:CHAT_REQUEST_SCHEMA,mode:'validate_only',expected_main_parent_sha:M,
+ schema_version:CHAT_REQUEST_SCHEMA,mode:'validate_only',database_change_risk:'potentially_destructive',expected_main_parent_sha:M,
  release_id:'DIC-20261021-EXAMPLE1',
  tested_source_sha:S,expected_release_head_sha:R,
  expected_development_head_sha:D,owner_approval_source:APPROVAL,
@@ -166,4 +166,11 @@ test('fresh manual proof cannot replay a consumed grant or a previously publishe
  const otherGrant={...grant,id:'DIC-20261021-OTHER123'};
  assert.throws(()=>planSingleUseClaim({...input,grant:otherGrant,releaseId:otherGrant.id,
   ledger:consumed}),/already published under another grant/);
+});
+
+test('normal releases reuse scheduled encrypted backup despite newer logged shots',()=>{
+ const backup={...request.backup_evidence,verified_at_utc:'2026-10-20T17:57:00Z',archive_completed_at_utc:'2026-10-20T17:40:00Z',snapshot_started_at_utc:'2026-10-20T17:35:00Z',latest_observed_data_write_at_utc:'2026-10-21T17:50:00Z'};
+ for(const database_change_risk of ['none','non_destructive'])
+  assert.equal(validate({...base,request:{...request,database_change_risk,backup_evidence:backup}}).releaseId,request.release_id);
+ assert.throws(()=>validate({...base,request:{...request,database_change_risk:'potentially_destructive',backup_evidence:backup}}),/stale|snapshot start/);
 });

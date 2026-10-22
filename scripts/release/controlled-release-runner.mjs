@@ -5,11 +5,12 @@
 // Does NOT create Netlify deploys; one NON-FORCE push to release/production
 // is the single atomic claim. Never retry a failed push automatically.
 import {execFileSync} from 'node:child_process';
-import {mkdtempSync,rmSync} from 'node:fs';
+import {mkdtempSync,rmSync,appendFileSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
+import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -210,12 +211,20 @@ export async function executeSingleUseRelease(settings=process.env){
   nowIso:new Date().toISOString()
  });
  validateRequest();
+ const requestEvidence=chatPush?chatRequest:manualRequest;
+ const migrationDiff=git(['diff','--name-status',releaseHead,sha,'--','supabase/migrations']);
+ const migrationRisk=classifyMigrationDiff(migrationDiff,path=>git(['show',sha+':'+path]));
+ if(requestEvidence.database_change_risk!==migrationRisk.risk)
+  throw Error('Database risk declaration differs from source-to-published SQL migration diff');
  const statuses=await ciForSha(sha,token);
  assertReadyForRelease({requiredChecks:statuses,flags:{
   githubPrivateBranchProtectionVerified:enforcedProtection,
   githubPrivateFreeCompensatingControlsVerified:privateFreeMode&&
     grant.owner_private_free_compensating_controls===true,
   netlifyProductionBranchVerified:true,defaultBranchRunnerVerified:true}});
+ if(settings.GITHUB_STEP_SUMMARY){
+  appendFileSync(settings.GITHUB_STEP_SUMMARY,releaseReadinessMarkdown({id,sha,releaseHead,ci:statuses,migrationRisk,request:requestEvidence}));
+ }
  const oldRaw=initialLedgerOnMissing({releaseHead,
   readLedger:()=>git(['show',releaseHead+':docs/RELEASE_CONSUMPTION.json'])});
  const ledger=json(oldRaw,'Release ledger');
