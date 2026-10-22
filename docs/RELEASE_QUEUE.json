@@ -78,25 +78,53 @@
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
       "scope_paths": [
-        "build_cloud.mjs",
         "netlify/functions/coffee-url-preview.mjs",
         "site/admin/main.js",
         "site/admin/view.js",
         "site/cloud/community.js",
-        "site/cloud/dose-advisory.js",
-        "site/cloud/main.js",
         "site/cloud/outbox.js"
       ],
       "tests": [],
       "ci_runs": [],
       "blockers": [
-        "First dose-warning/signout source tranche not merged or CI verified",
-        "Most approved tasks are not yet implemented/tested",
-        "40th live duplicate-name Admin migration requires reconciliation before SQL changes",
-        "First PR must complete exact-source CI and merge; code currently subject to re-verification"
+        "Remaining authorized UX/sync/Admin/Community/extractor/quality scope has not been fully implemented/tested",
+        "40th production migration 20261022165047 requires reconciliation before overlapping SQL"
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Protect latest October 22 source/provider changes and existing two READY items; no production SQL or publication."
+      "notes": "First dose and sign-out tranche merged safely and tracked separately READY. Future main.js changes must each have exact tested queue/source receipts."
+    },
+    {
+      "id": "DIC-Q-80-basket-signout",
+      "issue": 80,
+      "pr": 81,
+      "title": "New-shot >2 g dismissible warning and owner-safe sign-out with unsynced work",
+      "state": "READY",
+      "merged_source_sha": "96939870d2ad6112cd6b07b07b02b0e43b7a10ab",
+      "scope_paths": [
+        "build_cloud.mjs",
+        "site/cloud/dose-advisory.js",
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "PR #81 head ea1ffc2ec9374031b733fadaafa522fadec1d374: five workflows PASS, covering approval/queue, Node/lint/build, mobile/browser, isolated SQL and visual",
+        "Nonforce GitHub merge 96939870d2ad6112cd6b07b07b02b0e43b7a10ab has IDENTICAL Git tree 8baf1d4bc43f4cb9d8d5c4cc053b780977fbbb2e to tested PR head",
+        "Postmerge source 96939870... all applicable validation workflows PASS: 39845986788, 39845986785, 39845986747, 39845986643",
+        "Mandatory outlier modal, existing password/extractor limits and offline revocation untouched; no production SQL or provider calls"
+      ],
+      "ci_runs": [
+        39845589904,
+        39845589616,
+        39845589611,
+        39845589605,
+        39845589493,
+        39845986788,
+        39845986785,
+        39845986747,
+        39845986643
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "READY as individual release unit, not deployed; split from parent DIC-Q-80 IN_PROGRESS. Tested merged source contains previously verified other READY items and concurrent AGENTS/Project Instructions preserved; no unready changes merged."
     }
   ],
   "history": [],

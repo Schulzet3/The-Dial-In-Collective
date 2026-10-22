@@ -1,5 +1,11 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-22 — Issue #80 first scoped improvement safely merged, exact source READY
+- PR #81 merged nonforce to development at **96939870d2ad6112cd6b07b07b02b0e43b7a10ab**, same tree as source-tested PR head ea1ffc2ec9374031b733fadaafa522fadec1d374 (tree 8baf1d4bc43f4cb9d8d5c4cc053b780977fbbb2e). Five/5 PR workflows PASS: approval 39845589605, app Node/lint/build 39845589611, browser/offline 39845589616, isolated SQL 39845589904 and visual 39845589493. Postmerge approval 39845986788, Node 39845986747, cloud/browser 39845986785 and visual 39845986643 all PASS.
+- Shipped to development only: basket warning new-shot **strictly greater than 2 g**, dismissible/not blocking and no rewarning on historical edit; informed sign-out with pending owner-scoped local queue preserved. Existing mandatory Confirm/Correct outlier, password rules, offline admission/revocation and extractor limits unchanged.
+- Queue tracks individual child DIC-Q-80-basket-signout **READY, NOT DEPLOYED**. Parent DIC-Q-80 remains IN_PROGRESS for other owner-authorized improvements. Earlier DIC-Q-78 and DIC-Q-44-credit-gate remain READY/unpublished, and newer AGENTS/Project Instructions from another same-day chat are preserved verbatim. No Netlify site publication or SQL/member data mutation.
+
+
 ## 2026-10-22 — Issue #80: approved refinements in isolated development, NOT READY
 - Owner-approved **mandatory** outlier confirm/correct retained; new basket warning >2g new-shot-only, dismissible and nonblocking; safe pending signout planned in first source tranche. Password/extractor limit/offline-revocation policies unchanged. Canonical spec and ledger updated, Issue #80 opened and queue IN_PROGRESS; exact CI and merge pending. Two existing READY items preserved, no publication.
 - Read-only production Supabase now reports **40** migrations including 20261022165047 duplicate-named Admin migration, which is not in prior 39-count receipt. Do not override SQL or recent other-chat work. Adviser warnings triaged preliminarily without changes.

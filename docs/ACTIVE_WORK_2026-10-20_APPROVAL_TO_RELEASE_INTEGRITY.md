@@ -1610,3 +1610,8 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 # 2026-10-22 — PR #81 browser boot fixture repair after actual CI
 - Exact PR #81 node/build 39845214826 PASS, isolated SQL 39845214943 PASS, approval 39845214977 PASS. Browser 39845214880 failed because its synthetic module harness omitted newly shipped cloud/dose-advisory.js, leading to undefined import; update fixture module inventory without changing app startup, data, or permissions. New exact CI pending; visual stage pending. No publication or merge.
+
+
+# 2026-10-22 — PR #81 fully tested/merged; narrow release queue READY receipt
+- Verified PR #81 source ea1ffc2ec9374031b733fadaafa522fadec1d374 with five PASS CI workflows 39845589605 approval, 39845589611 Node/build, 39845589616 cloud/browser, 39845589904 isolated SQL, 39845589493 visual. GitHub merge 96939870d2ad6112cd6b07b07b02b0e43b7a10ab was NONFORCE and has identical source tree 8baf1d4bc43f4cb9d8d5c4cc053b780977fbbb2e; new postmerge approval 39845986788, Node 39845986747, cloud/browser 39845986785 and visual 39845986643 all SUCCESS. Prior failures and repairs retained in same-commit history, not erased.
+- NEW individual DIC-Q-80-basket-signout marked READY with source SHA, paths build_cloud.mjs/site/cloud/dose-advisory.js/site/cloud/main.js, tests and CI numbers, blockers empty. DIC-Q-80 remains IN_PROGRESS for remaining owner scope and database migration conflict, independent previously READY DIC-Q-78 and DIC-Q-44 preserved. No release authorization, Netlify build, provider SQL, credentials or member data mutation.
