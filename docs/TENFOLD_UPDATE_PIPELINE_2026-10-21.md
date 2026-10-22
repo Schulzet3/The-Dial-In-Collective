@@ -19,3 +19,7 @@ Benchmark equivalent work items before/after; target at least a 90% median reduc
 ## Source-only follow-up: postflight evidence and recovery index
 
 `postrelease-receipt.mjs` implements fail-closed comparison of GitHub release ref, Netlify current READY published commit, exact one-use source, ordered migration versions and independent data receipt. It cannot perform authenticated checks by itself and cannot certify owner-device acceptance. `summarizeFailedChecks` avoids storing raw logs; `recoveryIndex` requires precise verified refs, a bounded next action and links back to authoritative GitHub documents. No release grant is generated, no provider is contacted and no previously Locked constraint is superseded. Real-host integration awaits dedicated verification under an explicitly approved release.
+
+## Approval-ready packaging versus publish approval
+
+A complete fresh backup and independently checked offsite custody must cover the last observed data write, with verification within the required two hours; credit evidence must be dated within 24 hours and show at least the approved per-build reserve. The offline dossier explicitly distinguishes `AWAITING_EXPLICIT_OWNER_APPROVAL` from `BLOCKED` and from `PREPARED_FOR_INDEPENDENT_RELEASE_CONTROLLER_CHECK`. These are explanatory source-only states, not live release commands; the actual release controller revalidates all conditions and single-use grant at execution time.

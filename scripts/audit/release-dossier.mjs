@@ -18,17 +18,21 @@ export function createReleaseDossier(input){
  if(!SHA.test(input.current_release_sha||''))gateErrors.push('Current published release SHA unavailable');
  if(!input.backup||!Number.isSafeInteger(input.backup.artifact_id)||!input.backup.verified_offsite)
   gateErrors.push('Fresh encrypted backup and independently verified offsite custody unavailable');
+ const asOf=iso(input.checked_at_utc);
  const start=iso(input.backup?.snapshot_started_at_utc),write=iso(input.backup?.latest_observed_data_write_at_utc);
- if(!Number.isFinite(start)||!Number.isFinite(write)||start<write)gateErrors.push('Backup does not cover latest observed data write');
- if(!(Number.isFinite(input.credit?.observed_remaining)&&Number.isFinite(iso(input.credit?.observed_at_utc))&&input.credit.observed_remaining>=15))
+ const archived=iso(input.backup?.archive_completed_at_utc),verified=iso(input.backup?.verified_at_utc);
+ if(![asOf,start,write,archived,verified].every(Number.isFinite)||write>start||start>archived||archived>verified||verified>asOf||asOf-verified>2*3600000)
+  gateErrors.push('Fresh backup coverage and chronological verification are unavailable');
+ const creditAt=iso(input.credit?.observed_at_utc);
+ if(!(Number.isFinite(input.credit?.observed_remaining)&&input.credit.observed_remaining>=15&&Number.isFinite(creditAt)&&Number.isFinite(asOf)&&creditAt<=asOf&&asOf-creditAt<=24*3600000))
   gateErrors.push('Fresh verified Netlify credit evidence unavailable');
- if(!input.owner_approval||input.owner_approval.status!=='UNCONSUMED'||input.owner_approval.tested_source_sha!==input.source_sha||!input.owner_approval.unique_release_id)
-  gateErrors.push('Missing unique explicit owner approval bound to tested SHA');
+ const ownerMissing=!input.owner_approval||input.owner_approval.status!=='UNCONSUMED'||input.owner_approval.tested_source_sha!==input.source_sha||!input.owner_approval.unique_release_id;
  return {
   schema_version:1,mode:'READ_ONLY_PREVIEW',source_sha:input.source_sha,
   release_sha:SHA.test(input.current_release_sha||'')?input.current_release_sha:null,
   check_summary:results,gate_errors:gateErrors,
-  review_state:gateErrors.length?'BLOCKED':'PREPARED_FOR_INDEPENDENT_RELEASE_CONTROLLER_CHECK',
+  review_state:gateErrors.length?'BLOCKED':ownerMissing?'AWAITING_EXPLICIT_OWNER_APPROVAL':'PREPARED_FOR_INDEPENDENT_RELEASE_CONTROLLER_CHECK',
+  owner_grant_verified:!ownerMissing,
   disclaimer:'Not a deploy grant. Live provider, exact fresh SHA, credits, expiry, single-use and per-release owner consent MUST be rechecked by release controller.'
  };
 }

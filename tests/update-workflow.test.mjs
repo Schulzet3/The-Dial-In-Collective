@@ -42,7 +42,7 @@ test('release dossier always declares read-only provenance and rejects missing i
 });
 test('dossier positive simulated evidence is only prepared for independent release controller check',()=>{
  const sha='a'.repeat(40),checks=['DIC cloud app build and tests','DIC cloud UX regression checks','DIC private visual review','DIC approval, implementation and continuity contract'].map((name,i)=>({name,head_sha:sha,status:'completed',conclusion:'success',run_id:i+1}));
- const packet=createReleaseDossier({source_sha:sha,current_release_sha:'b'.repeat(40),checks,backup:{artifact_id:123,verified_offsite:true,snapshot_started_at_utc:'2026-10-21T12:00:00Z',latest_observed_data_write_at_utc:'2026-10-21T11:00:00Z'},credit:{observed_remaining:25,observed_at_utc:'2026-10-21T12:00:00Z'},owner_approval:{status:'UNCONSUMED',tested_source_sha:sha,unique_release_id:'DIC-20261021-TESTED'}});
+ const packet=createReleaseDossier({source_sha:sha,current_release_sha:'b'.repeat(40),checks,checked_at_utc:'2026-10-21T12:15:00Z',backup:{artifact_id:123,verified_offsite:true,snapshot_started_at_utc:'2026-10-21T12:00:00Z',latest_observed_data_write_at_utc:'2026-10-21T11:00:00Z',archive_completed_at_utc:'2026-10-21T12:05:00Z',verified_at_utc:'2026-10-21T12:10:00Z'},credit:{observed_remaining:25,observed_at_utc:'2026-10-21T12:00:00Z'},owner_approval:{status:'UNCONSUMED',tested_source_sha:sha,unique_release_id:'DIC-20261021-TESTED'}});
  assert.equal(packet.review_state,'PREPARED_FOR_INDEPENDENT_RELEASE_CONTROLLER_CHECK');
  assert.match(packet.disclaimer,/rechecked/);
 });
@@ -51,4 +51,15 @@ test('stage time measurement separates human approval wait and rejects inversion
  assert.equal(m.full_elapsed_minutes,70);
  assert.equal(m.processing_excluding_approval_wait_minutes,30);
  assert.throws(()=>stageDurations({requested_at:'2026-10-21T01:00:00Z'}),/Complete/);
+});
+
+test('dossier detects stale backup/credit and distinguishes consent from technical readiness',()=>{
+ const sha='a'.repeat(40);
+ const checks=['DIC cloud app build and tests','DIC cloud UX regression checks','DIC private visual review','DIC approval, implementation and continuity contract'].map((name,i)=>({name,head_sha:sha,status:'completed',conclusion:'success',run_id:i+1}));
+ const b={source_sha:sha,current_release_sha:'b'.repeat(40),checked_at_utc:'2026-10-21T12:15:00Z',checks,backup:{artifact_id:123,verified_offsite:true,latest_observed_data_write_at_utc:'2026-10-21T11:00:00Z',snapshot_started_at_utc:'2026-10-21T12:00:00Z',archive_completed_at_utc:'2026-10-21T12:05:00Z',verified_at_utc:'2026-10-21T12:10:00Z'},credit:{observed_remaining:20,observed_at_utc:'2026-10-21T12:00:00Z'}};
+ assert.equal(createReleaseDossier(b).review_state,'AWAITING_EXPLICIT_OWNER_APPROVAL');
+ const stale={...b,checked_at_utc:'2026-10-23T15:00:00Z'};
+ assert.equal(createReleaseDossier(stale).review_state,'BLOCKED');
+ const preWrite={...b,backup:{...b.backup,latest_observed_data_write_at_utc:'2026-10-21T12:01:00Z'}};
+ assert.equal(createReleaseDossier(preWrite).review_state,'BLOCKED');
 });
