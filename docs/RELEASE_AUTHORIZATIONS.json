@@ -39,6 +39,26 @@
         "dic-verify-coffee current development SHA 7df3deb4a271a6eb041c125574cd15ec455f6128 (owner-approved, pending deploy)"
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261022-FASTFLOW-ADMIN-03",
+      "tested_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "estimated_credits_limit": 15,
+      "approved_at_utc": "2026-10-22T15:54:00Z",
+      "expires_at_utc": "2026-10-23T23:59:00Z",
+      "approval_source": "Owner 2026-10-22 final 'Yes proceed' for seven-feature Fast-Flow/Admin production release incl. four SQL migrations, Issue #44 comment 6344707918, scope receipt 6343761450",
+      "scope": "ONE approved consolidated production publication: Fast-Flow 6th style; Admin Portal collapsible/grouped/shown data, audited direct-save and one-click coffee actions, basket-dose >1g warning+confirm, first expansion once-only style recommendation, corrected draft context and Hide Shot UI removal. Apply only forward-only source migrations 20261022023000, 20261022024000, 20261022053000, 20261022090000 before public frontend. Excludes deferred internal Hide Shot removal, unready extractor and roadmap work, any member-data deletion, purchases or plan changes.",
+      "sql_evidence": [
+        "20261022023000 dic_admin_shot_coffee_group_identity (approved, pending apply)",
+        "20261022024000 dic_admin_fast_review_and_identity_edits (approved, pending apply)",
+        "20261022053000 dic_first_coffee_style_prompt (approved, pending apply)",
+        "20261022090000 dic_fast_flow_hybrid_style (approved, pending apply)"
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "Grants are only created after a separate explicit owner release approval. Each unique release ID is bound to one tested SHA, max 1 publication, 15-credit ceiling and finite expiration. Empty until next approved release."
