@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — explicit Fast-Flow browser selection acceptance staged
+- Added a new 390px Chromium scripted control-path test: Change Style → Fast-Flow → Save → confirmed new shot draft. Required exact-SHA CI still pending for this test-only commit; no production effect, real owner/device not tested.
+
+
 ## October 22 MDT — Fast-Flow CI inventory repair after isolated SQL PASS
 - PR #77 source `8ca363c`: isolated PG17.11 migration suite PASS, Node 620/621; one coverage contract inventory sort failure also blocked cloud and visual workflows. Fixed alphabetical inventory match without weakening checks in next same-journal commit; fresh exact-SHA all-job CI remains pending. No deployment or production SQL.
 

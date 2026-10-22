@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 22 MDT — Fast-Flow new-style real browser interaction regression
+- On exact source `f3328ad4c63c1ade1806cc73bb5bcaf75bcf5f9f`, GitHub approval, full Node/lint/build and disposable SQL checks have passed; UX/visual browser runs were still pending. Added a focused 390px Chromium interaction on the same synthetic owner/browser harness: open Change Style, select the new Fast-Flow option, submit direct style save, verify persisted workspace style and Fast-Flow shot draft (no shot logged). This exercises actual handlers/DOM rather than only source text. Uses mocked backend; NOT signed real owner/device acceptance or hosted data. No application logic, migration, credentials or provider settings changed.
+- Required same-commit journal and status update; exact new SHA must rerun 6 source jobs including browser checks. Current release remains unauthorized.
+
+
 ## October 22 MDT — Fast-Flow exact-candidate CI failure reviewed; deterministic coverage-order correction
 - GitHub PR #77 exact candidate `8ca363cbe10dee1ec580951a44d58272d1d616db`, two-parent merge, successfully passed disconnected PostgreSQL 17.11 isolated SQL workflow **39735222226** including new seven-table/function migration and suite. Existing JS suite reported **620/621 pass**; the sole failure was coverage inventory order: audit compares `JSON.stringify(actual)` to the **alphabetically sorted** ledger `current_owner_` key list. Actual had same keys, zero missing/extra, but a new Fast-Flow key was inserted unsorted. Cloud preview/visual/check-fast failed on the same approval gate, not source runtime. This is a genuine source/coverage consistency failure, not waived or skipped.
 - Corrected approval matrix inventory to exact sorted ledger keys without removing approvals/contracts or changing authorization logic. No application/SQL/provider change. Full exact-new-SHA CI required before calling source tested. No Netlify publication/hosted SQL/credit spend.

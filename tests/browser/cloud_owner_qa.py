@@ -428,6 +428,19 @@ with sync_playwright() as p:
  assert page.locator('.alternate-recipes').count()==0
  checks.append('Explicit Make Current preference overrides clarity heuristic and preserves both families and all shot records')
 
+ # Sixth style must be an actual user choice and survive a server-style save.
+ page.locator('.style-row [data-action="style"]').first.click()
+ assert page.locator('#style select[name=style] option[value="Fast-Flow"]').count()==1
+ page.locator('#style select[name=style]').select_option('Fast-Flow')
+ page.locator('#style button[type=submit]').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.locator('.style-row .style-fast-flow').count()==1
+ assert page.evaluate("window.__raw.workspaceCoffees[0].selected_style")=='Fast-Flow'
+ page.locator('[data-action=log]').first.click()
+ assert 'Fast-Flow' in page.locator('#shot .recipe-label').inner_text()
+ page.get_by_role('button',name='Close',exact=True).click()
+ checks.append('390px browser: sixth Fast-Flow style selected, saved to workspace and retained in new shot draft')
+
  # Account switches must not reuse a previous account's still-running sync.
  switch=page.evaluate("""async () => {
    const app=window.__app,previous=app.identity,prevEpoch=app.epoch,original=app.doSync;
