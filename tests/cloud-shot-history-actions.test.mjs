@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {shotCard} from '../site/cloud/shot_card.js';
 import {Outbox,ACTIONS} from '../site/cloud/outbox.js';
-import {CloudError} from '../site/cloud/client.js';
 
 const sampleShot={
  id:'9f161ab1-9781-4f69-ac17-12184e090bc4',timestamp:'2026-10-21T19:00:00Z',
