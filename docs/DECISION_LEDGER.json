@@ -2191,6 +2191,15 @@
       "decision": "Finish every approved request to independently source-verified tested merged readiness, automatically maintain durable GitHub release queue, accumulate multiple READY items until one release approval for exact tested batch.",
       "supersedes": "Stop after merely proposed, partial or unmerged implementation when task was already approved; Request repeat owner permission for ordinary testing and release-queue intake of approved changes; No durable unified queue across chats",
       "approval": "Direct owner instruction 2026-10-22, Issue #70 comment 6347498805"
+    },
+    {
+      "id": "OPS-SINGLE-INSTRUCTION-DEVELOPMENT-AND-PUBLICATION-20261022",
+      "status": "Locked",
+      "date": "2026-10-22",
+      "title": "One owner's build instruction authorizes READY preparation; one explicit publish instruction is the sole release consent",
+      "decision": "Asking to publish, deploy, release the queue or publish a named ready feature is immediate ONE release approval for the selected READY scope; do not require a follow-up confirmation after readiness report or per component. Prepare exact one-use source-SHA grant internally and execute only if safety/CI/credit/recovery and provider evidence pass. Asking to build, change, update, fix or implement is owner permission to finish that approved source scope, tests, nonforce merge, and add verified READY queue entry; do not prompt for further routine dev/testing/queue approval.",
+      "supersedes": "Any older workflow instruction to obtain a second owner approval or Yes proceed AFTER an explicit owner request to publish/deploy the same identified batch or feature; Per-SQL/Edge/Auth/direct-required-provider permission loops within the single already-authorized release scope; Any implied separate owner permission for ordinary approved build->test->merge->queue development steps",
+      "approval": "Owner clarification 2026-10-22; Issue #70 comment 6347990316"
     }
   ],
   "open_current_owner_decisions": [],
@@ -4002,5 +4011,28 @@
     "queue_path": "docs/RELEASE_QUEUE.json",
     "implementation_status": "POLICY_APPROVED_ENGINE_AND_CI_PENDING",
     "release_authorized": false
+  },
+  "current_owner_single_instruction_development_and_publication_20261022": {
+    "decision_id": "OPS-SINGLE-INSTRUCTION-DEVELOPMENT-AND-PUBLICATION-20261022",
+    "status": "Locked",
+    "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/70#issuecomment-6347990316",
+    "approval_date": "2026-10-22",
+    "development_instruction": "Asking to build, change, update, fix or implement is owner permission to finish that approved source scope, tests, nonforce merge, and add verified READY queue entry; do not prompt for further routine dev/testing/queue approval.",
+    "publication_instruction": "Asking to publish, deploy, release the queue or publish a named ready feature is immediate ONE release approval for the selected READY scope; do not require a follow-up confirmation after readiness report or per component. Prepare exact one-use source-SHA grant internally and execute only if safety/CI/credit/recovery and provider evidence pass.",
+    "publish_selected_feature": "Scope-limited feature release does not authorize other ready items; isolate an exact safe source candidate if needed and retest, else report blocker and do not publish unrelated changes.",
+    "supersedes_only": [
+      "Any older workflow instruction to obtain a second owner approval or Yes proceed AFTER an explicit owner request to publish/deploy the same identified batch or feature",
+      "Per-SQL/Edge/Auth/direct-required-provider permission loops within the single already-authorized release scope",
+      "Any implied separate owner permission for ordinary approved build->test->merge->queue development steps"
+    ],
+    "preserves": [
+      "One explicit publish instruction for each future distinct release; no blanket publishing after development request",
+      "Unique single-use release ID exact combined tested SHA, real relevant CI, readiness report, provider readback, backups, credits, private GitHub Free advisory status",
+      "Authenticity of actual device/testing records; owner-device signoff optional",
+      "Historical/offline/Community and private account data and permissions",
+      "Unapproved unrelated destructive deletions, private member changes, purchases or plan changes excluded"
+    ],
+    "implementation": "DOCUMENTATION_CLARIFICATION_OF_EXISTING_CONTROLLER, NOT_NEW_RELEASE_GRANT",
+    "production_deployed_by_this_decision": false
   }
 }

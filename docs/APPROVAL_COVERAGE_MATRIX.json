@@ -46,6 +46,7 @@
     "current_owner_retire_hide_shot_backend_20261021",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
+    "current_owner_single_instruction_development_and_publication_20261022",
     "current_owner_single_use_beta_invites_20261018",
     "current_owner_sitewide_low_friction_correction_20261021",
     "current_owner_streamlined_release_20261022",
@@ -787,5 +788,15 @@
     "owner_device_gate": "NOT_REQUIRED",
     "publication_authorized": false,
     "limits": "CI advisory GitHub Free private, queue is source preflight only, no automatic production publish or guarantee of external provider acceptance"
+  },
+  "single_instruction_approval_policy": {
+    "decision_key": "current_owner_single_instruction_development_and_publication_20261022",
+    "scope": "BUILD_REQUEST_AUTONOMOUSLY_PREPARE_AND_QUEUE_PUBLISH_REQUEST_IS_SOLE_SCOPED_RELEASE_CONSENT",
+    "one_use_source_grant_created_from_publish_command": true,
+    "readiness_report_is_not_second_approval": true,
+    "release_batch_selection": "WHOLE_READY_QUEUE_UNLESS_OWNER_EXPLICITLY_NAMES_SUBSET; SAFE_ISOLATION_REQUIRED",
+    "exceptions": "UNRELATED_DESTRUCTIVE_MEMBER_DATA_CHANGES_OR_PURCHASES_NOT_INCLUDED",
+    "owner_device_testing": "NOT_REQUIRED",
+    "production_authorized_by_documentation_change": false
   }
 }

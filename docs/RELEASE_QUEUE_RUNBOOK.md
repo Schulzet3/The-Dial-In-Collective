@@ -1,4 +1,10 @@
 # Automatic build → verified READY → batched owner-approved release
+
+## One-instruction owner authorization, no repeated signoff (2026-10-22)
+**Source decision:** OPS-SINGLE-INSTRUCTION-DEVELOPMENT-AND-PUBLICATION-20261022, Issue #70 comment 6347990316. "Build / update / fix / change / implement" means finish the approved development scope, tests, safe merge and automatic GitHub queue intake, without asking to continue normal work. Do **not** run live SQL, spend Netlify credits or publish on this instruction.
+
+"Publish/deploy the release queue" means owner gives the single **production release approval immediately** for the whole selected ready batch. "Publish/deploy feature X" means one release approval for **only that named READY feature** (plus required explicitly scoped dependencies); use a safely isolated, newly tested candidate if other app code has been merged. Do not silently add unrelated READY items or ask for another Yes after producing the manifest. Treat generation of the one-use owner grant, SHA, readiness report, CI/preflight, applicable production SQL/Edge/Auth/provider steps, any automatically needed encrypted backup, one publication and postflight as internal execution stages under that one publish request. Fail closed on genuinely unready code, unavailable backup/credits/provider checks or unsupported feature isolation, and report the blocker without falsely claiming publication or demanding redundant consent. Preserve separate scope approval for unrelated irreversible deletion, paid purchases and member-data operations. No new release authorized by this instruction update.
+
 **Current owner Locked policy**: `OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022` in Master Specification/Decision Ledger; owner Issue #70 comment 6347498805. This replaces stop-at-implementation/ask-again behavior. It does not authorize production or database/provider writes.
 
 ## Non-negotiable default on EVERY approved build/change request
