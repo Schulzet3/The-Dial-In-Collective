@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "scope": "Owner-approved PR76 backup-only merge and existing encrypted backup trigger",
+  "approval": {
+    "owner_quote": "Yes. Do it please.",
+    "question": "May I merge PR #76 and allow its existing encrypted-backup workflow to run?",
+    "owner_local_time": "2026-10-22T08:41:00-06:00",
+    "comment_id": 6343586761,
+    "recorded_and_read_back_before_merge": true
+  },
+  "integration": {
+    "pull_request": 76,
+    "merge_sha": "78535c5715fd23bb14c4b03eac7c0a62c7643044",
+    "parents": ["57d6000085ba3346006a6e479c6be0133de6d3f4", "4473b7cb46c62a9197ff34e8a9ae3394a604d9d8"],
+    "tree_sha": "360dd75b3b43ae5974c09ef3f54c3f7f29dbfbfc",
+    "tested_head_sha": "4473b7cb46c62a9197ff34e8a9ae3394a604d9d8",
+    "tested_tree_identical": true,
+    "premerge_inert_ci_run": 39733503577,
+    "changed_paths": [".github/workflows/nightly-backup.yml", "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md", "docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md"],
+    "source_pin_before": "1e79c4585c49ab517abb912887ee05ed7f4c4c4d",
+    "source_pin_after": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+    "workflow_blob": "e71d8ee3d0a97614a5ef5ff5fc9e691e747d5f9d",
+    "unchanged_backup_script_blob": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+    "force_push": false
+  },
+  "backup": {
+    "run_id": 39798472050,
+    "job_id": 119892074738,
+    "attempt": 1,
+    "event": "push",
+    "head_sha": "78535c5715fd23bb14c4b03eac7c0a62c7643044",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "completed_at": "2026-10-22T14:46:10Z",
+    "snapshot_start_lower_bound_utc": "2026-10-22T14:45:45Z",
+    "app_source_checkout_verified_in_log": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+    "artifact_id": 12435235505,
+    "artifact_name": "dic-encrypted-nightly-39798472050",
+    "artifact_size_in_bytes": 1881323,
+    "artifact_zip_sha256": "4fd41f2cbd0e609299b68b2c7e3a4c544f622b31df7c4065da3ac0b44f865fa8",
+    "artifact_created_at": "2026-10-22T14:46:05Z",
+    "artifact_expires_at": "2026-11-21T14:46:04Z",
+    "artifact_expired_at_readback": false,
+    "digest_evidence": "GitHub artifact API and upload finalization log agree; no separate local download/hash was performed",
+    "uploaded_file": "backup.age",
+    "uploaded_file_count": 1,
+    "plaintext_uploaded": false,
+    "offsite_delivery_verified_for_this_artifact": false,
+    "exact_artifact_decrypted_or_restored": false
+  },
+  "postmerge_controller": {
+    "run_id": 39798471761,
+    "job_id": 119892074718,
+    "head_sha": "78535c5715fd23bb14c4b03eac7c0a62c7643044",
+    "job_conclusion": "success",
+    "completed_at": "2026-10-22T14:45:49Z",
+    "scope": "Inert controller and synthetic isolated PostgreSQL checks, not a restore of the new encrypted archive"
+  },
+  "production": {
+    "netlify_site_id": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+    "current_deploy_id": "6ad968689f42fbe8e871e151",
+    "deploy_state": "ready",
+    "published_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+    "branch": "release/production",
+    "published_at": "2026-10-22T01:36:01.787Z",
+    "independent_pre_and_postmerge_project_readback": true,
+    "new_site_publication": false,
+    "production_database_or_member_data_write_requested": false,
+    "provider_setting_change_requested": false,
+    "netlify_spend_requested": false
+  },
+  "reconciliation_notes": [
+    "Some run/latest-job metadata returned QUEUED even after logs and artifact finalized. All-attempt job endpoint and exact-commit check-runs independently confirmed completed SUCCESS. Precise caching/propagation cause is unproven.",
+    "Unsupported workflow-collection and standalone-job fetch routes returned connector HTTP 400; supported run subresources worked. No new run or blind rerun was requested.",
+    "Initial approval-comment tool call was interrupted without a receipt; no comment existed on independent readback before the successful verified approval comment.",
+    "No Locked product decision changed. The separately merged, unpublished Fast-Flow application work remains outside this operation."
+  ],
+  "remaining_boundaries": {
+    "issue73": "Scope complete; reconcile and close after documentation commit readback",
+    "issue28": "Remain open for scheduled courier/freshness/retention and natural alert evidence",
+    "issue36": "Remain open for broader pilot acceptance",
+    "next_release": "Requires its own explicit owner deployment instruction and exact-source one-use authorization; this approval is not reusable"
+  }
+}
