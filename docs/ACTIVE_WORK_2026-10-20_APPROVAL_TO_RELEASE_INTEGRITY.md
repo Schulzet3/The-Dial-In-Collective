@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — PR #64 stale exact regex correction, CI pending
+- First full PR SHA `8e0904e23470627e2b052438ca99bb558d547774` SQL isolated check SUCCESS. Full validate/cloud checks FAILED in older tests expecting the precise former SQL expression `p_action='approve' and reason_text is null`; updated source expresses identical approved safe condition as `reason_text is null and p_action='approve'` to support action-specific Merge/Hold audit. Changed both Node assertions to check actual current expression. Did not remove tests for action guard, role, revisions, audit, duplicate checks, or SQL. First PR approval+review failed because owner key missing from sorted inventory; fixed in prior source-only commit `87e7014caced650c159043e248a5b37f2ccf9153`. Mobile final outcome still pending on first SHA. All six new source-head CI must be assessed; no provider/production data mutation.
+- Next: verify new commit and six CI outcomes, repeat until all relevant checks pass; merge only after tested identical tree and no concurrent changes.
+
 ## October 21 MDT — Issue #52 first CI failure correction, approval key inventory
 - PR #64 first source `8e0904e23470627e2b052438ca99bb558d547774` approval workflow `39718670584` and independent visual fast-check `39718670627` FAILED only owner approval inventory mismatch: new key was documented in the ledger and matrix detail, but not included in matrix `owner_decision_key_inventory`; script correctly failed closed. Added the actual owner key in sorted inventory, preserving all old inventory elements and existing static coverage checks. No test gate reduced, no runtime code or provider changes. Other source CI results were still pending at this checkpoint; all checks must rerun against new SHA. Same-commit journal and audit inventory change.
 

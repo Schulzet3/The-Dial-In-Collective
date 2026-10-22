@@ -81,7 +81,7 @@ test('admin review UI enforces exact revision and one-click distinct, merge or h
  assert.doesNotMatch(main,/if\(decision!=='approve'\)/);
  assert.match(main,/const reason=''/);
   const updated=await readFile(new URL('../supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql',import.meta.url),'utf8');
-  assert.match(updated,/p_action='approve' and reason_text is null/);
+  assert.match(updated,/reason_text is null and p_action='approve'/);
   assert.match(updated,/Administrator approved distinct coffee/);
  assert.match(sql,/private\.require_member\(\)/);
  assert.match(sql,/not private\.is_admin\(\)/);
