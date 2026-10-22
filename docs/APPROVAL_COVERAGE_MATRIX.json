@@ -770,12 +770,22 @@
   },
   "autonomous_release_queue_policy": {
     "decision_key": "current_owner_autonomous_build_test_queue_20261022",
-    "status": "OWNER_APPROVED_IMPLEMENTATION_PENDING_VALIDATED_QUEUE_GATE",
+    "status": "IMPLEMENTED_AND_VERIFIED_SOURCE_CI_AND_MAIN_RELEASE_CONTROLLER_CI",
     "queue_path": "docs/RELEASE_QUEUE.json",
-    "no_automatic_publication": true,
-    "ready_only_when_source_verified": true,
-    "accumulate_multiple_items": true,
-    "exclude_unready_merged_code": true,
-    "one_owner_approval_for_exact_batch": true
+    "standard_workflow": "OWNER_BUILD_REQUEST=>IMPLEMENT=>TEST=>MERGE=>AUTO_QUEUE_READY_OR_REPORT_BLOCKER",
+    "ready_requires": "MERGED_TEST_RECEIPTS_EXACT_SHA_AND_ALL_SCOPED_GREEN",
+    "in_progress_and_testing_not_shipped": true,
+    "unknown_deployable_paths_block": true,
+    "main_one_use_gate_sha": "d9ac65d0b80833f372b24138892ba22c21654247",
+    "development_sha": "f9914dba0374cd5cf2d29b1ab99de5eb7e0c5240",
+    "development_ci_runs": {
+      "approval": 39829144737,
+      "full_node_build": 39829144758,
+      "cloud_regression_and_mobile": 39829144689
+    },
+    "main_ci_run": 39829253291,
+    "owner_device_gate": "NOT_REQUIRED",
+    "publication_authorized": false,
+    "limits": "CI advisory GitHub Free private, queue is source preflight only, no automatic production publish or guarantee of external provider acceptance"
   }
 }
