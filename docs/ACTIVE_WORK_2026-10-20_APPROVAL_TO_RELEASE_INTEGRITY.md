@@ -1,5 +1,11 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #50 source-only optimization tranche; CI pending
+- Continuation approved in Issue #50 comment 6330859118. At edit source HEAD `cac957a7183c0a28a367c292b75f918cbd678df6`; independent Netlify READY/current `6ad968689f42fbe8e871e151` / `eee687dd4d7fc19493139bc106e63c16849ac91d`; release grant ALL-PENDING-02 consumed. Supabase 34 migrations, Edge verify v5. No production, live provider, member data or credit action taken here.
+- Enabled `actions/setup-node` `cache: 'npm'` in Node 22 validation jobs in cloud-beta-ci and cloud-regression. Existing `npm ci --ignore-scripts --no-audit --no-fund`, lockfile, full test/lint/build, Netlify Node 18 checks, mobile QA and release safeguards unchanged. Cache downloaded npm packages only, not node_modules. Goal: lower install time without bypassing checks. No measured speedup or suite PASS claimed until exact SHA CI and comparable run durations verified.
+- Next: verify SHA + files; inspect exact CI; compare timing; continue optimization with coverage-preserving reductions and fail-closed release dossier. Workflow redesign stays development-only until separately approved production publish.
+
+
 ## 2026-10-22T01:37:04.912Z — production LIVE READY/current, independently provider-verified postflight
 - **SUCCESS:** single-use grant `DIC-20261021-ALL-PENDING-02` from exact five-check tested source `7df3deb4a271a6eb041c125574cd15ec455f6128` was consumed once by official ops main chat-trigger run `39706556610` SUCCESS, release commit `eee687dd4d7fc19493139bc106e63c16849ac91d`, non-force `release/production` ref verified. Its receipt and consumption were independently fetched from GitHub, with old release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d` as parent.
 - **Netlify independently READY/current:** deployment `6ad968689f42fbe8e871e151`, site `153277f2-e19e-4862-b9a6-f2e18ccde271`, actual production `release/production` commit `eee687dd4d7fc19493139bc106e63c16849ac91d`, published `2026-10-22T01:36:01.787Z`. Deploy reports one `coffee-url-preview` function, 377 scanned files and **zero detected secret matches**. Do not claim exact frontend owner-device acceptance from provider READY.
