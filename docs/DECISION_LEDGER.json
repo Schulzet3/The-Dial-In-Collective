@@ -3656,5 +3656,37 @@
     ],
     "implementation": "DEVELOPMENT IMPLEMENTED: source JS/full isolated SQL/Chromium CI green. NOT DEPLOYED. Real signed administrator/member owner-device acceptance pending; requires named owner SQL+Netlify production consent before application",
     "linked_issue": 47
+  },
+  "current_owner_universal_deployment_consent_20261021": {
+    "decision_id": "OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021",
+    "status": "Locked, explicitly owner approved, governs future deployment consent interpretation",
+    "owner_quote": "You have approval to publish ALL pending changes including the backend changes. In the future, when I approve a deployment, you need to treat it as a universal approval unless I specifically say otherwise. Please remember and document that.",
+    "effective_date_local": "2026-10-21 America/Denver",
+    "permission": "Each explicit approval to deploy covers the then-pending bounded release package, frontend and directly needed SQL/Edge/Auth/backend/provider actions unless the owner expressly limits it; no duplicate SQL or Edge approval question.",
+    "current_release_scope": {
+      "one_release": true,
+      "frontend": "All pending approved frontend and extractor/admin changes",
+      "named_sql_order": [
+        "20261021221455_dic_source_worker_auth_and_admission.sql",
+        "20261021224447_dic_admin_content_review.sql"
+      ],
+      "edge_functions": [
+        "dic-verify-coffee"
+      ],
+      "no_new_unrelated_work": true
+    },
+    "supersedes_only": [
+      "The older requirement to obtain an additional owner approval *specifically* for production SQL/Edge/Auth or required provider deployment actions, after an explicit approval to publish ALL pending release changes",
+      "The immediately preceding October 21 production hold ONLY for separately named SQL/Edge consent"
+    ],
+    "preserves": [
+      "Prior 79 baseline Locked requirements and historical receipts",
+      "Member privacy/RLS/history/offline shot data and non-destructive requirements",
+      "No unapproved deletion, arbitrary personal-record mutation or paid purchase/top-up",
+      "Private GitHub Free, advisory checks, non-force single-use source-grant release with backup and credit evidence",
+      "One explicit new owner approval for each future release; no unlimited release authority",
+      "Actual CI, protected function roles, verified production readiness and owner device acceptance separate"
+    ],
+    "implementation": "POLICY RECORDED, all pending source already staged; this does not claim hosted deployment, migration application, new Edge version or published Netlify source"
   }
 }

@@ -38,7 +38,8 @@
     "current_owner_required_outlier_review",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
-    "current_owner_single_use_beta_invites_20261018"
+    "current_owner_single_use_beta_invites_20261018",
+    "current_owner_universal_deployment_consent_20261021"
   ],
   "production": {
     "netlify_deploy_id": "6ad92fd1d706315f29032892",
@@ -403,5 +404,18 @@
     "open_count": 20,
     "fnv1a32": "aaaa90e5",
     "note": "Noncryptographic mutation tripwire only; baseline 79 Locked/20 Open preserved verbatim, later supersessions reside in Master Specification and Ledger."
+  },
+  "deployment_approval_policy": {
+    "decision_id": "OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021",
+    "consent": "one explicit deployment instruction includes all pending necessary frontend/backend/SQL/Edge/Auth/provider components unless expressly excluded",
+    "one_use_grant_required": true,
+    "source_SHA_required": true,
+    "new_release_status": "APPROVED_IN_PRINCIPLE_UNBOUND_PENDING_CI_AND_PROVIDER_PREFLIGHT",
+    "not_authorized": [
+      "unrelated member-data deletion/mutation",
+      "paid purchases or topups",
+      "GitHub Pro or public visibility",
+      "bypass of safety or backup safeguards"
+    ]
   }
 }
