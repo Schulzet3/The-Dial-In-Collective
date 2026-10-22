@@ -1,3 +1,8 @@
+# 2026-10-22 — owner-approved 01:00 fixed MST scheduled backups and weekly regression
+- Owner explicitly approved daily encrypted backup 01:00 fixed MST = 08:00 UTC and Sunday full regression at the same fixed offset, plus streamlined release policy. Exact authorization recorded Issue #44 comment 6346939887 and Locked canonical development decision OPS-STREAMLINED-RELEASE-20261022, source commit 1e545e39e2f8f8e875fe9c7cb64cca09012153ce.
+- This **same operations commit** changes only the existing main nightly-backup cron, installs a separate main weekly comprehensive regression workflow that explicitly checks out development/backend-foundation, and records this journal. This may cause GitHub's backup workflow push trigger to execute once (the user authorized automatic backups); no production code publication, SQL mutation, membership change or purchase. Next: inspect actual GitHub Actions schedule registration/runs; Sunday run has not yet occurred, so not claim passed. Weekly verification checks app Node tests, lint, build/site integrity, isolated SQL/JWT/snapshot suites, synthetic mobile/browser/offline tests.
+- Fixed MST means US daylight saving shifts observable Denver clock to 02:00 MDT during summer. Owner-device testing is retired as signoff requirement, NOT fabricated as historically passed. The automatic pre-destructive snapshot and readiness report still need dedicated implementation/readback on release controller before claiming five stages fully automated.
+
 # Main operations checkpoint for the three-pass project audit
 
 ## October 22, 2026 MDT — PR #76 owner-approved merge and encrypted backup verified

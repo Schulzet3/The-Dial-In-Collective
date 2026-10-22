@@ -12,8 +12,9 @@ on:
       - .github/workflows/nightly-backup.yml
       - scripts/backups/create-nightly-encrypted-dump.sh
   workflow_dispatch:
+  # 08:00 UTC = fixed 01:00 MST (02:00 MDT in daylight-saving months).
   schedule:
-    - cron: '23 9 * * *'
+    - cron: '0 8 * * *'
 
 permissions:
   contents: read
