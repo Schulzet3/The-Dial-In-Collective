@@ -192,23 +192,33 @@
       "issue": 80,
       "pr": 86,
       "title": "Fetch Admin records and account listings only for expanded sections",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "2af816e2800f3630b29ffa2000fdafb564affb59",
       "scope_paths": [
         "site/admin/main.js",
         "site/admin/view.js",
         "site/admin/records.js"
       ],
-      "tests": [],
+      "tests": [
+        "PR #86 final source fd31d0ed74cb7178f4d0c3aa87cf02c6eadaed88 passed five exact-source workflows including real browser, build, SQL and approval.",
+        "PR #86 nonforce merge 2af816e2800f3630b29ffa2000fdafb564affb59 confirmed and all four exact-source postmerge workflows PASS.",
+        "Rapid Admin disclosure expansion preserves both requested record loads; collapsed listings use no record RPC, account detail and invites restricted to expanded accounts.",
+        "Existing live Admin database function read-only verified identical to GitHub and duplicate migration statements identical; no SQL writes."
+      ],
       "ci_runs": [
-        39855181956,
-        39855181641
+        39857973494,
+        39857973473,
+        39857973460,
+        39857973457,
+        39857973445,
+        39858276316,
+        39858276201,
+        39858276074,
+        39858276033
       ],
-      "blockers": [
-        "Initial exact-source checks failed due to untracked Admin records path in release queue and legacy tests that assumed collapsed Admin invitations were already rendered; repair staged and CI rerun required."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Isolated PR #86; owner-approved source-only lazy-loading tranche. Never declare READY or deploy until exact-source CI and nonforce merge verified. Replaces eager private-record reads with on-demand expanded-section reads; keeps status/admin-role checks and 50-row pagination."
+      "notes": "Development READY, never published. Admin server-backed search is separate and incomplete. Both postmerge exact-source results and live head verified."
     }
   ],
   "history": [],
