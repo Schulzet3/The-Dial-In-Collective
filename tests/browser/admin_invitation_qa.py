@@ -80,7 +80,10 @@ with sync_playwright() as p:
  page.on("pageerror",lambda err: errors.append(str(err)))
  page.set_content('<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>'+css+'</style></head><body><main id="admin-root" class="admin-shell"></main></body></html>')
  page.add_script_tag(content=mock+"\n"+client+"\n"+records+"\n"+view+"\n"+main)
- page.get_by_role("heading",name="Beta Invitations").wait_for()
+ page.locator('#admin-refresh').wait_for()
+  assert page.locator('details.admin-disclosure:not([open])').count()==6
+  page.locator('#admin-accounts summary.admin-disclosure-summary').click()
+  page.get_by_role("heading",name="Beta Invitations").wait_for()
  assert page.locator(".admin-stats a").all_text_contents()[0].startswith("Pending Coffees")
  assert [a.get_attribute("href") for a in page.locator(".admin-stats a").all()]==["#admin-pending","#admin-conflicts","#admin-approved","#admin-shots","#admin-accounts"]
  assert page.get_by_text("operator@synthetic.invalid").count()==1

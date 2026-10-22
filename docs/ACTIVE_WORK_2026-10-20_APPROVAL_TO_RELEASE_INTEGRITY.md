@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — isolated synthetic Chrome fixtures updated for admin disclosures (#52)
+- Repaired genuine prior fixture expectation that admin content was always expanded. Browser/mobile tests now assert default-collapsed six main sections, explicitly open Accounts before invitation UX, expand all main sections and per-coffee shot groups before testing existing 38+ visual assertions, creator attribution, notes, audited editing and no overflow. Replaced only DOM selectors affected by native disclosure wrapper; retained every substantive assertion. Real member data and live browser untouched. CI/visual evidence not yet observed, no release granted.
+
+
 ## October 21 MDT — Issue #52 stable coffee-nested admin shots staged (NO hosted SQL)
 - Staged a **source-only** read-only change to existing admin-gated `dic_admin_records('shots')` RPC: returns immutable owner `library_entry_id` and canonical/submission IDs and roaster as extra DTO fields. New forward-only file `20261022023000_dic_admin_shot_coffee_group_identity.sql`; NEVER edits, deletes or redistributes shots, nor changes SQL authorization predicate/grants. Supabase CLI not available in isolated runtime (npx timed out), filename uses existing canonical timestamp convention and must be verified in migration tooling prior to any release.
 - Nested shots inside **Logged Shots** by exact member library-entry id (not shared name), with every orphan isolated, even if labels are identical; original hidden/Pending shots remain visible to admin, no pagination or editor removed. Coffee group disclosure defaults closed, open state kept in memory; each group count explicitly says *on this page*. Added Node XSS/name-collision/page grouping and disconnected SQL assertion. Existing visual/browser fixture selectors need follow-up adjustment before CI verdict.

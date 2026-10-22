@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Issue #52 — source-only staging on isolated branch; no production release
+- Six principal Admin Portal panels native accessible and collapsed by default, dashboard stat shortcuts open/focus target, open state retained on refresh. Logged Shots nested into independent per-library-coffee groups (not name-based), including hidden/unknown/pending entries and paged boundaries. **New migration `20261022023000_dic_admin_shot_coffee_group_identity.sql` is not applied to live Supabase; feature NOT deployed.** Browser fixtures have been updated for disclosures; exact PR CI awaiting run. Current live provider remains previous approved `eee687dd...`, no new grant. See Issue #52 and journal.
+
+
 ## 2026-10-22T01:37:04.912Z — production LIVE READY/current, independently provider-verified postflight
 - **SUCCESS:** single-use grant `DIC-20261021-ALL-PENDING-02` from exact five-check tested source `7df3deb4a271a6eb041c125574cd15ec455f6128` was consumed once by official ops main chat-trigger run `39706556610` SUCCESS, release commit `eee687dd4d7fc19493139bc106e63c16849ac91d`, non-force `release/production` ref verified. Its receipt and consumption were independently fetched from GitHub, with old release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d` as parent.
 - **Netlify independently READY/current:** deployment `6ad968689f42fbe8e871e151`, site `153277f2-e19e-4862-b9a6-f2e18ccde271`, actual production `release/production` commit `eee687dd4d7fc19493139bc106e63c16849ac91d`, published `2026-10-22T01:36:01.787Z`. Deploy reports one `coffee-url-preview` function, 377 scanned files and **zero detected secret matches**. Do not claim exact frontend owner-device acceptance from provider READY.
