@@ -4,6 +4,8 @@
 
 # Automatic build → verified READY → batched owner-approved release
 
+**Current request schema:** [schema v4](RELEASE_REQUEST_SCHEMA_V4.md), with owner-managed credits and no budget evidence or screenshot field. Historic schema v2 examples are not current release contracts. No separate Netlify site publish is required for GitHub ops/CI changes; a revised Netlify ignore-build script enters the *next* owner-authorized app release.
+
 ## One-instruction owner authorization, no repeated signoff (2026-10-22)
 **Source decision:** OPS-SINGLE-INSTRUCTION-DEVELOPMENT-AND-PUBLICATION-20261022, Issue #70 comment 6347990316. "Build / update / fix / change / implement" means finish the approved development scope, tests, safe merge and automatic GitHub queue intake, without asking to continue normal work. Do **not** run live SQL, spend Netlify credits or publish on this instruction.
 
