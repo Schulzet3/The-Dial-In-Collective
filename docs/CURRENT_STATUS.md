@@ -1,5 +1,11 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-22 — Issue #80: approved refinements in isolated development, NOT READY
+- Owner-approved **mandatory** outlier confirm/correct retained; new basket warning >2g new-shot-only, dismissible and nonblocking; safe pending signout planned in first source tranche. Password/extractor limit/offline-revocation policies unchanged. Canonical spec and ledger updated, Issue #80 opened and queue IN_PROGRESS; exact CI and merge pending. Two existing READY items preserved, no publication.
+- Read-only production Supabase now reports **40** migrations including 20261022165047 duplicate-named Admin migration, which is not in prior 39-count receipt. Do not override SQL or recent other-chat work. Adviser warnings triaged preliminarily without changes.
+- Plugin permission configuration attempt returned provider 404; full-access setting NOT changed.
+
+
 ## 2026-10-22 — owner-only Netlify credit policy READY, not yet published
 - Credit gate source and release-schema changes **independently verified**. Development code SHA `b7778e84a051a9aabeca0aec38736c728b851f36` GitHub Actions `validate`/Node/lint/build run 39836273736 PASS, approval/queue run 39836273671 PASS, cloud/mobile run 39836273672 PASS. Main ops controller credit-free schema-v4 tests run 39833454468 PASS, main queue run 39834475458 PASS, current schema docs run 39834942465 PASS. Existing 621 Node test suite now PASS after replacing one outdated literal Project Instructions assertion; earlier run 39835734007 correctly remains recorded FAIL 620/621 in history.
 - `DIC-Q-44-credit-gate` promoted from TESTING to READY with exact source, tests, CI receipts and zero blockers; separate `DIC-Q-78` (mobile Shot History) remains READY, preserved. Historical credit screenshots and receipts retained but not read for release authorization. User exclusively monitors Netlify credits and will be informed if Netlify actually refuses a build. No credits checked, no plan purchases, no automatic top-ups. Proactive project instruction recommendations mandated, with GitHub paste source updated.

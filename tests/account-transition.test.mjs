@@ -63,12 +63,24 @@ test('delayed sync-detail read cannot display the former account queue',async()=
  await reading.promise;f.switchAccount();release.resolve();await task;
  assert.equal(shown,0);
 });
-test('sign-out preserves unsynced changes and does not call the auth service',async()=>{
- const f=fixture();let signs=0;const event={owner:OWNER,id:'unsynced'};
+test('declined sign-out preserves account, unsynced work, and does not call auth signOut',async()=>{
+ const f=fixture(),event={owner:OWNER,id:'unsynced'};let signs=0;
  f.store.list=async()=>[event];f.client.signOut=async()=>signs++;
- await f.app.click({target:{closest:()=>({dataset:{action:'signout'}})}});
+ const old=globalThis.confirm;globalThis.confirm=()=>false;
+ try{await f.app.click({target:{closest:()=>({dataset:{action:'signout'}})}});}
+ finally{if(old===undefined)delete globalThis.confirm;else globalThis.confirm=old;}
  assert.equal(signs,0);assert.equal(f.app.identity.id,OWNER);
- assert.deepEqual(await f.app.queue.pending(),[event]);assert.match(f.app.notice,/Changes are waiting to sync/);
+ assert.deepEqual(await f.app.queue.pending(),[event]);
+});
+test('accepted sign-out leaves unsynced work durable and bound to the original owner',async()=>{
+ const f=fixture(),event={owner:OWNER,id:'unsynced'};let signs=0;
+ f.store.list=async()=>[event];f.client.signOut=async()=>signs++;
+ const old=globalThis.confirm;globalThis.confirm=()=>true;
+ try{await f.app.click({target:{closest:()=>({dataset:{action:'signout'}})}});}
+ finally{if(old===undefined)delete globalThis.confirm;else globalThis.confirm=old;}
+ assert.equal(signs,1);
+ assert.equal(f.app.identity,null);
+ assert.deepEqual(await f.store.list(OWNER),[event]);
 });
 test('late sign-out completion cannot erase a newer account session',async()=>{
  const f=fixture(),signing=deferred(),release=deferred();
