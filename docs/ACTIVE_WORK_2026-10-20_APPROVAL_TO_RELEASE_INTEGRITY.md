@@ -1,5 +1,11 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #50 red CI: proven stale postrelease credit-ledger pointer; repair pending exact check
+- User continuation and intake already captured in Issue #50 comment 6331084899. On pre-fix HEAD `599bd560b9a4dc971fe8d5fa17c327126e99c62d`, three workflows `39708986220` (approval), `39708986133` (validation) and `39708986172` (cloud regression) all FAIL on a single release receipt mismatch; each Node suite 586/587 PASS, independently mobile-browser QA PASS. The same error already occurred **before npm caching** at `cac957a`, run `39706736348`.
+- Root cause: release coverage matrix already correctly names actual Netlify READY/current `6ad968689f42fbe8e871e151` + Git SHA `eee687dd4d7fc19493139bc106e63c16849ac91d`, but credit ledger still names prior `6ad92fd1`. Current pointer corrected using live provider receipt; entire former record copied to historical ledger, original accounting note archived unchanged, credit snapshots preserved. Unknown real credit debit/balance remain UNKNOWN. Strict coverage assertion unchanged, no skipped tests.
+- This change is documentation/evidence repair only. Next independently confirm new SHA and CI, then measure caching and optimize release workflow. No production publish, live SQL/Edge/Auth/member mutation, credentials, provider settings or spend.
+
+
 ## October 21 MDT — Issue #50 source-only optimization tranche; CI pending
 - Continuation approved in Issue #50 comment 6330859118. At edit source HEAD `cac957a7183c0a28a367c292b75f918cbd678df6`; independent Netlify READY/current `6ad968689f42fbe8e871e151` / `eee687dd4d7fc19493139bc106e63c16849ac91d`; release grant ALL-PENDING-02 consumed. Supabase 34 migrations, Edge verify v5. No production, live provider, member data or credit action taken here.
 - Enabled `actions/setup-node` `cache: 'npm'` in Node 22 validation jobs in cloud-beta-ci and cloud-regression. Existing `npm ci --ignore-scripts --no-audit --no-fund`, lockfile, full test/lint/build, Netlify Node 18 checks, mobile QA and release safeguards unchanged. Cache downloaded npm packages only, not node_modules. Goal: lower install time without bypassing checks. No measured speedup or suite PASS claimed until exact SHA CI and comparable run durations verified.
