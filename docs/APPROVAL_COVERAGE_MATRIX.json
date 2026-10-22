@@ -21,6 +21,7 @@
     "current_owner_autofill_button_only_20261019",
     "current_owner_beta_breached_password_opt_out_20261018",
     "current_owner_beta_member_soft_remove_only_20261018",
+    "current_owner_defer_private_hide_shot_retirement_20261021",
     "current_owner_duplicate_first_automatic_catalog_approval_20261021",
     "current_owner_expedited_two_migrations_and_production_20261021",
     "current_owner_extractor_deterministic_only_20261019",
@@ -422,8 +423,9 @@
         "community_shots": 2,
         "mutation_receipts": 44
       },
-      "residual_limitation": "Internal privileged private.mutate legacy branch remains; ordinary member entry fully blocked in production; no physical column drop; site not released",
-      "production_verified": true
+      "residual_limitation": "Internal private.mutate legacy branch remains and its removal is explicitly deferred by owner; public guard exists and authenticated direct EXECUTE denied in read-only October22 catalog check. No proof about every privileged route. Site UI source not released.",
+      "production_verified": true,
+      "production_counts_evidence": "Historical October21 guard-application observation; counts not re-audited in this reconciliation."
     },
     {
       "id": "first_coffee_expansion_one_time_style",
@@ -433,7 +435,13 @@
       "exact_tested_sha": "0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2",
       "merged_sha": "83d289eef8c26b57329f3ef71bfae3fc018d53cd",
       "tree_sha": "c0ad5b7d364fde83e93820199cc39b8ac0659cb9",
-      "ci_runs": {"approval": 39726672939, "cloud": 39726672918, "sql": 39726672909, "ux_two_jobs": 39726672928, "visual": 39726672887},
+      "ci_runs": {
+        "approval": 39726672939,
+        "cloud": 39726672918,
+        "sql": 39726672909,
+        "ux_two_jobs": 39726672928,
+        "visual": 39726672887
+      },
       "hosted_sql_applied": false,
       "site_published": false,
       "device_acceptance": "PENDING_POST_RELEASE_REAL_ACCOUNT_AND_DEVICE",
@@ -486,7 +494,7 @@
     {
       "id": "multi_worker_release_guard",
       "status": "OPEN_RESIDUAL_BYPASS_RISK",
-      "reason": "Single-use grant/consumption and a non-force Git compare-and-swap claim are implemented and the original authorized claim was consumed. GitHub Free/private CI cannot prevent direct-writer bypass or provider-admin redeploy; native Actions final push failed and is tracked in #44. Keep #38 open with this narrower, evidence-based scope.",
+      "reason": "Single-use grants and non-force serialized claims are implemented. Native Actions final push succeeded in run39706556610 and Netlify READY/current eee687dd was independently read back. GitHub Free/private advisory checks still cannot prevent direct writers or provider-admin redeploy. Keep #38 open; #44 retains unknown actual postrelease debit and account/device evidence, not a still-unproven native push.",
       "issue": 38
     },
     {
@@ -503,7 +511,7 @@
     {
       "id": "netlify_release_branch_cutover",
       "status": "COMPLETED_VERIFIED_20261021",
-      "reason": "Netlify production follows release/production and current READY deploy 6ad92fd1d706315f29032892 serves release 1e79c4585c49ab517abb912887ee05ed7f4c4c4d. The one approved release grant is consumed; cutover must not be repeated as pending work.",
+      "reason": "Netlify production follows release/production. Current READY deploy6ad968689f42fbe8e871e151 serves eee687dd4d7fc19493139bc106e63c16849ac91d, independently read October22. Prior grants consumed; no repeat cutover or new publication authorized.",
       "issue": 38
     },
     {
@@ -529,7 +537,7 @@
     "consent": "one explicit deployment instruction includes all pending necessary frontend/backend/SQL/Edge/Auth/provider components unless expressly excluded",
     "one_use_grant_required": true,
     "source_SHA_required": true,
-    "new_release_status": "APPROVED_IN_PRINCIPLE_UNBOUND_PENDING_CI_AND_PROVIDER_PREFLIGHT",
+    "new_release_status": "NO_NEW_RELEASE_AUTHORIZED; DIC-20261021-ALL-PENDING-02_CONSUMED; fresh explicit deployment instruction and source-bound one-use grant required",
     "not_authorized": [
       "unrelated member-data deletion/mutation",
       "paid purchases or topups",
@@ -543,19 +551,27 @@
     "remove": [
       "admin coffee edit manual reason",
       "admin shot/note edit manual reason",
-      "admin extra edit confirmation",
-      "advisory shot dose browser confirm"
+      "admin extra edit confirmation"
     ],
     "preserve": [
       "all server access/privacy checks",
       "record/audit/revision",
       "coffee identity conflict escalation",
       "risk-specific non-edit consent",
-      "prior production state until fresh approval"
+      "prior production state until fresh approval",
+      "Warning plus Confirm only when dose differs by more than 1 g from the selected draft basket, or the historical basket snapshot on edit"
     ],
     "tested_sha": "10fd93e822037995a6bb66298f3b405bc019bdc1",
     "merged_sha": "e9dbd365a33c69de602ac34f4ac1334baa29e8de",
-    "source_tree_equal_to_tested": true
+    "source_tree_equal_to_tested": true,
+    "historical_superseded_removal": "advisory shot dose browser confirm: the blanket removal was narrowly superseded by UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
+    "evidence_scope": "tested_sha/merged_sha describe original direct-save tranche only; later dose exception has separate evidence below",
+    "dose_exception_evidence": {
+      "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
+      "exact_tested_sha": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
+      "merged_sha": "31f5b7ebabf31a09c69a58860292f626f491dc34",
+      "draft_basket_followup": "Issue73 source-only regression repair; exact integrated CI pending"
+    }
   },
   "current_owner_admin_one_click_resolution_and_dose_warning_20261021": {
     "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
@@ -579,5 +595,18 @@
       "sql",
       "review"
     ]
+  },
+  "proportionate_controls_policy": {
+    "decision_id": "OPS-PROPORTIONATE-COFFEE-APP-CONTROLS-20261021",
+    "status": "APPROVED_POLICY_RECONCILED_FROM_PR68",
+    "source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/57#issuecomment-6332524896",
+    "implementation": "Policy recorded; no blanket guard exemption or new release authorization. Each actual simplification retains its exact supersession and evidence."
+  },
+  "private_hide_shot_retirement_deferral": {
+    "decision_key": "current_owner_defer_private_hide_shot_retirement_20261021",
+    "status": "OWNER_DEFERRED_CLOSED_PR72_UNMERGED",
+    "candidate_migration_applied": false,
+    "future_authority": "Renewed scoped review/authorization required",
+    "source": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/72#issuecomment-6333843360"
   }
 }

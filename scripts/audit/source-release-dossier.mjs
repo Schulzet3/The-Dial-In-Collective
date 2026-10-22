@@ -4,18 +4,24 @@ import {execFileSync} from 'node:child_process';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {readTracked,checkRepository} from './approval-coverage.mjs';
+import {planSingleUseClaim} from '../release/one-use-claim.mjs';
 
 const SHA=/^[a-f0-9]{40}$/;
 export const REQUIRED_CHECKS=Object.freeze(['approval','validate','cloud-tests','mobile-browser-qa','sql']);
-export function buildSourceDossier({sourceSha,matrix,credits,grants,consumption}){
+export function buildSourceDossier({sourceSha,matrix,credits,grants,consumption,nowIso=new Date().toISOString()}){
  if(!SHA.test(sourceSha||''))throw new Error('Expected exact 40-character Git HEAD SHA');
  const current=credits?.release_policy?.last_published_release;
  if(!current||matrix?.production?.exact_source_sha!==current.published_commit_sha||
   matrix?.production?.netlify_deploy_id!==current.deploy_id)
   throw new Error('Release receipt mismatch; stop source dossier generation');
- const spent=new Set((consumption?.consumed||[]).map(x=>x.id));
- const candidates=(grants?.grants||[]).filter(g=>g.tested_source_sha===sourceSha&&
-   g.owner_approved===true&&g.max_publications===1&&!spent.has(g.id));
+ const candidates=(grants?.grants||[]).filter(grant=>{
+  try{
+   // Reuse the controller's pure validation; never persist or consume its plan.
+   planSingleUseClaim({grant,releaseId:grant?.id,sourceSha,nowIso,ledger:consumption,
+    currentPublishedSourceSha:consumption?.consumed?.at(-1)?.tested_source_sha||current.published_commit_sha});
+   return true;
+  }catch{return false;}
+ });
  const uniqueUnconsumed=candidates.length===1?candidates[0].id:null;
  const pending=[
   'Independent GitHub Actions exact-SHA five-check readback not performed by this local process',
