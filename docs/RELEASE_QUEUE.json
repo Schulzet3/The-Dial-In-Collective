@@ -43,25 +43,35 @@
       "issue": 44,
       "pr": null,
       "title": "Retire mandatory Netlify credit checks and owner-manage credit monitoring",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "b7778e84a051a9aabeca0aec38736c728b851f36",
       "scope_paths": [
         "netlify.toml",
         "scripts/netlify/should-ignore-build.mjs",
         "scripts/audit/approval-coverage.mjs",
         "scripts/release/one-use-claim.mjs"
       ],
-      "tests": [],
-      "ci_runs": [],
-      "blockers": [
-        "New credit-free Netlify guard/approval-source tests awaiting exact-source CI",
-        "Main operations release-controller schema-v4 tests passed; release guard app-source parity and Netlify build integration pending"
+      "tests": [
+        "621 checked-in Node tests PASS with updated Locked owner-credit-free and private GitHub Free policy tests (GitHub CI 39836273736)",
+        "Exact-source lint and app build PASS (CI 39836273736)",
+        "Cloud/mobile browser and integration checks PASS (CI 39836273672)",
+        "Advisory owner decision/queue/checkpoint approval contract PASS (CI 39836273671)",
+        "Main operations one-use controller schema-v4/recovery/claim tests PASS (runs 39833454468, 39834475458 and 39834942465)"
       ],
+      "ci_runs": [
+        39836273736,
+        39836273672,
+        39836273671,
+        39833454468,
+        39834475458,
+        39834942465
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/70#issuecomment-6348177131",
-      "notes": "Owner-only credit monitoring; app source code must be published ONLY as part of next separately owner-approved READY batch. Main ops controller v4 verified run 39833454468. Historical credit ledger retained; no live credit check."
+      "notes": "READY source: no Netlify credit ledger/minimum balance/freshness/plan expiration gate. Exact merged SHA b7778e84. This queued change does not modify the live published website; new ignore-build source becomes effective in next explicitly owner-approved combined production release. User responsible for credits, existing one-use claim/CI/backup/privacy/readback intact. Verified original published live Netlify state separately."
     }
   ],
   "history": [],
-  "last_reconciled_utc": "2026-10-22T18:46:01.947Z",
+  "last_reconciled_utc": "2026-10-22T19:02:26.156Z",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }
