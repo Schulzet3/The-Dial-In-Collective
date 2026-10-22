@@ -12,18 +12,31 @@
       "issue": 78,
       "pr": 79,
       "title": "Fix iPhone text clipping and responsive Shot History layout",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "1c3f1c51b9933669fe957fe24d4d65c77c95457e",
       "scope_paths": [
         "site/visual.css"
       ],
-      "tests": [],
-      "ci_runs": [],
-      "blockers": [
-        "PR #79 merged but development CI encountered failures on merge SHA; exact final development-source verification and queue readiness not yet reconciled"
+      "tests": [
+        "All six PR #79 exact-source GitHub checks PASS on 47895ae80d37fcc6fae2b25c3553482f097f683a: approval, Node lint/build, cloud-tests, mobile-browser-qa, isolated SQL and visual review",
+        "Synthetic mobile browser checks PASS at 320, 360, 375, 390, 430 and 768px including full Grind setting, card borders and enlarged 320px text",
+        "Visual light/dark mobile + 900px desktop review PASS after preserving desktop date alignment",
+        "Postmerge 43a5e7f9d9df2184afb460d2670da1caecdb2a approval + cloud/mobile + validate workflow 39832597578 SUCCESS after correcting outdated text assertion",
+        "Non-force merge #79 at 1c3f1c51b9933669fe957fe24d4d65c77c95457e confirmed; only unpublished deployable path is site/visual.css, no database/provider changes"
       ],
+      "ci_runs": [
+        39830413501,
+        39830413504,
+        39830413484,
+        39830413554,
+        39830413506,
+        39832597454,
+        39832597578,
+        39832597140
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/78",
-      "notes": "Merge verified from GitHub; keep TESTING until exact appropriate CI source and visual evidence settle. Do not claim unmerged or READY."
+      "notes": "Verified merged and source-tested; pending next explicit owner publication. Previous GraphQL write error caused no partial queue write and was reconciled against current GitHub file; newer unrelated commits documentation-only. No actual signed-in owner-device test claimed."
     },
     {
       "id": "DIC-Q-44-credit-gate",
@@ -45,6 +58,6 @@
     }
   ],
   "history": [],
-  "last_reconciled_utc": "2026-10-22T18:36:55.476Z",
+  "last_reconciled_utc": "2026-10-22T18:39:00Z",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }
