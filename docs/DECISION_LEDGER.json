@@ -2158,6 +2158,12 @@
       "scope": "Single owner-approved permanent deletion of BASELINE and OUTLIER QA shots and notes, two Community projections, links and quality checks; sanitize only eight matching audit shot payloads and six matching receipt response payloads to safe tombstones retaining identity/action/timestamps/replay metadata, confirm no favorites/reviews, protect 18 original shots/notes and 2 original Community records. No release or other SQL. Verify SQL before marking complete.",
       "source": "Owner explicit 'Fine remove the shots now please' on 2026-10-20 MDT / 2026-10-21 UTC, following exact proposed two-record authorization",
       "status": "Executed and independently verified in production; one-use approval exhausted"
+    },
+    {
+      "topic": "Issue #19 recommended style placement",
+      "current": "UX-FIRST-EXPANSION-STYLE-20261021",
+      "supersedes": "Original §27.3 and baseline Add Coffee style timing only",
+      "scope": "One-time first manual coffee expansion instead of Add Coffee; preserve all other Locked decisions and data."
     }
   ],
   "open_current_owner_decisions": [],
@@ -3780,5 +3786,23 @@
     "authorizes": "Source, CI and narrow hosted SQL retirement only following backup and guard validation. Netlify production publication not authorized.",
     "implementation": "Source PR #66 normal merged a2cca542ab9919c54e623bd2e13b49ee17805611 from exact 6-green-tested 86454065a0ad01ea2fd4214282e5416619c81215, identical Git tree 49afb8a2287c3c6d063970992bb94a29d9e08daa. Owner-authorized production guard ACTUALLY APPLIED Supabase migration 20261022041530, direct SQLSTATE 22023 negative check passed, 22/0-hidden shots, 22 notes, 2 Community, 44 receipts all unchanged. GitHub migration filename aligned to applied version, final alignment CI pending. Frontend NOT DEPLOYED.",
     "residual_limitation": "Private privileged internal mutate function still contains dormant hide_shot branch, auth direct EXECUTE denied, public wrapper now blocks it. Precise live SQL rewrite attempt blocked by tooling safety checks and was NOT applied. Hidden_at field retained without data loss. Follow-up via controlled review required for code eradication. No Netlify site release."
+  },
+  "current_owner_first_expansion_starting_style_20261021": {
+    "decision_id": "UX-FIRST-EXPANSION-STYLE-20261021",
+    "status": "Locked",
+    "owner_source": "Owner Oct 21 MDT: show Starting Shot Style recommendation only the first time newly added coffee is expanded before first shot; prepare for deployment.",
+    "approval": "Development and release-readiness only; no hosted mutation or Netlify publish.",
+    "scope": "No Starting Shot Style on Add Coffee; first intentional open displays editable Recommended for you and one-line reason once across owner account/devices, chosen private style reflected in first-shot log, never makes coffee Current merely by adding/viewing.",
+    "supersedes_only": [
+      "Master Specification §27.3 Add Coffee timing/picker only",
+      "Original baseline styles Recommended for you placement, Issue #19 earlier PR #63/#67 layout"
+    ],
+    "preserves": [
+      "All five original style names and separate Custom targets #14",
+      "Owner isolation and revision checked mutation, no shared coffee identity changes",
+      "All original shot history, offline queued events, Admin/direct Save and Hide Shot retired state",
+      "Independent exact source release consent and owner-device checks"
+    ],
+    "implementation": "Owner-approved, source staged; CI/merge/production/device acceptance pending."
   }
 }

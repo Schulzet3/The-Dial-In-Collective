@@ -80,6 +80,15 @@ export class IndexedStore {
  put(event){return this.transaction(['events','meta'],tx=>{const events=tx.objectStore('events'),meta=tx.objectStore('meta');const exists=events.get([event.owner,event.id]);exists.onsuccess=()=>{if(exists.result){events.put({...event,sequence:exists.result.sequence});return;}const r=meta.get('sequence');r.onsuccess=()=>{const sequence=(r.result||0)+1;meta.put(sequence,'sequence');events.put({...event,sequence});};};});}
  async list(owner){const db=await this.db();return new Promise((resolve,reject)=>{const r=db.transaction('events').objectStore('events').getAll();r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result.filter(e=>e.owner===owner).sort((a,b)=>a.sequence-b.sequence));});}
  acknowledge(event,result){return this.transaction(['events','receipts','cache'],tx=>{tx.objectStore('receipts').put({owner:event.owner,id:event.id,event:structuredClone(event),result,at:new Date().toISOString()});const cache=tx.objectStore('cache'),r=cache.get(event.owner);r.onsuccess=()=>{if(r.result)cache.put({...r.result,snapshot:patchAcknowledgement(r.result.snapshot,event,result),needsRefresh:true},event.owner);};tx.objectStore('events').delete([event.owner,event.id]);});}
+ async claimFirstStylePrompt(owner,libraryId){
+  if(!owner||!libraryId)throw new CloudError('Owner and coffee are required.','invalid_prompt');
+  const key='first-style:'+owner+':'+libraryId;let first=false;
+  await this.transaction(['meta'],tx=>{
+   const store=tx.objectStore('meta'),request=store.get(key);
+   request.onsuccess=()=>{if(!request.result){first=true;store.put(true,key);}};
+  });
+  return first;
+ }
  async readCache(owner){const db=await this.db();return new Promise((resolve,reject)=>{const r=db.transaction('cache').objectStore('cache').get(owner);r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result||null);});}
  saveCache(owner,snapshot){return this.transaction(['cache'],tx=>tx.objectStore('cache').put({owner,snapshot:structuredClone(snapshot),at:new Date().toISOString()},owner));}
  // Fresh server denial revokes cache for that owner; queued events and receipts survive.
