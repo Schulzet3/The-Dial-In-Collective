@@ -210,3 +210,15 @@ test('approved identity editor fields are writable by the server-guarded operato
   assert.doesNotMatch(html,new RegExp('<input name="'+field+'"[^>]*readonly'));
  }
 });
+
+test('Admin search is escaped, accessible, and clearable without changing fixed metric order',()=>{
+ const html=renderAdminDashboard({counts:{active_accounts:2}},null,null,{}, {},{searchText:'<img onerror=attack>'});
+ assert.match(html,/id="admin-search-form"/);
+ assert.match(html,/aria-label="Search all Admin records"/);
+ assert.match(html,/data-action="admin-search-clear"/);
+ assert.match(html,/&lt;img onerror=attack&gt;/);
+ assert.doesNotMatch(html,/<img onerror/);
+ assert.equal((html.match(/class="admin-stat" href=/g)||[]).length,5);
+ const empty=renderAdminRecordCollection('approved',{search:true,items:[],total:0,offset:0});
+ assert.match(empty,/No matching records\./);
+});

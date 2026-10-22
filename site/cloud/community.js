@@ -1,6 +1,7 @@
 // Anonymous, admitted-member Community views. Only sanitized backend DTOs
 // are rendered. Never display contributor handles, raw notes or workspace IDs.
 import {e,button,icon,fmt,styleBadge} from '../lib/ui.js';
+import {STYLES} from '../lib/constants.js';
 const num=value=>Number.isFinite(Number(value))?Number(value):0;
 
 export function communityReviewBanner(reviews=[]){
@@ -105,8 +106,8 @@ function communityShotRow({sh,index},revision){
   </div>
  </details>`;
 }
-export function communityPage({shots=[],total=0,loading=false,error='',style='all',coffee='all',revision=0}={}){
- const styles=[...new Set(shots.map(sh=>sh.style).filter(Boolean))].sort();
+export function communityPage({shots=[],total=0,loading=false,error='',style='all',coffee='all',search='',revision=0}={}){
+ const styles=[...new Set([...STYLES,...shots.map(sh=>sh.style).filter(Boolean)])].sort();
  const coffeeOptions=new Map(),groups=new Map();
  for(const [index,sh] of shots.entries()){
   const key=communityCoffeeKey(sh);
@@ -126,18 +127,24 @@ export function communityPage({shots=[],total=0,loading=false,error='',style='al
    ${button(`${icon('arrow',15)} Refresh`,'community-refresh','','ghost compact')}
   </div>
   <p class="helper">Tap a coffee to see its qualifying shots, organized by verified release when needed. Tap a shot to view its ratings and evidence. Only verified Dialed-In observations appear here. No account names, private notes or custom setup details are shared. Qualifying anonymous contributions may persist if personal shot history or the account is deleted. Styles are guidelines, not pass/fail rules.</p>
+  <form id="community-search" role="search" autocomplete="off" class="community-search-form">
+   <label for="community-search-query">Search Community coffees</label>
+   <input id="community-search-query" name="query" maxlength="80" aria-label="Search Community coffees and roasters" placeholder="Coffee, roaster, origin, process…" value="${e(search)}">
+   <button class="ghost compact" type="submit">Search</button>
+   ${search?button('Clear','community-search-clear','','ghost compact'):''}
+  </form>
   ${error?`<p class="preview-note" role="alert">${e(error)}</p>`:''}
-  ${shots.length?`<div class="community-filters">
+  ${(shots.length||search||style!=='all')?`<div class="community-filters">
    <label class="field"><span>Style</span><select id="community-style" aria-label="Filter Community shots by style">
     <option value="all">All Styles</option>${styles.map(x=>`<option value="${e(x)}" ${style===x?'selected':''}>${e(x)}</option>`).join('')}
    </select></label>
-   <label class="field"><span>Coffee</span><select id="community-coffee" aria-label="Filter Community shots by coffee">
+   <label class="field"><span>Coffee (loaded results)</span><select id="community-coffee" aria-label="Filter Community shots by coffee">
     <option value="all">All Coffees</option>${coffees.map(x=>`<option value="${e(x.key)}" ${coffee===x.key?'selected':''}>${e(x.label)}</option>`).join('')}
    </select></label>
   </div>`:''}
   ${!shots.length&&!loading?`<div class="community-empty">${icon('users',25)}
-   <h3>Community data is growing</h3>
-   <p class="helper">Verified, Dialed-In shots will appear here once their data passes automatic integrity checks. Your private and Pending coffees stay private.</p>
+   <h3>${search||style!=='all'?'No matching Community shots':'Community data is growing'}</h3>
+   <p class="helper">${search||style!=='all'?'Try a different term or style. Only qualifying verified Dialed-In shots can match.':'Verified, Dialed-In shots will appear here once their data passes automatic integrity checks. Your private and Pending coffees stay private.'}</p>
    ${button('Back To Coffees','home','','primary compact')}
   </div>`:''}
   <div class="community-cards">
@@ -160,7 +167,7 @@ export function communityPage({shots=[],total=0,loading=false,error='',style='al
     </details>`;
    }).join('')}
   </div>
-  ${groups.size===0&&shots.length?'<p class="helper space-top">No loaded shots match these filters. Try All Styles or All Coffees.</p>':''}
+  ${groups.size===0&&shots.length?'<p class="helper space-top">No loaded shots match this coffee. Try All Coffees.</p>':''}
   <div class="community-footer"><p class="helper">${loading?'Loading Community shots…':`Showing ${Math.min(shots.length,total)} of ${total} qualifying shots.`}</p>
    ${!loading&&!error&&shots.length<total?button('Load More Shots','community-more','','secondary compact'):''}
   </div>
