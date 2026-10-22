@@ -1,3 +1,9 @@
+# 2026-10-22 — Scoped journal PR #92 nonforce cross-stream reconciliation [TESTING]
+- Rebased by two-parent nonforce merge onto development Netlify-test-reuse commit 05dda786a729e1f65252449754f361a88f119b36; retained entire current development source, queue and unrelated changes. Applied only eight previously audited scoped-journal files and a same-commit active checkpoint entry. PR #92 exact SHA must pass before integration; no site release/SQL/provider changes.
+
+# 2026-10-22 — Scoped GitHub work journals candidate, no release
+- Owner Issue #80 approved reducing concurrent giant-journal edit conflicts. New named issue/ops/release workstream journals are valid same-commit source checkpoints with strict path validation; recovery still starts at active journal and its workstream index. Contract Node tests, canonical Master/Decision Ledger and Project Instructions copy updated. No live SQL/Netlify/app functionality changed. CI and nonforce merge required before READY.
+
 # 2026-10-22 — PR #87 Netlify exact-source test reuse integrated without losing newer work (TESTING)
 - Nonforce two-parent branch reconciliation preserves latest development Community+extractor merge and every READY/TESTING queue item while restoring only the owner-approved Netlify full-suite duplicate removal source and its two tests from PR #87. The published Netlify build still runs npm test until a later owner-approved deployment; full GitHub exact-source npm test and verification gate remain mandatory. The source cannot become READY until all five CI workflows pass on this combined HEAD and a nonforce merge/postmerge check is read back; no provider/site/db changes.
 
