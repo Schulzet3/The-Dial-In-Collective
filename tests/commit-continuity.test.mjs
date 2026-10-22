@@ -72,3 +72,12 @@ test('a real merge-only code change cannot disappear from continuity inspection'
   rmSync(dir,{recursive:true,force:true});
  }
 });
+
+const scoped='docs/workstreams/issue-80.md';
+test('an indexed scoped work journal satisfies same-commit continuity',()=>{
+ assert.deepEqual(auditLatestCommit({paths:['site/cloud/main.js',scoped],subject:'fix: independent save [skip netlify]'}),[]);
+});
+test('unindexed docs cannot satisfy a same-commit code checkpoint',()=>{
+ for(const fake of ['docs/workstreams/README.md','docs/notes.md','docs/workstreams/issue-.md'])
+  assert.match(auditLatestCommit({paths:['site/cloud/main.js',fake],subject:'fix [skip netlify]'}).join(' '),/SAME-COMMIT/);
+});

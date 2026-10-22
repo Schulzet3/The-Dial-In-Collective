@@ -296,6 +296,24 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Preserve 12/IP/min Netlify rateLimit, existing 12/member/24h quota and 30s cooldown across trusted/universal paths; verified unique canonical exact URL and short-lived public-only warm cache skip daily claim, but still enforce 30s cooldown; transient upstream failures do not debit member daily count; other outcomes complete ticket before releasing result. Existing shared trusted claim stays untouched. No production changes."
+    },
+    {
+      "id": "DIC-Q-80-scoped-journals",
+      "issue": 80,
+      "pr": null,
+      "title": "Scoped same-commit GitHub work journals for parallel development",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "scripts/audit/verify-commit-checkpoint.mjs"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Verify exact-source CI and nonforce merge; no production action."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Workflow-only source/CI change; central active checkpoint, role/data safety, published site and release boundaries unchanged."
     }
   ],
   "history": [],

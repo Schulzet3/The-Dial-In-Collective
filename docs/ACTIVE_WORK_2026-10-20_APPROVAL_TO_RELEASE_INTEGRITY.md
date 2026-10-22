@@ -1,3 +1,6 @@
+# 2026-10-22 — Scoped GitHub work journals candidate, no release
+- Owner Issue #80 approved reducing concurrent giant-journal edit conflicts. New named issue/ops/release workstream journals are valid same-commit source checkpoints with strict path validation; recovery still starts at active journal and its workstream index. Contract Node tests, canonical Master/Decision Ledger and Project Instructions copy updated. No live SQL/Netlify/app functionality changed. CI and nonforce merge required before READY.
+
 # 2026-10-22 — Nonforce overlap reconciliation for approved Issue #80 PR #91 (source candidate)
 - Preserved newer merged Admin search source and its verified READY queue receipts; preserved combined Community search + extractor PR #91 candidate and separately tracked tests/migrations. Two-parent nonforce integration commit resolves only overlapping GitHub journal/queue text, does not change application behavior or deploy. Run all five exact-source CI workflows against this reconciled PR head before merging into development; do not change production SQL/Netlify/member records. Older PR #89/#90 remain source history, not independent merge targets after PR #91 verification.
 
