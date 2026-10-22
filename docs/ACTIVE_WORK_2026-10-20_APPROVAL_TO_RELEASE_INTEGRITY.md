@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — low-friction Admin workflow synthetic/SQL regression tranche
+- Added exact SQL acceptance for `Approve Distinct` with null human reason: standard audit reason is persisted and ordinary role/revision/provenance/near-match checks still apply. Source-only edit migration now exercised in isolated SQL with approved name and release change, canonical UUID/member library/shot link preservation and recorded before/after audit. Prior descriptive, source attribution and shot corrections still tested.
+- Added Node tests for full pending-card content, escaped XSS samples and writable approved name/roaster/release fields plus source guard contract. Fixed isolated visual review's newly introduced check indentation (left all other visual asserts unchanged). **CI not yet verified on this SHA.** No live provider changes.
+
+
 ## October 21 MDT — #52 owner-approved full pending facts, easy approve and canonical edits implemented in source
 - Pending and Conflict cards now expose all proposal coffee fields immediately inside the expanded top-level section, including explicit missing values. Escaping unchanged. Approved coffee operator editor no longer locks name, roaster or release label; separate member routes unchanged.
 - Approve Distinct now uses the click directly without browser prompt or confirmation; server-side reviewed RPC issues standard audit reason for a blank reason only on `approve`. Hold/Merge still require a human audit reason and confirmation. Full current server admin/revision/safe-duplicate checks retained.

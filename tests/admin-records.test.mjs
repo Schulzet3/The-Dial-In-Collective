@@ -186,3 +186,26 @@ test('shots are nested by actual owner coffee entry, not the same coffee name',(
  const opened=renderAdminRecordCollection('shots',{items,total:5},{openCoffeeGroups:new Set(['library:'+a])});
  assert.match(opened,/data-admin-coffee="library:00000000-0000-4000-8000-0000000000a1" open>/);
 });
+
+test('pending cards show every field without a secondary per-coffee disclosure',()=>{
+ const id='00000000-0000-4000-8000-000000000911';
+ const html=renderAdminDashboard({},null,null,{},{
+  pending:{items:[{id,revision:3,name:'<danger>',roaster:'Fixture Roaster',tasting_notes:'Berry & Floral',origin:'Ethiopia',espressoNotes:'18 g in'}],total:1,offset:0}
+ });
+ assert.match(html,/class="admin-coffee-facts"/);
+ for(const field of ['Coffee Name','Roaster','Release / Harvest','Origin','Process','Roast Level',
+  'Variety','Producer','Elevation','Tasting Notes','Summary','Espresso Notes','Source URL'])
+  assert.ok(html.includes(field),'missing '+field);
+ assert.match(html,/&lt;danger&gt;/);
+ assert.match(html,/Berry &amp; Floral/);
+ assert.doesNotMatch(html,/<danger>/);
+ assert.match(html,/data-action="review-approve"/);
+});
+test('approved identity editor fields are writable by the server-guarded operator',()=>{
+ const html=renderAdminRecord({id:'00000000-0000-4000-8000-000000000912',revision:3,
+   name:'New name',roaster:'New roaster',release_label:'Harvest 2026'},'approved');
+ for(const field of ['name','roaster','release_label']){
+  assert.match(html,new RegExp('<input name="'+field+'"[^>]*'));
+  assert.doesNotMatch(html,new RegExp('<input name="'+field+'"[^>]*readonly'));
+ }
+});

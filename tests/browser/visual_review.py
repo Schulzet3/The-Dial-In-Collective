@@ -265,9 +265,9 @@ globalThis.supabase={createClient:()=>sdk};
   check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','2'],mode+': Admin cards match complete record totals')
    check(page.locator('details.admin-disclosure:not([open])').count()==6,mode+': all admin sections collapsed initially')
    for kind in ['pending','conflicts','approved','shots','accounts','infrastructure']:
-    page.locator('#admin-'+kind+' summary.admin-disclosure-summary').click()
+   page.locator('#admin-'+kind+' summary.admin-disclosure-summary').click()
    for group in page.locator('#admin-shots details.admin-coffee-group').all():
-    group.locator('summary').click()
+   group.locator('summary').click()
   for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
    check(page.locator('#admin-'+kind+' .admin-record').count()==total,mode+': '+kind+' records are populated')
   check(page.locator('#admin-pending h2').all_text_contents()==['Pending Coffee Review'] and page.locator('#admin-conflicts h2').all_text_contents()==['Conflicts'],mode+': review sections have one readable heading')
