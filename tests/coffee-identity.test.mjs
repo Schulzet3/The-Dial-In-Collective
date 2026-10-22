@@ -54,7 +54,9 @@ test('client and UI use the server matcher before existing verified or pending a
  const cloud=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  const client=readFileSync(new URL('../site/cloud/client.js',import.meta.url),'utf8');
  const source=readFileSync(new URL('../supabase/migrations/20261014215731_dic_roaster_identity_matching.sql',import.meta.url),'utf8');
- assert.match(cloud,/this\.client\.findCoffeeMatches\(d\)/);
+ // The chosen personal style must not become a public coffee identity fact.
+ assert.ok(cloud.includes('const {starting_style,...coffee}=d'));
+ assert.ok(cloud.includes('this.client.findCoffeeMatches(coffee)'));
  assert.match(cloud,/add_verified_coffee/);
  assert.match(cloud,/submit_coffee/);
  assert.match(cloud,/matchReviewMarkup\(matched\)/);

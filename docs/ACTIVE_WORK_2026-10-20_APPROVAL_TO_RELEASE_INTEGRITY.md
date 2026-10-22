@@ -1,5 +1,11 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #57 resumed: safe #19 successor (source-only; exact CI pending)
+- Owner continuation recorded in Issue #57 comment 6332485267. Verified GitHub development `b9b71fc11e4808f585194d3d2659a044a9745476`; independent Netlify READY `6ad968689f42fbe8e871e151`, production source `eee687dd4d7fc19493139bc106e63c16849ac91d`. PR #63 `508e8767183e292a2beb1060e91af9362ef023bb` 5/5 historical CI green but dirty after later Locked Hide Shot withdrawal; never merge old draft.
+- New isolated `work/issue19-style-successor-20261021` starts at exact current development and reapplies only four approved #19 code/test files. Current canonical Master Specification, Decision Ledger, approval coverage, all historical documents inherited intact, including `UX-REMOVE-HIDE-SHOT-CONTROL-20261021` and Admin/direct Save. Starting Shot Style remains owner-private, revision-checked, never shared coffee identity; manual choice survives Autofill and duplicate review. No original shot/history overwrite.
+- CI for THIS source NOT YET PASSING/VERIFIED. Next: open successor PR, run exact-SHA approval/Node/build/cloud/mobile/SQL/visual workflows; resolve any failures and concurrent work before reviewed nonforce merge. No production SQL/Edge/Auth/member-data/Netlify/credits/provider changes; no device acceptance.
+
+
 ## October 21 MDT — interruption recovery handoff for next chat (Issue #57)
 - User specifically requested quick GitHub recovery/documentation after this chat errored, NOT a new production approval. Durable full handoff posted as **Issue #57 comment 6332428386**: https://github.com/Schulzet3/The-Dial-In-Collective/issues/57#issuecomment-6332428386 . Do not rely on chat alone.
 - Latest verified dev at intake `dcd8405501d403f89743ffc434f85d0c54eff101`. IMPORTANT subsequent owner supersession `UX-REMOVE-HIDE-SHOT-CONTROL-20261021` removed UI via merged #65 / `4f77a7ff8b3d20a0ad7a48f223cdeeddeada919d`; **never resurrect Hide Shot**. The prior #58 merge and its earlier interpretation were superseded, not still desired.
