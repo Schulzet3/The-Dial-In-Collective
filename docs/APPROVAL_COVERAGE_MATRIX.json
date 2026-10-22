@@ -443,15 +443,25 @@
   },
   "current_owner_admin_one_click_resolution_and_dose_warning_20261021": {
     "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
-    "status": "SOURCE_STAGED_TEST_UNVERIFIED_NOT_DEPLOYED",
+    "status": "DEVELOPMENT_MERGED_6_OF_6_EXACT_SHA_SUCCESS_NOT_DEPLOYED_NOT_ACCEPTED",
     "source_files": [
       "site/admin/main.js",
       "site/cloud/main.js",
       "supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql"
     ],
-    "source_sha": "PENDING_COMMIT_READBACK",
+    "source_sha": "31f5b7ebabf31a09c69a58860292f626f491dc34",
     "production_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
-    "device_acceptance": "NOT_TESTED",
-    "scope": "One action Merge/Hold existing duplicate and basket-dose warning+confirm >1g on log and edit; preserve historical import recovery and member access protection"
+    "device_acceptance": "PENDING_SIGNED_OWNER_DEVICE_AFTER_RELEASE",
+    "scope": "One action Merge/Hold existing duplicate and basket-dose warning+confirm >1g on log and edit; preserve historical import recovery and member access protection",
+    "exact_tested_sha": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
+    "tested_tree": "53cc65e2bed818ad7b1862d17eb5328baeb04861",
+    "checks": [
+      "approval",
+      "validate",
+      "cloud-tests",
+      "mobile-browser-qa",
+      "sql",
+      "review"
+    ]
   }
 }
