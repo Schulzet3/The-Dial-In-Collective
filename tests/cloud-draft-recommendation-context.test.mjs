@@ -136,7 +136,7 @@ test('new shot more than 2 g from selected basket provides nonblocking guidance'
  const result=await submitDose({dose:18,confirm:false});
  assert.equal(result.warnings.length,0,'basket advice may not invoke blocking confirm');
  assert.equal(result.writes.length,1,'shot must still save');
- assert.match(basketDoseAdvisory(18,22),/22\\.0 g reference/);
+ assert.match(basketDoseAdvisory(18,22),/22[.]0 g reference/);
  assert.equal(result.app.draft.basketId,'draft-basket');
 });
 test('exactly two grams is within tolerance and over two is advisory',async()=>{

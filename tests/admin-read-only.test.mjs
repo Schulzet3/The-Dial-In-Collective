@@ -115,8 +115,11 @@ test('routine admin Save requires no human correction reason or redundant confir
  assert.match(migration,/Administrator saved record changes/);
  assert.match(migration,/insert into private\.admin_content_edits/);
  assert.doesNotMatch(main,/if\(decision!=='approve'\)/);
- assert.match(cloud,/Math\.abs\(actualDose-Number\(referenceDose\)\)>1/);
- assert.match(cloud,/globalThis\.confirm\?\.\(warning\)/);
- assert.match(cloud,/this\.editing\?\.snapshot\?\.basketDoseG/);
- assert.match(cloud,/version\?\.baskets\?\.find/);
+ const {basketDoseAdvisory}=await import('../site/cloud/dose-advisory.js');
+ assert.equal(basketDoseAdvisory(18,20),null,'two grams is tolerated');
+ assert.match(basketDoseAdvisory(17.9,20),/more than 2 g/);
+ assert.equal(basketDoseAdvisory(17,20,{editing:true}),null,'edits never rewarn');
+ assert.match(cloud,/this\.updateDoseAdvisory\(\)/);
+ assert.doesNotMatch(cloud,/globalThis\.confirm\?\.\(warning\)/);
+ assert.match(cloud,/expected_revision:this\.editing\.revision/);
 });

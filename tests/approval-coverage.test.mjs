@@ -58,12 +58,12 @@ test('all original baseline Locked/Open decisions are preserved as an immutable 
 test('owner explicitly rules out GitHub Pro/public; Project instructions reflect advisory Free/private controls',()=>{
  const instructions=file('docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md');
  const spec=file('docs/MASTER_SPECIFICATION.md');
- assert.match(instructions,/repository \*\*private on GitHub Free\*\*/);
- assert.match(instructions,/Do not recommend upgrading or making it public/);
- assert.match(instructions,/CI and branch protections.*advisory/);
- assert.match(instructions,/I alone monitor Netlify credits/);
- assert.match(instructions,/Never request a balance screenshot/);
- assert.match(instructions,/Proactively recommend Project Instructions changes/);
+ assert.match(instructions,/GitHub private on Free|repository \*\*private on GitHub Free\*\*/);
+ assert.match(instructions,/Do not recommend upgrading|Do not suggest public visibility or a paid GitHub upgrade/);
+ assert.match(instructions,/CI\/branch restrictions are advisory|CI and branch protections.*advisory/);
+ assert.match(instructions,/I alone monitor (?:Netlify )?credits/);
+ assert.match(instructions,/Never request (?:a balance screenshot|credit screenshots)/);
+ assert.match(instructions,/Proactively recommend Project Instructions changes|proactively provide exact paste-ready/);
  assert.match(spec,/Owner-Locked GitHub Free\/private operating constraint/);
  assert.ok(Object.hasOwn(ledger,'current_owner_github_free_private_no_upgrade_20261020'));
 });
