@@ -229,7 +229,8 @@ const fixtureRows={
   {...fixtureShot,id:fixtureId('6',2),coffee_name:'Synthetic Natural Coffee',hidden_at:fixtureTime,
    notes:'Synthetic retained note on a hidden shot.'}],
  accounts:[{id:fixtureId('1',1),email:'operator@synthetic.invalid',admin:true,enabled:true},
-  {id:fixtureId('2',1),email:'tester@synthetic.invalid',admin:false,enabled:false}]
+  {id:fixtureId('2',1),email:'tester@synthetic.invalid',admin:false,enabled:false}],
+ invites:[{id:fixtureId('7',1),label:'Synthetic Used Invitation',status:'used',uses:1,max_uses:1,created_at:fixtureTime}]
 };
 const sdk={
  auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),
@@ -269,6 +270,8 @@ globalThis.supabase={createClient:()=>sdk};
   check(page.locator('#admin-approved .admin-queue-title strong').first.inner_text()=='tester@synthetic.invalid',mode+': record creator attribution is visible')
   check(page.locator('#admin-shots .admin-record-note').first.inner_text()=='Notes: Synthetic private note: sweet berry finish.',mode+': synthetic private shot notes are visible')
   check(page.locator('.admin-member-row').count()==2 and page.get_by_role('button',name='Restore Access',exact=True).count()==1,mode+': complete accounts include the removed synthetic member')
+  check(page.locator('#admin-invites .admin-invite-row').count()==1 and page.get_by_text('Synthetic Used Invitation').count()==1,mode+': complete historical invitation listing renders without secret retrieval')
+  check(page.locator('#admin-invites').get_by_text('Complete invitation history is temporarily unavailable').count()==0,mode+': invitation fixture exercises successful server listing, not fallback')
   check(page.locator('.admin-pagination').count()==0,mode+': complete short lists do not show misleading pagination')
   review=page.locator('#admin-pending > .admin-record')
   check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare','review-hold']),mode+': each paginated coffee has review actions')
