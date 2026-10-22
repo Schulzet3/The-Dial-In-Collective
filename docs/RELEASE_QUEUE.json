@@ -161,26 +161,31 @@
       "issue": 80,
       "pr": 83,
       "title": "Continue independent queued shot and preference saves past validation conflicts",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "7ce3ecd587c0b9b6c14782d56feb93c3dccb46a6",
       "scope_paths": [
         "site/cloud/outbox.js"
       ],
       "tests": [
-        "PR #83 tested head 631b34b4c62adda6f97d504f5c2488b0a925d35a five workflows PASS; nonforce merged identical Git tree 1db245b0e252840210396525a33d5e4f26f9a9d4"
+        "PR #83 exact head 631b34b4c62adda6f97d504f5c2488b0a925d35a: five workflow PASS (approval, Node/build, browser/mobile/offline, isolated SQL, visual)",
+        "Non-force merged commit 7ce3ecd587c0b9b6c14782d56feb93c3dccb46a6 matches exact tested PR Git tree 1db245b0e252840210396525a33d5e4f26f9a9d4",
+        "Postmerge exact SHA 7ce3ecd587c0b9b6c14782d56feb93c3dccb46a6: four GitHub workflow PASS including cloud/mobile 39849792808, run completed 2026-10-22T20:44:34Z",
+        "Behavior tests demonstrate independently identified shot and unrelated preference proceed after conflict; same-shot/dependent work remains queued; no replay; account denial and account switch remain fail-closed"
       ],
       "ci_runs": [
         39849532708,
         39849532696,
         39849532685,
         39849532628,
-        39849532584
+        39849532584,
+        39849792934,
+        39849792808,
+        39849792672,
+        39849792671
       ],
-      "blockers": [
-        "Postmerge exact-SHA cloud/mobile workflow 39849792808 has not completed; hold READY until actual result is verified"
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Conservatively allow only different fully identified shot saves and disjoint preference saves after a non-authorization conflict/rejection. Never replay held event, cross owner or continue on denial."
+      "notes": "READY for separately owner-authorized production release only, preserves queued conflict/receipt identities, no SQL/provider mutations. Parent Issue #80 remains IN_PROGRESS for other scopes."
     }
   ],
   "history": [],

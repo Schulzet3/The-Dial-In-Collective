@@ -1,5 +1,10 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-22 — Issue #80 independent outbox postmerge verified READY
+- The delayed postmerge browser/mobile Actions run **39849792808** completed **SUCCESS** at 20:44:34 UTC. All four exact merged-SHA workflows for `7ce3ecd587c0b9b6c14782d56feb93c3dccb46a6` are now PASS, on top of five/5 source PR tests. DIC-Q-80-outbox marked **READY**, together with prior DIC-Q-80-polling and DIC-Q-80-basket-signout. Existing two unrelated READY entries retained. No production release.
+- Broad Issue #80 remains **IN_PROGRESS** for Admin/search, Community search, extractor/reliability and quality workflows; migration provenance conflict remains flagged.
+
+
 ## 2026-10-22 — Issue #80 continuation: polling READY; outbox integrated, postmerge browser evidence pending
 - PR #82 **merged** nonforce at `0e87b1c23c4493bef428311c918ab5b5df421625`, identical tree `bd0a20cb56e4fa395d5d8d79b2e0aa1025fe78e1` to tested head. All five source workflows and all four postmerge workflows PASS; 30-second membership check still enforced, full history/Community refresh reduced to 3-minute idle interval with reconnect/foreground/mutation immediate refresh. Queue `DIC-Q-80-polling` **READY, NOT DEPLOYED**.
 - PR #83 **merged** nonforce at `7ce3ecd587c0b9b6c14782d56feb93c3dccb46a6`, identical tree `1db245b0e252840210396525a33d5e4f26f9a9d4` to five-workflow PASS source head. A known rejected/conflicted shot no longer blocks a separately identified independent shot or unrelated preference write. Dependent and access-denied mutations remain fail-closed; retained queued data/receipts unchanged. Postmerge browser run `39849792808` remained IN_PROGRESS at queue checkpoint, so `DIC-Q-80-outbox` stays **TESTING, NOT READY** until exact-source readback.
