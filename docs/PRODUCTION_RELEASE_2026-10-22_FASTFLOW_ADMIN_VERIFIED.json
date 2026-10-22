@@ -13,8 +13,10 @@
     "claimed_at_utc": "2026-10-22T16:35:21.195Z",
     "controller_main_request_sha": "7611c1d9e8f35a5faf3721720528783ac55f7bdc",
     "controller_workflow_run_id": 39815256276,
-    "controller_run_completion": "QUEUED_AT_LAST_INDEPENDENT_READBACK_NOT_YET_CONFIRMED; GitHub release SHA/consumption independently verified",
-    "single_use_replay": "PROHIBITED"
+    "controller_run_completion": "COMPLETED_SUCCESS_CONFIRMED_IN_GITHUB_ACTIONS_RUN_39815256276",
+    "single_use_replay": "PROHIBITED",
+    "controller_run_completed_at_utc": "2026-10-22T16:43:03Z",
+    "controller_single_attempt": 1
   },
   "netlify": {
     "site": "the-dial-in-collective",
@@ -121,12 +123,12 @@
     "backend_function_and_record_counts": "VERIFIED_READ_ONLY",
     "actual_signed_in_owner_device": "PENDING",
     "accessibility_and_offline_edge_cases": "PENDING_NOT_INFERRED_FROM_CI",
-    "direct_public_http_smoke": "NOT_CONFIRMED_BY_PROVIDER_READY_ONLY"
+    "direct_public_http_smoke": "NOT_CONFIRMED_BY_PROVIDER_READY_ONLY",
+    "native_release_controller": "COMPLETED_SUCCESS_GITHUB_ACTIONS_EXACT_REQUEST_ONCE"
   },
   "residual_risks": [
     "Private GitHub Free advisory CI/unenforced required checks and direct push bypass exposure",
     "Netlify live billing balance/actual debit not readable in connected API",
-    "Current Actions controller run completion not returned despite GitHub claim + Netlify success",
     "Exact new backup archive was not actually restored or decrypted",
     "Real authenticated owner device acceptance pending"
   ],
