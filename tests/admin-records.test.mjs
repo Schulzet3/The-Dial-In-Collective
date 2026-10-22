@@ -44,7 +44,8 @@ test('records are escaped, creator displayed and fields editable only through a 
  assert.match(html,/data-record-form/);
  assert.match(html,/name="notes"/);
  assert.match(html,/<textarea name="notes"[^>]*maxlength="16000"/);
- assert.match(html,/Save Audited Correction/);
+ assert.match(html,/Save Changes/);
+ assert.doesNotMatch(html,/name="reason"|Reason for correction/);
 });
 test('pagination includes a Next link and shows accurate total',()=>{
  const html=renderAdminRecordCollection('approved',{items:[{name:'A'}],total:61,offset:0});

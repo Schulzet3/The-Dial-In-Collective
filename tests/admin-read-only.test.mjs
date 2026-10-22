@@ -101,3 +101,18 @@ test('manual review displays compatible duplicates and escapes candidate names',
  assert.match(html,/&lt;script&gt;/);
  assert.doesNotMatch(html,/<script>|<img/);
 });
+
+test('routine admin Save requires no human correction reason or redundant confirmation',async()=>{
+ const main=await readFile(new URL('../site/admin/main.js',import.meta.url),'utf8');
+ const records=await readFile(new URL('../site/admin/records.js',import.meta.url),'utf8');
+ const migration=await readFile(new URL('../supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql',import.meta.url),'utf8');
+ const cloud=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ assert.match(records,/Save Changes/);
+ assert.doesNotMatch(records,/Reason for correction|name="reason"/);
+ assert.doesNotMatch(main,/Save this administrator correction\?/);
+ assert.match(main,/p_reason:''/);
+ assert.match(migration,/Administrator saved record changes/);
+ assert.match(migration,/insert into private\.admin_content_edits/);
+ assert.match(main,/if\(decision!=='approve'\)/);
+ assert.doesNotMatch(cloud,/if\(Math\.abs\(Number\(d\.doseG\)-dose\)>1&&!confirm/);
+});

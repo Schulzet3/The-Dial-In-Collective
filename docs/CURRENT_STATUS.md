@@ -7,6 +7,12 @@
 - Next: inspect exact CI, correct failures without weakening assertions, then review source and merge if 5/5 green. Production publishing remains blocked pending future explicit grant.
 
 
+
+
+## Direct Save integrated with current owner-safe development; CI pending, NOT DEPLOYED
+- Owner Approved routine Admin coffee/shot/note edits now Save once without human correction reason/confirmation; existing staged migration auto-generates audit reason, preserves role/revision/identity and original values. Basket Dose ±1g advisory no longer blocks valid shot Save; hidden shot feature from development preserved. Integrated isolated `work/sitewide-direct-save-current-20261021` source awaits exact GitHub checks/review, no production authorization/mutation. Details Issue #52 and same-commit journal.
+
+
 ## October 21 MDT — PR #58 safe Hide Shot source MERGED, exact tree verified
 - Owner already approved #20 implementation and current backlog continuation in #57. PR #58 code initially built/tested `1502e7bafa89b5ab168396b15fc287c945a67905`. Concurrent Admin #55 source at `fd4bfdb17758d27367f7d137c24bc319e56b5858` merged nonforce into feature at two-parent reconciled source `abc990805d839ee7d000789a102b8de5922e7cdf`, retaining BOTH live journals and SQL sources. No force or lost admin updates.
 - All FIVE full exact-SHA GitHub workflows **SUCCESS** at `abc990805d839ee7d000789a102b8de5922e7cdf`: approval `39716813266`, full Node/build `39716813260`, cloud/mobile `39716813220`, visual `39716813246`, isolated SQL `39716813142`. Final diff limited to `site/cloud/main.js`, `site/cloud/shot_card.js`, `tests/cloud-hide-shot-ui.test.mjs` and dated docs. This is conditional owner-scoped Hide Shot, no mass delete/Undo; exact server mutation id and revision guard remain unchanged.
