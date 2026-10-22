@@ -10,6 +10,7 @@ export function renderAdminDenied(message='Administrator access required.'){
 }
 export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={},options={}){
  const stats=data?.counts||{};
+ const searchText=String(options.searchText||'');
  const queue=Array.isArray(data?.queue)?data.queue:[];
  const count=(kind,fallback)=>{
   const page=records[kind];
@@ -38,6 +39,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   const page=records[kind],complete=Array.isArray(page?.items)&&!page.error;
   // Page-2 and later records must retain the independent existing review RPCs.
   if(options.openSections?.has(kind)&&!page)return '<p class="helper" role="status">Loading records…</p>';
+   if(searchText&&page?.error)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions});
   if(complete)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions});
   const rows=queue.filter(item=>(item.status==='conflict')===(kind==='conflicts'));
   const fallback=rows.length?rows.map(preview).join(''):page?.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>';
@@ -46,7 +48,14 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
- <section class="admin-stats" aria-label="Application status">
+ <form id="admin-search-form" class="admin-search-form" role="search" autocomplete="off">
+   <label for="admin-search-query">Search records</label>
+   <input id="admin-search-query" name="query" maxlength="80" value="${e(searchText)}" placeholder="Coffee, roaster, member email, shot notes…" aria-label="Search all Admin records">
+   <button type="submit" class="ghost compact">Search</button>
+   ${searchText?'<button type="button" class="ghost compact" data-action="admin-search-clear">Clear</button>':''}
+   <p class="helper">Searches complete server-side listings, not just the current page. Open a section to view its matching records.</p>
+  </form>
+  <section class="admin-stats" aria-label="Application status">
  ${stat('Pending Coffees',count('pending',stats.pending_coffees),'pending')}${stat('Conflicts',count('conflicts',stats.conflicts),'conflicts')}
  ${stat('Approved Coffees',count('approved',stats.verified_coffees),'approved')}${stat('Logged Shots',count('shots',stats.shot_records),'shots')}
  ${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
