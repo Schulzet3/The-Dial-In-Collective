@@ -1,3 +1,7 @@
+## October 21 MDT — proportionate controls owner authorization (source-docs only)
+- Explicit owner instruction: loosen, modify or eliminate safeguards as needed to increase efficiency/effectiveness in a coffee-data-sharing app; production release-readiness requirements may be streamlined. Intake recorded on Issue #57 comment 6332524896. Distinguish owner policy approval from a fresh publish request. Previous specific app controls (role, identity, revisions, durable shots, backups, credentials, true verification) remain until reviewed and narrowly superseded; no unconditional disclosure/account mutation.
+- Recovered development baseline b9b71fc11e4808f585194d3d2659a044a9745476; documented single policy in canonical Master Specification + Decision Ledger and active-work journal/status in a docs-only isolated commit without touching concurrent PR #67 or Netlify. The next work session must review redundant prompts, duplicated release checklists and synthetic-test repetition against current source and evidence; record exact removed requirements and corresponding risk. No code, CI, production SQL/Edge/Auth, member records, Netlify credits, provider configuration or deployment in this documentation change.
+
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
 ## October 21 MDT — interruption recovery handoff for next chat (Issue #57)

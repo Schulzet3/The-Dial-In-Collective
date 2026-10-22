@@ -1,3 +1,6 @@
+## October 21 MDT — owner proportional safeguard simplification Approved, documentation only
+Owner permits streamlining redundant safeguards and release-readiness controls for the community coffee app where efficiency/effectiveness improves. Decision OPS-PROPORTIONATE-COFFEE-APP-CONTROLS-20261021 in canonical specification and ledger, scope recorded Issue #57 comment 6332524896. No new publication authority or actual provider/code change. Review specific safeguards individually with exact scope, reason, residual risk and tests; preserve account boundaries/credentials, historic data, and real deploy readback. b9b71fc11e4808f585194d3d2659a044a9745476 was recovery baseline; concurrent PR #67 remains independent.
+
 # CURRENT STATUS — The Dial In Collective
 
 ## October 21 MDT — Hide Shot control owner withdrawal, 6/6 EXACT-SHA CI PASSED, source merged
