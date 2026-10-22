@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,formatQueueReport}
+import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport}
  from '../scripts/release/release-queue.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const queued={id:'DIC-Q-100',issue:100,pr:101,title:'Safe shot-page update',
@@ -50,4 +50,14 @@ test('stale merged commits, empty batch and mismatched baseline all refuse',()=>
  assert.equal(assess(q,[]).ready,false);
  assert.equal(assess({...q,published_base:{...q.published_base,tested_source_sha:C}}).ready,false);
  assert.equal(assess(q,['site/cloud/shot_card.js'],()=>false).ready,false);
+});
+
+test('CI must detect any app file introduced without even an IN_PROGRESS queue item',()=>{
+ const reported=assessIntakeCoverage(q,['docs/CURRENT_STATUS.md','site/cloud/shot_card.js']);
+ assert.equal(reported.tracked,true);
+ const missed=assessIntakeCoverage(q,['site/cloud/shot_card.js','supabase/migrations/20261022223000_new.sql']);
+ assert.equal(missed.tracked,false);assert.match(missed.errors.join(' '),/Untracked app change/);
+ const pending={...queued,state:'TESTING',merged_source_sha:null,tests:[],ci_runs:[],blockers:['CI pending']};
+ assert.equal(assessIntakeCoverage({...q,items:[pending]},['site/cloud/shot_card.js']).tracked,true);
+ assert.equal(assessIntakeCoverage({...q,items:[]},[]).tracked,true);
 });

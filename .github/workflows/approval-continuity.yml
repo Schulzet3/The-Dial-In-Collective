@@ -32,6 +32,7 @@ jobs:
       - name: Validate durable queue schema and show next-batch status (never publishes)
         run: |
           node scripts/release/release-queue.mjs --validate
+          node scripts/release/release-queue.mjs --enforce-intake
           node scripts/release/release-queue.mjs --status
       - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
         env:
