@@ -11,7 +11,11 @@ test('oversized chunked requests are cancelled before reading the entire body',a
 });
 test('a bounded request still reaches admission and returns the original fields',async()=>{
  let calls=0;
- const handler=createPreviewHandler({env,apiFetch:async()=>new Response(JSON.stringify(++calls===1?{id:'member'}:calls===2?{admitted:true,emailVerified:true}:{allowed:true})),readHtml:async()=>({ok:true,html:'product'}),extract:()=>({ok:true,fields:{name:'Coffee'}})});
+ const handler=createPreviewHandler({env,apiFetch:async endpoint=>{calls++;return new Response(JSON.stringify(endpoint.endsWith('/auth/v1/user')?{id:'member'}:
+ endpoint.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:
+ endpoint.endsWith('/rpc/dic_preview_cached_verified')?null:
+ endpoint.endsWith('/rpc/dic_preview_preflight')?{allowed:true,ticket:'00000000-0000-4000-8000-000000000123'}:
+ endpoint.endsWith('/rpc/dic_preview_complete')?{charged:true}:null));},readHtml:async()=>({ok:true,html:'product'}),extract:()=>({ok:true,fields:{name:'Coffee'}})});
  const response=await handler(new Request('https://app.example/api/coffee-preview',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer test'},body:JSON.stringify({source_url:'https://roaster.com/products/coffee'})}));
- assert.equal(response.status,200);assert.equal((await response.json()).fields.name,'Coffee');assert.equal(calls,3);
+ assert.equal(response.status,200);assert.equal((await response.json()).fields.name,'Coffee');assert.equal(calls,5);
 });

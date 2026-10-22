@@ -151,7 +151,9 @@ const authorizedFetch=async endpoint=>({
  ok:true,
  json:async()=>endpoint.endsWith('/auth/v1/user')?{id:'authenticated-owner'}:
   endpoint.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:
-  {allowed:true}
+  endpoint.endsWith('/rpc/dic_preview_cached_verified')?null:
+  endpoint.endsWith('/rpc/dic_preview_preflight')?{allowed:true,ticket:'00000000-0000-4000-8000-000000000123'}:
+  endpoint.endsWith('/rpc/dic_preview_complete')?{charged:true}:null
 });
 const request=(source_url=valid,auth=true)=>new Request('https://app.dialincollective.com/api/coffee-preview',{
  method:'POST',headers:{'Content-Type':'application/json',
