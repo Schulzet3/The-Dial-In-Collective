@@ -27,7 +27,7 @@ class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
   this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
-  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
+  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
@@ -48,7 +48,7 @@ class CloudApp {
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
-  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
+  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityReloadRequested=false;this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   if(reviewSheet.open)reviewSheet.close();reviewSheet.replaceChildren();
   sheet.close();sheet.innerHTML='';
  }
@@ -283,7 +283,8 @@ class CloudApp {
     style:this.communityStyle,coffee:this.communityCoffee,search:this.communitySearch,revision:this.communityRevision});
  }
  async loadCommunity({more=false}={}){
-  if(this.communityLoading||!this.identity||!this.status?.admitted)return;
+  if(this.communityLoading){if(!more)this.communityReloadRequested=true;return;}
+  if(!this.identity||!this.status?.admitted)return;
   const owner=this.identity.id,epoch=this.epoch;
   const offset=more?this.communityRows.length:0;
   this.communityLoading=true;this.communityError='';this.render();
@@ -304,7 +305,11 @@ class CloudApp {
     this.communityError='Community is temporarily unavailable. Your personal shots remain unchanged.';
   }finally{
    if(owner===this.identity?.id&&epoch===this.epoch){
-    this.communityLoading=false;this.render();
+    this.communityLoading=false;
+    const rerun=this.communityReloadRequested;
+    this.communityReloadRequested=false;
+    if(rerun)this.loadCommunity().catch(err=>this.error(err));
+    else this.render();
    }
   }
  }
