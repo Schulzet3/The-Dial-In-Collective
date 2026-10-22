@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — Fast-Flow CI inventory repair after isolated SQL PASS
+- PR #77 source `8ca363c`: isolated PG17.11 migration suite PASS, Node 620/621; one coverage contract inventory sort failure also blocked cloud and visual workflows. Fixed alphabetical inventory match without weakening checks in next same-journal commit; fresh exact-SHA all-job CI remains pending. No deployment or production SQL.
+
+
 ## October 22 MDT — approved Fast-Flow hybrid staged on isolated branch, CI PENDING
 - Owner-approved sixth Fast-Flow style and selective Turbo starting-prior fallback are staged as source candidate on `work/fast-flow-hybrid-20261022` from development `259772b50ca98011a65b3efa9b07a03cda858339`. Exact source behavior and narrow supersession in canonical specification/ledger, new coverage contract, JavaScript + SQL regressions. Existing five styles, user history and original priors untouched. **Source CI, database, browser, real device and production acceptance NOT YET VERIFIED** at this checkpoint.
 - Additive `20261022090000_dic_fast_flow_hybrid_style.sql` **NOT APPLIED** to hosted Supabase; Netlify production independently last observed at `eee687dd4d7fc19493139bc106e63c16849ac91d`, not freshly queried. No release, credits, hosted SQL/Edge/Auth, member data or provider settings touched; no new release authorization.
