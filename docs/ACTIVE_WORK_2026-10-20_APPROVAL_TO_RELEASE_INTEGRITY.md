@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — tighten offline browser selector race
+On review, first-shot prompt is resolved asynchronously after card expansion; immediate `count()` could see neither button and fall back to a no-longer-rendered old locator. Changed test to Playwright's auto-waiting union of `first-shot-log` and standard `log` entry points, still verifying the rest of the genuine PWA flow. Only test + same-commit journal; exact-head browser CI still required. No provider or release actions.
+
+
 ## October 21 MDT — Issue #19 offline PWA browser test adaptation
 After Actions runner recovery, visual workflow 39723155771 reached real Chromium and FAILED in `tests/browser/pwa_offline_qa.py` at previous `[data-action=log]` locator during first coffee expansion. New owner-Locked #19 UX intentionally substitutes `[data-action=first-shot-log]` before first-ever shot, so legacy test path is outdated. Changed PWA regression test to select first-shot-log when present and otherwise use normal log; preserves all subsequent offline shot persistence, isolation and sync assertions without bypassing behavior. Must run actual new-head CI including browser and SQL before merging. Same-commit journal; no hosted operations or release.
 
