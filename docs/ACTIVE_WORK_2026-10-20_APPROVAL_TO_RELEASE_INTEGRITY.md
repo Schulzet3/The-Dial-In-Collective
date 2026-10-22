@@ -1,5 +1,11 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 22 MDT — Fast-Flow fallback precedence fix after 621/622 exact-source Node CI
+- PR #77 exact source `cf5d7e796c204662950058ed6c26508833e82990` full Node 621 PASS / 1 FAIL, failure in new test `compatible Fast-Flow evidence on similar coffees outranks same-coffee Turbo fallback`: expected `Your successful similar coffees`, got `Unproven Fast-Flow starting estimate`. Confirmed code bug: after `provisional` was applied, the separate `if(chosen)...else if(style==='Fast-Flow')` still executed and overwrote direct same-style provisional with weaker Turbo fallback.
+- Narrow repair `else if(style==='Fast-Flow'&&!provisional)` blocks Turbo only where qualifying Fast-Flow personal similar evidence exists. Preserves direct families, existing styles, ratio-only cap, selection, unrelated branches. Failing regression remains unchanged to detect recurrence. All 622+ tests, visual/browser and SQL must be rerun at exact new SHA, no earlier pass transferred. No production SQL, Netlify or data changes.
+- Next exact all-five-workflow CI, inspect any remaining failures; merge development source only after fully green and review, never publish without independent owner release approval.
+
+
 ## October 22 MDT — Fast-Flow same-style evidence regression fixture repaired (CI pending)
 - Exact candidate `ffab6795b6eb00b3504776ab313aaef5665292f2` cloud Node test 39736066333 failed 1 new test: compatible Fast-Flow other-coffee evidence was expected, but synthetic `rawFixture` coffee had an unknown roast level, correctly barred from similarity matching by the existing engine. Narrowly supplied known `Light` roast in this test only, leaving unknown-roast refusal and all production code/policies unchanged. Keep assertion that same-style compatible coffee data outranks cross-style Turbo and remains unproven. Earlier failed check is retained, all six exact-new-SHA checks required. No provider, SQL, customer history or Netlify changes. Same-commit journal.
 

@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — Fast-Flow fallback ordering engine bug corrected (CI pending)
+- 621/622 exact-source tests passed on prior candidate; failure exposed real Turbo-overwrites-Fast-Flow-similar evidence bug. Corrected fallback guard `!provisional` without loosening tests, CI still pending. No hosted changes or publication.
+
+
 ## October 22 MDT — Fast-Flow comparable-roast fixture correction requires fresh CI
 - One added engine test expected same-style comparable-coffee evidence but used unknown roast, properly excluded by similarity gate (failed job 39736066333). Fixture now explicitly `Light`; no production algorithm or validation weakened. Browser-selector repair from prior candidate retained. Exact source CI must rerun before merge; production remains unchanged.
 

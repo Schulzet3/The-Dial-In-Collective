@@ -238,7 +238,7 @@ export function recommendation(s,coffeeId,options={}) {
    equipmentTier:familyChoice.tier,reason:familyChoice.reason};
   rec.reasons=familyChoice.reason?[familyChoice.reason]:local.length?[]:
    ['Your successful ratio from another setup; time and grind remain starting estimates.'];
- } else if(style==='Fast-Flow') {
+ } else if(style==='Fast-Flow'&&!provisional) {
   // Only closely compatible Turbo success can weakly inform the STARTING ratio.
   // Never import its measured time, grind, family, confirmation or shot count.
   const turbo=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.style==='Turbo'&&
