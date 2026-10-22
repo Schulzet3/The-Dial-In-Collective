@@ -39,6 +39,7 @@
     "current_owner_release_preferences",
     "current_owner_remove_hide_shot_control_20261021",
     "current_owner_required_outlier_review",
+    "current_owner_retire_hide_shot_backend_20261021",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
     "current_owner_single_use_beta_invites_20261018",
@@ -386,6 +387,32 @@
       "exact_tested_sha": "03f87bab4a2a0086d1ecdc736cb2d714dd231792",
       "merged_sha": "4f77a7ff8b3d20a0ad7a48f223cdeeddeada919d",
       "tree_sha": "99558f366ba0af981e3ebc0c55bd5365abc0f7db"
+    },
+    {
+      "id": "hide_shot_backend_action_retired",
+      "decision_key": "current_owner_retire_hide_shot_backend_20261021",
+      "scope": "Reject obsolete hide action in client and server, preserve old data and legacy outbox entries",
+      "implementation": "STAGED_CI_PENDING_HOSTED_SQL_NOT_APPLIED",
+      "device_acceptance": "NOT_APPLICABLE_UNTIL_SEPARATE_SITE_RELEASE",
+      "issue": 20,
+      "assertions": [
+        {
+          "path": "site/cloud/outbox.js",
+          "absent": "'save_shot','hide_shot'"
+        },
+        {
+          "path": "supabase/migrations/20261022043000_dic_retire_hide_shot_action.sql",
+          "contains": "if action='hide_shot' then"
+        },
+        {
+          "path": "tests/cloud-shot-history-actions.test.mjs",
+          "contains": "new obsolete hide events must be refused"
+        },
+        {
+          "path": "tests/retired-hide-shot-sql.test.mjs",
+          "contains": "rejected before existing owner and receipt routing"
+        }
+      ]
     }
   ],
   "active_gap_flags": [

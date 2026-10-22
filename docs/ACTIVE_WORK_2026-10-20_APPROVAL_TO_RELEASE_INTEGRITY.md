@@ -1,5 +1,13 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — PR #66 first lint failure corrected, CI rerun pending
+- First source `ab62c0210f0fbad996a571785a927f4f42de7f32` independent visual review FAILED because added `CloudError` import in regression test was unused; strict ESLint max-warnings-zero correctly blocked it. Removed only unused import; assertion coverage preserved. No production/app source SQL or data changes in correction. Rerun six full checks on new exact commit before any merge or narrowly approved hosted SQL.
+
+
+## October 21 MDT — owner approved complete Hide Shot backend retirement, source CI pending
+- Recovered actual HEAD `b9b71fc11e4808f585194d3d2659a044a9745476` (advanced concurrently since previous session; no overwrite). Exact source-only change removes obsolete `hide_shot` from NEW outbox ACTIONS while preserving existing persisted old event read/flush and conflict/rejection export path. New narrowly scoped migration `supabase/migrations/20261022043000_dic_retire_hide_shot_action.sql` guards public `dic_apply_client_change` BEFORE actor/receipt routing; preserves all other existing delegation endpoints, no schema/row mutation. Tests explicitly reject new enqueue and require old event continuity, and check no destructive SQL. Previous live inspection: 22 shots, zero hidden; backend `private.mutate` branch remains internally defined but is unreachable via public guarded client entry after hosted SQL applies. Risk: direct privileged internal private RPC grant review and remaining hidden_at dependency cleanup not performed. No site publication or unrelated hosted SQL approved. Next: exact six-source CI, compare tested tree, check live backup and privileged grants, independently apply ONLY this migration to hosted production if safe, verify accepted action denied and shot/history counts unchanged; do not publish site.
+
+
 ## October 21 MDT — interruption recovery handoff for next chat (Issue #57)
 - User specifically requested quick GitHub recovery/documentation after this chat errored, NOT a new production approval. Durable full handoff posted as **Issue #57 comment 6332428386**: https://github.com/Schulzet3/The-Dial-In-Collective/issues/57#issuecomment-6332428386 . Do not rely on chat alone.
 - Latest verified dev at intake `dcd8405501d403f89743ffc434f85d0c54eff101`. IMPORTANT subsequent owner supersession `UX-REMOVE-HIDE-SHOT-CONTROL-20261021` removed UI via merged #65 / `4f77a7ff8b3d20a0ad7a48f223cdeeddeada919d`; **never resurrect Hide Shot**. The prior #58 merge and its earlier interpretation were superseded, not still desired.

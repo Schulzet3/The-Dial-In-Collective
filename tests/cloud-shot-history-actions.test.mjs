@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {shotCard} from '../site/cloud/shot_card.js';
-import {Outbox} from '../site/cloud/outbox.js';
+import {Outbox,ACTIONS} from '../site/cloud/outbox.js';
 
 const sampleShot={
  id:'9f161ab1-9781-4f69-ac17-12184e090bc4',timestamp:'2026-10-21T19:00:00Z',
@@ -42,7 +42,10 @@ test('legacy already-queued hide mutation remains account isolated and conflict 
   now:()=> '2026-10-21T20:00:00Z',
   remote:{async mutate(event){sent++;assert.equal(event.action,'hide_shot');assert.equal(event.payload.expected_revision,7);return {ok:false,code:'conflict',revision:8};}}
  });
- await outbox.enqueue('hide_shot',{id:sampleShot.id,expected_revision:7});
+ assert.equal(ACTIONS.has('hide_shot'),false,'new obsolete hide events must be refused');
+ await assert.rejects(outbox.enqueue('hide_shot',{id:sampleShot.id,expected_revision:7}),{code:'unsupported_action'});
+ // Existing old-device events remain readable, rejectable, and exportable.
+ await store.put({owner:'member-A',id:'hide-event-1',action:'hide_shot',payload:{id:sampleShot.id,expected_revision:7},status:'pending',createdAt:'2026-10-21T20:00:00Z'});
  owner='member-B';assert.equal((await outbox.pending()).length,0);
  owner='member-A';assert.equal((await outbox.flush()).state,'conflict');
  assert.equal(sent,1);assert.equal(acked,0);
