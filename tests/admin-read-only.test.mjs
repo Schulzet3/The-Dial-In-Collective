@@ -72,13 +72,14 @@ test('the proposed SQL never grants admin rights or enables mutation operations'
  assert.doesNotMatch(sql,/insert into private\.app_admins|update public\.coffees|alter policy|create policy/i);
 });
 
-test('admin review UI enforces exact revision, single-click approve and reasons for manual conflict decisions',async()=>{
+test('admin review UI enforces exact revision and one-click distinct, merge or hold decisions',async()=>{
  const main=await readFile(new URL('../site/admin/main.js',import.meta.url),'utf8');
  const sql=await readFile(new URL('../supabase/migrations/20261021053500_dic_admin_coffee_review.sql',import.meta.url),'utf8');
  assert.match(main,/dic_admin_review_coffee/);
  assert.match(main,/p_expected_revision:revision/);
- assert.match(main,/if\(decision!=='approve'\)/);
-  assert.match(main,/if\(reason.length<8\)return/);
+ assert.doesNotMatch(main,/Reason for |Apply .*submitted coffee/);
+ assert.doesNotMatch(main,/if\(decision!=='approve'\)/);
+ assert.match(main,/const reason=''/);
   const updated=await readFile(new URL('../supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql',import.meta.url),'utf8');
   assert.match(updated,/p_action='approve' and reason_text is null/);
   assert.match(updated,/Administrator approved distinct coffee/);
@@ -113,6 +114,9 @@ test('routine admin Save requires no human correction reason or redundant confir
  assert.match(main,/p_reason:''/);
  assert.match(migration,/Administrator saved record changes/);
  assert.match(migration,/insert into private\.admin_content_edits/);
- assert.match(main,/if\(decision!=='approve'\)/);
- assert.doesNotMatch(cloud,/if\(Math\.abs\(Number\(d\.doseG\)-dose\)>1&&!confirm/);
+ assert.doesNotMatch(main,/if\(decision!=='approve'\)/);
+ assert.match(cloud,/Math\.abs\(actualDose-Number\(referenceDose\)\)>1/);
+ assert.match(cloud,/globalThis\.confirm\?\.\(warning\)/);
+ assert.match(cloud,/this\.editing\?\.snapshot\?\.basketDoseG/);
+ assert.match(cloud,/version\?\.baskets\?\.find/);
 });

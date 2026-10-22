@@ -25,6 +25,9 @@ test('new admin source retains distinct-approval audit and identity guards with 
  assert.match(sql,/private\.dic_promote_pending_coffee/);
  assert.match(sql,/Possible duplicate or conflicting coffee release/);
  assert.match(sql,/oldcoffee\.revision<>p_expected_revision/);
- assert.match(js,/if\(decision!=='approve'\)/);
+ assert.doesNotMatch(js,/if\(decision!=='approve'\)/);
+ assert.match(sql,/Administrator resolved duplicate coffee/);
+ assert.match(sql,/Administrator held coffee for review/);
+ assert.match(js,/const reason=''/);
  assert.match(js,/p_reason:reason,p_canonical_id:selected\|\|null/);
 });
