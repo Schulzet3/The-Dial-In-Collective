@@ -1,3 +1,6 @@
+# 2026-10-22 — Issue #80 extractor PostgreSQL 17.11 behavior/permission acceptance added
+- Extend the disconnected exact-database regression runner with supabase/tests/preview_two_phase_cache.sql; synthetic, rollback-only admitted owner tests exact verified source reuse (no owner data), single-use completion ticket, no charge at preflight and 30s cache cooldown. Revalidate all 40+ migrations and suites on disposable SQL; original trusted preview API remains unchanged. No production provider operation; journal and SQL test/runner in SAME source commit.
+
 # 2026-10-22 — Issue #80 extractor first exact CI repair
 - PR #90 initial SHA 75640dfce17763c1973136007f78637f3c6f15bf Node run 39861335676 FAIL on two legacy synthetic Netlify admission mocks: existing adaptive and bounded-request fixtures still emitted only the older 'allowed:true' shape. The new two-phase architecture requires explicit preflight ticket and charged completion receipt; this SAME unit-test/journal commit updates fixture responses and original expected count from 3 to 5 without touching extractor production code. Re-run exact source for tests; original successful multi-source behavior unchanged and no production database writes or website publish.
 
