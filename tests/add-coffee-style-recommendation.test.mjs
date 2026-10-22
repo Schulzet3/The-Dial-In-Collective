@@ -19,6 +19,8 @@ test('manual user choice survives changed roast and URL-fetched values',()=>{
 });
 test('style remains owner-scoped, revision-checked, and never makes coffee Current',()=>{
  const s=source();
+ const mobile=readFileSync(new URL('browser/cloud_owner_qa.py',import.meta.url),'utf8');
+ assert.match(mobile,/'coffee-style-choice'/);
  assert.match(s,/new-coffee-style-suggestion/);
  assert.match(s,/refreshNewCoffeeStyle\(form,this\.state\.preferences\)/);
  assert.match(s,/async persistAddedStyle\(lid,style\)/);

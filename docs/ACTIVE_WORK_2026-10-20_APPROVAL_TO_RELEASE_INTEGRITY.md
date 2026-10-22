@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — Issue #19 mobile test-only module registry fix, CI pending
+- Previous `c3c4f113` exact cloud regression PASS but 390px `mobile-browser-qa` failed in run `39712620426` because its synthetic JS module list omitted new source module `coffee-style-choice`. Source bundle therefore could not create `window.__CloudApp`. This is a **test fixture dependency**, not a live app failure. No assertion bypassed.
+- Added the approved new source module to the isolated mobile bundle and Node contract protecting registration. Full Node, SQL, mobile, approval and visual rerun required on new exact SHA before merge. Existing mock server mutation semantics remain old and need a separate test-hardening review before claiming real Add Coffee browser persistence; source RPC security and revision are tested separately. No production/provider/data changes.
+
+
 ## October 21 MDT — Issue #19 initial CI fail closed on omitted shipped module; repair pending verification
 - Exact source `e1e4f70c7b5881c5dba0b9980b04fb663f9aef7a` cloud regression `39712517317` read back as **298/299 PASS, one FAIL** at `tests/site-integrity.test.mjs`: `cloud/main.js` imports new helper `cloud/coffee-style-choice.js` but `build_cloud.mjs` explicit asset list lacked the new module. The security/shipping integrity gate correctly prevented broken PWA output; no provider mutation/publish.
 - Minimal fix adds exact helper path to allowlisted dist copy and service-worker public shell, with explicit source regression in Add Coffee test. All behavior, owner-scoped version guard and existing tests retained. No bypass of `validateSiteSource` or file-integrity checks. Next: new exact-SHA PR five checks and visual before merging; no source/deployment acceptance claimed yet.

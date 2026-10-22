@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Issue #19 mobile QA dependency fix, not deployed
+- Synthetic 390px suite previously failed at module boot, new module registered in fixture without skipping tests. Exact source recheck pending. No Netlify, SQL or member mutation.
+
+
 ## Issue #19 shipped-module graph regression caught before merge
 - Initial new style module missing in explicit dist allowlist, so cloud test 298/299 (site integrity FAIL). Source-only fix adding allowlisted module and regression staged; fresh exact CI pending. No release. See work journal and PR #56.
 
