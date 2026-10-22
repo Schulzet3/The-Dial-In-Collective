@@ -85,6 +85,7 @@ function boot(){
  let authChange,role={authenticated:true,admitted:true,admin:true};
  const root={
   innerHTML:'',
+  contains(){return true;},
   addEventListener(name,fn){events[name]=fn;},
   querySelector(sel){
    if(sel==='#admin-action-notice'&&this.innerHTML.includes('id="admin-action-notice"'))
@@ -122,6 +123,7 @@ function boot(){
  });
  vm.runInContext(source,context);
  return {root,calls,events,clipboard,done:context.started,
+  openAccounts(){events.toggle({target:{matches:selector=>selector==='details[data-admin-section]',open:true,dataset:{adminSection:'accounts'}}});},
   signOut(){authChange('SIGNED_OUT',null);},
   switchAccount(){authChange('SIGNED_IN',{user:{id:MEMBER}});},
   setRole(value){role=value;}
@@ -129,6 +131,9 @@ function boot(){
 }
 test('admin can issue and copy a code once, refreshing clears it; no code in list',async()=>{
  const b=boot();await b.done;
+ assert.doesNotMatch(b.root.innerHTML,/Beta Invitations/,'Collapsed accounts should not load a private listing');
+ assert.equal(b.calls.filter(x=>['dic_admin_records','dic_admin_access_overview'].includes(x.name)).length,0);
+ b.openAccounts();await flush();
  assert.match(b.root.innerHTML,/Beta Invitations/);
  assert.match(b.root.innerHTML,/Administrator · Permanent access/);
  const form={
@@ -150,6 +155,7 @@ test('admin can issue and copy a code once, refreshing clears it; no code in lis
 });
 test('member removal/restoration and invitation revocation require RPC, then refresh',async()=>{
  const b=boot();await b.done;
+ b.openAccounts();await flush();
  b.events.click({target:{closest(){return {dataset:{action:'remove-member',id:MEMBER}};}}});
  await flush();
  const removed=b.calls.find(x=>x.name==='dic_admin_set_member_access').args;
@@ -164,6 +170,7 @@ test('member removal/restoration and invitation revocation require RPC, then ref
 });
 test('cross-tab account change immediately removes one-time invitation and denies stale render',async()=>{
  const b=boot();await b.done;
+ b.openAccounts();await flush();
  b.events.submit({target:{id:'admin-invite-form',elements:{namedItem(name){return {value:name==='label'?'Single tester':''};}}},preventDefault(){}});
  await flush();assert.match(b.root.innerHTML,new RegExp(SECRET));
  b.signOut();

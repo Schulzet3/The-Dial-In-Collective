@@ -186,6 +186,29 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "READY for separately owner-authorized production release only, preserves queued conflict/receipt identities, no SQL/provider mutations. Parent Issue #80 remains IN_PROGRESS for other scopes."
+    },
+    {
+      "id": "DIC-Q-80-admin-lazy",
+      "issue": 80,
+      "pr": 86,
+      "title": "Fetch Admin records and account listings only for expanded sections",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/admin/records.js"
+      ],
+      "tests": [],
+      "ci_runs": [
+        39855181956,
+        39855181641
+      ],
+      "blockers": [
+        "Initial exact-source checks failed due to untracked Admin records path in release queue and legacy tests that assumed collapsed Admin invitations were already rendered; repair staged and CI rerun required."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Isolated PR #86; owner-approved source-only lazy-loading tranche. Never declare READY or deploy until exact-source CI and nonforce merge verified. Replaces eager private-record reads with on-demand expanded-section reads; keeps status/admin-role checks and 50-row pagination."
     }
   ],
   "history": [],
