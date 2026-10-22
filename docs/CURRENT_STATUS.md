@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — #20 Hide Shot UI staged in isolated development branch
+- Owner-safe Hide Shot affordance staged on `work/hide-shot-owner-safe-20261021`; original shot records preserved. Uses existing server-owner revision guard and asks for explicit confirmation. Code/CI verification pending. No Netlify or Supabase production mutation, and user-device acceptance is not claimed. Same-commit active journal holds implementation scope and next steps.
+
+
 ## October 21 MDT — verified optimization merge; source development only
 - Issue #50 first source optimization release completed at merge `8e09ecbe12aaeec7129097d6d546ec3baaf7253c` with identical five-green-tested tree `d3ed86cb625bbe2dc8332e6c196a0ded90f4f5e9`; 593/593 required Node tests, 299/299 targeted cloud, independent mobile+SQL+approval+visual success. Targeted secondary test stage 35.7–56.6% shorter in two runs, not a comparable whole deployment-cycle or 10× claim. Production still unchanged Netlify `6ad968689f42fbe8e871e151`; no new release grant. Full receipt `docs/audits/2026-10-21-optimization-final-merge-receipt.json`.
 

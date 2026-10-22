@@ -1,5 +1,11 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — #20 safe personal Hide Shot source implementation (verification pending)
+- Owner's broad backlog continuation was logged in Issue #57; independent Issue #20 already authorizes this development scope. Branch `work/hide-shot-owner-safe-20261021` starts at verified development `f55feb70450901d8e0113e11affc7bb7bb35294a`, isolated from admin PR #55. No production or live member-data changes.
+- Added a small Hide Shot button inside **expanded synchronized personal shot details only**, never a delete action. Handler requires admitted online session, a nonhidden/not-pending owner-visible shot with positive revision, zero pending sync events, explicit confirmation about retained original and possible anonymous Community observations, then existing `hide_shot` owner-scoped revision-checked/idempotent outbox mutation. Clears only presentation state after sync; no hard purge/Undo promise. Offline hide attempts are rejected before enqueue; interrupted network sends stay in the durable outbox, stale revisions do not overwrite.
+- New Node checks cover visible controls, confirmation, protected mutation call, outbox owner segregation and revision conflict. All exact-SHA CI checks, browser/device acceptance and full source review pending. No release permission inferred. Next: open PR, verify source tests and resolve failures, reconcile with concurrent #55.
+
+
 ## October 21 MDT — optimization PR #54 MERGED, exact tested tree independently verified
 - Normal GitHub non-force PR merge at `8e09ecbe12aaeec7129097d6d546ec3baaf7253c` on `development/backend-foundation`, two parents `e392b551` and tested PR head `2268052832a53eb7a75ca52fbcdb9ebb60d3778d`. Independent Git tree readback: both merged and tested tree are byte-identical `d3ed86cb625bbe2dc8332e6c196a0ded90f4f5e9`. No force, no Netlify release.
 - On **one exact tested SHA** all five required GitHub checks SUCCESS: approval `39711524826`, validate `39711525001` (**593/593** Node), cloud-tests + mobile-browser-qa `39711524830` (targeted cloud **299/299**), isolated SQL `39711524828`; extra visual `39711524863` SUCCESS. These GitHub Free private checks are advisory, not enforced branch protection.
