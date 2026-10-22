@@ -217,7 +217,7 @@ begin
  exception when serialization_failure then denied:=true;end;
  if not denied then raise exception 'Stale administrator shot revision accepted';end if;
  data:=public.dic_admin_edit_shot(shot_id,shot_rev,'{"notes":"Corrected private fixture notes"}'::jsonb,
-   'Correct only the private annotation','shot');
+   '','shot');
  if data->>'ok' is distinct from 'true' then raise exception 'Notes-only correction failed';end if;
  execute 'reset role'; -- administrator does not gain another member's direct-table reads
  if (select to_jsonb(s)-'revision'-'updated_at' from public.shots s where id=shot_id)
@@ -227,6 +227,7 @@ begin
    and a.actor_id=admin_id and a.subject_owner_id=member_id
    and a.before_values->>'notes'='Original private fixture notes'
    and a.after_values->>'notes'='Corrected private fixture notes'
+   and a.reason='Administrator saved record changes'
    and (a.before_values->'shot'->>'grind_setting')::numeric=2.125
    and (a.after_values->'shot'->>'temperature_c')::numeric=93.27) then
   raise exception 'Shot audit lost original notes or exact measurements';end if;
