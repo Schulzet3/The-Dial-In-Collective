@@ -86,8 +86,7 @@
       "tests": [],
       "ci_runs": [],
       "blockers": [
-        "Remaining approved Admin lazy-load/search, Community server search, extractor cache/quota correctness and quality workflow refinements require scoped implementation/tests",
-        "A 40th hosted Admin migration named dic_admin_shot_coffee_group_identity (version 20261022165047) exists beyond earlier 39-count report; reconcile before overlapping SQL."
+        "Broader Issue #80 engineering optimizations outside the four requested feature tranches remain independently IN_PROGRESS. Four requested child changes are verified separately for a future owner-authorized batch release."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "First dose and sign-out tranche merged safely and tracked separately READY. Future main.js changes must each have exact tested queue/source receipts."
@@ -231,22 +230,72 @@
         "site/admin/main.js",
         "site/admin/view.js",
         "site/admin/records.js",
-        "supabase/migrations/20261022220000_dic_admin_server_search.sql"
+        "supabase/migrations/20261022220000_dic_admin_server_search.sql",
+        "site/admin/styles.css"
       ],
       "tests": [
         "Five exact-development-source Actions runs PASS at d3ad52feb3869b55dabf2148e2b1fbf180553d01: approval 39860829330; app Node/lint/build 39860829336; SQL isolated 39860829365; cloud/browser 39860829408; visual 39860829337.",
-        "Admin search source and separate migration merged on development; 80-character bounded literal query, real admin role gate and filtered pages, no production database application."
+        "Admin search source and separate migration merged on development; 80-character bounded literal query, real admin role gate and filtered pages, no production database application.",
+        "PR #88 passed five exact-source CI suites at 979766a325e2f9c66444da8bc55b84eca0f28f86.",
+        "PR #88 merged nonforce to d3ad52feb3869b55dabf2148e2b1fbf180553d01 and all five postmerge workflows PASS, including disconnected SQL and Chromium.",
+        "New role-gated forward SQL migration staged for owner-authorized batch publication; old listing RPC unchanged."
       ],
       "ci_runs": [
         39860829330,
         39860829336,
         39860829365,
         39860829408,
-        39860829337
+        39860829337,
+        39859325889,
+        39859325893,
+        39859325976,
+        39859325840,
+        39859325857
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Development READY only. New migration 20261022220000 remains un-applied to production and must be explicitly in-scope during a future owner-authorized release with migration safety and provider readback. This queue promotion is evidence-only; production is unchanged."
+      "notes": "Development READY only. New migration 20261022220000 remains un-applied to production and must be explicitly in-scope during a future owner-authorized release with migration safety and provider readback. This queue promotion is evidence-only; production is unchanged. READY for owner-authorized combined migration and frontend release; stage-only SQL not applied live. Preserves old list RPC and admin gate."
+    },
+    {
+      "id": "DIC-Q-80-community-search",
+      "issue": 80,
+      "pr": 89,
+      "title": "Server-side Community coffee and style search with stable filtered paging",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/client.js",
+        "site/cloud/main.js",
+        "site/cloud/community.js",
+        "supabase/migrations/20261022220100_dic_community_server_search.sql",
+        "site/styles.css"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Combined integration must pass exact-source SQL/privacy, browser/mobile, visual, Node and postmerge CI before READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Preserves existing browse function and sanitized DTO, eligible verified only and no owner IDs. Bound 80-character term and style across entire server data before count/page, 20-row stable paging, manual request not per-keystroke."
+    },
+    {
+      "id": "DIC-Q-80-extractor-cache-quota",
+      "issue": 80,
+      "pr": 90,
+      "title": "Verified exact-URL and warm public-preview reuse; transient-retrieval quota correctness",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify/functions/coffee-url-preview.mjs",
+        "supabase/migrations/20261022220200_dic_preview_two_phase_cache.sql"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Combined integration must pass isolated SQL/privacy, extractor runtime, Node/browser and postmerge CI before READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Preserve 12/IP/min Netlify rateLimit, existing 12/member/24h quota and 30s cooldown across trusted/universal paths; verified unique canonical exact URL and short-lived public-only warm cache skip daily claim, but still enforce 30s cooldown; transient upstream failures do not debit member daily count; other outcomes complete ticket before releasing result. Existing shared trusted claim stays untouched. No production changes."
     }
   ],
   "history": [],

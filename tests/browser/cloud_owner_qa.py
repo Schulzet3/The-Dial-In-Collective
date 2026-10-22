@@ -33,6 +33,16 @@ window.__client={
  async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
  async listCommunityReviews(){return window.__reviews||[];},async confirmCommunityOutlier(){window.__reviews=[];return {ok:true,state:'eligible'};},
  async browseCommunityShots(){return {shots:window.__communityShots||[],total:(window.__communityShots||[]).length};},
+ async searchCommunityShots({query='',style='all',limit=20,offset=0}={}){
+  if(window.__delayCommunityNext){
+   window.__delayCommunityNext=false;
+   await new Promise(resolve=>{window.__unblockCommunity=resolve;});
+   window.__unblockCommunity=null;
+  }
+  const search=String(query).toLowerCase();
+  const rows=(window.__communityShots||[]).filter(row=>(style==='all'||row.style===style)&&(!search||[row.coffee_name,row.roaster,row.release_origin,row.release_process].join(' ').toLowerCase().includes(search)));
+  return {shots:structuredClone(rows.slice(offset,offset+limit)),total:rows.length};
+ },
 
  async editCoffeeDetails(entryId,expected,data,url){
   const r=window.__raw,l=r.library.find(x=>x.id===entryId);
@@ -328,7 +338,22 @@ with sync_playwright() as p:
  page.keyboard.press('Enter')
  assert coffee.evaluate('(el)=>el.open')
  checks.append('Community coffee group is keyboard-operable without custom click handlers')
+ page.locator('#community-search-query').fill('Orinoco')
+ page.get_by_role('button',name='Search',exact=True).click()
+ page.wait_for_function("document.querySelectorAll('details.community-coffee-card').length===1")
+ assert 'Yirgacheffe' in page.locator('details.community-coffee-card').first.inner_text()
+ page.locator('[data-action=community-search-clear]').click()
+ page.wait_for_function("document.querySelectorAll('details.community-coffee-card').length===2")
+ page.evaluate('window.__delayCommunityNext=true')
+ page.locator('#community-search-query').fill('Orinoco')
+ page.get_by_role('button',name='Search',exact=True).click()
+ page.wait_for_function('typeof window.__unblockCommunity==="function"')
  page.locator('#community-style').select_option('Traditional')
+ page.evaluate('window.__unblockCommunity()')
+ page.wait_for_function("document.querySelector('.community-empty h3')?.textContent==='No matching Community shots'")
+ assert page.locator('#community-style').input_value()=='Traditional'
+ page.locator('[data-action=community-search-clear]').click()
+ page.wait_for_function("document.querySelectorAll('details.community-coffee-card').length===1")
  assert page.locator('details.community-coffee-card').count()==1
  assert 'Other' in page.locator('details.community-coffee-card').inner_text()
  page.locator('#community-style').select_option('all')

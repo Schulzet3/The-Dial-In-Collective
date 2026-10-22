@@ -180,12 +180,15 @@ test('conflicting unlabeled product JSON-LD is ambiguous; other product URL cann
 const approvedEnv=key=>({SUPABASE_URL:'https://azviqqejypsefzilgonr.supabase.co',
  SUPABASE_PUBLISHABLE_KEY:'sb_publishable_test_nonfunctional'}[key]);
 const identityJson=()=>({id:'12345678-1111-4111-8111-123456789012'});
+const mockPreviewApi=(url,{admitted=true,allowed=true}={})=>url.endsWith('/auth/v1/user')?identityJson():
+ url.endsWith('/rpc/dic_session_status')?{admitted,emailVerified:true}:
+ url.endsWith('/rpc/dic_preview_cached_verified')?null:
+ url.endsWith('/rpc/dic_preview_preflight')?{allowed,ticket:allowed?'00000000-0000-4000-8000-000000000123':null,reason:allowed?null:'daily_preview_limit'}:
+ url.endsWith('/rpc/dic_preview_complete')?{charged:true}:null;
 function handlerMock({admitted=true,allowed=true,status=200}={}){
  const calls=[],apiFetch=async (u,opt)=>{
   calls.push({u,method:opt.method,hasBearer:/^Bearer /i.test(opt.headers.Authorization||'')});
-  const data=u.endsWith('/auth/v1/user')?identityJson():
-   u.endsWith('/rpc/dic_session_status')?{admitted,emailVerified:true}:
-   u.endsWith('/rpc/dic_claim_universal_preview')?{allowed,reason:allowed?null:'daily_preview_limit'}:null;
+  const data=mockPreviewApi(u,{admitted,allowed});
   return {ok:status===200,json:async()=>data};
  };
  let outbound=0;
@@ -208,7 +211,7 @@ test('auth/member/quota precede network fetch; returned web fields are unverifie
  assert.equal(result.result.verification,'unverified');
  assert.equal(result.result.fields.name,'Ethiopia 2026');
  assert.equal(ok.outbound,1);
- assert.equal(ok.calls.length,3);
+ assert.equal(ok.calls.length,5);
  assert.equal(ok.calls[0].hasBearer,true);
  const denied=handlerMock({admitted:false});
  assert.equal((await denied.invoke()).http,403);
@@ -355,9 +358,7 @@ test('Ecwid preview returns only source-backed fields after member quota, no Wix
  const calls=[];let rawFetches=0,jsonReads=0;
  const apiFetch=async(u,opt)=>{
   calls.push({u,auth:!!opt.headers.Authorization});
-  const data=u.endsWith('/auth/v1/user')?identityJson():
-   u.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:
-   {allowed:true};
+  const data=mockPreviewApi(u);
   return {ok:true,json:async()=>data};
  };
  const handler=createPreviewHandler({apiFetch,env:approvedEnv,
@@ -374,7 +375,7 @@ test('Ecwid preview returns only source-backed fields after member quota, no Wix
  assert.equal(result.verification,'unverified');
  assert.equal(rawFetches,0,'known Ecwid store should skip broad 662KB Wix page');
  assert.equal(jsonReads,1);
- assert.equal(calls.length,3,'session admission and quota must be checked first');
+ assert.equal(calls.length,5,'session, verified lookup, cooldown and completion must be checked');
 });
 test('Ecwid snapshot failure safely falls back to blank/manual rather than false shop identity',async()=>{
  const result=await extractEcwidProduct(mangoPageUrl,'',{
@@ -437,9 +438,7 @@ test('unknown Ecwid store shell uses product snapshot first, not shop-wide SEO',
   })+'</script>',ogTagsHtml:'<meta property="og:title" content="Blend No 7">',
   htmlCode:'<h1>Blend No 7</h1><p>Origin: Brazil</p><p>Roast: Medium</p>'};
  const called=[];let pages=0;
- const apiFetch=async(u)=>({ok:true,json:async()=>u.endsWith('/auth/v1/user')?
-  identityJson():u.endsWith('/rpc/dic_session_status')?
-  {admitted:true,emailVerified:true}:{allowed:true}});
+ const apiFetch=async u=>({ok:true,json:async()=>mockPreviewApi(u)});
  const handler=createPreviewHandler({apiFetch,env:approvedEnv,
   readHtml:async()=>{pages++;return {ok:true,html:shop,source_url:url};},
   readJson:async path=>{called.push(path);return {ok:true,json:JSON.stringify(productData)};}});
@@ -523,8 +522,7 @@ test('sparse but valid Shopify HTML enriches missing structured facts from exact
   '<meta property="og:site_name" content="Coffee Example"></head><body><main><h1>Mountain Lot</h1>'+
   '<p>Origin: Gedeb, Ethiopia</p></main></body></html>';
  let calls=0;
- const client=async endpoint=>({ok:true,json:async()=>endpoint.endsWith('/auth/v1/user')?
-  identityJson():endpoint.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:{allowed:true}});
+ const client=async endpoint=>({ok:true,json:async()=>mockPreviewApi(endpoint)});
  const handler=createPreviewHandler({apiFetch:client,env:approvedEnv,
   readHtml:async()=>({ok:true,html:page,source_url:url}),
   readJson:async endpoint=>{calls++;assert.equal(endpoint,'https://coffee-example.com/products/mountain-lot.js');
@@ -549,8 +547,7 @@ test('Shopify fallback retrieves a bounded public JSON product when HTML source 
  const data={handle:'berry-lot',title:'Berry Lot',vendor:'My Roaster',
   description:'<p>Origin: Kenya</p><p>Tasting Notes: Blackcurrant, bergamot</p>'};
  let htmlReads=0,jsonReads=0;
- const apiFetch=async path=>({ok:true,json:async()=>path.endsWith('/auth/v1/user')?
-  identityJson():path.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:{allowed:true}});
+ const apiFetch=async path=>({ok:true,json:async()=>mockPreviewApi(path)});
  const handler=createPreviewHandler({apiFetch,env:approvedEnv,
   readHtml:async()=>{htmlReads++;return {ok:false,reason:'page_too_large'};},
   readJson:async path=>{jsonReads++;assert.equal(path,'https://my-roaster.coffee/products/berry-lot.js');return {ok:true,json:JSON.stringify(data)};}});
@@ -634,8 +631,7 @@ test('Woo product JSON fallback honors member admission/quota and strict field s
  const product={name:'Kenya Sidama',slug:'kenya-sidama',permalink:url,
   description:'<p>Origin: Kenya</p><p>Tasting Notes: Lime, cranberry, cacao</p>'};
  let htmlCalls=0,jsonCalls=0,apiCalls=0;
- const apiFetch=async endpoint=>{apiCalls++;return {ok:true,json:async()=>endpoint.endsWith('/auth/v1/user')?
-  identityJson():endpoint.endsWith('/rpc/dic_session_status')?{admitted:true,emailVerified:true}:{allowed:true}};};
+ const apiFetch=async endpoint=>{apiCalls++;return {ok:true,json:async()=>mockPreviewApi(endpoint)};};
  const handler=createPreviewHandler({apiFetch,env:approvedEnv,
   readHtml:async()=>{htmlCalls++;return {ok:false,reason:'page_too_large'};},
   readJson:async endpoint=>{jsonCalls++;assert.equal(endpoint,'https://new-roaster.coffee/wp-json/wc/store/v1/products/kenya-sidama');
@@ -649,6 +645,37 @@ test('Woo product JSON fallback honors member admission/quota and strict field s
  assert.equal(body.fields.origin,'Kenya');
  assert.equal(body.fields.tasting_notes,'Lime, cranberry, cacao');
  assert.equal(body.verification,'unverified');
- assert.equal(htmlCalls,1);assert.equal(jsonCalls,1);assert.equal(apiCalls,3);
+ assert.equal(htmlCalls,1);assert.equal(jsonCalls,1);assert.equal(apiCalls,5);
  assert.equal(await extractWooProduct(url,{readJson:async()=>({ok:true,json:'unexpected JS'})}),null);
+});
+
+test('exact repeated URL reuses public warm preview without additional daily claim or source fetch',async()=>{
+ const app=handlerMock();const first=await app.invoke();const second=await app.invoke();
+ assert.equal(first.result.ok,true);assert.equal(second.result.cached,true);assert.equal(app.outbound,1);
+ assert.equal(app.calls.filter(x=>x.u.endsWith('/rpc/dic_preview_complete')).length,1);
+ assert.equal(app.calls.filter(x=>x.u.endsWith('/rpc/dic_preview_preflight')).length,2);
+});
+test('transient website failure does not call charge-completion RPC',async()=>{
+ const calls=[];
+ const apiFetch=async u=>{calls.push(u);return {ok:true,json:async()=>mockPreviewApi(u)};};
+ const handler=createPreviewHandler({apiFetch,env:approvedEnv,readHtml:async()=>({ok:false,reason:'source_unavailable'})});
+ const req=new Request('https://app.dialincollective.com/api/coffee-preview',{method:'POST',
+  headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',
+  'origin':'https://app.dialincollective.com'},body:JSON.stringify({source_url:productURL})});
+ const result=await(await handler(req)).json();assert.equal(result.reason,'source_unavailable');
+ assert.equal(calls.filter(x=>x.endsWith('/rpc/dic_preview_complete')).length,0);
+});
+test('unambiguous verified catalog lookup skips retrieval and daily claim but enforces cooldown',async()=>{
+ let outbound=0;const requests=[];
+ const apiFetch=async (url,opt)=>{requests.push({url,body:opt.body});return {ok:true,json:async()=>
+  url.endsWith('/rpc/dic_preview_cached_verified')?
+   {ok:true,source:'verified_catalog',fields:{name:'Known Release',roaster:'Known Roaster'}}:mockPreviewApi(url)};};
+ const handler=createPreviewHandler({apiFetch,env:approvedEnv,readHtml:async()=>{outbound++;throw Error('Should not fetch');}});
+ const req=new Request('https://app.dialincollective.com/api/coffee-preview',{method:'POST',
+ headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',
+ 'origin':'https://app.dialincollective.com'},body:JSON.stringify({source_url:productURL})});
+ const result=await(await handler(req)).json();assert.equal(result.cached,true);
+ assert.equal(result.verification,'verified');assert.equal(outbound,0);
+ assert.equal(requests.some(x=>x.url.endsWith('/rpc/dic_preview_complete')),false);
+ assert.equal(requests.find(x=>x.url.endsWith('/rpc/dic_preview_preflight')).body,'{"p_cached":true}');
 });

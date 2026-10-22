@@ -27,7 +27,7 @@ class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
   this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
-  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communityRevision=0;
+  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
@@ -48,7 +48,7 @@ class CloudApp {
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
-  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityStyle='all';this.communityCoffee='all';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
+  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityReloadRequested=false;this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   if(reviewSheet.open)reviewSheet.close();reviewSheet.replaceChildren();
   sheet.close();sheet.innerHTML='';
  }
@@ -280,16 +280,20 @@ class CloudApp {
      'sync','','sync-indicator')+'</span></nav>';
   return nav+communityPage({shots:this.communityRows,total:this.communityTotal,
     loading:this.communityLoading,error:this.communityError,
-    style:this.communityStyle,coffee:this.communityCoffee,revision:this.communityRevision});
+    style:this.communityStyle,coffee:this.communityCoffee,search:this.communitySearch,revision:this.communityRevision});
  }
  async loadCommunity({more=false}={}){
-  if(this.communityLoading||!this.identity||!this.status?.admitted)return;
+  if(this.communityLoading){if(!more)this.communityReloadRequested=true;return;}
+  if(!this.identity||!this.status?.admitted)return;
   const owner=this.identity.id,epoch=this.epoch;
   const offset=more?this.communityRows.length:0;
   this.communityLoading=true;this.communityError='';this.render();
   try{
    if(!navigator.onLine)throw new Error('Connect to the internet to browse Community shots.');
-   const page=await this.inSession(()=>this.client.browseCommunityShots({limit:20,offset}));
+   const query={limit:20,offset};
+    const page=await this.inSession(()=>this.communitySearch||this.communityStyle!=='all'
+     ?this.client.searchCommunityShots({...query,query:this.communitySearch,style:this.communityStyle})
+     :this.client.browseCommunityShots(query));
    if(owner!==this.identity?.id||epoch!==this.epoch)return;
    if(!Array.isArray(page?.shots)||!Number.isFinite(Number(page.total)))
     throw new Error('Community data is temporarily unavailable.');
@@ -301,7 +305,11 @@ class CloudApp {
     this.communityError='Community is temporarily unavailable. Your personal shots remain unchanged.';
   }finally{
    if(owner===this.identity?.id&&epoch===this.epoch){
-    this.communityLoading=false;this.render();
+    this.communityLoading=false;
+    const rerun=this.communityReloadRequested;
+    this.communityReloadRequested=false;
+    if(rerun)this.loadCommunity().catch(err=>this.error(err));
+    else this.render();
    }
   }
  }
@@ -651,6 +659,7 @@ class CloudApp {
    if(a==='community'){this.view='community';await this.loadCommunity();return;}
    if(a==='home'){this.view='coffees';this.render();return;}
    if(a==='community-refresh'){await this.loadCommunity();return;}
+    if(a==='community-search-clear'){this.communitySearch='';this.communityCoffee='all';await this.loadCommunity();return;}
    if(a==='community-more'){await this.loadCommunity({more:true});return;}
    if(a==='community-correct-outlier'){
     if(this.pending.length)throw new Error('Finish syncing before editing an existing shot.');
@@ -684,12 +693,16 @@ class CloudApp {
   }catch(err){this.error(err);}
  }
  input(ev){if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.render();}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
+ change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
     if(id==='auth-signin'){await this.client.signIn(d.email,d.password);const epoch=this.epoch;const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;await this.connect();}
-   else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.confirmationEmail=d.email.trim();this.authView='check-email';this.notice='';this.render();root.querySelector('#confirmation-title')?.focus();}
+   else if(id==='community-search'){
+     const query=String(d.query||'').trim();if(query.length>80)throw new Error('Community search must be 80 characters or fewer.');
+     this.communitySearch=query;this.communityCoffee='all';await this.loadCommunity();
+    }
+    else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.confirmationEmail=d.email.trim();this.authView='check-email';this.notice='';this.render();root.querySelector('#confirmation-title')?.focus();}
    else if(id==='auth-reset'){this.notice=await this.client.requestReset(d.email);this.render();}
    else if(id==='auth-password'){await this.inSession(()=>this.client.setPassword(d.password));this.recovery=false;this.notice='Password updated.';await this.connect();}
    else if(id==='auth-invite'){await this.inSession(()=>this.client.redeemInvite(d.token));await this.connect();}

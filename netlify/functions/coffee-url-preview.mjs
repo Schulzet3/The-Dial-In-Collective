@@ -26,12 +26,12 @@ async function readRequest(request){
   chunks.push(decoder.decode());return JSON.parse(chunks.join(''));
  }finally{reader.releaseLock();}
 }
-async function restCall(fetcher,base,key,token,path,method='GET'){
+async function restCall(fetcher,base,key,token,path,method='GET',body='{}'){
  const response=await fetcher(base+path,{
   method,signal:AbortSignal.timeout(6500),
   headers:{'apikey':key,'Authorization':'Bearer '+token,
    ...(method==='POST'?{'Content-Type':'application/json'}:{})},
-  ...(method==='POST'?{body:'{}'}:{})
+  ...(method==='POST'?{body}:{})
  });
  if(!response.ok)return null;
  return response.json();
@@ -39,6 +39,9 @@ async function restCall(fetcher,base,key,token,path,method='GET'){
 export function createPreviewHandler({
  apiFetch=fetch,readHtml=fetchPublicCoffeeHtml,readLargeHtml=fetchPublicCoffeeProductRetry,readJson,extract=extractPublicCoffeeFacts,env=envDefault
 }={}){
+ // Public-only short-lived warm cache within an isolated function instance; never identity or token data.
+ const publicCache=new Map(),TTL_MS=15*60_000,MAX_ENTRIES=40;
+ const transient=new Set(['source_unavailable','source_fetch_failed','preview_unavailable']);
  return async request=>{
   if(request.method!=='POST')return json({ok:false,reason:'method_not_allowed'},405);
   const origin=request.headers.get('origin');
@@ -68,9 +71,31 @@ export function createPreviewHandler({
    const status=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_session_status','POST');
    if(status?.admitted!==true||status?.emailVerified!==true)
     return json({ok:false,reason:'admitted_member_required'},403);
-   const claim=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_claim_universal_preview','POST');
-   if(claim?.allowed!==true)
-    return json({ok:false,reason:claim?.reason||'preview_unavailable'},claim?.reason==='preview_cooldown'||claim?.reason==='daily_preview_limit'?429:503);
+   const keyUrl=validated.toString();
+   const catalog=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_preview_cached_verified','POST',JSON.stringify({p_source_url:keyUrl}));
+   const warm=publicCache.get(keyUrl);
+   if(warm&&warm.expiresAt<=Date.now())publicCache.delete(keyUrl);
+   const cached=catalog?.ok?{...catalog,verification:'verified',note:'Reused exact approved coffee source; confirm your intended release.'}:
+    warm?.expiresAt>Date.now()?warm.preview:null;
+   if(cached){
+    const reuse=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_preview_preflight','POST',JSON.stringify({p_cached:true}));
+    if(reuse?.allowed!==true)return json({ok:false,reason:reuse?.reason||'preview_unavailable'},['preview_cooldown','daily_preview_limit'].includes(reuse?.reason)?429:503);
+    return json({...cached,cached:true});
+   }
+   // Enforce one shared cooldown; non-transient extraction results charge quota once.
+   const claim=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_preview_preflight','POST',JSON.stringify({p_cached:false}));
+   if(claim?.allowed!==true||typeof claim.ticket!=='string')
+    return json({ok:false,reason:claim?.reason||'preview_unavailable'},['preview_cooldown','daily_preview_limit'].includes(claim?.reason)?429:503);
+   const finish=async (payload,status=200)=>{
+    if(!payload?.ok&&transient.has(payload?.reason))return json(payload,status);
+    const spent=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_preview_complete','POST',JSON.stringify({p_ticket:claim.ticket}));
+    if(spent?.charged!==true)return json({ok:false,reason:'preview_unavailable'},503);
+    if(payload?.ok){
+     if(publicCache.size>=MAX_ENTRIES)publicCache.delete(publicCache.keys().next().value);
+     publicCache.set(keyUrl,{preview:payload,expiresAt:Date.now()+TTL_MS});
+    }
+    return json(payload,status);
+   };
    // A known public Ecwid store ID allows one small, product-specific
    // read instead of retrieving a 600KB+ Wix catalog shell.
    const deadlineAt=Date.now()+15_000;
@@ -100,7 +125,7 @@ export function createPreviewHandler({
      // Some Shopify pages exceed the HTML bound or refuse HTML, while their
      // public exact-handle product JSON may still be safely accessible.
      const fromPublic=await publicProduct(finalUrl);
-     if(!fromPublic?.ok)return json({ok:false,reason:page?.reason||'source_unavailable'});
+     if(!fromPublic?.ok)return await finish({ok:false,reason:page?.reason||'source_unavailable'});
      preview=fromPublic;
     }else{
     finalUrl=typeof page.source_url==='string'&&safeCoffeeUrl(page.source_url)?page.source_url:validated.toString();
@@ -130,8 +155,8 @@ export function createPreviewHandler({
     }
     }
    }
-   if(!preview?.ok)return json({ok:false,reason:preview?.reason||'ambiguous_or_missing_product'});
-   return json({...preview,source_url:validated.toString(),...(finalUrl!==validated.toString()?{resolved_url:finalUrl}:{}),verification:'unverified',
+   if(!preview?.ok)return await finish({ok:false,reason:preview?.reason||'ambiguous_or_missing_product'});
+   return await finish({...preview,source_url:validated.toString(),...(finalUrl!==validated.toString()?{resolved_url:finalUrl}:{}),verification:'unverified',
     note:'Suggestions from a public page; exact roaster and release need verification.'});
   }catch{return json({ok:false,reason:'preview_unavailable'},503);}
  };
