@@ -10,7 +10,7 @@
 - Extractor exact verified URL/canonical coffee reuse, 15-minute bounded public-only cache, two-phase quota charging excluding transient retrieval failures; existing IP/member/day/cooldown and SSRF protections retained. PR #91; SQL source staged.
 - Actual packaged member+Admin Chromium build smoke added and passed. PR #85.
 - Redundant Netlify full npm test moved entirely to mandatory GitHub source validation while Netlify retains the checked build graph. PR #87 merged 05dda786.
-- Current requirements view exists; scoped independent same-commit journals merged in PR #92, final postmerge checks pending at this checkpoint.
+- Current requirements view exists; scoped independent same-commit journals merged in PR #92, applicable postmerge checks PASS; fully source READY at 8c19b440, still NOT DEPLOYED.
 
 ## Conditional work disposition (not license to weaken safeguards)
 - No further preview-preflight consolidation or older preview API removal without direct caller/runtime evidence demonstrating equal or better extraction reliability, usability **and** efficiency. Keep external safe-URL/DNS/DNS-rebinding protections.
