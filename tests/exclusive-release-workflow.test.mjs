@@ -11,6 +11,8 @@ test('atomic production controller cannot execute from push or schedule',()=>{
 test('production workflow uses exact owner ID and source SHA, not raw Netlify build hook',()=>{
  assert.match(yml,/INPUT_RELEASE_ID:.*inputs\.release_id/);
  assert.match(yml,/INPUT_TESTED_SOURCE_SHA:.*inputs\.tested_source_sha/);
+ assert.match(yml,/INPUT_RELEASE_EVIDENCE_JSON:.*inputs\.release_evidence_json/);
+ assert.match(yml,/release_evidence_json:[\s\S]*?required: true/);
  assert.match(yml,/DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED/);
  assert.match(yml,/DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED/);
  assert.match(yml,/DIC_RELEASE_CONTROLLER_VERIFIED/);

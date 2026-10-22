@@ -8,8 +8,8 @@ import {execFileSync} from 'node:child_process';
 import {mkdtempSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {planSingleUseClaim,assertReadyForRelease,RELEASE_BRANCH} from './one-use-claim.mjs';
-import {validateChatReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
+import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
+import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -25,14 +25,69 @@ export function initialLedgerOnMissing({releaseHead,readLedger}){
   return JSON.stringify({schema_version:1,consumed:[]});
  }
 }
-const git=(args,{input,env}={})=>execFileSync('git',args,{encoding:'utf8',input,
- stdio:['pipe','pipe','pipe'],env:env||process.env}).trim();
+// git push --porcelain writes per-ref rejection reasons to stdout. Retain
+// both channels, but never print command arguments, credentials or raw URLs.
+export function redactTransportText(value,secrets=[]){
+ const normalize=value=>String(value||'').replace(/\u001b\[[0-9;]*[A-Za-z]/g,'')
+  .replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g,'');
+ let text=normalize(value);
+ // Normalize before matching: embedded terminal escapes must not turn a
+ // missed credential into readable plaintext after the redaction pass.
+ for(const secret of secrets.filter(s=>typeof s==='string'&&s.length>0).sort((a,b)=>b.length-a.length)){
+  for(const encoded of [secret,encodeURIComponent(secret),Buffer.from('x-access-token:'+secret).toString('base64')].map(normalize))
+   if(encoded)text=text.split(encoded).join('[REDACTED]');
+ }
+ return text.replace(/\b(?:https?|ssh):\/\/[^\s'"<>]+/gi,'[REDACTED_URL]')
+  .replace(/\b(?:authorization\s*:\s*)?(?:bearer|basic)\s+[^\s'"<>]+/gi,'[REDACTED_AUTH]')
+  .replace(/\b(?:gh[pousr]_[A-Za-z0-9_]+|github_pat_[A-Za-z0-9_]+)\b/g,'[REDACTED_TOKEN]')
+  .replace(/\beyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g,'[REDACTED_JWT]')
+  .trim().slice(0,1600);
+}
+export function gitFailureDiagnostic(error,{operation='command',secrets=[]}={}){
+ const stdout=redactTransportText(error?.stdout,secrets),stderr=redactTransportText(error?.stderr,secrets);
+ const detail=stdout+'\n'+stderr;
+ const category=/without.*workflows?.*permission|refusing to allow.*workflow/i.test(detail)?'WORKFLOW_PERMISSION_DENIED':
+  /non-fast-forward|fetch first|stale info|cannot lock ref/i.test(detail)?'REF_CONFLICT':
+  /authentication failed|permission.*denied|HTTP 403|returned error: 403/i.test(detail)?'AUTHORIZATION_DENIED':
+  /timed out|ETIMEDOUT/.test(String(error?.code||''))?'TRANSPORT_TIMEOUT':'GIT_COMMAND_FAILED';
+ return {operation:/^[a-z-]+$/.test(operation)?operation:'command',
+  exit_code:Number.isInteger(error?.status)?error.status:null,category,stdout,stderr};
+}
+const git=(args,{input,env}={})=>{
+ const environment=env||process.env;
+ try{return execFileSync('git',args,{encoding:'utf8',input,
+  stdio:['pipe','pipe','pipe'],env:environment,timeout:60_000,maxBuffer:4*1024*1024}).trim();}
+ catch(error){
+  const secrets=Object.entries(environment).filter(([key])=>/TOKEN|SECRET|PASSWORD|AUTH|CREDENTIAL|DB_URL|PRIVATE_KEY/i.test(key)).map(([,value])=>value);
+  throw Error('Git operation failed: '+JSON.stringify(gitFailureDiagnostic(error,{operation:args[0],secrets})));
+ }
+};
 const json=(s,label)=>{try{return JSON.parse(s);}catch{throw Error(label+' is not valid JSON');}};
 function sourceGrant(data,id){
  if(data?.schema_version!==1||!Array.isArray(data.grants))throw Error('No source-of-truth owner approval list');
  const grants=data.grants.filter(g=>g.id===id);
  if(grants.length!==1)throw Error('Owner grant absent or duplicate ID: '+id);
  return grants[0];
+}
+export function selectLatestCiConclusions(checkRuns,sha){
+ const scores=new Map();
+ for(const check of checkRuns||[]){
+  if(check.head_sha!==sha||check.app?.slug!=='github-actions')continue;
+  if(!Number.isSafeInteger(check.id)||check.id<=0)throw Error('Invalid GitHub check-run identity');
+  const prior=scores.get(check.name);
+  // A newer queued/in-progress run must override an older completed PASS.
+  // completed_at cannot order attempts because it is null while running.
+  if(!prior||check.id>prior.id)scores.set(check.name,check);
+ }
+ return Object.fromEntries([...scores].map(([name,check])=>[
+  name,check.status==='completed'?check.conclusion:'pending'
+ ]));
+}
+export function assertCurrentReleaseRefs({developmentHead,releaseHead,actualDevelopmentHead,actualReleaseHead}){
+ if(!SHA.test(actualDevelopmentHead||'')||!SHA.test(actualReleaseHead||'')||
+   actualDevelopmentHead!==developmentHead||actualReleaseHead!==releaseHead)
+  throw Error('Development approval or release HEAD changed during preflight; recover before a new request');
+ return true;
 }
 async function ciForSha(sha,token){
  const url='https://api.github.com/repos/'+REPO+'/commits/'+sha+'/check-runs?per_page=100';
@@ -41,14 +96,8 @@ async function ciForSha(sha,token){
  if(!response.ok)throw Error('Cannot independently verify exact-source GitHub CI: HTTP '+response.status);
  const data=await response.json();
  if(data.total_count>100)throw Error('Too many check runs; require explicit pagination review');
- const scores={};
- for(const check of data.check_runs||[]){
-  if(check.head_sha!==sha)continue;
-  const prior=scores[check.name];
-  if(!prior||String(check.completed_at||'')>String(prior.completed_at||''))
-   scores[check.name]={conclusion:check.conclusion,completed_at:check.completed_at};
- }
- return Object.fromEntries(Object.entries(scores).map(([key,value])=>[key,value.conclusion]));
+ if(!Array.isArray(data.check_runs))throw Error('GitHub CI response lacks check runs');
+ return selectLatestCiConclusions(data.check_runs,sha);
 }
 const setBlob=(path,content,env)=>{
  const sha=git(['hash-object','-w','--stdin'],{input:content,env});
@@ -103,6 +152,13 @@ export async function executeSingleUseRelease(settings=process.env){
  const sha=chatPush?chatRequest.tested_source_sha:(settings.INPUT_TESTED_SOURCE_SHA||'');
  if(!SHA.test(sha)||!/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/.test(id))
   throw Error('Missing exact release ID or 40-character source SHA');
+ let manualRequest;
+ if(!chatPush){
+  const raw=settings.INPUT_RELEASE_EVIDENCE_JSON;
+  if(typeof raw!=='string'||!raw.trim()||raw.length>32_768)
+   throw Error('Manual release requires explicit, bounded schema-v2 recovery and credit evidence JSON');
+  manualRequest=json(raw,'Manual release evidence');
+ }
  const token=settings.GITHUB_TOKEN;
  if(!token)throw Error('GitHub Actions write token missing');
  // Read the current remote refs. No force, no rebases, no automatic retries.
@@ -112,6 +168,15 @@ export async function executeSingleUseRelease(settings=process.env){
  const developmentHead=git(['rev-parse','refs/remotes/origin/development/backend-foundation']);
  const releaseHead=git(['rev-parse','refs/remotes/origin/'+RELEASE_BRANCH]);
  if(!SHA.test(developmentHead)||!SHA.test(releaseHead))throw Error('Exact remote branches unavailable');
+ const recheckRemoteRefs=()=>{
+  const refs=new Map(git(['ls-remote','origin','refs/heads/development/backend-foundation',
+   'refs/heads/'+RELEASE_BRANCH]).split(/\r?\n/).filter(Boolean).map(line=>{
+    const [value,ref]=line.split(/\s+/);return [ref,value];
+   }));
+  assertCurrentReleaseRefs({developmentHead,releaseHead,
+   actualDevelopmentHead:refs.get('refs/heads/development/backend-foundation'),
+   actualReleaseHead:refs.get('refs/heads/'+RELEASE_BRANCH)});
+ };
  git(['merge-base','--is-ancestor',sha,developmentHead]);
  // Exclude historically green application SHAs which still had the old
  // development-branch publication guard. Never silently deploy an old build.
@@ -125,7 +190,7 @@ export async function executeSingleUseRelease(settings=process.env){
  if(!enforcedProtection&&(!privateFreeMode||
     grant.owner_private_free_compensating_controls!==true))
   throw Error('Owner-signed private Free residual-control acceptance missing');
- if(chatPush)validateChatReleaseRequest({
+ const validateRequest=()=>chatPush?validateChatReleaseRequest({
   request:chatRequest,
   changedPaths:git(['diff-tree','--no-commit-id','--name-only','-r','HEAD'])
    .split(/\r?\n/).filter(Boolean),
@@ -136,7 +201,15 @@ export async function executeSingleUseRelease(settings=process.env){
   commitParentSha:git(['rev-list','--parents','-n','1','HEAD']).split(/\s+/)[1],
   eventHeadSha:settings.GITHUB_SHA,checkedOutHeadSha:git(['rev-parse','HEAD']),
   nowIso:new Date().toISOString()
+ }):validateManualReleaseRequest({
+  request:manualRequest,inputReleaseId:id,inputTestedSourceSha:sha,
+  expectedDevelopmentHead:developmentHead,expectedReleaseHead:releaseHead,
+  ownerApprovalSource:grant.approval_source,
+  expectedMainHead:git(['ls-remote','origin','refs/heads/main']).split(/\s+/)[0],
+  checkedOutHeadSha:git(['rev-parse','HEAD']),workflowHeadSha:settings.GITHUB_SHA,
+  nowIso:new Date().toISOString()
  });
+ validateRequest();
  const statuses=await ciForSha(sha,token);
  assertReadyForRelease({requiredChecks:statuses,flags:{
   githubPrivateBranchProtectionVerified:enforcedProtection,
@@ -152,6 +225,8 @@ export async function executeSingleUseRelease(settings=process.env){
  // A live end-to-end, guard-checked request preflight without any Git/Netlify
  // write, credits or grant consumption. A later publish request must be a NEW
  // exact two-file owner-authorized commit and re-checks ALL fresh evidence.
+ recheckRemoteRefs();
+ validateRequest();
  if(chatPush)validatePushEnvelope();
  if(chatPush&&chatRequest.mode==='validate_only')
   return {id,testedSourceSha:sha,status:'INERT_CHAT_RELEASE_PREFLIGHT_PASS_NO_GIT_PUSH'};
@@ -182,6 +257,14 @@ export async function executeSingleUseRelease(settings=process.env){
   const subject='Release DIC: '+id+' [dic-publish]';
   const commit=git(['commit-tree',tree,'-p',releaseHead,'-m',subject],{env});
   if(!SHA.test(commit))throw Error('No immutable Git release commit');
+  // Capture a recoverable candidate without claiming the ref was accepted.
+  console.log('[DIC immutable claim prepared] '+JSON.stringify({release_id:id,
+   release_commit:commit,tested_source_sha:sha,previous_release_head:releaseHead,
+   status:'PREPARED_NOT_PUSHED_NETLIFY_UNVERIFIED'}));
+  recheckRemoteRefs();
+  validateReleaseGrant(grant,{releaseId:id,sourceSha:sha,nowIso:new Date().toISOString()});
+  validateRequest();
+  if(chatPush)validatePushEnvelope();
   // Git's remote update is a fast-forward compare-and-swap of this specific
   // parent. A competing concurrent commit diverges and loses the push.
   // NEVER add --force or retry the push after a rejection.

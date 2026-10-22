@@ -27,6 +27,10 @@ trap 'rm -rf "$OUT/plain" "$OUT/bundle.tar.gz"' EXIT
 
 # PostgreSQL 17 matches the live project. Use caller's uid for readability.
 # Require TLS in transit to the Supabase session pooler; never silently fall back to cleartext.
+# Capture a conservative lower bound before pg_dump can open its snapshot.
+# Completion alone cannot prove that writes made during export were included.
+SNAPSHOT_STARTED_AT_UTC="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+echo "DIC_BACKUP_SNAPSHOT_STARTED_AT_UTC=$SNAPSHOT_STARTED_AT_UTC"
 docker run --rm --user "$(id -u):$(id -g)" --env SUPABASE_DB_URL --env PGSSLMODE=require \
   --volume "$OUT/plain:/out" postgres:17-alpine sh -euc '
     pg_dump --dbname="$SUPABASE_DB_URL" --format=custom \
@@ -56,7 +60,7 @@ if [[ "$OBJECT_COUNT" != 0 ]]; then
   exit 1
 fi
 
-# The second checkout is the current reviewed application development source.
+# The second checkout is pinned to the independently verified live application commit.
 # Only tracked repository source is present; do not include .git, credentials, or exports.
 SOURCE_DIR="$GITHUB_WORKSPACE/backup-app-source"
 if [[ ! -f "$SOURCE_DIR/package.json" || ! -d "$SOURCE_DIR/supabase/migrations" || ! -f "$SOURCE_DIR/netlify.toml" ]]; then
@@ -78,7 +82,7 @@ fi
 IFS='|' read -r USERS SHOTS VERIFIED_COFFEES LIBRARY_ENTRIES APPROVED_SUBMISSIONS <<< "$COUNTS"
 echo "Snapshot sanity inventory (observed after export): users=$USERS shots=$SHOTS verified_coffees=$VERIFIED_COFFEES library_entries=$LIBRARY_ENTRIES approved_submissions=$APPROVED_SUBMISSIONS"
 cat > "$OUT/plain/manifest.json" <<EOF
-{"format":"dic-age-postgres-v1","project_ref":"$SUPABASE_PROJECT_REF","created_utc":"$(date -u +%Y-%m-%dT%H:%M:%SZ)","commit":"$GITHUB_SHA","postgres_client_major":17,"storage_object_count":0,"dump_sha256":"$DUMP_SHA256","app_source_commit":"$SOURCE_COMMIT","app_source_sha256":"$SOURCE_SHA256","observed_after_export":{"auth_users":$USERS,"shots":$SHOTS,"verified_coffees":$VERIFIED_COFFEES,"library_entries":$LIBRARY_ENTRIES,"approved_submissions":$APPROVED_SUBMISSIONS},"restore_notice":"Auth and application tables are backed up. Separate external configuration and isolated restore testing remain required."}
+{"format":"dic-age-postgres-v1","project_ref":"$SUPABASE_PROJECT_REF","snapshot_started_at_utc":"$SNAPSHOT_STARTED_AT_UTC","created_utc":"$(date -u +%Y-%m-%dT%H:%M:%SZ)","commit":"$GITHUB_SHA","postgres_client_major":17,"storage_object_count":0,"dump_sha256":"$DUMP_SHA256","app_source_commit":"$SOURCE_COMMIT","app_source_sha256":"$SOURCE_SHA256","observed_after_export":{"auth_users":$USERS,"shots":$SHOTS,"verified_coffees":$VERIFIED_COFFEES,"library_entries":$LIBRARY_ENTRIES,"approved_submissions":$APPROVED_SUBMISSIONS},"restore_notice":"Auth and application tables are backed up. Separate external configuration and isolated restore testing remain required."}
 EOF
 
 tar -czf "$OUT/bundle.tar.gz" -C "$OUT/plain" database.dump manifest.json toc.txt storage-object-count.txt observed-counts.txt app-source.tar.gz
@@ -89,3 +93,4 @@ age --encrypt --recipient "$BACKUP_AGE_RECIPIENT" \
   --output "$OUT/encrypted/backup.age" "$OUT/bundle.tar.gz"
 test -s "$OUT/encrypted/backup.age"
 echo 'Encrypted archive created; no plaintext artifact will be uploaded.'
+

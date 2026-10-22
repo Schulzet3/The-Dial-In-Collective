@@ -9,28 +9,24 @@ if [[ -z "$SUPABASE_DB_URL" || "$SUPABASE_DB_URL" != *"$SUPABASE_PROJECT_REF"* ]
 fi
 OUT="$RUNNER_TEMP/dic-restore-drill-$GITHUB_RUN_ID"
 CONTAINER="dic-restore-$GITHUB_RUN_ID"
+SOURCE_CONTAINER="dic-recovery-source-$GITHUB_RUN_ID"
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 mkdir -p "$OUT"
-cleanup() { docker rm -f "$CONTAINER" >/dev/null 2>&1 || true; rm -rf "$OUT"; }
+cleanup() {
+  docker rm -f "$SOURCE_CONTAINER" "$CONTAINER" >/dev/null 2>&1 || true
+  rm -rf "$OUT"
+}
 trap cleanup EXIT
-docker run --rm --user "$(id -u):$(id -g)" --env SUPABASE_DB_URL \
-  --env PGSSLMODE=require --volume "$OUT:/out" postgres:17-alpine sh -euc '
-  pg_dump --dbname="$SUPABASE_DB_URL" --format=custom \
-    --no-owner --no-privileges --file=/out/database.dump
-  pg_restore --list /out/database.dump > /out/contents.toc
-  psql --no-psqlrc --dbname="$SUPABASE_DB_URL" --tuples-only --no-align \
-    --command="select (select count(*) from auth.users),
-             (select count(*) from auth.identities),
-             (select count(*) from private.beta_members),
-             (select count(*) from private.import_control),
-             (select count(*) from public.account_preferences),
-             (select count(*) from public.coffees),
-             (select count(*) from public.setups),
-             (select count(*) from public.library_entries),
-             (select count(*) from public.shots)" > /out/expected-counts.txt
-'
+# All source evidence is collected from one exported read-only snapshot before
+# the disconnected restore starts. The helper remains inside postgres:17-alpine
+# and never uploads its private files or requires a new credential.
+docker run --rm --name "$SOURCE_CONTAINER" --user "$(id -u):$(id -g)" --env SUPABASE_DB_URL \
+  --env PGSSLMODE=require --volume "$OUT:/out" \
+  --volume "$SCRIPT_DIR:/backup-scripts:ro" postgres:17-alpine \
+  sh /backup-scripts/capture-recovery-snapshot.sh /out
 # Rebuild EVERY first-party public/private table plus the core Auth identity pair.
-# Constraints, RLS and functions are versioned in source migrations and need a
-# separate managed-Supabase configuration check.
+# App constraints, RLS and functions are restored and checked below. Hosted
+# Supabase services and provider configuration remain a separate recovery scope.
 awk '
 /^[0-9]+;/ {
   if ($0 ~ / (TABLE|TABLE DATA) auth (users|identities) / ||
@@ -41,27 +37,7 @@ SOURCE_TABLE_COUNT=$(grep -Ec ' TABLE DATA (public|private) [A-Za-z_0-9]+ ' "$OU
 if [[ "$SOURCE_TABLE_COUNT" -lt 30 ]]; then
   echo "::error::Snapshot unexpectedly contains fewer than 30 first-party tables"; exit 1
 fi
-# Query every first-party table count from the live source. Only table names and
-# counts are retained, never user records or plaintext backup artifacts.
-cat > "$OUT/table-list-query.sql" <<'SQL'
-select format('select %L, count(*) from %I.%I;',
-              schemaname || '.' || tablename, schemaname, tablename)
-from pg_tables
-where schemaname in ('public', 'private')
-order by schemaname, tablename;
-SQL
-docker run --rm --user "$(id -u):$(id -g)" \
-  --env SUPABASE_DB_URL --env PGSSLMODE=require \
-  --volume "$OUT:/out" postgres:17-alpine sh -euc '
-  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
-    --file=/out/table-list-query.sql > /out/table-count-selects.sql
-  printf "%s\n" \
-    "select '\''auth.users'\'', count(*) from auth.users;" \
-    "select '\''auth.identities'\'', count(*) from auth.identities;" \
-    >> /out/table-count-selects.sql
-  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
-    --file=/out/table-count-selects.sql > /out/expected-all-counts.tsv
-'
+# All expected table counts were captured in the dump's source transaction.
 if [[ "$(wc -l < "$OUT/expected-all-counts.tsv")" -ne $((SOURCE_TABLE_COUNT + 2)) ]]; then
   echo "::error::Source table inventory does not match the expected database scope"; exit 1
 fi
@@ -131,9 +107,8 @@ docker exec -u root "$CONTAINER" chmod 644 /tmp/table-count-selects.sql
 docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
   -U postgres -d postgres --tuples-only --no-align \
   --file=/tmp/table-count-selects.sql > "$OUT/restored-all-counts.tsv"
-if ! cmp -s "$OUT/expected-all-counts.tsv" "$OUT/restored-all-counts.tsv"; then
-  echo "::error::At least one restored app/Auth table row count differs from source"; exit 1
-fi
+sh "$SCRIPT_DIR/assert-recovery-inventory.sh" \
+  "$OUT/expected-all-counts.tsv" "$OUT/restored-all-counts.tsv" row-counts
 # FIRST_PARTY_METADATA_RESTORE_CHECK
 # Rebuild app-owned functional schema in the same disposable database. This is
 # distinct from provider-managed Supabase Auth/Storage service restoration.
@@ -181,31 +156,8 @@ docker exec -u postgres "$CONTAINER" pg_restore --exit-on-error \
   -U postgres -d postgres /tmp/database.dump >/dev/null
 
 # Compare all first-party policies, indexes, noninternal triggers and functions
-# and RLS-enabled table counts against the unchanged hosted source. Totals
+# and RLS-enabled table counts against the captured source snapshot. Totals
 # reveal no personal records, descriptions, secret material or user IDs.
-cat > "$OUT/app-schema-inventory.sql" <<'SQL'
-select concat_ws('|',
- (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace
-  where n.nspname in ('public','private') and c.relkind in ('r','p')),
- (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace
-  where n.nspname in ('public','private') and c.relkind in ('r','p') and c.relrowsecurity),
- (select count(*) from pg_policy p join pg_class c on c.oid=p.polrelid
-  join pg_namespace n on n.oid=c.relnamespace where n.nspname in ('public','private')),
- (select count(*) from pg_indexes where schemaname in ('public','private')),
- (select count(*) from pg_trigger t join pg_class c on c.oid=t.tgrelid
-  join pg_namespace n on n.oid=c.relnamespace
-  where n.nspname in ('public','private') and not t.tgisinternal),
- (select count(*) from pg_proc p join pg_namespace n on n.oid=p.pronamespace
-  where n.nspname in ('public','private')),
- (select count(*) from pg_trigger t where t.tgrelid='auth.users'::regclass
-  and t.tgname='dic_auth_user_created' and not t.tgisinternal));
-SQL
-docker run --rm --user "$(id -u):$(id -g)" \
-  --env SUPABASE_DB_URL --env PGSSLMODE=require \
-  --volume "$OUT:/out" postgres:17-alpine sh -euc '
-  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
-    --file=/out/app-schema-inventory.sql > /out/live-app-metadata.txt
-'
 docker cp "$OUT/app-schema-inventory.sql" "$CONTAINER:/tmp/app-schema-inventory.sql" >/dev/null
 docker exec -u root "$CONTAINER" chmod 644 /tmp/app-schema-inventory.sql
 docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres \
@@ -213,37 +165,16 @@ docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d p
 LIVE_METADATA=$(tr -d '[:space:]' < "$OUT/live-app-metadata.txt")
 RESTORED_METADATA=$(tr -d '[:space:]' < "$OUT/restored-app-metadata.txt")
 if [[ "$LIVE_METADATA" != "$RESTORED_METADATA" ]]; then
-  echo "::error::First-party schema metadata mismatch: live=$LIVE_METADATA restored=$RESTORED_METADATA"
+  echo "::error::First-party schema metadata mismatch: snapshot=$LIVE_METADATA restored=$RESTORED_METADATA"
   exit 1
 fi
-echo "PASS: Application RLS, policies, indexes, triggers, functions and signup trigger match the live metadata counts ($LIVE_METADATA)."
+echo "PASS: Application RLS, policies, indexes, triggers, functions and signup trigger match the snapshot metadata counts ($LIVE_METADATA)."
 
 # ROW_FINGERPRINT_CONTENT_RESTORE_CHECK
 # Row counts alone do not establish payload fidelity. Compare canonicalized
 # per-row JSON fingerprints for every public/private table and core Auth pair.
 # Hash files stay in runner-private scratch space and are deleted on exit;
 # neither the private data nor the fingerprints are uploaded or printed.
-cat > "$OUT/row-fingerprint-generator.sql" <<'SQL'
-select format(
-  'select %L, md5(coalesce(string_agg(md5(to_jsonb(t)::text), %L order by md5(to_jsonb(t)::text)), %L)) from %I.%I t;',
-  schemaname || '.' || tablename, '', '', schemaname, tablename)
-from (
- select schemaname,tablename from pg_tables where schemaname in ('public','private')
- union all
- select 'auth'::text, 'users'::text
- union all
- select 'auth'::text, 'identities'::text
-) inventory
-order by schemaname,tablename;
-SQL
-docker run --rm --user "$(id -u):$(id -g)" \
-  --env SUPABASE_DB_URL --env PGSSLMODE=require \
-  --volume "$OUT:/out" postgres:17-alpine sh -euc '
-  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
-    --file=/out/row-fingerprint-generator.sql > /out/table-row-fingerprints.sql
-  psql --no-psqlrc --tuples-only --no-align --dbname="$SUPABASE_DB_URL" \
-    --file=/out/table-row-fingerprints.sql > /out/source-row-fingerprints.tsv
-'
 if [[ "$(wc -l < "$OUT/source-row-fingerprints.tsv")" -ne $((SOURCE_TABLE_COUNT+2)) ]]; then
   echo "::error::Expected every first-party and core Auth table in row fingerprint verification"; exit 1
 fi
@@ -252,10 +183,9 @@ docker exec -u root "$CONTAINER" chmod 644 /tmp/table-row-fingerprints.sql
 docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 -U postgres -d postgres \
   --tuples-only --no-align --file=/tmp/table-row-fingerprints.sql \
   > "$OUT/restored-row-fingerprints.tsv"
-if ! cmp -s "$OUT/source-row-fingerprints.tsv" "$OUT/restored-row-fingerprints.tsv"; then
-  echo "::error::Restored first-party/Auth row content fingerprints disagree with source"; exit 1
-fi
-echo "PASS: All first-party/Auth table row payload fingerprints match live source without exposing user data."
+sh "$SCRIPT_DIR/assert-recovery-inventory.sh" \
+  "$OUT/source-row-fingerprints.tsv" "$OUT/restored-row-fingerprints.tsv" row-fingerprints
+echo "PASS: All first-party/Auth table row payload fingerprints match the source snapshot without exposing user data."
 RESTORED_ARCHIVE_COUNT=$(docker exec -u postgres "$CONTAINER" psql -X -v ON_ERROR_STOP=1 \
   -U postgres -d postgres --tuples-only --no-align \
   --command="select count(*) from private.import_batches")
@@ -280,3 +210,4 @@ echo "PASS: All $RESTORED_TABLE_COUNT first-party application/private tables wer
 echo "PASS: All first-party table row counts and core Auth counts agree with source."
 echo "LIMIT: First-party application schema and core Auth data only; hosted Supabase services, provider-managed settings, and external secrets are not restored."
 echo "INFO: No plaintext uploaded; disposable PostgreSQL and local dump deleted."
+

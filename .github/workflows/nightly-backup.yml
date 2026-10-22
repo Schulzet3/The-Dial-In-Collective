@@ -1,13 +1,13 @@
 name: DIC encrypted database backup
 
-# Nightly encrypted export to private GitHub artifacts. Apps Script forwards ciphertext to Drive.
-# Approved pilot preflight backup: comment-only push triggers one fresh encrypted
-# recovery archive before migrating production; standard nightly behavior unchanged.
-# The Apps Script courier ignores push runs; manually verify a private offsite copy.
+# Run operational backups from the default branch only. Development keeps the
+# same reviewed definition without creating a second backup on each code edit.
+# The private offsite courier ignores push smoke tests; verify their private
+# offsite copy independently before using one as release recovery evidence.
 on:
-  # Smoke-test changes to backup infrastructure; Drive courier ignores push tests.
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - .github/workflows/nightly-backup.yml
       - scripts/backups/create-nightly-encrypted-dump.sh
@@ -24,7 +24,7 @@ concurrency:
 
 jobs:
   backup:
-    # Explicit LTS runner: prevent unreviewed ubuntu-latest migration to 26.04.
+    # Pin OS so the Oct-Nov 2026 ubuntu-latest migration does not change backup behavior.
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
@@ -35,11 +35,11 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - name: Checkout verified published release for independent recovery
+      - name: Checkout verified live cloud app source for independent offsite recovery
         uses: actions/checkout@v7
         with:
-          # Verified current Netlify production READY deploy 6ad7be20bf672d5c8936f19a at 2026-10-20 19:17:09 UTC; PWA refresh, approved Autofill, expanded deterministic product extraction; exact published source.
-          ref: e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60
+          # Update only after independent evidence confirms a newer live deploy.
+          ref: 1e79c4585c49ab517abb912887ee05ed7f4c4c4d
           path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
