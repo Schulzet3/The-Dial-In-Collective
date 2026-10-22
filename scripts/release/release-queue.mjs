@@ -84,6 +84,14 @@ export function assessReleaseQueue(queue,{publishedSourceSha,candidateSha,change
    errors.push(item.id+' READY item has no unpublished deployable changes (possibly already released)');
  return {ready:errors.length===0,errors,deployable_paths:diff,ready_items:ready.map(x=>({id:x.id,issue:x.issue,title:x.title,merged_source_sha:x.merged_source_sha,scope_paths:x.scope_paths})),other_items:(queue?.items||[]).filter(x=>x.state!=='READY'&&x.state!=='DEPLOYED').map(x=>({id:x.id,state:x.state,merged_source_sha:x.merged_source_sha,blockers:x.blockers}))};
 }
+export function assessIntakeCoverage(queue,changedPaths){
+ const errors=queueSchemaErrors(queue);
+ const paths=deployableChangedPaths(changedPaths);
+ for(const path of paths)
+  if(!queue?.items?.some(x=>x.state!=='DEPLOYED'&&x.scope_paths?.includes(path)))
+   errors.push('Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: '+path);
+ return {tracked:errors.length===0,errors,deployable_paths:paths};
+}
 export function formatQueueReport(result){
  return ['## Deployment queue (source-only assessment)','**Batch source ready:** '+(result.ready?'YES':'NO'),
   '**Queued ready changes:** '+result.ready_items.length,
@@ -105,12 +113,16 @@ export function evaluateLocalQueue(){
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{
   const flag=process.argv[2]||'--status';
-  if(!['--status','--validate','--strict'].includes(flag)||process.argv.length>3)throw Error('Usage: release-queue.mjs [--status|--validate|--strict]');
+  if(!['--status','--validate','--strict','--enforce-intake'].includes(flag)||process.argv.length>3)throw Error('Usage: release-queue.mjs [--status|--validate|--strict|--enforce-intake]');
   const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
   const errors=queueSchemaErrors(queue);
   if(errors.length)throw Error(errors.join('; '));
   if(flag==='--validate')console.log('[DIC queue schema] PASS');
-  else{
+  else if(flag==='--enforce-intake'){
+   const result=evaluateLocalQueue(),tracked=assessIntakeCoverage(queue,result.deployable_paths);
+   if(!tracked.tracked)throw Error(tracked.errors.join('; '));
+   console.log('[DIC queue intake] PASS '+tracked.deployable_paths.length+' tracked deployable paths');
+  }else{
    const result=evaluateLocalQueue();console.log(formatQueueReport(result));
    if(flag==='--strict'&&!result.ready)process.exitCode=2;
   }
