@@ -45,7 +45,7 @@ export function renderAdminShotGroups(items,{openCoffeeGroups=new Set()}={}){
   ' shot'+(g.shots.length===1?'':'s')+' on this page</small><span class="admin-chevron" aria-hidden="true">⌄</span></summary>'+
   '<div class="admin-coffee-shots">'+g.shots.map(row=>renderAdminRecord(row,'shots')).join('')+'</div></details>').join('');
 }
-const rowFields=(item,shot,approved)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
+const rowFields=(item,shot)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
  const value=string(item[key]);
  const multiline=['notes','tasting_notes','summary','espressoNotes'].includes(key);
  const maxLength=key==='notes'?16000:8000;
@@ -75,7 +75,7 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
   (item.source_url&&(shot||approved)?'<p class="admin-source">Source: '+e(item.source_url)+'</p>':'')+
   (enabled?'<button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Edit Details</button>':'')+
   (enabled?'<form hidden class="admin-record-editor" data-record-form '+attr('data-id',id)+attr('data-type',type)+
-     attr('data-revision',rev)+'><div class="admin-record-grid">'+rowFields(item,shot,approved)+'</div>'+
+     attr('data-revision',rev)+'><div class="admin-record-grid">'+rowFields(item,shot)+'</div>'+
      (!shot?'<label>Source URL (optional)<input name="source_url" type="url"'+attr('value',item.source_url||'')+'></label>'+
       '<button type="button" class="ghost compact" data-action="extract-coffee-url"'+attr('data-id',id)+'>Autofill Blanks From URL</button>'+
       '<p class="helper">Preview fills only empty inputs; inspect and save changes explicitly. Extraction alone never verifies official evidence.</p>':'')+

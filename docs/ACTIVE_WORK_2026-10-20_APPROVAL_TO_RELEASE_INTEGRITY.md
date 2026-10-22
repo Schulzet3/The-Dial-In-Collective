@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — #52 lint input cleanup before exact final acceptance
+- Latest merge `691c78b34d5c07b0957afecd7d7f4ab3bed46555` has 4/6 check-runs SUCCESS (approval/cloud-tests/mobile-browser-qa/isolated-sql); validate and visual-review were still running their lint stages on last read. New admin canonical editing removed the previous need for the third `rowFields(...,approved)` parameter. The project's pinned ESLint config treats unused parameters as warnings and runs `--max-warnings 0`; proactively remove this unused parameter and its call argument to avoid a wasted lint failure, with zero rendered/runtime behavior change. Journal and source are in SAME commit. Earlier four PASS apply to parent SHA, not automatically to this new SHA; rerun exact code before concluding green.
+- Do not publish; no SQL/data/provider changes.
+
+
 ## October 21 MDT — optimization PR #54 MERGED, exact tested tree independently verified
 - Normal GitHub non-force PR merge at `8e09ecbe12aaeec7129097d6d546ec3baaf7253c` on `development/backend-foundation`, two parents `e392b551` and tested PR head `2268052832a53eb7a75ca52fbcdb9ebb60d3778d`. Independent Git tree readback: both merged and tested tree are byte-identical `d3ed86cb625bbe2dc8332e6c196a0ded90f4f5e9`. No force, no Netlify release.
 - On **one exact tested SHA** all five required GitHub checks SUCCESS: approval `39711524826`, validate `39711525001` (**593/593** Node), cloud-tests + mobile-browser-qa `39711524830` (targeted cloud **299/299**), isolated SQL `39711524828`; extra visual `39711524863` SUCCESS. These GitHub Free private checks are advisory, not enforced branch protection.
