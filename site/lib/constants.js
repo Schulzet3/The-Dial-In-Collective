@@ -1,6 +1,6 @@
 export const APP_VERSION = '0.1.0';
 export const SCHEMA_VERSION = 1;
-export const STYLES = ['Traditional', 'Turbo', 'Ristretto', 'Lungo', 'Custom'];
+export const STYLES = ['Traditional', 'Turbo', 'Fast-Flow', 'Ristretto', 'Lungo', 'Custom'];
 // Owner-Locked seven-tier Title Case scale. Original source records remain literal.
 export const ROASTS = ['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
 export function canonicalRoastLevel(value){
@@ -19,6 +19,7 @@ export const SCALES = [
 export const STYLE_COPY = {
  Traditional: 'Balanced, conventional espresso. Starting targets vary by roast level: roughly 1:1.8-1:2.5 and 22-32 seconds, then adapt to your coffee, setup, successful shots and preferences.',
  Turbo: 'Fast, high-flow espresso with a relatively long ratio and coarser grind. Typical starting territory: 1:2.2-1:3.0 in 12-18 seconds. Targets adapt from there.',
+ 'Fast-Flow': 'SEY-inspired coarse-ground, very fast-flow espresso at a shorter ratio than typical Turbo. Illustrative starting territory is 1:2.35 in 10-16 seconds, adapting to taste and equipment. Not SOUP or Sprover.',
  Ristretto: 'Shorter, more concentrated espresso. Typical starting territory: 1:1.1-1:1.5 in 18-25 seconds, emphasizing texture and intensity. Ratio matters more than exact time.',
  Lungo: 'Longer-ratio espresso. Typical starting territory: 1:2.5-1:3.2 in 28-40 seconds. A more open, less concentrated cup. Ratio matters more than exact time.',
  Custom: 'Set your own starting windows. Style guidelines never decide whether your shot tastes right.'
@@ -28,10 +29,12 @@ export const RATIOS = {
  // Until evidence differentiates their targets, two new light tiers inherit
  // the existing Light priors; no invented precision or shifting old targets.
  Traditional: [2.5,2.5,2.5,2.35,2.0,1.9,1.8], Turbo: [3.0,3.0,3.0,2.8,2.6,2.4,2.2],
+ // A cautious common starting prior; no measured roast-specific Fast-Flow differences yet.
+ 'Fast-Flow': [2.35,2.35,2.35,2.35,2.35,2.35,2.35],
  Ristretto: [1.5,1.5,1.5,1.4,1.3,1.2,1.1], Lungo: [3.2,3.2,3.2,3.0,2.8,2.6,2.5],
  Custom: [2,2,2,2,2,2,2]
 };
-export const TIMES = {Traditional: [[25,32],[22,28]], Turbo:[[12,18],[12,18]], Ristretto:[[20,25],[18,23]], Lungo:[[30,40],[28,36]], Custom:[[25,32],[25,32]]};
+export const TIMES = {Traditional: [[25,32],[22,28]], Turbo:[[12,18],[12,18]], 'Fast-Flow':[[10,16],[10,16]], Ristretto:[[20,25],[18,23]], Lungo:[[30,40],[28,36]], Custom:[[25,32],[25,32]]};
 export const TEMPS = [95,95,95,94,93,91.5,90];
 export const CONFIG = {
   // Prototype tuning values. These are application heuristics, not scientific limits.

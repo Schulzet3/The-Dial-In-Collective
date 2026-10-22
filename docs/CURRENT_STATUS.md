@@ -1,5 +1,13 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — approved Fast-Flow hybrid staged on isolated branch, CI PENDING
+- Owner-approved sixth Fast-Flow style and selective Turbo starting-prior fallback are staged as source candidate on `work/fast-flow-hybrid-20261022` from development `259772b50ca98011a65b3efa9b07a03cda858339`. Exact source behavior and narrow supersession in canonical specification/ledger, new coverage contract, JavaScript + SQL regressions. Existing five styles, user history and original priors untouched. **Source CI, database, browser, real device and production acceptance NOT YET VERIFIED** at this checkpoint.
+- Additive `20261022090000_dic_fast_flow_hybrid_style.sql` **NOT APPLIED** to hosted Supabase; Netlify production independently last observed at `eee687dd4d7fc19493139bc106e63c16849ac91d`, not freshly queried. No release, credits, hosted SQL/Edge/Auth, member data or provider settings touched; no new release authorization.
+- Next: verify source commit/files; execute exact-SHA Node/lint/build, isolated PG 17.11, offline/browser/visual and policy checks, fix failures and nonforce reconcile before any development merge. Production rollout and owner-device signed acceptance separately gated.
+
+
+
+
 ## 2026-10-22 06:29 UTC — GitHub reconciliation complete in source; backup pin ready for scoped approval
 - **Merged and tested:** application [PR #74](https://github.com/Schulzet3/The-Dial-In-Collective/pull/74) at `259772b50ca98011a65b3efa9b07a03cda858339` fixes draft recommendation context, draft-basket dose warnings and invalid-grant reporting. Five PR workflows / six jobs passed on `d38c52751b028bbb0fdd76ba06f2e09d11a0c071`; merge tree is identical. Postmerge app/approval/cloud/mobile/visual checks also passed; PR-only SQL covers that same tree. Operations docs [PR #75](https://github.com/Schulzet3/The-Dial-In-Collective/pull/75) merged at `57d6000085ba3346006a6e479c6be0133de6d3f4` with green pre/postmerge inert acceptance. No new app release or provider write occurred.
 - **Backlog reconciled:** 11 open issues now state current scope (#9/#18/#19/#28/#30/#36/#43/#44/#47/#50/#52), preserving every original body. #23 closed as a duplicate only after all criteria were transferred and verified in open #43/#47; high-signal real-conflict quality and signed-in record/paging/privacy acceptance remain UNVERIFIED. Superseded #51/#68 PRs are closed unmerged; #72 remains deferred. Supplied JSX is recovered; nine original research bodies/workshop/full transcript gaps remain.
