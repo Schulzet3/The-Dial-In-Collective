@@ -4,6 +4,7 @@ import * as E from '../lib/engine.js';
 import * as U from '../lib/ui.js';
 import {CloudError,createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT,isAccessDenied} from './client.js';
 import {IndexedStore,Outbox} from './outbox.js';
+import {basketDoseAdvisory} from './dose-advisory.js';
 import {hydrate,applyPending,shotPayload} from './mapping.js';
 import {CLOUD_CONFIG} from './config.js';
 import {emailConfirmationView} from './confirmation.js';
@@ -29,6 +30,7 @@ class CloudApp {
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   this.deniedOfflineOwners=new Set();
+  this.dismissedDoseAdvisories=new Set();
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
  }
  async inSession(operation){
@@ -40,6 +42,7 @@ class CloudApp {
  resetAccount(){
   this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
+  this.dismissedDoseAdvisories.clear();
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
@@ -480,7 +483,22 @@ class CloudApp {
  showLog(cid,editing=null,styleOverride=null){
   const c=this.state.coffees.find(c=>c.id===cid),v=M.activeVersion(this.state);this.logCoffee=cid;this.editing=editing;
   this.draft=editing?C.clone(editing):E.prefill(this.state,cid,styleOverride?{style:styleOverride}:{});this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
-  const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1'})}${!editing?button('Use Recommendation','use-temp','','use-recommendation'):''}</div>`:''}</div>${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><p class=helper role=alert></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
+  const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1'})}${!editing?button('Use Recommendation','use-temp','','use-recommendation'):''}</div>`:''}</div>${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><aside id="shot-dose-advisory" class="helper" role="status" hidden><span data-dose-message></span> <button type="button" class="ghost compact" data-action="dismiss-dose-advisory">Dismiss</button></aside><p class=helper role=alert></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
+  this.updateDoseAdvisory();
+ }
+ updateDoseAdvisory(){
+  const panel=sheet.querySelector?.('#shot-dose-advisory');
+  if(!panel)return;
+  const d=this.draft;
+  if(!d||this.editing||this.dismissedDoseAdvisories.has(d.id)){panel.hidden=true;return;}
+  const version=M.activeVersion(this.state),coffee=M.coffeeState(this.state,this.logCoffee);
+  const basketId=d.basketId||coffee?.basketId||version?.defaultBasketId;
+  const reference=version?.baskets?.find(b=>b.id===basketId)?.doseG;
+  const current=sheet.querySelector?.('#shot')?.elements?.doseG?.value??d.doseG;
+  const message=basketDoseAdvisory(current,reference);
+  panel.hidden=!message;
+  const label=panel.querySelector?.('[data-dose-message]');
+  if(label)label.textContent=message||'';
  }
  readDraft(){const f=sheet.querySelector('#shot');if(!f)return;for(const key of ['doseG','yieldG','timeS','grindSetting'])this.draft[key]=f.elements[key].value;this.draft.notes=f.elements.notes.value;
   // The displayed unit is rounded for readability. A notes/rating edit must
@@ -489,6 +507,7 @@ class CloudApp {
   if(f.elements.slowFeed)this.draft.feedMode=f.elements.slowFeed.checked?'slow':'standard';}
  async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
   try{
+   if(a==='dismiss-dose-advisory'){if(this.draft?.id)this.dismissedDoseAdvisories.add(this.draft.id);const panel=sheet.querySelector?.('#shot-dose-advisory');if(panel)panel.hidden=true;return;}
    if(a==='close'){sheet.close();return;}
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
@@ -638,10 +657,10 @@ class CloudApp {
    if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
    if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
    if(a==='export'){exportFile(await this.inSession(()=>this.store.export(this.identity.id)));return;}
-   if(a==='signout'){if((await this.inSession(()=>this.queue.pending())).length)throw new Error('Changes are waiting to sync. Open Cloud Sync Details to save pending changes and finish syncing before signing out.');const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
+   if(a==='signout'){const queued=await this.inSession(()=>this.queue.pending());if(queued.length&&!globalThis.confirm?.('You have '+queued.length+' unsynced change(s). They remain saved on this device for this account and will sync only after you sign in to the same account again. Sign out anyway?'))return;const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
   }catch(err){this.error(err);}
  }
- input(ev){if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+ input(ev){if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
  change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.render();}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
@@ -684,22 +703,9 @@ class CloudApp {
    else if(id==='style'){await this.mutate('set_style',{setup_id:M.activeSetup(this.state).id,setup_version_id:M.activeVersion(this.state).id,library_entry_id:this.styleCoffee,style:d.style,expected_revision:this.styleRevision},{onlineOnly:true});sheet.close();}
    else if(id==='shot'){
     this.readDraft();const d=this.draft,validation=M.validateShot(d);if(validation.length)throw new Error(validation.join(' '));
-    // Only an actual +/-1 g basket-dose deviation needs an extra decision.
-    // On edit use the original shot's basket snapshot; do not silently compare
-    // historic shots against a newly selected or reconfigured basket.
-    const version=M.activeVersion(this.state);
-    const coffeeState=M.coffeeState(this.state,this.logCoffee);
-    const basketId=this.editing?.basketId||d.basketId||coffeeState?.basketId||version?.defaultBasketId;
-    const basket=this.editing?null:version?.baskets?.find(b=>b.id===basketId);
-    const referenceDose=this.editing?.snapshot?.basketDoseG??basket?.doseG;
-    const actualDose=Number(d.doseG);
-    if(Number.isFinite(Number(referenceDose))&&Number(referenceDose)>0&&
-       Number.isFinite(actualDose)&&Math.abs(actualDose-Number(referenceDose))>1){
-     const warning=`Dose ${actualDose.toFixed(1)} g is more than 1 g from this basket's ${Number(referenceDose).toFixed(1)} g reference. This is allowed; confirm to ${this.editing?'save the edited':'log the'} shot.`;
-     if(!globalThis.confirm?.(warning))return;
-    }
+    // New-shot basket variance is a nonblocking advisory. Existing edits never rewarn.
     let payload;if(this.editing){payload={id:d.id,expected_revision:this.editing.revision,dose_g:Number(d.doseG),yield_g:Number(d.yieldG),time_s:Number(d.timeS),grind_setting:Number(d.grindSetting),temperature_c:C.num(d.tempC),taste:d.tasteScales,notes:d.notes};}else payload=shotPayload(this.state,this.logCoffee,d);
-    await this.mutate('save_shot',payload);this.firstStylePromptId=null;this.expanded=new Set([this.logCoffee]);this.tempCoffee=null;this.justSavedId=d.id;sheet.close();this.notice=this.pending.length?'Saved on this device; waiting to sync.':'Shot saved to your cloud account.';this.render();
+    await this.mutate('save_shot',payload);this.dismissedDoseAdvisories.delete(d.id);this.firstStylePromptId=null;this.expanded=new Set([this.logCoffee]);this.tempCoffee=null;this.justSavedId=d.id;sheet.close();this.notice=this.pending.length?'Saved on this device; waiting to sync.':'Shot saved to your cloud account.';this.render();
    }
   }catch(err){this.error(err);}finally{this.busy=false;form.querySelectorAll('button').forEach(b=>b.disabled=false);}
  }
