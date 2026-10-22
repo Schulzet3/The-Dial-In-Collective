@@ -131,7 +131,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   return sh.coffeeId!==c.id&&rank>=0&&other>=0&&Math.abs(other-rank)===1&&(rank<2||other<2);
  });
  if(nearby.length)return {value:round(quantile(nearby.map(sh=>sh.grindSetting),.5)),source:'Nearby light-roast reference, unproven on this coffee',proven:false};
- return {value:round(v.grinderMin+(v.grinderMax-v.grinderMin)*(style==='Turbo'?.75:.5)),source:'Espresso range starting estimate',proven:false};
+ return {value:round(v.grinderMin+(v.grinderMax-v.grinderMin)*(['Turbo','Fast-Flow'].includes(style)?.75:.5)),source:'Espresso range starting estimate',proven:false};
 }
 export function learnSensitivity(shots) {
  const groups=new Map();
@@ -237,9 +237,26 @@ export function recommendation(s,coffeeId,options={}) {
    equipmentTier:familyChoice.tier,reason:familyChoice.reason};
   rec.reasons=familyChoice.reason?[familyChoice.reason]:local.length?[]:
    ['Your successful ratio from another setup; time and grind remain starting estimates.'];
+ } else if(style==='Fast-Flow') {
+  // Only closely compatible Turbo success can weakly inform the STARTING ratio.
+  // Never import its measured time, grind, family, confirmation or shot count.
+  const turbo=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.style==='Turbo'&&
+   sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.basketId===basket.id&&
+   sh.feedMode===feed&&finite(sh.doseG)&&sh.doseG>0&&finite(sh.yieldG)&&
+   finite(sh.timeS)&&sh.timeS>=8&&sh.timeS<=20&&
+   sh.yieldG/sh.doseG>=1.8&&sh.yieldG/sh.doseG<=3.2);
+  if(turbo.length){
+   const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);
+   const residual=mean(turbo.map(sh=>sh.yieldG/sh.doseG-RATIOS.Turbo[r]));
+   const bias=clamp(residual*.2,-.12,.12);
+   for(const k of ['low','center','high'])rec.ratio[k]=round(rec.ratio[k]+bias,2);
+   rec.source='Unproven Fast-Flow starting estimate';
+   rec.turboFallback={style:'Turbo',compatibleShots:turbo.length,ratioOnly:true};
+   rec.reasons.unshift('Cautious ratio-only reference from '+turbo.length+' compatible Turbo shot'+(turbo.length===1?'':'s')+'; Fast-Flow time, grind and success remain independent.');
+  }
  } else if(style!=='Custom') {
-  // Weak cross-style ratio residual only: no copied time or grind numbers.
-  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&RATIOS[sh.style]);
+  // Weak residual only from other established styles; never merge Fast-Flow into Turbo.
+  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&RATIOS[sh.style]);
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);

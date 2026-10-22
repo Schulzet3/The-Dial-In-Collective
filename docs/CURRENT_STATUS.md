@@ -1,5 +1,11 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — approved Fast-Flow hybrid staged on isolated branch, CI PENDING
+- Owner-approved sixth Fast-Flow style and selective Turbo starting-prior fallback are staged as source candidate on `work/fast-flow-hybrid-20261022` from development `259772b50ca98011a65b3efa9b07a03cda858339`. Exact source behavior and narrow supersession in canonical specification/ledger, new coverage contract, JavaScript + SQL regressions. Existing five styles, user history and original priors untouched. **Source CI, database, browser, real device and production acceptance NOT YET VERIFIED** at this checkpoint.
+- Additive `20261022090000_dic_fast_flow_hybrid_style.sql` **NOT APPLIED** to hosted Supabase; Netlify production independently last observed at `eee687dd4d7fc19493139bc106e63c16849ac91d`, not freshly queried. No release, credits, hosted SQL/Edge/Auth, member data or provider settings touched; no new release authorization.
+- Next: verify source commit/files; execute exact-SHA Node/lint/build, isolated PG 17.11, offline/browser/visual and policy checks, fix failures and nonforce reconcile before any development merge. Production rollout and owner-device signed acceptance separately gated.
+
+
 ## October 22 MDT — current GitHub reconciliation candidate, source CI pending
 - Issue #73 repairs draft recommendation context, dose-warning basket selection and source-dossier grant reporting; canonical PR #68 proportional-controls policy and owner-deferred PR #72 retirement are reconciled. Integrated exact-source CI/merge are pending; no production feature is newly deployed.
 - Current Netlify READY remains `6ad968689f42fbe8e871e151` / `eee687dd4d7fc19493139bc106e63c16849ac91d` ; 35 Supabase migrations applied. First-expansion/admin refinements still need a separately authorized release. No fresh release grant exists.

@@ -26,6 +26,7 @@
     "current_owner_expedited_two_migrations_and_production_20261021",
     "current_owner_extractor_deterministic_only_20261019",
     "current_owner_first_expansion_starting_style_20261021",
+    "current_owner_fast_flow_hybrid_20261022",
     "current_owner_github_continuity",
     "current_owner_github_free_private_no_upgrade_20261020",
     "current_owner_grinder_range_info_20261019",
@@ -57,6 +58,36 @@
     "chat_controller_native_last_push": "SUCCESS_39706556610"
   },
   "contracts": [
+    {
+      "id": "fast_flow_sixth_style_hybrid",
+      "decision_key": "current_owner_fast_flow_hybrid_20261022",
+      "scope": "Sixth selectable style; independent family and guarded ratio-only Turbo fallback",
+      "implementation": "SOURCE_CANDIDATE_PENDING_CI",
+      "device_acceptance": "NOT_VERIFIED",
+      "issue": 31,
+      "assertions": [
+        {
+          "path": "site/lib/constants.js",
+          "contains": "'Fast-Flow': [2.35,2.35"
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "rec.turboFallback={style:'Turbo'"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "C.STYLES.filter(style=>style!=='Custom')"
+        },
+        {
+          "path": "supabase/migrations/20261022090000_dic_fast_flow_hybrid_style.sql",
+          "contains": "workspace_coffees_selected_style_check"
+        },
+        {
+          "path": "tests/fast-flow-hybrid.test.mjs",
+          "contains": "compatible Turbo fallback adjusts only the unproven Fast-Flow ratio"
+        }
+      ]
+    },
     {
       "id": "grinder_range_new_setup",
       "decision_key": "current_owner_grinder_range_info_20261019",
