@@ -32,7 +32,7 @@ test('Community page renders server-sanitized counts and measurements with progr
  assert.match(html,/aria-label="Filter Community shots by style"/);
  assert.doesNotMatch(html,/owner_id|contributor_id|shot_id|PRIVATE:/);
  const filtered=communityPage({shots:[row],total:1,style:'Traditional'});
- assert.match(filtered,/No loaded shots match these filters/);
+ assert.match(filtered,/No loaded shots match this coffee/);
  assert.doesNotMatch(filtered,/<article class="community-card"/);
 });
 
@@ -79,11 +79,15 @@ test('Supabase adapter uses narrow RPC names without raw account identity payloa
  assert.deepEqual(await client.editCoffeeDetails('coffee-lib',3,{name:'Coffee',roaster:'Roaster'},'https://roaster.invalid/coffee'),{ok:true,kind:'updated_pending'});
  const browse=await client.browseCommunityShots({limit:20,offset:0});
  assert.equal(browse.total,1);
+ const found=await client.searchCommunityShots({query:'Yirgacheffe',style:'Turbo',limit:20,offset:20});
+ assert.equal(found.total,1);
+ await assert.rejects(()=>client.searchCommunityShots({query:'x'.repeat(81)}),/Invalid Community search/);
  assert.deepEqual(calls,[
   ['dic_my_community_outliers',undefined],
   ['dic_confirm_community_outlier',{p_shot_id:'abc',p_expected_revision:7}],
   ['dic_edit_my_coffee',{p_library_entry:'coffee-lib',p_expected_revision:3,p_details:{name:'Coffee',roaster:'Roaster'},p_source_url:'https://roaster.invalid/coffee'}],
-  ['dic_browse_community_shots',{p_limit:20,p_offset:0}]
+  ['dic_browse_community_shots',{p_limit:20,p_offset:0}],
+  ['dic_search_community_shots',{p_query:'Yirgacheffe',p_style:'Turbo',p_limit:20,p_offset:20}]
  ]);
  client.dispose();
 });
@@ -220,4 +224,18 @@ test('release sections honor style/coffee filtering, pagination and independent 
  assert.match(html,/3 shots loaded/);
  assert.match(html,/1 shot loaded/);
  assert.doesNotMatch(html,/SECRET-OWNER|SECRET-NOTE|SECRET-PERSON|private_notes|contributor_id/);
+});
+
+test('Community search UI escapes input and shows a meaningful filtered-empty state',()=>{
+ const html=communityPage({shots:[],total:0,search:'<script>alert(1)</script>',style:'Turbo'});
+ assert.match(html,/id="community-search"/);
+ assert.match(html,/aria-label="Search Community coffees and roasters"/);
+ assert.match(html,/&lt;script&gt;/);
+ assert.doesNotMatch(html,/<script>/);
+ assert.match(html,/No matching Community shots/);
+ assert.match(html,/community-search-clear/);
+ assert.match(html,/option value="Turbo" selected/);
+ const historic=communityPage({shots:[row],total:20,search:'roaster'});
+ assert.match(historic,/Load More Shots/);
+ assert.match(historic,/Showing 1 of 20 qualifying shots/);
 });

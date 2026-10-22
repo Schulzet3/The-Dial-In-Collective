@@ -174,3 +174,11 @@ dialog{color:var(--ink);background:var(--surface);border:1px solid var(--line);p
  .community-required-review .community-review-prompt{padding:17px 14px}
  .community-required-review .community-review-text h3{font-size:18px}
 }
+
+/* A calm, accessible manual search, not a per-keystroke network request. */
+.community-search-form{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:end;gap:8px;margin:16px 0 4px}
+.community-search-form label{grid-column:1/-1;font-weight:650;font-size:13px}
+.community-search-form input{min-width:0;min-height:44px;width:100%;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:10px 12px;font:inherit}
+.community-search-form button{min-height:44px}
+.community-search-form input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media(max-width:440px){.community-search-form{grid-template-columns:minmax(0,1fr) auto}.community-search-form input{grid-column:1/-1}}
