@@ -50,19 +50,19 @@
     "current_owner_universal_deployment_consent_20261021"
   ],
   "production": {
-    "netlify_deploy_id": "6ad968689f42fbe8e871e151",
-    "exact_source_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
-    "owner_approval_for_new_release": "DIC-20261022-FASTFLOW-ADMIN-03_APPROVED_ONE_USE_PENDING_RELEASE",
-    "tested_application_source_sha": "7df3deb4a271a6eb041c125574cd15ec455f6128",
-    "owner_device_acceptance": "NOT_YET_VERIFIED_NEW_EXTRACTOR_ADMIN",
-    "chat_controller_native_last_push": "SUCCESS_39706556610",
+    "netlify_deploy_id": "6ada3b5018ccdd080d3b4584",
+    "exact_source_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+    "owner_approval_for_new_release": "DIC-20261022-FASTFLOW-ADMIN-03_CONSUMED; future publication requires NEW distinct owner authorization",
+    "tested_application_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
+    "owner_device_acceptance": "PENDING_REAL_SIGNED_OWNER_DEVICE_FOR_FASTFLOW_ADMIN_FIRST_STYLE",
+    "chat_controller_native_last_push": "GITHUB_RELEASE_REF_CLAIM_VERIFIED_RUN_39815256276_COMPLETION_QUEUED_ON_LAST_READBACK",
     "pending_release": {
       "id": "DIC-20261022-FASTFLOW-ADMIN-03",
       "tested_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
       "approved_at_utc": "2026-10-22T15:54:00Z",
       "scope_receipt": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/44#issuecomment-6343761450",
       "owner_approval_receipt": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/44#issuecomment-6344707918",
-      "stage": "APPROVED_SOURCE_TESTED_NOT_DEPLOYED",
+      "stage": "DEPLOYED_READY_OWNER_DEVICE_ACCEPTANCE_PENDING",
       "expected_applied_sql_versions": [
         "20261022023000",
         "20261022024000",
@@ -70,8 +70,30 @@
         "20261022090000"
       ],
       "excluded": "owner deferred PR72 and all unready/unapproved roadmap work",
-      "source_ci": "6 of 6 green 39736577832/39736577933/39736577745/39736578142(2)/39736577911",
-      "one_use": true
+      "source_ci": "SIX_OF_SIX_PASS_EXACT_SOURCE; POSTFLIGHT_READY_PROVIDER_CONFIRMED",
+      "one_use": true,
+      "actual_migration_versions": [
+        {
+          "name": "dic_admin_shot_coffee_group_identity",
+          "version": "20261022162910"
+        },
+        {
+          "name": "dic_admin_fast_review_and_identity_edits",
+          "version": "20261022162954"
+        },
+        {
+          "name": "dic_first_coffee_style_prompt",
+          "version": "20261022163029"
+        },
+        {
+          "name": "dic_fast_flow_hybrid_style",
+          "version": "20261022163126"
+        }
+      ],
+      "actual_production_git_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+      "netlify_deploy_id": "6ada3b5018ccdd080d3b4584",
+      "claim_consumed_once": true,
+      "owner_device_acceptance": "PENDING"
     }
   },
   "contracts": [
@@ -79,8 +101,8 @@
       "id": "fast_flow_sixth_style_hybrid",
       "decision_key": "current_owner_fast_flow_hybrid_20261022",
       "scope": "Sixth selectable style; independent family and guarded ratio-only Turbo fallback",
-      "implementation": "DEVELOPMENT_MERGED_SOURCE_TESTED_6_OF_6_NOT_DEPLOYED",
-      "device_acceptance": "NOT_YET_VERIFIED",
+      "implementation": "PUBLISHED_NETLIFY_READY_6ada3b5018ccdd080d3b4584_RELEASE_fe2eee66717b13b9c9d203d1728bfc863961732e; exact source CI passed, SQL only where applicable",
+      "device_acceptance": "PENDING_SIGNED_OWNER_DEVICE_POST_RELEASE",
       "issue": 31,
       "assertions": [
         {
@@ -387,7 +409,7 @@
       "id": "admin_approvable_record_explorer",
       "decision_key": "current_owner_admin_records_edit_20261021",
       "scope": "Admin portal only; no member/public pages, no live SQL",
-      "implementation": "DEV implemented including all Pending/Conflict page-2 review controls, full historical invitation metadata paging, scoped audited edits, and existing admission tools; JS/Chromium/SQL checks PASS. New RPC and worker-auth migration NOT hosted-applied; no frontend published.",
+      "implementation": "Admin foundation previously deployed; current approved collapsible/grouped/direct-save enhancements deployed with source c272d778768728bbf75f829477d6331b33b7322a in Netlify READY 6ada3b5018ccdd080d3b4584; hosted related SQL 20261022162910 and 20261022162954 applied; existing admin audit/permissions retained",
       "device_acceptance": "NOT VERIFIED: current signed-in operator/member real device, UI keyboard/VoiceOver, post-deploy permissions/functional acceptance, consent receipts.",
       "assertions": [
         {
@@ -420,8 +442,8 @@
       "id": "hide_shot_personal_control_withdrawn",
       "decision_key": "current_owner_remove_hide_shot_control_20261021",
       "scope": "Owner explicitly removes Hide Shot user control from all member shot history; leaves existing historical data and server compatibility alone.",
-      "implementation": "DEVELOPMENT_MERGED_EXACT_TESTED_TREE_6_OF_6_SUCCESS_PR65",
-      "device_acceptance": "PENDING_REAL_SIGNED_OWNER_DEVICE_AFTER_SEPARATELY_AUTHORIZED_RELEASE",
+      "implementation": "PUBLISHED_NETLIFY_READY_6ada3b5018ccdd080d3b4584_RELEASE_fe2eee66717b13b9c9d203d1728bfc863961732e; exact source CI passed, SQL only where applicable",
+      "device_acceptance": "PENDING_SIGNED_OWNER_DEVICE_POST_RELEASE",
       "issue": 20,
       "assertions": [
         {
@@ -523,7 +545,7 @@
       },
       "decision_key": "current_owner_first_expansion_starting_style_20261021",
       "scope": "First intentional expansion before any shot, never Add Coffee",
-      "implementation": "SOURCE_MERGED_EXACT_TESTED_6_OF_6_NOT_DEPLOYED",
+      "implementation": "PUBLISHED_NETLIFY_READY_6ada3b5018ccdd080d3b4584_RELEASE_fe2eee66717b13b9c9d203d1728bfc863961732e; exact source CI passed, SQL only where applicable",
       "exact_tested_sha": "0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2",
       "merged_sha": "83d289eef8c26b57329f3ef71bfae3fc018d53cd",
       "tree_sha": "c0ad5b7d364fde83e93820199cc39b8ac0659cb9",
@@ -536,7 +558,7 @@
       },
       "hosted_sql_applied": false,
       "site_published": false,
-      "device_acceptance": "PENDING_POST_RELEASE_REAL_ACCOUNT_AND_DEVICE",
+      "device_acceptance": "PENDING_SIGNED_OWNER_DEVICE_POST_RELEASE",
       "issue": 19,
       "assertions": [
         {
@@ -732,5 +754,6 @@
     "candidate_migration_applied": false,
     "future_authority": "Renewed scoped review/authorization required",
     "source": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/72#issuecomment-6333843360"
-  }
+  },
+  "production_deployment_receipt": "docs/PRODUCTION_RELEASE_2026-10-22_FASTFLOW_ADMIN_VERIFIED.json"
 }
