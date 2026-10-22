@@ -3,6 +3,7 @@
 import {execFileSync} from 'node:child_process';
 import {appendFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
+import {resolve} from 'node:path';
 const SHA=/^[a-f0-9]{40}$/;
 export function docsOnlyPaths(paths){
  return Array.isArray(paths)&&paths.length>0&&paths.every(path=>
@@ -19,7 +20,7 @@ export function classifyChanges({base,head,event,git=execFileSync}={}){
   return {docs_only:docsOnlyPaths(paths),reason:docsOnlyPaths(paths)?'DOCUMENTATION_ONLY':'SOURCE_OR_UNKNOWN',paths};
  }catch{return {docs_only:false,reason:'GIT_DIFF_UNAVAILABLE',paths:[]};}
 }
-if(process.argv[1]&&fileURLToPath(import.meta.url)===process.argv[1]){
+if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
  const out=classifyChanges({base:process.env.DIC_CI_BASE,head:process.env.DIC_CI_HEAD,event:process.env.DIC_CI_EVENT});
  if(process.env.GITHUB_OUTPUT)appendFileSync(process.env.GITHUB_OUTPUT,'docs_only='+out.docs_only+'\n');
  console.log('[DIC CI scope] '+JSON.stringify({docs_only:out.docs_only,reason:out.reason,count:out.paths.length}));
