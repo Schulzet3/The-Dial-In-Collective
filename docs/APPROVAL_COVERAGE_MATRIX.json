@@ -429,6 +429,39 @@
     },
     {
       "id": "first_coffee_expansion_one_time_style",
+      "draft_context_followup": {
+        "issue": 73,
+        "pull_request": 74,
+        "status": "SOURCE_MERGED_EXACT_SHA_CI_SUCCESS_NOT_DEPLOYED_NOT_ACCEPTED",
+        "exact_tested_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+        "merged_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "tree_sha": "a7d84671e81ae3af0de90c4198eda36bd794d0c0",
+        "ci_runs": {
+          "approval": 39732735076,
+          "validate": 39732735077,
+          "cloud_and_mobile": 39732735160,
+          "sql": 39732735118,
+          "visual": 39732735154
+        },
+        "postmerge_ci_runs": {
+          "approval": 39733019368,
+          "validate": 39733019280,
+          "cloud_and_mobile": 39733019319,
+          "visual": 39733019338
+        },
+        "sql_evidence": "PR-only run39732735118 passed on the identical tested/merged Git tree; no postmerge SQL run claimed.",
+        "regression_file": "tests/cloud-draft-recommendation-context.test.mjs",
+        "regressions": {
+          "passing_after_repair": 7,
+          "failing_before_repairs": 6,
+          "historical_edit_snapshot_guard_passed_before_and_after": true
+        },
+        "scope": "Use Recommendation and Slow Feed preserve draft style/basket/feed. New-shot dose warning uses the draft basket; edits keep historical dose snapshot and strict >1 g confirmation threshold.",
+        "site_published": false,
+        "hosted_sql_applied_by_followup": false,
+        "device_acceptance": "PENDING_AFTER_SEPARATELY_AUTHORIZED_RELEASE",
+        "receipt": "docs/audits/2026-10-22-github-reconciliation-receipt.json"
+      },
       "decision_key": "current_owner_first_expansion_starting_style_20261021",
       "scope": "First intentional expansion before any shot, never Add Coffee",
       "implementation": "SOURCE_MERGED_EXACT_TESTED_6_OF_6_NOT_DEPLOYED",
@@ -522,7 +555,7 @@
     {
       "id": "github_free_private_no_paid_upgrade",
       "status": "LOCKED_POLICY_WITH_RESIDUAL_RISK",
-      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; advisory CI, exact source readback, same-commit journal and single-use non-force release claim are compensating controls. Release cutover and one consumed claim are verified, with native Actions push transport and direct-writer/provider bypass risks still open.",
+      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; advisory CI, exact source readback, same-commit journal and single-use non-force release claim are compensating controls. Native Actions final push is verified SUCCESS for run 39706556610 and consumed release eee687dd4d7fc19493139bc106e63c16849ac91d; #44 retains unknown actual postrelease debit/account/device evidence. Direct-writer/provider bypass risk remains open in #38.",
       "issue": 38
     }
   ],
@@ -570,7 +603,39 @@
       "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
       "exact_tested_sha": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
       "merged_sha": "31f5b7ebabf31a09c69a58860292f626f491dc34",
-      "draft_basket_followup": "Issue73 source-only regression repair; exact integrated CI pending"
+      "draft_basket_followup": {
+        "issue": 73,
+        "pull_request": 74,
+        "status": "SOURCE_MERGED_EXACT_SHA_CI_SUCCESS_NOT_DEPLOYED_NOT_ACCEPTED",
+        "exact_tested_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
+        "merged_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
+        "tree_sha": "a7d84671e81ae3af0de90c4198eda36bd794d0c0",
+        "ci_runs": {
+          "approval": 39732735076,
+          "validate": 39732735077,
+          "cloud_and_mobile": 39732735160,
+          "sql": 39732735118,
+          "visual": 39732735154
+        },
+        "postmerge_ci_runs": {
+          "approval": 39733019368,
+          "validate": 39733019280,
+          "cloud_and_mobile": 39733019319,
+          "visual": 39733019338
+        },
+        "sql_evidence": "PR-only run39732735118 passed on the identical tested/merged Git tree; no postmerge SQL run claimed.",
+        "regression_file": "tests/cloud-draft-recommendation-context.test.mjs",
+        "regressions": {
+          "passing_after_repair": 7,
+          "failing_before_repairs": 6,
+          "historical_edit_snapshot_guard_passed_before_and_after": true
+        },
+        "scope": "Use Recommendation and Slow Feed preserve draft style/basket/feed. New-shot dose warning uses the draft basket; edits keep historical dose snapshot and strict >1 g confirmation threshold.",
+        "site_published": false,
+        "hosted_sql_applied_by_followup": false,
+        "device_acceptance": "PENDING_AFTER_SEPARATELY_AUTHORIZED_RELEASE",
+        "receipt": "docs/audits/2026-10-22-github-reconciliation-receipt.json"
+      }
     }
   },
   "current_owner_admin_one_click_resolution_and_dose_warning_20261021": {
