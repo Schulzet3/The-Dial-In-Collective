@@ -1,5 +1,11 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## 2026-10-22T01:35Z — ONE guarded release ref CLAIMED; Netlify READY not yet verified
+- Current owner-authorized grant `DIC-20261021-ALL-PENDING-02`, exact 5-check tested source `7df3deb4a271a6eb041c125574cd15ec455f6128`, requested once on ops `main` two-path request commit `69b0c266b06c8feec719474188ec0a2c1a05910f`. Controller Actions run **39706556610 SUCCESS**, unlike prior native final-push failure.
+- Independent `release/production` ref **`eee687dd4d7fc19493139bc106e63c16849ac91d`** (parent previous live release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`), claim receipt exact tested source and one-use consumption ledger verified in released commit. No second grant or second release request. Both approved production migrations and Edge JWT v5 remain live; original 22 shots/22 notes/4 coffees/7 submissions/5 members retained.
+- **Netlify most recent independent site readback at 2026-10-22T01:35:53Z still shows prior READY/current `6ad92fd1d706315f29032892`.** A GitHub release ref success is NOT proof of publication. Next: check actual Netlify production deployment state until it becomes READY/current at exactly `eee687dd...`; then perform scoped live read-only smoke and postflight journal/status. Do not issue another release request or build.
+
+
 ## October 21 evening MDT — approved backend deployment VERIFIED, frontend release still pending
 - One-use new owner grant `DIC-20261021-ALL-PENDING-02` bound to exact 5/5-green functional SHA `7df3deb4a271a6eb041c125574cd15ec455f6128`. Full protected SQL/Edge scope approved under new Locked universal policy.
 - Production Supabase source-worker migration `dic_source_worker_auth_and_admission` applied successfully, remote version `20261022013337`. Second `dic_admin_content_review` applied successfully **in order**, remote version `20261022013349`. Applied migration history independently read back to **34 migrations**. Live read-only record counts unchanged: **22 shots/22 notes, 4 canonical coffees, 7 submissions, 5 beta members**. `private.admin_content_edits` and `public.dic_admin_records` / `public.dic_trusted_source_verify` are present. No original member record changed by these schema migrations.
