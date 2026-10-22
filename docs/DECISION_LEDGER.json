@@ -2182,6 +2182,15 @@
       "decision": "Five-stage automated release; single release-specific owner approval; readiness report; risk-based CI and Sunday 08:00 UTC comprehensive tests; daily encrypted backup 08:00 UTC; automatic supplemental backup only for potentially destructive database operations without repeat owner prompt; owner-device acceptance no longer a deployment completion gate, including previous deployments.",
       "supersedes": "Fresh encrypted backup for every non-destructive release; Full costly regression on every harmless change when targeted evidence suffices; Required owner-device signoff to mark verified production delivery complete",
       "approval": "Owner 2026-10-22 direct approval, GitHub Issue #44 comment 6346939887"
+    },
+    {
+      "id": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
+      "status": "Locked",
+      "date": "2026-10-22",
+      "title": "Autonomous finish-test-queue and batched release default",
+      "decision": "Finish every approved request to independently source-verified tested merged readiness, automatically maintain durable GitHub release queue, accumulate multiple READY items until one release approval for exact tested batch.",
+      "supersedes": "Stop after merely proposed, partial or unmerged implementation when task was already approved; Request repeat owner permission for ordinary testing and release-queue intake of approved changes; No durable unified queue across chats",
+      "approval": "Direct owner instruction 2026-10-22, Issue #70 comment 6347498805"
     }
   ],
   "open_current_owner_decisions": [],
@@ -3972,5 +3981,26 @@
     "schedule": "Fixed MST: 01:00 MST = 08:00 UTC; during MDT clock shows 02:00; Sunday comprehensive run.",
     "implementation_status": "PARTIALLY_IMPLEMENTED pending verification of main backup schedule and auto pre-destructive backup/release report",
     "no_release_approval": true
+  },
+  "current_owner_autonomous_build_test_queue_20261022": {
+    "decision_id": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
+    "status": "Locked",
+    "owner_source": "Direct owner instruction 2026-10-22, Issue #70 comment 6347498805",
+    "approval": "Autonomously develop, test, merge and queue approved build/change requests; no new production release approval",
+    "scope": "Finish every approved request to independently source-verified tested merged readiness, automatically maintain durable GitHub release queue, accumulate multiple READY items until one release approval for exact tested batch.",
+    "supersedes_only": [
+      "Stop after merely proposed, partial or unmerged implementation when task was already approved",
+      "Request repeat owner permission for ordinary testing and release-queue intake of approved changes",
+      "No durable unified queue across chats"
+    ],
+    "preserves": [
+      "All other Locked product and user-data decisions, privacy/RLS, credentials, shots, offline/Community history",
+      "Private GitHub Free advisory controls and same-commit journal",
+      "One distinct owner-approved single-use release with tested source, credits, backup risk and provider readback",
+      "No automatic live SQL/Edge/Auth/member-data or provider mutations or purchases"
+    ],
+    "queue_path": "docs/RELEASE_QUEUE.json",
+    "implementation_status": "POLICY_APPROVED_ENGINE_AND_CI_PENDING",
+    "release_authorized": false
   }
 }
