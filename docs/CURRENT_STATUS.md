@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — Fast-Flow comparable-roast fixture correction requires fresh CI
+- One added engine test expected same-style comparable-coffee evidence but used unknown roast, properly excluded by similarity gate (failed job 39736066333). Fixture now explicitly `Light`; no production algorithm or validation weakened. Browser-selector repair from prior candidate retained. Exact source CI must rerun before merge; production remains unchanged.
+
+
 ## October 22 MDT — Fast-Flow new browser test selector fixed (pending exact-source CI)
 - New 390px browser regression initially timed out before saving due to test-only `button[type=submit]` locator; existing UI button is an implicit submit. Updated test locator to `#style button.primary` without weakening the save/draft assertions. Failing CI run 39735752502 retained; no application or SQL behavior changed. Rerun all source CI on corrected head before source merge; no publication.
 

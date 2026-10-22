@@ -62,6 +62,7 @@ test('other coffees do not leak into direct Turbo fallback',()=>{
 });
 test('compatible Fast-Flow evidence on similar coffees outranks same-coffee Turbo fallback',()=>{
  const {s,c}=setup();
+ c.roastLevel='Light'; // An unknown roast cannot establish similar-coffee evidence.
  s.coffees.push({...c,id:'similar-coffee',name:'Comparable coffee'});
  s.shots.push(shot('turbo',c.id,'Turbo',{yieldG:40,timeS:13}));
  s.shots.push(shot('flow-other','similar-coffee','Fast-Flow',{yieldG:42,timeS:13}));

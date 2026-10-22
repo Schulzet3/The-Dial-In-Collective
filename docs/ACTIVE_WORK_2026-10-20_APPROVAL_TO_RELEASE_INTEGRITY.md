@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 22 MDT — Fast-Flow same-style evidence regression fixture repaired (CI pending)
+- Exact candidate `ffab6795b6eb00b3504776ab313aaef5665292f2` cloud Node test 39736066333 failed 1 new test: compatible Fast-Flow other-coffee evidence was expected, but synthetic `rawFixture` coffee had an unknown roast level, correctly barred from similarity matching by the existing engine. Narrowly supplied known `Light` roast in this test only, leaving unknown-roast refusal and all production code/policies unchanged. Keep assertion that same-style compatible coffee data outranks cross-style Turbo and remains unproven. Earlier failed check is retained, all six exact-new-SHA checks required. No provider, SQL, customer history or Netlify changes. Same-commit journal.
+
+
 ## October 22 MDT — Fast-Flow mobile browser test selector repair; CI RE-RUN REQUIRED
 - PR #77 candidate `af1738fc8941d594888d34721b7db5f9c8d9fcb6` produced a real CI failure in synthetic 390px browser run 39735752502 at `#style button[type=submit]`: source Style form uses an implicit submit `<button class="primary full">Use Style</button>` without a `type=submit` attribute, so the newly introduced test selector waited until timeout before submitting. Corrected only the test to `#style button.primary`, still exercising the actual click/save/persist/draft path; no assertion loosened, no app/SQL/provider mutation. The prior failing run remains recorded; rerun exact-source browser, visual and required CI before merging. Same-commit journal with test change; production unchanged.
 
