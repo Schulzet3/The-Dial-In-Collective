@@ -117,7 +117,8 @@ test('empty complete review pages have one titled section and one empty message'
   assert.equal((section.match(/<h2>/g)||[]).length,1);
   assert.ok(section.includes('<h2>'+title+'</h2>'));
   assert.equal(section.split(message).length-1,1);
-  assert.doesNotMatch(section,/<section|<details|No records to show/);
+  assert.match(section,/<details class="admin-disclosure" data-admin-section=/);
+  assert.doesNotMatch(section,/<section|No records to show/);
  }
  assert.doesNotMatch(html,/<h2>(pending|conflicts)<\/h2>/);
 });
@@ -129,7 +130,8 @@ test('unavailable detail pages preserve independent review actions without false
  assert.match(html,/data-action="review-merge-prepare"/);
  assert.match(html,/data-action="review-hold"/);
  assert.equal((html.match(/Detailed listing unavailable/g)||[]).length,2);
- assert.doesNotMatch(html,/<details|No pending coffee submissions|No coffee conflicts/);
+ assert.match(html,/<details class="admin-disclosure" data-admin-section="pending"/);
+ assert.doesNotMatch(html,/No pending coffee submissions|No coffee conflicts/);
  assert.match(html,/Detailed listing unavailable/);
  const standalone=renderAdminRecordCollection('pending',{items:[],total:0});
  assert.match(standalone,/<h2>Pending Coffees<\/h2>/);
@@ -149,4 +151,20 @@ test('invite listing failure retains safe original 50-row overview without loopi
   null,{items:[],total:60,offset:50,error:'Unavailable'});
  assert.match(html,/Original invite|Complete invitation history is temporarily unavailable/);
  assert.doesNotMatch(html,/data-kind="invites"/);
+});
+
+test('admin summaries expose counts and remain collapsed on initial render',()=>{
+ const html=renderAdminDashboard({counts:{shot_records:4}},null,null,{},{
+  pending:{items:[],total:0},conflicts:{items:[],total:0},
+  approved:{items:[],total:0},shots:{items:[],total:4}
+ });
+ for(const kind of ['pending','conflicts','approved','shots','accounts','infrastructure']){
+  const tag=html.match(new RegExp('<details class="admin-disclosure" data-admin-section="'+kind+'"[^>]*>'))?.[0];
+  assert.ok(tag,'missing '+kind);
+  assert.doesNotMatch(tag,/\\sopen(?:\\s|>)/);
+ }
+ assert.match(html,/data-admin-section="shots"[^>]*><summary[^>]*><h2>Logged Shots<\\/h2><span class="admin-count">4<\\/span>/);
+ const opened=renderAdminDashboard({},null,null,{}, {},{openSections:new Set(['shots','pending'])});
+ assert.match(opened,/data-admin-section="shots" open>/);
+ assert.doesNotMatch(opened,/data-admin-section="approved" open>/);
 });

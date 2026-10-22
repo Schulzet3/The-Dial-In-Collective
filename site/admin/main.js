@@ -14,6 +14,7 @@ async function start(){
  let mergeChoices=Object.create(null);
  let recordPages=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map(k=>[k,0]));
  let records={};
+ const openSections=new Set();
  const invalidate=message=>{
   issued=null;mergeChoices=Object.create(null);records={};invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
@@ -69,7 +70,7 @@ async function start(){
    ]);
    records=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map((kind,i)=>[kind,pages[i]]));
    if(invalidated)return;
-   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records);
+   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -85,6 +86,13 @@ async function start(){
    catch(err){actionMessage(err.message||'The administrator action failed.');}
    finally{busy=false;}
   }
+  // Preserve operator disclosure state during re-render; toggle requires capture.
+  root.addEventListener?.('toggle',event=>{
+   const details=event.target;
+   if(!details?.matches?.('details[data-admin-section]'))return;
+   if(details.open)openSections.add(details.dataset.adminSection);
+   else openSections.delete(details.dataset.adminSection);
+  },true);
   // Delegate actions from stable root, which survives refresh renders.
   root.addEventListener?.('submit',event=>{
    if(event.target?.matches?.('[data-record-form]')){
@@ -115,13 +123,24 @@ async function start(){
    });
   });
   root.addEventListener?.('click',event=>{
+   const card=event.target?.closest?.('a.admin-stat[href^="#admin-"]');
+   if(card){
+    const section=root.querySelector('#'+card.getAttribute('href').slice(1));
+    const disclosure=section?.querySelector?.('details[data-admin-section]');
+    if(disclosure){
+     event.preventDefault();disclosure.open=true;openSections.add(disclosure.dataset.adminSection);
+     disclosure.querySelector('summary')?.focus?.({preventScroll:true});
+     section.scrollIntoView?.({block:'start'});
+    }
+    return;
+   }
    const button=event.target?.closest?.('[data-action],#admin-refresh');
    if(!button)return;
    const action=button.dataset.action||'refresh';
    if(action==='record-page'){
     const kind=button.dataset.kind,offset=Number(button.dataset.offset);
     if(!['pending','conflicts','approved','shots','accounts','invites'].includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
-    guarded(async()=>{recordPages[kind]=offset;await refresh();root.querySelector('#admin-'+kind)?.scrollIntoView?.({block:'start'});});return;
+    guarded(async()=>{recordPages[kind]=offset;const target=['accounts','invites'].includes(kind)?'accounts':kind;openSections.add(target);await refresh();root.querySelector('#admin-'+target)?.scrollIntoView?.({block:'start'});});return;
    }
    if(action==='edit-toggle'){
     const form=Array.from(root.querySelectorAll('[data-record-form]')).find(f=>f.dataset.id===button.dataset.id);

@@ -2,6 +2,14 @@
 // live-admin-gated dic_admin_records RPC, never direct member table SELECT.
 import {e} from '../lib/ui.js';
 export const ADMIN_KINDS=['pending','conflicts','approved','shots'];
+export function adminDisclosure(title,kind,count,content,{expanded=false}={}){
+ const num=count!=null&&Number.isSafeInteger(Number(count))&&Number(count)>=0?String(Number(count)):'';
+ return '<details class="admin-disclosure" data-admin-section="'+e(kind)+'"'+(expanded?' open':'')+'>'+
+ '<summary class="admin-disclosure-summary"><h2>'+e(title)+'</h2>'+
+ (num?'<span class="admin-count">'+e(num)+'</span>':'')+
+ '<span class="admin-chevron" aria-hidden="true">⌄</span></summary>'+
+ '<div class="admin-disclosure-body">'+content+'</div></details>';
+}
 const fields={
  coffee:[['name','Coffee Name'],['roaster','Roaster'],['release_label','Release / Harvest'],
  ['origin','Origin'],['process','Process'],['roast_level','Roast Level'],
@@ -50,7 +58,7 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
   (typeof reviewActions==='function'?reviewActions(item):'')+
   '</article>';
 }
-export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewActions=null}={}){
+export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewActions=null,expanded=false}={}){
  const title=({pending:'Pending Coffees',conflicts:'Conflicts',approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
  const loaded=Array.isArray(page.items)?page.items:[];
  const offset=Number.isSafeInteger(page.offset)&&page.offset>=0?page.offset:0;
@@ -70,5 +78,5 @@ export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewA
  // independent approval actions. Embed their records without another panel.
  if(embedded)return (page.error?'':description)+content;
  return '<section class="admin-panel admin-record-section" '+((kind==='approved'||kind==='shots')?'id="admin-'+e(kind)+'" tabindex="-1"':'')+'>'+
- '<div class="admin-section-header"><h2>'+e(title)+'</h2>'+description+'</div>'+content+'</section>';
+ adminDisclosure(title,kind,total,description+content,{expanded})+'</section>';
 }
