@@ -11,6 +11,7 @@ import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
+import {assessReleaseQueue,formatQueueReport} from './release-queue.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -228,6 +229,18 @@ export async function executeSingleUseRelease(settings=process.env){
  const oldRaw=initialLedgerOnMissing({releaseHead,
   readLedger:()=>git(['show',releaseHead+':docs/RELEASE_CONSUMPTION.json'])});
  const ledger=json(oldRaw,'Release ledger');
+ // A tested SHA is not automatically a release: every changed app path must
+ // belong to a READY queued item, and any merged unfinished work blocks.
+ const lastPublishedTestedSha=ledger.consumed.at(-1)?.tested_source_sha||releaseHead;
+ const queuedSource=json(git(['show',sha+':docs/RELEASE_QUEUE.json']),'Durable release queue');
+ const changedSourcePaths=git(['diff','--name-only','--no-renames',lastPublishedTestedSha,sha])
+  .split(/\r?\n/).filter(Boolean);
+ const queueGate=assessReleaseQueue(queuedSource,{
+  publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,changedPaths:changedSourcePaths,
+  isAncestor:(a,b)=>{try{git(['merge-base','--is-ancestor',a,b]);return true;}catch{return false;}}
+ });
+ if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
+ if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
   ledger,currentPublishedSourceSha:ledger.consumed.at(-1)?.tested_source_sha||releaseHead});
@@ -252,7 +265,8 @@ export async function executeSingleUseRelease(settings=process.env){
   const claimReceipt={schema_version:1,release_id:id,tested_source_sha:sha,
    previous_release_head_sha:releaseHead,claimed_at_utc:nowIso,
    status:'GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK',
-   granted_single_publication:true};
+   granted_single_publication:true,
+   approved_ready_queue_items:queueGate.ready_items};
   const journalPath='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
   const latestJournal=git(['show',developmentHead+':'+journalPath]);
   const newJournal=latestJournal.trimEnd()+'\n\n## Release controller claim — '+nowIso+
