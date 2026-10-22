@@ -192,23 +192,34 @@
       "issue": 80,
       "pr": 86,
       "title": "Fetch Admin records and account listings only for expanded sections",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "2af816e2800f3630b29ffa2000fdafb564affb59",
       "scope_paths": [
         "site/admin/main.js",
         "site/admin/view.js",
         "site/admin/records.js"
       ],
-      "tests": [],
+      "tests": [
+        "PR #86 final source fd31d0ed74cb7178f4d0c3aa87cf02c6eadaed88 five/5 checks PASS (approval 39857973460, cloud build/test 39857973445, isolated SQL 39857973473, cloud browser 39857973494, visual 39857973457)",
+        "Nonforce merge verified 2af816e2800f3630b29ffa2000fdafb564affb59 with all scoped paths and unchanged unrelated branches",
+        "All four postmerge GitHub runs on exact merge SHA PASS: approval 39858276074, cloud Node/build 39858276033, cloud/mobile 39858276316, visual 39858276201",
+        "Synthetic browser tests verify collapsed sections send no listing/account overview, expanded sections fetch scoped 50-row pages and maintain account privacy; rapid second open during first RPC is not lost",
+        "No SQL, production Netlify, Auth, Edge, private member-data write or credential action"
+      ],
       "ci_runs": [
-        39855181956,
-        39855181641
+        39857316510,
+        39857316592,
+        39857316498,
+        39857316623,
+        39857316773,
+        39858276074,
+        39858276033,
+        39858276316,
+        39858276201
       ],
-      "blockers": [
-        "Initial exact-source checks failed due to untracked Admin records path in release queue and legacy tests that assumed collapsed Admin invitations were already rendered; repair staged and CI rerun required."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Isolated PR #86; owner-approved source-only lazy-loading tranche. Never declare READY or deploy until exact-source CI and nonforce merge verified. Replaces eager private-record reads with on-demand expanded-section reads; keeps status/admin-role checks and 50-row pagination."
+      "notes": "READY, not published. Verified against current GitHub development commit 2af816e2 and all four postmerge runs. Includes on-demand Admin records, account/invite disclosure, race-safe queueing. Browser acceptance synthetic only, not actual owner-device sign-in. Parent #80 remains IN_PROGRESS for server-backed search, Community search, extractor and other refinements."
     },
     {
       "id": "DIC-Q-80-netlify-test-reuse",
