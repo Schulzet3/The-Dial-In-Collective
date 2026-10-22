@@ -1,23 +1,22 @@
 // Inert validation for a chat-originated, owner-approved release request.
 // No deploy or Git mutation. Hosted controller must also check real refs,
-// source CI, unique grant, data recovery and credit state before any push.
+// source CI, unique grant and data recovery before any push. Credits belong to owner.
 export const CHAT_REQUEST_PATH='docs/RELEASE_REQUEST.json';
 export const OPS_JOURNAL_PATH='docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md';
-// Schema 3 supports risk-specific backup freshness; historical v1/v2
-// publication requests are immutable receipts, never silently replayed.
-export const CHAT_REQUEST_SCHEMA=3;
+// Schema 4 removes all credit evidence and retains risk-specific recovery proof.
+// Earlier schema v1/v2/v3 releases remain immutable consumed receipts, not replay inputs.
+export const CHAT_REQUEST_SCHEMA=4;
 const SHA=/^[a-f0-9]{40}$/;
 const HASH=/^[a-f0-9]{64}$/;
 const ID=/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/;
 const ALLOWED_PATHS=[CHAT_REQUEST_PATH,OPS_JOURNAL_PATH].sort();
 const REQUIRED=['schema_version','release_id','tested_source_sha',
  'expected_release_head_sha','expected_development_head_sha',
- 'owner_approval_source','created_at_utc','backup_evidence','credit_evidence',
+ 'owner_approval_source','created_at_utc','backup_evidence',
  'database_change_risk','mode'];
 const REQ_BACKUP=['artifact_id','encrypted_sha256','owner_private_offsite_file_id',
  'snapshot_started_at_utc','archive_completed_at_utc','verified_at_utc',
  'latest_observed_data_write_at_utc'];
-const REQ_CREDIT=['observed_remaining_credits','observed_at_utc','source'];
 const deny=reason=>{throw new Error('Release request denied: '+reason);};
 const exactly=(obj,keys)=>!!obj&&typeof obj==='object'&&!Array.isArray(obj)&&
  Object.keys(obj).sort().join('|')===keys.slice().sort().join('|');
@@ -75,16 +74,9 @@ function validateRequestEvidence({
  if(started>archived||archived>verified||archived>now+60_000||latestWrite>now+60_000||
     (request.database_change_risk==='potentially_destructive'&&latestWrite>started))
   deny('encrypted archive does not cover latest observed user data write at snapshot start');
- const credit=request.credit_evidence;
- if(!exactly(credit,REQ_CREDIT)||!Number.isSafeInteger(credit.observed_remaining_credits)||
-    credit.observed_remaining_credits<15||!validDate(credit.observed_at_utc)||
-    typeof credit.source!=='string'||credit.source.length<12)
-  deny('credit budget evidence absent or below single-build ceiling');
- const credTime=Date.parse(credit.observed_at_utc);
- if(credTime>now+60_000||now-credTime>24*60*60*1000)
-  deny('credit check stale or future-dated');
- // These evidence fields are receipts from independently observed providers,
- // NOT substitutes for actually checking the remote backup/credit sources.
+ // Netlify credits are checked by the owner, never required in requests/preflight.
+ // A provider quota refusal is handled as a real provider failure, not a reason
+ // to demand balance screenshots or a second deployment approval.
  return {releaseId:request.release_id,testedSourceSha:request.tested_source_sha,
   expectedReleaseHeadSha:request.expected_release_head_sha,
   expectedDevelopmentHeadSha:request.expected_development_head_sha};
@@ -111,7 +103,7 @@ export function validateChatReleaseRequest(args={}){
 
 // Manual dispatch does not create a chat commit or impersonate a push event.
 // Its explicit JSON evidence binds the current main checkout and the same
-// fresh recovery/credit evidence, exact source and owner grant as chat release.
+// fresh recovery evidence, exact source and owner grant as chat release.
 export function validateManualReleaseRequest(args={}){
  const {request,inputReleaseId,inputTestedSourceSha,expectedMainHead,
   checkedOutHeadSha,workflowHeadSha,expectedDevelopmentHead,expectedReleaseHead,

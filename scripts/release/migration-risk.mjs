@@ -34,11 +34,11 @@ export function releaseReadinessMarkdown({id,sha,releaseHead,ci,migrationRisk,re
   '- **Recovery artifact ID:** '+request.backup_evidence.artifact_id,
   '- **Snapshot began (UTC):** '+request.backup_evidence.snapshot_started_at_utc,
   '- **Archive last verified (UTC):** '+request.backup_evidence.verified_at_utc,
-  '- **Last observed credit count:** '+request.credit_evidence.observed_remaining_credits+' (observed '+request.credit_evidence.observed_at_utc+')',
+  '- **Netlify credit monitoring:** Owner-managed; no balance check or credit receipt required',
   '- **GitHub CI:** '+checks.map(k=>k+'='+ci[k]).join(', '),
   '- **Netlify state:** NOT YET VERIFIED AS PUBLISHED; requires independent READY/current deploy SHA readback',
   '- **Owner-device signoff:** NOT REQUIRED by 2026-10-22 owner policy (not a claim it occurred)',
-  '- **Residual risks:** GitHub Free/private status checks advisory, credit number is timestamped external evidence, database-backup offsite receipt must be independently real.',
+  '- **Residual risks:** GitHub Free/private status checks advisory, Netlify may independently refuse builds for quota reasons; database-backup offsite receipt must be independently real.',
   ''];
  return lines.join('\n');
 }

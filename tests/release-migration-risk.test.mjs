@@ -18,6 +18,7 @@ test('data writes, destructive DDL, renamed old migrations, dynamic blocks fail 
  assert.equal(classifyMigrationDiff('A\t'+add,()=>{throw Error('missing');}).risk,'potentially_destructive');
 });
 test('readiness report never misstates publication or owner-device acceptance',()=>{
- const s=releaseReadinessMarkdown({id:'DIC-20261022-EXAMPLE1',sha:'a'.repeat(40),releaseHead:'b'.repeat(40),ci:Object.fromEntries(['approval','validate','cloud-tests','mobile-browser-qa','sql'].map(k=>[k,'success'])),migrationRisk:{risk:'none',reason:'NO_MIGRATION_CHANGES'},request:{backup_evidence:{artifact_id:123,snapshot_started_at_utc:'2026-10-22T01:00:00Z',verified_at_utc:'2026-10-22T01:30:00Z'},credit_evidence:{observed_remaining_credits:300,observed_at_utc:'2026-10-22T02:00:00Z'}}});
+ const s=releaseReadinessMarkdown({id:'DIC-20261022-EXAMPLE1',sha:'a'.repeat(40),releaseHead:'b'.repeat(40),ci:Object.fromEntries(['approval','validate','cloud-tests','mobile-browser-qa','sql'].map(k=>[k,'success'])),migrationRisk:{risk:'none',reason:'NO_MIGRATION_CHANGES'},request:{backup_evidence:{artifact_id:123,snapshot_started_at_utc:'2026-10-22T01:00:00Z',verified_at_utc:'2026-10-22T01:30:00Z'}}});
  assert.match(s,/NOT YET VERIFIED AS PUBLISHED/);assert.match(s,/NOT REQUIRED/);assert.match(s,/Extra encrypted backup required:\*\* NO/);
+ assert.match(s,/Owner-managed/);assert.doesNotMatch(s,/observed credit count|minimum credit|snapshot credit/i);
 });

@@ -14,7 +14,6 @@ export function validateReleaseGrant(grant,{releaseId,sourceSha,nowIso}={}){
   reject('grant is not bound to this exact tested source SHA');
  if(grant.owner_approved!==true||grant.status!=='APPROVED')reject('explicit owner consent absent');
  if(grant.production_branch!==RELEASE_BRANCH||grant.max_publications!==1)reject('unsafe branch or more than one publication authorized');
- if(grant.estimated_credits_limit!==15)reject('release cost ceiling differs from owner locked grant');
  if(typeof grant.approved_at_utc!=='string'||!Number.isFinite(Date.parse(grant.approved_at_utc)))
   reject('approval timestamp missing');
  const now=Date.parse(nowIso||'');

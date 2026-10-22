@@ -158,7 +158,7 @@ export async function executeSingleUseRelease(settings=process.env){
  if(!chatPush){
   const raw=settings.INPUT_RELEASE_EVIDENCE_JSON;
   if(typeof raw!=='string'||!raw.trim()||raw.length>32_768)
-   throw Error('Manual release requires explicit, bounded schema-v2 recovery and credit evidence JSON');
+   throw Error('Manual release requires explicit, bounded schema-v4 recovery evidence JSON');
   manualRequest=json(raw,'Manual release evidence');
  }
  const token=settings.GITHUB_TOKEN;
@@ -245,7 +245,7 @@ export async function executeSingleUseRelease(settings=process.env){
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
   ledger,currentPublishedSourceSha:ledger.consumed.at(-1)?.tested_source_sha||releaseHead});
  // A live end-to-end, guard-checked request preflight without any Git/Netlify
- // write, credits or grant consumption. A later publish request must be a NEW
+ // write, provider activity or grant consumption. A later publish request must be a NEW
  // exact two-file owner-authorized commit and re-checks ALL fresh evidence.
  recheckRemoteRefs();
  validateRequest();
