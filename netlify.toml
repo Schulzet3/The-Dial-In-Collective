@@ -1,8 +1,10 @@
 # Existing Git-connected application; approved source is development/backend-foundation.
 # Production uses Supabase Auth/admission/RLS; Netlify team SSO protects nonproduction.
 # Publish only a separately authorized tested release and verify its actual deploy.
+# Full Node tests run against the exact release source in the mandatory GitHub
+# preflight; do not rerun the same expensive suite during one-use publication.
 [build]
-  command = "npm test && npm run build:cloud"
+  command = "npm run build:cloud"
   publish = "dist"
   # Ignore automatic production builds unless this is a deliberately marked,
   # fully tested, one-use owner-approved release; the owner monitors credits.

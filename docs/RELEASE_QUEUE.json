@@ -296,6 +296,24 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Preserve 12/IP/min Netlify rateLimit, existing 12/member/24h quota and 30s cooldown across trusted/universal paths; verified unique canonical exact URL and short-lived public-only warm cache skip daily claim, but still enforce 30s cooldown; transient upstream failures do not debit member daily count; other outcomes complete ticket before releasing result. Existing shared trusted claim stays untouched. No production changes."
+    },
+    {
+      "id": "DIC-Q-80-netlify-test-reuse",
+      "issue": 80,
+      "pr": 87,
+      "title": "Skip a second full Node suite during exact-source production publication",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify.toml"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Await exact-source build, approval and browser CI and verified nonforce integration. Verify source-bound one-use release preflight still runs the full Node suite before authorized publication."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Independent owner-approved CI deduplication. Netlify build remains `npm run build:cloud` with graph, source and approval checks; exact-source full `npm test` in GitHub stays mandatory; Netlify ignore build / one-use claim / published SHA contract unchanged. No production deployment."
     }
   ],
   "history": [],
