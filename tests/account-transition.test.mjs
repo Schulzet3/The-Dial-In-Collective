@@ -89,3 +89,37 @@ test('late sign-out completion cannot erase a newer account session',async()=>{
  await signing.promise;f.switchAccount();release.resolve();await task;
  assert.equal(f.app.identity.id,'other-owner');assert.equal(f.app.renders||0,0);
 });
+
+
+test('idle foreground checks admission without reloading every personal and Community dataset',async()=>{
+ const f=fixture();let statusCalls=0,heavyCalls=0;
+ f.client.status=async()=>{statusCalls++;return {admitted:true,role:'member'};};
+ f.app.sync=async()=>{heavyCalls++;};
+ f.app.lastHeavySyncAt=Date.now();
+ await f.app.pollOnce();
+ assert.equal(statusCalls,1);
+ assert.equal(heavyCalls,0,'a verified recent full sync avoids duplicated full-state reads');
+ f.app.lastHeavySyncAt=Date.now()-181000;
+ await f.app.pollOnce();
+ assert.equal(statusCalls,2);
+ assert.equal(heavyCalls,1,'long idle tab still picks up cross-device changes');
+});
+test('revocation is checked every polling interval, not delayed until a full-state refresh',async()=>{
+ const f=fixture();let denied=0,synced=0;
+ f.app.lastHeavySyncAt=Date.now();
+ f.client.status=async()=>({admitted:false});
+ f.app.denyAccess=async(user,epoch,status)=>{denied++;assert.equal(user.id,OWNER);assert.equal(status.admitted,false);};
+ f.app.sync=async()=>{synced++;};
+ await f.app.pollOnce();
+ assert.equal(denied,1);
+ assert.equal(synced,0,'must never read personal data after admission denial');
+});
+test('an old account polling response cannot mutate newer owner session',async()=>{
+ const f=fixture(),started=deferred(),release=deferred();let synced=0;
+ f.client.status=async()=>{started.resolve();await release.promise;return {admitted:false};};
+ f.app.denyAccess=async()=>{throw new Error('Stale user must not be denied on another account');};
+ f.app.sync=async()=>{synced++;};
+ const pending=f.app.pollOnce();await started.promise;f.switchAccount();release.resolve();await pending;
+ assert.equal(synced,0);
+ assert.equal(f.app.identity.id,'other-owner');
+});

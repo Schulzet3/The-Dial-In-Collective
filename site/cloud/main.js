@@ -31,6 +31,7 @@ class CloudApp {
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
+  this.lastHeavySyncAt=0;this.pollingStatus=null;
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
  }
  async inSession(operation){
@@ -43,6 +44,7 @@ class CloudApp {
   this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.dismissedDoseAdvisories.clear();
+  this.lastHeavySyncAt=0;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
@@ -71,8 +73,29 @@ class CloudApp {
   if(this.identity)await this.connect();else this.render();
   // A returning connection must recheck beta admission before flushing locally queued shots.
    addEventListener('online',()=>this.connect().catch(err=>this.error(err)));
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)(this.status?.admitted?this.sync():this.connect()).catch(err=>this.error(err));});
-  this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.sync().catch(()=>{});},30000);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)this.connect().catch(err=>this.error(err));});
+  // Preserve the former 30-second admission/revocation check while reducing
+  // unnecessary 17-dataset reads and Community review requests during idle use.
+  this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.pollOnce().catch(()=>{});},30000);
+ }
+ async pollOnce(){
+  if(this.pollingStatus)return this.pollingStatus;
+  const user=this.identity,epoch=this.epoch;
+  if(!user||!this.status?.admitted||this.busy||globalThis.navigator?.onLine===false)return;
+  this.pollingStatus=(async()=>{
+   try{
+    const status=await this.client.status();
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    if(!status?.admitted){await this.denyAccess(user,epoch,status);return;}
+    this.status=status;
+    if(this.pending.some(x=>x.status==='pending')||Date.now()-this.lastHeavySyncAt>=180000)await this.sync();
+   }catch(err){
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    if(isAccessDenied(err))await this.denyAccess(user,epoch);
+    // A temporary admission-check outage must not trigger a full-data scan.
+   }
+  })().finally(()=>this.pollingStatus=null);
+  return this.pollingStatus;
  }
  // Offline data is not an offline authorization token. Only the previously
  // admitted owner's cached records may be viewed, and only NEW shots can queue.
@@ -160,7 +183,7 @@ class CloudApp {
   }
   this.syncState=outcome.state;const pending=await this.store.list(who.id);
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
-  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;}
+  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;this.lastHeavySyncAt=Date.now();}
   catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);
   await this.syncFirstStylePrompts(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;

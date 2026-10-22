@@ -125,6 +125,25 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "READY as individual release unit, not deployed; split from parent DIC-Q-80 IN_PROGRESS. Tested merged source contains previously verified other READY items and concurrent AGENTS/Project Instructions preserved; no unready changes merged."
+    },
+    {
+      "id": "DIC-Q-80-polling",
+      "issue": 80,
+      "pr": null,
+      "title": "Reduce background full-state reads while preserving 30-second admission/revocation checks",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Source tests and merge receipt pending",
+        "Review revocation, multiaccount and offline browser regression before READY"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Maintain status() check every 30 seconds; full personal+Community refresh slower when idle (3 minutes), immediate after actions/foreground/reconnect; no silent offline admission changes."
     }
   ],
   "history": [],
