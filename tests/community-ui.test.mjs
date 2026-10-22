@@ -32,7 +32,7 @@ test('Community page renders server-sanitized counts and measurements with progr
  assert.match(html,/aria-label="Filter Community shots by style"/);
  assert.doesNotMatch(html,/owner_id|contributor_id|shot_id|PRIVATE:/);
  const filtered=communityPage({shots:[row],total:1,style:'Traditional'});
- assert.match(filtered,/No loaded shots match these filters/);
+ assert.match(filtered,/No loaded shots match this coffee/);
  assert.doesNotMatch(filtered,/<article class="community-card"/);
 });
 
