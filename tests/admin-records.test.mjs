@@ -181,7 +181,8 @@ test('shots are nested by actual owner coffee entry, not the same coffee name',(
  assert.equal((html.match(/class="admin-queue-item admin-record"/g)||[]).length,5);
  assert.match(html,/2 shots on this page/);
  assert.match(html,/Showing 1–5 of 55/);
- assert.doesNotMatch(html,/<img|onerror=/);
+ assert.match(html,/&lt;img onerror=bad&gt;/);
+ assert.doesNotMatch(html,/<img/);
  const opened=renderAdminRecordCollection('shots',{items,total:5},{openCoffeeGroups:new Set(['library:'+a])});
  assert.match(opened,/data-admin-coffee="library:00000000-0000-4000-8000-0000000000a1" open>/);
 });

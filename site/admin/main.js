@@ -130,7 +130,7 @@ async function start(){
   });
   root.addEventListener?.('click',event=>{
    const card=event.target?.closest?.('a.admin-stat[href^="#admin-"]');
-   if(card){
+   if(card && typeof card.getAttribute==='function'){
     const section=root.querySelector('#'+card.getAttribute('href').slice(1));
     const disclosure=section?.querySelector?.('details[data-admin-section]');
     if(disclosure){
