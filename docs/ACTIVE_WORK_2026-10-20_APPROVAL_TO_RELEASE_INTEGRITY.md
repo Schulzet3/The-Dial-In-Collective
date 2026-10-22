@@ -1606,3 +1606,7 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 # 2026-10-22 — PR #81 readiness intake after test source changes
 - CI 39845056946 validated owner decisions and correctly failed due to untracked deployable build_cloud.mjs in #80 queue item. Added exact path to IN_PROGRESS intake, retained all two READY items and existing blocked status. Other CI still under review; no merge/production action.
+
+
+# 2026-10-22 — PR #81 browser boot fixture repair after actual CI
+- Exact PR #81 node/build 39845214826 PASS, isolated SQL 39845214943 PASS, approval 39845214977 PASS. Browser 39845214880 failed because its synthetic module harness omitted newly shipped cloud/dose-advisory.js, leading to undefined import; update fixture module inventory without changing app startup, data, or permissions. New exact CI pending; visual stage pending. No publication or merge.
