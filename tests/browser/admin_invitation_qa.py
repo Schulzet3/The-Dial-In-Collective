@@ -51,9 +51,11 @@ window.__sdk={
   if(name==='dic_session_status')return {data:{authenticated:true,admitted:true,admin:true}};
   if(name==='dic_admin_dashboard')return {data:{counts:{active_accounts:2,pending_coffees:0},queue:[],queue_total:0}};
   if(name==='dic_admin_access_overview')return {data:structuredClone(window.__access)};
-  if(name==='dic_admin_records'){
+  if(name==='dic_admin_records'||name==='dic_admin_search_records'){
    const items=args.p_kind==='accounts'?window.__access.members:args.p_kind==='invites'?window.__access.invites:[];
-   return {data:{items:structuredClone(items),total:items.length,offset:args.p_offset}};
+   const term=String(args.p_query||'').toLowerCase();
+   const filtered=items.filter(row=>!term||JSON.stringify(row).toLowerCase().includes(term));
+   return {data:{items:structuredClone(filtered),total:filtered.length,offset:args.p_offset}};
   }
   if(name==='dic_admin_issue_invite'){
    const m={id:INVITE,label:args.p_label,created_at:'2026-10-18',
@@ -106,6 +108,14 @@ with sync_playwright() as p:
  assert set(page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_records').map(c=>c.args.p_kind)"))=={'accounts','invites','approved'}
  page.locator('#admin-approved summary.admin-disclosure-summary').click()
 
+ page.locator("#admin-search-query").fill("tester@synthetic.invalid")
+ page.get_by_role("button",name="Search",exact=True).click()
+ page.wait_for_function("window.__calls.some(c=>c.name==='dic_admin_search_records'&&c.args.p_query==='tester@synthetic.invalid'&&c.args.p_kind==='accounts')")
+ assert page.get_by_text("tester@synthetic.invalid").count()==1
+ assert page.get_by_text("operator@synthetic.invalid").count()==0
+ page.get_by_role("button",name="Clear",exact=True).click()
+ page.get_by_text("operator@synthetic.invalid").wait_for()
+ assert page.locator('#admin-search-query').input_value()==''
  page.locator("#admin-invite-label").fill("Small user group")
  page.get_by_role("button",name="Generate Code").click()
  page.locator("#admin-new-code").wait_for()

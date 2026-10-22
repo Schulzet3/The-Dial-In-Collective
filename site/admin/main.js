@@ -16,6 +16,7 @@ async function start(){
  let pendingSectionRefresh=false;
  let mergeChoices=Object.create(null);
  let recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));
+ let searchText='';
  let records={};
  let access=null;
  const openSections=new Set();
@@ -72,9 +73,14 @@ async function start(){
     const loadAccess=openSections.has('accounts');
     const [dashboard,nextAccess,...pages]=await Promise.all([
      adminRpc('dic_admin_dashboard'),
-     loadAccess?adminRpc('dic_admin_access_overview'):Promise.resolve(null),
+     loadAccess?(searchText?Promise.resolve({members:[],invites:[],members_total:0,invites_total:0}):adminRpc('dic_admin_access_overview')):Promise.resolve(null),
      ...kinds.map(async kind=>{
-      try{return await adminRpc('dic_admin_records',{p_kind:kind,p_offset:recordPages[kind],p_limit:50});}
+      try{
+       const args={p_kind:kind,p_offset:recordPages[kind],p_limit:50};
+       if(searchText)args.p_query=searchText;
+       const result=await adminRpc(searchText?'dic_admin_search_records':'dic_admin_records',args);
+       return {...result,search:!!searchText};
+      }
       catch(error){if(isAccessDenied(error))throw error;return {items:[],total:0,offset:recordPages[kind],error:'Detailed listing is temporarily unavailable.'};}
      })
     ]);
@@ -82,7 +88,7 @@ async function start(){
     // No stale hidden-page totals override the fresh dashboard count.
     records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
     access=loadAccess?nextAccess:null;
-    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups});
+    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -127,6 +133,15 @@ async function start(){
   },true);
   // Delegate actions from stable root, which survives refresh renders.
   root.addEventListener?.('submit',event=>{
+   if(event.target?.id==='admin-search-form'){
+    event.preventDefault();
+    const term=String(event.target.elements?.namedItem?.('query')?.value||'').trim();
+    if(term.length>80){actionMessage('Search must be 80 characters or fewer.');return;}
+    guarded(async()=>{
+     searchText=term;recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));
+     await refresh();
+    });return;
+   }
    if(event.target?.matches?.('[data-record-form]')){
     event.preventDefault();
     guarded(async()=>{
@@ -171,6 +186,9 @@ async function start(){
    const button=event.target?.closest?.('[data-action],#admin-refresh');
    if(!button)return;
    const action=button.dataset.action||'refresh';
+   if(action==='admin-search-clear'){
+    guarded(async()=>{searchText='';recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));await refresh();});return;
+   }
    if(action==='record-page'){
     const kind=button.dataset.kind,offset=Number(button.dataset.offset);
     if(!RECORD_KINDS.includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;

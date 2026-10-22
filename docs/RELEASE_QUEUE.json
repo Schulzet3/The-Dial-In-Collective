@@ -219,6 +219,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Development READY, never published. Admin server-backed search is separate and incomplete. Both postmerge exact-source results and live head verified."
+    },
+    {
+      "id": "DIC-Q-80-admin-search",
+      "issue": 80,
+      "pr": null,
+      "title": "Server-side Admin record search and filtered 50-row pagination",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/admin/records.js",
+        "supabase/migrations/20261022220000_dic_admin_server_search.sql"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Staged SQL migration is not deployed; exact-source CI, SQL sandbox privacy/permission tests and nonforce integration still required."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "New RPC preserves old dic_admin_records; query is bounded to 80 characters, case-insensitive literal substring, admin member gate and 50-row filtered counts; no production SQL applies absent publish approval."
     }
   ],
   "history": [],
