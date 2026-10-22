@@ -54,3 +54,17 @@
 .admin-candidates{display:flex;flex-wrap:wrap;gap:10px;align-items:end;padding:12px;border:1px solid var(--line);border-radius:12px;margin:8px 0}
 .admin-candidates label{font-size:12px;display:grid;gap:6px;flex:1 1 200px}
 .admin-candidates select{padding:10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);max-width:100%}
+
+/* Ordered, keyboard-operable metric navigation and paged admin records. */
+.admin-stat{color:inherit;text-decoration:none;min-width:0;scroll-margin-top:18px}
+.admin-stat small{color:var(--accent);font-size:11px;font-weight:650}
+.admin-stat:hover,.admin-stat:focus-visible{border-color:var(--accent);outline-offset:3px}
+.admin-record-section{scroll-margin-top:18px}
+.admin-accounts-title{font-size:20px;margin:20px 0 12px}
+.admin-record-note{font-size:12px;overflow-wrap:anywhere}
+.admin-record-editor{margin:14px 0 4px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.admin-record-editor[hidden]{display:none}
+.admin-record-editor label{font-size:12px;font-weight:600;display:grid;gap:6px;margin:9px 0}
+.admin-record-editor input,.admin-record-editor textarea{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px;width:100%;font:inherit}
+.admin-record-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0 12px}
+.admin-pagination{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-top:13px}

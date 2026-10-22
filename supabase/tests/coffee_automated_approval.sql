@@ -103,6 +103,7 @@ begin
  r:=public.dic_trusted_source_verify(official_pending,jsonb_build_object(
    'checked_url','https://sweetbloomcoffee.com/products/unique-source-fixture',
    'product_name','Unique Source Fixture','title_matches',true,
+   'submission_revision',1,
    'evidence_kind','jsonld_product','verified_fields',
     jsonb_build_object('name','Unique Source Fixture'),
    'evidence_excerpt','Isolated synthetic roaster Product JSON-LD'));

@@ -25,6 +25,27 @@ test('lost response retains exact event for idempotent retry',async()=>{const f=
 test('conflicts are retained and block later writes',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{});await f.q.enqueue('save_shot',{});f.remote.mutate=async()=>({ok:false,code:'conflict',revision:4});assert.equal((await f.q.flush()).state,'conflict');assert.equal(f.store.events.length,2);assert.equal(f.store.events.find(x=>x.id==='1').status,'conflict');});
 test('no retry-overwrite of unresolved conflict',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{});let n=0;f.remote.mutate=async()=>{n++;return {ok:false,code:'conflict'};};await f.q.flush();await f.q.flush();assert.equal(n,1);});
 test('server validation rejection retains local event',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{});f.remote.mutate=async()=>{throw new CloudError('bad','22023');};assert.equal((await f.q.flush()).state,'rejected');assert.equal(f.store.events.length,1);});
+test('authorization denials remain distinguishable in fresh and retained queue rejections',async()=>{
+ for(const error of [new CloudError('No access','42501'),Object.assign(new CloudError('Forbidden'),{status:403}),new CloudError('Invalid claims','PGRST303')]){
+  const f=queueFixture();await f.q.enqueue('save_shot',{dose_g:18});let calls=0;
+  f.remote.mutate=async()=>{calls++;throw error;};
+  const fresh=await f.q.flush(),retained=await f.q.flush();
+  assert.equal(fresh.accessDenied,true);assert.equal(fresh.recheckAccess,undefined);
+  assert.equal(retained.accessDenied,true);assert.equal(retained.recheckAccess,true);assert.equal(calls,1);
+  assert.equal(f.store.events[0].error.status,error.status);assert.deepEqual(f.store.events[0].payload,{dose_g:18});
+ }
+});
+test('validation failures do not masquerade as a membership denial',async()=>{
+ const f=queueFixture();await f.q.enqueue('save_shot',{});f.remote.mutate=async()=>{throw new CloudError('Invalid dose','23514');};
+ assert.equal((await f.q.flush()).accessDenied,undefined);assert.equal((await f.q.flush()).accessDenied,undefined);
+});
+test('failed local error annotation cannot hide a fresh remote access denial',async()=>{
+ const f=queueFixture();await f.q.enqueue('save_shot',{dose_g:18});
+ f.remote.mutate=async()=>{throw new CloudError('No access','42501');};
+ f.store.put=async()=>{throw new Error('Storage unavailable');};
+ assert.equal((await f.q.flush()).accessDenied,true);
+ assert.equal(f.store.events[0].status,'pending');assert.deepEqual(f.store.events[0].payload,{dose_g:18});
+});
 test('account B cannot flush account A pending data',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{a:true});f.owner('b');await f.q.enqueue('save_shot',{b:true});await f.q.flush();assert.equal(f.calls.length,1);assert.equal(f.calls[0].owner,'b');assert.equal(f.store.events[0].owner,'a');});
 test('changing accounts stops in-flight queue before next event',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{});await f.q.enqueue('save_shot',{});f.remote.mutate=async()=>{f.owner('b');return {ok:true};};assert.equal((await f.q.flush()).state,'account_changed');assert.equal(f.store.events.length,1);});
 test('signed-out queue cannot create new writes',async()=>{const f=queueFixture();f.owner(null);await assert.rejects(f.q.enqueue('save_shot',{}),{code:'signed_out'});});

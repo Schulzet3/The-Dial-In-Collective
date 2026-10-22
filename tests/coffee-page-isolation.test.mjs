@@ -34,3 +34,41 @@ test('explicit mixed processing resolves to Other/Unknown despite stale one-proc
   assert.equal(r.fields.process,'Other/Unknown');assert.ok(!r.conflicts?.includes('process'));
  }
 });
+test('same-product structured duplicates cannot silently erase conflicting process, roast or release evidence',()=>{
+ const product=values=>({'@type':'Product',name:'Current Coffee',url,
+  additionalProperty:Object.entries(values).map(([name,value])=>({name,value}))});
+ const first=product({Process:'Washed','Roast Level':'Light',Harvest:'2025',Origin:'Ethiopia'});
+ const second=product({Process:'Natural','Roast Level':'Dark',Harvest:'2026'});
+ for(const nodes of [[first,second],[second,first]]){
+  const result=parse('<script type="application/ld+json">'+JSON.stringify(nodes)+'</script>');
+  for(const field of ['process','roast_level','release_label']){
+   assert.equal(result.fields[field],undefined,field);assert.ok(result.conflicts.includes(field));
+  }
+  assert.equal(result.fields.origin,'Ethiopia');
+ }
+});
+test('equivalent structured nodes enrich compatible missing facts without treating purchase variants as the same coffee',()=>{
+ const nodes=[
+  {'@type':'Product',name:'Current Coffee',url,additionalProperty:[{name:'Process',value:'Washed'}]},
+  {'@type':'Product',name:'Current Coffee',url,additionalProperty:[{name:'Origin',value:'Ethiopia'}]},
+  {'@type':'Product',name:'Other Coffee',url:'https://roaster.com/products/other',additionalProperty:[{name:'Process',value:'Natural'}]}
+ ];
+ const result=parse('<script type="application/ld+json">'+JSON.stringify(nodes)+'</script>');
+ assert.equal(result.fields.process,'Washed');assert.equal(result.fields.origin,'Ethiopia');assert.equal(result.conflicts,undefined);
+});
+test('same-title inline product state and JSON-LD retain a conflict instead of choosing one representation',()=>{
+ const linked={'@type':'Product',name:'Current Coffee',url,additionalProperty:[{name:'Process',value:'Washed'}]};
+ const inline={title:'Current Coffee',url,metafields:{process:'Natural'}};
+ const result=parse('<script type="application/ld+json">'+JSON.stringify(linked)+'</script>'+
+  '<script id="product-json" type="application/json">'+JSON.stringify(inline)+'</script>');
+ assert.equal(result.fields.process,undefined);assert.ok(result.conflicts.includes('process'));
+});
+test('contradictory explicit roast graphics suppress structured and Agtron fallback suggestions',()=>{
+ const product={'@type':'Product',name:'Current Coffee',url,additionalProperty:[
+  {name:'Roast Level',value:'Light'},{name:'Agtron',value:75}
+ ]};
+ const result=parse('<script type="application/ld+json">'+JSON.stringify(product)+'</script>'+
+  '<main><h1>Current Coffee</h1><div data-roast-level="Dark"></div><div data-roast-level="Medium"></div></main>');
+ assert.equal(result.fields.roast_level,undefined);assert.equal(result.roast_source,undefined);
+ assert.ok(result.conflicts.includes('roast_level'));assert.match(result.roast_hint,/Conflicting roast labels/);
+});

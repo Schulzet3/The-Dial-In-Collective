@@ -18,6 +18,27 @@
         "20261021165302 dic_duplicate_first_auto_approval"
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261021-ALL-PENDING-02",
+      "tested_source_sha": "7df3deb4a271a6eb041c125574cd15ec455f6128",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "estimated_credits_limit": 15,
+      "approved_at_utc": "2026-10-22T01:15:48.881Z",
+      "expires_at_utc": "2026-10-28T23:59:00Z",
+      "approval_source": "Owner October 21 explicit one-release all-pending frontend/backend production authorization and future universal deployment scope; canonical commit b5a591e6f786ff37de0313ca897c09fee15baf0e",
+      "scope": "ONE guarded production publish of all pending tested source, admin review and extractor improvements, after exact two forward-only production migrations plus current JWT-required dic-verify-coffee Edge function. No historical data deletion, unapproved unrelated changes, paid credit topup, or second release.",
+      "sql_evidence": [
+        "20261021221455 dic_source_worker_auth_and_admission (owner-approved, pending apply)",
+        "20261021224447 dic_admin_content_review (owner-approved, pending apply)"
+      ],
+      "edge_evidence": [
+        "dic-verify-coffee current development SHA 7df3deb4a271a6eb041c125574cd15ec455f6128 (owner-approved, pending deploy)"
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "Grants are only created after a separate explicit owner release approval. Each unique release ID is bound to one tested SHA, max 1 publication, 15-credit ceiling and finite expiration. Empty until next approved release."

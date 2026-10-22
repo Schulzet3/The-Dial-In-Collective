@@ -1,5 +1,5 @@
 import {CLOUD_CONFIG} from '../cloud/config.js';
-import {secureOrigin} from '../cloud/client.js';
+import {secureOrigin,isAccessDenied} from '../cloud/client.js';
 import {e} from '../lib/ui.js';
 import {applyAppearance,readAppearance} from '../cloud/appearance.js';
 applyAppearance(readAppearance(),{remember:false});
@@ -12,6 +12,11 @@ async function start(){
  let issued=null; // generated code exists only in live tab memory
  let busy=false;
  let mergeChoices=Object.create(null);
+ let recordPages=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map(k=>[k,0]));
+ let records={};
+ const invalidate=message=>{
+  issued=null;mergeChoices=Object.create(null);records={};invalidated=true;root.innerHTML=renderAdminDenied(message);
+ };
  try {
   secureOrigin();
   if(!CLOUD_CONFIG.enabled||!globalThis.supabase?.createClient)throw new Error('Cloud access is not configured.');
@@ -23,7 +28,7 @@ async function start(){
   sdk.auth.onAuthStateChange((event,session)=>{
    const next=session?.user?.id||null;
    if(event==='SIGNED_OUT'||(owner!==undefined&&next!==owner)){
-    issued=null;mergeChoices=Object.create(null);invalidated=true;root.innerHTML=renderAdminDenied('Your session changed. Return to the main app and reopen Admin.');
+    invalidate('Your session changed. Return to the main app and reopen Admin.');
    }
    owner=next;
   });
@@ -41,7 +46,7 @@ async function start(){
   async function adminRpc(name,args){
    const {data,error}=await sdk.rpc(name,args);
    if(invalidated)throw new Error('Your session changed. Return to the app.');
-   if(error)throw error;
+   if(error){if(isAccessDenied(error))invalidate('Administrator access could not be confirmed. Return to the main app.');throw error;}
    if(data?.ok===false)throw new Error(data.code==='needs_confirmation'?'Possible existing coffee. Resolve the duplicate before approval.':'The administrator action was rejected.');
    return data;
   }
@@ -54,11 +59,18 @@ async function start(){
    if(invalidated)return;
 
    const trigger=root.querySelector('#admin-refresh');if(trigger)trigger.disabled=true;
-   const [dashboard,access]=await Promise.all([
-    adminRpc('dic_admin_dashboard'),adminRpc('dic_admin_access_overview')
+   try{
+    const [dashboard,access,...pages]=await Promise.all([
+    adminRpc('dic_admin_dashboard'),adminRpc('dic_admin_access_overview'),
+    ...['pending','conflicts','approved','shots','accounts','invites'].map(async kind=>{
+     try{return await adminRpc('dic_admin_records',{p_kind:kind,p_offset:recordPages[kind],p_limit:50});}
+     catch(error){if(isAccessDenied(error))throw error;return {items:[],total:0,offset:0,error:'Detailed listing is temporarily unavailable.'};}
+    })
    ]);
+   records=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map((kind,i)=>[kind,pages[i]]));
    if(invalidated)return;
-   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices);
+   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records);
+   }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
    if(invalidated)return;
@@ -75,6 +87,21 @@ async function start(){
   }
   // Delegate actions from stable root, which survives refresh renders.
   root.addEventListener?.('submit',event=>{
+   if(event.target?.matches?.('[data-record-form]')){
+    event.preventDefault();
+    guarded(async()=>{
+     const form=event.target,type=form.dataset.type,id=form.dataset.id;
+     const rev=Number(form.dataset.revision),reason=String(form.elements.namedItem('reason')?.value||'').trim();
+     if(!/^[0-9a-f-]{36}$/i.test(id)||!Number.isSafeInteger(rev)||rev<1||reason.length<8)throw new Error('A valid record, revision and correction reason are required.');
+     const changes=Object.fromEntries(Array.from(form.elements).filter(el=>el.name&&el.name!=='reason').map(el=>[el.name,el.value]));
+     if(!globalThis.confirm?.('Save this administrator correction? The original values will remain in the audit record.'))return;
+     await adminRpc(type==='shot'?'dic_admin_edit_shot':'dic_admin_edit_coffee',{
+      p_record_id:id,p_expected_revision:rev,p_details:changes,p_reason:reason,p_kind:type
+     });
+     await refresh();actionMessage('Audited correction saved.');
+    });return;
+   }
+   
    if(event.target?.id!=='admin-invite-form')return;
    event.preventDefault();
    guarded(async()=>{
@@ -91,6 +118,37 @@ async function start(){
    const button=event.target?.closest?.('[data-action],#admin-refresh');
    if(!button)return;
    const action=button.dataset.action||'refresh';
+   if(action==='record-page'){
+    const kind=button.dataset.kind,offset=Number(button.dataset.offset);
+    if(!['pending','conflicts','approved','shots','accounts','invites'].includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
+    guarded(async()=>{recordPages[kind]=offset;await refresh();root.querySelector('#admin-'+kind)?.scrollIntoView?.({block:'start'});});return;
+   }
+   if(action==='edit-toggle'){
+    const form=Array.from(root.querySelectorAll('[data-record-form]')).find(f=>f.dataset.id===button.dataset.id);
+    if(form)form.hidden=!form.hidden;return;
+   }
+   if(action==='extract-coffee-url'){
+    guarded(async()=>{
+     const form=Array.from(root.querySelectorAll('[data-record-form]')).find(f=>f.dataset.id===button.dataset.id);
+     const url=String(form?.elements.namedItem('source_url')?.value||'').trim();
+     if(!form||!/^https:\/\//i.test(url))throw new Error('Enter an HTTPS coffee product URL.');
+     const {data,error}=await sdk.auth.getSession();
+     if(error||!data?.session?.access_token)throw new Error('Sign in again before URL extraction.');
+     const response=await fetch('/api/coffee-preview',{method:'POST',credentials:'same-origin',referrerPolicy:'no-referrer',headers:{'Content-Type':'application/json',Authorization:'Bearer '+data.session.access_token},body:JSON.stringify({source_url:url})});
+     const preview=await response.json();
+     // A delayed response belongs only to the same live administrator draft and URL.
+     if(invalidated||!root.contains(form)||String(form.elements.namedItem('source_url')?.value||'').trim()!==url)return;
+     if(!response.ok||!preview?.ok)throw new Error('Unable to extract coffee metadata from this URL.');
+     let populated=0;
+     for(const [key,value] of Object.entries(preview.fields||{})){
+      const name=key==='espresso_notes'?'espressoNotes':key;
+      const field=form.elements.namedItem(name);
+      if(field&&!field.readOnly&&!field.disabled&&typeof value==='string'&&!field.value.trim()){field.value=value;populated++;}
+     }
+     actionMessage('URL preview filled '+populated+' blank fields. Review and save explicitly; source identity is not automatically verified.');
+    });return;
+   }
+   
    if(action==='copy-invite'){
     guarded(async()=>{
      if(!issued?.invite_code)throw new Error('There is no recent invitation code to copy.');

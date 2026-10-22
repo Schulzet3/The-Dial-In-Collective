@@ -17,17 +17,24 @@ run_sql tests/sql/bootstrap.sql
 for migration in supabase/migrations/*.sql; do
   echo "Applying $migration to isolated PostgreSQL"
   run_sql "$migration"
-  # The foundation suite tests original direct-column grants, intentionally
-  # replaced by revision-checked APIs in subsequent migrations.
-  if [[ "$migration" == *20261012015655_dic_internal_function_access.sql ]]; then
-    run_sql supabase/tests/security_foundation.sql
-  fi
+  # Historical suites run at the schema boundary they were written to protect.
+  # Later migrations intentionally replace some of those permissions/gates.
+  case "$migration" in
+    *20261012015655_dic_internal_function_access.sql)
+      run_sql supabase/tests/security_foundation.sql ;;
+    *20261012183845_dic_import_qualified_validation.sql)
+      run_sql supabase/tests/native_import.sql ;;
+    *20261014152014_dic_owner_only_import_exception.sql)
+      run_sql supabase/tests/owner_only_import_exception.sql ;;
+    *20261014200634_dic_setup_rename_feed_memory.sql)
+      run_sql supabase/tests/setup_rename_feed_memory.sql ;;
+  esac
 done
 # Formal CLI-generated release migration is applied ONCE by the loop above.
 # No second draft application: privacy and identity regressions use final schema.
 run_sql tests/sql/owner-fixture.sql
-for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_coffee_review coffee_duplicate_first_auto_approval admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity; do
+for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_coffee_review admin_content_review coffee_duplicate_first_auto_approval admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity pre_release_cross_account source_worker_auth_and_admission; do
   echo "Running $regression"
   run_sql "supabase/tests/$regression.sql"
 done
-echo 'PASS: all checked-in migrations plus SQL security, identity, approval, admin, preview and multi-account Community quality regressions; no hosted connection.'
+echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization regressions; no hosted connection.'

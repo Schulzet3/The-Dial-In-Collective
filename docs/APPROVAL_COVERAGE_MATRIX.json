@@ -3,6 +3,7 @@
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "Any NEW current_owner_ decision key requires deliberate classification in this inventory before CI/build can pass; anchors verify source presence, NOT live user-device acceptance or every baseline behavior.",
   "owner_decision_key_inventory": [
+    "current_owner_admin_records_edit_20261021",
     "current_owner_approved_adaptive_extractor_production_release_20261020",
     "current_owner_approved_agtron_narrative",
     "current_owner_approved_community_nested_layout_20261018",
@@ -19,10 +20,12 @@
     "current_owner_beta_breached_password_opt_out_20261018",
     "current_owner_beta_member_soft_remove_only_20261018",
     "current_owner_duplicate_first_automatic_catalog_approval_20261021",
+    "current_owner_expedited_two_migrations_and_production_20261021",
     "current_owner_extractor_deterministic_only_20261019",
     "current_owner_github_continuity",
     "current_owner_github_free_private_no_upgrade_20261020",
     "current_owner_grinder_range_info_20261019",
+    "current_owner_hands_free_release_from_chat_20261021",
     "current_owner_one_visible_recipe_internal_families_20261020",
     "current_owner_outlier_research_20261018",
     "current_owner_permanent_admin_and_beta_invitation_access_20261018",
@@ -35,12 +38,16 @@
     "current_owner_required_outlier_review",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
-    "current_owner_single_use_beta_invites_20261018"
+    "current_owner_single_use_beta_invites_20261018",
+    "current_owner_universal_deployment_consent_20261021"
   ],
   "production": {
-    "netlify_deploy_id": "6ad7be20bf672d5c8936f19a",
-    "exact_source_sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
-    "owner_approval_for_new_release": "GRANTED_ONCE_IN_CHAT_PENDING_BACKEND_AND_BRANCH_RELEASE_PREFLIGHT"
+    "netlify_deploy_id": "6ad92fd1d706315f29032892",
+    "exact_source_sha": "1e79c4585c49ab517abb912887ee05ed7f4c4c4d",
+    "owner_approval_for_new_release": "DIC-20261021-BETA-COFFEE-01_CONSUMED; new explicit grant required for any later release",
+    "tested_application_source_sha": "c6976b1fc86ed5e6b38c0c38831950fca017b3a4",
+    "owner_device_acceptance": "NOT_YET_VERIFIED",
+    "chat_controller_native_last_push": "FAILED_39679465858; authorized connector nonforce original claim recovery verified"
   },
   "contracts": [
     {
@@ -146,7 +153,7 @@
       "decision_key": "current_owner_approved_community_release_context_20261018",
       "scope": "Sanitized Community coffee card/release grouping already deployed",
       "implementation": "published_source_and_migration",
-      "device_acceptance": "OWNER_OBSERVED_REGISTERED_MEMBER_BROWSING; PRIVATE_CROSS_ACCOUNT_API_UNVERIFIED_ISSUE_41",
+      "device_acceptance": "OWNER_MEMBER_BROWSE_ACCEPTED; SCOPED_REAL_CROSS_ACCOUNT_ROLE_ACCEPTANCE_CLOSED_ISSUE_41",
       "issue": 11,
       "assertions": [
         {
@@ -187,9 +194,9 @@
     {
       "id": "internal_single_visible_recipe",
       "decision_key": "current_owner_one_visible_recipe_internal_families_20261020",
-      "scope": "One visible family; distinct internal recipe evidence; NOT yet deployed",
-      "implementation": "DEVELOPMENT_ONLY",
-      "device_acceptance": "NOT_DEPLOYED",
+      "scope": "One visible family and distinct internal recipe evidence included in published application source; remaining candidate lifecycle and real multi-family acceptance tracked in #10/#13",
+      "implementation": "published_source",
+      "device_acceptance": "NOT_INDEPENDENTLY_VERIFIED_FOR_THIS_FEATURE",
       "issue": 10,
       "assertions": [
         {
@@ -292,8 +299,8 @@
       "id": "duplicate_first_catalog_auto_approval",
       "decision_key": "current_owner_duplicate_first_automatic_catalog_approval_20261021",
       "scope": "Only genuinely distinct member coffee auto approval and safe same-release reuse; hold genuine duplicate conflict; source provenance separate; keep Mango Pending",
-      "implementation": "IMPLEMENTED_TESTED_DEVELOPMENT_ONLY_8d8043f2567a7f4a32b25b10ac3e78ed4f69d948",
-      "device_acceptance": "NOT_DEPLOYED_SQL_OR_NETLIFY_NOT_OWNER_DEVICE_ACCEPTED",
+      "implementation": "published_source_and_migrations; Netlify READY/current 6ad92fd1d706315f29032892 at release commit 1e79c4585c49ab517abb912887ee05ed7f4c4c4d, tested application c6976b1fc86ed5e6b38c0c38831950fca017b3a4; DIC-20261021-BETA-COFFEE-01 consumed",
+      "device_acceptance": "AUTHENTICATED_ADMIN_AND_NONADMIN_WORKFLOW_ACCEPTANCE_NOT_YET_VERIFIED",
       "issue": 43,
       "assertions": [
         {
@@ -307,6 +314,39 @@
         {
           "path": "site/cloud/main.js",
           "contains": "Coffee automatically approved and added to the shared catalog."
+        }
+      ]
+    },
+    {
+      "id": "admin_approvable_record_explorer",
+      "decision_key": "current_owner_admin_records_edit_20261021",
+      "scope": "Admin portal only; no member/public pages, no live SQL",
+      "implementation": "DEV implemented including all Pending/Conflict page-2 review controls, full historical invitation metadata paging, scoped audited edits, and existing admission tools; JS/Chromium/SQL checks PASS. New RPC and worker-auth migration NOT hosted-applied; no frontend published.",
+      "device_acceptance": "NOT VERIFIED: current signed-in operator/member real device, UI keyboard/VoiceOver, post-deploy permissions/functional acceptance, consent receipts.",
+      "assertions": [
+        {
+          "path": "site/admin/view.js",
+          "contains": "admin-accounts"
+        },
+        {
+          "path": "site/admin/records.js",
+          "contains": "Creator not available"
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "dic_admin_records"
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "dic_admin_edit_shot"
+        },
+        {
+          "path": "build_cloud.mjs",
+          "contains": "admin/records.js"
+        },
+        {
+          "path": "supabase/migrations/20261021224447_dic_admin_content_review.sql",
+          "contains": "private.dic_admin_edit_record"
         }
       ]
     }
@@ -326,8 +366,8 @@
     },
     {
       "id": "multi_worker_release_guard",
-      "status": "OPEN",
-      "reason": "Git marker and credit guard are not atomic consumed-once locks across workers.",
+      "status": "OPEN_RESIDUAL_BYPASS_RISK",
+      "reason": "Single-use grant/consumption and a non-force Git compare-and-swap claim are implemented and the original authorized claim was consumed. GitHub Free/private CI cannot prevent direct-writer bypass or provider-admin redeploy; native Actions final push failed and is tracked in #44. Keep #38 open with this narrower, evidence-based scope.",
       "issue": 38
     },
     {
@@ -343,19 +383,19 @@
     },
     {
       "id": "netlify_release_branch_cutover",
-      "status": "BLOCKED",
-      "reason": "Current production watches development; requires owner to move Git CD to dedicated release/production branch AFTER inert workflow tests.",
+      "status": "COMPLETED_VERIFIED_20261021",
+      "reason": "Netlify production follows release/production and current READY deploy 6ad92fd1d706315f29032892 serves release 1e79c4585c49ab517abb912887ee05ed7f4c4c4d. The one approved release grant is consumed; cutover must not be repeated as pending work.",
       "issue": 38
     },
     {
       "id": "chatgpt_project_settings",
-      "status": "OWNER_ACTION_REQUIRED",
-      "reason": "Project instructions saved to GitHub file; no Project settings editor is exposed, user must paste and save."
+      "status": "OWNER_REPORTED_SAVED",
+      "reason": "Owner confirmed Project instructions were saved, recorded in the active work journal and issue #12 comment 6304881257. This is owner-report evidence; no direct Project-settings API readback is available. Do not ask for the same save again."
     },
     {
       "id": "github_free_private_no_paid_upgrade",
       "status": "LOCKED_POLICY_WITH_RESIDUAL_RISK",
-      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; retain advisory CI, exact SHA check, work journal and inert one-use controller. No branch protection guarantee.",
+      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; advisory CI, exact source readback, same-commit journal and single-use non-force release claim are compensating controls. Release cutover and one consumed claim are verified, with native Actions push transport and direct-writer/provider bypass risks still open.",
       "issue": 38
     }
   ],
@@ -364,5 +404,18 @@
     "open_count": 20,
     "fnv1a32": "aaaa90e5",
     "note": "Noncryptographic mutation tripwire only; baseline 79 Locked/20 Open preserved verbatim, later supersessions reside in Master Specification and Ledger."
+  },
+  "deployment_approval_policy": {
+    "decision_id": "OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021",
+    "consent": "one explicit deployment instruction includes all pending necessary frontend/backend/SQL/Edge/Auth/provider components unless expressly excluded",
+    "one_use_grant_required": true,
+    "source_SHA_required": true,
+    "new_release_status": "APPROVED_IN_PRINCIPLE_UNBOUND_PENDING_CI_AND_PROVIDER_PREFLIGHT",
+    "not_authorized": [
+      "unrelated member-data deletion/mutation",
+      "paid purchases or topups",
+      "GitHub Pro or public visibility",
+      "bypass of safety or backup safeguards"
+    ]
   }
 }

@@ -68,16 +68,43 @@ function uniqueProductHeading(html,sourceUrl,meta){
  return {name:heading.name,description:description||meta.description||'',url:sourceUrl,
   kind:'official_product_page',attributes:null};
 }
+function explicitReleaseYears(product){
+ const years=new Set(normalizeWords(product.name).match(/\b(?:19|20)\d\d\b/g)||[]);
+ // Keep sentence punctuation: "our company started in 2025. Harvest 2024"
+ // must not turn a nearby unrelated year into release evidence.
+ const description=String(product.description||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
+  .toLowerCase().replace(/<[^>]*>/g,' ').slice(0,1000);
+ const date='(?:19|20)\\d\\d(?:\\s*[/–—-]\\s*(?:(?:19|20)?\\d\\d))?';
+ const label='(?:harvest|crop|release|season|selection)';
+ const before=new RegExp('\\b'+label+'(?:\\s+year)?(?:\\s+(?:for|of|in|from))?\\s*[:–—-]?\\s*('+date+')\\b','g');
+ const after=new RegExp('\\b('+date+')\\s+'+label+'\\b','g');
+ for(const pattern of [before,after]){
+  for(const match of description.matchAll(pattern)){
+   const parts=match[1].match(/\d+/g)||[];
+   for(const part of parts)years.add(part.length===2?parts[0].slice(0,2)+part:part);
+  }
+ }
+ return [...years];
+}
 function hasReleaseProof(entered,product){
  if(!entered)return true;
  const value=normalizeWords(entered);
  const snippet=normalizeWords(product.name+' '+product.description.slice(0,1000));
- if(!value)return true;
- // Full release name or exact year in the product identity/description, never
- // in a footer copyright or unrelated recommended-products carousel.
- if((' '+snippet+' ').includes(' '+value+' '))return true;
- const years=[...value.matchAll(/\b(?:19|20)\d\d\b/g)].map(x=>x[0]);
- return years.length>0&&years.every(y=>(' '+snippet+' ').includes(' '+y+' '));
+ if(!value)return false;
+ const fullLabel=(' '+snippet+' ').includes(' '+value+' ');
+ const words=value.split(' '),year=/^(?:19|20)\d\d$/;
+ const years=words.filter(word=>year.test(word));
+ // A year may establish a plain harvest label, but never an unproved lot,
+ // batch, or named release that happens to share that year. Such labels
+ // require the full identity above; ambiguous evidence stays Pending.
+ const plainHarvest=words.every(word=>year.test(word)||/^(?:harvest|crop|release|season|year)$/.test(word));
+ const provedYears=explicitReleaseYears(product);
+ // A bare year is proof only in the product title or explicit harvest/crop/
+ // release/selection text. Conflicting release years never auto-promote.
+ if(years.length&&provedYears.some(y=>!years.includes(y)))return false;
+ if(plainHarvest)return years.length>0&&years.every(y=>provedYears.includes(y));
+ // Lot, batch and named releases require the complete literal label.
+ return fullLabel;
 }
 export function productNameMatches(entered,productName) {
  const q=normalizeWords(entered),p=normalizeWords(productName);
@@ -112,15 +139,14 @@ export function extractOfficialEvidence(html,submitted) {
   const heading=uniqueProductHeading(html,submitted.source_url,meta);
   if(heading)products.push(heading);
  }
- const same=products.filter(p=>productNameMatches(submitted.name,p.name)&&hasReleaseProof(submitted.release_label,p));
- if(same.length!==1){
-  // Multiple Product nodes can refer to multiple related items, not one.
-  // Accept a matching JSON-LD Product over redundant same-title OG metadata.
-  const strong=same.filter(x=>x.kind==='jsonld_product');
-  if(strong.length!==1)return {ok:false,reason:same.length?'ambiguous_product':'product_title_not_verified'};
-  same.splice(0,same.length,strong[0]);
- }
- const chosen=same[0];
+ const matching=products.filter(p=>productNameMatches(submitted.name,p.name));
+ // Choose evidence strength before release checks. Weak same-title OG metadata
+ // must not bypass a contradictory or unproved structured Product release.
+ const strong=matching.filter(x=>x.kind==='jsonld_product');
+ const candidates=strong.length?strong:matching;
+ if(candidates.length!==1)return {ok:false,reason:candidates.length?'ambiguous_product':'product_title_not_verified'};
+ const chosen=candidates[0];
+ if(!hasReleaseProof(submitted.release_label,chosen))return {ok:false,reason:'product_title_not_verified'};
  if(chosen.url&&submitted.source_url){
   try{
    const declared=new URL(submitted.source_url),linked=new URL(chosen.url,declared.origin);

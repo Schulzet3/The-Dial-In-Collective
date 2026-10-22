@@ -48,6 +48,22 @@ const summarize=async ([roaster,url])=>{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
+
+  // Only short, public source text around published specification labels.
+  // This is NOT an app parser fallback and never persists fetched raw HTML.
+  if(['SEY Kedida Gubata','Sweet Bloom Wuri','SEY Chorso Bule'].includes(roaster)){
+   const text=label=>{
+    const re=new RegExp(label+'[\\s\\S]{0,340}','i');
+    const fragment=re.exec(fetched.html)?.[0]||'';
+    return fragment.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
+   };
+   console.log('[DIC FIELD EVIDENCE DIAG] '+JSON.stringify({roaster,
+    source_sha256:createHash('sha256').update(fetched.html).digest('hex'),
+    varietal_text:text('VARIETAL'),region_text:text('REGION'),altitude_text:text('ALTITUDE'),
+    harvest_text:text('HARVEST'),roast_text:text('Roast Level')
+   }));
+  }
+
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Digest only, never the page body. Facts below are public source data.
   const keys=Object.keys(result.fields||{});
@@ -70,6 +86,10 @@ for(let i=0;i<targets.length;i+=2){
 console.log('[DIC ROASTER SUMMARY] '+JSON.stringify({total:results.length,
  parsed:results.filter(x=>x.status==='parsed').length,
  blocked:results.filter(x=>x.status!=='parsed').map(x=>({roaster:x.roaster,status:x.status})),
+ tasting_notes_present:results.filter(x=>x.status==='parsed'&&typeof x.tasting_notes==='string'&&x.tasting_notes.trim()).length,
+ parsed_missing_tasting_notes:results.filter(x=>x.status==='parsed'&&!x.tasting_notes).map(x=>({roaster:x.roaster,available:x.available})),
+ per_product_field_counts:results.map(x=>({roaster:x.roaster,status:x.status,fields:(x.available||[]).length,has_notes:Boolean(x.tasting_notes),has_recipe:Boolean(x.recipe)})),
+
  note:'Some same-roaster URLs intentionally represent separate releases or formats. Two Queen City product links represent the same coffee. Current anonymous HTTPS source checks are distinct from authenticated browser acceptance. No user quota was consumed.'}));
 
 // This deliberately opt-in live acceptance reports drift instead of a green
@@ -108,8 +128,11 @@ if(tim?.status==='parsed'){
  assert.equal(tim.details.processing_detail,undefined,'Picking and sorting must not be labeled a process type');
 } else console.log('[DIC TIM WENDELBOE LIMIT] '+JSON.stringify({status:tim?.status}));
 const raven=results.find(x=>x.roaster==='Echo Raven Mexico');
-if(raven?.status==='parsed')
+if(raven?.status==='parsed'){
  assert.equal(raven.details.named_producer,undefined,'Coffee growers from is not a named human producer');
+ assert.match(raven.tasting_notes||'',/chocolate.*cinnamon.*green apple/i,
+  'Echo Raven Mexico publishes Tasting Profile and all three explicit notes');
+}
 const corvus=results.find(x=>x.roaster==='Corvus Echo Gesha');
 if(corvus?.status==='parsed'){
  assert.match(corvus.name||'',/Echo Gesha/i);
@@ -127,6 +150,7 @@ const franky=results.find(x=>x.roaster==='PERC Franky Hoyos');
 const outpost=results.find(x=>x.roaster==='PERC Outpost Coffee');
 const onyx=results.find(x=>x.roaster==='Onyx Mullugeta Muntasha');
 const sweetWuri=results.find(x=>x.roaster==='Sweet Bloom Wuri');
+// Wuri's Roast Level chart endpoint is not an independently verified selected tier; keep unverified without marked-position evidence.
 const sweetUraga=results.find(x=>x.roaster==='Sweet Bloom Uraga');
 const heart=results.find(x=>x.roaster==='Heart Phono');
 const blackWhite=results.find(x=>x.roaster==='Black & White Los Altos');

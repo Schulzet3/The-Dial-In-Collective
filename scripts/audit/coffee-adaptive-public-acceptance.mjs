@@ -18,6 +18,7 @@ const targets=[
  ['Corvus Echo Gesha','https://www.corvuscoffee.com/products/echo-gesha'],
  ['Corvus Dead Reckoning','https://www.corvuscoffee.com/products/dead-reckoning-blend'],
  ['SEY Yaye Arbegona','https://www.seycoffee.com/collections/coffee/products/2026-yaye-arbegona-ethiopia'],
+ ['SEY Kedida Gubata','https://www.seycoffee.com/collections/coffee/products/2026-kedida-gubata-ethiopia'],
  ['Onyx Mullugeta','https://onyxcoffeelab.com/products/ethiopia-mullugeta-muntasha-natural-26?variant=43228176810082'],
  ['Sweet Bloom Wuri','https://sweetbloomcoffee.com/products/wuri'],
  ['Heart Phono','https://www.heartroasters.com/products/phono'],
@@ -40,7 +41,7 @@ const safeSummary=(x,name,retryReason,byteCount)=>({
 });
 // Independently check the actual public product API enrichment on four vendors,
 // with no auth tokens and without treating extra API data as canonical proof.
-const enrichmentTargets=new Set(['PERC Kenya Mara','Sweet Bloom Wuri','Heart Phono','Park City Ethiopia']);
+const enrichmentTargets=new Set(['PERC Kenya Mara','Sweet Bloom Wuri','Heart Phono','Park City Ethiopia','SEY Kedida Gubata']);
 const results=[];
 for(let i=0;i<targets.length;i+=2){
  const batch=await Promise.all(targets.slice(i,i+2).map(async([name,url])=>{

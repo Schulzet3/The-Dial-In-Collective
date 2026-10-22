@@ -1,0 +1,660 @@
+{
+  "schema_version": 1,
+  "as_of_utc": "2026-10-21T23:18:35Z",
+  "status": "THREE_PASSES_COMPLETE_APPLICATION_MERGED_OPERATIONS_MERGE_HELD",
+  "application": {
+    "reviewed_head": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+    "tree": "c8819ad71ceaf795db60e245bf373c959a102fa2",
+    "tested_merge_commit": "32ddf59981b2072c96c38d71d78e0f228ae2c49d",
+    "synthetic_merge_tree_equals_head": true,
+    "pr": 48,
+    "merged": true,
+    "workflows": [
+      {
+        "id": 39691380654,
+        "name": "DIC cloud UX regression checks",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380654",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 39691380609,
+        "name": "DIC cloud app build and tests",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380609",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 39691380667,
+        "name": "DIC approval, implementation and continuity contract",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380667",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 39691380621,
+        "name": "DIC isolated SQL release regression",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380621",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 39691380805,
+        "name": "DIC private visual review",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691380805",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      }
+    ],
+    "tests": {
+      "node22_version": "22.23.3",
+      "node22": 575,
+      "failures": 0,
+      "skipped": 0,
+      "node18_version": "18.20.8",
+      "node18_ignore_stage": 30,
+      "node18_failures": 0,
+      "node18_skipped": 0,
+      "pinned_lint_and_build": "PASS",
+      "shipped_assets_and_private_source_boundary": "PASS",
+      "postgres_version": "17.11",
+      "migrations": 34,
+      "sql_suites": 17,
+      "signed_postgrest_http_assertions": 32,
+      "snapshot_scenarios": 6,
+      "mobile_owner_checks": 50,
+      "visual_assertions": 151,
+      "screenshots": 38,
+      "service_worker_cold_offline_reopen": "PASS_ACTUAL_LOCALHOST_BROWSER",
+      "http_scope": "Actual HMAC-signed HTTP requests to isolated PostgREST with synthetic identities; not hosted GoTrue or production sessions.",
+      "browser_scope": "Chromium with synthetic accounts and records; not real device or live administrator/member acceptance."
+    },
+    "exact_file_readbacks": {
+      "integrated_checkpoint": 97,
+      "browser_followup": 12,
+      "final_presentation_followup": 14,
+      "all_byte_and_git_blob_hash_matches": true,
+      "count_boundary": "Per-commit changed-file checks overlap; do not sum them as unique files. PR #48 has 120 changed paths."
+    },
+    "visual_review": {
+      "workflow_run": 39691380805,
+      "artifact_id": 12388379058,
+      "archive_bytes": 9371547,
+      "archive_sha256": "0075721a2811d1abe9c54eadfc7bfffe3e43cf119c514fd357d1205a86e16e6d",
+      "sanitized_report": "docs/audits/2026-10-21-final-visual-results.json",
+      "sanitized_report_sha256": "2cee29c8f0f4396369f3ad52e8c7341a0155aab2bd3dca526cacd95d4eb7c53b",
+      "native_admin_images_reviewed": 6,
+      "other_images_byte_identical_to_previous_reviewed_artifact": 32,
+      "total_captures": 38,
+      "result": "PASS: final six administrator captures inspected at native resolution; prior heading/duplicate-empty-panel defects corrected, populated lists and mobile editors present, no blocking captured clipping or overlap. Other 32 captures exactly match the earlier reviewed set.",
+      "scope": "Synthetic Chromium artifact; not real-account, device or accessibility acceptance."
+    },
+    "final_presentation_followup": {
+      "source_files": [
+        "site/admin/records.js",
+        "site/admin/view.js"
+      ],
+      "test_files": [
+        "tests/admin-records.test.mjs",
+        "tests/browser/visual_review.py"
+      ],
+      "focused_test_pass": 35,
+      "focused_test_fail": 0,
+      "focused_test_skipped": 0,
+      "existing_visual_assertions_preserved": true,
+      "configured_captures": 38,
+      "runtime_result": "ALL_FIVE_EXACT_SOURCE_WORKFLOWS_AND_ALL_FIVE_POST_MERGE_WORKFLOWS_PASS",
+      "fixes": [
+        "One titled pending/conflict section and one truthful empty state; listing errors are not empty results.",
+        "Independent approval/duplicate/hold controls preserved in detail/fallback states.",
+        "Correct per-RPC synthetic fixture shapes and populated creator/notes/coffee/shot/account pages; contrasting legacy aggregates prove successful list totals drive cards.",
+        "Original 36 captures retained; mobile editable/readonly field inspection added in light and dark."
+      ],
+      "source_head": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5",
+      "merge_commit": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+    },
+    "merge_commit": "663cc6d779fec99ee788f655d75ebc8d96593a18",
+    "merge_tree": "c8819ad71ceaf795db60e245bf373c959a102fa2",
+    "merge_parents": [
+      "5ab369e6755d26e0e2e2c22724722a14ed8535d6",
+      "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+    ],
+    "actual_merge_tree_equals_tested_tree": true,
+    "merge_ref_and_parents_readback_exact": true,
+    "target_branch": "development/backend-foundation",
+    "pr_changed_files": 120,
+    "check_jobs": [
+      {
+        "id": 119538124546,
+        "name": "review",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123933,
+        "name": "cloud-tests",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123923,
+        "name": "validate",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123788,
+        "name": "approval",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123580,
+        "name": "mobile-browser-qa",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      },
+      {
+        "id": 119538123376,
+        "name": "sql",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "d366ec4afee6cf47be6611d9c2e37ca2a1954bc5"
+      }
+    ],
+    "post_merge_workflows": [
+      {
+        "id": 39691957997,
+        "name": "DIC isolated SQL release regression",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957997",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957863,
+        "name": "DIC controlled public roaster source probe",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957863",
+        "status": "completed",
+        "conclusion": "skipped",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957868,
+        "name": "DIC private visual review",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957868",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957623,
+        "name": "DIC cloud app build and tests",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957623",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957624,
+        "name": "DIC approval, implementation and continuity contract",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957624",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      },
+      {
+        "id": 39691957727,
+        "name": "DIC cloud UX regression checks",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39691957727",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "663cc6d779fec99ee788f655d75ebc8d96593a18"
+      }
+    ],
+    "required_workflows_before_and_after_merge": "ALL_FIVE_SUCCESS",
+    "optional_workflow_boundary": "The controlled public-roaster probe was skipped by design on the merge. It is not one of the five required workflows; Node test skip counts below remain zero."
+  },
+  "issues": {
+    "count": 20,
+    "readback_exact": true,
+    "all_existing_states_preserved": true,
+    "retitled": [
+      24,
+      36,
+      40
+    ],
+    "dispositions": [
+      {
+        "number": 5,
+        "title": "[P1] Complete member source-backed coffee verification and release acceptance",
+        "disposition": "The existing duplicate-first member catalog approval and separate trusted-source path are already deployed under release `1e79c458...`; do not reapply their two October 21 migrations. PR #48 adds source-only current-admission, exact Pending revision, release-identity and truthful source-status repairs. Keep this issue for distinct real-member verification/Retry acceptance and any remaining product-specific evidence gaps. Reuse #43 for administrator decisions and #33/#25 for extractor/graphic coverage.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 9,
+        "title": "[P0] Complete server-owned community eligibility and correction rules",
+        "disposition": "Preserve completed #34 held Confirm transport-failure/retry acceptance and the recorded Correct Shot positive path. Closed #41 remains scoped role/privacy evidence. Remaining work is the distinct wrong-member, stale-revision and hide/detach behavior, with the unfinished Hide Shot UI in #20. The audit adds synthetic privacy/revision coverage without calling it real-member acceptance or repeating the authorized historical cleanup.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 10,
+        "title": "[P0] Internal recipe families and single preference-aware recommendation",
+        "disposition": "One visible recipe and the internal preference-aware personal-family chooser are included in current application source. The audit repairs applied single-variable control consistency and recomputes personal families after the new administrator correction path. Remaining candidate lifecycle, non-ratio/same-ratio significance and genuine multi-family acceptance stay here and in #12/#13; existing helper code is not full feature completion.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 12,
+        "title": "[P0] Wire complete recommendation evidence tiers with provenance",
+        "disposition": "Full recommendation evidence hierarchy and provenance are already approved for development. #11 and #41 are completed prerequisites within their recorded scope and are not current blockers. The complete exact/related/similar Community tiers and durable provenance through Use Recommendation, payload and hydration remain unfinished. Do not substitute the published arrow/info display for this separate requirement or ask for the same development approval again.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 21,
+        "title": "[P0] Finish live iPhone offline shot replay and owner isolation acceptance",
+        "disposition": "Preserve the recorded real iPhone offline replay and cold-reopen evidence. PR #48 repairs explicit authorization-denial handling, owner cache clearing, outbox denial propagation and account races; source tests and synthetic Chromium remain distinct from real-device acceptance. Remaining unique account/queue/reload cases belong with #22. Known limit: if cache deletion itself fails, the current in-memory denial marker cannot protect a later full offline reload; no unsupported durable-revocation guarantee is claimed.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 22,
+        "title": "[P1] Execute real multi-device offline and conflict acceptance",
+        "disposition": "Retain genuine simultaneous-device edits, stale revisions, account switching and offline conflicts as the remaining acceptance scope. PR #48 adds behavioral regressions for private-state clearing and delayed old-account results without replacing this real-device work. Queue payloads/receipts remain preserved. A denied-screen private export policy has not been invented; failed cache deletion followed by a full offline reload remains explicit.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 23,
+        "title": "[P1] Implement high-signal admin review and safe canonical decisions",
+        "disposition": "Administrator approve/merge/hold and duplicate-first coffee handling are already deployed under #43. Complete paged creator-attributed listings and scoped audited record edits are the separate development-only #47 tranche, incorporated and repaired by PR #48. Reuse those implementations; do not build a second admin portal. Keep this issue for distinct high-signal conflict-review quality and acceptance that is not already owned by #43/#47.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 24,
+        "title": "[P1] Verify remaining single-use invitation lifecycle acceptance",
+        "disposition": "Invitation issue/revoke and member Remove/Restore are deployed and have scoped owner-run live evidence; preserve completed #41 checks. Remaining unique work is confirmed-email redemption, second-use/concurrent denial and any genuinely unverified clipboard or history-preservation case. New codes are single-use and nonexpiring before redemption; older calendar-expiry criteria are superseded history. No new invite or account mutation is authorized by this audit. Do not reopen the completed Generate/Revoke/RemoveRestore steps because the original issue title/checklist is older.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 25,
+        "title": "[P1] Complete real roast-graphic acceptance after published extractor",
+        "disposition": "Seven roast tiers and the daily preview cap of 12 are decided and implemented; #8 is completed. Published graphic/parser work and later accepted extraction cases remain evidence. PR #48 adds source-only contradiction/unit/identity regressions. Retain this issue for distinct real product/graphic field acceptance and link #33/#5 rather than repeating accepted examples or reopening settled quotas.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 27,
+        "title": "[P2] Verify restricted provider security and release settings",
+        "disposition": "Read-only audit verified 32 applied migrations, 44 RLS-enabled tables, no anon/direct-member table writes, function/grant boundaries and source/provider function parity within the recorded scope. Private no-policy tables and the narrowly gated security-definer APIs are intentional. Optional breached-password protection is an accepted private-beta boundary, not authorization to purchase a plan. Restricted provider settings/secret lifecycle and current billing remain evidence gaps; private-Free GitHub checks remain advisory under #38.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 28,
+        "title": "[P2] Verify backup courier health and non-disruptive failure monitoring",
+        "disposition": "PR #49 contains the tested main-only backup source-pin, snapshot-start and shared-snapshot recovery fixes, with 38/38 Node tests and six real PostgreSQL failure/concurrency groups. Automatic approval review blocked its merge because main's existing path filters would export the live database to a new encrypted GitHub artifact and run the isolated recovery workflow; explicit approval for those effects is required. No new backup/restore ran. Even after a future successful push smoke run, the courier ignores push artifacts, so scheduled offsite-copy/retention/watchdog and natural failure-alert delivery evidence remain distinct. Preserve every existing archive.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 30,
+        "title": "[P2] Recover missing research and prototype source material without inventing evidence",
+        "disposition": "The three-pass recovery inspected all accessible baseline repository documents, 915 reachable development commit metadata records, retrieved issue/PR discussions, both supplied ZIPs (all 24 recorded member checksums) and all 15 pages of the supplied research PDF. Nine referenced full research bodies, unavailable full transcripts and the failed JSX transfer remain missing. The audit does not invent their content or claim every historical chat was retrieved. See the complete traceability/source manifest in PR #48.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 33,
+        "title": "[P1] Multi-roaster URL extraction completeness: missing tasting notes and field regressions",
+        "disposition": "Retain published deterministic extractor work and previously accepted source cases. PR #48 repairs spelled-out recipe units/nonfinite results, contradictory same-product metadata/graphics, contextual release/lot proof, fresh admission and stale Pending revision binding. These newer changes remain source-only. Track any unsupported current product URL or missing field distinctly under this issue/#25/#5. Later deterministic-only owner policy still governs; deferred device-only BYOK/screenshot work is #18.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 36,
+        "title": "[P1] Complete remaining limited-pilot acceptance and backup evidence",
+        "disposition": "The technical pilot publication and later authorized production release are completed. Preserve accepted #11 Community browsing, #34 held retry, #41 scoped role/privacy, invitation issue/revoke and Remove/Restore receipts. This umbrella now tracks only the distinct remaining work in #21/#22/#24/#26/#28 and new #47 device acceptance. Do not repeat historical migrations, routing, accepted cases or the consumed grant. PR #48 contains the full reconciled register; PR #49's operations merge awaits explicit owner approval because automatic approval review blocked its live-read backup/recovery effects.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 38,
+        "title": "[P1] Prevent duplicate Netlify production publishes for one owner authorization",
+        "disposition": "The original single-use grant has one verified consumed claim and production release. PR #48 strengthens latest exact-SHA CI, final ref/freshness leases, schema-v2 evidence, merge/SQL journal coverage and the fail-closed Netlify ignore adapter; matching main operations PR #49 is tested but awaits explicit approval of its live-read backup/recovery effects. GitHub Free/private status checks remain advisory, and direct-writer/provider/manual-build bypass boundaries remain. Native transport reliability is #44. Do not close this issue or replay the consumed grant based on unit tests.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 39,
+        "title": "[Published; real-device acceptance pending] Grinder range and next-shot arrow + info",
+        "disposition": "The approved grinder lowercase-i help is scoped to New Setup; the published next-shot arrow/info preserves single-change behavior. The audit fixes numerical application consistency and untouched-temperature precision. The reported missing-icon route remains a specific clarification/acceptance item, not approval to add an existing-settings grinder editor. Preserve rejected layout alternatives and the Locked Basket-based caption; any caption change remains a product decision.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 40,
+        "title": "[Published] Autofill button: remaining specific visual and accessibility checks",
+        "disposition": "The sole approved change from the broader mockup is the larger New Coffee Autofill button; it is published, and the owner reported that the app looks better. Preserve that scoped evidence. Do not resurrect rejected form/disclosure redesigns or demand a repeat of generic appearance acceptance. Keep any distinct keyboard/focus/device issue with #26; wider source evidence problems belong to #33.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 43,
+        "title": "[P0] Complete administrator coffee review and trusted-source promotion workflow",
+        "disposition": "Admin review and duplicate-first member flow, including both named October 21 migrations, are already deployed under release `1e79c458...`. Keep only the distinct genuine administrator/member acceptance and any remaining safe-review cases. PR #48 preserves Pending history and repairs source-worker admission/revision evidence; the expanded paged editor/creator/notes capability is the separately authorized development-only #47 tranche. Neither this audit nor prior consumption authorizes a new production migration or release.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 44,
+        "title": "[P0] Make beta production release a one-action tested-SHA workflow",
+        "disposition": "The installed chat path validated the original grant and constructed release `1e79c458...`; native Actions final Git push failed, and the same vetted claim was finalized by supervised non-force connector CAS. The historical rejection cause remains unproven. PR #48 adds bounded sanitized porcelain stdout/stderr and final preflight checks; matching main PR #49 passed exact CI but its merge awaits explicit approval of existing live-read backup/recovery effects. Do not call the native transport fixed end-to-end, manufacture acceptance by replaying the consumed grant, or create a second release request. A future separately authorized release can establish native acceptance with the improved diagnostics.",
+        "body_readback_exact": true,
+        "state": "open"
+      },
+      {
+        "number": 47,
+        "title": "[P1] Admin dashboard: ordered drill-down, creator attribution, editable coffees and shots",
+        "disposition": "The narrow development-only creator/notes/edit exception is now recorded in both canonical requirements files; original member-to-member privacy remains. Concurrent work through `5ab369...` is preserved in PR #48. Independent review additionally repairs omitted-field retention, final personal-family revision, 16,000-character notes, source-only audit history, readonly/stale-URL preview, navigation and page/card counts. Reviewed candidate `20261021222700` is replaced byte-identically by actual CLI-generated `20261021224447_dic_admin_content_review.sql`; it is NOT applied. Full isolated SQL passed; exact combined CI/browser evidence is tracked in PR #48. No production SQL/Edge/Auth/member/Netlify action is authorized. Actual owner/device acceptance and individual consent receipts remain unverified beyond the recorded owner assertion.",
+        "body_readback_exact": true,
+        "state": "open"
+      }
+    ],
+    "final_readback_at_utc": "2026-10-21T23:15:47Z",
+    "current_evidence_links_branch": "development/backend-foundation",
+    "final_readback": [
+      {
+        "number": 5,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 9,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 10,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 12,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 21,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 22,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 23,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 24,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 25,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 27,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 28,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 30,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 33,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 36,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 38,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 39,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 40,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 43,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 44,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      },
+      {
+        "number": 47,
+        "bodyExact": true,
+        "titleExact": true,
+        "state": "open"
+      }
+    ],
+    "original_bodies_and_former_titles_preserved": true,
+    "accepted_issues_untouched": [
+      11,
+      34,
+      41
+    ],
+    "invitation_policy": "New invitation codes are single-use and nonexpiring before redemption; historical calendar-expiry acceptance is superseded."
+  },
+  "operations": {
+    "pr": 49,
+    "head": "fcfb3d1b8b91bb593d9bd7ee6963068f43cdec9c",
+    "base": "f8726e330648c4a3e82de88d75b6978ffee37d44",
+    "status": "READY_HELD_BY_AUTOMATIC_APPROVAL_REVIEW",
+    "merged": false,
+    "ci_run": 39689422083,
+    "node22_tests": 38,
+    "snapshot_scenarios": 6,
+    "changed_files_readback": 27,
+    "independent_all_candidate_files_readback": 33,
+    "hold_reason": "Merging existing main backup/recovery paths triggers a read-only live database export, a new encrypted private GitHub artifact and isolated recovery. Automatic approval review requires explicit owner approval of those concrete effects.",
+    "no_bypass": true,
+    "native_release_transport_acceptance": "UNPROVEN",
+    "new_offsite_copy_receipt": "NOT_ESTABLISHED",
+    "candidate_tree": "e4b23a4db65e8636b1317fa0b8d592340a96b19d",
+    "installed_on_main": false,
+    "live_export_or_restore_executed": false,
+    "approval_question": "May I merge PR #49, which will run the existing read-only live database backup into an encrypted artifact in this private GitHub repository and separately run the isolated database-recovery check?",
+    "backup_and_recovery_evidence_boundary": "The encrypted backup and recovery workflows each capture live data read-only. The recovery workflow restores its separately captured snapshot into an isolated target; it does not decrypt or restore the newly uploaded encrypted backup artifact."
+  },
+  "production": {
+    "checked_at_utc": "2026-10-21T23:01:15Z",
+    "id": "6ad92fd1d706315f29032892",
+    "state": "ready",
+    "branch": "release/production",
+    "commit_ref": "1e79c4585c49ab517abb912887ee05ed7f4c4c4d",
+    "published_at": "2026-10-21T21:34:34.367Z",
+    "applied_migrations": 32,
+    "new_audit_migrations_applied": false,
+    "prior_grant_consumed": true,
+    "provider_changes_by_audit": false,
+    "unapplied_audit_migrations": [
+      "20261021221455_dic_source_worker_auth_and_admission.sql",
+      "20261021224447_dic_admin_content_review.sql"
+    ]
+  },
+  "historical_application_checkpoints": [
+    {
+      "as_of_utc": "2026-10-21T23:05:00Z",
+      "scope": "Earlier d556656 integration and the subsequently resolved final presentation follow-up; preserved history, not current pending work.",
+      "receipt": {
+        "reviewed_head": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+        "tree": "7b62dfc3af113f8aed4e824b082c09addba66dfb",
+        "tested_merge_commit": "3ac5300fbf954993c58aa0c11e9d0581f4eef1c1",
+        "synthetic_merge_tree_equals_head": true,
+        "pr": 48,
+        "merged": false,
+        "workflows": [
+          {
+            "id": 39690072140,
+            "name": "DIC approval, implementation and continuity contract",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072140"
+          },
+          {
+            "id": 39690072164,
+            "name": "DIC cloud app build and tests",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072164"
+          },
+          {
+            "id": 39690072166,
+            "name": "DIC cloud UX regression checks",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072166"
+          },
+          {
+            "id": 39690072139,
+            "name": "DIC isolated SQL release regression",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072139"
+          },
+          {
+            "id": 39690072223,
+            "name": "DIC private visual review",
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "d556656140aed478bd1a1c83c6b2b2734cdfad69",
+            "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39690072223"
+          }
+        ],
+        "tests": {
+          "node22": 573,
+          "failures": 0,
+          "skipped": 0,
+          "node18_ignore_stage": "PASS",
+          "migrations": 34,
+          "sql_suites": 17,
+          "signed_postgrest_http_assertions": 32,
+          "snapshot_scenarios": 6,
+          "mobile_owner_checks": 50,
+          "visual_assertions": 117,
+          "screenshots": 36
+        },
+        "exact_file_readbacks": {
+          "integrated_checkpoint": 97,
+          "browser_followup": 12
+        },
+        "visual_review": {
+          "artifact_id": 12387733069,
+          "sha256": "9267f3993e160d2dffa83061abdcbad2552f7601c3ffcf0287e09a08f174be58",
+          "native_admin_images_reviewed": 4,
+          "other_images_reviewed_in_contact_sheets": 32,
+          "result": "No blocking captured layout defect; raw lowercase internal headings and redundant empty panels confirmed. Synthetic legacy records fixture did not visually certify populated current record pages; narrow source/fixture follow-up pending."
+        },
+        "final_presentation_followup": {
+          "source_files": [
+            "site/admin/records.js",
+            "site/admin/view.js"
+          ],
+          "test_files": [
+            "tests/admin-records.test.mjs",
+            "tests/browser/visual_review.py"
+          ],
+          "focused_test_pass": 35,
+          "focused_test_fail": 0,
+          "focused_test_skipped": 0,
+          "existing_visual_assertions_preserved": true,
+          "configured_captures": 38,
+          "runtime_result": "NEXT_EXACT_GITHUB_CI_REQUIRED",
+          "fixes": [
+            "One titled pending/conflict section and one truthful empty state; listing errors are not empty results.",
+            "Independent approval/duplicate/hold controls preserved in detail/fallback states.",
+            "Correct per-RPC synthetic fixture shapes and populated creator/notes/coffee/shot/account pages; contrasting legacy aggregates prove successful list totals drive cards.",
+            "Original 36 captures retained; mobile editable/readonly field inspection added in light and dark."
+          ]
+        }
+      }
+    }
+  ],
+  "completion_boundary": {
+    "three_available_evidence_review_passes": "COMPLETE",
+    "confirmed_application_repairs": "MERGED_AND_TESTED",
+    "operations_integration": "TESTED_PR_READY_EXPLICIT_EFFECTS_APPROVAL_REQUIRED",
+    "all_product_requirements_complete": false,
+    "unavailable_history_recovered": false,
+    "future_error_free_guarantee": false,
+    "remaining_work_register": "docs/audits/2026-10-21-requirement-traceability.md",
+    "docs_commit_note": "This receipt records the tested application merge. Its final documentation-only commit is identified by the containing Git commit; it cannot contain its own commit hash."
+  }
+}

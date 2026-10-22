@@ -1,0 +1,290 @@
+{
+  "audit_id": "DIC-THREE-PASS-20261021",
+  "observed_at": "2026-10-21 22:06:21 UTC",
+  "recovery_source_sha": "c9829d157ef4f430d24af7056ab32661ba8629f5",
+  "production": {
+    "site_id": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+    "deploy_id": "6ad92fd1d706315f29032892",
+    "state": "ready",
+    "source_sha": "1e79c4585c49ab517abb912887ee05ed7f4c4c4d",
+    "branch": "release/production",
+    "published_at": "2026-10-21T21:34:34.367Z",
+    "secret_scan_matches": 0,
+    "credits": "NOT_EXPOSED_BY_CONNECTED_READ"
+  },
+  "database": {
+    "project_id": "azviqqejypsefzilgonr",
+    "status": "ACTIVE_HEALTHY",
+    "counts": {
+      "shots": 22,
+      "coffees": 4,
+      "auth_users": 5,
+      "shot_notes": 22,
+      "submissions": 7,
+      "beta_members": 5,
+      "orphan_notes": 0,
+      "community_shots": 2
+    },
+    "table_count": 44,
+    "rls_disabled_tables": 0,
+    "anonymous_accessible_tables": 0,
+    "direct_member_writable_tables": 0,
+    "function_count": 77,
+    "anonymous_executable_functions": 0,
+    "member_security_definer_functions": [
+      {
+        "name": "dic_browse_community_shots",
+        "args": "p_limit integer, p_offset integer",
+        "search_path": [
+          "search_path=\"\""
+        ]
+      },
+      {
+        "name": "dic_claim_universal_preview",
+        "args": "",
+        "search_path": [
+          "search_path=\"\""
+        ]
+      },
+      {
+        "name": "dic_community_evidence_counts",
+        "args": "p_coffee_id uuid, p_style text",
+        "search_path": [
+          "search_path=\"\""
+        ]
+      },
+      {
+        "name": "dic_confirm_community_outlier",
+        "args": "p_shot_id uuid, p_expected_revision bigint",
+        "search_path": [
+          "search_path=\"\""
+        ]
+      },
+      {
+        "name": "dic_my_community_outliers",
+        "args": "",
+        "search_path": [
+          "search_path=\"\""
+        ]
+      }
+    ],
+    "migrations": [
+      {
+        "version": "20261009190246",
+        "name": "dic_identity_foundation"
+      },
+      {
+        "version": "20261009192735",
+        "name": "dic_coffee_catalog"
+      },
+      {
+        "version": "20261012015417",
+        "name": "dic_equipment_workspaces"
+      },
+      {
+        "version": "20261012015600",
+        "name": "dic_shots_recipes_community"
+      },
+      {
+        "version": "20261012015655",
+        "name": "dic_internal_function_access"
+      },
+      {
+        "version": "20261012021522",
+        "name": "dic_beta_session_api"
+      },
+      {
+        "version": "20261012022200",
+        "name": "dic_authenticated_core_api"
+      },
+      {
+        "version": "20261012023227",
+        "name": "dic_hidden_shot_family_integrity"
+      },
+      {
+        "version": "20261012030019",
+        "name": "dic_owner_workspace_actions"
+      },
+      {
+        "version": "20261012030729",
+        "name": "dic_remember_feed_condition"
+      },
+      {
+        "version": "20261012030924",
+        "name": "dic_bound_client_mutations"
+      },
+      {
+        "version": "20261012183642",
+        "name": "dic_native_import_review"
+      },
+      {
+        "version": "20261012183845",
+        "name": "dic_import_qualified_validation"
+      },
+      {
+        "version": "20261014152014",
+        "name": "dic_owner_only_import_exception"
+      },
+      {
+        "version": "20261014200634",
+        "name": "dic_setup_rename_feed_memory"
+      },
+      {
+        "version": "20261014212829",
+        "name": "dic_admin_read_only_dashboard"
+      },
+      {
+        "version": "20261014215731",
+        "name": "dic_roaster_identity_matching"
+      },
+      {
+        "version": "20261014221324",
+        "name": "dic_coffee_auto_catalog"
+      },
+      {
+        "version": "20261014222202",
+        "name": "dic_source_worker_target"
+      },
+      {
+        "version": "20261014222802",
+        "name": "dic_unified_coffee_rpc_compat"
+      },
+      {
+        "version": "20261016154252",
+        "name": "dic_url_first_and_autofill_preview"
+      },
+      {
+        "version": "20261017005739",
+        "name": "dic_universal_coffee_preview_shared_30s"
+      },
+      {
+        "version": "20261017015639",
+        "name": "dic_universal_preview_jwt_role_compat"
+      },
+      {
+        "version": "20261017050220",
+        "name": "dic_preview_daily_budget_12"
+      },
+      {
+        "version": "20261017053258",
+        "name": "dic_seven_roast_tier_compatibility"
+      },
+      {
+        "version": "20261018035732",
+        "name": "dic_seven_roast_owner_data"
+      },
+      {
+        "version": "20261018054140",
+        "name": "dic_community_quality_integrity"
+      },
+      {
+        "version": "20261018064703",
+        "name": "dic_contextual_quality_community_ui"
+      },
+      {
+        "version": "20261019041437",
+        "name": "dic_community_release_context"
+      },
+      {
+        "version": "20261019041452",
+        "name": "dic_admin_beta_invitation_controls"
+      },
+      {
+        "version": "20261021165214",
+        "name": "dic_admin_coffee_review"
+      },
+      {
+        "version": "20261021165302",
+        "name": "dic_duplicate_first_auto_approval"
+      }
+    ],
+    "advisory_summary": [
+      {
+        "name": "rls_enabled_no_policy",
+        "level": "INFO",
+        "count": 4,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+      },
+      {
+        "name": "authenticated_security_definer_function_executable",
+        "level": "WARN",
+        "count": 5,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "level": "WARN",
+        "count": 1,
+        "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+      }
+    ],
+    "performance_summary": [
+      {
+        "name": "unindexed_foreign_keys",
+        "level": "INFO",
+        "count": 10,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys"
+      },
+      {
+        "name": "unused_index",
+        "level": "INFO",
+        "count": 11,
+        "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+      }
+    ],
+    "edge_functions": [
+      {
+        "name": "dic-verify-coffee",
+        "status": "ACTIVE",
+        "version": 4,
+        "verify_jwt": true,
+        "updated_at": 1792198699690
+      },
+      {
+        "name": "dic-preview-coffee",
+        "status": "ACTIVE",
+        "version": 3,
+        "verify_jwt": true,
+        "updated_at": 1792300123394
+      }
+    ],
+    "anonymous_column_accessible_tables": 0,
+    "direct_member_column_writable_tables": 0,
+    "source_migration_aliases": [
+      {
+        "source_file": "20261021053500_dic_admin_coffee_review.sql",
+        "applied_provider_version": "20261021165214",
+        "name": "dic_admin_coffee_review"
+      },
+      {
+        "source_file": "20261021062000_dic_duplicate_first_auto_approval.sql",
+        "applied_provider_version": "20261021165302",
+        "name": "dic_duplicate_first_auto_approval"
+      }
+    ],
+    "function_reconciliation": {
+      "baseline_source": "c9829d157ef4f430d24af7056ab32661ba8629f5",
+      "project_functions": 77,
+      "exact_body_matches_after_recorded_migration_rewrites": 76,
+      "reviewed_equivalent_recovery_guard": "public.rls_auto_enable: keyword case/format differ; same recovery-script operations",
+      "explained_rewrites": [
+        "20261012183845_dic_import_qualified_validation.sql: nodes.k/nodes.val qualification",
+        "20261014152014_dic_owner_only_import_exception.sql: owner exception guard and epilogue"
+      ],
+      "unexplained_live_body_drift": 0,
+      "scope": "Observed applied baseline only; the new source-worker audit migration is staged and deliberately differs from live definitions."
+    },
+    "staged_audit_migration": {
+      "file": "20261021221455_dic_source_worker_auth_and_admission.sql",
+      "status": "SOURCE_ONLY_NOT_APPLIED",
+      "edge_coordination": "Updated dic-verify-coffee must carry submission_revision; deploy compatible Edge first, then migration under a future exact approval."
+    }
+  },
+  "limitations": [
+    "Provider metadata/read-only aggregates are not new authenticated device acceptance.",
+    "Actual Netlify credit debit not exposed.",
+    "No live SQL, Auth, Edge or data mutation performed.",
+    "Cloudflare/Resend/Apps Script current private provider settings not independently accessible through installed purpose-built tools.",
+    "Security-definer warnings require function-specific authorization analysis; warning count is not a vulnerability count."
+  ]
+}

@@ -1,16 +1,24 @@
-name: DIC isolated full app-data recovery drill
+name: DIC weekly recovery verification
 
 on:
   push:
     branches:
-      - development/backend-foundation
+      - main
     paths:
       - .github/workflows/database-recovery-drill.yml
       - scripts/backups/isolated-recovery-drill.sh
+      - scripts/backups/capture-recovery-snapshot.sh
+      - scripts/backups/assert-recovery-inventory.sh
   workflow_dispatch:
+  schedule:
+    - cron: '43 10 * * 0'
 
 permissions:
   contents: read
+
+concurrency:
+  group: dic-weekly-isolated-restore
+  cancel-in-progress: false
 
 jobs:
   isolated-restore:

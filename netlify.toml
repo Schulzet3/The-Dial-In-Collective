@@ -7,7 +7,9 @@
   # Ignore automatic production builds unless this is a deliberately marked,
   # fully tested release with a fresh verified balance of at least 15 credits.
   # No branch/deploy preview publication without an explicit future approval.
-  ignore = "node ./scripts/netlify/should-ignore-build.mjs"
+  # Runtime/script errors must skip too: only the exact allow token AND exit42
+  # become Netlify exit1. The inline adapter also covers a missing helper file.
+  ignore = "DIC_IGNORE_STATUS=0; DIC_IGNORE_RESULT=$(node ./scripts/netlify/should-ignore-build.mjs) || DIC_IGNORE_STATUS=$?; if [ \"$DIC_IGNORE_STATUS\" -eq 42 ] && [ \"$DIC_IGNORE_RESULT\" = DIC_BUILD_ALLOWED ]; then exit 1; fi; exit 0"
 [build.environment]
   NODE_VERSION = "22"
 # Build coordinates are SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY only.
