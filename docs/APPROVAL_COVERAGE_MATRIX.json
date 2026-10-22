@@ -392,8 +392,8 @@
       "id": "hide_shot_backend_action_retired",
       "decision_key": "current_owner_retire_hide_shot_backend_20261021",
       "scope": "Reject obsolete hide action in client and server, preserve old data and legacy outbox entries",
-      "implementation": "STAGED_CI_PENDING_HOSTED_SQL_NOT_APPLIED",
-      "device_acceptance": "NOT_APPLICABLE_UNTIL_SEPARATE_SITE_RELEASE",
+      "implementation": "SOURCE_MERGED_6_OF_6_CI_AND_HOSTED_GUARD_APPLIED_20261022041530",
+      "device_acceptance": "Backend SQLSTATE 22023 readback confirmed; source UI not deployed",
       "issue": 20,
       "assertions": [
         {
@@ -401,7 +401,7 @@
           "absent": "'save_shot','hide_shot'"
         },
         {
-          "path": "supabase/migrations/20261022043000_dic_retire_hide_shot_action.sql",
+          "path": "supabase/migrations/20261022041530_dic_retire_hide_shot_action.sql",
           "contains": "if action='hide_shot' then"
         },
         {
@@ -412,7 +412,15 @@
           "path": "tests/retired-hide-shot-sql.test.mjs",
           "contains": "rejected before existing owner and receipt routing"
         }
-      ]
+      ],
+      "production_migration_version": "20261022041530",
+      "production_counts_verified": {
+        "shots": 22,
+        "hidden": 0,
+        "notes": 22,
+        "community_shots": 2,
+        "mutation_receipts": 44
+      }
     }
   ],
   "active_gap_flags": [

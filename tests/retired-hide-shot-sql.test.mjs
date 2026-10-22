@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 
-const source=readFileSync(new URL('../supabase/migrations/20261022043000_dic_retire_hide_shot_action.sql',import.meta.url),'utf8');
+const source=readFileSync(new URL('../supabase/migrations/20261022041530_dic_retire_hide_shot_action.sql',import.meta.url),'utf8');
 test('retired hide action is rejected before existing owner and receipt routing',()=>{
  assert.match(source,/create or replace function public\.dic_apply_client_change/);
  assert.match(source,/if action='hide_shot' then/);
