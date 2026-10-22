@@ -32,7 +32,6 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
    ${canEdit?`<div class="shot-actions">
     ${button('Edit','edit',`data-id="${e(shot.id)}"`,'primary compact history-edit')}
     ${canChoose?button('Make Current Recipe','make-current',`data-id="${e(shot.id)}"`,'ghost compact history-make-current'):''}
-    ${button('Hide Shot','hide-shot',`data-id="${e(shot.id)}"`,'ghost compact history-hide')}
    </div>`:''}
   </div>`:''}
  </section>`;

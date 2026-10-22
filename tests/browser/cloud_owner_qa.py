@@ -167,6 +167,8 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.wait_for_function('!document.querySelector("#sheet").open');assert page.locator('.current-mark').count()==1;checks.append('Saving shot closes log and pins coffee')
  assert page.locator('.feedback-panel').count()==1;checks.append('Latest result and radar visible after save')
  page.get_by_text('Shot History (1)',exact=True).click();page.locator('[data-action=shot-expand]').click();assert page.locator('.shot-body .radar').count()==1;checks.append('Shot details expand inline with radar and notes')
+ assert page.locator('.shot-body [data-action=hide-shot]').count()==0 and page.get_by_role('button',name='Hide Shot',exact=True).count()==0
+ checks.append('Shot History retains Edit/Make Current but has no Hide Shot control')
  header=page.locator('.shot-overview').first.inner_text()
  assert 'Home Espresso' not in header and 'Basket Dose' not in header and 'Slow Feed' not in header
  assert page.locator('.shot-record-context').get_by_text('Home Espresso',exact=True).count()==1
