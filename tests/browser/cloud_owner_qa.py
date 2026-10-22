@@ -457,6 +457,26 @@ with sync_playwright() as p:
   }""")
  assert switch=={'firstRuns':1,'nextRuns':1,'clear':True},switch
  checks.append('Cross-account inflight synchronization never satisfies the next account cache refresh')
+ # Responsive regression: shot text, borders, chart and badges must fit at phone/tablet sizes.
+ for width in [320,360,375,390,430,768]:
+  page.set_viewport_size({'width':width,'height':850})
+  page.evaluate("window.__app.view='coffees';window.__app.expanded.add('coffee');window.__app.shotExpanded.add('short-b');window.__app.render()")
+  page.get_by_text('Shot History (4)',exact=True).click() if not page.locator('.shot-toggle').count() else None
+  assert page.locator('.shot-numbers').count()>0
+  detail=page.locator('.shot-numbers').first
+  assert detail.evaluate("(el)=>getComputedStyle(el).whiteSpace!=='nowrap' && getComputedStyle(el).overflowX!=='auto'")
+  assert detail.evaluate("(el)=>el.scrollWidth<=el.clientWidth+2"),f'Shot summary clipped at {width}px'
+  assert page.evaluate("document.documentElement.scrollWidth<=innerWidth+1"),f'Page overflow at {width}px'
+  assert page.locator('.shot').first.evaluate("(el)=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1}"),f'Card border overflow at {width}px'
+  checks.append(f'{width}px: shot summary, Grind and card border fit without clipping')
+ # Enlarged text must reflow instead of showing a hidden horizontal strip.
+ page.set_viewport_size({'width':320,'height':850})
+ detail=page.locator('.shot-numbers').first
+ detail.evaluate("(el)=>el.style.fontSize='21px'")
+ assert detail.evaluate("(el)=>el.scrollWidth<=el.clientWidth+2")
+ assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+ checks.append('320px with enlarged shot text keeps the full measurement line readable')
+ page.set_viewport_size({'width':390,'height':844})
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
  assert not errors,errors;checks.append('No browser JavaScript exceptions')
  b.close()
