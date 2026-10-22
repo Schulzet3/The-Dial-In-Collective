@@ -19,7 +19,7 @@ async function boot({deferPreview=false}={}){
   {name:'release_label',value:'',readOnly:true},
   {name:'origin',value:''},{name:'process',value:'Washed'},
   {name:'variety',value:'',disabled:true},
-  {name:'source_url',value:URL_A},{name:'reason',value:'Correct the published origin'}
+  {name:'source_url',value:URL_A}
  ];
  const fields=Object.fromEntries(controls.map(field=>[field.name,field]));
  controls.namedItem=name=>fields[name];
@@ -45,7 +45,7 @@ async function boot({deferPreview=false}={}){
  const preview={ok:true,fields:{release_label:'2026 Harvest',origin:'Kenya',process:'Natural',variety:'Bourbon'}};
  const context=vm.createContext({document:{querySelector:()=>root},supabase:{createClient:()=>sdk},
   CLOUD_CONFIG:{enabled:true},secureOrigin(){},isAccessDenied,e,applyAppearance(){},readAppearance:()=> 'light',
-  renderAdminDashboard:()=> 'Admin fixture',renderAdminDenied:()=> 'Access denied',confirm:()=>true,
+  renderAdminDashboard:()=> 'Admin fixture',renderAdminDenied:()=> 'Access denied',confirm:()=>{throw Error('Unapproved extra confirmation');},
   fetch:async()=>{
    previewStarted.resolve();
    if(deferPreview)await previewReply.promise;
@@ -65,6 +65,7 @@ test('approved coffee preview preserves readonly identity and typed facts while 
  f.save();await tick();
  const saved=f.calls.find(call=>call.name==='dic_admin_edit_coffee');
  assert.ok(saved);assert.equal(saved.args.p_expected_revision,4);
+ assert.equal(saved.args.p_reason,'');assert.equal(Object.hasOwn(saved.args.p_details,'reason'),false);
  assert.equal(saved.args.p_details.name,'Canonical Coffee');
  assert.equal(saved.args.p_details.roaster,'Original Roaster');
  assert.equal(saved.args.p_details.release_label,'');

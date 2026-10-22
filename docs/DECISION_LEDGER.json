@@ -3712,5 +3712,24 @@
     ],
     "consent": "Owner asserts user consent for admin reading/editing; not independently verified or authority to remove account protections",
     "stage": "SOURCE_ONLY_APPROVED_NOT_IMPLEMENTED_NOT_TESTED_NOT_DEPLOYED"
+  },
+  "current_owner_sitewide_low_friction_correction_20261021": {
+    "id": "UX-SITEWIDE-DIRECT-SAVE-20261021",
+    "status": "Locked — owner explicitly approved source implementation and testing, NOT new production deployment",
+    "owner_quote": "Yes. I'd like to eliminate the mandatory correction reason and confirmation site wide. Where else does it exist? Agreed it should give warning only if the edit creates a genuine identity conflict.",
+    "scope": "Routine Save changes to administrator and member editable coffee records, shot measurements, private notes and other ordinary record edits. Never require a human correction explanation or a second confirm; generate neutral server audit reason where needed, keep revision and before/after history. Remove advisory ±1g shot basket dose browser prompt, keep numeric validation.",
+    "supersedes_only": [
+      "Mandatory 8–1000 character human correction reason and secondary browser confirmation for ordinary administrator audited coffee/shot/note edits",
+      "Preserved separately audited Edit reason gate in UX-ADMIN-LOW-FRICTION-REVIEW-20261021",
+      "Extra browser Log anyway confirmation for nonblocking advisory ±1g basket dose deviation"
+    ],
+    "preserves": [
+      "Administrator/member role admission and RLS authorization; password/secrets; creator privacy in Community",
+      "All immutable record IDs, before/after correction snapshots, service-side neutral audit provenance, revision conflicts and uniqueness/near-duplicate release protections",
+      "Genuine conflict warnings and explicit consent for merge/hold ambiguous coffee identity and outlier Community confirmation",
+      "Explicit confirmations for revocation/removing access, bulk historical imports and other materially different non-edit actions",
+      "Private GitHub Free, no live provider change/paid topup, and fresh exact-SHA single-use owner consent for a later deployment"
+    ],
+    "implementation": "IMPLEMENTED IN ISOLATED SOURCE; Node, browser and isolated SQL CI pending. Production unchanged."
   }
 }
