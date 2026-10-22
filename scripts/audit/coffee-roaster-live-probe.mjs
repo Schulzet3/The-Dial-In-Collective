@@ -48,6 +48,22 @@ const summarize=async ([roaster,url])=>{
   const fetched=await fetchPublicCoffeeHtml(url);
   if(!fetched.ok)return {roaster,status:fetched.reason};
   const result=extractPublicCoffeeFacts(fetched.html,{source_url:fetched.source_url});
+
+  // Only short, public source text around published specification labels.
+  // This is NOT an app parser fallback and never persists fetched raw HTML.
+  if(['SEY Kedida Gubata','Sweet Bloom Wuri','SEY Chorso Bule'].includes(roaster)){
+   const text=label=>{
+    const re=new RegExp(label+'[\\s\\S]{0,340}','i');
+    const fragment=re.exec(fetched.html)?.[0]||'';
+    return fragment.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
+   };
+   console.log('[DIC FIELD EVIDENCE DIAG] '+JSON.stringify({roaster,
+    source_sha256:createHash('sha256').update(fetched.html).digest('hex'),
+    varietal_text:text('VARIETAL'),region_text:text('REGION'),altitude_text:text('ALTITUDE'),
+    harvest_text:text('HARVEST'),roast_text:text('Roast Level')
+   }));
+  }
+
   if(!result.ok)return {roaster,status:result.reason,bytes:Buffer.byteLength(fetched.html)};
   // Digest only, never the page body. Facts below are public source data.
   const keys=Object.keys(result.fields||{});

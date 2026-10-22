@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Extractor #33 second pass: source-vs-parser completeness diagnosis
+- Live tasting notes now PASS 25/25 parsed current product URLs at a5e93c8, Picky adaptive 2MB conditional HTML recovered separately. Diagnostic source-only probe for SEY Kedida and Sweet Bloom Wuri optional metadata in progress, no production mutation or new broad release approval.
+
+
 ## 2026-10-21 extractor #33 live gap discovered and repaired (development-only)
 - Live unprivileged probe 39701479733 successfully parsed 25/31 URLs with tasting notes on 24/25 parsed; only Echo Raven Mexico lacked notes, although current selected product says `Tasting Profile: Chocolate, cinnamon, green apple.` Added exact label alias and source-backed regression; follow-up public matrix/CI pending. Picky adaptive retry separately recovered 9 source-backed fields (no blanket 2MB allowance). Unavailable source pages and rejected Queen City homepage remain honestly excluded. No Netlify/Supabase/provider mutation.
 
