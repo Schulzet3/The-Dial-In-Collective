@@ -23,3 +23,18 @@ Benchmark equivalent work items before/after; target at least a 90% median reduc
 ## Approval-ready packaging versus publish approval
 
 A complete fresh backup and independently checked offsite custody must cover the last observed data write, with verification within the required two hours; credit evidence must be dated within 24 hours and show at least the approved per-build reserve. The offline dossier explicitly distinguishes `AWAITING_EXPLICIT_OWNER_APPROVAL` from `BLOCKED` and from `PREPARED_FOR_INDEPENDENT_RELEASE_CONTROLLER_CHECK`. These are explanatory source-only states, not live release commands; the actual release controller revalidates all conditions and single-use grant at execution time.
+
+## Initial measured CI results (not a 10× completion claim)
+
+Comparison on different successful source SHAs (GitHub run creation-to-update windows, not request-to-live latency):
+
+| Check | Earlier | New optimizer PR | Interpretation |
+| --- | ---: | ---: | --- |
+| Full Node/lint/build | 28s | 40s | Slower; new tests and runner variability |
+| Cloud mobile UX | 117s | 49s | 58% shorter elapsed run |
+| Private visual | 112s | 95s | 15% shorter elapsed run |
+| Approval continuity | 11s | 13s | Similar |
+| Isolated SQL | not comparable | 53s | All applicable cases passed |
+| New advisory fast feedback | not available | 15s | Early signals; not sufficient for release |
+
+Because these workflows run concurrently and compare different commits, the durations cannot be added or claimed as a controlled benchmark. The full-cycle median has not been measured. Tests at source 1bbe6813 all passed; this completion-note commit changes documentation only.

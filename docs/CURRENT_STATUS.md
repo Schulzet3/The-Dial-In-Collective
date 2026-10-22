@@ -2,7 +2,7 @@
 
 ## 2026-10-21 — source-only 10× update pipeline optimization, staged for CI
 - Issue #50 owner-directed scope: reduce update turnaround by at least one order of magnitude without assuming a standing release grant. First isolated source tranche `work/tenfold-update-pipeline-20261021` stages duplicate CI/browser removal with preserved final coverage contracts, dependency caching, advisory fast feedback, read-only release dossier and stage-time measurement. The earlier "loosen production requirements" request is **not** a precise supersession of any Locked grant, backup, credit or user-data safeguard. No live deploy, SQL/Edge/Auth/member mutation, provider setting or spend.
-- Production remains published release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. First CI passed Node, SQL, mobile and approval but caught one unused-import lint warning; repaired in follow-up and next exact source CI required; next remaining sprint includes native release final-push diagnosis, portable recovery index and deployed SHA receipt automation. No demonstrated 10× reduction yet.
+- Production remains published release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. Final source `1bbe6813...` passed six required/advisory CI checks including lint, SQL, mobile and visual. Sprint still in isolated PR #51 (not merged or deployed), and measured full 10× update-to-live improvement not established; next remaining sprint includes native release final-push diagnosis, portable recovery index and deployed SHA receipt automation. No demonstrated 10× reduction yet.
 
 
 
