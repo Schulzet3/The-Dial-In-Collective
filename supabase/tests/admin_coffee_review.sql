@@ -133,7 +133,7 @@ begin
  perform set_config('request.jwt.claims',jsonb_build_object('sub',admin_id,'role','authenticated')::text,true);
  execute 'set local role authenticated';
  select revision into rev from public.coffee_submissions where id=hold_id;
- got:=public.dic_admin_review_coffee(hold_id,rev,'hold','Need exact official product release source',null);
+ got:=public.dic_admin_review_coffee(hold_id,rev,'hold',null,null);
  if got->>'status'<>'conflict' then raise exception 'Hold did not mark conflict';end if;
  execute 'reset role';
  if not exists(select 1 from public.library_entries where owner_id=member_id and submission_id=hold_id)

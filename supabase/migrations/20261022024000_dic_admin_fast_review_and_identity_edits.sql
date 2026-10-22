@@ -10,9 +10,14 @@ begin
    raise exception using errcode='42501',message='Administrator required.';
  end if;
  reason_text:=nullif(btrim(coalesce(p_reason,'')),'');
- -- An explicit one-click Approve Distinct decision has a generated audit reason.
- if p_action='approve' and reason_text is null then
+ -- The administrator's explicit review action is sufficient. Record truthful,
+ -- neutral machine-authored audit provenance without fabricating a human reason.
+ if reason_text is null and p_action='approve' then
    reason_text:='Administrator approved distinct coffee';
+ elsif reason_text is null and p_action='merge' then
+   reason_text:='Administrator resolved duplicate coffee';
+ elsif reason_text is null and p_action='hold' then
+   reason_text:='Administrator held coffee for review';
  end if;
  if reason_text is null or length(reason_text)<8 or length(reason_text)>1000 then
    raise exception using errcode='22023',message='A specific review reason (8–1000 characters) is required.';

@@ -3731,5 +3731,23 @@
       "Private GitHub Free, no live provider change/paid topup, and fresh exact-SHA single-use owner consent for a later deployment"
     ],
     "implementation": "APPROVED → IMPLEMENTED → TESTED 6/6 → MERGED into development/backend-foundation e9dbd365a33c69de602ac34f4ac1334baa29e8de; exact tested source 10fd93e822037995a6bb66298f3b405bc019bdc1; tested and merged trees identical; NOT DEPLOYED, NOT OWNER DEVICE ACCEPTED"
+  },
+  "current_owner_admin_one_click_resolution_and_dose_warning_20261021": {
+    "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
+    "status": "Locked",
+    "approval": "Owner development and testing only; production release not approved",
+    "scope": "One click to Merge a previously identified valid duplicate into explicitly selected safe canonical coffee or Hold an existing submitted coffee; no human explanation or secondary confirmation. Actual new identity collisions are blocked and surfaced. Logging/editing dose >1g from correct basket reference requires warning and explicit confirm. Revocation and member removal keep warning/confirm. Historical import remains absent from routine Settings but server recovery retained.",
+    "supersedes_only": [
+      "Manual human reason and second browser confirmation for administrator existing Merge/Hold review actions",
+      "No extra confirmation for greater-than-1g basket dose deviation in UX-SITEWIDE-DIRECT-SAVE-20261021"
+    ],
+    "preserves": [
+      "Role, RLS, revision, canonical safe matching and detailed private audit",
+      "Original shot basket snapshot on edit and selected basket reference on new shot",
+      "No automatic merge of new conflicts, preserved member data and historical recovery gate",
+      "Existing invitation revoke and member-remove warning/confirm",
+      "Separate exact-source production release authorization"
+    ],
+    "implementation": "Staged source, exact-source CI pending; NOT DEPLOYED or device accepted"
   }
 }
