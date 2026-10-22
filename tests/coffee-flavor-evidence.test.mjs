@@ -213,3 +213,16 @@ test('a short product-local tasting notes paragraph survives escaped ampersands'
   '<p class="tasting-notes">Raspberry, Bergamot &amp; Cacao</p>');
  assert.equal(r.fields.tasting_notes,'Raspberry, Bergamot & Cacao');
 });
+
+test('real Echo Raven Mexico uses explicitly labeled Tasting Profile, without assigning generic growers',()=>{
+ const r=preview('echoravencoffee.com/products/mexico','Echo Raven Coffee CO.',
+  '<p>Roast: Medium</p><p>Tasting Profile: Chocolate, cinnamon, green apple.</p>'+
+  '<p>Grower: Coffee growers from Chiapas and Oaxaca</p>'+
+  '<p>Variety: Typica, Criollo, Bourbon, Mundo Novo, Caturra</p>'+
+  '<p>Region: Chipias and Oaxaca, Mexico</p><p>Altitude: 900-1000 M</p>'+
+  '<p>Process: Fully washed and sun dried.</p>','Mexico');
+ assert.equal(r.fields.tasting_notes,'Chocolate, cinnamon, green apple.');
+ assert.equal(r.fields.roast_level,'Medium');
+ assert.equal(r.fields.producer,undefined,'Generic grower attribution is not a named person');
+ assert.match(r.fields.origin||'',/Chipias and Oaxaca, Mexico/);
+});

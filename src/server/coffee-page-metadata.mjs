@@ -14,7 +14,7 @@ const FIELD_ALIASES={
  variety:['variety','varietal','cultivar','cultivars','varieties','varietals','variété','variété(s)','variedad','variedades'],
  producer:['producer','producers','farms','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station','productor','productora','finca','produtor'],
  roast_level:['roast','roast level','roast profile'],
- tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of','tastes like','flavor profile','flavour profile','cupping notes','notas de cata','notas de sabor','sabores'],
+ tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of','tastes like','tasting profile','flavor profile','flavour profile','cupping notes','notas de cata','notas de sabor','sabores'],
  release_label:['harvest','harvest year','harvest date','crop year','lot','lot number','release','release year','cosecha','fecha de cosecha']
 };
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));

@@ -11,7 +11,7 @@ import {extractProductFlavorEvidence} from './coffee-flavor-evidence.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','agtron_scale','agtron_sample','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
- 'Tasting Notes':'tasting_notes','Taste Notes':'tasting_notes','Cup Notes':'tasting_notes',
+ 'Tasting Notes':'tasting_notes','Taste Notes':'tasting_notes','Tasting Profile':'tasting_notes','Cup Notes':'tasting_notes',
  'Reminds Us Of':'tasting_notes','Notes':'tasting_notes',
  'Process':'process','Process Method':'process','Processing Method':'process',
  'Processing':'process','Traitement':'process','Treatment':'process',

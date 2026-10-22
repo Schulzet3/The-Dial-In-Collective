@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 extractor #33 live gap discovered and repaired (development-only)
+- Live unprivileged probe 39701479733 successfully parsed 25/31 URLs with tasting notes on 24/25 parsed; only Echo Raven Mexico lacked notes, although current selected product says `Tasting Profile: Chocolate, cinnamon, green apple.` Added exact label alias and source-backed regression; follow-up public matrix/CI pending. Picky adaptive retry separately recovered 9 source-backed fields (no blanket 2MB allowance). Unavailable source pages and rejected Queen City homepage remain honestly excluded. No Netlify/Supabase/provider mutation.
+
+
 ## 2026-10-21 owner-reported extractor tasting-notes gap — IN PROGRESS DEVELOPMENT ONLY
 - Issue #33 authorized real public roaster product coverage (SEY, PERC, Queen City, Sweet Bloom plus historic sample matrix) and safe deterministic improvements; no deployment/hosted SQL/credits. Staged bounded selected-product flavor chips/list fallback and negative tests, and improved 31-URL public probe note/field coverage. Latest CI and current public source not yet verified.
 

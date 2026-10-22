@@ -112,8 +112,11 @@ if(tim?.status==='parsed'){
  assert.equal(tim.details.processing_detail,undefined,'Picking and sorting must not be labeled a process type');
 } else console.log('[DIC TIM WENDELBOE LIMIT] '+JSON.stringify({status:tim?.status}));
 const raven=results.find(x=>x.roaster==='Echo Raven Mexico');
-if(raven?.status==='parsed')
+if(raven?.status==='parsed'){
  assert.equal(raven.details.named_producer,undefined,'Coffee growers from is not a named human producer');
+ assert.match(raven.tasting_notes||'',/chocolate.*cinnamon.*green apple/i,
+  'Echo Raven Mexico publishes Tasting Profile and all three explicit notes');
+}
 const corvus=results.find(x=>x.roaster==='Corvus Echo Gesha');
 if(corvus?.status==='parsed'){
  assert.match(corvus.name||'',/Echo Gesha/i);
