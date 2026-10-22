@@ -1,5 +1,11 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 — source-only 10× update pipeline optimization, staged for CI
+- Issue #50 owner-directed scope: reduce update turnaround by at least one order of magnitude without assuming a standing release grant. First isolated source tranche `work/tenfold-update-pipeline-20261021` stages duplicate CI/browser removal with preserved final coverage contracts, dependency caching, advisory fast feedback, read-only release dossier and stage-time measurement. The earlier "loosen production requirements" request is **not** a precise supersession of any Locked grant, backup, credit or user-data safeguard. No live deploy, SQL/Edge/Auth/member mutation, provider setting or spend.
+- Production remains published release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. Need exact PR/CI readbacks before marking implemented; next remaining sprint includes native release final-push diagnosis, portable recovery index and deployed SHA receipt automation. No demonstrated 10× reduction yet.
+
+
+
 ## October 21, 2026 evening MDT — extractor deployment readiness recovery (read-only providers, no publication)
 - **Recovered exact developer source:** functional extractor at `14cb2641d4edecc0a677814c0ca5866845083d10`; documentation-only later development checkpoints `a7f1d940`, `8c355985`. The first recovery journal was committed/read back as `8c3559855276473e18111d2926188a3853f1435b`; its approval/continuity Action `39703114694` SUCCESS. Keep subsequent source changes tied to same-commit journal.
 - **Extractor evidence:** source-backed 31 URL acceptance run `39701686397` checked 31 URLs, 25 currently parsed products, 25/25 of those with tasting notes; 6 did not parse (including deliberate homepage rejection and unreachable sources). Adaptive product-specific 2 MB retry recovered Picky without changing ordinary 900 KB cap. Current clean functional CI `39702321099` (583 Node22 assertions, 30 Node18 tests, lint/build), browser `39702321078`, continuity `39702321059` all SUCCESS. The earlier unsafe Wuri roast-graphic shortcut FAILED regressions and was reverted; no selected roast claim. Exact SEY Kedida missing optional source facts remain blank. This establishes **IMPLEMENTED + TESTED IN DEVELOPMENT**, not real signed-in device acceptance or universal field extraction.
