@@ -11,9 +11,11 @@ Start here:
 
 When continuing the project, review GitHub's active development branch and its active journal before Current Status. Preserve all Locked decisions. Ask product questions one at a time. Never treat an old checklist or an Open proposal as a new requirement or current completion state.
 
-## Current operations — October 21, 2026
+## Current operations — October 22, 2026
 
-Verified production is Netlify READY/current deploy `6ad92fd1d706315f29032892`, release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. The nightly source pin is updated to that exact published release. The original grant is consumed; main changes do not authorize another publication.
+Verified production is Netlify READY/current deploy `6ad968689f42fbe8e871e151`, release `eee687dd4d7fc19493139bc106e63c16849ac91d` on `release/production`. [Native Actions run 39706556610](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39706556610) successfully advanced the release branch for the already consumed grant `DIC-20261021-ALL-PENDING-02`; separate provider readback confirms publication. The older failed native attempt remains historical. This receipt does not authorize another release.
+
+**Open recovery correction:** the nightly app-source pin still points to prior release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. A separate one-line candidate updates it to the verified published release after scoped backup-operation authorization; changing that main path triggers an existing live-read encrypted backup. No backup workflow, release request or provider is changed by this documentation reconciliation.
 
 The [operations journal](docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md) records the current audit repairs and actual CI/smoke outcomes. The [schema-2 evidence guide](docs/RELEASE_REQUEST_SCHEMA_V2.md) governs new release requests. The [application audit](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/audits/2026-10-21-three-pass-audit.md) records three-pass scope, findings, source repairs and unfinished requests.
 
