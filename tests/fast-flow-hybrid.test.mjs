@@ -60,3 +60,14 @@ test('other coffees do not leak into direct Turbo fallback',()=>{
  const rec=recommendation(s,c.id,{style:'Fast-Flow',ignoreAdvice:true});
  assert.equal(rec.turboFallback,undefined);assert.equal(rec.observations,0);
 });
+test('compatible Fast-Flow evidence on similar coffees outranks same-coffee Turbo fallback',()=>{
+ const {s,c}=setup();
+ s.coffees.push({...c,id:'similar-coffee',name:'Comparable coffee'});
+ s.shots.push(shot('turbo',c.id,'Turbo',{yieldG:40,timeS:13}));
+ s.shots.push(shot('flow-other','similar-coffee','Fast-Flow',{yieldG:42,timeS:13}));
+ const rec=recommendation(s,c.id,{style:'Fast-Flow',ignoreAdvice:true});
+ assert.equal(rec.source,'Your successful similar coffees on this setup');
+ assert.equal(rec.turboFallback,undefined);
+ assert.equal(rec.observations,1);
+ assert.equal(rec.established,false);
+});

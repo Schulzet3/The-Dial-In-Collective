@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 22 MDT — Fast-Flow evidence-priority fix found during source review
+- On candidate `af1738fc8941d594888d34721b7db5f9c8d9fcb6`, independent algorithm review found a confirmed new-style ordering bug: old `exactOther` suppression would hide similar-coffee **Fast-Flow** success whenever the exact coffee had an established Turbo shot, causing the weaker cross-style Turbo reference to win. The owner-approved hybrid requires direct compatible same-style evidence first. Applied a narrow Fast-Flow-only exemption to legacy suppression (other styles' priority logic preserved), with a focused regression proving similar-coffee Fast-Flow evidence outranks same-coffee Turbo fallback without counting unverified results as established. No native historical records or SQL schema changes; same-commit journal.
+- Browser selector interaction regression from prior commit remains staged; the additional exact new source CI and browser/SQL checks must all pass before merge/release. No publication/hosted data/provider mutations.
+
+
 ## October 22 MDT — Fast-Flow new-style real browser interaction regression
 - On exact source `f3328ad4c63c1ade1806cc73bb5bcaf75bcf5f9f`, GitHub approval, full Node/lint/build and disposable SQL checks have passed; UX/visual browser runs were still pending. Added a focused 390px Chromium interaction on the same synthetic owner/browser harness: open Change Style, select the new Fast-Flow option, submit direct style save, verify persisted workspace style and Fast-Flow shot draft (no shot logged). This exercises actual handlers/DOM rather than only source text. Uses mocked backend; NOT signed real owner/device acceptance or hosted data. No application logic, migration, credentials or provider settings changed.
 - Required same-commit journal and status update; exact new SHA must rerun 6 source jobs including browser checks. Current release remains unauthorized.

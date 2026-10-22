@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — Fast-Flow evidence ordering corrected in source candidate
+- Corrected a confirmed exception: comparable Fast-Flow data now outranks weaker exact-coffee Turbo fallback when no direct Fast-Flow family exists. New regression added, exact-source checks pending. No provider/production change.
+
+
 ## October 22 MDT — explicit Fast-Flow browser selection acceptance staged
 - Added a new 390px Chromium scripted control-path test: Change Style → Fast-Flow → Save → confirmed new shot draft. Required exact-SHA CI still pending for this test-only commit; no production effect, real owner/device not tested.
 

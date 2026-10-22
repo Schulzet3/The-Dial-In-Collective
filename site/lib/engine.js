@@ -205,7 +205,8 @@ export function recommendation(s,coffeeId,options={}) {
  // Do not override more relevant exact-coffee successful family data or the
  // higher-priority same-coffee cross-style evidence.
  const exactOther=s.shots.some(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style);
- const provisional=style==='Custom'||exactOther?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
+ // For Fast-Flow, comparable same-style successes outrank a Turbo cross-style fallback.
+ const provisional=style==='Custom'||(exactOther&&style!=='Fast-Flow')?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
  const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
  const chosen=familyChoice?.family||null;
  if(!chosen&&provisional){
