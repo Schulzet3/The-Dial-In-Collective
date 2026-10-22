@@ -83,8 +83,10 @@ async function flush(){for(let i=0;i<32;i++)await Promise.resolve();}
 function boot(){
  const calls=[],events={};
  let authChange,role={authenticated:true,admitted:true,admin:true};
+ let pauseDashboard=false,resumeDashboard=null;
  const root={
   innerHTML:'',
+  contains(){return true;},
   addEventListener(name,fn){events[name]=fn;},
   querySelector(sel){
    if(sel==='#admin-action-notice'&&this.innerHTML.includes('id="admin-action-notice"'))
@@ -101,7 +103,10 @@ function boot(){
   async rpc(name,args){
    calls.push({name,args});
    if(name==='dic_session_status')return {data:role};
-   if(name==='dic_admin_dashboard')return {data:{counts:{active_accounts:2},queue:[],queue_total:0}};
+   if(name==='dic_admin_dashboard'){
+    if(pauseDashboard){pauseDashboard=false;await new Promise(resolve=>{resumeDashboard=resolve;});}
+    return {data:{counts:{active_accounts:2},queue:[],queue_total:0}};
+   }
    if(name==='dic_admin_access_overview')return {data:structuredClone(state)};
    if(name==='dic_admin_records')return {error:{code:'PGRST202',message:'Detailed record RPC is not yet deployed'}};
    if(name==='dic_admin_issue_invite')return {data:{ok:true,id:INVITE,invite_code:SECRET}};
@@ -122,13 +127,29 @@ function boot(){
  });
  vm.runInContext(source,context);
  return {root,calls,events,clipboard,done:context.started,
+  openAccounts(){events.toggle({target:{matches:selector=>selector==='details[data-admin-section]',open:true,dataset:{adminSection:'accounts'}}});},
+  openSection(kind){events.toggle({target:{matches:selector=>selector==='details[data-admin-section]',open:true,dataset:{adminSection:kind}}});},
+  stallDashboard(){pauseDashboard=true;},
+  resumeDashboard(){if(!resumeDashboard)throw Error('No request paused');resumeDashboard();resumeDashboard=null;},
   signOut(){authChange('SIGNED_OUT',null);},
   switchAccount(){authChange('SIGNED_IN',{user:{id:MEMBER}});},
   setRole(value){role=value;}
  };
 }
+test('rapidly expanding a second Admin section cannot drop its record fetch',async()=>{
+ const b=boot();await b.done;
+ b.stallDashboard();b.openAccounts();await flush();
+ b.openSection('approved');
+ b.resumeDashboard();await flush();
+ const loaded=b.calls.filter(x=>x.name==='dic_admin_records').map(x=>x.args.p_kind);
+ assert.ok(loaded.includes('accounts')&&loaded.includes('invites'));
+ assert.ok(loaded.includes('approved'),'Second expanded section must load even while first refresh is in flight');
+});
 test('admin can issue and copy a code once, refreshing clears it; no code in list',async()=>{
  const b=boot();await b.done;
+ assert.doesNotMatch(b.root.innerHTML,/Beta Invitations/,'Collapsed accounts should not load a private listing');
+ assert.equal(b.calls.filter(x=>['dic_admin_records','dic_admin_access_overview'].includes(x.name)).length,0);
+ b.openAccounts();await flush();
  assert.match(b.root.innerHTML,/Beta Invitations/);
  assert.match(b.root.innerHTML,/Administrator · Permanent access/);
  const form={
@@ -150,6 +171,7 @@ test('admin can issue and copy a code once, refreshing clears it; no code in lis
 });
 test('member removal/restoration and invitation revocation require RPC, then refresh',async()=>{
  const b=boot();await b.done;
+ b.openAccounts();await flush();
  b.events.click({target:{closest(){return {dataset:{action:'remove-member',id:MEMBER}};}}});
  await flush();
  const removed=b.calls.find(x=>x.name==='dic_admin_set_member_access').args;
@@ -164,6 +186,7 @@ test('member removal/restoration and invitation revocation require RPC, then ref
 });
 test('cross-tab account change immediately removes one-time invitation and denies stale render',async()=>{
  const b=boot();await b.done;
+ b.openAccounts();await flush();
  b.events.submit({target:{id:'admin-invite-form',elements:{namedItem(name){return {value:name==='label'?'Single tester':''};}}},preventDefault(){}});
  await flush();assert.match(b.root.innerHTML,new RegExp(SECRET));
  b.signOut();

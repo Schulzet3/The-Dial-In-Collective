@@ -261,11 +261,17 @@ globalThis.supabase={createClient:()=>sdk};
   page.add_script_tag(content='const MODE='+json.dumps(mode)+';'+escaped+shared+client+records+view+sdk+main)
   page.locator('#admin-refresh').wait_for();check(page.locator('html').get_attribute('data-theme')==mode,mode+': Admin reads saved account appearance')
   page.locator('#admin-refresh').click();check(page.evaluate('requests.filter(x=>x==="dic_admin_dashboard").length')>=2,mode+': Admin Refresh remains read-only')
-  page.wait_for_function("document.querySelector('#admin-refresh')?.disabled===false && document.querySelectorAll('#admin-approved .admin-record').length===2")
-  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','2'],mode+': Admin cards match complete record totals')
+  page.wait_for_function("document.querySelector('#admin-refresh')?.disabled===false")
   check(page.locator('details.admin-disclosure:not([open])').count()==6,mode+': all admin sections collapsed initially')
-  for kind in ['pending','conflicts','approved','shots','accounts','infrastructure']:
+  check(page.evaluate("requests.filter(x=>x==='dic_admin_records'||x==='dic_admin_access_overview').length")==0,mode+': collapsed records are not fetched')
+  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','3','1','1'],mode+': closed metrics use dashboard overview counts')
+  for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
    page.locator('#admin-'+kind+' summary.admin-disclosure-summary').click()
+   page.wait_for_function(f"document.querySelectorAll('#admin-{kind} .admin-record').length==={total}")
+  page.locator('#admin-accounts summary.admin-disclosure-summary').click()
+  page.wait_for_function("document.querySelectorAll('#admin-accounts .admin-member-row').length===2 && document.querySelectorAll('#admin-accounts .admin-invite-row').length===1")
+  page.locator('#admin-infrastructure summary.admin-disclosure-summary').click()
+  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','2'],mode+': expanded Admin cards use paged record totals')
   for group in page.locator('#admin-shots details.admin-coffee-group').all():
    group.locator('summary').click()
   for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
