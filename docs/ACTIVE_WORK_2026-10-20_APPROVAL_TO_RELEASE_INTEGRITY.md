@@ -1,5 +1,12 @@
 # Main operations checkpoint for the three-pass project audit
 
+## October 22, 2026 MDT — PREPARED ONLY: separate published-source backup pin correction
+
+- Candidate only; **not committed to main or activated**. Required authorization remains pending for this exact one-line workflow source-pin repair and its existing live-read encrypted backup trigger. Do not treat the prior PR #49 approval, a consumed release request or this candidate file as new authorization.
+- Proposed `.github/workflows/nightly-backup.yml` delta: checkout app source `1e79c4585c49ab517abb912887ee05ed7f4c4c4d` -> `eee687dd4d7fc19493139bc106e63c16849ac91d`, the independently verified Netlify READY/current release. Encryption, credentials, scripts, schedules, retention and old archives are unchanged. This is not a site publication, hosted SQL write or provider-setting change.
+- Applying this path change to main would trigger the existing encrypted database backup: it reads the live database and uploads a new ciphertext-only artifact to the private GitHub repository. The isolated recovery workflow is not triggered by this one YAML path alone. A push backup is not automatically copied by the scheduled offsite courier and does not prove restoration of this exact new encrypted artifact.
+- Before integration: record exact approval provenance, recheck main/release/deploy refs, retain the spent release request bytes, review this one-line diff plus both journals and use a non-force commit. After integration: independently verify the actual backup job and ciphertext artifact; document any failure without blind reruns. Do not claim a new offsite receipt or real-device acceptance.
+
 ## October 22, 2026 MDT — reconcile native release success and operations documentation
 
 - Owner requested GitHub reconciliation and fixes in [Issue #73](https://github.com/Schulzet3/The-Dial-In-Collective/issues/73). This commit updates operations documentation only. Recovery baseline `main` is `69b0c266b06c8feec719474188ec0a2c1a05910f`; application development and production remain separate branches.
