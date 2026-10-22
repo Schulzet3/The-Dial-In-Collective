@@ -288,11 +288,13 @@ globalThis.supabase={createClient:()=>sdk};
   coffee=page.locator('#admin-approved .admin-record').first
   coffee.get_by_role('button',name='Edit Details',exact=True).click()
   coffee_editor=coffee.locator('[data-record-form]');coffee_editor.wait_for(state='visible')
+   check(coffee_editor.locator('[name="reason"]').count()==0,mode+': no correction-reason requirement on routine coffee Save')
   check(all(coffee_editor.locator('[name="'+field+'"]').is_editable() for field in ['name','roaster','release_label']),mode+': approved identity is editable only in the administrator editor')
   check(coffee_editor.locator('[name="origin"]').input_value()=='Guji, Ethiopia' and coffee_editor.locator('[name="origin"]').is_editable(),mode+': descriptive coffee values are editable')
   shot_record=page.locator('#admin-shots .admin-record').first
   shot_record.get_by_role('button',name='Edit Details',exact=True).click()
   shot_editor=shot_record.locator('[data-record-form]');shot_editor.wait_for(state='visible')
+   check(shot_editor.locator('[name="reason"]').count()==0,mode+': no correction-reason requirement on routine shot Save')
   check(shot_editor.locator('[name="notes"]').input_value()=='Synthetic private note: sweet berry finish.' and shot_editor.locator('[name="notes"]').is_editable(),mode+': shot editor retains the original synthetic private note')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': populated mobile editors fit the viewport')
   shot(page,'14-admin-editors-mobile-'+mode)

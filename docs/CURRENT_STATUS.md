@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Sitewide ordinary Save implemented in isolated source, CI pending (not deployed)
+- One Save for routine Admin coffee and shot/note edits; SQL source creates machine-authored audit reason when blank; no ±1g advisory browser confirm. New isolated PostgreSQL and Chromium assertions protect original/updated history. Manual ambiguous merge/hold and non-edit access/import/outlier actions remain protected. No new production consent or release. Branch `work/sitewide-direct-save-20261021` awaiting checks and reviewed integration into Issue #52.
+
+
 ## Issue #52 — owner-approved sitewide direct-save simplification (source-only)
 - Locked `UX-SITEWIDE-DIRECT-SAVE-20261021` scopes ordinary Admin pending/approved coffee and shot/note edits to **Save** without mandatory human reason or extra browser confirm. Source migration auto-audits, preserving authorization, identity conflict and revision safeguards. Advisory basket dose second confirm to be removed; manual merge/hold conflicts, account revocation/removal, Community outlier verification and bulk import remain separate non-edit actions. Staged isolated `work/sitewide-direct-save-20261021`; code/tests pending. No provider writes, live Netlify or publication consent.
 
