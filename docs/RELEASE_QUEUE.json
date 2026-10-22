@@ -78,20 +78,22 @@
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/cloud/main.js",
-        "site/cloud/dose-advisory.js",
-        "site/cloud/outbox.js",
+        "build_cloud.mjs",
+        "netlify/functions/coffee-url-preview.mjs",
         "site/admin/main.js",
         "site/admin/view.js",
         "site/cloud/community.js",
-        "netlify/functions/coffee-url-preview.mjs"
+        "site/cloud/dose-advisory.js",
+        "site/cloud/main.js",
+        "site/cloud/outbox.js"
       ],
       "tests": [],
       "ci_runs": [],
       "blockers": [
         "First dose-warning/signout source tranche not merged or CI verified",
         "Most approved tasks are not yet implemented/tested",
-        "40th live duplicate-name Admin migration requires reconciliation before SQL changes"
+        "40th live duplicate-name Admin migration requires reconciliation before SQL changes",
+        "First PR must complete exact-source CI and merge; code currently subject to re-verification"
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Protect latest October 22 source/provider changes and existing two READY items; no production SQL or publication."

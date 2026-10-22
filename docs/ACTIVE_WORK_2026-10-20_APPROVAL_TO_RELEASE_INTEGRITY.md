@@ -1602,3 +1602,7 @@ Current request **does not explicitly approve a fresh Netlify production deploym
 
 # 2026-10-22 — PR #81 second feedback recovery: semantic Project Instructions contract
 - Exact CI b9d8ab... first failed for expected stale source/old branch ancestry, repaired with merge of concurrent AGENTS/Project Instructions and explicit source build asset. New exact PR CI 01aff6e5...: complete SQL/build tests except one approval test matching newer Project Instructions' synonymous "do not suggest public visibility or paid upgrades"; old regex was too phrase-specific. This same-commit amendment verifies preserved meaning instead of exact owner wording. Pending new exact-source CI. No production or provider mutation.
+
+
+# 2026-10-22 — PR #81 readiness intake after test source changes
+- CI 39845056946 validated owner decisions and correctly failed due to untracked deployable build_cloud.mjs in #80 queue item. Added exact path to IN_PROGRESS intake, retained all two READY items and existing blocked status. Other CI still under review; no merge/production action.
