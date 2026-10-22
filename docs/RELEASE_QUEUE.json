@@ -225,21 +225,28 @@
       "issue": 80,
       "pr": null,
       "title": "Server-side Admin record search and filtered 50-row pagination",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "d3ad52feb3869b55dabf2148e2b1fbf180553d01",
       "scope_paths": [
         "site/admin/main.js",
         "site/admin/view.js",
         "site/admin/records.js",
         "supabase/migrations/20261022220000_dic_admin_server_search.sql"
       ],
-      "tests": [],
-      "ci_runs": [],
-      "blockers": [
-        "Staged SQL migration is not deployed; exact-source CI, SQL sandbox privacy/permission tests and nonforce integration still required."
+      "tests": [
+        "Five exact-development-source Actions runs PASS at d3ad52feb3869b55dabf2148e2b1fbf180553d01: approval 39860829330; app Node/lint/build 39860829336; SQL isolated 39860829365; cloud/browser 39860829408; visual 39860829337.",
+        "Admin search source and separate migration merged on development; 80-character bounded literal query, real admin role gate and filtered pages, no production database application."
       ],
+      "ci_runs": [
+        39860829330,
+        39860829336,
+        39860829365,
+        39860829408,
+        39860829337
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "New RPC preserves old dic_admin_records; query is bounded to 80 characters, case-insensitive literal substring, admin member gate and 50-row filtered counts; no production SQL applies absent publish approval."
+      "notes": "Development READY only. New migration 20261022220000 remains un-applied to production and must be explicitly in-scope during a future owner-authorized release with migration safety and provider readback. This queue promotion is evidence-only; production is unchanged."
     }
   ],
   "history": [],

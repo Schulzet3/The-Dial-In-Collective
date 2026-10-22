@@ -1,3 +1,6 @@
+# 2026-10-22 — Admin search exact-source verified READY; production SQL unapplied
+- Read-back development merge d3ad52feb3869b55dabf2148e2b1fbf180553d01 and all five exact-SHA GitHub Actions run results SUCCESS: approval 39860829330, Node/build 39860829336, isolated SQL 39860829365, cloud/browser 39860829408 and visual 39860829337. DIC-Q-80-admin-search now READY with source/test receipts, distinct from no-publication and no-applied-hosted-migration: new SQL 20261022220000 is queued for future owner-authorized production application only. No source app behavior rewritten, no conflicting PRs modified, no provider or member-data writes. Packaged application PR #85 independently merged 06d81f6a31a4594681a70d395cfb7e02692b3123 with all five checks PASS (including built artifact Chromium smoke) and needs no deployable app queue item.
+
 ## 2026-10-22 — Issue #80 Admin lazy loading postmerge verified READY
 - PR #86 merged nonforce at 2af816e2800f3630b29ffa2000fdafb564affb59. Five premerge checks and four exact merged-source Actions checks PASS (approval 39858276074, Node/build 39858276033, mobile 39858276316, visual 39858276201). Queue DIC-Q-80-admin-lazy READY; initial CI regressions repaired, no producer/member data or site deployment. Admin search, Community search and extractor caching/quota remain IN_PROGRESS.
 
