@@ -55,15 +55,15 @@ test('all original baseline Locked/Open decisions are preserved as an immutable 
  assert.match(check({ledger:modified}).join(' '),/baseline/);
 });
 
-test('owner explicitly rules out GitHub Pro/public; Project instructions reflect advisory Free/private controls',()=>{
+test('owner locked private Free plan and owner-only credits remain enforced despite instruction rewrites',()=>{
  const instructions=file('docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md');
  const spec=file('docs/MASTER_SPECIFICATION.md');
- assert.match(instructions,/GitHub private on Free|repository \*\*private on GitHub Free\*\*/);
- assert.match(instructions,/Do not recommend upgrading|Do not suggest public visibility or a paid GitHub upgrade/);
- assert.match(instructions,/CI\/branch restrictions are advisory|CI and branch protections.*advisory/);
- assert.match(instructions,/I alone monitor (?:Netlify )?credits/);
- assert.match(instructions,/Never request (?:a balance screenshot|credit screenshots)/);
- assert.match(instructions,/Proactively recommend Project Instructions changes|proactively provide exact paste-ready/);
+ assert.match(instructions,/private on GitHub Free/i,'current instructions must keep the repository private Free');
+ assert.match(instructions,/do not (?:suggest|recommend)[^\n]*(?:public visibility|paid upgrades|upgrade)/i,'no public/paid upgrade recommendations');
+ assert.match(instructions,/CI and branch protections are advisory|CI\/branch restrictions are advisory/i);
+ assert.match(instructions,/I alone monitor credits|I alone monitor Netlify credits/i);
+ assert.match(instructions,/Never request[^\n]*screenshots/i);
+ assert.match(instructions,/provide exact paste-ready replacement text|Proactively recommend Project Instructions changes/i);
  assert.match(spec,/Owner-Locked GitHub Free\/private operating constraint/);
  assert.ok(Object.hasOwn(ledger,'current_owner_github_free_private_no_upgrade_20261020'));
 });
