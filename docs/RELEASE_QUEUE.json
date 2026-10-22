@@ -234,25 +234,27 @@
         "site/admin/styles.css"
       ],
       "tests": [
+        "Five exact-development-source Actions runs PASS at d3ad52feb3869b55dabf2148e2b1fbf180553d01: approval 39860829330; app Node/lint/build 39860829336; SQL isolated 39860829365; cloud/browser 39860829408; visual 39860829337.",
+        "Admin search source and separate migration merged on development; 80-character bounded literal query, real admin role gate and filtered pages, no production database application.",
         "PR #88 passed five exact-source CI suites at 979766a325e2f9c66444da8bc55b84eca0f28f86.",
         "PR #88 merged nonforce to d3ad52feb3869b55dabf2148e2b1fbf180553d01 and all five postmerge workflows PASS, including disconnected SQL and Chromium.",
         "New role-gated forward SQL migration staged for owner-authorized batch publication; old listing RPC unchanged."
       ],
       "ci_runs": [
-        39859325889,
-        39859325893,
-        39859325976,
-        39859325840,
-        39859325857,
         39860829330,
         39860829336,
         39860829365,
         39860829408,
-        39860829337
+        39860829337,
+        39859325889,
+        39859325893,
+        39859325976,
+        39859325840,
+        39859325857
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "READY for owner-authorized combined migration and frontend release; stage-only SQL not applied live. Preserves old list RPC and admin gate."
+      "notes": "Development READY only. New migration 20261022220000 remains un-applied to production and must be explicitly in-scope during a future owner-authorized release with migration safety and provider readback. This queue promotion is evidence-only; production is unchanged. READY for owner-authorized combined migration and frontend release; stage-only SQL not applied live. Preserves old list RPC and admin gate."
     },
     {
       "id": "DIC-Q-80-community-search",
