@@ -33,8 +33,8 @@ done
 # Formal CLI-generated release migration is applied ONCE by the loop above.
 # No second draft application: privacy and identity regressions use final schema.
 run_sql tests/sql/owner-fixture.sql
-for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_coffee_review admin_content_review admin_shot_coffee_group_identity coffee_duplicate_first_auto_approval admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity pre_release_cross_account source_worker_auth_and_admission; do
+for regression in coffee_identity_matching coffee_automated_approval admin_read_only_dashboard admin_coffee_review admin_content_review admin_shot_coffee_group_identity coffee_duplicate_first_auto_approval admin_invitation_controls url_preview_release universal_url_preview seven_roast_levels community_quality_integrity pre_release_cross_account source_worker_auth_and_admission first_style_prompt; do
   echo "Running $regression"
   run_sql "supabase/tests/$regression.sql"
 done
-echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization regressions; no hosted connection.'
+echo 'PASS: all checked-in migrations and SQL suites, including staged import/setup, cross-account and source-worker authorization and first-style owner isolation regressions; no hosted connection.'
