@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — Issue #50 source-only optimization read-only dossier (not deployed)
+- PR #54 cloud regression 299/299 PASS in 4.301s versus 587/587 in 9.904s prior duplicate full suite; 56.6% narrower test-stage reduction, full release validation unchanged. New offline, fail-closed source dossier and optimized development→release→postflight runbooks staged. CI on updated PR source pending; no 10× whole cycle claim, live Netlify source unchanged. See active journal and benchmark receipt.
+
+
 ## October 21 MDT — isolated Issue #50 CI optimization proposal (not merged/published)
 - Isolated branch `work/optimization-sprint-20261021`: adds cloud-targeted regression suite, fast inner-loop, CI stage-timing receipts, avoids redundant full Node suite in visual review while keeping full mandatory validate and five required checks. CI and measured performance pending; the actual Netlify production deployment remains unchanged. Details and same-commit documentation in active journal.
 

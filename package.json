@@ -8,7 +8,7 @@
     "lint": "npm exec --yes --package=eslint@10.13.0 -- eslint . --max-warnings 0",
     "test": "node --test tests/*.test.mjs",
     "test:cloud": "node --test tests/admin-*.test.mjs tests/cloud*.test.mjs tests/coffee-*.test.mjs tests/community-ui.test.mjs tests/offline-*.test.mjs tests/pwa-shell.test.mjs tests/recipe-family-selection.test.mjs tests/recommendation-evidence-priority.test.mjs tests/site-integrity.test.mjs tests/preview-request-bounds.test.mjs tests/shot-temperature-preservation.test.mjs",
-    "check:fast": "node --test tests/ci-optimization.test.mjs tests/approval-coverage.test.mjs tests/commit-continuity.test.mjs tests/netlify-credit-guard.test.mjs tests/one-use-claim.test.mjs tests/required-check-workflows.test.mjs",
+    "check:fast": "node --test tests/ci-optimization.test.mjs tests/approval-coverage.test.mjs tests/commit-continuity.test.mjs tests/netlify-credit-guard.test.mjs tests/one-use-claim.test.mjs tests/required-check-workflows.test.mjs tests/source-release-dossier.test.mjs",
     "build:cloud": "node build_cloud.mjs"
   },
   "dependencies": { "@supabase/supabase-js": "2.117.3" }
