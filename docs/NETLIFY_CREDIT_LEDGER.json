@@ -2,7 +2,7 @@
   "product": "The Dial In Collective",
   "provider": "Netlify",
   "account_plan": "Personal (paid through current billing period; downgrade to Free scheduled)",
-  "accounting_note": "Latest Netlify production READY/current 6ad5197d42cc6608b98712a4 from 415136c3a31d67f97b9ec53cb96b5b057eb704fe published 2026-10-18 19:10 UTC under one explicitly approved PWA release; planned charge 15 Personal credits, actual charge and current balance unavailable through connector. Last owner-provided 940/1000 was October 17 (historical), current grant through 2026-11-14. Owner monitors and notifies on low credits, no purchases or recharge; approval consumed. Post-release encrypted GitHub backup 39157642936 succeeded; push-only offsite courier receipt unverified.",
+  "accounting_note": "Actual latest Netlify READY/current release 6ad968689f42fbe8e871e151 from eee687dd4d7fc19493139bc106e63c16849ac91d published 2026-10-22T01:36:01.787Z. The single-use grant DIC-20261021-ALL-PENDING-02 was consumed, five required SHA-bound checks passed. Last independently observed available Personal credits 790 as of 2026-10-21T19:00:03.850Z; current balance and actual new debit remain UNKNOWN. No purchase or automatic recharge. Owner-private encrypted backup artifact 12392475438 and Drive copy 1CKt0N5zFakzD0TJhz9E-Rh4VcbBETIzm were verified; exact snapshot restore not proven.",
   "monthly_included_credits": 1000,
   "production_deploy_credits_each": 15,
   "snapshots": [
@@ -101,32 +101,34 @@
     "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
     "post_release_billing_refresh_needed": false,
     "last_published_release": {
-      "deploy_id": "6ad92fd1d706315f29032892",
-      "published_commit_sha": "1e79c4585c49ab517abb912887ee05ed7f4c4c4d",
-      "published_at_utc": "2026-10-21T21:34:34.367Z",
+      "deploy_id": "6ad968689f42fbe8e871e151",
+      "published_commit_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+      "published_at_utc": "2026-10-22T01:36:01.787Z",
       "netlify_status": "ready/current",
       "branch": "release/production",
       "context": "production",
       "primary_hostname": "https://app.dialincollective.com",
       "production_requires_netlify_team_sso": false,
       "nonproduction_requires_netlify_team_sso": true,
-      "scanned_files": "UNKNOWN: specific current count not independently retained",
+      "scanned_files": 377,
       "secret_scan_matches": 0,
       "planned_cost_credits": 15,
       "actual_credits_deducted": "UNKNOWN: Netlify connector does not expose billing; no purchase",
       "current_remaining_credits": "UNKNOWN now; prior authenticated Work billing read 790 Personal at 2026-10-21T19:00:03.850Z",
       "approval_exhausted": true,
-      "release_id": "DIC-20261021-BETA-COFFEE-01",
-      "tested_application_source_sha": "c6976b1fc86ed5e6b38c0c38831950fca017b3a4",
-      "release_scope": "Current already-approved c6976b1 app source, including admin coffee review and duplicate-first approval backend/client, with previously authorized two SQL migrations applied",
+      "release_id": "DIC-20261021-ALL-PENDING-02",
+      "tested_application_source_sha": "7df3deb4a271a6eb041c125574cd15ec455f6128",
+      "release_scope": "One owner-approved universal all-pending release: extractor and administrator interface, source worker and administrator SQL, and JWT-required dic-verify-coffee Edge function. Live SQL/Edge first, then one guarded Netlify production release.",
       "supabase_migrations_applied": [
         "20261021165214 dic_admin_coffee_review",
-        "20261021165302 dic_duplicate_first_auto_approval"
+        "20261021165302 dic_duplicate_first_auto_approval",
+        "20261022013337 dic_source_worker_auth_and_admission",
+        "20261022013349 dic_admin_content_review"
       ],
       "member_data_mutations": 0,
-      "owner_installed_pwa_acceptance": "UNVERIFIED (not inferred from READY)",
-      "release_receipt": "docs/RELEASE_READINESS_2026-10-21.md",
-      "private_encrypted_backup_verified_sha256": "1a1163504592d55088bfd26acb0bf57db67f61a663670ad119c2d0e4902f5069",
+      "owner_installed_pwa_acceptance": "UNVERIFIED for newly published extractor/admin components",
+      "release_receipt": "docs/PRODUCTION_RELEASE_2026-10-21_ALL_PENDING_VERIFIED.json",
+      "private_encrypted_backup_verified_sha256": "3a4a5da9635013e10d71df5ccc1a96aa557a64f4f70721128cddfbd77e5d87c6",
       "actual_live_data_counts": {
         "shots": 22,
         "shot_notes": 22,
@@ -135,8 +137,8 @@
         "community_shots": 2,
         "beta_members": 5
       },
-      "native_chat_controller_transport": "github action push FAILED, connected chat tool nonforce expected-head update of already-generated vetted claim SUCCESS",
-      "next_release_approval": "REQUIRED, this grant consumed"
+      "native_chat_controller_transport": "Github Actions run 39706556610 succeeded with non-force production branch push and independently READY/current Netlify commit",
+      "next_release_approval": "REQUIRED; DIC-20261021-ALL-PENDING-02 consumed"
     },
     "owner_waived_balance_check_for_this_release": {
       "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",

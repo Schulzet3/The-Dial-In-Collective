@@ -1,5 +1,11 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — #52 first CI failure analysis, source-only fixes (all checks retained)
+- Draft [PR #53](https://github.com/Schulzet3/The-Dial-In-Collective/pull/53) first CI on `4466c05e8b5f56153919ceb2d84825343151a8de`: actual isolated SQL workflow **PASS** (migration applies in disposable PG), but Node/visual tests detected a malformed slash-escape in newly authored Node regex, SQL dispatch invariant correctly detected a new SQL regression file missing from the runner, and 390px Chromium harness caught accidental 2-space Python indentation. All three repaired, without deleting any test/assertion.
+- Advisory approval check RED was **pre-existing parent Issue #50 inconsistency**, where `APPROVAL_COVERAGE_MATRIX` identifies independently verified live Netlify `6ad968689f42fbe8e871e151`/`eee687dd4d...` but old `NETLIFY_CREDIT_LEDGER` still named the previous `6ad92fd1...` deploy. Verified actual current Netlify site remains new READY/current on 2026-10-22T02:14Z. Reconciled ledger `last_published_release` to independently verified Netlify 2026-10-22T01:36:01.787Z and consumed grant; **no invented current credit balance/actual debit**, preserve all historical snapshots and purchase prohibition. This is a factual correction, NOT another deploy.
+- Scoped next: rerun required PR check suite at exact new SHA; investigate remaining real UI/parser failures and correct without bypassing. Main active branch remains untouched; new SQL is source-only, no provider data mutation, no release grant.
+
+
 ## October 21 MDT — isolated synthetic Chrome fixtures updated for admin disclosures (#52)
 - Repaired genuine prior fixture expectation that admin content was always expanded. Browser/mobile tests now assert default-collapsed six main sections, explicitly open Accounts before invitation UX, expand all main sections and per-coffee shot groups before testing existing 38+ visual assertions, creator attribution, notes, audited editing and no overflow. Replaced only DOM selectors affected by native disclosure wrapper; retained every substantive assertion. Real member data and live browser untouched. CI/visual evidence not yet observed, no release granted.
 

@@ -161,9 +161,9 @@ test('admin summaries expose counts and remain collapsed on initial render',()=>
  for(const kind of ['pending','conflicts','approved','shots','accounts','infrastructure']){
   const tag=html.match(new RegExp('<details class="admin-disclosure" data-admin-section="'+kind+'"[^>]*>'))?.[0];
   assert.ok(tag,'missing '+kind);
-  assert.doesNotMatch(tag,/\\sopen(?:\\s|>)/);
+  assert.doesNotMatch(tag,/\sopen(?:\s|>)/);
  }
- assert.match(html,/data-admin-section="shots"[^>]*><summary[^>]*><h2>Logged Shots<\\/h2><span class="admin-count">4<\\/span>/);
+ assert.match(html,/data-admin-section="shots"[^>]*><summary[^>]*><h2>Logged Shots<\/h2><span class="admin-count">4<\/span>/);
  const opened=renderAdminDashboard({},null,null,{}, {},{openSections:new Set(['shots','pending'])});
  assert.match(opened,/data-admin-section="shots" open>/);
  assert.doesNotMatch(opened,/data-admin-section="approved" open>/);
