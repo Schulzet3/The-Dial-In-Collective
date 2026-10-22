@@ -23,6 +23,28 @@ const fields={
 const string=v=>v==null?'':String(v);
 const attr=(name,value)=>' '+name+'="'+e(string(value))+'"';
 const date=v=>string(v).slice(0,10);
+const uuid=value=>/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(string(value));
+export function groupAdminShots(items=[]){
+ const groups=[],found=new Map();
+ for(const shot of items){
+  const key=uuid(shot.library_entry_id)?'library:'+shot.library_entry_id:'orphan:'+string(shot.id);
+  let g=found.get(key);
+  if(!g){
+   g={key,name:string(shot.coffee_name||'Coffee unavailable'),roaster:string(shot.coffee_roaster||''),
+    owner:string(shot.creator_email||'Creator unavailable'),shots:[]};
+   found.set(key,g);groups.push(g);
+  }
+  g.shots.push(shot);
+ }
+ return groups;
+}
+export function renderAdminShotGroups(items,{openCoffeeGroups=new Set()}={}){
+ return groupAdminShots(items).map(g=>'<details class="admin-coffee-group" data-admin-coffee="'+e(g.key)+'"'+
+  (openCoffeeGroups.has(g.key)?' open':'')+'><summary class="admin-coffee-summary"><strong>'+
+  e(g.name)+'</strong><small>'+e(g.roaster?g.roaster+' · ':'')+e(g.owner)+' · '+e(String(g.shots.length))+
+  ' shot'+(g.shots.length===1?'':'s')+' on this page</small><span class="admin-chevron" aria-hidden="true">⌄</span></summary>'+
+  '<div class="admin-coffee-shots">'+g.shots.map(row=>renderAdminRecord(row,'shots')).join('')+'</div></details>').join('');
+}
 const rowFields=(item,shot,approved)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
  const value=string(item[key]);
  const multiline=['notes','tasting_notes','summary','espressoNotes'].includes(key);
@@ -58,7 +80,7 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
   (typeof reviewActions==='function'?reviewActions(item):'')+
   '</article>';
 }
-export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewActions=null,expanded=false}={}){
+export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewActions=null,expanded=false,openCoffeeGroups=new Set()}={}){
  const title=({pending:'Pending Coffees',conflicts:'Conflicts',approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
  const loaded=Array.isArray(page.items)?page.items:[];
  const offset=Number.isSafeInteger(page.offset)&&page.offset>=0?page.offset:0;
@@ -71,7 +93,7 @@ export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewA
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(Math.max(0,offset-50))+'" '+(offset===0?'disabled':'')+'>Previous</button>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(offset+50)+'" '+(offset+loaded.length>=total?'disabled':'')+'>Next</button></div>':'';
  const empty=({pending:'No pending coffee submissions.',conflicts:'No coffee conflicts.'})[kind]||'No records to show.';
- const content=error+(loaded.length?loaded.map(item=>renderAdminRecord(item,kind,{reviewActions})).join(''):
+ const content=error+(loaded.length?(kind==='shots'?renderAdminShotGroups(loaded,{openCoffeeGroups}):loaded.map(item=>renderAdminRecord(item,kind,{reviewActions})).join('')):
   page.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>')+pagination;
  const description='<p class="helper">All records, page by page · creator and revision shown where available.</p>';
  // Pending and Conflicts already have titled outer sections containing the

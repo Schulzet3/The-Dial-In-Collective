@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {renderAdminRecord,renderAdminRecordCollection} from '../site/admin/records.js';
+import {renderAdminRecord,renderAdminRecordCollection,groupAdminShots} from '../site/admin/records.js';
 import {renderAdminDashboard,renderAdminAccessPanel} from '../site/admin/view.js';
 
 test('admin five metric cards navigate in exact owner order',()=>{
@@ -167,4 +167,21 @@ test('admin summaries expose counts and remain collapsed on initial render',()=>
  const opened=renderAdminDashboard({},null,null,{}, {},{openSections:new Set(['shots','pending'])});
  assert.match(opened,/data-admin-section="shots" open>/);
  assert.doesNotMatch(opened,/data-admin-section="approved" open>/);
+});
+
+test('shots are nested by actual owner coffee entry, not the same coffee name',()=>{
+ const a='00000000-0000-4000-8000-0000000000a1',b='00000000-0000-4000-8000-0000000000b2';
+ const shot=(i,key)=>({id:'00000000-0000-4000-8000-00000000010'+i,revision:2,library_entry_id:key,
+  coffee_name:'Same Name',creator_email:'owner@example.invalid',notes:'<img onerror=bad>'});
+ const items=[shot(1,a),shot(2,a),shot(3,b),shot(4,null),shot(5,null)];
+ const groups=groupAdminShots(items);
+ assert.deepEqual(groups.map(g=>g.shots.length),[2,1,1,1]);
+ const html=renderAdminRecordCollection('shots',{items,total:55,offset:0});
+ assert.equal((html.match(/class="admin-coffee-group"/g)||[]).length,4);
+ assert.equal((html.match(/class="admin-queue-item admin-record"/g)||[]).length,5);
+ assert.match(html,/2 shots on this page/);
+ assert.match(html,/Showing 1–5 of 55/);
+ assert.doesNotMatch(html,/<img|onerror=/);
+ const opened=renderAdminRecordCollection('shots',{items,total:5},{openCoffeeGroups:new Set(['library:'+a])});
+ assert.match(opened,/data-admin-coffee="library:00000000-0000-4000-8000-0000000000a1" open>/);
 });

@@ -59,7 +59,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  ${adminDisclosure('Conflicts','conflicts',count('conflicts',stats.conflicts),reviewSection('conflicts','No coffee conflicts.'),{expanded:options.openSections?.has('conflicts')})}
  </section>
  ${renderAdminRecordCollection('approved',records.approved,{expanded:options.openSections?.has('approved')})}
- ${renderAdminRecordCollection('shots',records.shots,{expanded:options.openSections?.has('shots')})}
+ ${renderAdminRecordCollection('shots',records.shots,{expanded:options.openSections?.has('shots'),openCoffeeGroups:options.openCoffeeGroups})}
  <section class="admin-panel admin-record-section" id="admin-accounts" tabindex="-1">${adminDisclosure('Accounts','accounts',count('accounts',stats.active_accounts),access?renderAdminAccessPanel(access,issued,records.accounts,records.invites):'<p class="helper">Account list unavailable.</p>',{expanded:options.openSections?.has('accounts')})}</section>
  <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
 }

@@ -15,6 +15,7 @@ async function start(){
  let recordPages=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map(k=>[k,0]));
  let records={};
  const openSections=new Set();
+ const openCoffeeGroups=new Set();
  const invalidate=message=>{
   issued=null;mergeChoices=Object.create(null);records={};invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
@@ -70,7 +71,7 @@ async function start(){
    ]);
    records=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map((kind,i)=>[kind,pages[i]]));
    if(invalidated)return;
-   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections});
+   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -89,6 +90,11 @@ async function start(){
   // Preserve operator disclosure state during re-render; toggle requires capture.
   root.addEventListener?.('toggle',event=>{
    const details=event.target;
+   if(details?.matches?.('details[data-admin-coffee]')){
+    if(details.open)openCoffeeGroups.add(details.dataset.adminCoffee);
+    else openCoffeeGroups.delete(details.dataset.adminCoffee);
+    return;
+   }
    if(!details?.matches?.('details[data-admin-section]'))return;
    if(details.open)openSections.add(details.dataset.adminSection);
    else openSections.delete(details.dataset.adminSection);
