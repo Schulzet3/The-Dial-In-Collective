@@ -144,6 +144,25 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Maintain status() check every 30 seconds; full personal+Community refresh slower when idle (3 minutes), immediate after actions/foreground/reconnect; no silent offline admission changes."
+    },
+    {
+      "id": "DIC-Q-80-outbox",
+      "issue": 80,
+      "pr": null,
+      "title": "Continue independent queued shot and preference saves past validation conflicts",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/outbox.js"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source CI and merge verification pending",
+        "Preserve account denial, mutation IDs and dependent action ordering"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Conservatively allow only different fully identified shot saves and disjoint preference saves after a non-authorization conflict/rejection. Never replay held event, cross owner or continue on denial."
     }
   ],
   "history": [],
