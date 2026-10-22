@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — visual fixture indentation repair for #61
+- Source `9e2af0a12cbf851b95161bc9e25ba80f18df8a22` had five checks PASS: approval, validate, cloud-tests, mobile-browser-qa, sql. Visual review failed only on `IndentationError` at new reasonless form assertion lines 291/297. Corrected their indentation to match the existing Python block; preserved both assertions and all live app behavior. SAME-COMMIT journal, source-only; no provider mutation, publication or member-data write. Rerun all exact-SHA CI before claiming acceptance.
+
+
 ## October 21 MDT — owner-approved sitewide direct Save (reconciled with latest #58 Hide Shot)
 - Intake Issue #52 comment `6331835380`, owner Locked `UX-SITEWIDE-DIRECT-SAVE-20261021`, prior isolated source and test journal `d6de025d7953c323b9cffbca2ed7a8ef0be5d5aa`. New **non-force** integrated branch `work/sitewide-direct-save-current-20261021` based on latest development `9d147cf07305ea5bc46a5719d268c66226498702` (includes newly merged owner-safe Hide Shot and all its tests), not prior code/history. All active development journal/status records retained.
 - In this SAME commit: Admin Pending/Approved Coffee + Shot/Notes editors are **Save Changes**, with neither mandatory human-written reason nor second browser confirm. Existing staged `20261022024000_dic_admin_fast_review_and_identity_edits.sql` auto-generates neutral reason `Administrator saved record changes` while preserving private actor/record before-and-after audit, auth, revision and coffee collision rules. Basket Dose ±1g advisor is no longer a modal blocker; numeric validation and new Hide Shot source unchanged. Node VM, rollback-only SQL and Chromium tests reflect user requirements; earlier checked-in assertions not removed.
