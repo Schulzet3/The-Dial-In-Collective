@@ -1,5 +1,12 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-21 18:36 MDT — Admin portal full requirements review, source implementation and release hold
+- Owner explicitly authorized **full admin implementation/test and predeployment review**, not a new SQL/Edge/Auth/member mutation, Netlify publication, credit spend or provider setting. Live GitHub issue #47 holds scope; canonical Locked decisions unchanged.
+- Fixed approval actions missing on page 2+ for Pending/Conflicts; fixed error fallback; added complete operator-only historical invitation pages beyond 50 with no token/hash exposure. Final reviewed app/test SHA `c1c0e18b385f5d38760d174618000fa80c3a42da`; visual/browser fixture source differs from isolated-SQL tested `0942852` only by synthetic test+docs. All four latest frontend/approval/UX/visual workflows **PASS**: 39700458197, 39700458094, 39700458093, 39700458141; isolated SQL 39700246884 PASS (including 32 signed disposable HTTP assertions). Tests prove development only.
+- Provider read-only: Netlify READY/current `6ad92fd1d706315f29032892` from `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`; Supabase 32 migrations; new source worker and admin content SQL still unapplied and RPCs absent. 22 shots, 22 notes, 4 approved/3 Pending/0 Conflicts, 5 admitted, 8 invitations untouched. GitHub private Free remains, prior release grant consumed.
+- Detailed requirement-by-requirement predeployment verdict [Admin Portal Final Release Review](ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md). **READY FOR OWNER RELEASE AUTHORIZATION REVIEW**, **NOT Deployed/Accepted**. Distinct explicit production SQL and source-SHA single-use publish approvals, credit/recovery/provider preflight and real signed-in owner/device acceptance still required; individual user consent receipts not inspected. No release triggered.
+
+
 ## 2026-10-22T00:33:41.438Z invitation-history browser-positive mock fixture
 - Updated only synthetic admin visual fixture to exercise new server 'invites' record listing rather than missing-backend fallback; actual SQL and UI unchanged from 0942852. Full visual/approval evidence must be refreshed. No provider changes.
 

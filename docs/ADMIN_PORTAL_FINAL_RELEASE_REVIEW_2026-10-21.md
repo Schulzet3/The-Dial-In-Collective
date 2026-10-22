@@ -1,0 +1,55 @@
+# The Dial In Collective — Full Admin Portal Release Review
+**Prepared:** 2026-10-22T00:37:45.572Z (October 21, 2026, America/Denver)
+**Status:** SOURCE IMPLEMENTED + SYNTHETIC / ISOLATED TESTED. **PRODUCTION DEPLOYMENT ON HOLD.**
+**Owner authorization:** Develop, test, reconcile all previously approved Admin controls and prepare the release. No approval was given for new hosted SQL, Edge/Auth/member-data changes, Netlify publication, provider-setting changes, purchases or credits.
+**Reviewed development code/test source:** `c1c0e18b385f5d38760d174618000fa80c3a42da` — source parent of this documentation-only review commit.
+**Audit authority:** `docs/MASTER_SPECIFICATION.md`, `docs/DECISION_LEDGER.json`, `docs/APPROVAL_COVERAGE_MATRIX.json`, `AGENTS.md`, live work journal, issue #47 and related #23/#24/#43, PR #48 and final three-pass traceability. No Locked decision altered.
+
+## 1. Recover and reconcile — what was requested, what actually exists
+| Owner-approved administrator function | Verified source implementation and actual limitation | Gate status |
+|---|---|---|
+| Dashboard top cards and exact section order | Pending Coffees → Conflicts → Approved Coffees → Logged Shots → Accounts; anchored, keyboard-accessible cards and corresponding complete 50-at-a-time server pages; totals use complete page counts, including hidden shots/removed accounts. | Dev implemented, synthetic Chromium passed |
+| Review every Pending and Conflict coffee | Page 2+ **fixed in this session**: Approve Distinct / Resolve Duplicate / Hold for Clarification actions follow each current paginated record with current revision, reason and existing server role checks. No duplicate legacy queue; first-50 legacy queue appears only as error fallback. | Dev implemented, Node and Chromium passed; real operator pending |
+| Approved coffees | All unmerged verified coffees paginated; recorded creator email (or honestly unavailable); operator may edit descriptive metadata and source URL with server revision, reason and before/after audit. Name, roaster and release identity cannot be rewritten through this editor. | Dev implemented, isolated SQL passed |
+| Logged shots | All (including hidden) paginated with owner identity/email, private notes and key measurements; audited version-checked operator edit preserves original user ownership, equipment identity, community/family classification and notes history. Nonadmin/anon barred. | Dev implemented, isolated SQL passed; signed live operator pending |
+| Coffee URL enrichment | Existing HTTPS preview reused for pending/approved editor; fills only previously blank editable fields, never silently saves, overwrites typed details, invents official product proof, or bypasses rate/SSRF constraints. | Dev implemented, Node/Chromium passed; actual hosted callback pending |
+| Account management | Admitted accounts paginated; owner/admin permanent, never requires invite; regular member Remove/Restore retains original shot/note history and prior anonymous contributions. No account password editing/deletion or changing protected admin authority through portal. | Existing live functions plus dev listing; scoped live access acceptance is historical, new page acceptance open |
+| Invitation management | Generate, copy the newly issued code once, status/usage, revoke; new codes single-use and no automatic expiration; stored secret never returned in list. **Fixed in this session:** page beyond the first 50 historical invitation entries via new admin-only `invites` projection, with safe existing-overview fallback. | Existing live controls + dev history paging; isolated SQL/Node passed |
+| High-signal review/health | Only genuine coffee identity conflicts enter review; distinct coffee handling remains automatic; app activity counters. External backup freshness is not claimed by the app's simplified health panel. Routine fuzzy matches/outlier shots do not automatically generate operator tasks. | Existing design, selected live functions deployed; no new unauthorized abuse workflow invented |
+
+**Adjacent outstanding issues are not silently claimed complete:** #23/#43 distinct real admin coffee/duplicate-flow acceptance; #24 invitation redemption/concurrent replay checks; #26 real accessibility/VoiceOver; #9 true-abuse/hide-detach edge cases; #38/#44 remaining Free/private release transport safeguards. A separate admin workflow for adjudicating impossible/abusive shots is not a new approved broad editing authority or a release blocker by itself; it requires exact product behavior/abuse criteria, rather than inventing deletion mechanisms. Canonical approved-coffee identity remains a separate controlled review.
+
+## 2. Changes in this work session (all `[skip netlify]`)
+- `262eb6454b7b852aa248f854510818f722714a91`: first 50-row approval-action gap repaired; early CI caught a false empty conflict message on RPC failure.
+- `a4860a2791bf904731c223ad12cd37511fb1ec7f`: fallback display repaired; all app/approval/cloud UX/Chromium jobs PASS.
+- `0942852177dceca3489f447f5bc4a70b9c90649a`: extra `invites` kind in the **unapplied** admin-content migration; paged invitation status/usage with no code/hash; isolated SQL, Node, Chromium and mobile PASS.
+- `c1c0e18b385f5d38760d174618000fa80c3a42da`: positive invitation browser fixture and assertions; **only** `tests/browser/visual_review.py` and docs differ from `0942852`. No production migration applied, no live member/account/shot data changed.
+- All application/test/source changes include a contemporaneous active journal in their own commit. Non-force expected-head ref writes and per-commit file readbacks verified. Concurrent operations-only documentation and approved PR #49 backup/recovery record preserved.
+
+## 3. Exact automated validation
+| Gate | Run ID | Source commit | Result |
+|---|---|---|---|
+| App / pinned lint, static build, all Node tests | [39700458197](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39700458197) | `c1c0e18b385f5d38760d174618000fa80c3a42da` | **PASS** |
+| Approval inventory and same-commit journal | [39700458094](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39700458094) | `c1c0e18b385f5d38760d174618000fa80c3a42da` | **PASS** |
+| Cloud UX, 390px invitation/access QA | [39700458093](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39700458093) | `c1c0e18b385f5d38760d174618000fa80c3a42da` | **PASS** |
+| Private Chromium visual review | [39700458141](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39700458141) | `c1c0e18b385f5d38760d174618000fa80c3a42da` | **PASS** |
+| Full network-isolated PostgreSQL 17.11 migrations and role/revision/audit/new invite tests; 32 real-signed isolated HTTP assertions | [39700246884](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39700246884) | `0942852177dceca3489f447f5bc4a70b9c90649a` | **PASS** |
+| Exact code/SQL compare since SQL test | `0942852..c1c0e18` | Only synthetic `visual_review.py` and documentation | **Verified source diff** |
+
+The above proves tested development and disposable fixtures only, **not** real signed-in account acceptance, individual consent, actual deployed behavior or flawless future operation. Security roles tested with isolated signed HTTP are synthetic, not GoTrue production sessions.
+
+## 4. Independent production provider readback (READ-ONLY)
+- **Netlify:** `https://app.dialincollective.com` stays current/READY deploy `6ad92fd1d706315f29032892`; checked published release source `1e79c4585c49ab517abb912887ee05ed7f4c4c4d` from `release/production`. No release attempt, new build, new grant or credit expenditure in this session.
+- **Supabase:** `azviqqejypsefzilgonr`, PostgreSQL 17.11 ACTIVE_HEALTHY, **32 applied migrations** only. Required new **forward-only** migrations `20261021221455_dic_source_worker_auth_and_admission.sql` and `20261021224447_dic_admin_content_review.sql` have **NOT** been applied. The new admin records and edit RPCs are absent from live. Data unchanged by work: **22 shots, 22 shot notes, 4 approved coffees, 3 Pending, 0 Conflicts, 5 admitted accounts, 8 historical invitations**.
+- Latest approved backup/operations PR #49 merged into backup-only `main` in separate authorized work; encrypted GitHub backup run `39699153137`, isolated recovery run `39699152897` SUCCESS. This does **not** attest that the latest encrypted artifact was individually decrypted/restored or delivered by the Drive offsite courier.
+- GitHub repository stays **private on GitHub Free**; GitHub Actions checks are advisory because enforced private-plan branch protection is unavailable. Current Netlify credit balance/debit **not independently accessible**; previous single-use approval `DIC-20261021-BETA-COFFEE-01` is **consumed**. No attempt to reuse it.
+
+## 5. Release decision and exact next steps
+**Engineering disposition:** Admin-source feature completeness for the documented approved scope: **Implemented → synthetic/isolated Tested**. **Not Deployed**, **not Accepted**. **Production release hold until the following separate evidence/permissions are satisfied**:
+1. Explicit owner authorization for applying **both exact reviewed named migrations** in deliberate dependency order, without unrelated table/Auth/member writes. Confirm current backup restoration and migration/SQL source hashes immediately before execution.
+2. Separate owner single-use release approval bound to exact tested development SHA, reviewed content/scope, Netlify branch `release/production`, risk/credit budget and expiration. Do not reuse the earlier consumed grant; review #38/#44 native push/duplicate control residual risk and actual published SHA.
+3. Immediately before the authorized release, independently inspect current Netlify credit balance and backed-up data/provider state, verify required security/configuration, and perform fail-closed release-controller preflight; never bypass locked publish gates for speed.
+4. After a separately authorized coordinated release, verify applied migration names, public RPC ACLs and current admin/nonadmin denial with real separate authenticated identities (where permitted), record existing shot/note/count invariants, confirm Netlify actual READY/current commit, and ask owner to accept on a signed-in real device. No new test invites, live shot edits, cross-member data disclosures or production mutation tests without narrowly scoped owner consent.
+5. Owner asserts all existing users consent to administrator access to non-password data including notes; independent member consent records were **not inspected**. This is a release/privacy evidence limitation, not a reason to expose passwords.
+
+**No more development code changes are known necessary from the recovered admin-specific source evidence at this checkpoint.** Remaining limitations are explicitly tracked rather than claiming universal completeness. Keep [Issue #47](https://github.com/Schulzet3/The-Dial-In-Collective/issues/47) open until Deployed and Accepted. Historical three-pass audit and incomplete unrelated product features remain under their separate issues.
