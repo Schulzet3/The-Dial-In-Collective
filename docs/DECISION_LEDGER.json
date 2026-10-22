@@ -2200,6 +2200,24 @@
       "decision": "Asking to publish, deploy, release the queue or publish a named ready feature is immediate ONE release approval for the selected READY scope; do not require a follow-up confirmation after readiness report or per component. Prepare exact one-use source-SHA grant internally and execute only if safety/CI/credit/recovery and provider evidence pass. Asking to build, change, update, fix or implement is owner permission to finish that approved source scope, tests, nonforce merge, and add verified READY queue entry; do not prompt for further routine dev/testing/queue approval.",
       "supersedes": "Any older workflow instruction to obtain a second owner approval or Yes proceed AFTER an explicit owner request to publish/deploy the same identified batch or feature; Per-SQL/Edge/Auth/direct-required-provider permission loops within the single already-authorized release scope; Any implied separate owner permission for ordinary approved build->test->merge->queue development steps",
       "approval": "Owner clarification 2026-10-22; Issue #70 comment 6347990316"
+    },
+    {
+      "id": "OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022",
+      "status": "Locked",
+      "date": "2026-10-22",
+      "title": "Remove all Netlify balance / budget checks from approval and deployment process",
+      "decision": "Netlify credit monitoring belongs exclusively to the owner. Eliminate all assistant, CI, release-request, owner-grant, and Netlify pre-build requirements to check available credits, credit minimum, snapshot freshness, plan-credit expiration, budget receipts or to obtain screenshots before an authorized release.",
+      "supersedes": "15-credit allowance and production credit ledger gate; Credit proof or freshness fields in production release request; One-use grant fixed credit ceiling; Credit-budget check in Netlify ignore-build and approval coverage; Historical credit requirement as future release hold",
+      "approval": "Issue #70 comment 6348177131 and Issue #44 comment 6348178048, direct owner instruction 2026-10-22"
+    },
+    {
+      "id": "OPS-PROACTIVE-PROJECT-INSTRUCTIONS-RECOMMENDATIONS-20261022",
+      "status": "Locked",
+      "date": "2026-10-22",
+      "title": "Proactively recommend material Project Instructions updates",
+      "decision": "Proactively suggest exact paste-ready Project Instructions changes whenever new material long-lived requirements, branches, release/backup/CI workflow, tools or communication defaults warrant revision. Keep GitHub copy current; user alone pastes into ChatGPT Project Settings. Avoid gratuitous suggestions for routine app features.",
+      "supersedes": "Passive instruction upkeep requiring user to notice standing policy drift",
+      "approval": "Issue #70 comment 6348177131, owner direct request 2026-10-22"
     }
   ],
   "open_current_owner_decisions": [],
@@ -4034,5 +4052,33 @@
     ],
     "implementation": "DOCUMENTATION_CLARIFICATION_OF_EXISTING_CONTROLLER, NOT_NEW_RELEASE_GRANT",
     "production_deployed_by_this_decision": false
+  },
+  "current_owner_no_netlify_credit_checks_20261022": {
+    "decision_id": "OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022",
+    "status": "Locked",
+    "owner_source": "Issue #70 comment 6348177131 and Issue #44 comment 6348178048, direct owner instruction 2026-10-22",
+    "scope": "Netlify credit monitoring belongs exclusively to the owner. Eliminate all assistant, CI, release-request, owner-grant, and Netlify pre-build requirements to check available credits, credit minimum, snapshot freshness, plan-credit expiration, budget receipts or to obtain screenshots before an authorized release.",
+    "supersedes_only": [
+      "15-credit allowance and production credit ledger gate",
+      "Credit proof or freshness fields in production release request",
+      "One-use grant fixed credit ceiling",
+      "Credit-budget check in Netlify ignore-build and approval coverage",
+      "Historical credit requirement as future release hold"
+    ],
+    "preserves": [
+      "Distinct owner publish/deploy command for each batch and exact source-bound one-use claim",
+      "At most one publication, appropriate CI, backup/permissions/history and Netlify published SHA readback",
+      "No purchases/top-ups/plan changes without separate owner approval; provider quota errors reported truthfully",
+      "All prior billing observations and consumed release grants preserved as historical facts"
+    ],
+    "stage": "POLICY_APPROVED_SOURCE_IMPLEMENTATION_PENDING",
+    "new_release_authorized": false
+  },
+  "current_owner_proactive_project_instructions_suggestions_20261022": {
+    "decision_id": "OPS-PROACTIVE-PROJECT-INSTRUCTIONS-RECOMMENDATIONS-20261022",
+    "status": "Locked",
+    "owner_source": "Issue #70 comment 6348177131, owner direct request 2026-10-22",
+    "scope": "Proactively suggest exact paste-ready Project Instructions changes whenever new material long-lived requirements, branches, release/backup/CI workflow, tools or communication defaults warrant revision. Keep GitHub copy current; user alone pastes into ChatGPT Project Settings. Avoid gratuitous suggestions for routine app features.",
+    "new_release_authorized": false
   }
 }

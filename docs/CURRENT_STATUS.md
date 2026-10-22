@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-22 — OWNER DECISION: retire Netlify credit release checks (implementation not yet verified)
+- Credits are owner's responsibility, never another assistant/CI/Netlify budget proof gate; keep one-use release authorization, CI, backup and postflight. Owner also requests proactive Project Instructions change suggestions. Decision sources and scope: Issue #70 comment 6348177131, #44 comment 6348178048. Canonical Spec/Decision Ledger updated; release controller/Netlify code implementation and CI follow separately. No publication.
+
+
 ## 2026-10-22 — one owner instruction per development request or publication, no double approval
 - Latest owner clarification (Issue #70 comment 6347990316) locks OPS-SINGLE-INSTRUCTION-DEVELOPMENT-AND-PUBLICATION-20261022. A build/update/fix request authorizes all feasible development/testing/integration and release queue entry. An explicit publish/deploy request IS the single approval for the requested READY batch/feature; no extra Yes/confirm after manifest or separate SQL/Edge/Auth/provider permission loop for the authorized release. Source-bound one-use grant and real readiness/credits/backup/Netlify readback remain required execution checks, not second consent.
 - A specific-feature request never silently includes other READY items; isolate/test candidate safely or report blocker. Unrelated destructive data deletion/purchases remain separate. The repo Project Settings copy, AGENTS.md, Master Specification, Decision Ledger, approval matrix and queue runbook were synchronized. This is documentation and consent clarity ONLY: no production grant consumed, no Netlify build, live migration, member change or plan purchase.

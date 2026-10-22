@@ -1,5 +1,11 @@
 # The Dial In Collective — Master Specification
 
+## Owner-Locked operational supersession (2026-10-22): credits are owner-managed without a release gate
+**OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022**. The owner alone monitors Netlify credits. Remove requirements for ChatGPT, GitHub Actions/release controller, Netlify ignore-build or approval coverage to check available credits, owner billing screenshots, snapshot age, minimum balance, grant expiry or a per-release credit cap. Such evidence must not block an otherwise authorized one-time publication. Preserve historically accurate billing receipts without using them as controls. Netlify may independently refuse service for quota; report actual provider response without buying, upgrading or recharging. Retain exact SHA, source tests, distinct publish command, one-use non-force claim, encrypted backups, permissions and postflight. No production release authorized by this change.
+
+**OPS-PROACTIVE-PROJECT-INSTRUCTIONS-RECOMMENDATIONS-20261022**. Proactively recommend concise replacement Project Instructions text whenever a material standing workflow, release policy, tool, branch, test/backup schedule or communication rule changes, while updating the canonical GitHub copy. ChatGPT Project Settings remain user-managed. Avoid redundant reminders on ordinary feature edits.
+
+
 ## Owner-Locked single-command authorization clarification — 2026-10-22
 **OPS-SINGLE-INSTRUCTION-DEVELOPMENT-AND-PUBLICATION-20261022.** An owner request to **build / update / fix / change / implement** is approval to finish the stated *development* scope, run and repair all applicable predeployment tests, safely integrate source and mark the exact verified item READY in the GitHub release queue without another "continue?", "test?", "merge?", or "queue it?" prompt. Stop only on a genuine missing product decision, dangerous out-of-scope operation or hard failed verification; log BLOCKED/TESTING rather than pretending 100% verified.
 
