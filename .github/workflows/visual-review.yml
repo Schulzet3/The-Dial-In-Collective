@@ -81,6 +81,9 @@ jobs:
         if: steps.scope.outputs.docs_only != 'true'
         env:
           DIC_FONT_DIR: /tmp/dic-render-assets
+      - name: Exercise packaged production app in a real browser (no credentials)
+        if: steps.scope.outputs.docs_only != 'true'
+        run: python tests/browser/built_app_qa.py
       - uses: actions/upload-artifact@v7
         with:
           name: dic-visual-review-screenshots
