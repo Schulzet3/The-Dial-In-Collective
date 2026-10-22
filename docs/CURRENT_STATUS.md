@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Extractor #33 source-evidence gap correction pending CI
+- Pinned HTTPS diagnostics 39701900003: SEY Kedida current HTML lacks earlier reported technical labels, thus leave missing unless exact public product API independently supplies them. Sweet Bloom Wuri current Product HTML explicitly says Roast Level Light, prior decoder blank. Staged selected-label fallback with conflict/marketing negatives, and deeper Kedida matched Shopify API study; source/test/public CI pending. No production publish/SQL/credits.
+
+
 ## Extractor #33 second pass: source-vs-parser completeness diagnosis
 - Live tasting notes now PASS 25/25 parsed current product URLs at a5e93c8, Picky adaptive 2MB conditional HTML recovered separately. Diagnostic source-only probe for SEY Kedida and Sweet Bloom Wuri optional metadata in progress, no production mutation or new broad release approval.
 
