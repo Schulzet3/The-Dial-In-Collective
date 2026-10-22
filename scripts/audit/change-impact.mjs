@@ -1,5 +1,5 @@
 // Fast feedback is advisory; never substitutes for complete exact-SHA release checks.
-import {readFileSync,readdirSync} from 'node:fs';
+import {readdirSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {resolve} from 'node:path';
 const SHA=/^[a-f0-9]{40}$/;
