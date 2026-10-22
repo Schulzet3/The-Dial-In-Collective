@@ -1,6 +1,22 @@
 import {CloudError,isAccessDenied} from './client.js';
 import {patchAcknowledgement} from './cache.js';
 export const ACTIONS=new Set(['create_setup','save_preferences','submit_coffee','add_verified_coffee','save_shot','select_setup','set_style','save_setup_settings','make_current','rename_setup','confirm_coffee_existing']);
+// Only provably independent, fully identified operations can pass a held
+// change. All other pairs preserve queue order and original idempotency keys.
+export function independentMutations(held,event){
+ if(!held||!event)return false;
+ const a=held.payload||{},b=event.payload||{};
+ if(held.action==='save_shot'&&event.action==='save_shot')
+  return typeof a.id==='string'&&!!a.id&&typeof b.id==='string'&&!!b.id&&a.id!==b.id
+    &&!!b.setup_version_id&&!!b.library_entry_id;
+ if(held.action==='save_shot'&&event.action==='save_preferences')return true;
+ if(held.action==='save_preferences'&&event.action==='save_shot')
+  return !!b.id&&!!b.setup_version_id&&!!b.library_entry_id;
+ return false;
+}
+function stoppedWithAccess(state,sent,notify,owner){
+ const result={state,sent,accessDenied:true};notify({...result,owner});return result;
+}
 export class Outbox {
  constructor({store,remote,identity,uuid=()=>crypto.randomUUID(),now=()=>new Date().toISOString(),notify=()=>{}}){Object.assign(this,{store,remote,identity,uuid,now,notify});this.running=null;}
  async enqueue(action,payload){
@@ -12,12 +28,20 @@ export class Outbox {
  async pending(){const who=await this.identity();return who?.id?(await this.store.list(who.id)):[];}
  async flush(){if(this.running)return this.running;this.running=this.run().finally(()=>this.running=null);return this.running;}
  async run(){
-  const who=await this.identity();if(!who?.id)return {state:'signed_out'};let sent=0;
+  const who=await this.identity();if(!who?.id)return {state:'signed_out'};
+  let sent=0;const held=[];
+  const stopped=state=>{const result={state,sent};this.notify({...result,owner:who.id});return result;};
   for(const event of await this.store.list(who.id)){
    if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
-   if(['conflict','rejected'].includes(event.status))return {
-    state:event.status,sent,...(isAccessDenied(event.error||event.result)?{accessDenied:true,recheckAccess:true}:{})
-   };
+   if(['conflict','rejected'].includes(event.status)){
+    if(isAccessDenied(event.error||event.result))return {state:event.status,sent,accessDenied:true,recheckAccess:true};
+    held.push(event);
+    continue;
+   }
+   // A known invalid/conflicted mutation cannot be replayed. A different shot
+   // may still sync, but setup, coffee, recipe and revision dependencies stay held.
+   // Unknown/legacy actions fail closed rather than being silently re-ordered.
+   if(held.some(previous=>!independentMutations(previous,event)))continue;
    let r;
    try{r=await this.remote.mutate(event);}catch(error){
     const accessDenied=isAccessDenied(error);
@@ -25,19 +49,25 @@ export class Outbox {
     if(rejected){
      try{await this.store.put({...event,status:'rejected',error:{code:error.code,message:error.message,status:error.status}});}
      catch(storageError){
-      // The original event is already durable. A failed error annotation must
-      // never hide a fresh authorization denial behind a storage/network error.
       if(!accessDenied)throw storageError;
      }
     }
-    const result={state:rejected?'rejected':'offline',sent,...(accessDenied?{accessDenied:true}:{})};this.notify({...result,owner:who.id});return result;
+    if(accessDenied)return stoppedWithAccess('rejected',sent,this.notify,who.id);
+    if(!rejected)return stopped('offline');
+    held.push(event);continue;
    }
-   if(!r?.ok){const state=r?.code==='conflict'?'conflict':'rejected';await this.store.put({...event,status:state,result:r});this.notify({state,owner:who.id});return {state,sent};}
-   // A lost response is retried with the SAME immutable mutation ID + payload.
+   if(!r?.ok){
+    const state=r?.code==='conflict'?'conflict':'rejected';
+    await this.store.put({...event,status:state,result:r});
+    held.push({...event,status:state,result:r});
+    continue;
+   }
+   // Lost responses always retain their original mutation ID for safe retries.
    await this.store.acknowledge(event,r);sent++;
   }
   if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
-  const result={state:'synced',sent,at:this.now()};this.notify({...result,owner:who.id});return result;
+  const state=held.some(event=>event.status==='conflict'||event.result?.code==='conflict')?'conflict':held.length?'rejected':'synced';
+  const result={state,sent,at:this.now()};this.notify({...result,owner:who.id});return result;
  }
 }
 export class IndexedStore {
