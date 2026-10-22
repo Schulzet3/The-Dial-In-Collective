@@ -8,6 +8,19 @@
 - Six principal Admin Portal panels native accessible and collapsed by default, dashboard stat shortcuts open/focus target, open state retained on refresh. Logged Shots nested into independent per-library-coffee groups (not name-based), including hidden/unknown/pending entries and paged boundaries. **New migration `20261022023000_dic_admin_shot_coffee_group_identity.sql` is not applied to live Supabase; feature NOT deployed.** Browser fixtures have been updated for disclosures; exact PR CI awaiting run. Current live provider remains previous approved `eee687dd...`, no new grant. See Issue #52 and journal.
 
 
+
+## October 21 MDT — Issue #50 source-only optimization read-only dossier (not deployed)
+- PR #54 cloud regression 299/299 PASS in 4.301s versus 587/587 in 9.904s prior duplicate full suite; 56.6% narrower test-stage reduction, full release validation unchanged. New offline, fail-closed source dossier and optimized development→release→postflight runbooks staged. CI on updated PR source pending; no 10× whole cycle claim, live Netlify source unchanged. See active journal and benchmark receipt.
+
+
+## October 21 MDT — isolated Issue #50 CI optimization proposal (not merged/published)
+- Isolated branch `work/optimization-sprint-20261021`: adds cloud-targeted regression suite, fast inner-loop, CI stage-timing receipts, avoids redundant full Node suite in visual review while keeping full mandatory validate and five required checks. CI and measured performance pending; the actual Netlify production deployment remains unchanged. Details and same-commit documentation in active journal.
+
+
+## October 21 MDT — source-only recovery of postrelease CI evidence drift
+- Prior `599bd560b9a4dc971fe8d5fa17c327126e99c62d` had 3 red workflows from stale credit-ledger current-release pointer; the immediately preceding pre-cache docs commit failed similarly. Provider/current coverage matrix match READY `6ad968689f42fbe8e871e151` / `eee687dd4d7fc19493139bc106e63c16849ac91d`. Ledger current pointer updated, prior entry/history and original dated credit snapshots preserved. No assertion weakened and no current billing spend invented. Exact fix CI pending; see active journal and Issue #50.
+
+
 ## 2026-10-22T01:37:04.912Z — production LIVE READY/current, independently provider-verified postflight
 - **SUCCESS:** single-use grant `DIC-20261021-ALL-PENDING-02` from exact five-check tested source `7df3deb4a271a6eb041c125574cd15ec455f6128` was consumed once by official ops main chat-trigger run `39706556610` SUCCESS, release commit `eee687dd4d7fc19493139bc106e63c16849ac91d`, non-force `release/production` ref verified. Its receipt and consumption were independently fetched from GitHub, with old release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d` as parent.
 - **Netlify independently READY/current:** deployment `6ad968689f42fbe8e871e151`, site `153277f2-e19e-4862-b9a6-f2e18ccde271`, actual production `release/production` commit `eee687dd4d7fc19493139bc106e63c16849ac91d`, published `2026-10-22T01:36:01.787Z`. Deploy reports one `coffee-url-preview` function, 377 scanned files and **zero detected secret matches**. Do not claim exact frontend owner-device acceptance from provider READY.
