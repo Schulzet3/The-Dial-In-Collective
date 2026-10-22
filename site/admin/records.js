@@ -79,8 +79,8 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
      (!shot?'<label>Source URL (optional)<input name="source_url" type="url"'+attr('value',item.source_url||'')+'></label>'+
       '<button type="button" class="ghost compact" data-action="extract-coffee-url"'+attr('data-id',id)+'>Autofill Blanks From URL</button>'+
       '<p class="helper">Preview fills only empty inputs; inspect and save changes explicitly. Extraction alone never verifies official evidence.</p>':'')+
-     '<label>Reason for correction<input name="reason" required minlength="8" maxlength="1000" placeholder="Explain what needs correction"></label>'+
-     '<div class="admin-review-actions"><button type="submit">Save Audited Correction</button><button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Cancel</button></div></form>':'')+
+     
+     '<div class="admin-review-actions"><button type="submit">Save Changes</button><button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Cancel</button></div></form>':'')+
   (typeof reviewActions==='function'?reviewActions(item):'')+
   '</article>';
 }
