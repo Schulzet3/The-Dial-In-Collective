@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — source-only direct Save MERGED and 6/6 tested, no deployment
+- Issue #52 approved low-friction extension `UX-SITEWIDE-DIRECT-SAVE-20261021` merged via PR #61 at `e9dbd365a33c69de602ac34f4ac1334baa29e8de`, identical source tree to 6/6 successful exact tested `10fd93e822037995a6bb66298f3b405bc019bdc1`. Routine administrator Pending/Approved Coffee, Shot and Notes editors use one Save with no human correction reason or second prompt. UNAPPLIED migration `20261022024000_dic_admin_fast_review_and_identity_edits.sql` generates neutral private audit provenance while preserving author/revision/original values and duplicate protections. Valid Basket Dose advisory no longer presents second confirm. Other truly consequential review/account/import/outlier decisions unchanged. Synthetic Node, protected role SQL, mobile Chromium and visual review passed. Netlify verified old production READY/current; **not deployed**, no new grant. Next user action: separately instruct deployment for all pending changes whenever ready, under universal-scope consent policy; owner-device acceptance remains pending.
+
+
 ## Direct Save integrated with current owner-safe development; CI pending, NOT DEPLOYED
 - Owner Approved routine Admin coffee/shot/note edits now Save once without human correction reason/confirmation; existing staged migration auto-generates audit reason, preserves role/revision/identity and original values. Basket Dose ±1g advisory no longer blocks valid shot Save; hidden shot feature from development preserved. Integrated isolated `work/sitewide-direct-save-current-20261021` source awaits exact GitHub checks/review, no production authorization/mutation. Details Issue #52 and same-commit journal.
 
