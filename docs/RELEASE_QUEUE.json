@@ -81,14 +81,13 @@
         "netlify/functions/coffee-url-preview.mjs",
         "site/admin/main.js",
         "site/admin/view.js",
-        "site/cloud/community.js",
-        "site/cloud/outbox.js"
+        "site/cloud/community.js"
       ],
       "tests": [],
       "ci_runs": [],
       "blockers": [
-        "Remaining authorized UX/sync/Admin/Community/extractor/quality scope has not been fully implemented/tested",
-        "40th production migration 20261022165047 requires reconciliation before overlapping SQL"
+        "Remaining approved Admin lazy-load/search, Community server search, extractor cache/quota correctness and quality workflow refinements require scoped implementation/tests",
+        "A 40th hosted Admin migration named dic_admin_shot_coffee_group_identity (version 20261022165047) exists beyond earlier 39-count report; reconcile before overlapping SQL."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "First dose and sign-out tranche merged safely and tracked separately READY. Future main.js changes must each have exact tested queue/source receipts."
@@ -129,37 +128,56 @@
     {
       "id": "DIC-Q-80-polling",
       "issue": 80,
-      "pr": null,
+      "pr": 82,
       "title": "Reduce background full-state reads while preserving 30-second admission/revocation checks",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "0e87b1c23c4493bef428311c918ab5b5df421625",
       "scope_paths": [
         "site/cloud/main.js"
       ],
-      "tests": [],
-      "ci_runs": [],
-      "blockers": [
-        "Source tests and merge receipt pending",
-        "Review revocation, multiaccount and offline browser regression before READY"
+      "tests": [
+        "PR #82 tested head 002bb99d0fb1d0e8c89f055ca96807b8369db196 five GitHub workflows PASS covering approval, Node/build, cloud/mobile/offline, isolated SQL and visual",
+        "Nonforce merge 0e87b1c23c4493bef428311c918ab5b5df421625 has identical Git tree bd0a20cb56e4fa395d5d8d79b2e0aa1025fe78e1",
+        "Postmerge exact SHA 0e87b1c23c4493bef428311c918ab5b5df421625 approval, Node/build, cloud/mobile and visual workflows all PASS",
+        "Real controller tests preserve 30-second server admission/revocation checks while reducing idle full-data reads to three minutes, preserving account race protection and offline behavior"
       ],
+      "ci_runs": [
+        39847110361,
+        39847110359,
+        39847110312,
+        39847110274,
+        39847110146,
+        39848976829,
+        39848976919,
+        39848977026,
+        39848976941
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
-      "notes": "Maintain status() check every 30 seconds; full personal+Community refresh slower when idle (3 minutes), immediate after actions/foreground/reconnect; no silent offline admission changes."
+      "notes": "Ready only for future combined/isolated owner-authorized publication. The 30-second admission check remains, unlike three-minute heavy workspace refresh."
     },
     {
       "id": "DIC-Q-80-outbox",
       "issue": 80,
-      "pr": null,
+      "pr": 83,
       "title": "Continue independent queued shot and preference saves past validation conflicts",
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
         "site/cloud/outbox.js"
       ],
-      "tests": [],
-      "ci_runs": [],
+      "tests": [
+        "PR #83 tested head 631b34b4c62adda6f97d504f5c2488b0a925d35a five workflows PASS; nonforce merged identical Git tree 1db245b0e252840210396525a33d5e4f26f9a9d4"
+      ],
+      "ci_runs": [
+        39849532708,
+        39849532696,
+        39849532685,
+        39849532628,
+        39849532584
+      ],
       "blockers": [
-        "Exact-source CI and merge verification pending",
-        "Preserve account denial, mutation IDs and dependent action ordering"
+        "Postmerge exact-SHA cloud/mobile workflow 39849792808 has not completed; hold READY until actual result is verified"
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Conservatively allow only different fully identified shot saves and disjoint preference saves after a non-authorization conflict/rejection. Never replay held event, cross owner or continue on denial."
