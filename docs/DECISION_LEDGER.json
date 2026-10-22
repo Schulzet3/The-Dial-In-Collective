@@ -2164,6 +2164,15 @@
       "current": "UX-FIRST-EXPANSION-STYLE-20261021",
       "supersedes": "Original §27.3 and baseline Add Coffee style timing only",
       "scope": "One-time first manual coffee expansion instead of Add Coffee; preserve all other Locked decisions and data."
+    },
+    {
+      "id": "OPS-PROPORTIONATE-COFFEE-APP-CONTROLS-20261021",
+      "status": "Locked",
+      "date": "2026-10-21",
+      "title": "Proportionate coffee-app safeguards and release readiness",
+      "decision": "Owner approves loosening, changing or eliminating disproportionate protections and production release-readiness steps when it improves app efficiency or effectiveness, with narrowly scoped evidence and updated canonical decisions. This is not a fresh production publish authorization. Preserve credentials/identity/roles/data integrity/history/recovery and factual deployment verification.",
+      "supersedes": "Prior blanket interpretation that all existing safeguards/release checklist steps are permanently mandatory solely because previously Locked; each concrete replacement must be documented against its exact affected requirement.",
+      "approval": "Direct owner instruction 2026-10-21, recorded Issue #57 comment 6332524896"
     }
   ],
   "open_current_owner_decisions": [],
@@ -3640,7 +3649,18 @@
     "linked_issues": [
       38,
       44
-    ]
+    ],
+    "verification_20261022": {
+      "native_controller_run": 39706556610,
+      "conclusion": "SUCCESS",
+      "published_source": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+      "netlify_deploy": "6ad968689f42fbe8e871e151",
+      "current_ready_readback": true,
+      "original_failure_root_cause": "UNKNOWN_HISTORICAL",
+      "postrelease_credit_debit": "UNKNOWN",
+      "real_owner_device_acceptance": "PENDING",
+      "new_release_authorized": false
+    }
   },
   "current_owner_admin_records_edit_20261021": {
     "decision_id": "OPS-ADMIN-RECORDS-EDIT-20261021",
@@ -3784,8 +3804,8 @@
       "Previous retained active hide_shot server mutation allowance and new-enqueue allowance in UX-REMOVE-HIDE-SHOT-CONTROL-20261021"
     ],
     "authorizes": "Source, CI and narrow hosted SQL retirement only following backup and guard validation. Netlify production publication not authorized.",
-    "implementation": "Source PR #66 normal merged a2cca542ab9919c54e623bd2e13b49ee17805611 from exact 6-green-tested 86454065a0ad01ea2fd4214282e5416619c81215, identical Git tree 49afb8a2287c3c6d063970992bb94a29d9e08daa. Owner-authorized production guard ACTUALLY APPLIED Supabase migration 20261022041530, direct SQLSTATE 22023 negative check passed, 22/0-hidden shots, 22 notes, 2 Community, 44 receipts all unchanged. GitHub migration filename aligned to applied version, final alignment CI pending. Frontend NOT DEPLOYED.",
-    "residual_limitation": "Private privileged internal mutate function still contains dormant hide_shot branch, auth direct EXECUTE denied, public wrapper now blocks it. Precise live SQL rewrite attempt blocked by tooling safety checks and was NOT applied. Hidden_at field retained without data loss. Follow-up via controlled review required for code eradication. No Netlify site release."
+    "implementation": "Public API guard applied as migration 20261022041530 and source filename aligned through PR69 at 21a0a7552e406da3c383f96d53c2323891c6f363; six exact-source checks passed at f447fd3dc7f73d6f2f6beb82b2763b80a786f833. Historical data-preservation counts remain the October21 receipt, not a new row audit. Frontend removal source remains unpublished.",
+    "residual_limitation": "Private internal hide_shot handler remains; owner explicitly deferred its removal in PR72 comment6333843360. Public wrapper contains rejection and authenticated direct EXECUTE is denied in October22 read-only catalog inspection. No claim that every privileged route is impossible. Do not reapply the public guard or implement deferred removal without renewed scope."
   },
   "current_owner_first_expansion_starting_style_20261021": {
     "decision_id": "UX-FIRST-EXPANSION-STYLE-20261021",
@@ -3803,6 +3823,29 @@
       "All original shot history, offline queued events, Admin/direct Save and Hide Shot retired state",
       "Independent exact source release consent and owner-device checks"
     ],
-    "implementation": "Owner-approved, source staged; CI/merge/production/device acceptance pending."
+    "implementation": "PR71 merged 83d289eef8c26b57329f3ef71bfae3fc018d53cd after all six checks passed on 0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2, identical tree c0ad5b7d364fde83e93820199cc39b8ac0659cb9. Frontend and migration20261022053000 remain undeployed; real-owner/device acceptance pending. Issue73 repairs draft-context recomputation, with its own exact-source CI receipt required."
+  },
+  "current_owner_defer_private_hide_shot_retirement_20261021": {
+    "decision_id": "UX-DEFER-PRIVATE-HIDE-SHOT-RETIREMENT-20261021",
+    "status": "Locked",
+    "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/72#issuecomment-6333843360",
+    "recorded_at_utc": "2026-10-22T05:55:05Z",
+    "scope": "Close PR72 without merge and defer physical removal of the dormant private.mutate hide_shot allowlist/handler.",
+    "supersedes_only": [
+      "Earlier instruction/next action to complete private-code eradication under UX-RETIRE-HIDE-SHOT-BACKEND-20261021"
+    ],
+    "preserves": [
+      "Applied public hide_shot rejection and withdrawn UI",
+      "All existing records, permission boundaries, receipts and historical hidden_at data",
+      "Closed PR72 branch and candidate migration as historical evidence"
+    ],
+    "implementation": "DEFERRED_BY_OWNER; PR72 CLOSED_UNMERGED; candidate migration NOT_APPLIED and not part of current development.",
+    "future_authority": "Renewed scoped review/authorization required before internal retirement; no publication or production mutation implied.",
+    "read_only_verification_20261022": {
+      "private_handler_present": true,
+      "public_guard_present": true,
+      "authenticated_private_execute": false,
+      "all_privileged_routes_proven_impossible": false
+    }
   }
 }
