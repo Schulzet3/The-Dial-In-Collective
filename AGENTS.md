@@ -1,3 +1,7 @@
+# OWNER-Locked main release controller policy, 2026-10-22
+- Decision OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022 in the active development Master Spec/Decision Ledger: owner alone monitors Netlify credit balance. The main release request and controller use credit-free schema v4; never ask for screenshots, minimum balance, credit snapshot age/expiry, plan budget or historical credit receipts as a release prerequisite. Preserve one owner publish command, one-use source-bound ref claim, exact CI, recoverability, nonforce Git and Netlify READY/current postflight; never buy/top-up/upgrade automatically. Provider may independently refuse for insufficient credits; report actual error. Old v2/v3 instructions below are history ONLY, not current gates.
+- Proactively suggest paste-ready Project Instructions changes for material ongoing workflow/approval/tool changes; GitHub copy is not ChatGPT Settings. No release is authorized by this policy update.
+
 # Default branch navigation
 
 This `main` branch is for encrypted backup/recovery operations and navigation. The active application and canonical project documentation are on `development/backend-foundation`.

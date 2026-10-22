@@ -1,3 +1,6 @@
+# CURRENT release request contract — 2026-10-22, supersedes historical installation notes below
+- Owner exclusively manages Netlify credits. **NO** assistant/CI/request/grant/builder credit balance, snapshot freshness, plan expiration or fixed cost cap is a release condition. The current one-use controller requires **schema v4**; see `docs/RELEASE_REQUEST_SCHEMA_V4.md` and `docs/RELEASE_REQUEST.schema-v4.example.json` / `docs/MANUAL_RELEASE_EVIDENCE.schema-v4.example.json`. Older v2/v3 examples/instructions are historical immutable artifacts and MUST NOT be used for future release requests. A single explicit owner publish command is approval for the selected exact-source release (not this documentation edit); no secondary confirmation. Continue exact CI/one-use claim/backup/provider postflight, and never buy credits/top up automatically. Actual provider quota refusal is a provider failure, not a preflight balance check. See Master Spec OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022 in development.
+
 # Default-branch single-use release controller — installation history
 
 ## Current operating state — October 22, 2026
