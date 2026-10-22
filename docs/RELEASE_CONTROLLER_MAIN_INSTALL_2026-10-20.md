@@ -1,8 +1,8 @@
 # Default-branch single-use release controller — installation history
 
-## Current operating state — October 21, 2026
+## Current operating state — October 22, 2026
 
-The release controller and Netlify routing are installed, and the original owner grant was consumed by the independently verified release `1e79c4585c49ab517abb912887ee05ed7f4c4c4d`. Native Actions final-push reliability remains issue #44; do not treat the supervised recovery as native acceptance. GitHub Free/private checks remain advisory. Current repairs and exact verification status are in the [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md).
+The release controller and Netlify routing are installed. [Native Actions run 39706556610](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39706556610) completed successfully, recording `GITHUB_REF_UPDATED_NETLIFY_UNVERIFIED` for release `eee687dd4d7fc19493139bc106e63c16849ac91d` and consumed grant `DIC-20261021-ALL-PENDING-02`. Separate current Netlify readback confirms READY/current deployment `6ad968689f42fbe8e871e151` at that exact release SHA. Native push acceptance is therefore verified for this completed release. The earlier supervised recovery remains historical; its unknown original transport cause does not negate the later successful native run. No new publication or future reliability guarantee follows from this receipt. GitHub Free/private checks remain advisory. Current remaining work and exact verification status are in the [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md).
 
 New manual requests require `release_evidence_json` under [schema 2](RELEASE_REQUEST_SCHEMA_V2.md), in addition to the unique owner grant and tested source. Historical request files and consumed approvals must not be replayed. The wording below records older installation checkpoints, including superseded inert/no-grant/provider-routing assumptions; it is not the present checklist.
 
