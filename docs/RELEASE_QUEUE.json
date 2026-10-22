@@ -43,21 +43,25 @@
       "issue": 44,
       "pr": null,
       "title": "Retire mandatory Netlify credit checks and owner-manage credit monitoring",
-      "state": "IN_PROGRESS",
+      "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "netlify.toml"
+        "netlify.toml",
+        "scripts/netlify/should-ignore-build.mjs",
+        "scripts/audit/approval-coverage.mjs",
+        "scripts/release/one-use-claim.mjs"
       ],
       "tests": [],
       "ci_runs": [],
       "blockers": [
-        "Source Netlify pre-build guard and CI tests not implemented/verified; main GitHub release-controller schema change pending"
+        "New credit-free Netlify guard/approval-source tests awaiting exact-source CI",
+        "Main operations release-controller schema-v4 tests passed; release guard app-source parity and Netlify build integration pending"
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/70#issuecomment-6348177131",
-      "notes": "Process approved, operational code pending. No website publication; app guard change will be part of future approved batch."
+      "notes": "Owner-only credit monitoring; app source code must be published ONLY as part of next separately owner-approved READY batch. Main ops controller v4 verified run 39833454468. Historical credit ledger retained; no live credit check."
     }
   ],
   "history": [],
-  "last_reconciled_utc": "2026-10-22T18:39:00Z",
+  "last_reconciled_utc": "2026-10-22T18:46:01.947Z",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }

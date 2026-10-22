@@ -15,7 +15,7 @@ export function baselineFingerprint(content){
  for(let i=0;i<text.length;i++)hash=Math.imul(hash^text.charCodeAt(i),16777619);
  return (hash>>>0).toString(16).padStart(8,'0');
 }
-export function auditApprovalCoverage({matrix,ledger,credits,source=readTracked}){
+export function auditApprovalCoverage({matrix,ledger,source=readTracked}){
  const errors=[];
  const record=(id,message)=>errors.push(id+': '+message);
  if(matrix.schema_version!==1)record('manifest','unsupported schema');
@@ -27,10 +27,21 @@ export function auditApprovalCoverage({matrix,ledger,credits,source=readTracked}
  const actual=matrix.owner_decision_key_inventory||[];
  if(new Set(actual).size!==actual.length||JSON.stringify(actual)!==JSON.stringify(expected))
   record('inventory','owner decision keys changed; reclassify the new or removed approval in the matrix BEFORE build');
- const release=credits?.release_policy?.last_published_release;
- if(!release||release.deploy_id!==matrix.production?.netlify_deploy_id||
-  release.published_commit_sha!==matrix.production?.exact_source_sha)
-  record('release_receipt','published Git SHA or Netlify receipt differs between coverage matrix and credit ledger');
+ // Verify historical publication using release claims and Netlify receipts,
+ // NEVER the owner-only Netlify credit ledger or dated billing screenshots.
+ const prod=matrix.production||{},receipt=prod.pending_release||{};
+ const SHA=/^[a-f0-9]{40}$/;
+ if(!SHA.test(prod.exact_source_sha||'')||!SHA.test(prod.tested_application_source_sha||'')||
+    !prod.netlify_deploy_id||receipt.actual_production_git_sha!==prod.exact_source_sha||
+    receipt.netlify_deploy_id!==prod.netlify_deploy_id)
+  record('release_receipt','published Git SHA / Netlify receipt internally inconsistent');
+ try{
+  const history=JSON.parse(source('docs/RELEASE_CONSUMPTION.json'));
+  if(!Array.isArray(history?.consumed)||!history.consumed.some(x=>
+    x.id===receipt.id&&x.tested_source_sha===prod.tested_application_source_sha))
+   record('release_receipt','published tested source lacks matching historical one-use claim');
+ }catch(error){record('release_receipt','cannot verify historical release claim: '+error.message);}
+
  const ids=new Set();
  for(const item of matrix.contracts||[]){
   if(!item.id||ids.has(item.id))record('contract','missing/duplicate contract id: '+item.id);
@@ -78,8 +89,7 @@ export function assertApprovedCoverage(options){
 export function checkRepository(){
  const matrix=JSON.parse(readTracked('docs/APPROVAL_COVERAGE_MATRIX.json'));
  const ledger=JSON.parse(readTracked('docs/DECISION_LEDGER.json'));
- const credits=JSON.parse(readTracked('docs/NETLIFY_CREDIT_LEDGER.json'));
- assertApprovedCoverage({matrix,ledger,credits});
+ assertApprovedCoverage({matrix,ledger});
  return {ownerDecisions:matrix.owner_decision_key_inventory.length,uiContracts:matrix.contracts.length,trackedGaps:matrix.active_gap_flags.length,publishedSource:matrix.production.exact_source_sha};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){

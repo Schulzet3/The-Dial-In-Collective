@@ -5,8 +5,7 @@ import {auditApprovalCoverage,checkRepository} from '../scripts/audit/approval-c
 const file=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const matrix=JSON.parse(file('docs/APPROVAL_COVERAGE_MATRIX.json'));
 const ledger=JSON.parse(file('docs/DECISION_LEDGER.json'));
-const credits=JSON.parse(file('docs/NETLIFY_CREDIT_LEDGER.json'));
-const check=(changes={})=>auditApprovalCoverage({matrix,ledger,credits,...changes});
+const check=(changes={})=>auditApprovalCoverage({matrix,ledger,...changes});
 test('every current owner decision is inventoried and approved UI source/contracts exist',()=>{
  assert.equal(checkRepository().ownerDecisions,matrix.owner_decision_key_inventory.length);
  assert.deepEqual(check(),[]);
@@ -28,9 +27,19 @@ test('removed selected-family single visible UI cannot silently return',()=>{
  const broken=file('site/cloud/main.js')+'\n'+ 'alternateRecipesMarkup(';
  assert.match(check({source:path=>path==='site/cloud/main.js'?broken:file(path)}).join(' '),/internal_single_visible_recipe/);
 });
-test('published source SHA drift between Netlify receipt and matrix fails closed',()=>{
- const c=structuredClone(credits);c.release_policy.last_published_release.published_commit_sha='not-live';
- assert.match(check({credits:c}).join(' '),/release_receipt/);
+test('published source SHA or one-use receipt drift fails without reading billing data',()=>{
+ const m=structuredClone(matrix);m.production.pending_release.actual_production_git_sha='not-live';
+ assert.match(check({matrix:m}).join(' '),/release_receipt/);
+ const source=path=>{
+  if(path==='docs/NETLIFY_CREDIT_LEDGER.json')throw Error('credit ledger must not be read');
+  if(path==='docs/RELEASE_CONSUMPTION.json')return JSON.stringify({schema_version:1,consumed:[]});
+  return file(path);
+ };
+ assert.match(check({source}).join(' '),/release_receipt/);
+ assert.deepEqual(check({source:path=>{
+  if(path==='docs/NETLIFY_CREDIT_LEDGER.json')throw Error('credit ledger must not be read');
+  return file(path);
+ }}),[]);
 });
 test('unverified cross-user privacy and duplicated worker publishes remain explicitly tracked',()=>{
  const m=structuredClone(matrix);

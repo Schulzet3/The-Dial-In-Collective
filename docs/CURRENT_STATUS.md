@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-22 — credit gate removal implemented source candidate, exact CI pending
+- Owner-only monitoring Locked. Main release request v4 and one-use controller remove budget prerequisites in ops commit cd70c2c9ce8385c6974efdd3077e3976388d8ba3; main Actions 39833454468 PASS. Application source now stages Netlify ignore-build without credit ledger/minimum/expiry, release claim without fixed cap, approval coverage no longer reads billing snapshots, metadata/docs and regression tests. DIC-Q-44-credit-gate TESTING until actual changed source SHA CI and queue READY receipt. Prior historical credit data remains. This does not publish the website.
+
+
 ## 2026-10-22 — OWNER DECISION: retire Netlify credit release checks (implementation not yet verified)
 - Credits are owner's responsibility, never another assistant/CI/Netlify budget proof gate; keep one-use release authorization, CI, backup and postflight. Owner also requests proactive Project Instructions change suggestions. Decision sources and scope: Issue #70 comment 6348177131, #44 comment 6348178048. Canonical Spec/Decision Ledger updated; release controller/Netlify code implementation and CI follow separately. No publication.
 

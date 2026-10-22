@@ -89,16 +89,11 @@
   ],
   "release_policy": {
     "approved_owner_preview_branch": "development/backend-foundation",
-    "production_deploy_minimum_balance": 15,
-    "maximum_snapshot_age_days": 7,
     "must_pass_tests_before_release": true,
     "release_marker": "Release DIC: ... [dic-publish]",
-    "budget_rule": "One fully tested deliberate release per individually approved bundle. Current deployable Personal plan credits are owner-monitored, not the separate operational allowance. Known insufficiency below 15 credits, credit data tampering, or an expired known grant blocks publishing. Never infer current billing from a dated screenshot. Keep user-authorized publish marker; no automatic source/docs or preview deployment. No plan purchases, unapproved recharge, weakening beta SSO, access, data privacy or recovery controls.",
-    "manual_refresh_required": "Owner assumes monitoring of Netlify credits and promises to alert when low; do not ask for routine screenshots or require a new billing read for each release during the current unexpired credit grant. After a known plan-grant expiration, verify that the applicable plan and credit availability are still valid, with the owner's consent. The plugin does not expose live credits.",
     "credits_on_free_plan_are_hard_limit": true,
     "purchase_permission": "No plan upgrades, manual credit purchases or automatic recharges without separate explicit owner approval.",
     "no_unattended_paid_topups": true,
-    "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
     "post_release_billing_refresh_needed": false,
     "last_published_release": {
       "deploy_id": "6ada3b5018ccdd080d3b4584",
@@ -146,17 +141,10 @@
       "next_release_approval": "REQUIRED: DIC-20261022-FASTFLOW-ADMIN-03 consumed",
       "owner_private_backup_drive_file_id": "1KIvM7R_6S-MahwIdNHPIHNxxEpo-XI32"
     },
-    "owner_waived_balance_check_for_this_release": {
-      "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
-      "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
-      "verified_billing_balance": "Not measured"
-    },
-    "credit_monitoring_mode": "owner_managed",
+    "credit_monitoring_mode": "owner_only_no_gates",
     "owner_monitoring_approval": "OPS-CREDIT-OWNER-MONITORING-20261017-01",
     "explicit_publish_approval_per_release": true,
     "owner_release_approval": "OPS-PER-RELEASE-OWNER-APPROVAL-20261017-01",
-    "maximum_snapshot_age_days_scope": "Historical operator-verified model only. Owner-managed mode waives repeated seven-day screenshot requests through the current grant expiration while retaining 15-credit and explicit publication permission.",
-    "current_known_plan_expires": "2026-11-14",
     "owner_assumes_proactive_low_credit_notice": true,
     "last_individually_authorized_release": {
       "scope": "Limited invitation-only technical pilot; two migration SQL files and one production Netlify publish",
@@ -415,7 +403,10 @@
       "encrypted_backup_artifact_id": 12292356358,
       "encrypted_backup_size_bytes": 1180698,
       "postrelease_offsite_delivery": "UNVERIFIED: push run excluded from Drive courier; next scheduled delivery not independently observed"
-    }
+    },
+    "owner_no_checks_effective": "2026-10-22",
+    "owner_credit_decision_id": "OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022",
+    "owner_credit_instruction": "No assistant/CI/build/preflight credit balance, plan expiration, budget amount, ledger receipt, screenshot or minimum available credits. Only owner monitors. Preserve explicit one-release approval and no purchase/top-up."
   },
   "reconciliation": "Live Netlify current READY 6ad5030aaae6cba42933a800 from d54f84103285cfb0185e1d806efe9e8c6064b72d on 2026-10-18 17:34 UTC; only a tested mandatory outlier retry UI hotfix released. Netlify visitor access unchanged, 212 files/zero secrets. Supabase migrations, Edge functions and member history unchanged. Latest backup-only main recovery source pin 24cf8be2a8b8332bac75ba87d7d745152d7a7e22; encrypted GitHub backup 39150331467 SUCCESS. Historical previous release data is preserved separately.",
   "scheduled_plan_change": {
@@ -693,5 +684,23 @@
       "native_chat_controller_transport": "SUCCESS: official ops GitHub Actions run 39706556610, non-force final push; no guarantee for future runs",
       "next_release_approval": "REQUIRED: ALL-PENDING-02 consumed"
     }
-  ]
+  ],
+  "historical_netlify_credit_gates_superseded_20261022": {
+    "source": "Owner direct instruction 2026-10-22; Issue #70 comment 6348177131",
+    "old_rules": {
+      "production_deploy_minimum_balance": 15,
+      "maximum_snapshot_age_days": 7,
+      "budget_rule": "One fully tested deliberate release per individually approved bundle. Current deployable Personal plan credits are owner-monitored, not the separate operational allowance. Known insufficiency below 15 credits, credit data tampering, or an expired known grant blocks publishing. Never infer current billing from a dated screenshot. Keep user-authorized publish marker; no automatic source/docs or preview deployment. No plan purchases, unapproved recharge, weakening beta SSO, access, data privacy or recovery controls.",
+      "manual_refresh_required": "Owner assumes monitoring of Netlify credits and promises to alert when low; do not ask for routine screenshots or require a new billing read for each release during the current unexpired credit grant. After a known plan-grant expiration, verify that the applicable plan and credit availability are still valid, with the owner's consent. The plugin does not expose live credits.",
+      "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
+      "maximum_snapshot_age_days_scope": "Historical operator-verified model only. Owner-managed mode waives repeated seven-day screenshot requests through the current grant expiration while retaining 15-credit and explicit publication permission.",
+      "current_known_plan_expires": "2026-11-14",
+      "owner_waived_balance_check_for_this_release": {
+        "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
+        "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
+        "verified_billing_balance": "Not measured"
+      }
+    },
+    "note": "Retained solely to preserve previously Locked historical operator requirements; never apply to future release."
+  }
 }
