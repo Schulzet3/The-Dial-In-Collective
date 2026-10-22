@@ -1,5 +1,8 @@
 # CURRENT STATUS — The Dial In Collective
 
+## 2026-10-22 — CI risk classification staged
+- Documentation-only PR code paths now avoid expensive CI stages via fail-closed classifier; source changes keep full relevant suites. Weekly complete regression remains scheduled Sunday 08:00 UTC from main. Changes committed with same-commit journal; GitHub result still to be verified. No production action.
+
 ## 2026-10-22 — streamlined release process APPROVED, implementation partial
 - Owner consent Issue #44 comment 6346939887: five-stage automated single-approval release and readiness report; risk-specific CI plus Sunday 08:00 UTC comprehensive tests; daily 08:00 UTC backup and additional automatic backup only for destructive database operations; owner-device signoff retired retroactively. Exact existing published release fe2eee66717b13b9c9d203d1728bfc863961732e stays historically verified deployed; no owner-device test is claimed. GitHub Free checks advisory. Main scheduled backup and future release controller enhancements must be separately confirmed. No publication/data write.
 
