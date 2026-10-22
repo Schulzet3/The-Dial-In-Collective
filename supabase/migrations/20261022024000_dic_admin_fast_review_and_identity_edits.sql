@@ -75,7 +75,8 @@ begin
  if actor is null or not private.is_admin() then
   raise exception using errcode='42501',message='Administrator required.';
  end if;
- reason_text:=btrim(coalesce(p_reason,''));
+ -- Default to neutral machine audit provenance when administrator saves without reason.
+ reason_text:=coalesce(nullif(btrim(coalesce(p_reason,'')),''),'Administrator saved record changes');
  if p_record_id is null or p_expected_revision is null or p_kind is null or
    p_kind not in ('shot','submission','approved') or
    length(reason_text) not between 8 and 1000 or
