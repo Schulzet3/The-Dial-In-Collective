@@ -9,8 +9,8 @@ create table private.dic_first_style_prompt_seen(
 alter table private.dic_first_style_prompt_seen enable row level security;
 revoke all on table private.dic_first_style_prompt_seen from public,anon,authenticated;
 grant all on table private.dic_first_style_prompt_seen to service_role;
-create function public.dic_claim_first_style_prompt(p_library_entry_id uuid)
-returns jsonb language plpgsql security definer set search_path='' as $$
+create function private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)
+returns jsonb language plpgsql security definer set search_path='' as $
 declare u uuid:=private.require_member();claimed uuid;
 begin
  if p_library_entry_id is null or not exists(
@@ -24,5 +24,12 @@ begin
  returning library_entry_id into claimed;
  return jsonb_build_object('ok',true,'show',claimed is not null);
 end $$;
+revoke all on function private.dic_claim_first_style_prompt_impl(uuid) from public,anon,authenticated;
+grant execute on function private.dic_claim_first_style_prompt_impl(uuid) to authenticated;
+-- The public RPC is INVOKER, avoiding a new exposed SECURITY DEFINER endpoint.
+create function public.dic_claim_first_style_prompt(p_library_entry_id uuid)
+returns jsonb language sql security invoker set search_path='' as $
+ select private.dic_claim_first_style_prompt_impl(p_library_entry_id);
+$;
 revoke all on function public.dic_claim_first_style_prompt(uuid) from public,anon,authenticated;
 grant execute on function public.dic_claim_first_style_prompt(uuid) to authenticated;

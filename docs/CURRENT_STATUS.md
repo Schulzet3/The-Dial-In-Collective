@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — Issue #19 CI blocked before runner execution; source corrected, rerun pending
+- PR #71 five workflows / six jobs failed to start runner (`runner_id=0`, `steps=[]`, missing logs); no application tests executed. Isolated SQL refactor uses private definer + public invoker; no hosted application. Static code compilation and mocked first-expansion behavior PASS; exact GitHub/isolated SQL/real device are NOT verified. Next restore CI runner availability, rerun exact SHA, then review source before merging. No Netlify release or provider writes.
+
+
 ## October 21 MDT — #19 first-expansion-only recommended style, CI pending
 - Source staged on current development `79a7e99d49112bf09a108ee131e97d5b2fcef898`, preserving newer Hide Shot backend retirement and all Locked decisions. Owner expressly changes placement from Add Coffee to first intentional coffee expansion before first shot, seen only once per owner/private coffee with server plus offline persistence. Additional SQL `20261022053000_dic_first_coffee_style_prompt.sql` is UNAPPLIED; frontend NOT DEPLOYED; no owner-device acceptance. Original PR #63/#67 drafts remain superseded, not merged. Next: exact-source CI, security/SQL checks, reviewed nonforce merge and fresh release preflight under separate owner authorization.
 
