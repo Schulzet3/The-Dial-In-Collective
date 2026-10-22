@@ -1,5 +1,10 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — exact full-stack candidate approved and five CI checks green
+- One-use release `DIC-20261021-ALL-PENDING-02` is now registered against exact tested app source `7df3deb4a271a6eb041c125574cd15ec455f6128`, following owner's universal all-pending deployment permission in the new Locked policy. All five required check-runs `approval`, `validate`, `cloud-tests`, `mobile-browser-qa`, `sql` returned SUCCESS on this SHA; tested code unchanged after. Prior release grant remains consumed.
+- Next: two owner-authorized forward-only production SQL migrations, verified `dic-verify-coffee` updated Edge deployment, runtime source/role/count check, then one controlled Netlify push using new grant and fresh evidence. **No Netlify publication or hosted backend change at time of this checkpoint.** Existing budget observation 790 remaining as of Oct21 19:00 UTC within 24h but current balance cannot be independently read through connector; last new GitHub encrypted backup and Drive offsite copy verified, no exact encrypted restore.
+
+
 ## October 21 MDT — production release source-bound CI retest initiated
 - Final pending full-stack candidate adds **only** release-scope security assertions and a disposable SQL test trigger with contemporaneous journal. Neither application runtime logic nor existing owner/member records changed. Source-bounded GitHub checks must complete before production SQL/Edge/Netlify release. Full-stack approval covers the changes; no duplicate authorization required. Reference active journal and new Locked `OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021`.
 
