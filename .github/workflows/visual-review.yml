@@ -29,19 +29,24 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
+          cache: npm
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm test
-      - name: Lint all active JavaScript and review scripts
-        run: npm run lint
+      # Node test/lint are performed by DIC cloud app build and tests on exact SHA.
+      # Keep this independent real-browser, integrity and offline acceptance gate.
       - run: npm run build:cloud
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_private_visual_review_nonfunctional
       - name: Verify every shipped file and transitive module import
         run: node scripts/audit/site-integrity.mjs --dist
+      - name: Cache pinned Chromium browser downloads
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: dic-chromium-${{ runner.os }}-playwright-1.55.0-v1
       - name: Prepare isolated browser only
         run: |
           python -m pip install playwright==1.55.0
@@ -49,11 +54,9 @@ jobs:
           mkdir -p /tmp/dic-render-assets
           curl --fail --location --max-time 40 'https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf' -o /tmp/dic-render-assets/Fraunces.ttf
           curl --fail --location --max-time 40 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf' -o /tmp/dic-render-assets/JetBrainsMono.ttf
-      - run: python tests/browser/cloud_owner_qa.py
+      # Cloud owner and invitation mobile suites remain in DIC cloud UX regression.
       - name: Verify real service-worker cached cold reopen in isolated Chromium
         run: python tests/browser/pwa_offline_qa.py
-      - name: Synthetic owner-only invitation portal mobile acceptance
-        run: python tests/browser/admin_invitation_qa.py
       - run: python tests/browser/visual_review.py
         env:
           DIC_FONT_DIR: /tmp/dic-render-assets

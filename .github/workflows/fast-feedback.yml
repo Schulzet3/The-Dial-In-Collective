@@ -1,0 +1,40 @@
+name: DIC fast feedback advisory
+# Advisory development feedback only. Never satisfies full release verification.
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - 'site/**'
+      - 'src/server/**'
+      - 'supabase/**'
+      - 'netlify/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '.github/workflows/fast-feedback.yml'
+  pull_request:
+    branches: [development/backend-foundation]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dic-fast-feedback-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  fast-feedback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Fast affected tests; unknown source falls back to all Node cases
+        env:
+          DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
+          DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/audit/change-impact.mjs
