@@ -19,6 +19,7 @@
     "current_owner_approved_two_qa_shot_purge_20261020",
     "current_owner_approved_url_autofill",
     "current_owner_autofill_button_only_20261019",
+    "current_owner_autonomous_build_test_queue_20261022",
     "current_owner_beta_breached_password_opt_out_20261018",
     "current_owner_beta_member_soft_remove_only_20261018",
     "current_owner_defer_private_hide_shot_retirement_20261021",
@@ -766,5 +767,15 @@
     "extra_backup": "AUTOMATIC_FOR_POTENTIALLY_DESTRUCTIVE_DATABASE_CHANGE_ONLY",
     "device_gate": "RETIRED_NOT_REQUIRED",
     "new_release_approval": "STILL_REQUIRED"
+  },
+  "autonomous_release_queue_policy": {
+    "decision_key": "current_owner_autonomous_build_test_queue_20261022",
+    "status": "OWNER_APPROVED_IMPLEMENTATION_PENDING_VALIDATED_QUEUE_GATE",
+    "queue_path": "docs/RELEASE_QUEUE.json",
+    "no_automatic_publication": true,
+    "ready_only_when_source_verified": true,
+    "accumulate_multiple_items": true,
+    "exclude_unready_merged_code": true,
+    "one_owner_approval_for_exact_batch": true
   }
 }
