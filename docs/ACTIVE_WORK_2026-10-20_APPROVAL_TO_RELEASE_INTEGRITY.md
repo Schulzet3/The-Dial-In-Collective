@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 22 MDT — Fast-Flow no-generic-cross-style override (CI pending)
+- Follow-up review after `c2b4b571382d7152f277fe905da8bb01967a191d` exposed a second priority leak: guarding only the Fast-Flow-specific Turbo branch permits a subsequent **generic legacy cross-style residual** to alter a correctly selected same-style provisional Fast-Flow ratio. Narrowly excluded Fast-Flow from that legacy branch; dedicated Turbo fallback still acts ONLY where no selected Fast-Flow family or provisional exists. Added comparison regression proving same-style Fast-Flow ratio is IDENTICAL with and without unrelated Turbo success, and existing five-style logic unchanged. All failures/previous test diagnostics retained; only exact-new-SHA CI can establish PASS. No hosted SQL, frontend publication or data mutation. Same-commit journal.
+
+
 ## October 22 MDT — Fast-Flow fallback precedence fix after 621/622 exact-source Node CI
 - PR #77 exact source `cf5d7e796c204662950058ed6c26508833e82990` full Node 621 PASS / 1 FAIL, failure in new test `compatible Fast-Flow evidence on similar coffees outranks same-coffee Turbo fallback`: expected `Your successful similar coffees`, got `Unproven Fast-Flow starting estimate`. Confirmed code bug: after `provisional` was applied, the separate `if(chosen)...else if(style==='Fast-Flow')` still executed and overwrote direct same-style provisional with weaker Turbo fallback.
 - Narrow repair `else if(style==='Fast-Flow'&&!provisional)` blocks Turbo only where qualifying Fast-Flow personal similar evidence exists. Preserves direct families, existing styles, ratio-only cap, selection, unrelated branches. Failing regression remains unchanged to detect recurrence. All 622+ tests, visual/browser and SQL must be rerun at exact new SHA, no earlier pass transferred. No production SQL, Netlify or data changes.

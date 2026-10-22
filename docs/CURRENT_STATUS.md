@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 22 MDT — Fast-Flow fallback precedence fully isolated (new CI pending)
+- Guarded the existing generic cross-style residual against overriding Fast-Flow similar-success evidence after the Fast-Flow-specific Turbo fallback was suppressed. Added equality regression with vs without Turbo history. Prior-source CI cannot be reused. No deployment or production changes.
+
+
 ## October 22 MDT — Fast-Flow fallback ordering engine bug corrected (CI pending)
 - 621/622 exact-source tests passed on prior candidate; failure exposed real Turbo-overwrites-Fast-Flow-similar evidence bug. Corrected fallback guard `!provisional` without loosening tests, CI still pending. No hosted changes or publication.
 

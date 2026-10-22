@@ -255,8 +255,8 @@ export function recommendation(s,coffeeId,options={}) {
    rec.turboFallback={style:'Turbo',compatibleShots:turbo.length,ratioOnly:true};
    rec.reasons.unshift('Cautious ratio-only reference from '+turbo.length+' compatible Turbo shot'+(turbo.length===1?'':'s')+'; Fast-Flow time, grind and success remain independent.');
   }
- } else if(style!=='Custom') {
-  // Weak residual only from other established styles; never merge Fast-Flow into Turbo.
+ } else if(style!=='Custom'&&style!=='Fast-Flow') {
+  // Weak residual only for legacy styles. Fast-Flow never shares this generic cross-style path.
   const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&RATIOS[sh.style]);
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
