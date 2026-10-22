@@ -41,7 +41,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   // Page-2 and later records must retain the independent existing review RPCs.
   if(complete)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions});
   const rows=queue.filter(item=>(item.status==='conflict')===(kind==='conflicts'));
-  const fallback=rows.length?rows.map(preview).join(''):'<p class="admin-empty helper">'+e(empty)+'</p>';
+  const fallback=rows.length?rows.map(preview).join(''):page?.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>';
   return fallback+(page?.error?renderAdminRecordCollection(kind,page,{embedded:true}):'');
  };
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>

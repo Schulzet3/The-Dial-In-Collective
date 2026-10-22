@@ -1,4 +1,7 @@
 # CURRENT STATUS — The Dial In Collective
+## Issue #47 latest source CI remediation (2026-10-22T00:27:25.538Z)
+- Source `262eb6454b7b852aa248f854510818f722714a91` passed approval contract, but Node/visual CI detected false “No conflicts” empty text when listing RPC failed; now corrected without weakening checks. Exact new CI must pass before final release review. No live app or database change.
+
 ## 2026-10-21 18:21 MDT admin portal completion + release review — development-only checkpoint
 - Owner requested all previously approved Admin capability implemented, reviewed/tested and readied for live publication, **without authorizing publication, hosted SQL/Edge/Auth/data mutations or credits**. Recovered development parent `ca5ea2ad6fa9e06405704f0b9da1c8e2a73a87e6`, provider still serves Netlify READY `6ad92fd1d706315f29032892`, Supabase healthy/32 applied migrations.
 - New confirmed gap repaired: every Pending/Conflict record in paginated listings (including after first 50) now exposes existing audited approve/merge/hold operations, rather than only the separate bounded dashboard.queue. Source and browser tests committed with journal; **CI/release review pending**. Historical records/Locked decisions/privacy restrictions retained; no provider mutation.

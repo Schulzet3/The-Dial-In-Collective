@@ -130,6 +130,7 @@ test('unavailable detail pages preserve independent review actions without false
  assert.match(html,/data-action="review-hold"/);
  assert.equal((html.match(/Detailed listing unavailable/g)||[]).length,2);
  assert.doesNotMatch(html,/<details|No pending coffee submissions|No coffee conflicts/);
+ assert.match(html,/Detailed listing unavailable/);
  const standalone=renderAdminRecordCollection('pending',{items:[],total:0});
  assert.match(standalone,/<h2>Pending Coffees<\/h2>/);
 });
