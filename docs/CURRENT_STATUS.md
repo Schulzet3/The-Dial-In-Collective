@@ -1,5 +1,11 @@
 # CURRENT STATUS — The Dial In Collective
 
+## October 21 MDT — #20 Hide Shot UI staged in isolated development branch
+- Owner-safe Hide Shot affordance staged on `work/hide-shot-owner-safe-20261021`; original shot records preserved. Uses existing server-owner revision guard and asks for explicit confirmation. Code/CI verification pending. No Netlify or Supabase production mutation, and user-device acceptance is not claimed. Same-commit active journal holds implementation scope and next steps.
+
+
+
+
 ## October 21 MDT — PR #55 source-only Admin redesign merged and independently verified
 - Owner-approved Issues #52/#47, narrow Locked admin decisions preserved in Master Specification, Decision Ledger and approval inventory. Five exact-head GitHub Actions SUCCESS on `adbaa99ac94d76d09d7990c7a35080410b7081a7`: approval `39716014307`, SQL `39716014408`, cloud/mobile `39716016857`, visual `39716014364`, Node/lint/build `39716014471`. Inspected key UI/server role-restricted SQL patches and no unapproved live provider actions.
 - Non-force normal GitHub PR #55 merge at `3b51aaba4b36a2beee3e38e8dc5e2916a944b2c8`, parents previous development `f55feb70450901d8e0113e11affc7bb7bb35294a` + exact tested PR head; merged and tested trees **byte-identical** `92a0eaa45743adbac86fee7cb8073aec854b900d`. Read back branch ref, Git commit/tree/parents and PR merged state independently.

@@ -1,5 +1,13 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — #20 safe personal Hide Shot source implementation (verification pending)
+- Owner's broad backlog continuation was logged in Issue #57; independent Issue #20 already authorizes this development scope. Branch `work/hide-shot-owner-safe-20261021` starts at verified development `f55feb70450901d8e0113e11affc7bb7bb35294a`, isolated from admin PR #55. No production or live member-data changes.
+- Added a small Hide Shot button inside **expanded synchronized personal shot details only**, never a delete action. Handler requires admitted online session, a nonhidden/not-pending owner-visible shot with positive revision, zero pending sync events, explicit confirmation about retained original and possible anonymous Community observations, then existing `hide_shot` owner-scoped revision-checked/idempotent outbox mutation. Clears only presentation state after sync; no hard purge/Undo promise. Offline hide attempts are rejected before enqueue; interrupted network sends stay in the durable outbox, stale revisions do not overwrite.
+- New Node checks cover visible controls, confirmation, protected mutation call, outbox owner segregation and revision conflict. All exact-SHA CI checks, browser/device acceptance and full source review pending. No release permission inferred. Next: open PR, verify source tests and resolve failures, reconcile with concurrent #55.
+
+
+
+
 ## October 21 MDT — PR #55 source-only Admin redesign merged and independently verified
 - Owner-approved Issues #52/#47, narrow Locked admin decisions preserved in Master Specification, Decision Ledger and approval inventory. Five exact-head GitHub Actions SUCCESS on `adbaa99ac94d76d09d7990c7a35080410b7081a7`: approval `39716014307`, SQL `39716014408`, cloud/mobile `39716016857`, visual `39716014364`, Node/lint/build `39716014471`. Inspected key UI/server role-restricted SQL patches and no unapproved live provider actions.
 - Non-force normal GitHub PR #55 merge at `3b51aaba4b36a2beee3e38e8dc5e2916a944b2c8`, parents previous development `f55feb70450901d8e0113e11affc7bb7bb35294a` + exact tested PR head; merged and tested trees **byte-identical** `92a0eaa45743adbac86fee7cb8073aec854b900d`. Read back branch ref, Git commit/tree/parents and PR merged state independently.
