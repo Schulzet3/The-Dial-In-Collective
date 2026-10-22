@@ -202,13 +202,9 @@ async function start(){
     const decision=action==='review-approve'?'approve':action==='review-merge'?'merge':'hold';
     const selected=decision==='merge'?root.querySelector('#admin-merge-'+id)?.value:null;
     if(decision==='merge'&&!mergeChoices[id]?.some(c=>c.id===selected))return;
-    // An explicit Approve Distinct click is sufficient. Real duplicates remain server-blocked.
-    let reason='';
-    if(decision!=='approve'){
-     reason=String(globalThis.prompt?.('Reason for '+decision+':','')||'').trim();
-     if(reason.length<8)return;
-     if(!globalThis.confirm?.('Apply '+decision+' to this submitted coffee? The decision is logged.'))return;
-    }
+    // Each deliberate resolution is one click. The server still checks role,
+    // current revision and canonical identity, and writes private audit provenance.
+    const reason='';
     guarded(async()=>{
      const result=await adminRpc('dic_admin_review_coffee',{
       p_submission_id:id,p_expected_revision:revision,p_action:decision,

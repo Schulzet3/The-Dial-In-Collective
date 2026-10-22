@@ -636,7 +636,20 @@ class CloudApp {
    else if(id==='style'){await this.mutate('set_style',{setup_id:M.activeSetup(this.state).id,setup_version_id:M.activeVersion(this.state).id,library_entry_id:this.styleCoffee,style:d.style,expected_revision:this.styleRevision},{onlineOnly:true});sheet.close();}
    else if(id==='shot'){
     this.readDraft();const d=this.draft,validation=M.validateShot(d);if(validation.length)throw new Error(validation.join(' '));
-    // Basket Dose +/-1 g is advisory; no extra confirmation on a valid save.
+    // Only an actual +/-1 g basket-dose deviation needs an extra decision.
+    // On edit use the original shot's basket snapshot; do not silently compare
+    // historic shots against a newly selected or reconfigured basket.
+    const version=M.activeVersion(this.state);
+    const coffeeState=M.coffeeState(this.state,this.logCoffee);
+    const basketId=this.editing?.basketId||coffeeState?.basketId||version?.defaultBasketId;
+    const basket=this.editing?null:version?.baskets?.find(b=>b.id===basketId);
+    const referenceDose=this.editing?.snapshot?.basketDoseG??basket?.doseG;
+    const actualDose=Number(d.doseG);
+    if(Number.isFinite(Number(referenceDose))&&Number(referenceDose)>0&&
+       Number.isFinite(actualDose)&&Math.abs(actualDose-Number(referenceDose))>1){
+     const warning=`Dose ${actualDose.toFixed(1)} g is more than 1 g from this basket's ${Number(referenceDose).toFixed(1)} g reference. This is allowed; confirm to ${this.editing?'save the edited':'log the'} shot.`;
+     if(!globalThis.confirm?.(warning))return;
+    }
     let payload;if(this.editing){payload={id:d.id,expected_revision:this.editing.revision,dose_g:Number(d.doseG),yield_g:Number(d.yieldG),time_s:Number(d.timeS),grind_setting:Number(d.grindSetting),temperature_c:C.num(d.tempC),taste:d.tasteScales,notes:d.notes};}else payload=shotPayload(this.state,this.logCoffee,d);
     await this.mutate('save_shot',payload);this.expanded=new Set([this.logCoffee]);this.tempCoffee=null;this.justSavedId=d.id;sheet.close();this.notice=this.pending.length?'Saved on this device; waiting to sync.':'Shot saved to your cloud account.';this.render();
    }
