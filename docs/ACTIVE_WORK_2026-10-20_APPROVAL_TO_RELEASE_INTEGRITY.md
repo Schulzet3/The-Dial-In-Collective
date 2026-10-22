@@ -1,5 +1,9 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — fixture correction before first-style SQL acceptance
+- Independent schema review found existing `library_coffee_once_idx` enforces UNIQUE `(owner_id,coffee_id)` for each verified coffee. Initial new synthetic security test mistakenly created two owner-A entries for one canonical coffee. Corrected test fixture to create a second synthetic canonical coffee for the pre-existing-shot suppression case; preserves original catalog uniqueness, does not weaken or bypass production constraints. Test is still only a candidate until GitHub Actions re-runs on new head. Changed SQL fixture plus same-commit journal, no application schema or hosted data mutation.
+
+
 ## October 21 MDT — isolated first-style authorization regression added
 - Review of PR #71's new owner-scoped claim exposed an evidence gap: the general isolated SQL runner applied its migration, but had no dedicated cross-account, one-time-claim assertion. Added `supabase/tests/first_style_prompt.sql` and registered it in `scripts/audit/isolated-sql-regression.sh` (network-isolated PostgreSQL 17.11, disposable `dic_ci`, synthetic users, outer ROLLBACK). Assertions cover no direct private table read, anon denial, admitted owner first show, replay false on same owner/other device, no prompt when a shot already exists, foreign owner/unknown entry rejection, separate owner claim of shared canonical coffee, direct private helper owner denial, and pending-user admission rejection. No production SQL/data/provider changes. Required same-commit journal. These are unverified new tests until exact PR-source CI actually executes; do not merge on earlier green evidence.
 

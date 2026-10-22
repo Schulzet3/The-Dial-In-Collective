@@ -3,7 +3,7 @@ begin;
 do $first_style$
 declare
  owner_a uuid:=gen_random_uuid(); owner_b uuid:=gen_random_uuid(); pending_member uuid:=gen_random_uuid();
- coffee uuid; entry_a uuid; entry_b uuid; entry_shot uuid;
+ coffee uuid; shot_coffee uuid; entry_a uuid; entry_b uuid; entry_shot uuid;
  setup_a uuid:=gen_random_uuid(); version_a uuid:=gen_random_uuid();
  calibration_a uuid:=gen_random_uuid(); basket_a uuid:=gen_random_uuid(); basket_version_a uuid:=gen_random_uuid();
  result jsonb; denied boolean; seen_count bigint;
@@ -28,7 +28,10 @@ begin
  values('Synthetic First Style','Synthetic Roaster','verified') returning id into coffee;
  insert into public.library_entries(owner_id,coffee_id) values(owner_a,coffee) returning id into entry_a;
  insert into public.library_entries(owner_id,coffee_id) values(owner_b,coffee) returning id into entry_b;
- insert into public.library_entries(owner_id,coffee_id) values(owner_a,coffee) returning id into entry_shot;
+ -- The catalog enforces one library entry per owner and canonical coffee.
+ insert into public.coffees(name,roaster,verification_state)
+ values('Synthetic With Shot','Synthetic Roaster','verified') returning id into shot_coffee;
+ insert into public.library_entries(owner_id,coffee_id) values(owner_a,shot_coffee) returning id into entry_shot;
  insert into public.setups(id,owner_id,name) values(setup_a,owner_a,'Synthetic prompt setup');
  insert into public.setup_versions(id,owner_id,setup_id,machine_model,grinder_model)
  values(version_a,owner_a,setup_a,'Synthetic machine','Synthetic grinder');
