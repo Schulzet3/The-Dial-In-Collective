@@ -31,7 +31,8 @@ test('Netlify ignore build adapter requires exact owner release allow token and 
  const src=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
  assert.match(toml,/node \.\/scripts\/netlify\/should-ignore-build\.mjs/);
  assert.match(toml,/DIC_IGNORE_STATUS/);
- assert.match(toml,/command\s*=\s*"npm test && npm run build:cloud"/);
+ assert.match(toml,/command\s*=\s*"npm run build:cloud"/);
+ assert.doesNotMatch(toml,/command\s*=\s*"npm test &&/);
  assert.match(src,/assertProductionClaim/);
  assert.match(src,/checkRepository\(\)/);
  assert.doesNotMatch(src,/NETLIFY_CREDIT_LEDGER\.json|estimated_credits_limit|remaining<cost/);

@@ -209,6 +209,24 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Isolated PR #86; owner-approved source-only lazy-loading tranche. Never declare READY or deploy until exact-source CI and nonforce merge verified. Replaces eager private-record reads with on-demand expanded-section reads; keeps status/admin-role checks and 50-row pagination."
+    },
+    {
+      "id": "DIC-Q-80-netlify-test-reuse",
+      "issue": 80,
+      "pr": null,
+      "title": "Skip a second full Node suite during exact-source production publication",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify.toml"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Await exact-source build, approval and browser CI and verified nonforce integration. Verify source-bound one-use release preflight still runs the full Node suite before authorized publication."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Independent owner-approved CI deduplication. Netlify build remains `npm run build:cloud` with graph, source and approval checks; exact-source full `npm test` in GitHub stays mandatory; Netlify ignore build / one-use claim / published SHA contract unchanged. No production deployment."
     }
   ],
   "history": [],
