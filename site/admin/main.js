@@ -203,13 +203,17 @@ async function start(){
     const decision=action==='review-approve'?'approve':action==='review-merge'?'merge':'hold';
     const selected=decision==='merge'?root.querySelector('#admin-merge-'+id)?.value:null;
     if(decision==='merge'&&!mergeChoices[id]?.some(c=>c.id===selected))return;
-    const reason=globalThis.prompt?.('Required audit reason for this coffee decision:','');
-    if(!reason||reason.trim().length<8)return;
-    if(!globalThis.confirm?.('Apply '+decision+' to this submitted coffee? The decision is logged and cannot overwrite another member’s shots.'))return;
+    // An explicit Approve Distinct click is sufficient. Real duplicates remain server-blocked.
+    let reason='';
+    if(decision!=='approve'){
+     reason=String(globalThis.prompt?.('Reason for '+decision+':','')||'').trim();
+     if(reason.length<8)return;
+     if(!globalThis.confirm?.('Apply '+decision+' to this submitted coffee? The decision is logged.'))return;
+    }
     guarded(async()=>{
      const result=await adminRpc('dic_admin_review_coffee',{
       p_submission_id:id,p_expected_revision:revision,p_action:decision,
-      p_reason:reason.trim(),p_canonical_id:selected||null
+      p_reason:reason,p_canonical_id:selected||null
      });
      if(!result?.ok)throw new Error('The review did not complete. Refresh before retrying.');
      delete mergeChoices[id];issued=null;await refresh();

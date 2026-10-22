@@ -1,7 +1,7 @@
 // Pure escaped administrator view. Legacy review overview is sanitized;
 // separate live-admin-only records RPC can include creator identity and notes.
 import {e} from '../lib/ui.js';
-import {adminDisclosure,renderAdminRecordCollection} from './records.js';
+import {adminDisclosure,renderAdminRecordCollection,renderAdminCoffeeFacts} from './records.js';
 
 export const formatCount=value=>value!=null&&value!==''&&Number.isSafeInteger(Number(value))&&Number(value)>=0?String(Number(value)):'—';
 export function renderAdminDenied(message='Administrator access required.'){
@@ -23,16 +23,14 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
    <button type="button" class="ghost compact" data-action="review-hold" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Hold for Clarification</button>
   </div>
   ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
-  <p class="admin-subtle">Manual review requires a reason and server verification. Your decision is recorded.</p>
+  <p class="admin-subtle">Approve a distinct coffee with one click. Potential duplicate conflicts require review; every decision is recorded.</p>
 
  `;
  const preview=item=>`<article class="admin-queue-item">
   <div class="admin-queue-title"><div><span class="admin-state">${e(item.status==='conflict'?'Conflict':'Pending')}</span>
    <h3>${e(item.name||'Unnamed coffee')}</h3><p class="helper">${e(item.roaster||'Roaster not supplied')}</p></div>
    <span class="admin-date">${e(String(item.created_at||'').slice(0,10))}</span></div>
-  <div class="admin-facts">${[
-   ['Release',item.release_label],['Origin',item.origin],['Process',item.process],['Roast',item.roast_level]
-  ].filter(([,v])=>v).map(([k,v])=>`<span><b>${e(k)}:</b> ${e(v)}</span>`).join('')}</div>
+  ${renderAdminCoffeeFacts(item)}
   ${item.source_url?`<p class="admin-source">Evidence URL (review manually): <span>${e(item.source_url)}</span></p>`:''}
   ${reviewActions(item)}
  </article>`;

@@ -49,11 +49,15 @@ const rowFields=(item,shot,approved)=>fields[shot?'shots':'coffee'].map(([key,la
  const value=string(item[key]);
  const multiline=['notes','tasting_notes','summary','espressoNotes'].includes(key);
  const maxLength=key==='notes'?16000:8000;
- const readonly=approved&&['name','roaster','release_label'].includes(key)?' readonly title="Canonical identity requires separate review"':'';
+ const readonly=''; // Admin may edit canonical identity with server-side collision and revision checks.
  const input=multiline?'<textarea name="'+e(key)+'" rows="2" maxlength="'+maxLength+'">'+e(value)+'</textarea>':
   '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+readonly+' ' +(['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
  return '<label>'+e(label)+input+'</label>';
 }).join('');
+export function renderAdminCoffeeFacts(item){
+ return '<dl class="admin-coffee-facts">'+[...fields.coffee,['source_url','Source URL']].map(([key,label])=>
+  '<div><dt>'+e(label)+'</dt><dd>'+e(string(item[key])||'—')+'</dd></div>').join('')+'</dl>';
+}
 export function renderAdminRecord(item,kind,{reviewActions=null}={}){
  const shot=kind==='shots',approved=kind==='approved';
  const id=string(item.id),title=shot?(item.coffee_name||'Shot record'):(item.name||'Unnamed coffee');
@@ -67,7 +71,7 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
   '<div class="admin-queue-title"><div><h3>'+e(title)+'</h3><p class="helper">'+e(description)+'</p>'+
   '<p class="helper">Added by: <strong>'+e(creator)+'</strong> · '+e(date(item.created_at||item.pulled_at))+'</p>'+
   '</div><span class="admin-state">'+e(shot?'Logged Shot':approved?'Approved Coffee':kind==='conflicts'?'Conflict':'Pending')+'</span></div>'+
-  (shot?'<p class="admin-record-note"><b>Notes:</b> '+e(item.notes||'None')+'</p>':'')+
+  (shot?'<p class="admin-record-note"><b>Notes:</b> '+e(item.notes||'None')+'</p>':(!approved?renderAdminCoffeeFacts(item):''))+
   (item.source_url?'<p class="admin-source">Source: '+e(item.source_url)+'</p>':'')+
   (enabled?'<button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Edit Details</button>':'')+
   (enabled?'<form hidden class="admin-record-editor" data-record-form '+attr('data-id',id)+attr('data-type',type)+
