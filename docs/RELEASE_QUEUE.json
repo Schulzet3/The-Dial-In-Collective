@@ -219,6 +219,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
       "notes": "Development READY, never published. Admin server-backed search is separate and incomplete. Both postmerge exact-source results and live head verified."
+    },
+    {
+      "id": "DIC-Q-80-community-search",
+      "issue": 80,
+      "pr": null,
+      "title": "Server-side Community coffee and style search with stable filtered paging",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/client.js",
+        "site/cloud/main.js",
+        "site/cloud/community.js",
+        "supabase/migrations/20261022220100_dic_community_server_search.sql"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "Staged SQL RPC requires coordinated publication; exact-source application, privacy SQL and browser acceptance pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/80",
+      "notes": "Preserves existing browse function and sanitized DTO, eligible verified only and no owner IDs. Bound 80-character term and style across entire server data before count/page, 20-row stable paging, manual request not per-keystroke."
     }
   ],
   "history": [],
