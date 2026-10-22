@@ -147,10 +147,12 @@ begin
  if data->>'ok'<>'true' or (select name from public.coffees where id=canonical_id)<>'Rewritten Identity'
     or (select release_label from public.coffees where id=canonical_id)<>'2026 Synthetic'
  then raise exception 'Admin canonical identity edit failed';end if;
+ -- Verify cross-owner references only as the disconnected privileged fixture.
+ -- Authenticated admin is intentionally denied another member's direct SELECT.
+ execute 'reset role';
  if (select count(*) from public.library_entries where id=library_id and coffee_id=canonical_id)<>1
     or (select count(*) from public.shots where id=shot_id and library_entry_id=library_id)<>1
  then raise exception 'Identity correction detached member history';end if;
- execute 'reset role';
  if not exists(select 1 from private.admin_content_edits where record_id=canonical_id
      and record_kind='approved' and before_values->>'name'='Canonical Fixture'
      and after_values->>'name'='Rewritten Identity') then
