@@ -60,14 +60,22 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  </section>
  ${renderAdminRecordCollection('approved',records.approved)}
  ${renderAdminRecordCollection('shots',records.shots)}
- <section id="admin-accounts" tabindex="-1"><h2 class="admin-accounts-title">Accounts</h2>${access?renderAdminAccessPanel(access,issued,records.accounts):'<p class="helper">Account list unavailable.</p>'}</section>
+ <section id="admin-accounts" tabindex="-1"><h2 class="admin-accounts-title">Accounts</h2>${access?renderAdminAccessPanel(access,issued,records.accounts,records.invites):'<p class="helper">Account list unavailable.</p>'}</section>
  <section class="admin-panel admin-health"><h2>Infrastructure</h2><p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p></section>`;
 }
 
 /** Strictly administrator-only UI projection. The list never contains a
  * plaintext token: freshly generated secrets appear once per browser tab. */
-export function renderAdminAccessPanel(access={},issued=null,accountPage=null){
- const invites=Array.isArray(access?.invites)?access.invites:[];
+export function renderAdminAccessPanel(access={},issued=null,accountPage=null,invitePage=null){
+ const hasInvitePage=Array.isArray(invitePage?.items)&&!invitePage?.error;
+ const invites=hasInvitePage?invitePage.items:Array.isArray(access?.invites)?access.invites:[];
+ const inviteOffset=hasInvitePage&&Number.isSafeInteger(invitePage.offset)&&invitePage.offset>=0?invitePage.offset:0;
+ const invitesTotal=hasInvitePage?invitePage.total:access.invites_total;
+ const inviteTotal=Number.isSafeInteger(Number(invitesTotal))&&Number(invitesTotal)>=0?Number(invitesTotal):0;
+ const inviteRange=invites.length?'Showing '+String(inviteOffset+1)+'–'+String(inviteOffset+invites.length)+' of '+String(inviteTotal):
+  'No invitations on this page · '+String(inviteTotal)+' total';
+ const inviteFallback=!hasInvitePage&&(invitePage?.error||inviteTotal>invites.length)
+  ?'<p class="helper" role="status">Complete invitation history is temporarily unavailable. Showing '+e(String(invites.length))+' most recent codes.</p>':'';
  const hasAccountPage=Array.isArray(accountPage?.items)&&!accountPage?.error;
  const members=hasAccountPage?accountPage.items:Array.isArray(access?.members)?access.members:[];
  const offset=hasAccountPage&&Number.isSafeInteger(accountPage.offset)&&accountPage.offset>=0?accountPage.offset:0;
@@ -103,7 +111,7 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null){
    <code id="admin-new-code">${e(issued.invite_code)}</code>
    <button type="button" class="ghost compact" data-action="copy-invite">Copy Code</button>
   </div>`:'';
- return `<section class="admin-panel admin-access" aria-labelledby="admin-access-heading">
+ return `<section class="admin-panel admin-access" id="admin-invites" tabindex="-1" aria-labelledby="admin-access-heading">
   <div class="admin-section-header"><h2 id="admin-access-heading">Beta Invitations</h2>
   <p class="helper">Create and revoke private invitations. Codes never expire automatically; already admitted accounts stay permanent.</p></div>
   <form id="admin-invite-form" class="admin-invite-form" autocomplete="off">
@@ -114,9 +122,10 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null){
   <p class="admin-invite-footnote helper">Unused codes never expire by date and can be revoked at any time. After one account uses a code, it cannot be used again. Already admitted accounts stay active until you remove their access.</p>
   ${secret}
   <p id="admin-action-notice" class="admin-action-notice" role="alert" aria-live="assertive"></p>
-  <h3>Existing Codes <span class="helper">${formatCount(access.invites_total)}</span></h3>
+  <h3>Existing Codes <span class="helper">${formatCount(invitesTotal)}</span></h3>
   <ul class="admin-invite-list">${inviteRows||'<li class="helper">No codes created yet.</li>'}</ul>
-  ${Number(access.invites_total)>invites.length?'<p class="helper">Showing the 50 most recent codes.</p>':''}
+  ${inviteFallback}
+  ${hasInvitePage&&(inviteOffset>0||inviteOffset+invites.length<inviteTotal)?`<div class="admin-pagination"><span class="helper">${e(inviteRange)}</span><button type="button" class="ghost compact" data-action="record-page" data-kind="invites" data-offset="${Math.max(0,inviteOffset-50)}" ${inviteOffset===0?'disabled':''}>Previous</button><button type="button" class="ghost compact" data-action="record-page" data-kind="invites" data-offset="${inviteOffset+50}" ${inviteOffset+invites.length>=inviteTotal?'disabled':''}>Next</button></div>`:''}
  </section>
  <section class="admin-panel admin-access" aria-labelledby="admin-members-heading">
   <h2 id="admin-members-heading">Member Access <span class="helper">${formatCount(totalValue)}</span></h2>

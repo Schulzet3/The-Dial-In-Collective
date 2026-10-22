@@ -28,7 +28,7 @@ begin
  if auth.uid() is null or not private.is_admin() then
   raise exception using errcode='42501',message='Administrator required.';
  end if;
- if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts')
+ if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts','invites')
    or p_offset is null or p_offset<0 or p_offset>1000000
    or p_limit is null or p_limit<1 or p_limit>50 then
   raise exception using errcode='22023',message='Invalid listing parameters.';
@@ -87,6 +87,20 @@ begin
   left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id
   left join auth.users u on u.id=s.owner_id
   order by s.pulled_at desc,s.id desc limit p_limit offset p_offset) v;
+ elsif p_kind='invites' then
+  -- Operator-only, bounded, historical invitations; never expose token hashes.
+  select count(*) into n from private.beta_invites;
+  select coalesce(jsonb_agg(v.row_data order by v.created_at desc,v.id desc),'[]'::jsonb) into listing
+  from (select i.id,i.created_at,jsonb_build_object(
+    'id',i.id,'label',i.label,'created_at',i.created_at,
+    'expires_at',i.expires_at,'uses',i.uses,'max_uses',i.max_uses,
+    'status',case
+      when i.revoked_at is not null then 'revoked'
+      when i.expires_at is not null and i.expires_at<=now() then 'expired'
+      when i.max_uses is not null and i.uses>=i.max_uses then 'used'
+      else 'active' end
+   ) row_data from private.beta_invites i
+   order by i.created_at desc,i.id desc limit p_limit offset p_offset) v;
  else
   select count(*) into n from private.beta_members where admitted_at is not null;
   select coalesce(jsonb_agg(v.row_data order by v.admitted_at desc,v.id),'[]'::jsonb) into listing

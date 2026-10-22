@@ -1,4 +1,8 @@
 # CURRENT STATUS — The Dial In Collective
+
+## 2026-10-22T00:31:25.586Z administrator invitation history completeness (Issue #47) — STAGED ONLY
+- New admin-only paginated invitation metadata across entire history, without plaintext or hashes, staged in currently unapplied admin SQL migration and admin interface. Current overview fallback preserved. Exact CI and release review pending; NO hosted backend/frontend change.
+
 ## Issue #47 latest source CI remediation (2026-10-22T00:27:25.538Z)
 - Source `262eb6454b7b852aa248f854510818f722714a91` passed approval contract, but Node/visual CI detected false “No conflicts” empty text when listing RPC failed; now corrected without weakening checks. Exact new CI must pass before final release review. No live app or database change.
 

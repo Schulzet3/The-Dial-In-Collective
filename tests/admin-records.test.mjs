@@ -134,3 +134,19 @@ test('unavailable detail pages preserve independent review actions without false
  const standalone=renderAdminRecordCollection('pending',{items:[],total:0});
  assert.match(standalone,/<h2>Pending Coffees<\/h2>/);
 });
+
+test('invitation metadata paginates independently, without exposing secrets',()=>{
+ const row={id:'00000000-0000-4000-8000-000000000071',label:'Older invite',uses:1,max_uses:1,status:'used',created_at:'2026-10-18'};
+ const html=renderAdminAccessPanel({invites_total:90,invites:[],members:[]},null,
+  {items:[],total:0,offset:0},{items:[row],total:90,offset:50});
+ assert.match(html,/Older invite|Showing 51–51 of 90/);
+ assert.match(html,/data-action="record-page" data-kind="invites" data-offset="0"/);
+ assert.match(html,/data-action="record-page" data-kind="invites" data-offset="100"/);
+ assert.doesNotMatch(html,/token_hash|dic-[a-f0-9]{64}/);
+});
+test('invite listing failure retains safe original 50-row overview without looping Next',()=>{
+ const html=renderAdminAccessPanel({invites:[{id:'00000000-0000-4000-8000-000000000072',label:'Original invite',uses:0,max_uses:1,status:'active'}],invites_total:60},null,
+  null,{items:[],total:60,offset:50,error:'Unavailable'});
+ assert.match(html,/Original invite|Complete invitation history is temporarily unavailable/);
+ assert.doesNotMatch(html,/data-kind="invites"/);
+});
