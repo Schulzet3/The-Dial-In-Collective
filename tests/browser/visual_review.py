@@ -263,10 +263,10 @@ globalThis.supabase={createClient:()=>sdk};
   page.locator('#admin-refresh').click();check(page.evaluate('requests.filter(x=>x==="dic_admin_dashboard").length')>=2,mode+': Admin Refresh remains read-only')
   page.wait_for_function("document.querySelector('#admin-refresh')?.disabled===false && document.querySelectorAll('#admin-approved .admin-record').length===2")
   check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','2'],mode+': Admin cards match complete record totals')
-   check(page.locator('details.admin-disclosure:not([open])').count()==6,mode+': all admin sections collapsed initially')
-   for kind in ['pending','conflicts','approved','shots','accounts','infrastructure']:
+  check(page.locator('details.admin-disclosure:not([open])').count()==6,mode+': all admin sections collapsed initially')
+  for kind in ['pending','conflicts','approved','shots','accounts','infrastructure']:
    page.locator('#admin-'+kind+' summary.admin-disclosure-summary').click()
-   for group in page.locator('#admin-shots details.admin-coffee-group').all():
+  for group in page.locator('#admin-shots details.admin-coffee-group').all():
    group.locator('summary').click()
   for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
    check(page.locator('#admin-'+kind+' .admin-record').count()==total,mode+': '+kind+' records are populated')

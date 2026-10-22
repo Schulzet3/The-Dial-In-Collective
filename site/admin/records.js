@@ -72,7 +72,7 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
   '<p class="helper">Added by: <strong>'+e(creator)+'</strong> · '+e(date(item.created_at||item.pulled_at))+'</p>'+
   '</div><span class="admin-state">'+e(shot?'Logged Shot':approved?'Approved Coffee':kind==='conflicts'?'Conflict':'Pending')+'</span></div>'+
   (shot?'<p class="admin-record-note"><b>Notes:</b> '+e(item.notes||'None')+'</p>':(!approved?renderAdminCoffeeFacts(item):''))+
-  (item.source_url?'<p class="admin-source">Source: '+e(item.source_url)+'</p>':'')+
+  (item.source_url&&(shot||approved)?'<p class="admin-source">Source: '+e(item.source_url)+'</p>':'')+
   (enabled?'<button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Edit Details</button>':'')+
   (enabled?'<form hidden class="admin-record-editor" data-record-form '+attr('data-id',id)+attr('data-type',type)+
      attr('data-revision',rev)+'><div class="admin-record-grid">'+rowFields(item,shot,approved)+'</div>'+

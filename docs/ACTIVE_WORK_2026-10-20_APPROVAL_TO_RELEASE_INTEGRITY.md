@@ -1,5 +1,10 @@
 # ACTIVE WORK — 2026-10-20 — owner request: zero-gap continuity, grinder UI and missed approvals
 
+## October 21 MDT — #52 visual fixture Python block structure and duplicate Pending source label corrected
+- Manual exact-file inspection caught one remaining 3-space indentation in isolated `visual_review.py` introduced by the new disclosure checks. Fixed to match the actual surrounding 2-space suite block and 3-space nested loops, without suppressing any test. Removed duplicate source URL text in Pending cards (the complete visible facts grid already shows it) for lean review. No change to audited RPC behavior or protected original records.
+- Draft PR #53 remained open at source `d5611c5`; earlier synthetic/isolated SQL checks at pre-owner-update SHA `7db1df9` were green except for this isolated visual fixture. **Post-update exact SHA CI not yet available**, so do not present these revised source/SQL changes as tested. New scoped owner instruction/decision preserved in canonical files and Issue #52; no production release.
+
+
 ## October 21 MDT — low-friction Admin workflow synthetic/SQL regression tranche
 - Added exact SQL acceptance for `Approve Distinct` with null human reason: standard audit reason is persisted and ordinary role/revision/provenance/near-match checks still apply. Source-only edit migration now exercised in isolated SQL with approved name and release change, canonical UUID/member library/shot link preservation and recorded before/after audit. Prior descriptive, source attribution and shot corrections still tested.
 - Added Node tests for full pending-card content, escaped XSS samples and writable approved name/roaster/release fields plus source guard contract. Fixed isolated visual review's newly introduced check indentation (left all other visual asserts unchanged). **CI not yet verified on this SHA.** No live provider changes.

@@ -31,7 +31,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
    <h3>${e(item.name||'Unnamed coffee')}</h3><p class="helper">${e(item.roaster||'Roaster not supplied')}</p></div>
    <span class="admin-date">${e(String(item.created_at||'').slice(0,10))}</span></div>
   ${renderAdminCoffeeFacts(item)}
-  ${item.source_url?`<p class="admin-source">Evidence URL (review manually): <span>${e(item.source_url)}</span></p>`:''}
+  
   ${reviewActions(item)}
  </article>`;
  const reviewSection=(kind,empty)=>{
