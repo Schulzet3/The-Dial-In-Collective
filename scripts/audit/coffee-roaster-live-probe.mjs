@@ -150,7 +150,7 @@ const franky=results.find(x=>x.roaster==='PERC Franky Hoyos');
 const outpost=results.find(x=>x.roaster==='PERC Outpost Coffee');
 const onyx=results.find(x=>x.roaster==='Onyx Mullugeta Muntasha');
 const sweetWuri=results.find(x=>x.roaster==='Sweet Bloom Wuri');
-if(sweetWuri?.status==='parsed')assert.equal(sweetWuri.roast_level,'Light','Sweet Bloom selected page explicitly says Roast Level Light');
+// Wuri's Roast Level chart endpoint is not an independently verified selected tier; keep unverified without marked-position evidence.
 const sweetUraga=results.find(x=>x.roaster==='Sweet Bloom Uraga');
 const heart=results.find(x=>x.roaster==='Heart Phono');
 const blackWhite=results.find(x=>x.roaster==='Black & White Los Altos');

@@ -1,5 +1,9 @@
 # CURRENT STATUS — The Dial In Collective
 
+## Extractor #33 CI adversarial finding — roast visual endpoint shortcut reverted
+- Proposed explicit `Roast Level Light` textual fallback was **unsafe**: CI 39702151073 caught 6 original roast visual/provenance regressions. Removed fallback and unsubstantiated Wuri assertion, preserved all prior roast tests; Wuri graphic remains review-only until independently selected-tier evidence exists. Source-backed Echo Raven notes and selected flavor chip improvements remain. Independent SEY Kedida HTML and exact public product API currently lack certain details, so leave blank. New CI pending. No production changes.
+
+
 ## Extractor #33 source-evidence gap correction pending CI
 - Pinned HTTPS diagnostics 39701900003: SEY Kedida current HTML lacks earlier reported technical labels, thus leave missing unless exact public product API independently supplies them. Sweet Bloom Wuri current Product HTML explicitly says Roast Level Light, prior decoder blank. Staged selected-label fallback with conflict/marketing negatives, and deeper Kedida matched Shopify API study; source/test/public CI pending. No production publish/SQL/credits.
 

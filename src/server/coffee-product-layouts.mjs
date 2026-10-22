@@ -272,14 +272,6 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   const m=clean(sey,140).match(/\s[-–]\s(Washed|Natural|Honey|Anaerobic)\s*$/i);
   if(m&&!fields.process)addField('process',m[1]);
  }
- // A selected Product can print the seven-tier value as a short two-node
- // "Roast Level / Light" label, e.g. Sweet Bloom Wuri's current public page.
- // This is a literal label-value pair, NOT a hue, Agtron or flavor guess.
- // Only use the already scoped selected product markup and a unique value.
- const visibleRoast=page.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,25000);
- const stated=[...visibleRoast.matchAll(/\bRoast\s+Level\s*[:\-–]?\s*(Ultra\s+Light|Very\s+Light|Medium[\s-]?Light|Medium[\s-]?Dark|Light|Medium|Dark)\b/gi)]
-  .map(x=>x[1]).filter(Boolean);
- if(stated.length===1)addField('roast_level',stated[0]);
  const tokens=[...page.matchAll(leaf)].slice(0,850).map(m=>({
   at:m.index,end:m.index+m[0].length,tag:m[1].toLowerCase(),text:clean(m[2],260)
  })).filter(m=>m.text);

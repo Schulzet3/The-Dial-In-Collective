@@ -227,18 +227,3 @@ test('real Echo Raven Mexico uses explicitly labeled Tasting Profile, without as
  assert.match(r.fields.origin||'',/Chipias and Oaxaca, Mexico/);
 });
 
-test('Sweet Bloom selected Product explicit Roast Level label survives non-adjacent wrapper tags',()=>{
- const r=preview('sweetbloomcoffee.com/products/wuri','Sweet Bloom Coffee',
-  '<p>citra hops, mandarin, sugarcane</p><section><div>Roast Level</div>'+
-  '<div class="roast-meter"><span>Light</span></div></section>');
- assert.equal(r.fields.roast_level,'Light');
-});
-test('absence, educational prose, or conflicting textual roast labels cannot invent a single roast',()=>{
- const missing=preview('roaster.example.com/products/one','Example',
-  '<p>Our roast level is often light and varies by crop.</p>');
- assert.equal(missing.fields.roast_level,undefined);
- const multiple=preview('roaster.example.com/products/one','Example',
-  '<div>Roast Level</div><span>Light</span>'+
-  '<div>Roast Level</div><span>Dark</span>');
- assert.equal(multiple.fields.roast_level,undefined);
-});
