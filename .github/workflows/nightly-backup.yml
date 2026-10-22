@@ -11,6 +11,8 @@ on:
     paths:
       - .github/workflows/nightly-backup.yml
       - scripts/backups/create-nightly-encrypted-dump.sh
+      # A new scoped request file update triggers one additional encrypted backup.
+      - docs/BACKUP_REQUEST.json
   workflow_dispatch:
   # 08:00 UTC = fixed 01:00 MST (02:00 MDT in daylight-saving months).
   schedule:
@@ -40,7 +42,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           # Update only after independent evidence confirms a newer live deploy.
-          ref: eee687dd4d7fc19493139bc106e63c16849ac91d
+          ref: fe2eee66717b13b9c9d203d1728bfc863961732e
           path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
