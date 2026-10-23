@@ -59,6 +59,24 @@
         "20261022090000 dic_fast_flow_hybrid_style (approved, pending apply)"
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261022-READY-QUEUE-04",
+      "tested_source_sha": "7156f0d3f1b960775c9256e7fcf92e0b89be8cc6",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-10-22T23:51:00Z",
+      "expires_at_utc": "2026-10-24T23:59:00Z",
+      "approval_source": "Owner October 22 2026 current chat: 'Okay publish everything that's pending and ready now please. You have approval'; recorded GitHub Issue #80 comment 6353908213",
+      "scope": "Exactly one combined production publication of all eleven verified READY queue items at source 7156f0d3: Admin lazy/search, Community search, safe preview/extractor caching and quota, basket advisory, sign-out, offline queue, polling, mobile polish and release optimization. Apply only approved 20261022220000, 20261022220100 and 20261022220200 SQL after verified backup. Preserve all other data, privacy, one-use and historical records.",
+      "sql_evidence": [
+        "20261022220000 dic_admin_server_search",
+        "20261022220100 dic_community_server_search",
+        "20261022220200 dic_preview_two_phase_cache"
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
