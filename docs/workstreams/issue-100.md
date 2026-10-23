@@ -31,3 +31,5 @@ SQL behavioral test first run 40036258579 exposed duplicate beta_members fixture
 SQL behavioral test 40036360045 found inverted failed-delete assertion (it complained because the source shot was correctly present after a rejected stale revision). Repaired test to require source shot remains. No live delete performed. Rerun exact-source SQL behavior.
 
 SQL behavioral CI 40036447816 showed a false missing-shot assertion under authenticated admin's ordinary RLS (direct SELECT of other member's shot returns zero). Replaced stale-revision check with authorized impact-preview shot count and moved post-delete readback to disposable test harness privileged context (RESET ROLE), so tests do not incorrectly equate RLS privacy with deletion. Retest pending, source data untouched.
+
+SQL behavioral suite prior exact source b2dcf3f4 PASSED run 40036544500 (role denial, canonical one-shot cascade, stale revisions, receipts, Pending no-shot); added an actual privately owned Pending coffee library+shot+note fixture and asserts its exact impact and atomic cascade. Repeat CI must pass before READY.

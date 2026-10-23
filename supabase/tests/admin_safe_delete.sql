@@ -70,11 +70,27 @@ BEGIN
  INSERT INTO public.coffee_submissions(owner_id,proposed_data,status)
  VALUES(member,'{"name":"Pending Test","roaster":"Synthetic Roaster"}','pending')
  RETURNING id,revision INTO pending,rev;
+ -- A private Pending coffee can already have a library entry, shot and note.
+ INSERT INTO public.library_entries(owner_id,submission_id) VALUES(member,pending) RETURNING id INTO lid;
+ INSERT INTO public.shots(owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,calibration_id,
+  style,pulled_at,dose_g,yield_g,time_s,grind_setting,extraction,body,clarity,sweetness,astringency,equipment_snapshot)
+ VALUES(member,lid,setup,version,basket_version,calibration,'Traditional',now(),18,36,28,2,3,3,3,3,3,'{}')
+ RETURNING id INTO shot;
+ INSERT INTO public.shot_notes(owner_id,shot_id,notes) VALUES(member,shot,'Pending private shot note');
  PERFORM set_config('request.jwt.claim.sub',owner::text,true);
  EXECUTE 'SET LOCAL ROLE authenticated';
  impact:=public.dic_admin_delete_preview('submission',pending);
+ IF (impact->>'shots')::int<>1 OR (impact->>'shot_notes')::int<>1 OR
+  (impact->>'library_entries')::int<>1 THEN
+  RAISE EXCEPTION 'Pending dependent impact counts missing %',impact;
+ END IF;
  IF (impact->>'linked_submissions')::int<>1 THEN RAISE EXCEPTION 'Pending count incorrect'; END IF;
  PERFORM public.dic_admin_delete_record('submission',pending,rev,impact);
+ EXECUTE 'RESET ROLE';
+ IF EXISTS(SELECT 1 FROM public.shots WHERE id=shot) OR EXISTS(SELECT 1 FROM public.shot_notes WHERE shot_id=shot)
+  OR EXISTS(SELECT 1 FROM public.library_entries WHERE id=lid) THEN
+  RAISE EXCEPTION 'Pending deletion left dependent shot, note or library';
+ END IF;
  IF EXISTS(SELECT 1 FROM public.coffee_submissions WHERE id=pending) THEN
   RAISE EXCEPTION 'Pending deletion did not remove submission';
  END IF;
