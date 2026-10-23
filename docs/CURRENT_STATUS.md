@@ -1,3 +1,7 @@
+## 2026-10-23: Issue #100 Admin review and deletion source merged — TESTING, NOT PUBLISHED
+
+Owner-approved screenshot-style Pending coffee comparison, no Hold action, and one-confirm admin-only pending/approved coffee and shot deletion are implemented in non-force PR #101 merged at `09648c9b1a702b45bfc7414f96d0bdb62f748169`; tested PR source `5afefc6c84a8fdb32a448fa7a28ca08d7ee65dfc`. Dedicated SQL `20261023225600_dic_admin_safe_delete.sql` is STAGED, NOT APPLIED LIVE. Isolated PostgreSQL17.11 source tests verify guarded impact, stale revision rejection, cross-role denial, and cascaded pending and canonical shots/notes; Node/build, approval, security and cloud/browser/mobile tests passed. Visual browser run `40036877151` remains in progress in provider browser preparation, so NOT marked PASSED. Queue item `DIC-Q-100-admin-review-delete` remains TESTING with a precise blocker. Previously independent Issue #33 remains READY unchanged. No Netlify publication, production database mutation, membership change, credentials or spending. Valid anonymous Community contributions remain protected: canonical delete is deliberately blocked when dependent Community or merged identity history cannot safely survive. On later separately approved production publication, verified encrypted backup and migration/provider readback are required.
+
 ## October 23, 2026: Issue #33 extractor completeness READY, not deployed
 
 PR99 is merged at `126304178bf255894af44633587052c7ef3b56d5`. Its tree
