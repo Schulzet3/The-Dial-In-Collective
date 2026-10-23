@@ -47,7 +47,7 @@ export function extractWooStoreData(data,request,{extract=extractPublicCoffeeFac
   '<body><main><h1>'+data.name.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</h1>'+
   // Do not execute scripts, and do not let HTML tags escape selected scope.
   removeElements(detail,['script', 'style', 'form', 'iframe', 'nav', 'footer'])
-   .replace(/<\/?main\b[^<>]*>/gi,' ')+'</main></body></html>';
+   .replace(/<\/?main\b[^<>]{0,2000}>/gi,' ')+'</main></body></html>';
  if(Buffer.byteLength(html)>MAX_HTML_BYTES)return null;
  const result=extract(html,{source_url:request.sourceUrl});
  return result?.ok&&normalize(result.fields?.name)===normalize(data.name)?result:null;

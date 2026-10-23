@@ -34,7 +34,7 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  // Current product description only; never let embedded checkout or scripts
  // escape the current-product boundary or run as executable code.
  const story=removeElements(description,['script', 'style', 'form', 'iframe', 'nav', 'footer'])
-  .replace(/<\/?main\b[^<>]*>/gi,' ');
+  .replace(/<\/?main\b[^<>]{0,2000}>/gi,' ');
  const html='<html><head><script type="application/ld+json">'+json+'</script></head>'+
   '<body><main><h1>'+data.title.replace(/&/g,'&amp;').replace(/</g,'&lt;')+
   '</h1>'+story+'</main></body></html>';

@@ -3,7 +3,7 @@
 // colour photograph. Explicit labels follow the owner's Locked seven tiers.
 const MAX_LABEL=90;
 function plain(s){
- return String(s??'').replace(/<[^<>]*>/g,' ').replace(/&(?:nbsp|#160);/gi,' ')
+ return String(s??'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&(?:nbsp|#160);/gi,' ')
   .replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'")
   .replace(/\s+/g,' ').trim().slice(0,MAX_LABEL);
 }
@@ -49,7 +49,7 @@ function roastLabelInPhrase(s){
 function cropProduct(html){
  const heads=[...html.matchAll(/<h1\b[^<>]{0,350}>[\s\S]{0,400}?<\/h1>/gi)];
  let body=heads.length===1?html.slice(heads[0].index):html.slice(0,40000);
- const m=body.search(/<footer\b|<h[2-4]\b[^<>]*>\s*(?:more coffees|related products|you may also like|other products|recommended for you)\b/i);
+ const m=body.search(/<footer\b|<h[2-4]\b[^<>]{0,2000}>\s*(?:more coffees|related products|you may also like|other products|recommended for you)\b/i);
  if(m>1000)body=body.slice(0,m);
  return body.slice(0,42000);
 }
@@ -82,7 +82,7 @@ export function extractRoastVisualEvidence(html){
   if(/\broast\b/i.test(label))offer(label,'graphic_accessible_label');
  }
  // Inline SVG titles/tags can express the graphic's value without OCR.
- for(const match of page.matchAll(/<(?:title|desc)\b[^<>]*>([\s\S]{1,160}?)<\/(?:title|desc)>/gi)){
+ for(const match of page.matchAll(/<(?:title|desc)\b[^<>]{0,2000}>([\s\S]{1,160}?)<\/(?:title|desc)>/gi)){
   if(/\broast\b/i.test(match[1]))offer(match[1],'inline_svg_title');
  }
  // Detect the selected class/ARIA state of a discrete roast-level selector.
@@ -97,7 +97,7 @@ export function extractRoastVisualEvidence(html){
   }
   // Do not convert a raw graphic marker percentage to a roast category:
   // roaster-specific endpoints/curves are not standardized.
-  const inline=snippet.match(/<(?:meter|progress|input)\b[^<>]{0,500}(?:aria-label\s*=\s*["'][^"']*roast[^"']*["'][^<>]*|data-label\s*=\s*["']roast["'][^<>]*)>/i);
+  const inline=snippet.match(/<(?:meter|progress|input)\b[^<>]{0,500}(?:aria-label\s*=\s*["'][^"']{0,2000}roast[^"']{0,2000}["'][^<>]{0,2000}|data-label\s*=\s*["']roast["'][^<>]{0,2000})>/i);
   const marker=snippet.match(/(?:left|translateX|--roast-position|--roast-level|--progress)\s*[:(]\s*(\d{1,3}(?:\.\d+)?)%/i);
   if((marker||inline)&&/\blight\b/i.test(snippet)&&/\bmedium\b/i.test(snippet))
    hints.push('Roast graphic uses a Light–Medium scale; verify its marker before selecting a level.');
