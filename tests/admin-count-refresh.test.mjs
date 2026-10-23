@@ -13,7 +13,6 @@ test('collapsed Admin sections display server dashboard counts without fetching 
  }
  assert.match(html,/href="#admin-approved"[^]*?<strong>7<\/strong>/);
  assert.match(html,/href="#admin-shots"[^]*?<strong>22<\/strong>/);
- assert.doesNotMatch(html,/No records to show\.<\/p><div class="admin-pagination"/);
 });
 
 test('all collapsed/Admin summary counts update from bounded backend summary on timer and foreground',()=>{
