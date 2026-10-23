@@ -9,10 +9,10 @@ const dom=()=>renderAdminDashboard({counts:stats,queue:[]},null,null,{}, {},{ope
 test('collapsed Admin sections display server dashboard counts without fetching their rows',()=>{
  const html=dom();
  for(const [kind,value] of [['approved',7],['shots',22],['accounts',5],['pending',0],['conflicts',0]]){
-  assert.match(html,new RegExp('data-admin-section="'+kind+'"[^]*?data-admin-count="'+kind+'">'+value+'</span>'),'section '+kind);
+  assert.match(html,new RegExp('data-admin-section="'+kind+'"[^]*?<span class="admin-count">'+value+'</span>'),'section '+kind);
  }
- assert.match(html,/data-admin-count="approved">7<\/strong>/);
- assert.match(html,/data-admin-count="shots">22<\/strong>/);
+ assert.match(html,/href="#admin-approved"[^]*?<strong>7<\/strong>/);
+ assert.match(html,/href="#admin-shots"[^]*?<strong>22<\/strong>/);
  assert.doesNotMatch(html,/No records to show\.<\/p><div class="admin-pagination"/);
 });
 

@@ -125,7 +125,7 @@ async function start(){
     for(const [kind,key] of Object.entries(countKeys)){
      const count=summary?.counts?.[key];
      if(count==null||!Number.isSafeInteger(Number(count))||Number(count)<0)continue;
-     for(const node of root.querySelectorAll('[data-admin-count="'+kind+'"]')){
+     for(const node of root.querySelectorAll('.admin-stat[href="#admin-'+kind+'"] strong, details[data-admin-section="'+kind+'"] .admin-count')){
       // Expanded search sections retain their filtered total rather than
       // silently substituting the whole-database count.
       if(searchText&&openSections.has(kind))continue;

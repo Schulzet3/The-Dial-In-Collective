@@ -17,7 +17,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   return Array.isArray(page?.items)&&!page.error&&Number.isSafeInteger(page.total)&&page.total>=0
    ?page.total:fallback;
  };
- const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong data-admin-count="${e(kind)}">${formatCount(value)}</strong><small>View all →</small></a>`;
+ const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong>${formatCount(value)}</strong><small>View all →</small></a>`;
  const reviewActions=item=>`  <div class="admin-review-actions" aria-label="Review ${e(item.name||'coffee')}">
    <button type="button" data-action="review-approve" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Approve Distinct Coffee</button>
    <button type="button" class="ghost compact" data-action="review-merge-prepare" data-id="${e(String(item.id||''))}">Resolve Duplicate</button>
