@@ -53,7 +53,7 @@ BEGIN
  EXCEPTION WHEN serialization_failure THEN blocked:=true;
  END;
  IF NOT blocked THEN RAISE EXCEPTION 'Stale revision deletion accepted'; END IF;
- IF NOT EXISTS(SELECT 1 FROM public.shots WHERE id=shot) THEN RAISE EXCEPTION 'Failed delete removed source shot'; END IF;
+ IF EXISTS(SELECT 1 FROM public.shots WHERE id=shot) IS NOT TRUE THEN RAISE EXCEPTION 'Failed delete changed source shot'; END IF;
  response:=public.dic_admin_delete_record('approved',coffee,rev,impact);
  IF (response->>'ok')::boolean IS DISTINCT FROM true OR
   EXISTS(SELECT 1 FROM public.shots WHERE id=shot) OR

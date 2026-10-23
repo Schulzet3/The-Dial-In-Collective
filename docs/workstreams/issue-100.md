@@ -27,3 +27,5 @@ New disposable rollback SQL suite admin_safe_delete.sql covers denied nonadmin p
 CI repair: approval run 40036258592 correctly rejected nondeployable SQL test/runner paths in queue scope_paths. Removed test-only paths from deployable scope and retained test tracking in issue journal. No source feature changed; CI rerun required.
 
 SQL behavioral test first run 40036258579 exposed duplicate beta_members fixture insert because auth.users trigger already creates member row. Fixed fixture with idempotent ON CONFLICT UPDATE; no production record altered. Retest exact SQL suite.
+
+SQL behavioral test 40036360045 found inverted failed-delete assertion (it complained because the source shot was correctly present after a rejected stale revision). Repaired test to require source shot remains. No live delete performed. Rerun exact-source SQL behavior.
