@@ -7,7 +7,8 @@ begin
   end if;
   if to_regprocedure('public.dic_admin_search_records(text,text,integer,integer)') is null
      or to_regprocedure('public.dic_search_community_shots(text,text,integer,integer)') is null
-     or to_regprocedure('public.dic_preview_complete(uuid)') is null then
+     or to_regprocedure('public.dic_preview_complete(uuid)') is null
+     or to_regprocedure('public.dic_preview_cached_verified(text)') is null then
     raise exception 'Ready-batch search and preview procedures missing';
   end if;
 end $verify$;

@@ -74,6 +74,7 @@ def run():
             )
             assert admin.locator("#admin-root").count() == 1
             assert admin.evaluate("typeof window.supabase?.createClient") == "function"
+            assert page.locator("#app .welcome").is_visible(), "Member welcome was hidden"
             assert page.locator("#app").is_visible(), "Member entry was hidden"
             assert admin.locator("#admin-root").is_visible(), "Admin entry was hidden"
             assert not failures, f"Packaged local asset failures: {failures}"
