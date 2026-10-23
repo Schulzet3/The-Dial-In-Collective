@@ -1,0 +1,35 @@
+name: DIC postrelease hosted Chromium smoke
+# Never publishes, edits accounts, mutates the database, or uses secrets.
+# The production deployment is tested from a GitHub-hosted network because
+# chat/container DNS cannot reach the public domain.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/dic-live-postrelease-smoke.yml'
+      - 'scripts/audit/live-postrelease-smoke.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dic-postrelease-public-smoke
+  cancel-in-progress: false
+jobs:
+  hosted-qa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Syntax-check nonmutating hosted test
+        run: python -m py_compile scripts/audit/live-postrelease-smoke.py
+      - name: Prepare temporary isolated browser
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Verify actual live primary and pinned deploy on mobile and desktop
+        run: python scripts/audit/live-postrelease-smoke.py
