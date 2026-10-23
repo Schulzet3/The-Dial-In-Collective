@@ -53,8 +53,9 @@ BEGIN
  EXCEPTION WHEN serialization_failure THEN blocked:=true;
  END;
  IF NOT blocked THEN RAISE EXCEPTION 'Stale revision deletion accepted'; END IF;
- IF EXISTS(SELECT 1 FROM public.shots WHERE id=shot) IS NOT TRUE THEN RAISE EXCEPTION 'Failed delete changed source shot'; END IF;
+ IF (private.dic_admin_delete_preview('approved',coffee)->>'shots')::int<>1 THEN RAISE EXCEPTION 'Failed delete changed source shot'; END IF;
  response:=public.dic_admin_delete_record('approved',coffee,rev,impact);
+ EXECUTE 'RESET ROLE'; -- readback bypasses member RLS for independent disposal-only validation
  IF (response->>'ok')::boolean IS DISTINCT FROM true OR
   EXISTS(SELECT 1 FROM public.shots WHERE id=shot) OR
   EXISTS(SELECT 1 FROM public.shot_notes WHERE shot_id=shot) OR
