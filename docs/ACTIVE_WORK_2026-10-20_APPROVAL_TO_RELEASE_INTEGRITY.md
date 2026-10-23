@@ -1,9 +1,11 @@
 # Main operations active checkpoint
 
-## October 23 UTC / October 22 MDT: Issue70 reconciliation
+## October 23 UTC / October 22 MDT: verified reconciliation
 
-Read [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md), current main AGENTS, live branch/provider refs and the authoritative [application Current Status](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/CURRENT_STATUS.md). The complete previous main checkpoint is preserved at [exact archive](archive/2026-10-23-operations/ACTIVE_WORK.previous.md).
+Read [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md), main AGENTS, actual branch/provider state and the authoritative application CURRENT_STATUS. The complete prior checkpoint is preserved at [exact archive](archive/2026-10-23-operations/ACTIVE_WORK.previous.md).
 
-This same code/test/CI commit repairs weekly test source selection: resolve one immutable development SHA for all jobs; six source-policy regressions locally PASS, GitHub exact-source CI/integration/readback still pending. Daily08UTC backup and Sunday08UTC regression schedules remain, no new natural execution claimed. README and journal now reflect actual READY/current releasef97b8f30, matching backup pin and credit-free schema v4. Old source-pin approval/PR76/device/credit gates are historical, not active.
+PR95's weekly source-consistency repair merged at `314ccf362dacba660e3b5a5236bb1bde2878d6e3`. Exact candidate CI `39898590290` and post-merge CI `39898695303` succeeded. All three weekly suites share one immutable development SHA. Daily 08:00 UTC backup and Sunday 08:00 UTC regression schedules remain; future natural executions are not claimed.
 
-No publication or production mutation. Spent release request, backup request, nightly workflow and backup scripts are untouched. #93 stays READY not deployed; #28 retains inaccessible watchdog delivery-channel settings. Complete candidate CI, nonforce integration and exact readback before closing Issue70.
+Current README and journal use the actual published `f97b8f30` source, matching backup pin and schema v4. Notification metadata is an unresolved discrepancy, not proof of disabled global settings; the owner's prior enabled Push/Email proof remains accepted and no reconfirmation is needed.
+
+This checkpoint is documentation-only. No publication or production mutation; consumed release request, backup request, nightly workflow and backup scripts remain untouched. #93 is still READY and unpublished. The application audit continues through PR94. [Operations receipt](audits/2026-10-23-operations-reconciliation-receipt.json).
