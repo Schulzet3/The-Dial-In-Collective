@@ -21,3 +21,5 @@ Candidate comparison correctness fix: existing merge-safe RPC rejects conflictin
 CI repair: exact-source Node suite 40035880378 failed historical workflow-reconciliation fixture because it incorrectly required current owner inventory equal immutable old inventory after an explicitly approved decision. Updated test to require every old key preserved, sorted new inventory allowed. Contract device acceptance now matches owner-retired device testing gate. Historical 15 contracts / 66 assertions remain byte-identical; no real-device PASS claimed. Retest pending.
 
 Syntax fix: CI run 40036026411 found unescaped apostrophe in an Admin comparison fallback JS string, causing multiple module-import tests to fail. Removed apostrophe, retesting exact source. No publication.
+
+New disposable rollback SQL suite admin_safe_delete.sql covers denied nonadmin preview, exact impact, stale revision and atomic canonical-to-library-to-shot-to-note deletion plus private receipts, and separate Pending deletion. Wired into isolated-sql-regression.sh. Need exact-source CI PASS; no hosted SQL.

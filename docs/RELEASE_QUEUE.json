@@ -58,14 +58,16 @@
       "issue": 100,
       "pr": 101,
       "title": "Side-by-side Admin coffee review and protected coffee/shot/submission deletion",
-      "state": "IN_PROGRESS",
+      "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
         "site/admin/view.js",
         "site/admin/main.js",
         "site/admin/styles.css",
         "site/admin/records.js",
-        "supabase/migrations/20261023225600_dic_admin_safe_delete.sql"
+        "supabase/migrations/20261023225600_dic_admin_safe_delete.sql",
+        "scripts/audit/isolated-sql-regression.sh",
+        "supabase/tests/admin_safe_delete.sql"
       ],
       "tests": [
         "Exact-source CI pending; security inventory PASS at source 06731546; approval workflow correctly rejected missing intake item before this repair."
