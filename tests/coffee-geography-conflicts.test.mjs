@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
+import {extractShopifyAjaxData,mergePublicProductPreview,shopifyProductRequest} from '../src/server/coffee-shopify-ajax.mjs';
 
 const source_url='https://roaster.example/products/current-coffee';
 function parse(properties,body='',head=''){
@@ -76,4 +76,52 @@ test('later blend evidence cannot restore a geographic field already rejected fo
  const result=parse([['Origin','Ethiopia']],'<p>Country: Colombia</p><p>Region: Huila</p>'+
   '<h2>Components:</h2><p>50% Colombia - Washed</p><p>50% Brazil - Natural</p>');
  withheld(result);assert.match(result.roaster_details?.blend_components||'',/Colombia.*Brazil/);
+});
+
+// Minimal selected-product fragments from the anonymous Onyx Geometry HTML
+// and Shopify JSON captured on 2026-10-23. The origin tags describe the two
+// countries in this explicitly tagged blend, not competing whole-product facts.
+const geometryUrl='https://onyxcoffeelab.com/products/geometry';
+const geometryProduct={title:'Geometry',handle:'geometry',vendor:'Onyx Coffee Lab',tags:[
+ 'caffeine:full','can-subscribe','coffee','COLOR: Peach','method:Espresso','method:Filter','ONYXCAFES',
+ 'origin:Colombia','origin:Ethiopia','process:Washed','profile:modern','reviewable','type:blend','wholesale-coffee'
+]};
+const geometryRequest=shopifyProductRequest(geometryUrl);
+function geometryEndpoint(overrides={}){
+ return extractShopifyAjaxData({...geometryProduct,...overrides},geometryRequest);
+}
+
+test('actual Onyx blend country tags agree with the complete HTML origin through endpoint merge',()=>{
+ const endpoint=geometryEndpoint();
+ assert.equal(endpoint?.fields.origin,'Colombia, Ethiopia');assert.equal(endpoint.conflicts,undefined);
+ assert.equal(endpoint.fields.process,'Washed');
+ const html=extractPublicCoffeeFacts('<main><h1>Geometry</h1>'+
+  '<div class="a-stat" data-name="roast-level" data-stat-id="agtron"><span class="stat-text">'+
+  '<p>Light<br>Agtron #130<br><label>ROAST LEVEL</label></p></span><hr></div>'+
+  '<div class="a-stat" data-name="country" data-stat-id="origin"><span class="stat-text">'+
+  '<p>Colombia, Ethiopia<br><label>ORIGIN</label></p><svg><use href="#icon-circle"></use></svg>'+
+  '</span><hr></div></main>',{source_url:geometryUrl});
+ assert.equal(html.fields.origin,'Colombia, Ethiopia');
+ const merged=mergePublicProductPreview(html,endpoint);
+ assert.equal(merged.fields.origin,'Colombia, Ethiopia');assert.equal(merged.conflicts,undefined);
+});
+
+test('explicit blend country tags deduplicate accent equivalents while preserving source spelling',()=>{
+ const result=geometryEndpoint({tags:['origin:México','origin:Mexico','origin:Ethiopia','TYPE: blend']});
+ assert.equal(result.fields.origin,'México, Ethiopia');assert.equal(result.conflicts,undefined);
+});
+
+test('separate origin tags need an explicit same-product blend marker before combining countries',()=>{
+ for(const marker of [null,'type:single-origin','not-type:blend','style:blend']){
+  withheld(geometryEndpoint({title:'Geometry Blend',tags:['origin:Colombia','origin:Ethiopia',...(marker?[marker]:[])]}));
+ }
+});
+
+test('blend tag aggregation cannot union or resurrect contradictory whole-product origin declarations',()=>{
+ for(const description of [
+  '<p>Origin: Ethiopia</p><p>Country: Colombia</p><p>Region: Huila</p>',
+  '<p>Country: Colombia</p><p>Region: Huila</p><p>Origin: Ethiopia</p>',
+  '<p>Origin: Brazil</p>',
+  '<p>Origin: Ethiopia</p>'
+ ])withheld(geometryEndpoint({description}));
 });

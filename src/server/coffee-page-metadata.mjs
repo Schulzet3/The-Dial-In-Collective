@@ -287,10 +287,27 @@ function productDetails(fields,p){
    }else addField(fields,key,value);
   }
  }
- for(const tag of Array.isArray(p.tags)?p.tags.slice(0,60):[]){
-  if(typeof tag!=='string')continue;
-  const m=tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i);
-  if(m)addField(fields,m[1],m[2]);
+ const tags=(Array.isArray(p.tags)?p.tags.slice(0,60):[]).filter(tag=>typeof tag==='string');
+ const tagPairs=tags.map(tag=>tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i)).filter(Boolean);
+ const originTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='origin');
+ let blendOrigin='';
+ // An explicitly blend-tagged Product can list one origin country per tag
+ // (e.g. Onyx Geometry). Combine only that same-product component cohort;
+ // independent descriptions, attributes and visible labels still pass through
+ // the ordinary whole-product geography conflict checks.
+ if(tags.some(tag=>/^type\s*[:=]\s*blend\s*$/i.test(tag))&&originTags.length>1&&
+    originTags.every(pair=>ORIGIN_COUNTRIES.has(keyOf(pair[2])))){
+  const countries=new Map();
+  for(const pair of originTags)if(!countries.has(keyOf(pair[2])))countries.set(keyOf(pair[2]),pair[2].trim());
+  const joined=[...countries.values()].join(', ');
+  if(joined.length<=220)blendOrigin=joined;
+ }
+ let blendOriginAdded=false;
+ for(const pair of tagPairs){
+  if(blendOrigin&&pair[1].toLowerCase()==='origin'){
+   if(!blendOriginAdded)addField(fields,'origin',blendOrigin);
+   blendOriginAdded=true;
+  }else addField(fields,pair[1],pair[2]);
  }
 }
 function focusedProductText(html){

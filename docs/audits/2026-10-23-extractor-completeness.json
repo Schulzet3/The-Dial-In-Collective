@@ -378,7 +378,7 @@
     "No hosted provider or member-data writes, no production deployment.",
     "Missing/image-only/inaccessible or contradictory source facts cannot be guaranteed."
   ],
-  "next_action": "Pass exact final-source Node22/lint/build, applicable browser/security/isolated-SQL checks and refreshed72-assertion public probe; integrate nonforce; record exact READY receipts without publication.",
+  "next_action": "Pass final exact-source Node22/lint/build and all applicable hosted checks, including the unchanged72-assertion live source probe; integrate nonforce and record READY with no publication.",
   "initial_candidate_acceptance": {
     "source_sha": "262d00a1e7ab7f4af58c5a9a94c76ca488a7b437",
     "tree_sha": "151b650b0b4bc641722011a93ddc5bb3fd30e23f",
@@ -652,7 +652,7 @@
       ]
     }
   },
-  "followup": "The independent cross-alias geography conflict is repaired: normalized explicit country evidence agrees across aliases, compatible region/country precision survives, and later nearby/metadata/endpoint/blend fallbacks cannot restore a rejected value. Eight new regressions pass; six failed before repair. Untyped origin evidence is bounded to 16 values.",
+  "followup": "Cross-alias geography conflicts remain final. The live-discovered Onyx regression is repaired narrowly: same-product origin tags aggregate only when the bounded tag cohort explicitly declares type:blend and every origin tag is an exact recognized country. Independent description/attribute/visible-label contradictions still suppress origin. Exact failed-run capture replays correctly through the full handler.",
   "source_limits": [
     "Sweet Bloom publishes a numeric roast-position custom property between Light/Medium endpoints without an explicit selected label; no roast category is invented.",
     "Sweet Bloom archive/date and relationship year are not harvest/release evidence.",
@@ -1046,15 +1046,87 @@
   "cache_review": "Public preview cache is a handler-local Map (15-minute TTL, 40 entries), so a handler constructed from updated source starts empty. No persistent cache invalidation/version change is needed. Incomplete catalog records proceed to source extraction. API no-store, POST requests and service-worker GET-only caching do not retain preview responses across handler versions.",
   "final_local_validation": {
     "node_version": "24.19.0",
-    "tests": 774,
-    "passed": 774,
+    "tests": 778,
+    "passed": 778,
     "failed": 0,
     "skipped": 0,
     "cancelled": 0,
-    "duration_ms": 10529.736271,
-    "focused_geography_and_existing_pipeline_tests": 107,
+    "duration_ms": 11535.315298,
+    "focused_geography_and_existing_pipeline_tests": 111,
     "queue_schema": "pass",
     "approval_coverage": "pass",
     "diff_whitespace": "pass"
+  },
+  "geography_conflict_candidate": {
+    "source_sha": "e24eef8215392b0f42f9fe9771029c6f528ad4c1",
+    "tree_sha": "87968506514933b482d16e56b3d24661694681f4",
+    "ci_observed_at_utc": "2026-10-23T20:20:26.996029+00:00",
+    "ci_runs": [
+      {
+        "id": 40018246981,
+        "name": "DIC private visual review",
+        "status": "in_progress",
+        "conclusion": null
+      },
+      {
+        "id": 40018246888,
+        "name": "DIC approval, implementation and continuity contract",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40018246869,
+        "name": "DIC source security inventory and dependency advisory",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40018246887,
+        "name": "DIC isolated SQL release regression",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40018246914,
+        "name": "DIC cloud app build and tests",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40018246886,
+        "name": "DIC cloud UX regression checks",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 40018240406,
+        "name": "DIC coffee extraction source acceptance",
+        "status": "completed",
+        "conclusion": "failure"
+      }
+    ],
+    "live": {
+      "run_id": 40018240406,
+      "artifact_id": 12528189967,
+      "artifact_sha256": "3f0f4ede60148b158ffdc7722f34166348a32b6c87d81ddb9f305b04a32d49dd",
+      "summary": {
+        "targets": 10,
+        "parsed": 9,
+        "required_targets": 10,
+        "required_failures": [
+          "onyx-geometry"
+        ],
+        "observed_gaps": 1,
+        "sources_with_gaps": [
+          "onyx-geometry"
+        ],
+        "public_requests": 19,
+        "real_backend_requests": 0,
+        "member_quota_consumed": 0,
+        "production_writes": 0,
+        "deployments": 0
+      },
+      "regression": "Stricter geography conflict handling withheld Onyx Geometry's explicit two-country origin. All other9 required cases passed. This failed run is preserved and does not count as final acceptance."
+    }
   }
 }

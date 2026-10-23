@@ -167,3 +167,25 @@ The complete local Node 24.19.0 suite now passes **774/774**, zero failed, skipp
 cancelled or todo, in 10.53 seconds. Approval coverage, queue schema and diff
 whitespace pass. Final exact-source Node 22 and live checks precede integration;
 no publication or member-data change has occurred.
+
+Fresh live run 40018240406 at e24eef8215392b0f42f9fe9771029c6f528ad4c1 caught
+a real regression: the stricter geography rule withheld Onyx Geometry's two-country
+origin. The other 9 required cases still passed. Artifact 12528189967 was
+independently verified with SHA256
+3f0f4ede60148b158ffdc7722f34166348a32b6c87d81ddb9f305b04a32d49dd.
+This failed run is retained as evidence, not relabeled or weakened. Trace the
+exact source occurrence and repair the distinction between component/blend data
+and genuine cross-source disagreement before another final acceptance run.
+
+The failed live case was traced to exact same-product Shopify tags:
+origin:Colombia, origin:Ethiopia, type:blend. HTML already gave the whole blend
+correctly. Only explicitly blend-marked cohorts whose origin tags are all exact
+recognized countries now aggregate before normal conflict checking. The existing
+60-tag/220-character limits remain. Independent attributes, descriptions and
+visible-label contradictions cannot be combined or restored by a blend marker.
+Four regressions were added (two positive cases failed before repair); all 111
+focused cases pass. Fresh failed-run source now passes the complete handler:
+Colombia, Ethiopia; no conflicts; one HTML and one JSON read; Unverified remains.
+Final local suite: **778/778 PASS**, zero failures, skips, cancellations or todo,
+Node 24.19.0, 11.54 seconds. Approval coverage and diff checks pass. Exact-source
+hosted and live acceptance precede integration and READY; no publication.
