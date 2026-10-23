@@ -1,3 +1,4 @@
+import {readBoundedJson,RequestBodyError} from '../supabase/functions/_shared/request-budget.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -28,7 +29,7 @@ function fixture({admitted=true,statusError=null,owner='member',authenticated=tr
   };
  };
  const context=vm.createContext({Deno:{env:{get:name=>({SUPABASE_URL:'https://fixture.invalid',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service'})[name]},serve:fn=>{handler=fn;}},
-  createClient,extractOfficialEvidence,officialProductUrl,Response,URL,TextDecoder,AbortSignal,
+  readBoundedJson,RequestBodyError,createClient,extractOfficialEvidence,officialProductUrl,Response,URL,TextDecoder,AbortSignal,
   fetch:async()=>{calls.push('fetch');return new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Hambela',url:productUrl})+'</script>',{headers:{'Content-Type':'text/html'}});}});
  vm.runInContext(source,context);
  return {calls,trusted,request:()=>handler(new Request('https://edge.invalid/dic-verify-coffee',{method:'POST',headers:{origin,Authorization:'Bearer fixture-token','Content-Type':'application/json'},body:JSON.stringify({submission_id:SID})}))};

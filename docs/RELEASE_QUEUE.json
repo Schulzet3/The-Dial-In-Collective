@@ -31,6 +31,51 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/93",
       "notes": "READY for next separately owner-authorized release. Preserve 45s summary-only refresh, lazy record pages, expanded filtered total, admin role protections. Not deployed."
+    },
+    {
+      "id": "DIC-Q-96-security-repairs",
+      "issue": 96,
+      "pr": null,
+      "title": "Security audit: bounded requests and HTML, accurate provenance, approved passwords, preserved notes and privacy copy",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify/functions/coffee-url-preview.mjs",
+        "site/cloud/client.js",
+        "site/cloud/main.js",
+        "site/cloud/mapping.js",
+        "site/lib/engine.js",
+        "site/lib/model.js",
+        "src/server/coffee-blend-evidence.mjs",
+        "src/server/coffee-delimited-specs.mjs",
+        "src/server/coffee-ecwid-snapshot.mjs",
+        "src/server/coffee-espresso-evidence.mjs",
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-narrative-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-product-layouts.mjs",
+        "src/server/coffee-product-prep.mjs",
+        "src/server/coffee-product-scope.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/coffee-woocommerce-store.mjs",
+        "src/server/roast-level-evidence.mjs",
+        "supabase/functions/_shared/html-scan.mjs",
+        "supabase/functions/_shared/request-budget.mjs",
+        "supabase/functions/dic-preview-coffee/index.ts",
+        "supabase/functions/dic-preview-coffee/preview.mjs",
+        "supabase/functions/dic-verify-coffee/evidence.mjs",
+        "supabase/functions/dic-verify-coffee/index.ts"
+      ],
+      "tests": [
+        "Local exact-content Node suite: 672 passing, including request stalls, byte limits, Unicode offsets, adversarial HTML, Edge negative identity/membership and note preservation.",
+        "Production read-only schema/permission checks and earlier 32 public HTTP probes recorded in Issue96; not authenticated production-session testing."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Final exact-source CI and nonforce integration pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
+      "notes": "No publication authorized. Future scoped release includes Netlify and both JWT-protected Edge functions plus shared helper files; no migration or member-data write. Preserve existing #93 READY item."
     }
   ],
   "history": [
@@ -121,7 +166,7 @@
         "site/cloud/community.js"
       ],
       "tests": [
-        "Full approved Issue #80 development merged nonforce: PR #81–#83, #85–#88, #91, #92; additional parallel PR #89/#90 superseded by #91 without lost work.",
+        "Full approved Issue #80 development merged nonforce: PR #81\u2013#83, #85\u2013#88, #91, #92; additional parallel PR #89/#90 superseded by #91 without lost work.",
         "PR #91 exact integrated source 70cceb6a... and postmerge ede403a0 all 5 workflows PASS, including SQL/PostgreSQL 17.11, browser/mobile, Node/lint/build, approval and visual.",
         "PR #87 combined Netlify test-reuse source 343a98be... all 5 workflows PASS; nonforce merge 05dda786... with applicable exact postmerge approval, Node/build and cloud checks PASS.",
         "PR #92 scoped journals source 39eafd79... approval, Node/build, SQL and cloud/browser PASS; nonforce merge 8c19b440... exact-source approval 39866094176, Node/build 39866094152 and cloud/mobile 39866094108 PASS.",

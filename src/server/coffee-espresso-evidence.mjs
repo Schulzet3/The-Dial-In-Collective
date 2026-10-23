@@ -3,7 +3,7 @@
 // reinterpret filter brew time or invent a temperature scale.
 import {productMarkup} from './coffee-product-scope.mjs';
 function flatten(html){
- return String(html||'').replace(/<br\s*\/?>|<\/(?:p|h[2-6]|li|div|tr)>/gi,' ').replace(/<[^>]*>/g,' ')
+ return String(html||'').replace(/<br\s*\/?>|<\/(?:p|h[2-6]|li|div|tr)>/gi,' ').replace(/<[^<>]*>/g,' ')
   .replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/\s+/g,' ').trim();
 }
 function boundedSection(html){

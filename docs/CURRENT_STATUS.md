@@ -1,3 +1,7 @@
+# Issue 96 security inspection: TESTING, not published
+
+Six confirmed repair classes are implemented locally with 672 passing Node assertions; exact-source CI and integration remain pending. Request/HTML resource limits, approved digit+symbol new-password rule, cache provenance, 16,000-character note preservation and accurate privacy text. Source queue records TESTING; #93 stays READY and unchanged. Live Supabase still 46 RLS tables, 22 shots/notes, 5 accounts and 48 receipts; 90 function definitions and 43 policies inventoried. Production remains f97b8f30. See [Issue96 report](audits/2026-10-23-security-inspection.md) and indexed work journal for evidence and coverage limits.
+
 # Current Status
 
 ## October 23 UTC / October 22 MDT: audit integrated

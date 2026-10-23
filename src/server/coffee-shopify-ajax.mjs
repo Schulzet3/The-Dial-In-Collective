@@ -1,3 +1,4 @@
+import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 
 // Public Shopify Ajax Product API, not merchant/Admin APIs. All reads use the
 // same bounded connection-time DNS-pinned HTTPS transport as product previews.
@@ -32,8 +33,8 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  const json=JSON.stringify(product).replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
  // Current product description only; never let embedded checkout or scripts
  // escape the current-product boundary or run as executable code.
- const story=description.replace(/<(script|style|form|iframe|nav|footer)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,' ')
-  .replace(/<\/?main\b[^>]*>/gi,' ');
+ const story=removeElements(description,['script', 'style', 'form', 'iframe', 'nav', 'footer'])
+  .replace(/<\/?main\b[^<>]*>/gi,' ');
  const html='<html><head><script type="application/ld+json">'+json+'</script></head>'+
   '<body><main><h1>'+data.title.replace(/&/g,'&amp;').replace(/</g,'&lt;')+
   '</h1>'+story+'</main></body></html>';
