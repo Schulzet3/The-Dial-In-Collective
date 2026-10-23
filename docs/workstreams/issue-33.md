@@ -101,3 +101,38 @@ Final candidate local complete suite: **751/751 PASS**, zero skipped/cancelled/t
 8.15s. Approval source coverage and queue schema pass. This is Node24 local evidence;
 required Node22/lint/build and public-source acceptance still run on exact GitHub
 source before READY.
+
+
+## Final evidence audit follow-up, before integration
+
+Candidate262d00a1e7ab7f4af58c5a9a94c76ca488a7b437 / tree
+151b650b0b4bc641722011a93ddc5bb3fd30e23f passed all seven workflows:
+approval40016226504, Node22/lint/build40016226478 (751/751,zero skips),
+security40016226510, isolated SQL40016226565, cloud/browser40016226456,
+visual/offline/built-app40016226507, live public acceptance40016188539.
+The live probe passed all10cases/64assertions with19public requests, no backend
+quota/data writes, and all10sanitized HTML replays identical, including Manhattan.
+Artifact12528053140 SHA256de86570a81bff0754d66c35d8e42099b4c44175ec6d222466b2d50996df3e27e
+was downloaded and independently verified. PR99 is open, not yet integrated.
+
+A final read-only field audit found four clear omissions outside those original
+assertions. Added source-bound extraction and regressions for SEY's named
+coffeeTitle_producer/country components (never AA SEPARATION as a farm), Manhattan's
+country immediately adjacent to its product H1, and NOMAD's explicitly named farm
+owner under Sobre la finca. Those6new positive/negative cases pass and actual-source
+replay recovers Ruarai/Nyeri,Kenya; Cauca,Colombia; Aquiares/DiegoRobelo y su familia.
+The same follow-up adds Onyx's exact tab-matched espresso20g/47g as a partial review
+reference; pressure-stage durations and neighboring filter data must not become
+an invented total time or temperature. Expanded live assertions cover these facts.
+
+Scope now includes coffee-espresso-evidence.mjs and partial-reference UI. Existing
+source limits remain explicit in the acceptance record, including contradictory
+Circulor facts and Sweet Bloom's unlabeled roast-position ordinal. No universal
+100% coverage or publication claim. Re-run affected/full validation, exact-sourceCI
+and expanded live acceptance, then integrate nonforce and record READY receipts.
+
+Final follow-up local validation: **766/766 tests pass**, zero skipped/cancelled,
+including 9 new exact-tab espresso tests and 6 final source-detail cases. Combined
+espresso/enrichment/auth/resource checks pass 123/123. Actual Onyx source replay
+returns only 20 g / 47 g and no total time, temperature or inferred ratio. Queue
+schema and approval coverage pass; exact GitHub checks remain the final gate.

@@ -249,6 +249,19 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  }
  // SEY encodes process in a release-specific product title component:
  // ETHIOPIAN LANDRACE - WASHED, never as a generic roast/brand heuristic.
+ // Its other named title components explicitly label producer and country.
+ // coffeeTitle_farm can instead contain a size separation, so it is excluded.
+ for(const match of html.matchAll(/<span\b[^<>]{0,1500}\bclass=["'][^"']{0,500}\bcoffeeTitle_(producer|country)\b[^"']{0,500}["'][^<>]{0,1500}>([^<>]{2,150})<\/span>/gi)){
+  field(fields,match[1].toLowerCase(),match[2],addField,extras,clean);
+ }
+ // A named location directly beside the selected WooCommerce title supplies
+ // its country. Restrict this label-free pattern to explicit country names;
+ // an address, marketing phrase or related product cannot fill geography.
+ const location=html.match(/<h1\b[^<>]{0,2000}>[\s\S]{1,500}?<\/h1>\s*<div\b[^<>]{0,1500}\bclass=["'][^"']{0,500}\bproduct-drilldown__content--info__location\b[^"']{0,500}["'][^<>]{0,1500}>([^<>]{2,90})<\/div>/i);
+ if(location){
+  const country=clean(location[1],90);
+  if(/^(?:Panama|Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|Papua New Guinea|DR Congo|United States|Jamaica)$/i.test(country))addField('Country',country);
+ }
  const sey=(html.match(/<span\b[^<>]{0,2000}class=["'][^"']{0,2000}coffeeTitle_varietyProcess[^"']{0,2000}["'][^<>]{0,2000}>([^<>]{3,140})<\/span>/i)||[])[1];
  if(sey){
   const m=clean(sey,140).match(/\s[-–]\s(Washed|Natural|Honey|Anaerobic)\s*$/i);

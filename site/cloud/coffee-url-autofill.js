@@ -43,13 +43,16 @@ export function coffeeUrlPreviewMarkup(result){
  const recipe=result.roaster_recipe||{};
  const validYield=Number.isFinite(recipe.yield_g)||
   (Number.isFinite(recipe.yield_g_min)&&Number.isFinite(recipe.yield_g_max)&&recipe.yield_g_max>=recipe.yield_g_min);
- const fullRecipe=Number.isFinite(recipe.dose_g)&&Number.isFinite(recipe.time_s_min)&&validYield;
+ const measuredReference=Number.isFinite(recipe.dose_g)&&validYield;
+ const fullRecipe=measuredReference&&Number.isFinite(recipe.time_s_min)&&
+  Number.isFinite(recipe.time_s_max)&&recipe.time_s_max>=recipe.time_s_min;
  const doseText=Number.isFinite(recipe.dose_g_max)?e(recipe.dose_g)+'–'+e(recipe.dose_g_max):
   e(recipe.dose_g)+(Number.isFinite(recipe.dose_tolerance_g)?' ± '+e(recipe.dose_tolerance_g):'');
  const outputText=Number.isFinite(recipe.yield_g)?e(recipe.yield_g):e(recipe.yield_g_min)+'–'+e(recipe.yield_g_max);
- const publishedRecipe=fullRecipe?
-  doseText+' g in, '+outputText+' g out, '+e(recipe.time_s_min)+'–'+e(recipe.time_s_max)+' s'+
-  (recipe.temperature?', '+e(recipe.temperature):recipe.temperature_reference?', temperature guidance: '+e(recipe.temperature_reference):''):
+ const publishedRecipe=measuredReference?
+  doseText+' g in, '+outputText+' g out'+(fullRecipe?', '+e(recipe.time_s_min)+'–'+e(recipe.time_s_max)+' s':'')+
+  (recipe.temperature?', '+e(recipe.temperature):recipe.temperature_reference?', temperature guidance: '+e(recipe.temperature_reference):'')+
+  (fullRecipe?'':' (total shot time not published)'):
   Number.isFinite(recipe.ratio)?'Espresso ratio 1:'+e(recipe.ratio)+' (dose and time not supplied)':'';
  return `<section class="coffee-url-preview">
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>

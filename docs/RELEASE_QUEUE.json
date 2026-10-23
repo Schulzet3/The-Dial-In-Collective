@@ -10,13 +10,14 @@
     {
       "id": "DIC-Q-33-product-completeness",
       "issue": 33,
-      "pr": null,
+      "pr": 99,
       "title": "Recover complete selected-coffee details across semantic layouts and public product sources",
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
         "site/cloud/coffee-url-autofill.js",
+        "src/server/coffee-espresso-evidence.mjs",
         "src/server/coffee-fact-compatibility.mjs",
         "src/server/coffee-flavor-evidence.mjs",
         "src/server/coffee-html-structure.mjs",
@@ -30,7 +31,8 @@
       ],
       "tests": [
         "Original Sweet Bloom missing-variety failure reproduced with the actual handler and bounded public transports in read-only live probe40014705373.",
-        "Saved-source replay confirms Bourbon Aji plus all other expected Sweet Bloom fields and exact18g/36g/22–24s espresso reference; multi-roaster layouts and negative controls covered by focused tests."
+        "Saved-source replay confirms Bourbon Aji plus all other expected Sweet Bloom fields and exact18g/36g/22–24s espresso reference; multi-roaster layouts and negative controls covered by focused tests.",
+        "Initial candidate262d00a1 passed all seven workflows:751Node22tests,lint/build,approval,isolatedSQL,browser/mobile/offline/visual,security inventory,and10/10livecases with64assertions; final evidence audit added four further source detail classes before integration."
       ],
       "ci_runs": [],
       "blockers": [
@@ -554,6 +556,6 @@
       "delivered_at_utc": "2026-10-23T01:48:46.334Z"
     }
   ],
-  "last_reconciled_utc": "2026-10-23T20:00:21.783573+00:00",
+  "last_reconciled_utc": "2026-10-23T20:08:00.475236+00:00",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }

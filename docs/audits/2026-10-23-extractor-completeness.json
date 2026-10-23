@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "status": "TESTING_NOT_DEPLOYED",
-  "recorded_at_utc": "2026-10-23T20:00:21.783573+00:00",
+  "recorded_at_utc": "2026-10-23T20:08:00.475236+00:00",
   "authority": "October23 owner Sweet Bloom failure report and comprehensive deterministic improvement request.",
   "baseline": {
     "source_sha": "c6ec5edc08e689d64e305c1821cecb9268d7b1a1",
@@ -378,5 +378,286 @@
     "No hosted provider or member-data writes, no production deployment.",
     "Missing/image-only/inaccessible or contradictory source facts cannot be guaranteed."
   ],
-  "next_action": "Pass exact-source fullCI, refreshed public-source assertions and fixture parity; integrate nonforce; promote queue with actual receipts."
+  "next_action": "Pass exact-source fullCI, refreshed public-source assertions and fixture parity; integrate nonforce; promote queue with actual receipts.",
+  "initial_candidate_acceptance": {
+    "source_sha": "262d00a1e7ab7f4af58c5a9a94c76ca488a7b437",
+    "tree_sha": "151b650b0b4bc641722011a93ddc5bb3fd30e23f",
+    "pr": 99,
+    "local_node": {
+      "version": "24.19.0",
+      "tests": 751,
+      "passed": 751,
+      "skipped": 0
+    },
+    "node22_ci": {
+      "version": "22.23.3",
+      "tests": 751,
+      "passed": 751,
+      "skipped": 0,
+      "run_id": 40016226478
+    },
+    "ci_runs": [
+      {
+        "id": 40016226504,
+        "conclusion": "success"
+      },
+      {
+        "id": 40016226478,
+        "conclusion": "success"
+      },
+      {
+        "id": 40016226510,
+        "conclusion": "success"
+      },
+      {
+        "id": 40016226565,
+        "conclusion": "success"
+      },
+      {
+        "id": 40016226456,
+        "conclusion": "success"
+      },
+      {
+        "id": 40016226507,
+        "conclusion": "success"
+      },
+      {
+        "id": 40016188539,
+        "conclusion": "success"
+      }
+    ],
+    "live": {
+      "run_id": 40016188539,
+      "artifact_id": 12528053140,
+      "artifact_sha256": "de86570a81bff0754d66c35d8e42099b4c44175ec6d222466b2d50996df3e27e",
+      "summary": {
+        "targets": 10,
+        "parsed": 9,
+        "required_targets": 10,
+        "required_failures": [],
+        "observed_gaps": 0,
+        "sources_with_gaps": [],
+        "public_requests": 19,
+        "real_backend_requests": 0,
+        "member_quota_consumed": 0,
+        "production_writes": 0,
+        "deployments": 0
+      },
+      "assertions": 64,
+      "all_html_fixture_parity": true,
+      "targets": [
+        {
+          "id": "sweet-bloom-arbey",
+          "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+          "fields": {
+            "name": "Arbey Cordoba",
+            "roaster": "Sweet Bloom Coffee",
+            "variety": "bourbon ají",
+            "process": "Washed",
+            "producer": "Arbey Cordoba",
+            "elevation_m": "1886 masl",
+            "tasting_notes": "mango, bing cherry, pineapple",
+            "origin": "Huila, Colombia"
+          },
+          "recipe": {
+            "dose_g": 18,
+            "yield_g": 36,
+            "time_s_min": 22,
+            "time_s_max": 24
+          },
+          "details": {
+            "named_producer": "Arbey Cordoba",
+            "farm": "El Diviso"
+          },
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "sweet-bloom-arbey-canonical",
+          "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+          "fields": {
+            "name": "Arbey Cordoba",
+            "roaster": "Sweet Bloom Coffee",
+            "variety": "bourbon ají",
+            "process": "Washed",
+            "producer": "Arbey Cordoba",
+            "elevation_m": "1886 masl",
+            "tasting_notes": "mango, bing cherry, pineapple",
+            "origin": "Huila, Colombia"
+          },
+          "recipe": {
+            "dose_g": 18,
+            "yield_g": 36,
+            "time_s_min": 22,
+            "time_s_max": 24
+          },
+          "details": {
+            "named_producer": "Arbey Cordoba",
+            "farm": "El Diviso"
+          },
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "sey-ruarai",
+          "url": "https://www.seycoffee.com/products/2026-ruarai-aa-separation-kenya",
+          "fields": {
+            "name": "SEY - 2026 Ruarai; AA Separation - Kenya",
+            "roaster": "SEY",
+            "process": "Washed",
+            "variety": "SL28 & SL34",
+            "origin": "Nyeri",
+            "elevation_m": "1,783 masl",
+            "release_label": "November 2025",
+            "tasting_notes": "rose hips, pomegranate, and candied grapefruit"
+          },
+          "recipe": null,
+          "details": {},
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "black-white-lica",
+          "url": "https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural",
+          "fields": {
+            "name": "Lica Torres - Black Cherry Natural",
+            "roaster": "Black & White Coffee Roasters",
+            "origin": "Rivas, Brunca, Costa Rica",
+            "producer": "Don Lica Torres",
+            "process": "Natural",
+            "variety": "Catuaí",
+            "elevation_m": "1500 MASL",
+            "tasting_notes": "cocktail cherry, port wine, white icing, milk chocolate",
+            "roast_level": "Light"
+          },
+          "recipe": null,
+          "details": {
+            "processing_detail": "Black Cherry Natural",
+            "farm": "Cerro Buena Vista"
+          },
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "tim-wendelboe-echemo",
+          "url": "https://timwendelboe.no/products/echemo-certified-organic",
+          "fields": {
+            "name": "Echemo – Certified Organic",
+            "roaster": "Tim Wendelboe",
+            "variety": "Ethiopian heirloom from Coche forest",
+            "tasting_notes": "Floral, white tea & stone fruits",
+            "producer": "Khalid Shifa",
+            "origin": "Goma, Jimma, Ethiopia",
+            "process": "Washed",
+            "release_label": "December 2025"
+          },
+          "recipe": null,
+          "details": {
+            "named_producer": "Khalid Shifa"
+          },
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "onyx-geometry",
+          "url": "https://onyxcoffeelab.com/products/geometry",
+          "fields": {
+            "name": "Geometry",
+            "roaster": "Onyx Coffee Lab",
+            "origin": "Colombia, Ethiopia",
+            "process": "Washed",
+            "roast_level": "Light",
+            "variety": "Mixed",
+            "elevation_m": "1950 MASL",
+            "tasting_notes": "Berries, Stone Fruit, Earl Grey, Honeysuckle, Round"
+          },
+          "recipe": null,
+          "details": {
+            "preferred_extraction": "Filter & Espresso",
+            "agtron": "130",
+            "production_roaster": "Loring S70 Peregrine",
+            "drying_method": "Raised-Bed Dried",
+            "harvest_season": "Rotating Microlots"
+          },
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "manhattan-samuel",
+          "url": "https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/",
+          "fields": {
+            "name": "Samuel Jr.",
+            "tasting_notes": "Star anise, Dark fudge, Verbena",
+            "roaster": "Manhattan Coffee Roasters",
+            "producer": "Diego Bermudez",
+            "elevation_m": "1960 masl",
+            "origin": "Cauca",
+            "variety": "Caturra Chiroso"
+          },
+          "recipe": null,
+          "details": {
+            "processing_detail": "Double Anaerobic Thermal Shock Washed",
+            "farm": "El Paraiso"
+          },
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "nomad-centroamericano",
+          "url": "https://nomadcoffee.es/products/centroamericano-natural-anaerobico",
+          "fields": {
+            "name": "Centroamericano Natural Anaeróbico",
+            "roaster": "Nomad Coffee",
+            "origin": "Costa Rica",
+            "process": "Anaerobic",
+            "variety": "Centroamericano",
+            "elevation_m": "1200 - 1400 MSNM",
+            "release_label": "2026",
+            "tasting_notes": "Cacao nibs Frutos del bosque Tamarindo"
+          },
+          "recipe": null,
+          "details": {
+            "processing_detail": "Natural Anaeróbico"
+          },
+          "conflicts": [],
+          "gaps": []
+        },
+        {
+          "id": "circulor-source-conflict",
+          "url": "https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx",
+          "fields": {
+            "name": "KENYA Coffea Circulor Outo Isolated SL34 AA Washed WX",
+            "roaster": "Coffea Circulor",
+            "producer": "Coffea Circulor Kenya Estate (Ivica & Macho)",
+            "origin": "Meru, Kenya",
+            "elevation_m": "1,500 masl",
+            "process": "Washed"
+          },
+          "recipe": null,
+          "details": {},
+          "conflicts": [
+            "variety"
+          ],
+          "gaps": []
+        },
+        {
+          "id": "queen-city-homepage-negative",
+          "url": "https://queencitycollectivecoffee.com/",
+          "fields": {},
+          "recipe": null,
+          "details": {},
+          "conflicts": [],
+          "gaps": []
+        }
+      ]
+    }
+  },
+  "followup": "Final evidence audit found source details beyond the original64assertions: SEY country/producer, Manhattan country, NOMAD farm owner, and Onyx tab-bound partialespresso20g/47g. Followup implementation/expanded assertions must pass fresh exact-sourceCI and liveacceptance beforeintegration.",
+  "source_limits": [
+    "Sweet Bloom publishes a numeric roast-position custom property between Light/Medium endpoints without an explicit selected label; no roast category is invented.",
+    "Sweet Bloom archive/date and relationship year are not harvest/release evidence.",
+    "Circulor explicitly disagrees on variety across selected-product descriptions; variety is withheld. Its sensory table and product-description flavor lists also disagree; no consensus flavor claim.",
+    "Manhattan complex Double Anaerobic Thermal Shock Washed remains exact review-only processing detail when the coarse selector cannot safely represent it.",
+    "Onyx espresso guide specifies20g/47g, but pressure-stage timings are not an explicit total extraction time; no filtertemperature or time is borrowed."
+  ]
 }

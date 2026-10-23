@@ -3,6 +3,7 @@ import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 // Supplement existing labeled and structured parsers; never create Verified facts.
 // No network calls, model invocation, hidden scripts or unrestricted site crawling.
 import {productMarkup} from './coffee-product-scope.mjs';
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 
 const COUNTRY=String.raw`Panama|Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|Papua New Guinea|DR Congo|United States|Jamaica`;
 const ENTITIES={'amp':'&','nbsp':' ','quot':'"','apos':"'",'eacute':'é','ndash':'–','mdash':'—'};
@@ -68,6 +69,24 @@ function locationFromHeadings(headings){
  }
  return null;
 }
+function explicitFarmOwnership(page){
+ const {nodes}=coffeeHtmlElements(page);
+ const headings=nodes.filter(node=>/^h[2-6]$/.test(node.tag));
+ const found=new Map();
+ for(let i=0;i<headings.length;i++){
+  const heading=headings[i];
+  if(heading.contentEnd-heading.headEnd>1500)continue;
+  const title=text(page.slice(heading.headEnd,heading.contentEnd),100).replace(/\s+[+−-](?:\s*[+−-])?\s*$/,'');
+  if(!/^(?:sobre la finca|acerca de la finca|about (?:this|the) farm)$/i.test(title))continue;
+  const end=Math.min(headings[i+1]?.start??page.length,heading.end+5000);
+  const paragraph=text(page.slice(heading.end,end),1500);
+  // Literal farm ownership in the selected farm story, including a family
+  // attribution. Generic farming explanations and other sections do not count.
+  const match=paragraph.match(/^([A-ZÀ-Ý][\p{L}\p{M}'’.-]*(?:\s+[A-ZÀ-Ý][\p{L}\p{M}'’.-]*){0,4})\s+es propiedad de\s+([A-ZÀ-Ý][\p{L}\p{M}'’.-]+(?:\s+[A-ZÀ-Ý][\p{L}\p{M}'’.-]+){1,3}(?:\s+y su familia)?)(?=\s*[,.;])/u);
+  if(match)found.set(match[1]+'\0'+match[2],{farm:match[1],producer:match[2]});
+ }
+ return found.size===1?[...found.values()][0]:null;
+}
 export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name)return {fields:{},details:{}};
  const page=scopedPage(html);
@@ -78,6 +97,11 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
   .map(m=>text(m[1],1400)).filter(Boolean).slice(0,90);
  const prose=paragraphs.join(' ').slice(0,11000);
  const output={},details={};
+ const ownership=explicitFarmOwnership(page);
+ if(ownership){
+  details.farm=ownership.farm;details.named_producer=ownership.producer;
+  if(!fields.producer)output.producer=ownership.producer;
+ }
  const place=locationFromHeadings(headings);
  if(place){
   details.farm=place.farm;

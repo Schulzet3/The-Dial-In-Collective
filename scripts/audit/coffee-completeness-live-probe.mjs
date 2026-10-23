@@ -29,7 +29,7 @@ const targets=[
   elevation_m:/1,?886\s*(?:m|masl)/i,tasting_notes:/mango.*bing cherry.*pineapple/i},
   recipe:{dose_g:18,yield_g:36,time_s_min:22,time_s_max:24},absent:['release_label']},
  {id:'sey-ruarai',url:'https://www.seycoffee.com/products/2026-ruarai-aa-separation-kenya',expected:{
-  variety:/SL\s?28.*SL\s?34/i,origin:/Nyeri/i,elevation_m:/1,?783\s*(?:m|masl)/i,
+  variety:/SL\s?28.*SL\s?34/i,origin:/Nyeri.*Kenya/i,producer:/\bRuarai\b/i,elevation_m:/1,?783\s*(?:m|masl)/i,
   release_label:/November\s*2025/i,process:/^Washed$/i}},
  {id:'black-white-lica',url:'https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural',expected:{
   variety:/^catua[ií]$/i,producer:/Lica Torres/i,origin:/Rivas.*Brunca.*Costa Rica/i,
@@ -43,14 +43,16 @@ const targets=[
   variety:/^Mixed$/i,origin:/Colombia.*Ethiopia/i,process:/^Washed$/i,
   roast_level:/^Light$/i,elevation_m:/1950\s*(?:m|masl)/i,
   tasting_notes:/Berries.*Stone Fruit.*Earl Grey.*Honeysuckle.*Round/i},
-  expected_details:{drying_method:/^Raised-Bed Dried$/i,agtron:/^130$/}},
+  expected_details:{drying_method:/^Raised-Bed Dried$/i,agtron:/^130$/},
+  recipe:{dose_g:20,yield_g:47},recipe_absentfields:['time_s_min','time_s_max','temperature']},
  {id:'manhattan-samuel',url:'https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/',expected:{
   roaster:/Manhattan Coffee Roasters/i,
-  variety:/Caturra.*Chiroso/i,producer:/Diego Bermudez/i,origin:/Cauca/i,
+  variety:/Caturra.*Chiroso/i,producer:/Diego Bermudez/i,origin:/Cauca.*Colombia/i,
   elevation_m:/1960\s*(?:m|masl)/i,tasting_notes:/star anise.*dark fudge.*verbena/i}},
  {id:'nomad-centroamericano',url:'https://nomadcoffee.es/products/centroamericano-natural-anaerobico',expected:{
   variety:/^Centroamericano$/i,origin:/Costa Rica/i,process:/^Anaerobic$/i,
-  elevation_m:/1200\s*[-–]\s*1400/i,release_label:/2026/}},
+  producer:/^Diego Robelo(?: y su familia)?$/i,elevation_m:/1200\s*[-–]\s*1400/i,release_label:/2026/},
+  expected_details:{farm:/^Aquiares$/i}},
  {id:'circulor-source-conflict',url:'https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx',
   expected:{origin:/Kenya|Meru/i,process:/^Washed$/i},expected_conflicts:['variety'],
   source_note:'Observed page title/summary says SL34, while Genesis says Ruiru 11. Report current source drift explicitly.'},
@@ -131,6 +133,10 @@ function assess(target,result){
  for(const [field,value] of Object.entries(target.recipe||{})){
   checked.push('espresso.'+field);
   if(result?.roaster_recipe?.[field]!==value)gaps.push({field:'espresso.'+field,reason:'missing_or_incorrect_espresso_value',actual:result?.roaster_recipe?.[field]??null,expected:value});
+ }
+ for(const field of target.recipe_absentfields||[]){
+  checked.push('absent.espresso.'+field);
+  if(result?.roaster_recipe?.[field]!=null)gaps.push({field:'espresso.'+field,reason:'unsupported_espresso_value',actual:result.roaster_recipe[field]});
  }
  for(const [key,pattern] of Object.entries(target.expected_details||{})){
   const field='details.'+key,value=result?.roaster_details?.[key];
