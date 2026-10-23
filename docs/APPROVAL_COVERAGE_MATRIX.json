@@ -9,6 +9,7 @@
     "current_owner_admin_low_friction_review_20261021",
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
     "current_owner_admin_records_edit_20261021",
+    "current_owner_admin_review_delete_20261023",
     "current_owner_approved_adaptive_extractor_production_release_20261020",
     "current_owner_approved_agtron_narrative",
     "current_owner_approved_community_nested_layout_20261018",
@@ -562,6 +563,42 @@
           "contains": "sanitization_changed_extraction"
         }
       ]
+    },
+    {
+      "id": "admin_coffee_shot_delete_and_comparison",
+      "decision_key": "current_owner_admin_review_delete_20261023",
+      "scope": "Issue100 owner approved review comparison, no Hold UI, exact impact confirmed admin-only coffee/shot/pending deletion with Community safeguards; not yet published.",
+      "implementation": "IN_PROGRESS; draft PR101 with staged SQL and Admin UI, exact CI/acceptance still under review.",
+      "device_acceptance": "NOT_RUN; synthetic developer CI does not claim authenticated production acceptance.",
+      "issue": 100,
+      "hosted_sql_applied": false,
+      "site_published": false,
+      "assertions": [
+        {
+          "path": "site/admin/view.js",
+          "contains": "Possible Existing Match"
+        },
+        {
+          "path": "site/admin/view.js",
+          "absent": "review-hold"
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "dic_admin_delete_preview"
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "globalThis.confirm?.(warning)"
+        },
+        {
+          "path": "supabase/migrations/20261023225600_dic_admin_safe_delete.sql",
+          "contains": "private.dic_admin_delete_record"
+        },
+        {
+          "path": "tests/admin-read-only.test.mjs",
+          "contains": "server-authoritative impact"
+        }
+      ]
     }
   ],
   "active_gap_flags": [
@@ -750,5 +787,13 @@
     "no_new_locked_decisions": true,
     "production_unchanged": true,
     "coverage_limits": "Every-file automated screening and targeted semantic review; no complete manual archive-history or production-account penetration certification."
+  },
+  "current_owner_admin_review_delete_20261023": {
+    "decision_key": "current_owner_admin_review_delete_20261023",
+    "status": "IN_PROGRESS",
+    "issue": 100,
+    "pr": 101,
+    "community_preservation": "BLOCK_COFFEE_WITH_QUALIFYING_COMMUNITY",
+    "owner_release_authorization": "NOT_GIVEN"
   }
 }
