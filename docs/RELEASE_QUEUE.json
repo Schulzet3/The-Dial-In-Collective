@@ -2,17 +2,18 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "7156f0d3f1b960775c9256e7fcf92e0b89be8cc6",
-    "release_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
-    "netlify_deploy_id": "6adabcecd4a2a68e94cdc09a"
+    "tested_source_sha": "d57f0b3cfeac32be6cd7a2192662a63a57e67e0f",
+    "release_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
+    "netlify_deploy_id": "6adb71e2a2e52cd3bbeef5e5"
   },
-  "items": [
+  "items": [],
+  "history": [
     {
       "id": "DIC-Q-93-admin-counts",
       "issue": 93,
       "pr": null,
       "title": "Keep collapsed Admin counters accurate and refresh them without loading record pages",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "6af607ada105b0c406829e8577e8ad7c543ab52d",
       "scope_paths": [
         "site/admin/main.js",
@@ -30,14 +31,19 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/93",
-      "notes": "READY for next separately owner-authorized release. Preserve 45s summary-only refresh, lazy record pages, expanded filtered total, admin role protections. Not deployed."
+      "notes": "READY for next separately owner-authorized release. Preserve 45s summary-only refresh, lazy record pages, expanded filtered total, admin role protections. Not deployed.\nDelivered in DIC-20261023-READY-QUEUE-05; Netlify READY/current provider readback and JWT-required Edge preview v4/verifier v6. Synthetic prior tests only; no real signed-in production browser claim.",
+      "delivered_release_id": "DIC-20261023-READY-QUEUE-05",
+      "delivered_tested_source_sha": "d57f0b3cfeac32be6cd7a2192662a63a57e67e0f",
+      "delivered_release_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
+      "delivered_netlify_deploy_id": "6adb71e2a2e52cd3bbeef5e5",
+      "delivered_at_utc": "2026-10-23T14:40:52.519Z"
     },
     {
       "id": "DIC-Q-96-security-repairs",
       "issue": 96,
       "pr": 98,
       "title": "Security audit: bounded requests and HTML, accurate provenance, approved passwords, preserved notes and privacy copy",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d",
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
@@ -84,14 +90,17 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
-      "notes": "READY source repairs, NOT DEPLOYED. A later owner-approved release must include Netlify/app and BOTH Edge functions with shared modules; no new SQL migration. Six confirmed findings addressed, including expanded HTML CPU variants. Every-file screening plus targeted semantic review is not exhaustive manual history review or full authenticated-production penetration certification.",
+      "notes": "READY source repairs, NOT DEPLOYED. A later owner-approved release must include Netlify/app and BOTH Edge functions with shared modules; no new SQL migration. Six confirmed findings addressed, including expanded HTML CPU variants. Every-file screening plus targeted semantic review is not exhaustive manual history review or full authenticated-production penetration certification.\nDelivered in DIC-20261023-READY-QUEUE-05; Netlify READY/current provider readback and JWT-required Edge preview v4/verifier v6. Synthetic prior tests only; no real signed-in production browser claim.",
       "related_prs": [
         97,
         98
-      ]
-    }
-  ],
-  "history": [
+      ],
+      "delivered_release_id": "DIC-20261023-READY-QUEUE-05",
+      "delivered_tested_source_sha": "d57f0b3cfeac32be6cd7a2192662a63a57e67e0f",
+      "delivered_release_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
+      "delivered_netlify_deploy_id": "6adb71e2a2e52cd3bbeef5e5",
+      "delivered_at_utc": "2026-10-23T14:40:52.519Z"
+    },
     {
       "id": "DIC-Q-78",
       "issue": 78,
