@@ -15,6 +15,7 @@ async function start(){
  let busy=false;
  let pendingSectionRefresh=false;
  let mergeChoices=Object.create(null);
+  let comparisons=Object.create(null);
  let recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));
  let searchText='';
  let records={};
@@ -22,7 +23,7 @@ async function start(){
  const openSections=new Set();
  const openCoffeeGroups=new Set();
  const invalidate=message=>{
-  issued=null;mergeChoices=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
+  issued=null;mergeChoices=Object.create(null);comparisons=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
  try {
   secureOrigin();
@@ -88,7 +89,7 @@ async function start(){
     // No stale hidden-page totals override the fresh dashboard count.
     records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
     access=loadAccess?nextAccess:null;
-    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText});
+    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText,comparisons});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -267,6 +268,18 @@ async function start(){
    }
    const id=button.dataset.id||'';
    if(!/^[0-9a-f]{8}-[0-9a-f-]{27,}$/.test(id))return;
+   if(action==='admin-load-comparison'){
+    guarded(async()=>{
+     const item=['pending','conflicts'].flatMap(k=>records[k]?.items||[]).find(row=>row.id===id);
+     if(!item)throw new Error('Expand Pending Coffees or Conflicts before comparing.');
+     const query=String(item.name||'').trim().slice(0,80);
+     if(!query)throw new Error('Coffee name required for comparison.');
+     const result=await adminRpc('dic_admin_search_records',{p_kind:'approved',p_query:query,p_offset:0,p_limit:50});
+     const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+     comparisons[id]=(result.items||[]).filter(c=>normalize(c.roaster)===normalize(item.roaster)&&normalize(c.name)===normalize(item.name)).slice(0,5);
+     await refresh();
+    });return;
+   }
    if(action==='review-merge-prepare'){
     guarded(async()=>{
      const result=await adminRpc('dic_admin_coffee_candidates',{p_submission_id:id});
@@ -275,10 +288,10 @@ async function start(){
      mergeChoices[id]=candidates;await refresh();
     });return;
    }
-   if(['review-approve','review-merge','review-hold'].includes(action)){
+   if(['review-approve','review-merge'].includes(action)){
     const revision=Number(button.dataset.revision);
     if(!Number.isSafeInteger(revision)||revision<1)return;
-    const decision=action==='review-approve'?'approve':action==='review-merge'?'merge':'hold';
+    const decision=action==='review-approve'?'approve':'merge';
     const selected=decision==='merge'?root.querySelector('#admin-merge-'+id)?.value:null;
     if(decision==='merge'&&!mergeChoices[id]?.some(c=>c.id===selected))return;
     // Each deliberate resolution is one click. The server still checks role,
@@ -291,7 +304,7 @@ async function start(){
      });
      if(!result?.ok)throw new Error('The review did not complete. Refresh before retrying.');
      delete mergeChoices[id];issued=null;await refresh();
-     actionMessage(decision==='hold'?'Coffee held for clarification.':'Coffee reviewed successfully.');
+     actionMessage('Coffee reviewed successfully.');
     });return;
    }
    if(action==='revoke-invite'){

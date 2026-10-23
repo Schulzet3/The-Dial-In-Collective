@@ -102,3 +102,13 @@
 .admin-search-form .helper{grid-column:1/-1;margin:1px 0 0;font-size:12px}
 .admin-search-form input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media(max-width:500px){.admin-search-form{grid-template-columns:minmax(0,1fr) auto}.admin-search-form input{grid-column:1/-1}}
+
+/* Issue 100: responsive submitted-versus-existing review, no product photos. */
+.admin-review-comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.admin-compare-panel{min-width:0;border:1px solid var(--line);border-radius:12px;padding:14px}
+.admin-compare-panel h4{margin:0 0 10px}.admin-compare-panel dl{margin:0}
+.admin-compare-row{display:grid;grid-template-columns:minmax(90px,40%) minmax(0,1fr);gap:10px;padding:6px 0;border-bottom:1px solid var(--line)}
+.admin-compare-row dt{color:var(--muted)}.admin-compare-row dd{margin:0;overflow-wrap:anywhere}
+.admin-compare-row.is-conflict dd,.admin-compare-conflict{color:#f6a781}
+.admin-compare-why{border-top:1px solid var(--line);margin-top:16px;padding-top:12px}
+@media(max-width:760px){.admin-review-comparison{grid-template-columns:1fr}}

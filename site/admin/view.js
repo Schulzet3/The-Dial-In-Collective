@@ -18,20 +18,31 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
    ?page.total:fallback;
  };
  const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong>${formatCount(value)}</strong><small>View all →</small></a>`;
- const reviewActions=item=>`  <div class="admin-review-actions" aria-label="Review ${e(item.name||'coffee')}">
+ const reviewActions=item=>`<button type="button" class="ghost compact" data-action="admin-load-comparison" data-id="${e(String(item.id||''))}">Compare Possible Matches</button>
+  <div class="admin-review-actions" aria-label="Review ${e(item.name||'coffee')}">
    <button type="button" data-action="review-approve" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Approve Distinct Coffee</button>
    <button type="button" class="ghost compact" data-action="review-merge-prepare" data-id="${e(String(item.id||''))}">Resolve Duplicate</button>
-   <button type="button" class="ghost compact" data-action="review-hold" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Hold for Clarification</button>
   </div>
   ${Array.isArray(candidatesBySubmission[item.id])?`<div class="admin-candidates"><label>Approved coffee to reuse <select id="admin-merge-${e(String(item.id||''))}">${candidatesBySubmission[item.id].map(c=>`<option value="${e(String(c.id||''))}">${e(c.roaster||'')} · ${e(c.name||'')} ${e(c.release_label||'')}</option>`).join('')}</select></label><button type="button" data-action="review-merge" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Confirm Duplicate Merge</button></div>`:''}
   <p class="admin-subtle">Approve a distinct coffee with one click. Potential duplicate conflicts require review; every decision is recorded.</p>
 
  `;
+ const renderMatch=item=>{
+  const matches=options.comparisons?.[item.id];
+  const target=Array.isArray(matches)?matches[0]:null;
+  const fields=[['name','Coffee Name'],['roaster','Roaster'],['origin','Origin'],['process','Process'],['release_label','Release / Harvest'],['producer','Producer'],['variety','Variety'],['roast_level','Roast Level'],['elevation_m','Elevation'],['tasting_notes','Tasting Notes'],['summary','Summary'],['espressoNotes','Espresso Notes'],['source_url','Source URL']];
+  const val=(record,key)=>String(record?.[key]??'').trim();
+  const norm=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  const different=key=>!!target&&!!val(item,key)&&!!val(target,key)&&norm(val(item,key))!==norm(val(target,key));
+  const facts=record=>'<dl class="admin-compare-facts">'+fields.map(([key,label])=>'<div class="admin-compare-row'+(different(key)?' is-conflict':'')+'"><dt>'+e(label)+'</dt><dd>'+e(val(record,key)||'—')+'</dd></div>').join('')+'</dl>';
+  const discrepancies=target?fields.filter(([key])=>different(key)):[];
+  return '<div class="admin-review-comparison"><section class="admin-compare-panel"><h4>Submitted Coffee (Pending)</h4>'+facts(item)+'</section><section class="admin-compare-panel"><h4>Possible Existing Match</h4>'+(target?'<p class="helper">'+e(target.name)+' · '+e(target.roaster)+' · Approved</p>'+facts(target):'<p class="helper">'+(matches?'No matching approved coffee in the first 50 search results.':'Load comparison to inspect existing coffees.')+'</p>')+'<div class="admin-compare-why"><strong>Why this needs review</strong><p>Potential identity overlap requires an administrator decision. Blank fields are not treated as contradictions.</p>'+discrepancies.map(([key,label])=>'<p class="admin-compare-conflict"><strong>'+e(label)+':</strong> Submitted '+e(val(item,key))+'; existing '+e(val(target,key))+'.</p>').join('')+'</div></section></div>';
+ };
  const preview=item=>`<article class="admin-queue-item">
   <div class="admin-queue-title"><div><span class="admin-state">${e(item.status==='conflict'?'Conflict':'Pending')}</span>
    <h3>${e(item.name||'Unnamed coffee')}</h3><p class="helper">${e(item.roaster||'Roaster not supplied')}</p></div>
    <span class="admin-date">${e(String(item.created_at||'').slice(0,10))}</span></div>
-  ${renderAdminCoffeeFacts(item)}
+  ${renderMatch(item)}
   
   ${reviewActions(item)}
  </article>`;
