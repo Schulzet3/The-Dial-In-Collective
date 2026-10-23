@@ -1,0 +1,77 @@
+name: DIC reviewed HTML attribute boundary follow-up
+# Source-only transfer. No production calls or workflow writes from the runner.
+on:
+  push:
+    branches: [work/issue96-security-audit-20261023]
+    paths: [.github/workflows/issue96-attribute-followup.yml]
+permissions:
+  contents: write
+jobs:
+  apply-reviewed-followup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Verify exact original and repaired bytes
+        run: |
+          python3 - <<'PY'
+          import hashlib,os,pathlib,subprocess
+          root=pathlib.Path.cwd();branch='work/issue96-security-audit-20261023'
+          git=lambda *a:subprocess.check_output(['git',*a],text=True).strip()
+          assert os.environ['GITHUB_REF']=='refs/heads/'+branch
+          assert git('rev-parse','HEAD')==os.environ['GITHUB_SHA']
+          assert git('rev-parse','HEAD^')=='efa25ff00436cda7aad1f9136a005c74d3c843b9'
+          manifest='''src/server/coffee-blend-evidence.mjs 0fdc5dcce10ab13645b5245752cb05beb44ea98bb752db1cf3614b4c942dc019 a0df7b8604f3576640c8d00f3fdae01c0080e9e1580f17476ae0124820cc3b1f
+          src/server/coffee-product-layouts.mjs 02afc9d665311bb357a4b3307284f41df7ba2390ccdf5f7a8ea5f4b838f01113 be7191b86b986a3e8e4462b3d8ef6777b0c8ad0a471f9b8770643b3489f08c87
+          src/server/coffee-shopify-ajax.mjs 120cb90164b90719cc49cba2eabf154b22dcd0b4b75f7cbb428fec00c5ddbde0 cf51b7699da98c7be72066d89dd937dbe4ebcceb576e1a82f1f376787d21b739
+          src/server/coffee-flavor-evidence.mjs ea6c7ccaab79d2f8fb7bf95f9a8388fe721caf714a6d2ff6f6f5c11c29a4f966 53167d3d38a41813a330a369412e9de9383c4ca877b6fc2670a04ba2ca1eaea4
+          src/server/coffee-page-metadata.mjs dbb0a4c4796fa9f39983f3a8ea3ddc1835154815c0bc13c821c2a1dbdf789436 ad2b179bf07d404bd854a8fa284b14c291fc681b63cb81a2b4fab406dfe14520
+          src/server/coffee-espresso-evidence.mjs 93772a4ec5025e6324ca8b21b05a1b49b5ff48011103b0ed2745fbab3c2ebf7e ee98ec8c07e76c23ade88c3c0a6cfc742ac32bf531b6b4403222a241a92c7bc6
+          src/server/coffee-narrative-evidence.mjs 0a33ca8bfd7e63b645d1328851c72f1a1e232a15ef8913ec62d24c386fa31416 7729f758712431d2b883eb053b1100b6d253d2ceb08a8480337c779bf91bfd2b
+          src/server/roast-level-evidence.mjs dda9571eda5ba5f3a988def8ad41299f8cf5bbab72e9cd03d1924c69b618f907 76491ac57cb2b7395254d7e5f93f20725f41975966340ece0b758ffe0d5608c6
+          src/server/coffee-woocommerce-store.mjs 699290d9216f4c9af331c32992109d636139f81659d88270932621f11c778906 56544c8154f58edd92d8df5bf2d93dbd035c0858259dc864101ebe8ca312e765
+          src/server/coffee-product-scope.mjs 3eb9678bf8048c72b6a08d5a9e48832437ade3ad044bacd2734fad6acdaef0ba a4fd5d291a76d55112a811ce6dd1e09dac010e8c07612ba283981833332a45c0
+          supabase/functions/dic-preview-coffee/preview.mjs 6cc7b147c41940cf54c400da60f74ee110aa3845d0daa7f29f43db141bbbd1a6 ffbdd46613387d61705fb8484171b2718daa70e550207fdd484261e73d2cd055
+          supabase/functions/dic-verify-coffee/evidence.mjs 6a41068903dbd8940480842e9118e0bb8d97d4b791857b4c4e4bfa04e7352b54 725d2b40fac58a9aaa96d0c4aee3995aa8d81f0568847b5da6b688607efec359
+          tests/html-resource-security.test.mjs 7166bf6773b4128250b2e333b1b44d91695fbea4bb045bb772f0b6ca61577ef7 188135639cfdd18944358c9baccc4926462c395dc407f4633384c99d48d360aa'''
+          addition='''
+          test('repeated quoted HTML attributes have bounded work across product layouts',()=>{
+           const code=`import {extractPublicCoffeeFacts as extract} from './src/server/coffee-page-metadata.mjs';
+           const samples=[['<div '+('class="a-stat" ').repeat(15000)+'>','https://www.seycoffee.com/products/audit'],['<p '+('class="meta-title" ').repeat(10000)+'>','https://example.invalid/products/audit'],['<div '+('class="meta-info" ').repeat(10000)+'>','https://example.invalid/products/audit'],['<div class="'+('a-stat ').repeat(40000)+'">','https://www.seycoffee.com/products/audit']];
+           for(const [sample,source_url] of samples)extract('<h1>Audit Coffee</h1>'+sample,{source_url});console.log('bounded');`;
+           const result=spawnSync(process.execPath,['--input-type=module','-e',code],{cwd:new URL('..',import.meta.url),timeout:4000,encoding:'utf8'});
+           assert.equal(result.error,undefined,result.error?.message);assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'bounded');
+          });
+          '''
+          patterns=['[^<>]*','[^"\']*','[^"]*',"[^']*",r'[^"\x27]*']
+          prepared={}
+          for row in manifest.splitlines():
+              name,before,after=row.split();path=root/name;data=path.read_bytes()
+              assert hashlib.sha256(data).hexdigest()==before,name+' original mismatch'
+              text=data.decode('utf-8')
+              if name.startswith('tests/'):text+=addition
+              else:
+                  for pattern in patterns:text=text.replace(pattern,pattern[:-1]+'{0,2000}')
+              result=text.encode('utf-8');assert hashlib.sha256(result).hexdigest()==after,name+' repaired mismatch'
+              prepared[name]=result
+          assert len(prepared)==13
+          for name,data in prepared.items():(root/name).write_bytes(data)
+          journal=root/'docs/workstreams/issue-96.md'
+          journal.write_text(journal.read_text()+'\n\n## Expanded attribute CPU regression repaired; final queue remains TESTING\nAfter PR97 seven successful checks and six successful merged checks, further isolated input probing found repeated quoted attributes could exceed2.5s. This same-commit follow-up bounds ambiguous tag/quoted values in12 parser modules and adds a child-process regression; all13 original/repaired SHA256 verified before writing. Local673/673 Node tests PASS; equivalent three stress cases now21-24ms. The earlier unreferenced READY documentation receipt is not integrated and is superseded. No production load test, release, SQL/Edge/Auth/provider/member changes. Preserve93 READY. Next exact-source CI, nonforce merge/readback and final receipt referencing the final tested SHA; do not claim historical manual/real-account penetration certification.\n')
+          subprocess.run(['git','add','--',*prepared,'docs/workstreams/issue-96.md'],check=True)
+          assert not any(p.startswith('.github/workflows/') for p in git('diff','--cached','--name-only').splitlines())
+          print('All13 before/after hashes verified; application-only patch staged')
+          PY
+      - name: Advance only the source audit branch nonforce
+        run: |
+          set -eu
+          BRANCH=work/issue96-security-audit-20261023
+          test "$(git ls-remote origin refs/heads/$BRANCH | cut -f1)" = "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix: bound ambiguous HTML attribute scanning [skip netlify]'
+          git push origin HEAD:refs/heads/$BRANCH
+          git rev-parse HEAD
