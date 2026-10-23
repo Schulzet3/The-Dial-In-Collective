@@ -1,0 +1,52 @@
+name: DIC authorized private source inspection
+on:
+  push:
+    branches: [work/issue96-security-audit-20261023]
+    paths: [.github/workflows/issue96-source-audit.yml]
+permissions:
+  contents: read
+jobs:
+  source-inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Package only tracked source, no credentials or production data
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import subprocess, pathlib, json, hashlib, io, tarfile
+          out=pathlib.Path('source_audit_artifact');out.mkdir()
+          def git(*args):return subprocess.check_output(['git',*args])
+          snapshots={'application':'459d2418ec75a71aaa908e3982965c2b5d7aa97b','operations':'1678391d18d96d72f207a42b5edf6da506e8b7b1','production':'f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f'}
+          refs={line.split(' ',1)[0]:line.split(' ',1)[1] for line in git('for-each-ref','--format=%(refname) %(objectname)','refs/remotes/origin/').decode().splitlines()}
+          manifest={'snapshots':snapshots,'branch_tips':refs,'files':[],'blobs':{}}
+          seen=set()
+          with tarfile.open(out/'unique-blobs.tar.gz','w:gz') as bundle:
+            for ref,sha in {**snapshots,**refs}.items():
+              for item in git('ls-tree','-r','-z',sha).split(b'\0'):
+                if not item:continue
+                meta,path=item.split(b'\t',1);mode,kind,blob=meta.decode().split()
+                if kind!='blob':continue
+                path=path.decode('utf8')
+                manifest['files'].append({'ref':ref,'commit':sha,'path':path,'mode':mode,'blob':blob})
+                if blob in seen:continue
+                data=git('cat-file','blob',blob);seen.add(blob)
+                try:text=data.decode('utf8');binary='\0' in text
+                except UnicodeDecodeError:binary=True
+                manifest['blobs'][blob]={'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'binary':binary,'lines':None if binary else len(data.splitlines())}
+                info=tarfile.TarInfo(blob);info.size=len(data);info.mode=0o600;bundle.addfile(info,io.BytesIO(data))
+          for label,sha in snapshots.items():
+            subprocess.run(['git','archive','--format=tar.gz','--output='+str(out/(label+'.tar.gz')),sha],check=True)
+          (out/'manifest.json').write_text(json.dumps(manifest,indent=2))
+          print(json.dumps({'branch_tips':len(refs),'unique_blobs':len(seen),'path_references':len(manifest['files']),'unique_bytes':sum(x['bytes'] for x in manifest['blobs'].values())}))
+          PY
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dic-private-source-audit-${{ github.run_id }}
+          path: source_audit_artifact/
+          if-no-files-found: error
+          retention-days: 1
