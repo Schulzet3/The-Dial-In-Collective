@@ -96,8 +96,9 @@ export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewA
   '<div class="admin-pagination"><span class="helper">'+e(range)+'</span>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(Math.max(0,offset-50))+'" '+(offset===0?'disabled':'')+'>Previous</button>'+
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(offset+50)+'" '+(offset+loaded.length>=total?'disabled':'')+'>Next</button></div>':'';
- const empty=({pending:'No pending coffee submissions.',conflicts:'No coffee conflicts.'})[kind]||'No records to show.';
- const content=error+(loaded.length?(kind==='shots'?renderAdminShotGroups(loaded,{openCoffeeGroups}):loaded.map(item=>renderAdminRecord(item,kind,{reviewActions})).join('')):
+ const empty=page.search?'No matching records.':(({pending:'No pending coffee submissions.',conflicts:'No coffee conflicts.'})[kind]||'No records to show.');
+ const content=page.loading?'<p class="helper" role="status">Loading records…</p>':
+  error+(loaded.length?(kind==='shots'?renderAdminShotGroups(loaded,{openCoffeeGroups}):loaded.map(item=>renderAdminRecord(item,kind,{reviewActions})).join('')):
   page.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>')+pagination;
  const description='<p class="helper">All records, page by page · creator and revision shown where available.</p>';
  // Pending and Conflicts already have titled outer sections containing the

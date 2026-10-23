@@ -8,7 +8,7 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill']:
+ for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill','dose-advisory']:
   folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
@@ -33,6 +33,16 @@ window.__client={
  async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
  async listCommunityReviews(){return window.__reviews||[];},async confirmCommunityOutlier(){window.__reviews=[];return {ok:true,state:'eligible'};},
  async browseCommunityShots(){return {shots:window.__communityShots||[],total:(window.__communityShots||[]).length};},
+ async searchCommunityShots({query='',style='all',limit=20,offset=0}={}){
+  if(window.__delayCommunityNext){
+   window.__delayCommunityNext=false;
+   await new Promise(resolve=>{window.__unblockCommunity=resolve;});
+   window.__unblockCommunity=null;
+  }
+  const search=String(query).toLowerCase();
+  const rows=(window.__communityShots||[]).filter(row=>(style==='all'||row.style===style)&&(!search||[row.coffee_name,row.roaster,row.release_origin,row.release_process].join(' ').toLowerCase().includes(search)));
+  return {shots:structuredClone(rows.slice(offset,offset+limit)),total:rows.length};
+ },
 
  async editCoffeeDetails(entryId,expected,data,url){
   const r=window.__raw,l=r.library.find(x=>x.id===entryId);
@@ -328,7 +338,22 @@ with sync_playwright() as p:
  page.keyboard.press('Enter')
  assert coffee.evaluate('(el)=>el.open')
  checks.append('Community coffee group is keyboard-operable without custom click handlers')
+ page.locator('#community-search-query').fill('Orinoco')
+ page.get_by_role('button',name='Search',exact=True).click()
+ page.wait_for_function("document.querySelectorAll('details.community-coffee-card').length===1")
+ assert 'Yirgacheffe' in page.locator('details.community-coffee-card').first.inner_text()
+ page.locator('[data-action=community-search-clear]').click()
+ page.wait_for_function("document.querySelectorAll('details.community-coffee-card').length===2")
+ page.evaluate('window.__delayCommunityNext=true')
+ page.locator('#community-search-query').fill('Orinoco')
+ page.get_by_role('button',name='Search',exact=True).click()
+ page.wait_for_function('typeof window.__unblockCommunity==="function"')
  page.locator('#community-style').select_option('Traditional')
+ page.evaluate('window.__unblockCommunity()')
+ page.wait_for_function("document.querySelector('.community-empty h3')?.textContent==='No matching Community shots'")
+ assert page.locator('#community-style').input_value()=='Traditional'
+ page.locator('[data-action=community-search-clear]').click()
+ page.wait_for_function("document.querySelectorAll('details.community-coffee-card').length===1")
  assert page.locator('details.community-coffee-card').count()==1
  assert 'Other' in page.locator('details.community-coffee-card').inner_text()
  page.locator('#community-style').select_option('all')
@@ -457,6 +482,26 @@ with sync_playwright() as p:
   }""")
  assert switch=={'firstRuns':1,'nextRuns':1,'clear':True},switch
  checks.append('Cross-account inflight synchronization never satisfies the next account cache refresh')
+ # Responsive regression: shot text, borders, chart and badges must fit at phone/tablet sizes.
+ for width in [320,360,375,390,430,768]:
+  page.set_viewport_size({'width':width,'height':850})
+  page.evaluate("window.__app.view='coffees';window.__app.expanded.add('coffee');window.__app.shotExpanded.add('short-b');window.__app.render()")
+  page.get_by_text('Shot History (4)',exact=True).click() if not page.locator('.shot-toggle').count() else None
+  assert page.locator('.shot-numbers').count()>0
+  detail=page.locator('.shot-numbers').first
+  assert detail.evaluate("(el)=>getComputedStyle(el).whiteSpace!=='nowrap' && getComputedStyle(el).overflowX!=='auto'")
+  assert detail.evaluate("(el)=>el.scrollWidth<=el.clientWidth+2"),f'Shot summary clipped at {width}px'
+  assert page.evaluate("document.documentElement.scrollWidth<=innerWidth+1"),f'Page overflow at {width}px'
+  assert page.locator('.shot').first.evaluate("(el)=>{const r=el.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth+1}"),f'Card border overflow at {width}px'
+  checks.append(f'{width}px: shot summary, Grind and card border fit without clipping')
+ # Enlarged text must reflow instead of showing a hidden horizontal strip.
+ page.set_viewport_size({'width':320,'height':850})
+ detail=page.locator('.shot-numbers').first
+ detail.evaluate("(el)=>el.style.fontSize='21px'")
+ assert detail.evaluate("(el)=>el.scrollWidth<=el.clientWidth+2")
+ assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+ checks.append('320px with enlarged shot text keeps the full measurement line readable')
+ page.set_viewport_size({'width':390,'height':844})
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
  assert not errors,errors;checks.append('No browser JavaScript exceptions')
  b.close()

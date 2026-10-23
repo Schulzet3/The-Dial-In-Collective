@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "release_id": "DIC-20261022-FASTFLOW-ADMIN-03",
+  "recorded_at_utc": "2026-10-22T16:38:14Z",
+  "authorized_scope": "Owner-approved seven completed app improvements, including Fast-Flow sixth style, Issue #44 comments 6343761450 and 6344707918; excludes deferred PR72/unready roadmaps",
+  "one_use_claim": {
+    "status": "CONSUMED_ONCE_VERIFIED_FROM_RELEASE_BRANCH",
+    "tested_application_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
+    "merged_source_sha": "12a03b65ed4093d610ece063a1d5a8dae8ef4895",
+    "tested_git_tree_sha": "2160c95d99474590bd7b32d20c9fed19466884de",
+    "release_git_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+    "previous_release_git_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+    "claimed_at_utc": "2026-10-22T16:35:21.195Z",
+    "controller_main_request_sha": "7611c1d9e8f35a5faf3721720528783ac55f7bdc",
+    "controller_workflow_run_id": 39815256276,
+    "controller_run_completion": "COMPLETED_SUCCESS_CONFIRMED_IN_GITHUB_ACTIONS_RUN_39815256276",
+    "single_use_replay": "PROHIBITED",
+    "controller_run_completed_at_utc": "2026-10-22T16:43:03Z",
+    "controller_single_attempt": 1
+  },
+  "netlify": {
+    "site": "the-dial-in-collective",
+    "primary_url": "https://app.dialincollective.com",
+    "deploy_id": "6ada3b5018ccdd080d3b4584",
+    "status": "READY_CURRENT_VERIFIED",
+    "context": "production",
+    "git_branch": "release/production",
+    "actual_published_git_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+    "published_at_utc": "2026-10-22T16:35:49.325Z",
+    "error_message": null,
+    "actual_credits_deducted": "UNKNOWN_NOT_EXPOSED",
+    "current_available_credits": "UNKNOWN_NOT_EXPOSED",
+    "last_authenticated_pre_release_credits": {
+      "count": 790,
+      "observed_at_utc": "2026-10-21T19:00:03.850Z",
+      "policy": "owner_managed_within_24h_controller_evidence_window",
+      "estimated_single_deploy_cost": 15
+    }
+  },
+  "database": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "postgres_version": "17.11",
+    "migration_count_before": 35,
+    "migration_count_after": 39,
+    "applied_in_source_order": [
+      {
+        "source_version": "20261022023000",
+        "source_file": "20261022023000_dic_admin_shot_coffee_group_identity.sql",
+        "applied_version": "20261022162910",
+        "name": "dic_admin_shot_coffee_group_identity"
+      },
+      {
+        "source_version": "20261022024000",
+        "source_file": "20261022024000_dic_admin_fast_review_and_identity_edits.sql",
+        "applied_version": "20261022162954",
+        "name": "dic_admin_fast_review_and_identity_edits"
+      },
+      {
+        "source_version": "20261022053000",
+        "source_file": "20261022053000_dic_first_coffee_style_prompt.sql",
+        "applied_version": "20261022163029",
+        "name": "dic_first_coffee_style_prompt"
+      },
+      {
+        "source_version": "20261022090000",
+        "source_file": "20261022090000_dic_fast_flow_hybrid_style.sql",
+        "applied_version": "20261022163126",
+        "name": "dic_fast_flow_hybrid_style"
+      }
+    ],
+    "readback": {
+      "checked_at_utc": "2026-10-22T16:38:14Z",
+      "fastflow_style_constraints_count": 7,
+      "fastflow_workspace_allowlist_updated": true,
+      "first_style_private_table_exists": true,
+      "first_style_private_table_rls_enabled": true,
+      "public_claim_rpc_authenticated_execute": true,
+      "public_claim_rpc_anon_execute": false,
+      "authenticated_private_mutate_direct_execute": false,
+      "first_style_claim_row_count": 0,
+      "shots": 22,
+      "shot_notes": 22,
+      "community_shots": 2,
+      "mutation_receipts": 44,
+      "coffee_submissions": 7,
+      "coffees": 7,
+      "auth_accounts": 5
+    },
+    "provider_migration_versions_differ_from_source_file_prefixes": true,
+    "do_not_replay_applied_sql": true
+  },
+  "edge": {
+    "dic_verify_coffee": {
+      "version": 5,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "redeployed_in_this_release": false
+    },
+    "dic_preview_coffee": {
+      "version": 3,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "redeployed_in_this_release": false
+    }
+  },
+  "backup": {
+    "run_id": 39798472050,
+    "run_attempt": 3,
+    "github_artifact_id": 12439586678,
+    "owner_private_offsite_drive_file_id": "1KIvM7R_6S-MahwIdNHPIHNxxEpo-XI32",
+    "artifact_zip_sha256": "2339845076d88a3fb5fea7a19a6725486a2b2a6af5b625da77f88ef3bb9ae258",
+    "artifact_zip_bytes": 1891389,
+    "snapshot_started_at_utc": "2026-10-22T15:58:16Z",
+    "artifact_completed_at_utc": "2026-10-22T15:58:56Z",
+    "latest_observed_auth_write_before_snapshot_utc": "2026-10-22T15:55:53.659219Z",
+    "independent_drive_download_hash_verified": true,
+    "contents": "encrypted backup.age only",
+    "exact_artifact_restore_tested": false
+  },
+  "acceptance": {
+    "source_six_required_checks": "PASS_GITHUB_CI_ON_TESTED_SHA",
+    "netlify_publication": "VERIFIED_READY_AND_CURRENT",
+    "backend_function_and_record_counts": "VERIFIED_READ_ONLY",
+    "actual_signed_in_owner_device": "PENDING",
+    "accessibility_and_offline_edge_cases": "PENDING_NOT_INFERRED_FROM_CI",
+    "direct_public_http_smoke": "NOT_CONFIRMED_BY_PROVIDER_READY_ONLY",
+    "native_release_controller": "COMPLETED_SUCCESS_GITHUB_ACTIONS_EXACT_REQUEST_ONCE"
+  },
+  "residual_risks": [
+    "Private GitHub Free advisory CI/unenforced required checks and direct push bypass exposure",
+    "Netlify live billing balance/actual debit not readable in connected API",
+    "Exact new backup archive was not actually restored or decrypted",
+    "Real authenticated owner device acceptance pending"
+  ],
+  "github_evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/44#issuecomment-6345988823",
+  "future_release_requires_fresh_approval": true
+}

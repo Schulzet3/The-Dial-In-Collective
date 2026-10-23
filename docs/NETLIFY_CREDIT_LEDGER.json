@@ -2,7 +2,7 @@
   "product": "The Dial In Collective",
   "provider": "Netlify",
   "account_plan": "Personal (paid through current billing period; downgrade to Free scheduled)",
-  "accounting_note": "Current READY Netlify production deploy 6ad968689f42fbe8e871e151 / eee687dd4d7fc19493139bc106e63c16849ac91d published 2026-10-22T01:36:01.787Z; planned cost 15 credits, actual debit and current remaining UNKNOWN. Last observed 790 Personal credits at 2026-10-21T19:00:03.850Z; no credit purchase. One-use ALL-PENDING-02 consumed; owner-device acceptance pending. Historical notes/snapshots preserved.",
+  "accounting_note": "As of 2026-10-22 16:35:49.325Z, Netlify production READY/current deploy 6ada3b5018ccdd080d3b4584 release SHA fe2eee66717b13b9c9d203d1728bfc863961732e under one-time DIC-20261022-FASTFLOW-ADMIN-03. Estimated 15 Personal credits, actual debit/current remaining UNKNOWN (provider billing not exposed). Last authenticated Netlify Personal 790 credits on 2026-10-21T19:00:03.850Z is historical pre-release. No purchase or recharge. Real owner/device acceptance pending. Previous records preserved in historical_published_release_records.",
   "monthly_included_credits": 1000,
   "production_deploy_credits_each": 15,
   "snapshots": [
@@ -89,21 +89,16 @@
   ],
   "release_policy": {
     "approved_owner_preview_branch": "development/backend-foundation",
-    "production_deploy_minimum_balance": 15,
-    "maximum_snapshot_age_days": 7,
     "must_pass_tests_before_release": true,
     "release_marker": "Release DIC: ... [dic-publish]",
-    "budget_rule": "One fully tested deliberate release per individually approved bundle. Current deployable Personal plan credits are owner-monitored, not the separate operational allowance. Known insufficiency below 15 credits, credit data tampering, or an expired known grant blocks publishing. Never infer current billing from a dated screenshot. Keep user-authorized publish marker; no automatic source/docs or preview deployment. No plan purchases, unapproved recharge, weakening beta SSO, access, data privacy or recovery controls.",
-    "manual_refresh_required": "Owner assumes monitoring of Netlify credits and promises to alert when low; do not ask for routine screenshots or require a new billing read for each release during the current unexpired credit grant. After a known plan-grant expiration, verify that the applicable plan and credit availability are still valid, with the owner's consent. The plugin does not expose live credits.",
     "credits_on_free_plan_are_hard_limit": true,
     "purchase_permission": "No plan upgrades, manual credit purchases or automatic recharges without separate explicit owner approval.",
     "no_unattended_paid_topups": true,
-    "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
     "post_release_billing_refresh_needed": false,
     "last_published_release": {
-      "deploy_id": "6ad968689f42fbe8e871e151",
-      "published_commit_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
-      "published_at_utc": "2026-10-22T01:36:01.787Z",
+      "deploy_id": "6ada3b5018ccdd080d3b4584",
+      "published_commit_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+      "published_at_utc": "2026-10-22T16:35:49.325Z",
       "netlify_status": "ready/current",
       "branch": "release/production",
       "context": "production",
@@ -116,44 +111,40 @@
         "coffee-url-preview"
       ],
       "planned_cost_credits": 15,
-      "actual_credits_deducted": "UNKNOWN: provider deployment receipt does not expose actual Netlify billing debit",
-      "current_remaining_credits": "UNKNOWN: 790 Personal last observed 2026-10-21T19:00:03.850Z before this release, not a current postrelease balance",
+      "actual_credits_deducted": "UNKNOWN: Netlify plugin does not return actual billing",
+      "current_remaining_credits": "UNKNOWN: last authenticated owner observation 790 on 2026-10-21T19:00:03.850Z, NOT live postflight",
       "approval_exhausted": true,
-      "release_id": "DIC-20261021-ALL-PENDING-02",
-      "tested_application_source_sha": "7df3deb4a271a6eb041c125574cd15ec455f6128",
-      "release_scope": "One owner-authorized exact-tested-source frontend release following approved source-worker/admin-content SQL and JWT coffee verifier v5",
+      "release_id": "DIC-20261022-FASTFLOW-ADMIN-03",
+      "tested_application_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
+      "release_scope": "Seven merged owner-approved completed features including Fast-Flow and Admin enhancements, four coordinated already applied forward-only SQL migrations; no pending extractor or dormant private Hide Shot retirement",
       "supabase_migrations_applied": [
-        "20261021165214 dic_admin_coffee_review",
-        "20261021165302 dic_duplicate_first_auto_approval",
-        "20261022013337 dic_source_worker_auth_and_admission",
-        "20261022013349 dic_admin_content_review"
+        "20261022162910 dic_admin_shot_coffee_group_identity",
+        "20261022162954 dic_admin_fast_review_and_identity_edits",
+        "20261022163029 dic_first_coffee_style_prompt",
+        "20261022163126 dic_fast_flow_hybrid_style"
       ],
       "member_data_mutations": 0,
-      "owner_installed_pwa_acceptance": "UNVERIFIED: Netlify READY does not establish owner-device acceptance",
-      "release_receipt": "docs/PRODUCTION_RELEASE_2026-10-21_ALL_PENDING_VERIFIED.json",
-      "private_encrypted_backup_verified_sha256": "3a4a5da9635013e10d71df5ccc1a96aa557a64f4f70721128cddfbd77e5d87c6",
+      "owner_installed_pwa_acceptance": "NOT_VERIFIED_REAL_DEVICE",
+      "release_receipt": "docs/PRODUCTION_RELEASE_2026-10-22_FASTFLOW_ADMIN_VERIFIED.json",
+      "private_encrypted_backup_verified_sha256": "2339845076d88a3fb5fea7a19a6725486a2b2a6af5b625da77f88ef3bb9ae258",
       "exact_ciphertext_restore_tested": false,
       "actual_live_data_counts": {
         "shots": 22,
         "shot_notes": 22,
-        "coffees": 4,
+        "coffees": 7,
         "coffee_submissions": 7,
-        "beta_members": 5
+        "beta_members": 5,
+        "community_shots": 2,
+        "mutation_receipts": 44
       },
-      "native_chat_controller_transport": "SUCCESS: official ops GitHub Actions run 39706556610, non-force final push; no guarantee for future runs",
-      "next_release_approval": "REQUIRED: ALL-PENDING-02 consumed"
+      "native_chat_controller_transport": "SUCCESS: official GitHub Actions run 39815256276 completed on one attempt, source-bound single-use claim; GitHub release SHA and Netlify READY independently verified; actual billing still UNKNOWN",
+      "next_release_approval": "REQUIRED: DIC-20261022-FASTFLOW-ADMIN-03 consumed",
+      "owner_private_backup_drive_file_id": "1KIvM7R_6S-MahwIdNHPIHNxxEpo-XI32"
     },
-    "owner_waived_balance_check_for_this_release": {
-      "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
-      "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
-      "verified_billing_balance": "Not measured"
-    },
-    "credit_monitoring_mode": "owner_managed",
+    "credit_monitoring_mode": "owner_only_no_gates",
     "owner_monitoring_approval": "OPS-CREDIT-OWNER-MONITORING-20261017-01",
     "explicit_publish_approval_per_release": true,
     "owner_release_approval": "OPS-PER-RELEASE-OWNER-APPROVAL-20261017-01",
-    "maximum_snapshot_age_days_scope": "Historical operator-verified model only. Owner-managed mode waives repeated seven-day screenshot requests through the current grant expiration while retaining 15-credit and explicit publication permission.",
-    "current_known_plan_expires": "2026-11-14",
     "owner_assumes_proactive_low_credit_notice": true,
     "last_individually_authorized_release": {
       "scope": "Limited invitation-only technical pilot; two migration SQL files and one production Netlify publish",
@@ -412,7 +403,10 @@
       "encrypted_backup_artifact_id": 12292356358,
       "encrypted_backup_size_bytes": 1180698,
       "postrelease_offsite_delivery": "UNVERIFIED: push run excluded from Drive courier; next scheduled delivery not independently observed"
-    }
+    },
+    "owner_no_checks_effective": "2026-10-22",
+    "owner_credit_decision_id": "OPS-NETLIFY-CREDITS-OWNER-ONLY-NO-GATES-20261022",
+    "owner_credit_instruction": "No assistant/CI/build/preflight credit balance, plan expiration, budget amount, ledger receipt, screenshot or minimum available credits. Only owner monitors. Preserve explicit one-release approval and no purchase/top-up."
   },
   "reconciliation": "Live Netlify current READY 6ad5030aaae6cba42933a800 from d54f84103285cfb0185e1d806efe9e8c6064b72d on 2026-10-18 17:34 UTC; only a tested mandatory outlier retry UI hotfix released. Netlify visitor access unchanged, 212 files/zero secrets. Supabase migrations, Edge functions and member history unchanged. Latest backup-only main recovery source pin 24cf8be2a8b8332bac75ba87d7d745152d7a7e22; encrypted GitHub backup 39150331467 SUCCESS. Historical previous release data is preserved separately.",
   "scheduled_plan_change": {
@@ -645,5 +639,68 @@
       "previous_note": "Latest Netlify production READY/current 6ad5197d42cc6608b98712a4 from 415136c3a31d67f97b9ec53cb96b5b057eb704fe published 2026-10-18 19:10 UTC under one explicitly approved PWA release; planned charge 15 Personal credits, actual charge and current balance unavailable through connector. Last owner-provided 940/1000 was October 17 (historical), current grant through 2026-11-14. Owner monitors and notifies on low credits, no purchases or recharge; approval consumed. Post-release encrypted GitHub backup 39157642936 succeeded; push-only offsite courier receipt unverified.",
       "note_was_current_as_of": "2026-10-18; preserved verbatim"
     }
-  ]
+  ],
+  "historical_published_release_records": [
+    {
+      "deploy_id": "6ad968689f42fbe8e871e151",
+      "published_commit_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+      "published_at_utc": "2026-10-22T01:36:01.787Z",
+      "netlify_status": "ready/current",
+      "branch": "release/production",
+      "context": "production",
+      "primary_hostname": "https://app.dialincollective.com",
+      "production_requires_netlify_team_sso": false,
+      "nonproduction_requires_netlify_team_sso": true,
+      "scanned_files": 377,
+      "secret_scan_matches": 0,
+      "published_functions": [
+        "coffee-url-preview"
+      ],
+      "planned_cost_credits": 15,
+      "actual_credits_deducted": "UNKNOWN: provider deployment receipt does not expose actual Netlify billing debit",
+      "current_remaining_credits": "UNKNOWN: 790 Personal last observed 2026-10-21T19:00:03.850Z before this release, not a current postrelease balance",
+      "approval_exhausted": true,
+      "release_id": "DIC-20261021-ALL-PENDING-02",
+      "tested_application_source_sha": "7df3deb4a271a6eb041c125574cd15ec455f6128",
+      "release_scope": "One owner-authorized exact-tested-source frontend release following approved source-worker/admin-content SQL and JWT coffee verifier v5",
+      "supabase_migrations_applied": [
+        "20261021165214 dic_admin_coffee_review",
+        "20261021165302 dic_duplicate_first_auto_approval",
+        "20261022013337 dic_source_worker_auth_and_admission",
+        "20261022013349 dic_admin_content_review"
+      ],
+      "member_data_mutations": 0,
+      "owner_installed_pwa_acceptance": "UNVERIFIED: Netlify READY does not establish owner-device acceptance",
+      "release_receipt": "docs/PRODUCTION_RELEASE_2026-10-21_ALL_PENDING_VERIFIED.json",
+      "private_encrypted_backup_verified_sha256": "3a4a5da9635013e10d71df5ccc1a96aa557a64f4f70721128cddfbd77e5d87c6",
+      "exact_ciphertext_restore_tested": false,
+      "actual_live_data_counts": {
+        "shots": 22,
+        "shot_notes": 22,
+        "coffees": 4,
+        "coffee_submissions": 7,
+        "beta_members": 5
+      },
+      "native_chat_controller_transport": "SUCCESS: official ops GitHub Actions run 39706556610, non-force final push; no guarantee for future runs",
+      "next_release_approval": "REQUIRED: ALL-PENDING-02 consumed"
+    }
+  ],
+  "historical_netlify_credit_gates_superseded_20261022": {
+    "source": "Owner direct instruction 2026-10-22; Issue #70 comment 6348177131",
+    "old_rules": {
+      "production_deploy_minimum_balance": 15,
+      "maximum_snapshot_age_days": 7,
+      "budget_rule": "One fully tested deliberate release per individually approved bundle. Current deployable Personal plan credits are owner-monitored, not the separate operational allowance. Known insufficiency below 15 credits, credit data tampering, or an expired known grant blocks publishing. Never infer current billing from a dated screenshot. Keep user-authorized publish marker; no automatic source/docs or preview deployment. No plan purchases, unapproved recharge, weakening beta SSO, access, data privacy or recovery controls.",
+      "manual_refresh_required": "Owner assumes monitoring of Netlify credits and promises to alert when low; do not ask for routine screenshots or require a new billing read for each release during the current unexpired credit grant. After a known plan-grant expiration, verify that the applicable plan and credit availability are still valid, with the owner's consent. The plugin does not expose live credits.",
+      "after_downgrade": "Re-verify balance and actual Free plan allowance; preserve release marker and a fresh, conservative 15-credit minimum.",
+      "maximum_snapshot_age_days_scope": "Historical operator-verified model only. Owner-managed mode waives repeated seven-day screenshot requests through the current grant expiration while retaining 15-credit and explicit publication permission.",
+      "current_known_plan_expires": "2026-11-14",
+      "owner_waived_balance_check_for_this_release": {
+        "scoped_commit": "f08dfda99f46b25240cb8cc35c46d2c3c76344b8",
+        "decision": "Owner explicitly confirmed sufficient credits and requested immediate publication without a new remaining balance check; this does not waive future credit controls",
+        "verified_billing_balance": "Not measured"
+      }
+    },
+    "note": "Retained solely to preserve previously Locked historical operator requirements; never apply to future release."
+  }
 }

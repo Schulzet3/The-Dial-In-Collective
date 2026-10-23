@@ -5,13 +5,14 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 const work='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
+const scopedWork=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+|release-[0-9]{8})\.md$/;
 export function auditLatestCommit({paths,subject}){
  const errors=[],items=[...new Set(paths.map(s=>s.trim()).filter(Boolean))];
  const marker=/^Release DIC: .+ \[dic-publish\]$/.test(subject||'');
  if(!marker&&!String(subject||'').includes('[skip netlify]'))
   errors.push('Unmarked commit: use [skip netlify] for nonrelease work; [dic-publish] requires its own owner-approved release');
  const code=items.filter(p=>/^(site\/|src\/|netlify\/functions\/|supabase\/|scripts\/|tests\/|\.github\/(?:workflows|actions)\/|build_cloud\.mjs$|eslint\.config\.mjs$|netlify\.toml$|package(?:-lock)?\.json$)/.test(p));
- if(code.length&&!items.includes(work))
+ if(code.length&&!items.includes(work)&&!items.some(p=>scopedWork.test(p)))
   errors.push('Code/CI change lacks SAME-COMMIT real-time GitHub work journal: '+code.slice(0,8).join(', '));
  if(marker&&code.length)
   errors.push('Release marker commit must only contain reviewed documentation/authorization, not last-second code');

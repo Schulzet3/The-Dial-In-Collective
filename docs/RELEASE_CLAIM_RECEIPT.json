@@ -1,9 +1,129 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261022-FASTFLOW-ADMIN-03",
-  "tested_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
-  "previous_release_head_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
-  "claimed_at_utc": "2026-10-22T16:35:21.195Z",
+  "release_id": "DIC-20261022-READY-QUEUE-04",
+  "tested_source_sha": "7156f0d3f1b960775c9256e7fcf92e0b89be8cc6",
+  "previous_release_head_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+  "claimed_at_utc": "2026-10-23T01:48:25.969Z",
   "status": "GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK",
-  "granted_single_publication": true
+  "granted_single_publication": true,
+  "approved_ready_queue_items": [
+    {
+      "id": "DIC-Q-78",
+      "issue": 78,
+      "title": "Fix iPhone text clipping and responsive Shot History layout",
+      "merged_source_sha": "1c3f1c51b9933669fe957fe24d4d65c77c95457e",
+      "scope_paths": [
+        "site/visual.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-44-credit-gate",
+      "issue": 44,
+      "title": "Retire mandatory Netlify credit checks and owner-manage credit monitoring",
+      "merged_source_sha": "b7778e84a051a9aabeca0aec38736c728b851f36",
+      "scope_paths": [
+        "netlify.toml",
+        "scripts/netlify/should-ignore-build.mjs",
+        "scripts/audit/approval-coverage.mjs",
+        "scripts/release/one-use-claim.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-80",
+      "issue": 80,
+      "title": "2026-10-22 owner-approved UX, sync, Admin, extractor and code-quality refinements",
+      "merged_source_sha": "8c19b44065a246dc1f201c6a99a0fd07a0ee4fa7",
+      "scope_paths": [
+        "netlify/functions/coffee-url-preview.mjs",
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/cloud/community.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-basket-signout",
+      "issue": 80,
+      "title": "New-shot >2 g dismissible warning and owner-safe sign-out with unsynced work",
+      "merged_source_sha": "96939870d2ad6112cd6b07b07b02b0e43b7a10ab",
+      "scope_paths": [
+        "build_cloud.mjs",
+        "site/cloud/dose-advisory.js",
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-polling",
+      "issue": 80,
+      "title": "Reduce background full-state reads while preserving 30-second admission/revocation checks",
+      "merged_source_sha": "0e87b1c23c4493bef428311c918ab5b5df421625",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-outbox",
+      "issue": 80,
+      "title": "Continue independent queued shot and preference saves past validation conflicts",
+      "merged_source_sha": "7ce3ecd587c0b9b6c14782d56feb93c3dccb46a6",
+      "scope_paths": [
+        "site/cloud/outbox.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-admin-lazy",
+      "issue": 80,
+      "title": "Fetch Admin records and account listings only for expanded sections",
+      "merged_source_sha": "2af816e2800f3630b29ffa2000fdafb564affb59",
+      "scope_paths": [
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/admin/records.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-admin-search",
+      "issue": 80,
+      "title": "Server-side Admin record search and filtered 50-row pagination",
+      "merged_source_sha": "d3ad52feb3869b55dabf2148e2b1fbf180553d01",
+      "scope_paths": [
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/admin/records.js",
+        "supabase/migrations/20261022220000_dic_admin_server_search.sql",
+        "site/admin/styles.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-community-search",
+      "issue": 80,
+      "title": "Server-side Community coffee and style search with stable filtered paging",
+      "merged_source_sha": "ede403a0660b273a84c24d32b8137bd045c4e133",
+      "scope_paths": [
+        "site/cloud/client.js",
+        "site/cloud/main.js",
+        "site/cloud/community.js",
+        "supabase/migrations/20261022220100_dic_community_server_search.sql",
+        "site/styles.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-extractor-cache-quota",
+      "issue": 80,
+      "title": "Verified exact-URL and warm public-preview reuse; transient-retrieval quota correctness",
+      "merged_source_sha": "ede403a0660b273a84c24d32b8137bd045c4e133",
+      "scope_paths": [
+        "netlify/functions/coffee-url-preview.mjs",
+        "supabase/migrations/20261022220200_dic_preview_two_phase_cache.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-80-netlify-test-reuse",
+      "issue": 80,
+      "title": "Skip a second full Node suite during exact-source production publication",
+      "merged_source_sha": "05dda786a729e1f65252449754f361a88f119b36",
+      "scope_paths": [
+        "netlify.toml"
+      ]
+    }
+  ]
 }

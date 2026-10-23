@@ -29,6 +29,11 @@ jobs:
           node-version: '22'
       - name: Fail on missing owner decisions or approved UI/source tests
         run: node scripts/audit/approval-coverage.mjs
+      - name: Validate durable queue schema and show next-batch status (never publishes)
+        run: |
+          node scripts/release/release-queue.mjs --validate
+          node scripts/release/release-queue.mjs --enforce-intake
+          node scripts/release/release-queue.mjs --status
       - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
         env:
           DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}

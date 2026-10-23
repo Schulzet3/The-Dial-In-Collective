@@ -5,6 +5,7 @@ import {hydrate} from '../site/cloud/mapping.js';
 import * as E from '../site/lib/engine.js';
 import * as M from '../site/lib/model.js';
 import {recipeGrid} from '../site/lib/ui.js';
+import {basketDoseAdvisory} from '../site/cloud/dose-advisory.js';
 
 let form;
 const reference={innerHTML:''};
@@ -131,36 +132,31 @@ test('matching new-shot dose does not warn when the workspace basket differs',as
  assert.equal(matching.writes[0].payload.basket_version_id,'draft-basket');
  assert.equal(matching.writes[0].payload.dose_g,22);
 });
-test('new-shot dose outside the draft basket warns even when it matches the workspace basket',async()=>{
- const outside=await submitDose({dose:18,confirm:false});
- assert.equal(outside.warnings.length,1,'18 g is outside the draft basket even though it matches the workspace choice');
- assert.match(outside.warnings[0],/22\.0 g reference/);
- assert.equal(outside.writes.length,0,'declining the warning preserves the draft without submitting');
- assert.equal(outside.app.draft.basketId,'draft-basket');
+test('new shot more than 2 g from selected basket provides nonblocking guidance',async()=>{
+ const result=await submitDose({dose:18,confirm:false});
+ assert.equal(result.warnings.length,0,'basket advice may not invoke blocking confirm');
+ assert.equal(result.writes.length,1,'shot must still save');
+ assert.match(basketDoseAdvisory(18,22),/22[.]0 g reference/);
+ assert.equal(result.app.draft.basketId,'draft-basket');
 });
-test('draft basket dose confirmation retains the strict greater-than-one-gram boundary',async()=>{
- for(const dose of [21,23]){
-  const result=await submitDose({dose});
-  assert.equal(result.warnings.length,0,`${dose} g differs by exactly 1 g`);
-  assert.equal(result.writes.length,1);
+test('exactly two grams is within tolerance and over two is advisory',async()=>{
+ for(const dose of [20,21,22,23,24]){
+  assert.equal(basketDoseAdvisory(dose,22),null);
+  const r=await submitDose({dose,confirm:false});
+  assert.equal(r.warnings.length,0);assert.equal(r.writes.length,1);
  }
- for(const dose of [20.9,23.1]){
-  const result=await submitDose({dose});
-  assert.equal(result.warnings.length,1,`${dose} g differs by more than 1 g`);
-  assert.match(result.warnings[0],/22\.0 g reference/);
-  assert.equal(result.writes.length,1,'accepting the advisory permits submission');
+ for(const dose of [19.9,24.1]){
+  assert.match(basketDoseAdvisory(dose,22),/more than 2 g/);
+  const r=await submitDose({dose,confirm:false});
+  assert.equal(r.warnings.length,0);assert.equal(r.writes.length,1);
  }
 });
-test('edited-shot dose confirmation still uses the historical snapshot, not either current basket',async()=>{
- for(const dose of [19,20,21]){
-  const result=await submitDose({dose,editing:true});
-  assert.equal(result.warnings.length,0,`${dose} g is within 1 g of the original 20 g snapshot`);
-  assert.equal(result.writes.length,1);
-  assert.equal(result.writes[0].payload.expected_revision,7);
-  assert.equal('basket_version_id' in result.writes[0].payload,false,'editing does not rewrite historical basket identity');
+test('editing historical shots never repeats basket advice or changes historical basket identity',async()=>{
+ for(const dose of [17,18,20,22,27]){
+  assert.equal(basketDoseAdvisory(dose,20,{editing:true}),null);
+  const r=await submitDose({dose,editing:true,confirm:false});
+  assert.equal(r.warnings.length,0);assert.equal(r.writes.length,1);
+  assert.equal(r.writes[0].payload.expected_revision,7);
+  assert.equal('basket_version_id' in r.writes[0].payload,false);
  }
- const outside=await submitDose({dose:22,editing:true,confirm:false});
- assert.equal(outside.warnings.length,1,'a 22 g draft basket cannot replace the original 20 g snapshot');
- assert.match(outside.warnings[0],/20\.0 g reference/);
- assert.equal(outside.writes.length,0);
 });

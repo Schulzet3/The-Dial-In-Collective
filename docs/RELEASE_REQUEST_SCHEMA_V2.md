@@ -1,3 +1,6 @@
+# HISTORICAL SCHEMA V2 — SUPERSEDED ON 2026-10-22
+**Do not use this document or schema-v2 example for new release requests.** Future requests require schema v4 at `docs/RELEASE_REQUEST_SCHEMA_V4.md`, which contains NO credit evidence, budget check, minimum balance or owner screenshot requirement. Owner alone monitors Netlify credits. Original historical schema-v2 instructions below are preserved for audit/history; they do not override the current owner-Locked decision. No publication by this edit.
+
 # Release request schema 2: backup snapshot coverage
 
 Schema 2 applies to new release requests after the operations audit. Previously

@@ -6,18 +6,23 @@ applyAppearance(readAppearance(),{remember:false});
 import {renderAdminDashboard,renderAdminDenied} from './view.js';
 
 const root=document.querySelector('#admin-root');
+const RECORD_KINDS=['pending','conflicts','approved','shots','accounts','invites'];
+const kindsForSection=kind=>kind==='accounts'?['accounts','invites']:RECORD_KINDS.includes(kind)?[kind]:[];
 const notice=message=>`<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header><section class="admin-panel admin-empty"><h1>Admin Dashboard Unavailable</h1><p>${e(message)}</p></section>`;
 async function start(){
  let invalidated=false;
  let issued=null; // generated code exists only in live tab memory
  let busy=false;
+ let pendingSectionRefresh=false;
  let mergeChoices=Object.create(null);
- let recordPages=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map(k=>[k,0]));
+ let recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));
+ let searchText='';
  let records={};
+ let access=null;
  const openSections=new Set();
  const openCoffeeGroups=new Set();
  const invalidate=message=>{
-  issued=null;mergeChoices=Object.create(null);records={};invalidated=true;root.innerHTML=renderAdminDenied(message);
+  issued=null;mergeChoices=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
  try {
   secureOrigin();
@@ -62,16 +67,28 @@ async function start(){
 
    const trigger=root.querySelector('#admin-refresh');if(trigger)trigger.disabled=true;
    try{
-    const [dashboard,access,...pages]=await Promise.all([
-    adminRpc('dic_admin_dashboard'),adminRpc('dic_admin_access_overview'),
-    ...['pending','conflicts','approved','shots','accounts','invites'].map(async kind=>{
-     try{return await adminRpc('dic_admin_records',{p_kind:kind,p_offset:recordPages[kind],p_limit:50});}
-     catch(error){if(isAccessDenied(error))throw error;return {items:[],total:0,offset:0,error:'Detailed listing is temporarily unavailable.'};}
-    })
-   ]);
-   records=Object.fromEntries(['pending','conflicts','approved','shots','accounts','invites'].map((kind,i)=>[kind,pages[i]]));
-   if(invalidated)return;
-   root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups});
+    // The summary is always current; private listings are loaded only for
+    // operator-expanded sections. Accounts/Invites share one disclosure.
+    const kinds=[...new Set([...openSections].flatMap(kindsForSection))];
+    const loadAccess=openSections.has('accounts');
+    const [dashboard,nextAccess,...pages]=await Promise.all([
+     adminRpc('dic_admin_dashboard'),
+     loadAccess?(searchText?Promise.resolve({members:[],invites:[],members_total:0,invites_total:0}):adminRpc('dic_admin_access_overview')):Promise.resolve(null),
+     ...kinds.map(async kind=>{
+      try{
+       const args={p_kind:kind,p_offset:recordPages[kind],p_limit:50};
+       if(searchText)args.p_query=searchText;
+       const result=await adminRpc(searchText?'dic_admin_search_records':'dic_admin_records',args);
+       return {...result,search:!!searchText};
+      }
+      catch(error){if(isAccessDenied(error))throw error;return {items:[],total:0,offset:recordPages[kind],error:'Detailed listing is temporarily unavailable.'};}
+     })
+    ]);
+    if(invalidated)return;
+    // No stale hidden-page totals override the fresh dashboard count.
+    records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
+    access=loadAccess?nextAccess:null;
+    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -85,7 +102,18 @@ async function start(){
    busy=true;
    try{await action();}
    catch(err){actionMessage(err.message||'The administrator action failed.');}
-   finally{busy=false;}
+   finally{
+    busy=false;
+    if(pendingSectionRefresh&&!invalidated){
+     pendingSectionRefresh=false;
+     guarded(()=>refresh());
+    }
+   }
+  }
+  function requestSectionRefresh(){
+   if(invalidated)return;
+   if(busy){pendingSectionRefresh=true;return;}
+   guarded(()=>refresh());
   }
   // Preserve operator disclosure state during re-render; toggle requires capture.
   root.addEventListener?.('toggle',event=>{
@@ -95,12 +123,25 @@ async function start(){
     else openCoffeeGroups.delete(details.dataset.adminCoffee);
     return;
    }
-   if(!details?.matches?.('details[data-admin-section]'))return;
-   if(details.open)openSections.add(details.dataset.adminSection);
-   else openSections.delete(details.dataset.adminSection);
+   if(!details?.matches?.('details[data-admin-section]')||!root.contains(details))return;
+   const kind=details.dataset.adminSection;
+   if(details.open){
+    const newOpen=!openSections.has(kind);
+    openSections.add(kind);
+    if(newOpen&&kindsForSection(kind).length)requestSectionRefresh();
+   }else openSections.delete(kind);
   },true);
   // Delegate actions from stable root, which survives refresh renders.
   root.addEventListener?.('submit',event=>{
+   if(event.target?.id==='admin-search-form'){
+    event.preventDefault();
+    const term=String(event.target.elements?.namedItem?.('query')?.value||'').trim();
+    if(term.length>80){actionMessage('Search must be 80 characters or fewer.');return;}
+    guarded(async()=>{
+     searchText=term;recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));
+     await refresh();
+    });return;
+   }
    if(event.target?.matches?.('[data-record-form]')){
     event.preventDefault();
     guarded(async()=>{
@@ -133,7 +174,10 @@ async function start(){
     const section=root.querySelector('#'+card.getAttribute('href').slice(1));
     const disclosure=section?.querySelector?.('details[data-admin-section]');
     if(disclosure){
-     event.preventDefault();disclosure.open=true;openSections.add(disclosure.dataset.adminSection);
+     event.preventDefault();
+     const newOpen=!disclosure.open;
+     disclosure.open=true;openSections.add(disclosure.dataset.adminSection);
+     if(newOpen)requestSectionRefresh();
      disclosure.querySelector('summary')?.focus?.({preventScroll:true});
      section.scrollIntoView?.({block:'start'});
     }
@@ -142,9 +186,12 @@ async function start(){
    const button=event.target?.closest?.('[data-action],#admin-refresh');
    if(!button)return;
    const action=button.dataset.action||'refresh';
+   if(action==='admin-search-clear'){
+    guarded(async()=>{searchText='';recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));await refresh();});return;
+   }
    if(action==='record-page'){
     const kind=button.dataset.kind,offset=Number(button.dataset.offset);
-    if(!['pending','conflicts','approved','shots','accounts','invites'].includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
+    if(!RECORD_KINDS.includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
     guarded(async()=>{recordPages[kind]=offset;const target=['accounts','invites'].includes(kind)?'accounts':kind;openSections.add(target);await refresh();root.querySelector('#admin-'+target)?.scrollIntoView?.({block:'start'});});return;
    }
    if(action==='edit-toggle'){

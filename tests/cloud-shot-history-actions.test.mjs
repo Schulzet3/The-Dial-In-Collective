@@ -54,3 +54,21 @@ test('legacy already-queued hide mutation remains account isolated and conflict 
  assert.equal((await outbox.flush()).state,'conflict');
  assert.equal(sent,1,'conflicted mutation must not silently repeat');
 });
+test('mobile Shot History summary wraps rather than clipping Grind and keeps the card readable',()=>{
+ const css=readFileSync(new URL('../site/visual.css',import.meta.url),'utf8');
+ const card=shotCard({...sampleShot,grindSetting:1,tempC:89},{expanded:true,activeVersionId:'version'});
+ assert.match(card,/Grind 1\.0/);
+ assert.match(card,/class="shot-numbers"/);
+ assert.match(card,/class="shot-record-context"/);
+ assert.match(css,/\.shot-numbers\{[^}]*overflow:visible;white-space:normal;overflow-wrap:anywhere/);
+ assert.match(css,/\.shot-topline\{display:grid;grid-template-columns:minmax\(0,1fr\)/);
+ assert.match(css,/\.shot-body \.taste-chip\{[^}]*max-width:100%;white-space:normal/);
+ assert.match(css,/\.shot-body \.radar\{[^}]*max-width:100%/);
+});
+
+test('shot history summary preserves desktop one-row date while narrow cards can wrap',()=>{
+ const css=readFileSync(new URL('../site/visual.css',import.meta.url),'utf8');
+ assert.match(css,/@media\(min-width:700px\)\{\s*\.shot-topline\{grid-template-columns:minmax\(0,1fr\) auto;align-items:baseline/);
+ assert.match(css,/\.shot-topline \.shot-date\{justify-self:end;white-space:nowrap/);
+ assert.match(css,/\.shot-numbers\{[^}]*overflow:visible;white-space:normal/);
+});

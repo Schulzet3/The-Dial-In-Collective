@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {Outbox} from '../site/cloud/outbox.js';
+import {Outbox,independentMutations} from '../site/cloud/outbox.js';
 import {patchAcknowledgement} from '../site/cloud/cache.js';
 import {CloudError,createCloudClient,secureOrigin,validateNewPassword} from '../site/cloud/client.js';
 import {hydrate,applyPending,shotPayload} from '../site/cloud/mapping.js';
@@ -23,6 +23,52 @@ test('outbox persists before making network call',async()=>{const f=queueFixture
 test('same timestamp queue stays in insertion order',async()=>{const f=queueFixture();for(let i=0;i<12;i++)await f.q.enqueue('save_shot',{n:i});await f.q.flush();assert.deepEqual(f.calls.map(x=>x.payload.n),Array.from({length:12},(_,i)=>i));});
 test('lost response retains exact event for idempotent retry',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{n:1});let once=true;const seen=[];f.remote.mutate=async e=>{seen.push(structuredClone(e));if(once){once=false;throw Error('offline');}return {ok:true};};assert.equal((await f.q.flush()).state,'offline');await f.q.flush();assert.deepEqual(seen[0],seen[1]);});
 test('conflicts are retained and block later writes',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{});await f.q.enqueue('save_shot',{});f.remote.mutate=async()=>({ok:false,code:'conflict',revision:4});assert.equal((await f.q.flush()).state,'conflict');assert.equal(f.store.events.length,2);assert.equal(f.store.events.find(x=>x.id==='1').status,'conflict');});
+test('a rejected shot does not block a different, fully identified offline shot',async()=>{
+ const f=queueFixture();
+ const shot=id=>({id,setup_version_id:'version-1',library_entry_id:'coffee-1'});
+ await f.q.enqueue('save_shot',shot('shot-a'));
+ await f.q.enqueue('save_shot',shot('shot-b'));
+ f.remote.mutate=async event=>{f.calls.push(event);return event.payload.id==='shot-a'?{ok:false,code:'conflict'}:{ok:true};};
+ const first=await f.q.flush();
+ assert.equal(first.state,'conflict');assert.equal(first.sent,1);
+ assert.deepEqual(f.calls.map(e=>e.payload.id),['shot-a','shot-b']);
+ assert.deepEqual(f.store.events.map(e=>e.payload.id),['shot-a']);
+ await f.q.flush();
+ assert.deepEqual(f.calls.map(e=>e.payload.id),['shot-a','shot-b'],'no held mutation or settled shot is replayed');
+});
+test('a rejected shot does not block unrelated preference change but unknown dependencies stay put',async()=>{
+ const f=queueFixture();
+ await f.q.enqueue('save_shot',{id:'bad',setup_version_id:'v',library_entry_id:'c'});
+ await f.q.enqueue('save_preferences',{theme:'dark',expected_revision:2});
+ await f.q.enqueue('make_current',{shot_id:'bad',expected_revision:2});
+ f.remote.mutate=async e=>{f.calls.push(e);return e.action==='save_shot'?{ok:false,code:'conflict'}:{ok:true};};
+ const result=await f.q.flush();
+ assert.equal(result.state,'conflict');assert.equal(result.sent,1);
+ assert.deepEqual(f.calls.map(e=>e.action),['save_shot','save_preferences']);
+ assert.equal(f.store.events.length,2,'held shot and dependent make_current stay durable');
+});
+test('held authorization denial never lets later independent operations proceed',async()=>{
+ const f=queueFixture();
+ await f.q.enqueue('save_shot',{id:'blocked',setup_version_id:'v',library_entry_id:'c'});
+ await f.q.enqueue('save_shot',{id:'later',setup_version_id:'v',library_entry_id:'c'});
+ let calls=0;
+ f.remote.mutate=async()=>{calls++;throw new CloudError('Forbidden','42501');};
+ const first=await f.q.flush(),again=await f.q.flush();
+ assert.equal(first.accessDenied,true);
+ assert.equal(again.accessDenied,true);
+ assert.equal(calls,1,'no later writes attempted under denied identity');
+ assert.equal(f.store.events.length,2);
+});
+test('same shot and unknown setup dependencies remain blocked while held',async()=>{
+ const f=queueFixture();
+ await f.q.enqueue('save_shot',{id:'same',setup_version_id:'v',library_entry_id:'c'});
+ await f.q.enqueue('save_shot',{id:'same',setup_version_id:'v',library_entry_id:'c',expected_revision:5});
+ await f.q.enqueue('create_setup',{id:'different'});
+ let calls=0;f.remote.mutate=async()=>{calls++;return {ok:false,code:'conflict'};};
+ assert.equal((await f.q.flush()).state,'conflict');
+ assert.equal(calls,1);assert.equal(f.store.events.length,3);
+ assert.equal(independentMutations({action:'create_setup',payload:{id:'bad'}},{action:'save_shot',payload:{id:'different',setup_version_id:'v',library_entry_id:'c'}}),false);
+});
 test('no retry-overwrite of unresolved conflict',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{});let n=0;f.remote.mutate=async()=>{n++;return {ok:false,code:'conflict'};};await f.q.flush();await f.q.flush();assert.equal(n,1);});
 test('server validation rejection retains local event',async()=>{const f=queueFixture();await f.q.enqueue('save_shot',{});f.remote.mutate=async()=>{throw new CloudError('bad','22023');};assert.equal((await f.q.flush()).state,'rejected');assert.equal(f.store.events.length,1);});
 test('authorization denials remain distinguishable in fresh and retained queue rejections',async()=>{

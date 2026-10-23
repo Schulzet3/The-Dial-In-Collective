@@ -13,6 +13,13 @@ test('fast feedback never replaces the full release suite or required five named
  const approval=file('.github/workflows/approval-continuity.yml');
  const pkg=JSON.parse(file('package.json'));
  assert.match(beta,/Run all checked-in Node tests[\s\S]*?npm test/);
+ const publish=file('netlify.toml');
+ assert.match(publish,/command\s*=\s*"npm run build:cloud"/);
+ assert.doesNotMatch(publish,/command\s*=\s*"npm test &&/);
+ // Application build still checks the owner approval and packaged graph.
+ const build=file('build_cloud.mjs');
+ assert.match(build,/checkRepository\(\)/);
+ assert.match(build,/validateDist\(root\)/);
  assert.match(beta,/node --test tests\/netlify-credit-guard\.test\.mjs tests\/one-use-claim\.test\.mjs/);
  assert.match(cloud,/cloud-tests:[\s\S]*?npm run test:cloud/);
  assert.match(cloud,/mobile-browser-qa:[\s\S]*?python tests\/browser\/cloud_owner_qa\.py/);

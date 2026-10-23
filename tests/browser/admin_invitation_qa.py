@@ -51,6 +51,12 @@ window.__sdk={
   if(name==='dic_session_status')return {data:{authenticated:true,admitted:true,admin:true}};
   if(name==='dic_admin_dashboard')return {data:{counts:{active_accounts:2,pending_coffees:0},queue:[],queue_total:0}};
   if(name==='dic_admin_access_overview')return {data:structuredClone(window.__access)};
+  if(name==='dic_admin_records'||name==='dic_admin_search_records'){
+   const items=args.p_kind==='accounts'?window.__access.members:args.p_kind==='invites'?window.__access.invites:[];
+   const term=String(args.p_query||'').toLowerCase();
+   const filtered=items.filter(row=>!term||JSON.stringify(row).toLowerCase().includes(term));
+   return {data:{items:structuredClone(filtered),total:filtered.length,offset:args.p_offset}};
+  }
   if(name==='dic_admin_issue_invite'){
    const m={id:INVITE,label:args.p_label,created_at:'2026-10-18',
       status:'active',uses:0,max_uses:1,expires_at:null};
@@ -82,8 +88,13 @@ with sync_playwright() as p:
  page.add_script_tag(content=mock+"\n"+client+"\n"+records+"\n"+view+"\n"+main)
  page.locator('#admin-refresh').wait_for()
  assert page.locator('details.admin-disclosure:not([open])').count()==6
+ assert page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_records'||c.name==='dic_admin_access_overview').length")==0, 'Collapsed sections must not fetch private records'
+ assert page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_dashboard').length")==1
  page.locator('#admin-accounts summary.admin-disclosure-summary').click()
+ page.get_by_text('tester@synthetic.invalid').wait_for()
  page.get_by_role("heading",name="Beta Invitations").wait_for()
+ assert page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_records').map(c=>c.args.p_kind).join(',')")=="accounts,invites"
+ assert page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_access_overview').length")==1
  assert page.locator(".admin-stats a").all_text_contents()[0].startswith("Pending Coffees")
  assert [a.get_attribute("href") for a in page.locator(".admin-stats a").all()]==["#admin-pending","#admin-conflicts","#admin-approved","#admin-shots","#admin-accounts"]
  assert page.get_by_text("operator@synthetic.invalid").count()==1
@@ -92,7 +103,19 @@ with sync_playwright() as p:
  assert page.locator('[data-id="'+ '10000000-0000-4000-8000-000000000001' +'"]').count()==0
  assert page.locator('#admin-invite-form').count()==1
  page.screenshot(path=str(OUT/"admin_invitations_empty_mobile.png"),full_page=True)
+ page.locator('#admin-approved summary.admin-disclosure-summary').click()
+ page.wait_for_function("window.__calls.some(c=>c.name==='dic_admin_records'&&c.args.p_kind==='approved')")
+ assert set(page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_records').map(c=>c.args.p_kind)"))=={'accounts','invites','approved'}
+ page.locator('#admin-approved summary.admin-disclosure-summary').click()
 
+ page.locator("#admin-search-query").fill("tester@synthetic.invalid")
+ page.get_by_role("button",name="Search",exact=True).click()
+ page.wait_for_function("window.__calls.some(c=>c.name==='dic_admin_search_records'&&c.args.p_query==='tester@synthetic.invalid'&&c.args.p_kind==='accounts')")
+ assert page.get_by_text("tester@synthetic.invalid").count()==1
+ assert page.get_by_text("operator@synthetic.invalid").count()==0
+ page.get_by_role("button",name="Clear",exact=True).click()
+ page.get_by_text("operator@synthetic.invalid").wait_for()
+ assert page.locator('#admin-search-query').input_value()==''
  page.locator("#admin-invite-label").fill("Small user group")
  page.get_by_role("button",name="Generate Code").click()
  page.locator("#admin-new-code").wait_for()

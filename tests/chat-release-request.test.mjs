@@ -8,7 +8,7 @@ const S='1'.repeat(40),D='2'.repeat(40),R='3'.repeat(40),M='4'.repeat(40),E='5'.
 const NOW='2026-10-21T18:00:00Z';
 const APPROVAL="Owner's exact release grant in GitHub source-of-truth";
 const request={
- schema_version:CHAT_REQUEST_SCHEMA,mode:'validate_only',expected_main_parent_sha:M,
+ schema_version:CHAT_REQUEST_SCHEMA,mode:'validate_only',database_change_risk:'potentially_destructive',expected_main_parent_sha:M,
  release_id:'DIC-20261021-EXAMPLE1',
  tested_source_sha:S,expected_release_head_sha:R,
  expected_development_head_sha:D,owner_approval_source:APPROVAL,
@@ -19,9 +19,7 @@ const request={
   snapshot_started_at_utc:'2026-10-21T17:35:00Z',
   archive_completed_at_utc:'2026-10-21T17:40:00Z',
   verified_at_utc:'2026-10-21T17:57:00Z',
-  latest_observed_data_write_at_utc:'2026-10-21T17:00:00Z'},
- credit_evidence:{observed_remaining_credits:100,
-  observed_at_utc:'2026-10-21T17:57:00Z',source:'Private Netlify billing dashboard'}
+  latest_observed_data_write_at_utc:'2026-10-21T17:00:00Z'}
 };
 const base={request,changedPaths:[CHAT_REQUEST_PATH,OPS_JOURNAL_PATH],
  commitSubject:'ops(release-request): DIC-20261021-EXAMPLE1 [skip netlify]',
@@ -64,13 +62,14 @@ test('old or future dated request, bad backup evidence and missing private copy 
  assert.throws(()=>validate({...base,request:{...request,backup_evidence:{...request.backup_evidence,
   owner_private_offsite_file_id:''}}}),/backup evidence/);
 });
-test('credit evidence below ceiling, stale or forged extra fields refuses release',()=>{
- assert.throws(()=>validate({...base,request:{...request,credit_evidence:{...request.credit_evidence,
-  observed_remaining_credits:14}}}),/credit budget/);
- assert.throws(()=>validate({...base,request:{...request,credit_evidence:{...request.credit_evidence,
-  observed_at_utc:'2026-10-18T10:00:00Z'}}}),/credit check stale/);
- assert.throws(()=>validate({...base,request:{...request,credit_evidence:{...request.credit_evidence,
-  extraneous:'yes'}}}),/credit budget/);
+test('owner-managed Netlify credits are never required by chat release request',()=>{
+ assert.equal(validate(base).releaseId,request.release_id);
+ // Old schema-3 balance attestations are rejected as obsolete extra fields:
+ // requiring a screenshot is NOT restored by copying a legacy request.
+ assert.throws(()=>validate({...base,request:{...request,credit_evidence:{
+  observed_remaining_credits:0,observed_at_utc:'1970-01-01T00:00:00Z',source:'obsolete screenshot'
+ }}}),/schema/);
+ assert.throws(()=>validate({...base,request:{...request,schema_version:3}}),/schema/);
 });
 
 test('single commit lease, dry-run or publish modes and replay/stale event cannot be forged',()=>{
@@ -140,24 +139,21 @@ test('manual fallback requires its own exact current-main lease and the same sou
  assert.throws(()=>validateManual({...manual,request:{...manualRequest,mode:'validate_only'}}),/publish mode/);
 });
 
-test('manual missing, stale or uncovered recovery/credit proof fails closed',()=>{
+test('manual missing, stale or uncovered recovery evidence fails closed',()=>{
  for(const request of [undefined,{...manualRequest,backup_evidence:undefined},
-  {...manualRequest,credit_evidence:undefined},
   {...manualRequest,created_at_utc:'2026-10-21T12:00:00Z'},
   {...manualRequest,backup_evidence:{...manualRequest.backup_evidence,
    verified_at_utc:'2026-10-21T12:00:00Z'}},
   {...manualRequest,backup_evidence:{...manualRequest.backup_evidence,
-   latest_observed_data_write_at_utc:'2026-10-21T17:37:00Z'}},
-  {...manualRequest,credit_evidence:{...manualRequest.credit_evidence,
-   observed_at_utc:'2026-10-18T12:00:00Z'}}])
-  assert.throws(()=>validateManual({...manual,request}),/schema|evidence|stale|snapshot start|credit budget/);
+   latest_observed_data_write_at_utc:'2026-10-21T17:37:00Z'}}])
+  assert.throws(()=>validateManual({...manual,request}),/schema|evidence|stale|snapshot start/);
 });
 
 test('fresh manual proof cannot replay a consumed grant or a previously published source',()=>{
  const evidence=validateManual(manual);
  const grant={id:evidence.releaseId,tested_source_sha:evidence.testedSourceSha,
   owner_approved:true,status:'APPROVED',production_branch:'release/production',
-  max_publications:1,estimated_credits_limit:15,approval_source:APPROVAL,
+  max_publications:1,approval_source:APPROVAL,
   approved_at_utc:'2026-10-21T17:00:00Z',expires_at_utc:'2026-10-21T19:00:00Z'};
  const input={grant,releaseId:evidence.releaseId,sourceSha:evidence.testedSourceSha,
   nowIso:NOW,currentPublishedSourceSha:R,ledger:{schema_version:1,consumed:[]}};
@@ -166,4 +162,11 @@ test('fresh manual proof cannot replay a consumed grant or a previously publishe
  const otherGrant={...grant,id:'DIC-20261021-OTHER123'};
  assert.throws(()=>planSingleUseClaim({...input,grant:otherGrant,releaseId:otherGrant.id,
   ledger:consumed}),/already published under another grant/);
+});
+
+test('normal releases reuse scheduled encrypted backup despite newer logged shots',()=>{
+ const backup={...request.backup_evidence,verified_at_utc:'2026-10-20T17:57:00Z',archive_completed_at_utc:'2026-10-20T17:40:00Z',snapshot_started_at_utc:'2026-10-20T17:35:00Z',latest_observed_data_write_at_utc:'2026-10-21T17:50:00Z'};
+ for(const database_change_risk of ['none','non_destructive'])
+  assert.equal(validate({...base,request:{...request,database_change_risk,backup_evidence:backup}}).releaseId,request.release_id);
+ assert.throws(()=>validate({...base,request:{...request,database_change_risk:'potentially_destructive',backup_evidence:backup}}),/stale|snapshot start/);
 });

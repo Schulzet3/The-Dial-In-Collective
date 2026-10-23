@@ -26,26 +26,43 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+          fetch-depth: 0
+      - name: Classify documentation-only change (unknown means full CI)
+        id: scope
+        env:
+          DIC_CI_EVENT: ${{ github.event_name }}
+          DIC_CI_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+          DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/audit/ci-scope.mjs
+      - name: Explain optimized no-op CI
+        if: steps.scope.outputs.docs_only == 'true'
+        run: echo 'Documentation-only change; expensive suite not applicable; exact-source release guard remains in place.'
       - uses: actions/setup-node@v6
+        if: steps.scope.outputs.docs_only != 'true'
         with:
           node-version: '22'
           cache: 'npm'
       - uses: actions/setup-python@v6
+        if: steps.scope.outputs.docs_only != 'true'
         with:
           python-version: '3.12'
       - run: npm ci --ignore-scripts --no-audit --no-fund
+        if: steps.scope.outputs.docs_only != 'true'
       # Full test suite is verified by the required independent validate job.
       # Visual review retains a fast security/regression check and unique browser acceptance.
       - run: npm run check:fast
-      - name: Lint all active JavaScript and review scripts
-        run: npm run lint
+        if: steps.scope.outputs.docs_only != 'true'
+      # Duplicate lint omitted; source validate runs npm run lint.
       - run: npm run build:cloud
+        if: steps.scope.outputs.docs_only != 'true'
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_private_visual_review_nonfunctional
       - name: Verify every shipped file and transitive module import
+        if: steps.scope.outputs.docs_only != 'true'
         run: node scripts/audit/site-integrity.mjs --dist
       - name: Prepare isolated browser only
+        if: steps.scope.outputs.docs_only != 'true'
         run: |
           python -m pip install playwright==1.55.0
           python -m playwright install --with-deps chromium
@@ -53,13 +70,20 @@ jobs:
           curl --fail --location --max-time 40 'https://raw.githubusercontent.com/google/fonts/main/ofl/fraunces/Fraunces%5BSOFT%2CWONK%2Copsz%2Cwght%5D.ttf' -o /tmp/dic-render-assets/Fraunces.ttf
           curl --fail --location --max-time 40 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf' -o /tmp/dic-render-assets/JetBrainsMono.ttf
       - run: python tests/browser/cloud_owner_qa.py
+        if: steps.scope.outputs.docs_only != 'true'
       - name: Verify real service-worker cached cold reopen in isolated Chromium
+        if: steps.scope.outputs.docs_only != 'true'
         run: python tests/browser/pwa_offline_qa.py
       - name: Synthetic owner-only invitation portal mobile acceptance
+        if: steps.scope.outputs.docs_only != 'true'
         run: python tests/browser/admin_invitation_qa.py
       - run: python tests/browser/visual_review.py
+        if: steps.scope.outputs.docs_only != 'true'
         env:
           DIC_FONT_DIR: /tmp/dic-render-assets
+      - name: Exercise packaged production app in a real browser (no credentials)
+        if: steps.scope.outputs.docs_only != 'true'
+        run: python tests/browser/built_app_qa.py
       - uses: actions/upload-artifact@v7
         with:
           name: dic-visual-review-screenshots

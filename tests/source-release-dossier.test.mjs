@@ -5,15 +5,16 @@ const sha='a'.repeat(40);
 const nowIso='2026-10-22T06:00:00Z';
 const grant=(overrides={})=>({
  id:'DIC-20261022-SOURCE01',tested_source_sha:sha,owner_approved:true,status:'APPROVED',
- production_branch:'release/production',max_publications:1,estimated_credits_limit:15,
+ production_branch:'release/production',max_publications:1,
  approved_at_utc:'2026-10-22T05:00:00Z',expires_at_utc:'2026-10-22T07:00:00Z',
  approval_source:'Synthetic owner approval fixture; no publication authorized',...overrides
 });
 const data=()=>({
  sourceSha:sha,nowIso,
- matrix:{production:{exact_source_sha:'b'.repeat(40),netlify_deploy_id:'DEPLOY'}},
- credits:{release_policy:{last_published_release:{published_commit_sha:'b'.repeat(40),
-  deploy_id:'DEPLOY',release_id:'G0',netlify_status:'ready/current'}}},
+ matrix:{production:{exact_source_sha:'b'.repeat(40),netlify_deploy_id:'DEPLOY',
+  tested_application_source_sha:'c'.repeat(40),
+  pending_release:{id:'DIC-20261021-OLD123',actual_production_git_sha:'b'.repeat(40),
+   netlify_deploy_id:'DEPLOY'}}},
  grants:{grants:[]},consumption:{schema_version:1,consumed:[]}
 });
 test('source dossier is HOLD even with a matching owner grant, not an executable release authorization',()=>{
@@ -22,7 +23,8 @@ test('source dossier is HOLD even with a matching owner grant, not an executable
  assert.equal(d.release_ready,false);assert.equal(d.release_disposition,'HOLD_EXTERNAL_PREFLIGHT');
  assert.equal(d.available_exact_source_grant_id,grant().id);assert.equal(d.private_github_free_checks_enforced,false);
  assert.deepEqual(d.required_checks,REQUIRED_CHECKS);
- assert.ok(d.pending_live_evidence.some(x=>x.includes('credit balance')));
+ assert.ok(!d.pending_live_evidence.some(x=>/credit|billing|balance/i.test(x)));
+ assert.equal(d.current_recorded_production.git_sha,'b'.repeat(40));
  assert.equal(d.current_recorded_production.provider_live_read_this_run,false);
  assert.deepEqual(v.consumption,{schema_version:1,consumed:[]});
 });
@@ -61,7 +63,7 @@ test('an incomplete ledger or differently named consumed grant cannot offer the 
  assert.equal(buildSourceDossier(v).available_exact_source_grant_id,null);
 });
 test('mismatched production receipt or non-Git source fails closed',()=>{
- const v=data();v.credits.release_policy.last_published_release.deploy_id='OTHER';
+ const v=data();v.matrix.production.pending_release.netlify_deploy_id='OTHER';
  assert.throws(()=>buildSourceDossier(v),/Release receipt mismatch/);
  const q=data();q.sourceSha='HEAD';
  assert.throws(()=>buildSourceDossier(q),/40-character Git HEAD/);

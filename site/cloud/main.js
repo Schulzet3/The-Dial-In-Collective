@@ -4,6 +4,7 @@ import * as E from '../lib/engine.js';
 import * as U from '../lib/ui.js';
 import {CloudError,createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT,isAccessDenied} from './client.js';
 import {IndexedStore,Outbox} from './outbox.js';
+import {basketDoseAdvisory} from './dose-advisory.js';
 import {hydrate,applyPending,shotPayload} from './mapping.js';
 import {CLOUD_CONFIG} from './config.js';
 import {emailConfirmationView} from './confirmation.js';
@@ -26,9 +27,11 @@ class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
   this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
-  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communityRevision=0;
+  this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   this.deniedOfflineOwners=new Set();
+  this.dismissedDoseAdvisories=new Set();
+  this.lastHeavySyncAt=0;this.pollingStatus=null;
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
  }
  async inSession(operation){
@@ -40,10 +43,12 @@ class CloudApp {
  resetAccount(){
   this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
+  this.dismissedDoseAdvisories.clear();
+  this.lastHeavySyncAt=0;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
-  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityStyle='all';this.communityCoffee='all';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
+  this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityReloadRequested=false;this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   if(reviewSheet.open)reviewSheet.close();reviewSheet.replaceChildren();
   sheet.close();sheet.innerHTML='';
  }
@@ -68,8 +73,29 @@ class CloudApp {
   if(this.identity)await this.connect();else this.render();
   // A returning connection must recheck beta admission before flushing locally queued shots.
    addEventListener('online',()=>this.connect().catch(err=>this.error(err)));
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)(this.status?.admitted?this.sync():this.connect()).catch(err=>this.error(err));});
-  this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.sync().catch(()=>{});},30000);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)this.connect().catch(err=>this.error(err));});
+  // Preserve the former 30-second admission/revocation check while reducing
+  // unnecessary 17-dataset reads and Community review requests during idle use.
+  this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.pollOnce().catch(()=>{});},30000);
+ }
+ async pollOnce(){
+  if(this.pollingStatus)return this.pollingStatus;
+  const user=this.identity,epoch=this.epoch;
+  if(!user||!this.status?.admitted||this.busy||globalThis.navigator?.onLine===false)return;
+  this.pollingStatus=(async()=>{
+   try{
+    const status=await this.client.status();
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    if(!status?.admitted){await this.denyAccess(user,epoch,status);return;}
+    this.status=status;
+    if(this.pending.some(x=>x.status==='pending')||Date.now()-this.lastHeavySyncAt>=180000)await this.sync();
+   }catch(err){
+    if(epoch!==this.epoch||user.id!==this.identity?.id)return;
+    if(isAccessDenied(err))await this.denyAccess(user,epoch);
+    // A temporary admission-check outage must not trigger a full-data scan.
+   }
+  })().finally(()=>this.pollingStatus=null);
+  return this.pollingStatus;
  }
  // Offline data is not an offline authorization token. Only the previously
  // admitted owner's cached records may be viewed, and only NEW shots can queue.
@@ -157,7 +183,7 @@ class CloudApp {
   }
   this.syncState=outcome.state;const pending=await this.store.list(who.id);
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
-  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;}
+  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;this.lastHeavySyncAt=Date.now();}
   catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
   this.state=applyPending(hydrate(this.raw),this.pending);
   await this.syncFirstStylePrompts(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;
@@ -254,16 +280,20 @@ class CloudApp {
      'sync','','sync-indicator')+'</span></nav>';
   return nav+communityPage({shots:this.communityRows,total:this.communityTotal,
     loading:this.communityLoading,error:this.communityError,
-    style:this.communityStyle,coffee:this.communityCoffee,revision:this.communityRevision});
+    style:this.communityStyle,coffee:this.communityCoffee,search:this.communitySearch,revision:this.communityRevision});
  }
  async loadCommunity({more=false}={}){
-  if(this.communityLoading||!this.identity||!this.status?.admitted)return;
+  if(this.communityLoading){if(!more)this.communityReloadRequested=true;return;}
+  if(!this.identity||!this.status?.admitted)return;
   const owner=this.identity.id,epoch=this.epoch;
   const offset=more?this.communityRows.length:0;
   this.communityLoading=true;this.communityError='';this.render();
   try{
    if(!navigator.onLine)throw new Error('Connect to the internet to browse Community shots.');
-   const page=await this.inSession(()=>this.client.browseCommunityShots({limit:20,offset}));
+   const query={limit:20,offset};
+    const page=await this.inSession(()=>this.communitySearch||this.communityStyle!=='all'
+     ?this.client.searchCommunityShots({...query,query:this.communitySearch,style:this.communityStyle})
+     :this.client.browseCommunityShots(query));
    if(owner!==this.identity?.id||epoch!==this.epoch)return;
    if(!Array.isArray(page?.shots)||!Number.isFinite(Number(page.total)))
     throw new Error('Community data is temporarily unavailable.');
@@ -275,7 +305,11 @@ class CloudApp {
     this.communityError='Community is temporarily unavailable. Your personal shots remain unchanged.';
   }finally{
    if(owner===this.identity?.id&&epoch===this.epoch){
-    this.communityLoading=false;this.render();
+    this.communityLoading=false;
+    const rerun=this.communityReloadRequested;
+    this.communityReloadRequested=false;
+    if(rerun)this.loadCommunity().catch(err=>this.error(err));
+    else this.render();
    }
   }
  }
@@ -480,7 +514,22 @@ class CloudApp {
  showLog(cid,editing=null,styleOverride=null){
   const c=this.state.coffees.find(c=>c.id===cid),v=M.activeVersion(this.state);this.logCoffee=cid;this.editing=editing;
   this.draft=editing?C.clone(editing):E.prefill(this.state,cid,styleOverride?{style:styleOverride}:{});this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
-  const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1'})}${!editing?button('Use Recommendation','use-temp','','use-recommendation'):''}</div>`:''}</div>${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><p class=helper role=alert></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
+  const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1'})}${!editing?button('Use Recommendation','use-temp','','use-recommendation'):''}</div>`:''}</div>${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><aside id="shot-dose-advisory" class="helper" role="status" hidden><span data-dose-message></span> <button type="button" class="ghost compact" data-action="dismiss-dose-advisory">Dismiss</button></aside><p class=helper role=alert></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
+  this.updateDoseAdvisory();
+ }
+ updateDoseAdvisory(){
+  const panel=sheet.querySelector?.('#shot-dose-advisory');
+  if(!panel)return;
+  const d=this.draft;
+  if(!d||this.editing||this.dismissedDoseAdvisories.has(d.id)){panel.hidden=true;return;}
+  const version=M.activeVersion(this.state),coffee=M.coffeeState(this.state,this.logCoffee);
+  const basketId=d.basketId||coffee?.basketId||version?.defaultBasketId;
+  const reference=version?.baskets?.find(b=>b.id===basketId)?.doseG;
+  const current=sheet.querySelector?.('#shot')?.elements?.doseG?.value??d.doseG;
+  const message=basketDoseAdvisory(current,reference);
+  panel.hidden=!message;
+  const label=panel.querySelector?.('[data-dose-message]');
+  if(label)label.textContent=message||'';
  }
  readDraft(){const f=sheet.querySelector('#shot');if(!f)return;for(const key of ['doseG','yieldG','timeS','grindSetting'])this.draft[key]=f.elements[key].value;this.draft.notes=f.elements.notes.value;
   // The displayed unit is rounded for readability. A notes/rating edit must
@@ -489,6 +538,7 @@ class CloudApp {
   if(f.elements.slowFeed)this.draft.feedMode=f.elements.slowFeed.checked?'slow':'standard';}
  async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
   try{
+   if(a==='dismiss-dose-advisory'){if(this.draft?.id)this.dismissedDoseAdvisories.add(this.draft.id);const panel=sheet.querySelector?.('#shot-dose-advisory');if(panel)panel.hidden=true;return;}
    if(a==='close'){sheet.close();return;}
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
@@ -609,6 +659,7 @@ class CloudApp {
    if(a==='community'){this.view='community';await this.loadCommunity();return;}
    if(a==='home'){this.view='coffees';this.render();return;}
    if(a==='community-refresh'){await this.loadCommunity();return;}
+    if(a==='community-search-clear'){this.communitySearch='';this.communityCoffee='all';await this.loadCommunity();return;}
    if(a==='community-more'){await this.loadCommunity({more:true});return;}
    if(a==='community-correct-outlier'){
     if(this.pending.length)throw new Error('Finish syncing before editing an existing shot.');
@@ -638,16 +689,20 @@ class CloudApp {
    if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
    if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
    if(a==='export'){exportFile(await this.inSession(()=>this.store.export(this.identity.id)));return;}
-   if(a==='signout'){if((await this.inSession(()=>this.queue.pending())).length)throw new Error('Changes are waiting to sync. Open Cloud Sync Details to save pending changes and finish syncing before signing out.');const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
+   if(a==='signout'){const queued=await this.inSession(()=>this.queue.pending());if(queued.length&&!globalThis.confirm?.('You have '+queued.length+' unsynced change(s). They remain saved on this device for this account and will sync only after you sign in to the same account again. Sign out anyway?'))return;const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
   }catch(err){this.error(err);}
  }
- input(ev){if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.render();}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
+ input(ev){if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+ change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
     if(id==='auth-signin'){await this.client.signIn(d.email,d.password);const epoch=this.epoch;const identity=await this.client.identity();if(epoch===this.epoch)this.identity=identity;await this.connect();}
-   else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.confirmationEmail=d.email.trim();this.authView='check-email';this.notice='';this.render();root.querySelector('#confirmation-title')?.focus();}
+   else if(id==='community-search'){
+     const query=String(d.query||'').trim();if(query.length>80)throw new Error('Community search must be 80 characters or fewer.');
+     this.communitySearch=query;this.communityCoffee='all';await this.loadCommunity();
+    }
+    else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.confirmationEmail=d.email.trim();this.authView='check-email';this.notice='';this.render();root.querySelector('#confirmation-title')?.focus();}
    else if(id==='auth-reset'){this.notice=await this.client.requestReset(d.email);this.render();}
    else if(id==='auth-password'){await this.inSession(()=>this.client.setPassword(d.password));this.recovery=false;this.notice='Password updated.';await this.connect();}
    else if(id==='auth-invite'){await this.inSession(()=>this.client.redeemInvite(d.token));await this.connect();}
@@ -684,22 +739,9 @@ class CloudApp {
    else if(id==='style'){await this.mutate('set_style',{setup_id:M.activeSetup(this.state).id,setup_version_id:M.activeVersion(this.state).id,library_entry_id:this.styleCoffee,style:d.style,expected_revision:this.styleRevision},{onlineOnly:true});sheet.close();}
    else if(id==='shot'){
     this.readDraft();const d=this.draft,validation=M.validateShot(d);if(validation.length)throw new Error(validation.join(' '));
-    // Only an actual +/-1 g basket-dose deviation needs an extra decision.
-    // On edit use the original shot's basket snapshot; do not silently compare
-    // historic shots against a newly selected or reconfigured basket.
-    const version=M.activeVersion(this.state);
-    const coffeeState=M.coffeeState(this.state,this.logCoffee);
-    const basketId=this.editing?.basketId||d.basketId||coffeeState?.basketId||version?.defaultBasketId;
-    const basket=this.editing?null:version?.baskets?.find(b=>b.id===basketId);
-    const referenceDose=this.editing?.snapshot?.basketDoseG??basket?.doseG;
-    const actualDose=Number(d.doseG);
-    if(Number.isFinite(Number(referenceDose))&&Number(referenceDose)>0&&
-       Number.isFinite(actualDose)&&Math.abs(actualDose-Number(referenceDose))>1){
-     const warning=`Dose ${actualDose.toFixed(1)} g is more than 1 g from this basket's ${Number(referenceDose).toFixed(1)} g reference. This is allowed; confirm to ${this.editing?'save the edited':'log the'} shot.`;
-     if(!globalThis.confirm?.(warning))return;
-    }
+    // New-shot basket variance is a nonblocking advisory. Existing edits never rewarn.
     let payload;if(this.editing){payload={id:d.id,expected_revision:this.editing.revision,dose_g:Number(d.doseG),yield_g:Number(d.yieldG),time_s:Number(d.timeS),grind_setting:Number(d.grindSetting),temperature_c:C.num(d.tempC),taste:d.tasteScales,notes:d.notes};}else payload=shotPayload(this.state,this.logCoffee,d);
-    await this.mutate('save_shot',payload);this.firstStylePromptId=null;this.expanded=new Set([this.logCoffee]);this.tempCoffee=null;this.justSavedId=d.id;sheet.close();this.notice=this.pending.length?'Saved on this device; waiting to sync.':'Shot saved to your cloud account.';this.render();
+    await this.mutate('save_shot',payload);this.dismissedDoseAdvisories.delete(d.id);this.firstStylePromptId=null;this.expanded=new Set([this.logCoffee]);this.tempCoffee=null;this.justSavedId=d.id;sheet.close();this.notice=this.pending.length?'Saved on this device; waiting to sync.':'Shot saved to your cloud account.';this.render();
    }
   }catch(err){this.error(err);}finally{this.busy=false;form.querySelectorAll('button').forEach(b=>b.disabled=false);}
  }

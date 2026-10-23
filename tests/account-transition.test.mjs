@@ -63,12 +63,24 @@ test('delayed sync-detail read cannot display the former account queue',async()=
  await reading.promise;f.switchAccount();release.resolve();await task;
  assert.equal(shown,0);
 });
-test('sign-out preserves unsynced changes and does not call the auth service',async()=>{
- const f=fixture();let signs=0;const event={owner:OWNER,id:'unsynced'};
+test('declined sign-out preserves account, unsynced work, and does not call auth signOut',async()=>{
+ const f=fixture(),event={owner:OWNER,id:'unsynced'};let signs=0;
  f.store.list=async()=>[event];f.client.signOut=async()=>signs++;
- await f.app.click({target:{closest:()=>({dataset:{action:'signout'}})}});
+ const old=globalThis.confirm;globalThis.confirm=()=>false;
+ try{await f.app.click({target:{closest:()=>({dataset:{action:'signout'}})}});}
+ finally{if(old===undefined)delete globalThis.confirm;else globalThis.confirm=old;}
  assert.equal(signs,0);assert.equal(f.app.identity.id,OWNER);
- assert.deepEqual(await f.app.queue.pending(),[event]);assert.match(f.app.notice,/Changes are waiting to sync/);
+ assert.deepEqual(await f.app.queue.pending(),[event]);
+});
+test('accepted sign-out leaves unsynced work durable and bound to the original owner',async()=>{
+ const f=fixture(),event={owner:OWNER,id:'unsynced'};let signs=0;
+ f.store.list=async()=>[event];f.client.signOut=async()=>signs++;
+ const old=globalThis.confirm;globalThis.confirm=()=>true;
+ try{await f.app.click({target:{closest:()=>({dataset:{action:'signout'}})}});}
+ finally{if(old===undefined)delete globalThis.confirm;else globalThis.confirm=old;}
+ assert.equal(signs,1);
+ assert.equal(f.app.identity,null);
+ assert.deepEqual(await f.store.list(OWNER),[event]);
 });
 test('late sign-out completion cannot erase a newer account session',async()=>{
  const f=fixture(),signing=deferred(),release=deferred();
@@ -76,4 +88,38 @@ test('late sign-out completion cannot erase a newer account session',async()=>{
  const task=f.app.click({target:{closest:()=>({dataset:{action:'signout'}})}});
  await signing.promise;f.switchAccount();release.resolve();await task;
  assert.equal(f.app.identity.id,'other-owner');assert.equal(f.app.renders||0,0);
+});
+
+
+test('idle foreground checks admission without reloading every personal and Community dataset',async()=>{
+ const f=fixture();let statusCalls=0,heavyCalls=0;
+ f.client.status=async()=>{statusCalls++;return {admitted:true,role:'member'};};
+ f.app.sync=async()=>{heavyCalls++;};
+ f.app.lastHeavySyncAt=Date.now();
+ await f.app.pollOnce();
+ assert.equal(statusCalls,1);
+ assert.equal(heavyCalls,0,'a verified recent full sync avoids duplicated full-state reads');
+ f.app.lastHeavySyncAt=Date.now()-181000;
+ await f.app.pollOnce();
+ assert.equal(statusCalls,2);
+ assert.equal(heavyCalls,1,'long idle tab still picks up cross-device changes');
+});
+test('revocation is checked every polling interval, not delayed until a full-state refresh',async()=>{
+ const f=fixture();let denied=0,synced=0;
+ f.app.lastHeavySyncAt=Date.now();
+ f.client.status=async()=>({admitted:false});
+ f.app.denyAccess=async(user,epoch,status)=>{denied++;assert.equal(user.id,OWNER);assert.equal(status.admitted,false);};
+ f.app.sync=async()=>{synced++;};
+ await f.app.pollOnce();
+ assert.equal(denied,1);
+ assert.equal(synced,0,'must never read personal data after admission denial');
+});
+test('an old account polling response cannot mutate newer owner session',async()=>{
+ const f=fixture(),started=deferred(),release=deferred();let synced=0;
+ f.client.status=async()=>{started.resolve();await release.promise;return {admitted:false};};
+ f.app.denyAccess=async()=>{throw new Error('Stale user must not be denied on another account');};
+ f.app.sync=async()=>{synced++;};
+ const pending=f.app.pollOnce();await started.promise;f.switchAccount();release.resolve();await pending;
+ assert.equal(synced,0);
+ assert.equal(f.app.identity.id,'other-owner');
 });

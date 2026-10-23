@@ -12,6 +12,8 @@
 8. [AGENTS — continuity rules](../AGENTS.md) — exact repository/change-control method.
 
 ## Current operating records
+- [Durable batched feature release queue](RELEASE_QUEUE.json) — statuses READY / TESTING / BLOCKED, exact issue, source SHA, paths, CI receipts and blockers; does not publish.
+- [Autonomous build-to-ready and queue runbook](RELEASE_QUEUE_RUNBOOK.md) — default implementation pipeline, release gate and honest blocking semantics.
 - [October 21 consolidated deployment readiness, backups and blockers](RELEASE_READINESS_2026-10-21.md) — dated preflight and receipts for the completed admin/duplicate-first and recipe-source release; use Current Status for the present development and production state.
 - [Active GitHub Free/private continuity and release safety plan](GITHUB_FREE_PRIVATE_CONTINUITY_AND_RELEASE_PLAN_2026-10-20.md) — owner refuses Pro/public; advisory CI, manual controls, remaining release risks.
 - [Project instructions ready to paste](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) — owner reports these were saved in ChatGPT Project settings; that completed step must not be requested again.
