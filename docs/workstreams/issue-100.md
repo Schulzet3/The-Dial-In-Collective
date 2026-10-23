@@ -33,3 +33,5 @@ SQL behavioral test 40036360045 found inverted failed-delete assertion (it compl
 SQL behavioral CI 40036447816 showed a false missing-shot assertion under authenticated admin's ordinary RLS (direct SELECT of other member's shot returns zero). Replaced stale-revision check with authorized impact-preview shot count and moved post-delete readback to disposable test harness privileged context (RESET ROLE), so tests do not incorrectly equate RLS privacy with deletion. Retest pending, source data untouched.
 
 SQL behavioral suite prior exact source b2dcf3f4 PASSED run 40036544500 (role denial, canonical one-shot cascade, stale revisions, receipts, Pending no-shot); added an actual privately owned Pending coffee library+shot+note fixture and asserts its exact impact and atomic cascade. Repeat CI must pass before READY.
+
+Visual CI 40036706480 failed obsolete synthetic browser requirement for removed Hold UI after all other illustrated mobile checks passed. Updated browser acceptance to assert only approved Approve Distinct and Resolve Duplicate actions; no production page changed. New visual/mobile exact-source CI pending.
