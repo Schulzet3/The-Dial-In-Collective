@@ -23,3 +23,5 @@ CI repair: exact-source Node suite 40035880378 failed historical workflow-reconc
 Syntax fix: CI run 40036026411 found unescaped apostrophe in an Admin comparison fallback JS string, causing multiple module-import tests to fail. Removed apostrophe, retesting exact source. No publication.
 
 New disposable rollback SQL suite admin_safe_delete.sql covers denied nonadmin preview, exact impact, stale revision and atomic canonical-to-library-to-shot-to-note deletion plus private receipts, and separate Pending deletion. Wired into isolated-sql-regression.sh. Need exact-source CI PASS; no hosted SQL.
+
+CI repair: approval run 40036258592 correctly rejected nondeployable SQL test/runner paths in queue scope_paths. Removed test-only paths from deployable scope and retained test tracking in issue journal. No source feature changed; CI rerun required.
