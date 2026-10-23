@@ -64,14 +64,15 @@
         "site/admin/view.js",
         "site/admin/main.js",
         "site/admin/styles.css",
-        "site/admin/records.js"
+        "site/admin/records.js",
+        "supabase/migrations/20261023225600_dic_admin_safe_delete.sql"
       ],
       "tests": [
         "Exact-source CI pending; security inventory PASS at source 06731546; approval workflow correctly rejected missing intake item before this repair."
       ],
       "ci_runs": [],
       "blockers": [
-        "Admin review comparison not yet fully tested; robust server-side one-confirm deletion, dependency counts, reversible recovery evidence, privacy and SQL tests incomplete; no production mutation permitted."
+        "Migration tests pending; SQL not applied live; cascading deletion blocked for coffees with Community contributions or merged references; additional UI/testing and recovery acceptance required."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/100",
       "notes": "Owner approved 2026-10-23. Hold UI removed, existing Pending semantics retained. Pending-vs-existing comparison in PR101 draft; protected search capped at first 50. Deletion is not active and not authorized for publication until safe transactional implementation and acceptance."
