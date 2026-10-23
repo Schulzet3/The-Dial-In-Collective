@@ -35,10 +35,10 @@
     {
       "id": "DIC-Q-96-security-repairs",
       "issue": 96,
-      "pr": null,
+      "pr": 98,
       "title": "Security audit: bounded requests and HTML, accurate provenance, approved passwords, preserved notes and privacy copy",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d",
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
         "site/cloud/client.js",
@@ -67,15 +67,28 @@
         "supabase/functions/dic-verify-coffee/index.ts"
       ],
       "tests": [
-        "Local exact-content Node suite: 672 passing, including request stalls, byte limits, Unicode offsets, adversarial HTML, Edge negative identity/membership and note preservation.",
-        "Production read-only schema/permission checks and earlier 32 public HTTP probes recorded in Issue96; not authenticated production-session testing."
+        "673/673 local Node tests; full final exact-source CI Node/lint/build PASS. Seven PR checks across six workflows PASS at b3599c235b6b1bff148272c5d3556b678219da66; all four applicable merged-source checks independently PASS; SQL/visual/security reuse the identical passing PR tree at 5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d.",
+        "Disposable PostgreSQL17.11 migration baseline, SQL suites including complete security_surface_inventory, signed-HMAC PostgREST ownership/replay/authorization and concurrent snapshot tests PASS. No production identities or database mutations.",
+        "Synthetic mobile/admin, visual, real Chromium service-worker offline and packaged-app browser checks PASS. Prior byte-identical UI screenshot sample independently inspected; no physical-device or production signed-member claim.",
+        "Final source inventory470 files/72863 text lines/3 binaries; no redacted credential-pattern candidates. Current production dependency audit zero known vulnerabilities. Artifact12482885419 SHA256f1548fc2cc098d337c77fc3364fc40a8f596df3eae85abbedc3d7fb2d800a671 independently matched all13 follow-up hashes; initial39 repair hashes matched prior artifact12481468441.",
+        "Malformed/nested/metatag/Unicode/repeated-attribute CPU regressions PASS in isolated child processes; previously >2.5s quoted-attribute cases now21-24ms locally. No production stress test.",
+        "Unchanged-production public/anonymous HTTP32/32 PASS in39905265823. Supabase readback22shots/22notes/5accounts/2Community/48receipts/43migrations;46 application tables allRLS, no client DML or anonymous app RPC grants."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Final exact-source CI and nonforce integration pending."
+      "ci_runs": [
+        39910106557,
+        39910106319,
+        39910106359,
+        39910106633,
+        39910106691,
+        39910106708
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
-      "notes": "No publication authorized. Future scoped release includes Netlify and both JWT-protected Edge functions plus shared helper files; no migration or member-data write. Preserve existing #93 READY item."
+      "notes": "READY source repairs, NOT DEPLOYED. A later owner-approved release must include Netlify/app and BOTH Edge functions with shared modules; no new SQL migration. Six confirmed findings addressed, including expanded HTML CPU variants. Every-file screening plus targeted semantic review is not exhaustive manual history review or full authenticated-production penetration certification.",
+      "related_prs": [
+        97,
+        98
+      ]
     }
   ],
   "history": [
@@ -166,7 +179,7 @@
         "site/cloud/community.js"
       ],
       "tests": [
-        "Full approved Issue #80 development merged nonforce: PR #81\u2013#83, #85\u2013#88, #91, #92; additional parallel PR #89/#90 superseded by #91 without lost work.",
+        "Full approved Issue #80 development merged nonforce: PR #81–#83, #85–#88, #91, #92; additional parallel PR #89/#90 superseded by #91 without lost work.",
         "PR #91 exact integrated source 70cceb6a... and postmerge ede403a0 all 5 workflows PASS, including SQL/PostgreSQL 17.11, browser/mobile, Node/lint/build, approval and visual.",
         "PR #87 combined Netlify test-reuse source 343a98be... all 5 workflows PASS; nonforce merge 05dda786... with applicable exact postmerge approval, Node/build and cloud checks PASS.",
         "PR #92 scoped journals source 39eafd79... approval, Node/build, SQL and cloud/browser PASS; nonforce merge 8c19b440... exact-source approval 39866094176, Node/build 39866094152 and cloud/mobile 39866094108 PASS.",
