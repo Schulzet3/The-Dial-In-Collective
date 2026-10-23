@@ -1,0 +1,254 @@
+// Opt-in, credential-free acceptance against public roaster pages.
+// The application handler runs with LOCAL admission/quota responses; only its
+// existing DNS-pinned, bounded public HTTPS transports make network requests.
+// No real account, Supabase request, quota claim, database write or deployment.
+import https from 'node:https';
+import {mkdir,writeFile} from 'node:fs/promises';
+import path from 'node:path';
+import {tmpdir} from 'node:os';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {isDeepStrictEqual} from 'node:util';
+import {createPreviewHandler} from '../../netlify/functions/coffee-url-preview.mjs';
+import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJson,
+ MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
+import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
+import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
+
+const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
+const ORIGINAL_URL=SWEET_URL+'?srsltid=AYCX9vKHwEAbPcEyS19XuoWD67cGIMJu47B764EfHZK_IkJ7c52nQlGl';
+const targets=[
+ {id:'sweet-bloom-arbey',url:ORIGINAL_URL,required:true,expected:{
+  name:/arbey cordoba/i,roaster:/sweet bloom/i,variety:/^bourbon aj[ií]$/i,
+  origin:/huila.*colombia/i,producer:/^arbey cordoba$/i,elevation_m:/1,?886\s*(?:m|masl)/i,
+  process:/^washed$/i,tasting_notes:/mango.*bing cherry.*pineapple/i},
+  recipe:{dose_g:18,yield_g:36,time_s_min:22,time_s_max:24},absent:['release_label']},
+ {id:'sweet-bloom-arbey-canonical',url:SWEET_URL,required:true,expected:{
+  variety:/^bourbon aj[ií]$/i,origin:/huila.*colombia/i,producer:/^arbey cordoba$/i,
+  elevation_m:/1,?886\s*(?:m|masl)/i,tasting_notes:/mango.*bing cherry.*pineapple/i},
+  recipe:{dose_g:18,yield_g:36,time_s_min:22,time_s_max:24},absent:['release_label']},
+ {id:'sey-ruarai',url:'https://www.seycoffee.com/products/2026-ruarai-aa-separation-kenya',expected:{
+  variety:/SL\s?28.*SL\s?34/i,origin:/Nyeri/i,elevation_m:/1,?783\s*(?:m|masl)/i,
+  release_label:/November\s*2025/i,process:/^Washed$/i}},
+ {id:'black-white-lica',url:'https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural',expected:{
+  variety:/^catua[ií]$/i,producer:/Lica Torres/i,origin:/Rivas.*Brunca.*Costa Rica/i,
+  elevation_m:/1500\s*(?:m|masl)/i,process:/^Natural$/i}},
+ {id:'tim-wendelboe-echemo',url:'https://timwendelboe.no/products/echemo-certified-organic',expected:{
+  variety:/Ethiopian heirloom.*Coche forest/i,producer:/Khalid Shifa/i,
+  process:/^Washed$/i,release_label:/December\s*2025/i,tasting_notes:/floral.*white tea.*stone fruits/i}},
+ {id:'onyx-geometry',url:'https://onyxcoffeelab.com/products/geometry',expected:{
+  variety:/^Mixed$/i,origin:/Colombia.*Ethiopia/i,process:/^Washed$/i,
+  roast_level:/^Light$/i,elevation_m:/1950\s*(?:m|masl)/i}},
+ {id:'manhattan-samuel',url:'https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/',expected:{
+  variety:/Caturra.*Chiroso/i,producer:/Diego Bermudez/i,origin:/Cauca/i,
+  elevation_m:/1960\s*(?:m|masl)/i,tasting_notes:/star anise.*dark fudge.*verbena/i}},
+ {id:'nomad-centroamericano',url:'https://nomadcoffee.es/products/centroamericano-natural-anaerobico',expected:{
+  variety:/^Centroamericano$/i,origin:/Costa Rica/i,process:/^Anaerobic$/i,
+  elevation_m:/1200\s*[-–]\s*1400/i,release_label:/2026/}},
+ {id:'circulor-source-conflict',url:'https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx',
+  expected:{origin:/Kenya|Meru/i,process:/^Washed$/i},expected_conflicts:['variety'],
+  source_note:'Observed page title/summary says SL34, while Genesis says Ruiru 11. Report current source drift explicitly.'},
+ {id:'queen-city-homepage-negative',url:'https://queencitycollectivecoffee.com/',negative:true}
+];
+const argv=process.argv.slice(2);
+let output=path.join(process.env.RUNNER_TEMP||tmpdir(),'dic-coffee-completeness');
+let only=null;
+for(let i=0;i<argv.length;i++){
+ if(argv[i]==='--outdir'&&argv[i+1])output=path.resolve(argv[++i]);
+ else if(argv[i]==='--only'&&argv[i+1])only=argv[++i];
+ else throw new Error('Usage: node scripts/audit/coffee-completeness-live-probe.mjs [--outdir PATH] [--only TARGET_ID]');
+}
+const selected=only?targets.filter(x=>x.id===only):targets;
+if(!selected.length)throw new Error('Unknown target ID; arbitrary external targets are not accepted.');
+await mkdir(output,{recursive:true});
+const sha=value=>createHash('sha256').update(value).digest('hex');
+const fold=value=>String(value??'').normalize('NFC');
+const publicUrl=raw=>{
+ try{
+  const url=new URL(raw);
+  // Keep coffee purchase-variant identity, omit tracking/referral parameters.
+  for(const key of [...url.searchParams.keys()])if(key!=='variant')url.searchParams.delete(key);
+  return url.toString();
+ }catch{return '';}
+};
+const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
+function sanitizeJson(value){
+ return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
+  .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
+}
+function fixtureHtml(html){
+ const compact=compactCoffeeProductHtml(html);
+ if(!compact)return '';
+ const chunks=[];let cursor=0;
+ for(const block of rawElements(compact)){
+  chunks.push(compact.slice(cursor,block.start));
+  const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
+  if(type&&block.closed){
+   const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
+   catch{/* Invalid script data is not preserved as executable markup. */}
+  }
+  cursor=block.end;
+ }
+ chunks.push(compact.slice(cursor));
+ return removeElements(chunks.join(''),['form','iframe','noscript'])
+  .replace(/<input\b[^<>]{0,4000}>/gi,'')
+  .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
+  .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
+  .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
+}
+function assess(target,result){
+ const gaps=[],checked=[];
+ if(target.negative){
+  if(result?.ok)gaps.push({field:'product_identity',reason:'homepage_was_accepted_as_product'});
+  else if(result?.reason!=='ambiguous_or_missing_product')gaps.push({field:'product_identity',reason:'negative_control_unverified',source_reason:result?.reason||'no_result'});
+  return {checked:['homepage_not_product'],gaps};
+ }
+ if(!result?.ok)return {checked,gaps:[{field:'product',reason:result?.reason||'no_result'}],
+  unverified_fields:[...Object.keys(target.expected||{}),...Object.keys(target.recipe||{}).map(key=>'espresso.'+key)]};
+ for(const [field,pattern] of Object.entries(target.expected||{})){
+  checked.push(field);
+  const value=result?.fields?.[field];
+  if(value==null||!String(value).trim())gaps.push({field,reason:result?.conflicts?.includes(field)?'conflicting_source_evidence':'missing_expected_source_field'});
+  else if(!pattern.test(fold(value)))gaps.push({field,reason:'source_expectation_mismatch',actual:value,expected_pattern:pattern.source});
+ }
+ for(const [field,value] of Object.entries(target.recipe||{})){
+  checked.push('espresso.'+field);
+  if(result?.roaster_recipe?.[field]!==value)gaps.push({field:'espresso.'+field,reason:'missing_or_incorrect_espresso_value',actual:result?.roaster_recipe?.[field]??null,expected:value});
+ }
+ for(const field of target.absent||[]){
+  checked.push('absent.'+field);
+  if(result?.fields?.[field]!=null)gaps.push({field,reason:'unsupported_inference',actual:result.fields[field]});
+ }
+ for(const field of target.expected_conflicts||[]){
+  checked.push('conflict.'+field);
+  if(!result?.conflicts?.includes(field)||result?.fields?.[field])gaps.push({field,reason:'previously_observed_source_conflict_not_withheld',actual:result?.fields?.[field]??null});
+ }
+ return {checked,gaps};
+}
+async function probe(target){
+ const started=performance.now(),requests=[],captures=[],pending=[];
+ let budgetRefusal=false,handlerResult=null,httpStatus=null,apiStubCalls=0;
+ const request=(options,callback)=>{
+  if(requests.length>=9){budgetRefusal=true;throw new Error('public_request_budget_exhausted');}
+  const begin=performance.now();
+  const record={url:publicUrl('https://'+options.hostname+options.path),method:options.method,
+   status:null,content_type:null,encoding:null,elapsed_ms:null,transport_error:null};
+  requests.push(record);
+  const outgoing=https.request(options,response=>{
+   record.status=response.statusCode??null;
+   record.content_type=String(response.headers['content-type']||'').slice(0,100);
+   record.encoding=String(response.headers['content-encoding']||'').slice(0,30);
+   response.once('end',()=>{record.elapsed_ms=Math.round(performance.now()-begin);});
+   response.once('close',()=>{record.elapsed_ms=Math.round(performance.now()-begin);});
+   callback(response);
+  });
+  outgoing.once('close',()=>{record.elapsed_ms=Math.round(performance.now()-begin);});
+  outgoing.once('error',error=>{
+   record.transport_error=/^[A-Z0-9_]{1,50}$/.test(error?.code||'')?error.code:'NETWORK_ERROR';
+   record.elapsed_ms=Math.round(performance.now()-begin);
+  });
+  return outgoing;
+ };
+ const capture=async(kind,url,result)=>{
+  const record={kind,url:publicUrl(result.source_url||url),ok:result.ok===true,reason:result.reason||null};
+  if(result.ok&&typeof result.html==='string'){
+   const sanitized=fixtureHtml(result.html);
+   record.bytes=Buffer.byteLength(result.html);record.original_sha256=sha(result.html);
+   record.fixture=target.id+'-'+captures.length+'.fixture.html';
+   record.sanitized_sha256=sha(sanitized);record.sanitized_bytes=Buffer.byteLength(sanitized);
+   const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
+   const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
+   record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
+   await writeFile(path.join(output,record.fixture),sanitized,'utf8');
+  }else if(result.ok&&typeof result.json==='string'){
+   record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
+   try{
+    const sanitized=sanitizeJson(JSON.parse(result.json));
+    record.fixture=target.id+'-'+captures.length+'.fixture.json';
+    record.sanitized_sha256=sha(sanitized);
+    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
+   }catch{record.fixture_unavailable='invalid_json';}
+  }
+  captures.push(record);
+ };
+ const wrap=(kind,transport)=>async(url,options={})=>{
+  const result=await transport(url,{...options,request});
+  // Await fixture writes before returning the source to the application.
+  // They do not change the returned bytes or the extraction result.
+  pending.push(capture(kind,url,result));
+  await pending.at(-1);
+  return result;
+ };
+ const apiFetch=async(url,options={})=>{
+  apiStubCalls++;
+  const endpoint=new URL(url).pathname;
+  let result;
+  if(endpoint==='/auth/v1/user')result={id:'public-probe-local-stub'};
+  else if(endpoint==='/rest/v1/rpc/dic_session_status')result={admitted:true,emailVerified:true};
+  else if(endpoint==='/rest/v1/rpc/dic_preview_cached_verified')result={ok:false};
+  else if(endpoint==='/rest/v1/rpc/dic_preview_preflight')result={allowed:true,ticket:'local-only-probe-ticket'};
+  else if(endpoint==='/rest/v1/rpc/dic_preview_complete')result={charged:true};
+  else throw new Error('Unexpected local backend stub endpoint: '+endpoint);
+  const expectedMethod=endpoint==='/auth/v1/user'?'GET':'POST';
+  if(options.method!==expectedMethod)throw new Error('Unexpected stub method');
+  return new Response(JSON.stringify(result),{status:200,headers:{'Content-Type':'application/json'}});
+ };
+ try{
+  const handler=createPreviewHandler({apiFetch,
+   readHtml:wrap('html',fetchPublicCoffeeHtml),readLargeHtml:wrap('large_html_retry',fetchPublicCoffeeProductRetry),
+   readJson:wrap('public_product_json',fetchPublicCoffeeJson),
+   env:key=>key==='SUPABASE_URL'?'https://public-probe-local.supabase.co':key==='SUPABASE_PUBLISHABLE_KEY'?'sb_publishable_local_stub':undefined});
+  const response=await handler(new Request('https://dic-probe.invalid/api/coffee-preview',{
+   method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer local.probe.stub'},
+   body:JSON.stringify({source_url:target.url})
+  }));
+  httpStatus=response.status;
+  handlerResult=await response.json();
+ }catch(error){handlerResult={ok:false,reason:'probe_exception',exception_type:error?.name||'Error'};}
+ await Promise.all(pending);
+ const assessment=assess(target,handlerResult);
+ if(budgetRefusal)assessment.gaps.push({field:'transport',reason:'request_budget_exhausted'});
+ return {id:target.id,url:publicUrl(target.url),requested_tracking_alias:target.url!==publicUrl(target.url),
+  required:target.required===true,negative:target.negative===true,source_note:target.source_note||null,
+  status:handlerResult?.ok?'parsed':handlerResult?.reason||'no_result',handler_http_status:httpStatus,
+  fields:handlerResult?.fields||{},conflicts:handlerResult?.conflicts||[],
+  recipe:handlerResult?.roaster_recipe||null,details:handlerResult?.roaster_details||{},
+  roast_hint:handlerResult?.roast_hint||null,
+  elapsed_ms:Math.round(performance.now()-started),public_request_count:requests.length,
+  local_backend_stub_calls:apiStubCalls,requests,captures,...assessment};
+}
+const startedAt=new Date().toISOString(),results=[];
+for(let index=0;index<selected.length;index+=2){
+ const batch=await Promise.all(selected.slice(index,index+2).map(probe));
+ for(const result of batch){
+  results.push(result);
+  console.log('[DIC COMPLETENESS SOURCE] '+JSON.stringify({id:result.id,status:result.status,
+   required:result.required,fields:result.fields,recipe:result.recipe,conflicts:result.conflicts,
+   gaps:result.gaps,public_request_count:result.public_request_count,elapsed_ms:result.elapsed_ms}));
+ }
+}
+const requiredFailures=results.filter(x=>x.required&&x.gaps.length);
+let sourceSha=null,sourceWorktreeDirty=null;
+try{
+ sourceSha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
+ sourceWorktreeDirty=Boolean(execFileSync('git',['status','--porcelain'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim());
+}
+catch{/* The report explicitly records a missing Git source instead of guessing. */}
+const result={version:1,started_at:startedAt,completed_at:new Date().toISOString(),
+ source_sha:sourceSha,source_worktree_dirty:sourceWorktreeDirty,workflow_sha:process.env.GITHUB_SHA||null,
+ scope:'Actual application extractor/public transport with local-only auth/quota stubs; public live source acceptance, not signed-member or deployed-app acceptance.',
+ fixture_notice:'Sanitized anonymous public responses; no scripts executed. Original hashes identify fetched responses. Check sanitization_preserves_html_extraction before treating fixtures as equivalent.',
+ initial_html_cap_bytes:MAX_HTML_BYTES,retry_html_cap_bytes:MAX_PRODUCT_RETRY_BYTES,
+ concurrency:2,maximum_public_requests_per_target:9,
+ summary:{targets:results.length,parsed:results.filter(x=>x.status==='parsed').length,
+  required_targets:results.filter(x=>x.required).length,required_failures:requiredFailures.map(x=>x.id),
+  observed_gaps:results.reduce((sum,x)=>sum+x.gaps.length,0),
+  sources_with_gaps:results.filter(x=>x.gaps.length).map(x=>x.id),
+  public_requests:results.reduce((sum,x)=>sum+x.public_request_count,0),
+  real_backend_requests:0,member_quota_consumed:0,production_writes:0,deployments:0},results};
+await writeFile(path.join(output,'results.json'),JSON.stringify(result,null,2)+'\n','utf8');
+console.log('[DIC COMPLETENESS SUMMARY] '+JSON.stringify(result.summary));
+console.log('[DIC COMPLETENESS ARTIFACTS] '+output);
+if(requiredFailures.length)process.exitCode=1;

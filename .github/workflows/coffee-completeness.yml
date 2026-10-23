@@ -1,0 +1,36 @@
+name: DIC coffee extraction source acceptance
+on:
+  push:
+    branches:
+      - development/backend-foundation
+      - work/issue33-product-completeness-20261023
+    paths:
+      - 'src/server/**'
+      - 'netlify/functions/coffee-url-preview.mjs'
+      - 'scripts/audit/coffee-completeness-live-probe.mjs'
+      - '.github/workflows/coffee-completeness.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-source-acceptance:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-completeness-probe]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Exercise bounded public extraction without production credentials
+        run: node scripts/audit/coffee-completeness-live-probe.mjs --outdir "$RUNNER_TEMP/coffee-completeness"
+      - name: Retain public source evidence and sanitized fixtures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-coffee-completeness-${{ github.run_id }}
+          path: ${{ runner.temp }}/coffee-completeness/
+          if-no-files-found: error
+          retention-days: 7
