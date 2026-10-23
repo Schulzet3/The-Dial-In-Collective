@@ -21,3 +21,10 @@ Actual published source remains `f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f`, Netl
 This follow-up is documentation-only. The consumed RELEASE_REQUEST, BACKUP_REQUEST, nightly workflow, backup scripts, release code/grants, provider settings and production branch remain unchanged. #93 remains READY, not deployed. Application reconciliation is PR94; its final integration is independently verified there. The current receipt is `docs/audits/2026-10-23-operations-reconciliation-receipt.json`.
 
 Historical operations journal: [exact archive](archive/2026-10-23-operations/OPS_JOURNAL.previous.md).
+
+## 2026-10-23T14:40:10.410Z — owner-authorized single-use READY batch request
+
+- Release DIC-20261023-READY-QUEUE-05 publish requested from exact tested source d57f0b3cfeac32be6cd7a2192662a63a57e67e0f; approved items #93/#96 only, plus necessary JWT-required Supabase Edge functions and Netlify app. Owner approval Issue #96 comment 6367192910.
+- Five exact-source CI checks PASS; no new SQL migrations. Edge functions updated and JWT-required: preview v4, verifier v6. Production Netlify publication remains unverified until provider readback.
+- Existing verified encrypted/offsite backup evidence reused for non-destructive release; latest read-only shots/notes count 23/23 (previously 22/22); no production member-data write by release. No new destructive migration or database deletion.
+- One guarded chat request, no force push, no credit check, no purchases. Release controller must enforce exact source, one-use grant and queue, then Netlify READY/current verification.
