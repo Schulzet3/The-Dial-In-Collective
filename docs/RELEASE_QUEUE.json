@@ -6,7 +6,30 @@
     "release_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
     "netlify_deploy_id": "6adabcecd4a2a68e94cdc09a"
   },
-  "items": [],
+  "items": [
+    {
+      "id": "DIC-Q-93-admin-counts",
+      "issue": 93,
+      "pr": null,
+      "title": "Keep collapsed Admin counters accurate and refresh them without loading record pages",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/admin/records.js"
+      ],
+      "tests": [
+        "Source branch candidate adds server-dashboard totals to unopened Approved/Shots, and independent light summary-only 45-second/focus refresh. Node/browser exact-source CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source Node/build/browser CI and integration readback pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/93",
+      "notes": "No production write or deployment; preserves lazy record loading, permissions, search-filtered expanded totals, and active forms."
+    }
+  ],
   "history": [
     {
       "id": "DIC-Q-78",
@@ -428,6 +451,6 @@
       "delivered_at_utc": "2026-10-23T01:48:46.334Z"
     }
   ],
-  "last_reconciled_utc": "2026-10-23T01:50:48.433Z",
+  "last_reconciled_utc": "2026-10-23T02:58:37.411Z",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }

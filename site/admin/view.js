@@ -17,7 +17,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   return Array.isArray(page?.items)&&!page.error&&Number.isSafeInteger(page.total)&&page.total>=0
    ?page.total:fallback;
  };
- const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong>${formatCount(value)}</strong><small>View all →</small></a>`;
+ const stat=(label,value,kind)=>`<a class="admin-stat" href="#admin-${e(kind)}"><span>${e(label)}</span><strong data-admin-count="${e(kind)}">${formatCount(value)}</strong><small>View all →</small></a>`;
  const reviewActions=item=>`  <div class="admin-review-actions" aria-label="Review ${e(item.name||'coffee')}">
    <button type="button" data-action="review-approve" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Approve Distinct Coffee</button>
    <button type="button" class="ghost compact" data-action="review-merge-prepare" data-id="${e(String(item.id||''))}">Resolve Duplicate</button>
@@ -66,8 +66,8 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  <section class="admin-panel admin-record-section" id="admin-conflicts" tabindex="-1">
  ${adminDisclosure('Conflicts','conflicts',count('conflicts',stats.conflicts),reviewSection('conflicts','No coffee conflicts.'),{expanded:options.openSections?.has('conflicts')})}
  </section>
- ${renderAdminRecordCollection('approved',records.approved||(options.openSections?.has('approved')?{loading:true}:{}),{expanded:options.openSections?.has('approved')})}
- ${renderAdminRecordCollection('shots',records.shots||(options.openSections?.has('shots')?{loading:true}:{}),{expanded:options.openSections?.has('shots'),openCoffeeGroups:options.openCoffeeGroups})}
+ ${renderAdminRecordCollection('approved',records.approved||(options.openSections?.has('approved')?{loading:true}:{total:stats.verified_coffees}),{expanded:options.openSections?.has('approved')})}
+ ${renderAdminRecordCollection('shots',records.shots||(options.openSections?.has('shots')?{loading:true}:{total:stats.shot_records}),{expanded:options.openSections?.has('shots'),openCoffeeGroups:options.openCoffeeGroups})}
  <section class="admin-panel admin-record-section" id="admin-accounts" tabindex="-1">${adminDisclosure('Accounts','accounts',count('accounts',stats.active_accounts),access?renderAdminAccessPanel(access,issued,records.accounts,records.invites):'<p class="helper" role="status">'+(options.openSections?.has('accounts')?'Loading account records…':'Open to load account records.')+'</p>',{expanded:options.openSections?.has('accounts')})}</section>
  <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
 }

@@ -6,7 +6,7 @@ export function adminDisclosure(title,kind,count,content,{expanded=false}={}){
  const num=count!=null&&Number.isSafeInteger(Number(count))&&Number(count)>=0?String(Number(count)):'';
  return '<details class="admin-disclosure" data-admin-section="'+e(kind)+'"'+(expanded?' open':'')+'>'+
  '<summary class="admin-disclosure-summary"><h2>'+e(title)+'</h2>'+
- (num?'<span class="admin-count">'+e(num)+'</span>':'')+
+ (num?'<span class="admin-count" data-admin-count="'+e(kind)+'">'+e(num)+'</span>':'')+
  '<span class="admin-chevron" aria-hidden="true">⌄</span></summary>'+
  '<div class="admin-disclosure-body">'+content+'</div></details>';
 }
