@@ -1,33 +1,29 @@
 # Current Status
 
-## Reconciled October 23, 2026 UTC / October 22 MDT
+## October23 UTC / October22 MDT: reconciled audit snapshot
 
-This is the active snapshot. Older detailed checkpoints are preserved byte-for-byte at [previous status](archive/2026-10-23-reconciliation/CURRENT_STATUS.previous.md). Verify live SHAs and provider state before a new mutation.
+Earlier status is preserved byte-for-byte at [archive](archive/2026-10-23-reconciliation/CURRENT_STATUS.previous.md). Verify live refs/provider before mutations. Canonical specification/ledger and current Project Instructions govern.
 
-### Actually deployed
+### Published and READY are different
 
-Netlify current READY deploy **6adabcecd4a2a68e94cdc09a** serves `release/production` **f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f**. Tested application source: **7156f0d3f1b960775c9256e7fcf92e0b89be8cc6**. Release `DIC-20261022-READY-QUEUE-04` is consumed. The 11-item prior queue batch is DEPLOYED, including responsive clipping repair, direct-save refinements, Admin lazy loading/search, Community search, extractor cache/quota refinements, browser-test source and password requirements. [Production receipt](PRODUCTION_RELEASE_2026-10-23_READY_QUEUE_VERIFIED.json).
+Actual Netlify READY/current deploy **6adabcecd4a2a68e94cdc09a** serves release **f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f**, tested app **7156f0d3f1b960775c9256e7fcf92e0b89be8cc6**. Grant DIC-20261022-READY-QUEUE-04 consumed. Prior11-item batch DEPLOYED: responsive repair, direct-save refinements, Admin lazy/search, Community search, extractor cache/quota, browser tests and password rules. [Receipt](PRODUCTION_RELEASE_2026-10-23_READY_QUEUE_VERIFIED.json).
 
-Supabase `azviqqejypsefzilgonr` is ACTIVE_HEALTHY on PostgreSQL 17.11 with **43 applied migrations**. Verifier Edge v5 and preview Edge v3 are ACTIVE with JWT verification. Fresh read-only audit: **5 accounts, 22 shots, 22 notes, 7 coffees, 7 submissions, 2 Community rows, 48 mutation receipts**. All 46 application public/private tables have RLS; no anon/authenticated direct table INSERT/UPDATE/DELETE and no anonymous public dic_* execution. This is catalog/aggregate evidence, not proof of every authenticated runtime path. Dormant private Hide Shot implementation remains intentionally deferred; no new SQL/Edge/Auth/data writes.
+**#93 remains the sole READY, NOT DEPLOYED queue item.** Exact testedsource6af607ada105b0c406829e8577e8ad7c543ab52d; recorded runs39892795031/39892795034/39892795082. This audit does not publish. Queue unchanged.
 
-### READY, not deployed
+Supabase ACTIVE_HEALTHY PG17.11,43migrations, verifierEdgev5/previewv3 ACTIVE JWT. Fresh aggregate/catalog evidence:5accounts,22shots,22notes,7coffees,7submissions,2Community,48receipts; all46applicationtablesRLS; no anon/authenticated direct table writes or anonymous publicdic_* execution. Intended guarded helpers remain. Private HideShot retirement is explicitly deferred, no new SQL/Edge/Auth/data writes. Catalog facts do not prove every runtime path.
 
-**#93 Admin collapsed-section counters** is the sole active READY queue item, source **6af607ada105b0c406829e8577e8ad7c543ab52d**. Recorded exact-source evidence: Node/lint/build **39892795031**, cloud/mobile **39892795034**, approval **39892795082**. Development recovery head before this audit: **79e688a95081ab2966954f64df49f49968d2b6b2**. Queue contents are preserved by this reconciliation. No publication is authorized by the audit request.
+### Audit and integration
 
-### Issue and workflow reconciliation
+32original issues reviewed;12duplicate/completed/unnecessary trackers closed with full residual transfers.19distinct work items remain plus70until final audit integration/readback. App PR94 preserves all51ownerkeys,15contracts/66assertions and originalbaseline/history; corrects obsolete credit/device/approval/dose/deployment metadata. Source5caebdf9 passed Node/build39898667022, approval39898666929, SQL39898666933 and visual39898667028; cloud/mobile was still running at that checkpoint. Final correction source requires its own applicable checks. [All issue dispositions](audits/2026-10-23-workflow-reconciliation.md).
 
-All 32 original open issues were reviewed. Twelve redundant/completed/unnecessary trackers have been closed with transferred criteria; #70 is the current audit until integration/readback finishes. Nineteen distinct retained work items are classified in the [audit register](audits/2026-10-23-workflow-reconciliation.md).
+Main PR95 merged weekly source-consistency repair at **314ccf362dacba660e3b5a5236bb1bde2878d6e3**, testedsource81b56a47 with successful mainCI39898590290. All weekly jobs now use one immutable developmentSHA. App mirror has identical workflow/test blobs. Main README/journals now reflect actual release, correctbackup pin and schema-v4; exactoldbytes archived. Final postmerge CI/readback belongs in the completion receipt. No release/backup request or nightly path changed.
 
-True feature gaps remain #10/#12/#13/#14/#15/#16; #17 retains essential grinder-scale decisions. Do not claim specification-complete beta. Owner-device testing is optional. Credit gates and repeated routine/component approval loops are retired; exact-source, one-use, privacy and recovery safeguards remain. The repository Project Instructions copy already agrees with current supplied instructions.
+### Backup and remaining evidence
 
-### Operations and actual remaining limits
+Actual daily08UTC and Sunday08UTC schedules configured; next newly timed natural executions not yet observed. Latest observed scheduled backup39796762687 began October22at14:33:59UTC under preceding schedule. Artifact12434555176 is byte-identical to private Drive ciphertext, SHA256bd575a9716ea0b76225827f0b33a036df10a49b62b86ecee5faa556ada5fdb0d, ZIPintegrityPASS with onlybackup.age. No new dump/decryption/freshrestore. Push-onlybackup39886382969 is not scheduledcourier proof.
 
-Operations recovery head: **2b635e61878642ee46b2c457b1096bd826c5dc01**. Main backup source is pinned to actual published **f97b8f30...**. Installed cron definitions are daily encrypted backup **08:00 UTC** and weekly regression **Sunday 08:00 UTC**; the first execution of the newly timed schedules is not yet observed in this audit.
+**Notification evidence correction:** false task-level flags are the same discrepancy already recorded against the owner's accepted enabled global Push/Email proof. They do NOT establish disabled settings, a changed configuration or a new release blocker. No screenshot/settings recheck is needed or permitted. Natural condition-alert delivery remains unverified; prior AppsScript alert/trigger evidence remains accepted. [Correction](audits/2026-10-23-notification-evidence-correction.md). #28 owns only distinct courier/retention/natural-alert evidence.
 
-Latest observed scheduled backup **39796762687** began October 22 **14:33:59 UTC** under the preceding schedule. Its artifact **12434555176** matches the owner-only Drive ciphertext byte-for-byte: SHA256 `bd575a9716ea0b76225827f0b33a036df10a49b62b86ecee5faa556ada5fdb0d`; ZIP integrity passed, only `backup.age`, no decryption/new restore. The later push-only postrelease backup is not a scheduled courier proof.
+Feature work #10/#12/#13/#14/#15/#16 remains; grinderdecisions#17 open. Deviceobservations optional, never fabricated. PrivateFree CI advisory. Inaccessible providerAuth/DNS/Resend/AppsScriptsettings, everyoriginalresearch/chatbody, newrealmember/device/VoiceOveracceptance, freshrestore and universalperformance remain unverified. No every-line/zero-defect claim. Current repository Project Instructions already align; no new settings paste is required.
 
-**Actual unresolved alert-setting gap (#28):** the enabled Backup Watchdog reports both push and email notifications disabled. The available update tool cannot change those channels. Historical successful alert tests are not current delivery proof.
-
-Provider settings not exposed by connected reads, every original research/chat body, real signed-in/device/assistive-technology flows not exercised, a fresh restore of this ciphertext and all production performance behavior remain explicitly unverified. Security/performance informational advisories were assessed, not blindly suppressed. This is not a guarantee of zero defects.
-
-Current work journal: [Issue #70](workstreams/issue-70.md). No new Netlify release, production database/member changes, paid plan/credit actions or destructive cleanup occurred in this audit.
+Current [workjournal](workstreams/issue-70.md). No new Netlify publication, memberdata/SQLmutation, paidchange or destructivecleanup.

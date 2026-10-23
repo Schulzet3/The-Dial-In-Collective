@@ -30,7 +30,7 @@ test('production evidence survives compact current view without a new release gr
  assert.equal(matrix.contracts.find(x=>x.id==='fast_flow_sixth_style_hybrid').production_migration_version,'20261022163126');
  assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_one_time_style').hosted_sql_applied,true);
 });
-test('current metadata cannot revive retired credit, device or dose gates',()=>{
+test('current metadata cannot revive retired credit, device, dose or notification-evidence gates',()=>{
  assert.equal(matrix.netlify_credit_owner_only.assistant_balance_check_required,false);
  assert.equal(matrix.netlify_credit_owner_only.minimum_balance_gate,false);
  assert.equal(matrix.netlify_credit_owner_only.request_credit_evidence,false);
@@ -40,6 +40,11 @@ test('current metadata cannot revive retired credit, device or dose gates',()=>{
  assert.match(matrix.sitewide_direct_save_policy.current_dose_policy,/New shot only.*more than 2 g.*no repeat on historical edit/);
  assert.ok(matrix.contracts.every(x=>x.device_acceptance.startsWith('RETIRED_NOT_REQUIRED')));
  assert.ok(matrix.active_gap_flags.some(x=>x.id==='multi_worker_release_guard'&&x.issue===27));
- assert.ok(matrix.active_gap_flags.some(x=>x.id==='backup_watchdog_delivery_channels'&&x.issue===28));
+ const delivery=matrix.active_gap_flags.find(x=>x.id==='backup_watchdog_delivery_channels');
+ assert.equal(delivery.issue,28);
+ assert.equal(delivery.status,'METADATA_DISCREPANCY_NATURAL_ALERT_DELIVERY_UNVERIFIED');
+ assert.equal(delivery.owner_global_notifications_enabled,'ACCEPTED_PREVIOUS_PROOF');
+ assert.equal(delivery.disabled_delivery_proven,false);
+ assert.equal(delivery.request_owner_reconfirmation,false);
  assert.equal(matrix.private_hide_shot_retirement_deferral.candidate_migration_applied,false);
 });
