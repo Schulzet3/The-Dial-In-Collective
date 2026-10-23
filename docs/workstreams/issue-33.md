@@ -136,3 +136,34 @@ including 9 new exact-tab espresso tests and 6 final source-detail cases. Combin
 espresso/enrichment/auth/resource checks pass 123/123. Actual Onyx source replay
 returns only 20 g / 47 g and no total time, temperature or inferred ratio. Queue
 schema and approval coverage pass; exact GitHub checks remain the final gate.
+
+## Independent final conflict review
+
+Source 0954e07332a2628816f67e37df05612ee3a816c6 passed 766/766 Node 22.23.3
+cases, lint/build, and the expanded live run 40017300314: all 10 required targets,
+72 assertions, zero gaps, 19 public requests and all 10 HTML sanitization parity
+checks. Artifact 12529026834 was independently downloaded and SHA256 verified:
+64f73d9fca4468333c0dcef679e79dcbbb0c0672ff7fdfacc8216733051af9fd.
+The final read-only reviewer then found one concrete case outside those live
+assertions: structured Origin: Ethiopia could be overwritten by visible Country:
+Colombia and Region: Huila. Repair the cross-alias conflict and preserve compatible
+country/region detail before integration. The queue remains TESTING until the
+repaired source passes its exact checks.
+
+A separate cache audit confirmed the public preview cache is handler-local memory;
+updated handlers start empty. No persistent cache invalidation or version change
+is needed. Incomplete catalog entries proceed to fresh extraction, and existing
+warm-result/auth/cooldown behavior stays intact. No provider or member data writes
+were performed during these reviews.
+
+The final conflict repair changes only coffee-page-metadata.mjs and the new
+coffee-geography-conflicts.test.mjs beyond these evidence/queue records. Exact
+country segments now agree across Origin/Country aliases; compatible accented,
+reordered and more detailed geography survives. A bounded set of 16 untyped
+origins is checked against the explicit country/region pair. Rejected origin
+cannot return through nearby, metadata, endpoint or blend fallbacks. All 8 new
+regressions pass (6 failed before repair); the combined focused run passes 107/107.
+The complete local Node 24.19.0 suite now passes **774/774**, zero failed, skipped,
+cancelled or todo, in 10.53 seconds. Approval coverage, queue schema and diff
+whitespace pass. Final exact-source Node 22 and live checks precede integration;
+no publication or member-data change has occurred.

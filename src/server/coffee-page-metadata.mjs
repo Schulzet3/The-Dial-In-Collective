@@ -111,6 +111,15 @@ const conflictsByFields=new WeakMap();
 const producerEvidenceByFields=new WeakMap();
 const farmEvidenceByFields=new WeakMap();
 const geographyByFields=new WeakMap();
+const ORIGIN_COUNTRIES=new Set('Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|China|Vietnam|Laos|Myanmar|Papua New Guinea|DR Congo|United States|Jamaica'.split('|').map(keyOf));
+const geographyParts=value=>[...new Set(String(value).split(/\s*(?:,|\/|;|&|\+|\band\b)\s*|\s+[-–—|]\s+/i).map(keyOf).filter(Boolean))];
+function compatibleGeography(first,second){
+ if(keyOf(first)===keyOf(second))return first;
+ const a=geographyParts(first),b=geographyParts(second);
+ if(a.every(part=>b.includes(part)))return second;
+ if(b.every(part=>a.includes(part)))return first;
+ return null;
+}
 // Some merchants flatten <br>-separated specifications into one field.
 // Stop at the NEXT explicit key, including concatenated CamelCase labels:
 // e.g. "Lime, Tea Origin: Kenya" or "GedebElevation: 1900m".
@@ -194,14 +203,39 @@ function addField(fields,rawKey,value){
   const label=keyOf(rawKey),geography=geographyByFields.get(fields)||{};
   const part=/^(?:country|countryoforigin|pais|paisdeorigen|pays)$/.test(label)?'country':
    /^(?:region|growingregion)$/.test(label)?'region':null;
-  if(part&&geography[part]&&keyOf(geography[part])!==keyOf(s)){
-   conflicts?.add('origin');delete fields.origin;return;
+  const reject=()=>{conflicts?.add('origin');delete fields.origin;geographyByFields.delete(fields);};
+  // Country evidence also appears under Origin/Origen or inside a fuller
+  // region-country value. A narrower label cannot overwrite a different
+  // explicit country, even before its Region counterpart has arrived.
+  const countries=geographyParts(s).filter(value=>ORIGIN_COUNTRIES.has(value)).sort();
+  if(!countries.length&&part==='country')countries.push(...geographyParts(s).sort());
+  if(countries.length&&geography.countries?.length&&countries.join('|')!==geography.countries.join('|')){
+   reject();return;
   }
-  if(part&&!geography[part])geography[part]=s;
+  if(countries.length)geography.countries=countries;
+  if(part){
+   const value=geography[part]?compatibleGeography(geography[part],s):s;
+   if(!value){reject();return;}
+   geography[part]=value;
+  }else{
+   // Keep a small deduplicated set of original untyped values. Waiting for
+   // the typed pair permits Origin:Huila as well as Origin:Colombia, while
+   // still checking every earlier source once that pair is complete.
+   geography.origins??=[];
+   if(!geography.origins.some(value=>keyOf(value)===keyOf(s))){
+    if(geography.origins.length>=16){reject();return;}
+    geography.origins.push(s);
+   }
+  }
   geographyByFields.set(fields,geography);
   if(geography.country&&geography.region){
    const region=geography.region,country=geography.country;
-   fields.origin=keyOf(region).includes(keyOf(country))?region:region+', '+country;
+   let combined=keyOf(region).includes(keyOf(country))?region:region+', '+country;
+   for(const origin of geography.origins||[]){
+    combined=compatibleGeography(combined,origin);
+    if(!combined){reject();return;}
+   }
+   fields.origin=combined;
    return;
   }
  }
@@ -614,6 +648,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roaster_details.processing_detail=blend.processes.join(', ');
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
+ // A later direct blend fallback cannot resurrect rejected geography.
+ if(conflicts.has('origin'))delete fields.origin;
  const roaster_recipe=explicitEspressoRecipe(product)||extractProductEspressoReference(product);
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
