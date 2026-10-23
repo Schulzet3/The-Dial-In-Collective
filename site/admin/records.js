@@ -81,6 +81,7 @@ export function renderAdminRecord(item,kind,{reviewActions=null,reviewComparison
       '<p class="helper">Preview fills only empty inputs; inspect and save changes explicitly. Extraction alone never verifies official evidence.</p>':'')+
      
      '<div class="admin-review-actions"><button type="submit">Save Changes</button><button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Cancel</button></div></form>':'')+
+  (enabled?'<button type="button" class="ghost compact admin-delete-action" data-action="admin-delete-record"'+attr('data-id',id)+attr('data-kind',type)+attr('data-revision',rev)+'>Delete '+(shot?'Shot':approved?'Coffee':'Submission')+'</button>':'')+
   (typeof reviewActions==='function'?reviewActions(item):'')+
   '</article>';
 }

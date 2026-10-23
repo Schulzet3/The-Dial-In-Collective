@@ -283,6 +283,25 @@ async function start(){
    }
    const id=button.dataset.id||'';
    if(!/^[0-9a-f]{8}-[0-9a-f-]{27,}$/.test(id))return;
+   if(action==='admin-delete-record'){
+    guarded(async()=>{
+     const kind=button.dataset.kind;
+     const revision=Number(button.dataset.revision);
+     if(!['shot','approved','submission'].includes(kind)||!Number.isSafeInteger(revision)||revision<1)
+      throw new Error('Refresh the record before requesting deletion.');
+     const impact=await adminRpc('dic_admin_delete_preview',{p_kind:kind,p_record_id:id});
+     if(impact.revision!==revision)throw new Error('This record has changed. Refresh before deleting.');
+     const count=key=>Number(impact[key]||0);
+     const related='Associated records: '+count('library_entries')+' library entries, '+count('shots')+' shots, '+count('shot_notes')+' notes, '+count('linked_submissions')+' submissions, '+count('community_shots')+' Community contributions, '+count('source_records')+' source records.';
+     if(impact.blocked)throw new Error('Deletion blocked to preserve Community contributions or other canonical references. '+related+' This record was not changed.');
+     const warning='Delete this '+(kind==='shot'?'shot':kind==='approved'?'approved coffee':'pending submission')+'?\n\n'+related+'\n\nDeleting a coffee or submission also deletes its associated shots and notes. Community contributions linked to an individual deleted shot remain available anonymously; the private source link is detached. This cannot be undone without a verified backup.\n\nConfirm deletion?';
+     if(!globalThis.confirm?.(warning))return;
+     const result=await adminRpc('dic_admin_delete_record',{p_kind:kind,p_record_id:id,p_expected_revision:revision,p_expected_impact:impact});
+     if(result?.ok!==true)throw new Error('Deletion did not complete. Review the record before retrying.');
+     delete mergeChoices[id];delete comparisons[id];await refresh();
+     actionMessage('Record deleted after server-verified impact confirmation.');
+    });return;
+   }
    if(action==='admin-load-comparison'){
     guarded(async()=>{
      const item=['pending','conflicts'].flatMap(k=>records[k]?.items||[]).find(row=>row.id===id);

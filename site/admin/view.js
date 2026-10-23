@@ -45,6 +45,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   ${renderMatch(item)}
   
   ${reviewActions(item)}
+  <button type="button" class="ghost compact admin-delete-action" data-action="admin-delete-record" data-kind="submission" data-id="${e(String(item.id||''))}" data-revision="${e(String(item.revision??''))}">Delete Submission</button>
  </article>`;
  const reviewSection=(kind,empty)=>{
   const page=records[kind],complete=Array.isArray(page?.items)&&!page.error;
