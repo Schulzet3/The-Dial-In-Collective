@@ -1,29 +1,29 @@
 # Current Status
 
-## October23 UTC / October22 MDT: reconciled audit snapshot
+## October 23 UTC / October 22 MDT: audit integrated
 
-Earlier status is preserved byte-for-byte at [archive](archive/2026-10-23-reconciliation/CURRENT_STATUS.previous.md). Verify live refs/provider before mutations. Canonical specification/ledger and current Project Instructions govern.
+PR94 is confirmed merged by non-force fast-forward at **24f75f1eae7a17de9af388c064940cdeed9cf772**. Its exact-source Node/lint/build, approval/preservation and isolated SQL checks passed. Valid browser/visual evidence is reused for unchanged application code; no unperformed duplicate rerun is called passed. PR95's weekly source-consistency repair is merged on main at **314ccf362dacba660e3b5a5236bb1bde2878d6e3**, with successful candidate and post-merge CI. Main documentation receipt **1678391d18d96d72f207a42b5edf6da506e8b7b1** also passed CI.
 
-### Published and READY are different
+The original 32 issues were reviewed. Ten duplicates were consolidated, #78's deployed repair was closed, #42's unnecessary cleanup was closed without deleting data, and #70 now records the completed audit. **Nineteen distinct work items remain:** #5, #10, #12, #13, #14, #15, #16, #17, #18, #22, #26, #27, #28, #30, #33, #37, #47, #50 and #93. Final live issue closure/count is recorded in #70. [Complete audit](audits/2026-10-23-workflow-reconciliation.md).
 
-Actual Netlify READY/current deploy **6adabcecd4a2a68e94cdc09a** serves release **f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f**, tested app **7156f0d3f1b960775c9256e7fcf92e0b89be8cc6**. Grant DIC-20261022-READY-QUEUE-04 consumed. Prior11-item batch DEPLOYED: responsive repair, direct-save refinements, Admin lazy/search, Community search, extractor cache/quota, browser tests and password rules. [Receipt](PRODUCTION_RELEASE_2026-10-23_READY_QUEUE_VERIFIED.json).
+### Actually deployed versus READY
 
-**#93 remains the sole READY, NOT DEPLOYED queue item.** Exact testedsource6af607ada105b0c406829e8577e8ad7c543ab52d; recorded runs39892795031/39892795034/39892795082. This audit does not publish. Queue unchanged.
+Netlify remains READY/current **6adabcecd4a2a68e94cdc09a**, release **f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f**, tested published application **7156f0d3f1b960775c9256e7fcf92e0b89be8cc6**. Grant DIC-20261022-READY-QUEUE-04 is consumed. The prior 11-item batch is deployed. This audit publishes nothing.
 
-Supabase ACTIVE_HEALTHY PG17.11,43migrations, verifierEdgev5/previewv3 ACTIVE JWT. Fresh aggregate/catalog evidence:5accounts,22shots,22notes,7coffees,7submissions,2Community,48receipts; all46applicationtablesRLS; no anon/authenticated direct table writes or anonymous publicdic_* execution. Intended guarded helpers remain. Private HideShot retirement is explicitly deferred, no new SQL/Edge/Auth/data writes. Catalog facts do not prove every runtime path.
+**#93 is the sole active READY, NOT DEPLOYED queue item.** Implementation source **6af607ada105b0c406829e8577e8ad7c543ab52d** has recorded successful Node/build, cloud/mobile and approval runs. Queue blob **936b337c63c5f36ad3ad07681bbd29256beffd07** is unchanged. Audit documentation/tests and the operations-only weekly repair do not add an untracked application feature to the release queue.
 
-### Audit and integration
+### Provider and backup readback
 
-32original issues reviewed;12duplicate/completed/unnecessary trackers closed with full residual transfers.19distinct work items remain plus70until final audit integration/readback. App PR94 preserves all51ownerkeys,15contracts/66assertions and originalbaseline/history; corrects obsolete credit/device/approval/dose/deployment metadata. Source5caebdf9 passed Node/build39898667022, approval39898666929, SQL39898666933 and visual39898667028; cloud/mobile was still running at that checkpoint. Final correction source requires its own applicable checks. [All issue dispositions](audits/2026-10-23-workflow-reconciliation.md).
+Supabase at 04:15:39 UTC: **43 migrations, 46 application tables with RLS, 5 accounts, 22 shots, 22 notes, 7 coffees, 7 submissions, 2 Community rows and 48 receipts**. Edge verifier v5 and preview v3 are ACTIVE/JWT-protected. Direct anonymous/member execution of private.mutate remains denied; the internal Hide Shot retirement remains explicitly deferred. No SQL/Auth/Edge/member-data change occurred.
 
-Main PR95 merged weekly source-consistency repair at **314ccf362dacba660e3b5a5236bb1bde2878d6e3**, testedsource81b56a47 with successful mainCI39898590290. All weekly jobs now use one immutable developmentSHA. App mirror has identical workflow/test blobs. Main README/journals now reflect actual release, correctbackup pin and schema-v4; exactoldbytes archived. Final postmerge CI/readback belongs in the completion receipt. No release/backup request or nightly path changed.
+Daily backup 08:00 UTC and Sunday regression 08:00 UTC are configured on main. All weekly suites now share one immutable development SHA. Future natural schedule execution is not claimed. Scheduled backup39796762687/artifact12434555176 matches the private Drive ciphertext SHA256 and ZIP integrity; no new export, decryption or fresh restore.
 
-### Backup and remaining evidence
+False task-level notification flags remain the previously documented discrepancy against accepted enabled global Push/Email proof. They do NOT prove disabled settings or a new failure. No settings screenshot, recheck or reconfirmation is needed. Natural condition-alert receipt remains unverified in #28; prior owner and Apps Script evidence remains accepted.
 
-Actual daily08UTC and Sunday08UTC schedules configured; next newly timed natural executions not yet observed. Latest observed scheduled backup39796762687 began October22at14:33:59UTC under preceding schedule. Artifact12434555176 is byte-identical to private Drive ciphertext, SHA256bd575a9716ea0b76225827f0b33a036df10a49b62b86ecee5faa556ada5fdb0d, ZIPintegrityPASS with onlybackup.age. No new dump/decryption/freshrestore. Push-onlybackup39886382969 is not scheduledcourier proof.
+### Remaining work and boundaries
 
-**Notification evidence correction:** false task-level flags are the same discrepancy already recorded against the owner's accepted enabled global Push/Email proof. They do NOT establish disabled settings, a changed configuration or a new release blocker. No screenshot/settings recheck is needed or permitted. Natural condition-alert delivery remains unverified; prior AppsScript alert/trigger evidence remains accepted. [Correction](audits/2026-10-23-notification-evidence-correction.md). #28 owns only distinct courier/retention/natural-alert evidence.
+Core feature work #10/#12/#13/#14/#15/#16 and grinder decisions #17 remain. Focused verification and deferred/nonblocking work are separately classified in the audit. Owner physical-device testing is optional. Credit checks and repeated routine approval loops are retired; exact-source, one-use, privacy and recovery safeguards remain.
 
-Feature work #10/#12/#13/#14/#15/#16 remains; grinderdecisions#17 open. Deviceobservations optional, never fabricated. PrivateFree CI advisory. Inaccessible providerAuth/DNS/Resend/AppsScriptsettings, everyoriginalresearch/chatbody, newrealmember/device/VoiceOveracceptance, freshrestore and universalperformance remain unverified. No every-line/zero-defect claim. Current repository Project Instructions already align; no new settings paste is required.
+Some provider settings, original chat/research bodies, new physical-device/VoiceOver/signed-member checks and fresh archive restoration remain unverified. This is not an every-line or zero-defect guarantee. The repository Project Instructions copy already matches current instructions, so no new settings paste is needed.
 
-Current [workjournal](workstreams/issue-70.md). No new Netlify publication, memberdata/SQLmutation, paidchange or destructivecleanup.
+[Completion receipt](audits/2026-10-23-reconciliation-receipt.json) · [Work journal](workstreams/issue-70.md) · [Exact previous status](archive/2026-10-23-reconciliation/CURRENT_STATUS.previous.md).
