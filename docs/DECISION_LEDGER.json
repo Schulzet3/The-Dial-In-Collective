@@ -2218,6 +2218,15 @@
       "decision": "Proactively suggest exact paste-ready Project Instructions changes whenever new material long-lived requirements, branches, release/backup/CI workflow, tools or communication defaults warrant revision. Keep GitHub copy current; user alone pastes into ChatGPT Project Settings. Avoid gratuitous suggestions for routine app features.",
       "supersedes": "Passive instruction upkeep requiring user to notice standing policy drift",
       "approval": "Issue #70 comment 6348177131, owner direct request 2026-10-22"
+    },
+    {
+      "id": "ADMIN-COFFEE-SHOT-DELETE-AND-COMPARE-20261023",
+      "status": "locked",
+      "date": "2026-10-23",
+      "title": "Owner-approved Admin comparison and guarded coffee/shot deletion",
+      "decision": "Replace redundant Hold UI with no-action Pending; add compare/flag explanation and guarded one-confirm administrator deletion with dependent personal-shot cleanup.",
+      "supersedes": "Earlier absence of Admin coffee/shot Delete UI and redundant Hold button only. Community durability, account retention, historical audit, permissions, release controls preserved.",
+      "approval": "Owner explicitly requested Build it after approving screenshot and one-extra-click dependency-aware cascading shot deletion in project chat October 23."
     }
   ],
   "open_current_owner_decisions": [],
@@ -4126,5 +4135,26 @@
     "extractor_guard": "Only optimize preview preflight/caching/old path if reliability, usability and efficiency are preserved or improved; retain URL protections.",
     "scoped_journal_execution": "Owner Issue #80 approved indexed same-commit scoped workstream journals rather than forcing every parallel code/test/CI commit to edit the central giant journal. Keep central recovery pointer, Current Status, owner issue and release queue reconciled at integration and READY; same-commit evidence and source readback remain mandatory.",
     "limits": "No overwrite of concurrent work, do not publish, no live SQL/Admin migration until extra live version reconciled."
+  },
+  "current_owner_admin_review_delete_20261023": {
+    "id": "ADMIN-COFFEE-SHOT-DELETE-AND-COMPARE-20261023",
+    "status": "locked",
+    "owner_approved_at_local": "2026-10-23",
+    "issue": 100,
+    "pr": 101,
+    "scope": "Admin coffee side-by-side Pending comparison and administrator-only Delete Shot / Delete Pending Submission / Delete Approved Coffee",
+    "approval": "Explicit owner request: remove Hold action, display candidate details/conflicts without photos, add Delete with one extra confirmation showing associated records, deleting coffee/pending also deletes associated shots",
+    "requirements": {
+      "hold_action_ui": "REMOVED; an untouched review remains Pending",
+      "candidate_comparison": "submitted and possible existing records, grounded field differences; no product image",
+      "deletion_confirmation": "one additional confirmation click, server-authoritative impact and optimistic revision check",
+      "cascade": "atomic removal of linked personal shots, notes and library dependencies when deleting eligible coffee/submission",
+      "community": "historically qualifying anonymous Community remains durable; preserve on individual shot deletion and fail closed for coffee with Community or complex merged references",
+      "audit": "retain private limited receipts and existing unrelated audit records",
+      "authorization": "admin-only server RPC; anonymous/non-admin denied",
+      "production": "separate publish and pre-destructive verified encrypted backup required"
+    },
+    "historical_scope": "Overrides only previous absence of administrator coffee/shot deletion and the Hold-for-Clarification UI option; does not authorize member-account deletion, arbitrary purging, Community destruction, other privacy or security policy changes.",
+    "implementation": "IN_PROGRESS; source PR101; no release and no production SQL or record deletion"
   }
 }

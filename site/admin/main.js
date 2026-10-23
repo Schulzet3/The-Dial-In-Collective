@@ -15,6 +15,7 @@ async function start(){
  let busy=false;
  let pendingSectionRefresh=false;
  let mergeChoices=Object.create(null);
+  let comparisons=Object.create(null);
  let recordPages=Object.fromEntries(RECORD_KINDS.map(k=>[k,0]));
  let searchText='';
  let records={};
@@ -22,7 +23,7 @@ async function start(){
  const openSections=new Set();
  const openCoffeeGroups=new Set();
  const invalidate=message=>{
-  issued=null;mergeChoices=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
+  issued=null;mergeChoices=Object.create(null);comparisons=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
  try {
   secureOrigin();
@@ -88,7 +89,21 @@ async function start(){
     // No stale hidden-page totals override the fresh dashboard count.
     records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
     access=loadAccess?nextAccess:null;
-    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText});
+    // Keep the comparison scoped to a bounded, admin-authorized server search.
+    // The first visible pending records are prefetched for the expanded queue;
+    // others can request their own comparison without loading the entire catalog.
+    const visible=['pending','conflicts'].flatMap(kind=>records[kind]?.items||[]).filter(item=>item.id&&!Object.hasOwn(comparisons,item.id)).slice(0,6);
+    await Promise.all(visible.map(async item=>{
+      try{
+        const query=String(item.name||'').trim().slice(0,80);
+        if(!query)return;
+        const result=await adminRpc('dic_admin_review_candidates',{p_submission_id:item.id});
+        if(!invalidated)comparisons[item.id]=Array.isArray(result?.candidates)?result.candidates:[];
+      }catch(error){if(isAccessDenied(error))throw error;}
+    }));
+    if(invalidated)return;
+
+    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText,comparisons});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -267,6 +282,36 @@ async function start(){
    }
    const id=button.dataset.id||'';
    if(!/^[0-9a-f]{8}-[0-9a-f-]{27,}$/.test(id))return;
+   if(action==='admin-delete-record'){
+    guarded(async()=>{
+     const kind=button.dataset.kind;
+     const revision=Number(button.dataset.revision);
+     if(!['shot','approved','submission'].includes(kind)||!Number.isSafeInteger(revision)||revision<1)
+      throw new Error('Refresh the record before requesting deletion.');
+     const impact=await adminRpc('dic_admin_delete_preview',{p_kind:kind,p_record_id:id});
+     if(impact.revision!==revision)throw new Error('This record has changed. Refresh before deleting.');
+     const count=key=>Number(impact[key]||0);
+     const related='Associated records: '+count('library_entries')+' library entries, '+count('shots')+' shots, '+count('shot_notes')+' notes, '+count('linked_submissions')+' submissions, '+count('community_shots')+' Community contributions, '+count('source_records')+' source records.';
+     if(impact.blocked)throw new Error('Deletion blocked to preserve Community contributions or other canonical references. '+related+' This record was not changed.');
+     const warning='Delete this '+(kind==='shot'?'shot':kind==='approved'?'approved coffee':'pending submission')+'?\n\n'+related+'\n\nDeleting a coffee or submission also deletes its associated shots and notes. Community contributions linked to an individual deleted shot remain available anonymously; the private source link is detached. This cannot be undone without a verified backup.\n\nConfirm deletion?';
+     if(!globalThis.confirm?.(warning))return;
+     const result=await adminRpc('dic_admin_delete_record',{p_kind:kind,p_record_id:id,p_expected_revision:revision,p_expected_impact:impact});
+     if(result?.ok!==true)throw new Error('Deletion did not complete. Review the record before retrying.');
+     delete mergeChoices[id];delete comparisons[id];await refresh();
+     actionMessage('Record deleted after server-verified impact confirmation.');
+    });return;
+   }
+   if(action==='admin-load-comparison'){
+    guarded(async()=>{
+     const item=['pending','conflicts'].flatMap(k=>records[k]?.items||[]).find(row=>row.id===id);
+     if(!item)throw new Error('Expand Pending Coffees or Conflicts before comparing.');
+     const query=String(item.name||'').trim().slice(0,80);
+     if(!query)throw new Error('Coffee name required for comparison.');
+     const result=await adminRpc('dic_admin_review_candidates',{p_submission_id:id});
+     comparisons[id]=Array.isArray(result?.candidates)?result.candidates:[];
+     await refresh();
+    });return;
+   }
    if(action==='review-merge-prepare'){
     guarded(async()=>{
      const result=await adminRpc('dic_admin_coffee_candidates',{p_submission_id:id});
@@ -275,10 +320,10 @@ async function start(){
      mergeChoices[id]=candidates;await refresh();
     });return;
    }
-   if(['review-approve','review-merge','review-hold'].includes(action)){
+   if(['review-approve','review-merge'].includes(action)){
     const revision=Number(button.dataset.revision);
     if(!Number.isSafeInteger(revision)||revision<1)return;
-    const decision=action==='review-approve'?'approve':action==='review-merge'?'merge':'hold';
+    const decision=action==='review-approve'?'approve':'merge';
     const selected=decision==='merge'?root.querySelector('#admin-merge-'+id)?.value:null;
     if(decision==='merge'&&!mergeChoices[id]?.some(c=>c.id===selected))return;
     // Each deliberate resolution is one click. The server still checks role,
@@ -291,7 +336,7 @@ async function start(){
      });
      if(!result?.ok)throw new Error('The review did not complete. Refresh before retrying.');
      delete mergeChoices[id];issued=null;await refresh();
-     actionMessage(decision==='hold'?'Coffee held for clarification.':'Coffee reviewed successfully.');
+     actionMessage('Coffee reviewed successfully.');
     });return;
    }
    if(action==='revoke-invite'){

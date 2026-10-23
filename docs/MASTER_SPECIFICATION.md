@@ -2628,3 +2628,14 @@ No AI/OCR/browser runtime, arbitrary crawl, paid service, data mutation or
 publication is authorized by this implementation request. A universal100% source
 coverage claim is not justified. Evidence: [Issue33 journal](workstreams/issue-33.md)
 and [source acceptance record](audits/2026-10-23-extractor-completeness.json).
+
+
+## Owner-Locked Admin coffee/shot review and deletion (2026-10-23, Issue #100)
+
+The owner approved the screenshot-based Pending Coffee Review: show a submitted coffee beside the relevant existing candidate and field differences, with truthful reasons for review and no product photographs. Remove the redundant **Hold for Clarification** user-interface action: doing nothing leaves the submission Pending, without altering existing historic hold records. Preserve administrator-only **Approve Distinct Coffee** and **Resolve Duplicate**, existing exact-revision protections, and no unapproved automatic merging.
+
+The owner also expressly authorized administrator deletion of a pending coffee submission, an approved canonical coffee, or an individual logged shot. After a Delete request, show a live, server-authoritative count of all associated records and require exactly one further confirmation click. Deleting a coffee or Pending submission must delete its associated personal shots and notes together with affected personal library and related records in one atomic transaction; do not leave dangling shot references. Deleting one shot clears its private note and safely updates dependent favorites, without accidentally deleting other shots. Refuse stale revisions, changed impact, unauthenticated/non-admin callers, and access from other accounts.
+
+**Locked Community preservation remains intact unless expressly superseded:** valid anonymous Community contributions survive deletion of a source personal shot with the origin link detached. For a canonical coffee with Community observations, merged-coffee references or other non-reconcilable historical pointers, deletion is **blocked** with a clear dependency count rather than silently removing valid Community/history. Additional explicit approval and safe preservation design are needed to change that boundary. Retain limited private deletion receipts and pre-existing historical audit/mutation receipts; never republish or expose private member data as part of the preview.
+
+**Release separation:** These features are under development on Issue #100 / PR #101. Only apply database changes or destructive live record actions during separately authorized publication/operation, with verified encrypted backup when a potentially destructive database operation is imminent. Application review UI, migration and tests must all pass and be merged before the complete item is READY. No website or hosted database publication is implied by this approval.

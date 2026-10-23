@@ -52,6 +52,30 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6373371567",
       "notes": "October23 owner report of missing Bourbon Ají and comprehensive deterministic extractor improvement request. Source development only; production publication not authorized. Preserve quotas, cooldown, auth, DNS pinning, size/retry/request limits, explicit save and Pending/Verified distinction. No migrations, Edge changes or member-data mutation."
+    },
+    {
+      "id": "DIC-Q-100-admin-review-delete",
+      "issue": 100,
+      "pr": 101,
+      "title": "Side-by-side Admin coffee review and protected coffee/shot/submission deletion",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/view.js",
+        "site/admin/main.js",
+        "site/admin/styles.css",
+        "site/admin/records.js",
+        "supabase/migrations/20261023225600_dic_admin_safe_delete.sql"
+      ],
+      "tests": [
+        "Exact-source CI pending; security inventory PASS at source 06731546; approval workflow correctly rejected missing intake item before this repair."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source CI and destructive SQL isolated tests outstanding; production backup/readback required at future authorized publication; canonical coffees with Community/merged references deliberately block irreversible deletion."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/100",
+      "notes": "Owner approved 2026-10-23. Hold UI removed, existing Pending semantics retained. Pending-vs-existing comparison in PR101 draft; dedicated admin-only identity match candidates including conflicting fields. Deletion is not active and not authorized for publication until safe transactional implementation and acceptance."
     }
   ],
   "history": [

@@ -285,7 +285,7 @@ globalThis.supabase={createClient:()=>sdk};
   check(page.locator('#admin-invites').get_by_text('Complete invitation history is temporarily unavailable').count()==0,mode+': invitation fixture exercises successful server listing, not fallback')
   check(page.locator('.admin-pagination').count()==0,mode+': complete short lists do not show misleading pagination')
   review=page.locator('#admin-pending .admin-record')
-  check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare','review-hold']),mode+': each paginated coffee has review actions')
+  check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare']),mode+': each paginated coffee has review actions')
   check(page.locator('.admin-review-details').count()==0,mode+': duplicate legacy review actions omitted')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin has no horizontal overflow')
   shot(page,'12-admin-'+mode)
