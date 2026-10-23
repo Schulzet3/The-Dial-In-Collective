@@ -1,7 +1,7 @@
 // Pure escaped administrator view. Legacy review overview is sanitized;
 // separate live-admin-only records RPC can include creator identity and notes.
 import {e} from '../lib/ui.js';
-import {adminDisclosure,renderAdminRecordCollection,renderAdminCoffeeFacts} from './records.js';
+import {adminDisclosure,renderAdminRecordCollection} from './records.js';
 
 export const formatCount=value=>value!=null&&value!==''&&Number.isSafeInteger(Number(value))&&Number(value)>=0?String(Number(value)):'—';
 export function renderAdminDenied(message='Administrator access required.'){

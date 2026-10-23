@@ -13,3 +13,5 @@ Staged Admin UI one-extra-click confirm: a server-authoritative revision-matched
 Node CI run 40035561381 failed existing assertions requiring removed Hold UI and obsolete flat coffee facts. SQL release regression 40035561306 passed the staged migration. Updated assertions to the newly approved UI, added grounded origin mismatch and deletion-guard regressions, and fixed fallback Delete button to require a valid ID/revision. Retest pending.
 
 Owner-approval synchronization: appended precise scoped Locked decision to both Master Specification and Decision Ledger and synchronized approval matrix inventory/contracts. No broad deletion of Community or member accounts is authorized. Expected CI Node/approval tests must verify canonical contract and original baseline unchanged.
+
+CI repair: Node tests passed at a0ac6eb but lint failed on unused renderAdminCoffeeFacts import after comparison replacement (run 40035745422); removed import. Exact-source lint/build/CI must rerun before readiness. No production mutation.
