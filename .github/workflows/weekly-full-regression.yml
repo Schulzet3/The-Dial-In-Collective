@@ -10,13 +10,33 @@ concurrency:
   group: dic-weekly-comprehensive-regression
   cancel-in-progress: false
 jobs:
+  resolve-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    outputs:
+      sha: ${{ steps.source.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: development/backend-foundation
+          persist-credentials: false
+      - name: Resolve one immutable source for every regression job
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          [[ "$sha" =~ ^[0-9a-f]{40}$ ]]
+          printf 'sha=%s\n' "$sha" >> "$GITHUB_OUTPUT"
+          printf 'Weekly regression source: `%s`\n' "$sha" >> "$GITHUB_STEP_SUMMARY"
   node-build:
+    needs: resolve-source
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: development/backend-foundation
+          ref: ${{ needs.resolve-source.outputs.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v7.1.0
         with:
@@ -31,24 +51,29 @@ jobs:
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_weekly_placeholder
       - run: node scripts/audit/site-integrity.mjs --dist
   database:
+    needs: resolve-source
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: development/backend-foundation
+          ref: ${{ needs.resolve-source.outputs.sha }}
           persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
       - run: node scripts/audit/verify-migration-baseline.mjs
       - run: bash scripts/audit/isolated-sql-regression.sh
       - run: bash scripts/audit/isolated-signed-http-regression.sh
       - run: bash scripts/audit/isolated-backup-snapshot-regression.sh
   mobile-offline:
+    needs: resolve-source
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: development/backend-foundation
+          ref: ${{ needs.resolve-source.outputs.sha }}
           persist-credentials: false
       - uses: actions/setup-python@v6
         with:
