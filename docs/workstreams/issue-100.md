@@ -25,3 +25,5 @@ Syntax fix: CI run 40036026411 found unescaped apostrophe in an Admin comparison
 New disposable rollback SQL suite admin_safe_delete.sql covers denied nonadmin preview, exact impact, stale revision and atomic canonical-to-library-to-shot-to-note deletion plus private receipts, and separate Pending deletion. Wired into isolated-sql-regression.sh. Need exact-source CI PASS; no hosted SQL.
 
 CI repair: approval run 40036258592 correctly rejected nondeployable SQL test/runner paths in queue scope_paths. Removed test-only paths from deployable scope and retained test tracking in issue journal. No source feature changed; CI rerun required.
+
+SQL behavioral test first run 40036258579 exposed duplicate beta_members fixture insert because auth.users trigger already creates member row. Fixed fixture with idempotent ON CONFLICT UPDATE; no production record altered. Retest exact SQL suite.

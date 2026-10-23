@@ -8,7 +8,7 @@ DECLARE owner uuid:='10000000-0000-4000-8000-000000000001'; member uuid:=gen_ran
 BEGIN
  IF current_database()<>'dic_ci' THEN RAISE EXCEPTION 'Only disposable database'; END IF;
  INSERT INTO auth.users(id,aud,role,email) VALUES(member,'authenticated','authenticated',member::text||'@fixture.invalid');
- INSERT INTO private.beta_members(owner_id,enabled,admitted_at) VALUES(member,true,now());
+ INSERT INTO private.beta_members(owner_id,enabled,admitted_at) VALUES(member,true,now()) ON CONFLICT (owner_id) DO UPDATE SET enabled=true,admitted_at=now();
  INSERT INTO public.coffees(name,roaster,verification_state,origin)
  VALUES('Admin Delete Fixture','Synthetic Roaster','verified','Colombia') RETURNING id,revision INTO coffee,rev;
  INSERT INTO public.setups(id,owner_id,name) VALUES(setup,member,'Delete test');
