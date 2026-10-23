@@ -1,3 +1,4 @@
+import {equivalentCoffeeVarieties} from './coffee-fact-compatibility.mjs';
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 
 // Public Shopify Ajax Product API, not merchant/Admin APIs. All reads use the
@@ -54,6 +55,28 @@ function compatibleOrigins(a,b){
  if(!subset(first,second)&&!subset(second,first))return null;
  return first.length>=second.length?a:b;
 }
+function enrichEspressoRecipe(base,extra){
+ if(!base)return extra;
+ // Keep a complete HTML recipe intact. Only a ratio-only reference can gain
+ // the endpoint's complete recipe, and only with corroborating measurements.
+ if(!extra||!Number.isFinite(base.ratio)||base.ratio<1||base.ratio>5||
+    Object.keys(base).some(key=>!['ratio','method'].includes(key)))return base;
+ if(base.method&&norm(base.method)!=='espresso'&&norm(base.method)!==norm(extra.method))return base;
+ if(extra.method&&!/\bespresso\b/i.test(extra.method))return base;
+ const doseMin=extra.dose_g,doseMax=extra.dose_g_max??doseMin;
+ const yieldMin=extra.yield_g??extra.yield_g_min,yieldMax=extra.yield_g??extra.yield_g_max;
+ const timeMin=extra.time_s_min,timeMax=extra.time_s_max;
+ if(![doseMin,doseMax,yieldMin,yieldMax,timeMin,timeMax].every(Number.isFinite)||
+    doseMin<=0||doseMax<doseMin||yieldMin<=0||yieldMax<yieldMin||timeMin<=0||timeMax<timeMin)return base;
+ const same=(a,b)=>Math.abs(a-b)<=1e-6;
+ const explicitRatio=Number.isFinite(extra.ratio);
+ if(explicitRatio&&!same(base.ratio,extra.ratio))return base;
+ // An explicit ratio must also agree with the published measurement range.
+ // Without one, ranged quantities alone cannot prove the same target ratio.
+ if(base.ratio<yieldMin/doseMax-1e-6||base.ratio>yieldMax/doseMin+1e-6)return base;
+ if(!explicitRatio&&(!same(doseMin,doseMax)||!same(yieldMin,yieldMax)||!same(base.ratio,yieldMin/doseMin)))return base;
+ return {...extra,ratio:base.ratio,...(!extra.method&&base.method?{method:base.method}:{})};
+}
 export function mergePublicProductPreview(base,extra){
  if(!extra?.ok)return base;
  if(!base?.ok)return extra;
@@ -63,8 +86,13 @@ export function mergePublicProductPreview(base,extra){
  for(const [key,value] of Object.entries(base.fields||{}))
   if(typeof value==='string'?value.trim():value!=null)fields[key]=value;
  const conflicts=new Set([...(base.conflicts||[]),...(extra.conflicts||[])]);
+ const mixedProcess=base.fields?.process==='Other/Unknown'?base:
+  extra.fields?.process==='Other/Unknown'?extra:null;
  for(const key of ['origin','roast_level','process','variety','producer','release_label']){
-  if(base.fields?.[key]&&extra.fields?.[key]&&norm(base.fields[key])!==norm(extra.fields[key])){
+  if(base.fields?.[key]&&extra.fields?.[key]&&(key==='variety'?!equivalentCoffeeVarieties(base.fields[key],extra.fields[key]):norm(base.fields[key])!==norm(extra.fields[key]))){
+   // A documented mixture is broader than a one-method metadata summary.
+   // As in the HTML parser, preserve it while keeping prior conflicts final.
+   if(key==='process'&&mixedProcess){fields.process='Other/Unknown';continue;}
    // "Gedeb, Ethiopia" and "Ethiopia" are compatible levels of geographic
    // precision, not contradictory countries. Keep the more specific sourced
    // origin; genuinely divergent blends/harvests remain conflicts.
@@ -74,10 +102,31 @@ export function mergePublicProductPreview(base,extra){
   }
  }
  for(const key of conflicts)delete fields[key];
- return {...base,fields,available:Object.keys(fields),
+ const recipe=enrichEspressoRecipe(base.roaster_recipe,extra.roaster_recipe);
+ const merged={...base,fields,available:Object.keys(fields),
   roaster_details:{...extra.roaster_details,...base.roaster_details},
   ...(conflicts.size?{conflicts:[...conflicts].sort()}:{}),
-  ...(base.roaster_recipe?{}:extra.roaster_recipe?{roaster_recipe:extra.roaster_recipe}:{})};
+  ...(recipe?{roaster_recipe:recipe}:{})};
+ if(mixedProcess&&!conflicts.has('process')){
+  for(const key of ['processing_detail','blend_components']){
+   const detail=mixedProcess.roaster_details?.[key];
+   if(typeof detail==='string'&&detail.trim())merged.roaster_details[key]=detail;
+  }
+ }
+ if(conflicts.has('roast_level')){
+  // A field rejected by either source must not retain a positive provenance
+  // label or a hint suggesting that the rejected roast can still be applied.
+  delete merged.roast_source;
+  merged.roast_hint='Conflicting source roast details were left blank. Check the roaster’s current label.';
+ }else if(fields.roast_level&&!String(base.fields?.roast_level||'').trim()){
+  // Evidence must travel with the selected value. In particular, an endpoint
+  // Agtron suggestion is still provisional when the HTML had no roast value.
+  for(const key of ['roast_hint','roast_source']){
+   if(typeof extra[key]==='string'&&extra[key].trim())merged[key]=extra[key];
+   else delete merged[key];
+  }
+ }
+ return merged;
 }
 // Backwards-compatible name for existing extractor consumers/tests.
 export const mergeShopifyPreview=mergePublicProductPreview;

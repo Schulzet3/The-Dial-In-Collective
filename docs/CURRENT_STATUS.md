@@ -1,3 +1,21 @@
+## October 23, 2026: Issue33 extractor completeness TESTING, not published
+
+The owner-reported Sweet Bloom Bourbon Ají failure is reproduced and repaired in
+source, with broader semantic layouts, accessible product-image text, source
+conflict handling and cache/endpoint enrichment. Saved-source replay and focused
+regressions pass; final Node22/lint/build, browser checks, refreshed live source
+acceptance and non-force integration are underway. See the indexed
+[Issue33 journal](workstreams/issue-33.md) and
+[acceptance record](audits/2026-10-23-extractor-completeness.json).
+
+The actual latest deployed batch remains DIC-20261023-READY-QUEUE-05, release
+`99ad6148e1a540619d67adb07b18f32c93dee9db`, Netlify READY/current
+`6adb71e2a2e52cd3bbeef5e5`. Its #93/#96 records are DEPLOYED history. The older
+unpublished paragraphs below are dated history. This work changes no hosted SQL,
+Edge functions, member records or publication state.
+
+---
+
 ## 2026-10-23T14:41:53.044Z: release DIC-20261023-READY-QUEUE-05 DEPLOYED and verified
 
 Owner's one-use release command delivered #93 and #96. Source d57f0b3cfeac32be6cd7a2192662a63a57e67e0f, guarded nonforce release commit 99ad6148e1a540619d67adb07b18f32c93dee9db, Netlify READY/current 6adb71e2a2e52cd3bbeef5e5 published 2026-10-23T14:40:52.519Z on release/production. Supabase Edge preview v4 and verifier v6 ACTIVE, JWT required. No SQL migrations or member-data mutations by this release. Database readback 23 shots, 23 notes, 5 accounts, 2 Community, 49 receipts, 46 application tables all RLS. One-use grant consumed. Exact-source five CI checks PASS. Queue has zero READY items, both delivered entries moved to history. Real authenticated production browser and inaccessible third-party controls remain unverified; no false test certification.

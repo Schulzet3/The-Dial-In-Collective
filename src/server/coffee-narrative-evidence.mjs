@@ -30,6 +30,7 @@ function foundGrower(paragraphs){
  for(const paragraph of paragraphs){
   if(paragraph.length>1000||/\b(?:generally|typically|for example|such as|learn about)\b/i.test(paragraph))continue;
   const patterns=[
+   new RegExp(String.raw`\b(?:from\s+)?(?:producer|farmer|grower)\s+`+PERSON+String.raw`(?=\s+(?:and|of|who|at|on|in)\b|[,!.;]|$)`,'u'),
    new RegExp(String.raw`\b(?:grown|produced|cultivated|harvested|farmed)\s+by\s+`+PERSON+'\\b','u'),
    new RegExp(String.raw`\b(?:farmer|producer|grower|farm owner|estate owner)\s*(?:is|:|–|-)\s*`+PERSON+'\\b','iu'),
    new RegExp('\\b'+PERSON+String.raw`\s+(?:is|was)\s+(?:the|a)\s+(?:farmer|producer|grower)\b`,'u'),
@@ -37,8 +38,9 @@ function foundGrower(paragraphs){
   ];
   for(const re of patterns){
    const m=re.exec(paragraph);
-   if(m&&m[1]&&!BAD_PERSON.test(m[1])&&
-       m[1].split(/\s+/).every(part=>/^\p{Lu}/u.test(part)))return m[1];
+   const candidate=m?.[1]?.replace(/\s+(?:Country|Origin|Region|Variety|Cultivar|Harvest|Elevation|Altitude|Process)(?:\s.*)?$/,'');
+   if(candidate&&!BAD_PERSON.test(candidate)&&
+       candidate.split(/\s+/).every(part=>/^\p{Lu}/u.test(part)))return candidate;
   }
  }
  return '';
@@ -88,6 +90,12 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
  for(const p of paragraphs){
   const farm=p.match(/^(?:Farm|Estate|Finca)\s*[:：-]\s*((?:Finca|Hacienda|Farm|Estate)\s+[\p{L}\p{M}][\p{L}\p{M}'’ -]{2,85})$/iu);
   if(farm&&!details.farm)details.farm=farm[1].slice(0,110);
+  // An explicitly named grower's own farm is a separate fact, not an
+  // interchangeable producer value. Keep the exact name and source casing.
+  if(!details.farm&&namedGrower&&p.includes(namedGrower)&&p.length<=1000){
+   const namedFarm=p.match(/\b(?:his|her|their)\s+(?:farm|estate)\s+([A-ZÀ-Ý][\p{L}\p{M}'’.-]*(?:\s+[A-ZÀ-Ý][\p{L}\p{M}'’.-]*){0,5})(?=\s+(?:is|was|has|where|in|and|produces|grows)\b|[,!.;]|$)/u);
+   if(namedFarm)details.farm=namedFarm[1].slice(0,110);
+  }
  }
  const technique=processingDetail(headings,paragraphs);
  if(technique){

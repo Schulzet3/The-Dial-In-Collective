@@ -8,28 +8,10 @@ import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron} from './agtron-roast.mjs';
 import {extractProductFlavorEvidence} from './coffee-flavor-evidence.mjs';
+import {coffeeFieldKey,extractSemanticCoffeeSpecs} from './coffee-semantic-specs.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^<>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','agtron_scale','agtron_sample','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
-const aliases=new Map(Object.entries({
- 'Tasting Notes':'tasting_notes','Taste Notes':'tasting_notes','Tasting Profile':'tasting_notes','Cup Notes':'tasting_notes',
- 'Reminds Us Of':'tasting_notes','Notes':'tasting_notes',
- 'Process':'process','Process Method':'process','Processing Method':'process',
- 'Processing':'process','Traitement':'process','Treatment':'process',
- 'Origin':'origin','Country':'origin','Region':'origin','Région':'origin','Location':'origin',
- 'Elevation':'elevation_m','Altitude':'elevation_m','Altitude Masl':'elevation_m',
- 'Variety':'variety','Varietal':'variety','Varieties':'variety','Variété':'variety',
- 'Producer':'producer','Producteur':'producer','Farm':'producer','Farmer':'producer',
- 'Farm Co-op':'producer','Farm / Co-op':'producer','Washing Station':'producer',
- 'Harvest':'release_label','Harvest Year':'release_label','Crop Year':'release_label',
- 'Release':'release_label','Lot':'release_label',
- 'Roast Level':'roast_level','Roast':'roast_level','Roast Profile':'roast_level',
- 'Roast Color':'agtron','Agtron':'agtron','Ground Agtron':'agtron',
- 'Best Rested':'recommended_rest','Recommended Rest':'recommended_rest',
- 'Drying Method':'drying_method','Harvest Season':'harvest_season',
- 'Preferred Extraction':'preferred_extraction','Production Roaster':'production_roaster',
- 'Process Detail':'processing_detail'
- }).map(([key,value])=>[key.replace(/[\p{M}]/gu,'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''),value]));
-const getKey=str=>aliases.get(String(str||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,''));
+const getKey=coffeeFieldKey;
 const isInfoText=s=>s.length>=2&&s.length<=240&&!/^(?:add to cart|shop|read more|next|size|quantity|subscribe|search|all coffee|more coffees|customer reviews|related products|regular price)$/i.test(s);
 const cleanValue=(s,clean,max=230)=>clean(s,max).replace(/^\s*[:\-|–]\s*/,'').trim();
 const normalizedProcess=s=>{
@@ -87,7 +69,7 @@ function field(fields,label,value,add,extras,clean){
  // must not become a numeric/identity field via a generic label.
  if(raw.length>175&&kind!=='tasting_notes')return;
  if(kind==='elevation_m'&&!/\b\d{3,4}\b/.test(raw))return;
- add(kind,raw);
+ add(label,raw);
 }
 function parsePairs(tokens,fields,add,extras,clean){
  // Onyx-style all-caps DIV captions follow their metric values. Other sites
@@ -213,12 +195,12 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   // Onyx publishes many general education sections on the product URL.
   // The actual coffee has named a-stat fields. Only read those source
   // blocks, never a distant paragraph titled "Producer"/"Extraction".
-  for(const m of html.matchAll(/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["'](roast-level|variety|process-method|elevation|origin|harvest-season|method|country|season|ferment|roaster)["'][\s\S]{0,2900}?<p\b[^<>]{0,2000}>([\s\S]{1,650}?)<\/p>/gi)){
-   const kind=m[1],p=m[2],label=(p.match(/<label\b[^<>]{0,2000}>([^<>]{2,75})<\/label>/i)||[])[1];
+  for(const m of html.matchAll(/<div\b[^<>]{0,2000}class=["'](?:[^"']{0,1000}\s)?a-stat(?:\s[^"']{0,1000})?["'][^<>]{0,2000}>[\s\S]{0,2900}?<p\b[^<>]{0,2000}>([\s\S]{1,650}?)<\/p>/gi)){
+   const p=m[1],label=(p.match(/<label\b[^<>]{0,2000}>([^<>]{2,75})<\/label>/i)||[])[1];
    if(!label)continue;
    const value=p.split(/<br\s*\/?\s*>/i)[0];
    field(fields,clean(label,80),value,addField,extras,clean);
-   if(kind==='roast-level'){
+   if(getKey(label)==='roast_level'){
     const num=(p.match(/\bAgtron\s*#?\s*(\d{1,3}(?:\.\d{1,2})?)/i)||[])[1];
     if(num)addExtra(extras,'agtron',num);
    }
@@ -272,9 +254,14 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   const m=clean(sey,140).match(/\s[-–]\s(Washed|Natural|Honey|Anaerobic)\s*$/i);
   if(m&&!fields.process)addField('process',m[1]);
  }
+ // Structural semantic facts scan the full already-bounded product, so a
+ // large gallery cannot hide late metric cards. Handled caption ranges are
+ // excluded from the older token parser to avoid pairing in both directions.
+ const semantic=extractSemanticCoffeeSpecs(html,{clean});
+ for(const fact of semantic.facts)field(fields,fact.label,fact.value,addField,extras,clean);
  const tokens=[...page.matchAll(leaf)].slice(0,850).map(m=>({
   at:m.index,end:m.index+m[0].length,tag:m[1].toLowerCase(),text:clean(m[2],260)
- })).filter(m=>m.text);
+ })).filter(m=>m.text&&!semantic.handledRanges.some(range=>m.at>=range.start&&m.end<=range.end));
  parsePairs(tokens,fields,addField,extras,clean);
  // Explicit inline paragraph style, including French and pipe-delimited specs.
  for(const t of tokens){

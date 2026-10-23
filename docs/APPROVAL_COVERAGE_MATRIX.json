@@ -528,6 +528,40 @@
           "contains": "once across reloads"
         }
       ]
+    },
+    {
+      "id": "coffee_selected_product_completeness",
+      "decision_key": "current_owner_extractor_deterministic_only_20261019",
+      "scope": "Issue33 selected-product compound varieties, semantic facts, endpoint/cache completeness, conflict preservation and bounded safe parsing.",
+      "implementation": "TESTING; exact final-source CI and integration pending; not deployed.",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no physical-device acceptance performed in this workstream; automated source/browser evidence recorded separately.",
+      "issue": 33,
+      "assertions": [
+        {
+          "path": "src/server/coffee-semantic-specs.mjs",
+          "contains": "extractSemanticCoffeeSpecs"
+        },
+        {
+          "path": "tests/coffee-captured-source-fragments.test.mjs",
+          "contains": "Bourbon"
+        },
+        {
+          "path": "tests/coffee-preview-enrichment.test.mjs",
+          "contains": "ratio"
+        },
+        {
+          "path": "tests/coffee-product-scope-integrity.test.mjs",
+          "contains": "test("
+        },
+        {
+          "path": "tests/coffee-completeness-integrity.test.mjs",
+          "contains": "equivalent cultivar lists"
+        },
+        {
+          "path": "scripts/audit/coffee-completeness-live-probe.mjs",
+          "contains": "sanitization_changed_extraction"
+        }
+      ]
     }
   ],
   "active_gap_flags": [

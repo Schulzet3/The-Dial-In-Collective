@@ -33,14 +33,19 @@ const targets=[
   release_label:/November\s*2025/i,process:/^Washed$/i}},
  {id:'black-white-lica',url:'https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural',expected:{
   variety:/^catua[ií]$/i,producer:/Lica Torres/i,origin:/Rivas.*Brunca.*Costa Rica/i,
-  elevation_m:/1500\s*(?:m|masl)/i,process:/^Natural$/i}},
+  elevation_m:/1500\s*(?:m|masl)/i,process:/^Natural$/i,roast_level:/^Light$/i,
+  tasting_notes:/cocktail cherry.*port wine.*white icing.*milk chocolate/i}},
  {id:'tim-wendelboe-echemo',url:'https://timwendelboe.no/products/echemo-certified-organic',expected:{
   variety:/Ethiopian heirloom.*Coche forest/i,producer:/Khalid Shifa/i,
+  origin:/Goma.*Jimma.*Ethiopia/i,
   process:/^Washed$/i,release_label:/December\s*2025/i,tasting_notes:/floral.*white tea.*stone fruits/i}},
  {id:'onyx-geometry',url:'https://onyxcoffeelab.com/products/geometry',expected:{
   variety:/^Mixed$/i,origin:/Colombia.*Ethiopia/i,process:/^Washed$/i,
-  roast_level:/^Light$/i,elevation_m:/1950\s*(?:m|masl)/i}},
+  roast_level:/^Light$/i,elevation_m:/1950\s*(?:m|masl)/i,
+  tasting_notes:/Berries.*Stone Fruit.*Earl Grey.*Honeysuckle.*Round/i},
+  expected_details:{drying_method:/^Raised-Bed Dried$/i,agtron:/^130$/}},
  {id:'manhattan-samuel',url:'https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/',expected:{
+  roaster:/Manhattan Coffee Roasters/i,
   variety:/Caturra.*Chiroso/i,producer:/Diego Bermudez/i,origin:/Cauca/i,
   elevation_m:/1960\s*(?:m|masl)/i,tasting_notes:/star anise.*dark fudge.*verbena/i}},
  {id:'nomad-centroamericano',url:'https://nomadcoffee.es/products/centroamericano-natural-anaerobico',expected:{
@@ -59,7 +64,10 @@ for(let i=0;i<argv.length;i++){
  else if(argv[i]==='--only'&&argv[i+1])only=argv[++i];
  else throw new Error('Usage: node scripts/audit/coffee-completeness-live-probe.mjs [--outdir PATH] [--only TARGET_ID]');
 }
-const selected=only?targets.filter(x=>x.id===only):targets;
+// This is an opt-in acceptance suite with reviewed source expectations.
+// Every sampled source and the negative control must pass; a changed or
+// unavailable source is reported as a failure, never hidden by a green run.
+const selected=(only?targets.filter(x=>x.id===only):targets).map(target=>({...target,required:true}));
 if(!selected.length)throw new Error('Unknown target ID; arbitrary external targets are not accepted.');
 await mkdir(output,{recursive:true});
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -92,7 +100,13 @@ function fixtureHtml(html){
   cursor=block.end;
  }
  chunks.push(compact.slice(cursor));
- return removeElements(chunks.join(''),['form','iframe','noscript'])
+ // WooCommerce and Shopify can place the selected product title, variant
+ // data, or specifications inside an add-to-cart form. Keep those children;
+ // remove only the form shell and controls that cannot supply page facts.
+ // The extractor already excludes selects, so country/grind options cannot
+ // become evidence. Every capture still records exact extraction parity.
+ return removeElements(chunks.join(''),['iframe','noscript','select','textarea'])
+  .replace(/<\/?form\b[^<>]{0,8000}>/gi,' ')
   .replace(/<input\b[^<>]{0,4000}>/gi,'')
   .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
   .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
@@ -106,7 +120,8 @@ function assess(target,result){
   return {checked:['homepage_not_product'],gaps};
  }
  if(!result?.ok)return {checked,gaps:[{field:'product',reason:result?.reason||'no_result'}],
-  unverified_fields:[...Object.keys(target.expected||{}),...Object.keys(target.recipe||{}).map(key=>'espresso.'+key)]};
+  unverified_fields:[...Object.keys(target.expected||{}),...Object.keys(target.recipe||{}).map(key=>'espresso.'+key),
+   ...Object.keys(target.expected_details||{}).map(key=>'details.'+key)]};
  for(const [field,pattern] of Object.entries(target.expected||{})){
   checked.push(field);
   const value=result?.fields?.[field];
@@ -116,6 +131,12 @@ function assess(target,result){
  for(const [field,value] of Object.entries(target.recipe||{})){
   checked.push('espresso.'+field);
   if(result?.roaster_recipe?.[field]!==value)gaps.push({field:'espresso.'+field,reason:'missing_or_incorrect_espresso_value',actual:result?.roaster_recipe?.[field]??null,expected:value});
+ }
+ for(const [key,pattern] of Object.entries(target.expected_details||{})){
+  const field='details.'+key,value=result?.roaster_details?.[key];
+  checked.push(field);
+  if(value==null||!String(value).trim())gaps.push({field,reason:'missing_expected_source_detail'});
+  else if(!pattern.test(fold(value)))gaps.push({field,reason:'source_expectation_mismatch',actual:value,expected_pattern:pattern.source});
  }
  for(const field of target.absent||[]){
   checked.push('absent.'+field);
@@ -210,6 +231,8 @@ async function probe(target){
  await Promise.all(pending);
  const assessment=assess(target,handlerResult);
  if(budgetRefusal)assessment.gaps.push({field:'transport',reason:'request_budget_exhausted'});
+ if(captures.some(item=>item.sanitization_preserves_html_extraction===false))
+  assessment.gaps.push({field:'source_fixture',reason:'sanitization_changed_extraction'});
  return {id:target.id,url:publicUrl(target.url),requested_tracking_alias:target.url!==publicUrl(target.url),
   required:target.required===true,negative:target.negative===true,source_note:target.source_note||null,
   status:handlerResult?.ok?'parsed':handlerResult?.reason||'no_result',handler_http_status:httpStatus,

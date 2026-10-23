@@ -13,6 +13,36 @@ function shortFlavorList(raw,clean){
  if(parts.length<2||parts.length>7||parts.some(p=>p.length>38||p.split(/\s+/).length>4||/[.!?;:|/]/.test(p)))return '';
  return text;
 }
+// Accessible image text is usable source evidence when it identifies the
+// exact selected coffee and explicitly transcribes its profile. No image is
+// downloaded or interpreted. A generic bag photo, filename, another product,
+// or unlabeled color scale cannot create flavor or roast facts.
+export function extractProductImageTextEvidence(html,{name,clean}={}){
+ const empty={};
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||typeof name!=='string')return empty;
+ const fold=value=>value.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  .replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+ const identity=fold(name);
+ if(identity.length<6||identity.length>180)return empty;
+ const notes=new Map(),roasts=new Set();let count=0;
+ for(const match of html.matchAll(/<img\b[^<>]{0,12000}>/gi)){
+  if(++count>200)break;
+  const raw=match[0].match(/\balt\s*=\s*(?:"([^"]{1,1000})"|'([^']{1,1000})')/i);
+  if(!raw)continue;
+  const alt=clean(raw[1]??raw[2],1000),normalized=fold(alt);
+  if(!normalized.startsWith(identity+' '))continue;
+  if(!/^(?:coffee(?: profile card)?|profile card)\b/.test(normalized.slice(identity.length+1)))continue;
+  const list=alt.match(/\b(?:tasting\s+)?notes\s*(?:of\s+|:\s*)([^;.!?]{5,170})/i);
+  const value=list?shortFlavorList(list[1],clean):'';
+  if(value)notes.set(fold(value),value);
+  const roast=alt.match(/(?:^|[;,.])\s*(Ultra Light|Very Light|Light[ -]Medium|Medium[ -]Light|Light|Medium[ -]Dark|Medium|Dark)\s+roast\b/i);
+  if(roast)roasts.add(roast[1].toLowerCase().replace(/[ -]+/g,'-'));
+ }
+ const result={};
+ if(notes.size===1)result.tasting_notes=[...notes.values()][0];
+ if(roasts.size===1)result.roast_level=[...roasts][0];
+ return result;
+}
 function namedClassValue(html,tag,className,clean){
  const re=new RegExp('<'+tag+'\\b[^<>]{0,850}\\bclass=["\\x27][^"\\x27]*\\b'+className+'\\b[^"\\x27]*["\\x27][^<>]{0,2000}>([\\s\\S]{0,1300}?)<\\/'+tag+'\\s*>','i');
  return clean(re.exec(html)?.[1]||'',200);

@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "status": "TESTING_NOT_DEPLOYED",
+  "recorded_at_utc": "2026-10-23T20:00:21.783573+00:00",
+  "authority": "October23 owner Sweet Bloom failure report and comprehensive deterministic improvement request.",
+  "baseline": {
+    "source_sha": "c6ec5edc08e689d64e305c1821cecb9268d7b1a1",
+    "run_id": 40014705373,
+    "artifact_id": 12528590212,
+    "artifact_sha256": "f1fb626c9b2ddb3983cf21f5bdf1125f59825b9866f68227f658936dddfda2cb",
+    "summary": {
+      "targets": 10,
+      "parsed": 9,
+      "required_targets": 2,
+      "required_failures": [
+        "sweet-bloom-arbey",
+        "sweet-bloom-arbey-canonical"
+      ],
+      "observed_gaps": 15,
+      "sources_with_gaps": [
+        "sweet-bloom-arbey",
+        "sweet-bloom-arbey-canonical",
+        "onyx-geometry",
+        "manhattan-samuel",
+        "nomad-centroamericano",
+        "circulor-source-conflict"
+      ],
+      "public_requests": 14,
+      "real_backend_requests": 0,
+      "member_quota_consumed": 0,
+      "production_writes": 0,
+      "deployments": 0
+    },
+    "targets": [
+      {
+        "id": "sweet-bloom-arbey",
+        "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+        "fields": {
+          "name": "Arbey Cordoba",
+          "roaster": "Sweet Bloom Coffee",
+          "tasting_notes": "mango, bing cherry, pineapple",
+          "process": "Washed",
+          "elevation_m": "1886 masl",
+          "origin": "Huila, Colombia",
+          "producer": "Arbey Cordoba"
+        },
+        "gaps": [
+          {
+            "field": "variety",
+            "reason": "missing_expected_source_field"
+          }
+        ],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "f412359acfed94e791d490057ad50ba32078e789a1890b794994a26e554dd248",
+            "sanitized_sha256": "2beae0354d8514f907604e8e9d614a3f30c80f0ff74972af3a67f962d5cbb875",
+            "sanitization_preserves_html_extraction": true
+          }
+        ]
+      },
+      {
+        "id": "sweet-bloom-arbey-canonical",
+        "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+        "fields": {
+          "name": "Arbey Cordoba",
+          "roaster": "Sweet Bloom Coffee",
+          "tasting_notes": "mango, bing cherry, pineapple",
+          "process": "Washed",
+          "elevation_m": "1886 masl",
+          "origin": "Huila, Colombia",
+          "producer": "Arbey Cordoba"
+        },
+        "gaps": [
+          {
+            "field": "variety",
+            "reason": "missing_expected_source_field"
+          }
+        ],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "c5fbd2974c48f341e18cf72102fc2785b45a8a72e5fe6e3df00a916cfdec0ef1",
+            "sanitized_sha256": "af6236e0a6316236332e96f3ee2f401f1a1625a71883d8b736168246c2170d39",
+            "sanitization_preserves_html_extraction": true
+          }
+        ]
+      },
+      {
+        "id": "sey-ruarai",
+        "url": "https://www.seycoffee.com/products/2026-ruarai-aa-separation-kenya",
+        "fields": {
+          "name": "SEY - 2026 Ruarai; AA Separation - Kenya",
+          "roaster": "SEY",
+          "process": "Washed",
+          "variety": "SL28 & SL34",
+          "origin": "Nyeri",
+          "elevation_m": "1,783 masl",
+          "release_label": "November 2025",
+          "tasting_notes": "rose hips, pomegranate, and candied grapefruit"
+        },
+        "gaps": [],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://www.seycoffee.com/products/2026-ruarai-aa-separation-kenya",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "44a7f4bc22f98d4b62088e6f812f80c369dd5a162cd2dc636df420b48bcd3e19",
+            "sanitized_sha256": "27bf8ef39c6178b0d5dce5a8eb55229ec8f74e6b21f4963b1b102fcd0b17696a",
+            "sanitization_preserves_html_extraction": true
+          }
+        ]
+      },
+      {
+        "id": "black-white-lica",
+        "url": "https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural",
+        "fields": {
+          "name": "Lica Torres - Black Cherry Natural",
+          "roaster": "Black & White Coffee Roasters",
+          "origin": "Rivas, Brunca, Costa Rica",
+          "producer": "Don Lica Torres",
+          "process": "Natural",
+          "variety": "Catuaí",
+          "elevation_m": "1500 MASL"
+        },
+        "gaps": [],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "863055519e322a78977b5d149d17a127f4d0c1ebb148287488571d49c9f62783",
+            "sanitized_sha256": "31b37a9c5a8f424c66bddcb69fff123acb404854452e570c609207f00635e25f",
+            "sanitization_preserves_html_extraction": true
+          },
+          {
+            "kind": "public_product_json",
+            "url": "https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural.js",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "8a3ac5e69169e6038fde586235f012db07ec3faee3e871b9b6517cc5b7b6dfe4",
+            "sanitized_sha256": "84d38024a040c31f4eeb4c4e95137a87983fa69b2847408966a9955e15f01666"
+          }
+        ]
+      },
+      {
+        "id": "tim-wendelboe-echemo",
+        "url": "https://timwendelboe.no/products/echemo-certified-organic",
+        "fields": {
+          "name": "Echemo – Certified Organic",
+          "roaster": "Tim Wendelboe",
+          "variety": "Ethiopian heirloom from Coche forest",
+          "tasting_notes": "Floral, white tea & stone fruits",
+          "producer": "Khalid Shifa",
+          "origin": "Ethiopia",
+          "process": "Washed",
+          "release_label": "December 2025"
+        },
+        "gaps": [],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://timwendelboe.no/products/echemo-certified-organic",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "3305b6f24ec5ec0db9ebcfa2e131a826e92afb0607bcb2c578491fbde0dea93a",
+            "sanitized_sha256": "a70eb2386aa98e3426c83219b06569c890f367710ee88ba3a9d4c1511f5508b7",
+            "sanitization_preserves_html_extraction": true
+          }
+        ]
+      },
+      {
+        "id": "onyx-geometry",
+        "url": "https://onyxcoffeelab.com/products/geometry",
+        "fields": {
+          "name": "Geometry",
+          "roaster": "Onyx Coffee Lab",
+          "origin": "Colombia",
+          "process": "Washed"
+        },
+        "gaps": [
+          {
+            "field": "variety",
+            "reason": "missing_expected_source_field"
+          },
+          {
+            "field": "origin",
+            "reason": "source_expectation_mismatch",
+            "actual": "Colombia",
+            "expected_pattern": "Colombia.*Ethiopia"
+          },
+          {
+            "field": "roast_level",
+            "reason": "missing_expected_source_field"
+          },
+          {
+            "field": "elevation_m",
+            "reason": "missing_expected_source_field"
+          }
+        ],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://onyxcoffeelab.com/products/geometry",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "c684790da56f86bdd0371dc5d41448c0b6f2a4dc16b84bb6ca3e174b28e21e7f",
+            "sanitized_sha256": "b1f2f62f35d4f8b5e013b4ee3975bd71c7632f755a80dc3472380d6026d7ee75",
+            "sanitization_preserves_html_extraction": true
+          },
+          {
+            "kind": "public_product_json",
+            "url": "https://onyxcoffeelab.com/products/geometry.js",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "6cc9e942dd78a03c10de0eeafc758acf0f56206f0c281c6d46204fd662e071d6",
+            "sanitized_sha256": "f98c85a7c5f05b1df5bc0df9eb110d0e5052f3d1bb0e8ced075704074c0a4b37"
+          }
+        ]
+      },
+      {
+        "id": "manhattan-samuel",
+        "url": "https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/",
+        "fields": {
+          "name": "Samuel Jr.",
+          "producer": "El Paraiso",
+          "elevation_m": "1960 masl",
+          "tasting_notes": "star anise, dark fudge, and verbena"
+        },
+        "gaps": [
+          {
+            "field": "variety",
+            "reason": "missing_expected_source_field"
+          },
+          {
+            "field": "producer",
+            "reason": "source_expectation_mismatch",
+            "actual": "El Paraiso",
+            "expected_pattern": "Diego Bermudez"
+          },
+          {
+            "field": "origin",
+            "reason": "missing_expected_source_field"
+          }
+        ],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "a431e8a0afe20f661717d68646e1dfeb093022d86d7c1e5774826e7d48324aa2",
+            "sanitized_sha256": "f90e1eed6845af818176a786f1ebde7a57d9fefbc08341a60543ffc26bc9bc14",
+            "sanitization_preserves_html_extraction": false
+          }
+        ]
+      },
+      {
+        "id": "nomad-centroamericano",
+        "url": "https://nomadcoffee.es/products/centroamericano-natural-anaerobico",
+        "fields": {
+          "name": "Centroamericano Natural Anaeróbico",
+          "roaster": "Nomad Coffee"
+        },
+        "gaps": [
+          {
+            "field": "variety",
+            "reason": "missing_expected_source_field"
+          },
+          {
+            "field": "origin",
+            "reason": "missing_expected_source_field"
+          },
+          {
+            "field": "process",
+            "reason": "missing_expected_source_field"
+          },
+          {
+            "field": "elevation_m",
+            "reason": "missing_expected_source_field"
+          },
+          {
+            "field": "release_label",
+            "reason": "missing_expected_source_field"
+          }
+        ],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://nomadcoffee.es/products/centroamericano-natural-anaerobico",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "158e14b08445520014d8f5865781ed2daf8aac7e769490f14daa3532e89497cb",
+            "sanitized_sha256": "f72b1de7293cde4cf421759ff447a35c85bab1de13b6fa0b54699f922bc8d840",
+            "sanitization_preserves_html_extraction": true
+          },
+          {
+            "kind": "public_product_json",
+            "url": "https://nomadcoffee.es/products/centroamericano-natural-anaerobico.js",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "48d0175aab0cc490d37b9b9dfa2062660a363a7eb2ab370f60494fd6bbc856cf",
+            "sanitized_sha256": "1f69f9095982e779e2c57c087810f90f01ba9650807ac38c0ff9c68088add089"
+          }
+        ]
+      },
+      {
+        "id": "circulor-source-conflict",
+        "url": "https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx",
+        "fields": {
+          "name": "KENYA Coffea Circulor Outo Isolated SL34 AA Washed WX",
+          "roaster": "Coffea Circulor",
+          "producer": "Coffea Circulor Kenya Estate (Ivica & Macho)",
+          "origin": "Kenya",
+          "elevation_m": "1,500 masl",
+          "variety": "Isolated, Ruiru 11, AA-grade",
+          "process": "Washed"
+        },
+        "gaps": [
+          {
+            "field": "variety",
+            "reason": "previously_observed_source_conflict_not_withheld",
+            "actual": "Isolated, Ruiru 11, AA-grade"
+          }
+        ],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "4e56506d2ac97384f2a4e33ba1bac702323f6c3fd44c047ef5d67fe460becc55",
+            "sanitized_sha256": "ee015d32296e471a26e1ff85fa2df16c1199763e5852c24abc7000c64fe33027",
+            "sanitization_preserves_html_extraction": true
+          },
+          {
+            "kind": "public_product_json",
+            "url": "https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx.js",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "6591f2e322e241bd7003e101e30a5a81fbd2b7ad8e8028d17e6cd7cecebecb27",
+            "sanitized_sha256": "420a22a8d211a6336213634fa97209e6270e7233e65742a5a2c64ae8d1b64845"
+          }
+        ]
+      },
+      {
+        "id": "queen-city-homepage-negative",
+        "url": "https://queencitycollectivecoffee.com/",
+        "fields": {},
+        "gaps": [],
+        "captures": [
+          {
+            "kind": "html",
+            "url": "https://queencitycollectivecoffee.com/",
+            "ok": true,
+            "reason": null,
+            "original_sha256": "2ceb875f1ea400585f9a153fc067aecfc803846453880c66292c844019c1782e",
+            "sanitized_sha256": "0e4085c4e12b5e512577140c7fd949c8168f29f1aa20b4dc7a1df7bb30ba5c17",
+            "sanitization_preserves_html_extraction": true
+          }
+        ]
+      }
+    ]
+  },
+  "baseline_fixture_limit": "Manhattan original sanitizer removed the form subtree and parity=false. Its saved fixture is not claimed equivalent to raw HTML. Sanitizer now preserves form children; fresh source acceptance must prove parity.",
+  "verification_limits": [
+    "Local baseline-source replay is not fresh live retrieval.",
+    "Source probe uses real public sources and local auth/quota stubs; not live authenticated app/member save acceptance.",
+    "No hosted provider or member-data writes, no production deployment.",
+    "Missing/image-only/inaccessible or contradictory source facts cannot be guaranteed."
+  ],
+  "next_action": "Pass exact-source fullCI, refreshed public-source assertions and fixture parity; integrate nonforce; promote queue with actual receipts."
+}

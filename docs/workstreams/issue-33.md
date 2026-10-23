@@ -36,3 +36,68 @@ Issue33 comment6373371567. No duplicate ambiguous write was retried.
 Next: inspect actual public source artifacts, complete and review in-scope source
 repairs, run full applicable CI, integrate non-force and record exact READY source.
 No completed implementation, live signed-in acceptance or publication is claimed.
+
+
+## Implementation candidate: semantic completeness and integrity
+
+Paths: `src/server/coffee-semantic-specs.mjs`, fact compatibility and bounded HTML
+structure helpers; page metadata/layout/scope/flavor/narrative parsers; Shopify
+merging, nested Woo endpoint matching; Netlify preview handler; catalog provenance
+UI; focused semantic/acceptance/integrity/captured-source/enrichment/scope tests;
+public probe/workflow and canonical status/ledger/matrix/queue records.
+
+Baseline live probe40014705373 at c6ec5edc08e689d64e305c1821cecb9268d7b1a1 reproduced
+the original missing variety on both tracked and canonical Sweet Bloom URLs.
+Downloaded artifact12528590212 passed independent SHA256 verification. It made14
+public requests, zero real backend requests, quota claims, production writes or
+deployments. Original Manhattan sanitization parity was false because the form
+subtree was removed; source capture now strips only the form shell and controls.
+The historical parity failure stays recorded, not relabeled as passing.
+
+Repairs include full unfamiliar cultivar names, explicit accents/Spanish/French
+labels, reversed/nested/multiline metric cards and full bounded page scan; later
+product sections survive recommendation removal. Farm/grower and country/region
+are retained separately/fully. Exact-name accessible image text recovers explicit
+notes and roast without OCR. Animated per-letter H1s recover product identity;
+source seller identity is accepted only for an explicitly named same-site roastery.
+Every fresh eligible product read uses the same existing bounded endpoint budget,
+including full core-field HTML. Merge preserves conflicts, provisional roast
+cautions, mixed-process details and compatible recipe evidence. Sparse catalog
+records cannot suppress a richer source; truthful fallback and free complete
+catalog/warm paths preserve admission, cooldown and charging rules.
+
+Review caught and repaired recommendation-card Espresso resumption, nested-block
+truncation and scanner-overflow leakage; the added10 scope cases pass. Review also
+caught a new malformed-H1 regex CPU issue (400000 unclosed H1 tags exceeded2.5s);
+identity now uses the bounded structural scan (local reproduction14ms). Existing
+Tim origin expectation changed from Kenya to Nyeri, Kenya because both explicit
+source labels must survive; this is an intended correctness improvement. Original
+combined Washed/Natural expectation now honors existing Other/Unknown policy.
+
+Focused runs include semantic/acceptance155/155, enrichment22/22, current
+pipeline77/77, source fragments8/8, and isolated auth/quota/SSRF/resources82/82
+(before only the final endpoint gate extension). Full local run743 cases had742
+pass and the sole stale Kenya expectation; that assertion is now repaired. All
+successful security subprocess runs used the permitted isolated runtime; no
+security tests were disabled to accommodate sandbox restrictions.
+
+Queue remains TESTING. Next commit/source must pass full Node22, lint/build,
+applicable browser tests, all ten live-source cases and sanitized replay parity,
+then nonforce integration with exact-source readback. No publication, hosted SQL,
+Edge deploy, Auth/provider change or personal-record mutation. Physical-device
+and authenticated production acceptance are not claimed. Universal perfection is
+not claimed; all facts retain the existing review/save workflow.
+
+
+Final local validation initially751 cases/749pass exposed two documentation-only
+contract failures: the new coverage entry needed the established
+RETIRED_NOT_REQUIRED device-policy marker, and the reconciliation test froze the
+entire current matrix to its15 historical contracts. Both are corrected: all15
+historical contracts and66 assertions remain exact; later approved contracts may
+be appended and still must pass the independent current approval coverage audit.
+No historical baseline, production receipt or safety gate was removed.
+
+Final candidate local complete suite: **751/751 PASS**, zero skipped/cancelled/todo,
+8.15s. Approval source coverage and queue schema pass. This is Node24 local evidence;
+required Node22/lint/build and public-source acceptance still run on exact GitHub
+source before READY.

@@ -39,7 +39,7 @@ test('Tim Wendelboe storefront Cultivar, Flavour Notes and Harvest Date labels a
  assert.equal(r.fields.variety,'SL28, SL34, Ruiru 11, Batian');
  assert.equal(r.fields.tasting_notes,'Blackcurrants, blackberries & raisins');
  assert.equal(r.fields.producer,'Several smallholders farmers');
- assert.equal(r.fields.origin,'Kenya');
+ assert.equal(r.fields.origin,'Nyeri, Kenya');
  assert.equal(r.fields.release_label,'December 2025');
  assert.equal(r.fields.process,'Washed');
  assert.equal(r.roaster_details?.named_producer,undefined,'Producer groups must not be misread as named humans');
