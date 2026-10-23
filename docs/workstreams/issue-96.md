@@ -46,3 +46,7 @@ Receipt recovery: the initial PR-metadata GET was denied before writes, so exist
 
 ## October 23 owner approved one READY-batch publication
 Owner: 'Approved to publish. Please deploy now'. Scope: existing #93/#96 READY only, mandatory both Supabase Edge functions and Netlify application; no new migration, arbitrary member-data changes, purchases or unrelated feature deployment. New inexpensive valid-request regression and existing SQL inventory are compiled in an exact-source release preflight so all five canonical GitHub checks can evaluate the precise candidate SHA; source application remains untouched. Release claim and provider readback are still pending; do not call deployed before independent evidence.
+
+
+## Owner release authorization recorded 2026-10-23T14:26:38.196Z
+Grant DIC-20261023-READY-QUEUE-05 binds one owner-approved release to candidate d57f0b3cfeac32be6cd7a2192662a63a57e67e0f, approval Issue96 comment6367192910. Only READY #93/#96 and necessary two JWT-required Edge functions / Netlify app. No new migrations or data deletes. Exact-source CI, one-use claim, production readback and release receipt still pending. No publication occurred in this grant commit.
