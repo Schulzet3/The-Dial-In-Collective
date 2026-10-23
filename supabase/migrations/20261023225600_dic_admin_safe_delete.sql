@@ -149,3 +149,54 @@ RETURNS jsonb LANGUAGE sql SET search_path TO '' AS $fn$
 $fn$;
 REVOKE ALL ON FUNCTION public.dic_admin_delete_record(text,uuid,bigint,jsonb) FROM PUBLIC,anon;
 GRANT EXECUTE ON FUNCTION public.dic_admin_delete_record(text,uuid,bigint,jsonb) TO authenticated;
+
+-- Issue 100: unlike the merge-safe RPC, Admin comparison must include possible
+-- matches WITH conflicting origin/process/release facts, without declaring them safe to merge.
+CREATE OR REPLACE FUNCTION private.dic_admin_review_candidates(p_submission_id uuid)
+RETURNS jsonb LANGUAGE plpgsql STABLE SECURITY DEFINER SET search_path TO '' AS $fn$
+DECLARE s public.coffee_submissions;
+BEGIN
+ PERFORM private.require_member();
+ IF auth.uid() IS NULL OR NOT private.is_admin() THEN
+  RAISE EXCEPTION USING errcode='42501',message='Administrator required.';
+ END IF;
+ SELECT * INTO s FROM public.coffee_submissions
+  WHERE id=p_submission_id AND status IN ('pending','conflict');
+ IF NOT FOUND THEN
+  RAISE EXCEPTION USING errcode='22023',message='Pending submission unavailable.';
+ END IF;
+ RETURN jsonb_build_object('candidates',coalesce((
+  SELECT jsonb_agg(candidate ORDER BY similarity_score DESC,coffee_name,coffee_id)
+  FROM (
+   SELECT c.id AS coffee_id,c.name AS coffee_name,
+    CASE WHEN private.dic_coffee_key(c.name)=private.dic_coffee_key(s.proposed_data->>'name')
+         THEN 1::numeric ELSE extensions.similarity(private.dic_coffee_key(c.name),
+             private.dic_coffee_key(s.proposed_data->>'name'))::numeric END AS similarity_score,
+    jsonb_build_object(
+      'id',c.id,'name',c.name,'roaster',c.roaster,'origin',c.origin,
+      'process',c.process,'release_label',c.release_label,'producer',c.producer,
+      'variety',c.variety,'roast_level',c.roast_level,'elevation_m',c.elevation_m,
+      'tasting_notes',c.tasting_notes,'summary',c.summary,
+      'espressoNotes',c.espresso_notes,'source_url',
+         (SELECT source_url FROM public.coffee_sources cs
+          WHERE cs.coffee_id=c.id AND cs.source_url IS NOT NULL ORDER BY cs.checked_at DESC LIMIT 1),
+      'match_reason',CASE WHEN private.dic_coffee_key(c.name)=private.dic_coffee_key(s.proposed_data->>'name')
+         THEN 'Same roaster and coffee name' ELSE 'Same roaster and similar coffee name' END
+    ) AS candidate
+   FROM public.coffees c
+   WHERE c.verification_state='verified' AND c.merged_into_id IS NULL
+    AND private.dic_canonical_roaster_key(c.roaster)=private.dic_canonical_roaster_key(s.proposed_data->>'roaster')
+    AND (private.dic_coffee_key(c.name)=private.dic_coffee_key(s.proposed_data->>'name')
+     OR extensions.similarity(private.dic_coffee_key(c.name),private.dic_coffee_key(s.proposed_data->>'name'))>=0.63)
+   ORDER BY similarity_score DESC,c.name,c.id LIMIT 10
+  ) candidates
+ ),'[]'::jsonb));
+END $fn$;
+
+CREATE OR REPLACE FUNCTION public.dic_admin_review_candidates(p_submission_id uuid)
+RETURNS jsonb LANGUAGE sql STABLE SET search_path TO '' AS $fn$
+ SELECT private.dic_admin_review_candidates(p_submission_id);
+$fn$;
+REVOKE ALL ON FUNCTION private.dic_admin_review_candidates(uuid) FROM PUBLIC,anon,authenticated;
+REVOKE ALL ON FUNCTION public.dic_admin_review_candidates(uuid) FROM PUBLIC,anon;
+GRANT EXECUTE ON FUNCTION public.dic_admin_review_candidates(uuid) TO authenticated;

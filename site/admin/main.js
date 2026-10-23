@@ -97,9 +97,8 @@ async function start(){
       try{
         const query=String(item.name||'').trim().slice(0,80);
         if(!query)return;
-        const result=await adminRpc('dic_admin_search_records',{p_kind:'approved',p_query:query,p_offset:0,p_limit:50});
-        const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
-        if(!invalidated)comparisons[item.id]=(result.items||[]).filter(c=>normalize(c.roaster)===normalize(item.roaster)&&normalize(c.name)===normalize(item.name)).slice(0,5);
+        const result=await adminRpc('dic_admin_review_candidates',{p_submission_id:item.id});
+        if(!invalidated)comparisons[item.id]=Array.isArray(result?.candidates)?result.candidates:[];
       }catch(error){if(isAccessDenied(error))throw error;}
     }));
     if(invalidated)return;
@@ -308,9 +307,8 @@ async function start(){
      if(!item)throw new Error('Expand Pending Coffees or Conflicts before comparing.');
      const query=String(item.name||'').trim().slice(0,80);
      if(!query)throw new Error('Coffee name required for comparison.');
-     const result=await adminRpc('dic_admin_search_records',{p_kind:'approved',p_query:query,p_offset:0,p_limit:50});
-     const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
-     comparisons[id]=(result.items||[]).filter(c=>normalize(c.roaster)===normalize(item.roaster)&&normalize(c.name)===normalize(item.name)).slice(0,5);
+     const result=await adminRpc('dic_admin_review_candidates',{p_submission_id:id});
+     comparisons[id]=Array.isArray(result?.candidates)?result.candidates:[];
      await refresh();
     });return;
    }
