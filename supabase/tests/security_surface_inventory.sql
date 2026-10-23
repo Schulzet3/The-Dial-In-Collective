@@ -35,3 +35,5 @@ begin
  raise notice 'PASS: entire application table/function privilege and fixed-path inventory';
 end $audit$;
 rollback;
+
+-- Release-scoped exact-source SQL rehearsal: keep all existing privilege assertions active.

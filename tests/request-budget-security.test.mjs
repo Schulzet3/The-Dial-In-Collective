@@ -37,3 +37,9 @@ test('early valid completion releases its stream lock and timer',async()=>{
  assert.equal((await readBoundedJson(request,{timeoutMs:25})).source_url,'https://example.invalid/products/coffee');
  assert.equal(request.body.locked,false);
 });
+
+// Release regression: fast valid requests remain accepted after byte and time limits.
+test('bounded request accepts a simple valid payload',async()=>{
+ const value=await readBoundedJson(req('{"source_url":"https://example.invalid/products/coffee"}'),{timeoutMs:100});
+ assert.equal(value.source_url,'https://example.invalid/products/coffee');
+});

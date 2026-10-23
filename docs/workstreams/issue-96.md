@@ -42,3 +42,7 @@ Coverage limits remain explicit: automated screening is not manual interpretatio
 The earlier unreferenced READY receipt was never integrated after the additional CPU variant appeared. Final receipt checks current refs, equal trees and real CI; all original queue history/#93 and approval contracts are preserved. This docs-only tree excludes the temporary finalizer; the bootstrap is retained as a second parent. Connector must independently compare/read back before any nonforce ref update.
 
 Receipt recovery: the initial PR-metadata GET was denied before writes, so existing read-only commit provenance is used without expanding token permissions. Four applicable postmerge jobs passed; SQL and visual are PR-only for this changed path set. Their actual successful runs are reused ONLY after all tested/merged Git trees match. No absent/skipped job is called PASS and no source/CI guard is weakened.
+
+
+## October 23 owner approved one READY-batch publication
+Owner: 'Approved to publish. Please deploy now'. Scope: existing #93/#96 READY only, mandatory both Supabase Edge functions and Netlify application; no new migration, arbitrary member-data changes, purchases or unrelated feature deployment. New inexpensive valid-request regression and existing SQL inventory are compiled in an exact-source release preflight so all five canonical GitHub checks can evaluate the precise candidate SHA; source application remains untouched. Release claim and provider readback are still pending; do not call deployed before independent evidence.
