@@ -8,7 +8,7 @@ import {extractDelimitedCoffeeSpecs} from './coffee-delimited-specs.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron} from './agtron-roast.mjs';
 import {extractProductFlavorEvidence} from './coffee-flavor-evidence.mjs';
-const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
+const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^<>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','agtron_scale','agtron_sample','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const aliases=new Map(Object.entries({
  'Tasting Notes':'tasting_notes','Taste Notes':'tasting_notes','Tasting Profile':'tasting_notes','Cup Notes':'tasting_notes',
@@ -144,12 +144,12 @@ function detailedCoffeeNarrative(page,fields,extras,clean,addField){
  // "<h2>THE DEETS!</h2>" token match. First prefer structured section
  // boundaries, then fall back to the BOUNDED, current-product-only
  // plain-text segment between this coffee's story heading and its brew FAQ.
- const headings=[...page.matchAll(/<h[2-5]\b[^>]{0,350}>([\s\S]{0,500}?)<\/h[2-5]\s*>/gi)];
+ const headings=[...page.matchAll(/<h[2-5]\b[^<>]{0,350}>([\s\S]{0,500}?)<\/h[2-5]\s*>/gi)];
  const section=headings.find(h=>/^(?:the deets!?|the story|about this coffee|coffee story|the details!?|about the coffee)$/i.test(clean(h[1],95)));
  let story='';
  if(section){
   const after=page.slice(section.index+section[0].length,section.index+section[0].length+8500);
-  const stop=after.search(/<h[2-5]\b[^>]*>[\s\S]{0,350}?(?:brew\s+recc?s|brew\s+recommendations?|what.s\s+agtron|related products|more coffees|you may also like)/i);
+  const stop=after.search(/<h[2-5]\b[^<>]{0,2000}>[\s\S]{0,350}?(?:brew\s+recc?s|brew\s+recommendations?|what.s\s+agtron|related products|more coffees|you may also like)/i);
   story=clean(stop>=0?after.slice(0,stop):after,5000);
  }
  if(!story||story.length<35){
@@ -168,7 +168,7 @@ function detailedCoffeeNarrative(page,fields,extras,clean,addField){
   if(tasting&&/\b(?:coffee|cup|taste|flavo[u]?r|profile)\b/i.test(story.slice(Math.max(0,tasting.index-115),tasting.index)))
    addField('tasting_notes',tasting[1].trim());
  }
- const heading=(page.match(/<h1\b[^>]*>([\s\S]{1,260}?)<\/h1>/i)||[])[1]||'';
+ const heading=(page.match(/<h1\b[^<>]{0,2000}>([\s\S]{1,260}?)<\/h1>/i)||[])[1]||'';
  // fields.name is already the matched source Product identity; storefront
  // H1 text may be nested, elided, or a short SEO heading. Require the
  // same producer entity to occur in THIS product's story regardless.
@@ -208,13 +208,13 @@ function selectedMarkup(html){
 export function extractLayoutEvidence(html,{fields,addField,clean}){
  html=productMarkup(html);
  const extras={},page=selectedMarkup(html);
- const onyxMetric=/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["']roast-level["']/i.test(html);
+ const onyxMetric=/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["']roast-level["']/i.test(html);
  if(onyxMetric){
   // Onyx publishes many general education sections on the product URL.
   // The actual coffee has named a-stat fields. Only read those source
   // blocks, never a distant paragraph titled "Producer"/"Extraction".
-  for(const m of html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["'](roast-level|variety|process-method|elevation|origin|harvest-season|method|country|season|ferment|roaster)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)){
-   const kind=m[1],p=m[2],label=(p.match(/<label\b[^>]*>([^<>]{2,75})<\/label>/i)||[])[1];
+  for(const m of html.matchAll(/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["'](roast-level|variety|process-method|elevation|origin|harvest-season|method|country|season|ferment|roaster)["'][\s\S]{0,2900}?<p\b[^<>]{0,2000}>([\s\S]{1,650}?)<\/p>/gi)){
+   const kind=m[1],p=m[2],label=(p.match(/<label\b[^<>]{0,2000}>([^<>]{2,75})<\/label>/i)||[])[1];
    if(!label)continue;
    const value=p.split(/<br\s*\/?\s*>/i)[0];
    field(fields,clean(label,80),value,addField,extras,clean);
@@ -226,7 +226,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   // Named Onyx Elevation modal belongs to this matched product; skip all
   // neighboring educational prose and unnamed numeric measures.
   if(!fields.elevation_m){
-   const altitude=html.match(/<div\b[^>]{0,800}\bclass=["'][^"']*\ba-stat-desc\b[^"']*["'][^>]*\bdata-stat-id=["']elevation["'][^>]*>[\s\S]{0,650}?<h[2-5]\b[^>]*>\s*Elevation\s*<\/h[2-5]>[\s\S]{0,220}?<h[3-6]\b[^>]*>\s*(\d{3,4}\s*(?:MASL|m))\s*<\/h[3-6]>/i);
+   const altitude=html.match(/<div\b[^<>]{0,800}\bclass=["'][^"']{0,2000}\ba-stat-desc\b[^"']{0,2000}["'][^<>]{0,2000}\bdata-stat-id=["']elevation["'][^<>]{0,2000}>[\s\S]{0,650}?<h[2-5]\b[^<>]{0,2000}>\s*Elevation\s*<\/h[2-5]>[\s\S]{0,220}?<h[3-6]\b[^<>]{0,2000}>\s*(\d{3,4}\s*(?:MASL|m))\s*<\/h[3-6]>/i);
    if(altitude)addField('elevation_m',altitude[1]);
   }
   if(!fields.tasting_notes){
@@ -244,21 +244,21 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  // <a> rather than a <p>. Read text only; never follow javascript: hrefs.
  // Named widgets can follow large decorative SVGs. Scan the bounded product
  // scope, not the shorter generic-token window, so valid late facts survive.
- for(const block of html.matchAll(/<div\b[^>]*class=["'][^"']*meta-info[^"']*["'][^>]*>([\s\S]{0,1150}?)<\/div>/gi)){
-  const m=block[1].match(/<p\b[^>]*class=["'][^"']*meta-title[^"']*["'][^>]*>([^<>]{2,90})<\/p>[\s\S]{0,380}?<(?:a|p)\b[^>]*>([^<>]{1,220})<\/(?:a|p)>/i);
+ for(const block of html.matchAll(/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}meta-info[^"']{0,2000}["'][^<>]{0,2000}>([\s\S]{0,1150}?)<\/div>/gi)){
+  const m=block[1].match(/<p\b[^<>]{0,2000}class=["'][^"']{0,2000}meta-title[^"']{0,2000}["'][^<>]{0,2000}>([^<>]{2,90})<\/p>[\s\S]{0,380}?<(?:a|p)\b[^<>]{0,2000}>([^<>]{1,220})<\/(?:a|p)>/i);
   if(m)field(fields,clean(m[1],80),m[2],addField,extras,clean);
  }
  // PERC Shopify layouts render headings and values several nested elements
  // apart; no arbitrary cross-heading pairing is allowed.
- for(const m of html.matchAll(/<h2\b[^>]*>([\s\S]{1,85}?)<\/h2>((?:(?!<h2\b)[\s\S]){0,5200}?)<h6\b[^>]*>([^<>]{2,190})<\/h6>/gi)){
+ for(const m of html.matchAll(/<h2\b[^<>]{0,2000}>([\s\S]{1,85}?)<\/h2>((?:(?!<h2\b)[\s\S]){0,5200}?)<h6\b[^<>]{0,2000}>([^<>]{2,190})<\/h6>/gi)){
   const label=clean(m[1],75);
   if(getKey(label))field(fields,label,m[3],addField,extras,clean);
  }
  // Onyx uses a named product metric followed by a <label> inside the same
  // compact <p>, e.g. "Ultra Light<br>Agtron #133<br><label>ROAST LEVEL".
  // Only the explicit selected value counts, not Agtron inferred darkness.
- for(const m of html.matchAll(/<div\b[^>]*class=["'][^"']*a-stat[^"']*["'][^>]*data-name=["'](?:roast-level|variety|process-method|elevation|origin|harvest-season)["'][\s\S]{0,2900}?<p\b[^>]*>([\s\S]{1,650}?)<\/p>/gi)){
-  const label=(m[1].match(/<label\b[^>]*>([^<>]{2,75})<\/label>/i)||[])[1];
+ for(const m of html.matchAll(/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["'](?:roast-level|variety|process-method|elevation|origin|harvest-season)["'][\s\S]{0,2900}?<p\b[^<>]{0,2000}>([\s\S]{1,650}?)<\/p>/gi)){
+  const label=(m[1].match(/<label\b[^<>]{0,2000}>([^<>]{2,75})<\/label>/i)||[])[1];
   if(!label)continue;
   const first=m[1].split(/<br\s*\/?\s*>/i)[0];
   field(fields,clean(label,80),first,addField,extras,clean);
@@ -267,7 +267,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  }
  // SEY encodes process in a release-specific product title component:
  // ETHIOPIAN LANDRACE - WASHED, never as a generic roast/brand heuristic.
- const sey=(html.match(/<span\b[^>]*class=["'][^"']*coffeeTitle_varietyProcess[^"']*["'][^>]*>([^<>]{3,140})<\/span>/i)||[])[1];
+ const sey=(html.match(/<span\b[^<>]{0,2000}class=["'][^"']{0,2000}coffeeTitle_varietyProcess[^"']{0,2000}["'][^<>]{0,2000}>([^<>]{3,140})<\/span>/i)||[])[1];
  if(sey){
   const m=clean(sey,140).match(/\s[-–]\s(Washed|Natural|Honey|Anaerobic)\s*$/i);
   if(m&&!fields.process)addField('process',m[1]);
@@ -283,7 +283,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  }
  // Some roasters put the label and value into a single flat text node or
  // nested rich-text wrapper that leaf tokenization cannot match.
- const visible=page.replace(/<[^>]*>/g,'\n');
+ const visible=page.replace(/<[^<>]{0,2000}>/g,'\n');
  const rows=visible.split(/\n/).map(x=>clean(x,280)).filter(Boolean).slice(0,450);
  for(const r of rows){
   const p=r.match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|]|\s+[-–]\s+)\s*(.{2,230})$/u);
@@ -293,7 +293,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  // use that value as a fallback; "Ultra Light" is NEVER inferred from title
  // brand, flavor notes or an unlabeled chart.
  if(!fields.process){
-  const h1=page.match(/<h1\b[^>]*>([\s\S]{0,440}?)<\/h1>/i);
+  const h1=page.match(/<h1\b[^<>]{0,2000}>([\s\S]{0,440}?)<\/h1>/i);
   const title=h1?clean(h1[1],250):'';
   const m=title.match(/(?:\s[-|]\s|\s\/\/\s)(Washed|Natural|Honey|Anaerobic)\s*$/i);
   if(m)addField('process',m[1]);
@@ -301,7 +301,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  // "In the cup we find ..." is explicit tasting prose. Strip punctuation
  // after one short sentence; do not turn the whole page into tasting notes.
  if(!fields.tasting_notes){
-  const txt=page.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,17000);
+  const txt=page.replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').slice(0,17000);
   const m=txt.match(/\b(?:in the cup we find|notes of)\s+([A-Za-zÀ-ÿ][^.!?;]{8,130})[.!?;]/i);
   if(m&&/\b(?:and|,)\b/i.test(m[1]))addField('tasting_notes',m[1].trim());
  }

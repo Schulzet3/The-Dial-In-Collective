@@ -3,7 +3,7 @@
 // colour photograph. Explicit labels follow the owner's Locked seven tiers.
 const MAX_LABEL=90;
 function plain(s){
- return String(s??'').replace(/<[^>]*>/g,' ').replace(/&(?:nbsp|#160);/gi,' ')
+ return String(s??'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&(?:nbsp|#160);/gi,' ')
   .replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#39;|&apos;/gi,"'")
   .replace(/\s+/g,' ').trim().slice(0,MAX_LABEL);
 }
@@ -34,7 +34,7 @@ export function roastLabelHint(value){
 }
 function attrs(tag){
  const out={};
- for(const m of tag.matchAll(/([:\w-]+)\s*=\s*(?:"([^"]{0,300})"|'([^']{0,300})')/g)){
+ for(const m of tag.matchAll(/(?:^|[\s<])([:\w-]{1,64})\s*=\s*(?:"([^"]{0,300})"|'([^']{0,300})')/g)){
   out[m[1].toLowerCase()]=plain(m[2]??m[3]);
  }
  return out;
@@ -47,9 +47,9 @@ function roastLabelInPhrase(s){
  return q?normalizeRoastLabel(q[1]):null;
 }
 function cropProduct(html){
- const heads=[...html.matchAll(/<h1\b[^>]{0,350}>[\s\S]{0,400}?<\/h1>/gi)];
+ const heads=[...html.matchAll(/<h1\b[^<>]{0,350}>[\s\S]{0,400}?<\/h1>/gi)];
  let body=heads.length===1?html.slice(heads[0].index):html.slice(0,40000);
- const m=body.search(/<footer\b|<h[2-4]\b[^>]*>\s*(?:more coffees|related products|you may also like|other products|recommended for you)\b/i);
+ const m=body.search(/<footer\b|<h[2-4]\b[^<>]{0,2000}>\s*(?:more coffees|related products|you may also like|other products|recommended for you)\b/i);
  if(m>1000)body=body.slice(0,m);
  return body.slice(0,42000);
 }
@@ -66,14 +66,14 @@ export function extractRoastVisualEvidence(html){
  };
  // Meta tags are included only with explicitly roast-specific names, NOT
  // generic SEO descriptions which often mention several roast levels.
- for(const tag of html.match(/<meta\b[^>]{0,1500}>/gi)||[]){
+ for(const tag of html.match(/<meta\b[^<>]{0,1500}>/gi)||[]){
   const a=attrs(tag),k=(a.name||a.property||a['itemprop']||'').toLowerCase();
   if(/^(?:(?:coffee|product)[:._-])?(?:roast[_-]?level|roast[_-]?profile|roast)$/.test(k))
    offer(a.content,'product_meta');
  }
  // Explicit product attributes in the cropped product section, including
  // accessible image/SVG descriptions (without requesting image bytes).
- for(const match of page.matchAll(/<(?:div|span|p|section|figure|img|svg|input|label|button|meter|output)\b[^>]{0,1800}>/gi)){
+ for(const match of page.matchAll(/<(?:div|span|p|section|figure|img|svg|input|label|button|meter|output)\b[^<>]{0,1800}>/gi)){
   const a=attrs(match[0]);
   for(const k of ['data-roast-level','data-roast','data-roast-profile','data-roast_label','data-coffee-roast','data-product-roast','data-roast-intensity']){
    if(a[k])offer(a[k],'product_attribute');
@@ -82,14 +82,14 @@ export function extractRoastVisualEvidence(html){
   if(/\broast\b/i.test(label))offer(label,'graphic_accessible_label');
  }
  // Inline SVG titles/tags can express the graphic's value without OCR.
- for(const match of page.matchAll(/<(?:title|desc)\b[^>]*>([\s\S]{1,160}?)<\/(?:title|desc)>/gi)){
+ for(const match of page.matchAll(/<(?:title|desc)\b[^<>]{0,2000}>([\s\S]{1,160}?)<\/(?:title|desc)>/gi)){
   if(/\broast\b/i.test(match[1]))offer(match[1],'inline_svg_title');
  }
  // Detect the selected class/ARIA state of a discrete roast-level selector.
  // The heading must be nearby; avoid unrelated site-wide filter controls.
  for(const m of page.matchAll(/(?:Roast\s+Level|Roast\s+Profile)\b[\s\S]{0,2600}/gi)){
   const snippet=m[0].slice(0,2600).split(/<\/(?:section|fieldset|article)>/i)[0];
-  for(const item of snippet.matchAll(/<(span|div|button|label|option|li)\b([^>]{0,850})>([^<>]{1,120})<\/\1>/gi)){
+  for(const item of snippet.matchAll(/<(span|div|button|label|option|li)\b([^<>]{0,850})>([^<>]{1,120})<\/\1>/gi)){
    const a=attrs(item[2]),v=plain(item[3]);
    const state=[a.class,a['aria-pressed'],a['aria-selected'],a['aria-current'],a['data-selected'],a['data-state']].filter(Boolean).join(' ');
    if(/(?:^|[\s_-])(?:selected|active|current|checked|is-active|is-selected)(?:$|[\s_-])|\btrue\b/i.test(state))
@@ -97,7 +97,7 @@ export function extractRoastVisualEvidence(html){
   }
   // Do not convert a raw graphic marker percentage to a roast category:
   // roaster-specific endpoints/curves are not standardized.
-  const inline=snippet.match(/<(?:meter|progress|input)\b[^>]{0,500}(?:aria-label\s*=\s*["'][^"']*roast[^"']*["'][^>]*|data-label\s*=\s*["']roast["'][^>]*)>/i);
+  const inline=snippet.match(/<(?:meter|progress|input)\b[^<>]{0,500}(?:aria-label\s*=\s*["'][^"']{0,2000}roast[^"']{0,2000}["'][^<>]{0,2000}|data-label\s*=\s*["']roast["'][^<>]{0,2000})>/i);
   const marker=snippet.match(/(?:left|translateX|--roast-position|--roast-level|--progress)\s*[:(]\s*(\d{1,3}(?:\.\d+)?)%/i);
   if((marker||inline)&&/\blight\b/i.test(snippet)&&/\bmedium\b/i.test(snippet))
    hints.push('Roast graphic uses a Light–Medium scale; verify its marker before selecting a level.');

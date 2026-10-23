@@ -1,9 +1,10 @@
+import {rawElements} from '../_shared/html-scan.mjs';
 // Bounded, deterministic preview of metadata from a trusted official roaster URL.
 // Not a canonical verification; never writes public coffee facts or uses AI.
 import {normalizeWords} from '../dic-verify-coffee/evidence.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 
-const trim=(v,max=240)=>String(v??'').replace(/<[^>]{0,800}>/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
+const trim=(v,max=240)=>String(v??'').replace(/<[^<>]{0,800}>/g,' ').replace(/\s+/g,' ').trim().slice(0,max);
 const urlHost=h=>String(h||'').toLowerCase().replace(/^www\./,'');
 export function officialPreviewUrl(raw,officialHost){
  if(typeof raw!=='string'||raw.length>4000||!/^[a-z0-9-]+(?:\.[a-z0-9-]+)+$/.test(officialHost||''))return null;
@@ -39,9 +40,9 @@ function productsFrom(data,out,depth=0){
 }
 function metaAttrs(html){
  const out={};
- for(const tag of html.match(/<meta\b[^>]{0,1800}>/gi)||[]){
+ for(const tag of html.match(/<meta\b[^<>]{0,1800}>/gi)||[]){
   const obj={};
-  for(const m of tag.matchAll(/([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi))obj[m[1].toLowerCase()]=decode(m[2]??m[3]);
+  for(const m of tag.matchAll(/(?:^|[\s<])([a-z-]{1,64})\s*=\s*(?:"([^"]{0,2000})"|'([^']{0,2000})')/gi))obj[m[1].toLowerCase()]=decode(m[2]??m[3]);
   const key=(obj.property||obj.name||'').toLowerCase();
   if(['og:type','og:title','description'].includes(key))out[key]=obj.content||'';
  }
@@ -76,7 +77,9 @@ function officialProcess(value){
 export function extractProductPreview(html,{source_url,roaster}={}){
  if(typeof html!=='string'||html.length>950000||!source_url||!roaster)return {ok:false,reason:'invalid_source'};
  const products=[];
- for(const [,attrs,payload] of html.matchAll(/<script\b([^>]{0,1000})>([\s\S]*?)<\/script\s*>/gi)){
+ for(const block of rawElements(html)){
+  if(!block.closed||block.attributes.length>1000)continue;
+  const attrs=block.attributes,payload=block.body;
   if(!/\btype\s*=\s*["']application\/ld\+json["']/i.test(attrs)||payload.length>180000)continue;
   try{productsFrom(JSON.parse(payload),products);}catch{/* malformed markup cannot become evidence */}
  }

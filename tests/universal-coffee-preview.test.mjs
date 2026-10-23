@@ -665,7 +665,7 @@ test('transient website failure does not call charge-completion RPC',async()=>{
  const result=await(await handler(req)).json();assert.equal(result.reason,'source_unavailable');
  assert.equal(calls.filter(x=>x.endsWith('/rpc/dic_preview_complete')).length,0);
 });
-test('unambiguous verified catalog lookup skips retrieval and daily claim but enforces cooldown',async()=>{
+test('unambiguous approved catalog lookup skips retrieval, preserves cooldown, never claims source verification',async()=>{
  let outbound=0;const requests=[];
  const apiFetch=async (url,opt)=>{requests.push({url,body:opt.body});return {ok:true,json:async()=>
   url.endsWith('/rpc/dic_preview_cached_verified')?
@@ -675,7 +675,7 @@ test('unambiguous verified catalog lookup skips retrieval and daily claim but en
  headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',
  'origin':'https://app.dialincollective.com'},body:JSON.stringify({source_url:productURL})});
  const result=await(await handler(req)).json();assert.equal(result.cached,true);
- assert.equal(result.verification,'verified');assert.equal(outbound,0);
+ assert.equal(result.verification,'unverified');assert.equal(result.source_verified,false);assert.equal(result.catalog_approved,true);assert.equal(result.source,'approved_catalog');assert.equal(outbound,0);
  assert.equal(requests.some(x=>x.url.endsWith('/rpc/dic_preview_complete')),false);
  assert.equal(requests.find(x=>x.url.endsWith('/rpc/dic_preview_preflight')).body,'{"p_cached":true}');
 });

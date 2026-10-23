@@ -1,7 +1,10 @@
 {
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
-  "coverage_policy": "Any NEW current_owner_ decision key requires deliberate classification in this inventory before CI/build can pass; anchors verify source presence, NOT live user-device acceptance or every baseline behavior.",
+  "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
+  "reconciled_at_utc": "2026-10-23",
+  "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
+  "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
     "current_owner_admin_low_friction_review_20261021",
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
@@ -56,61 +59,47 @@
     "current_owner_universal_deployment_consent_20261021"
   ],
   "production": {
-    "netlify_deploy_id": "6ada3b5018ccdd080d3b4584",
-    "exact_source_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
-    "owner_approval_for_new_release": "DIC-20261022-FASTFLOW-ADMIN-03_CONSUMED; future publication requires NEW distinct owner authorization",
-    "tested_application_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
+    "netlify_deploy_id": "6adabcecd4a2a68e94cdc09a",
+    "exact_source_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+    "tested_application_source_sha": "7156f0d3f1b960775c9256e7fcf92e0b89be8cc6",
+    "owner_approval_for_new_release": "DIC-20261022-READY-QUEUE-04_CONSUMED; no new publication authorized by this audit",
     "owner_device_acceptance": "RETIRED_NOT_REQUIRED_AS_COMPLETION_GATE_NO_DEVICE_TEST_CLAIM",
-    "chat_controller_native_last_push": "SUCCESS_SINGLE_ATTEMPT_GITHUB_ACTIONS_RUN_39815256276_SOURCE_BOUND_RELEASE_REF_MATCHES_NETLIFY_READY",
     "pending_release": {
-      "id": "DIC-20261022-FASTFLOW-ADMIN-03",
-      "tested_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
-      "approved_at_utc": "2026-10-22T15:54:00Z",
-      "scope_receipt": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/44#issuecomment-6343761450",
-      "owner_approval_receipt": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/44#issuecomment-6344707918",
+      "id": "DIC-20261022-READY-QUEUE-04",
+      "tested_source_sha": "7156f0d3f1b960775c9256e7fcf92e0b89be8cc6",
+      "actual_production_git_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+      "netlify_deploy_id": "6adabcecd4a2a68e94cdc09a",
       "stage": "DEPLOYED_READY_COMPLETE_NO_DEVICE_SIGNOFF_REQUIRED",
-      "expected_applied_sql_versions": [
-        "20261022023000",
-        "20261022024000",
-        "20261022053000",
-        "20261022090000"
-      ],
-      "excluded": "owner deferred PR72 and all unready/unapproved roadmap work",
-      "source_ci": "SIX_OF_SIX_PASS_EXACT_SOURCE; POSTFLIGHT_READY_PROVIDER_CONFIRMED",
-      "one_use": true,
+      "claim_consumed_once": true,
+      "controller_run": 39886055063,
       "actual_migration_versions": [
         {
-          "name": "dic_admin_shot_coffee_group_identity",
-          "version": "20261022162910"
+          "name": "dic_admin_server_search",
+          "version": "20261023014707"
         },
         {
-          "name": "dic_admin_fast_review_and_identity_edits",
-          "version": "20261022162954"
+          "name": "dic_community_server_search",
+          "version": "20261023014715"
         },
         {
-          "name": "dic_first_coffee_style_prompt",
-          "version": "20261022163029"
-        },
-        {
-          "name": "dic_fast_flow_hybrid_style",
-          "version": "20261022163126"
+          "name": "dic_preview_two_phase_cache",
+          "version": "20261023014720"
         }
-      ],
-      "actual_production_git_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
-      "netlify_deploy_id": "6ada3b5018ccdd080d3b4584",
-      "claim_consumed_once": true,
-      "owner_device_acceptance": "RETIRED_NOT_REQUIRED",
-      "controller_run": "39815256276_COMPLETED_SUCCESS_2026-10-22T16:43:03Z"
-    }
+      ]
+    },
+    "receipt": "docs/PRODUCTION_RELEASE_2026-10-23_READY_QUEUE_VERIFIED.json",
+    "pending_release_field_note": "Schema compatibility name; this record is a consumed HISTORICAL release, not a pending authorization."
   },
   "contracts": [
     {
       "id": "fast_flow_sixth_style_hybrid",
       "decision_key": "current_owner_fast_flow_hybrid_20261022",
-      "scope": "Sixth selectable style; independent family and guarded ratio-only Turbo fallback",
-      "implementation": "PUBLISHED_NETLIFY_READY_6ada3b5018ccdd080d3b4584_RELEASE_fe2eee66717b13b9c9d203d1728bfc863961732e; exact source CI passed, SQL only where applicable",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "scope": "Approved Fast-Flow style; independent family and guarded ratio-only Turbo fallback",
+      "implementation": "published_source",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 31,
+      "production_migration": "APPLIED_20261022163126",
+      "production_migration_version": "20261022163126",
       "assertions": [
         {
           "path": "site/lib/constants.js",
@@ -132,26 +121,16 @@
           "path": "tests/fast-flow-hybrid.test.mjs",
           "contains": "compatible Turbo fallback adjusts only the unproven Fast-Flow ratio"
         }
-      ],
-      "tested_source_sha": "c272d778768728bbf75f829477d6331b33b7322a",
-      "merged_sha": "12a03b65ed4093d610ece063a1d5a8dae8ef4895",
-      "tested_tree_sha": "2160c95d99474590bd7b32d20c9fed19466884de",
-      "checks": [
-        "39736577832",
-        "39736577933",
-        "39736577745",
-        "39736578142",
-        "39736577911"
-      ],
-      "production_migration": "NOT_APPLIED"
+      ]
     },
     {
       "id": "grinder_range_new_setup",
       "decision_key": "current_owner_grinder_range_info_20261019",
       "scope": "New Setup only; no existing-settings editor was approved",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
-      "issue": 39,
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
+      "issue": 26,
+      "historical_issue": 39,
       "assertions": [
         {
           "path": "site/cloud/main.js",
@@ -196,8 +175,9 @@
       "decision_key": "current_owner_recommendation_display_choice_20261019",
       "scope": "Next Shot Recommendation card only; explicit single-change choice",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
-      "issue": 39,
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
+      "issue": 26,
+      "historical_issue": 39,
       "assertions": [
         {
           "path": "site/cloud/main.js",
@@ -224,10 +204,11 @@
     {
       "id": "coffee_url_autofill_button_only",
       "decision_key": "current_owner_autofill_button_only_20261019",
-      "scope": "ONLY prominent full-width New Coffee Autofill button; no other #40 concept",
+      "scope": "ONLY prominent full-width New Coffee Autofill button; no other original #40 concept",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
-      "issue": 40,
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
+      "issue": 26,
+      "historical_issue": 40,
       "assertions": [
         {
           "path": "site/cloud/main.js",
@@ -248,7 +229,7 @@
       "decision_key": "current_owner_approved_community_release_context_20261018",
       "scope": "Sanitized Community coffee card/release grouping already deployed",
       "implementation": "published_source_and_migration",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 11,
       "assertions": [
         {
@@ -268,9 +249,10 @@
     {
       "id": "pwa_shell_refresh",
       "decision_key": "current_owner_pwa_freshness_extractor_reliability_release_20261020",
-      "scope": "Atomic revisioned service worker, online nav refresh with offline fallback",
+      "scope": "Atomic revisioned service worker, online navigation refresh with offline fallback",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
+      "issue": 22,
       "assertions": [
         {
           "path": "scripts/pwa/service-worker.template.txt",
@@ -289,9 +271,9 @@
     {
       "id": "internal_single_visible_recipe",
       "decision_key": "current_owner_one_visible_recipe_internal_families_20261020",
-      "scope": "One visible family and distinct internal recipe evidence included in published application source; remaining candidate lifecycle and real multi-family acceptance tracked in #10/#13",
+      "scope": "One visible family is published; full candidate/confirmed/retired lifecycle and experiment transport remain #10/#13",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 10,
       "assertions": [
         {
@@ -311,9 +293,9 @@
     {
       "id": "original_badges_no_shadows",
       "decision_key": "current_owner_grinder_range_info_20261019",
-      "scope": "Related owner-Locked visual constraints; full original badge decisions in Master Spec/older Decision Ledger",
+      "scope": "Preserve original Locked badge and visual constraints; full authority remains in canonical specification and ledger",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "assertions": [
         {
           "path": "site/visual.css",
@@ -332,10 +314,11 @@
     {
       "id": "controlled_netlify_release",
       "decision_key": "current_owner_pwa_freshness_extractor_reliability_release_20261020",
-      "scope": "Only dedicated release/production can publish after unique grant, consumed claim, exact release marker and valid credits; development always skipped",
+      "scope": "Only release/production publishes after an exact-source one-use consumed claim and release marker; no assistant credit checks or billing gates",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
-      "issue": 38,
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
+      "issue": 27,
+      "historical_issue": 38,
       "assertions": [
         {
           "path": "scripts/netlify/should-ignore-build.mjs",
@@ -366,9 +349,9 @@
     {
       "id": "mandatory_held_shot_confirm_failure_retry_live",
       "decision_key": "current_owner_required_outlier_review",
-      "scope": "Required held extreme-outlier Confirm modal, visible Chrome blocked-fetch error, reenabled retry and real signed-owner same-modal HTTP200 successful Confirm. Does not verify Correct Shot or provider outage.",
+      "scope": "Preserve recorded required held-shot Confirm/error/retry success; not proof of every outage or wrong-member case",
       "implementation": "published_source",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 34,
       "acceptance_evidence": "docs/acceptance/2026-10-20-community-confirmation-retry-owner-report.json",
       "assertions": [
@@ -393,10 +376,11 @@
     {
       "id": "duplicate_first_catalog_auto_approval",
       "decision_key": "current_owner_duplicate_first_automatic_catalog_approval_20261021",
-      "scope": "Only genuinely distinct member coffee auto approval and safe same-release reuse; hold genuine duplicate conflict; source provenance separate; keep Mango Pending",
-      "implementation": "published_source_and_migrations; Netlify READY/current 6ad92fd1d706315f29032892 at release commit 1e79c4585c49ab517abb912887ee05ed7f4c4c4d, tested application c6976b1fc86ed5e6b38c0c38831950fca017b3a4; DIC-20261021-BETA-COFFEE-01 consumed",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
-      "issue": 43,
+      "scope": "Genuinely distinct member coffee catalog approval and safe same-release reuse; hold real conflicts and label official-source assurance separately",
+      "implementation": "published_source_and_migrations",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
+      "issue": 47,
+      "historical_issue": 43,
       "assertions": [
         {
           "path": "supabase/migrations/20261021062000_dic_duplicate_first_auto_approval.sql",
@@ -415,9 +399,10 @@
     {
       "id": "admin_approvable_record_explorer",
       "decision_key": "current_owner_admin_records_edit_20261021",
-      "scope": "Admin portal only; no member/public pages, no live SQL",
-      "implementation": "Admin foundation previously deployed; current approved collapsible/grouped/direct-save enhancements deployed with source c272d778768728bbf75f829477d6331b33b7322a in Netlify READY 6ada3b5018ccdd080d3b4584; hosted related SQL 20261022162910 and 20261022162954 applied; existing admin audit/permissions retained",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "scope": "Protected Admin records, audited edits, review, paging and later lazy-loading/search refinements are deployed; #93 count fix remains READY, not deployed",
+      "implementation": "published_foundation_and_search; separate_Q93_ready",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
+      "issue": 47,
       "assertions": [
         {
           "path": "site/admin/view.js",
@@ -448,9 +433,9 @@
     {
       "id": "hide_shot_personal_control_withdrawn",
       "decision_key": "current_owner_remove_hide_shot_control_20261021",
-      "scope": "Owner explicitly removes Hide Shot user control from all member shot history; leaves existing historical data and server compatibility alone.",
-      "implementation": "PUBLISHED_NETLIFY_READY_6ada3b5018ccdd080d3b4584_RELEASE_fe2eee66717b13b9c9d203d1728bfc863961732e; exact source CI passed, SQL only where applicable",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "scope": "Hide Shot UI removed; existing history and deferred private compatibility branch preserved",
+      "implementation": "published_source",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 20,
       "assertions": [
         {
@@ -473,18 +458,17 @@
           "path": "tests/browser/cloud_owner_qa.py",
           "contains": "Shot History retains Edit/Make Current but has no Hide Shot control"
         }
-      ],
-      "exact_tested_sha": "03f87bab4a2a0086d1ecdc736cb2d714dd231792",
-      "merged_sha": "4f77a7ff8b3d20a0ad7a48f223cdeeddeada919d",
-      "tree_sha": "99558f366ba0af981e3ebc0c55bd5365abc0f7db"
+      ]
     },
     {
       "id": "hide_shot_backend_action_retired",
       "decision_key": "current_owner_retire_hide_shot_backend_20261021",
-      "scope": "Reject obsolete hide action in client and server, preserve old data and legacy outbox entries",
-      "implementation": "SOURCE_MERGED_6_OF_6_CI_AND_HOSTED_GUARD_APPLIED_20261022041530",
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "scope": "Client and public action reject hide; preserve old data and legacy outbox entries. Internal private retirement explicitly deferred",
+      "implementation": "published_guard_and_client",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 20,
+      "production_migration_version": "20261022041530",
+      "residual_limitation": "Read-only catalog confirms dormant private.mutate hide_shot branch remains; anon/authenticated direct EXECUTE denied. Owner deferred PR72. No retirement or privileged-route proof claimed.",
       "assertions": [
         {
           "path": "site/cloud/outbox.js",
@@ -502,71 +486,18 @@
           "path": "tests/retired-hide-shot-sql.test.mjs",
           "contains": "rejected before existing owner and receipt routing"
         }
-      ],
-      "production_migration_version": "20261022041530",
-      "production_counts_verified": {
-        "shots": 22,
-        "hidden": 0,
-        "notes": 22,
-        "community_shots": 2,
-        "mutation_receipts": 44
-      },
-      "residual_limitation": "Internal private.mutate legacy branch remains and its removal is explicitly deferred by owner; public guard exists and authenticated direct EXECUTE denied in read-only October22 catalog check. No proof about every privileged route. Site UI source not released.",
-      "production_verified": true,
-      "production_counts_evidence": "Historical October21 guard-application observation; counts not re-audited in this reconciliation."
+      ]
     },
     {
       "id": "first_coffee_expansion_one_time_style",
-      "draft_context_followup": {
-        "issue": 73,
-        "pull_request": 74,
-        "status": "SOURCE_MERGED_EXACT_SHA_CI_SUCCESS_NOT_DEPLOYED_NOT_ACCEPTED",
-        "exact_tested_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
-        "merged_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
-        "tree_sha": "a7d84671e81ae3af0de90c4198eda36bd794d0c0",
-        "ci_runs": {
-          "approval": 39732735076,
-          "validate": 39732735077,
-          "cloud_and_mobile": 39732735160,
-          "sql": 39732735118,
-          "visual": 39732735154
-        },
-        "postmerge_ci_runs": {
-          "approval": 39733019368,
-          "validate": 39733019280,
-          "cloud_and_mobile": 39733019319,
-          "visual": 39733019338
-        },
-        "sql_evidence": "PR-only run39732735118 passed on the identical tested/merged Git tree; no postmerge SQL run claimed.",
-        "regression_file": "tests/cloud-draft-recommendation-context.test.mjs",
-        "regressions": {
-          "passing_after_repair": 7,
-          "failing_before_repairs": 6,
-          "historical_edit_snapshot_guard_passed_before_and_after": true
-        },
-        "scope": "Use Recommendation and Slow Feed preserve draft style/basket/feed. New-shot dose warning uses the draft basket; edits keep historical dose snapshot and strict >1 g confirmation threshold.",
-        "site_published": false,
-        "hosted_sql_applied_by_followup": false,
-        "device_acceptance": "PENDING_AFTER_SEPARATELY_AUTHORIZED_RELEASE",
-        "receipt": "docs/audits/2026-10-22-github-reconciliation-receipt.json"
-      },
       "decision_key": "current_owner_first_expansion_starting_style_20261021",
-      "scope": "First intentional expansion before any shot, never Add Coffee",
-      "implementation": "PUBLISHED_NETLIFY_READY_6ada3b5018ccdd080d3b4584_RELEASE_fe2eee66717b13b9c9d203d1728bfc863961732e; exact source CI passed, SQL only where applicable",
-      "exact_tested_sha": "0b05cfe56b09ac9e3c9b6e744f2f17bdd092fad2",
-      "merged_sha": "83d289eef8c26b57329f3ef71bfae3fc018d53cd",
-      "tree_sha": "c0ad5b7d364fde83e93820199cc39b8ac0659cb9",
-      "ci_runs": {
-        "approval": 39726672939,
-        "cloud": 39726672918,
-        "sql": 39726672909,
-        "ux_two_jobs": 39726672928,
-        "visual": 39726672887
-      },
-      "hosted_sql_applied": false,
-      "site_published": false,
-      "device_acceptance": "RETIRED_NOT_REQUIRED (historical device testing not asserted)",
+      "scope": "First intentional expansion before any shot, never Add Coffee; historical dose-confirmation details superseded by current >2 g new-shot advisory",
+      "implementation": "published_source",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 19,
+      "hosted_sql_applied": true,
+      "production_migration_version": "20261022163029",
+      "site_published": true,
       "assertions": [
         {
           "path": "site/cloud/main.js",
@@ -602,158 +533,112 @@
   "active_gap_flags": [
     {
       "id": "existing_setup_settings_not_new_setup",
-      "status": "OWNER_CLARIFICATION_NEEDED",
-      "reason": "Existing Setup Settings has no editable grinder-range heading/fields; earlier approval explicitly named New Setup only. Owner reports missing on phone; route not established. Do not silently widen scope.",
-      "issue": 39
+      "status": "ROUTE_SPECIFIC_REPORT_UNVERIFIED_NO_SCOPE_EXPANSION",
+      "reason": "New Setup help is approved; an existing-settings grinder editor is not. Reproduce the reported route before changing behavior.",
+      "issue": 26,
+      "historical_issue": 39
     },
     {
       "id": "real_cross_account_api_acceptance",
       "status": "CLOSED_ACCEPTED_LIVE_ROLE_SECURITY_ISSUE41",
-      "reason": "Verified production owner-run authenticated member v2 33/33 current owner isolation, admin v1 original 32/1 mistaken review expectation preserved; genuine ordinary member admin read and 2/2 mutation 403/42501; genuine removed/restore existing session 403-to-200 and immediate UI; genuine newly registered never-admitted Auth session admitted=false status 200, protected read 403/42501, provider method/role/status correlated; owner's approved temporary Auth user removed through Dashboard and post-delete 5 Auth/5 enabled admitted/0 never admitted/0 disabled; 18 shots/18 notes/2 eligible Community, 8 invites/9 events and referential integrity unchanged. Supplemental disposable signed PostgREST 32/32 PASS, simulated phone retry not a genuine held case. Provider logs are aggregates, no exact JWT subject/error payload. One test-created unused contributor placeholder detached by FK ON DELETE SET NULL remains with no links, tracked separately in issue #42 and not a privacy leak or #41 authorization acceptance gap. Separate broader risks #27/#38 and live held-shot #9/#34 remain. GitHub Issue #41 closed 2026-10-21T03:49:19Z, independently read back; evidence commit f99222277a2931c46746d6ad6eaa2bc6e054b452, continuity CI 39540598220 SUCCESS. Never-admitted owner-created GoTrue account was deleted through Dashboard and final five-account/shot-history counts and all referential checks passed. The lone unlinked test-created contributor placeholder is non-blocking, tracked in #42 with future owner approval needed for SQL cleanup. Broader security #27/#38 and live held-shot #9/#34 remain open; no Locked requirement weakened.",
-      "issue": 41
+      "reason": "Preserve completed #41 genuine role/read/removal-restoration evidence. Distinct wrong-member/stale-revision observations formerly #9 remain #27; no new physical/session check claimed. Two unlinked contributor placeholders remain unchanged; #42 closed not_planned.",
+      "issue": 41,
+      "remaining_issue": 27
     },
     {
       "id": "multi_worker_release_guard",
       "status": "OPEN_RESIDUAL_BYPASS_RISK",
-      "reason": "Single-use grants and non-force serialized claims are implemented. Native Actions final push succeeded in run39706556610 and Netlify READY/current eee687dd was independently read back. GitHub Free/private advisory checks still cannot prevent direct writers or provider-admin redeploy. Keep #38 open; #44 retains unknown actual postrelease debit and account/device evidence, not a still-unproven native push.",
-      "issue": 38
+      "reason": "Serialized non-force one-use release claim and native successful releases exist. Private Free advisory checks cannot prevent a privileged direct writer or provider administrator; no credit/device gate.",
+      "issue": 27,
+      "historical_issue": 38
     },
     {
       "id": "all_chat_transcript_coverage",
       "status": "UNPROVABLE",
-      "reason": "Project archives contain many exported messages, but not guaranteed every conversation; canonical GitHub logging and enforceable review inventory are necessary."
+      "reason": "Not every original chat/research body is available. Preserve canonical logging; missing source recovery remains #30.",
+      "issue": 30
     },
     {
       "id": "github_private_branch_protection",
       "status": "UNAVAILABLE_ON_OWNER_APPROVED_PRIVATE_FREE_PLAN",
-      "reason": "Owner explicitly declined GitHub Pro and public source. Branches protected:false and private rulesets 403; GitHub Actions CI is advisory, not a mandatory block. No alternate enforcement is claimed. Keep #38 open.",
-      "issue": 38
+      "reason": "Private GitHub Free checks are advisory; no enforced branch-protection claim, public visibility change or paid upgrade.",
+      "issue": 27
     },
     {
       "id": "netlify_release_branch_cutover",
-      "status": "COMPLETED_VERIFIED_20261021",
-      "reason": "Netlify production follows release/production. Current READY deploy6ad968689f42fbe8e871e151 serves eee687dd4d7fc19493139bc106e63c16849ac91d, independently read October22. Prior grants consumed; no repeat cutover or new publication authorized.",
-      "issue": 38
+      "status": "COMPLETED_VERIFIED",
+      "reason": "Current READY deploy 6adabcecd4a2a68e94cdc09a matches f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f on release/production. No repeat routing setup or publication authorized.",
+      "issue": 27
     },
     {
       "id": "chatgpt_project_settings",
       "status": "OWNER_REPORTED_SAVED",
-      "reason": "Owner confirmed Project instructions were saved, recorded in the active work journal and issue #12 comment 6304881257. This is owner-report evidence; no direct Project-settings API readback is available. Do not ask for the same save again."
+      "reason": "Current instructions provided in the chat agree with the repository copy. Direct Project Settings API readback is unavailable; do not ask for a repeat save."
     },
     {
       "id": "github_free_private_no_paid_upgrade",
       "status": "LOCKED_POLICY_WITH_RESIDUAL_RISK",
-      "reason": "Maintain private GitHub Free, no upgrade/public suggestion; advisory CI, exact source readback, same-commit journal and single-use non-force release claim are compensating controls. Native Actions final push is verified SUCCESS for run 39706556610 and consumed release eee687dd4d7fc19493139bc106e63c16849ac91d; #44 retains unknown actual postrelease debit/account/device evidence. Direct-writer/provider bypass risk remains open in #38.",
-      "issue": 38
+      "reason": "Keep private Free. Exact-source CI/readback and one-use release are compensating controls, not a guarantee against privileged bypass.",
+      "issue": 27
+    },
+    {
+      "id": "backup_watchdog_delivery_channels",
+      "status": "METADATA_DISCREPANCY_NATURAL_ALERT_DELIVERY_UNVERIFIED",
+      "reason": "Enabled watchdog again reports notifications_enabled=false/email_enabled=false, the same lower-level discrepancy already documented against accepted owner proof of enabled global Tasks Push/Email. These flags do not prove disabled delivery or a configuration change. Preserve accepted proof and prior Apps Script alert evidence; natural condition-alert receipt remains unverified. No new release blocker or settings request.",
+      "owner_global_notifications_enabled": "ACCEPTED_PREVIOUS_PROOF",
+      "disabled_delivery_proven": false,
+      "request_owner_reconfirmation": false,
+      "issue": 28
     }
   ],
   "original_baseline": {
     "locked_count": 79,
     "open_count": 20,
     "fnv1a32": "aaaa90e5",
-    "note": "Noncryptographic mutation tripwire only; baseline 79 Locked/20 Open preserved verbatim, later supersessions reside in Master Specification and Ledger."
+    "note": "Original baseline mutation tripwire, not current unresolved-decision count. Exact canonical baseline remains unchanged."
   },
   "deployment_approval_policy": {
     "decision_id": "OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021",
-    "consent": "one explicit deployment instruction includes all pending necessary frontend/backend/SQL/Edge/Auth/provider components unless expressly excluded",
+    "decision_key": "current_owner_single_instruction_development_and_publication_20261022",
+    "consent": "One scoped publish command authorizes one selected READY batch and necessary approved dependencies; no second routine confirmation.",
     "one_use_grant_required": true,
     "source_SHA_required": true,
-    "new_release_status": "NO_NEW_RELEASE_AUTHORIZED; DIC-20261021-ALL-PENDING-02_CONSUMED; fresh explicit deployment instruction and source-bound one-use grant required",
+    "new_release_status": "NO_NEW_RELEASE_AUTHORIZED",
     "not_authorized": [
-      "unrelated member-data deletion/mutation",
-      "paid purchases or topups",
-      "GitHub Pro or public visibility",
-      "bypass of safety or backup safeguards"
+      "unrelated irreversible deletion or arbitrary private member-data changes",
+      "purchases, plan changes, paid upgrades or public repository visibility",
+      "future publications or bypassing required recovery/privacy safeguards"
     ]
   },
   "sitewide_direct_save_policy": {
     "decision_id": "UX-SITEWIDE-DIRECT-SAVE-20261021",
-    "status": "DEVELOPMENT_MERGED_SIX_GREEN_TESTED_NOT_DEPLOYED_NOT_ACCEPTED",
+    "status": "DEPLOYED; apply later narrow dose supersession",
     "remove": [
-      "admin coffee edit manual reason",
-      "admin shot/note edit manual reason",
-      "admin extra edit confirmation"
+      "routine manual edit reasons",
+      "redundant ordinary edit confirmations"
     ],
     "preserve": [
-      "all server access/privacy checks",
-      "record/audit/revision",
-      "coffee identity conflict escalation",
-      "risk-specific non-edit consent",
-      "prior production state until fresh approval",
-      "Warning plus Confirm only when dose differs by more than 1 g from the selected draft basket, or the historical basket snapshot on edit"
+      "server access and privacy",
+      "audit and revision history",
+      "genuine identity/conflict escalation",
+      "Remove Access and revoke-invitation warning/confirmation"
     ],
-    "tested_sha": "10fd93e822037995a6bb66298f3b405bc019bdc1",
-    "merged_sha": "e9dbd365a33c69de602ac34f4ac1334baa29e8de",
-    "source_tree_equal_to_tested": true,
-    "historical_superseded_removal": "advisory shot dose browser confirm: the blanket removal was narrowly superseded by UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
-    "evidence_scope": "tested_sha/merged_sha describe original direct-save tranche only; later dose exception has separate evidence below",
-    "dose_exception_evidence": {
-      "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
-      "exact_tested_sha": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
-      "merged_sha": "31f5b7ebabf31a09c69a58860292f626f491dc34",
-      "draft_basket_followup": {
-        "issue": 73,
-        "pull_request": 74,
-        "status": "SOURCE_MERGED_EXACT_SHA_CI_SUCCESS_NOT_DEPLOYED_NOT_ACCEPTED",
-        "exact_tested_sha": "d38c52751b028bbb0fdd76ba06f2e09d11a0c071",
-        "merged_sha": "259772b50ca98011a65b3efa9b07a03cda858339",
-        "tree_sha": "a7d84671e81ae3af0de90c4198eda36bd794d0c0",
-        "ci_runs": {
-          "approval": 39732735076,
-          "validate": 39732735077,
-          "cloud_and_mobile": 39732735160,
-          "sql": 39732735118,
-          "visual": 39732735154
-        },
-        "postmerge_ci_runs": {
-          "approval": 39733019368,
-          "validate": 39733019280,
-          "cloud_and_mobile": 39733019319,
-          "visual": 39733019338
-        },
-        "sql_evidence": "PR-only run39732735118 passed on the identical tested/merged Git tree; no postmerge SQL run claimed.",
-        "regression_file": "tests/cloud-draft-recommendation-context.test.mjs",
-        "regressions": {
-          "passing_after_repair": 7,
-          "failing_before_repairs": 6,
-          "historical_edit_snapshot_guard_passed_before_and_after": true
-        },
-        "scope": "Use Recommendation and Slow Feed preserve draft style/basket/feed. New-shot dose warning uses the draft basket; edits keep historical dose snapshot and strict >1 g confirmation threshold.",
-        "site_published": false,
-        "hosted_sql_applied_by_followup": false,
-        "device_acceptance": "PENDING_AFTER_SEPARATELY_AUTHORIZED_RELEASE",
-        "receipt": "docs/audits/2026-10-22-github-reconciliation-receipt.json"
-      }
-    }
+    "current_dose_policy": "New shot only: dismissible advisory for more than 2 g absolute difference; exactly 2 g does not warn; no repeat on historical edit; preserve basket snapshot.",
+    "dose_supersession_decision_key": "current_owner_oct22_refinements_20261022",
+    "historical_evidence": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json"
   },
   "current_owner_admin_one_click_resolution_and_dose_warning_20261021": {
     "decision_id": "UX-ADMIN-ONE-CLICK-RESOLUTION-AND-DOSE-WARNING-20261021",
-    "status": "DEVELOPMENT_MERGED_6_OF_6_EXACT_SHA_SUCCESS_NOT_DEPLOYED_NOT_ACCEPTED",
-    "source_files": [
-      "site/admin/main.js",
-      "site/cloud/main.js",
-      "supabase/migrations/20261022024000_dic_admin_fast_review_and_identity_edits.sql"
-    ],
-    "source_sha": "31f5b7ebabf31a09c69a58860292f626f491dc34",
-    "production_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
-    "device_acceptance": "PENDING_SIGNED_OWNER_DEVICE_AFTER_RELEASE",
-    "scope": "One action Merge/Hold existing duplicate and basket-dose warning+confirm >1g on log and edit; preserve historical import recovery and member access protection",
-    "exact_tested_sha": "93427e9dbb03dacc35a0836d3c1ddc38265474e4",
-    "tested_tree": "53cc65e2bed818ad7b1862d17eb5328baeb04861",
-    "checks": [
-      "approval",
-      "validate",
-      "cloud-tests",
-      "mobile-browser-qa",
-      "sql",
-      "review"
-    ]
+    "status": "DEPLOYED; prior >1g log/edit confirm superseded by October22 refinement",
+    "scope": "Resolve/Hold existing conflicts with one action; newly introduced conflicts remain flagged. Current dose rule is separately recorded above.",
+    "production_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+    "device_acceptance": "RETIRED_NOT_REQUIRED; not newly performed",
+    "historical_evidence": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json"
   },
   "proportionate_controls_policy": {
     "decision_id": "OPS-PROPORTIONATE-COFFEE-APP-CONTROLS-20261021",
-    "status": "APPROVED_POLICY_RECONCILED_FROM_PR68",
-    "source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/57#issuecomment-6332524896",
-    "implementation": "Policy recorded; no blanket guard exemption or new release authorization. Each actual simplification retains its exact supersession and evidence."
+    "status": "APPROVED_POLICY; not blanket removal of safety controls",
+    "source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/57#issuecomment-6332524896"
   },
   "private_hide_shot_retirement_deferral": {
     "decision_key": "current_owner_defer_private_hide_shot_retirement_20261021",
@@ -762,15 +647,16 @@
     "future_authority": "Renewed scoped review/authorization required",
     "source": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/72#issuecomment-6333843360"
   },
-  "production_deployment_receipt": "docs/PRODUCTION_RELEASE_2026-10-22_FASTFLOW_ADMIN_VERIFIED.json",
+  "production_deployment_receipt": "docs/PRODUCTION_RELEASE_2026-10-23_READY_QUEUE_VERIFIED.json",
   "streamlined_release_policy": {
     "decision_key": "current_owner_streamlined_release_20261022",
-    "status": "PARTIAL_IMPLEMENTATION_NOT_PUBLISHED",
+    "status": "PARTIAL_IMPLEMENTATION_PUBLISHED; WEEKLY_AUTONOMOUS_REFACTOR_NOT_IMPLEMENTED",
     "weekly_regression_utc": "SUNDAY_0800",
     "nightly_encrypted_backup_utc": "DAILY_0800",
     "extra_backup": "AUTOMATIC_FOR_POTENTIALLY_DESTRUCTIVE_DATABASE_CHANGE_ONLY",
     "device_gate": "RETIRED_NOT_REQUIRED",
-    "new_release_approval": "STILL_REQUIRED"
+    "new_release_approval": "STILL_REQUIRED",
+    "new_schedule_execution": "Configured on main; next newly timed schedule execution not observed during this audit"
   },
   "autonomous_release_queue_policy": {
     "decision_key": "current_owner_autonomous_build_test_queue_20261022",
@@ -780,25 +666,17 @@
     "ready_requires": "MERGED_TEST_RECEIPTS_EXACT_SHA_AND_ALL_SCOPED_GREEN",
     "in_progress_and_testing_not_shipped": true,
     "unknown_deployable_paths_block": true,
-    "main_one_use_gate_sha": "d9ac65d0b80833f372b24138892ba22c21654247",
-    "development_sha": "f9914dba0374cd5cf2d29b1ab99de5eb7e0c5240",
-    "development_ci_runs": {
-      "approval": 39829144737,
-      "full_node_build": 39829144758,
-      "cloud_regression_and_mobile": 39829144689
-    },
-    "main_ci_run": 39829253291,
     "owner_device_gate": "NOT_REQUIRED",
     "publication_authorized": false,
-    "limits": "CI advisory GitHub Free private, queue is source preflight only, no automatic production publish or guarantee of external provider acceptance"
+    "limits": "Advisory private Free CI; source READY is not production publication."
   },
   "single_instruction_approval_policy": {
     "decision_key": "current_owner_single_instruction_development_and_publication_20261022",
     "scope": "BUILD_REQUEST_AUTONOMOUSLY_PREPARE_AND_QUEUE_PUBLISH_REQUEST_IS_SOLE_SCOPED_RELEASE_CONSENT",
     "one_use_source_grant_created_from_publish_command": true,
     "readiness_report_is_not_second_approval": true,
-    "release_batch_selection": "WHOLE_READY_QUEUE_UNLESS_OWNER_EXPLICITLY_NAMES_SUBSET; SAFE_ISOLATION_REQUIRED",
-    "exceptions": "UNRELATED_DESTRUCTIVE_MEMBER_DATA_CHANGES_OR_PURCHASES_NOT_INCLUDED",
+    "release_batch_selection": "Selected READY batch; named subset plus necessary approved dependencies; safe isolation required",
+    "exceptions": "Unrelated destructive member-data changes and purchases excluded",
     "owner_device_testing": "NOT_REQUIRED",
     "production_authorized_by_documentation_change": false
   },
@@ -811,13 +689,32 @@
     "netlify_build_credit_gate": false,
     "one_use_credit_cap": false,
     "preserve_historical_receipts": true,
-    "source_implementation_status": "IMPLEMENTED_READY_TESTED_EXACT_SOURCE_SHA_B7778E84_AND_MAIN_CI_39834942465",
+    "source_implementation_status": "PUBLISHED_VERIFIED_DIC-20261022-READY-QUEUE-04",
     "owner_managed_credit_monitoring": true,
-    "netlify_production_publication_state": "NOT_PUBLISHED_THIS_CHANGE_REQUIRES_NEXT_OWNER_RELEASE_COMMAND"
+    "netlify_production_publication_state": "PUBLISHED_VERIFIED_6adabcecd4a2a68e94cdc09a"
   },
   "proactive_project_instructions": {
     "decision_key": "current_owner_proactive_project_instructions_suggestions_20261022",
     "recommend_exact_pasteable_text_on_material_change": true,
     "chatgpt_project_settings_user_managed": true
+  },
+  "reconciliation_evidence": "docs/audits/2026-10-23-workflow-reconciliation.md",
+  "security_inspection_issue96": {
+    "issue": 96,
+    "prs": [
+      97,
+      98
+    ],
+    "state": "READY_NOT_DEPLOYED",
+    "tested_source_sha": "b3599c235b6b1bff148272c5d3556b678219da66",
+    "merged_source_sha": "5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d",
+    "tree_sha": "9843b383d38aea0d413381eeab4eb3aaaac5e82d",
+    "findings_repaired": 6,
+    "node_tests": 673,
+    "provider_public_checks": 32,
+    "receipt": "docs/audits/2026-10-23-security-ready-receipt.json",
+    "no_new_locked_decisions": true,
+    "production_unchanged": true,
+    "coverage_limits": "Every-file automated screening and targeted semantic review; no complete manual archive-history or production-account penetration certification."
   }
 }

@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "observed_at_utc": "2026-10-23T06:20:55.390833+00:00",
+  "issue": 96,
+  "prs": [
+    97,
+    98
+  ],
+  "status": "CONFIRMED_SOURCE_REPAIRS_READY_NOT_DEPLOYED",
+  "tested_source_sha": "b3599c235b6b1bff148272c5d3556b678219da66",
+  "merged_source_sha": "5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d",
+  "tested_merge_ref_sha": "cdbca21a560cc796a282c967cd5ee4906e3055af",
+  "equal_tree_sha": "9843b383d38aea0d413381eeab4eb3aaaac5e82d",
+  "pr_ci_runs": [
+    39910106557,
+    39910106319,
+    39910106359,
+    39910106633,
+    39910106691,
+    39910106708
+  ],
+  "merged_checks": {
+    "approval": {
+      "check_id": 120271575661,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39910323314/job/120271575661"
+    },
+    "validate": {
+      "check_id": 120271572241,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39910323399/job/120271572241"
+    },
+    "cloud-tests": {
+      "check_id": 120271571937,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39910323316/job/120271571937"
+    },
+    "mobile-browser-qa": {
+      "check_id": 120271571592,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/39910323316/job/120271571592"
+    }
+  },
+  "node_tests_local": 673,
+  "runtime_dependency_vulnerabilities": 0,
+  "inventory": {
+    "files": 470,
+    "text_lines": 72863,
+    "binary_files": 3,
+    "artifact": 12482885419,
+    "sha256": "f1548fc2cc098d337c77fc3364fc40a8f596df3eae85abbedc3d7fb2d800a671",
+    "all13_followup_file_hashes_matched": true,
+    "initial39_repaired_file_hashes_matched_prior_artifact": 12481468441
+  },
+  "live_provider_http": {
+    "run": 39905265823,
+    "pass": 32,
+    "scope": "Nonmutating public/anonymous HTTP on unchanged production"
+  },
+  "production": {
+    "release_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+    "netlify_deploy": "6adabcecd4a2a68e94cdc09a",
+    "accounts": 5,
+    "shots": 22,
+    "notes": 22,
+    "community": 2,
+    "receipts": 48,
+    "migrations": 43,
+    "application_tables": 46,
+    "missing_rls": 0,
+    "data_readback_at_utc": "2026-10-23T06:00:38.286049Z",
+    "new_publication": false
+  },
+  "later_release_requirements": [
+    "Netlify/application source",
+    "dic-preview-coffee including shared helpers",
+    "dic-verify-coffee including shared helpers",
+    "No new SQL migration"
+  ],
+  "unverified": [
+    "Manual semantic inspection of every archived repository line",
+    "Real production GoTrue/member/admin signed penetration sessions",
+    "Hosted Auth password configuration not exposed by tools",
+    "Genuine nonproduction SSO challenge behavior",
+    "Physical WebKit/VoiceOver/storage-eviction scenarios",
+    "Provider administrative/build-hook controls not exposed by tools",
+    "Full-history secret clearance or third-party infrastructure penetration",
+    "Previously truncated historical note text cannot be reconstructed"
+  ],
+  "preserved": [
+    "All canonical Locked decisions",
+    "Existing #93 READY entry",
+    "Queue published_base and complete history",
+    "Original member records and offline/Community history",
+    "Private Free and single-use publication boundaries"
+  ]
+}

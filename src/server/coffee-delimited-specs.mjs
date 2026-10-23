@@ -1,3 +1,4 @@
+import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 // Evidence-only parser for paired coffee specifications such as
 // "Producer // Region, Country" + "Washed-processed Variety // 2170 masl".
 // A paired product specification is required; prose, navigation, importer
@@ -37,11 +38,11 @@ function identityLine(line){
 function sourceParagraphs(page,clean){
  // Inputs are bounded before applying regexes. No source scripts or hidden
  // fallback elements should become facts, even in a direct unit invocation.
- const visible=page.replace(/<(script|style|nav|footer|aside|template|noscript)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,' ');
- const headings=[...visible.matchAll(/<h[2-6]\b[^>]{0,350}>([\s\S]{0,300}?)<\/h[2-6]>/gi)];
+ const visible=removeElements(page,['script', 'style', 'nav', 'footer', 'aside', 'template', 'noscript']);
+ const headings=[...visible.matchAll(/<h[2-6]\b[^<>]{0,350}>([\s\S]{0,300}?)<\/h[2-6]>/gi)];
  const stop=headings.find(h=>/^(?:you may also like|related products|more coffees|customer reviews|recently viewed)\b/i.test(clean(h[1],180)));
  const scope=stop?visible.slice(0,stop.index):visible;
- const matches=[...scope.matchAll(/<p\b[^>]{0,600}>([\s\S]{1,5000}?)<\/p\s*>/gi)].slice(0,80);
+ const matches=[...scope.matchAll(/<p\b[^<>]{0,600}>([\s\S]{1,5000}?)<\/p\s*>/gi)].slice(0,80);
  return matches.map((m,i)=>({at:m.index,end:m.index+m[0].length,text:clean(m[1],4000),
    gapBefore:i?scope.slice(matches[i-1].index+matches[i-1][0].length,m.index):'',
    lines:m[1].split(/<br\s*\/?>/gi).slice(0,10).map(s=>clean(s,350)).filter(Boolean)}));

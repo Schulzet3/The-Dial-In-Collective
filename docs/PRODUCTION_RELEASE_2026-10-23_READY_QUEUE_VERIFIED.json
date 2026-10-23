@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "release_id": "DIC-20261022-READY-QUEUE-04",
+  "tested_source_sha": "7156f0d3f1b960775c9256e7fcf92e0b89be8cc6",
+  "release_git_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+  "netlify_deploy_id": "6adabcecd4a2a68e94cdc09a",
+  "published_at_utc": "2026-10-23T01:48:46.334Z",
+  "controller_run_id": 39886055063,
+  "created_at_utc": "2026-10-23T01:50:48.433Z",
+  "authorization": "Owner October 22 2026 current chat: publish everything pending READY; GitHub Issue #80 comment 6353908213",
+  "batch": {
+    "ready_items_delivered": [
+      "DIC-Q-78",
+      "DIC-Q-44-credit-gate",
+      "DIC-Q-80",
+      "DIC-Q-80-basket-signout",
+      "DIC-Q-80-polling",
+      "DIC-Q-80-outbox",
+      "DIC-Q-80-admin-lazy",
+      "DIC-Q-80-admin-search",
+      "DIC-Q-80-community-search",
+      "DIC-Q-80-extractor-cache-quota",
+      "DIC-Q-80-netlify-test-reuse"
+    ],
+    "items_count": 11,
+    "changed_deployable_paths": 20
+  },
+  "ci": {
+    "tested_source_sha": "7156f0d3f1b960775c9256e7fcf92e0b89be8cc6",
+    "approval": "SUCCESS",
+    "validate": "SUCCESS",
+    "cloud_tests": "SUCCESS",
+    "mobile_browser_qa": "SUCCESS",
+    "isolated_sql": "SUCCESS",
+    "visual_review": "SUCCESS",
+    "test_types": "Exact-source synthetic browser/mobile/SQL; not signed-in device acceptance"
+  },
+  "github": {
+    "main_request_commit": "d5c5b613c2cc73b228c012114ff3daabbad90497",
+    "controller_run_id": 39886055063,
+    "controller_job": "SUCCESS",
+    "release_commit": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+    "previous_release_commit": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+    "source_bound_one_use_claim_consumed": true
+  },
+  "netlify": {
+    "state": "READY_CURRENT",
+    "deploy_id": "6adabcecd4a2a68e94cdc09a",
+    "commit_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+    "context": "production",
+    "url": "https://app.dialincollective.com",
+    "published_at_utc": "2026-10-23T01:48:46.334Z"
+  },
+  "backup": {
+    "source_run": 39874552989,
+    "artifact_id": 12468515140,
+    "private_offsite_drive_file_id": "1uxw-1GEZAUfqrgHqAqLQl4lLmKkhji6Y",
+    "snapshot_started_at_utc": "2026-10-22T23:52:35Z",
+    "source_zip_sha256": "9f1d9199cfae4e85058e1ffd83bc0d8ef11737b47c03d60a91492a21aefe7378",
+    "drive_download_sha256": "9f1d9199cfae4e85058e1ffd83bc0d8ef11737b47c03d60a91492a21aefe7378",
+    "latest_prior_observed_write_utc": "2026-10-22T17:04:58.892029Z",
+    "encrypted_offsite_verified": true,
+    "exact_backup_decryption_restore_tested": false
+  },
+  "database": {
+    "project_id": "azviqqejypsefzilgonr",
+    "postgres_version": "17.11",
+    "before_migration_count": 40,
+    "after_migration_count": 43,
+    "migrations": [
+      {
+        "source_file": "supabase/migrations/20261022220000_dic_admin_server_search.sql",
+        "applied_version": "20261023014707",
+        "name": "dic_admin_server_search"
+      },
+      {
+        "source_file": "supabase/migrations/20261022220100_dic_community_server_search.sql",
+        "applied_version": "20261023014715",
+        "name": "dic_community_server_search"
+      },
+      {
+        "source_file": "supabase/migrations/20261022220200_dic_preview_two_phase_cache.sql",
+        "applied_version": "20261023014720",
+        "name": "dic_preview_two_phase_cache"
+      }
+    ],
+    "counts_before_and_after": {
+      "accounts": 5,
+      "shots": 22,
+      "shot_notes": 22,
+      "coffees": 7,
+      "coffee_submissions": 7,
+      "community_shots": 2,
+      "mutation_receipts": 48,
+      "storage_objects": 0
+    },
+    "new_rpc_admin_only": true,
+    "new_rpc_anon_denied": true,
+    "member_and_admin_routes_granted": true
+  },
+  "limitations": [
+    "Real authenticated owner/device browser acceptance not performed; packaged synthetic Chromium passed",
+    "Container HTTP curl external DNS failed; direct public HTTP route unavailable to container; Netlify provider READY/current and matching release SHA independently verified",
+    "Actual Netlify credits billed unknown and owner-managed",
+    "Residual GitHub Free/private unprotected branch/provider direct-writer risk remains"
+  ]
+}

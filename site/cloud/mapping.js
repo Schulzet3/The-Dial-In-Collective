@@ -56,5 +56,5 @@ export function applyPending(state,events){
 export function shotPayload(s,coffeeId,d){
  const v=M.activeVersion(s),setup=M.activeSetup(s);if(!v||!setup)throw new Error('Choose a setup.');
  const validation=M.validateShot(d);if(validation.length)throw new Error(validation.join(' '));
- return {id:d.id,setup_id:setup.id,setup_version_id:v.id,library_entry_id:coffeeId,basket_version_id:d.basketId,calibration_id:v.calibrationId,style:d.style,pulled_at:d.timestamp||new Date().toISOString(),dose_g:C.round(d.doseG),yield_g:C.round(d.yieldG),time_s:C.round(d.timeS),grind_setting:C.round(d.grindSetting),temperature_c:v.advanced.temperature?C.num(d.tempC):null,feed_mode:v.advanced.slowFeed?d.feedMode:'standard',taste:{...d.tasteScales},notes:String(d.notes||'').slice(0,10000)};
+ return {id:d.id,setup_id:setup.id,setup_version_id:v.id,library_entry_id:coffeeId,basket_version_id:d.basketId,calibration_id:v.calibrationId,style:d.style,pulled_at:d.timestamp||new Date().toISOString(),dose_g:C.round(d.doseG),yield_g:C.round(d.yieldG),time_s:C.round(d.timeS),grind_setting:C.round(d.grindSetting),temperature_c:v.advanced.temperature?C.num(d.tempC):null,feed_mode:v.advanced.slowFeed?d.feedMode:'standard',taste:{...d.tasteScales},notes:String(d.notes||'')};
 }

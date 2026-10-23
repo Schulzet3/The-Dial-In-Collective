@@ -1,3 +1,4 @@
+import {readBoundedJson,RequestBodyError} from '../_shared/request-budget.mjs';
 // Server-only, allowlisted official product verification.
 // The browser cannot supply verification evidence or write canonical records.
 // Supabase JWT gateway verification must stay ENABLED.
@@ -60,7 +61,7 @@ Deno.serve(async req=>{
        secret=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
  if(!base||!anon||!secret)return json({ok:false,reason:'verification_not_configured'},503,origin);
  try{
-  const payload=await req.json();
+  const payload=await readBoundedJson(req);
   const sid=payload?.submission_id;
   if(typeof sid!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(sid))
    return json({ok:false,reason:'invalid_submission'},400,origin);
@@ -103,7 +104,8 @@ Deno.serve(async req=>{
   if(promoteError)return json({ok:false,status:'pending',reason:'verification_requires_review'},200,origin);
   if(!promoted?.ok)return json({ok:false,status:'pending',reason:promoted?.code||'needs_confirmation'},200,origin);
   return json({ok:true,status:'verified',source_verified:promoted.already_verified!==true,coffee_id:promoted.coffee_id,canonical_name:promoted.canonical_name},200,origin);
- }catch{
+ }catch(error){
+  if(error instanceof RequestBodyError)return json({ok:false,reason:error.code},error.status,origin);
   return json({ok:false,status:'pending',reason:'verification_failed'},200,origin);
  }
 });

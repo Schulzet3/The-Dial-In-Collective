@@ -110,6 +110,38 @@ async function start(){
     }
    }
   }
+  // Small server-authoritative count refresh. Never load collapsed records.
+  let countRefreshRunning=false;
+  const countKeys={
+   pending:'pending_coffees',conflicts:'conflicts',approved:'verified_coffees',
+   shots:'shot_records',accounts:'active_accounts'
+  };
+  async function refreshVisibleCounts(){
+   if(invalidated||busy||countRefreshRunning||document.hidden)return;
+   countRefreshRunning=true;
+   try{
+    const summary=await adminRpc('dic_admin_dashboard');
+    if(invalidated)return;
+    for(const [kind,key] of Object.entries(countKeys)){
+     const count=summary?.counts?.[key];
+     if(count==null||!Number.isSafeInteger(Number(count))||Number(count)<0)continue;
+     for(const node of root.querySelectorAll('.admin-stat[href="#admin-'+kind+'"] strong, details[data-admin-section="'+kind+'"] .admin-count')){
+      // Expanded search sections retain their filtered total rather than
+      // silently substituting the whole-database count.
+      if(searchText&&openSections.has(kind))continue;
+      node.textContent=String(Number(count));
+     }
+    }
+   }catch(error){
+    if(isAccessDenied(error)&&!invalidated)invalidate('Administrator access could not be confirmed.');
+    // Transient failures retain last known counts, never present invented zeroes.
+   }finally{countRefreshRunning=false;}
+  }
+  globalThis.setInterval?.(refreshVisibleCounts,45000);
+  document.addEventListener?.('visibilitychange',()=>{
+   if(!document.hidden)refreshVisibleCounts();
+  });
+  globalThis.addEventListener?.('focus',refreshVisibleCounts);
   function requestSectionRefresh(){
    if(invalidated)return;
    if(busy){pendingSectionRefresh=true;return;}

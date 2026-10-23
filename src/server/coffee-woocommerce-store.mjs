@@ -1,3 +1,4 @@
+import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 
 // Public, read-only WooCommerce Store API product by exact SEO slug.
 // This is the unauthenticated customer-facing Store API, NOT the admin REST
@@ -45,8 +46,8 @@ export function extractWooStoreData(data,request,{extract=extractPublicCoffeeFac
  const html='<html><head><script type="application/ld+json">'+serialized+'</script></head>'+
   '<body><main><h1>'+data.name.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</h1>'+
   // Do not execute scripts, and do not let HTML tags escape selected scope.
-  detail.replace(/<(script|style|form|iframe|nav|footer)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,' ')
-   .replace(/<\/?main\b[^>]*>/gi,' ')+'</main></body></html>';
+  removeElements(detail,['script', 'style', 'form', 'iframe', 'nav', 'footer'])
+   .replace(/<\/?main\b[^<>]{0,2000}>/gi,' ')+'</main></body></html>';
  if(Buffer.byteLength(html)>MAX_HTML_BYTES)return null;
  const result=extract(html,{source_url:request.sourceUrl});
  return result?.ok&&normalize(result.fields?.name)===normalize(data.name)?result:null;

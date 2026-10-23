@@ -109,14 +109,14 @@ test('admission comes from server, not user metadata',async()=>{const f=authFixt
 test('browser writes bind original queue owner at server boundary',async()=>{const f=authFixture();await f.c.mutate({id:'mutation',owner:OWNER,action:'save_shot',payload:{id:'shot'}});assert.equal(f.calls[0].name,'dic_apply_client_change');assert.equal(f.calls[0].p.expected_owner,OWNER);f.c.dispose();});
 test('hydration restores latest-shot advice to the main recommendation',()=>{const r=rawFixture();r.shots=[rawShot({feed_mode:'standard',grind_setting:1,extraction:4,is_dialed_in:false,personal_family_id:null})];const s=hydrate(r),rec=E.recommendation(s,'coffee');assert.ok(s.shots[0].suggestion);assert.equal(rec.grind.source,'Next setting to try');assert.equal(rec.grind.value,1.2);});
 
-test('new passwords accept exactly 8 characters with uppercase and a special character',()=>{
+test('new passwords accept at least 8 characters with a number and special character, without uppercase',()=>{
  assert.equal(validateNewPassword('Latte@12'),null);
- assert.equal(validateNewPassword('Coffee!A'),null);
+ assert.equal(validateNewPassword('coffee!1'),null);
  assert.equal(validateNewPassword('Coffee 1!'),null);
 });
-test('new password validation rejects too short, lowercase only, and missing symbols',()=>{
+test('new password validation rejects too short, missing digits, and missing symbols',()=>{
  assert.match(validateNewPassword('Short!A'),/8 characters/);
- assert.match(validateNewPassword('coffeebar!'),/uppercase/);
+ assert.match(validateNewPassword('coffeebar!'),/number/);
  assert.match(validateNewPassword('Coffee123'),/special/);
  assert.match(validateNewPassword('Coffee🙂12'),/special/);
  assert.match(validateNewPassword(''),/8 characters/);
