@@ -50,8 +50,8 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   const page=records[kind],complete=Array.isArray(page?.items)&&!page.error;
   // Page-2 and later records must retain the independent existing review RPCs.
   if(options.openSections?.has(kind)&&!page)return '<p class="helper" role="status">Loading records…</p>';
-   if(searchText&&page?.error)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions});
-  if(complete)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions});
+   if(searchText&&page?.error)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions,reviewComparison:renderMatch});
+  if(complete)return renderAdminRecordCollection(kind,page,{embedded:true,reviewActions,reviewComparison:renderMatch});
   const rows=queue.filter(item=>(item.status==='conflict')===(kind==='conflicts'));
   const fallback=rows.length?rows.map(preview).join(''):page?.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>';
   return fallback+(page?.error?renderAdminRecordCollection(kind,page,{embedded:true}):'');

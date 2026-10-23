@@ -89,6 +89,21 @@ async function start(){
     // No stale hidden-page totals override the fresh dashboard count.
     records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
     access=loadAccess?nextAccess:null;
+    // Keep the comparison scoped to a bounded, admin-authorized server search.
+    // The first visible pending records are prefetched for the expanded queue;
+    // others can request their own comparison without loading the entire catalog.
+    const visible=['pending','conflicts'].flatMap(kind=>records[kind]?.items||[]).filter(item=>item.id&&!Object.hasOwn(comparisons,item.id)).slice(0,6);
+    await Promise.all(visible.map(async item=>{
+      try{
+        const query=String(item.name||'').trim().slice(0,80);
+        if(!query)return;
+        const result=await adminRpc('dic_admin_search_records',{p_kind:'approved',p_query:query,p_offset:0,p_limit:50});
+        const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+        if(!invalidated)comparisons[item.id]=(result.items||[]).filter(c=>normalize(c.roaster)===normalize(item.roaster)&&normalize(c.name)===normalize(item.name)).slice(0,5);
+      }catch(error){if(isAccessDenied(error))throw error;}
+    }));
+    if(invalidated)return;
+
     root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText,comparisons});
    }finally{if(trigger)trigger.disabled=false;}
   }
