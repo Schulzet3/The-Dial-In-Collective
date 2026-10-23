@@ -7,7 +7,7 @@ import {productMarkup} from './coffee-product-scope.mjs';
 const COUNTRY=String.raw`Panama|Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|Papua New Guinea|DR Congo|United States|Jamaica`;
 const ENTITIES={'amp':'&','nbsp':' ','quot':'"','apos':"'",'eacute':'é','ndash':'–','mdash':'—'};
 function text(raw,max=300){
- return String(raw||'').replace(/<[^<>]*>/g,' ').replace(/&(#\d+|#x[\da-f]+|[a-z]+);/gi,(all,key)=>{
+ return String(raw||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&(#\d+|#x[\da-f]+|[a-z]+);/gi,(all,key)=>{
   const k=key.toLowerCase();
   if(Object.hasOwn(ENTITIES,k))return ENTITIES[k];
   if(k[0]!=='#')return all;
@@ -17,10 +17,10 @@ function text(raw,max=300){
 }
 function scopedPage(html){
  let p=removeElements(productMarkup(html),['svg']);
- const heading=/<h1\b[^<>]*>[\s\S]{0,12500}?<\/h1>/i.exec(p);
+ const heading=/<h1\b[^<>]{0,2000}>[\s\S]{0,12500}?<\/h1>/i.exec(p);
  if(!heading)return '';
  p=p.slice(heading.index+heading[0].length,heading.index+heading[0].length+45000);
- const stop=p.search(/<h[2-6]\b[^<>]*>[\s\S]{0,400}?(?:you may also like|related products|more coffees|shop similar|customer reviews|recently viewed)\b/i);
+ const stop=p.search(/<h[2-6]\b[^<>]{0,2000}>[\s\S]{0,400}?(?:you may also like|related products|more coffees|shop similar|customer reviews|recently viewed)\b/i);
  return stop<0?p: p.slice(0,stop);
 }
 const PERSON=String.raw`([A-ZÀ-Ý][a-zà-ÿ'’.-]{1,30}(?:\s+[A-ZÀ-Ý][a-zà-ÿ'’.-]{1,30}){1,2})`;
@@ -70,9 +70,9 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name)return {fields:{},details:{}};
  const page=scopedPage(html);
  if(!page)return {fields:{},details:{}};
- const headings=[...page.matchAll(/<h([2-6])\b[^<>]*>([\s\S]{1,500}?)<\/h\1>/gi)]
+ const headings=[...page.matchAll(/<h([2-6])\b[^<>]{0,2000}>([\s\S]{1,500}?)<\/h\1>/gi)]
   .map(m=>text(m[2],200)).filter(Boolean).slice(0,80);
- const paragraphs=[...page.matchAll(/<(?:p|li)\b[^<>]*>([\s\S]{1,3000}?)<\/(?:p|li)>/gi)]
+ const paragraphs=[...page.matchAll(/<(?:p|li)\b[^<>]{0,2000}>([\s\S]{1,3000}?)<\/(?:p|li)>/gi)]
   .map(m=>text(m[1],1400)).filter(Boolean).slice(0,90);
  const prose=paragraphs.join(' ').slice(0,11000);
  const output={},details={};

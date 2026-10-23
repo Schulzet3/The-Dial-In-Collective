@@ -2,7 +2,7 @@ import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 // Bounded product-specific flavor evidence. No AI, cross-page navigation,
 // guessed flavor dictionary or related-product tasting notes.
 const topOfProduct=(html)=>{
- const match=/<h1\b[^<>]*>[\s\S]{0,12000}?<\/h1>/i.exec(html);
+ const match=/<h1\b[^<>]{0,2000}>[\s\S]{0,12000}?<\/h1>/i.exec(html);
  return match?html.slice(match.index+match[0].length,match.index+match[0].length+16000):'';
 };
 function shortFlavorList(raw,clean){
@@ -14,13 +14,13 @@ function shortFlavorList(raw,clean){
  return text;
 }
 function namedClassValue(html,tag,className,clean){
- const re=new RegExp('<'+tag+'\\b[^<>]{0,850}\\bclass=["\\x27][^"\\x27]*\\b'+className+'\\b[^"\\x27]*["\\x27][^<>]*>([\\s\\S]{0,1300}?)<\\/'+tag+'\\s*>','i');
+ const re=new RegExp('<'+tag+'\\b[^<>]{0,850}\\bclass=["\\x27][^"\\x27]*\\b'+className+'\\b[^"\\x27]*["\\x27][^<>]{0,2000}>([\\s\\S]{0,1300}?)<\\/'+tag+'\\s*>','i');
  return clean(re.exec(html)?.[1]||'',200);
 }
 function sipComparisonNotes(html,clean){
  // A named TAKE A SIP section describes this one coffee's flavor.
  // Only explicit comparison nouns count, not arbitrary story adjectives.
- const at=html.search(/<strong\b[^<>]*>\s*TAKE A SIP\s*[|:]\s*<\/strong>/i);
+ const at=html.search(/<strong\b[^<>]{0,2000}>\s*TAKE A SIP\s*[|:]\s*<\/strong>/i);
  if(at<0)return '';
  const block=html.slice(at,at+2600).split(/<\/p\s*>/i)[0];
  const text=clean(block,1700);
@@ -59,7 +59,7 @@ function labeledFlavorChips(top,clean){
  const re=/<(p|div|ul|ol|section)\b([^<>]{0,950})>([\s\S]{0,2300}?)<\/\1\s*>/gi;
  const named=/\b(?:tasting[-_ ]?notes?|taste[-_ ]?notes?|flavou?r[-_ ]?notes?|flavou?r[-_ ]?profile|cupping[-_ ]?notes?)\b/i;
  for(const m of top.matchAll(re)){
-  const props=[...m[2].matchAll(/\b(?:class|data-[\w-]+|aria-label)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)]
+  const props=[...m[2].matchAll(/\b(?:class|data-[\w-]+|aria-label)\s*=\s*(?:"([^"]{0,2000})"|'([^']{0,2000})')/gi)]
    .map(x=>x[1]??x[2]??'');
   if(!props.some(x=>named.test(x)))continue;
   const body=m[3];
@@ -85,9 +85,9 @@ export function extractProductFlavorEvidence(html,{clean}={}){
  // Named, merchant-owned product containers must be near the selected H1.
  // Avoid promotion of checkout/footer/related coffee names or vague SEO.
  const top=topOfProduct(html);
- const onyx=top.match(/<p\b[^<>]{0,550}\bclass=["'][^"']*\btasting-notes\b[^"']*["'][^<>]*>([\s\S]{0,2100}?)<\/p>/i);
+ const onyx=top.match(/<p\b[^<>]{0,550}\bclass=["'][^"']{0,2000}\btasting-notes\b[^"']{0,2000}["'][^<>]{0,2000}>([\s\S]{0,2100}?)<\/p>/i);
  if(onyx){
-  const notes=[...onyx[1].matchAll(/<span\b[^<>]{0,550}\bclass=["'][^"']*\bnote\b[^"']*["'][^<>]*>([\s\S]{0,150}?)<\/span>/gi)]
+  const notes=[...onyx[1].matchAll(/<span\b[^<>]{0,550}\bclass=["'][^"']{0,2000}\bnote\b[^"']{0,2000}["'][^<>]{0,2000}>([\s\S]{0,150}?)<\/span>/gi)]
    .map(m=>clean(m[1],55)).filter(Boolean);
   const value=notes.length?notes.join(', '):clean(onyx[1],160);
   const accepted=shortFlavorList(value,clean);

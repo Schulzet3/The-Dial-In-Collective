@@ -42,7 +42,7 @@ function metaAttrs(html){
  const out={};
  for(const tag of html.match(/<meta\b[^<>]{0,1800}>/gi)||[]){
   const obj={};
-  for(const m of tag.matchAll(/(?:^|[\s<])([a-z-]{1,64})\s*=\s*(?:"([^"]*)"|'([^']*)')/gi))obj[m[1].toLowerCase()]=decode(m[2]??m[3]);
+  for(const m of tag.matchAll(/(?:^|[\s<])([a-z-]{1,64})\s*=\s*(?:"([^"]{0,2000})"|'([^']{0,2000})')/gi))obj[m[1].toLowerCase()]=decode(m[2]??m[3]);
   const key=(obj.property||obj.name||'').toLowerCase();
   if(['og:type','og:title','description'].includes(key))out[key]=obj.content||'';
  }

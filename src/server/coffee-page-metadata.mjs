@@ -43,7 +43,7 @@ function entities(s){
 }
 function clean(s,max=250){
  return entities(removeElements(String(s??''),['script','style'])
-  .replace(/<[^<>]*>/g,' ').replace(/[\u0000-\u001f\u007f]/g,' ')
+  .replace(/<[^<>]{0,2000}>/g,' ').replace(/[\u0000-\u001f\u007f]/g,' ')
   .replace(/\s+/g,' ').trim()).slice(0,max);
 }
 function textOf(v,max=250){
@@ -54,7 +54,7 @@ function textOf(v,max=250){
 }
 function attrs(tag){
  const out={};
- for(const m of String(tag).matchAll(/(?:^|[\s<])([:\w-]{1,64})\s*=\s*(?:"([^"]*)"|'([^']*)')/g)){
+ for(const m of String(tag).matchAll(/(?:^|[\s<])([:\w-]{1,64})\s*=\s*(?:"([^"]{0,2000})"|'([^']{0,2000})')/g)){
   out[m[1].toLowerCase()]=entities(m[2]??m[3]);
  }
  return out;
@@ -232,10 +232,10 @@ function productDetails(fields,p){
  }
 }
 function focusedProductText(html){
- const h1=[...html.matchAll(/<h1\b[^<>]*>([\s\S]{0,320}?)<\/h1>/gi)];
+ const h1=[...html.matchAll(/<h1\b[^<>]{0,2000}>([\s\S]{0,320}?)<\/h1>/gi)];
  const start=h1.length===1?h1[0].index:0;
  let crop=html.slice(start,start+25000);
- const end=crop.search(/<h[2-4][^<>]*>\s*(?:more coffees|you may also like|related products|shop similar)/i);
+ const end=crop.search(/<h[2-4][^<>]{0,2000}>\s*(?:more coffees|you may also like|related products|shop similar)/i);
  if(end>400)crop=crop.slice(0,end);
  return clean(crop,6500);
 }
@@ -260,7 +260,7 @@ function explicitNearbyFacts(html,fields){
  // adjacent product <p> elements. Read the discrete elements, never combine
  // navigation/header words into a fabricated origin.
  let focused=html;
- const h1=html.match(/<h1\b[^<>]*>[\s\S]{0,320}?<\/h1>/i);
+ const h1=html.match(/<h1\b[^<>]{0,2000}>[\s\S]{0,320}?<\/h1>/i);
  if(h1)focused=html.slice(h1.index,h1.index+16000);
  const paragraphs=[...focused.matchAll(/<p\b[^<>]{0,350}>([\s\S]{1,450}?)<\/p>/gi)]
   .map(m=>clean(m[1],200)).filter(Boolean).slice(0,24);
@@ -279,7 +279,7 @@ function explicitNearbyFacts(html,fields){
  // A heading such as "850 small scale producers" next to an explicit
  // "PRODUCER" metric identifies a producer group, not the crop year.
  if(!fields.producer){
-  for(const m of html.matchAll(/<h([23])\b[^<>]*>([\s\S]{1,200}?)<\/h\1>/gi)){
+  for(const m of html.matchAll(/<h([23])\b[^<>]{0,2000}>([\s\S]{1,200}?)<\/h\1>/gi)){
    const label=clean(m[2],120);
    if(!/^(?:\d{1,5}\s+)?(?:small[ -]?scale\s+)?(?:small[ -]?holder\s+)?(?:producers?|farmers?|cooperatives?|[A-Z][A-Za-z' ]{2,50})$/i.test(label))continue;
    // Only count a nearby explicit metric label before any *other* heading.
@@ -324,7 +324,7 @@ function explicitEspressoRecipe(html){
  const text=focusedProductText(html);
  // Proud Mary uses its product-specific meta-info block and often puts
  // this before the H1 and far from the short main-title crop.
- const compact=html.match(/<p\b[^<>]*class=["'][^"']*meta-title[^"']*["'][^<>]*>\s*Espresso\s*\|\s*Filter\s*<\/p>[\s\S]{0,450}?<p\b[^<>]*>\s*Ratio\s*1\s*:\s*(\d(?:\.\d{1,2})?)\s*\|\s*1\s*:\s*\d/i);
+ const compact=html.match(/<p\b[^<>]{0,2000}class=["'][^"']{0,2000}meta-title[^"']{0,2000}["'][^<>]{0,2000}>\s*Espresso\s*\|\s*Filter\s*<\/p>[\s\S]{0,450}?<p\b[^<>]{0,2000}>\s*Ratio\s*1\s*:\s*(\d(?:\.\d{1,2})?)\s*\|\s*1\s*:\s*\d/i);
  if(compact){
   const ratio=Number(compact[1]);
   if(ratio>=1&&ratio<=5)return {ratio,method:'Espresso'};
@@ -347,7 +347,7 @@ function explicitEspressoRecipe(html){
  return {dose_g:input,yield_g:output,time_s_min:first,time_s_max:last};
 }
 function productHeading(html){
- const matches=[...html.matchAll(/<h1\b[^<>]*>([\s\S]{0,400}?)<\/h1>/gi)]
+ const matches=[...html.matchAll(/<h1\b[^<>]{0,2000}>([\s\S]{0,400}?)<\/h1>/gi)]
   .map(m=>clean(m[1],170)).filter(x=>x&&!/^(shop|home|coffee|products|search|menu)$/i.test(x));
  const distinct=[...new Set(matches.map(x=>x.toLowerCase()))];
  return distinct.length===1?matches[0]:'';
@@ -368,17 +368,17 @@ function removeSiteSuffix(title,site){
 function labeledPairs(html,fields){
  // Structured specifications: <dt>Label</dt><dd>Value</dd>,
  // <tr><th>Label</th><td>Value</td></tr> and common flat key:value.
- for(const m of html.matchAll(/<dt\b[^<>]*>([\s\S]{0,180}?)<\/dt>\s*<dd\b[^<>]*>([\s\S]{0,800}?)<\/dd>/gi)){
+ for(const m of html.matchAll(/<dt\b[^<>]{0,2000}>([\s\S]{0,180}?)<\/dt>\s*<dd\b[^<>]{0,2000}>([\s\S]{0,800}?)<\/dd>/gi)){
   addField(fields,clean(m[1],80),clean(m[2],600));
  }
- for(const m of html.matchAll(/<tr\b[^<>]*>\s*<(?:th|td)\b[^<>]*>([\s\S]{0,200}?)<\/(?:th|td)>\s*<td\b[^<>]*>([\s\S]{0,800}?)<\/td>/gi)){
+ for(const m of html.matchAll(/<tr\b[^<>]{0,2000}>\s*<(?:th|td)\b[^<>]{0,2000}>([\s\S]{0,200}?)<\/(?:th|td)>\s*<td\b[^<>]{0,2000}>([\s\S]{0,800}?)<\/td>/gi)){
   addField(fields,clean(m[1],80),clean(m[2],600));
  }
  // On some pages a single coffee-info paragraph uses line breaks for
  // multiple labeled fields. Parse each explicitly delimited part separately,
  // instead of turning every later fact into a massive "Tasting Notes" value.
  // Shopify SEO description metadata is intentionally excluded.
- for(const m of html.matchAll(/<(?:p|li)\b[^<>]*>([\s\S]{0,900}?)<\/(?:p|li)>/gi)){
+ for(const m of html.matchAll(/<(?:p|li)\b[^<>]{0,2000}>([\s\S]{0,900}?)<\/(?:p|li)>/gi)){
   const parts=m[1].split(/<br\s*\/?\s*>/gi);
   for(const part of parts.slice(0,14)){
    const str=clean(part,420);
@@ -435,10 +435,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // HTML <title> is a release-specific name followed by the roaster. Do
    // not create an identity from the URL slug or a category page alone.
    if(!title&&likelyPath){
-    const canonical=(html.match(/<link\b[^<>]{0,950}\brel\s*=\s*["']canonical["'][^<>]*>/i)||[])[0]||'';
+    const canonical=(html.match(/<link\b[^<>]{0,950}\brel\s*=\s*["']canonical["'][^<>]{0,2000}>/i)||[])[0]||'';
     const declared=attrs(canonical).href||'';
     if(declared&&samePage(declared,source_url)){
-     const rawTitle=clean((html.match(/<title\b[^<>]*>([\s\S]{1,240}?)<\/title>/i)||[])[1]||'',200);
+     const rawTitle=clean((html.match(/<title\b[^<>]{0,2000}>([\s\S]{1,240}?)<\/title>/i)||[])[1]||'',200);
      const bits=rawTitle.split(/\s+[–—]\s+/);
      if(bits.length===2&&bits[0].length>3&&bits[1].length>2&&bits[1].length<100){
       title=bits[0];brand=bits[1];
@@ -473,7 +473,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Avoid stray articles/related-product labels on custom Onyx storefronts.
  // The product's named a-stat metrics supply its selected factual labels.
  const product=productMarkup(html);
- const onyxMetrics=/<div\b[^<>]*class=["'][^"']*a-stat[^"']*["'][^<>]*data-name=["']roast-level["']/i.test(product);
+ const onyxMetrics=/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["']roast-level["']/i.test(product);
  if(!onyxMetrics)labeledPairs(product,fields);
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.

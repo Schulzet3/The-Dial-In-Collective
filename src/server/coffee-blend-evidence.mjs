@@ -16,7 +16,7 @@ function unique(values){
  return out;
 }
 function clean(s){
- return String(s||'').replace(/<[^<>]*>/g,' ').replace(/&amp;/gi,'&')
+ return String(s||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&amp;/gi,'&')
   .replace(/&nbsp;/gi,' ').replace(/\s+/g,' ').trim();
 }
 function producersInComponent(description){
@@ -35,12 +35,12 @@ function producersInComponent(description){
 export function extractCoffeeBlendEvidence(html){
  if(typeof html!=='string'||html.length>2_000_000)return null;
  const page=productMarkup(html);
- const marker=/<(?:p|h[2-6]|strong|b)\b[^<>]{0,350}>\s*(?:<strong\b[^<>]*>)?\s*Components?\s*:\s*(?:<\/strong>\s*)?<\/(?:p|h[2-6]|strong|b)>/i.exec(page)||
-  /<(?:p|strong|b)\b[^<>]*>\s*Components?\s*:\s*(?:<br\s*\/?>)/i.exec(page)||
-  /<(?:p|li)\b[^<>]*>\s*Components?\s*:\s*(?=\d{1,3}\s*%\s+)/i.exec(page);
+ const marker=/<(?:p|h[2-6]|strong|b)\b[^<>]{0,350}>\s*(?:<strong\b[^<>]{0,2000}>)?\s*Components?\s*:\s*(?:<\/strong>\s*)?<\/(?:p|h[2-6]|strong|b)>/i.exec(page)||
+  /<(?:p|strong|b)\b[^<>]{0,2000}>\s*Components?\s*:\s*(?:<br\s*\/?>)/i.exec(page)||
+  /<(?:p|li)\b[^<>]{0,2000}>\s*Components?\s*:\s*(?=\d{1,3}\s*%\s+)/i.exec(page);
  if(!marker)return null;
  let tail=page.slice(marker.index+marker[0].length,marker.index+marker[0].length+2500);
- tail=tail.split(/<(?:h[2-6]|p|strong)\b[^<>]*>\s*(?:tasting\s+notes?|espresso(?:\s+parameter)?|brew(?:ing)?\s+tips|about this coffee)\s*:/i)[0];
+ tail=tail.split(/<(?:h[2-6]|p|strong)\b[^<>]{0,2000}>\s*(?:tasting\s+notes?|espresso(?:\s+parameter)?|brew(?:ing)?\s+tips|about this coffee)\s*:/i)[0];
  const rows=tail.replace(/<\/(?:p|li|div)>|<br\s*\/?>/gi,'\n')
   .split(/\n|\s*[;]\s*(?=\d{1,3}\s*%)|\s+\+\s+(?=\d{1,3}\s*%)/)
   .map(clean).filter(Boolean).slice(0,20);
