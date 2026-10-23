@@ -6,7 +6,43 @@
     "release_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
     "netlify_deploy_id": "6adb71e2a2e52cd3bbeef5e5"
   },
-  "items": [],
+  "items": [
+    {
+      "id": "DIC-Q-33-product-completeness",
+      "issue": 33,
+      "pr": 99,
+      "title": "Recover complete selected-coffee details across semantic layouts and public product sources",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify/functions/coffee-url-preview.mjs",
+        "site/cloud/coffee-url-autofill.js",
+        "src/server/coffee-espresso-evidence.mjs",
+        "src/server/coffee-fact-compatibility.mjs",
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-html-structure.mjs",
+        "src/server/coffee-narrative-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-product-layouts.mjs",
+        "src/server/coffee-product-scope.mjs",
+        "src/server/coffee-semantic-specs.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/coffee-woocommerce-store.mjs"
+      ],
+      "tests": [
+        "Original Sweet Bloom missing-variety failure reproduced with the actual handler and bounded public transports in read-only live probe40014705373.",
+        "Saved-source replay confirms Bourbon Aji plus all other expected Sweet Bloom fields and exact18g/36g/22–24s espresso reference; multi-roaster layouts and negative controls covered by focused tests.",
+        "Initial candidate262d00a1 passed all seven workflows:751Node22tests,lint/build,approval,isolatedSQL,browser/mobile/offline/visual,security inventory,and10/10livecases with64assertions; final evidence audit added four further source detail classes before integration.",
+        "Final local778/778 tests pass, including12 geography/blend regressions (111/111 focused). Final exact-source CI and unchanged72-assertion live probe must pass beforeintegration; the discovered Onyx regression is repaired without weakening source-conflict checks."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact final-source Node22/lint/build, applicable browser checks, live source acceptance and non-force integration are in progress."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6373371567",
+      "notes": "October23 owner report of missing Bourbon Ají and comprehensive deterministic extractor improvement request. Source development only; production publication not authorized. Preserve quotas, cooldown, auth, DNS pinning, size/retry/request limits, explicit save and Pending/Verified distinction. No migrations, Edge changes or member-data mutation."
+    }
+  ],
   "history": [
     {
       "id": "DIC-Q-93-admin-counts",
@@ -521,6 +557,6 @@
       "delivered_at_utc": "2026-10-23T01:48:46.334Z"
     }
   ],
-  "last_reconciled_utc": "2026-10-23T03:12:15.835Z",
+  "last_reconciled_utc": "2026-10-23T20:08:00.475236+00:00",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }

@@ -2598,3 +2598,33 @@ Explicit owner instruction: **“Fine remove the shots now please”**, followin
 **Narrow override of earlier initial `read-only administrator dashboard` scope and sanitized admin dashboard DTO:** A **new, separate, administrator-only** record-list/correction RPC is allowed to project creator identifiers/emails, user personal shots and notes, but NO direct table read/write grants, broad RLS changes, public Community identity exposure or member-to-member record reads. The old read-only dashboard endpoint remains unchanged and safe. Existing admission/admin role checks, revision concurrency, immutable provenance, original note/shot history, admin audit, community projection and exact canonical release identity remain locked. Canonical identity (approved coffee name, roaster and release label) is NOT rewritten through descriptive editing; a separate identity review would be needed. Owner asserted member consent to admin access including notes; independent member-consent documentation was NOT inspected, so no claim of verified member-specific consent is made. Nothing in this decision waives external privacy law or password secrecy.
 
 **Delivery boundary:** staged code/SQL only, no hosted SQL, Edge, Auth, membership, note/shot mutation, Netlify publish, provider setting/credit action, or new future release authorization. Require separate named production SQL and release approvals, isolated SQL security tests, actual admin/member negative checks, and owner-device acceptance before marking Live/Accepted. Issue #47 tracks incomplete work. Previous original Locked corpus and member RLS remain unchanged.
+
+
+## October 23, 2026 — selected-product completeness implementation
+
+The owner reported that Sweet Bloom Arbey Cordoba omitted the explicitly published
+Bourbon Ají variety and requested comprehensive extractor improvements. This is
+implementation work under the existing deterministic-only and autonomous
+development/queue decisions. Read compound cultivar names without a narrow
+cultivar whitelist; preserve accented and localized labels, multiline and reverse
+metric layouts, explicit country/region and separate farm/grower facts. Accessible
+image descriptions may supply literal, exact-name-matched profile facts; pixels,
+image color and filenames remain insufficient evidence.
+
+A fresh eligible product read may use the existing bounded exact-product endpoint
+even when the core fields are full, to recover additional source facts and detect
+contradictions. Prefer current warm source evidence over sparse catalog records;
+retain the authorized free complete-catalog path and truthful cached fallback
+without copying old catalog approval or facts into a new release. Equivalent
+cultivar lists are compatible; contradictory source values stay withheld. Retain
+roast cautions, mixed processing and compatible espresso measurements. Selectively
+exclude recommendation components while retaining later selected-product sections;
+parser resource limits fail closed.
+
+The existing 900KB initial bound, eligible single2MB HTML retry, shared deadlines,
+request/redirect bounds, DNS pinning, TLS, admission,12/member/24h,30s cooldown,
+12/IP/min, blank-only autofill, explicit save and Pending/Verified semantics remain.
+No AI/OCR/browser runtime, arbitrary crawl, paid service, data mutation or
+publication is authorized by this implementation request. A universal100% source
+coverage claim is not justified. Evidence: [Issue33 journal](workstreams/issue-33.md)
+and [source acceptance record](audits/2026-10-23-extractor-completeness.json).

@@ -8,16 +8,11 @@ import {extractCoffeeBlendEvidence} from './coffee-blend-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
-const FIELD_ALIASES={
- origin:['origin','origins','countries','country','country of origin','region','coffee origin','région','location','growing region','país','pais','país de origen','origine','pays','región'],
- elevation_m:['elevation','altitude','elevation m','altitude masl','grown at','altitude (masl)','altura','altitud'],
- process:['process','processing','processing method','processing style','traitement','treatment','process method','proceso','procesamiento','processo'],
- variety:['variety','varietal','cultivar','cultivars','varieties','varietals','variété','variété(s)','variedad','variedades'],
- producer:['producer','producers','farms','farm','farmer','grower','cooperative','co-op','farm/co-op','producteur','washing station','productor','productora','finca','produtor'],
- roast_level:['roast','roast level','roast profile'],
- tasting_notes:['tasting notes','taste notes','flavor notes','flavour notes','cup notes','flavors','flavours','notes','reminds us of','tastes like','tasting profile','flavor profile','flavour profile','cupping notes','notas de cata','notas de sabor','sabores'],
- release_label:['harvest','harvest year','harvest date','crop year','lot','lot number','release','release year','cosecha','fecha de cosecha']
-};
+import {COFFEE_FIELD_ALIASES} from './coffee-semantic-specs.mjs';
+import {equivalentCoffeeVarieties} from './coffee-fact-compatibility.mjs';
+import {extractProductImageTextEvidence} from './coffee-flavor-evidence.mjs';
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
+const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
 function readableRoaster(s){
@@ -29,11 +24,13 @@ function readableRoaster(s){
  if(parts.at(-1).length===2)parts.pop();
  return parts.map(part=>part[0].toUpperCase()+part.slice(1)).join(' ');
 }
+const LATIN_ENTITIES=Object.fromEntries('aacute:á agrave:à acirc:â atilde:ã auml:ä aring:å aelig:æ ccedil:ç eacute:é egrave:è ecirc:ê euml:ë iacute:í igrave:ì icirc:î iuml:ï ntilde:ñ oacute:ó ograve:ò ocirc:ô otilde:õ ouml:ö oslash:ø oelig:œ uacute:ú ugrave:ù ucirc:û uuml:ü yacute:ý yuml:ÿ szlig:ß'.split(' ').map(pair=>pair.split(':')));
 function entities(s){
- const replace={'amp':'&','quot':'"','apos':"'",'lt':'<','gt':'>','nbsp':' ','ndash':'–','mdash':'—','bull':'•'};
+ const replace={'amp':'&','quot':'"','apos':"'",'lt':'<','gt':'>','nbsp':' ','ndash':'–','mdash':'—','bull':'•','bullet':'•','rsquo':'’','lsquo':'‘'};
  return String(s??'').replace(/&(#x[0-9a-f]+|#[0-9]+|[a-z]+);/gi,(s,key)=>{
   const lower=key.toLowerCase();
   if(lower in replace)return replace[lower];
+  if(LATIN_ENTITIES[lower])return key[0]===key[0].toUpperCase()?LATIN_ENTITIES[lower].toUpperCase():LATIN_ENTITIES[lower];
   if(lower.startsWith('#')){
    const hex=lower.startsWith('#x'),n=Number.parseInt(lower.slice(hex?2:1),hex?16:10);
    if(Number.isInteger(n)&&n>0&&n<=0x10ffff&&!(n>=0xd800&&n<=0xdfff))return String.fromCodePoint(n);
@@ -111,6 +108,18 @@ function samePage(raw,target){
 }
 const ROAST=['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
 const conflictsByFields=new WeakMap();
+const producerEvidenceByFields=new WeakMap();
+const farmEvidenceByFields=new WeakMap();
+const geographyByFields=new WeakMap();
+const ORIGIN_COUNTRIES=new Set('Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|China|Vietnam|Laos|Myanmar|Papua New Guinea|DR Congo|United States|Jamaica'.split('|').map(keyOf));
+const geographyParts=value=>[...new Set(String(value).split(/\s*(?:,|\/|;|&|\+|\band\b)\s*|\s+[-–—|]\s+/i).map(keyOf).filter(Boolean))];
+function compatibleGeography(first,second){
+ if(keyOf(first)===keyOf(second))return first;
+ const a=geographyParts(first),b=geographyParts(second);
+ if(a.every(part=>b.includes(part)))return second;
+ if(b.every(part=>a.includes(part)))return first;
+ return null;
+}
 // Some merchants flatten <br>-separated specifications into one field.
 // Stop at the NEXT explicit key, including concatenated CamelCase labels:
 // e.g. "Lime, Tea Origin: Kenya" or "GedebElevation: 1900m".
@@ -136,7 +145,8 @@ function normalized(field,value){
   // Keep the roaster's actual listed notes, not the words "coffee with notes of".
   // Remove only this anchored, clearly extraneous introductory phrase.
   const labelled=s.match(/^(?:this )?coffee\s+(?:with|has)\s+(?:tasting\s+)?notes?\s+of\s+(.+)$/i);
-  return labelled?labelled[1].replace(/[.!?]+\s*$/,'').trim():s;
+  return (labelled?labelled[1].replace(/[.!?]+\s*$/,'').trim():s)
+   .replace(/\s*[•·]\s*/g,', ').replace(/(?:,\s*)+$/,'').trim();
  }
  if(field==='roast_level'){
   const norm=s.toLowerCase().replace(/[\s_-]/g,'');
@@ -145,7 +155,7 @@ function normalized(field,value){
  if(field==='process'){
   // This is one anaerobic treatment with a natural drying subtype,
   // not an ambiguous Washed & Natural blend.
-  if(/\b(?:anaerobic[\s-]+natural|natural[\s-]+anaerobic)\b/i.test(s))
+  if(/\b(?:anaerob(?:ic|ico|ica)[\s-]+natural|natural[\s-]+anaerob(?:ic|ico|ica))\b/i.test(s.normalize('NFD').replace(/[\u0300-\u036f]/g,'')))
    return 'Anaerobic';
   const norm=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   // Different components of a blend can have different processes; the
@@ -177,6 +187,58 @@ function addField(fields,rawKey,value){
  // year to the neighboring PRODUCER label (observed on Wuri / Uraga).
  if(key==='producer'&&(/^(?:since|est(?:ablished)?\.?|founded)\s+(?:19|20)\d{2}$/i.test(s)||
    /^(?:coffee\s+)?growers?\s+from\b/i.test(s)))return;
+ // A farm and its named grower are complementary source facts. Preserve
+ // the farm separately and prefer an explicit producer over a farm fallback.
+ if(key==='producer'&&s){
+  const farm=/^(?:farm|farms|finca)$/i.test(String(rawKey).trim());
+  if(farm){
+   if(!farmEvidenceByFields.has(fields))farmEvidenceByFields.set(fields,s);
+   if(fields.producer)return;
+   producerEvidenceByFields.set(fields,'farm');
+  }else if(producerEvidenceByFields.get(fields)==='farm'){
+   fields.producer=s;producerEvidenceByFields.set(fields,'producer');return;
+  }else producerEvidenceByFields.set(fields,'producer');
+ }
+ if(key==='origin'&&s){
+  const label=keyOf(rawKey),geography=geographyByFields.get(fields)||{};
+  const part=/^(?:country|countryoforigin|pais|paisdeorigen|pays)$/.test(label)?'country':
+   /^(?:region|growingregion)$/.test(label)?'region':null;
+  const reject=()=>{conflicts?.add('origin');delete fields.origin;geographyByFields.delete(fields);};
+  // Country evidence also appears under Origin/Origen or inside a fuller
+  // region-country value. A narrower label cannot overwrite a different
+  // explicit country, even before its Region counterpart has arrived.
+  const countries=geographyParts(s).filter(value=>ORIGIN_COUNTRIES.has(value)).sort();
+  if(!countries.length&&part==='country')countries.push(...geographyParts(s).sort());
+  if(countries.length&&geography.countries?.length&&countries.join('|')!==geography.countries.join('|')){
+   reject();return;
+  }
+  if(countries.length)geography.countries=countries;
+  if(part){
+   const value=geography[part]?compatibleGeography(geography[part],s):s;
+   if(!value){reject();return;}
+   geography[part]=value;
+  }else{
+   // Keep a small deduplicated set of original untyped values. Waiting for
+   // the typed pair permits Origin:Huila as well as Origin:Colombia, while
+   // still checking every earlier source once that pair is complete.
+   geography.origins??=[];
+   if(!geography.origins.some(value=>keyOf(value)===keyOf(s))){
+    if(geography.origins.length>=16){reject();return;}
+    geography.origins.push(s);
+   }
+  }
+  geographyByFields.set(fields,geography);
+  if(geography.country&&geography.region){
+   const region=geography.region,country=geography.country;
+   let combined=keyOf(region).includes(keyOf(country))?region:region+', '+country;
+   for(const origin of geography.origins||[]){
+    combined=compatibleGeography(combined,origin);
+    if(!combined){reject();return;}
+   }
+   fields.origin=combined;
+   return;
+  }
+ }
  // Withhold contradictory categorical/release evidence instead of silently
  // preferring stale JSON-LD. Compound processes must stay unsimplified.
  // A truly mixed-process product is explicitly Other/Unknown, not blank.
@@ -186,8 +248,8 @@ function addField(fields,rawKey,value){
   fields.process='Other/Unknown';return;
  }
  if(key==='process'&&fields.process==='Other/Unknown')return;
- if(conflicts&&(s&&fields[key]&&['process','roast_level','release_label'].includes(key)&&
-    keyOf(s)!==keyOf(fields[key]))){
+ if(conflicts&&(s&&fields[key]&&['process','roast_level','release_label','variety'].includes(key)&&
+    (key==='variety'?!equivalentCoffeeVarieties(s,fields[key]):keyOf(s)!==keyOf(fields[key])))){
   conflicts.add(key);delete fields[key];return;
  }
  if(fields[key])return;
@@ -225,10 +287,27 @@ function productDetails(fields,p){
    }else addField(fields,key,value);
   }
  }
- for(const tag of Array.isArray(p.tags)?p.tags.slice(0,60):[]){
-  if(typeof tag!=='string')continue;
-  const m=tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i);
-  if(m)addField(fields,m[1],m[2]);
+ const tags=(Array.isArray(p.tags)?p.tags.slice(0,60):[]).filter(tag=>typeof tag==='string');
+ const tagPairs=tags.map(tag=>tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i)).filter(Boolean);
+ const originTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='origin');
+ let blendOrigin='';
+ // An explicitly blend-tagged Product can list one origin country per tag
+ // (e.g. Onyx Geometry). Combine only that same-product component cohort;
+ // independent descriptions, attributes and visible labels still pass through
+ // the ordinary whole-product geography conflict checks.
+ if(tags.some(tag=>/^type\s*[:=]\s*blend\s*$/i.test(tag))&&originTags.length>1&&
+    originTags.every(pair=>ORIGIN_COUNTRIES.has(keyOf(pair[2])))){
+  const countries=new Map();
+  for(const pair of originTags)if(!countries.has(keyOf(pair[2])))countries.set(keyOf(pair[2]),pair[2].trim());
+  const joined=[...countries.values()].join(', ');
+  if(joined.length<=220)blendOrigin=joined;
+ }
+ let blendOriginAdded=false;
+ for(const pair of tagPairs){
+  if(blendOrigin&&pair[1].toLowerCase()==='origin'){
+   if(!blendOriginAdded)addField(fields,'origin',blendOrigin);
+   blendOriginAdded=true;
+  }else addField(fields,pair[1],pair[2]);
  }
 }
 function focusedProductText(html){
@@ -241,10 +320,6 @@ function focusedProductText(html){
 }
 function explicitNearbyFacts(html,fields){
  const near=focusedProductText(html).slice(0,2600);
- if(!fields.variety){
-  const v=near.match(/\b(Heirloom|Bourbon|Typica|Caturra|Catuai|Catuaí|Gesha|Geisha|SL28|SL34|Pacamara|Castillo|Bourbon Sidra)\s+variet(?:y|ies)\b/i);
-  if(v)fields.variety=clean(v[1],100);
- }
  if(!fields.process){
   const combo=/\b(washed|natural|honey|anaerobic)\s*(?:&|and|\/|,)\s*(washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i.test(near);
   if(!combo){
@@ -262,9 +337,9 @@ function explicitNearbyFacts(html,fields){
  let focused=html;
  const h1=html.match(/<h1\b[^<>]{0,2000}>[\s\S]{0,320}?<\/h1>/i);
  if(h1)focused=html.slice(h1.index,h1.index+16000);
- const paragraphs=[...focused.matchAll(/<p\b[^<>]{0,350}>([\s\S]{1,450}?)<\/p>/gi)]
-  .map(m=>clean(m[1],200)).filter(Boolean).slice(0,24);
- const originIndex=paragraphs.findIndex(p=>/^[A-Z][A-Za-z'-]{2,}(?:\s+[A-Z][A-Za-z'-]{2,}){0,3},\s*[A-Z][A-Za-z'-]{3,}(?:\s+[A-Z][A-Za-z'-]{2,}){0,3}$/.test(p));
+ const paragraphs=[...focused.matchAll(/<(p|h[2-6])\b[^<>]{0,350}>([\s\S]{1,450}?)<\/\1>/gi)]
+  .map(m=>clean(m[2],200)).filter(Boolean).slice(0,40);
+ const originIndex=paragraphs.findIndex(p=>/^[\p{L}\p{M}][\p{L}\p{M} .’'&/-]{1,135},\s*(?:Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|China|Vietnam|Laos|Myanmar|Papua New Guinea|DR Congo|United States|Jamaica|Hawaii)$/iu.test(p));
  if(originIndex>=0){
   if(!fields.origin)fields.origin=paragraphs[originIndex];
   if(!fields.tasting_notes){
@@ -273,22 +348,6 @@ function explicitNearbyFacts(html,fields){
    if(/^[a-z][a-z' -]{2,45}(?:,\s*[a-z][a-z' -]{2,45}){2,5}$/i.test(candidate)&&
      /\b(?:washed|natural|honey|anaerobic)\s+process\b/i.test(following)){
     fields.tasting_notes=candidate;
-   }
-  }
- }
- // A heading such as "850 small scale producers" next to an explicit
- // "PRODUCER" metric identifies a producer group, not the crop year.
- if(!fields.producer){
-  for(const m of html.matchAll(/<h([23])\b[^<>]{0,2000}>([\s\S]{1,200}?)<\/h\1>/gi)){
-   const label=clean(m[2],120);
-   if(!/^(?:\d{1,5}\s+)?(?:small[ -]?scale\s+)?(?:small[ -]?holder\s+)?(?:producers?|farmers?|cooperatives?|[A-Z][A-Za-z' ]{2,50})$/i.test(label))continue;
-   // Only count a nearby explicit metric label before any *other* heading.
-   // Otherwise an unrelated "Heirloom Variety" or "Roast Level" heading
-   // could accidentally be assigned to the producer field.
-   const following=html.slice(m.index+m[0].length,m.index+m[0].length+300).split(/<h[1-6]\b/i)[0];
-   if(/\bPRODUCER\b/i.test(clean(following,200))){
-    fields.producer=label;
-    break;
    }
   }
  }
@@ -347,8 +406,27 @@ function explicitEspressoRecipe(html){
  return {dose_g:input,yield_g:output,time_s_min:first,time_s_max:last};
 }
 function productHeading(html){
- const matches=[...html.matchAll(/<h1\b[^<>]{0,2000}>([\s\S]{0,400}?)<\/h1>/gi)]
-  .map(m=>clean(m[1],170)).filter(x=>x&&!/^(shop|home|coffee|products|search|menu)$/i.test(x));
+ const page=productMarkup(html),{nodes}=coffeeHtmlElements(page);
+ const matches=nodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=10000&&
+  /^<\/h1\s*>/i.test(page.slice(node.contentEnd,node.end))).slice(0,20).map(node=>{
+   const content=removeElements(page.slice(node.headEnd,node.contentEnd),['svg','audio','button','style','script']);
+   // Animated headings can wrap every letter in nested spans. Only join
+   // single-character leaves within explicitly grouped words; ordinary
+   // multiword headings retain their normal spaces and accents.
+   const words=[...content.matchAll(/<div\b[^<>]{0,1000}\bclass=["'][^"']{0,400}\bword\b[^"']{0,400}["'][^<>]{0,1000}>([\s\S]{1,5000}?)<\/div>/gi)];
+   if(words.length&&words.length<=16){
+    const reconstructed=words.map(word=>{
+     const chars=[...word[1].matchAll(/<span\b[^<>]{0,500}>([^<>]{0,20})<\/span>/gi)]
+      .map(char=>entities(char[1]));
+     const joined=chars.join('').trim();
+     const complete=clean(word[1],250).replace(/\s+/g,'')===joined.replace(/\s+/g,'');
+     return complete&&chars.length>=1&&chars.length<=80&&chars.every(char=>[...char].length===1||/^[^\p{M}]\p{M}$/u.test(char))?joined:'';
+    });
+    const rest=content.replace(/<div\b[^<>]{0,1000}\bclass=["'][^"']{0,400}\bword\b[^"']{0,400}["'][^<>]{0,1000}>([\s\S]{1,5000}?)<\/div>/gi,'');
+    if(reconstructed.every(Boolean)&&!clean(rest,200))return reconstructed.join(' ').slice(0,170);
+   }
+   return clean(content,170);
+  }).filter(x=>x&&!/^(shop|home|coffee|products|search|menu)$/i.test(x));
  const distinct=[...new Set(matches.map(x=>x.toLowerCase()))];
  return distinct.length===1?matches[0]:'';
 }
@@ -470,6 +548,22 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const siteName=textOf(meta['og:site_name'],200);
  if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
   fields.roaster=readableRoaster(siteName);
+ // WooCommerce may identify the roaster only as this Product's seller.
+ // Require its explicit roastery name and same-site URL; an arbitrary
+ // marketplace seller or unrelated graph Organization is not a roaster.
+ if(!fields.roaster&&p.url&&samePage(p.url,source_url)){
+  const sellers=(Array.isArray(p.offers)?p.offers.slice(0,20):[p.offers]).map(offer=>offer?.seller);
+  const candidates=new Set();
+  for(const seller of sellers){
+   const name=textOf(seller?.name,150);
+   if(!/\b(?:coffee\s+roasters?|roastery|coffee\s+lab)\b/i.test(name)||typeof seller?.url!=='string')continue;
+   try{
+    const sellerUrl=new URL(seller.url),sourceUrl=new URL(source_url);
+    if(sellerUrl.protocol==='https:'&&sellerUrl.hostname.replace(/^www\./,'')===sourceUrl.hostname.replace(/^www\./,''))candidates.add(name);
+   }catch{/* Invalid seller URL is not identity evidence. */}
+  }
+  if(candidates.size===1)fields.roaster=[...candidates][0];
+ }
  // Avoid stray articles/related-product labels on custom Onyx storefronts.
  // The product's named a-stat metrics supply its selected factual labels.
  const product=productMarkup(html);
@@ -491,6 +585,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  for(const [key,value] of Object.entries(narrative.details)){
   if(!roaster_details[key]&&value)roaster_details[key]=value;
  }
+ const farm=farmEvidenceByFields.get(fields);
+ if(farm&&!roaster_details.farm)roaster_details.farm=farm;
+ // The page's accessible image description sometimes transcribes the
+ // selected bag's profile card. Read only explicit words attached to an
+ // exact-name image; pixels, color, filenames and other coffees are ignored.
+ const imageText=extractProductImageTextEvidence(product,{name:fields.name,clean});
+ if(imageText.tasting_notes&&!fields.tasting_notes)addField(fields,'tasting_notes',imageText.tasting_notes);
+ if(imageText.roast_level)addField(fields,'roast_level',imageText.roast_level);
  // JSON-LD additionalProperty can publish numeric roast color without an
  // HTML metric. Retain the measured value from this matched Product only.
  if(!roaster_details.agtron){
@@ -563,6 +665,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roaster_details.processing_detail=blend.processes.join(', ');
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
+ // A later direct blend fallback cannot resurrect rejected geography.
+ if(conflicts.has('origin'))delete fields.origin;
  const roaster_recipe=explicitEspressoRecipe(product)||extractProductEspressoReference(product);
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.

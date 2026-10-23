@@ -11,12 +11,14 @@ const normalize=v=>String(v||'').normalize('NFKD')
 export function wooProductRequest(raw){
  const url=safeCoffeeUrl(raw);if(!url)return null;
  // Woo merchants can localize or customize the public product permalink base.
- // Keep the allowlist narrow and always require exact slug AND returned permalink.
- const m=url.pathname.match(/^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?(?:product|coffee|coffees|beans)\/([a-z0-9][a-z0-9-]{0,155})\/?$/i);
+ // A product permalink can include bounded category segments, e.g.
+ // /product/coffees/world-class/samuel-jr/. Nested paths additionally require
+ // the API's full returned permalink, not just the last matching slug.
+ const m=url.pathname.match(/^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?(?:product|coffee|coffees|beans)\/((?:[a-z0-9][a-z0-9-]{0,79}\/){0,3})([a-z0-9][a-z0-9-]{0,155})\/?$/i);
  if(!m)return null;
- const slug=m[1].toLowerCase();
+ const slug=m[2].toLowerCase();
  const api=new URL('/wp-json/wc/store/v1/products/'+slug,url.origin).toString();
- return safeCoffeeUrl(api)?{api,slug,sourceUrl:url.toString()}:null;
+ return safeCoffeeUrl(api)?{api,slug,sourceUrl:url.toString(),requirePermalink:!!m[1]}:null;
 }
 function exactPermalink(value,source){
  if(!value)return true;
@@ -28,6 +30,7 @@ export function extractWooStoreData(data,request,{extract=extractPublicCoffeeFac
  if(!request||!data||Array.isArray(data)||typeof data!=='object'||data.is_password_protected===true||
   typeof data.name!=='string'||!data.name.trim()||data.name.length>200||
   typeof data.slug!=='string'||data.slug.toLowerCase()!==request.slug||
+  (request.requirePermalink&&(typeof data.permalink!=='string'||!data.permalink))||
   (typeof data.permalink==='string'&&!exactPermalink(data.permalink,request.sourceUrl)))return null;
  const descriptions=[data.short_description,data.description].filter(x=>typeof x==='string'&&x.length<=16000);
  const detail=descriptions.join('\n');

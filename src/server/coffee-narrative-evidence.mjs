@@ -3,6 +3,7 @@ import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 // Supplement existing labeled and structured parsers; never create Verified facts.
 // No network calls, model invocation, hidden scripts or unrestricted site crawling.
 import {productMarkup} from './coffee-product-scope.mjs';
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 
 const COUNTRY=String.raw`Panama|Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|Papua New Guinea|DR Congo|United States|Jamaica`;
 const ENTITIES={'amp':'&','nbsp':' ','quot':'"','apos':"'",'eacute':'é','ndash':'–','mdash':'—'};
@@ -30,6 +31,7 @@ function foundGrower(paragraphs){
  for(const paragraph of paragraphs){
   if(paragraph.length>1000||/\b(?:generally|typically|for example|such as|learn about)\b/i.test(paragraph))continue;
   const patterns=[
+   new RegExp(String.raw`\b(?:from\s+)?(?:producer|farmer|grower)\s+`+PERSON+String.raw`(?=\s+(?:and|of|who|at|on|in)\b|[,!.;]|$)`,'u'),
    new RegExp(String.raw`\b(?:grown|produced|cultivated|harvested|farmed)\s+by\s+`+PERSON+'\\b','u'),
    new RegExp(String.raw`\b(?:farmer|producer|grower|farm owner|estate owner)\s*(?:is|:|–|-)\s*`+PERSON+'\\b','iu'),
    new RegExp('\\b'+PERSON+String.raw`\s+(?:is|was)\s+(?:the|a)\s+(?:farmer|producer|grower)\b`,'u'),
@@ -37,8 +39,9 @@ function foundGrower(paragraphs){
   ];
   for(const re of patterns){
    const m=re.exec(paragraph);
-   if(m&&m[1]&&!BAD_PERSON.test(m[1])&&
-       m[1].split(/\s+/).every(part=>/^\p{Lu}/u.test(part)))return m[1];
+   const candidate=m?.[1]?.replace(/\s+(?:Country|Origin|Region|Variety|Cultivar|Harvest|Elevation|Altitude|Process)(?:\s.*)?$/,'');
+   if(candidate&&!BAD_PERSON.test(candidate)&&
+       candidate.split(/\s+/).every(part=>/^\p{Lu}/u.test(part)))return candidate;
   }
  }
  return '';
@@ -66,6 +69,24 @@ function locationFromHeadings(headings){
  }
  return null;
 }
+function explicitFarmOwnership(page){
+ const {nodes}=coffeeHtmlElements(page);
+ const headings=nodes.filter(node=>/^h[2-6]$/.test(node.tag));
+ const found=new Map();
+ for(let i=0;i<headings.length;i++){
+  const heading=headings[i];
+  if(heading.contentEnd-heading.headEnd>1500)continue;
+  const title=text(page.slice(heading.headEnd,heading.contentEnd),100).replace(/\s+[+−-](?:\s*[+−-])?\s*$/,'');
+  if(!/^(?:sobre la finca|acerca de la finca|about (?:this|the) farm)$/i.test(title))continue;
+  const end=Math.min(headings[i+1]?.start??page.length,heading.end+5000);
+  const paragraph=text(page.slice(heading.end,end),1500);
+  // Literal farm ownership in the selected farm story, including a family
+  // attribution. Generic farming explanations and other sections do not count.
+  const match=paragraph.match(/^([A-ZÀ-Ý][\p{L}\p{M}'’.-]*(?:\s+[A-ZÀ-Ý][\p{L}\p{M}'’.-]*){0,4})\s+es propiedad de\s+([A-ZÀ-Ý][\p{L}\p{M}'’.-]+(?:\s+[A-ZÀ-Ý][\p{L}\p{M}'’.-]+){1,3}(?:\s+y su familia)?)(?=\s*[,.;])/u);
+  if(match)found.set(match[1]+'\0'+match[2],{farm:match[1],producer:match[2]});
+ }
+ return found.size===1?[...found.values()][0]:null;
+}
 export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name)return {fields:{},details:{}};
  const page=scopedPage(html);
@@ -76,6 +97,11 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
   .map(m=>text(m[1],1400)).filter(Boolean).slice(0,90);
  const prose=paragraphs.join(' ').slice(0,11000);
  const output={},details={};
+ const ownership=explicitFarmOwnership(page);
+ if(ownership){
+  details.farm=ownership.farm;details.named_producer=ownership.producer;
+  if(!fields.producer)output.producer=ownership.producer;
+ }
  const place=locationFromHeadings(headings);
  if(place){
   details.farm=place.farm;
@@ -88,6 +114,12 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
  for(const p of paragraphs){
   const farm=p.match(/^(?:Farm|Estate|Finca)\s*[:：-]\s*((?:Finca|Hacienda|Farm|Estate)\s+[\p{L}\p{M}][\p{L}\p{M}'’ -]{2,85})$/iu);
   if(farm&&!details.farm)details.farm=farm[1].slice(0,110);
+  // An explicitly named grower's own farm is a separate fact, not an
+  // interchangeable producer value. Keep the exact name and source casing.
+  if(!details.farm&&namedGrower&&p.includes(namedGrower)&&p.length<=1000){
+   const namedFarm=p.match(/\b(?:his|her|their)\s+(?:farm|estate)\s+([A-ZÀ-Ý][\p{L}\p{M}'’.-]*(?:\s+[A-ZÀ-Ý][\p{L}\p{M}'’.-]*){0,5})(?=\s+(?:is|was|has|where|in|and|produces|grows)\b|[,!.;]|$)/u);
+   if(namedFarm)details.farm=namedFarm[1].slice(0,110);
+  }
  }
  const technique=processingDetail(headings,paragraphs);
  if(technique){

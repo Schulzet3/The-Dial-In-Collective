@@ -1,3 +1,21 @@
+## October 23, 2026: Issue33 extractor completeness TESTING, not published
+
+The owner-reported Sweet Bloom Bourbon Ají failure is reproduced and repaired in
+source, with broader semantic layouts, accessible product-image text, source
+conflict handling and cache/endpoint enrichment. Saved-source replay and focused
+regressions pass; final Node22/lint/build, browser checks, refreshed live source
+acceptance and non-force integration are underway. See the indexed
+[Issue33 journal](workstreams/issue-33.md) and
+[acceptance record](audits/2026-10-23-extractor-completeness.json).
+
+The actual latest deployed batch remains DIC-20261023-READY-QUEUE-05, release
+`99ad6148e1a540619d67adb07b18f32c93dee9db`, Netlify READY/current
+`6adb71e2a2e52cd3bbeef5e5`. Its #93/#96 records are DEPLOYED history. The older
+unpublished paragraphs below are dated history. This work changes no hosted SQL,
+Edge functions, member records or publication state.
+
+---
+
 ## Issue96 repairs READY, NOT DEPLOYED (2026-10-23T06:20:55.390833+00:00)
 
 PR97 and follow-up PR98 are merged. Final source 5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d has tree 9843b383d38aea0d413381eeab4eb3aaaac5e82d, identical to tested PR source b3599c235b6b1bff148272c5d3556b678219da66 and its tested merge ref. All seven final PR checks and all four applicable merged-source checks PASS. SQL/visual/security evidence is reused from the identical passing PR tree; no skipped check is called passed. Six findings repaired: approved password composition, bounded request parsing, truthful catalog-cache provenance, long-note preservation, privacy wording and pathological HTML processing, including repeated quoted attributes. Local673 Node cases pass; final browser/mobile/visual/offline/built-app and isolated SQL/signedHTTP/snapshot suites pass. Current locked production dependencies have zero known advisories. Final tested inventory470 files/72863 text lines/3 binaries; all13 follow-up file hashes and earlier39 repair hashes independently matched CI artifacts.
