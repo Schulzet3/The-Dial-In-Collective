@@ -1,0 +1,79 @@
+name: DIC one-use reviewed source transfer
+# Owner-authorized source repair only. This installer removes itself.
+on:
+  push:
+    branches: [work/issue96-security-audit-20261023]
+    paths: [.github/workflows/issue96-apply-reviewed.yml]
+permissions:
+  contents: write
+concurrency:
+  group: dic-issue96-reviewed-source-transfer
+  cancel-in-progress: false
+jobs:
+  apply-reviewed-bytes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Verify complete payload and all base hashes before changing files
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import base64, gzip, hashlib, json, os, pathlib, subprocess
+          root=pathlib.Path.cwd()
+          branch='work/issue96-security-audit-20261023'
+          base='471f2666799b8b04ad873f7e4f39684c4f215776'
+          git=lambda *a:subprocess.check_output(['git',*a],text=True).strip()
+          assert os.environ['GITHUB_REF']=='refs/heads/'+branch
+          assert git('rev-parse','HEAD')==os.environ['GITHUB_SHA']
+          assert git('rev-parse','HEAD^')==base,'Unexpected installer parent'
+          packed=''.join((root/f'.github/issue96-payload/{i}.b64').read_text() for i in range(5))
+          raw=gzip.decompress(base64.b64decode(packed,validate=True))
+          assert hashlib.sha256(raw).hexdigest()=='5a799aeb13b62468eaba0b48c02d48252ba06353ce8b301fcc94d31946b2dc55'
+          payload=json.loads(raw);assert payload['base']==base
+          assert len(payload['files'])==39
+          allowed_prefixes=('site/','src/server/','supabase/functions/','tests/')
+          allowed_files={'.github/workflows/security-inspection.yml','docs/CURRENT_STATUS.md','docs/RELEASE_QUEUE.json','docs/audits/2026-10-23-security-inspection.md','netlify/functions/coffee-url-preview.mjs','scripts/audit/isolated-sql-regression.sh','scripts/audit/security-inventory.mjs','supabase/tests/security_surface_inventory.sql'}
+          prepared={}
+          for entry in payload['files']:
+              name=entry['path'];p=pathlib.PurePosixPath(name)
+              assert not p.is_absolute() and '..' not in p.parts and name not in prepared
+              assert name in allowed_files or name.startswith(allowed_prefixes)
+              path=root/name
+              assert not path.is_symlink()
+              before=path.read_bytes() if path.exists() else b''
+              if entry['old'] is None:assert not path.exists()
+              else:assert hashlib.sha256(before).hexdigest()==entry['old'],name+' base mismatch'
+              text=before.decode('utf-8');end=len(text)
+              for a,b,value in reversed(entry['ops']):
+                  assert isinstance(a,int) and isinstance(b,int) and 0<=a<=b<=end
+                  assert isinstance(value,str)
+                  text=text[:a]+value+text[b:];end=a
+              after=text.encode('utf-8')
+              assert hashlib.sha256(after).hexdigest()==entry['new'],name+' result mismatch'
+              prepared[name]=after
+          for name,data in prepared.items():
+              path=root/name;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data)
+          journal=root/'docs/workstreams/issue-96.md'
+          journal.write_text(journal.read_text()+'\n\n## Reviewed source repairs transferred, TESTING only\nOwner instructed completion of all unfinished Issue96 work. Six findings are repaired in this same source commit: approved digit/symbol password composition; bounded byte/time/UTF8 request parsing in both Edge handlers and Netlify; truthful catalog-cache provenance; preserved notes with explicit 16000-character validation; current privacy copy; monotonic HTML raw-element processing and bounded attribute parsing. Local full Node suite672/672 PASS, original/adversarial parser cases and mocked real Edge handlers included. Expanded metadata stress failure was repaired before transfer. All39 payload files independently matched original and resulting SHA256 before this commit; temporary installer/payload removed. No deployed source, hosted SQL, Edge, Auth, member record, permission or purchase changed. #93 READY retained. Issue96 queue remains TESTING until applicable exact-source CI, review and nonforce integration/readback. Live read-only catalog46 RLS tables/43 policies/90 functions;22shots/22notes/5accounts/2Community/48receipts unchanged. One read-only audit SQL syntax error was corrected with no mutation. Full manual every historical line, real signed production sessions and inaccessible provider settings are not claimed.\n')
+          for i in range(5):(root/f'.github/issue96-payload/{i}.b64').unlink()
+          (root/'.github/workflows/issue96-apply-reviewed.yml').unlink()
+          paths=list(prepared)+['docs/workstreams/issue-96.md','.github/issue96-payload','.github/workflows/issue96-apply-reviewed.yml']
+          subprocess.run(['git','add','-A','--',*paths],check=True)
+          print('Verified and staged',len(prepared),'source files; installer removed; no publication')
+          PY
+      - name: Advance only the existing audit branch nonforce
+        shell: bash
+        run: |
+          set -eu
+          BRANCH=work/issue96-security-audit-20261023
+          ACTUAL=$(git ls-remote origin refs/heads/$BRANCH | cut -f1)
+          test "$ACTUAL" = "$GITHUB_SHA"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix: harden input parsing and preserve approved data behavior [skip netlify]'
+          git push origin HEAD:refs/heads/$BRANCH
+          git rev-parse HEAD
