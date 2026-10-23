@@ -12,7 +12,7 @@
       "issue": 93,
       "pr": null,
       "title": "Keep collapsed Admin counters accurate and refresh them without loading record pages",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "6af607ada105b0c406829e8577e8ad7c543ab52d",
       "scope_paths": [
         "site/admin/main.js",
@@ -20,19 +20,17 @@
         "site/admin/records.js"
       ],
       "tests": [
-        "Source commit 6af607ada105b0c406829e8577e8ad7c543ab52d full Node/lint/build GitHub validate SUCCESS; cloud-tests SUCCESS and approval SUCCESS; mobile Chromium browser job 39892795034 still installing Playwright, no PASS claim. Current source checks for collapsed counts and summary-only refresh regression included.",
-        "Two earlier red CI attempts were test assertion/markup mismatches; repaired with existing markup preserved and final three green CI jobs."
+        "Exact implementation SHA 6af607ada105b0c406829e8577e8ad7c543ab52d: GitHub full Node/lint/build validate run 39892795031 SUCCESS, approval run 39892795082 SUCCESS, cloud-tests run 39892795034 SUCCESS, mobile-browser-qa in same run SUCCESS; readback completed/conclusion success and both jobs complete.",
+        "Collapsed count and background count refresh regressions passed, existing Admin markup tests preserved. Earlier red runs were repaired and retained as journal evidence. No real signed-in production browser proof; browser QA uses synthetic accounts."
       ],
       "ci_runs": [
         39892795031,
         39892795034,
         39892795082
       ],
-      "blockers": [
-        "Relevant mobile-browser-qa exact-source check is still in progress; must read back completed SUCCESS before READY."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/93",
-      "notes": "No production write or deployment; preserves lazy record loading, permissions, search-filtered expanded totals, and active forms."
+      "notes": "READY for next separately owner-authorized release. Preserve 45s summary-only refresh, lazy record pages, expanded filtered total, admin role protections. Not deployed."
     }
   ],
   "history": [
@@ -456,6 +454,6 @@
       "delivered_at_utc": "2026-10-23T01:48:46.334Z"
     }
   ],
-  "last_reconciled_utc": "2026-10-23T03:08:19.713Z",
+  "last_reconciled_utc": "2026-10-23T03:12:15.835Z",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }

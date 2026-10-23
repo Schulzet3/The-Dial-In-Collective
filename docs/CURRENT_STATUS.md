@@ -1,3 +1,6 @@
+# 2026-10-23 — Issue #93 Admin collapsed-count fix READY, not yet deployed
+- Corrected source `6af607ada105b0c406829e8577e8ad7c543ab52d` passed exact-source Node/lint/build (`39892795031`), cloud regression and synthetic 390px mobile Admin browser (`39892795034`), approval (`39892795082`). Existing section lazy loading preserved; server dashboard totals now populate collapsed Approved Coffees/Logged Shots, counts refresh with low-overhead 45-second/foreground fetch without opening sections. Issue #93 queued READY pending a future separate owner publish command. Production remains release `f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f` without this fix.
+
 # 2026-10-23T02:58:37.411Z — Issue #93 Admin collapsed counts fix in TESTING, not published
 - Screenshot shows zero Approved Coffees and Logged Shots in collapsed headings even though live Supabase has 7 and 22 respectively. Root cause and candidate repair in development: use dashboard totals for collapsed pages and lightweight 45-second/focus count refresh without loading private rows. Add tests and exact-source CI before READY; existing production remains unchanged. Issue #93.
 
