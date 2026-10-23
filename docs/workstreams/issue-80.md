@@ -41,3 +41,7 @@ First PR approval CI failed correctly: the workflow audit script is operational 
 
 ## 2026-10-23 — Issue #93 precise CI test fixture repair
 - Existing Admin render contracts now pass on source 3fb5de8251c37a48971c3fc5b1693ce8cb427c69. New test added an unrelated assertion that hidden unloaded page markup contain no pagination, which is not the user-reported count defect and is not required for collapsed `<details>` behavior; this caused one full Node/cloud failure. Removed only that over-constraining assertion, preserving exact independent count assertions and source lightweight refresh test. Reverify exact-source CI before marking READY. No production writes or publication.
+
+
+## 2026-10-23 — Issue #93 exact-source green Node, cloud and approval; mobile dependency still running
+- Final source 6af607ada105b0c406829e8577e8ad7c543ab52d: Node full tests/build GitHub run 39892795031 SUCCESS, cloud-tests run 39892795034 SUCCESS, approval run 39892795082 SUCCESS. Mobile-browser-qa job 120216213676 in run 39892795034 remained IN_PROGRESS at Chromium dependency install as of 03:08 UTC; do not claim browser pass or READY until actual outcome. Queue remains TESTING; no deployment. Earlier reds were repaired and included in journal.

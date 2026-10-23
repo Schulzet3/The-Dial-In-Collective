@@ -13,18 +13,23 @@
       "pr": null,
       "title": "Keep collapsed Admin counters accurate and refresh them without loading record pages",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "6af607ada105b0c406829e8577e8ad7c543ab52d",
       "scope_paths": [
         "site/admin/main.js",
         "site/admin/view.js",
         "site/admin/records.js"
       ],
       "tests": [
-        "Source branch candidate adds server-dashboard totals to unopened Approved/Shots, and independent light summary-only 45-second/focus refresh. Node/browser exact-source CI PENDING."
+        "Source commit 6af607ada105b0c406829e8577e8ad7c543ab52d full Node/lint/build GitHub validate SUCCESS; cloud-tests SUCCESS and approval SUCCESS; mobile Chromium browser job 39892795034 still installing Playwright, no PASS claim. Current source checks for collapsed counts and summary-only refresh regression included.",
+        "Two earlier red CI attempts were test assertion/markup mismatches; repaired with existing markup preserved and final three green CI jobs."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        39892795031,
+        39892795034,
+        39892795082
+      ],
       "blockers": [
-        "Exact-source Node/build/browser CI and integration readback pending."
+        "Relevant mobile-browser-qa exact-source check is still in progress; must read back completed SUCCESS before READY."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/93",
       "notes": "No production write or deployment; preserves lazy record loading, permissions, search-filtered expanded totals, and active forms."
@@ -451,6 +456,6 @@
       "delivered_at_utc": "2026-10-23T01:48:46.334Z"
     }
   ],
-  "last_reconciled_utc": "2026-10-23T02:58:37.411Z",
+  "last_reconciled_utc": "2026-10-23T03:08:19.713Z",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }
