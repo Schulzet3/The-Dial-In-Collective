@@ -189,3 +189,36 @@ Colombia, Ethiopia; no conflicts; one HTML and one JSON read; Unverified remains
 Final local suite: **778/778 PASS**, zero failures, skips, cancellations or todo,
 Node 24.19.0, 11.54 seconds. Approval coverage and diff checks pass. Exact-source
 hosted and live acceptance precede integration and READY; no publication.
+
+## Final integrated receipt — READY, not deployed
+
+Final tested source `df9956fa269c705e98bc509a62146f491ce83c99`, synthetic merge
+`4999b835030ccde9828ee08e3b38d8384f82152b`, and non-force PR99 merge
+`126304178bf255894af44633587052c7ef3b56d5` all have tree `cf3023ec7b1a47ea278f06c511b2a0a5845ef885`.
+All 36 changed/new local source blobs were independently verified against the
+GitHub tree before the final code commit. The integration and branch were read
+back. Final PR workflows passed: 40018972019, 40018972022, 40018972061, 40018972023, 40018972060, 40018972080, 40018964681.
+Applicable merged-source workflows passed: 40019580174, 40019580251, 40019580211, 40019580226.
+
+Final Node 22.23.3 validation is 778/778 with zero failures, skips, cancellations
+or todo; lint/build/dist privacy checks pass. Browser/mobile, visual/offline,
+packaged-app, isolated SQL/signed HTTP/recovery, security and approval/continuity
+steps actually ran and passed. No optimized skipped check is reported as a test.
+
+Live source run 40018964681 passes all 10 required cases and 72 assertions, with
+zero observed gaps and all 10 sanitized HTML comparisons identical. Artifact
+12528679791 was independently downloaded and its SHA256 verified:
+dc44c8677fdce8e84bb8369b64ad19a52420171d87b3ac2e019152802d669845.
+The clean source and workflow SHAs both equal the final tested source. The run
+made 19 public requests, consumed no member quota, and made no real backend
+requests, production writes or deployments. Earlier failed assertions and their repairs
+remain recorded above and in the audit; their failures are not relabeled.
+
+Canonical status, ledger, coverage and release queue are synchronized in this
+documentation-only receipt. The queue covers exactly all 13 unpublished app
+paths and is READY with no scoped blockers. Production release
+99ad6148e1a540619d67adb07b18f32c93dee9db and Netlify READY/current
+6adb71e2a2e52cd3bbeef5e5 were read back unchanged. No hosted SQL/Edge/Auth,
+member records or publication changes. Existing saved coffees are not rewritten.
+Source development is complete; a future separately authorized release must
+use the existing scoped one-command publication process.

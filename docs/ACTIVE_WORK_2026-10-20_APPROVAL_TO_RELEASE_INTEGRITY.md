@@ -1,18 +1,27 @@
-## October 23, 2026: Issue33 extractor completeness TESTING, not published
+## October 23, 2026: Issue #33 extractor completeness READY, not deployed
 
-The owner-reported Sweet Bloom Bourbon Ají failure is reproduced and repaired in
-source, with broader semantic layouts, accessible product-image text, source
-conflict handling and cache/endpoint enrichment. Saved-source replay and focused
-regressions pass; final Node22/lint/build, browser checks, refreshed live source
-acceptance and non-force integration are underway. See the indexed
-[Issue33 journal](workstreams/issue-33.md) and
+PR99 is merged at `126304178bf255894af44633587052c7ef3b56d5`. Its tree
+`cf3023ec7b1a47ea278f06c511b2a0a5845ef885` is identical to the tested final source
+`df9956fa269c705e98bc509a62146f491ce83c99` and the tested PR merge tree. All seven final
+PR workflows and the applicable merged-source checks pass: 778 Node 22 tests,
+lint/build, approval/continuity, security inventory, isolated database checks,
+browser/mobile/visual/offline, and live public-source acceptance.
+
+The final live run passes all 10 cases and 72 source assertions with no gaps,
+including Bourbon Ají and the full published Sweet Bloom details, the expanded
+roaster layouts, and Onyx's explicitly declared two-country blend and partial
+espresso guide. All 10 sanitized HTML comparisons agree. Reviewable conflicts,
+missing/graphic-only facts, and the existing explicit-save behavior remain.
+
+Queue item `DIC-Q-33-product-completeness` is READY with all 13 deployable paths
+and no scoped blockers. See the [Issue #33 journal](workstreams/issue-33.md) and
 [acceptance record](audits/2026-10-23-extractor-completeness.json).
 
-The actual latest deployed batch remains DIC-20261023-READY-QUEUE-05, release
+The published batch remains DIC-20261023-READY-QUEUE-05, release
 `99ad6148e1a540619d67adb07b18f32c93dee9db`, Netlify READY/current
-`6adb71e2a2e52cd3bbeef5e5`. Its #93/#96 records are DEPLOYED history. The older
-unpublished paragraphs below are dated history. This work changes no hosted SQL,
-Edge functions, member records or publication state.
+`6adb71e2a2e52cd3bbeef5e5`, independently read back unchanged. No publication,
+hosted SQL/Edge/Auth change or member-data mutation occurred. A separate owner
+publish instruction remains required by the existing project release policy.
 
 ---
 
