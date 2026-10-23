@@ -337,7 +337,7 @@ class CloudApp {
    <section class="settings-section" aria-label="Community and privacy">
     <details class="advanced settings-advanced">
      <summary>Community &amp; Privacy</summary>
-     <p class="helper">Dialed-In shots from verified coffees contribute anonymously after validation. Qualifying contributions may remain even if you hide a personal shot or delete your account; private notes, account names, and personal setup details are never shared.</p>
+     <p class="helper">Eligible Dialed-In shots from approved coffees contribute anonymously after validation. Community does not show private notes, account names, or personal setup details. Authorized administrators can review account-linked records and notes. Remove Access is reversible and retains your records and Community contributions.</p>
     </details>
    </section>
    <section class="settings-section settings-system" aria-label="Cloud Sync">

@@ -1,3 +1,4 @@
+import {readBoundedJson,RequestBodyError} from '../_shared/request-budget.mjs';
 // Read-only, authenticated official-roaster URL preview.
 // No coffee facts are saved, no AI keys are used, and raw arbitrary hosts
 // are never fetched. Supabase's Edge JWT verification must remain enabled.
@@ -49,7 +50,7 @@ Deno.serve(async req=>{
        service=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
  if(!base||!anon||!service)return respond({ok:false,reason:'not_configured'},503,origin);
  try{
-  const body=await req.json();const source_url=body?.source_url;
+  const body=await readBoundedJson(req);const source_url=body?.source_url;
   if(typeof source_url!=='string'||source_url.length>4000)return respond({ok:false,reason:'invalid_url'},400,origin);
   let url;try{url=new URL(source_url);}catch{return respond({ok:false,reason:'invalid_url'},400,origin);}
   if(url.protocol!=='https:'||url.port||url.username||url.password||url.hash||
@@ -81,5 +82,5 @@ Deno.serve(async req=>{
   });
   if(!lookupError)match=lookup;
   return respond({...preview,source_url:checked,match},200,origin);
- }catch{return respond({ok:false,reason:'preview_unavailable'},200,origin);}
+ }catch(error){if(error instanceof RequestBodyError)return respond({ok:false,reason:error.code},error.status,origin);return respond({ok:false,reason:'preview_unavailable'},200,origin);}
 });

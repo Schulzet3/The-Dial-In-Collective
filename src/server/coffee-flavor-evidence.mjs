@@ -1,7 +1,8 @@
+import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 // Bounded product-specific flavor evidence. No AI, cross-page navigation,
 // guessed flavor dictionary or related-product tasting notes.
 const topOfProduct=(html)=>{
- const match=/<h1\b[^>]*>[\s\S]{0,12000}?<\/h1>/i.exec(html);
+ const match=/<h1\b[^<>]*>[\s\S]{0,12000}?<\/h1>/i.exec(html);
  return match?html.slice(match.index+match[0].length,match.index+match[0].length+16000):'';
 };
 function shortFlavorList(raw,clean){
@@ -13,13 +14,13 @@ function shortFlavorList(raw,clean){
  return text;
 }
 function namedClassValue(html,tag,className,clean){
- const re=new RegExp('<'+tag+'\\b[^>]{0,850}\\bclass=["\\x27][^"\\x27]*\\b'+className+'\\b[^"\\x27]*["\\x27][^>]*>([\\s\\S]{0,1300}?)<\\/'+tag+'\\s*>','i');
+ const re=new RegExp('<'+tag+'\\b[^<>]{0,850}\\bclass=["\\x27][^"\\x27]*\\b'+className+'\\b[^"\\x27]*["\\x27][^<>]*>([\\s\\S]{0,1300}?)<\\/'+tag+'\\s*>','i');
  return clean(re.exec(html)?.[1]||'',200);
 }
 function sipComparisonNotes(html,clean){
  // A named TAKE A SIP section describes this one coffee's flavor.
  // Only explicit comparison nouns count, not arbitrary story adjectives.
- const at=html.search(/<strong\b[^>]*>\s*TAKE A SIP\s*[|:]\s*<\/strong>/i);
+ const at=html.search(/<strong\b[^<>]*>\s*TAKE A SIP\s*[|:]\s*<\/strong>/i);
  if(at<0)return '';
  const block=html.slice(at,at+2600).split(/<\/p\s*>/i)[0];
  const text=clean(block,1700);
@@ -37,8 +38,8 @@ function sipComparisonNotes(html,clean){
 // Keep the literal flavor nouns instead of machine-translating or guessing a
 // dictionary. No neighboring coffee, general processing or education text.
 function frenchProductSensoryNotes(html,clean){
- const after=topOfProduct(html).replace(/<svg\b[^>]*>[\s\S]*?<\/svg\s*>/gi,' ');
- for(const m of after.matchAll(/<p\b[^>]{0,350}>([\s\S]{30,1600}?)<\/p\s*>/gi)){
+ const after=removeElements(topOfProduct(html),['svg']);
+ for(const m of after.matchAll(/<p\b[^<>]{0,350}>([\s\S]{30,1600}?)<\/p\s*>/gi)){
   const prose=clean(m[1],780);
   const cue=/\bnotes?\s+florales?[^.!?()]{0,90}\(([\p{L}\p{M}'’ -]{2,40})\)/iu.exec(prose);
   if(!cue)continue;
@@ -55,7 +56,7 @@ function frenchProductSensoryNotes(html,clean){
 // Explicit flavor-profile markup for the *selected* product; never global SEO,
 // unlabeled marketing, footer content or nearby product recommendations.
 function labeledFlavorChips(top,clean){
- const re=/<(p|div|ul|ol|section)\b([^>]{0,950})>([\s\S]{0,2300}?)<\/\1\s*>/gi;
+ const re=/<(p|div|ul|ol|section)\b([^<>]{0,950})>([\s\S]{0,2300}?)<\/\1\s*>/gi;
  const named=/\b(?:tasting[-_ ]?notes?|taste[-_ ]?notes?|flavou?r[-_ ]?notes?|flavou?r[-_ ]?profile|cupping[-_ ]?notes?)\b/i;
  for(const m of top.matchAll(re)){
   const props=[...m[2].matchAll(/\b(?:class|data-[\w-]+|aria-label)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)]
@@ -64,11 +65,11 @@ function labeledFlavorChips(top,clean){
   const body=m[3];
   let value='';
   if(/^(?:ul|ol)$/i.test(m[1])){
-   const parts=[...body.matchAll(/<li\b[^>]{0,350}>([\s\S]{1,320}?)<\/li\s*>/gi)]
+   const parts=[...body.matchAll(/<li\b[^<>]{0,350}>([\s\S]{1,320}?)<\/li\s*>/gi)]
     .map(x=>clean(x[1],65)).filter(Boolean);
    if(parts.length>=2&&parts.length<=7)value=parts.join(', ');
   }else{
-   const parts=[...body.matchAll(/<(?:span|li)\b[^>]{0,350}>([^<>]{1,105})<\/(?:span|li)\s*>/gi)]
+   const parts=[...body.matchAll(/<(?:span|li)\b[^<>]{0,350}>([^<>]{1,105})<\/(?:span|li)\s*>/gi)]
     .map(x=>clean(x[1],65)).filter(Boolean);
    value=parts.length>=2&&parts.length<=7?parts.join(', '):clean(body,175)
     .replace(/^(?:tasting|taste|flavou?r|cupping)\s*(?:notes?|profile)\s*[:\u2014-]\s*/i,'');
@@ -84,9 +85,9 @@ export function extractProductFlavorEvidence(html,{clean}={}){
  // Named, merchant-owned product containers must be near the selected H1.
  // Avoid promotion of checkout/footer/related coffee names or vague SEO.
  const top=topOfProduct(html);
- const onyx=top.match(/<p\b[^>]{0,550}\bclass=["'][^"']*\btasting-notes\b[^"']*["'][^>]*>([\s\S]{0,2100}?)<\/p>/i);
+ const onyx=top.match(/<p\b[^<>]{0,550}\bclass=["'][^"']*\btasting-notes\b[^"']*["'][^<>]*>([\s\S]{0,2100}?)<\/p>/i);
  if(onyx){
-  const notes=[...onyx[1].matchAll(/<span\b[^>]{0,550}\bclass=["'][^"']*\bnote\b[^"']*["'][^>]*>([\s\S]{0,150}?)<\/span>/gi)]
+  const notes=[...onyx[1].matchAll(/<span\b[^<>]{0,550}\bclass=["'][^"']*\bnote\b[^"']*["'][^<>]*>([\s\S]{0,150}?)<\/span>/gi)]
    .map(m=>clean(m[1],55)).filter(Boolean);
   const value=notes.length?notes.join(', '):clean(onyx[1],160);
   const accepted=shortFlavorList(value,clean);

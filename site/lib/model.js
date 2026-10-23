@@ -137,6 +137,9 @@ export function hasLocalSuccess(s,coffeeId,style) {
 }
 export function validateShot(d) {
  const errors=[];
+ // PostgreSQL length(text) counts Unicode code points, not UTF-16 units.
+ // Reject excess before enqueue/save; never silently discard a member's text.
+ if(Array.from(String(d.notes||'')).length>16000)errors.push('Notes must be 16,000 characters or fewer. Your text has not been saved or shortened.');
  for(const field of ['doseG','yieldG','timeS']){const n=num(d[field]),[lo,hi]=CONFIG.bounds[field];if(n==null||n<lo||n>hi)errors.push(`${{doseG:'Dose',yieldG:'Yield',timeS:'Time'}[field]} must be between ${lo} and ${hi}${field==='timeS'?' s':' g'}.`);}
  if(num(d.grindSetting)==null||num(d.grindSetting)<0)errors.push('Enter the actual grind setting (0 or higher).');
  if(d.tempC!==''&&d.tempC!=null){const n=num(d.tempC);if(n==null||n<70||n>100)errors.push('Check temperature (70-100 degrees C).');}

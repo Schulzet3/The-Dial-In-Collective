@@ -16,7 +16,7 @@ const publicStoreIds=html=>{
  const all=new Set();
  if(typeof html!=='string'||html.length>2_000_000)return all;
  // An actual script-src reference, not a free-floating marketing mention.
- for(const tag of html.match(/<script\b[^>]{0,1800}>/gi)||[]){
+ for(const tag of html.match(/<script\b[^<>]{0,1800}>/gi)||[]){
   const source=tag.match(/\bsrc\s*=\s*["'](https:\/\/app\.ecwid\.com\/script\.js\?\d{5,14}(?:&[^"'<>]{0,260})?)["']/i)?.[1];
   const id=source?.match(/^https:\/\/app\.ecwid\.com\/script\.js\?(\d{5,14})(?:&|$)/i)?.[1];
   if(id)all.add(id);

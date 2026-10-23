@@ -1,3 +1,4 @@
+import {rawElements,removeElements} from '../_shared/html-scan.mjs';
 // Deterministic official-product evidence parser. No AI calls, no HTML execution.
 // This file is shared by Deno Edge and the Node regression suite.
 export function normalizeWords(value) {
@@ -38,9 +39,9 @@ function walkProduct(data,products,limit=0) {
 }
 function metas(html) {
  const out={};
- for(const tag of html.match(/<meta\b[^>]{0,1800}>/gi)||[]){
+ for(const tag of html.match(/<meta\b[^<>]{0,1800}>/gi)||[]){
   const attributes={};
-  for(const x of tag.matchAll(/([a-z-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi))
+  for(const x of tag.matchAll(/(?:^|[\s<])([a-z-]{1,64})\s*=\s*(?:"([^"]*)"|'([^']*)')/gi))
    attributes[x[1].toLowerCase()]=decodeHtml(x[2]??x[3]);
   const key=(attributes.property||attributes.name||'').toLowerCase();
   if(key==='og:title'||key==='og:type'||key==='description')out[key]=attributes.content||'';
@@ -55,16 +56,15 @@ function uniqueProductHeading(html,sourceUrl,meta){
   const url=new URL(sourceUrl);
   if(!/^\/(?:products|product)\/[a-z0-9][a-z0-9._~%+-]*\/?$/i.test(url.pathname))return null;
  }catch{return null;}
- const headings=[...html.matchAll(/<h1\b[^>]{0,400}>([\s\S]{0,320}?)<\/h1>/gi)]
-  .map(x=>({index:x.index,name:decodeHtml(x[1].replace(/<[^>]*>/g,' ')).replace(/\s+/g,' ').trim()}))
+ const headings=[...html.matchAll(/<h1\b[^<>]{0,400}>([\s\S]{0,320}?)<\/h1>/gi)]
+  .map(x=>({index:x.index,name:decodeHtml(x[1].replace(/<[^<>]*>/g,' ')).replace(/\s+/g,' ').trim()}))
   .filter(x=>x.name&&!/^(shop|products?|coffees?|search|home|menu)$/i.test(x.name));
  if(headings.length!==1)return null;
  const heading=headings[0];
  const local=html.slice(heading.index,heading.index+4800);
- const bounded=local.split(/<footer\b|<h[2-4]\b[^>]*>\s*(?:more coffees|related products|you may also like)/i)[0];
- const description=decodeHtml(bounded.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,' ')
-  .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ')
-  .replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')).slice(0,1000);
+ const bounded=local.split(/<footer\b|<h[2-4]\b[^<>]*>\s*(?:more coffees|related products|you may also like)/i)[0];
+ const description=decodeHtml(removeElements(bounded,['script','style'])
+  .replace(/<[^<>]*>/g,' ').replace(/\s+/g,' ')).slice(0,1000);
  return {name:heading.name,description:description||meta.description||'',url:sourceUrl,
   kind:'official_product_page',attributes:null};
 }
@@ -73,7 +73,7 @@ function explicitReleaseYears(product){
  // Keep sentence punctuation: "our company started in 2025. Harvest 2024"
  // must not turn a nearby unrelated year into release evidence.
  const description=String(product.description||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'')
-  .toLowerCase().replace(/<[^>]*>/g,' ').slice(0,1000);
+  .toLowerCase().replace(/<[^<>]*>/g,' ').slice(0,1000);
  const date='(?:19|20)\\d\\d(?:\\s*[/–—-]\\s*(?:(?:19|20)?\\d\\d))?';
  const label='(?:harvest|crop|release|season|selection)';
  const before=new RegExp('\\b'+label+'(?:\\s+year)?(?:\\s+(?:for|of|in|from))?\\s*[:–—-]?\\s*('+date+')\\b','g');
@@ -125,7 +125,9 @@ export function productNameMatches(entered,productName) {
 export function extractOfficialEvidence(html,submitted) {
  if(typeof html!=='string'||html.length>950000)return {ok:false,reason:'page_too_large'};
  const products=[];
- for(const [,attrs,payload] of html.matchAll(/<script\b([^>]{0,1000})>([\s\S]*?)<\/script\s*>/gi)){
+ for(const block of rawElements(html)){
+  if(!block.closed||block.attributes.length>1000)continue;
+  const attrs=block.attributes,payload=block.body;
   if(!/\btype\s*=\s*["']application\/ld\+json["']/i.test(attrs)||payload.length>180000)continue;
   try{walkProduct(JSON.parse(payload),products);}catch{ /* Broken source markup never becomes approval evidence. */ }
  }
