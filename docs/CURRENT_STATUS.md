@@ -1,3 +1,11 @@
+## October 24, 2026: Issue #10 extended two-family acceptance — isolated tests PASS; issue OPEN
+
+Owner-approved follow-up test PR #106 merged nonforce at `1a6570ed8c43dacf6bca7a6239b8c5fae1f06130`. Its head `fd7f55048a29b8b47d882d4923dcbf45958888ee` passed **788/788 Node tests**, isolated PostgreSQL 17.11 two-family authenticated switch/return, stale revision, state reload, equipment version denial, candidate/confirmed/retired and cross-account privacy **ROLLBACK**, plus injected browser, mobile, visual, offline, cloud and approval checks. All six merged-source check runs also completed SUCCESS. No app behavior or deployable paths changed; existing #10, #5, #33, #100 release queue items stay READY as previously verified.
+
+**Issue #10 must remain open:** the live Supabase database still contains **0** actual same-member same-coffee/style/setup groups with 2+ eligible families. Exact real hosted authenticated switching/reload/equipment/offline acceptance remains UNPERFORMED; pending `20261024021000_dic_personal_family_lifecycle_integrity.sql` is NOT APPLIED. The approved ONE visible recipe plus internal families remains unchanged. No production records, migration or Netlify publication were modified. Details: [Issue #10 journal](workstreams/issue-10.md).
+
+---
+
 ## 2026-10-24 UTC: Issue #5 source integrity READY, NOT DEPLOYED
 
 PR #105 source fix was merged nonforce at `a034fb727f7fa7a0fbbfd74bbbca40d2fce9a651`. The trusted coffee verifier now rejects explicitly conflicting or ambiguous official Product metadata for origin, producer and process. The service-role-only source target gains the proposed producer via staged migration `20261024020500_dic_source_target_producer.sql`, **not applied to hosted Supabase**. New targeted Node and rollback-only SQL tests pass; six PR exact-source checks (40052571214, 40052571219, 40052571240, 40052571343, 40052571307, 40052571296) all passed and four exact merged-source checks (40052834393, 40052834378, 40052834521, 40052834386) all passed. Issue #10's concurrent READY queue changes were preserved. `DIC-Q-5-source-fact-integrity` is READY, with no production release or data mutation. Issue #5 is still OPEN until separately authorized source/Edge publication and scoped live acceptance; member catalog approval does not prove official roaster-page authenticity.
