@@ -28,6 +28,24 @@ function productUrl(raw,source){
   url.pathname.replace(/\/+$/,'')!==source.pathname.replace(/\/+$/,''))return null;
  return url;
 }
+// An independently selected Product can identify the public product page or
+// its conventional Product fragment. A schema entity ID on an arbitrary
+// product-page fragment must not bypass the direct hasVariant guard below.
+function selectedProductUrl(product,source){
+ const raw=Object.hasOwn(product,'url')?product.url:product['@id'];
+ const url=productUrl(raw,source);
+ return url&&(!url.hash||/^#(?:product|product-group)$/i.test(url.hash))?url:null;
+}
+// Preserve strictly public typed schema variants directly under the selected Product.
+function rootSchemaIdentity(raw,source,type){
+ if(typeof raw!=='string')return false;
+ const prefix=source.origin+'/#/schema/'+type+'/';
+ if(!raw.startsWith(prefix))return false;
+ const url=httpsUrl(raw);
+ const tail=raw.slice(prefix.length);
+ return Boolean(url&&url.origin===source.origin&&url.pathname==='/'&&!url.search&&
+  tail.length>=1&&tail.length<=200&&[...tail].every(char=>/[A-Za-z0-9._~-]/.test(char)));
+}
 function selectedOfferVariant(offer,source,parentVariant){
  if(!offer||typeof offer!=='object'||!hasType(offer,'offer'))return null;
  // An explicit URL has priority. A contradictory URL must not be rescued
@@ -51,37 +69,33 @@ function publicTemplate(value,source,variant){
   url.searchParams.get('id')===variant&&numericVariant.test(variant)&&
   /^(?:[1-9]|[1-9]\d)$/.test(url.searchParams.get('quantity')||'');
 }
-function inheritedSchemaVariant(product,source){
- // A direct selected-product hasVariant may use an entity ID rather than
- // a purchase URL. The Offer must still provide its own exact public URL.
- if(!product||typeof product!=='object'||Array.isArray(product)||
-  !(hasType(product,'product')||hasType(product,'productgroup'))||
-  Object.hasOwn(product,'url')||!Object.hasOwn(product,'@id'))return false;
- const id=httpsUrl(product['@id'],source.href);
- return Boolean(id&&id.origin===source.origin&&id.pathname==='/'&&!id.search&&
-  /^#\/schema\/Product\/[a-z0-9._~-]{1,200}$/i.test(id.hash));
-}
 function selectedPublicOffers(value,source){
  const offers=new WeakMap(),seen=new WeakSet(),stack=[[value,0]];
  let visited=0;
- const addOffers=(item,parentVariant,depth=0,explicitUrl=false)=>{
+ const addOffers=(item,parentVariant,depth=0,requireSchemaOffer=false)=>{
   if(!item||typeof item!=='object'||depth>8)return;
-  if(Array.isArray(item)){for(const child of item.slice(0,512))addOffers(child,parentVariant,depth+1,explicitUrl);return;}
-  const variant=explicitUrl&&!Object.hasOwn(item,'url')?null:selectedOfferVariant(item,source,parentVariant);
-  if(variant)offers.set(item,variant);
-  else if(hasType(item,'aggregateoffer'))addOffers(item.offers,parentVariant,depth+1,explicitUrl);
+  if(Array.isArray(item)){for(const child of item.slice(0,512))addOffers(child,parentVariant,depth+1,requireSchemaOffer);return;}
+  const variant=requireSchemaOffer&&!Object.hasOwn(item,'url')?null:selectedOfferVariant(item,source,parentVariant);
+  if(variant&&(!requireSchemaOffer||rootSchemaIdentity(item['@id'],source,'Offer')))offers.set(item,variant);
+  else if(hasType(item,'aggregateoffer'))addOffers(item.offers,parentVariant,depth+1,requireSchemaOffer);
  };
  while(stack.length&&visited<20_000){
   const [item,depth]=stack.pop();
   if(!item||typeof item!=='object'||seen.has(item)||depth>32)continue;
   seen.add(item);visited++;
   if(!Array.isArray(item)&&(hasType(item,'product')||hasType(item,'productgroup'))){
-   const url=productUrl(Object.hasOwn(item,'url')?item.url:item['@id'],source);
+   const url=selectedProductUrl(item,source);
    if(url){
-    const parentVariant=url.searchParams.get('variant');
-    addOffers(item.offers,parentVariant);
-    for(const child of [].concat(item.hasVariant||[]).slice(0,512))
-     if(inheritedSchemaVariant(child,source))addOffers(child.offers,parentVariant,0,true);
+    addOffers(item.offers,url.searchParams.get('variant'));
+    if(!url.searchParams.has('variant')){
+     const variants=Array.isArray(item.hasVariant)?item.hasVariant:[item.hasVariant];
+     for(const child of variants.slice(0,512)){
+      if(!child||typeof child!=='object'||Array.isArray(child)||
+         !hasType(child,'product')||Object.hasOwn(child,'url')||
+         !rootSchemaIdentity(child['@id'],source,'Product'))continue;
+      addOffers(child.offers,null,0,true);
+     }
+    }
    }
   }
   for(const child of Object.values(item))if(child&&typeof child==='object')stack.push([child,depth+1]);

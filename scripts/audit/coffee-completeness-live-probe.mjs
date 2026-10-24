@@ -309,3 +309,4 @@ await writeFile(path.join(output,'results.json'),JSON.stringify(result,null,2)+'
 console.log('[DIC COMPLETENESS SUMMARY] '+JSON.stringify(result.summary));
 console.log('[DIC COMPLETENESS ARTIFACTS] '+output);
 if(requiredFailures.length)process.exitCode=1;
+// Issue #33 exact-source audit trigger: full sanitized NOMAD variant parity must hold.
