@@ -1,3 +1,8 @@
+## October 24 UTC — Nomad offers-only structure investigation
+40065666688 shows each of nine purchase variants differs only in nested public `offers` JSON, all other variant keys equivalent. Added bounded nested key-path diagnostics with sensitive key labels redacted, values never logged; strict parity stays mandatory. No runtime or production change. [dic-completeness-probe].
+
+---
+
 ## October 24 UTC — Nomad JSON-LD semantic mismatch confirmed
 Latest source acceptance 40065604312 confirms Nomad variant JSON values are semantically different (not just formatting), while Circulor and all other nine targets pass after safe product discriminator restoration. Strict parity remains enforced. Added diagnostic logging only the names/presence/types of top-level differing JSON keys, never their values. No runtime changes, no production writes. [dic-completeness-probe]
 

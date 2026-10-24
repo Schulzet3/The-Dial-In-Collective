@@ -116,6 +116,17 @@ function fixtureDifference(original,replay){
    parsed_json_equal:(()=>{try{return isDeepStrictEqual(JSON.parse(fact.value),JSON.parse(counterpart?.value));}catch{return false;}})(),
    normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(fact.value)));}catch{return null;}})(),
    replay_normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(counterpart?.value)));}catch{return null;}})(),
+   nested_offer_difference_paths:(()=>{try{
+     const before=JSON.parse(fact.value)?.offers,after=JSON.parse(counterpart.value)?.offers;
+     const paths=[],walk=(a,b,p,depth)=>{
+       if(depth>5||paths.length>20||isDeepStrictEqual(a,b))return;
+       if(a&&b&&typeof a==='object'&&typeof b==='object'){
+         for(const k of new Set([...Object.keys(a),...Object.keys(b)]))
+           walk(a[k],b[k],p+'/'+(sensitiveKey.test(k)?'[sensitive]':k),depth+1);
+       }else paths.push({path:p,before_present:a!==undefined,after_present:b!==undefined,
+         before_type:typeof a,after_type:typeof b});
+     };walk(before,after,'offers',0);return paths;
+   }catch{return ['parse_error'];}})(),
    json_difference_keys:(()=>{try{
     const a=JSON.parse(fact.value),b=JSON.parse(counterpart.value);
     if(!a||!b||typeof a!=='object'||typeof b!=='object')return [];
