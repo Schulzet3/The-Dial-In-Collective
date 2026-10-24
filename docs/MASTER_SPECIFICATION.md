@@ -1,5 +1,19 @@
 # The Dial In Collective — Master Specification
 
+## Locked owner-scoped test acceptance — Issues #5 and #10 (2026-10-23 MDT)
+
+**TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023 — ACCEPTED, scope limited to test evidence.** Exact owner approval: “Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10.”
+
+For GitHub Issues #5 and #10 only, the owner's explicitly accepted isolated PostgreSQL 17.11/PostgREST 12.2 cryptographically signed JWT acceptance (PR #107, 50/50 HTTP assertions, pre-merge and exact merged-source CI) replaces the prior requirement to obtain the corresponding real-member production-session testing evidence. The previously verified published production readbacks and public anonymous/invalid-JWT smoke remain distinct evidence. These synthetic signed tokens are not Supabase GoTrue member sessions and do not establish an actual official-roaster live fetch.
+
+**Not waived:** Preserve the full product behavior, authentication/admission, member data, provenance, privacy, source-identity, recipe-family decisions, publication authorization, and all untested system claims. This acceptance does NOT publish staged migration 20261024034800_dic_pending_retry_http_conflict.sql or waive the requirement to deploy a known fix before marking Issue #5 complete. It does NOT waive remaining Community source/contributor-balanced integration in Issue #12 expressly referenced by Issue #10, or independently owned experimental lifecycle Issue #13. It does not transfer this acceptance to unrelated issues or create permissions for future releases.
+
+**Closure requirements still outstanding at approval:** Issue #5's separately READY, unpublished retry HTTP conflict migration remains to be released with an independent owner publish command; Issue #10's original explicit Community contributor/source evidence tier integration tracked in #12 remains unfinished. The #13 post-rating experiments retain separate open requirements. Thus **neither original GitHub issue is automatically closed by this test-evidence supersession**. No additional site/Edge/SQL release, member-data writes, or changes to other Locked decisions are authorized.
+
+**Specific verified acceptance evidence:** PR #107 merged `d9607f9b505f26f66c607d431b82e19d5450473b`; isolated PostgreSQL 17.11 and PostgREST 12.2 **50/50** signed JWT HTTP assertions PASS; exact merged SHA CI approval 40059878206, Node/build 40059878199, isolated SQL/signed HTTP 40059878227, cloud/mobile 40059878239 all SUCCESS; premerge visual 40059738743 SUCCESS. Published site's public safety smoke 40058958473 was 6/6 PASS, **not a substitute claim for real-account authenticated hosted behavior**. See scope-specific issue journals and release queue for required publication receipts.
+
+---
+
 **Scoped same-commit journals — owner-approved Issue #80 (2026-10-22):** Preserve same-commit GitHub development continuity while allowing an indexed `docs/workstreams/issue-<N>.md`, `ops-<slug>.md` or `release-<YYYYMMDD>.md` work journal instead of requiring all concurrent branches to update one giant file. The central work checkpoint remains the recovery entrypoint; reconcile CURRENT_STATUS, issue history and the release queue at integration/READY. No relaxation of privacy, owner approval, release consent, tests or readback. This narrowly supersedes only the single-file checkpoint requirement.
 
 ## Owner-approved narrow UX refinements (2026-10-22, Issue #80)

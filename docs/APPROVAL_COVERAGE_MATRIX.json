@@ -6,6 +6,7 @@
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
+    "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023",
     "current_owner_admin_low_friction_review_20261021",
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
     "current_owner_admin_records_edit_20261021",
@@ -796,5 +797,30 @@
     "community_preservation": "BLOCK_COFFEE_WITH_QUALIFYING_COMMUNITY",
     "owner_release_authorization": "NOT_GIVEN",
     "merged_source_sha": "7150a72e15e661867b909fa31ee7f7443455deab"
+  },
+  "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023": {
+    "decision_id": "TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023",
+    "status": "ACCEPTED_SCOPED_TEST_EVIDENCE_NOT_ISSUE_CLOSED",
+    "owner_quote": "Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10.",
+    "issues": [
+      5,
+      10
+    ],
+    "accepted_only": "Synthetic authenticated HMAC signed PostgreSQL/PostgREST acceptance replaces real production member tests for exactly these two issues.",
+    "pr": 107,
+    "merge_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
+    "http_assertions_passed": 50,
+    "merged_source_ci": [
+      40059878206,
+      40059878199,
+      40059878227,
+      40059878239
+    ],
+    "real_production_session_tested": false,
+    "issue5_staged_fix_release": "READY_NOT_DEPLOYED",
+    "issue10_community_integration": "OUTSTANDING_ISSUE_12",
+    "issue13_independent": "OPEN",
+    "new_release_authorized": false,
+    "original_requirements_preserved_except_test_modality": true
   }
 }

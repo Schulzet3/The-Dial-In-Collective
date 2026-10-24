@@ -95,3 +95,7 @@ First signed local JWT/PostgREST run 40059377581 passed 47 assertions, including
 ## CI reconciliation: PR107
 
 Run 40059619954 passed isolated PostgreSQL 17.11 and all 50 signed local PostgREST JWT checks. Node run 40059620028 failed a historical receipt test that selected a new TESTING issue item before an already DEPLOYED historical item. Corrected receipt selection to bind the four previously deployed items to exact release DIC-20261024-READY-QUEUE-06. New stale-retry migration remains unpublished. Await CI rerun.
+
+## Owner test-evidence substitution, October 23/24 2026
+
+Owner explicitly accepts PR107 isolated signed-JWT integration testing in place of real-member session acceptance for Issues #5/#10 only (decision TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023, recorded in both canonical files). All 50 synthetic signed PostgREST HTTP assertions passed; no hosted GoTrue login. Issue #10 remains OPEN because the original criterion for contributor-balanced Community source/provenance hierarchy is unfinished in Issue #12. Issue #13 experiment lifecycle remains independent; no feature or release is waived beyond the exact test modality. The separate #5 stale retry migration is READY but unpublished. No production operation authorized.

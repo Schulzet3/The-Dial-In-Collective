@@ -2227,6 +2227,15 @@
       "decision": "Replace redundant Hold UI with no-action Pending; add compare/flag explanation and guarded one-confirm administrator deletion with dependent personal-shot cleanup.",
       "supersedes": "Earlier absence of Admin coffee/shot Delete UI and redundant Hold button only. Community durability, account retention, historical audit, permissions, release controls preserved.",
       "approval": "Owner explicitly requested Build it after approving screenshot and one-extra-click dependency-aware cascading shot deletion in project chat October 23."
+    },
+    {
+      "id": "TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023",
+      "status": "locked",
+      "date": "2026-10-23",
+      "title": "Accept isolated signed-JWT integration tests instead of production real-member acceptance for Issues #5 and #10",
+      "decision": "The owner explicitly accepted signed-JWT isolated PostgREST PostgreSQL tests as substitutes for the required real-member test evidence only in Issues #5/#10.",
+      "supersedes": "Only the real-member production-session test requirement for these two issues; not other acceptance clauses, live publication, contributor-balanced Community integration or experiment lifecycle.",
+      "approval": "Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10."
     }
   ],
   "open_current_owner_decisions": [],
@@ -4156,5 +4165,37 @@
     },
     "historical_scope": "Overrides only previous absence of administrator coffee/shot deletion and the Hold-for-Clarification UI option; does not authorize member-account deletion, arbitrary purging, Community destruction, other privacy or security policy changes.",
     "implementation": "READY_NOT_PUBLISHED: PR101 and PR102 merged; final source 7150a72e15e661867b909fa31ee7f7443455deab, applicable CI PASS. Production Supabase SQL and Netlify unchanged; separate publish required."
+  },
+  "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023": {
+    "decision_id": "TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023",
+    "status": "Locked owner-approved scoped acceptance substitution",
+    "owner_quote": "Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10.",
+    "owner_decision_date_local": "2026-10-23",
+    "issues": [
+      5,
+      10
+    ],
+    "substitutes_only": "Genuine real-member production-session acceptance evidence previously required for the Issue #5 official source/owner Pending Retry path and the Issue #10 two-eligible-family same-owner recipe switching tests.",
+    "accepted_evidence": {
+      "repository": "Schulzet3/The-Dial-In-Collective",
+      "pr": 107,
+      "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
+      "signed_http_assertions": "50/50 PASS in isolated PostgreSQL 17.11/PostgREST 12.2 with HMAC-signed CI-only JWT",
+      "merged_ci_runs": [
+        40059878206,
+        40059878199,
+        40059878227,
+        40059878239
+      ],
+      "premerge_visual_run": 40059738743,
+      "published_public_unauthenticated_security_smoke": 40058958473,
+      "provenance_limit": "Synthetic locally signed JWT is not a live Supabase GoTrue token; mock official product facts are not a current real roaster response."
+    },
+    "supersedes_only": "Exact original real-member acceptance test modality clauses of Issues #5 and #10; none of the underlying application behaviors or unrelated acceptance standards.",
+    "scope": "For GitHub Issues #5 and #10 only, the owner's explicitly accepted isolated PostgreSQL 17.11/PostgREST 12.2 cryptographically signed JWT acceptance (PR #107, 50/50 HTTP assertions, pre-merge and exact merged-source CI) replaces the prior requirement to obtain the corresponding real-member production-session testing evidence. The previously verified published production readbacks and public anonymous/invalid-JWT smoke remain distinct evidence. These synthetic signed tokens are not Supabase GoTrue member sessions and do not establish an actual official-roaster live fetch.",
+    "preserve": "Preserve the full product behavior, authentication/admission, member data, provenance, privacy, source-identity, recipe-family decisions, publication authorization, and all untested system claims. This acceptance does NOT publish staged migration 20261024034800_dic_pending_retry_http_conflict.sql or waive the requirement to deploy a known fix before marking Issue #5 complete. It does NOT waive remaining Community source/contributor-balanced integration in Issue #12 expressly referenced by Issue #10, or independently owned experimental lifecycle Issue #13. It does not transfer this acceptance to unrelated issues or create permissions for future releases.",
+    "remaining_to_close_issue_5": "Apply tested and queued but UNPUBLISHED 20261024034800_dic_pending_retry_http_conflict.sql only after a NEW explicit publish authorization; verify deployment receipt. Issue #5 remains OPEN.",
+    "remaining_to_close_issue_10": "Complete contributor-balanced cross-user Community evidence/source tier integration explicitly listed in #10 and tracked in #12. Issue #13 experimental lifecycle remains independent and OPEN. Issue #10 remains OPEN.",
+    "release_permission": "NOT_GRANTED"
   }
 }
