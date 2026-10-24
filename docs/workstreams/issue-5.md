@@ -7,3 +7,6 @@ Authorization: owner requested complete remaining focused tests and repairs, no 
 Confirmed gap: source parser checked explicit Process but not explicit Origin/Producer, and trusted server-only source target omitted proposed Producer. Narrow fix compares only independently stated JSON-LD Product additionalProperty fields, rejects ambiguous/conflicting facts, allows country-only versus region+country, never invents missing values. SQL target wrapper is service_role-only and read-only. Add Node negative tests and rollback-only SQL assertion. Preserve source host, release, role, freshness, retries, ownership, canonical identity, history and provenance.
 
 Staged migration `20261024020500_dic_source_target_producer.sql` is NOT applied. Supabase Edge/frontend remain unchanged live. No production records, credentials or provider settings touched. Source exact-SHA CI/merge and release readiness must be read back before calling this READY; real production negative observations unverified.
+
+## CI recovery
+Initial PR105 approval job 40052296053 failed because release queue scope_paths incorrectly listed two nondeployable test files. Approval coverage itself passed. Removed test-only paths from scope_paths while preserving test coverage, staged implementation and no-release boundary. Rerun exact-source PR checks required.

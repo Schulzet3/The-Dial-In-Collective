@@ -114,15 +114,13 @@
     {
       "id": "DIC-Q-5-source-fact-integrity",
       "issue": 5,
-      "pr": null,
+      "pr": 105,
       "title": "Trusted source rejects conflicting origin/producer metadata",
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
         "supabase/functions/dic-verify-coffee/evidence.mjs",
-        "supabase/migrations/20261024020500_dic_source_target_producer.sql",
-        "tests/coffee-source-verification.test.mjs",
-        "supabase/tests/source_worker_auth_and_admission.sql"
+        "supabase/migrations/20261024020500_dic_source_target_producer.sql"
       ],
       "tests": [
         "Targeted source conflict and rollback-only SQL producer tests added, pending exact-source CI; reuse existing source worker, role/revision/release and identity-preservation tests."
