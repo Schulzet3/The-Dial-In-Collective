@@ -1,3 +1,8 @@
+## October 24 UTC — diagnostic harness regex repair
+The prior same-branch diagnostic commit accidentally doubled backslashes in the newly added *diagnostic-only* regular expressions. Readback caught this before relying on its findings. Corrected them and rerun exact-source CI; normal extractor and frozen benchmark untouched. [dic-completeness-probe] [skip netlify].
+
+---
+
 ## October 24, 2026 UTC — Issue #33 source-parity isolation (diagnostic, NOT READY)
 Current owner authorizes no-cost GitHub source tests without publication. Preserved PR109 merged runtime and concurrent Issue12 Community work; existing focused branch parent 05221ec8. The prior live run 40063625090 failed only Nomad/Circulor fixture parity. Nomad canonical fields/conflicts/recipe remain identical but nine source variant records differ; Circulor loses source facts for Genesis producer and Sensory flavor and changes conflicts. This test-only update records extraction-equivalence after each in-memory sanitizer phase (JSON scripts, form controls/shell, inputs, privacy attribute protections) using hashes/field labels only, never persisting the raw public HTML or relaxing required parity. Run [dic-completeness-probe] on exact-source Actions; fix the identified cause and retest before READY. No production SQL, member data or release operation.
 

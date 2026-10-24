@@ -145,9 +145,9 @@ function fixtureStageDiagnostics(html,sourceUrl,original){
  const chunks=[];let cursor=0;
  for(const block of rawElements(compact)){
   chunks.push(compact.slice(cursor,block.start));
-  const type=block.attributes.match(/\\btype\\s*=\\s*["'](application\\/(?:ld\\+)?json)["']/i)?.[1];
+  const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
   if(type&&block.closed){
-   const id=block.attributes.match(/\\bid\\s*=\\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
+   const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
    try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
    catch{}
   }
@@ -156,12 +156,12 @@ function fixtureStageDiagnostics(html,sourceUrl,original){
  chunks.push(compact.slice(cursor));
  const scripts=chunks.join('');
  const controls=removeElements(scripts,['iframe','noscript','select','textarea']);
- const formless=controls.replace(/<\\/?form\\b[^<>]{0,8000}>/gi,' ');
- const inputless=controls.replace(/<input\\b[^<>]{0,4000}>/gi,'');
+ const formless=controls.replace(/<\/?form\b[^<>]{0,8000}>/gi,' ');
+ const inputless=controls.replace(/<input\b[^<>]{0,4000}>/gi,'');
  const safeAttrs=s=>s
-  .replace(/\\s(?:on[a-z]+|nonce)\\s*=\\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\\s>]{1,1000})/gi,'')
-  .replace(/\\b(href|src)\\s*=\\s*(["'])\\s*javascript:[^"']{0,8000}\\2/gi,'$1="#"')
-  .replace(/<meta\\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
+  .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
+  .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
+  .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
  const stages=[['json_script_rewrite_only',scripts],['drop_form_controls',controls],
   ['drop_form_shell',formless],['drop_inputs',inputless],['privacy_attr_guards',safeAttrs(controls)],
   ['privacy_form_shell',safeAttrs(formless)],['privacy_inputs',safeAttrs(inputless)]];
