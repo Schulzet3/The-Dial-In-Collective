@@ -43,3 +43,13 @@ PR104 first exact-source validate failed **1/785**: `tests/sql-runner-coverage.t
 ## Approval intake repair
 
 Second PR104 attempt: approval gate failed `DIC-Q-10-recipe-favorite-correction scope paths must be exact deployable files` because the SQL CI runner script was incorrectly placed in the release item's deployable `scope_paths`. The runner remains changed and CI-tracked but is NOT a deployable file. Removed it only from queue scope; preserve `site/lib/engine.js` and the pending migration, and retest.
+
+## Final scoped source result — PR #104 merge and exact-source verification
+
+PR104 HEAD `903b27ecc02ac09834cd1a7d03f11be0694c6cf3`: all seven required CI jobs SUCCESS after repairing SQL runner dispatch and queue scope. Explicit disposable PostgreSQL17.11 regression `recipe_family_lifecycle.sql` PASSED, including JWT-path owner Make Current, two confirmed eligible same-coffee/style families, correction/retirement and guest privacy; ROLLBACK verified. Latest Node/lint/build validates 785 tests, all passed. Mobile, review browser/visual/offline and security/approval passed.
+
+Nonforce PR #104 merge `8542286bb52a600a5c1c7ee962b5ad45ff3cd2aa` independently confirmed as development HEAD; matching tree `501aec8db406ac83d95b57bbce08e5e33abc40a9` versus tested HEAD. Merged-source validate `40052429083`, approval `40052429043`, cloud/browser/mobile `40052429176`, SQL `40052429177`, review `40052429034` all SUCCESS. Existing independently READY #33 and #100 untouched.
+
+Queue item `DIC-Q-10-recipe-favorite-correction` marked **READY for source release only** with PR104. Pending migration `20261024021000_dic_personal_family_lifecycle_integrity.sql` not applied on hosted Supabase. No Netlify release, changes to Auth/member-data or spending.
+
+**Issue #10 remains OPEN:** live hosted account contains zero coffee/style/setup groups with two eligible families (read-only aggregated check; no account IDs used). Thus actual signed-in hosted two-family switch/reload/offline/equipment acceptance cannot presently be verified without impermissible fabricated production data. Preserve explicit #10 live acceptance and distinct #12 community and #13 experiment work as outstanding. One visible recipe remains locked. Release readiness of the scoped tested code must not be misreported as live hosted verification or completed issue acceptance.

@@ -87,10 +87,10 @@
     {
       "id": "DIC-Q-10-recipe-favorite-correction",
       "issue": 10,
-      "pr": 103,
+      "pr": 104,
       "title": "Preserve an explicitly chosen recipe through successful shot corrections",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": "6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d",
+      "state": "READY",
+      "merged_source_sha": "8542286bb52a600a5c1c7ee962b5ad45ff3cd2aa",
       "scope_paths": [
         "site/lib/engine.js",
         "supabase/migrations/20261024021000_dic_personal_family_lifecycle_integrity.sql"
@@ -100,21 +100,27 @@
         "PR103 head 1663ec6f30895976895bc5df86883d77e26bbffa exact-source 7/7 checks SUCCESS. Nonforce GitHub merge 6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d read back as development HEAD.",
         "Issue #10 follow-on source includes disposable PostgreSQL lifecycle test and same-ratio unproven-variation JS test; awaiting new exact-source CI.",
         "First new CI validate 784/785; sole failure identified as new SQL test missing from static runner dispatch; repaired and awaiting full exact-source rerun.",
-        "SQL runner is a test tool, not deployable app payload; removed it from queue scope_paths after expected approval intake rejected it."
+        "SQL runner is a test tool, not deployable app payload; removed it from queue scope_paths after expected approval intake rejected it.",
+        "PR104 final head 903b27ecc02ac09834cd1a7d03f11be0694c6cf3: 7/7 exact-source check runs SUCCESS (validate, approval, cloud-tests, isolated SQL, review visual/offline/packaged app, mobile-browser QA, security inventory).",
+        "Disposable PostgreSQL 17.11 executed migration and recipe_family_lifecycle.sql, PASS: admitted member has two distinct eligible same-coffee/style/same-setup family records, authenticated Make Current through public.dic_mutate, correction across families, invalid favorite clearing, confirmed→candidate→retired transitions, hidden history preservation, cross-account negative; every synthetic insert rolled back. No hosted data changes.",
+        "Nonforce PR104 merged at 8542286bb52a600a5c1c7ee962b5ad45ff3cd2aa; identical tree 501aec8db406ac83d95b57bbce08e5e33abc40a9 with tested head. Merged-source validate, approval, cloud-tests, SQL, browser/mobile and full review all SUCCESS (two scope-irrelevant jobs deliberately SKIPPED).",
+        "Read-only hosted count 0 real owner+coffee+style+setup combinations with >=2 eligible personal families; real hosted two-family acceptance UNPERFORMED and remains separately open on Issue #10. No synthetic shots added to production."
       ],
       "ci_runs": [
         40050780815,
         40050780779,
         40050780785,
         40050780814,
-        40050780892
+        40050780892,
+        40052429176,
+        40052429177,
+        40052429043,
+        40052429083,
+        40052429034
       ],
-      "blockers": [
-        "Await full exact-source isolated SQL regression including new recipe_family_lifecycle.sql, plus application/approval/browser CI; merge and source readback pending.",
-        "New SQL migration remains UNAPPLIED to hosted Supabase; separate release authorization required."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
-      "notes": "No UI, SQL or public API changes, no deployment. This is a narrow issue #10 reliability slice; broader candidate/confirmation lifecycle, same-ratio significance and hosted multi-family scenarios remain open. Preserve the two existing independently READY queue items. Includes pending SQL migration 20261024021000; release dependency requires an authorized, exact-source production migration; existing READY queue items unchanged."
+      "notes": "No UI, SQL or public API changes, no deployment. This is a narrow issue #10 reliability slice; broader candidate/confirmation lifecycle, same-ratio significance and hosted multi-family scenarios remain open. Preserve the two existing independently READY queue items. Includes pending SQL migration 20261024021000; release dependency requires an authorized, exact-source production migration; existing READY queue items unchanged. Isolated source READY for separately approved release; pending migration 20261024021000 is NOT APPLIED hosted. Issue #10 remains OPEN for genuine hosted two-family acceptance and cross-cutting #12/#13. Queued READY does not claim hosted user acceptance or production deployment."
     },
     {
       "id": "DIC-Q-5-source-fact-integrity",
