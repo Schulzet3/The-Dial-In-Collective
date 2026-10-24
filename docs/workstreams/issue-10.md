@@ -17,3 +17,7 @@ Release disposition: **IN_PROGRESS / not READY**. No Netlify publication or prod
 ## CI follow-up: intake bookkeeping
 
 PR103 initial source checks: review, validate, cloud-tests, mobile-browser QA, security-inventory and SQL **SUCCESS**; approval job **FAIL** solely because untracked deployable path `site/lib/engine.js` lacked a queue item (approval coverage itself PASS). Add issue 10 TESTING queue item in this same corrective commit. Recheck exact commit after write; merge only after all applicable checks complete SUCCESS.
+
+## Verified non-force integration
+
+PR #103 head `1663ec6f30895976895bc5df86883d77e26bbffa`: 7/7 checks SUCCESS, including approval intake after queue registration. GitHub nonforce merged PR #103 at `6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d`; development HEAD independently confirmed. Merged-source approval, cloud tests and validate PASS at journal update; final review and mobile QA still pending. Keep TESTING pending final readback. No release.

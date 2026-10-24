@@ -90,12 +90,13 @@
       "pr": 103,
       "title": "Preserve an explicitly chosen recipe through successful shot corrections",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "PR103 initial exact-source validate, cloud-tests, mobile-browser-qa, security-inventory, sql and review SUCCESS; approval intake FAIL until queue entry registered. Three correction regression tests introduced; awaiting exact re-run."
+        "PR103 initial exact-source validate, cloud-tests, mobile-browser-qa, security-inventory, sql and review SUCCESS; approval intake FAIL until queue entry registered. Three correction regression tests introduced; awaiting exact re-run.",
+        "PR103 head 1663ec6f30895976895bc5df86883d77e26bbffa exact-source 7/7 checks SUCCESS. Nonforce GitHub merge 6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d read back as development HEAD."
       ],
       "ci_runs": [
         40050780815,
@@ -105,7 +106,7 @@
         40050780892
       ],
       "blockers": [
-        "Wait for exact SHA approval intake and tests to pass; nonforce merge and readback pending."
+        "Wait for remaining merged-source review and mobile-browser QA checks, then reconcile to READY."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
       "notes": "No UI, SQL or public API changes, no deployment. This is a narrow issue #10 reliability slice; broader candidate/confirmation lifecycle, same-ratio significance and hosted multi-family scenarios remain open. Preserve the two existing independently READY queue items."
