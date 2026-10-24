@@ -538,3 +538,7 @@ Run 40065492108 narrowed the remaining failures: NOMAD differs only in source-fa
 
 ### Exact safe product JSON capture repair candidate
 Public run 40065587138 retained differences: NOMAD retains 42/42 source facts but changed 9 purchase-variant JSON details; Circulor dropped Shopify product-json evidence, affecting 25 of 111 original facts and two independent conflict flags. This candidate preserves inert `data-product`/`data-product-json` script identity markers previously stripped by fixture serialization; adds a positive and negative fixture parity control and bounded structured attribute difference diagnostics. Full proof requires new exact-source live acceptance (do not change the oracle or waive source-fact parity). Queue remains TESTING and unpublished.
+
+
+### NOMAD public offers only remaining parity failure
+Run 40065751486 repaired Circulor: source facts and conflict flags now preserve under inert product JSON marker. NOMAD is the sole remaining live failure; 9 public purchase-variant offer objects differ after sanitized script JSON redaction. Keep failure and record only safe offer object key-level differences to isolate the exact source field before correcting capture; do not silence or waive parity. Production unchanged.

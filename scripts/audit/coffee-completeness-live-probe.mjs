@@ -180,6 +180,15 @@ async function probe(target){
       const lost=Object.keys(old).filter(key=>!Object.hasOwn(updated,key));
       const changed=Object.keys(old).filter(key=>Object.hasOwn(updated,key)&&JSON.stringify(old[key])!==JSON.stringify(updated[key]));
       if(record.parity_changed_product_attributes.length<12)record.parity_changed_product_attributes.push({label:a.label,lost,changed});
+      if(changed.includes('offers')&&record.parity_offer_key_differences===undefined){
+       const one=Array.isArray(old.offers)?old.offers[0]:old.offers;
+       const two=Array.isArray(updated.offers)?updated.offers[0]:updated.offers;
+       if(one&&two&&typeof one==='object'&&typeof two==='object'){
+        const all=[...new Set([...Object.keys(one),...Object.keys(two)])];
+        record.parity_offer_key_differences=all.filter(key=>!isDeepStrictEqual(one[key],two[key])).map(key=>({key,oldType:typeof one[key],newType:typeof two[key],oldPresent:Object.hasOwn(one,key),newPresent:Object.hasOwn(two,key)}));
+       }
+      }
+
      }catch{}
     }
 
