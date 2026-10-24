@@ -107,9 +107,14 @@ export function coffeeDescriptionCountryMismatch(description,{name='',origin=''}
 // A short heading can explicitly put a named subregion, region and country
 // together. This corroboration must arrive before narrower independent labels
 // are compared; it never invents the location of an otherwise unknown place.
-export function extractCoffeeGeographyTuples(html,{clean,name=''}={}){
+export function extractCoffeeGeographyTuples(html,{clean,name='',includeCurrentLocality=false}={}){
  const found=[];
- for(const block of productCoffeeProse(html,clean)){
+ // A selected Product description may be plain text rather than visible
+ // markup. Only this opt-in path admits its explicit current-place relation.
+ if(includeCurrentLocality&&typeof html==='string'&&!/<[a-z][^>]*>/i.test(html))
+  html='<p>'+html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
+ const blocks=productCoffeeProse(html,clean);
+ for(const block of blocks){
   if(block.educational||!/^h[1-6]$/.test(block.tag)||block.text.length>220||!current(block.text)||key(block.text)===key(name))continue;
   let value=block.text;
   const split=value.match(/^(.{3,100}?)\s+[–—-]\s+(.{4,150})$/);
@@ -123,6 +128,14 @@ export function extractCoffeeGeographyTuples(html,{clean,name=''}={}){
      /\b(?:coffee|roast|process(?:ed|ing)?|washed|natural|honey|anaerobic|variety|shipping|street|avenue|road|suite)\b/i.test(value))continue;
   if(!found.some(item=>key(item)===key(value)))found.push(value);
   if(found.length>=12)break;
+ }
+ if(includeCurrentLocality)for(const place of narrativeGeography(blocks.filter(block=>!block.educational),{currentLocalityOnly:true})){
+  // Early tuple reconciliation needs a country in this same source claim.
+  // Keep partial geography as source evidence, without forcing a conflict
+  // when the page's separate Region and Country labels arrive later.
+  if(place.label!=='Origin')continue;
+  if(found.length>=12)break;
+  if(!found.some(value=>key(value)===key(place.value)))found.push(place.value);
  }
  return found;
 }
@@ -162,7 +175,7 @@ function directOriginClaims(sentence){
  }
  return claims;
 }
-function narrativeGeography(blocks){
+function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
  const candidates=[];
  const add=(value,quote)=>{
   value=value.replace(/\s+/g,' ').replace(/[,; ]+$/,'').trim();
@@ -189,6 +202,7 @@ function narrativeGeography(blocks){
     else add(currentLocality[1],sentence);
     continue;
    }
+   if(currentLocalityOnly)continue;
    const pieces=[];
    const remember=value=>{
     value=value.replace(/\s+(?:region|zone|district|department|province|state|municipality)\b.*$/i,'').replace(/[.!?]+$/,'').trim();

@@ -583,9 +583,9 @@ function productDetails(fields,p){
  }
  // Product JSON-LD and storefront metadata may include HTML or plain-text
  // labels, often separated by BR, newlines or semicolons (not HTML tables).
- // Only the selected Product's explicitly labeled lines are evidence.
+ // Keep explicit labels and current-place tuples scoped to this Product.
  if(description){
-  for(const place of extractCoffeeGeographyTuples(description,{name:fields.name,clean}))addField(fields,'Origin',place);
+  for(const place of extractCoffeeGeographyTuples(description,{name:fields.name,clean,includeCurrentLocality:true}))addField(fields,'Origin',place);
   // The selected structured description can contain the same real tables,
   // definition lists and metric cards as visible HTML. Preserve their
   // structure instead of flattening a header row into a supposed value.

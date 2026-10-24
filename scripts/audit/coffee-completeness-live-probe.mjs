@@ -150,7 +150,7 @@ async function probe(target){
  const capture=async(kind,url,result)=>{
   const record={kind,url:publicUrl(result.source_url||url),ok:result.ok===true,reason:result.reason||null};
   if(result.ok&&typeof result.html==='string'){
-   const sanitized=fixtureHtml(result.html);
+   const sanitized=fixtureHtml(result.html,{source_url:result.source_url||url});
    record.bytes=Buffer.byteLength(result.html);record.original_sha256=sha(result.html);
    record.fixture=target.id+'-'+captures.length+'.fixture.html';
    record.sanitized_sha256=sha(sanitized);record.sanitized_bytes=Buffer.byteLength(sanitized);
@@ -167,20 +167,31 @@ async function probe(target){
     record.parity_conflicts_original=original?.conflicts||[];
     record.parity_conflicts_replay=replay?.conflicts||[];
     record.parity_source_fact_counts=[original?.source_facts?.length??0,replay?.source_facts?.length??0];
-    const factTag=f=>[f.field||'',f.label||'',f.source_type||'',f.section||'',f.value||''].map(x=>String(x)).join('|');
-    const beforeFacts=(original?.source_facts||[]).map(factTag);
-    const afterFacts=(replay?.source_facts||[]).map(factTag);
-    const afterBag=new Map();for(const v of afterFacts)afterBag.set(v,(afterBag.get(v)||0)+1);
-    record.parity_missing_source_fact_examples=beforeFacts.filter(v=>{const n=afterBag.get(v)||0;if(!n)return true;afterBag.set(v,n-1);return false;}).slice(0,12).map(v=>v.slice(0,190).replace(/(?:password|token|secret|session|cookie|email|phone|authorization|checkout)[^|]{0,80}/gi,'[redacted]'));
+    const factTag=f=>JSON.stringify(f);
+    const afterBag=new Map();
+    for(const fact of replay?.source_facts||[]){
+     const tag=factTag(fact);afterBag.set(tag,(afterBag.get(tag)||0)+1);
+    }
+    // Diagnostics describe structure only. Do not copy values from the
+    // pre-redaction output into retained logs, even when source parity fails.
+    record.parity_missing_source_fact_examples=(original?.source_facts||[]).filter(fact=>{
+     const tag=factTag(fact),count=afterBag.get(tag)||0;
+     if(!count)return true;
+     afterBag.set(tag,count-1);return false;
+    }).slice(0,12).map(fact=>({
+     field:fact.field||null,source_type:fact.source_type||null,
+     property_keys:Object.keys(fact).sort(),value_type:typeof fact.value,
+     value_utf8_bytes:Buffer.byteLength(String(fact.value??''))
+    }));
     const factKey=f=>[f.field||'',f.label||'',f.source_type||'',f.section||''].join('|');
     record.parity_changed_product_attributes=[];
-    for(const a of (original?.source_facts||[]).filter(f=>f.source_type==='product_json')){
+    for(const [factIndex,a] of (original?.source_facts||[]).filter(f=>f.source_type==='product_json').entries()){
      const b=(replay?.source_facts||[]).find(f=>factKey(f)===factKey(a));
      if(!b||String(a.value)===String(b.value))continue;
      try{const old=JSON.parse(a.value),updated=JSON.parse(b.value);
       const lost=Object.keys(old).filter(key=>!Object.hasOwn(updated,key));
       const changed=Object.keys(old).filter(key=>Object.hasOwn(updated,key)&&JSON.stringify(old[key])!==JSON.stringify(updated[key]));
-      if(record.parity_changed_product_attributes.length<12)record.parity_changed_product_attributes.push({label:a.label,lost,changed});
+      if(record.parity_changed_product_attributes.length<12)record.parity_changed_product_attributes.push({fact_index:factIndex,lost,changed});
       if(changed.includes('offers')&&record.parity_offer_key_differences===undefined){
        const one=Array.isArray(old.offers)?old.offers[0]:old.offers;
        const two=Array.isArray(updated.offers)?updated.offers[0]:updated.offers;
@@ -199,7 +210,7 @@ async function probe(target){
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
    try{
-    const sanitized=sanitizeJson(JSON.parse(result.json));
+    const sanitized=sanitizeJson(JSON.parse(result.json),{source_url:result.source_url||url});
     record.fixture=target.id+'-'+captures.length+'.fixture.json';
     record.sanitized_sha256=sha(sanitized);
     await writeFile(path.join(output,record.fixture),sanitized,'utf8');
@@ -288,3 +299,4 @@ await writeFile(path.join(output,'results.json'),JSON.stringify(result,null,2)+'
 console.log('[DIC COMPLETENESS SUMMARY] '+JSON.stringify(result.summary));
 console.log('[DIC COMPLETENESS ARTIFACTS] '+output);
 if(requiredFailures.length)process.exitCode=1;
+// Issue #33 exact-source audit trigger: full sanitized NOMAD variant parity must hold.

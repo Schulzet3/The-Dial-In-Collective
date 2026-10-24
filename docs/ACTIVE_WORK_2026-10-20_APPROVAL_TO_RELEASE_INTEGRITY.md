@@ -1,3 +1,14 @@
+## October 24, 2026 UTC: candidate11 recovery and fresh verification — TESTING
+
+Resume the [Issue33 journal](workstreams/issue-33.md) and [current extractor audit](audits/2026-10-24-extractor-final-audit.md). PR109 is already merged. Its failed public-source run remains failed. Original candidate10 completed locally but its unpublished files became inaccessible when the runtime disconnected; newly reconstructed candidate11 has different bytes and requires a fresh full603 benchmark. Do not reuse C10's historical passes as acceptance of C11.
+
+Use the original hash-locked source and recovery archives in read-only GitHub Actions; preserve the frozen oracle/scorers and all concurrent upstream through acf411c. Run normal source checks, offline Python/OCR checks and unchanged fresh public acceptance, then non-force integrate and read back actual source/CI before promoting only this audit's queue row. Do not publish or modify production/member data. Current queue is TESTING; current recorded merge34a1755 belongs to candidate8.
+
+
+Concurrent upstream through `2f4668fdc7918a04f6cc2432021c5f15cb30acd2` (tree `93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee`) is preserved exactly. It includes PR113's confirmed-personal-family Community evidence and source READY reconciliation, staged unapplied migrations, and independent regression tests. The other queue rows and root metadata retain their current upstream values. None of the32 extractor runtime files or actual client-export module changed; fresh combined hosted checks cover the overall source.
+
+---
+
 ## October 24, 2026 UTC — PUBLICATION PAUSED; deferred combined release handoff
 
 **Current owner instruction:** “Since you've marked the issues closed, you don't need to continue with deployment. I will do a deployment when the extractor changes are ready. Please document your progress so another chat can publish all the pending changes.” No Netlify publication, release-branch push, release grant or further Supabase migration now. **The earlier conditional release permission is not reusable for a future batch.**

@@ -133,6 +133,141 @@ class CoffeeReportIntegrityTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             self.report.build(self.args)
 
+    def audit_fixture(self):
+        compared = json.loads(self.args.comparison.read_text())
+        retained = json.loads(self.args.retention.read_text())
+        return {
+            'status': 'FULL_AUDIT_COMPLETE',
+            'final_candidate': 10,
+            'extractor_source_fingerprint': compared['source_tree_sha256'],
+            'oracle_freeze_sha256': compared['oracle_freeze_sha256'],
+            'canonical': compared['counts'],
+            'supplementary_retention': retained['counts'],
+            'remaining_source_limit': 'Synthetic report fixture; no production acceptance.',
+            'remote_integration': True,
+            'hosted_ci_dispatched': True,
+            'published_or_deployed': False,
+            'new_api_keys_or_paid_services': False,
+            'integration_continuation': {
+                'state': 'READY',
+                'github_ci': 'PASS',
+                'merged_source_sha': 'a' * 40,
+                'ci_runs': [123456789],
+                'blockers': [],
+            },
+        }
+
+    def render_audit(self, audit):
+        self.args.audit_receipt = write(self.root / 'audit.json', audit)
+        self.report.build(self.args)
+        return json.loads(self.args.output.read_text())
+
+    def test_missing_integration_receipt_does_not_invent_an_old_block_or_unused_ci(self):
+        self.report.build(self.args)
+        result = json.loads(self.args.output.read_text())
+        self.assertEqual(result['integration_state'], 'UNKNOWN')
+        self.assertFalse(result['integration_ready'])
+        self.assertNotIn('user rejected', result['integration_status'])
+        self.assertNotIn('dispatched no hosted CI', result['cost_boundary'])
+        self.assertIn('Hosted CI use is not recorded', result['cost_boundary'])
+
+    def test_complete_ready_receipt_supersedes_historical_write_rejection_without_deployment_claim(self):
+        audit = self.audit_fixture()
+        audit['historical_remote_write_block'] = 'user rejected MCP tool call'
+        result = self.render_audit(audit)
+        self.assertTrue(result['integration_ready'])
+        self.assertEqual(result['integration_state'], 'READY')
+        self.assertIn('a' * 40, result['integration_status'])
+        self.assertIn('123456789', result['integration_status'])
+        self.assertNotIn('integration BLOCKED', result['final_audit_summary'])
+        self.assertNotIn('user rejected', result['integration_status'])
+        self.assertIn('not proof of production deployment', result['integration_status'])
+        self.assertIn('records hosted GitHub CI', result['cost_boundary'])
+        self.assertIn('records no publication or deployment', result['cost_boundary'])
+
+    def test_pending_current_ci_is_not_promoted_by_a_recorded_merge(self):
+        audit = self.audit_fixture()
+        audit['integration_continuation'].update(state='TESTING', github_ci='PENDING')
+        result = self.render_audit(audit)
+        self.assertFalse(result['integration_ready'])
+        self.assertEqual(result['integration_state'], 'TESTING')
+        self.assertIn('PENDING', result['integration_status'])
+        self.assertIn('records hosted GitHub CI', result['cost_boundary'])
+
+    def test_ready_label_requires_complete_typed_merge_and_ci_evidence(self):
+        invalid = [
+            ('remote integration missing', 'root', 'remote_integration', None),
+            ('remote integration is a string', 'root', 'remote_integration', 'true'),
+            ('merge missing', 'continuation', 'merged_source_sha', None),
+            ('merge shortened', 'continuation', 'merged_source_sha', 'abcdef0'),
+            ('merge placeholder', 'continuation', 'merged_source_sha', '0' * 40),
+            ('merge is not hex', 'continuation', 'merged_source_sha', 'g' * 40),
+            ('CI status missing', 'continuation', 'github_ci', None),
+            ('CI runs missing', 'continuation', 'ci_runs', None),
+            ('CI runs empty', 'continuation', 'ci_runs', []),
+            ('CI run zero', 'continuation', 'ci_runs', [0]),
+            ('CI run negative', 'continuation', 'ci_runs', [-1]),
+            ('CI run boolean', 'continuation', 'ci_runs', [True]),
+            ('CI run string', 'continuation', 'ci_runs', ['123456789']),
+            ('blockers missing', 'continuation', 'blockers', None),
+            ('blocker remains', 'continuation', 'blockers', ['Fresh-source acceptance failed']),
+        ]
+        for label, container, key, value in invalid:
+            with self.subTest(label=label):
+                audit = self.audit_fixture()
+                target = audit if container == 'root' else audit['integration_continuation']
+                target[key] = value
+                result = self.render_audit(audit)
+                self.assertFalse(result['integration_ready'])
+                self.assertNotEqual(result['integration_state'], 'READY')
+                self.assertIn('not established', result['integration_status'])
+
+    def test_failed_current_ci_and_blockers_remain_visible(self):
+        audit = self.audit_fixture()
+        audit['integration_continuation'].update(
+            github_ci='FAILED', blockers=['Public-source parity failed'])
+        result = self.render_audit(audit)
+        self.assertFalse(result['integration_ready'])
+        self.assertEqual(result['integration_state'], 'BLOCKED')
+        self.assertIn('FAILED', result['integration_status'])
+        self.assertIn('Public-source parity failed', result['integration_status'])
+
+    def test_legacy_or_malformed_status_container_cannot_establish_ready(self):
+        for continuation in (None, [], 'READY', {'state': 'READY'}):
+            with self.subTest(continuation=continuation):
+                audit = self.audit_fixture()
+                audit['status'] = 'READY'
+                audit['integration_continuation'] = continuation
+                result = self.render_audit(audit)
+                self.assertFalse(result['integration_ready'])
+                self.assertNotEqual(result['integration_state'], 'READY')
+
+    def test_cost_and_publication_statements_follow_explicit_flags_only(self):
+        audit = self.audit_fixture()
+        audit['new_api_keys_or_paid_services'] = True
+        audit['published_or_deployed'] = True
+        del audit['hosted_ci_dispatched']
+        result = self.render_audit(audit)
+        self.assertIn('records new API keys or paid services', result['cost_boundary'])
+        self.assertIn('records publication or deployment', result['cost_boundary'])
+        self.assertIn('does not independently verify it', result['cost_boundary'])
+        self.assertIn('Hosted CI use is not recorded', result['cost_boundary'])
+        self.assertNotIn('records no new API', result['cost_boundary'])
+        self.assertNotIn('records no publication', result['cost_boundary'])
+
+    def test_ready_receipt_still_requires_original_source_oracle_and_score_bindings(self):
+        for key, changed, message in (
+            ('extractor_source_fingerprint', 'f' * 64, 'Final audit source differs'),
+            ('oracle_freeze_sha256', 'f' * 64, 'Final audit oracle differs'),
+            ('canonical', {'cases': 0}, 'Final audit scores differ'),
+            ('supplementary_retention', {'additional_assertions': 0}, 'Final audit scores differ'),
+        ):
+            with self.subTest(key=key):
+                audit = self.audit_fixture()
+                audit[key] = changed
+                with self.assertRaisesRegex(AssertionError, message):
+                    self.render_audit(audit)
+
 
 if __name__ == '__main__':
     unittest.main()

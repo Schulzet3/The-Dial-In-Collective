@@ -1,0 +1,52 @@
+name: DIC coffee audit Python checks
+
+# Existing report/retention and local-review tests run without app credentials.
+# Free Ubuntu test prerequisites do not change the application dependency tree.
+on:
+  push:
+    branches:
+      - development/backend-foundation
+    paths:
+      - '.github/workflows/coffee-audit-python.yml'
+      - 'scripts/audit/**'
+      - 'tests/audit/**'
+      - 'tests/coffee_source_review_local_test.py'
+  pull_request:
+    branches:
+      - development/backend-foundation
+    paths:
+      - '.github/workflows/coffee-audit-python.yml'
+      - 'scripts/audit/**'
+      - 'tests/audit/**'
+      - 'tests/coffee_source_review_local_test.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dic-coffee-audit-python-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install existing free local-review test prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes python3-pil tesseract-ocr tesseract-ocr-eng fonts-dejavu-core
+      - name: Record test prerequisite versions
+        run: |
+          /usr/bin/python3 --version
+          /usr/bin/python3 -c "import PIL; print('Pillow ' + PIL.__version__)"
+          tesseract --version
+          dpkg-query --show python3-pil tesseract-ocr tesseract-ocr-eng fonts-dejavu-core
+      - name: Verify frozen-audit report and retention integrity
+        run: /usr/bin/python3 -m unittest discover -v -s tests/audit -p 'test_*.py'
+      - name: Verify offline source review including real local OCR
+        run: /usr/bin/python3 -m unittest discover -v -s tests -p 'coffee_source_review_local_test.py'

@@ -1,3 +1,40 @@
+## October 24, 2026 UTC — PR116 recovered extractor audit, concurrent source reconciled; TESTING
+
+PR116's first actual hosted run exposed a selected structured-description geography gap: 1,392 Node tests passed, one failed and six deployed-endpoint tests were explicitly skipped; the cloud subset had the same sole failure (1,025/1,026). Lint/build did not run after that failure. Python independently passed38 report/retention tests and23 offline/OCR tests. The frozen runner passed11 integrity controls and correctly stopped before replay because secure archive inputs were unavailable. These outcomes remain recorded; they are not presented as final acceptance.
+
+While the repair was under review, PR115 merged at `1800187cf0980f30d555d71134bde3c0f8e059a7` and development advanced through `2fe83f3580bb465ad74c67774e7ae743b8e0e35c`. Its direct-locality representation, malformed related-card repair, public-fixture behavior, regression tests and source diagnostics are being reconciled with candidate11's stronger attribute and source-identity guards. The canonical field follows the current upstream Nyeri, Kenya choice while the complete mountain sentence remains attributable source evidence. No frozen expectation or scorer changes.
+
+Automatic approval review rejected plaintext signed archive URLs and completion tokens in PR metadata; no credentials were written. The revised input channel uses a fresh single-use receiver on the authorized runner and accepts only authenticated ciphertext bound to the exact repository, PR, head, run, attempt and deadline. Original complete transfer metadata and hash-bound files remain private to the runner. Public interoperability controls and the new full603 benchmark still require hosted execution.
+
+The unrelated owner-authorized #5/#12 database delivery receipts and queue states in current upstream are preserved. This extractor task performs no production/provider/member mutation or publication and does not use those separate approvals to release #33. Concurrent upstream `4a0d3b92d21bafd0be2a88131f3d8dd774a0f1e0` resolved source intake with an explicit TESTING source-carryover record that forbids repeated SQL. Its approval run40066461895 passed. Preserve that row and the original DEPLOYED receipt exactly; the optional intake-code proposal was not integrated. The extractor candidate adds no intake or release-rule change; the subsequently merged PR119 implementation is retained exactly.
+
+The current source remains **TESTING** until the reconciled runtime, all frozen603 cases, actual exports/offline behavior, ordinary source checks and fresh unchanged public-source acceptance pass. Candidate10's historical results cannot validate candidate11. See [PR116](https://github.com/Schulzet3/The-Dial-In-Collective/pull/116), [the audit](audits/2026-10-24-extractor-final-audit.md) and [the Issue33 journal](workstreams/issue-33.md).
+
+---
+
+## October 24, 2026 UTC: candidate11 reconstruction and fresh hosted audit — TESTING
+
+Historical preparation at PR116 head `735db80606e5bf3a2458c84df1817f1d71a86646`; superseded by the newer reconciliation above.
+
+PR109 merged candidate8 at `34a1755ab908ad845f4393b7677f1b0ca0985962`. Its public-source acceptance run **40062287845 failed** on SEY origin, Manhattan tasting-note scope, and Nomad/Circulor sanitized-capture parity. Passing ordinary checks did not override that failure. The separate diagnostic branch `05221ec8...` and its narrower expectations are not merged or copied here.
+
+The subsequent candidate10 full603 benchmark and combined local checks completed, but the execution environment disconnected and its unpublished runtime files and raw logs became inaccessible. Their recorded outcomes remain in [the historical local summary](audits/extractor-candidate10-recorded-local-summary.json). The new reconstruction has different source bytes and is **candidate11**: no candidate10 full-benchmark or Node pass is claimed for it.
+
+Candidate11 repairs the demonstrated region/mountain relationship, independently scoped WooCommerce cards, complete attribute consumption, narrowly allowed public cart-template/inert-marker sanitization, and receipt-derived audit status. All existing public-probe targets and the complete source-fact parity gate remain unchanged. Independent review found a further leading-equals attribute ambiguity before integration; it is repaired with positive/negative controls, including leading-equals, tag-terminator and ASCII-whitespace boundaries. Node/full-corpus execution remains pending. Every new code/test file remains subject to actual hosted tests.
+
+The original frozen603/201 corpus, source archive and candidate8 recovery archive are preserved. A read-only GitHub job will verify the original archive/freeze/attestation hashes and run the real handler, unchanged comparison and retention checks. Complete candidate8-to11 outputs/calls/exports must remain equal apart from elapsed timing, with zero lost exact or fully retained assertions. No oracle, capture, scorer or product-decision change is authorized. Separate Python CI runs the existing free offline OCR prerequisites and actual audit/helper tests.
+
+Latest upstream `acf411ca344538e1ec68dde895c8e6600e2c4858` / tree `e9d9a3f4224d8fac13d1f83cc3fefe17857a35cd` is preserved, including the additional Community Node/SQL controls and its independent family-identity acceptance limits. All30 unchanged extractor runtime files were independently fetched and SHA-256 verified against the recorded manifest. Every unrelated queue row, history entry and root metadata value remains exact.
+
+Queue `DIC-Q-33-expanded-603-audit` remains **TESTING**. It records the actual candidate8 merge while candidate11's full benchmark, normal current-source Actions, non-force integration and fresh merged public acceptance remain pending. GitHub writes and Actions are explicitly authorized; no new API key, paid service, production publication, hosted SQL/Edge/Auth or member-data mutation is performed. No physical-device or real-member acceptance is inferred.
+
+Current evidence and next action: [extractor audit](audits/2026-10-24-extractor-final-audit.md), source-bound hosted results once available, and this journal. Earlier dated checkpoints below are history, not current readiness.
+
+
+Concurrent upstream through `2f4668fdc7918a04f6cc2432021c5f15cb30acd2` (tree `93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee`) is preserved exactly. It includes PR113's confirmed-personal-family Community evidence and source READY reconciliation, staged unapplied migrations, and independent regression tests. The other queue rows and root metadata retain their current upstream values. None of the32 extractor runtime files or actual client-export module changed; fresh combined hosted checks cover the overall source.
+
+---
+
 ## October 24, 2026 UTC — PUBLICATION PAUSED; deferred combined release handoff
 
 **Current owner instruction:** “Since you've marked the issues closed, you don't need to continue with deployment. I will do a deployment when the extractor changes are ready. Please document your progress so another chat can publish all the pending changes.” No Netlify publication, release-branch push, release grant or further Supabase migration now. **The earlier conditional release permission is not reusable for a future batch.**

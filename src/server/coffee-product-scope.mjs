@@ -8,10 +8,33 @@ const DECORATION=new Set(['svg','canvas','audio','button']);
 // an attribute name inside raw markup can mistake title="hidden ..." for an
 // actual visibility or identity attribute.
 export function coffeeHtmlAttributes(source){
- const out=Object.create(null);
- for(const match of String(source||'').matchAll(/(?:^|\s)([A-Za-z_:][A-Za-z0-9_:.-]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g)){
-  const key=match[1].toLowerCase();
-  if(!Object.hasOwn(out,key))out[key]=match[2]??match[3]??match[4]??'';
+ const out=Object.create(null),text=String(source||'');let at=0;
+ const space=character=>/[\t\n\f\r ]/.test(character);
+ while(at<text.length){
+  while(at<text.length&&space(text[at]))at++;
+  if(at>=text.length||text[at]==='>')break;
+  if(text[at]==='/'){at++;continue;}
+  // HTML keeps a leading equals sign in an unusual attribute name. Consume
+  // that first character before recognizing a later equals/value separator.
+  const start=at++;
+  while(at<text.length&&!/[\t\n\f\r =/>]/.test(text[at]))at++;
+  const name=text.slice(start,at).toLowerCase();
+  while(at<text.length&&space(text[at]))at++;
+  let value='';
+  if(text[at]==='='){
+   at++;while(at<text.length&&space(text[at]))at++;
+   if(text[at]==='"'||text[at]==="'"){
+    const close=text.indexOf(text[at],at+1);
+    if(close<0)break;
+    value=text.slice(at+1,close);at=close+1;
+   }else{
+    const valueStart=at;while(at<text.length&&!/[\t\n\f\r >]/.test(text[at]))at++;
+    value=text.slice(valueStart,at);
+   }
+  }
+  // Unusual names still consume their entire value before deciding whether
+  // this reader recognizes the key. Quoted class-like text is never a key.
+  if(/^[a-z_:][a-z0-9_:.-]*$/.test(name)&&!Object.hasOwn(out,name))out[name]=value;
  }
  return out;
 }
@@ -57,8 +80,24 @@ function withoutRelatedProducts(page,onTruncated){
  // Prefer a named recommendation component. Removing its bounded element
  // preserves genuine product sections appearing later on the same page.
  const controlled=new Set(),guideIds=new Set(),attributes=nodes.map(node=>coffeeHtmlAttributes(node.attributes)),blockedControls=new Set();
+ // A malformed outer recommendation wrapper can end before its cards.
+ // Require both a real WooCommerce product LI and its own loop-link anchor;
+ // generic product classes or class-like attribute values are insufficient.
+ const loopCards=new Set(),hasClass=(attrs,name)=>String(attrs.class||'').split(/[\t\n\f\r ]+/).includes(name);
  for(const [index,node] of nodes.entries()){
-  if(blockedControls.has(node.parent)||isHidden(attributes[index])||isNavigation(node,attributes[index])||isRelated(node,attributes[index]))blockedControls.add(index);
+  if(node.tag!=='a'||!hasClass(attributes[index],'woocommerce-LoopProduct-link'))continue;
+  let parent=node.parent;
+  for(let depth=0;parent!==null&&depth<8;depth++){
+   const candidate=nodes[parent];
+   if(candidate.tag==='li'){
+    if(hasClass(attributes[parent],'product')&&hasClass(attributes[parent],'type-product'))loopCards.add(parent);
+    break;
+   }
+   parent=candidate.parent;
+  }
+ }
+ for(const [index,node] of nodes.entries()){
+  if(blockedControls.has(node.parent)||isHidden(attributes[index])||isNavigation(node,attributes[index])||isRelated(node,attributes[index])||loopCards.has(index))blockedControls.add(index);
  }
  for(const [index,node] of nodes.entries()){
   if(blockedControls.has(index))continue;
@@ -86,6 +125,7 @@ function withoutRelatedProducts(page,onTruncated){
   if(hidden&&!ownedPanel)ranges.push([node.start,node.end]);
   if(node.tag==='aside'&&!isProductCostAside(node,attrs))ranges.push([node.start,node.end]);
   if(isNavigation(node,attrs))ranges.push([node.start,node.end]);
+  if(loopCards.has(index))ranges.push([node.start,node.end]);
   if(!CONTAINER.has(node.tag))continue;
   const explicit=isRelated(node,attrs);
   if(explicit)ranges.push([node.start,node.end]);
@@ -143,11 +183,15 @@ function withoutRelatedProducts(page,onTruncated){
  // known related section only when the *very next* sibling is explicitly
  // another product card, and stop at the next named genuine product section
  // (e.g. "Our Story"). Do not trim subsequent selected-product content.
+ const nodeIndexByStart=new Map(nodes.map((node,index)=>[node.start,index]));
  const completeRanges=ranges.map(([start,end])=>{
-  const nextMarkup=page.slice(end,end+1200).trimStart();
-  const orphanCard=/^(?:<\/(?:li|ul|div)>\s*){0,5}<li\b[^>]{0,1100}\bclass\s*=\s*["'][^"']*\bproduct\b/i.test(nextMarkup);
-  const actualRelated=/^<section\b[^>]{0,1000}\bclass\s*=\s*["'][^"']*\brelated\b[^"']*\bproducts?\b/i.test(page.slice(start,start+1100));
-  if(!orphanCard||!actualRelated)return [start,end];
+  const sectionIndex=nodeIndexByStart.get(start),section=nodes[sectionIndex];
+  const actualRelated=section?.tag==='section'&&/\brelated\b[\s\S]*\bproducts?\b/i.test(attributes[sectionIndex]?.class||'');
+  if(!actualRelated)return [start,end];
+  const next=firstAfter(nodes,end-1);
+  if(!next||next.tag!=='li'||next.start-end>1200||
+     !hasClass(attributes[nodeIndexByStart.get(next.start)],'product')||
+     !/^(?:\s*<\/(?:li|ul|div)>){0,5}\s*$/.test(page.slice(end,next.start)))return [start,end];
   const resume=headings.find(item=>item.start>=end&&item.start-end<125000&&PRODUCT_SECTION.test(item.title));
   return [start,resume?.start??Math.min(page.length,end+125000)];
  });

@@ -5,11 +5,13 @@ on:
       - development/backend-foundation
       - work/issue33-product-completeness-20261023
       - work/issue33-603-live-source-repairs-20261024
+      - work/issue33-candidate11-recovery-20261024
     paths:
       - 'src/server/**'
       - 'netlify/functions/coffee-url-preview.mjs'
       - 'scripts/audit/coffee-completeness-live-probe.mjs'
       - 'scripts/audit/coffee-fixture-sanitize.mjs'
+      - 'scripts/audit/coffee-source-fixture-sanitization.mjs'
       - '.github/workflows/coffee-completeness.yml'
   workflow_dispatch:
 permissions:
