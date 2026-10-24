@@ -1,3 +1,7 @@
+## October 24 2026 — Issue #10/#12 dependency implementation in TESTING
+
+Source-only candidate Community evidence tiers (exact coffee, related release, similar coffee) with per-contributor median bucketing, safe read-only admitted-user RPC, optional lazy hydration and evidence source labels. New regression tests queued, exact CI and integration pending. Existing #5 stale-retry fix remains READY but not deployed. No publication or production data operations.
+
 ## October 23/24, 2026 — owner-directed proactive closure workflow
 
 The owner clarified that a development/issue-closure request authorizes complete feasible implementation and dependency resolution without routine follow-up instructions, immediate failure diagnosis/fix/retest, scope-preserving alternatives for unavailable evidence, concise verified closure/READY reporting, and monitoring of pending CI. This is an operating-process clarification, not approval to publish, waive Locked features or misclassify unperformed tests. Synced `AGENTS.md` and the repository's ChatGPT Project Instructions copy. ChatGPT hourly condition-watch "Dial In CI Completion" is enabled for new GitHub completions, with *at most hourly* checking rather than instantaneous alerts. Separate release authority and non-force integration safeguards remain unchanged. Issue #5's stale Pending Retry migration remains READY but not deployed; Issue #10 still has Issue #12 Community evidence integration as an actual unfinished requirement. No app/backend code changed in this documentation commit.

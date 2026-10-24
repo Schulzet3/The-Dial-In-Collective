@@ -1,5 +1,6 @@
 import {CONFIG,RATIOS,TIMES,TEMPS,roastIndex,num,round,clamp,norm,finite,newId,now,isDialed} from './constants.js';
 import {activeSetup,activeVersion,workspace,coffeeState,ensureCoffeeState,selectedBasket,feedMode,snapshot,hasLocalSuccess,validateShot,logAudit} from './model.js';
+import {selectCommunityPrior} from './community-evidence.js';
 export const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
 export function quantile(a,q) {const b=[...a].sort((x,y)=>x-y);if(!b.length)return null;const pos=(b.length-1)*q,lo=Math.floor(pos);return b[lo]+(b[Math.min(lo+1,b.length-1)]-b[lo])*(pos-lo);}
 export function stats(a,{singleWidth=0}={}) {
@@ -209,7 +210,28 @@ export function recommendation(s,coffeeId,options={}) {
  const provisional=style==='Custom'||(exactOther&&style!=='Fast-Flow')?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
  const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
  const chosen=familyChoice?.family||null;
- if(!chosen&&provisional){
+ const peer=style==='Custom'||chosen||(exactOther&&style!=='Fast-Flow')?null:
+  selectCommunityPrior(s.communityEvidence?.[coffeeId]?.[style],style);
+ // Community exact release and related release outrank personal similar coffee;
+ // personal similar outranks Community similar. No cross-style time/grind copying.
+ const peerFirst=peer&&(peer.tierNumber<=4||!provisional);
+ if(!chosen&&peerFirst){
+  const confidence=(peer.tier==='exact'?.4:peer.tier==='related_release'?.22:.10)*
+   Math.min(1,.45+.12*Math.min(peer.contributorCount,4));
+  const ratio=round(rec.ratio.center+(peer.ratio-rec.ratio.center)*confidence,2);
+  const time=round(rec.time.center+(peer.time-rec.time.center)*confidence);
+  const rHalf=(rec.ratio.high-rec.ratio.low)/2,tHalf=(rec.time.high-rec.time.low)/2;
+  rec.ratio={low:round(Math.max(.8,ratio-rHalf),2),center:ratio,high:round(ratio+rHalf,2)};
+  rec.time={low:round(Math.max(1,time-tHalf)),center:time,high:round(time+tHalf)};
+  rec.source='Unproven '+peer.tier.replaceAll('_',' ')+' Community starting reference';
+  rec.communityEvidence={tier:peer.tier,shotCount:peer.shotCount,contributorCount:peer.contributorCount,
+   ratioFamiliesAreEstimated:true,grindCalibrated:false};
+  rec.reasons.unshift('Cautious '+peer.tier.replaceAll('_',' ')+' Community starting reference from '+
+    peer.contributorCount+' independent contributor'+(peer.contributorCount===1?'':'s')+
+    ' and '+peer.shotCount+' eligible '+style+' shot'+(peer.shotCount===1?'':'s')+
+    '; not proven on your equipment.');
+ }
+ if(!chosen&&!peerFirst&&provisional){
   // Conservative shrinkage toward the existing roast/style prior avoids
   // treating a small number of similar coffees as an exact recipe.
   const weight=Math.min(.5,.16+.07*Math.min(provisional.count,3)+.025*Math.max(0,provisional.closeness-1))*(provisional.nearby?.5:1);
@@ -247,7 +269,7 @@ export function recommendation(s,coffeeId,options={}) {
     nonRatioSignificance:unprovenNonRatioVariation?'unproven':'not_indicated'};
   rec.reasons=familyChoice.reason?[familyChoice.reason]:local.length?[]:
    ['Your successful ratio from another setup; time and grind remain starting estimates.'];
- } else if(style==='Fast-Flow'&&!provisional) {
+ } else if(style==='Fast-Flow'&&!provisional&&!peerFirst) {
   // Only closely compatible Turbo success can weakly inform the STARTING ratio.
   // Never import its measured time, grind, family, confirmation or shot count.
   const turbo=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.style==='Turbo'&&
@@ -264,7 +286,7 @@ export function recommendation(s,coffeeId,options={}) {
    rec.turboFallback={style:'Turbo',compatibleShots:turbo.length,ratioOnly:true};
    rec.reasons.unshift('Cautious ratio-only reference from '+turbo.length+' compatible Turbo shot'+(turbo.length===1?'':'s')+'; Fast-Flow time, grind and success remain independent.');
   }
- } else if(style!=='Custom'&&style!=='Fast-Flow') {
+ } else if(!peerFirst&&style!=='Custom'&&style!=='Fast-Flow') {
   // Weak residual only for legacy styles. Fast-Flow never shares this generic cross-style path.
   const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&RATIOS[sh.style]);
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
