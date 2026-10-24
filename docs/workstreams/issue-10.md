@@ -160,3 +160,10 @@ Explicit scoped owner authorization: “If you need to publish to proceed you ar
 
 ---
 
+
+## October 24 UTC: #5 and #12 authorized production database receipts, app still pending
+
+Explicit owner approval for a release to close #5/#10/#12. Supabase production applied three previously unshipped **source-verified** functions/migrations via connected provider: actual migration history `20261024052303 dic_pending_retry_http_conflict` (original source filename 20261024034800), `20261024052411 dic_community_recommendation_evidence` (source 20261024041100), `20261024052419 dic_recommendation_use_provenance` (source 20261024041800). Applied only once each, with independent provider history and SQL function/trigger/privilege path readback. No historical rows rewritten. Count invariant 23 shots, 23 notes, 2 Community, 4 personal families, 10 library entries, 4 preferences. #5 closed with actual production readback. #10/#12 previously development-closed. The **web frontend is NOT deployed**; published Netlify still prior release. Existing #12 READY queue now documents SQL applied but the frontend still awaiting isolated exact-source CI and serialized one-use Netlify release. Candidate `work/release-scoped-issues-5-10-12-20261024`, PR117, omits unrelated TESTING extractor #33; this candidate is unverified, and its PR test workflows did not start on clean-base retarget. NO bypass of release controls or unready deployment. Do not reapply any of the three SQL migrations. The owner approval remains for a single scoped publication, not unrelated READY batch.
+
+---
+
