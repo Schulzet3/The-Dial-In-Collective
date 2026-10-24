@@ -29,7 +29,8 @@ class CloudApp {
   this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
-  this.deniedOfflineOwners=new Set();
+  this.recommendationEvidence={};this.recommendationEvidenceRequests=new Set();
+   this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
   this.lastHeavySyncAt=0;this.pollingStatus=null;
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
@@ -43,7 +44,7 @@ class CloudApp {
  resetAccount(){
   this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
-  this.dismissedDoseAdvisories.clear();
+  this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();
   this.lastHeavySyncAt=0;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
@@ -119,7 +120,7 @@ class CloudApp {
   const pending=await this.inSession(()=>this.store.list(user.id));
   if(epoch!==this.epoch||user.id!==this.identity?.id)return false;
   this.status=null;this.localOfflineOwner=user.id;this.raw=cache.snapshot;
-  this.pending=pending;this.state=applyPending(hydrate(this.raw),this.pending);
+  this.pending=pending;this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;
   this.syncState='offline';this.reviews=[];this.reviewError='';
   if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)this.expanded.add(M.workspace(this.state).currentCoffeeId);
   this.notice='Offline workspace. New shots save on this device and sync after reconnecting.';
@@ -185,7 +186,7 @@ class CloudApp {
   if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;
   try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;this.lastHeavySyncAt=Date.now();}
   catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}
-  this.state=applyPending(hydrate(this.raw),this.pending);
+  this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;
   await this.syncFirstStylePrompts(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;
   // A known flagged shot cannot be deferred. A failed refresh cannot erase
   // an outstanding hold; queue/offline data remains recoverable.
@@ -198,7 +199,7 @@ class CloudApp {
   if(!this.identity||(!this.status?.admitted&&!offlineShot))throw new Error('Sign in with beta access first.');
   if(onlineOnly&&(!navigator.onLine||this.pending.length))throw new Error('Reconnect and finish syncing before changing this setting. Offline shot logging remains available.');
   await this.inSession(()=>this.queue.enqueue(action,payload));this.pending=await this.inSession(()=>this.store.list(this.identity.id));
-  this.state=applyPending(hydrate(this.raw),this.pending);this.render();
+  this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;this.render();
   await this.inSession(()=>this.sync());
   if(onlineOnly&&this.pending.length)throw new Error('The change is preserved in the sync queue. Open Sync details to check its status.');
  }
@@ -475,6 +476,26 @@ class CloudApp {
   }
   const coffee=this.state.coffees.find(x=>x.id===id);if(!coffee)return;
   this.expanded.add(id);this.firstStylePromptId=null;this.render();
+   // Lazy optional Community evidence; retain independent personal shot flow.
+   if(this.status?.admitted&&globalThis.navigator?.onLine!==false){
+    const style=M.coffeeState(this.state,id).style,key=id+':'+style;
+    if(!Object.hasOwn(this.recommendationEvidence[id]||{},style)&&
+       !this.recommendationEvidenceRequests.has(key)){
+     this.recommendationEvidenceRequests.add(key);
+     const owner=this.identity?.id,epoch=this.epoch;
+     try{
+      const evidence=await this.inSession(()=>this.client.recommendationCommunityEvidence(id,style));
+      if(this.identity?.id===owner&&this.epoch===epoch){
+       (this.recommendationEvidence[id] ||= {})[style]=evidence;
+       this.state.communityEvidence=this.recommendationEvidence;
+       this.render();
+      }
+     }catch(error){
+      if(isAccessDenied(error))throw error;
+      // Community prior unavailable: preserve personal recommendation and history.
+     }finally{this.recommendationEvidenceRequests.delete(key);}
+    }
+   }
   if(!this.identity?.id||this.state.shots.some(sh=>sh.coffeeId===id))return;
   const owner=this.identity.id,epoch=this.epoch,key=owner+':'+id;
   if(this.firstStyleClaimInFlight.has(key))return;

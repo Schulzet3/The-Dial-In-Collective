@@ -103,3 +103,23 @@ Owner explicitly accepts PR107 isolated signed-JWT integration testing in place 
 ## Proactive ownership directive (owner Oct 23/24, 2026)
 
 Owner wants an Issue #10 closure request treated as end-to-end development authorization. Investigate and implement relevant #12 Community evidence integration instead of handing back a list of tasks. Resolve failed CI and retest immediately, verify exact source and merge, record evidence, queue READY without publishing. Do not treat the owner-approved isolated signed-JWT evidence as blanket waiver of #12 source/provenance behavior. Current #5 migration remains separately READY/unpublished. CI completion monitoring is configured hourly (not instant) and no project setting can provide unattended unscheduled execution.
+
+## October 24, 2026 — owner-authorized Issue #12 dependency implementation for #10
+
+Source recovery development `e6d874510448f6cd3d0f21f5edabc3d2863a14ed`, Issue #10 and #12 original acceptance, Section 25.2, current approved single visible recipe and all prior evidence reviewed. Owner instruction: "get issues 5 and 10 closed please"; proactively pursue previously approved #12 contributor-balanced Community evidence hierarchy rather than hand the dependency back to owner. #5 ready stale retry migration remains untouched and unpublished.
+
+Implementation candidate: service-side admitted-only `dic_community_recommendation_evidence(uuid,text)` using only eligible validated, verified canonical Community projections, owned library-entry lookup, exact/related release/similar metadata tiers and one median per contributor per approximate ratio bucket. No private contributor, shot IDs, notes, grinder setting or identity are included in the response. The local recommendation accepts only signed-source shaped aggregate data, ranks Section 25.2 tiers conservatively, never overrides an owned exact family, never cross-copies style or grinder calibration, and always treats Community output as unproven. Network call is lazily made on coffee expansion, cache is account-epoch isolated and optional so Log Shot never blocks; no extra routine UI step.
+
+Added Node precedence, forged provenance and owner-override tests and isolated SQL fixture privacy checks. New migration remains source-staged. **TESTING** until CI passes. Do not publish or close #10 simply because source exists; read back tested PR merge and account/Community correctness first. Issue #12 may have additional durable provenance through Use Recommendation and hydration to address in followup; do not claim coverage of that before implementation. No product decision or Locked rule was changed.
+
+## CI recovery — October 24, 2026
+
+PR108 initial Node and visual CI identified a missing explicit production asset allowlist entry for newly imported site/lib/community-evidence.js. The source graph deliberately fails closed. Fixed by including the exact new module in build_cloud.mjs allowlist; this also copies and hashes it as part of the PWA shell. Source/Node and private browser checks need a new exact-SHA rerun. No deployment or hosted SQL applied.
+
+## CI intake recovery
+
+The first retry fixed the site graph by explicitly copying site/lib/community-evidence.js into production assets. Exact-source approval then correctly failed closed because the related build_cloud.mjs change was missing from queue scope_paths. Reconciled the new deployable build path in the same Issue #12 TESTING queue item, preserving Issue #5 READY. Rerun combined exact-source CI; do not publish until READY and separately authorized.
+
+## CI browser recovery — October 24 UTC
+
+PR108 post-allowlist exact tests passed all Node/build and SQL, but 390px browser QA bundle transpiler required the new community-evidence module registered before engine. It had initialized `Modules.engine` before `Modules.community_evidence`, producing a JavaScript destructuring error, not an application product failure. Corrected the explicitly ordered browser module list and added the optional read-only Community RPC fixture. This does not loosen test assertions. Rerun exact-source CI; staging only.

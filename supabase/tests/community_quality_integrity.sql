@@ -446,6 +446,23 @@ begin
  if not denied then raise exception 'Anonymous browsing was allowed';end if;
  execute 'reset role';
 
+ -- Tested member sees only verified, contributor-balanced, same-style
+ -- anonymous starting evidence for their own canonical coffee identity.
+ perform set_config('request.jwt.claim.sub',us[1]::text,true);
+ perform set_config('request.jwt.claims',
+   jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_community_recommendation_evidence(
+  (select id from public.library_entries where owner_id=us[1] and coffee_id=c1 limit 1),'Turbo');
+ execute 'reset role';
+ if (result->>'style') is distinct from 'Turbo' or
+    jsonb_array_length(result->'candidates')<1 or
+    result->'candidates'->0->>'tier' is distinct from 'exact' then
+  raise exception 'Exact verified community prior missing: %',result;end if;
+ if result::text like '%contributor_id%' or result::text like '%owner_id%' or
+    result::text like '%grind_setting%' or result::text like '%notes%' then
+  raise exception 'Private contributor metadata leaked';end if;
+
  -- Revoke admission immediately suppresses both community reads and stats.
  perform set_config('request.jwt.claim.sub',us[1]::text,true);
  perform set_config('request.jwt.claims',
