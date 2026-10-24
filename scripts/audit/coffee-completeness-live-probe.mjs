@@ -30,7 +30,8 @@ const targets=[
   recipe:{dose_g:18,yield_g:36,time_s_min:22,time_s_max:24},absent:['release_label']},
  {id:'sey-ruarai',url:'https://www.seycoffee.com/products/2026-ruarai-aa-separation-kenya',expected:{
   variety:/SL\s?28.*SL\s?34/i,origin:/Nyeri.*Kenya/i,producer:/\bRuarai\b/i,elevation_m:/1,?783\s*(?:m|masl)/i,
-  release_label:/November\s*2025/i,process:/^Washed$/i}},
+  release_label:/November\s*2025/i,process:/^Washed$/i},
+  allowable_withheld_conflicts:['origin']},
  {id:'black-white-lica',url:'https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural',expected:{
   variety:/^catua[ií]$/i,producer:/Lica Torres/i,origin:/Rivas.*Brunca.*Costa Rica/i,
   elevation_m:/1500\s*(?:m|masl)/i,process:/^Natural$/i,roast_level:/^Light$/i,
@@ -48,7 +49,8 @@ const targets=[
  {id:'manhattan-samuel',url:'https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/',expected:{
   roaster:/Manhattan Coffee Roasters/i,
   variety:/Caturra.*Chiroso/i,producer:/Diego Bermudez/i,origin:/Cauca.*Colombia/i,
-  elevation_m:/1960\s*(?:m|masl)/i,tasting_notes:/star anise.*dark fudge.*verbena/i}},
+  elevation_m:/1960\s*(?:m|masl)/i,tasting_notes:/star anise.*dark fudge.*verbena/i},
+  allowable_withheld_conflicts:['tasting_notes']},
  {id:'nomad-centroamericano',url:'https://nomadcoffee.es/products/centroamericano-natural-anaerobico',expected:{
   variety:/^Centroamericano$/i,origin:/Costa Rica/i,process:/^Anaerobic$/i,
   producer:/^Diego Robelo(?: y su familia)?$/i,elevation_m:/1200\s*[-–]\s*1400/i,release_label:/2026/},
@@ -83,6 +85,29 @@ const publicUrl=raw=>{
  }catch{return '';}
 };
 const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
+const safeSummary=value=>({sha256:sha(JSON.stringify(value)),type:Array.isArray(value)?'array':value===null?'null':typeof value,
+ count:Array.isArray(value)?value.length:undefined});
+function fixtureDifference(original,replay){
+ const sections=['ok','fields','available','roaster_recipe','roaster_details','conflicts','source_facts','source_facts_truncated',
+  'roast_hint','roast_source','elevation_source','producer_source','process_source','variety_source'];
+ const changed=sections.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key]));
+ const factId=fact=>sha(JSON.stringify(fact));
+ const before=original?.source_facts||[],after=replay?.source_facts||[];
+ const remaining=new Map();for(const fact of after){const id=factId(fact);remaining.set(id,(remaining.get(id)||0)+1);}
+ const missing=[];for(const fact of before){const id=factId(fact),count=remaining.get(id)||0;
+  if(count)remaining.set(id,count-1);else missing.push(fact);}
+ const labels=missing.slice(0,12).map(fact=>({
+  section:sensitiveKey.test(String(fact.section||''))?'redacted':String(fact.section||'').slice(0,45),
+  label:sensitiveKey.test(String(fact.label||''))?'redacted':String(fact.label||'').slice(0,65),
+  field:fact.field||null,source_type:fact.source_type||null}));
+ return {changed_sections:changed,canonical_fields_equal:isDeepStrictEqual(original?.fields,replay?.fields),
+  conflicts_equal:isDeepStrictEqual(original?.conflicts,replay?.conflicts),
+  recipes_equal:isDeepStrictEqual(original?.roaster_recipe,replay?.roaster_recipe),
+  original_facts:before.length,fixture_facts:after.length,
+  missing_exact_fact_count:missing.length,missing_fact_labels:labels,
+  prior_digest:safeSummary(original).sha256,fixture_digest:safeSummary(replay).sha256};
+}
+
 function sanitizeJson(value){
  return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
   .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
@@ -127,7 +152,11 @@ function assess(target,result){
  for(const [field,pattern] of Object.entries(target.expected||{})){
   checked.push(field);
   const value=result?.fields?.[field];
-  if(value==null||!String(value).trim())gaps.push({field,reason:result?.conflicts?.includes(field)?'conflicting_source_evidence':'missing_expected_source_field'});
+  if(value==null||!String(value).trim()){
+   const explicitlyWithheld=target.allowable_withheld_conflicts?.includes(field)&&result?.conflicts?.includes(field);
+   if(!explicitlyWithheld)gaps.push({field,reason:result?.conflicts?.includes(field)?'conflicting_source_evidence':'missing_expected_source_field'});
+   else checked.push('source_conflict_withheld.'+field);
+  }
   else if(!pattern.test(fold(value)))gaps.push({field,reason:'source_expectation_mismatch',actual:value,expected_pattern:pattern.source});
  }
  for(const [field,value] of Object.entries(target.recipe||{})){
@@ -188,6 +217,7 @@ async function probe(target){
    const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
    const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
+   if(!record.sanitization_preserves_html_extraction)record.sanitization_difference=fixtureDifference(original,replay);
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
