@@ -99,3 +99,7 @@ Run 40059619954 passed isolated PostgreSQL 17.11 and all 50 signed local PostgRE
 ## Owner test-evidence substitution, October 23/24 2026
 
 Owner explicitly accepts PR107 isolated signed-JWT integration testing in place of real-member session acceptance for Issues #5/#10 only (decision TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023, recorded in both canonical files). All 50 synthetic signed PostgREST HTTP assertions passed; no hosted GoTrue login. Issue #10 remains OPEN because the original criterion for contributor-balanced Community source/provenance hierarchy is unfinished in Issue #12. Issue #13 experiment lifecycle remains independent; no feature or release is waived beyond the exact test modality. The separate #5 stale retry migration is READY but unpublished. No production operation authorized.
+
+## Proactive ownership directive (owner Oct 23/24, 2026)
+
+Owner wants an Issue #10 closure request treated as end-to-end development authorization. Investigate and implement relevant #12 Community evidence integration instead of handing back a list of tasks. Resolve failed CI and retest immediately, verify exact source and merge, record evidence, queue READY without publishing. Do not treat the owner-approved isolated signed-JWT evidence as blanket waiver of #12 source/provenance behavior. Current #5 migration remains separately READY/unpublished. CI completion monitoring is configured hourly (not instant) and no project setting can provide unattended unscheduled execution.
