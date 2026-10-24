@@ -12,7 +12,7 @@
       "issue": 5,
       "pr": 107,
       "title": "Correct stale Pending Retry HTTP response",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
       "scope_paths": [
         "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
@@ -35,7 +35,12 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5",
-      "notes": "Changes only private retry RPC stale result from transport-hanging SQLSTATE 40001 to safe explicit nonmutating conflict. Does not publish or alter any member records. Ready source, NOT deployed. Synthetic CI signed JWT keys / accounts and official evidence are disposable only. Previous Issue #5 official-source real member acceptance remains unverified; another owner-authorized release required to apply narrow migration. Issue #10 remains open for authentic natural 2-family user acceptance and separate #12/#13 integration."
+      "notes": "Changes only private retry RPC stale result from transport-hanging SQLSTATE 40001 to safe explicit nonmutating conflict. Does not publish or alter any member records. Ready source, NOT deployed. Synthetic CI signed JWT keys / accounts and official evidence are disposable only. Previous Issue #5 official-source real member acceptance remains unverified; another owner-authorized release required to apply narrow migration. Issue #10 remains open for authentic natural 2-family user acceptance and separate #12/#13 integration.\nOctober 24 2026 UTC: Owner explicitly approved the needed production step. Applied exact tested migration source via Supabase production; provider assigned migration version 20261024052303 (rather than repository filename version 20261024034800). Readback verified new nonmutating conflict path present, retryable SQLSTATE 40001 absent; unchanged 23 shots/23 notes/2 Community/4 personal families/10 library. This is SQL-only delivery, NOT a Netlify publication. NEVER replay this function migration.",
+      "delivered_release_id": "DIC-20261024-ISSUE5-SQL-ONLY-07",
+      "delivered_sql_migration_version": "20261024052303",
+      "delivered_sql_source_blob_sha": "2a9eca5b32e37dd937a5257a02981dd6113b84f7",
+      "delivered_provider": "Supabase production only",
+      "delivered_netlify_deploy_id": null
     },
     {
       "id": "DIC-Q-12-community-prior-hierarchy",
