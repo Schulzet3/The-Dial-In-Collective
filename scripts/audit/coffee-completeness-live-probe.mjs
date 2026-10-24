@@ -122,7 +122,7 @@ function fixtureDifference(original,replay){
        if(depth>5||paths.length>20||isDeepStrictEqual(a,b))return;
        if(a&&b&&typeof a==='object'&&typeof b==='object'){
          for(const k of new Set([...Object.keys(a),...Object.keys(b)]))
-           walk(a[k],b[k],p+'/'+(sensitiveKey.test(k)?'[sensitive]':k),depth+1);
+           walk(a[k],b[k],p+'/'+(/^[A-Za-z][A-Za-z0-9_]{0,40}$/.test(k)?k:'[nonstandard_key]'),depth+1);
        }else paths.push({path:p,before_present:a!==undefined,after_present:b!==undefined,
          before_type:typeof a,after_type:typeof b});
      };walk(before,after,'offers',0);return paths;

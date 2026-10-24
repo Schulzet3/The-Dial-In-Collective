@@ -1,3 +1,8 @@
+## October 24 UTC — final public offer key identification
+40065720528 shows exactly one removed public offer property across nine variants, classified only as a sensitive-named key. Report its bounded identifier without its original value, alongside presence/type, to distinguish a customer secret from a public checkout availability URL before any sanitizer change. No raw content emitted and parity check not weakened. [dic-completeness-probe]
+
+---
+
 ## October 24 UTC — Nomad offers-only structure investigation
 40065666688 shows each of nine purchase variants differs only in nested public `offers` JSON, all other variant keys equivalent. Added bounded nested key-path diagnostics with sensitive key labels redacted, values never logged; strict parity stays mandatory. No runtime or production change. [dic-completeness-probe].
 
