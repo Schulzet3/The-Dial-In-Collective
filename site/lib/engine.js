@@ -228,6 +228,13 @@ export function recommendation(s,coffeeId,options={}) {
   const all=familyChoice.shots,local=all.filter(sh=>sh.setupVersionId===v.id);
   const basketFeed=local.filter(sh=>sh.basketId===basket.id&&sh.feedMode===feed);
   const feedLocal=local.filter(sh=>sh.feedMode===feed);
+  // Differences in time or temperature at the SAME ratio are observations,
+  // not proof of a second recipe. Do not invent a time/temperature threshold.
+  const comparable=basketFeed.filter(sh=>sh.calibrationId===v.calibrationId);
+  const ratios=new Set(comparable.map(sh=>String(sh.yieldG/sh.doseG)));
+  const differingTime=new Set(comparable.map(sh=>sh.timeS)).size>1;
+  const differingTemp=new Set(comparable.map(sh=>sh.tempC==null?'unspecified':sh.tempC)).size>1;
+  const unprovenNonRatioVariation=comparable.length>=2&&ratios.size===1&&(differingTime||differingTemp);
   const ratioEvidence=basketFeed.length?basketFeed:feedLocal.length?feedLocal:local.length?local:all;
   rec.ratio=stats(ratioEvidence.map(x=>x.yieldG/x.doseG),{singleWidth:CONFIG.singleYieldHalfWidth/basket.doseG});
   // Time from another setup, basket or feed must not masquerade as local proof.
@@ -235,7 +242,9 @@ export function recommendation(s,coffeeId,options={}) {
   rec.familyId=chosen.id;rec.observations=ratioEvidence.length;rec.established=local.length>0;
   rec.source=local.length?'Your dialed in window':'Starting reference from your other setup';
   rec.familySelection={basis:familyChoice.basis,candidates:familiesFor(s,coffeeId,style).length,
-   equipmentTier:familyChoice.tier,reason:familyChoice.reason};
+   equipmentTier:familyChoice.tier,reason:familyChoice.reason,
+    sameRatioNonRatioVariation:unprovenNonRatioVariation,
+    nonRatioSignificance:unprovenNonRatioVariation?'unproven':'not_indicated'};
   rec.reasons=familyChoice.reason?[familyChoice.reason]:local.length?[]:
    ['Your successful ratio from another setup; time and grind remain starting estimates.'];
  } else if(style==='Fast-Flow'&&!provisional) {

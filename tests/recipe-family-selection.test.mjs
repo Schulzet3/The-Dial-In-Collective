@@ -155,3 +155,21 @@ test('correcting an explicit favorite to non-green releases invalid manual selec
  assert.notEqual(choose(s).basis,'manual');
  assert.equal(recommendation(s,'coffee').familyId,'long');
 });
+
+test('same-ratio time and temperature variation is recorded without splitting an internal family or inventing taste significance',()=>{
+ const {s}=make({favorite:'short-a'});
+ const short=s.shots.filter(sh=>sh.familyId==='short');
+ short[1].yieldG=36;
+ short[1].timeS=42;
+ short[1].tempC=95;
+ short[0].tempC=91;
+ const before=structuredClone(s);
+ const rec=recommendation(s,'coffee');
+ assert.equal(rec.familyId,'short');
+ assert.equal(rec.familySelection.sameRatioNonRatioVariation,true);
+ assert.equal(rec.familySelection.nonRatioSignificance,'unproven');
+ assert.equal(rec.familySelection.candidates,2);
+ assert.deepEqual(s,before,'significance evaluation must not change shot history or recipe preferences');
+ assert.equal(rec.reasons.some(x=>/different extraction|temperature|time variation/i.test(x)),false,
+  'do not add extra recipe UI or unsupported taste claims');
+});

@@ -89,14 +89,18 @@
       "issue": 10,
       "pr": 103,
       "title": "Preserve an explicitly chosen recipe through successful shot corrections",
-      "state": "TESTING",
+      "state": "IN_PROGRESS",
       "merged_source_sha": "6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d",
       "scope_paths": [
-        "site/lib/engine.js"
+        "site/lib/engine.js",
+        "supabase/migrations/20261024021000_dic_personal_family_lifecycle_integrity.sql"
       ],
       "tests": [
         "PR103 initial exact-source validate, cloud-tests, mobile-browser-qa, security-inventory, sql and review SUCCESS; approval intake FAIL until queue entry registered. Three correction regression tests introduced; awaiting exact re-run.",
-        "PR103 head 1663ec6f30895976895bc5df86883d77e26bbffa exact-source 7/7 checks SUCCESS. Nonforce GitHub merge 6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d read back as development HEAD."
+        "PR103 head 1663ec6f30895976895bc5df86883d77e26bbffa exact-source 7/7 checks SUCCESS. Nonforce GitHub merge 6c82e4e5c9d48f2ecc8301e661d6617fb2e2890d read back as development HEAD.",
+        "Issue #10 follow-on source includes disposable PostgreSQL lifecycle test and same-ratio unproven-variation JS test; awaiting new exact-source CI.",
+        "First new CI validate 784/785; sole failure identified as new SQL test missing from static runner dispatch; repaired and awaiting full exact-source rerun.",
+        "SQL runner is a test tool, not deployable app payload; removed it from queue scope_paths after expected approval intake rejected it."
       ],
       "ci_runs": [
         40050780815,
@@ -106,10 +110,11 @@
         40050780892
       ],
       "blockers": [
-        "Wait for remaining merged-source review and mobile-browser QA checks, then reconcile to READY."
+        "Await full exact-source isolated SQL regression including new recipe_family_lifecycle.sql, plus application/approval/browser CI; merge and source readback pending.",
+        "New SQL migration remains UNAPPLIED to hosted Supabase; separate release authorization required."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
-      "notes": "No UI, SQL or public API changes, no deployment. This is a narrow issue #10 reliability slice; broader candidate/confirmation lifecycle, same-ratio significance and hosted multi-family scenarios remain open. Preserve the two existing independently READY queue items."
+      "notes": "No UI, SQL or public API changes, no deployment. This is a narrow issue #10 reliability slice; broader candidate/confirmation lifecycle, same-ratio significance and hosted multi-family scenarios remain open. Preserve the two existing independently READY queue items. Includes pending SQL migration 20261024021000; release dependency requires an authorized, exact-source production migration; existing READY queue items unchanged."
     },
     {
       "id": "DIC-Q-5-source-fact-integrity",
