@@ -13,9 +13,15 @@ export function selectCommunityPrior(data,style){
  if(!choices.length)return null;
  const ranked=[...choices].sort((a,b)=>levels[a.tier]-levels[b.tier]||
   b.contributor_count-a.contributor_count||b.shot_count-a.shot_count||
+  (b.confirmed_personal_family_count??0)-(a.confirmed_personal_family_count??0)||
   a.ratio-b.ratio);
  const c=ranked[0];
  return {tier:c.tier,tierNumber:levels[c.tier],ratio:Number(c.ratio),time:Number(c.time_s),
   shotCount:c.shot_count,contributorCount:c.contributor_count,
+  confirmedPersonalFamilyCount:Number.isInteger(c.confirmed_personal_family_count)
+   &&c.confirmed_personal_family_count>=0?c.confirmed_personal_family_count:0,
+  confirmedFamilyContributors:Number.isInteger(c.confirmed_family_contributors)
+   &&c.confirmed_family_contributors>=0?c.confirmed_family_contributors:0,
+  communityGroupIdentityVerified:false,
   evidence:'community_eligible',style,established:false,calibratedGrind:false};
 }
