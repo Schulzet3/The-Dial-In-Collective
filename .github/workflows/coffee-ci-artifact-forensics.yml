@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 22
       - name: Run exact recovered fixture and qualified-flavor controls
-        run: node --test tests/coffee-live-fixture-sanitization.test.mjs tests/coffee-public-source-repairs.test.mjs tests/coffee-qualified-flavor-continuation.test.mjs tests/coffee-frozen-source-identity-repairs.test.mjs tests/coffee-fresh-source-conflicts.test.mjs tests/coffee-coordinated-sensory-evidence.test.mjs
+        run: node --test tests/coffee-live-fixture-sanitization.test.mjs tests/coffee-public-source-repairs.test.mjs tests/coffee-qualified-flavor-continuation.test.mjs tests/coffee-frozen-source-identity-repairs.test.mjs tests/coffee-fresh-source-conflicts.test.mjs tests/coffee-coordinated-sensory-evidence.test.mjs tests/coffee-current-producer-role.test.mjs tests/coffee-release-literal-year.test.mjs
   focused-nomad-live:
     runs-on: ubuntu-24.04
     timeout-minutes: 8
@@ -68,3 +68,6 @@ jobs:
         run: /usr/bin/python3 scripts/audit/coffee-frozen-ci.py self-test
       - name: Run complete report integrity controls
         run: /usr/bin/python3 -m unittest discover -s tests/audit -p test_coffee_report_integrity.py
+
+      - name: Run independent changed-artifact reader controls
+        run: /usr/bin/python3 scripts/audit/coffee-reviewed-change-forensics.py --self-test

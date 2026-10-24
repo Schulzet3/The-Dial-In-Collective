@@ -330,6 +330,26 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
  }
  return [{label:countryNames(value).length?'Origin':'Region',value,quote:candidates.map(item=>item.quote).join(' | ').slice(0,2200)}];
 }
+function currentCoffeeReleasePrefix(sentence){
+ if(sentence.length>1800)return null;
+ const match=sentence.match(/^((?:Here's|Here’s|Here is)\s+what\s+you\s+can\s+expect\s+from\s+this\s+coffee\s+in\s+(20\d{2}\s*[/–—-]\s*(?:20)?\d{2})\s*:)(.*)$/i);
+ if(!match||!current(match[1])||!current(match[3].replace(/\bthan\s+last\s+year(?:['’]s)?\s+(?:harvest|crop)\b/gi,'than an earlier comparison')))return null;
+ return {label:'Release',value:match[2],quote:sentence};
+}
+// This one literal relationship is also valid in a selected Product's own
+// description. Do not expand all JSON prose into general identity guesses.
+export function extractCoffeeCurrentReleasePrefixes(html,{clean}={}){
+ const facts=[];
+ for(const block of productCoffeeProse(html,clean)){
+  if(block.educational||/^h[1-6]$/.test(block.tag))continue;
+  for(const sentence of sentences(block.text)){
+   const fact=currentCoffeeReleasePrefix(sentence);
+   if(fact&&!facts.some(item=>key(item.value)===key(fact.value)))facts.push(fact);
+   if(facts.length===12)return facts;
+  }
+ }
+ return facts;
+}
 export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={}){
  const facts=[],blocks=productCoffeeProse(html,clean).filter(block=>!block.educational);
  if(!name||!blocks.length)return {facts};
@@ -414,6 +434,10 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   }
   }
   for(const sentence of sentences(value)){
+   // The current date prefix is independent of a later past-harvest comparison.
+   // Keep both dates when another current claim genuinely disagrees.
+   const datedPrefix=currentCoffeeReleasePrefix(sentence);
+   if(datedPrefix)add(datedPrefix.label,datedPrefix.value,datedPrefix.quote);
    for(const claim of directOriginClaims(sentence)){
     if(claim.country)add('Country',claim.value,claim.quote);
     else originCandidates.push(claim);
@@ -532,7 +556,8 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
     if(harvest)add('Harvest',harvest[1],sentence);
     const datedOffering=sentence.match(/\b(?:our|this)\s+(?:(?:first|last|new|current|rotating|washed|natural|honey|anaerobic|single)\s+){0,5}(?:selection|offering|release|single origin)\b[^.!?]{0,65}\b(?:of|for)\s+(20\d{2})\b/i)||
      sentence.match(/\bbring\s+you\s+(?:the\s+)?(20\d{2})\s+lot\b/i)||
-     sentence.match(/\bexpect\s+from\s+this\s+coffee\s+in\s+(20\d{2}(?:\s*[-–—/]\s*(?:20)?\d{2})?)\b/i);
+     (!/\b(?:could|would|might|may|hypothetical|imagine|suppose)\b/i.test(sentence)&&
+      sentence.match(/\bexpect\s+from\s+this\s+coffee\s+in\s+(20\d{2}(?:\s*[-–—/]\s*(?:20)?\d{2})?)\b/i));
     if(datedOffering)add('Release',datedOffering[1],sentence);
     const seasonalProgram=sentence.match(/\b(?:cornerstone|part)\s+of\s+our\s+(20\d{2})\s+(spring|summer|autumn|fall|winter)\s+coffee\s+program\b/i);
     if(seasonalProgram)add('Release',seasonalProgram[2][0].toUpperCase()+seasonalProgram[2].slice(1).toLowerCase()+' '+seasonalProgram[1],sentence);

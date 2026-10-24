@@ -72,7 +72,8 @@ const noteParts=value=>String(value||'').split(/\s*(?:,|&|\||[•·;/]|\band\b)\
 const noteKey=value=>[...new Set(noteParts(value))].sort().join('|');
 const plainClean=(value,max=1000)=>String(value||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&amp;/gi,'&').replace(/&(?:nbsp|#160);/gi,' ').replace(/\s+/g,' ').trim().slice(0,max);
 export function normalizeExplicitCoffeeTastingNotes(value,{allowProse=false}={}){
- let text=plainClean(value,401);
+ let text=unconditionalFlavorPrefix(plainClean(value,401));
+ if(!text)return '';
  // A merchant may put a list bullet immediately after the printed field label.
  // This helper is used only once that label/role has already been established.
  text=text.replace(/^[-–—•]\s*(?=[\p{L}\p{N}])/u,'');
@@ -352,6 +353,10 @@ function frenchProductSensoryNotes(page,clean){
 // cannot become an unconditional profile simply because they say "notes of".
 const PREPARATION_QUALIFIED_FLAVOR=/\b(?:when|if|once|after|before|while)\s+(?:(?:it|this coffee|the coffee|this cup)\s+is\s+)?(?:served|prepared|brewed|mixed|combined|diluted|layered|cooled|heated|warmed)\b/i;
 const CONDITIONAL_FLAVOR=/\b(?:if|unless|when|after|before|while|once|until|because|only|may|might|could|would|should|can|depending|served|prepared|brewed|added|adding|diluted|steeped|cooled|heated|warmed|either|or|otherwise|alternatively|instead)\b/i;
+function unconditionalFlavorPrefix(value){
+ const clauses=value.split(';'),qualified=clauses.findIndex(text=>PREPARATION_QUALIFIED_FLAVOR.test(text));
+ return qualified<0?value:clauses.slice(0,qualified).join(';').trim();
+}
 function layeredComponentFlavor(sentence,clean){
  if(sentence.length>450||CONDITIONAL_FLAVOR.test(sentence))return '';
  const match=sentence.match(/^(.{2,100}?)\s+notes?\s+of\s+(?:our|the)\s+(.{2,80}?)\s+are\s+(?:(?:intricately|carefully|beautifully)\s+)?layered\s+with\s+(?:the\s+)?(.{2,140}?)\s+from\s+(?:our|the)\s+(.{2,80}?)[.!?]?$/i);
@@ -447,8 +452,12 @@ function flavorProse(page,clean){
    }
   }
   const sentences=blockText.split(/(?<=[.!?])\s+/u);
-  for(const [sentenceIndex,sentence] of sentences.entries()){
-   if(sentence.length>1800||PREPARATION_QUALIFIED_FLAVOR.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence.replace(/\bnot only\b|\bshould not be missed\b/gi,''))||
+  for(const [sentenceIndex,fullSentence] of sentences.entries()){
+   if(fullSentence.length>1800)continue;
+   // A later semicolon clause can qualify just a finish. Keep an earlier
+   // unconditional profile, but never promote that clause or later text.
+   const sentence=unconditionalFlavorPrefix(fullSentence);
+   if(!sentence||NONCURRENT_COFFEE_PROSE.test(sentence.replace(/\bnot only\b|\bshould not be missed\b/gi,''))||
     /\b(?:regional|varietal|cultivar|designation of origin)\b[^.!?]{0,220}\b(?:known|boasts?|recognition)\b/i.test(sentence))continue;
    const primary=primaryCurrentFlavor(sentence,clean);
    if(primary){narrative.set(noteKey(primary),primary);continue;}

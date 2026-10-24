@@ -82,8 +82,9 @@ function foundGrower(paragraphs,name=''){
   const currentFarm=currentLot&&!GENERAL_CONTEXT.test(sentence.slice(0,currentLot.index))&&factualSentence(currentLot[1])&&collectiveCredit(currentLot[2]);
   if(currentFarm)collectives.set(currentFarm.normalize('NFKC').toLowerCase(),currentFarm);
   const attributionContext=sentence.replace(/\bis not one (?:you|we)\b/gi,'is one you')
-   .replace(/\bwithout caffeine\b/gi,'decaffeinated').replace(/\bwithout a featured coffee\b/gi,'awaiting coffee');
-  if(!factualSentence(attributionContext)||!/\b(?:coffees?|producers?|farmers?|growers?|farms?|finca|hacienda|estate|station|mill|grown|produced|produces?|cultivated|cultivates?|harvested|farmed|sourced|collected|brought|comes|has|duo)\b/i.test(sentence))continue;
+   .replace(/\bwithout caffeine\b/gi,'decaffeinated').replace(/\bwithout a featured coffee\b/gi,'awaiting coffee')
+   .replace(/\bwithout oxygen\b/gi,'oxygen-free');
+  if(!factualSentence(attributionContext)||!/\b(?:coffees?|cherries|producers?|farmers?|growers?|farms?|finca|hacienda|estate|station|mill|grown|produced|produces?|cultivated|cultivates?|harvested|farmed|sourced|collected|brought|comes|has|duo)\b/i.test(sentence))continue;
   // A complete list explicitly credited to this lot outranks a later
   // biographical sentence naming just one of those same people. It never
   // absorbs a third, independently credited producer or a historical list.
@@ -97,6 +98,17 @@ function foundGrower(paragraphs,name=''){
     if(!lotCredits.has(key))lotCredits.set(key,{value:creditedLot[2].trim(),names});
    }
   }
+  const currentNewProducer=!/\b(?:formerly|previously|used to|until|(?:in|during|before)\s+(?:19|20)\d{2})\b/i.test(sentence);
+  // A named actor handling this coffee's cherries in a tank is an explicit
+  // production credit. Oxygen-free processing does not deny that actor.
+  const tankOperator=attributionContext.match(new RegExp('\\b'+PERSON+'\\s+sealed\\s+[^.!?;]{0,80}\\bcherries\\s+in\\s+(?:a|the)\\s+(?:sealed\\s+)?tank\\b','u'));
+  if(currentNewProducer&&tankOperator&&!BAD_PERSON.test(tankOperator[1]))
+   found.set(tankOperator[1].normalize('NFKC').toLowerCase(),tankOperator[1]);
+  // The same named subject and pronoun can explicitly state a current
+  // coffee-producer role after a short biographical introduction.
+  const workingProducer=sentence.match(new RegExp('^'+PERSON+'\\s+has\\s+been\\s+working\\b[^.!?;]{0,100}[–—-]\\s*(?:she|he)[’\\x27]s\\s+[^.!?;]{0,160},\\s+and\\s+(?:most\\s+recently\\s+|now\\s+|also\\s+)?an?\\s+(?:[a-z-]+\\s+){0,2}coffee\\s+producer\\b','u'));
+  if(currentNewProducer&&workingProducer&&!BAD_PERSON.test(workingProducer[1]))
+   found.set(workingProducer[1].normalize('NFKC').toLowerCase(),workingProducer[1]);
   const patterns=[
    new RegExp(String.raw`\b(?:from\s+)?(?:[Pp]roducer|[Ff]armer|[Gg]rower)\s*,?\s+`+CREDITED+String.raw`(?=\s+(?:and|of|who|at|on|in)\b|[,!.;]|$)`,'gu'),
    new RegExp(String.raw`\b(?:[Gg]rown|[Pp]roduced|[Cc]ultivated|[Hh]arvested|[Ff]armed)\s+by\s+(?:(?:the\s+)?(?:(?:female|male|dedicated|renowned)\s+)?(?:coffee\s+)?(?:producer|farmer|grower|pioneer)\s+)?`+CREDITED+String.raw`(?=\s+(?:and|who|at|on|in|from|high|along|near)\b|[,!.;—–]|$)`,'gu'),
@@ -170,7 +182,10 @@ function foundGrower(paragraphs,name=''){
     collectives.set(value.normalize('NFKC').toLowerCase(),value);
    }
   }
-  const namedGroup=sentence.match(new RegExp(String.raw`(?:^|[“"(])(`+NAME_WORD+String.raw`(?:\s+(?:`+PARTICLE+String.raw`\s+)?`+NAME_WORD+String.raw`){0,5})(?:[”")]|\s*\([^.!?]{2,100}\))?\s+is\s+(?:an?\s+)?(?:\d+[ -]member\s+)?(?:(?:smallholder\s+farmers?['’]?|female|women|coffee)\s+)*(?:group|association|cooperative)\s+(?:of\s+(?:(?:female|women|smallholder|organic-certified|coffee)\s+)*(?:coffee\s+)?(?:producers|growers|farmers)|working\s+across\b)`,'u'));
+  // Certification parentheses qualify the growers, not a different entity.
+  // Keep the source sentence intact and read only this role's comparison view.
+  const associationSentence=currentNewProducer?sentence.replace(/\s*\((?:and\s+)?[^()]{1,80}\bcertified\)\s*/gi,' '):sentence;
+  const namedGroup=associationSentence.match(new RegExp(String.raw`(?:^|[“"(])(`+NAME_WORD+String.raw`(?:\s+(?:`+PARTICLE+String.raw`\s+)?`+NAME_WORD+String.raw`){0,5})(?:[”")]|\s*\([^.!?]{2,100}\))?\s+is\s+(?:an?\s+)?(?:\d+[ -]member\s+)?(?:(?:smallholder\s+farmers?['’]?|female|women|coffee)\s+)*(?:group|association|cooperative)\s+(?:of\s+(?:(?:female|women|smallholder|organic-certified|coffee)\s+)*(?:coffee\s+)?(?:producers|growers|farmers)|working\s+across\b)`,'u'));
   if(namedGroup)collectives.set(namedGroup[1].normalize('NFKC').toLowerCase(),namedGroup[1]);
   const familyProduction=sentence.match(new RegExp('('+NAME_WORD+String.raw`(?:\s+`+NAME_WORD+String.raw`){0,3}\s+family)\s+(?:(?:grow|produce|cultivate)s?\s+coffees?\b|combines\s+[^.!?]{0,150}\bto\s+(?:grow|produce|cultivate)\s+coffees?\b)`,'u'));
   if(familyProduction)collectives.set(familyProduction[1].normalize('NFKC').toLowerCase(),familyProduction[1]);
@@ -184,6 +199,8 @@ function foundGrower(paragraphs,name=''){
    collectives.set(familyCultivation[2].normalize('NFKC').toLowerCase(),familyCultivation[2]);
   const group=sentence.match(/\b((?:(?:approximately|around|over|nearly)\s+)?(?:[\d,]+\s+)?(?:(?:small[ -]?holder|small|local|individual|family[- ]owned)\s+){1,3}(?:farmers?|growers?|producers?|farms?|farm holders))\s+(?:(?:who|that)\s+)?(?:cultivate|grow|produce|deliver|supply|harvest|tender)\b/i);
   if(group)collectives.set(group[1].normalize('NFKC').toLowerCase(),group[1]);
+  const workingFarms=sentence.match(/\b((?:(?:small|family[- ]owned|family|local|individual|independent)\s+){1,3}farms?)\s+work\s+[^.!?;]{1,90}?\band\s+(?:grow|produce|cultivate)\s+coffee\b/i);
+  if(currentNewProducer&&workingFarms)collectives.set(workingFarms[1].normalize('NFKC').toLowerCase(),workingFarms[1]);
   const supplied=sentence.match(/\b(?:coffee|cherries)\s+from\s+(?:a |the )?(?:network|group|collection)\s+of\s+([^.!?;]{3,140})(?=[.!?;]|$)/i)||
    sentence.match(/\bcoffee\s+is\s+a\s+collection\s+of\s+(?:the efforts of\s+)?([^.!?;]{3,140})(?=[.!?;]|$)/i);
   const sourceGroup=supplied&&collectiveCredit(supplied[1]);

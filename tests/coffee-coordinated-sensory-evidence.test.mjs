@@ -4,7 +4,7 @@ import {extractProductFlavorEvidence} from '../src/server/coffee-flavor-evidence
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 
 const source_url='https://roaster.example/products/current-coffee';
-const clean=(html,max=6000)=>String(html).replace(/<[^<>]*>/g,' ').replace(/&amp;/g,'&').replace(/\\s+/g,' ').trim().slice(0,max);
+const clean=(html,max=6000)=>String(html).replace(/<[^<>]*>/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim().slice(0,max);
 const page=body=>'<main><h1>Current Coffee</h1>'+body+'</main>';
 const notes=body=>extractProductFlavorEvidence(page(body),{clean});
 const cases=[
@@ -102,4 +102,21 @@ test('named component note pairs require a current selected blend relationship',
  const selected={'@type':'Product',name:'Current Coffee',url:source_url};
  const result=extractPublicCoffeeFacts('<script type="application/ld+json">'+JSON.stringify([selected,other])+'</script>'+page('<p>Origin: Kenya</p>'),{source_url});
  assert.equal(result.fields.tasting_notes,undefined);
+});
+
+test('a later preparation-qualified clause preserves only the earlier unconditional profile',()=>{
+ assert.equal(notes('<p>Tasting notes of caramel, peanut and red fruits; chocolatey finish when served with milk.</p>'),'caramel, peanut and red fruits');
+ assert.equal(notes('<p>This cup is smooth; when served with milk it has notes of raspberry and caramel.</p>'),'');
+ assert.equal(notes('<p>When served with milk, this coffee has notes of raspberry and caramel; chocolatey finish.</p>'),'');
+});
+
+test('printed sensory labels keep milk chocolate but preserve preparation qualifications',()=>{
+ assert.equal(notes('<p>Tasting Notes: milk chocolate, orange</p>'),'milk chocolate, orange');
+ for(const html of ['<p>Tasting Notes: caramel and chocolate when served with milk.</p>',
+  '<p>When served with milk, this coffee has notes of strawberry and orange.</p>']){
+  assert.equal(notes(html),'');
+  const result=extractPublicCoffeeFacts(page(html),{source_url});
+  assert.equal(result.fields.tasting_notes,undefined);
+  assert.ok(result.source_facts?.some(fact=>String(fact.value).includes('served with milk')));
+ }
 });

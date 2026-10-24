@@ -6,7 +6,7 @@ import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evid
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
-import {extractCoffeeIdentityEvidence,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
+import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
@@ -607,6 +607,7 @@ function productDetails(fields,p){
   const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   const body=/<[a-z][^>]*>/i.test(currentDescription)?currentDescription:currentDescription.split(/\r?\n/).filter(line=>line.trim()).map(line=>'<p>'+escape(line)+'</p>').join('');
   const story='<main><h1>'+escape(fields.name)+'</h1><div itemprop="description">'+body+'</div></main>';
+  for(const fact of extractCoffeeCurrentReleasePrefixes(story,{clean}))addIdentityFact(fields,fact);
   const explicit=productFlavorProfiles(fields,story);
   if(!explicit){
    const notes=extractProductFlavorEvidence(story,{clean});

@@ -94,7 +94,7 @@ jobs:
             --repo "$GITHUB_WORKSPACE" \
             --work "$RUNNER_TEMP/dic-frozen-corpus" \
             --output "$RUNNER_TEMP/dic-frozen-corpus/output" \
-            --expected-fingerprint 65e4a3e234d2e37fc6d999d80fbf3a959e39cfe3851b79f0aa9c2bb8ce98a544 \
+            --expected-fingerprint fd7b32facd2a36ebfce6fabe97cf6594185c0e1301293122543c2128f0ec46ea \
             "${audit_review_args[@]}"
       - name: Erase any remaining ephemeral receiver key
         if: always()
