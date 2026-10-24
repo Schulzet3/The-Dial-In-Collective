@@ -22,8 +22,8 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/dic-candidate12-change-review"
           sha256sum --check <<'DIC_REVIEW_PINS'
-          ff6167fe571e3a35140a9003994ef696788e59d1c167559920ef9d6e398023e9  scripts/audit/coffee-reviewed-change-forensics.py
-          7e78c9813436437be1a2ebd940d4260591200f9a98d64b234de9d03e056c3ce0  docs/audits/extractor-candidate12-forensics-input-40071855281-1.json
+          5611a19f71bf98712c6f8219c697dfe0d70f355548470a7dc2527776df7e3e9d  scripts/audit/coffee-reviewed-change-forensics.py
+          7d0d35a13c49853c915126404bbd192ea2e505496940b1bef2aa88a745995780  docs/audits/extractor-candidate12-forensics-input-40073531611-1.json
           DIC_REVIEW_PINS
           {
             /usr/bin/python3 --version
@@ -41,8 +41,8 @@ jobs:
         run: |
           set -euo pipefail
           /usr/bin/python3 -B scripts/audit/coffee-reviewed-change-forensics.py \
-            --config docs/audits/extractor-candidate12-forensics-input-40071855281-1.json \
-            --config-sha256 7e78c9813436437be1a2ebd940d4260591200f9a98d64b234de9d03e056c3ce0 \
+            --config docs/audits/extractor-candidate12-forensics-input-40073531611-1.json \
+            --config-sha256 7d0d35a13c49853c915126404bbd192ea2e505496940b1bef2aa88a745995780 \
             2>&1 | tee "$RUNNER_TEMP/dic-candidate12-change-review/review.jsonl"
       - name: Retain bounded review evidence without archived source captures
         if: always()
