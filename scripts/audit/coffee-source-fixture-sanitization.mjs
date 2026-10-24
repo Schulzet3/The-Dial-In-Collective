@@ -77,7 +77,7 @@ function selectedPublicOffers(value,source){
   seen.add(item);visited++;
   if(!Array.isArray(item)&&(hasType(item,'product')||hasType(item,'productgroup'))){
    const url=productUrl(Object.hasOwn(item,'url')?item.url:item['@id'],source);
-   if(url){
+   if(url&&!(Object.hasOwn(item,'url')&&rootSchemaIdentity(item['@id'],source,'Product'))){
     addOffers(item.offers,url.searchParams.get('variant'));
     if(!url.searchParams.has('variant')){
      const variants=Array.isArray(item.hasVariant)?item.hasVariant:[item.hasVariant];
