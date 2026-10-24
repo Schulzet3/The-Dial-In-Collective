@@ -151,12 +151,9 @@ begin
  execute 'reset role';
  perform set_config('request.jwt.claim.sub',u1::text,true);
  execute 'set local role authenticated';
- denied:=false;
- begin
-  perform public.dic_member_retry_pending_approval(sid,base_rev+1);
- exception when serialization_failure then denied:=true;
- end;
- if not denied then raise exception 'Stale revision accepted';end if;
+ resp:=public.dic_member_retry_pending_approval(sid,base_rev+1);
+ if resp->>'code' is distinct from 'conflict' or resp->>'ok' is distinct from 'false' then
+  raise exception 'Stale revision accepted: %',resp;end if;
  resp:=public.dic_member_retry_pending_approval(sid,base_rev);
  if resp->>'status'<>'verified' then raise exception 'Existing Pending retry did not approve: %',resp;end if;
  if not exists(select 1 from public.library_entries where id=lid and

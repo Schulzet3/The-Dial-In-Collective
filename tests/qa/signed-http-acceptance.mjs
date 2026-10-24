@@ -1,10 +1,9 @@
 // CI ONLY. Real HMAC-signed JWTs, verified by disposable PostgREST 12.2,
 // targeting ONLY locally built dic_ci; NOT GoTrue-issued production tokens.
 import assert from 'node:assert/strict';
-import {createHmac} from 'node:crypto';
+import {createHmac,randomUUID} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFileSync} from 'node:fs';
-import {randomUUID} from 'node:crypto';
 
 const url=process.env.DIC_CI_HTTP_URL;
 const secret=process.env.DIC_CI_JWT_SECRET;
@@ -260,7 +259,7 @@ assert.equal(scalar("(select status from public.coffee_submissions where id='"+p
 pass('Foreign member signed Retry cannot change someone elses Pending record');
 r=await rpc('dic_member_retry_pending_approval',familyToken,
  {p_submission_id:pendingId,p_expected_revision:99});
-assert.ok(r.status>=400||r.data?.ok!==true);
+assert.equal(r.status,200);assert.equal(r.data?.code,'conflict');
 assert.equal(scalar("(select status from public.coffee_submissions where id='"+pendingId+"')"),'pending');
 pass('Stale signed Pending retry does not approve or alter record');
 r=await rpc('dic_member_retry_pending_approval',familyToken,
