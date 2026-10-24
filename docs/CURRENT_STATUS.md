@@ -1,3 +1,8 @@
+## October 24, 2026 UTC — Issue #12 family identity audit
+
+Recovered exact development SHA 8b8cffd and verified five merged-source PR110 CI runs SUCCESS. PR108 9135e06, extractor PR109 34a1755 and PR110 8b8cffd are merged. Read Section 25.2 and original #12 acceptance. Source SQL returns distinct_family_basis=ratio_bucket_observed from 0.25-ratio groups and does not populate community_shots.family_id. These are independently contributor-balanced observed groups, not confirmed shared family identities. Existing client correctly marks ratioFamiliesAreEstimated; cannot claim original distinct successful Community-family criterion fully verified. #12 remains TESTING, #10 remains OPEN pending #12. #5 remains READY/unpublished. New regression checks below are NOT PASSED until tested and merged. No production provider, database or member writes.
+
+---
 ## October23,2026 MDT: extractor PR109 reconciled with Community source9135e06
 
 Concurrent Community recommendation source9135e06 is preserved, including its separately TESTING queue item. Shared client mutation behavior retains both audit owner/receipt safeguards and Community evidence. Combined local1372 Node tests,53Python tests,lint/build,mobile import and9actual packaged/offline checks PASS after fixing a missing module in the local browser harness. The32 extractor runtime files and frozen603 benchmark remain candidate8-identical. Updated-source GitHub Actions and non-force integration remain pending; queue TESTING, no publication.

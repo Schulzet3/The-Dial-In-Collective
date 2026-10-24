@@ -50,3 +50,18 @@ test('a related release is weighted more conservatively than exact, similar weak
  }
  assert.ok(deltas[0]>deltas[1]&&deltas[1]>deltas[2],deltas.join(','));
 });
+
+test('Community observed ratio groups remain separate unproven references, not confirmed owned families',()=>{
+ const {s,id}=create();
+ s.communityEvidence={[id]:{Turbo:{style:'Turbo',candidates:[
+  {tier:'exact',style:'Turbo',ratio:2.12,time_s:29,shot_count:2,contributor_count:1,distinct_family_basis:'ratio_bucket_observed',source:'eligible_verified_community',calibrated_grind:false},
+  {tier:'exact',style:'Turbo',ratio:3.14,time_s:18,shot_count:7,contributor_count:3,distinct_family_basis:'ratio_bucket_observed',source:'eligible_verified_community',calibrated_grind:false}
+ ]}}};
+ const prior=selectCommunityPrior(s.communityEvidence[id].Turbo,'Turbo');
+ assert.equal(prior.ratio,3.14);
+ assert.equal(prior.contributorCount,3);
+ const rec=recommendation(s,id);
+ assert.equal(rec.communityEvidence.ratioFamiliesAreEstimated,true);
+ assert.equal(rec.established,false);
+ assert.equal(rec.familyId,null);
+});
