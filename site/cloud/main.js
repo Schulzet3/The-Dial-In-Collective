@@ -197,6 +197,11 @@ class CloudApp {
   if(!this.pending.length&&navigator.onLine){try{const held=await this.client.listCommunityReviews();if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.reviews=held;this.reviewError='';}catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.reviewError='Required shot reviews are temporarily unavailable. Reconnect and check Sync.';}}
   if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)this.expanded.add(M.workspace(this.state).currentCoffeeId);
   this.render();
+  if(this.status?.admitted&&globalThis.navigator?.onLine!==false)
+   for(const id of this.expanded)this.loadRecommendationEvidence(id).catch(error=>{
+    if(isAccessDenied(error)&&epoch===this.epoch&&who.id===this.identity?.id)
+     this.denyAccess(who,epoch).catch(()=>{});
+   });
  }
  async mutate(action,payload,{onlineOnly=false}={}){
   const owner=this.identity?.id,epoch=this.epoch;
@@ -563,6 +568,25 @@ class CloudApp {
    }catch(error){if(error.code==='account_changed')throw error;break;}
   }
  }
+ async loadRecommendationEvidence(id){
+  if(!this.status?.admitted||globalThis.navigator?.onLine===false||!this.identity?.id)return;
+  const style=M.coffeeState(this.state,id).style,key=id+':'+style;
+  if(Object.hasOwn(this.recommendationEvidence[id]||{},style)||
+     this.recommendationEvidenceRequests.has(key))return;
+  this.recommendationEvidenceRequests.add(key);
+  const owner=this.identity.id,epoch=this.epoch;
+  try{
+   const evidence=await this.inSession(()=>this.client.recommendationCommunityEvidence(id,style));
+   if(this.identity?.id===owner&&this.epoch===epoch){
+    (this.recommendationEvidence[id] ||= {})[style]=evidence;
+    this.state.communityEvidence=this.recommendationEvidence;
+    this.render();
+   }
+  }catch(error){
+   if(isAccessDenied(error))throw error;
+   // Missing Community data must never block logging or personal recipes.
+  }finally{this.recommendationEvidenceRequests.delete(key);}
+ }
  async expandCoffee(id){
   if(this.expanded.has(id)){
    this.expanded.delete(id);if(this.tempCoffee===id)this.tempCoffee=null;
@@ -571,27 +595,8 @@ class CloudApp {
   }
   const coffee=this.state.coffees.find(x=>x.id===id);if(!coffee)return;
   this.expanded.add(id);this.firstStylePromptId=null;this.render();
-   // Lazy optional Community evidence; retain independent personal shot flow.
-   if(this.status?.admitted&&globalThis.navigator?.onLine!==false){
-    const style=M.coffeeState(this.state,id).style,key=id+':'+style;
-    if(!Object.hasOwn(this.recommendationEvidence[id]||{},style)&&
-       !this.recommendationEvidenceRequests.has(key)){
-     this.recommendationEvidenceRequests.add(key);
-     const owner=this.identity?.id,epoch=this.epoch;
-     try{
-      const evidence=await this.inSession(()=>this.client.recommendationCommunityEvidence(id,style));
-      if(this.identity?.id===owner&&this.epoch===epoch){
-       (this.recommendationEvidence[id] ||= {})[style]=evidence;
-       this.state.communityEvidence=this.recommendationEvidence;
-       this.render();
-      }
-     }catch(error){
-      if(isAccessDenied(error))throw error;
-      // Community prior unavailable: preserve personal recommendation and history.
-     }finally{this.recommendationEvidenceRequests.delete(key);}
-    }
-   }
-  if(!this.identity?.id||this.state.shots.some(sh=>sh.coffeeId===id))return;
+   await this.loadRecommendationEvidence(id);
+ if(!this.identity?.id||this.state.shots.some(sh=>sh.coffeeId===id))return;
   const owner=this.identity.id,epoch=this.epoch,key=owner+':'+id;
   if(this.firstStyleClaimInFlight.has(key))return;
   this.firstStyleClaimInFlight.add(key);
@@ -629,7 +634,7 @@ class CloudApp {
  }
  showLog(cid,editing=null,styleOverride=null){
   const c=this.state.coffees.find(c=>c.id===cid),v=M.activeVersion(this.state);this.logCoffee=cid;this.editing=editing;
-  this.draft=editing?C.clone(editing):E.prefill(this.state,cid,styleOverride?{style:styleOverride}:{});this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
+  this.draft=editing?C.clone(editing):E.prefill(this.state,cid,styleOverride?{style:styleOverride}:{});if(!editing)this.draft.recommendationContext=null;this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
   const d=this.draft,rec=E.recommendation(this.state,cid,styleOverride?{style:styleOverride}:{});this.show(editing?'Edit Shot':'Log A Shot',`<form id=shot novalidate><p class=recipe-label>${e(c.name)} · ${e(d.style)}</p>${!editing?`<div id=log-reference>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}</div>`:''}<div class="form-grid space-top">${field('Dose (g)','doseG',d.doseG,{required:true,type:'number',step:'.1'})}${field('Yield (g)','yieldG',d.yieldG,{required:true,type:'number',step:'.1'})}${field('Time (s)','timeS',d.timeS,{required:true,type:'number',step:'.1'})}<div>${field('Grind Setting','grindSetting',d.grindSetting,{required:true,type:'number',step:'.1'})}${!editing?button('Use Recommendation','use-grind','','use-recommendation'):''}</div>${v.advanced.temperature||editing?.tempC!=null?`<div>${field(`Temperature (°${this.logUnit}, Optional)`,'temperature',C.tempDisplay(d.tempC,this.logUnit),{type:'number',step:'1'})}${!editing?button('Use Recommendation','use-temp','','use-recommendation'):''}</div>`:''}</div>${v.advanced.slowFeed&&!editing?checkbox('slowFeed','Slow Feed',d.feedMode==='slow'):''}<div id=ratings>${scales(d.tasteScales)}</div><label class=field><span>Notes (Optional · Private)</span><textarea name=notes>${e(d.notes||'')}</textarea></label><aside id="shot-dose-advisory" class="helper" role="status" hidden><span data-dose-message></span> <button type="button" class="ghost compact" data-action="dismiss-dose-advisory">Dismiss</button></aside><p class=helper role=alert></p><button class="primary full space-top" type=submit>Save Shot & Get Suggestion</button></form>`);
   this.updateDoseAdvisory();
  }
@@ -775,7 +780,21 @@ class CloudApp {
    if(a==='edit-coffee'){if(this.pending.length)throw new Error('Finish syncing before editing coffee details.');this.showEditCoffee(id);return;}
    if(a==='edit'){if(this.pending.length)throw new Error('Finish syncing before editing existing shots.');const sh=this.state.shots.find(x=>x.id===id);this.showLog(sh.coffeeId,sh);return;}
    if(a==='rate'){this.readDraft();this.draft.tasteScales[target.dataset.key]=Number(target.dataset.value);sheet.querySelector('#ratings').innerHTML=scales(this.draft.tasteScales);const alert=sheet.querySelector('[role=alert]');if(alert)alert.textContent='';return;}
-   if(a==='use-grind'||a==='use-temp'){this.readDraft();const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});if(a==='use-grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;else{this.draft.tempC=r.tempC;sheet.querySelector('[name=temperature]').value=C.tempDisplay(r.tempC,this.logUnit);}this.readDraft();return;}
+   if(a==='use-grind'||a==='use-temp'){
+    this.readDraft();
+    const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});
+    const control=a==='use-grind'?'grind':'temperature';
+    if(control==='grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;
+    else{this.draft.tempC=r.tempC;sheet.querySelector('[name=temperature]').value=C.tempDisplay(r.tempC,this.logUnit);}
+    this.draft.recommendationContext={
+      source_label:String(r.source||'Starting recommendation').slice(0,90),
+      used_controls:[...new Set([...(this.draft.recommendationContext?.used_controls||[]),control])],
+      ...(r.communityEvidence?{community_tier:r.communityEvidence.tier,
+       contributor_count:r.communityEvidence.contributorCount,
+       shot_count:r.communityEvidence.shotCount}: {})
+    };
+    this.readDraft();return;
+   }
    if(a==='switch'){this.show('Your Workspaces',this.state.setups.map(x=>`<div class="switch-row"><div class="switch-info"><strong>${e(x.name)}</strong>${x.id===this.state.activeSetupId?'<small>Current Setup</small>':''}</div><div class="switch-actions">${button('Use','choose-setup',`data-id="${e(x.id)}"`,'secondary compact')}${button('Rename','rename-setup',`data-id="${e(x.id)}"`,'ghost compact')}</div></div>`).join(''));return;}
    if(a==='choose-setup'){await this.mutate('select_setup',{setup_id:id,expected_revision:this.raw.preferences.revision},{onlineOnly:true});this.expanded.clear();const pin=M.workspace(this.state).currentCoffeeId;if(pin)this.expanded.add(pin);sheet.close();this.render();return;}
    if(a==='style'){const p=M.coffeeState(this.state,id);this.styleCoffee=id;this.styleRevision=this.raw.workspaceCoffees.find(x=>x.library_entry_id===id&&x.setup_version_id===M.activeVersion(this.state).id)?.revision||0;this.show('Shot Style',`<form id=style>${select('Style','style',C.STYLES.filter(s=>s!=='Custom'),p.style)}<p class="helper space-top">Styles are guidelines, not pass/fail rules.</p><button class="primary full">Use Style</button></form>`);return;}
