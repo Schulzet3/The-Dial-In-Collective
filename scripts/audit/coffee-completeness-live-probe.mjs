@@ -106,6 +106,13 @@ function fixtureDifference(original,replay){
   recipes_equal:isDeepStrictEqual(original?.roaster_recipe,replay?.roaster_recipe),
   original_facts:before.length,fixture_facts:after.length,
   missing_exact_fact_count:missing.length,missing_fact_labels:labels,
+  differing_fact_shapes:missing.slice(0,12).map(fact=>{const counterpart=after.find(x=>x.label===fact.label&&x.source_path===fact.source_path);return {
+   label:fact.label,source_path:fact.source_path||null,
+   original_keys:Object.keys(fact).sort(),replay_keys:counterpart?Object.keys(counterpart).sort():[],
+   original_value_type:typeof fact.value,replay_value_type:typeof counterpart?.value,
+   original_value_keys:fact.value&&typeof fact.value==='object'?Object.keys(fact.value).sort():null,
+   replay_value_keys:counterpart?.value&&typeof counterpart.value==='object'?Object.keys(counterpart.value).sort():null,
+   original_value_sha:sha(JSON.stringify(fact.value)),replay_value_sha:sha(JSON.stringify(counterpart?.value))};}),
   prior_digest:safeSummary(original).sha256,fixture_digest:safeSummary(replay).sha256};
 }
 
