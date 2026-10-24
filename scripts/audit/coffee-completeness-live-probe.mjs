@@ -156,6 +156,17 @@ async function probe(target){
    const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
    const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
+   if(!record.sanitization_preserves_html_extraction){
+    // Fail closed while retaining only public, bounded differences needed
+    // to repair capture parity; never hide a divergent source fact.
+    const keys=[...new Set([...Object.keys(original||{}),...Object.keys(replay||{})])];
+    record.parity_differences=keys.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key]));
+    record.parity_field_differences=[...new Set([...Object.keys(original?.fields||{}),...Object.keys(replay?.fields||{})])]
+     .filter(key=>!isDeepStrictEqual(original?.fields?.[key],replay?.fields?.[key]));
+    record.parity_conflicts_original=original?.conflicts||[];
+    record.parity_conflicts_replay=replay?.conflicts||[];
+    record.parity_source_fact_counts=[original?.source_facts?.length??0,replay?.source_facts?.length??0];
+   }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
