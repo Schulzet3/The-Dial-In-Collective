@@ -63,3 +63,20 @@ test('CI must detect any app file introduced without even an IN_PROGRESS queue i
  assert.equal(assessIntakeCoverage({...q,items:[pending]},['site/cloud/shot_card.js']).tracked,true);
  assert.equal(assessIntakeCoverage({...q,items:[]},[]).tracked,true);
 });
+
+
+test('a separately applied Supabase SQL-only migration is covered only by exact verified receipt and source blob',()=>{
+ const sql='supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql';
+ const deployed={...queued,id:'DIC-Q-5',issue:5,state:'DEPLOYED',scope_paths:[sql],
+  delivered_provider:'Supabase production only',delivered_release_id:'DIC-20261024-ISSUE5-SQL-ONLY-07',
+  delivered_sql_migration_version:'20261024052303',delivered_sql_source_blob_sha:C};
+ const candidate={...q,items:[queued,deployed]};
+ assert.equal(assessIntakeCoverage(candidate,[sql],{currentBlobSha:()=>C}).tracked,true);
+ assert.equal(assessIntakeCoverage(candidate,[sql],{currentBlobSha:()=>B}).tracked,false);
+ assert.equal(assessIntakeCoverage(candidate,[sql]).tracked,false);
+ assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,delivered_provider:'unverified'}]},[sql],{currentBlobSha:()=>C}).tracked,false);
+ assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,delivered_sql_migration_version:null}]},[sql],{currentBlobSha:()=>C}).tracked,false);
+ assert.equal(assessIntakeCoverage(candidate,['site/cloud/shot_card.js',sql,'supabase/migrations/new.sql'],{currentBlobSha:()=>C}).tracked,false);
+ assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,scope_paths:['site/cloud/shot_card.js']}]},['site/cloud/shot_card.js'],{currentBlobSha:()=>C}).tracked,true,
+  'a separate non-DEPLOYED READY item still covers its own frontend path');
+});

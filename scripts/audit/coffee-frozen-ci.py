@@ -3,7 +3,7 @@
 
 This runner never creates an oracle, changes a scorer, executes archived code,
 or accepts a changed frozen output automatically. Transfer credentials remain
-only in the captured GitHub event and helper stdin, never in retained artifacts.
+only in process memory and helper stdin, never in repository history or artifacts.
 """
 from __future__ import annotations
 
@@ -12,6 +12,7 @@ import base64
 import contextlib
 from datetime import datetime, timezone
 import hashlib
+import hmac
 import importlib.util
 import io
 import json
@@ -153,25 +154,233 @@ def check_transfer(label, transfer):
     require(valid, "Unexpected prepared transfer host for " + label)
 
 
-def materialize_from_event(work):
-    """Use the current unmodified Library helper; never raw-download Library bytes."""
-    require(os.environ.get("GITHUB_REPOSITORY") == REPOSITORY, "Unexpected repository")
+
+CHANNEL_ALGORITHM = "x25519-xsalsa20-poly1305"
+CHANNEL_MARKER = "DIC_FROZEN_INPUT_ENCRYPTED"
+CHANNEL_SECONDS = 1200
+PUBLIC_INTEROP = {
+    "sender_secret_key": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+    "sender_public_key": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+    "receiver_secret_key": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+    "receiver_public_key": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+    "nonce": "69696ee955b62b73cd62bda875fc73d68219e0036b7a0b37",
+    "message": "DIC frozen archive channel interoperability v1",
+    "ciphertext": "a8eca2ae0cff9b9fa4355c1199c084d074d7277a129b8fdc68ec63cdab7412dc6c7ecbee324e331e69651c373bf132e44a431ea1ca03f40d3e14a1e5c415",
+    "tweetnacl_source_sha256": "6bcd37a3b20dce913f82d4b23e4e2b661058b4b953df8a3f8c45d56ac4f72447",
+}
+
+
+def crypto_classes():
+    # Ubuntu's free PyNaCl/libsodium package; no application dependency or key.
+    from nacl.public import Box, PrivateKey, PublicKey
+    return Box, PrivateKey, PublicKey
+
+
+def verify_public_interop():
+    Box, PrivateKey, PublicKey = crypto_classes()
+    vector = PUBLIC_INTEROP
+    sender = PrivateKey(bytes.fromhex(vector["sender_secret_key"]))
+    receiver = PrivateKey(bytes.fromhex(vector["receiver_secret_key"]))
+    require(bytes(sender.public_key).hex() == vector["sender_public_key"]
+            and bytes(receiver.public_key).hex() == vector["receiver_public_key"],
+            "Public RFC7748 key interoperability control failed")
+    nonce, message = bytes.fromhex(vector["nonce"]), vector["message"].encode("ascii")
+    encrypted = Box(sender, receiver.public_key).encrypt(message, nonce).ciphertext
+    require(encrypted.hex() == vector["ciphertext"],
+            "Public TweetNaCl/PyNaCl ciphertext interoperability control failed")
+    require(Box(receiver, PublicKey(bytes.fromhex(vector["sender_public_key"]))).decrypt(
+            encrypted, nonce) == message, "Public channel decrypt control failed")
+    # Independent standard-library HMAC/HKDF check against the public jsSHA
+    # vector. Only public test bytes are used; no transfer seed reaches CI.
+    hmac_expected = ("87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cde"
+                     "daa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854")
+    require(hmac.new(bytes([11]) * 20, b"Hi There", hashlib.sha512).hexdigest() == hmac_expected,
+            "RFC4231 HMAC-SHA512 public control failed")
+    salt = b"DIC frozen input transfer HKDF salt v1"
+    info = b"DIC public HKDF compatibility v1"
+    prk = hmac.new(salt, bytes(range(64)), hashlib.sha512).digest()
+    okm = hmac.new(prk, info + bytes([1]), hashlib.sha512).digest()[:56]
+    require(prk.hex() == "0cdc8aaaec22a2e9a78241fbf5472dd8c6f73b3013f63fba0ac1f2b4397ba94ec793720d70970af9d9f0056f089916f4ff7c2e1a96127212fc3bc288fc8349fb"
+            and okm.hex() == "1a68f3d4ab70a17ba545f31346054ce03fbe06bf13d58e811985d6967aaace104ec5b8a045bdf78a3707d1766bb0b25885c3d4b28a741ee9",
+            "Public jsSHA/Python HKDF-SHA512 compatibility control failed")
+    return {"algorithm": CHANNEL_ALGORITHM, "public_vector_pass": True,
+            "hmac_sha512_public_vector_pass": True, "hkdf_sha512_public_vector_pass": True,
+            "tweetnacl_source_sha256": vector["tweetnacl_source_sha256"],
+            "public_vector_ciphertext_sha256": hashlib.sha256(encrypted).hexdigest()}
+
+
+def current_run_context():
+    require(os.environ.get("GITHUB_REPOSITORY") == REPOSITORY
+            and os.environ.get("GITHUB_EVENT_NAME") == "pull_request", "Unexpected repository or event")
     event = load_json(os.environ["GITHUB_EVENT_PATH"])
     pr = event.get("pull_request", {})
     require(pr.get("head", {}).get("ref") == AUDIT_BRANCH
-            and pr.get("head", {}).get("repo", {}).get("full_name") == REPOSITORY,
+            and pr.get("head", {}).get("repo", {}).get("full_name") == REPOSITORY
+            and pr.get("base", {}).get("ref") == "development/backend-foundation",
             "Frozen inputs are restricted to the authorized same-repository audit PR")
-    body = pr.get("body") or ""
-    matches = re.findall(r"<!--\s*DIC_FROZEN_INPUT_TRANSFERS\s*\n([\s\S]*?)\n-->", body)
-    require(len(matches) == 1, "Exactly one prepared frozen-input marker is required")
+    number, head = event.get("number"), pr.get("head", {}).get("sha")
+    require(type(number) is int and number > 0 and number == pr.get("number")
+            and isinstance(head, str) and re.fullmatch(r"[0-9a-f]{40}", head),
+            "Invalid pull-request identity")
+    repo = Path(__file__).resolve().parents[2]
+    actual_head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip()
+    require(actual_head == head, "Frozen input channel must bind to the actual checked-out PR head")
+    run_id, attempt = os.environ.get("GITHUB_RUN_ID", ""), os.environ.get("GITHUB_RUN_ATTEMPT", "")
+    require(run_id.isdigit() and int(run_id) > 0 and attempt.isdigit() and int(attempt) > 0,
+            "Invalid workflow run identity")
+    return {"repository": REPOSITORY, "pr_number": number, "head_sha": head,
+            "run_id": run_id, "run_attempt": attempt}
+
+
+def write_private(path, value):
+    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(descriptor, "wb") as stream:
+        stream.write(value)
+
+
+def prepare_channel(work):
+    context = current_run_context()
+    interop = verify_public_interop()
+    _Box, PrivateKey, _PublicKey = crypto_classes()
+    work.mkdir(parents=True, exist_ok=True, mode=0o700)
+    private_dir, public_dir = work / "channel-private", work / "channel-public"
+    private_dir.mkdir(mode=0o700)
+    public_dir.mkdir(mode=0o700)
+    receiver = PrivateKey.generate()
+    context.update(receiver_public_key=bytes(receiver.public_key).hex(),
+                   expires_unix=int(time.time()) + CHANNEL_SECONDS)
+    write_private(private_dir / "receiver.key", bytes(receiver))
+    write_json(private_dir / "context.json", context)
+    (private_dir / "context.json").chmod(0o600)
+    write_json(public_dir / "public-key.json", {"schema_version": 1, "context": context,
+                                               "interoperability": interop})
+    name = "dic-frozen-channel-v1-{run_id}-{run_attempt}-{pr_number}-{head_sha}-{expires_unix}-{receiver_public_key}".format(**context)
+    if os.environ.get("GITHUB_OUTPUT"):
+        with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as stream:
+            stream.write("artifact_name=" + name + "\n")
+    print(json.dumps({"public_channel": context, "interoperability": interop,
+                      "artifact_name": name}), flush=True)
+    return context
+
+
+def encrypted_marker(body):
+    require(isinstance(body, str), "Invalid pull-request body")
+    require(not re.search(r"<!--\s*DIC_FROZEN_INPUT_TRANSFERS\b", body),
+            "Plaintext frozen-input transfer markers are not permitted")
+    matches = re.findall(r"<!--\s*" + CHANNEL_MARKER + r"\s*\n([\s\S]*?)\n-->", body)
+    require(len(matches) <= 1, "Multiple encrypted input envelopes are not permitted")
+    if not matches:
+        return None
     try:
-        manifest = json.loads(matches[0])
+        return json.loads(matches[0])
     except (ValueError, TypeError):
-        raise ValueError("Prepared frozen-input marker is not valid JSON") from None
+        raise ValueError("Encrypted input envelope is not valid JSON") from None
+
+
+def decrypt_envelope(envelope, context, private_bytes, now=None):
+    now = time.time() if now is None else now
+    require(type(context.get("expires_unix")) is int and now < context["expires_unix"],
+            "Private input channel expired")
+    require(isinstance(envelope, dict) and set(envelope) ==
+            {"schema_version", "algorithm", "context", "sender_public_key", "nonce", "ciphertext"}
+            and type(envelope["schema_version"]) is int and envelope["schema_version"] == 1
+            and envelope["algorithm"] == CHANNEL_ALGORITHM,
+            "Invalid encrypted input envelope schema")
+    require(typed_equal(envelope["context"], context),
+            "Encrypted input envelope belongs to another repository, PR, head, run, attempt or key")
+    for key, length in (("sender_public_key", 64), ("nonce", 48)):
+        require(isinstance(envelope[key], str) and len(envelope[key]) == length
+                and re.fullmatch(r"[0-9a-f]+", envelope[key]), "Invalid encrypted input " + key)
+    ciphertext = envelope["ciphertext"]
+    require(isinstance(ciphertext, str) and 32 <= len(ciphertext) <= 131072
+            and len(ciphertext) % 2 == 0 and re.fullmatch(r"[0-9a-f]+", ciphertext),
+            "Invalid encrypted input ciphertext")
+    Box, PrivateKey, PublicKey = crypto_classes()
+    receiver = PrivateKey(private_bytes)
+    require(bytes(receiver.public_key).hex() == context["receiver_public_key"],
+            "Private input key does not match the public channel")
+    try:
+        plaintext = Box(receiver, PublicKey(bytes.fromhex(envelope["sender_public_key"]))).decrypt(
+            bytes.fromhex(ciphertext), bytes.fromhex(envelope["nonce"]))
+        payload = json.loads(plaintext)
+    except Exception:
+        raise ValueError("Encrypted input authentication or payload decoding failed") from None
+    require(isinstance(payload, dict) and set(payload) == {"schema_version", "context", "transfers"}
+            and type(payload["schema_version"]) is int and payload["schema_version"] == 1
+            and typed_equal(payload["context"], context), "Encrypted payload context differs")
+    manifest = payload["transfers"]
     require(isinstance(manifest, dict) and set(manifest) ==
             {"schema_version", "source_archive", "recovery_archive"}
             and type(manifest["schema_version"]) is int and manifest["schema_version"] == 1,
-            "Unexpected frozen-input marker schema")
+            "Unexpected encrypted frozen-input manifest schema")
+    return manifest
+
+
+def consume_envelope(work, envelope, context):
+    private_dir, key_file = work / "channel-private", work / "channel-private/receiver.key"
+    require(key_file.is_file() and not key_file.is_symlink()
+            and not (private_dir / "consumed.json").exists(), "Private input channel is unavailable or consumed")
+    try:
+        write_private(private_dir / "consumed.json", json_bytes({
+            "envelope_sha256": hashlib.sha256(json_bytes(envelope)).hexdigest(),
+            "consumed_at": int(time.time())}))
+        return decrypt_envelope(envelope, context, key_file.read_bytes())
+    finally:
+        key_file.unlink(missing_ok=True)
+
+
+def read_encrypted_transfers(work):
+    context = load_json(work / "channel-private/context.json")
+    current = current_run_context()
+    require(all(typed_equal(context.get(key), value) for key, value in current.items()),
+            "Private channel belongs to another checked-out workflow run")
+    require(type(context.get("expires_unix")) is int
+            and 0 < context["expires_unix"] - time.time() <= CHANNEL_SECONDS,
+            "Private input channel is expired or has an invalid deadline")
+    token = os.environ.get("GH_TOKEN", "")
+    require(token, "Read-only GitHub token is unavailable for encrypted input polling")
+    mask(token)
+    endpoint = "https://api.github.com/repos/" + REPOSITORY + "/pulls/" + str(context["pr_number"])
+    request = urllib.request.Request(endpoint, headers={
+        "Authorization": "Bearer " + token, "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "dic-frozen-audit",
+    })
+    try:
+        while time.time() < context["expires_unix"]:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                raw = response.read(1024 * 1024 + 1)
+            require(len(raw) <= 1024 * 1024, "Pull-request metadata exceeds the channel bound")
+            pr = json.loads(raw)
+            require(pr.get("state") == "open"
+                    and pr.get("number") == context["pr_number"]
+                    and pr.get("head", {}).get("sha") == context["head_sha"]
+                    and pr.get("head", {}).get("ref") == AUDIT_BRANCH
+                    and pr.get("head", {}).get("repo", {}).get("full_name") == REPOSITORY
+                    and pr.get("base", {}).get("ref") == "development/backend-foundation",
+                    "Pull request changed while awaiting private inputs")
+            envelope = encrypted_marker(pr.get("body") or "")
+            if envelope is not None:
+                manifest = consume_envelope(work, envelope, context)
+                print(json.dumps({"encrypted_input_decryption_verified": True,
+                                  "sender_identity_verified_by_channel": False,
+                                  "run_id": context["run_id"], "run_attempt": context["run_attempt"],
+                                  "head_sha": context["head_sha"],
+                                  "private_receiver_key_deleted": True}), flush=True)
+                return manifest
+            time.sleep(10)
+        raise ValueError("Private input channel expired before an encrypted envelope arrived")
+    finally:
+        (work / "channel-private/receiver.key").unlink(missing_ok=True)
+
+
+def materialize_from_event(work):
+    """Decrypt one run-bound envelope before the unmodified Library helper."""
+    manifest = read_encrypted_transfers(work)
+    return materialize_transfers(work, manifest)
+
+
+def materialize_transfers(work, manifest):
+    """Use the unmodified Library helper with the complete decrypted objects."""
     for label in ARCHIVES:
         transfer = manifest[label]
         if isinstance(transfer, dict):
@@ -230,7 +439,7 @@ def materialize_from_event(work):
                 "Materialized original archive differs: " + label)
         print(json.dumps({"materialized": label, "bytes": expected["size_bytes"],
                           "sha256": expected["sha256"]}), flush=True)
-    # No event, transfer manifest, URL, header, completion token or raw helper
+    # No plaintext manifest, URL, header, completion token or raw helper
     # output is written into the retained artifact directory.
     return inputs
 
@@ -568,6 +777,39 @@ def offline_python_script(script, arguments, attempts_file):
         write_json(attempts_file, {"attempts": attempts})
 
 
+def failure_diagnostics(log):
+    """Expose only bounded exception names and source locations, never messages."""
+    with Path(log).open("rb") as stream:
+        stream.seek(max(0, Path(log).stat().st_size - 65536))
+        lines = stream.read().decode("utf-8", errors="replace").splitlines()[-100:]
+    errors, frames = [], []
+    for line in lines:
+        error = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_.]*(?:Error|Exception)|Error|AssertionError)"
+                         r"(?: \[([A-Z0-9_]{1,80})\])?:", line)
+        if error:
+            record = {"type": error[1]}
+            if error[2]:
+                record["code"] = error[2]
+            if record not in errors:
+                errors.append(record)
+        frame = re.match(r'^\s*File ["\']([^"\']+)["\'], line ([0-9]+)', line)
+        if frame:
+            name, number = Path(frame[1]).name, frame[2]
+        elif line.lstrip().startswith(("at ", "file://")):
+            frame = re.search(r"([A-Za-z0-9_.-]+\.(?:mjs|cjs|js|py)):([0-9]+)(?::[0-9]+)?", line)
+            if not frame:
+                continue
+            name, number = frame[1], frame[2]
+        else:
+            continue
+        if re.fullmatch(r"[A-Za-z0-9_.-]{1,100}", name):
+            record = {"source_file": name, "line": int(number)}
+            if record not in frames:
+                frames.append(record)
+    return {"exception_types": errors[-10:], "source_locations": frames[-20:],
+            "raw_exception_messages_omitted": True, "complete_log_retained_in_artifact": True}
+
+
 def run_command(name, command, output, repo, timeout=MAX_COMMAND_SECONDS):
     log = output / "logs" / (name + ".log")
     log.parent.mkdir(parents=True, exist_ok=True)
@@ -582,6 +824,8 @@ def run_command(name, command, output, repo, timeout=MAX_COMMAND_SECONDS):
     receipt = {"name": name, "exit_code": result.returncode,
                "elapsed_seconds": round(time.monotonic() - started, 3),
                "log": "logs/" + log.name, "log_sha256": file_hash(log)}
+    if result.returncode != 0:
+        receipt["failure_diagnostics"] = failure_diagnostics(log)
     print(json.dumps(receipt), flush=True)
     require(result.returncode == 0, "Benchmark stage failed: " + name + "; see retained stage log")
     attempts_file = output / (name + "-external-attempts.json")
@@ -949,7 +1193,7 @@ def run_benchmark(args):
         "status", "candidate", "source_commit", "source_tree", "runtime_fingerprint",
         "canonical", "supplementary_retention", "canonical_exact_losses",
         "supplementary_full_retention_losses", "actual_client_exports", "offline_helper",
-        "corpus", "artifacts", "measurements", "blockers")}), flush=True)
+        "corpus", "artifacts", "measurements", "complete_output_call_changes", "blockers")}), flush=True)
     require(not blockers, "Frozen benchmark requires independent review; see retained summary and raw artifacts")
     return summary
 
@@ -1108,6 +1352,115 @@ def self_test():
             with self.assertRaises(ValueError):
                 retention_losses(old, new)
 
+
+        def _channel_fixture(self, payload_patch=None):
+            Box, PrivateKey, _PublicKey = crypto_classes()
+            sender = PrivateKey(bytes.fromhex(PUBLIC_INTEROP["sender_secret_key"]))
+            receiver = PrivateKey(bytes.fromhex(PUBLIC_INTEROP["receiver_secret_key"]))
+            context = {"repository": REPOSITORY, "pr_number": 116, "head_sha": "1" * 40,
+                       "run_id": "12345", "run_attempt": "1",
+                       "receiver_public_key": bytes(receiver.public_key).hex(),
+                       "expires_unix": 4102444800}
+            payload = {"schema_version": 1, "context": context,
+                       "transfers": {"schema_version": 1,
+                                     "source_archive": {"fixture": True},
+                                     "recovery_archive": {"fixture": True}}}
+            if payload_patch:
+                payload.update(payload_patch)
+            nonce = bytes.fromhex(PUBLIC_INTEROP["nonce"])
+            ciphertext = Box(sender, receiver.public_key).encrypt(json_bytes(payload), nonce).ciphertext
+            envelope = {"schema_version": 1, "algorithm": CHANNEL_ALGORITHM,
+                        "context": context, "sender_public_key": bytes(sender.public_key).hex(),
+                        "nonce": nonce.hex(), "ciphertext": ciphertext.hex()}
+            return context, envelope, bytes(receiver), payload
+
+        def test_channel_public_tweetnacl_pynacl_interoperability(self):
+            self.assertTrue(verify_public_interop()["public_vector_pass"])
+
+        def test_channel_valid_ciphertext_preserves_the_complete_manifest(self):
+            context, envelope, receiver, payload = self._channel_fixture()
+            actual = decrypt_envelope(envelope, context, receiver)
+            self.assertTrue(typed_equal(actual, payload["transfers"]))
+            body = "<!-- " + CHANNEL_MARKER + "\n" + json.dumps(envelope) + "\n-->"
+            self.assertEqual(encrypted_marker(body), envelope)
+
+        def test_channel_rejects_tampering_wrong_nonce_and_wrong_sender(self):
+            context, envelope, receiver, _payload = self._channel_fixture()
+            for key in ("ciphertext", "nonce", "sender_public_key"):
+                altered = dict(envelope)
+                raw = bytearray.fromhex(altered[key])
+                raw[0] ^= 1
+                altered[key] = raw.hex()
+                with self.subTest(key=key), self.assertRaises(ValueError):
+                    decrypt_envelope(altered, context, receiver)
+
+        def test_channel_rejects_expiry_and_cross_context_replay(self):
+            context, envelope, receiver, _payload = self._channel_fixture()
+            with self.assertRaises(ValueError):
+                decrypt_envelope(envelope, context, receiver, now=context["expires_unix"])
+            changes = {"repository": "other/repository", "pr_number": 117,
+                       "head_sha": "2" * 40, "run_id": "54321", "run_attempt": "2",
+                       "receiver_public_key": "1" * 64, "expires_unix": 4102444900}
+            for key, value in changes.items():
+                altered = {**envelope, "context": {**context, key: value}}
+                with self.subTest(key=key), self.assertRaises(ValueError):
+                    decrypt_envelope(altered, context, receiver)
+
+        def test_channel_rejects_inner_context_and_plaintext_fallback(self):
+            context, envelope, receiver, _payload = self._channel_fixture(payload_patch={
+                "context": {"head_sha": "different"}})
+            with self.assertRaises(ValueError):
+                decrypt_envelope(envelope, context, receiver)
+            with self.assertRaises(ValueError):
+                encrypted_marker("<!-- DIC_FROZEN_INPUT_TRANSFERS\n{}\n-->")
+            with self.assertRaises(ValueError):
+                encrypted_marker("<!-- " + CHANNEL_MARKER + "\nnot-json\n-->")
+            self.assertIsNone(encrypted_marker("A clean pull request has no transfer material."))
+
+        def test_channel_is_single_use_and_erases_key_after_failure(self):
+            context, envelope, receiver, payload = self._channel_fixture()
+            with tempfile.TemporaryDirectory() as temporary:
+                work = Path(temporary)
+                private = work / "channel-private"
+                private.mkdir(mode=0o700)
+                key = private / "receiver.key"
+                write_private(key, receiver)
+                self.assertEqual(stat.S_IMODE(key.stat().st_mode), 0o600)
+                self.assertEqual(consume_envelope(work, envelope, context), payload["transfers"])
+                self.assertFalse(key.exists())
+                with self.assertRaises(ValueError):
+                    consume_envelope(work, envelope, context)
+            with tempfile.TemporaryDirectory() as temporary:
+                work = Path(temporary)
+                (work / "channel-private").mkdir(mode=0o700)
+                key = work / "channel-private/receiver.key"
+                write_private(key, receiver)
+                bad = {**envelope, "ciphertext": "00" * (len(envelope["ciphertext"]) // 2)}
+                with self.assertRaises(ValueError):
+                    consume_envelope(work, bad, context)
+                self.assertFalse(key.exists())
+
+        def test_failure_diagnostics_omit_exception_values(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                log = Path(temporary) / "failed.log"
+                log.write_text('Traceback (most recent call last):\n'
+                               '  File "/temporary/private/code.py", line 41, in run\n'
+                               'ValueError: PRIVATE_CAPTURE_VALUE https://private.invalid/token\n'
+                               '    at run (file:///temporary/actual-client-exports.mjs:8:3)\n'
+                               'Error [ERR_MODULE_NOT_FOUND]: PRIVATE_CAPTURE_VALUE\n',
+                               encoding="utf-8")
+                result = failure_diagnostics(log)
+                encoded = json.dumps(result)
+                self.assertNotIn("PRIVATE_CAPTURE_VALUE", encoded)
+                self.assertNotIn("private.invalid", encoded)
+                self.assertNotIn("/temporary/", encoded)
+                self.assertEqual(result["source_locations"],
+                                 [{"source_file": "code.py", "line": 41},
+                                  {"source_file": "actual-client-exports.mjs", "line": 8}])
+                self.assertEqual(result["exception_types"],
+                                 [{"type": "ValueError"},
+                                  {"type": "Error", "code": "ERR_MODULE_NOT_FOUND"}])
+
         def test_python_external_operations_are_denied_and_recorded(self):
             attempts = []
             with deny_python_external_operations(attempts):
@@ -1126,7 +1479,9 @@ def self_test():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    materialize = commands.add_parser("materialize", help="Materialize the exact original prepared Library inputs")
+    channel = commands.add_parser("prepare-channel", help="Prepare a private ephemeral receiver and public announcement")
+    channel.add_argument("--work", type=Path, required=True)
+    materialize = commands.add_parser("materialize", help="Decrypt and materialize the exact original prepared Library inputs")
     materialize.add_argument("--work", type=Path, required=True)
     benchmark = commands.add_parser("run", help="Run the original frozen corpus and retain sanitized evidence")
     benchmark.add_argument("--work", type=Path, required=True)
@@ -1149,9 +1504,12 @@ def main():
     if args.command == "self-test":
         self_test()
         return 0
-    output = (args.work / "output").resolve() if args.command == "materialize" else args.output.resolve()
+    output = ((args.work / "output").resolve()
+              if args.command in ("materialize", "prepare-channel") else args.output.resolve())
     try:
-        if args.command == "materialize":
+        if args.command == "prepare-channel":
+            prepare_channel(args.work.resolve())
+        elif args.command == "materialize":
             materialize_from_event(args.work.resolve())
         else:
             run_benchmark(args)

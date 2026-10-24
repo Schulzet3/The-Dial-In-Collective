@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "type": "candidate11_preverification_source_manifest",
-  "created_at": "2026-10-24T05:10:53.120Z",
-  "source_status": "PREPARED_NOT_YET_FULLY_TESTED",
-  "intended_base_commit": "2f4668fdc7918a04f6cc2432021c5f15cb30acd2",
-  "intended_base_tree": "93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee",
-  "runtime_fingerprint": "7c6f6f791c4ebe2272b19bb609a6faf1eeb77176bf0b1cdefa9ebf711ffaf217",
+  "created_at": "2026-10-24T05:35:54.781Z",
+  "source_status": "RECONCILED_PENDING_FRESH_HOSTED_VERIFICATION",
+  "intended_base_commit": "ca8cf23ce442e0bdb807e381f777a9e166b398ed",
+  "intended_base_tree": "3677e9b93cb404233190937ddc0b3212bbed6159",
+  "runtime_fingerprint": "4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2",
   "runtime_files": [
     {
       "path": "netlify/functions/coffee-url-preview.mjs",
@@ -69,8 +69,8 @@
     },
     {
       "path": "src/server/coffee-identity-evidence.mjs",
-      "bytes": 40069,
-      "sha256": "e1cadaa0deb26cb3ed22acdaef1b42e23e915c2c39cbd91f68a332795338cf1d"
+      "bytes": 41368,
+      "sha256": "60307608d166c8ca5a60906055f4e8a4f7098e9ef371161d4eb19e9d2f973a32"
     },
     {
       "path": "src/server/coffee-narrative-evidence.mjs",
@@ -79,8 +79,8 @@
     },
     {
       "path": "src/server/coffee-page-metadata.mjs",
-      "bytes": 72749,
-      "sha256": "5a48b6de966ffbc5253abefe238b81c2c8263805c968ad90a7dcf0d2f28a4981"
+      "bytes": 72780,
+      "sha256": "d1fe565595e5f36f027345ea72817d84a10cc54c3bac3009929617570fd6ef13"
     },
     {
       "path": "src/server/coffee-processing-evidence.mjs",
@@ -109,8 +109,8 @@
     },
     {
       "path": "src/server/coffee-product-scope.mjs",
-      "bytes": 15229,
-      "sha256": "7e5f9243ccbbd54f4ce637c8a60321ec3df4471a0118204e8f05188d76c81369"
+      "bytes": 16492,
+      "sha256": "fb1f0952da058ecc731f001f0ea15e6d2402c7c2d12beae4c64047c4f0a82d20"
     },
     {
       "path": "src/server/coffee-semantic-specs.mjs",
@@ -170,24 +170,6 @@
   ],
   "source_files": [
     {
-      "path": "scripts/audit/coffee-source-fixture-sanitization.mjs",
-      "git_blob_sha": "12253198952ea99adf4af6320a8389a40b00eaed",
-      "sha256": "2e5d1f69bd7aaf959dcb3713b9c78245c911cb12bb45124049cf5926b65cc04d",
-      "bytes": 7055
-    },
-    {
-      "path": "scripts/audit/coffee-completeness-live-probe.mjs",
-      "git_blob_sha": "322a14a0f597f1fcd50ba725d6d58e4854cb294e",
-      "sha256": "c8f8194645e3743152052499d656f613ba6f9b5f0c1a79e769dcc9cacf461e7e",
-      "bytes": 16661
-    },
-    {
-      "path": "tests/coffee-live-fixture-sanitization.test.mjs",
-      "git_blob_sha": "0f58bbeb0a0b0fc7e7f2009d264e6060356238e8",
-      "sha256": "5f289b6c007fa8f82c01115f7b6ab99f3cfc4e01006140d9033c07cd2517f12c",
-      "bytes": 9644
-    },
-    {
       "path": "scripts/audit/coffee-corpus-report.py",
       "git_blob_sha": "1cb10262701e197fde3512b068708c038363d657",
       "sha256": "80c600bea00379b3b0f26a465f0327c3de26367102028e274555c95799bfdaaa",
@@ -207,33 +189,75 @@
     },
     {
       "path": "src/server/coffee-identity-evidence.mjs",
-      "git_blob_sha": "93d4937f75177fd1a2b12700043cfca679a0bf59",
-      "sha256": "e1cadaa0deb26cb3ed22acdaef1b42e23e915c2c39cbd91f68a332795338cf1d",
-      "bytes": 40069
+      "git_blob_sha": "9846378e05152e159b7140f7ba1530a4c0490eb9",
+      "sha256": "60307608d166c8ca5a60906055f4e8a4f7098e9ef371161d4eb19e9d2f973a32",
+      "bytes": 41368
+    },
+    {
+      "path": "src/server/coffee-page-metadata.mjs",
+      "git_blob_sha": "0f5e0b1f865a9864e6c057d211d24a9c7a1bf35f",
+      "sha256": "d1fe565595e5f36f027345ea72817d84a10cc54c3bac3009929617570fd6ef13",
+      "bytes": 72780
     },
     {
       "path": "src/server/coffee-product-scope.mjs",
-      "git_blob_sha": "816e4c4fbe7129babab945de9ee64ca6ee6cc818",
-      "sha256": "7e5f9243ccbbd54f4ce637c8a60321ec3df4471a0118204e8f05188d76c81369",
-      "bytes": 15229
+      "git_blob_sha": "ef068bb1a74979ef6c4f32e1e9791b6b26467ad1",
+      "sha256": "fb1f0952da058ecc731f001f0ea15e6d2402c7c2d12beae4c64047c4f0a82d20",
+      "bytes": 16492
     },
     {
       "path": "tests/coffee-fresh-source-conflicts.test.mjs",
-      "git_blob_sha": "177a08926f2f4580d354fa1d572de9c5369f8051",
-      "sha256": "ff72d6cc1ac2ca12d4aa2b8e9a952bb646f38f71f3d04220a28312758575d278",
-      "bytes": 8954
+      "git_blob_sha": "6df27948dc3a10e16254ca74d3b4658f77cf72cb",
+      "sha256": "39d01036a01196beabd4fe54a92eaca420bab10cf82e449e5be80afa6fb86d06",
+      "bytes": 13810
     },
     {
-      "path": ".github/workflows/coffee-frozen-corpus.yml",
-      "git_blob_sha": "96b50d7f11c2750b96fd71c1baa2b29983019c77",
-      "sha256": "d7f0e8d6a4cc8fadc74584b509bbfbf281a23511e84306b0202c2dbf2fba27f8",
-      "bytes": 3096
+      "path": ".github/workflows/coffee-completeness.yml",
+      "git_blob_sha": "0ab0e11fcbfceb9410d2a0d04067b44d3cb00c71",
+      "sha256": "fe829d06bb98ed637054fad14d9a3ba98308569654849f6489da3d4f1942146e",
+      "bytes": 1534
+    },
+    {
+      "path": "scripts/audit/coffee-fixture-sanitize.mjs",
+      "git_blob_sha": "97de21e05a12f5f47b13c79090f182abfbc96936",
+      "sha256": "62c6dfc78049e50d7df7787a41e4cf5c59e99ba7599d2b5421ab9922fb08c4d0",
+      "bytes": 294
+    },
+    {
+      "path": "scripts/audit/coffee-source-fixture-sanitization.mjs",
+      "git_blob_sha": "d91438f4c807da89c76046be1ae059d76a44f8d6",
+      "sha256": "68111ab4c857e0e21c9ef67e2dae065ba48ecf22292f0857f155d4cec0888189",
+      "bytes": 7987
+    },
+    {
+      "path": "tests/coffee-live-fixture-sanitization.test.mjs",
+      "git_blob_sha": "cf537ef141fdaebfa3f376198e913631cc793fc9",
+      "sha256": "26b69314fe14826293eb9bbcecb317354b4e539f1095bfaa84428e9363137c20",
+      "bytes": 12397
+    },
+    {
+      "path": "tests/coffee-public-source-repairs.test.mjs",
+      "git_blob_sha": "103969ef76665627dc08640a6327bf82fa42730b",
+      "sha256": "5f7cdd27c2ac8a38b95d5781d3b275ebf2513298179bcfc7dc83c5858a62597c",
+      "bytes": 9191
     },
     {
       "path": "scripts/audit/coffee-frozen-ci.py",
-      "git_blob_sha": "a2ce9b5c6461cdd57d85d82c960d9d6dee231c76",
-      "sha256": "8251574dfa3412d60942d3c744cef6289a7dd7f680d26dc72c5f160b068ac465",
-      "bytes": 64299
+      "git_blob_sha": "f19adc9964c4d9c9a32753a4a5505d79a47af5d7",
+      "sha256": "4279e1e36962276a3dbbf560bbab3639127251fdac2a164ab83852a82bf9cedb",
+      "bytes": 84952
+    },
+    {
+      "path": "scripts/audit/coffee-completeness-live-probe.mjs",
+      "git_blob_sha": "8776b27324e61b7971530aedc030fc6e928f5dae",
+      "sha256": "5dbb7ac454eab598ad3166874564385df1b25f07bd59dd56e4061156a40367da",
+      "bytes": 19805
+    },
+    {
+      "path": ".github/workflows/coffee-frozen-corpus.yml",
+      "git_blob_sha": "1affc766e8bc831c4b6fed557cbd7ababf7185a2",
+      "sha256": "b8a00a95aba4cd5a5094d8ed7a9c025edd8e29f5b367b9eb327596c35467a225",
+      "bytes": 3943
     }
   ],
   "unchanged30_independent_verification": {
@@ -242,7 +266,8 @@
     "utf8_bytes": 438487,
     "manifest_subset_sha256": "abc333c895464116a3db07123d723a1fa9fb3304219b8e1e3b7aaacc239e344b",
     "verified_at": "2026-10-24T04:59:01.118Z",
-    "additional_upstream_runtime_changes": 0
+    "additional_upstream_runtime_changes": 0,
+    "applies_to": "Initial candidate11 runtime before the selected-description bridge;29 of these remain unchanged in this reconciliation"
   },
   "runtime_reconstruction": {
     "original_candidate10_exact_recovery": false,
@@ -251,15 +276,13 @@
   },
   "independent_runtime_review": {
     "status": "SCOPED_REVIEW_PASS",
-    "attribute_smoke_controls": 12,
-    "product_scope_smoke_controls": 8,
-    "clear_negative_geography_controls": 6,
-    "environment": "Pure V8 evaluation of actual fetched modules; not Node or full corpus",
-    "issues_repaired_before_integration": [
-      "Leading-equals attributes could expose hidden/class keys",
-      "Unquoted tag terminator must stop attributes",
-      "HTML whitespace and new class-token splitting use ASCII whitespace, not all JS whitespace"
-    ],
+    "source_tree": "9d0897ade5010affa7f569da25c6124cd3ddc8da",
+    "runtime_fingerprint": "4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2",
+    "fresh_v8_fixture_functions": 16,
+    "upstream_v8_fixture_functions": 8,
+    "environment": "Actual source graph in V8 with explicitly disclosed fixture adapters; not Node/full corpus",
+    "upstream_direct_locality_branch_preserved": true,
+    "source_attribution_and_partial_geography_controls": true,
     "full_tests_status": "PENDING"
   },
   "frozen_inputs": {
@@ -273,7 +296,7 @@
   "scorers_changed": false,
   "production_authorized": false,
   "frozen_pipeline_review": {
-    "status": "READ_ONLY_REVIEW_PASS",
+    "status": "INDEPENDENT_READ_ONLY_REVIEW_PASS",
     "full_execution": "PENDING",
     "checks": [
       "Original archive/oracle/scorer/runtime hash bindings",
@@ -282,6 +305,47 @@
       "Complete unmodified Library transfer and helper metadata",
       "No credentials, input archives or raw captures in retained artifacts",
       "Corrected receipt-derived report builder included in combined tree"
-    ]
+    ],
+    "runner_sha256": "4279e1e36962276a3dbbf560bbab3639127251fdac2a164ab83852a82bf9cedb"
+  },
+  "pr_number": 116,
+  "first_hosted_result": "docs/audits/extractor-candidate11-first-hosted-results.json",
+  "independent_sanitizer_review": {
+    "status": "SCOPED_REVIEW_PASS",
+    "tree": "dc4b0be942b30af7418de394631f2b05c674cee9",
+    "all4_script_marker_parity_controls": true,
+    "uri_controls": 10,
+    "upstream_first7_runtime_tests_byte_identical": true,
+    "original_live_targets_unchanged": true,
+    "whole_extraction_parity_gate_unchanged": true,
+    "hosted_full_node_and_real_source_acceptance": "PENDING"
+  },
+  "secure_input_channel": {
+    "plaintext_transfer_acceptance": false,
+    "automatic_review_rejection_preserved": true,
+    "credentials_written": false,
+    "algorithm": "x25519-xsalsa20-poly1305",
+    "single_use": true,
+    "binding": [
+      "repository",
+      "pr_number",
+      "head_sha",
+      "run_id",
+      "run_attempt",
+      "receiver_public_key",
+      "expires_unix"
+    ],
+    "crypto_implementation": "Pinned unmodified TweetNaCl1.0.3 and jsSHA3.3.1 sender; distro PyNaCl receiver",
+    "public_vectors_v8": "PASS",
+    "hosted18controls": "PENDING",
+    "no_transfer_credentials_in_source_or_artifacts": true
+  },
+  "concurrent_upstream": {
+    "base": "ca8cf23ce442e0bdb807e381f777a9e166b398ed",
+    "pr115_runtime_and_public_controls_reconciled": true,
+    "pr119_release_intake_source_and_tests_exact": true,
+    "unrelated_queue_rows_and_root_metadata_exact": true,
+    "optional_intake_donor_integrated": false,
+    "deferred_release_handoff_exact": true
   }
 }

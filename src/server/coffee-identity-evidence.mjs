@@ -107,9 +107,14 @@ export function coffeeDescriptionCountryMismatch(description,{name='',origin=''}
 // A short heading can explicitly put a named subregion, region and country
 // together. This corroboration must arrive before narrower independent labels
 // are compared; it never invents the location of an otherwise unknown place.
-export function extractCoffeeGeographyTuples(html,{clean,name=''}={}){
+export function extractCoffeeGeographyTuples(html,{clean,name='',includeCurrentLocality=false}={}){
  const found=[];
- for(const block of productCoffeeProse(html,clean)){
+ // A selected Product description may be plain text rather than visible
+ // markup. Only this opt-in path admits its explicit current-place relation.
+ if(includeCurrentLocality&&typeof html==='string'&&!/<[a-z][^>]*>/i.test(html))
+  html='<p>'+html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
+ const blocks=productCoffeeProse(html,clean);
+ for(const block of blocks){
   if(block.educational||!/^h[1-6]$/.test(block.tag)||block.text.length>220||!current(block.text)||key(block.text)===key(name))continue;
   let value=block.text;
   const split=value.match(/^(.{3,100}?)\s+[–—-]\s+(.{4,150})$/);
@@ -123,6 +128,14 @@ export function extractCoffeeGeographyTuples(html,{clean,name=''}={}){
      /\b(?:coffee|roast|process(?:ed|ing)?|washed|natural|honey|anaerobic|variety|shipping|street|avenue|road|suite)\b/i.test(value))continue;
   if(!found.some(item=>key(item)===key(value)))found.push(value);
   if(found.length>=12)break;
+ }
+ if(includeCurrentLocality)for(const place of narrativeGeography(blocks.filter(block=>!block.educational),{currentLocalityOnly:true})){
+  // Early tuple reconciliation needs a country in this same source claim.
+  // Keep partial geography as source evidence, without forcing a conflict
+  // when the page's separate Region and Country labels arrive later.
+  if(place.label!=='Origin')continue;
+  if(found.length>=12)break;
+  if(!found.some(value=>key(value)===key(place.value)))found.push(place.value);
  }
  return found;
 }
@@ -162,7 +175,7 @@ function directOriginClaims(sentence){
  }
  return claims;
 }
-function narrativeGeography(blocks){
+function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
  const candidates=[];
  const add=(value,quote)=>{
   value=value.replace(/\s+/g,' ').replace(/[,; ]+$/,'').trim();
@@ -176,6 +189,20 @@ function narrativeGeography(blocks){
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
       /\b(?:variety|cultivar)\b.{0,65}\b(?:grown|collected|introduced|originated|discovered)\b/i.test(sentence))continue;
+   // The selected coffee's direct source locality outranks a nearby
+   // landmark in the same sentence. SEY describes Ruarai as coming from
+   // Nyeri *on the slopes of Mount Kenya*: the mountain is context, not a
+   // second named origin. Require the literal current-coffee clause and
+   // the explicit landmark relation; never infer an unprinted country.
+   const currentLocality=sentence.match(/\b(?:this|our|the)\s+(?:coffee|lot|offering)\s+comes?\s+from\s+([\p{Lu}][\p{L}\p{M}'’.-]{1,65}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{1,60}){0,3})\s+on\s+the\s+(?:(?:north|south|east|west)(?:ern)?\s+)?slopes?\s+of\s+(?:Mount|Mt\.?|Mountain)\s+[\p{Lu}][\p{L}\p{M}'’.-]{1,65}\b/iu);
+   if(currentLocality){
+    const literalCountries=countryNames(sentence);
+    if(literalCountries.length===1)
+     add(currentLocality[1]+', '+literalCountries[0],sentence);
+    else add(currentLocality[1],sentence);
+    continue;
+   }
+   if(currentLocalityOnly)continue;
    const pieces=[];
    const remember=value=>{
     value=value.replace(/\s+(?:region|zone|district|department|province|state|municipality)\b.*$/i,'').replace(/[.!?]+$/,'').trim();
@@ -184,12 +211,6 @@ function narrativeGeography(blocks){
     if(/^(?:Central|Northern|Southern|Eastern|Western|North|South|East|West)$/i.test(value))return;
     if(value&&!pieces.some(part=>key(part)===key(value)))pieces.push(value);
    };
-   // Preserve both explicitly linked locations: keeping only the mountain
-   // in "from Nyeri on the western slopes of Mount Kenya" falsely conflicts
-   // with a separately printed Nyeri region. Do not infer an unstated place.
-   for(const match of sentence.matchAll(new RegExp('\\b(?:[Ii]n|[Ff]rom)\\s+(?:the\\s+)?('+PLACE+')\\s*,?\\s+(?:on|along)\\s+(?:the\\s+)?(?:(?:northern|southern|eastern|western|northwestern|northeastern|southwestern|southeastern)\\s+)?(?:slopes|foothills)\\s+of\\s+('+PLACE+')','gu'))){
-    remember(match[1]);remember(match[2]);
-   }
    // Each pattern contains an actual geographic relationship. A bare farm
    // name, a product title, or a nearby country is not enough to invent a
    // town. Preserve every place word from the selected sentence verbatim.

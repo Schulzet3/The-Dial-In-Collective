@@ -12,7 +12,7 @@
       "issue": 5,
       "pr": 107,
       "title": "Correct stale Pending Retry HTTP response",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
       "scope_paths": [
         "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
@@ -35,7 +35,12 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5",
-      "notes": "Changes only private retry RPC stale result from transport-hanging SQLSTATE 40001 to safe explicit nonmutating conflict. Does not publish or alter any member records. Ready source, NOT deployed. Synthetic CI signed JWT keys / accounts and official evidence are disposable only. Previous Issue #5 official-source real member acceptance remains unverified; another owner-authorized release required to apply narrow migration. Issue #10 remains open for authentic natural 2-family user acceptance and separate #12/#13 integration."
+      "notes": "Changes only private retry RPC stale result from transport-hanging SQLSTATE 40001 to safe explicit nonmutating conflict. Does not publish or alter any member records. Ready source, NOT deployed. Synthetic CI signed JWT keys / accounts and official evidence are disposable only. Previous Issue #5 official-source real member acceptance remains unverified; another owner-authorized release required to apply narrow migration. Issue #10 remains open for authentic natural 2-family user acceptance and separate #12/#13 integration.\nOctober 24 2026 UTC: Owner explicitly approved the needed production step. Applied exact tested migration source via Supabase production; provider assigned migration version 20261024052303 (rather than repository filename version 20261024034800). Readback verified new nonmutating conflict path present, retryable SQLSTATE 40001 absent; unchanged 23 shots/23 notes/2 Community/4 personal families/10 library. This is SQL-only delivery, NOT a Netlify publication. NEVER replay this function migration.",
+      "delivered_release_id": "DIC-20261024-ISSUE5-SQL-ONLY-07",
+      "delivered_sql_migration_version": "20261024052303",
+      "delivered_sql_source_blob_sha": "2a9eca5b32e37dd937a5257a02981dd6113b84f7",
+      "delivered_provider": "Supabase production only",
+      "delivered_netlify_deploy_id": null
     },
     {
       "id": "DIC-Q-12-community-prior-hierarchy",
@@ -82,15 +87,23 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
-      "notes": "READY source only, NOT DEPLOYED. PR108+PR110+PR113 complete #12's exact/related/similar contributor-balanced Community evidence, source and private applied provenance, source-backed distinct successful personal family evidence, owner exclusion, unproven cross-person estimated grouping and one visible preferred recipe. The existing 0.25 similarity grouping remains heuristic, never a verified global family ID. Tests include rollback-only PostgreSQL 17.11 with two real server-classified synthetic personally confirmed families and 53 earlier signed HTTP acceptance assertions, browser, Node, source CI. Supabase migrations 20261024041100 and 20261024041800, plus app source, are staged ONLY and require a separate owner release. #5 independent READY migration remains not applied; #33 TESTING extractor untouched. No new direct paid service."
+      "notes": "READY source only, NOT DEPLOYED. PR108+PR110+PR113 complete #12's exact/related/similar contributor-balanced Community evidence, source and private applied provenance, source-backed distinct successful personal family evidence, owner exclusion, unproven cross-person estimated grouping and one visible preferred recipe. The existing 0.25 similarity grouping remains heuristic, never a verified global family ID. Tests include rollback-only PostgreSQL 17.11 with two real server-classified synthetic personally confirmed families and 53 earlier signed HTTP acceptance assertions, browser, Node, source CI. Supabase migrations 20261024041100 and 20261024041800, plus app source, are staged ONLY and require a separate owner release. #5 independent READY migration remains not applied; #33 TESTING extractor untouched. No new direct paid service.\nOctober 24 2026 UTC: owner explicitly approved production delivery for #5, #10, #12. Production Supabase migrations applied and read back: 20261024052411 dic_community_recommendation_evidence (exact source blob bb235321c44cf0da960226fe80fdbf8629779f29) and 20261024052419 dic_recommendation_use_provenance (blob 65117164c599a6cc2722536bd509fbdff9bc1bce). Provider readback confirms member Community RPC, provenance trigger, protected mutation route; counts unchanged (23 shots, 23 notes, 2 Community, 4 families, 10 library, 4 preferences). DO NOT REAPPLY SQL. Web app is NOT YET PUBLISHED: READY state applies to remaining frontend, not the already delivered database migration. Scoped candidate PR117 pending exact CI; unready extractor #33 excluded. No Netlify release performed.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Production #12 SQL already applied in provider versions 20261024052411 and 20261024052419; frontend still unpublished.",
+      "sql_migrations_applied": [
+        "20261024052411",
+        "20261024052419"
+      ],
+      "sql_source_blob_shas": [
+        "bb235321c44cf0da960226fe80fdbf8629779f29",
+        "65117164c599a6cc2722536bd509fbdff9bc1bce"
+      ]
     },
     {
       "id": "DIC-Q-33-expanded-603-audit",
       "issue": 33,
-      "pr": 109,
+      "pr": 116,
       "title": "Expanded 603-coffee / 201-U.S.-roaster deterministic extractor and evidence audit",
       "state": "TESTING",
-      "merged_source_sha": "34a1755ab908ad845f4393b7677f1b0ca0985962",
+      "merged_source_sha": "1800187cf0980f30d555d71134bde3c0f8e059a7",
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
         "site/cloud/client.js",
@@ -125,18 +138,44 @@
         "src/server/coffee-supplementary-source-evidence.mjs"
       ],
       "tests": [
-        "Candidate8 full frozen603/201:603 successful previews;3024 exact/167 missing/811 review across4002 unchanged canonical assertions. Retention5458full/337partial/679unconfirmed. All four documented omissions restored;3 malformed-source flags.",
-        "PR109 candidate8 merged34a1755 after seven passing PR jobs. Its public-source acceptance40062287845 FAILED; no historical failure or skip relabeled.",
-        "Candidate10 full frozen replay and local1388Node/60Python/9offline completed before environment disconnection; original unpublished runtime/logs unavailable. Recorded historical outcomes do not validate newly reconstructed candidate11 bytes.",
-        "Candidate11: focused pure-V8 smoke and static review only so far; full Node, fresh full603 benchmark, PythonOCR, normalCI and public-source acceptance pending. Original oracle/captures/scorers preserved.",
-        "Current acf411c upstream retained;30 unchanged runtime files independently SHA256/byte checked. Full32-file candidate11 manifest will be bound to actual hosted run."
+        "Candidate 8: 603/603 previews; 3024 exact / 167 missing / 811 review across 4002 unchanged canonical assertions. Zero prior exact-match losses.",
+        "Retention 5458 full / 337 partial / 679 unconfirmed; three original malformed-source flags. All four known omissions restored; 603 actual exports, 614 variants and 3008 reference destinations verified.",
+        "1368 named local Node tests pass, six upstream live opt-in tests skipped; 30 Python audit + 23 helper tests; lint/build/import browser + nine packaged/offline checks pass. No production or physical-device claim.",
+        "Fresh combined e6d8745/candidate8 local verification:1368 named Node pass,0fail,6opt-in skips;30Python audit+23helper pass; lint/build/320,390,1280 import browser pass. Initial merge-marker failure repaired by exact upstream test restore; runtime unchanged.",
+        "After preserving concurrent9135e06 Community source:1372 named Node pass/0fail/6opt-in skips;53Python;lint/build;320/390/1280 import browser and9 actual packaged/offline checks pass. Manual browser dependency bundle omission repaired; prior failure retained. New exact-source Actions pending.",
+        "Independent source-only runs 40065961167 and 40065995754 PASSED 10/10 with strict sanitizer extraction parity, including NOMAD/Circulor, source conflict withholding, and negative homepage. Exact current merged-source public acceptance and approval gate remain pending.",
+        "PR116 first head735db806 actual hosted run:1392Node pass/1fail/6explicit deployed-endpoint skips; cloud1025/1; Python38audit+23offline/OCR pass;11frozen-runner controls pass then private-input stop (no603replay). Newly reconciled source requires fresh tests; historical passes do not validate it."
+      ],
+      "ci_runs": [
+        40065961167,
+        40065995754
+      ],
+      "blockers": [
+        "Reconciled candidate11 requires complete original frozen603 replay, normal exact-source CI, non-force integration and fresh unchanged public-source acceptance. Initial Node regression and absent secure input run are recorded; no borrowed historical pass."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; current explicit owner GitHub write and Actions authorization.",
+      "notes": "Candidate8 full frozen audit complete; four prior omissions repaired. Owner explicitly permits GitHub use under the no-additional-cost requirement and resolves the previous rejected write. Normal CI/READY/release gates unchanged. Concurrent upstream e6d8745, separate Issue5 READY migration, acceptance decisions and exact historical release test preserved. Pending PR/merge/actualCI; no publication/provider/member-data change. Newer concurrent Community source9135e06 is reconciled; its independent TESTING queue item remains unchanged. Shared mutation flow retains both audit session/receipt protections and Community evidence reattachment.\nConcurrent Issue33 repair was integrated before PR118; PR118 closed without merge to preserve accepted source. Actual repaired source at 1800187c, no production site deployment approved.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Frozen 603/201 benchmark unchanged, maintain TESTING until exact merged-source acceptance and approval/queue checks PASS. Candidate11 PR116 reconstructs further guarded source/scoping/sanitizer/report repairs after environment loss. Concurrent PR115 implementation, PR119 intake and the latest deferred-release handoff are preserved. Existing ci_runs describe prior source, not a new C11 pass. This task has no production release authority."
+    },
+    {
+      "id": "DIC-Q-5-deployed-sql-source-carryover",
+      "issue": 5,
+      "pr": 107,
+      "title": "Already-applied retry SQL migration: unpublished Git source carryover",
+      "state": "TESTING",
+      "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
+      "scope_paths": [
+        "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
+      ],
+      "tests": [
+        "Read-only Supabase migration history 2026-10-24 confirms applied migration 20261024052303_dic_pending_retry_http_conflict (repository file uses 20261024034800 prefix). Original Issue5 DEPLOYED queue item and receipts are authoritative for provider application; no new migration application is permitted or needed.",
+        "Unpublished Git source path is tracked separately because source-intake excludes DEPLOYED items, not because SQL requires redeployment."
       ],
       "ci_runs": [],
       "blockers": [
-        "Fresh full603 benchmark and exact-source hosted checks required for newly reconstructed candidate11; then non-force integration and fresh public-source acceptance."
+        "Already applied to production under provider migration version 20261024052303. Source file remains in unpublished web Git delta; reconcile its exact-source inclusion and avoid replay before any future authorized batch publication."
       ],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; current explicit owner GitHub write and Actions authorization.",
-      "notes": "Records actual candidate8 PR109 merge instead of stale null. Current candidate11 reconstruction follows loss of original unpublished candidate10 files; no old result is borrowed for differing code. Explicit owner GitHub writes/Actions authorization, no readiness waiver. Preserve exact unrelated Issue5/Issue12 queue records/history/rootmetadata and all acf411c source. No publication/provider/member-data change. Newer concurrent3529a9b Community confirmed-personal-family source, staged migration and additional tests are preserved exactly; their separate TESTING row is not promoted."
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5; prior deployed receipt DIC-Q-5-pending-retry-http-conflict; current owner authorization to reconcile outstanding GitHub records.",
+      "notes": "Source-tracking bookkeeping only, not a second migration or a second feature. Original DIC-Q-5-pending-retry-http-conflict stays DEPLOYED. This non-READY companion prevents false intake gaps while explicitly blocking duplicate SQL application or unapproved publication.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Preserve SQL-only #5 DEPLOYED, carryover TESTING until source coverage/anti-replay acceptance resolves; do not run the migration again."
     }
   ],
   "history": [

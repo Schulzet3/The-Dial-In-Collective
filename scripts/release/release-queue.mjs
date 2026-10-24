@@ -86,12 +86,26 @@ export function assessReleaseQueue(queue,{publishedSourceSha,candidateSha,change
    errors.push(item.id+' READY item has no unpublished deployable changes (possibly already released)');
  return {ready:errors.length===0,errors,deployable_paths:diff,ready_items:ready.map(x=>({id:x.id,issue:x.issue,title:x.title,merged_source_sha:x.merged_source_sha,scope_paths:x.scope_paths})),other_items:(queue?.items||[]).filter(x=>x.state!=='READY'&&x.state!=='DEPLOYED').map(x=>({id:x.id,state:x.state,merged_source_sha:x.merged_source_sha,blockers:x.blockers}))};
 }
-export function assessIntakeCoverage(queue,changedPaths){
+// SQL-only operations already verified and applied directly in Supabase still
+// appear in the Netlify-base diff because the website was not republished.
+// Count those exact source bytes as covered, without requeuing or replaying
+// the migration. A stale/forged receipt or changed SQL file NEVER qualifies.
+export function assessIntakeCoverage(queue,changedPaths,{currentBlobSha=()=>null}={}){
  const errors=queueSchemaErrors(queue);
  const paths=deployableChangedPaths(changedPaths);
- for(const path of paths)
-  if(!queue?.items?.some(x=>x.state!=='DEPLOYED'&&x.scope_paths?.includes(path)))
-   errors.push('Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: '+path);
+ for(const path of paths){
+  const covered=queue?.items?.some(item=>{
+   if(!item?.scope_paths?.includes(path))return false;
+   if(item.state!=='DEPLOYED')return true;
+   return path.startsWith('supabase/migrations/')&&
+    item.delivered_provider==='Supabase production only'&&
+    typeof item.delivered_release_id==='string'&&item.delivered_release_id.length>8&&
+    /^\d{14}$/.test(String(item.delivered_sql_migration_version||''))&&
+    SHA.test(item.delivered_sql_source_blob_sha||'')&&
+    currentBlobSha(path)===item.delivered_sql_source_blob_sha;
+  });
+  if(!covered)errors.push('Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: '+path);
+ }
  return {tracked:errors.length===0,errors,deployable_paths:paths};
 }
 export function formatQueueReport(result){
@@ -121,7 +135,10 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   if(errors.length)throw Error(errors.join('; '));
   if(flag==='--validate')console.log('[DIC queue schema] PASS');
   else if(flag==='--enforce-intake'){
-   const result=evaluateLocalQueue(),tracked=assessIntakeCoverage(queue,result.deployable_paths);
+   const result=evaluateLocalQueue(),tracked=assessIntakeCoverage(queue,result.deployable_paths,{
+    currentBlobSha:path=>{try{return execFileSync('git',['hash-object','--',path],{encoding:'utf8',timeout:15000}).trim();}
+      catch{return null;}}
+   });
    if(!tracked.tracked)throw Error(tracked.errors.join('; '));
    console.log('[DIC queue intake] PASS '+tracked.deployable_paths.length+' tracked deployable paths');
   }else{

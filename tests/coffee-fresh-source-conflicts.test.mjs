@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {coffeeHtmlAttributes,productMarkup} from '../src/server/coffee-product-scope.mjs';
-import {extractCoffeeIdentityEvidence} from '../src/server/coffee-identity-evidence.mjs';
+import {extractCoffeeIdentityEvidence,extractCoffeeGeographyTuples} from '../src/server/coffee-identity-evidence.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 
 const source_url='https://roaster.example/products/current-coffee';
@@ -22,17 +22,20 @@ const card=(attributes='class="woocommerce-LoopProduct-link"')=>
  '<li class="product type-product"><div><a '+attributes+' href="/products/another-coffee">'+
  '<h3>Another Coffee</h3><p>Tasting notes: '+foreignNotes+'</p></a></div></li>';
 
-test('a current region and explicitly linked mountain refine the same selected origin',()=>{
- const result=parse('<p>Region: Nyeri</p><p>Country: Kenya</p>',{
-  description:nyeri,name:'Ruarai Kenya'
- });
- assert.equal(result.ok,true);
- assert.equal(result.fields.origin,'Nyeri, Mount Kenya, Kenya');
- assert.ok(!result.conflicts?.includes('origin'));
+test('the direct current locality stays canonical while its mountain remains source evidence',()=>{
+ for(const description of [nyeri,'<p>'+nyeri+'</p>'])for(const body of ['', '<p>Region: Nyeri</p><p>Country: Kenya</p>']){
+  const result=parse(body,{
+   description,name:'Ruarai Kenya'
+  });
+  assert.equal(result.ok,true);
+  assert.equal(result.fields.origin,'Nyeri, Kenya');
+  assert.ok(!result.conflicts?.includes('origin'));
+  assert.ok(result.source_facts?.some(fact=>fact.source_type==='product_json'&&fact.source_url===source_url&&JSON.stringify(fact).includes(nyeri)));
+ }
  const facts=extractCoffeeIdentityEvidence('<p>'+nyeri+'</p>',{
   name:'Ruarai Kenya',fields:{origin:'Nyeri, Kenya'},clean
  }).facts;
- assert.ok(facts.some(f=>f.label==='Origin'&&f.value==='Nyeri, Mount Kenya, Kenya'));
+ assert.ok(facts.some(f=>f.label==='Origin'&&f.value==='Nyeri, Kenya'&&f.quote.includes(nyeri)));
 });
 
 test('the new geographic relationship does not admit denied or historical prose',()=>{
@@ -54,6 +57,60 @@ test('a genuinely different labeled region remains a source conflict',()=>{
  assert.equal(result.fields.origin,undefined);
  assert.ok(result.conflicts?.includes('origin'));
  assert.ok(!result.available.includes('origin'));
+});
+
+test('selected JSON geography still rejects denied, historical, educational and other-coffee prose',()=>{
+ for(const description of [
+  'Last year this coffee came from Nyeri on the western slopes of Mount Kenya',
+  'This coffee does not come from Nyeri on the western slopes of Mount Kenya',
+  'Other coffees come from Nyeri on the western slopes of Mount Kenya',
+  'Our staff visited a coffee farm in Nyeri on the western slopes of Mount Kenya',
+  '<h2>Origins explained</h2><p>'+nyeri+'</p>'
+ ]){
+  const result=parse('<p>Region: Nyeri</p><p>Country: Kenya</p>',{
+   description,name:'Ruarai Kenya'
+  });
+  assert.equal(result.fields.origin,'Nyeri, Kenya',description);
+  assert.ok(!result.conflicts?.includes('origin'),description);
+ }
+});
+
+test('the JSON geography bridge admits only the upstream direct-locality relation',()=>{
+ const options={name:'Ruarai Kenya',clean,includeCurrentLocality:true};
+ assert.deepEqual(extractCoffeeGeographyTuples(nyeri,options),['Nyeri, Kenya']);
+ assert.deepEqual(extractCoffeeGeographyTuples('<p>'+nyeri+'</p>',{name:'Ruarai Kenya',clean}),[]);
+ assert.deepEqual(extractCoffeeGeographyTuples('This coffee grows in the Huila region of Colombia.',options),[]);
+});
+
+test('partial linked JSON geography cannot create a conflict with later country and region labels',()=>{
+ const partial='This coffee comes from Moshi on the slopes of Mount Kilimanjaro';
+ for(const [description,expected] of [
+  [partial,'Moshi, Tanzania'],
+  [partial+' in Tanzania','Moshi, Tanzania']
+ ]){
+  const result=parse('<p>Region: Moshi</p><p>Country: Tanzania</p>',{description});
+  assert.equal(result.fields.origin,expected);
+  assert.ok(!result.conflicts?.includes('origin'));
+  assert.ok(result.source_facts?.some(fact=>fact.source_type==='product_json'&&fact.source_url===source_url&&JSON.stringify(fact).includes(description)));
+ }
+ assert.deepEqual(extractCoffeeGeographyTuples(partial,{name:'Current Coffee',clean,includeCurrentLocality:true}),[]);
+});
+
+test('only selected Product descriptions contribute linked geography and competing selected places still conflict',()=>{
+ const selected={'@type':'Product',name:'Ruarai Kenya',url:source_url};
+ const other={'@type':'Product',name:'Other Coffee',url:'https://roaster.example/products/other-coffee',description:nyeri};
+ const render=products=>extractPublicCoffeeFacts('<script type="application/ld+json">'+JSON.stringify(products)+
+  '</script><main><h1>Ruarai Kenya</h1><p>Region: Nyeri</p><p>Country: Kenya</p></main>',{source_url});
+ const unrelated=render([selected,other]);
+ assert.equal(unrelated.fields.origin,'Nyeri, Kenya');
+ assert.ok(!unrelated.conflicts?.includes('origin'));
+ const conflicting=render([
+  {...selected,description:nyeri},
+  {...selected,description:'This coffee comes from Kirinyaga on the western slopes of Mount Kenya'}
+ ]);
+ assert.equal(conflicting.fields.origin,undefined);
+ assert.ok(conflicting.conflicts?.includes('origin'));
+ assert.ok(!conflicting.available.includes('origin'));
 });
 
 test('orphaned WooCommerce recommendation cards cannot contaminate selected tasting notes',()=>{
@@ -153,4 +210,34 @@ test('attribute and class token boundaries follow HTML whitespace and the real t
  const joinedNames='<li class="product\u00a0type-product"><a class="woocommerce-LoopProduct-link" href="/current">'+
   '<p>Producer: Ana Torres</p></a></li>';
  assert.match(productMarkup(page(joinedNames)),/Ana Torres/);
+});
+
+test('quoted class strings cannot extend an orphan recommendation range over selected evidence',()=>{
+ const closing='<section class="related products"><h2>Related products</h2></section></li>';
+ for(const attributes of [
+  'title="class=\'product\'"',
+  '@click="class=\'product\'"',
+  '=class="product"',
+  'class="product-info"'
+ ]){
+  const scoped=productMarkup(page(closing+'<li '+attributes+'><p>Producer: Ana Torres</p></li>'));
+  assert.match(scoped,/Ana Torres/,attributes);
+ }
+ const forgedSection='<section title="class=\'related products\'"><h2>Related products</h2></section></li>'+
+  '<li class="product"><p>Producer: Ana Torres</p></li>';
+ assert.match(productMarkup(page(forgedSection)),/Ana Torres/);
+});
+
+test('upstream malformed related siblings without loop-link classes stay excluded until the real story',()=>{
+ const html=page('<p>Tasting notes: '+selectedNotes+'</p>'+
+  '<section class="related products"><h2>Related products</h2><ul><li class="product"><p>Another Coffee</p></li></section></li>'+
+  '<li class="product type-product"><a href="/products/another-coffee"><p>Tasting notes: '+foreignNotes+'</p></a></li>'+
+  '<li class="product"><p>Tasting notes: Red apple, Fudge</p></li>'+
+  '<section><h2>Our Story</h2><p>Producer: Ana Torres</p></section>');
+ const scoped=productMarkup(html);
+ assert.doesNotMatch(scoped,/Another Coffee|Orange, Praline, Cream|Red apple, Fudge/);
+ assert.match(scoped,/Ana Torres/);
+ const result=parse(scoped);
+ assert.equal(result.fields.tasting_notes,selectedNotes);
+ assert.equal(result.fields.producer,'Ana Torres');
 });

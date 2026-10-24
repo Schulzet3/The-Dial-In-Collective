@@ -2,6 +2,8 @@
 // This does not fetch a URL, execute page scripts, or change application extraction.
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
+import {coffeeHtmlAttributes} from '../../src/server/coffee-product-scope.mjs';
+import {coffeeHtmlElements} from '../../src/server/coffee-html-structure.mjs';
 
 const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
 const numericVariant=/^[1-9]\d{0,29}$/;
@@ -32,7 +34,7 @@ function selectedOfferVariant(offer,source,parentVariant){
  // by a different ID; a URL-less schema Offer may use its exact #offer ID.
  const hasUrl=Object.hasOwn(offer,'url');
  const url=productUrl(hasUrl?offer.url:offer['@id'],source);
- if(!url||(url.hash&&(hasUrl||!/^#offer$/i.test(url.hash)))||
+ if(!url||(hasUrl?Boolean(url.hash):!/^#offer$/i.test(url.hash))||
   [...url.searchParams.keys()].some(key=>key!=='variant'))return null;
  const variants=url.searchParams.getAll('variant');
  if(variants.length!==1||!numericVariant.test(variants[0])||
@@ -80,46 +82,48 @@ export function sanitizePublicCoffeeJson(value,{source_url}={}){
  }).replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
 }
 
-// Consume every complete attribute, including unknown/numeric/event names,
-// before recognizing a literal inert product-data marker. Text inside another
-// quoted attribute never creates type/id/data-product-json attributes.
-function fixtureAttributes(source){
- const out=Object.create(null);let index=0;
- while(index<source.length){
-  while(/\s/.test(source[index]||''))index++;
-  if(index>=source.length||source[index]==='/')break;
-  const start=index;
-  while(index<source.length&&!/[\s"'<>/=]/.test(source[index]))index++;
-  if(index===start)break;
-  const name=source.slice(start,index).toLowerCase();let value='';
-  while(index<source.length&&/\s/.test(source[index]))index++;
-  if(source[index]==='='){
-   index++;while(index<source.length&&/\s/.test(source[index]))index++;
-   if(source[index]==='"'||source[index]==="'"){
-    const quote=source[index++],begin=index;
-    while(index<source.length&&source[index]!==quote)index++;
-    if(index>=source.length)break;
-    value=source.slice(begin,index++);
-   }else{
-    const begin=index;
-    while(index<source.length&&!/\s/.test(source[index]))index++;
-    value=source.slice(begin,index);
-   }
+// Preserve the form/control boundaries used by the source parser, without
+// retaining private controls or arbitrary prefilled input values. Attribute
+// parsing is shared with product scoping so quoted text cannot forge a key.
+function fixtureInputs(html){
+ const {nodes,scannedEnd,truncated}=coffeeHtmlElements(html),chunks=[];
+ const allowed=new Set(['type','name','id','class','form','checked','disabled','min','max','step','value']);
+ const escape=value=>String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ let cursor=0;
+ for(const node of nodes){
+  if(node.tag!=='input')continue;
+  chunks.push(html.slice(cursor,node.start));cursor=node.headEnd;
+  const attrs=coffeeHtmlAttributes(node.attributes),type=(attrs.type||'text').toLowerCase();
+  const privateControl=/^(?:password|email|tel|file)$/i.test(type)||
+   [attrs.name,attrs.id,attrs.autocomplete].some(value=>sensitiveKey.test(value||'')||/\b(?:address|billing|shipping|contact)\b/i.test(value||''));
+  if(privateControl){chunks.push(' ');continue;}
+  const name=attrs.name||'',value=attrs.value||'';
+  const numericControl=/^(?:id|variant(?:_id)?|product(?:_id|-id)|selling_plan)$/i.test(name)&&numericVariant.test(value);
+  const quantityControl=/^quantity$/i.test(name)&&/^(?:[1-9]|[1-9]\d)$/.test(value);
+  const namedVariant=/^coffee_variant$/i.test(name)&&/^[a-z][a-z0-9 _-]{0,79}$/i.test(value);
+  const keepValue=/^(?:hidden|radio|checkbox|number|text)$/i.test(type)&&(numericControl||quantityControl||namedVariant);
+  let tag='<input';
+  for(const [key,item] of Object.entries(attrs)){
+   if(!allowed.has(key)||(key==='value'&&!keepValue)||item.length>600)continue;
+   tag+=' '+key+'="'+escape(item)+'"';
   }
-  if(!Object.hasOwn(out,name))out[name]=value;
+  chunks.push(tag+'>');
  }
- return out;
+ chunks.push(html.slice(cursor,truncated?scannedEnd:html.length));
+ return chunks.join('');
 }
+
 export function sanitizePublicCoffeeFixtureHtml(html,{source_url}={}){
  const compact=compactCoffeeProductHtml(html);
  if(!compact)return '';
  const chunks=[];let cursor=0;
  for(const block of rawElements(compact)){
   chunks.push(compact.slice(cursor,block.start));
-  const attributes=fixtureAttributes(block.attributes),type=(attributes.type||'').toLowerCase();
+  const attributes=coffeeHtmlAttributes(block.attributes),type=(attributes.type||'').toLowerCase();
   if(/^(?:application\/json|application\/ld\+json)$/.test(type)&&block.closed){
    const id=/^[a-z0-9_-]{1,160}$/i.test(attributes.id||'')?attributes.id:'';
-   const marker=Object.hasOwn(attributes,'data-product-json')?' data-product-json':'';
+   const marker=['data-product-json','data-product','data-product-data','data-shopify-product']
+    .filter(key=>Object.hasOwn(attributes,key)).map(key=>' '+key).join('');
    try{
     chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+marker+'>'+
      sanitizePublicCoffeeJson(JSON.parse(block.body),{source_url})+'</script>');
@@ -128,12 +132,11 @@ export function sanitizePublicCoffeeFixtureHtml(html,{source_url}={}){
   cursor=block.end;
  }
  chunks.push(compact.slice(cursor));
- // Keep selected product facts inside purchase forms; remove the form shell,
- // controls and active markup. The caller still requires complete fact parity.
- return removeElements(chunks.join(''),['iframe','noscript','select','textarea'])
-  .replace(/<\/?form\b[^<>]{0,8000}>/gi,' ')
-  .replace(/<input\b[^<>]{0,4000}>/gi,'')
-  .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
-  .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
+ // Preserve upstream's useful form and input boundaries. No action target,
+ // executable handler or private input value is retained. The probe still
+ // requires complete extraction equality before accepting a capture.
+ return fixtureInputs(removeElements(chunks.join(''),['iframe','noscript','select','textarea']))
+  .replace(/\s(?:on[a-z]+|nonce|action|formaction)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
+  .replace(/\b(href|src)\s*=\s*(?:"\s*javascript:[^"]*"|'\s*javascript:[^']*'|javascript:[^\t\n\f\r "'<>]*)/gi,'$1="#"')
   .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
 }

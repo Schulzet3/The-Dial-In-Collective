@@ -1,4 +1,5 @@
 // Opt-in, credential-free acceptance against public roaster pages.
+// Exact merged-source public acceptance recheck after concurrent integration.
 // The application handler runs with LOCAL admission/quota responses; only its
 // existing DNS-pinned, bounded public HTTPS transports make network requests.
 // No real account, Supabase request, quota claim, database write or deployment.
@@ -14,8 +15,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {sanitizePublicCoffeeJson as sanitizeJson,
- sanitizePublicCoffeeFixtureHtml as fixtureHtml} from './coffee-source-fixture-sanitization.mjs';
+import {fixtureCoffeeHtml as fixtureHtml,sanitizePublicJson as sanitizeJson} from './coffee-fixture-sanitize.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
 const ORIGINAL_URL=SWEET_URL+'?srsltid=AYCX9vKHwEAbPcEyS19XuoWD67cGIMJu47B764EfHZK_IkJ7c52nQlGl';
@@ -157,6 +157,55 @@ async function probe(target){
    const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
    const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
+   if(!record.sanitization_preserves_html_extraction){
+    // Fail closed while retaining only public, bounded differences needed
+    // to repair capture parity; never hide a divergent source fact.
+    const keys=[...new Set([...Object.keys(original||{}),...Object.keys(replay||{})])];
+    record.parity_differences=keys.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key]));
+    record.parity_field_differences=[...new Set([...Object.keys(original?.fields||{}),...Object.keys(replay?.fields||{})])]
+     .filter(key=>!isDeepStrictEqual(original?.fields?.[key],replay?.fields?.[key]));
+    record.parity_conflicts_original=original?.conflicts||[];
+    record.parity_conflicts_replay=replay?.conflicts||[];
+    record.parity_source_fact_counts=[original?.source_facts?.length??0,replay?.source_facts?.length??0];
+    const factTag=f=>JSON.stringify(f);
+    const afterBag=new Map();
+    for(const fact of replay?.source_facts||[]){
+     const tag=factTag(fact);afterBag.set(tag,(afterBag.get(tag)||0)+1);
+    }
+    // Diagnostics describe structure only. Do not copy values from the
+    // pre-redaction output into retained logs, even when source parity fails.
+    record.parity_missing_source_fact_examples=(original?.source_facts||[]).filter(fact=>{
+     const tag=factTag(fact),count=afterBag.get(tag)||0;
+     if(!count)return true;
+     afterBag.set(tag,count-1);return false;
+    }).slice(0,12).map(fact=>({
+     field:fact.field||null,source_type:fact.source_type||null,
+     property_keys:Object.keys(fact).sort(),value_type:typeof fact.value,
+     value_utf8_bytes:Buffer.byteLength(String(fact.value??''))
+    }));
+    const factKey=f=>[f.field||'',f.label||'',f.source_type||'',f.section||''].join('|');
+    record.parity_changed_product_attributes=[];
+    for(const [factIndex,a] of (original?.source_facts||[]).filter(f=>f.source_type==='product_json').entries()){
+     const b=(replay?.source_facts||[]).find(f=>factKey(f)===factKey(a));
+     if(!b||String(a.value)===String(b.value))continue;
+     try{const old=JSON.parse(a.value),updated=JSON.parse(b.value);
+      const lost=Object.keys(old).filter(key=>!Object.hasOwn(updated,key));
+      const changed=Object.keys(old).filter(key=>Object.hasOwn(updated,key)&&JSON.stringify(old[key])!==JSON.stringify(updated[key]));
+      if(record.parity_changed_product_attributes.length<12)record.parity_changed_product_attributes.push({fact_index:factIndex,lost,changed});
+      if(changed.includes('offers')&&record.parity_offer_key_differences===undefined){
+       const one=Array.isArray(old.offers)?old.offers[0]:old.offers;
+       const two=Array.isArray(updated.offers)?updated.offers[0]:updated.offers;
+       if(one&&two&&typeof one==='object'&&typeof two==='object'){
+        const all=[...new Set([...Object.keys(one),...Object.keys(two)])];
+        record.parity_offer_key_differences=all.filter(key=>!isDeepStrictEqual(one[key],two[key])).map(key=>({key,oldType:typeof one[key],newType:typeof two[key],oldPresent:Object.hasOwn(one,key),newPresent:Object.hasOwn(two,key)}));
+       }
+      }
+
+     }catch{}
+    }
+
+
+   }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);

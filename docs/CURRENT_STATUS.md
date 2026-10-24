@@ -1,4 +1,20 @@
+## October 24, 2026 UTC — PR116 recovered extractor audit, concurrent source reconciled; TESTING
+
+PR116's first actual hosted run exposed a selected structured-description geography gap: 1,392 Node tests passed, one failed and six deployed-endpoint tests were explicitly skipped; the cloud subset had the same sole failure (1,025/1,026). Lint/build did not run after that failure. Python independently passed38 report/retention tests and23 offline/OCR tests. The frozen runner passed11 integrity controls and correctly stopped before replay because secure archive inputs were unavailable. These outcomes remain recorded; they are not presented as final acceptance.
+
+While the repair was under review, PR115 merged at `1800187cf0980f30d555d71134bde3c0f8e059a7` and development advanced through `2fe83f3580bb465ad74c67774e7ae743b8e0e35c`. Its direct-locality representation, malformed related-card repair, public-fixture behavior, regression tests and source diagnostics are being reconciled with candidate11's stronger attribute and source-identity guards. The canonical field follows the current upstream Nyeri, Kenya choice while the complete mountain sentence remains attributable source evidence. No frozen expectation or scorer changes.
+
+Automatic approval review rejected plaintext signed archive URLs and completion tokens in PR metadata; no credentials were written. The revised input channel uses a fresh single-use receiver on the authorized runner and accepts only authenticated ciphertext bound to the exact repository, PR, head, run, attempt and deadline. Original complete transfer metadata and hash-bound files remain private to the runner. Public interoperability controls and the new full603 benchmark still require hosted execution.
+
+The unrelated owner-authorized #5/#12 database delivery receipts and queue states in current upstream are preserved. This extractor task performs no production/provider/member mutation or publication and does not use those separate approvals to release #33. Concurrent upstream `4a0d3b92d21bafd0be2a88131f3d8dd774a0f1e0` resolved source intake with an explicit TESTING source-carryover record that forbids repeated SQL. Its approval run40066461895 passed. Preserve that row and the original DEPLOYED receipt exactly; the optional intake-code proposal was not integrated. The extractor candidate adds no intake or release-rule change; the subsequently merged PR119 implementation is retained exactly.
+
+The current source remains **TESTING** until the reconciled runtime, all frozen603 cases, actual exports/offline behavior, ordinary source checks and fresh unchanged public-source acceptance pass. Candidate10's historical results cannot validate candidate11. See [PR116](https://github.com/Schulzet3/The-Dial-In-Collective/pull/116), [the audit](audits/2026-10-24-extractor-final-audit.md) and [the Issue33 journal](workstreams/issue-33.md).
+
+---
+
 ## October 24, 2026 UTC: candidate11 reconstruction and fresh hosted audit — TESTING
+
+Historical preparation at PR116 head `735db80606e5bf3a2458c84df1817f1d71a86646`; superseded by the newer reconciliation above.
 
 PR109 merged candidate8 at `34a1755ab908ad845f4393b7677f1b0ca0985962`. Its public-source acceptance run **40062287845 failed** on SEY origin, Manhattan tasting-note scope, and Nomad/Circulor sanitized-capture parity. Passing ordinary checks did not override that failure. The separate diagnostic branch `05221ec8...` and its narrower expectations are not merged or copied here.
 
@@ -16,6 +32,38 @@ Current evidence and next action: [extractor audit](audits/2026-10-24-extractor-
 
 
 Concurrent upstream through `2f4668fdc7918a04f6cc2432021c5f15cb30acd2` (tree `93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee`) is preserved exactly. It includes PR113's confirmed-personal-family Community evidence and source READY reconciliation, staged unapplied migrations, and independent regression tests. The other queue rows and root metadata retain their current upstream values. None of the32 extractor runtime files or actual client-export module changed; fresh combined hosted checks cover the overall source.
+
+---
+
+## October 24, 2026 UTC — PUBLICATION PAUSED; deferred combined release handoff
+
+**Current owner instruction:** “Since you've marked the issues closed, you don't need to continue with deployment. I will do a deployment when the extractor changes are ready. Please document your progress so another chat can publish all the pending changes.” No Netlify publication, release-branch push, release grant or further Supabase migration now. **The earlier conditional release permission is not reusable for a future batch.**
+
+Full handoff: [RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md](RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md). GitHub #5/#10/#12 CLOSED, #33 OPEN/TESTING. Three source-verified Supabase production SQL migrations ALREADY APPLIED at `20261024052303`, `20261024052411`, `20261024052419`, **DO NOT REPLAY**. Last readback: 23 shots, 23 notes, 2 Community, 4 personal families, 10 library, 4 preferences. Netlify remains on prior release SHA `65ee386` (deploy `6adc20c03a07673c4dd08035`); #12 frontend unpublished.
+
+**Queue:** `DIC-Q-5-pending-retry-http-conflict` stays **DEPLOYED SQL-only**. Concurrent extractor session created separate `DIC-Q-5-deployed-sql-source-carryover` **TESTING** to track the migration filename still absent from the released Git tree and prevent duplicate SQL. `DIC-Q-12-community-prior-hierarchy` **READY web**. `DIC-Q-33-expanded-603-audit` **TESTING**. This handoff preserves that more precise companion queue accounting rather than overwriting it with a premature READY label. Closed unused PR #117 UNMERGED; don't deploy its unverified isolated candidate. Complete extractor checks before marking combined source READY; obtain a NEW explicit publish instruction for the later batch.
+
+---
+## October 24 UTC — Source intake ledger reconciled without duplicate production SQL
+Independent Issue33 merged-source public run 40066375905 SUCCESS; the public-source sanitizer now preserves both Nomad and Circulor evidence. Issue5 production migration was independently observed as applied in Supabase migration history under version 20261024052303. Source-only queue carrier DIC-Q-5-deployed-sql-source-carryover is TESTING and explicitly blocks any duplicate application of the corresponding unpublished Git migration; original Issue5 item stays DEPLOYED. No website publication. Issue33 queue remains TESTING pending complete exact-source approval/CI receipts.
+
+---
+
+## October 24, 2026 UTC — Issue #33 live source parity fixed, final merged-source gates TESTING
+
+PR #109 merged previously. Concurrent source-parity remediation for Nomad/Circulor now included in development at 1800187cf0980f30d555d71134bde3c0f8e059a7, with live public acceptance 40065961167 passing on its reviewed work source. Separate variant 40065995754 also passed all ten source targets. Current development exact-source verification is being re-run with [dic-completeness-probe], with no extractor runtime, member, production, or deployment modification. DIC-Q-33-expanded-603-audit is TESTING pending exact merged-source acceptance and approval/continuity check. Approval failure traced to separately deployed Issue5 migration queue intake (40066162962), not misreported as extractor failure. No publication authorized.
+
+---
+
+## October 24 UTC: #5 and #12 authorized production database receipts, app still pending
+
+Explicit owner approval for a release to close #5/#10/#12. Supabase production applied three previously unshipped **source-verified** functions/migrations via connected provider: actual migration history `20261024052303 dic_pending_retry_http_conflict` (original source filename 20261024034800), `20261024052411 dic_community_recommendation_evidence` (source 20261024041100), `20261024052419 dic_recommendation_use_provenance` (source 20261024041800). Applied only once each, with independent provider history and SQL function/trigger/privilege path readback. No historical rows rewritten. Count invariant 23 shots, 23 notes, 2 Community, 4 personal families, 10 library entries, 4 preferences. #5 closed with actual production readback. #10/#12 previously development-closed. The **web frontend is NOT deployed**; published Netlify still prior release. Existing #12 READY queue now documents SQL applied but the frontend still awaiting isolated exact-source CI and serialized one-use Netlify release. Candidate `work/release-scoped-issues-5-10-12-20261024`, PR117, omits unrelated TESTING extractor #33; this candidate is unverified, and its PR test workflows did not start on clean-base retarget. NO bypass of release controls or unready deployment. Do not reapply any of the three SQL migrations. The owner approval remains for a single scoped publication, not unrelated READY batch.
+
+---
+
+## October 24 2026 UTC — Owner-approved #5 SQL-only production delivery
+
+Explicit scoped owner authorization: “If you need to publish to proceed you are approved to do so. Get them closed please.” Applied original READY source `20261024034800_dic_pending_retry_http_conflict.sql` through connected Supabase. Provider migration generated version `20261024052303` name `dic_pending_retry_http_conflict`; avoid replaying repository timestamp/version. Independent database readback found explicit structured nonmutating `conflict` text and no `40001` error branch. Before/after unchanged: shots 23, notes 23, Community 2, personal families 4, library 10. Original Issue #5 signed JWT 50/50 fixture evidence remains the owner-approved alternate modality, not live member browser acceptance. GitHub #5 closed with exact receipt. This item is SQL-only DEPLOYED, no Netlify release. Existing Netlify still `65ee386` at deploy `6adc20c03a07673c4dd08035`. #12 application source remains READY but not published. Extractor #33 remains TESTING and cannot accidentally ship. Scope issue #5 plus prerequisite #10/#12; do not use another publication approval for later unrelated work. No purchases.
 
 ---
 

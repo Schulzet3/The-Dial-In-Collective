@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: dic-frozen-coffee-${{ github.event.pull_request.number }}
@@ -41,10 +42,10 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
-      - name: Install the existing free offline-review prerequisite
+      - name: Install free offline-review and encrypted-transfer prerequisites
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends --yes python3-pil
+          sudo apt-get install --no-install-recommends --yes python3-pil python3-nacl
       - name: Record interpreter and prerequisite versions
         run: |
           mkdir -p "$RUNNER_TEMP/dic-frozen-corpus/output/logs"
@@ -52,11 +53,24 @@ jobs:
             node --version
             /usr/bin/python3 --version
             /usr/bin/python3 -c "import PIL; print('Pillow ' + PIL.__version__)"
-            dpkg-query --show python3-pil
+            /usr/bin/python3 -c "import nacl; print('PyNaCl ' + nacl.__version__)"
+            dpkg-query --show python3-pil python3-nacl
           } | tee "$RUNNER_TEMP/dic-frozen-corpus/output/logs/prerequisite-versions.log"
       - name: Check archive and evidence-integrity failure boundaries
         run: /usr/bin/python3 scripts/audit/coffee-frozen-ci.py self-test
-      - name: Materialize the original hash-bound frozen inputs
+      - name: Prepare the ephemeral private input channel
+        id: channel
+        run: >-
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py prepare-channel
+          --work "$RUNNER_TEMP/dic-frozen-corpus"
+      - name: Announce only the public receiver key
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.channel.outputs.artifact_name }}
+          path: ${{ runner.temp }}/dic-frozen-corpus/channel-public/public-key.json
+          if-no-files-found: error
+          retention-days: 1
+      - name: Decrypt and materialize the original hash-bound frozen inputs
         env:
           GH_TOKEN: ${{ github.token }}
         run: >-
@@ -68,7 +82,10 @@ jobs:
           --repo "$GITHUB_WORKSPACE"
           --work "$RUNNER_TEMP/dic-frozen-corpus"
           --output "$RUNNER_TEMP/dic-frozen-corpus/output"
-          --expected-fingerprint 7c6f6f791c4ebe2272b19bb609a6faf1eeb77176bf0b1cdefa9ebf711ffaf217
+          --expected-fingerprint 4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2
+      - name: Erase any remaining ephemeral receiver key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/dic-frozen-corpus/channel-private/receiver.key"
       - name: Retain raw results, reports and logs without transfer data or source captures
         if: always()
         uses: actions/upload-artifact@v7

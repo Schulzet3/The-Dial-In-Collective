@@ -1,4 +1,24 @@
+## October 24, 2026 UTC — PR116 actual failure, secure recovery and concurrent PR115 reconciliation
+
+State: **TESTING; no publication or deployment by this task.** Owner authorizes ordinary GitHub writes and Actions with no new API keys or added paid services. Preserve all frozen603/201 inputs, expected answers, scorers, current upstream, product choices and saved/offline member data.
+
+First actual candidate11 head `735db80606e5bf3a2458c84df1817f1d71a86646`: full Node1399 =1392 pass/1 fail/6 explicit deployed-endpoint skips; cloud1026 =1025 pass/same1 failure. The introduced three-place Nyeri assertion failed. Lint/build were not run afterward. Python run40065850569 passed38 report/retention and23 offline-helper tests, including real local OCR. Approval, source security, isolated SQL53 signed HTTP assertions, mobile and private visual/offline checks passed. Frozen run40065850565 passed11 integrity controls, then stopped at absent private inputs; no full replay occurred. The original failure is preserved in GitHub and the scoped first-hosted-result receipt.
+
+Concurrent PR115 merged at `1800187cf0980f30d555d71134bde3c0f8e059a7`; latest integrated upstream was `2fe83f3580bb465ad74c67774e7ae743b8e0e35c`. Preserve its source and tests while reconciling the overlapping repair. Its test defines direct locality **Nyeri, Kenya** as canonical and Mount Kenya as contextual prose. Candidate11 follows that explicit upstream representation and additionally requires the full sentence, original source URL and product_json source attribution. Only our newly introduced regression expectation is adapted; the original603 frozen answers and scorer remain unchanged.
+
+Selected Product.description opts into the existing upstream direct-current-locality branch only when that same claim supplies a literal country. Country-less partial text remains source evidence and does not create a conflict with later Region/Country labels. Denied, historical, educational, unrelated-product and competing selected-product controls remain. Product scoping keeps both upstream's bounded malformed orphan-sibling range and the independently owned real WooCommerce loop-card guard. Real parsed attributes replace ambiguous class-text matching in those range predicates. The complete lexer preserves quoted, unusual-name, leading-equals, tag-terminator and ASCII-whitespace boundaries.
+
+The initially rejected PR would have exposed temporary signed download URLs and completion tokens; automatic approval review rejected that action, and the subsequent clean PR contains none. This revision removes plaintext transfer acceptance altogether. A fresh ephemeral PyNaCl receiver announces only its public key; one authenticated ciphertext is bound to repository/PR/head/run/attempt/key/deadline. Complete original transfer objects reach only the unmodified helper's stdin. The private receiver key is deleted on use or failure. Original archives, oracle, scorer and runtime hashes remain mandatory. Public unmodified TweetNaCl/jsSHA vectors passed in V8 and were independently reviewed;18 runner/crypto controls and the full603 benchmark remain pending actual hosted execution.
+
+Concurrent upstream `4a0d3b92d21bafd0be2a88131f3d8dd774a0f1e0` resolved the #5 source-intake gap with an explicit TESTING unpublished-Git-source carrier that forbids another SQL application, while retaining the original DEPLOYED receipt. Approval run40066461895 passed. Preserve both rows and root queue metadata exactly. The prepared alternative intake-code donor remains unreferenced and is not integrated; no source-intake or release rule is changed. Other #5/#12 production actions belong to separately authorized concurrent work and are preserved; this task performs none.
+
+Same-commit source manifest, audit, first-hosted result and this journal distinguish prior claims from executed checks. Every new/reconciled runtime, sanitizer, report or CI change still requires actual current-source checks. No new service, new API key or app deployment is performed.
+
+---
+
 ## October 24, 2026 UTC: candidate11 reconstruction and fresh hosted audit — TESTING
+
+Historical preparation at PR116 head `735db80606e5bf3a2458c84df1817f1d71a86646`; superseded by the current reconciliation and actual CI records above.
 
 PR109 merged candidate8 at `34a1755ab908ad845f4393b7677f1b0ca0985962`. Its public-source acceptance run **40062287845 failed** on SEY origin, Manhattan tasting-note scope, and Nomad/Circulor sanitized-capture parity. Passing ordinary checks did not override that failure. The separate diagnostic branch `05221ec8...` and its narrower expectations are not merged or copied here.
 
@@ -16,6 +36,16 @@ Current evidence and next action: [extractor audit](../audits/2026-10-24-extract
 
 
 Concurrent upstream through `2f4668fdc7918a04f6cc2432021c5f15cb30acd2` (tree `93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee`) is preserved exactly. It includes PR113's confirmed-personal-family Community evidence and source READY reconciliation, staged unapplied migrations, and independent regression tests. The other queue rows and root metadata retain their current upstream values. None of the32 extractor runtime files or actual client-export module changed; fresh combined hosted checks cover the overall source.
+
+---
+
+## October 24 UTC — independent deployed-SQL source carryover reconciled for exact-source CI
+The current development 488fc83 public coffee source acceptance 40066375905 PASS. Approval 40066375903 fails intake only because migration supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql appears in the unpublished source diff while its only queue coverage is already DEPLOYED. Read-only Supabase list_migrations confirms applied migration 20261024052303 dic_pending_retry_http_conflict, and the existing Issue5 item remains DEPLOYED. Added a separate explicitly TESTING source-carryover record covering the unpublished Git path without reclassifying the production operation or promising to re-run it. The new item forbids repeat SQL until future release preflight reconciles source and applied migration identities. No migration, production write, site publication, or source code behavior change. Re-run approval/continuity under the exact new documentation SHA. Issue33 itself stays TESTING pending source gates.
+
+---
+
+## October 24 UTC — public-source exact merged-source acceptance recheck (pending)
+Current development is 2fe83f3580bb465ad74c67774e7ae743b8e0e35c (tree 8fe9054f125c2727970abe199136291c83be0982), with concurrent Issue #33 source parity repairs already integrated and verified on their work branch in public run 40065961167. Independent parallel sanitizer run 40065995754 also passed all ten targets and strict original/sanitized parity. PR #118 is intentionally closed WITHOUT MERGE because it conflicts with newer integrated implementation. All application, Community, Issue5/10/12, member/offline work remains untouched by this test-only recheck. Trigger [dic-completeness-probe] against actual development HEAD via an innocuous audit-script comment; record result before READY. The merged-source approval check currently fails because queue intake treats the separately DEPLOYED Issue5 SQL migration as untracked. Preserve that distinction, do not weaken intake or alter #5 state without release evidence. No publication/provider writes. [skip netlify].
 
 ---
 
@@ -538,6 +568,52 @@ Source development is complete; a future separately authorized release must
 use the existing scoped one-command publication process.
 
 
+## October 24 UTC 2026 — live source acceptance repair, isolated and awaiting exact CI
+
+Owner authorization: continue Issue #33 on the immutable 603-coffee/201-U.S.-roaster source corpus, no new key or direct spending, no publishing or member-data mutation. PR #109 merged but live public-source run 40062287845 failed four checks: SEY Ruarai current geography, Manhattan Samuel Jr. tasting notes, and NOMAD/Circulor sanitized capture extraction parity. Its original failed captures and run remain retained; no weakening of contradictory-source withholding.
+
+Recovered original public failed-run captures and the independent frozen oracle (SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb). Repaired the SEY direct source-locality reading (Nyeri on the slopes of Mount Kenya, not a competing Mountain origin) and isolated malformed WooCommerce related-product orphan cards so their tasting notes cannot contaminate Samuel Jr.; genuine current product story resumes at its own heading. Restructured the public acceptance capture sanitizer to preserve safe product form/input DOM required for comparable parsing while scrubbing sensitive attributes, fields and executable scripts. Added six positive/negative source-bound tests, workflow branch/path filters and preserved review-only cross-source conflicts.
+
+Local focused 18/18 acceptance and new tests passed; complete isolated Node test invocation 1,374 passed, 0 failed, 6 opt-in hosted/provider tests skipped (1,380 total), Node 22.16.0. Original captured corpus replay: 603/603 previews, 3,024 exact, 167 missing, 811 review-required of 4,002 canonical assertions, zero changed canonical dispositions or prior exact losses against preserved candidate8; supplementary retention 5,458 full, 337 partial, 679 unconfirmed. Existing source captures/oracle/scorer unmodified. Other advanced C8v2/C9 checkpoint metrics are not merged; promising C9 defects were inspected but not blindly applied over current source. The local build without test Supabase coordinates returned the expected missing-public-coordinates gate; full CI build will use nonfunctional public placeholders. A completed frozen offline replay is not proof of current live-source parity.
+
+This code commit is a new feature branch from current development, preserving concurrent Issue #12 work. **State: TESTING, not READY or DEPLOYED** until the actual public-source GitHub workflow, CI, safe PR integration and exact-source post-merge readback pass. No Netlify publication or Supabase production/member write was requested or performed. Next action: inspect the fresh live-source artifact for any residual NOMAD/Circulor parity differences, correct and rerun as necessary, then merge non-force and reconcile queue and Issue #33.
+
+
+### Live probe diagnostic continuation (same commit)
+Run 40065390623 at cc87a3e failed only NOMAD and Circulor sanitized replay comparisons; SEY and Manhattan passed. Retain failed artifact 12548602912. Next source-bound probe records bounded top-level/field/conflict and source-fact-count differences without suppressing any failure, so the exact sanitization loss can be fixed. No release authorization and queue remains TESTING.
+
+
+### Live source parity diagnostic refinement
+Run 40065492108 narrowed the remaining failures: NOMAD differs only in source-fact object details (42/42 facts, no canonical or conflict differences), while Circulor loses two canonical fields and two conflict flags plus 25 source facts (111 to 86) during fixture sanitization. Keep the assertions failing; add bounded publicly sourced fact-diff diagnostics to determine exactly which sanitization step changes evidence before repairing it. No production changes.
+
+
+### Exact safe product JSON capture repair candidate
+Public run 40065587138 retained differences: NOMAD retains 42/42 source facts but changed 9 purchase-variant JSON details; Circulor dropped Shopify product-json evidence, affecting 25 of 111 original facts and two independent conflict flags. This candidate preserves inert `data-product`/`data-product-json` script identity markers previously stripped by fixture serialization; adds a positive and negative fixture parity control and bounded structured attribute difference diagnostics. Full proof requires new exact-source live acceptance (do not change the oracle or waive source-fact parity). Queue remains TESTING and unpublished.
+
+
+### NOMAD public offers only remaining parity failure
+Run 40065751486 repaired Circulor: source facts and conflict flags now preserve under inert product JSON marker. NOMAD is the sole remaining live failure; 9 public purchase-variant offer objects differ after sanitized script JSON redaction. Keep failure and record only safe offer object key-level differences to isolate the exact source field before correcting capture; do not silence or waive parity. Production unchanged.
+
+
+### NOMAD strict public offer-source fix
+Run 40065854883 proved the precise public source-fact difference: all nine named purchase variants lost only Yoast Offer.checkoutPageURLTemplate from the sanitized script, not a customer credential. Implement a narrow static public HTTP(S)/relative template exception only under an @type Offer, bounded to 2048 characters with common sensitive query values still excluded. Preserve all other customer, session, cart and checkout token redaction. Eight positive/negative tests pass in the focused local run; rerun exact live parity and required CI before merger. SEY, Manhattan, Circulor and homepage controls already passed live. Frozen 603 unchanged, no production data or publication.
+
+
+### October 24 UTC — merged-source release intake correction
+PR #115 merged non-force as 1800187cf0980f30d555d71134bde3c0f8e059a7, retaining concurrent Issues #5 and #12. All seven premerge checks passed at 4634570200b7f820f1982b85d2151f5aabe1af7c, including public-source run 40065961167 with 10/10 targets, nine valid parses and negative control, 0 gaps, 19 public requests, and 0 member requests/deployments. The merged approval check exposed a false untracked SQL migration because directly DEPLOYED Issue #5 Supabase migration still appears in the not-yet-published Netlify-base diff. This follow-up narrow intake repair retains the provider-verified SQL receipt under strict exact blob validation; negative and positive regression tests added. Both Issue #5 and #33 remain tracked; #33 TESTING until merged exact source CI and live acceptance on the final merged code pass. No release authorized.
+
+
 ### Candidate11 full frozen-corpus execution transferred to authorized GitHub Actions
 
 The execution environment is unavailable. The original source and candidate8 recovery archives are transferred through the unmodified Library helper with their complete prepared metadata; no archive code is executed. The new read-only same-repository workflow pins their hashes, the original oracle and scoring scripts, all32 current runtime files, and actual client export code. It runs the real handler on all603 coffees, compares complete outputs and calls to candidate8 (excluding timing only), and checks canonical/retention losses, all603 offline exports and the offline review helper. Source captures and transfer credentials are not retained in the output artifact. The scoped runner includes11 failure-boundary self-tests. Independent source review found no concrete path/privacy/false-pass blocker; the corrected report builder is included. None of these new hosted tests is claimed passed before its actual run. This commit's same-commit journal records the two CI files and current source manifest. The user explicitly authorizes GitHub use and normal Actions without treating it as added direct cost. No publication or production mutation is authorized.
+
+
+### Run the unchanged public-source acceptance before candidate11 integration
+
+The existing read-only public-source workflow now permits the explicitly named candidate11 recovery branch when its commit carries the existing `[dic-completeness-probe]` marker. All target definitions, public request bounds, assertions and sanitized fact-parity checks remain unchanged. This enables actual premerge verification of the demonstrated fresh-source failures while preserving the original development-merge acceptance trigger. No production credentials, member requests, deployments or paid service are used.
+
+
+Concurrent development additionally merged PR119 at `9c3deaf9f9603c66e6501fe20ae02e828a03ed23`, retaining exact already-applied SQL receipt recognition during intake. Its release-queue source and regression tests are preserved byte-for-byte from upstream. This candidate adds no intake/release-rule changes and does not integrate its separate, unused alternative donor. The currently recorded source-carryover row remains exactly as upstream until its owner reconciles it.
+
+
+The latest owner deferred-publication handoff merged at `ca8cf23ce442e0bdb807e381f777a9e166b398ed` is read and preserved exactly, including the full handoff, runbook, active-checkpoint/current-status additions, unrelated queue rows and Issue10 journal. It explicitly pauses Netlify/release grants/production SQL and requires a new owner publish instruction after extractor readiness. This continuation performs only development fixes and verification. No earlier release permission is reused.
