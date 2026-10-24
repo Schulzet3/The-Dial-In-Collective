@@ -434,6 +434,77 @@ def fact_differences(before, after):
     return result, complete
 
 
+
+TARGETED_CONTEXTS = {
+    "www-limacoffeeroasters-com__kenya-kichwa-tembo-0224337e": ("Kibugu",),
+    "vestacoffee-com__kamwangi-kenya-cbf1ab54": ("New Ngariama",),
+    "mauicoffeeroasters-com__fresh-trades-8oz-d0540271": ("cola-like",),
+    "www-nunatakcoffee-com__raven-espresso-8fe55e93": ("dark chocolate", "blueberry preserves", "hazelnut liqueur"),
+    "larryscoffee-com__coffee-111-4366f999": ("Dehab",),
+}
+
+
+def targeted_original_context(case_id, before, after, report_case):
+    """Emit bounded whole plain-text facts that already existed in pinned C8."""
+    require(case_id in TARGETED_CONTEXTS and before.get("case_id") == case_id
+            and after.get("case_id") == case_id and report_case.get("case_id") == case_id,
+            "unexpected targeted context identity")
+    require(before.get("source_url") == after.get("source_url") == report_case.get("source_url"),
+            "targeted context source differs")
+    captures = report_case.get("captures")
+    require(isinstance(captures, list) and 0 < len(captures) <= 32
+            and len({row["label"] for row in captures}) == len(captures)
+            and len({row["file"] for row in captures}) == len(captures),
+            "targeted original capture inventory differs")
+    for row in captures:
+        require(isinstance(row["file"], str) and PurePosixPath(row["file"]).name == row["file"]
+                and "\\" not in row["file"] and digest(row["sha256"])
+                and type(row["bytes"]) is int and row["bytes"] >= 0,
+                "invalid targeted original capture metadata")
+    original = before.get("output", {}).get("source_facts", [])
+    current = after.get("output", {}).get("source_facts", [])
+    require(isinstance(original, list) and isinstance(current, list)
+            and max(len(original), len(current)) <= 4096, "targeted fact inventory limit")
+    current_indices = {}
+    for index, fact in enumerate(current):
+        current_indices.setdefault(stable_hash(fact), []).append(index)
+    matches, omitted, seen = [], [], set()
+    needles = tuple(value.casefold() for value in TARGETED_CONTEXTS[case_id])
+    for index, fact in enumerate(original):
+        require(isinstance(fact, dict), "invalid original targeted source fact")
+        value = fact.get("value")
+        if not isinstance(value, str) or not any(needle in value.casefold() for needle in needles):
+            continue
+        fingerprint = stable_hash(fact)
+        if fingerprint in seen:
+            continue
+        seen.add(fingerprint)
+        if fact.get("format") == "html" or re.search(r"</?[A-Za-z][^<>]{0,500}>", value):
+            omitted.append({"fact_sha256": fingerprint, "reason": "raw_markup_not_emitted"})
+            continue
+        projected = fact_projection(fact)
+        if not projected["complete"]:
+            omitted.append({"fact_sha256": fingerprint, "reason": "structured_product_data_not_emitted"})
+            continue
+        require(fingerprint in current_indices, "original context fact changed or disappeared")
+        require(0 < len(value.encode("utf-8")) <= 12000, "targeted plain-text fact size limit")
+        matches.append({"baseline_fact_index": index, "current_fact_indices": current_indices[fingerprint],
+                        "fact_sha256": fingerprint, "fact": fact,
+                        "complete_stored_value_emitted": True, "unchanged_from_c8": True})
+    require(1 <= len(matches) <= 12, "missing or excessive unchanged plain-text context")
+    result = {"case_id": case_id, "source_url": before["source_url"],
+              "scope": "Fixed targeted whole plain-text facts from hash-bound original C8 replay",
+              "original_capture_bindings": captures,
+              "matched_original_plain_text_facts": matches, "omitted_structured_matches": omitted,
+              "original_source_facts_truncated": before.get("output", {}).get("source_facts_truncated"),
+              "current_source_facts_truncated": after.get("output", {}).get("source_facts_truncated"),
+              "raw_capture_bytes_read": False, "new_output_used_as_source_evidence": False,
+              "literal_capture_validation_still_required_on_reviewed_rerun": True,
+              "independent_source_review_completed": False, "approval_generated": False}
+    safe_public(result)
+    return result
+
+
 def case_projection(case_id, before, after, old_comparison, comparison, old_retention, retention, report_case):
     require(report_case["case_id"] == case_id and report_case["source_url"] == after["source_url"]
             and same(report_case["candidate_output"], after["output"]), "report case output/source differs")
@@ -575,7 +646,7 @@ def retention_losses(old, current):
 
 
 
-def examine(config):
+def examine(config, targeted_contexts_only=False):
     global STAGE
     STAGE = "remote_identity"
     prefix = "repos/" + REPO + "/actions/"
@@ -734,7 +805,8 @@ def examine(config):
         "supplementary_full_retention_losses": [
             {"case_id": row["case_id"], "assertion_index": row["assertion_index"]} for row in full_losses],
         "blockers": summary["blockers"], "approval_generated": False})
-    emit_exact_material(read_file("review-material.json"))
+    if not targeted_contexts_only:
+        emit_exact_material(read_file("review-material.json"))
     STAGE = "exact_changed_public_evidence"
     incomplete = []
     for change in changes:
@@ -743,9 +815,24 @@ def examine(config):
             old_compared[case_id], compared[case_id], old_retained[case_id], retained[case_id], report_cases[case_id])
         projection["stable_change_hashes"] = next(row for row in current["review_material"]["changes"]
                                                 if row["case_id"] == case_id)
-        emit("candidate12_changed_case", projection)
+        if not targeted_contexts_only:
+            emit("candidate12_changed_case", projection)
         if not complete:
             incomplete.append(case_id)
+    if targeted_contexts_only:
+        STAGE = "targeted_unchanged_original_contexts"
+        require(not incomplete, "changed structured facts still require separate source review")
+        contexts = [targeted_original_context(case_id, before[case_id], after[case_id], report_cases[case_id])
+                    for case_id in TARGETED_CONTEXTS]
+        for context in contexts:
+            emit("candidate12_original_context", context)
+        emit("candidate12_unchanged_contexts_complete", {
+            "status": "PASS", "targeted_cases": len(contexts), "changed_cases_verified": len(changes),
+            "all_contexts_from_unchanged_original_c8_facts": True,
+            "raw_source_captures_extracted_or_uploaded": False,
+            "roaster_requests": 0, "production_operations": False, "approval_generated": False})
+        archive.close()
+        return
     emit("candidate12_forensics_complete", {
         "status": "PASS" if not incomplete else "TARGETED_EVIDENCE_STILL_REQUIRED",
         "changed_cases_projected": len(changes), "incomplete_structured_fact_cases": incomplete,
@@ -889,6 +976,73 @@ def self_test():
             _changes, complete = fact_differences([], [fact])
             self.assertFalse(complete)
 
+
+        def _context_fixture(self, facts):
+            case_id = next(iter(TARGETED_CONTEXTS))
+            source_url = "https://example.test/products/targeted"
+            before = {"case_id": case_id, "source_url": source_url,
+                      "output": {"source_facts": facts, "source_facts_truncated": False}}
+            after = decode_json(json.dumps(before).encode())
+            report_case = {"case_id": case_id, "source_url": source_url,
+                           "captures": [{"label": "page", "file": "page.html", "sha256": "a" * 64,
+                                         "bytes": 100, "url": source_url}]}
+            return case_id, before, after, report_case
+
+        def test_targeted_context_uses_complete_unchanged_original_fact_not_new_output(self):
+            fact = {"label": "Published paragraph",
+                    "value": "Kibugu Farmers Cooperative Society (FCS) in Embu County owns this station.",
+                    "source_type": "html", "source_url": "https://example.test/products/targeted"}
+            case_id, before, after, report = self._context_fixture([fact])
+            after["output"]["named_producer"] = "Unreviewed new value"
+            after["output"]["source_facts"].insert(0, {"value": "Unrelated unchanged prose"})
+            result = targeted_original_context(case_id, before, after, report)
+            matches = result["matched_original_plain_text_facts"]
+            self.assertEqual(len(matches), 1)
+            self.assertEqual(matches[0]["fact"], fact)
+            self.assertEqual(matches[0]["current_fact_indices"], [1])
+            self.assertTrue(matches[0]["unchanged_from_c8"])
+            self.assertFalse(result["new_output_used_as_source_evidence"])
+            self.assertFalse(result["approval_generated"])
+
+        def test_targeted_context_rejects_changed_absent_unknown_or_rebound_support(self):
+            case_id, before, after, report = self._context_fixture([{"value": "Kibugu owns this station."}])
+            after["output"]["source_facts"][0]["value"] = "Kibugu has a different role."
+            with self.assertRaises(ValueError):
+                targeted_original_context(case_id, before, after, report)
+            for values in (
+                    ("unknown-case", before, before, report),
+                    (case_id, before, before, {**report, "source_url": "https://other.test/"}),
+                    (case_id, {**before, "output": {"source_facts": []}}, before, report)):
+                with self.subTest(identity=values[0]), self.assertRaises(ValueError):
+                    targeted_original_context(*values)
+
+        def test_targeted_context_omits_structured_data_without_silently_substituting_it(self):
+            plain = {"value": "Kibugu Farmers Cooperative Society runs the station."}
+            structured = {"format": "json", "value": '{"producer":"Kibugu","product":{"media":[1,2]}}'}
+            markup = {"value": "<div>Kibugu raw page data</div>"}
+            case_id, before, after, report = self._context_fixture([plain, structured, markup])
+            result = targeted_original_context(case_id, before, after, report)
+            self.assertEqual(len(result["matched_original_plain_text_facts"]), 1)
+            self.assertEqual(len(result["omitted_structured_matches"]), 2)
+            self.assertNotIn("media", json.dumps(result))
+            case_id, before, after, report = self._context_fixture([structured, markup])
+            with self.assertRaises(ValueError):
+                targeted_original_context(case_id, before, after, report)
+
+        def test_targeted_context_bounds_and_sensitive_values_fail_before_printing(self):
+            values = [
+                [{"value": "Kibugu " + "x" * 12000}],
+                [{"value": "Kibugu Bearer PUBLIC_TEST_FIXTURE"}],
+                [{"value": "Kibugu source paragraph " + str(index)} for index in range(13)],
+            ]
+            for facts in values:
+                case_id, before, after, report = self._context_fixture(facts)
+                with self.subTest(facts=len(facts)), contextlib.redirect_stdout(io.StringIO()) as out:
+                    with self.assertRaises(ValueError):
+                        targeted_original_context(case_id, before, after, report)
+                    self.assertEqual(out.getvalue(), "")
+
+
         def test_sensitive_patterns_and_output_overflow_are_never_printed(self):
             global EMITTED
             for value in ("Bearer PUBLIC_TEST_FIXTURE", "https://example.oaiusercontent.com/?sig=fixture",
@@ -921,8 +1075,11 @@ def main():
     mode.add_argument("--self-test", action="store_true")
     mode.add_argument("--config", type=Path)
     parser.add_argument("--config-sha256")
+    parser.add_argument("--targeted-contexts-only", action="store_true")
     args = parser.parse_args()
     if args.self_test:
+        if args.targeted_contexts_only:
+            parser.error("--targeted-contexts-only requires --config")
         self_test()
         return 0
     try:
@@ -936,7 +1093,7 @@ def main():
         emit("forensic_reader_identity", {"script_sha256": sha(Path(__file__).read_bytes()),
                                          "config_sha256": args.config_sha256,
                                          "candidate": 12, "approval_generated": False})
-        examine(config)
+        examine(config, targeted_contexts_only=args.targeted_contexts_only)
         return 0
     except Exception as error:
         # Do not echo exception values, server responses, environment or source bodies.

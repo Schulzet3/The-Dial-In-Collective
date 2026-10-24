@@ -62,3 +62,11 @@ The reader avoids dumping whole structured product/media JSON facts. If such a f
 Bounds are 64 MiB compressed download, 2,048 ZIP entries, 256 MiB total uncompressed data, 64 MiB per member, 180,000 bytes per log event and 4 MiB across emitted evidence. These fit the measured previous artifact. A failure at a bound requires an explicit, scoped follow-up; it is not permission to accept partial review.
 
 The first-run references later placed in an approval manifest must come from this actual authenticated evidence. The separate frozen runner still requires independent source review, exact manifest pins, zero existing exact/full-retention losses, all current exports and offline validation on the full rerun.
+
+## Targeted unchanged original source contexts
+
+The optional `--targeted-contexts-only` flag retains the same exact config, GitHub artifact identity, archive/member hashes, original C8 bindings and complete case/export/scorer checks. It then emits bounded original plain-text context for exactly Lima/Kichwa Tembo, Vesta/Kamwangi, Maui/Fresh Trades, Nunatak/Raven Espresso and Larrys/Coffee 111. This mode does not repeat the changed-case or exact-review-material payloads already obtained from the default reader.
+
+Each emitted whole fact must already exist in the hash-bound original C8 replay and have identical typed values and metadata in the current replay under the existing stable fact hash. The record includes its complete stored value, hash, original/current indices and original capture metadata. Newly produced canonical or supplemental names are never substituted as source evidence. Raw markup and structured product JSON remain omitted with hashes/reasons; missing, changed, private-pattern, oversized or excessive plain-text matches fail closed. Limits are twelve matching facts per case and 12,000 UTF-8 bytes per fact, within the existing total/event bounds. These are complete stored facts, not a claim to have printed every byte of the original page.
+
+The mode emits `candidate12_original_context` and `candidate12_unchanged_contexts_complete`. It creates no approval. The later reviewed full rerun must still verify any selected literal quote against the original captured bytes. Four new selector controls accompany the original nine reader controls; actual hosted execution is recorded separately.

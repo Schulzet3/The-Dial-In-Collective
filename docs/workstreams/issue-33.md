@@ -681,3 +681,8 @@ The combined next focused suite expects95 Node tests,34 frozen-runner controls,2
 ## October 24 UTC — exact Candidate12 changed-result forensics, no approval
 
 Pinned the actual first completed Candidate12 failed frozen run40070270334 (head92cd74d6da008b8186f381b57aaa09a10a43cc88, runtime3fabb78c3bb1d49bd5cffcf5dd3e6d4108495717d2021d7d37e628f659e8c6a0) and its exact ZIP, final manifest and seven raw-result hashes for independent review. The isolated diagnostic workflow verifies reader/config hashes, reruns nine existing failure controls and projects all24 changed cases with original source metadata. It preserves the first run as UNREVIEWED, creates no approval, performs no corpus replay or live probe, and retains bounded review logs without original captures or transfer credentials. The original expected values and scorer remain frozen. No PR121 head, runtime, member/provider data or publication state changes in this diagnostics commit.
+
+
+## October 24 UTC — bounded original source-context review
+
+The exact first Candidate12 changed-case reader passed run40070657191/job120803159680, verifying all24 complete case projections, original artifact/scorer bindings and603 export/offline checks. This follow-up keeps those integrity checks and the same authenticated config, runs13 existing/new reader controls, then emits only bounded unchanged original C8 plain-text facts for the five explicitly reviewed producer/sensory contexts. Newly extracted values are not treated as independent source evidence. Structured product data and raw markup are omitted explicitly; missing, changed, oversized or private evidence fails closed. No corpus replay, live request, approval, input credentials, production operation or PR121 head change is made.

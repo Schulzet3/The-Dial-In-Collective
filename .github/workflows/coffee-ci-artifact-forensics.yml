@@ -1,4 +1,4 @@
-name: DIC Candidate 12 exact change review
+name: DIC Candidate 12 original source contexts
 on:
   push:
     branches:
@@ -22,19 +22,19 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/dic-candidate12-change-review"
           sha256sum --check <<'DIC_REVIEW_PINS'
-          ff6167fe571e3a35140a9003994ef696788e59d1c167559920ef9d6e398023e9  scripts/audit/coffee-reviewed-change-forensics.py
+          e13f1b27b80099b54b23f03058556f9e55d5cc15a000103678a152d52949ee0f  scripts/audit/coffee-reviewed-change-forensics.py
           860c99b8f79fa5921d146f3b2c3f5c907584dabff34e29ed2d488a9e43de530a  docs/audits/extractor-candidate12-forensics-input-40070270334-1.json
           DIC_REVIEW_PINS
           {
             /usr/bin/python3 --version
             gh --version
           } > "$RUNNER_TEMP/dic-candidate12-change-review/versions.log"
-      - name: Run all nine existing forensic failure controls
+      - name: Run existing and targeted-context failure controls
         shell: bash
         run: |
           set -euo pipefail
           /usr/bin/python3 -B scripts/audit/coffee-reviewed-change-forensics.py --self-test 2>&1 | tee "$RUNNER_TEMP/dic-candidate12-change-review/controls.log"
-      - name: Read only the authenticated failed Candidate 12 artifact
+      - name: Read bounded unchanged original source contexts
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -43,12 +43,13 @@ jobs:
           /usr/bin/python3 -B scripts/audit/coffee-reviewed-change-forensics.py \
             --config docs/audits/extractor-candidate12-forensics-input-40070270334-1.json \
             --config-sha256 860c99b8f79fa5921d146f3b2c3f5c907584dabff34e29ed2d488a9e43de530a \
+            --targeted-contexts-only \
             2>&1 | tee "$RUNNER_TEMP/dic-candidate12-change-review/review.jsonl"
       - name: Retain bounded review evidence without archived source captures
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: dic-candidate12-change-review-${{ github.run_id }}-${{ github.run_attempt }}
+          name: dic-candidate12-original-contexts-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/dic-candidate12-change-review/
           if-no-files-found: error
           retention-days: 90
