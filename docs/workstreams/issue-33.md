@@ -640,3 +640,7 @@ The prior journal-only [dic-completeness-probe] push was path-filtered and did n
 ## October 24 UTC — immediate syntax correction after actual CI failure
 
 Public-source run 40068109510 failed before tests from a truncated source line in new rootSchemaIdentity (not from the underlying NOMAD public data). Repaired the exact malformed RegExp line and restored the selectedOfferVariant function header. The previous failure remains recorded. Re-execute same stringent live acceptance with [dic-completeness-probe] and applicable Node/CI before any READY claim; no production operations.
+
+## October 24 UTC — parse failure repair
+
+40068171951 failed from malformed generated guard line. Replaced entire helper and restored selectedOfferVariant header. No behavioral change outside strict schema variant fixture handling. Rerun bounded [dic-completeness-probe]. Prior failures preserved. TESTING, not deployed.

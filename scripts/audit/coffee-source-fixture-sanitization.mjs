@@ -32,10 +32,17 @@ function productUrl(raw,source){
 // same-origin root-schema reference. Only a direct selected Product.hasVariant
 // relation may use these IDs; the ID alone never selects an arbitrary Product.
 function rootSchemaIdentity(raw,source,type){
- if(typeof raw!=='string'||!raw.startsWith(source.origin+'/#/schema/'+type+'/'))return false;
+ if(typeof raw!=='string')return false;
+ const prefix=source.origin+'/#/schema/'+type+'/';
+ if(!raw.startsWith(prefix))return false;
  const url=httpsUrl(raw);
+ const tail=raw.slice(prefix.length);
  return Boolean(url&&url.origin===source.origin&&url.pathname==='/'&&!url.search&&
-  new RegExp('^#/schema/'+type+'/[A-Za-z0-9._~-]{1,200}||typeof offer!=='object'||!hasType(offer,'offer'))return null;
+  tail.length>=1&&tail.length<=200&&
+  [...tail].every(char=>/[A-Za-z0-9._~-]/.test(char)));
+}
+function selectedOfferVariant(offer,source,parentVariant){
+ if(!offer||typeof offer!=='object'||!hasType(offer,'offer'))return null;
  // An explicit URL has priority. A contradictory URL must not be rescued
  // by a different ID; a URL-less schema Offer may use its exact #offer ID.
  const hasUrl=Object.hasOwn(offer,'url');
