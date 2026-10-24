@@ -40,10 +40,10 @@
     {
       "id": "DIC-Q-12-community-prior-hierarchy",
       "issue": 12,
-      "pr": 110,
+      "pr": 113,
       "title": "Contributor-balanced exact/related/similar Community starting priors for recipe recommendation (#10 dependency)",
-      "state": "TESTING",
-      "merged_source_sha": "8b8cffd504b4a5ae885f2388ee7273972790dba2",
+      "state": "READY",
+      "merged_source_sha": "3529a9b628bedf3f294f6509f4628c9660914131",
       "scope_paths": [
         "supabase/migrations/20261024041100_dic_community_recommendation_evidence.sql",
         "site/lib/community-evidence.js",
@@ -56,10 +56,12 @@
         "site/cloud/shot_card.js"
       ],
       "tests": [
-        "PR108 merged at 9135e06; merged-source CI 40061824798/40061824799/40061824794/40061824833/40061824800 SUCCESS.",
-        "PR110 merged 8b8cffd; exact-source approval/SQL/Node/mobile/visual CI SUCCESS 40062842516/40062842378/40062842377/40062842415/40062842398; PR110 53 signed PostgREST HTTP assertions passed.",
-        "Additional observed-ratio-group integrity regression added in this branch; exact-source CI pending.",
-        "Issue #12 confirmed personal-family provenance: new rollback-only two-family cross-user SQL assertions and Node checks added in source branch; NOT PASSED pending exact-source CI."
+        "PR108 merged source 9135e06; five exact merged-source checks PASS (40061824798 approval, 40061824799 SQL, 40061824794 Node, 40061824833 mobile/cloud, 40061824800 visual).",
+        "PR110 merged source 8b8cffd; five exact merged-source checks PASS (40062842516 approval, 40062842378 SQL/53 signed-JWT POSTGREST acceptance, 40062842377 Node, 40062842415 mobile/cloud, 40062842398 visual).",
+        "PR112 reconciled evidence, added integrity checks, merged acf411c; five exact merged-source checks PASS.",
+        "PR113 corrected the actual source gap: use server-confirmed personally distinct recipe family IDs for member-level medians, balance independent contributors once per observed Community ratio region, exclude the requesting owner's own contributions, and retain detached anonymous projections with no fabricated verification. The first isolated SQL fixture failed because direct inserts bypass the member mutation's family classification; repaired fixture by executing the real server classifier, not relaxing assertions.",
+        "PR113 tested HEAD a2f3f0aa087dd1ebef06c5f9e1aff12676726bb9: all seven applicable exact-source CI checks PASS, including isolated rollback-only SQL with two independently classified confirmed successful recipe families, owner isolation, no private identifiers, Node/build, mobile/Cloud, visual, approval/security inventory.",
+        "PR113 non-force merged 3529a9b628bedf3f294f6509f4628c9660914131; all six applicable merged-source CI checks PASS: approval 40064949410, isolated SQL 40064949504, cloud/mobile 40064949521, Node/build 40064949589, visual review 40064949420. These are development-source tests, not actual hosted member acceptance or deployment."
       ],
       "ci_runs": [
         40061824798,
@@ -71,13 +73,16 @@
         40062842378,
         40062842377,
         40062842415,
-        40062842398
+        40062842398,
+        40064949410,
+        40064949504,
+        40064949521,
+        40064949589,
+        40064949420
       ],
-      "blockers": [
-        "Source revision pending exact-SHA signed/SQL, Node/browser/offline/approval CI, non-force merge, and merged-source readback. Confirmed personal-family contributions now explicitly represented; cross-member ratio-group identity stays estimated, not global-verified."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
-      "notes": "PR108 Community evidence and PR110 provenance are merged and verified. PR109 is extractor-only. Community ratio buckets are explicitly estimated, not proven distinct family identities. Preserve #12 TESTING while accepting useful tier weighting, privacy, contributor balancing and provenance as verified source; no production release. Issue #5 READY and Issue #33 extractor remain unchanged. Candidate completion links observed Community aggregates to server-confirmed member recipe families, preserves per-contributor weighting, source precedence and no invented globally verified family. No schema changes or production backfill."
+      "notes": "READY source only, NOT DEPLOYED. PR108+PR110+PR113 complete #12's exact/related/similar contributor-balanced Community evidence, source and private applied provenance, source-backed distinct successful personal family evidence, owner exclusion, unproven cross-person estimated grouping and one visible preferred recipe. The existing 0.25 similarity grouping remains heuristic, never a verified global family ID. Tests include rollback-only PostgreSQL 17.11 with two real server-classified synthetic personally confirmed families and 53 earlier signed HTTP acceptance assertions, browser, Node, source CI. Supabase migrations 20261024041100 and 20261024041800, plus app source, are staged ONLY and require a separate owner release. #5 independent READY migration remains not applied; #33 TESTING extractor untouched. No new direct paid service."
     },
     {
       "id": "DIC-Q-33-expanded-603-audit",
@@ -818,6 +823,5 @@
       "delivered_at_utc": "2026-10-24T03:06:58.402Z"
     }
   ],
-  "last_reconciled_utc": "2026-10-24T00:30:00Z",
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
 }

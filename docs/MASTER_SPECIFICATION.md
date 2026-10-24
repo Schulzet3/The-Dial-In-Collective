@@ -1440,6 +1440,8 @@ For a user's recommendation, stronger context should generally outrank weaker co
 
 Exact ordering may differ by variable. For example, grind should strongly favor the user's own grinder history.
 
+**October 24, 2026 implementation status (no new Locked decision):** Issue #12's staged read-only Community recommendation RPC now uses existing server-maintained personally confirmed recipe-family membership to preserve distinct successful member-family evidence, with per-contributor medians and one vote per independently contributing member in an observed ratio region. It excludes the requesting member's own Community contributions, protects anonymity and grinder calibration, and keeps exact, related-release and similar-coffee tiers distinct. Cross-member ratio grouping under the established 0.25 heuristic is explicitly **estimated**; two people in a similar bucket are not declared to share a globally verified family ID. Current UI still shows exactly one recipe. Original source/provenance and confirmed member-family fixtures pass exact CI at merge `3529a9b`. This is development READY, **not deployed**; previously written historical comments describing the feature as unfinished refer to the source state at their dates. Issue #13 experimental family lifecycle is separate and unaffected.
+
 ## 25.3 Roaster recipe
 
 A roaster-published espresso recipe is a strong prior, particularly for Traditional-style starting points, but real successful data should eventually outweigh it.
