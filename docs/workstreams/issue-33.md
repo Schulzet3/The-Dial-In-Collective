@@ -644,3 +644,7 @@ Public-source run 40068109510 failed before tests from a truncated source line i
 ## October 24 UTC — parse failure repair
 
 40068171951 failed from malformed generated guard line. Replaced entire helper and restored selectedOfferVariant header. No behavioral change outside strict schema variant fixture handling. Rerun bounded [dic-completeness-probe]. Prior failures preserved. TESTING, not deployed.
+
+## October 24 UTC — reconstruction after generated replacement corruption
+
+Root cause of the repeated syntax failures in runs 40068109510, 40068171951 and 40068227419: JavaScript String.replace replacement text interpreted a dollar-quote sequence as the original suffix, multiplying the sanitizer file and corrupting function boundaries. Reconstructed the sanitizer from the exact untouched PR116 blob d91438f4, applied only two bounded source edits with string slicing, verified expected size (no duplicated module or malformed helper), and preserved the previously added tests. Re-run original exact-source acceptance. Queue TESTING, no publication.
