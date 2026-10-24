@@ -628,3 +628,7 @@ Exact public acceptance 40066955938 is FAIL solely for NOMAD's nine published JS
 
 This commit is [skip netlify] development-only. Retain Issue33 TESTING until PR head live source acceptance, tests/privacy/approval, non-force merge and merged-source readback. Separate Issue5 SQL source-carryover, Issue10/12, the deferred release instruction and release queue remain untouched.
 
+
+## October 24 UTC — exact-source public acceptance requested
+
+The first push workflow for 956be473 correctly skipped because this repository requires the explicit [dic-completeness-probe] marker in the head commit. This documentation-only follow-up triggers the existing bounded public-source acceptance without changing parser, sanitizer, frozen corpus, or test expectations. Inspect its actual result and repair any failure before READY. No release or production operations.
