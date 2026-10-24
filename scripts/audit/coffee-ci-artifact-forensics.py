@@ -318,6 +318,126 @@ def live():
         emit("nomad_structural_parity", {"id": target["id"], "captures": captures})
 
 
+
+def clipped_text(value, limit):
+    if not isinstance(value, str):
+        return scalar(value)
+    if PRIVATE.search(value):
+        return {"omitted_sensitive_pattern": True}
+    raw = value.encode("utf-8")
+    if len(raw) <= limit:
+        return value
+    return {"text": raw[:limit].decode("utf-8", errors="ignore"),
+            "truncated": True, "original_bytes": len(raw)}
+
+
+def plain_fact_value(fact):
+    value = fact.get("value")
+    if not isinstance(value, str) or not value.strip() or PRIVATE.search(value):
+        return None
+    if fact.get("format") == "json" or value.lstrip().startswith(("{", "[")):
+        return None
+    if re.search(r"product (?:attributes|media|variants|offers)", str(fact.get("label", "")), re.I):
+        return None
+    return value
+
+
+def missing_projection(index, compare, comparison):
+    # These are the historical 2eb/C11 rows, not assertions about later repairs.
+    grouped = {}
+    total = 0
+    normalize = lambda text: re.sub(r"\s+", " ", text).strip().casefold()
+    for case_id in sorted(compare):
+        output = index[case_id].get("output", {})
+        source_facts = output.get("source_facts", [])
+        for canonical in compare[case_id]["canonical"]:
+            if canonical.get("status") != "missing":
+                continue
+            field = canonical["field"]
+            require(re.fullmatch(r"[a-z_]{1,60}", field))
+            expected = canonical.get("expected")
+            expected_text = expected if isinstance(expected, str) else ""
+            quotes = canonical.get("evidence", [])
+            require(isinstance(quotes, list))
+            quote_texts = [item.get("quote") for item in quotes if isinstance(item, dict)
+                           and isinstance(item.get("quote"), str)]
+            query_quotes = [normalize(value) for value in quote_texts if len(value) >= 6]
+            query_expected = normalize(expected_text)
+            words = {value for value in re.findall(r"[^\W_]{3,}", query_expected)
+                     if value not in {"coffee", "with", "from", "this", "that", "and", "the", "our", "other"}}
+            matches = []
+            for position, fact in enumerate(source_facts):
+                value = plain_fact_value(fact)
+                if value is None:
+                    continue
+                normalized = normalize(value)
+                score, basis, at = 0, None, 0
+                for quote in query_quotes:
+                    where = normalized.find(quote)
+                    if where >= 0:
+                        score, basis, at = 4, "frozen_quote", where
+                        break
+                if not score and fact.get("field") == field:
+                    score, basis = 3, "explicit_field"
+                if not score and query_expected and len(query_expected) >= 3:
+                    where = normalized.find(query_expected)
+                    if where >= 0:
+                        score, basis, at = 2, "expected_phrase", where
+                if not score and len(words) >= 2:
+                    hits = [word for word in words if re.search(r"\b" + re.escape(word) + r"\b", normalized)]
+                    if len(hits) >= min(2, len(words)):
+                        score, basis, at = 1, "expected_word_overlap", normalized.find(hits[0])
+                if not score:
+                    continue
+                # Use a bounded literal excerpt around the match. The original
+                # value length and clipping are explicit; no text is invented.
+                plain = re.sub(r"\s+", " ", value).strip()
+                excerpt_start = max(0, at - 180) if len(plain.encode("utf-8")) > 750 else 0
+                excerpt = plain[excerpt_start:]
+                projected = {"source_fact_index": position, "match_basis": basis,
+                             "field": word(fact.get("field")), "label": clipped_text(fact.get("label"), 120),
+                             "source_type": word(fact.get("source_type")), "section": clipped_text(fact.get("section"), 120),
+                             "source_url": public_url(fact.get("source_url")),
+                             "context": clipped_text(excerpt, 750),
+                             "normalized_excerpt_starts_at_character": excerpt_start,
+                             "context_whitespace_normalized": True,
+                             "source_value_bytes": len(value.encode("utf-8"))}
+                matches.append((score, position, projected))
+            matches.sort(key=lambda row: (-row[0], row[1]))
+            selected = []
+            seen = set()
+            for _, _, projected in matches:
+                tag = json.dumps(projected["context"], sort_keys=True)
+                if tag in seen:
+                    continue
+                seen.add(tag)
+                selected.append(projected)
+                if len(selected) == 2:
+                    break
+            evidence = [{"capture_id": word(item.get("capture_id")),
+                         "quote": clipped_text(item.get("quote"), 500)}
+                        for item in quotes[:3] if isinstance(item, dict)]
+            row = {"case_id": case_id, "field": field, "expected": clipped_text(expected, 600),
+                   "status_at_original_source": "missing",
+                   "explicit_conflict": field in (output.get("conflicts") or []),
+                   "frozen_evidence": evidence, "frozen_evidence_count": len(quotes),
+                   "source_facts_truncated": bool(output.get("source_facts_truncated")),
+                   "matching_plain_context_count": len(matches), "context": selected}
+            grouped.setdefault(field, []).append(row)
+            total += 1
+    require(total == 167 == comparison["counts"]["missing"])
+    require(all(len(rows) == comparison["by_field"][field]["missing"] for field, rows in grouped.items()))
+    emit("missing_canonical_inventory", {"source_commit": HEAD, "runtime_fingerprint": FP,
+        "comparison_sha256": HASHES["candidate11-comparison.json"], "replay_sha256": HASHES["candidate11-replay.json"],
+        "rows": total, "by_field": {field: len(rows) for field, rows in sorted(grouped.items())},
+        "scope": "Original 2eb/C11 missing rows; classify later improvements from their separate full-run deltas.",
+        "automatic_adjudication": False})
+    for field, rows in sorted(grouped.items()):
+        for start in range(0, len(rows), 20):
+            emit("missing_canonical_group", {"source_commit": HEAD, "field": field,
+                "total_in_field": len(rows), "start_index": start, "rows": rows[start:start + 20]})
+
+
 def frozen():
     global STAGE
     with artifact("frozen") as archive:
@@ -360,6 +480,7 @@ def frozen():
                 and len(compare) == len(comparison["records"]) == 603
                 and set(index) == set(compare) and set(CASE_IDS) <= set(index))
         emit("comparison_totals", {"counts": scalar(comparison["counts"]), "by_field": scalar(comparison["by_field"])})
+        missing_projection(index, compare, comparison)
         for case_id in CASE_IDS:
             record = index[case_id]
             output = record.get("output", {})

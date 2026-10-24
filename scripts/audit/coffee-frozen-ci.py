@@ -83,6 +83,8 @@ MAX_FILES = 50000
 MAX_MEMBER_BYTES = 256 * 1024 * 1024
 MAX_EXTRACTED_BYTES = 4 * 1024 * 1024 * 1024
 MAX_COMMAND_SECONDS = 1200
+CANDIDATE = 12
+CANDIDATE_PREFIX = "candidate" + str(CANDIDATE)
 
 
 def require(condition, message):
@@ -910,6 +912,387 @@ def retention_losses(old, current):
     return losses
 
 
+
+REVIEWED_CHANGE_TYPE = "independently_reviewed_frozen_case_changes"
+STABLE_CASE_FORMAT = "python-json-sort-keys-utf8-v1"
+MAX_REVIEW_MANIFEST_BYTES = 4 * 1024 * 1024
+
+
+def stable_json_sha256(value):
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True,
+                                    separators=(",", ":"), allow_nan=False).encode("utf-8")).hexdigest()
+
+
+def stable_case_sha256(row):
+    return stable_json_sha256({key: value for key, value in row.items() if key != "elapsed_ms"})
+
+
+def stable_case_inventory_sha256(rows):
+    return stable_json_sha256([{"case_id": case_id, "sha256": stable_case_sha256(rows[case_id])}
+                               for case_id in sorted(rows)])
+
+
+def valid_sha256(value):
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None and value != "0" * 64
+
+
+def exact_object(value, keys, message):
+    require(isinstance(value, dict) and set(value) == set(keys), message)
+
+
+def reject_duplicate_json_keys(pairs):
+    value = {}
+    for key, item in pairs:
+        require(key not in value, "Duplicate reviewed-change JSON property")
+        value[key] = item
+    return value
+
+
+def read_reviewed_changes(repo, path, pinned_sha256):
+    if path is None and pinned_sha256 is None:
+        return None, None
+    require(path is not None and valid_sha256(pinned_sha256),
+            "Reviewed changes require both a repository path and a nonzero SHA-256 workflow pin")
+    location = repo / path
+    require(location.absolute() == location.resolve()
+            and location.resolve().parent == (repo / "docs/audits").resolve()
+            and location.suffix == ".json" and location.is_file() and not location.is_symlink(),
+            "Reviewed-change manifest must be a regular JSON file directly under checked-out docs/audits")
+    require(0 < location.stat().st_size <= MAX_REVIEW_MANIFEST_BYTES
+            and file_hash(location) == pinned_sha256,
+            "Reviewed-change manifest bytes do not match the explicit workflow pin")
+    def invalid_constant(_value):
+        raise ValueError("Nonfinite number in reviewed-change manifest")
+    document = json.loads(location.read_text(encoding="utf-8"),
+                          object_pairs_hook=reject_duplicate_json_keys, parse_constant=invalid_constant)
+    return document, {"file": location.relative_to(repo).as_posix(),
+                      "bytes": location.stat().st_size, "sha256": pinned_sha256}
+
+
+def derived_score_counts(comparison, retention):
+    """Recount existing scorer records without changing their scoring decisions."""
+    counts = dict.fromkeys(("cases", "ok_response", "canonical_assertions", "exact_equivalent",
+                            "missing", "review_required", "conflict_assertions", "conflict_withheld",
+                            "conflict_unresolved", "additional_facts", "additional_literal_present",
+                            "additional_unconfirmed", "unexpected_fields"), 0)
+    for row in comparison["records"]:
+        require(type(row.get("ok")) is bool, "Invalid comparison response status")
+        counts["cases"] += 1
+        counts["ok_response"] += int(row["ok"])
+        for check in row["canonical"]:
+            require(check.get("status") in ("exact_equivalent", "missing", "review_required"),
+                    "Unknown canonical scorer status")
+            counts["canonical_assertions"] += 1
+            counts[check["status"]] += 1
+        for check in row["ambiguities"]:
+            require(check.get("status") in ("withheld", "review_required"),
+                    "Unknown conflict scorer status")
+            counts["conflict_assertions"] += 1
+            counts["conflict_withheld" if check["status"] == "withheld" else "conflict_unresolved"] += 1
+        for check in row["additional"]:
+            require(check.get("status") in ("literal_present", "unconfirmed"),
+                    "Unknown additional-fact scorer status")
+            counts["additional_facts"] += 1
+            counts["additional_literal_present" if check["status"] == "literal_present"
+                   else "additional_unconfirmed"] += 1
+        require(isinstance(row["unexpected"], list), "Invalid unexpected-field scorer records")
+        counts["unexpected_fields"] += len(row["unexpected"])
+    retained = {"cases": 0, "additional_assertions": 0, "truncated_previews": 0}
+    for row in retention["records"]:
+        require(type(row.get("source_facts_truncated")) is bool, "Invalid retention truncation status")
+        retained["cases"] += 1
+        retained["truncated_previews"] += int(row["source_facts_truncated"])
+        for check in row["checks"]:
+            status = check.get("status")
+            require(status in ("all_evidence_retained", "some_evidence_retained", "unconfirmed"),
+                    "Unknown supplementary-retention scorer status")
+            retained["additional_assertions"] += 1
+            retained[status] = retained.get(status, 0) + 1
+    require(typed_equal(counts, comparison["counts"])
+            and typed_equal(retained, retention["counts"]),
+            "Scorer count dictionaries differ from their independently recounted case records")
+    return {"canonical": counts, "supplementary_retention": retained}
+
+
+def frozen_review_evidence_index(corpus, expected):
+    require(file_hash(corpus / "oracle-freeze.json") == FREEZE_SHA256
+            and file_hash(corpus / "original-archive-packet-attestation.json") == ATTESTATION_SHA256,
+            "Reviewed-change evidence needs the unchanged original freeze and packet attestation")
+    freeze = load_json(corpus / "oracle-freeze.json")
+    entries = [row for row in freeze["files"] if row["kind"] == "source_hash_index"]
+    require(len(entries) == 1, "Missing unique frozen capture index for reviewed changes")
+    location = corpus / PurePosixPath(entries[0]["path"]).name
+    require(file_hash(location) == entries[0]["sha256"], "Frozen review capture index changed")
+    captures = load_json(location)
+    by_capture = {(row["case_id"], row["file"]): row for row in captures}
+    require(len(captures) == len(by_capture) == 1197
+            and {row["case_id"] for row in captures} == expected.keys(),
+            "Frozen review capture coverage changed")
+    packet_rows = load_json(corpus / "original-archive-packet-attestation.json")["packets"]
+    selected_packets = [row for row in packet_rows if (row.get("id") or row.get("case_id")) in expected]
+    packets = {(row.get("id") or row.get("case_id")): row for row in selected_packets}
+    require(len(selected_packets) == len(packets) and packets.keys() == expected.keys(),
+            "Frozen review packet coverage changed")
+    return {"captures": by_capture, "packets": packets}
+
+
+def oracle_has_quote(value, capture_id, quote):
+    if isinstance(value, dict):
+        if value.get("capture_id") == capture_id and value.get("quote") == quote:
+            return True
+        return any(oracle_has_quote(item, capture_id, quote) for item in value.values())
+    if isinstance(value, list):
+        return any(oracle_has_quote(item, capture_id, quote) for item in value)
+    return False
+
+
+def verify_reviewed_source_quote(corpus, expected, evidence_index, case_id, evidence):
+    exact_object(evidence, ("capture_id", "capture_file", "capture_sha256", "capture_source_url",
+                            "quote", "quote_basis"), "Invalid reviewed source-evidence properties")
+    require(case_id in expected and safe_parts(case_id) == (case_id,),
+            "Reviewed source evidence names an unknown case")
+    name = evidence["capture_file"]
+    require(isinstance(name, str) and safe_parts(name) == (name,),
+            "Reviewed source capture must remain inside its original frozen case")
+    require(isinstance(evidence["capture_id"], str) and evidence["capture_id"]
+            and valid_sha256(evidence["capture_sha256"])
+            and evidence["quote_basis"] in ("literal_capture", "frozen_oracle")
+            and isinstance(evidence["quote"], str)
+            and 0 < len(evidence["quote"].encode("utf-8")) <= 8192,
+            "Invalid reviewed source quote or original capture binding")
+    original = evidence_index["captures"].get((case_id, name))
+    require(original is not None and original["sha256"] == evidence["capture_sha256"],
+            "Reviewed quote points to a capture outside the original frozen hash index")
+    case_directory = corpus / "cases" / case_id
+    require(corpus.absolute() == corpus.resolve() and case_directory.absolute() == case_directory.resolve(),
+            "Reviewed source evidence cannot traverse a linked corpus directory")
+    packet_path = case_directory / "source-packet.json"
+    packet_proof = evidence_index["packets"].get(case_id)
+    require(packet_proof is not None and packet_path.is_file() and not packet_path.is_symlink()
+            and packet_path.stat().st_size == packet_proof["bytes"]
+            and file_hash(packet_path) == packet_proof["sha256"],
+            "Reviewed quote's original source packet changed")
+    packet = load_json(packet_path)
+    require(packet.get("id") == case_id
+            and packet.get("source_url") == expected[case_id]["source_url"]
+            and packet.get("roaster_id") == expected[case_id]["roaster_id"],
+            "Reviewed quote's source identity differs")
+    requests = [row for row in packet["requests"]
+                if row.get("label") == evidence["capture_id"] and row.get("file") == name]
+    require(len(requests) == 1
+            and all(requests[0].get(key) == original[key] for key in ("sha256", "bytes", "status"))
+            and requests[0]["status"] == 200
+            and isinstance(evidence["capture_source_url"], str)
+            and evidence["capture_source_url"] in (requests[0].get("url"), requests[0].get("final_url")),
+            "Reviewed quote's URL or capture identity differs from the original packet")
+    location = corpus / "cases" / case_id / name
+    require(location.is_file() and not location.is_symlink()
+            and location.resolve().parent == (corpus / "cases" / case_id).resolve()
+            and location.stat().st_size == original["bytes"] and file_hash(location) == original["sha256"],
+            "Reviewed quote's original source bytes changed")
+    if evidence["quote_basis"] == "literal_capture":
+        require(evidence["quote"].encode("utf-8") in location.read_bytes(),
+                "Reviewed literal quote is absent from the original capture bytes")
+    else:
+        require(oracle_has_quote(expected[case_id], evidence["capture_id"], evidence["quote"]),
+                "Reviewed oracle quote is absent from the unchanged frozen source oracle")
+
+
+def export_inventory(exports, expected_ids):
+    require(exports.get("cases") == 603 and exports.get("exports") == 603
+            and exports.get("download_clicks") == 603
+            and exports.get("client_module_sha256") == CLIENT_EXPORT_SHA256,
+            "Actual client snapshot/Blob verification is incomplete or uses a different exporter")
+    rows = exports.get("records")
+    require(isinstance(rows, list) and all(isinstance(row, dict) for row in rows),
+            "Missing actual client export records")
+    indexed = {row["case_id"]: row for row in rows}
+    require(len(rows) == len(indexed) == 603 and indexed.keys() == expected_ids,
+            "Actual client exports have missing, duplicate or unknown cases")
+    changes = []
+    for case_id, row in indexed.items():
+        require(row.get("file") == "exports/" + case_id + ".json"
+                and type(row.get("bytes")) is int and row["bytes"] > 0
+                and row.get("synthetic_anchor_clicks") == 1
+                and valid_sha256(row.get("sha256")) and valid_sha256(row.get("baseline_sha256"))
+                and type(row.get("equal")) is bool,
+                "Invalid actual client snapshot/Blob export receipt")
+        require(row["equal"] == (row["sha256"] == row["baseline_sha256"]),
+                "Actual client equality and complete export byte hashes disagree")
+        if not row["equal"]:
+            changes.append({"case_id": case_id, "kind": "export_changed"})
+    require(exports.get("equal") == 603 - len(changes)
+            and typed_equal(exports.get("errors"), changes),
+            "Actual client export has failures or an unaccounted change")
+    return indexed
+
+
+def review_material(old_rows, current_rows, complete_changes, exports,
+                    baseline_counts, candidate_counts, preserved_scripts, candidate_fingerprint):
+    export_rows = export_inventory(exports, current_rows.keys())
+    changes = []
+    for change in complete_changes:
+        case_id = change["case_id"]
+        row = export_rows[case_id]
+        changes.append({**change, "roaster_id": current_rows[case_id]["roaster_id"],
+                        "source_url": current_rows[case_id]["source_url"],
+                        "before_case_sha256": stable_case_sha256(old_rows[case_id]),
+                        "after_case_sha256": stable_case_sha256(current_rows[case_id]),
+                        "before_export_sha256": row["baseline_sha256"], "after_export_sha256": row["sha256"]})
+    return {
+        "schema_version": 1, "type": "unapproved_frozen_change_review_material", "candidate": CANDIDATE,
+        "status": "UNREVIEWED" if changes else "UNCHANGED",
+        "oracle_freeze_sha256": FREEZE_SHA256,
+        "packet_archive_attestation_sha256": ATTESTATION_SHA256,
+        "source_archive_sha256": ARCHIVES["source_archive"]["sha256"],
+        "recovery_archive_sha256": ARCHIVES["recovery_archive"]["sha256"],
+        "baseline_runtime_fingerprint": C8_FINGERPRINT,
+        "baseline_artifacts": C8_ARTIFACTS,
+        "candidate_runtime_fingerprint": candidate_fingerprint,
+        "preserved_script_hashes": preserved_scripts,
+        "stable_case_projection": {"format": STABLE_CASE_FORMAT, "ignored_case_properties": ["elapsed_ms"]},
+        "baseline_stable_cases_sha256": stable_case_inventory_sha256(old_rows),
+        "candidate_stable_cases_sha256": stable_case_inventory_sha256(current_rows),
+        "baseline_counts": baseline_counts, "candidate_counts": candidate_counts,
+        "changes": changes,
+        "actual_export_changed_cases": [case_id for case_id, row in export_rows.items() if not row["equal"]],
+        "source_quotes_reviewed": False, "approval_manifest_generated": False,
+    }
+
+
+def verify_reviewed_changes(manifest, material, corpus, expected, evidence_index, run_id):
+    exact_object(manifest, (
+        "schema_version", "type", "repository", "candidate", "review", "first_observed_run",
+        "oracle_freeze_sha256", "packet_archive_attestation_sha256", "source_archive_sha256",
+        "recovery_archive_sha256", "baseline_runtime_fingerprint", "baseline_artifacts",
+        "candidate_runtime_fingerprint", "preserved_script_hashes", "stable_case_projection",
+        "baseline_stable_cases_sha256", "candidate_stable_cases_sha256", "expected_counts", "changes"),
+        "Unrecognized or missing reviewed-change manifest properties")
+    require(type(manifest["schema_version"]) is int and manifest["schema_version"] == 1
+            and manifest["type"] == REVIEWED_CHANGE_TYPE and manifest["repository"] == REPOSITORY,
+            "Reviewed-change manifest type or repository differs")
+    for key in ("candidate", "oracle_freeze_sha256", "packet_archive_attestation_sha256", "source_archive_sha256",
+                "recovery_archive_sha256", "baseline_runtime_fingerprint", "baseline_artifacts",
+                "candidate_runtime_fingerprint", "preserved_script_hashes", "stable_case_projection",
+                "baseline_stable_cases_sha256", "candidate_stable_cases_sha256"):
+        require(typed_equal(manifest[key], material[key]), "Reviewed-change binding differs: " + key)
+    exact_object(manifest["expected_counts"], ("canonical", "supplementary_retention"),
+                 "Reviewed score dictionaries are incomplete")
+    require(typed_equal(manifest["expected_counts"], material["candidate_counts"]),
+            "Actual recounted scores differ from the independently reviewed exact score dictionaries")
+    review = manifest["review"]
+    exact_object(review, ("reviewer", "reviewed_at", "decision", "independent_source_review"),
+                 "Incomplete independent source-review decision")
+    require(isinstance(review["reviewer"], str) and 0 < len(review["reviewer"]) <= 200
+            and "\n" not in review["reviewer"] and "\r" not in review["reviewer"]
+            and review["decision"] == "approve_exact_source_supported_changes"
+            and review["independent_source_review"] is True,
+            "Reviewed changes require an explicit independent source-review decision")
+    try:
+        reviewed_at = datetime.fromisoformat(review["reviewed_at"])
+    except (ValueError, TypeError):
+        raise ValueError("Invalid independent review timestamp") from None
+    require(reviewed_at.tzinfo is not None and reviewed_at <= datetime.now(timezone.utc),
+            "Independent review timestamp must be an actual past UTC-offset timestamp")
+    observed = manifest["first_observed_run"]
+    exact_object(observed, ("run_id", "run_attempt", "source_commit", "source_tree", "workflow_path",
+                            "completed_at", "conclusion", "benchmark_status", "artifact", "artifacts"),
+                 "Missing first failed full-run provenance")
+    require(type(observed["run_id"]) is int and observed["run_id"] > 0
+            and str(observed["run_id"]) != str(run_id)
+            and type(observed["run_attempt"]) is int and observed["run_attempt"] > 0
+            and observed["conclusion"] == "FAILURE" and observed["benchmark_status"] == "FAIL"
+            and observed["workflow_path"] == ".github/workflows/coffee-frozen-corpus.yml",
+            "Review must refer to a distinct already failed full frozen workflow run")
+    for key in ("source_commit", "source_tree"):
+        require(isinstance(observed[key], str) and re.fullmatch(r"[0-9a-f]{40}", observed[key])
+                and observed[key] != "0" * 40, "Invalid source identity for the first failed full run")
+    try:
+        completed_at = datetime.fromisoformat(observed["completed_at"])
+    except (ValueError, TypeError):
+        raise ValueError("Invalid first failed-run completion timestamp") from None
+    require(completed_at.tzinfo is not None and completed_at <= reviewed_at,
+            "Source review must follow completion of the first failed full frozen run")
+    exact_object(observed["artifact"], ("id", "bytes", "sha256"), "Missing original failed-run artifact identity")
+    require(type(observed["artifact"]["id"]) is int and observed["artifact"]["id"] > 0
+            and type(observed["artifact"]["bytes"]) is int and observed["artifact"]["bytes"] > 0
+            and valid_sha256(observed["artifact"]["sha256"]), "Invalid original failed-run artifact binding")
+    filenames = {"replay": CANDIDATE_PREFIX + "-replay.json", "comparison": CANDIDATE_PREFIX + "-comparison.json",
+                 "retention": CANDIDATE_PREFIX + "-retention.json", "exports": "actual-exports.json",
+                 "review_material": "review-material.json", "summary": "summary.json",
+                 "manifest": "artifact-manifest.json"}
+    exact_object(observed["artifacts"], filenames, "Missing raw first-run evidence hashes")
+    for key, name in filenames.items():
+        row = observed["artifacts"][key]
+        exact_object(row, ("file", "bytes", "sha256"), "Invalid first-run raw artifact properties")
+        require(row["file"] == name and type(row["bytes"]) is int and row["bytes"] > 0
+                and valid_sha256(row["sha256"]), "Invalid first-run raw artifact hash")
+    stable_material_bytes = (json.dumps(material, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    require(observed["artifacts"]["review_material"]["bytes"] == len(stable_material_bytes)
+            and observed["artifacts"]["review_material"]["sha256"]
+            == hashlib.sha256(stable_material_bytes).hexdigest(),
+            "Actual stable review material differs from the pinned first failed-run artifact")
+    approvals = manifest["changes"]
+    actual = {row["case_id"]: row for row in material["changes"]}
+    require(isinstance(approvals, list) and approvals
+            and all(isinstance(row, dict) and isinstance(row.get("case_id"), str) for row in approvals),
+            "Reviewed-change manifest must enumerate a nonempty exact changed-case inventory")
+    approved = {row["case_id"]: row for row in approvals}
+    require(len(approved) == len(approvals) and approved.keys() == actual.keys()
+            and set(material["actual_export_changed_cases"]) <= approved.keys(),
+            "Reviewed-change manifest has duplicate, missing, extra or unreviewed output/export cases")
+    for case_id, change in approved.items():
+        exact_object(change, tuple(actual[case_id]) + ("decision", "rationale", "source_evidence"),
+                     "Unrecognized or missing per-case review properties")
+        for key, value in actual[case_id].items():
+            require(typed_equal(change[key], value), "Reviewed whole-case/export hash or change descriptor differs")
+        require(change["decision"] == "source_supported_improvement"
+                and isinstance(change["rationale"], str) and 20 <= len(change["rationale"]) <= 4000,
+                "Each changed case needs an explicit source-supported review rationale")
+        evidence = change["source_evidence"]
+        require(isinstance(evidence, list) and 1 <= len(evidence) <= 32,
+                "Each changed case needs bounded original source-quote evidence")
+        require(len({stable_json_sha256(row) for row in evidence}) == len(evidence),
+                "Duplicate reviewed source evidence")
+        for row in evidence:
+            verify_reviewed_source_quote(corpus, expected, evidence_index, case_id, row)
+    return {"status": "ACCEPTED", "reviewed_cases": len(approved),
+            "reviewed_export_changes": len(material["actual_export_changed_cases"]),
+            "first_observed_run_id": observed["run_id"],
+            "first_run_authentication": "Exact offline pins supplied by the independent review; no live artifact re-fetch.",
+            "reviewer": review["reviewer"], "reviewed_at": review["reviewed_at"],
+            "unlisted_case_changes_permitted": False, "zero_loss_requirements_waived": False}
+
+
+def benchmark_change_blockers(material, review_gate, exact_losses, full_losses, exports, helper):
+    """Approval can replace only the unchanged-output/count expectation, never safety checks."""
+    blockers = []
+    reviewed = review_gate.get("status") == "ACCEPTED"
+    if material["changes"] and not reviewed:
+        blockers.append("Complete frozen case output/call changes require independent source review")
+    if exact_losses:
+        blockers.append("A prior canonical exact match was lost")
+    if full_losses:
+        blockers.append("A prior fully retained supplementary assertion was lost")
+    if not reviewed and not typed_equal(material["candidate_counts"]["canonical"],
+                                        material["baseline_counts"]["canonical"]):
+        blockers.append("Canonical counts differ from the unchanged-output expectation")
+    if not reviewed and not typed_equal(material["candidate_counts"]["supplementary_retention"],
+                                        material["baseline_counts"]["supplementary_retention"]):
+        blockers.append("Retention counts differ from the unchanged-output expectation")
+    if exports.get("cases") != 603 or exports.get("exports") != 603 or exports.get("download_clicks") != 603:
+        blockers.append("Actual client snapshot/Blob download did not pass every frozen case")
+    if any(row.get("kind") != "export_changed" for row in exports.get("errors", [])):
+        blockers.append("An actual client export failed; review cannot waive export fidelity")
+    if not reviewed and (exports["exports"] != 603 or exports["equal"] != 603 or exports["errors"]):
+        blockers.append("Actual client snapshot/download equality did not pass all603 cases")
+    if review_gate.get("status") == "REJECTED":
+        blockers.append("Pinned reviewed-change manifest did not validate")
+    if helper["passed"] != 603 or helper["failures"] or helper["attempted_external_operations"]:
+        blockers.append("Offline helper validation did not pass all603 actual exports without external operations")
+    return blockers
+
+
 def verify_offline_exports(repo, output, exports):
     spec = importlib.util.spec_from_file_location(
         "frozen_ci_local_review", repo / "scripts/audit/coffee-source-review-local.py")
@@ -955,6 +1338,8 @@ def run_benchmark(args):
     require(args.repo.resolve() == repo, "Benchmark must run the checked-out repository scripts")
     require(re.fullmatch(r"[0-9a-f]{64}", args.expected_fingerprint or "")
             and args.expected_fingerprint != "0" * 64, "A reviewed runtime fingerprint is required")
+    reviewed_manifest, reviewed_manifest_info = read_reviewed_changes(
+        repo, args.reviewed_changes, args.reviewed_changes_sha256)
     work, output = args.work.resolve(), args.output.resolve()
     require(work != repo and repo not in work.parents and output == work / "output",
             "Benchmark output must be the dedicated output directory outside the application checkout")
@@ -1019,8 +1404,8 @@ def run_benchmark(args):
     guard.write_text(NODE_GUARD, encoding="utf-8")
     export_script.write_text(EXPORT_CHECK, encoding="utf-8")
     replay_path, comparison_path, retention_path = [
-        output / name for name in ("candidate11-replay.json", "candidate11-comparison.json",
-                                  "candidate11-retention.json")]
+        output / name for name in (CANDIDATE_PREFIX + "-replay.json", CANDIDATE_PREFIX + "-comparison.json",
+                                  CANDIDATE_PREFIX + "-retention.json")]
     stages = []
     stages.append(run_command("full603-replay", [
         "node", "--import", str(guard), str(repo / "scripts/audit/coffee-corpus-replay.mjs"),
@@ -1033,7 +1418,7 @@ def run_benchmark(args):
             and replay.get("oracle_freeze_sha256") == FREEZE_SHA256,
             "Replay is not the complete original frozen benchmark")
     require(len(replay.get("source_files", [])) == 32, "Unexpected extractor runtime file inventory")
-    current_rows = indexed_records(replay, expected.keys(), "candidate11 replay")
+    current_rows = indexed_records(replay, expected.keys(), CANDIDATE_PREFIX + " replay")
     old_rows = indexed_records(baseline["replay"], expected.keys(), "candidate8 replay")
     for case_id, row in current_rows.items():
         require(row.get("source_url") == expected[case_id]["source_url"]
@@ -1058,8 +1443,8 @@ def run_benchmark(args):
         str(corpus), str(replay_path), str(retention_path),
     ], output, repo))
     comparison, retention = load_json(comparison_path), load_json(retention_path)
-    compared = indexed_records(comparison, expected.keys(), "candidate11 comparison")
-    retained = indexed_records(retention, expected.keys(), "candidate11 retention")
+    compared = indexed_records(comparison, expected.keys(), CANDIDATE_PREFIX + " comparison")
+    retained = indexed_records(retention, expected.keys(), CANDIDATE_PREFIX + " retention")
     before_compared = indexed_records(baseline["comparison"], expected.keys(), "candidate8 comparison")
     before_retained = indexed_records(baseline["retention"], expected.keys(), "candidate8 retention")
     for name, result in (("comparison", comparison), ("retention", retention)):
@@ -1067,6 +1452,8 @@ def run_benchmark(args):
                 and result.get("oracle_freeze_sha256") == FREEZE_SHA256
                 and result.get("replay_sha256") == file_hash(replay_path),
                 "New result binding differs: " + name)
+    candidate_counts = derived_score_counts(comparison, retention)
+    baseline_counts = derived_score_counts(baseline["comparison"], baseline["retention"])
     exact_losses = canonical_losses(before_compared, compared)
     full_losses = retention_losses(before_retained, retained)
     write_json(output / "canonical-and-retention-deltas.json", {
@@ -1082,22 +1469,33 @@ def run_benchmark(args):
     ], output, repo))
     exports = load_json(output / "actual-exports.json")
     helper = verify_offline_exports(repo, output, exports)
-    blockers = []
-    if complete_changes:
-        blockers.append("Complete frozen case output/call changes require independent source review")
-    if exact_losses:
-        blockers.append("A prior canonical exact match was lost")
-    if full_losses:
-        blockers.append("A prior fully retained supplementary assertion was lost")
-    if not typed_equal(comparison["counts"], baseline["comparison"]["counts"]):
-        blockers.append("Canonical counts differ from the unchanged-output expectation")
-    if not typed_equal(retention["counts"], baseline["retention"]["counts"]):
-        blockers.append("Retention counts differ from the unchanged-output expectation")
-    if exports["exports"] != 603 or exports["equal"] != 603 or exports["errors"]:
-        blockers.append("Actual client snapshot/download equality did not pass all603 cases")
-    if helper["passed"] != 603 or helper["failures"] or helper["attempted_external_operations"]:
-        blockers.append("Offline helper validation did not pass all603 actual exports without external operations")
-    require(comparison["counts"]["canonical_assertions"] == 4002
+    material = review_material(old_rows, current_rows, complete_changes, exports,
+                               baseline_counts, candidate_counts, preserved_scripts,
+                               replay["source_tree_sha256"])
+    material_path = output / "review-material.json"
+    write_json(material_path, material)
+    review_gate = {"status": "NOT_PROVIDED", "mode": "strict_c8_equality",
+                   "manifest": None, "unlisted_case_changes_permitted": False,
+                   "zero_loss_requirements_waived": False}
+    if reviewed_manifest is not None:
+        try:
+            evidence_index = frozen_review_evidence_index(corpus, expected)
+            review_gate = {**verify_reviewed_changes(
+                reviewed_manifest, material, corpus, expected, evidence_index,
+                os.environ.get("GITHUB_RUN_ID", "")),
+                "mode": "pinned_independent_review", "manifest": reviewed_manifest_info}
+            shutil.copyfile(repo / reviewed_manifest_info["file"], output / "reviewed-changes-manifest.json")
+            (output / "reviewed-changes-manifest.json").chmod(0o600)
+        except (ValueError, KeyError, TypeError) as error:
+            review_gate = {"status": "REJECTED", "mode": "pinned_independent_review",
+                           "manifest": reviewed_manifest_info,
+                           "reason": str(error) if isinstance(error, ValueError) else type(error).__name__,
+                           "unlisted_case_changes_permitted": False, "zero_loss_requirements_waived": False}
+    write_json(output / "reviewed-changes-validation.json", review_gate)
+    blockers = benchmark_change_blockers(material, review_gate, exact_losses, full_losses, exports, helper)
+    require(comparison["counts"]["cases"] == 603 and comparison["counts"]["ok_response"] == 603
+            and retention["counts"]["cases"] == 603
+            and comparison["counts"]["canonical_assertions"] == 4002
             and comparison["counts"]["additional_facts"] == 6474
             and retention["counts"]["additional_assertions"] == 6474,
             "Frozen assertion totals changed")
@@ -1118,6 +1516,9 @@ def run_benchmark(args):
             "Original lock or attestation changed")
     for name, expected_hash in preserved_scripts.items():
         require(file_hash(repo / name) == expected_hash, "Harness/scorer/exporter changed during benchmark")
+    if reviewed_manifest_info is not None:
+        require(file_hash(repo / reviewed_manifest_info["file"]) == reviewed_manifest_info["sha256"],
+                "Pinned reviewed-change manifest changed during the benchmark")
     git_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip()
     git_tree = subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], cwd=repo, text=True).strip()
     run_id = os.environ.get("GITHUB_RUN_ID", "")
@@ -1125,8 +1526,10 @@ def run_benchmark(args):
     receipt = {
         "schema_version": 4, "type": "actual_github_frozen_corpus_benchmark",
         "created_at": datetime.now(timezone.utc).isoformat(),
-        "status": "FROZEN_BENCHMARK_REVIEW_REQUIRED" if blockers else "FROZEN_BENCHMARK_PASS",
-        "final_candidate": 11, "extractor_source_fingerprint": replay["source_tree_sha256"],
+        "status": ("FROZEN_BENCHMARK_REVIEW_REQUIRED" if blockers else
+                   "FROZEN_BENCHMARK_PASS_WITH_REVIEWED_CHANGES" if review_gate["status"] == "ACCEPTED"
+                   else "FROZEN_BENCHMARK_PASS"),
+        "final_candidate": CANDIDATE, "extractor_source_fingerprint": replay["source_tree_sha256"],
         "extractor_source_files": runtime_files,
         "oracle_freeze_sha256": FREEZE_SHA256, "canonical": comparison["counts"],
         "supplementary_retention": retention["counts"],
@@ -1136,7 +1539,16 @@ def run_benchmark(args):
         "expected_values_changed": False, "scoring_rules_changed": False,
         "complete_case_equivalence": {"cases": 603, "changed_cases": len(complete_changes),
                                       "ignored": ["elapsed_ms"]},
+        "reviewed_changes": review_gate,
+        "reviewed_change_cases": material["changes"],
+        "all_complete_case_outputs_calls_equal": not complete_changes,
         "actual_client_exports_equal": exports["equal"],
+        "export_verification": {
+            "cases": exports["cases"], "current_snapshot_download_passed": exports["exports"],
+            "snapshot_blob_bytes_verified": True, "client_module_sha256": exports["client_module_sha256"],
+            "unchanged_from_c8": exports["equal"], "changed_from_c8": exports["exports"] - exports["equal"],
+            "offline_exports_passed": helper["passed"],
+        },
         "offline_helper_exports_passed": helper["passed"],
         "canonical_exact_losses": len(exact_losses),
         "supplementary_full_retention_losses": len(full_losses),
@@ -1150,9 +1562,9 @@ def run_benchmark(args):
             "blockers": blockers + ["Premerge benchmark; complete integration and applicable final checks remain required"],
         },
     }
-    receipt_path = output / "candidate11-benchmark-receipt.json"
+    receipt_path = output / (CANDIDATE_PREFIX + "-benchmark-receipt.json")
     write_json(receipt_path, receipt)
-    report_path = output / "candidate11-frozen-audit.html"
+    report_path = output / (CANDIDATE_PREFIX + "-frozen-audit.html")
     stages.append(run_command("source-bound-report", [
         sys.executable, str(Path(__file__).resolve()), "offline-python",
         str(repo / "scripts/audit/coffee-corpus-report.py"),
@@ -1165,23 +1577,34 @@ def run_benchmark(args):
         "--audit-receipt", str(receipt_path),
     ], output, repo))
     summary = {
-        "status": "FAIL" if blockers else "PASS",
-        "candidate": 11, "source_commit": git_sha, "source_tree": git_tree,
+        "status": ("FAIL" if blockers else "PASS_WITH_REVIEWED_CHANGES"
+                   if review_gate["status"] == "ACCEPTED" else "PASS"),
+        "candidate": CANDIDATE, "source_commit": git_sha, "source_tree": git_tree,
         "runtime_fingerprint": replay["source_tree_sha256"],
         "corpus": corpus_receipt, "canonical": comparison["counts"],
         "supplementary_retention": retention["counts"],
         "complete_output_call_changes": complete_changes,
+        "reviewed_changes": review_gate,
+        "review_material_changes": material["changes"],
+        "score_count_deltas": {
+            metric: {key: candidate_counts[metric].get(key, 0) - baseline_counts[metric].get(key, 0)
+                     for key in sorted(set(candidate_counts[metric]) | set(baseline_counts[metric]))}
+            for metric in ("canonical", "supplementary_retention")
+        },
         "canonical_exact_losses": len(exact_losses),
         "supplementary_full_retention_losses": len(full_losses),
         "actual_client_exports": {"cases": exports["cases"], "exports": exports["exports"],
-                                  "equal": exports["equal"], "errors": exports["errors"]},
+                                  "equal": exports["equal"], "errors": exports["errors"],
+                                  "current_snapshot_download_passed": exports["exports"],
+                                  "changed_from_c8": exports["exports"] - exports["equal"]},
         "offline_helper": {"passed": helper["passed"], "failures": helper["failures"],
                            "attempted_external_operations": helper["attempted_external_operations"]},
         "measurements": exports["measurements"],
         "artifacts": {name: {"file": path.name, "bytes": path.stat().st_size, "sha256": file_hash(path)}
                       for name, path in (("replay", replay_path), ("comparison", comparison_path),
                                          ("retention", retention_path), ("report", report_path),
-                                         ("receipt", receipt_path))},
+                                         ("receipt", receipt_path), ("review_material", material_path),
+                                         ("actual_exports", output / "actual-exports.json"))},
         "stages": stages, "blockers": blockers,
         "expected_values_changed": False, "scoring_rules_changed": False,
         "runtime_and_frozen_inputs_unchanged": True,
@@ -1193,7 +1616,8 @@ def run_benchmark(args):
         "status", "candidate", "source_commit", "source_tree", "runtime_fingerprint",
         "canonical", "supplementary_retention", "canonical_exact_losses",
         "supplementary_full_retention_losses", "actual_client_exports", "offline_helper",
-        "corpus", "artifacts", "measurements", "complete_output_call_changes", "blockers")}), flush=True)
+        "corpus", "artifacts", "measurements", "complete_output_call_changes", "reviewed_changes",
+        "review_material_changes", "score_count_deltas", "blockers")}), flush=True)
     require(not blockers, "Frozen benchmark requires independent review; see retained summary and raw artifacts")
     return summary
 
@@ -1353,6 +1777,426 @@ def self_test():
                 retention_losses(old, new)
 
 
+
+        def _review_exports(self, old, current):
+            rows, errors = [], []
+            for case_id, row in current.items():
+                first = stable_json_sha256(old[case_id]["output"])
+                second = stable_json_sha256(row["output"])
+                equal = first == second
+                rows.append({"case_id": case_id, "file": "exports/" + case_id + ".json",
+                             "bytes": 100, "sha256": second, "baseline_sha256": first,
+                             "equal": equal, "synthetic_anchor_clicks": 1, "download_name": "review.json"})
+                if not equal:
+                    errors.append({"case_id": case_id, "kind": "export_changed"})
+            return {"cases": 603, "exports": 603, "download_clicks": 603,
+                    "client_module_sha256": CLIENT_EXPORT_SHA256,
+                    "equal": 603 - len(errors), "errors": errors, "records": rows}
+
+        def _review_fixture(self, corpus):
+            old = {}
+            expected = {}
+            quote = "Regions: Minas Gerais, Brazil"
+            for number in range(603):
+                case_id = "case-" + str(number).zfill(4)
+                source_url = "https://example.test/products/" + case_id
+                old[case_id] = {"case_id": case_id, "roaster_id": "fixture-roaster",
+                                "source_url": source_url, "elapsed_ms": 1,
+                                "status": 200, "output": {"ok": True, "fields": {"name": case_id, "origin": "Brazil"},
+                                                       "source_facts": [{"label": "Published text", "value": quote}]},
+                                "calls": [{"url": source_url, "limit": 900000}],
+                                "fixture_calls": ["user", "dic_preview_complete"]}
+                expected[case_id] = {"case_id": case_id, "source_url": source_url,
+                                     "roaster_id": "fixture-roaster",
+                                     "canonical": {"origin": {"value": "Minas Gerais, Brazil",
+                                                  "evidence": [{"capture_id": "page", "quote": quote}]}}}
+            current = json.loads(json.dumps(old))
+            case_id = "case-0000"
+            current[case_id]["output"]["fields"]["origin"] = "Minas Gerais, Brazil"
+            exports = self._review_exports(old, current)
+            baseline_counts = {
+                "canonical": {"cases": 603, "ok_response": 603, "canonical_assertions": 4002,
+                              "exact_equivalent": 3024, "missing": 167, "review_required": 811,
+                              "conflict_assertions": 115, "conflict_withheld": 65, "conflict_unresolved": 50,
+                              "additional_facts": 6474, "additional_literal_present": 1526,
+                              "additional_unconfirmed": 4948, "unexpected_fields": 19},
+                "supplementary_retention": {"cases": 603, "additional_assertions": 6474,
+                                           "all_evidence_retained": 5458, "some_evidence_retained": 337,
+                                           "unconfirmed": 679, "truncated_previews": 3}}
+            counts = json.loads(json.dumps(baseline_counts))
+            counts["canonical"]["exact_equivalent"] += 1
+            counts["canonical"]["review_required"] -= 1
+            preserved = {"scripts/audit/coffee-corpus-replay.mjs": "a" * 64,
+                         "scripts/audit/coffee-corpus-compare.mjs": "b" * 64,
+                         "scripts/audit/coffee-corpus-normalize.mjs": "c" * 64,
+                         "scripts/audit/coffee-corpus-retention.py": "d" * 64,
+                         "site/cloud/coffee-url-autofill.js": CLIENT_EXPORT_SHA256}
+            material = review_material(old, current, compare_complete_cases(old, current), exports,
+                                       baseline_counts, counts, preserved, "e" * 64)
+            folder = corpus / "cases" / case_id
+            folder.mkdir(parents=True)
+            capture = folder / "page.html"
+            capture.write_text("<p>" + quote + "</p>", encoding="utf-8")
+            original = {"case_id": case_id, "file": "page.html", "sha256": file_hash(capture),
+                        "bytes": capture.stat().st_size, "status": 200}
+            packet = {"id": case_id, "source_url": expected[case_id]["source_url"],
+                      "roaster_id": expected[case_id]["roaster_id"],
+                      "requests": [{**{key: original[key] for key in ("file", "bytes", "sha256", "status")},
+                                    "label": "page", "url": expected[case_id]["source_url"],
+                                    "final_url": expected[case_id]["source_url"]}]}
+            packet_path = folder / "source-packet.json"
+            write_json(packet_path, packet)
+            index = {"captures": {(case_id, "page.html"): original},
+                     "packets": {case_id: {"bytes": packet_path.stat().st_size, "sha256": file_hash(packet_path)}}}
+            evidence = {"capture_id": "page", "capture_file": "page.html", "capture_sha256": original["sha256"],
+                        "capture_source_url": expected[case_id]["source_url"], "quote": quote,
+                        "quote_basis": "literal_capture"}
+            bindings = ("candidate", "oracle_freeze_sha256", "packet_archive_attestation_sha256", "source_archive_sha256",
+                        "recovery_archive_sha256", "baseline_runtime_fingerprint", "baseline_artifacts",
+                        "candidate_runtime_fingerprint", "preserved_script_hashes", "stable_case_projection",
+                        "baseline_stable_cases_sha256", "candidate_stable_cases_sha256")
+            manifest = {"schema_version": 1, "type": REVIEWED_CHANGE_TYPE, "repository": REPOSITORY,
+                        **{key: material[key] for key in bindings},
+                        "expected_counts": counts,
+                        "review": {"reviewer": "Independent public test fixture", "reviewed_at": "2020-01-02T00:00:00+00:00",
+                                   "decision": "approve_exact_source_supported_changes", "independent_source_review": True},
+                        "first_observed_run": {"run_id": 123, "run_attempt": 1, "source_commit": "a" * 40,
+                                               "source_tree": "b" * 40,
+                                               "workflow_path": ".github/workflows/coffee-frozen-corpus.yml",
+                                               "completed_at": "2020-01-01T00:00:00+00:00",
+                                               "conclusion": "FAILURE", "benchmark_status": "FAIL",
+                                               "artifact": {"id": 456, "bytes": 100, "sha256": "f" * 64},
+                                               "artifacts": {}},
+                        "changes": [{**change, "decision": "source_supported_improvement",
+                                     "rationale": "Original public capture directly supplies this missing locality.",
+                                     "source_evidence": [evidence]} for change in material["changes"]]}
+            names = {"replay": CANDIDATE_PREFIX + "-replay.json", "comparison": CANDIDATE_PREFIX + "-comparison.json",
+                     "retention": CANDIDATE_PREFIX + "-retention.json", "exports": "actual-exports.json",
+                     "review_material": "review-material.json", "summary": "summary.json",
+                     "manifest": "artifact-manifest.json"}
+            for key, name in names.items():
+                manifest["first_observed_run"]["artifacts"][key] = {"file": name, "bytes": 100, "sha256": "a" * 64}
+            raw = (json.dumps(material, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+            manifest["first_observed_run"]["artifacts"]["review_material"] = {
+                "file": "review-material.json", "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+            return manifest, material, expected, index, old, current, exports
+
+        def test_reviewed_changes_accept_only_exact_source_supported_case_and_export(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, _old, _current, exports = self._review_fixture(root)
+                result = verify_reviewed_changes(manifest, material, root, expected, index, "789")
+                self.assertEqual(result["status"], "ACCEPTED")
+                self.assertEqual(result["reviewed_cases"], 1)
+                self.assertEqual(result["reviewed_export_changes"], 1)
+                helper = {"passed": 603, "failures": [], "attempted_external_operations": []}
+                self.assertEqual(benchmark_change_blockers(material, result, [], [], exports, helper), [])
+                self.assertFalse(result["zero_loss_requirements_waived"])
+                self.assertFalse(material["approval_manifest_generated"])
+                self.assertEqual(material["status"], "UNREVIEWED")
+
+
+        def test_reviewed_changes_reject_previous_candidate_artifact_names(self):
+            self.assertEqual(CANDIDATE, 12)
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, *_rest = self._review_fixture(root)
+                self.assertEqual(material["candidate"], 12)
+                for key in ("replay", "comparison", "retention"):
+                    bad = json.loads(json.dumps(manifest))
+                    bad["first_observed_run"]["artifacts"][key]["file"] = "candidate11-" + key + ".json"
+                    with self.subTest(artifact=key), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+
+        def test_reviewed_changes_missing_manifest_remains_strict(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                _manifest, material, _expected, _index, old, _current, exports = self._review_fixture(root)
+                helper = {"passed": 603, "failures": [], "attempted_external_operations": []}
+                absent = {"status": "NOT_PROVIDED"}
+                failures = benchmark_change_blockers(material, absent, [], [], exports, helper)
+                self.assertTrue(any("output/call changes" in message for message in failures))
+                self.assertTrue(any("Canonical counts" in message for message in failures))
+                self.assertTrue(any("snapshot/download equality" in message for message in failures))
+                unchanged_exports = self._review_exports(old, old)
+                unchanged = review_material(old, old, [], unchanged_exports, material["baseline_counts"],
+                                            material["baseline_counts"], material["preserved_script_hashes"],
+                                            material["candidate_runtime_fingerprint"])
+                self.assertEqual(benchmark_change_blockers(unchanged, absent, [], [], unchanged_exports, helper), [])
+
+        def test_reviewed_manifest_path_pin_and_strict_json(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                folder = root / "docs/audits"
+                folder.mkdir(parents=True)
+                path = folder / "review.json"
+                path.write_text('{"public_fixture":true}', encoding="utf-8")
+                pin = file_hash(path)
+                document, info = read_reviewed_changes(root, Path("docs/audits/review.json"), pin)
+                self.assertEqual(document, {"public_fixture": True})
+                self.assertEqual(info["sha256"], pin)
+                self.assertEqual(read_reviewed_changes(root, None, None), (None, None))
+                for supplied, digest in ((None, pin), (Path("docs/audits/review.json"), None),
+                                         (Path("docs/audits/review.json"), "0" * 64),
+                                         (Path("docs/audits/review.json"), "1" * 64)):
+                    with self.subTest(path=supplied, pin=digest), self.assertRaises(ValueError):
+                        read_reviewed_changes(root, supplied, digest)
+                outside = root / "outside.json"
+                outside.write_text("{}", encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    read_reviewed_changes(root, outside, file_hash(outside))
+                linked = folder / "linked.json"
+                linked.symlink_to(outside)
+                with self.assertRaises(ValueError):
+                    read_reviewed_changes(root, linked, file_hash(outside))
+                for content in ('{"same":1,"same":2}', '{"bad":NaN}'):
+                    path.write_text(content, encoding="utf-8")
+                    with self.subTest(content=content), self.assertRaises(ValueError):
+                        read_reviewed_changes(root, path, file_hash(path))
+
+        def test_reviewed_changes_reject_stale_or_changed_source_and_scorer_bindings(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, *_rest = self._review_fixture(root)
+                keys = ("oracle_freeze_sha256", "packet_archive_attestation_sha256", "source_archive_sha256",
+                        "recovery_archive_sha256", "baseline_runtime_fingerprint", "candidate_runtime_fingerprint",
+                        "baseline_stable_cases_sha256", "candidate_stable_cases_sha256")
+                for key in keys:
+                    bad = json.loads(json.dumps(manifest))
+                    bad[key] = "f" * 64
+                    with self.subTest(binding=key), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+                for key in ("baseline_artifacts", "preserved_script_hashes"):
+                    bad = json.loads(json.dumps(manifest))
+                    bad[key][next(iter(bad[key]))] = "f" * 64
+                    with self.subTest(binding=key), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+                bad = json.loads(json.dumps(manifest))
+                bad["stable_case_projection"]["ignored_case_properties"].append("calls")
+                with self.assertRaises(ValueError):
+                    verify_reviewed_changes(bad, material, root, expected, index, "789")
+
+        def test_reviewed_changes_reject_missing_extra_duplicate_and_wildcard_approvals(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, *_rest = self._review_fixture(root)
+                for mutation in ("empty", "duplicate", "extra", "wildcard", "extra_property"):
+                    bad = json.loads(json.dumps(manifest))
+                    if mutation == "empty":
+                        bad["changes"] = []
+                    elif mutation == "duplicate":
+                        bad["changes"].append(json.loads(json.dumps(bad["changes"][0])))
+                    elif mutation == "extra":
+                        bad["changes"].append({**bad["changes"][0], "case_id": "case-0001"})
+                    elif mutation == "wildcard":
+                        bad["changes"][0]["case_id"] = "*"
+                    else:
+                        bad["allow_other_changes"] = True
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+
+        def test_reviewed_changes_reject_different_whole_case_and_export_hashes(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, *_rest = self._review_fixture(root)
+                for key in ("before_case_sha256", "after_case_sha256", "before_export_sha256", "after_export_sha256"):
+                    bad = json.loads(json.dumps(manifest))
+                    bad["changes"][0][key] = "f" * 64
+                    with self.subTest(hash=key), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+                for key in ("changed_case_keys", "changed_output_keys"):
+                    bad = json.loads(json.dumps(manifest))
+                    bad["changes"][0][key].append("unreviewed")
+                    with self.subTest(descriptor=key), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+
+        def test_reviewed_changes_reject_unexpected_facts_calls_and_extra_case_even_with_better_counts(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, old, current, _exports = self._review_fixture(root)
+                for mutation in ("facts", "calls", "fixture_calls", "extra_case"):
+                    after = json.loads(json.dumps(current))
+                    if mutation == "facts":
+                        after["case-0000"]["output"]["source_facts"].append({"value": "Unreviewed text"})
+                    elif mutation == "calls":
+                        after["case-0000"]["calls"][0]["limit"] = 2000000
+                    elif mutation == "fixture_calls":
+                        after["case-0000"]["fixture_calls"].append("unreviewed_endpoint")
+                    else:
+                        after["case-0001"]["fixture_calls"].reverse()
+                    actual = review_material(old, after, compare_complete_cases(old, after),
+                                             self._review_exports(old, after), material["baseline_counts"],
+                                             material["candidate_counts"], material["preserved_script_hashes"],
+                                             material["candidate_runtime_fingerprint"])
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        verify_reviewed_changes(manifest, actual, root, expected, index, "789")
+
+        def test_reviewed_changes_require_exact_all_score_dictionaries(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, *_rest = self._review_fixture(root)
+                for metric in ("canonical", "supplementary_retention"):
+                    for mutation in ("value", "missing", "extra", "boolean"):
+                        bad = json.loads(json.dumps(manifest))
+                        if mutation == "value":
+                            bad["expected_counts"][metric]["cases"] -= 1
+                        elif mutation == "missing":
+                            del bad["expected_counts"][metric]["cases"]
+                        elif mutation == "extra":
+                            bad["expected_counts"][metric]["unknown"] = 0
+                        else:
+                            bad["expected_counts"][metric]["cases"] = True
+                        with self.subTest(metric=metric, mutation=mutation), self.assertRaises(ValueError):
+                            verify_reviewed_changes(bad, material, root, expected, index, "789")
+
+        def test_reviewed_changes_reject_missing_or_nonfailed_prior_run_provenance(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, *_rest = self._review_fixture(root)
+                mutations = (
+                    ("run_id", 789), ("run_id", True), ("run_attempt", 0), ("conclusion", "SUCCESS"),
+                    ("benchmark_status", "PASS"), ("source_commit", "0" * 40),
+                    ("workflow_path", ".github/workflows/other.yml"),
+                    ("completed_at", "2020-01-03T00:00:00+00:00"))
+                for key, value in mutations:
+                    bad = json.loads(json.dumps(manifest))
+                    bad["first_observed_run"][key] = value
+                    with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+                for mutation in ("missing_artifact", "changed_material_hash", "changed_material_size", "not_independent"):
+                    bad = json.loads(json.dumps(manifest))
+                    if mutation == "missing_artifact":
+                        del bad["first_observed_run"]["artifacts"]["exports"]
+                    elif mutation == "changed_material_hash":
+                        bad["first_observed_run"]["artifacts"]["review_material"]["sha256"] = "f" * 64
+                    elif mutation == "changed_material_size":
+                        bad["first_observed_run"]["artifacts"]["review_material"]["bytes"] += 1
+                    else:
+                        bad["review"]["independent_source_review"] = False
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+
+        def test_reviewed_changes_require_original_literal_or_frozen_oracle_quotes(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, *_rest = self._review_fixture(root)
+                evidence = manifest["changes"][0]["source_evidence"][0]
+                oracle_evidence = {**evidence, "quote_basis": "frozen_oracle"}
+                verify_reviewed_source_quote(root, expected, index, "case-0000", oracle_evidence)
+                for key, value in (("capture_file", "../page.html"), ("capture_id", "wrong"),
+                                   ("capture_sha256", "f" * 64), ("quote", "Absent source quotation"),
+                                   ("capture_source_url", "https://other.test/product"),
+                                   ("quote_basis", "new_current_web_page")):
+                    with self.subTest(key=key), self.assertRaises(ValueError):
+                        verify_reviewed_source_quote(root, expected, index, "case-0000", {**evidence, key: value})
+                with self.assertRaises(ValueError):
+                    verify_reviewed_source_quote(root, expected, index, "case-0000",
+                                                 {**oracle_evidence, "quote": "Not in frozen oracle"})
+                for evidence_list in ([], [evidence, evidence]):
+                    bad = json.loads(json.dumps(manifest))
+                    bad["changes"][0]["source_evidence"] = evidence_list
+                    with self.subTest(quote_count=len(evidence_list)), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789")
+
+        def test_reviewed_source_quote_rejects_mutated_capture_packet_and_linked_directory(self):
+            for mutation in ("capture", "packet", "linked_directory"):
+                with tempfile.TemporaryDirectory() as temporary:
+                    root = Path(temporary).resolve()
+                    manifest, _material, expected, index, *_rest = self._review_fixture(root)
+                    folder = root / "cases/case-0000"
+                    if mutation == "capture":
+                        (folder / "page.html").write_text("Mutated original source", encoding="utf-8")
+                    elif mutation == "packet":
+                        (folder / "source-packet.json").write_text("{}", encoding="utf-8")
+                    else:
+                        moved = root / "linked-source"
+                        folder.rename(moved)
+                        folder.symlink_to(moved, target_is_directory=True)
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        verify_reviewed_source_quote(root, expected, index, "case-0000",
+                                                     manifest["changes"][0]["source_evidence"][0])
+
+        def test_reviewed_changes_cannot_waive_losses_exports_or_offline_failures(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, _old, _current, exports = self._review_fixture(root)
+                accepted = verify_reviewed_changes(manifest, material, root, expected, index, "789")
+                helper = {"passed": 603, "failures": [], "attempted_external_operations": []}
+                for exact, retained in (([{"case_id": "case-0000"}], []), ([], [{"case_id": "case-0000"}])):
+                    self.assertTrue(benchmark_change_blockers(material, accepted, exact, retained, exports, helper))
+                for patch in ({"exports": 602}, {"download_clicks": 602},
+                              {"errors": [{"case_id": "case-0000", "kind": "export_failed"}]}):
+                    self.assertTrue(benchmark_change_blockers(material, accepted, [], [], {**exports, **patch}, helper))
+                for patch in ({"passed": 602}, {"failures": [{"case_id": "case-0000"}]},
+                              {"attempted_external_operations": ["socket.connect"]}):
+                    self.assertTrue(benchmark_change_blockers(material, accepted, [], [], exports, {**helper, **patch}))
+
+        def test_actual_export_inventory_rejects_missing_duplicate_unknown_or_mismatched_downloads(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                _manifest, _material, _expected, _index, _old, current, exports = self._review_fixture(root)
+                for mutation in ("missing", "duplicate", "unknown", "clicks", "hash", "errors", "exporter"):
+                    bad = json.loads(json.dumps(exports))
+                    if mutation == "missing":
+                        bad["records"].pop()
+                    elif mutation == "duplicate":
+                        bad["records"][-1] = bad["records"][0]
+                    elif mutation == "unknown":
+                        bad["records"][-1]["case_id"] = "unknown-case"
+                    elif mutation == "clicks":
+                        bad["records"][0]["synthetic_anchor_clicks"] = 2
+                    elif mutation == "hash":
+                        bad["records"][0]["sha256"] = bad["records"][0]["baseline_sha256"]
+                    elif mutation == "errors":
+                        bad["errors"].append({"case_id": "case-0001", "kind": "export_failed"})
+                    else:
+                        bad["client_module_sha256"] = "f" * 64
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        export_inventory(bad, current.keys())
+
+        def test_stable_case_hash_ignores_only_elapsed_and_inventory_order(self):
+            first = {"case_id": "one", "elapsed_ms": 1, "output": {"ok": True, "source_facts": ["original"]},
+                     "calls": [1, 2], "fixture_calls": ["a", "b"]}
+            changed = {**first, "elapsed_ms": 999}
+            self.assertEqual(stable_case_sha256(first), stable_case_sha256(changed))
+            for key in ("output", "calls", "fixture_calls", "unrecognized"):
+                self.assertNotEqual(stable_case_sha256(first), stable_case_sha256({**first, key: ["new"]}))
+            self.assertEqual(stable_case_inventory_sha256({"one": first, "two": changed}),
+                             stable_case_inventory_sha256({"two": changed, "one": first}))
+            self.assertNotEqual(stable_case_sha256({"value": True}), stable_case_sha256({"value": 1}))
+
+        def test_count_dictionaries_are_recounted_from_all_scorer_records(self):
+            comparison = {
+                "records": [
+                    {"ok": True, "canonical": [{"status": "exact_equivalent"}, {"status": "missing"}],
+                     "ambiguities": [{"status": "withheld"}, {"status": "review_required"}],
+                     "additional": [{"status": "literal_present"}, {"status": "unconfirmed"}],
+                     "unexpected": [{"field": "origin"}, {"field": "producer"}]},
+                    {"ok": False, "canonical": [{"status": "review_required"}],
+                     "ambiguities": [], "additional": [], "unexpected": []}],
+                "counts": {"cases": 2, "ok_response": 1, "canonical_assertions": 3, "exact_equivalent": 1,
+                           "missing": 1, "review_required": 1, "conflict_assertions": 2, "conflict_withheld": 1,
+                           "conflict_unresolved": 1, "additional_facts": 2, "additional_literal_present": 1,
+                           "additional_unconfirmed": 1, "unexpected_fields": 2}}
+            retention = {
+                "records": [{"source_facts_truncated": True,
+                             "checks": [{"status": "all_evidence_retained"}, {"status": "some_evidence_retained"},
+                                        {"status": "unconfirmed"}]},
+                            {"source_facts_truncated": False, "checks": []}],
+                "counts": {"cases": 2, "additional_assertions": 3, "truncated_previews": 1,
+                           "all_evidence_retained": 1, "some_evidence_retained": 1, "unconfirmed": 1}}
+            result = derived_score_counts(comparison, retention)
+            self.assertEqual(result, {"canonical": comparison["counts"], "supplementary_retention": retention["counts"]})
+            changed = json.loads(json.dumps(comparison))
+            changed["counts"]["exact_equivalent"] += 1
+            with self.assertRaises(ValueError):
+                derived_score_counts(changed, retention)
+            changed = json.loads(json.dumps(retention))
+            changed["records"][0]["checks"][0]["status"] = "auto_approved"
+            with self.assertRaises(ValueError):
+                derived_score_counts(comparison, changed)
+
+
         def _channel_fixture(self, payload_patch=None):
             Box, PrivateKey, _PublicKey = crypto_classes()
             sender = PrivateKey(bytes.fromhex(PUBLIC_INTEROP["sender_secret_key"]))
@@ -1488,6 +2332,10 @@ def main():
     benchmark.add_argument("--output", type=Path, required=True)
     benchmark.add_argument("--repo", type=Path, required=True)
     benchmark.add_argument("--expected-fingerprint", required=True)
+    benchmark.add_argument("--reviewed-changes", type=Path,
+                           help="Optional exact independently reviewed changes in checked-out docs/audits")
+    benchmark.add_argument("--reviewed-changes-sha256",
+                           help="Required explicit workflow SHA-256 pin when --reviewed-changes is present")
     offline = commands.add_parser("offline-python", help=argparse.SUPPRESS)
     offline.add_argument("script", type=Path)
     offline.add_argument("attempts_file", type=Path)

@@ -31,4 +31,40 @@ jobs:
         with:
           node-version: 22
       - name: Run exact recovered fixture and qualified-flavor controls
-        run: node --test tests/coffee-live-fixture-sanitization.test.mjs tests/coffee-public-source-repairs.test.mjs tests/coffee-qualified-flavor-continuation.test.mjs
+        run: node --test tests/coffee-live-fixture-sanitization.test.mjs tests/coffee-public-source-repairs.test.mjs tests/coffee-qualified-flavor-continuation.test.mjs tests/coffee-frozen-source-identity-repairs.test.mjs tests/coffee-fresh-source-conflicts.test.mjs
+  focused-nomad-live:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 22
+      - name: Verify original NOMAD expectations and complete saved-fixture parity
+        run: node scripts/audit/coffee-completeness-live-probe.mjs --only nomad-centroamericano --outdir "$RUNNER_TEMP/dic-nomad-source-check"
+      - name: Retain bounded public source-check evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-nomad-source-check-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic-nomad-source-check/
+          if-no-files-found: error
+          retention-days: 90
+
+  focused-python-integrity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install free integrity-test prerequisite
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes python3-nacl
+      - name: Run archive, encrypted-input and reviewed-change boundary controls
+        run: /usr/bin/python3 scripts/audit/coffee-frozen-ci.py self-test
+      - name: Run complete report integrity controls
+        run: /usr/bin/python3 -m unittest discover -s tests/audit -p test_coffee_report_integrity.py

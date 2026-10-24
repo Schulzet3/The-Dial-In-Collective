@@ -104,6 +104,41 @@ export function coffeeDescriptionCountryMismatch(description,{name='',origin=''}
   declared.push(match[1]);
  return declared.some(country=>!expected.some(value=>key(value)===key(country)));
 }
+
+// A page can retain a correct URL/title while its SEO sentence names another
+// coffee from the same country. Require an explicit named-coffee subject and
+// distinct non-generic name tokens on both sides before rejecting that fallback.
+export function coffeeDescriptionNamedCoffeeMismatch(description,{name='',origin=''}={}){
+ if(typeof description!=='string'||description.length>16000||!name)return false;
+ const expected=countryNames(origin);
+ if(!expected.length){
+  const title=extractCoffeeTitleOrigin(name);
+  if(title?.label==='Country')expected.push(...countryNames(title.value));
+ }
+ if(!expected.length)return false;
+ const nationalWords=[...COUNTRIES.split('|'),...Object.keys(DEMONYMS)].sort((a,b)=>b.length-a.length).join('|');
+ const tokens=value=>new Set(String(value).replace(new RegExp('\\b(?:'+nationalWords+')\\b','gi'),' ')
+  .normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  .replace(/\b(?:coffee|coffees|beans?|blend|lot|grade|washed|natural|honey|anaerobic|process(?:ed)?|roast|light|medium|dark|organic|single|origin|supernatural|regions?|zones?|districts?|communities|community|departments?|provinces?|states?|municipalities|municipality|towns?|villages?|valleys?|mountains?|highlands|hills|foothills|slopes?|peaks?)\b/g,' ')
+  .match(/[a-z]{3,}/g)||[]);
+ const selected=tokens(name);
+ if(selected.size<2)return false;
+ // A marketed coffee name may differ from its explicitly labeled locality.
+ // The selected origin can corroborate that same locality in the SEO subject.
+ for(const token of tokens(origin))selected.add(token);
+ const named=new RegExp('^(('+nationalWords+')\\s+\\p{Lu}[\\p{L}\\p{M}\\d \'’–-]{2,150}?)\\s+(?:is|was)\\s+(?:sourced|grown|produced|cultivated)\\b','u');
+ for(const sentence of sentences(description)){
+  const match=named.exec(sentence);
+  if(!match||!current(sentence))continue;
+  const declaredCountry=DEMONYMS[match[2]]||match[2];
+  if(!expected.some(value=>key(value)===key(declaredCountry)))return true;
+  const declared=tokens(match[1]);
+  const labeledLocality=/\b(?:regions?|zones?|districts?|communities|community|departments?|provinces?|states?|municipalities|municipality|towns?|villages?)\b/i.test(match[1]);
+  if((declared.size>=2||(declared.size===1&&labeledLocality))&&![...declared].some(token=>selected.has(token)))return true;
+ }
+ return false;
+}
+
 // A short heading can explicitly put a named subregion, region and country
 // together. This corroboration must arrive before narrower independent labels
 // are compared; it never invents the location of an otherwise unknown place.
@@ -114,6 +149,27 @@ export function extractCoffeeGeographyTuples(html,{clean,name='',includeCurrentL
  if(includeCurrentLocality&&typeof html==='string'&&!/<[a-z][^>]*>/i.test(html))
   html='<p>'+html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>';
  const blocks=productCoffeeProse(html,clean);
+ // A comma list in a selected title can contain flavors or people. Require
+ // each non-country word to have a literal geographic role in current
+ // selected prose before using the title's complete location tuple.
+ const geographicSentences=blocks.filter(block=>!block.educational&&!/^h[1-6]$/.test(block.tag))
+  .flatMap(block=>sentences(block.text)).filter(value=>value.length<=1800&&current(value));
+ const geographicRole=value=>{
+  const escaped=value.replace(/[.*+?^$(){}|[\]\\]/g,'\\$&');
+  const site=new RegExp('\\b(?:washing station|wet mill|dry mill|farm|estate)\\s+(?:(?:is\\s+)?(?:located|situated)\\s+)?in\\s+'+escaped+'(?=[,.;:!?–—]|\\s|$)','iu');
+  const terrain=new RegExp('(?:^|[,:;]\\s*)'+escaped+'\\s+(?:sits|lies|is\\s+(?:located|situated))\\s+(?:in|between|on|along)\\b','u');
+  return geographicSentences.some(sentence=>site.test(sentence)||
+   (terrain.test(sentence)&&/\b(?:mountains?|saddle|valley|highlands|hills|slopes|range)\b/i.test(sentence)&&
+    /\b(?:coffee|coffees|beans|farms?|grown|growing|planted|cultivat\w*)\b/i.test(sentence)));
+ };
+ const titleTuples=String(name).split(/\s+[–—-]\s+/).slice(1).filter(value=>{
+  const parts=value.split(',').map(part=>part.trim());
+  return parts.length>=3&&parts.length<=6&&COUNTRY_ONLY.test(parts.at(-1))&&
+   parts.slice(0,-1).every(part=>/^\p{Lu}[\p{L}\p{M} .’'()-]{1,60}$/u.test(part)&&
+    !completeVarietyPhrase(part,{explicit:true})&&geographicRole(part))&&
+   !/\b(?:coffee|roast|process(?:ed|ing)?|washed|natural|honey|anaerobic|variety|farm|finca|estate|station|street|avenue|road|suite|awards?|competition|cup of excellence|grade)\b/i.test(value);
+ });
+ if(titleTuples.length===1&&name.length<=220)found.push(titleTuples[0].trim());
  for(const block of blocks){
   if(block.educational||!/^h[1-6]$/.test(block.tag)||block.text.length>220||!current(block.text)||key(block.text)===key(name))continue;
   let value=block.text;
@@ -184,7 +240,7 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
  };
  for(const block of blocks){
   if(/^h[1-6]$/.test(block.tag))continue;
-  for(const sentence of sentences(block.text)){
+  for(let sentence of sentences(block.text)){
    if(sentence.length>1800||!current(sentence)||! /\b(?:coffee|coffees|beans?|cherries|grow(?:n|ing|s)?|cultivat|sourc|farm|finca|hacienda|estate|cooperative|station|mill|producer)\w*\b/i.test(sentence)||
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
@@ -203,20 +259,44 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
     continue;
    }
    if(currentLocalityOnly)continue;
+   // A neighboring social project is context, not a claim that this lot
+   // grew there. Keep a direct current-lot source clause if one is printed.
+   const nearby=/\b(?:nearby|neighbou?ring)\b/i.exec(sentence);
+   if(nearby&&/\b(?:social\s+(?:reintegration|programs?|projects?)|community\s+projects?|former\s+combatants)\b/i.test(sentence)){
+    const direct=sentence.slice(0,nearby.index).replace(/[,;:–—\s]+$/,'');
+    if(!/\b(?:this|our|the current)\s+(?:coffee|lot|offering|beans?)\s+(?:comes?\s+from|(?:is|are)\s+(?:grown|sourced|produced)\s+(?:in|from))\b/i.test(direct))continue;
+    sentence=direct;
+   }
    const pieces=[];
    const remember=value=>{
     value=value.replace(/\s+(?:region|zone|district|department|province|state|municipality)\b.*$/i,'').replace(/[.!?]+$/,'').trim();
     const possessive=value.match(new RegExp('^('+COUNTRIES+')[’\']s(?:\\s+(.+))?$','u'));
     if(possessive){if(possessive[2])remember(possessive[2]);remember(possessive[1]);return;}
     if(/^(?:Central|Northern|Southern|Eastern|Western|North|South|East|West)$/i.test(value))return;
+    // Country possessives can introduce awards or coffee grades as well
+    // as places. Neither a competition name nor a screen grade is a region.
+    if(/\b(?:cup of excellence|awards?|competitions?|championships?)\b/i.test(value)||
+       (/^(?:AA|AB|PB|EP|SHB|SHG)$/i.test(value)&&/\b(?:grade|graded|screen|size|classification)\b/i.test(sentence)))return;
     if(value&&!pieces.some(part=>key(part)===key(value)))pieces.push(value);
    };
+   const tupleParts=value=>{
+    const parts=value.split(/,\s*/).map(part=>part.replace(/[.!?]+$/,''));
+    const countryAt=parts.findIndex(part=>COUNTRY_ONLY.test(part.replace(/[’']s$/u,'')));
+    // A country closes a place tuple. A following farm/person apposition
+    // cannot become another place; retain genuine multi-country lists.
+    return countryAt>=0&&!parts.slice(countryAt+1).some(part=>COUNTRY_ONLY.test(part.replace(/[’']s$/u,'')))?
+     parts.slice(0,countryAt+1):parts;
+   };
+   // An explicit current-coffee clause can place the country before its
+   // locality: "the western part of Honduras, Pacavita". Keep both names.
+   const countryFirst=sentence.match(new RegExp('\\b(?:[Tt]hese|[Oo]ur|[Tt]he|[Tt]his)\\s+(?:beans|coffee|lot)\\s+comes?\\s+from\\s+the\\s+(?:northern|southern|eastern|western|central|northwestern|northeastern|southwestern|southeastern)\\s+part\\s+of\\s+('+COUNTRIES+'),\\s*('+PLACE+')(?=\\s*,\\s*(?:which|where)|[.!;]|$)','u'));
+   if(countryFirst){remember(countryFirst[2]);remember(countryFirst[1]);}
    // Each pattern contains an actual geographic relationship. A bare farm
    // name, a product title, or a nearby country is not enough to invent a
    // town. Preserve every place word from the selected sentence verbatim.
    for(const match of sentence.matchAll(new RegExp('(?:[Ii]n|[Ff]rom|[Nn]ear|[Oo]f)\\s+(?:the\\s+)?('+PLACE+'(?:,\\s*'+PLACE+'){1,5})','gu'))){
-    const parts=match[1].split(/,\s*/).map(part=>part.replace(/[.!?]+$/,''));
-    if(COUNTRY_ONLY.test(parts.at(-1)))for(const part of parts)remember(part);
+    const parts=tupleParts(match[1]);
+    if(COUNTRY_ONLY.test(parts.at(-1).replace(/[’']s$/u,'')))for(const part of parts)remember(part);
    }
    for(const match of sentence.matchAll(new RegExp('(?:[Ll]ocated|[Gg]rown|[Ss]ituated|[Pp]roduced)\\s+in\\s+(?:(?:northern|southern|eastern|western|central)\\s+)?('+PLACE+')\\s+in\\s+(?:the\\s+)?('+PLACE+')\\s+'+PLACE_KIND+'\\s+of\\s+('+COUNTRIES+')\\b','gu'))){
     remember(match[1]);remember(match[2]);remember(match[3]);
@@ -228,7 +308,7 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
     remember(match[2]);remember(match[1]);
    }
    for(const match of sentence.matchAll(new RegExp('(?:[Rr]egion|[Zz]one|[Dd]istrict|[Dd]epartment|[Pp]rovince|[Ss]tate|[Mm]unicipality|[Tt]own|[Vv]illage|[Cc]ommunity|[Vv]alley|[Mm]ountains?|[Hh]ighlands|[Hh]ills|[Ff]oothills|[Ss]lopes|[Pp]eaks)\\s+of\\s+('+PLACE+'(?:,\\s*'+PLACE+'){0,4})','gu')))
-    for(const part of match[1].split(/,\s*/))remember(part);
+    for(const part of tupleParts(match[1]))remember(part);
    for(const match of sentence.matchAll(new RegExp('\\b(?:[Ii]n|[Ff]rom|[Ww]ithin|[Aa]round|[Nn]ear|to)\\s+(?:the\\s+)?('+PLACE+')\\s+'+PLACE_KIND+'\\b','gu')))
     if(!new RegExp('^(?:'+COUNTRIES+')[’\']s\\b','u').test(match[1]))remember(match[1]);
    // An explicit country in the same geographic sentence can complete its

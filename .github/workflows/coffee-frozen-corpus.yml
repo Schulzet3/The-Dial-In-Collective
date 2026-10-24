@@ -76,13 +76,26 @@ jobs:
         run: >-
           /usr/bin/python3 scripts/audit/coffee-frozen-ci.py materialize
           --work "$RUNNER_TEMP/dic-frozen-corpus"
-      - name: Run all 603 original cases, unchanged scores, exports and offline review
-        run: >-
-          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py run
-          --repo "$GITHUB_WORKSPACE"
-          --work "$RUNNER_TEMP/dic-frozen-corpus"
-          --output "$RUNNER_TEMP/dic-frozen-corpus/output"
-          --expected-fingerprint 4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2
+      - name: Run all 603 original cases, frozen scores, exports and independent review
+        # Empty pins mean strict C8 equality. Only an independently reviewed,
+        # committed manifest and its exact SHA-256 may enable reviewed changes.
+        env:
+          DIC_REVIEWED_CHANGES_PATH: ''
+          DIC_REVIEWED_CHANGES_SHA256: ''
+        shell: bash
+        run: |
+          set -euo pipefail
+          audit_review_args=()
+          if [[ -n "$DIC_REVIEWED_CHANGES_PATH" || -n "$DIC_REVIEWED_CHANGES_SHA256" ]]; then
+            audit_review_args+=(--reviewed-changes "$DIC_REVIEWED_CHANGES_PATH"
+                               --reviewed-changes-sha256 "$DIC_REVIEWED_CHANGES_SHA256")
+          fi
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py run \
+            --repo "$GITHUB_WORKSPACE" \
+            --work "$RUNNER_TEMP/dic-frozen-corpus" \
+            --output "$RUNNER_TEMP/dic-frozen-corpus/output" \
+            --expected-fingerprint 3db313d81e46e7e01bde9dfa015760f551f55e65729b9c4cae1cbb803a330d3e \
+            "${audit_review_args[@]}"
       - name: Erase any remaining ephemeral receiver key
         if: always()
         run: rm -f "$RUNNER_TEMP/dic-frozen-corpus/channel-private/receiver.key"
@@ -90,7 +103,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: dic-frozen603-candidate11-${{ github.run_id }}-${{ github.run_attempt }}
+          name: dic-frozen603-candidate12-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/dic-frozen-corpus/output/
           if-no-files-found: error
-          retention-days: 7
+          retention-days: 90
