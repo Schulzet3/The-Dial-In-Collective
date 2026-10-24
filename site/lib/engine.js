@@ -364,7 +364,23 @@ export function editShot(s,id,input) {
  if(old.dialedIn)old.familyId=assignFamily(s,old);
  old.outlierReview=isExtreme(s,old)?'pending':'not_needed';
  old.suggestion=old.dialedIn?{title:'Dialed in. Nicely done.',text:'Corrected result contributes to your successful window.',next:null}:{title:'Shot corrected',text:'Your recipe windows now reflect the corrected taste ratings.',next:null};
- for(const set of s.setups)for(const w of Object.values(set.workspaces))for(const p of Object.values(w.coffees))for(const [style,fid] of Object.entries(p.currentFamilies))if(fid===previousFamily&&!familyShots(s,fid).length){if(old.dialedIn)p.currentFamilies[style]=old.familyId;else delete p.currentFamilies[style];}
+ // A deliberate Make Current choice follows the SAME corrected successful shot,
+ // rather than silently becoming an automatic preference for another family.
+ // If that shot is no longer successful, release the invalid manual favorite.
+ for(const set of s.setups)for(const w of Object.values(set.workspaces))for(const p of Object.values(w.coffees)){
+  for(const [style,fid] of Object.entries(p.currentFamilies)){
+   if(fid!==previousFamily||style!==old.style)continue;
+   if(p.favoriteShots?.[fid]===id){
+    if(old.dialedIn&&old.familyId===fid)continue;
+    delete p.favoriteShots[fid];
+    if(old.dialedIn){p.currentFamilies[style]=old.familyId;p.favoriteShots[old.familyId]=id;}
+    else delete p.currentFamilies[style];
+   }else if(!familyShots(s,fid).length){
+    if(old.dialedIn)p.currentFamilies[style]=old.familyId;
+    else delete p.currentFamilies[style];
+   }
+  }
+ }
  return old;
 }
 export function hideShot(s,id) {const sh=s.shots.find(x=>x.id===id);if(!sh)return;sh.hidden=true;sh.hiddenAt=now();logAudit(s,'shot.hidden',{shotId:id,retainQualifyingContribution:sh.dialedIn});}
