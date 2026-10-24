@@ -71,3 +71,9 @@ Owner requested to perform all feasible tests to close Issue #10. PR106 head `fd
 
 **Remaining blocker to closing Issue #10:** no real live admitted member currently has two eligible families for the same coffee/style/setup version (read-only aggregate = 0), and the staged SQL lifecycle migration is not applied live. Cannot honestly mark real hosted owner switching/reload/offline/equipment acceptance PASS without authorized publication and naturally available legitimate multiple successful approaches. Also #12 contributor/source evidence and #13 lifecycle integration remain separately scoped. No fabricated production test records, production SQL, Netlify publication or Locked decision changes.
 
+
+## October 24, 2026 UTC — real hosted postrelease integrity readback
+
+Issue #10's internal recipe migration is now applied in release DIC-20261024-READY-QUEUE-06. Production read-only counts: 23 shots, 23 notes, four personal recipe families, four preferences. No invalid favorites or cross-owner/coffee/style family mismatches found (zero each). The hosted database still contains exactly ZERO real admitted member+coffee+style+setup-version combinations with two distinct eligible successful families. Thus live authenticated switching Current back/forth, reload, equipment-change handling and offline replay cannot be demonstrated honestly on existing natural records. Retain prior rollback-only PostgreSQL tests and synthetic browser tests as separate evidence; they passed on PR #106, not real authenticated live usage. Do not insert test shots, alter real member preferences, or silently close this issue. Full cross-user #12 and experiment #13 integration remain distinct.
+
+New safe public postrelease HTTP/JWT denial workflow is scoped to both issues but does not establish hosted personal recipe acceptance. Source only, no new deployable code/Netlify publication/production mutation. Exact-source CI outcome pending.
