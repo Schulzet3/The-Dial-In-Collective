@@ -47,7 +47,7 @@ CASE_IDS = [
     "www-nunatakcoffee-com__raven-espresso-8fe55e93",
     "www-nunatakcoffee-com__early-bird-df6ad855",
 ]
-RELEVANT = re.compile(r"Tolima|Gona|Kirima|\bAA\b|Batian|Excellence|award|Santa.?Cruz|Silvestre|Vasquez|Joel|Lopez|Pacavita|Regions|1201|Kochere|Chelelektu|Buku|Sayasa|Nunatak|finish|aroma|component", re.I)
+RELEVANT = re.compile(r"Tolima|Gona|Kirima|\bAA\b|Batian|Excellence|award|Santa.?Cruz|Silvestre|Vasquez|Joel|Lopez|Pacavita|Regions|1201|Kochere|Chelelektu|Buku|Sayasa|Nunatak|finish|aroma|component|Jammy|blueberry|sweet pepper|ginger|hazelnut|medjool|Minas Gerais|Pitalito|Sierra Nevada|Las Flores|Chiapas|Othaya|Nyeri", re.I)
 PRIVATE = re.compile(r"authorization|bearer\s|password|csrf|session.?token|api.?key|[?&](?:token|sig|secret|key)=", re.I)
 STAGE = "startup"
 
@@ -209,6 +209,9 @@ def url_shape(value):
                       "has_credentials": bool(url.username or url.password),
                       "same_origin": url.scheme == "https" and url.hostname == "nomadcoffee.es" and url.port in (None, 443),
                       "same_product_path": url.path.rstrip("/") == urlsplit(SOURCE).path,
+                      "root_path": url.path in ("", "/"),
+                      "fragment_schema_product": bool(re.fullmatch(r"/schema/Product/[A-Za-z0-9._~-]{1,200}", url.fragment, re.I)),
+                      "fragment_schema_offer": bool(re.fullmatch(r"/schema/Offer/[A-Za-z0-9._~-]{1,200}", url.fragment, re.I)),
                       "query_keys": sorted({word(k) for k, v in query}),
                       "variant_count": len(variants), "single_numeric_variant": valid,
                       "fragment_class": "none" if not url.fragment else "exact_offer" if url.fragment.lower() == "offer" else "other"})
@@ -366,7 +369,7 @@ def frozen():
                 value = fact.get("value")
                 if not isinstance(value, str) or not RELEVANT.search(value):
                     continue
-                if value.lstrip().startswith(("{", "[")) or PRIVATE.search(value):
+                if fact.get("format") == "json" or re.search(r"product (?:attributes|media|variants|offers)", str(fact.get("label", "")), re.I) or value.lstrip().startswith(("{", "[")) or PRIVATE.search(value):
                     continue
                 relevant_count += 1
                 if len(facts) >= 12:
