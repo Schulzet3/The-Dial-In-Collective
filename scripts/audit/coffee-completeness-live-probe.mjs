@@ -112,7 +112,11 @@ function fixtureDifference(original,replay){
    original_value_type:typeof fact.value,replay_value_type:typeof counterpart?.value,
    original_value_keys:fact.value&&typeof fact.value==='object'?Object.keys(fact.value).sort():null,
    replay_value_keys:counterpart?.value&&typeof counterpart.value==='object'?Object.keys(counterpart.value).sort():null,
-   original_value_sha:sha(JSON.stringify(fact.value)),replay_value_sha:sha(JSON.stringify(counterpart?.value))};}),
+   original_value_sha:sha(JSON.stringify(fact.value)),replay_value_sha:sha(JSON.stringify(counterpart?.value)),
+   parsed_json_equal:(()=>{try{return isDeepStrictEqual(JSON.parse(fact.value),JSON.parse(counterpart?.value));}catch{return false;}})(),
+   normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(fact.value)));}catch{return null;}})(),
+   replay_normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(counterpart?.value)));}catch{return null;}})()
+   };}),
   prior_digest:safeSummary(original).sha256,fixture_digest:safeSummary(replay).sha256};
 }
 

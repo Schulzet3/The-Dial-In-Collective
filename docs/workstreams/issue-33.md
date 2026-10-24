@@ -1,3 +1,8 @@
+## October 24 UTC — distinguish lexical JSON encoding from lost source facts
+Nomad nine `hasVariant` source fact values retain their labels, paths, types and count, but the serialized JSON text hashes differ after sensitive-key-aware JSON reserialization. This test-only phase records whether each original and replay JSON string parses to the same typed object; negative differences must continue to fail. No raw values or private data logged, source corpus untouched. [dic-completeness-probe].
+
+---
+
 ## October 24 UTC — Nomad remaining supplementary variant value diagnostic
 Live acceptance 40065413270 passed Circulor extraction parity and all other eight cases, but Nomad still differed on nine public purchase-variant value records with identical canonical fields/conflicts/recipe and total fact count. Preserve strict parity. Add only key names, JSON value types, and SHA digests to the failing fixture diagnostics; do not leak raw variant contents, relax privacy redaction, or weaken acceptance. No runtime change or production write. [dic-completeness-probe]
 
