@@ -3,6 +3,8 @@
 import assert from 'node:assert/strict';
 import {createHmac} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+import {randomUUID} from 'node:crypto';
 
 const url=process.env.DIC_CI_HTTP_URL;
 const secret=process.env.DIC_CI_JWT_SECRET;
@@ -163,4 +165,111 @@ assert.equal(r.status,401);assert.ok(['PGRST301','PGRST302'].includes(r.data?.co
 pass('Invalid HMAC signature rejected before any database authorization');
 assert.equal(scalar('(select count(*) from public.shot_notes)'), '6');
 pass('All isolated personal notes preserved and never returned to foreign client');
+
+// Issue #5/#10: A disposable but REAL HTTP/JWT/PostgREST test environment.
+// The seeded identities below never exist in hosted Supabase. PostgREST verifies
+// cryptographic signatures; the service role uses ONLY this CI's fresh key.
+const injected=readFileSync(new URL('../sql/issue-5-10-signed-http-fixture.sql',import.meta.url),'utf8');
+execFileSync('docker',['exec','-i',pg,'psql','-X','-v','ON_ERROR_STOP=1',
+ '-U','postgres','-d','dic_ci'],{input:injected,encoding:'utf8',timeout:30000});
+const familyUser='70000000-0000-4000-8000-000000000007';
+const familyToken=sign(familyUser);
+const serviceToken=sign(familyUser,{role:'service_role'});
+const short='78000000-0000-4000-8000-000000000001';
+const long='78000000-0000-4000-8000-000000000003';
+const sourceId='79000000-0000-4000-8000-000000000001';
+const pendingId='79000000-0000-4000-8000-000000000002';
+const originalLibrary='7a000000-0000-4000-8000-000000000002';
+const shortFamily=scalar("(select personal_family_id from public.shots where id='"+short+"')");
+const longFamily=scalar("(select personal_family_id from public.shots where id='"+long+"')");
+assert.match(shortFamily,/^[0-9a-f-]{36}$/);assert.notEqual(shortFamily,longFamily);
+pass('Two independently confirmed same-member same-setup families exist only in disposable SQL');
+
+r=await rpc('dic_session_status',familyToken);
+assert.equal(r.status,200);assert.equal(r.data?.admitted,true);
+pass('New synthetic member signs in through real HMAC JWT and PostgREST admission check');
+r=await rpc('dic_read_personal_state',familyToken);
+assert.equal(r.status,200);
+assert.ok(r.data?.families?.some(x=>x.id===shortFamily));
+assert.ok(r.data?.families?.some(x=>x.id===longFamily));
+pass('Signed owner loads both eligible families and original shots from live local HTTP API');
+
+const preferenceRevision=()=>Number(scalar("(select revision from public.recipe_preferences where owner_id='"+familyUser+"' and library_entry_id='77000000-0000-4000-8000-000000000007' and style='Turbo')"));
+const selectShot=async(shot,rev)=>rpc('dic_mutate',familyToken,{mutation_id:randomUUID(),
+ action:'make_current',payload:{shot_id:shot,expected_revision:rev}});
+r=await selectShot(short,preferenceRevision());
+assert.equal(r.status,200);assert.equal(r.data?.ok,true);
+assert.equal(scalar("(select favorite_shot_id from public.recipe_preferences where owner_id='"+familyUser+"' and style='Turbo')"),short);
+pass('Signed owner selects first internal family by authenticated revision-checked RPC');
+r=await selectShot(long,preferenceRevision()-1);
+assert.ok(r.status>=400||r.data?.code==='conflict'||r.data?.ok===false);
+assert.equal(scalar("(select favorite_shot_id from public.recipe_preferences where owner_id='"+familyUser+"' and style='Turbo')"),short);
+pass('Signed stale retry cannot override existing manually selected family');
+r=await selectShot(long,preferenceRevision());
+assert.equal(r.status,200);assert.equal(r.data?.ok,true);
+assert.equal(scalar("(select current_family_id from public.recipe_preferences where owner_id='"+familyUser+"' and style='Turbo')"),longFamily);
+r=await rpc('dic_read_personal_state',familyToken);
+assert.equal(r.status,200);
+assert.ok(r.data?.recipePreferences?.some(x=>x.current_family_id===longFamily&&x.favorite_shot_id===long));
+pass('Two-family switch survives a new authenticated HTTP state reload');
+r=await selectShot(short,preferenceRevision());
+assert.equal(r.status,200);assert.equal(r.data?.ok,true);
+assert.equal(scalar("(select current_family_id from public.recipe_preferences where owner_id='"+familyUser+"' and style='Turbo')"),shortFamily);
+pass('Signed member switches back without changing shot or family identity');
+
+r=await rpc('dic_read_personal_state',tokens.owner);
+assert.equal(r.status,200);
+assert.ok(!r.data?.shots?.some(x=>[short,long].includes(x.id)));
+assert.ok(!r.data?.families?.some(x=>[shortFamily,longFamily].includes(x.id)));
+pass('A separate genuine signed JWT cannot read another synthetic owner recipe history');
+r=await rpc('dic_mutate',tokens.owner,{mutation_id:randomUUID(),action:'make_current',
+ payload:{shot_id:short,expected_revision:preferenceRevision()}});
+assert.ok(r.status>=400||r.data?.ok!==true);
+assert.equal(scalar("(select favorite_shot_id from public.recipe_preferences where owner_id='"+familyUser+"' and style='Turbo')"),short);
+pass('Foreign signed account cannot Make Current someone elses recipe');
+
+await denied('Owner JWT cannot invoke service-only official verifier',
+ '/rpc/dic_trusted_source_verify',familyToken,{submission_id:sourceId,evidence:{}});
+r=await rpc('dic_source_check_target',serviceToken,{submission_id:sourceId});
+assert.equal(r.status,200);assert.equal(r.data?.producer,'CI Washing Station');
+assert.equal(r.data?.submission_revision,1);
+pass('Locally signed service JWT alone reads trusted official-source producer and revision');
+r=await rpc('dic_source_claim',serviceToken,{submission_id:sourceId});
+assert.equal(r.status,200);assert.equal(r.data?.allowed,true);
+pass('Local service-role JWT obtains source-claim budget under actual PostgREST role');
+const evidence={checked_url:'https://sweetbloomcoffee.com/products/ci-official',
+ product_name:'CI Official Product',title_matches:true,evidence_kind:'jsonld_product',
+ submission_revision:1,release_label:'2026',
+ verified_fields:{name:'CI Official Product',origin:'Gedeb, Ethiopia',
+  producer:'CI Washing Station',process:'Washed'}};
+r=await rpc('dic_trusted_source_verify',serviceToken,{submission_id:sourceId,evidence});
+assert.equal(r.status,200);assert.equal(r.data?.ok,true);
+assert.equal(r.data?.status,'verified');
+const officialCoffee=r.data.coffee_id;
+assert.equal(scalar("(select count(*) from public.coffee_sources where coffee_id='"+officialCoffee+"' and source_kind='roaster_page')"),'1');
+pass('Service JWT promotes synthetic source-matched Pending and records official provenance');
+r=await rpc('dic_trusted_source_verify',serviceToken,{submission_id:sourceId,evidence});
+assert.equal(r.status,200);assert.equal(r.data?.already_verified,true);
+assert.equal(scalar("(select count(*) from public.coffee_sources where coffee_id='"+officialCoffee+"' and source_kind='roaster_page')"),'1');
+pass('Signed service replay preserves one canonical and one official provenance record');
+
+r=await rpc('dic_member_retry_pending_approval',tokens.owner,
+ {p_submission_id:pendingId,p_expected_revision:1});
+assert.ok(r.status>=400||r.data?.ok!==true);
+assert.equal(scalar("(select status from public.coffee_submissions where id='"+pendingId+"')"),'pending');
+pass('Foreign member signed Retry cannot change someone elses Pending record');
+r=await rpc('dic_member_retry_pending_approval',familyToken,
+ {p_submission_id:pendingId,p_expected_revision:99});
+assert.ok(r.status>=400||r.data?.ok!==true);
+assert.equal(scalar("(select status from public.coffee_submissions where id='"+pendingId+"')"),'pending');
+pass('Stale signed Pending retry does not approve or alter record');
+r=await rpc('dic_member_retry_pending_approval',familyToken,
+ {p_submission_id:pendingId,p_expected_revision:1});
+assert.equal(r.status,200);assert.equal(r.data?.status,'verified');
+assert.equal(scalar("(select count(*) from public.library_entries where id='"+originalLibrary+"' and submission_id is null and coffee_id is not null)"),'1');
+assert.equal(scalar("(select status from public.coffee_submissions where id='"+pendingId+"')"),'approved');
+pass('Real signed HTTP Pending Retry promotes exact owner while preserving original library UUID');
+assert.equal(scalar("(select count(*) from public.shot_notes)"),'6');
+pass('All disposable signed acceptance scenarios preserve six preexisting private shot notes');
+
 console.log('RESULT: '+passed+' isolated genuine-HMAC-signed PostgREST HTTP/quality assertions PASS; NO GoTrue or production sessions tested.');
