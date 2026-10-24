@@ -60,11 +60,30 @@ The outer artifact object contains the exact original artifact's positive id, po
 
 Each changes entry copies every field of the corresponding actual review-material.json change exactly: case_id, changed_case_keys, changed_output_keys, roaster_id, source_url, before_case_sha256, after_case_sha256, before_export_sha256, and after_export_sha256. It adds only:
 
-- decision: source_supported_improvement.
-- rationale: an explicit source-supported explanation of 20–4,000 characters.
-- source_evidence: one to 32 unique original-source quote bindings.
+- decision: source_supported_improvement for a reviewed extraction change, or nonsemantic_order_only for the narrowly verified availability-array permutation below.
+- rationale: an explicit explanation of 20–4,000 characters, accurately distinguishing a source-supported change from a change of array order.
+- source_evidence: one to 32 unique original-source quote bindings for source_supported_improvement. It must be exactly an empty array for nonsemantic_order_only, because that decision makes no new source claim.
 
 Each source-evidence object has exactly capture_id, capture_file, capture_sha256, capture_source_url, quote, and quote_basis. It must refer to the exact case's original frozen capture and original hash-bound packet. A literal_capture quote must occur byte-for-byte in that capture. A frozen_oracle quote must occur with the exact capture ID in the unchanged original oracle. The latter preserves original quoted evidence that may have normalized HTML layout; it does not fabricate a new raw-byte match. Quote size is bounded to 8,192 UTF-8 bytes. No source path may leave the original corpus or traverse a linked directory.
+
+
+## Explicit nonsemantic available-field order review
+
+A difference in the order of output.available is not an accuracy improvement. It still requires a manual, exact, pinned per-case decision after the actual first failed full run; there is no automatic exception to the unchanged-output default.
+
+The nonsemantic_order_only decision is accepted only when all of these conditions hold:
+
+- The complete changed-case descriptor names only output and only its available property.
+- Before and after available values are different arrays of at least two nonempty strings. Both arrays contain exactly the same unique strings, without duplication, insertion, removal, coercion or case normalization.
+- Every other property of the whole case is identical under the existing typed comparison after removing only top-level elapsed_ms and output.available. This includes canonical fields, source facts, status, identity, calls and fixture calls.
+- The actual before/after client snapshot/download export hashes are equal, and the case is absent from the actual changed-export inventory.
+- The entire per-case canonical/additional/conflict/unexpected-field scorer record and the entire supplementary-retention record are unchanged.
+- The verifier receives all six actual complete 603-case maps: original/current replays, comparisons and retention records. Case identities and both whole-corpus stable replay inventory hashes must match the pinned review material. Missing, partial, stale or rebound evidence fails closed.
+
+The availability-only classification cannot be disguised as source_supported_improvement. Membership changes, duplicate values, other output changes, changed calls, changed scorer evidence or changed exports do not qualify. The ordinary exact manifest inventory, source/runtime/scorer bindings, first failed-run provenance and all non-waivable checks still apply.
+
+Accepted receipts separately record reviewed_source_supported_cases and reviewed_nonsemantic_order_cases, plus the exact per-case case_decisions. The report's total reviewed-case count includes both classes and is not a count of accuracy gains. An order-only case must not appear as a recovered field or a semantic extraction improvement in the final audit.
+
 
 ## Non-waivable checks and reporting
 
@@ -79,6 +98,13 @@ Receipts retain the measured actual_client_exports_equal number and add explicit
 This implementation adds focused positive and adversarial runner/report controls. Source review and hosted execution must be recorded separately; preparation of this document or its tests does not establish a passing hosted run.
 
 Full603 workflow path filtering follows runtime, tests, audit scripts/workflow and the exact reviewed-change manifest/control document. Narrative audit receipts alone do not alter a scored runtime or approved delta; ordinary documentation/approval checks still apply. This avoids making a receipt about a completed run recursively require a new full run without any source or approval change.
+
+
+## Current37253 source requires a fresh unapproved run
+
+The exact concurrent3fabb approval below is preserved as historical evidence only. This source revision has runtime fingerprint `37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24`; its workflow intentionally clears both review pins. The old manifest is retained verbatim at `extractor-reviewed-changes-candidate12-runtime3fabb.json`. It cannot approve changed37253 outputs. The new source must retain its own first full result, independently review all exact changes, and reproduce a separately pinned review without waiving canonical/full-retention losses or current-export/offline checks.
+
+## Preserved concurrent review of the earlier3fabb runtime
 
 ## Actual first 603-case Candidate12 replay and independent original-source review — October 24 UTC
 

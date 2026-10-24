@@ -425,8 +425,68 @@ function coordinatedFlavorSentence(sentence,blockText,clean){
  return '';
 }
 
+// A named assertion is current-product evidence only when its literal subject
+// agrees with the selected H1. Country adjectives use the existing literal
+// place reader; processing words alone never identify a coffee.
+function selectedSensorySubject(subject,name,blendScope=false){
+ if(!name||subject.length>110||name.length>220)return false;
+ const subjectPlace=extractCoffeeTitleOrigin(subject),namePlace=extractCoffeeTitleOrigin(name);
+ if(subjectPlace&&namePlace&&fold(subjectPlace.value)!==fold(namePlace.value))return false;
+ if(/\bdecaf(?:feinated)?\b/i.test(subject)&&!/\bdecaf(?:feinated)?\b/i.test(name))return false;
+ const processes=value=>new Set((value.match(/\b(?:washed|natural|honey)\b/gi)||[]).map(fold));
+ const subjectProcesses=processes(subject),nameProcesses=processes(name);
+ if(subjectProcesses.size&&nameProcesses.size&&![...subjectProcesses].every(value=>nameProcesses.has(value)))return false;
+ if(/^(?:coffee|cup|lot|blend)$/i.test(subject))return true;
+ // A named component of a selected blend cannot stand for its full profile.
+ if(blendScope)return fold(subject)===fold(name);
+ const selected=new Set(fold(name).split(' ')),tokens=fold(subject).split(' ').filter(value=>
+  !/^(?:coffee|cup|lot|decaf|decaffeinated|fully|washed|natural|honey)$/.test(value));
+ return tokens.length>0&&tokens.every(token=>{
+  if(selected.has(token))return true;
+  const place=extractCoffeeTitleOrigin(token);
+  return place&&namePlace&&fold(place.value)===fold(namePlace.value);
+ });
+}
+function currentSelectedBlend(block){
+ if(block.educational||/^(?:about the region|regional (?:profile|characteristics)|coffee producers here)\b/i.test(block.text)||
+  /^(?:about the region|regional (?:profile|characteristics))\b/i.test(block.section))return false;
+ const text=block.text.split(/\bAbout the Region\b/i)[0];
+ return text.split(/(?<=[.!?])\s+|(?<=[!?])(?=(?:This|Our|The)\s)/u).some(sentence=>
+  (/^(?:this|our|the current)\s+blend\b/i.test(sentence)||
+   /^(?:this|our|the current)\s+(?:coffee|espresso|lot|offering)\s+(?:is\s+(?:a|an)\s+blend\b|blends\b)/i.test(sentence)||
+   /^we\s+blend\s+[^.!?;]{2,220}\s+for\s+(?:this|our|the current)\s+(?:coffee|espresso|lot|offering)\b/i.test(sentence))&&
+  !NONCURRENT_COFFEE_PROSE.test(sentence)&&
+  !CONDITIONAL_FLAVOR.test(sentence)&&!/\b(?:hypothetical|fictional|previously|formerly|historically|(?:last|previous)\s+(?:season|year|release|harvest))\b/i.test(sentence));
+}
+const DIRECT_EXTRACTION_FLAVOR=/^(?:(?:pushing|adjusting|changing|increasing|reducing|lengthening|shortening)\s+(?:your|the)\s+extraction\b|(?:turbos?|turbo\s+(?:shots?|espresso))\s+(?:are|is|have|has|offer|offers|bring|brings|yield|yields)\b)/i;
+function selectedLiteralFlavorSentence(sentence,name,clean,blendScope=false){
+ if(sentence.length>550||CONDITIONAL_FLAVOR.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence)||
+  /\b(?:hypothetical|fictional|previously|formerly|historically|(?:last|previous)\s+season|with\s+milk(?![ -]+chocolate\b))\b/i.test(sentence))return '';
+ let match=sentence.match(/^(?:This|Our)\s+(.{2,110}?)\s+is\s+(?:a|an)\s+[^.!?;]{0,70}\bcup,\s+with\s+(.{2,250}?)[.!?]?$/i);
+ if(match&&selectedSensorySubject(match[1],name,blendScope)&&noteParts(match[2]).length>=2&&
+  !/\b(?:body|mouthfeel|acidity|balance|balanced)\b/i.test(match[2]))return shortFlavorList(match[2],clean);
+ match=sentence.match(/^Our\s+(.{2,110}?)\s+is\s+([^.!?;,]{2,70}\bforward),\s+(?:a|an)\s+([^.!?;,]{2,80}\bsweetness)\s+with\s+(?:a|an)\s+[^.!?;,]{2,60}\bbody[.!?]?$/i);
+ if(!match||!/\b(?:decaf(?:feinated)?|coffee)\b/i.test(match[1])||!selectedSensorySubject(match[1],name,blendScope))return '';
+ const first=shortFlavorList(match[2],clean,{allowSingle:true}),second=shortFlavorList(match[3],clean,{allowSingle:true});
+ return first&&second?shortFlavorList(first+', '+second,clean,{allowSingle:true}):'';
+}
+function mixedCharacteristicsFlavor(segment,clean){
+ const match=segment.match(/^Characteristics\s*[:–—-]\s*(.{2,650})$/i);
+ if(!match)return '';
+ const value=match[1].split(/\s+\b(?:Origin|Country|Region|Elevation|Altitude|Farm|Producer|Variet(?:y|ies|al)|Process(?:ing)?|Roast(?: Level)?|Harvest|Body|Acidity)\s*[:–—-]\s*/i)[0].trim();
+ if(NONCURRENT_COFFEE_PROSE.test(value)||CONDITIONAL_FLAVOR.test(value)||
+  /\b(?:hypothetical|fictional|previously|formerly|historically|(?:last|previous)\s+season)\b/i.test(value))return '';
+ // The first clause identifies roast; only the separately coordinated
+ // sweetness phrase has a flavor role. Do not turn body/acidity into notes.
+ const sensory=value.match(/^(?:hints?\s+of\s+)?(?:light|medium|dark|lighter|darker|light[ -]medium|medium[ -]dark)\s+roast,\s*(?:and\s+)?([^.!?;,]{2,100}\bsweetness)[.!?]?$/i);
+ return sensory?shortFlavorList(sensory[1],clean,{allowSingle:true}):'';
+}
+
 function flavorProse(page,clean){
  const blocks=productCoffeeProse(page,clean),explicit=new Map(),genericProfiles=new Map(),tastingStatements=new Map(),narrative=new Map();
+ const selectedNames=[...new Set(blocks.filter(block=>block.tag==='h1'&&!block.educational).map(block=>block.text))];
+ const selectedName=selectedNames.length===1?selectedNames[0]:'';
+ const blendScope=/\bblend\b/i.test(selectedName)||blocks.some(currentSelectedBlend);
  const roastVariants=new Set(blocks.flatMap(block=>[...block.text.matchAll(/\bas\s+(?:a|an)\s+((?:very\s+|ultra\s+)?light|medium(?:[ -](?:light|dark))?|dark)\s+roast\b/gi)].map(match=>fold(match[1]))));
  for(const block of blocks){
   if(block.educational||/^(?:about the region|regional (?:profile|characteristics)|coffee producers here)\b/i.test(block.text)||
@@ -442,6 +502,8 @@ function flavorProse(page,clean){
    const value=clean(line,6001).replace(/\s+/g,' ').trim();
    const segments=EXPLICIT_FLAVOR_LABEL.test(value)?[value]:value.split(/(?<=[.!?])\s+/u).slice(0,32);
    for(const segment of segments){
+    const characteristics=roastVariants.size<=1?mixedCharacteristicsFlavor(segment,clean):'';
+    if(characteristics)genericProfiles.set(noteKey(characteristics),characteristics);
     const generic=segment.match(/^Profile\s*:\s*(.{2,300})$/i);
     // "We taste ..." in a sentence is a narrative supplement. A printed
     // label such as "We Taste: ..." is an explicit profile. Giving both
@@ -458,7 +520,7 @@ function flavorProse(page,clean){
     if(notes&&!profiles.has(noteKey(notes)))profiles.set(noteKey(notes),notes);
    }
   }
-  const sentences=blockText.split(/(?<=[.!?])\s+/u);
+  const sentences=blockText.split(/(?<=[.!?])\s+|(?<=[!?])(?=(?:This|Our|The)\s)/u);
   for(const [sentenceIndex,fullSentence] of sentences.entries()){
    if(fullSentence.length>1800)continue;
    // A later semicolon clause can qualify just a finish. Keep an earlier
@@ -468,7 +530,9 @@ function flavorProse(page,clean){
     /\b(?:regional|varietal|cultivar|designation of origin)\b[^.!?]{0,220}\b(?:known|boasts?|recognition)\b/i.test(sentence))continue;
    const primary=primaryCurrentFlavor(sentence,clean);
    if(primary){narrative.set(noteKey(primary),primary);continue;}
-   if(roastVariants.size>1)continue;
+   if(roastVariants.size>1||DIRECT_EXTRACTION_FLAVOR.test(sentence))continue;
+   const literal=selectedLiteralFlavorSentence(sentence,selectedName,clean,blendScope);
+   if(literal){narrative.set(noteKey(literal),literal);continue;}
    const coordinated=coordinatedFlavorSentence(sentence,blockText,clean);
    if(coordinated){narrative.set(noteKey(coordinated),coordinated);continue;}
    const continuation=layeredComponentFlavor(sentence,clean)||straightShotFlavor(sentence,sentences[sentenceIndex-1],clean);

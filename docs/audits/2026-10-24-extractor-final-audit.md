@@ -1,3 +1,22 @@
+# Dial In Collective extractor audit — current Candidate12 verification in progress
+
+## October 24 UTC — additional Candidate12 source repairs; full verification pending
+
+Current source remains **TESTING**, PR121. The combined32-file extractor fingerprint is `37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24`. This revision adds five literal producer relationships, cleans station/operator entity boundaries, and recovers three current sensory relationships. New controls preserve conditional, historical, educational, unrelated-product and partial-blend boundaries. The39 new Node regression cases have restricted-V8 preparation evidence; actual hosted Node and full603 verification are still required for this revision.
+
+The previous actual full run [40070270334](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40070270334), source92cd/runtime3fabb, completed603 usable cases:3037 exact/151 missing/814 review,5458 full/337 partial/679 unconfirmed supplementary assertions, zero prior exact/full-retention losses,603 current snapshot/download checks and603 offline validations. It retained24 changed complete outputs and23 changed exports as an unreviewed strict failure. Its actual ordinary CI passed1476 Node tests with6 explicit skips,1108 cloud tests,44+23 Python/OCR, lint/build/mobile/visual/security/isolated SQL/approval. Those results are preserved as historical evidence, not relabeled as proof for this new runtime.
+
+Concurrent commit963add and its exact3fabb review manifest are preserved. That source-specific approval is disabled for the new37253 runtime: the next full603 run starts in strict mode, retains every actual difference and requires independent exact-case review. A separate narrow order-only decision can describe an identical available-field set reordered without claiming accuracy gains; all fields/calls/scorer/retention/export bytes must remain identical for that classification.
+
+The historical C11 audit and complete READY queue snapshot are retained verbatim under docs/audits/candidate11-concurrent-integration-audit.md and candidate11-concurrent-ready-queue-snapshot.json. The sole current extractor queue item is TESTING and points to PR121. Other queue rows, Locked product decisions, member data, offline behavior and concurrent release instructions remain intact. This audit performs no publication, deployment, production SQL/Edge/Auth or member operation.
+
+
+## Preserved preceding audit narrative
+
+The following is retained history for its explicitly bound older source. It is not current37253 readiness.
+
+---
+
 # Final extractor audit receipt — October 24, 2026 UTC
 
 **CURRENT: READY for a separately approved future release; not deployed.** The material below the divider is the preserved historical candidate11 reconstruction plan and contains dated TESTING/pending statements superseded by this receipt.

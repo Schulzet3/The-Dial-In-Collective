@@ -319,12 +319,40 @@ function normalized(field,value,{allowFlavorProse=false}={}){
  }
  return s;
 }
+// A literal farm designator under Location/Origin is an explicit farm
+// credit. Split only a published pipe-delimited place tuple ending in a
+// named country; the original label/value remains in retained source facts.
+function labeledFarmLocation(rawKey,value){
+ if(!/^(?:location|origin)$/.test(keyOf(rawKey)))return null;
+ const parts=cleanTrailingProductLabels(textOf(value,1000)).split(/\s*\|\s*/);
+ if(parts.length<1||parts.length>2||parts.some(part=>/\b(?:if|unless|when|whether|depending|provided|either|or)\b/i.test(part)))return null;
+ const farm=parts[0].replace(/\s*\((?:organically grown|(?:certified )?organic)\)\s*$/i,'').trim();
+ const word=String.raw`[\p{Lu}][\p{L}\p{M}'’.-]*`;
+ const tail=String.raw`(?:\s+(?:`+word+String.raw`|de|del|la|las|los|da|das|do|dos)){0,6}`;
+ const named=new RegExp('^(?:(?:Finca|Fazenda|Hacienda)\\s+'+word+tail+'|'+word+tail+'\\s+Farms?)$','u');
+ if(farm.length>120||!named.test(farm))return null;
+ const origin=parts[1]?.trim()||'';
+ if(parts.length===2){
+  const places=origin.split(/\s*,\s*/);
+  if(places.length<1||places.length>6||!ORIGIN_COUNTRIES.has(keyOf(places.at(-1)))||
+    places.some(place=>!place||place.length>100||!/^[\p{Lu}][\p{L}\p{M}\d\s'’().-]*$/u.test(place)))return null;
+ }
+ return {farm,origin};
+}
 function addField(fields,rawKey,value){
  // Layout extractors may pass either a visible roaster label or an
  // already-resolved internal field key such as release_label. Never drop a
  // supported canonical key just because its display synonym is absent.
  const key=Object.hasOwn(FIELD_ALIASES,rawKey)?rawKey:LOOKUP.get(keyOf(rawKey));
  if(!key)return;
+ if(key==='origin'){
+  const place=labeledFarmLocation(rawKey,value);
+  if(place){
+   addField(fields,'Farm',place.farm);
+   if(!place.origin)return;
+   value=place.origin;
+  }
+ }
  // Keep every valid literal process claim, including evidence encountered
  // after a provisional category conflict, for precise stage reconciliation.
  if(key==='process')recordCoffeeProcessingClaim(fields,cleanTrailingProductLabels(textOf(value,1000)),normalized(key,value));

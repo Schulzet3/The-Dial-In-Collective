@@ -1160,7 +1160,67 @@ def review_material(old_rows, current_rows, complete_changes, exports,
     }
 
 
-def verify_reviewed_changes(manifest, material, corpus, expected, evidence_index, run_id):
+
+def verified_order_only_context(case_records, material):
+    """Bind the narrow order classification to actual complete replay/scorer maps."""
+    names = ("baseline_replay", "candidate_replay", "baseline_comparison",
+             "candidate_comparison", "baseline_retention", "candidate_retention")
+    exact_object(case_records, names, "Order-only review requires actual replay and scorer evidence")
+    original = case_records["baseline_replay"]
+    require(isinstance(original, dict) and len(original) == 603,
+            "Order-only review requires the complete original case inventory")
+    for name in names:
+        rows = case_records[name]
+        require(isinstance(rows, dict) and rows.keys() == original.keys()
+                and all(isinstance(row, dict) and row.get("case_id") == case_id
+                        for case_id, row in rows.items()),
+                "Order-only case/scorer identities are incomplete or rebound")
+    require(stable_case_inventory_sha256(original) == material["baseline_stable_cases_sha256"]
+            and stable_case_inventory_sha256(case_records["candidate_replay"])
+            == material["candidate_stable_cases_sha256"],
+            "Order-only evidence differs from the pinned complete replay inventories")
+    return case_records
+
+
+def verify_nonsemantic_available_order(change, material, case_records):
+    """Allow only a permutation of the same distinct available-field strings."""
+    case_id = change["case_id"]
+    require(change["changed_case_keys"] == ["output"]
+            and change["changed_output_keys"] == ["available"],
+            "Order-only decision can cover only output.available")
+    before = case_records["baseline_replay"][case_id]
+    after = case_records["candidate_replay"][case_id]
+    require(stable_case_sha256(before) == change["before_case_sha256"]
+            and stable_case_sha256(after) == change["after_case_sha256"],
+            "Order-only whole-case hashes differ")
+    require(isinstance(before.get("output"), dict) and isinstance(after.get("output"), dict),
+            "Order-only output evidence is missing")
+    first = before["output"].get("available")
+    second = after["output"].get("available")
+    require(isinstance(first, list) and isinstance(second, list)
+            and 2 <= len(first) == len(second)
+            and all(isinstance(value, str) and value for value in first + second)
+            and len(set(first)) == len(first) and len(set(second)) == len(second)
+            and set(first) == set(second) and not typed_equal(first, second),
+            "Order-only decision requires a nontrivial permutation of unique identical strings")
+    old_projection = {key: value for key, value in before.items() if key != "elapsed_ms"}
+    new_projection = {key: value for key, value in after.items() if key != "elapsed_ms"}
+    old_projection["output"] = {key: value for key, value in before["output"].items()
+                                if key != "available"}
+    new_projection["output"] = {key: value for key, value in after["output"].items()
+                                if key != "available"}
+    require(typed_equal(old_projection, new_projection),
+            "Order-only review cannot cover fields, facts, calls, identity or any other case change")
+    require(change["before_export_sha256"] == change["after_export_sha256"]
+            and case_id not in material["actual_export_changed_cases"],
+            "Order-only review requires identical actual snapshot/download export bytes")
+    for baseline, candidate in (("baseline_comparison", "candidate_comparison"),
+                                ("baseline_retention", "candidate_retention")):
+        require(typed_equal(case_records[baseline][case_id], case_records[candidate][case_id]),
+                "Order-only review cannot cover any canonical, additional or retention record change")
+
+
+def verify_reviewed_changes(manifest, material, corpus, expected, evidence_index, run_id, *, case_records=None):
     exact_object(manifest, (
         "schema_version", "type", "repository", "candidate", "review", "first_observed_run",
         "oracle_freeze_sha256", "packet_archive_attestation_sha256", "source_archive_sha256",
@@ -1241,22 +1301,38 @@ def verify_reviewed_changes(manifest, material, corpus, expected, evidence_index
     require(len(approved) == len(approvals) and approved.keys() == actual.keys()
             and set(material["actual_export_changed_cases"]) <= approved.keys(),
             "Reviewed-change manifest has duplicate, missing, extra or unreviewed output/export cases")
+    order_cases = [case_id for case_id, row in approved.items()
+                   if row.get("decision") == "nonsemantic_order_only"]
+    if order_cases:
+        case_records = verified_order_only_context(case_records, material)
     for case_id, change in approved.items():
         exact_object(change, tuple(actual[case_id]) + ("decision", "rationale", "source_evidence"),
                      "Unrecognized or missing per-case review properties")
         for key, value in actual[case_id].items():
             require(typed_equal(change[key], value), "Reviewed whole-case/export hash or change descriptor differs")
-        require(change["decision"] == "source_supported_improvement"
+        require(change["decision"] in ("source_supported_improvement", "nonsemantic_order_only")
                 and isinstance(change["rationale"], str) and 20 <= len(change["rationale"]) <= 4000,
-                "Each changed case needs an explicit source-supported review rationale")
+                "Each changed case needs an explicit correctly classified review rationale")
         evidence = change["source_evidence"]
-        require(isinstance(evidence, list) and 1 <= len(evidence) <= 32,
-                "Each changed case needs bounded original source-quote evidence")
-        require(len({stable_json_sha256(row) for row in evidence}) == len(evidence),
-                "Duplicate reviewed source evidence")
-        for row in evidence:
-            verify_reviewed_source_quote(corpus, expected, evidence_index, case_id, row)
+        if change["decision"] == "nonsemantic_order_only":
+            require(isinstance(evidence, list) and not evidence,
+                    "Order-only review adds no source claim and requires empty source_evidence")
+            verify_nonsemantic_available_order(change, material, case_records)
+        else:
+            require(not (change["changed_case_keys"] == ["output"]
+                         and change["changed_output_keys"] == ["available"]),
+                    "Available-only changes require the explicit narrow order-only decision")
+            require(isinstance(evidence, list) and 1 <= len(evidence) <= 32,
+                    "Each source improvement needs bounded original source-quote evidence")
+            require(len({stable_json_sha256(row) for row in evidence}) == len(evidence),
+                    "Duplicate reviewed source evidence")
+            for row in evidence:
+                verify_reviewed_source_quote(corpus, expected, evidence_index, case_id, row)
     return {"status": "ACCEPTED", "reviewed_cases": len(approved),
+            "reviewed_source_supported_cases": len(approved) - len(order_cases),
+            "reviewed_nonsemantic_order_cases": len(order_cases),
+            "case_decisions": [{"case_id": case_id, "decision": row["decision"]}
+                               for case_id, row in approved.items()],
             "reviewed_export_changes": len(material["actual_export_changed_cases"]),
             "first_observed_run_id": observed["run_id"],
             "first_run_authentication": "Exact offline pins supplied by the independent review; no live artifact re-fetch.",
@@ -1482,7 +1558,10 @@ def run_benchmark(args):
             evidence_index = frozen_review_evidence_index(corpus, expected)
             review_gate = {**verify_reviewed_changes(
                 reviewed_manifest, material, corpus, expected, evidence_index,
-                os.environ.get("GITHUB_RUN_ID", "")),
+                os.environ.get("GITHUB_RUN_ID", ""),
+                case_records={"baseline_replay": old_rows, "candidate_replay": current_rows,
+                              "baseline_comparison": before_compared, "candidate_comparison": compared,
+                              "baseline_retention": before_retained, "candidate_retention": retained}),
                 "mode": "pinned_independent_review", "manifest": reviewed_manifest_info}
             shutil.copyfile(repo / reviewed_manifest_info["file"], output / "reviewed-changes-manifest.json")
             (output / "reviewed-changes-manifest.json").chmod(0o600)
@@ -1880,6 +1959,198 @@ def self_test():
             manifest["first_observed_run"]["artifacts"]["review_material"] = {
                 "file": "review-material.json", "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
             return manifest, material, expected, index, old, current, exports
+
+
+        def _bind_order_review(self, manifest, material, records, exports):
+            old, current = records["baseline_replay"], records["candidate_replay"]
+            updated = review_material(old, current, compare_complete_cases(old, current), exports,
+                                      material["baseline_counts"], material["candidate_counts"],
+                                      material["preserved_script_hashes"], material["candidate_runtime_fingerprint"])
+            result = json.loads(json.dumps(manifest))
+            for key in ("baseline_stable_cases_sha256", "candidate_stable_cases_sha256"):
+                result[key] = updated[key]
+            result["expected_counts"] = updated["candidate_counts"]
+            result["changes"] = [{**row, "decision": "nonsemantic_order_only",
+                                  "rationale": "Only the same available-field strings change order; no extracted value, call, score or export changes.",
+                                  "source_evidence": []} for row in updated["changes"]]
+            raw = (json.dumps(updated, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+            result["first_observed_run"]["artifacts"]["review_material"] = {
+                "file": "review-material.json", "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+            return result, updated
+
+        def _order_review_fixture(self, corpus):
+            manifest, material, expected, index, old, _current, _exports = self._review_fixture(corpus)
+            old["case-0000"]["output"]["available"] = ["name", "origin"]
+            current = json.loads(json.dumps(old))
+            current["case-0000"]["output"]["available"] = ["origin", "name"]
+            current["case-0000"]["elapsed_ms"] = 999
+            # The actual client snapshot omits available; its unchanged bytes
+            # are an independent prerequisite, not inferred from set equality.
+            exports = self._review_exports(old, old)
+            compared = {case_id: {"case_id": case_id, "ok": True,
+                                  "canonical": [{"field": "origin", "actual": "Brazil",
+                                                 "expected": "Minas Gerais, Brazil", "status": "review_required"}],
+                                  "additional": [], "ambiguities": [], "unexpected": [],
+                                  "source_facts_truncated": False} for case_id in old}
+            retained = {case_id: {"case_id": case_id, "source_facts_truncated": False,
+                                  "checks": [{"assertion_index": 0, "status": "all_evidence_retained",
+                                              "frozen_evidence": [{"quote": "Original public fact"}]}]}
+                        for case_id in old}
+            records = {"baseline_replay": old, "candidate_replay": current,
+                       "baseline_comparison": compared, "candidate_comparison": json.loads(json.dumps(compared)),
+                       "baseline_retention": retained, "candidate_retention": json.loads(json.dumps(retained))}
+            material["candidate_counts"] = json.loads(json.dumps(material["baseline_counts"]))
+            manifest, material = self._bind_order_review(manifest, material, records, exports)
+            return manifest, material, expected, index, records, exports
+
+        def test_order_only_review_accepts_exact_permutation_without_accuracy_claim(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, records, exports = self._order_review_fixture(root)
+                result = verify_reviewed_changes(manifest, material, root, expected, index, "789",
+                                                 case_records=records)
+                self.assertEqual(result["status"], "ACCEPTED")
+                self.assertEqual(result["reviewed_source_supported_cases"], 0)
+                self.assertEqual(result["reviewed_nonsemantic_order_cases"], 1)
+                self.assertEqual(result["reviewed_export_changes"], 0)
+                self.assertEqual(result["case_decisions"], [{"case_id": "case-0000",
+                                                             "decision": "nonsemantic_order_only"}])
+                self.assertEqual(material["baseline_counts"], material["candidate_counts"])
+                helper = {"passed": 603, "failures": [], "attempted_external_operations": []}
+                self.assertEqual(benchmark_change_blockers(material, result, [], [], exports, helper), [])
+
+        def test_order_only_review_requires_complete_actual_replay_and_scorer_maps(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, records, _exports = self._order_review_fixture(root)
+                with self.assertRaises(ValueError):
+                    verify_reviewed_changes(manifest, material, root, expected, index, "789")
+                for mutation in ("missing_map", "missing_case", "wrong_case", "wrong_inventory", "extra_map"):
+                    bad = json.loads(json.dumps(records))
+                    if mutation == "missing_map":
+                        del bad["candidate_retention"]
+                    elif mutation == "missing_case":
+                        del bad["candidate_comparison"]["case-0001"]
+                    elif mutation == "wrong_case":
+                        bad["baseline_retention"]["case-0000"]["case_id"] = "case-0001"
+                    elif mutation == "wrong_inventory":
+                        bad["candidate_replay"]["case-0001"]["calls"].append({"url": "https://unexpected.test/"})
+                    else:
+                        bad["unknown"] = {}
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        verify_reviewed_changes(manifest, material, root, expected, index, "789",
+                                                case_records=bad)
+
+        def test_order_only_review_rejects_membership_duplicates_nonstring_and_unchanged_lists(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, records, exports = self._order_review_fixture(root)
+                for before, after in (
+                        (["name", "origin"], ["producer", "name"]),
+                        (["name", "origin"], ["origin", "origin"]),
+                        (["name", "name", "origin"], ["origin", "name", "name"]),
+                        (["name", 1], [1, "name"]),
+                        (["name", ""], ["", "name"]),
+                        (["name", "origin"], ["name", "origin"]),
+                        (["name"], ["name"]),
+                        (["name", "origin"], "origin,name")):
+                    bad = json.loads(json.dumps(records))
+                    bad["baseline_replay"]["case-0000"]["output"]["available"] = before
+                    bad["candidate_replay"]["case-0000"]["output"]["available"] = after
+                    rebound, observed = self._bind_order_review(manifest, material, bad, exports)
+                    with self.subTest(before=before, after=after), self.assertRaises(ValueError):
+                        verify_reviewed_changes(rebound, observed, root, expected, index, "789",
+                                                case_records=bad)
+
+        def test_order_only_review_rejects_other_whole_case_changes_even_with_rebound_hashes(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, records, exports = self._order_review_fixture(root)
+                for mutation in ("field", "source_fact", "call", "fixture_call", "identity", "status", "extra_output"):
+                    bad = json.loads(json.dumps(records))
+                    row = bad["candidate_replay"]["case-0000"]
+                    if mutation == "field":
+                        row["output"]["fields"]["origin"] = "Colombia"
+                    elif mutation == "source_fact":
+                        row["output"]["source_facts"][0]["value"] = "Different source evidence"
+                    elif mutation == "call":
+                        row["calls"][0]["limit"] = 2000000
+                    elif mutation == "fixture_call":
+                        row["fixture_calls"].append("unexpected_fixture_call")
+                    elif mutation == "identity":
+                        row["source_url"] = "https://other.test/products/case-0000"
+                    elif mutation == "status":
+                        row["status"] = 500
+                    else:
+                        row["output"]["unlisted"] = True
+                    rebound, observed = self._bind_order_review(manifest, material, bad, exports)
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        verify_reviewed_changes(rebound, observed, root, expected, index, "789",
+                                                case_records=bad)
+
+        def test_order_only_review_rejects_any_per_case_scorer_or_retention_change(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, records, _exports = self._order_review_fixture(root)
+                for mutation in ("canonical", "additional", "ambiguity", "unexpected", "truncated",
+                                 "retention_status", "retention_evidence"):
+                    bad = json.loads(json.dumps(records))
+                    comparison = bad["candidate_comparison"]["case-0000"]
+                    retention = bad["candidate_retention"]["case-0000"]
+                    if mutation == "canonical":
+                        comparison["canonical"][0]["status"] = "exact_equivalent"
+                    elif mutation == "additional":
+                        comparison["additional"].append({"status": "literal_present"})
+                    elif mutation == "ambiguity":
+                        comparison["ambiguities"].append({"status": "withheld"})
+                    elif mutation == "unexpected":
+                        comparison["unexpected"].append("producer")
+                    elif mutation == "truncated":
+                        retention["source_facts_truncated"] = True
+                    elif mutation == "retention_status":
+                        retention["checks"][0]["status"] = "some_evidence_retained"
+                    else:
+                        retention["checks"][0]["frozen_evidence"][0]["quote"] = "Changed quote"
+                    with self.subTest(mutation=mutation), self.assertRaises(ValueError):
+                        verify_reviewed_changes(manifest, material, root, expected, index, "789",
+                                                case_records=bad)
+
+        def test_order_only_review_rejects_changed_export_bytes_and_misleading_decisions(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, records, exports = self._order_review_fixture(root)
+                changed_exports = json.loads(json.dumps(exports))
+                changed_exports["records"][0]["sha256"] = "f" * 64
+                changed_exports["records"][0]["equal"] = False
+                changed_exports["equal"] = 602
+                changed_exports["errors"] = [{"case_id": "case-0000", "kind": "export_changed"}]
+                rebound, observed = self._bind_order_review(manifest, material, records, changed_exports)
+                with self.assertRaises(ValueError):
+                    verify_reviewed_changes(rebound, observed, root, expected, index, "789",
+                                            case_records=records)
+                for decision, evidence in (("unknown", []), ("source_supported_improvement", []),
+                                           ("nonsemantic_order_only", [{"quote": "Irrelevant source claim"}])):
+                    bad = json.loads(json.dumps(manifest))
+                    bad["changes"][0]["decision"] = decision
+                    bad["changes"][0]["source_evidence"] = evidence
+                    with self.subTest(decision=decision), self.assertRaises(ValueError):
+                        verify_reviewed_changes(bad, material, root, expected, index, "789",
+                                                case_records=records)
+
+        def test_order_only_acceptance_cannot_waive_losses_export_fidelity_or_offline_checks(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary).resolve()
+                manifest, material, expected, index, records, exports = self._order_review_fixture(root)
+                accepted = verify_reviewed_changes(manifest, material, root, expected, index, "789",
+                                                   case_records=records)
+                helper = {"passed": 603, "failures": [], "attempted_external_operations": []}
+                for exact, retention in (([{"case_id": "case-0000"}], []),
+                                         ([], [{"case_id": "case-0000"}])):
+                    self.assertTrue(benchmark_change_blockers(material, accepted, exact, retention, exports, helper))
+                self.assertTrue(benchmark_change_blockers(material, accepted, [], [], {**exports, "exports": 602}, helper))
+                self.assertTrue(benchmark_change_blockers(material, accepted, [], [], exports,
+                                                          {**helper, "attempted_external_operations": ["socket.connect"]}))
+
 
         def test_reviewed_changes_accept_only_exact_source_supported_case_and_export(self):
             with tempfile.TemporaryDirectory() as temporary:

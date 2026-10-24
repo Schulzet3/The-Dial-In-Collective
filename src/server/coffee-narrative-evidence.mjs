@@ -57,9 +57,69 @@ function collectiveCredit(raw){
   /^\p{Lu}[\p{L}\p{M}'’-]+(?:\s+\p{Lu}[\p{L}\p{M}'’-]+){0,5}\s+(?:[Ff]arm|[Ee]state)$/u.test(value);
  return group||namedFarm?value:'';
 }
+function productionOperatorCredit(raw){
+ // A named operator's alias is part of its credit; its descriptive
+ // parenthesis and following location are retained in the source sentence.
+ const entity=raw.trim().match(/^(.{3,120}?\b(?:[Cc]ooperative(?:\s+[Ss]ociety)?|[Cc]o-op|[Aa]ssociation)(?:\s+\([A-Z][A-Z\d.&'’ -]{1,24}\))?)(?=\s+\((?:a|an)\s+[^)]{1,120}\)|\s+(?:in|at|near)\s+\p{Lu}|$)/u);
+ return collectiveCredit(entity?entity[1]:raw);
+}
+function currentProducerSentence(value){
+ return factualSentence(value)&&!/\b(?:formerly|previously|used to|until|prior to|(?:in|during|before)\s+(?:19|20)\d{2}|if|unless|when|whether|depending|provided|may|might|could|would|should|can)\b/i.test(value);
+}
+function explicitFarmList(paragraph){
+ const lines=producerSentences(paragraph),found=[];
+ for(let index=0;index<lines.length-1;index++){
+  const introduction=lines[index],line=lines[index+1];
+  if(!currentProducerSentence(introduction)||!currentProducerSentence(line))continue;
+  const counted=introduction.match(/^(?:your|this|our|the current)\s+coffee\s+is\s+comprised\s+of\s+(two|three|four|five|six|[2-6])\s+(?:different\s+)?farms\b/i);
+  const listed=line.match(/^(?:the\s+)?(?:small\s+)?variations?\s+in\s+flavou?r\s+from\s+(?:the\s+)?([^.!?;]{3,220})\s+farms\s+combine\b/i);
+  if(!counted||!listed)continue;
+  const names=listed[1].split(/\s*,\s*|\s+(?:and|&)\s+/).map(value=>value.replace(/^(?:and|&)\s+/,'').trim()).filter(Boolean);
+  const count=({two:2,three:3,four:4,five:5,six:6})[counted[1].toLowerCase()]||Number(counted[1]);
+  const literalName=new RegExp('^'+NAME_WORD+'(?:\\s+(?:'+PARTICLE+'\\s+){0,2}'+NAME_WORD+'){0,6}$','u');
+  if(names.length!==count||names.some(name=>!literalName.test(name))||
+    new Set(names.map(name=>name.normalize('NFKC').toLowerCase())).size!==count)continue;
+  found.push({names,value:names.join('; ')});
+ }
+ return found;
+}
+function selectedProducerSubject(subject,name){
+ const normalized=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu,' ').trim();
+ const current=normalized(subject);
+ if(/^(?:this|our|the current) (?:coffee|lot|offering)$/.test(current))return true;
+ const named=current.replace(/^(?:our|the) /,'');
+ const selected=normalized(name).replace(/^(?:our|the) /,'');
+ return named.split(' ').length>=2&&(named===selected||selected===named+' estate'||selected===named+' farm');
+}
+function cooperativeAliasCredits(paragraphs){
+ const result=new Map(),aliases=new Map();
+ const intro=new RegExp(String.raw`\b(?:farmers|growers|producers)\s+have\s+joined\s+together\s+to\s+(?:create|form)\s+the\s+((?:`+NAME_WORD+String.raw`\s+){1,7}(?:Cooperative|Co-op)),\s+(?:better\s+)?known\s+as\s+([A-Z][A-Z\d]{2,30})(?=[.!?;]|\s*$)`,'u');
+ // A formation story alone is not a current production credit. The same
+ // explicitly defined alias must presently oversee the coffee's production.
+ for(const [index,paragraph] of paragraphs.entries()){
+  for(const line of producerSentences(paragraph)){
+   if(!currentProducerSentence(line))continue;
+   const match=line.match(intro);if(!match)continue;
+   const names=aliases.get(match[2])||new Set();names.add(match[1]);aliases.set(match[2],names);
+   const oversight=new RegExp('^'+match[2]+String.raw`\s+(?:carefully\s+)?(?:supervises|oversees)\s+all\s+phases\s+of\s+(?:the\s+)?coffee\s+production(?:\s+and\s+processing)?\b`,'u');
+   let bounded='';
+   for(const candidate of paragraphs.slice(index,index+4)){
+    if(bounded.length+candidate.length>2400)break;
+    bounded+=candidate+' ';
+    if(producerSentences(candidate).some(sentence=>currentProducerSentence(sentence)&&oversight.test(sentence)))
+     result.set(match[2],match[2]);
+   }
+  }
+ }
+ for(const [alias,names] of aliases)if(names.size!==1)result.delete(alias);
+ return [...result.values()];
+}
 function foundGrower(paragraphs,name=''){
- const found=new Map(),collectives=new Map(),lotCredits=new Map();
+ const found=new Map(),collectives=new Map(),lotCredits=new Map(),farmLists=new Map(),operatorRelations=new Map();
+ for(const alias of cooperativeAliasCredits(paragraphs))collectives.set(alias.normalize('NFKC').toLowerCase(),alias);
  for(const paragraph of paragraphs){
+  for(const list of explicitFarmList(paragraph))
+   farmLists.set(list.names.map(value=>value.normalize('NFKC').toLowerCase()).join('|'),list);
   // A current-coffee introduction followed by the same person's farming
   // sentence supplies a grower, without treating a city after "from" as one.
   if(/\b(?:She|He|They)\s+(?:farms?|grows?|cultivates?|produces?)\b/.test(paragraph)){
@@ -99,6 +159,13 @@ function foundGrower(paragraphs,name=''){
    }
   }
   const currentNewProducer=!/\b(?:formerly|previously|used to|until|(?:in|during|before)\s+(?:19|20)\d{2})\b/i.test(sentence);
+  // Keep a qualified farmer group when this exact selected coffee is
+  // explicitly sourced from its named factory. A shortened title may omit
+  // only a trailing farm/estate role word, never a different named coffee.
+  const factorySource=currentProducerSentence(sentence)&&sentence.match(/^(.{3,160}?)\s+(?:comes(?:\s+to\s+us)?|is\s+sourced)\s+from\s+(?:the\s+)?((?:(?:dedicated|smallholder|local|independent)\s+)?farmers\s+of\s+(?:the\s+)?(.{2,100}?\s+Factory))(?=[.!?;]|$)/i);
+  if(factorySource&&selectedProducerSubject(factorySource[1],name)&&
+    new RegExp('^'+NAME_WORD+'(?:\\s+(?:'+PARTICLE+'\\s+){0,2}'+NAME_WORD+'){0,5}\\s+Factory$','u').test(factorySource[3]))
+   collectives.set(factorySource[2].normalize('NFKC').toLowerCase(),factorySource[2]);
   // A named actor handling this coffee's cherries in a tank is an explicit
   // production credit. Oxygen-free processing does not deny that actor.
   const tankOperator=attributionContext.match(new RegExp('\\b'+PERSON+'\\s+sealed\\s+[^.!?;]{0,80}\\bcherries\\s+in\\s+(?:a|the)\\s+(?:sealed\\s+)?tank\\b','u'));
@@ -172,10 +239,18 @@ function foundGrower(paragraphs,name=''){
   if(offeringCredit)collectives.set(offeringCredit.normalize('NFKC').toLowerCase(),offeringCredit);
   // These describe a named production organization, not an unnamed group
   // inferred from a country. Keep the literal station/co-op attribution.
-  if(!/\b(?:formerly|previously|used to|until|prior to|other stations?|different stations?)\b/i.test(sentence)){
+  if(currentProducerSentence(sentence)&&!/\b(?:other stations?|different stations?)\b/i.test(sentence)){
    const operator=sentence.match(/\b(?:washing stations?|wet mills?|dry mills?)\s+(?:are\s+)?(?:run|operated|managed)\s+by\s+(?:the\s+)?([^.!?;]{3,155}?)(?=,\s|\s+(?:since|which|that)\b|[.!?;]|$)/i);
-   const operatorCredit=operator&&collectiveCredit(operator[1]);
+   const operatorCredit=operator&&productionOperatorCredit(operator[1]);
    if(operatorCredit)collectives.set(operatorCredit.normalize('NFKC').toLowerCase(),operatorCredit);
+   const relation=sentence.match(new RegExp('^('+NAME_WORD+'(?:\\s+(?:'+PARTICLE+'\\s+){0,2}'+NAME_WORD+'){0,5})\\s+is\\s+one\\s+of\\s+(?:two|three|four|five|six|seven|eight|nine|[2-9])\\s+(washing stations|wet mills|dry mills)\\s+(?:run|operated|managed)\\s+by\\s+(?:the\\s+)?([^.!?;]{3,155})(?=[.!?;]|$)','u'));
+   const relationOperator=relation&&productionOperatorCredit(relation[3]);
+   const titleWords=value=>' '+String(value).normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu,' ').trim()+' ';
+   if(relationOperator&&titleWords(name).includes(titleWords(relation[1]))){
+    const stationCredit=relation[1]+' '+relation[2].replace(/s$/,'');
+    const value=stationCredit+'; '+relationOperator;
+    operatorRelations.set(value.normalize('NFKC').toLowerCase(),{value,parts:[stationCredit,relationOperator]});
+   }
    const station=sentence.match(new RegExp('^('+FULL_NAME+')(?:,\\s*(?:located|situated)\\s+in\\s+[^,.!?;]{2,100},)?\\s+is\\s+an?\\s+(washing station|wet mill|dry mill)\\b','u'));
    if(station){
     const value=station[1]+' '+station[2];
@@ -217,6 +292,18 @@ function foundGrower(paragraphs,name=''){
  }
  // Multiple current-lot credits cannot be resolved by their HTML order.
  if(found.size)return found.size===1?[...found.values()][0]:'';
+ if(farmLists.size){
+  if(farmLists.size!==1)return '';
+  const list=[...farmLists.values()][0],members=new Set(list.names.map(value=>value.normalize('NFKC').toLowerCase()));
+  if([...collectives.keys()].some(value=>!members.has(value)))return '';
+  return list.value;
+ }
+ if(operatorRelations.size){
+  if(operatorRelations.size!==1)return '';
+  const relation=[...operatorRelations.values()][0],parts=new Set(relation.parts.map(value=>value.normalize('NFKC').toLowerCase()));
+  if([...collectives.keys()].some(value=>!parts.has(value)))return '';
+  return relation.value;
+ }
  return collectives.size===1?[...collectives.values()][0]:'';
 }
 const TECHNIQUE=/\b(?:carbonic maceration|anaerobic fermentation|co[\s-]?ferment(?:ation|ed)?|lactic fermentation|thermal shock|double fermentation|inoculated fermentation)\b/i;
