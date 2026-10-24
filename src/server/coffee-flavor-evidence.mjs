@@ -354,8 +354,15 @@ function frenchProductSensoryNotes(page,clean){
 const PREPARATION_QUALIFIED_FLAVOR=/\b(?:(?:when|if|once|after|before|while)\s+(?:(?:(?:it|this coffee|the coffee|this cup)\s+is|it['’]s)\s+)?(?:served|prepared|brewed|mixed|combined|diluted|layered|cooled|heated|warmed)|(?:when|if|once|after|before|while)\s+(?:you|we)\s+(?:add|mix\s+in|stir\s+in)\s+(?:(?:some|extra|a\s+little)\s+)?milk|(?:served|prepared|brewed|mixed|combined|diluted|layered)\s+with\s+milk(?![ -]+chocolate\b))\b/i;
 const CONDITIONAL_FLAVOR=/\b(?:if|unless|when|after|before|while|once|until|because|only|may|might|could|would|should|can|depending|served|prepared|brewed|added|adding|diluted|steeped|cooled|heated|warmed|either|or|otherwise|alternatively|instead)\b/i;
 function unconditionalFlavorPrefix(value){
- const clauses=value.split(';'),qualified=clauses.findIndex(text=>PREPARATION_QUALIFIED_FLAVOR.test(text));
- return qualified<0?value:clauses.slice(0,qualified).join(';').trim();
+ // Semicolons and an explicit additive-notes relation can qualify only a
+ // later clause. Slice the original prefix so earlier additions stay intact.
+ let start=0,previousBoundary=0;
+ for(const boundary of value.matchAll(/;|\s+with\s+additional\s+(?:sweet\s+)?notes?\s+of\s+/gi)){
+  if(PREPARATION_QUALIFIED_FLAVOR.test(value.slice(start,boundary.index)))
+   return value.slice(0,previousBoundary).trim();
+  previousBoundary=boundary.index;start=boundary.index+boundary[0].length;
+ }
+ return PREPARATION_QUALIFIED_FLAVOR.test(value.slice(start))?value.slice(0,previousBoundary).trim():value;
 }
 function layeredComponentFlavor(sentence,clean){
  if(sentence.length>450||CONDITIONAL_FLAVOR.test(sentence))return '';
