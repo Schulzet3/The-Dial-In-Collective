@@ -1,3 +1,9 @@
+## October 24, 2026 UTC — Deferred combined release (CURRENT)
+
+The owner paused publication after closing GitHub #5/#10/#12, asking to wait until the 603-coffee extractor #33 is READY. **No Netlify release now; a new explicit publish instruction will be needed for the future combined READY queue.** Production SQL versions 20261024052303, 20261024052411 and 20261024052419 are already applied under different versions than Git source filenames; never replay automatically. Queue #5 is READY **for unpublished Git source only**, while SQL is already live. Queue #12 READY for frontend; #33 TESTING. See [full verified deferred release handoff](RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md). Older dates/approval examples below are history, not new authorization.
+
+---
+
 # 2026-10-23 — Actual release receipt (supersedes older dated READY/TESTING snapshots below)
 - ONE owner-authorized batch DIC-20261022-READY-QUEUE-04 delivered all 11 READY items. Current published tested source `7156f0d3f1b960775c9256e7fcf92e0b89be8cc6`, release commit `f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f`, Netlify production deploy `6adabcecd4a2a68e94cdc09a` READY/current. GitHub controller run 39886055063 success. Three approved SQL functions migrated, backend data and grants verified. `docs/RELEASE_QUEUE.json` has **zero pending READY items** and 11 immutable historical DEPLOYED receipts; previous October 22 provisional notes below are history, not present status.
 - Main encrypted nightly backup checkout pin now follows the newly published release. Postrelease GitHub encrypted-export run 39886382969 SUCCESS, ciphertext artifact 12472896712; its independent offsite delivery is not claimed. Earlier prerelease Google Drive ciphertext was independently downloaded and SHA verified as part of the actual release. See `docs/PRODUCTION_RELEASE_2026-10-23_READY_QUEUE_VERIFIED.json`.

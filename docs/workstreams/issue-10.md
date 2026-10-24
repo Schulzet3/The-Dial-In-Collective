@@ -167,3 +167,7 @@ Explicit owner approval for a release to close #5/#10/#12. Supabase production a
 
 ---
 
+
+## October 24, 2026 UTC — Deferred combined release after owner pause
+
+User explicitly stopped further deployment: “Since you've marked the issues closed, you don't need to continue with deployment. I will do a deployment when the extractor changes are ready. Please document your progress so another chat can publish all the pending changes.” No Netlify/release-grant action authorized now. Created authoritative handoff `docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md`; closed unused unverified PR117 unmerged. Live readback: GitHub #5/#10/#12 closed, #33 TESTING, Supabase migrations 20261024052303/20261024052411/20261024052419 installed and new frontend absent from Netlify; 23 shots/23 notes/2 Community/4 family/10 library/4 preferences intact. Queue source-only correction: #5 READY for as-yet-unpublished Git migration file (SQL already deployed and must not replay); #12 READY web, #33 TESTING. Next owner-approved publication only after extractor's immutable 603/201 benchmark acceptance, exact CI, queue and provider preflight; no consent assumed from earlier publish grant. This is documentation and queue reconciliation only, not a deployment.
