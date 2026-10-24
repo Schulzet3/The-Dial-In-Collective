@@ -154,6 +154,27 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; current explicit owner GitHub write and Actions authorization.",
       "notes": "Candidate8 full frozen audit complete; four prior omissions repaired. Owner explicitly permits GitHub use under the no-additional-cost requirement and resolves the previous rejected write. Normal CI/READY/release gates unchanged. Concurrent upstream e6d8745, separate Issue5 READY migration, acceptance decisions and exact historical release test preserved. Pending PR/merge/actualCI; no publication/provider/member-data change. Newer concurrent Community source9135e06 is reconciled; its independent TESTING queue item remains unchanged. Shared mutation flow retains both audit session/receipt protections and Community evidence reattachment.\nConcurrent Issue33 repair was integrated before PR118; PR118 closed without merge to preserve accepted source. Actual repaired source at 1800187c, no production site deployment approved."
+    },
+    {
+      "id": "DIC-Q-5-deployed-sql-source-carryover",
+      "issue": 5,
+      "pr": 107,
+      "title": "Already-applied retry SQL migration: unpublished Git source carryover",
+      "state": "TESTING",
+      "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
+      "scope_paths": [
+        "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
+      ],
+      "tests": [
+        "Read-only Supabase migration history 2026-10-24 confirms applied migration 20261024052303_dic_pending_retry_http_conflict (repository file uses 20261024034800 prefix). Original Issue5 DEPLOYED queue item and receipts are authoritative for provider application; no new migration application is permitted or needed.",
+        "Unpublished Git source path is tracked separately because source-intake excludes DEPLOYED items, not because SQL requires redeployment."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Already applied to production under provider migration version 20261024052303. Source file remains in unpublished web Git delta; reconcile its exact-source inclusion and avoid replay before any future authorized batch publication."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5; prior deployed receipt DIC-Q-5-pending-retry-http-conflict; current owner authorization to reconcile outstanding GitHub records.",
+      "notes": "Source-tracking bookkeeping only, not a second migration or a second feature. Original DIC-Q-5-pending-retry-http-conflict stays DEPLOYED. This non-READY companion prevents false intake gaps while explicitly blocking duplicate SQL application or unapproved publication."
     }
   ],
   "history": [

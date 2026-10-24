@@ -1,3 +1,8 @@
+## October 24 UTC — Source intake ledger reconciled without duplicate production SQL
+Independent Issue33 merged-source public run 40066375905 SUCCESS; the public-source sanitizer now preserves both Nomad and Circulor evidence. Issue5 production migration was independently observed as applied in Supabase migration history under version 20261024052303. Source-only queue carrier DIC-Q-5-deployed-sql-source-carryover is TESTING and explicitly blocks any duplicate application of the corresponding unpublished Git migration; original Issue5 item stays DEPLOYED. No website publication. Issue33 queue remains TESTING pending complete exact-source approval/CI receipts.
+
+---
+
 ## October 24, 2026 UTC — Issue #33 live source parity fixed, final merged-source gates TESTING
 
 PR #109 merged previously. Concurrent source-parity remediation for Nomad/Circulor now included in development at 1800187cf0980f30d555d71134bde3c0f8e059a7, with live public acceptance 40065961167 passing on its reviewed work source. Separate variant 40065995754 also passed all ten source targets. Current development exact-source verification is being re-run with [dic-completeness-probe], with no extractor runtime, member, production, or deployment modification. DIC-Q-33-expanded-603-audit is TESTING pending exact merged-source acceptance and approval/continuity check. Approval failure traced to separately deployed Issue5 migration queue intake (40066162962), not misreported as extractor failure. No publication authorized.
