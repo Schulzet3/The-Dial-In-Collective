@@ -123,3 +123,7 @@ The first retry fixed the site graph by explicitly copying site/lib/community-ev
 ## CI browser recovery — October 24 UTC
 
 PR108 post-allowlist exact tests passed all Node/build and SQL, but 390px browser QA bundle transpiler required the new community-evidence module registered before engine. It had initialized `Modules.engine` before `Modules.community_evidence`, producing a JavaScript destructuring error, not an application product failure. Corrected the explicitly ordered browser module list and added the optional read-only Community RPC fixture. This does not loosen test assertions. Rerun exact-source CI; staging only.
+
+## October 24, 2026 — scoped release candidate for #5/#10/#12
+
+Owner authorized one release needed to finish these issues. Development branch 2f4668f includes separately TESTING extractor #33 (merged PR109), so the existing release gate correctly rejects publishing its full tree. This isolated source builds from the post-PR108 9135e06 ancestor and carries only in-scope PR110/PR113 changes; unready extractor work remains untouched on development. This commit applies PR110 client provenance-only hunks to existing source; subsequent migration/tests integration and CI are pending. No Netlify/Supabase publication or data writes. Preserve #5 READY, single visible recipe, owner isolation, offline queues and no new paid services. Do not mark source READY until scoped exact-source CI passes.

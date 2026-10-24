@@ -11,6 +11,9 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
   ['Basket Dose',shot.snapshot?.basketDoseG!=null?`${shot.snapshot.basketDoseG} g`:null],
   ['Feed',feedLabel(shot.feedMode)]
  ].filter(([,value])=>value!=null&&value!=='');
+ const provenance=shot.recommendationContext;
+ const used=Array.isArray(provenance?.used_controls)?provenance.used_controls.filter(x=>['grind','temperature'].includes(x)):[];
+ const source=provenance?.kind==='member_selected_starting_reference'&&used.length?String(provenance.source_label||'Starting recommendation'):null;
  const canEdit=!shot.cloudPending;
  const canChoose=canEdit&&shot.dialedIn&&shot.setupVersionId===activeVersionId;
  return `<section class="shot">
@@ -28,6 +31,7 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
   ${shot.notes?`<p class="note shot-note">${e(shot.notes)}</p>`:''}
   ${expanded?`<div class="shot-body">
    ${chips(shot.tasteScales)}${radar(shot.tasteScales)}
+   ${source?`<p class="helper" data-recommendation-source>Used ${e(used.join(' and '))} from: ${e(source)}. A saved starting reference, not independent source verification.</p>`:''}
    ${context.length?`<dl class="shot-record-context">${context.map(([label,value])=>`<div><dt>${e(label)}</dt><dd>${e(value)}</dd></div>`).join('')}</dl>`:''}
    ${canEdit?`<div class="shot-actions">
     ${button('Edit','edit',`data-id="${e(shot.id)}"`,'primary compact history-edit')}
