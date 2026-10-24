@@ -137,8 +137,22 @@ function withoutRelatedProducts(page,onTruncated){
   ranges.push([removeStart,end]);coveredUntil=end;
  }
  if(!ranges.length)return page;
+ // Some real WooCommerce pages close a `section.related.products` too
+ // early, leaving subsequent <li class=product> cards as orphan siblings.
+ // Their flavor tags must not become selected-product evidence. Extend a
+ // known related section only when the *very next* sibling is explicitly
+ // another product card, and stop at the next named genuine product section
+ // (e.g. "Our Story"). Do not trim subsequent selected-product content.
+ const completeRanges=ranges.map(([start,end])=>{
+  const nextMarkup=page.slice(end,end+1200).trimStart();
+  const orphanCard=/^(?:<\/(?:li|ul|div)>\s*){0,5}<li\b[^>]{0,1100}\bclass\s*=\s*["'][^"']*\bproduct\b/i.test(nextMarkup);
+  const actualRelated=/^<section\b[^>]{0,1000}\bclass\s*=\s*["'][^"']*\brelated\b[^"']*\bproducts?\b/i.test(page.slice(start,start+1100));
+  if(!orphanCard||!actualRelated)return [start,end];
+  const resume=headings.find(item=>item.start>=end&&item.start-end<125000&&PRODUCT_SECTION.test(item.title));
+  return [start,resume?.start??Math.min(page.length,end+125000)];
+ });
  const chunks=[];let cursor=0;
- for(const [start,end] of ranges.sort((a,b)=>a[0]-b[0])){
+ for(const [start,end] of completeRanges.sort((a,b)=>a[0]-b[0])){
   if(end<=cursor)continue;
   if(start>cursor)chunks.push(page.slice(cursor,start));
   chunks.push(' ');cursor=end;

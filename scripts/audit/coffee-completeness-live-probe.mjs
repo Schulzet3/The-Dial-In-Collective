@@ -14,7 +14,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
+import {fixtureCoffeeHtml as fixtureHtml,sanitizePublicJson as sanitizeJson} from './coffee-fixture-sanitize.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
 const ORIGINAL_URL=SWEET_URL+'?srsltid=AYCX9vKHwEAbPcEyS19XuoWD67cGIMJu47B764EfHZK_IkJ7c52nQlGl';
@@ -82,38 +82,6 @@ const publicUrl=raw=>{
   return url.toString();
  }catch{return '';}
 };
-const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
-function sanitizeJson(value){
- return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
-  .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
-}
-function fixtureHtml(html){
- const compact=compactCoffeeProductHtml(html);
- if(!compact)return '';
- const chunks=[];let cursor=0;
- for(const block of rawElements(compact)){
-  chunks.push(compact.slice(cursor,block.start));
-  const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
-  if(type&&block.closed){
-   const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
-   catch{/* Invalid script data is not preserved as executable markup. */}
-  }
-  cursor=block.end;
- }
- chunks.push(compact.slice(cursor));
- // WooCommerce and Shopify can place the selected product title, variant
- // data, or specifications inside an add-to-cart form. Keep those children;
- // remove only the form shell and controls that cannot supply page facts.
- // The extractor already excludes selects, so country/grind options cannot
- // become evidence. Every capture still records exact extraction parity.
- return removeElements(chunks.join(''),['iframe','noscript','select','textarea'])
-  .replace(/<\/?form\b[^<>]{0,8000}>/gi,' ')
-  .replace(/<input\b[^<>]{0,4000}>/gi,'')
-  .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
-  .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
-  .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
-}
 function assess(target,result){
  const gaps=[],checked=[];
  if(target.negative){
