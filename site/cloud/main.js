@@ -780,7 +780,21 @@ class CloudApp {
    if(a==='edit-coffee'){if(this.pending.length)throw new Error('Finish syncing before editing coffee details.');this.showEditCoffee(id);return;}
    if(a==='edit'){if(this.pending.length)throw new Error('Finish syncing before editing existing shots.');const sh=this.state.shots.find(x=>x.id===id);this.showLog(sh.coffeeId,sh);return;}
    if(a==='rate'){this.readDraft();this.draft.tasteScales[target.dataset.key]=Number(target.dataset.value);sheet.querySelector('#ratings').innerHTML=scales(this.draft.tasteScales);const alert=sheet.querySelector('[role=alert]');if(alert)alert.textContent='';return;}
-   if(a==='use-grind'||a==='use-temp'){this.readDraft();const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});if(a==='use-grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;else{this.draft.tempC=r.tempC;sheet.querySelector('[name=temperature]').value=C.tempDisplay(r.tempC,this.logUnit);}this.readDraft();return;}
+   if(a==='use-grind'||a==='use-temp'){
+    this.readDraft();
+    const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});
+    const control=a==='use-grind'?'grind':'temperature';
+    if(control==='grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;
+    else{this.draft.tempC=r.tempC;sheet.querySelector('[name=temperature]').value=C.tempDisplay(r.tempC,this.logUnit);}
+    this.draft.recommendationContext={
+      source_label:String(r.source||'Starting recommendation').slice(0,90),
+      used_controls:[...new Set([...(this.draft.recommendationContext?.used_controls||[]),control])],
+      ...(r.communityEvidence?{community_tier:r.communityEvidence.tier,
+       contributor_count:r.communityEvidence.contributorCount,
+       shot_count:r.communityEvidence.shotCount}: {})
+    };
+    this.readDraft();return;
+   }
    if(a==='switch'){this.show('Your Workspaces',this.state.setups.map(x=>`<div class="switch-row"><div class="switch-info"><strong>${e(x.name)}</strong>${x.id===this.state.activeSetupId?'<small>Current Setup</small>':''}</div><div class="switch-actions">${button('Use','choose-setup',`data-id="${e(x.id)}"`,'secondary compact')}${button('Rename','rename-setup',`data-id="${e(x.id)}"`,'ghost compact')}</div></div>`).join(''));return;}
    if(a==='choose-setup'){await this.mutate('select_setup',{setup_id:id,expected_revision:this.raw.preferences.revision},{onlineOnly:true});this.expanded.clear();const pin=M.workspace(this.state).currentCoffeeId;if(pin)this.expanded.add(pin);sheet.close();this.render();return;}
    if(a==='style'){const p=M.coffeeState(this.state,id);this.styleCoffee=id;this.styleRevision=this.raw.workspaceCoffees.find(x=>x.library_entry_id===id&&x.setup_version_id===M.activeVersion(this.state).id)?.revision||0;this.show('Shot Style',`<form id=style>${select('Style','style',C.STYLES.filter(s=>s!=='Custom'),p.style)}<p class="helper space-top">Styles are guidelines, not pass/fail rules.</p><button class="primary full">Use Style</button></form>`);return;}
