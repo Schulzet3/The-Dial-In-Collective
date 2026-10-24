@@ -139,6 +139,38 @@ function fixtureHtml(html){
   .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
   .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
 }
+
+function fixtureStageDiagnostics(html,sourceUrl,original){
+ const compact=compactCoffeeProductHtml(html);
+ const chunks=[];let cursor=0;
+ for(const block of rawElements(compact)){
+  chunks.push(compact.slice(cursor,block.start));
+  const type=block.attributes.match(/\\btype\\s*=\\s*["'](application\\/(?:ld\\+)?json)["']/i)?.[1];
+  if(type&&block.closed){
+   const id=block.attributes.match(/\\bid\\s*=\\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
+   catch{}
+  }
+  cursor=block.end;
+ }
+ chunks.push(compact.slice(cursor));
+ const scripts=chunks.join('');
+ const controls=removeElements(scripts,['iframe','noscript','select','textarea']);
+ const formless=controls.replace(/<\\/?form\\b[^<>]{0,8000}>/gi,' ');
+ const inputless=controls.replace(/<input\\b[^<>]{0,4000}>/gi,'');
+ const safeAttrs=s=>s
+  .replace(/\\s(?:on[a-z]+|nonce)\\s*=\\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\\s>]{1,1000})/gi,'')
+  .replace(/\\b(href|src)\\s*=\\s*(["'])\\s*javascript:[^"']{0,8000}\\2/gi,'$1="#"')
+  .replace(/<meta\\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
+ const stages=[['json_script_rewrite_only',scripts],['drop_form_controls',controls],
+  ['drop_form_shell',formless],['drop_inputs',inputless],['privacy_attr_guards',safeAttrs(controls)],
+  ['privacy_form_shell',safeAttrs(formless)],['privacy_inputs',safeAttrs(inputless)]];
+ return stages.map(([step,fixture])=>{
+  const replay=extractPublicCoffeeFacts(fixture,{source_url:sourceUrl});
+  return {step,parity:isDeepStrictEqual(original,replay),...fixtureDifference(original,replay)};
+ });
+}
+
 function assess(target,result){
  const gaps=[],checked=[];
  if(target.negative){
@@ -217,7 +249,10 @@ async function probe(target){
    const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
    const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
-   if(!record.sanitization_preserves_html_extraction)record.sanitization_difference=fixtureDifference(original,replay);
+   if(!record.sanitization_preserves_html_extraction){
+    record.sanitization_difference=fixtureDifference(original,replay);
+    record.sanitization_stages=fixtureStageDiagnostics(result.html,result.source_url||url,original);
+   }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
