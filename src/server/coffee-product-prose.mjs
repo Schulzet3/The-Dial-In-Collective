@@ -7,7 +7,7 @@ import {productMarkup} from './coffee-product-scope.mjs';
 // precedes it. Return discrete text blocks, never one flattened page sentence.
 const BLOCK=new Set(['p','li','h1','h2','h3','h4','h5','h6','dt','dd','blockquote','figcaption','div','span']);
 const INLINE=new Set(['span','a','em','strong','b','i','small','sup','sub','br','u','s','label','abbr']);
-const EDUCATION=/^(?:what (?:is|are)|how (?:to|does|do)|how we(?:['’]re| are) brewing|understanding|learn about|glossary|(?:variet(?:y|ies)|cultivars?|processing|fermentation|origins?|elevations?) (?:education|explained|guide)|roast (?:levels|types|profiles) explained|our roast (?:levels|types)|(?:light|medium|dark) roast specialists|brew(?:ing)? (?:guide|tips|recommendations|reccs)|customer reviews|reviews)\b/i;
+const EDUCATION=/^(?:what (?:is|are)|how (?:to|does|do)|how we(?:['’]re| are) brewing|understanding|learn about|glossary|coffee education|(?:variet(?:y|ies)|cultivars?|processing|fermentation|origins?|elevations?) (?:education|explained|guide)|roast (?:levels|types|profiles) explained|our roast (?:levels|types)|(?:light|medium|dark) roast specialists|brew(?:ing)? (?:guide|tips|recommendations|reccs)|customer reviews|reviews)\b/i;
 export const isEducationalCoffeeHeading=value=>EDUCATION.test(String(value||''));
 export function productCoffeeProse(html,clean){
  if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function')return [];

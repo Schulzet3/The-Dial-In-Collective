@@ -7,6 +7,7 @@ import {productMarkup} from './coffee-product-scope.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {extractCoffeeGeographyEntityRoles} from './coffee-geography-entity-roles.mjs';
+import {literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
 
 const COUNTRY=String.raw`Panama|Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|Papua New Guinea|DR Congo|United States|Jamaica|Vietnam|China|Taiwan|Laos|Myanmar|Venezuela|Philippines|Malawi|Zambia|Nepal|Australia|Cuba|Dominican Republic|Haiti|Puerto Rico|Timor-Leste|East Timor`;
 const ENTITIES={'amp':'&','nbsp':' ','quot':'"','apos':"'",'eacute':'é','ndash':'–','mdash':'—'};
@@ -114,8 +115,107 @@ function cooperativeAliasCredits(paragraphs){
  for(const [alias,names] of aliases)if(names.size!==1)result.delete(alias);
  return [...result.values()];
 }
-function foundGrower(paragraphs,name=''){
+function currentProducerParagraphGroups(blocks){
+ const groups=[],headings=[],parents=[];let group=[];
+ const finish=()=>{if(group.length)groups.push(group);group=[];};
+ for(const block of blocks){
+  if(/^h[1-6]$/.test(block.tag)){
+   finish();parents.length=0;
+   const level=Number(block.tag[1]);
+   while(headings.length&&headings.at(-1).level>=level)headings.pop();
+   if(level===1)headings.length=0;
+   else headings.push({level,current:currentProducerSentence(block.text)&&
+    !/\b(?:history|historical|previous|prior|past|earlier|former|last|other|another|different)\b|^(?:about the region|regional (?:profile|characteristics))\b/i.test(block.text)});
+   continue;
+  }
+  if(block.educational||headings.some(heading=>!heading.current)){finish();continue;}
+  while(parents.length&&parents.at(-1).end<=block.start)parents.pop();
+  const parent=parents.at(-1);
+  if(block.tag==='span'&&parent&&parent.start<block.start&&parent.end>=block.end)continue;
+  parents.push(block);
+  if(!group.includes(block.text))group.push(block.text);
+ }
+ finish();return groups;
+}
+function producerCountriesAgree(statement,name,fields){
+ const countries=value=>literalCoffeeSourcePlaces(value).filter(place=>new RegExp('^(?:'+COUNTRY+')$','i').test(place)).map(producerIdentity);
+ const declared=countries(statement);
+ // A cleared origin after a real conflict is not positive compatibility.
+ // Independent producer statements without a country assertion still stand.
+ if(fields.originConflict&&declared.length)return false;
+ const selected=countries(fields.origin||'');if(!selected.length)selected.push(...countries(name));
+ return !selected.length||declared.every(place=>selected.includes(place));
+}
+function producerIdentity(value){
+ return String(value||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^\p{L}\d]+/gu,' ').trim();
+}
+function selectedCooperativeAlias(alias,name){
+ const selected=producerIdentity(name).replace(new RegExp('^(?:'+COUNTRY.toLowerCase()+')\\s+','u'),'');
+ const literal=producerIdentity(alias);
+ return literal.length>=3&&new RegExp('^'+literal+'\\s+(?:cooperative|co op|coop)(?:\\s+(?:washed|natural|honey|anaerobic|coffee)){0,2}$','u').test(selected);
+}
+function quotedCooperativeCredits(groups,name,fields){
+ const definitions=new Map(),current=new Map();
+ const fullName=NAME_WORD+String.raw`(?:\s+(?:\p{Ll}{1,3}\s+)?`+NAME_WORD+String.raw`){1,7}`;
+ const intro=new RegExp('^('+fullName+String.raw`)\s*\(["“]([^"”]{3,60})["”]\)\s+means\s+["“][^"”]{1,100}["”]\.?(?=\s|$)`,'u');
+ for(const paragraphs of groups)for(let index=0;index<paragraphs.length;index++){
+  const paragraph=paragraphs[index],match=paragraph.match(intro);
+  if(!match||!currentProducerSentence(match[0])||!selectedCooperativeAlias(match[2],name))continue;
+  const key=producerIdentity(match[2]),names=definitions.get(key)||new Set();
+  names.add(match[1]);definitions.set(key,names);
+  const rest=paragraph.slice(match[0].length).trim()||paragraphs[index+1]||'';
+  // The immediate named organization, its quoted alias and this current
+  // coffee-producing role must agree. A translation or location alone is
+  // not a producer credit, and another intervening subject breaks the link.
+  const role=producerSentences(rest)[0]||'';
+  if(currentProducerSentence(role)&&producerCountriesAgree(role,name,fields)&&/^This\s+Co-?op(?:erative)?\s+is\s+located\s+(?:in|near|at)\s+[^.!?;]{2,150},\s+where\s+they\s+have\s+been\s+(?:producing|growing|cultivating)\s+coffee\b/i.test(role))
+   current.set(key,match[1]);
+ }
+ for(const [key,names] of definitions)if(names.size!==1)current.delete(key);
+ return [...current.values()];
+}
+function selectedStewardshipFarmCredits(paragraphs,name,fields){
+ const selected=producerIdentity(name),result=new Set();
+ const farm=String.raw`(?:Hacienda|Finca|Fazenda|Farm|Estate)\s+`+NAME_WORD+String.raw`(?:\s+(?:`+PARTICLE+String.raw`\s+){0,2}`+NAME_WORD+String.raw`){0,5}`;
+ const stewardship=new RegExp(String.raw`(?:^|,\s+)(`+farm+String.raw`)\s+(?:thrives|operates)\s+under\s+the\s+same\s+stewardship\s+as\s+(`+farm+String.raw`)[.!]?$`,'u');
+ const cultivation=/^(?:Grown|Cultivated)\s+(?:between|at)\s+\d[\d,]*(?:\.\d+)?(?:\s*(?:and|to|[-–—])\s*\d[\d,]*(?:\.\d+)?)?\s*(?:meters?|metres?|masl|m)\s+and\s+(?:processed|milled)\s+at\s+the\s+farm['’]s\s+own\s+[^.!?;]{1,100}\bmill,\s+(?:this|our)\s+(?:[a-z][a-z-]*\s+){0,3}(?:coffee|lot|offering)\b/i;
+ for(let index=0;index<paragraphs.length;index++){
+  const lines=producerSentences(paragraphs[index]);
+  for(let lineIndex=0;lineIndex<lines.length;lineIndex++){
+   const line=lines[lineIndex],match=line.match(stewardship);
+   if(!match||!currentProducerSentence(line)||producerIdentity(match[1])!==selected||producerIdentity(match[2])===selected)continue;
+   const next=lines[lineIndex+1]||producerSentences(paragraphs[index+1]||'')[0]||'';
+   // Only the exact selected farm is admitted. Shared stewardship does not
+   // make its sister estate, steward or a third-party mill this producer.
+   if(currentProducerSentence(next)&&producerCountriesAgree(line+' '+next,name,fields)&&cultivation.test(next))result.add(match[1]);
+  }
+ }
+ return [...result];
+}
+function explicitAnonymousProducerCredits(paragraphs,name,fields){
+ const result=new Set();
+ for(const paragraph of paragraphs)for(const line of producerSentences(paragraph)){
+  if(!currentProducerSentence(line)||!producerCountriesAgree(line,name,fields))continue;
+  const current=String.raw`^(?:this|our|the current)\s+(?:[\p{L}][\p{L}-]{1,25}\s+){0,3}coffee\s+`;
+  const collection=line.match(new RegExp(current+String.raw`comes\s+from\s+[^.!?;]{2,120},\s+a\s+collection\s+from\s+((?:(?:small[ -]?holder|local|independent|family[- ]owned)\s+){1,2}(?:producers|farmers|growers))(?=[.!?;]|$)`,'iu'));
+  if(collection)result.add(collection[1]);
+  const cooperative=line.match(new RegExp(current+String.raw`is\s+from\s+a\s+(Co-?op(?:erative)?)\s+we\s+have\s+worked\s+with\s+for\s+years(?:,\s+and\s+is\s+(?:in|near)\s+([^,.!?;]{2,130}))?[.!]?$`,'iu'));
+  // Preserve the printed unnamed role. Do not invent a cooperative name,
+  // geographic qualifier or explanatory parenthesis to match an oracle.
+  if(cooperative&&(!cooperative[2]||!/\b(?:and|or|except|rather|instead|also|another|different|but)\b/i.test(cooperative[2])))result.add(cooperative[1]);
+ }
+ return [...result];
+}
+function foundGrower(paragraphs,name='',relationshipGroups=[paragraphs],fields={}){
  const found=new Map(),collectives=new Map(),lotCredits=new Map(),farmLists=new Map(),operatorRelations=new Map();
+ // These newly linked single-source relationships do not establish a
+ // complete supplier list for a selected blend or component narrative.
+ if(!/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' '))){
+  for(const credit of quotedCooperativeCredits(relationshipGroups,name,fields))
+   collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
+  for(const group of relationshipGroups)for(const credit of [...selectedStewardshipFarmCredits(group,name,fields),...explicitAnonymousProducerCredits(group,name,fields)])
+   collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
+ }
  for(const alias of cooperativeAliasCredits(paragraphs))collectives.set(alias.normalize('NFKC').toLowerCase(),alias);
  for(const paragraph of paragraphs){
   for(const list of explicitFarmList(paragraph))
@@ -376,7 +476,7 @@ function explicitFarmOwnership(page,nodes){
  }
  return found.size===1?[...found.values()][0]:null;
 }
-export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
+export function extractNarrativeCoffeeEvidence(html,{name='',fields={},origin=fields.origin||'',originConflict=false}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name)return {fields:{},details:{}};
  const page=scopedPage(html);
  if(!page)return {fields:{},details:{}};
@@ -388,8 +488,8 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
    if(heading)headings.push(heading);
   }
  }
- const proseParents=[];
- for(const block of productCoffeeProse(page,text)){
+ const proseParents=[],proseBlocks=productCoffeeProse(page,text);
+ for(const block of proseBlocks){
   if(block.educational||/^h[1-6]$/.test(block.tag))continue;
   while(proseParents.length&&proseParents.at(-1).end<=block.start)proseParents.pop();
   // An inline span can begin halfway through a person's name. Its enclosing
@@ -413,7 +513,9 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
   if(!fields.producer&&!output.producer)output.producer=place.farm;
  }
  // Farm and grower are not interchangeable; preserve distinct source facts.
- const namedGrower=foundGrower(paragraphs,name);
+ const relationshipGroups=currentProducerParagraphGroups(proseBlocks);
+ const producerContext={origin,originConflict};
+ const namedGrower=foundGrower(paragraphs,name,relationshipGroups,producerContext);
  if(namedGrower&&!details.named_producer)details.named_producer=namedGrower;
  if(namedGrower&&!fields.producer&&!output.producer)output.producer=namedGrower;
  if(!fields.producer&&!output.producer){
@@ -473,5 +575,8 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={}}={}){
   }
   if(found.size===1)output.elevation_m=[...found.values()][0];
  }
- return {fields:output,details};
+ const literalAnonymousProducer=output.producer===namedGrower&&/^Co-?op(?:erative)?$/i.test(namedGrower)&&
+  !/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' '))&&
+  relationshipGroups.some(group=>explicitAnonymousProducerCredits(group,name,producerContext).includes(namedGrower))?namedGrower:'';
+ return {fields:output,details,...(literalAnonymousProducer?{literal_anonymous_producer:literalAnonymousProducer}:{})};
 }

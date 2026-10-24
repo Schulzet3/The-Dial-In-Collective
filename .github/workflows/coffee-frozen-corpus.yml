@@ -83,8 +83,8 @@ jobs:
         # Empty pins mean strict C8 equality. Only an independently reviewed,
         # committed manifest and its exact SHA-256 may enable reviewed changes.
         env:
-          DIC_REVIEWED_CHANGES_PATH: 'docs/audits/extractor-reviewed-changes-candidate12.json'
-          DIC_REVIEWED_CHANGES_SHA256: '0f4189bf1f72389002cbe2b274c47ba4ef65fcb806b0e68afa065940f5394044'
+          DIC_REVIEWED_CHANGES_PATH: ''
+          DIC_REVIEWED_CHANGES_SHA256: ''
         shell: bash
         run: |
           set -euo pipefail
@@ -97,7 +97,7 @@ jobs:
             --repo "$GITHUB_WORKSPACE" \
             --work "$RUNNER_TEMP/dic-frozen-corpus" \
             --output "$RUNNER_TEMP/dic-frozen-corpus/output" \
-            --expected-fingerprint 37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24 \
+            --expected-fingerprint ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451 \
             "${audit_review_args[@]}"
       - name: Erase any remaining ephemeral receiver key
         if: always()

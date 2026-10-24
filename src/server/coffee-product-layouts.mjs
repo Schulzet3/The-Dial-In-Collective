@@ -215,7 +215,7 @@ function detailedCoffeeNarrative(page,fields,extras,clean,addField){
 function selectedMarkup(html){
  return productMarkup(html).slice(0,60000);
 }
-export function extractLayoutEvidence(html,{fields,addField,clean}){
+export function extractLayoutEvidence(html,{fields,addField,clean,hasOriginConflict=()=>false}){
  html=productMarkup(html);
  const extras={},page=selectedMarkup(html);
  const onyxMetric=/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["']roast-level["']/i.test(html);
@@ -240,7 +240,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
    if(altitude)addField('elevation_m',altitude[1]);
   }
   if(!fields.tasting_notes){
-   const found=extractProductFlavorEvidence(html,{clean});
+   const found=extractProductFlavorEvidence(html,{clean,origin:fields.origin,originConflict:hasOriginConflict()});
    if(found)addField('tasting_notes',found);
   }
   return extras;
@@ -331,7 +331,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  // over the older short-window narrative fallback. Gallery bytes cannot
  // hide a later real flavor sentence, and labels beat incidental prose.
  if(!fields.tasting_notes){
-  const found=extractProductFlavorEvidence(html,{clean});
+  const found=extractProductFlavorEvidence(html,{clean,origin:fields.origin,originConflict:hasOriginConflict()});
   if(found)addField('tasting_notes',found);
  }
  // "In the cup we find ..." is explicit tasting prose. Strip punctuation
@@ -351,7 +351,7 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  // stripped of navigation and unrelated products by productMarkup().
  detailedCoffeeNarrative(html,fields,extras,clean,addField);
  if(!fields.tasting_notes){
-  const found=extractProductFlavorEvidence(html,{clean});
+  const found=extractProductFlavorEvidence(html,{clean,origin:fields.origin,originConflict:hasOriginConflict()});
   if(found)addField('tasting_notes',found);
  }
  return extras;

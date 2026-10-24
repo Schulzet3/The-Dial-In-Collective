@@ -175,7 +175,7 @@ function samePage(raw,target){
  }catch{return false;}
 }
 const conflictsByFields=new WeakMap();
-const narrativeFlavorByFields=new WeakMap();
+const narrativeFlavorStoriesByFields=new WeakMap();
 const blendEvidenceByFields=new WeakMap();
 const producerEvidenceByFields=new WeakMap();
 const narrativeProducerByFields=new WeakSet();
@@ -244,7 +244,7 @@ function cleanTrailingProductLabels(text){
  }
  return text.slice(0,first).replace(/[\s,;|✹]+$/,'').trim();
 }
-function normalized(field,value,{allowFlavorProse=false}={}){
+function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=false}={}){
  const raw=textOf(value,field==='tasting_notes'?650:1000);
  if(!raw)return '';
  let s=['tasting_notes','origin','producer','variety','elevation_m','release_label','process','roast_level'].includes(field)?
@@ -257,7 +257,9 @@ function normalized(field,value,{allowFlavorProse=false}={}){
   const marketed=s.match(/^(.{2,140}?),\s+(?:celebrated|renowned|prized|known|regarded|considered)\b/i);
   if(marketed&&explicitCoffeeVarietyList(marketed[1]))s=marketed[1].replace(/^100\s*%\s*/,'').trim();
  }
- if(!s||LOOKUP.has(keyOf(s)))return '';
+ // A proved current unnamed cooperative is a literal supplier role. Bare
+ // label echoes remain invalid everywhere else.
+ if(!s||(LOOKUP.has(keyOf(s))&&!(field==='producer'&&allowAnonymousProducer&&/^Co-?op(?:erative)?$/i.test(s))))return '';
  if(field!=='tasting_notes'&&s.length>220)return '';
  if(['origin','variety'].includes(field)&&/\b(?:this|these|those|is|are|was|were|typically|generally|often|refers|instead|when|because|creates|absorbing|resulting|we|our)\b/i.test(s))return '';
  if(field==='origin'&&/^(?:single[ -]origin|blend|blended|various|seasonal|rotating|multiple origins?)\.?$/i.test(s))return '';
@@ -339,7 +341,7 @@ function labeledFarmLocation(rawKey,value){
  }
  return {farm,origin};
 }
-function addField(fields,rawKey,value){
+function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
  // Layout extractors may pass either a visible roaster label or an
  // already-resolved internal field key such as release_label. Never drop a
  // supported canonical key just because its display synonym is absent.
@@ -371,7 +373,7 @@ function addField(fields,rawKey,value){
  if(key==='roast_level'&&Array.isArray(value)&&new Set(value.map(item=>normalizeRoastLabel(textOf(item,100))).filter(Boolean)).size>1){
   conflicts?.add(key);delete fields[key];return;
  }
- let s=normalized(key,value,{allowFlavorProse:key==='tasting_notes'&&rawKey!==key});
+ let s=normalized(key,value,{allowFlavorProse:key==='tasting_notes'&&rawKey!==key,allowAnonymousProducer:key==='producer'&&literalAnonymousProducer});
  // A named cooperative/farm can be accidentally prefixed to a Region
  // caption. Remove it only with independent, literal role evidence from
  // this selected product; the complete published value remains in facts.
@@ -638,12 +640,11 @@ function productDetails(fields,p){
   for(const fact of extractCoffeeCurrentReleasePrefixes(story,{clean}))addIdentityFact(fields,fact);
   const explicit=productFlavorProfiles(fields,story);
   if(!explicit){
-   const notes=extractProductFlavorEvidence(story,{clean});
-   if(notes){
-    const existing=narrativeFlavorByFields.get(fields)||[];
-    if(!existing.some(value=>equivalentCoffeeTastingNotes(value,notes)))existing.push(notes);
-    narrativeFlavorByFields.set(fields,existing);
-   }
+   // Resolve narrative geography only after all selected labels and
+   // equivalent Product nodes have supplied their current origin evidence.
+   const existing=narrativeFlavorStoriesByFields.get(fields)||[];
+   if(!existing.includes(story))existing.push(story);
+   narrativeFlavorStoriesByFields.set(fields,existing);
   }
   const roast=extractRoastVisualEvidence(story);
   if(roast.confidence==='conflict'){conflictsByFields.get(fields)?.add('roast_level');delete fields.roast_level;}
@@ -971,7 +972,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.
  const roaster_details=extractLayoutEvidence(canonicalProduct,{
-  fields,addField:(key,value)=>addField(fields,key,value),clean
+  fields,addField:(key,value)=>addField(fields,key,value),clean,hasOriginConflict:()=>conflicts.has('origin')
  });
  // A product's country word can complete a labeled region, but an explicit
  // selected-product country caption has priority over a name-derived fallback.
@@ -980,10 +981,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Supplement explicit page labels with current-coffee narrative evidence.
  // The canonical Process selector is coarse; keep complex fermentation and
  // farm/grower attributions as reviewable, noncanonical details.
- const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields});
+ const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
  for(const [key,value] of Object.entries(narrative.fields)){
   if(fields[key])continue;
-  addField(fields,key,value);markNarrativeIdentity(fields,key);
+  addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);
   if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
  }
  for(const fact of extractCoffeeIdentityEvidence(canonicalProduct,{name:fields.name,fields,clean}).facts)addIdentityFact(fields,fact);
@@ -1050,7 +1051,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   for(const description of usableMatchedDescriptions){
    const story=canonicalIdentityScope(fields,'<main><h1>'+escape(fields.name)+'</h1><p>'+escape(description)+'</p></main>');
-   const notes=extractProductFlavorEvidence(story,{clean});
+   const notes=extractProductFlavorEvidence(story,{clean,origin:fields.origin,originConflict:conflicts.has('origin')});
    if(notes)addField(fields,'Tasting Notes',notes);
   }
  }
@@ -1068,14 +1069,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const fragments=usableMatchedDescriptions.map(description=>description.split(/(?<=[.!?])\s+|\r?\n/u).slice(0,240).map(value=>'<p>'+escape(value)+'</p>').join(''));
   for(const fragment of fragments){
    labeledPairs(fragment,candidates);
-   extractLayoutEvidence(fragment,{fields:candidates,clean,addField:(label,value)=>{
+   extractLayoutEvidence(fragment,{fields:candidates,clean,hasOriginConflict:()=>candidateConflicts.has('origin'),addField:(label,value)=>{
     const kind=Object.hasOwn(FIELD_ALIASES,label)?label:LOOKUP.get(keyOf(label));
     if(kind)explicitKinds.add(kind);addField(candidates,label,value);
    }});
   }
   for(const key of Object.keys(candidates))if(!['name','roaster'].includes(key))explicitKinds.add(key);
   for(const fragment of fragments){
-   const prose=extractNarrativeCoffeeEvidence(fragment,{name:fields.name,fields:candidates});
+   const prose=extractNarrativeCoffeeEvidence(fragment,{name:fields.name,fields:candidates,origin:fields.origin||candidates.origin,originConflict:conflicts.has('origin')||candidateConflicts.has('origin')});
    for(const [key,value] of Object.entries(prose.fields))if(!candidates[key])addField(candidates,key,value);
    for(const fact of extractCoffeeIdentityEvidence(fragment,{name:fields.name,fields:candidates,clean}).facts)
     addIdentityFact(candidates,fact);
@@ -1092,8 +1093,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
   for(const window of recurringHarvestByFields.get(candidates)?.values()||[])rememberRecurringHarvest(fields,window);
  }
- if(!fields.tasting_notes&&(narrativeFlavorByFields.get(fields)||[]).length===1)
-  addField(fields,'tasting_notes',narrativeFlavorByFields.get(fields)[0]);
+ const narrativeNotes=[];
+ if(!fields.tasting_notes)for(const story of narrativeFlavorStoriesByFields.get(fields)||[]){
+  const notes=extractProductFlavorEvidence(story,{clean,origin:fields.origin,originConflict:conflicts.has('origin')});
+  if(notes&&!narrativeNotes.some(value=>equivalentCoffeeTastingNotes(value,notes)))narrativeNotes.push(notes);
+ }
+ narrativeFlavorStoriesByFields.delete(fields);
+ if(!fields.tasting_notes&&narrativeNotes.length===1)addField(fields,'tasting_notes',narrativeNotes[0]);
  const roast_evidence=extractRoastVisualEvidence(currentProduct);
  if(roast_evidence.confidence==='conflict'){
   delete fields.roast_level;conflicts.add('roast_level');
