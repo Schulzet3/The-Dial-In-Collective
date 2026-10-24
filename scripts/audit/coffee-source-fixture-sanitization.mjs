@@ -77,7 +77,10 @@ function selectedPublicOffers(value,source){
   seen.add(item);visited++;
   if(!Array.isArray(item)&&(hasType(item,'product')||hasType(item,'productgroup'))){
    const url=productUrl(Object.hasOwn(item,'url')?item.url:item['@id'],source);
-   if(url&&!(Object.hasOwn(item,'url')&&rootSchemaIdentity(item['@id'],source,'Product'))){
+   // A URL-less schema Product ID is graph identity, never independent
+   // proof of the selected product document, even if its path is copied.
+   if(url&&!(Object.hasOwn(item,'url')&&rootSchemaIdentity(item['@id'],source,'Product'))&&
+      !(!Object.hasOwn(item,'url')&&/^#\/schema\/Product\//i.test(url.hash))){
     addOffers(item.offers,url.searchParams.get('variant'));
     if(!url.searchParams.has('variant')){
      const variants=Array.isArray(item.hasVariant)?item.hasVariant:[item.hasVariant];
