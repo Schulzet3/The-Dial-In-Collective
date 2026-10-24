@@ -119,3 +119,7 @@ PR108 initial Node and visual CI identified a missing explicit production asset 
 ## CI intake recovery
 
 The first retry fixed the site graph by explicitly copying site/lib/community-evidence.js into production assets. Exact-source approval then correctly failed closed because the related build_cloud.mjs change was missing from queue scope_paths. Reconciled the new deployable build path in the same Issue #12 TESTING queue item, preserving Issue #5 READY. Rerun combined exact-source CI; do not publish until READY and separately authorized.
+
+## CI browser recovery — October 24 UTC
+
+PR108 post-allowlist exact tests passed all Node/build and SQL, but 390px browser QA bundle transpiler required the new community-evidence module registered before engine. It had initialized `Modules.engine` before `Modules.community_evidence`, producing a JavaScript destructuring error, not an application product failure. Corrected the explicitly ordered browser module list and added the optional read-only Community RPC fixture. This does not loosen test assertions. Rerun exact-source CI; staging only.

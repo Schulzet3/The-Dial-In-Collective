@@ -8,8 +8,8 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill','dose-advisory']:
-  folder='lib' if name in ['constants','model','engine','ui'] else 'cloud'
+ for name in ['constants','model','community-evidence','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill','dose-advisory']:
+  folder='lib' if name in ['constants','model','community-evidence','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
  t=(SITE/'cloud/main.js').read_text();t=t.replace("import {CLOUD_CONFIG} from './config.js';","const CLOUD_CONFIG={enabled:false};").replace('startCloudApp();','').replace('export {CloudApp};','');t=re.sub(r'\bexport\s+','',imports(t))
