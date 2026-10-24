@@ -1,0 +1,434 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-23",
+  "workstream": "Owner-authorized no-added-cost manual extractor audit and >=600 distinct coffees from >=200 USA roasters",
+  "status": "parser_repairs_focused_tested; independent corpus eligibility and product oracle still in progress",
+  "authority": "Root-assigned six-module audit and implementation; no commits, publication, provider mutations, API keys or paid services by this reviewer.",
+  "review_method": "Read all six current local modules and relevant callers/tests; construct independent adversarial source snippets before repairs; verify through full extractPublicCoffeeFacts and focused regression suites. This report does not claim the 600-coffee/200-roaster goal is already complete.",
+  "source_snapshot": [
+    {
+      "path": "src/server/coffee-page-metadata.mjs",
+      "lines": 714,
+      "sha256": "b02f5fb23c712608692dceb106af8be933b9a72e2ae971e472bae7eb3184363b",
+      "coverage": "complete module manual review; changed paths tested"
+    },
+    {
+      "path": "src/server/coffee-product-scope.mjs",
+      "lines": 134,
+      "sha256": "5a6700c4c381a1dc7fd8e009be17f46df48996e157101733c75d79fceb024203",
+      "coverage": "complete module manual review; changed paths tested"
+    },
+    {
+      "path": "src/server/coffee-semantic-specs.mjs",
+      "lines": 188,
+      "sha256": "a8e0d92fd170ce09a4dbe5cdbf4e614a9ac86bfb5f3de31e452d9e6c51b9ac8a",
+      "coverage": "complete module manual review; changed paths tested"
+    },
+    {
+      "path": "src/server/coffee-product-layouts.mjs",
+      "lines": 341,
+      "sha256": "3f9de8d65dc265e954e4d11113408f6d93d925f819a644cc0c589d97944a2a7a",
+      "coverage": "complete module manual review; changed paths tested"
+    },
+    {
+      "path": "src/server/coffee-narrative-evidence.mjs",
+      "lines": 175,
+      "sha256": "c384b8c34c48d577977b74a1ef713b3854622347d7e160a1f6a5333698273143",
+      "coverage": "complete module manual review; changed paths tested"
+    },
+    {
+      "path": "src/server/coffee-flavor-evidence.mjs",
+      "lines": 199,
+      "sha256": "8b7780a4d76482903987489e833b6cf730121d21e96f0fb0f5125b0763b59110",
+      "coverage": "complete module manual review; changed paths tested"
+    }
+  ],
+  "coverage_inventory": {
+    "identity": [
+      "Product and ProductGroup JSON-LD",
+      "linked same-product duplicates",
+      "ListItem.item",
+      "URL-like @id",
+      "exact name unlinked metadata",
+      "inline Product state",
+      "visible H1/OG fallback",
+      "tracking and purchase-variant identity",
+      "soft404/challenge rejection"
+    ],
+    "canonical_fields": [
+      "name",
+      "roaster",
+      "release_label",
+      "origin",
+      "producer",
+      "variety",
+      "process",
+      "elevation_m",
+      "roast_level",
+      "tasting_notes"
+    ],
+    "supported_source_shapes": [
+      "additionalProperty arrays and singular objects",
+      "metafields/metadata/attributes/options",
+      "tables and definition lists",
+      "paragraph/BR labels",
+      "localized labels",
+      "prefix/suffix and reversed sibling cards",
+      "numeric and compound cultivars",
+      "product-bound narrative",
+      "matched image alt text",
+      "explicit source roast graphics and qualified Agtron"
+    ],
+    "supplemental_evidence": [
+      "farm and named grower",
+      "Agtron score/scale/sample",
+      "rest",
+      "drying and processing details",
+      "harvest season",
+      "preferred extraction",
+      "production roaster",
+      "blend components",
+      "explicit espresso reference",
+      "unknown specifications, full source descriptions and commerce retained by root source-facts module"
+    ],
+    "boundaries": [
+      "navigation/templates/noncontent removed",
+      "named recommendations and quick views removed",
+      "controlled hidden product panels retained",
+      "same-container token ownership",
+      "source conflicts survive all fallbacks",
+      "source truncation disclosed",
+      "read-only source suggestions remain unverified and are not automatically saved"
+    ],
+    "not_claimed": [
+      "arbitrary language understanding",
+      "pixel OCR",
+      "executed browser-only content",
+      "logged-in or private sources",
+      "all possible storefront layouts",
+      "an independently labeled 600-coffee field oracle at this stage"
+    ]
+  },
+  "findings": [
+    {
+      "id": "PA01",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "One unrelated unlinked Product replaced the current visible H1 and donated facts.",
+      "minimal_source_pattern": "H1 Current Coffee; lone unlinked Product Other Coffee with Variety Robusta.",
+      "repair": "Unlinked Product must agree with a present current heading/OG identity; same-name unlinked data may enrich a linked Product.",
+      "regression": "an unrelated unlinked Product cannot replace the visible current coffee or donate its facts",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA02",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "Same-page matching ignored identity-significant query selectors.",
+      "minimal_source_pattern": "/coffee?id=current versus Product.url /coffee?id=other.",
+      "repair": "Compare nontracking query parameters, preserving exact Shopify release identity for variant and collection aliases.",
+      "regression": "query product identifiers remain identity-sensitive while tracking parameters do not",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA03",
+      "severity": "medium",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "ListItem.item, URL-like @id and a Product following thirty recommendations were missed.",
+      "minimal_source_pattern": "ItemList -> ListItem.item -> Product @id, or thirty-five unrelated Products before the current one.",
+      "repair": "Bounded schema traversal includes item; exact-page candidates are prioritized under a 200-candidate cap.",
+      "regression": "ListItem-wrapped Products and their explicit URL-like @id remain readable",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA04",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "Empty metafields shadowed metadata/attributes/options; inline wrappers discarded raw commerce/attribute evidence.",
+      "minimal_source_pattern": "metafields:{} plus attributes:[{name:Variety,options:[Chiroso]}].",
+      "repair": "Read all recognized containers through shared conflict resolution; preserve raw inline Product properties for review evidence.",
+      "regression": "all structured containers contribute and empty metafields cannot shadow attributes",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA05",
+      "severity": "medium",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "Structured arrays silently lost every entry after five.",
+      "minimal_source_pattern": "Varieties array containing seven named values.",
+      "repair": "Retain complete bounded arrays that fit canonical limits; oversized arrays remain raw review evidence instead of a truncated canonical subset.",
+      "regression": "structured cultivar arrays preserve six or more entries without a five-value cutoff",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA06",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "A soft 404 or browser challenge at a product-shaped URL became a coffee name.",
+      "minimal_source_pattern": "<h1>Page not found</h1> at /products/current.",
+      "repair": "Reject explicit error/challenge fallback headings.",
+      "regression": "soft 404 and challenge headings cannot become fallback coffee names",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA07",
+      "severity": "high",
+      "files": [
+        "coffee-product-scope.mjs",
+        "coffee-semantic-specs.mjs"
+      ],
+      "confirmed_problem": "Hidden generic nodes, quick views and additional recommendation names supplied unrelated facts; quoted attribute text could masquerade as visibility.",
+      "minimal_source_pattern": "hidden div Variety Robusta; class recommendations; You might also like; title containing aria-hidden text.",
+      "repair": "Quote-aware attributes and bounded component removal; retain only exact referenced hidden current-product panels, reject hidden/unrelated controllers.",
+      "regression": "hidden generic content and named unrelated components cannot supply coffee facts",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA08",
+      "severity": "medium",
+      "files": [
+        "coffee-semantic-specs.mjs",
+        "coffee-product-layouts.mjs"
+      ],
+      "confirmed_problem": "Independent regex trees did not share quote-aware structure; numeric explicit cultivar labels were rejected and legacy tokens could cross cards.",
+      "minimal_source_pattern": "<div title=\"a > b\"><h3>74158</h3><p>Variety</p></div>.",
+      "repair": "Use shared bounded structural scanner, allow explicitly labeled numeric cultivar codes, require legacy pair ownership by the same parent.",
+      "regression": "quoted angle brackets cannot break structural card ownership or numeric cultivar labels",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA09",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "Country prevented richer compatible Origin data, while contradictory same-country regions silently preferred the first.",
+      "minimal_source_pattern": "Country Colombia + Origin Huila, Colombia; Origin Huila, Colombia versus Cauca, Colombia.",
+      "repair": "Enrich compatible segment supersets and withhold divergent full origins; preserve alternatives with conflict flags.",
+      "regression": "same-country conflicting regions and explicit producers are withheld with review alternatives",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA10",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs",
+        "coffee-product-layouts.mjs"
+      ],
+      "confirmed_problem": "Explicit producer, altitude, farm and rest contradictions silently selected one source.",
+      "minimal_source_pattern": "Producer Ana Torres versus Beatriz Morales; Elevation1800m versus1900m; Farm Aurora versus Luna; Rest7 versus21days.",
+      "repair": "Withhold contradictory canonical or supplemental summaries, retain raw alternatives; farm fallback conflicts do not erase an independently explicit grower.",
+      "regression": "conflicting farm and rest details remain reviewable without a misleading first-value summary",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA11",
+      "severity": "medium",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "Complementary Harvest and Lot values were treated as a contradictory release.",
+      "minimal_source_pattern": "Harvest2026 plus Lot7.",
+      "repair": "Retain a labeled composite release; contradictions within a harvest or lot stay final.",
+      "regression": "harvest and lot are complementary while contradictions within either label stay final",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA12",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs"
+      ],
+      "confirmed_problem": "The older espresso parser took precedence, collapsed ranges and borrowed from a nearby filter section.",
+      "minimal_source_pattern": "Espresso Dose18g Yield36g Time25s–30s; immediate h3 Filter supplied Yield45g Time30s.",
+      "repair": "Remove the older parser; use only the shared espresso evidence module repaired by requirements reviewer.",
+      "regression": "tests/coffee-runtime-audit.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA13",
+      "severity": "high",
+      "files": [
+        "coffee-page-metadata.mjs",
+        "coffee-product-layouts.mjs"
+      ],
+      "confirmed_problem": "Legacy nearby/story fallbacks could resurrect negated techniques or general altitude claims after safer narrative checks.",
+      "minimal_source_pattern": "This coffee was not an anaerobic natural; Coffee is generally grown at1800meters.",
+      "repair": "Sentence-bounded positive story evidence; remove unlabeled altitude guessing; all canonical conflicts remain final after blend/roast fallbacks.",
+      "regression": "legacy nearby and story paths cannot resurrect negated techniques or general growing altitudes",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "PA14",
+      "severity": "medium",
+      "files": [
+        "coffee-page-metadata.mjs",
+        "coffee-product-scope.mjs"
+      ],
+      "confirmed_problem": "Source scanning limits were invisible after product scope had already clipped the source.",
+      "minimal_source_pattern": "More than128 nested elements after an earlier readable specification.",
+      "repair": "Propagate scope truncation to source_facts_truncated; source fact limits are likewise explicit.",
+      "regression": "long review evidence exposes truncation while preserving canonical source scope",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF01",
+      "severity": "high",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "Negation, historical and educational prose became positive process or grower facts.",
+      "repair": "Sentence-bounded current-lot context and negation/history guards.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF02",
+      "severity": "medium",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "Grower matching crossed sentence boundaries, truncated longer names and preferred the first contradictory producer.",
+      "repair": "Bounded multilingual names, explicit joint credits and unresolved contradictory current credits.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF03",
+      "severity": "medium",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "A farm location heading erased its explicitly named owner.",
+      "repair": "Preserve explicit owner before farm fallback.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF04",
+      "severity": "high",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "Generic, impossible and reversed narrative altitudes became canonical.",
+      "repair": "Require current-coffee growth context, physical units and a plausible ascending range.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF05",
+      "severity": "high",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "16KB/45KB source windows and paragraph/prose count limits hid available current-product facts.",
+      "repair": "Scan shared bounded product markup, remove decorative content before text budgets.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF06",
+      "severity": "medium",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "Nested flavor containers, single notes, percentages and bullet/pipe notation were missed.",
+      "repair": "Structural flavor ownership with bounded literal note validation.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF07",
+      "severity": "high",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "data-alt or alt-like text inside another attribute became product image evidence.",
+      "repair": "Unique, quote-aware real alt attributes only.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF08",
+      "severity": "high",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "Image roast scale labels selected Medium; contradictory current image profiles disappeared without a conflict.",
+      "repair": "Reject legends/scales; propagate explicit roast and note conflicts to metadata.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    },
+    {
+      "id": "NF09",
+      "severity": "medium",
+      "files": [
+        "coffee-narrative-evidence.mjs",
+        "coffee-flavor-evidence.mjs"
+      ],
+      "confirmed_problem": "Partial class tokens selected stale flavors and generic TAKE A SIP metaphors became notes.",
+      "repair": "Whole class tokens and literal sensory evidence; reject unrelated experience metaphors.",
+      "regression": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "status": "implemented_and_focused_tested"
+    }
+  ],
+  "verification": {
+    "runtime": "Node v24.19.0 locally; root owns final exact-source Node22 CI",
+    "new_parser_tests": {
+      "file": "tests/coffee-parser-audit.test.mjs",
+      "passed": 20,
+      "failed": 0
+    },
+    "new_narrative_flavor_tests": {
+      "file": "tests/coffee-narrative-flavor-integrity.test.mjs",
+      "passed": 31,
+      "failed": 0
+    },
+    "narrative_flavor_focused_suite": {
+      "passed": 102,
+      "failed": 0
+    },
+    "combined_relevant_suite": {
+      "tests": 313,
+      "passed": 312,
+      "failed": 1,
+      "remaining_failure": "Old coffee-espresso-tabs whole-markup assertion forbids filter205F in new review-only source facts; canonical espresso20g/47g remains correct without time/temp. Root owns method-context/source-facts and assertion update."
+    },
+    "resource_bound_tests": "Passed with approved local child-process execution; default sandbox EPERM was an environment restriction, not a parser failure.",
+    "diff_check": "passed",
+    "provider_changes": false,
+    "commits": false
+  },
+  "corpus_oracle_protocol": {
+    "next_assignment": "Independent roaster eligibility entries80–169 from enriched-candidates.json, followed by raw-only product source annotation.",
+    "independence": "Do not inspect parser output before writing expected values/source spans from captures.",
+    "requirements": [
+      "Official first-party USA location proof",
+      "At least3 distinct coffee products per accepted roaster",
+      "Exclude merch, events, subscriptions, samplers and size/wholesale duplicates",
+      "Distinguish absent, inaccessible, contradictory and parser-missed facts",
+      "Count false positives as failures, not merely fill-rate improvements"
+    ],
+    "unresolved_scope": "The aggregate corpus and release readiness are owned by root and are not certified by this six-module code review."
+  }
+}

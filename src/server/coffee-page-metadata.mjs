@@ -1,28 +1,45 @@
-import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
+import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
+import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
 // roaster verification and never promotes a canonical record.
-import {extractRoastVisualEvidence} from './roast-level-evidence.mjs';
-import {extractLayoutEvidence} from './coffee-product-layouts.mjs';
+import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evidence.mjs';
+import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
-import {extractCoffeeBlendEvidence} from './coffee-blend-evidence.mjs';
+import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
+import {extractCoffeeIdentityEvidence,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
-import {productMarkup} from './coffee-product-scope.mjs';
+import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
-import {COFFEE_FIELD_ALIASES} from './coffee-semantic-specs.mjs';
-import {equivalentCoffeeVarieties} from './coffee-fact-compatibility.mjs';
-import {extractProductImageTextEvidence} from './coffee-flavor-evidence.mjs';
+import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs} from './coffee-semantic-specs.mjs';
+import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin} from './coffee-fact-compatibility.mjs';
+import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
+import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
+import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
+import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
+import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
+import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
+import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
+import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
 const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
 function readableRoaster(s){
- const raw=String(s||'').trim();
+ const published=String(s||'').trim();
+ const trading=published.match(/\b(?:d\.?b\.?a\.?|doing business as)\s+(.{2,150})$/i);
+ const raw=(trading?trading[1]:published).trim();
  // Some Shopify sites publish an internal host slug (tim-wendelboe-no)
  // instead of a public-facing roaster. Drop only a terminal country TLD.
  if(!/^[a-z]+(?:-[a-z]+){2,}$/.test(raw))return raw;
  const parts=raw.split('-');
  if(parts.at(-1).length===2)parts.pop();
  return parts.map(part=>part[0].toUpperCase()+part.slice(1)).join(' ');
+}
+function publishedRoaster(value){
+ const text=String(value||'').trim();
+ if(!text||/^(?:my store|online store|store|shopify|home|products?|vendor[- _]?unknown|unknown|single[ -]origin(?:\s*[|:/-].*)?)$/i.test(text)||
+   /^[A-Z0-9_-]{2,12}\s+ONLINE$/.test(text)||ORIGIN_COUNTRIES.has(keyOf(text)))return '';
+ return readableRoaster(text);
 }
 const LATIN_ENTITIES=Object.fromEntries('aacute:á agrave:à acirc:â atilde:ã auml:ä aring:å aelig:æ ccedil:ç eacute:é egrave:è ecirc:ê euml:ë iacute:í igrave:ì icirc:î iuml:ï ntilde:ñ oacute:ó ograve:ò ocirc:ô otilde:õ ouml:ö oslash:ø oelig:œ uacute:ú ugrave:ù ucirc:û uuml:ü yacute:ý yuml:ÿ szlig:ß'.split(' ').map(pair=>pair.split(':')));
 function entities(s){
@@ -43,35 +60,48 @@ function clean(s,max=250){
   .replace(/<[^<>]{0,2000}>/g,' ').replace(/[\u0000-\u001f\u007f]/g,' ')
   .replace(/\s+/g,' ').trim()).slice(0,max);
 }
-function textOf(v,max=250){
+function textOf(v,max=250,depth=0){
+ if(depth>8)return '';
  if(typeof v==='string'||typeof v==='number')return clean(v,max);
- if(Array.isArray(v))return v.slice(0,5).map(x=>textOf(x,80)).filter(Boolean).join(', ').slice(0,max);
- if(v&&typeof v==='object')return textOf(v.name??v.value??v.text??'',max);
+ if(Array.isArray(v)){
+  if(v.length>80)return '';
+  const joined=v.map(x=>textOf(x,max,depth+1)).filter(Boolean).join(', ');
+  return joined.length<=max?joined:'';
+ }
+ if(v&&typeof v==='object')return textOf(v.name??v.value??v.text??'',max,depth+1);
  return '';
 }
 function attrs(tag){
- const out={};
- for(const m of String(tag).matchAll(/(?:^|[\s<])([:\w-]{1,64})\s*=\s*(?:"([^"]{0,2000})"|'([^']{0,2000})')/g)){
-  out[m[1].toLowerCase()]=entities(m[2]??m[3]);
- }
+ const out=coffeeHtmlAttributes(String(tag).replace(/^<[^\s>]+/,''));
+ for(const key of Object.keys(out))out[key]=entities(out[key]);
  return out;
 }
+const META_CANONICAL=Symbol('page canonical URL');
 function pageMeta(html){
  const r={};
- for(const match of html.match(/<meta\b[^<>]{0,1600}>/gi)||[]){
-  const a=attrs(match);
+ const page=removeElements(removeComments(html),['script','style','template','noscript','textarea','iframe','svg','canvas']);
+ for(const node of coffeeHtmlElements(page).nodes){
+  if(!['meta','link'].includes(node.tag)||node.headEnd-node.start>24000)continue;
+  const a=attrs(page.slice(node.start,node.headEnd));
+  if(node.tag==='link'){
+   if(!r[META_CANONICAL]&&/^canonical$/i.test(a.rel||'')&&a.href)r[META_CANONICAL]=a.href;
+   continue;
+  }
   const k=(a.property||a.name||'').toLowerCase();
-  if(k&&a.content)r[k]=clean(a.content,k==='description'?650:250);
+  if(k&&a.content)r[k]=clean(a.content,/^(?:og:)?description$/.test(k)?16000:250);
  }
  return r;
 }
-function walk(value,out,depth=0,budget={n:0}){
+function walk(value,out,depth=0,budget={n:0},siteIdentities){
  if(depth>9||++budget.n>450||!value||typeof value!=='object')return;
  if(Array.isArray(value)){
-  for(const child of value.slice(0,80))walk(child,out,depth+1,budget);
+  for(const child of value.slice(0,80))walk(child,out,depth+1,budget,siteIdentities);
   return;
  }
  const types=Array.isArray(value['@type'])?value['@type']:[value['@type']];
+ if(siteIdentities&&siteIdentities.length<40&&typeof value.name==='string'&&value.name.length<=200&&
+  types.some(type=>/^(?:Organization|WebSite|LocalBusiness)$/i.test(String(type))))
+  siteIdentities.push({name:value.name,url:typeof value.url==='string'?value.url:''});
  // A Shopify ProductGroup is the release-level parent and its child
  // Products are purchase variants (size/grind), not separate coffees.
  // Only an explicit named ProductGroup with its own product URL may become
@@ -81,83 +111,194 @@ function walk(value,out,depth=0,budget={n:0}){
  else if(types.some(t=>String(t||'').toLowerCase()==='productgroup')&&
          typeof value.name==='string'&&typeof value.url==='string')
   out.push(value);
- for(const key of ['@graph','mainEntity','itemListElement','hasVariant','isVariantOf','offers']){
-  if(value[key])walk(value[key],out,depth+1,budget);
+ for(const key of ['@graph','mainEntity','itemListElement','item','hasVariant','isVariantOf','offers']){
+  if(value[key])walk(value[key],out,depth+1,budget,siteIdentities);
  }
 }
-function jsonProducts(html){
+const PRODUCT_SCOPE_IDENTITY=Symbol('corroborated current product group identity');
+function bindShopifyGroupIdentity(products,target,{heading='',declaredUrl=''}={}){
+ // A custom-domain storefront can publish its Shopify alias as canonical,
+ // while its group and variant IDs are relative to the requested page.
+ // Retain the parent only when its explicit local ID, visible name, and
+ // page-declared alias corroborate the same product. Do not fetch the alias
+ // or replace the original published URL in review evidence.
+ if(!heading||!declaredUrl)return;
+ const candidates=products.filter(product=>{
+  if(![].concat(product['@type']||[]).some(type=>String(type).toLowerCase()==='productgroup')||
+    keyOf(textOf(product.name))!==keyOf(heading)||typeof product.url!=='string'||samePage(product.url,target)||
+    typeof product['@id']!=='string'||!/^\/(?!\/)/.test(product['@id'])||!samePage(product['@id'],target))return false;
+  try{
+   const alias=new URL(product.url),local=new URL(product['@id'],target),current=new URL(target);
+   if(alias.protocol!=='https:'||alias.username||alias.password||alias.port||
+     !/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/i.test(alias.hostname)||local.hash.toLowerCase()!=='#product'||
+     !samePage(product.url,declaredUrl))return false;
+   alias.host=current.host;
+   return samePage(alias.toString(),target);
+  }catch{return false;}
+ });
+ if(candidates.length===1)candidates[0][PRODUCT_SCOPE_IDENTITY]=candidates[0]['@id'];
+}
+function jsonProducts(html,target,siteIdentities,identityContext){
  const result=[];
  for(const block of rawElements(html)){
   if(block.attributes.length>1000)continue;
   const at=attrs(block.attributes);
   if(!block.closed||(at.type||'').toLowerCase()!=='application/ld+json'||block.body.length>250000)continue;
-  try{walk(JSON.parse(block.body),result);}catch{/* Malformed page JSON isn't evidence. */}
+  try{walk(JSON.parse(block.body),result,0,{n:0},siteIdentities);}catch{/* Malformed page JSON isn't evidence. */}
  }
- return result.slice(0,30);
+ bindShopifyGroupIdentity(result,target,identityContext);
+ const linked=result.filter(product=>productIdentityUrl(product)&&samePage(productIdentityUrl(product),target));
+ const preferred=new Set(linked);
+ return [...linked,...result.filter(product=>!preferred.has(product))].slice(0,200);
+}
+function productIdentityUrl(p){
+ if(p[PRODUCT_SCOPE_IDENTITY])return p[PRODUCT_SCOPE_IDENTITY];
+ if(typeof p.url==='string')return p.url;
+ return typeof p['@id']==='string'&&/^(?:https?:|\/)/i.test(p['@id'])?p['@id']:'';
 }
 function samePage(raw,target){
  try{
+  if(typeof raw!=='string'||raw.length>3000)return false;
   const a=new URL(raw,target),b=new URL(target);
   const host=x=>x.toLowerCase().replace(/^www\./,'');
   const path=x=>x.replace(/\/+$/,'');
   if(host(a.hostname)!==host(b.hostname))return false;
+  // Tracking parameters do not identify a different coffee. Product IDs
+  // and arbitrary query selectors do; only Shopify purchase variants may
+  // share their release-level /products/handle identity.
+  const query=url=>[...url.searchParams].filter(([key])=>!/^utm_|^(?:srsltid|gclid|fbclid|msclkid|mc_cid|mc_eid)$/i.test(key)&&
+   !(key==='variant'&&/\/products\/[^/]+\/?$/i.test(url.pathname))).sort(([a,av],[b,bv])=>a.localeCompare(b)||av.localeCompare(bv));
+  if(JSON.stringify(query(a))!==JSON.stringify(query(b)))return false;
   if(path(a.pathname)===path(b.pathname))return true;
   const handle=x=>x.match(/\/(?:products)\/([^/]+)\/?$/i)?.[1]||'';
   return !!handle(a.pathname)&&handle(a.pathname)===handle(b.pathname);
  }catch{return false;}
 }
-const ROAST=['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
 const conflictsByFields=new WeakMap();
+const narrativeFlavorByFields=new WeakMap();
+const blendEvidenceByFields=new WeakMap();
 const producerEvidenceByFields=new WeakMap();
+const narrativeProducerByFields=new WeakSet();
+const narrativeIdentityByFields=new WeakMap();
+const elevationSourceByFields=new WeakMap();
+const identityQuarantinesByFields=new WeakMap();
+const identityScopeTruncatedByFields=new WeakSet();
 const farmEvidenceByFields=new WeakMap();
 const geographyByFields=new WeakMap();
-const ORIGIN_COUNTRIES=new Set('Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|China|Vietnam|Laos|Myanmar|Papua New Guinea|DR Congo|United States|Jamaica'.split('|').map(keyOf));
-const geographyParts=value=>[...new Set(String(value).split(/\s*(?:,|\/|;|&|\+|\band\b)\s*|\s+[-–—|]\s+/i).map(keyOf).filter(Boolean))];
-function compatibleGeography(first,second){
- if(keyOf(first)===keyOf(second))return first;
- const a=geographyParts(first),b=geographyParts(second);
- if(a.every(part=>b.includes(part)))return second;
- if(b.every(part=>a.includes(part)))return first;
- return null;
+const geographyRolesByFields=new WeakMap();
+const releaseEvidenceByFields=new WeakMap();
+const recurringHarvestByFields=new WeakMap();
+function rememberRecurringHarvest(fields,value){
+ const windows=recurringHarvestByFields.get(fields)||new Map();
+ if(windows.size<16&&!windows.has(keyOf(value)))windows.set(keyOf(value),value);
+ recurringHarvestByFields.set(fields,windows);
 }
+function rememberGeographyEntityRoles(fields,html){
+ if(!html)return;
+ const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ const body=/<[a-z][^>]*>/i.test(html)?html:'<p>'+escape(html)+'</p>';
+ const roles=geographyRolesByFields.get(fields)||[];
+ for(const role of extractCoffeeGeographyEntityRoles(body,{clean})){
+  if(roles.some(existing=>keyOf(existing.name)===keyOf(role.name)&&existing.role===role.role))continue;
+  if(roles.length>=32)break;
+  roles.push(role);
+ }
+ geographyRolesByFields.set(fields,roles);
+}
+function markNarrativeIdentity(fields,key){
+ if(!fields[key]||!['process','variety'].includes(key))return;
+ const evidence=narrativeIdentityByFields.get(fields)||new Set();
+ evidence.add(key);narrativeIdentityByFields.set(fields,evidence);
+}
+function addIdentityFact(fields,fact){
+ const key=LOOKUP.get(keyOf(fact.label)),previous=fields[key];
+ if(key==='variety'&&previous&&fact.explicit_current_composition&&
+    !conflictsByFields.get(fields)?.has('variety')&&explicitCoffeeVarietyRefinement(previous,fact.value))delete fields.variety;
+ addField(fields,fact.label,fact.value);
+ if(!previous)markNarrativeIdentity(fields,key);
+}
+const ORIGIN_COUNTRIES=new Set('Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|China|Vietnam|Laos|Myanmar|Papua New Guinea|DR Congo|Democratic Republic of the Congo|United States|Jamaica|Venezuela|Philippines|Malawi|Zambia|Nepal|Australia|Cuba|Dominican Republic|Haiti|Puerto Rico|Taiwan|Timor-Leste|East Timor|Cameroon'.split('|').map(keyOf));
+// Classify only literal published large-area names; never infer their country.
+const ORIGIN_AREAS=new Set('Sumatra|Java|Bali|Sulawesi|Timor|Flores|Hawaii|Kona'.split('|').map(keyOf));
+function withPublishedArea(value,area){
+ const parts=value.split(/\s*,\s*/);
+ if(parts.some(part=>keyOf(part)===keyOf(area)))return value;
+ const at=ORIGIN_COUNTRIES.has(keyOf(parts.at(-1)))?parts.length-1:parts.length;
+ parts.splice(at,0,area);return parts.join(', ');
+}
+const geographyParts=coffeeOriginParts;
+const compatibleGeography=compatibleCoffeeOrigins;
 // Some merchants flatten <br>-separated specifications into one field.
 // Stop at the NEXT explicit key, including concatenated CamelCase labels:
 // e.g. "Lime, Tea Origin: Kenya" or "GedebElevation: 1900m".
 // We intentionally do not guess flavor/origin facts from arbitrary prose.
 function cleanTrailingProductLabels(text){
- const key=/(?:Tasting Notes?|Flavou?r Notes?|Cupping Notes?|Origin|Country(?: of Origin)?|Region|Elevation|Altitude|Farm\/Co-?op|Farm|Producer|Variet(?:y|ies|al|als)|Process(?:ing)?(?: Method)?|Roast(?: Level)?|Harvest(?: Year)?|Shipping|Quantity)\s*:/gi;
+ const names=[...Object.values(FIELD_ALIASES).flat(),'Shipping','Quantity','Community','Grade'].sort((a,b)=>b.length-a.length)
+  .map(label=>label.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/ /g,'\\s+'));
+ const key=new RegExp('(?:'+names.join('|')+')\\s*(?:[:：=]|\\s+[-–—]{1,3}\\s*|\\s+/{2,3}\\s+)','gi');
  let first=text.length;
  for(const match of text.matchAll(key)){
   // The leading label can legitimately be the value if a source already
   // retained it. Only subsequent key-value blocks are contamination.
   if(match.index>0&&match.index<first)first=match.index;
  }
- return text.slice(0,first).trim();
+ return text.slice(0,first).replace(/[\s,;|✹]+$/,'').trim();
 }
-function normalized(field,value){
- const raw=textOf(value,field==='tasting_notes'?650:220);
+function normalized(field,value,{allowFlavorProse=false}={}){
+ const raw=textOf(value,field==='tasting_notes'?650:1000);
  if(!raw)return '';
- const s=['tasting_notes','origin','producer','variety','elevation_m','release_label'].includes(field)?
+ let s=['tasting_notes','origin','producer','variety','elevation_m','release_label','process','roast_level'].includes(field)?
   cleanTrailingProductLabels(raw):raw;
- if(!s)return '';
+ if(field==='origin')s=s.replace(/\s*[|;,]+\s*$/,'').trim();
+ if(field==='producer')s=s.replace(/\s+(?:read more|learn more|view details)\s*$/i,'').trim();
+ if(field==='producer'&&/^(?:amount|quantity|size|weight|choose|select|add to cart|shop now)$/i.test(s))return '';
+ if(field==='variety')s=s.replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'').replace(/\.$/,'').trim();
+ if(field==='variety'){
+  const marketed=s.match(/^(.{2,140}?),\s+(?:celebrated|renowned|prized|known|regarded|considered)\b/i);
+  if(marketed&&explicitCoffeeVarietyList(marketed[1]))s=marketed[1].replace(/^100\s*%\s*/,'').trim();
+ }
+ if(!s||LOOKUP.has(keyOf(s)))return '';
+ if(field!=='tasting_notes'&&s.length>220)return '';
+ if(['origin','variety'].includes(field)&&/\b(?:this|these|those|is|are|was|were|typically|generally|often|refers|instead|when|because|creates|absorbing|resulting|we|our)\b/i.test(s))return '';
+ if(field==='origin'&&/^(?:single[ -]origin|blend|blended|various|seasonal|rotating|multiple origins?)\.?$/i.test(s))return '';
  if(field==='tasting_notes'){
   // An explicit product flavor label sometimes includes a prose lead-in.
   // Keep the roaster's actual listed notes, not the words "coffee with notes of".
   // Remove only this anchored, clearly extraneous introductory phrase.
   const labelled=s.match(/^(?:this )?coffee\s+(?:with|has)\s+(?:tasting\s+)?notes?\s+of\s+(.+)$/i);
-  return (labelled?labelled[1].replace(/[.!?]+\s*$/,'').trim():s)
-   .replace(/\s*[•·]\s*/g,', ').replace(/(?:,\s*)+$/,'').trim();
+  const notes=(labelled?labelled[1].replace(/[.!?]+\s*$/,'').trim():s)
+   .replace(/\s*[•·]\s*/g,', ').replace(/^(?:,\s*)+|(?:,\s*)+$/g,'').trim();
+  return normalizeExplicitCoffeeTastingNotes(notes,{allowProse:allowFlavorProse});
  }
  if(field==='roast_level'){
-  const norm=s.toLowerCase().replace(/[\s_-]/g,'');
-  return norm==='lightmedium'?'Medium-Light':ROAST.find(x=>x.toLowerCase().replace(/[\s-]/g,'')===norm)||'';
+  return normalizeRoastLabel(s)||'';
  }
  if(field==='process'){
+  if(/\b(?:not|never|without|isn['’]t|is\s+not)\b/i.test(s))return '';
+  const norm=withoutNaturalDecaffeinationModifier(s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase());
+  // A declared anaerobic fermentation plus a drying/washing stage is one
+  // combined treatment. A bare list of distinct methods remains mixed.
+  if(/^(?:natural|washed|honey)\s*[,;/+]\s*anaerobic fermentation$|^anaerobic fermentation\s*[,;/+]\s*(?:natural|washed|honey)$/i.test(norm))return 'Anaerobic';
+  const categories=norm.split(/\s*(?:[,/&+|;]|\band\b)\s*/).map(part=>{
+   if(/^anaerobic\b/.test(part))return 'Anaerobic';
+   if(/^(?:pulped[ -]+natural|honey)\b/.test(part))return 'Honey';
+   if(/^(?:fully[ -]+)?washed\b/.test(part))return 'Washed';
+   if(/^natural\b/.test(part))return 'Natural';
+   if(/^(?:co[ -]?ferment(?:ed|ation)?|osmotic dehydration)\b/.test(part))return 'Other/Unknown';
+   return '';
+  }).filter(Boolean);
+  if(new Set(categories).size>1)return 'Other/Unknown';
+  if(categories.length===1&&categories[0]==='Other/Unknown')return 'Other/Unknown';
+  if(/\bpulped[ -]+natural\b/.test(norm)&&!/\bwashed\b/.test(norm))return 'Honey';
+  if(/\b(?:wet[ -]+hulled|giling basah|semi[ -]+washed)\b/.test(norm))return 'Other/Unknown';
+  if(/\b(?:wet[ -]+process(?:ed|ing)?|fully[ -]+washed)\b/.test(norm)&&!/(?:natural|honey|anaerobic)/.test(norm))return 'Washed';
+  if(/\b(?:dry[ -]+process(?:ed|ing)?|unwashed|dried in (?:the )?cherry)\b/.test(norm)&&!/(?:washed|honey|anaerobic)/.test(norm))return 'Natural';
   // This is one anaerobic treatment with a natural drying subtype,
   // not an ambiguous Washed & Natural blend.
-  if(/\b(?:anaerob(?:ic|ico|ica)[\s-]+natural|natural[\s-]+anaerob(?:ic|ico|ica))\b/i.test(s.normalize('NFD').replace(/[\u0300-\u036f]/g,'')))
+  if(/\b(?:anaerob(?:ic|ico|ica)[\s-]+(?:natural|washed|honey)|(?:natural|washed|honey)[\s-]+anaerob(?:ic|ico|ica))\b/i.test(s.normalize('NFD').replace(/[\u0300-\u036f]/g,'')))
    return 'Anaerobic';
-  const norm=s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  if(/\banaerobic(?:ally)?\b/.test(norm)&&/\bferment(?:ation|ed|ing)?\b/.test(norm)&&
+     !/\b(?:blend|components?|mixed|mixture)\b|\b(?:washed|natural|honey)\s*(?:&|\+|\/|,|and)\s*(?:washed|natural|honey)\b/.test(norm))return 'Anaerobic';
   // Different components of a blend can have different processes; the
   // canonical single-select field must not silently say "Washed" if the
   // roaster actually says "Washed & Natural".
@@ -172,6 +313,10 @@ function normalized(field,value){
    return 'Other/Unknown';
   return found.length===1?found[0]:'';
  }
+ if(field==='elevation_m'){
+  const elevation=parseCoffeeElevation(s);
+  return elevation&&!elevation.conflicting?elevation.display:'';
+ }
  return s;
 }
 function addField(fields,rawKey,value){
@@ -180,18 +325,64 @@ function addField(fields,rawKey,value){
  // supported canonical key just because its display synonym is absent.
  const key=Object.hasOwn(FIELD_ALIASES,rawKey)?rawKey:LOOKUP.get(keyOf(rawKey));
  if(!key)return;
+ // Keep every valid literal process claim, including evidence encountered
+ // after a provisional category conflict, for precise stage reconciliation.
+ if(key==='process')recordCoffeeProcessingClaim(fields,cleanTrailingProductLabels(textOf(value,1000)),normalized(key,value));
+ // A recurring calendar window describes harvest timing, not the identity
+ // of this year's release. Keep it even when a separate year is disputed.
+ if(key==='release_label'){
+  const window=normalized(key,value);
+  if(isRecurringCoffeeHarvestWindow(window)){rememberRecurringHarvest(fields,window);return;}
+  if(isGenericCoffeeLotLabel(window))return;
+ }
  const conflicts=conflictsByFields.get(fields);
  if(conflicts?.has(key))return;
- const s=normalized(key,value);
+ if(key==='elevation_m'&&parseCoffeeElevation(textOf(value,500))?.conflicting){
+  conflicts?.add(key);delete fields[key];return;
+ }
+ if(key==='roast_level'&&Array.isArray(value)&&new Set(value.map(item=>normalizeRoastLabel(textOf(item,100))).filter(Boolean)).size>1){
+  conflicts?.add(key);delete fields[key];return;
+ }
+ let s=normalized(key,value,{allowFlavorProse:key==='tasting_notes'&&rawKey!==key});
+ // A named cooperative/farm can be accidentally prefixed to a Region
+ // caption. Remove it only with independent, literal role evidence from
+ // this selected product; the complete published value remains in facts.
+ if(key==='origin'&&s)s=cleanCoffeeGeographyEntityPrefix(s,geographyRolesByFields.get(fields)||[]);
+ if(key==='tasting_notes'&&s&&fields[key]){
+  const prose=value=>!normalizeExplicitCoffeeTastingNotes(value)||/^(?:a|an)\b.*\b(?:cup|coffee|notes?|aroma|flavou?r|body|finish)\b/i.test(value);
+  const beforeProse=prose(fields[key]),afterProse=prose(s);
+  if(beforeProse&&!afterProse){fields[key]=s;return;}
+  if(afterProse&&!beforeProse)return;
+  if(equivalentCoffeeTastingNotes(s,fields[key])){
+   if(!/[,;&|•·/]/.test(fields[key])&&/[,;&|•·/]/.test(s))fields[key]=s;
+   return;
+  }
+  conflicts?.add(key);delete fields[key];return;
+ }
+ if(key==='variety'&&s&&fields.variety){
+  const compatible=compatibleGenericCoffeeVarieties(fields.variety,s);
+  if(compatible){
+   fields.variety=compatible;
+   if(compatible===s)narrativeIdentityByFields.get(fields)?.delete(key);
+   return;
+  }
+ }
+ if(s)narrativeIdentityByFields.get(fields)?.delete(key);
  // Storefront reverse-layout metrics can accidentally assign the RELATIONSHIP
  // year to the neighboring PRODUCER label (observed on Wuri / Uraga).
  if(key==='producer'&&(/^(?:since|est(?:ablished)?\.?|founded)\s+(?:19|20)\d{2}$/i.test(s)||
-   /^(?:coffee\s+)?growers?\s+from\b/i.test(s)))return;
+   /^(?:coffee\s+)?growers?\s+from\b/i.test(s)||
+   (/^\d/.test(s)&&!/\b(?:farmers?|growers?|producers?|farms?|cooperatives?|community|famil(?:y|ies)|small[ -]?holders?|farm[ -]?holders?)\b/i.test(s))))return;
  // A farm and its named grower are complementary source facts. Preserve
  // the farm separately and prefer an explicit producer over a farm fallback.
  if(key==='producer'&&s){
-  const farm=/^(?:farm|farms|finca)$/i.test(String(rawKey).trim());
+  const farm=/^(?:farm|farms|finca)$/.test(keyOf(rawKey));
   if(farm){
+   if(farmEvidenceByFields.has(fields)&&keyOf(farmEvidenceByFields.get(fields))!==keyOf(s)){
+    farmEvidenceByFields.set(fields,null);
+    if(producerEvidenceByFields.get(fields)==='farm')delete fields.producer;
+    return;
+   }
    if(!farmEvidenceByFields.has(fields))farmEvidenceByFields.set(fields,s);
    if(fields.producer)return;
    producerEvidenceByFields.set(fields,'farm');
@@ -201,22 +392,39 @@ function addField(fields,rawKey,value){
  }
  if(key==='origin'&&s){
   const label=keyOf(rawKey),geography=geographyByFields.get(fields)||{};
-  const part=/^(?:country|countryoforigin|pais|paisdeorigen|pays)$/.test(label)?'country':
-   /^(?:region|growingregion)$/.test(label)?'region':null;
+  const regionLevel=/^(?:region|growingregion|regionmunicipality|regioncity)$/.test(label)?'region':
+   /^(?:department|province|state|district|municipality|subregion|city|village)$/.test(label)?label:null;
+  let part=/^(?:country|countryoforigin|pais|paisdeorigen|pays)$/.test(label)?'country':regionLevel?'region':null;
+  const allParts=geographyParts(s);
+  if(!part&&allParts.length&&allParts.every(value=>ORIGIN_COUNTRIES.has(value)))part='country';
+  if(!part&&allParts.length===1&&ORIGIN_AREAS.has(allParts[0]))part='area';
   const reject=()=>{conflicts?.add('origin');delete fields.origin;geographyByFields.delete(fields);};
   // Country evidence also appears under Origin/Origen or inside a fuller
   // region-country value. A narrower label cannot overwrite a different
   // explicit country, even before its Region counterpart has arrived.
   const countries=geographyParts(s).filter(value=>ORIGIN_COUNTRIES.has(value)).sort();
   if(!countries.length&&part==='country')countries.push(...geographyParts(s).sort());
-  if(countries.length&&geography.countries?.length&&countries.join('|')!==geography.countries.join('|')){
+  const blend=blendEvidenceByFields.get(fields),blendCountries=(blend?.complete_origins&&blend.multi_country?blend.origins:[])
+   .flatMap(geographyParts).filter(value=>ORIGIN_COUNTRIES.has(value));
+  const sameBlend=blendCountries.length>1&&countries.length&&geography.countries?.length&&
+   [...countries,...geography.countries].every(country=>blendCountries.includes(country));
+  if(countries.length&&geography.countries?.length&&countries.join('|')!==geography.countries.join('|')&&!sameBlend){
    reject();return;
   }
-  if(countries.length)geography.countries=countries;
+  if(countries.length)geography.countries=sameBlend?[...new Set(blendCountries)].sort():countries;
   if(part){
-   const value=geography[part]?compatibleGeography(geography[part],s):s;
+   const previous=part==='region'?geography.regions?.[regionLevel]:geography[part];
+   const value=previous?compatibleGeography(previous,s):s;
    if(!value){reject();return;}
-   geography[part]=value;
+   if(part==='region'){
+    geography.regions??={};geography.regions[regionLevel]=value;
+    let joined='';
+    for(const level of ['village','city','municipality','subregion','district','region','province','department','state']){
+     const next=geography.regions[level];if(!next)continue;
+     joined=joined?(compatibleGeography(joined,next)||joined+', '+next):next;
+    }
+    geography.region=joined;
+   }else geography[part]=value;
   }else{
    // Keep a small deduplicated set of original untyped values. Waiting for
    // the typed pair permits Origin:Huila as well as Origin:Colombia, while
@@ -228,16 +436,79 @@ function addField(fields,rawKey,value){
    }
   }
   geographyByFields.set(fields,geography);
-  if(geography.country&&geography.region){
-   const region=geography.region,country=geography.country;
-   let combined=keyOf(region).includes(keyOf(country))?region:region+', '+country;
+  if((geography.country&&geography.region)||(geography.area&&(geography.region||geography.country))){
+   let combined='';
+   for(const part of [geography.region,geography.area,geography.country].filter(Boolean))
+    combined=combined?(compatibleGeography(combined,part)||combined+', '+part):part;
    for(const origin of geography.origins||[]){
-    combined=compatibleGeography(combined,origin);
+    let compatible=compatibleGeography(combined,origin);
+    if(!compatible&&geography.area){
+     const withoutArea=combined.split(/\s*,\s*/).filter(part=>keyOf(part)!==keyOf(geography.area)).join(', ');
+     const refined=compatibleGeography(withoutArea,origin);
+     if(refined)compatible=withPublishedArea(refined,geography.area);
+    }
+    combined=compatible;
     if(!combined){reject();return;}
    }
    fields.origin=combined;
    return;
   }
+  // Reconcile fuller untyped Origin values even if a separate Region label
+  // is absent. Colombia -> Huila, Colombia is enrichment; Huila, Colombia
+  // versus Cauca, Colombia is a contradiction, not a first-value preference.
+  let combined=geography.country||geography.region||geography.area||geography.origins?.[0]||'';
+  for(const origin of geography.origins||[]){
+   const value=compatibleGeography(combined,origin);
+   if(value){combined=value;continue;}
+   if(geography.region&&!geography.country&&(isCoffeeBroadOrigin(combined)||isCoffeeBroadOrigin(origin))){
+    const broad=isCoffeeBroadOrigin(combined)?combined:origin;
+    const local=isCoffeeBroadOrigin(combined)?origin:combined;
+    combined=local+', '+broad;continue;
+   }
+   const firstCountries=geographyParts(combined).filter(part=>ORIGIN_COUNTRIES.has(part));
+   const otherCountries=geographyParts(origin).filter(part=>ORIGIN_COUNTRIES.has(part));
+   // A typed literal area can complete a region-country tuple even when
+   // that tuple was published under Origin rather than separate captions.
+   // Require its explicit final country; do not infer one from the area.
+   if(geography.area&&!geography.region&&!geography.country&&otherCountries.length===1){
+    const pieces=origin.split(/\s*,\s*/);
+    if(pieces.length>1&&ORIGIN_COUNTRIES.has(keyOf(pieces.at(-1)))){
+     combined=withPublishedArea(origin,geography.area);continue;
+    }
+   }
+   if((isCoffeeBroadOrigin(combined)||isCoffeeBroadOrigin(origin))&&(firstCountries.length||otherCountries.length)){reject();return;}
+   if(geography.country&&!geography.region&&!otherCountries.length&&geographyParts(combined).every(part=>ORIGIN_COUNTRIES.has(part))){
+    combined=origin+', '+geography.country;continue;
+   }
+   if((firstCountries.length&&otherCountries.length)||(!geography.country&&!geography.region)||geography.country||
+      (geography.region&&otherCountries.length)){
+    reject();return;
+   }
+  }
+  if(combined){fields.origin=combined;return;}
+ }
+ if(key==='release_label'&&s){
+  const label=keyOf(rawKey),kind=/^(?:harvest|crop|cosecha|fechadecosecha)/.test(label)?'harvest':/^lot/.test(label)?'lot':'release';
+  if(kind==='lot'&&/^(?:single[ -]origin|blend|communal|community|regional)(?:\s+lot)?$/i.test(s))return;
+  if(kind==='harvest'&&/\b(?:hand[ -]?picked|selective picking|seasonally selected|peak ripeness|year[ -]round)\b/i.test(s))return;
+  const evidence=releaseEvidenceByFields.get(fields)||{};
+  const comparable=value=>keyOf(String(value).replace(/^(?:harvest(?: year)?|crop year|lot(?: number)?|release(?: year)?)\s*[:#-]?\s*/i,''));
+  if(evidence[kind]&&comparable(evidence[kind])!==comparable(s)){
+   conflicts?.add(key);delete fields[key];return;
+  }
+  evidence[kind]??=s;
+  if(evidence.harvest&&evidence.release&&comparable(evidence.harvest)!==comparable(evidence.release)){
+   conflicts?.add(key);delete fields[key];return;
+  }
+  releaseEvidenceByFields.set(fields,evidence);
+  const primary=evidence.harvest||evidence.release;
+  if(primary&&evidence.lot){
+   const prefix=evidence.harvest?'Harvest':'Release';
+   const first=new RegExp('^'+prefix+'\\b','i').test(primary)?primary:prefix+' '+primary;
+   const lot=/^lot\b/i.test(evidence.lot)?evidence.lot:'Lot '+evidence.lot;
+   fields.release_label=first+'; '+lot;
+  }else fields.release_label=primary||evidence.lot;
+  return;
  }
  // Withhold contradictory categorical/release evidence instead of silently
  // preferring stale JSON-LD. Compound processes must stay unsimplified.
@@ -248,38 +519,119 @@ function addField(fields,rawKey,value){
   fields.process='Other/Unknown';return;
  }
  if(key==='process'&&fields.process==='Other/Unknown')return;
- if(conflicts&&(s&&fields[key]&&['process','roast_level','release_label','variety'].includes(key)&&
-    (key==='variety'?!equivalentCoffeeVarieties(s,fields[key]):keyOf(s)!==keyOf(fields[key])))){
+ if(key==='elevation_m'&&s&&fields.elevation_m){
+  // Conversion rounds the display to metres. Compare the original units
+  // so an explicitly published feet range does not conflict with its own
+  // metric counterpart merely because of that display rounding.
+  const source=textOf(value,500),previous=elevationSourceByFields.get(fields)||fields.elevation_m;
+  const compatible=compatibleCoffeeElevations(previous,source);
+  if(compatible){fields.elevation_m=normalized('elevation_m',compatible);elevationSourceByFields.set(fields,compatible);return;}
+ }
+ if(conflicts&&(s&&fields[key]&&['process','roast_level','producer','elevation_m','variety'].includes(key)&&
+    (key==='variety'?!equivalentCoffeeVarieties(s,fields[key]):key==='elevation_m'?!equivalentCoffeeElevations(s,fields[key]):keyOf(s)!==keyOf(fields[key])))){
   conflicts.add(key);delete fields[key];return;
  }
  if(fields[key])return;
- if(s)fields[key]=s;
+ if(s){fields[key]=s;if(key==='elevation_m')elevationSourceByFields.set(fields,textOf(value,500));}
+}
+function canonicalIdentityScope(fields,raw,source_type='html'){
+ const scoped=isolateCoffeeIdentityCohorts(raw,{name:fields.name});
+ if(scoped.origin)addField(fields,'Origin',scoped.origin);
+ if(scoped.truncated)identityScopeTruncatedByFields.add(fields);
+ const retained=identityQuarantinesByFields.get(fields)||[];
+ for(const range of scoped.quarantined||[]){
+  const fragment=raw.slice(range.start,range.end);
+  if(!fragment||retained.some(item=>item.raw===fragment&&item.source_type===source_type))continue;
+  if(retained.length>=12){identityScopeTruncatedByFields.add(fields);break;}
+  retained.push({raw:fragment,source_type});
+ }
+ if(retained.length)identityQuarantinesByFields.set(fields,retained);
+ return scoped.html;
+}
+function canonicalComponentScope(fields,html){
+ const blend=extractCoffeeBlendEvidence(html,{name:fields.name,scoped:true});
+ if(!blend)return html;
+ const previous=blendEvidenceByFields.get(fields);
+ if(!previous||blend.display.length>previous.display.length)blendEvidenceByFields.set(fields,blend);
+ if((blend.origin||blend.origins.length)&&(blend.component_format!=='narrative'||blend.complete_origins))
+  addField(fields,'Origin',blend.origin||blend.origins.join(', '));
+ if(blend.complete_producers)addField(fields,'Producer',blend.producers.join(', '));
+ if(blend.complete_varieties)addField(fields,'Variety',blend.varieties.join(', '));
+ if(blend.multi_process&&blend.all_component_processes!==false)addField(fields,'Process','Other/Unknown');
+ else if(blend.complete_process)addField(fields,'Process',blend.processes[0]);
+ return withoutCoffeeBlendComponentSpecs(html,blend);
+}
+function productFlavorProfiles(fields,html){
+ const profiles=extractProductFlavorProfileEvidence(html,{clean});
+ const complete=profiles.filter(profile=>profile.kind!=='named_chips');
+ for(const profile of profiles){
+  if(profile.kind==='named_chips'&&complete.some(other=>coffeeTastingNotesSubset(profile.value,other.value)))continue;
+  addField(fields,'Tasting Notes',profile.value);
+ }
+ return profiles.length;
 }
 function productDetails(fields,p){
- const brand=textOf(p.brand??p.manufacturer);
- if(brand&&!fields.roaster)fields.roaster=readableRoaster(brand);
- for(const row of Array.isArray(p.additionalProperty)?p.additionalProperty.slice(0,80):[]){
+ const brand=publishedRoaster(textOf(p.brand??p.manufacturer));
+ if(brand&&!fields.roaster)fields.roaster=brand;
+ const rawDescription=String(p.description??'');
+ const currentDescription=rawDescription&&rawDescription.length<=160000?canonicalIdentityScope(fields,rawDescription,'product_json'):'';
+ const description=currentDescription?canonicalComponentScope(fields,currentDescription):'';
+ rememberGeographyEntityRoles(fields,description);
+ const properties=Array.isArray(p.additionalProperty)?p.additionalProperty.slice(0,80):p.additionalProperty&&typeof p.additionalProperty==='object'?[p.additionalProperty]:[];
+ for(const row of properties){
   addField(fields,row?.name,row?.value);
  }
  // Product JSON-LD and storefront metadata may include HTML or plain-text
  // labels, often separated by BR, newlines or semicolons (not HTML tables).
  // Only the selected Product's explicitly labeled lines are evidence.
- const description=String(p.description??'');
- if(description&&description.length<=16000){
+ if(description){
+  for(const place of extractCoffeeGeographyTuples(description,{name:fields.name,clean}))addField(fields,'Origin',place);
+  // The selected structured description can contain the same real tables,
+  // definition lists and metric cards as visible HTML. Preserve their
+  // structure instead of flattening a header row into a supposed value.
+  for(const fact of extractSemanticCoffeeSpecs(description,{clean}).facts)
+   if(Object.hasOwn(FIELD_ALIASES,fact.kind))addField(fields,fact.label,fact.value);
   labeledPairs(description,fields);
-  const delimited=description.replace(/<br\s*\/?>|<\/(?:p|li|div)>/gi,'\n')
-   .replace(/<[^<>]{0,800}>/g,' ');
-  for(const line of delimited.split(/\r?\n|\s*;\s*/).slice(0,45)){
-   const m=clean(line,450).match(/^([\p{L}][\p{L} .&/'-]{1,36})\s*[:：]\s*(.{2,270})$/u);
+  const delimited=entities(description.replace(/<br\s*\/?>|<\/(?:p|li|div)>/gi,'\n')
+   .replace(/<[^<>]{0,800}>/g,' '));
+  // A semicolon terminates an HTML entity and can also separate cultivars.
+  // Decode first, and split only before another explicit label; otherwise
+  // "Caturra &amp; Castillo" creates a false second claim "Caturra &amp".
+  const segments=delimited.split(/\r?\n|\s*;\s*(?=[\p{L}][\p{L} .&/'()_-]{1,55}\s*[:：])/u);
+  for(const line of segments.slice(0,90)){
+   const m=clean(line,450).match(/^([\p{L}][\p{L} .&/'-]{1,36})\s*(?:[:：|=]|\s+[-–—]{1,3}\s+|\s+\/{2,3}\s+)\s*(.{2,270})$/u);
    if(m&&LOOKUP.has(keyOf(m[1])))addField(fields,m[1],m[2]);
   }
+ }
+ if(currentDescription){
+  const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const body=/<[a-z][^>]*>/i.test(currentDescription)?currentDescription:currentDescription.split(/\r?\n/).filter(line=>line.trim()).map(line=>'<p>'+escape(line)+'</p>').join('');
+  const story='<main><h1>'+escape(fields.name)+'</h1><div itemprop="description">'+body+'</div></main>';
+  const explicit=productFlavorProfiles(fields,story);
+  if(!explicit){
+   const notes=extractProductFlavorEvidence(story,{clean});
+   if(notes){
+    const existing=narrativeFlavorByFields.get(fields)||[];
+    if(!existing.some(value=>equivalentCoffeeTastingNotes(value,notes)))existing.push(notes);
+    narrativeFlavorByFields.set(fields,existing);
+   }
+  }
+  const roast=extractRoastVisualEvidence(story);
+  if(roast.confidence==='conflict'){conflictsByFields.get(fields)?.add('roast_level');delete fields.roast_level;}
+  else if(roast.value)addField(fields,'roast_level',roast.value);
  }
  for(const [key,value] of Object.entries(p)){
   if(['additionalProperty','offers','description','brand','manufacturer','image'].includes(key))continue;
   addField(fields,key,value);
  }
- const details=p.metafields??p.metadata??p.attributes??p.options??null;
- if(details&&typeof details==='object'&&!Array.isArray(details)){
+ // Each recognized metadata container can supply complementary fields.
+ // Empty metafields must not shadow attributes, and contradictions still
+ // pass through the same canonical evidence checks.
+ for(const details of [p.metafields,p.metadata,p.attributes,p.options]){
+ if(Array.isArray(details)){
+  for(const row of details.slice(0,80))if(row&&typeof row==='object')
+   addField(fields,row.name??row.key??row.label,row.value??row.values??row.options);
+ }else if(details&&typeof details==='object'){
   for(const [key,value] of Object.entries(details).slice(0,80)){
    // Some Shopify theme metafields use {value:"Light"} / nested custom.
    if(key==='custom'&&value&&typeof value==='object'&&!Array.isArray(value)){
@@ -287,50 +639,49 @@ function productDetails(fields,p){
    }else addField(fields,key,value);
   }
  }
+ }
  const tags=(Array.isArray(p.tags)?p.tags.slice(0,60):[]).filter(tag=>typeof tag==='string');
  const tagPairs=tags.map(tag=>tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i)).filter(Boolean);
  const originTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='origin');
+ const processTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='process');
+ const declaredBlend=tags.some(tag=>/^type\s*[:=]\s*blend\s*$/i.test(tag));
+ // Multiple exact processing tags on an explicitly declared blend describe
+ // its components. Nonblend products still pass each tag to conflict checks.
+ const mixedProcessTags=declaredBlend&&processTags.length>1&&processTags.every(pair=>
+  /^(?:washed|natural|honey|anaerobic)$/i.test(pair[2].trim()))&&
+  new Set(processTags.map(pair=>pair[2].trim().toLowerCase())).size>1;
  let blendOrigin='';
  // An explicitly blend-tagged Product can list one origin country per tag
  // (e.g. Onyx Geometry). Combine only that same-product component cohort;
  // independent descriptions, attributes and visible labels still pass through
  // the ordinary whole-product geography conflict checks.
- if(tags.some(tag=>/^type\s*[:=]\s*blend\s*$/i.test(tag))&&originTags.length>1&&
+ if(declaredBlend&&originTags.length>1&&
     originTags.every(pair=>ORIGIN_COUNTRIES.has(keyOf(pair[2])))){
   const countries=new Map();
   for(const pair of originTags)if(!countries.has(keyOf(pair[2])))countries.set(keyOf(pair[2]),pair[2].trim());
   const joined=[...countries.values()].join(', ');
   if(joined.length<=220)blendOrigin=joined;
  }
- let blendOriginAdded=false;
+ let blendOriginAdded=false,blendProcessAdded=false;
  for(const pair of tagPairs){
   if(blendOrigin&&pair[1].toLowerCase()==='origin'){
    if(!blendOriginAdded)addField(fields,'origin',blendOrigin);
    blendOriginAdded=true;
+  }else if(mixedProcessTags&&pair[1].toLowerCase()==='process'){
+   if(!blendProcessAdded)addField(fields,'process',processTags.map(item=>item[2].trim()).join(' & '));
+   blendProcessAdded=true;
   }else addField(fields,pair[1],pair[2]);
  }
-}
-function focusedProductText(html){
- const h1=[...html.matchAll(/<h1\b[^<>]{0,2000}>([\s\S]{0,320}?)<\/h1>/gi)];
- const start=h1.length===1?h1[0].index:0;
- let crop=html.slice(start,start+25000);
- const end=crop.search(/<h[2-4][^<>]{0,2000}>\s*(?:more coffees|you may also like|related products|shop similar)/i);
- if(end>400)crop=crop.slice(0,end);
- return clean(crop,6500);
+ for(const tag of tags){
+  // Exact product-owned taxonomy tags may spell out the type of coffee
+  // without a colon. Do not read longer promotional or negative tag text.
+  const process=tag.match(/^(?:(washed)\s+coffee|(washed|natural|honey|anaerobic)\s+process(?:ed)?\s+coffee)\s*$/i);
+  if(process)addField(fields,'process',process[1]||process[2]);
+  const roast=tag.match(/(?:^|[_\s])((?:(?:ultra|very)\s+light|light\s*[-/]\s*medium|medium\s*[-/]\s*(?:light|dark)|light|medium|dark)\s+roast)(?:\s+coffee)?\s*$/i);
+  if(roast)addField(fields,'roast_level',roast[1]);
+ }
 }
 function explicitNearbyFacts(html,fields){
- const near=focusedProductText(html).slice(0,2600);
- if(!fields.process){
-  const combo=/\b(washed|natural|honey|anaerobic)\s*(?:&|and|\/|,)\s*(washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i.test(near);
-  if(!combo){
-   const p=near.match(/\b(fully washed|washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i);
-   if(p)fields.process=normalized('process',p[1]);
-  }
- }
- if(!fields.elevation_m){
-  const m=near.match(/\b(\d{3,4}\s*(?:[-–]\s*\d{3,4})?)\s*m(?:asl|eters?\s*(?:above sea level)?)/i);
-  if(m)fields.elevation_m=m[1].replace(/\s+/g,' ').trim()+' masl';
- }
  // Some coffee labels place "Gedeb, Ethiopia" and a flavor list in
  // adjacent product <p> elements. Read the discrete elements, never combine
  // navigation/header words into a fabricated origin.
@@ -339,6 +690,14 @@ function explicitNearbyFacts(html,fields){
  if(h1)focused=html.slice(h1.index,h1.index+16000);
  const paragraphs=[...focused.matchAll(/<(p|h[2-6])\b[^<>]{0,350}>([\s\S]{1,450}?)<\/\1>/gi)]
   .map(m=>clean(m[2],200)).filter(Boolean).slice(0,40);
+ if(!fields.process){
+  for(const paragraph of paragraphs){
+   if(/\b(?:not|never|without|neither|unlike|isn't|wasn't|doesn't|rather than|generally|typically|usually|for example|such as|other coffees?|previous (?:harvest|lot|year)|last year)\b/i.test(paragraph))continue;
+   if(/\b(?:fully washed|washed|natural|honey|anaerobic)\s+(?:processed|process)\b/i.test(paragraph)){
+    addField(fields,'process',paragraph);markNarrativeIdentity(fields,'process');if(fields.process)break;
+   }
+  }
+ }
  const originIndex=paragraphs.findIndex(p=>/^[\p{L}\p{M}][\p{L}\p{M} .’'&/-]{1,135},\s*(?:Ethiopia|Colombia|Kenya|Brazil|Guatemala|Costa Rica|Honduras|El Salvador|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand|China|Vietnam|Laos|Myanmar|Papua New Guinea|DR Congo|United States|Jamaica|Hawaii)$/iu.test(p));
  if(originIndex>=0){
   if(!fields.origin)fields.origin=paragraphs[originIndex];
@@ -353,63 +712,16 @@ function explicitNearbyFacts(html,fields){
  }
  // Never infer harvest or roast from surrounding promotional prose.
 }
-function explicitEspressoRecipe(html){
- // Some roasters publish equipment-specific Espresso recipes alongside V60
- // and AeroPress recipes. Scope strictly to the named Espresso heading, not
- // the adjacent filter method, and never invent missing dose/yield/time.
- for(const h of html.matchAll(/<h([2-6])\b[^<>]{0,400}>([^<>]{0,95}\bEspresso\b[^<>]{0,65})<\/h\1>/gi)){
-  const title=clean(h[2],85);
-  if(!/\bEspresso\b/i.test(title)||/^(?:Espresso\s*\|\s*Filter|Espresso Recipe|Filter\s*(?:&|and)\s*Espresso)$/i.test(title))continue;
-  let block=html.slice(h.index+h[0].length,h.index+h[0].length+2100);
-  const next=block.search(/<h[2-4]\b/i);if(next>80)block=block.slice(0,next);
-  const recipe=clean(block,1600);
-  const dose=recipe.match(/\bDOSE\s*:?\s*(\d{1,2}(?:\.\d)?)\s*g\b/i);
-  const yieldG=recipe.match(/\bYIELD\s*:?\s*(\d{1,3}(?:\.\d)?)\s*g\b/i);
-  const time=recipe.match(/\bTIME\s*:?\s*(?:(\d):)?(\d{1,2})(?:\s*(?:s|sec|seconds))?\b/i);
-  if(!dose||!yieldG||!time)continue;
-  const input=Number(dose[1]),output=Number(yieldG[1]);
-  const seconds=Number(time[2])+(time[1]?60*Number(time[1]):0);
-  if(input<5||input>40||output<5||output>150||seconds<5||seconds>80)continue;
-  const result={dose_g:input,yield_g:output,time_s_min:seconds,time_s_max:seconds,
-   method:title};
-  const temp=recipe.match(/\bTEMP\s*:?\s*(\d{2,3}(?:\.\d)?)\s*°?\s*(F|C)\b/i);
-  if(temp&&Number(temp[1])>=40&&Number(temp[1])<=220)
-   result.temperature=temp[1]+'°'+temp[2].toUpperCase();
-  return result;
- }
- // Proud Mary provides an Espresso 1:2.5 alongside Filter 1:16 but does
- // NOT publish the dose, output mass or seconds. Expose a ratio reference
- // without fabricating a full recipe or inserting a default dose.
- const text=focusedProductText(html);
- // Proud Mary uses its product-specific meta-info block and often puts
- // this before the H1 and far from the short main-title crop.
- const compact=html.match(/<p\b[^<>]{0,2000}class=["'][^"']{0,2000}meta-title[^"']{0,2000}["'][^<>]{0,2000}>\s*Espresso\s*\|\s*Filter\s*<\/p>[\s\S]{0,450}?<p\b[^<>]{0,2000}>\s*Ratio\s*1\s*:\s*(\d(?:\.\d{1,2})?)\s*\|\s*1\s*:\s*\d/i);
- if(compact){
-  const ratio=Number(compact[1]);
-  if(ratio>=1&&ratio<=5)return {ratio,method:'Espresso'};
- }
- const ratioOnly=text.match(/\bEspresso\s*\|\s*Filter\b[\s\S]{0,130}?\bRatio\s*1\s*:\s*(\d(?:\.\d{1,2})?)\s*\|\s*1\s*:/i);
- if(ratioOnly){
-  const ratio=Number(ratioOnly[1]);
-  if(ratio>=1&&ratio<=5)return {ratio,method:'Espresso'};
- }
-
- const i=text.search(/\bEspresso\b/i);
- if(i<0)return null;
- const snippet=text.slice(i,i+750);
- const dose=snippet.match(/\bCOFFEE\s+IN\s*:?\s*(\d{1,2}(?:\.\d)?)\s*g\b/i);
- const yieldMass=snippet.match(/\bESPRESSO\s+OUT\s*:?\s*(\d{1,3}(?:\.\d)?)\s*g\b/i);
- const time=snippet.match(/\bBREW\s+TIME\s*:?\s*(\d{1,2}(?:\.\d)?)\s*(?:[-–]\s*(\d{1,2}(?:\.\d)?))?\s*s(?:ec|econds?)?\b/i);
- if(!dose||!yieldMass||!time)return null;
- const input=Number(dose[1]),output=Number(yieldMass[1]),first=Number(time[1]),last=Number(time[2]||time[1]);
- if(input<5||input>40||output<5||output>150||first<5||first>80||last<first||last>80)return null;
- return {dose_g:input,yield_g:output,time_s_min:first,time_s_max:last};
-}
-function productHeading(html){
+function productHeading(html,{explicitOnly=false}={}){
  const page=productMarkup(html),{nodes}=coffeeHtmlElements(page);
- const matches=nodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=10000&&
-  /^<\/h1\s*>/i.test(page.slice(node.contentEnd,node.end))).slice(0,20).map(node=>{
-   const content=removeElements(page.slice(node.headEnd,node.contentEnd),['svg','audio','button','style','script']);
+ const matches=nodes.filter(node=>{
+  if(!/^h[1-6]$/.test(node.tag)||node.contentEnd-node.headEnd>10000||
+   !new RegExp('^</'+node.tag+'\\s*>','i').test(page.slice(node.contentEnd,node.end)))return false;
+  const attributes=attrs(node.attributes),explicit=/\b(?:product[_-]title|product__title|product-single__title)\b/i.test(attributes.class||'')||attributes.itemprop==='name';
+  return explicitOnly?explicit:node.tag==='h1'||explicit;
+ }).slice(0,20).map(node=>{
+   const content=removeElements(page.slice(node.headEnd,node.contentEnd),['svg','audio','button','style','script'])
+    .replace(/<(span|small)\b[^<>]{0,600}\bclass=["'][^"']{0,300}\bprice\b[^"']{0,300}["'][^<>]{0,600}>[\s\S]{0,600}?<\/\1>/gi,' ');
    // Animated headings can wrap every letter in nested spans. Only join
    // single-character leaves within explicitly grouped words; ordinary
    // multiword headings retain their normal spaces and accents.
@@ -435,7 +747,8 @@ function productHeading(html){
 function genericStorefrontHeading(value){
  const s=clean(value,180);
  return /^(?:store|shop|catalog|online store|products?|all products?|shop all)(?:\s*[|:\u2013\u2014-].*)?$/i.test(s)||
-  /^.{2,90}?\s*[:|\u2013\u2014-]\s*(?:store|shop|catalog|online store|products?|all products?)$/i.test(s);
+  /^.{2,90}?\s*[:|\u2013\u2014-]\s*(?:store|shop|catalog|online store|products?|all products?)$/i.test(s)||
+  /^(?:(?:error\s*)?404\b|(?:sorry[,!]?\s*)?(?:page|product)\s+(?:not found|unavailable)|not found|access denied|forbidden|just a moment|verify (?:you are|you're) human|checking your browser|please enable (?:javascript|cookies)|service unavailable|temporarily unavailable)\b/i.test(s);
 }
 function removeSiteSuffix(title,site){
  const raw=clean(title,200),siteName=clean(site,120);
@@ -444,13 +757,15 @@ function removeSiteSuffix(title,site){
  return stem||raw;
 }
 function labeledPairs(html,fields){
+ const flavorText=(label,raw,max)=>clean(LOOKUP.get(keyOf(label))==='tasting_notes'?
+  raw.replace(/<\/?(?:span|strong|b|em|i|small|sup|sub|a|u|s|mark|abbr)\b[^<>]{0,2000}>/gi,''):raw,max);
  // Structured specifications: <dt>Label</dt><dd>Value</dd>,
  // <tr><th>Label</th><td>Value</td></tr> and common flat key:value.
  for(const m of html.matchAll(/<dt\b[^<>]{0,2000}>([\s\S]{0,180}?)<\/dt>\s*<dd\b[^<>]{0,2000}>([\s\S]{0,800}?)<\/dd>/gi)){
-  addField(fields,clean(m[1],80),clean(m[2],600));
+  const label=clean(m[1],80);addField(fields,label,flavorText(label,m[2],600));
  }
- for(const m of html.matchAll(/<tr\b[^<>]{0,2000}>\s*<(?:th|td)\b[^<>]{0,2000}>([\s\S]{0,200}?)<\/(?:th|td)>\s*<td\b[^<>]{0,2000}>([\s\S]{0,800}?)<\/td>/gi)){
-  addField(fields,clean(m[1],80),clean(m[2],600));
+ for(const m of html.matchAll(/<tr\b[^<>]{0,2000}>\s*<(?:th|td)\b[^<>]{0,2000}>((?:(?!<\/(?:th|td)>)[\s\S]){0,200}?)<\/(?:th|td)>\s*<td\b[^<>]{0,2000}>((?:(?!<\/td>)[\s\S]){0,800}?)<\/td>\s*<\/tr>/gi)){
+  const label=clean(m[1],80);addField(fields,label,flavorText(label,m[2],600));
  }
  // On some pages a single coffee-info paragraph uses line breaks for
  // multiple labeled fields. Parse each explicitly delimited part separately,
@@ -460,8 +775,11 @@ function labeledPairs(html,fields){
   const parts=m[1].split(/<br\s*\/?\s*>/gi);
   for(const part of parts.slice(0,14)){
    const str=clean(part,420);
-   const label=str.match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|]|\s+[-–]\s+)\s*(.{2,300})$/u);
-   if(label)addField(fields,label[1],label[2]);
+   const label=str.match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|=]|\s+[-–—]{1,3}\s+|\s+\/{2,3}\s+)\s*(.{2,300})$/u);
+   if(label){
+    const flavor=LOOKUP.get(keyOf(label[1]))==='tasting_notes'?flavorText(label[1],part,420).match(/^([\p{L}][\p{L} &/'-]{1,36})\s*(?:[:：|=]|\s+[-–—]{1,3}\s+|\s+\/{2,3}\s+)\s*(.{2,300})$/u):null;
+    addField(fields,label[1],flavor?flavor[2]:label[2]);
+   }
   }
  }
 }
@@ -477,35 +795,52 @@ function shopifyProduct(html,target){
    const p=JSON.parse(m[2]);
    if(!p||typeof p!=='object'||typeof p.title!=='string')continue;
    if(p.url&&!samePage(p.url,target))continue;
-   out.push({name:p.title,brand:p.vendor||'',additionalProperty:[],description:p.description||'',metafields:p.metafields||p.metadata||{},tags:p.tags||[],attributes:p.attributes||{},url:p.url||null});
+   if(typeof p.handle==='string'){
+    const handle=new URL(target).pathname.match(/\/products\/([^/]+)\/?$/i)?.[1];
+    if(handle&&decodeURIComponent(handle)!==p.handle)continue;
+   }
+   out.push({...p,name:p.title,brand:p.vendor||p.brand||'',url:p.url||null});
   }catch{}
  }
  return out;
 }
 export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(typeof html!=='string'||html.length>2_000_000||!source_url)return {ok:false,reason:'invalid_source'};
- const meta=pageMeta(html);
- const all=[...jsonProducts(html),...shopifyProduct(html,source_url)];
- const linked=all.filter(p=>p.url&&samePage(p.url,source_url));
- const unlinked=all.filter(p=>!p.url);
+ let scopeTruncated=false;
+ const meta=pageMeta(html),product=productMarkup(html,{onTruncated:()=>{scopeTruncated=true;}});
+ const explicitHeading=productHeading(product,{explicitOnly:true});
+ const heading=explicitHeading||productHeading(product),identityAnchor=heading||removeSiteSuffix(meta['og:title']||'',meta['og:site_name']);
+ const siteIdentities=[];
+ const all=[...jsonProducts(html,source_url,siteIdentities,{heading,declaredUrl:meta['og:url']||meta[META_CANONICAL]||''}),...shopifyProduct(html,source_url)];
+ const linked=all.filter(p=>productIdentityUrl(p)&&samePage(productIdentityUrl(p),source_url));
+ const unlinked=all.filter(p=>!productIdentityUrl(p)&&(!identityAnchor||keyOf(textOf(p.name))===keyOf(identityAnchor)));
+ if(!linked.length&&!unlinked.length&&new Set(all.filter(p=>!productIdentityUrl(p)).map(p=>keyOf(textOf(p.name)))).size>1)
+  return {ok:false,reason:'ambiguous_or_missing_product'};
  const selected=linked.length?linked:unlinked;
  const unique=[...new Map(selected.map(p=>[keyOf(textOf(p.name)),p]).filter(([key])=>key)).values()];
  let p=unique.length===1?unique[0]:null;
  if(unique.length>1){
-  // Shopify's JSON-LD graph can list a current Product followed by eight
-  // purchase/size variants, all assigned its canonical URL. The exact
-  // product title in og:title is required; unrelated products stay rejected.
-  const ogName=clean(meta['og:title']||'',200);
-  const exact=unique.filter(row=>keyOf(textOf(row.name))===keyOf(ogName));
-  if(exact.length===1&&exact[0].url&&samePage(exact[0].url,source_url))p=exact[0];
-  else return {ok:false,reason:'ambiguous_or_missing_product'};
+  const anchors=[heading,removeSiteSuffix(meta['og:title']||'',meta['og:site_name'])].filter(Boolean);
+  const groups=unique.filter(row=>[].concat(row['@type']||[]).some(type=>String(type).toLowerCase()==='productgroup')&&
+   productIdentityUrl(row)&&samePage(productIdentityUrl(row),source_url));
+  const group=groups.length===1?groups[0]:null;
+  const variants=Array.isArray(group?.hasVariant)?group.hasVariant.slice(0,80):[];
+  const validGroup=group&&unique.every(row=>row===group||variants.some(variant=>keyOf(textOf(variant.name))===keyOf(textOf(row.name))&&
+   keyOf(textOf(row.name)).startsWith(keyOf(textOf(group.name)))));
+  if(validGroup)p=group;
+  else{
+   const exact=unique.filter(row=>anchors.some(anchor=>keyOf(textOf(row.name))===keyOf(anchor)));
+   if(exact.length===1&&productIdentityUrl(exact[0])&&samePage(productIdentityUrl(exact[0]),source_url))p=exact[0];
+   else return {ok:false,reason:'ambiguous_or_missing_product'};
+   if(group&&p===group)return {ok:false,reason:'ambiguous_or_missing_product'};
+  }
  }
  if(!p){
   let likelyPath=false;
   try{likelyPath=/\/(products?|coffee|coffees|beans?|shop)\/[^/]+/i.test(new URL(source_url).pathname);}catch{}
   const ogType=String(meta['og:type']||'');
   if(/^product(?:\.|$)/i.test(ogType)||likelyPath){
-   let title=productHeading(html)||removeSiteSuffix(meta['og:title']||'',meta['og:site_name']);
+   let title=identityAnchor;
    if(genericStorefrontHeading(title))title='';
    let brand=meta['og:site_name']||'';
    // Onyx does not emit a conventional Product JSON-LD/H1/og:title on the
@@ -513,8 +848,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // HTML <title> is a release-specific name followed by the roaster. Do
    // not create an identity from the URL slug or a category page alone.
    if(!title&&likelyPath){
-    const canonical=(html.match(/<link\b[^<>]{0,950}\brel\s*=\s*["']canonical["'][^<>]{0,2000}>/i)||[])[0]||'';
-    const declared=attrs(canonical).href||'';
+    const declared=meta[META_CANONICAL]||'';
     if(declared&&samePage(declared,source_url)){
      const rawTitle=clean((html.match(/<title\b[^<>]{0,2000}>([\s\S]{1,240}?)<\/title>/i)||[])[1]||'',200);
      const bits=rawTitle.split(/\s+[–—]\s+/);
@@ -523,19 +857,31 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
      }
     }
    }
-   if(title)p={name:title,brand,additionalProperty:[],description:meta.description||''};
+   if(title&&!genericStorefrontHeading(title))p={name:title,brand,additionalProperty:[]};
   }
  }
  if(!p||!textOf(p.name))return {ok:false,reason:'ambiguous_or_missing_product'};
- const fields={name:textOf(p.name,200)},conflicts=new Set();
+ const visibleProductName=explicitHeading&&productIdentityUrl(p)&&samePage(productIdentityUrl(p),source_url)&&
+  meta['og:url']&&samePage(meta['og:url'],source_url)&&keyOf(textOf(p.name))===keyOf(meta['og:title'])?explicitHeading:'';
+ const fields={name:visibleProductName||textOf(p.name,200)},conflicts=new Set();
+ const descriptionIdentity=meta['og:url']||meta[META_CANONICAL]||'';
+ const matchedDescriptions=descriptionIdentity&&samePage(descriptionIdentity,source_url)?
+  [...new Set([meta['og:description'],meta.description].filter(value=>typeof value==='string'&&value.length<=16000))]:[];
  conflictsByFields.set(fields,conflicts);
+ const titleCountry=extractCoffeeTitleOrigin(fields.name);
+ const currentProduct=canonicalIdentityScope(fields,product);
+ const canonicalProduct=canonicalComponentScope(fields,currentProduct);
+ rememberGeographyEntityRoles(fields,canonicalProduct);
+ for(const place of extractCoffeeGeographyTuples(canonicalProduct,{name:fields.name,clean}))addField(fields,'Origin',place);
  productDetails(fields,p);
  // Repeated JSON-LD/inline nodes may describe the same selected product.
  // Deduplicating its title must not discard contradictory roast, process,
  // or release evidence. Retain the chosen node's precedence for compatible
  // facts, and run equivalent nodes through the same conflict checks.
  const identity=keyOf(textOf(p.name));
- for(const equivalent of selected){
+ const equivalentProducts=all.filter(candidate=>keyOf(textOf(candidate.name))===identity&&
+  (!productIdentityUrl(candidate)||samePage(productIdentityUrl(candidate),source_url)));
+ for(const equivalent of equivalentProducts){
   if(equivalent!==p&&keyOf(textOf(equivalent.name))===identity)productDetails(fields,equivalent);
  }
  // An actual, literal lot number in the selected Product title is stronger
@@ -545,52 +891,104 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const lot=textOf(p.name,200).match(/\bLot\s*#?\s*\d{1,4}(?:[\/-]\d{1,4}){0,2}\b/i);
   if(lot)fields.release_label=lot[0].replace(/\s+/g,' ').trim();
  }
- const siteName=textOf(meta['og:site_name'],200);
- if(!fields.roaster&&siteName&&!/^(?:online store|shopify|home|products?)$/i.test(siteName))
-  fields.roaster=readableRoaster(siteName);
+ const siteName=publishedRoaster(textOf(meta['og:site_name'],200));
+ const sameSiteIdentity=identity=>{
+  try{
+   const a=new URL(identity.url),b=new URL(source_url);
+   return a.protocol==='https:'&&a.hostname.replace(/^www\./,'')===b.hostname.replace(/^www\./,'');
+  }catch{return false;}
+ };
+ if(siteName)fields.roaster=fields.roaster?preferredCoffeeRoasterName(fields.roaster,siteName,{
+  preferCandidate:true,corroborated:siteIdentities.some(identity=>sameSiteIdentity(identity)&&keyOf(textOf(identity.name))===keyOf(siteName))
+ }):siteName;
+ for(const identity of siteIdentities){
+  const name=publishedRoaster(textOf(identity.name,200));
+  if(name&&fields.roaster)fields.roaster=preferredCoffeeRoasterName(fields.roaster,name,{corroborated:sameSiteIdentity(identity)});
+ }
+ if(!fields.roaster){
+  const rawTitle=clean((html.match(/<title\b[^<>]{0,2000}>([\s\S]{1,500}?)<\/title>/i)||[])[1]||'',500);
+  const pieces=rawTitle.split(/\s+[–—|]\s+/),candidate=pieces.at(-1)||'';
+  if(pieces.length>=2&&/\b(?:coffee|coffees|roasters?|roastery|roasting)\b/i.test(candidate)&&
+   keyOf(pieces.slice(0,-1).join(' '))===keyOf(fields.name))fields.roaster=publishedRoaster(candidate);
+ }
  // WooCommerce may identify the roaster only as this Product's seller.
  // Require its explicit roastery name and same-site URL; an arbitrary
  // marketplace seller or unrelated graph Organization is not a roaster.
- if(!fields.roaster&&p.url&&samePage(p.url,source_url)){
-  const sellers=(Array.isArray(p.offers)?p.offers.slice(0,20):[p.offers]).map(offer=>offer?.seller);
+ {
+  const identityUrl=productIdentityUrl(p);
+  const sellers=(Array.isArray(p.offers)?p.offers.slice(0,20):[p.offers])
+   .filter(offer=>identityUrl?samePage(identityUrl,source_url):typeof offer?.url==='string'&&samePage(offer.url,source_url))
+   .map(offer=>offer?.seller);
   const candidates=new Set();
   for(const seller of sellers){
    const name=textOf(seller?.name,150);
-   if(!/\b(?:coffee\s+roasters?|roastery|coffee\s+lab)\b/i.test(name)||typeof seller?.url!=='string')continue;
+   const identityUrl=typeof seller?.url==='string'?seller.url:typeof seller?.sameAs==='string'?seller.sameAs:'';
+   if(!/\b(?:coffee\s+roasters?|roastery|coffee\s+lab)\b/i.test(name)||!identityUrl)continue;
    try{
-    const sellerUrl=new URL(seller.url),sourceUrl=new URL(source_url);
+    const sellerUrl=new URL(identityUrl),sourceUrl=new URL(source_url);
     if(sellerUrl.protocol==='https:'&&sellerUrl.hostname.replace(/^www\./,'')===sourceUrl.hostname.replace(/^www\./,''))candidates.add(name);
    }catch{/* Invalid seller URL is not identity evidence. */}
   }
-  if(candidates.size===1)fields.roaster=[...candidates][0];
+  if(candidates.size===1){
+   const name=[...candidates][0];
+   fields.roaster=fields.roaster?preferredCoffeeRoasterName(fields.roaster,name,{corroborated:true}):name;
+  }
  }
  // Avoid stray articles/related-product labels on custom Onyx storefronts.
  // The product's named a-stat metrics supply its selected factual labels.
- const product=productMarkup(html);
- const onyxMetrics=/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["']roast-level["']/i.test(product);
- if(!onyxMetrics)labeledPairs(product,fields);
+ productFlavorProfiles(fields,currentProduct);
+ const onyxMetrics=/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["']roast-level["']/i.test(canonicalProduct);
+ if(!onyxMetrics)labeledPairs(canonicalProduct,fields);
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.
- const roaster_details=extractLayoutEvidence(product,{
+ const roaster_details=extractLayoutEvidence(canonicalProduct,{
   fields,addField:(key,value)=>addField(fields,key,value),clean
  });
+ // A product's country word can complete a labeled region, but an explicit
+ // selected-product country caption has priority over a name-derived fallback.
+ if(titleCountry?.label==='Country'&&!geographyParts(fields.origin||'').some(part=>ORIGIN_COUNTRIES.has(part)))
+  addField(fields,titleCountry.label,titleCountry.value);
  // Supplement explicit page labels with current-coffee narrative evidence.
  // The canonical Process selector is coarse; keep complex fermentation and
  // farm/grower attributions as reviewable, noncanonical details.
- const narrative=extractNarrativeCoffeeEvidence(product,{name:fields.name,fields});
+ const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields});
  for(const [key,value] of Object.entries(narrative.fields)){
-  if(key==='process'&&fields.process&&fields.process!==value)continue;
-  addField(fields,key,value);
+  if(fields[key])continue;
+  addField(fields,key,value);markNarrativeIdentity(fields,key);
+  if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
+ }
+ for(const fact of extractCoffeeIdentityEvidence(canonicalProduct,{name:fields.name,fields,clean}).facts)addIdentityFact(fields,fact);
+ // A cached SEO description can have the correct page URL/title while its
+ // text still explicitly describes a different country's coffee. Preserve
+ // that raw source for review, but do not let the stale cohort donate a
+ // producer, altitude, roast or other missing canonical field.
+ const usableMatchedDescriptions=matchedDescriptions.filter(description=>
+  !coffeeDescriptionCountryMismatch(description,{name:fields.name,origin:fields.origin}));
+ // Label-free height metrics and additional physical unit formats are
+ // considered only after the explicit lot and existing narrative evidence.
+ if(!onyxMetrics){
+  const heights=extractCoffeeElevationEvidence(canonicalProduct,{clean,name:fields.name,includeNarrative:!fields.elevation_m,includeExplicitMasl:true});
+  for(const height of heights)addField(fields,'elevation_m',height);
+  for(const description of usableMatchedDescriptions){
+   const scopedDescription=canonicalIdentityScope(fields,'<p>'+description.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>');
+   for(const height of extractCoffeeElevationEvidence(scopedDescription,{clean,name:fields.name,includeExplicitMasl:true}))
+    addField(fields,'elevation_m',height);
+  }
  }
  for(const [key,value] of Object.entries(narrative.details)){
   if(!roaster_details[key]&&value)roaster_details[key]=value;
  }
  const farm=farmEvidenceByFields.get(fields);
- if(farm&&!roaster_details.farm)roaster_details.farm=farm;
+ const detailConflicts=new Set(coffeeLayoutDetailConflicts(roaster_details));
+ if(farm===null){delete roaster_details.farm;detailConflicts.add('farm');}
+ else if(farm&&!roaster_details.farm)roaster_details.farm=farm;
  // The page's accessible image description sometimes transcribes the
  // selected bag's profile card. Read only explicit words attached to an
  // exact-name image; pixels, color, filenames and other coffees are ignored.
- const imageText=extractProductImageTextEvidence(product,{name:fields.name,clean});
+ const imageText=extractProductImageTextEvidence(currentProduct,{name:fields.name,clean});
+ for(const field of imageText.conflicts||[])if(['roast_level','tasting_notes'].includes(field)){
+  conflicts.add(field);delete fields[field];
+ }
  if(imageText.tasting_notes&&!fields.tasting_notes)addField(fields,'tasting_notes',imageText.tasting_notes);
  if(imageText.roast_level)addField(fields,'roast_level',imageText.roast_level);
  // JSON-LD additionalProperty can publish numeric roast color without an
@@ -615,8 +1013,58 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    addField(fields,k.replace(/^(?:coffee|product)[:._-]/,''),v);
   }
  }
- if(!onyxMetrics)explicitNearbyFacts(product,fields);
- const roast_evidence=extractRoastVisualEvidence(product);
+ if(!onyxMetrics)explicitNearbyFacts(canonicalProduct,fields);
+ const matchedDescriptionTitle=[fields.name,textOf(p.name)].some(name=>
+  equivalentCoffeeProductNames(name,meta['og:title'],{brands:[fields.roaster,meta['og:site_name']]}));
+ if(!fields.tasting_notes&&matchedDescriptionTitle&&usableMatchedDescriptions.length){
+  const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  for(const description of usableMatchedDescriptions){
+   const story=canonicalIdentityScope(fields,'<main><h1>'+escape(fields.name)+'</h1><p>'+escape(description)+'</p></main>');
+   const notes=extractProductFlavorEvidence(story,{clean});
+   if(notes)addField(fields,'Tasting Notes',notes);
+  }
+ }
+ if(!fields.roast_level&&!conflicts.has('roast_level')&&matchedDescriptionTitle&&descriptionIdentity&&samePage(descriptionIdentity,source_url)){
+  const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const story='<main><h1>'+escape(meta['og:title'])+'</h1>'+usableMatchedDescriptions.map(description=>'<p>'+escape(description)+'</p>').join('')+'</main>';
+  const roast=extractRoastVisualEvidence(canonicalIdentityScope(fields,story));
+  if(roast.confidence==='conflict')conflicts.add('roast_level');
+  else if(roast.value)addField(fields,'roast_level',roast.value);
+ }
+ if(matchedDescriptionTitle&&usableMatchedDescriptions.length){
+  const candidates={name:fields.name,roaster:fields.roaster},candidateConflicts=new Set(),explicitKinds=new Set();
+  conflictsByFields.set(candidates,candidateConflicts);
+  const escape=value=>value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const fragments=usableMatchedDescriptions.map(description=>description.split(/(?<=[.!?])\s+|\r?\n/u).slice(0,240).map(value=>'<p>'+escape(value)+'</p>').join(''));
+  for(const fragment of fragments){
+   labeledPairs(fragment,candidates);
+   extractLayoutEvidence(fragment,{fields:candidates,clean,addField:(label,value)=>{
+    const kind=Object.hasOwn(FIELD_ALIASES,label)?label:LOOKUP.get(keyOf(label));
+    if(kind)explicitKinds.add(kind);addField(candidates,label,value);
+   }});
+  }
+  for(const key of Object.keys(candidates))if(!['name','roaster'].includes(key))explicitKinds.add(key);
+  for(const fragment of fragments){
+   const prose=extractNarrativeCoffeeEvidence(fragment,{name:fields.name,fields:candidates});
+   for(const [key,value] of Object.entries(prose.fields))if(!candidates[key])addField(candidates,key,value);
+   for(const fact of extractCoffeeIdentityEvidence(fragment,{name:fields.name,fields:candidates,clean}).facts)
+    addIdentityFact(candidates,fact);
+  }
+  for(const key of ['origin','process','variety','producer','release_label']){
+   const varietyRefinement=key==='variety'&&fields.variety&&candidates.variety&&
+    compatibleGenericCoffeeVarieties(fields.variety,candidates.variety)===candidates.variety;
+   if((fields[key]&&!varietyRefinement)||conflicts.has(key)||candidateConflicts.has(key)||!candidates[key])continue;
+   addField(fields,key,candidates[key]);
+   if(!explicitKinds.has(key)){
+    markNarrativeIdentity(fields,key);
+    if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
+   }
+  }
+  for(const window of recurringHarvestByFields.get(candidates)?.values()||[])rememberRecurringHarvest(fields,window);
+ }
+ if(!fields.tasting_notes&&(narrativeFlavorByFields.get(fields)||[]).length===1)
+  addField(fields,'tasting_notes',narrativeFlavorByFields.get(fields)[0]);
+ const roast_evidence=extractRoastVisualEvidence(currentProduct);
  if(roast_evidence.confidence==='conflict'){
   delete fields.roast_level;conflicts.add('roast_level');
  }
@@ -645,32 +1093,77 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roast_evidence.hint=agtronExplanation(agtron,explicit);
   }
  }
- // Fallback extractors may directly set a field; a conflict remains final.
+ // A literal combined treatment can reconcile its own washing/drying
+ // subtype. Different subtypes and conflicts lacking full evidence remain.
+ const reconciledProcess=reconcileCoffeeProcessingClaims([{fields,conflicts:[...conflicts]}]);
+ if(reconciledProcess&&conflicts.has('process')){
+  fields.process=reconciledProcess;conflicts.delete('process');
+ }
+ // Fallback extractors may directly set a field; other conflicts remain final.
  for(const field of conflicts)delete fields[field];
+ if(conflicts.has('producer'))delete roaster_details.named_producer;
+ const recurringHarvest=[...(recurringHarvestByFields.get(fields)?.values()||[])];
+ if(!roaster_details.harvest_season&&!detailConflicts.has('harvest_season')){
+  if(recurringHarvest.length===1)roaster_details.harvest_season=recurringHarvest[0];
+  else if(recurringHarvest.length>1)detailConflicts.add('harvest_season');
+ }
  // An explicitly listed multi-component blend cannot be represented as one
  // country or processing category. Retain component facts for review.
- const blend=extractCoffeeBlendEvidence(product);
+ const blend=blendEvidenceByFields.get(fields);
  if(blend){
   roaster_details.blend_components=blend.display;
   // List distinct evidenced countries in first-seen order, never label a
   // multi-origin blend with only one of its components' countries.
-  if(blend.multi_country)fields.origin=blend.origins.join(', ');
-  else if(!fields.origin&&blend.origins.length===1)fields.origin=blend.origins[0];
+  if(!fields.origin&&!conflicts.has('origin'))fields.origin=blend.origin||blend.origins.join(', ');
   // Only genuinely named farms/producers are used. An unlabeled component
   // coffee name alone is not enough evidence to assert its producer.
-  if(blend.multi_producer)fields.producer=blend.producers.join(', ');
-  else if(!fields.producer&&blend.producers.length===1)fields.producer=blend.producers[0];
+  if(blend.complete_producers&&!fields.producer&&!conflicts.has('producer'))fields.producer=blend.producers.join(', ');
+  if(blend.complete_varieties&&!fields.variety&&!conflicts.has('variety'))fields.variety=blend.varieties.join(', ');
   if(blend.multi_process){
    fields.process='Other/Unknown';
    roaster_details.processing_detail=blend.processes.join(', ');
+  }else if(blend.incomplete_component_process&&narrativeIdentityByFields.get(fields)?.has('process')){
+   // One naturally processed component cannot describe an entire blend
+   // whose other component's treatment is not published.
+   delete fields.process;
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
  // A later direct blend fallback cannot resurrect rejected geography.
- if(conflicts.has('origin'))delete fields.origin;
- const roaster_recipe=explicitEspressoRecipe(product)||extractProductEspressoReference(product);
+ for(const field of conflicts)delete fields[field];
+ if(conflicts.has('roast_level')){roast_evidence.value=null;roast_evidence.source='';}
+ const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:currentProduct,source_url});
+ if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
+ const roaster_recipe=extractProductEspressoReference(currentProduct);
+ const quarantined=(identityQuarantinesByFields.get(fields)||[]).flatMap(item=>{
+  const facts=mergeCoffeeSourceFacts(collectCoffeeSourceFacts(item.raw,{name:fields.name,source_url}),
+   collectStructuredCoffeeSourceFacts({description:item.raw},{source_url,source_type:item.source_type}));
+  if(facts.truncated)identityScopeTruncatedByFields.add(fields);
+  return facts.map(fact=>({...fact,source_type:item.source_type,section:'Different coffee in the source',conflicting:true}));
+ });
+ const source_facts=mergeCoffeeSourceFacts(
+  quarantined,
+  supplementary.facts,
+  collectCoffeePageMetaSourceFacts(meta,{source_url}),
+  collectCoffeePageGuidanceFacts(html,{source_url}),
+  collectCoffeeSourceFacts(product,{name:fields.name,source_url}),
+  ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
+  ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
+ );
+ for(const fact of source_facts){
+  if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
+  else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
+  if((fact.field&&(conflicts.has(fact.field)||detailConflicts.has(fact.field)))||
+   (detailConflicts.has('farm')&&/^(?:farm|farms|finca)$/i.test(fact.label)))fact.conflicting=true;
+ }
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
+  ...(source_facts.length?{source_facts}:{}),
+  ...(source_facts.truncated||scopeTruncated||identityScopeTruncatedByFields.has(fields)?{source_facts_truncated:true}:{}),
+  ...(fields.producer&&narrativeProducerByFields.has(fields)?{producer_source:'narrative'}:{}),
+  ...(fields.process&&narrativeIdentityByFields.get(fields)?.has('process')?{process_source:'narrative'}:{}),
+  ...(fields.variety&&narrativeIdentityByFields.get(fields)?.has('variety')?{variety_source:'narrative'}:{}),
+  ...(fields.elevation_m&&elevationSourceByFields.has(fields)?{elevation_source:elevationSourceByFields.get(fields)}:{}),
   ...(conflicts.size?{conflicts:[...conflicts].sort()}:{}),
   ...(roaster_recipe?{roaster_recipe}:{}),
   ...(Object.keys(roaster_details).length?{roaster_details}:{}),

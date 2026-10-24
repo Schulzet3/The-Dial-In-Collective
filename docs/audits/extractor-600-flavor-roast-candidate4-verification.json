@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "type": "source_demonstrated_candidate4_flavor_roast_verification",
+  "verified_at": "2026-10-24T01:36:52.296541+00:00",
+  "purpose": "Verify actual-source defects found by the complete candidate2 notes review and independent unexpected-field audit. Preserve literal source roles, reject incomplete fragments, and do not alter the frozen oracle.",
+  "extractor_outputs_seen": true,
+  "frozen_oracles_modified": false,
+  "scoring_changed": false,
+  "no_real_api_keys": true,
+  "production_network_test": false,
+  "node_version": "v22.22.0",
+  "owned_source_files": [
+    {
+      "path": "src/server/coffee-flavor-evidence.mjs",
+      "sha256": "13caf3d68f19d2d8687bb846ea1f325910bc1f9cad188205e13229533595e095"
+    },
+    {
+      "path": "src/server/roast-level-evidence.mjs",
+      "sha256": "635c0b1b5af80104510319d7ce7151ee30f340ddc65cbb2aa2b976a7e2c7dd0e"
+    },
+    {
+      "path": "src/server/coffee-semantic-specs.mjs",
+      "sha256": "9003e5dea7eda669059933af1d2e3914783f3c229b7b6e0477e5e950334e3448"
+    },
+    {
+      "path": "tests/coffee-flavor-residual-integrity.test.mjs",
+      "sha256": "7ae2c598dc7d69a6d324d11c9e2103ccb18ad5d0580e351bc6439543527c9531"
+    }
+  ],
+  "named_tests": {
+    "tests": 172,
+    "passed": 172,
+    "failed": 0,
+    "skipped": 0,
+    "command": "node --test --test-reporter=spec tests/coffee-flavor-residual-integrity.test.mjs tests/coffee-corpus-flavor-roast-regressions.test.mjs tests/coffee-flavor-evidence.test.mjs tests/coffee-narrative-flavor-integrity.test.mjs tests/roast-level-evidence.test.mjs tests/coffee-semantic-specs.test.mjs",
+    "log_path": "/workspace/scratch/13d81ee504dd/candidate4-flavor-focused-3.log",
+    "log_sha256": "db8ca984f900592c5427fa766fc6ab104bf05750b4f2377a0fd0490635f00209"
+  },
+  "full_handler_focus": {
+    "case_count": 14,
+    "exact_target_assertions": 14,
+    "passed": 14,
+    "failed": 0,
+    "source_repo": "/workspace/scratch/13d81ee504dd/flavor-roast-candidate4-handler-focus",
+    "source_tree_sha256": "0cbd83c5e64dfc7b5164bb2829476d49f138982ea59d05a6d39b2928f0bcd836",
+    "replay_path": "/workspace/scratch/13d81ee504dd/extractor-600/candidate4-flavor-roast-focused-handler-replay.json",
+    "replay_sha256": "443db9c9a2ebef640c35f6359d35de7e7ebe348da3f817569df9a5b873fc4e2d",
+    "harness_sha256": "0747079c41858ac4d586a3c6037a357ee4fa3d5259e271426409fdf4795e6c40",
+    "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+    "packet_archive_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556"
+  },
+  "mechanisms": [
+    "Reject origin/title/verb fragments in compact flavor values while preserving source prose for review.",
+    "Do not treat a BR inside a notes-of sentence as a new independent hero profile.",
+    "Recover literal nouns after possessive and article introductions before a sensory suffix.",
+    "Bound flavoring blend/fusion noun lists before the explicit creates taste/flavor verb clause.",
+    "Recognize fully written we are tasting and a standalone Tastes like profile without overwriting different formal profiles.",
+    "Retain the complete literal paragraph immediately after the explicit What you will find in the cup heading.",
+    "Join compact block chips inside already labeled note containers while preserving inline word continuity and independent captions.",
+    "Exclude the title of an explicitly recommended linked alternate product from canonical roast evidence."
+  ],
+  "limitations": [
+    "The full603-case candidate4 replay passes these14 source-backed target assertions. This does not upgrade other canonical comparison statuses or replace the frozen oracle.",
+    "StageLine orange-bitters and Westrock nutty-finish details remain supplemental source facts; the targeted canonical checks do not assert every role was merged.",
+    "MysticMonk Thanksgiving retains its independently detected roast conflict rather than guessing a tier.",
+    "A parser or fixture response is not production network validation."
+  ],
+  "records": [
+    {
+      "case_id": "brewtusroasting-com__costa-rica-black-honey-direct-trade-cb27859c",
+      "source_url": "https://brewtusroasting.com/products/costa-rica-black-honey-direct-trade",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "chocolate, black cherry, and strawberry",
+      "actual": "chocolate, black cherry, and strawberry",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://brewtusroasting.com/products/costa-rica-black-honey-direct-trade",
+          "file": "page.html",
+          "sha256": "15d98e7b22dd57c12726137d39a8b597fc6df88ed2f7ffdd22b3aec1d94d5a50"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://brewtusroasting.com/products/costa-rica-black-honey-direct-trade.js",
+          "file": "product-endpoint.html",
+          "sha256": "5747deda0451ad7546d59154ace007d064a005f9b0a3a642a7a85b57d73ad2d0"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "chocolate, black cherry, and strawberry",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "csrcoffee-com__costa-rica-668c2df8",
+      "source_url": "https://csrcoffee.com/products/costa-rica",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "sweet, chocolaty",
+      "actual": "sweet, chocolaty",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://csrcoffee.com/products/costa-rica",
+          "file": "page.html",
+          "sha256": "3018eefb7fc5eae7aa5c6503cbbc2f16db099e2f7c1ed780a68d2f5d5de8759f"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://csrcoffee.com/products/costa-rica.js",
+          "file": "product-endpoint.html",
+          "sha256": "79ae867c2df976cf5d29b760c7807d17487d7c3edb72a3ee951f646ac64866f8"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "sweet, chocolaty",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__fireside-favorite-fca08b4a",
+      "source_url": "https://darkcanyon-coffee.com/collections/best-sellers/products/fireside-favorite",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "Graham Cracker, aromatic Cinnamon, smooth Vanilla, and nutty Hazelnut",
+      "actual": "Graham Cracker, aromatic Cinnamon, smooth Vanilla, and nutty Hazelnut",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://darkcanyon-coffee.com/collections/best-sellers/products/fireside-favorite",
+          "file": "page.html",
+          "sha256": "8ec2d2a307584b0fecd890e3457439f853ceb7c00a409c7717bf717dfe859377"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://darkcanyon-coffee.com/products/fireside-favorite.js",
+          "file": "product-endpoint.html",
+          "sha256": "07a2787c63cb3c9364669cd5e3743804117e209d99ae8f9a54f5d14ffd35deb6"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "Graham Cracker, aromatic Cinnamon, smooth Vanilla, and nutty Hazelnut",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__my-girlfriends-blend-c6019ee1",
+      "source_url": "https://darkcanyon-coffee.com/collections/best-sellers/products/my-girlfriends-blend",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "rich caramel and smooth French vanilla",
+      "actual": "rich caramel and smooth French vanilla",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://darkcanyon-coffee.com/collections/best-sellers/products/my-girlfriends-blend",
+          "file": "page.html",
+          "sha256": "44d282ce19b53eceac897611d45e72c016a3b7032bfb9e91f4536b5e39de716c"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://darkcanyon-coffee.com/products/my-girlfriends-blend.js",
+          "file": "product-endpoint.html",
+          "sha256": "704613342ea606ac83571354681b65b1f5ca95bd39e2bdbdeae3c201f640a100"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "rich caramel and smooth French vanilla",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "preludecoffeeroasters-com__colombia-decaf-f464b0d0",
+      "source_url": "https://preludecoffeeroasters.com/products/colombia-decaf",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "This is a full bodied coffee with sweet flavors of maple glaze and raspberry preserves. We also get some nice cinnamon-like spice with hints of ginger that's reminiscent of root beer.",
+      "actual": "This is a full bodied coffee with sweet flavors of maple glaze and raspberry preserves. We also get some nice cinnamon-like spice with hints of ginger that's reminiscent of root beer.",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://preludecoffeeroasters.com/products/colombia-decaf",
+          "file": "page.html",
+          "sha256": "9e7142d11a60ec17a3c5efc06be2fb771cc391a80c2bb96ac8c7915a95e028d2"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://preludecoffeeroasters.com/products/colombia-decaf.js",
+          "file": "product-endpoint.html",
+          "sha256": "e60266f90fb71b12cadc6a3016ff4399c7b373f018155085e4e0606702d09a10"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "This is a full bodied coffee with sweet flavors of maple glaze and raspberry preserves. We also get some nice cinnamon-like spice with hints of ginger that's reminiscent of root beer.",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "shop-westrockcoffee-com__raiz-palmera-whole-bean-coffee-85b1fb1c",
+      "source_url": "https://shop.westrockcoffee.com/products/raiz-palmera-whole-bean-coffee",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "nice sweet caramel",
+      "actual": "nice sweet caramel",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://shop.westrockcoffee.com/products/raiz-palmera-whole-bean-coffee",
+          "file": "page.html",
+          "sha256": "d8581ab825b28044aab5e94fac68bc1ed7870fb754fbe469aa4e76f925e8963c"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://shop.westrockcoffee.com/products/raiz-palmera-whole-bean-coffee.js",
+          "file": "product-endpoint.html",
+          "sha256": "92f5a4567671a5bd78e7206807cd8bc1520d3d15debb1f024b7afaf9e6009723"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "nice sweet caramel",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee",
+      "http_status": 200,
+      "target_field": "roast_level",
+      "source_backed_expected": null,
+      "actual": null,
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee",
+          "file": "page.html",
+          "sha256": "7a9bff1cdf0783c46e58c49a1728152e12b16517b441ac0d121d4228d8e61ae8"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee.js",
+          "file": "product-endpoint.html",
+          "sha256": "e0e2140c57e6d00daef2594f4c4bce1a1707ba3fdfd4c37f289cab47fdee41ee"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": null,
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "wakecoffee-com__bromo-blend-23fb9334",
+      "source_url": "https://wakecoffee.com/products/bromo-blend",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "robust caramel",
+      "actual": "robust caramel",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://wakecoffee.com/products/bromo-blend",
+          "file": "page.html",
+          "sha256": "0d97a75a64b6df977ace1df50855f6bccd7d3216b239a3b156b30c41efcc722a"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://wakecoffee.com/products/bromo-blend.js",
+          "file": "product-endpoint.html",
+          "sha256": "7f3a0f8aa5d7852c30fe594918374ad1bd099a2ec352c720f7be96410672ae63"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "robust caramel",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "www-coffeestamp-com__zambia-kateshi-estate-015b39b9",
+      "source_url": "https://www.coffeestamp.com/products/zambia-kateshi-estate",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "fruit punch, passion fruit, and pineapple",
+      "actual": "fruit punch, passion fruit, and pineapple",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://www.coffeestamp.com/products/zambia-kateshi-estate",
+          "file": "page.html",
+          "sha256": "dfd570fa600dd73f49bbdce7415d3cbabe58e3273d84db8f6ece0b1c39ca4719"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://www.coffeestamp.com/products/zambia-kateshi-estate.js",
+          "file": "product-endpoint.html",
+          "sha256": "eb3b3024ce8a820e5b8ebf7d086b793ba53435743ce940dea55a927e01a78379"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "fruit punch, passion fruit, and pineapple",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__under-the-rainbow-october-limited-blend-12a24dc7",
+      "source_url": "https://www.darkmattercoffee.com/products/under-the-rainbow-october-limited-blend",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "dark chocolate, warm spices, and pecan clusters",
+      "actual": "dark chocolate, warm spices, and pecan clusters",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://www.darkmattercoffee.com/products/under-the-rainbow-october-limited-blend",
+          "file": "page.html",
+          "sha256": "7be0d2306586cdb1eab88f918f0877cef12d703dcb60f36193bea90bb0b7ac61"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://www.darkmattercoffee.com/products/under-the-rainbow-october-limited-blend.js",
+          "file": "product-endpoint.html",
+          "sha256": "f6a8a13fa59cee56837c201abffd239c82c25710f945c662789a72df8be551d3"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "dark chocolate, warm spices, and pecan clusters",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "www-lineageroasting-com__copy-of-kenya-gaikundo-2-bb0620c4",
+      "source_url": "https://www.lineageroasting.com/products/copy-of-kenya-gaikundo-2",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "Caramel, Fig",
+      "actual": "Caramel, Fig",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://www.lineageroasting.com/products/copy-of-kenya-gaikundo-2",
+          "file": "page.html",
+          "sha256": "cc24dcfbd171b04dbdafc811a10349ed06cb5ab276a191bf471248c5b88ccaef"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://www.lineageroasting.com/products/copy-of-kenya-gaikundo-2.js",
+          "file": "product-endpoint.html",
+          "sha256": "bd6f9330b6d17590cc0b8635bb6f37e74a8c89045827fcfb9ba262fd4c844da2"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "Caramel, Fig",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "www-mysticmonkcoffee-com__kenya-peaberry-5c4fb260",
+      "source_url": "https://www.mysticmonkcoffee.com/products/kenya-peaberry",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "Honeydew Melon, Jasmine, Red Wine",
+      "actual": "Honeydew Melon, Jasmine, Red Wine",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://www.mysticmonkcoffee.com/products/kenya-peaberry",
+          "file": "page.html",
+          "sha256": "696736a9583257e4ba03ca31098de296d625d7ca3a644b7aab2d435094d7205e"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://www.mysticmonkcoffee.com/products/kenya-peaberry.js",
+          "file": "product-endpoint.html",
+          "sha256": "a61ae5d1d4726be996a21ac39f716d7006fe430d78b90d8d5d7ed9af8c87e455"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "Honeydew Melon, Jasmine, Red Wine",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "www-mysticmonkcoffee-com__thanksgiving-blend-5c504fec",
+      "source_url": "https://www.mysticmonkcoffee.com/products/thanksgiving-blend",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "Dark Chocolate, Dark Cherry, Wild Honey",
+      "actual": "Dark Chocolate, Dark Cherry, Wild Honey",
+      "assertion_passed": true,
+      "canonical_conflicts": [
+        "roast_level"
+      ],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://www.mysticmonkcoffee.com/products/thanksgiving-blend",
+          "file": "page.html",
+          "sha256": "80695d9c685e686297d6d3066cdee4f0c252b898644bec70a67ecf1c39901bb2"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "source_url": "https://www.mysticmonkcoffee.com/products/thanksgiving-blend.js",
+          "file": "product-endpoint.html",
+          "sha256": "62d9f835858a9869dcaaa52fd37ad846cbd357884c94a9b3ebed073f41d5011b"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "Dark Chocolate, Dark Cherry, Wild Honey",
+        "http_status": 200,
+        "passed": true
+      }
+    },
+    {
+      "case_id": "www-stageline-coffee__ethiopia-worasa-daniel-mijane-9329fa36",
+      "source_url": "https://www.stageline.coffee/product-page/ethiopia-worasa-daniel-mijane",
+      "http_status": 200,
+      "target_field": "tasting_notes",
+      "source_backed_expected": "fresh plum and florals",
+      "actual": "fresh plum and florals",
+      "assertion_passed": true,
+      "canonical_conflicts": [],
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "source_url": "https://www.stageline.coffee/product-page/ethiopia-worasa-daniel-mijane",
+          "file": "page.html",
+          "sha256": "10167499071174f67c6380b35127a3df69eb3956d514d57aded711652966c442"
+        }
+      ],
+      "full_candidate4_assertion": {
+        "actual": "fresh plum and florals",
+        "http_status": 200,
+        "passed": true
+      }
+    }
+  ],
+  "full_candidate4_verified_at": "2026-10-24T01:46:45.398055+00:00",
+  "full_corpus_candidate4_verification": {
+    "case_count": 603,
+    "all_handler_responses_200": true,
+    "targeted_assertions": 14,
+    "passed": 14,
+    "failed": 0,
+    "source_repo": "../extractor-candidate-recovered-4",
+    "source_tree_sha256": "95c80e702a9ac4faabf62a3c661c3fae43455cca23f065cfa9cd9d420424a6eb",
+    "replay_path": "/workspace/scratch/13d81ee504dd/extractor-600/recovered-candidate-4-replay.json",
+    "replay_sha256": "a5cb4d10efd52f169273365e7838b7090da99610e6b425d810c7c5d7d6a3435e",
+    "comparison_sha256": "7b846b3f19c44f3091893decaa221808fa9ff1e4b8b3f081c98c80dd3fdd8f0e",
+    "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+    "packet_archive_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556",
+    "owned_runtime_files_unchanged_from_focused_snapshot": true
+  }
+}

@@ -44,7 +44,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
   async read(){assertSecure();return unwrap(await sdk.rpc('dic_read_personal_state'));},
    async claimFirstStylePrompt(libraryEntryId){assertSecure();return unwrap(await sdk.rpc('dic_claim_first_style_prompt',{p_library_entry_id:libraryEntryId}));},
    async findCoffeeMatches(payload){assertSecure();return unwrap(await sdk.rpc('dic_find_coffee_matches',{payload}));},
-   async previewCoffeeUrl(source_url){
+   async previewCoffeeUrl(source_url,{refreshSource=false}={}){
     assertSecure();
     // One URL lookup and one shared per-account rate claim. Do NOT invoke the
     // legacy curated preview first: two fetches would defeat the >=30-second
@@ -57,7 +57,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
      const response=await previewFetch(previewPath,{
       method:'POST',credentials:'same-origin',referrerPolicy:'no-referrer',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-      body:JSON.stringify({source_url})
+      body:JSON.stringify({source_url,...(refreshSource===true?{refresh_source:true}:{})})
      });
      page=await response.json();
      if(!response.ok&&!page?.reason)page={ok:false,reason:'preview_unavailable'};

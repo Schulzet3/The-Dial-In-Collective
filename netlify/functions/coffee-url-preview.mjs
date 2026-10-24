@@ -52,9 +52,10 @@ export function createPreviewHandler({
   if(typeof base!=='string'||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(base)||
      typeof key!=='string'||!key.startsWith('sb_publishable_'))
    return json({ok:false,reason:'preview_unavailable'},503);
-  let source_url;
+  let source_url,refreshSource=false;
   try{
-   source_url=(await readBoundedJson(request))?.source_url;
+   const input=await readBoundedJson(request);
+   source_url=input?.source_url;refreshSource=input?.refresh_source===true;
   }catch(error){return json({ok:false,reason:error.code==='request_timeout'?'request_timeout':'invalid_url'},error.code==='request_timeout'?408:400);}
   const validated=safeCoffeeUrl(source_url);
   if(!validated)return json({ok:false,reason:'invalid_url'},400);
@@ -77,14 +78,17 @@ export function createPreviewHandler({
    // A recent public read may contain fields missing from the older catalog.
    // Always revalidate admission/cooldown, but never replace it with sparse
    // catalog facts or imply that its newly extracted values were approved.
-   if(warm?.expiresAt>Date.now())return await reuseCached(warm.preview);
+   if(!refreshSource&&warm?.expiresAt>Date.now())return await reuseCached(warm.preview);
    let catalog=null;
    try{catalog=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_preview_cached_verified','POST',JSON.stringify({p_source_url:keyUrl}));}
    catch{/* Optional cache transport failure must not prevent a guarded source read. */}
    const validCatalog=catalog?.ok&&(!catalog.source_url||catalog.source_url===keyUrl)&&
     ['name','roaster'].every(key=>typeof catalog.fields?.[key]==='string'&&catalog.fields[key].trim());
    const approved=validCatalog?{...catalog,source:'approved_catalog',catalog_approved:true,source_verified:false,verification:'unverified',note:'Reused approved catalog details, not independently verified roaster evidence. Confirm your intended release.'}:null;
-   if(completePreview(approved))return await reuseCached(approved);
+   // A member may explicitly check today's product page after seeing saved
+   // catalog facts. This uses the ordinary guarded retrieval claim; it never
+   // bypasses admission, cooldown, quota, URL checks or the source deadline.
+   if(!refreshSource&&completePreview(approved))return await reuseCached(approved);
    // Enforce one shared cooldown; non-transient extraction results charge quota once.
    const claim=await restCall(apiFetch,base,key,auth[1],'/rest/v1/rpc/dic_preview_preflight','POST',JSON.stringify({p_cached:false}));
    if(claim?.allowed!==true||typeof claim.ticket!=='string'){
