@@ -515,3 +515,34 @@ paths and is READY with no scoped blockers. Production release
 member records or publication changes. Existing saved coffees are not rewritten.
 Source development is complete; a future separately authorized release must
 use the existing scoped one-command publication process.
+
+
+## October 24 UTC 2026 — live source acceptance repair, isolated and awaiting exact CI
+
+Owner authorization: continue Issue #33 on the immutable 603-coffee/201-U.S.-roaster source corpus, no new key or direct spending, no publishing or member-data mutation. PR #109 merged but live public-source run 40062287845 failed four checks: SEY Ruarai current geography, Manhattan Samuel Jr. tasting notes, and NOMAD/Circulor sanitized capture extraction parity. Its original failed captures and run remain retained; no weakening of contradictory-source withholding.
+
+Recovered original public failed-run captures and the independent frozen oracle (SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb). Repaired the SEY direct source-locality reading (Nyeri on the slopes of Mount Kenya, not a competing Mountain origin) and isolated malformed WooCommerce related-product orphan cards so their tasting notes cannot contaminate Samuel Jr.; genuine current product story resumes at its own heading. Restructured the public acceptance capture sanitizer to preserve safe product form/input DOM required for comparable parsing while scrubbing sensitive attributes, fields and executable scripts. Added six positive/negative source-bound tests, workflow branch/path filters and preserved review-only cross-source conflicts.
+
+Local focused 18/18 acceptance and new tests passed; complete isolated Node test invocation 1,374 passed, 0 failed, 6 opt-in hosted/provider tests skipped (1,380 total), Node 22.16.0. Original captured corpus replay: 603/603 previews, 3,024 exact, 167 missing, 811 review-required of 4,002 canonical assertions, zero changed canonical dispositions or prior exact losses against preserved candidate8; supplementary retention 5,458 full, 337 partial, 679 unconfirmed. Existing source captures/oracle/scorer unmodified. Other advanced C8v2/C9 checkpoint metrics are not merged; promising C9 defects were inspected but not blindly applied over current source. The local build without test Supabase coordinates returned the expected missing-public-coordinates gate; full CI build will use nonfunctional public placeholders. A completed frozen offline replay is not proof of current live-source parity.
+
+This code commit is a new feature branch from current development, preserving concurrent Issue #12 work. **State: TESTING, not READY or DEPLOYED** until the actual public-source GitHub workflow, CI, safe PR integration and exact-source post-merge readback pass. No Netlify publication or Supabase production/member write was requested or performed. Next action: inspect the fresh live-source artifact for any residual NOMAD/Circulor parity differences, correct and rerun as necessary, then merge non-force and reconcile queue and Issue #33.
+
+
+### Live probe diagnostic continuation (same commit)
+Run 40065390623 at cc87a3e failed only NOMAD and Circulor sanitized replay comparisons; SEY and Manhattan passed. Retain failed artifact 12548602912. Next source-bound probe records bounded top-level/field/conflict and source-fact-count differences without suppressing any failure, so the exact sanitization loss can be fixed. No release authorization and queue remains TESTING.
+
+
+### Live source parity diagnostic refinement
+Run 40065492108 narrowed the remaining failures: NOMAD differs only in source-fact object details (42/42 facts, no canonical or conflict differences), while Circulor loses two canonical fields and two conflict flags plus 25 source facts (111 to 86) during fixture sanitization. Keep the assertions failing; add bounded publicly sourced fact-diff diagnostics to determine exactly which sanitization step changes evidence before repairing it. No production changes.
+
+
+### Exact safe product JSON capture repair candidate
+Public run 40065587138 retained differences: NOMAD retains 42/42 source facts but changed 9 purchase-variant JSON details; Circulor dropped Shopify product-json evidence, affecting 25 of 111 original facts and two independent conflict flags. This candidate preserves inert `data-product`/`data-product-json` script identity markers previously stripped by fixture serialization; adds a positive and negative fixture parity control and bounded structured attribute difference diagnostics. Full proof requires new exact-source live acceptance (do not change the oracle or waive source-fact parity). Queue remains TESTING and unpublished.
+
+
+### NOMAD public offers only remaining parity failure
+Run 40065751486 repaired Circulor: source facts and conflict flags now preserve under inert product JSON marker. NOMAD is the sole remaining live failure; 9 public purchase-variant offer objects differ after sanitized script JSON redaction. Keep failure and record only safe offer object key-level differences to isolate the exact source field before correcting capture; do not silence or waive parity. Production unchanged.
+
+
+### NOMAD strict public offer-source fix
+Run 40065854883 proved the precise public source-fact difference: all nine named purchase variants lost only Yoast Offer.checkoutPageURLTemplate from the sanitized script, not a customer credential. Implement a narrow static public HTTP(S)/relative template exception only under an @type Offer, bounded to 2048 characters with common sensitive query values still excluded. Preserve all other customer, session, cart and checkout token redaction. Eight positive/negative tests pass in the focused local run; rerun exact live parity and required CI before merger. SEY, Manhattan, Circulor and homepage controls already passed live. Frozen 603 unchanged, no production data or publication.

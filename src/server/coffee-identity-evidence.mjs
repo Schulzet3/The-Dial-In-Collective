@@ -176,6 +176,19 @@ function narrativeGeography(blocks){
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
       /\b(?:variety|cultivar)\b.{0,65}\b(?:grown|collected|introduced|originated|discovered)\b/i.test(sentence))continue;
+   // The selected coffee's direct source locality outranks a nearby
+   // landmark in the same sentence. SEY describes Ruarai as coming from
+   // Nyeri *on the slopes of Mount Kenya*: the mountain is context, not a
+   // second named origin. Require the literal current-coffee clause and
+   // the explicit landmark relation; never infer an unprinted country.
+   const currentLocality=sentence.match(/\b(?:this|our|the)\s+(?:coffee|lot|offering)\s+comes?\s+from\s+([\p{Lu}][\p{L}\p{M}'’.-]{1,65}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{1,60}){0,3})\s+on\s+the\s+(?:(?:north|south|east|west)(?:ern)?\s+)?slopes?\s+of\s+(?:Mount|Mt\.?|Mountain)\s+[\p{Lu}][\p{L}\p{M}'’.-]{1,65}\b/iu);
+   if(currentLocality){
+    const literalCountries=countryNames(sentence);
+    if(literalCountries.length===1)
+     add(currentLocality[1]+', '+literalCountries[0],sentence);
+    else add(currentLocality[1],sentence);
+    continue;
+   }
    const pieces=[];
    const remember=value=>{
     value=value.replace(/\s+(?:region|zone|district|department|province|state|municipality)\b.*$/i,'').replace(/[.!?]+$/,'').trim();

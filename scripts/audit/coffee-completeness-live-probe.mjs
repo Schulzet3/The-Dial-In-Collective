@@ -14,7 +14,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
+import {fixtureCoffeeHtml as fixtureHtml,sanitizePublicJson as sanitizeJson} from './coffee-fixture-sanitize.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
 const ORIGINAL_URL=SWEET_URL+'?srsltid=AYCX9vKHwEAbPcEyS19XuoWD67cGIMJu47B764EfHZK_IkJ7c52nQlGl';
@@ -82,38 +82,6 @@ const publicUrl=raw=>{
   return url.toString();
  }catch{return '';}
 };
-const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
-function sanitizeJson(value){
- return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
-  .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
-}
-function fixtureHtml(html){
- const compact=compactCoffeeProductHtml(html);
- if(!compact)return '';
- const chunks=[];let cursor=0;
- for(const block of rawElements(compact)){
-  chunks.push(compact.slice(cursor,block.start));
-  const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
-  if(type&&block.closed){
-   const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
-   catch{/* Invalid script data is not preserved as executable markup. */}
-  }
-  cursor=block.end;
- }
- chunks.push(compact.slice(cursor));
- // WooCommerce and Shopify can place the selected product title, variant
- // data, or specifications inside an add-to-cart form. Keep those children;
- // remove only the form shell and controls that cannot supply page facts.
- // The extractor already excludes selects, so country/grind options cannot
- // become evidence. Every capture still records exact extraction parity.
- return removeElements(chunks.join(''),['iframe','noscript','select','textarea'])
-  .replace(/<\/?form\b[^<>]{0,8000}>/gi,' ')
-  .replace(/<input\b[^<>]{0,4000}>/gi,'')
-  .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
-  .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
-  .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
-}
 function assess(target,result){
  const gaps=[],checked=[];
  if(target.negative){
@@ -188,6 +156,44 @@ async function probe(target){
    const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
    const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
+   if(!record.sanitization_preserves_html_extraction){
+    // Fail closed while retaining only public, bounded differences needed
+    // to repair capture parity; never hide a divergent source fact.
+    const keys=[...new Set([...Object.keys(original||{}),...Object.keys(replay||{})])];
+    record.parity_differences=keys.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key]));
+    record.parity_field_differences=[...new Set([...Object.keys(original?.fields||{}),...Object.keys(replay?.fields||{})])]
+     .filter(key=>!isDeepStrictEqual(original?.fields?.[key],replay?.fields?.[key]));
+    record.parity_conflicts_original=original?.conflicts||[];
+    record.parity_conflicts_replay=replay?.conflicts||[];
+    record.parity_source_fact_counts=[original?.source_facts?.length??0,replay?.source_facts?.length??0];
+    const factTag=f=>[f.field||'',f.label||'',f.source_type||'',f.section||'',f.value||''].map(x=>String(x)).join('|');
+    const beforeFacts=(original?.source_facts||[]).map(factTag);
+    const afterFacts=(replay?.source_facts||[]).map(factTag);
+    const afterBag=new Map();for(const v of afterFacts)afterBag.set(v,(afterBag.get(v)||0)+1);
+    record.parity_missing_source_fact_examples=beforeFacts.filter(v=>{const n=afterBag.get(v)||0;if(!n)return true;afterBag.set(v,n-1);return false;}).slice(0,12).map(v=>v.slice(0,190).replace(/(?:password|token|secret|session|cookie|email|phone|authorization|checkout)[^|]{0,80}/gi,'[redacted]'));
+    const factKey=f=>[f.field||'',f.label||'',f.source_type||'',f.section||''].join('|');
+    record.parity_changed_product_attributes=[];
+    for(const a of (original?.source_facts||[]).filter(f=>f.source_type==='product_json')){
+     const b=(replay?.source_facts||[]).find(f=>factKey(f)===factKey(a));
+     if(!b||String(a.value)===String(b.value))continue;
+     try{const old=JSON.parse(a.value),updated=JSON.parse(b.value);
+      const lost=Object.keys(old).filter(key=>!Object.hasOwn(updated,key));
+      const changed=Object.keys(old).filter(key=>Object.hasOwn(updated,key)&&JSON.stringify(old[key])!==JSON.stringify(updated[key]));
+      if(record.parity_changed_product_attributes.length<12)record.parity_changed_product_attributes.push({label:a.label,lost,changed});
+      if(changed.includes('offers')&&record.parity_offer_key_differences===undefined){
+       const one=Array.isArray(old.offers)?old.offers[0]:old.offers;
+       const two=Array.isArray(updated.offers)?updated.offers[0]:updated.offers;
+       if(one&&two&&typeof one==='object'&&typeof two==='object'){
+        const all=[...new Set([...Object.keys(one),...Object.keys(two)])];
+        record.parity_offer_key_differences=all.filter(key=>!isDeepStrictEqual(one[key],two[key])).map(key=>({key,oldType:typeof one[key],newType:typeof two[key],oldPresent:Object.hasOwn(one,key),newPresent:Object.hasOwn(two,key)}));
+       }
+      }
+
+     }catch{}
+    }
+
+
+   }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
