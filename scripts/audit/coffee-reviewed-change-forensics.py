@@ -505,6 +505,79 @@ def targeted_original_context(case_id, before, after, report_case):
     return result
 
 
+
+def targeted_context_failure(case_id, before, after, error):
+    """Describe a failed fixed selector without echoing any source or exception value."""
+    require(case_id in TARGETED_CONTEXTS, "unexpected diagnostic case")
+    reasons = {
+        "unexpected targeted context identity": "IDENTITY_MISMATCH",
+        "targeted context source differs": "SOURCE_MISMATCH",
+        "targeted original capture inventory differs": "CAPTURE_INVENTORY",
+        "invalid targeted original capture metadata": "CAPTURE_METADATA",
+        "targeted fact inventory limit": "FACT_INVENTORY_LIMIT",
+        "invalid original targeted source fact": "FACT_TYPE",
+        "original context fact changed or disappeared": "CHANGED_OR_MISSING_FACT",
+        "targeted plain-text fact size limit": "FACT_SIZE_LIMIT",
+        "missing or excessive unchanged plain-text context": "PLAIN_MATCH_COUNT",
+        "sensitive-pattern evidence cannot be printed": "PRIVATE_PATTERN",
+        "public evidence string limit": "PUBLIC_STRING_LIMIT",
+        "public evidence depth limit": "PUBLIC_STRUCTURE_LIMIT",
+        "public evidence object limit": "PUBLIC_STRUCTURE_LIMIT",
+        "public evidence array limit": "PUBLIC_STRUCTURE_LIMIT",
+    }
+    # Only the mapped constant is emitted. Unknown exception text is never returned.
+    reason = reasons.get(str(error), "UNCLASSIFIED_CONTEXT_FAILURE")
+    original = before.get("output", {}).get("source_facts", [])
+    current = after.get("output", {}).get("source_facts", [])
+    bounded = isinstance(original, list) and isinstance(current, list) and max(len(original), len(current)) <= 4096
+    counts = {key: 0 for key in ("unique_matching_facts", "raw_markup_matches", "structured_matches",
+                                 "plain_matches", "unchanged_plain_matches", "changed_plain_matches",
+                                 "oversized_plain_matches", "private_or_invalid_plain_matches")}
+    if bounded:
+        needles = tuple(value.casefold() for value in TARGETED_CONTEXTS[case_id])
+        current_hashes = {stable_hash(fact) for fact in current}
+        seen = set()
+        for fact in original:
+            if not isinstance(fact, dict):
+                continue
+            value = fact.get("value")
+            if not isinstance(value, str) or not any(needle in value.casefold() for needle in needles):
+                continue
+            fingerprint = stable_hash(fact)
+            if fingerprint in seen:
+                continue
+            seen.add(fingerprint)
+            counts["unique_matching_facts"] += 1
+            if fact.get("format") == "html" or re.search(r"</?[A-Za-z][^<>]{0,500}>", value):
+                counts["raw_markup_matches"] += 1
+                continue
+            structured = fact.get("format") == "json"
+            if value.lstrip().startswith(("{", "[")):
+                try:
+                    structured = structured or isinstance(json.loads(value), (dict, list))
+                except ValueError:
+                    pass
+            if structured:
+                counts["structured_matches"] += 1
+                continue
+            counts["plain_matches"] += 1
+            counts["unchanged_plain_matches" if fingerprint in current_hashes else "changed_plain_matches"] += 1
+            if not 0 < len(value.encode("utf-8")) <= 12000:
+                counts["oversized_plain_matches"] += 1
+            try:
+                safe_public(fact)
+            except (ValueError, TypeError):
+                counts["private_or_invalid_plain_matches"] += 1
+    result = {"case_id": case_id, "reason_code": reason,
+              "original_fact_count": len(original) if isinstance(original, list) else None,
+              "current_fact_count": len(current) if isinstance(current, list) else None,
+              "inventory_within_diagnostic_bound": bounded, "matching_counts": counts,
+              "source_values_emitted": False, "exception_values_emitted": False,
+              "context_accepted": False, "approval_generated": False}
+    safe_public(result)
+    return result
+
+
 def case_projection(case_id, before, after, old_comparison, comparison, old_retention, retention, report_case):
     require(report_case["case_id"] == case_id and report_case["source_url"] == after["source_url"]
             and same(report_case["candidate_output"], after["output"]), "report case output/source differs")
@@ -822,16 +895,26 @@ def examine(config, targeted_contexts_only=False):
     if targeted_contexts_only:
         STAGE = "targeted_unchanged_original_contexts"
         require(not incomplete, "changed structured facts still require separate source review")
-        contexts = [targeted_original_context(case_id, before[case_id], after[case_id], report_cases[case_id])
-                    for case_id in TARGETED_CONTEXTS]
+        contexts, failures = [], []
+        for case_id in TARGETED_CONTEXTS:
+            try:
+                contexts.append(targeted_original_context(case_id, before[case_id], after[case_id],
+                                                          report_cases[case_id]))
+            except (ValueError, KeyError, TypeError) as error:
+                failures.append(targeted_context_failure(case_id, before[case_id], after[case_id], error))
         for context in contexts:
             emit("candidate12_original_context", context)
+        for failure in failures:
+            emit("candidate12_original_context_failure", failure)
         emit("candidate12_unchanged_contexts_complete", {
-            "status": "PASS", "targeted_cases": len(contexts), "changed_cases_verified": len(changes),
-            "all_contexts_from_unchanged_original_c8_facts": True,
+            "status": "FAIL" if failures else "PASS", "targeted_cases": len(TARGETED_CONTEXTS),
+            "contexts_emitted": len(contexts), "failed_case_ids": [row["case_id"] for row in failures],
+            "changed_cases_verified": len(changes),
+            "all_contexts_from_unchanged_original_c8_facts": not failures,
             "raw_source_captures_extracted_or_uploaded": False,
             "roaster_requests": 0, "production_operations": False, "approval_generated": False})
         archive.close()
+        require(not failures, "one or more original context selectors failed; no approval generated")
         return
     emit("candidate12_forensics_complete", {
         "status": "PASS" if not incomplete else "TARGETED_EVIDENCE_STILL_REQUIRED",
@@ -1041,6 +1124,46 @@ def self_test():
                     with self.assertRaises(ValueError):
                         targeted_original_context(case_id, before, after, report)
                     self.assertEqual(out.getvalue(), "")
+
+
+        def test_targeted_failure_diagnostics_use_only_fixed_codes_and_counts(self):
+            facts = [{"value": "Kibugu public paragraph " + str(index)} for index in range(13)]
+            facts += [{"value": "<div>Kibugu markup</div>"},
+                      {"format": "json", "value": '{"name":"Kibugu"}'}]
+            case_id, before, after, _report = self._context_fixture(facts)
+            result = targeted_context_failure(case_id, before, after,
+                                              ValueError("missing or excessive unchanged plain-text context"))
+            self.assertEqual(result["reason_code"], "PLAIN_MATCH_COUNT")
+            self.assertEqual(result["matching_counts"]["unique_matching_facts"], 15)
+            self.assertEqual(result["matching_counts"]["unchanged_plain_matches"], 13)
+            self.assertEqual(result["matching_counts"]["raw_markup_matches"], 1)
+            self.assertEqual(result["matching_counts"]["structured_matches"], 1)
+            self.assertFalse(result["context_accepted"])
+            self.assertFalse(result["source_values_emitted"])
+            self.assertNotIn("public paragraph", json.dumps(result))
+
+        def test_targeted_failure_diagnostics_never_echo_private_or_unknown_error_values(self):
+            facts = [{"value": "Kibugu Bearer PUBLIC_TEST_FIXTURE"},
+                     {"value": "Kibugu " + "x" * 12000}]
+            case_id, before, after, _report = self._context_fixture(facts)
+            for error, code in ((ValueError("sensitive-pattern evidence cannot be printed"), "PRIVATE_PATTERN"),
+                                (ValueError("Bearer PUBLIC_TEST_FIXTURE_UNKNOWN"), "UNCLASSIFIED_CONTEXT_FAILURE")):
+                result = targeted_context_failure(case_id, before, after, error)
+                self.assertEqual(result["reason_code"], code)
+                self.assertEqual(result["matching_counts"]["private_or_invalid_plain_matches"], 1)
+                self.assertEqual(result["matching_counts"]["oversized_plain_matches"], 1)
+                with contextlib.redirect_stdout(io.StringIO()) as out:
+                    emit("candidate12_original_context_failure", result)
+                self.assertNotIn("PUBLIC_TEST_FIXTURE", out.getvalue())
+                self.assertNotIn("Bearer", out.getvalue())
+                self.assertFalse(result["exception_values_emitted"])
+            after["output"]["source_facts"].pop()
+            result = targeted_context_failure(case_id, before, after,
+                                              ValueError("original context fact changed or disappeared"))
+            self.assertEqual(result["reason_code"], "CHANGED_OR_MISSING_FACT")
+            self.assertEqual(result["matching_counts"]["changed_plain_matches"], 1)
+            with self.assertRaises(ValueError):
+                targeted_context_failure("unknown", before, after, ValueError("private"))
 
 
         def test_sensitive_patterns_and_output_overflow_are_never_printed(self):
