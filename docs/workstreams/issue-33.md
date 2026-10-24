@@ -617,3 +617,14 @@ Concurrent development additionally merged PR119 at `9c3deaf9f9603c66e6501fe20ae
 
 
 The latest owner deferred-publication handoff merged at `ca8cf23ce442e0bdb807e381f777a9e166b398ed` is read and preserved exactly, including the full handoff, runbook, active-checkpoint/current-status additions, unrelated queue rows and Issue10 journal. It explicitly pauses Netlify/release grants/production SQL and requires a new owner publish instruction after extractor readiness. This continuation performs only development fixes and verification. No earlier release permission is reused.
+
+---
+
+## October 24 UTC — Issue #33 two-workstream consolidation: exact NOMAD parity repair under test
+
+Owner supplied both concurrent handoffs and authorized safe GitHub integration without publication or new direct cost. Recovered development ca8cf23 and open PR116 candidate11 2eb32b2. PR115's previously merged SEY, Manhattan, NOMAD and Circulor repairs remain preserved; PR118 remains deliberately unmerged. Verified original frozen603 run 40066959055 PASS with 603/603, 3024 exact / 167 missing / 811 review on unchanged 4002 assertions, zero exact or supplementary full-retention regression, 603 real exports and offline validations. Distinguish this verified candidate11 result from handoffs describing the replay as pending.
+
+Exact public acceptance 40066955938 is FAIL solely for NOMAD's nine published JSON-LD Offer checkoutPageURLTemplate source facts; all ten targets/negative control satisfy canonical expectations. Hash-bound read-only forensics 40067597798 and 40067721892 identify direct selected Product.hasVariant children with URL-less same-origin /#/schema/Product/ IDs and nested typed Offers with /#/schema/Offer/ IDs, explicit selected-product ?variant=n URLs, and nine templates removed by overstrict sanitizer. No canonical or conflict differences. This commit narrowly permits preservation only with an exact selected-parent relation, typed same-origin root-schema child/Offer identities, selected HTTPS product path plus one numeric variant and previously bounded nonsensitive public cart-add template. Tests require full source parity and reject cross-origin/other-product/unbound/contradictory IDs and URLs. Original captures, expected oracle, scorer, client code, runtime, member and production data are unchanged. No CI result is claimed until exact new-source Actions conclude.
+
+This commit is [skip netlify] development-only. Retain Issue33 TESTING until PR head live source acceptance, tests/privacy/approval, non-force merge and merged-source readback. Separate Issue5 SQL source-carryover, Issue10/12, the deferred release instruction and release queue remain untouched.
+

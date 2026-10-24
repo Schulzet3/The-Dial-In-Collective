@@ -137,6 +137,44 @@ test('nested public Yoast variants and URL-less exact Offer IDs retain complete 
  assert.deepEqual(after,before);
 });
 
+test('same-origin root schema Product variants and typed Offers preserve exact selected public facts',()=>{
+ const base=product();delete base.offers;
+ base.hasVariant=Array.from({length:9},(_,index)=>{
+  const id=String(1001+index);
+  return {'@type':'Product','@id':'https://coffee.example/#/schema/Product/selected-'+id,
+   name:'Selected Kenya '+id,
+   offers:{...offer(id),'@id':'https://coffee.example/#/schema/Offer/selected-'+id}};
+ });
+ const json=clean(base);
+ assert.equal(json.hasVariant.length,9);
+ for(let i=0;i<9;i++)
+  assert.equal(json.hasVariant[i].offers.checkoutPageURLTemplate,base.hasVariant[i].offers.checkoutPageURLTemplate);
+ const html=documentFor(base);
+ const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(html),{source_url:SOURCE});
+ const fixture=sanitizePublicCoffeeFixtureHtml(html,{source_url:SOURCE});
+ const replay=extractPublicCoffeeFacts(fixture,{source_url:SOURCE});
+ assert.equal(original.ok,true);
+ assert.equal((fixture.match(/checkoutPageURLTemplate/g)||[]).length,9);
+ assert.deepEqual(replay,original,'source-fact records, conflicts and all published offers must be identical');
+ for(const change of [
+  child=>{child['@id']='https://other.example/#/schema/Product/selected-1001';},
+  child=>{child['@id']='https://coffee.example/products/selected-kenya#/schema/Product/selected-1001';},
+  child=>{child['@id']='https://coffee.example/#/schema/Product/selected-1001?private';},
+  child=>{child.url=SOURCE;},
+  child=>{child.offers['@id']='https://other.example/#/schema/Offer/selected-1001';},
+  child=>{child.offers['@id']='https://coffee.example/#/schema/Product/selected-1001';},
+  child=>{child.offers.url='https://coffee.example/products/other?variant=1001';},
+  child=>{child.offers.url=SOURCE+'?variant=1002';}
+ ]){
+  const data=structuredClone(base);data.hasVariant=[data.hasVariant[0]];
+  change(data.hasVariant[0]);
+  assert.equal(Object.hasOwn(clean(data).hasVariant[0].offers,'checkoutPageURLTemplate'),false,String(change));
+ }
+ const foreign=structuredClone(base);foreign.url='https://coffee.example/products/another-coffee';
+ assert.equal(Object.hasOwn(clean(foreign).hasVariant[0].offers,'checkoutPageURLTemplate'),false);
+ assert.equal(Object.hasOwn(JSON.parse(sanitizePublicCoffeeJson(base)).hasVariant[0].offers,'checkoutPageURLTemplate'),false);
+});
+
 test('all real inert product markers preserve complete extraction and genuine variety conflicts',()=>{
  const data={title:'Selected Kenya',handle:'selected-kenya',url:SOURCE,vendor:'Example Coffee Roasters',
   variants:[{id:1001,title:'250 g',price:1800,available:true}],description:'A published Kenyan coffee.'};
