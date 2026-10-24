@@ -13,3 +13,7 @@ Change: move the explicit favorite pointer with that same shot when it remains g
 Verification state at commit creation: **not yet tested**. Run exact-source Node/lint/build and browser-relevant CI; inspect the results and merge to development only after tests pass. Further Issue #10 lifecycle and hosted two-family acceptance criteria remain open; coordinate with #12/#13, do not assert full issue completion.
 
 Release disposition: **IN_PROGRESS / not READY**. No Netlify publication or production changes.
+
+## CI follow-up: intake bookkeeping
+
+PR103 initial source checks: review, validate, cloud-tests, mobile-browser QA, security-inventory and SQL **SUCCESS**; approval job **FAIL** solely because untracked deployable path `site/lib/engine.js` lacked a queue item (approval coverage itself PASS). Add issue 10 TESTING queue item in this same corrective commit. Recheck exact commit after write; merge only after all applicable checks complete SUCCESS.
