@@ -1,3 +1,12 @@
+## October 24, 2026 UTC — PUBLICATION PAUSED; deferred combined release handoff
+
+**Current owner instruction:** “Since you've marked the issues closed, you don't need to continue with deployment. I will do a deployment when the extractor changes are ready. Please document your progress so another chat can publish all the pending changes.” No Netlify publication, release-branch push, release grant or further Supabase migration now. **The earlier conditional release permission is not reusable for a future batch.**
+
+Full handoff: [RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md](RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md). GitHub #5/#10/#12 CLOSED, #33 OPEN/TESTING. Three source-verified Supabase production SQL migrations ALREADY APPLIED at `20261024052303`, `20261024052411`, `20261024052419`, **DO NOT REPLAY**. Last readback: 23 shots, 23 notes, 2 Community, 4 personal families, 10 library, 4 preferences. Netlify remains on prior release SHA `65ee386` (deploy `6adc20c03a07673c4dd08035`); #12 frontend unpublished.
+
+**Queue:** `DIC-Q-5-pending-retry-http-conflict` stays **DEPLOYED SQL-only**. Concurrent extractor session created separate `DIC-Q-5-deployed-sql-source-carryover` **TESTING** to track the migration filename still absent from the released Git tree and prevent duplicate SQL. `DIC-Q-12-community-prior-hierarchy` **READY web**. `DIC-Q-33-expanded-603-audit` **TESTING**. This handoff preserves that more precise companion queue accounting rather than overwriting it with a premature READY label. Closed unused PR #117 UNMERGED; don't deploy its unverified isolated candidate. Complete extractor checks before marking combined source READY; obtain a NEW explicit publish instruction for the later batch.
+
+---
 ## October 23, 2026 MDT: candidate8 GitHub integration resumed — TESTING, not published
 
 Resume from [Issue33 journal](workstreams/issue-33.md), CURRENT_STATUS and RELEASE_QUEUE. The earlier GitHub rejection has been explicitly resolved by the owner, who permits required GitHub Actions use. Candidate8's frozen full603 evidence is retained, and actual upstream `e6d874510448f6cd3d0f21f5edabc3d2863a14ed` is reconciled. This commit prepares the real-parent development integration; no READY or publication claim until actual source/CI readback. All historical checkpoints below retain their dated scope.
