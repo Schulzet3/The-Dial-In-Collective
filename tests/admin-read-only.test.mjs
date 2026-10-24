@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {renderAdminDashboard,renderAdminDenied,formatCount} from '../site/admin/view.js';
 
-test('admin dashboard offers guarded manual review without destructive delete',()=>{
+test('admin dashboard offers guarded review without a redundant Hold button',()=>{
  const html=renderAdminDashboard({
   counts:{pending_coffees:4,conflicts:1,verified_coffees:5,active_accounts:1,shot_records:14},
   queue_total:1,queue:[{id:'test',status:'pending',name:'Example',roaster:'Roaster',created_at:'2026-10-14T00:00:00Z'}]
@@ -15,7 +15,8 @@ test('admin dashboard offers guarded manual review without destructive delete',(
  assert.doesNotMatch(html,/Pending Coffee Verification|Source-backed coffees can verify automatically/);
  assert.match(html,/data-action="review-approve"/);
  assert.match(html,/data-action="review-merge-prepare"/);
- assert.match(html,/data-action="review-hold"/);
+ assert.doesNotMatch(html,/data-action="review-hold"/);
+ assert.match(html,/Compare Possible Matches/);
  assert.doesNotMatch(html,/data-action="delete"|>Delete</);
  assert.match(html,/Logged Shots/);
  assert.match(html,/The Dial In Collective/);
@@ -72,7 +73,7 @@ test('the proposed SQL never grants admin rights or enables mutation operations'
  assert.doesNotMatch(sql,/insert into private\.app_admins|update public\.coffees|alter policy|create policy/i);
 });
 
-test('admin review UI enforces exact revision and one-click distinct, merge or hold decisions',async()=>{
+test('admin review UI enforces exact revision and direct distinct or merge decisions',async()=>{
  const main=await readFile(new URL('../site/admin/main.js',import.meta.url),'utf8');
  const sql=await readFile(new URL('../supabase/migrations/20261021053500_dic_admin_coffee_review.sql',import.meta.url),'utf8');
  assert.match(main,/dic_admin_review_coffee/);
@@ -122,4 +123,17 @@ test('routine admin Save requires no human correction reason or redundant confir
  assert.match(cloud,/this\.updateDoseAdvisory\(\)/);
  assert.doesNotMatch(cloud,/globalThis\.confirm\?\.\(warning\)/);
  assert.match(cloud,/expected_revision:this\.editing\.revision/);
+});
+
+test('admin deletes require server-authoritative impact, one additional confirmation and exact revision',async()=>{
+ const main=await readFile(new URL('../site/admin/main.js',import.meta.url),'utf8');
+ const migration=await readFile(new URL('../supabase/migrations/20261023225600_dic_admin_safe_delete.sql',import.meta.url),'utf8');
+ assert.match(main,/dic_admin_delete_preview/);assert.match(main,/globalThis\.confirm\?\.\(warning\)/);
+ assert.match(main,/dic_admin_delete_record/);assert.match(main,/p_expected_impact:impact/);
+ assert.match(migration,/private\.require_member\(\)/);assert.match(migration,/private\.is_admin\(\)/);
+ assert.match(migration,/p_expected_revision/);assert.match(migration,/IS DISTINCT FROM p_expected_impact/);
+ assert.match(migration,/community_count>0/);assert.match(migration,/DELETE FROM public\.library_entries/);
+ assert.match(migration,/DELETE FROM public\.shots WHERE id=p_record_id/);
+ assert.match(migration,/dic_admin_delete_receipts/);
+ assert.doesNotMatch(migration,/GRANT DELETE ON public\./i);
 });

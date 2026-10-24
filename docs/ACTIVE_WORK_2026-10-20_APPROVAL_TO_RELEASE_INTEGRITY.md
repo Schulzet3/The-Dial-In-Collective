@@ -1,3 +1,30 @@
+## October 23, 2026: Issue #33 extractor completeness READY, not deployed
+
+PR99 is merged at `126304178bf255894af44633587052c7ef3b56d5`. Its tree
+`cf3023ec7b1a47ea278f06c511b2a0a5845ef885` is identical to the tested final source
+`df9956fa269c705e98bc509a62146f491ce83c99` and the tested PR merge tree. All seven final
+PR workflows and the applicable merged-source checks pass: 778 Node 22 tests,
+lint/build, approval/continuity, security inventory, isolated database checks,
+browser/mobile/visual/offline, and live public-source acceptance.
+
+The final live run passes all 10 cases and 72 source assertions with no gaps,
+including Bourbon Ají and the full published Sweet Bloom details, the expanded
+roaster layouts, and Onyx's explicitly declared two-country blend and partial
+espresso guide. All 10 sanitized HTML comparisons agree. Reviewable conflicts,
+missing/graphic-only facts, and the existing explicit-save behavior remain.
+
+Queue item `DIC-Q-33-product-completeness` is READY with all 13 deployable paths
+and no scoped blockers. See the [Issue #33 journal](workstreams/issue-33.md) and
+[acceptance record](audits/2026-10-23-extractor-completeness.json).
+
+The published batch remains DIC-20261023-READY-QUEUE-05, release
+`99ad6148e1a540619d67adb07b18f32c93dee9db`, Netlify READY/current
+`6adb71e2a2e52cd3bbeef5e5`, independently read back unchanged. No publication,
+hosted SQL/Edge/Auth change or member-data mutation occurred. A separate owner
+publish instruction remains required by the existing project release policy.
+
+---
+
 ## Issue96 repairs READY, NOT DEPLOYED (2026-10-23T06:20:55.390833+00:00)
 
 PR97 and follow-up PR98 are merged. Final source 5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d has tree 9843b383d38aea0d413381eeab4eb3aaaac5e82d, identical to tested PR source b3599c235b6b1bff148272c5d3556b678219da66 and its tested merge ref. All seven final PR checks and all four applicable merged-source checks PASS. SQL/visual/security evidence is reused from the identical passing PR tree; no skipped check is called passed. Six findings repaired: approved password composition, bounded request parsing, truthful catalog-cache provenance, long-note preservation, privacy wording and pathological HTML processing, including repeated quoted attributes. Local673 Node cases pass; final browser/mobile/visual/offline/built-app and isolated SQL/signedHTTP/snapshot suites pass. Current locked production dependencies have zero known advisories. Final tested inventory470 files/72863 text lines/3 binaries; all13 follow-up file hashes and earlier39 repair hashes independently matched CI artifacts.
@@ -30,6 +57,6 @@ Owner authorized completing source inspection and repairs across GitHub, Supabas
 ## Issue96 source transferred; exact CI pending, no publication
 Actual source commit6fd2995f0af422a4ea959790544e61ca23ff7fbe is independently read back on the existing audit branch, parent8437c27013e21d3d43d0653e826c14d58343bfbd. Its38 non-workflow files passed before/after byte verification and include same-commit issue96 journal. This same-commit connector change installs the separately verified read-only dependency/inventory workflow and deletes the temporary installer; all temporary payload files were already removed. No main/release/provider/production database writes, secret export or publication. #93 READY retained; #96 TESTING until exact-source Node/lint/build, isolated SQL/signedHTTP, browser/visual/offline, dependency audit and nonforce integration/readback. Detailed scope and limitations remain in workstreams/issue-96.md and audits/2026-10-23-security-inspection.md.
 
-## Release controller claim — 2026-10-23T14:40:30.833Z
-- Approved release DIC-20261023-READY-QUEUE-05 from tested application SHA d57f0b3cfeac32be6cd7a2192662a63a57e67e0f claimed exactly once against previous release ref f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f. Five GitHub CI checks passed and one-use authorization ledger was written.
+## Release controller claim — 2026-10-24T03:06:35.740Z
+- Approved release DIC-20261024-READY-QUEUE-06 from tested application SHA 28f908dc9828a45558bd56b532fed17022cef3d8 claimed exactly once against previous release ref 99ad6148e1a540619d67adb07b18f32c93dee9db. Five GitHub CI checks passed and one-use authorization ledger was written.
 - **Not yet a Netlify publication receipt:** independently check READY/current deployed SHA before marking Deployed.

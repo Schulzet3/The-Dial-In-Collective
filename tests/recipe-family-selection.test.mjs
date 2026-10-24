@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {hydrate} from '../site/cloud/mapping.js';
 import {rawFixture,rawShot,TIME} from './cloud-fixtures/raw.js';
-import {chooseRecipeFamily,recommendation,baseline} from '../site/lib/engine.js';
-import {activeVersion,coffeeState} from '../site/lib/model.js';
+import {chooseRecipeFamily,recommendation,baseline,editShot} from '../site/lib/engine.js';
+import {activeVersion,coffeeState,reviseSetup} from '../site/lib/model.js';
 const make=({preference='',favorite=null}={})=>{
  const raw=rawFixture();raw.preferences.tasting_preferences=preference;
  raw.families=[
@@ -114,4 +114,92 @@ test('family-grind reference cannot leak across ratio families during recalibrat
  assert.equal(rec.familyId,'short');
  assert.match(rec.grind.source,/Estimated from previous calibration/);
  assert.notEqual(rec.grind.value,1.6);
+});
+
+test('editing the explicitly preferred all-green shot into another ratio family preserves the owners selection',()=>{
+ const {s}=make({preference:'clarity',favorite:'short-a'});
+ const p=coffeeState(s,'coffee');
+ const beforeOthers=s.shots.filter(sh=>sh.id!=='short-a').map(sh=>({id:sh.id,familyId:sh.familyId,revision:sh.revision}));
+ assert.equal(recommendation(s,'coffee').familyId,'short');
+ const edited=s.shots.find(sh=>sh.id==='short-a');
+ // The corrected yield makes this shot part of the established longer-ratio family.
+ // The other original short-family success must remain untouched.
+ const result=editShot(s,edited.id,{yieldG:51});
+ assert.equal(result.id,'short-a');
+ assert.equal(result.familyId,'long');
+ assert.equal(p.currentFamilies.Turbo,'long');
+ assert.equal(p.favoriteShots.long,'short-a');
+ assert.equal(p.favoriteShots.short,undefined);
+ assert.equal(choose(s).basis,'manual');
+ assert.equal(recommendation(s,'coffee').familyId,'long');
+ assert.deepEqual(s.shots.filter(sh=>sh.id!=='short-a').map(sh=>({id:sh.id,familyId:sh.familyId,revision:sh.revision})),beforeOthers);
+});
+test('correcting an ordinary nonfavorite shot does not transfer the preferred family',()=>{
+ const {s}=make({preference:'clarity',favorite:'short-a'});
+ const p=coffeeState(s,'coffee');
+ const moved=editShot(s,'short-b',{yieldG:51});
+ assert.equal(moved.familyId,'long');
+ assert.equal(p.currentFamilies.Turbo,'short');
+ assert.equal(p.favoriteShots.short,'short-a');
+ assert.equal(choose(s).basis,'manual');
+ assert.equal(recommendation(s,'coffee').familyId,'short');
+});
+test('correcting an explicit favorite to non-green releases invalid manual selection',()=>{
+ const {s}=make({preference:'clarity',favorite:'short-a'});
+ const p=coffeeState(s,'coffee');
+ const corrected=editShot(s,'short-a',{tasteScales:{extraction:1,body:1,clarity:1,sweetness:1,astringency:5}});
+ assert.equal(corrected.dialedIn,false);
+ assert.equal(corrected.familyId,null);
+ assert.equal(p.favoriteShots.short,undefined);
+ assert.equal(p.currentFamilies.Turbo,undefined);
+ assert.notEqual(choose(s).basis,'manual');
+ assert.equal(recommendation(s,'coffee').familyId,'long');
+});
+
+test('same-ratio time and temperature variation is recorded without splitting an internal family or inventing taste significance',()=>{
+ const {s}=make({favorite:'short-a'});
+ const short=s.shots.filter(sh=>sh.familyId==='short');
+ short[1].yieldG=36;
+ short[1].timeS=42;
+ short[1].tempC=95;
+ short[0].tempC=91;
+ const before=structuredClone(s);
+ const rec=recommendation(s,'coffee');
+ assert.equal(rec.familyId,'short');
+ assert.equal(rec.familySelection.sameRatioNonRatioVariation,true);
+ assert.equal(rec.familySelection.nonRatioSignificance,'unproven');
+ assert.equal(rec.familySelection.candidates,2);
+ assert.deepEqual(s,before,'significance evaluation must not change shot history or recipe preferences');
+ assert.equal(rec.reasons.some(x=>/different extraction|temperature|time variation/i.test(x)),false,
+  'do not add extra recipe UI or unsupported taste claims');
+});
+
+test('two-family manual selection persists across a fresh server hydration, without changing history',()=>{
+ const {raw}=make({preference:'bright citrus clarity',favorite:'short-b'});
+ const rawBefore=structuredClone(raw);
+ const fresh=hydrate(structuredClone(raw));
+ assert.equal(recommendation(fresh,'coffee').familyId,'short');
+ assert.equal(chooseRecipeFamily(fresh,'coffee','Turbo',activeVersion(fresh),
+  activeVersion(fresh).baskets[0],'standard',coffeeState(fresh,'coffee')).basis,'manual');
+ assert.equal(fresh.shots.length,4);
+ assert.equal(new Set(fresh.shots.map(sh=>sh.familyId)).size,2);
+ assert.deepEqual(raw,rawBefore);
+});
+test('equipment version change demotes previous family time to reference without erasing old favorite or shots',()=>{
+ const {s}=make({preference:'bright citrus clarity',favorite:'short-a'});
+ const oldId=activeVersion(s).id,originalShots=structuredClone(s.shots);
+ assert.equal(recommendation(s,'coffee').familyId,'short');
+ reviseSetup(s,{name:'Test Home',machine:'Replacement machine',
+  grinder:'Replacement grinder',burrs:'Different burrs',grinderMin:0,
+  grinderMax:5,basketDoseG:18,tempUnit:'F'});
+ assert.notEqual(activeVersion(s).id,oldId);
+ const changed=recommendation(s,'coffee');
+ assert.equal(changed.established,false,'old successes cannot certify a new setup');
+ assert.notEqual(changed.familySelection?.basis,'manual','old manually favored shot is not eligible on new setup');
+ assert.equal(changed.time.center,baseline(s.coffees[0],'Turbo',18,s.preferences).time.center);
+ assert.deepEqual(s.shots,originalShots,'equipment versioning never rewrites historical shots');
+ s.setups[0].activeVersionId=oldId;
+ assert.equal(recommendation(s,'coffee').familyId,'short','returning to old version restores manual choice');
+ assert.equal(coffeeState(s,'coffee').favoriteShots.short,'short-a');
+ assert.equal(s.shots.length,4);
 });

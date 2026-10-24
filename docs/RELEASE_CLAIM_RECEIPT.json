@@ -1,54 +1,64 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261023-READY-QUEUE-05",
-  "tested_source_sha": "d57f0b3cfeac32be6cd7a2192662a63a57e67e0f",
-  "previous_release_head_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
-  "claimed_at_utc": "2026-10-23T14:40:30.833Z",
+  "release_id": "DIC-20261024-READY-QUEUE-06",
+  "tested_source_sha": "28f908dc9828a45558bd56b532fed17022cef3d8",
+  "previous_release_head_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
+  "claimed_at_utc": "2026-10-24T03:06:35.740Z",
   "status": "GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-93-admin-counts",
-      "issue": 93,
-      "title": "Keep collapsed Admin counters accurate and refresh them without loading record pages",
-      "merged_source_sha": "6af607ada105b0c406829e8577e8ad7c543ab52d",
-      "scope_paths": [
-        "site/admin/main.js",
-        "site/admin/view.js",
-        "site/admin/records.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-96-security-repairs",
-      "issue": 96,
-      "title": "Security audit: bounded requests and HTML, accurate provenance, approved passwords, preserved notes and privacy copy",
-      "merged_source_sha": "5b1bc56c8d2d111ab70f14f1bd1bf58de4f9146d",
+      "id": "DIC-Q-33-product-completeness",
+      "issue": 33,
+      "title": "Recover complete selected-coffee details across semantic layouts and public product sources",
+      "merged_source_sha": "126304178bf255894af44633587052c7ef3b56d5",
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
-        "site/cloud/client.js",
-        "site/cloud/main.js",
-        "site/cloud/mapping.js",
-        "site/lib/engine.js",
-        "site/lib/model.js",
-        "src/server/coffee-blend-evidence.mjs",
-        "src/server/coffee-delimited-specs.mjs",
-        "src/server/coffee-ecwid-snapshot.mjs",
+        "site/cloud/coffee-url-autofill.js",
         "src/server/coffee-espresso-evidence.mjs",
+        "src/server/coffee-fact-compatibility.mjs",
         "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-html-structure.mjs",
         "src/server/coffee-narrative-evidence.mjs",
         "src/server/coffee-page-metadata.mjs",
         "src/server/coffee-product-layouts.mjs",
-        "src/server/coffee-product-prep.mjs",
         "src/server/coffee-product-scope.mjs",
+        "src/server/coffee-semantic-specs.mjs",
         "src/server/coffee-shopify-ajax.mjs",
-        "src/server/coffee-woocommerce-store.mjs",
-        "src/server/roast-level-evidence.mjs",
-        "supabase/functions/_shared/html-scan.mjs",
-        "supabase/functions/_shared/request-budget.mjs",
-        "supabase/functions/dic-preview-coffee/index.ts",
-        "supabase/functions/dic-preview-coffee/preview.mjs",
+        "src/server/coffee-woocommerce-store.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-100-admin-review-delete",
+      "issue": 100,
+      "title": "Side-by-side Admin coffee review and protected coffee/shot/submission deletion",
+      "merged_source_sha": "7150a72e15e661867b909fa31ee7f7443455deab",
+      "scope_paths": [
+        "site/admin/view.js",
+        "site/admin/main.js",
+        "site/admin/styles.css",
+        "site/admin/records.js",
+        "supabase/migrations/20261023225600_dic_admin_safe_delete.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-10-recipe-favorite-correction",
+      "issue": 10,
+      "title": "Preserve an explicitly chosen recipe through successful shot corrections",
+      "merged_source_sha": "8542286bb52a600a5c1c7ee962b5ad45ff3cd2aa",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "supabase/migrations/20261024021000_dic_personal_family_lifecycle_integrity.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-5-source-fact-integrity",
+      "issue": 5,
+      "title": "Trusted source rejects conflicting origin/producer metadata",
+      "merged_source_sha": "a034fb727f7fa7a0fbbfd74bbbca40d2fce9a651",
+      "scope_paths": [
         "supabase/functions/dic-verify-coffee/evidence.mjs",
-        "supabase/functions/dic-verify-coffee/index.ts"
+        "supabase/migrations/20261024020500_dic_source_target_producer.sql"
       ]
     }
   ]

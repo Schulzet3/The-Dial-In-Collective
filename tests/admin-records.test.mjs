@@ -89,7 +89,7 @@ test('every pending and conflict entry is actionable even on page two',()=>{
    conflicts:{items:[{id:conflict,revision:9,name:'Page 2 conflict',status:'conflict'}],total:51,offset:50}
   });
  for(const id of [pending,conflict]){
-  for(const action of ['review-approve','review-merge-prepare','review-hold'])
+  for(const action of ['review-approve','review-merge-prepare'])
    assert.match(html,new RegExp('data-action="'+action+'" data-id="'+id+'"'));
  }
  assert.equal((html.match(/data-action="review-approve"/g)||[]).length,2);
@@ -129,7 +129,7 @@ test('unavailable detail pages preserve independent review actions without false
  assert.match(html,/Coffee needing review/);
  assert.match(html,/data-action="review-approve"/);
  assert.match(html,/data-action="review-merge-prepare"/);
- assert.match(html,/data-action="review-hold"/);
+ assert.doesNotMatch(html,/data-action="review-hold"/);
  assert.equal((html.match(/Detailed listing unavailable/g)||[]).length,2);
  assert.match(html,/<details class="admin-disclosure" data-admin-section="pending"/);
  assert.doesNotMatch(html,/No pending coffee submissions|No coffee conflicts/);
@@ -193,7 +193,7 @@ test('pending cards show every field without a secondary per-coffee disclosure',
  const html=renderAdminDashboard({},null,null,{},{
   pending:{items:[{id,revision:3,name:'<danger>',roaster:'Fixture Roaster',tasting_notes:'Berry & Floral',origin:'Ethiopia',espressoNotes:'18 g in'}],total:1,offset:0}
  });
- assert.match(html,/class="admin-coffee-facts"/);
+ assert.match(html,/class="admin-compare-facts"/);
  for(const field of ['Coffee Name','Roaster','Release / Harvest','Origin','Process','Roast Level',
   'Variety','Producer','Elevation','Tasting Notes','Summary','Espresso Notes','Source URL'])
   assert.ok(html.includes(field),'missing '+field);
@@ -221,4 +221,23 @@ test('Admin search is escaped, accessible, and clearable without changing fixed 
  assert.equal((html.match(/class="admin-stat" href=/g)||[]).length,5);
  const empty=renderAdminRecordCollection('approved',{search:true,items:[],total:0,offset:0});
  assert.match(empty,/No matching records\./);
+});
+
+test('pending comparison identifies genuine origin conflicts, treats blanks as unknown and escapes untrusted text',()=>{
+ const id='00000000-0000-4000-8000-000000000911';
+ const html=renderAdminDashboard({},null,null,{}, {pending:{items:[{id,revision:1,status:'pending',name:'Arbey Cordoba',roaster:'Sweet Bloom',origin:'Antigua, Guatemala',process:'Washed',producer:'Arbey Cordoba'}],total:1,offset:0}}, {comparisons:{[id]:[{name:'Arbey Cordoba',roaster:'Sweet Bloom',origin:'Huila, Colombia',process:null,producer:null}]}});
+ assert.match(html,/Submitted Coffee/);assert.match(html,/Possible Existing Match/);
+ assert.match(html,/Antigua, Guatemala/);assert.match(html,/Huila, Colombia/);
+ assert.match(html,/Origin:|Origin<\/dt>/);assert.match(html,/Blank fields are not treated as contradictions/);
+ assert.doesNotMatch(html,/review-hold|<img/);
+});
+test('delete controls render on real editable records with a revision',()=>{
+ const id='00000000-0000-4000-8000-000000000912';
+ for(const kind of ['shots','approved','pending']){
+  const html=renderAdminRecord({id,revision:2,name:'Coffee'},kind);
+  assert.match(html,/data-action="admin-delete-record"/);
+  assert.match(html,/data-revision="2"/);
+ }
+ const disabled=renderAdminRecord({name:'No identifier'},'approved');
+ assert.doesNotMatch(disabled,/data-action="admin-delete-record"/);
 });

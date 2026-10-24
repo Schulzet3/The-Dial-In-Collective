@@ -16,11 +16,16 @@ test('workflow cleanup preserves exact historical blobs, not paraphrased evidenc
  }
 });
 test('reconciliation retains every classified owner key and source assertion',()=>{
- assert.deepEqual(matrix.owner_decision_key_inventory,old.owner_decision_key_inventory);
- assert.deepEqual(projection(matrix),projection(old));
+ for(const key of old.owner_decision_key_inventory)assert.ok(matrix.owner_decision_key_inventory.includes(key),'missing historical owner decision '+key);
+ assert.deepEqual(matrix.owner_decision_key_inventory,[...matrix.owner_decision_key_inventory].sort(),'current inventory remains sorted');
+ // Historical contracts remain exact. Later approved implementations may
+ // add coverage; approval-coverage separately validates every current item.
+ const originalIds=new Set(old.contracts.map(item=>item.id));
+ const historical={contracts:matrix.contracts.filter(item=>originalIds.has(item.id))};
+ assert.deepEqual(projection(historical),projection(old));
  for(const key of ['locked_count','open_count','fnv1a32'])assert.equal(matrix.original_baseline[key],old.original_baseline[key]);
- assert.equal(matrix.contracts.length,15);
- assert.equal(matrix.contracts.reduce((sum,item)=>sum+item.assertions.length,0),66);
+ assert.equal(historical.contracts.length,15);
+ assert.equal(historical.contracts.reduce((sum,item)=>sum+item.assertions.length,0),66);
 });
 test('production evidence survives compact current view without a new release grant',()=>{
  for(const key of ['exact_source_sha','tested_application_source_sha','netlify_deploy_id'])assert.equal(matrix.production[key],old.production[key]);

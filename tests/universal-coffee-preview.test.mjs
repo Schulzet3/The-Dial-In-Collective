@@ -168,7 +168,7 @@ test('blend descriptors never get forced into a single inaccurate processing cat
  assert.equal(r.fields.process,'Other/Unknown');
  const html='<html><body><h1>Blend 9.2</h1><p>washed & natural process</p></body></html>';
  const fallback=extractPublicCoffeeFacts(html,{source_url:productURL});
- assert.equal(fallback.fields.process,undefined);
+ assert.equal(fallback.fields.process,'Other/Unknown');
 });
 test('conflicting unlabeled product JSON-LD is ambiguous; other product URL cannot win',()=>{
  const a={...product,name:'Alpha',url:productURL},b={...product,name:'Beta',url:productURL};
@@ -665,11 +665,13 @@ test('transient website failure does not call charge-completion RPC',async()=>{
  const result=await(await handler(req)).json();assert.equal(result.reason,'source_unavailable');
  assert.equal(calls.filter(x=>x.endsWith('/rpc/dic_preview_complete')).length,0);
 });
-test('unambiguous approved catalog lookup skips retrieval, preserves cooldown, never claims source verification',async()=>{
+test('complete unambiguous approved catalog skips retrieval, preserves cooldown, never claims source verification',async()=>{
  let outbound=0;const requests=[];
  const apiFetch=async (url,opt)=>{requests.push({url,body:opt.body});return {ok:true,json:async()=>
   url.endsWith('/rpc/dic_preview_cached_verified')?
-   {ok:true,source:'verified_catalog',fields:{name:'Known Release',roaster:'Known Roaster'}}:mockPreviewApi(url)};};
+   {ok:true,source:'verified_catalog',fields:{name:'Known Release',roaster:'Known Roaster',
+    release_label:'2026',origin:'Ethiopia',process:'Washed',roast_level:'Light',elevation_m:'1900 masl',
+    variety:'Heirloom',producer:'Named Cooperative',tasting_notes:'Peach, tea, honey'}}:mockPreviewApi(url)};};
  const handler=createPreviewHandler({apiFetch,env:approvedEnv,readHtml:async()=>{outbound++;throw Error('Should not fetch');}});
  const req=new Request('https://app.dialincollective.com/api/coffee-preview',{method:'POST',
  headers:{'content-type':'application/json','authorization':'Bearer valid.jwt.token',

@@ -285,7 +285,7 @@ globalThis.supabase={createClient:()=>sdk};
   check(page.locator('#admin-invites').get_by_text('Complete invitation history is temporarily unavailable').count()==0,mode+': invitation fixture exercises successful server listing, not fallback')
   check(page.locator('.admin-pagination').count()==0,mode+': complete short lists do not show misleading pagination')
   review=page.locator('#admin-pending .admin-record')
-  check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare','review-hold']),mode+': each paginated coffee has review actions')
+  check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare']),mode+': each paginated coffee has review actions')
   check(page.locator('.admin-review-details').count()==0,mode+': duplicate legacy review actions omitted')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': Admin has no horizontal overflow')
   shot(page,'12-admin-'+mode)
@@ -304,7 +304,7 @@ globalThis.supabase={createClient:()=>sdk};
   check(shot_editor.locator('[name="notes"]').input_value()=='Synthetic private note: sweet berry finish.' and shot_editor.locator('[name="notes"]').is_editable(),mode+': shot editor retains the original synthetic private note')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': populated mobile editors fit the viewport')
   shot(page,'14-admin-editors-mobile-'+mode)
-  check(all(name in ['dic_session_status','dic_admin_dashboard','dic_admin_access_overview','dic_admin_records'] for name in page.evaluate('requests')),mode+': visual editor inspection makes no mutation RPC')
+  check(all(name in ['dic_session_status','dic_admin_dashboard','dic_admin_access_overview','dic_admin_records','dic_admin_review_candidates'] for name in page.evaluate('requests')),mode+': visual editor inspection makes no mutation RPC')
   page.close()
  for width in [320,375,390,768,1280]:
   page=boot(browser,'dark',width,1100)

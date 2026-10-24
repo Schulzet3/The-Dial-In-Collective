@@ -27,9 +27,11 @@ export function coffeeUrlPreviewMarkup(result){
  const existing=result.match?.classification==='exact_verified'?'This page also matches an existing verified coffee. Choosing Add Coffee will reuse its canonical record after the identity check.':
   result.match?.classification==='needs_confirmation'?'A similar verified coffee exists. You will be asked to confirm the right release before linking any records.':'';
  const official=result.source==='official_roaster_product_metadata';
- const heading=official?'Details Found On Official Roaster Page':'Suggested Details From Webpage';
- const sourceLabel=official?'Official Source Preview':'Unverified Page';
- const caution=official?'Review these suggestions; a page preview alone does not verify the exact release.':'The webpage is not yet a verified official source. Review these extracted suggestions and leave unconfirmed facts blank.';
+ const catalog=result.source==='approved_catalog';
+ const heading=catalog?'Previously Approved Coffee Details':official?'Details Found On Official Roaster Page':'Suggested Details From Webpage';
+ const sourceLabel=catalog?'Approved Catalog':official?'Official Source Preview':'Unverified Page';
+ const caution=catalog?(result.refresh_reason?'The current roaster page could not be rechecked. Available catalog details are shown below; confirm the intended release.':'These details come from the approved coffee catalog. Confirm that this is the release you want.'):
+  official?'Review these suggestions; a page preview alone does not verify the exact release.':'The webpage is not yet a verified official source. Review these extracted suggestions and leave unconfirmed facts blank.';
  // Noncanonical supplementary facts remain visible in a compact disclosure,
  // not silently saved as a roast classification or verified source metadata.
  const detailsLabels={
@@ -41,13 +43,16 @@ export function coffeeUrlPreviewMarkup(result){
  const recipe=result.roaster_recipe||{};
  const validYield=Number.isFinite(recipe.yield_g)||
   (Number.isFinite(recipe.yield_g_min)&&Number.isFinite(recipe.yield_g_max)&&recipe.yield_g_max>=recipe.yield_g_min);
- const fullRecipe=Number.isFinite(recipe.dose_g)&&Number.isFinite(recipe.time_s_min)&&validYield;
+ const measuredReference=Number.isFinite(recipe.dose_g)&&validYield;
+ const fullRecipe=measuredReference&&Number.isFinite(recipe.time_s_min)&&
+  Number.isFinite(recipe.time_s_max)&&recipe.time_s_max>=recipe.time_s_min;
  const doseText=Number.isFinite(recipe.dose_g_max)?e(recipe.dose_g)+'–'+e(recipe.dose_g_max):
   e(recipe.dose_g)+(Number.isFinite(recipe.dose_tolerance_g)?' ± '+e(recipe.dose_tolerance_g):'');
  const outputText=Number.isFinite(recipe.yield_g)?e(recipe.yield_g):e(recipe.yield_g_min)+'–'+e(recipe.yield_g_max);
- const publishedRecipe=fullRecipe?
-  doseText+' g in, '+outputText+' g out, '+e(recipe.time_s_min)+'–'+e(recipe.time_s_max)+' s'+
-  (recipe.temperature?', '+e(recipe.temperature):recipe.temperature_reference?', temperature guidance: '+e(recipe.temperature_reference):''):
+ const publishedRecipe=measuredReference?
+  doseText+' g in, '+outputText+' g out'+(fullRecipe?', '+e(recipe.time_s_min)+'–'+e(recipe.time_s_max)+' s':'')+
+  (recipe.temperature?', '+e(recipe.temperature):recipe.temperature_reference?', temperature guidance: '+e(recipe.temperature_reference):'')+
+  (fullRecipe?'':' (total shot time not published)'):
   Number.isFinite(recipe.ratio)?'Espresso ratio 1:'+e(recipe.ratio)+' (dose and time not supplied)':'';
  return `<section class="coffee-url-preview">
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>

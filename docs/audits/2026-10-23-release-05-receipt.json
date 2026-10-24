@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "release_id": "DIC-20261023-READY-QUEUE-05",
+  "owner_approval_source": "GitHub Issue #96 comment 6367192910",
+  "tested_source_sha": "d57f0b3cfeac32be6cd7a2192662a63a57e67e0f",
+  "release_commit_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
+  "netlify_deploy_id": "6adb71e2a2e52cd3bbeef5e5",
+  "published_at_utc": "2026-10-23T14:40:52.519Z",
+  "netlify_state": "ready",
+  "netlify_context": "production",
+  "netlify_branch": "release/production",
+  "delivered_items": [
+    "DIC-Q-93-admin-counts",
+    "DIC-Q-96-security-repairs"
+  ],
+  "edge_functions": [
+    {
+      "name": "dic-preview-coffee",
+      "version": 4,
+      "status": "ACTIVE",
+      "verify_jwt": true
+    },
+    {
+      "name": "dic-verify-coffee",
+      "version": 6,
+      "status": "ACTIVE",
+      "verify_jwt": true
+    }
+  ],
+  "database": {
+    "shots": 23,
+    "notes": 23,
+    "accounts": 5,
+    "community": 2,
+    "mutation_receipts": 49,
+    "application_tables": 46,
+    "missing_rls": 0
+  },
+  "sql_migrations_applied": 0,
+  "verified_at_utc": "2026-10-23T14:41:53.044Z",
+  "unverified": [
+    "Real signed-in production Admin/Member browser session",
+    "Full external authenticated production penetration tests",
+    "Live public HTTP probe from external web tool unavailable"
+  ],
+  "grant_consumed": true
+}

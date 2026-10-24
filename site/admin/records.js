@@ -58,7 +58,7 @@ export function renderAdminCoffeeFacts(item){
  return '<dl class="admin-coffee-facts">'+[...fields.coffee,['source_url','Source URL']].map(([key,label])=>
   '<div><dt>'+e(label)+'</dt><dd>'+e(string(item[key])||'—')+'</dd></div>').join('')+'</dl>';
 }
-export function renderAdminRecord(item,kind,{reviewActions=null}={}){
+export function renderAdminRecord(item,kind,{reviewActions=null,reviewComparison=null}={}){
  const shot=kind==='shots',approved=kind==='approved';
  const id=string(item.id),title=shot?(item.coffee_name||'Shot record'):(item.name||'Unnamed coffee');
  const creator=item.creator_email||'Creator not available';
@@ -71,7 +71,7 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
   '<div class="admin-queue-title"><div><h3>'+e(title)+'</h3><p class="helper">'+e(description)+'</p>'+
   '<p class="helper">Added by: <strong>'+e(creator)+'</strong> · '+e(date(item.created_at||item.pulled_at))+'</p>'+
   '</div><span class="admin-state">'+e(shot?'Logged Shot':approved?'Approved Coffee':kind==='conflicts'?'Conflict':'Pending')+'</span></div>'+
-  (shot?'<p class="admin-record-note"><b>Notes:</b> '+e(item.notes||'None')+'</p>':(!approved?renderAdminCoffeeFacts(item):''))+
+  (shot?'<p class="admin-record-note"><b>Notes:</b> '+e(item.notes||'None')+'</p>':(!approved?(typeof reviewComparison==='function'?reviewComparison(item):renderAdminCoffeeFacts(item)):''))+
   (item.source_url&&(shot||approved)?'<p class="admin-source">Source: '+e(item.source_url)+'</p>':'')+
   (enabled?'<button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Edit Details</button>':'')+
   (enabled?'<form hidden class="admin-record-editor" data-record-form '+attr('data-id',id)+attr('data-type',type)+
@@ -81,10 +81,11 @@ export function renderAdminRecord(item,kind,{reviewActions=null}={}){
       '<p class="helper">Preview fills only empty inputs; inspect and save changes explicitly. Extraction alone never verifies official evidence.</p>':'')+
      
      '<div class="admin-review-actions"><button type="submit">Save Changes</button><button type="button" class="ghost compact" data-action="edit-toggle"'+attr('data-id',id)+'>Cancel</button></div></form>':'')+
+  (enabled?'<button type="button" class="ghost compact admin-delete-action" data-action="admin-delete-record"'+attr('data-id',id)+attr('data-kind',type)+attr('data-revision',rev)+'>Delete '+(shot?'Shot':approved?'Coffee':'Submission')+'</button>':'')+
   (typeof reviewActions==='function'?reviewActions(item):'')+
   '</article>';
 }
-export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewActions=null,expanded=false,openCoffeeGroups=new Set()}={}){
+export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewActions=null,reviewComparison=null,expanded=false,openCoffeeGroups=new Set()}={}){
  const title=({pending:'Pending Coffees',conflicts:'Conflicts',approved:'Approved Coffees',shots:'Logged Shots'})[kind]||kind;
  const loaded=Array.isArray(page.items)?page.items:[];
  const offset=Number.isSafeInteger(page.offset)&&page.offset>=0?page.offset:0;
@@ -98,7 +99,7 @@ export function renderAdminRecordCollection(kind,page={},{embedded=false,reviewA
   '<button type="button" class="ghost compact" data-action="record-page" data-kind="'+e(kind)+'" data-offset="'+e(offset+50)+'" '+(offset+loaded.length>=total?'disabled':'')+'>Next</button></div>':'';
  const empty=page.search?'No matching records.':(({pending:'No pending coffee submissions.',conflicts:'No coffee conflicts.'})[kind]||'No records to show.');
  const content=page.loading?'<p class="helper" role="status">Loading records…</p>':
-  error+(loaded.length?(kind==='shots'?renderAdminShotGroups(loaded,{openCoffeeGroups}):loaded.map(item=>renderAdminRecord(item,kind,{reviewActions})).join('')):
+  error+(loaded.length?(kind==='shots'?renderAdminShotGroups(loaded,{openCoffeeGroups}):loaded.map(item=>renderAdminRecord(item,kind,{reviewActions,reviewComparison})).join('')):
   page.error?'':'<p class="admin-empty helper">'+e(empty)+'</p>')+pagination;
  const description='<p class="helper">All records, page by page · creator and revision shown where available.</p>';
  // Pending and Conflicts already have titled outer sections containing the
