@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {hydrate} from '../site/cloud/mapping.js';
 import {rawFixture,rawShot,TIME} from './cloud-fixtures/raw.js';
 import {chooseRecipeFamily,recommendation,baseline,editShot} from '../site/lib/engine.js';
-import {activeVersion,coffeeState} from '../site/lib/model.js';
+import {activeVersion,coffeeState,reviseSetup} from '../site/lib/model.js';
 const make=({preference='',favorite=null}={})=>{
  const raw=rawFixture();raw.preferences.tasting_preferences=preference;
  raw.families=[
@@ -172,4 +172,34 @@ test('same-ratio time and temperature variation is recorded without splitting an
  assert.deepEqual(s,before,'significance evaluation must not change shot history or recipe preferences');
  assert.equal(rec.reasons.some(x=>/different extraction|temperature|time variation/i.test(x)),false,
   'do not add extra recipe UI or unsupported taste claims');
+});
+
+test('two-family manual selection persists across a fresh server hydration, without changing history',()=>{
+ const {raw}=make({preference:'bright citrus clarity',favorite:'short-b'});
+ const rawBefore=structuredClone(raw);
+ const fresh=hydrate(structuredClone(raw));
+ assert.equal(recommendation(fresh,'coffee').familyId,'short');
+ assert.equal(chooseRecipeFamily(fresh,'coffee','Turbo',activeVersion(fresh),
+  activeVersion(fresh).baskets[0],'standard',coffeeState(fresh,'coffee')).basis,'manual');
+ assert.equal(fresh.shots.length,4);
+ assert.equal(new Set(fresh.shots.map(sh=>sh.familyId)).size,2);
+ assert.deepEqual(raw,rawBefore);
+});
+test('equipment version change demotes previous family time to reference without erasing old favorite or shots',()=>{
+ const {s}=make({preference:'bright citrus clarity',favorite:'short-a'});
+ const oldId=activeVersion(s).id,originalShots=structuredClone(s.shots);
+ assert.equal(recommendation(s,'coffee').familyId,'short');
+ reviseSetup(s,{name:'Test Home',machine:'Replacement machine',
+  grinder:'Replacement grinder',burrs:'Different burrs',grinderMin:0,
+  grinderMax:5,basketDoseG:18,tempUnit:'F'});
+ assert.notEqual(activeVersion(s).id,oldId);
+ const changed=recommendation(s,'coffee');
+ assert.equal(changed.established,false,'old successes cannot certify a new setup');
+ assert.notEqual(changed.familySelection?.basis,'manual','old manually favored shot is not eligible on new setup');
+ assert.equal(changed.time.center,baseline(s.coffees[0],'Turbo',18,s.preferences).time.center);
+ assert.deepEqual(s.shots,originalShots,'equipment versioning never rewrites historical shots');
+ s.setups[0].activeVersionId=oldId;
+ assert.equal(recommendation(s,'coffee').familyId,'short','returning to old version restores manual choice');
+ assert.equal(coffeeState(s,'coffee').favoriteShots.short,'short-a');
+ assert.equal(s.shots.length,4);
 });

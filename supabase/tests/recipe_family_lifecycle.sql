@@ -83,6 +83,61 @@ begin
  select * into rp from public.recipe_preferences where owner_id=owner and setup_version_id=vid
   and library_entry_id=lid and style='Turbo';
  if rp.current_family_id<>short_id or rp.favorite_shot_id<>a then raise exception 'Explicit owner favorite not recorded'; end if;
+ -- Stale revisions never silently switch a family's selected example.
+ perform set_config('request.jwt.claim.sub',owner::text,true);
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',owner,'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ response:=public.dic_mutate(gen_random_uuid(),'make_current',
+   jsonb_build_object('shot_id',c,'expected_revision',rp.revision-1));
+ if response->>'code'<>'conflict' then raise exception 'Stale revision accepted: %',response; end if;
+ response:=public.dic_mutate(gen_random_uuid(),'make_current',
+   jsonb_build_object('shot_id',c,'expected_revision',rp.revision));
+ if response->>'ok'<>'true' then raise exception 'Switch to second family rejected: %',response; end if;
+ execute 'reset role';
+ select * into rp from public.recipe_preferences where owner_id=owner and setup_version_id=vid
+  and library_entry_id=lid and style='Turbo';
+ if rp.current_family_id<>long_id or rp.favorite_shot_id<>c then
+   raise exception 'Second-family Make Current failed'; end if;
+ -- A second explicit selection must return to the original family.
+ perform set_config('request.jwt.claim.sub',owner::text,true);
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',owner,'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ response:=public.dic_mutate(gen_random_uuid(),'make_current',
+   jsonb_build_object('shot_id',a,'expected_revision',rp.revision));
+ if response->>'ok'<>'true' then raise exception 'Switch back to first family rejected: %',response; end if;
+ state:=public.dic_read_personal_state();
+ if not exists (
+   select 1 from jsonb_array_elements(state->'recipePreferences') p
+    where p->>'favorite_shot_id'=a::text and p->>'current_family_id'=short_id::text
+ ) then raise exception 'Authenticated state reload lost explicit favorite'; end if;
+ execute 'reset role';
+ select * into rp from public.recipe_preferences where owner_id=owner and setup_version_id=vid
+  and library_entry_id=lid and style='Turbo';
+ if rp.current_family_id<>short_id or rp.favorite_shot_id<>a then raise exception 'Switch back failed'; end if;
+ -- A new hardware version may reference historic family evidence but cannot
+ -- Make Current using a successful shot from the previous equipment version.
+ declare
+  new_vid uuid:=gen_random_uuid();
+ begin
+  insert into public.setup_versions(id,owner_id,setup_id,machine_model,grinder_model)
+   values(new_vid,owner,sid,'Changed machine','Changed grinder');
+  update public.setups set active_version_id=new_vid where id=sid;
+  perform set_config('request.jwt.claim.sub',owner::text,true);
+  perform set_config('request.jwt.claims',jsonb_build_object('sub',owner,'role','authenticated')::text,true);
+  execute 'set local role authenticated';
+  begin
+   response:=public.dic_mutate(gen_random_uuid(),'make_current',
+    jsonb_build_object('shot_id',a,'expected_revision',rp.revision));
+   raise exception 'Previous equipment shot incorrectly became Current on new version';
+  exception when invalid_parameter_value then null;
+  end;
+  execute 'reset role';
+  update public.setups set active_version_id=vid where id=sid;
+ end;
+ select * into rp from public.recipe_preferences where owner_id=owner and setup_version_id=vid
+  and library_entry_id=lid and style='Turbo';
+ if rp.current_family_id<>short_id or rp.favorite_shot_id<>a then
+  raise exception 'Equipment change modified old version recipe preference'; end if;
  -- Correct the exact favorite shot into the other established family.
  update public.shots set yield_g=54 where id=a;
  perform private.classify_personal_shot(a);
@@ -115,5 +170,5 @@ begin
   raise exception 'Cross-account family/shot privacy leak'; end if;
  execute 'reset role';
 end $issue10$;
-select 'PASS: isolated admitted account two-family authenticated selection, correction, retirement, significance and privacy; rollback' as result;
+select 'PASS: isolated admitted account dual-family switching, stale revision, reload, equipment isolation, correction, retirement, significance and privacy; rollback' as result;
 rollback;
