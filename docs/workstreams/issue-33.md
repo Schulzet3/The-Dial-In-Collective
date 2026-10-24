@@ -530,3 +530,7 @@ This code commit is a new feature branch from current development, preserving co
 
 ### Live probe diagnostic continuation (same commit)
 Run 40065390623 at cc87a3e failed only NOMAD and Circulor sanitized replay comparisons; SEY and Manhattan passed. Retain failed artifact 12548602912. Next source-bound probe records bounded top-level/field/conflict and source-fact-count differences without suppressing any failure, so the exact sanitization loss can be fixed. No release authorization and queue remains TESTING.
+
+
+### Live source parity diagnostic refinement
+Run 40065492108 narrowed the remaining failures: NOMAD differs only in source-fact object details (42/42 facts, no canonical or conflict differences), while Circulor loses two canonical fields and two conflict flags plus 25 source facts (111 to 86) during fixture sanitization. Keep the assertions failing; add bounded publicly sourced fact-diff diagnostics to determine exactly which sanitization step changes evidence before repairing it. No production changes.

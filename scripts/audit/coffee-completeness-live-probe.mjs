@@ -166,6 +166,12 @@ async function probe(target){
     record.parity_conflicts_original=original?.conflicts||[];
     record.parity_conflicts_replay=replay?.conflicts||[];
     record.parity_source_fact_counts=[original?.source_facts?.length??0,replay?.source_facts?.length??0];
+    const factTag=f=>[f.field||'',f.label||'',f.source_type||'',f.section||'',f.value||''].map(x=>String(x)).join('|');
+    const beforeFacts=(original?.source_facts||[]).map(factTag);
+    const afterFacts=(replay?.source_facts||[]).map(factTag);
+    const afterBag=new Map();for(const v of afterFacts)afterBag.set(v,(afterBag.get(v)||0)+1);
+    record.parity_missing_source_fact_examples=beforeFacts.filter(v=>{const n=afterBag.get(v)||0;if(!n)return true;afterBag.set(v,n-1);return false;}).slice(0,12).map(v=>v.slice(0,190).replace(/(?:password|token|secret|session|cookie|email|phone|authorization|checkout)[^|]{0,80}/gi,'[redacted]'));
+
    }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
