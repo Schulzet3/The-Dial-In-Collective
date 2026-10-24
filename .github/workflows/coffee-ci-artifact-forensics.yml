@@ -1,0 +1,22 @@
+name: DIC exact CI artifact forensics
+on:
+  push:
+    branches:
+      - work/issue33-candidate11-live-diagnostics-20261024
+permissions:
+  contents: read
+  actions: read
+jobs:
+  inspect-existing-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Compile read-only forensic script
+        run: python3 -m py_compile scripts/audit/coffee-ci-artifact-forensics.py
+      - name: Read hash-bound original artifact evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -B scripts/audit/coffee-ci-artifact-forensics.py
