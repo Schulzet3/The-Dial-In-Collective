@@ -1,0 +1,97 @@
+{
+  "type": "independent_candidate7_final_delta_controls",
+  "created_at": "2026-10-24T02:40:10.176Z",
+  "scope": "Only final generic root JSON completion, atomic exact values and reclaimed-capacity priority delta; previous42 controls remain separately bound to e5bcdf9a.",
+  "before": {
+    "runtime": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719",
+    "tests": "49d7e6734a7b4e72fec4e5a5b84525175eba6de4fa7026a73e6743fdb3a4686b"
+  },
+  "after": {
+    "runtime": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719",
+    "tests": "49d7e6734a7b4e72fec4e5a5b84525175eba6de4fa7026a73e6743fdb3a4686b"
+  },
+  "checks": 13,
+  "passed": 13,
+  "failed": 0,
+  "outcomes": [
+    {
+      "name": "complete omitted root preserves literal weight with unit",
+      "passed": true,
+      "facts": 44,
+      "characters": 64000,
+      "exact_source_value": "\"0.75lb\""
+    },
+    {
+      "name": "complete omitted root preserves typed quantitative weight",
+      "passed": true,
+      "facts": 44,
+      "characters": 63995,
+      "exact_source_value": "{\"@type\":\"QuantitativeValue\",\"value\":\"0.75\",\"unitText\":\"lb\"}"
+    },
+    {
+      "name": "complete omitted root preserves numeric zero",
+      "passed": true,
+      "facts": 44,
+      "characters": 63993,
+      "exact_source_value": "0"
+    },
+    {
+      "name": "complete omitted root preserves boolean false",
+      "passed": true,
+      "facts": 44,
+      "characters": 63997,
+      "exact_source_value": "false"
+    },
+    {
+      "name": "complete omitted root preserves explicit null",
+      "passed": true,
+      "facts": 44,
+      "characters": 63996,
+      "exact_source_value": "null"
+    },
+    {
+      "name": "complete omitted root preserves empty source string",
+      "passed": true,
+      "facts": 44,
+      "characters": 63994,
+      "exact_source_value": "\"\""
+    },
+    {
+      "name": "complete omitted multi-part root is restored atomically",
+      "passed": true,
+      "facts": 45,
+      "characters": 63987
+    },
+    {
+      "name": "root completion rejects malformed JSON",
+      "passed": true
+    },
+    {
+      "name": "root completion rejects missing first part",
+      "passed": true
+    },
+    {
+      "name": "root completion rejects wholly omitted new variant core",
+      "passed": true
+    },
+    {
+      "name": "root completion rejects unscoped numeric array index",
+      "passed": true
+    },
+    {
+      "name": "omitted root chunks cannot borrow a different URL",
+      "passed": true
+    },
+    {
+      "name": "reclaimed capacity preserves original caption before lower-priority gallery",
+      "passed": true,
+      "facts": 128,
+      "characters": 5604,
+      "caption_source_url": "https://roaster.example/products/coffee",
+      "caption_role": "Published image caption"
+    }
+  ],
+  "network": "None; local synthetic values only",
+  "source_or_test_edits": false,
+  "harness_note": "Initial comparison mistakenly treated fact-object key insertion order as semantic metadata; corrected comparison sorts property names and still requires exact value strings and every metadata value. No runtime or test edit was made for that harness correction."
+}

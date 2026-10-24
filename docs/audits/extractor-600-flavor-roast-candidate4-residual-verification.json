@@ -1,0 +1,3862 @@
+{
+  "schema_version": 1,
+  "type": "full_candidate4_flavor_roast_delta_and_residual_verification",
+  "reviewer": "/root/flavor_roast",
+  "created_at": "2026-10-24T01:46:45.524861+00:00",
+  "purpose": "Verify the exact full candidate4 replay and assess changes using original sources and existing source ledgers, without duplicating completed manual work or changing the frozen oracle.",
+  "extractor_outputs_seen": true,
+  "frozen_oracles_modified": false,
+  "scoring_changed": false,
+  "source_tree_sha256": "95c80e702a9ac4faabf62a3c661c3fae43455cca23f065cfa9cd9d420424a6eb",
+  "replay_sha256": "a5cb4d10efd52f169273365e7838b7090da99610e6b425d810c7c5d7d6a3435e",
+  "comparison_sha256": "7b846b3f19c44f3091893decaa221808fa9ff1e4b8b3f081c98c80dd3fdd8f0e",
+  "verification_receipt_sha256": "94675153d91d2485b23dacbf17e99244775816a13173d0e8621b8e284b4d6870",
+  "source_review_receipts": [
+    {
+      "file": "extractor-600-flavor-roast-candidate1-adjudication.json",
+      "sha256": "866fc41e1e423a28cf766a72f496821d6811e30d8dd743205efa5ab15a7c369a"
+    },
+    {
+      "file": "extractor-600-flavor-roast-candidate2-focused-adjudication.json",
+      "sha256": "17b6ffb128303dc09c3e473d94cc40f4dc6d9a63f8efce4d6e256ab6da3a52fd"
+    },
+    {
+      "file": "extractor-600-candidate2-notes-review-complete-adjudication.json",
+      "sha256": "2b06a1bc568e709bbbebebfb5c65054695212787ff0395a953d466d7d1ff17ee"
+    }
+  ],
+  "targeted_assertions": {
+    "count": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "candidate3_to_candidate4_changes": 25,
+  "prior_exact_note_status_changes": 2,
+  "prior_exact_note_status_change_explanation": "Both are Simpatico clean qualifiers explicitly printed in the source; the strict review statuses remain unchanged. No flavor noun was lost.",
+  "prior_exact_roast_losses": 0,
+  "remaining_residual_coverage": {
+    "notes": 272,
+    "roast": 32,
+    "with_prior_source_review": 304,
+    "without_prior_source_review": 0
+  },
+  "runtime_edits_from_this_verification": false,
+  "remaining_limits": [
+    "Existing partial narrative, aroma, finish, preparation and component distinctions are documented in the source ledgers; their claims must not be mechanically unioned to match an oracle.",
+    "The coverage map points to reviewed original source context; it does not blindly reuse a prior verdict for a changed candidate value. Changed outputs are assessed separately in records.",
+    "A fixture handler response and unchanged source hashes do not establish production networking behavior."
+  ],
+  "records": [
+    {
+      "case_id": "shop-ohenryscoffee-com__costa-rica-sonora-honey-97b7bfea",
+      "field": "tasting_notes",
+      "before": null,
+      "after": "cherry, chocolate, hazelnut, and baking spice",
+      "expected": "cherry, chocolate, hazelnut, baking spice",
+      "before_status": "missing",
+      "after_status": "review_required",
+      "adjudication_class": "recovered_literal_note_list",
+      "reason": "The current description explicitly lists cherry, chocolate, hazelnut and baking spice after its body/acidity clause.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://shop.ohenryscoffee.com/products/costa-rica-sonora-honey",
+          "sha256": "1adebae7b83ddc51d56381ba095e2d7b173ef4ee57d80871e1da59f66f603a43",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://shop.ohenryscoffee.com/products/costa-rica-sonora-honey.js",
+          "sha256": "628965c069e2d71138e072a6c4ffa956e4d60f548765a6ed299f74768a80227a",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__fireside-favorite-fca08b4a",
+      "field": "tasting_notes",
+      "before": null,
+      "after": "Graham Cracker, aromatic Cinnamon, smooth Vanilla, and nutty Hazelnut",
+      "expected": "Graham Cracker, Cinnamon, Vanilla, Hazelnut",
+      "before_status": "missing",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://darkcanyon-coffee.com/collections/best-sellers/products/fireside-favorite",
+          "sha256": "8ec2d2a307584b0fecd890e3457439f853ceb7c00a409c7717bf717dfe859377",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://darkcanyon-coffee.com/products/fireside-favorite.js",
+          "sha256": "07a2787c63cb3c9364669cd5e3743804117e209d99ae8f9a54f5d14ffd35deb6",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__my-girlfriends-blend-c6019ee1",
+      "field": "tasting_notes",
+      "before": "My Girlfriend's Blend simply mixes caramel and french vanilla for a sweet and delectable",
+      "after": "rich caramel and smooth French vanilla",
+      "expected": "Caramel and French vanilla",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://darkcanyon-coffee.com/collections/best-sellers/products/my-girlfriends-blend",
+          "sha256": "44d282ce19b53eceac897611d45e72c016a3b7032bfb9e91f4536b5e39de716c",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://darkcanyon-coffee.com/products/my-girlfriends-blend.js",
+          "sha256": "704613342ea606ac83571354681b65b1f5ca95bd39e2bdbdeae3c201f640a100",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "mountainthunder-com__peaberry16-df12f0ea",
+      "field": "tasting_notes",
+      "before": "Kona Peaberry Coffee provides a slightly lighter body and sweeter",
+      "after": null,
+      "expected": null,
+      "before_status": null,
+      "after_status": null,
+      "adjudication_class": "removed_incomplete_comparative_fragment",
+      "reason": "The old output was a truncated lighter-body/sweeter comparison with other Kona products, not a complete flavor value. The full comparative description remains supplemental source evidence.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://mountainthunder.com/products/peaberry16",
+          "sha256": "9419e687e2b81c9e03268738a4d4c0fc3ddeb2de73ebc7a14c5dd61f993e1774",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://mountainthunder.com/products/peaberry16.js",
+          "sha256": "3c2ac80223e82ee2b9e5e4671ad9c534a59b5b73eaf18454278dcae38df98785",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "www-coffeestamp-com__zambia-kateshi-estate-015b39b9",
+      "field": "tasting_notes",
+      "before": "punch, passion fruit, and pineapple.",
+      "after": "fruit punch, passion fruit, and pineapple",
+      "expected": "fruit punch, passion fruit, pineapple",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.coffeestamp.com/products/zambia-kateshi-estate",
+          "sha256": "dfd570fa600dd73f49bbdce7415d3cbabe58e3273d84db8f6ece0b1c39ca4719",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.coffeestamp.com/products/zambia-kateshi-estate.js",
+          "sha256": "eb3b3024ce8a820e5b8ebf7d086b793ba53435743ce940dea55a927e01a78379",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "brewtusroasting-com__costa-rica-black-honey-direct-trade-cb27859c",
+      "field": "tasting_notes",
+      "before": "black cherry, and strawberry",
+      "after": "chocolate, black cherry, and strawberry",
+      "expected": "chocolate, black cherry, strawberry",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://brewtusroasting.com/products/costa-rica-black-honey-direct-trade",
+          "sha256": "15d98e7b22dd57c12726137d39a8b597fc6df88ed2f7ffdd22b3aec1d94d5a50",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://brewtusroasting.com/products/costa-rica-black-honey-direct-trade.js",
+          "sha256": "5747deda0451ad7546d59154ace007d064a005f9b0a3a642a7a85b57d73ad2d0",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "preludecoffeeroasters-com__ethiopia-guji-kercha-b7d5d3dd",
+      "field": "tasting_notes",
+      "before": "sweet strawberries and agave nectar",
+      "after": "This coffee has those classic bursting fruit flavors we've come to love about natural Ethiopian coffees. It reminds us of sweet strawberries and agave nectar with a buttery mouthfeel and a pleasant acidity that makes us think of granny smith apples.",
+      "expected": "sweet strawberries, agave nectar, granny smith apples",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "complete_labeled_sensory_paragraph",
+      "reason": "The dedicated cup heading covers the full current-coffee paragraph, including the granny-smith-apple acidity comparison and its qualifiers.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://preludecoffeeroasters.com/products/ethiopia-guji-kercha",
+          "sha256": "c645eb7df8b446fefbaf7ce7aff4446251b45d87100518e966cd4f5a86fe3802",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://preludecoffeeroasters.com/products/ethiopia-guji-kercha.js",
+          "sha256": "d50c674e9b7193d7d2bb0443962a6a7edb1cfc1d303f5dacfb71480e8912bf25",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "preludecoffeeroasters-com__brasil-4c2bdb86",
+      "field": "tasting_notes",
+      "before": "cinnamon bread, milk chocolate, and macadamia nuts",
+      "after": "This coffee reminds us of cinnamon bread, milk chocolate, and macadamia nuts. It has a pleasant medium body with low acidity and a mild sweetness.",
+      "expected": "cinnamon bread, milk chocolate, macadamia nuts",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "complete_labeled_sensory_paragraph",
+      "reason": "The dedicated cup heading covers the same flavor nouns plus literal body, acidity and sweetness information.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://preludecoffeeroasters.com/products/brasil",
+          "sha256": "5f691e18c65d3abf4314f9a1a25a9776e861995e5dbc26c9f5e462a4c9108aee",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://preludecoffeeroasters.com/products/brasil.js",
+          "sha256": "a9616d8250a6974ad8cf9c8c6a171cd791b91017cdc448475de898650e463bd3",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "preludecoffeeroasters-com__colombia-decaf-f464b0d0",
+      "field": "tasting_notes",
+      "before": null,
+      "after": "This is a full bodied coffee with sweet flavors of maple glaze and raspberry preserves. We also get some nice cinnamon-like spice with hints of ginger that's reminiscent of root beer.",
+      "expected": "maple glaze, raspberry preserves, cinnamon-like spice, ginger, root beer",
+      "before_status": "missing",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://preludecoffeeroasters.com/products/colombia-decaf",
+          "sha256": "9e7142d11a60ec17a3c5efc06be2fb771cc391a80c2bb96ac8c7915a95e028d2",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://preludecoffeeroasters.com/products/colombia-decaf.js",
+          "sha256": "e60266f90fb71b12cadc6a3016ff4399c7b373f018155085e4e0606702d09a10",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "wakecoffee-com__bromo-blend-23fb9334",
+      "field": "tasting_notes",
+      "before": "crafted from select Central American and Indonesian beans, delivers a robust caramel",
+      "after": "robust caramel",
+      "expected": "caramel",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://wakecoffee.com/products/bromo-blend",
+          "sha256": "0d97a75a64b6df977ace1df50855f6bccd7d3216b239a3b156b30c41efcc722a",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://wakecoffee.com/products/bromo-blend.js",
+          "sha256": "7f3a0f8aa5d7852c30fe594918374ad1bd099a2ec352c720f7be96410672ae63",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "www-mysticmonkcoffee-com__thanksgiving-blend-5c504fec",
+      "field": "tasting_notes",
+      "before": "Dark Chocolate Dark Cherry Wild Honey",
+      "after": "Dark Chocolate, Dark Cherry, Wild Honey",
+      "expected": "Dark Chocolate, malt, Dark Cherry, Wild Honey",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.mysticmonkcoffee.com/products/thanksgiving-blend",
+          "sha256": "80695d9c685e686297d6d3066cdee4f0c252b898644bec70a67ecf1c39901bb2",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.mysticmonkcoffee.com/products/thanksgiving-blend.js",
+          "sha256": "62d9f835858a9869dcaaa52fd37ad846cbd357884c94a9b3ebed073f41d5011b",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "www-mysticmonkcoffee-com__cloister-reserve-blend-76c8c1de",
+      "field": "tasting_notes",
+      "before": "Candied Citrus Berry Chocolate Hazelnut",
+      "after": "Candied Citrus, Berry, Chocolate Hazelnut",
+      "expected": "Candied Citrus, Berry, Chocolate Hazelnut",
+      "before_status": "exact_equivalent",
+      "after_status": "exact_equivalent",
+      "adjudication_class": "preserved_structured_chip_boundaries",
+      "reason": "Original selected chips are Candied Citrus, Berry and Chocolate Hazelnut. Added separators preserve their boundaries; the frozen comparison remains exact-equivalent.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.mysticmonkcoffee.com/products/cloister-reserve-blend",
+          "sha256": "ac0d46c7bd94afdd4f634a41bb7c5e26258b08a391614ca46cc5e1a54db0ee0c",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.mysticmonkcoffee.com/products/cloister-reserve-blend.js",
+          "sha256": "83c81fe450c4d839674413fbe97d0b81ce95c41a19d201ff846a602f4d3af3e0",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "www-mysticmonkcoffee-com__kenya-peaberry-5c4fb260",
+      "field": "tasting_notes",
+      "before": "Honeydew Melon Jasmine Red Wine",
+      "after": "Honeydew Melon, Jasmine, Red Wine",
+      "expected": "Honeydew Melon, Pear, Jasmine, Red Wine",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.mysticmonkcoffee.com/products/kenya-peaberry",
+          "sha256": "696736a9583257e4ba03ca31098de296d625d7ca3a644b7aab2d435094d7205e",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.mysticmonkcoffee.com/products/kenya-peaberry.js",
+          "sha256": "a61ae5d1d4726be996a21ac39f716d7006fe430d78b90d8d5d7ed9af8c87e455",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "csrcoffee-com__costa-rica-668c2df8",
+      "field": "tasting_notes",
+      "before": "Costa Rica Single Origin Coffee – Sweet, Chocolaty, and BoldA crime story brewed to perfection.",
+      "after": "sweet, chocolaty",
+      "expected": "chocolate,green grapes,cherries,floral",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://csrcoffee.com/products/costa-rica",
+          "sha256": "3018eefb7fc5eae7aa5c6503cbbc2f16db099e2f7c1ed780a68d2f5d5de8759f",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://csrcoffee.com/products/costa-rica.js",
+          "sha256": "79ae867c2df976cf5d29b760c7807d17487d7c3edb72a3ee951f646ac64866f8",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "bleucoffee-com__nicaragua-fto-ade51baa",
+      "field": "tasting_notes",
+      "before": null,
+      "after": "dark chocolate and walnut",
+      "expected": "Floral; chocolate; nutty; citrus; dark chocolate; walnut",
+      "before_status": "missing",
+      "after_status": "review_required",
+      "adjudication_class": "recovered_literal_flavor_role",
+      "reason": "Dark chocolate and walnut is the explicit flavor phrase within a broader source description that separately states aroma and acidity. Extra roles remain separately reviewable.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://bleucoffee.com/products/nicaragua-fto",
+          "sha256": "db7acddff93ff3e78d0526b2a2eebc056df1d156e00af59f61b450c22ed03772",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://bleucoffee.com/products/nicaragua-fto.js",
+          "sha256": "7fe6f84e16078c62894267665deda33542c0a38e42d94f23d39c8222341c6afb",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "www-stageline-coffee__ethiopia-worasa-daniel-mijane-9329fa36",
+      "field": "tasting_notes",
+      "before": null,
+      "after": "fresh plum and florals",
+      "expected": "fresh plum, florals, orange bitters",
+      "before_status": "missing",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.stageline.coffee/product-page/ethiopia-worasa-daniel-mijane",
+          "sha256": "10167499071174f67c6380b35127a3df69eb3956d514d57aded711652966c442",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "www-lineageroasting-com__ethiopia-bishaan-0055cf16",
+      "field": "tasting_notes",
+      "before": "Red Fruit Starfruit",
+      "after": "Red Fruit, Starfruit",
+      "expected": "Red fruit; starfruit",
+      "before_status": "exact_equivalent",
+      "after_status": "exact_equivalent",
+      "adjudication_class": "preserved_structured_chip_boundaries",
+      "reason": "Original selected data-note chips say Red Fruit and Starfruit; no noun was added or removed.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.lineageroasting.com/products/ethiopia-bishaan",
+          "sha256": "0fdfc316e90c6bf779893c5427c76c0099626d17c7943f6801bce288530e350a",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.lineageroasting.com/products/ethiopia-bishaan.js",
+          "sha256": "50400f9b561872990406ee40dc2a14609be75c9acacdf70d99ea18b5d20eb810",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "www-lineageroasting-com__decaf-2c6427c4",
+      "field": "tasting_notes",
+      "before": "Chocolate Ripe Berries",
+      "after": "Chocolate, Ripe Berries",
+      "expected": "Chocolate; ripe berries",
+      "before_status": "exact_equivalent",
+      "after_status": "exact_equivalent",
+      "adjudication_class": "preserved_structured_chip_boundaries",
+      "reason": "Original selected data-note chips say Chocolate and Ripe Berries; no noun was added or removed.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.lineageroasting.com/products/decaf",
+          "sha256": "cb006472720cbd9759f1dd0a46f839d434909043ab8d9a0a2fe1cb33dc50418f",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.lineageroasting.com/products/decaf.js",
+          "sha256": "d4ccaf3784d5df0f7f820672870e90417ce3be1d267f785cdbe8f99185db5958",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "www-lineageroasting-com__copy-of-kenya-gaikundo-2-bb0620c4",
+      "field": "tasting_notes",
+      "before": "Caramel Fig",
+      "after": "Caramel, Fig",
+      "expected": "Caramel; fig; floral",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.lineageroasting.com/products/copy-of-kenya-gaikundo-2",
+          "sha256": "cc24dcfbd171b04dbdafc811a10349ed06cb5ab276a191bf471248c5b88ccaef",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.lineageroasting.com/products/copy-of-kenya-gaikundo-2.js",
+          "sha256": "bd6f9330b6d17590cc0b8635bb6f37e74a8c89045827fcfb9ba262fd4c844da2",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "shop-westrockcoffee-com__raiz-palmera-whole-bean-coffee-85b1fb1c",
+      "field": "tasting_notes",
+      "before": null,
+      "after": "nice sweet caramel",
+      "expected": "Sweet caramel; nutty",
+      "before_status": "missing",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://shop.westrockcoffee.com/products/raiz-palmera-whole-bean-coffee",
+          "sha256": "d8581ab825b28044aab5e94fac68bc1ed7870fb754fbe469aa4e76f925e8963c",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://shop.westrockcoffee.com/products/raiz-palmera-whole-bean-coffee.js",
+          "sha256": "92f5a4567671a5bd78e7206807cd8bc1520d3d15debb1f024b7afaf9e6009723",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__under-the-rainbow-october-limited-blend-12a24dc7",
+      "field": "tasting_notes",
+      "before": null,
+      "after": "dark chocolate, warm spices, and pecan clusters",
+      "expected": "Dark chocolate; warm spices; pecan clusters",
+      "before_status": "missing",
+      "after_status": "review_required",
+      "adjudication_class": "source_demonstrated_target_fix",
+      "reason": "The exact full candidate4 handler output matches the source-backed target assertion in the linked candidate4 verification receipt.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.darkmattercoffee.com/products/under-the-rainbow-october-limited-blend",
+          "sha256": "7be0d2306586cdb1eab88f918f0877cef12d703dcb60f36193bea90bb0b7ac61",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.darkmattercoffee.com/products/under-the-rainbow-october-limited-blend.js",
+          "sha256": "f6a8a13fa59cee56837c201abffd239c82c25710f945c662789a72df8be551d3",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json"
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__anthrax-cursum-perficio-e8175990",
+      "field": "tasting_notes",
+      "before": "Tastes like Nutella, graham cracker, and lemon tea",
+      "after": "Nutella, graham cracker, and lemon tea",
+      "expected": "Nutella; graham cracker; lemon tea",
+      "before_status": "review_required",
+      "after_status": "review_required",
+      "adjudication_class": "removed_profile_label_prefix",
+      "reason": "The standalone Tastes like profile explicitly names Nutella, graham cracker and lemon tea. Its caption no longer becomes part of the value.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://www.darkmattercoffee.com/products/anthrax-cursum-perficio",
+          "sha256": "d416ea137c49de5b34334ad5b74cfdbd0b7443d3efdeda781003d9de90eed350",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://www.darkmattercoffee.com/products/anthrax-cursum-perficio.js",
+          "sha256": "11862e9806be8002684880d25f201b75a83f4ada9a03c9fbf07f76abb3a74837",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "field": "tasting_notes",
+      "before": "nutty/cocoa",
+      "after": "clean, nutty/cocoa",
+      "expected": "Nutty; Cocoa",
+      "before_status": "exact_equivalent",
+      "after_status": "review_required",
+      "adjudication_class": "supported_literal_qualifier",
+      "reason": "The source says clean, nutty/cocoa flavor. Clean is an additional printed sensory qualifier, not a lost or invented note. Keep the strict review status.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee",
+          "sha256": "7a9bff1cdf0783c46e58c49a1728152e12b16517b441ac0d121d4228d8e61ae8",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee.js",
+          "sha256": "e0e2140c57e6d00daef2594f4c4bce1a1707ba3fdfd4c37f289cab47fdee41ee",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json",
+      "reviewed_literal_quote": "It is a full-bodied low acid coffee with a clean, nutty/cocoa flavor."
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "field": "roast_level",
+      "before": "Medium",
+      "after": null,
+      "expected": null,
+      "before_status": null,
+      "after_status": null,
+      "adjudication_class": "removed_alternate_product_attribution",
+      "reason": "The Medium Smooth Roast text belongs to a linked recommended alternate decaf, not the selected Half-Caff. The recommendation remains in source facts.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee",
+          "sha256": "7a9bff1cdf0783c46e58c49a1728152e12b16517b441ac0d121d4228d8e61ae8",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee.js",
+          "sha256": "e0e2140c57e6d00daef2594f4c4bce1a1707ba3fdfd4c37f289cab47fdee41ee",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": "extractor-600-flavor-roast-candidate4-verification.json",
+      "reviewed_literal_quote": "It is a full-bodied low acid coffee with a clean, nutty/cocoa flavor."
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+      "field": "tasting_notes",
+      "before": "nutty",
+      "after": "clean, nutty",
+      "expected": "Nutty",
+      "before_status": "exact_equivalent",
+      "after_status": "review_required",
+      "adjudication_class": "supported_literal_qualifier",
+      "reason": "The source says clean, nutty flavor. Clean is an additional printed sensory qualifier, not a lost or invented note. Keep the strict review status.",
+      "post_output_review": true,
+      "strict_status_unchanged": true,
+      "score_override": false,
+      "source_receipts": [
+        {
+          "capture_id": "page",
+          "file": "page.html",
+          "source_url": "https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast",
+          "sha256": "e6e7df1b288307ab26183512473ec40b8b96ba8275889ba1971ebb02571cd7ff",
+          "hash_reverified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "product-endpoint.html",
+          "source_url": "https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast.js",
+          "sha256": "0fd63aad343273004e5831f92cf508f8f3812449b9dc7dcca4985f4cdf8d6d82",
+          "hash_reverified": true
+        }
+      ],
+      "targeted_verification_reference": null,
+      "reviewed_literal_quote": "Simpatico Organic Low Acid Medium Smooth Roast Coffee is a bright-bodied low acid coffee with a clean, nutty flavor."
+    }
+  ],
+  "residual_source_coverage": [
+    {
+      "case_id": "www-seycoffee-com__2026-halo-hartume-2nd-selection-ethiopia-4cc1b558",
+      "field": "tasting_notes",
+      "current_actual": "melon, plum, and lemon verbena",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-seycoffee-com__2026-daniel-caro-lopez-el-tambo-end-of-season-colombia-2d682d0f",
+      "field": "tasting_notes",
+      "current_actual": "lychee, oolong, and mango",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-seycoffee-com__2026-yaye-arbegona-ethiopia-ccef9c43",
+      "field": "tasting_notes",
+      "current_actual": "watermelon, a lovely florality, and berries",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackwhiteroasters-com__r-sebastian-ramirez-red-fruits-decaf-05435709",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackwhiteroasters-com__r-sebastian-ramirez-red-fruits-decaf-05435709",
+      "field": "tasting_notes",
+      "current_actual": "strawberry jam and chocolate cherries, dulce de leche and milk chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackwhiteroasters-com__r-diego-horta-anaerobic-natural-71b8f534",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackwhiteroasters-com__r-diego-horta-anaerobic-natural-71b8f534",
+      "field": "tasting_notes",
+      "current_actual": "black cherries, cherry cordial filling, marzipan, spiced orange, craft chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackwhiteroasters-com__franky-hoyos-gesha-tropical-6e7c057f",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackwhiteroasters-com__franky-hoyos-gesha-tropical-6e7c057f",
+      "field": "tasting_notes",
+      "current_actual": "guava, mango, orange creamsicle, and pink bubblegum",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "queencitycollectivecoffee-com__los-magnificos-gesha-colombia-1cea64c3",
+      "field": "tasting_notes",
+      "current_actual": "Prickly Pear & Guava Jelly",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "queencitycollectivecoffee-com__banko-gotiti-washed-ethiopia-6ad8dbf6",
+      "field": "tasting_notes",
+      "current_actual": "Peach Brulee & Cantaloupe",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "queencitycoffeeroasters-com__yirgacheffe-ethiopia-aricha-mill-light-roast-single-origin-coffee-cab4b083",
+      "field": "tasting_notes",
+      "current_actual": "Tea-like, Peach, Black Tea, Honeysuckle",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "queencitycoffeeroasters-com__brazil-cerrado-medium-roast-coffee-674b2da7",
+      "field": "tasting_notes",
+      "current_actual": "Bold and smooth, Almonds, Dark Chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-ohenryscoffee-com__costa-rica-sonora-honey-97b7bfea",
+      "field": "roast_level",
+      "current_actual": "Medium-Light",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-ohenryscoffee-com__costa-rica-sonora-honey-97b7bfea",
+      "field": "tasting_notes",
+      "current_actual": "cherry, chocolate, hazelnut, and baking spice",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-ohenryscoffee-com__brazil-oberon-1d9885cf",
+      "field": "roast_level",
+      "current_actual": "Medium-Light",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-ohenryscoffee-com__brazil-oberon-1d9885cf",
+      "field": "tasting_notes",
+      "current_actual": "sweet chocolate and citrus",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-ohenryscoffee-com__ethiopia-yirgacheffe-8bd2d712",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-ohenryscoffee-com__ethiopia-yirgacheffe-8bd2d712",
+      "field": "tasting_notes",
+      "current_actual": "sweet floral and citrus",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "talkingcrowcoffeeroasters-com__decaf-whiskey-barrel-aged-brazil-fd6f9235",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "talkingcrowcoffeeroasters-com__decaf-nicaragua-jinotega-micro-lot-2038f60a",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "talkingcrowcoffeeroasters-com__decaf-peru-swiss-water-process-e0524dfb",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "singlespeedcoffeeroasters-com__costa-rican-tesoros-volcanicos-573501a9",
+      "field": "roast_level",
+      "current_actual": "Medium-Light",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "singlespeedcoffeeroasters-com__costa-rican-tesoros-volcanicos-573501a9",
+      "field": "tasting_notes",
+      "current_actual": "Moderate acidity and body, clean, sweet, balanced",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "singlespeedcoffeeroasters-com__copy-of-espresso-blend-2d25984e",
+      "field": "roast_level",
+      "current_actual": "Medium-Light",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "singlespeedcoffeeroasters-com__copy-of-espresso-blend-2d25984e",
+      "field": "tasting_notes",
+      "current_actual": "Floral, black tea, lemon, orange, bright and crisp",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "sextantcoffee-com__the-windsor-sextant-coffee-670265e1",
+      "field": "tasting_notes",
+      "current_actual": "cherry and milk chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "sextantcoffee-com__yirgacheffe-heirloom-12oz-bag-e89762fa",
+      "field": "tasting_notes",
+      "current_actual": "Sweet and slightly Floral",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "victuscoffee-com__victoria-blend-af016119",
+      "field": "tasting_notes",
+      "current_actual": "smooth milk chocolate and fruity",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "victuscoffee-com__veloce-blend-c9bd8a60",
+      "field": "tasting_notes",
+      "current_actual": "sweet chocolatey and fruity",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "victuscoffee-com__nero-blend-44c407aa",
+      "field": "tasting_notes",
+      "current_actual": "deep chocolatey",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "lostsockroasters-com__madre-laura-decaf-10oz-d7a9147f",
+      "field": "tasting_notes",
+      "current_actual": "rich milk chocolate and a caramel sweetness",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-realdope-coffee__tanazania-peaberry-6d645b3d",
+      "field": "tasting_notes",
+      "current_actual": "Earthy, fruity, hints of cacao",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "mauicoffeeroasters-com__brazil-mogiana-16oz-ffd99634",
+      "field": "tasting_notes",
+      "current_actual": "wood, leather and dark chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "mauicoffeeroasters-com__club-imua-0903be62",
+      "field": "tasting_notes",
+      "current_actual": "floral, citrus, and honey",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "mauicoffeeroasters-com__fresh-trades-8oz-d0540271",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "friedrichscoffee-com__colombia-lisandro-cardenas-finca-las-brisas-5aafa735",
+      "field": "roast_level",
+      "current_actual": "Medium-Light",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "friedrichscoffee-com__colombia-lisandro-cardenas-finca-las-brisas-5aafa735",
+      "field": "tasting_notes",
+      "current_actual": "cooked cherry, soft florals, a winey sweetness, and a smooth, sugary finish",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "friedrichscoffee-com__rise-and-shine-10256320",
+      "field": "tasting_notes",
+      "current_actual": "Rich and balanced, Smooth, Citrus fruitiness",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "friedrichscoffee-com__traders-blend-1674f46b",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "epiphanycoffee-co__solar-flare-d6613c1b",
+      "field": "tasting_notes",
+      "current_actual": "Watermelon, Grapefruit Juice, Orange Zest, and Rosewater",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "epiphanycoffee-co__electrify-espresso-3c12d871",
+      "field": "tasting_notes",
+      "current_actual": "milk chocolate, roasted almonds and dried fruits",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "epiphanycoffee-co__radiate-60c42496",
+      "field": "tasting_notes",
+      "current_actual": "Brown Ale, Tobacco Smoke and Molasses",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "woodwarblercoffee-com__honduras-legacy-farms-e863cefa",
+      "field": "tasting_notes",
+      "current_actual": "Chocolate, Almond, Caramel, Balanced, Mild Acidity",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "woodwarblercoffee-com__el-salvador-smbc-rfa-f36ab75c",
+      "field": "tasting_notes",
+      "current_actual": "Milk Chocolate, Brown Sugar, Orange, Medium Acidity & Body, Smooth finish",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "woodwarblercoffee-com__guatemala-huehuetanango-05b94e53",
+      "field": "tasting_notes",
+      "current_actual": "Honey, Lime, Orange, Medium Body & Acidity",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-bluejazzcoffee-com__guatemala-antigua-43408003",
+      "field": "tasting_notes",
+      "current_actual": "stone fruit",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-bluejazzcoffee-com__guatemala-el-scorpion-9ca3c32c",
+      "field": "roast_level",
+      "current_actual": "Medium-Light",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-bluejazzcoffee-com__guatemala-el-scorpion-9ca3c32c",
+      "field": "tasting_notes",
+      "current_actual": "cherry cola, lime and molasses",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "heinebroscoffee-com__natural-ethiopia-sidama-18c1bbba",
+      "field": "tasting_notes",
+      "current_actual": "Berry & salted chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "heinebroscoffee-com__traveler-blend-327e6101",
+      "field": "tasting_notes",
+      "current_actual": "blueberry and caramel.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "heinebroscoffee-com__guatemala-san-marcos-b6e935a7",
+      "field": "tasting_notes",
+      "current_actual": "Milk chocolate, cherry, and hazelnut",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-fazendacoffee-com__colombia-decaf-sugar-process-3cd8ff6d",
+      "field": "tasting_notes",
+      "current_actual": "Caramel, Red Apple, Syrupy",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-aveleyfarmscoffee-com__ethiopia-natural-halo-beriti-016a72fc",
+      "field": "tasting_notes",
+      "current_actual": "Sweet, Blueberry, Lemon, Lime",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-aveleyfarmscoffee-com__ethiopia-harrar-7677c8eb",
+      "field": "tasting_notes",
+      "current_actual": "Cocao, Berries, Pleasant Body",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-aveleyfarmscoffee-com__costa-rica-el-indio-8a09672e",
+      "field": "tasting_notes",
+      "current_actual": "Sweet, Caramel, Creamy, Nutty",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "44northcoffee-com__honduras-decaf-013a8aff",
+      "field": "tasting_notes",
+      "current_actual": "Rich body with aroma of lemongrass and notes of warm peach.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "44northcoffee-com__sumatra-9613467b",
+      "field": "tasting_notes",
+      "current_actual": "Blackberry burst! Heavy body with a syrupy mouthfeel & spiced wine finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "44northcoffee-com__mexico-chiapas-dfd8dfb7",
+      "field": "tasting_notes",
+      "current_actual": "Pleasing body with notes of sweet candied lemon and dried blueberry.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "roasterympls-com__guatemala-geisha-limited-edition-5cb23f75",
+      "field": "tasting_notes",
+      "current_actual": "Jasmine, bergamot, and stone fruit",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "roasterympls-com__organic-ethiopia-guiji-4c206fc5",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "roasterympls-com__tanzania-peaberry-5d4fd760",
+      "field": "tasting_notes",
+      "current_actual": "Citrus, black tea, sweet berries, and hints of chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "yellowstonecoffee-com__colombia-huila-f62f795a",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "baldguybrew-com__organic-costa-rican-coffee-a4712955",
+      "field": "tasting_notes",
+      "current_actual": "This coffee is sweet, balanced with chocolate and toffee, floral, cherry and cocoa nuances. Excellent example of a high altitude, Costa Rican coffee.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "baldguybrew-com__organic-ethiopian-coffee-61dd1211",
+      "field": "tasting_notes",
+      "current_actual": "Berry notes, strawberry, raspberry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "baldguybrew-com__organic-colombian-coffee-14cfc5f3",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "baldguybrew-com__organic-colombian-coffee-14cfc5f3",
+      "field": "tasting_notes",
+      "current_actual": "Tangerine peel fragrance with a hint of cinnamon, medium body with a refreshing finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "sparkyscraftcoffeeroasting-com__below-zero-blend-ea45122b",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "frontsidecoffee-com__mexican-veracruz-9defe3e3",
+      "field": "tasting_notes",
+      "current_actual": "honey dew melon, cashew, sweet bread",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "redhouseroasters-com__gesha-el-paraiso-narino-39bee590",
+      "field": "tasting_notes",
+      "current_actual": "Fruity notes, hibiscus, medium acidity, clean finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "redhouseroasters-com__sumatra-9382c3bb",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "redhouseroasters-com__sumatra-9382c3bb",
+      "field": "tasting_notes",
+      "current_actual": "Molasses, floral. Spice. Full body, sweet finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "redhouseroasters-com__mexican-oaxaca-47baf1aa",
+      "field": "tasting_notes",
+      "current_actual": "Balanced sweet cocoa, honey, caramel.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "subterracoffee-com__decaf-colombia-sugarcane-medium-roast-3b39991b",
+      "field": "tasting_notes",
+      "current_actual": "loads of cocoa, nut, and browned sugar",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "subterracoffee-com__mexico-chiapas-bellavista-medium-11b61363",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "subterracoffee-com__mexico-chiapas-bellavista-medium-11b61363",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "subterracoffee-com__ethiopia-guji-hambela-buliye-natural-light-roast-585fcce7",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "glorycloudcoffee-com__honduras-decaf-reserva-pacavita-organic-7aaae2f3",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "glorycloudcoffee-com__indonesia-washed-java-blawan-097ece4e",
+      "field": "tasting_notes",
+      "current_actual": "subtle dried apricot, pear, medium acidity, big round body, slightly tea like, herbal, spicy, very balanced",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "glorycloudcoffee-com__brazil-fazenda-sao-manuel-01848104",
+      "field": "tasting_notes",
+      "current_actual": "balanced, honey, almond, milk chocolate, slight fruity.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "leapcoffeeroasters-com__decaf-coffee-f99b3914",
+      "field": "tasting_notes",
+      "current_actual": "characteristically smooth, mellow, and sweet, with a slight caramel note and pleasant acidity.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "leapcoffeeroasters-com__brazil-organic-coffee-21a5e97e",
+      "field": "tasting_notes",
+      "current_actual": "Walnut and Orange notes with a Caramel finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "leapcoffeeroasters-com__ethiopian-organic-coffee-6d3b1463",
+      "field": "tasting_notes",
+      "current_actual": "Blueberry, plum and chocolate.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "gnosiscoffee-com__red-bourbon-decaf-947e2539",
+      "field": "tasting_notes",
+      "current_actual": "bergamot and juicy red fruit",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-thecoffeeexchange-com__peru-cafe-canchaque-natural-process-american-roast-limited-offering-a3fff888",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-thecoffeeexchange-com__dominican-republic-red-honey-process-vienna-roast-limited-offering-9ea91e79",
+      "field": "tasting_notes",
+      "current_actual": "Bold flavor, Smooth, Full body, Dark Chocolate, Cherry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-roasted-beans-com__ethiopia-natural-kembata-grade-1-gp-48fe5f98",
+      "field": "tasting_notes",
+      "current_actual": "blueberry and strawberry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "lamulitacoffee-com__exotic-mule-95baf161",
+      "field": "tasting_notes",
+      "current_actual": "Chocolate, Red Fruits, and Hazelnut",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "lamulitacoffee-com__humble-mule-decaf-coffee-62295a71",
+      "field": "tasting_notes",
+      "current_actual": "Caramel, Chocolate, and Vanilla",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "lamulitacoffee-com__san-vicente-huila-f73e1961",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-ahrre-com__test-de3ae7ad",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-ahrre-com__african-blend-949d4fac",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "favor-coffee__the-token-dark-blend-c8c1a9f9",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "summermooncoffee-com__fireside-9c362989",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "summermooncoffee-com__en-fuego-8cc1b6ac",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-readingcoffee-com__chai-cheesecake-fall-season-premium-flavored-coffee-8bbfc0ec",
+      "field": "tasting_notes",
+      "current_actual": "Sweet & Sugary, Spice, Earthy, Savory",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-readingcoffee-com__its-bourbon-bacon-hon-fall-season-premium-flavored-coffee-e6c21ec5",
+      "field": "tasting_notes",
+      "current_actual": "Spice, Grain & Cereal",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__fireside-favorite-fca08b4a",
+      "field": "tasting_notes",
+      "current_actual": "Graham Cracker, aromatic Cinnamon, smooth Vanilla, and nutty Hazelnut",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__highlander-grogg-30e2568d",
+      "field": "tasting_notes",
+      "current_actual": "Butterscotch, the smooth sweetness of French Vanilla, and the velvety warmth of Irish Crème",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__my-girlfriends-blend-c6019ee1",
+      "field": "tasting_notes",
+      "current_actual": "rich caramel and smooth French vanilla",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "tenfoldcoffee-com__san-lorenzo-x-3d3841ad",
+      "field": "tasting_notes",
+      "current_actual": "Yuzu, Bergamont, & Winey",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "tenfoldcoffee-com__umoja-pb-copy-5cd65e4e",
+      "field": "tasting_notes",
+      "current_actual": "Cherry, Apricot & Light",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "earthbackcoffee-com__ethiopian-yirgacheffe-medium-roast-7eccca01",
+      "field": "tasting_notes",
+      "current_actual": "Well balanced, bright and floral, with tangerine and lemongrass notes.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "earthbackcoffee-com__sumatra-mandheling-8099b9bb",
+      "field": "tasting_notes",
+      "current_actual": "Syrupy full body, dark chocolate, mild cherry.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-nunatakcoffee-com__blends-1d496695",
+      "field": "tasting_notes",
+      "current_actual": "Jammy blueberry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-nunatakcoffee-com__raven-espresso-8fe55e93",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "snowyelk-com__corpse-pose-decaf-869b4c17",
+      "field": "tasting_notes",
+      "current_actual": "Nutty and smooth with a delicate sweetness and hints of chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "snowyelk-com__the-summit-d4f0fa28",
+      "field": "tasting_notes",
+      "current_actual": "Chocolate brownie, pomegranate, and dried cherry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bebrightcoffee-com__colombia-finca-milan-nitro-caturra-4ec819db",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bebrightcoffee-com__colombia-finca-milan-nitro-caturra-4ec819db",
+      "field": "tasting_notes",
+      "current_actual": "Watermelon, Kiwi, Cantaloupe, & Caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bebrightcoffee-com__ethiopia-anderacha-natural-6f826845",
+      "field": "tasting_notes",
+      "current_actual": "Blood Orange, Kiwi, Lychee, & Green Grape Candy",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-inkcoffee-com__6610-01ae1c21",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-inkcoffee-com__espresso-89-bd5b9a13",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-inkcoffee-com__vienna-d3ba19e6",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-buonacaffe-com__tanzanian-peaberry-dark-roast-00cc3ac3",
+      "field": "tasting_notes",
+      "current_actual": "Sweet Black Earth, lemon-honey start, smooth, gentle citrus",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "mountainthunder-com__espresso16-000be6f3",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "spirituscoffee-com__mountain-water-process-decaf-59d29eb9",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-tandemcoffee-com__faver-ninco-santa-maria-huila-colombia-73134488",
+      "field": "tasting_notes",
+      "current_actual": "bright red fruit, herbal tea, and honeyed sweetness",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-tandemcoffee-com__heri-agena-ethiopia-eedd7b21",
+      "field": "tasting_notes",
+      "current_actual": "crisp, and complex, with focused stone fruit, dense tropical",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-coffeestamp-com__honduras-finca-la-alondra-8cf11279",
+      "field": "tasting_notes",
+      "current_actual": "sugarcane rapadura and baking chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-coffeestamp-com__zambia-kateshi-estate-015b39b9",
+      "field": "tasting_notes",
+      "current_actual": "fruit punch, passion fruit, and pineapple",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-woodshedroast-com__ethiopian-15584dcd",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-woodshedroast-com__decaf-honduran-swiss-water--process-copy-535a0b51",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "blackriverroasters-com__organic-specialty-decaf-4779854e",
+      "field": "tasting_notes",
+      "current_actual": "raisin, chocolate and caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "blackriverroasters-com__organic-honduras-comsa-d92176d0",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "blackriverroasters-com__organic-sumatra-gayo-mandiri-6d7a0d54",
+      "field": "tasting_notes",
+      "current_actual": "syrupy dark chocolate, raisin, cedar, and vanilla",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "brewtusroasting-com__ethiopia-natural-86045e38",
+      "field": "tasting_notes",
+      "current_actual": "strawberry, peach, and brown sugar",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "brewtusroasting-com__costa-rica-black-honey-direct-trade-cb27859c",
+      "field": "tasting_notes",
+      "current_actual": "chocolate, black cherry, and strawberry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "brewtusroasting-com__kenya-ab-nyeri-kiangundo-427eef15",
+      "field": "tasting_notes",
+      "current_actual": "Wine, Lemon, Grapefruit, and Cherry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "preludecoffeeroasters-com__ethiopia-guji-kercha-b7d5d3dd",
+      "field": "tasting_notes",
+      "current_actual": "This coffee has those classic bursting fruit flavors we've come to love about natural Ethiopian coffees. It reminds us of sweet strawberries and agave nectar with a buttery mouthfeel and a pleasant acidity that makes us think of granny smith apples.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "preludecoffeeroasters-com__brasil-4c2bdb86",
+      "field": "tasting_notes",
+      "current_actual": "This coffee reminds us of cinnamon bread, milk chocolate, and macadamia nuts. It has a pleasant medium body with low acidity and a mild sweetness.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "preludecoffeeroasters-com__colombia-decaf-f464b0d0",
+      "field": "tasting_notes",
+      "current_actual": "This is a full bodied coffee with sweet flavors of maple glaze and raspberry preserves. We also get some nice cinnamon-like spice with hints of ginger that's reminiscent of root beer.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "lowcountrycoffeeroasters-com__peru-hb-1-ad8af585",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__the-sloan-blend-1-89659545",
+      "field": "tasting_notes",
+      "current_actual": "caramel and vanilla",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__hello-darlin-1-4d1fcba2",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-justlovecoffee-com__colombia-honey-process-8fa61c65",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "katicoffee-com__papua-new-guinea-highlands-5b352bc5",
+      "field": "tasting_notes",
+      "current_actual": "Dark Chocolate, Black Cherry, and Mild Spice",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "katicoffee-com__helios-2911f0af",
+      "field": "tasting_notes",
+      "current_actual": "Chocolate, Dried Fruit, and Balanced",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "katicoffee-com__tanzania-peaberry-230f6e0e",
+      "field": "tasting_notes",
+      "current_actual": "Blackberry, Nutmeg, and Floral",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "kingspeakcoffee-com__mexico-nayarit-anaerobic-process-b967ef27",
+      "field": "tasting_notes",
+      "current_actual": "Sweet berries, Honey & Fig",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "kingspeakcoffee-com__nicaragua-finca-idealista-d46c3176",
+      "field": "tasting_notes",
+      "current_actual": "Strawberries & Honey",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "kingspeakcoffee-com__costa-rica-cafe-sircof-8d9e8574",
+      "field": "tasting_notes",
+      "current_actual": "Cherries, Raspberries & Chocolate Brownies",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "vtartisan-com__la-macarena-red-microlot-copy-1-e8d921b1",
+      "field": "tasting_notes",
+      "current_actual": "soft florals, sweet cirus & blackcurrant",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "vtartisan-com__sumatra-gayo-2f774ec2",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-limacoffeeroasters-com__wilder-garcia-geisha-microlot-c4dee512",
+      "field": "tasting_notes",
+      "current_actual": "Green grape, honeysuckle, coconut water & orange blossom",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-radialcoffee-com__colombia-pablo-eva-del-cid-01e587b3",
+      "field": "tasting_notes",
+      "current_actual": "praline, nougat and a hint of raspberry fruitiness",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-radialcoffee-com__guatemala-43765ab1",
+      "field": "tasting_notes",
+      "current_actual": "sweet dark chocolate, juicy cherries and rich raisins",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-radialcoffee-com__cosa-nueva-flagship-blend-aed0d488",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-radialcoffee-com__cosa-nueva-flagship-blend-aed0d488",
+      "field": "tasting_notes",
+      "current_actual": "stone fruit and honey",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__coffee-111-4366f999",
+      "field": "tasting_notes",
+      "current_actual": "Bright, fruit-tea, and sweet honeysuckle. We taste notes of peach, nougat, and chocolate covered cherries. Delicious, delightful, Dehab's!",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "dakotaroasters-com__great-plains-decaf-e82a8e8c",
+      "field": "tasting_notes",
+      "current_actual": "chocolate, caramel, and apple",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "dakotaroasters-com__701-blend-683f29aa",
+      "field": "tasting_notes",
+      "current_actual": "nutty, cocoa, with a slight lemongrass finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-nativocoffeeroasters-com__suavidad-medium-roast-452533ac",
+      "field": "tasting_notes",
+      "current_actual": "cocoa, honey, and hazelnut",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "iwanacoffee-com__pink-bourbon-washed-process-0ebf7adf",
+      "field": "tasting_notes",
+      "current_actual": "floral, chamomile, tea, yellow fruit, and brown sugar",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "iwanacoffee-com__tabi-natural-process-d8af63b5",
+      "field": "tasting_notes",
+      "current_actual": "vanilla, caramel, honey, nuts, and chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "iwanacoffee-com__maragogipe-washed-process-f996941b",
+      "field": "tasting_notes",
+      "current_actual": "wildflowers, black tea, apple, green grapes, and spices",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "contemporoast-com__black-honey-berries-2d89cc6a",
+      "field": "tasting_notes",
+      "current_actual": "mixed berries, honey and floral",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "contemporoast-com__1201-blend-63a831d5",
+      "field": "tasting_notes",
+      "current_actual": "caramel, peanut and red fruits",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "contemporoast-com__ethiopia-sweet-lily-55b38ade",
+      "field": "tasting_notes",
+      "current_actual": "blueberry, macadamia & brown sugar",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "cascadiaroasters-com__colombia-decaf-1652ef44",
+      "field": "tasting_notes",
+      "current_actual": "Orange Peel and Sugar Cane",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "cascadiaroasters-com__bourbon-barrel-aged-5b43c3e5",
+      "field": "tasting_notes",
+      "current_actual": "Bread and caramel notes and aromas of rye and oak.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "wakecoffee-com__decaf-76048300",
+      "field": "tasting_notes",
+      "current_actual": "herbal, dark chocolate, medium body",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "wakecoffee-com__bromo-blend-23fb9334",
+      "field": "tasting_notes",
+      "current_actual": "robust caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d",
+      "field": "tasting_notes",
+      "current_actual": "milk chocolate, cherry, and caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__what-cheer-medium-blend-7841ea74",
+      "field": "tasting_notes",
+      "current_actual": "fruit over a rich chocolate base",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__rhode-scholar-dark-roast-0b92a2dd",
+      "field": "tasting_notes",
+      "current_actual": "baker's chocolate and toffee",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "daylily-coffee__colombia-finca-javier-4d43f340",
+      "field": "tasting_notes",
+      "current_actual": "Blackberry, Currant, and Mango",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "subliminalcoffee-com__finca-la-unica-washed-honduras-9987b6bb",
+      "field": "tasting_notes",
+      "current_actual": "Milk Chocolate, Sweet Tobacco, and Cinnamon Sugar",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "subliminalcoffee-com__la-piragua-anaerobic-natural-colombia-b1a91f65",
+      "field": "tasting_notes",
+      "current_actual": "Pink Lemonade, Hibiscus Tea, & Apricot",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "sumatocoffee-com__the-sender-single-origin-costa-rican-114a246a",
+      "field": "tasting_notes",
+      "current_actual": "Lively spice notes, balanced sweetness",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "sumatocoffee-com__per-my-last-email-decaf-76c11240",
+      "field": "tasting_notes",
+      "current_actual": "Smooth hazelnut, subtle sweetness, balanced acidity",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "ironcladcoffee-com__honduras-san-lazaro-ea54f0fa",
+      "field": "tasting_notes",
+      "current_actual": "Caramel, Toasted Almond, Easy-Drinking",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "802coffee-com__colombia-el-silencio-5c60ae47",
+      "field": "tasting_notes",
+      "current_actual": "Green apple, florals, raw sugar, vibrant & sweet finish",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "802coffee-com__zambia-kateshi-estate-ba0db55d",
+      "field": "tasting_notes",
+      "current_actual": "Red grapes, raspberry, cherry cordial. A juicy, jammy body!",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "802coffee-com__el-salvador-tierra-bendita-copy-cc8fd60a",
+      "field": "tasting_notes",
+      "current_actual": "Apples, dark chocolate, and mixed berries. Balanced cup, velvety body.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+      "field": "tasting_notes",
+      "current_actual": "Juicy Tropical Fruit, Amaretto, Syrupy Body & Vibrant Acidity",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "blackdogcoffee-net__ethiopian-harrar-e2e33ce1",
+      "field": "tasting_notes",
+      "current_actual": "Dark Chocolate,Dried Fruit,Strawberry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "blackdogcoffee-net__dogwatch-dark-blend-2-7f53b648",
+      "field": "tasting_notes",
+      "current_actual": "smoky chocolate flavor with earth",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-mysticmonkcoffee-com__thanksgiving-blend-5c504fec",
+      "field": "tasting_notes",
+      "current_actual": "Dark Chocolate, Dark Cherry, Wild Honey",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-mysticmonkcoffee-com__kenya-peaberry-5c4fb260",
+      "field": "tasting_notes",
+      "current_actual": "Honeydew Melon, Jasmine, Red Wine",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-3-mexico-san-isidro-zoquiapan-a9d137cc",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "south17roasters-com__dark-raine-4408701d",
+      "field": "tasting_notes",
+      "current_actual": "chocolate and hints of sweet tobacco",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "south17roasters-com__rose-roots-4d6c4fe4",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "south17roasters-com__ambition-c8cf1c28",
+      "field": "tasting_notes",
+      "current_actual": "citrus, malt, pine, and semi-sweet chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-confidentcoffeeroasters-com__costa-rica-9a5f0a93",
+      "field": "tasting_notes",
+      "current_actual": "Caramel, almond, apple, mild acidity and a smooth finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-confidentcoffeeroasters-com__colombia-narino-baa1dd62",
+      "field": "tasting_notes",
+      "current_actual": "A perfectly balanced coffee with notes of chocolate, caramel and toffee.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-confidentcoffeeroasters-com__even-steven-be7c962b",
+      "field": "tasting_notes",
+      "current_actual": "Chocolate, Toffee, and Apricot.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__sugarcane-decaf-37227ccc",
+      "field": "tasting_notes",
+      "current_actual": "Sweet, Balanced, Smooth",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-vailcoffee-com__reserve-coffee-3-b0e7cce9",
+      "field": "tasting_notes",
+      "current_actual": "Coca , praline, mellow fresh citrus acidity",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__fireworks-b1eaf3a1",
+      "field": "tasting_notes",
+      "current_actual": "toasted almonds and sweet berry jam",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__vietnamese-roast-1c2854db",
+      "field": "tasting_notes",
+      "current_actual": "long pepper, root beer, and cherry spice",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__mama-74e240f8",
+      "field": "tasting_notes",
+      "current_actual": "earthy, cocoa, and umami",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-yessica-diego-parra-1e778f8e",
+      "field": "tasting_notes",
+      "current_actual": "bright citrus, rich panela, and smooth caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-alejandro-ariza-inza-94d5813a",
+      "field": "tasting_notes",
+      "current_actual": "honey, juicy yellow plum, and cocoa",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb",
+      "field": "tasting_notes",
+      "current_actual": "natural wine, rich cacao, and cherry cordial",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "iowacr-com__bazinga-9c130050",
+      "field": "tasting_notes",
+      "current_actual": "citrus, milk chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "iowacr-com__lilys-blend-4088935f",
+      "field": "tasting_notes",
+      "current_actual": "just the right touch of floral",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "iowacr-com__ethiopian-yirgacheffe-1-1719c3e5",
+      "field": "tasting_notes",
+      "current_actual": "Earthy, Fragrant and floral with wine and fruit overtones",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-kamiakcoffeeco-com__brazil-single-estate-27b0f36d",
+      "field": "tasting_notes",
+      "current_actual": "mellow cocoa and roasted peanut",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-kamiakcoffeeco-com__tanzania-aa-amcos-d767bc15",
+      "field": "tasting_notes",
+      "current_actual": "honeydew, agave sweetness, and a mild peatiness",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-kamiakcoffeeco-com__ethiopia-guji-01d8a75a",
+      "field": "tasting_notes",
+      "current_actual": "Very sweet with juicy fruit acidity and a creamy mouthfeel; lots of fruity and floral flavors with blackberry, vanilla bean creaminess, and botanical notes. If you love Ethiopian or African coffee in general, this is a great coffee for you.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "csrcoffee-com__costa-rica-668c2df8",
+      "field": "tasting_notes",
+      "current_actual": "sweet, chocolaty",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "csrcoffee-com__seattle-blend-e9d20371",
+      "field": "tasting_notes",
+      "current_actual": "bright berry",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "ridleyroasthouse-com__pura-vida-3eb09eb4",
+      "field": "tasting_notes",
+      "current_actual": "Smooth peanut butter and hickory with a full body and dry finish",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "ridleyroasthouse-com__ridley-roasthouse-founders-roast-coffee-4370b011",
+      "field": "tasting_notes",
+      "current_actual": "Great aroma, very clean, notes of apricot, honey and pear with full body and sweet finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "ridleyroasthouse-com__ridley-roasthouse-easy-rider-organic-decaf-7c00bf6b",
+      "field": "tasting_notes",
+      "current_actual": "Cane sugar sweetness with medium acidity and creamy body brings to mind cocoa with a citrus finish.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "orleanscoffee-com__windsor-court-blend-87184157",
+      "field": "tasting_notes",
+      "current_actual": "Floral aroma, full-bodied. Wonderful balanced cup.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "orleanscoffee-com__colombia-supremo-bucaramanga-coffee-02535261",
+      "field": "tasting_notes",
+      "current_actual": "Sweet tart, peach, apricot",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "orleanscoffee-com__espresso-decaf-blend-366fdcb3",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "orleanscoffee-com__espresso-decaf-blend-366fdcb3",
+      "field": "tasting_notes",
+      "current_actual": "cocoa, toasted nuts, and a touch of earthiness",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "dekaf-com__guatemala-finca-santa-isabel-21f898f2",
+      "field": "tasting_notes",
+      "current_actual": "bonbon-like caramel, clementine sparkle, and crisp green apple",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "dekaf-com__brazil-arabela-e2d6dc66",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "dekaf-com__colombia-papayo-e5125d1e",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "mbingomountaincoffee-com__rwanda-inzovu-supreme-natural-e2d495af",
+      "field": "tasting_notes",
+      "current_actual": "Fruity, winey, balanced acidity, mellow body, and a sweet aftertaste.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-kindercoffeelab-com__avalon-light-roast-892b1a46",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "coppercanyoncoffee-com__sumatra-853bcc1b",
+      "field": "tasting_notes",
+      "current_actual": "Baker's Chocolate, Syrupy, Dark Cherry, Sweet Lemon acidity, Earthy",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "coppercanyoncoffee-com__guatemala-43415a16",
+      "field": "tasting_notes",
+      "current_actual": "Chocolate, Citrus, Sweet Vanilla Aroma, Floral Finish",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "coppercanyoncoffee-com__nicaragua-8c146fc0",
+      "field": "tasting_notes",
+      "current_actual": "Nutty, Chocolate, Sweet acidity, Raspberry, Lemon",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackcoffeeroastingco-com__am-blend-dedf0494",
+      "field": "tasting_notes",
+      "current_actual": "lemon and sunrise",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blackcoffeeroastingco-com__red-room-blend-978d7a79",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "nightswimcoffee-com__nano-genji-6-4fad727f",
+      "field": "tasting_notes",
+      "current_actual": "Watermelon, Lime, Vanilla Frosting",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__tanzania-peaberry-5c634be9",
+      "field": "tasting_notes",
+      "current_actual": "Citrus, Syrupy, Caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__bali-78c10a5d",
+      "field": "tasting_notes",
+      "current_actual": "Cedar, Molasses, Herbal",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__nicaragua-pumpkin-spice-pacamara-8272581d",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bostoncommoncoffee-com__product_35ee44c1-8ee6-002e-befc-061a089f2959-32157555",
+      "field": "tasting_notes",
+      "current_actual": "Citrus, tropical fruit, berries, floral, bright acidity, tea-like body.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bostoncommoncoffee-com__brazil-oberon-3517fbd8",
+      "field": "tasting_notes",
+      "current_actual": "Chocolate, nutty, fruity aftertaste; light acidity, sweet, full body. Clean and balanced.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bleucoffee-com__ethiopia-0a0d54ca",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bleucoffee-com__nicaragua-fto-ade51baa",
+      "field": "tasting_notes",
+      "current_actual": "dark chocolate and walnut",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bleucoffee-com__copy-of-papua-new-guinea-741ec193",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "grindinggearscoffee-com__ethiopia-9a78b7f7",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-roc2-com__organic-timor-7ee5fcf0",
+      "field": "tasting_notes",
+      "current_actual": "pineapple and fresh orange juice",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "mapscoffee-com__volcan-37-85d3a716",
+      "field": "tasting_notes",
+      "current_actual": "Caramel, pecan, toffee, straight forward coffee flavor",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-aldeacoffee-com__flow_state_decaf-a99758f7",
+      "field": "tasting_notes",
+      "current_actual": "RED BERRY, SMOOTH, NUTTY",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-aldeacoffee-com__ruth-reyes-naturally-processed-6c9444a7",
+      "field": "tasting_notes",
+      "current_actual": "BALANCED, MILK CHOCOLATE, FRUITY",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "manuscriptcoffee-com__costa-rica-guanacaste-2676ed3e",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "manuscriptcoffee-com__costa-rica-guanacaste-2676ed3e",
+      "field": "tasting_notes",
+      "current_actual": "Almond, Orange, Toffee",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-rossstreetroasting-com__kula-peaberry-papua-new-guinea-3a0b9666",
+      "field": "tasting_notes",
+      "current_actual": "Sweet aroma, chocolate & raisin/dried fruit notes, earthy, med-heavy body, syrupy mouthfeel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "brickhouseroasters-com__black-certified-organic-coffee-6552baa4",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "quartermaine-com__sumatra-c84b9077",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "quartermaine-com__costa-rica-special-estate-d954fdc2",
+      "field": "tasting_notes",
+      "current_actual": "baking chocolate, and hints of citrus rind",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "laterzacoffee-com__honduras-copan-ruinas-san-isidro-katia-duke-natural-processed-0e7d8495",
+      "field": "tasting_notes",
+      "current_actual": "Blackberry, dried fig, & sweet milk chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "laterzacoffee-com__ethiopia-guji-washed-e795ccf9",
+      "field": "tasting_notes",
+      "current_actual": "Fresh Pear, Jasmine & Caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "laterzacoffee-com__ethiopia-sidama-buncho-honey-processed-9ad9cc87",
+      "field": "tasting_notes",
+      "current_actual": "Brown sugar, pear & candied mango",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "riseupcoffee-com__single-origin-select-sumatra-fair-trade-organic-23fc6425",
+      "field": "tasting_notes",
+      "current_actual": "rich, malty, earthy",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-stageline-coffee__ethiopia-worasa-daniel-mijane-9329fa36",
+      "field": "tasting_notes",
+      "current_actual": "fresh plum and florals",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__danche-ethiopia-gedeb-zone-blueberry-pineapple-kiwi-lemon-lime-e30cb7ff",
+      "field": "tasting_notes",
+      "current_actual": "BLUEBERRY, PINEAPPLE, KIWI, & PEACH.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__alva-marina-alvarado-honduras-santa-barbara-blank-blank-and-blank-ade18ebf",
+      "field": "tasting_notes",
+      "current_actual": "CRANBERRY LEMON CURD, TANGERINE, & HIBISCUS.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__tzunwitz-guatemala-huehuetenango-blueberry-waffles-strawberry-nougat-pear-dc8ba1f7",
+      "field": "tasting_notes",
+      "current_actual": "BLUEBERRY WAFFLES, STRAWBERRY NOUGAT, & PEAR.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-swroasting-coffee__XOJGV4EZXCTPBXV6RSP4SGVF-fe2617be",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-swroasting-coffee__XOJGV4EZXCTPBXV6RSP4SGVF-fe2617be",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-swroasting-coffee__3JUGSMBHQMZS4BR5I5N2SDEA-6ac11545",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-swroasting-coffee__25NBJDMXCAYX4YC5XJZAYZDG-1d539602",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__ethiopia-gedeb-banko-gotiti-12oz-5ae573be",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__kenya-estate-670f492d",
+      "field": "tasting_notes",
+      "current_actual": "Floral, grapefruit aroma with bright, tangy acidity. Round, almost savory, caramel low balance.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__guatemala-huehuetenango-los-dos-socios-12oz-cb6c3dbe",
+      "field": "tasting_notes",
+      "current_actual": "Balanced with chocolate, caramel, and orange citrusy acidity.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-alaskaartisancoffee-com__white-coffee-a7330830",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-alaskaartisancoffee-com__black-fog-rising-b7b1bac1",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-alaskaartisancoffee-com__ak-mountain-33ad2b66",
+      "field": "tasting_notes",
+      "current_actual": "cacao nibs and apricot",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "seedscoffee-com__top-shelf-series-colombia-alejandro-ruiz-a44ea10e",
+      "field": "tasting_notes",
+      "current_actual": "Star Fruit and Guava",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-compasscoffee-com__emblem-espresso-1-d6afd58b",
+      "field": "tasting_notes",
+      "current_actual": "Rich, Caramel, Classic",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-compasscoffee-com__embassy-blend-27d72179",
+      "field": "tasting_notes",
+      "current_actual": "Bold, crisp, and savory with earthy, fragrant notes.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-compasscoffee-com__horizon-blend-39995b86",
+      "field": "tasting_notes",
+      "current_actual": "Bright and sweet with vibrant berry-like notes.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-lineageroasting-com__copy-of-kenya-gaikundo-2-bb0620c4",
+      "field": "tasting_notes",
+      "current_actual": "Caramel, Fig",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "quillscoffee-com__colombia-el-paraiso-3-5fab7533",
+      "field": "tasting_notes",
+      "current_actual": "dark honey, nougat, & stone fruit",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "quillscoffee-com__colombia-guamo-4e5c962f",
+      "field": "tasting_notes",
+      "current_actual": "papaya, guava, & hibiscus",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "quillscoffee-com__guatemala-quetzal-f1b9bcd9",
+      "field": "tasting_notes",
+      "current_actual": "molasses, pecan, & red grape",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "beanstockcoffee-com__last-roast-holiday-roast-2-el-salvador-finca-los-angeles-pacamara-black-honey-pr-635c445a",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "beanstockcoffee-com__colombian-supremo-organic-1ed788de",
+      "field": "tasting_notes",
+      "current_actual": "carmelized sugar and dark chocolate",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "beanstockcoffee-com__ethiopia-ayla-bombe-g1-natural-e4953428",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "shop-westrockcoffee-com__raiz-palmera-whole-bean-coffee-85b1fb1c",
+      "field": "tasting_notes",
+      "current_actual": "nice sweet caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "disciplescoffee-com__hunduras-b4389d3f",
+      "field": "tasting_notes",
+      "current_actual": "plum, raspberry, strawberry-lemonade, rhubarb, allspice, and cream",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "disciplescoffee-com__guatemala-5f4e440a",
+      "field": "tasting_notes",
+      "current_actual": "cherry, malt, anise, and cinnamon",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "disciplescoffee-com__single-origin-organic-nicaragua-a4aa0f61",
+      "field": "tasting_notes",
+      "current_actual": "milk chocolate, citrus, almond, and brown sugar",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__balthvs-manifest-3b637bfc",
+      "field": "tasting_notes",
+      "current_actual": "milk duds, pomegranate, and hazelnut",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__under-the-rainbow-october-limited-blend-12a24dc7",
+      "field": "tasting_notes",
+      "current_actual": "dark chocolate, warm spices, and pecan clusters",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__anthrax-cursum-perficio-e8175990",
+      "field": "tasting_notes",
+      "current_actual": "Nutella, graham cracker, and lemon tea",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "localroasters-com__nicaragua-la-bastilla-12-oz-368e5fab",
+      "field": "tasting_notes",
+      "current_actual": "Starfruit, Blackberry Jam, & Rose",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "localroasters-com__brazil-natural-12-oz-51c91b04",
+      "field": "tasting_notes",
+      "current_actual": "Golden Raisin, Pecan, & Honey Grahams",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "localroasters-com__costa-rica-la-amistad12-oz-651618d8",
+      "field": "tasting_notes",
+      "current_actual": "Green Apple, Dark Caramel, & Cacao Nibs",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "field": "tasting_notes",
+      "current_actual": "clean, nutty/cocoa",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29",
+      "field": "tasting_notes",
+      "current_actual": "dark fruit",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+      "field": "tasting_notes",
+      "current_actual": "clean, nutty",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "thunderheadcoffee-com__sumatran-aceh-harimau-tiger-triple-picked-d877dfae",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "thunderheadcoffee-com__colombia-narino-excelso-426d3067",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "methodicalcoffee-com__ethiopia-layo-teraga-3d742e19",
+      "field": "tasting_notes",
+      "current_actual": "Orange, Papaya, Stone Fruit",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-millcreekcoffee-com__guatemalan-e5148300",
+      "field": "tasting_notes",
+      "current_actual": "Full body, medium acidity, notes of dark chocolate and citrus",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-millcreekcoffee-com__mexican-95316589",
+      "field": "tasting_notes",
+      "current_actual": "citrus, toffee, and dark cocoa with a light body",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-millcreekcoffee-com__kona-00a4abfe",
+      "field": "tasting_notes",
+      "current_actual": "Subtlety-sweet, earthy, full-bodied, citrus fruit, smooth and nutty",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "motivecoffeecompany-com__colombia-dark-roast-copy-0a65e5fd",
+      "field": "tasting_notes",
+      "current_actual": "chocolate and caramel",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "motivecoffeecompany-com__ethiopia-yirgacheffe-copy-1bb86824",
+      "field": "tasting_notes",
+      "current_actual": "apricot and dark honey",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "motivecoffeecompany-com__papua-new-guinea-efb1c19c",
+      "field": "tasting_notes",
+      "current_actual": "cocoa powder and roasted almond",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "cortezcoffee-com__finca-amalita-micro-lot-blend-f185f367",
+      "field": "tasting_notes",
+      "current_actual": "A super smooth & refreshing cup with notes of bright citrus, smooth honey, walnut, and complex florals.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "cortezcoffee-com__costa-rica-red-honey-5e1161b8",
+      "field": "tasting_notes",
+      "current_actual": "Rich notes of raspberry, honey, tart cherry, and aged rum. Very well balanced.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "cortezcoffee-com__el-salvador-santa-ana-copy-1833d18d",
+      "field": "tasting_notes",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "bonjocoffee-com__brazil-jose-alberto-careta-5e97986d",
+      "field": "tasting_notes",
+      "current_actual": "Nutella, Buttery, Dried Fruits",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-sidecarcoffee-com__honduras-alexia-mejia-b52cbc57",
+      "field": "tasting_notes",
+      "current_actual": "sweet citrus, floral, plum, and jasmine tea",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-sidecarcoffee-com__uganda-rwenzori-d90536fa",
+      "field": "tasting_notes",
+      "current_actual": "dried berry, caramel, and fresh berry flavors, with winey lactic acidity and fruit-like sweetness.",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-sidecarcoffee-com__espresso-9535246d",
+      "field": "tasting_notes",
+      "current_actual": "dark chocolate, blueberries and pop rocks",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-ixxacoffee-com__kaan-bfb54882",
+      "field": "tasting_notes",
+      "current_actual": "Heavy Body, Caramel, Dark Chocolate, Roasted Almonds",
+      "strict_status": "review_required",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-candidate2-notes-review-complete-adjudication.json"
+      ]
+    },
+    {
+      "case_id": "www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0",
+      "field": "roast_level",
+      "current_actual": null,
+      "strict_status": "missing",
+      "prior_source_review_references": [
+        "extractor-600-flavor-roast-candidate1-adjudication.json",
+        "extractor-600-flavor-roast-candidate2-focused-adjudication.json"
+      ]
+    }
+  ]
+}

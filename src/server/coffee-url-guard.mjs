@@ -8,16 +8,30 @@ import {gunzipSync,inflateSync,brotliDecompressSync} from 'node:zlib';
 
 export const MAX_HTML_BYTES=900_000;
 export const MAX_PRODUCT_RETRY_BYTES=2_000_000;
+// Decode exactly one path segment. Encoded separators, controls and a second
+// encoding layer are never product identity. Literal international handles
+// and registered-mark characters do occur in public merchant product URLs.
+export function coffeeProductHandle(segment){
+ if(typeof segment!=='string'||!segment||segment.length>600)return null;
+ let handle;try{handle=decodeURIComponent(segment).normalize('NFC');}catch{return null;}
+ if(handle.length>156||! /^[\p{L}\p{N}][\p{L}\p{M}\p{N}_®™.+~-]*$/u.test(handle))return null;
+ return handle.toLowerCase();
+}
 // The expanded limit is available ONLY to an explicitly shaped product page.
 // Category and homepage paths must never receive the larger response budget.
 export function isCoffeeProductDetailUrl(raw){
  const u=safeCoffeeUrl(raw);if(!u)return false;
  const parts=u.pathname.split('/').filter(Boolean);
- const tail=parts.at(-1)||'',parent=(parts.at(-2)||'').toLowerCase();
- if(!/^[a-z0-9][a-z0-9._%+~-]{3,155}$/i.test(tail))return false;
+ if(parts.some(part=>/^(?:product-category|category|categories|wp-admin)$/i.test(part)))return false;
+ const tail=coffeeProductHandle(parts.at(-1)||''),parent=(parts.at(-2)||'').toLowerCase();
+ if(!tail||tail.length<4)return false;
  if(/^(?:all|coffee|coffees|beans|products|new|featured|collection|collections|shop|store|category|sale|search)$/i.test(tail))return false;
  if(parent==='shop'||parent==='store')return /-p\d{6,14}$/i.test(tail);
- return ['product','products','product-page','coffee','coffees','beans'].includes(parent);
+ if(['product','products','product-page','coffee','coffees','beans'].includes(parent))return true;
+ // Match the bounded nested Woo product shapes accepted by the public
+ // product endpoint adapter. A category segment cannot disguise an arbitrary
+ // shop, administration or catalog URL as a larger-budget product request.
+ return /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?(?:product|coffee|coffees|beans)\/(?:[a-z0-9][a-z0-9-]{0,79}\/){1,3}[a-z0-9][a-z0-9-]{3,155}\/?$/i.test(u.pathname);
 }
 
 const MAX_URL_LENGTH=3000;
@@ -106,8 +120,11 @@ export async function fetchPublicCoffeeHtml(raw,{
  if(remaining<=0)return {ok:false,reason:'source_unavailable'};
  // Narrow HTML-in-JS MIME compatibility to the documented public product
  // endpoint, never general third-party scripts or untrusted executable code.
- if(responseType==='shopify_json'&&!/^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?products\/[a-z0-9][a-z0-9-]{0,155}\.js$/i.test(url.pathname))
-  return {ok:false,reason:'invalid_url'};
+ if(responseType==='shopify_json'){
+  const segment=url.pathname.match(/^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?products\/([^/]+)\.js$/i)?.[1];
+  const handle=coffeeProductHandle(segment);
+  if(!handle||/[.+~]/.test(handle))return {ok:false,reason:'invalid_url'};
+ }
  const result=await new Promise(resolve=>{
   let settled=false;
   const finish=(value)=>{if(settled)return;settled=true;clearTimeout(timer);resolve(value);};

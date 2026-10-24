@@ -11,7 +11,7 @@ import {emailConfirmationView} from './confirmation.js';
 import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from './coffee-url-autofill.js';
+import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,autofillFields} from './coffee-url-autofill.js';
 import {communityReviewBanner,communityPage} from './community.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
 const NEXT_SHOT_INFO="Changing only one setting helps isolate its effect on your espresso's flavor. Keep the other settings consistent and compare the results. Shot time may change naturally; record what happens.";
@@ -26,7 +26,7 @@ function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
-  this.coffeeUrlPreviewInput=null;this.coffeeUrlBusy=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
+  this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   this.recommendationEvidence={};this.recommendationEvidenceRequests=new Set();
@@ -41,6 +41,9 @@ class CloudApp {
   try{const result=await operation();if(changed())throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');return result;}
   catch(error){if(changed())throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');throw error;}
  }
+ assertSession(owner,epoch){
+  if(owner!==this.identity?.id||epoch!==this.epoch)throw new CloudError('Account changed. Any queued change remains with its original account.','account_changed');
+ }
  resetAccount(){
   this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
@@ -49,6 +52,7 @@ class CloudApp {
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
+  this.coffeeUrlSourceReview=null;this.pendingCoffeeReview=null;
   this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityReloadRequested=false;this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
   if(reviewSheet.open)reviewSheet.close();reviewSheet.replaceChildren();
   sheet.close();sheet.innerHTML='';
@@ -195,12 +199,28 @@ class CloudApp {
   this.render();
  }
  async mutate(action,payload,{onlineOnly=false}={}){
+  const owner=this.identity?.id,epoch=this.epoch;
   const offlineShot=action==='save_shot'&&!payload.expected_revision&&this.identity?.id===this.localOfflineOwner&&globalThis.navigator?.onLine===false;
   if(!this.identity||(!this.status?.admitted&&!offlineShot))throw new Error('Sign in with beta access first.');
   if(onlineOnly&&(!navigator.onLine||this.pending.length))throw new Error('Reconnect and finish syncing before changing this setting. Offline shot logging remains available.');
-  await this.inSession(()=>this.queue.enqueue(action,payload));this.pending=await this.inSession(()=>this.store.list(this.identity.id));
+  const event=await this.inSession(()=>this.queue.enqueue(action,payload));this.assertSession(owner,epoch);
+  if(event?.owner&&event.owner!==owner)throw new CloudError('The saved change belongs to another account.','account_changed');
+  const pending=await this.inSession(()=>this.store.list(owner));this.assertSession(owner,epoch);this.pending=pending;
   this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;this.render();
-  await this.inSession(()=>this.sync());
+  let syncError;
+  try{await this.inSession(()=>this.sync());}
+  catch(error){this.assertSession(owner,epoch);if(error.code==='account_changed')throw error;syncError=error;}
+  this.assertSession(owner,epoch);
+  if(onlineOnly&&['submit_coffee','add_verified_coffee'].includes(action)&&event?.id&&typeof this.store.readReceipt==='function'){
+   // A storage read can fail after the server has already saved this event.
+   // Preserve the exact mutation ID for a read-only retry; never resubmit it.
+   let receipt;
+   try{receipt=await this.inSession(()=>this.store.readReceipt(owner,event.id));}
+   catch(error){this.assertSession(owner,epoch);if(error.code==='account_changed')throw error;}
+   this.assertSession(owner,epoch);
+   return receipt?.result??{acknowledgement_unavailable:true,mutation_id:event.id};
+  }
+  if(syncError)throw syncError;
   if(onlineOnly&&this.pending.length)throw new Error('The change is preserved in the sync queue. Open Sync details to check its status.');
  }
  error(err){
@@ -375,7 +395,7 @@ class CloudApp {
    <p class="helper space-top">Renaming does not change your equipment history, shots, or recommendations.</p>
    <button class="primary full space-top">Save Name</button></form>`);
  }
- showEditCoffee(id){
+ showEditCoffee(id,{importedDetails,importedSourceUrl}={}){
   const c=this.state.coffees.find(x=>x.id===id);
   const entry=this.raw?.library?.find(l=>l.id===id);
   if(!c||!entry)throw new Error('Refresh this coffee before editing.');
@@ -387,11 +407,18 @@ class CloudApp {
   // original submission may predate later administrator corrections.
   const source=canonical?correction:original;
   if(!canonical&&source?.status!=='pending')throw new Error('This coffee submission is no longer editable.');
-  const data=source?.proposed_data||canonical||{};
+  const data={...(source?.proposed_data||canonical||{})};
+  const differences=canonical?coffeeSourceDifferences(importedDetails,data):[];
+  // Keep existing approved facts and a member's pending corrections. Newly
+  // found missing facts are prefilled for an explicit correction submission;
+  // conflicting nonempty values remain visible for the member to compare.
+  for(const item of differences)if(!item.current.trim())data[item.key]=item.submitted;
   this.editCoffeeId=id;this.editCoffeeRevision=source?.revision??canonical?.revision;
-  const sourceUrl=source?source.source_url||'':original?.source_url||'';
+  const sourceUrl=typeof importedSourceUrl==='string'&&importedSourceUrl.startsWith('https://')?importedSourceUrl:
+   source?source.source_url||'':original?.source_url||'';
   if(!this.editCoffeeRevision)throw new Error('Coffee revision unavailable. Refresh and retry.');
   this.show(canonical?'Suggest Coffee Corrections':'Edit Coffee Details',`<form id=edit-coffee>
+   ${differences.length?`<section class="coffee-url-preview"><p><strong>Your coffee was added. These submitted details differ from its saved record.</strong></p><p class="helper">Missing details are filled below. Compare any different existing values, then submit the correction for review to retain your changes.</p><dl class="coffee-url-fields">${differences.map(item=>`<div><dt>${e(item.label)}</dt><dd>Saved: ${e(item.current||'Not provided')}<br>Submitted: ${e(item.submitted)}</dd></div>`).join('')}</dl></section>`:''}
    ${field('Coffee Name','name',data.name||'',{required:true})}
    ${field('Roaster','roaster',data.roaster||'',{required:true})}
    ${field('Release / Harvest (If Shown)','release_label',data.release_label||'')}
@@ -409,7 +436,58 @@ class CloudApp {
    <button class="primary full space-top" type="submit">${canonical?'Submit Correction For Review':'Save Coffee Details'}</button>
   </form>`);
  }
- showAdd(){this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.coffeeUrlPreviewInput=null;
+ reviewAddedCoffeeDetails(libraryEntry,submitted){
+  if(!libraryEntry?.coffee_id)return false;
+  const canonical=this.raw?.coffees?.find(coffee=>coffee.id===libraryEntry.coffee_id);
+  if(!canonical||!coffeeSourceDifferences(submitted,canonical).length)return false;
+  this.showEditCoffee(libraryEntry.id,{importedDetails:submitted,importedSourceUrl:submitted.source_url});
+  return true;
+ }
+ holdAddedCoffeeReview(submitted,{libraryId,coffeeId,result}={}){
+  this.pendingCoffeeReview={owner:this.identity?.id,epoch:this.epoch,submitted:{...submitted},
+   libraryId,coffeeId,mutationId:result?.mutation_id,acknowledged:result?.ok===true};
+  this.showPendingCoffeeReview();
+ }
+ showPendingCoffeeReview(){
+  const pending=this.pendingCoffeeReview;if(!pending)return;
+  this.assertSession(pending.owner,pending.epoch);
+  this.notice=pending.acknowledged?'Coffee saved. Refresh its saved record to review the imported details.':
+   'The coffee save needs confirmation. Your submitted details are retained here while its status is checked.';
+  const fields=autofillFields.filter(([key])=>typeof pending.submitted[key]==='string'&&pending.submitted[key].trim());
+  this.show(pending.acknowledged?'Coffee Saved · Review Waiting':'Check Coffee Save',
+   `<section id="pending-coffee-review"><p>${e(this.notice)}</p><p class="helper">Refresh checks the original save. It will not add this coffee again. Keep this page open until the review is ready.</p><dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(pending.submitted[key])}</dd></div>`).join('')}</dl>${button('Refresh Saved Coffee','refresh-saved-coffee','','primary full')}</section>`);
+  this.render();
+ }
+ async refreshAddedCoffeeReview(){
+  const pending=this.pendingCoffeeReview;if(!pending)return;
+  this.assertSession(pending.owner,pending.epoch);
+  try{await this.inSession(()=>this.sync());}
+  catch(error){this.assertSession(pending.owner,pending.epoch);if(error.code==='account_changed')throw error;}
+  this.assertSession(pending.owner,pending.epoch);
+  if(pending.mutationId){
+   let receipt;
+   try{receipt=await this.inSession(()=>this.store.readReceipt(pending.owner,pending.mutationId));}
+   catch(error){this.assertSession(pending.owner,pending.epoch);if(error.code==='account_changed')throw error;}
+   this.assertSession(pending.owner,pending.epoch);
+   if(receipt?.result?.ok===true){
+    pending.acknowledged=true;pending.mutationId=null;
+    if(typeof receipt.result.library_entry_id==='string')pending.libraryId=receipt.result.library_entry_id;
+    if(typeof receipt.result.coffee_id==='string')pending.coffeeId=receipt.result.coffee_id;
+   }
+  }
+  const entry=this.raw?.library?.find(x=>x.id===pending.libraryId);
+  const canonical=entry?.coffee_id&&this.raw?.coffees?.find(x=>x.id===entry.coffee_id);
+  const privateSubmission=!entry?.coffee_id&&this.raw?.submissions?.find(x=>x.id===entry?.submission_id&&x.status==='pending');
+  if(pending.mutationId||!entry||(!canonical&&!privateSubmission)){this.showPendingCoffeeReview();return;}
+  this.tempCoffee=entry.id;
+  // Opening the correction form requires the current saved revision. Keep
+  // the waiting state if that form cannot yet be constructed safely.
+  if(!this.reviewAddedCoffeeDetails(entry,pending.submitted)){
+   sheet.close();this.notice=canonical?'Your saved coffee is ready.':'Your private coffee is saved and awaiting identity review.';this.render();
+  }
+  this.pendingCoffeeReview=null;
+ }
+ showAdd(){if(this.pendingCoffeeReview){this.showPendingCoffeeReview();return;}this.addCoffeeDraft=null;this.pendingMergeSubmissionId=null;this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;
   this.show('New Coffee',`<form id=new-coffee>
    <div class="coffee-url-first">${field('Roaster Page URL','source_url','',{type:'url',placeholder:'https://roaster.com/products/coffee'})}
     <div class="coffee-url-actions">${button('Autofill From URL','preview-coffee-url','','secondary coffee-url-autofill-button')}
@@ -426,36 +504,53 @@ class CloudApp {
   </form>`);
  }
  async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){
+  const owner=this.identity?.id,epoch=this.epoch;
   if(chosenId){
-   await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:uuid()},{onlineOnly:true});
-   const library=this.raw?.library?.find(x=>x.coffee_id===chosenId);
+   const proposedId=uuid();
+   const added=await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:proposedId},{onlineOnly:true});
+   this.assertSession(owner,epoch);
+   const library=this.raw?.library?.find(x=>typeof added?.library_entry_id==='string'?x.id===added.library_entry_id:x.coffee_id===chosenId);
+   if(added?.acknowledgement_unavailable||!library||!this.raw?.coffees?.some(x=>x.id===library.coffee_id)){
+    this.holdAddedCoffeeReview(d,{libraryId:added?.library_entry_id||library?.id||proposedId,coffeeId:chosenId,result:added});return;
+   }
    this.tempCoffee=library?.id||null;
    // New coffee is ready to expand intentionally, not auto-expanded.
-   sheet.close();this.notice='Added the existing verified coffee. No duplicate was created.';this.render();return;
+   sheet.close();this.notice='Added the existing verified coffee. No duplicate was created.';this.render();
+   this.reviewAddedCoffeeDetails(library,d);return;
   }
   const lid=uuid(),{source_url,proposed_data}=proposalWithRecognizedRoaster(d,matched);
-  await this.mutate('submit_coffee',{library_entry_id:lid,source_url,proposed_data,confirmed_distinct:confirmedDistinct},{onlineOnly:true});
-  this.tempCoffee=lid;sheet.close();
-  const entry=this.raw?.library?.find(x=>x.id===lid);
+  const added=await this.mutate('submit_coffee',{library_entry_id:lid,source_url,proposed_data,confirmed_distinct:confirmedDistinct},{onlineOnly:true});
+  this.assertSession(owner,epoch);
+  // The server may reuse a library entry that already existed. Follow this
+  // exact event's acknowledgement instead of guessing by name or losing the
+  // imported details because its ID differs from the proposed new ID.
+  const savedId=typeof added?.library_entry_id==='string'?added.library_entry_id:lid;
+  const entry=this.raw?.library?.find(x=>x.id===savedId);
+  if(added?.acknowledgement_unavailable||!entry||(entry.coffee_id&&!this.raw?.coffees?.some(x=>x.id===entry.coffee_id))){
+   this.holdAddedCoffeeReview(d,{libraryId:savedId,coffeeId:added?.coffee_id,result:added});return;
+  }
+  this.tempCoffee=savedId;sheet.close();
   const proposal=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);
   if(entry?.coffee_id){
-   this.notice='Coffee automatically approved and added to the shared catalog.';
+   this.notice=added?.reused?'Added the existing verified coffee. No duplicate was created.':'Coffee automatically approved and added to the shared catalog.';
   }else{
    this.notice='Saved privately because a possible duplicate needs review. You can log shots now.';
    if(proposal?.id&&proposal?.source_url&&this.client.verifyCoffeeSource){
     try{
      const checked=await this.inSession(()=>this.client.verifyCoffeeSource(proposal.id));
+     this.assertSession(owner,epoch);
      if(checked?.ok===true&&checked?.status==='verified'){
-      await this.inSession(()=>this.sync());this.notice=checked.source_verified===true
+      await this.inSession(()=>this.sync());this.assertSession(owner,epoch);this.notice=checked.source_verified===true
        ?'Official source verified. Your coffee is now in the shared catalog.'
        :'Coffee is already approved in the shared catalog.';
      }else if(checked?.reason==='needs_confirmation'){
       this.notice='Coffee saved. A possible duplicate needs confirmation; nothing was merged.';
      }else this.notice='Pending identity review. Your private coffee and shots remain saved.';
-    }catch(error){if(error.code==='account_changed')throw error;this.notice='Saved privately; source verification is unavailable and identity review can be retried.';}
+    }catch(error){this.assertSession(owner,epoch);if(error.code==='account_changed')throw error;this.notice='Saved privately; source verification is unavailable and identity review can be retried.';}
    }
   }
   this.render();
+  this.reviewAddedCoffeeDetails(this.raw?.library?.find(x=>x.id===savedId),d);
  }
   async syncFirstStylePrompts(owner){
   if(!owner||!this.status?.admitted||globalThis.navigator?.onLine===false)return;
@@ -579,18 +674,26 @@ class CloudApp {
    if(a==='open-admin'){location.assign('/admin.html');return;}
    if(a==='rename-setup'){this.showRenameSetup(id);return;}
    if(a==='add'){this.showAdd();return;}
-    if(a==='preview-coffee-url'){
+   if(a==='refresh-saved-coffee'){if(this.busy)return;this.busy=true;try{await this.refreshAddedCoffeeReview();}finally{this.busy=false;}return;}
+    if(a==='download-coffee-source-review'){
+     const form=sheet.querySelector('#new-coffee');
+     if(form&&this.coffeeUrlSourceReview&&String(form.elements.source_url.value||'').trim()===this.coffeeUrlPreviewInput)
+      downloadCoffeeSourceReview(this.coffeeUrlSourceReview);
+     return;
+    }
+    if(a==='preview-coffee-url'||a==='preview-coffee-url-refresh'){
      const form=sheet.querySelector('#new-coffee'),panel=form?.querySelector('#coffee-url-feedback');
      if(!form||!panel||this.coffeeUrlBusy)return;
      const raw=String(form.elements.source_url.value||'').trim();
      if(!raw){panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'invalid_url'});return;}
-     this.coffeeUrlBusy=true;this.coffeeUrlPreviewInput=null;
+     this.coffeeUrlBusy=true;this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;
      const original=target.textContent;target.disabled=true;target.textContent='Checking URL...';
      try{
-      const found=await this.inSession(()=>this.client.previewCoffeeUrl(raw));
+      const found=await this.inSession(()=>this.client.previewCoffeeUrl(raw,{refreshSource:a==='preview-coffee-url-refresh'}));
       if(!sheet.open||sheet.querySelector('#new-coffee')!==form||form.elements.source_url.value.trim()!==raw)return;
       
       this.coffeeUrlPreviewInput=found?.ok?raw:null;
+      this.coffeeUrlSourceReview=coffeeSourceReviewSnapshot(found);
       // One click populates available blanks, then the member reviews and
       // presses Add Coffee. Never overwrite typed facts or silently approve.
       if(found?.ok)applyCoffeeUrlFields(form,found);
@@ -713,7 +816,7 @@ class CloudApp {
    if(a==='signout'){const queued=await this.inSession(()=>this.queue.pending());if(queued.length&&!globalThis.confirm?.('You have '+queued.length+' unsynced change(s). They remain saved on this device for this account and will sync only after you sign in to the same account again. Sign out anyway?'))return;const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
   }catch(err){this.error(err);}
  }
- input(ev){if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+ input(ev){if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
  change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{

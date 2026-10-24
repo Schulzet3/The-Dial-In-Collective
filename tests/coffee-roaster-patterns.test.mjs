@@ -82,7 +82,8 @@ test('PERC icon+heading metrics include process, Agtron, rest and Breville recip
  '<h6>DOSE: 16g</h6><h6>YIELD: 40g</h6><h6>TEMP: 205° F</h6>'+
  '<h6>TIME: 0:25</h6><h6>TDS: 7.77</h6>'+
  '<h2>Hario V60</h2><h6>Dose: 20g</h6><h6>Water: 320g</h6>');
- assert.equal(r.fields.origin,'Pitalito');
+ // The selected product name explicitly supplies Colombia.
+ assert.equal(r.fields.origin,'Pitalito, Colombia');
  assert.equal(r.fields.elevation_m,'1650 MASL');
  assert.equal(r.fields.variety,'Orange Bourbon');
  assert.equal(r.fields.process,'Washed');
@@ -102,7 +103,8 @@ test('The Picky Chemist uses French product details on English-language Wix page
  '<p>Altitude : 1931 – 2049 m</p>'+
  '<p>Variété : Gesha 1931</p><p>Traitement : Honey</p>'+tail,
  'https://en.thepickychemist.com/product-page/ethiopia-gesha-village-lot-26-136-oma-honey');
- assert.equal(r.fields.origin,'Bench Maji – Oma');
+ // Preserve the country explicitly published in the selected title.
+ assert.equal(r.fields.origin,'Bench Maji – Oma, Ethiopia');
  assert.equal(r.fields.producer,'Gesha Village Coffee Estate');
  assert.equal(r.fields.elevation_m,'1931 – 2049 m');
  assert.equal(r.fields.variety,'Gesha 1931');
@@ -222,7 +224,8 @@ test('live PERC Product variants do not displace exact canonical product identit
  const r=preview(html,url+'?variant=53562522829114');
  assert.equal(r.ok,true);
  assert.equal(r.fields.name,'Colombia Franky Hoyos Adv Washed');
- assert.equal(r.fields.origin,'Pitalito');
+ // Exact Product identity publishes Colombia alongside its local metric.
+ assert.equal(r.fields.origin,'Pitalito, Colombia');
  assert.equal(r.roaster_details.agtron,'74.7');
 });
 test('PERC JSON-LD ProductGroup parent wins over size/grind variant Products only when URL matches',()=>{
@@ -289,7 +292,7 @@ test('live roaster flattened labels never contaminate flavor notes or origin val
  const heart=head('Ethiopia Halo','Heart Roasters')+
   '<h1>Ethiopia Halo</h1><p>Origin: GedebElevation: 1900-2200m Varietals: HeirloomProcess: Fully washed</p>'+tail;
  const h=preview(heart,'https://www.heartroasters.com/products/ethiopia-halo');
- assert.equal(h.fields.origin,'Gedeb');
+ assert.equal(h.fields.origin,'Gedeb, Ethiopia','The exact selected Ethiopia Halo title supplies the country');
  assert.doesNotMatch(h.fields.origin,/Elevation|Varietals|Process/i);
 });
 test('generic geographic grower groups are not asserted as a named producer',()=>{

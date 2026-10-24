@@ -1,3 +1,9 @@
+## October 23, 2026 MDT: candidate8 GitHub integration resumed — TESTING, not published
+
+Resume from [Issue33 journal](workstreams/issue-33.md), CURRENT_STATUS and RELEASE_QUEUE. The earlier GitHub rejection has been explicitly resolved by the owner, who permits required GitHub Actions use. Candidate8's frozen full603 evidence is retained, and actual upstream `e6d874510448f6cd3d0f21f5edabc3d2863a14ed` is reconciled. This commit prepares the real-parent development integration; no READY or publication claim until actual source/CI readback. All historical checkpoints below retain their dated scope.
+
+---
+
 ## October 23, 2026: Issue #33 extractor completeness READY, not deployed
 
 PR99 is merged at `126304178bf255894af44633587052c7ef3b56d5`. Its tree

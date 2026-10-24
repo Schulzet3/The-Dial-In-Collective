@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {officialPreviewUrl,extractProductPreview} from '../supabase/functions/dic-preview-coffee/preview.mjs';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
+import {createCloudClient} from '../site/cloud/client.js';
 
 const product=(extra={})=>'<html><head><meta property="og:type" content="product"></head><body>'+
  '<script type="application/ld+json">'+JSON.stringify({
@@ -150,7 +151,7 @@ test('official URL cannot rebind an older Coffee ID for an unknown harvest throu
 
 test('published New Coffee preview click immediately populates blanks before Add Coffee',()=>{
  const main=read('site/cloud/main.js');
- const at=main.indexOf("if(a==='preview-coffee-url')");
+ const at=main.indexOf("if(a==='preview-coffee-url'||a==='preview-coffee-url-refresh')");
  const end=main.indexOf("if(a==='check-pending-match')",at);
  assert.ok(at>0&&end>at);
  const handler=main.slice(at,end);
@@ -165,7 +166,7 @@ test('published New Coffee preview click immediately populates blanks before Add
 });
 test('client makes exactly one authenticated public-preview request per click with no double quota',()=>{
  const client=read('site/cloud/client.js');
- const begin=client.indexOf('async previewCoffeeUrl(source_url){');
+ const begin=client.indexOf('async previewCoffeeUrl(source_url,');
  const end=client.indexOf('async verifyCoffeeSource(',begin);
  const preview=client.slice(begin,end);
  assert.match(client,/previewPath='\/api\/coffee-preview'/);
@@ -174,4 +175,25 @@ test('client makes exactly one authenticated public-preview request per click wi
  assert.match(preview,/dic_find_coffee_matches/);
  assert.doesNotMatch(preview,/sdk\.functions\.invoke\('dic-preview-coffee'/);
  assert.doesNotMatch(preview,/SUPABASE_SERVICE_ROLE_KEY/);
+});
+test('catalog preview provides an explicit current-page check while ordinary previews need no extra lookup',()=>{
+ const saved=coffeeUrlPreviewMarkup({ok:true,source:'approved_catalog',fields:{name:'Coffee',roaster:'Roaster'}});
+ assert.match(saved,/data-action="preview-coffee-url-refresh"/);assert.match(saved,/Check Current Roaster Page/);
+ assert.match(saved,/usual URL lookup limit/);
+ const fresh=coffeeUrlPreviewMarkup({ok:true,source:'unverified_public_page',fields:{name:'Coffee',roaster:'Roaster'}});
+ assert.doesNotMatch(fresh,/data-action="preview-coffee-url-refresh"/);
+});
+test('client sends the explicit refresh flag only for that action and uses one preview request',async()=>{
+ const requests=[];
+ const sdk={auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),
+  getSession:async()=>({data:{session:{access_token:'fixture.nonfunctional'}}})},rpc:async()=>({data:{classification:'new'}})};
+ const client=createCloudClient(sdk,{assertSecure(){},previewFetch:async(url,options)=>{
+  requests.push({url,body:JSON.parse(options.body)});return {ok:true,json:async()=>({ok:true,fields:{name:'Coffee'}})};
+ }});
+ await client.previewCoffeeUrl(link);
+ await client.previewCoffeeUrl(link,{refreshSource:true});
+ await client.previewCoffeeUrl(link,{refreshSource:'true'});
+ assert.equal(requests.length,3);
+ assert.deepEqual(requests.map(x=>x.body),[{source_url:link},{source_url:link,refresh_source:true},{source_url:link}]);
+ assert.ok(requests.every(x=>x.url==='/api/coffee-preview'));
 });

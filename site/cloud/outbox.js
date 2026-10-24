@@ -110,6 +110,19 @@ export class IndexedStore {
  put(event){return this.transaction(['events','meta'],tx=>{const events=tx.objectStore('events'),meta=tx.objectStore('meta');const exists=events.get([event.owner,event.id]);exists.onsuccess=()=>{if(exists.result){events.put({...event,sequence:exists.result.sequence});return;}const r=meta.get('sequence');r.onsuccess=()=>{const sequence=(r.result||0)+1;meta.put(sequence,'sequence');events.put({...event,sequence});};};});}
  async list(owner){const db=await this.db();return new Promise((resolve,reject)=>{const r=db.transaction('events').objectStore('events').getAll();r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result.filter(e=>e.owner===owner).sort((a,b)=>a.sequence-b.sequence));});}
  acknowledge(event,result){return this.transaction(['events','receipts','cache'],tx=>{tx.objectStore('receipts').put({owner:event.owner,id:event.id,event:structuredClone(event),result,at:new Date().toISOString()});const cache=tx.objectStore('cache'),r=cache.get(event.owner);r.onsuccess=()=>{if(r.result)cache.put({...r.result,snapshot:patchAcknowledgement(r.result.snapshot,event,result),needsRefresh:true},event.owner);};tx.objectStore('events').delete([event.owner,event.id]);});}
+ async readReceipt(owner,id){
+  const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if(typeof owner!=='string'||typeof id!=='string'||!uuid.test(owner)||!uuid.test(id))return null;
+  const db=await this.db();
+  return new Promise((resolve,reject)=>{
+   const request=db.transaction('receipts','readonly').objectStore('receipts').get([owner,id]);
+   request.onerror=()=>reject(request.error);
+   request.onsuccess=()=>{
+    const receipt=request.result;
+    resolve(receipt?.owner===owner&&receipt.id===id&&receipt.event?.owner===owner&&receipt.event.id===id?receipt:null);
+   };
+  });
+ }
  async claimFirstStylePrompt(owner,libraryId){
   if(!owner||!libraryId)throw new CloudError('Owner and coffee are required.','invalid_prompt');
   const key='first-style:'+owner+':'+libraryId;let first=false;

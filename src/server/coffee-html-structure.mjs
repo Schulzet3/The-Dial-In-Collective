@@ -4,7 +4,7 @@ const VOID=new Set(['area','base','br','col','embed','hr','img','input','link','
 export function coffeeHtmlElements(html){
  if(typeof html!=='string'||html.length>2_000_000)return {nodes:[],scannedEnd:0,truncated:true};
  const nodes=[],stack=[],tag=/<\/?([a-z][a-z0-9:-]{0,60})(?=[\s/>])/gi;
- let match,scannedEnd=html.length,truncated=false;
+ let match,scannedEnd=html.length,truncated=false,recoveredMalformedTags=0;
  while((match=tag.exec(html))){
   const start=match.index;
   let headEnd=tag.lastIndex,quote='';
@@ -17,9 +17,13 @@ export function coffeeHtmlElements(html){
    else if(character==='"'||character==="'")quote=character;
    else if(character==='>'||character==='<')break;
   }
-  if(html[headEnd]!=='>'){scannedEnd=start;truncated=true;break;}
-  tag.lastIndex=headEnd+1;
   const name=match[1].toLowerCase(),closing=html[start+1]==='/';
+  const recovered=!closing&&html[headEnd]==='<'&&!quote&&recoveredMalformedTags<32&&
+   /["']\s+$/.test(html.slice(start,headEnd))&&/^<[a-z][a-z0-9:-]{0,60}(?=[\s/>])/i.test(html.slice(headEnd,headEnd+80));
+  if(html[headEnd]!=='>'&&!recovered){scannedEnd=start;truncated=true;break;}
+  if(recovered)recoveredMalformedTags++;
+  const openingEnd=headEnd+(recovered?0:1);
+  tag.lastIndex=openingEnd;
   if(closing){
    let at=stack.length-1;
    while(at>=0&&nodes[stack[at]].tag!==name)at--;
@@ -30,15 +34,15 @@ export function coffeeHtmlElements(html){
    continue;
   }
   if(nodes.length>=40_000||stack.length>=128){scannedEnd=start;truncated=true;break;}
-  const node={tag:name,start,headEnd:headEnd+1,end:html.length,contentEnd:html.length,
+  const node={tag:name,start,headEnd:openingEnd,end:html.length,contentEnd:html.length,
    parent:stack.length?stack[stack.length-1]:null,
    attributes:headEnd-start<=2400?html.slice(start+match[0].length,headEnd):''};
   const index=nodes.push(node)-1;
-  if(VOID.has(name)||html[headEnd-1]==='/'){node.end=headEnd+1;node.contentEnd=headEnd+1;}
+  if(VOID.has(name)||html[headEnd-1]==='/'){node.end=openingEnd;node.contentEnd=openingEnd;}
   else stack.push(index);
  }
  // Unclosed elements end at the last inspected boundary, never in source
  // that a later text parser would otherwise see without product scoping.
  for(const index of stack){nodes[index].end=scannedEnd;nodes[index].contentEnd=scannedEnd;}
- return {nodes,scannedEnd,truncated};
+ return {nodes,scannedEnd,truncated,recoveredMalformedTags};
 }
