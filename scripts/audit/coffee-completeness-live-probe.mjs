@@ -115,7 +115,16 @@ function fixtureDifference(original,replay){
    original_value_sha:sha(JSON.stringify(fact.value)),replay_value_sha:sha(JSON.stringify(counterpart?.value)),
    parsed_json_equal:(()=>{try{return isDeepStrictEqual(JSON.parse(fact.value),JSON.parse(counterpart?.value));}catch{return false;}})(),
    normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(fact.value)));}catch{return null;}})(),
-   replay_normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(counterpart?.value)));}catch{return null;}})()
+   replay_normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(counterpart?.value)));}catch{return null;}})(),
+   json_difference_keys:(()=>{try{
+    const a=JSON.parse(fact.value),b=JSON.parse(counterpart.value);
+    if(!a||!b||typeof a!=='object'||typeof b!=='object')return [];
+    return [...new Set([...Object.keys(a),...Object.keys(b)])].filter(k=>!isDeepStrictEqual(a[k],b[k])).map(k=>({
+      key:sensitiveKey.test(k)?'redacted_sensitive_key':k,
+      before_present:Object.hasOwn(a,k),after_present:Object.hasOwn(b,k),
+      before_type:typeof a[k],after_type:typeof b[k]
+    })).slice(0,20);
+   }catch{return ['parse_error'];}})()
    };}),
   prior_digest:safeSummary(original).sha256,fixture_digest:safeSummary(replay).sha256};
 }

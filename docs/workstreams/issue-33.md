@@ -1,3 +1,8 @@
+## October 24 UTC — Nomad JSON-LD semantic mismatch confirmed
+Latest source acceptance 40065604312 confirms Nomad variant JSON values are semantically different (not just formatting), while Circulor and all other nine targets pass after safe product discriminator restoration. Strict parity remains enforced. Added diagnostic logging only the names/presence/types of top-level differing JSON keys, never their values. No runtime changes, no production writes. [dic-completeness-probe]
+
+---
+
 ## October 24 UTC — distinguish lexical JSON encoding from lost source facts
 Nomad nine `hasVariant` source fact values retain their labels, paths, types and count, but the serialized JSON text hashes differ after sensitive-key-aware JSON reserialization. This test-only phase records whether each original and replay JSON string parses to the same typed object; negative differences must continue to fail. No raw values or private data logged, source corpus untouched. [dic-completeness-probe].
 
