@@ -39,3 +39,7 @@ CI/merge status at this commit: NOT YET TESTED. Check new exact-source tests/SQL
 ## CI failure and immediate repair — SQL suite dispatch
 
 PR104 first exact-source validate failed **1/785**: `tests/sql-runner-coverage.test.mjs` correctly detected that the new `supabase/tests/recipe_family_lifecycle.sql` was not registered in `scripts/audit/isolated-sql-regression.sh`. The separate SQL CI initially passed but did not yet execute the new test, so it is NOT evidence of lifecycle acceptance. Fixed runner dispatch in this commit and made synthetic beta admission idempotent (existing auth-user trigger may precreate membership). Rerun ALL exact-source checks, especially the actual isolated SQL suite. No hosted operations or publication.
+
+## Approval intake repair
+
+Second PR104 attempt: approval gate failed `DIC-Q-10-recipe-favorite-correction scope paths must be exact deployable files` because the SQL CI runner script was incorrectly placed in the release item's deployable `scope_paths`. The runner remains changed and CI-tracked but is NOT a deployable file. Removed it only from queue scope; preserve `site/lib/engine.js` and the pending migration, and retest.
