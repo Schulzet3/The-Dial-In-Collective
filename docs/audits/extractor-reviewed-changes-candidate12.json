@@ -1,0 +1,885 @@
+{
+  "schema_version": 1,
+  "type": "independently_reviewed_frozen_case_changes",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "candidate": 12,
+  "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+  "packet_archive_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556",
+  "source_archive_sha256": "696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52",
+  "recovery_archive_sha256": "728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce",
+  "baseline_runtime_fingerprint": "301346616618784a5ff926ddb9302b3be6e2710bea74c3a47e3d476e02ca812c",
+  "baseline_artifacts": {
+    "replay": "d5e3b098c15595a4d03554024f8c57b7d4a1bf7251b4b743f96cb432099bcf12",
+    "comparison": "86701191b7a6f7d2e90060a1bcc2d8658d35e66670168a5cdfb1878255694aa3",
+    "retention": "8f7b9b25a284ea2f0f06cd43b5d07a21469f1c20a80ad47612ac6a7c31880088"
+  },
+  "candidate_runtime_fingerprint": "3fabb78c3bb1d49bd5cffcf5dd3e6d4108495717d2021d7d37e628f659e8c6a0",
+  "preserved_script_hashes": {
+    "scripts/audit/coffee-corpus-replay.mjs": "0747079c41858ac4d586a3c6037a357ee4fa3d5259e271426409fdf4795e6c40",
+    "scripts/audit/coffee-corpus-compare.mjs": "da04b988c824a44e7e3c8d4729dd99854333a33d5de539c2206353f215082549",
+    "scripts/audit/coffee-corpus-normalize.mjs": "b079b7fe8149c9dcff37afa76bcaa13a9e91777f37e33a976c96aa81c5371874",
+    "scripts/audit/coffee-corpus-retention.py": "197579285d08a678fb6fb1bb841e7c8570943c75b531301fc1c13cc5eab8f12f",
+    "site/cloud/coffee-url-autofill.js": "2c201e75232bba85df667bc1b8a90182b92e3f5c51d6d17cbaf15847718b3469"
+  },
+  "stable_case_projection": {
+    "format": "python-json-sort-keys-utf8-v1",
+    "ignored_case_properties": [
+      "elapsed_ms"
+    ]
+  },
+  "baseline_stable_cases_sha256": "8f860d353364ad9d575feb2420e3ec09e3528b6ba414fef79b876a3e26694f97",
+  "candidate_stable_cases_sha256": "fe6fb5f05a07864fdbaf7d2d1949fb39011e2fc3a0c2705260b76298e6864eaf",
+  "expected_counts": {
+    "canonical": {
+      "cases": 603,
+      "ok_response": 603,
+      "canonical_assertions": 4002,
+      "exact_equivalent": 3037,
+      "missing": 151,
+      "review_required": 814,
+      "conflict_assertions": 115,
+      "conflict_withheld": 65,
+      "conflict_unresolved": 50,
+      "additional_facts": 6474,
+      "additional_literal_present": 1526,
+      "additional_unconfirmed": 4948,
+      "unexpected_fields": 19
+    },
+    "supplementary_retention": {
+      "cases": 603,
+      "additional_assertions": 6474,
+      "truncated_previews": 3,
+      "all_evidence_retained": 5458,
+      "unconfirmed": 679,
+      "some_evidence_retained": 337
+    }
+  },
+  "review": {
+    "reviewer": "OpenAI GPT-6 original-source evidence reviewer",
+    "reviewed_at": "2026-10-24T06:36:33.544485+00:00",
+    "decision": "approve_exact_source_supported_changes",
+    "independent_source_review": true
+  },
+  "first_observed_run": {
+    "run_id": 40070270334,
+    "run_attempt": 1,
+    "source_commit": "92cd74d6da008b8186f381b57aaa09a10a43cc88",
+    "source_tree": "3d73c90ff6d2707d15aba38fa07ff7f99e9bfc75",
+    "workflow_path": ".github/workflows/coffee-frozen-corpus.yml",
+    "completed_at": "2026-10-24T06:30:44Z",
+    "conclusion": "FAILURE",
+    "benchmark_status": "FAIL",
+    "artifact": {
+      "id": 12551131716,
+      "bytes": 15158055,
+      "sha256": "a82a2f07d5583ce3dbb0a48334e2766fe89d2d8f465e3afe097d1df38c1c0afd"
+    },
+    "artifacts": {
+      "replay": {
+        "file": "candidate12-replay.json",
+        "bytes": 35335192,
+        "sha256": "ae0d4f89839b82aa481d1f929489109ba2c11d71806be64d4bd93517f2ccbf02"
+      },
+      "comparison": {
+        "file": "candidate12-comparison.json",
+        "bytes": 6986668,
+        "sha256": "c554e69f43dad78389247ad31be31f49cefc4476cffd5384d0afebf211d00df3"
+      },
+      "retention": {
+        "file": "candidate12-retention.json",
+        "bytes": 20080094,
+        "sha256": "ddca2035971c2ce920b69988faac85529740c1942b9fef3dcc335ba192cd63a1"
+      },
+      "exports": {
+        "file": "actual-exports.json",
+        "bytes": 302041,
+        "sha256": "a2bff69f9f9e6b15b57c03be11514badc485407e37dd55cb574a7e0afbab9143"
+      },
+      "review_material": {
+        "file": "review-material.json",
+        "bytes": 22427,
+        "sha256": "e1c63fbe930ebeebdb19831a87b5a3dff9b939402e5015e5f73c73b76816bb37"
+      },
+      "summary": {
+        "file": "summary.json",
+        "bytes": 32428,
+        "sha256": "e352e5f578b90d44a92d2fc5d17674f1b1ba06c2c4c5c9cdad75457131e6dfa4"
+      },
+      "manifest": {
+        "file": "artifact-manifest.json",
+        "bytes": 126416,
+        "sha256": "f0d539d3a54654c8c726d2f220a1069288a217ef50a5cf0dbdfd83b583f3cc3c"
+      }
+    }
+  },
+  "changes": [
+    {
+      "case_id": "beanstockcoffee-com__colombian-supremo-organic-1ed788de",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "beanstockcoffee-com",
+      "source_url": "https://beanstockcoffee.com/products/colombian-supremo-organic",
+      "before_case_sha256": "f8e381b91692caba96fea261b444033aa8dd53c68be7a2343404a774a4de5d61",
+      "after_case_sha256": "2f49f37a73d9e4a3d3d68286a09ff4ccd115f3598011934189ee8e77259729c6",
+      "before_export_sha256": "31d865b2e409f83783bc5775f8a41cdc99679af56422165fa8fd692454dc1f2e",
+      "after_export_sha256": "70c0b6376badae3dfcb4e3b34cf26e29a430548bf589505e16ce10cb704cd116",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Colombian FUDAM coffee title and growing association source identify FUDAM as the named group producing this lot, rather than inventing an individual farmer.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "1a61f172fa904755e0632e6be3247d9541d367e2c2711e87a13636bbf46e7662",
+          "capture_source_url": "https://beanstockcoffee.com/products/colombian-supremo-organic",
+          "quote": "FUDAM) is a 300-member association",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "beanstockcoffee-com__ethiopia-ayla-bombe-g1-natural-e4953428",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "beanstockcoffee-com",
+      "source_url": "https://beanstockcoffee.com/products/ethiopia-ayla-bombe-g1-natural",
+      "before_case_sha256": "99aab03184fd763aa64904247f94adbdee039c679b63e3b239d230622f0222c0",
+      "after_case_sha256": "26a1f077c4e71249089ceaa2dea9ae3eaba9052e0224514646325716add7e9e7",
+      "before_export_sha256": "9e396f515959b2b3251f478ebe1a4d31f178448e0968ae7cf183480ac14bdd51",
+      "after_export_sha256": "6082fbbcd0cf8bdd9fcdd8594ac3473675d3c19b7a78ad48ff65e5a1aead7a4d",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected product paragraph explicitly places green grape and jasmine before mild tangelo juiciness in the finish; the complete coordinated tasting description belongs to this coffee.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "df80720699965621ad6b2a033c1a8e38a3983d4ebde21f20691a9c755e72380a",
+          "capture_source_url": "https://beanstockcoffee.com/products/ethiopia-ayla-bombe-g1-natural",
+          "quote": "green grape and jasmine up front with mild tangelo juiciness in the finish",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "blackriverroasters-com__organic-honduras-comsa-d92176d0",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "blackriverroasters-com",
+      "source_url": "https://blackriverroasters.com/products/organic-honduras-comsa",
+      "before_case_sha256": "7d59d0aa2f7ac74ea430fadc6a581c6757fe32f6715a5b432bad40a64cf9f24a",
+      "after_case_sha256": "391fdbe1cc9042154b4f41dcfd374e91ff2ee572d0198508369d45eed77170fa",
+      "before_export_sha256": "baf806912bbb18cd17154cac9642a9e3d0286a92e6e4903ea0f0d5c7e9dc8723",
+      "after_export_sha256": "f5e0749d113106897ddc11277d6f31f0d914fabe22f96b2c6736238ede59b312",
+      "decision": "source_supported_improvement",
+      "rationale": "The current Honduras COMSA product directly describes raspberry, jam, cranberry and cherry as a single fruit-forward cup profile; there is no flavoring or unrelated product reference.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "137e8c87e7792ccc6564270431410aaf0266fe41f7f9fc63631d7cd4eecc6b4f",
+          "capture_source_url": "https://blackriverroasters.com/products/organic-honduras-comsa",
+          "quote": "raspberry, jam, cranberry and cherry",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__bali-78c10a5d",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "coffeeroasterlnk-com",
+      "source_url": "https://coffeeroasterlnk.com/products/bali",
+      "before_case_sha256": "0a11de1cc7609fb01b51e2e328d110f61e9046fafdca0758afbada72adf44a9d",
+      "after_case_sha256": "fbd689ae93f55fe63e34ac23af4bd74c82f4b404923bef2b3ffb69fdd81fa2bb",
+      "before_export_sha256": "68209c116146b2770fd2d713d82f1b63cf312705b605d586e29c2c99d6b3ebaf",
+      "after_export_sha256": "9bde194674b71b95e65cc94bef700ba3255bcf8b818cd9fe50e357bb6eda6c30",
+      "decision": "source_supported_improvement",
+      "rationale": "The original Bali Blue Moon product source explicitly says small family farms grow this current coffee in Bali; the unqualified group credit is preserved rather than guessing a named producer.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "3f49ba74f13b23a49497483ccfb1439f19786476ef3552808f8c649c3d37d16f",
+          "capture_source_url": "https://coffeeroasterlnk.com/products/bali",
+          "quote": "small family farms work a few acres",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__nicaragua-pumpkin-spice-pacamara-8272581d",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "coffeeroasterlnk-com",
+      "source_url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara",
+      "before_case_sha256": "29a9aea132b14fb80c35f4f74c8e16d34c3de50566dfbb42649053c8b3902f17",
+      "after_case_sha256": "bf4b854d7c9b26d938797213a2a7cbdc7aa0508fa576550068503310b144fa18",
+      "before_export_sha256": "ee89b9dd6c44a828fa5e4d029047d94e139aa54e883d8af2487c2eda418434c3",
+      "after_export_sha256": "bc05a4fd819430673d875ce6be79b568eb4d34c74b318512ef2d5d9a80d12e98",
+      "decision": "source_supported_improvement",
+      "rationale": "The Nicaragua Pacamara current product expressly attributes sealed cherries and doubled fermentation to Gold Mountain at the farm; it does not describe a different supplier or post-roast flavor addition.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "647ffd5e0de19f85b581441d0dfc54de6ef7415522c1e6f844ecf2fe3efa873e",
+          "capture_source_url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara",
+          "quote": "Gold Mountain sealed ripe Pacamara cherries",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "contemporoast-com__1201-blend-63a831d5",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "source_facts"
+      ],
+      "roaster_id": "contemporoast-com",
+      "source_url": "https://contemporoast.com/products/1201-blend",
+      "before_case_sha256": "7e28994d6aa90670df061eda199d88f14abad6bd8cfaf6f9650fbd2d43a46cab",
+      "after_case_sha256": "7db0d897a6c4dd28c8b97ffab8c9e1036322f73b0b77be5bd66efbf329425d90",
+      "before_export_sha256": "795ecac837a91bfd632de5fe28c67a1c17055fac8d18342707f7729e705a8d41",
+      "after_export_sha256": "94c697a6123213e44606a76121440b6fc73f4fcd28f117f987dcbcaa4bb1981a",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected 1201 Blend explicitly labels both coffee component regions Minas Gerais Brazil and Pitalito Huila Colombia, and its current-cup profile states a chocolatey finish after the caramel, peanut and red-fruit notes.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "b64e2ea7e5aaa938f06aa3ded28e9880299c5dc42f4112c62dfef2d699b65a46",
+          "capture_source_url": "https://contemporoast.com/products/1201-blend",
+          "quote": "Regions: Minas Gerais, Brazil",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "b64e2ea7e5aaa938f06aa3ded28e9880299c5dc42f4112c62dfef2d699b65a46",
+          "capture_source_url": "https://contemporoast.com/products/1201-blend",
+          "quote": "Pitalito, Huila, Colombia",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "b64e2ea7e5aaa938f06aa3ded28e9880299c5dc42f4112c62dfef2d699b65a46",
+          "capture_source_url": "https://contemporoast.com/products/1201-blend",
+          "quote": "chocolatey finish",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "dekaf-com__brazil-arabela-e2d6dc66",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "dekaf-com",
+      "source_url": "https://dekaf.com/products/brazil-arabela",
+      "before_case_sha256": "fff6534df6601eb2b1c7291adf48489b2b947c951cf03b6c726a73427e959b32",
+      "after_case_sha256": "2d3e8949ef65af67dc3b147db8cba80bd871e8093b19e7b63f948e93bb6399d1",
+      "before_export_sha256": "07639886a699f225d8eeb3e2daaf675426abe4b6d1af62bb186d2f3f6d5c6a41",
+      "after_export_sha256": "1feedf4ac17511a726935f309ba91b92af79d137f5afe2767053794eb99002f8",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Brazil Arabela narrative explicitly provides dried fig and graham cracker sensory descriptors as one coffee profile; this is not an unrelated product or conditional drink preparation.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "6be6e2197fe3d097d697fa716003154876dd1fbfb6691a5e29af594a17049e2b",
+          "capture_source_url": "https://dekaf.com/products/brazil-arabela",
+          "quote": "gentle dried fig notes",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "6be6e2197fe3d097d697fa716003154876dd1fbfb6691a5e29af594a17049e2b",
+          "capture_source_url": "https://dekaf.com/products/brazil-arabela",
+          "quote": "graham cracker essence",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "dekaf-com__colombia-papayo-e5125d1e",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "dekaf-com",
+      "source_url": "https://dekaf.com/products/colombia-papayo",
+      "before_case_sha256": "cf2d79fe5bae87f369d30b01e048b892cacc968bc38761e1244f1d8e5864d084",
+      "after_case_sha256": "33999011bff34d56dd55fe934d9e498251cf8140e772ff33d6e2d9717b21a8b6",
+      "before_export_sha256": "114c6096417d08c608e755b8127a6a657d751c9f84d31d68024ff7b59de90530",
+      "after_export_sha256": "c8d04dd5233fa819c7bb1b5b10d20919ad0f67029de50497f22e87dcc23536c2",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Colombia Papayo coffee expressly combines baking-spice notes, cherry-cobbler sweetness and a hint of red grape; all are current cup descriptions rather than preparation variants.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "068d856bbe9f882377673cba28debafe7b76b97d528203bfee64e3130e6a36f4",
+          "capture_source_url": "https://dekaf.com/products/colombia-papayo",
+          "quote": "lively baking spice notes",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "068d856bbe9f882377673cba28debafe7b76b97d528203bfee64e3130e6a36f4",
+          "capture_source_url": "https://dekaf.com/products/colombia-papayo",
+          "quote": "cherry cobbler sweetness",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "068d856bbe9f882377673cba28debafe7b76b97d528203bfee64e3130e6a36f4",
+          "capture_source_url": "https://dekaf.com/products/colombia-papayo",
+          "quote": "hint of red grape",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "ironcladcoffee-com__honduras-san-lazaro-ea54f0fa",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "ironcladcoffee-com",
+      "source_url": "https://ironcladcoffee.com/products/honduras-san-lazaro",
+      "before_case_sha256": "35f52ff1e8d5c1ab32234f4b5de5bd47f10b0e82093f83ebbc0523c3888218b6",
+      "after_case_sha256": "9a4341bd7aed1cc1061a3ce5661f094c16f2c12d6d76f46e94e5ae4ba7b48b93",
+      "before_export_sha256": "b77a355b2f2063890396d565fa1a8eb8c8a63544a714ff0e65bfd475e5b0ebef",
+      "after_export_sha256": "aa26141773334d05f38f23ad15a44747f4bcb740360719b11a3bb74cf5ea8ab8",
+      "decision": "source_supported_improvement",
+      "rationale": "The source prints what to expect from this coffee in 2023/24 before comparing with the previous harvest; the printed season pair is current despite the subsequent historical contrast.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "fdc5112c1fae0a0bcc9cb59bf554141b64215e99461763923d720c91872515ca",
+          "capture_source_url": "https://ironcladcoffee.com/products/honduras-san-lazaro",
+          "quote": "this coffee in 2023/24",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__coffee-111-4366f999",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "larryscoffee-com",
+      "source_url": "https://larryscoffee.com/products/coffee-111",
+      "before_case_sha256": "dd2c5c1c0e82c4f46e7c32b1df334f346220bee6f716bdca91ddef17b1dd47d1",
+      "after_case_sha256": "55538824c74f0adcd0c8650685fed85343b709fea1cf6d1171ada8ca68a696a6",
+      "before_export_sha256": "fc268445677736836930822842c42aa7b91e9774c8d4d52388874f0824de3762",
+      "after_export_sha256": "afa911935b2b8b3eee31cd8204ece9562ca9afc97f100bea30ced7c77d40319e",
+      "decision": "source_supported_improvement",
+      "rationale": "The current Ethiopia Dehab Diamond description names Dehab Bitewlign and directly says she is a coffee producer, with farming context for this lot. No other person is substituted.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "7942b3feea7577a7db835df33e5821e54c5af20efff6fa36d2944245c4b365b5",
+          "capture_source_url": "https://larryscoffee.com/products/coffee-111",
+          "quote": "Dehab Bitewlign",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "7942b3feea7577a7db835df33e5821e54c5af20efff6fa36d2944245c4b365b5",
+          "capture_source_url": "https://larryscoffee.com/products/coffee-111",
+          "quote": "most recently an amazing coffee producer",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "mapscoffee-com__scarlet-macaw-d7315aa3",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "fields",
+        "roaster_details"
+      ],
+      "roaster_id": "mapscoffee-com",
+      "source_url": "https://mapscoffee.com/products/scarlet-macaw",
+      "before_case_sha256": "6bd7ce8e49fe23a38c3c20232ad46e02bed5c3b404565028a6afe40bb3346ae2",
+      "after_case_sha256": "64dfa920dbf7d79bbfd69493c0c84612a3167e921768e7b944e2faf9bddb3a81",
+      "before_export_sha256": "861d57d52e8fabaad1a50e1464c2358223b40daca47da546b52e7b71e069bf33",
+      "after_export_sha256": "185b182d844caca875803bf1f19d6991d43ebf4745419381f3a3d02004c39f80",
+      "decision": "source_supported_improvement",
+      "rationale": "The Scarlet Macaw source states that its current selected lot originates in Pacavita Honduras and credits Silvestre Vasquez and Joel Lopez as the two contributing current producers, not an earlier lot.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "a3de59a055b4bb959d809b352f505ed99979d485862759843a76a94b86e64faa",
+          "capture_source_url": "https://mapscoffee.com/products/scarlet-macaw",
+          "quote": "Silvestre Vasquez and Joel Lopez",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "a3de59a055b4bb959d809b352f505ed99979d485862759843a76a94b86e64faa",
+          "capture_source_url": "https://mapscoffee.com/products/scarlet-macaw",
+          "quote": "Pacavita",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "mauicoffeeroasters-com__fresh-trades-8oz-d0540271",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "mauicoffeeroasters-com",
+      "source_url": "https://mauicoffeeroasters.com/products/fresh-trades-8oz",
+      "before_case_sha256": "7ad4e8c7b0b19446662281f28581927b9d124a32c5c3511cd346c493dfab76e7",
+      "after_case_sha256": "16474ac3199b3e7dd1fd19c6d550f5c9a5c36e3f0e3cd4ae05b907e3f8af42a3",
+      "before_export_sha256": "0111eb83662b85fff100b80d7e1f416ba55f10132e7ab1b473d837f8358c0bf4",
+      "after_export_sha256": "42b074ac9c5990b258b2ffac552b38b41fe04cca1fbe060e0aafca8f7d6495cb",
+      "decision": "source_supported_improvement",
+      "rationale": "The current Fresh Trades single-origin Guatemala cup description literally lists cola-like sweetness and buttery undertones and a second sweetness description; no unrelated merchandise or process is promoted.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "b0838fd8e176ecc8276468bffd64add350ff7684efb9afa34057e7fbb705824a",
+          "capture_source_url": "https://mauicoffeeroasters.com/products/fresh-trades-8oz",
+          "quote": "cola-like sweetness, buttery undertones, and a delightful sweetness",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "onyxcoffeelab-com__mexico-finca-santa-cruz-gesha-bd946347",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "fields"
+      ],
+      "roaster_id": "onyxcoffeelab-com",
+      "source_url": "https://onyxcoffeelab.com/products/mexico-finca-santa-cruz-gesha",
+      "before_case_sha256": "4b27650dd342f7e16b1d1949b406c880f65fb157b1896e8e72d9a8c04f30b501",
+      "after_case_sha256": "04ef047743bcfd22f603213b949c67626a155106826c24f624a06ce4c1a4c0a1",
+      "before_export_sha256": "c37c3b3c28a8e6165e74e1a60703a0dda7949bc3f0dad69a6695d88f7f179655",
+      "after_export_sha256": "8cebe0f88d16c8ee721711d1a36a73a372123baaa46ee52dd92ce850a4c6c612",
+      "decision": "source_supported_improvement",
+      "rationale": "The Onyx selected Mexico Finca Santa Cruz source explicitly locates the growing farm in Chiapas Mexico; Mexico Cup of Excellence is an award, never a source subregion.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "11885c7e5616224d27f9d7a9c3c3ac197e5ace4a92c233304c31ffeb65398fdc",
+          "capture_source_url": "https://onyxcoffeelab.com/products/mexico-finca-santa-cruz-gesha",
+          "quote": "Located in the mountains of Chiapas, Mexico",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "vestacoffee-com__kamwangi-kenya-cbf1ab54",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "vestacoffee-com",
+      "source_url": "https://vestacoffee.com/products/kamwangi-kenya",
+      "before_case_sha256": "8f9d46af21c44de0d82a8c793b70a6ba12a5735a0a057f6861ec6e6d83071b71",
+      "after_case_sha256": "c9d08e9d7e2f71ae3a3cbaac7fb27b809efe72d6e018bd1e3303fca9fed9bd1c",
+      "before_export_sha256": "05170fc1f709e9fb445e09346e56842ab0acf6c363a385a4bf2ca7a9ab5a1672",
+      "after_export_sha256": "f419c2ef320fc0462e737b216976fb74661dfeaf6e402b61207447959bf83269",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Kamwangi coffee source explicitly says the washing station is managed by New Ngariama Farmers Cooperative Society; the accompanying source parenthetical is literal contextual text, not a second producer.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "de0c90f9b76fbfd83730d83854265b2d0b48662ff9f93c6819bcebb76c8b9667",
+          "capture_source_url": "https://vestacoffee.com/products/kamwangi-kenya",
+          "quote": "New Ngariama Farmers",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "vtartisan-com__sumatra-gayo-2f774ec2",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "vtartisan-com",
+      "source_url": "https://vtartisan.com/products/sumatra-gayo",
+      "before_case_sha256": "f94c40ed8c3e85ff86f13b5b70163e7ee5765465c22281cf558e30b7ac6f011b",
+      "after_case_sha256": "bb94393cc8846c3b8e4eae2df0d49ee8d5f256a473e590ace1b9c701a23c2a6a",
+      "before_export_sha256": "a1e7567eda9ce2bbe35889fd67d79ed1b5f031e742965a6f7b6636256adfa510",
+      "after_export_sha256": "a592beea85630b9b601617785a244a81dca339fa42202b598bfc5480a8c903c0",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Sumatra Gayo coffee body describes its own wet-hulled beans as chocolaty, licorice-like and earthy, not a recipe additive or historical comparison.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "e6c2ffa27e76f97d6bbd25f211bce2b6e8f2d41bfb3308e5266581ab99aab0a9",
+          "capture_source_url": "https://vtartisan.com/products/sumatra-gayo",
+          "quote": "chocolaty, licorice-like with bold, earthy undertones",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-alaskaartisancoffee-com__black-fog-rising-b7b1bac1",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "www-alaskaartisancoffee-com",
+      "source_url": "https://www.alaskaartisancoffee.com/products/black-fog-rising",
+      "before_case_sha256": "15988df43047d02318a10d113e8669f6373f23b63c7a69f4422b6267c6ee2e43",
+      "after_case_sha256": "19eb759b16f3aa5ed9bc03c897755aaabe16d814fc4f779eef5f4c83ffa97c58",
+      "before_export_sha256": "7a45a793e859ac084c8d800806d0f4f36d34aaf6d87e3d2674ad0b15383b4563",
+      "after_export_sha256": "3a6e6175baa5b2a0f3e4e30f8aa0f12cb41a34c96b8b98253a4b581af48f8044",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Black Fog Rising blend description explicitly says the Black Satin milk chocolate notes pair with the roasted cacao nib notes of its other constituent, a combined current blend profile.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "bb8c5b4e4b244aa331d452ecb9f353394e457d7e430ff88ab75b65781966cba1",
+          "capture_source_url": "https://www.alaskaartisancoffee.com/products/black-fog-rising",
+          "quote": "milk chocolate notes of the Black Satin pair perfectly with the notes of roasted cacao nibs",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-aldeacoffee-com__ruth-reyes-naturally-processed-6c9444a7",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available"
+      ],
+      "roaster_id": "www-aldeacoffee-com",
+      "source_url": "https://www.aldeacoffee.com/products/ruth-reyes-naturally-processed",
+      "before_case_sha256": "b5a9f3d99feea3af11a459b0613b3425e92d3f4646775325bc1b6a523b273d31",
+      "after_case_sha256": "1c3602bc626f0becd3c7c52eb43f36ec6e71b749b8401abdfec1fed6b5b44c17",
+      "before_export_sha256": "89b4f9e79884d63a52516ec3e9279ecacc0d519af028037fec0ea5007bea995a",
+      "after_export_sha256": "89b4f9e79884d63a52516ec3e9279ecacc0d519af028037fec0ea5007bea995a",
+      "decision": "source_supported_improvement",
+      "rationale": "The original Ruth Reyes selected product is identical before and after apart from the ordering of the available field names; source selection, stored values and exports do not introduce a new fact.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "c1f173e621153adf59b2cf8d87451fb2d163816a8fb2c01baa707a41c187de72",
+          "capture_source_url": "https://www.aldeacoffee.com/products/ruth-reyes-naturally-processed",
+          "quote": "Ruth Reyes",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-altaroasters-com__kirima-batian-othaya-nyeri-kenya-12oz-bag-b814c94e",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "www-altaroasters-com",
+      "source_url": "https://www.altaroasters.com/products/kirima-batian-othaya-nyeri-kenya-12oz-bag",
+      "before_case_sha256": "cb652b33ee27e0051ad34a7cb351d04689ada83b66327f826ba40b5f900d63c9",
+      "after_case_sha256": "f075c2d8f5a2da757284f974bfd30fc4289392b940fa27505f964fdd007e27eb",
+      "before_export_sha256": "eac3d27058a1d8ef7e7594e9616c8b0f9bd85a87678cd16286afa19de99039c4",
+      "after_export_sha256": "f6cb331845c62d4a69f51e20a628314f0b2df598277504547bd02684ad3202e5",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Kirima Batian title and current lot geography explicitly print Othaya Nyeri Kenya, while the same selected text attributes the Kiaguthu station to Othaya Farmers Cooperative Society; AA is a bean grade, not a region.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "13c999a86fa405e32813d2e7a685575bfd3d444c15d28d24af0d46d50f345f7e",
+          "capture_source_url": "https://www.altaroasters.com/products/kirima-batian-othaya-nyeri-kenya-12oz-bag",
+          "quote": "Othaya Farmers Cooperative Society",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "13c999a86fa405e32813d2e7a685575bfd3d444c15d28d24af0d46d50f345f7e",
+          "capture_source_url": "https://www.altaroasters.com/products/kirima-batian-othaya-nyeri-kenya-12oz-bag",
+          "quote": "Othaya, Nyeri, Kenya",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-altaroasters-com__nevado-gona-colombia-12oz-bag-1aa5407f",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "fields"
+      ],
+      "roaster_id": "www-altaroasters-com",
+      "source_url": "https://www.altaroasters.com/products/nevado-gona-colombia-12oz-bag",
+      "before_case_sha256": "6336a047d73a722457518557d73699defec8ceb04af54ccbbf837d6651c78040",
+      "after_case_sha256": "eeda006339b3d5ae525253e47ba0243a47315733e78b73fe57988d5c06f57511",
+      "before_export_sha256": "34f7fc6d8dee4469ed7e999e4ec4cf4280f656a935db091cd5ae6da70045f91b",
+      "after_export_sha256": "a95a682bd11bdb6b305ad9063cd878b0b7ef6bdd115aff5ae1d12986269e6669",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Nevado Gona source explicitly says that this coffee is grown in Sierra Nevada de Santa Marta Colombia, while San Jose de Oriente is only a nearby social-program location and is not the current growing origin.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "2ac656de8012b5683799eb49eb87d2fc642e36e53077c5aaecd03dba02d9b2be",
+          "capture_source_url": "https://www.altaroasters.com/products/nevado-gona-colombia-12oz-bag",
+          "quote": "Nevado Gona is grown organically high in the Sierra Nevada de Santa Marta",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "www-ketchcoffee-com",
+      "source_url": "https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process",
+      "before_case_sha256": "3b802696770b0ce141776e16024c87d75a6a415d759b8a2e68a4d1e627dcf1ba",
+      "after_case_sha256": "81db07ce7d60d6eaacc5e17aee486bb6fd7e98c4093d437f52d25e8db67876dc",
+      "before_export_sha256": "e82570d92d3888c6337098b6a94414a7fd9e8de5446fa65941d5238eeca0137e",
+      "after_export_sha256": "1ab40b42791468c5798ba8b8501872f2c59a7e7b6ae22f22f95548c8d50ea9eb",
+      "decision": "source_supported_improvement",
+      "rationale": "The current Ketch Honduras coffee explicitly calls blackberry its dominant tasting note; separate roast-variant narratives include additional descriptors but do not supersede the unqualified dominant blackberry.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "4d5733cd1db21931369ee82a4b43a8151e055fa7bd70bd3a5aafd665dbbca9c6",
+          "capture_source_url": "https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process",
+          "quote": "The dominant flavor note of this coffee that we taste is blackberry",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-limacoffeeroasters-com__kenya-kichwa-tembo-0224337e",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "roaster_details"
+      ],
+      "roaster_id": "www-limacoffeeroasters-com",
+      "source_url": "https://www.limacoffeeroasters.com/products/kenya-kichwa-tembo",
+      "before_case_sha256": "74b5f685854f065fa5a3364516f282f434e2df9d4011e6560429e03a8dd0f696",
+      "after_case_sha256": "4f18c69c77d5fadfdf1e61eb0c85a18bebd0a539bba246d6f20f580aa69ca1b2",
+      "before_export_sha256": "0aa1c36c3242d43bcbf9965885cc5286d0775ad042ecf04f15ee5c99a6ff55cd",
+      "after_export_sha256": "3e4e53a0905035def197d0df71610ad63b9e454e332030fce8e2d565708215ce",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Lima Kichwa Tembo source identifies Gikirima Factory as operated by Kibugu Farmers Cooperative Society in Embu County. This is an attributed roaster detail, not a newly promoted unrelated coffee origin.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "3d22db1ac1346e3de4259a0876e7457233e455ef2cd0ac60bf63c03aa8502a12",
+          "capture_source_url": "https://www.limacoffeeroasters.com/products/kenya-kichwa-tembo",
+          "quote": "Kibugu Farmers Cooperative Society (FCS) in Embu County",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-nunatakcoffee-com__blends-1d496695",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "fields"
+      ],
+      "roaster_id": "www-nunatakcoffee-com",
+      "source_url": "https://www.nunatakcoffee.com/products/blends",
+      "before_case_sha256": "a1bb53d265d64805613f1a6d945f5c4b89bf8112dbb91c5de529fced449420f8",
+      "after_case_sha256": "d1d96cff6a36c7ec27167a771c926b92630b454944cc42b2143b203447be4b9b",
+      "before_export_sha256": "7bce793dde8977dc2e5004a49296211fbc9d73298ca6c755731ca0978d7b00a0",
+      "after_export_sha256": "ebe05319e566706ac11d6a87ae5991606af765b041199352a76f3ede9df352ae",
+      "decision": "source_supported_improvement",
+      "rationale": "The current Nunatak Wild blend source explicitly connects jammy blueberry Ethiopia notes with sweet pepper and ginger-like spice from its Sumatra component. Both are current blend constituents, not independent products.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "72fbe5cd480ab6dee7fe9cff7da83c944912a4f69be2be8ce93c1acab9216884",
+          "capture_source_url": "https://www.nunatakcoffee.com/products/blends",
+          "quote": "Jammy blueberry notes of our natural Ethiopia",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "72fbe5cd480ab6dee7fe9cff7da83c944912a4f69be2be8ce93c1acab9216884",
+          "capture_source_url": "https://www.nunatakcoffee.com/products/blends",
+          "quote": "sweet pepper and subtle, ginger-like spice from our Sumatra",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-nunatakcoffee-com__raven-espresso-8fe55e93",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "www-nunatakcoffee-com",
+      "source_url": "https://www.nunatakcoffee.com/products/raven-espresso",
+      "before_case_sha256": "2dd1f970696b039dcce9099ee8e9a9d25c13a57686d1d6d006375b78d113845c",
+      "after_case_sha256": "9e945156bebed7c17742d76a123cc26252c25230dd7587eeba1e96a472c68956",
+      "before_export_sha256": "955eecbb90866557e9d9443707ace4d0860a5b3aac7af6b83967433b8100019f",
+      "after_export_sha256": "320b0f5d09c70d94aa513a0cc724c77bf3570a1933038737af7483d45361e494",
+      "decision": "source_supported_improvement",
+      "rationale": "The current Nunatak Raven Espresso text describes a straight-shot balance of dark chocolate sweetness, nuttiness and a bright finish, and separates later milk-dependent notes that must not enter the unconditional profile.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "0a619eddbd2635414f7eaf0ad40a85077ecdee952435c064e046383fdf08a9d9",
+          "capture_source_url": "https://www.nunatakcoffee.com/products/raven-espresso",
+          "quote": "They begin with a profound dark chocolate sweetness",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "0a619eddbd2635414f7eaf0ad40a85077ecdee952435c064e046383fdf08a9d9",
+          "capture_source_url": "https://www.nunatakcoffee.com/products/raven-espresso",
+          "quote": "velvet-like nuttiness",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "0a619eddbd2635414f7eaf0ad40a85077ecdee952435c064e046383fdf08a9d9",
+          "capture_source_url": "https://www.nunatakcoffee.com/products/raven-espresso",
+          "quote": "bright effervescent finish",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "www-vailcoffee-com__ethiopian-yirgacheff-d46602a2",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "fields",
+        "roaster_details"
+      ],
+      "roaster_id": "www-vailcoffee-com",
+      "source_url": "https://www.vailcoffee.com/products/ethiopian-yirgacheff",
+      "before_case_sha256": "3a422f6266239c4653b19c5376b117c392dadb757a5f814ae5353c32df7ea871",
+      "after_case_sha256": "eb6f72b25e64850e622680a8dfc7584b6e1351ed9b133ffa175a11c59a678074",
+      "before_export_sha256": "02976582cd4f8d7e31f0b367c2cd46f36bde682083c840889d9563913f5db882",
+      "after_export_sha256": "32a9472c7444cc267015bae8e760525335721cd8c9aecdd42a04ac29cc4c4be5",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Vail Ethiopia Guji G1 product names Buku Sayisa as the washing station operating the coffee processing, while small family farms are contributor context; source identity is not guessed from unrelated metadata.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "e3f65f56c62a72bfd3d69b2da2b7553f9942c488b6dec85ee0e870db1c854c6c",
+          "capture_source_url": "https://www.vailcoffee.com/products/ethiopian-yirgacheff",
+          "quote": "Buku Sayisa, located in West Guji, is a washing station",
+          "quote_basis": "literal_capture"
+        }
+      ]
+    }
+  ]
+}
