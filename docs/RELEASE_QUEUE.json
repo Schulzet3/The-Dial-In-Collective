@@ -121,6 +121,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
       "notes": "No UI, SQL or public API changes, no deployment. This is a narrow issue #10 reliability slice; broader candidate/confirmation lifecycle, same-ratio significance and hosted multi-family scenarios remain open. Preserve the two existing independently READY queue items. Includes pending SQL migration 20261024021000; release dependency requires an authorized, exact-source production migration; existing READY queue items unchanged. Isolated source READY for separately approved release; pending migration 20261024021000 is NOT APPLIED hosted. Issue #10 remains OPEN for genuine hosted two-family acceptance and cross-cutting #12/#13. Queued READY does not claim hosted user acceptance or production deployment."
+    },
+    {
+      "id": "DIC-Q-5-source-fact-integrity",
+      "issue": 5,
+      "pr": 105,
+      "title": "Trusted source rejects conflicting origin/producer metadata",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/functions/dic-verify-coffee/evidence.mjs",
+        "supabase/migrations/20261024020500_dic_source_target_producer.sql"
+      ],
+      "tests": [
+        "Targeted source conflict and rollback-only SQL producer tests added, pending exact-source CI; reuse existing source worker, role/revision/release and identity-preservation tests."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source Node and isolated SQL CI, approval/coverage checks and nonforce merge/readback pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5",
+      "notes": "Staged only; source metadata fact integrity. No production SQL/Edge change or publication. Existing member data and source provenance protected."
     }
   ],
   "history": [

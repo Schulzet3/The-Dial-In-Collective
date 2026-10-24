@@ -177,3 +177,28 @@ test('Pending official-source retry uses authenticated stored owner submission',
  assert.match(source,/submission\.status!=='pending'/);
  assert.doesNotMatch(source,/dic_trusted_source_verify/);
 });
+
+
+test('official product facts cannot certify conflicting origin or producer',()=>{
+ const product=(properties)=>'<script type="application/ld+json">'+JSON.stringify({
+  '@type':'Product',name:'Wuri',url:'https://sweetbloomcoffee.com/products/wuri',
+  additionalProperty:properties.map(([name,value])=>({name,value}))
+ })+'</script>';
+ const page=product([['Origin','Gedeb, Ethiopia'],['Producer','Wuri Washing Station'],['Process','Washed']]);
+ const entry={name:'Wuri',source_url:'https://sweetbloomcoffee.com/products/wuri',
+  origin:'Ethiopia',producer:'Wuri Washing Station',process:'Washed'};
+ const ok=extractOfficialEvidence(page,entry);
+ assert.equal(ok.ok,true);
+ assert.equal(ok.verified_fields.origin,'Gedeb, Ethiopia');
+ assert.equal(ok.verified_fields.producer,'Wuri Washing Station');
+ assert.equal(extractOfficialEvidence(page,{...entry,origin:'Huila, Colombia'}).reason,'origin_conflict');
+ assert.equal(extractOfficialEvidence(page,{...entry,origin:'Huila, Ethiopia'}).reason,'origin_conflict');
+ assert.equal(extractOfficialEvidence(page,{...entry,producer:'Different Farm'}).reason,'producer_conflict');
+ assert.equal(extractOfficialEvidence(page,{...entry,process:'Natural'}).reason,'process_conflict');
+ assert.equal(extractOfficialEvidence(page,{...entry,origin:'Gedeb, Ethiopia'}).ok,true);
+ assert.equal(extractOfficialEvidence(product([['Origin','Ethiopia'],['Origin','Colombia']]),entry).reason,'ambiguous_product_facts');
+ const unknown=extractOfficialEvidence(product([]),entry);
+ assert.equal(unknown.ok,true);
+ assert.equal('origin' in unknown.verified_fields,false);
+ assert.equal('producer' in unknown.verified_fields,false);
+});
