@@ -15,6 +15,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {coffeeHtmlAttributes} from '../../src/server/coffee-product-scope.mjs';
+import {sanitizeJson} from './coffee-public-json-sanitizer.mjs';
 import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
@@ -86,78 +87,14 @@ const publicUrl=raw=>{
  }catch{return '';}
 };
 const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
-const safeSummary=value=>({sha256:sha(JSON.stringify(value)),type:Array.isArray(value)?'array':value===null?'null':typeof value,
- count:Array.isArray(value)?value.length:undefined});
 function fixtureDifference(original,replay){
- const sections=['ok','fields','available','roaster_recipe','roaster_details','conflicts','source_facts','source_facts_truncated',
-  'roast_hint','roast_source','elevation_source','producer_source','process_source','variety_source'];
- const changed=sections.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key]));
- const factId=fact=>sha(JSON.stringify(fact));
- const before=original?.source_facts||[],after=replay?.source_facts||[];
- const remaining=new Map();for(const fact of after){const id=factId(fact);remaining.set(id,(remaining.get(id)||0)+1);}
- const missing=[];for(const fact of before){const id=factId(fact),count=remaining.get(id)||0;
-  if(count)remaining.set(id,count-1);else missing.push(fact);}
- const labels=missing.slice(0,12).map(fact=>({
-  section:sensitiveKey.test(String(fact.section||''))?'redacted':String(fact.section||'').slice(0,45),
-  label:sensitiveKey.test(String(fact.label||''))?'redacted':String(fact.label||'').slice(0,65),
-  field:fact.field||null,source_type:fact.source_type||null}));
- return {changed_sections:changed,canonical_fields_equal:isDeepStrictEqual(original?.fields,replay?.fields),
+ const parts=['ok','fields','available','roaster_recipe','roaster_details','conflicts','source_facts',
+ 'source_facts_truncated','roast_hint','roast_source','elevation_source','producer_source','process_source','variety_source'];
+ return {changed_sections:parts.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key])),
+  canonical_fields_equal:isDeepStrictEqual(original?.fields,replay?.fields),
   conflicts_equal:isDeepStrictEqual(original?.conflicts,replay?.conflicts),
   recipes_equal:isDeepStrictEqual(original?.roaster_recipe,replay?.roaster_recipe),
-  original_facts:before.length,fixture_facts:after.length,
-  missing_exact_fact_count:missing.length,missing_fact_labels:labels,
-  differing_fact_shapes:missing.slice(0,12).map(fact=>{const counterpart=after.find(x=>x.label===fact.label&&x.source_path===fact.source_path);return {
-   label:fact.label,source_path:fact.source_path||null,
-   original_keys:Object.keys(fact).sort(),replay_keys:counterpart?Object.keys(counterpart).sort():[],
-   original_value_type:typeof fact.value,replay_value_type:typeof counterpart?.value,
-   original_value_keys:fact.value&&typeof fact.value==='object'?Object.keys(fact.value).sort():null,
-   replay_value_keys:counterpart?.value&&typeof counterpart.value==='object'?Object.keys(counterpart.value).sort():null,
-   original_value_sha:sha(JSON.stringify(fact.value)),replay_value_sha:sha(JSON.stringify(counterpart?.value)),
-   parsed_json_equal:(()=>{try{return isDeepStrictEqual(JSON.parse(fact.value),JSON.parse(counterpart?.value));}catch{return false;}})(),
-   normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(fact.value)));}catch{return null;}})(),
-   replay_normalized_json_sha:(()=>{try{return sha(JSON.stringify(JSON.parse(counterpart?.value)));}catch{return null;}})(),
-   nested_offer_difference_paths:(()=>{try{
-     const before=JSON.parse(fact.value)?.offers,after=JSON.parse(counterpart.value)?.offers;
-     const paths=[],walk=(a,b,p,depth)=>{
-       if(depth>5||paths.length>20||isDeepStrictEqual(a,b))return;
-       if(a&&b&&typeof a==='object'&&typeof b==='object'){
-         for(const k of new Set([...Object.keys(a),...Object.keys(b)]))
-           walk(a[k],b[k],p+'/'+(/^[A-Za-z][A-Za-z0-9_]{0,40}$/.test(k)?k:'[nonstandard_key]'),depth+1);
-       }else paths.push({path:p,before_present:a!==undefined,after_present:b!==undefined,
-         before_type:typeof a,after_type:typeof b});
-     };walk(before,after,'offers',0);return paths;
-   }catch{return ['parse_error'];}})(),
-   json_difference_keys:(()=>{try{
-    const a=JSON.parse(fact.value),b=JSON.parse(counterpart.value);
-    if(!a||!b||typeof a!=='object'||typeof b!=='object')return [];
-    return [...new Set([...Object.keys(a),...Object.keys(b)])].filter(k=>!isDeepStrictEqual(a[k],b[k])).map(k=>({
-      key:sensitiveKey.test(k)?'redacted_sensitive_key':k,
-      before_present:Object.hasOwn(a,k),after_present:Object.hasOwn(b,k),
-      before_type:typeof a[k],after_type:typeof b[k]
-    })).slice(0,20);
-   }catch{return ['parse_error'];}})()
-   };}),
-  prior_digest:safeSummary(original).sha256,fixture_digest:safeSummary(replay).sha256};
-}
-
-function publicCheckoutTemplate(value,sourceUrl){
- if(typeof value!=='string'||value.length>600||!sourceUrl)return false;
- try{
-  const source=new URL(sourceUrl),url=new URL(value,source);
-  if(source.protocol!=='https:'||url.protocol!=='https:'||url.hostname!==source.hostname||
-   url.username||url.password||url.port||url.hash)return false;
-  // Only a roaster-local public shopping cart template, not a private
-  // customer checkout, bearer capability, email or session-bearing link.
-  if(!/^\/cart\//i.test(url.pathname)||/[?&](?:token|secret|session|customer|email|checkout|auth|key)=/i.test(url.search))
-   return false;
-  return true;
- }catch{return false;}
-}
-function sanitizeJson(value,sourceUrl){
- return JSON.stringify(value,(key,item)=>{
-  if(key==='checkoutPageURLTemplate'&&publicCheckoutTemplate(item,sourceUrl))return item;
-  return sensitiveKey.test(key)?undefined:item;
- }).replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
+  original_facts:original?.source_facts?.length||0,fixture_facts:replay?.source_facts?.length||0};
 }
 function fixtureHtml(html,sourceUrl){
  const compact=compactCoffeeProductHtml(html);
@@ -190,42 +127,6 @@ function fixtureHtml(html,sourceUrl){
   .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
   .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
   .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
-}
-
-function fixtureStageDiagnostics(html,sourceUrl,original){
- const compact=compactCoffeeProductHtml(html);
- const chunks=[];let cursor=0;
- for(const block of rawElements(compact)){
-  chunks.push(compact.slice(cursor,block.start));
-  const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
-  if(type&&block.closed){
-   const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   // Preserve only the static product-script discriminator. The parser uses
-   // attribute identity to recognize a selected-product JSON block; dropping
-   // it silently loses variant and conflicting source evidence.
-   const productMarker=/product/i.test(JSON.stringify(coffeeHtmlAttributes(block.attributes)))?
-    ' data-public-product-context="product"':'';
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body),sourceUrl)+'</script>');}
-   catch{}
-  }
-  cursor=block.end;
- }
- chunks.push(compact.slice(cursor));
- const scripts=chunks.join('');
- const controls=removeElements(scripts,['iframe','noscript','select','textarea']);
- const formless=controls.replace(/<\/?form\b[^<>]{0,8000}>/gi,' ');
- const inputless=controls.replace(/<input\b[^<>]{0,4000}>/gi,'');
- const safeAttrs=s=>s
-  .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
-  .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
-  .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
- const stages=[['json_script_rewrite_only',scripts],['drop_form_controls',controls],
-  ['drop_form_shell',formless],['drop_inputs',inputless],['privacy_attr_guards',safeAttrs(controls)],
-  ['privacy_form_shell',safeAttrs(formless)],['privacy_inputs',safeAttrs(inputless)]];
- return stages.map(([step,fixture])=>{
-  const replay=extractPublicCoffeeFacts(fixture,{source_url:sourceUrl});
-  return {step,parity:isDeepStrictEqual(original,replay),...fixtureDifference(original,replay)};
- });
 }
 
 function assess(target,result){
@@ -308,7 +209,6 @@ async function probe(target){
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
    if(!record.sanitization_preserves_html_extraction){
     record.sanitization_difference=fixtureDifference(original,replay);
-    record.sanitization_stages=fixtureStageDiagnostics(result.html,result.source_url||url,original);
    }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){

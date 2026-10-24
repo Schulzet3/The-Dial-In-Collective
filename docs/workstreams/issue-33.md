@@ -1,3 +1,8 @@
+## October 24 UTC — Issue #33 reusable no-secret sanitizer regressions
+Acceptance run 40065911894 PASSED all ten live targets with zero source gaps after restoring selected-product JSON identity and the same-roaster public cart URL template. Extractor app runtime and frozen 603 oracle were untouched. Refactored the narrow JSON sanitizer into a testable ESM helper and added four Node positive/negative regressions: published variant parity, private account/token stripping, HTTPS/same-roaster/path bounds, nested sensitive fields. Removed exploratory per-stage key diagnostics; maintain strict full-extraction comparison and only safe summarized failure evidence. Subsequent exact-source CI and non-force integration required before queue READY; [dic-completeness-probe] [skip netlify]. No deployment or paid service.
+
+---
+
 ## October 24 UTC — immediate syntax repair
 40065866614 caught invalid regex flags in the newly added narrow cart path guard before executing acceptance. Corrected escaped regex source and reran; previous changes remain test-only. Same commit journal update, no other runtime/provider change. [dic-completeness-probe]
 
