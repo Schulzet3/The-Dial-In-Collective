@@ -4,8 +4,8 @@ import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {extractProductFlavorEvidence} from '../src/server/coffee-flavor-evidence.mjs';
 import {extractShopifyAjaxData,shopifyProductRequest} from '../src/server/coffee-shopify-ajax.mjs';
 
-const source_url='https://roaster.example/products/current-coffee';
-const other_url='https://roaster.example/products/another-coffee';
+const source_url='https://roaster.examplecoffee.com/products/current-coffee';
+const other_url='https://roaster.examplecoffee.com/products/another-coffee';
 const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const clean=(value,max=6000)=>String(value).replace(/<[^<>]*>/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim().slice(0,max);
 const page=(name,body,head='')=>head+'<main><h1>'+escape(name)+'</h1>'+body+'</main>';
@@ -37,7 +37,9 @@ const cases=[
 for(const entry of cases)test('selected literal sensory relationship: '+entry.name,()=>{
  const visible=parse(entry.name,'<p>'+escape(entry.source)+'</p>');
  const structured=parse(entry.name,'',product({'@type':'Product',name:entry.name,url:source_url,description:entry.source}));
- const endpoint=extractShopifyAjaxData({title:entry.name,handle:'current-coffee',description:'<p>'+escape(entry.source)+'</p>'},shopifyProductRequest(source_url));
+ const request=shopifyProductRequest(source_url);
+ assert.ok(request,'The public-shaped synthetic Shopify URL must pass the real URL guard; no request is fetched.');
+ const endpoint=extractShopifyAjaxData({title:entry.name,handle:'current-coffee',description:'<p>'+escape(entry.source)+'</p>'},request);
  for(const result of [visible,structured,endpoint]){
   assert.equal(result?.ok,true);
   assert.equal(result.fields.tasting_notes,entry.notes);

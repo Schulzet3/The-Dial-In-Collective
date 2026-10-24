@@ -279,9 +279,9 @@
     },
     {
       "path": "tests/coffee-literal-sensory-residuals.test.mjs",
-      "bytes": 16510,
-      "sha256": "b210283cb09e78464e32fa829feb0e56a1e30c57f03e038826dea6ce9981d9bb",
-      "git_blob_sha": "2d451044b94610fd45c365e8b17d827f33010dcf"
+      "bytes": 16670,
+      "sha256": "f31bda09e661622f0590727c4ff610042e40320c0dbd1af3a6cd91f66729e84d",
+      "git_blob_sha": "190a907f1ab6d53239b2c61dd1dadbb4eb0be931"
     },
     {
       "path": "tests/coffee-live-fixture-sanitization.test.mjs",
@@ -417,7 +417,7 @@
     "repaired_source": "Only unconditionalFlavorPrefix changed; both additive and semicolon boundaries preserve the original earlier prefix.",
     "fresh_actual_checks": "PENDING"
   },
-  "revised_at": "2026-10-24 06:46:41 UTC",
+  "revised_at": "2026-10-24 06:51:02 UTC",
   "first_completed_followup_runtime": {
     "source_commit": "92cd74d6da008b8186f381b57aaa09a10a43cc88",
     "source_tree": "3d73c90ff6d2707d15aba38fa07ff7f99e9bfc75",
@@ -472,5 +472,13 @@
     "runner_controls_prepared": 41,
     "existing_reader_controls": 9,
     "source_improvement_gains_claimed": false
+  },
+  "test_fixture_correction": {
+    "source_commit": "b23602ee91361e921be3d805cc34610c52c33e60",
+    "cloud_run_id": 40071601697,
+    "reason": "Actual safeCoffeeUrl rejects the synthetic .example TLD. The restricted V8 URL-policy stub admitted it. The metadata success contract is valid; every existing success/field/conflict/source assertion remains intact.",
+    "change": "Use the existing repository public-shaped fixture domain roaster.examplecoffee.com and assert the Shopify request descriptor is nonnull. No network is fetched by this unit fixture.",
+    "runtime_changed": false,
+    "new_hosted_checks": "PENDING"
   }
 }
