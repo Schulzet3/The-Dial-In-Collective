@@ -1,6 +1,30 @@
-## October 24 2026: #10 Community source integration merged; provenance completion TESTING
+## October23,2026 MDT: extractor PR109 reconciled with Community source9135e06
 
-PR108 independently tested and merged at 9135e06dfe29da3caa0d3820e7eb8c003634ef29 with all five merged-source CI checks passing. Community exact/related/similar priors validated and protected. Additional #12 durable Use Recommendation attribution through existing shot recommendation_context being implemented in PR109, TESTING, not yet merged or deployed. Issue #5 remains READY but unpublished. No production writes.
+Concurrent Community recommendation source9135e06 is preserved, including its separately TESTING queue item. Shared client mutation behavior retains both audit owner/receipt safeguards and Community evidence. Combined local1372 Node tests,53Python tests,lint/build,mobile import and9actual packaged/offline checks PASS after fixing a missing module in the local browser harness. The32 extractor runtime files and frozen603 benchmark remain candidate8-identical. Updated-source GitHub Actions and non-force integration remain pending; queue TESTING, no publication.
+
+---
+
+## October 23, 2026 MDT: candidate8 GitHub integration resumed — TESTING, not published
+
+The owner explicitly re-authorized GitHub writes and clarified that GitHub use does not count against the added-cost restriction. Candidate8 is being integrated with normal exact-source Actions checks; no alternate readiness policy or production control is changed. Preserve concurrent upstream `e6d874510448f6cd3d0f21f5edabc3d2863a14ed`, the separate Issue5 READY migration and Issues5/10 scoped acceptance.
+
+The frozen full603 benchmark remains603/603 successful,3024 exact/167 missing/811 review-required; all four prior omissions repaired, three malformed-source flags retained. Application bytes are identical to the fully audited candidate8. The release queue remains TESTING until actual PR/merge/CI readback. [Scoped journal](workstreams/issue-33.md) and [benchmark receipt](audits/extractor-600-benchmark-receipt.json) contain the evidence and limits. Production remains unchanged at `65ee38609db6bd5977dd0f2b393e7791a5e1b766` / current READY Netlify `6adc20c03a07673c4dd08035`.
+
+---
+
+## October 23 MDT / October 24 UTC, 2026: candidate 8 extractor audit complete locally; GitHub integration BLOCKED
+
+The owner explicitly authorized larger size limits where beneficial without added direct cost. Candidate 8 now completes the frozen 603-coffee / 201-U.S.-roaster audit: all 603 previews succeed; **3,024 exact / 167 missing / 811 review-required** across **4,002 canonical assertions**. Candidate 7 was 3,023/171/808. Exactly four formerly blank fields were recovered: one strict match and three fuller source-wording differences. No prior exact match was lost and no expected answer, normalizer, source capture or oracle lock changed.
+
+Evidence capacity is now 384 facts / 192,000 UTF-16 content units, with 1,600-unit values, 128 parts and 128 variants retained. All four previously documented omissions are restored. Supplementary retention is 5,458 full / 337 partial / 679 unconfirmed; truncation falls 96→3, solely original malformed Congregation pages. These are diagnostic counts, not a completeness percentage. Every captured request/fixture-call sequence matches candidate 7, with no expanded network allowance, new key, paid service, hosted CI or direct-cost operation.
+
+Four source-backed producer/flavor fields and five published espresso recipes were recovered. Generic family mentions, gift bouquets, conditional flavors, filter recipes, pressure-stage durations and forged/contradictory selectors remain excluded. Larger UI/download/export and local Unicode helper files preserve review-only semantics. All 603 actual exports validate offline; 614/614 diagnosed variants and 3,008 reference destinations verify exactly. The one prior plain-row flag is independently source-proven paragraph expansion with identical attribution; ambiguous inline namespaces remain explicitly separate from unique whole-object claims.
+
+Local checks pass: **1,368 named Node tests**, 30 Python audit and 23 local-helper tests, offline lint/build, 320/390/1280 import browser, and 9 actual packaged/offline browser checks including exactly one synthetic save after reconnect. Six newly preserved upstream live-provider tests remain opt-in and were skipped, not passed. The initial combined suite exposed a release-test identity collision; binding its four exact queue IDs fixed it without promoting this audit or changing upstream release records. Application/test/script bytes are frozen; final evidence-document reconciliation is separately checked.
+
+Concurrent upstream is preserved through `d45664b1fd5195d9e76f35d94a49adbd3f3ac040` (tree `18527e7fc1a00891dd33760eda2115e62ef5b538`), including separately recorded production acceptance and remaining genuine-user acceptance limits. This audit performed none of those provider actions. Exact upstream blobs/modes, unrelated queue/history/authorization entries and member/offline behavior remain intact. The narrow release-test queue-ID integration repair is recorded separately from byte-identical upstream files.
+
+Queue `DIC-Q-33-expanded-603-audit` remains **BLOCKED**, not READY: GitHub tree-write rejection: isError:true; user rejected MCP tool call. No more specific reason was supplied. No retry or alternate write route was used. No audit remote write, publish or deploy occurred. Further GitHub integration requires explicit resolution of that rejection and a fresh upstream check; synthetic recovery history must never be pushed. Extractor fingerprint: `301346616618784a5ff926ddb9302b3be6e2710bea74c3a47e3d476e02ca812c`. Evidence: `docs/audits/extractor-600-benchmark-receipt.json` and the candidate 8 source reviews.
 
 ## October 24 2026 — Issue #10/#12 dependency implementation in TESTING
 

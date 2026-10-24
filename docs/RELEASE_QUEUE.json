@@ -66,6 +66,60 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
       "notes": "Owner asked proactively close #5/#10 including approved #12 prerequisite. Source only; no production Netlify, Supabase SQL, Auth or member-data operations. Enforce identity, contributor-balanced per-ratio bucket medians, same-style precedence, no Community grinder calibration, optional lazy fetch, independent member identity. #5 existing READY item retained. Follow-up PR109 saves explicit 'Use Recommendation' attribution into already existing private shot recommendation_context via source-only trigger/wrapper, preserving all currently deployed mutation routes and controls. No server-verified Community claims from this user-supplied field."
+    },
+    {
+      "id": "DIC-Q-33-expanded-603-audit",
+      "issue": 33,
+      "pr": 109,
+      "title": "Expanded 603-coffee / 201-U.S.-roaster deterministic extractor and evidence audit",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "netlify/functions/coffee-url-preview.mjs",
+        "site/cloud/client.js",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/main.js",
+        "site/cloud/outbox.js",
+        "src/server/coffee-blend-evidence.mjs",
+        "src/server/coffee-elevation-evidence.mjs",
+        "src/server/coffee-espresso-evidence.mjs",
+        "src/server/coffee-fact-compatibility.mjs",
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-geography-entity-roles.mjs",
+        "src/server/coffee-html-structure.mjs",
+        "src/server/coffee-identity-evidence.mjs",
+        "src/server/coffee-narrative-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-product-identity.mjs",
+        "src/server/coffee-product-layouts.mjs",
+        "src/server/coffee-product-prose.mjs",
+        "src/server/coffee-product-scope.mjs",
+        "src/server/coffee-semantic-specs.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/coffee-source-facts.mjs",
+        "src/server/coffee-source-identity-scope.mjs",
+        "src/server/coffee-url-guard.mjs",
+        "src/server/coffee-woocommerce-store.mjs",
+        "src/server/roast-level-evidence.mjs",
+        "supabase/functions/_shared/coffee-release-label.mjs",
+        "supabase/functions/dic-verify-coffee/evidence.mjs",
+        "package.json",
+        "src/server/coffee-processing-evidence.mjs",
+        "src/server/coffee-supplementary-source-evidence.mjs"
+      ],
+      "tests": [
+        "Candidate 8: 603/603 previews; 3024 exact / 167 missing / 811 review across 4002 unchanged canonical assertions. Zero prior exact-match losses.",
+        "Retention 5458 full / 337 partial / 679 unconfirmed; three original malformed-source flags. All four known omissions restored; 603 actual exports, 614 variants and 3008 reference destinations verified.",
+        "1368 named local Node tests pass, six upstream live opt-in tests skipped; 30 Python audit + 23 helper tests; lint/build/import browser + nine packaged/offline checks pass. No production or physical-device claim.",
+        "Fresh combined e6d8745/candidate8 local verification:1368 named Node pass,0fail,6opt-in skips;30Python audit+23helper pass; lint/build/320,390,1280 import browser pass. Initial merge-marker failure repaired by exact upstream test restore; runtime unchanged.",
+        "After preserving concurrent9135e06 Community source:1372 named Node pass/0fail/6opt-in skips;53Python;lint/build;320/390/1280 import browser and9 actual packaged/offline checks pass. Manual browser dependency bundle omission repaired; prior failure retained. New exact-source Actions pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Awaiting actual real-parent GitHub integration and required exact-source CI readback."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; current explicit owner GitHub write and Actions authorization.",
+      "notes": "Candidate8 full frozen audit complete; four prior omissions repaired. Owner explicitly permits GitHub use under the no-additional-cost requirement and resolves the previous rejected write. Normal CI/READY/release gates unchanged. Concurrent upstream e6d8745, separate Issue5 READY migration, acceptance decisions and exact historical release test preserved. Pending PR/merge/actualCI; no publication/provider/member-data change. Newer concurrent Community source9135e06 is reconciled; its independent TESTING queue item remains unchanged. Shared mutation flow retains both audit session/receipt protections and Community evidence reattachment."
     }
   ],
   "history": [

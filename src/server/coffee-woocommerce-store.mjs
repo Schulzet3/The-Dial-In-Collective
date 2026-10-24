@@ -1,4 +1,6 @@
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
+import {coffeeIdentityKey} from './coffee-product-identity.mjs';
+import {collectStructuredCoffeeSourceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 
 // Public, read-only WooCommerce Store API product by exact SEO slug.
 // This is the unauthenticated customer-facing Store API, NOT the admin REST
@@ -6,8 +8,7 @@ import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 import {safeCoffeeUrl,fetchPublicCoffeeJson,MAX_HTML_BYTES} from './coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from './coffee-page-metadata.mjs';
 
-const normalize=v=>String(v||'').normalize('NFKD')
- .replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+const normalize=coffeeIdentityKey;
 export function wooProductRequest(raw){
  const url=safeCoffeeUrl(raw);if(!url)return null;
  // Woo merchants can localize or customize the public product permalink base.
@@ -53,7 +54,12 @@ export function extractWooStoreData(data,request,{extract=extractPublicCoffeeFac
    .replace(/<\/?main\b[^<>]{0,2000}>/gi,' ')+'</main></body></html>';
  if(Buffer.byteLength(html)>MAX_HTML_BYTES)return null;
  const result=extract(html,{source_url:request.sourceUrl});
- return result?.ok&&normalize(result.fields?.name)===normalize(data.name)?result:null;
+ if(!result?.ok||normalize(result.fields?.name)!==normalize(data.name))return null;
+ const originalFacts=result.source_facts;
+ const endpointFacts=(originalFacts||[]).map(fact=>({...fact,source_type:'product_json',source_url:request.api}));
+ const source_facts=mergeCoffeeSourceFacts(endpointFacts,
+  collectStructuredCoffeeSourceFacts(data,{source_url:request.api,source_type:'product_json'}));
+ return {...result,source_facts,...(result.source_facts_truncated||originalFacts?.truncated||source_facts.truncated?{source_facts_truncated:true}:{})};
 }
 export async function extractWooProduct(raw,{readJson=fetchPublicCoffeeJson,extract=extractPublicCoffeeFacts,deadlineAt=null}={}){
  const request=wooProductRequest(raw);if(!request)return null;

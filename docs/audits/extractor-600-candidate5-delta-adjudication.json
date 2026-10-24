@@ -1,0 +1,3252 @@
+{
+  "schema_version": 1,
+  "type": "candidate5_final_post_output_canonical_delta_adjudication",
+  "created_at": "2026-10-24T02:18:10.053627+00:00",
+  "reviewer": "purchase_repairs; independent of prior processing/identity runtime changes, exposed to benchmark outputs",
+  "scope": "All27 changed canonical assertions across26 frozen cases, plus separate50-record final delta annotation for the original root variety/release ledger. Fresh original-source review of27 changes; reuse of unchanged earlier decisions for50 records.",
+  "source_tree_sha256": "7dbaa531e9ff0c889da84ef9ca5e873261ee96be6d946bc9c5d7851bca9f7338",
+  "replay_sha256": "60fc1b963e28aee46a22ad21ee08973ef249bed2a87f15ca0a828d4c9ae92c02",
+  "comparison_sha256": "af45dc921bc8660eeaa334dce32f744e75a9f595bf190150ca78e245e404723a",
+  "previous_comparison_sha256": "7b846b3f19c44f3091893decaa221808fa9ff1e4b8b3f081c98c80dd3fdd8f0e",
+  "plan_sha256": "ad2358dce37c828c0b2f0fa15eb57658761865d9d9fa845ac134f99bccbb5a5b",
+  "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+  "packet_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556",
+  "historical_receipts_preserved": [
+    {
+      "path": "docs/audits/extractor-600-candidate5-processing-residual-verification.json",
+      "sha256": "f4a7531590470505c798292b3fec606a2043ebe6dca449cb1cdf361aa867e701"
+    },
+    {
+      "path": "docs/audits/extractor-600-identity-producer-candidate5-repair.json",
+      "sha256": "ce1b582cbae86697bef5aa65ea7b90819075b5eebede89ed958706cff9baec0a"
+    },
+    {
+      "path": "docs/audits/extractor-600-root-variety-release-adjudication.json",
+      "sha256": "3f2c7a1f50006e9cac1265f09e37c120fa6858520868cea0c0dc33fa4e01b7cc"
+    },
+    {
+      "path": "docs/audits/extractor-600-candidate4-missing-origin-independent-review.json",
+      "sha256": "efe2449202dafe9d1c89120b00e38b6bf3143ee6b8261560df526d3a073dfa45"
+    }
+  ],
+  "counts": {
+    "canonical_changes_reviewed": 27,
+    "changed_cases": 26,
+    "now_exact": 20,
+    "still_review_required": 5,
+    "intentional_release_withholding": 2,
+    "prior_exact_losses": 0,
+    "prior_full_retention_losses": 0,
+    "source_capture_files_rehashed": 145,
+    "source_packet_files_rehashed": 74,
+    "source_hash_mismatches": 0,
+    "root_variety_release_records_reused": 50,
+    "root_variety_release_changed": 0
+  },
+  "records": [
+    {
+      "case_id": "queencitycollectivecoffee-com__liliana-ramirez-colombia-92ec7653",
+      "field": "variety",
+      "before": null,
+      "after": "Chiroso",
+      "expected": "Chiroso",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://queencitycollectivecoffee.com/products/liliana-ramirez-colombia",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_current_lot_variety",
+      "decision": "The selected current-lot sentence explicitly gives 100% Chiroso. The extraction no longer loses the appositional cultivar sentence. This does not justify converting the separate traditional Tres Cochadas method into a Washed category.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "This lot is 100% Chiroso, one of Colombia's most exciting varieties",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "This lot is 100% Chiroso"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": "traditional Tres Cochadas method",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "sextantcoffee-com__the-windsor-sextant-coffee-670265e1",
+      "field": "process",
+      "before": null,
+      "after": "Washed",
+      "expected": "Washed",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://sextantcoffee.com/products/the-windsor-sextant-coffee",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_selected_taxonomy",
+      "decision": "The exact selected endpoint has the complete Washed Coffee taxonomy value. The affirmative product tag supplies Washed; vague water-friendly narrative is not needed.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/tags/7",
+          "quote": "Washed Coffee",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Washed Coffee"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-koffeekult-com__costa-rica-perla-negra-peaberry-4491e5c0",
+      "field": "process",
+      "before": null,
+      "after": "Natural",
+      "expected": "Natural (Perla Negra)",
+      "old_status": "missing",
+      "new_status": "review_required",
+      "source_url": "https://www.koffeekult.com/products/costa-rica-perla-negra-peaberry",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_category_qualifier_source_only",
+      "decision": "Natural is explicitly current. Historical honey processing and washing whole cherries are not contradictory current green-coffee methods. The named Perla Negra qualifier remains in source text and product identity, but is not present in the canonical process value or a separate processing_detail. Keep the strict review-required status; this is a real canonical-detail limitation, not an exact match to Natural (Perla Negra).",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "The Perla Negra Process: Only the ripest coffee cherries are selected for this natural process.",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Paired with the Perla Negra natural process",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Only the ripest coffee cherries are selected for this natural process"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": "Perla Negra",
+      "omitted_literal_retained_in_public_source_facts": true,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "subterracoffee-com__ethiopia-guji-hambela-buliye-natural-light-roast-585fcce7",
+      "field": "process",
+      "before": null,
+      "after": "Natural",
+      "expected": "Natural",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://subterracoffee.com/products/ethiopia-guji-hambela-buliye-natural-light-roast",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_current_title_and_grade",
+      "decision": "The current selected title says Natural and the product paragraph independently says natural grade 1. The old URL handle is not used as current identity evidence.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/title",
+          "quote": "ethiopia sidama ayla bombe natural light roast",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "-lovely natural grade 1 sidama!",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "lovely natural grade 1 sidama"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07",
+      "field": "origin",
+      "before": null,
+      "after": "El Paraíso, Honduras",
+      "expected": "La Lodoza, El Paraíso, Honduras",
+      "old_status": "missing",
+      "new_status": "review_required",
+      "source_url": "https://www.slowburncoffee.com/products/honduras-expreso-paraiseno",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_partial_origin_locality_source_only",
+      "decision": "El Paraíso and Honduras are directly supported for the selected coffee. The unrelated current-offerings Colombia card is correctly excluded. The published La Lodoza locality is still present in the retained original-source prose but absent from the canonical origin; report a partial extraction rather than claiming the longer frozen expected origin was recovered. No inferred geographic hierarchy or producer-conflict resolution is added.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "In the Lodoza, El Paraíso region of Honduras",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "from the beautiful lands of La Lodoza, El Paraíso",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "In the Lodoza, El Paraíso region of Honduras"
+        },
+        {
+          "capture_id": "page",
+          "quote": "La Lodoza, El Paraíso"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": "Fully washed ✹",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": "La Lodoza",
+      "omitted_literal_retained_in_public_source_facts": true,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "summermooncoffee-com__en-fuego-8cc1b6ac",
+      "field": "origin",
+      "before": null,
+      "after": "Mexico",
+      "expected": "Mexico",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://summermooncoffee.com/products/en-fuego",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_direct_origin",
+      "decision": "The selected single-origin roast is explicitly from the highlands of Mexico. No inference from Tex meets Mex or the roaster address is needed.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "This single-origin roast is from the highlands of Mexico.",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "from the highlands of Mexico"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "field": "release_label",
+      "before": "Microlot",
+      "after": null,
+      "expected": "Harvest September – January; Lot Microlot",
+      "old_status": "review_required",
+      "new_status": "missing",
+      "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "intentional_generic_lot_and_season_withheld",
+      "decision": "Microlot is a generic lot type and September–January is a recurring harvest window without a year or distinct lot identifier. Removing Microlot from release_label preserves the established release-identity guard. Both literal values survive in public source facts, and the window remains harvest_season. The frozen expected combined release is unchanged; the strict missing result is intentional withholding, not lost source evidence.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Lot: Microlot",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Harvest: September – January",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Harvest: September – January"
+        },
+        {
+          "capture_id": "page",
+          "quote": "Lot: Microlot"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": "Anaerobic Honey",
+      "current_conflicts": [
+        "tasting_notes"
+      ],
+      "supplementary_role_facts": [
+        {
+          "label": "Lot",
+          "value": "Microlot",
+          "source_type": "html",
+          "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee",
+          "field": "lot_type",
+          "section": "Origin Details",
+          "supporting_sources": [
+            {
+              "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee.js",
+              "source_type": "product_json"
+            }
+          ]
+        },
+        {
+          "label": "Harvest",
+          "value": "September – January",
+          "source_type": "html",
+          "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee",
+          "field": "harvest_season",
+          "section": "Origin Details",
+          "supporting_sources": [
+            {
+              "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee.js",
+              "source_type": "product_json"
+            }
+          ]
+        }
+      ],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-unlockedcoffee-com__dedication-costa-rica-4667ab5c",
+      "field": "release_label",
+      "before": "Microlot",
+      "after": null,
+      "expected": "Harvest December–April; Lot Microlot",
+      "old_status": "review_required",
+      "new_status": "missing",
+      "source_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "intentional_generic_lot_and_season_withheld",
+      "decision": "Microlot and the recurring December–April harvest window do not distinguish a specific release. They remain lot_type and harvest_season source facts; release_label is blank. Other published contradictions, including the later alternative variety/process/origin block, are not resolved by this release decision. Preserve the frozen expected value and strict missing score.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Harvest: December–April Lot: Microlot",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Harvest: December–April"
+        },
+        {
+          "capture_id": "page",
+          "quote": "Lot: Microlot"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [
+        "origin",
+        "process",
+        "variety"
+      ],
+      "supplementary_role_facts": [
+        {
+          "label": "Harvest",
+          "value": "December–April",
+          "source_type": "html",
+          "source_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica",
+          "field": "harvest_season",
+          "section": "Shop our best sellers! / Coffee Details"
+        },
+        {
+          "label": "Lot",
+          "value": "Microlot",
+          "source_type": "html",
+          "source_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica",
+          "field": "lot_type",
+          "section": "Shop our best sellers! / Coffee Details"
+        },
+        {
+          "label": "Harvest",
+          "value": "December–April",
+          "source_type": "product_json",
+          "source_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica.js",
+          "field": "harvest_season",
+          "section": "Coffee Details"
+        },
+        {
+          "label": "Lot",
+          "value": "Microlot",
+          "source_type": "product_json",
+          "source_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica.js",
+          "field": "lot_type",
+          "section": "Coffee Details"
+        }
+      ],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "lionrushcoffee-com__el-silencio-chiroso-washed-26272132",
+      "field": "process",
+      "before": null,
+      "after": "Anaerobic",
+      "expected": "Anaerobic",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://lionrushcoffee.com/products/el-silencio-chiroso-washed",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_compatible_processing_stages",
+      "decision": "The current process explicitly combines Washed with30-hour anaerobic fermentation, and the endpoint tag repeats its Washed subtype. Anaerobic is the existing canonical category for this combined method, while the complete literal statement remains processing_detail. This does not authorize merging incompatible Natural and Washed claims on other coffees.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Process: Washed, 30-hour anaerobic fermentation",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/tags/3",
+          "quote": "process:washed",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Process: Washed, 30-hour anaerobic fermentation"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": "Process: Washed, 30-hour anaerobic fermentation",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "wakecoffee-com__decaf-76048300",
+      "field": "origin",
+      "before": null,
+      "after": "Latin America, Indonesia, Africa",
+      "expected": "Latin America; Indonesia; Africa",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://wakecoffee.com/products/decaf",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_complete_broad_blend_origins",
+      "decision": "The current product explicitly lists Latin American, Indonesian and African Blend. All three broad places survive; no particular country is invented within Africa or Latin America.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Latin American, Indonesian and African Blend",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Latin American, Indonesian and African Blend"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d",
+      "field": "origin",
+      "before": null,
+      "after": "Colombia",
+      "expected": "Hulia, Colombia",
+      "old_status": "missing",
+      "new_status": "review_required",
+      "source_url": "https://www.lilrhodycoffee.com/products/bellevue-decaf-blend",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_partial_origin_untyped_region_source_only",
+      "decision": "The direct from Colombia sentence supports Colombia. Hulia appears literally in the Current Coffee name and remains available in source facts; the parser neither corrects it to Huila nor turns that untyped word into a canonical region. The frozen expected Hulia, Colombia remains unchanged and review-required. This is partial canonical extraction with source spelling preserved.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Current Coffee: Colombia Hulia MWP Decaf",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Bellevue is a single-origin mountain water decaf from Colombia",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Current Coffee: Colombia Hulia MWP Decaf"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": "Hulia",
+      "omitted_literal_retained_in_public_source_facts": true,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "sumatocoffee-com__per-my-last-email-decaf-76c11240",
+      "field": "process",
+      "before": null,
+      "after": "Washed",
+      "expected": "Washed",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://sumatocoffee.com/products/per-my-last-email-decaf",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_processing_before_decaffeination",
+      "decision": "The selected source explicitly says Washed process before EA decaffeination. Natural elsewhere modifies the decaffeination treatment and must not become Natural green-coffee processing. The complete stage statement survives as processing_detail.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Process: EA (Ethyl Acetate) Natural Decaffeination",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Processing: Washed process before EA decaffeination",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Processing: Washed process before EA decaffeination"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": "Washed process before EA decaffeination",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "south17roasters-com__dark-raine-4408701d",
+      "field": "origin",
+      "before": null,
+      "after": "Sumatra Mandheling",
+      "expected": "Sumatra Mandheling",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://south17roasters.com/products/dark-raine",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_literal_origin",
+      "decision": "The selected description literally says single origin Sumatra Mandheling. Preserve this wording without adding an unstated Indonesia or confusing the following wet-hulled process phrase with geography.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "single origin Sumatra Mandheling wet hulled process coffee",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "single origin Sumatra Mandheling"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__sugarcane-decaf-37227ccc",
+      "field": "process",
+      "before": null,
+      "after": "Washed",
+      "expected": "Washed",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.chromaticcoffee.com/products/sugarcane-decaf",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_wet_process_and_separate_decaf",
+      "decision": "The selected page metric says Wet Process & SugarCane Ethyl Acetate Decaffeination. Wet Process supports Washed; the natural adjective in the sugarcane description does not support Natural. The full printed metric survives processing_detail.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "Wet Process & SugarCane Ethyl Acetate Decaffeination",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Wet Process & SugarCane Ethyl Acetate Decaffeination"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": "Wet Process & SugarCane Ethyl Acetate Decaffeination",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__san-vicente-yogondoy-dd5f12d3",
+      "field": "process",
+      "before": null,
+      "after": "Washed",
+      "expected": "Washed",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.chromaticcoffee.com/products/san-vicente-yogondoy",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_complete_wet_process_phrase",
+      "decision": "The selected metric says Extended-Fermentation Wet Process. Retaining the final Process word repairs the former truncated semantic caption and supports Washed while retaining the complete method as processing_detail.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "Extended-Fermentation Wet Process",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Extended-Fermentation Wet Process"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": "Extended-Fermentation Wet Process",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__fireworks-b1eaf3a1",
+      "field": "origin",
+      "before": null,
+      "after": "Brazil",
+      "expected": "Brazil",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://craftsmancliffroasters.com/products/fireworks",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_direct_origin",
+      "decision": "The selected current coffee is explicitly a single-origin dark roast from Brazil. Intervening roast and craft-roasting adjectives do not change that direct origin assertion.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "single-origin dark roast from Brazil",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "single-origin dark roast from Brazil"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__mama-74e240f8",
+      "field": "origin",
+      "before": null,
+      "after": "Uganda",
+      "expected": "Uganda",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://craftsmancliffroasters.com/products/mama",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_direct_origin",
+      "decision": "The selected description explicitly names Single-Origin from Uganda, corroborated by the direct Uganda story and selected tag. No location is inferred from an unrelated brand narrative.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Single-Origin from Uganda",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Single-Origin from Uganda"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb",
+      "field": "process",
+      "before": null,
+      "after": "Anaerobic",
+      "expected": "Anaerobic",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_same_method_combined_witness",
+      "decision": "The selected HTML explicitly says Anaerobic Natural; the selected story gives120-hour anaerobic fermentation in cherry and Extended Fermentation Natural. Their shared Natural subtype is compatible only with that combined current witness. Anaerobic remains the established category and the literal detail is preserved. The separate Natura/Natural Reserve origin conflict stays unresolved.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "Process Anaerobic Natural",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "120-hour anaerobic fermentation in cherry",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Process: Extended Fermentation Natural",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "ProcessAnaerobic Natural"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": "This lot is a rare Sudan Rume variety processed with extended anaerobic fermentation, producing a juicy and expressive cup.",
+      "current_conflicts": [
+        "origin"
+      ],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "highpointroasters-com__campfire-blend-e9a988ad",
+      "field": "origin",
+      "before": null,
+      "after": "Africa, Central America",
+      "expected": "Africa; Central America",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://highpointroasters.com/product/campfire-blend",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_complete_broad_blend_origins",
+      "decision": "The selected blend explicitly combines African and Central American coffees. Not for the fainthearted is a whole idiom, not a negation of those origins. Broad areas stay broad.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "blend of dark roasted African and Central American coffees",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "African and Central American coffees"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-congregationcoffee-com__gallop-c3eaf093",
+      "field": "origin",
+      "before": null,
+      "after": "Colombia, Guatemala",
+      "expected": "Colombia, Guatemala",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.congregationcoffee.com/products/gallop",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_current_blend_label",
+      "decision": "The current selected page labels the blend Colombia, Guatemala. The general statement that the blend changes by harvest does not negate the currently published pair; the endpoint description need not repeat the HTML label.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "Blend: Colombia , Guatemala",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Colombia"
+        },
+        {
+          "capture_id": "page",
+          "quote": "Guatemala"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__danche-ethiopia-gedeb-zone-blueberry-pineapple-kiwi-lemon-lime-e30cb7ff",
+      "field": "process",
+      "before": null,
+      "after": "Natural",
+      "expected": "Natural",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.blindtigercoffee.com/coffee/danche-ethiopia-gedeb-zone-blueberry-pineapple-kiwi-lemon-lime",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_current_lot_over_retired_lot",
+      "decision": "The page explicitly retires the Washed lot and announces that the Natural lot has arrived. The following current-lot description confirms whole-cherry drying. Only the affirmative current claim is used; historical process statements are not broadly permitted.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "While the washed lot is RIP , the natural lot just landed !",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "coffee cherries were picked & left to dry ferment whole in tanks for 3 days",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "the natural lot just landed"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__alva-marina-alvarado-honduras-santa-barbara-blank-blank-and-blank-ade18ebf",
+      "field": "process",
+      "before": null,
+      "after": "Washed",
+      "expected": "Washed",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.blindtigercoffee.com/coffee/alva-marina-alvarado-honduras-santa-barbara-blank-blank-and-blank",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_ordered_current_processing",
+      "decision": "The selected current production sentence explicitly orders depulping, dry fermentation, washing and drying. That sequence supports Washed. This differs from rinsing whole cherries or generic educational usually/generally language.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "Marina's is no exception: Ripe cherries were depulped each afternoon, dry-fermented for 24 hrs, washed 4x, & dried for 2-3 weeks in covered, parabolic solar dryers.",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "washed 4x"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__el-salvador-el-retiro-honey-copy-9779b807",
+      "field": "origin",
+      "before": "Colombia",
+      "after": "Caramanta, Colombia",
+      "expected": "Caramanta, Colombia",
+      "old_status": "review_required",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.ghosttowncoffee.com/products/el-salvador-el-retiro-honey-copy",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_literal_farm_region_split",
+      "decision": "The selected current title gives Colombia and the explicit paired Farm/Region caption maps Machoruso to farm and Caramanta to region. The legacy El Salvador URL slug is not used as current identity.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/title",
+          "quote": "Colombia Mist - Gesha",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Farm/Region: Machoruso / Caramanta",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Colombia Mist - Gesha"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Farm/Region: Machoruso / Caramanta"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__el-salvador-el-retiro-honey-copy-9779b807",
+      "field": "producer",
+      "before": null,
+      "after": "Machoruso",
+      "expected": "Machoruso farm",
+      "old_status": "missing",
+      "new_status": "review_required",
+      "source_url": "https://www.ghosttowncoffee.com/products/el-salvador-el-retiro-honey-copy",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_farm_name_role_retained",
+      "decision": "Machoruso is the literal farm name in Farm/Region: Machoruso / Caramanta. The canonical producer field carries the name, and roaster_details.farm plus the Farm source fact retain its role. The frozen expected appends farm, so strict review remains. This does not identify a named person or assert that a farm is a human producer.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Farm/Region: Machoruso / Caramanta",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Farm/Region: Machoruso / Caramanta"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [
+        {
+          "label": "Farm",
+          "value": "Machoruso",
+          "source_type": "html",
+          "source_url": "https://www.ghosttowncoffee.com/products/el-salvador-el-retiro-honey-copy",
+          "field": "producer",
+          "supporting_sources": [
+            {
+              "source_url": "https://www.ghosttowncoffee.com/products/el-salvador-el-retiro-honey-copy.js",
+              "source_type": "product_json"
+            }
+          ]
+        },
+        {
+          "label": "Farm/Region",
+          "value": "Machoruso / Caramanta",
+          "source_type": "html",
+          "source_url": "https://www.ghosttowncoffee.com/products/el-salvador-el-retiro-honey-copy",
+          "field": "farm_region",
+          "supporting_sources": [
+            {
+              "source_url": "https://www.ghosttowncoffee.com/products/el-salvador-el-retiro-honey-copy.js",
+              "source_type": "product_json"
+            }
+          ]
+        }
+      ],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__copy-of-colombia-monserrate-d819b479",
+      "field": "origin",
+      "before": "Antioquia, Colombia",
+      "after": "Caramanta, Antioquia, Colombia",
+      "expected": "Caramanta, Antioquia, Colombia",
+      "old_status": "review_required",
+      "new_status": "exact_equivalent",
+      "source_url": "https://www.ghosttowncoffee.com/products/copy-of-colombia-monserrate",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_separately_labeled_municipality",
+      "decision": "The current title names Colombia, and separately labeled Region Antioquia and Municipality Caramanta establish the two complementary place roles. Preserve their printed labels; the legacy Monserrate URL is not the current coffee name.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/title",
+          "quote": "Colombia Caramanta",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "Region: Antioquia Municipality: Caramanta",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Colombia Caramanta"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Region: Antioquia Municipality: Caramanta"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": "Washed. Sun dried under a canopy",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "bonjocoffee-com__divino-blend-40eb6059",
+      "field": "process",
+      "before": null,
+      "after": "Other/Unknown",
+      "expected": "Other/Unknown",
+      "old_status": "missing",
+      "new_status": "exact_equivalent",
+      "source_url": "https://bonjocoffee.com/products/divino-blend",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_explicit_mixed_blend",
+      "decision": "The current page explicitly says Mixed (Washed & Natural), the description specifies the two component methods, and selected tags declare type:Blend. Other/Unknown is the existing mixed-method category; mixed detail survives. This does not reconcile incompatible process tags on a nonblend.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "json_pointer": null,
+          "quote": "Process: Mixed (Washed & Natural)",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "By combining a Fully Washed Colombian with a Natural Process Brazilian",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Process: Mixed (Washed & Natural)"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-candidate5-processing-residual-verification.json",
+      "current_processing_detail": "Mixed (Washed & Natural)",
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": null,
+      "omitted_literal_retained_in_public_source_facts": null,
+      "strict_score_overridden": false
+    },
+    {
+      "case_id": "www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0",
+      "field": "origin",
+      "before": null,
+      "after": "Tenejapa",
+      "expected": "Tenejapa, Chiapas",
+      "old_status": "missing",
+      "new_status": "review_required",
+      "source_url": "https://www.ixxacoffee.com/products/organic-ki-saya-tenejapa-microlot",
+      "review_stage": "post_output_original_source_delta_adjudication",
+      "category": "supported_partial_origin_second_place_source_only",
+      "decision": "The current lot explicitly hails from Tenejapa. The separate current-product phrase also says from Chiapas and is retained in source prose, but the canonical field does not combine it with Tenejapa. Report that remaining partial extraction honestly; do not claim Chiapas is absent from the source, infer an administrative hierarchy, or add unstated Mexico.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "our organic gem from Chiapas",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        },
+        {
+          "capture_id": "product-endpoint",
+          "json_pointer": "/description",
+          "quote": "This lot hails from Tenejapa",
+          "verification": "literal substring after HTML entity/visible-text whitespace decoding; no semantic substitution",
+          "source_verified": true
+        }
+      ],
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "our organic gem from Chiapas"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "This lot hails from Tenejapa"
+        }
+      ],
+      "prior_focused_receipt": "extractor-600-identity-producer-candidate5-repair.json",
+      "current_processing_detail": null,
+      "current_conflicts": [],
+      "supplementary_role_facts": [],
+      "omitted_canonical_literal": "Chiapas",
+      "omitted_literal_retained_in_public_source_facts": true,
+      "strict_score_overridden": false
+    }
+  ],
+  "root_variety_release_final_delta": {
+    "original_receipt": "docs/audits/extractor-600-root-variety-release-adjudication.json",
+    "original_receipt_sha256": "3f2c7a1f50006e9cac1265f09e37c120fa6858520868cea0c0dc33fa4e01b7cc",
+    "original_receipt_bytes_preserved": true,
+    "records": [
+      {
+        "case_id": "www-stumptowncoffee-com__ethiopia-nano-challa-d838f3e8",
+        "field": "variety",
+        "candidate4_actual": "Heirloom",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Heirloom",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The source literally says heirloom. Do not manufacture the oracle’s additional indigenous/Ethiopian-landrace wording from general taxonomy.",
+        "existing_category": "literal_generic_variety",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "queencitycollectivecoffee-com__liliana-ramirez-colombia-92ec7653",
+        "field": "release_label",
+        "candidate4_actual": "2026",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "2026",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The literal harvest year or date range is retained; the frozen expectation differs in caption or precision. Preserve the published value and leave the strict comparison unchanged.",
+        "existing_category": "release_caption_or_precision",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "queencitycollectivecoffee-com__banko-gotiti-washed-ethiopia-6ad8dbf6",
+        "field": "variety",
+        "candidate4_actual": "heirloom",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "heirloom",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The source literally says heirloom. Do not manufacture the oracle’s additional indigenous/Ethiopian-landrace wording from general taxonomy.",
+        "existing_category": "literal_generic_variety",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-koffeekult-com__kenya-b02d4619",
+        "field": "variety",
+        "candidate4_actual": "SL28 and SL34",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "SL28 and SL34",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-bluejazzcoffee-com__guatemala-el-scorpion-9ca3c32c",
+        "field": "variety",
+        "candidate4_actual": "Caturra and Bourbon",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Caturra and Bourbon",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "combatcoffeetea-com__night-vision-medium-roast-kenya-5c582e18",
+        "field": "variety",
+        "candidate4_actual": "SL 28 and SL 34",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "SL 28 and SL 34",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "combatcoffeetea-com__narino-dark-roast-single-origin-fair-trade-0ba79ce1",
+        "field": "variety",
+        "candidate4_actual": "Castillo/Colombia (46,3%) Caturra (53.7%)",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Castillo/Colombia (46,3%) Caturra (53.7%)",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "Preserve the source’s 46,3% and 53.7% composition qualifiers. Removing numeric evidence solely to match the oracle would lose published data.",
+        "existing_category": "published_numeric_composition",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "baldguybrew-com__organic-costa-rican-coffee-a4712955",
+        "field": "variety",
+        "candidate4_actual": "Caturra, Catuai Red, Catuai Yellow, and Tipica Hibrido",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Caturra, Catuai Red, Catuai Yellow, and Tipica Hibrido",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-roasted-beans-com__zambia-natural-gold-single-origin-168485d4",
+        "field": "release_label",
+        "candidate4_actual": "2020/21",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "2020/21",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The literal harvest year or date range is retained; the frozen expectation differs in caption or precision. Preserve the published value and leave the strict comparison unchanged.",
+        "existing_category": "release_caption_or_precision",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "roadmapcoffeeworks-com__ethiopia-worka-sakaro-anaerobic-a812511b",
+        "field": "release_label",
+        "candidate4_actual": null,
+        "candidate4_strict_status": "missing",
+        "candidate5_actual": null,
+        "candidate5_strict_status": "missing",
+        "changed": false,
+        "existing_source_decision_reused": "A yearless calendar window recurs annually and cannot identify a distinct release. Keep it in harvest_season and source facts; preserve the frozen missing/review status instead of redefining the oracle.",
+        "existing_category": "recurring_harvest_not_release_identity",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "roadmapcoffeeworks-com__mexico-cesmach-dbdab1c3",
+        "field": "release_label",
+        "candidate4_actual": null,
+        "candidate4_strict_status": "missing",
+        "candidate5_actual": null,
+        "candidate5_strict_status": "missing",
+        "changed": false,
+        "existing_source_decision_reused": "A yearless calendar window recurs annually and cannot identify a distinct release. Keep it in harvest_season and source facts; preserve the frozen missing/review status instead of redefining the oracle.",
+        "existing_category": "recurring_harvest_not_release_identity",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "lionrushcoffee-com__huila-decaf-sugarcane-e67d36fe",
+        "field": "variety",
+        "candidate4_actual": "Castillo, Caturra, and Colombia",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Castillo, Caturra, and Colombia",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-coffeestamp-com__rwanda-coopac-microlot-a-db1df797",
+        "field": "variety",
+        "candidate4_actual": "Typica Peaberry",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Typica Peaberry",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The returned value retains the source’s species, peaberry, percentage or explanatory qualifier, which the frozen compact expectation omits. No unsupported taxonomic inference is added.",
+        "existing_category": "literal_qualifier_preserved",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-coffeestamp-com__zambia-kateshi-estate-015b39b9",
+        "field": "variety",
+        "candidate4_actual": "Arabica; Castillo, Catimor 129, F6",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Arabica; Castillo, Catimor 129, F6",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The returned value retains the source’s species, peaberry, percentage or explanatory qualifier, which the frozen compact expectation omits. No unsupported taxonomic inference is added.",
+        "existing_category": "literal_qualifier_preserved",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "brewtusroasting-com__kenya-ab-nyeri-kiangundo-427eef15",
+        "field": "variety",
+        "candidate4_actual": "SL28, SL34, and Ruiru 11",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "SL28, SL34, and Ruiru 11",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-limacoffeeroasters-com__kenya-kichwa-tembo-0224337e",
+        "field": "variety",
+        "candidate4_actual": "SL 34, SL 28",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "SL 34, SL 28",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-nativocoffeeroasters-com__suavidad-medium-roast-452533ac",
+        "field": "variety",
+        "candidate4_actual": "100% Pink Bourbon",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "100% Pink Bourbon",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The returned value retains the source’s species, peaberry, percentage or explanatory qualifier, which the frozen compact expectation omits. No unsupported taxonomic inference is added.",
+        "existing_category": "literal_qualifier_preserved",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "topecacoffee-com__el-salvador-manzano-natural-1920259d",
+        "field": "variety",
+        "candidate4_actual": "Pacamara, Gesha, Pacas, and Red Bourbon",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Pacamara, Gesha, Pacas, and Red Bourbon",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "subliminalcoffee-com__finca-terrerito-natural-honduras-1f82a287",
+        "field": "variety",
+        "candidate4_actual": "Parainema & Obata",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Parainema & Obata",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "802coffee-com__zambia-kateshi-estate-ba0db55d",
+        "field": "variety",
+        "candidate4_actual": "Castillo, Catimor 129, F6",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Castillo, Catimor 129, F6",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+        "field": "variety",
+        "candidate4_actual": "Caturra, Castillo and Colombia",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Caturra, Castillo and Colombia",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+        "field": "release_label",
+        "candidate4_actual": "December 2024 to March 2025",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "December 2024 to March 2025",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The source explicitly publishes a dated Harvest Period. Use that literal harvest date for release context; the frozen Tier2/Tier3 expectation is a marketing tier, also preserved in source facts.",
+        "existing_category": "dated_harvest_over_marketing_tier",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-ketchcoffee-com__tier-2-decaf-colombia-el-vergel-estate-natural-process-892ff188",
+        "field": "release_label",
+        "candidate4_actual": "October to December 2025",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "October to December 2025",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The source explicitly publishes a dated Harvest Period. Use that literal harvest date for release context; the frozen Tier2/Tier3 expectation is a marketing tier, also preserved in source facts.",
+        "existing_category": "dated_harvest_over_marketing_tier",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-ketchcoffee-com__tier-3-mexico-san-isidro-zoquiapan-a9d137cc",
+        "field": "release_label",
+        "candidate4_actual": "September 2025",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "September 2025",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The source explicitly publishes a dated Harvest Period. Use that literal harvest date for release context; the frozen Tier2/Tier3 expectation is a marketing tier, also preserved in source facts.",
+        "existing_category": "dated_harvest_over_marketing_tier",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "webe-coffee__guatemala-los-volcanes-6e6502b0",
+        "field": "variety",
+        "candidate4_actual": "Bourbon, Caturra, Catuai, Sarchimor, Anacafe 14",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Bourbon, Caturra, Catuai, Sarchimor, Anacafe 14",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-chromaticcoffee-com__sugarcane-decaf-37227ccc",
+        "field": "variety",
+        "candidate4_actual": "Colombia & Castillo",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Colombia & Castillo",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-vailcoffee-com__reserve-coffee-3-b0e7cce9",
+        "field": "variety",
+        "candidate4_actual": "Bourbon, Catuai, Caturra, and Lempira",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Bourbon, Catuai, Caturra, and Lempira",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-greatcirclecoffee-com__young-producers-yessica-diego-parra-1e778f8e",
+        "field": "variety",
+        "candidate4_actual": "Caturra and Castillo",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Caturra and Castillo",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-greatcirclecoffee-com__young-producers-alejandro-ariza-inza-94d5813a",
+        "field": "variety",
+        "candidate4_actual": "Caturra and Castillo",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Caturra and Castillo",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "others-coffee__out-side-dark-brazil-ed212ef7",
+        "field": "variety",
+        "candidate4_actual": "TYPICA AND BOURBON",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "TYPICA AND BOURBON",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "mbingomountaincoffee-com__rwanda-inzovu-supreme-natural-e2d495af",
+        "field": "variety",
+        "candidate4_actual": "Arabica: Bourbon and Typica",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Arabica: Bourbon and Typica",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The returned value retains the source’s species, peaberry, percentage or explanatory qualifier, which the frozen compact expectation omits. No unsupported taxonomic inference is added.",
+        "existing_category": "literal_qualifier_preserved",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "fostercoffee-co__sookoo-ethiopia-6359d13f",
+        "field": "variety",
+        "candidate4_actual": "Gibirinna 74110 & Serto 74112",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Gibirinna 74110 & Serto 74112",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "vestacoffee-com__kamwangi-kenya-cbf1ab54",
+        "field": "variety",
+        "candidate4_actual": "SL28 and SL34, Batian and Ruiru 11",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "SL28 and SL34, Batian and Ruiru 11",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result. The named minor Batian and Ruiru 11 inputs are included alongside SL28 and SL34.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "vestacoffee-com__wush-wush-anaerobic-natural-7016c178",
+        "field": "variety",
+        "candidate4_actual": "Wush Wush",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Wush Wush",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2",
+        "field": "variety",
+        "candidate4_actual": "Papayo + Wush Wush",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Papayo + Wush Wush",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "quartermaine-com__colombia-6ab9ee5e",
+        "field": "variety",
+        "candidate4_actual": "100% Typica",
+        "candidate4_strict_status": "exact_equivalent",
+        "candidate5_actual": "100% Typica",
+        "candidate5_strict_status": "exact_equivalent",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-swroasting-coffee__25NBJDMXCAYX4YC5XJZAYZDG-1d539602",
+        "field": "variety",
+        "candidate4_actual": "Bourbon, Caturra, and Catuai",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Bourbon, Caturra, and Catuai",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-wreckingballcoffee-com__ethiopia-gedeb-banko-gotiti-12oz-5ae573be",
+        "field": "variety",
+        "candidate4_actual": "Heirloom (more specifically Metu Bishari Selections, Gera Selections, and Merdacheriko)",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Heirloom (more specifically Metu Bishari Selections, Gera Selections, and Merdacheriko)",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The returned value retains the source’s species, peaberry, percentage or explanatory qualifier, which the frozen compact expectation omits. No unsupported taxonomic inference is added.",
+        "existing_category": "literal_qualifier_preserved",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-wreckingballcoffee-com__kenya-estate-670f492d",
+        "field": "variety",
+        "candidate4_actual": "SL28 and Ruiru11",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "SL28 and Ruiru11",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-rustydogcoffee-com__ethiopia-wush-wush-natural-processed-light-roast-single-farmer-3cbbcccd",
+        "field": "variety",
+        "candidate4_actual": "Wush Wush",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Wush Wush",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-lineageroasting-com__decaf-2c6427c4",
+        "field": "release_label",
+        "candidate4_actual": "January 2024 - June 2024",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "January 2024 - June 2024",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The literal harvest year or date range is retained; the frozen expectation differs in caption or precision. Preserve the published value and leave the strict comparison unchanged.",
+        "existing_category": "release_caption_or_precision",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "beanstockcoffee-com__last-roast-holiday-roast-2-el-salvador-finca-los-angeles-pacamara-black-honey-pr-635c445a",
+        "field": "variety",
+        "candidate4_actual": "Gesha",
+        "candidate4_strict_status": "exact_equivalent",
+        "candidate5_actual": "Gesha",
+        "candidate5_strict_status": "exact_equivalent",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result. Pink Bourbon belongs to the farm’s separate inventory, not this Gesha lot.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-darkmattercoffee-com__balthvs-manifest-3b637bfc",
+        "field": "variety",
+        "candidate4_actual": "Mixed, Bourbon & Pacas",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Mixed, Bourbon & Pacas",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-darkmattercoffee-com__under-the-rainbow-october-limited-blend-12a24dc7",
+        "field": "variety",
+        "candidate4_actual": "Catuai, Pacas & Bourbon",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Catuai, Pacas & Bourbon",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "www-darkmattercoffee-com__anthrax-cursum-perficio-e8175990",
+        "field": "variety",
+        "candidate4_actual": "Catuai, Bourbon & Pacas",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Catuai, Bourbon & Pacas",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "localroasters-com__nicaragua-la-bastilla-12-oz-368e5fab",
+        "field": "variety",
+        "candidate4_actual": "Catura & Catuai",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Catura & Catuai",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "localroasters-com__brazil-natural-12-oz-51c91b04",
+        "field": "variety",
+        "candidate4_actual": "Yellow Bourbon, Mundo Novo, and Obatã",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Yellow Bourbon, Mundo Novo, and Obatã",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "elixrcoffee-com__wush-wush-ethiopia-630aa3db",
+        "field": "variety",
+        "candidate4_actual": "Wush Wush",
+        "candidate4_strict_status": "exact_equivalent",
+        "candidate5_actual": "Wush Wush",
+        "candidate5_strict_status": "exact_equivalent",
+        "changed": false,
+        "existing_source_decision_reused": "The current-product source review exposed a genuine cultivar specificity or scope defect. Candidate4 now retains the supported current-lot cultivar(s); farm inventories and educational ancestry are excluded. Strict exact/review status remains the unmodified comparator result.",
+        "existing_category": "source_backed_repair_verified",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "methodicalcoffee-com__colombia-andres-cardona-322bcc3f",
+        "field": "variety",
+        "candidate4_actual": "Castillo & Colombia",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Castillo & Colombia",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      },
+      {
+        "case_id": "bonjocoffee-com__guatemala-finca-el-rincon-copy-438c5bc9",
+        "field": "variety",
+        "candidate4_actual": "Catuai & Caturra",
+        "candidate4_strict_status": "review_required",
+        "candidate5_actual": "Catuai & Caturra",
+        "candidate5_strict_status": "review_required",
+        "changed": false,
+        "existing_source_decision_reused": "The published cultivar names are retained. Conjunctions, list delimiters or internal spacing differ from the frozen compact list; keep the source wording and strict review status.",
+        "existing_category": "literal_list_presentation",
+        "no_historical_status_overwrite": true
+      }
+    ]
+  },
+  "verified_source_captures": [
+    {
+      "case_id": "queencitycollectivecoffee-com__liliana-ramirez-colombia-92ec7653",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "d7472efca247f816faaa6813e3596e5575ba9273d1a8af86dcaa2912cdcfc0c9",
+      "bytes": 257088
+    },
+    {
+      "case_id": "queencitycollectivecoffee-com__liliana-ramirez-colombia-92ec7653",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "ff067ab7a47239ed664d0146b46dedfed8666835087749a1f2b0ac0e6fbf736d",
+      "bytes": 5043
+    },
+    {
+      "case_id": "sextantcoffee-com__the-windsor-sextant-coffee-670265e1",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "37a6ab04f40ad1a781ec30fa788e65d8b3d4ae94a01e04a51cc9c15796188d42",
+      "bytes": 560994
+    },
+    {
+      "case_id": "sextantcoffee-com__the-windsor-sextant-coffee-670265e1",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "22770b25c56c6724f10cbe434e94f065ec0f92ae215b35c6992a8fe880ec4219",
+      "bytes": 24471
+    },
+    {
+      "case_id": "www-koffeekult-com__costa-rica-perla-negra-peaberry-4491e5c0",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "529db759599d68e0143eada4fc491673aa1cdc2f2ce06565f1ee402845af7e2f",
+      "bytes": 261272
+    },
+    {
+      "case_id": "www-koffeekult-com__costa-rica-perla-negra-peaberry-4491e5c0",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "27893e310edd220b603ba089738aa1ad98003109429933e811a790b12e368da7",
+      "bytes": 10225
+    },
+    {
+      "case_id": "subterracoffee-com__ethiopia-guji-hambela-buliye-natural-light-roast-585fcce7",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "59e73200233db454c897361af736494d2e3c2c3c1b8d75a3b79079a89bcd83f0",
+      "bytes": 230164
+    },
+    {
+      "case_id": "subterracoffee-com__ethiopia-guji-hambela-buliye-natural-light-roast-585fcce7",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "3ebf8291a758a5d8083561dd61a5ec808e2f427a5aa158cef6be0367bc3f1124",
+      "bytes": 16226
+    },
+    {
+      "case_id": "www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "cb830df35caf3a18b60ebefb8ca296c71b319fa78f01501a8905f6a9da3c67b8",
+      "bytes": 308055
+    },
+    {
+      "case_id": "www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "0cf5a7d8cbbabc1eadca4df20967f7a075143446c46748f1e3ee6a5637986a79",
+      "bytes": 4762
+    },
+    {
+      "case_id": "summermooncoffee-com__en-fuego-8cc1b6ac",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "5b702ce8d44267a6eb70027ef9f008cc1784824cb04d5c201e2b7e077ce107b5",
+      "bytes": 281131
+    },
+    {
+      "case_id": "summermooncoffee-com__en-fuego-8cc1b6ac",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "cacd452304051f638af50b14f26eb94ba3f1b64113787f408f5e09fbeb7666c7",
+      "bytes": 6464
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "c1f9287dddf362b82043c2261e303d4b0af81948c70a4706df701677d53fe0ef",
+      "bytes": 558671
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "a394922cae0e5ca10de7a3c66f4cbf22a158cb7d9669207b913e0c79e2b00dc6",
+      "bytes": 68775
+    },
+    {
+      "case_id": "www-unlockedcoffee-com__dedication-costa-rica-4667ab5c",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "30995147b02d17f74e4c84b143d10fa20d9f45f92d62c1a6346ceb6d5760e304",
+      "bytes": 243419
+    },
+    {
+      "case_id": "www-unlockedcoffee-com__dedication-costa-rica-4667ab5c",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "031390eabb42df62b725c3bdd910cb739a7f2f48163e71dd59f6a6f2ee7d7705",
+      "bytes": 11182
+    },
+    {
+      "case_id": "lionrushcoffee-com__el-silencio-chiroso-washed-26272132",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "2639b0d72d95ed734a016a4e8f28799a12a15ce94aede845185d3bac64a6e4c2",
+      "bytes": 274404
+    },
+    {
+      "case_id": "lionrushcoffee-com__el-silencio-chiroso-washed-26272132",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "b92ad9625eeb5ce41034f42a5b4a6fb7a1b2352888b07b032686d32df397e337",
+      "bytes": 9564
+    },
+    {
+      "case_id": "wakecoffee-com__decaf-76048300",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "b07601546099c55f5fe6ad1b5e2a3cd4f2a592d8b917cca364b4f4973a18a421",
+      "bytes": 329563
+    },
+    {
+      "case_id": "wakecoffee-com__decaf-76048300",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "3859c904aa0e102d8ed8f981ba4fa1654e99e7f12e647fb2e1bb9c7ecd45a230",
+      "bytes": 7816
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "b20571811ccda8cbb70fe539abaf1808d3da34e5e013f9b95b049c8c05e64f69",
+      "bytes": 338460
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "0513bda98fbfa6983b6f4b45e58522ebd9c51b170a4340bc9905ca8bbe50878a",
+      "bytes": 14535
+    },
+    {
+      "case_id": "sumatocoffee-com__per-my-last-email-decaf-76c11240",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "6772731afc763725581a2e58f74eaee126490cfca95e813838487a073c6ead60",
+      "bytes": 274819
+    },
+    {
+      "case_id": "sumatocoffee-com__per-my-last-email-decaf-76c11240",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "cd643a0e047edacca027eab35beefba55a36f790f2471f516e56e3e14318d166",
+      "bytes": 17848
+    },
+    {
+      "case_id": "south17roasters-com__dark-raine-4408701d",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "6ac6929bb07f78851af2b86f1e150baea5261e86d248ca074efe2c3a465d6d3a",
+      "bytes": 157693
+    },
+    {
+      "case_id": "south17roasters-com__dark-raine-4408701d",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "037e3c4c87f6e478e27ed6b46fa2e6a2fc61b0cdf99a21fbb72f4a81900de5c3",
+      "bytes": 6309
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__sugarcane-decaf-37227ccc",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "cb3494ab1f89515bd66c058a481d20c3d3cf00c12979caf8880dd24db823749f",
+      "bytes": 529571
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__sugarcane-decaf-37227ccc",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "076363ebc8b65f5938a6b58798043d0cea9f0329e10661d1e6aa2f23039b3e95",
+      "bytes": 29034
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__san-vicente-yogondoy-dd5f12d3",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "300ffbe078a81920c525fa32e24eca33911d008fd6dd835c830fc7a74d4216a7",
+      "bytes": 502652
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__san-vicente-yogondoy-dd5f12d3",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "78e7cd67fa3a02a844a50686f8f855082ac140557bd1c022dda81492b49d29ac",
+      "bytes": 12918
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__fireworks-b1eaf3a1",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "5b4582fff36bc58f021dad5484be680d7dee27cbc00dd4c74fd308732ec374b5",
+      "bytes": 192060
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__fireworks-b1eaf3a1",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "6848319437cde0b43fec76b1d7d5b1da50f0c0eb4aca68306253436fb8fbd34d",
+      "bytes": 9747
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__mama-74e240f8",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "cc229a5dd8f2413734ad4cc5037951d00ba3070df374b54c81a4e8a1ff687f44",
+      "bytes": 209596
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__mama-74e240f8",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "fc98c748aba94b126e8988a6e4c3454ea4e2554cb3e7841ffa4e79d8052ab7e6",
+      "bytes": 12960
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "f17681f7093775304bac159ac60ad5cb769b21d0ce0dd2749606ded0dd940965",
+      "bytes": 355441
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "fc5a5c9649f5a66cfd5e95ca14e72b8f9d903e8cabda749bfc67aad79fc804e3",
+      "bytes": 8814
+    },
+    {
+      "case_id": "highpointroasters-com__campfire-blend-e9a988ad",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "a58e8c718b9642f7b8eff179b399300844b2b4cfe3c1ddb6877533bb2173fc96",
+      "bytes": 217131
+    },
+    {
+      "case_id": "highpointroasters-com__campfire-blend-e9a988ad",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.json",
+      "sha256": "52531c0a78844bd671d90d874b80e5df38d3918f1a046eb363ef5ada68179ddc",
+      "bytes": 3402
+    },
+    {
+      "case_id": "www-congregationcoffee-com__gallop-c3eaf093",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "1b83cba969f80e1aa364ceb33407c9360dc4a6393dd372dc0a0079ce42c49a0e",
+      "bytes": 219249
+    },
+    {
+      "case_id": "www-congregationcoffee-com__gallop-c3eaf093",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "17941fb2f2a58f0f9de10e8efe7415959a0bef29d003e840a4d04db0e27decc8",
+      "bytes": 28701
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__danche-ethiopia-gedeb-zone-blueberry-pineapple-kiwi-lemon-lime-e30cb7ff",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "9be0358e74ae52247314c02bbcd83ac6b40ac78d7ed0216c14cee4925c69d6a0",
+      "bytes": 95668
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__alva-marina-alvarado-honduras-santa-barbara-blank-blank-and-blank-ade18ebf",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "e51e5f430a85a7107a8e829abe59d25b5f62ab3829a4d1c4120fe6def3c85963",
+      "bytes": 95652
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__el-salvador-el-retiro-honey-copy-9779b807",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "2b2161410c4f7312a72d99c792e9a227fb3a25823f1ef392e38214f477a0e07b",
+      "bytes": 272911
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__el-salvador-el-retiro-honey-copy-9779b807",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "87d63f93e1093ad89ac03e24d93fbe17af2443d7bd3f290d49b223ce52e34228",
+      "bytes": 4552
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__copy-of-colombia-monserrate-d819b479",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "d6d571b67020aba4fb5c72e690d3bbda6f22414c6134bae3091a686491702f86",
+      "bytes": 399064
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__copy-of-colombia-monserrate-d819b479",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "9668bc0bd2b0e99c94d360a4a8afc7116a31b2547e6be3413f4ac27c3a7b9f32",
+      "bytes": 23410
+    },
+    {
+      "case_id": "bonjocoffee-com__divino-blend-40eb6059",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "740c4518e19b79043a081dee409a8fdee670065dad91fef427b348449a772070",
+      "bytes": 751945
+    },
+    {
+      "case_id": "bonjocoffee-com__divino-blend-40eb6059",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "ed40be491dc551b84995b9ab8e6f8016f4e4e7d6137b960ca4872bd34ef6088c",
+      "bytes": 17657
+    },
+    {
+      "case_id": "www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "1926c09fa88c396f54e2012c62bd1f986ec9721fc49cbc87404efb34fc05f667",
+      "bytes": 257400
+    },
+    {
+      "case_id": "www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "c5d2493f737d80fe8900c40ffee8c50cedf433f0bfe1e812ff6a8bddd0cf37db",
+      "bytes": 30630
+    },
+    {
+      "case_id": "www-stumptowncoffee-com__ethiopia-nano-challa-d838f3e8",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "c5cdcc1fb920ab8819443525f895c32c10fb79019f84942f47e3b6cdc3ab8875",
+      "bytes": 265500
+    },
+    {
+      "case_id": "www-stumptowncoffee-com__ethiopia-nano-challa-d838f3e8",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "a0ec29a5eb5f2db63a5812a380ac6f164a624443a47a90b6272b83a08640e2a9",
+      "bytes": 4290
+    },
+    {
+      "case_id": "queencitycollectivecoffee-com__banko-gotiti-washed-ethiopia-6ad8dbf6",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "da3f73f2483a6a9623d4cc0e01bdaf0c3c1c33a984da606e183c9d7bc72aa315",
+      "bytes": 276363
+    },
+    {
+      "case_id": "queencitycollectivecoffee-com__banko-gotiti-washed-ethiopia-6ad8dbf6",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "693ac8952c358d8301f2ec98f7842f7c5a237bdcff58bf71b7b25b1b02c8c7e7",
+      "bytes": 6172
+    },
+    {
+      "case_id": "www-koffeekult-com__kenya-b02d4619",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "ddf9f312789b4b827c2331afc8f0d6c83d771624102c493b10cc8daa964a3dcb",
+      "bytes": 313134
+    },
+    {
+      "case_id": "www-koffeekult-com__kenya-b02d4619",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "17b41b119f154e8a06c53e07ec000ed6f3f7e7479bbd236ebec1f604428cfe65",
+      "bytes": 19869
+    },
+    {
+      "case_id": "www-bluejazzcoffee-com__guatemala-el-scorpion-9ca3c32c",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "3243f23ca65d7e45034ea7f4c051ee70a323283e673485b908fbd7bcd8462e02",
+      "bytes": 172092
+    },
+    {
+      "case_id": "www-bluejazzcoffee-com__guatemala-el-scorpion-9ca3c32c",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "bf77eacbca1c7d74fb3d74c6c4ed62dff6988c560eaf02dde4a37973f32041ea",
+      "bytes": 9499
+    },
+    {
+      "case_id": "combatcoffeetea-com__night-vision-medium-roast-kenya-5c582e18",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "9d0ef7c71f3aa844323e2161b94d1926e531a96fa5e14a2c86b4e84bfa2b5088",
+      "bytes": 185395
+    },
+    {
+      "case_id": "combatcoffeetea-com__night-vision-medium-roast-kenya-5c582e18",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "d8ea020f234722c93918a262aa0b10d980ff5728858b1b60d6cf06a29d4cbfe1",
+      "bytes": 30228
+    },
+    {
+      "case_id": "combatcoffeetea-com__narino-dark-roast-single-origin-fair-trade-0ba79ce1",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "c183bce68e7e4cf8f52b693c70426093536a8a7d69adb0fbfd499e18605989a2",
+      "bytes": 189802
+    },
+    {
+      "case_id": "combatcoffeetea-com__narino-dark-roast-single-origin-fair-trade-0ba79ce1",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "3e5fc8ed4d37f17e262ab7609a26075711051693cb690716f885c9e3bd17d9f6",
+      "bytes": 30673
+    },
+    {
+      "case_id": "baldguybrew-com__organic-costa-rican-coffee-a4712955",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "cbe09f2562706c4faabf4ea7c95d75ad3ede2119982451e1588b6d60e4e946c2",
+      "bytes": 535635
+    },
+    {
+      "case_id": "baldguybrew-com__organic-costa-rican-coffee-a4712955",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "de0ed3547099089f72f3dd0258e0e2968a4f82b2ace8ef5b8ffcaa88a87e5db9",
+      "bytes": 19781
+    },
+    {
+      "case_id": "www-roasted-beans-com__zambia-natural-gold-single-origin-168485d4",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "831d4ac53b4df4b8876b568d5753df8130a1cc4ffd9f6d975c0069701ea9e433",
+      "bytes": 132206
+    },
+    {
+      "case_id": "www-roasted-beans-com__zambia-natural-gold-single-origin-168485d4",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "d575bd0443449363a91f662a95e8fe47de7c817e9e1f10944525f5ca5f8250e6",
+      "bytes": 7247
+    },
+    {
+      "case_id": "roadmapcoffeeworks-com__ethiopia-worka-sakaro-anaerobic-a812511b",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "fb373b4bfaf07f03924dee9ba6cda0d7ad9d72732d87372885179f596dd5022b",
+      "bytes": 227034
+    },
+    {
+      "case_id": "roadmapcoffeeworks-com__ethiopia-worka-sakaro-anaerobic-a812511b",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "f8fd79b9e1df30d9418a5feda2169908f8c98648c3490eae0646bebc1bb7aa49",
+      "bytes": 8727
+    },
+    {
+      "case_id": "roadmapcoffeeworks-com__mexico-cesmach-dbdab1c3",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "fbf5d42bb648c45a0a848b49e453e1723a58d224e8f632e8aca96ab2703dbb0f",
+      "bytes": 222604
+    },
+    {
+      "case_id": "roadmapcoffeeworks-com__mexico-cesmach-dbdab1c3",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "5b065275eb4a44a9336e4a60c4c09df4951554fa6ba1dc2f271c173df8fba5d3",
+      "bytes": 7703
+    },
+    {
+      "case_id": "lionrushcoffee-com__huila-decaf-sugarcane-e67d36fe",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "e14775c5995a050e0fa129deda355d5246127a63b67ee9eef24d8f2d5fc81c5a",
+      "bytes": 273683
+    },
+    {
+      "case_id": "lionrushcoffee-com__huila-decaf-sugarcane-e67d36fe",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "b5891f262c77b44185ae2b26c710f2ed5350baa8ee0795e9f05ef418ed55071d",
+      "bytes": 8922
+    },
+    {
+      "case_id": "www-coffeestamp-com__rwanda-coopac-microlot-a-db1df797",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "85a2d6364b33e3cf0cecdeb9c104b7bfc3459c6e8f89f1a84b7b34b754af9b87",
+      "bytes": 302278
+    },
+    {
+      "case_id": "www-coffeestamp-com__rwanda-coopac-microlot-a-db1df797",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "67e92a6308687592ced19c67e7ec6cfedef72b73c9e0b12106cb780b705e43ff",
+      "bytes": 16223
+    },
+    {
+      "case_id": "www-coffeestamp-com__zambia-kateshi-estate-015b39b9",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "dfd570fa600dd73f49bbdce7415d3cbabe58e3273d84db8f6ece0b1c39ca4719",
+      "bytes": 268380
+    },
+    {
+      "case_id": "www-coffeestamp-com__zambia-kateshi-estate-015b39b9",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "eb3b3024ce8a820e5b8ebf7d086b793ba53435743ce940dea55a927e01a78379",
+      "bytes": 8709
+    },
+    {
+      "case_id": "brewtusroasting-com__kenya-ab-nyeri-kiangundo-427eef15",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "d6ee2fcbc701506fb26ac7dee406b04650f1887ac16d25e88a9e5231d1ed9b93",
+      "bytes": 239034
+    },
+    {
+      "case_id": "brewtusroasting-com__kenya-ab-nyeri-kiangundo-427eef15",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "a204e3030a1ef68945fa81c294d0351e001faf9d9aef2e1a3b648d3a29424c8c",
+      "bytes": 6958
+    },
+    {
+      "case_id": "www-limacoffeeroasters-com__kenya-kichwa-tembo-0224337e",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "3d22db1ac1346e3de4259a0876e7457233e455ef2cd0ac60bf63c03aa8502a12",
+      "bytes": 348707
+    },
+    {
+      "case_id": "www-limacoffeeroasters-com__kenya-kichwa-tembo-0224337e",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "21ae2d1ebc8ef2ef74f7bb782d0aa477a9db1c3a730ac758c59d0a4c7e8ee8b9",
+      "bytes": 20797
+    },
+    {
+      "case_id": "www-nativocoffeeroasters-com__suavidad-medium-roast-452533ac",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "71c3f498db234c5bffbf037d27b8eee6da803128df4e3f228cd357111f1a0684",
+      "bytes": 258223
+    },
+    {
+      "case_id": "www-nativocoffeeroasters-com__suavidad-medium-roast-452533ac",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "b0ff517a4ceb6e3271a55d75247b86e65271cb6ee42ab45678d59dddc9f9a9fe",
+      "bytes": 10804
+    },
+    {
+      "case_id": "topecacoffee-com__el-salvador-manzano-natural-1920259d",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "49396564445530ea5b78a141325c0fae953c5ed3bb2ba825d047d8bbdc80fa74",
+      "bytes": 496122
+    },
+    {
+      "case_id": "topecacoffee-com__el-salvador-manzano-natural-1920259d",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "6c1a7da749e5e221240c25931c77fce1dc09ec19cfaf26e0c584db6ff1e1a482",
+      "bytes": 13510
+    },
+    {
+      "case_id": "subliminalcoffee-com__finca-terrerito-natural-honduras-1f82a287",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "59964ccfb4802e1a58da267764dedb89ae2e437175139d2ae775f14fd6c29f0a",
+      "bytes": 201238
+    },
+    {
+      "case_id": "subliminalcoffee-com__finca-terrerito-natural-honduras-1f82a287",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "b481e58c63a900e77a066134200fe9d0e161ff63e8ca023a97e30d00ae2b7ef9",
+      "bytes": 6261
+    },
+    {
+      "case_id": "802coffee-com__zambia-kateshi-estate-ba0db55d",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "d3af13c2ea6215f5a1e2175b5f9c793db57663d14c8aacc4e5b1bea55ae10d9d",
+      "bytes": 92736
+    },
+    {
+      "case_id": "802coffee-com__zambia-kateshi-estate-ba0db55d",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "f8cd0bd9ccb2f8a712945cc646426a5e2e288a430643fb6c2af2697cbc370d33",
+      "bytes": 8363
+    },
+    {
+      "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "750b88b7dfbc882105518fc6457f0f7efa985c55eb633b7f3187ea9d29d33914",
+      "bytes": 747833
+    },
+    {
+      "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "248cd32c6b42610848fd99de68b4e89bb2fc556f42f56f1d56e252f523af9d49",
+      "bytes": 38951
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "4d5733cd1db21931369ee82a4b43a8151e055fa7bd70bd3a5aafd665dbbca9c6",
+      "bytes": 510929
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "483a4a6cdf7f070419b1b57d89493f606fa7c5820be33fd035c0dd11bf737bf0",
+      "bytes": 29235
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-decaf-colombia-el-vergel-estate-natural-process-892ff188",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "b08381e71ea6903cc74f41f89ff637fd07ba2008b899e1698e4e57fd94f3acc7",
+      "bytes": 500506
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-decaf-colombia-el-vergel-estate-natural-process-892ff188",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "f22871de7ab80db84c2342af18422303dfcc60e16a949ec4404ac4a0a9aca28c",
+      "bytes": 27182
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-3-mexico-san-isidro-zoquiapan-a9d137cc",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "47b0f1cdae175b84e54914712e6ee8f68fcb3635cbdc6514687774990b139fd7",
+      "bytes": 496595
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-3-mexico-san-isidro-zoquiapan-a9d137cc",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "a0e0e75d09506619051fe10c7cf71b9c6b49383fde6552f906d8e528d609f1a7",
+      "bytes": 27127
+    },
+    {
+      "case_id": "webe-coffee__guatemala-los-volcanes-6e6502b0",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "a7c18c1ead3721877fbb742e37c346fa7a672869dec72bcd78ac168e7d45d9d6",
+      "bytes": 289366
+    },
+    {
+      "case_id": "webe-coffee__guatemala-los-volcanes-6e6502b0",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "71ebaa9107b768303f3dee1e70d7904a1aaea23dce075416bbd3f66e316fbd05",
+      "bytes": 4999
+    },
+    {
+      "case_id": "www-vailcoffee-com__reserve-coffee-3-b0e7cce9",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "00014b5f939047146607495ebf490acfbad155eb250b186e1f5b2164cd44efa6",
+      "bytes": 494011
+    },
+    {
+      "case_id": "www-vailcoffee-com__reserve-coffee-3-b0e7cce9",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "f2a74e47787d8ff42daf2ddb3b86497016cc6ad2ddd3b791984aee0fc9c519a0",
+      "bytes": 11185
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-yessica-diego-parra-1e778f8e",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "036fa74153b5c277138614f649a058f3ef36ecce3a70085b15de8d8bd9a69ecc",
+      "bytes": 346781
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-yessica-diego-parra-1e778f8e",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "10ac5b383f4c6292cc725179000ee875338e633da9f0c68db0ce41eaffbd1a65",
+      "bytes": 9003
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-alejandro-ariza-inza-94d5813a",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "272b3fbc00cd106e9a8a66719f2cb186599a05da6be23ffee488a43292db17b3",
+      "bytes": 353193
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-alejandro-ariza-inza-94d5813a",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "c35dc609cf317b0df7b7dbb98e888e5c514aa057207082dbb4bfbbd87d0e8ca9",
+      "bytes": 9184
+    },
+    {
+      "case_id": "others-coffee__out-side-dark-brazil-ed212ef7",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "75e712a1e4bf097f4dda5cdbddb86cf2ebeb517ab2d38edd22effe8167390b26",
+      "bytes": 233331
+    },
+    {
+      "case_id": "others-coffee__out-side-dark-brazil-ed212ef7",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "3e76f5fa05db8fa2f58a721a786d6b1da253b91b42c8b7e038cc8779af30347f",
+      "bytes": 2801
+    },
+    {
+      "case_id": "mbingomountaincoffee-com__rwanda-inzovu-supreme-natural-e2d495af",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "a4f4fa7fc4e16541504fd48cca38d64a726ec45d983546458f8d26520ae75c94",
+      "bytes": 247385
+    },
+    {
+      "case_id": "mbingomountaincoffee-com__rwanda-inzovu-supreme-natural-e2d495af",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "ead7152170896983082e5ae6b852b96b92542d63b5e8c8a6fb07c17fb5375407",
+      "bytes": 47182
+    },
+    {
+      "case_id": "fostercoffee-co__sookoo-ethiopia-6359d13f",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "a4475ce227f539a269a6f453ae9035905c4130cc80cccb59b1dfebda4a090bff",
+      "bytes": 371443
+    },
+    {
+      "case_id": "fostercoffee-co__sookoo-ethiopia-6359d13f",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "07cae15c272b9e7111d0c801fa56974b82ed3f4e96b25454ba6b2bf6c69ae209",
+      "bytes": 4279
+    },
+    {
+      "case_id": "vestacoffee-com__kamwangi-kenya-cbf1ab54",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "de0c90f9b76fbfd83730d83854265b2d0b48662ff9f93c6819bcebb76c8b9667",
+      "bytes": 439627
+    },
+    {
+      "case_id": "vestacoffee-com__kamwangi-kenya-cbf1ab54",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "a1169b25b39f0f8bc47593ddcca1a759174934c28d29aa6f30fb30ab138892c3",
+      "bytes": 4777
+    },
+    {
+      "case_id": "vestacoffee-com__wush-wush-anaerobic-natural-7016c178",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "7b4518a9877fd406aebfedddbabc919c3d14393365558f8a87d17fadca2b0b23",
+      "bytes": 474749
+    },
+    {
+      "case_id": "vestacoffee-com__wush-wush-anaerobic-natural-7016c178",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "9d9cf70c38026b5c52fc2987c67d4a3da8f7c5762c2514f3532254e13247a0d0",
+      "bytes": 5942
+    },
+    {
+      "case_id": "vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "f5c476bf272b1ed1094e745744e1d67d3213f8deac3bde4ae1282b5dc3fe4345",
+      "bytes": 431303
+    },
+    {
+      "case_id": "vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "87422028078632d3209d77c64bc89d1acdbd3e28b3caf55994d8fdb3dd92707b",
+      "bytes": 3527
+    },
+    {
+      "case_id": "quartermaine-com__colombia-6ab9ee5e",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "41a5a4a8c9b71723ef463802b46c3c24ea2cc3af2d036563a3abb79881ce7b16",
+      "bytes": 361389
+    },
+    {
+      "case_id": "quartermaine-com__colombia-6ab9ee5e",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "94f7e0ed3d47c370a9478274ddfc077546d224cc440e1ebc7251e1476790e7d9",
+      "bytes": 71592
+    },
+    {
+      "case_id": "www-swroasting-coffee__25NBJDMXCAYX4YC5XJZAYZDG-1d539602",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "34093ab1b46338d7b38491696175307b4af403081e426d92e1afd48ec1953a0e",
+      "bytes": 55068
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__ethiopia-gedeb-banko-gotiti-12oz-5ae573be",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "fa7d0f6da7db1c8d1521804194f935bb161bf072a76135753a9bbb77a6bacd27",
+      "bytes": 629809
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__ethiopia-gedeb-banko-gotiti-12oz-5ae573be",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "cba09ccfc98532bdf267ad4d82fbbe70022765089a5ed0e6f51c0f0f342cd484",
+      "bytes": 37979
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__kenya-estate-670f492d",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "8c783003a851e2f82f768b0d39ead231a999e1addb43af3bb4cae2485a9367b2",
+      "bytes": 490907
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__kenya-estate-670f492d",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "a9b47dc6e1c1333fc2d3ccd480147c5140601edb7fe81ff8b67194617a3e38a1",
+      "bytes": 27375
+    },
+    {
+      "case_id": "www-rustydogcoffee-com__ethiopia-wush-wush-natural-processed-light-roast-single-farmer-3cbbcccd",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "0bce8851d7c2fd5b4946f7627cf503d60370201abe890c8f8e49a0f514e568d9",
+      "bytes": 204131
+    },
+    {
+      "case_id": "www-rustydogcoffee-com__ethiopia-wush-wush-natural-processed-light-roast-single-farmer-3cbbcccd",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "7227bcc5c997d1b7bf2142efa21c111ca4d4b9eaf00dea4be1b776fee92b9ba0",
+      "bytes": 11167
+    },
+    {
+      "case_id": "www-lineageroasting-com__decaf-2c6427c4",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "cb006472720cbd9759f1dd0a46f839d434909043ab8d9a0a2fe1cb33dc50418f",
+      "bytes": 139276
+    },
+    {
+      "case_id": "www-lineageroasting-com__decaf-2c6427c4",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "d4ccaf3784d5df0f7f820672870e90417ce3be1d267f785cdbe8f99185db5958",
+      "bytes": 9149
+    },
+    {
+      "case_id": "beanstockcoffee-com__last-roast-holiday-roast-2-el-salvador-finca-los-angeles-pacamara-black-honey-pr-635c445a",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "df1cc8d59c8f19e03793117056ae950144383e8b996e221b911d43d6ed4923e0",
+      "bytes": 110637
+    },
+    {
+      "case_id": "beanstockcoffee-com__last-roast-holiday-roast-2-el-salvador-finca-los-angeles-pacamara-black-honey-pr-635c445a",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "1738e4572ba4555bc947659ff55b148ae4886c9a096cfc3fa36fd80d6a32c358",
+      "bytes": 16039
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__balthvs-manifest-3b637bfc",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "53d219063432ab48f02aa765e3cabd517ad2b221f7df4ffb4eb9cd6614d35685",
+      "bytes": 249436
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__balthvs-manifest-3b637bfc",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "a432c79bfcc4aefd0e35fe81fdb535e06d7ebc052d41e1767da716ecb7919e93",
+      "bytes": 12112
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__under-the-rainbow-october-limited-blend-12a24dc7",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "7be0d2306586cdb1eab88f918f0877cef12d703dcb60f36193bea90bb0b7ac61",
+      "bytes": 251834
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__under-the-rainbow-october-limited-blend-12a24dc7",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "f6a8a13fa59cee56837c201abffd239c82c25710f945c662789a72df8be551d3",
+      "bytes": 14438
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__anthrax-cursum-perficio-e8175990",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "d416ea137c49de5b34334ad5b74cfdbd0b7443d3efdeda781003d9de90eed350",
+      "bytes": 250138
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__anthrax-cursum-perficio-e8175990",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "11862e9806be8002684880d25f201b75a83f4ada9a03c9fbf07f76abb3a74837",
+      "bytes": 13100
+    },
+    {
+      "case_id": "localroasters-com__nicaragua-la-bastilla-12-oz-368e5fab",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "8d3b2ebc14d490bff652c93d4f6835aca5cfbfcf354ea2ec4b1c56f5728aba81",
+      "bytes": 212820
+    },
+    {
+      "case_id": "localroasters-com__nicaragua-la-bastilla-12-oz-368e5fab",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "d272d88d5bdba54985f76e999e2fbcbc36d7f770d9709e1becc9531d73cdf8f8",
+      "bytes": 7970
+    },
+    {
+      "case_id": "localroasters-com__brazil-natural-12-oz-51c91b04",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "45e6d293f0972efbf92b2d05570449203222ceb5007894b4c61af8816b4aded1",
+      "bytes": 201669
+    },
+    {
+      "case_id": "localroasters-com__brazil-natural-12-oz-51c91b04",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "2c7d87d370f11941d0354c88146d6210d46a05ae95e70da1fddd1f480dae88b9",
+      "bytes": 6684
+    },
+    {
+      "case_id": "elixrcoffee-com__wush-wush-ethiopia-630aa3db",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "34dd03767d0890c512536720599bbdf7d1bb5d0ce84a259fce272a4c200eab75",
+      "bytes": 149074
+    },
+    {
+      "case_id": "elixrcoffee-com__wush-wush-ethiopia-630aa3db",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "45250aee904c91d28638b059ea418ef7b41c0eb214d200e1b5bcf3aaf28c5553",
+      "bytes": 3498
+    },
+    {
+      "case_id": "methodicalcoffee-com__colombia-andres-cardona-322bcc3f",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "8272ef13e46e663fe20d4e963bae8879258c3cbe9d09218e3ae7eea312ed38af",
+      "bytes": 309217
+    },
+    {
+      "case_id": "methodicalcoffee-com__colombia-andres-cardona-322bcc3f",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "3e7850c3b7ef48a4a2f4bc43f472d2f37c1170448b5489c016cbd10092050927",
+      "bytes": 10826
+    },
+    {
+      "case_id": "bonjocoffee-com__guatemala-finca-el-rincon-copy-438c5bc9",
+      "capture_id": "page",
+      "file": "page.html",
+      "sha256": "23ba90c7580438139df3a07819c0c50c1e3f352582b47ec58824e6e83492592c",
+      "bytes": 579851
+    },
+    {
+      "case_id": "bonjocoffee-com__guatemala-finca-el-rincon-copy-438c5bc9",
+      "capture_id": "product-endpoint",
+      "file": "product-endpoint.html",
+      "sha256": "7da544e7a1867f2f67312c5ff1a05018d7f44c1e93db700fedb47c0b7c5e94ac",
+      "bytes": 6655
+    }
+  ],
+  "verified_source_packets": [
+    {
+      "case_id": "queencitycollectivecoffee-com__liliana-ramirez-colombia-92ec7653",
+      "sha256": "1add8a12e46b2666308dd2419eb856ef81bd7d8661ab8c8876812f7ab9d87747",
+      "bytes": 19933
+    },
+    {
+      "case_id": "sextantcoffee-com__the-windsor-sextant-coffee-670265e1",
+      "sha256": "5becd5ca806a6bc49d985180249b65be45cd583f91e3f24d28b1419ddd2ce02c",
+      "bytes": 59237
+    },
+    {
+      "case_id": "www-koffeekult-com__costa-rica-perla-negra-peaberry-4491e5c0",
+      "sha256": "8522ef8098662ab65da246bb2cfb2863f15fbc1a12fc34ca4fdb952ad6e3f11c",
+      "bytes": 34062
+    },
+    {
+      "case_id": "subterracoffee-com__ethiopia-guji-hambela-buliye-natural-light-roast-585fcce7",
+      "sha256": "47dbcc892e2616f1e5d7902beac402d17b83d6e24b62a771f21c2b75b9a27407",
+      "bytes": 46623
+    },
+    {
+      "case_id": "www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07",
+      "sha256": "0b4f4e1fabd40262181d9aee4056c5cf43c9d8002b55f353be0981f1867850fd",
+      "bytes": 20050
+    },
+    {
+      "case_id": "summermooncoffee-com__en-fuego-8cc1b6ac",
+      "sha256": "d613dd6b1127246ce6414438e2c84748ac3e9b4675718f68e22b6532149f1091",
+      "bytes": 25964
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "sha256": "5f0c9250ecaab18a90911155288d7f6a116a5e740b46d869e71bf9a21b053b77",
+      "bytes": 144193
+    },
+    {
+      "case_id": "www-unlockedcoffee-com__dedication-costa-rica-4667ab5c",
+      "sha256": "8ea33bd19186ee5097e06726cf12c9ad2790c860cb22cef7b39619c10fea11fd",
+      "bytes": 29481
+    },
+    {
+      "case_id": "lionrushcoffee-com__el-silencio-chiroso-washed-26272132",
+      "sha256": "66015383c518896c51971f31326ae6d17819b90fbf406735b9c1d41d95ec3207",
+      "bytes": 36896
+    },
+    {
+      "case_id": "wakecoffee-com__decaf-76048300",
+      "sha256": "1c09ea7715719fc1a00c72a0f7e85f27bccdc6a29a5626308e421ccbe40a2ab5",
+      "bytes": 19177
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d",
+      "sha256": "829260824370f840ce99498156d59477e58dbd077c8041201e192e5314c2980e",
+      "bytes": 37846
+    },
+    {
+      "case_id": "sumatocoffee-com__per-my-last-email-decaf-76c11240",
+      "sha256": "125b4266fc3e2367577ed21a2c9e6385820e4d05da68c2e2280cf2e7f2076b77",
+      "bytes": 51444
+    },
+    {
+      "case_id": "south17roasters-com__dark-raine-4408701d",
+      "sha256": "8f20cfdc527dfe961039f1d0d9e9b2331735dc6079ef53cba081b095b4ce072e",
+      "bytes": 19183
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__sugarcane-decaf-37227ccc",
+      "sha256": "0bd0f592cd67cf563423dc33f4efe44c0efbaad8c82c3c7f40bb9a8066dc0111",
+      "bytes": 69346
+    },
+    {
+      "case_id": "www-chromaticcoffee-com__san-vicente-yogondoy-dd5f12d3",
+      "sha256": "bd33b3a0e65aaf70c094bb32efe0332d63796d144047d468e4999ffb9a21dd0e",
+      "bytes": 36200
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__fireworks-b1eaf3a1",
+      "sha256": "1b1629eac5d136de07a31c87103463aaadcf564ae8a540c66a4aa2b77fbfd665",
+      "bytes": 21028
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__mama-74e240f8",
+      "sha256": "4dbb5f8a9e66df684c2a06c98c223ab57c8e3a341a717ed04c69d241eedd3b90",
+      "bytes": 27053
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb",
+      "sha256": "e5bdfada24f09aba3e1609b590b2272f8762373492908e8bb84d46b1af886462",
+      "bytes": 46154
+    },
+    {
+      "case_id": "highpointroasters-com__campfire-blend-e9a988ad",
+      "sha256": "e2e665fba1b678710ea0cc5bcca7dabd04c4e4fe4f58fdd2ecbe58757098ac25",
+      "bytes": 18488
+    },
+    {
+      "case_id": "www-congregationcoffee-com__gallop-c3eaf093",
+      "sha256": "706b934af7ac2e5b7849448fbd3061363185940395a42b13fa52d8c11b1b5b5f",
+      "bytes": 66429
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__danche-ethiopia-gedeb-zone-blueberry-pineapple-kiwi-lemon-lime-e30cb7ff",
+      "sha256": "df12ef8b7325a6ff0786bf98919ab1d2c03dccb8da0caaaf6a95ea9a9b839667",
+      "bytes": 10961
+    },
+    {
+      "case_id": "www-blindtigercoffee-com__alva-marina-alvarado-honduras-santa-barbara-blank-blank-and-blank-ade18ebf",
+      "sha256": "5c8ed0319bb07296bcfdb3436b0e60a2c15ad0419fd6b3e628242409bc7d65e1",
+      "bytes": 11100
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__el-salvador-el-retiro-honey-copy-9779b807",
+      "sha256": "a7c2bcaaa701592744e2fe1c3a03b98cf7a924db45081fcb91b555e5bd817b76",
+      "bytes": 12852
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__copy-of-colombia-monserrate-d819b479",
+      "sha256": "e7e037ff3976a612017e48dacf30508cd803ea1ff37a315a628979d195440021",
+      "bytes": 51308
+    },
+    {
+      "case_id": "bonjocoffee-com__divino-blend-40eb6059",
+      "sha256": "ea20346b6c8fc970cad4f6b3cca9cfa840d50b914c652b1b386119f646eb3387",
+      "bytes": 62778
+    },
+    {
+      "case_id": "www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0",
+      "sha256": "20cd0ae21a0bd91dcd08812ed2d8cd21ef7357763e16b1d86c9062869e12a31d",
+      "bytes": 69786
+    },
+    {
+      "case_id": "www-stumptowncoffee-com__ethiopia-nano-challa-d838f3e8",
+      "sha256": "33f44b68100215495345d0caafe2f7712f7820d2d894645de61a6e9544469abd",
+      "bytes": 32081
+    },
+    {
+      "case_id": "queencitycollectivecoffee-com__banko-gotiti-washed-ethiopia-6ad8dbf6",
+      "sha256": "baef57a95440e5fb58e1a0552031315e52e0f0594081d32e4e26671a49269d84",
+      "bytes": 27031
+    },
+    {
+      "case_id": "www-koffeekult-com__kenya-b02d4619",
+      "sha256": "c9795bedec26e35e4dadab22d1d669788e86e9da32c4f504ef711823520ddc44",
+      "bytes": 59401
+    },
+    {
+      "case_id": "www-bluejazzcoffee-com__guatemala-el-scorpion-9ca3c32c",
+      "sha256": "0c776de494d6484152ac440746986d951eadac7ff5bc3f6b8cd91e3ae1eb6c5a",
+      "bytes": 31180
+    },
+    {
+      "case_id": "combatcoffeetea-com__night-vision-medium-roast-kenya-5c582e18",
+      "sha256": "f42a5eff895f9f2b9632aeb237b287f80fbc9c93a5cc9b718145b7c21b6010b5",
+      "bytes": 61363
+    },
+    {
+      "case_id": "combatcoffeetea-com__narino-dark-roast-single-origin-fair-trade-0ba79ce1",
+      "sha256": "c4378e32bae2cfacfc1d2e3dbbd47a108a2f510cd6a7ffcdf048743878b81cfa",
+      "bytes": 61341
+    },
+    {
+      "case_id": "baldguybrew-com__organic-costa-rican-coffee-a4712955",
+      "sha256": "7f00937ffa5d061d73fa54f910c746d4fa09ceb11ee41fdb01603bd821b8eb3a",
+      "bytes": 52402
+    },
+    {
+      "case_id": "www-roasted-beans-com__zambia-natural-gold-single-origin-168485d4",
+      "sha256": "3f12dde8fbc19e736a7ba88031da9469811784bc87fd70db30a38ffe3fc806a2",
+      "bytes": 16238
+    },
+    {
+      "case_id": "roadmapcoffeeworks-com__ethiopia-worka-sakaro-anaerobic-a812511b",
+      "sha256": "427335fb3dd1d24ef553a66c09c32733e69272e4f6dd6d1e017c491de0071c7c",
+      "bytes": 33411
+    },
+    {
+      "case_id": "roadmapcoffeeworks-com__mexico-cesmach-dbdab1c3",
+      "sha256": "b475880ba5ac1a61692cfac1316f277bfd05802cdef4ec0ea9ded0931d024fef",
+      "bytes": 30819
+    },
+    {
+      "case_id": "lionrushcoffee-com__huila-decaf-sugarcane-e67d36fe",
+      "sha256": "88086ab80657d4c83904f1762792222a166b7fe26d7b683e78e19dd177793e82",
+      "bytes": 35910
+    },
+    {
+      "case_id": "www-coffeestamp-com__rwanda-coopac-microlot-a-db1df797",
+      "sha256": "a344860496bb1ed0b9835b3bdf06c7883169b8a1454f33757c5f6ecb26c0c8a4",
+      "bytes": 39851
+    },
+    {
+      "case_id": "www-coffeestamp-com__zambia-kateshi-estate-015b39b9",
+      "sha256": "638c109ade7ad879a6fbd16ea228d963d1a48229d560103afc6f09c11536b937",
+      "bytes": 25835
+    },
+    {
+      "case_id": "brewtusroasting-com__kenya-ab-nyeri-kiangundo-427eef15",
+      "sha256": "2fbbd867b69971558cfbe570cfa57dd06e3371bcb7911cc47d16e0dc3d593161",
+      "bytes": 29707
+    },
+    {
+      "case_id": "www-limacoffeeroasters-com__kenya-kichwa-tembo-0224337e",
+      "sha256": "d9923a84a8a5cd20b5839faac749f526bf3e81db782ff1bcf8c27740a41f110c",
+      "bytes": 48434
+    },
+    {
+      "case_id": "www-nativocoffeeroasters-com__suavidad-medium-roast-452533ac",
+      "sha256": "44c82e58317de01c441135b4a9b4b8d3fe270c5c8328fd87153d744c43648f8d",
+      "bytes": 32169
+    },
+    {
+      "case_id": "topecacoffee-com__el-salvador-manzano-natural-1920259d",
+      "sha256": "99e79d368b178414413022c4178f495f4b4f4a5a00dc8ef85ba61b5d20791d60",
+      "bytes": 48311
+    },
+    {
+      "case_id": "subliminalcoffee-com__finca-terrerito-natural-honduras-1f82a287",
+      "sha256": "b9b0c2372808baa4097e6e3ce7bb32f75cea0e6daf1eb999f5e8f6875961f781",
+      "bytes": 26586
+    },
+    {
+      "case_id": "802coffee-com__zambia-kateshi-estate-ba0db55d",
+      "sha256": "7abfe4f55ef79d94a45b7ac960f0703ae873321b4265dd831de912706333c321",
+      "bytes": 22817
+    },
+    {
+      "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+      "sha256": "f455325847e40352c6e1fddff33e50065aabd00773914afa37c9ade107788d03",
+      "bytes": 99829
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+      "sha256": "1e43e1d15b156e8052b7cbba3719af75d087bee2399c63f1da159c5e88037f0f",
+      "bytes": 90969
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-decaf-colombia-el-vergel-estate-natural-process-892ff188",
+      "sha256": "f4952f07433be89db970e8b456245768b08f372733e29913a46b9dc186c64d7c",
+      "bytes": 87626
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-3-mexico-san-isidro-zoquiapan-a9d137cc",
+      "sha256": "709b5c1e94b21206ae9ee15ec92cdf2c2f06888e3d8eec847bfc752925e1adb3",
+      "bytes": 85183
+    },
+    {
+      "case_id": "webe-coffee__guatemala-los-volcanes-6e6502b0",
+      "sha256": "8cf976af75cd619602468b678430ebe66e6d2a240b10317f64b9494a082ce436",
+      "bytes": 19110
+    },
+    {
+      "case_id": "www-vailcoffee-com__reserve-coffee-3-b0e7cce9",
+      "sha256": "8ea11e686a0afa431b1068243619924923a4d1e247c070aa1c30774d9d23ab33",
+      "bytes": 56833
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-yessica-diego-parra-1e778f8e",
+      "sha256": "a6197a6013b639940aab850b3cda3c1b86f7a2b85bf60f0a05aaa4243c6fcd24",
+      "bytes": 50162
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__young-producers-alejandro-ariza-inza-94d5813a",
+      "sha256": "a592fd330616d9fe1b184a873942ae094e00f84862f3ad41073742d9366e62c0",
+      "bytes": 52258
+    },
+    {
+      "case_id": "others-coffee__out-side-dark-brazil-ed212ef7",
+      "sha256": "f5a1807f57c80c804b0fbfcd167db0569c7b0b118249e90324455c57fb0bd8af",
+      "bytes": 13382
+    },
+    {
+      "case_id": "mbingomountaincoffee-com__rwanda-inzovu-supreme-natural-e2d495af",
+      "sha256": "a30928a57bcd982ccf3834d93c972050e338d990d0eb4633192dd43277c917d0",
+      "bytes": 93591
+    },
+    {
+      "case_id": "fostercoffee-co__sookoo-ethiopia-6359d13f",
+      "sha256": "090232405675f6ac9d3745f65df3a8bbfa14bd31fadf9fbb46a83f46eab00cc8",
+      "bytes": 19812
+    },
+    {
+      "case_id": "vestacoffee-com__kamwangi-kenya-cbf1ab54",
+      "sha256": "a922eebfd5ba95b0c0e3da066fe88922530ff9fef3cbf9c7ce4b087c77c68a9f",
+      "bytes": 28625
+    },
+    {
+      "case_id": "vestacoffee-com__wush-wush-anaerobic-natural-7016c178",
+      "sha256": "b6c7536eee6c9fb73782d380278aafc66b7aa3861e0f61e88ed1b467ce6d7bce",
+      "bytes": 27693
+    },
+    {
+      "case_id": "vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2",
+      "sha256": "3d93432c5edcda9acbd375885c71ffab33205c122c5fb0bd8f3fde73ee840a5e",
+      "bytes": 23575
+    },
+    {
+      "case_id": "quartermaine-com__colombia-6ab9ee5e",
+      "sha256": "fc588b4037a0aa7136c5e6b97a3821c632618793602942d08dfc50d09c96d26a",
+      "bytes": 125319
+    },
+    {
+      "case_id": "www-swroasting-coffee__25NBJDMXCAYX4YC5XJZAYZDG-1d539602",
+      "sha256": "fe1b1e9e756d3f83db4effcb454552b616d72878cf7b65313ce6d10ccc744dcd",
+      "bytes": 6142
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__ethiopia-gedeb-banko-gotiti-12oz-5ae573be",
+      "sha256": "eb689c5a96649f46cb99d509dfda4e475c0a67c977b48169bb7fea5d4141e8f4",
+      "bytes": 71988
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__kenya-estate-670f492d",
+      "sha256": "3f2d4b76c8e383a74801a3de3c74da0ade9b6c83db468bb1ca4ffb6dde47d15a",
+      "bytes": 59425
+    },
+    {
+      "case_id": "www-rustydogcoffee-com__ethiopia-wush-wush-natural-processed-light-roast-single-farmer-3cbbcccd",
+      "sha256": "5a4a0fafa58eb59ab113eff1cdeab15ec39088d97906a07873568446524552ac",
+      "bytes": 27616
+    },
+    {
+      "case_id": "www-lineageroasting-com__decaf-2c6427c4",
+      "sha256": "548979d4f8ab73853eca0c5f2f3d13314dd2821eeeb8674c298299385b174af0",
+      "bytes": 26366
+    },
+    {
+      "case_id": "beanstockcoffee-com__last-roast-holiday-roast-2-el-salvador-finca-los-angeles-pacamara-black-honey-pr-635c445a",
+      "sha256": "b7cb46da3efdfa6a436b45d28d5524be938c8be32078a58b1af368a730bd67ab",
+      "bytes": 34584
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__balthvs-manifest-3b637bfc",
+      "sha256": "11d20cbdfe7d0217e792dc94d4cecd302b46fef96fa7b9c0663671ee206c1a84",
+      "bytes": 32392
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__under-the-rainbow-october-limited-blend-12a24dc7",
+      "sha256": "c0757d64cfa4e315224e5ac4a0d64e766f271c3cba4ff3fdfdd1f744406bd679",
+      "bytes": 32030
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__anthrax-cursum-perficio-e8175990",
+      "sha256": "388839a86cb1ef373e7f72f56ae1ba65675fc695f87c828f06f4a9551b1bb28c",
+      "bytes": 30966
+    },
+    {
+      "case_id": "localroasters-com__nicaragua-la-bastilla-12-oz-368e5fab",
+      "sha256": "acdc8ff8cb99103f3cc5fe0c63124b702e680c1a00d141e122a9f53427f5ba78",
+      "bytes": 19671
+    },
+    {
+      "case_id": "localroasters-com__brazil-natural-12-oz-51c91b04",
+      "sha256": "672ab7d98bb02b72a27b4ed309cf52fc64275bd133ac4f8e7752ba8a89223e47",
+      "bytes": 17105
+    },
+    {
+      "case_id": "elixrcoffee-com__wush-wush-ethiopia-630aa3db",
+      "sha256": "c7b529a6d99eddf1a0e4accc54f1e46e27a65ea4c107e0d9e4e294f1c7c9b17a",
+      "bytes": 11827
+    },
+    {
+      "case_id": "methodicalcoffee-com__colombia-andres-cardona-322bcc3f",
+      "sha256": "c97c94743bad5c1b73ce86584ea9186b517c23b101e46a6834956f8e00654c1f",
+      "bytes": 37780
+    },
+    {
+      "case_id": "bonjocoffee-com__guatemala-finca-el-rincon-copy-438c5bc9",
+      "sha256": "cab13fa914754053f74cdd9ca74195e99bd01aaa7e1dff909278b14ee08b0552",
+      "bytes": 41402
+    }
+  ],
+  "frozen_files_verified": [
+    {
+      "path": "extractor-600/manifest.json",
+      "sha256": "388e953bf0774ccaf93ad08c76e4714a8b1c23a6feabd073bbbb4270077168da"
+    },
+    {
+      "path": "dic-audit-recovered/docs/audits/extractor-600-oracle-a.json",
+      "sha256": "2cc77e02828d640f342ef73597b550e8892cfa354882977254d2b9697b960c64"
+    },
+    {
+      "path": "dic-audit-recovered/docs/audits/extractor-600-oracle-b.json",
+      "sha256": "cd2ce6b8ff09bdaf4fedbeaad3b7556efe0c42607cc04229563a90a32ecef72b"
+    },
+    {
+      "path": "dic-audit-recovered/docs/audits/extractor-600-oracle-c.json",
+      "sha256": "60c00a8f61f06af1858ebdae7ace408987cb79d80014552f03cb724afc71cbee"
+    },
+    {
+      "path": "dic-audit-recovered/docs/audits/extractor-600-oracle-root.json",
+      "sha256": "088034be3484a543b3b36d76420b3567f8b3cd708ee266e2c45da9996c6f2e0e"
+    },
+    {
+      "path": "dic-audit-recovered/docs/audits/extractor-600-oracle-root-extra-c.json",
+      "sha256": "7b9cb91e7e6f6426162af761557c8ebde9c91726509ed919939351c2014215b8"
+    },
+    {
+      "path": "extractor-600/frozen-source-hashes.json",
+      "sha256": "8498aab51eb1a39e076428ad2e931a563f1ca4ef1f8dc210f8dd90431c6280a4"
+    }
+  ],
+  "limitations": [
+    "Post-output source adjudication, not an independently relabeled oracle or a score upgrade.",
+    "The remaining three partial origins and Perla Negra qualifier are published source information still missing from canonical field detail; literal source retention does not make those assertions exact.",
+    "Machoruso is a supported farm name with its role retained separately, not a newly identified human producer.",
+    "Two generic Microlot/recurring-season release values are deliberately withheld and remain missing under the unchanged frozen expectation.",
+    "Unchanged50-record variety/release source decisions are reused, not described as50 new manual re-annotations.",
+    "This review reads captured original public sources; it does not certify current live websites, production networking, saved member records or deployment."
+  ],
+  "runtime_tests_or_oracle_modified": false,
+  "remote_writes_or_publication": false
+}

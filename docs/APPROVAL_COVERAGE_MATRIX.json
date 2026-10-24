@@ -600,6 +600,40 @@
           "contains": "server-authoritative impact"
         }
       ]
+    },
+    {
+      "id": "coffee_expanded_603_source_audit",
+      "decision_key": "current_owner_extractor_deterministic_only_20261019",
+      "scope": "Owner-expanded no-key/no-additional-cost 603-coffee source audit; deterministic layout/scoping/identity/field repairs, evidence preservation/export, exact acknowledgement correction handoff, and separate local OCR review.",
+      "implementation": "FULL_AUDIT_COMPLETE; GITHUB_INTEGRATION_TESTING. Candidate8:603/603 previews,3024 exact/167 missing/811 review; all four prior omissions restored, three malformed-source flags. Owner-authorized384 facts/192000 content units. Complete local evidence preserved; actual source integration and standard GitHub CI pending after explicit owner write/Actions authorization. No publication and no alternate readiness policy.",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; isolated automated mobile/browser and local OCR evidence is recorded separately; no physical-device acceptance claimed.",
+      "issue": 33,
+      "assertions": [
+        {
+          "path": "src/server/coffee-source-facts.mjs",
+          "contains": "MAX_SOURCE_FACT_CHARACTERS=192_000"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "coffeeSourceReviewSnapshot"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "reviewAddedCoffeeDetails"
+        },
+        {
+          "path": "site/cloud/outbox.js",
+          "contains": "readReceipt(owner,id)"
+        },
+        {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "contains": "source_url_fetched"
+        },
+        {
+          "path": "docs/workstreams/issue-33.md",
+          "contains": "4,002 canonical assertions"
+        }
+      ]
     }
   ],
   "active_gap_flags": [

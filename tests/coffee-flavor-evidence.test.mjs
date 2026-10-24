@@ -22,7 +22,7 @@ test('PERC lot narrative yields genuine flavor notes, not fermentation text or o
   '<h2>THE DEETS!</h2><p>Mara Estate coffee with notes of strawberry, guava, honeydew, and sweet cream.</p>'+
   '<h2>BREW RECCS</h2><p>Drip recipe with notes of another coffee.</p>','Kenya Mara Estate');
  assert.equal(r.fields.tasting_notes,'strawberry, guava, honeydew, and sweet cream');
- assert.equal(r.fields.origin,'Narok County');
+ assert.equal(r.fields.origin,'Narok County, Kenya');
  assert.equal(r.fields.process,'Natural');
 });
 test('nested PERC story heading and later decorations do not hide clear flavor evidence',()=>{

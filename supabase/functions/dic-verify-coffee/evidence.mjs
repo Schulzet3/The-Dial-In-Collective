@@ -1,4 +1,5 @@
 import {rawElements,removeElements} from '../_shared/html-scan.mjs';
+import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../_shared/coffee-release-label.mjs';
 // Deterministic official-product evidence parser. No AI calls, no HTML execution.
 // This file is shared by Deno Edge and the Node regression suite.
 export function normalizeWords(value) {
@@ -88,6 +89,9 @@ function explicitReleaseYears(product){
 }
 function hasReleaseProof(entered,product){
  if(!entered)return true;
+ // "January" and "July–September" can match the official page every year.
+ // They are harvest guidance, not corroboration of a particular release.
+ if(isRecurringCoffeeHarvestWindow(entered)||isGenericCoffeeLotLabel(entered))return false;
  const value=normalizeWords(entered);
  const snippet=normalizeWords(product.name+' '+product.description.slice(0,1000));
  if(!value)return false;

@@ -1,0 +1,897 @@
+{
+  "type": "candidate7_bounded_packing_final_focused_verification",
+  "created_at": "2026-10-24T02:39:04.772604+00:00",
+  "scope": "17 frozen cases:12 diagnosed purchase cases and5 cases with9 proven original-record regressions; source evidence only, not the full603 benchmark.",
+  "runtime_editing_complete": true,
+  "oracle_or_expected_results_changed": false,
+  "publication_or_deployment": false,
+  "network_member_or_production_test": false,
+  "source_tree_sha256": "14f8df4de9c0e4dc2705c8304c5c6e1e17668c777a542c858ce3c88388750d44",
+  "source_facts_sha256": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719",
+  "test_file_sha256": "49d7e6734a7b4e72fec4e5a5b84525175eba6de4fa7026a73e6743fdb3a4686b",
+  "source_snapshot": "../purchase-focus-phase9",
+  "source_files": [
+    {
+      "path": "netlify/functions/coffee-url-preview.mjs",
+      "bytes": 11871,
+      "sha256": "7bd23728f64530c79ca909ee4ace04cec768b7b5252c95784d02e16aed2d34ea"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1081,
+      "sha256": "86ad4b0f80fcda1d671e792b080f9d5f32ce64fa59f392996435bc5bffd7d603"
+    },
+    {
+      "path": "src/server/agtron-roast.mjs",
+      "bytes": 4209,
+      "sha256": "ac7ca37b80a5b7f4ed3bd339ab6e247f10f19f19574ce1617958f365808195d2"
+    },
+    {
+      "path": "src/server/coffee-blend-evidence.mjs",
+      "bytes": 21864,
+      "sha256": "2ffcfd4ac69601d6dd9780541bb7e46748866716eac6119463b2299c23666c76"
+    },
+    {
+      "path": "src/server/coffee-delimited-specs.mjs",
+      "bytes": 5796,
+      "sha256": "a8a27725ae978f50a3fa3bdc1a005b5ba09bf8ec483d3461f501325bd1f22f22"
+    },
+    {
+      "path": "src/server/coffee-ecwid-snapshot.mjs",
+      "bytes": 4019,
+      "sha256": "e802efd5d6147539fbefe2f7e8c651c051a7179ad7ffa3a373269e9a2d7fcf4e"
+    },
+    {
+      "path": "src/server/coffee-elevation-evidence.mjs",
+      "bytes": 12915,
+      "sha256": "99ddff5818689fbf265a4d71c6ae86a797d9bcc196ecb51256a753aec95fb77f"
+    },
+    {
+      "path": "src/server/coffee-espresso-evidence.mjs",
+      "bytes": 14143,
+      "sha256": "aaeac79920aa6e9f916a99bb18196cd905b3f009eb613f028936f85fe5d41996"
+    },
+    {
+      "path": "src/server/coffee-fact-compatibility.mjs",
+      "bytes": 6263,
+      "sha256": "b1ce2c4dacee77b9a5d8522e357cafef849c790b68a98c22b35fa45cdfe00e21"
+    },
+    {
+      "path": "src/server/coffee-flavor-evidence.mjs",
+      "bytes": 33092,
+      "sha256": "13caf3d68f19d2d8687bb846ea1f325910bc1f9cad188205e13229533595e095"
+    },
+    {
+      "path": "src/server/coffee-geography-entity-roles.mjs",
+      "bytes": 3041,
+      "sha256": "7a010e6a8834c4f8aeeaff85b5d5073782a8de2fb2575492df2df3f03d43073b"
+    },
+    {
+      "path": "src/server/coffee-html-structure.mjs",
+      "bytes": 2584,
+      "sha256": "51a2ed559db9b2d1a279d16b2dd1859b56ed53e395726f8f083ae9bcc68f3ab2"
+    },
+    {
+      "path": "src/server/coffee-identity-evidence.mjs",
+      "bytes": 39504,
+      "sha256": "006e73addd79226db3c977faece0a6e733f31c854780f2b1386b2a7eb0b1cb1b"
+    },
+    {
+      "path": "src/server/coffee-narrative-evidence.mjs",
+      "bytes": 28042,
+      "sha256": "2c97df49f1caf8653c74f8eb19396b6f0a1eb33e6c2fc66a6dad7a4f0a6b58e9"
+    },
+    {
+      "path": "src/server/coffee-page-metadata.mjs",
+      "bytes": 72749,
+      "sha256": "5a48b6de966ffbc5253abefe238b81c2c8263805c968ad90a7dcf0d2f28a4981"
+    },
+    {
+      "path": "src/server/coffee-processing-evidence.mjs",
+      "bytes": 5318,
+      "sha256": "f7343b25ebfba3fabae8d92a0f40ea11fffbc371772406bf53d4f4b01bcb38b6"
+    },
+    {
+      "path": "src/server/coffee-product-identity.mjs",
+      "bytes": 4359,
+      "sha256": "f4c415e25e24acdf22d1773b6c850cb87e7d103169866298dd7f8e1025c1b3c8"
+    },
+    {
+      "path": "src/server/coffee-product-layouts.mjs",
+      "bytes": 22026,
+      "sha256": "b3f7ef30c1dfaa33c35c261314b9e6e63acf23a8bcce17be27ae0389db7f2630"
+    },
+    {
+      "path": "src/server/coffee-product-prep.mjs",
+      "bytes": 1014,
+      "sha256": "275caffe3368aee9e24f25af79968aeeeadddb6adcbe5eda7cc8b3a607781451"
+    },
+    {
+      "path": "src/server/coffee-product-prose.mjs",
+      "bytes": 3159,
+      "sha256": "7c8fc0ac536e3b559187431bc263384820c52caa111b6d1a64f09cf19595ef89"
+    },
+    {
+      "path": "src/server/coffee-product-scope.mjs",
+      "bytes": 13430,
+      "sha256": "c7e341e86ec2c04a43dea41f87b21697c9d88490878aafb45395be19b12cca60"
+    },
+    {
+      "path": "src/server/coffee-semantic-specs.mjs",
+      "bytes": 25915,
+      "sha256": "5416067b3568d86e037c4e41109dee4c86b725b0ca4ae72920a2bddcaecfa47a"
+    },
+    {
+      "path": "src/server/coffee-shopify-ajax.mjs",
+      "bytes": 16108,
+      "sha256": "717e3775b3b904c18d712ec1b28984640581ff1c117547056c8d5c3a0239f86f"
+    },
+    {
+      "path": "src/server/coffee-source-facts.mjs",
+      "bytes": 57085,
+      "sha256": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719"
+    },
+    {
+      "path": "src/server/coffee-source-identity-scope.mjs",
+      "bytes": 10181,
+      "sha256": "c373bf54dc7d9651a0f8c6387d0dbe7d3be504c152111b60e5c71e37bdcf1270"
+    },
+    {
+      "path": "src/server/coffee-supplementary-source-evidence.mjs",
+      "bytes": 15198,
+      "sha256": "d8d31536b1489838efa223c67035fc5ee0c2f553594b6d8dcc61703bcdbea28c"
+    },
+    {
+      "path": "src/server/coffee-url-guard.mjs",
+      "bytes": 11620,
+      "sha256": "bccfdb07691ce550c81e62aa5f5004db63f6fd349f039e1b16e150134e047484"
+    },
+    {
+      "path": "src/server/coffee-woocommerce-store.mjs",
+      "bytes": 4665,
+      "sha256": "135b2eed7b4905f46320fec3fc7acf0745f6e737e0b6ae7adc8b7445e0be86be"
+    },
+    {
+      "path": "src/server/roast-level-evidence.mjs",
+      "bytes": 23313,
+      "sha256": "cf33f4918e69a788b4919566ec179f01ddf9940c7584cd585502f9f04f612d91"
+    },
+    {
+      "path": "supabase/functions/_shared/coffee-release-label.mjs",
+      "bytes": 2276,
+      "sha256": "4286e31e3980ffe01c5f5713a06bcc614e5e219f869cd14a1d2271dd0532ea42"
+    },
+    {
+      "path": "supabase/functions/_shared/html-scan.mjs",
+      "bytes": 1723,
+      "sha256": "1ad927dda503b511c8b3de35fbd98de5b7cec9af96aebfd3146dff8eb09513e4"
+    },
+    {
+      "path": "supabase/functions/_shared/request-budget.mjs",
+      "bytes": 2455,
+      "sha256": "0371c73242eae466d84de3bd6322ffd563bdd9c4d2744bcba284a1072a8f523d"
+    }
+  ],
+  "replay": "/workspace/scratch/64e35b541d47/extractor-600/purchase-focus-phase9-replay.json",
+  "replay_sha256": "39f8a446545c70c958e0b1b399b7fabc06ac8f7d31c26787fe0de47d8fa167d4",
+  "frozen_oracle_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+  "frozen_files_reverified": [
+    {
+      "kind": "selection_manifest",
+      "file": "manifest.json",
+      "sha256": "388e953bf0774ccaf93ad08c76e4714a8b1c23a6feabd073bbbb4270077168da"
+    },
+    {
+      "kind": "source_oracle",
+      "file": "extractor-600-oracle-a.json",
+      "sha256": "2cc77e02828d640f342ef73597b550e8892cfa354882977254d2b9697b960c64"
+    },
+    {
+      "kind": "source_oracle",
+      "file": "extractor-600-oracle-b.json",
+      "sha256": "cd2ce6b8ff09bdaf4fedbeaad3b7556efe0c42607cc04229563a90a32ecef72b"
+    },
+    {
+      "kind": "source_oracle",
+      "file": "extractor-600-oracle-c.json",
+      "sha256": "60c00a8f61f06af1858ebdae7ace408987cb79d80014552f03cb724afc71cbee"
+    },
+    {
+      "kind": "source_oracle",
+      "file": "extractor-600-oracle-root.json",
+      "sha256": "088034be3484a543b3b36d76420b3567f8b3cd708ee266e2c45da9996c6f2e0e"
+    },
+    {
+      "kind": "source_oracle",
+      "file": "extractor-600-oracle-root-extra-c.json",
+      "sha256": "7b9cb91e7e6f6426162af761557c8ebde9c91726509ed919939351c2014215b8"
+    },
+    {
+      "kind": "source_hash_index",
+      "file": "frozen-source-hashes.json",
+      "sha256": "8498aab51eb1a39e076428ad2e931a563f1ca4ef1f8dc210f8dd90431c6280a4"
+    }
+  ],
+  "capture_hashes_reverified": [
+    {
+      "case_id": "darkcanyon-coffee-com__fireside-favorite-fca08b4a",
+      "file": "page.html",
+      "sha256": "8ec2d2a307584b0fecd890e3457439f853ceb7c00a409c7717bf717dfe859377"
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__fireside-favorite-fca08b4a",
+      "file": "product-endpoint.html",
+      "sha256": "07a2787c63cb3c9364669cd5e3743804117e209d99ae8f9a54f5d14ffd35deb6"
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__highlander-grogg-30e2568d",
+      "file": "page.html",
+      "sha256": "6d6e6a36c63aec084d5450ecab57d140c2b26753eb0b9c6a0f1e6c52ce5e0345"
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__highlander-grogg-30e2568d",
+      "file": "product-endpoint.html",
+      "sha256": "2d8c18c5f7040f0525b094a92133bb3f1372d43467c12290f1540ed277c137f9"
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__my-girlfriends-blend-c6019ee1",
+      "file": "page.html",
+      "sha256": "44d282ce19b53eceac897611d45e72c016a3b7032bfb9e91f4536b5e39de716c"
+    },
+    {
+      "case_id": "darkcanyon-coffee-com__my-girlfriends-blend-c6019ee1",
+      "file": "product-endpoint.html",
+      "sha256": "704613342ea606ac83571354681b65b1f5ca95bd39e2bdbdeae3c201f640a100"
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+      "file": "page.html",
+      "sha256": "97eba20cf34c660238899a9c4336d2bce9288d8c84906fcb142688111b9c9bc1"
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+      "file": "product-endpoint.html",
+      "sha256": "6834039453b5a349bbf2e3040614984eda2e9288f7e7e12ec132fe6879310400"
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__hello-darlin-1-4d1fcba2",
+      "file": "page.html",
+      "sha256": "c1a63c1d7f7a6bf2a61ff6e57b9cd283ee49a1fc70d412cebd14e7cc38193d3c"
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__hello-darlin-1-4d1fcba2",
+      "file": "product-endpoint.html",
+      "sha256": "5f4c413f23543fadc560d0ea4c289febb0b60eb4b167b2121cb69d6947056828"
+    },
+    {
+      "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+      "file": "page.html",
+      "sha256": "750b88b7dfbc882105518fc6457f0f7efa985c55eb633b7f3187ea9d29d33914"
+    },
+    {
+      "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+      "file": "product-endpoint.html",
+      "sha256": "248cd32c6b42610848fd99de68b4e89bb2fc556f42f56f1d56e252f523af9d49"
+    },
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "file": "page.html",
+      "sha256": "46511690f59029d3ee90f22fe3bb06ab9a900f0966ca3733966b6f1f5297f2bc"
+    },
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "file": "product-endpoint.html",
+      "sha256": "b0d0605d6d326e35e558e52563944ef80d5f1bf88f3c028676c6dc2c1d1a2bc0"
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "file": "page.html",
+      "sha256": "99985bcf8f84aa55a3f0ab726d000302fd27999993715d0d09d385c65f1407ad"
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "file": "product-endpoint.html",
+      "sha256": "5723ba9ddc4b7d5c84756a4780a12ccb2529ad55bb3a665ea887b80fe69255f3"
+    },
+    {
+      "case_id": "laterzacoffee-com__ethiopia-guji-washed-e795ccf9",
+      "file": "page.html",
+      "sha256": "4aa9c7ef0b3a056bcd61d57a2d9c4043ca64c0e7914c343ac55a3ceb94050215"
+    },
+    {
+      "case_id": "laterzacoffee-com__ethiopia-guji-washed-e795ccf9",
+      "file": "product-endpoint.html",
+      "sha256": "e7c3ad07a7d8866c9f1737388d3f68299199826a03154ce40741155c3b2df550"
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "file": "page.html",
+      "sha256": "7a9bff1cdf0783c46e58c49a1728152e12b16517b441ac0d121d4228d8e61ae8"
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "file": "product-endpoint.html",
+      "sha256": "e0e2140c57e6d00daef2594f4c4bce1a1707ba3fdfd4c37f289cab47fdee41ee"
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+      "file": "page.html",
+      "sha256": "e6e7df1b288307ab26183512473ec40b8b96ba8275889ba1971ebb02571cd7ff"
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+      "file": "product-endpoint.html",
+      "sha256": "0fd63aad343273004e5831f92cf508f8f3812449b9dc7dcca4985f4cdf8d6d82"
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29",
+      "file": "page.html",
+      "sha256": "7f212134a984c01e375a9fb1044682ecbdd6c442bffe7d829af2ee6fb487025d"
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29",
+      "file": "product-endpoint.html",
+      "sha256": "81ccfa64f77d883a21137d34493543b1a50884c04c20506007c5b9f5303c7f70"
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "file": "page.html",
+      "sha256": "c1f9287dddf362b82043c2261e303d4b0af81948c70a4706df701677d53fe0ef"
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "file": "product-endpoint.html",
+      "sha256": "a394922cae0e5ca10de7a3c66f4cbf22a158cb7d9669207b913e0c79e2b00dc6"
+    },
+    {
+      "case_id": "www-rossstreetroasting-com__kula-peaberry-papua-new-guinea-3a0b9666",
+      "file": "page.html",
+      "sha256": "d34184b2da779b0c69be0478a72455b10b069b9639fe923f9b5f23cd0cd8d578"
+    },
+    {
+      "case_id": "www-rossstreetroasting-com__kula-peaberry-papua-new-guinea-3a0b9666",
+      "file": "product-endpoint.html",
+      "sha256": "7e698db19a0254958ed5f2173477a0e55aa1144fd55380f76f13a92b4f52d299"
+    },
+    {
+      "case_id": "www-rustydogcoffee-com__peru-607c616a",
+      "file": "page.html",
+      "sha256": "d1da932b926103bbda82af707c280b63ec7592b5098fcc4e89d3f9e62d368cab"
+    },
+    {
+      "case_id": "www-rustydogcoffee-com__peru-607c616a",
+      "file": "product-endpoint.html",
+      "sha256": "61f907d7adb9445f8e1853aa18007aac954e51b1e8252fea2283895debba0690"
+    },
+    {
+      "case_id": "www-woodshedroast-com__decaf-honduran-swiss-water--process-copy-535a0b51",
+      "file": "page.html",
+      "sha256": "44a0f8b4e3c1844ed65cc0d29639bb30e179dedf3009efedf403fc08284a29e0"
+    },
+    {
+      "case_id": "www-woodshedroast-com__decaf-honduran-swiss-water--process-copy-535a0b51",
+      "file": "product-endpoint.html",
+      "sha256": "03db1a3cc752dd0a926bc3442260422668c5dcd1627741fd0230a63b244cb84e"
+    },
+    {
+      "case_id": "www-woodshedroast-com__ethiopian-15584dcd",
+      "file": "page.html",
+      "sha256": "f3b275e2046173b66f5a0d419e45a0179b7a1ed4b2124426178b272d98bc8a6e"
+    },
+    {
+      "case_id": "www-woodshedroast-com__ethiopian-15584dcd",
+      "file": "product-endpoint.html",
+      "sha256": "f3931ee4e5f2b3ba304fb37d98eb6970eb8563ab19029bba80c12074d976e537"
+    }
+  ],
+  "tests": {
+    "receipt": "/workspace/scratch/64e35b541d47/purchase-candidate7-final-focused-test-receipt.json",
+    "receipt_sha256": "b99c070e6be07a36745524d9725ee6e840d5b90db45fe47b054a42dda59c19a0",
+    "type": "candidate7_final_bounded_packing_focused_named_tests",
+    "created_at": "2026-10-24T02:38:22.982934+00:00",
+    "exit_code": 0,
+    "counts": {
+      "tests": 112,
+      "pass": 112,
+      "fail": 0,
+      "skipped": 0
+    },
+    "source_before": {
+      "src/server/coffee-source-facts.mjs": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719",
+      "src/server/coffee-supplementary-source-evidence.mjs": "d8d31536b1489838efa223c67035fc5ee0c2f553594b6d8dcc61703bcdbea28c",
+      "src/server/coffee-page-metadata.mjs": "5a48b6de966ffbc5253abefe238b81c2c8263805c968ad90a7dcf0d2f28a4981",
+      "site/cloud/coffee-url-autofill.js": "29fbfdb19bc01cf9eed7c137d039a2fff37e55e0df45741cb0b5082782f67a1d",
+      "tests/coffee-source-facts.test.mjs": "092e857f7973c459d88058efa06d4617d7788ca64659b0047a4e0b74c57257d6",
+      "tests/coffee-purchase-source-records.test.mjs": "49d7e6734a7b4e72fec4e5a5b84525175eba6de4fa7026a73e6743fdb3a4686b",
+      "tests/coffee-supplementary-source-evidence.test.mjs": "eb902b1cfb5807be2eeeb58b8500c5656ab01ff25bbe6bbf036929f4a352a904",
+      "tests/coffee-source-review-grouped-reference.test.mjs": "3da320d376a2658dcecdefa8378ef5064c016bc8f6305bf012bf5ed9523b8ba3"
+    },
+    "source_after": {
+      "src/server/coffee-source-facts.mjs": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719",
+      "src/server/coffee-supplementary-source-evidence.mjs": "d8d31536b1489838efa223c67035fc5ee0c2f553594b6d8dcc61703bcdbea28c",
+      "src/server/coffee-page-metadata.mjs": "5a48b6de966ffbc5253abefe238b81c2c8263805c968ad90a7dcf0d2f28a4981",
+      "site/cloud/coffee-url-autofill.js": "29fbfdb19bc01cf9eed7c137d039a2fff37e55e0df45741cb0b5082782f67a1d",
+      "tests/coffee-source-facts.test.mjs": "092e857f7973c459d88058efa06d4617d7788ca64659b0047a4e0b74c57257d6",
+      "tests/coffee-purchase-source-records.test.mjs": "49d7e6734a7b4e72fec4e5a5b84525175eba6de4fa7026a73e6743fdb3a4686b",
+      "tests/coffee-supplementary-source-evidence.test.mjs": "eb902b1cfb5807be2eeeb58b8500c5656ab01ff25bbe6bbf036929f4a352a904",
+      "tests/coffee-source-review-grouped-reference.test.mjs": "3da320d376a2658dcecdefa8378ef5064c016bc8f6305bf012bf5ed9523b8ba3"
+    },
+    "source_unchanged": true,
+    "log": "/workspace/scratch/64e35b541d47/purchase-candidate7-final-focused-tests.log",
+    "log_sha256": "5a3b5ec911fc67eb18ea638bde07224a5f36663a795ebae63cdcf1aed7fb1781",
+    "network": false,
+    "real_member_data": false
+  },
+  "source_preservation_gate": {
+    "receipt": "/workspace/scratch/64e35b541d47/purchase-candidate7-phase9-focused-preservation.json",
+    "receipt_sha256": "51b9f13ff8f6e751ff2110983302f14fe32bcb26767b261ebb22f8cf90d058c6",
+    "type": "focused_original_source_preservation_gate",
+    "source_tree_sha256": "14f8df4de9c0e4dc2705c8304c5c6e1e17668c777a542c858ce3c88388750d44",
+    "replay_sha256": "39f8a446545c70c958e0b1b399b7fabc06ac8f7d31c26787fe0de47d8fa167d4",
+    "script_sha256": "7c9d1918ccf9b22ec39068981bd2718d4657fcba48f0651d11c5351981b537ca",
+    "selected_cases_only": true,
+    "candidate4": {
+      "counts": {
+        "same_unambiguous_pointer": 797,
+        "source_supported_projection_property_sets_checked": 460
+      },
+      "whole_original_losses": [],
+      "partial_property_losses": [],
+      "non_summary_plain_context_differences": [],
+      "other_output_changes": []
+    },
+    "candidate5": {
+      "counts": {
+        "same_unambiguous_pointer": 2322,
+        "source_supported_projection_property_sets_checked": 773,
+        "generated_summary_rows_removed": 45
+      },
+      "whole_original_losses": [],
+      "partial_property_losses": [],
+      "non_summary_plain_context_differences": [],
+      "other_output_changes": []
+    },
+    "purchase_whole_originals": {
+      "total": 614,
+      "exact": 614,
+      "records": [
+        {
+          "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+          "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee.js",
+          "capture_sha256": "a394922cae0e5ca10de7a3c66f4cbf22a158cb7d9669207b913e0c79e2b00dc6",
+          "variants": 24,
+          "whole_original_exact": 24
+        },
+        {
+          "case_id": "darkcanyon-coffee-com__fireside-favorite-fca08b4a",
+          "source_url": "https://darkcanyon-coffee.com/products/fireside-favorite.js",
+          "capture_sha256": "07a2787c63cb3c9364669cd5e3743804117e209d99ae8f9a54f5d14ffd35deb6",
+          "variants": 63,
+          "whole_original_exact": 63
+        },
+        {
+          "case_id": "darkcanyon-coffee-com__highlander-grogg-30e2568d",
+          "source_url": "https://darkcanyon-coffee.com/products/highlander-grogg.js",
+          "capture_sha256": "2d8c18c5f7040f0525b094a92133bb3f1372d43467c12290f1540ed277c137f9",
+          "variants": 63,
+          "whole_original_exact": 63
+        },
+        {
+          "case_id": "darkcanyon-coffee-com__my-girlfriends-blend-c6019ee1",
+          "source_url": "https://darkcanyon-coffee.com/products/my-girlfriends-blend.js",
+          "capture_sha256": "704613342ea606ac83571354681b65b1f5ca95bd39e2bdbdeae3c201f640a100",
+          "variants": 63,
+          "whole_original_exact": 63
+        },
+        {
+          "case_id": "www-woodshedroast-com__ethiopian-15584dcd",
+          "source_url": "https://www.woodshedroast.com/products/ethiopian.js",
+          "capture_sha256": "f3931ee4e5f2b3ba304fb37d98eb6970eb8563ab19029bba80c12074d976e537",
+          "variants": 60,
+          "whole_original_exact": 60
+        },
+        {
+          "case_id": "www-woodshedroast-com__decaf-honduran-swiss-water--process-copy-535a0b51",
+          "source_url": "https://www.woodshedroast.com/products/decaf-honduran-swiss-water%C2%AE-process-copy.js",
+          "capture_sha256": "03db1a3cc752dd0a926bc3442260422668c5dcd1627741fd0230a63b244cb84e",
+          "variants": 60,
+          "whole_original_exact": 60
+        },
+        {
+          "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+          "source_url": "https://hellolarsonscoffee.com/products/bless-your-heart-1.js",
+          "capture_sha256": "6834039453b5a349bbf2e3040614984eda2e9288f7e7e12ec132fe6879310400",
+          "variants": 72,
+          "whole_original_exact": 72
+        },
+        {
+          "case_id": "hellolarsonscoffee-com__hello-darlin-1-4d1fcba2",
+          "source_url": "https://hellolarsonscoffee.com/products/hello-darlin-1.js",
+          "capture_sha256": "5f4c413f23543fadc560d0ea4c289febb0b60eb4b167b2121cb69d6947056828",
+          "variants": 72,
+          "whole_original_exact": 72
+        },
+        {
+          "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee.js",
+          "capture_sha256": "5723ba9ddc4b7d5c84756a4780a12ccb2529ad55bb3a665ea887b80fe69255f3",
+          "variants": 30,
+          "whole_original_exact": 30
+        },
+        {
+          "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+          "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee.js",
+          "capture_sha256": "e0e2140c57e6d00daef2594f4c4bce1a1707ba3fdfd4c37f289cab47fdee41ee",
+          "variants": 36,
+          "whole_original_exact": 36
+        },
+        {
+          "case_id": "simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29",
+          "source_url": "https://simpaticocoffee.com/products/simpatico-low-acid-decaf-coffee-dark-smooth-roast.js",
+          "capture_sha256": "81ccfa64f77d883a21137d34493543b1a50884c04c20506007c5b9f5303c7f70",
+          "variants": 36,
+          "whole_original_exact": 36
+        },
+        {
+          "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+          "source_url": "https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast.js",
+          "capture_sha256": "0fd63aad343273004e5831f92cf508f8f3812449b9dc7dcca4985f4cdf8d6d82",
+          "variants": 35,
+          "whole_original_exact": 35
+        }
+      ]
+    },
+    "bounds": [
+      {
+        "case_id": "darkcanyon-coffee-com__fireside-favorite-fca08b4a",
+        "facts": 126,
+        "characters": 63990,
+        "largest_value": 1384,
+        "truncated": true
+      },
+      {
+        "case_id": "darkcanyon-coffee-com__highlander-grogg-30e2568d",
+        "facts": 126,
+        "characters": 63988,
+        "largest_value": 1384,
+        "truncated": true
+      },
+      {
+        "case_id": "darkcanyon-coffee-com__my-girlfriends-blend-c6019ee1",
+        "facts": 124,
+        "characters": 63988,
+        "largest_value": 1384,
+        "truncated": true
+      },
+      {
+        "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+        "facts": 128,
+        "characters": 63997,
+        "largest_value": 884,
+        "truncated": true
+      },
+      {
+        "case_id": "hellolarsonscoffee-com__hello-darlin-1-4d1fcba2",
+        "facts": 128,
+        "characters": 63776,
+        "largest_value": 856,
+        "truncated": true
+      },
+      {
+        "case_id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+        "facts": 128,
+        "characters": 46789,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+        "facts": 109,
+        "characters": 63998,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+        "facts": 111,
+        "characters": 63989,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "laterzacoffee-com__ethiopia-guji-washed-e795ccf9",
+        "facts": 128,
+        "characters": 54927,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+        "facts": 128,
+        "characters": 52961,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+        "facts": 128,
+        "characters": 55663,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29",
+        "facts": 128,
+        "characters": 56746,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+        "facts": 128,
+        "characters": 40374,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "www-rossstreetroasting-com__kula-peaberry-papua-new-guinea-3a0b9666",
+        "facts": 128,
+        "characters": 50048,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "www-rustydogcoffee-com__peru-607c616a",
+        "facts": 128,
+        "characters": 54153,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "www-woodshedroast-com__decaf-honduran-swiss-water--process-copy-535a0b51",
+        "facts": 123,
+        "characters": 63963,
+        "largest_value": 1600,
+        "truncated": true
+      },
+      {
+        "case_id": "www-woodshedroast-com__ethiopian-15584dcd",
+        "facts": 128,
+        "characters": 63470,
+        "largest_value": 1600,
+        "truncated": true
+      }
+    ],
+    "pass": true
+  },
+  "gate_scope_caveat": "C4 whole typed records and source-supported projection property sets were checked here; the plain-context exact-row comparison is C5-to-final only. Historical C4-to-C5 plain-row differences require the separate independent source adjudication and are not declared exact matches by this receipt.",
+  "repairs": [
+    "Reclaim only exact typed-variant-proven generated Purchase option summaries; every attributed URL/type requires proof, and any unique field/conflict/path/part/section/locator metadata prevents removal.",
+    "Preserve the complete literal ProductGroup child before its cores; additional multi-destination reference rows follow cores and other page JSON, so optional completion does not displace original fields.",
+    "Under character pressure, compact only exact index/part/path-matched generated projection labels to Fields for #N. Keep values, formats, source pointers, original indices, parts, units, URLs/forms and source types; preserve custom/source-authored labels and unique metadata.",
+    "Normalize generated-label identity across full/compact forms for nested merges without merging different source types, URLs/forms, parts, values or custom contexts.",
+    "Early generated-label reclaim is restricted to ProductGroup cores. General endpoint/page variant packing priorities remain unchanged.",
+    "Complete any already-selected root JSON property or retained-projection child only when its full contiguous original value survives the bounded candidate buffer. Missing variant cores are not promoted by this completion path.",
+    "Restore original image-caption roles with the same proof-backed capacity rule; process reclaimed-capacity tasks in evidence-priority order so captions precede lower-priority galleries."
+  ],
+  "intermediate_failures_preserved": [
+    "Candidate6 repaired9 C4 records but introduced1 C5 whole record,4 partial projection property sets and1 caption-role loss. Its source/results/receipts remain unchanged.",
+    "An intermediate broad early compaction admitted extra page objects and displaced Hello Larson source values and Woodshed context. Restricting early compaction to ProductGroup cores repaired those regressions.",
+    "Small-image child sharing experiments were rejected. No repeated-child threshold, reference grammar, existing variant count limit or source payload bound changed in the final repair."
+  ],
+  "larry_source_targets": [
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "source_path": "/offers",
+      "prior_facts": [
+        {
+          "label": "Published offers",
+          "value": "{\"@type\":\"AggregateOffer\",\"priceCurrency\":\"USD\",\"lowPrice\":\"8.95\",\"highPrice\":\"124.60\",\"offerCount\":24,\"priceSpecification\":{\"@type\":\"PriceSpecification\",\"priceCurrency\":\"USD\",\"minPrice\":\"8.95\",\"maxPrice\":\"124.60\"}}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/offers",
+          "format": "json",
+          "part": 0
+        }
+      ],
+      "current_facts": [
+        {
+          "label": "Published offers",
+          "value": "{\"@type\":\"AggregateOffer\",\"priceCurrency\":\"USD\",\"lowPrice\":\"8.95\",\"highPrice\":\"124.60\",\"offerCount\":24,\"priceSpecification\":{\"@type\":\"PriceSpecification\",\"priceCurrency\":\"USD\",\"minPrice\":\"8.95\",\"maxPrice\":\"124.60\"}}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/offers",
+          "format": "json",
+          "part": 0
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "source_path": "/weight",
+      "prior_facts": [
+        {
+          "label": "Published product weight",
+          "value": "\"0.75lb\"",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/weight",
+          "format": "json",
+          "part": 0
+        }
+      ],
+      "current_facts": [
+        {
+          "label": "Published product weight",
+          "value": "\"0.75lb\"",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/weight",
+          "format": "json",
+          "part": 0
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "source_path": "/hasVariant/15",
+      "prior_facts": [
+        {
+          "label": "Purchase variant 16 public fields",
+          "value": "{\"@type\":\"Product\",\"name\":\"Bolivia - 5 lb Bag / Drip - Flat Bottom Filter (#7)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_bolivia_pro_agro_12oz_2026.jpg?v=1792502002\",\"sku\":\"RC-BOLV-5LB-GR7\",\"size\":\"5 lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"124.60\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510734572\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510734572\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/15",
+          "format": "projection",
+          "part": 0
+        }
+      ],
+      "current_facts": [
+        {
+          "label": "Purchase variant 16 public fields",
+          "value": "{\"@type\":\"Product\",\"name\":\"Bolivia - 5 lb Bag / Drip - Flat Bottom Filter (#7)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_bolivia_pro_agro_12oz_2026.jpg?v=1792502002\",\"sku\":\"RC-BOLV-5LB-GR7\",\"size\":\"5 lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"124.60\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510734572\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510734572\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/15",
+          "format": "projection",
+          "part": 0
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "source_path": "/hasVariant/16",
+      "prior_facts": [
+        {
+          "label": "Purchase variant 17 public fields",
+          "value": "{\"@type\":\"Product\",\"name\":\"Bolivia - 5 lb Bag / French Press (#10)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_bolivia_pro_agro_12oz_2026.jpg?v=1792502002\",\"sku\":\"RC-BOLV-5LB-GR10\",\"size\":\"5 lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"124.60\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510832876\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510832876\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/16",
+          "format": "projection",
+          "part": 0
+        }
+      ],
+      "current_facts": [
+        {
+          "label": "Purchase variant 17 public fields",
+          "value": "{\"@type\":\"Product\",\"name\":\"Bolivia - 5 lb Bag / French Press (#10)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_bolivia_pro_agro_12oz_2026.jpg?v=1792502002\",\"sku\":\"RC-BOLV-5LB-GR10\",\"size\":\"5 lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"124.60\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510832876\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510832876\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/16",
+          "format": "projection",
+          "part": 0
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "source_path": "/weight",
+      "prior_facts": [
+        {
+          "label": "Published product weight",
+          "value": "\"0.75lb\"",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/weight",
+          "format": "json",
+          "part": 0
+        }
+      ],
+      "current_facts": [
+        {
+          "label": "Published product weight",
+          "value": "\"0.75lb\"",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/weight",
+          "format": "json",
+          "part": 0
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "source_path": "/hasVariant/7",
+      "prior_facts": [
+        {
+          "label": "Purchase variant 8 public fields",
+          "value": "{\"@type\":\"Product\",\"name\":\"Sumatra - 2lb Bag / Espresso (#3)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_sumatra_permata_gayo_12oz_2026.jpg?v=1792502001\",\"sku\":\"RC-SUMA-2LB-GR3\",\"size\":\"2lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"55.20\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510144748\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510144748\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/7",
+          "format": "projection",
+          "part": 0
+        }
+      ],
+      "current_facts": [
+        {
+          "label": "Fields for #8",
+          "value": "{\"@type\":\"Product\",\"name\":\"Sumatra - 2lb Bag / Espresso (#3)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_sumatra_permata_gayo_12oz_2026.jpg?v=1792502001\",\"sku\":\"RC-SUMA-2LB-GR3\",\"size\":\"2lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"55.20\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510144748\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510144748\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/7",
+          "format": "projection",
+          "part": 0
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "source_path": "/hasVariant/8",
+      "prior_facts": [
+        {
+          "label": "Purchase variant 9 public fields",
+          "value": "{\"@type\":\"Product\",\"name\":\"Sumatra - 2lb Bag / Drip - Cone Filter (#5)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_sumatra_permata_gayo_12oz_2026.jpg?v=1792502001\",\"sku\":\"RC-SUMA-2LB-GR5\",\"size\":\"2lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"55.20\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510210284\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510210284\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/8",
+          "format": "projection",
+          "part": 0
+        }
+      ],
+      "current_facts": [
+        {
+          "label": "Fields for #9",
+          "value": "{\"@type\":\"Product\",\"name\":\"Sumatra - 2lb Bag / Drip - Cone Filter (#5)\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_sumatra_permata_gayo_12oz_2026.jpg?v=1792502001\",\"sku\":\"RC-SUMA-2LB-GR5\",\"size\":\"2lb Bag\",\"offers\":{\"@type\":\"Offer\",\"priceCurrency\":\"USD\",\"price\":\"55.20\",\"validFrom\":\"2024-02-21\",\"priceValidUntil\":\"2027-01-21\",\"availability\":\"https://schema.org/InStock\",\"itemCondition\":\"https://schema.org/NewCondition\",\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510210284\",\"seller\":{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Larry&#39;s Coffee\",\"description\":\"Locally owned and operated organic fair-trade coffee roaster\"}},\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424510210284\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/8",
+          "format": "projection",
+          "part": 0
+        }
+      ]
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "restored_caption_exact": {
+        "label": "Product image description",
+        "value": "Drip Machine",
+        "source_type": "html",
+        "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+        "section": "Published image caption"
+      }
+    }
+  ],
+  "bounds_unchanged": {
+    "facts": 128,
+    "content_utf16_characters": 64000,
+    "value_utf16_characters": 1600
+  },
+  "conclusion": {
+    "whole_original_purchase_variants_exact": 614,
+    "c4_proven_whole_losses": 0,
+    "c4_source_supported_partial_losses": 0,
+    "c5_proven_whole_losses": 0,
+    "c5_source_supported_partial_losses": 0,
+    "c5_non_summary_plain_context_losses": 0,
+    "c5_other_output_changes": 0,
+    "named_tests_passed": 112
+  },
+  "limits": [
+    "All17 focused outputs remain explicitly truncated. Retaining all diagnosed purchase objects and tested prior evidence does not mean retaining every source page or gallery.",
+    "Complete preserved alternatives at mixed inline namespaces do not become uniquely resolved records; the strict resolver remains fail-closed.",
+    "The full603 candidate7 benchmark, frozen-retention comparison and independent whole/partial/plain-source differentials remain separate required final checks.",
+    "No actual provider networking, production, member data, deployment or publication was exercised."
+  ]
+}

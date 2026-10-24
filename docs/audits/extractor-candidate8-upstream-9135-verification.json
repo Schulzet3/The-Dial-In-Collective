@@ -1,0 +1,1011 @@
+{
+  "status": "PASS_WITH_REPAIRED_TEST_HARNESS",
+  "upstream_commit": "9135e06dfe29da3caa0d3820e7eb8c003634ef29",
+  "upstream_tree": "1474569e8db4aa820b5d6fac4af7ee11a9d4393c",
+  "prior_pr_head": "517dfe26720e8eef69aa525bdb07f7c26d01c3fa",
+  "extractor_runtime_unchanged": true,
+  "benchmark_reused": "candidate8 immutable full603, fingerprint301346616618784a5ff926ddb9302b3be6e2710bea74c3a47e3d476e02ca812c",
+  "initial_combined_checks": {
+    "created_at": "2026-10-24T04:20:37.893124+00:00",
+    "source_before_sha256": "ddb84b24669e7eacae069ccdb0e43cad68b8d9efc01bb32fc15bbfc8312ad2f1",
+    "source_after_sha256": "ddb84b24669e7eacae069ccdb0e43cad68b8d9efc01bb32fc15bbfc8312ad2f1",
+    "source_unchanged": true,
+    "source_files": 358,
+    "checks": [
+      {
+        "name": "node",
+        "command": [
+          "/workspace/scratch/64e35b541d47/free-node-runtime/node-v22.22.0-linux-x64/bin/node",
+          "--test",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/account-transition.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/admin-coffee-review.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/admin-count-refresh.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/admin-invitation-controls.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/admin-read-only.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/admin-records.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/admin-session.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/admin-url-enrichment.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/approval-coverage.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/backup-security.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/backup-snapshot-policy.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/chat-release-request.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/chat-release-workflow-policy.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/ci-optimization.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/ci-scope.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/cloud-access-denial.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/cloud-draft-recommendation-context.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/cloud-first-style-on-expand.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/cloud-shot-history-actions.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/cloud.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-agtron-narrative.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-audit-comparison.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-blend-source-evidence.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-captured-source-fragments.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-completeness-acceptance.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-completeness-integrity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-corpus-flavor-roast-regressions.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-corpus-identity-regressions.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-delimited-specs.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-deterministic-only.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-duplicate-first-client.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-edit-revision.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-elevation-identity-regressions.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-elevation-recovery-residuals.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-endpoint-evidence-provenance.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-espresso-continuation.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-espresso-tabs.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-espresso-units.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-final-source-details.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-flavor-evidence.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-flavor-residual-integrity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-geography-conflicts.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-geography-entity-roles.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-geography-source-evidence.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-identity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-multi-roaster-depth.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-narrative-evidence.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-narrative-flavor-integrity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-page-isolation.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-parser-audit.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-preview-enrichment.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-processing-residual-integrity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-producer-source-evidence.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-product-group-alias.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-product-identity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-product-scope-integrity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-purchase-source-records.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-receipt-lookup.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-release-window-extraction.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-roaster-identity-residuals.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-roaster-patterns.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-runtime-audit.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-semantic-continuation.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-semantic-specs.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-source-capacity-packing.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-source-facts.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-source-identity-scope.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-source-review-capacity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-source-review-grouped-reference.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-source-status-ui.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-source-verification.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-supplementary-source-evidence.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/coffee-url-autofill.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/commit-continuity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/community-recommendation-prior.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/community-ui.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/controlled-release-runner.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/edge-request-security.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/exclusive-release-workflow.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/extractor-adaptive-production.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/extractor-size-study-boundary.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/fast-flow-hybrid.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/hosted-issue-5-10-smoke.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/html-resource-security.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/import.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/legacy-dark-badges.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/netlify-credit-guard.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/next-shot-control-consistency.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/no-text-shadows.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/notes-preservation-security.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/official-agtron-preview.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/offline-reopen.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/offline-storage-resilience.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/one-use-claim.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/one-use-git-race.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/pending-release-contract.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/preview-request-bounds.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/pwa-shell.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/queen-city-url-preview.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/read-only-account-acceptance.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/recipe-family-selection.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/recommendation-evidence-priority.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/release-four-ready-batch.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/release-free-private-policy.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/release-migration-risk.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/release-queue.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/release-ready-queue.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/request-budget-security.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/required-check-workflows.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/retired-hide-shot-sql.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/roast-level-evidence.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/shot-temperature-preservation.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/site-integrity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/source-hygiene.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/source-release-dossier.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/source-verifier-admission.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/sql-runner-coverage.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/ui-design-language.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/universal-coffee-preview.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/ux-refinements.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/visual-refinement.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/weekly-source-snapshot.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/workflow-reconciliation.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/audit/coffee-corpus-comparison-integrity.test.mjs",
+          "/workspace/scratch/64e35b541d47/dic-extractor-integration/tests/audit/coffee-corpus-replay-integrity.test.mjs"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 11.659,
+        "log": "/workspace/scratch/64e35b541d47/integration-github/local-9135/node.log",
+        "log_sha256": "8e13c2bc6b0b93a39d83612c0d888424be0514baa7fe093ff1a038a6a0228468",
+        "counts": {
+          "tests": 1378,
+          "pass": 1372,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 6
+        },
+        "named_subtests": 1378,
+        "execution_valid": true
+      },
+      {
+        "name": "python-audit",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/audit",
+          "-p",
+          "test_*.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.092,
+        "log": "/workspace/scratch/64e35b541d47/integration-github/local-9135/python-audit.log",
+        "log_sha256": "fd6bdc903b3eed9eff476f965c554626f48090effa7069e7eed7a86f665764c5"
+      },
+      {
+        "name": "python-ocr",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "coffee_source_review_local_test.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.875,
+        "log": "/workspace/scratch/64e35b541d47/integration-github/local-9135/python-ocr.log",
+        "log_sha256": "dfd3a46d0e5c315c8c62b3e06b51473cacfa8699ab2ae393d7287d4d2b734ad0"
+      },
+      {
+        "name": "lint",
+        "command": [
+          "/workspace/scratch/64e35b541d47/free-node-runtime/node-v22.22.0-linux-x64/bin/node",
+          "/root/.npm/_npx/5ebd48878d2d0d11/node_modules/eslint/bin/eslint.js",
+          ".",
+          "--max-warnings",
+          "0"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 4.188,
+        "log": "/workspace/scratch/64e35b541d47/integration-github/local-9135/lint.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "fixture-build",
+        "command": [
+          "/workspace/scratch/64e35b541d47/free-node-runtime/node-v22.22.0-linux-x64/bin/node",
+          "build_cloud.mjs"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.058,
+        "log": "/workspace/scratch/64e35b541d47/integration-github/local-9135/fixture-build.log",
+        "log_sha256": "e92cdda9d0fb33741a867e3f9b299531083c174b5cd70305d293994fe8904861"
+      },
+      {
+        "name": "import-browser",
+        "command": [
+          "/workspace/scratch/64e35b541d47/free-node-runtime/node-v22.22.0-linux-x64/bin/node",
+          "scripts/audit/coffee-import-browser.mjs",
+          "/workspace/scratch/64e35b541d47/browser-runtime/chrome-headless-shell-linux64/chrome-headless-shell",
+          "/workspace/scratch/64e35b541d47/integration-github/local-9135/import-browser.json"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 30.414,
+        "log": "/workspace/scratch/64e35b541d47/integration-github/local-9135/import-browser.log",
+        "log_sha256": "1335971088872f8cf86ffdc923f8ca8bcb5ced6508345db1e8f703d861095bf8"
+      }
+    ],
+    "no_network_or_production_acceptance": true,
+    "no_physical_device_acceptance": true
+  },
+  "repair": {
+    "path": "scripts/audit/coffee-import-browser.mjs",
+    "cause": "Manual browser test bundle omitted new upstream community-evidence dependency; app build already included it.",
+    "change": "Include existing module before engine and fail immediately on bundle errors; keep all existing assertions.",
+    "lint_exit_code": 0,
+    "corrected_browser": {
+      "created_at": "2026-10-24T04:20:56.473Z",
+      "browser": "156.0.8078.47",
+      "node": "v22.22.0",
+      "browser_bundle_sha256": "874fa33fa244e11baff52bba4066d2f36f2d2d3322e162d5ae3d8d7b7b774657",
+      "fixture_sha256": "5c744c7f9ee4c524f1215b927dc1ec0c782c3482400a61b5d98dd7c33d0efcc7",
+      "styles_sha256": "304fa9cbceb727c259fe48b5f79fd851407642c5216b21db8e24fb4c42f2e7e4",
+      "harness_sha256": "4908e2c1a378abe74c6be6c2a2aa05d9d955567ff4bd5de62dfa08598e71c924",
+      "local_fixtures_only": true,
+      "no_network": true,
+      "no_api_keys": true,
+      "checks": [
+        {
+          "viewport": 320,
+          "blank_only_autofill": true,
+          "public_source_download": true,
+          "structured_json_preserved": true,
+          "expanded_evidence_count": 384,
+          "expanded_last_record_preserved": true,
+          "structured_projection_reference_namespace_preserved": true,
+          "supporting_provenance_preserved": true,
+          "raw_structures_not_rendered": true,
+          "typed_form_data_not_exported": true,
+          "export_excludes_private_fields": true,
+          "stale_url_clears_preview": true,
+          "canonical_reuse_opens_explicit_correction": true,
+          "no_automatic_correction_write": true,
+          "explicit_current_page_refresh": true,
+          "acknowledged_save_survives_stale_refresh": true,
+          "refresh_does_not_resubmit": true,
+          "no_horizontal_overflow": true
+        },
+        {
+          "viewport": 390,
+          "blank_only_autofill": true,
+          "public_source_download": true,
+          "structured_json_preserved": true,
+          "expanded_evidence_count": 384,
+          "expanded_last_record_preserved": true,
+          "structured_projection_reference_namespace_preserved": true,
+          "supporting_provenance_preserved": true,
+          "raw_structures_not_rendered": true,
+          "typed_form_data_not_exported": true,
+          "export_excludes_private_fields": true,
+          "stale_url_clears_preview": true,
+          "canonical_reuse_opens_explicit_correction": true,
+          "no_automatic_correction_write": true,
+          "explicit_current_page_refresh": true,
+          "acknowledged_save_survives_stale_refresh": true,
+          "refresh_does_not_resubmit": true,
+          "no_horizontal_overflow": true
+        },
+        {
+          "viewport": 1280,
+          "blank_only_autofill": true,
+          "public_source_download": true,
+          "structured_json_preserved": true,
+          "expanded_evidence_count": 384,
+          "expanded_last_record_preserved": true,
+          "structured_projection_reference_namespace_preserved": true,
+          "supporting_provenance_preserved": true,
+          "raw_structures_not_rendered": true,
+          "typed_form_data_not_exported": true,
+          "export_excludes_private_fields": true,
+          "stale_url_clears_preview": true,
+          "canonical_reuse_opens_explicit_correction": true,
+          "no_automatic_correction_write": true,
+          "explicit_current_page_refresh": true,
+          "acknowledged_save_survives_stale_refresh": true,
+          "refresh_does_not_resubmit": true,
+          "no_horizontal_overflow": true
+        }
+      ],
+      "page_errors": []
+    }
+  },
+  "packaged_offline": {
+    "created_at": "2026-10-24T04:20:56.804Z",
+    "type": "actual_built_app_and_service_worker_local_browser_qa",
+    "production_network_test": false,
+    "no_real_api_keys": true,
+    "no_member_data_or_production_writes": true,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "source_before": [
+      {
+        "path": "build_cloud.mjs",
+        "bytes": 3713,
+        "sha256": "6d3d8d1e7715df0bb11168750faa629e950604892093ce04c45cb08154be0726"
+      },
+      {
+        "path": "netlify/functions/coffee-url-preview.mjs",
+        "bytes": 11871,
+        "sha256": "7bd23728f64530c79ca909ee4ace04cec768b7b5252c95784d02e16aed2d34ea"
+      },
+      {
+        "path": "site/admin.html",
+        "bytes": 818,
+        "sha256": "0f810ee4e654ceabea761db8c0027fe8baceaed93a7eb043c56231f2e061630b"
+      },
+      {
+        "path": "site/admin/main.js",
+        "bytes": 19838,
+        "sha256": "0b964d120a68ade7e5102e59acceb955b30cdc83a84a61009db571d3ac854103"
+      },
+      {
+        "path": "site/admin/records.js",
+        "bytes": 8947,
+        "sha256": "e25e1145aaa8a028f48ecf78d36003d913fe1b3e793aa106e5c4f9a1e85aae11"
+      },
+      {
+        "path": "site/admin/styles.css",
+        "bytes": 9691,
+        "sha256": "dd63af5cd420822f335fdfa26ef26f2acdde5c441799c7778a66c4393160024b"
+      },
+      {
+        "path": "site/admin/view.js",
+        "bytes": 16879,
+        "sha256": "2ec76b4a5425213b7d62b5f69f6f8ddd2495ca0d383a239d7d4b59edbc79d7b5"
+      },
+      {
+        "path": "site/cloud.html",
+        "bytes": 1119,
+        "sha256": "678f2d4657863bb729e7dd68e2f76768e30c1d9821fd7858a28a4fe1da373620"
+      },
+      {
+        "path": "site/cloud/appearance-bootstrap.js",
+        "bytes": 397,
+        "sha256": "0e746ef7e4c627f9fca207f6cd53f7c7d0ee0f062178311e370f78f61f818dbe"
+      },
+      {
+        "path": "site/cloud/appearance.js",
+        "bytes": 1544,
+        "sha256": "fcf8f24fa00ef7b27ac8df9e2c2c14d38c22da0f402c29edd10eb03c81b3fe43"
+      },
+      {
+        "path": "site/cloud/cache.js",
+        "bytes": 2449,
+        "sha256": "45261c7e60f5dd19f1fa56e076bfdae7868cb8854eaefb7af430e5a10f20ff61"
+      },
+      {
+        "path": "site/cloud/client.js",
+        "bytes": 8567,
+        "sha256": "f5b4f186dbea52e70d1601067f555051959c48a043b3fb3dcd6661ddf0b631c2"
+      },
+      {
+        "path": "site/cloud/coffee-match-ui.js",
+        "bytes": 2017,
+        "sha256": "edd343e0cbc874cf94b7d13fbbabd22ba3e46b4ec07e8299920555b08cc6fd85"
+      },
+      {
+        "path": "site/cloud/coffee-url-autofill.js",
+        "bytes": 14730,
+        "sha256": "2c201e75232bba85df667bc1b8a90182b92e3f5c51d6d17cbaf15847718b3469"
+      },
+      {
+        "path": "site/cloud/community.js",
+        "bytes": 10589,
+        "sha256": "5e7a602227d8aa3ddfae5d3b0e3616dcb0f0410da5ec601abdbd405ac183fabd"
+      },
+      {
+        "path": "site/cloud/config.js",
+        "bytes": 164,
+        "sha256": "a15e8af5c96790d750894c80b98e06df00486202692c6400aada9c28fca43889"
+      },
+      {
+        "path": "site/cloud/confirmation.js",
+        "bytes": 1147,
+        "sha256": "ea20139ab0e55495e2184aaea974b24a0720a6239dbbd647e800bcc8eaebb0df"
+      },
+      {
+        "path": "site/cloud/dose-advisory.js",
+        "bytes": 579,
+        "sha256": "01b5dd708734f385450de3b899ee18599c1c0b669a343329b6c4c8e7d8ae8d58"
+      },
+      {
+        "path": "site/cloud/import-entry.js",
+        "bytes": 156,
+        "sha256": "c56924ea1e92f2005a96fc4e6e4851ce7c07f3cfbabbc1945ff7fb3ae1a30868"
+      },
+      {
+        "path": "site/cloud/import-integration.js",
+        "bytes": 1221,
+        "sha256": "a302dfc01659af817bc0ebd93a416f1c2e6b4df21e4c29addd9694d344561caf"
+      },
+      {
+        "path": "site/cloud/import-preview.js",
+        "bytes": 8733,
+        "sha256": "791a4593a6e97d25783877a20465ff6ed537bcf2781518c24fd18757b2606af8"
+      },
+      {
+        "path": "site/cloud/import-ui.js",
+        "bytes": 7876,
+        "sha256": "8830cc007f285c4ba533c8423b198e125dd9cfe7b90d0fa1b759b63583416186"
+      },
+      {
+        "path": "site/cloud/import.css",
+        "bytes": 1494,
+        "sha256": "c465d402019462f73ffa85cb9ed1628dc3ba472c7f022fe6a81d80427f4c8611"
+      },
+      {
+        "path": "site/cloud/main.js",
+        "bytes": 78019,
+        "sha256": "0f4d312e7588a984e69e3a572d0126667699201cf513f189e9b74fd6391ed2f7"
+      },
+      {
+        "path": "site/cloud/mapping.js",
+        "bytes": 7345,
+        "sha256": "287320c45a0032b8fb737370fbe7d90305df611b523b19b7b2724d5e9b623123"
+      },
+      {
+        "path": "site/cloud/outbox.js",
+        "bytes": 10052,
+        "sha256": "d2251b9fd64f46f690485d874ef72b2d4f2935f7261551fbb946f2c44846c963"
+      },
+      {
+        "path": "site/cloud/shot_card.js",
+        "bytes": 2067,
+        "sha256": "c0febb4e270cd40de58cd3453601870eac5ae0e1e2d3b868fe6a40a6531d6735"
+      },
+      {
+        "path": "site/icon-192.png",
+        "bytes": 986,
+        "sha256": "8f05af6c5f72bb637a1710fec5c3a22e340a27766fa5c2d6f726725bdcff7245"
+      },
+      {
+        "path": "site/icon-512.png",
+        "bytes": 2680,
+        "sha256": "793f324acb494dd0d717ebdaa629103b3c977050c5685b0b85bb988b4d0b945b"
+      },
+      {
+        "path": "site/icon.svg",
+        "bytes": 368,
+        "sha256": "660c5f85f326f7c6982fb73acfc46d39105a297504fc30e423458b717fce623b"
+      },
+      {
+        "path": "site/lib/community-evidence.js",
+        "bytes": 1260,
+        "sha256": "72e8eab4908eabc2e119f4c96211e55deb904d84c0aef7011bbfcd802c9f7e75"
+      },
+      {
+        "path": "site/lib/constants.js",
+        "bytes": 6069,
+        "sha256": "7e8de39b09bdad3f5d3713b73f39da1ea8f9c313aab7c2e6c285f7d07372d389"
+      },
+      {
+        "path": "site/lib/engine.js",
+        "bytes": 35757,
+        "sha256": "d2e170a940ac5d83f16ca1083e5e1f5dbd70edaaf21de899c0160e1100e49737"
+      },
+      {
+        "path": "site/lib/model.js",
+        "bytes": 12125,
+        "sha256": "74af5ac7056c28e3dbeb87f78ba3f9a290f49884356f190579b9c1b3d4f0b1a0"
+      },
+      {
+        "path": "site/lib/ui.js",
+        "bytes": 10857,
+        "sha256": "c913c15e3af994e3b924689b5d47081f712ba732a96b89935cf8b28857641f1b"
+      },
+      {
+        "path": "site/manifest.webmanifest",
+        "bytes": 573,
+        "sha256": "c5aeae229eebad969c49e22bb8d4d97697dbd9090be9ef8a0fe4a77c1b930dfb"
+      },
+      {
+        "path": "site/styles.css",
+        "bytes": 32221,
+        "sha256": "06f4d7e4eaa44ed40d547900508a698a3dc46d543cc2dac29c262eb82bf4c39e"
+      },
+      {
+        "path": "site/visual.css",
+        "bytes": 27790,
+        "sha256": "c9e6bf6920214d747ad92b9d3cd8d0d533ef6d843870bbf3860da6c9aa43f539"
+      },
+      {
+        "path": "src/server/agtron-roast.mjs",
+        "bytes": 4209,
+        "sha256": "ac7ca37b80a5b7f4ed3bd339ab6e247f10f19f19574ce1617958f365808195d2"
+      },
+      {
+        "path": "src/server/coffee-blend-evidence.mjs",
+        "bytes": 21864,
+        "sha256": "2ffcfd4ac69601d6dd9780541bb7e46748866716eac6119463b2299c23666c76"
+      },
+      {
+        "path": "src/server/coffee-delimited-specs.mjs",
+        "bytes": 5796,
+        "sha256": "a8a27725ae978f50a3fa3bdc1a005b5ba09bf8ec483d3461f501325bd1f22f22"
+      },
+      {
+        "path": "src/server/coffee-ecwid-snapshot.mjs",
+        "bytes": 4019,
+        "sha256": "e802efd5d6147539fbefe2f7e8c651c051a7179ad7ffa3a373269e9a2d7fcf4e"
+      },
+      {
+        "path": "src/server/coffee-elevation-evidence.mjs",
+        "bytes": 12915,
+        "sha256": "99ddff5818689fbf265a4d71c6ae86a797d9bcc196ecb51256a753aec95fb77f"
+      },
+      {
+        "path": "src/server/coffee-espresso-evidence.mjs",
+        "bytes": 20637,
+        "sha256": "55f30cab5c1e2ddf1b98a808b5502a448d58d268299e06a80738c64cbe05e57e"
+      },
+      {
+        "path": "src/server/coffee-fact-compatibility.mjs",
+        "bytes": 6263,
+        "sha256": "b1ce2c4dacee77b9a5d8522e357cafef849c790b68a98c22b35fa45cdfe00e21"
+      },
+      {
+        "path": "src/server/coffee-flavor-evidence.mjs",
+        "bytes": 35067,
+        "sha256": "86d988f1b1535f44ded85b6b116471bb22e4b73ace7a768b766643ba73e31a48"
+      },
+      {
+        "path": "src/server/coffee-geography-entity-roles.mjs",
+        "bytes": 3041,
+        "sha256": "7a010e6a8834c4f8aeeaff85b5d5073782a8de2fb2575492df2df3f03d43073b"
+      },
+      {
+        "path": "src/server/coffee-html-structure.mjs",
+        "bytes": 2584,
+        "sha256": "51a2ed559db9b2d1a279d16b2dd1859b56ed53e395726f8f083ae9bcc68f3ab2"
+      },
+      {
+        "path": "src/server/coffee-identity-evidence.mjs",
+        "bytes": 39504,
+        "sha256": "006e73addd79226db3c977faece0a6e733f31c854780f2b1386b2a7eb0b1cb1b"
+      },
+      {
+        "path": "src/server/coffee-narrative-evidence.mjs",
+        "bytes": 28957,
+        "sha256": "8d7b59c22838a7febd981ffd7c049f19ded3219f3c493ef300c51e599794048b"
+      },
+      {
+        "path": "src/server/coffee-page-metadata.mjs",
+        "bytes": 72749,
+        "sha256": "5a48b6de966ffbc5253abefe238b81c2c8263805c968ad90a7dcf0d2f28a4981"
+      },
+      {
+        "path": "src/server/coffee-processing-evidence.mjs",
+        "bytes": 5318,
+        "sha256": "f7343b25ebfba3fabae8d92a0f40ea11fffbc371772406bf53d4f4b01bcb38b6"
+      },
+      {
+        "path": "src/server/coffee-product-identity.mjs",
+        "bytes": 4359,
+        "sha256": "f4c415e25e24acdf22d1773b6c850cb87e7d103169866298dd7f8e1025c1b3c8"
+      },
+      {
+        "path": "src/server/coffee-product-layouts.mjs",
+        "bytes": 22026,
+        "sha256": "b3f7ef30c1dfaa33c35c261314b9e6e63acf23a8bcce17be27ae0389db7f2630"
+      },
+      {
+        "path": "src/server/coffee-product-prep.mjs",
+        "bytes": 1014,
+        "sha256": "275caffe3368aee9e24f25af79968aeeeadddb6adcbe5eda7cc8b3a607781451"
+      },
+      {
+        "path": "src/server/coffee-product-prose.mjs",
+        "bytes": 3159,
+        "sha256": "7c8fc0ac536e3b559187431bc263384820c52caa111b6d1a64f09cf19595ef89"
+      },
+      {
+        "path": "src/server/coffee-product-scope.mjs",
+        "bytes": 13430,
+        "sha256": "c7e341e86ec2c04a43dea41f87b21697c9d88490878aafb45395be19b12cca60"
+      },
+      {
+        "path": "src/server/coffee-semantic-specs.mjs",
+        "bytes": 25915,
+        "sha256": "5416067b3568d86e037c4e41109dee4c86b725b0ca4ae72920a2bddcaecfa47a"
+      },
+      {
+        "path": "src/server/coffee-shopify-ajax.mjs",
+        "bytes": 16108,
+        "sha256": "717e3775b3b904c18d712ec1b28984640581ff1c117547056c8d5c3a0239f86f"
+      },
+      {
+        "path": "src/server/coffee-source-facts.mjs",
+        "bytes": 58104,
+        "sha256": "eb005bbb0edbbcb94416af610b7f10b8aa72d9c77a1af0f915c5d7a7c2d75100"
+      },
+      {
+        "path": "src/server/coffee-source-identity-scope.mjs",
+        "bytes": 10181,
+        "sha256": "c373bf54dc7d9651a0f8c6387d0dbe7d3be504c152111b60e5c71e37bdcf1270"
+      },
+      {
+        "path": "src/server/coffee-supplementary-source-evidence.mjs",
+        "bytes": 15198,
+        "sha256": "d8d31536b1489838efa223c67035fc5ee0c2f553594b6d8dcc61703bcdbea28c"
+      },
+      {
+        "path": "src/server/coffee-url-guard.mjs",
+        "bytes": 11620,
+        "sha256": "bccfdb07691ce550c81e62aa5f5004db63f6fd349f039e1b16e150134e047484"
+      },
+      {
+        "path": "src/server/coffee-woocommerce-store.mjs",
+        "bytes": 4665,
+        "sha256": "135b2eed7b4905f46320fec3fc7acf0745f6e737e0b6ae7adc8b7445e0be86be"
+      },
+      {
+        "path": "src/server/roast-level-evidence.mjs",
+        "bytes": 23313,
+        "sha256": "cf33f4918e69a788b4919566ec179f01ddf9940c7584cd585502f9f04f612d91"
+      },
+      {
+        "path": "supabase/functions/_shared/coffee-release-label.mjs",
+        "bytes": 2276,
+        "sha256": "4286e31e3980ffe01c5f5713a06bcc614e5e219f869cd14a1d2271dd0532ea42"
+      },
+      {
+        "path": "supabase/functions/_shared/html-scan.mjs",
+        "bytes": 1723,
+        "sha256": "1ad927dda503b511c8b3de35fbd98de5b7cec9af96aebfd3146dff8eb09513e4"
+      },
+      {
+        "path": "supabase/functions/_shared/request-budget.mjs",
+        "bytes": 2455,
+        "sha256": "0371c73242eae466d84de3bd6322ffd563bdd9c4d2744bcba284a1072a8f523d"
+      },
+      {
+        "path": "supabase/functions/dic-preview-coffee/agtron-roast.mjs",
+        "bytes": 4209,
+        "sha256": "ac7ca37b80a5b7f4ed3bd339ab6e247f10f19f19574ce1617958f365808195d2"
+      },
+      {
+        "path": "supabase/functions/dic-preview-coffee/index.ts",
+        "bytes": 5864,
+        "sha256": "16b29151206342066e8f1983bec6226271d3e80f4e37b103dc5f5ebbb0d48e84"
+      },
+      {
+        "path": "supabase/functions/dic-preview-coffee/preview.mjs",
+        "bytes": 7803,
+        "sha256": "ffbdd46613387d61705fb8484171b2718daa70e550207fdd484261e73d2cd055"
+      },
+      {
+        "path": "supabase/functions/dic-verify-coffee/evidence.mjs",
+        "bytes": 11502,
+        "sha256": "76f41097698ee5fa518e7b64aed0e33f6d7eacf4184cec54a63c8c5dd13ff8b3"
+      },
+      {
+        "path": "supabase/functions/dic-verify-coffee/index.ts",
+        "bytes": 6909,
+        "sha256": "535c2a6cc36c7b90fc76111b9a0db70613b1c345deaf547c07b8417c3a7a429c"
+      },
+      {
+        "path": "tests/browser/built_app_qa.py",
+        "bytes": 4098,
+        "sha256": "2dde3d98397bdd97744c2d1d1d014b8c8815f0483dda576981e3874b51b9f55c"
+      },
+      {
+        "path": "tests/browser/pwa_offline_qa.py",
+        "bytes": 8186,
+        "sha256": "71fcdd242f02215868b46dda008e7ad3106709a4985be1c1168a5fd76e550c06"
+      },
+      {
+        "path": "tests/cloud-fixtures/raw.js",
+        "bytes": 2262,
+        "sha256": "468ad024c88960e379c1d0ce8263d06fcb94f0479ad21fbc072f0a9916707002"
+      }
+    ],
+    "dist_before": [
+      {
+        "path": "_headers",
+        "bytes": 486,
+        "sha256": "ac1a91b5a188598b7d27cdbaf72abfe1d4b6e03838d8d4a639beeaf42bf270b4"
+      },
+      {
+        "path": "admin.html",
+        "bytes": 818,
+        "sha256": "0f810ee4e654ceabea761db8c0027fe8baceaed93a7eb043c56231f2e061630b"
+      },
+      {
+        "path": "admin/main.js",
+        "bytes": 19838,
+        "sha256": "0b964d120a68ade7e5102e59acceb955b30cdc83a84a61009db571d3ac854103"
+      },
+      {
+        "path": "admin/records.js",
+        "bytes": 8947,
+        "sha256": "e25e1145aaa8a028f48ecf78d36003d913fe1b3e793aa106e5c4f9a1e85aae11"
+      },
+      {
+        "path": "admin/styles.css",
+        "bytes": 9691,
+        "sha256": "dd63af5cd420822f335fdfa26ef26f2acdde5c441799c7778a66c4393160024b"
+      },
+      {
+        "path": "admin/view.js",
+        "bytes": 16879,
+        "sha256": "2ec76b4a5425213b7d62b5f69f6f8ddd2495ca0d383a239d7d4b59edbc79d7b5"
+      },
+      {
+        "path": "cloud/appearance-bootstrap.js",
+        "bytes": 397,
+        "sha256": "0e746ef7e4c627f9fca207f6cd53f7c7d0ee0f062178311e370f78f61f818dbe"
+      },
+      {
+        "path": "cloud/appearance.js",
+        "bytes": 1544,
+        "sha256": "fcf8f24fa00ef7b27ac8df9e2c2c14d38c22da0f402c29edd10eb03c81b3fe43"
+      },
+      {
+        "path": "cloud/cache.js",
+        "bytes": 2449,
+        "sha256": "45261c7e60f5dd19f1fa56e076bfdae7868cb8854eaefb7af430e5a10f20ff61"
+      },
+      {
+        "path": "cloud/client.js",
+        "bytes": 8567,
+        "sha256": "f5b4f186dbea52e70d1601067f555051959c48a043b3fb3dcd6661ddf0b631c2"
+      },
+      {
+        "path": "cloud/coffee-match-ui.js",
+        "bytes": 2017,
+        "sha256": "edd343e0cbc874cf94b7d13fbbabd22ba3e46b4ec07e8299920555b08cc6fd85"
+      },
+      {
+        "path": "cloud/coffee-url-autofill.js",
+        "bytes": 14730,
+        "sha256": "2c201e75232bba85df667bc1b8a90182b92e3f5c51d6d17cbaf15847718b3469"
+      },
+      {
+        "path": "cloud/community.js",
+        "bytes": 10589,
+        "sha256": "5e7a602227d8aa3ddfae5d3b0e3616dcb0f0410da5ec601abdbd405ac183fabd"
+      },
+      {
+        "path": "cloud/config.js",
+        "bytes": 189,
+        "sha256": "6d27c323dce99d1c8bf815a74c80c54a1c6a0b820a5ba41d6c328f9cec093f3c"
+      },
+      {
+        "path": "cloud/confirmation.js",
+        "bytes": 1147,
+        "sha256": "ea20139ab0e55495e2184aaea974b24a0720a6239dbbd647e800bcc8eaebb0df"
+      },
+      {
+        "path": "cloud/dose-advisory.js",
+        "bytes": 579,
+        "sha256": "01b5dd708734f385450de3b899ee18599c1c0b669a343329b6c4c8e7d8ae8d58"
+      },
+      {
+        "path": "cloud/main.js",
+        "bytes": 78019,
+        "sha256": "0f4d312e7588a984e69e3a572d0126667699201cf513f189e9b74fd6391ed2f7"
+      },
+      {
+        "path": "cloud/mapping.js",
+        "bytes": 7345,
+        "sha256": "287320c45a0032b8fb737370fbe7d90305df611b523b19b7b2724d5e9b623123"
+      },
+      {
+        "path": "cloud/outbox.js",
+        "bytes": 10052,
+        "sha256": "d2251b9fd64f46f690485d874ef72b2d4f2935f7261551fbb946f2c44846c963"
+      },
+      {
+        "path": "cloud/shot_card.js",
+        "bytes": 2067,
+        "sha256": "c0febb4e270cd40de58cd3453601870eac5ae0e1e2d3b868fe6a40a6531d6735"
+      },
+      {
+        "path": "icon-192.png",
+        "bytes": 986,
+        "sha256": "8f05af6c5f72bb637a1710fec5c3a22e340a27766fa5c2d6f726725bdcff7245"
+      },
+      {
+        "path": "icon-512.png",
+        "bytes": 2680,
+        "sha256": "793f324acb494dd0d717ebdaa629103b3c977050c5685b0b85bb988b4d0b945b"
+      },
+      {
+        "path": "icon.svg",
+        "bytes": 368,
+        "sha256": "660c5f85f326f7c6982fb73acfc46d39105a297504fc30e423458b717fce623b"
+      },
+      {
+        "path": "index.html",
+        "bytes": 1119,
+        "sha256": "678f2d4657863bb729e7dd68e2f76768e30c1d9821fd7858a28a4fe1da373620"
+      },
+      {
+        "path": "lib/community-evidence.js",
+        "bytes": 1260,
+        "sha256": "72e8eab4908eabc2e119f4c96211e55deb904d84c0aef7011bbfcd802c9f7e75"
+      },
+      {
+        "path": "lib/constants.js",
+        "bytes": 6069,
+        "sha256": "7e8de39b09bdad3f5d3713b73f39da1ea8f9c313aab7c2e6c285f7d07372d389"
+      },
+      {
+        "path": "lib/engine.js",
+        "bytes": 35757,
+        "sha256": "d2e170a940ac5d83f16ca1083e5e1f5dbd70edaaf21de899c0160e1100e49737"
+      },
+      {
+        "path": "lib/model.js",
+        "bytes": 12125,
+        "sha256": "74af5ac7056c28e3dbeb87f78ba3f9a290f49884356f190579b9c1b3d4f0b1a0"
+      },
+      {
+        "path": "lib/ui.js",
+        "bytes": 10857,
+        "sha256": "c913c15e3af994e3b924689b5d47081f712ba732a96b89935cf8b28857641f1b"
+      },
+      {
+        "path": "manifest.webmanifest",
+        "bytes": 573,
+        "sha256": "c5aeae229eebad969c49e22bb8d4d97697dbd9090be9ef8a0fe4a77c1b930dfb"
+      },
+      {
+        "path": "styles.css",
+        "bytes": 32221,
+        "sha256": "06f4d7e4eaa44ed40d547900508a698a3dc46d543cc2dac29c262eb82bf4c39e"
+      },
+      {
+        "path": "sw.js",
+        "bytes": 2425,
+        "sha256": "4708bd6c0d32537bc8f6bd8df1022ba9110e159227569f46fa1117e617550f0f"
+      },
+      {
+        "path": "vendor/supabase.js",
+        "bytes": 217907,
+        "sha256": "d6a5c4414a5d4ce646d9c1de223aa7067d3ff664c15394ffeb7fcffc763354a3"
+      },
+      {
+        "path": "visual.css",
+        "bytes": 27790,
+        "sha256": "c9e6bf6920214d747ad92b9d3cd8d0d533ef6d843870bbf3860da6c9aa43f539"
+      }
+    ],
+    "checks": [
+      {
+        "name": "packaged_member_entry_real_sdk_modules_css_and_mobile_layout",
+        "result": "PASS"
+      },
+      {
+        "name": "packaged_admin_entry_denies_absent_session_and_loads_real_assets",
+        "result": "PASS"
+      },
+      {
+        "name": "actual_service_worker_caches_public_shell_assets_only",
+        "result": "PASS",
+        "cached_paths": [
+          "/",
+          "/index.html",
+          "/visual.css",
+          "/cloud/appearance.js",
+          "/cloud/appearance-bootstrap.js",
+          "/styles.css",
+          "/icon.svg",
+          "/icon-192.png",
+          "/icon-512.png",
+          "/manifest.webmanifest",
+          "/cloud/client.js",
+          "/cloud/cache.js",
+          "/cloud/outbox.js",
+          "/cloud/mapping.js",
+          "/cloud/shot_card.js",
+          "/cloud/community.js",
+          "/cloud/coffee-match-ui.js",
+          "/cloud/coffee-url-autofill.js",
+          "/cloud/dose-advisory.js",
+          "/cloud/main.js",
+          "/cloud/confirmation.js",
+          "/lib/constants.js",
+          "/lib/model.js",
+          "/lib/community-evidence.js",
+          "/lib/engine.js",
+          "/lib/ui.js",
+          "/vendor/supabase.js",
+          "/cloud/config.js"
+        ]
+      },
+      {
+        "name": "cold_offline_reopen_retains_only_current_owner_coffee_and_disables_online_catalog",
+        "result": "PASS"
+      },
+      {
+        "name": "real_offline_shot_save_outbox_survives_reload_and_shows_one_pending",
+        "result": "PASS"
+      },
+      {
+        "name": "offline_different_owner_cannot_read_previous_owner_cache_or_outbox",
+        "result": "PASS"
+      },
+      {
+        "name": "expired_offline_session_cannot_expose_owner_cache",
+        "result": "PASS"
+      },
+      {
+        "name": "reconnect_revalidates_and_synchronizes_exactly_once_then_acknowledged_queue_stays_empty",
+        "result": "PASS",
+        "synthetic_mutation_calls": 1,
+        "synthetic_remote_shots": 1
+      },
+      {
+        "name": "no_local_missing_assets_or_browser_javascript_errors",
+        "result": "PASS"
+      }
+    ],
+    "errors": [],
+    "blocked_external_requests": [
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      },
+      {
+        "url": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        "method": "GET"
+      }
+    ],
+    "local_asset_failures": [],
+    "browser_version": "156.0.8078.47",
+    "synthetic_sdk_sha256": "eeb99052067fdf13691bd1188620ad224fc23bd636320f8910571b4b40174ef5",
+    "synthetic_sdk_base_sha256": "3ce85665037d98d75b2026c07b35f19e6b556aa1a74e1a6b25aa1a75d34b5731",
+    "synthetic_sdk_instrumentation": "Only additional fixture logic counts calls to dic_apply_client_change; application modules and service worker remain exact dist bytes.",
+    "status": "PASS",
+    "source_before_sha256": "9d7a8a5224f3e4c8eb67246d358610117348d3795b32ecfeaffffe5b07be3915",
+    "source_after_sha256": "9d7a8a5224f3e4c8eb67246d358610117348d3795b32ecfeaffffe5b07be3915",
+    "dist_before_sha256": "87c636e77b5f642152902d95c4c5d2418e4c424a94066dfd6124ed7bb72b45fa",
+    "dist_after_sha256": "87c636e77b5f642152902d95c4c5d2418e4c424a94066dfd6124ed7bb72b45fa",
+    "source_unchanged": true,
+    "dist_unchanged": true,
+    "completed_at": "2026-10-24T04:20:58.257Z",
+    "harness_sha256": "f356dff0c042fbf40b21b69f4fb9784d646a07f501e0bd7ebf51512d96dc1fde"
+  },
+  "semantic_merge_review": {
+    "path": "integration-review/semantic-9135-merge-review.json",
+    "sha256": "8bad4e3eca9341384f72f5f9df0f62488c2b33dd22fd488b34df24c73553283a"
+  },
+  "actual_new_source_github_ci": "PENDING",
+  "production_authorized": false
+}

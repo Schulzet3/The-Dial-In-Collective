@@ -29,7 +29,11 @@ test('Onyx-style guide identities preserve published 20 g / 47 g without inventi
  assert.match(markup,/published espresso reference/);
  assert.match(markup,/20 g in, 47 g out \(total shot time not published\)/);
  assert.match(markup,/Reference only; not applied or saved automatically/);
- assert.doesNotMatch(markup,/26(?:–26)? s|205°F|400 g out|25 g in|29\.5/);
+ const espressoReference=markup.match(/<p class="helper"><strong>Roaster's published espresso[^]*?<\/p>/)?.[0];
+ assert.ok(espressoReference);
+ assert.doesNotMatch(espressoReference,/26(?:–26)? s|205°F|400 g out|25 g in|29\.5/);
+ assert.match(markup,/Filter - English · Water/);
+ assert.match(markup,/400g @ 205°F/);
 });
 
 test('a guide needs its exact espresso control identity; filter tabs cannot donate fields',()=>{

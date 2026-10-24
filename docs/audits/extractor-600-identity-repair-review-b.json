@@ -1,0 +1,583 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-24T00:39:14.546801+00:00",
+  "reviewer": "/root/pipeline_audit",
+  "workstream": "Owner-authorized zero-key/no-added-cost extractor audit of 603 distinct coffees from 201 US roasters",
+  "status": "reconstructed production stable; fresh focused Node 22 tests and selected captured-source checks passed; awaiting final candidate snapshot/full corpus replay",
+  "independence": {
+    "extractor_outputs_seen": true,
+    "purpose": "diagnostic repair and recovery receipt",
+    "frozen_oracles_modified": false,
+    "strict_scorer_modified": false,
+    "new_regressions_are_independent_oracle": false
+  },
+  "recovery": {
+    "workspace": "/workspace/scratch/13d81ee504dd/dic-audit-recovered",
+    "stale_workspace_untouched": "/workspace/scratch/13d81ee504dd/dic",
+    "cause": "Executor returned an older filesystem snapshot; root recovered exact original WIP/upstream files, source captures and original frozen oracle bytes. Later code was reconstructed and freshly tested.",
+    "historical_tests_do_not_validate_reconstruction": true,
+    "provider_writes_by_this_agent": false,
+    "commits_or_deployments_by_this_agent": false
+  },
+  "frozen_oracles": [
+    {
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "sha256": "2cc77e02828d640f342ef73597b550e8892cfa354882977254d2b9697b960c64",
+      "coffees": 150,
+      "frozen_bytes_verified": true
+    },
+    {
+      "path": "docs/audits/extractor-600-oracle-b.json",
+      "sha256": "cd2ce6b8ff09bdaf4fedbeaad3b7556efe0c42607cc04229563a90a32ecef72b",
+      "coffees": 150,
+      "frozen_bytes_verified": true
+    },
+    {
+      "path": "docs/audits/extractor-600-oracle-c.json",
+      "sha256": "60c00a8f61f06af1858ebdae7ace408987cb79d80014552f03cb724afc71cbee",
+      "coffees": 150,
+      "frozen_bytes_verified": true
+    },
+    {
+      "path": "docs/audits/extractor-600-oracle-root.json",
+      "sha256": "088034be3484a543b3b36d76420b3567f8b3cd708ee266e2c45da9996c6f2e0e",
+      "coffees": 75,
+      "frozen_bytes_verified": true
+    },
+    {
+      "path": "docs/audits/extractor-600-oracle-root-extra-c.json",
+      "sha256": "7b9cb91e7e6f6426162af761557c8ebde9c91726509ed919939351c2014215b8",
+      "coffees": 78,
+      "frozen_bytes_verified": true
+    }
+  ],
+  "source_snapshot": [
+    {
+      "path": "src/server/coffee-page-metadata.mjs",
+      "sha256": "87e263db550a0db29ad3aa07db16d61438c58aea02a0a4fe28defe5867f11f21",
+      "lines": 974
+    },
+    {
+      "path": "src/server/coffee-product-scope.mjs",
+      "sha256": "69233323f51e83b0d14b4858035bd11c9db33d1c741cf74d2ef5754a690dd6f9",
+      "lines": 152
+    },
+    {
+      "path": "src/server/coffee-html-structure.mjs",
+      "sha256": "51a2ed559db9b2d1a279d16b2dd1859b56ed53e395726f8f083ae9bcc68f3ab2",
+      "lines": 48
+    },
+    {
+      "path": "src/server/coffee-semantic-specs.mjs",
+      "sha256": "1a280c28c60fa8821f34489fc380b6dce5f6412cf5ba1d38b059b9ef80fc0f3c",
+      "lines": 269
+    },
+    {
+      "path": "src/server/coffee-product-layouts.mjs",
+      "sha256": "19b67a99bc0cf8a44bd2e2d5b846183ac44c5b12b405dac2b51881310e9c0d33",
+      "lines": 349
+    },
+    {
+      "path": "src/server/coffee-narrative-evidence.mjs",
+      "sha256": "a3deb0ce53d2bf9397afbe8af2cbe954efb6204652898e7e5ddac7e385e94b85",
+      "lines": 200
+    },
+    {
+      "path": "src/server/coffee-identity-evidence.mjs",
+      "sha256": "c7e21880757858ff91b892c345a4a94c1f4859ffe350105e91b3bcfdfddcb1c3",
+      "lines": 241
+    },
+    {
+      "path": "src/server/coffee-fact-compatibility.mjs",
+      "sha256": "1d4a471abb0d671fb82c28121881bce06e54df9f13cf980c0866fa77fab90b72",
+      "lines": 57
+    },
+    {
+      "path": "src/server/coffee-blend-evidence.mjs",
+      "sha256": "d979f7325eb61d754e97fca365cf906310d6eef7b197a4a2c1e1b8abb3db4b27",
+      "lines": 262
+    },
+    {
+      "path": "src/server/coffee-shopify-ajax.mjs",
+      "sha256": "f040b70baacefb06cce38c6e79f60c7a2aefaefd054000098f6cec14a19707da",
+      "lines": 224
+    },
+    {
+      "path": "src/server/coffee-geography-entity-roles.mjs",
+      "sha256": "57e2fec30c12f78e1b3a145b4220c5e72da0f468c36c5a1adf554770b75018c8",
+      "lines": 49
+    },
+    {
+      "path": "src/server/coffee-source-identity-scope.mjs",
+      "sha256": "c373bf54dc7d9651a0f8c6387d0dbe7d3be504c152111b60e5c71e37bdcf1270",
+      "lines": 162
+    }
+  ],
+  "coverage_and_failure_categories": [
+    {
+      "field": "origin",
+      "failure_category": "compatible geographic evidence treated as a contradiction",
+      "repair": "Reconcile exact country/region roles, complete source place segments, printed continent-country relations, explicit same-sentence region-country corroboration, middle-dot delimiters, and directional qualifiers. Remove a prefixed farm/cooperative only with independent exact selected-product role evidence. Preserve North-versus-South and unrelated regions as conflicts.",
+      "regressions": [
+        "Dueling Rabbits repeated product names",
+        "Paper Plane process-bearing title",
+        "Kona qualified place captions",
+        "Lion Rush Huila / Colombia",
+        "Subliminal Copan / Honduras",
+        "Idyll named cooperative prefix"
+      ],
+      "limits": [
+        "No guessed regional hierarchy. Vesta Fresno and Tolima remain reviewable without a source join.",
+        "A genuine printed Central American versus Colombian claim remains a conflict."
+      ]
+    },
+    {
+      "field": "origin",
+      "failure_category": "narrative or title country inferred from an unrelated meaning",
+      "repair": "Reject country words inside named farms, historical coffee culture and national roast style; use title country only after explicit selected-product geography. Reject exact repeated product headings as region claims.",
+      "regressions": [
+        "Finca Costa Rica in Colombia",
+        "Craftsman Vietnamese-style roast history",
+        "Explicit Brazil description on Ethiopia-titled synthetic Product"
+      ],
+      "limits": [
+        "Place names and political/cultural references are not automatically cultivation evidence."
+      ]
+    },
+    {
+      "field": "variety",
+      "failure_category": "entity/list truncation, supported label variants and bounded cultivar grammar",
+      "repair": "Decode entities before label separation; split semicolons only before explicit next labels; preserve full cultivar lists and accent/case equivalents; add Tree variety and safe terminal-period captions; extract named parenthetical and Oxford-comma cultivars and explicit processed-cultivar statements.",
+      "regressions": [
+        "Caturra &amp; Castillo",
+        "Arabica; Castillo, Catimor 129, F6",
+        "Predominantly Typica",
+        "SL28, SL34, and Ruiru11",
+        "Natural processed Caturra"
+      ],
+      "limits": [
+        "An unrecognized botanical name without explicit label is retained in source facts, not guessed.",
+        "Generic flavor or street/barrel names cannot supply cultivars."
+      ]
+    },
+    {
+      "field": "process",
+      "failure_category": "coarse dropdown normalization loses literal processing or conflates blend components",
+      "repair": "Retain literal processing detail, normalize explicit wet/dry and pulped-natural methods, recognize bounded current-coffee processing prose, and use Other/Unknown for explicit component mixtures. Preserve explicit caption over a less precise narrative fallback across endpoints.",
+      "regressions": [
+        "Origin & process: Sumatra (wet hulled)",
+        "Natural and Honey blend",
+        "50% naturally processed Yellow Catuai and 50% honey processed Mondo Novo",
+        "Explicit Honey versus narrative anaerobic detail"
+      ],
+      "limits": [
+        "Decaffeination method alone does not establish washed/natural cultivation process.",
+        "Contradictory explicit processing captions remain withheld for review."
+      ]
+    },
+    {
+      "field": "producer",
+      "failure_category": "farms, names, numerical metrics and narrative clauses mixed into one producer",
+      "repair": "Keep farm separately; prefer a named explicit producer over a farm fallback; reject adjacent relationship-year and numeric count contamination; support bounded named-grower grammar and actual collective groups; record narrative provenance so explicit endpoint evidence can refine it.",
+      "regressions": [
+        "Finca Costa Rica owned by Faver Ninco",
+        "Named grower before farm fallback",
+        "Generic specific-region/farm marketing rejected",
+        "Two explicit producer names conflict"
+      ],
+      "limits": [
+        "A group count or ambiguous broad sourcing sentence is not a named producer.",
+        "No arbitrary substring matching to reconcile incompatible producer identities."
+      ]
+    },
+    {
+      "field": "release_label",
+      "failure_category": "harvest/lot facts confused with generic marketing, publication dates or instructions",
+      "repair": "Read literal harvest and lot labels, exact lot numbers, and source title identifiers; keep multiple source claims reviewable; reject generic Single Origin/Blend lot labels and shipping/harvest instructions.",
+      "regressions": [
+        "Literal title Lot 42",
+        "Generic single-origin Lot rejected",
+        "Published exact harvest label retained"
+      ],
+      "limits": [
+        "Micro-lot branding, series names and undated marketing are not automatically a canonical release.",
+        "Publication date, SKU and URL year do not establish harvest."
+      ]
+    },
+    {
+      "field": "shared",
+      "failure_category": "source scope hides legitimate stories or leaks unrelated content",
+      "repair": "Use bounded structural scanning, controlled hidden panels, precise related/review exclusions, narrow malformed-tag recovery, and fake-element/attribute guards. Quarantine a corroborated foreign coffee cohort while preserving raw source facts marked disputed.",
+      "regressions": [
+        "Be Bright story behind malformed header",
+        "GloryCloud decaf description containing Kenya AB",
+        "Related product and review removal with current-story resumption",
+        "Fake meta markup and oversized malformed structure negatives"
+      ],
+      "limits": [
+        "Resource caps remain and truncation is disclosed.",
+        "Mixed source identity is quarantined only with positive corroboration, not broad heuristics."
+      ]
+    },
+    {
+      "field": "shared",
+      "failure_category": "HTML, JSON, endpoint and meta fallbacks erase stronger evidence",
+      "repair": "Bind metadata descriptions to exact canonical/OG URL and equivalent product title/brand; parse explicit labels before prose; preserve field-level narrative provenance; retain both competing raw claims and respect final conflicts.",
+      "regressions": [
+        "Exact URL/title long metadata labels",
+        "Wrong URL/title/brand negatives",
+        "Full HTML details preserved after endpoint enrichment",
+        "Prior conflict cannot be resurrected"
+      ],
+      "limits": [
+        "Exact public endpoint and bounded shared-deadline rules remain in force.",
+        "A richer source-facts export is not the same as a reviewed canonical value."
+      ]
+    }
+  ],
+  "verification": {
+    "runtime": "Node v22.22.0",
+    "command": "node --test tests/coffee-corpus-identity-regressions.test.mjs tests/coffee-geography-conflicts.test.mjs tests/coffee-geography-entity-roles.test.mjs tests/coffee-preview-enrichment.test.mjs tests/coffee-runtime-audit.test.mjs tests/coffee-semantic-specs.test.mjs tests/coffee-product-scope-integrity.test.mjs tests/coffee-source-identity-scope.test.mjs tests/universal-coffee-preview.test.mjs",
+    "tests": 171,
+    "passed": 171,
+    "failed": 0,
+    "skipped": 0,
+    "tap_sha256": "96f4fef2ea9e42a0303bcaa331f4fdd162fa179c73f43ecd7d8a5c2d841ea1cc",
+    "test_sources": [
+      {
+        "path": "tests/coffee-corpus-identity-regressions.test.mjs",
+        "sha256": "9ce7a193ac777ab5e684e714d53e521cb89f0605dd3f117768c75e29ea1aca0c"
+      },
+      {
+        "path": "tests/coffee-geography-conflicts.test.mjs",
+        "sha256": "98d6fd1f59d70b290b47fd5cb751fdcc182d5ce65056385e1d0814cb9989e10d"
+      },
+      {
+        "path": "tests/coffee-geography-entity-roles.test.mjs",
+        "sha256": "c47699cbd583a08eac48d1c457a60d87c151bf9d665948194998ee2d10fd3263"
+      },
+      {
+        "path": "tests/coffee-preview-enrichment.test.mjs",
+        "sha256": "7a1f7ec91fc380971a539f60fc9fb34908684a66f8163cee7276dfe954e1e2ad"
+      },
+      {
+        "path": "tests/coffee-runtime-audit.test.mjs",
+        "sha256": "1ea0d065aa17cef14fe159e5d202b7ffbb0990c36dedb9c9f216dbd7acea8001"
+      },
+      {
+        "path": "tests/coffee-semantic-specs.test.mjs",
+        "sha256": "3ebc0e4c4f35228b5534fc3685e9ba7bafb96d055e263cac13cab84893a54b2d"
+      },
+      {
+        "path": "tests/coffee-product-scope-integrity.test.mjs",
+        "sha256": "af9c4b780a30f72e50768f265ac9c006fb75edf6ee7ff298e1cdb71da5bcd14f"
+      },
+      {
+        "path": "tests/coffee-source-identity-scope.test.mjs",
+        "sha256": "8e1627fe5523b3afada188284b3054e3f1196fe2ccff30808d64e58bac9a2b7e"
+      },
+      {
+        "path": "tests/universal-coffee-preview.test.mjs",
+        "sha256": "2fe01a9fc600ad1bfa1a75e4a49cdbcaf120988145e768b8bcf5d91cbb6d115e"
+      }
+    ],
+    "test_names": [
+      "entities and cultivar list semicolons cannot truncate a selected description",
+      "generic cultivar suffixes stay within their explicit complete value",
+      "Country and Region retain explicit hierarchy in either order and reject unrelated regions",
+      "comparison-only place punctuation, leading marketing and directional precision do not weaken contradictions",
+      "broad printed places agree with explicit countries but not wrong continents",
+      "literal source tuples corroborate geography but repeated product names cannot invent regions",
+      "an explicitly joined current region-country sentence can complete a labeled region",
+      "an independently named cooperative prefix can reconcile selected product geography without discarding raw evidence",
+      "unknown or explicitly comma-delimited entities cannot be removed from a conflicting place caption",
+      "separate producer and geography BR lines cannot fabricate a location",
+      "a country inside a farm name is not an extra blend country",
+      "national coffee culture and roast styles cannot supply an unstated cultivation country",
+      "tree-variety aliases and terminal-period factual lists retain complete cultivar evidence",
+      "a bounded composite origin/process caption separates only a complete recognized process qualifier",
+      "exact current prose process grammar excludes natural flavor and decaf adjectives",
+      "explicit mixtures preserve Other/Unknown while anaerobic subtype is one method",
+      "parenthesized and Oxford-comma cultivar claims remain complete",
+      "a current processed-cultivar phrase and cultivar-led process-specific title supply literal variety",
+      "complete percentage composition prose preserves both cultivars and a real process mixture",
+      "named farmers outrank vague narrative collectives and general sourcing definitions are not producers",
+      "complete explicit blend cohorts aggregate before field conflict checks in HTML and flat schema",
+      "blend grouping cannot erase independent whole-product contradictions or invent unnamed producers",
+      "complete country-and-process component lists never read hidden attribute strings",
+      "one-product column tables bind each heading to its value and exclude multiple product rows",
+      "recommendation and Woo review scopes cannot donate facts but later current story can",
+      "script and attribute pseudo-elements cannot donate canonical facts",
+      "malformed missing angle after a completed quoted attribute recovers within original ancestry only",
+      "release labels exclude harvesting instructions and generic lot categories",
+      "a long meta description requires exact product URL and branded title before filling absent identity fields",
+      "explicit producer/process/cultivar captions retain precedence over same-product prose fallbacks",
+      "positively identified foreign coffee cohort is excluded canonically and kept as disputed source evidence",
+      "structured Origin cannot be overwritten by a contradictory visible Country and Region",
+      "cross-alias geography conflicts are independent of structured and visible evidence order",
+      "compatible origin country or region fragments enrich to the full explicitly labeled geography",
+      "compatible geographic precision and accent equivalents preserve the more detailed source spelling",
+      "equivalent origin segment ordering and ordinary delimiters are not country conflicts",
+      "a differing explicit country in a full origin cannot be hidden by a shared region fragment",
+      "origin conflicts remain withheld through direct nearby and endpoint fallbacks",
+      "later blend evidence cannot restore a geographic field already rejected for source disagreement",
+      "actual Onyx blend country tags agree with the complete HTML origin through endpoint merge",
+      "explicit blend country tags deduplicate accent equivalents while preserving source spelling",
+      "separate origin tags need an explicit same-product blend marker before combining countries",
+      "blend tag aggregation cannot union or resurrect contradictory whole-product origin declarations",
+      "literal Idyll cooperative statement resolves an entity prefix without guessing a region hierarchy",
+      "an independently attested named farm or estate uses exact word boundaries and accent equivalents",
+      "comma-delimited places, unattested names, lone places and exact entity-only values remain intact",
+      "negation, comparison, generic education and another coffee never establish a role for cleanup",
+      "a geography prefix alone and a name in a heading do not create independent entity proof",
+      "nested emphasis preserves a literal source role and duplicate representations do not multiply proof",
+      "role and measurement bounds fail closed without altering unsupported input",
+      "a missing variety triggers one exact-product enrichment even when six other facts exist",
+      "every missing autofill fact is eligible for bounded enrichment, including harvest and roaster",
+      "complete HTML core facts still gain complementary endpoint recipe and supplementary details",
+      "complete HTML core facts are checked against exact-product endpoint conflicts",
+      "a complete approved catalog retains the free cooldown-enforced fast path",
+      "an incomplete approved catalog cannot suppress fresh fields or confer approval on them",
+      "fresh source fields do not silently inherit absent or obsolete catalog values",
+      "warm public evidence wins over an incomplete catalog and stays quota-free",
+      "fresh admission and verified email are required before returning warm or catalog evidence",
+      "denied retrieval quota cannot fetch; a usable catalog may still take its allowed free path",
+      "catalog fallback never bypasses a shared cooldown refusal",
+      "transient or thrown source failures retain usable catalog details without charging or warming them",
+      "a completed non-transient source failure charges once and falls back without claiming verification",
+      "nested Woo product permalinks require an exact returned canonical path",
+      "product-endpoint roast enrichment retains its provisional evidence and HTML recipe/details",
+      "roast conflict from either source cannot resurrect a value or positive roast provenance",
+      "existing HTML roast provenance survives compatible enrichment without taking endpoint assumptions",
+      "explicit mixed processing survives a narrower endpoint or HTML summary with its source details",
+      "mixed-process enrichment never clears an already documented process conflict",
+      "a ratio-only HTML reference gains a compatible complete endpoint espresso recipe",
+      "different or uncorroborated espresso recipes are not combined into a new recipe",
+      "a complete HTML espresso recipe retains all its measurements when the endpoint differs",
+      "a recommended coffee named Espresso cannot reopen the current product scope",
+      "a nested recommended coffee cannot hide a later sibling product story",
+      "product-like headings inside recommendation cards do not become resume markers",
+      "decorative icons do not turn a recommendations heading wrapper into the entire component",
+      "flat recommendations resume only at a peer or higher-level product section",
+      "a shared container retains its actual product details after related cards",
+      "named recommendations and selected-product espresso instructions remain independent",
+      "depth overflow keeps inspected product facts and discards the unscanned remainder",
+      "node overflow discards unscanned recommendations without deleting earlier facts",
+      "an unterminated opening tag fails closed before source text it cannot scope",
+      "quoted angle brackets and large decorative attributes do not hide later product facts",
+      "malformed repeated H1 tags cannot turn a large heading-content allowance into repeated full scans",
+      "two-letter span words are ordinary title words, not animated single-character leaves",
+      "ordinary espresso recipe headings preserve shared-unit ranges without punctuation requirements",
+      "the public extractor cannot collapse an explicit time range through an older parser",
+      "nearby filter headings cannot complete an incomplete espresso recipe",
+      "conflicting measurements or independent espresso sections cannot manufacture one recipe",
+      "named equipment recipes retain minute-second time and stop before the next brew method",
+      "clock-format espresso ranges and temperature ranges are never reduced to their first value",
+      "explicit same-method anaerobic-natural blend components retain their single process",
+      "a genuinely different blend component still makes the process Other/Unknown",
+      "matching partial espresso measurements gain independently published time and temperature",
+      "partial recipes with incompatible equipment or measurements cannot borrow missing values",
+      "different recipe measurements stay separate and both remain reviewable",
+      "different supplementary source values remain reviewable instead of being erased by merge",
+      "conflicting endpoint elevations are withheld with both source values retained for review",
+      "only bounded nested product paths receive the existing larger HTML retry eligibility",
+      "validated public product adapters retain unfamiliar facts and full descriptions for review",
+      "evidence limits survive product adapters and preview merges as an explicit review notice",
+      "Sweet Bloom suffix variety and reversed producer/elevation cards preserve the actual coffee facts",
+      "explicit suffix varieties retain unfamiliar compound names and Unicode accents",
+      "nested metric labels share cultivar and multilingual aliases with ordinary product fields",
+      "rich multiline specification rows keep values together without merging neighboring facts",
+      "inline emphasis after a label preserves the entire value and stops at the next label",
+      "a labeled list preserves every cultivar rather than flattening adjacent words",
+      "compact metric pairs beyond the old 60 KB window remain readable",
+      "reverse cards never assign relationship years or neighboring headings as producer",
+      "unselected roast spectrum labels remain blank even in value-before-label markup",
+      "suffix wording in education and unrelated cards is not cultivar evidence",
+      "named Onyx product metrics keep priority over general variety education",
+      "a product title that happens to be a field label is still only a coffee name",
+      "semantic metric parsing stays bounded on malformed deep and repeated-attribute markup",
+      "a later named foreign coffee with corroborating specification cohort is quarantined",
+      "flattened selected Product JSON description retains the same identity boundary",
+      "an exact later current-name heading resumes current-product facts",
+      "generic detail headings do not resume a foreign coffee",
+      "a sentence-initial Our keeps the named coffee case requirement",
+      "country outside the list needs a positively named different coffee",
+      "same-country named coffee alone is not enough to quarantine",
+      "a component explicitly belonging to the selected blend remains available",
+      "named foreign coffee must be followed by corroborating origin and multiple labels",
+      "generic country lessons and quoted examples cannot establish current blend identity",
+      "comparisons and negations do not assert a separate coffee section",
+      "an absent or single-country initial blend list never starts quarantine",
+      "script, style, comment and navigation examples do not become product evidence",
+      "unknown regional names do not gain a country through geography guessing",
+      "a reference equal to the selected name is not a different coffee",
+      "entity decoding and quoted angle brackets preserve original input offsets",
+      "incompatible current blend lists do not produce a made-up union",
+      "unscanned structural and input tails are withheld with a truncation receipt",
+      "adversarial malformed and repeated labels stay within a bounded child run",
+      "unknown public roaster URLs are allowed; private and unsafe hosts are rejected",
+      "global IPv4 test excludes local, carrier NAT, reserved, multicast and mapped IPv6",
+      "connection-time pinned DNS check rejects any mixed or private A answer",
+      "secure fetch uses pinned TLS, refuses redirects and bounds body",
+      "HTTPS redirects can be followed only through fresh validated pinned connections",
+      "unknown schema.org Product yields correctly labeled proposed, not Verified facts",
+      "Sweet Bloom Wuri-style page extracts H1, labeled info and exact espresso recipe",
+      "blend descriptors never get forced into a single inaccurate processing category",
+      "conflicting unlabeled product JSON-LD is ambiguous; other product URL cannot win",
+      "auth/member/quota precede network fetch; returned web fields are unverified",
+      "bad origins and URL targets cannot trigger Supabase or external fetch",
+      "Netlify endpoint uses rate limiting, private server-only import paths and no promotion",
+      "approved 12-claim account budget keeps shared 30-second cooldown and legacy route protection",
+      "public product snapshot JSON shares safe pinned TLS and bounded reads",
+      "Wix/Ecwid shop-shell SEO title must not become a nonexistent coffee",
+      "real product evidence remains eligible even when site OG title says Store",
+      "public Ecwid transport target is strict, exact product URL and public store mapping",
+      "Mango Tree snapshot extracts exact published coffee details, not unrelated suggestions",
+      "Ecwid rejects wrong title, other canonical product, malformed or oversized static output",
+      "Ecwid preview returns only source-backed fields after member quota, no Wix shell fetch",
+      "Ecwid snapshot failure safely falls back to blank/manual rather than false shop identity",
+      "generic Ecwid embeds across shop/store paths use only an actual public script-src ID",
+      "selected Product description supplies explicit structured-label facts on new platforms",
+      "unknown Ecwid store shell uses product snapshot first, not shop-wide SEO",
+      "Shopify Ajax canonical product handle and locale are strictly validated",
+      "Shopify public product JSON parses only the exact handle and explicit source labels",
+      "Shopify independent source disagreement is withheld instead of silently merged",
+      "cross-platform product enrichment preserves more precise compatible origins but rejects divergent countries",
+      "sparse but valid Shopify HTML enriches missing structured facts from exact-handle public JSON",
+      "Shopify fallback retrieves a bounded public JSON product when HTML source unavailable",
+      "Shopify public JSON is fetched with pinned TLS and no credentials",
+      "Shopify product .js MIME compatibility does not execute arbitrary JavaScript",
+      "Woo public Store API lookup accepts only exact, secure product slugs",
+      "Woo public Store API selects exact published product and bounded attributes, no secrets",
+      "Woo product JSON fallback honors member admission/quota and strict field source",
+      "exact repeated URL reuses public warm preview without additional daily claim or source fetch",
+      "transient website failure does not call charge-completion RPC",
+      "complete unambiguous approved catalog skips retrieval, preserves cooldown, never claims source verification"
+    ],
+    "unsupported_invocation": "An initial attempt used --test-isolation=none, which Node 22 rejected before running tests; it was corrected to the supported --test invocation. No pass was attributed to that failed invocation."
+  },
+  "fresh_captured_source_diagnostics": [
+    {
+      "id": "craftsmancliffroasters-com__fireworks-b1eaf3a1",
+      "html": {},
+      "endpoint": {},
+      "merged": {},
+      "provenance": {},
+      "source_url": "https://craftsmancliffroasters.com/products/fireworks",
+      "source_capture_sha256": {
+        "page.html": "5b4582fff36bc58f021dad5484be680d7dee27cbc00dd4c74fd308732ec374b5",
+        "product-endpoint.html": "6848319437cde0b43fec76b1d7d5b1da50f0c0eb4aca68306253436fb8fbd34d"
+      },
+      "assertion_role": "diagnostic after extractor-output exposure; not independent oracle"
+    },
+    {
+      "id": "craftsmancliffroasters-com__mama-74e240f8",
+      "html": {},
+      "endpoint": {},
+      "merged": {},
+      "provenance": {},
+      "source_url": "https://craftsmancliffroasters.com/products/mama",
+      "source_capture_sha256": {
+        "page.html": "cc229a5dd8f2413734ad4cc5037951d00ba3070df374b54c81a4e8a1ff687f44",
+        "product-endpoint.html": "fc98c748aba94b126e8988a6e4c3454ea4e2554cb3e7841ffa4e79d8052ab7e6"
+      },
+      "assertion_role": "diagnostic after extractor-output exposure; not independent oracle"
+    },
+    {
+      "id": "craftsmancliffroasters-com__vietnamese-roast-1c2854db",
+      "html": {},
+      "endpoint": {},
+      "merged": {},
+      "provenance": {},
+      "source_url": "https://craftsmancliffroasters.com/products/vietnamese-roast",
+      "source_capture_sha256": {
+        "page.html": "a9d6490abd01a6676bbb09d297b7e1f1cf2ba8dd381591a5fa8b1f56ba872d4e",
+        "product-endpoint.html": "5672a68801310f350e99f9552f50efa339984ff873d6421fc58b0bc1616135be"
+      },
+      "assertion_role": "diagnostic after extractor-output exposure; not independent oracle"
+    },
+    {
+      "id": "idyllcoffeeroasters-com__colombia-narino-buesaco-copy-984dde98",
+      "html": {
+        "origin": "Buesaco, Nariño, Colombia",
+        "process": "Washed",
+        "variety": "Caturra, Castillo and Colombia"
+      },
+      "endpoint": {
+        "origin": "Buesaco, Nariño, Colombia",
+        "process": "Washed",
+        "variety": "Caturra, Castillo and Colombia"
+      },
+      "merged": {
+        "origin": "Buesaco, Nariño, Colombia",
+        "process": "Washed",
+        "variety": "Caturra, Castillo and Colombia"
+      },
+      "provenance": {},
+      "source_url": "https://idyllcoffeeroasters.com/products/colombia-narino-buesaco-copy",
+      "source_capture_sha256": {
+        "page.html": "750b88b7dfbc882105518fc6457f0f7efa985c55eb633b7f3187ea9d29d33914",
+        "product-endpoint.html": "248cd32c6b42610848fd99de68b4e89bb2fc556f42f56f1d56e252f523af9d49"
+      },
+      "assertion_role": "diagnostic after extractor-output exposure; not independent oracle"
+    },
+    {
+      "id": "idyllcoffeeroasters-com__muungano-togetherness-cooperative-dr-congo-02088967",
+      "html": {
+        "origin": "Lake Kivu, DR Congo 🇨🇩",
+        "process": "Washed",
+        "variety": "Bourbon"
+      },
+      "endpoint": {
+        "origin": "Lake Kivu, DR Congo",
+        "process": "Washed",
+        "variety": "Bourbon"
+      },
+      "merged": {
+        "origin": "Lake Kivu, DR Congo 🇨🇩",
+        "process": "Washed",
+        "variety": "Bourbon"
+      },
+      "provenance": {},
+      "source_url": "https://idyllcoffeeroasters.com/products/muungano-togetherness-cooperative-dr-congo",
+      "source_capture_sha256": {
+        "page.html": "adcc16808d976379d6735a62e31a8cccf5b2d65a5820074c7547019c25fa3062",
+        "product-endpoint.html": "d2ecd43e921a779d178315f83bab9b1214d5425c8cceeae5766b3373e9e2647c"
+      },
+      "assertion_role": "diagnostic after extractor-output exposure; not independent oracle"
+    },
+    {
+      "id": "idyllcoffeeroasters-com__peru-jaime-rivera-pintado-la-prosperidad-de-chirinos-cajamarca-san-ignacio-provi-b62a17f2",
+      "html": {
+        "origin": "Cajamarca, San Ignacio Province, Peru",
+        "process": "Washed",
+        "variety": "Pache, Caturra, Catimor"
+      },
+      "endpoint": {
+        "origin": "Cajamarca, San Ignacio Province, Peru",
+        "process": "Washed",
+        "variety": "Pache, Caturra, Catimor"
+      },
+      "merged": {
+        "origin": "Cajamarca, San Ignacio Province, Peru",
+        "process": "Washed",
+        "variety": "Pache, Caturra, Catimor"
+      },
+      "provenance": {},
+      "source_url": "https://idyllcoffeeroasters.com/products/peru-jaime-rivera-pintado-la-prosperidad-de-chirinos-cajamarca-san-ignacio-province",
+      "source_capture_sha256": {
+        "page.html": "bd08dc63258e84c4528112e05b86af6e5c0bb6a6ab4feab60452bd015b8a12c7",
+        "product-endpoint.html": "b063e2dd81e026452b836d924e3e05971c5848d9cab14b94b9a6658f46d82f11"
+      },
+      "assertion_role": "diagnostic after extractor-output exposure; not independent oracle"
+    }
+  ],
+  "full_corpus_current_metrics": null,
+  "limits": [
+    "This focused receipt does not claim full 603-case acceptance or perfect completeness. Root owns the immutable candidate replay and strict 4002-assertion comparison.",
+    "Rendered-only and image-only facts are a separate frozen media supplement and need separately verified production coverage.",
+    "The no-API-key/no-additional-cost request does not remove source identity, auth, quota, network guard or publication boundaries.",
+    "The original manual six-module audit is preserved in docs/audits/2026-10-23-extractor-600-parser-audit.json; its early status and source hashes are historical."
+  ],
+  "next_action": "Root snapshots stable production, reruns all 603 captured cases and reports strict results plus residual classifications without changing frozen expectations."
+}

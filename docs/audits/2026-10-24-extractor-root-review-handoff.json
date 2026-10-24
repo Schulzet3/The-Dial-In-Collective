@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "type": "post_replay_manual_root_code_review",
+  "recorded_at": "2026-10-24T01:52:34.683048+00:00",
+  "status": "candidate4_verified_additional_demonstrated_repairs_under_candidate5_verification",
+  "scope": "Complete new source-facts/export/report code and changed mutation/preview/save paths, independently challenged by requirements reviewer. This is not a full source-pixel or production-account acceptance claim.",
+  "files": [
+    {
+      "path": "src/server/coffee-source-facts.mjs",
+      "sha256": "e8db6f0db07332194552c4b07acbd0e8e822b61b5aa22a911c5b8083231464b2"
+    },
+    {
+      "path": "site/cloud/coffee-url-autofill.js",
+      "sha256": "29fbfdb19bc01cf9eed7c137d039a2fff37e55e0df45741cb0b5082782f67a1d"
+    },
+    {
+      "path": "site/cloud/main.js",
+      "sha256": "58e483f3e6980c02177677b1f1182083d2079cfae634297b35b737ae6f3279bc"
+    },
+    {
+      "path": "site/cloud/outbox.js",
+      "sha256": "d2251b9fd64f46f690485d874ef72b2d4f2935f7261551fbb946f2c44846c963"
+    },
+    {
+      "path": "site/cloud/client.js",
+      "sha256": "cca139fd66a7e9bbd47746bb5261ecd0e2806e5909f5d976aa168e4cd6f21a2a"
+    },
+    {
+      "path": "netlify/functions/coffee-url-preview.mjs",
+      "sha256": "7bd23728f64530c79ca909ee4ace04cec768b7b5252c95784d02e16aed2d34ea"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-compare.mjs",
+      "sha256": "da04b988c824a44e7e3c8d4729dd99854333a33d5de539c2206353f215082549"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-normalize.mjs",
+      "sha256": "b079b7fe8149c9dcff37afa76bcaa13a9e91777f37e33a976c96aa81c5371874"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-report.py",
+      "sha256": "1ac6e7fa8ef786859c2fb211655d375bb31f65e09acc6f7d575922bd883109f0"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-snapshot.py",
+      "sha256": "990272a0e86fade140ca37c25afa9e7e7650bfad7da738bd18da4656b30fccc9"
+    },
+    {
+      "path": "scripts/audit/coffee-import-browser.mjs",
+      "sha256": "cf3e32cad2aee4cd05c126203b5a03ab67fd4b2ccbb5be25ed8908703dd3b828"
+    },
+    {
+      "path": "supabase/functions/_shared/coffee-release-label.mjs",
+      "sha256": "4286e31e3980ffe01c5f5713a06bcc614e5e219f869cd14a1d2271dd0532ea42"
+    },
+    {
+      "path": "supabase/functions/dic-verify-coffee/evidence.mjs",
+      "sha256": "a5516a11b3ebc0eb0e15d6539f71d434239c2066b1f8cb10d51c5df85b838b09"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-retention.py",
+      "sha256": "bc7ba9b59d880c319a8a8dc4c1965a8cb6ca1fae3d7d9b4a1577da737843b6df"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-report-browser.mjs",
+      "sha256": "cbccae78b452fca427c83021a711a25fbb705cc3506d6c4b11feebe4176c2e14"
+    },
+    {
+      "path": "scripts/audit/coffee-source-review-local.py",
+      "sha256": "90504a35a4379494b06835655bbe1eb1c1dbf6c4f7910b5b39ef63864fdc55a2"
+    },
+    {
+      "path": "package.json",
+      "sha256": "86ad4b0f80fcda1d671e792b080f9d5f32ce64fa59f392996435bc5bffd7d603"
+    }
+  ],
+  "findings": [
+    {
+      "id": "ROOT-01",
+      "problem": "A confirmed coffee save followed by a stale or unavailable state refresh closed the form and discarded the imported-detail correction handoff.",
+      "repair": "Retain submitted details, identify the exact acknowledged library entry, and retry reading the original save without another add mutation. Build correction forms only from saved records/revisions.",
+      "status": "implemented_and_targeted_browser_verified"
+    },
+    {
+      "id": "ROOT-02",
+      "problem": "An account change between an inner awaited session guard and its caller continuation could return the previous account receipt.",
+      "repair": "Capture owner and epoch across the full mutation/add operation, validate the queued owner, and check again after awaits and before UI/receipt handoff. Account reset clears pending reviews.",
+      "status": "implemented_and_adversarially_verified"
+    },
+    {
+      "id": "ROOT-03",
+      "problem": "Hundreds of early supplementary dialog labels could fill the collector before later selected-product evidence reached priority sorting.",
+      "repair": "Reserve primary text early and use a bounded priority-aware intermediate collector. Keep explicit truncation and existing final size limits.",
+      "status": "implemented_and_independent_probe_verified"
+    },
+    {
+      "id": "ROOT-04",
+      "problem": "Null or scalar optional purchase variants threw before other valid evidence could be returned.",
+      "repair": "Skip malformed variants in the human summary while preserving their bounded exact raw JSON in the review export.",
+      "status": "implemented_and_independent_probe_verified"
+    },
+    {
+      "id": "ROOT-05",
+      "problem": "UTF-16 chunk boundaries split emoji pairs, producing exports the local helper could not encode.",
+      "repair": "Use code-point-safe text/JSON/export boundaries, verify complete JSON reconstruction, and reject invalid lone surrogates explicitly in the separate local helper.",
+      "status": "implemented_and_cross_component_regressions_passed"
+    },
+    {
+      "id": "ROOT-06",
+      "problem": "Image alt/title captions were pre-clipped at1601characters without truncation disclosure and continuation priority could invert chunk order.",
+      "repair": "Pass bounded complete captions through the ordinary chunker and preserve continuation order.",
+      "status": "implemented_and_independent_probe_verified"
+    },
+    {
+      "id": "ROOT-07",
+      "problem": "Identical structured fragments from different source URLs or parts were deduplicated, losing original capture attribution.",
+      "repair": "Include exact source URL and part in structured evidence identity, and retain the original JSON pointer.",
+      "status": "implemented_and_focused_actual_source_probe_verified"
+    },
+    {
+      "id": "ROOT-08",
+      "problem": "A complete approved catalog could permanently hide newer page facts from URL preview.",
+      "repair": "Add an explicit Check Current Roaster Page action using the ordinary authenticated bounded lookup, quota and cooldown. Default catalog/warm-cache paths remain available.",
+      "status": "implemented_and_targeted_browser_verified"
+    },
+    {
+      "id": "ROOT-09",
+      "problem": "Strict benchmark normalization could erase numeric qualifiers and accidentally accept >1600m as1600m.",
+      "repair": "Preserve numeric qualifiers, decimals, ranges and ratios; recompute both baseline and candidate comparisons using the same normalization. No oracle edits.",
+      "status": "implemented_and_adversarially_verified"
+    },
+    {
+      "id": "ROOT-10",
+      "problem": "Comparison/report joins and supplementary display needed stronger bindings to original case identity, frozen assertions and exact replay bytes.",
+      "repair": "Verify complete unique case sets, source URL/roaster identity, oracle/manifest hashes, replay fingerprints/hashes, archived packet hashes, and indexed supplementary assertion identity before report generation.",
+      "status": "implemented_and_independent_adversarial_tests_passed"
+    },
+    {
+      "id": "ROOT-11",
+      "problem": "Large purchase records repeated identical image and presentation values, displacing original prices, options and quantity rules.",
+      "repair": "Decompose exact public records into typed projections, original child paths and explicit same-source references. Prioritize commerce cores and exact endpoint option definitions; keep size bounds and truncation explicit.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    },
+    {
+      "id": "ROOT-12",
+      "problem": "Long selected Woo variation-form attributes were cut off by a general structural attribute bound, and hidden forms or different query-selected products could be misattributed.",
+      "repair": "Read only bounded selected numeric product forms with matching origin/path and meaningful query selectors. Reject hidden/CSS-hidden ancestors, inconsistent duplicate forms, noncurrent actions, false remote-variation markers and private form properties.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    },
+    {
+      "id": "ROOT-13",
+      "problem": "Reference records could survive after their targets were displaced by preview limits.",
+      "repair": "Require a complete contiguous parseable JSON target in the same exact URL and product-form locator namespace. Remove dangling references and disclose truncation.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    },
+    {
+      "id": "ROOT-14",
+      "problem": "Deduplicating identical prose lost the endpoint that independently supported it; terminal caption colons consumed separate slots for identical facts.",
+      "repair": "Retain bounded explicit supporting-source pairs. Text deduplication preserves semantic field, section, source path and form locator; only a terminal caption colon is treated as equivalent punctuation. Structured namespaces remain exact.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    },
+    {
+      "id": "ROOT-15",
+      "problem": "Selected public metadata, general coffee FAQs and literal map-marker values were absent or displaced.",
+      "repair": "Retain allowlisted page descriptions, bounded visible coffee guidance with explicit general scope, and literal bounded map-marker data. Do not infer canonical facts from those sources or fetch linked resources.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    },
+    {
+      "id": "ROOT-16",
+      "problem": "The exact-source purchase/export audit did not account for projected values, original HTML form namespaces, or duplicated text attribution.",
+      "repair": "Validate reconstruction against the frozen original typed value at its exact pointer. Require full cardinality, complete fragments, exact namespaces and explicit supporting-source attribution; do not upgrade strict canonical scores.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    },
+    {
+      "id": "ROOT-17",
+      "problem": "Yearless harvest windows and generic lot categories could be mistaken for distinct release identity, including values prefixed with a colon.",
+      "repair": "Share bounded recurring-window/generic-lot predicates between extraction and verification. Preserve source-only harvest/lot-type details; require independently supported dated, named or numbered release proof.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    },
+    {
+      "id": "ROOT-18",
+      "problem": "New audit-integrity regressions were outside the normal Node test glob.",
+      "repair": "Include tests/audit/*.test.mjs in the existing npm test command, without new dependencies or running hosted workflows.",
+      "status": "implemented_final_combined_candidate_verification_pending"
+    }
+  ],
+  "targeted_verification": {
+    "six_defect_node_tests": {
+      "pass": 58,
+      "fail": 0
+    },
+    "account_offline_documentation_node_tests": {
+      "pass": 99,
+      "fail": 0
+    },
+    "refresh_final_node_tests": {
+      "pass": 42,
+      "fail": 0
+    },
+    "overlapping_suites_not_a_unique_total": true,
+    "browser_receipt": "coffee-extractor-final-import-browser.json",
+    "browser_viewports": [
+      320,
+      390,
+      1280
+    ],
+    "browser_page_errors": 0,
+    "comparison_replay_integrity_node_tests": 13,
+    "report_retention_integrity_python_tests": 27,
+    "source_review_helper_python_tests": 20,
+    "browser_public_json_projection_reference_and_supporting_sources_verified": true,
+    "source_caption_dedup_tests": {
+      "pass": 43,
+      "fail": 0,
+      "overlaps_other_focused_suites": true
+    }
+  },
+  "cost_boundary": "No new API keys, paid services, hosted CI, production deployment, SQL or real member writes. Local fixtures and selected public captures only.",
+  "integration": "No remote audit commit, branch or PR. GitHub tree write was rejected; do not claim integrated or deployed."
+}

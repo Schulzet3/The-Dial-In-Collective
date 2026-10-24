@@ -66,7 +66,8 @@ test('PERC Kenya Mara Estate reads its full narrative, preserves processing subt
  assert.equal(r.fields.process,'Anaerobic');
  assert.equal(r.fields.roast_level,'Light');
  assert.equal(r.fields.variety,'Batian, SL 28, Ruiru 11');
- assert.equal(r.fields.origin,'Narok County');
+ // The selected name and its own story explicitly publish Kenya.
+ assert.equal(r.fields.origin,'Narok County, Kenya');
  assert.equal(r.roaster_details.agtron,'78.4');
  assert.match(r.roaster_details.processing_detail,/Adv Natural; anaerobic natural.*96-hour/);
  assert.match(r.roast_hint,/Gourmet scale/);
