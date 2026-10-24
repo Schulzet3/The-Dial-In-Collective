@@ -636,3 +636,7 @@ The first push workflow for 956be473 correctly skipped because this repository r
 ## October 24 UTC — source-path trigger for scoped acceptance
 
 The prior journal-only [dic-completeness-probe] push was path-filtered and did not start the public-source workflow. This source-script comment is a no-behavior-change trigger under the existing workflow path filter, with the same required marker. All original expected responses and source parity checks remain unchanged; inspect exact run result before marking READY.
+
+## October 24 UTC — immediate syntax correction after actual CI failure
+
+Public-source run 40068109510 failed before tests from a truncated source line in new rootSchemaIdentity (not from the underlying NOMAD public data). Repaired the exact malformed RegExp line and restored the selectedOfferVariant function header. The previous failure remains recorded. Re-execute same stringent live acceptance with [dic-completeness-probe] and applicable Node/CI before any READY claim; no production operations.
