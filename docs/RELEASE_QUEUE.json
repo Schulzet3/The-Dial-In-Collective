@@ -12,20 +12,30 @@
       "issue": 5,
       "pr": 107,
       "title": "Correct stale Pending Retry HTTP response",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
       "scope_paths": [
         "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
       ],
       "tests": [
-        "PR107 signed HMAC JWT/PostgREST runner reproduced stale Pending timeout after 47 passing requests; fix and rerun pending."
+        "PR107 head e51efdb8d6ee6b973d7d6e1c0eab35c16eb14e63 passed full Node/lint/build 40059738778; isolated PostgreSQL17.11 / 50 actual local signed PostgREST HTTP assertions 40059738744; approval 40059738774; cloud/mobile 40059738746; visual/offline 40059738743.",
+        "Merged commit d9607f9b505f26f66c607d431b82e19d5450473b passed exact-source approval 40059878206, Node/lint/build 40059878199, SQL/signed HTTP 40059878227, cloud/mobile 40059878239.",
+        "Stale HTTP retry error 40001 timeout reproduced first PR run 40059377581; corrected to immediate {ok:false,code:conflict} with no Pending mutation, preserving owner, revocation, canonical identity and history; signed real JWT 50/50 checks pass on fixture. No GoTrue-hosted member login or live official roaster fetch simulated."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source SQL/Node/browser/approval CI and nonforce merge/readback required. Migration NOT deployed."
+      "ci_runs": [
+        40059738774,
+        40059738778,
+        40059738744,
+        40059738746,
+        40059738743,
+        40059878206,
+        40059878199,
+        40059878227,
+        40059878239
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5",
-      "notes": "Changes only private retry RPC stale result from transport-hanging SQLSTATE 40001 to safe explicit nonmutating conflict. Does not publish or alter any member records."
+      "notes": "Changes only private retry RPC stale result from transport-hanging SQLSTATE 40001 to safe explicit nonmutating conflict. Does not publish or alter any member records. Ready source, NOT deployed. Synthetic CI signed JWT keys / accounts and official evidence are disposable only. Previous Issue #5 official-source real member acceptance remains unverified; another owner-authorized release required to apply narrow migration. Issue #10 remains open for authentic natural 2-family user acceptance and separate #12/#13 integration."
     }
   ],
   "history": [
