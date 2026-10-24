@@ -1,0 +1,122 @@
+{
+  "type": "candidate6_read_only_character_pressure_assessment",
+  "created_at": "2026-10-24T02:28:33.921500+00:00",
+  "runtime_sha256": "c14ac8538e7216b42e31139b99aed30227049147b0fb817d178b3d3211e37256",
+  "focused_replay_sha256": "235f7025653c3e02b2c4baf8e987d2db4f351eb2f5193bc284162243850dc70a",
+  "focused_replay_source_fingerprint": "44024422df7dcee2f7962e06399a57c281cb22418af3933039d347b1d60b40ab",
+  "prior_candidate5_replay_sha256": "60fc1b963e28aee46a22ad21ee08973ef249bed2a87f15ca0a828d4c9ae92c02",
+  "budget_measure": "JavaScript UTF-16 string length of label/value/section/source_path/source_locator, matching merger cost; unchanged 64000/128/1600 limits",
+  "cases": [
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "current_fact_count": 106,
+      "current_character_units": 63988,
+      "remaining_character_units": 12,
+      "missing_original_fact": {
+        "label": "Published offers",
+        "value": "{\"@type\":\"AggregateOffer\",\"priceCurrency\":\"USD\",\"lowPrice\":\"8.95\",\"highPrice\":\"124.60\",\"offerCount\":24,\"priceSpecification\":{\"@type\":\"PriceSpecification\",\"priceCurrency\":\"USD\",\"minPrice\":\"8.95\",\"maxPrice\":\"124.60\"}}",
+        "source_type": "product_json",
+        "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+        "source_path": "/offers",
+        "format": "json",
+        "part": 0
+      },
+      "missing_fact_character_units": 238,
+      "constraint": "character budget, not fact count",
+      "remaining_purchase_summary_count": 0,
+      "generated_projection_label_count": 39,
+      "candidate_label_only_savings": 273,
+      "hypothetical_label_compaction_plus_target": {
+        "fact_count": 107,
+        "character_units": 63953,
+        "all_existing_values_and_metadata_retained": true,
+        "only_change_to_existing_labels": "Remove the seven-character generated public-space qualifier, preserving fields and continuation numbering.",
+        "is_actual_handler_output": false
+      },
+      "capture": {
+        "path": "/workspace/scratch/64e35b541d47/extractor-600/cases/larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2/page.html",
+        "sha256": "46511690f59029d3ee90f22fe3bb06ab9a900f0966ca3733966b6f1f5297f2bc",
+        "original_bytes_reverified": true,
+        "matching_packet_product_indices": [
+          0
+        ]
+      },
+      "source_value_length": 215,
+      "cheap_summary_replacement": "No remaining Purchase option summary exists in this output. Exact generated projection label compaction alone is arithmetically sufficient without discarding source values."
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "current_fact_count": 108,
+      "current_character_units": 63983,
+      "remaining_character_units": 17,
+      "missing_original_fact": {
+        "label": "Product image description",
+        "value": "Drip Machine",
+        "source_type": "html",
+        "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+        "section": "Published image caption"
+      },
+      "missing_fact_character_units": 60,
+      "constraint": "character budget, not fact count",
+      "remaining_purchase_summary_count": 1,
+      "generated_projection_label_count": 37,
+      "candidate_label_only_savings": 259,
+      "hypothetical_label_compaction_plus_target": {
+        "fact_count": 109,
+        "character_units": 63784,
+        "all_existing_values_and_metadata_retained": true,
+        "only_change_to_existing_labels": "Remove the seven-character generated public-space qualifier, preserving fields and continuation numbering.",
+        "is_actual_handler_output": false
+      },
+      "capture": {
+        "path": "/workspace/scratch/64e35b541d47/extractor-600/cases/larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a/page.html",
+        "sha256": "99985bcf8f84aa55a3f0ab726d000302fd27999993715d0d09d385c65f1407ad",
+        "original_bytes_reverified": true,
+        "caption_occurrences": [
+          {
+            "character_offset": 863099,
+            "line": 17162,
+            "context": "<div class=\"brew-method-calc__method-media\"><img src=\"//larryscoffee.com/cdn/shop/files/dripmachine-doodle-black.png?v=1787847431&amp;width=480\" alt=\"Drip Machine\" srcset=\"//larryscoffee.com/cdn/shop/files/dripmachine-doodle-black.png?v=1787847431&amp;width=240 "
+          },
+          {
+            "character_offset": 863444,
+            "line": 17163,
+            "context": "mp;width=480 480w\" width=\"480\" height=\"741\" loading=\"lazy\" sizes=\"(min-width: 768px) 200px, 40vw\">\n</div><span class=\"brew-method-calc__method-title\">Drip Machine</span></div><div class=\"brew-method-calc__method\" >\n                <div class=\"brew-method-calc__m"
+          }
+        ]
+      },
+      "source_summary_proof": {
+        "summary": {
+          "label": "Purchase option: 12 oz Bag / Whole Bean",
+          "value": "price 2300 (currency minor units); shipping weight 340 g (Shopify); available",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee.js"
+        },
+        "cost": 116,
+        "retained_exact_projection_path": "/variants/0",
+        "retained_summary_properties": {
+          "id": 44424509128940,
+          "title": "12 oz Bag / Whole Bean",
+          "price": 2300,
+          "weight": 340,
+          "available": true
+        },
+        "endpoint_sha256": "5723ba9ddc4b7d5c84756a4780a12ccb2529ad55bb3a665ea887b80fe69255f3",
+        "exact_properties_equal_frozen_endpoint": true,
+        "hypothetical_swap_fact_count": 108,
+        "hypothetical_swap_character_units": 63927,
+        "is_actual_handler_output": false
+      }
+    }
+  ],
+  "conclusion": "Neither observed loss is mathematically inevitable under the existing bounds. Both can fit alongside all present values by shortening only generated projection labels from public fields to fields; Sumatra also has one exactly proved redundant generated summary sufficient for a one-for-one caption restoration.",
+  "implementation_requirements": [
+    "Apply pressure handling early enough that earlier bounded merges do not irreversibly drop the original offers or caption before final packing.",
+    "Preserve the dedup identity of full and compact generated labels across nested merges without changing arbitrary source-authored labels.",
+    "Keep every original value, source URL/type, form locator, pointer, format, part, unit, conflict flag, field mapping and section unchanged.",
+    "Retest complete JSON chunks and original target retention in the actual full handler; arithmetic proposals here are not executed output or benchmark results.",
+    "Keep C6 outputs immutable. Any repaired candidate needs its own source-bound focused and full verification."
+  ],
+  "runtime_modified": false,
+  "frozen_evidence_modified": false
+}

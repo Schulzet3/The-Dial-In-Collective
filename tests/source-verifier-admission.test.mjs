@@ -10,7 +10,7 @@ import {extractOfficialEvidence,officialProductUrl} from '../supabase/functions/
 const source=readFileSync(new URL('../supabase/functions/dic-verify-coffee/index.ts',import.meta.url),'utf8').replace(/^import .*?;\n/gm,'');
 const SID='a1111111-1111-4111-8111-111111111111';
 const origin='https://app.dialincollective.com';
-function fixture({admitted=true,statusError=null,owner='member',authenticated=true,submissionStatus='pending',alreadyVerified=false,promoteError=null}={}){
+function fixture({admitted=true,statusError=null,owner='member',authenticated=true,submissionStatus='pending',alreadyVerified=false,promoteError=null,releaseLabel='',productDescription=''}={}){
  const calls=[],trusted=[];let handler;
  const productUrl='https://sweetbloomcoffee.com/products/hambela';
  const createClient=(_url,key)=>{
@@ -23,14 +23,14 @@ function fixture({admitted=true,statusError=null,owner='member',authenticated=tr
    from(){calls.push('submission_read');return {select:()=>({eq:()=>({async maybeSingle(){return {data:{id:SID,owner_id:owner,status:submissionStatus,canonical_coffee_id:'canonical'}};}})})};},
    async rpc(name,args){calls.push(name);if(name==='dic_trusted_source_verify'){trusted.push(args);if(promoteError)return {error:promoteError};}
     return {data:{
-     dic_source_check_target:{official_host:'sweetbloomcoffee.com',source_url:productUrl,name:'Hambela',submission_revision:7},
+     dic_source_check_target:{official_host:'sweetbloomcoffee.com',source_url:productUrl,name:'Hambela',release_label:releaseLabel,submission_revision:7},
      dic_source_claim:{allowed:true},dic_trusted_source_verify:{ok:true,coffee_id:'canonical',already_verified:alreadyVerified}
     }[name]};}
   };
  };
  const context=vm.createContext({Deno:{env:{get:name=>({SUPABASE_URL:'https://fixture.invalid',SUPABASE_ANON_KEY:'anon',SUPABASE_SERVICE_ROLE_KEY:'service'})[name]},serve:fn=>{handler=fn;}},
   readBoundedJson,RequestBodyError,createClient,extractOfficialEvidence,officialProductUrl,Response,URL,TextDecoder,AbortSignal,
-  fetch:async()=>{calls.push('fetch');return new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Hambela',url:productUrl})+'</script>',{headers:{'Content-Type':'text/html'}});}});
+  fetch:async()=>{calls.push('fetch');return new Response('<script type="application/ld+json">'+JSON.stringify({'@type':'Product',name:'Hambela',url:productUrl,description:productDescription})+'</script>',{headers:{'Content-Type':'text/html'}});}});
  vm.runInContext(source,context);
  return {calls,trusted,request:()=>handler(new Request('https://edge.invalid/dic-verify-coffee',{method:'POST',headers:{origin,Authorization:'Bearer fixture-token','Content-Type':'application/json'},body:JSON.stringify({submission_id:SID})}))};
 }
@@ -58,6 +58,24 @@ test('admitted owner retains the bounded claim, fetch and evidence verification 
  assert.equal(response.status,200);assert.equal(result.status,'verified');assert.equal(result.source_verified,true);
  assert.equal(f.trusted[0].submission_id,SID);assert.equal(f.trusted[0].evidence.submission_revision,7);
  assert.deepEqual(f.calls,['client:anon','identity','dic_session_status','client:service','submission_read','dic_source_check_target','dic_source_claim','fetch','dic_trusted_source_verify']);
+});
+test('an admitted owner cannot promote a recurring yearless harvest window as a verified release',async()=>{
+ for(const releaseLabel of ['January','July–September','Spring / Summer',': November – April']){
+  const f=fixture({releaseLabel,productDescription:'Harvest period: '+releaseLabel+'. A washed coffee.'});
+  const response=await f.request(),result=await response.json();
+  assert.equal(response.status,200);assert.equal(result.status,'pending');assert.equal(result.reason,'product_title_not_verified');
+  assert.equal(f.calls.includes('fetch'),true);assert.equal(f.calls.includes('dic_trusted_source_verify'),false);assert.equal(f.trusted.length,0);
+ }
+ const dated=fixture({releaseLabel:'January 2026',productDescription:'Harvest period: January 2026. A washed coffee.'});
+ assert.equal((await (await dated.request()).json()).status,'verified');assert.equal(dated.trusted.length,1);
+});
+test('generic microlot proof stays pending while a published numbered microlot can verify',async()=>{
+ const generic=fixture({releaseLabel:'Microlot',productDescription:'Lot: Microlot. A washed coffee.'});
+ const rejected=await(await generic.request()).json();
+ assert.equal(rejected.status,'pending');assert.equal(rejected.reason,'product_title_not_verified');
+ assert.equal(generic.calls.includes('dic_trusted_source_verify'),false);assert.equal(generic.trusted.length,0);
+ const numbered=fixture({releaseLabel:'Microlot 7',productDescription:'Lot: Microlot 7. A washed coffee.'});
+ assert.equal((await(await numbered.request()).json()).status,'verified');assert.equal(numbered.trusted.length,1);
 });
 test('approval during the product fetch cannot be mislabeled as new official evidence',async()=>{
  const f=fixture({alreadyVerified:true}),response=await f.request(),result=await response.json();

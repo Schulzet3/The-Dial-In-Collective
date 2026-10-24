@@ -1,3 +1,7 @@
+## October 23/24 2026 — candidate8 extractor 603-case audit: GitHub integration TESTING, NOT deployed
+
+Owner explicitly reauthorized non-force GitHub writes and ordinary GitHub Actions. Frozen candidate8 local audit: 603 coffees / 201 U.S. roasters / 4,002 unchanged canonical checks: 3,024 exact, 167 missing, 811 review. Supplementary 5,458 fully retained / 337 partly / 679 unconfirmed; three malformed HTML source flags. All four known bounded source omissions restored. Local 1,368 named Node +53 Python pass; six optional live tests skipped. Source review/export/offline checks completed but do not constitute live member/provider acceptance. Base development 9135e06 preserves Issue #12 Community recommendation integration and Issues #5/#10 changes. GitHub PR and exact-source checks pending, queue row DIC-Q-33-expanded-603-audit TESTING. No SQL/Edge/member-data changes, deployment or publication authorized.
+
 ## October 24 2026 — Issue #10/#12 dependency implementation in TESTING
 
 Source-only candidate Community evidence tiers (exact coffee, related release, similar coffee) with per-contributor median bucketing, safe read-only admitted-user RPC, optional lazy hydration and evidence source labels. New regression tests queued, exact CI and integration pending. Existing #5 stale-retry fix remains READY but not deployed. No publication or production data operations.

@@ -1,0 +1,330 @@
+{
+  "type": "candidate7_final_independent_packing_review",
+  "created_at": "2026-10-24T02:42:09.322172+00:00",
+  "verdict": "Final changed-risk controls pass; an explicit source-preservation exception remains. Do not claim universal C5 raw-source preservation.",
+  "runtime_sha256": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719",
+  "tests_sha256": "49d7e6734a7b4e72fec4e5a5b84525175eba6de4fa7026a73e6743fdb3a4686b",
+  "final_focused_replay_sha256": "39f8a446545c70c958e0b1b399b7fabc06ac8f7d31c26787fe0de47d8fa167d4",
+  "final_focused_replay_fingerprint": "14f8df4de9c0e4dc2705c8304c5c6e1e17668c777a542c858ce3c88388750d44",
+  "final_focused_case_count": 17,
+  "evidence_scopes": {
+    "interim_controls": {
+      "count": 42,
+      "passed": 42,
+      "source_sha256": "e5bcdf9a139fcd9faf364bf27b2e0664cc8496ffb6e9752d313030d705a631be",
+      "receipt": "docs/audits/extractor-600-candidate7-independent-packing-review-interim.json",
+      "receipt_sha256": "79498a82f27c47e5ed4231da0814ed78a127dab9391fb251d061c6b3c3850226",
+      "reuse_basis": "Strict label recognition, typed proof and atomic replacement, chunk validation and variant decomposition regions are byte-identical. This is explicitly prior-source evidence, not42 fresh executions on final source."
+    },
+    "final_changed_risk_controls": {
+      "count": 13,
+      "passed": 13,
+      "source_sha256": "389c70972a5deb9b89f6e57c9e9ee27127c7118fcbaa76957bf720e010076719",
+      "receipt": "docs/audits/extractor-600-candidate7-packing-delta-controls.json",
+      "receipt_sha256": "60708ca845f6d8b7f8a894c8a0ca7ec6c761d83a8a054cd298957ecea425bb71"
+    },
+    "interim_128_record_count_pressure_probe": {
+      "source": "/workspace/scratch/64e35b541d47/dic-audit-recovered/src/server/coffee-source-facts.mjs",
+      "source_sha256": "e5bcdf9a139fcd9faf364bf27b2e0664cc8496ffb6e9752d313030d705a631be",
+      "input_variants": 128,
+      "original_json_characters": 26789,
+      "encoded_image_characters": 101,
+      "retained_facts": 128,
+      "characters": 32714,
+      "exact_original_records_in_one_projection_or_json": 128,
+      "references": 0,
+      "truncated": false
+    }
+  },
+  "byte_identical_reviewed_regions": [
+    {
+      "region": "typed_purchase_summary",
+      "sha256": "64f5d53c9e50fa4986aa1ffdf34f00cada7f3afe0827333a6b66744dbe54c80b",
+      "byte_identical_to_interim": true
+    },
+    {
+      "region": "complete_chunk_validation",
+      "sha256": "f22af61500f7d85908e6034ab5e5acf1356bbb2d0fea5ed59b0fb0ef068555f6",
+      "byte_identical_to_interim": true
+    },
+    {
+      "region": "strict_generated_projection_label",
+      "sha256": "0fde933dd615c20b15215951682552d6104af6e9c4921243a2c916bb786ed185",
+      "byte_identical_to_interim": true
+    },
+    {
+      "region": "exact_summary_proofs_and_atomic_restoration",
+      "sha256": "684d68bd90187defc6a77d8b0d41d0b0fa48acfb5e65c72dfee20f131bc0f4e6",
+      "byte_identical_to_interim": true
+    },
+    {
+      "region": "variant_decomposition_no_new_image_sharing",
+      "sha256": "930db6387dc8484077391ca0beea0dc0dbd0c106e7c82278bcc530e634840943",
+      "byte_identical_to_interim": true
+    }
+  ],
+  "final_delta_review": [
+    "Any complete selected root JSON property may use reclaimed capacity, preserving exact typed zero/false/null/empty values and units. Incomplete groups and unrelated namespaces remain ineligible.",
+    "Reclaimed-capacity tasks use the original evidence ordering, so original captions precede lower-priority galleries.",
+    "Early pressure compaction is limited to ProductGroup hasVariant cores, while exact full/compact label alias identity and unique-context guards remain unchanged.",
+    "No small-image sharing or new threshold remains; addVariationRecords is unchanged.",
+    "Count128, aggregate64000 and per-value1600 bounds remain unchanged; truncation remains explicit."
+  ],
+  "actual_final_source_review": [
+    {
+      "case_id": "larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2",
+      "facts": 109,
+      "character_units": 63998,
+      "truncated": true,
+      "restored_c5_projection_fragments": [
+        {
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/15",
+          "part": 0,
+          "original_value_and_all_metadata_equal": true,
+          "prior_label": "Purchase variant 16 public fields",
+          "current_label": "Purchase variant 16 public fields"
+        },
+        {
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/16",
+          "part": 0,
+          "original_value_and_all_metadata_equal": true,
+          "prior_label": "Purchase variant 17 public fields",
+          "current_label": "Purchase variant 17 public fields"
+        }
+      ],
+      "c5_original_targets_retained_as_exact_fact_objects": [
+        {
+          "label": "Published product weight",
+          "value": "\"0.75lb\"",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/weight",
+          "format": "json",
+          "part": 0
+        },
+        {
+          "label": "Published offers",
+          "value": "{\"@type\":\"AggregateOffer\",\"priceCurrency\":\"USD\",\"lowPrice\":\"8.95\",\"highPrice\":\"124.60\",\"offerCount\":24,\"priceSpecification\":{\"@type\":\"PriceSpecification\",\"priceCurrency\":\"USD\",\"minPrice\":\"8.95\",\"maxPrice\":\"124.60\"}}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/offers",
+          "format": "json",
+          "part": 0
+        }
+      ],
+      "primary_complete_from_exact_projection_and_child": true,
+      "primary_object_sha256": "83678b32e241baba89101d23c2aa7de98da40daae0db0bcff1ef756afa21486b",
+      "capture": {
+        "path": "/workspace/scratch/64e35b541d47/extractor-600/cases/larryscoffee-com__bolivia-single-origin-light-roast-organic-coffee-572282c2/page.html",
+        "sha256": "46511690f59029d3ee90f22fe3bb06ab9a900f0966ca3733966b6f1f5297f2bc",
+        "original_bytes_verified": true,
+        "primary_matches": [
+          {
+            "character_offset": 378701,
+            "name": "Bolivia",
+            "variant_count": 24
+          }
+        ],
+        "published_productgroup_count": 2
+      },
+      "omitted_raw_alternative": {
+        "fact": {
+          "label": "Purchase variant 1",
+          "value": "{\"@id\":\"/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510963948#variant\",\"@type\":\"Product\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_bolivia_pro_agro_12oz_2026.jpg?v=1792502002&width=1920\",\"name\":\"Bolivia - 12 oz Bag / Whole Bean\",\"offers\":{\"@id\":\"/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510963948#offer\",\"@type\":\"Offer\",\"availability\":\"http://schema.org/InStock\",\"price\":\"22.00\",\"priceCurrency\":\"USD\",\"url\":\"https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510963948\"},\"sku\":\"RC-BOLV-12Z-WB\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/0",
+          "format": "json",
+          "part": 0
+        },
+        "value_characters": 620,
+        "fact_cost": 651,
+        "present_in_c4": false,
+        "present_in_c5": false,
+        "present_in_c6": true,
+        "present_in_final": false,
+        "exact_original_capture_match": true,
+        "canonical_object_sha256": "164b4cf35e578b0da3339fc356446e40d5d6f380d26a742e0b00205a9fd8e07f",
+        "remaining_character_units": 2,
+        "shortfall_at_current_representation": 649,
+        "remaining_approved_projection_label_savings": 38,
+        "remaining_purchase_summary_count": 0,
+        "differing_alternative_leaf_values": [
+          {
+            "path": "/@id",
+            "omitted_value": "/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510963948#variant",
+            "primary_value": null,
+            "literal_found_anywhere": false
+          },
+          {
+            "path": "/image",
+            "omitted_value": "https://larryscoffee.com/cdn/shop/files/pdp_main_image_bolivia_pro_agro_12oz_2026.jpg?v=1792502002&width=1920",
+            "primary_value": "https://larryscoffee.com/cdn/shop/files/pdp_main_image_bolivia_pro_agro_12oz_2026.jpg?v=1792502002",
+            "literal_found_anywhere": false
+          },
+          {
+            "path": "/offers/@id",
+            "omitted_value": "/products/bolivia-single-origin-light-roast-organic-coffee?variant=44424510963948#offer",
+            "primary_value": null,
+            "literal_found_anywhere": false
+          },
+          {
+            "path": "/offers/availability",
+            "omitted_value": "http://schema.org/InStock",
+            "primary_value": "https://schema.org/InStock",
+            "literal_found_anywhere": false
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+      "facts": 111,
+      "character_units": 63989,
+      "truncated": true,
+      "restored_c5_projection_fragments": [
+        {
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/7",
+          "part": 0,
+          "original_value_and_all_metadata_equal": true,
+          "prior_label": "Purchase variant 8 public fields",
+          "current_label": "Fields for #8"
+        },
+        {
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/8",
+          "part": 0,
+          "original_value_and_all_metadata_equal": true,
+          "prior_label": "Purchase variant 9 public fields",
+          "current_label": "Fields for #9"
+        }
+      ],
+      "c5_original_targets_retained_as_exact_fact_objects": [
+        {
+          "label": "Published product weight",
+          "value": "\"0.75lb\"",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/weight",
+          "format": "json",
+          "part": 0
+        },
+        {
+          "label": "Product image description",
+          "value": "Drip Machine",
+          "source_type": "html",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "section": "Published image caption"
+        }
+      ],
+      "primary_complete_from_exact_projection_and_child": true,
+      "primary_object_sha256": "a8f772baa3186303a0bec6c7ee4aa39385afc08cb3eb77fcb8fe510a7eeb4d26",
+      "capture": {
+        "path": "/workspace/scratch/64e35b541d47/extractor-600/cases/larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a/page.html",
+        "sha256": "99985bcf8f84aa55a3f0ab726d000302fd27999993715d0d09d385c65f1407ad",
+        "original_bytes_verified": true,
+        "primary_matches": [
+          {
+            "character_offset": 45274,
+            "name": "Sumatra",
+            "variant_count": 30
+          }
+        ],
+        "published_productgroup_count": 2
+      },
+      "omitted_raw_alternative": {
+        "fact": {
+          "label": "Purchase variant 1",
+          "value": "{\"@id\":\"/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424509128940#variant\",\"@type\":\"Product\",\"image\":\"https://larryscoffee.com/cdn/shop/files/pdp_main_image_sumatra_permata_gayo_12oz_2026.jpg?v=1792502001&width=1920\",\"name\":\"Sumatra - 12 oz Bag / Whole Bean\",\"offers\":{\"@id\":\"/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424509128940#offer\",\"@type\":\"Offer\",\"availability\":\"http://schema.org/InStock\",\"price\":\"23.00\",\"priceCurrency\":\"USD\",\"url\":\"https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424509128940\"},\"sku\":\"RC-SUMA-12Z-WB\"}",
+          "source_type": "product_json",
+          "source_url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+          "source_path": "/hasVariant/0",
+          "format": "json",
+          "part": 0
+        },
+        "value_characters": 624,
+        "fact_cost": 655,
+        "present_in_c4": false,
+        "present_in_c5": true,
+        "present_in_c6": true,
+        "present_in_final": false,
+        "exact_original_capture_match": true,
+        "canonical_object_sha256": "e171e3b2ded2184f78985d7c8f62dc3058b1c16e23fcd43963a8be41d6c31b40",
+        "remaining_character_units": 11,
+        "shortfall_at_current_representation": 644,
+        "remaining_approved_projection_label_savings": 190,
+        "remaining_purchase_summary_count": 0,
+        "differing_alternative_leaf_values": [
+          {
+            "path": "/@id",
+            "omitted_value": "/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424509128940#variant",
+            "primary_value": null,
+            "literal_found_anywhere": false
+          },
+          {
+            "path": "/image",
+            "omitted_value": "https://larryscoffee.com/cdn/shop/files/pdp_main_image_sumatra_permata_gayo_12oz_2026.jpg?v=1792502001&width=1920",
+            "primary_value": "https://larryscoffee.com/cdn/shop/files/pdp_main_image_sumatra_permata_gayo_12oz_2026.jpg?v=1792502001",
+            "literal_found_anywhere": false
+          },
+          {
+            "path": "/offers/@id",
+            "omitted_value": "/products/sumatra-single-origin-light-roast-organic-coffee?variant=44424509128940#offer",
+            "primary_value": null,
+            "literal_found_anywhere": false
+          },
+          {
+            "path": "/offers/availability",
+            "omitted_value": "http://schema.org/InStock",
+            "primary_value": "https://schema.org/InStock",
+            "literal_found_anywhere": false
+          }
+        ]
+      }
+    }
+  ],
+  "mixed_namespace_scan": {
+    "review_type": "Post-output exact frozen-capture namespace review; no oracle changes",
+    "replay": "/workspace/scratch/64e35b541d47/extractor-600/purchase-focus-phase9-replay.json",
+    "replay_sha256": "39f8a446545c70c958e0b1b399b7fabc06ac8f7d31c26787fe0de47d8fa167d4",
+    "replay_source_tree_sha256": "14f8df4de9c0e4dc2705c8304c5c6e1e17668c777a542c858ce3c88388750d44",
+    "reviewed_case_count": 17,
+    "mixed_namespace_path_count": 0,
+    "affected_case_count": 0,
+    "cases": [],
+    "limitations": [
+      "This detects and source-checks mixed-format paths in the supplied focused replay only; it is not an all-corpus ambiguity census.",
+      "Current facts lack a JSON-LD script/object locator. Exact alternatives can be source-reviewed, but their shared URL/path is not a unique object namespace.",
+      "Successful source reconstruction does not establish unverified preview values as canonical or erase source_facts_truncated."
+    ]
+  },
+  "critical_preservation_exception": {
+    "case_id": "larryscoffee-com__sumatra-single-origin-light-roast-organic-coffee-99efc38a",
+    "baseline": "Candidate5 full output",
+    "source_path": "/hasVariant/0",
+    "issue": "A separately parseable624-character raw alternative from a second published ProductGroup was present beside a primary projection in C5 and is omitted in final C7. The primary alternative is now complete, but this does not preserve every alternate literal.",
+    "lost_alternate_leaf_paths": [
+      "/@id",
+      "/image",
+      "/offers/@id",
+      "/offers/availability"
+    ],
+    "gate_limitation": "A comparison requiring a unique record at URL/path excludes the older mixed namespace. Its zero-loss result cannot prove that every individually retained raw alternative survived.",
+    "adjudication_path": "/workspace/scratch/64e35b541d47/final-independent-review/candidate7-sumatra-raw-alternative-adjudication.json",
+    "adjudication_sha256": "8b48a842af7828e09a18806368c9f83077f986867382a28ccbcd8fcf84c5395b",
+    "disposition": "Explicit bounded source-export limitation; no further runtime change was made by this reviewer."
+  },
+  "interpretation": [
+    "Final17 has zero mixed-format paths; this is partly caused by omission of the secondary Larry alternatives and must not be presented as complete source preservation or automatic disambiguation.",
+    "Both primary Larry first variants reconstruct exactly from the current projection and description child and match original captured JSON-LD.",
+    "Bolivia secondary alternative is C6-only; Sumatra secondary alternative was already present in C5. These are different preservation claims.",
+    "The final audit must distinguish frozen expected-result scores, unique-namespace record counts, literal source alternatives and bounded incomplete exports.",
+    "The whole603 benchmark and all-corpus follow-up remain separate evidence owned by the parent audit; this receipt does not replace them."
+  ],
+  "runtime_test_or_frozen_evidence_edits_by_reviewer": false,
+  "network_or_production_access": false,
+  "object_hash_encoding": "SHA256 of UTF-8 JSON with sorted keys, ensure_ascii=false, compact comma/colon separators. Capture hashes use original bytes. Budgets use JavaScript UTF-16 units."
+}

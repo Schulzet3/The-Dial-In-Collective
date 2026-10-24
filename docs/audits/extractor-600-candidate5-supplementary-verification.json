@@ -1,0 +1,543 @@
+{
+  "created_at": "2026-10-24T02:13:47.544Z",
+  "status": "FOCUSED_PASS_FULL_CANDIDATE_REPLAY_PENDING",
+  "scope": "Handoff gaps9.2–9.6; review-only profile, GTIN, catalog category and visual marker evidence",
+  "frozen_oracle_changed": false,
+  "no_live_network": true,
+  "no_real_api_keys": true,
+  "no_member_data_or_production_writes": true,
+  "snapshot": "../extractor-supplementary-candidate5-focus-1",
+  "source_fingerprint": "d26a1d783ba97c94f2dfbd7a3aae3ae112a84196ae33bc49c327a7f6025d6a77",
+  "replay": {
+    "path": "extractor-600/supplementary-candidate5-focus-1-replay.json",
+    "sha256": "79b77f20b1d9d981bea3565deeec954c81e260969d3d7394f296c26e90e023f1",
+    "cases": 10,
+    "previews_passed": 10
+  },
+  "named_tests": {
+    "path": "supplementary-focus-tests-2.log",
+    "sha256": "2e60d9b46225954256cc6900c24b608f7d2f79c7d886ba1017bd9de11208850b",
+    "passed": 57,
+    "failed": 0,
+    "skipped": 0
+  },
+  "source_files": [
+    {
+      "path": "src/server/coffee-supplementary-source-evidence.mjs",
+      "bytes": 15198,
+      "sha256": "d8d31536b1489838efa223c67035fc5ee0c2f553594b6d8dcc61703bcdbea28c"
+    },
+    {
+      "path": "tests/coffee-supplementary-source-evidence.test.mjs",
+      "bytes": 14623,
+      "sha256": "eb902b1cfb5807be2eeeb58b8500c5656ab01ff25bbe6bbf036929f4a352a904"
+    },
+    {
+      "path": "site/cloud/coffee-url-autofill.js",
+      "bytes": 14181,
+      "sha256": "29fbfdb19bc01cf9eed7c137d039a2fff37e55e0df45741cb0b5082782f67a1d"
+    }
+  ],
+  "focused_assertions": 109,
+  "records": [
+    {
+      "case_id": "bebrightcoffee-com__colombia-finca-milan-nitro-caturra-4ec819db",
+      "source_url": "https://bebrightcoffee.com/products/colombia-finca-milan-nitro-caturra",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 411258,
+          "sha256": "504775555e6ddffc7aac0fe8adbdc817f2b34dbbbbd5cfa4a51585d747f20628",
+          "url": "https://bebrightcoffee.com/products/colombia-finca-milan-nitro-caturra"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 9143,
+          "sha256": "88cfba304e3f58201d1613c1193ea5ee9cc0ca0553f12751d975105cf1748127",
+          "url": "https://bebrightcoffee.com/products/colombia-finca-milan-nitro-caturra.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 62,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Roast comparison marker",
+          "value": "left: 20%; printed endpoints: Light Roast / Dark Roast",
+          "source_type": "html",
+          "source_url": "https://bebrightcoffee.com/products/colombia-finca-milan-nitro-caturra",
+          "section": "Published product graphic"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Colombia Finca Milan Nitro Caturra",
+        "roaster": "Be Bright Coffee",
+        "tasting_notes": "Watermelon, Kiwi, Cantaloupe, & Caramel",
+        "origin": "Pereira, Colombia",
+        "producer": "Café UBA",
+        "variety": "Caturra",
+        "process": "Washed"
+      }
+    },
+    {
+      "case_id": "bebrightcoffee-com__ethiopia-anderacha-natural-6f826845",
+      "source_url": "https://bebrightcoffee.com/products/ethiopia-anderacha-natural",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 475528,
+          "sha256": "11ded1dae7745df4603f3a8782b46eaf52b224043159ce2408d79841f0b4a6ec",
+          "url": "https://bebrightcoffee.com/products/ethiopia-anderacha-natural"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 29942,
+          "sha256": "c18676b556b6a9ca3b880485f65fc8fdce7c6da8a15513d1c27b8cb6964ddea9",
+          "url": "https://bebrightcoffee.com/products/ethiopia-anderacha-natural.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 72,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Roast comparison marker",
+          "value": "left: 20%; printed endpoints: Light Roast / Dark Roast",
+          "source_type": "html",
+          "source_url": "https://bebrightcoffee.com/products/ethiopia-anderacha-natural",
+          "section": "Published product graphic"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Ethiopia Anderacha Natural",
+        "roaster": "Be Bright Coffee",
+        "tasting_notes": "Blood Orange, Kiwi, Lychee, & Green Grape Candy",
+        "origin": "Ethiopia",
+        "process": "Natural",
+        "producer": "Abana Estate"
+      }
+    },
+    {
+      "case_id": "bebrightcoffee-com__honduras-sebastian-mejia-parainema-natural-8625da5d",
+      "source_url": "https://bebrightcoffee.com/products/honduras-sebastian-mejia-parainema-natural",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 425967,
+          "sha256": "f120c0ba391876f48bdd4bc932a98f6fc94c90d8e426edbbc988a053f8278a24",
+          "url": "https://bebrightcoffee.com/products/honduras-sebastian-mejia-parainema-natural"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 9940,
+          "sha256": "1f2e9674a32c3ee2453e790141fbd547dcdce4b77044b0fa061ab7780e924da2",
+          "url": "https://bebrightcoffee.com/products/honduras-sebastian-mejia-parainema-natural.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 62,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Roast comparison marker",
+          "value": "left: 20%; printed endpoints: Light Roast / Dark Roast",
+          "source_type": "html",
+          "source_url": "https://bebrightcoffee.com/products/honduras-sebastian-mejia-parainema-natural",
+          "section": "Published product graphic"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Honduras Sebastian Mejia Parainema Natural",
+        "roaster": "Be Bright Coffee",
+        "tasting_notes": "Pomelo, Poached Pear, Vanilla, Maraschino Cherry",
+        "origin": "Honduras",
+        "producer": "Sebastian Mejia",
+        "process": "Natural",
+        "variety": "Parainema",
+        "elevation_m": "1530 masl"
+      }
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__nicaragua-pumpkin-spice-pacamara-8272581d",
+      "source_url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 395002,
+          "sha256": "647ffd5e0de19f85b581441d0dfc54de6ef7415522c1e6f844ecf2fe3efa873e",
+          "url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 17429,
+          "sha256": "6994dd265233a1c47e42020e0126e53a81271f24570d486729d3fd59eda5a76d",
+          "url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 92,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Published catalog category (type)",
+          "value": "Decaf & Half Caff",
+          "source_type": "product_json",
+          "source_url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara.js",
+          "section": "Published catalog category",
+          "source_path": "/type"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Nicaragua - Pumpkin Spice- Pacamara",
+        "roaster": "Coffee Roaster",
+        "origin": "Pumpkin Spice- Pacamara, Nicaragua",
+        "process": "Anaerobic",
+        "variety": "Pacamara"
+      }
+    },
+    {
+      "case_id": "sweetbloomcoffee-com__arbey-cordoba-26-4813fa3d",
+      "source_url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 227922,
+          "sha256": "ec05d04cf8a6711e7f943c39624e05e2feb2898800104cbd20da2031ead44d4c",
+          "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 3186,
+          "sha256": "196cc5d28dbdf4ce1d107dce964885577be03a3b723ab365859ace97d0a9d559",
+          "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 70,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Experience graphic marker",
+          "value": "--level: 4; printed endpoints: Comfort / Adventure",
+          "source_type": "html",
+          "source_url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+          "section": "Published product graphic"
+        },
+        {
+          "label": "Roast Level graphic marker",
+          "value": "--level: 2; printed endpoints: Light / Medium",
+          "source_type": "html",
+          "source_url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+          "section": "Published product graphic"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Arbey Cordoba",
+        "roaster": "Sweet Bloom Coffee",
+        "producer": "Arbey Cordoba",
+        "tasting_notes": "mango, bing cherry, pineapple",
+        "variety": "bourbon ají",
+        "process": "Washed",
+        "elevation_m": "1886 masl",
+        "origin": "Huila, Colombia"
+      }
+    },
+    {
+      "case_id": "sweetbloomcoffee-com__uraga-bc72601e",
+      "source_url": "https://sweetbloomcoffee.com/products/uraga",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 235585,
+          "sha256": "ab30a903caced6f36547282ad9dc7d6f3791ddacda0b9fcb3986345363cb93ca",
+          "url": "https://sweetbloomcoffee.com/products/uraga"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 2975,
+          "sha256": "93408a81eb7fbc1912fd9b7a16d7725e27aa5118e0c163d15c555e9daf6bd3ec",
+          "url": "https://sweetbloomcoffee.com/products/uraga.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 74,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Experience graphic marker",
+          "value": "--level: 4; printed endpoints: Comfort / Adventure",
+          "source_type": "html",
+          "source_url": "https://sweetbloomcoffee.com/products/uraga",
+          "section": "Published product graphic"
+        },
+        {
+          "label": "Roast Level graphic marker",
+          "value": "--level: 2; printed endpoints: Light / Medium",
+          "source_type": "html",
+          "source_url": "https://sweetbloomcoffee.com/products/uraga",
+          "section": "Published product graphic"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Uraga",
+        "roaster": "Sweet Bloom Coffee",
+        "release_label": "2026",
+        "origin": "Guji, Ethiopia",
+        "tasting_notes": "guava, raspberry, milk chocolate",
+        "variety": "Heirloom",
+        "process": "Natural",
+        "producer": "850 Small Holder Farmers",
+        "elevation_m": "2150-2250 masl"
+      }
+    },
+    {
+      "case_id": "sweetbloomcoffee-com__wuri-9dc18dbf",
+      "source_url": "https://sweetbloomcoffee.com/products/wuri",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 235689,
+          "sha256": "ba167099be898fc34d07bb046c019d63d811bd52f7bfcedc44db1367141c1308",
+          "url": "https://sweetbloomcoffee.com/products/wuri"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 3295,
+          "sha256": "c9d8c2413264fa0933277640141400922ffd0c2ca4a542c2921019563688fea2",
+          "url": "https://sweetbloomcoffee.com/products/wuri.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 72,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Experience graphic marker",
+          "value": "--level: 2; printed endpoints: Comfort / Adventure",
+          "source_type": "html",
+          "source_url": "https://sweetbloomcoffee.com/products/wuri",
+          "section": "Published product graphic"
+        },
+        {
+          "label": "Roast Level graphic marker",
+          "value": "--level: 1; printed endpoints: Light / Medium",
+          "source_type": "html",
+          "source_url": "https://sweetbloomcoffee.com/products/wuri",
+          "section": "Published product graphic"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Wuri",
+        "roaster": "Sweet Bloom Coffee",
+        "tasting_notes": "citra hops, mandarin, sugarcane",
+        "release_label": "2026",
+        "process": "Washed",
+        "origin": "Gedeb, Ethiopia",
+        "variety": "Heirloom",
+        "producer": "850 small scale producers",
+        "elevation_m": "2000-2100 masl"
+      }
+    },
+    {
+      "case_id": "thrivefarmers-com__horizon-organic-ee66c7f3",
+      "source_url": "https://thrivefarmers.com/products/horizon-organic",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 203945,
+          "sha256": "66914cff96b1b9e52030d0a706f6d1e68257a3d3a3401edba138e3164143ff91",
+          "url": "https://thrivefarmers.com/products/horizon-organic"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 22515,
+          "sha256": "953645dd0485a4778403e842ef74c4a287dc0f0698e8f73708a708ade1143011",
+          "url": "https://thrivefarmers.com/products/horizon-organic.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 101,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "Farmer profile name",
+          "value": "Marta Solares",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "FARM:",
+          "value": "La Esperanza",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "PROCESSING METHODS:",
+          "value": "Washed",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "REGION:",
+          "value": "El Sombrerito, San Jose Pinula,Guatemala",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "VARIETIES:",
+          "value": "Catuai, Caturra, Bourbon",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "COFFEE PRODUCTION:",
+          "value": "2.10 hectares",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "How We Met Marta",
+          "value": "The name Solares has been part of the Thrive Farmers history since the beginning. Rogelio Solares, one of the original Thrive family since its founding, introduced us to his family in Concepcion Pinula, Guatemala just southeast of Guatemala City. Marta is the matriarch of coffee farming in Concepcion Pinula, and in addition to being a mother of ten, grandmother, wife, and community leader, she has been farming coffee for most of her life. She is a testament to the power and resiliency of women in coffee, and their leadership and innovation in bringing coffee growing to the next generation.",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "Marta's Kitchen is her Office",
+          "value": "Literally, Marta’s kitchen table is where the association meets and where the future of their coffee production is discussed. Around that table, the association decided to partner with Thrive five years ago. She, along with her son, Vinicio, and other producers, had faith in Thrive, with the association investing 5,000 pounds of green beans in the first year. Now 2/3’s of their production is brought to market through Thrive, over 80,000 lbs of green beans.",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "What's important to Marta and her family",
+          "value": "Marta wants her grandchildren and great-grandchildren to continue the tradition of coffee farming. She wants the relationship with Thrive to continue growing. She wants more people to enjoy the coffee that her family grows.",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        },
+        {
+          "label": "Where Marta lives and grows coffee?",
+          "value": "Marta and her family in Concepcion Pinula, Guatemala, are part of a 17-member farmer association called the Association of Coffee Producers of Concepcion Pinula. Marta was a founding member of that association. The association was a result of Marta’s leadership in seeking a better way to work together as neighbors and coffee farmers in the small community of Concepción Pinula, aiming to find new markets, adopt best shared practices, and lower costs by working collectively. The community sought stable and long-term relationships for their coffee. They were tired of selling their coffee cherries to “coyotes” for low prices with no other options. The most important part of the association is mentoring the next generation to continue in the family business.",
+          "source_type": "html",
+          "source_url": "https://thrivefarmers.com/products/horizon-organic",
+          "section": "Supplementary page panel / Linked farmer profile / Marta Solares"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Horizon Organic",
+        "roaster": "Thrive Farmers",
+        "origin": "Huehuetenango(GT) / Matagalpa(NI), Guatemala / Nicaragua",
+        "process": "Washed",
+        "roast_level": "Medium",
+        "tasting_notes": "Fruity, Toasted Cereal, Chocolate",
+        "variety": "Caturra, Pache Verde",
+        "elevation_m": "1750 masl"
+      }
+    },
+    {
+      "case_id": "www-readingcoffee-com__chai-cheesecake-fall-season-premium-flavored-coffee-8bbfc0ec",
+      "source_url": "https://www.readingcoffee.com/products/chai-cheesecake-fall-season-premium-flavored-coffee",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 308397,
+          "sha256": "f541343e08b1cc6c4af3cb5dcefabf310ec33ca9e3110ecbb333498a428a4f67",
+          "url": "https://www.readingcoffee.com/products/chai-cheesecake-fall-season-premium-flavored-coffee"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 12399,
+          "sha256": "ed00a938f62e557d067f17335482127d98fe5288a0d51bf65ec2a1e5926077fc",
+          "url": "https://www.readingcoffee.com/products/chai-cheesecake-fall-season-premium-flavored-coffee.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 70,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "GTIN-14",
+          "value": "00850085566263",
+          "source_type": "product_json",
+          "source_url": "https://www.readingcoffee.com/products/chai-cheesecake-fall-season-premium-flavored-coffee",
+          "section": "Published product identifier",
+          "source_path": "/gtin14"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "Chai Cheesecake Fall Season Premium Flavored Coffee",
+        "roaster": "Reading Coffee Company",
+        "roast_level": "Medium",
+        "tasting_notes": "Sweet & Sugary, Spice, Earthy, Savory",
+        "origin": "Central America, South America"
+      }
+    },
+    {
+      "case_id": "www-readingcoffee-com__its-bourbon-bacon-hon-fall-season-premium-flavored-coffee-e6c21ec5",
+      "source_url": "https://www.readingcoffee.com/products/its-bourbon-bacon-hon-fall-season-premium-flavored-coffee",
+      "captures": [
+        {
+          "file": "page.html",
+          "bytes": 358528,
+          "sha256": "58b43955247c27e1079fffc63d62be171000bccb96d69a285676b79f8cc452e3",
+          "url": "https://www.readingcoffee.com/products/its-bourbon-bacon-hon-fall-season-premium-flavored-coffee"
+        },
+        {
+          "file": "product-endpoint.html",
+          "bytes": 24905,
+          "sha256": "fe315754c3e24cbaa385923ae6998783560e3140a9da5f3b7d8eea3c795bdc9c",
+          "url": "https://www.readingcoffee.com/products/its-bourbon-bacon-hon-fall-season-premium-flavored-coffee.js"
+        }
+      ],
+      "preview_status": 200,
+      "fact_count": 95,
+      "source_facts_truncated": false,
+      "required_facts": [
+        {
+          "label": "GTIN-14",
+          "value": "00850085566294",
+          "source_type": "product_json",
+          "source_url": "https://www.readingcoffee.com/products/its-bourbon-bacon-hon-fall-season-premium-flavored-coffee",
+          "section": "Published product identifier",
+          "source_path": "/gtin14"
+        }
+      ],
+      "client_export_all_facts_exact": true,
+      "canonical_fields": {
+        "name": "It's Bourbon & Bacon, Hon! Fall Season Premium Flavored Coffee",
+        "roaster": "Reading Coffee Company",
+        "roast_level": "Medium",
+        "tasting_notes": "Spice, Grain & Cereal",
+        "origin": "Central America, South America"
+      }
+    }
+  ],
+  "corrections": [
+    "The original Wuri source publishes Roast Level --level:1 and Experience --level:2. The handoff generalized Sweet Bloom Roast Level as2; captured bytes and this receipt retain1 for Wuri. No frozen expected value was changed."
+  ],
+  "limits": [
+    "Only selected visible triggers with matching unique preview/modal names open the linked outer farmer panel. Profile facts are supplementary biography, not assigned current-lot fields.",
+    "GTIN numeric values and invalid widths are withheld, preserving strings with their leading zeros only.",
+    "Catalog category does not establish caffeine or processing.",
+    "Graphic positions are literal evidence only; no implied scale size or canonical roast category.",
+    "The snapshot includes concurrent unfinished purchase packing work; this focused result does not certify that work or the final combined source.",
+    "Actual production networking, authorization and signed-in persistence are not exercised by the isolated handler replay.",
+    "Focused immutable snapshot predates the root-only generic roast caution wording update. Its old fallback sentence remains historical; the final full snapshot must include the new wording. No canonical behavior was changed by that wording update."
+  ]
+}

@@ -9,6 +9,9 @@ import {productMarkup} from './coffee-product-scope.mjs';
 import {interpretAgtron} from './agtron-roast.mjs';
 import {extractProductFlavorEvidence} from './coffee-flavor-evidence.mjs';
 import {coffeeFieldKey,extractSemanticCoffeeSpecs} from './coffee-semantic-specs.mjs';
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
+import {parseCoffeeElevation} from './coffee-elevation-evidence.mjs';
+import {compatibleEADecaffeinationDetail} from './coffee-processing-evidence.mjs';
 const leaf=/<(h[2-6]|p|div|span|strong|small|label|dt|dd|li|b)\b[^<>]{0,420}>([^<>]{1,400})<\/\1\s*>/gi;
 const allowedExtra=new Set(['agtron','agtron_scale','agtron_sample','recommended_rest','drying_method','harvest_season','preferred_extraction','processing_detail','production_roaster']);
 const getKey=coffeeFieldKey;
@@ -24,8 +27,21 @@ const normalizedProcess=s=>{
  ].filter(([,regex])=>regex.test(lower));
  return flags.length===1?flags[0][0]:'';
 };
+const extraConflicts=new WeakMap();
+export const coffeeLayoutDetailConflicts=details=>[...(extraConflicts.get(details)||[])];
 function addExtra(extras,kind,value){
- if(!allowedExtra.has(kind)||extras[kind]||!value)return;
+ if(!allowedExtra.has(kind)||!value||extraConflicts.get(extras)?.has(kind))return;
+ if(extras[kind]){
+  if(kind==='processing_detail'){
+   const compatible=compatibleEADecaffeinationDetail(extras[kind],value);
+   if(compatible){extras[kind]=compatible;return;}
+  }
+  if(extras[kind].normalize('NFKC').toLowerCase()!==String(value).normalize('NFKC').toLowerCase()){
+   const conflicts=extraConflicts.get(extras)||new Set();conflicts.add(kind);extraConflicts.set(extras,conflicts);delete extras[kind];
+   if(kind==='agtron'){delete extras.agtron_scale;delete extras.agtron_sample;}
+  }
+  return;
+ }
  extras[kind]=value;
 }
 function field(fields,label,value,add,extras,clean){
@@ -45,14 +61,19 @@ function field(fields,label,value,add,extras,clean){
   return;
  }
  if(kind==='recommended_rest'){
-  const m=raw.match(/\b(\d{1,3})\s*[-–]\s*(\d{1,3})\s*days?\b|\b(\d{1,3})\s*days?\b/i);
-  if(m)addExtra(extras,kind,m[1]?m[1]+'–'+m[2]+' days':m[3]+' days');
+  const m=raw.match(/\b(\d{1,3})(?:\s*[-–]\s*(\d{1,3}))?\s*(days?|weeks?|months?)\b/i);
+  if(m&&Number(m[1])>0&&(!m[2]||Number(m[2])>=Number(m[1])))
+   addExtra(extras,kind,m[1]+(m[2]?'–'+m[2]:'')+' '+m[3].toLowerCase());
   return;
  }
  if(kind==='harvest_season'||kind==='drying_method'||kind==='preferred_extraction'||kind==='production_roaster'){
   addExtra(extras,kind,raw.slice(0,105));return;
  }
- if(kind==='processing_detail'){addExtra(extras,kind,raw.slice(0,160));return;}
+ if(kind==='processing_detail'){
+  const decaf=/^decaffeination (?:method|process)$/i.test(String(label).replace(/[:：]\s*$/,''));
+  const detail=decaf?'Decaffeination: '+raw.split(/[.!?](?:\s|$)/)[0].trim():raw;
+  addExtra(extras,kind,detail.slice(0,160));return;
+ }
  // Processing can be an elaborate treatment with multiple stages:
  // the single-select field must never misrepresent a blended process.
  if(kind==='process'){
@@ -60,15 +81,15 @@ function field(fields,label,value,add,extras,clean){
   // Pass the original evidence so the shared conflict tracker can suppress
   // a stale single-process fallback when the visible process is compound.
   add(kind,raw);
-  if(raw.length<=90&&raw.toLowerCase()!==value.toLowerCase()&&
-     /\b(?:washed|natural|honey|anaerobic|lavado|lavada|miel|ferment|maceration|carbonic|thermal shock|dried|drying)\b/i.test(raw))
+  if(raw.length<=150&&raw.toLowerCase()!==value.toLowerCase()&&
+     /\b(?:washed|natural|honey|anaerobic|lavado|lavada|miel|ferment|fermentation|maceration|carbonic|thermal shock|dried|drying|wet[ -]+process(?:ed|ing)?|dry[ -]+process(?:ed|ing)?|decaf(?:feination|feinated)?|sugar[ -]?cane|sugar\s+process|ethyl[ -]+acetate|swiss[ -]+water|mountain[ -]+water)\b/i.test(raw))
     addExtra(extras,'processing_detail',raw.slice(0,160));
   return;
  }
  // Long narrative process paragraphs, roaster navigation or unrelated SEO
  // must not become a numeric/identity field via a generic label.
  if(raw.length>175&&kind!=='tasting_notes')return;
- if(kind==='elevation_m'&&!/\b\d{3,4}\b/.test(raw))return;
+ if(kind==='elevation_m'&&!parseCoffeeElevation(raw))return;
  add(label,raw);
 }
 function parsePairs(tokens,fields,add,extras,clean){
@@ -87,9 +108,9 @@ function parsePairs(tokens,fields,add,extras,clean){
   const label=tokens[i],kind=getKey(label.text);
   if(!kind||!['roast_level','origin','variety','process','elevation_m','agtron','drying_method','harvest_season','preferred_extraction'].includes(kind))continue;
   const prior=tokens[i-1];
-  if(label.at-prior.end>260||getKey(prior.text)||!isInfoText(prior.text))continue;
+  if(label.parent!==prior.parent||label.at-prior.end>260||getKey(prior.text)||!isInfoText(prior.text))continue;
   if(kind==='roast_level'&&!/^(Ultra Light|Very Light|Light|Light-Medium|Medium.Light|Medium|Medium-Dark|Dark)$/i.test(prior.text))continue;
-  if(kind==='elevation_m'&&!/\b\d{3,4}\b/.test(prior.text))continue;
+  if(kind==='elevation_m'&&!parseCoffeeElevation(prior.text))continue;
   if(kind==='variety'&&/\b(?:masl|meters?|agtron)\b/i.test(prior.text))continue;
   field(fields,label.text,prior.text,add,extras,clean);
  }
@@ -101,6 +122,7 @@ function parsePairs(tokens,fields,add,extras,clean){
   if(reverseLayout&&tok.tag==='div'&&/^[A-Z][A-Z ]{3,}$/.test(tok.text))continue;
   for(let j=i+1;j<Math.min(i+5,tokens.length);j++){
    const next=tokens[j];
+   if(next.parent!==tok.parent)break;
    if(next.at-tok.end>650)break;
    if(getKey(next.text))break;
    if(!isInfoText(next.text))continue;
@@ -143,6 +165,11 @@ function detailedCoffeeNarrative(page,fields,extras,clean,addField){
   story=tail.slice(0,5000);
  }
  if(!story||story.length<35)return;
+ // A product story can explain techniques this lot did NOT use, describe a
+ // previous harvest, or teach general coffee processing. Those sentences
+ // must not become positive canonical claims through this legacy fallback.
+ story=story.split(/(?<=[.!?])\s+/u).filter(sentence=>!/\b(?:not|never|without|neither|unlike|isn't|wasn't|doesn't|rather than|generally|typically|usually|for example|such as|other coffees?|previous (?:harvest|lot|year)|last year)\b/i.test(sentence)).join(' ');
+ if(!story)return;
  // Only the selected product's own bounded coffee story can supply
  // narrative tasting notes. Don't pull sensory prose from processing FAQs.
  if(!fields.tasting_notes){
@@ -179,7 +206,8 @@ function detailedCoffeeNarrative(page,fields,extras,clean,addField){
   if(extras.processing_detail&&
      !/^(?:adv(?:anced)?[\s-]+natural|natural(?:[\s-]+processed)?)$/i.test(extras.processing_detail))return;
   fields.process='Anaerobic';
-  const hours=story.match(/\b(\d{1,3})\s*(?:[- ]hours?|h)\b/i);
+  const fermentation=story.split(/(?<=[.!?])\s+/u).find(sentence=>/\b(?:anaerobic|anaerobically)\b/i.test(sentence)&&/\b(?:ferment|tanks?)\w*/i.test(sentence))||'';
+  const hours=fermentation.match(/\b(\d{1,3})\s*(?:[- ]hours?|h)\b/i);
   const original=extras.processing_detail||'Natural';
   extras.processing_detail=`${original}; anaerobic natural${hours?', '+hours[1]+'-hour sealed-tank fermentation':''}`.slice(0,160);
  }
@@ -272,8 +300,9 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
  // excluded from the older token parser to avoid pairing in both directions.
  const semantic=extractSemanticCoffeeSpecs(html,{clean});
  for(const fact of semantic.facts)field(fields,fact.label,fact.value,addField,extras,clean);
+ const parents=new Map(coffeeHtmlElements(page).nodes.map(node=>[node.start,node.parent]));
  const tokens=[...page.matchAll(leaf)].slice(0,850).map(m=>({
-  at:m.index,end:m.index+m[0].length,tag:m[1].toLowerCase(),text:clean(m[2],260)
+  at:m.index,end:m.index+m[0].length,parent:parents.get(m.index),tag:m[1].toLowerCase(),text:clean(m[2],260)
  })).filter(m=>m.text&&!semantic.handledRanges.some(range=>m.at>=range.start&&m.end<=range.end));
  parsePairs(tokens,fields,addField,extras,clean);
  // Explicit inline paragraph style, including French and pipe-delimited specs.
@@ -298,12 +327,24 @@ export function extractLayoutEvidence(html,{fields,addField,clean}){
   const m=title.match(/(?:\s[-|]\s|\s\/\/\s)(Washed|Natural|Honey|Anaerobic)\s*$/i);
   if(m)addField('process',m[1]);
  }
+ // Explicit named profiles and a full bounded prose reader take precedence
+ // over the older short-window narrative fallback. Gallery bytes cannot
+ // hide a later real flavor sentence, and labels beat incidental prose.
+ if(!fields.tasting_notes){
+  const found=extractProductFlavorEvidence(html,{clean});
+  if(found)addField('tasting_notes',found);
+ }
  // "In the cup we find ..." is explicit tasting prose. Strip punctuation
  // after one short sentence; do not turn the whole page into tasting notes.
  if(!fields.tasting_notes){
-  const txt=page.replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').slice(0,17000);
-  const m=txt.match(/\b(?:in the cup we find|notes of)\s+([A-Za-zÀ-ÿ][^.!?;]{8,130})[.!?;]/i);
-  if(m&&/\b(?:and|,)\b/i.test(m[1]))addField('tasting_notes',m[1].trim());
+  for(const paragraph of page.matchAll(/<(?:p|li)\b[^<>]{0,1200}>([\s\S]{1,900}?)<\/(?:p|li)>/gi)){
+   const txt=clean(paragraph[1],300);
+   for(const sentence of txt.split(/(?<=[.!?])\s+/u)){
+    const m=sentence.match(/^(?:in the cup we find|notes of)\s+([\p{L}][^.!?;]{8,130})[.!?;]?$/iu);
+    if(m&&/(?:\band\b|,)/i.test(m[1])){addField('tasting_notes',m[1].trim());break;}
+   }
+   if(fields.tasting_notes)break;
+  }
  }
  // A large product's decorative HTML can push its story beyond the
  // 60 KB metric-token window. The full source is still already bounded,
