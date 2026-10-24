@@ -127,21 +127,32 @@
       "issue": 5,
       "pr": 105,
       "title": "Trusted source rejects conflicting origin/producer metadata",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a034fb727f7fa7a0fbbfd74bbbca40d2fce9a651",
       "scope_paths": [
         "supabase/functions/dic-verify-coffee/evidence.mjs",
         "supabase/migrations/20261024020500_dic_source_target_producer.sql"
       ],
       "tests": [
-        "Targeted source conflict and rollback-only SQL producer tests added, pending exact-source CI; reuse existing source worker, role/revision/release and identity-preservation tests."
+        "PR105 reconciled exact source 060387a5e360cadc3fa4e38bad45284bab2ae101: approval 40052571214, security 40052571219, isolated SQL 40052571240, Node/lint/build 40052571343, cloud/mobile 40052571307, visual 40052571296 all SUCCESS.",
+        "Nonforce merged PR105 at a034fb727f7fa7a0fbbfd74bbbca40d2fce9a651; postmerge exact-source approval 40052834393, Node/lint/build 40052834378, isolated SQL 40052834521 and cloud/mobile 40052834386 all SUCCESS.",
+        "Reused source and SQL negative cases: wrong roaster, release/harvest mismatch, stale revisions, revoked and cross-account access, stable library identity; new explicit origin/producer/process conflict checks and service target producer SQL fixture PASS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source Node and isolated SQL CI, approval/coverage checks and nonforce merge/readback pending."
+      "ci_runs": [
+        40052571219,
+        40052571214,
+        40052571296,
+        40052571240,
+        40052571343,
+        40052571307,
+        40052834393,
+        40052834378,
+        40052834521,
+        40052834386
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5",
-      "notes": "Staged only; source metadata fact integrity. No production SQL/Edge change or publication. Existing member data and source provenance protected."
+      "notes": "READY source only, NOT DEPLOYED. Stage migration 20261024020500_dic_source_target_producer.sql and deploy updated Edge evidence verifier only on separately approved publication. Existing real-member Arbey duplicate-first and Wuri Admin review readback already credited. Do not equate source_kind=label with official source proof. Remaining production official-source/retry acceptance stays UNVERIFIED; Issue #5 remains open until deployed and provider evidence satisfies its remaining criteria. No production data or provider settings changed."
     }
   ],
   "history": [
