@@ -127,3 +127,7 @@ PR108 post-allowlist exact tests passed all Node/build and SQL, but 390px browse
 ## October 24, 2026 — scoped release candidate for #5/#10/#12
 
 Owner authorized one release needed to finish these issues. Development branch 2f4668f includes separately TESTING extractor #33 (merged PR109), so the existing release gate correctly rejects publishing its full tree. This isolated source builds from the post-PR108 9135e06 ancestor and carries only in-scope PR110/PR113 changes; unready extractor work remains untouched on development. This commit applies PR110 client provenance-only hunks to existing source; subsequent migration/tests integration and CI are pending. No Netlify/Supabase publication or data writes. Preserve #5 READY, single visible recipe, owner isolation, offline queues and no new paid services. Do not mark source READY until scoped exact-source CI passes.
+
+### Scoped candidate migration and regression fixture reconstruction
+
+Applied unchanged, previously source-verified PR110 provenance SQL and the final PR113 Community SQL, including independently member-confirmed families, owner exclusion and anonymous source counts. Reused PR110/113 signed HTTP, rollback-only PostgreSQL and Node regression tests without changing expected outcomes, and included the appropriate private display/shot payload modules from the prior provenance commit. No extractor #33 deployable paths added to this scoped candidate; comprehensive candidate CI and branch isolation verification still pending. No live provider mutation, publication or member-data changes.

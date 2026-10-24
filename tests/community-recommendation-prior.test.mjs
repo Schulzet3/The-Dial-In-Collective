@@ -50,3 +50,42 @@ test('a related release is weighted more conservatively than exact, similar weak
  }
  assert.ok(deltas[0]>deltas[1]&&deltas[1]>deltas[2],deltas.join(','));
 });
+
+test('Community observed ratio groups remain separate unproven references, not confirmed owned families',()=>{
+ const {s,id}=create();
+ s.communityEvidence={[id]:{Turbo:{style:'Turbo',candidates:[
+  {tier:'exact',style:'Turbo',ratio:2.12,time_s:29,shot_count:2,contributor_count:1,distinct_family_basis:'ratio_bucket_observed',source:'eligible_verified_community',calibrated_grind:false},
+  {tier:'exact',style:'Turbo',ratio:3.14,time_s:18,shot_count:7,contributor_count:3,distinct_family_basis:'ratio_bucket_observed',source:'eligible_verified_community',calibrated_grind:false}
+ ]}}};
+ const prior=selectCommunityPrior(s.communityEvidence[id].Turbo,'Turbo');
+ assert.equal(prior.ratio,3.14);
+ assert.equal(prior.contributorCount,3);
+ const rec=recommendation(s,id);
+ assert.equal(rec.communityEvidence.ratioFamiliesAreEstimated,true);
+ assert.equal(rec.established,false);
+ assert.equal(rec.familyId,null);
+});
+
+test('confirmed member families provide distinct evidence without falsely verifying cross-member identity',()=>{
+ const {s,id}=create();
+ const candidates=[
+  {tier:'exact',style:'Turbo',ratio:2.3,time_s:28,shot_count:4,contributor_count:2,
+   confirmed_personal_family_count:2,confirmed_family_contributors:2,
+   distinct_family_basis:'confirmed_personal_families_in_observed_ratio_group',
+   community_group_identity_verified:false,source:'eligible_verified_community',calibrated_grind:false},
+  {tier:'exact',style:'Turbo',ratio:3.0,time_s:19,shot_count:2,contributor_count:1,
+   confirmed_personal_family_count:1,confirmed_family_contributors:1,
+   distinct_family_basis:'confirmed_personal_families_in_observed_ratio_group',
+   community_group_identity_verified:false,source:'eligible_verified_community',calibrated_grind:false}
+ ];
+ s.communityEvidence={[id]:{Turbo:{style:'Turbo',candidates}}};
+ const prior=selectCommunityPrior(s.communityEvidence[id].Turbo,'Turbo');
+ assert.equal(prior.confirmedPersonalFamilyCount,2);
+ assert.equal(prior.confirmedFamilyContributors,2);
+ assert.equal(prior.communityGroupIdentityVerified,false);
+ assert.equal(prior.contributorCount,2);
+ const rec=recommendation(s,id);
+ assert.equal(rec.communityEvidence.ratioFamiliesAreEstimated,true);
+ assert.equal(rec.established,false);
+ assert.equal(rec.familyId,null);
+});
