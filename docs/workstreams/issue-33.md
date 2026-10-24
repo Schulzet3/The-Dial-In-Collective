@@ -1,3 +1,8 @@
+## October 24 UTC — live-source fixture product-script identity repair
+Stage-level exact run 40065204476 at 4203445 isolates both Nomad and Circulor discrepancies to the very first sanitized JSON-script rewrite; removing form controls, inputs, event attributes or sensitive metadata added no further difference. In the extractor, `shopifyProduct()` intentionally requires product identity in an inline `application/json` script's attributes. The previous fixture sanitizer dropped that marker while retaining script JSON, making selected-product variants disagree or disappear and hiding two Circulor source conflicts. Preserve only a static, harmless `data-public-product-context="product"` marker when the *original* script attributes identify product context; do not retain original potentially sensitive attributes. JSON key stripping, script execution suppression, HTTPS/SSRF controls, source conflict withholding, field oracles and strict entire-extraction parity all remain unchanged. Run [dic-completeness-probe] [skip netlify] on exact source and add offline positive/negative regressions. No production or member data writes.
+
+---
+
 ## October 24 UTC — diagnostic harness regex repair
 The prior same-branch diagnostic commit accidentally doubled backslashes in the newly added *diagnostic-only* regular expressions. Readback caught this before relying on its findings. Corrected them and rerun exact-source CI; normal extractor and frozen benchmark untouched. [dic-completeness-probe] [skip netlify].
 

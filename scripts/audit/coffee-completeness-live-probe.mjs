@@ -14,6 +14,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {coffeeHtmlAttributes} from '../../src/server/coffee-product-scope.mjs';
 import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
@@ -121,7 +122,12 @@ function fixtureHtml(html){
   const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
   if(type&&block.closed){
    const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
+   // Preserve only the static product-script discriminator. The parser uses
+   // attribute identity to recognize a selected-product JSON block; dropping
+   // it silently loses variant and conflicting source evidence.
+   const productMarker=/product/i.test(JSON.stringify(coffeeHtmlAttributes(block.attributes)))?
+    ' data-public-product-context="product"':'';
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
    catch{/* Invalid script data is not preserved as executable markup. */}
   }
   cursor=block.end;
@@ -148,7 +154,12 @@ function fixtureStageDiagnostics(html,sourceUrl,original){
   const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
   if(type&&block.closed){
    const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
+   // Preserve only the static product-script discriminator. The parser uses
+   // attribute identity to recognize a selected-product JSON block; dropping
+   // it silently loses variant and conflicting source evidence.
+   const productMarker=/product/i.test(JSON.stringify(coffeeHtmlAttributes(block.attributes)))?
+    ' data-public-product-context="product"':'';
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
    catch{}
   }
   cursor=block.end;
