@@ -35,3 +35,7 @@ Source change under isolated branch `work/issue10-server-family-lifecycle-202610
 **Acceptance boundary:** Isolated admitted-account testing proves exact SQL and simulated JWT/RLS, not a live hosted user sign-in. Do not insert synthetic shots into production. The currently staged migration must never be applied to production until separately authorized. Do not assert hosted live-account acceptance, full #12 community evidence or #13 experiment lifecycle without independent proof.
 
 CI/merge status at this commit: NOT YET TESTED. Check new exact-source tests/SQL and security/release checks before any nonforce integration, then update journal/queue/status accordingly.
+
+## CI failure and immediate repair — SQL suite dispatch
+
+PR104 first exact-source validate failed **1/785**: `tests/sql-runner-coverage.test.mjs` correctly detected that the new `supabase/tests/recipe_family_lifecycle.sql` was not registered in `scripts/audit/isolated-sql-regression.sh`. The separate SQL CI initially passed but did not yet execute the new test, so it is NOT evidence of lifecycle acceptance. Fixed runner dispatch in this commit and made synthetic beta admission idempotent (existing auth-user trigger may precreate membership). Rerun ALL exact-source checks, especially the actual isolated SQL suite. No hosted operations or publication.

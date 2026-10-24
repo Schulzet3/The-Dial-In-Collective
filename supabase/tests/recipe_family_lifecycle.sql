@@ -17,7 +17,8 @@ begin
   values(owner,'authenticated','authenticated',owner::text||'@example.invalid',now()),
         (stranger,'authenticated','authenticated',stranger::text||'@example.invalid',now());
  insert into private.beta_members(owner_id,enabled,admitted_at)
-  values(owner,true,now()),(stranger,true,now());
+  values(owner,true,now()),(stranger,true,now())
+  on conflict(owner_id) do update set enabled=true,admitted_at=now();
  insert into public.setups(id,owner_id,name) values(sid,owner,'Recipe lifecycle test setup');
  insert into public.setup_versions(id,owner_id,setup_id,machine_model,grinder_model)
   values(vid,owner,sid,'Fixture machine','Fixture grinder');
