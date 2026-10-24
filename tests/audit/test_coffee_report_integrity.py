@@ -269,5 +269,115 @@ class CoffeeReportIntegrityTests(unittest.TestCase):
                     self.render_audit(audit)
 
 
+    def review_receipt_fixture(self):
+        before = json.loads(self.args.baseline_replay.read_text())['records']
+        after = copy.deepcopy(before)
+        after[0]['output']['source_facts'] = [{'value': 'Source-supported additional locality'}]
+        def case_hash(row):
+            return hashlib.sha256(json.dumps({key: value for key, value in row.items() if key != 'elapsed_ms'},
+                                             ensure_ascii=False, sort_keys=True,
+                                             separators=(',', ':')).encode('utf-8')).hexdigest()
+        case_id = before[0]['case_id']
+        audit = self.audit_fixture()
+        audit.update({
+            'status': 'FROZEN_BENCHMARK_PASS_WITH_REVIEWED_CHANGES',
+            'final_candidate': 12,
+            'complete_case_equivalence': {'cases': 603, 'changed_cases': 1, 'ignored': ['elapsed_ms']},
+            'all_complete_case_outputs_calls_equal': False,
+            'actual_client_exports_equal': 602, 'offline_helper_exports_passed': 603,
+            'export_verification': {'cases': 603, 'current_snapshot_download_passed': 603,
+                                    'snapshot_blob_bytes_verified': True, 'client_module_sha256': 'c' * 64,
+                                    'unchanged_from_c8': 602, 'changed_from_c8': 1, 'offline_exports_passed': 603},
+            'reviewed_changes': {'status': 'ACCEPTED', 'reviewed_cases': 1, 'reviewed_export_changes': 1,
+                                 'unlisted_case_changes_permitted': False, 'zero_loss_requirements_waived': False,
+                                 'manifest': {'file': 'docs/audits/reviewed-fixture.json', 'sha256': 'd' * 64}},
+            'reviewed_change_cases': [{'case_id': case_id, 'before_case_sha256': case_hash(before[0]),
+                                      'after_case_sha256': case_hash(after[0]),
+                                      'before_export_sha256': 'a' * 64, 'after_export_sha256': 'b' * 64}]})
+        return audit, before, after
+
+    def test_reviewed_change_summary_separates_current_export_fidelity_from_c8_equality(self):
+        audit, before, after = self.review_receipt_fixture()
+        result = self.report.benchmark_review_evidence(audit, before, after)
+        self.assertIn('603 / 603 valid current client snapshot and Blob downloads', result['summary'])
+        self.assertIn('602 exports are unchanged from C8 and 1 differ', result['summary'])
+        self.assertIn('1 complete case outputs/call records', result['summary'])
+        self.assertIn('d' * 64, result['summary'])
+        self.assertFalse(result['all_complete_case_records_equal'])
+        self.assertEqual(len(result['reviewed_case_hashes']), 1)
+        self.assertNotIn('603 exports are unchanged', result['summary'])
+
+    def test_reviewed_change_report_rejects_omitted_cases_changed_hashes_and_inflated_equal_count(self):
+        audit, before, after = self.review_receipt_fixture()
+        for mutation in ('omit', 'hash', 'equal', 'wildcard', 'waive', 'missing_pin'):
+            bad = copy.deepcopy(audit)
+            if mutation == 'omit':
+                bad['reviewed_change_cases'] = []
+            elif mutation == 'hash':
+                bad['reviewed_change_cases'][0]['after_case_sha256'] = 'f' * 64
+            elif mutation == 'equal':
+                bad['actual_client_exports_equal'] = 603
+            elif mutation == 'wildcard':
+                bad['reviewed_change_cases'][0]['case_id'] = '*'
+            elif mutation == 'waive':
+                bad['reviewed_changes']['zero_loss_requirements_waived'] = True
+            else:
+                del bad['reviewed_changes']['manifest']['sha256']
+            with self.subTest(mutation=mutation), self.assertRaises(AssertionError):
+                self.report.benchmark_review_evidence(bad, before, after)
+
+    def test_unreviewed_changed_receipt_is_not_presented_as_accepted(self):
+        audit, before, after = self.review_receipt_fixture()
+        audit['reviewed_changes'] = {'status': 'NOT_PROVIDED'}
+        audit['status'] = 'FROZEN_BENCHMARK_REVIEW_REQUIRED'
+        result = self.report.benchmark_review_evidence(audit, before, after)
+        self.assertIn('no reviewed-change manifest is accepted', result['summary'])
+        self.assertEqual(result['reviewed_case_hashes'], [])
+        self.assertEqual(result['observed_changed_case_ids'], [before[0]['case_id']])
+        self.assertEqual(result['recorded_benchmark_status'], 'FROZEN_BENCHMARK_REVIEW_REQUIRED')
+
+    def test_reviewed_report_rejects_actual_unreviewed_source_fact_or_call_changes(self):
+        audit, before, after = self.review_receipt_fixture()
+        for key, value in (('calls', ['unreviewed']), ('fixture_calls', ['unreviewed']),
+                           ('output', {'ok': True, 'source_facts': [{'value': 'different unreviewed source'}]})):
+            current = copy.deepcopy(after)
+            current[0][key] = value
+            with self.subTest(key=key), self.assertRaisesRegex(AssertionError, 'whole-case hashes'):
+                self.report.benchmark_review_evidence(audit, before, current)
+
+    def test_report_does_not_invent_export_fidelity_from_missing_legacy_receipt_fields(self):
+        audit = self.audit_fixture()
+        result = self.report.benchmark_review_evidence(audit)
+        self.assertIn('not recorded', result['summary'])
+        audit['actual_client_exports_equal'] = 603
+        result = self.report.benchmark_review_evidence(audit)
+        self.assertIn('603 client exports equal to C8', result['summary'])
+        self.assertIn('not separately summarized', result['summary'])
+        self.assertIsNone(result['recorded_export_fidelity'])
+
+
+
+    def test_complete_report_build_keeps_reviewed_deltas_and_current_export_fidelity_visible(self):
+        audit, before, after = self.review_receipt_fixture()
+        original_replay = json.loads(self.args.replay.read_text())
+        self.args.baseline_replay = write(self.root / 'baseline-replay-distinct.json',
+                                         {**original_replay, 'records': before})
+        write(self.args.replay, {**original_replay, 'records': after})
+        for path, replay_path in ((self.args.baseline, self.args.baseline_replay),
+                                  (self.args.comparison, self.args.replay),
+                                  (self.args.retention, self.args.replay)):
+            value = json.loads(path.read_text())
+            value['replay_sha256'] = digest(replay_path)
+            write(path, value)
+        result = self.render_audit(audit)
+        review = result['benchmark_review']
+        self.assertEqual(review['observed_changed_case_ids'], [before[0]['case_id']])
+        self.assertEqual(len(review['reviewed_case_hashes']), 1)
+        self.assertIn('603 / 603 valid current client snapshot and Blob downloads', review['summary'])
+        self.assertIn('602 exports are unchanged from C8 and 1 differ', review['summary'])
+        self.assertIn('not proof of production deployment', result['integration_status'])
+
+
+
 if __name__ == '__main__':
     unittest.main()

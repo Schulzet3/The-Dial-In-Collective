@@ -6,11 +6,11 @@ import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evid
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
-import {extractCoffeeIdentityEvidence,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
+import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
-import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs} from './coffee-semantic-specs.mjs';
+import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
@@ -392,7 +392,7 @@ function addField(fields,rawKey,value){
  }
  if(key==='origin'&&s){
   const label=keyOf(rawKey),geography=geographyByFields.get(fields)||{};
-  const regionLevel=/^(?:region|growingregion|regionmunicipality|regioncity)$/.test(label)?'region':
+  const regionLevel=/^(?:regions?|growingregion|regionmunicipality|regioncity)$/.test(label)?'region':
    /^(?:department|province|state|district|municipality|subregion|city|village)$/.test(label)?label:null;
   let part=/^(?:country|countryoforigin|pais|paisdeorigen|pays)$/.test(label)?'country':regionLevel?'region':null;
   const allParts=geographyParts(s);
@@ -535,7 +535,7 @@ function addField(fields,rawKey,value){
  if(s){fields[key]=s;if(key==='elevation_m')elevationSourceByFields.set(fields,textOf(value,500));}
 }
 function canonicalIdentityScope(fields,raw,source_type='html'){
- const scoped=isolateCoffeeIdentityCohorts(raw,{name:fields.name});
+ const scoped=isolateCoffeeIdentityCohorts(withoutEducationalCoffeeGeography(raw,{clean}),{name:fields.name});
  if(scoped.origin)addField(fields,'Origin',scoped.origin);
  if(scoped.truncated)identityScopeTruncatedByFields.add(fields);
  const retained=identityQuarantinesByFields.get(fields)||[];
@@ -607,6 +607,7 @@ function productDetails(fields,p){
   const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   const body=/<[a-z][^>]*>/i.test(currentDescription)?currentDescription:currentDescription.split(/\r?\n/).filter(line=>line.trim()).map(line=>'<p>'+escape(line)+'</p>').join('');
   const story='<main><h1>'+escape(fields.name)+'</h1><div itemprop="description">'+body+'</div></main>';
+  for(const fact of extractCoffeeCurrentReleasePrefixes(story,{clean}))addIdentityFact(fields,fact);
   const explicit=productFlavorProfiles(fields,story);
   if(!explicit){
    const notes=extractProductFlavorEvidence(story,{clean});
@@ -963,7 +964,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // that raw source for review, but do not let the stale cohort donate a
  // producer, altitude, roast or other missing canonical field.
  const usableMatchedDescriptions=matchedDescriptions.filter(description=>
-  !coffeeDescriptionCountryMismatch(description,{name:fields.name,origin:fields.origin}));
+  !coffeeDescriptionCountryMismatch(description,{name:fields.name,origin:fields.origin})&&
+  !coffeeDescriptionNamedCoffeeMismatch(description,{name:fields.name,origin:fields.origin}));
  // Label-free height metrics and additional physical unit formats are
  // considered only after the explicit lot and existing narrative evidence.
  if(!onyxMetrics){
@@ -1114,7 +1116,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   roaster_details.blend_components=blend.display;
   // List distinct evidenced countries in first-seen order, never label a
   // multi-origin blend with only one of its components' countries.
-  if(!fields.origin&&!conflicts.has('origin'))fields.origin=blend.origin||blend.origins.join(', ');
+  if(!fields.origin&&!conflicts.has('origin')&&(!blend.incomplete_component_origins||blend.complete_origins))
+   fields.origin=blend.origin||blend.origins.join(', ');
   // Only genuinely named farms/producers are used. An unlabeled component
   // coffee name alone is not enough evidence to assert its producer.
   if(blend.complete_producers&&!fields.producer&&!conflicts.has('producer'))fields.producer=blend.producers.join(', ');

@@ -1,3 +1,15 @@
+## October 24 UTC — Candidate12 extractor accuracy follow-up; TESTING
+
+The earlier continuation merged through PR116 at `5da3eba1e6a567defca572c54ac677c81f4b535c`; development `30312b2184ccf23ce1180179bf9ebdfabce5fca8` and all concurrent source/receipt/queue history are preserved. Its original frozen603 run40066959055 at2eb32b2 completed603 previews,3024 exact/167 missing/811 review and5458 full/337 partial/679 unconfirmed supplementary assertions. That is completed Candidate11 evidence, not a Candidate12 result.
+
+Candidate12 continues separately on `work/issue33-candidate12-full-audit-20261024`. Actual focused run40069075479 at3deece8b passed95 Node tests,34 runner controls,20 report controls,9 changed-artifact reader controls and the unchanged NOMAD target with complete fixture parity. The final independently reviewed sensory-boundary extension adds preparation contractions/active milk additions, explicit hypothetical negatives, and an ordinary layered milk-chocolate positive; its exact ordinary/full603 verification is pending. Current32-file runtime fingerprint: `9de825285249972f2657267bc0b74745c509b1db663dc185a4f7a7b5bd208da4`.
+
+All167 originally missing assertions have case-level triage. Conditional, conflicting, unsupported and unresolved source roles remain explicitly qualified. Every actual new full603 delta requires independent original-source review, exact manifest pins, zero previous exact/full-retention losses and all603 actual current exports/offline validations. Original answers, captures and scorers remain unchanged. GitHub development/Actions remain authorized without a new API key or paid service.
+
+The extractor remains **TESTING** until exact-source CI, full603 review/rerun, non-force integration and merged-source checks complete. **Publication remains paused** under the unchanged owner handoff; no release-branch push, grant, deployment, production SQL/Edge/Auth or member-data operation is authorized by this follow-up.
+
+---
+
 ## October 24, 2026 UTC — PR116 recovered extractor audit, concurrent source reconciled; TESTING
 
 PR116's first actual hosted run exposed a selected structured-description geography gap: 1,392 Node tests passed, one failed and six deployed-endpoint tests were explicitly skipped; the cloud subset had the same sole failure (1,025/1,026). Lint/build did not run after that failure. Python independently passed38 report/retention tests and23 offline/OCR tests. The frozen runner passed11 integrity controls and correctly stopped before replay because secure archive inputs were unavailable. These outcomes remain recorded; they are not presented as final acceptance.

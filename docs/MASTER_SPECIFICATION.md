@@ -2693,3 +2693,17 @@ Preserve explicit current-source geography, genuine contradictions, selected-pro
 
 
 Concurrent upstream through `2f4668fdc7918a04f6cc2432021c5f15cb30acd2` (tree `93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee`) is preserved exactly. It includes PR113's confirmed-personal-family Community evidence and source READY reconciliation, staged unapplied migrations, and independent regression tests. The other queue rows and root metadata retain their current upstream values. None of the32 extractor runtime files or actual client-export module changed; fresh combined hosted checks cover the overall source.
+
+
+### October 24 extractor Candidate12 implementation follow-up — pending complete verification
+
+## October 24 UTC — Candidate12 extractor accuracy follow-up; TESTING
+
+The earlier continuation merged through PR116 at `5da3eba1e6a567defca572c54ac677c81f4b535c`; development `30312b2184ccf23ce1180179bf9ebdfabce5fca8` and all concurrent source/receipt/queue history are preserved. Its original frozen603 run40066959055 at2eb32b2 completed603 previews,3024 exact/167 missing/811 review and5458 full/337 partial/679 unconfirmed supplementary assertions. That is completed Candidate11 evidence, not a Candidate12 result.
+
+Candidate12 continues separately on `work/issue33-candidate12-full-audit-20261024`. Actual focused run40069075479 at3deece8b passed95 Node tests,34 runner controls,20 report controls,9 changed-artifact reader controls and the unchanged NOMAD target with complete fixture parity. The final independently reviewed sensory-boundary extension adds preparation contractions/active milk additions, explicit hypothetical negatives, and an ordinary layered milk-chocolate positive; its exact ordinary/full603 verification is pending. Current32-file runtime fingerprint: `9de825285249972f2657267bc0b74745c509b1db663dc185a4f7a7b5bd208da4`.
+
+All167 originally missing assertions have case-level triage. Conditional, conflicting, unsupported and unresolved source roles remain explicitly qualified. Every actual new full603 delta requires independent original-source review, exact manifest pins, zero previous exact/full-retention losses and all603 actual current exports/offline validations. Original answers, captures and scorers remain unchanged. GitHub development/Actions remain authorized without a new API key or paid service.
+
+The extractor remains **TESTING** until exact-source CI, full603 review/rerun, non-force integration and merged-source checks complete. **Publication remains paused** under the unchanged owner handoff; no release-branch push, grant, deployment, production SQL/Edge/Auth or member-data operation is authorized by this follow-up.
+

@@ -90,7 +90,7 @@ test('anonymous product JSON script data-product marker survives fixture sanitiz
 test('NOMAD public Yoast checkout URL template survives without leaking other checkout secrets',()=>{
  const url='https://nomadcoffee.es/products/centroamericano-natural-anaerobico';
  const variantUrl=url+'?variant=123';
- const product={"@context":"https://schema.org","@type":"Product","name":"Centroamericano Natural Anaeróbico","url":url,"hasVariant":[{"@type":"Product","name":"Centroamericano Natural Anaeróbico - 1kg / Café en Grano","url":variantUrl,"offers":{"@type":"Offer","url":variantUrl,"price":"100.00","priceCurrency":"EUR","checkoutPageURLTemplate":"https://nomadcoffee.es/cart/add?id=123&quantity=1","checkoutAuthToken":"sensitive-checkout-token"}}]};
+ const product={"@context":"https://schema.org","@type":"Product","name":"Centroamericano Natural Anaeróbico","url":url,"hasVariant":[{"@type":"Product","name":"Centroamericano Natural Anaeróbico - 1kg / Café en Grano","@id":"https://nomadcoffee.es/#/schema/Product/selected-123","offers":{"@type":"Offer","@id":"https://nomadcoffee.es/#/schema/Offer/selected-123","url":variantUrl,"price":"100.00","priceCurrency":"EUR","checkoutPageURLTemplate":"https://nomadcoffee.es/cart/add?id=123&quantity=1","checkoutAuthToken":"sensitive-checkout-token"}}]};
  const html=page('Centroamericano Natural Anaeróbico','<script type="application/ld+json">'+JSON.stringify(product)+'</script>',url);
  const original=parse(html,url),sanitized=fixtureCoffeeHtml(html,{source_url:url}),replay=parse(sanitized,url);
  assert.match(JSON.stringify(original.source_facts),/checkoutPageURLTemplate/);
