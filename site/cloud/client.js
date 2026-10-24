@@ -74,6 +74,7 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
    async memberRetryPendingApproval(submissionId,expectedRevision){assertSecure();return unwrap(await sdk.rpc('dic_member_retry_pending_approval',{p_submission_id:submissionId,p_expected_revision:expectedRevision}));},
   // Authenticated, least-field Community endpoints. Never send owner IDs or
   // session tokens to the UI; Supabase membership is checked server-side.
+  async recommendationCommunityEvidence(libraryEntryId,style){assertSecure();return unwrap(await sdk.rpc('dic_community_recommendation_evidence',{p_library_entry_id:libraryEntryId,p_style:style}));},
   async listCommunityReviews(){assertSecure();const items=unwrap(await sdk.rpc('dic_my_community_outliers'));return Array.isArray(items)?items:[];},
   async confirmCommunityOutlier(shotId,expectedRevision){assertSecure();return unwrap(await sdk.rpc('dic_confirm_community_outlier',{p_shot_id:shotId,p_expected_revision:expectedRevision}));},
   async browseCommunityShots({limit=20,offset=0}={}){assertSecure();return unwrap(await sdk.rpc('dic_browse_community_shots',{p_limit:limit,p_offset:offset}));},

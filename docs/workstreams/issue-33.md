@@ -1,3 +1,15 @@
+## October23,2026 MDT: PR109 reconciled with concurrent Community source9135e06
+
+The first real source commit517dfe26720e8eef69aa525bdb07f7c26d01c3fa and PR109 were independently read back: exact reviewed tree5d76faec8b10f3d2adb21b3bca30cffd9a772686 and sole real upstream parente6d8745. No synthetic history was uploaded. While its Actions ran, development advanced through five concurrent commits to9135e06dfe29da3caa0d3820e7eb8c003634ef29 (tree1474569e8db4aa820b5d6fac4af7ee11a9d4393c). All506 upstream blobs/modes were recovered exactly.
+
+Preserve the new Community recommendation helper/engine, staged migration, build allowlist, tests, browser harness and independent DIC-Q-12-community-prior-hierarchy TESTING item. Resolve the shared mutation function by retaining all candidate8 owner/epoch checks and read-only mutation-receipt retry behavior while restoring upstream's Community evidence after hydration. Other upstream client changes merge unchanged. Current status and queue preserve every concurrent record.
+
+The combined Node suite passes1372 tests with6 opt-in provider skips, and Python/lint/build pass. The import-browser harness initially failed because its manual module bundle omitted upstream's new community-evidence dependency; the app build already includes that dependency. Add the existing module before engine and fail immediately on bundle errors, preserving every import assertion. Repeat import/mobile and actual packaged/offline checks before updating the PR.
+
+The32 extractor runtime files remain identical to full candidate8, so603-case benchmark evidence is reused. Combined checks now PASS:1372 named Node tests,0fail,6opt-in hosted skips;30Python audit+23helper;lint/build;repaired320/390/1280 import browser;9 actual packaged/offline checks including exactly one synthetic replay after reconnect. Source and packaged bytes remained unchanged during browser execution. The manual browser test bundle dependency omission was repaired and its original failure retained. Receipt: `docs/audits/extractor-candidate8-upstream-9135-verification.json`. Old-base PR checks are valid only for517dfe2 and its former merge tree, not this new combined source. Queue remains TESTING until actual updated-source Actions, non-force integration and readback. Production unchanged; no provider or member-data mutation.
+
+---
+
 ## October 23, 2026 MDT: candidate8 GitHub integration resumed — TESTING, not published
 
 Owner authority: “Please reference the new project instructions. I need you to figure this out proactively. Please get this done at all costs without incurring direct cost to me. GitHub should now allow writes.” Later clarification: “You can use github as much as you need. That does not count as adding cost”. These explicit instructions resolve the prior rejected GitHub write for this development task and permit the required GitHub Actions checks. Normal readiness rules remain in force; no local-CI exception or release-control change was implemented. Production publication remains separately authorized.

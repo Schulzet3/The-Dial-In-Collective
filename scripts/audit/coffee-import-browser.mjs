@@ -14,8 +14,9 @@ const read=file=>fs.readFile(path.join(root,file),'utf8');
 const imports=text=>text.replace(/import \* as (\w+) from ['"](.+?)['"];?/g,(_whole,name,file)=>`const ${name}=Modules.${path.basename(file,'.js').replaceAll('-','_')};`)
  .replace(/import\s*\{([^}]+)\}\s*from\s*['"](.+?)['"];?/g,(_whole,names,file)=>`const {${names}}=Modules.${path.basename(file,'.js').replaceAll('-','_')};`);
 let bundle='(()=>{const Modules={};\n';
-for(const name of ['constants','model','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill','dose-advisory']){
- const folder=['constants','model','engine','ui'].includes(name)?'lib':'cloud';
+const libraryModules=['constants','model','community-evidence','engine','ui'];
+for(const name of [...libraryModules,'appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill','dose-advisory']){
+ const folder=libraryModules.includes(name)?'lib':'cloud';
  const source=await fs.readFile(path.join(site,folder,name+'.js'),'utf8');
  const exports=[...source.matchAll(/export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)/g)].map(match=>match[1]);
  bundle+=`Modules.${name.replaceAll('-','_')}=(()=>{${imports(source).replace(/\bexport\s+/g,'')}\nreturn {${exports.join(',')}};})();\n`;
@@ -34,6 +35,8 @@ try{
   const page=await context.newPage();page.on('pageerror',error=>errors.push(String(error)));
   await page.setContent('<!doctype html><html><head><style>'+css+'</style></head><body><div id="app"></div><dialog id="sheet" aria-labelledby="sheet-title"></dialog><div id="toasts" role="status"></div></body></html>');
   await page.addScriptTag({content:bundle});
+  assert.deepEqual(errors,[],'Browser module bundle must load before exercising import');
+  assert.equal(await page.evaluate(()=>typeof window.__CloudApp),'function','CloudApp must be available in the browser fixture');
   await page.addScriptTag({content:fixture+`
    if(!crypto.randomUUID){let sequence=0;crypto.randomUUID=()=> '11111111-1111-4111-8111-'+String(++sequence).padStart(12,'0');}
    window.__raw=rawFixture();window.__writes=[];

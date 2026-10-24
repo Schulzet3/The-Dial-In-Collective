@@ -1,3 +1,9 @@
+## October23,2026 MDT: extractor PR109 reconciled with Community source9135e06
+
+Concurrent Community recommendation source9135e06 is preserved, including its separately TESTING queue item. Shared client mutation behavior retains both audit owner/receipt safeguards and Community evidence. Combined local1372 Node tests,53Python tests,lint/build,mobile import and9actual packaged/offline checks PASS after fixing a missing module in the local browser harness. The32 extractor runtime files and frozen603 benchmark remain candidate8-identical. Updated-source GitHub Actions and non-force integration remain pending; queue TESTING, no publication.
+
+---
+
 ## October 23, 2026 MDT: candidate8 GitHub integration resumed — TESTING, not published
 
 The owner explicitly re-authorized GitHub writes and clarified that GitHub use does not count against the added-cost restriction. Candidate8 is being integrated with normal exact-source Actions checks; no alternate readiness policy or production control is changed. Preserve concurrent upstream `e6d874510448f6cd3d0f21f5edabc3d2863a14ed`, the separate Issue5 READY migration and Issues5/10 scoped acceptance.
@@ -19,6 +25,10 @@ Local checks pass: **1,368 named Node tests**, 30 Python audit and 23 local-help
 Concurrent upstream is preserved through `d45664b1fd5195d9e76f35d94a49adbd3f3ac040` (tree `18527e7fc1a00891dd33760eda2115e62ef5b538`), including separately recorded production acceptance and remaining genuine-user acceptance limits. This audit performed none of those provider actions. Exact upstream blobs/modes, unrelated queue/history/authorization entries and member/offline behavior remain intact. The narrow release-test queue-ID integration repair is recorded separately from byte-identical upstream files.
 
 Queue `DIC-Q-33-expanded-603-audit` remains **BLOCKED**, not READY: GitHub tree-write rejection: isError:true; user rejected MCP tool call. No more specific reason was supplied. No retry or alternate write route was used. No audit remote write, publish or deploy occurred. Further GitHub integration requires explicit resolution of that rejection and a fresh upstream check; synthetic recovery history must never be pushed. Extractor fingerprint: `301346616618784a5ff926ddb9302b3be6e2710bea74c3a47e3d476e02ca812c`. Evidence: `docs/audits/extractor-600-benchmark-receipt.json` and the candidate 8 source reviews.
+
+## October 24 2026 — Issue #10/#12 dependency implementation in TESTING
+
+Source-only candidate Community evidence tiers (exact coffee, related release, similar coffee) with per-contributor median bucketing, safe read-only admitted-user RPC, optional lazy hydration and evidence source labels. New regression tests queued, exact CI and integration pending. Existing #5 stale-retry fix remains READY but not deployed. No publication or production data operations.
 
 ## October 23/24, 2026 — owner-directed proactive closure workflow
 
