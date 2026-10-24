@@ -86,7 +86,6 @@ const publicUrl=raw=>{
   return url.toString();
  }catch{return '';}
 };
-const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
 function fixtureDifference(original,replay){
  const parts=['ok','fields','available','roaster_recipe','roaster_details','conflicts','source_facts',
  'source_facts_truncated','roast_hint','roast_source','elevation_source','producer_source','process_source','variety_source'];

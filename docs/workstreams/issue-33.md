@@ -1,3 +1,8 @@
+## October 24 UTC — exact-source PR118 lint failure fixed
+PR118 initial Actions 40066062830 ran 1,383 Node tests successfully (zero failures) then stopped on ESLint max-warnings=0: orphaned `sensitiveKey` constant after moving the sanitizer to its own ESM module. Removed only that unused constant; sanitizer module still owns all secret filtering. PR approval/SQL/cloud UX already PASS; rerun Node/lint/build, visual/offline and integration on exact revised head before merging. No app runtime change, production write or publish.
+
+---
+
 ## October 24 UTC — verified follow-up integration candidate
 Original development parent 2f4668fdc7918a04f6cc2432021c5f15cb30acd2 (tree 93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee). Concurrent Issue12 and other application files are left byte-identical. PR109 already merged. Follow-up source branch e29aa9ba444b764eea129c53dfc178b8ee6b4481 passed full ten-target live-source parity 40065995754 (SEY/Manhattan intentionally withheld conflicting claims); app runtime and original 603-corpus oracle remain unchanged. New sanitizer Node regressions and exact GitHub workflows will run on this real-parent integration source. This commit updates the scoped journal together with code/tests, queue TESTING and current status. Not READY until merged-source CI and public acceptance pass; no publish. [dic-completeness-probe]
 
