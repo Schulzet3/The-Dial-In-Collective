@@ -28,3 +28,8 @@ Historical operations journal: [exact archive](archive/2026-10-23-operations/OPS
 - Five exact-source CI checks PASS; no new SQL migrations. Edge functions updated and JWT-required: preview v4, verifier v6. Production Netlify publication remains unverified until provider readback.
 - Existing verified encrypted/offsite backup evidence reused for non-destructive release; latest read-only shots/notes count 23/23 (previously 22/22); no production member-data write by release. No new destructive migration or database deletion.
 - One guarded chat request, no force push, no credit check, no purchases. Release controller must enforce exact source, one-use grant and queue, then Netlify READY/current verification.
+
+## 2026-10-24T03:06:02Z owner-authorized four-item release request
+- Release ID DIC-20261024-READY-QUEUE-06, tested source 28f908dc9828a45558bd56b532fed17022cef3d8. Four READY items: #5, #10, #33, #100. Explicit owner publish authorization. Five exact-source GitHub checks passed.
+- Backup run 40053858192, encrypted ZIP artifact 12545035289, SHA256 686b3c78417ab34c8607708ac52b7c7f1b3dc042256c3a6d870e4f954ef928d7, private Drive offsite 13cgHYP1ofSUhvye4PdgvN_tQ6Hr1bFZh, downloaded and byte-matched. Snapshot start 02:22:14 UTC after latest observed write.
+- Hosted SQL applied/read back: 20261024030533 dic_admin_safe_delete; 20261024030536 dic_source_target_producer; 20261024030539 dic_personal_family_lifecycle_integrity. Verifier Edge v7 ACTIVE JWT required. No production records intentionally deleted. Netlify publication still unverified, pending one-use controller.
