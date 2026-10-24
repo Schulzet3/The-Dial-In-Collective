@@ -193,6 +193,12 @@ class CloudApp {
   if(!this.pending.length&&navigator.onLine){try{const held=await this.client.listCommunityReviews();if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.reviews=held;this.reviewError='';}catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.reviewError='Required shot reviews are temporarily unavailable. Reconnect and check Sync.';}}
   if(!this.expanded.size&&M.workspace(this.state).currentCoffeeId)this.expanded.add(M.workspace(this.state).currentCoffeeId);
   this.render();
+  // Automatically opened Current Coffee and style changes receive optional priors.
+  if(this.status?.admitted&&globalThis.navigator?.onLine!==false)
+   for(const id of this.expanded)this.loadRecommendationEvidence(id).catch(error=>{
+    if(isAccessDenied(error)&&epoch===this.epoch&&who.id===this.identity?.id)
+     this.denyAccess(who,epoch).catch(()=>{});
+   });
  }
  async mutate(action,payload,{onlineOnly=false}={}){
   const offlineShot=action==='save_shot'&&!payload.expected_revision&&this.identity?.id===this.localOfflineOwner&&globalThis.navigator?.onLine===false;
@@ -468,6 +474,25 @@ class CloudApp {
    }catch(error){if(error.code==='account_changed')throw error;break;}
   }
  }
+ async loadRecommendationEvidence(id){
+  if(!this.status?.admitted||globalThis.navigator?.onLine===false||!this.identity?.id)return;
+  const style=M.coffeeState(this.state,id).style,key=id+':'+style;
+  if(Object.hasOwn(this.recommendationEvidence[id]||{},style)||
+     this.recommendationEvidenceRequests.has(key))return;
+  this.recommendationEvidenceRequests.add(key);
+  const owner=this.identity.id,epoch=this.epoch;
+  try{
+   const evidence=await this.inSession(()=>this.client.recommendationCommunityEvidence(id,style));
+   if(this.identity?.id===owner&&this.epoch===epoch){
+    (this.recommendationEvidence[id] ||= {})[style]=evidence;
+    this.state.communityEvidence=this.recommendationEvidence;
+    this.render();
+   }
+  }catch(error){
+   if(isAccessDenied(error))throw error;
+   // Missing Community data must never block logging or personal recipes.
+  }finally{this.recommendationEvidenceRequests.delete(key);}
+ }
  async expandCoffee(id){
   if(this.expanded.has(id)){
    this.expanded.delete(id);if(this.tempCoffee===id)this.tempCoffee=null;
@@ -476,27 +501,8 @@ class CloudApp {
   }
   const coffee=this.state.coffees.find(x=>x.id===id);if(!coffee)return;
   this.expanded.add(id);this.firstStylePromptId=null;this.render();
-   // Lazy optional Community evidence; retain independent personal shot flow.
-   if(this.status?.admitted&&globalThis.navigator?.onLine!==false){
-    const style=M.coffeeState(this.state,id).style,key=id+':'+style;
-    if(!Object.hasOwn(this.recommendationEvidence[id]||{},style)&&
-       !this.recommendationEvidenceRequests.has(key)){
-     this.recommendationEvidenceRequests.add(key);
-     const owner=this.identity?.id,epoch=this.epoch;
-     try{
-      const evidence=await this.inSession(()=>this.client.recommendationCommunityEvidence(id,style));
-      if(this.identity?.id===owner&&this.epoch===epoch){
-       (this.recommendationEvidence[id] ||= {})[style]=evidence;
-       this.state.communityEvidence=this.recommendationEvidence;
-       this.render();
-      }
-     }catch(error){
-      if(isAccessDenied(error))throw error;
-      // Community prior unavailable: preserve personal recommendation and history.
-     }finally{this.recommendationEvidenceRequests.delete(key);}
-    }
-   }
-  if(!this.identity?.id||this.state.shots.some(sh=>sh.coffeeId===id))return;
+   await this.loadRecommendationEvidence(id);
+ if(!this.identity?.id||this.state.shots.some(sh=>sh.coffeeId===id))return;
   const owner=this.identity.id,epoch=this.epoch,key=owner+':'+id;
   if(this.firstStyleClaimInFlight.has(key))return;
   this.firstStyleClaimInFlight.add(key);

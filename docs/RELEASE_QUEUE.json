@@ -40,7 +40,7 @@
     {
       "id": "DIC-Q-12-community-prior-hierarchy",
       "issue": 12,
-      "pr": null,
+      "pr": 108,
       "title": "Contributor-balanced exact/related/similar Community starting priors for recipe recommendation (#10 dependency)",
       "state": "TESTING",
       "merged_source_sha": null,
@@ -50,18 +50,22 @@
         "site/lib/engine.js",
         "site/cloud/client.js",
         "site/cloud/main.js",
-        "build_cloud.mjs"
+        "build_cloud.mjs",
+        "supabase/migrations/20261024041800_dic_recommendation_use_provenance.sql",
+        "site/cloud/mapping.js",
+        "site/cloud/shot_card.js"
       ],
       "tests": [
         "New local Node recommendation priority and source evidence tests, isolated PostgreSQL Community quality test, Cloud build/mobile/visual/offline/approval CI must pass; tests not yet executed.",
-        "Visual/Node initial source check failed on omitted module in build asset allowlist, repaired in commit 7073bc; approval intake then found newly tracked build_cloud.mjs omitted from queue scope; fixed now."
+        "Visual/Node initial source check failed on omitted module in build asset allowlist, repaired in commit 7073bc; approval intake then found newly tracked build_cloud.mjs omitted from queue scope; fixed now.",
+        "PR108 six source checks SUCCESS and merged source Node/SQL/approval/cloud/visual all success; follow-up provenance tests and exact CI pending."
       ],
       "ci_runs": [],
       "blockers": [
-        "Exact-source SQL, Node, mobile/browser and approval checks pending; PR nonforce integration and readback required."
+        "Recommendation provenance signed-HTTP, SQL, Node, browser/offline checks pending; PR109 merge/readback required."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
-      "notes": "Owner asked proactively close #5/#10 including approved #12 prerequisite. Source only; no production Netlify, Supabase SQL, Auth or member-data operations. Enforce identity, contributor-balanced per-ratio bucket medians, same-style precedence, no Community grinder calibration, optional lazy fetch, independent member identity. #5 existing READY item retained."
+      "notes": "Owner asked proactively close #5/#10 including approved #12 prerequisite. Source only; no production Netlify, Supabase SQL, Auth or member-data operations. Enforce identity, contributor-balanced per-ratio bucket medians, same-style precedence, no Community grinder calibration, optional lazy fetch, independent member identity. #5 existing READY item retained. Follow-up PR109 saves explicit 'Use Recommendation' attribution into already existing private shot recommendation_context via source-only trigger/wrapper, preserving all currently deployed mutation routes and controls. No server-verified Community claims from this user-supplied field."
     }
   ],
   "history": [

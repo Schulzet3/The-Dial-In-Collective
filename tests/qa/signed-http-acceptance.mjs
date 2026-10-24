@@ -271,4 +271,35 @@ pass('Real signed HTTP Pending Retry promotes exact owner while preserving origi
 assert.equal(scalar("(select count(*) from public.shot_notes)"),'6');
 pass('All disposable signed acceptance scenarios preserve six preexisting private shot notes');
 
+// Durable private attribution through the actual authenticated HTTP mutation route.
+const attributedShot=randomUUID();
+r=await rpc('dic_apply_client_change',familyToken,{
+ expected_owner:familyUser,mutation_id:randomUUID(),action:'save_shot',
+ payload:{id:attributedShot,expected_revision:0,
+  library_entry_id:'77000000-0000-4000-8000-000000000007',
+  setup_id:'71000000-0000-4000-8000-000000000007',
+  setup_version_id:'72000000-0000-4000-8000-000000000007',
+  basket_version_id:'74000000-0000-4000-8000-000000000007',
+  calibration_id:'75000000-0000-4000-8000-000000000007',
+  style:'Turbo',dose_g:18,yield_g:40,time_s:25,grind_setting:2,
+  temperature_c:92,feed_mode:'standard',
+  taste:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
+  recommendation_context:{source_label:'Unproven exact Community starting reference',
+   used_controls:['grind'],community_tier:'exact',contributor_count:3,shot_count:7}}
+});
+assert.equal(r.status,200);
+assert.equal(r.data?.ok,true);
+assert.equal(scalar("(select recommendation_context->>'kind' from public.shots where id='"+attributedShot+"')"),'member_selected_starting_reference');
+assert.equal(scalar("(select recommendation_context->>'source_verified_independently' from public.shots where id='"+attributedShot+"')"),'false');
+pass('Signed admitted owner preserves unverified source attribution through real HTTP mutation');
+r=await rpc('dic_read_personal_state',familyToken);
+assert.equal(r.status,200);
+assert.ok(r.data?.shots?.some(x=>x.id===attributedShot&&
+ x.recommendation_context?.community_tier==='exact'));
+pass('Signed fresh hydration returns historical private shot source without trusting it as verified');
+r=await rpc('dic_read_personal_state',tokens.owner);
+assert.equal(r.status,200);
+assert.ok(!r.data?.shots?.some(x=>x.id===attributedShot));
+pass('Another signed member never receives private recommendation source context');
+
 console.log('RESULT: '+passed+' isolated genuine-HMAC-signed PostgREST HTTP/quality assertions PASS; NO GoTrue or production sessions tested.');

@@ -487,5 +487,34 @@ begin
 
  raise notice 'PASS community: verified-only, five peers, outlier confirmation, identity, correction, hidden/deleted durability, Pending approval, contributor counts, RLS, idempotence';
 end $test$;
+-- Isolated provenance trigger test, after prior acceptance assertions.
+do $provenance$
+declare exemplar public.shots; tested uuid:=gen_random_uuid(); prior jsonb;
+begin
+ if current_database()<>'dic_ci' then raise exception 'CI isolation required';end if;
+ select * into exemplar from public.shots limit 1;
+ if exemplar.id is null then raise exception 'Missing synthetic existing shot';end if;
+ perform set_config('dic.recommendation_context',
+ '{"source_label":"Unproven exact Community starting reference","used_controls":["grind","temperature"],"community_tier":"exact","contributor_count":3,"shot_count":7}',true);
+ insert into public.shots(id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+  calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,temperature_c,feed_mode,
+  extraction,body,clarity,sweetness,astringency,equipment_snapshot)
+ values(tested,exemplar.owner_id,exemplar.library_entry_id,exemplar.setup_id,
+  exemplar.setup_version_id,exemplar.basket_version_id,exemplar.calibration_id,
+  exemplar.style,now(),exemplar.dose_g,exemplar.yield_g,exemplar.time_s,exemplar.grind_setting,
+  exemplar.temperature_c,exemplar.feed_mode,3,3,5,5,1,'{}'::jsonb);
+ select recommendation_context into prior from public.shots where id=tested;
+ if prior->>'kind' is distinct from 'member_selected_starting_reference' or
+    prior->>'source_verified_independently' is distinct from 'false' or
+    prior->>'community_tier' is distinct from 'exact' or
+    prior->>'contributor_count' is distinct from '3' then
+  raise exception 'Source attribution not preserved, or incorrectly verified: %',prior;end if;
+ if position('action=''hide_shot''' in pg_get_functiondef(
+    'public.dic_apply_client_change(uuid,uuid,text,jsonb)'::regprocedure))=0 or
+    position('private.dic_submit_coffee_auto' in pg_get_functiondef(
+    'public.dic_apply_client_change(uuid,uuid,text,jsonb)'::regprocedure))=0 then
+  raise exception 'Existing protected mutation routing lost';end if;
+end $provenance$;
+
 select 'PASS: isolated community quality integration; no hosted writes' as result;
 rollback;

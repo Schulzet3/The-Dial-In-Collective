@@ -63,6 +63,8 @@ test('Use Recommendation keeps the selected first-shot style when its preference
  assert.equal(Number(form.elements.grindSetting.value),wanted.grind.value);
  assert.equal(Number(app.draft.grindSetting),wanted.grind.value);
  assert.equal(app.draft.style,'Turbo');
+ assert.deepEqual(app.draft.recommendationContext.used_controls,['grind']);
+ assert.match(app.draft.recommendationContext.source_label,/recommendation|starting|estimate/i);
  assert.equal(M.coffeeState(app.state,'coffee').style,'Traditional','using a suggestion must not rewrite the saved workspace');
 });
 test('Slow Feed refresh keeps the open draft style and basket instead of the persisted workspace choice',async()=>{

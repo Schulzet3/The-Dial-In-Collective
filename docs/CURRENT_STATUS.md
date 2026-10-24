@@ -1,3 +1,7 @@
+## October 24 2026: #10 Community source integration merged; provenance completion TESTING
+
+PR108 independently tested and merged at 9135e06dfe29da3caa0d3820e7eb8c003634ef29 with all five merged-source CI checks passing. Community exact/related/similar priors validated and protected. Additional #12 durable Use Recommendation attribution through existing shot recommendation_context being implemented in PR109, TESTING, not yet merged or deployed. Issue #5 remains READY but unpublished. No production writes.
+
 ## October 24 2026 — Issue #10/#12 dependency implementation in TESTING
 
 Source-only candidate Community evidence tiers (exact coffee, related release, similar coffee) with per-contributor median bucketing, safe read-only admitted-user RPC, optional lazy hydration and evidence source labels. New regression tests queued, exact CI and integration pending. Existing #5 stale-retry fix remains READY but not deployed. No publication or production data operations.
