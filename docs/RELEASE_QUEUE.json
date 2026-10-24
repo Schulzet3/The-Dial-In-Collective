@@ -6,7 +6,28 @@
     "release_sha": "65ee38609db6bd5977dd0f2b393e7791a5e1b766",
     "netlify_deploy_id": "6adc20c03a07673c4dd08035"
   },
-  "items": [],
+  "items": [
+    {
+      "id": "DIC-Q-5-pending-retry-http-conflict",
+      "issue": 5,
+      "pr": 107,
+      "title": "Correct stale Pending Retry HTTP response",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
+      ],
+      "tests": [
+        "PR107 signed HMAC JWT/PostgREST runner reproduced stale Pending timeout after 47 passing requests; fix and rerun pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source SQL/Node/browser/approval CI and nonforce merge/readback required. Migration NOT deployed."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5",
+      "notes": "Changes only private retry RPC stale result from transport-hanging SQLSTATE 40001 to safe explicit nonmutating conflict. Does not publish or alter any member records."
+    }
+  ],
   "history": [
     {
       "id": "DIC-Q-93-admin-counts",
