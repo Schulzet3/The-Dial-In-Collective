@@ -14,6 +14,8 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {coffeeHtmlAttributes} from '../../src/server/coffee-product-scope.mjs';
+import {sanitizeJson} from './coffee-public-json-sanitizer.mjs';
 import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
@@ -30,7 +32,8 @@ const targets=[
   recipe:{dose_g:18,yield_g:36,time_s_min:22,time_s_max:24},absent:['release_label']},
  {id:'sey-ruarai',url:'https://www.seycoffee.com/products/2026-ruarai-aa-separation-kenya',expected:{
   variety:/SL\s?28.*SL\s?34/i,origin:/Nyeri.*Kenya/i,producer:/\bRuarai\b/i,elevation_m:/1,?783\s*(?:m|masl)/i,
-  release_label:/November\s*2025/i,process:/^Washed$/i}},
+  release_label:/November\s*2025/i,process:/^Washed$/i},
+  allowable_withheld_conflicts:['origin']},
  {id:'black-white-lica',url:'https://www.blackwhiteroasters.com/products/r-lica-torres-black-cherry-natural',expected:{
   variety:/^catua[ií]$/i,producer:/Lica Torres/i,origin:/Rivas.*Brunca.*Costa Rica/i,
   elevation_m:/1500\s*(?:m|masl)/i,process:/^Natural$/i,roast_level:/^Light$/i,
@@ -48,7 +51,8 @@ const targets=[
  {id:'manhattan-samuel',url:'https://manhattancoffeeroasters.com/product/coffees/world-class/samuel-jr/',expected:{
   roaster:/Manhattan Coffee Roasters/i,
   variety:/Caturra.*Chiroso/i,producer:/Diego Bermudez/i,origin:/Cauca.*Colombia/i,
-  elevation_m:/1960\s*(?:m|masl)/i,tasting_notes:/star anise.*dark fudge.*verbena/i}},
+  elevation_m:/1960\s*(?:m|masl)/i,tasting_notes:/star anise.*dark fudge.*verbena/i},
+  allowable_withheld_conflicts:['tasting_notes']},
  {id:'nomad-centroamericano',url:'https://nomadcoffee.es/products/centroamericano-natural-anaerobico',expected:{
   variety:/^Centroamericano$/i,origin:/Costa Rica/i,process:/^Anaerobic$/i,
   producer:/^Diego Robelo(?: y su familia)?$/i,elevation_m:/1200\s*[-–]\s*1400/i,release_label:/2026/},
@@ -83,11 +87,16 @@ const publicUrl=raw=>{
  }catch{return '';}
 };
 const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
-function sanitizeJson(value){
- return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
-  .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
+function fixtureDifference(original,replay){
+ const parts=['ok','fields','available','roaster_recipe','roaster_details','conflicts','source_facts',
+ 'source_facts_truncated','roast_hint','roast_source','elevation_source','producer_source','process_source','variety_source'];
+ return {changed_sections:parts.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key])),
+  canonical_fields_equal:isDeepStrictEqual(original?.fields,replay?.fields),
+  conflicts_equal:isDeepStrictEqual(original?.conflicts,replay?.conflicts),
+  recipes_equal:isDeepStrictEqual(original?.roaster_recipe,replay?.roaster_recipe),
+  original_facts:original?.source_facts?.length||0,fixture_facts:replay?.source_facts?.length||0};
 }
-function fixtureHtml(html){
+function fixtureHtml(html,sourceUrl){
  const compact=compactCoffeeProductHtml(html);
  if(!compact)return '';
  const chunks=[];let cursor=0;
@@ -96,7 +105,12 @@ function fixtureHtml(html){
   const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
   if(type&&block.closed){
    const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
+   // Preserve only the static product-script discriminator. The parser uses
+   // attribute identity to recognize a selected-product JSON block; dropping
+   // it silently loses variant and conflicting source evidence.
+   const productMarker=/product/i.test(JSON.stringify(coffeeHtmlAttributes(block.attributes)))?
+    ' data-public-product-context="product"':'';
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body),sourceUrl)+'</script>');}
    catch{/* Invalid script data is not preserved as executable markup. */}
   }
   cursor=block.end;
@@ -114,6 +128,7 @@ function fixtureHtml(html){
   .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
   .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
 }
+
 function assess(target,result){
  const gaps=[],checked=[];
  if(target.negative){
@@ -127,7 +142,11 @@ function assess(target,result){
  for(const [field,pattern] of Object.entries(target.expected||{})){
   checked.push(field);
   const value=result?.fields?.[field];
-  if(value==null||!String(value).trim())gaps.push({field,reason:result?.conflicts?.includes(field)?'conflicting_source_evidence':'missing_expected_source_field'});
+  if(value==null||!String(value).trim()){
+   const explicitlyWithheld=target.allowable_withheld_conflicts?.includes(field)&&result?.conflicts?.includes(field);
+   if(!explicitlyWithheld)gaps.push({field,reason:result?.conflicts?.includes(field)?'conflicting_source_evidence':'missing_expected_source_field'});
+   else checked.push('source_conflict_withheld.'+field);
+  }
   else if(!pattern.test(fold(value)))gaps.push({field,reason:'source_expectation_mismatch',actual:value,expected_pattern:pattern.source});
  }
  for(const [field,value] of Object.entries(target.recipe||{})){
@@ -181,18 +200,21 @@ async function probe(target){
  const capture=async(kind,url,result)=>{
   const record={kind,url:publicUrl(result.source_url||url),ok:result.ok===true,reason:result.reason||null};
   if(result.ok&&typeof result.html==='string'){
-   const sanitized=fixtureHtml(result.html);
+   const sanitized=fixtureHtml(result.html,result.source_url||url);
    record.bytes=Buffer.byteLength(result.html);record.original_sha256=sha(result.html);
    record.fixture=target.id+'-'+captures.length+'.fixture.html';
    record.sanitized_sha256=sha(sanitized);record.sanitized_bytes=Buffer.byteLength(sanitized);
    const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
    const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
+   if(!record.sanitization_preserves_html_extraction){
+    record.sanitization_difference=fixtureDifference(original,replay);
+   }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
    try{
-    const sanitized=sanitizeJson(JSON.parse(result.json));
+    const sanitized=sanitizeJson(JSON.parse(result.json),result.source_url||url);
     record.fixture=target.id+'-'+captures.length+'.fixture.json';
     record.sanitized_sha256=sha(sanitized);
     await writeFile(path.join(output,record.fixture),sanitized,'utf8');

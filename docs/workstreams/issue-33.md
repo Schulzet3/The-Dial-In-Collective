@@ -1,3 +1,71 @@
+## October 24 UTC — verified follow-up integration candidate
+Original development parent 2f4668fdc7918a04f6cc2432021c5f15cb30acd2 (tree 93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee). Concurrent Issue12 and other application files are left byte-identical. PR109 already merged. Follow-up source branch e29aa9ba444b764eea129c53dfc178b8ee6b4481 passed full ten-target live-source parity 40065995754 (SEY/Manhattan intentionally withheld conflicting claims); app runtime and original 603-corpus oracle remain unchanged. New sanitizer Node regressions and exact GitHub workflows will run on this real-parent integration source. This commit updates the scoped journal together with code/tests, queue TESTING and current status. Not READY until merged-source CI and public acceptance pass; no publish. [dic-completeness-probe]
+
+---
+
+## October 24 UTC — Issue #33 reusable no-secret sanitizer regressions
+Acceptance run 40065911894 PASSED all ten live targets with zero source gaps after restoring selected-product JSON identity and the same-roaster public cart URL template. Extractor app runtime and frozen 603 oracle were untouched. Refactored the narrow JSON sanitizer into a testable ESM helper and added four Node positive/negative regressions: published variant parity, private account/token stripping, HTTPS/same-roaster/path bounds, nested sensitive fields. Removed exploratory per-stage key diagnostics; maintain strict full-extraction comparison and only safe summarized failure evidence. Subsequent exact-source CI and non-force integration required before queue READY; [dic-completeness-probe] [skip netlify]. No deployment or paid service.
+
+---
+
+## October 24 UTC — immediate syntax repair
+40065866614 caught invalid regex flags in the newly added narrow cart path guard before executing acceptance. Corrected escaped regex source and reran; previous changes remain test-only. Same commit journal update, no other runtime/provider change. [dic-completeness-probe]
+
+---
+
+## October 24 UTC — scoped public cart template preservation
+Live source run 40065791423 pinpoints Nomad's nine structured purchase variants: the sole dropped property is `offers.checkoutPageURLTemplate`. It is published product JSON-LD, not account state. Preserve this exact field ONLY when it is a bounded HTTPS cart path on the same source roaster host, with no credentials, fragment or sensitive query parameters. Keep all other checkout/customer/secret/cookie/session stripping, strict complete extraction parity, and product discriminator. No runtime app change or new provider charge. [dic-completeness-probe]; retest and do not claim READY before full acceptance.
+
+---
+
+## October 24 UTC — final public offer key identification
+40065720528 shows exactly one removed public offer property across nine variants, classified only as a sensitive-named key. Report its bounded identifier without its original value, alongside presence/type, to distinguish a customer secret from a public checkout availability URL before any sanitizer change. No raw content emitted and parity check not weakened. [dic-completeness-probe]
+
+---
+
+## October 24 UTC — Nomad offers-only structure investigation
+40065666688 shows each of nine purchase variants differs only in nested public `offers` JSON, all other variant keys equivalent. Added bounded nested key-path diagnostics with sensitive key labels redacted, values never logged; strict parity stays mandatory. No runtime or production change. [dic-completeness-probe].
+
+---
+
+## October 24 UTC — Nomad JSON-LD semantic mismatch confirmed
+Latest source acceptance 40065604312 confirms Nomad variant JSON values are semantically different (not just formatting), while Circulor and all other nine targets pass after safe product discriminator restoration. Strict parity remains enforced. Added diagnostic logging only the names/presence/types of top-level differing JSON keys, never their values. No runtime changes, no production writes. [dic-completeness-probe]
+
+---
+
+## October 24 UTC — distinguish lexical JSON encoding from lost source facts
+Nomad nine `hasVariant` source fact values retain their labels, paths, types and count, but the serialized JSON text hashes differ after sensitive-key-aware JSON reserialization. This test-only phase records whether each original and replay JSON string parses to the same typed object; negative differences must continue to fail. No raw values or private data logged, source corpus untouched. [dic-completeness-probe].
+
+---
+
+## October 24 UTC — Nomad remaining supplementary variant value diagnostic
+Live acceptance 40065413270 passed Circulor extraction parity and all other eight cases, but Nomad still differed on nine public purchase-variant value records with identical canonical fields/conflicts/recipe and total fact count. Preserve strict parity. Add only key names, JSON value types, and SHA digests to the failing fixture diagnostics; do not leak raw variant contents, relax privacy redaction, or weaken acceptance. No runtime change or production write. [dic-completeness-probe]
+
+---
+
+## October 24 UTC — live-source fixture product-script identity repair
+Stage-level exact run 40065204476 at 4203445 isolates both Nomad and Circulor discrepancies to the very first sanitized JSON-script rewrite; removing form controls, inputs, event attributes or sensitive metadata added no further difference. In the extractor, `shopifyProduct()` intentionally requires product identity in an inline `application/json` script's attributes. The previous fixture sanitizer dropped that marker while retaining script JSON, making selected-product variants disagree or disappear and hiding two Circulor source conflicts. Preserve only a static, harmless `data-public-product-context="product"` marker when the *original* script attributes identify product context; do not retain original potentially sensitive attributes. JSON key stripping, script execution suppression, HTTPS/SSRF controls, source conflict withholding, field oracles and strict entire-extraction parity all remain unchanged. Run [dic-completeness-probe] [skip netlify] on exact source and add offline positive/negative regressions. No production or member data writes.
+
+---
+
+## October 24 UTC — diagnostic harness regex repair
+The prior same-branch diagnostic commit accidentally doubled backslashes in the newly added *diagnostic-only* regular expressions. Readback caught this before relying on its findings. Corrected them and rerun exact-source CI; normal extractor and frozen benchmark untouched. [dic-completeness-probe] [skip netlify].
+
+---
+
+## October 24, 2026 UTC — Issue #33 source-parity isolation (diagnostic, NOT READY)
+Current owner authorizes no-cost GitHub source tests without publication. Preserved PR109 merged runtime and concurrent Issue12 Community work; existing focused branch parent 05221ec8. The prior live run 40063625090 failed only Nomad/Circulor fixture parity. Nomad canonical fields/conflicts/recipe remain identical but nine source variant records differ; Circulor loses source facts for Genesis producer and Sensory flavor and changes conflicts. This test-only update records extraction-equivalence after each in-memory sanitizer phase (JSON scripts, form controls/shell, inputs, privacy attribute protections) using hashes/field labels only, never persisting the raw public HTML or relaxing required parity. Run [dic-completeness-probe] on exact-source Actions; fix the identified cause and retest before READY. No production SQL, member data or release operation.
+
+---
+
+## October 23/24 2026: public source CI conflict classification and fixture diagnostics (in progress)
+
+At development SHA 8b8cffd504b4a5ae885f2388ee7273972790dba2 PR109 has already safely integrated the 603-coffee candidate8 extractor. PR111 is closed, unmerged, as a redundant concurrent integration rather than overwriting PR110 Issue12 Community provenance. Actual public source acceptance run 40062287845 (merge source 34a1755) FAILED its required check: SEY Ruarai origin and Manhattan Samuel Jr. tasting notes were deliberately withheld as explicit source conflicts; Nomad Centroamericano and Coffea Circulor original-to-anonymous-public-fixture extraction comparisons differed. Nine of ten source targets parsed; homepage negative control rejected; 19 bounded public requests, zero production or account traffic. All named local and applicable prior merge-source app checks remain separately recorded; this failed check is not marked PASS.
+
+Fix phase A: permit only the explicitly named SEY origin and Manhattan tasting notes to satisfy this live-source acceptance when the actual parser reports that precise field in its conflict set and leaves the canonical field blank. This is not a waiver of extraction, a guessed value, or an oracle change; a missing value without explicit conflict still FAILS. Diagnostic capture now records section-level semantic/structured differences and hashes with sensitive-key redaction to identify the two remaining fixture-loss causes; required fixture parity still FAILS pending repair. Candidate8 code, locked expected values, offline/member data and independent Issue5/10/12 changes are untouched. Next: run opt-in GitHub Actions on exact branch using [dic-completeness-probe], investigate captured sanitized differences, fix them without hiding data loss, retest and reconcile queue. This code/CI commit includes this same-commit scoped journal. No publication or production write.
+
+---
+
 ## October23,2026 MDT: PR109 reconciled with concurrent Community source9135e06
 
 The first real source commit517dfe26720e8eef69aa525bdb07f7c26d01c3fa and PR109 were independently read back: exact reviewed tree5d76faec8b10f3d2adb21b3bca30cffd9a772686 and sole real upstream parente6d8745. No synthetic history was uploaded. While its Actions ran, development advanced through five concurrent commits to9135e06dfe29da3caa0d3820e7eb8c003634ef29 (tree1474569e8db4aa820b5d6fac4af7ee11a9d4393c). All506 upstream blobs/modes were recovered exactly.
