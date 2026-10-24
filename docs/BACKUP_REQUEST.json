@@ -2,8 +2,8 @@
   "schema_version": 1,
   "purpose": "OPTIONAL_PRE_DESTRUCTIVE_ENCRYPTED_SNAPSHOT_REQUEST",
   "instructions": "Update request_id, requested_at_utc and release_id before an approved potentially destructive database operation; push to main triggers encrypted backup. Do not modify backups manually or include account data/credentials.",
-  "request_id": "DIC-20261022-READY-QUEUE-04-BACKUP-01",
-  "requested_at_utc": "2026-10-22T23:51:52.633Z",
-  "release_id": "DIC-20261022-READY-QUEUE-04",
-  "reason": "Owner 2026-10-22 approved all READY queue; staged SQL preview quota function is conservatively potentially-destructive under controller. Require fresh encrypted backup and verified private offsite copy before SQL or publication; issue #80 comment 6353908213."
+  "request_id": "DIC-20261024-READY-QUEUE-06-BACKUP-01",
+  "requested_at_utc": "2026-10-24T02:21:45Z",
+  "release_id": "DIC-20261024-READY-QUEUE-06",
+  "reason": "Owner approved all four READY entries including Issue #100 admin delete API; extra verified encrypted pre-destructive backup required before applying staged SQL. No production writes by this request."
 }
