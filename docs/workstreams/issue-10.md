@@ -91,3 +91,7 @@ This checkpoint is **not yet PASS**. Exact-source CI isolated SQL, signed HTTP, 
 ## PR107 failure recovery: HTTP stale retry
 
 First signed local JWT/PostgREST run 40059377581 passed 47 assertions, including two-family switch, source promotion and foreign denial. A stale Pending retry then timed out after 10 seconds. Source raised retryable SQLSTATE 40001, which did not yield a prompt HTTP response. Fixed narrowly by staged function replacement 20261024034800_dic_pending_retry_http_conflict.sql, returning a safe nonmutating {ok:false,code:'conflict'} response before writes. Updated SQL and HTTP tests. Separate ESLint duplicate import fixed. Queue item DIC-Q-5-pending-retry-http-conflict in TESTING; exact-source CI and merge pending. No production mutation or publication; genuine production member acceptance remains unverified.
+
+## CI reconciliation: PR107
+
+Run 40059619954 passed isolated PostgreSQL 17.11 and all 50 signed local PostgREST JWT checks. Node run 40059620028 failed a historical receipt test that selected a new TESTING issue item before an already DEPLOYED historical item. Corrected receipt selection to bind the four previously deployed items to exact release DIC-20261024-READY-QUEUE-06. New stale-retry migration remains unpublished. Await CI rerun.
