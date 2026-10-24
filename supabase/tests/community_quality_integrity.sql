@@ -459,12 +459,71 @@ begin
     jsonb_array_length(result->'candidates')<1 or
     result->'candidates'->0->>'tier' is distinct from 'exact' then
   raise exception 'Exact verified community prior missing: %',result;end if;
- if result->'candidates'->0->>'distinct_family_basis' is distinct from 'ratio_bucket_observed' or
-    result::text like '%"family_id"%' then
-  raise exception 'Observed ratio groups falsely represented as confirmed family identities';end if;
+ if result->'candidates'->0->>'distinct_family_basis' is distinct from 'ratio_bucket_observed'
+    or result->'candidates'->0->>'community_group_identity_verified' is distinct from 'false'
+    or result::text like '%"family_id"%' then
+  raise exception 'Estimated Community groups falsely represented as verified cross-member family identities';end if;
  if result::text like '%contributor_id%' or result::text like '%owner_id%' or
     result::text like '%grind_setting%' or result::text like '%notes%' then
   raise exception 'Private contributor metadata leaked';end if;
+
+ -- A repeated successful family is a real server-owned identity, not an
+ -- arbitrary per-shot bucket. A second repeated successful approach must not
+ -- be merged into the first or declared a verified *cross-member* identity.
+ -- This is rollback-only synthetic fixture data.
+ for i in 1..2 loop
+  insert into public.shots(
+   id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
+   calibration_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+   extraction,body,clarity,sweetness,astringency,equipment_snapshot
+  ) select gen_random_uuid(),owner_id,library_entry_id,setup_id,setup_version_id,
+      basket_version_id,calibration_id,style,now()+i*interval '2 minute',
+      dose_g,dose_g*2.8,24,grind_setting,3,3,5,5,1,'{}'::jsonb
+     from public.shots where id=sh[1];
+ end loop;
+ if (select count(distinct s.personal_family_id)
+   from public.shots s join public.library_entries le on le.id=s.library_entry_id
+   join public.personal_recipe_families f on f.id=s.personal_family_id
+   where s.owner_id=us[1] and le.coffee_id=c1 and s.style='Turbo'
+   and s.is_dialed_in and f.evidence_state='personally_confirmed')<>2 then
+  raise exception 'Two distinct server-confirmed successful personal families were conflated';
+ end if;
+ perform set_config('request.jwt.claim.sub',us[2]::text,true);
+ perform set_config('request.jwt.claims',
+   jsonb_build_object('sub',us[2],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_community_recommendation_evidence(
+  (select id from public.library_entries where owner_id=us[2] and coffee_id=c1 limit 1),'Turbo');
+ execute 'reset role';
+ if (select count(*) from jsonb_array_elements(result->'candidates') as c(value)
+    where c.value->>'tier'='exact'
+      and c.value->>'distinct_family_basis'='confirmed_personal_families_in_observed_ratio_group'
+      and (c.value->>'confirmed_personal_family_count')::integer>=1
+      and (c.value->>'confirmed_family_contributors')::integer>=1) < 2 then
+  raise exception 'Two independently successful personal recipe approaches not represented separately: %',result;
+ end if;
+ if result::text like '%"family_id"%' or result::text like '%contributor_id%'
+   or result::text like '%owner_id%' or result::text like '%grind_setting%'
+   or result::text like '%notes%' then
+  raise exception 'Private personal family identity or calibration escaped aggregate: %',result;
+ end if;
+ if exists(select 1 from jsonb_array_elements(result->'candidates') as c(value)
+    where c.value->>'community_group_identity_verified' is distinct from 'false') then
+  raise exception 'Estimated cross-member ratio grouping claimed verified';
+ end if;
+ -- The original contributing member must not be counted as an independent
+ -- Community peer when they request their own coffee.
+ perform set_config('request.jwt.claim.sub',us[1]::text,true);
+ perform set_config('request.jwt.claims',
+   jsonb_build_object('sub',us[1],'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ result:=public.dic_community_recommendation_evidence(
+  (select id from public.library_entries where owner_id=us[1] and coffee_id=c1 limit 1),'Turbo');
+ execute 'reset role';
+ if exists(select 1 from jsonb_array_elements(result->'candidates') as c(value)
+    where c.value->>'tier'='exact' and (c.value->>'ratio')::numeric between 2.75 and 2.85) then
+  raise exception 'Own confirmed family incorrectly recycled as an independent Community recommendation';
+ end if;
 
  -- Revoke admission immediately suppresses both community reads and stats.
  perform set_config('request.jwt.claim.sub',us[1]::text,true);
