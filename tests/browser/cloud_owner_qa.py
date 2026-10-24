@@ -452,6 +452,23 @@ with sync_playwright() as p:
  assert len(page.evaluate("window.__raw.shots"))==4
  assert page.locator('.alternate-recipes').count()==0
  checks.append('Explicit Make Current preference overrides clarity heuristic and preserves both families and all shot records')
+ # Simulate a server reload with the same owner rows. The browser must restore
+ # the *explicit* choice instead of reverting to the clarity auto-selection.
+ page.evaluate("""() => {
+  window.__app.raw=structuredClone(window.__raw);
+  window.__app.state=window.__Modules.mapping.hydrate(window.__app.raw);
+  window.__app.render();
+ }""")
+ assert '1:2.03' in page.locator('.recipe-grid').first.inner_text()
+ assert page.locator('.recipe-grid').count()==1
+ assert page.evaluate("window.__raw.recipePreferences[0].favorite_shot_id")=='short-b'
+ assert len(page.evaluate("window.__app.state.shots"))==4
+ checks.append('Synthetic owner state reload preserves manually chosen family, one recipe and four history shots')
+ page.evaluate("window.__offline=true;window.__app.render()")
+ assert '1:2.03' in page.locator('.recipe-grid').first.inner_text()
+ assert page.locator('.recipe-grid').count()==1
+ page.evaluate("window.__offline=false")
+ checks.append('Existing loaded recipe remains visible through simulated offline network state')
 
  # Sixth style must be an actual user choice and survive a server-style save.
  page.locator('.style-row [data-action="style"]').first.click()
