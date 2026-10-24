@@ -542,3 +542,7 @@ Public run 40065587138 retained differences: NOMAD retains 42/42 source facts bu
 
 ### NOMAD public offers only remaining parity failure
 Run 40065751486 repaired Circulor: source facts and conflict flags now preserve under inert product JSON marker. NOMAD is the sole remaining live failure; 9 public purchase-variant offer objects differ after sanitized script JSON redaction. Keep failure and record only safe offer object key-level differences to isolate the exact source field before correcting capture; do not silence or waive parity. Production unchanged.
+
+
+### NOMAD strict public offer-source fix
+Run 40065854883 proved the precise public source-fact difference: all nine named purchase variants lost only Yoast Offer.checkoutPageURLTemplate from the sanitized script, not a customer credential. Implement a narrow static public HTTP(S)/relative template exception only under an @type Offer, bounded to 2048 characters with common sensitive query values still excluded. Preserve all other customer, session, cart and checkout token redaction. Eight positive/negative tests pass in the focused local run; rerun exact live parity and required CI before merger. SEY, Manhattan, Circulor and homepage controls already passed live. Frozen 603 unchanged, no production data or publication.

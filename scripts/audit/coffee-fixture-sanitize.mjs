@@ -5,7 +5,17 @@ import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs
 
 const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
 export function sanitizePublicJson(value){
- return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
+ return JSON.stringify(value,function(key,item){
+  // Yoast publishes a static, anonymous Offer checkout URL template as a
+  // literal purchase-variant property. Removing this public field changed
+  // NOMAD's original product source fact for every variant. It is not an
+  // authorization credential, active checkout request, or member data.
+  // Never relax redaction for any other checkout, session or secret key.
+  if(key==='checkoutPageURLTemplate'&&this?.['@type']==='Offer'&&
+     typeof item==='string'&&item.length<=2048&&/^(?:https?:\/\/|\/)/i.test(item)&&
+     !/[?&](?:token|session|password|secret|auth|customer|email)=/i.test(item))return item;
+  return sensitiveKey.test(key)?undefined:item;
+ })
   .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
 }
 export function fixtureCoffeeHtml(html){

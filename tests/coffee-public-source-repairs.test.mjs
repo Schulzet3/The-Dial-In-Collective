@@ -85,3 +85,17 @@ test('anonymous product JSON script data-product marker survives fixture sanitiz
  assert.ok(original.source_facts?.length>=5);
  assert.deepEqual(replay,original);
 });
+
+
+test('NOMAD public Yoast checkout URL template survives without leaking other checkout secrets',()=>{
+ const url='https://nomadcoffee.es/products/centroamericano-natural-anaerobico';
+ const product={"@context":"https://schema.org","@type":"Product","name":"Centroamericano Natural Anaeróbico","url":url,"hasVariant":[{"@type":"Product","name":"Centroamericano Natural Anaeróbico - 1kg / Café en Grano","offers":{"@type":"Offer","price":"100.00","priceCurrency":"EUR","checkoutPageURLTemplate":"https://nomadcoffee.es/cart/add?variant=123","checkoutAuthToken":"sensitive-checkout-token"}}]};
+ const html=page('Centroamericano Natural Anaeróbico','<script type="application/ld+json">'+JSON.stringify(product)+'</script>',url);
+ const original=parse(html,url),sanitized=fixtureCoffeeHtml(html),replay=parse(sanitized,url);
+ assert.match(JSON.stringify(original.source_facts),/checkoutPageURLTemplate/);
+ assert.match(sanitized,/checkoutPageURLTemplate/);
+ assert.doesNotMatch(sanitized,/sensitive-checkout-token/);
+ // The only intentionally removed key is a synthetic secret: it must not
+ // reappear in the public captured source, yet real purchase fields survive.
+ assert.match(JSON.stringify(replay.source_facts),/checkoutPageURLTemplate/);
+});
