@@ -1,3 +1,8 @@
+## October 24 UTC — scoped public cart template preservation
+Live source run 40065791423 pinpoints Nomad's nine structured purchase variants: the sole dropped property is `offers.checkoutPageURLTemplate`. It is published product JSON-LD, not account state. Preserve this exact field ONLY when it is a bounded HTTPS cart path on the same source roaster host, with no credentials, fragment or sensitive query parameters. Keep all other checkout/customer/secret/cookie/session stripping, strict complete extraction parity, and product discriminator. No runtime app change or new provider charge. [dic-completeness-probe]; retest and do not claim READY before full acceptance.
+
+---
+
 ## October 24 UTC — final public offer key identification
 40065720528 shows exactly one removed public offer property across nine variants, classified only as a sensitive-named key. Report its bounded identifier without its original value, alongside presence/type, to distinguish a customer secret from a public checkout availability URL before any sanitizer change. No raw content emitted and parity check not weakened. [dic-completeness-probe]
 

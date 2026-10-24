@@ -140,11 +140,26 @@ function fixtureDifference(original,replay){
   prior_digest:safeSummary(original).sha256,fixture_digest:safeSummary(replay).sha256};
 }
 
-function sanitizeJson(value){
- return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
-  .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
+function publicCheckoutTemplate(value,sourceUrl){
+ if(typeof value!=='string'||value.length>600||!sourceUrl)return false;
+ try{
+  const source=new URL(sourceUrl),url=new URL(value,source);
+  if(source.protocol!=='https:'||url.protocol!=='https:'||url.hostname!==source.hostname||
+   url.username||url.password||url.port||url.hash)return false;
+  // Only a roaster-local public shopping cart template, not a private
+  // customer checkout, bearer capability, email or session-bearing link.
+  if(!/^\\/cart\\//i.test(url.pathname)||/[?&](?:token|secret|session|customer|email|checkout|auth|key)=/i.test(url.search))
+   return false;
+  return true;
+ }catch{return false;}
 }
-function fixtureHtml(html){
+function sanitizeJson(value,sourceUrl){
+ return JSON.stringify(value,(key,item)=>{
+  if(key==='checkoutPageURLTemplate'&&publicCheckoutTemplate(item,sourceUrl))return item;
+  return sensitiveKey.test(key)?undefined:item;
+ }).replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
+}
+function fixtureHtml(html,sourceUrl){
  const compact=compactCoffeeProductHtml(html);
  if(!compact)return '';
  const chunks=[];let cursor=0;
@@ -158,7 +173,7 @@ function fixtureHtml(html){
    // it silently loses variant and conflicting source evidence.
    const productMarker=/product/i.test(JSON.stringify(coffeeHtmlAttributes(block.attributes)))?
     ' data-public-product-context="product"':'';
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body),sourceUrl)+'</script>');}
    catch{/* Invalid script data is not preserved as executable markup. */}
   }
   cursor=block.end;
@@ -190,7 +205,7 @@ function fixtureStageDiagnostics(html,sourceUrl,original){
    // it silently loses variant and conflicting source evidence.
    const productMarker=/product/i.test(JSON.stringify(coffeeHtmlAttributes(block.attributes)))?
     ' data-public-product-context="product"':'';
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+productMarker+'>'+sanitizeJson(JSON.parse(block.body),sourceUrl)+'</script>');}
    catch{}
   }
   cursor=block.end;
@@ -284,7 +299,7 @@ async function probe(target){
  const capture=async(kind,url,result)=>{
   const record={kind,url:publicUrl(result.source_url||url),ok:result.ok===true,reason:result.reason||null};
   if(result.ok&&typeof result.html==='string'){
-   const sanitized=fixtureHtml(result.html);
+   const sanitized=fixtureHtml(result.html,result.source_url||url);
    record.bytes=Buffer.byteLength(result.html);record.original_sha256=sha(result.html);
    record.fixture=target.id+'-'+captures.length+'.fixture.html';
    record.sanitized_sha256=sha(sanitized);record.sanitized_bytes=Buffer.byteLength(sanitized);
@@ -299,7 +314,7 @@ async function probe(target){
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
    try{
-    const sanitized=sanitizeJson(JSON.parse(result.json));
+    const sanitized=sanitizeJson(JSON.parse(result.json),result.source_url||url);
     record.fixture=target.id+'-'+captures.length+'.fixture.json';
     record.sanitized_sha256=sha(sanitized);
     await writeFile(path.join(output,record.fixture),sanitized,'utf8');
