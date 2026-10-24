@@ -17,7 +17,7 @@ begin
  on conflict(owner_id) do update set enabled=true,admitted_at=now();
  insert into public.coffee_submissions(owner_id,source_url,proposed_data)
  values(member_id,'https://sweetbloomcoffee.com/products/json-worker-fixture',
-  '{"name":"JSON Worker Fixture","roaster":"Sweet Bloom","release_label":"2026"}')
+  '{"name":"JSON Worker Fixture","roaster":"Sweet Bloom","release_label":"2026","producer":"Wuri Washing Station"}')
  returning id into pending_id;
  insert into public.library_entries(owner_id,submission_id) values(member_id,pending_id);
  insert into public.coffee_submissions(owner_id,source_url,proposed_data)
@@ -72,6 +72,7 @@ begin
  execute 'set local role service_role';
  r:=public.dic_source_check_target(pending_id);
  if r->>'submission_id' is distinct from pending_id::text then raise exception 'JSON service target failed';end if;
+  if r->>'producer' is distinct from 'Wuri Washing Station' then raise exception 'Verifier omitted producer';end if;
  r:=public.dic_source_claim(pending_id);
  if r->>'allowed' is distinct from 'true' then raise exception 'JSON service claim failed';end if;
  r:=public.dic_source_claim(pending_id);

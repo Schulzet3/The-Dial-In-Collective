@@ -158,15 +158,30 @@ export function extractOfficialEvidence(html,submitted) {
     return {ok:false,reason:'structured_product_url_mismatch'};
   }catch{return {ok:false,reason:'invalid_product_url'};}
  }
- let officialProcess='';
- if(Array.isArray(chosen.attributes)){
-  for(const row of chosen.attributes){
-   if(String(row?.name||'').toLowerCase()==='process') officialProcess=String(row?.value||'');
-  }
+ // Compare explicit Product facts only. Unpublished details are not invented.
+ const recorded={process:[],origin:[],producer:[]};
+ const names={process:'process',processing:'process',processingmethod:'process',
+  origin:'origin',countryoforigin:'origin',growingregion:'origin',coffeeorigin:'origin',
+  producer:'producer',farm:'producer',farmname:'producer',estate:'producer',washingstation:'producer'};
+ for(const row of Array.isArray(chosen.attributes)?chosen.attributes:[]){
+  const label=normalizeWords(row?.name||'').split(' ').join('');
+  const field=names[label],value=typeof row?.value==='string'?row.value.trim():'';
+  if(field&&value&&!recorded[field].some(v=>normalizeWords(v)===normalizeWords(value)))
+   recorded[field].push(value);
  }
- const expected=normalizeWords(submitted.process||''),actual=normalizeWords(officialProcess);
- const incompatibleProcess=Boolean(expected&&actual&&expected!==actual);
- if(incompatibleProcess)return {ok:false,reason:'process_conflict'};
+ for(const field of Object.keys(recorded))
+  if(recorded[field].length>1)return {ok:false,reason:'ambiguous_product_facts'};
+ const facts=Object.fromEntries(Object.entries(recorded).map(([key,values])=>[key,values[0]||'']));
+ const compatible=(entered,published)=>{
+  const a=normalizeWords(entered),b=normalizeWords(published);
+  if(!a||!b||a===b)return true;
+  // A country-only input may agree with region+country; two distinct
+  // named regions must not agree merely because their country matches.
+  return (' '+a+' ').includes(' '+b+' ')||(' '+b+' ').includes(' '+a+' ');
+ };
+ for(const field of ['process','origin','producer'])
+  if(!compatible(submitted[field],facts[field]))
+   return {ok:false,reason:field+'_conflict'};
  const release=String(submitted.release_label||'').trim();
  return {
   ok:true,
@@ -175,7 +190,9 @@ export function extractOfficialEvidence(html,submitted) {
   title_matches:true,
   release_label:release||null,
   contradictory_facts:false,
-  verified_fields:{name:chosen.name.slice(0,200),...(actual?{process:officialProcess.slice(0,100)}:{})},
+  verified_fields:{name:chosen.name.slice(0,200),
+   ...Object.fromEntries(Object.entries(facts).filter(([,value])=>value)
+    .map(([key,value])=>[key,value.slice(0,200)]))},
   evidence_excerpt:'Official product metadata: '+chosen.name.slice(0,160)
  };
 }
