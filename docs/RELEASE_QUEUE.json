@@ -40,10 +40,10 @@
     {
       "id": "DIC-Q-12-community-prior-hierarchy",
       "issue": 12,
-      "pr": 108,
+      "pr": 110,
       "title": "Contributor-balanced exact/related/similar Community starting priors for recipe recommendation (#10 dependency)",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "8b8cffd504b4a5ae885f2388ee7273972790dba2",
       "scope_paths": [
         "supabase/migrations/20261024041100_dic_community_recommendation_evidence.sql",
         "site/lib/community-evidence.js",
@@ -56,16 +56,27 @@
         "site/cloud/shot_card.js"
       ],
       "tests": [
-        "New local Node recommendation priority and source evidence tests, isolated PostgreSQL Community quality test, Cloud build/mobile/visual/offline/approval CI must pass; tests not yet executed.",
-        "Visual/Node initial source check failed on omitted module in build asset allowlist, repaired in commit 7073bc; approval intake then found newly tracked build_cloud.mjs omitted from queue scope; fixed now.",
-        "PR108 six source checks SUCCESS and merged source Node/SQL/approval/cloud/visual all success; follow-up provenance tests and exact CI pending."
+        "PR108 merged at 9135e06; merged-source CI 40061824798/40061824799/40061824794/40061824833/40061824800 SUCCESS.",
+        "PR110 merged 8b8cffd; exact-source approval/SQL/Node/mobile/visual CI SUCCESS 40062842516/40062842378/40062842377/40062842415/40062842398; PR110 53 signed PostgREST HTTP assertions passed.",
+        "Additional observed-ratio-group integrity regression added in this branch; exact-source CI pending."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40061824798,
+        40061824799,
+        40061824794,
+        40061824833,
+        40061824800,
+        40062842516,
+        40062842378,
+        40062842377,
+        40062842415,
+        40062842398
+      ],
       "blockers": [
-        "Recommendation provenance signed-HTTP, SQL, Node, browser/offline checks pending; PR109 merge/readback required."
+        "Original #12 distinct successful Community-family acceptance remains unproven: projection family_id is not populated and RPC only groups observed 0.25 ratio buckets, not authoritative cross-user family identities."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/10",
-      "notes": "Owner asked proactively close #5/#10 including approved #12 prerequisite. Source only; no production Netlify, Supabase SQL, Auth or member-data operations. Enforce identity, contributor-balanced per-ratio bucket medians, same-style precedence, no Community grinder calibration, optional lazy fetch, independent member identity. #5 existing READY item retained. Follow-up PR109 saves explicit 'Use Recommendation' attribution into already existing private shot recommendation_context via source-only trigger/wrapper, preserving all currently deployed mutation routes and controls. No server-verified Community claims from this user-supplied field."
+      "notes": "PR108 Community evidence and PR110 provenance are merged and verified. PR109 is extractor-only. Community ratio buckets are explicitly estimated, not proven distinct family identities. Preserve #12 TESTING while accepting useful tier weighting, privacy, contributor balancing and provenance as verified source; no production release. Issue #5 READY and Issue #33 extractor remain unchanged."
     },
     {
       "id": "DIC-Q-33-expanded-603-audit",

@@ -459,6 +459,9 @@ begin
     jsonb_array_length(result->'candidates')<1 or
     result->'candidates'->0->>'tier' is distinct from 'exact' then
   raise exception 'Exact verified community prior missing: %',result;end if;
+ if result->'candidates'->0->>'distinct_family_basis' is distinct from 'ratio_bucket_observed' or
+    result::text like '%"family_id"%' then
+  raise exception 'Observed ratio groups falsely represented as confirmed family identities';end if;
  if result::text like '%contributor_id%' or result::text like '%owner_id%' or
     result::text like '%grind_setting%' or result::text like '%notes%' then
   raise exception 'Private contributor metadata leaked';end if;
