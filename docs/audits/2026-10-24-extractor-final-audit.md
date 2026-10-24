@@ -1,3 +1,28 @@
+# Final extractor audit receipt — October 24, 2026 UTC
+
+**CURRENT: READY for a separately approved future release; not deployed.** The material below the divider is the preserved historical candidate11 reconstruction plan and contains dated TESTING/pending statements superseded by this receipt.
+
+## Exact merged-source acceptance
+
+- PR [#116](https://github.com/Schulzet3/The-Dial-In-Collective/pull/116) non-force merged into `development/backend-foundation` at `5da3eba1e6a567defca572c54ac677c81f4b535c`. GitHub compares `adc6ca5..5da3eba`: no changed files, only the merge commit. Subsequent development `30312b2` contains a script-only public-probe trigger and matching journal, not a runtime update.
+- Final PR head `adc6ca5`: eight applicable workflows PASS (1,412/1,418 Node with six explicit deployed-endpoint skips, zero failures; 1,044/1,044 cloud tests; Python 38 report/retention + 23 offline/OCR; lint/build; mobile/browser/visual/offline; SQL/approval/security). Source-specific public acceptance [40068783292](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40068783292) passed all ten fixed targets and required full saved-source fixture parity, including the original NOMAD and Circulor issues.
+- Exact merge SHA `5da3eba`: [40069032400](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069032400) approval, 40069032432 app, 40069032372 UX and 40069032464 Python: all SUCCESS. Exact current development `30312b2`: [40069154699](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069154699) PASS on fresh public HTTPS, ten targets/nine products/one negative/zero gaps, 19 public requests and **zero** real backend calls, member quota, production writes or deployments. Python 40069154718, app 40069154717, approval 40069154691: SUCCESS.
+
+## Actual frozen-corpus replay and retained limitations
+
+- Original [40066959055](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40066959055) is a real completed candidate11 run at source `2eb32b247e2c47bd1646a234717a23d5cd14b6fc`, runtime fingerprint `4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2`: all 603/603 original coffees, 201 U.S. roasters, 1,197 immutable captures, original oracle/scorer, 4,002 unchanged canonical assertions, 3,024 exact / 167 missing / 811 review-required. Supplementary 6,474: 5,458 fully retained, 337 partly, 679 unconfirmed; no old exact or fully retained fact loss. All 603 actual client snapshot/download exports and offline helper validations passed, with no external-operation attempts.
+- GitHub diff `2eb32b2..adc6ca5` modifies only audit fixture sanitizer, audit trigger script, synthetic regression test and journal. Both the original extraction implementation and fingerprint are unchanged and the merged tree is identical to `adc6ca5`. The earlier full-corpus pass therefore remains applicable to this exact runtime. No candidate10 historical local evidence is claimed as substitute.
+- Full replay attempt [40068786714](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40068786714) **did not execute cases**: single-use private archive transfer rejected a moved PR head during materialization. Its error and ephemeral key erasure remain recorded. It cannot be marked PASS and does not invalidate the completed unchanged-runtime replay.
+- Missing/review counts are not automatically accuracy percentages. Three malformed original sources, 50 unresolved source conflicts and 19 unexpected canonical fields remain disclosed. No universal-completeness, live private-member, signed-in physical-device, or newly deployed backend acceptance is claimed.
+
+## Known C9 work not included in this READY batch
+
+Read-only hash-bound forensics and original frozen captures exposed selected unresolved accuracy errors: Onyx `Mexico Finca Santa Cruz Gesha` uses `Cup of Excellence, Mexico` rather than the published `Chiapas, Mexico`; Alta `Kirima Batian` treats grade `AA` as geography; Alta `Nevado Gona` uses a nearby social-program place rather than `Sierra Nevada de Santa Marta, Colombia`; Maps `Scarlet Macaw` keeps only one of two named lot producers. The separate C9 geography/producer candidate blobs and regression test exist but were *not* integrated or verified against all current tests, and their improvements are **not called fixed**. They remain OPEN on Issue33 for separately tested development, not hidden in this completed 603-case source-preservation audit. Any later C9 runtime change requires a new exact-source/frozen impact assessment before its own READY classification.
+
+Queue item `DIC-Q-33-expanded-603-audit` refers only to the reviewed, implemented and tested source. No deployment, new API key or paid service, production database/Edge/Auth modification, or saved-member-data mutation occurred.
+
+---
+
 # Dial In Collective extractor audit — frozen603 continuation
 
 **Current state: TESTING. Candidate11 is prepared for fresh hosted verification; it is not a completed full-corpus result or a deployed release.**

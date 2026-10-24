@@ -102,8 +102,8 @@
       "issue": 33,
       "pr": 116,
       "title": "Expanded 603-coffee / 201-U.S.-roaster deterministic extractor and evidence audit",
-      "state": "TESTING",
-      "merged_source_sha": "1800187cf0980f30d555d71134bde3c0f8e059a7",
+      "state": "READY",
+      "merged_source_sha": "5da3eba1e6a567defca572c54ac677c81f4b535c",
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
         "site/cloud/client.js",
@@ -144,17 +144,36 @@
         "Fresh combined e6d8745/candidate8 local verification:1368 named Node pass,0fail,6opt-in skips;30Python audit+23helper pass; lint/build/320,390,1280 import browser pass. Initial merge-marker failure repaired by exact upstream test restore; runtime unchanged.",
         "After preserving concurrent9135e06 Community source:1372 named Node pass/0fail/6opt-in skips;53Python;lint/build;320/390/1280 import browser and9 actual packaged/offline checks pass. Manual browser dependency bundle omission repaired; prior failure retained. New exact-source Actions pending.",
         "Independent source-only runs 40065961167 and 40065995754 PASSED 10/10 with strict sanitizer extraction parity, including NOMAD/Circulor, source conflict withholding, and negative homepage. Exact current merged-source public acceptance and approval gate remain pending.",
-        "PR116 first head735db806 actual hosted run:1392Node pass/1fail/6explicit deployed-endpoint skips; cloud1025/1; Python38audit+23offline/OCR pass;11frozen-runner controls pass then private-input stop (no603replay). Newly reconciled source requires fresh tests; historical passes do not validate it."
+        "PR116 first head735db806 actual hosted run:1392Node pass/1fail/6explicit deployed-endpoint skips; cloud1025/1; Python38audit+23offline/OCR pass;11frozen-runner controls pass then private-input stop (no603replay). Newly reconciled source requires fresh tests; historical passes do not validate it.",
+        "Verified original frozen603 GitHub replay 40066959055 on candidate11 source 2eb32b2: 603/603 exact handler previews, unchanged 4002 canonical expectations (3024 exact/167 missing/811 review), 6474 supplementary checks, 603/603 real client snapshot/download exports and 603 offline validations, original 1197 captures/oracle/scorer unchanged, zero canonical exact or full-retention losses.",
+        "Exact post-fix PR116 head adc6ca5: all eight ordinary workflows PASS (Node 1412 pass/0 fail/6 deployed-endpoint skips, cloud 1044 pass, Python 38 report/retention plus 23 offline OCR, lint/build, mobile/browser/visual/private offline, security, isolated SQL/approval); public acceptance 40068783292 PASS 10 required targets and full source-fixture parity incl NOMAD/Circulor.",
+        "Non-force PR116 merge 5da3eba independently read back; GitHub compare showed identical file tree to reviewed head. Exact merged 5da3eba GitHub Actions 40069032400, 40069032432, 40069032372, 40069032464 all PASS. Additional exact-development 30312b2 acceptance 40069154699 PASS (10/10, nine products+homepage negative, zero source gaps/production writes), cloud 40069154717, Python 40069154718 and approval 40069154691 PASS. No-runtime-change script comment triggered live check.",
+        "GitHub frozen rerun 40068786714 did NOT execute 603 cases: the PR changed during single-use private archive materialization, so input identity check failed closed. Previous PASS 40066959055 is reused solely because exact extractor application/runtime code is unchanged, verified by compare; this interrupted run is not evidence of frozen accuracy. Unmerged C9 accuracy improvements remain explicitly UNVERIFIED and not included in this READY scope."
       ],
       "ci_runs": [
         40065961167,
-        40065995754
+        40065995754,
+        40066959055,
+        40068786736,
+        40068786752,
+        40068786728,
+        40068786729,
+        40068786717,
+        40068786747,
+        40068786716,
+        40068783292,
+        40069032400,
+        40069032432,
+        40069032372,
+        40069032464,
+        40069154699,
+        40069154717,
+        40069154718,
+        40069154691
       ],
-      "blockers": [
-        "Reconciled candidate11 requires complete original frozen603 replay, normal exact-source CI, non-force integration and fresh unchanged public-source acceptance. Initial Node regression and absent secure input run are recorded; no borrowed historical pass."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; current explicit owner GitHub write and Actions authorization.",
-      "notes": "Candidate8 full frozen audit complete; four prior omissions repaired. Owner explicitly permits GitHub use under the no-additional-cost requirement and resolves the previous rejected write. Normal CI/READY/release gates unchanged. Concurrent upstream e6d8745, separate Issue5 READY migration, acceptance decisions and exact historical release test preserved. Pending PR/merge/actualCI; no publication/provider/member-data change. Newer concurrent Community source9135e06 is reconciled; its independent TESTING queue item remains unchanged. Shared mutation flow retains both audit session/receipt protections and Community evidence reattachment.\nConcurrent Issue33 repair was integrated before PR118; PR118 closed without merge to preserve accepted source. Actual repaired source at 1800187c, no production site deployment approved.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Frozen 603/201 benchmark unchanged, maintain TESTING until exact merged-source acceptance and approval/queue checks PASS. Candidate11 PR116 reconstructs further guarded source/scoping/sanitizer/report repairs after environment loss. Concurrent PR115 implementation, PR119 intake and the latest deferred-release handoff are preserved. Existing ci_runs describe prior source, not a new C11 pass. This task has no production release authority."
+      "notes": "Candidate8 full frozen audit complete; four prior omissions repaired. Owner explicitly permits GitHub use under the no-additional-cost requirement and resolves the previous rejected write. Normal CI/READY/release gates unchanged. Concurrent upstream e6d8745, separate Issue5 READY migration, acceptance decisions and exact historical release test preserved. Pending PR/merge/actualCI; no publication/provider/member-data change. Newer concurrent Community source9135e06 is reconciled; its independent TESTING queue item remains unchanged. Shared mutation flow retains both audit session/receipt protections and Community evidence reattachment.\nConcurrent Issue33 repair was integrated before PR118; PR118 closed without merge to preserve accepted source. Actual repaired source at 1800187c, no production site deployment approved.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Frozen 603/201 benchmark unchanged, maintain TESTING until exact merged-source acceptance and approval/queue checks PASS. Candidate11 PR116 reconstructs further guarded source/scoping/sanitizer/report repairs after environment loss. Concurrent PR115 implementation, PR119 intake and the latest deferred-release handoff are preserved. Existing ci_runs describe prior source, not a new C11 pass. This task has no production release authority.\n[2026-10-24 READY reconciliation] PR116 non-force merged at 5da3eba; exact merged checks pass, and exact current development 30312b2 passes fresh ten-target live acceptance. This READY item covers only implemented/tested extractor audit and source fixture fixes. The original frozen 603/201 benchmark and review-required accuracy limits remain disclosed. C9 Onyx award-as-origin, Alta AA/nearby-region, Maps dual-producer and other residual accuracy gaps remain UNMERGED/UNVERIFIED and open for separately source-bound testing within Issue33; they are not waived or promoted as fixed. The interrupted secure-input rerun 40068786714 is explicitly NOT a passing corpus replay. Existing Issue5/10/12 states and previously applied production SQL are unchanged. No Netlify publication, new paid service, new API key or member-data mutation."
     },
     {
       "id": "DIC-Q-5-deployed-sql-source-carryover",
