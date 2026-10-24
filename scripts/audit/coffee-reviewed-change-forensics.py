@@ -28,7 +28,7 @@ import zipfile
 
 REPO = "Schulzet3/The-Dial-In-Collective"
 REPO_ID = 1355472654
-BRANCH = "work/issue33-candidate11-recovery-20261024"
+BRANCH = "work/issue33-candidate12-full-audit-20261024"
 WORKFLOW = ".github/workflows/coffee-frozen-corpus.yml"
 FREEZE = "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb"
 ATTESTATION = "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556"
