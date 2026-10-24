@@ -1,0 +1,943 @@
+{
+  "schema_version": 1,
+  "type": "actual_merged_source_ci_receipt",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "candidate": 12,
+  "pull_request": 121,
+  "status": "PASS",
+  "source_integration_state": "READY",
+  "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+  "source_tree": "9a00b4fa54f87f66a649a17db516bc049f326821",
+  "parents": [
+    "a42bc757a3aedf02fcb213a4d8a7da807a68fa8c",
+    "3dc7fe4daab46b888368cdd8de4d59886fe5fb4f"
+  ],
+  "runtime_fingerprint": "ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451",
+  "merged_source_identity": {
+    "previous_development_parent": "a42bc757a3aedf02fcb213a4d8a7da807a68fa8c",
+    "reviewed_pr_parent": "3dc7fe4daab46b888368cdd8de4d59886fe5fb4f",
+    "complete_tree_identical_to_reviewed_pr_parent": true,
+    "reviewed_pr_tree": "9a00b4fa54f87f66a649a17db516bc049f326821",
+    "merge_commit_message": "Merge PR #121: verified frozen603 extractor repairs [dic-completeness-probe] [skip netlify]\n\nIntegrate the independently reviewed Candidate12 extractor and exact original603 benchmark acceptance. Preserve development a42bc757, original expected answers/captures/scorers, all unrelated queue and Locked decisions, member/save/offline behavior and concurrent publication instructions. Reviewed run40074270907 passed with zero prior exact or full-retention losses and all603 client export/offline validations. Run applicable merged-source checks and fresh public-source acceptance before final source-READY reconciliation. This merge does not publish or deploy.",
+    "comparison_basis": "Read-back Git commit parents and tree object IDs; complete-tree equality, not a runtime-only assumption."
+  },
+  "provenance": "All fresh merged-source counts and conclusions below come from completed GitHub runs and their entire raw job logs. Exact-tree PR-only/path-filtered checks are explicitly reused rather than represented as newly executed at the merge.",
+  "full_node_and_app_build": {
+    "run_id": 40074669136,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/cloud-beta-ci.yml",
+    "event": "push",
+    "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120815370442,
+    "job_name": "validate",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "started_at": "2026-10-24T07:34:28Z",
+    "completed_at": "2026-10-24T07:35:52Z",
+    "log": {
+      "bytes": 677822,
+      "sha256": "be0c31f19d07ad85ca6920f4bf4299ef2a50bec4b0032714bbfa2b2750c7cb7d",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074669136/job/120815370442"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify Netlify ignore guard on its pre-install Node 18 runtime",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install exact locked dependency tree",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run all checked-in Node tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Lint browser, server, Edge and audit JavaScript",
+        "conclusion": "success"
+      },
+      {
+        "name": "Build static beta assets with nonfunctional public test coordinates",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail if any development-only or private source leaks into dist",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain source validation timing receipts even on failure",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "tests": 1575,
+    "passed": 1569,
+    "failed": 0,
+    "skipped": 6,
+    "cancelled": 0,
+    "duration_ms": 47443.008177,
+    "skipped_test_names": [
+      "published application serves its sign-in shell",
+      "published admin route serves its shell without granting private data",
+      "dic-verify-coffee rejects requests without an authenticated JWT",
+      "dic-verify-coffee rejects forged JWT without touching member data",
+      "dic-preview-coffee rejects requests without an authenticated JWT",
+      "dic-preview-coffee rejects forged JWT without touching member data"
+    ],
+    "preinstall_node18_guard": {
+      "passed": 12,
+      "failed": 0
+    },
+    "lint": "PASS",
+    "build": "PASS",
+    "private_source_dist_guard": "PASS"
+  },
+  "cloud_unit_and_build": {
+    "run_id": 40074669168,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/cloud-regression.yml",
+    "event": "push",
+    "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120815370361,
+    "job_name": "cloud-tests",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "started_at": "2026-10-24T07:34:29Z",
+    "completed_at": "2026-10-24T07:35:20Z",
+    "log": {
+      "bytes": 523327,
+      "sha256": "6e1784e876807479d49d52c220b03107c42069e9c877deec0cf60f469bac35a9",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074669168/job/120815370361"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/setup-node@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install locked runtime dependencies",
+        "conclusion": "success"
+      },
+      {
+        "name": "Cloud unit and regression tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Syntax check",
+        "conclusion": "success"
+      },
+      {
+        "name": "Build allowlisted cloud preview",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain cloud regression timing receipts even on failure",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "tests": 1201,
+    "passed": 1201,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "duration_ms": 36769.858567,
+    "syntax": "PASS",
+    "build": "PASS"
+  },
+  "python_audit": {
+    "run_id": 40074669171,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/coffee-audit-python.yml",
+    "event": "push",
+    "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120815370539,
+    "job_name": "python-audit",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "started_at": "2026-10-24T07:34:28Z",
+    "completed_at": "2026-10-24T07:34:52Z",
+    "log": {
+      "bytes": 49358,
+      "sha256": "c5cb49d9f03593e864c4d37e996aaff77af45dbe46c1723d9c767dbace8a0150",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074669171/job/120815370539"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install existing free local-review test prerequisites",
+        "conclusion": "success"
+      },
+      {
+        "name": "Record test prerequisite versions",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify frozen-audit report and retention integrity",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify offline source review including real local OCR",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "audit": {
+      "tests": 44,
+      "passed": 44,
+      "failed": 0,
+      "seconds": 6.509
+    },
+    "offline_source_review": {
+      "tests": 23,
+      "passed": 23,
+      "failed": 0,
+      "seconds": 1.649
+    },
+    "skipped": 0,
+    "versions": {
+      "python": "3.12.3",
+      "pillow": "10.2.0",
+      "tesseract": "5.3.4"
+    },
+    "real_local_ocr_controls": "PASS"
+  },
+  "mobile_browser": {
+    "run_id": 40074669168,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/cloud-regression.yml",
+    "event": "push",
+    "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120815370146,
+    "job_name": "mobile-browser-qa",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "started_at": "2026-10-24T07:34:28Z",
+    "completed_at": "2026-10-24T07:35:59Z",
+    "log": {
+      "bytes": 65745,
+      "sha256": "0475390e30d0ba3327c6d2dc68d6a056f478daffbdbcb7570eeeb5dd64d6769d",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074669168/job/120815370146"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install Playwright and Chromium",
+        "conclusion": "success"
+      },
+      {
+        "name": "Exercise 390px phone UX with synthetic accounts",
+        "conclusion": "success"
+      },
+      {
+        "name": "Exercise owner-only admin invitations and member access in 390px Chromium",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain synthetic phone screenshots for review",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "synthetic_mobile_checks_passed": 61,
+    "admin_invitation_and_access_flows": "PASS",
+    "production_accounts_used": false,
+    "scope_limit": "Injected browser harness with mocked backend/auth and in-memory storage; not live login/email or native IndexedDB. Private service-worker and packaged-app checks are separately supported by the identical-tree PR visual job."
+  },
+  "approval_and_continuity": {
+    "run_id": 40074669164,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/approval-continuity.yml",
+    "event": "push",
+    "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120815370478,
+    "job_name": "approval",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "started_at": "2026-10-24T07:34:29Z",
+    "completed_at": "2026-10-24T07:34:38Z",
+    "log": {
+      "bytes": 31635,
+      "sha256": "0da9396cc6998ee03c05763078a14645272074d7740aa404c1f36ec5a22ce75f",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074669164/job/120815370478"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail on missing owner decisions or approved UI/source tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Validate durable queue schema and show next-batch status (never publishes)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Audit EVERY pushed commit, including docs-only and earlier commits in batch",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "approval_coverage": "PASS",
+    "queue_schema": "PASS",
+    "queue_intake": "PASS",
+    "tracked_deployable_paths": 39,
+    "same_commit_continuity": {
+      "status": "PASS",
+      "commit_count": 10,
+      "checked_paths": 186
+    }
+  },
+  "fresh_live_acceptance": {
+    "run_id": 40074669139,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/coffee-completeness.yml",
+    "event": "push",
+    "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120815370150,
+    "job_name": "public-source-acceptance",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "started_at": "2026-10-24T07:34:29Z",
+    "completed_at": "2026-10-24T07:34:56Z",
+    "log": {
+      "bytes": 23431,
+      "sha256": "3066c76d3cf09343085685d571b5dc070f11aeca8977139175707b751c68e482",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074669139/job/120815370150"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Exercise bounded public extraction without production credentials",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain public source evidence and sanitized fixtures",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "runtime_fingerprint": "ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451",
+    "targets": 10,
+    "parsed": 9,
+    "required_targets": 10,
+    "required_failures": [],
+    "observed_gaps": 0,
+    "sources_with_gaps": [],
+    "public_requests": 19,
+    "real_backend_requests": 0,
+    "member_quota_consumed": 0,
+    "production_writes": 0,
+    "deployments": 0,
+    "required_homepage_negative_passed": 1,
+    "targets_summary": [
+      {
+        "id": "sweet-bloom-arbey",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 2849
+      },
+      {
+        "id": "sweet-bloom-arbey-canonical",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 2865
+      },
+      {
+        "id": "sey-ruarai",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 2783
+      },
+      {
+        "id": "black-white-lica",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 2756
+      },
+      {
+        "id": "tim-wendelboe-echemo",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 4013
+      },
+      {
+        "id": "onyx-geometry",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 3885
+      },
+      {
+        "id": "manhattan-samuel",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 5304
+      },
+      {
+        "id": "nomad-centroamericano",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 1340
+      },
+      {
+        "id": "circulor-source-conflict",
+        "status": "parsed",
+        "required": true,
+        "conflicts": [
+          "producer",
+          "tasting_notes",
+          "variety"
+        ],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 1878
+      },
+      {
+        "id": "queen-city-homepage-negative",
+        "status": "ambiguous_or_missing_product",
+        "required": true,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 1,
+        "elapsed_ms": 1258
+      }
+    ],
+    "artifact": {
+      "id": 12552508337,
+      "name": "dic-coffee-completeness-40074669139",
+      "bytes": 343826,
+      "sha256": "b9f7a78e4bc62b52355a71db0b7f31d1ce01e89d7e41be6857bc19d7d293898e",
+      "expires_at": "2027-01-22T07:34:26Z"
+    }
+  },
+  "retained_identical_tree_pr_evidence": {
+    "source_security_inventory": {
+      "run_id": 40074270930,
+      "run_attempt": 1,
+      "workflow_path": ".github/workflows/security-inspection.yml",
+      "event": "pull_request",
+      "source_commit": "3dc7fe4daab46b888368cdd8de4d59886fe5fb4f",
+      "workflow_status": "completed",
+      "workflow_conclusion": "success",
+      "job_id": 120814182220,
+      "job_name": "security-inventory",
+      "job_status": "completed",
+      "job_conclusion": "success",
+      "log": {
+        "bytes": 19327,
+        "sha256": "3a33d2a8cc708089a893233ae388537ada1af7bb3ca361e9eaecc420a7903446"
+      },
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@v7.1.0",
+          "conclusion": "success"
+        },
+        {
+          "name": "Inventory every tracked file and screen text without printing secrets",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check the exact production dependency lock against current advisories",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v7.1.0",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "configured_workflow": "PASS",
+      "scope_limit": "A passing configured inventory/advisory workflow is not proof that all security defects are absent.",
+      "reused_for_merged_source": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+      "reviewed_tree_identical_to_merged_tree": true,
+      "new_merged_run_claimed": false,
+      "reason": "No new run emitted for this merge by the original workflow event/path filters. The successful PR run tested the exact same complete Git tree 9a00b4fa54f87f66a649a17db516bc049f326821; no source, test, workflow, dependency or SQL bytes changed at merge."
+    },
+    "isolated_sql": {
+      "run_id": 40074270904,
+      "run_attempt": 1,
+      "workflow_path": ".github/workflows/isolated-sql-regression.yml",
+      "event": "pull_request",
+      "source_commit": "3dc7fe4daab46b888368cdd8de4d59886fe5fb4f",
+      "workflow_status": "completed",
+      "workflow_conclusion": "success",
+      "job_id": 120814182191,
+      "job_name": "sql",
+      "job_status": "completed",
+      "job_conclusion": "success",
+      "log": {
+        "bytes": 108134,
+        "sha256": "e7a6ac16da6281db718bf814d8fa3627cd1570caaf6328dccf6725f89ca3075a"
+      },
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Classify documentation-only change (unknown means full CI)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Explain optimized no-op CI",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Verify all production-applied migration filenames and exact SQL byte hashes",
+          "conclusion": "success"
+        },
+        {
+          "name": "Apply and exercise schema in network-isolated PostgreSQL 17.11",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify actual signed bearer JWT authorization, held-shot ownership and correction against disposable PostgREST",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify recovery snapshot consistency under concurrent writes and fail-closed errors",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "genuine_signed_postgrest_assertions_passed": 53,
+      "network_isolated_postgresql": "17.11",
+      "production_go_true_or_sessions_tested": false,
+      "production_sql_or_member_writes_performed": false,
+      "concurrent_snapshot_and_failure_boundaries": "PASS",
+      "reused_for_merged_source": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+      "reviewed_tree_identical_to_merged_tree": true,
+      "new_merged_run_claimed": false,
+      "reason": "No new run emitted for this merge by the original workflow event/path filters. The successful PR run tested the exact same complete Git tree 9a00b4fa54f87f66a649a17db516bc049f326821; no source, test, workflow, dependency or SQL bytes changed at merge."
+    },
+    "private_visual_review": {
+      "run_id": 40074270911,
+      "run_attempt": 1,
+      "workflow_path": ".github/workflows/visual-review.yml",
+      "event": "pull_request",
+      "source_commit": "3dc7fe4daab46b888368cdd8de4d59886fe5fb4f",
+      "workflow_status": "completed",
+      "workflow_conclusion": "success",
+      "job_id": 120814182255,
+      "job_name": "review",
+      "job_status": "completed",
+      "job_conclusion": "success",
+      "log": {
+        "bytes": 95190,
+        "sha256": "e309711dbccf5c5ef328781ae2af0a89106ae0ca7e85903d899482db12ef6d3a"
+      },
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Classify documentation-only change (unknown means full CI)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Explain optimized no-op CI",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run check:fast",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run build:cloud",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify every shipped file and transitive module import",
+          "conclusion": "success"
+        },
+        {
+          "name": "Prepare isolated browser only",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python tests/browser/cloud_owner_qa.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify real service-worker cached cold reopen in isolated Chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Synthetic owner-only invitation portal mobile acceptance",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python tests/browser/visual_review.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Exercise packaged production app in a real browser (no credentials)",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@v6",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ],
+      "source_guard_tests_passed": 42,
+      "synthetic_browser_checks_passed": 61,
+      "visual_checks_passed": 167,
+      "screenshots": 38,
+      "real_service_worker_cached_cold_reopen": "PASS",
+      "private_owner_cache_queue_session_and_cross_owner_isolation": "PASS",
+      "packaged_member_and_admin_entry_modules_and_assets": "PASS",
+      "reused_for_merged_source": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+      "reviewed_tree_identical_to_merged_tree": true,
+      "new_merged_run_claimed": false,
+      "reason": "No new run emitted for this merge by the original workflow event/path filters. The successful PR run tested the exact same complete Git tree 9a00b4fa54f87f66a649a17db516bc049f326821; no source, test, workflow, dependency or SQL bytes changed at merge."
+    }
+  },
+  "frozen_benchmark": {
+    "run_id": 40074270907,
+    "run_attempt": 1,
+    "job_id": 120814182586,
+    "source_commit": "3dc7fe4daab46b888368cdd8de4d59886fe5fb4f",
+    "source_tree": "9a00b4fa54f87f66a649a17db516bc049f326821",
+    "runtime_fingerprint": "ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451",
+    "status": "PASS_WITH_REVIEWED_CHANGES",
+    "conclusion": "SUCCESS",
+    "complete_merged_tree_identical": true,
+    "repeated_at_merge": false,
+    "reason_no_repeat": "The merged Git tree is exactly the tested reviewed PR tree; runtime, harness, scorers, exports, review manifest and all tests are byte-identical.",
+    "receipt": {
+      "path": "docs/audits/extractor-candidate12-frozen-reviewed-run-40074270907.json",
+      "git_blob": "8d9fe7c3e91feb84ad46bb87ef730e6c2247386f",
+      "bytes": 70613,
+      "sha256": "4e711444425fe4092151c946e2735acb4227c4c5ba4d9f0feba8ca3d289aaba1"
+    },
+    "canonical": {
+      "cases": 603,
+      "ok_response": 603,
+      "canonical_assertions": 4002,
+      "exact_equivalent": 3046,
+      "missing": 132,
+      "review_required": 824,
+      "conflict_assertions": 115,
+      "conflict_withheld": 65,
+      "conflict_unresolved": 50,
+      "additional_facts": 6474,
+      "additional_literal_present": 1526,
+      "additional_unconfirmed": 4948,
+      "unexpected_fields": 19
+    },
+    "supplementary_retention": {
+      "all_evidence_retained": 5458,
+      "cases": 603,
+      "additional_assertions": 6474,
+      "truncated_previews": 3,
+      "unconfirmed": 679,
+      "some_evidence_retained": 337
+    },
+    "changed_complete_cases": 42,
+    "source_supported_cases": 41,
+    "nonsemantic_order_only_cases": 1,
+    "current_snapshot_download_fidelity_passed": 603,
+    "offline_checks_passed": 603,
+    "unchanged_exports_from_c8": 562,
+    "reviewed_exports_changed_from_c8": 41,
+    "canonical_exact_losses": 0,
+    "supplementary_full_retention_losses": 0,
+    "original_source_quotes_passed": {
+      "literal_capture": 35,
+      "frozen_oracle": 20
+    },
+    "artifact": {
+      "id": 12552820841,
+      "bytes": 15203294,
+      "sha256": "a5ae41c233761cef75d489ea0b2b66623ff56c822269e98ea02202394cb22ca8",
+      "expires_at": "2027-01-22T07:28:30Z"
+    }
+  },
+  "explicitly_skipped_workflows": [
+    {
+      "run_id": 40074669165,
+      "workflow_path": ".github/workflows/roaster-source-probe.yml",
+      "conclusion": "SKIPPED",
+      "source_commit": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+      "jobs": [
+        {
+          "id": 120815371461,
+          "name": "unprivileged-public-pages",
+          "conclusion": "skipped"
+        },
+        {
+          "id": 120815392749,
+          "name": "isolated-size-study",
+          "conclusion": "skipped"
+        }
+      ],
+      "reason": "The merge message requests the distinct dic-completeness-probe. It contains none of the separate dic-live-probe, dic-platform-probe or dic-size-study opt-in markers; the original broader probe workflow job conditions therefore skip both jobs."
+    }
+  ],
+  "original_expectations_modified": false,
+  "production_sql_or_member_writes_performed": false,
+  "publication_or_deployment_performed": false,
+  "new_paid_services_or_api_keys": false,
+  "limitations": [
+    "READY here describes completed source integration and applicable validation. It is not a deployment receipt, publication authorization, or evidence that production has changed.",
+    "The six named production-configuration Node tests remain skipped and are not counted as passed.",
+    "Cloud tests overlap the full Node suite; counts must not be added as unique test coverage.",
+    "The distinct controlled-roaster probe is skipped. The fresh required ten-target coffee source acceptance actually ran and passed.",
+    "Source security, isolated SQL and private visual evidence is from the successful PR run on the exact identical complete tree, not from a new merged-source job.",
+    "Production Auth sessions, email, member accounts and production SQL were not exercised; isolated signed PostgREST checks and browser identities were synthetic.",
+    "The frozen benchmark retains 132 missing and 824 review-required canonical assertions, 337 partial and 679 unconfirmed supplementary assertions, 115 conflicts and three truncation flags. Passing validation does not establish 100 percent extraction.",
+    "No frozen expected answer, raw capture, scorer, existing product decision, member record or offline behavior was changed for acceptance."
+  ]
+}

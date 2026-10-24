@@ -1,122 +1,183 @@
-# Dial In Collective extractor audit — current Candidate12 verification in progress
+# Dial In Collective extractor audit — verified development source
 
-## October 24 UTC — final residual repairs; new full verification pending
+**Completed 24 October 2026 UTC. Candidate12 is READY in development and has not been deployed.**
 
-PR121 remains **TESTING**. The combined32-file extractor fingerprint is `ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451`. This revision adds four literal current producer relationships and seven sensory-role repairs, with guards for competing countries, historical and other-product sections, body/acidity, preparation context and processing explanations. The final combined source passed independent review and137 restricted-V8 fixture functions, including54 new controls. Those diagnostics are not Node, browser or full-corpus acceptance.
+PR [#121](https://github.com/Schulzet3/The-Dial-In-Collective/pull/121) was merged non-force at `010f77a83ca1efbf447db6b838ef0f826aaf2f1a`. The actual merge tree is exactly the reviewed head's tree, `9a00b4fa54f87f66a649a17db516bc049f326821`, with preserved development `a42bc757a3aedf02fcb213a4d8a7da807a68fa8c` and reviewed head `3dc7fe4daab46b888368cdd8de4d59886fe5fb4f` as its parents. The final runtime fingerprint across 32 files is `ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451`.
 
-The latest completed full run [40071855281](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40071855281), sourceccc03c70/runtime37253, produced603 usable previews: **3044 exact /143 missing /815 review** of4002 unchanged canonical assertions;5458 full/337 partial/679 unconfirmed supplementary assertions. It had zero previous exact/full-retention losses,603 current snapshot/download checks and603 offline validations. Its32 changed complete outputs and31 changed export byte sets were retained as a strict **FAIL pending review**. Actual ordinary CI passed1515 Node tests with6 explicit published-endpoint/shell skips,1147 cloud tests,44+23 Python/OCR, lint/build/mobile/visual/security/isolated SQL/approval. The32-case source review and raw receipts are retained separately; they do not validate newac529 runtime bytes.
+The [complete reviewed benchmark40074270907](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074270907) passed the original 603 coffees, 201 roasters and 1197 captures. Applicable merged-source checks and fresh public-page acceptance also passed; their exact sources, job logs, counts and limitations are in [extractor-candidate12-merged-ci-010f77a8.json](extractor-candidate12-merged-ci-010f77a8.json). The final documentation commit changes no extractor, scorer, expectation, capture, client/export/offline source, workflow or test.
 
-Concurrent ef01a082 and its exact37253 review manifest are preserved and archived. Both review pins are empty for this new source. A fresh complete strict603 run, independent review of every actual change and a source-bound reviewed rerun are required before integration. The22 release-label questions have a separate closure receipt: no expected answer or release policy was changed, and three rows with no source context remain explicitly uncertain.
+This report supersedes earlier in-progress Candidate12 summaries. The complete historical Candidate11 audit and its original READY queue are preserved verbatim in [the archived audit](candidate11-concurrent-integration-audit.md) and [queue snapshot](candidate11-concurrent-ready-queue-snapshot.json). Dated failures, source-review decisions and interrupted runs remain in the [Issue 33 journal](../workstreams/issue-33.md); they have not been rewritten as passes.
 
-Only this extractor queue item remains TESTING. All other queue records, Locked decisions, source captures, expected results, member/saved/offline behavior and concurrent release instructions remain intact. This task does not publish, deploy, execute production SQL/Edge/Auth, or change member data. No new keys or paid services are used.
+## Plain-English findings
 
----
+The main remaining problems were how the extractor assigned meaning to text that it already retained: identifying the current farm or cooperative, distinguishing a location from an award or coffee grade, and keeping a complete tasting description without importing a different product, preparation or historical story. The repairs use generic source relationships and boundaries, not a lookup table of the benchmark's answers.
 
-# Final extractor audit receipt — October 24, 2026 UTC
+The finished version recovers useful facts and corrects specific wrong assignments. It also leaves uncertainty visible. A page saying only “Co-op” does not justify inventing its name; a flavor that appears only after adding milk is not an unconditional cup note; a marketing series is not automatically a distinct release. These distinctions preserve the product's existing review and explicit-save decisions.
 
-**CURRENT: READY for a separately approved future release; not deployed.** The material below the divider is the preserved historical candidate11 reconstruction plan and contains dated TESTING/pending statements superseded by this receipt.
+The earlier GitHub write/execution blocker is resolved under the owner's explicit authorization. The original archives were restored through an authenticated, one-use encrypted handoff to an actual GitHub runner. All source reviews, the full original benchmark, integration and applicable final checks are completed. No new API key or paid service was introduced. No production deployment, SQL/Edge/Auth operation or member-data write was performed.
 
-## Exact merged-source acceptance
+## Measured results on the unchanged corpus
 
-- PR [#116](https://github.com/Schulzet3/The-Dial-In-Collective/pull/116) non-force merged into `development/backend-foundation` at `5da3eba1e6a567defca572c54ac677c81f4b535c`. GitHub compares `adc6ca5..5da3eba`: no changed files, only the merge commit. Subsequent development `30312b2` contains a script-only public-probe trigger and matching journal, not a runtime update.
-- Final PR head `adc6ca5`: eight applicable workflows PASS (1,412/1,418 Node with six explicit deployed-endpoint skips, zero failures; 1,044/1,044 cloud tests; Python 38 report/retention + 23 offline/OCR; lint/build; mobile/browser/visual/offline; SQL/approval/security). Source-specific public acceptance [40068783292](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40068783292) passed all ten fixed targets and required full saved-source fixture parity, including the original NOMAD and Circulor issues.
-- Exact merge SHA `5da3eba`: [40069032400](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069032400) approval, 40069032432 app, 40069032372 UX and 40069032464 Python: all SUCCESS. Exact current development `30312b2`: [40069154699](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069154699) PASS on fresh public HTTPS, ten targets/nine products/one negative/zero gaps, 19 public requests and **zero** real backend calls, member quota, production writes or deployments. Python 40069154718, app 40069154717, approval 40069154691: SUCCESS.
+“Exact” means normalized agreement with the original frozen expected value. It is not an overall accuracy percentage. “Review required” includes faithful wording that differs from the expected string, richer supported detail, unresolved source roles and actual uncertainty. The expected answers and scorers were not adjusted to improve the score.
 
-## Actual frozen-corpus replay and retained limitations
-
-- Original [40066959055](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40066959055) is a real completed candidate11 run at source `2eb32b247e2c47bd1646a234717a23d5cd14b6fc`, runtime fingerprint `4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2`: all 603/603 original coffees, 201 U.S. roasters, 1,197 immutable captures, original oracle/scorer, 4,002 unchanged canonical assertions, 3,024 exact / 167 missing / 811 review-required. Supplementary 6,474: 5,458 fully retained, 337 partly, 679 unconfirmed; no old exact or fully retained fact loss. All 603 actual client snapshot/download exports and offline helper validations passed, with no external-operation attempts.
-- GitHub diff `2eb32b2..adc6ca5` modifies only audit fixture sanitizer, audit trigger script, synthetic regression test and journal. Both the original extraction implementation and fingerprint are unchanged and the merged tree is identical to `adc6ca5`. The earlier full-corpus pass therefore remains applicable to this exact runtime. No candidate10 historical local evidence is claimed as substitute.
-- Full replay attempt [40068786714](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40068786714) **did not execute cases**: single-use private archive transfer rejected a moved PR head during materialization. Its error and ephemeral key erasure remain recorded. It cannot be marked PASS and does not invalidate the completed unchanged-runtime replay.
-- Missing/review counts are not automatically accuracy percentages. Three malformed original sources, 50 unresolved source conflicts and 19 unexpected canonical fields remain disclosed. No universal-completeness, live private-member, signed-in physical-device, or newly deployed backend acceptance is claimed.
-
-## Known C9 work not included in this READY batch
-
-Read-only hash-bound forensics and original frozen captures exposed selected unresolved accuracy errors: Onyx `Mexico Finca Santa Cruz Gesha` uses `Cup of Excellence, Mexico` rather than the published `Chiapas, Mexico`; Alta `Kirima Batian` treats grade `AA` as geography; Alta `Nevado Gona` uses a nearby social-program place rather than `Sierra Nevada de Santa Marta, Colombia`; Maps `Scarlet Macaw` keeps only one of two named lot producers. The separate C9 geography/producer candidate blobs and regression test exist but were *not* integrated or verified against all current tests, and their improvements are **not called fixed**. They remain OPEN on Issue33 for separately tested development, not hidden in this completed 603-case source-preservation audit. Any later C9 runtime change requires a new exact-source/frozen impact assessment before its own READY classification.
-
-Queue item `DIC-Q-33-expanded-603-audit` refers only to the reviewed, implemented and tested source. No deployment, new API key or paid service, production database/Edge/Auth modification, or saved-member-data mutation occurred.
-
----
-
-# Dial In Collective extractor audit — frozen603 continuation
-
-**Current state: TESTING. Candidate11 is prepared for fresh hosted verification; it is not a completed full-corpus result or a deployed release.**
-
-This audit keeps the original603 coffees from201 U.S. roasters, three coffees per roaster. The original1197 captures,4002 canonical assertions,6474 supplementary assertions, frozen expected answers and scoring rules are unchanged. GitHub writes and ordinary Actions are owner-authorized. No new API key or paid service is required. This extractor task does not publish the app, operate production SQL/Edge/Auth or change saved member records.
-
-## Evidence and recovery
-
-- PR109 merged candidate8 at `34a1755ab908ad845f4393b7677f1b0ca0985962`. Ordinary checks passed, but actual public-source acceptance40062287845 failed four checks. That failure was not replaced by a passing ordinary CI label.
-- Candidate10's full603 replay and local checks completed before the execution environment disconnected. Its original unpublished runtime and raw local files could not be recovered. The [historical local summary](extractor-candidate10-recorded-local-summary.json) records that evidence and limitation. Different candidate11 bytes require fresh checks.
-- PR116's first source `735db80606e5bf3a2458c84df1817f1d71a86646` actually ran in GitHub. Full Node:1399 total,1392 pass,1 fail,6 explicit deployed-endpoint skips. Cloud subset:1026 total,1025 pass,same1 failure. Lint/build stopped after the Node failure. Python:38 report/retention plus23 offline/OCR tests passed. Approval, security, isolated SQL with53 signed HTTP assertions, mobile and private visual/offline checks passed.
-- The first frozen workflow passed11 runner integrity controls and then stopped because its clean event had no private archive input. **It did not run the603-case benchmark.**
-- Concurrent PR115 merged independent live-source repairs, and current upstream through `ca8cf23ce442e0bdb807e381f777a9e166b398ed` is preserved. Its exact merged public-source run40066375905 passed, and later approval40066461895 passed after unrelated source-carryover bookkeeping was reconciled. Those results validate that prior source, not the combined candidate11.
-- The separate C8v2 handoff claims3036 exact/118 missing/848 review against the same frozen oracle, but its referenced93,450,947-byte ZIP was not found in the accessible inventory. Its recorded metrics and missing implementation are not mixed into this audit. Wholesale replacement would drop later capacity, supplementary evidence and scope guards.
-
-## What the recovered work improved
-
-The durable candidate8 continuation increased retained source-fact capacity from128 to384 facts and from64000 to192000 UTF-16 content units. It kept per-value/part/variant bounds and the existing request limits. Source-context truncation warnings fell from96 to3; the three remaining warnings are malformed original Congregation captures, not evidence that arbitrary larger bounds would repair their missing HTML.
-
-Four documented omissions were recovered: a complete alternate Larry's Sumatra structured object, and Tintico's page description, Open Graph title and image-caption context. Source-backed Gamboa family, Cortez tea-like notes, Subterra bouquet and Beanstock additive text were repaired. Five additional published espresso references were retained across Foster, Methodical and Tenfold. Richer Unicode-safe review/download/offline exports remain review-only until an explicit user save.
-
-The recorded complete preservation review covered22900 reconstructable structured objects,30111 plain contexts,447 complete alternatives across223 ambiguous namespaces,614 purchase variants and3008 reference destinations. Distinct alternatives are kept distinct; an absent source-document identity is not repaired by silently merging objects.
-
-Candidate11 adds and reconciles the following guarded behavior:
-
-1. **Current geography from selected product descriptions.** Preserve concurrent upstream's canonical direct locality Nyeri, Kenya, while keeping the entire Mount Kenya sentence with its original URL and product_json source attribution. Only the existing explicit current-locality relation with a literal country is admitted from structured descriptions. Partial, historical, denied, educational or unrelated-product text cannot create a new canonical conflict.
-2. **Selected-product isolation.** Keep both upstream's bounded malformed WooCommerce orphan-card handling and independently owned real loop-card exclusions. An unrelated card cannot donate tasting notes to the selected coffee. Genuine contradictions on the selected product remain reviewable.
-3. **Complete HTML attributes.** Consume unusual attribute names and full quoted/unquoted values before recognizing real attributes. Leading equals signs, quoted class-like strings, real tag ends and nonbreaking spaces cannot be mistaken for hidden or product-card instructions.
-4. **Faithful public fixtures.** Preserve the useful form/input boundaries and real inert product-data markers that extraction needs. Keep narrowly bound public purchase templates only for the selected HTTPS product/typed Offer/variant. Strip private controls and keys. The upstream import path remains an alias of one canonical sanitizer.
-5. **Honest reporting and reproducibility.** Read integration status from the actual audit receipt; test malformed, missing and pending evidence. Run the original source archive and recovery archive through an isolated GitHub benchmark with unchanged scorers, exact runtime hashes, complete output/call comparisons, actual client exports and offline review.
-6. **Credential-safe recovery.** Automatic approval review rejected a proposed plaintext credential transfer in PR metadata; no credentials were written. The replacement accepts only one authenticated encrypted envelope for a fresh runner key and exact repository/PR/head/run/attempt/deadline. Original complete transfer metadata goes privately to the unmodified helper. Public interoperability and integrity controls must pass before real inputs are supplied.
-
-The new guards were independently reviewed. Pure V8 diagnostics are explicitly distinguished from Node, browser, actual-network and full-corpus execution.
-
-## Frozen benchmark history
-
-These counts are strict normalized equality to the frozen expected values, **not an accuracy percentage**. Review differences can include richer source-supported values, source contradictions, scope or role distinctions, and genuinely unresolved cases.
-
-| Complete benchmark | Successful previews | Exact canonical | Missing canonical | Review required |
+| Complete benchmark | Usable previews | Exact canonical | Missing canonical | Review required |
 |---|---:|---:|---:|---:|
-| Original baseline |600|2229|1068|705|
-| Handoff candidate4 |603|3003|192|807|
+| Original preserved baseline |600|2229|1068|705|
+| Handoff Candidate4 |603|3003|192|807|
 | Candidate7 |603|3023|171|808|
-| Durable candidate8 |603|3024|167|811|
-| Historical candidate10, recorded before environment loss |603|3024|167|811|
-| Combined candidate11 |Pending|Pending|Pending|Pending|
+| Durable Candidate8 / freshly verified Candidate11 |603|3024|167|811|
+| Intermediate Candidate12, runtime 37253; strict run retained |603|3044|143|815|
+| **Final Candidate12, reviewed run 40074270907** |**603**|**3046**|**132**|**824**|
 
-Candidate8 supplementary retention was5458 full,337 partial and679 unconfirmed. Of115 conflict assertions,65 were withheld and50 remained unresolved;19 unexpected canonical fields remained explicit. None of these residuals is automatically converted to a pass.
+The final result has 43 more exact assertions and 60 fewer missing assertions than Candidate4, the latest complete result in the original handoff. Candidate5 originally had focused verification only and is not presented as a complete benchmark. Compared with the restored Candidate8/verified Candidate11 source, the final runtime adds 22 exact matches and fills 35 missing fields, while 13 more results fall into the honest review category.
 
-## Required candidate11 closure
+Across the original 6474 supplementary assertions, 5458 remain fully retained, 337 partly retained and 679 unconfirmed. There are **zero prior exact-match losses and zero prior full-retention losses**. Retention counts do not increase merely because a previously retained passage is now correctly assigned to a canonical field.
 
-The full benchmark must reverify both original archive hashes, the original freeze/packet attestation, all603 case identities and1197 capture hashes, all4002/6474 assertions, current runtime fingerprints and unchanged harness/scorer/client-export bytes. Complete case records and calls are compared to candidate8 with only elapsed timing excluded. Any changed value or lost exact/full-retention assertion requires explicit source review.
+Primary evidence: [extractor-candidate12-frozen-reviewed-run-40074270907.json](extractor-candidate12-frozen-reviewed-run-40074270907.json), [manual source review](extractor-candidate12-manual-source-review-runtimeac529.json), [source manifest](extractor-candidate12-source-manifest.json), and [historical Candidate11 audit](candidate11-concurrent-integration-audit.md).
 
-The actual client snapshot and Blob download paths must preserve all603 exports, and the real offline companion must accept them without external operations. The runtime and frozen inputs are rehashed after replay. Raw results, diffs, stage logs, generated HTML and a fresh TESTING receipt are retained together; no historical passing receipt substitutes for the new run.
+## What actually improved
 
-The reconciled Node/Python/build/browser/mobile/offline/security/approval checks and unchanged strict live-source targets must actually pass. Non-force integration and merged-source readback must then confirm the same reviewed runtime. Only the extractor's own queue row may become READY on that evidence. A source-ready status is not deployment authority.
+### Current origin and producer roles
 
-## Preserved boundaries and remaining limits
+The extractor now separates the selected coffee's geography and producer relationships from awards, grades, nearby projects and historical descriptions. Concrete frozen-source corrections include:
 
-The original corpus and captures are frozen, so current website changes are assessed separately. A successful frozen replay is not real-member, physical-device or hosted authentication acceptance. The six deployed-endpoint opt-in tests remain explicitly skipped unless actually exercised.
+- Onyx Mexico Finca Santa Cruz Gesha: **Chiapas, Mexico** replaces the award text used as geography.
+- Alta Kirima Batian: **Othaya, Nyeri, Kenya** is retained as origin, with **Othaya Farmers Cooperative Society** as producer; “AA” is not treated as a place.
+- Alta Nevado Gona: **Sierra Nevada de Santa Marta, Colombia** is selected from the current coffee's description rather than a nearby social-program location.
+- Maps Scarlet Macaw: both **Silvestre Vasquez and Joel Lopez** are retained, with **Pacavita, Honduras**.
+- Pinewood Hacienda Río Negro: the current producing farm **Hacienda Río Negro** is recovered without assigning its sister farm as the producer.
 
-The final audit must continue to disclose missing and review-required canonical values, partial/unconfirmed supplementary evidence, ambiguous source namespaces and malformed original captures. It must not claim perfect extraction or infer missing source facts from external geography or product knowledge.
+Further producer repairs preserve explicit cooperative aliases, complete named farm/grower groups and current smallholder credits. Historical, hypothetical, educational and other-product paragraphs cannot donate a producer. A country-qualified producer claim must agree with the selected origin and cannot silently fill a field after a genuine country conflict.
 
-Concurrent #5/#12 database delivery and the explicit TESTING source-carryover record are preserved as upstream work. This task did not perform those production actions, alter their records or borrow their release approval. The optional alternative intake-code proposal was not integrated; upstream PR119's receipt-aware intake and existing strict release rules are preserved exactly.
+Some correct recoveries remain review-required. Ghost Town's page supports **Abateraninkunga ba Sholi**, while the frozen expected string adds “cooperative.” Sidecar supports **smallholder producers** without an invented individual name. VT Artisan's current source says **Co-op**; the parser does not invent the longer name in the expected answer. All original source details and provenance remain available for review.
 
-## Primary audit links
+### Complete tasting descriptions with the right scope
 
-- [PR116: recovered combined candidate11](https://github.com/Schulzet3/The-Dial-In-Collective/pull/116)
-- [First actual Python checks](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40065850569)
-- [First frozen-runner stop before replay](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40065850565)
-- [Current source manifest](extractor-candidate11-source-manifest.json)
-- [First hosted result, including failures](extractor-candidate11-first-hosted-results.json)
-- [Issue33 journal](../workstreams/issue-33.md)
+Current literal sensory clauses are recovered more reliably, including coordinated phrases, “Characteristics” sections, explicit tastes and sweetness. Meaningful modifiers are preserved instead of stripped to force exact string matches.
 
-This document will be reconciled with actual candidate11 results and exact integration receipts before a final readiness claim.
+Examples include Hello Darlin's **fruity**, Hello Bless Your Heart's **mildly sweet and nutty**, INK6610's **rich taste, slightly smoky undertones and bittersweet, dark chocolate**, INK Espresso89's **chocolate taste, licorice sweetness**, and South17's **strawberry jam and chocolate**. BLEU's actual Sumatran product is scoped by its content despite an old Papua New Guinea URL slug.
 
-The current [deferred combined-release handoff](../RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md) explicitly pauses publication and all further production SQL. It is preserved unchanged; source readiness will not reuse an earlier release grant.
+The new boundaries distinguish tasting notes from aroma-only descriptions, body/acidity, roast descriptions, optional flavor additions, milk preparation, partial blend components and historical material. A narrow processing-description rule lets an explicit current named profile outrank the broad causal phrase “fruit-forward”; it does not discard specific fruit or chocolate flavors generally. Actual counterexamples for these boundaries were repaired and tested before integration.
 
-## Candidate12 workstream in PR121
+### Release identity, source preservation and public-page fidelity
+
+A literal current release/year pair is recovered without letting a later historical comparison erase it. Existing rules for release labels remain unchanged: generic Reserve/Limited marketing, a series name or a yearless seasonal calendar do not justify inventing an edition or year. A separate22-row [release-label review](extractor-candidate12-release-label-closure-review.json) records19 reviewed source-role decisions and 3 context-limited rows. The latter are evidence limitations, not proof that no source exists.
+
+The restored earlier work also retains four documented omissions: Larry's complete alternate Sumatra structured object and Tintico's page description, Open Graph title and image-caption context. Five additional published espresso references across Foster, Methodical and Tenfold remain preserved. Its recorded preservation review covered 22900 reconstructable structured objects, 30111 plain contexts, 447 alternatives across 223 namespaces, 614 purchase variants and 3008 reference destinations.
+
+Candidate11's guarded selected-product boundaries and complete HTML attribute handling remain integrated. The public-fixture sanitizer retains the precise public product/Offer/variant structure needed for extraction while removing private controls. Actual current-page checks, including NOMAD and Circulor, verify full extraction parity against the sanitized saved fixtures. No private-data or source-scope guard was weakened to make a fixture pass.
+
+Evidence: [complete 42-case review](extractor-candidate12-manual-source-review-runtimeac529.json), [forensic projection receipt](extractor-candidate12-forensics-run-40073961047.json), [earlier capacity verification](extractor-600-candidate8-capacity-verification.json), and [extractor-candidate12-merged-ci-010f77a8.json](extractor-candidate12-merged-ci-010f77a8.json).
+
+## Size limits: increased where the evidence justified it
+
+The owner-authorized capacity change is retained:
+
+| Evidence allowance | Earlier | Current |
+|---|---:|---:|
+| Source facts |128|384|
+| Content budget, UTF-16 units |64000|192000|
+
+Per-value, structured-part and variant bounds remain1600/128/128. The existing network policy remains a900000-byte normal read and an eligible bounded2000000-byte product retry. HTTPS, SSRF, redirect, request-count and deadline safeguards are unchanged by the final runtime.
+
+The capacity increase reduced recorded source-context truncation warnings from 96 to3. The three remaining warnings correspond to malformed original Congregation captures; the audit did not establish that a larger arbitrary limit would recover their missing markup. On the final 603 run, the maximum fact count was 297 and the largest response was 222,009 UTF-8 bytes. The measured maximum source-fact **value** text was 165610 UTF-16 units; that metric excludes label/other budget contributions and must not be treated as the complete content-budget usage.
+
+No additional limit increase was justified by these results. Larger limits alone would not correct the role, conflict or missing-source issues listed below. [Capacity receipt](extractor-600-candidate8-capacity-verification.json); [extractor-candidate12-frozen-reviewed-run-40074270907.json](extractor-candidate12-frozen-reviewed-run-40074270907.json).
+
+## Every changed output was reviewed
+
+The final source was first run in strict mode at 2454, [run 40073531611](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40073531611). All 603 cases executed, but the job correctly failed acceptance because 42 complete output records differed from the baseline and had not yet been approved. That failure remains preserved.
+
+A separate hash-bound forensic run [40073961047](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40073961047) produced all 42 complete safe projections with no omitted structured facts. The root review and independent producer/sensory reviewers inspected the current-product relationships, complete changed values, retained qualifiers, original capture/oracle bindings and before/after case/export identities. Earlier review was reused only where the complete evidence and all relevant hashes were identical.
+
+The final reviewed rerun accepts exactly those 42 changes: **41 source-supported case changes and 1 nonsemantic ordering change**. It does not accept arbitrary future changes.
+
+- 40 coffees have 46 changed canonical assertions: 17 producer, 21 tasting-note, 7 origin and 1 release-label assertions.
+- 35 originally missing assertions are populated: 15 now exact and 20 still review-required.
+- 7 previous review assertions become exact; 4 changed review assertions remain review-required.
+- Lima's extra case changes auxiliary producer detail only. Aldea's extra case changes an availability-array order only; its export bytes are unchanged. Neither is counted as a canonical accuracy gain.
+
+The pinned review manifest is 73029 bytes, SHA256 `d82f85051727908bfbea8985cd837636a37baee4b1b3262aa21e3c0049dd9d47`. Actual hosted validation checked all 55 source quotations: 35 as exact UTF-8 members of their original captured bytes and 20 against the unchanged frozen oracle, with original packet/capture hashes and URLs. It also required exact before/after case and export hashes, unchanged frozen identities/scorers, and zero loss/export/offline failures. All 41 runner controls, 9 forensic-reader controls and five benchmark stages passed.
+
+The reviewed rerun reproduces the strict run's complete changed records, score counts and retention dictionary exactly. “PASS_WITH_REVIEWED_CHANGES” means those explicit source-supported changes passed the fixed gate; it does not mean every remaining field is correct. [Pinned manifest](extractor-reviewed-changes-candidate12.json); [strict receipt](extractor-candidate12-frozen-run-40073531611.json); [extractor-candidate12-frozen-reviewed-run-40074270907.json](extractor-candidate12-frozen-reviewed-run-40074270907.json).
+
+## Remaining gaps are recorded, not hidden
+
+All 167 originally missing Candidate8/11 assertions were individually triaged and reconciled against the actual final replay:
+
+| Field | Originally missing | Recovered exact | Recovered, still review | Still missing |
+|---|---:|---:|---:|---:|
+| Elevation |1|0|0|1|
+| Origin |11|0|0|11|
+| Process |11|0|0|11|
+| Producer |42|10|5|27|
+| Release label |34|1|0|33|
+| Roast level |26|0|0|26|
+| Tasting notes |42|4|15|23|
+| **Total** |**167**|**15**|**20**|**132**|
+
+There are still824 review-required canonical assertions. The original 115 conflict assertions remain65 withheld and 50 unresolved; 19 unexpected canonical fields remain visible. Supplementary retention still includes337 partial and 679 unconfirmed assertions. These are retained limitations, not silently promoted successes.
+
+Residual cases include source conflicts, ambiguous producer or component roles, conditional/preparation descriptions, unsupported roast tiers, yearless release language, decaffeination versus green-coffee processing, image or structural evidence limits, and malformed captures. The finite documented repair and review set is complete, but this audit does **not** establish that every remaining blank is intentional, impossible to improve, or blocked by cost. Further improvements need equally specific source evidence and regression checks; broad guessing would change product behavior or create unsupported facts.
+
+Issue 33 remains the named tracker for these disclosed residual accuracy questions. The current READY classification applies to this completed, tested, integrated repair set. [Case-level dispositions and final 167 reconciliation](extractor-candidate12-manual-source-review-runtimeac529.json).
+
+## Verification, failures and limits of the claims
+
+Fresh reviewed-head 3dc ordinary checks passed:
+
+| Verification | Actual result |
+|---|---|
+| Full Node suite |1575 total: 1569 passed, 0 failed, 6 explicit skips|
+| Cloud unit/regression suite |1201 passed, 0 failed|
+| Python audit/report checks |44 passed|
+| Offline/OCR companion checks |23 passed|
+| Pre-install Node 18 ignore guard |12 passed|
+| Browser/mobile checks |61 passed|
+| Visual assertions |167 passed, 38 screenshots|
+| Source guards |42 passed|
+| Isolated SQL signed synthetic HTTP assertions |53 passed|
+| Lint, build, private-source distribution guard, approval/continuity and security |Passed|
+
+These suites overlap; their totals are not summed into a unique-test count. The six skips are the published sign-in shell, published admin shell, and missing/forged-JWT tests for each of dic-verify-coffee and dic-preview-coffee. They were not run against real published endpoints and are not passes.
+
+On the actual merge, the full app/test/build workflow 40074669136, cloud/mobile workflow 40074669168, Python workflow 40074669171, approval/continuity workflow 40074669164 and public-source acceptance 40074669139 all completed successfully. The separate broader controlled-roaster probe 40074669165 was skipped and is not counted as a pass. PR-head visual/security/isolated-SQL evidence applies to the identical merged file tree; it is not represented as newly executed on the merge. The fresh live acceptance at [run 40074669139](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074669139) exercised nine current product-page cases plus the required homepage negative, retained complete saved-fixture parity, made19 public requests and reported zero gaps. It made no real backend calls, consumed no member quota and performed no deployment or production writes. This sample is not a fresh live crawl of all 603 products or all 201 roasters.
+
+All 603 actual client snapshot and Blob-download paths preserve the **current** reviewed outputs.562 exports are byte-identical to old Candidate8;41 deliberately differ and are independently reviewed. All 603 real offline-helper validations pass with no attempted external operation. Browser verification includes actual service-worker cold reopening, durable queues, session isolation and packaged assets. No physical-device or genuine-member-session acceptance is inferred.
+
+Actual earlier failures are retained: an unconditional plum flavor was lost before a later milk-qualified note and was repaired without weakening its original test; synthetic .example fixture hostnames were rejected by the real URL guard and only the fixtures were corrected. Superseded or interrupted frozen jobs that did not execute603 cases are not counted as benchmark passes. The optional original-context reader's partial result remains explicitly partial, separate from the complete final 42-case forensic projection. Restricted-V8 preparation diagnostics are not used as substitutes for the actual Node/browser/corpus runs above.
+
+Fixture timing is reported in the raw result for reproducibility, not as a production latency or capacity promise. The final audit did not exercise production authentication or change member records. [extractor-candidate12-ordinary-ci-3dc7fe4d.json](extractor-candidate12-ordinary-ci-3dc7fe4d.json); [extractor-candidate12-merged-ci-010f77a8.json](extractor-candidate12-merged-ci-010f77a8.json); [work journal](../workstreams/issue-33.md).
+
+## Recovery, reproducibility and retained artifacts
+
+The original source archive is 113755359 bytes with SHA256 `696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52`. The original recovery ZIP is 88577532 bytes with SHA256 `728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce`. The frozen oracle digest remains `0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb`; the packet attestation remains `0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556`.
+
+Historical unpublished Candidate10 runtime/raw bytes were not recoverable after environment loss. Its [recorded local summary](extractor-candidate10-recorded-local-summary.json) is retained as history; reconstructed Candidate11 and final Candidate12 were actually reverified. A separate claimed Candidate8v2 archive was not found and its 3036/118/848 numbers are excluded from the accepted comparison.
+
+The reviewed run's [raw artifact12552820841](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074270907/artifacts/12552820841) is 15203294 bytes, SHA256 `a5ae41c233761cef75d489ea0b2b66623ff56c822269e98ea02202394cb22ca8`, with GitHub expiry **22 January 2027 at 07:28:30 UTC**. Its final manifest is 126430 bytes, SHA256 `4b91c5707e2531993dca6d950631841117b375f27873eb5a80f7cc46061621d4`, describing631 retained files and 206486532 uncompressed bytes. The complete hosted job log is 93836 UTF-8 bytes, SHA256 `dc46883f57c768ff241481e0168ec58908e7fbdfec7cc5d7d9b0f276413a603c`.
+
+Durable repository receipts bind every stage log, replay, comparison, retention report, actual exports and complete review material to the original sources and tested runtime. They preserve compact evidence after the raw Actions artifact expires; they are not a claim that an expiring raw archive remains indefinitely downloadable. No original capture files or signed transfer credentials were included in the retained Actions artifact. The encrypted temporary PR-body marker was removed after successful materialization, and the runner erased its receiver key.
+
+The retained run 40074270907 HTML and its internal benchmark-receipt.json were generated before the merge and correctly retain that premerge TESTING integration state. They are immutable historical artifact bytes. Source READY is established separately by the actual non-force merge, the merged-source verification receipt and this final audit; those raw artifacts have not been relabeled.
+
+## Integration, product decisions and production boundary
+
+The non-force merge preserves all unrelated development files, queue rows/history/policy, Locked decisions and concurrent publication instructions. Only this extractor queue item's current completion state is reconciled to READY; no other work is promoted. The deterministic-only runtime, blank-only autofill, review-only source evidence, explicit save, Pending/Verified semantics, source provenance and offline/member behavior are unchanged.
+
+Readonly production checks for this task observed release/production at `65ee38609db6bd5977dd0f2b393e7791a5e1b766` and Netlify current READY deploy `6adc20c03a07673c4dd08035`. The branch, published deploy ID and deploy's exact source SHA remained unchanged at the readonly 07:36 UTC check, compared with the earlier task readback. No publication branch, provider deployment, production database, Auth or member record was written.
+
+### Concurrent future-publication instruction — preserved historical wording
+
+The following existing authority paragraph is preserved verbatim. Its in-progress PR121 status is historical; the verified current source disposition is stated above. This audit does not execute that separate conditional future publication.
 
 October 24, 2026 UTC: Owner now authorizes completing PR121 and ONE future combined publication of the verified READY queue, with no repeat production migrations, no unrelated TESTING scope and a separate release grant plus provider readback. This supersedes only the older pause on publication, not the source-integrity/safety/release controls. PR121 remains TESTING until its changed-runtime frozen603 has independently reviewed output deltas and exact-source passing checks; no publication has occurred.
 
-See separate tested branch and work journal; the historic C11 final audit above remains unchanged.
+## Current evidence index
+
+- [Merged PR121](https://github.com/Schulzet3/The-Dial-In-Collective/pull/121).
+- [Reviewed full603 run 40074270907](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074270907) and [extractor-candidate12-frozen-reviewed-run-40074270907.json](extractor-candidate12-frozen-reviewed-run-40074270907.json).
+- [Original strict observation40073531611](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40073531611) and [its receipt](extractor-candidate12-frozen-run-40073531611.json).
+- [Complete original-source adjudication](extractor-candidate12-manual-source-review-runtimeac529.json), [exact manifest](extractor-reviewed-changes-candidate12.json), and [forensic receipt](extractor-candidate12-forensics-run-40073961047.json).
+- [extractor-candidate12-ordinary-ci-3dc7fe4d.json](extractor-candidate12-ordinary-ci-3dc7fe4d.json) and [extractor-candidate12-merged-ci-010f77a8.json](extractor-candidate12-merged-ci-010f77a8.json).
+- [Current source manifest](extractor-candidate12-source-manifest.json), [release queue](../RELEASE_QUEUE.json), [Issue 33 journal](../workstreams/issue-33.md), and [Issue 33 residual tracker](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33).
