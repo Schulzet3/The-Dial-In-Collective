@@ -148,7 +148,7 @@ function publicCheckoutTemplate(value,sourceUrl){
    url.username||url.password||url.port||url.hash)return false;
   // Only a roaster-local public shopping cart template, not a private
   // customer checkout, bearer capability, email or session-bearing link.
-  if(!/^\\/cart\\//i.test(url.pathname)||/[?&](?:token|secret|session|customer|email|checkout|auth|key)=/i.test(url.search))
+  if(!/^\/cart\//i.test(url.pathname)||/[?&](?:token|secret|session|customer|email|checkout|auth|key)=/i.test(url.search))
    return false;
   return true;
  }catch{return false;}

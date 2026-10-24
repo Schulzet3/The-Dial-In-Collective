@@ -1,3 +1,8 @@
+## October 24 UTC — immediate syntax repair
+40065866614 caught invalid regex flags in the newly added narrow cart path guard before executing acceptance. Corrected escaped regex source and reran; previous changes remain test-only. Same commit journal update, no other runtime/provider change. [dic-completeness-probe]
+
+---
+
 ## October 24 UTC — scoped public cart template preservation
 Live source run 40065791423 pinpoints Nomad's nine structured purchase variants: the sole dropped property is `offers.checkoutPageURLTemplate`. It is published product JSON-LD, not account state. Preserve this exact field ONLY when it is a bounded HTTPS cart path on the same source roaster host, with no credentials, fragment or sensitive query parameters. Keep all other checkout/customer/secret/cookie/session stripping, strict complete extraction parity, and product discriminator. No runtime app change or new provider charge. [dic-completeness-probe]; retest and do not claim READY before full acceptance.
 
