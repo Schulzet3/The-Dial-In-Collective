@@ -470,7 +470,11 @@ begin
  -- A repeated successful family is a real server-owned identity, not an
  -- arbitrary per-shot bucket. A second repeated successful approach must not
  -- be merged into the first or declared a verified *cross-member* identity.
- -- This is rollback-only synthetic fixture data.
+ -- This is rollback-only synthetic fixture data. Direct SQL fixture
+ -- INSERT does not invoke the authenticated mutation API's post-save family
+ -- classification; explicitly run the same server-owned classifier here.
+ perform private.classify_personal_shot(sh[1]);
+ perform private.classify_personal_shot(same_user_shot);
  for i in 1..2 loop
   insert into public.shots(
    id,owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,
@@ -479,7 +483,8 @@ begin
   ) select gen_random_uuid(),owner_id,library_entry_id,setup_id,setup_version_id,
       basket_version_id,calibration_id,style,now()+i*interval '2 minute',
       dose_g,dose_g*2.8,24,grind_setting,3,3,5,5,1,'{}'::jsonb
-     from public.shots where id=sh[1];
+     from public.shots where id=sh[1] returning id into sid;
+  perform private.classify_personal_shot(sid);
  end loop;
  if (select count(distinct s.personal_family_id)
    from public.shots s join public.library_entries le on le.id=s.library_entry_id
