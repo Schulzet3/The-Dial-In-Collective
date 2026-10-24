@@ -17,7 +17,11 @@ export function fixtureCoffeeHtml(html){
   const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
   if(type&&block.closed){
    const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizePublicJson(JSON.parse(block.body))+'</script>');}
+   // Exact product-marked JSON script attributes are needed to recognize
+   // same-product Shopify payloads, particularly Circulor. Only preserve
+   // inert product-identity flags and a tightly validated id.
+   const productFlag=block.attributes.match(/\bdata-(?:product(?:-json|-data)?|shopify-product)(?=\s|=|$)/i)?.[0]||'';
+   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+(productFlag?' '+productFlag:'')+'>'+sanitizePublicJson(JSON.parse(block.body))+'</script>');}
    catch{/* Invalid JSON is not preserved as executable markup. */}
   }
   cursor=block.end;

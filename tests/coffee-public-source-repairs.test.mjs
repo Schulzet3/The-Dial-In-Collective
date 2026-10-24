@@ -75,3 +75,13 @@ test('public fixture sanitizer is inert and retains permitted DOM for source par
  const replay=parse(sanitized,'https://roaster.example/products/current-coffee');
  assert.equal(replay.fields.tasting_notes,original.fields.tasting_notes);
 });
+
+
+test('anonymous product JSON script data-product marker survives fixture sanitization',()=>{
+ const url='https://coffeacirculor.com/products/selected-coffee';
+ const html=page('Selected Coffee','<script type="application/json" data-product-json>'+
+  JSON.stringify({id:43,title:'Selected Coffee',handle:'selected-coffee',tags:['Coffee'],vendor:'Coffea Circulor',available:true,variants:[{id:123,name:'Selected Coffee - 250g',available:true,price:1200}]})+'</script>',url);
+ const original=parse(html,url),replay=parse(fixtureCoffeeHtml(html),url);
+ assert.ok(original.source_facts?.length>=5);
+ assert.deepEqual(replay,original);
+});

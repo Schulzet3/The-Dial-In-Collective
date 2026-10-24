@@ -171,6 +171,18 @@ async function probe(target){
     const afterFacts=(replay?.source_facts||[]).map(factTag);
     const afterBag=new Map();for(const v of afterFacts)afterBag.set(v,(afterBag.get(v)||0)+1);
     record.parity_missing_source_fact_examples=beforeFacts.filter(v=>{const n=afterBag.get(v)||0;if(!n)return true;afterBag.set(v,n-1);return false;}).slice(0,12).map(v=>v.slice(0,190).replace(/(?:password|token|secret|session|cookie|email|phone|authorization|checkout)[^|]{0,80}/gi,'[redacted]'));
+    const factKey=f=>[f.field||'',f.label||'',f.source_type||'',f.section||''].join('|');
+    record.parity_changed_product_attributes=[];
+    for(const a of (original?.source_facts||[]).filter(f=>f.source_type==='product_json')){
+     const b=(replay?.source_facts||[]).find(f=>factKey(f)===factKey(a));
+     if(!b||String(a.value)===String(b.value))continue;
+     try{const old=JSON.parse(a.value),updated=JSON.parse(b.value);
+      const lost=Object.keys(old).filter(key=>!Object.hasOwn(updated,key));
+      const changed=Object.keys(old).filter(key=>Object.hasOwn(updated,key)&&JSON.stringify(old[key])!==JSON.stringify(updated[key]));
+      if(record.parity_changed_product_attributes.length<12)record.parity_changed_product_attributes.push({label:a.label,lost,changed});
+     }catch{}
+    }
+
 
    }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
