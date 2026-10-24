@@ -1,0 +1,79 @@
+name: DIC original frozen coffee corpus
+
+# Restricted audit continuation. This job reads the exact original archives,
+# runs the existing scorers and actual handler offline, and never deploys.
+on:
+  pull_request:
+    branches:
+      - development/backend-foundation
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/workflows/coffee-frozen-corpus.yml'
+      - 'scripts/audit/**'
+      - 'docs/audits/**'
+      - 'src/**'
+      - 'netlify/functions/**'
+      - 'supabase/functions/_shared/**'
+      - 'site/cloud/coffee-url-autofill.js'
+      - 'tests/**'
+      - 'package.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dic-frozen-coffee-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  frozen603:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.repository == 'Schulzet3/The-Dial-In-Collective' &&
+      github.event.pull_request.head.ref == 'work/issue33-candidate11-recovery-20261024'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Install the existing free offline-review prerequisite
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes python3-pil
+      - name: Record interpreter and prerequisite versions
+        run: |
+          mkdir -p "$RUNNER_TEMP/dic-frozen-corpus/output/logs"
+          {
+            node --version
+            /usr/bin/python3 --version
+            /usr/bin/python3 -c "import PIL; print('Pillow ' + PIL.__version__)"
+            dpkg-query --show python3-pil
+          } | tee "$RUNNER_TEMP/dic-frozen-corpus/output/logs/prerequisite-versions.log"
+      - name: Check archive and evidence-integrity failure boundaries
+        run: /usr/bin/python3 scripts/audit/coffee-frozen-ci.py self-test
+      - name: Materialize the original hash-bound frozen inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py materialize
+          --work "$RUNNER_TEMP/dic-frozen-corpus"
+      - name: Run all 603 original cases, unchanged scores, exports and offline review
+        run: >-
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py run
+          --repo "$GITHUB_WORKSPACE"
+          --work "$RUNNER_TEMP/dic-frozen-corpus"
+          --output "$RUNNER_TEMP/dic-frozen-corpus/output"
+          --expected-fingerprint 7c6f6f791c4ebe2272b19bb609a6faf1eeb77176bf0b1cdefa9ebf711ffaf217
+      - name: Retain raw results, reports and logs without transfer data or source captures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-frozen603-candidate11-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/dic-frozen-corpus/output/
+          if-no-files-found: error
+          retention-days: 7

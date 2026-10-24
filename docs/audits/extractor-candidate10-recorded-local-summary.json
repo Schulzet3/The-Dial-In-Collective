@@ -1,0 +1,814 @@
+{
+  "schema_version": 4,
+  "type": "reconstructed_frozen_corpus_candidate10_audit_summary",
+  "created_at": "2026-10-24T04:49:02.432Z",
+  "status": "HISTORICAL_LOCAL_BENCHMARK_RECORDED_ORIGINAL_RUNTIME_UNAVAILABLE",
+  "final_candidate": 10,
+  "supersedes_completed_candidate": 8,
+  "candidate9": {
+    "source_fingerprint": "27ebf28e3f98014249fcfc5dc98ef7ada55c80e325af385562ace4e7c73029f6",
+    "full_corpus_completed": true,
+    "canonical": {
+      "cases": 603,
+      "ok_response": 603,
+      "canonical_assertions": 4002,
+      "exact_equivalent": 3024,
+      "missing": 167,
+      "review_required": 811,
+      "conflict_assertions": 115,
+      "conflict_withheld": 65,
+      "conflict_unresolved": 50,
+      "additional_facts": 6474,
+      "additional_literal_present": 1526,
+      "additional_unconfirmed": 4948,
+      "unexpected_fields": 19
+    },
+    "status": "SUPERSEDED_BEFORE_REMOTE_INTEGRATION",
+    "reason": "Independent adversarial review found a quoted-attribute classification defect. Candidate10 repairs it; candidate9 was not given final independent acceptance."
+  },
+  "extractor_source_fingerprint": "8d3d3a56e34bd57db742e53438339e4682aa66b3912ffd699424abaec3fa5493",
+  "extractor_source_files": [
+    {
+      "path": "netlify/functions/coffee-url-preview.mjs",
+      "bytes": 11871,
+      "sha256": "7bd23728f64530c79ca909ee4ace04cec768b7b5252c95784d02e16aed2d34ea"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1081,
+      "sha256": "86ad4b0f80fcda1d671e792b080f9d5f32ce64fa59f392996435bc5bffd7d603"
+    },
+    {
+      "path": "src/server/agtron-roast.mjs",
+      "bytes": 4209,
+      "sha256": "ac7ca37b80a5b7f4ed3bd339ab6e247f10f19f19574ce1617958f365808195d2"
+    },
+    {
+      "path": "src/server/coffee-blend-evidence.mjs",
+      "bytes": 21864,
+      "sha256": "2ffcfd4ac69601d6dd9780541bb7e46748866716eac6119463b2299c23666c76"
+    },
+    {
+      "path": "src/server/coffee-delimited-specs.mjs",
+      "bytes": 5796,
+      "sha256": "a8a27725ae978f50a3fa3bdc1a005b5ba09bf8ec483d3461f501325bd1f22f22"
+    },
+    {
+      "path": "src/server/coffee-ecwid-snapshot.mjs",
+      "bytes": 4019,
+      "sha256": "e802efd5d6147539fbefe2f7e8c651c051a7179ad7ffa3a373269e9a2d7fcf4e"
+    },
+    {
+      "path": "src/server/coffee-elevation-evidence.mjs",
+      "bytes": 12915,
+      "sha256": "99ddff5818689fbf265a4d71c6ae86a797d9bcc196ecb51256a753aec95fb77f"
+    },
+    {
+      "path": "src/server/coffee-espresso-evidence.mjs",
+      "bytes": 20637,
+      "sha256": "55f30cab5c1e2ddf1b98a808b5502a448d58d268299e06a80738c64cbe05e57e"
+    },
+    {
+      "path": "src/server/coffee-fact-compatibility.mjs",
+      "bytes": 6263,
+      "sha256": "b1ce2c4dacee77b9a5d8522e357cafef849c790b68a98c22b35fa45cdfe00e21"
+    },
+    {
+      "path": "src/server/coffee-flavor-evidence.mjs",
+      "bytes": 35067,
+      "sha256": "86d988f1b1535f44ded85b6b116471bb22e4b73ace7a768b766643ba73e31a48"
+    },
+    {
+      "path": "src/server/coffee-geography-entity-roles.mjs",
+      "bytes": 3041,
+      "sha256": "7a010e6a8834c4f8aeeaff85b5d5073782a8de2fb2575492df2df3f03d43073b"
+    },
+    {
+      "path": "src/server/coffee-html-structure.mjs",
+      "bytes": 2584,
+      "sha256": "51a2ed559db9b2d1a279d16b2dd1859b56ed53e395726f8f083ae9bcc68f3ab2"
+    },
+    {
+      "path": "src/server/coffee-identity-evidence.mjs",
+      "bytes": 40154,
+      "sha256": "e4ca8e8397e237e488dd4a1806f1b21038a76084b7d7e15007ac284456b14d31"
+    },
+    {
+      "path": "src/server/coffee-narrative-evidence.mjs",
+      "bytes": 28957,
+      "sha256": "8d7b59c22838a7febd981ffd7c049f19ded3219f3c493ef300c51e599794048b"
+    },
+    {
+      "path": "src/server/coffee-page-metadata.mjs",
+      "bytes": 72749,
+      "sha256": "5a48b6de966ffbc5253abefe238b81c2c8263805c968ad90a7dcf0d2f28a4981"
+    },
+    {
+      "path": "src/server/coffee-processing-evidence.mjs",
+      "bytes": 5318,
+      "sha256": "f7343b25ebfba3fabae8d92a0f40ea11fffbc371772406bf53d4f4b01bcb38b6"
+    },
+    {
+      "path": "src/server/coffee-product-identity.mjs",
+      "bytes": 4359,
+      "sha256": "f4c415e25e24acdf22d1773b6c850cb87e7d103169866298dd7f8e1025c1b3c8"
+    },
+    {
+      "path": "src/server/coffee-product-layouts.mjs",
+      "bytes": 22026,
+      "sha256": "b3f7ef30c1dfaa33c35c261314b9e6e63acf23a8bcce17be27ae0389db7f2630"
+    },
+    {
+      "path": "src/server/coffee-product-prep.mjs",
+      "bytes": 1014,
+      "sha256": "275caffe3368aee9e24f25af79968aeeeadddb6adcbe5eda7cc8b3a607781451"
+    },
+    {
+      "path": "src/server/coffee-product-prose.mjs",
+      "bytes": 3159,
+      "sha256": "7c8fc0ac536e3b559187431bc263384820c52caa111b6d1a64f09cf19595ef89"
+    },
+    {
+      "path": "src/server/coffee-product-scope.mjs",
+      "bytes": 14446,
+      "sha256": "cb1d1f3eaefeb7147c1c3b9ff1a9b698c150e5fd92bd5b81e05ebc8492353d5a"
+    },
+    {
+      "path": "src/server/coffee-semantic-specs.mjs",
+      "bytes": 25915,
+      "sha256": "5416067b3568d86e037c4e41109dee4c86b725b0ca4ae72920a2bddcaecfa47a"
+    },
+    {
+      "path": "src/server/coffee-shopify-ajax.mjs",
+      "bytes": 16108,
+      "sha256": "717e3775b3b904c18d712ec1b28984640581ff1c117547056c8d5c3a0239f86f"
+    },
+    {
+      "path": "src/server/coffee-source-facts.mjs",
+      "bytes": 58104,
+      "sha256": "eb005bbb0edbbcb94416af610b7f10b8aa72d9c77a1af0f915c5d7a7c2d75100"
+    },
+    {
+      "path": "src/server/coffee-source-identity-scope.mjs",
+      "bytes": 10181,
+      "sha256": "c373bf54dc7d9651a0f8c6387d0dbe7d3be504c152111b60e5c71e37bdcf1270"
+    },
+    {
+      "path": "src/server/coffee-supplementary-source-evidence.mjs",
+      "bytes": 15198,
+      "sha256": "d8d31536b1489838efa223c67035fc5ee0c2f553594b6d8dcc61703bcdbea28c"
+    },
+    {
+      "path": "src/server/coffee-url-guard.mjs",
+      "bytes": 11620,
+      "sha256": "bccfdb07691ce550c81e62aa5f5004db63f6fd349f039e1b16e150134e047484"
+    },
+    {
+      "path": "src/server/coffee-woocommerce-store.mjs",
+      "bytes": 4665,
+      "sha256": "135b2eed7b4905f46320fec3fc7acf0745f6e737e0b6ae7adc8b7445e0be86be"
+    },
+    {
+      "path": "src/server/roast-level-evidence.mjs",
+      "bytes": 23313,
+      "sha256": "cf33f4918e69a788b4919566ec179f01ddf9940c7584cd585502f9f04f612d91"
+    },
+    {
+      "path": "supabase/functions/_shared/coffee-release-label.mjs",
+      "bytes": 2276,
+      "sha256": "4286e31e3980ffe01c5f5713a06bcc614e5e219f869cd14a1d2271dd0532ea42"
+    },
+    {
+      "path": "supabase/functions/_shared/html-scan.mjs",
+      "bytes": 1723,
+      "sha256": "1ad927dda503b511c8b3de35fbd98de5b7cec9af96aebfd3146dff8eb09513e4"
+    },
+    {
+      "path": "supabase/functions/_shared/request-budget.mjs",
+      "bytes": 2455,
+      "sha256": "0371c73242eae466d84de3bd6322ffd563bdd9c4d2744bcba284a1072a8f523d"
+    }
+  ],
+  "corpus": {
+    "coffees": 603,
+    "us_roasters": 201,
+    "coffees_per_roaster": 3,
+    "canonical_assertions": 4002,
+    "supplementary_assertions": 6474,
+    "captures": 1197
+  },
+  "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+  "expected_values_changed": false,
+  "source_captures_changed": false,
+  "scoring_rules_changed": false,
+  "packet_archive_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556",
+  "attestation_created_after_oracle_freeze": true,
+  "source_archive_sha256": "696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52",
+  "canonical": {
+    "cases": 603,
+    "ok_response": 603,
+    "canonical_assertions": 4002,
+    "exact_equivalent": 3024,
+    "missing": 167,
+    "review_required": 811,
+    "conflict_assertions": 115,
+    "conflict_withheld": 65,
+    "conflict_unresolved": 50,
+    "additional_facts": 6474,
+    "additional_literal_present": 1526,
+    "additional_unconfirmed": 4948,
+    "unexpected_fields": 19
+  },
+  "by_field": {
+    "name": {
+      "expected": 603,
+      "exact": 603,
+      "missing": 0,
+      "review_required": 0
+    },
+    "roaster": {
+      "expected": 603,
+      "exact": 585,
+      "missing": 0,
+      "review_required": 18
+    },
+    "release_label": {
+      "expected": 51,
+      "exact": 10,
+      "missing": 34,
+      "review_required": 7
+    },
+    "origin": {
+      "expected": 538,
+      "exact": 316,
+      "missing": 11,
+      "review_required": 211
+    },
+    "process": {
+      "expected": 413,
+      "exact": 378,
+      "missing": 11,
+      "review_required": 24
+    },
+    "roast_level": {
+      "expected": 332,
+      "exact": 300,
+      "missing": 26,
+      "review_required": 6
+    },
+    "elevation_m": {
+      "expected": 300,
+      "exact": 113,
+      "missing": 1,
+      "review_required": 186
+    },
+    "variety": {
+      "expected": 303,
+      "exact": 264,
+      "missing": 0,
+      "review_required": 39
+    },
+    "producer": {
+      "expected": 319,
+      "exact": 187,
+      "missing": 42,
+      "review_required": 90
+    },
+    "tasting_notes": {
+      "expected": 540,
+      "exact": 268,
+      "missing": 42,
+      "review_required": 230
+    }
+  },
+  "supplementary_retention": {
+    "all_evidence_retained": 5458,
+    "cases": 603,
+    "additional_assertions": 6474,
+    "truncated_previews": 3,
+    "unconfirmed": 679,
+    "some_evidence_retained": 337
+  },
+  "run_history": [
+    {
+      "run": "Baseline 23f15c4",
+      "counts": {
+        "cases": 603,
+        "ok_response": 600,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 2229,
+        "missing": 1068,
+        "review_required": 705,
+        "conflict_assertions": 115,
+        "conflict_withheld": 61,
+        "conflict_unresolved": 54,
+        "additional_facts": 6474,
+        "additional_literal_present": 99,
+        "additional_unconfirmed": 6375,
+        "unexpected_fields": 40
+      },
+      "source_fingerprint": "9e435b2ad0a184ae3cda434e0fa9b5e65345186f55d076dd880cf8a4b9b40f58",
+      "comparison_sha256": "79cf8deeebd1045e78a2fe83f7469249a27715b23c7b2428fa22135888380954"
+    },
+    {
+      "run": "Candidate 1",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 2768,
+        "missing": 406,
+        "review_required": 828,
+        "conflict_assertions": 115,
+        "conflict_withheld": 67,
+        "conflict_unresolved": 48,
+        "additional_facts": 6474,
+        "additional_literal_present": 1479,
+        "additional_unconfirmed": 4995,
+        "unexpected_fields": 37
+      },
+      "source_fingerprint": "b663415b9d46d8823887860db72172e71f83a7ab9ef4281f67c5a65f2b6b5a13",
+      "comparison_sha256": "8ed3991448dcac3618c2d258c59a138149edbb681a649b0c6c8d64bb63e0ef65"
+    },
+    {
+      "run": "Candidate 2",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 2950,
+        "missing": 260,
+        "review_required": 792,
+        "conflict_assertions": 115,
+        "conflict_withheld": 66,
+        "conflict_unresolved": 49,
+        "additional_facts": 6474,
+        "additional_literal_present": 1496,
+        "additional_unconfirmed": 4978,
+        "unexpected_fields": 44
+      },
+      "source_fingerprint": "2eec5644ec12486f2a4482f417e333b71707e1af3620583342a835789c767eef",
+      "comparison_sha256": "85707cca9bab7b5fa104629f13029e2acda462336647871f768111fa2b331a5b"
+    },
+    {
+      "run": "Candidate 3",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3003,
+        "missing": 204,
+        "review_required": 795,
+        "conflict_assertions": 115,
+        "conflict_withheld": 64,
+        "conflict_unresolved": 51,
+        "additional_facts": 6474,
+        "additional_literal_present": 1520,
+        "additional_unconfirmed": 4954,
+        "unexpected_fields": 42
+      },
+      "source_fingerprint": "a41112541fbddbf4bdf2609ab964c8222dc26aa7f83a7b262faf24f8a91c26f2",
+      "comparison_sha256": "e4d60482ac4185efecf5e93150a7195d0e445ea0fb6444c25a89df8c7a9ebe05"
+    },
+    {
+      "run": "Candidate 4",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3003,
+        "missing": 192,
+        "review_required": 807,
+        "conflict_assertions": 115,
+        "conflict_withheld": 65,
+        "conflict_unresolved": 50,
+        "additional_facts": 6474,
+        "additional_literal_present": 1522,
+        "additional_unconfirmed": 4952,
+        "unexpected_fields": 20
+      },
+      "source_fingerprint": "95c80e702a9ac4faabf62a3c661c3fae43455cca23f065cfa9cd9d420424a6eb",
+      "comparison_sha256": "7b846b3f19c44f3091893decaa221808fa9ff1e4b8b3f081c98c80dd3fdd8f0e"
+    },
+    {
+      "run": "Candidate 5",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3023,
+        "missing": 171,
+        "review_required": 808,
+        "conflict_assertions": 115,
+        "conflict_withheld": 65,
+        "conflict_unresolved": 50,
+        "additional_facts": 6474,
+        "additional_literal_present": 1525,
+        "additional_unconfirmed": 4949,
+        "unexpected_fields": 19
+      },
+      "source_fingerprint": "7dbaa531e9ff0c889da84ef9ca5e873261ee96be6d946bc9c5d7851bca9f7338",
+      "comparison_sha256": "af45dc921bc8660eeaa334dce32f744e75a9f595bf190150ca78e245e404723a"
+    },
+    {
+      "run": "Candidate 6",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3023,
+        "missing": 171,
+        "review_required": 808,
+        "conflict_assertions": 115,
+        "conflict_withheld": 65,
+        "conflict_unresolved": 50,
+        "additional_facts": 6474,
+        "additional_literal_present": 1525,
+        "additional_unconfirmed": 4949,
+        "unexpected_fields": 19
+      },
+      "source_fingerprint": "44024422df7dcee2f7962e06399a57c281cb22418af3933039d347b1d60b40ab",
+      "comparison_sha256": "93cfe43af003ca16270931376a33dab625d050310765755f9d58451ffb8495e7"
+    },
+    {
+      "run": "Candidate 7",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3023,
+        "missing": 171,
+        "review_required": 808,
+        "conflict_assertions": 115,
+        "conflict_withheld": 65,
+        "conflict_unresolved": 50,
+        "additional_facts": 6474,
+        "additional_literal_present": 1525,
+        "additional_unconfirmed": 4949,
+        "unexpected_fields": 19
+      },
+      "source_fingerprint": "14f8df4de9c0e4dc2705c8304c5c6e1e17668c777a542c858ce3c88388750d44",
+      "comparison_sha256": "c00ac339e99ee7d26cb6237b9f70ffe21714cfe671907d767a08e98fb5463115"
+    },
+    {
+      "run": "Candidate 8",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3024,
+        "missing": 167,
+        "review_required": 811,
+        "conflict_assertions": 115,
+        "conflict_withheld": 65,
+        "conflict_unresolved": 50,
+        "additional_facts": 6474,
+        "additional_literal_present": 1526,
+        "additional_unconfirmed": 4948,
+        "unexpected_fields": 19
+      },
+      "source_fingerprint": "301346616618784a5ff926ddb9302b3be6e2710bea74c3a47e3d476e02ca812c",
+      "comparison_sha256": "86701191b7a6f7d2e90060a1bcc2d8658d35e66670168a5cdfb1878255694aa3"
+    },
+    {
+      "run": "Candidate 10",
+      "counts": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3024,
+        "missing": 167,
+        "review_required": 811,
+        "conflict_assertions": 115,
+        "conflict_withheld": 65,
+        "conflict_unresolved": 50,
+        "additional_facts": 6474,
+        "additional_literal_present": 1526,
+        "additional_unconfirmed": 4948,
+        "unexpected_fields": 19
+      },
+      "source_fingerprint": "8d3d3a56e34bd57db742e53438339e4682aa66b3912ffd699424abaec3fa5493",
+      "comparison_sha256": "58dad7b42773e8f2d0135c87fc446e02d58f267dd82599a1f74d1d671d86ae57"
+    }
+  ],
+  "canonical_exact_losses_from_candidate4": 0,
+  "canonical_exact_losses_from_candidate8": 0,
+  "supplementary_full_losses_from_candidate4": 0,
+  "supplementary_full_losses_from_candidate8": 0,
+  "independent_candidate8_to10_equivalence": {
+    "status": "PASS_RECORDED_BEFORE_WORKSPACE_DISCONNECTION",
+    "cases": 603,
+    "complete_outputs_equal": true,
+    "all_case_properties_except_elapsed_equal": true,
+    "captured_calls_equal": true,
+    "backend_fixture_calls_equal": true,
+    "actual_client_exports_equal": true,
+    "comparison_method": "Typed deep equality and exact deterministic serialized JSON",
+    "reconstructable_objects": 22900,
+    "plain_contexts_with_attribution": 30111,
+    "complete_alternatives": 447,
+    "ambiguous_namespaces": 223,
+    "purchase_variants_verified": 614,
+    "explicit_reference_destinations_verified": 3008,
+    "all603_exports_pass_offline_helper": true,
+    "attempted_blocked_network_or_child_process_operations": 0,
+    "limits": "Equivalence proves no change to these captured cases, not universal semantic accuracy or future source stability."
+  },
+  "structured_namespace_limits": {
+    "ambiguous_namespaces": 223,
+    "affected_cases": 30,
+    "individually_source_proven_complete_alternatives": 447,
+    "raw_strict_groups": {
+      "distinct_published_inline_objects_share_namespace": 169,
+      "unresolved_ambiguous_chunks": 54
+    },
+    "unflagged_incomplete_originals_in_54_investigated_groups": 0,
+    "unique_parent_identity_asserted": false,
+    "reason": "A containing-script or source-document identity is absent. Distinct complete objects at one URL and relative pointer remain alternatives; they must not be fused or silently chosen. This is not evidence of a canonical field error."
+  },
+  "remaining_truncated_captures": [
+    {
+      "case_id": "www-congregationcoffee-com__colombia-the-journey-b0604340",
+      "source_url": "https://www.congregationcoffee.com/products/colombia-the-journey",
+      "status": 200,
+      "preview_ok": true,
+      "fact_count": 110,
+      "content_utf16": 49382,
+      "max_value_utf16": 1600,
+      "max_part": 2,
+      "invalid_part_count": 0,
+      "invalid_unicode_value_count": 0,
+      "serialized_response_utf8_bytes": 75155,
+      "truncated": true,
+      "previous_truncated": true,
+      "captured_requests_exactly_equal": true,
+      "fixture_calls_exactly_equal": true,
+      "measurement_origin": "Preserved candidate8 per-case sizes and source identity; full candidate10 output is independently equal. Elapsed timing is not reused."
+    },
+    {
+      "case_id": "www-congregationcoffee-com__gallop-c3eaf093",
+      "source_url": "https://www.congregationcoffee.com/products/gallop",
+      "status": 200,
+      "preview_ok": true,
+      "fact_count": 123,
+      "content_utf16": 42986,
+      "max_value_utf16": 1600,
+      "max_part": 2,
+      "invalid_part_count": 0,
+      "invalid_unicode_value_count": 0,
+      "serialized_response_utf8_bytes": 68399,
+      "truncated": true,
+      "previous_truncated": true,
+      "captured_requests_exactly_equal": true,
+      "fixture_calls_exactly_equal": true,
+      "measurement_origin": "Preserved candidate8 per-case sizes and source identity; full candidate10 output is independently equal. Elapsed timing is not reused."
+    },
+    {
+      "case_id": "www-congregationcoffee-com__peru-copy-aafd4f8f",
+      "source_url": "https://www.congregationcoffee.com/products/peru-copy",
+      "status": 200,
+      "preview_ok": true,
+      "fact_count": 109,
+      "content_utf16": 31217,
+      "max_value_utf16": 1600,
+      "max_part": 2,
+      "invalid_part_count": 0,
+      "invalid_unicode_value_count": 0,
+      "serialized_response_utf8_bytes": 53769,
+      "truncated": true,
+      "previous_truncated": true,
+      "captured_requests_exactly_equal": true,
+      "fixture_calls_exactly_equal": true,
+      "measurement_origin": "Preserved candidate8 per-case sizes and source identity; full candidate10 output is independently equal. Elapsed timing is not reused."
+    }
+  ],
+  "capacity_limits": {
+    "facts": 384,
+    "content_utf16": 192000,
+    "value_utf16": 1600,
+    "parts": 128,
+    "purchase_variants": 128
+  },
+  "capacity_measurements": {
+    "fact_count": {
+      "min": 6,
+      "median": 78,
+      "p95": 160,
+      "max": 297
+    },
+    "content_utf16": {
+      "min": 3744,
+      "median": 23732,
+      "p95": 72444,
+      "max": 179666
+    },
+    "serialized_response_utf8_bytes": {
+      "min": 6754,
+      "median": 38491,
+      "p95": 105612,
+      "max": 222019
+    },
+    "elapsed_ms": {
+      "min": 20.67,
+      "median": 119.04,
+      "p95": 306.72,
+      "max": 608.96
+    }
+  },
+  "captured_request_sequences_unchanged": true,
+  "known_candidate7_omissions": {
+    "total": 4,
+    "restored": 4,
+    "evidence": "docs/audits/extractor-600-candidate8-source-preservation.json; independently preserved by complete candidate8-to10 output equivalence."
+  },
+  "bounded_purchase_totals": {
+    "original_variants": 614,
+    "whole_original_exact": 614,
+    "commerce_keys_exact": 614
+  },
+  "reference_counts": {
+    "records": 512,
+    "grouped_records": 481,
+    "destinations": 3008,
+    "original_destinations_exact": 3008
+  },
+  "local_final_checks": {
+    "status": "PASS_RECORDED_BEFORE_WORKSPACE_DISCONNECTION",
+    "combined_upstream_sha": "8b8cffd504b4a5ae885f2388ee7273972790dba2",
+    "node": {
+      "tests": 1394,
+      "pass": 1388,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 6
+    },
+    "python_audit": 37,
+    "python_local_helper": 23,
+    "lint": "PASS",
+    "build": "PASS",
+    "import_browser": {
+      "status": "PASS",
+      "viewports": [
+        320,
+        390,
+        1280
+      ]
+    },
+    "packaged_offline_browser": {
+      "status": "PASS",
+      "checks": 9,
+      "source_unchanged": true,
+      "dist_unchanged": true
+    },
+    "source_unchanged_during_checks": true,
+    "evidence_limit": "These checks completed and their results were read before the local execution environment disconnected. The original full local log/receipt files are not currently accessible. Fresh GitHub checks will be recorded separately on the recovered exact source."
+  },
+  "historical_candidate8_receipt": "docs/audits/extractor-600-candidate8-final-local-receipt.json",
+  "historical_candidate8_integration": {
+    "pr": 109,
+    "pr_head": "93fa2bdd4d016ab2887111f8add1442b463e42b9",
+    "merged_source_sha": "34a1755ab908ad845f4393b7677f1b0ca0985962",
+    "tree_sha": "c534f9930790816936f5ddd3bb214c73c5597134",
+    "passing_pr_workflow_runs": [
+      40062080993,
+      40062080966,
+      40062080968,
+      40062080976,
+      40062080972,
+      40062080991
+    ],
+    "passing_merged_workflow_runs": [
+      40062287782,
+      40062287789,
+      40062287784,
+      40062287737
+    ],
+    "public_source_acceptance": {
+      "run": 40062287845,
+      "status": "FAILED",
+      "cases": 10,
+      "public_requests": 19,
+      "failures": [
+        "SEY Ruarai origin false conflict",
+        "Manhattan Samuel related-card tasting-note contamination",
+        "Nomad sanitized extraction parity",
+        "Circulor sanitized extraction parity"
+      ],
+      "artifact_id": 12547633199,
+      "artifact_zip_sha256": "862eac7f0d2a117257884bf033ba1761602e80c2805d71a3363b6bff7b30a2d2"
+    },
+    "controlled_roaster_probe": {
+      "run": 40062287879,
+      "status": "SKIPPED"
+    }
+  },
+  "continuation_improvements": [
+    {
+      "area": "Larger retained-information allowance",
+      "change": "Owner-authorized capacity rises from 128 to 384 facts and from 64,000 to 192,000 content character units. All four known omissions are restored. The 603-case run uses exactly the same captured request sequences; no wider download allowance, new key or paid service is introduced."
+    },
+    {
+      "area": "Internal cutoffs and complete option titles",
+      "change": "Finish the existing bounded shortcode scan instead of stopping at 160,000 characters, align intermediate candidate collection with the larger final allowance, and retain full long purchase-option titles in summary values. Preserve genuine malformed-source flags."
+    },
+    {
+      "area": "Four literal producer and flavor recoveries",
+      "change": "Recover Gamboa family, the complete Cortez tea-like list, Subterra sensory bouquet notes, and both parts of Beanstock’s additive flavor sentence. Keep generic family mentions, gifts, incomplete phrases and conditional flavors excluded. The frozen scorer awards one new exact match and retains three wording differences for review."
+    },
+    {
+      "area": "Five additional published espresso references",
+      "change": "Recognize standalone method headings, reversed unit-bearing labels and explicitly linked brew cards. Preserve five additional Foster, Methodical and Tenfold recipes. Keep filter sections, pressure stages, ambiguous method selectors and quoted-attribute forgeries out. These remain review-only references and never overwrite dose/yield fields."
+    },
+    {
+      "area": "Compatible review, download and offline helper",
+      "change": "Carry the larger source-information allowance through the actual UI and export. Disclose client-side clipping explicitly. Increase only the local companion’s bounded file/output allowances so valid Unicode exports are accepted. All 603 real client exports pass the offline helper without network or child-process activity."
+    },
+    {
+      "area": "Compatible geographic context",
+      "change": "Preserve the explicit Nyeri region alongside Mount Kenya and Kenya, avoiding a false conflict while continuing to withhold genuine source disagreements."
+    },
+    {
+      "area": "Selected-product card boundaries",
+      "change": "Exclude actual WooCommerce related-product cards even when malformed markup closes an outer recommendation wrapper early; require a real loop-link class within bounded ancestry."
+    },
+    {
+      "area": "Complete HTML attribute tokenization",
+      "change": "Consume quoted and unusual attribute names/values before interpreting class attributes, so class-like text in event handlers or numeric attributes cannot suppress valid product evidence."
+    },
+    {
+      "area": "Faithful public audit captures",
+      "change": "Retain narrowly validated, same-origin selected-offer cart templates and the inert data-product-json marker while continuing recursive private-key redaction and requiring complete extraction parity."
+    },
+    {
+      "area": "Truthful report integration status",
+      "change": "Derive status from a source-bound receipt; READY requires actual merge, positive CI run IDs, passing CI and no scoped blockers. Missing or pending evidence stays pending."
+    }
+  ],
+  "fresh_focused_verification": {
+    "identity_and_scope_tests": 7,
+    "independent_attribute_adversarial_controls": 5,
+    "adjacent_node_tests": 175,
+    "sanitizer_tests": 6,
+    "report_integrity_tests": 13,
+    "anonymous_sanitized_fact_parity": {
+      "Nomad": 42,
+      "Circulor": 111
+    },
+    "genuine_source_conflicts_preserved": true
+  },
+  "preserved_upstream": {
+    "sha": "8b8cffd504b4a5ae885f2388ee7273972790dba2",
+    "tree": "168850be723f00bed2e11ec58ad18d3d05df2666",
+    "all32_runtime_files_unchanged_from_prior_upstream": true,
+    "scope": "Community recommendation provenance, staged SQL, tests and unrelated queue rows are preserved; no production operations.",
+    "latest_sha": "acf411ca344538e1ec68dde895c8e6600e2c4858",
+    "latest_tree": "e9d9a3f4224d8fac13d1f83cc3fefe17857a35cd",
+    "latest_changes": "Community acceptance documentation plus one Node/SQL regression control; all32 extractor runtime files unchanged. Local checks remain explicitly bound to8b; current combined hosted checks pending."
+  },
+  "remaining_source_limit": "All four documented candidate7 source-preservation omissions are restored. Three Congregation captures still carry explicit incomplete-source flags because the original HTML is malformed. 167 canonical expectations remain blank and 811 require review under the unchanged strict scorer; 679 supplementary assertions remain unconfirmed. These diagnostics include intentional withholding, source contradictions, richer wording and conservative verification limits. No complete-page or universal-accuracy claim is made.",
+  "limits": [
+    "All four documented candidate7 source-preservation omissions are restored. Three Congregation captures still carry explicit incomplete-source flags because the original HTML is malformed. 167 canonical expectations remain blank and 811 require review under the unchanged strict scorer; 679 supplementary assertions remain unconfirmed. These diagnostics include intentional withholding, source contradictions, richer wording and conservative verification limits. No complete-page or universal-accuracy claim is made.",
+    "The 3,024 strict matches out of 4,002 checks are normalized equality against the frozen oracle, not an estimate of semantic accuracy. Four blank fields were recovered: one became exact, three remained review differences because the actual source wording is richer.",
+    "Supplementary retention is separate: 5,458 full, 337 partial, 679 unconfirmed. A short quote under eight characters can remain unconfirmed even when the exact currency, ID, size or number is visibly retained. No scoring rule or expected answer was relaxed.",
+    "Some different inline product objects share a URL and relative JSON pointer. The separate namespace source review distinguishes complete raw and hydrated projected alternatives from genuine incompleteness. No unique canonical whole-object identity is claimed for an ambiguous namespace.",
+    "The one strict prior plain-row flag is an expanded Onyx paragraph. Its entire prior text is the exact prefix of the longer captured-source paragraph, with identical label, section and attribution. The raw checker flag is preserved and separately adjudicated.",
+    "Complete reconstruction of the 614 diagnosed purchase variants and preservation of checked prior objects/contexts do not prove every page, image, interactive state, linked document or future source is complete.",
+    "All 19 unexpected canonical fields are unchanged from candidate7 and keep their prior source-bound reviews, including four source-quality ambiguities. Preview suggestions remain unverified; no member or shared-catalog records were changed.",
+    "Local timings and response sizes come from frozen-source fixtures. This audit does not certify production network latency, real signed-in accounts, physical devices or future website changes. Six upstream live-provider tests were deliberately skipped because they are opt-in and outside this local audit.",
+    "The corpus is diverse but dominated by Shopify and is not a random statistical sample of every U.S. roaster website.",
+    "This JSON is a newly reconstructed summary from retained exact manifests, recorded tool outcomes and the preserved candidate8 receipt. It is not represented as the byte-identical original candidate10 replay, comparison, retention, adjudication or proposed receipt."
+  ],
+  "recovery": {
+    "status": "ORIGINAL_FILES_NOT_RECOVERED_NEW_CANDIDATE_REQUIRED",
+    "cause": "The local exec-server disconnected after the complete candidate10 benchmark, independent review and combined local tests had finished; the next documentation/payload command never started.",
+    "original_local_artifacts_available": false,
+    "artifact_hashes_recorded_before_disconnect": {
+      "replay": "b17cbfd53e3950cf44bb6bbce099c5d30a10ab4bf5396d3ccb0a447fc3ea215d",
+      "comparison": "58dad7b42773e8f2d0135c87fc446e02d58f267dd82599a1f74d1d671d86ae57",
+      "retention": "c9fef71f2dda1e16c9789beb326eccded4970ab8ef2f034e49d6cf2628e2c964",
+      "independent_final_adjudication": "f6a43b6429fb39903a7ffdfb1b15d98e51b3a9b5ef549ca82afea6a09939d480",
+      "proposed_receipt": "f4026b93edb931a78c8fa9705f3d870a5b460709617654a4b0c18ac59836393b"
+    },
+    "representation": "This JSON is a newly reconstructed summary from retained exact manifests, recorded tool outcomes and the preserved candidate8 receipt. It is not represented as the byte-identical original candidate10 replay, comparison, retention, adjudication or proposed receipt.",
+    "preserved_prior_evidence": "Candidate8 source-bound audit records remain unchanged in docs/audits and the previously saved recovery materials. Candidate10 complete outputs were independently equal to candidate8 on all603 cases before disconnection, except elapsed timing.",
+    "full_raw_replay_republished": false
+  },
+  "integration_continuation": {
+    "owner_write_authorization": "Please reference the new project instructions. I need you to figure this out proactively. Please get this done at all costs without incurring direct cost to me. GitHub should now allow writes.",
+    "owner_github_cost_clarification": "You can use github as much as you need. That does not count as adding cost",
+    "state": "SUPERSEDED_BY_CANDIDATE11_RECONSTRUCTION",
+    "github_ci": "AUTHORIZED_PENDING_CURRENT_SOURCE",
+    "normal_readiness_rules_preserved": true,
+    "production_authorized": false,
+    "blockers": [
+      "Original candidate10 runtime/log/replay files could not be recovered after execution-environment loss. Newly reconstructed candidate11 requires fresh full603 benchmark and hosted verification."
+    ]
+  },
+  "remote_integration": false,
+  "remote_write_block": null,
+  "hosted_ci_dispatched": true,
+  "published_or_deployed": false,
+  "production_sql_auth_edge_or_member_writes": false,
+  "new_api_keys_or_paid_services": false,
+  "historical_remote_write_block": "GitHub tree-write rejection: isError:true; user rejected MCP tool call. No more specific reason was supplied. No retry or alternate write route was used."
+}

@@ -9,6 +9,7 @@ import collections
 from datetime import datetime, timezone
 import hashlib
 import json
+import re
 from pathlib import Path
 
 
@@ -18,6 +19,76 @@ def read(path):
 
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def integration_evidence(audit=None):
+    """Describe recorded source integration without inferring deployment."""
+    audit = audit if isinstance(audit, dict) else {}
+    continuation = audit.get('integration_continuation')
+    continuation = continuation if isinstance(continuation, dict) else {}
+    state = continuation.get('state')
+    ci = continuation.get('github_ci')
+    merged = continuation.get('merged_source_sha')
+    runs = continuation.get('ci_runs')
+    blockers = continuation.get('blockers')
+    ready = (
+        state == 'READY'
+        and audit.get('remote_integration') is True
+        and ci == 'PASS'
+        and isinstance(merged, str)
+        and re.fullmatch(r'[0-9a-fA-F]{40}', merged) is not None
+        and int(merged, 16) != 0
+        and isinstance(runs, list)
+        and bool(runs)
+        and all(type(run) is int and run > 0 for run in runs)
+        and isinstance(blockers, list)
+        and not blockers
+    )
+    if ready:
+        summary = ('Receipt records source READY at merged commit ' + merged
+                   + '; GitHub CI PASS on runs ' + ', '.join(map(str, runs))
+                   + '. This is source integration evidence, not proof of production deployment.')
+        effective_state = 'READY'
+    else:
+        failed_ci = ci in ('FAIL', 'FAILED', 'FAILURE', 'ERROR', 'CANCELLED')
+        if state == 'BLOCKED' or failed_ci:
+            effective_state = 'BLOCKED'
+        elif state in ('TESTING', 'IN_PROGRESS'):
+            effective_state = state
+        elif state == 'READY':
+            effective_state = 'UNVERIFIED'
+        else:
+            effective_state = 'UNKNOWN'
+        summary = ('Source integration ' + effective_state
+                   + '; complete passing merge and CI evidence is not established.')
+        if isinstance(ci, str):
+            summary += ' Recorded GitHub CI state: ' + ci + '.'
+        if isinstance(blockers, list) and blockers:
+            summary += ' Recorded blockers: ' + '; '.join(map(str, blockers)) + '.'
+    return {'state': effective_state, 'ready': ready, 'summary': summary}
+
+
+def audit_cost_boundary(audit=None):
+    """Use explicit receipt flags; missing flags are not negative evidence."""
+    audit = audit if isinstance(audit, dict) else {}
+    parts = ['Report generation reads existing local evidence and makes no remote requests.']
+    for key, affirmative, negative, unknown in (
+        ('new_api_keys_or_paid_services',
+         'The receipt records new API keys or paid services.',
+         'The receipt records no new API keys or paid services.',
+         'New-key and paid-service use is not recorded in this receipt.'),
+        ('hosted_ci_dispatched',
+         'The receipt records hosted GitHub CI.',
+         'The receipt records no hosted GitHub CI.',
+         'Hosted CI use is not recorded in this receipt.'),
+        ('published_or_deployed',
+         'The receipt records publication or deployment; this report does not independently verify it.',
+         'The receipt records no publication or deployment.',
+         'Publication or deployment is not recorded in this receipt.'),
+    ):
+        value = audit.get(key)
+        parts.append(affirmative if value is True else negative if value is False else unknown)
+    return ' '.join(parts)
 
 
 def build(args):
@@ -128,8 +199,9 @@ def build(args):
             {'area': 'No-key image review', 'change': 'Use existing local browser rendering and Tesseract as separate inspection tools. The local OCR companion reads explicitly selected files, records hashes and confidence, and never approves or writes coffee facts.'},
             {'area': 'Regression and measurement integrity', 'change': 'Replay immutable source snapshots through the real handler using captured bytes and isolated fixtures. Keep the independent expected-value lock, strict comparison rules, original source hashes and post-output reviews separate.'}
         ],
-        'integration_status': 'Local implementation and evidence only. The recorded GitHub create_tree write returned isError:true and “user rejected MCP tool call”; no more specific reason was supplied. That rejection remains a blocker. No retry, alternative remote write route or publication was used.',
-        'cost_boundary': 'This audit used no new API keys or paid/model APIs and dispatched no hosted CI. No publication, production deployment or real member-data mutation occurred. Tests use local resources, public captures and nonfunctional fixtures.',
+        'integration_state': 'UNKNOWN', 'integration_ready': False,
+        'integration_status': integration_evidence()['summary'],
+        'cost_boundary': audit_cost_boundary(),
         'limitations': ['Strict comparisons use frozen accepted values, with Unicode/accent/case and layout punctuation normalization. Numeric qualifiers, decimals, ranges and ratios are preserved. They do not use token overlap as a pass.',
             'A review difference may be a valid unit, name or granularity difference, a source contradiction, or a defect. Separate post-replay notes do not change the strict score.',
             'A missing canonical expectation is a blank output, including intentional withholding for conflict or schema limits. It is not automatically an unsafe omission.',
@@ -146,7 +218,12 @@ def build(args):
         assert audit['extractor_source_fingerprint'] == replay['source_tree_sha256'], 'Final audit source differs'
         assert audit['oracle_freeze_sha256'] == replay['oracle_freeze_sha256'], 'Final audit oracle differs'
         assert audit['canonical'] == candidate['counts'] and audit['supplementary_retention'] == retention['counts'], 'Final audit scores differ'
-        payload['final_audit_summary'] = 'Candidate ' + str(audit['final_candidate']) + ': local audit complete; integration BLOCKED. ' + audit['remaining_source_limit']
+        integration = integration_evidence(audit)
+        payload['integration_state'] = integration['state']
+        payload['integration_ready'] = integration['ready']
+        payload['integration_status'] = integration['summary']
+        payload['cost_boundary'] = audit_cost_boundary(audit)
+        payload['final_audit_summary'] = 'Candidate ' + str(audit['final_candidate']) + ': ' + integration['summary'] + ' ' + audit['remaining_source_limit']
         payload['final_audit_receipt'] = {'filename': args.audit_receipt.name, 'sha256': digest(args.audit_receipt), 'status': audit['status']}
         payload['repair_summary'].extend(audit.get('continuation_improvements', []))
         payload['limitations'].insert(0, audit['remaining_source_limit'])
@@ -159,7 +236,7 @@ def build(args):
 
 TEMPLATE = r'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'"><title>Coffee extractor · 603-case audit</title><style>
 :root{color-scheme:light;--ink:#22332c;--muted:#54635a;--paper:#f6f3eb;--card:#fffef9;--line:#d4dbd1;--ok:#206449;--warn:#855820;--bad:#9a3434}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}main{max-width:1320px;margin:auto;padding:32px 24px 80px}h1{font-size:clamp(28px,4vw,44px);line-height:1.1;margin:10px 0 18px}h2{font-size:24px;margin-top:32px}h3{font-size:19px}p{max-width:90ch}.eyebrow{letter-spacing:.13em;font-size:12px;font-weight:750;text-transform:uppercase}.muted,small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}.stat strong{display:block;font-size:30px;line-height:1.2}.stat span{font-size:13px}.notice{border-left:4px solid #a57a40;background:#eee6d7;padding:14px 18px;border-radius:0 8px 8px 0}.scroll{overflow:auto;max-width:100%}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#e9eee5}td{overflow-wrap:anywhere}thead th{white-space:nowrap}.controls{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:18px 0}label{font-size:13px;font-weight:650;display:block}input,select,button{font:inherit;padding:10px 12px;border:1px solid #98a89b;border-radius:7px;background:white;color:var(--ink)}input{width:min(450px,80vw)}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #367559;outline-offset:3px}details.case{border:1px solid var(--line);background:var(--card);border-radius:9px;margin:10px 0}summary{cursor:pointer;padding:14px 16px}.case-title{font-weight:650}.case-meta{display:block;font-size:13px;color:var(--muted);margin:3px 0 0 18px}.body{padding:0 18px 18px}.bad{color:var(--bad)}.review{color:var(--warn)}.good{color:var(--ok)}code,pre{font:12px/1.5 ui-monospace,monospace;overflow-wrap:anywhere;white-space:pre-wrap}pre{background:#f0f2eb;padding:12px;border-radius:6px;max-height:460px;overflow:auto}.quote{border-left:3px solid var(--line);padding-left:12px;margin:8px 0;font-size:14px}.pill{display:inline-block;border:1px solid var(--line);padding:1px 7px;border-radius:12px;font-size:12px;white-space:nowrap;margin-right:5px}a{color:#15583d}footer{font-size:13px;border-top:1px solid var(--line);margin-top:36px;padding-top:18px}@media(max-width:650px){main{padding:22px 12px 60px}.grid{grid-template-columns:1fr 1fr}.stat{padding:12px}.stat strong{font-size:25px}th,td{padding:8px}.body{padding:0 10px 14px}.case-meta{margin-left:0}.field-table{min-width:0}.field-table thead{display:none}.field-table tbody,.field-table tr,.field-table td{display:block}.field-table tr{border-bottom:1px solid var(--line);padding:10px 0}.field-table td{display:grid;grid-template-columns:88px minmax(0,1fr);gap:10px;border:0;padding:4px 0}.field-table td::before{content:attr(data-label);font-weight:650;color:var(--muted)}}
-</style></head><body><main><header><div class="eyebrow">The Dial In Collective · independent source audit</div><h1>Every selected coffee.<br>Every comparison visible.</h1><p>603 coffees from 201 U.S. roasters, three distinct products each. This report keeps the frozen expected values, original-source evidence, baseline results, repaired candidate, and remaining questions together.</p><div class="notice"><strong>Successful preview is not complete extraction.</strong> Strict field comparisons, supplementary evidence retention, ambiguity handling, and post-replay source reviews are separate measures. The candidate is local; this report does not establish deployment or perfect coverage.</div></header><section><h2>Measured results</h2><div id="stats" class="grid"></div><p class="muted" id="run"></p><div class="scroll"><table id="field-results"><thead><tr><th>Field</th><th>Expected</th><th>Baseline exact</th><th>Candidate exact</th><th>Candidate blank</th><th>Needs review</th></tr></thead><tbody></tbody></table></div><p id="retention-summary"></p><details><summary>How to interpret these numbers</summary><ul id="limits"></ul></details></section><section><h2>Implemented improvements</h2><div id="repair-summary"></div><p id="cost-boundary" class="muted"></p><p id="integration-status" class="notice"></p></section><section><h2>Inspect all 603 cases</h2><p>Search by coffee, roaster, state or source URL. Open any case to compare the original expected value with both versions and inspect the source quotes, supplementary facts and capture hashes.</p><div class="controls"><div><label for="search">Coffee, roaster, state or URL</label><input id="search" type="search" placeholder="e.g. Arbey, Onyx, CO" autocomplete="off"></div><div><label for="status">Show</label><select id="status"><option value="all">All cases</option><option value="missing">Has blank expected fields</option><option value="review">Has review differences</option><option value="unexpected">Has unexpected fields</option><option value="truncated">Source evidence truncated</option></select></div><button id="reset" type="button">Reset filters</button></div><p id="results-count" aria-live="polite"></p><div id="cases"></div></section><section><h2>Reproducibility</h2><p>The original expected values were locked before per-case outputs were opened. Separate post-replay reviews identify repairs, equivalences, disagreements and oracle omissions without rewriting that independent lock.</p><pre id="provenance"></pre></section><footer>This self-contained report loads no remote scripts, images or data. Clicking an explicit roaster source link opens that website. Sources can change after capture; the recorded bytes and hashes are the audit evidence.</footer></main><script id="audit-data" type="application/json">__PAYLOAD__</script><script>
+</style></head><body><main><header><div class="eyebrow">The Dial In Collective · independent source audit</div><h1>Every selected coffee.<br>Every comparison visible.</h1><p>603 coffees from 201 U.S. roasters, three distinct products each. This report keeps the frozen expected values, original-source evidence, baseline results, repaired candidate, and remaining questions together.</p><div class="notice"><strong>Successful preview is not complete extraction.</strong> Strict field comparisons, supplementary evidence retention, ambiguity handling, and post-replay source reviews are separate measures. Source integration is recorded separately below; this report does not establish deployment or perfect coverage.</div></header><section><h2>Measured results</h2><div id="stats" class="grid"></div><p class="muted" id="run"></p><div class="scroll"><table id="field-results"><thead><tr><th>Field</th><th>Expected</th><th>Baseline exact</th><th>Candidate exact</th><th>Candidate blank</th><th>Needs review</th></tr></thead><tbody></tbody></table></div><p id="retention-summary"></p><details><summary>How to interpret these numbers</summary><ul id="limits"></ul></details></section><section><h2>Implemented improvements</h2><div id="repair-summary"></div><p id="cost-boundary" class="muted"></p><p id="integration-status" class="notice"></p></section><section><h2>Inspect all 603 cases</h2><p>Search by coffee, roaster, state or source URL. Open any case to compare the original expected value with both versions and inspect the source quotes, supplementary facts and capture hashes.</p><div class="controls"><div><label for="search">Coffee, roaster, state or URL</label><input id="search" type="search" placeholder="e.g. Arbey, Onyx, CO" autocomplete="off"></div><div><label for="status">Show</label><select id="status"><option value="all">All cases</option><option value="missing">Has blank expected fields</option><option value="review">Has review differences</option><option value="unexpected">Has unexpected fields</option><option value="truncated">Source evidence truncated</option></select></div><button id="reset" type="button">Reset filters</button></div><p id="results-count" aria-live="polite"></p><div id="cases"></div></section><section><h2>Reproducibility</h2><p>The original expected values were locked before per-case outputs were opened. Separate post-replay reviews identify repairs, equivalences, disagreements and oracle omissions without rewriting that independent lock.</p><pre id="provenance"></pre></section><footer>This self-contained report loads no remote scripts, images or data. Clicking an explicit roaster source link opens that website. Sources can change after capture; the recorded bytes and hashes are the audit evidence.</footer></main><script id="audit-data" type="application/json">__PAYLOAD__</script><script>
 'use strict';
 const data=JSON.parse(document.getElementById('audit-data').textContent);
 const labels={name:'Coffee name',roaster:'Roaster',release_label:'Release / harvest',origin:'Origin',process:'Process',roast_level:'Roast level',elevation_m:'Elevation',variety:'Variety',producer:'Producer',tasting_notes:'Tasting notes'};

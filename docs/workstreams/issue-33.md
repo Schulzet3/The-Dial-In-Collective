@@ -1,3 +1,24 @@
+## October 24, 2026 UTC: candidate11 reconstruction and fresh hosted audit — TESTING
+
+PR109 merged candidate8 at `34a1755ab908ad845f4393b7677f1b0ca0985962`. Its public-source acceptance run **40062287845 failed** on SEY origin, Manhattan tasting-note scope, and Nomad/Circulor sanitized-capture parity. Passing ordinary checks did not override that failure. The separate diagnostic branch `05221ec8...` and its narrower expectations are not merged or copied here.
+
+The subsequent candidate10 full603 benchmark and combined local checks completed, but the execution environment disconnected and its unpublished runtime files and raw logs became inaccessible. Their recorded outcomes remain in [the historical local summary](../audits/extractor-candidate10-recorded-local-summary.json). The new reconstruction has different source bytes and is **candidate11**: no candidate10 full-benchmark or Node pass is claimed for it.
+
+Candidate11 repairs the demonstrated region/mountain relationship, independently scoped WooCommerce cards, complete attribute consumption, narrowly allowed public cart-template/inert-marker sanitization, and receipt-derived audit status. All existing public-probe targets and the complete source-fact parity gate remain unchanged. Independent review found a further leading-equals attribute ambiguity before integration; it is repaired with positive/negative controls, including leading-equals, tag-terminator and ASCII-whitespace boundaries. Node/full-corpus execution remains pending. Every new code/test file remains subject to actual hosted tests.
+
+The original frozen603/201 corpus, source archive and candidate8 recovery archive are preserved. A read-only GitHub job will verify the original archive/freeze/attestation hashes and run the real handler, unchanged comparison and retention checks. Complete candidate8-to11 outputs/calls/exports must remain equal apart from elapsed timing, with zero lost exact or fully retained assertions. No oracle, capture, scorer or product-decision change is authorized. Separate Python CI runs the existing free offline OCR prerequisites and actual audit/helper tests.
+
+Latest upstream `acf411ca344538e1ec68dde895c8e6600e2c4858` / tree `e9d9a3f4224d8fac13d1f83cc3fefe17857a35cd` is preserved, including the additional Community Node/SQL controls and its independent family-identity acceptance limits. All30 unchanged extractor runtime files were independently fetched and SHA-256 verified against the recorded manifest. Every unrelated queue row, history entry and root metadata value remains exact.
+
+Queue `DIC-Q-33-expanded-603-audit` remains **TESTING**. It records the actual candidate8 merge while candidate11's full benchmark, normal current-source Actions, non-force integration and fresh merged public acceptance remain pending. GitHub writes and Actions are explicitly authorized; no new API key, paid service, production publication, hosted SQL/Edge/Auth or member-data mutation is performed. No physical-device or real-member acceptance is inferred.
+
+Current evidence and next action: [extractor audit](../audits/2026-10-24-extractor-final-audit.md), source-bound hosted results once available, and this journal. Earlier dated checkpoints below are history, not current readiness.
+
+
+Concurrent upstream through `2f4668fdc7918a04f6cc2432021c5f15cb30acd2` (tree `93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee`) is preserved exactly. It includes PR113's confirmed-personal-family Community evidence and source READY reconciliation, staged unapplied migrations, and independent regression tests. The other queue rows and root metadata retain their current upstream values. None of the32 extractor runtime files or actual client-export module changed; fresh combined hosted checks cover the overall source.
+
+---
+
 ## October23,2026 MDT: PR109 reconciled with concurrent Community source9135e06
 
 The first real source commit517dfe26720e8eef69aa525bdb07f7c26d01c3fa and PR109 were independently read back: exact reviewed tree5d76faec8b10f3d2adb21b3bca30cffd9a772686 and sole real upstream parente6d8745. No synthetic history was uploaded. While its Actions ran, development advanced through five concurrent commits to9135e06dfe29da3caa0d3820e7eb8c003634ef29 (tree1474569e8db4aa820b5d6fac4af7ee11a9d4393c). All506 upstream blobs/modes were recovered exactly.
@@ -515,3 +536,8 @@ paths and is READY with no scoped blockers. Production release
 member records or publication changes. Existing saved coffees are not rewritten.
 Source development is complete; a future separately authorized release must
 use the existing scoped one-command publication process.
+
+
+### Candidate11 full frozen-corpus execution transferred to authorized GitHub Actions
+
+The execution environment is unavailable. The original source and candidate8 recovery archives are transferred through the unmodified Library helper with their complete prepared metadata; no archive code is executed. The new read-only same-repository workflow pins their hashes, the original oracle and scoring scripts, all32 current runtime files, and actual client export code. It runs the real handler on all603 coffees, compares complete outputs and calls to candidate8 (excluding timing only), and checks canonical/retention losses, all603 offline exports and the offline review helper. Source captures and transfer credentials are not retained in the output artifact. The scoped runner includes11 failure-boundary self-tests. Independent source review found no concrete path/privacy/false-pass blocker; the corrected report builder is included. None of these new hosted tests is claimed passed before its actual run. This commit's same-commit journal records the two CI files and current source manifest. The user explicitly authorizes GitHub use and normal Actions without treating it as added direct cost. No publication or production mutation is authorized.

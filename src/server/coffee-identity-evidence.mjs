@@ -184,6 +184,12 @@ function narrativeGeography(blocks){
     if(/^(?:Central|Northern|Southern|Eastern|Western|North|South|East|West)$/i.test(value))return;
     if(value&&!pieces.some(part=>key(part)===key(value)))pieces.push(value);
    };
+   // Preserve both explicitly linked locations: keeping only the mountain
+   // in "from Nyeri on the western slopes of Mount Kenya" falsely conflicts
+   // with a separately printed Nyeri region. Do not infer an unstated place.
+   for(const match of sentence.matchAll(new RegExp('\\b(?:[Ii]n|[Ff]rom)\\s+(?:the\\s+)?('+PLACE+')\\s*,?\\s+(?:on|along)\\s+(?:the\\s+)?(?:(?:northern|southern|eastern|western|northwestern|northeastern|southwestern|southeastern)\\s+)?(?:slopes|foothills)\\s+of\\s+('+PLACE+')','gu'))){
+    remember(match[1]);remember(match[2]);
+   }
    // Each pattern contains an actual geographic relationship. A bare farm
    // name, a product title, or a nearby country is not enough to invent a
    // town. Preserve every place word from the selected sentence verbatim.
