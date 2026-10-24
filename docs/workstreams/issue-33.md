@@ -1,3 +1,8 @@
+## October 24 UTC — public-source exact merged-source acceptance recheck (pending)
+Current development is 2fe83f3580bb465ad74c67774e7ae743b8e0e35c (tree 8fe9054f125c2727970abe199136291c83be0982), with concurrent Issue #33 source parity repairs already integrated and verified on their work branch in public run 40065961167. Independent parallel sanitizer run 40065995754 also passed all ten targets and strict original/sanitized parity. PR #118 is intentionally closed WITHOUT MERGE because it conflicts with newer integrated implementation. All application, Community, Issue5/10/12, member/offline work remains untouched by this test-only recheck. Trigger [dic-completeness-probe] against actual development HEAD via an innocuous audit-script comment; record result before READY. The merged-source approval check currently fails because queue intake treats the separately DEPLOYED Issue5 SQL migration as untracked. Preserve that distinction, do not weaken intake or alter #5 state without release evidence. No publication/provider writes. [skip netlify].
+
+---
+
 ## October23,2026 MDT: PR109 reconciled with concurrent Community source9135e06
 
 The first real source commit517dfe26720e8eef69aa525bdb07f7c26d01c3fa and PR109 were independently read back: exact reviewed tree5d76faec8b10f3d2adb21b3bca30cffd9a772686 and sole real upstream parente6d8745. No synthetic history was uploaded. While its Actions ran, development advanced through five concurrent commits to9135e06dfe29da3caa0d3820e7eb8c003634ef29 (tree1474569e8db4aa820b5d6fac4af7ee11a9d4393c). All506 upstream blobs/modes were recovered exactly.

@@ -1,4 +1,5 @@
 // Opt-in, credential-free acceptance against public roaster pages.
+// Exact merged-source public acceptance recheck after concurrent integration.
 // The application handler runs with LOCAL admission/quota responses; only its
 // existing DNS-pinned, bounded public HTTPS transports make network requests.
 // No real account, Supabase request, quota claim, database write or deployment.
