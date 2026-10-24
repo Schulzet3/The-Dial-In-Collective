@@ -131,3 +131,7 @@ Owner authorized one release needed to finish these issues. Development branch 2
 ### Scoped candidate migration and regression fixture reconstruction
 
 Applied unchanged, previously source-verified PR110 provenance SQL and the final PR113 Community SQL, including independently member-confirmed families, owner exclusion and anonymous source counts. Reused PR110/113 signed HTTP, rollback-only PostgreSQL and Node regression tests without changing expected outcomes, and included the appropriate private display/shot payload modules from the prior provenance commit. No extractor #33 deployable paths added to this scoped candidate; comprehensive candidate CI and branch isolation verification still pending. No live provider mutation, publication or member-data changes.
+
+### Scoped release candidate preflight queue intake
+
+Expanded only #12 tracked scope to cover new saved recommendation provenance and preserved #5 status. State remains TESTING with explicitly pending fresh candidate CI. The original #33 extractor source is not part of this candidate, even though its separately tracked work stays on development. Owner authorized only one release, still unused. No production changes.
