@@ -28,6 +28,14 @@ function productUrl(raw,source){
   url.pathname.replace(/\/+$/,'')!==source.pathname.replace(/\/+$/,''))return null;
  return url;
 }
+// An independently selected Product can identify the public product page or
+// its conventional Product fragment. A schema entity ID on an arbitrary
+// product-page fragment must not bypass the direct hasVariant guard below.
+function selectedProductUrl(product,source){
+ const raw=Object.hasOwn(product,'url')?product.url:product['@id'];
+ const url=productUrl(raw,source);
+ return url&&(!url.hash||/^#(?:product|product-group)$/i.test(url.hash))?url:null;
+}
 // Preserve strictly public typed schema variants directly under the selected Product.
 function rootSchemaIdentity(raw,source,type){
  if(typeof raw!=='string')return false;
@@ -67,7 +75,7 @@ function selectedPublicOffers(value,source){
  const addOffers=(item,parentVariant,depth=0,requireSchemaOffer=false)=>{
   if(!item||typeof item!=='object'||depth>8)return;
   if(Array.isArray(item)){for(const child of item.slice(0,512))addOffers(child,parentVariant,depth+1,requireSchemaOffer);return;}
-  const variant=selectedOfferVariant(item,source,parentVariant);
+  const variant=requireSchemaOffer&&!Object.hasOwn(item,'url')?null:selectedOfferVariant(item,source,parentVariant);
   if(variant&&(!requireSchemaOffer||rootSchemaIdentity(item['@id'],source,'Offer')))offers.set(item,variant);
   else if(hasType(item,'aggregateoffer'))addOffers(item.offers,parentVariant,depth+1,requireSchemaOffer);
  };
@@ -76,11 +84,8 @@ function selectedPublicOffers(value,source){
   if(!item||typeof item!=='object'||seen.has(item)||depth>32)continue;
   seen.add(item);visited++;
   if(!Array.isArray(item)&&(hasType(item,'product')||hasType(item,'productgroup'))){
-   const url=productUrl(Object.hasOwn(item,'url')?item.url:item['@id'],source);
-   // A URL-less schema Product ID is graph identity, never independent
-   // proof of the selected product document, even if its path is copied.
-   if(url&&!(Object.hasOwn(item,'url')&&rootSchemaIdentity(item['@id'],source,'Product'))&&
-      !(!Object.hasOwn(item,'url')&&/^#\/schema\/Product\//i.test(url.hash))){
+   const url=selectedProductUrl(item,source);
+   if(url){
     addOffers(item.offers,url.searchParams.get('variant'));
     if(!url.searchParams.has('variant')){
      const variants=Array.isArray(item.hasVariant)?item.hasVariant:[item.hasVariant];

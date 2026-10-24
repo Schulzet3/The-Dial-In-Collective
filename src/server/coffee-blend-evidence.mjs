@@ -204,7 +204,7 @@ function percentageProseComponents(page){
 function narrativeComposition(page,name){
  const blocks=productCoffeeProse(page,clean).filter(block=>!block.educational&&!/^h[1-6]$/.test(block.tag));
  const blendNamed=/\bblend\b/i.test(name),origins=[],methods=[],quotes=[];
- let wholeProcess=false,explicitMixture=false,wholeOrigins=false;
+ let wholeProcess=false,explicitMixture=false,wholeOrigins=false,incompleteOrigins=false;
  for(const block of blocks){
   const distinctExpressions=/\b(?:bringing|brings|bring)\s+together\s+(?:two|three|four|five|six|[2-6])\s+distinct\s+(?:expressions|process(?:es|ing methods))\b/i.test(block.text);
   const context=blendNamed||distinctExpressions||/\b(?:(?:this|our|the|a)\s+(?:(?:coffee|espresso)\s+)?(?:blend|mixture|fusion|combination)|(?:hand\s+)?blended|blending|components?)\b/i.test(block.text);
@@ -219,8 +219,13 @@ function narrativeComposition(page,name){
    const sourced=/\b(?:coffees?|beans?|origins?|components?)\s+(?:(?:is|are|was|were|sourced|grown|selected|chosen|drawn|coming|come|comes)\s+){0,4}(?:from|of|with)\b/i.test(composition)||
     /\b(?:blend|fusion|mixture|combination)\s+(?:(?:is|are|currently|made|up|composed|comprised)\s+){0,5}(?:from|of|with|contains?|includes?)\b/i.test(composition)||
     /\b(?:combine[sd]?|blends?|blended)\b.{0,150}\b(?:coffees?|beans?|favorites)\b/i.test(composition);
-   const completeOrigin=/\b(?:blend|fusion|mixture|combination)\s+(?:(?:is|are|currently|made|up|composed|comprised)\s+){0,5}(?:from|of|with|contains?|includes?)\b/i.test(composition)||
-    /\b(?:combine[sd]?|blends?|blended)\b.{0,150}\b(?:coffees?|beans?|favorites)\b/i.test(composition);
+   // A named pair can mention a country for only one component. A later
+   // "cup of coffee" does not prove the other component's growing origin.
+   const namedPair=composition.match(/^(?:Our|The)\s+(.{2,250}?)\s+and\s+(?:our|the)\s+(.{2,250}?)\s+coffees\s+are\s+(?:hand\s+)?blended\s+together\b/i);
+   const partialNamedPair=!!namedPair&&[namedPair[1],namedPair[2]].some(part=>!literalCoffeeSourcePlaces(part).length);
+   incompleteOrigins||=partialNamedPair;
+   const completeOrigin=!partialNamedPair&&(/\b(?:blend|fusion|mixture|combination)\s+(?:(?:is|are|currently|made|up|composed|comprised)\s+){0,5}(?:from|of|with|contains?|includes?)\b/i.test(composition)||
+    /\b(?:combine[sd]?|blends?|blended)\b.{0,150}\b(?:coffees?|beans?|favorites)\b/i.test(composition));
    const currentBase=context&&/\b(?:this season['’]s|current|our|the)\s+(?:base|component)\b.{0,120}\bfrom\b/i.test(composition);
    const combined=context&&/\b(?:layered|combined|blended|blending)\b/i.test(composition);
    const logisticsLocation=/\b(?:ships?|shipped|shipping)\b.{0,90}\bfrom\b|\b(?:roasted|roasting|packaged|packed|manufactured)\s+(?:in|at)\b/i.test(composition)&&
@@ -230,7 +235,7 @@ function narrativeComposition(page,name){
    // merely mentioned in a farm's history is not another component.
    if(places.length&&(context||places.length>=2)&&(sourced||combined||currentBase)){
     origins.push(...places);quotes.push(sentence);
-    wholeOrigins||=completeOrigin||((sourced||combined)&&places.length>1&&!/\b(?:component|base)\b/i.test(composition));
+    wholeOrigins||=completeOrigin||(!partialNamedPair&&(sourced||combined)&&places.length>1&&!/\b(?:component|base)\b/i.test(composition));
    }
    const blendMethods=context&&(distinctExpressions||/\b(?:blend|blended|mixture|components?|individual tracks)\b/i.test(block.text));
    if(!blendMethods)continue;
@@ -256,7 +261,7 @@ function narrativeComposition(page,name){
   multi_process:multiProcess,complete_process:wholeProcess&&processes.length===1,
   all_component_processes:wholeProcess||explicitMixture||multiProcess,
   incomplete_component_process:!wholeProcess&&places.length>1&&!multiProcess,
-  complete_producers:false,complete_varieties:false,complete_origins:wholeOrigins,component_format:'narrative'};
+  complete_producers:false,complete_varieties:false,complete_origins:wholeOrigins,incomplete_component_origins:incompleteOrigins,component_format:'narrative'};
 }
 export function withoutCoffeeBlendComponentSpecs(html,blend){
  if(!blend?.component_ranges?.length)return html;

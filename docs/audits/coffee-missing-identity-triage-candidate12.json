@@ -1,0 +1,998 @@
+{
+  "type": "frozen603_missing_canonical_source_triage",
+  "source_commit": "2eb32b247e2c47bd1646a234717a23d5cd14b6fc",
+  "source_run": 40068548616,
+  "source_job": 120796818592,
+  "source_log_sha256": "cfc39e85a52fa4a4b5e0922e263279c36d3930e372a3991c34f2b5811a9aeb37",
+  "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+  "scope": "65 originally missing C11 assertions: 11 origin, 11 process, 42 producer and 1 elevation. These are bounded source projections, not a new benchmark or a claim that every remaining gap is unfixable. Candidate12 full original-corpus results are pending.",
+  "rows": [
+    {
+      "case_id": "www-bluejazzcoffee-com__guatemala-antigua-43408003",
+      "field": "elevation_m",
+      "expected": "Lake Atitlan: 1800–2000m; HueHuetenengo: 1500–1700 MASL",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "One of the coffees is a fully washed selection from the Lake Atitlan region grown at 1800-2000 meters above sea level. The other is a washed HueHuetenengo grown at 1500-1700 MASL."
+        }
+      ],
+      "classification": "qualified_component_values_retained",
+      "reason": "The source gives two different altitude ranges for two named components. A single unqualified elevation would erase the component relationship; retain both source claims instead of inventing one range."
+    },
+    {
+      "case_id": "gnosiscoffee-com__red-bourbon-decaf-947e2539",
+      "field": "origin",
+      "expected": "Piendamó, Cauca, Colombia",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Piendamó, Cauca / Producer: Wilton Benítez and Paraíso 92"
+        }
+      ],
+      "classification": "unlabeled_entity_relation_needs_structural_review",
+      "reason": "The origin words are printed beside a producer credit without an origin label. The bounded text does not preserve the original layout needed to distinguish country, locality, farm and producer roles safely."
+    },
+    {
+      "case_id": "lowcountrycoffeeroasters-com__breakfast-blend-ccc8cf9e",
+      "field": "origin",
+      "expected": "Colombia, Costa La Amistad",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Breakfast Blend showcases Colombia, Costa La Amistad & Robusta."
+        }
+      ],
+      "classification": "incomplete_component_origin",
+      "reason": "The blend names Colombia, Costa La Amistad and Robusta. Robusta is a species rather than a place, and the literal Costa La Amistad text does not establish a country for every component."
+    },
+    {
+      "case_id": "novocoffee-com__danche-fe9eff8c",
+      "field": "origin",
+      "expected": "Danche, Worka Chelbessa, Gedeb, Ethiopia",
+      "original_status": "missing",
+      "original_explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Danche, a small village within the renowned Worka Chelbessa coffee-producing region of southern Ethiopia"
+        }
+      ],
+      "classification": "existing_conflict_requires_complete_claim_review",
+      "reason": "The original result explicitly withheld origin because current source claims disagree or have an unproven hierarchy. The projected expected quote alone cannot justify clearing that conflict; retain all claims and inspect the original competing evidence."
+    },
+    {
+      "case_id": "sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f",
+      "field": "origin",
+      "expected": "Planadas, Tolima, Colombia",
+      "original_status": "missing",
+      "original_explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "This Colombian coffee comes from the Department of Tolima in the Andean mountain range, purchased from a Colombia export company that works with an association of small specialty coffee farmers in Planadas."
+        }
+      ],
+      "classification": "existing_conflict_requires_complete_claim_review",
+      "reason": "The original result explicitly withheld origin because current source claims disagree or have an unproven hierarchy. The projected expected quote alone cannot justify clearing that conflict; retain all claims and inspect the original competing evidence."
+    },
+    {
+      "case_id": "shop-iconikcoffee-com__washed-sidra-giorgio-bressani-6098f7a9",
+      "field": "origin",
+      "expected": "San Jerónimo, Lake Atitlán, Guatemala",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Bressani Family, San Jerónimo Guatemala"
+        }
+      ],
+      "classification": "unlabeled_geography_and_farm_relation",
+      "reason": "The source mixes a family credit, San Jerónimo, a named farm and a nearby lake. Promoting all these strings into one origin requires a role/location relationship beyond the bounded unlabeled quote."
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "field": "origin",
+      "expected": "Oaxaca",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Oaxaca"
+        }
+      ],
+      "classification": "product_tag_not_corroborated_geography",
+      "reason": "Oaxaca is present as an untyped product tag. The retained tag alone cannot establish whether it is this coffee's growing origin or justify adding an unstated country."
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+      "field": "origin",
+      "expected": "Oaxaca, Mexico",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Oaxaca"
+        },
+        {
+          "capture_id": "page",
+          "quote": "flavorful Mexican organic coffee"
+        }
+      ],
+      "classification": "product_tag_not_corroborated_geography",
+      "reason": "Oaxaca is present as an untyped product tag. The retained tag alone cannot establish whether it is this coffee's growing origin or justify adding an unstated country."
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29",
+      "field": "origin",
+      "expected": "Oaxaca",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Oaxaca"
+        }
+      ],
+      "classification": "product_tag_not_corroborated_geography",
+      "reason": "Oaxaca is present as an untyped product tag. The retained tag alone cannot establish whether it is this coffee's growing origin or justify adding an unstated country."
+    },
+    {
+      "case_id": "vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2",
+      "field": "origin",
+      "expected": "Fresno, Tolima, Colombia",
+      "original_status": "missing",
+      "original_explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Origin: Colombia, Tolima"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Region: Fresno"
+        }
+      ],
+      "classification": "existing_conflict_requires_complete_claim_review",
+      "reason": "The original result explicitly withheld origin because current source claims disagree or have an unproven hierarchy. The projected expected quote alone cannot justify clearing that conflict; retain all claims and inspect the original competing evidence."
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb",
+      "field": "origin",
+      "expected": "Cayambe-Coca Natural Reserve,Ecuador",
+      "original_status": "missing",
+      "original_explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Location: Cayambe-Coca Natural Reserve, Ecuador"
+        }
+      ],
+      "classification": "existing_conflict_requires_complete_claim_review",
+      "reason": "The original result explicitly withheld origin because current source claims disagree or have an unproven hierarchy. The projected expected quote alone cannot justify clearing that conflict; retain all claims and inspect the original competing evidence."
+    },
+    {
+      "case_id": "www-nativocoffeeroasters-com__tranquilo-decaf-0d004043",
+      "field": "origin",
+      "expected": "Colombia",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "authentic taste of Colombian specialty coffee"
+        }
+      ],
+      "classification": "decaffeination_location_and_marketing_claim",
+      "reason": "Colombia is named as a decaffeination location, while the quoted demonym describes authentic taste. Do not infer growing origin from processing location or sensory marketing language."
+    },
+    {
+      "case_id": "44northcoffee-com__honduras-decaf-013a8aff",
+      "field": "process",
+      "expected": "Water process decaffeination",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Decaffeination method: Water process (non-chemical)"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "beanstockcoffee-com__colombian-supremo-organic-1ed788de",
+      "field": "process",
+      "expected": "Washed",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The coffees are generally washed two or three times"
+        }
+      ],
+      "classification": "qualified_method_statement",
+      "reason": "The excerpt says the coffees are generally washed. The existing current-claim guard excludes this qualification; the full published procedural text remains evidence rather than an unconditional canonical assertion."
+    },
+    {
+      "case_id": "brewpointcoffee-com__the-alchemist-decaf-blend-18d5dd47",
+      "field": "process",
+      "expected": "Mountain Water decaffeination",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "processed using the Mountain Water method"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "glorycloudcoffee-com__honduras-decaf-reserva-pacavita-organic-7aaae2f3",
+      "field": "process",
+      "expected": "Swiss Water Decaf",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Swiss Water Process leads to a fantastic decaf coffee"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "queencitycoffeeroasters-com__colombia-decaf-04783dc2",
+      "field": "process",
+      "expected": "Swiss Water Process",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Process: Swiss Water Process"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "queencitycollectivecoffee-com__liliana-ramirez-colombia-92ec7653",
+      "field": "process",
+      "expected": "Washed / Tres Cochadas",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "processed using the traditional Tres Cochadas method"
+        }
+      ],
+      "classification": "method_sequence_requires_current_claim_adjudication",
+      "reason": "The source names Tres Cochadas and describes a qualified harvest/processing sequence. A generic normalization must distinguish post-pulp washing from incidental washing and preserve the current-lot scope; no method-name lookup or broad qualifier exception was added."
+    },
+    {
+      "case_id": "sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f",
+      "field": "process",
+      "expected": "Sugar process decaffeination",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "decaffeinated at origin in Colombia using a chemical-free process our Spanish-learning roaster loosely attempted to translate as “sugar process”"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "sodality-coffee__supremo-colombia-decaf-28cfa749",
+      "field": "process",
+      "expected": "Swiss Water Decaf",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Process: Swiss Water Decaf"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "subterracoffee-com__decaf-colombia-sugarcane-medium-roast-3b39991b",
+      "field": "process",
+      "expected": "Sugarcane Decaf",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "made with the sugarcane decaffeination process"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "www-fazendacoffee-com__colombia-decaf-sugar-process-3cd8ff6d",
+      "field": "process",
+      "expected": "Sugar Cane EA Decaffeination",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Process: Sugar Cane Decaffeination Process"
+        }
+      ],
+      "classification": "canonical_model_separates_decaffeination",
+      "reason": "The expected text names a decaffeination treatment. Preserve the published processing detail, but do not replace the approved green-processing category with an out-of-enum treatment or infer a green method."
+    },
+    {
+      "case_id": "www-stumptowncoffee-com__kenya-karumandi-ebfbfccd",
+      "field": "process",
+      "expected": "Washed",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "undergo de-pulping and the wet fermentation process"
+        }
+      ],
+      "classification": "procedural_inference_not_explicit_category",
+      "reason": "The quote describes de-pulping and wet fermentation without explicitly naming the canonical Washed category. The audit must not silently convert this procedural inference into an unconditional source claim."
+    },
+    {
+      "case_id": "beanstockcoffee-com__colombian-supremo-organic-1ed788de",
+      "field": "producer",
+      "expected": "FUDAM growers association",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "(FUDAM) is a 300-member association"
+        }
+      ],
+      "classification": "candidate12_repair_pending_full_corpus",
+      "reason": "The current association-of-growers claim was blocked by a parenthetical certification. A tested parsing view skips only that certification qualifier and recovers the literal name FUDAM; no new role words are synthesized."
+    },
+    {
+      "case_id": "blackriverroasters-com__organic-honduras-comsa-d92176d0",
+      "field": "producer",
+      "expected": "COMSA (Cafe Organico Marcala, S.A)",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "formed COMSA (Cafe Organico Marcala, S.A)"
+        }
+      ],
+      "classification": "historical_organization_needs_current_lot_link",
+      "reason": "COMSA is named in a dated formation/certification history. A current coffee-source relationship must be established before automatically promoting that historical organization credit."
+    },
+    {
+      "case_id": "bostoncommoncoffee-com__mexico-zongolica-b58d95aa",
+      "field": "producer",
+      "expected": "20 women producers of Woman Power Zongolica",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Mexico Zongolica coffee is also called WPZ — \"Woman Power Zongolica!\" — by the 20 women who grew and produced it."
+        }
+      ],
+      "classification": "qualified_current_group_needs_role_resolution",
+      "reason": "The source credits 20 women who grew the named coffee, while Woman Power Zongolica is introduced as the coffee's alternative name. Do not silently turn that coffee name into an organization; the literal group/source relation remains retained."
+    },
+    {
+      "case_id": "brewtusroasting-com__ethiopia-natural-86045e38",
+      "field": "producer",
+      "expected": "Smallholder farmers",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "paying premiums to smallholder farmers"
+        }
+      ],
+      "classification": "unnamed_supplier_role_requires_attribution",
+      "reason": "Paying premiums to smallholder farmers supports a supplier-group fact, but the excerpt also names a processing station. It does not settle the desired producer level or the full current producer list."
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__bali-78c10a5d",
+      "field": "producer",
+      "expected": "Small family farms",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "where small family farms work a few acres at a time"
+        }
+      ],
+      "classification": "candidate12_repair_pending_full_corpus",
+      "reason": "A current clause explicitly says small family farms work the land and grow coffee. The tested generic role grammar preserves the literal small family farms credit."
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__nicaragua-pumpkin-spice-pacamara-8272581d",
+      "field": "producer",
+      "expected": "Gold Mountain",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Gold Mountain sealed ripe Pacamara cherries in a tank without oxygen"
+        }
+      ],
+      "classification": "candidate12_repair_pending_full_corpus",
+      "reason": "The source names Gold Mountain as the actor sealing this coffee's cherries in a tank. The tested producer reader keeps the oxygen-free processing qualification without treating it as denial of the actor."
+    },
+    {
+      "case_id": "combatcoffeetea-com__night-vision-medium-roast-kenya-5c582e18",
+      "field": "producer",
+      "expected": "Smallholder farmer cooperatives",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Smallholder farmers, each with around 200 trees, work together in co-ops."
+        }
+      ],
+      "classification": "qualified_current_group_needs_role_resolution",
+      "reason": "Smallholder farmers and co-ops are described as related roles, without one literal complete producer name. The audit retains that relationship without synthesizing a named cooperative."
+    },
+    {
+      "case_id": "contemporoast-com__black-honey-berries-2d89cc6a",
+      "field": "producer",
+      "expected": "Forest; Huver Castillo",
+      "original_status": "missing",
+      "original_explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Producer: Forest Farmer/Farm: Huver Castillo, El Paseo farm"
+        }
+      ],
+      "classification": "existing_conflict_requires_complete_claim_review",
+      "reason": "Explicit Producer and Farmer/Farm labels give Forest and Huver Castillo. Distinct source roles must not be silently concatenated to erase the existing producer conflict."
+    },
+    {
+      "case_id": "disciplescoffee-com__hunduras-b4389d3f",
+      "field": "producer",
+      "expected": "COMSA",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "coffee from COMSA in Marcala, La Paz"
+        }
+      ],
+      "classification": "untyped_source_entity_needs_role_corroboration",
+      "reason": "COMSA occurs after coffee from and before a locality, but the bounded source provides no explicit organization/producer role. The extractor must not classify arbitrary source-name tokens as people or organizations."
+    },
+    {
+      "case_id": "earthbackcoffee-com__ethiopian-yirgacheffe-medium-roast-7eccca01",
+      "field": "producer",
+      "expected": "Small farmers within the co-op",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Small farmers working hard within the co-op"
+        }
+      ],
+      "classification": "qualified_current_group_needs_role_resolution",
+      "reason": "The source describes small farmers working within a co-op. The complete producer relationship is not a single named entity and remains available for review."
+    },
+    {
+      "case_id": "ironcladcoffee-com__honduras-san-lazaro-ea54f0fa",
+      "field": "producer",
+      "expected": "Finca San Lazaro / Mission Lazarus",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The San Lazaro farm serves others through the non-profit ministry known as Mission Lazarus"
+        }
+      ],
+      "classification": "farm_and_ministry_roles_require_relationship_review",
+      "reason": "The source relates a named farm to a nonprofit ministry. Combining them as one producer requires preserving their different roles rather than treating every organization in the story as a grower."
+    },
+    {
+      "case_id": "larryscoffee-com__coffee-111-4366f999",
+      "field": "producer",
+      "expected": "Dehab Bitewlign",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Dehab Bitewlign has been working hard her whole life"
+        }
+      ],
+      "classification": "candidate12_repair_pending_full_corpus",
+      "reason": "The same named subject and pronoun explicitly enumerate a current coffee-producer role. The tested narrow biographical grammar recovers Dehab Bitewlign without borrowing a relative's occupation."
+    },
+    {
+      "case_id": "mbingomountaincoffee-com__ethiopia-guji-g3-organic-dambi-uddo-natural-6aa0040a",
+      "field": "producer",
+      "expected": "Approximately 450 smallholder farms supplying Dambi Uddo Station",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "across approximately 450 smallholder farms. These cherries are then delivered to the Dambi Uddo Station"
+        }
+      ],
+      "classification": "qualified_component_supplier_relationship",
+      "reason": "The source gives approximately 450 smallholder farms and a named receiving station. Preserve the quantity and supplier/station relationship; do not flatten it into an invented single entity."
+    },
+    {
+      "case_id": "memoirscoffee-com__papua-new-guinea-lahamenegu-red-mountain-natural-ax-5d7a4eb7",
+      "field": "producer",
+      "expected": "Smallholder farms supplying Lahamenegu wet mill",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "The mill’s supply chain services smallholder farms within a 30-kilometer radius"
+        }
+      ],
+      "classification": "qualified_supplier_and_mill_relationship",
+      "reason": "Smallholder farms supply a mill under an export company's chain. The bounded excerpt does not establish a single producer identity without resolving those distinct roles."
+    },
+    {
+      "case_id": "monhegancoffee-com__brazil-6a68cdb6",
+      "field": "producer",
+      "expected": "Fazenda Dutra",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Location: Fazenda Dutra (organically grown)"
+        }
+      ],
+      "classification": "geographic_label_names_farm_role",
+      "reason": "Fazenda Dutra is printed under Location. It is retained literally; moving a geographic label into Producer needs a tested farm-role rule and original layout adjudication rather than changing the label's meaning by name lookup."
+    },
+    {
+      "case_id": "nightswimcoffee-com__ghost-roast-d9cb981c",
+      "field": "producer",
+      "expected": "Koba community",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "COMMUNITY: Koba"
+        }
+      ],
+      "classification": "community_label_not_necessarily_producer",
+      "reason": "COMMUNITY: Koba supplies a community/location fact. It does not explicitly identify a named grower organization, so it must not be relabeled as Producer merely to satisfy the expected string."
+    },
+    {
+      "case_id": "others-coffee__get-right-brazil-parceiros-do-cafe-68c7326f",
+      "field": "producer",
+      "expected": "Fazenda Furnas; Apostolo Simao; Boa Vista",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The small variations in flavor from the Fazenda Furnas, Apostolo Simao, and Boa Vista farms combine"
+        }
+      ],
+      "classification": "multiple_farms_need_complete_list_relationship",
+      "reason": "The source gives three named farms in a current blend. Correct canonical handling must preserve all names and the three-farm relationship; a partial name or first-match fallback would be unsafe."
+    },
+    {
+      "case_id": "pinewoodcoffeeco-com__hacienda-rio-negro-7dec66a2",
+      "field": "producer",
+      "expected": "Hacienda Río Negro",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Hacienda Río Negro thrives under the same stewardship as Hacienda La Minita"
+        }
+      ],
+      "classification": "selected_farm_and_sister_estate_need_role_scope",
+      "reason": "The current farm and a sister estate occur together. Their shared stewardship is not evidence that both are the offered coffee's producer; a tested selected-farm relationship is needed."
+    },
+    {
+      "case_id": "ridleyroasthouse-com__pura-vida-3eb09eb4",
+      "field": "producer",
+      "expected": "Finca Santa Elena",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "dried slowly on the patios at Finca Santa Elena"
+        }
+      ],
+      "classification": "processing_site_not_unqualified_grower",
+      "reason": "The quoted farm hosts drying patios. A processing-site credit should remain distinct from an inferred owner/grower unless the full selected source explicitly links them."
+    },
+    {
+      "case_id": "roasterympls-com__organic-ethiopia-guiji-4c206fc5",
+      "field": "producer",
+      "expected": "Smallholder farmers",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Ethiopia’s smallholder farmers"
+        }
+      ],
+      "classification": "broad_collective_marketing_role",
+      "reason": "The coffee is said to reflect the tradition of a country's smallholder farmers. That broad statement lacks a bounded supplying producer identity; retain it as source context."
+    },
+    {
+      "case_id": "seedscoffee-com__ethiopia-guji-getachew-copy-aebdc1b3",
+      "field": "producer",
+      "expected": "Habtamu Fekadu Aga / Kuri Mountain Coffee",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Habtamu Fekadu Aga (‘Kuri Mountain Coffee’)"
+        }
+      ],
+      "classification": "export_company_and_founding_history_roles",
+      "reason": "The passage combines a company name, trading alias, founder, inherited farm and outgrowers. A producer string must not collapse these different roles or promote founding history without the current selected-source link."
+    },
+    {
+      "case_id": "sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f",
+      "field": "producer",
+      "expected": "Association of 39 small coffee growers",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The association gathers 39 small coffee growers"
+        }
+      ],
+      "classification": "qualified_association_membership",
+      "reason": "An unnamed association gathers 39 growers. The count and association membership are retained, but synthesizing a named producer or dropping the qualification would overstate the source."
+    },
+    {
+      "case_id": "shop-iconikcoffee-com__washed-guatemala-finca-san-jeronimo-8b09f740",
+      "field": "producer",
+      "expected": "Giorgio Bressani",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Giorgio Bressani, San Jerónimo Guatemala"
+        }
+      ],
+      "classification": "unlabeled_person_requires_role_correspondence",
+      "reason": "A bare full name is printed beside geography, while the later producer biography uses only the first name. Correct linking requires the original compact layout and identity correspondence, not a general person-name guess."
+    },
+    {
+      "case_id": "shop-iconikcoffee-com__washed-sidra-giorgio-bressani-6098f7a9",
+      "field": "producer",
+      "expected": "Bressani Family / Giorgio Bressani",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Bressani Family, San Jerónimo Guatemala"
+        }
+      ],
+      "classification": "family_and_person_identity_correspondence",
+      "reason": "The product uses a family credit and later a first-name biography. The bounded quote does not alone establish the full combined family/person producer string."
+    },
+    {
+      "case_id": "shop-justlovecoffee-com__kenya-aa-ndaroini-estate-c681155f",
+      "field": "producer",
+      "expected": "Farmers of Ndaroini Factory",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "dedicated farmers of the Ndaroini Factory"
+        }
+      ],
+      "classification": "qualified_farmers_and_factory_relationship",
+      "reason": "The source credits farmers of a named factory. Preserving the farmers/factory relationship requires a role-aware credit, not treating Factory as a farm owner or dropping the grower qualification."
+    },
+    {
+      "case_id": "shop-justlovecoffee-com__uganda-aa-lifesong-61614efb",
+      "field": "producer",
+      "expected": "Lifesong Farms",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Origin: Lifesong Farms | Mt. Elgon, Uganda"
+        }
+      ],
+      "classification": "mixed_origin_farm_and_geography_label",
+      "reason": "The Origin label contains both Lifesong Farms and Mt. Elgon, Uganda. A split into farm and geography needs complete structural evidence and a tested source-role rule."
+    },
+    {
+      "case_id": "spirituscoffee-com__guatemala-manos-de-mujer-40ee25e6",
+      "field": "producer",
+      "expected": "Guaya'b Asociación Civil, Manos de Mujer program",
+      "original_status": "missing",
+      "original_explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Producer: Guaya'b Asociación Civil, Manos de Mujer program"
+        }
+      ],
+      "classification": "existing_conflict_requires_complete_claim_review",
+      "reason": "Current producer/program labels use different qualifiers. The original conflict must not be removed by stripping meaningful program or member-role words without full claim adjudication."
+    },
+    {
+      "case_id": "thrivefarmers-com__horizon-organic-ee66c7f3",
+      "field": "producer",
+      "expected": "ACODIHUE",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "organic producing communities, ACODIHUE"
+        }
+      ],
+      "classification": "community_association_role_needs_current_link",
+      "reason": "ACODIHUE is a producing community/association in the narrative. A generic rule needs to bind that organization to the offered coffee while excluding neighboring/community context."
+    },
+    {
+      "case_id": "vestacoffee-com__kamwangi-kenya-cbf1ab54",
+      "field": "producer",
+      "expected": "Kamwangi washing station / New Ngariama Farmers’ Cooperative Society",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Kamwangi is one of three washing stations managed by the New Ngariama Farmers’ Cooperative Society"
+        }
+      ],
+      "classification": "candidate12_partial_role_recovery_pending_full_corpus",
+      "reason": "The new current station-operator grammar can recover the named cooperative from the literal managed-by clause. The frozen expected value also includes the station and the source adds a parenthetical description; the complete full-corpus output requires review."
+    },
+    {
+      "case_id": "vtartisan-com__sumatra-gayo-2f774ec2",
+      "field": "producer",
+      "expected": "Co-op (name not stated)",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "from a Co-op we have worked with for years"
+        }
+      ],
+      "classification": "unnamed_cooperative_role",
+      "reason": "The source explicitly says an unnamed Co-op. Do not fabricate a cooperative name; retaining the anonymous role is more faithful than matching the audit's explanatory parenthesis as literal source text."
+    },
+    {
+      "case_id": "www-aldeacoffee-com__ruth-reyes-naturally-processed-6c9444a7",
+      "field": "producer",
+      "expected": "Ruth Reyes",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Ruth Reyes"
+        }
+      ],
+      "classification": "product_name_not_sufficient_producer_role",
+      "reason": "Ruth Reyes is the product name, with an unnamed pioneer credit. A product title alone cannot establish that the named person is the producer rather than an honorific or branding choice."
+    },
+    {
+      "case_id": "www-altaroasters-com__kirima-batian-othaya-nyeri-kenya-12oz-bag-b814c94e",
+      "field": "producer",
+      "expected": "Othaya Farmers Cooperative Society",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "washing stations run by the Othaya Farmers Cooperative Society"
+        }
+      ],
+      "classification": "candidate12_repair_pending_full_corpus",
+      "reason": "The literal washing-stations-run-by clause credits Othaya Farmers Cooperative Society. This is already covered by candidate12's station-operator repair and focused actual Node controls."
+    },
+    {
+      "case_id": "www-darkmattercoffee-com__anthrax-cursum-perficio-e8175990",
+      "field": "producer",
+      "expected": "Pacas family / Cafe Tuxpal",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "coffee from the Pacas Family in El Salvador"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Cafe Tuxpal mill"
+        }
+      ],
+      "classification": "incomplete_component_producer_list",
+      "reason": "Only one blend component's family/mill credit is quoted. Promoting that partial list as the whole blend's producer would hide the unspecified other component."
+    },
+    {
+      "case_id": "www-ghosttowncoffee-com__rwanda-sholi-coop-natural-copy-b877526a",
+      "field": "producer",
+      "expected": "Abateraninkunga ba Sholi cooperative",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Abateraninkunga ba Sholi (\"Sholi\")"
+        }
+      ],
+      "classification": "alias_and_pronoun_role_need_linking",
+      "reason": "The full local-language name and nickname are followed by “This Coop”. Canonical recovery needs a bounded alias/pronoun link; the retained text must not be replaced by a guessed cooperative name."
+    },
+    {
+      "case_id": "www-lineageroasting-com__copy-of-kenya-gaikundo-2-bb0620c4",
+      "field": "producer",
+      "expected": "Abana Estate",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Visiting Abana estate"
+        }
+      ],
+      "classification": "historical_visit_not_current_source_credit",
+      "reason": "The quote describes visiting Abana estate in 2022. A historical visit alone must not become the current lot's producer."
+    },
+    {
+      "case_id": "www-paperplanecoffee-com__tres-cruces-honey-processed-guatemala-cdcb7eb8",
+      "field": "producer",
+      "expected": "smallholder farmers in Joyabaj",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "smallholder farmers in the community"
+        }
+      ],
+      "classification": "unnamed_farmers_and_mill_relationship",
+      "reason": "The source describes unnamed community farmers and transport to a wet mill. The missing canonical value requires a location-qualified collective inference beyond the literal producer name."
+    },
+    {
+      "case_id": "www-sidecarcoffee-com__uganda-rwenzori-d90536fa",
+      "field": "producer",
+      "expected": "Rwenzori smallholder producers",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "This natural-process coffee comes from the Rwenzori region of Uganda, a collection from smallholder producers."
+        }
+      ],
+      "classification": "qualified_unnamed_producer_group",
+      "reason": "The source explicitly describes a collection from smallholder producers in a named region. It remains reviewable as a qualified group; no producer organization or completeness is inferred."
+    },
+    {
+      "case_id": "www-stageline-coffee__brazil-capricornio-dulce-signature-4e3df727",
+      "field": "producer",
+      "expected": "Capricornio",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Capricornio"
+        }
+      ],
+      "classification": "brand_name_and_processing_team_role",
+      "reason": "Capricornio is praised for experimental practices and a signature series. The bounded text does not explicitly identify its role as grower, processor, exporter or brand."
+    },
+    {
+      "case_id": "www-thecoffeeexchange-com__honduras-comsa-espresso-roast-6d5322c1",
+      "field": "producer",
+      "expected": "Comsa Cooperative",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "The Comsa Cooperative"
+        }
+      ],
+      "classification": "organization_history_and_member_practices",
+      "reason": "The passage names the cooperative and describes member autonomy after its founding. A general producer rule still needs a current offered-coffee link and must exclude unrelated organization histories."
+    },
+    {
+      "case_id": "www-thecoffeeexchange-com__peru-cafe-canchaque-natural-process-american-roast-limited-offering-a3fff888",
+      "field": "producer",
+      "expected": "Cooperativa Agraria Cafetalera Jose Gabriel Condorcanqui",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Cooperativa Agraria Cafetalera Jose Gabriel Condorcanqui"
+        }
+      ],
+      "classification": "nested_cooperative_history_roles",
+      "reason": "The source names a cooperative, its historical namesake, an umbrella cooperative and a trading organization. These roles must be resolved without selecting whichever capitalized name appears first."
+    },
+    {
+      "case_id": "zekescoffee-com__honduras-marcala-lenca-farm-1d4ea326",
+      "field": "producer",
+      "expected": "The Garcias",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "The Garcias"
+        }
+      ],
+      "classification": "trading_partner_not_automatic_grower",
+      "reason": "The source directly trades with The Garcias and later discusses historical/current generations. A trading-partner credit alone should not silently become a grower claim without the complete current farm relationship."
+    },
+    {
+      "case_id": "zekescoffee-com__nicaragua-segovia-1-lb-16-oz-67c6cfae",
+      "field": "producer",
+      "expected": "PRODECOOP",
+      "original_status": "missing",
+      "original_explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "PRODECOOP"
+        }
+      ],
+      "classification": "cooperative_alias_needs_bounded_identity_link",
+      "reason": "The source explicitly defines a cooperative's acronym and production oversight. Recovery needs a tested current alias/role relationship; the evidence remains retained and this is a documented parser opportunity, not absent source."
+    }
+  ]
+}

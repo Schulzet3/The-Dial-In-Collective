@@ -8,7 +8,7 @@ import {normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {normalizeExplicitCoffeeTastingNotes} from './coffee-flavor-evidence.mjs';
 import {isEducationalCoffeeHeading} from './coffee-product-prose.mjs';
 export const COFFEE_FIELD_ALIASES=Object.freeze({
- origin:['origin','origin/region','country/region','the blend','origins','countries','country','country of origin','region','region/municipality','region/city','department','province','state','district','municipality','subregion','sub-region','city','village','geography','coffee origin','région','location','growing region','país','pais','país de origen','origen','origine','pays','región'],
+ origin:['origin','origin/region','country/region','the blend','origins','countries','country','country of origin','region','regions','region/municipality','region/city','department','province','state','district','municipality','subregion','sub-region','city','village','geography','coffee origin','région','location','growing region','país','pais','país de origen','origen','origine','pays','región'],
  elevation_m:['elevation','elevations','altitude','altitudes','altitude/elevation','elevation/altitude','masl','msnm','elevation m','altitude masl','grown at','altitude (masl)','altura','altitud','growing altitude','growing elevation','coffee growing altitude','coffee growing elevation'],
  process:['process','processes','the process','production method','processing type','proc. method','proc method','processing','processing method','processing style','milling','milling process','traitement','treatment','process method','proceso','procesamiento','processo'],
  variety:['variety','variety/cultivar(s)','the bean','tree variety','tree varieties','arabica varieties','arabica variety','varietal','cultivar','cultivars','varieties','varietals','variété','variété(s)','variétés','variedad','variedades','variedade','variedades'],
@@ -361,4 +361,34 @@ export function extractSemanticCoffeeSpecs(html,{clean}={}){
   other!==fact&&other.kind===fact.kind&&other.start<=fact.start&&other.end>=fact.end&&
   other.value.length>fact.value.length&&keyOf(other.value).startsWith(keyOf(fact.value))));
  return result;
+}
+
+
+// Canonical geography follows the same explicit educational-heading boundary
+// as narrative geography. Keep the original markup for supplementary evidence;
+// this offset-preserving view removes only geographic specifications.
+export function withoutEducationalCoffeeGeography(html,{clean}={}){
+ if(typeof html!=='string'||html.length>MAX_HTML||typeof clean!=='function')return html;
+ const {nodes}=coffeeHtmlElements(html),sections=[];
+ let start=-1,level=7;
+ for(const node of nodes){
+  if(!/^h[2-6]$/.test(node.tag)||node.contentEnd-node.headEnd>1500)continue;
+  const nextLevel=Number(node.tag[1]),education=isEducationalCoffeeHeading(clean(html.slice(node.headEnd,node.contentEnd),300));
+  if(nextLevel>level&&!education)continue;
+  if(start>=0)sections.push({start,end:node.start});
+  start=education?node.start:-1;level=nextLevel;
+ }
+ if(start>=0)sections.push({start,end:html.length});
+ if(!sections.length)return html;
+ const ranges=extractSemanticCoffeeSpecs(html,{clean}).facts
+  .filter(fact=>['origin','origin_process','farm_region'].includes(fact.kind)&&
+   sections.some(section=>fact.start>=section.start&&fact.end<=section.end))
+  .sort((a,b)=>a.start-b.start||b.end-a.end);
+ const chunks=[];let cursor=0;
+ for(const range of ranges){
+  if(range.end<=cursor)continue;
+  const begin=Math.max(cursor,range.start);
+  chunks.push(html.slice(cursor,begin),' '.repeat(range.end-begin));cursor=range.end;
+ }
+ chunks.push(html.slice(cursor));return chunks.join('');
 }

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "type": "actual_github_prebenchmark_superseded_run",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "pull_request": 121,
+  "source_commit": "ef01a082c99f1907dde83a97f7b8f66d600ec404",
+  "runtime_fingerprint": "37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24",
+  "workflow": ".github/workflows/coffee-frozen-corpus.yml",
+  "run_id": 40072603159,
+  "run_attempt": 1,
+  "job_id": 120809078026,
+  "run_created_at": "2026-10-24T07:02:56Z",
+  "run_updated_at": "2026-10-24T07:17:20Z",
+  "conclusion": "cancelled",
+  "superseding_source_commit": "2454c2e898c1cd600f9c7ed12a98379d59c3b313",
+  "superseding_runtime_fingerprint": "ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451",
+  "controls": {
+    "runner": {
+      "tests": 41,
+      "passed": 41,
+      "failed": 0,
+      "seconds": 2.362
+    },
+    "forensic_reader": {
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "seconds": 0.022
+    }
+  },
+  "actual_stages": [
+    {
+      "name": "Check archive and evidence-integrity failure boundaries",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Decrypt and materialize the original hash-bound frozen inputs",
+      "status": "completed",
+      "conclusion": "cancelled"
+    },
+    {
+      "name": "Run all 603 original cases, frozen scores, exports and independent review",
+      "status": "completed",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "Erase any remaining ephemeral receiver key",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Retain raw results, reports and logs without transfer data or source captures",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "materialize_failure": {
+    "stage": "materialize",
+    "reason": "Pull request changed while awaiting private inputs",
+    "exception_type": "ValueError",
+    "created_at": "2026-10-24T07:17:15.610678+00:00"
+  },
+  "evidence": {
+    "job_log": {
+      "bytes": 44022,
+      "sha256": "bb24c283337c882c12a9c426056e26f7d3563a0eb409beab55c762d00af63b08"
+    },
+    "diagnostic_artifact": {
+      "id": 12552107974,
+      "name": "dic-frozen603-candidate12-40072603159-1",
+      "bytes": 1016,
+      "sha256": "85020921be0f8ffb306eb97f01a7e3e36873400dfbe2c06597327ca3696992e4",
+      "expires_at": "2027-01-22T07:02:56Z"
+    }
+  },
+  "full_corpus_executed": false,
+  "source_archives_materialized": false,
+  "benchmark_scores_generated": false,
+  "reviewed_gate_executed": false,
+  "published_or_deployed": false,
+  "limits": [
+    "The concurrent ef01 commit and its old-runtime reviewed manifest are preserved as history. This cancelled job does not approve that manifest or any newer source.",
+    "Successful preparatory controls are not a successful corpus replay. The full603 step was skipped and the ephemeral-key cleanup succeeded.",
+    "The retained 1016-byte artifact contains preparation/failure diagnostics, not603 coffee outputs or a fresh benchmark receipt.",
+    "No passing frozen-benchmark claim or new extraction score is derived from this run."
+  ]
+}

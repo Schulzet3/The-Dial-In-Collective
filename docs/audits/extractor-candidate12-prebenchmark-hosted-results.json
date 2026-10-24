@@ -1,0 +1,610 @@
+{
+  "schema_version": 1,
+  "type": "candidate12_prebenchmark_hosted_history",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "candidate": 12,
+  "pull_request": 121,
+  "scope": "Immutable historical GitHub evidence before the first completed Candidate 12 frozen603 benchmark. These outcomes are bound to their own source commits and must not be relabeled as final-candidate passes.",
+  "original_frozen_inputs": {
+    "coffee_count": 603,
+    "roaster_count": 201,
+    "capture_count": 1197,
+    "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+    "expectations_modified": false
+  },
+  "first_pr_head": {
+    "source_commit": "c96d1c685ac601eec955907202aa2135da7cce57",
+    "source_tree": "9aff66b9cf7c7263005d51f022d0d80ac798e5e0",
+    "runtime_source_fingerprint": "9de825285249972f2657267bc0b74745c509b1db663dc185a4f7a7b5bd208da4",
+    "full_node": {
+      "run": {
+        "id": 40069437694,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC cloud app build and tests",
+        "workflow_path": ".github/workflows/cloud-beta-ci.yml",
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:16:16Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437694"
+      },
+      "log": {
+        "job_id": 120799488407,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437694/job/120799488407",
+        "decoded_utf8_bytes": 638450,
+        "decoded_utf8_sha256": "ab9a47c3e27f4461c0a475ace79e3ae777049dc46a859602b50cf63a90451f8e"
+      },
+      "counts": {
+        "tests": 1482,
+        "passed": 1475,
+        "failed": 1,
+        "cancelled": 0,
+        "skipped": 6,
+        "todo": 0
+      },
+      "duration_ms": 62601.730185,
+      "failure": {
+        "test": "additive notes preserve the unconditional first list when the additional flavor depends on preparation",
+        "test_file": "tests/coffee-semantic-continuation.test.mjs",
+        "test_definition_line": 101,
+        "assertion_line": 112,
+        "input": "This coffee has notes of plum with additional notes of hibiscus when served with milk.",
+        "expected": "plum",
+        "actual_value_present": false,
+        "actual_js_type": "undefined",
+        "failure_type": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "interpretation": "The new preparation qualifier removed a previously supported unconditional first flavor. The checked-in test was not changed to accept that loss."
+      },
+      "skipped_tests": [
+        "published application serves its sign-in shell",
+        "published admin route serves its shell without granting private data",
+        "dic-verify-coffee rejects requests without an authenticated JWT",
+        "dic-verify-coffee rejects forged JWT without touching member data",
+        "dic-preview-coffee rejects requests without an authenticated JWT",
+        "dic-preview-coffee rejects forged JWT without touching member data"
+      ],
+      "subsequent_build_and_syntax_completion_claimed": false
+    },
+    "cloud_regression": {
+      "run": {
+        "id": 40069437600,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC cloud UX regression checks",
+        "workflow_path": ".github/workflows/cloud-regression.yml",
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:15:55Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437600"
+      },
+      "log": {
+        "job_id": 120799487840,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437600/job/120799487840",
+        "decoded_utf8_bytes": 485436,
+        "decoded_utf8_sha256": "8f14ff14e205f17f90959e76bc52a367458ec29bae5b3326ce20396f26eb486f"
+      },
+      "job_conclusion": "failure",
+      "counts": {
+        "tests": 1108,
+        "passed": 1107,
+        "failed": 1,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "duration_ms": 36540.205657,
+      "failure": {
+        "test": "additive notes preserve the unconditional first list when the additional flavor depends on preparation",
+        "test_file": "tests/coffee-semantic-continuation.test.mjs",
+        "test_definition_line": 101,
+        "assertion_line": 112,
+        "input": "This coffee has notes of plum with additional notes of hibiscus when served with milk.",
+        "expected": "plum",
+        "actual_value_present": false,
+        "actual_js_type": "undefined",
+        "failure_type": "AssertionError",
+        "code": "ERR_ASSERTION",
+        "interpretation": "The new preparation qualifier removed a previously supported unconditional first flavor. The checked-in test was not changed to accept that loss."
+      },
+      "syntax_and_cloud_preview_build_steps": "skipped_after_test_failure"
+    },
+    "mobile_browser": {
+      "run": {
+        "id": 40069437600,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC cloud UX regression checks",
+        "workflow_path": ".github/workflows/cloud-regression.yml",
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:15:55Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437600"
+      },
+      "log": {
+        "job_id": 120799487665,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437600/job/120799487665",
+        "decoded_utf8_bytes": 66651,
+        "decoded_utf8_sha256": "a53682df9b7c14af3759848b44939125f7da8bc2e7d91f3f177dd6c18787f79b"
+      },
+      "job_conclusion": "success",
+      "reported_passed_checks": 61,
+      "note": "This job passed even though the workflow's separate cloud regression job failed."
+    },
+    "python_audit": {
+      "run": {
+        "id": 40069437646,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC coffee audit Python checks",
+        "workflow_path": ".github/workflows/coffee-audit-python.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:15:19Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437646"
+      },
+      "log": {
+        "job_id": 120799487980,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437646/job/120799487980",
+        "decoded_utf8_bytes": 49892,
+        "decoded_utf8_sha256": "938ff89fb4b180b974f685ebd70029b4844a1bb07ccbdf3edb7d6d39b3f59f70"
+      },
+      "suites": [
+        {
+          "name": "audit_report_and_retention_integrity",
+          "tests": 44,
+          "passed": 44,
+          "failed": 0,
+          "skipped": 0,
+          "duration_seconds": 5.861
+        },
+        {
+          "name": "offline_source_review_including_real_local_OCR",
+          "tests": 23,
+          "passed": 23,
+          "failed": 0,
+          "skipped": 0,
+          "duration_seconds": 1.637
+        }
+      ],
+      "versions": {
+        "python": "3.12.3",
+        "pillow": "10.2.0",
+        "tesseract": "5.3.4"
+      },
+      "scope": "Local synthetic fixtures, offline review and local OCR; no hosted OCR or paid service."
+    },
+    "approval_and_continuity": {
+      "run": {
+        "id": 40069437633,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC approval, implementation and continuity contract",
+        "workflow_path": ".github/workflows/approval-continuity.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:15:02Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437633"
+      },
+      "log": {
+        "job_id": 120799487990,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437633/job/120799487990",
+        "decoded_utf8_bytes": 32465,
+        "decoded_utf8_sha256": "840549b4455fd40ca68c58acb392ecb3cdc54bc8073422fdadb53b5e3d9b7fb2"
+      },
+      "reported": {
+        "owner_decisions": 53,
+        "ui_contracts": 18,
+        "tracked_gaps": 9,
+        "queue_schema": "PASS",
+        "queue_intake": "PASS",
+        "tracked_deployable_paths": 39,
+        "same_commit_continuity": "PASS",
+        "commit_count": 1,
+        "checked_paths": 37
+      }
+    },
+    "source_security_inventory": {
+      "run": {
+        "id": 40069437573,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC source security inventory and dependency advisory",
+        "workflow_path": ".github/workflows/security-inspection.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:15:04Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437573"
+      },
+      "log": {
+        "job_id": 120799487470,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437573/job/120799487470",
+        "decoded_utf8_bytes": 19327,
+        "decoded_utf8_sha256": "f451ee468018654edaeb0d41e801202e91800d2158f7542fbdf81414944c7b7a"
+      },
+      "scope": "The checked-in inventory/advisory workflow completed successfully; this record makes no broader claim that every vulnerability is absent."
+    },
+    "isolated_sql": {
+      "run": {
+        "id": 40069437591,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC isolated SQL release regression",
+        "workflow_path": ".github/workflows/isolated-sql-regression.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:15:48Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437591"
+      },
+      "log": {
+        "job_id": 120799487676,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437591/job/120799487676",
+        "decoded_utf8_bytes": 107825,
+        "decoded_utf8_sha256": "49d0a0de4353763ef59011c6a26eed8a085029c55a5ccfd9fa532b65f6271279"
+      },
+      "scope": "Network-isolated PostgreSQL and synthetic authenticated HTTP regression fixtures. No production SQL, real member rows or GoTrue production sessions were exercised.",
+      "reported_signed_postgrest_http_quality_assertions": 53
+    },
+    "private_visual_review": {
+      "run": {
+        "id": 40069437607,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC private visual review",
+        "workflow_path": ".github/workflows/visual-review.yml",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:16:44Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437607"
+      },
+      "log": {
+        "job_id": 120799487710,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437607/job/120799487710",
+        "decoded_utf8_bytes": 95304,
+        "decoded_utf8_sha256": "d3b82130720ac8f0cbff0f7e118f84782ee51d8e3ad73498f4e9c9fdfe1d9be9"
+      },
+      "reported_browser_checks": 61,
+      "reported_visual_checks": 167,
+      "reported_screenshots": 38,
+      "scope": "Private isolated browser review; no site publication."
+    },
+    "frozen_job_prebenchmark_rejection": {
+      "run": {
+        "id": 40069437621,
+        "attempt": 1,
+        "event": "pull_request",
+        "name": "DIC original frozen coffee corpus",
+        "workflow_path": ".github/workflows/coffee-frozen-corpus.yml",
+        "status": "completed",
+        "conclusion": "failure",
+        "head_sha": "c96d1c685ac601eec955907202aa2135da7cce57",
+        "created_at": "2026-10-24T06:14:50Z",
+        "updated_at": "2026-10-24T06:18:24Z",
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437621"
+      },
+      "log": {
+        "job_id": 120799487989,
+        "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069437621/job/120799487989",
+        "decoded_utf8_bytes": 42447,
+        "decoded_utf8_sha256": "d3eb38a6caa46befe02b9e5a03a68ae52503071d98751ac4c007a2ad843e6ebc"
+      },
+      "actual_failure": {
+        "status": "FAIL",
+        "stage": "materialize",
+        "reason": "Pull request changed while awaiting private inputs",
+        "exception_type": "ValueError",
+        "created_at": "2026-10-24T06:18:21.184971+00:00",
+        "original_expectations_modified": false,
+        "new_api_keys_or_paid_services": false,
+        "published_or_deployed": false
+      },
+      "runner_self_tests": {
+        "tests": 34,
+        "passed": 34,
+        "failed": 0,
+        "duration_seconds": 0.418
+      },
+      "forensic_reader_self_tests": {
+        "tests": 9,
+        "passed": 9,
+        "failed": 0,
+        "duration_seconds": 0.02
+      },
+      "public_interoperability": {
+        "nacl_box": true,
+        "hmac_sha512": true,
+        "hkdf_sha512": true
+      },
+      "input_envelope_submitted": false,
+      "original_archives_materialized": false,
+      "frozen_replay_started": false,
+      "completed_frozen_benchmark": false,
+      "interpretation": "The private-input guard rejected the stale PR head before downloading the original corpus. This is a pre-benchmark failure and supplies no Candidate 12 frozen scores or output review."
+    }
+  },
+  "repaired_head_live_acceptance": {
+    "source_commit": "7e7029fd26c10d2ea6149a938ea56fe7b44b5a43",
+    "source_tree": "560db289119c53bf94fd605ea620dc4d0dafa9c5",
+    "runtime_source_fingerprint": "3fabb78c3bb1d49bd5cffcf5dd3e6d4108495717d2021d7d37e628f659e8c6a0",
+    "run": {
+      "id": 40069670619,
+      "attempt": 1,
+      "event": "push",
+      "name": "DIC coffee extraction source acceptance",
+      "workflow_path": ".github/workflows/coffee-completeness.yml",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "7e7029fd26c10d2ea6149a938ea56fe7b44b5a43",
+      "created_at": "2026-10-24T06:18:16Z",
+      "updated_at": "2026-10-24T06:18:45Z",
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069670619"
+    },
+    "log": {
+      "job_id": 120800189979,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069670619/job/120800189979",
+      "decoded_utf8_bytes": 23571,
+      "decoded_utf8_sha256": "40087c8fd42e13925d0e6db53877f1eae41d972dd0ecbcce5446d68224694f5a"
+    },
+    "summary": {
+      "targets": 10,
+      "parsed": 9,
+      "required_targets": 10,
+      "required_failures": [],
+      "observed_gaps": 0,
+      "sources_with_gaps": [],
+      "public_requests": 19,
+      "real_backend_requests": 0,
+      "member_quota_consumed": 0,
+      "production_writes": 0,
+      "deployments": 0
+    },
+    "targets": [
+      {
+        "id": "sweet-bloom-arbey",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "Arbey Cordoba",
+          "roaster": "Sweet Bloom Coffee",
+          "producer": "Arbey Cordoba",
+          "tasting_notes": "mango, bing cherry, pineapple",
+          "variety": "bourbon ají",
+          "process": "Washed",
+          "elevation_m": "1886 masl",
+          "origin": "Huila, Colombia"
+        },
+        "recipe": {
+          "dose_g": 18,
+          "yield_g": 36,
+          "time_s_min": 22,
+          "time_s_max": 24
+        },
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 1717
+      },
+      {
+        "id": "sweet-bloom-arbey-canonical",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "Arbey Cordoba",
+          "roaster": "Sweet Bloom Coffee",
+          "producer": "Arbey Cordoba",
+          "tasting_notes": "mango, bing cherry, pineapple",
+          "variety": "bourbon ají",
+          "process": "Washed",
+          "elevation_m": "1886 masl",
+          "origin": "Huila, Colombia"
+        },
+        "recipe": {
+          "dose_g": 18,
+          "yield_g": 36,
+          "time_s_min": 22,
+          "time_s_max": 24
+        },
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 1708
+      },
+      {
+        "id": "sey-ruarai",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "2026 Ruarai; AA Separation - Kenya",
+          "roaster": "SEY COFFEE",
+          "origin": "Nyeri, Kenya",
+          "tasting_notes": "rose hips, pomegranate, and candied grapefruit",
+          "producer": "Ruarai",
+          "process": "Washed",
+          "variety": "SL28 & SL34",
+          "elevation_m": "1,783 masl",
+          "release_label": "November 2025"
+        },
+        "recipe": null,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 1597
+      },
+      {
+        "id": "black-white-lica",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "Lica Torres - Black Cherry Natural",
+          "roaster": "Black & White Coffee Roasters",
+          "origin": "Rivas, Brunca, Costa Rica",
+          "producer": "Don Lica Torres",
+          "process": "Natural",
+          "variety": "Catuaí",
+          "elevation_m": "1500 MASL",
+          "tasting_notes": "cocktail cherry, port wine, white icing, milk chocolate",
+          "roast_level": "Light"
+        },
+        "recipe": null,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 1569
+      },
+      {
+        "id": "tim-wendelboe-echemo",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "Echemo – Certified Organic",
+          "roaster": "Tim Wendelboe Coffee",
+          "tasting_notes": "Floral, white tea & stone fruits",
+          "variety": "Ethiopian heirloom from Coche forest",
+          "producer": "Khalid Shifa",
+          "origin": "Goma, Jimma, Ethiopia",
+          "process": "Washed",
+          "release_label": "December 2025"
+        },
+        "recipe": null,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 3179
+      },
+      {
+        "id": "onyx-geometry",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "Geometry",
+          "origin": "Colombia, Ethiopia",
+          "roaster": "Onyx Coffee Lab",
+          "process": "Washed",
+          "tasting_notes": "Berries, Stone Fruit, Earl Grey, Honeysuckle, Round",
+          "roast_level": "Light",
+          "variety": "Mixed",
+          "elevation_m": "1950 MASL"
+        },
+        "recipe": {
+          "dose_g": 20,
+          "method": "Espresso",
+          "yield_g": 47
+        },
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 3216
+      },
+      {
+        "id": "manhattan-samuel",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "Samuel Jr.",
+          "tasting_notes": "Star anise, Dark fudge, Verbena",
+          "roaster": "Manhattan Coffee Roasters",
+          "origin": "Cauca, Colombia",
+          "producer": "Diego Bermudez",
+          "elevation_m": "1960 masl",
+          "variety": "Caturra Chiroso",
+          "process": "Washed"
+        },
+        "recipe": null,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 4925
+      },
+      {
+        "id": "nomad-centroamericano",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "Centroamericano Natural Anaeróbico",
+          "roaster": "Nomad Coffee",
+          "origin": "Costa Rica",
+          "process": "Anaerobic",
+          "variety": "Centroamericano",
+          "elevation_m": "1200 - 1400 MSNM",
+          "release_label": "2026",
+          "tasting_notes": "Cacao nibs Frutos del bosque Tamarindo",
+          "producer": "Diego Robelo y su familia"
+        },
+        "recipe": null,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 1152
+      },
+      {
+        "id": "circulor-source-conflict",
+        "status": "parsed",
+        "required": true,
+        "fields": {
+          "name": "KENYA Coffea Circulor Outo Isolated SL34 AA Washed WX",
+          "roaster": "Coffea Circulor",
+          "origin": "Meru, Kenya",
+          "roast_level": "Light",
+          "elevation_m": "1,500 masl",
+          "process": "Washed"
+        },
+        "recipe": null,
+        "conflicts": [
+          "producer",
+          "tasting_notes",
+          "variety"
+        ],
+        "gaps": [],
+        "public_request_count": 2,
+        "elapsed_ms": 3242
+      },
+      {
+        "id": "queen-city-homepage-negative",
+        "status": "ambiguous_or_missing_product",
+        "required": true,
+        "fields": {},
+        "recipe": null,
+        "conflicts": [],
+        "gaps": [],
+        "public_request_count": 1,
+        "elapsed_ms": 462
+      }
+    ],
+    "artifact": {
+      "id": 12550344530,
+      "name": "dic-coffee-completeness-40069670619",
+      "size_bytes": 343818,
+      "sha256": "f317cd6131dacc67f388809866d4d4d5b5ea1750fd1abe91ad29fe4b777988e3",
+      "created_at": "2026-10-24T06:18:41Z",
+      "expires_at": "2027-01-22T06:18:17Z",
+      "repository_id": 1355472654,
+      "head_sha": "7e7029fd26c10d2ea6149a938ea56fe7b44b5a43",
+      "run_id": 40069670619
+    },
+    "interpretation": "All ten original required live contracts passed: nine parsed products and the required homepage rejection. The Circulor source conflict remained explicit. Live acceptance does not replace the unchanged frozen603 benchmark or later same-source ordinary CI."
+  },
+  "limitations": [
+    "Neither source head in this historical record completed the frozen603 benchmark.",
+    "Six full-Node tests explicitly reported SKIP; they are listed and are not represented as passing production/authentication tests.",
+    "The original full-Node and cloud failures are retained even though a later source commit repairs their cause.",
+    "GitHub API status and decoded completed logs were read directly; log hashes identify the exact decoded UTF-8 bytes, not GitHub's compressed log ZIP.",
+    "Artifact expiry is a retrieval limit. This durable JSON preserves the observed identities and outcomes; it does not make expired raw artifacts retrievable.",
+    "No deployment, publication, production SQL, member-data mutation, new API key or paid external service is authorized or implied by this evidence."
+  ]
+}

@@ -160,7 +160,7 @@ test('same-origin root schema Product variants and typed Offers preserve exact s
   child=>{child['@id']='https://other.example/#/schema/Product/selected-1001';},
   child=>{child['@id']='https://coffee.example/products/selected-kenya#/schema/Product/selected-1001';},
   child=>{child['@id']='https://coffee.example/#/schema/Product/selected-1001?private';},
-  child=>{child.url=SOURCE;},
+  child=>{child.url=null;},
   child=>{child.offers['@id']='https://other.example/#/schema/Offer/selected-1001';},
   child=>{child.offers['@id']='https://coffee.example/#/schema/Product/selected-1001';},
   child=>{child.offers.url='https://coffee.example/products/other?variant=1001';},
@@ -242,4 +242,120 @@ test('public fixture neutralizes quoted and unquoted JavaScript link or source a
    assert.match(fixture,/Variety: Bourbon/);
   }
  }
+});
+
+
+function schemaVariants(count=1){
+ const data=product();delete data.offers;
+ data.hasVariant=Array.from({length:count},(_,index)=>{
+  const id=String(1001+index),purchase=offer(id);
+  purchase['@id']='https://coffee.example/#/schema/Offer/selected-'+id;
+  return {'@type':'Product','@id':'https://coffee.example/#/schema/Product/selected-'+id,
+   name:'Selected Kenya - '+id,offers:purchase};
+ });
+ return data;
+}
+
+test('selected Product direct schema-ID variants preserve all nine public offers and whole extraction',()=>{
+ const input=schemaVariants(9),actual=clean(input);
+ assert.equal(actual.hasVariant.length,9);
+ assert.deepEqual(actual.hasVariant.map(row=>row.offers.checkoutPageURLTemplate),
+  input.hasVariant.map(row=>row.offers.checkoutPageURLTemplate));
+ const html=documentFor(input),fixture=sanitizePublicCoffeeFixtureHtml(html,{source_url:SOURCE});
+ const before=extractPublicCoffeeFacts(compactCoffeeProductHtml(html),{source_url:SOURCE});
+ const after=extractPublicCoffeeFacts(fixture,{source_url:SOURCE});
+ assert.equal(before.ok,true);
+ assert.match(JSON.stringify(before.source_facts),/checkoutPageURLTemplate/);
+ assert.deepEqual(after,before,'preserve every public variant fact, not just canonical fields');
+});
+
+test('schema-variant inheritance rejects contradictory, missing and unrelated product identities',()=>{
+ const mutations=[
+  data=>{data.url='https://coffee.example/products/another-coffee';},
+  data=>{data.hasVariant[0]['@type']='Thing';},
+  data=>{delete data.hasVariant[0]['@id'];},
+  data=>{data.hasVariant[0]['@id']='https://other.example/#/schema/Product/selected-1001';},
+  data=>{data.hasVariant[0]['@id']='http://coffee.example/#/schema/Product/selected-1001';},
+  data=>{data.hasVariant[0]['@id']='https://coffee.example/products/another-coffee#product';},
+  data=>{data.hasVariant[0]['@id']='https://coffee.example/#unrelated-product';},
+  data=>{data.hasVariant[0]['@id']='https://coffee.example/#/schema/Offer/selected-1001';},
+  data=>{data.hasVariant[0]['@id']='https://coffee.example/?session=private#/schema/Product/selected-1001';},
+  data=>{data.hasVariant[0].url=null;},
+  data=>{data.hasVariant[0].url='';},
+  data=>{data.hasVariant[0].url='https://other.example/products/selected-kenya';},
+  data=>{data.hasVariant[0].url='https://coffee.example/products/another-coffee';},
+  data=>{data.hasVariant[0].url=SOURCE+'?variant=1002';}
+ ];
+ for(const mutate of mutations){
+  const data=schemaVariants();mutate(data);
+  assert.equal(Object.hasOwn(clean(data).hasVariant[0].offers,'checkoutPageURLTemplate'),false,String(mutate));
+ }
+ for(const key of ['relatedProducts','subjectOf','seller']){
+  const data=schemaVariants(),child=data.hasVariant[0];
+  delete data.hasVariant;data[key]=child;
+  assert.equal(Object.hasOwn(clean(data)[key].offers,'checkoutPageURLTemplate'),false,key);
+ }
+ const detached=schemaVariants().hasVariant[0];
+ const graph={'@graph':[product(),detached]};
+ assert.equal(Object.hasOwn(clean(graph)['@graph'][1].offers,'checkoutPageURLTemplate'),false);
+});
+
+test('inherited schema variant still requires explicit selected Offer URL and strict public cart data',()=>{
+ const mutations=[
+  row=>{delete row['@id'];},
+  row=>{row['@id']='https://other.example/#/schema/Offer/selected-1001';},
+  row=>{row['@id']='https://coffee.example/#/schema/Product/selected-1001';},
+  row=>{delete row.url;},
+  row=>{row.url=null;},
+  row=>{delete row.url;row['@id']=SOURCE+'?variant=1001#offer';},
+  row=>{row['@type']='Thing';},
+  row=>{row.url='https://other.example/products/selected-kenya?variant=1001';},
+  row=>{row.url='https://coffee.example/products/another-coffee?variant=1001';},
+  row=>{row.url=SOURCE+'?variant=1001&session=private';},
+  row=>{row.url=SOURCE+'?variant=1001&variant=1001';},
+  row=>{row.checkoutPageURLTemplate='/cart/add?id=1001&quantity=1';},
+  row=>{row.checkoutPageURLTemplate='http://coffee.example/cart/add?id=1001&quantity=1';},
+  row=>{row.checkoutPageURLTemplate='https://other.example/cart/add?id=1001&quantity=1';},
+  row=>{row.checkoutPageURLTemplate='https://coffee.example/cart/add?id=1002&quantity=1';},
+  row=>{row.checkoutPageURLTemplate='https://coffee.example/cart/add?id=1001&quantity=100';},
+  row=>{row.checkoutPageURLTemplate='https://coffee.example/cart/add?id=1001&quantity=1&token=private';}
+ ];
+ for(const mutate of mutations){
+  const data=schemaVariants();mutate(data.hasVariant[0].offers);
+  assert.equal(Object.hasOwn(clean(data).hasVariant[0].offers,'checkoutPageURLTemplate'),false,String(mutate));
+ }
+ const privateData=schemaVariants();
+ privateData.hasVariant[0].sessionToken='DO_NOT_RETAIN_VARIANT';
+ privateData.hasVariant[0].offers.checkoutAuthToken='DO_NOT_RETAIN_OFFER';
+ const actual=clean(privateData);
+ assert.ok(actual.hasVariant[0].offers.checkoutPageURLTemplate);
+ assert.doesNotMatch(JSON.stringify(actual),/DO_NOT_RETAIN/);
+});
+
+test('independent Product page identities allow only public Product fragments and valid explicit URLs',()=>{
+ for(const type of ['Product','ProductGroup']){
+  for(const suffix of ['', '#product', '#product-group']){
+   const data=product();data['@type']=type;delete data.url;data['@id']=SOURCE+suffix;
+   assert.ok(clean(data).offers[0].checkoutPageURLTemplate,type+suffix);
+  }
+ }
+ for(const suffix of ['#/schema/Product/selected-1001', '#other-product', '#private-session']){
+  for(const explicitUrl of [false,true]){
+   const data=product();
+   if(explicitUrl)data.url=SOURCE+suffix;
+   else{delete data.url;data['@id']=SOURCE+suffix;}
+   assert.equal(Object.hasOwn(clean(data).offers[0],'checkoutPageURLTemplate'),false,suffix);
+  }
+ }
+ // This child is independently bound by its explicit selected-product URL.
+ // Only schema-ID inheritance requires the child's URL property to be absent.
+ const direct=schemaVariants();direct.hasVariant[0].url=SOURCE;
+ assert.ok(clean(direct).hasVariant[0].offers.checkoutPageURLTemplate);
+ const mismatch=schemaVariants();mismatch.hasVariant[0].url=SOURCE+'?variant=1002';
+ assert.equal(Object.hasOwn(clean(mismatch).hasVariant[0].offers,'checkoutPageURLTemplate'),false);
+ const grouped=schemaVariants(),selectedOffer=grouped.hasVariant[0].offers;
+ grouped.hasVariant[0].offers={'@type':'AggregateOffer',offers:[selectedOffer]};
+ assert.ok(clean(grouped).hasVariant[0].offers.offers[0].checkoutPageURLTemplate);
+ delete selectedOffer.url;
+ assert.equal(Object.hasOwn(clean(grouped).hasVariant[0].offers.offers[0],'checkoutPageURLTemplate'),false);
 });

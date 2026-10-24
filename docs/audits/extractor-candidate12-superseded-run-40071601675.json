@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "type": "candidate12_prebenchmark_superseded_workflow_receipt",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "pull_request": 121,
+  "source_commit": "b23602ee91361e921be3d805cc34610c52c33e60",
+  "source_tree": "f825e68dc9aba1286cf7578df41a53b7c7066461",
+  "runtime_fingerprint": "37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24",
+  "run_id": 40071601675,
+  "run_attempt": 1,
+  "workflow_path": ".github/workflows/coffee-frozen-corpus.yml",
+  "run_created_at": "2026-10-24T06:47:37Z",
+  "run_updated_at": "2026-10-24T06:51:40Z",
+  "status": "completed",
+  "conclusion": "cancelled",
+  "job_id": 120806049124,
+  "job_log": {
+    "bytes": 44070,
+    "sha256": "180df1d2faa605f274eacb7e9e6b51da4f6f2b7a7817233fce0aac4714cdc467"
+  },
+  "prepared_control_execution": {
+    "runner": {
+      "passed": 41,
+      "failed": 0,
+      "seconds": 1.856,
+      "script_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "script_sha256": "e9ad18b5ae80efa61dd3495b18ab38b4a2f4b92ba1df76cd9888e8b3444408df",
+      "new_order_only_controls_passed": 7
+    },
+    "reader": {
+      "passed": 9,
+      "failed": 0,
+      "seconds": 0.018,
+      "script_blob": "eccc73bf982d1f17001dcd02ca402f203964398d",
+      "script_sha256": "ff6167fe571e3a35140a9003994ef696788e59d1c167559920ef9d6e398023e9"
+    },
+    "public_crypto_vectors": "PASS"
+  },
+  "failure": {
+    "stage": "materialize",
+    "reported_status": "FAIL",
+    "reason": "Pull request changed while awaiting private inputs",
+    "exception_type": "ValueError"
+  },
+  "full_frozen_benchmark": {
+    "executed": false,
+    "step_conclusion": "skipped",
+    "canonical_or_retention_scores_established": false,
+    "usable_as_complete603_receipt": false
+  },
+  "ephemeral_receiver_cleanup": "SUCCESS",
+  "retained_result_artifact": [
+    {
+      "id": 12551433359,
+      "name": "dic-frozen603-candidate12-40071601675-1",
+      "bytes": 1018,
+      "sha256": "e8825404b8305f4c1ccf6533c49c981e82a9f01863eba450f110e6d22657c4af",
+      "created_at": "2026-10-24T06:51:36Z",
+      "expires_at": "2027-01-22T06:47:37Z"
+    }
+  ],
+  "source_integration_context": "Actual ordinary Node CI found the synthetic .example URL fixture defect. The parent withheld archive inputs, then committed only the corrected fixture and historical evidence at ccc03c70f7532af7854e450cd4d98344daa6cd4a. The runtime fingerprint is unchanged; that later run still needs its own actual full603 evidence.",
+  "claim_limit": "The recorded41+9 controls passed, including all seven order-only boundaries. The overall run was cancelled before archive materialization or any603 replay. No deployment or integration readiness is implied."
+}

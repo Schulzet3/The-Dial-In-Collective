@@ -91,6 +91,90 @@ def audit_cost_boundary(audit=None):
     return ' '.join(parts)
 
 
+
+def benchmark_review_evidence(audit=None, baseline_records=None, candidate_records=None):
+    """Present recorded export fidelity and exact reviewed deltas as distinct facts."""
+    audit = audit if isinstance(audit, dict) else {}
+    before = {row['case_id']: row for row in baseline_records or []}
+    after = {row['case_id']: row for row in candidate_records or []}
+    def case_hash(row):
+        value = {key: item for key, item in row.items() if key != 'elapsed_ms'}
+        return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True,
+                                         separators=(',', ':'), allow_nan=False).encode('utf-8')).hexdigest()
+    def digest_value(value):
+        return (isinstance(value, str) and re.fullmatch(r'[0-9a-f]{64}', value) is not None
+                and value != '0' * 64)
+    changes = sorted(case_id for case_id in before
+                     if case_id in after and case_hash(before[case_id]) != case_hash(after[case_id]))
+    complete = audit.get('complete_case_equivalence')
+    if isinstance(complete, dict):
+        assert before.keys() == after.keys() and len(before) == 603, 'Complete-case review coverage differs'
+        assert type(complete.get('cases')) is int and complete['cases'] == 603, 'Complete-case receipt count differs'
+        assert (type(complete.get('changed_cases')) is int and complete['changed_cases'] == len(changes)
+                and complete.get('ignored') == ['elapsed_ms']), 'Complete-case receipt changes differ'
+        if 'all_complete_case_outputs_calls_equal' in audit:
+            assert audit['all_complete_case_outputs_calls_equal'] is (not changes), 'Complete-case equality claim differs'
+    fidelity = audit.get('export_verification')
+    parts = []
+    if isinstance(fidelity, dict):
+        for key in ('cases', 'current_snapshot_download_passed', 'unchanged_from_c8',
+                    'changed_from_c8', 'offline_exports_passed'):
+            assert type(fidelity.get(key)) is int and 0 <= fidelity[key] <= 603, 'Invalid recorded client-export count'
+        assert (fidelity['cases'] == 603 and fidelity['current_snapshot_download_passed'] == 603
+                and fidelity['snapshot_blob_bytes_verified'] is True
+                and fidelity['unchanged_from_c8'] + fidelity['changed_from_c8'] == 603
+                and fidelity['unchanged_from_c8'] == audit.get('actual_client_exports_equal')
+                and fidelity['offline_exports_passed'] == audit.get('offline_helper_exports_passed')
+                and digest_value(fidelity.get('client_module_sha256'))), 'Client-export fidelity receipt differs'
+        parts.append('Receipt records 603 / 603 valid current client snapshot and Blob downloads; '
+                     + str(fidelity['unchanged_from_c8']) + ' exports are unchanged from C8 and '
+                     + str(fidelity['changed_from_c8']) + ' differ. Offline export checks passed '
+                     + str(fidelity['offline_exports_passed']) + ' / 603.')
+    elif type(audit.get('actual_client_exports_equal')) is int:
+        parts.append('Receipt records ' + str(audit['actual_client_exports_equal'])
+                     + ' client exports equal to C8; current snapshot/Blob fidelity is not separately '
+                     'summarized by this receipt.')
+    else:
+        parts.append('Separate client-export fidelity is not recorded in this receipt.')
+    gate = audit.get('reviewed_changes')
+    gate = gate if isinstance(gate, dict) else {}
+    reviewed_cases = audit.get('reviewed_change_cases', [])
+    if gate.get('status') == 'ACCEPTED':
+        assert isinstance(complete, dict) and isinstance(fidelity, dict), 'Reviewed changes lack complete export/case evidence'
+        assert (isinstance(reviewed_cases, list) and reviewed_cases
+                and all(isinstance(row, dict) and isinstance(row.get('case_id'), str) for row in reviewed_cases)), 'Missing reviewed case inventory'
+        indexed = {row['case_id']: row for row in reviewed_cases}
+        assert len(indexed) == len(reviewed_cases) and set(indexed) == set(changes), 'Reviewed case inventory differs from actual replay'
+        assert (type(gate.get('reviewed_cases')) is int and gate['reviewed_cases'] == len(changes)
+                and type(gate.get('reviewed_export_changes')) is int
+                and gate['reviewed_export_changes'] == fidelity['changed_from_c8']
+                and gate.get('unlisted_case_changes_permitted') is False
+                and gate.get('zero_loss_requirements_waived') is False), 'Reviewed change counts or scope differ'
+        export_changes = 0
+        for case_id, row in indexed.items():
+            assert (row.get('before_case_sha256') == case_hash(before[case_id])
+                    and row.get('after_case_sha256') == case_hash(after[case_id])), 'Reviewed whole-case hashes differ'
+            assert (digest_value(row.get('before_export_sha256'))
+                    and digest_value(row.get('after_export_sha256'))), 'Missing reviewed export hashes'
+            export_changes += row['before_export_sha256'] != row['after_export_sha256']
+        assert export_changes == fidelity['changed_from_c8'], 'Reviewed export hash inventory differs'
+        manifest = gate.get('manifest')
+        assert (isinstance(manifest, dict) and digest_value(manifest.get('sha256'))
+                and isinstance(manifest.get('file'), str)
+                and re.fullmatch(r'docs/audits/[A-Za-z0-9_.-]+\.json', manifest['file'])), 'Missing pinned reviewed-change manifest'
+        parts.append(str(len(changes)) + ' complete case outputs/call records have an exact pinned independent '
+                     'source review. Review manifest: ' + manifest['file'] + ', SHA-256 ' + manifest['sha256']
+                     + '. These outputs are changed; the frozen expected values and scoring rules remain unchanged.')
+    elif isinstance(complete, dict):
+        parts.append(str(len(changes)) + ' complete case output/call records differ from C8; '
+                     + ('no reviewed-change manifest is accepted.' if changes else 'all complete case records match C8 except elapsed time.'))
+    return {'summary': ' '.join(parts), 'recorded_benchmark_status': audit.get('status'),
+            'recorded_export_fidelity': fidelity if isinstance(fidelity, dict) else None,
+            'reviewed_changes': gate, 'observed_changed_case_ids': changes,
+            'reviewed_case_hashes': reviewed_cases if gate.get('status') == 'ACCEPTED' else [],
+            'all_complete_case_records_equal': not changes if before and after else None}
+
+
 def build(args):
     manifest_path = args.corpus / 'manifest.json'
     manifest = read(manifest_path)
@@ -202,6 +286,7 @@ def build(args):
         'integration_state': 'UNKNOWN', 'integration_ready': False,
         'integration_status': integration_evidence()['summary'],
         'cost_boundary': audit_cost_boundary(),
+        'benchmark_review': benchmark_review_evidence(),
         'limitations': ['Strict comparisons use frozen accepted values, with Unicode/accent/case and layout punctuation normalization. Numeric qualifiers, decimals, ranges and ratios are preserved. They do not use token overlap as a pass.',
             'A review difference may be a valid unit, name or granularity difference, a source contradiction, or a defect. Separate post-replay notes do not change the strict score.',
             'A missing canonical expectation is a blank output, including intentional withholding for conflict or schema limits. It is not automatically an unsafe omission.',
@@ -223,6 +308,7 @@ def build(args):
         payload['integration_ready'] = integration['ready']
         payload['integration_status'] = integration['summary']
         payload['cost_boundary'] = audit_cost_boundary(audit)
+        payload['benchmark_review'] = benchmark_review_evidence(audit, baseline_replay['records'], replay['records'])
         payload['final_audit_summary'] = 'Candidate ' + str(audit['final_candidate']) + ': ' + integration['summary'] + ' ' + audit['remaining_source_limit']
         payload['final_audit_receipt'] = {'filename': args.audit_receipt.name, 'sha256': digest(args.audit_receipt), 'status': audit['status']}
         payload['repair_summary'].extend(audit.get('continuation_improvements', []))
@@ -236,7 +322,7 @@ def build(args):
 
 TEMPLATE = r'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'"><title>Coffee extractor · 603-case audit</title><style>
 :root{color-scheme:light;--ink:#22332c;--muted:#54635a;--paper:#f6f3eb;--card:#fffef9;--line:#d4dbd1;--ok:#206449;--warn:#855820;--bad:#9a3434}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}main{max-width:1320px;margin:auto;padding:32px 24px 80px}h1{font-size:clamp(28px,4vw,44px);line-height:1.1;margin:10px 0 18px}h2{font-size:24px;margin-top:32px}h3{font-size:19px}p{max-width:90ch}.eyebrow{letter-spacing:.13em;font-size:12px;font-weight:750;text-transform:uppercase}.muted,small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}.stat strong{display:block;font-size:30px;line-height:1.2}.stat span{font-size:13px}.notice{border-left:4px solid #a57a40;background:#eee6d7;padding:14px 18px;border-radius:0 8px 8px 0}.scroll{overflow:auto;max-width:100%}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#e9eee5}td{overflow-wrap:anywhere}thead th{white-space:nowrap}.controls{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:18px 0}label{font-size:13px;font-weight:650;display:block}input,select,button{font:inherit;padding:10px 12px;border:1px solid #98a89b;border-radius:7px;background:white;color:var(--ink)}input{width:min(450px,80vw)}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #367559;outline-offset:3px}details.case{border:1px solid var(--line);background:var(--card);border-radius:9px;margin:10px 0}summary{cursor:pointer;padding:14px 16px}.case-title{font-weight:650}.case-meta{display:block;font-size:13px;color:var(--muted);margin:3px 0 0 18px}.body{padding:0 18px 18px}.bad{color:var(--bad)}.review{color:var(--warn)}.good{color:var(--ok)}code,pre{font:12px/1.5 ui-monospace,monospace;overflow-wrap:anywhere;white-space:pre-wrap}pre{background:#f0f2eb;padding:12px;border-radius:6px;max-height:460px;overflow:auto}.quote{border-left:3px solid var(--line);padding-left:12px;margin:8px 0;font-size:14px}.pill{display:inline-block;border:1px solid var(--line);padding:1px 7px;border-radius:12px;font-size:12px;white-space:nowrap;margin-right:5px}a{color:#15583d}footer{font-size:13px;border-top:1px solid var(--line);margin-top:36px;padding-top:18px}@media(max-width:650px){main{padding:22px 12px 60px}.grid{grid-template-columns:1fr 1fr}.stat{padding:12px}.stat strong{font-size:25px}th,td{padding:8px}.body{padding:0 10px 14px}.case-meta{margin-left:0}.field-table{min-width:0}.field-table thead{display:none}.field-table tbody,.field-table tr,.field-table td{display:block}.field-table tr{border-bottom:1px solid var(--line);padding:10px 0}.field-table td{display:grid;grid-template-columns:88px minmax(0,1fr);gap:10px;border:0;padding:4px 0}.field-table td::before{content:attr(data-label);font-weight:650;color:var(--muted)}}
-</style></head><body><main><header><div class="eyebrow">The Dial In Collective · independent source audit</div><h1>Every selected coffee.<br>Every comparison visible.</h1><p>603 coffees from 201 U.S. roasters, three distinct products each. This report keeps the frozen expected values, original-source evidence, baseline results, repaired candidate, and remaining questions together.</p><div class="notice"><strong>Successful preview is not complete extraction.</strong> Strict field comparisons, supplementary evidence retention, ambiguity handling, and post-replay source reviews are separate measures. Source integration is recorded separately below; this report does not establish deployment or perfect coverage.</div></header><section><h2>Measured results</h2><div id="stats" class="grid"></div><p class="muted" id="run"></p><div class="scroll"><table id="field-results"><thead><tr><th>Field</th><th>Expected</th><th>Baseline exact</th><th>Candidate exact</th><th>Candidate blank</th><th>Needs review</th></tr></thead><tbody></tbody></table></div><p id="retention-summary"></p><details><summary>How to interpret these numbers</summary><ul id="limits"></ul></details></section><section><h2>Implemented improvements</h2><div id="repair-summary"></div><p id="cost-boundary" class="muted"></p><p id="integration-status" class="notice"></p></section><section><h2>Inspect all 603 cases</h2><p>Search by coffee, roaster, state or source URL. Open any case to compare the original expected value with both versions and inspect the source quotes, supplementary facts and capture hashes.</p><div class="controls"><div><label for="search">Coffee, roaster, state or URL</label><input id="search" type="search" placeholder="e.g. Arbey, Onyx, CO" autocomplete="off"></div><div><label for="status">Show</label><select id="status"><option value="all">All cases</option><option value="missing">Has blank expected fields</option><option value="review">Has review differences</option><option value="unexpected">Has unexpected fields</option><option value="truncated">Source evidence truncated</option></select></div><button id="reset" type="button">Reset filters</button></div><p id="results-count" aria-live="polite"></p><div id="cases"></div></section><section><h2>Reproducibility</h2><p>The original expected values were locked before per-case outputs were opened. Separate post-replay reviews identify repairs, equivalences, disagreements and oracle omissions without rewriting that independent lock.</p><pre id="provenance"></pre></section><footer>This self-contained report loads no remote scripts, images or data. Clicking an explicit roaster source link opens that website. Sources can change after capture; the recorded bytes and hashes are the audit evidence.</footer></main><script id="audit-data" type="application/json">__PAYLOAD__</script><script>
+</style></head><body><main><header><div class="eyebrow">The Dial In Collective · independent source audit</div><h1>Every selected coffee.<br>Every comparison visible.</h1><p>603 coffees from 201 U.S. roasters, three distinct products each. This report keeps the frozen expected values, original-source evidence, baseline results, repaired candidate, and remaining questions together.</p><div class="notice"><strong>Successful preview is not complete extraction.</strong> Strict field comparisons, supplementary evidence retention, ambiguity handling, and post-replay source reviews are separate measures. Source integration is recorded separately below; this report does not establish deployment or perfect coverage.</div></header><section><h2>Measured results</h2><div id="stats" class="grid"></div><p class="muted" id="run"></p><div class="scroll"><table id="field-results"><thead><tr><th>Field</th><th>Expected</th><th>Baseline exact</th><th>Candidate exact</th><th>Candidate blank</th><th>Needs review</th></tr></thead><tbody></tbody></table></div><p id="retention-summary"></p><p id="benchmark-review" class="muted"></p><details><summary>How to interpret these numbers</summary><ul id="limits"></ul></details></section><section><h2>Implemented improvements</h2><div id="repair-summary"></div><p id="cost-boundary" class="muted"></p><p id="integration-status" class="notice"></p></section><section><h2>Inspect all 603 cases</h2><p>Search by coffee, roaster, state or source URL. Open any case to compare the original expected value with both versions and inspect the source quotes, supplementary facts and capture hashes.</p><div class="controls"><div><label for="search">Coffee, roaster, state or URL</label><input id="search" type="search" placeholder="e.g. Arbey, Onyx, CO" autocomplete="off"></div><div><label for="status">Show</label><select id="status"><option value="all">All cases</option><option value="missing">Has blank expected fields</option><option value="review">Has review differences</option><option value="unexpected">Has unexpected fields</option><option value="truncated">Source evidence truncated</option></select></div><button id="reset" type="button">Reset filters</button></div><p id="results-count" aria-live="polite"></p><div id="cases"></div></section><section><h2>Reproducibility</h2><p>The original expected values were locked before per-case outputs were opened. Separate post-replay reviews identify repairs, equivalences, disagreements and oracle omissions without rewriting that independent lock.</p><pre id="provenance"></pre></section><footer>This self-contained report loads no remote scripts, images or data. Clicking an explicit roaster source link opens that website. Sources can change after capture; the recorded bytes and hashes are the audit evidence.</footer></main><script id="audit-data" type="application/json">__PAYLOAD__</script><script>
 'use strict';
 const data=JSON.parse(document.getElementById('audit-data').textContent);
 const labels={name:'Coffee name',roaster:'Roaster',release_label:'Release / harvest',origin:'Origin',process:'Process',roast_level:'Roast level',elevation_m:'Elevation',variety:'Variety',producer:'Producer',tasting_notes:'Tasting notes'};
@@ -256,7 +342,8 @@ for(const value of data.limitations)document.getElementById('limits').append(el(
 for(const item of data.repair_summary){const d=el('details');d.append(el('summary',item.area),el('p',item.change));document.getElementById('repair-summary').append(d);}
 document.getElementById('cost-boundary').textContent=data.cost_boundary;
 document.getElementById('integration-status').textContent=data.integration_status;
-document.getElementById('provenance').textContent=JSON.stringify({candidate_source_tree_sha256:data.source_tree_sha256,oracle_freeze_sha256:data.oracle_freeze_sha256,replay_sha256:data.replay_sha256,comparison_sha256:data.comparison_sha256,retention_sha256:data.retention_sha256,baseline_replay_sha256:data.baseline_replay_sha256,baseline_comparison_sha256:data.baseline_comparison_sha256,comparison_normalizer_sha256:data.comparison_normalizer_sha256,packet_archive_attestation_sha256:data.packet_archive_attestation_sha256,source_archive_sha256:data.source_archive_sha256,packet_attestation_created_after_oracle_freeze:true,post_replay_review_files:data.post_replay_review_files,local_replay_timing_ms:data.local_replay_timing_ms,timing_limit:'Local parsing/orchestration only, not production network latency',generated_at:data.generated_at},null,2);
+document.getElementById('benchmark-review').textContent=data.benchmark_review.summary;
+document.getElementById('provenance').textContent=JSON.stringify({candidate_source_tree_sha256:data.source_tree_sha256,oracle_freeze_sha256:data.oracle_freeze_sha256,replay_sha256:data.replay_sha256,comparison_sha256:data.comparison_sha256,retention_sha256:data.retention_sha256,baseline_replay_sha256:data.baseline_replay_sha256,baseline_comparison_sha256:data.baseline_comparison_sha256,comparison_normalizer_sha256:data.comparison_normalizer_sha256,packet_archive_attestation_sha256:data.packet_archive_attestation_sha256,source_archive_sha256:data.source_archive_sha256,packet_attestation_created_after_oracle_freeze:true,post_replay_review_files:data.post_replay_review_files,benchmark_review:data.benchmark_review,local_replay_timing_ms:data.local_replay_timing_ms,timing_limit:'Local parsing/orchestration only, not production network latency',generated_at:data.generated_at},null,2);
 function caseBody(item){
  const body=el('div',undefined,'body'),source=el('p');source.append(link(item.source_url,'Open roaster product page'));body.append(source);
  const location=el('p',undefined,'muted');location.append(el('span',(item.roaster.city||'')+(item.roaster.state?', '+item.roaster.state:'')+' · '+(item.roaster.platform_hint||'platform unclassified')+'. '));if(item.roaster.location_source_url)location.append(link(item.roaster.location_source_url,'U.S. location evidence'));if(item.roaster.location_quote)location.append(el('span',' — '+item.roaster.location_quote));body.append(location);

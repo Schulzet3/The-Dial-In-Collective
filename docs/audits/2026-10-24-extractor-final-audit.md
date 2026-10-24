@@ -1,3 +1,17 @@
+# Dial In Collective extractor audit — current Candidate12 verification in progress
+
+## October 24 UTC — final residual repairs; new full verification pending
+
+PR121 remains **TESTING**. The combined32-file extractor fingerprint is `ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451`. This revision adds four literal current producer relationships and seven sensory-role repairs, with guards for competing countries, historical and other-product sections, body/acidity, preparation context and processing explanations. The final combined source passed independent review and137 restricted-V8 fixture functions, including54 new controls. Those diagnostics are not Node, browser or full-corpus acceptance.
+
+The latest completed full run [40071855281](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40071855281), sourceccc03c70/runtime37253, produced603 usable previews: **3044 exact /143 missing /815 review** of4002 unchanged canonical assertions;5458 full/337 partial/679 unconfirmed supplementary assertions. It had zero previous exact/full-retention losses,603 current snapshot/download checks and603 offline validations. Its32 changed complete outputs and31 changed export byte sets were retained as a strict **FAIL pending review**. Actual ordinary CI passed1515 Node tests with6 explicit published-endpoint/shell skips,1147 cloud tests,44+23 Python/OCR, lint/build/mobile/visual/security/isolated SQL/approval. The32-case source review and raw receipts are retained separately; they do not validate newac529 runtime bytes.
+
+Concurrent ef01a082 and its exact37253 review manifest are preserved and archived. Both review pins are empty for this new source. A fresh complete strict603 run, independent review of every actual change and a source-bound reviewed rerun are required before integration. The22 release-label questions have a separate closure receipt: no expected answer or release policy was changed, and three rows with no source context remain explicitly uncertain.
+
+Only this extractor queue item remains TESTING. All other queue records, Locked decisions, source captures, expected results, member/saved/offline behavior and concurrent release instructions remain intact. This task does not publish, deploy, execute production SQL/Edge/Auth, or change member data. No new keys or paid services are used.
+
+---
+
 # Final extractor audit receipt — October 24, 2026 UTC
 
 **CURRENT: READY for a separately approved future release; not deployed.** The material below the divider is the preserved historical candidate11 reconstruction plan and contains dated TESTING/pending statements superseded by this receipt.
@@ -100,3 +114,9 @@ Concurrent #5/#12 database delivery and the explicit TESTING source-carryover re
 This document will be reconciled with actual candidate11 results and exact integration receipts before a final readiness claim.
 
 The current [deferred combined-release handoff](../RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md) explicitly pauses publication and all further production SQL. It is preserved unchanged; source readiness will not reuse an earlier release grant.
+
+## Candidate12 workstream in PR121
+
+October 24, 2026 UTC: Owner now authorizes completing PR121 and ONE future combined publication of the verified READY queue, with no repeat production migrations, no unrelated TESTING scope and a separate release grant plus provider readback. This supersedes only the older pause on publication, not the source-integrity/safety/release controls. PR121 remains TESTING until its changed-runtime frozen603 has independently reviewed output deltas and exact-source passing checks; no publication has occurred.
+
+See separate tested branch and work journal; the historic C11 final audit above remains unchanged.

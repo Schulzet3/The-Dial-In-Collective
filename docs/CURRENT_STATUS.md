@@ -1,3 +1,32 @@
+## October 24 UTC — final residual repairs; new full verification pending
+
+PR121 remains **TESTING**. The combined32-file extractor fingerprint is `ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451`. This revision adds four literal current producer relationships and seven sensory-role repairs, with guards for competing countries, historical and other-product sections, body/acidity, preparation context and processing explanations. The final combined source passed independent review and137 restricted-V8 fixture functions, including54 new controls. Those diagnostics are not Node, browser or full-corpus acceptance.
+
+The latest completed full run [40071855281](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40071855281), sourceccc03c70/runtime37253, produced603 usable previews: **3044 exact /143 missing /815 review** of4002 unchanged canonical assertions;5458 full/337 partial/679 unconfirmed supplementary assertions. It had zero previous exact/full-retention losses,603 current snapshot/download checks and603 offline validations. Its32 changed complete outputs and31 changed export byte sets were retained as a strict **FAIL pending review**. Actual ordinary CI passed1515 Node tests with6 explicit published-endpoint/shell skips,1147 cloud tests,44+23 Python/OCR, lint/build/mobile/visual/security/isolated SQL/approval. The32-case source review and raw receipts are retained separately; they do not validate newac529 runtime bytes.
+
+Concurrent ef01a082 and its exact37253 review manifest are preserved and archived. Both review pins are empty for this new source. A fresh complete strict603 run, independent review of every actual change and a source-bound reviewed rerun are required before integration. The22 release-label questions have a separate closure receipt: no expected answer or release policy was changed, and three rows with no source context remain explicitly uncertain.
+
+Only this extractor queue item remains TESTING. All other queue records, Locked decisions, source captures, expected results, member/saved/offline behavior and concurrent release instructions remain intact. This task does not publish, deploy, execute production SQL/Edge/Auth, or change member data. No new keys or paid services are used.
+
+---
+
+## Active PR121 reconciliation and conditional release authorization
+
+October 24, 2026 UTC: Owner now authorizes completing PR121 and ONE future combined publication of the verified READY queue, with no repeat production migrations, no unrelated TESTING scope and a separate release grant plus provider readback. This supersedes only the older pause on publication, not the source-integrity/safety/release controls. PR121 remains TESTING until its changed-runtime frozen603 has independently reviewed output deltas and exact-source passing checks; no publication has occurred.
+
+## October 24 UTC — Candidate12 extractor accuracy follow-up; TESTING
+
+The earlier continuation merged through PR116 at `5da3eba1e6a567defca572c54ac677c81f4b535c`; development `30312b2184ccf23ce1180179bf9ebdfabce5fca8` and all concurrent source/receipt/queue history are preserved. Its original frozen603 run40066959055 at2eb32b2 completed603 previews,3024 exact/167 missing/811 review and5458 full/337 partial/679 unconfirmed supplementary assertions. That is completed Candidate11 evidence, not a Candidate12 result.
+
+Candidate12 continues separately on `work/issue33-candidate12-full-audit-20261024`. Actual focused run40069075479 at3deece8b passed95 Node tests,34 runner controls,20 report controls,9 changed-artifact reader controls and the unchanged NOMAD target with complete fixture parity. The final independently reviewed sensory-boundary extension adds preparation contractions/active milk additions, explicit hypothetical negatives, and an ordinary layered milk-chocolate positive; its exact ordinary/full603 verification is pending. Current32-file runtime fingerprint: `3fabb78c3bb1d49bd5cffcf5dd3e6d4108495717d2021d7d37e628f659e8c6a0`.
+
+All167 originally missing assertions have case-level triage. Conditional, conflicting, unsupported and unresolved source roles remain explicitly qualified. Every actual new full603 delta requires independent original-source review, exact manifest pins, zero previous exact/full-retention losses and all603 actual current exports/offline validations. Original answers, captures and scorers remain unchanged. GitHub development/Actions remain authorized without a new API key or paid service.
+
+The extractor remains **TESTING** until exact-source CI, full603 review/rerun, non-force integration and merged-source checks complete. **Publication remains paused** under the unchanged owner handoff; no release-branch push, grant, deployment, production SQL/Edge/Auth or member-data operation is authorized by this follow-up.
+
+
+---
+
 ## October 24, 2026 UTC — Issue #33 extractor audit integrated, verified READY; website NOT deployed
 
 **Current verified development:** PR [#116](https://github.com/Schulzet3/The-Dial-In-Collective/pull/116) merged non-force at `5da3eba1e6a567defca572c54ac677c81f4b535c`. The current exact merged development source `30312b2184ccf23ce1180179bf9ebdfabce5fca8` adds only a public-probe trigger and a same-commit journal; no runtime, privacy, source oracle, scoring, or source-capture change. The tested PR head and merge have identical file trees, confirmed by GitHub compare.
