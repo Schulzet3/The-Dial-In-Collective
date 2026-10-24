@@ -632,3 +632,7 @@ This commit is [skip netlify] development-only. Retain Issue33 TESTING until PR 
 ## October 24 UTC — exact-source public acceptance requested
 
 The first push workflow for 956be473 correctly skipped because this repository requires the explicit [dic-completeness-probe] marker in the head commit. This documentation-only follow-up triggers the existing bounded public-source acceptance without changing parser, sanitizer, frozen corpus, or test expectations. Inspect its actual result and repair any failure before READY. No release or production operations.
+
+## October 24 UTC — source-path trigger for scoped acceptance
+
+The prior journal-only [dic-completeness-probe] push was path-filtered and did not start the public-source workflow. This source-script comment is a no-behavior-change trigger under the existing workflow path filter, with the same required marker. All original expected responses and source parity checks remain unchanged; inspect exact run result before marking READY.
