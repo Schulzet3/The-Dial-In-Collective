@@ -20,3 +20,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 -B scripts/audit/coffee-ci-artifact-forensics.py
+  focused-node-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 22
+      - name: Run exact recovered fixture and qualified-flavor controls
+        run: node --test tests/coffee-live-fixture-sanitization.test.mjs tests/coffee-public-source-repairs.test.mjs tests/coffee-qualified-flavor-continuation.test.mjs

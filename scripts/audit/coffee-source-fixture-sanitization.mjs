@@ -51,15 +51,25 @@ function publicTemplate(value,source,variant){
   url.searchParams.get('id')===variant&&numericVariant.test(variant)&&
   /^(?:[1-9]|[1-9]\d)$/.test(url.searchParams.get('quantity')||'');
 }
+function inheritedSchemaVariant(product,source){
+ // A direct selected-product hasVariant may use an entity ID rather than
+ // a purchase URL. The Offer must still provide its own exact public URL.
+ if(!product||typeof product!=='object'||Array.isArray(product)||
+  !(hasType(product,'product')||hasType(product,'productgroup'))||
+  Object.hasOwn(product,'url')||!Object.hasOwn(product,'@id'))return false;
+ const id=httpsUrl(product['@id'],source.href);
+ return Boolean(id&&id.origin===source.origin&&id.pathname==='/'&&!id.search&&
+  /^#\/schema\/Product\/[a-z0-9._~-]{1,200}$/i.test(id.hash));
+}
 function selectedPublicOffers(value,source){
  const offers=new WeakMap(),seen=new WeakSet(),stack=[[value,0]];
  let visited=0;
- const addOffers=(item,parentVariant,depth=0)=>{
+ const addOffers=(item,parentVariant,depth=0,explicitUrl=false)=>{
   if(!item||typeof item!=='object'||depth>8)return;
-  if(Array.isArray(item)){for(const child of item.slice(0,512))addOffers(child,parentVariant,depth+1);return;}
-  const variant=selectedOfferVariant(item,source,parentVariant);
+  if(Array.isArray(item)){for(const child of item.slice(0,512))addOffers(child,parentVariant,depth+1,explicitUrl);return;}
+  const variant=explicitUrl&&!Object.hasOwn(item,'url')?null:selectedOfferVariant(item,source,parentVariant);
   if(variant)offers.set(item,variant);
-  else if(hasType(item,'aggregateoffer'))addOffers(item.offers,parentVariant,depth+1);
+  else if(hasType(item,'aggregateoffer'))addOffers(item.offers,parentVariant,depth+1,explicitUrl);
  };
  while(stack.length&&visited<20_000){
   const [item,depth]=stack.pop();
@@ -67,7 +77,12 @@ function selectedPublicOffers(value,source){
   seen.add(item);visited++;
   if(!Array.isArray(item)&&(hasType(item,'product')||hasType(item,'productgroup'))){
    const url=productUrl(Object.hasOwn(item,'url')?item.url:item['@id'],source);
-   if(url)addOffers(item.offers,url.searchParams.get('variant'));
+   if(url){
+    const parentVariant=url.searchParams.get('variant');
+    addOffers(item.offers,parentVariant);
+    for(const child of [].concat(item.hasVariant||[]).slice(0,512))
+     if(inheritedSchemaVariant(child,source))addOffers(child.offers,parentVariant,0,true);
+   }
   }
   for(const child of Object.values(item))if(child&&typeof child==='object')stack.push([child,depth+1]);
  }

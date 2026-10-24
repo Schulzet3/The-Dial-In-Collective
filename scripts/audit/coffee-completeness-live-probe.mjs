@@ -271,6 +271,16 @@ for(let index=0;index<selected.length;index+=2){
  const batch=await Promise.all(selected.slice(index,index+2).map(probe));
  for(const result of batch){
   results.push(result);
+  const parityFailures=result.captures.filter(item=>item.sanitization_preserves_html_extraction===false).map(item=>({
+   kind:item.kind,original_sha256:item.original_sha256,sanitized_sha256:item.sanitized_sha256,
+   parity_differences:item.parity_differences,parity_field_differences:item.parity_field_differences,
+   parity_conflicts_original:item.parity_conflicts_original,parity_conflicts_replay:item.parity_conflicts_replay,
+   parity_source_fact_counts:item.parity_source_fact_counts,
+   parity_missing_source_fact_examples:item.parity_missing_source_fact_examples,
+   parity_changed_product_attributes:item.parity_changed_product_attributes,
+   parity_offer_key_differences:item.parity_offer_key_differences
+  }));
+  if(parityFailures.length)console.log('[DIC FIXTURE PARITY] '+JSON.stringify({id:result.id,captures:parityFailures}));
   console.log('[DIC COMPLETENESS SOURCE] '+JSON.stringify({id:result.id,status:result.status,
    required:result.required,fields:result.fields,recipe:result.recipe,conflicts:result.conflicts,
    gaps:result.gaps,public_request_count:result.public_request_count,elapsed_ms:result.elapsed_ms}));
