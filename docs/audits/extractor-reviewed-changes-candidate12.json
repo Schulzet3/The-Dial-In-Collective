@@ -1,4 +1,8 @@
 {
+  "schema_version": 1,
+  "type": "independently_reviewed_frozen_case_changes",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "candidate": 12,
   "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
   "packet_archive_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556",
   "source_archive_sha256": "696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52",
@@ -9,7 +13,7 @@
     "comparison": "86701191b7a6f7d2e90060a1bcc2d8658d35e66670168a5cdfb1878255694aa3",
     "retention": "8f7b9b25a284ea2f0f06cd43b5d07a21469f1c20a80ad47612ac6a7c31880088"
   },
-  "candidate_runtime_fingerprint": "37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24",
+  "candidate_runtime_fingerprint": "ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451",
   "preserved_script_hashes": {
     "scripts/audit/coffee-corpus-replay.mjs": "0747079c41858ac4d586a3c6037a357ee4fa3d5259e271426409fdf4795e6c40",
     "scripts/audit/coffee-corpus-compare.mjs": "da04b988c824a44e7e3c8d4729dd99854333a33d5de539c2206353f215082549",
@@ -24,19 +28,15 @@
     ]
   },
   "baseline_stable_cases_sha256": "8f860d353364ad9d575feb2420e3ec09e3528b6ba414fef79b876a3e26694f97",
-  "candidate_stable_cases_sha256": "e1f3aa846cbd457e06e3d5a7c332871757fd96e2f6921bd0c12a88f577e2724b",
-  "schema_version": 1,
-  "type": "independently_reviewed_frozen_case_changes",
-  "repository": "Schulzet3/The-Dial-In-Collective",
-  "candidate": 12,
+  "candidate_stable_cases_sha256": "6ac8bf5f13e9a876f8b981401cc712219daf67df5f9fb002813eecbe40426db4",
   "expected_counts": {
     "canonical": {
       "cases": 603,
       "ok_response": 603,
       "canonical_assertions": 4002,
-      "exact_equivalent": 3044,
-      "missing": 143,
-      "review_required": 815,
+      "exact_equivalent": 3046,
+      "missing": 132,
+      "review_required": 824,
       "conflict_assertions": 115,
       "conflict_withheld": 65,
       "conflict_unresolved": 50,
@@ -55,60 +55,60 @@
     }
   },
   "review": {
-    "reviewer": "OpenAI GPT-6 independent original-source review",
-    "reviewed_at": "2026-10-24T07:00:54.006657+00:00",
+    "reviewer": "OpenAI GPT-6 independent original-source review with separate producer and sensory reviewers",
+    "reviewed_at": "2026-10-24T07:25:39Z",
     "decision": "approve_exact_source_supported_changes",
     "independent_source_review": true
   },
   "first_observed_run": {
-    "run_id": 40071855281,
+    "run_id": 40073531611,
     "run_attempt": 1,
-    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
-    "source_tree": "8082f78a977e44257d1738d1c190171104182afc",
+    "source_commit": "2454c2e898c1cd600f9c7ed12a98379d59c3b313",
+    "source_tree": "a24946142b73111db8c3478f7b59c8db5acc9043",
     "workflow_path": ".github/workflows/coffee-frozen-corpus.yml",
-    "completed_at": "2026-10-24T06:56:30Z",
+    "completed_at": "2026-10-24T07:22:06Z",
     "conclusion": "FAILURE",
     "benchmark_status": "FAIL",
     "artifact": {
-      "id": 12550893892,
-      "bytes": 15164900,
-      "sha256": "e3aa8eeac39d3d0a0e71f028f3d540c1d1aa594b08aaaaf9611b176d17eff260"
+      "id": 12551678774,
+      "bytes": 15173132,
+      "sha256": "3cc052595a38514553f760e65225dfbe3af07c470dcd99f8a2ee92d7fe4cc4c1"
     },
     "artifacts": {
       "replay": {
         "file": "candidate12-replay.json",
-        "bytes": 35336317,
-        "sha256": "0330b68b71d7a4b704e19ca499faa8ebbe915822706ed46e23f24774b458bef5"
+        "bytes": 35337626,
+        "sha256": "ad7c8277dd03c811bbf487b8a6e6c13dc7fd2259d3ae13305c841ee599f3a734"
       },
       "comparison": {
         "file": "candidate12-comparison.json",
-        "bytes": 6986729,
-        "sha256": "7754d41ef5489f8bca243abb35f93e4920daa609383c72eaea558157eb6f25b5"
+        "bytes": 6988361,
+        "sha256": "40a35d0929ab69fcd6f161bab721c5a8141bed20aa50e5ceab8596331ad01272"
       },
       "retention": {
         "file": "candidate12-retention.json",
         "bytes": 20080094,
-        "sha256": "222845615649c2f8e4de6e855af53a807740709cdacc01271a661725b88468b0"
+        "sha256": "567f377015ba9a8767afe6c350675afd6b63e74af6b522768e76ae205b18337f"
       },
       "exports": {
         "file": "actual-exports.json",
-        "bytes": 302989,
-        "sha256": "f3187512f13f434f898a552b8478b2a61a4542656fd6d337142e4c3b5d2d58f7"
+        "bytes": 304125,
+        "sha256": "27fbf997c56681532d662745ccc9096a00a0ca03b21d670bc09a31db18bab8f1"
       },
       "review_material": {
         "file": "review-material.json",
-        "bytes": 29002,
-        "sha256": "a9ed3f3cdce20424870d2c4b6236bd411e88674abf64ddd7cf519139b9bcf6a7"
+        "bytes": 36996,
+        "sha256": "a4c76ddd8238c9c3bf5c0f7a3d5d94d07c7e643df7b974933178305be9ad1592"
       },
       "summary": {
         "file": "summary.json",
-        "bytes": 41489,
-        "sha256": "cc40e1ed381e148e371f2ff6b603d285e437a03b757981b25de63662520b4ec3"
+        "bytes": 52484,
+        "sha256": "42931ec1048c9696de2deda87ab4112aada29d63558e3619147f5e44cf2df4d7"
       },
       "manifest": {
         "file": "artifact-manifest.json",
-        "bytes": 126416,
-        "sha256": "f82cad42a12f3341284fcd83519a718bf32e9d3060f8bac86cb2d87b20858be0"
+        "bytes": 126417,
+        "sha256": "9be2022623772fb6d4be6a71808fe75ef06c0fbffc2d82b6f50cdce1c16f801e"
       }
     }
   },
@@ -196,6 +196,34 @@
           "capture_source_url": "https://blackriverroasters.com/products/organic-honduras-comsa",
           "quote": "raspberry, jam, cranberry and cherry",
           "quote_basis": "literal_capture"
+        }
+      ]
+    },
+    {
+      "case_id": "bleucoffee-com__copy-of-papua-new-guinea-741ec193",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "bleucoffee-com",
+      "source_url": "https://bleucoffee.com/products/copy-of-papua-new-guinea",
+      "before_case_sha256": "e65d25a7b519a26c387ce3ea2ff08114fd342b4417b3806ea5ac245365b7ce70",
+      "after_case_sha256": "38e90a880f0498ccdbedcc70b41de406e6d149adb4781a900adfbe7e729e758d",
+      "before_export_sha256": "91b8dd4edc5a3da98d5881d1d96a0e40c8d7923c0c60cf71551538d2221444b8",
+      "after_export_sha256": "9010b219314a3905dc2053b6345b7de7f2b237f86ff49371d8ccbef50147fff3",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Sumatra Mandheling product explicitly separates its aroma clause from its current flavor clause. Preserve the complete literal rich, lush and smooth flavors of black cherry, tobacco and cocoa; the different floral, fruity, vanilla and pipe-tobacco aromas remain unchanged in source evidence rather than being merged into one cup profile.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "53694118b098b2b86f376474f4e8d7a09d4d83ba22d534192b0c7997a8acff22",
+          "capture_source_url": "https://bleucoffee.com/products/copy-of-papua-new-guinea.js",
+          "quote": "floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa.",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -385,6 +413,62 @@
       ]
     },
     {
+      "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "hellolarsonscoffee-com",
+      "source_url": "https://hellolarsonscoffee.com/products/bless-your-heart-1",
+      "before_case_sha256": "60fa039aeb059b69dbd6797f0d81e142f3eeb3c666791aa29af00a39d4273e38",
+      "after_case_sha256": "8d4d8331c6788fba86a03dc27cb2cb76233a55e2f66750ae538ee3482928205f",
+      "before_export_sha256": "5010872f36291ec61ccc18e2f1feae7b4d7f745c0ae07afbd6cb6f2df8833c6c",
+      "after_export_sha256": "74ac88427e45d8b01a2ab232de2738bcbec4572aac4e7cff6a380971e8c82141",
+      "decision": "source_supported_improvement",
+      "rationale": "The matched Bless Your Heart Brazilian product describes its own base variety as mildly sweet and nutty before separately offering optional flavors. Selected country evidence agrees; retain the literal conjunction and qualification without importing an optional flavor or rewriting the phrase to satisfy the frozen scorer.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "97eba20cf34c660238899a9c4336d2bce9288d8c84906fcb142688111b9c9bc1",
+          "capture_source_url": "https://hellolarsonscoffee.com/products/bless-your-heart-1",
+          "quote": "A mildly sweet and nutty Brazilian variety",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__hello-darlin-1-4d1fcba2",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "hellolarsonscoffee-com",
+      "source_url": "https://hellolarsonscoffee.com/products/hello-darlin-1",
+      "before_case_sha256": "f19b0865c11fbdf3a9dfb27de3bad50d1d7abf8b446b7fa1fe08bf3b6a0c7977",
+      "after_case_sha256": "3bed919b7732c1a2aa5393fc6bf6ebe221a04904063337181ce8560aac4c7e1a",
+      "before_export_sha256": "4dd354571d9b2321c28ea0acede08f900e675c2337a4f98d20aa49b6f2f03bd3",
+      "after_export_sha256": "b5fc484522edd75ed8ea4f8870e4a73cfcf0c69562049528d66dd84fccbd99e5",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Hello Darlin Papua New Guinea product explicitly calls its current cup fruity. Country evidence agrees and optional flavor choices are separate, so only the literal current base-coffee descriptor is supplied.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "c1a63c1d7f7a6bf2a61ff6e57b9cd283ee49a1fc70d412cebd14e7cc38193d3c",
+          "capture_source_url": "https://hellolarsonscoffee.com/products/hello-darlin-1",
+          "quote": "This rich cup of fruity Papua New Guinea goodness",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
       "case_id": "ironcladcoffee-com__honduras-san-lazaro-ea54f0fa",
       "changed_case_keys": [
         "output"
@@ -531,15 +615,23 @@
       "before_export_sha256": "6b1c6f4d944f3c604c8bf109f7ac09284dea84f72fb3988e00cb44d1e2e66732",
       "after_export_sha256": "9db8ebfcf0fd0bd881f45b62a56d354a7b5c42a0ea2b79725291637512e1637d",
       "decision": "source_supported_improvement",
-      "rationale": "The current Brazil product explicitly identifies Fazenda Dutra as its farming location and the coffee is organically grown, so the farm becomes the sourced producer while the location text is not mistakenly retained as an origin region.",
+      "rationale": "The selected Brazilian product explicitly labels Fazenda Dutra as its location. Fazenda identifies a farm, while organically grown is a descriptor. Retain the literal farm in producer/farm and the independently printed Brazil in origin; all original farm, organic and source text remains preserved.",
       "source_evidence": [
         {
-          "capture_id": "page",
-          "capture_file": "page.html",
-          "capture_sha256": "42b35a18e52c2da90ed6c066b2ced5ff660e42966fa2967ae585388f9d782f98",
-          "capture_source_url": "https://monhegancoffee.com/products/brazil",
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "194b31a9826e603fd07defd742f7200c414e019ee69c18a0f7240d1e2222d04a",
+          "capture_source_url": "https://monhegancoffee.com/products/brazil.js",
           "quote": "Location: Fazenda Dutra (organically grown)",
-          "quote_basis": "literal_capture"
+          "quote_basis": "frozen_oracle"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "194b31a9826e603fd07defd742f7200c414e019ee69c18a0f7240d1e2222d04a",
+          "capture_source_url": "https://monhegancoffee.com/products/brazil.js",
+          "quote": "Brazil",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -588,15 +680,101 @@
       "before_export_sha256": "960b26b2bbb4669522e7b82a7dce1ac45e9220e4151db504726124adb7904b7c",
       "after_export_sha256": "57886ddf06ad65b33e9b9d8f133bbd13b26e6a17e1bfb4027f3e41c2875d6891",
       "decision": "source_supported_improvement",
-      "rationale": "The selected medium roast Brazil blend lists exactly Fazenda Furnas, Apostolo Simao and Boa Vista farms as its three contributing farms, so their complete roster must be retained without inventing a single person.",
+      "rationale": "The current selected blend explicitly counts and combines the three named farms. Preserve Fazenda Furnas, Apostolo Simao and Boa Vista as the complete producer credit in source order; do not replace it with one component or invent a person/farm relationship.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "c8d07b1a183172c7d725931b06f49521bbb91990f1da82ab8482c547b67ae173",
+          "capture_source_url": "https://others.coffee/products/get-right-brazil-parceiros-do-cafe.js",
+          "quote": "The small variations in flavor from the Fazenda Furnas, Apostolo Simao, and Boa Vista farms combine",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
+      "case_id": "pinewoodcoffeeco-com__hacienda-rio-negro-7dec66a2",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "pinewoodcoffeeco-com",
+      "source_url": "https://pinewoodcoffeeco.com/products/hacienda-rio-negro",
+      "before_case_sha256": "0df3d1b6fe11d04de04d4491d76391d5c42b6aa04776c7738a48504fdcb10f4c",
+      "after_case_sha256": "2d8f0566556691e33e8682c9f58c0f11aba26e6d571db298ac3d2adef6c21776",
+      "before_export_sha256": "488d14c5ff684b9cfab6295363407278c657c6fb70f0db54459598e2fd564148",
+      "after_export_sha256": "b62779db4d4994c61147a2cb8b6818beaee4ba3f2ebb71338bdf508b01c02126",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Hacienda Rio Negro title and current source name Hacienda Río Negro, followed immediately by cultivation and processing at the farm's own Beneficio Río Negro mill. The shared stewardship comparison does not make the sister estate Hacienda La Minita, its steward or the mill a substitute producer.",
       "source_evidence": [
         {
           "capture_id": "page",
           "capture_file": "page.html",
-          "capture_sha256": "9bc17491b6b0e95c16ab57d12545962bc6bc6900dcf4dffeccfe64622094e81d",
-          "capture_source_url": "https://others.coffee/products/get-right-brazil-parceiros-do-cafe",
-          "quote": "Fazenda Furnas, Apostolo Simao, and Boa Vista farms",
-          "quote_basis": "literal_capture"
+          "capture_sha256": "87bdad3a1d5171298a6415a80b357059b079991f9d39431b12e3ec2a90f70fe7",
+          "capture_source_url": "https://pinewoodcoffeeco.com/products/hacienda-rio-negro",
+          "quote": "Hacienda Río Negro thrives under the same stewardship as Hacienda La Minita",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
+      "case_id": "shop-inkcoffee-com__6610-01ae1c21",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "shop-inkcoffee-com",
+      "source_url": "https://shop.inkcoffee.com/products/6610",
+      "before_case_sha256": "b2ce19ede16fe48a97083f0d1aa986afb441597df863810f87c6152ec5a6d90a",
+      "after_case_sha256": "20064d5e3910a80ac3d0b7b8bfdd588761d5ec25c45bfb072ea54621e88c282a",
+      "before_export_sha256": "5493d88ebf493df673f73f0550bd4e41eaa3f1044285f37c7ff7d565c1722b87",
+      "after_export_sha256": "4fb076a50f1cd8df8852a730110dce77931808ebc170af78d6898d845f614ab0",
+      "decision": "source_supported_improvement",
+      "rationale": "The current 6610 Characteristics passage explicitly links its roast to a rich taste, slightly smoky undertones and bittersweet dark chocolate. Retain that literal sensory clause while keeping adjacent roast, full body, low acidity and origin labels separate.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "1ecbf7fbdbf8a178c9a80eacc76452a949d49d6d2acfb44047c72d2626690a45",
+          "capture_source_url": "https://shop.inkcoffee.com/products/6610",
+          "quote": "slightly smoky undertones and bittersweet, dark chocolate",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
+      "case_id": "shop-inkcoffee-com__espresso-89-bd5b9a13",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "shop-inkcoffee-com",
+      "source_url": "https://shop.inkcoffee.com/products/espresso-89",
+      "before_case_sha256": "1071680eb4575c4d042cdfc42933197101ad8a2b893d7025ecbc0e75b4df7382",
+      "after_case_sha256": "690b5221080cb4dbbf60c7e8cb6f9d8bca377e09941b62f6e35102dd41cd7d10",
+      "before_export_sha256": "cba994982ad48750fcf1f7c7d6d8bd48dd42d93e03585465c51f7f7c95f9ffb1",
+      "after_export_sha256": "5553ba9826de55ef4ef4336ae32fdfe980297e4a59f4d012aeebcbda43ca1c20",
+      "decision": "source_supported_improvement",
+      "rationale": "Espresso 89's current Characteristics clause explicitly names chocolate taste and licorice sweetness. Its separate earlier milk/roast discussion and following Big body label do not belong in this unconditional tasting field; preserve the literal taste and sweetness modifiers.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "275a5d97e3bea9962a2627ee32a512ed813eb0accd208796082445005b200788",
+          "capture_source_url": "https://shop.inkcoffee.com/products/espresso-89",
+          "quote": "Darker roast chocolate taste, licorice sweetness",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -616,15 +794,43 @@
       "before_export_sha256": "110b84c17e751d48b1cdd587d187dfc6cca9c85e48e82a3e0ce1b832754ce394",
       "after_export_sha256": "9022cba27aefbaeb2585a20d356e5f5a29b24ecad2e4ebab5266197cf956e78d",
       "decision": "source_supported_improvement",
-      "rationale": "The selected Vienna roast explicitly lists caramel sweetness in its own labeled characteristics; the current flavor descriptor is literal and not a neighboring product or the historic French roast.",
+      "rationale": "The selected Vienna Characteristics caption explicitly attributes caramel sweetness to the coffee. Separate the neighboring roast hint, origin, body and acidity from the sensory value. The literal original descriptor is retained and the frozen scorer independently classifies it exact.",
       "source_evidence": [
         {
           "capture_id": "page",
           "capture_file": "page.html",
           "capture_sha256": "a3b51805ca61e3122264977d073182e9480200f12b26f81597e35ae9b4923da0",
           "capture_source_url": "https://shop.inkcoffee.com/products/vienna",
-          "quote": "caramel sweetness",
-          "quote_basis": "literal_capture"
+          "quote": "Characteristics - Hints of dark roast, and caramel sweetness",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
+      "case_id": "shop-justlovecoffee-com__colombia-honey-process-8fa61c65",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "shop-justlovecoffee-com",
+      "source_url": "https://shop.justlovecoffee.com/products/colombia-honey-process",
+      "before_case_sha256": "961c8d5ac706494c9c6e4196d2e7ce8e96bf679f84c82177f634b30b4d7d950c",
+      "after_case_sha256": "dc07509ab0250763a493255641c0ce2a351f23223d13d8f2ff2101f1a7ee7fd2",
+      "before_export_sha256": "6ca940fce1bf6fdff26b02e9b96145401ee9e166f36c493d8bfc3e18e4d4d745",
+      "after_export_sha256": "11e4367303d86f245e93f4248b289fa3ed5e0cb82bcebecce0f1fc3c03db4338",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Colombia Honey Process coffee explicitly publishes strawberry and orange notes complemented by delicate floral undertones. Retain the complete current named profile. The following causal processing explanation supplies only the broader fruit-forward tendency, remains unchanged in source facts, and does not replace the precise current notes.",
+      "source_evidence": [
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "7bbb02f9335517152cafd2465b36e9399f15a7d5266faf375d567b7a24b6b7a6",
+          "capture_source_url": "https://shop.justlovecoffee.com/products/colombia-honey-process",
+          "quote": "vibrant notes of strawberry and orange, complemented by delicate floral undertones",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -646,7 +852,7 @@
       "before_export_sha256": "6969e21e4e4524ea3b43ba6033f84b5dcd3e8e3a9bb2479bf162c8cc3f261a19",
       "after_export_sha256": "12f3bb080e6a11aa8681adc5f863a1531c7c46a725807deef10e5850410288e5",
       "decision": "source_supported_improvement",
-      "rationale": "The source explicitly credits dedicated farmers of the Ndaroini Factory for this selected Kenya AA coffee, with no inferred individual identity or unrelated supplier.",
+      "rationale": "The current selected Ndaroini coffee is explicitly sourced from the dedicated farmers of the Ndaroini Factory. Preserve that literal group credit and its modifiers without inventing an individual producer or deleting words to match the frozen expected value. The result remains review_required.",
       "source_evidence": [
         {
           "capture_id": "page",
@@ -654,7 +860,7 @@
           "capture_sha256": "d23470d1c321549c6ce0f9532f473fd034a29c48c0f478ffbceb40feecae5b8a",
           "capture_source_url": "https://shop.justlovecoffee.com/products/kenya-aa-ndaroini-estate",
           "quote": "dedicated farmers of the Ndaroini Factory",
-          "quote_basis": "literal_capture"
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -675,7 +881,7 @@
       "before_export_sha256": "f94852a1f1f4211634a6fc2f8eb69ff8df7c3af3f9e0eb080eb0f9dc3eef0b6d",
       "after_export_sha256": "d8d65961d5741974bc6b0a3b00b8e1c0715f5b826d362ac2d2d7a156d8f4d325",
       "decision": "source_supported_improvement",
-      "rationale": "The selected Uganda product origin explicitly labels Lifesong Farms and Mt. Elgon Uganda; the farm identity is credited as producer while the explicit geographic mountain and country remain origin.",
+      "rationale": "The selected coffee's Origin caption contains a literal named farm before the pipe and geographic text afterward. Preserve Lifesong Farms as producer/farm and Mt. Elgon, Uganda as origin. Do not append Bududa merely to match the expected composite; the remaining origin difference stays review_required.",
       "source_evidence": [
         {
           "capture_id": "page",
@@ -683,7 +889,35 @@
           "capture_sha256": "6eb29b9f66ffad34c6e44872d1f5b255cfb8bc6180532dba47f83f36fcfbb6dd",
           "capture_source_url": "https://shop.justlovecoffee.com/products/uganda-aa-lifesong",
           "quote": "Origin: Lifesong Farms | Mt. Elgon, Uganda",
-          "quote_basis": "literal_capture"
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
+      "case_id": "south17roasters-com__rose-roots-4d6c4fe4",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields"
+      ],
+      "roaster_id": "south17roasters-com",
+      "source_url": "https://south17roasters.com/products/rose-roots",
+      "before_case_sha256": "e18e2823821abf3b0ef323bce9d2e455c0f17f5f7d0a95e13d8e40f2828d3e79",
+      "after_case_sha256": "b72ed069932823a90dd39b505102ece9a70242ce99c37aa5dc5738b0c95aa829",
+      "before_export_sha256": "f60ee428530f8c0181309e2cdfec3debf10c6cdc66816e3df0e623fe88df6d42",
+      "after_export_sha256": "76b5f4eb2b65508182e535d9fc4527c2155a1a61a6d51e5bdf262b1f29d3ea53",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Rose and Roots description separately states an aroma of strawberry and rose, then explicitly invites the reader to taste strawberry jam and chocolate in every cup. Supply that literal cup-taste assertion while retaining the aroma and Pink Bucket Series context separately without manufacturing an edition.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "c293bbdd4513870aa1b7fc0c9605d573e75997797e0e90bc272e2d913d20e970",
+          "capture_source_url": "https://south17roasters.com/products/rose-roots.js",
+          "quote": "an enchanting aroma of strawberry and rose with each brew. Taste the complexity of strawberry jam and chocolate",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -705,15 +939,15 @@
       "before_export_sha256": "05170fc1f709e9fb445e09346e56842ab0acf6c363a385a4bf2ca7a9ab5a1672",
       "after_export_sha256": "1ebd4c98eed6509e00dcc417131a5e34f40a4a72237f0f899806a9289ce2734d",
       "decision": "source_supported_improvement",
-      "rationale": "Selected Kamwangi source explicitly identifies the current washing station and its managing New Ngariama Farmers Cooperative Society; the unrelated promotional parenthetical is no longer copied into the producer name.",
+      "rationale": "The original current Kamwangi paragraph explicitly identifies the selected washing station and its operator, New Ngariama Farmers’ Cooperative Society. Preserve both complementary credits, and remove only the descriptive parenthesis from the entity name. The complete source paragraph remains unchanged.",
       "source_evidence": [
         {
-          "capture_id": "page",
-          "capture_file": "page.html",
-          "capture_sha256": "de0c90f9b76fbfd83730d83854265b2d0b48662ff9f93c6819bcebb76c8b9667",
-          "capture_source_url": "https://vestacoffee.com/products/kamwangi-kenya",
-          "quote": "New Ngariama Farmers",
-          "quote_basis": "literal_capture"
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "a1169b25b39f0f8bc47593ddcca1a759174934c28d29aa6f30fb30ab138892c3",
+          "capture_source_url": "https://vestacoffee.com/products/kamwangi-kenya.js",
+          "quote": "Kamwangi is one of three washing stations managed by the New Ngariama Farmers’ Cooperative Society",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -724,24 +958,34 @@
       ],
       "changed_output_keys": [
         "available",
-        "fields"
+        "fields",
+        "producer_source",
+        "roaster_details"
       ],
       "roaster_id": "vtartisan-com",
       "source_url": "https://vtartisan.com/products/sumatra-gayo",
       "before_case_sha256": "f94c40ed8c3e85ff86f13b5b70163e7ee5765465c22281cf558e30b7ac6f011b",
-      "after_case_sha256": "bb94393cc8846c3b8e4eae2df0d49ee8d5f256a473e590ace1b9c701a23c2a6a",
+      "after_case_sha256": "06b9030c9f80add9f69d24049a71b296b4b43f34371eb05b8f4498a90bbc4497",
       "before_export_sha256": "a1e7567eda9ce2bbe35889fd67d79ed1b5f031e742965a6f7b6636256adfa510",
-      "after_export_sha256": "a592beea85630b9b601617785a244a81dca339fa42202b598bfc5480a8c903c0",
+      "after_export_sha256": "aadf282bdc003713a964f5975e8612247065d0b038565231f6beb28d7dce2bef",
       "decision": "source_supported_improvement",
-      "rationale": "The selected Sumatra Gayo coffee body describes its own wet-hulled beans as chocolaty, licorice-like and earthy, not a recipe additive or historical comparison.",
+      "rationale": "The current Indonesian Sumatra Gayo product directly identifies a Co-op as its long-standing supplier without naming that organization, so preserve only the literal anonymous role. The complete current chocolaty, licorice-like and earthy tasting wording is identical to the prior independently reviewed result; neither an invented cooperative name nor the oracle's explanatory parenthetical is added.",
       "source_evidence": [
         {
           "capture_id": "page",
           "capture_file": "page.html",
           "capture_sha256": "e6c2ffa27e76f97d6bbd25f211bce2b6e8f2d41bfb3308e5266581ab99aab0a9",
           "capture_source_url": "https://vtartisan.com/products/sumatra-gayo",
-          "quote": "chocolaty, licorice-like with bold, earthy undertones",
-          "quote_basis": "literal_capture"
+          "quote": "from a Co-op we have worked with for years",
+          "quote_basis": "frozen_oracle"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "e6c2ffa27e76f97d6bbd25f211bce2b6e8f2d41bfb3308e5266581ab99aab0a9",
+          "capture_source_url": "https://vtartisan.com/products/sumatra-gayo",
+          "quote": "coffee that is chocolaty, licorice-like with bold, earthy undertones",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -787,18 +1031,9 @@
       "after_case_sha256": "1c3602bc626f0becd3c7c52eb43f36ec6e71b749b8401abdfec1fed6b5b44c17",
       "before_export_sha256": "89b4f9e79884d63a52516ec3e9279ecacc0d519af028037fec0ea5007bea995a",
       "after_export_sha256": "89b4f9e79884d63a52516ec3e9279ecacc0d519af028037fec0ea5007bea995a",
-      "decision": "source_supported_improvement",
-      "rationale": "The original Ruth Reyes selected product is identical before and after apart from the ordering of the available field names; source selection, stored values and exports do not introduce a new fact.",
-      "source_evidence": [
-        {
-          "capture_id": "page",
-          "capture_file": "page.html",
-          "capture_sha256": "c1f173e621153adf59b2cf8d87451fb2d163816a8fb2c01baa707a41c187de72",
-          "capture_source_url": "https://www.aldeacoffee.com/products/ruth-reyes-naturally-processed",
-          "quote": "Ruth Reyes",
-          "quote_basis": "literal_capture"
-        }
-      ]
+      "decision": "nonsemantic_order_only",
+      "rationale": "Only the ordering of the same eight unique available-field names changed. The actual complete field values, all other case properties and calls, every canonical/additional/retention row, and the exported snapshot bytes are identical. This is an explicit nonsemantic permutation and adds no source or accuracy claim.",
+      "source_evidence": []
     },
     {
       "case_id": "www-altaroasters-com__kirima-batian-othaya-nyeri-kenya-12oz-bag-b814c94e",
@@ -866,6 +1101,36 @@
       ]
     },
     {
+      "case_id": "www-ghosttowncoffee-com__rwanda-sholi-coop-natural-copy-b877526a",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "www-ghosttowncoffee-com",
+      "source_url": "https://www.ghosttowncoffee.com/products/rwanda-sholi-coop-natural-copy",
+      "before_case_sha256": "32a8ea3f52c63810b4417a3a1f1805d78b617e671bab6026bfcb266e1bd03254",
+      "after_case_sha256": "702740f1cee77240089a894700628683472f3c16ab108b64116c9f388efd185f",
+      "before_export_sha256": "9becce07a802f727c6e3933001b572c10a453150892b96001becdfa429a60da7",
+      "after_export_sha256": "e2aa28ef650fef40c46bf4ecc0e4ecb0584e1dda39ce7e2f77986399c9c4e4f7",
+      "decision": "source_supported_improvement",
+      "rationale": "The selected Rwanda Sholi Cooperative product defines Sholi as Abateraninkunga ba Sholi and immediately describes This Coop's continuing coffee production. Preserve the published full name rather than inventing a person or appending an explanatory cooperative suffix absent from the literal name.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "967f5da9c127b9a76b6b580c07baa1e07c18e5c2aa88d212e75625e73645fa26",
+          "capture_source_url": "https://www.ghosttowncoffee.com/products/rwanda-sholi-coop-natural-copy.js",
+          "quote": "Abateraninkunga ba Sholi (\"Sholi\")",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
       "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
       "changed_case_keys": [
         "output"
@@ -908,7 +1173,7 @@
       "before_export_sha256": "0aa1c36c3242d43bcbf9965885cc5286d0775ad042ecf04f15ee5c99a6ff55cd",
       "after_export_sha256": "0d5253349a66338fadc2b640f36ec9711d95abe58e47e8206e9b39b4fb0012d7",
       "decision": "source_supported_improvement",
-      "rationale": "The selected Lima Kichwa Tembo source identifies Gikirima Factory as operated by Kibugu Farmers Cooperative Society in Embu County. This is an attributed roaster detail, not a newly promoted unrelated coffee origin.",
+      "rationale": "The original current Gikirima paragraph names Kibugu Farmers Cooperative Society (FCS) as operator and locates it in Embu County. The auxiliary named-producer field retains the full entity and genuine acronym while excluding the geographic suffix. The explicit canonical producer pair and every source fact stay unchanged.",
       "source_evidence": [
         {
           "capture_id": "page",
@@ -1000,6 +1265,36 @@
       ]
     },
     {
+      "case_id": "www-sidecarcoffee-com__uganda-rwenzori-d90536fa",
+      "changed_case_keys": [
+        "output"
+      ],
+      "changed_output_keys": [
+        "available",
+        "fields",
+        "producer_source",
+        "roaster_details"
+      ],
+      "roaster_id": "www-sidecarcoffee-com",
+      "source_url": "https://www.sidecarcoffee.com/products/uganda-rwenzori",
+      "before_case_sha256": "2fdb1d8ae6c8c82313741ca4c40e30f378a9b487c5c629409e3636c0359fe494",
+      "after_case_sha256": "f90fc15911a742723bbb5aa2aab7b4b1f9820e43ca4ce16109706d3f63738050",
+      "before_export_sha256": "90d6f02dde90e1e6b964de0873d8b527631f91ccee37c0cb8cee40de613a4a71",
+      "after_export_sha256": "9320590b3871bcc44c56c5731b9a11f20579980b6443d31cad8d7571bc4e3160",
+      "decision": "source_supported_improvement",
+      "rationale": "The current Uganda Rwenzori product explicitly describes this coffee as a collection from smallholder producers. Preserve that literal producing group without inventing an organization name or joining the nearby geographic label into the producer name.",
+      "source_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "capture_file": "product-endpoint.html",
+          "capture_sha256": "2c94462c302d728a0d56d838ac91ba00602a99cfff68d8ed045a3215926970d2",
+          "capture_source_url": "https://www.sidecarcoffee.com/products/uganda-rwenzori.js",
+          "quote": "This natural-process coffee comes from the Rwenzori region of Uganda, a collection from smallholder producers.",
+          "quote_basis": "frozen_oracle"
+        }
+      ]
+    },
+    {
       "case_id": "www-swroasting-coffee__XOJGV4EZXCTPBXV6RSP4SGVF-fe2617be",
       "changed_case_keys": [
         "output"
@@ -1015,7 +1310,7 @@
       "before_export_sha256": "36e2413f7256f416ea8b049495b185d5163f3d1411b0b9245ab7795c76790c8e",
       "after_export_sha256": "6629eb0dfc615efc3ca1361acf98b55ef652974c7672a011f488ab4a954d8a82",
       "decision": "source_supported_improvement",
-      "rationale": "The selected Washed Fragancia coffee expressly prints dragonfruit, starfruit and fresh-basil finish in its own cup narrative; later extraction-dependent stonefruit and citrus notes remain conditional and are not promoted.",
+      "rationale": "The selected Washed Fragancia's first current cup description explicitly states dragonfruit, starfruit and hints of fresh basil in the finish. Preserve that full literal phrase while excluding the later extraction-dependent, other-variety and turbo profiles. The additional source modifiers honestly remain review_required.",
       "source_evidence": [
         {
           "capture_id": "page",
@@ -1071,15 +1366,15 @@
       "before_export_sha256": "cedba0379e0b36d4bd843dc8350a6ec3f8b9f48aadf517804b31298f8e1e4d72",
       "after_export_sha256": "833bfcdabab708253cad23aeb4902deda3446945884262890cfdd223f1cdc15b",
       "decision": "source_supported_improvement",
-      "rationale": "The chosen Honduran Decaf description expressly says citrus forward and fruity sweetness as a coffee cup profile; this does not confuse the Swiss Water decaffeination method with bean processing.",
+      "rationale": "The selected Honduran Decaf description directly states citrus forward and fruity sweetness. The syrup-y body is a separate role. Preserve the actual citrus-forward qualification, leaving the frozen review classification intact instead of deleting it for exact agreement.",
       "source_evidence": [
         {
           "capture_id": "page",
           "capture_file": "page.html",
           "capture_sha256": "44a0f8b4e3c1844ed65cc0d29639bb30e179dedf3009efedf403fc08284a29e0",
           "capture_source_url": "https://www.woodshedroast.com/products/decaf-honduran-swiss-water®-process-copy",
-          "quote": "citrus forward",
-          "quote_basis": "literal_capture"
+          "quote": "Our Decaf Honduras is citrus forward, a fruity sweetness with a syrup-y body!",
+          "quote_basis": "frozen_oracle"
         }
       ]
     },
@@ -1101,7 +1396,7 @@
       "before_export_sha256": "e5a83c4d66f5a455657968e084c436fcba31f701668c2fd5fbcb168f9ac909ea",
       "after_export_sha256": "5f704a1c39b86abc575abaad6d16ef4f4c165861e9787b976f56b3db78f20ed4",
       "decision": "source_supported_improvement",
-      "rationale": "The selected Nicaragua Segovia description directly names the multi-farmer Central Multiple Service Cooperative PRODECOOP, which produces and processes this coffee as a collective.",
+      "rationale": "The selected Nicaragua Segovia story defines the Central Multiple Service Cooperative's alias PRODECOOP and separately attributes supervision of this coffee's production and processing to that same alias. Both original relationships establish the producer credit; a bare acronym alone would not.",
       "source_evidence": [
         {
           "capture_id": "page",
@@ -1109,6 +1404,14 @@
           "capture_sha256": "8c1b746080e8cc8e63fcb8a539e483528b40c8916b64fafaa7d194e1d67fe9bb",
           "capture_source_url": "https://zekescoffee.com/products/nicaragua-segovia-1-lb-16-oz",
           "quote": "Central Multiple Service Cooperative, better known as PRODECOOP",
+          "quote_basis": "literal_capture"
+        },
+        {
+          "capture_id": "page",
+          "capture_file": "page.html",
+          "capture_sha256": "8c1b746080e8cc8e63fcb8a539e483528b40c8916b64fafaa7d194e1d67fe9bb",
+          "capture_source_url": "https://zekescoffee.com/products/nicaragua-segovia-1-lb-16-oz",
+          "quote": "PRODECOOP carefully supervises all phases of the coffee production and processing",
           "quote_basis": "literal_capture"
         }
       ]

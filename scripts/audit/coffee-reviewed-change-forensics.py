@@ -721,6 +721,7 @@ def examine(config):
         "source_tree": config["source_tree"], "runtime_fingerprint": config["runtime_fingerprint"],
         "artifact_id": config["artifact_id"], "artifact_bytes": config["artifact_bytes"],
         "artifact_sha256": config["artifact_sha256"], "artifact_manifest": config["artifact_manifest"],
+        "summary_member": files["summary.json"],
         "run_completed_at": run["updated_at"], "artifact_expires_at": metadata["expires_at"],
         "original_baseline_hashes": C8, "projection_is_independent_approval": False})
     emit("candidate12_recounted_summary", {

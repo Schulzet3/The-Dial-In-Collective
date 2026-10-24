@@ -83,8 +83,8 @@ jobs:
         # Empty pins mean strict C8 equality. Only an independently reviewed,
         # committed manifest and its exact SHA-256 may enable reviewed changes.
         env:
-          DIC_REVIEWED_CHANGES_PATH: ''
-          DIC_REVIEWED_CHANGES_SHA256: ''
+          DIC_REVIEWED_CHANGES_PATH: 'docs/audits/extractor-reviewed-changes-candidate12.json'
+          DIC_REVIEWED_CHANGES_SHA256: 'd82f85051727908bfbea8985cd837636a37baee4b1b3262aa21e3c0049dd9d47'
         shell: bash
         run: |
           set -euo pipefail
