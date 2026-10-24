@@ -1,6 +1,6 @@
 ## October 24, 2026 UTC — Deferred combined release (CURRENT)
 
-The owner paused publication after closing GitHub #5/#10/#12, asking to wait until the 603-coffee extractor #33 is READY. **No Netlify release now; a new explicit publish instruction will be needed for the future combined READY queue.** Production SQL versions 20261024052303, 20261024052411 and 20261024052419 are already applied under different versions than Git source filenames; never replay automatically. Queue #5 is READY **for unpublished Git source only**, while SQL is already live. Queue #12 READY for frontend; #33 TESTING. See [full verified deferred release handoff](RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md). Older dates/approval examples below are history, not new authorization.
+The owner paused publication after closing GitHub #5/#10/#12, asking to wait until the 603-coffee extractor #33 is READY. **No Netlify release now; a new explicit publish instruction will be needed for the future combined READY queue.** Production SQL versions 20261024052303, 20261024052411 and 20261024052419 are already applied under different versions than Git source filenames; never replay automatically. Original #5 is DEPLOYED SQL-only. Its independent source-carryover item is TESTING until exact release-gate/anti-replay evidence. Queue #12 READY for frontend; #33 TESTING. See [full verified deferred release handoff](RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md). Older dates/approval examples below are history, not new authorization.
 
 ---
 
