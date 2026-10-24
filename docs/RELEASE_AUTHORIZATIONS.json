@@ -90,6 +90,27 @@
       "approval_source": "Owner October 23 2026 current chat: 'Approved to publish. Please deploy now'; GitHub Issue #96 comment 6367192910",
       "scope": "Exactly one production release of READY queue items DIC-Q-93-admin-counts and DIC-Q-96-security-repairs; deploy Netlify/application and BOTH JWT-required dic-preview-coffee and dic-verify-coffee Edge functions with verified shared modules; no SQL migration, no arbitrary member-data changes, unrelated work, purchases, paid plans or later releases.",
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261024-READY-QUEUE-06",
+      "tested_source_sha": "28f908dc9828a45558bd56b532fed17022cef3d8",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-10-24T03:04:28Z",
+      "expires_at_utc": "2026-10-25T03:04:28Z",
+      "approval_source": "Owner October 23, 2026 in this chat: Please publish all items in the deployment queue",
+      "scope": "Exactly one combined release of all four READY items issues 33,100,10,5 at tested SHA 28f908dc; apply three named SQL migrations in order, deploy JWT-required dic-verify-coffee Edge and Netlify app, no arbitrary member deletion or unrelated changes.",
+      "sql_evidence": [
+        "20261023225600 dic_admin_safe_delete",
+        "20261024020500 dic_source_target_producer",
+        "20261024021000 dic_personal_family_lifecycle_integrity"
+      ],
+      "edge_evidence": [
+        "dic-verify-coffee JWT-required exact source"
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
