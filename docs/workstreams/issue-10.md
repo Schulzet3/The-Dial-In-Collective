@@ -115,3 +115,7 @@ Added Node precedence, forged provenance and owner-override tests and isolated S
 ## CI recovery — October 24, 2026
 
 PR108 initial Node and visual CI identified a missing explicit production asset allowlist entry for newly imported site/lib/community-evidence.js. The source graph deliberately fails closed. Fixed by including the exact new module in build_cloud.mjs allowlist; this also copies and hashes it as part of the PWA shell. Source/Node and private browser checks need a new exact-SHA rerun. No deployment or hosted SQL applied.
+
+## CI intake recovery
+
+The first retry fixed the site graph by explicitly copying site/lib/community-evidence.js into production assets. Exact-source approval then correctly failed closed because the related build_cloud.mjs change was missing from queue scope_paths. Reconciled the new deployable build path in the same Issue #12 TESTING queue item, preserving Issue #5 READY. Rerun combined exact-source CI; do not publish until READY and separately authorized.
