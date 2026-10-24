@@ -1,3 +1,7 @@
+## Active PR121 reconciliation and conditional release authorization
+
+October 24, 2026 UTC: Owner now authorizes completing PR121 and ONE future combined publication of the verified READY queue, with no repeat production migrations, no unrelated TESTING scope and a separate release grant plus provider readback. This supersedes only the older pause on publication, not the source-integrity/safety/release controls. PR121 remains TESTING until its changed-runtime frozen603 has independently reviewed output deltas and exact-source passing checks; no publication has occurred.
+
 ## October 24 UTC — Candidate12 extractor accuracy follow-up; TESTING
 
 The earlier continuation merged through PR116 at `5da3eba1e6a567defca572c54ac677c81f4b535c`; development `30312b2184ccf23ce1180179bf9ebdfabce5fca8` and all concurrent source/receipt/queue history are preserved. Its original frozen603 run40066959055 at2eb32b2 completed603 previews,3024 exact/167 missing/811 review and5458 full/337 partial/679 unconfirmed supplementary assertions. That is completed Candidate11 evidence, not a Candidate12 result.
@@ -7,6 +11,13 @@ Candidate12 continues separately on `work/issue33-candidate12-full-audit-2026102
 All167 originally missing assertions have case-level triage. Conditional, conflicting, unsupported and unresolved source roles remain explicitly qualified. Every actual new full603 delta requires independent original-source review, exact manifest pins, zero previous exact/full-retention losses and all603 actual current exports/offline validations. Original answers, captures and scorers remain unchanged. GitHub development/Actions remain authorized without a new API key or paid service.
 
 The extractor remains **TESTING** until exact-source CI, full603 review/rerun, non-force integration and merged-source checks complete. **Publication remains paused** under the unchanged owner handoff; no release-branch push, grant, deployment, production SQL/Edge/Auth or member-data operation is authorized by this follow-up.
+
+
+---
+
+## October 24 UTC — extractor Issue33 source READY, production unchanged
+
+The owner authorized development completion and GitHub testing, **not publication**. PR116 merged at `5da3eba1e6a567defca572c54ac677c81f4b535c` with all eight exact PR-head workflows green, all four applicable merged-source workflows green, and current development `30312b2` live acceptance [40069154699](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069154699) green on ten fixed targets and source parity (NOMAD/Circulor). Verified original candidate11 frozen603 run40066959055 passed all 603, original oracle and scorer and all 603 exports/offline review; subsequent 40068786714 was *aborted prior to replay* because encrypted-input PR binding changed. Exact runtime is unchanged between the successful frozen run and merged code. DIC-Q-33-expanded-603-audit is READY only for this implemented source; Issue33 remains OPEN for separately unmerged/unverified C9 residual coffee-origin/producer accuracy work. Other queue items remain intact. Actual published Netlify stays 6adc20c03a07673c4dd08035 / 65ee386. No new API key, direct cost, hosted SQL/Auth/Edge/member writes or publication. Detailed record: docs/audits/2026-10-24-extractor-final-audit.md and docs/workstreams/issue-33.md.
 
 ---
 

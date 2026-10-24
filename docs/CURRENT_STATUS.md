@@ -1,3 +1,7 @@
+## Active PR121 reconciliation and conditional release authorization
+
+October 24, 2026 UTC: Owner now authorizes completing PR121 and ONE future combined publication of the verified READY queue, with no repeat production migrations, no unrelated TESTING scope and a separate release grant plus provider readback. This supersedes only the older pause on publication, not the source-integrity/safety/release controls. PR121 remains TESTING until its changed-runtime frozen603 has independently reviewed output deltas and exact-source passing checks; no publication has occurred.
+
 ## October 24 UTC — Candidate12 extractor accuracy follow-up; TESTING
 
 The earlier continuation merged through PR116 at `5da3eba1e6a567defca572c54ac677c81f4b535c`; development `30312b2184ccf23ce1180179bf9ebdfabce5fca8` and all concurrent source/receipt/queue history are preserved. Its original frozen603 run40066959055 at2eb32b2 completed603 previews,3024 exact/167 missing/811 review and5458 full/337 partial/679 unconfirmed supplementary assertions. That is completed Candidate11 evidence, not a Candidate12 result.
@@ -7,6 +11,21 @@ Candidate12 continues separately on `work/issue33-candidate12-full-audit-2026102
 All167 originally missing assertions have case-level triage. Conditional, conflicting, unsupported and unresolved source roles remain explicitly qualified. Every actual new full603 delta requires independent original-source review, exact manifest pins, zero previous exact/full-retention losses and all603 actual current exports/offline validations. Original answers, captures and scorers remain unchanged. GitHub development/Actions remain authorized without a new API key or paid service.
 
 The extractor remains **TESTING** until exact-source CI, full603 review/rerun, non-force integration and merged-source checks complete. **Publication remains paused** under the unchanged owner handoff; no release-branch push, grant, deployment, production SQL/Edge/Auth or member-data operation is authorized by this follow-up.
+
+
+---
+
+## October 24, 2026 UTC — Issue #33 extractor audit integrated, verified READY; website NOT deployed
+
+**Current verified development:** PR [#116](https://github.com/Schulzet3/The-Dial-In-Collective/pull/116) merged non-force at `5da3eba1e6a567defca572c54ac677c81f4b535c`. The current exact merged development source `30312b2184ccf23ce1180179bf9ebdfabce5fca8` adds only a public-probe trigger and a same-commit journal; no runtime, privacy, source oracle, scoring, or source-capture change. The tested PR head and merge have identical file trees, confirmed by GitHub compare.
+
+**Actual checks:** Eight PR-head workflows PASS including 1,412 full Node passes / 0 failures / six explicit opt-in hosted skips, 1,044 cloud tests, lint/build, mobile/browser/visual/offline, Python/OCR, source security, isolated SQL and approval. All four applicable exact merge-source checks PASS (40069032400, 40069032432, 40069032372, 40069032464); source 30312b2 public-source run [40069154699](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40069154699) PASS: ten fixed live targets, nine products plus required homepage-negative, no gaps or mandatory failures; fresh app/Python/approval runs 40069154717, 40069154718, 40069154691 PASS. No backend, quota, member or production write occurred.
+
+**Frozen benchmark:** [40066959055](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40066959055) actually ran the unchanged candidate11 extractor/runtime against all 603 original coffees/201 roasters, 1,197 captures and 4,002 untouched canonical expectations: 3,024 exact, 167 missing, 811 review-required; 5,458 full/337 partial/679 unconfirmed supplementary retention; 603/603 client snapshot/download and offline validations pass. Runtime hash and scorer/capture/oracle hashes are retained. GitHub comparison confirms all subsequent changes are confined to audit sanitizer/script, tests and documentation, so this source-bound complete replay is reused rather than falsely treated as an unperformed re-run. 40068786714 subsequently failed *before replay* because PR head moved during the single-use encrypted input handshake; not a benchmark failure or passing replay.
+
+**Disposition:** queue item `DIC-Q-33-expanded-603-audit` is **READY (development/source only)**. Issue #33 remains **OPEN** for specifically known, non-integrated C9 source-accuracy residuals: Onyx award vs origin, Alta AA grade/nearby locality vs current origin, Maps joint-producer identity, and remaining review-required or missing source facts. Those are not claimed repaired, accepted, or 100% accurate and must be separately tested before any new READY change. Separate Issue5/12 and deployed-SQL source-carrier states remain intact. No publication approval is granted or consumed.
+
+**Published state independently read back:** Netlify READY/current deploy `6adc20c03a07673c4dd08035`, published source `65ee38609db6bd5977dd0f2b393e7791a5e1b766`, unchanged; the new extractor audit and deferred frontend updates are **NOT DEPLOYED**. No production Supabase SQL/Edge/Auth, private member data, paid service, API key or Netlify release operation was performed.
 
 ---
 
