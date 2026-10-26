@@ -375,6 +375,32 @@ export function isCollapsedSelectedTastesLikePrefix(value,complete){
  }
  return false;
 }
+// A merchant may show an explicit multi-note profile in a Tasting Notes
+// section and a separate coarse Flavors taxonomy in its Brewing
+// Recommendations. These are DIFFERENT published information roles; a
+// secondary recommendation taxonomy is not a contradictory tasting list.
+// Require every visible Tasting Notes copy to contain the same full literal
+// words, admit no other flavor source and preserve the exact printed string.
+// A different labeled tasting list, or an unscoped Flavors list, still
+// remains a genuine conflict and stays withheld for member confirmation.
+export function explicitCoffeeNotesSeparateFromBrewingTags(facts){
+ if(!Array.isArray(facts))return null;
+ const relevant=facts.filter(f=>f?.field==='tasting_notes');
+ if(relevant.length<2||relevant.length>8)return null;
+ const notes=[],other=[];let hasRecommendation=false;
+ for(const f of relevant){
+  const label=keyOf(String(f.label||'')),section=keyOf(String(f.section||''));
+  if(label==='tastingnotes'&&section==='tastingnotes'&&f.source_type==='html')notes.push(f);
+  else if(label==='flavors'&&section==='brewingrecommendations'&&f.source_type==='html')hasRecommendation=true;
+  else other.push(f);
+ }
+ if(!hasRecommendation||other.length||!notes.length)return null;
+ const exact=value=>String(value||'').normalize('NFKD').replace(/\p{M}/gu,'')
+  .toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'');
+ const current=notes.find(f=>String(f.value||'').split(/\s*,\s*/).length>=3);
+ if(!current||!notes.every(f=>exact(f.value)===exact(current.value)))return null;
+ return normalizeExplicitCoffeeTastingNotes(current.value)||null;
+}
 function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
  // Layout extractors may pass either a visible roaster label or an
  // already-resolved internal field key such as release_label. Never drop a
@@ -1230,6 +1256,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // Section roles are source-verified only after the complete selected
+ // product evidence set is assembled; do not suppress genuine conflicts from
+ // any other notes section, snippet, model, or differently worded flavor list.
+ if(conflicts.has('tasting_notes')&&!fields.tasting_notes){
+  const explicit=explicitCoffeeNotesSeparateFromBrewingTags(source_facts);
+  if(explicit){fields.tasting_notes=explicit;conflicts.delete('tasting_notes');}
+ }
  for(const fact of source_facts){
   if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
   else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
