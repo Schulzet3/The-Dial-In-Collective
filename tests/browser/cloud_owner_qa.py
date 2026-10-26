@@ -107,6 +107,12 @@ window.__client={
   pref.current_family_id=sh.personal_family_id;pref.favorite_shot_id=sh.id;pref.revision++;
   return {ok:true,record:structuredClone(pref)};
  }
+ if(e.action==='save_custom_targets'){
+  const wc=r.workspaceCoffees.find(x=>x.setup_id===d.setup_id&&x.setup_version_id===d.setup_version_id&&x.library_entry_id===d.library_entry_id);
+  if(!wc||wc.revision!==d.expected_revision)return {ok:false,code:'conflict',revision:wc?.revision??0};
+  wc.custom_targets=structuredClone(d.custom_targets);wc.selected_style='Custom';wc.revision++;
+  return {ok:true,record:structuredClone(wc)};
+ }
  if(e.action==='set_style'){r.workspaceCoffees[0].selected_style=d.style;r.workspaceCoffees[0].revision++;return {ok:true,record:r.workspaceCoffees[0]};}
  return {ok:true};
  }
@@ -167,7 +173,46 @@ with sync_playwright() as p:
  page.screenshot(path=str(OUT/'cloud_home_light.png'),full_page=True)
  page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=tasting_preferences]').fill('Fruity clarity');page.get_by_role('button',name='Save Preferences',exact=True).click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();assert page.locator('#sheet').evaluate('(x)=>x.open');checks.append('Preference save leaves Settings open')
  page.get_by_text('Advanced Setup Options',exact=True).click();page.locator('[name=track_temperature]').check();page.locator('[name=track_slow_feed]').check();page.get_by_role('button',name='Save Advanced Options').click();page.get_by_role('alert').filter(has_text='Advanced settings saved').wait_for();assert page.locator('#sheet details.advanced:has(summary:text-is("Advanced Setup Options"))').evaluate('(x)=>x.open');checks.append('Advanced save preserves open sheet and section')
- page.get_by_role('button',name='Close',exact=True).click();page.get_by_role('button',name='Log A Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
+ page.get_by_role('button',name='Close',exact=True).click()
+ # UI Issue14: all owner-approved styles visible, Custom values saved through
+ # the same protected mutation path, and switching away preserves Custom.
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ assert 'Custom' in page.locator('#style [name=style]').locator('option').all_text_contents()
+ assert 'Fast-Flow' in page.locator('#style [name=style]').locator('option').all_text_contents()
+ page.locator('#style [name=style]').select_option('Custom')
+ assert page.locator('#custom-targets').is_visible()
+ page.locator('#style [name=ratio]').fill('2.6')
+ page.locator('#style [name=time_low_s]').fill('20')
+ page.locator('#style [name=time_high_s]').fill('28')
+ page.locator('#style [name=temperature]').fill('201.2')
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ saved=page.evaluate('window.__raw.workspaceCoffees[0].custom_targets')
+ assert saved['ratio']==2.6 and saved['time_low_s']==20 and saved['time_high_s']==28 and abs(saved['temperature_c']-94)<.01,saved
+ assert page.evaluate('window.__Modules.engine.recommendation(window.__app.state,"coffee").yield.center')==46.8
+ assert page.locator('.style-custom').count()==1
+ checks.append('Custom style: six choices; ratio, time and optional temperature saved in protected simulated owner workspace')
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ page.locator('#style [name=style]').select_option('Traditional')
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.workspaceCoffees[0].custom_targets.ratio')==2.6
+ assert page.evaluate('window.__Modules.engine.recommendation(window.__app.state,"coffee").style')=='Traditional'
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ page.locator('#style [name=style]').select_option('Custom')
+ assert page.locator('#style [name=ratio]').input_value()=='2.6'
+ assert page.locator('#style [name=time_low_s]').input_value()=='20'
+ assert page.locator('#style [name=time_high_s]').input_value()=='28'
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ page.evaluate('window.__app.state=window.__Modules.mapping.hydrate(window.__raw);window.__app.render()')
+ assert page.evaluate('window.__Modules.model.coffeeState(window.__app.state,"coffee").custom.ratioLow')==2.6
+ checks.append('Custom targets survive non-Custom switch, re-selection and independent hydration without changing measured shots')
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ page.locator('#style [name=style]').select_option('Turbo')
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ page.get_by_role('button',name='Log A Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
  assert page.locator('[name=temperature]').input_value()=='';checks.append('Temperature is optional, not fabricated in actual input')
  assert not page.locator('[name=slowFeed]').is_checked();page.locator('[name=slowFeed]').check();checks.append('New Slow Feed entry can be selected explicitly')
  page.locator('[name=yieldG]').fill('50');page.locator('[name=timeS]').fill('100');page.locator('[name=grindSetting]').fill('0');page.locator('[name=notes]').fill('Synthetic private note')
