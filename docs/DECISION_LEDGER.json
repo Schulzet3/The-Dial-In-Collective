@@ -2246,6 +2246,16 @@
       "supersedes": "Only the earlier Locked baseline §27/Issue14 requirement to offer and persist Custom and the October 22 Fast-Flow clause that the original Custom *active behavior* was unchanged; no removal of Fast-Flow, other style priors, approved visual badge history, member records, permissions or release safeguards.",
       "approval": "Owner direct 2026-10-26 instruction to retire Custom completely as a product feature while retaining minimal data-loss safeguards; follow-up explicit 'Do it' twice; verified production aggregate zero saved Custom shots, workspace selections, personal families and experiments.",
       "delivery": "SOURCE_ONLY_NOT_PUBLISHED; full CI and merge receipt recorded under GitHub Issue #14"
+    },
+    {
+      "id": "UX-RETIRE-EXPERIMENTS-20261026",
+      "title": "Retire Experiment workflow and stage guarded unused Experiment database cleanup",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "decision": "Retire the complete Experiment workflow, active lifecycle, post-rating prompt, threshold detection and special candidate/confirmation/promotion. Ordinary shot logging remains unrestricted within existing numeric safety bounds, five sensory ratings and required outlier checks. Retain exact shot/notes data, Community eligibility of qualifying green shots, one visible recommendation, separate successful internal families and explicit owner-scoped Make Current preference. A different green shot must not replace a manually chosen favorite automatically. Stage only a guarded, source-tested migration for unused Experiment table and shot column, aborting on any nonempty Experiment data; no production DDL until a separate owner publish instruction and verified recovery backup.",
+      "supersedes": "Only original Experiment lifecycle/UI/threshold/experiment-specific candidate/confirmation requirements in §§6.2,7.2,18,19,37,41 and Issue13. Preserve successful recipe-family evidence states, shots/history/offline data, one visible recipe, identity, privacy, credits and separate production release consent.",
+      "approval": "Owner directly said 'Proceed with your recommendation' after evaluating full Experiment product/database retirement on October 26, 2026.",
+      "delivery": "SOURCE_ONLY; production Experiment retirement migration awaits separately authorized release"
     }
   ],
   "open_current_owner_decisions": [],
@@ -4300,5 +4310,13 @@
     "supersedes": "Only the earlier Locked baseline §27/Issue14 requirement to offer and persist Custom and the October 22 Fast-Flow clause that the original Custom *active behavior* was unchanged; no removal of Fast-Flow, other style priors, approved visual badge history, member records, permissions or release safeguards.",
     "approval": "Owner direct 2026-10-26 instruction to retire Custom completely as a product feature while retaining minimal data-loss safeguards; follow-up explicit 'Do it' twice; verified production aggregate zero saved Custom shots, workspace selections, personal families and experiments.",
     "implementation": "source-only; see scoped_supersessions and Issue14"
+  },
+  "UX-RETIRE-EXPERIMENTS-20261026": {
+    "status": "Locked",
+    "date": "2026-10-26",
+    "decision": "Retire the complete Experiment workflow, active lifecycle, post-rating prompt, threshold detection and special candidate/confirmation/promotion. Ordinary shot logging remains unrestricted within existing numeric safety bounds, five sensory ratings and required outlier checks. Retain exact shot/notes data, Community eligibility of qualifying green shots, one visible recommendation, separate successful internal families and explicit owner-scoped Make Current preference. A different green shot must not replace a manually chosen favorite automatically. Stage only a guarded, source-tested migration for unused Experiment table and shot column, aborting on any nonempty Experiment data; no production DDL until a separate owner publish instruction and verified recovery backup.",
+    "supersedes": "Only original Experiment lifecycle/UI/threshold/experiment-specific candidate/confirmation requirements in §§6.2,7.2,18,19,37,41 and Issue13. Preserve successful recipe-family evidence states, shots/history/offline data, one visible recipe, identity, privacy, credits and separate production release consent.",
+    "approval": "Owner directly said 'Proceed with your recommendation' after evaluating full Experiment product/database retirement on October 26, 2026.",
+    "delivery": "SOURCE_ONLY; production Experiment retirement migration awaits separately authorized release"
   }
 }

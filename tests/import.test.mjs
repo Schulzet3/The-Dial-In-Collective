@@ -25,7 +25,7 @@ test('invalid numeric strings are not coerced into measurements',()=>{const d=fi
 test('missing taste rating is not fabricated',()=>{const d=fixture();delete d.data.shots[0].tasteScales.body;assert.throws(()=>parse(d),/rating/);});
 test('fractional taste rating is rejected',()=>{const d=fixture();d.data.shots[0].tasteScales.body=2.5;assert.throws(()=>parse(d),/whole numbers/);});
 test('multi-version export is blocked without silently dropping versions',()=>{const d=fixture();d.data.setups[0].versions.push({...d.data.setups[0].versions[0],id:'v2'});assert.throws(()=>parse(d),/Multiple equipment versions/);});
-test('experiment data is blocked without silent loss',()=>{const d=fixture();d.data.experiments.push({id:'e'});assert.throws(()=>parse(d),/Experiment migration/);});
+test('experiment data is blocked without silent loss',()=>{const d=fixture();d.data.experiments.push({id:'e'});assert.throws(()=>parse(d),/Retired Experiment records/);});
 test('current unlogged coffee is rejected',()=>{const d=fixture();d.data.setups[0].workspaces.v.currentCoffeeId='c2';assert.throws(()=>parse(d),/unlogged/);});
 test('preview escapes coffee names and explains save gate',()=>{const summary=parse(fixture()).summary;summary.coffees[0].name='<img src=x onerror=alert(1)>';const page=previewMarkup(summary,{ok:true,canImport:false,blockReason:'Recovery pending'});assert.doesNotMatch(page,/<img/);assert.match(page,/&lt;img/);assert.match(page,/Recovery pending/);assert.match(page,/No changes have been saved/);});
 function sdkFixture(){const calls=[];const sdk={auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}})},async rpc(name,p){calls.push({name,p});return {data:{ok:true},error:null};}};return {sdk,calls};}

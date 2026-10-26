@@ -31,7 +31,7 @@ export function parseImport(text) {
  const d=doc.data;
  const setups=index(d.setups,'setup'),coffees=index(d.coffees,'coffee'),shots=index(d.shots,'shot'),families=index(d.families,'recipe family');
  if(setups.size!==1||coffees.size<1||coffees.size>100||shots.size>2000||families.size>500)fail('This first importer supports one setup, up to 100 coffees and 2000 shots. Other files are kept unchanged.');
- if(!Array.isArray(d.experiments)||d.experiments.length)fail('Experiment migration is not enabled yet. Keep this backup; nothing was imported.');
+ if(d.experiments!==undefined&&(!Array.isArray(d.experiments)||d.experiments.length))fail('Retired Experiment records cannot be imported without loss. Keep the original backup; nothing was imported.');
  if(!['system','light','dark'].includes(d.theme))fail('Unknown appearance setting.');
  const setup=d.setups[0],versions=index(setup.versions,'equipment version');
  if(versions.size!==1)fail('Multiple equipment versions need the next migration adapter. Nothing was imported.');
@@ -57,7 +57,7 @@ export function parseImport(text) {
   numeric(sh.grindSetting,0,Number.MAX_VALUE,'grind setting',true);numeric(sh.tempC,70,100,'temperature',true);
   if(![null,undefined,'unknown','standard','slow'].includes(sh.feedMode))fail('Unknown feed condition.');
   for(const key of ['extraction','body','clarity','sweetness','astringency']){numeric(sh.tasteScales?.[key],1,5,'taste rating');if(!Number.isInteger(sh.tasteScales[key]))fail('Taste ratings must be whole numbers.');}
-  if(sh.experimentId!=null)fail('This shot references an experiment that is not supported by this importer yet.');
+  if(sh.experimentId!=null)fail('This shot has a retired Experiment link. Keep the original backup; nothing was imported.');
   const b=baskets.get(sh.basketId),g=calibrations.get(sh.calibrationId),s=sh.snapshot;
   if(!b||!g||!object(s)||s.basketDoseG!==b.doseG||s.grinderMin!==g.min||s.grinderMax!==g.max||['machine','grinder','burrs'].some(k=>(s[k]||'')!==(v[k]||'')))fail('A historical equipment snapshot differs from its version. The whole file is kept unchanged for review.');
   if(sh.familyId!=null){const f=families.get(sh.familyId);if(!f||f.coffeeId!==sh.coffeeId||f.style!==sh.style)fail('A shot has a mismatched recipe family.');}

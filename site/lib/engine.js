@@ -295,10 +295,9 @@ export function recommendation(s,coffeeId,options={}) {
  rec.tempC=temperatureGuidance(s,c,style,v,rec.tempC,rec.familyId);
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
  rec.yield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
- const exp=s.experiments.find(e=>e.id===p.experiments[style]&&e.status==='active');rec.experimentId=exp?.id||null;
- // Advice takes over only during initial dialing or an explicitly active experiment.
- const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&(!exp||sh.experimentId===exp.id)).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
- if(!options.ignoreAdvice&&last && (!hasLocalSuccess(s,coffeeId,style)||exp)){
+ // Successful shot families are chosen independently of any retired Experiment workflow.
+ const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
+ if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
   const a=last.suggestion||nextAdvice(s,last,rec);
@@ -315,7 +314,6 @@ export function recommendation(s,coffeeId,options={}) {
    rec.yield={low:Math.max(5,round(nextYield-1)),high:round(nextYield+1),center:round(nextYield)};
    rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};
   }
-  if(exp){rec.source='Experiment starting window';rec.established=false;}
  }
  if(!rec.established&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
@@ -354,14 +352,6 @@ export function nextAdvice(s,shot,rec) {
  const center=clamp(shot.yieldG+1,5,200);
  return {title:'A small refinement',text:`Try ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out with the same grind. Compare sweetness and clarity before making a larger change.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};
 }
-export function experimentChanges(s,shot,rec) {
- if(!rec?.established || rec.experimentId)return [];
- const result=[];
- for(const [key,base] of [['doseG',rec.doseG],['yieldG',rec.yield.center],['timeS',rec.time.center]]) if(Math.abs(shot[key]-base)>=CONFIG.experiment[key]-1e-8)result.push(key);
- if(finite(shot.tempC)&&finite(rec.tempC)&&Math.abs(shot.tempC-rec.tempC)>=2-1e-8)result.push('tempC');
- if(rec.grind.proven&&Math.abs(shot.grindSetting-rec.grind.value)>=grindStep(activeVersion(s))-1e-8)result.push('grindSetting');
- return result;
-}
 export function isExtreme(s,shot) {
  const prior=s.shots.filter(x=>!x.hidden&&x.dialedIn&&x.coffeeId===shot.coffeeId&&x.style===shot.style&&x.setupVersionId===shot.setupVersionId&&x.id!==shot.id);
  if(prior.length<4)return false;
@@ -371,10 +361,8 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
  const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s),p=ensureCoffeeState(s,coffeeId);
  if(!c||!v)throw new Error('Coffee or setup not found.');
- const rec=recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode,ignoreAdvice:true});
- const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,bagId:c.activeBagId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,experimentId:p.experiments[input.style]||null,usedRecommendation:input.usedRecommendation||{},revision:1};
+ const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,bagId:c.activeBagId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
- const diffs=experimentChanges(s,sh,rec);sh.experimentChanges=diffs;
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';
  sh.suggestion=nextAdvice(s,sh,recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode}));
  if(sh.dialedIn)sh.familyId=assignFamily(s,sh);else sh.familyId=null;
@@ -415,18 +403,11 @@ export function editShot(s,id,input) {
  return old;
 }
 export function hideShot(s,id) {const sh=s.shots.find(x=>x.id===id);if(!sh)return;sh.hidden=true;sh.hiddenAt=now();logAudit(s,'shot.hidden',{shotId:id,retainQualifyingContribution:sh.dialedIn});}
-export function startExperiment(s,id) {
- const sh=s.shots.find(x=>x.id===id);if(!sh)throw new Error('Shot not found.');
- const p=ensureCoffeeState(s,sh.coffeeId);
- const e={id:newId('experiment'),coffeeId:sh.coffeeId,setupVersionId:sh.setupVersionId,style:sh.style,originalFamilyId:p.currentFamilies[sh.style]||null,status:'active',createdAt:now()};
- s.experiments.push(e);p.experiments[sh.style]=e.id;sh.experimentId=e.id;sh.experimentDecision='yes';return e;
-}
-export function endExperiment(s,id) {const e=s.experiments.find(x=>x.id===id);if(!e)return;e.status='ended';e.endedAt=now();const p=ensureCoffeeState(s,e.coffeeId);delete p.experiments[e.style];}
 export function makeCurrent(s,shotId) {
  const sh=s.shots.find(x=>x.id===shotId);if(!sh?.dialedIn||sh.hidden)throw new Error('Choose a visible all-green shot.');
  if(sh.setupVersionId!==activeVersion(s).id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
  const p=ensureCoffeeState(s,sh.coffeeId);p.currentFamilies[sh.style]=sh.familyId;p.favoriteShots[sh.familyId]=sh.id;p.style=sh.style;
- const exp=p.experiments[sh.style];if(exp)endExperiment(s,exp);logAudit(s,'recipe.preferred',{coffeeId:sh.coffeeId,familyId:sh.familyId,shotId});
+ logAudit(s,'recipe.preferred',{coffeeId:sh.coffeeId,familyId:sh.familyId,shotId});
 }
 export function contributorWeight(n) {return n<=1?1:n===2?1.2:n<=4?1.4:n<=7?1.6:n<=12?1.8:2;}
 export function communitySummary(shots) {

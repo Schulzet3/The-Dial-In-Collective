@@ -1,5 +1,14 @@
 # The Dial In Collective — Master Specification
 
+## Owner-Locked retirement of Experiment workflow — October 26, 2026
+
+**UX-RETIRE-EXPERIMENTS-20261026 (Locked):** At the owner's explicit direction, the entire user-facing and internal **Experiment workflow** is retired: no start/decline prompts, meaningful-change Experiment thresholds, experiment workspaces or panels, active Experiment state, separate candidate/confirmation/promotion steps, or automatic switches back to an earlier recipe when ending an Experiment. A member may still vary dose, yield, grind, temperature and timing in ordinary Log Shot → Rate → Recommendation. Every shot retains its actual values, notes, sensory ratings and historical identity. All-green shots remain valid and Community-eligible under existing provenance/quality safeguards; distinct successful ratio/recipe families remain internally separated and inform **one** visible recommendation. A materially different green shot does **not** automatically override an existing *explicitly preferred* Make Current Recipe shot/family. The user can choose Make Current on any qualifying successful shot under existing owner, setup, and revision checks. Preserve offline queue and legacy backup records, account isolation, private notes, Community contributions, provenance and mutation receipts.
+
+**Database scope:** Production read-only inventory on October 26 showed **0 public.experiments rows and 0 public.shots linked by experiment_id** (23 shots/4 personal families/4 preferences unchanged). Retire the table and obsolete shot column only through the separately source-tested forward-only migration that refuses to proceed if any Experiment row/linked shot appears. Keep the historic migration files and archival rejection safeguards; never silently discard an old backup, erase shot records or replay applied SQL. **No destructive live SQL, Netlify publication, Auth/Edge or member writes authorized by this development instruction.** The release owner must arrange an additional verified encrypted backup immediately before any future approved potentially destructive SQL operation.
+
+**Precise supersession:** This later Locked decision overrides the earlier Experiment-specific lifecycle provisions in §§6.2, 7.2, 18, 19, 37, 41 and the original Issue #13 acceptance criteria, including pending threshold/baseline/decline questions and Experiment-specific candidate/confirmed stages. It **does not** remove the independently approved recipe-family evidence states used for Community learning, one-visible-recipe policy, success ratings, preference confirmation, Log Shot feedback, or data/history safety. Historical dated descriptions remain as audit evidence, not active requirements. Source tracking: GitHub Issue #13; product retirement is distinct from a production deployment.
+
+
 ## Owner-Locked Custom shot style retirement — October 26, 2026
 
 **UX-RETIRE-CUSTOM-STYLE-20261026 (Locked):** The owner explicitly directed retirement of Custom as an active product style after confirming no saved Custom shots. Read-only production aggregate independently confirmed zero Custom shots, workspace selections, personal recipe families or experiments. The current selectable espresso styles are **Traditional, Turbo, Fast-Flow, Ristretto and Lungo**. Do not offer Custom on Add Coffee, first expansion, Change Style, new shot logging or active recipe selection. Do not create a Custom editor or persist new Custom targets. Keep existing shot measurements editable regardless of style, never use rigid style-time/ratio thresholds to veto all-green taste, and preserve historical style labels, member notes, private/offline queued shots, family history and account separation. No automatic historical relabeling or destructive database cleanup. Existing older SQL style checks may continue accepting legacy queued records for data recovery; they are not a currently offered product feature. Remove the **never-applied** October 26 Custom-target migration rather than altering already-applied schema/history. This narrow supersession replaces only the original §27 and Issue #14 Custom offering/persistence obligation and the October 22 Fast-Flow decision's preservation of Custom as an **active choice**; Fast-Flow, original badge history, existing data, permissions and separate release approval remain intact. This is development authorization, **not** permission to deploy, apply SQL or modify member records.
@@ -342,7 +351,7 @@ The app may contain sophisticated recommendation, community, equipment, identity
 ## 2.1 Product principles
 
 - **Simple on the surface, sophisticated underneath.** Advanced modeling must not create routine data-entry burden.
-- **Experimentation is a first-class behavior.** Espresso is not a fixed target. Recommendations are reference points, not rules.
+- **Recipe variation remains available without an Experiment workflow.** Espresso is not a fixed target. Log any shot normally, rate it and let successful evidence inform the single recommendation; recommendation priors are guidance, not rules.
 - **Personal taste matters.** Two successful recipe families may both be valid; the best recommendation can differ by user preference.
 - **Observed success beats generic theory.** A user's own successful shots on the same coffee/setup are highly valuable.
 - **Community learning must be robust.** More shots improve confidence, but one heavy user must not dominate the Collective.
@@ -487,7 +496,6 @@ On normal app open:
 - Its current/preferred recipe or active dial-in state is immediately visible.
 - **Log a Shot** is immediately available.
 - The last-used equipment setup is already selected.
-- If an Experiment is active for that coffee/setup, the Experiment panel is visible and the main Log a Shot action continues that experiment.
 
 ## 6.3 Changing current coffee
 
@@ -556,12 +564,10 @@ The expanded card should prioritize:
 1. Current/preferred recipe or current dial-in state.
 2. Log a Shot.
 3. If not dialed in: previous-shot feedback and next recommendation.
-4. If an experiment is active: Experiment panel.
-5. Shot History.
-6. Shot History retains other successful approaches; no separate Alternate Recipes control.
-7. Coffee facts and source/roaster details.
-8. Community detail behind progressive disclosure.
-9. Optional Bag Details behind progressive disclosure.
+4. Shot History, retaining other successful approaches without a separate Alternate Recipes control.
+5. Coffee facts and source/roaster details.
+6. Community detail behind progressive disclosure.
+7. Optional Bag Details behind progressive disclosure.
 
 ## 7.3 Existing visual language to preserve
 
@@ -1064,81 +1070,15 @@ Community recommendation logic may choose among families based on the user's pre
 
 ---
 
-# 18. Experiment system
+# 18. Experiment workflow — retired (owner decision October 26, 2026)
 
-Experimentation should feel intentional and positive, not like the user has violated a rule.
+The former Experiment prompt, active state, panel, meaningful-change detector, end/promote action, and experiment-specific candidate/confirmation stages are **not part of the product**. Users try new recipes through ordinary shot logging. A green shot remains independently valid without automatically changing an explicitly preferred successful recipe. Keep internal personally confirmed recipe-family evidence for Community and recommendation correctness; it is **not** an Experiment lifecycle.
 
-## 18.1 Meaningful-change detection
-
-A meaningful change is a possible signal of intentional experimentation.
-
-Initial trigger thresholds:
-
-- Dose: **0.5 g** or more.
-- Yield: **5 g** or more.
-- Time: **5 s** or more.
-- Temperature: **2 C / approximately 4 F** or more.
-- Grind: adaptive to the grinder's configured espresso range; for the product owner's 0.0-5.0 grinder range, **0.1** is meaningful.
-- Shot style: any explicit style change is meaningful.
-
-Crossing **any one** threshold is enough to trigger possible-experiment logic.
-
-These are not warnings, errors, or hard bounds.
-
-Time should not infer experimentation for small natural shot-to-shot variation; approximately 5 seconds is the starting threshold.
-
-## 18.2 Prompt timing
-
-Do not interrupt the user while filling out the shot form.
-
-After the user finishes rating/saving a meaningfully changed shot, prompt with a lightweight question such as:
-
-**Trying something different?**  
-This shot changed meaningfully from your current recipe.  
-**Start an Experiment** | **No, just log it**
-
-## 18.3 Experiment workspace
-
-If the user confirms:
-
-- Coffee remains Dialed In based on the established recipe.
-- Existing preferred recipe remains intact.
-- Show a distinct, lightly separated **Experiment** panel with a small badge.
-- The Experiment panel contains:
-  - latest experimental shot;
-  - radar graph;
-  - tasting bubbles;
-  - what changed;
-  - next-shot recommendation;
-  - experiment-specific history/progress as appropriate.
-- Main Log a Shot action automatically continues the active experiment.
-- User does not reconfirm "experiment" for every subsequent shot.
-
-## 18.4 End Experiment
-
-- User can choose **End Experiment**.
-- If the new approach is not preferred, ending the experiment returns the interface to the original preferred recipe.
-- Failed/non-green experimental shots remain in private personal history.
-
-## 18.5 Candidate and confirmation lifecycle
-
-- First materially different **all-green** experimental shot -> **Candidate Recipe Family**.
-- Second successful repeat -> **Confirmed internal successful recipe family** (not a separate routine UI card).
-- User may choose **Make Current Recipe** immediately after the first successful candidate if they love it.
-- Candidate/confirmed status and current/preferred status are separate concepts.
-
-## 18.6 Successful experiment that is not preferred
-
-If an experiment produces an all-green result but the user decides the old recipe is still better:
-
-- The successful experimental shot remains valid.
-- It remains community-eligible.
-- It may remain a candidate or another valid internal recipe family.
-- Ending the experiment only changes the user's active preference/workspace; it does not invalidate the successful shot.
+Historical Experiment records or linked shots in an old backup must not be silently dropped. The import path rejects those records with recovery guidance. The staged backend retirement removes only the unoccupied Experiment schema after an explicit empty-data check and separate release approval.
 
 ---
 
-# 19. Non-experiment dial-in display behavior
+# 19. Standard dial-in display behavior
 
 ## 19.1 Coffee not yet dialed in
 
@@ -1158,7 +1098,7 @@ This is the active dial-in workspace.
 - Current/preferred recipe/window is primary.
 - Shot History remains available for inspection.
 - A later non-green shot does not automatically replace the main recipe with a large dial-in panel.
-- The large Experiment workspace should appear only after the user confirms that the meaningful change is an experiment.
+- No separate Experiment workspace or post-rating confirmation is offered; ordinary shots retain their feedback and history.
 
 A remaining UX detail is open regarding how much brief feedback to show for a non-green shot on an already dialed-in coffee when the user chooses "No, just log it." See Open Questions.
 
@@ -1171,7 +1111,7 @@ A remaining UX detail is open regarding how much brief feedback to show for a no
 - **Copy constraint — Locked:** Do **not** display the proposed badge/text **“One adjustment at a time”**. It was rejected as visible UI clutter, not as an algorithmic concept. The initial side-by-side Change/Keep metric-card graphic was also too busy.
 - **Layout choice — Locked as `RECOMMENDATION-OPTION-A-ARROW-INFO-20261019` (October 2026 owner clarification):** Use **Option A's uncluttered previous → next arrow** with the same **small lowercase i icon** beside **Next Shot Recommendation**. Show a specific previous **actual shot** → suggested next value for exactly one controllable variable, plus one muted sentence naming the other unchanged controllable settings. No separate Change/Keep metric cards, colored badges, or extra boxes. The i reveals a concise cause/effect explanation and mentions that measured shot time may change naturally. Keep the existing tasting bubbles and radar. If no single reliable measurable change exists (including distribution-only technique and successful shots), retain specific original textual feedback rather than inventing an arrow. The immediately previous **Option B text-only layout is explicitly superseded and never reached runtime**; keep its decision history while removing obsolete draft UI suggestions from the active design.
 - **Accessibility and data:** Reuse the New Setup lowercase i control styling and 36 px tap target, accessible label and live `aria-expanded` state; use a unique explanation ID per coffee. Derive arrows from recorded shot measurements and the next suggested action, never an estimated starting recipe or measured time outcome. Format values using existing units. Preserve evidence notes when a recommended grind step was sized from comparable shots. Preparation advice should focus on distribution alone instead of asking for a simultaneous tamp change.
-- Keep the recommendation panel fast to scan and compatible with the approved Log Shot → Rate → Recommendation flow and all existing Locked evidence, history and experiment rules.
+- Keep the recommendation panel fast to scan and compatible with the approved Log Shot → Rate → Recommendation flow and all existing Locked evidence, history and internal recipe-family rules.
 
 Source: owner conversation on the next-shot recommendation, recorded in [issue #39](https://github.com/Schulzet3/The-Dial-In-Collective/issues/39) on 2026-10-19/20. The initial decision approved the one-variable principle and removed visible badge copy. The owner's subsequent explicit correction Locked the arrow-and-info presentation, now implemented and tested in development but not published or accepted on a live device.
 
@@ -1859,28 +1799,9 @@ When a brand-new coffee is added but has no shot yet, decide:
 
 Do not silently make a coffee current merely because it was added unless explicitly decided.
 
-### C. "No, just log it" after a meaningful deviation
+### C–D. Retired Experiment decisions (resolved October 26, 2026)
 
-If the user declines Start an Experiment:
-
-- the shot should still be logged;
-- if non-green, it remains personal/private;
-- if all-green, it is community-eligible by the global Dialed-In rule.
-
-Still to define: should an all-green meaningful deviation that the user says was **not** an experiment affect the personal current family/window, form a hidden candidate family, or be retained as a successful outlier without changing personal recipe state?
-
-### D. Experiment trigger reference point
-
-Thresholds are defined, but the comparison baseline is not yet explicit.
-
-Candidates include:
-
-- current preferred family centerpoint;
-- current preferred window boundary;
-- previous actual shot;
-- current displayed recommendation.
-
-This matters especially for time and natural variability.
+No comparison threshold or Experiment baseline needs to be designed. A different shot is saved and rated normally; green evidence can form an internal family without changing an explicit favorite, and non-green results stay private under the existing contribution rules. No Start/Decline question is offered.
 
 ### E. Grinder scale semantics
 
@@ -1893,7 +1814,7 @@ Public V1 should decide how to handle grinders where:
 - the grinder is stepped vs stepless;
 - the meaningful adjustment step is not one decimal place.
 
-This affects normalization, experiment detection, and "Use Recommendation."
+This affects grinder guidance and "Use Recommendation"; Experiment detection is retired.
 
 ### F. Community correction after editing an already-contributed shot
 
@@ -1930,11 +1851,9 @@ Suggested design direction:
 - larger N: robust quantile/MAD/trimmed window;
 - center: median or trimmed mean rather than raw mean when outliers accumulate.
 
-### I. Adaptive grind experiment threshold
+### I. Retired grinder-based Experiment trigger
 
-The product owner confirmed 0.1 is meaningful on a 0.0-5.0 grinder.
-
-A candidate general rule is approximately one real adjustment increment or a small percentage of configured espresso range, but this is not yet approved.
+No grinder setting triggers an Experiment workflow. The approved grinder adjustment guidance and hardware-specific calibration remain in force independently.
 
 ### J. Preference-aware recipe families vs strict green sensory targets
 
@@ -2244,8 +2163,8 @@ A beta build is not ready unless all of these are true:
 8. Non-green shots do not contribute to community data.
 9. Repeated green shots build a successful window and robust centerpoint.
 10. Materially different green recipes can remain separate families.
-11. Experiment prompts occur after rating and only start the Experiment workspace if the user confirms.
-12. Candidate/confirmed **internal** successful recipe-family lifecycle works while the card shows one recommendation.
+11. Saving/rating a shot never requires Experiment confirmation; measurements, notes, outlier confirmation and five taste ratings retain their approved rules.
+12. Successful shots may support distinct **internal** recipe-family evidence while the coffee card shows one recommendation; no Experiment stages or competing recipe cards.
 13. Old successful recipes are never destroyed merely because a new one becomes current.
 14. Shot details expand inline and multiple shots can be compared.
 15. Current coffee stays pinned outside search.
