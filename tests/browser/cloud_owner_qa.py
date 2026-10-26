@@ -164,6 +164,13 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Save Name',exact=True).click();page.wait_for_function('!document.querySelector("#sheet").open')
  assert 'Home Espresso' in page.locator('.setup-switch').inner_text();checks.append('Setup can be renamed without recreating equipment')
  page.locator('[data-action=expand]').click();page.get_by_role('button',name='Log A Shot',exact=False).wait_for();checks.append('Coffee expansion is inline')
+ # Retired Custom is absent from actual mobile style choices, while all five supported styles remain.
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ current_styles=page.locator('#style select[name=style] option').all_text_contents()
+ assert current_styles==['Traditional','Turbo','Fast-Flow','Ristretto','Lungo'],current_styles
+ assert page.locator('#style option[value="Custom"]').count()==0
+ page.locator('#sheet [data-action="close"]').click()
+ checks.append('Mobile five-style selector excludes retired Custom without affecting existing shot logging')
  page.screenshot(path=str(OUT/'cloud_home_light.png'),full_page=True)
  page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=tasting_preferences]').fill('Fruity clarity');page.get_by_role('button',name='Save Preferences',exact=True).click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();assert page.locator('#sheet').evaluate('(x)=>x.open');checks.append('Preference save leaves Settings open')
  page.get_by_text('Advanced Setup Options',exact=True).click();page.locator('[name=track_temperature]').check();page.locator('[name=track_slow_feed]').check();page.get_by_role('button',name='Save Advanced Options').click();page.get_by_role('alert').filter(has_text='Advanced settings saved').wait_for();assert page.locator('#sheet details.advanced:has(summary:text-is("Advanced Setup Options"))').evaluate('(x)=>x.open');checks.append('Advanced save preserves open sheet and section')
