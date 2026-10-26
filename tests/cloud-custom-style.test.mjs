@@ -54,5 +54,6 @@ test('Custom target changes use protected owner-bound outbox and cannot bypass a
  assert.equal(ACTIONS.has('save_custom_targets'),true);
  assert.equal(independentMutations({action:'save_shot',payload:{id:'one'}},{action:'save_custom_targets',payload:{library_entry_id:'coffee'}}),false);
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
- assert.doesNotMatch(main,/supabase\\.from\\(['"]workspace_coffees/);
+ assert.equal(main.includes("supabase.from('workspace_coffees"),false);
+ assert.ok(main.includes("this.mutate('save_custom_targets'"));
 });
