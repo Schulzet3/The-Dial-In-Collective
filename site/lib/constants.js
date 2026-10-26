@@ -1,6 +1,7 @@
 export const APP_VERSION = '0.1.0';
 export const SCHEMA_VERSION = 1;
-export const STYLES = ['Traditional', 'Turbo', 'Fast-Flow', 'Ristretto', 'Lungo', 'Custom'];
+// Selectable shot styles. The retired historical Custom label stays readable in saved records.
+export const STYLES = ['Traditional', 'Turbo', 'Fast-Flow', 'Ristretto', 'Lungo'];
 // Owner-Locked seven-tier Title Case scale. Original source records remain literal.
 export const ROASTS = ['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
 export function canonicalRoastLevel(value){
@@ -22,7 +23,8 @@ export const STYLE_COPY = {
  'Fast-Flow': 'SEY-inspired coarse-ground, very fast-flow espresso at a shorter ratio than typical Turbo. Illustrative starting territory is 1:2.35 in 10-16 seconds, adapting to taste and equipment. Not SOUP or Sprover.',
  Ristretto: 'Shorter, more concentrated espresso. Typical starting territory: 1:1.1-1:1.5 in 18-25 seconds, emphasizing texture and intensity. Ratio matters more than exact time.',
  Lungo: 'Longer-ratio espresso. Typical starting territory: 1:2.5-1:3.2 in 28-40 seconds. A more open, less concentrated cup. Ratio matters more than exact time.',
- Custom: 'Set your own starting windows. Style guidelines never decide whether your shot tastes right.'
+ // Historical display text only: retired Custom cannot be selected for new shots.
+ Custom: 'Retired historical style. Your saved shots and notes are preserved.'
 };
 // Starting priors preserved from the supplied JSX, NOT pass/fail rules.
 export const RATIOS = {

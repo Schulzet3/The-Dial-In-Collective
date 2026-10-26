@@ -47,7 +47,7 @@ export function applyPending(state,events){
  for(const event of events){if(event.status!=='pending')continue;const p=event.payload;
   if(event.action==='save_shot'&&!s.shots.some(sh=>sh.id===p.id)&&(!p.expected_revision||p.expected_revision===0)){
    const previous=s.activeSetupId;s.activeSetupId=p.setup_id;
-   if(M.activeVersion(s)?.id===p.setup_version_id){try{const sh=E.saveShot(s,p.library_entry_id,{id:p.id,timestamp:p.pulled_at,doseG:p.dose_g,yieldG:p.yield_g,timeS:p.time_s,grindSetting:p.grind_setting,tempC:p.temperature_c,style:p.style,basketId:p.basket_version_id,feedMode:p.feed_mode,tasteScales:p.taste,notes:p.notes});sh.cloudPending=true;}catch{/* Kept in the durable outbox even if it cannot be rendered. */}}
+   if(M.activeVersion(s)?.id===p.setup_version_id){try{const sh=E.saveShot(s,p.library_entry_id,{id:p.id,timestamp:p.pulled_at,doseG:p.dose_g,yieldG:p.yield_g,timeS:p.time_s,grindSetting:p.grind_setting,tempC:p.temperature_c,style:p.style,basketId:p.basket_version_id,feedMode:p.feed_mode,tasteScales:p.taste,notes:p.notes},{allowLegacyCustom:p.style==='Custom'});sh.cloudPending=true;}catch{/* Kept in the durable outbox even if it cannot be rendered. */}}
    s.activeSetupId=previous;
   }
  }
