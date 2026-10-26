@@ -107,6 +107,12 @@ window.__client={
   pref.current_family_id=sh.personal_family_id;pref.favorite_shot_id=sh.id;pref.revision++;
   return {ok:true,record:structuredClone(pref)};
  }
+ if(e.action==='save_custom_targets'){
+  const wc=r.workspaceCoffees.find(x=>x.setup_id===d.setup_id&&x.setup_version_id===d.setup_version_id&&x.library_entry_id===d.library_entry_id);
+  if(!wc||wc.revision!==d.expected_revision)return {ok:false,code:'conflict',revision:wc?.revision??0};
+  wc.custom_targets=structuredClone(d.custom_targets);wc.selected_style='Custom';wc.revision++;
+  return {ok:true,record:structuredClone(wc)};
+ }
  if(e.action==='set_style'){r.workspaceCoffees[0].selected_style=d.style;r.workspaceCoffees[0].revision++;return {ok:true,record:r.workspaceCoffees[0]};}
  return {ok:true};
  }
@@ -167,12 +173,67 @@ with sync_playwright() as p:
  page.screenshot(path=str(OUT/'cloud_home_light.png'),full_page=True)
  page.get_by_role('button',name='Settings',exact=True).click();page.locator('[name=tasting_preferences]').fill('Fruity clarity');page.get_by_role('button',name='Save Preferences',exact=True).click();page.get_by_role('alert').filter(has_text='Preferences saved').wait_for();assert page.locator('#sheet').evaluate('(x)=>x.open');checks.append('Preference save leaves Settings open')
  page.get_by_text('Advanced Setup Options',exact=True).click();page.locator('[name=track_temperature]').check();page.locator('[name=track_slow_feed]').check();page.get_by_role('button',name='Save Advanced Options').click();page.get_by_role('alert').filter(has_text='Advanced settings saved').wait_for();assert page.locator('#sheet details.advanced:has(summary:text-is("Advanced Setup Options"))').evaluate('(x)=>x.open');checks.append('Advanced save preserves open sheet and section')
- page.get_by_role('button',name='Close',exact=True).click();page.get_by_role('button',name='Log A Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
+ page.get_by_role('button',name='Close',exact=True).click()
+ # UI Issue14: all owner-approved styles visible, Custom values saved through
+ # the same protected mutation path, and switching away preserves Custom.
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ assert 'Custom' in page.locator('#style [name=style]').locator('option').all_text_contents()
+ assert 'Fast-Flow' in page.locator('#style [name=style]').locator('option').all_text_contents()
+ page.locator('#style [name=style]').select_option('Custom')
+ assert page.locator('#custom-targets').is_visible()
+ page.locator('#style [name=ratio]').fill('2.6')
+ page.locator('#style [name=time_low_s]').fill('20')
+ page.locator('#style [name=time_high_s]').fill('28')
+ page.locator('#style [name=temperature]').fill('201.2')
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ saved=page.evaluate('window.__raw.workspaceCoffees[0].custom_targets')
+ assert saved['ratio']==2.6 and saved['time_low_s']==20 and saved['time_high_s']==28 and abs(saved['temperature_c']-94)<.01,saved
+ assert page.evaluate('window.__Modules.engine.recommendation(window.__app.state,"coffee").yield.center')==46.8
+ assert page.locator('.style-custom').count()==1
+ checks.append('Custom style: six choices; ratio, time and optional temperature saved in protected simulated owner workspace')
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ page.locator('#style [name=style]').select_option('Traditional')
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ assert page.evaluate('window.__raw.workspaceCoffees[0].custom_targets.ratio')==2.6
+ assert page.evaluate('window.__Modules.engine.recommendation(window.__app.state,"coffee").style')=='Traditional'
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ page.locator('#style [name=style]').select_option('Custom')
+ assert page.locator('#style [name=ratio]').input_value()=='2.6'
+ assert page.locator('#style [name=time_low_s]').input_value()=='20'
+ assert page.locator('#style [name=time_high_s]').input_value()=='28'
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ page.evaluate('window.__app.state=window.__Modules.mapping.hydrate(window.__raw);window.__app.render()')
+ assert page.evaluate('window.__Modules.model.coffeeState(window.__app.state,"coffee").custom.ratioLow')==2.6
+ checks.append('Custom targets survive non-Custom switch, re-selection and independent hydration without changing measured shots')
+ page.get_by_role('button',name='Change Style',exact=True).click()
+ page.locator('#style [name=style]').select_option('Turbo')
+ page.get_by_role('button',name='Use Style').click()
+ page.wait_for_function('!document.querySelector("#sheet").open')
+ page.get_by_role('button',name='Log A Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
  assert page.locator('[name=temperature]').input_value()=='';checks.append('Temperature is optional, not fabricated in actual input')
  assert not page.locator('[name=slowFeed]').is_checked();page.locator('[name=slowFeed]').check();checks.append('New Slow Feed entry can be selected explicitly')
+ page.get_by_role('button',name='Save Shot & Get Suggestion').click()
+ page.get_by_role('alert').filter(has_text='Yield').first.wait_for()
+ assert page.locator('[name=yieldG]').get_attribute('aria-invalid')=='true'
+ assert page.locator('[name=yieldG]').evaluate('(el)=>document.activeElement===el')
+ checks.append('390px browser: invalid shot focuses first missing measurement and announces its error')
  page.locator('[name=yieldG]').fill('50');page.locator('[name=timeS]').fill('100');page.locator('[name=grindSetting]').fill('0');page.locator('[name=notes]').fill('Synthetic private note')
+ assert page.locator('[name=yieldG]').get_attribute('aria-invalid') is None
+ checks.append('Corrected measurement clears stale aria-invalid without altering other required checks')
  page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.get_by_role('alert').filter(has_text='Rate').first.wait_for();checks.append('All five sensory ratings required before save')
- for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]').click()
+ assert page.locator('[data-scale=extraction] [role=group]').get_attribute('aria-invalid')=='true'
+ assert page.locator('[data-scale=extraction] [data-action=rate]').first.evaluate('(el)=>document.activeElement===el')
+ checks.append('Missing five taste ratings focus the first unanswered scale without preselecting a value')
+ for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:
+  rating=page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]')
+  rating.focus();rating.press('Space')
+  assert rating.evaluate('(el)=>document.activeElement===el'),f'{key} keyboard focus lost after rating'
+  assert rating.get_attribute('aria-pressed')=='true'
+  assert page.locator(f'[data-scale={key}] output').inner_text()!='Tap to rate'
+ checks.append('Real Chromium Space-key ratings retain focus, pressed state and visible label for all five scales')
  page.screenshot(path=str(OUT/'cloud_log_light.png'),full_page=True)
  page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.wait_for_function('!document.querySelector("#sheet").open');assert page.locator('.current-mark').count()==1;checks.append('Saving shot closes log and pins coffee')
  assert page.locator('.feedback-panel').count()==1;checks.append('Latest result and radar visible after save')
@@ -520,6 +581,18 @@ with sync_playwright() as p:
  checks.append('320px with enlarged shot text keeps the full measurement line readable')
  page.set_viewport_size({'width':390,'height':844})
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
+ # Browser network drops after the account was previously admitted; avoid
+ # presenting a stale Synced badge, but never drop queued member changes.
+ page.context.set_offline(True)
+ page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Offline')")
+ assert page.get_by_role('status').filter(has_text='Offline: saved coffees and shot logging are available').count()>=1
+ assert page.locator('.app-nav [data-action=community]').count()==0
+ assert page.locator('.sync-indicator').get_attribute('data-sync-state')=='offline'
+ checks.append('Actual offline event immediately shows Offline status, keeps private coffees and disables online-only Community navigation')
+ page.context.set_offline(False)
+ page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Synced')")
+ assert page.locator('.app-nav [data-action=community]').count()==1
+ checks.append('Reconnect rechecks account and restores normal sync status')
  assert not errors,errors;checks.append('No browser JavaScript exceptions')
  b.close()
 report={'passed':len(checks),'checks':checks,'caveats':['Injected browser harness with mocked backend/auth and in-memory storage; not live login/email or native IndexedDB','Original local app is untouched; deployment/backup/full feature parity not ready']}

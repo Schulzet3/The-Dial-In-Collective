@@ -2,7 +2,7 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-10-23",
+  "reconciled_at_utc": "2026-10-26",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
@@ -113,7 +113,7 @@
         },
         {
           "path": "site/cloud/main.js",
-          "contains": "C.STYLES.filter(style=>style!=='Custom')"
+          "contains": "C.STYLES,suggestion.style"
         },
         {
           "path": "supabase/migrations/20261022090000_dic_fast_flow_hybrid_style.sql",
@@ -122,6 +122,14 @@
         {
           "path": "tests/fast-flow-hybrid.test.mjs",
           "contains": "compatible Turbo fallback adjusts only the unproven Fast-Flow ratio"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "this.mutate('save_custom_targets'"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "contains": "export function customTargetsForSave("
         }
       ]
     },

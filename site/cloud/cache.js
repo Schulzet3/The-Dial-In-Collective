@@ -22,7 +22,7 @@ export function patchAcknowledgement(snapshot,event,result){
  if(['save_preferences','select_setup'].includes(event.action))next.preferences=structuredClone(r);
  if(event.action==='save_setup_settings')upsert('setupPreferences',r,x=>x.setup_version_id===r.setup_version_id);
  if(event.action==='rename_setup')upsert('setups',r,x=>x.id===r.id);
- if(event.action==='set_style')upsert('workspaceCoffees',r,x=>x.setup_version_id===r.setup_version_id&&x.library_entry_id===r.library_entry_id);
+ if(['set_style','save_custom_targets'].includes(event.action))upsert('workspaceCoffees',r,x=>x.setup_version_id===r.setup_version_id&&x.library_entry_id===r.library_entry_id);
  if(event.action==='make_current')upsert('recipePreferences',r,x=>x.setup_version_id===r.setup_version_id&&x.library_entry_id===r.library_entry_id&&x.style===r.style);
  return next;
 }
