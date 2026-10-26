@@ -316,6 +316,23 @@ export function extractRoastVisualEvidence(html){
   if(places.length!==1||places[0].normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()!==country.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase())continue;
   offer(split[2],'selected_product_country_roast_badge');
  }
+ // Some Shopify products print the current coffee as "Sumatra Medium" or
+ // "Colombia Medium" in its single selected-product H1, without the word
+ // "roast" in nearby text. The last *complete* word is the literal roast
+ // category and the prefix must itself be a single explicitly recognized
+ // geographic name. Do not parse related H1s, marketing headings, scales,
+ // flavor text, or a product with multiple competing H1 titles.
+ const h1s=pageNodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=220);
+ if(h1s.length===1){
+  const heading=plain(page.slice(h1s[0].headEnd,h1s[0].contentEnd));
+  const title=heading.match(/^([\p{Lu}][\p{L}\p{M}'’ .-]{2,65}?)\s+(Ultra Light|Very Light|Light|Medium(?:[- ](?:Light|Dark))?|Dark)$/iu);
+  if(title){
+   const geography=title[1].trim(),places=literalCoffeeSourcePlaces(geography);
+   const key=value=>value.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+   if(places.length===1&&key(places[0])===key(geography))
+    offer(title[2],'selected_product_geography_roast_title');
+  }
+ }
  // Detect the selected class/ARIA state of a discrete roast-level selector.
  // The heading must be nearby; avoid unrelated site-wide filter controls.
  const actualStarts=new Set(pageNodes.map(node=>node.start));
