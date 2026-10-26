@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {shopifyProductRequest,extractShopifyAjaxData,mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
+import {shopifyProductRequest,extractShopifyAjaxData} from '../src/server/coffee-shopify-ajax.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const req=shopifyProductRequest('https://example.org/products/selected-release');
 function product(data={}){

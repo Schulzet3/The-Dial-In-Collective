@@ -1,3 +1,8 @@
+## October 26 UTC — PR149 exact-source lint correction
+
+PR-head full Node 1,622 PASS/0 FAIL/6 pre-existing SKIP on exact `99a652eb...`, approval and SQL/security/cloud succeeded, but app/build run `40392673840` flagged one ESLint `no-unused-vars` warning at new scoped source regression: `mergePublicProductPreview` imported but not referenced. Removed ONLY that unused test import; extractor runtime blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, 603-case replay and original immutable oracle/scorer remain unchanged. Same-commit journal update; rerun exact-source GitHub CI and revalidate before merge.
+
+---
 ## October 26 UTC — incorporated parallel development branch, CI recovery
 
 PR #149 approval/continuity run 40392328712 failed at `git merge-base --is-ancestor` because development advanced from `92a91fe...` to `e5477a3c17c813d5fd6f091c6d42054fd4d1c5a0` after feature branch fork, NOT because extractor tests failed. GitHub compared 20 concurrent paths (UI/SQL/spec/queue/workflows), none of the scoped extractor/journal/test paths overlapped. Non-force two-parent feature integration preserves new parent development tree plus exact original603-tested extractor source blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, dedicated source test and audit receipt. No Netlify publish. Must re-run exact merged-base PR CI; no claim of repaired CI until verified.
