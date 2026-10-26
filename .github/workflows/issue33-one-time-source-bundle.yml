@@ -1,0 +1,35 @@
+name: DIC private one-time Issue33 source bundle
+on:
+  pull_request:
+    paths:
+      - .github/workflows/issue33-one-time-source-bundle.yml
+permissions:
+  contents: read
+concurrency:
+  group: dic-private-issue33-source-bundle-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+jobs:
+  source-bundle:
+    if: github.event.pull_request.number == 125
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Inspect exact source checkout and make private offline-only archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > issue33-checked-out-sha.txt
+          git ls-files -z | tar --null -czf issue33-private-source-bundle.tar.gz --files-from -
+          sha256sum issue33-private-source-bundle.tar.gz
+          test -s issue33-private-source-bundle.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: issue33-source-bundle-${{ github.sha }}
+          path: |
+            issue33-private-source-bundle.tar.gz
+            issue33-checked-out-sha.txt
+          retention-days: 1
+          if-no-files-found: error
