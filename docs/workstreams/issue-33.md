@@ -1,3 +1,9 @@
+## October 26 UTC — release queue CI failure repaired at PR #122
+
+First exact-head approval run 40264372425 failed schema validation because IN_PROGRESS follow-on audit item listed only nondeployable `scripts/audit/`, `tests/` and `docs/audits/` files under `scope_paths`. The queue contract intentionally restricts `scope_paths` to deployable application files. Correction: keep the audit-only evidence paths in the item notes and work journal, and use an empty deployable scope while no new production code exists. Preserve the separate previous READY candidate and all other queue items unchanged. This is a **documentation-only correction** to the new follow-on item; no validator relaxation. Re-run exact source approval/continuity before merge; no deployed-state assertion.
+
+---
+
 ## October 26, 2026 UTC — owner-authorized #33 completion follow-on (safe equivalence triage, NOT a closure)
 
 Owner instructed autonomous closure of all 132 missing and 824 review-required canonical source assertions while preserving originals and **without publication**. Recovered current `development/backend-foundation` source `c2e76544e340b95e121a23c6c825a5a2c727e9af`, all original Candidate12 acceptance evidence, no existing open PRs, original frozen 603 comparison archive from verified run 40074270907. The previous Candidate12 READY queue row must not be downgraded or misrepresented as fixing all residuals.
