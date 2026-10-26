@@ -639,8 +639,8 @@
       "issue": 13,
       "pr": 155,
       "title": "Retire Experiment workflow and stage guarded unused SQL cleanup",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "aac4db631510e746053a5a6d5b67a189ac9f7ad0",
       "scope_paths": [
         "site/lib/constants.js",
         "site/lib/engine.js",
@@ -650,16 +650,27 @@
         "supabase/migrations/20261026213000_dic_retire_experiments.sql"
       ],
       "tests": [
-        "Five active style shot logging, successful internal families, explicit preference retention, negative and positive taste feedback, archived backup failure and offline queued payload preservation covered by new Node regression.",
-        "Disposable PostgreSQL applies guarded Experiment retirement only after original forward migrations and verifies no Experiment table/shot column, no loss of personal families, notes, Community, member scopes or Make Current receipt behavior.",
-        "Production read-only preflight October 26: zero Experiment records, zero linked shots; 23 shots, 4 personal families and 4 preferences. An independent verified encrypted backup is mandatory immediately before later owner-authorized potentially destructive production migration."
+        "Owner-Locked UX-RETIRE-EXPERIMENTS-20261026: remove all active Experiment state, thresholds, start/end transitions and experiment recipe overrides. Preserve single visible recommendation, internal successful families, five required sensory ratings, offline shot durability, historical notes and deliberate Make Current preference. tests/retired-experiment-workflow.test.mjs plus existing regression suite passed on exact tested source 0d962bc20dc35e3cf39624b25f2dc5b6baf583a8; Node/lint/build 40400102523 SUCCESS.",
+        "Isolated PostgreSQL 17.11 full migration/regression including staged 20261026213000_dic_retire_experiments.sql and supabase/tests/retired_experiments.sql passed: 40400102485 and exact merged development 40400494914 SUCCESS. Guarded DDL refuses unexpected Experiment rows/linked shots, removes only unused Experiment table and shot link; protected owner state, receipt/idempotent Make Current, importer backup guards, shot notes and distinct recipe families remain.",
+        "Cloud/mobile synthetic 390px/browser and offline checks 40400102387 SUCCESS; private visual 40400102299 SUCCESS; approval 40400102469 and exact merged 40400494868 SUCCESS; security inventory 40400102389 SUCCESS; Python audit 40400102301 SUCCESS. Head tree exactly equals non-force PR155 merge at aac4db631510e746053a5a6d5b67a189ac9f7ad0; merged Node/lint/build 40400494929 SUCCESS.",
+        "Read-only production preflight October 26: public.experiments 0, shots with experiment_id not null 0; 23 saved shots, four personal recipe families and four preferences. No hosted SQL execution; do not infer disconnected device outbox contents from hosted aggregate. Supabase actual applied migration history unchanged; actual site remains October 24 release.",
+        "Stage SQL exclusively for separately approved future publication. At that time, require a newly verified encrypted backup before potentially destructive DDL, repeat emptiness and dependency checks, apply only included ready scope, independently verify provider data integrity and exclude unrelated unready extractor PRs. Original 603-coffee benchmark SKIPPED as unrelated to this feature, not called passed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await isolated SQL migration/Node/synthetic browser/approval exact-source CI, safe non-force integration and merged readback. The migration is source-only; DO NOT execute against production without a separate publish instruction, fresh verified encrypted backup and repeat empty-data preflight."
+      "ci_runs": [
+        40400102469,
+        40400102389,
+        40400102485,
+        40400102387,
+        40400102523,
+        40400102299,
+        40400102301,
+        40400494868,
+        40400494929,
+        40400494914
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/13; direct owner approval October 26, 2026",
-      "notes": "No Experiment UI or workflow is offered in hosted baseline. Retire unused client and future SQL structures while preserving all ordinary shots, notes, actual green evidence, multiple family learning and Make Current preferences. Historical migrations and original old backups not edited; never silently discard legacy Experiment data. Independent #33 and #26 queue entries are preserved."
+      "notes": "No Experiment UI or workflow is offered in hosted baseline. Retire unused client and future SQL structures while preserving all ordinary shots, notes, actual green evidence, multiple family learning and Make Current preferences. Historical migrations and original old backups not edited; never silently discard legacy Experiment data. Independent #33 and #26 queue entries are preserved. Exact non-force merge source and all applicable head/merged CI verified. SOURCE READY; Supabase schema clean-up is UNAPPLIED, Netlify NOT DEPLOYED. Any live Experiment records discovered later block rather than get deleted."
     }
   ],
   "history": [
