@@ -83,4 +83,13 @@ jobs:
           python -m playwright install --with-deps chromium
       - run: python tests/browser/cloud_owner_qa.py
       - run: python tests/browser/admin_invitation_qa.py
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run build:cloud
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_weekly_placeholder
       - run: python tests/browser/pwa_offline_qa.py
