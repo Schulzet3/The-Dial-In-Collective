@@ -815,8 +815,18 @@ function productDetails(fields,p){
   // without a colon. Do not read longer promotional or negative tag text.
   const process=tag.match(/^(?:(washed)\s+coffee|(washed|natural|honey|anaerobic)\s+process(?:ed)?\s+coffee)\s*$/i);
   if(process)addField(fields,'process',process[1]||process[2]);
-  const roast=tag.match(/(?:^|[_\s])((?:(?:ultra|very)\s+light|light\s*[-/]\s*medium|medium\s*[-/]\s*(?:light|dark)|light|medium|dark)\s+roast)(?:\s+coffee)?\s*$/i);
-  if(roast)addField(fields,'roast_level',roast[1]);
+  // Require the entire selected product taxonomy tag to be a roast level.
+  // Matching a suffix of a compound 'Medium Light Roast' previously promoted
+  // 'Light Roast' and manufactured a contradiction against Medium-Light.
+  // Coffee_* is a broad catalog category. When this exact Product also has
+  // a more specific literal roast tag, the broad category can be stale: one
+  // captured Uganda product says medium-roast and Medium in its selected copy
+  // while remaining in an old Coffee_Light Roast storefront collection.
+  // Do not silently promote the category over the selected product detail.
+  const hasSpecificRoastTag=tags.some(other=>/^(?:(?:ultra|very)[- ]light|light(?:[- ]medium)?|medium(?:[- ]light|[- ]dark)?|dark)[- ]roast$/i.test(other));
+  const broadCatalogRoast=/^Coffee_/i.test(tag);
+  const roast=tag.match(/^(?:Coffee_)?((?:(?:ultra|very)\s+light|light\s*[-/ ]\s*medium|medium\s*[-/ ]\s*(?:light|dark)|dark\s*[-/ ]\s*medium|light|medium|dark)\s+roast)(?:\s+coffee)?\s*$/i);
+  if(roast&&!(broadCatalogRoast&&hasSpecificRoastTag))addField(fields,'roast_level',roast[1]);
  }
 }
 function explicitNearbyFacts(html,fields){

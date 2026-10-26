@@ -609,20 +609,30 @@
       "pr": 152,
       "title": "Resolve selected Shopify Medium Light Roast taxonomy without false product conflict",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "f8940ffca7c02200bd207b8edfa2c73da55eabd8",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
         "Original frozen603/201-roaster local replay on parser blob 395d596b279fd39f8fb72ee1996a91570280047f claimed 3069 exact /111 missing/822 review; one more Radial Cosa Nueva Medium-Light source-backed result, no prior exact loss and full supplementary retention unchanged. This evidence does NOT apply to the current code blob.",
-        "Current PR152 HEAD d64f019e29b66fef8b592c6b8542a0f8c7671690 contains parser blob 53875bcb5b436bed7a74f09947bccb1f2e1cdd23, which adds broad Coffee_ tag and selected-product tag precedence. Compared exact Git blob content; source differs from local full603 receipt. Earlier PR-head CI 00a3378... passed Node, approval, SQL, security, cloud and visual, hosted original corpus SKIPPED. These CI runs do not verify d64f019e... and are not claimed passed for current head."
+        "Current PR152 HEAD d64f019e29b66fef8b592c6b8542a0f8c7671690 contains parser blob 53875bcb5b436bed7a74f09947bccb1f2e1cdd23, which adds broad Coffee_ tag and selected-product tag precedence. Compared exact Git blob content; source differs from local full603 receipt. Earlier PR-head CI 00a3378... passed Node, approval, SQL, security, cloud and visual, hosted original corpus SKIPPED. These CI runs do not verify d64f019e... and are not claimed passed for current head.",
+        "PR152 nevertheless merged non-force on latest development exact source f8940ffca7c02200bd207b8edfa2c73da55eabd8, with parser blob 53875bcb5b436bed7a74f09947bccb1f2e1cdd23, NOT same as original full603 local receipt parser blob 395d596b279fd39f8fb72ee1996a91570280047f. Exact PR-head d64f019e... approval 40396561650, Node/build 40396561677, cloud/mobile 40396561631, isolated SQL 40396561721, source security 40396561681 and visual 40396561669 all SUCCESS. Merged exact source approval 40397109510 and app/build 40397109438 SUCCESS. Original hosted frozen603 workflow 40397109336 SKIPPED. These checks do NOT establish whole original603 scores on merged parser."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40396561650,
+        40396561677,
+        40396561631,
+        40396561721,
+        40396561681,
+        40396561669,
+        40397109510,
+        40397109438
+      ],
       "blockers": [
-        "Exact current PR152 parser blob 53875bcb5b436bed7a74f09947bccb1f2e1cdd23 does not equal original603 replay receipt parser blob 395d596b279fd39f8fb72ee1996a91570280047f. Must either restore tested blob or rerun full immutable original 603/201 handler benchmark on current source, verify zero earlier exact/full-retention losses, update source-bound receipt and pass applicable exact-head GitHub CI. Then non-force merge and exact merged CI before READY."
+        "UNREADY MERGED SOURCE IN RELEASE CANDIDATE. PR152 merged at f8940ffca7c02200bd207b8edfa2c73da55eabd8 with parser blob 53875bcb5b436bed7a74f09947bccb1f2e1cdd23 differing from entire original603 replayed parser 395d596b279fd39f8fb72ee1996a91570280047f. Reconcile exact current source with source-bound original 603-case/201-roaster handler replay (or corrective non-force PR restoring independently tested blob), zero previous exact/full-retention losses, and update original-source acceptance receipt with actual current parser blob. Then exact corrective-source CI/merge and conductor READY promotion. CI alone and old 3069/111/822 claim are insufficient. This blocks combined release preflight; never publish unverified candidate."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; https://github.com/Schulzet3/The-Dial-In-Collective/pull/152",
-      "notes": "Open extractor-owned development PR; not merged, not part of deployment. Historical CI on older PR head cannot substitute for exact new source. Coordinator retains queue/status ownership and will intake verified PR after merge."
+      "notes": "Merged source is genuinely in development and therefore HOLD as TESTING until corrected original603 exact source evidence exists. The reviewed PR142/other streams remain unaffected. No standalone PR152 code changes are implied safe for publication. Original exact independently verified PR149 3068/112/822 remains last source-bound whole-corpus benchmark."
     }
   ],
   "history": [

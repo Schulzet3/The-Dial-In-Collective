@@ -28,3 +28,7 @@ Read back development `55feef07bf95792dd6a3fb6ca35863988ef58425`, main d4f50a72,
 
 
 October 26 scope-count correction (documentation only): independently re-counted 14 active READY items as 10 extractor source slices, one Community frontend, one UI Log Shot focus, one Custom retirement, and one source-only already-applied Issue5 SQL inclusion; no underlying queue state changed. [skip netlify].
+
+
+## October 26 UTC — concurrent PR152 merged while conductor intake PR154 prepared
+Exact live development HEAD advanced from 55feef07 to `f8940ffca7c02200bd207b8edfa2c73da55eabd8` via non-force PR152 merge while another conversation was performing that work. Read back actual source parser Git blob 53875bcb5b436bed7a74f09947bccb1f2e1cdd23; original603 receipt still claims tested 395d596b279fd39f8fb72ee1996a91570280047f. No corresponding full original603 current-source proof; hosted workflow skipped. Relevant exact PR-head and merged app/approval CI succeeded but does not supersede original corpus mismatch. Reconciled queue row from unmerged-null to merged TESTING with exact SHA and zero fictitious source acceptance; strict release HOLD. This merge reconciliation itself preserves concurrent PR152 code/tests/issue33 journal and source captures; source tree built from live development, with existing coordinator branch parent plus live development parent. No extractor code altered, no SQL/provider/member/prod writes.
