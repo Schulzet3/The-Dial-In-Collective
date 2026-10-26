@@ -96,6 +96,26 @@ export function radar(t) {
 export function scales(t={}) {
  return `<fieldset class="sensory"><legend>How did it taste?</legend>${SCALES.map(sc=>`<div class="scale" data-scale="${sc.key}"><div class="scale-top"><span>${e(sc.label)}</span><output>${e(tasteLabel(sc,t[sc.key]))}</output></div><div class="scale-control"><small>${e(sc.low)}</small><div role="group" aria-label="${e(sc.label)}">${(sc.reverse?[5,4,3,2,1]:[1,2,3,4,5]).map(n=>`<button type="button" class="scale-button severity-${tasteSeverity(sc,n)} ${t[sc.key]===n?'chosen':''}" data-action="rate" data-key="${sc.key}" data-value="${n}" aria-label="${e(sc.label)}: ${e(tasteLabel(sc,n))}" aria-pressed="${t[sc.key]===n}"><span>${t[sc.key]===n?'\u2713':''}</span></button>`).join('')}</div><small>${e(sc.high)}</small></div><p>${e(sc.hint)}</p></div>`).join('')}</fieldset>`;
 }
+// Update a single sensory row in place. Replacing #ratings after each tap
+// destroyed the focused button and its keyboard/assistive-technology position.
+// All five selections remain explicit; only the tapped scale is changed.
+export function updateTasteSelection(ratings,key,value) {
+ const scale=SCALES.find(s=>s.key===key);
+ if(!ratings||!scale||!Number.isInteger(value)||value<1||value>5)return false;
+ const row=ratings.querySelector('[data-scale="'+key+'"]');
+ if(!row)return false;
+ const output=row.querySelector('output');
+ if(output)output.textContent=tasteLabel(scale,value);
+ for(const control of row.querySelectorAll('[data-action="rate"]')){
+  const selected=Number(control.dataset.value)===value;
+  control.classList.toggle('chosen',selected);
+  control.setAttribute('aria-pressed',String(selected));
+  const mark=control.querySelector('span');
+  if(mark)mark.textContent=selected?'\u2713':'';
+ }
+ return true;
+}
+
 export function shotSummary(sh,unit='F') {return `<span class="shot-numbers">${fmt(sh.doseG)}g \u2192 ${fmt(sh.yieldG)}g \u00b7 ${fmt(sh.timeS)}s${sh.tempC!=null?` \u00b7 ${tempDisplay(sh.tempC,unit)}\u00b0${unit}`:''}${sh.grindSetting!=null?` \u00b7 Grind ${fmt(sh.grindSetting)}`:''}</span>`;}
 export const humanDate=d=>{try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
 export const previewNotice=()=>`<div class="preview-note">${icon('eye',16)}<div><strong>Design preview</strong><span>Fictional sample data. Nothing is shared, synced or sent to an account.</span></div></div>`;
