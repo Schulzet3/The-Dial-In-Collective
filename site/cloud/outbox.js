@@ -1,6 +1,6 @@
 import {CloudError,isAccessDenied} from './client.js';
 import {patchAcknowledgement} from './cache.js';
-export const ACTIONS=new Set(['create_setup','save_preferences','submit_coffee','add_verified_coffee','save_shot','select_setup','set_style','save_setup_settings','make_current','rename_setup','confirm_coffee_existing']);
+export const ACTIONS=new Set(['create_setup','save_preferences','submit_coffee','add_verified_coffee','save_shot','select_setup','set_style','save_custom_targets','save_setup_settings','make_current','rename_setup','confirm_coffee_existing']);
 // Only provably independent, fully identified operations can pass a held
 // change. All other pairs preserve queue order and original idempotency keys.
 export function independentMutations(held,event){

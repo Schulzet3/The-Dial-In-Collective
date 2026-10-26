@@ -3,6 +3,46 @@ import * as C from '../lib/constants.js';
 import * as E from '../lib/engine.js';
 const number=x=>x==null?null:Number(x);
 const rows=(raw,key)=>Array.isArray(raw?.[key])?raw[key]:[];
+// Only owner-scoped validated Custom targets from the protected personal-state
+// response may become a recipe starting reference. Invalid/stale cache data
+// never masquerades as a verified Custom configuration.
+export function customTargetsFromRaw(value){
+ if(!value||typeof value!=='object'||Array.isArray(value))return null;
+ const {ratio,time_low_s:low,time_high_s:high,temperature_c:temp}=value;
+ const finite=x=>typeof x==='number'&&Number.isFinite(x);
+ if(!finite(ratio)||ratio<0.8||ratio>4.5||!finite(low)||!finite(high)||
+  low<5||low>60||high<5||high>60||high<=low||
+  !(temp==null||finite(temp)&&temp>=85&&temp<=99.9))return null;
+ return {ratioLow:ratio,ratioHigh:ratio,timeLow:low,timeHigh:high,tempC:temp??null};
+}
+const finiteInput=value=>{
+ if(value==null||typeof value==='boolean'||!String(value).trim())return null;
+ const n=Number(value);return Number.isFinite(n)?n:null;
+};
+// Client validation exactly mirrors the additive Issue14 SQL boundary.
+// Never silently replace an existing precise Celsius target with the rounded
+// Fahrenheit display value on an unchanged form submission.
+export function customTargetsForSave(input,{unit='F',previous=null}={}){
+ const ratio=finiteInput(input?.ratio),low=finiteInput(input?.time_low_s),high=finiteInput(input?.time_high_s);
+ if(ratio==null||ratio<0.8||ratio>4.5)throw new Error('Enter a Custom ratio between 1:0.8 and 1:4.5.');
+ if(low==null||high==null||low<5||high>60||high<=low||low>60||high<5)
+  throw new Error('Enter a Custom time range from 5 to 60 seconds, with the end after the start.');
+ let temp=previous?.tempC??null;
+ if(Object.hasOwn(input||{},'temperature')){
+  const requested=finiteInput(input.temperature);
+  if(requested==null){
+   if(input.temperature!=null&&String(input.temperature).trim())throw new Error('Enter a valid optional temperature.');
+   temp=null;
+  }else{
+   const oldShown=previous?.tempC==null?null:unit==='F'?C.round(previous.tempC*9/5+32,1):C.round(previous.tempC,1);
+   temp=oldShown!=null&&requested===oldShown?previous.tempC:C.tempInput(requested,unit);
+  }
+ }
+ if(temp!=null&&(!Number.isFinite(temp)||temp<85||temp>99.9))
+  throw new Error(unit==='F'?'Custom temperature must be 185–211.8 °F or left blank.':'Custom temperature must be 85–99.9 °C or left blank.');
+ return {ratio,time_low_s:low,time_high_s:high,temperature_c:temp};
+}
+
 export function hydrate(raw){
  const s=M.blankState();s.theme=raw.preferences?.theme||'system';s.preferences=raw.preferences?.tasting_preferences||'';s.activeSetupId=raw.preferences?.active_setup_id||null;
  for(const setup of rows(raw,'setups')){
@@ -15,7 +55,7 @@ export function hydrate(raw){
   });
   const item={id:setup.id,name:setup.name,activeVersionId:setup.active_version_id,versions,workspaces:{}};
   for(const v of versions){const w=M.blankWorkspace();const rw=rows(raw,'workspaces').find(x=>x.setup_version_id===v.id);w.currentCoffeeId=rw?.current_library_entry_id||null;
-   for(const wc of rows(raw,'workspaceCoffees').filter(x=>x.setup_version_id===v.id)){const p=M.blankCoffeeState();p.style=wc.selected_style;p.basketId=wc.basket_version_id;w.coffees[wc.library_entry_id]=p;if(wc.last_logged_at)w.recent[wc.library_entry_id]=wc.last_logged_at;}
+   for(const wc of rows(raw,'workspaceCoffees').filter(x=>x.setup_version_id===v.id)){const p=M.blankCoffeeState();p.style=wc.selected_style;p.basketId=wc.basket_version_id;p.custom=customTargetsFromRaw(wc.custom_targets);w.coffees[wc.library_entry_id]=p;if(wc.last_logged_at)w.recent[wc.library_entry_id]=wc.last_logged_at;}
    for(const pref of rows(raw,'recipePreferences').filter(x=>x.setup_version_id===v.id)){const p=w.coffees[pref.library_entry_id] ||= M.blankCoffeeState();if(pref.current_family_id)p.currentFamilies[pref.style]=pref.current_family_id;if(pref.reference_family_id)p.referenceFamilies[pref.style]=pref.reference_family_id;if(pref.favorite_shot_id)p.favoriteShots[pref.current_family_id]=pref.favorite_shot_id;}
    item.workspaces[v.id]=w;
   }

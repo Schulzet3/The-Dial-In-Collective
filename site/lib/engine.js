@@ -201,7 +201,7 @@ export function recommendation(s,coffeeId,options={}) {
  if(!c||!v)return null;
  const style=options.style||p.style,basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),feed=options.feedMode||feedMode(v);
  const rec=baseline(c,style,basket.doseG,s.preferences);
- if(style==='Custom'&&p.custom){rec.ratio={low:p.custom.ratioLow,high:p.custom.ratioHigh,center:(p.custom.ratioLow+p.custom.ratioHigh)/2};rec.time={low:p.custom.timeLow,high:p.custom.timeHigh,center:(p.custom.timeLow+p.custom.timeHigh)/2};rec.reasons=[];}
+ if(style==='Custom'&&p.custom){rec.ratio={low:p.custom.ratioLow,high:p.custom.ratioHigh,center:(p.custom.ratioLow+p.custom.ratioHigh)/2};rec.time={low:p.custom.timeLow,high:p.custom.timeHigh,center:(p.custom.timeLow+p.custom.timeHigh)/2};rec.reasons=[];rec.source='Your Custom starting targets';}
  // Section 25.2 tier 5: personal success on similar coffees from THIS setup.
  // Do not override more relevant exact-coffee successful family data or the
  // higher-priority same-coffee cross-style evidence.
@@ -292,7 +292,7 @@ export function recommendation(s,coffeeId,options={}) {
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
- rec.tempC=temperatureGuidance(s,c,style,v,rec.tempC,rec.familyId);
+ rec.tempC=temperatureGuidance(s,c,style,v,style==='Custom'&&finite(p.custom?.tempC)?p.custom.tempC:rec.tempC,rec.familyId);
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
  rec.yield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
  const exp=s.experiments.find(e=>e.id===p.experiments[style]&&e.status==='active');rec.experimentId=exp?.id||null;
