@@ -694,8 +694,7 @@ function productDetails(fields,p){
  // prose. Require the selected name itself as the grammatical subject.
  const leadingName=selectedTitle.split(/\s+[-–—|]\s+/)[0]?.trim()||'';
  if(leadingName.length>=5&&leadingName.length<=65){
-  const releaseSentence=new RegExp('\\b'+leadingName.replace(/[.*+?^${}()|[\]\\]/g,'\\ rememberGeographyEntityRoles(fields,description);
-')+
+  const releaseSentence=new RegExp('\\b'+leadingName.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+
    '\\s+is\\s+a\\s+(limited\\s+(?:spring|summer|autumn|fall|winter)\\s+release)\\b','i');
   const sentence=releaseSentence.exec(clean(currentDescription,20000));
   if(sentence)addField(fields,'release_label',sentence[1]);

@@ -1,3 +1,9 @@
+## October 26 UTC — source transport escaping correction before PR
+
+GitHub readback of the initial staged release-literal branch source did NOT match locally tested parser blob (JS replacement-string `$&` expansion distorted a single expression). Stopped before PR; repaired the expression in this source+same-commit journal correction, preserving identical intended product/source semantics. Require GitHub readback of exact local tested source blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb` before PR and CI; prior initial staged commit is **NOT** test evidence. Immutable corpus inputs remain unchanged, no provider or production writes.
+
+---
+
 ## October 26 UTC — bounded selected-product release facts, full immutable original603 replay completed; GitHub verification
 
 Owner continues Issue #33 source-backed extractor improvement without paid services, production publication, SQL/Auth/Edge/member writes. Dedicated source changes: `src/server/coffee-page-metadata.mjs`, new negative/positive `tests/coffee-selected-release-labels.test.mjs`; this indexed same-commit work journal; dedicated source-review receipt. Parent latest `92a91fe75c140e8ec15b81da1b4cb502ff426636`; original parser blob `4ddacdd63139a2001652195395278032fc06d642`. Original immutable archive SHA256 `728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce`, original source captures `696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52`, original freeze `0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb`; absolutely no original capture/oracle/scorer modifications.
