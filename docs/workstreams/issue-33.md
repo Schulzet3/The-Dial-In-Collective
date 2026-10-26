@@ -1,3 +1,19 @@
+## October 26 UTC — repaired concrete GitHub Node CI syntax failure
+
+Exact PR124 head `a857d10f` revealed in actual full GitHub tests 40265867313 and cloud tests 40265867322: the newly updated BR regression fixture had a trailing unmatched string quote (`</p>''`) and both suites correctly failed at Node syntax validation. Corrected the extra quote without touching runtime, oracle or source fixture content; the captured source replay and local 3/3 parser assertions remain the basis of behavior. Re-run all exact-head CI and never claim these failed runs as PASS. The 603 original-source local replay is still underway independently.
+
+---
+## October 26 UTC — exact original capture local failure and BR repair
+
+The full untouched 603-case source archive has now been recovered from the owner's Library and SHA256 verified as 696c011e...; recovery ZIP likewise hash-bound 728bd529..., with frozen original oracle-freeze 0bd751f6... and packet attestation 0767e52a.... The first PR124 generic compact-claim handler **did not recover** the Queen City field from its actual saved page because the roaster splits `San Agustín, Huila, Colombia` and `Washed Gesha // 1600 - 1989 masl` using a `<br>` inside a single `<p>`. Reproduced previous output `Colombia`. Scope-corrected parser to preserve a two-BR-segment current product **paragraph** as a composite candidate without concatenating independent products or unrelated paragraphs. Local Node three targeted tests PASS, actual read-only replay of original captured Queen City case now returns `San Agustín, Huila, Colombia` and no origin conflict. Frozen full603 source replay launched separately; do not claim full-corpus acceptance before it finishes. Original 603 oracle, source captures and scoring remain immutable; the pre-existing READY Candidate12 package remains intact. No provider deployment/SQL/member changes.
+
+---
+## October 26, 2026 UTC — targeted current-product geography fix in TESTING
+
+Full reviewed Candidate12 replay retains original Queen City Los Magnificos product text: `San Agustín, Huila, Colombia Washed Gesha // 1600 - 1989 masl` in selected HTML/source facts. Frozen oracle independently expects origin `San Agustín, Huila, Colombia`; previous canonical output contains only `Colombia` (strict review-required). A generic guarded compact spec-row parser now recognizes complete current-product place/country tuples immediately before explicit green processing, cultivar and altitude, and refuses titles naming a different country. Test fixtures cover positive selected-product localities, other-country contradiction, historical/related/incomplete specs. This patch changes live server extraction, so **the original 603 replay is required before declaring this improvement READY**. Do not change the immutable oracle/scorer or suppress other source conflicts. Queue follow-on stays IN_PROGRESS/TESTING. GitHub CI and full-corpus effect not yet claimed. No Netlify/production/paid operations.
+
+---
+
 ## October 26 UTC — exact GitHub PR #122 merge-continuity recovery
 
 PR #122's verified head `464e1775` passed all applicable 7 source PR checks, with original private frozen603 appropriately SKIPPED. GitHub native merge `644870aee66ad5c5f0bcdab0d4eeb66283cdd5fb` preserved the identical tree `0af5b2bf` and first-parent path diff included this issue journal. However GitHub auto-generated the merge title without `[skip netlify]`, causing actual merged-source approval CI run `40264649781` to FAIL continuity. Git history cannot be rewritten non-force.
