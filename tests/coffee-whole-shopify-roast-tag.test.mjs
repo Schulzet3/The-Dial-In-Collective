@@ -24,6 +24,11 @@ test('multiple contradictory whole roast tags remain withheld',()=>{
  assert.equal(v.fields.roast_level,undefined);
  assert.ok(v.conflicts?.includes('roast_level'));
 });
+test('explicit product-prefixed Coffee_ tags still contradict an independently different roast',()=>{
+ const v=parse(['Coffee_Light Roast'],'<p>Roast Level: Medium</p>');
+ assert.equal(v.fields.roast_level,undefined);
+ assert.ok(v.conflicts?.includes('roast_level'));
+});
 test('product identity mismatch is never rescued by a roast tag',()=>{
  const v=extractShopifyAjaxData({title:'Other',handle:'not-test-coffee',tags:['Medium Light Roast']},request);
  assert.equal(v,null);
