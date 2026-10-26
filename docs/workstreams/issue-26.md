@@ -14,3 +14,6 @@ Augmented the existing synthetic authenticated CloudApp Chromium QA (not real Su
 
 ## 2026-10-26 — CI syntax failure corrected
 Head 7230b78b10094dc6c2115e6ab50d4d0d4dc39638 failed Node/cloud checks because a new test-only regular expression accidentally overescaped literal square brackets. The application JavaScript itself parsed. Removed the fragile regex from synthetic DOM test in favor of literal selector inspection; no runtime or UI changes. Reverify new exact-source CI. Approval intake still requires Conductor-owned queue row.
+
+## 2026-10-26 — second fixture quoting error repaired
+Exact-source 7e85020749 Node/cloud checks failed because a newly authored test-only text-matching assertion at test line 92 used invalid nested quote escapes. The previous 390px Chromium browser job on 7230b78b passed; runtime code parsed and visual/SQL/security passed. Replaced brittle quote-sensitive source assertion with two plain string checks for focused group and stale invalid-state removal. No application/runtime changes, no validation relaxation. New Node/cloud exact-source rerun required. Conductor queue intake still blocked.

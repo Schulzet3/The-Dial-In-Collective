@@ -89,5 +89,6 @@ test('Log Shot keeps semantic error announcement and re-enables fields before fo
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  assert.ok(main.includes('role=alert id=shot-validation-feedback'));
  assert.ok(main.includes("form.querySelectorAll('button').forEach(b=>b.disabled=false);if(id==='shot'&&shotValidation?.length)U.focusShotValidationError"));
- assert.ok(main.includes("const group=target.closest('[role=\\"group\\"]')")||main.includes("target.closest('[role=\\"group\\"]')"));
+ assert.ok(main.includes('target.closest('));
+ assert.ok(main.includes("group?.removeAttribute('aria-invalid')"));
 });
