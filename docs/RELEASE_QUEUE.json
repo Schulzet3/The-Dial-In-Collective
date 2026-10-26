@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-residual-source-accuracy",
+      "issue": 33,
+      "pr": null,
+      "title": "Source-backed resolution of original 132 missing and 824 review-required frozen603 assertions",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "scripts/audit/coffee-corpus-presentation-review.mjs",
+        "tests/coffee-corpus-presentation-review.test.mjs",
+        "docs/audits/extractor-candidate12-presentation-triage.md"
+      ],
+      "tests": [
+        "Original frozen603 comparison loaded locally; five presentation-equivalence tests passed. No new extractor runtime or updated frozen corpus run is claimed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Only a supplemental non-scoring classification of 299 potential presentation-only differences exists. The original 132 missing and 824 strict review-required assertions remain unchanged; substantive source investigations and new extractor fixes have not passed a full 603 replay."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Owner authorizes all feasible offline/current public-source development, testing and integration. This row is NOT READY; maintain the independent previous Candidate12 READY item unaltered. No production publication, migration or member operations authorized."
+    },
+    {
       "id": "DIC-Q-5-pending-retry-http-conflict",
       "issue": 5,
       "pr": 107,

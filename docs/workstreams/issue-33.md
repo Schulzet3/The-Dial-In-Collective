@@ -1,3 +1,15 @@
+## October 26, 2026 UTC — owner-authorized #33 completion follow-on (safe equivalence triage, NOT a closure)
+
+Owner instructed autonomous closure of all 132 missing and 824 review-required canonical source assertions while preserving originals and **without publication**. Recovered current `development/backend-foundation` source `c2e76544e340b95e121a23c6c825a5a2c727e9af`, all original Candidate12 acceptance evidence, no existing open PRs, original frozen 603 comparison archive from verified run 40074270907. The previous Candidate12 READY queue row must not be downgraded or misrepresented as fixing all residuals.
+
+This commit adds a **read-only, non-scoring** presentation-equivalence review helper and regression suite plus a separate IN_PROGRESS follow-on queue item. Actual local Node tests: **5 passed / 0 failed**. The helper rechecked 603 unique cases and the original 4,002 canonical scores (3,046 exact / 132 missing / 824 review-required). It classified **299 provisional literal-print equivalents** (180 elevation, 87 tasting-list, 26 variety, 4 roast-alias, 2 producer) while preserving all 132 missing and 525 other review-required items. It does not change the frozen oracle, strict scorer, runtime extractor, selected product facts, source conflicts, saved data, or published code. Input `candidate12-comparison.json` SHA-256: `5d9b48038fd5fae12720caf2253c0a8e583dd6ac0e8a37cb873b815aa657df95`.
+
+New utility tests are locally passing, **GitHub exact-head CI and PR merge were not yet verified at journal-writing time**; no full603 parser improvement or complete source adjudication is claimed. Those remaining tasks are owned by Issue #33 and status IN_PROGRESS. All source-backed remaining changes require independent original-capture review, updated tests, frozen regression replay and actual exact-source CI. No new API keys, paid services, production SQL/Edge/Auth, private records or publication.
+
+Evidence: `docs/audits/extractor-candidate12-presentation-triage.md`; helper `scripts/audit/coffee-corpus-presentation-review.mjs`; tests `tests/coffee-corpus-presentation-review.test.mjs`.
+
+---
+
 ## October 24, 2026 UTC — PR116 actual failure, secure recovery and concurrent PR115 reconciliation
 
 State: **TESTING; no publication or deployment by this task.** Owner authorizes ordinary GitHub writes and Actions with no new API keys or added paid services. Preserve all frozen603/201 inputs, expected answers, scorers, current upstream, product choices and saved/offline member data.
