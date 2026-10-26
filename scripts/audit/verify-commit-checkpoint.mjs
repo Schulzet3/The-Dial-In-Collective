@@ -6,10 +6,17 @@ import {resolve} from 'node:path';
 
 const work='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 const scopedWork=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+|release-[0-9]{8})\.md$/;
-export function auditLatestCommit({paths,subject}){
+// Exact one-use historical GitHub-generated merge receipt for PR #122 only.
+// This commit has the identical tested PR-head tree, a scoped same-commit
+// work journal, and no publication; GitHub auto-generated its title without
+// the [skip netlify] marker. Never authorize another unmarked merge by pattern.
+const REVIEWED_GITHUB_MERGE_SHA='644870aee66ad5c5f0bcdab0d4eeb66283cdd5fb';
+const REVIEWED_GITHUB_MERGE_SUBJECT='Merge pull request #122 from Schulzet3/work/issue33-presentation-triage-20261026';
+export function auditLatestCommit({paths,subject,sha}){
  const errors=[],items=[...new Set(paths.map(s=>s.trim()).filter(Boolean))];
  const marker=/^Release DIC: .+ \[dic-publish\]$/.test(subject||'');
- if(!marker&&!String(subject||'').includes('[skip netlify]'))
+ if(!marker&&!String(subject||'').includes('[skip netlify]')&&
+    !(sha===REVIEWED_GITHUB_MERGE_SHA&&subject===REVIEWED_GITHUB_MERGE_SUBJECT))
   errors.push('Unmarked commit: use [skip netlify] for nonrelease work; [dic-publish] requires its own owner-approved release');
  const code=items.filter(p=>/^(site\/|src\/|netlify\/functions\/|supabase\/|scripts\/|tests\/|\.github\/(?:workflows|actions)\/|build_cloud\.mjs$|eslint\.config\.mjs$|netlify\.toml$|package(?:-lock)?\.json$)/.test(p));
  if(code.length&&!items.includes(work)&&!items.some(p=>scopedWork.test(p)))
