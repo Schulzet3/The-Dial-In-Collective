@@ -6,7 +6,7 @@ const parse=(name,body)=>extractPublicCoffeeFacts('<main><h1>'+name+'</h1>'+body
 
 test('current-product compact geography plus processing and altitude keeps entire literal origin',()=>{
  const source='San Agustín, Huila, Colombia Washed Gesha // 1600 - 1989 masl';
- const result=parse('Los Magnificos ~ Gesha // Colombia','<p>Reminds us of - Prickly Pear & Guava Jelly</p><p><strong>San Agustín, Huila, Colombia<br><span>Washed Gesha // 1600 - 1989 masl</span></strong></p>'');
+ const result=parse('Los Magnificos ~ Gesha // Colombia','<p>Reminds us of - Prickly Pear & Guava Jelly</p><p><strong>San Agustín, Huila, Colombia<br><span>Washed Gesha // 1600 - 1989 masl</span></strong></p>');
  assert.equal(result.fields.origin,'San Agustín, Huila, Colombia');
  assert.ok(!result.conflicts?.includes('origin'));
  assert.ok(result.source_facts?.some(x=>String(x.value).includes(source)));
