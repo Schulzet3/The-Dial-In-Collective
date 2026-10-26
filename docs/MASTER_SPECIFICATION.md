@@ -1533,15 +1533,17 @@ Community popularity should validate or challenge the foundation, not replace sc
 
 ---
 
+**OWNER-CUSTOM-RETIREMENT-20261026 (Locked; supersedes only Custom-style availability):** The owner explicitly retired Custom as a selectable/active espresso style. The five selectable styles are Traditional, Turbo, Fast-Flow, Ristretto, and Lungo. Do not offer, create, recommend or automatically reclassify shots as Custom. Preserve historical/offline Custom records, labels, notes, and pending mutation receipts without deletion or silent conversion. Existing Custom-related database columns/functions remain as inert compatibility only; production schema/data must not be changed under this development instruction. Supersedes earlier §27 Custom UI/editor/target requirements, Issue #14's original acceptance, the Fast-Flow decision's preservation of Custom as a selectable style, and any old five/six-style wording only to this precise extent. Other style priors, recommendation guidelines, history and release controls remain Locked. Issue #14 may be closed as intentionally retired after exact-source tests and integration, not as implemented Custom functionality.
+
 # 27. Shot styles - V1 guidelines, not hard definitions
 
-Current V1 style set:
+Current selectable style set (owner retirement 2026-10-26):
 
 - Traditional.
 - Turbo.
+- Fast-Flow.
 - Ristretto.
 - Lungo.
-- Custom.
 
 The style selected by the user remains the shot's style. Remove the current rigid automatic reclassification logic.
 
@@ -1580,8 +1582,7 @@ Shorter, more concentrated espresso. Typical starting territory is about 1:1.1-1
 **Lungo**  
 Longer-ratio espresso. Typical starting territory is about 1:2.5-1:3.2 in 28-40 seconds, often increasing openness and clarity while reducing concentration. Ratio matters more than hitting an exact time.
 
-**Custom**  
-Set your own targets with no style assumptions.
+**Custom retired:** not selectable or recommended; historical and offline data remain readable and must never be silently relabeled.
 
 ## 27.3 Style recommendation on Add Coffee
 
@@ -2017,9 +2018,9 @@ Deferred until a paid model is defined.
 
 Earlier research covers blooming, declining-pressure, lever-style, low-flow, allonge, modern high-extraction, etc.
 
-Current product UI supports Traditional, Turbo, Ristretto, Lungo, Custom.
+Current product UI supports Traditional, Turbo, Fast-Flow, Ristretto, Lungo. Custom is retired and retained only for safe legacy compatibility.
 
-Decide later whether advanced named profiles should become first-class styles or remain under Custom/advanced equipment modes.
+Decide later whether advanced named profiles should become first-class styles or remain deferred advanced equipment modes; do not restore Custom without explicit owner approval.
 
 ### T. Native apps
 

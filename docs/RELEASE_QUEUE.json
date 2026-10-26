@@ -474,7 +474,7 @@
       "issue": 14,
       "pr": 138,
       "title": "Backend Custom style targets: safe per-coffee workspace persistence",
-      "state": "TESTING",
+      "state": "BLOCKED",
       "merged_source_sha": null,
       "scope_paths": [
         "supabase/migrations/20261026000000_dic_custom_targets_workspace.sql"
@@ -485,10 +485,10 @@
       ],
       "ci_runs": [],
       "blockers": [
-        "SQL suite coverage and protected gateway readback remain to be verified; UI/UX owns Custom fields, hydration and acceptance, Coordinator owns readiness. Production migration is explicitly not authorized."
+        "Owner superseded Custom style requirement 2026-10-26; backend migration and action must NOT be released. Reconcile integrated source and run exact-source regression before retiring this queue item and closing Issue #14."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14",
-      "notes": "Coordinated with UI/UX and Coordinator via Issue #14; no shared release publication or provider changes. Existing published and READY rows remain untouched."
+      "notes": "Owner withdrew active Custom product requirement. Existing source-only Custom SQL migration is NOT approved for publication; preserve old SQL/records as safe inert compatibility pending source-only retirement. This is not READY or DEPLOYED."
     }
   ],
   "history": [

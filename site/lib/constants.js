@@ -1,6 +1,7 @@
 export const APP_VERSION = '0.1.0';
 export const SCHEMA_VERSION = 1;
-export const STYLES = ['Traditional', 'Turbo', 'Fast-Flow', 'Ristretto', 'Lungo', 'Custom'];
+export const STYLES = ['Traditional', 'Turbo', 'Fast-Flow', 'Ristretto', 'Lungo'];
+// Historical Custom records remain parseable; Custom must not be offered for new selections.
 // Owner-Locked seven-tier Title Case scale. Original source records remain literal.
 export const ROASTS = ['Ultra Light','Very Light','Light','Medium-Light','Medium','Medium-Dark','Dark'];
 export function canonicalRoastLevel(value){
