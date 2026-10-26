@@ -477,11 +477,11 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "supabase/migrations/20261026000000_dic_custom_targets_workspace.sql",
-        "scripts/audit/isolated-sql-regression.sh"
+        "supabase/migrations/20261026000000_dic_custom_targets_workspace.sql"
       ],
       "tests": [
-        "Source-only migration and disposable synthetic SQL suite supabase/tests/custom_targets_workspace.sql; isolated exact-source check must execute this suite and inspect resulting permission boundaries before READY."
+        "Source-only migration and disposable synthetic SQL suite supabase/tests/custom_targets_workspace.sql; isolated exact-source check must execute this suite and inspect resulting permission boundaries before READY.",
+        "Run isolated-sql-regression.sh explicitly includes custom_targets_workspace synthetic suite."
       ],
       "ci_runs": [],
       "blockers": [
