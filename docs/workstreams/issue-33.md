@@ -1,3 +1,11 @@
+## October 26 UTC — exact GitHub PR #122 merge-continuity recovery
+
+PR #122's verified head `464e1775` passed all applicable 7 source PR checks, with original private frozen603 appropriately SKIPPED. GitHub native merge `644870aee66ad5c5f0bcdab0d4eeb66283cdd5fb` preserved the identical tree `0af5b2bf` and first-parent path diff included this issue journal. However GitHub auto-generated the merge title without `[skip netlify]`, causing actual merged-source approval CI run `40264649781` to FAIL continuity. Git history cannot be rewritten non-force.
+
+This follow-up adds an **exact SHA AND subject** historical exception to the continuity checker for that one immutable GitHub-generated PR #122 merge only; arbitrary new unmarked merges remain blocked. New positive/negative tests reject incorrect SHA/subject and absent same-commit journal. This does not modify the release queue decision, shorten commit-range scans, suppress future merge checks, waive current owner approval, deploy or touch production data. The PR must pass its own exact-source checks, merge with an explicit `[skip netlify]` title and be read back before either workflow is called PASSED.
+
+---
+
 ## October 26 UTC — release queue CI failure repaired at PR #122
 
 First exact-head approval run 40264372425 failed schema validation because IN_PROGRESS follow-on audit item listed only nondeployable `scripts/audit/`, `tests/` and `docs/audits/` files under `scope_paths`. The queue contract intentionally restricts `scope_paths` to deployable application files. Correction: keep the audit-only evidence paths in the item notes and work journal, and use an empty deployable scope while no new production code exists. Preserve the separate previous READY candidate and all other queue items unchanged. This is a **documentation-only correction** to the new follow-on item; no validator relaxation. Re-run exact source approval/continuity before merge; no deployed-state assertion.
