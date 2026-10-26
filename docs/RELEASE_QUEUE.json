@@ -223,7 +223,7 @@
       "id": "DIC-Q-33-residual-source-accuracy",
       "issue": 33,
       "pr": null,
-      "title": "Remaining 120 missing and 822 strict-review canonical coffee assertions",
+      "title": "Remaining 118 missing and 822 strict-review canonical coffee assertions",
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
       "scope_paths": [],
@@ -241,14 +241,15 @@
         "Reading Coffee exact source section-role distinction local source replay PASS on immutable original603: 3059 exact /121 missing/822 review vs previous 3058/122/822, only original Reading Venezuela tasting_notes blank -> complete exact, zero other canonical output/status change, unchanged all 603 detailed retention, 83 focused Node tests PASS. Exact GitHub CI and merge pending.",
         "PR131 exact selected tasting section and distinct Brewing Recommendations Flavors recovered Reading Venezuela missing notes, original603 3059 exact/121 missing/822 review, zero loss. Completed as independent READY row DIC-Q-33-reading-notes-versus-brewing-flavors. Merged-source CI Node/build 40346241072, approval 40346241185, cloud/mobile/browser 40346241066 all success.",
         "Original current Manifest Coffee Costa Rica Guanacaste selected product `<span class=pdp__tag>Medium</span><h1>Costa Rica Guanacaste</h1>` in same product `pdp__info`; exact parser recovers Medium while unrelated tags, multiple headings, unsupported categories and conflicts rejected. Original immutable 603-case actual-handler full replay 3060 exact/120 missing/822 review, only one recovered roast, all 603 source retention identical. Local focused 70/70 PASS. Exact GitHub CI and merge pending.",
-        "PR132 non-force merged b73599acd17160650f83a125aebfcad54f0d9b76; exact merged CI 40348165507,40348165618,40348165442 SUCCESS. Original frozen603 full local replay 3,060 exact/120 missing/822 review, no previously exact or supplementary retention losses. Completed source separated into READY DIC-Q-33-manuscript-selected-product-roast."
+        "PR132 non-force merged b73599acd17160650f83a125aebfcad54f0d9b76; exact merged CI 40348165507,40348165618,40348165442 SUCCESS. Original frozen603 full local replay 3,060 exact/120 missing/822 review, no previously exact or supplementary retention losses. Completed source separated into READY DIC-Q-33-manuscript-selected-product-roast.",
+        "PR139 two additional literal Shopify selected product roast tags exact source merged 74f85b54c2e88529f0eb31d918dc9f072f957b1e and CI 40374947007/40374947059/40374947161 SUCCESS, full original603 replay 3,062 exact/118 missing/822 strict-review; completed source split into separate READY row."
       ],
       "ci_runs": [],
       "blockers": [
-        "120 original missing canonical facts and 822 review-required strict comparisons await per-case source classification and evidence-safe improvements; many are true source ambiguity, ontology limits, conflicts or presentation differences, not automatically parser failures. No unmerged PR132 candidate remains."
+        "118 original missing canonical facts and 822 review-required strict comparisons await per-case source classification and evidence-safe improvements; many are true source ambiguity, ontology limits, conflicts or presentation differences, not automatically parser failures. New independent PR139 source package is READY; unresolved residual facts remain IN_PROGRESS."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "PR132 source and exact merged-source checks complete; its one verified recovery is READY in independent row. Parent is IN_PROGRESS only for remaining actual evidence-driven adjudication, with no pending unmerged source scope. Retain original immutable oracle and scorer; no publication."
+      "notes": "Parent Issue33 OPEN and IN_PROGRESS for 118 missing/822 strict-review original canonical facts; PR139's completed narrow package independently READY. Preserve immutable original source/oracle/scorer and all 603 supplementary retention records."
     },
     {
       "id": "DIC-Q-5-pending-retry-http-conflict",
@@ -475,20 +476,115 @@
       "pr": 138,
       "title": "Backend Custom style targets: safe per-coffee workspace persistence",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "aea8d62133575a56952619ca902500e96605d6f1",
       "scope_paths": [
         "supabase/migrations/20261026000000_dic_custom_targets_workspace.sql"
       ],
       "tests": [
-        "Source-only migration and disposable synthetic SQL suite supabase/tests/custom_targets_workspace.sql; isolated exact-source check must execute this suite and inspect resulting permission boundaries before READY.",
-        "Run isolated-sql-regression.sh explicitly includes custom_targets_workspace synthetic suite."
+        "PR #138 merged source-only protected owner-scoped Custom-target SQL schema, revision/receipt idempotency and preexisting protected mutation route; file blob 1883f8d9c97921d26b37680868b613cfa0922edf unchanged.",
+        "Disposable PostgreSQL 17.11 Custom acceptance exercised valid/invalid target bounds, real owner-scope reload, two synthetic authenticated owners, deny cross-account/JWT mismatch, mutation replay/revision, old version denial, unchanged shots/favorites: SQL runs 40375560073 and 40375852495 SUCCESS.",
+        "Separate PostgREST synthetic HMAC-signed HTTP acceptance 65/65 PASS, run 40376427172; exact merged 29860303c65d57a9f2af71813a0cbbe55e3e4005 SQL/HTTP 40377137536, Node/build 40377137608, approval 40377173013, cloud/browser 40377137502 SUCCESS; UI not yet validated."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40375560073,
+        40375852495,
+        40376427172,
+        40377137536,
+        40377137608,
+        40377173013,
+        40377137502
+      ],
       "blockers": [
-        "SQL suite coverage and protected gateway readback remain to be verified; UI/UX owns Custom fields, hydration and acceptance, Coordinator owns readiness. Production migration is explicitly not authorized."
+        "Dependent Custom frontend #142 and combined Log Shot regression acceptance are not integrated or verified; hold backend release readiness until UI handshake and exact integrated-source tests. New migration is NOT applied to production, and must not be executed without later owner publication approval."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14",
-      "notes": "Coordinated with UI/UX and Coordinator via Issue #14; no shared release publication or provider changes. Existing published and READY rows remain untouched."
+      "notes": "Backend implementation merged in PR138 and exercised in PR140+PR141 SQL/65 signed HTTP assertions; source checks PASS. Coordinator retains TESTING for joined Custom UI feature readiness, not because earlier SQL coverage is absent. No production SQL, Edge, Auth, member data or Netlify change."
+    },
+    {
+      "id": "DIC-Q-26-shot-rating-focus",
+      "issue": 26,
+      "pr": 136,
+      "title": "Log Shot accessible rating focus, validation focus, and truthful offline indicator",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/lib/ui.js"
+      ],
+      "tests": [
+        "PR136 head 5aa3f841c1b6fbf69202f20db47308dd8100fa7d: real synthetic 390px Chromium keyboard and focus, incomplete sensory/measurement validation with aria-invalid and offline/pending/reconnect; Node regression and same-commit journal recorded.",
+        "Head exact checks: Node/build 40379016946, cloud/browser/mobile 40379017004, visual 40379016973, SQL 40379016968 and security 40379017005 SUCCESS. Approval 40379017006 fails only missing queue coverage for site/lib/ui.js; new intake resolves classification, not a false CI PASS."
+      ],
+      "ci_runs": [
+        40379016946,
+        40379017004,
+        40379016973,
+        40379016968,
+        40379017005
+      ],
+      "blockers": [
+        "Two overlapping UI PRs #136/#142 modify site/cloud/main.js, browser fixture and workstream index; combine source safely and verify exact integrated approval/browser/build CI before merging and promoting READY. Separate missing-intake gate from original PR136 must be rerun."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/26; https://github.com/Schulzet3/The-Dial-In-Collective/issues/133#issuecomment-6424393544",
+      "notes": "Conductor-only intake at TESTING, not an assertion that PR136 passed approval, was merged or deployed; preserve shots, offline outbox, access, and draft."
+    },
+    {
+      "id": "DIC-Q-14-custom-target-frontend",
+      "issue": 14,
+      "pr": 142,
+      "title": "Approved Custom style picker, editor, durable target hydration and offline cache",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/mapping.js",
+        "site/cloud/outbox.js",
+        "site/cloud/cache.js",
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "PR142 head aeb30f1c1a982087c58b47cfd88c017af9ab2bd6 implements 6 styles, explicit Custom bounds 0.8–4.5 ratio/5–60 seconds/optional temperature, protected owner/revision-bound save_custom_targets, server reload, precise temperature and offline cache; focused Node and synthetic 390px Chromium evidence is scoped to its head.",
+        "Exact head SQL 40378041053 and source security 40378041058 SUCCESS; app 40378041264, visual 40378041045 and approval 40378041069 failed stale historical Fast-Flow assertion that requires hidden Custom (not code evidence of a new locked exclusion). Approval matrix must be positively updated only with combined code and tested."
+      ],
+      "ci_runs": [
+        40378041053,
+        40378041058
+      ],
+      "blockers": [
+        "Matrix fast_flow_sixth_style_hybrid currently asserts removed C.STYLES.filter(style=>style!=='Custom') marker; replace with positive actual all-six selector and guarded custom editor assertions alongside integrated PR142 code, retaining all other Fast-Flow assertions. Integrate overlapping PR136 without overwrites, rerun CI and browser acceptance. Backend DIC-Q-14-custom-target-backend remains TESTING until joined feature verified."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; https://github.com/Schulzet3/The-Dial-In-Collective/issues/133#issuecomment-6424169578",
+      "notes": "Conductor-only TESTING intake; this does not bypass historical approval or imply production migration applied. Match PR142 actual added cache path."
+    },
+    {
+      "id": "DIC-Q-33-single-selected-shopify-roast-tag",
+      "issue": 33,
+      "pr": 139,
+      "title": "Recover two selected Shopify coffee roast levels from sole exact-product tags",
+      "state": "READY",
+      "merged_source_sha": "74f85b54c2e88529f0eb31d918dc9f072f957b1e",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Original SHA-verified immutable 603-coffee/201-roaster, 1,197 original source captures and unchanged scorer/oracle 4,002 canonical assertions independently locally replayed through current handler: 3,062 exact/118 missing/822 strict review versus 3,060/120/822; two source-literal current product roast recoveries only, zero prior exact losses and zero unexpected additions.",
+        "All 603 original supplementary retention case records identical; 5,458 full/337 partial/679 unconfirmed of 6,474; full Node 1,603 PASS/0 FAIL/6 named skips, focused 113/113 PASS. Host private-input original corpus workflow SKIPPED, not PASSED.",
+        "PR-head applicable CI approval 40374634117, security 40374634046, SQL 40374634022, Node/build 40374633983, cloud/browser 40374633784, visual 40374633976 all SUCCESS. Exact merged-source app 40374947007, approval 40374947059, cloud/browser 40374947161 all SUCCESS on 74f85b54c2e88529f0eb31d918dc9f072f957b1e."
+      ],
+      "ci_runs": [
+        40374634117,
+        40374634046,
+        40374634022,
+        40374633983,
+        40374633784,
+        40374633976,
+        40374947007,
+        40374947059,
+        40374947161
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; https://github.com/Schulzet3/The-Dial-In-Collective/pull/139",
+      "notes": "This independently bounded source-backed two-field extractor package is READY in development, NOT DEPLOYED; parent Issue #33 remains OPEN for 118 missing and 822 strict review. Original benchmark/oracle/scorer and private member data preserved. No production SQL/Edge/Auth/Netlify action."
     }
   ],
   "history": [
