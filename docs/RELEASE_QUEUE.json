@@ -8,6 +8,37 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-reading-notes-versus-brewing-flavors",
+      "issue": 33,
+      "pr": 131,
+      "title": "Recover exact selected-product tasting profile separately from brewing flavor taxonomy",
+      "state": "READY",
+      "merged_source_sha": "c156297f26d30eb7efce70010eef420c4e5ef4b4",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Original owner-saved unchanged 603-coffee/201-U.S.-roaster source archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52, immutable oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb and source packet attestation verified. Independent real-handler 603/603 original captures replay in 12 disjoint bounded shards with unchanged 4,002 canonical expectations: 3,059 exact/121 missing/822 strict review vs prior 3,058/122/822; only one Reading Coffee Venezuela Tasting Notes missing->exact and no other canonical changes or prior exact losses.",
+        "Original supplementary retention checker 5,458 full /337 partial /679 unconfirmed across 6,474, all 603 detailed retention rows unchanged. Source Git blob bada8e3e6d50c4fe06c07d5152f4a3a1f7272b98, tests blob eb0dded232502b8a6c20ea6101526788892e6290, 83/83 focused Node tests pass incl. contradictory tasting lists and unscoped Flavors remain withheld.",
+        "PR131 exact head 53e826e245f13db351bbd799b3d83e50f36f7ac1: all seven ordinary applicable GitHub CI checks PASS Node/build 40345820469, approval 40345820312, cloud/browser/mobile 40345820407, SQL 40345820799, security 40345820373, visual 40345820655. Hosted frozen603 private input job SKIPPED (local original-source run was independent).",
+        "Nonforce PR131 merged c156297f26d30eb7efce70010eef420c4e5ef4b4 with reviewed exact tree 4e676e8cb688c76f0b2f1a0eab66d548ef90d501 and [skip netlify] title. Merged source Node/build 40346241072, approval 40346241185, cloud/mobile/browser 40346241066 all SUCCESS; independent optional public source jobs SKIPPED, not called passing."
+      ],
+      "ci_runs": [
+        40345820469,
+        40345820312,
+        40345820407,
+        40345820799,
+        40345820373,
+        40345820655,
+        40346241072,
+        40346241185,
+        40346241066
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "READY, not deployed. The source fact roles differ; original direct note list remains exact and brewing flavors remain preserved without falsely escalating to contradiction. Parent Issue33 OPEN for 121 missing/822 strict review. No production publication, SQL/Edge/Auth/member change, paid service or immutable oracle change."
+    },
+    {
       "id": "DIC-Q-33-selected-title-roast",
       "issue": 33,
       "pr": 130,
@@ -171,9 +202,7 @@
       "title": "Remaining 125 missing and 822 strict-review canonical coffee assertions",
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs"
-      ],
+      "scope_paths": [],
       "tests": [
         "Original frozen603 comparison loaded locally; five presentation-equivalence tests passed. No new extractor runtime or updated frozen corpus run is claimed.",
         "PR #124 merged f5157b738092805caac0af3db15553829ff77e42 with original603 independent local acceptance (3047 exact / 132 missing / 823 review), strictly one improved source-backed Queen City origin and no other changed case or supplementary retention loss; does not settle remaining residual issues.",
@@ -185,14 +214,15 @@
         "PR129 original frozen603 603/603 actual isolated-handler replay verified 3056 exact/124 missing/822 review, one intended Gnosis selected product origin recovered with zero other current-case changes, all 603 supplementary retention records identical. Merged exact source e634d3a207d1708d645eafc39f318110b67bc86a, tree 46f9acaef545bc5a04d9f6cb6142bf9cbe07f60d and merged CI 40335509395/40335509310/40335509383 all SUCCESS; this narrow source change transferred to separate READY row.",
         "Next narrowly scoped exact selected H1 origin + roast candidate, tested against immutable 603 original source captures and identical oracle: 3058 exact/122 missing/822 review vs latest 3056/124/822. Exactly two Thunderhead coffees recovered Medium roast, zero previously exact regressions, all 603 supplementary retention records identical; 86 targeted Node tests PASS. GitHub CI and integration pending.",
         "PR130 source merged f9ab5a4873b709fb0cf802e925333ac94a7382ef and exact merged-source build 40338878563, approval 40338878373, cloud/browser/mobile 40338878534 PASS. Selected-title roast scope separately READY with 603 original read-only capture replay 3058/122/822, 0 prior exact/retention losses.",
-        "Reading Coffee exact source section-role distinction local source replay PASS on immutable original603: 3059 exact /121 missing/822 review vs previous 3058/122/822, only original Reading Venezuela tasting_notes blank -> complete exact, zero other canonical output/status change, unchanged all 603 detailed retention, 83 focused Node tests PASS. Exact GitHub CI and merge pending."
+        "Reading Coffee exact source section-role distinction local source replay PASS on immutable original603: 3059 exact /121 missing/822 review vs previous 3058/122/822, only original Reading Venezuela tasting_notes blank -> complete exact, zero other canonical output/status change, unchanged all 603 detailed retention, 83 focused Node tests PASS. Exact GitHub CI and merge pending.",
+        "PR131 exact selected tasting section and distinct Brewing Recommendations Flavors recovered Reading Venezuela missing notes, original603 3059 exact/121 missing/822 review, zero loss. Completed as independent READY row DIC-Q-33-reading-notes-versus-brewing-flavors. Merged-source CI Node/build 40346241072, approval 40346241185, cloud/mobile/browser 40346241066 all success."
       ],
       "ci_runs": [],
       "blockers": [
-        "Current proposed reading coffee source-role fix requires GitHub exact-source code tests, safe PR merge and merged-source checks before READY; original source still has 121 missing and 822 strict-review assertions not individually adjudicated as resolved."
+        "121 missing and 822 strict review-required original canonical assertions remain. Some are unsupported product claims, source conflicts, taxonomy limitations or only provisionally equivalent print formatting. Each requires defensible source-specific adjudication; do not silently map, guess or downgrade genuine conflicts."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Source accuracy parent remains IN_PROGRESS. Reading Coffee section-role change is an isolated candidate in TESTING. Preserve all prior READY source items and immutable original 603 oracle/scorer and source bytes; no production publish, member data, paid service or new keys."
+      "notes": "Parent Issue #33 OPEN/IN_PROGRESS; no unmerged application source. Six independent accuracy source changes now READY and NOT DEPLOYED. Original 201-roaster benchmark and non-scoring preliminary 299 print-equivalences preserved."
     },
     {
       "id": "DIC-Q-5-pending-retry-http-conflict",
