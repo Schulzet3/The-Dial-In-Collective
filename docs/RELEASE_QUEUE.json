@@ -223,7 +223,7 @@
       "id": "DIC-Q-33-residual-source-accuracy",
       "issue": 33,
       "pr": null,
-      "title": "Remaining 118 missing and 822 strict-review canonical coffee assertions",
+      "title": "Remaining 112 missing and 822 strict-review frozen original canonical coffee assertions",
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
       "scope_paths": [],
@@ -242,14 +242,15 @@
         "PR131 exact selected tasting section and distinct Brewing Recommendations Flavors recovered Reading Venezuela missing notes, original603 3059 exact/121 missing/822 review, zero loss. Completed as independent READY row DIC-Q-33-reading-notes-versus-brewing-flavors. Merged-source CI Node/build 40346241072, approval 40346241185, cloud/mobile/browser 40346241066 all success.",
         "Original current Manifest Coffee Costa Rica Guanacaste selected product `<span class=pdp__tag>Medium</span><h1>Costa Rica Guanacaste</h1>` in same product `pdp__info`; exact parser recovers Medium while unrelated tags, multiple headings, unsupported categories and conflicts rejected. Original immutable 603-case actual-handler full replay 3060 exact/120 missing/822 review, only one recovered roast, all 603 source retention identical. Local focused 70/70 PASS. Exact GitHub CI and merge pending.",
         "PR132 non-force merged b73599acd17160650f83a125aebfcad54f0d9b76; exact merged CI 40348165507,40348165618,40348165442 SUCCESS. Original frozen603 full local replay 3,060 exact/120 missing/822 review, no previously exact or supplementary retention losses. Completed source separated into READY DIC-Q-33-manuscript-selected-product-roast.",
-        "PR139 two additional literal Shopify selected product roast tags exact source merged 74f85b54c2e88529f0eb31d918dc9f072f957b1e and CI 40374947007/40374947059/40374947161 SUCCESS, full original603 replay 3,062 exact/118 missing/822 strict-review; completed source split into separate READY row."
+        "PR139 two additional literal Shopify selected product roast tags exact source merged 74f85b54c2e88529f0eb31d918dc9f072f957b1e and CI 40374947007/40374947059/40374947161 SUCCESS, full original603 replay 3,062 exact/118 missing/822 strict-review; completed source split into separate READY row.",
+        "PR149 merged original603 3068 exact/112 missing/822 strict review at b8ec73427b896723e5b4aec78a94602c2b37f3ea; 603 supplementary retention records unchanged; distinct READY source slice recorded. Unmerged PR152 has one further claimed source-backed roast improvement, NOT included in this frozen score or batch."
       ],
       "ci_runs": [],
       "blockers": [
-        "118 original missing canonical facts and 822 review-required strict comparisons await per-case source classification and evidence-safe improvements; many are true source ambiguity, ontology limits, conflicts or presentation differences, not automatically parser failures. New independent PR139 source package is READY; unresolved residual facts remain IN_PROGRESS."
+        "112 original missing canonical facts and 822 review-required strict comparisons await per-case source classification and evidence-safe improvements; many are true source ambiguity, ontology limits, conflicts or presentation differences, not automatically parser failures. Independent PR139 and PR149 source packages are READY; unresolved residual facts remain IN_PROGRESS."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Parent Issue33 OPEN and IN_PROGRESS for 118 missing/822 strict-review original canonical facts; PR139's completed narrow package independently READY. Preserve immutable original source/oracle/scorer and all 603 supplementary retention records."
+      "notes": "Parent #33 OPEN IN_PROGRESS for 112 missing and 822 review-required original assertions after PR149. PR152 candidate is open with a further claimed gain pending exact-source full CI and merge. Previous narrow READY packages preserved; do not modify frozen capture/oracle/scorer."
     },
     {
       "id": "DIC-Q-5-pending-retry-http-conflict",
@@ -453,22 +454,28 @@
       "id": "DIC-Q-5-deployed-sql-source-carryover",
       "issue": 5,
       "pr": 107,
-      "title": "Already-applied retry SQL migration: unpublished Git source carryover",
-      "state": "TESTING",
+      "title": "Already-applied Issue #5 SQL source inclusion; STRICTLY NO REPLAY",
+      "state": "READY",
       "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
       "scope_paths": [
         "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
       ],
       "tests": [
         "Read-only Supabase migration history 2026-10-24 confirms applied migration 20261024052303_dic_pending_retry_http_conflict (repository file uses 20261024034800 prefix). Original Issue5 DEPLOYED queue item and receipts are authoritative for provider application; no new migration application is permitted or needed.",
-        "Unpublished Git source path is tracked separately because source-intake excludes DEPLOYED items, not because SQL requires redeployment."
+        "Unpublished Git source path is tracked separately because source-intake excludes DEPLOYED items, not because SQL requires redeployment.",
+        "Checked-in migration exact Git blob 2a9eca5b32e37dd937a5257a02981dd6113b84f7 equals source delivered to Supabase version 20261024052303 dic_pending_retry_http_conflict; actual provider migration ledger read back and private.dic_member_retry_pending_approval(uuid,bigint) installed with structured non-mutating stale conflict, security-definer, exact owner control.",
+        "Original merged-source PR107 CI at d9607f9b505f26f66c607d431b82e19d5450473b: approval 40059878206, app/build 40059878199, isolated SQL 40059878227, cloud 40059878239 ALL SUCCESS. Independently verified GitHub run conclusions.",
+        "Source-only reconciliation. File remained outside previously published app tested source 28f908dc... but is already applied live. This source-carrier is READY for Git source inclusion ONLY and MUST NEVER be executed, reapplied or silently added to pending production migrations. Provider versions 20261024052303 / 20261024052411 / 20261024052419 already applied. Git filename timestamps differ from provider versions; future release controller must explicitly reconcile/skip these exact blobs; no blind supabase db push."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Already applied to production under provider migration version 20261024052303. Source file remains in unpublished web Git delta; reconcile its exact-source inclusion and avoid replay before any future authorized batch publication."
+      "ci_runs": [
+        40059878206,
+        40059878199,
+        40059878227,
+        40059878239
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5; prior deployed receipt DIC-Q-5-pending-retry-http-conflict; current owner authorization to reconcile outstanding GitHub records.",
-      "notes": "Source-tracking bookkeeping only, not a second migration or a second feature. Original DIC-Q-5-pending-retry-http-conflict stays DEPLOYED. This non-READY companion prevents false intake gaps while explicitly blocking duplicate SQL application or unapproved publication.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Preserve SQL-only #5 DEPLOYED, carryover TESTING until source coverage/anti-replay acceptance resolves; do not run the migration again."
+      "notes": "Source-tracking bookkeeping only, not a second migration or a second feature. Original DIC-Q-5-pending-retry-http-conflict stays DEPLOYED. This non-READY companion prevents false intake gaps while explicitly blocking duplicate SQL application or unapproved publication.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Preserve SQL-only #5 DEPLOYED, carryover TESTING until source coverage/anti-replay acceptance resolves; do not run the migration again. \n[2026-10-26 coordinator read-only reconciliation] READY only for exact Git SOURCE CARRYOVER, not a new backend migration/deployment. Three Oct24 SQL files have been applied under provider versions 20261024052303, 20261024052411 and 20261024052419; do not replay. Original SQL feature item remains DEPLOYED. Provider function readback verified. No member-data writes."
     },
     {
       "id": "DIC-Q-26-shot-rating-focus",
@@ -566,6 +573,35 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; direct owner 2026-10-26 Custom retirement instruction",
       "notes": "Original Custom feature request intentionally superseded; UI PR142 closed unmerged. Custom backend PR138 source-only migration removed before publication; former queued feature entries preserved only as retired history. Leave older applied migrations, shot data, notes and offline outboxes intact. Independently verified source READY for an authorized future batch, not deployed. Preserves previously merged independent Issue26 READY and all queued extractor work."
+    },
+    {
+      "id": "DIC-Q-33-selected-product-release-literals",
+      "issue": 33,
+      "pr": 149,
+      "title": "Recover six literal selected-product release labels in the frozen 603-coffee benchmark",
+      "state": "READY",
+      "merged_source_sha": "b8ec73427b896723e5b4aec78a94602c2b37f3ea",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Actual frozen original 603-coffee/201-roaster/1,197 capture handler replay against unmodified 4,002 canonical assertions: 3068 exact /112 missing/822 strict-review, up from 3062 exact/118 missing/822. Six selected-product release labels recovered, zero previous exact losses and all 603 supplementary retention records unchanged at 5458 fully retained/337 partial/679 unconfirmed. No oracle/scorer/capture edits. Original capture and oracle hashes verified in docs/audits/extractor-issue33-selected-release-literals-original603-20261026.json.",
+        "Parser blob at exact non-force merge b8ec73427b896723e5b4aec78a94602c2b37f3ea is 6ba19638395cd09a71cd9d4884ed212e1a6af8fb, byte-identical to independently executed local reviewed parser. Targeted 8/8 including negative competing product controls passed. Unscored Downeast selected-title Limited Release documented but NOT counted as canonical gain.",
+        "PR149 exact head at 4de3bc3bb7652e372537be5801eab47ca65794d7: Node/build 40392998035, cloud/synthetic mobile 40392997993, approval 40392997989, SQL 40392997974, source security 40392998201 and visual 40392998026 all SUCCESS. Merged exact SHA b8ec73427b896723e5b4aec78a94602c2b37f3ea app/build 40393435446 and approval/continuity 40393435470 SUCCESS. Merged cloud's mobile install still IN_PROGRESS at queue intake, not counted as PASS; unchanged parser source was passed at PR head. Hosted private original603 workflow SKIPPED, not a pass."
+      ],
+      "ci_runs": [
+        40392998035,
+        40392997993,
+        40392997989,
+        40392997974,
+        40392998201,
+        40392998026,
+        40393435446,
+        40393435470
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; https://github.com/Schulzet3/The-Dial-In-Collective/pull/149",
+      "notes": "Narrow source-backed package merged and independently READY, NOT DEPLOYED. Parent Issue #33 remains OPEN for 112 missing/822 review; later PR152 is OPEN and must stay TESTING until exact-source integration. No new SQL/Edge/Auth/private data/publishing."
     }
   ],
   "history": [
