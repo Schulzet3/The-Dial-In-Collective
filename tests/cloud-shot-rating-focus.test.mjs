@@ -51,7 +51,7 @@ test('all five original sensory choices stay individually required and accessibl
  assert.equal((html.match(/data-action="rate"/g)||[]).length,25);
  assert.equal((html.match(/aria-pressed="false"/g)||[]).length,25);
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
- assert.match(main,/U\\.updateTasteSelection\\(sheet\\.querySelector\\('#ratings'\\),target\\.dataset\\.key,Number\\(target\\.dataset\\.value\\)\\)/);
- assert.doesNotMatch(main,/sheet\\.querySelector\\('#ratings'\\)\\.innerHTML=scales/);
- assert.match(main,/M\\.validateShot\\(d\\)/);
+ assert.ok(main.includes("U.updateTasteSelection(sheet.querySelector('#ratings'),target.dataset.key,Number(target.dataset.value))"));
+ assert.ok(!main.includes("sheet.querySelector('#ratings').innerHTML=scales"));
+ assert.ok(main.includes('M.validateShot(d)'));
 });
