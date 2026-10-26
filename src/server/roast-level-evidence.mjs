@@ -3,6 +3,7 @@
 // colour photograph. Explicit labels follow the owner's Locked seven tiers.
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
 import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 const MAX_LABEL=90;
@@ -297,6 +298,23 @@ export function extractRoastVisualEvidence(html){
   if(!svgNodes.has(index)||!['title','desc'].includes(node.tag)||node.contentEnd-node.headEnd>160)continue;
   const value=page.slice(node.headEnd,node.contentEnd);
   if(/\broast\b/i.test(value))offer(value,'inline_svg_title');
+ }
+ // A current product's concise country / roast badge may print the two
+ // facts in adjacent spans, with no word "roast" in the badge. Admit only
+ // this known product-specific badge structure, a literally named source
+ // country and a supported *complete* roast level, never navigation menus,
+ // foreign product cards, blend recipes or generic numeric variants.
+ for(const node of pageNodes){
+  if(node.tag!=='div'||node.contentEnd-node.headEnd>350)continue;
+  const classNames=new Set(String(attrs(node.attributes).class||'').split(/\s+/));
+  if(!classNames.has('gld-product-variant-text-price'))continue;
+  const content=page.slice(node.headEnd,node.contentEnd);
+  const split=content.match(/^\s*<span\b[^<>]{0,350}>\s*([\p{L}\p{M} .'-]{2,65})\s*<\/span>\s*<span\b[^<>]{0,350}>\s*\|\s*((?:Ultra\s+Light|Very\s+Light|Light(?:[- ]Medium)?|Medium(?:[- ](?:Light|Dark))?|Dark))\s*<\/span>\s*$/iu);
+  if(!split)continue;
+  const country=split[1].trim();
+  const places=literalCoffeeSourcePlaces(country);
+  if(places.length!==1||places[0].normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()!==country.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase())continue;
+  offer(split[2],'selected_product_country_roast_badge');
  }
  // Detect the selected class/ARIA state of a discrete roast-level selector.
  // The heading must be nearby; avoid unrelated site-wide filter controls.
