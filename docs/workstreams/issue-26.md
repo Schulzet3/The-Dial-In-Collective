@@ -5,3 +5,6 @@ Owner requested systematic Log Shot → Rate → Recommendation audit in paralle
 
 ## Same-commit test fixture correction
 Corrected a doubly escaped *test-only* JavaScript regular expression that was checking raw source text rather than invoking rating logic. Retained all three behavior assertions using direct exact string matches, with no runtime change; rerun source-bound GitHub checks.
+
+## 2026-10-26 — recover focus on invalid shot submission
+Additional same-scope accessibility repair: a required missing numeric measurement or sensory rating previously left keyboard focus on Save and only raised a generic alert at the bottom. Now source Model.validateShot remains authoritative, and after the save buttons are safely re-enabled the first invalid field/first unanswered sensory scale receives focus plus aria-invalid/description. Rating a flagged scale clears stale invalid semantics, without preselecting any answer or bypassing required five-scale validation. Added focused synthetic DOM regression tests. No schema, recipe logic, offline, member history or publication modification. Rerun source-specific CI; readiness and queue intake still depend on Conductor.

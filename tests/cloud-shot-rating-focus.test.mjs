@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {SCALES,tasteLabel} from '../site/lib/constants.js';
-import {updateTasteSelection,scales} from '../site/lib/ui.js';
+import {updateTasteSelection,focusShotValidationError,scales} from '../site/lib/ui.js';
 
 function fakeScale(key){
  const scale=SCALES.find(s=>s.key===key);
@@ -54,4 +54,40 @@ test('all five original sensory choices stay individually required and accessibl
  assert.ok(main.includes("U.updateTasteSelection(sheet.querySelector('#ratings'),target.dataset.key,Number(target.dataset.value))"));
  assert.ok(!main.includes("sheet.querySelector('#ratings').innerHTML=scales"));
  assert.ok(main.includes('M.validateShot(d)'));
+});
+
+test('invalid measurements receive error semantics and the first field retains focus',()=>{
+ const changed=[];
+ const control=(name)=>({name,attrs:{},setAttribute(k,v){this.attrs[k]=v;},focus(){changed.push(name);}});
+ const dose=control('dose'),yieldField=control('yield'),notes=control('notes');
+ const fields={'[name="doseG"]':dose,'[name="yieldG"]':yieldField,'[name="notes"]':notes};
+ const form={isConnected:true,querySelector(selector){return fields[selector]||null;}};
+ assert.equal(focusShotValidationError(form,['Yield must be between 5 and 120 g.','Dose must be between 5 and 40 g.','Notes must be 16,000 characters or fewer.'],{}),true);
+ assert.deepEqual(changed,['dose']);
+ for(const c of [dose,yieldField,notes]){assert.equal(c.attrs['aria-invalid'],'true');assert.equal(c.attrs['aria-describedby'],'shot-validation-feedback');}
+});
+test('missing taste score focuses the first incomplete group; no score is preselected',()=>{
+ const focused=[];
+ const groups={};
+ for(const s of SCALES){
+  const child={focus(){focused.push(s.key)}};
+  groups[s.key]={attrs:{},setAttribute(k,v){this.attrs[k]=v;},querySelector(n){assert.equal(n,'button');return child;}};
+ }
+ const form={isConnected:true,querySelector(selector){
+  const match=selector.match(/^\\[data-scale="([a-z]+)"\\] \\[role="group"\\]$/);
+  return match?groups[match[1]]:null;
+ }};
+ const tastes={extraction:3,body:3,clarity:null,sweetness:5,astringency:1};
+ assert.equal(focusShotValidationError(form,['Rate all five taste scales.'],tastes),true);
+ assert.deepEqual(focused,['clarity']);
+ assert.equal(groups.clarity.attrs['aria-invalid'],'true');
+ assert.equal(groups.clarity.attrs['aria-describedby'],'shot-validation-feedback');
+ assert.equal(groups.body.attrs['aria-invalid'],undefined);
+ assert.equal(focusShotValidationError({isConnected:false},['Rate all five taste scales.'],tastes),false);
+});
+test('Log Shot keeps semantic error announcement and re-enables fields before focusing validation',()=>{
+ const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ assert.ok(main.includes('role=alert id=shot-validation-feedback'));
+ assert.ok(main.includes("form.querySelectorAll('button').forEach(b=>b.disabled=false);if(id==='shot'&&shotValidation?.length)U.focusShotValidationError"));
+ assert.ok(main.includes("const group=target.closest('[role=\\"group\\"]')")||main.includes("target.closest('[role=\\"group\\"]')"));
 });
