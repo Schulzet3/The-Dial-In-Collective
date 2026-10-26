@@ -55,3 +55,5 @@ Master Specification and Decision Ledger now both include the explicit owner Loc
 2026-10-26 client safety correction: prevalidate explicit deprecated style BEFORE `addCoffee` mutates local coffee array; a rejection must never leave an unsaved ghost coffee. Focused Node test verifies no state change. Exact CI rerun required.
 
 2026-10-26 CI regression repair: cloud-test exact-source 40390332209 had 1239 pass, one stale string assertion expecting M.validateShot(d) without its explicit legacy-edit compatibility option. The change retains all five mandatory taste ratings and adds the exact new validation call to the test assertion. Synthetic 390px mobile-browser job 121809347175 was SUCCESS. A fresh exact-SHA suite is required.
+
+2026-10-26: Node test reconciliation: the owner-approved source change updates only the old Fast-Flow/Custom filter assertion; the historic 15-contract baseline remains otherwise identical. Retired product coverage now uses the prescribed RETIRED_NOT_REQUIRED device label. Retest exact source; no other acceptance relaxed.
