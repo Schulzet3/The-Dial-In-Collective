@@ -205,7 +205,7 @@ export function recommendation(s,coffeeId,options={}) {
  // Section 25.2 tier 5: personal success on similar coffees from THIS setup.
  // Do not override more relevant exact-coffee successful family data or the
  // higher-priority same-coffee cross-style evidence.
- const exactOther=s.shots.some(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style);
+ const exactOther=s.shots.some(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom');
  // For Fast-Flow, comparable same-style successes outrank a Turbo cross-style fallback.
  const provisional=style==='Custom'||(exactOther&&style!=='Fast-Flow')?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
  const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
@@ -288,7 +288,7 @@ export function recommendation(s,coffeeId,options={}) {
   }
  } else if(!peerFirst&&style!=='Custom'&&style!=='Fast-Flow') {
   // Weak residual only for legacy styles. Fast-Flow never shares this generic cross-style path.
-  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&RATIOS[sh.style]);
+  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&sh.style!=='Custom'&&RATIOS[sh.style]);
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
@@ -367,8 +367,8 @@ export function isExtreme(s,shot) {
  if(prior.length<4)return false;
  return Math.abs(shot.yieldG/shot.doseG-quantile(prior.map(x=>x.yieldG/x.doseG),.5))>1.25||Math.abs(shot.timeS-quantile(prior.map(x=>x.timeS),.5))>25;
 }
-export function saveShot(s,coffeeId,input) {
- const errors=validateShot(input);if(errors.length)throw new Error(errors.join(' '));
+export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
+ const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
  const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s),p=ensureCoffeeState(s,coffeeId);
  if(!c||!v)throw new Error('Coffee or setup not found.');
  const rec=recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode,ignoreAdvice:true});
@@ -387,7 +387,7 @@ export function saveShot(s,coffeeId,input) {
 }
 export function editShot(s,id,input) {
  const old=s.shots.find(x=>x.id===id);if(!old)throw new Error('Shot not found.');
- const merged={...old,...input};const errors=validateShot(merged);if(errors.length)throw new Error(errors.join(' '));
+ const merged={...old,...input};const errors=validateShot(merged,{allowLegacyCustom:old.style==='Custom'});if(errors.length)throw new Error(errors.join(' '));
  logAudit(s,'shot.edited',{shotId:id,before:{doseG:old.doseG,yieldG:old.yieldG,timeS:old.timeS,grindSetting:old.grindSetting,tempC:old.tempC,tasteScales:{...old.tasteScales},familyId:old.familyId},previousRevision:old.revision});
  const previousFamily=old.familyId;
  for(const k of ['doseG','yieldG','timeS','grindSetting'])old[k]=round(merged[k]);

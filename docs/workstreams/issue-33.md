@@ -1,3 +1,8 @@
+## October 26 UTC — incorporated parallel development branch, CI recovery
+
+PR #149 approval/continuity run 40392328712 failed at `git merge-base --is-ancestor` because development advanced from `92a91fe...` to `e5477a3c17c813d5fd6f091c6d42054fd4d1c5a0` after feature branch fork, NOT because extractor tests failed. GitHub compared 20 concurrent paths (UI/SQL/spec/queue/workflows), none of the scoped extractor/journal/test paths overlapped. Non-force two-parent feature integration preserves new parent development tree plus exact original603-tested extractor source blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, dedicated source test and audit receipt. No Netlify publish. Must re-run exact merged-base PR CI; no claim of repaired CI until verified.
+
+---
 ## October 26 UTC — exact local source byte-parity correction
 
 After fixing literal `$&` source-transport escaping, GitHub readback still showed functionally equivalent but DIFFERENT statement order from the independently full603-tested local parser. Moved selected-product Limited Blend tag handling immediately after `tagPairs` to restore exact candidate source bytes. Do not count either earlier staged commit as tested source; require exact blob readback of `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, then exact-source PR CI. No original oracle/capture or production changes.

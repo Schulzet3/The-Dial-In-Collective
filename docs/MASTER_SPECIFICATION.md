@@ -1,5 +1,9 @@
 # The Dial In Collective — Master Specification
 
+## Owner-Locked Custom shot style retirement — October 26, 2026
+
+**UX-RETIRE-CUSTOM-STYLE-20261026 (Locked):** The owner explicitly directed retirement of Custom as an active product style after confirming no saved Custom shots. Read-only production aggregate independently confirmed zero Custom shots, workspace selections, personal recipe families or experiments. The current selectable espresso styles are **Traditional, Turbo, Fast-Flow, Ristretto and Lungo**. Do not offer Custom on Add Coffee, first expansion, Change Style, new shot logging or active recipe selection. Do not create a Custom editor or persist new Custom targets. Keep existing shot measurements editable regardless of style, never use rigid style-time/ratio thresholds to veto all-green taste, and preserve historical style labels, member notes, private/offline queued shots, family history and account separation. No automatic historical relabeling or destructive database cleanup. Existing older SQL style checks may continue accepting legacy queued records for data recovery; they are not a currently offered product feature. Remove the **never-applied** October 26 Custom-target migration rather than altering already-applied schema/history. This narrow supersession replaces only the original §27 and Issue #14 Custom offering/persistence obligation and the October 22 Fast-Flow decision's preservation of Custom as an **active choice**; Fast-Flow, original badge history, existing data, permissions and separate release approval remain intact. This is development authorization, **not** permission to deploy, apply SQL or modify member records.
+
 ## Locked owner-scoped test acceptance — Issues #5 and #10 (2026-10-23 MDT)
 
 **TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023 — ACCEPTED, scope limited to test evidence.** Exact owner approval: “Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10.”
@@ -1541,7 +1545,8 @@ Current V1 style set:
 - Turbo.
 - Ristretto.
 - Lungo.
-- Custom.
+
+The active selectable styles are the five listed above. Historical Custom labels are preserved only for existing or previously queued records.
 
 The style selected by the user remains the shot's style. Remove the current rigid automatic reclassification logic.
 
@@ -1580,8 +1585,8 @@ Shorter, more concentrated espresso. Typical starting territory is about 1:1.1-1
 **Lungo**  
 Longer-ratio espresso. Typical starting territory is about 1:2.5-1:3.2 in 28-40 seconds, often increasing openness and clarity while reducing concentration. Ratio matters more than hitting an exact time.
 
-**Custom**  
-Set your own targets with no style assumptions.
+**Retired Custom (historical records only)**  
+Custom is not an option for new shots and does not have a configurable target editor. Preserve pre-existing Custom shot labels, notes and offline records without converting them into another style.
 
 ## 27.3 Style recommendation on Add Coffee
 
@@ -2017,9 +2022,9 @@ Deferred until a paid model is defined.
 
 Earlier research covers blooming, declining-pressure, lever-style, low-flow, allonge, modern high-extraction, etc.
 
-Current product UI supports Traditional, Turbo, Ristretto, Lungo, Custom.
+Current selectable product styles are Traditional, Turbo, Fast-Flow, Ristretto and Lungo. Custom was explicitly retired October 26, 2026.
 
-Decide later whether advanced named profiles should become first-class styles or remain under Custom/advanced equipment modes.
+Decide later whether advanced named profiles should become first-class styles or remain under approved equipment modes; retirement is not permission to add new styles.
 
 ### T. Native apps
 

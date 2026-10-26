@@ -53,7 +53,7 @@ test('all five original sensory choices stay individually required and accessibl
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  assert.ok(main.includes("U.updateTasteSelection(sheet.querySelector('#ratings'),target.dataset.key,Number(target.dataset.value))"));
  assert.ok(!main.includes("sheet.querySelector('#ratings').innerHTML=scales"));
- assert.ok(main.includes('M.validateShot(d)'));
+ assert.ok(main.includes("M.validateShot(d,{allowLegacyCustom:!!this.editing&&this.editing.style==='Custom'})"),'five required taste ratings are checked and only historical Custom edits receive compatibility');;
 });
 
 test('invalid measurements receive error semantics and the first field retains focus',()=>{
