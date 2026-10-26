@@ -8,6 +8,38 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-selected-roast-badge",
+      "issue": 33,
+      "pr": 127,
+      "title": "Exact selected product country / roast badge extraction",
+      "state": "READY",
+      "merged_source_sha": "dee154ef9763942db5fea622c3481cf514a7b259",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ],
+      "tests": [
+        "Exact original published Summer Moon Fireside and En Fuego HTML source shows selected-product two-span country + literal Medium roast badge; local handler returned Medium on both without conflict. 15 targeted source and negative tests passed; rejects unknown variant labels, related products, unsupported roast ranges and competing current roast badges.",
+        "Full original immutable 603-coffee/201-roaster handler replay PASS; unchanged original oracle 4002 canonical: 3055 exact, 125 missing, 822 review-required; exactly two previous missing roast fields became exact (Summer Moon Fireside and En Fuego), zero other canonical case changes. Prior complete replay 3053/127/822. No prior exact loss.",
+        "Independent original unchanged 6474 supplementary assertions: 5458 full /337 partial/679 unconfirmed; complete records for all 603 cases identical to preceding replay. Source archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52; original oracle freeze SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb. Final replay SHA256 c6ef3eb771802be2bff0fa61443fe7f920ee46df1d324054ad13bd324e3096d8; strict comparison SHA256 ee6e04c9faaaae52972523e4f5e90ea14d973fe6f2c4d5aa2d00bb389cb5e3a5; retention SHA256 45ce3de8dff83aeffa1e78b8d1e74158c6e18de23140f74d2eece74b7af3418a.",
+        "PR127 head 2167aa3a812cfda37c51ba5a61310ddcdbaba0d4 all applicable GitHub CI SUCCESS: Node/build 40270543353, approval 40270543349, cloud/browser/mobile 40270543470, SQL 40270543365, source security 40270543448, visual review 40270543351. Private hosted frozen603 job SKIPPED due private-input handshake; separately independent real original603 local replay passed.",
+        "Non-force merge dee154ef9763942db5fea622c3481cf514a7b259 with [skip netlify] title; merged exact tree 92530ae4c7566416e9b122374ccee793cef86a55 equals reviewed PR head. Exact merged-source CI success Node/build 40270762133, approval 40270761924, cloud/browser/mobile 40270761796. Live source probe SKIPPED, no new production or real-member acceptance claimed."
+      ],
+      "ci_runs": [
+        40270543353,
+        40270543349,
+        40270543470,
+        40270543365,
+        40270543448,
+        40270543351,
+        40270762133,
+        40270761924,
+        40270761796
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "This narrowly source-verified extractor improvement is READY in development only, not deployed. Parent Issue33 remains OPEN for 125 missing/822 reviews. No frozen oracle/scorer change or product-category guess, no paid service, no Netlify, production SQL/Edge/Auth/member record change."
+    },
+    {
       "id": "DIC-Q-33-literal-tasting-and-origin",
       "issue": 33,
       "pr": 126,
@@ -76,25 +108,24 @@
       "id": "DIC-Q-33-residual-source-accuracy",
       "issue": 33,
       "pr": null,
-      "title": "Remaining 127 missing and 822 strict-review coffee canonical assertions",
+      "title": "Remaining 125 missing and 822 strict-review canonical coffee assertions",
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
-      "scope_paths": [
-        "src/server/roast-level-evidence.mjs"
-      ],
+      "scope_paths": [],
       "tests": [
         "Original frozen603 comparison loaded locally; five presentation-equivalence tests passed. No new extractor runtime or updated frozen corpus run is claimed.",
         "PR #124 merged f5157b738092805caac0af3db15553829ff77e42 with original603 independent local acceptance (3047 exact / 132 missing / 823 review), strictly one improved source-backed Queen City origin and no other changed case or supplementary retention loss; does not settle remaining residual issues.",
         "Local focused suites: 64/64 pass after fixing overly broad one-word Flavor Notes suppression; original immutable603 combined preview 3053 exact/127 missing/822 strict review, 5458 full supplemental and no prior loss; exact final-source CI and frozen replay pending.",
         "PR126 source merged 318ae408a27f0fc49b0dced9b19d992dca1fe0c3 with original frozen 603 read-only replay: 3053 exact/127 blank/822 strict review, eight changed cases only, zero prior exact loss, 603 supplement retention rows unchanged. Narrow completed source package split into READY row DIC-Q-33-literal-tasting-and-origin.",
-        "Original published Summer Moon Fireside and En Fuego captured HTML literally display selected-product <div class=gld-product-variant-text-price><span>Colombia|Mexico</span><span> | Medium</span>. Local real HTML source parser now yields Medium on both; local 15/15 tests passed against product exact badge, invalid origin/level, unrelated nav/product, and conflicting badges. Full original603 replay/CI pending."
+        "Original published Summer Moon Fireside and En Fuego captured HTML literally display selected-product <div class=gld-product-variant-text-price><span>Colombia|Mexico</span><span> | Medium</span>. Local real HTML source parser now yields Medium on both; local 15/15 tests passed against product exact badge, invalid origin/level, unrelated nav/product, and conflicting badges. Full original603 replay/CI pending.",
+        "PR127 exact archived Summer Moon product badge now yields 2 new explicit Medium roast levels; full frozen 603 replay 3055 exact /125 missing/822 review, unchanged 603 detailed retention check rows. Completed narrow source change separately READY in DIC-Q-33-selected-roast-badge."
       ],
       "ci_runs": [],
       "blockers": [
-        "Remaining 127 blank and 822 strict-review canonical fields require original source adjudication; 299 historical provisional presentation-equivalence cases are not source score passes. Real conflicting pages and intentionally unsupported fixed-category values must remain reviewable/blank instead of invented. Parent Issue33 remains OPEN."
+        "Original unchanged 603-case replay still has 125 missing and 822 strict-review canonical assertions; only 299 historical cases are provisionally classified as literal presentation equivalences, not added score passes. Some fields have unsupported fixed categories or genuinely conflicting source facts that must not be guessed."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Current active PR-level candidate tests product-specific two-span country/roast badges. Parent IN_PROGRESS until validated; previous READY packages unchanged. Source no paid/deployment operations."
+      "notes": "Parent accuracy objective OPEN/IN_PROGRESS; only uncompleted residuals remain. Earlier READY source package retained; no deployable scope until next code patch is tested."
     },
     {
       "id": "DIC-Q-5-pending-retry-http-conflict",
