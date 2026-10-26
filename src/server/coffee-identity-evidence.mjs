@@ -1,4 +1,6 @@
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
+import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 import {compatibleCoffeeOrigins,isGenericCoffeeVariety} from './coffee-fact-compatibility.mjs';
 import {withoutNaturalDecaffeinationModifier} from './coffee-processing-evidence.mjs';
 
@@ -350,6 +352,30 @@ export function extractCoffeeCurrentReleasePrefixes(html,{clean}={}){
  }
  return facts;
 }
+// Visible accessible product-image text can state a complete exact-coffee
+// origin even when its nearby region caption is joined to producer details.
+// Require the printed selected coffee name AND the literal "coffee bag from"
+// statement; general images, filenames, and anonymous bag photos never count.
+function selectedCoffeeBagAltOrigin(html,name){
+ if(!name||name.length>160)return [];
+ const {nodes,truncated}=coffeeHtmlElements(html);
+ if(truncated)return [];
+ const claims=[];
+ for(const node of nodes){
+  if(node.tag!=='img'||node.attributes.length>2400)continue;
+  const alt=coffeeHtmlAttributes(node.attributes).alt;
+  if(!alt||alt.length>360)continue;
+  const match=/^(.{2,140}?)\s+coffee\s+bag\s+from\s+(.{6,150}?)\s+[-–—]\s+(?:(?:very|ultra)\s+)?(?:light|medium|dark)(?:[ -](?:light|medium|dark))?\s+roast\s+by\s+producer\s+.{2,100}$/iu.exec(alt);
+  if(!match||key(match[1])!==key(name))continue;
+  const location=match[2].trim(),parts=location.split(/\s*,\s*/u);
+  if(parts.length!==3||!COUNTRY_ONLY.test(parts[2])||parts.slice(0,2).some(x=>
+   x.length<3||x.length>65||!/^[\p{Lu}][\p{L}\p{M}'’ .-]*$/u.test(x)))continue;
+  const value=parts.join(', ');
+  if(!claims.some(x=>key(x.value)===key(value)))claims.push({value,quote:alt});
+  if(claims.length>3)break;
+ }
+ return claims;
+}
 export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={}){
  const facts=[],blocks=productCoffeeProse(html,clean).filter(block=>!block.educational);
  if(!name||!blocks.length)return {facts};
@@ -384,7 +410,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
  // derive a region, producer, harvest, or product identity from URL slugs.
  if(titleCountries.length&&titleCountries.length<=4&&!countryNames(fields.origin||'').length)add('Country',titleCountries.join(', '),name);
  if(!fields.origin&&titleOrigin?.label==='Origin')add('Origin',titleOrigin.value,name);
- const originCandidates=[],processes=[],currentProcesses=[],varietyCandidates=[],compositionCandidates=[];
+ const originCandidates=[...selectedCoffeeBagAltOrigin(html,name)],processes=[],currentProcesses=[],varietyCandidates=[],compositionCandidates=[];
  const readVariety=!fields.variety||isGenericCoffeeVariety(fields.variety);
  const compactProcess=new RegExp('^('+PROCESS+')(?:\\s+process(?:ed|ing)?)?[.!]?$','i');
  const processAndVariety=new RegExp('^('+PROCESS+')\\s+(.{2,100})$','i');
