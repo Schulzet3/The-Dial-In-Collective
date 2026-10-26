@@ -404,7 +404,11 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   // lines. Do not flatten "NEGUESSE DEBELA<br>GEDEB, ETHIOPIA" into one
   // fabricated place name and then conflict with the visible origin.
   const compactLines=block.html.split(/<br\b[^<>]{0,2000}>/gi);
-  for(const compact of compactLines.length<=40?compactLines.map(line=>clean(line,6001)):[]){
+  const compactCandidates=compactLines.length<=40?compactLines.map(line=>clean(line,6001)):[];
+  // Recover one complete selected-product specification when geography and
+  // processing/altitude are split by a single BR in the SAME paragraph.
+  if(block.tag==='p'&&compactLines.length===2&&value.length<=160)compactCandidates.push(value);
+  for(const compact of compactCandidates){
   if(compact.length<=160&&current(compact)){
    const countryFirst=compact.match(new RegExp('^('+COUNTRIES+')\\s+[-–—]\\s+([\\p{L}\\p{M} .,’’\'()-]{2,120})$','iu'));
    if(countryFirst&&!( /^h[1-6]$/.test(block.tag)&&key(compact)===key(name))&&
