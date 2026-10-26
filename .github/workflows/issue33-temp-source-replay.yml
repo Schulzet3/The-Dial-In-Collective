@@ -1,0 +1,33 @@
+name: DIC one-time owner-authorized Issue33 offline source replay
+on:
+  pull_request:
+    paths:
+      - .github/workflows/issue33-temp-source-replay.yml
+permissions:
+  contents: read
+jobs:
+  replay-input:
+    if: github.head_ref == 'work/issue33-source-replay-20261026'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Verify and bundle Git-tracked source only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git rev-parse HEAD > source-head-sha.txt
+          git ls-files -z | tar --null -czf source-replay.tar.gz --files-from -
+          sha256sum source-replay.tar.gz
+          test -s source-replay.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: issue33-replay-source-${{ github.event.pull_request.head.sha }}
+          path: |
+            source-head-sha.txt
+            source-replay.tar.gz
+          retention-days: 1
+          if-no-files-found: error
