@@ -273,7 +273,7 @@
     {
       "id": "internal_single_visible_recipe",
       "decision_key": "current_owner_one_visible_recipe_internal_families_20261020",
-      "scope": "One visible family is published; full candidate/confirmed/retired lifecycle and experiment transport remain #10/#13",
+      "scope": "One best-matching recipe is visible; distinct personally successful families and explicit Make Current remain. Former Experiment transport/lifecycle is owner-retired under Issue #13.",
       "implementation": "published_source",
       "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 10,
@@ -672,6 +672,48 @@
         {
           "path": "tests/retired-custom-style.test.mjs",
           "contains": "new Custom shots and new Custom coffee selection are rejected"
+        }
+      ]
+    },
+    {
+      "id": "retired_experiment_workflow_20261026",
+      "decision_key": "UX-RETIRE-EXPERIMENTS-20261026",
+      "scope": "No active Experiment lifecycle, preserve successful recipes and legacy backups; guarded unused SQL retirement",
+      "implementation": "source_testing",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; synthetic browser is scoped, physical-device testing optional and not claimed",
+      "issue": 13,
+      "assertions": [
+        {
+          "path": "site/lib/engine.js",
+          "absent": "export function startExperiment("
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "export function makeCurrent(s,shotId)"
+        },
+        {
+          "path": "site/lib/model.js",
+          "absent": "basketId:null,experiments:{}"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "absent": "experimentId:sh.experiment_id"
+        },
+        {
+          "path": "site/cloud/import-preview.js",
+          "contains": "Retired Experiment records cannot be imported without loss"
+        },
+        {
+          "path": "supabase/migrations/20261026213000_dic_retire_experiments.sql",
+          "contains": "drop table public.experiments restrict;"
+        },
+        {
+          "path": "tests/retired-experiment-workflow.test.mjs",
+          "contains": "green changed shot is stored"
+        },
+        {
+          "path": "supabase/tests/retired_experiments.sql",
+          "contains": "Retired Experiment table remains present"
         }
       ]
     }

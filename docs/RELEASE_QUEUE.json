@@ -602,6 +602,33 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; https://github.com/Schulzet3/The-Dial-In-Collective/pull/149",
       "notes": "Narrow source-backed package merged and independently READY, NOT DEPLOYED. Parent Issue #33 remains OPEN for 112 missing/822 review; later PR152 is OPEN and must stay TESTING until exact-source integration. No new SQL/Edge/Auth/private data/publishing."
+    },
+    {
+      "id": "DIC-Q-13-retire-experiments",
+      "issue": 13,
+      "pr": null,
+      "title": "Retire Experiment workflow and stage guarded unused SQL cleanup",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/constants.js",
+        "site/lib/engine.js",
+        "site/lib/model.js",
+        "site/cloud/mapping.js",
+        "site/cloud/import-preview.js",
+        "supabase/migrations/20261026213000_dic_retire_experiments.sql"
+      ],
+      "tests": [
+        "Five active style shot logging, successful internal families, explicit preference retention, negative and positive taste feedback, archived backup failure and offline queued payload preservation covered by new Node regression.",
+        "Disposable PostgreSQL applies guarded Experiment retirement only after original forward migrations and verifies no Experiment table/shot column, no loss of personal families, notes, Community, member scopes or Make Current receipt behavior.",
+        "Production read-only preflight October 26: zero Experiment records, zero linked shots; 23 shots, 4 personal families and 4 preferences. An independent verified encrypted backup is mandatory immediately before later owner-authorized potentially destructive production migration."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await isolated SQL migration/Node/synthetic browser/approval exact-source CI, safe non-force integration and merged readback. The migration is source-only; DO NOT execute against production without a separate publish instruction, fresh verified encrypted backup and repeat empty-data preflight."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/13; direct owner approval October 26, 2026",
+      "notes": "No Experiment UI or workflow is offered in hosted baseline. Retire unused client and future SQL structures while preserving all ordinary shots, notes, actual green evidence, multiple family learning and Make Current preferences. Historical migrations and original old backups not edited; never silently discard legacy Experiment data. Independent #33 and #26 queue entries are preserved."
     }
   ],
   "history": [
