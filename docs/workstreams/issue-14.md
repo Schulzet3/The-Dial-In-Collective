@@ -53,3 +53,5 @@ Master Specification and Decision Ledger now both include the explicit owner Loc
 2026-10-26 CI recovery: PR #148 approval run 40390155333 FAILED only because the new approval matrix contract pointed at a scoped supersession ID not yet also exposed as a top-level Decision Ledger key (audit uses `Object.hasOwn(ledger,decision_key)`). Added exact Locked top-level identity while retaining original scoped record, rather than weakening check. All other originally approved keys intact. Retest exact source required.
 
 2026-10-26 client safety correction: prevalidate explicit deprecated style BEFORE `addCoffee` mutates local coffee array; a rejection must never leave an unsaved ghost coffee. Focused Node test verifies no state change. Exact CI rerun required.
+
+2026-10-26 CI regression repair: cloud-test exact-source 40390332209 had 1239 pass, one stale string assertion expecting M.validateShot(d) without its explicit legacy-edit compatibility option. The change retains all five mandatory taste ratings and adds the exact new validation call to the test assertion. Synthetic 390px mobile-browser job 121809347175 was SUCCESS. A fresh exact-SHA suite is required.
