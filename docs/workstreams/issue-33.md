@@ -1,3 +1,37 @@
+## October 26 UTC — PR149 exact-source lint correction
+
+PR-head full Node 1,622 PASS/0 FAIL/6 pre-existing SKIP on exact `99a652eb...`, approval and SQL/security/cloud succeeded, but app/build run `40392673840` flagged one ESLint `no-unused-vars` warning at new scoped source regression: `mergePublicProductPreview` imported but not referenced. Removed ONLY that unused test import; extractor runtime blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, 603-case replay and original immutable oracle/scorer remain unchanged. Same-commit journal update; rerun exact-source GitHub CI and revalidate before merge.
+
+---
+## October 26 UTC — incorporated parallel development branch, CI recovery
+
+PR #149 approval/continuity run 40392328712 failed at `git merge-base --is-ancestor` because development advanced from `92a91fe...` to `e5477a3c17c813d5fd6f091c6d42054fd4d1c5a0` after feature branch fork, NOT because extractor tests failed. GitHub compared 20 concurrent paths (UI/SQL/spec/queue/workflows), none of the scoped extractor/journal/test paths overlapped. Non-force two-parent feature integration preserves new parent development tree plus exact original603-tested extractor source blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, dedicated source test and audit receipt. No Netlify publish. Must re-run exact merged-base PR CI; no claim of repaired CI until verified.
+
+---
+## October 26 UTC — exact local source byte-parity correction
+
+After fixing literal `$&` source-transport escaping, GitHub readback still showed functionally equivalent but DIFFERENT statement order from the independently full603-tested local parser. Moved selected-product Limited Blend tag handling immediately after `tagPairs` to restore exact candidate source bytes. Do not count either earlier staged commit as tested source; require exact blob readback of `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, then exact-source PR CI. No original oracle/capture or production changes.
+
+---
+
+## October 26 UTC — source transport escaping correction before PR
+
+GitHub readback of the initial staged release-literal branch source did NOT match locally tested parser blob (JS replacement-string `$&` expansion distorted a single expression). Stopped before PR; repaired the expression in this source+same-commit journal correction, preserving identical intended product/source semantics. Require GitHub readback of exact local tested source blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb` before PR and CI; prior initial staged commit is **NOT** test evidence. Immutable corpus inputs remain unchanged, no provider or production writes.
+
+---
+
+## October 26 UTC — bounded selected-product release facts, full immutable original603 replay completed; GitHub verification
+
+Owner continues Issue #33 source-backed extractor improvement without paid services, production publication, SQL/Auth/Edge/member writes. Dedicated source changes: `src/server/coffee-page-metadata.mjs`, new negative/positive `tests/coffee-selected-release-labels.test.mjs`; this indexed same-commit work journal; dedicated source-review receipt. Parent latest `92a91fe75c140e8ec15b81da1b4cb502ff426636`; original parser blob `4ddacdd63139a2001652195395278032fc06d642`. Original immutable archive SHA256 `728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce`, original source captures `696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52`, original freeze `0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb`; absolutely no original capture/oracle/scorer modifications.
+
+Reproduced six original selected product facts: Dark Matter Under the Rainbow `October Limited Blend`, Dark Matter Balthvs Manifest and Anthrax `Limited Blend` exact Shopify product tags, Koffee Kult Perla Negra `LIMITED RELEASE` bounded selected strong tag, Epiphany Solar Flare `limited summer release` selected-name sentence, and Roasterympls Guatemala Geisha `Limited Edition` title. A seventh source-backed additional literal, Downeast Pacayal Honey `Limited Release`, appears in original selected Product title but is not scored as an original canonical assertion; accurately disclose as one new unexpected-source fact requiring review, not a false improvement to the oracle. Rejected Spiritus Manos de Mujer producer candidate when two original producer claims were found contradictory; do not override withheld conflict. Synthetic scoped release tests 8/8 PASS, including other-product, title, catalog-tag, stale prose, handle mismatch and explicit contradictory-current-release controls.
+
+Full *actual selected handler* frozen replay on all original **603/603** captured coffees, 201 US roasters, unchanged 4002 canonical assertions and original independent scorer: previous `3062 exact / 118 missing / 822 strict review`; new **3068 exact / 112 missing / 822 strict review**; exactly six missing-to-exact release fields, **zero prior exact losses, zero other canonical changes**; one independently reviewed source-backed additional product title fact. All **603** original per-coffee retention rows unchanged at **5458 full /337 partial/679 unconfirmed** of 6474. First replay under heavy concurrent CPU omitted June Coffee Riakiberu Shopify variant endpoint at ~15.8s, incorrectly reducing retention by two; re-executed the SAME source and immutable packet under normal CPU (2.0s, HTML+product JSON both fetched), replaced only the erroneous per-case test output, and reran original unchanged replay scorer/retention. Final source fingerprint `95bd03ec9d462635bb4fec946c70eaf6cdbc78c993e29ee73fa2177374101cca`, final replay `bdd6e7404f906fe77fb9b8461d37cdec9e713e7d7aa8b9cbe402df508933c300`, comparison `2f145eefb1a5783245bbdeb6f05d3e2af8a043612b8e068b9e0bcc63c5486df3`, retention `df3029f85f33620961428ca98ebed822599fe4dbe96273f8ef7d695b9e69e814`. These are private frozen-capture local tests, NOT a live website crawl nor hosted private-input CI pass.
+
+Scope: independent no-production feature branch. Do not touch shared queue/status/approvals (Conductor #133 intake). Full Node/build and exact-source PR/merged GitHub CI required before separate READY classification; Issue33 parent remains OPEN with 112 missing / 822 review including genuine source conflicts and oracle-format distinctions. No user, Community, offline or production data changes and NOT DEPLOYED.
+
+---
+
 ## October 26 UTC — exact selected Shopify sole roast tag, immutable original603 fully PASS; scoped PR verification
 
 Issue #33 owner authorizes safe extractor-only improvements, no direct cost, no production publication, and no production SQL/Edge/Auth/member changes. Recovered authenticated Github development branch (parent `aea8d62133575a56952619ca902500e96605d6f1`), source blob `bada8e3e6d50c4fe06c07d5152f4a3a1f7272b98`, and original owner Library archive SHA256 `728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce` plus captured source SHA256 `696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52`. Original oracle freeze `0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb`; original capture index, packet attestation, source captures, expected results and scorer unchanged. Complete current-source baseline 603/603 original captures, 201 roasters / 4,002 original canonical assertions: **3,060 exact, 120 missing, 822 strict-review-required**, retention **5,458 fully retained / 337 partially / 679 unconfirmed** of 6,474.
