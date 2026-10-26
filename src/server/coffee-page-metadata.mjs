@@ -772,6 +772,16 @@ function productDetails(fields,p){
    blendProcessAdded=true;
   }else addField(fields,pair[1],pair[2]);
  }
+ // A selected Shopify product may classify its own roast as a single bare
+ // taxonomy tag (for example IXXA Ki-Saya publishes tags: ["Medium"]). This
+ // is NOT page prose, a grind option, or another product's catalog badge.
+ // Other tags can denote collection memberships, even if a bare tag looks
+ // like a roast (Zeke's "Light" category contradicts its medium-light lot).
+ // Use this narrow fallback only when the product has ONE tag in total;
+ // multiple tags require explicit roast labeling elsewhere.
+ const bareRoastTags=tags.filter(tag=>
+  /^(?:(?:ultra|very)\s+light|light[ -]medium|medium[ -](?:light|dark)|light|medium|dark)$/i.test(tag.trim()));
+ if(tags.length===1&&bareRoastTags.length===1)addField(fields,'roast_level',bareRoastTags[0].trim());
  for(const tag of tags){
   // Exact product-owned taxonomy tags may spell out the type of coffee
   // without a colon. Do not read longer promotional or negative tag text.
