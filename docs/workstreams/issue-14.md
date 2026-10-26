@@ -1,0 +1,15 @@
+# Issue #14 backend work journal — 2026-10-26 UTC
+
+Development only. Base SHA 6ed8969a6c65b52f75300a6e3f7c982c4716c6b4. Scope: Custom user-defined per-coffee/setup-version recipe targets behind the existing authenticated RPC. Parallel UI session owns form, hydration, and presentation. Coordinator owns shared release queue/status.
+
+Supabase observed PostgreSQL 17.11 ACTIVE_HEALTHY; latest production SQL versions 20261024052303, 20261024052411, 20261024052419 already applied and explicitly excluded from any future execution. No production SQL, Edge, member data or Netlify operation performed.
+
+Changes: source-only migration adds nullable validated JSON custom_targets to existing owner-read, RLS-protected workspace_coffees. Private protected action save_custom_targets with ratio 0.8..4.5, ascending time_low_s/time_high_s 5..60, optional temperature_c 85..99.9; owner/active-version/library checks, existing expected_owner public gateway, optimistic workspace revision, serialized mutation receipts and idempotent replay. Atomic selection of Custom, preserving targets on later switch to other style. No historical shot/family mutation. Restricted helper grants and fail-closed dispatcher patch.
+
+Synthetic transaction acceptance: supabase/tests/custom_targets_workspace.sql (requires disposable dic_ci database). Local PostgreSQL/CLI not available in this container. SQL not locally executed and must not be labeled passed. GitHub isolated SQL and exact-source approval checks are required prior to merge and READY. No claim of UI completion. Issue #14 stays open pending UI acceptance and Coordinator queue reconciliation.
+
+2026-10-26 UTC CI recovery: PR approval workflow failed because the new migration had no release-queue intake. Added a scoped TESTING row (never READY) while preserving every concurrently updated existing queue entry. SQL isolated workflow was green, but coverage against the exact new disposable test requires direct verification. Fixed restricted private helper EXECUTE grant to authenticated so the existing SECURITY INVOKER public owner gateway can dispatch, retaining member authentication and private nonexposed schema. Rebased by non-force merge parent against bd190609a3ae9d24fb5c3ef879d24e7da86a3495; requires fresh exact-source CI.
+
+2026-10-26 SQL acceptance coverage correction: isolated SQL script historically enumerated regression suites explicitly; the new Custom synthetic suite would have been skipped despite green SQL workflow. Added custom_targets_workspace to the explicit disposable PostgreSQL 17.11 suite list (same commit journal), and tracked this shared CI path under TESTING queue scope. Pending fresh exact-source CI.
+
+2026-10-26 queue schema correction: scope_paths accepts deployable paths only; removed isolated test runner script from deployable coverage while retaining exact regression evidence in tests, journal and commit. Original queue entries unchanged. Fresh CI required.
