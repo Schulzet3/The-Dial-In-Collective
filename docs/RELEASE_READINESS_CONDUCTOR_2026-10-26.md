@@ -29,6 +29,6 @@
 
 ## Release readiness conclusion
 
-**Individually source READY:** 14 active queue items: 9 extractor source packages including PR149, #12 Community UI, #26 Log Shot UX, #14 retirement, and #5 SQL source-only bookkeeping (note: actual number of extractor packages must always be recomputed from live queue). **Not READY:** Issue33 residual source acceptance, open PR152, full Issue26/22/27/13 backlog. This document is a date/SHA-bound snapshot, not authority to publish.
+**Individually source READY:** 14 active queue items: 10 independently READY extractor source packages including PR149, #12 Community UI, #26 Log Shot UX, #14 retirement, and #5 SQL source-only bookkeeping (recompute from live queue before any release). **Not READY:** Issue33 residual source acceptance, open PR152, full Issue26/22/27/13 backlog. This document is a date/SHA-bound snapshot, not authority to publish.
 
 **Next safe action:** Extractor workstream validates PR152 exact current Git parser blob on immutable original603, updates its receipt and CI, integrates non-force. Conductor verifies merged SHA, promotes only independently complete source package, updates release queue and new readiness report. Independently rerun combined source and release gate when owner eventually approves publication. No production changes until then.
