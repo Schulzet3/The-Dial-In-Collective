@@ -536,8 +536,8 @@
       "issue": 14,
       "pr": 148,
       "title": "Retire Custom as selectable shot style; preserve offline and historical records",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e5477a3c17c813d5fd6f091c6d42054fd4d1c5a0",
       "scope_paths": [
         "site/lib/constants.js",
         "site/lib/model.js",
@@ -546,15 +546,26 @@
         "site/cloud/mapping.js"
       ],
       "tests": [
-        "Source-only five-style retirement unit tests, isolated SQL/HTTP application regression and real synthetic 390px mobile style selector to be verified on exact integrated SHA.",
-        "Read-only hosted Supabase aggregate: 0 Custom shots, 0 Custom workspace selections, 0 Custom personal recipe families, 0 Custom experiments; does not inspect disconnected device outboxes."
+        "Owner-superseded five selectable styles; new Custom shot/style creation rejected before mutation; legacy Custom history/edit, five green taste ratings, old offline queued shot preserved and non-Custom recommendation isolation verified by tests/retired-custom-style.test.mjs; full source Node/lint/build on exact merged SHA 40392006758 SUCCESS.",
+        "PR148 390px synthetic mobile browser 40391081388 SUCCESS and visual 40391081324 SUCCESS on identical runtime and browser source. Only a narrow historical-approval assertion/document change intervened; merged source tree equals PR148 tested tree.",
+        "Exact merged development SHA e5477a3c17c813d5fd6f091c6d42054fd4d1c5a0: approval 40392005621 SUCCESS, isolated PostgreSQL/signed-HTTP regression 40392004845 SUCCESS, Node/build 40392006758 SUCCESS. PR head source security 40391540590 SUCCESS. Frozen603 corpus workflow SKIPPED (not considered Issue14 acceptance).",
+        "Read-only production aggregate showed 0 Custom shots, 0 selected Custom workspace rows, 0 Custom families, 0 Custom experiments. Original offline device queues not directly accessible; non-destructive synthetic compatibility regression passed.",
+        "Retired never-applied migration 20261026000000_dic_custom_targets_workspace.sql and its special tests removed from active source; actual Supabase provider migration history unchanged. Both canonical owner-Locked decision records updated, historical feature PR142/PR145 closed unmerged. No production publication."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await exact-source Node, browser, SQL, approval and security CI, safe non-force merge and merged-source readback. No production publication authorized."
+      "ci_runs": [
+        40391540843,
+        40391540544,
+        40391540630,
+        40391540590,
+        40391081388,
+        40391081324,
+        40392005621,
+        40392006758,
+        40392004845
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; direct owner 2026-10-26 Custom retirement instruction",
-      "notes": "Original Custom feature request intentionally superseded; UI PR142 closed unmerged. Custom backend PR138 source-only migration removed before publication; former queued feature entries preserved only as retired history. Leave older applied migrations, shot data, notes and offline outboxes intact."
+      "notes": "Original Custom feature request intentionally superseded; UI PR142 closed unmerged. Custom backend PR138 source-only migration removed before publication; former queued feature entries preserved only as retired history. Leave older applied migrations, shot data, notes and offline outboxes intact. Independently verified source READY for an authorized future batch, not deployed. Preserves previously merged independent Issue26 READY and all queued extractor work."
     }
   ],
   "history": [
