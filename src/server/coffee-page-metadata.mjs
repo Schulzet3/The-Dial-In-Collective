@@ -677,6 +677,29 @@ function productDetails(fields,p){
  const currentDescription=rawDescription&&rawDescription.length<=160000?canonicalIdentityScope(fields,rawDescription,'product_json'):'';
  const description=currentDescription?canonicalComponentScope(fields,currentDescription):'';
  rememberGeographyEntityRoles(fields,description);
+ // Release descriptions must be tied to this EXACT selected Product, never
+ // to storefront banners, related coffees, publish dates or URL slugs.
+ // Distinctive parenthetical title labels outrank a shorter generic Shopify
+ // category tag on the same product (October Limited Blend vs Limited Blend).
+ const selectedTitle=textOf(p.name??p.title,200);
+ const titleRelease=selectedTitle.match(/\(\s*((?:(?:January|February|March|April|May|June|July|August|September|October|November|December|20\d{2})\s+)?Limited\s+(?:Blend|Release|Edition|Reserve|Offering|Batch))\s*\)\s*$/i)?.[1]||
+  selectedTitle.match(/\b(Limited\s+(?:Edition|Release|Reserve|Offering|Batch))\s*$/i)?.[1]||'';
+ if(titleRelease)addField(fields,'release_label',titleRelease);
+ // An uppercase standalone badge inside the selected Product description
+ // is a literal release label, not a promotional sidebar or a general
+ // coffee-related sentence. Do not infer a lot number or harvest year.
+ const releaseBadge=[...currentDescription.matchAll(/<strong\b[^<>]{0,250}>\s*(LIMITED\s+RELEASE)(?:\s*\|\s*WHOLE\s+BEAN\s+ONLY)?\s*<\/strong>/gi)];
+ if(releaseBadge.length===1)addField(fields,'release_label',releaseBadge[0][1]);
+ // Some roasters spell out a named seasonal release in the exact coffee's
+ // prose. Require the selected name itself as the grammatical subject.
+ const leadingName=selectedTitle.split(/\s+[-–—|]\s+/)[0]?.trim()||'';
+ if(leadingName.length>=5&&leadingName.length<=65){
+  const releaseSentence=new RegExp('\\b'+leadingName.replace(/[.*+?^${}()|[\]\\]/g,'\\ rememberGeographyEntityRoles(fields,description);
+')+
+   '\\s+is\\s+a\\s+(limited\\s+(?:spring|summer|autumn|fall|winter)\\s+release)\\b','i');
+  const sentence=releaseSentence.exec(clean(currentDescription,20000));
+  if(sentence)addField(fields,'release_label',sentence[1]);
+ }
  const properties=Array.isArray(p.additionalProperty)?p.additionalProperty.slice(0,80):p.additionalProperty&&typeof p.additionalProperty==='object'?[p.additionalProperty]:[];
  for(const row of properties){
   addField(fields,row?.name,row?.value);
@@ -741,6 +764,12 @@ function productDetails(fields,p){
  }
  }
  const tags=(Array.isArray(p.tags)?p.tags.slice(0,60):[]).filter(tag=>typeof tag==='string');
+ // Shopify tags are exact-current-product taxonomy, not a roaster's
+ // general collection: retain an explicit standalone Limited Blend tag
+ // only when a more specific directly printed title release is absent.
+ // Never combine a date/season from unrelated category tags with the label.
+ const limitedBlendTags=tags.filter(tag=>/^Limited\s+Blend$/i.test(tag.trim()));
+ if(!titleRelease&&limitedBlendTags.length===1)addField(fields,'release_label',limitedBlendTags[0].trim());
  const tagPairs=tags.map(tag=>tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i)).filter(Boolean);
  const originTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='origin');
  const processTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='process');
