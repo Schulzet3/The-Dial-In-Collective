@@ -71,6 +71,9 @@ begin
  return answer;
 end $s$;
 revoke all on function private.dic_save_custom_targets(uuid,jsonb) from public,anon,authenticated;
+-- Same protected authenticated gateway pattern as private.mutate_workspace.
+-- Internal schema is not a Data API exposed schema; require_member enforces admission.
+grant execute on function private.dic_save_custom_targets(uuid,jsonb) to authenticated;
 -- Patch the installed protected dispatcher only when its expected route is present exactly once.
 do $router$
 declare definition text; old_text text:=$old$ if action='rename_setup' then$old$;

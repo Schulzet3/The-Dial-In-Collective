@@ -468,6 +468,26 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5; prior deployed receipt DIC-Q-5-pending-retry-http-conflict; current owner authorization to reconcile outstanding GitHub records.",
       "notes": "Source-tracking bookkeeping only, not a second migration or a second feature. Original DIC-Q-5-pending-retry-http-conflict stays DEPLOYED. This non-READY companion prevents false intake gaps while explicitly blocking duplicate SQL application or unapproved publication.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Preserve SQL-only #5 DEPLOYED, carryover TESTING until source coverage/anti-replay acceptance resolves; do not run the migration again."
+    },
+    {
+      "id": "DIC-Q-14-custom-target-backend",
+      "issue": 14,
+      "pr": 138,
+      "title": "Backend Custom style targets: safe per-coffee workspace persistence",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261026000000_dic_custom_targets_workspace.sql"
+      ],
+      "tests": [
+        "Source-only migration and disposable synthetic SQL suite supabase/tests/custom_targets_workspace.sql; isolated exact-source check must execute this suite and inspect resulting permission boundaries before READY."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "SQL suite coverage and protected gateway readback remain to be verified; UI/UX owns Custom fields, hydration and acceptance, Coordinator owns readiness. Production migration is explicitly not authorized."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14",
+      "notes": "Coordinated with UI/UX and Coordinator via Issue #14; no shared release publication or provider changes. Existing published and READY rows remain untouched."
     }
   ],
   "history": [
