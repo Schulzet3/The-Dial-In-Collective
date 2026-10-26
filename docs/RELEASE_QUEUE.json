@@ -475,28 +475,31 @@
       "issue": 26,
       "pr": 136,
       "title": "Log Shot accessible rating focus, validation focus, and truthful offline indicator",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "9b8e20dd3cc6c95481e7962a37ab30fbb69c5ebe",
       "scope_paths": [
         "site/cloud/main.js",
         "site/lib/ui.js"
       ],
       "tests": [
         "PR136 head 5aa3f841c1b6fbf69202f20db47308dd8100fa7d: real synthetic 390px Chromium keyboard and focus, incomplete sensory/measurement validation with aria-invalid and offline/pending/reconnect; Node regression and same-commit journal recorded.",
-        "Head exact checks: Node/build 40379016946, cloud/browser/mobile 40379017004, visual 40379016973, SQL 40379016968 and security 40379017005 SUCCESS. Approval 40379017006 fails only missing queue coverage for site/lib/ui.js; new intake resolves classification, not a false CI PASS."
+        "Head exact checks: Node/build 40379016946, cloud/browser/mobile 40379017004, visual 40379016973, SQL 40379016968 and security 40379017005 SUCCESS. Approval 40379017006 fails only missing queue coverage for site/lib/ui.js; new intake resolves classification, not a false CI PASS.",
+        "Exact PR136 non-force merge 9b8e20dd3cc6c95481e7962a37ab30fbb69c5ebe read back, source includes both site/cloud/main.js and site/lib/ui.js and same-commit test/journal. Exact merged SHA approval 40389190256, Node/lint/build 40389190260, cloud/synthetic mobile 40389190347, visual 40389190196 all SUCCESS. Original PR-head SQL/security/Node/browser checks also SUCCESS. This is scoped accessible focus/validation/offline work, not broad physical VoiceOver certification."
       ],
       "ci_runs": [
         40379016946,
         40379017004,
         40379016973,
         40379016968,
-        40379017005
+        40379017005,
+        40389190256,
+        40389190260,
+        40389190347,
+        40389190196
       ],
-      "blockers": [
-        "Two overlapping UI PRs #136/#142 modify site/cloud/main.js, browser fixture and workstream index; combine source safely and verify exact integrated approval/browser/build CI before merging and promoting READY. Separate missing-intake gate from original PR136 must be rerun."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/26; https://github.com/Schulzet3/The-Dial-In-Collective/issues/133#issuecomment-6424393544",
-      "notes": "Conductor-only intake at TESTING, not an assertion that PR136 passed approval, was merged or deployed; preserve shots, offline outbox, access, and draft."
+      "notes": "Narrow UI/UX #26 Log Shot focus, invalid-field guidance and truthful offline pending state READY IN SOURCE, NOT DEPLOYED. PR136 merged non-force and exact merged-source checks pass. Parent Issue26 remains OPEN for unrelated comprehensive device/accessibility residuals. Owner-retired Custom PR142 was closed unmerged; unaffected UI26 work retained."
     },
     {
       "id": "DIC-Q-33-single-selected-shopify-roast-tag",
@@ -531,7 +534,7 @@
     {
       "id": "DIC-Q-14-retired-custom-style",
       "issue": 14,
-      "pr": null,
+      "pr": 148,
       "title": "Retire Custom as selectable shot style; preserve offline and historical records",
       "state": "TESTING",
       "merged_source_sha": null,
@@ -1262,12 +1265,12 @@
         40377137502
       ],
       "blockers": [
-        "Dependent Custom frontend #142 and combined Log Shot regression acceptance are not integrated or verified; hold backend release readiness until UI handshake and exact integrated-source tests. New migration is NOT applied to production, and must not be executed without later owner publication approval."
+        "Owner explicitly retired active Custom targets. Source-only migration supabase/migrations/20261026000000_dic_custom_targets_workspace.sql already merged in development but was NOT applied to production and MUST NOT be included/executed in a future release. Complete source-only supersession or documented safe exclusion with exact-source release gate and legacy/offline data integrity before allowing a combined release."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14",
-      "notes": "Backend implementation merged in PR138 and exercised in PR140+PR141 SQL/65 signed HTTP assertions; source checks PASS. Coordinator retains TESTING for joined Custom UI feature readiness, not because earlier SQL coverage is absent. No production SQL, Edge, Auth, member data or Netlify change.",
+      "notes": "Previously verified merged backend SQL and signed HTTP work remains historical, but its unexecuted new Custom-target migration is superseded by the owner, NOT READY nor DEPLOYED. Preserve existing production Custom history/database compatibility without applying new unnecessary SQL. Investigate source retirement, no destructive DB operations.",
       "retired_at_utc": "2026-10-26T00:00:00Z",
-      "retirement_reason": "Owner superseded Custom UI/persistence. Never-hosted Custom-target source migration removed. Historical merged commits and exact synthetic tests remain in GitHub as audit evidence; no Custom SQL was applied to production."
+      "retirement_reason": "Owner superseded active Custom style. UI PR #142 closed unmerged; candidate PR #145 supplanted by fuller guarded retirement; unused October 26 SQL removed from latest source before any production application. Keep historical CI and commits as evidence; never publish these retired components."
     },
     {
       "id": "DIC-Q-14-custom-target-frontend",
@@ -1292,12 +1295,35 @@
         40378041058
       ],
       "blockers": [
-        "Matrix fast_flow_sixth_style_hybrid currently asserts removed C.STYLES.filter(style=>style!=='Custom') marker; replace with positive actual all-six selector and guarded custom editor assertions alongside integrated PR142 code, retaining all other Fast-Flow assertions. Integrate overlapping PR136 without overwrites, rerun CI and browser acceptance. Backend DIC-Q-14-custom-target-backend remains TESTING until joined feature verified."
+        "Owner explicitly RETIRED selectable Custom on October 26, 2026, superseding original Issue #14 UI/editor scope. PR #142 CLOSED UNMERGED, integration candidate PR #146 CLOSED UNMERGED. Do not merge or publish either; retain history/offline records and only minimal compatibility safeguards. This canceled source must not be promoted READY."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; https://github.com/Schulzet3/The-Dial-In-Collective/issues/133#issuecomment-6424169578",
-      "notes": "Conductor-only TESTING intake; this does not bypass historical approval or imply production migration applied. Match PR142 actual added cache path.",
+      "notes": "Withdrawn UI implementation source is not merged and not deployable. Owner-locked retirement supersedes active Custom picker/editor. Queued BLOCKED solely to retain truthful intake/history; no production or member operations.",
       "retired_at_utc": "2026-10-26T00:00:00Z",
-      "retirement_reason": "Owner superseded Custom UI/persistence. Never-hosted Custom-target source migration removed. Historical merged commits and exact synthetic tests remain in GitHub as audit evidence; no Custom SQL was applied to production."
+      "retirement_reason": "Owner superseded active Custom style. UI PR #142 closed unmerged; candidate PR #145 supplanted by fuller guarded retirement; unused October 26 SQL removed from latest source before any production application. Keep historical CI and commits as evidence; never publish these retired components."
+    },
+    {
+      "id": "DIC-Q-14-custom-retirement-ui",
+      "issue": 14,
+      "pr": 145,
+      "title": "Retire selectable Custom while protecting existing history and offline records",
+      "state": "RETIRED_UNPUBLISHED",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/constants.js"
+      ],
+      "tests": [
+        "Owner's later explicit October 26 Locked supersession requires five selectable styles: Traditional/Turbo/Fast-Flow/Ristretto/Lungo; legacy Custom histories/offline saves must remain intact. Candidate PR145 updates both canonical Master Specification and Decision Ledger and the active style enumeration; verify exact code/hidden legacy behavior before READY.",
+        "Actual PR145 exact-source CI, final non-force integration and historical/offline compatibility acceptance PENDING; its old RELEASE_QUEUE.json diff is stale against Coordinator PR144 and must NOT replace current queue."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR145 source not yet merged/verified exact CI. Preserve post-PR144 shared queue records and owner-source approvals; ensure removing Custom from active STYLES does not invalidate old Custom records or pending outbox events. Approval coverage must be strengthened on exact merged source; no production migration."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; newer owner exact direction quoted in PR145: 'retire Custom completely from the product, while retaining only the minimal safeguards necessary to prevent data loss' and 'Do it'.",
+      "notes": "Superseding Locked product decision recorded in candidate PR145 (not yet integrated). Conductor tracking TESTING only; do not infer source readiness, site publication, backend migration application or removal of saved Custom data.",
+      "retired_at_utc": "2026-10-26T00:00:00Z",
+      "retirement_reason": "Owner superseded active Custom style. UI PR #142 closed unmerged; candidate PR #145 supplanted by fuller guarded retirement; unused October 26 SQL removed from latest source before any production application. Keep historical CI and commits as evidence; never publish these retired components."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
