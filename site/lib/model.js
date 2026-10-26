@@ -95,6 +95,7 @@ export function addCoffee(s,data) {
  if(!data.name?.trim()||!data.roaster?.trim())throw new Error('Name and roaster are required.');
  const c={id:newId('coffee'),createdAt:now(),hidden:false,status:'local',bags:[{id:newId('bag'),roastDate:'',frozen:false,archived:false}],...pickCoffee(data)};
  c.activeBagId=c.bags[0].id;s.coffees.push(c);
+ if(data.style==='Custom')throw new Error('Custom is retired. Choose an available shot style.');
  if(activeSetup(s))ensureCoffeeState(s,c.id).style=STYLES.includes(data.style)?data.style:'Traditional';
  logAudit(s,'coffee.added',{coffeeId:c.id});return c;
 }
@@ -135,7 +136,7 @@ export function snapshot(s,coffeeId,basketId) {
 export function hasLocalSuccess(s,coffeeId,style) {
  const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn);
 }
-export function validateShot(d) {
+export function validateShot(d,{allowLegacyCustom=false}={}) {
  const errors=[];
  // PostgreSQL length(text) counts Unicode code points, not UTF-16 units.
  // Reject excess before enqueue/save; never silently discard a member's text.
@@ -144,7 +145,7 @@ export function validateShot(d) {
  if(num(d.grindSetting)==null||num(d.grindSetting)<0)errors.push('Enter the actual grind setting (0 or higher).');
  if(d.tempC!==''&&d.tempC!=null){const n=num(d.tempC);if(n==null||n<70||n>100)errors.push('Check temperature (70-100 degrees C).');}
  if(!d.tasteScales||!Object.entries({extraction:3,body:3,clarity:5,sweetness:5,astringency:1}).every(([k])=>Number.isInteger(d.tasteScales[k])&&d.tasteScales[k]>=1&&d.tasteScales[k]<=5))errors.push('Rate all five taste scales.');
- if(!STYLES.includes(d.style))errors.push('Choose a shot style.');
+ if(!STYLES.includes(d.style)&&!(allowLegacyCustom&&d.style==='Custom'))errors.push('Choose an available shot style.');
  return errors;
 }
 export function validateBackup(data) {

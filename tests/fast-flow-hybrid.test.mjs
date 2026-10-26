@@ -13,7 +13,7 @@ const shot=(id,coffeeId,style,extra={})=>({
  timestamp:'2026-10-22T00:00:00Z',familyId:null,...extra
 });
 test('Fast-Flow is the sixth explicit option; old priors remain intact',()=>{
- assert.deepEqual(STYLES,['Traditional','Turbo','Fast-Flow','Ristretto','Lungo','Custom']);
+ assert.deepEqual(STYLES,['Traditional','Turbo','Fast-Flow','Ristretto','Lungo']);
  assert.match(STYLE_COPY['Fast-Flow'],/SEY-inspired/);
  for(const style of STYLES)assert.ok(styleBadge(style).includes(style));
  assert.match(select('Style','style',STYLES,'Fast-Flow'),/value="Fast-Flow" selected/);
