@@ -29,6 +29,15 @@ test('explicit product-prefixed Coffee_ tags still contradict an independently d
  assert.equal(v.fields.roast_level,undefined);
  assert.ok(v.conflicts?.includes('roast_level'));
 });
+test('broad Coffee_ collection category cannot erase a more specific source-backed product roast',()=>{
+ const v=extractShopifyAjaxData({title:'Test Coffee',handle:'test-coffee',description:'<p>Roast Level: Medium</p>',
+  tags:['Coffee_Light Roast','Consumer Product','medium-roast']},request);
+ assert.equal(v.fields.roast_level,'Medium');
+ assert.ok(!v.conflicts?.includes('roast_level'));
+ const inconsistent=extractShopifyAjaxData({title:'Test Coffee',handle:'test-coffee',
+  description:'<p>Current coffee.</p>',tags:['Coffee_Light Roast','medium-roast']},request);
+ assert.equal(inconsistent.fields.roast_level,undefined,'ambiguous tags alone do not fabricate a roast');
+});
 test('product identity mismatch is never rescued by a roast tag',()=>{
  const v=extractShopifyAjaxData({title:'Other',handle:'not-test-coffee',tags:['Medium Light Roast']},request);
  assert.equal(v,null);
