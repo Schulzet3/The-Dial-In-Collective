@@ -815,7 +815,10 @@ function productDetails(fields,p){
   // without a colon. Do not read longer promotional or negative tag text.
   const process=tag.match(/^(?:(washed)\s+coffee|(washed|natural|honey|anaerobic)\s+process(?:ed)?\s+coffee)\s*$/i);
   if(process)addField(fields,'process',process[1]||process[2]);
-  const roast=tag.match(/(?:^|[_\s])((?:(?:ultra|very)\s+light|light\s*[-/]\s*medium|medium\s*[-/]\s*(?:light|dark)|light|medium|dark)\s+roast)(?:\s+coffee)?\s*$/i);
+  // Require the entire selected product taxonomy tag to be a roast level.
+  // Matching a suffix of a compound 'Medium Light Roast' previously promoted
+  // 'Light Roast' and manufactured a contradiction against Medium-Light.
+  const roast=tag.match(/^((?:(?:ultra|very)\s+light|light\s*[-/ ]\s*medium|medium\s*[-/ ]\s*(?:light|dark)|dark\s*[-/ ]\s*medium|light|medium|dark)\s+roast)(?:\s+coffee)?\s*$/i);
   if(roast)addField(fields,'roast_level',roast[1]);
  }
 }
