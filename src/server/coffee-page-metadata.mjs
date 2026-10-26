@@ -763,13 +763,13 @@ function productDetails(fields,p){
  }
  }
  const tags=(Array.isArray(p.tags)?p.tags.slice(0,60):[]).filter(tag=>typeof tag==='string');
+ const tagPairs=tags.map(tag=>tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i)).filter(Boolean);
  // Shopify tags are exact-current-product taxonomy, not a roaster's
  // general collection: retain an explicit standalone Limited Blend tag
  // only when a more specific directly printed title release is absent.
  // Never combine a date/season from unrelated category tags with the label.
  const limitedBlendTags=tags.filter(tag=>/^Limited\s+Blend$/i.test(tag.trim()));
  if(!titleRelease&&limitedBlendTags.length===1)addField(fields,'release_label',limitedBlendTags[0].trim());
- const tagPairs=tags.map(tag=>tag.match(/^(origin|process|roast(?: level)?|variety|tasting notes|region|producer)\s*[:=]\s*(.{2,130})$/i)).filter(Boolean);
  const originTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='origin');
  const processTags=tagPairs.filter(pair=>pair[1].toLowerCase()==='process');
  const declaredBlend=tags.some(tag=>/^type\s*[:=]\s*blend\s*$/i.test(tag));

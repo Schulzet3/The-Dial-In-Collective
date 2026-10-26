@@ -1,3 +1,9 @@
+## October 26 UTC — exact local source byte-parity correction
+
+After fixing literal `$&` source-transport escaping, GitHub readback still showed functionally equivalent but DIFFERENT statement order from the independently full603-tested local parser. Moved selected-product Limited Blend tag handling immediately after `tagPairs` to restore exact candidate source bytes. Do not count either earlier staged commit as tested source; require exact blob readback of `6ba19638395cd09a71cd9d4884ed212e1a6af8fb`, then exact-source PR CI. No original oracle/capture or production changes.
+
+---
+
 ## October 26 UTC — source transport escaping correction before PR
 
 GitHub readback of the initial staged release-literal branch source did NOT match locally tested parser blob (JS replacement-string `$&` expansion distorted a single expression). Stopped before PR; repaired the expression in this source+same-commit journal correction, preserving identical intended product/source semantics. Require GitHub readback of exact local tested source blob `6ba19638395cd09a71cd9d4884ed212e1a6af8fb` before PR and CI; prior initial staged commit is **NOT** test evidence. Immutable corpus inputs remain unchanged, no provider or production writes.
