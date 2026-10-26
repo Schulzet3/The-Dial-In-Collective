@@ -11,3 +11,6 @@ Additional same-scope accessibility repair: a required missing numeric measureme
 
 ## 2026-10-26 — real Chromium Log Shot keyboard and invalid-form acceptance
 Augmented the existing synthetic authenticated CloudApp Chromium QA (not real Supabase) to save with missing measured values at 390px, assert focus+aria-invalid on first missing yield, type correction and assert invalid state clears, then attempt with five missing taste scales and assert the first unanswered scale receives focus. Each of the five choices is selected using the actual Space keyboard event; the SAME focused button, aria-pressed=true and updated output text are asserted. This tests actual DOM behavior rather than only isolated mock nodes. Production, browser privacy and Locked rating requirements unchanged. Source CI rerun required; Coordinator queue intake unchanged (only main/ui deployable paths).
+
+## 2026-10-26 — CI syntax failure corrected
+Head 7230b78b10094dc6c2115e6ab50d4d0d4dc39638 failed Node/cloud checks because a new test-only regular expression accidentally overescaped literal square brackets. The application JavaScript itself parsed. Removed the fragile regex from synthetic DOM test in favor of literal selector inspection; no runtime or UI changes. Reverify new exact-source CI. Approval intake still requires Conductor-owned queue row.

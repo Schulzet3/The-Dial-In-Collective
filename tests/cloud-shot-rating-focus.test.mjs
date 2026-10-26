@@ -74,8 +74,8 @@ test('missing taste score focuses the first incomplete group; no score is presel
   groups[s.key]={attrs:{},setAttribute(k,v){this.attrs[k]=v;},querySelector(n){assert.equal(n,'button');return child;}};
  }
  const form={isConnected:true,querySelector(selector){
-  const match=selector.match(/^\\[data-scale="([a-z]+)"\\] \\[role="group"\\]$/);
-  return match?groups[match[1]]:null;
+  const key=selector.includes('[data-scale="')?selector.split('"')[1]:null;
+  return key&&selector.endsWith(' [role="group"]')?groups[key]:null;
  }};
  const tastes={extraction:3,body:3,clarity:null,sweetness:5,astringency:1};
  assert.equal(focusShotValidationError(form,['Rate all five taste scales.'],tastes),true);
