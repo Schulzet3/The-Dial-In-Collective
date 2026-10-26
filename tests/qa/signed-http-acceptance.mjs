@@ -332,9 +332,10 @@ pass('Signed member saves owner-scoped Custom targets through protected HTTP mut
 
 r=await rpc('dic_read_personal_state',familyToken);
 assert.equal(r.status,200);
-assert.ok(r.data?.workspaceCoffees?.some(x=>x.library_entry_id===customLibrary &&
- x.setup_version_id===customVersion&&x.selected_style==='Custom'&&
- JSON.stringify(x.custom_targets)===JSON.stringify(customTarget)));
+const savedCustom=r.data?.workspaceCoffees?.filter(x=>x.library_entry_id===customLibrary &&
+ x.setup_version_id===customVersion&&x.selected_style==='Custom')||[];
+assert.equal(savedCustom.length,1);
+assert.deepEqual(savedCustom[0].custom_targets,customTarget);
 pass('Fresh signed HTTP personal state includes persistent Custom targets and selected style');
 
 r=await rpc('dic_apply_client_change',familyToken,customArgs);
