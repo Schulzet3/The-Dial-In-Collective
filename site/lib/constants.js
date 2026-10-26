@@ -43,7 +43,6 @@ export const CONFIG = {
   ratioFamilyDistance: 0.25,
   robustAt: 12,
   trimFraction: 0.10,
-  experiment: { doseG: .5, yieldG: 5, timeS: 5, tempC: 2 },
   grindRangeFraction: .03,
   minGrindStep: .1,
   rangeHalfWidth: .12,
