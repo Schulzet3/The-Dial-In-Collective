@@ -299,6 +299,22 @@ export function extractRoastVisualEvidence(html){
   const value=page.slice(node.headEnd,node.contentEnd);
   if(/\broast\b/i.test(value))offer(value,'inline_svg_title');
  }
+ // A current product's small discrete roast tag immediately precedes
+ // its ONLY selected H1 title. Require an exact sibling DOM relationship,
+ // the product-specific pdp__tag class, and a complete supported roast tier.
+ // A badge from a recommendation, navigation or separate product cannot
+ // supply a roast. Multiple H1 product identities make this ambiguous.
+ const productTitles=pageNodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=220);
+ if(productTitles.length===1){
+  const title=productTitles[0],siblings=pageNodes.filter(node=>node.parent===title.parent);
+  const position=siblings.indexOf(title),tag=position>0?siblings[position-1]:null;
+  if(tag?.tag==='span'&&tag.contentEnd-tag.headEnd<=120&&tag.end<=title.start&&
+   title.start-tag.end<=100&&/^\s*$/.test(page.slice(tag.end,title.start))&&
+   String(attrs(tag.attributes).class||'').split(/\s+/).includes('pdp__tag')){
+   const declared=plain(page.slice(tag.headEnd,tag.contentEnd));
+   if(normalizeRoastLabel(declared))offer(declared,'selected_product_adjacent_roast_badge');
+  }
+ }
  // A current product's concise country / roast badge may print the two
  // facts in adjacent spans, with no word "roast" in the badge. Admit only
  // this known product-specific badge structure, a literally named source
