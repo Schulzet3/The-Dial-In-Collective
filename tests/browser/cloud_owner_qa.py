@@ -536,6 +536,18 @@ with sync_playwright() as p:
  checks.append('320px with enlarged shot text keeps the full measurement line readable')
  page.set_viewport_size({'width':390,'height':844})
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
+ # Browser network drops after the account was previously admitted; avoid
+ # presenting a stale Synced badge, but never drop queued member changes.
+ page.context.set_offline(True)
+ page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Offline')")
+ assert page.get_by_role('status').filter(has_text='Offline: saved coffees and shot logging are available').count()>=1
+ assert page.locator('.app-nav [data-action=community]').count()==0
+ assert page.locator('.sync-indicator').get_attribute('data-sync-state')=='offline'
+ checks.append('Actual offline event immediately shows Offline status, keeps private coffees and disables online-only Community navigation')
+ page.context.set_offline(False)
+ page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Synced')")
+ assert page.locator('.app-nav [data-action=community]').count()==1
+ checks.append('Reconnect rechecks account and restores normal sync status')
  assert not errors,errors;checks.append('No browser JavaScript exceptions')
  b.close()
 report={'passed':len(checks),'checks':checks,'caveats':['Injected browser harness with mocked backend/auth and in-memory storage; not live login/email or native IndexedDB','Original local app is untouched; deployment/backup/full feature parity not ready']}
