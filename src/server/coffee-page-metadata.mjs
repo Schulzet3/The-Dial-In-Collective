@@ -11,7 +11,7 @@ import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
-import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin} from './coffee-fact-compatibility.mjs';
+import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
@@ -341,6 +341,40 @@ function labeledFarmLocation(rawKey,value){
  }
  return {farm,origin};
 }
+// Prefer an explicit detailed selected-product tasting list over a short,
+// unseparated storefront flavor taxonomy. The taxonomy remains in source facts.
+// A separately itemized conflicting flavor list is *never* suppressed.
+export function isCoarseCoffeeFlavorTaxonomy(label,value,detailed){
+ const text=String(value||'').trim();
+ return keyOf(label)==='flavornotes'&&!/[,;|]/.test(text)&&text.length<=80&&
+  ((text.split(/\s+/).length>=3&&text.split(/\s+/).length<=6)||
+   ([...text.matchAll(/[\p{Ll}][\p{Lu}]/gu)].length>=2)||
+   (text.split(/\s+/).length>=2&&/[\p{Ll}][\p{Lu}]/u.test(text)))&&
+  typeof detailed==='string'&&detailed.split(/\s*,\s*/).length>=3;
+}
+// A labeled metric panel that only names acidity/body is not a tasting
+// descriptor list. Preserve the raw published panel in source_facts.
+export function isMetricOnlyCoffeeTastingPanel(label,value){
+ if(keyOf(label)!=='tastingnotes')return false;
+ const text=String(value||'').trim();
+ const match=/^(acidity|body)\s*:\s*[^,;:]{2,110},\s*(acidity|body)\s*:\s*[^;:]{2,140}$/i.exec(text);
+ return !!match&&match[1].toLowerCase()!==match[2].toLowerCase();
+}
+// Some storefront HTML concatenates comma-separated selected flavor chips
+// without separators and then appends a new "Best for" label. Ignore only a
+// byte-equivalent prefix of the already accepted *longer* explicit note list.
+export function isCollapsedSelectedTastesLikePrefix(value,complete){
+ const match=/^(.{6,180}?),\s*Best\s+for(?:[A-Z]|\s|$)/.exec(String(value||''));
+ const terms=String(complete||'').split(/\s*,\s*/).filter(Boolean);
+ if(!match||terms.length<4)return false;
+ const folded=s=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+ const observed=folded(match[1]);let prefix='';
+ for(let at=0;at<terms.length-1;at++){
+  prefix+=folded(terms[at]);
+  if(at>=1&&observed===prefix)return true;
+ }
+ return false;
+}
 function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
  // Layout extractors may pass either a visible roaster label or an
  // already-resolved internal field key such as release_label. Never drop a
@@ -374,11 +408,21 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   conflicts?.add(key);delete fields[key];return;
  }
  let s=normalized(key,value,{allowFlavorProse:key==='tasting_notes'&&rawKey!==key,allowAnonymousProducer:key==='producer'&&literalAnonymousProducer});
+ if(key==='tasting_notes'&&isMetricOnlyCoffeeTastingPanel(rawKey,s))return;
  // A named cooperative/farm can be accidentally prefixed to a Region
  // caption. Remove it only with independent, literal role evidence from
  // this selected product; the complete published value remains in facts.
  if(key==='origin'&&s)s=cleanCoffeeGeographyEntityPrefix(s,geographyRolesByFields.get(fields)||[]);
  if(key==='tasting_notes'&&s&&fields[key]){
+  // A compact unseparated "Flavor Notes" metadata taxonomy is a coarser
+  // storefront grouping, not a competing literal tasting list. Prefer the
+  // existing multi-note explicit profile and keep the taxonomy in source
+  // facts; a separately comma-delimited contrary list still conflicts.
+  if(isCoarseCoffeeFlavorTaxonomy(rawKey,s,fields[key]))return;
+  // A shorter generic "Tastes like" list may omit a flavor in an explicit
+  // longer selected-product profile without contradicting any printed note.
+  if((keyOf(rawKey)==='tasteslike'||keyOf(rawKey)==='notes')&&coffeeTastingNotesSubset(s,fields[key]))return;
+  if(keyOf(rawKey)==='tasteslike'&&isCollapsedSelectedTastesLikePrefix(s,fields[key]))return;
   const prose=value=>!normalizeExplicitCoffeeTastingNotes(value)||/^(?:a|an)\b.*\b(?:cup|coffee|notes?|aroma|flavou?r|body|finish)\b/i.test(value);
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
@@ -1192,6 +1236,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if((fact.field&&(conflicts.has(fact.field)||detailConflicts.has(fact.field)))||
    (detailConflicts.has('farm')&&/^(?:farm|farms|finca)$/i.test(fact.label)))fact.conflicting=true;
  }
+ // Literal country-first middle-dot captions are equivalent when they have
+ // one explicit country and a bounded named locality. Keep original source facts.
+ if(fields.origin&&!conflicts.has('origin'))fields.origin=orderExplicitCoffeeOriginTuple(fields.origin);
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),

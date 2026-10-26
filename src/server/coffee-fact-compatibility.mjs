@@ -89,3 +89,24 @@ export function compatibleCoffeeOrigins(first,second){
  if(broadContains(second,first))return first;
  return null;
 }
+
+/**
+ * Presentation-only canonical ordering of a *printed* country-first locality:
+ * "Burundi · Gatara, Kayanza" -> "Gatara, Kayanza, Burundi".
+ * Never use a gazetteer to add a missing country, join a blend, or resolve
+ * competing claims. Source facts retain the exact published text.
+ */
+export function orderExplicitCoffeeOriginTuple(value){
+ if(typeof value!=='string'||value.length>220)return value;
+ const match=/^([\p{L}][\p{L}\s'-]{1,60})\s*·\s*([^·]{3,130})$/u.exec(value.trim());
+ if(!match)return value;
+ const country=match[1].trim(),place=match[2].trim();
+ const key=coffeeOriginParts(country);
+ if(key.length!==1||!knownCountries.has(key[0]))return value;
+ const parts=place.split(/\s*,\s*/u);
+ if(parts.length<1||parts.length>3||parts.some(part=>
+  part.length<3||part.length>65||!/^[\p{L}][\p{L}\p{M}\s'’().-]*$/u.test(part)||
+  /\b(?:coffee|roast|blend|tasting|process|price|shipping|offer|subscription)\b/iu.test(part)||
+  coffeeOriginParts(part).some(piece=>knownCountries.has(piece))))return value;
+ return [...parts,country].join(', ');
+}

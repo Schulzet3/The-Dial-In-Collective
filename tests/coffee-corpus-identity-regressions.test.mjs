@@ -293,7 +293,7 @@ test('literal source tuples corroborate geography but repeated product names can
  const joined=parse('<h2>GRAPOS Cooperative – El Soconusco, Chiapas, Mexico</h2><p>Origin: Chiapas, Mexico</p><p>Region: El Soconusco</p>');
  assert.equal(joined.fields.origin,'El Soconusco, Chiapas, Mexico');noConflict(joined,'origin');
  const dueling=parse('<h2>Burundi - Amasho</h2><p>Origin: Burundi · Gatara, Kayanza</p>',{name:'Burundi - Amasho'});
- assert.equal(dueling.fields.origin,'Burundi · Gatara, Kayanza');noConflict(dueling,'origin');
+ assert.equal(dueling.fields.origin,'Gatara, Kayanza, Burundi');noConflict(dueling,'origin');
  const title=parse('<p>Origin: Joyabaj</p><p>Country: Guatemala</p>',{name:'TRES CRUCES, HONEY PROCESSED, GUATEMALA'});
  assert.equal(title.fields.origin,'Joyabaj, Guatemala');noConflict(title,'origin');
 });
