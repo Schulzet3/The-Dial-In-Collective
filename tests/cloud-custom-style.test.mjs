@@ -6,6 +6,7 @@ import {hydrate,customTargetsFromRaw,customTargetsForSave} from '../site/cloud/m
 import {recommendation} from '../site/lib/engine.js';
 import {coffeeState} from '../site/lib/model.js';
 import {ACTIONS,independentMutations} from '../site/cloud/outbox.js';
+import {patchAcknowledgement} from '../site/cloud/cache.js';
 
 const target={ratio:2.4,time_low_s:24,time_high_s:32,temperature_c:92.36};
 test('Custom targets persist through hydration and drive one current Custom recipe',()=>{
@@ -56,4 +57,15 @@ test('Custom target changes use protected owner-bound outbox and cannot bypass a
  const main=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
  assert.equal(main.includes("supabase.from('workspace_coffees"),false);
  assert.ok(main.includes("this.mutate('save_custom_targets'"));
+});
+
+test('acknowledged Custom targets patch owner cache durably until next server read',()=>{
+ const original=rawFixture();
+ const record={...original.workspaceCoffees[0],selected_style:'Custom',custom_targets:{...target},revision:2};
+ const patched=patchAcknowledgement(original,{action:'save_custom_targets',payload:{library_entry_id:'coffee'}},{ok:true,record});
+ assert.equal(original.workspaceCoffees[0].custom_targets,undefined);
+ assert.equal(patched.workspaceCoffees[0].custom_targets.ratio,2.4);
+ assert.equal(patched.workspaceCoffees[0].selected_style,'Custom');
+ assert.equal(coffeeState(hydrate(patched),'coffee').custom.timeHigh,32);
+ assert.deepEqual(patchAcknowledgement(original,{action:'save_custom_targets',payload:{}},{ok:false}),original);
 });
