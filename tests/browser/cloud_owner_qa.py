@@ -170,9 +170,25 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Close',exact=True).click();page.get_by_role('button',name='Log A Shot',exact=False).click();assert page.locator('[name=doseG]').input_value()=='18';assert page.locator('[name=yieldG]').input_value()=='';assert page.locator('[name=timeS]').input_value()=='';assert page.locator('[name=grindSetting]').input_value()=='';checks.append('Logging prefill uses basket dose, blank measured output/time/grind')
  assert page.locator('[name=temperature]').input_value()=='';checks.append('Temperature is optional, not fabricated in actual input')
  assert not page.locator('[name=slowFeed]').is_checked();page.locator('[name=slowFeed]').check();checks.append('New Slow Feed entry can be selected explicitly')
+ page.get_by_role('button',name='Save Shot & Get Suggestion').click()
+ page.get_by_role('alert').filter(has_text='Yield').first.wait_for()
+ assert page.locator('[name=yieldG]').get_attribute('aria-invalid')=='true'
+ assert page.locator('[name=yieldG]').evaluate('(el)=>document.activeElement===el')
+ checks.append('390px browser: invalid shot focuses first missing measurement and announces its error')
  page.locator('[name=yieldG]').fill('50');page.locator('[name=timeS]').fill('100');page.locator('[name=grindSetting]').fill('0');page.locator('[name=notes]').fill('Synthetic private note')
+ assert page.locator('[name=yieldG]').get_attribute('aria-invalid') is None
+ checks.append('Corrected measurement clears stale aria-invalid without altering other required checks')
  page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.get_by_role('alert').filter(has_text='Rate').first.wait_for();checks.append('All five sensory ratings required before save')
- for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]').click()
+ assert page.locator('[data-scale=extraction] [role=group]').get_attribute('aria-invalid')=='true'
+ assert page.locator('[data-scale=extraction] [data-action=rate]').first.evaluate('(el)=>document.activeElement===el')
+ checks.append('Missing five taste ratings focus the first unanswered scale without preselecting a value')
+ for key,value in [('extraction',3),('body',3),('clarity',5),('sweetness',5),('astringency',1)]:
+  rating=page.locator(f'[data-action=rate][data-key={key}][data-value="{value}"]')
+  rating.focus();rating.press('Space')
+  assert rating.evaluate('(el)=>document.activeElement===el'),f'{key} keyboard focus lost after rating'
+  assert rating.get_attribute('aria-pressed')=='true'
+  assert page.locator(f'[data-scale={key}] output').inner_text()!='Tap to rate'
+ checks.append('Real Chromium Space-key ratings retain focus, pressed state and visible label for all five scales')
  page.screenshot(path=str(OUT/'cloud_log_light.png'),full_page=True)
  page.get_by_role('button',name='Save Shot & Get Suggestion').click();page.wait_for_function('!document.querySelector("#sheet").open');assert page.locator('.current-mark').count()==1;checks.append('Saving shot closes log and pins coffee')
  assert page.locator('.feedback-panel').count()==1;checks.append('Latest result and radar visible after save')
@@ -520,6 +536,18 @@ with sync_playwright() as p:
  checks.append('320px with enlarged shot text keeps the full measurement line readable')
  page.set_viewport_size({'width':390,'height':844})
  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth');checks.append('390px viewport has no horizontal overflow')
+ # Browser network drops after the account was previously admitted; avoid
+ # presenting a stale Synced badge, but never drop queued member changes.
+ page.context.set_offline(True)
+ page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Offline')")
+ assert page.get_by_role('status').filter(has_text='Offline: saved coffees and shot logging are available').count()>=1
+ assert page.locator('.app-nav [data-action=community]').count()==0
+ assert page.locator('.sync-indicator').get_attribute('data-sync-state')=='offline'
+ checks.append('Actual offline event immediately shows Offline status, keeps private coffees and disables online-only Community navigation')
+ page.context.set_offline(False)
+ page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Synced')")
+ assert page.locator('.app-nav [data-action=community]').count()==1
+ checks.append('Reconnect rechecks account and restores normal sync status')
  assert not errors,errors;checks.append('No browser JavaScript exceptions')
  b.close()
 report={'passed':len(checks),'checks':checks,'caveats':['Injected browser harness with mocked backend/auth and in-memory storage; not live login/email or native IndexedDB','Original local app is untouched; deployment/backup/full feature parity not ready']}
