@@ -5,7 +5,7 @@ import * as U from '../lib/ui.js';
 import {CloudError,createCloudClient,secureOrigin,validateNewPassword,PASSWORD_HINT,isAccessDenied} from './client.js';
 import {IndexedStore,Outbox} from './outbox.js';
 import {basketDoseAdvisory} from './dose-advisory.js';
-import {hydrate,applyPending,shotPayload} from './mapping.js';
+import {hydrate,applyPending,shotPayload,customTargetsForSave} from './mapping.js';
 import {CLOUD_CONFIG} from './config.js';
 import {emailConfirmationView} from './confirmation.js';
 import {shotCard} from './shot_card.js';
@@ -29,7 +29,7 @@ class CloudApp {
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
-  this.recommendationEvidence={};this.recommendationEvidenceRequests=new Set();
+  this.recommendationEvidence={};this.recommendationEvidenceRequests=new Set();this.styleLogAfterSave=null;
    this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
   this.lastHeavySyncAt=0;this.pollingStatus=null;
@@ -50,7 +50,7 @@ class CloudApp {
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();
   this.lastHeavySyncAt=0;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
-  this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
+  this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;this.styleLogAfterSave=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
   this.coffeeUrlSourceReview=null;this.pendingCoffeeReview=null;
   this.coffeeUrlPreviewInput=null;this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityError='';this.communityLoading=false;this.communityReloadRequested=false;this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
@@ -293,8 +293,8 @@ class CloudApp {
    const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));const local=shots.filter(sh=>sh.setupVersionId===v.id&&sh.style===p.style),last=local[0];const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;
     const firstStyle=this.firstStylePromptId===c.id&&shots.length===0;
     const suggestion=firstStyle?E.suggestedStyle(c,s.preferences||''):null;
-    const firstPrompt=firstStyle?`<section class="first-shot-style" aria-label="First shot starting style"><div class=recipe-label>Recommended for you: ${e(suggestion.style)}</div><p class=helper>${e(suggestion.reason)} You can choose another style.</p>${select('Starting Shot Style','first_style',C.STYLES.filter(style=>style!=='Custom'),suggestion.style)}${button('Log First Shot','first-shot-log',`data-id="${e(c.id)}"`,'primary full log-cta')}</section>`:'';
-   return `<article class="coffee-card ${open?'is-open':''} ${w.currentCoffeeId===c.id?'is-current':''}"><button class=coffee-toggle data-action=expand data-id="${e(c.id)}" aria-expanded="${open}"><div class=coffee-title-area><div class=coffee-title>${e(c.name)}${w.currentCoffeeId===c.id?'<span class=current-mark>Current</span>':''}${success?'<span class=status-badge>Dialed In</span>':''}</div><div class=coffee-subtitle>${e(c.roaster)} · ${e(c.origin)}</div></div>${icon('chevron')}</button>${open?`<div class=coffee-body>${firstStyle?firstPrompt:`<div class=style-row>${styleBadge(p.style)}${button('Change Style','style',`data-id="${e(c.id)}"`,'ghost compact')}</div><div class=recipe-label>${success?'Your Dialed In Window':'Starting Recommendation'}</div>${recipeGrid(rec,v.advanced.temperature,v.tempUnit)}${button(`${icon('plus',16)} Log A Shot`,'log',`data-id="${e(c.id)}"`,'primary full log-cta')}`}${rec.reasons?.length?`<p class=recipe-reason>${e(rec.reasons[0])}</p>`:''}${last&&(!success||this.justSavedId===last.id)?`<section class=feedback-panel><div class="next-shot-heading"><span class="next-shot-label">${advice.next?'Next Shot Recommendation':'Shot Feedback'}</span>${advice.next?`<button type="button" class="inline-info-button" data-action="next-shot-info" aria-label="About Next Shot Recommendation" aria-expanded="false" aria-controls="next-shot-info-${e(c.id)}"><span aria-hidden="true">i</span></button>`:''}</div><h3>${e(nextShotTitle(advice))}</h3>${nextShotGuidance(advice,last,v.advanced.temperature,v.tempUnit)}${advice.next?`<p class="next-shot-info-text helper" id="next-shot-info-${e(c.id)}" hidden>${e(NEXT_SHOT_INFO)}</p>`:''}${chips(last.tasteScales)}${radar(last.tasteScales)}</section>`:''}<details class=inline-disclosure data-retain="facts-${e(c.id)}"><summary>Coffee Details</summary><dl class=coffee-facts>${[['Roaster',c.roaster],['Origin',c.origin],['Elevation',c.elevationM],['Roast Level',c.roastLevel],['Process',c.process],['Variety',c.variety],['Producer',c.producer],['Tasting Notes',c.tastingNotes]].filter(x=>x[1]).map(([k,val])=>`<div><dt>${e(k)}</dt><dd>${e(val)}</dd></div>`).join('')}</dl><p class=helper>${c.status==='verified'?'Approved coffee':'Pending approval · your shots stay private.'}</p>${button('Edit Coffee Details','edit-coffee',`data-id="${e(c.id)}"`,'ghost compact')}${c.status==='pending'?button('Check For A Verified Match','check-pending-match',`data-id="${e(c.id)}"`,'ghost compact'):''}${c.status==='pending'?button('Retry Automatic Approval','retry-member-auto-approval',`data-id="${e(c.id)}"`,'ghost compact'):''}${c.status==='pending'&&this.raw?.submissions?.find(sub=>sub.id===this.raw?.library?.find(l=>l.id===c.id)?.submission_id)?.source_url?button('Retry Official Source Check','retry-pending-source',`data-id="${e(c.id)}"`,'ghost compact'):''}${this.raw?.submissions?.some(sub=>sub.canonical_coffee_id&&sub.status==='pending'&&sub.canonical_coffee_id===this.raw?.library?.find(l=>l.id===c.id)?.coffee_id)?'<p class="helper">Correction pending review. The shared coffee record is unchanged.</p>':''}</details><details class=inline-disclosure data-retain="history-${e(c.id)}"><summary>Shot History (${shots.length})</summary>${shots.length?`<div class="history-actions">${button(shots.every(sh=>this.shotExpanded.has(sh.id))?'Collapse All':'Expand All','shot-toggle-all',`data-id="${e(c.id)}"`,'text-button')}</div>`:''}${shots.map(sh=>shotCard(sh,{expanded:this.shotExpanded.has(sh.id),activeVersionId:v.id,unit:v.tempUnit})).join('')}</details></div>`:''}</article>`;
+    const firstPrompt=firstStyle?`<section class="first-shot-style" aria-label="First shot starting style"><div class=recipe-label>Recommended for you: ${e(suggestion.style)}</div><p class=helper>${e(suggestion.reason)} You can choose another style.</p>${select('Starting Shot Style','first_style',C.STYLES,suggestion.style)}${button('Log First Shot','first-shot-log',`data-id="${e(c.id)}"`,'primary full log-cta')}</section>`:'';
+   return `<article class="coffee-card ${open?'is-open':''} ${w.currentCoffeeId===c.id?'is-current':''}"><button class=coffee-toggle data-action=expand data-id="${e(c.id)}" aria-expanded="${open}"><div class=coffee-title-area><div class=coffee-title>${e(c.name)}${w.currentCoffeeId===c.id?'<span class=current-mark>Current</span>':''}${success?'<span class=status-badge>Dialed In</span>':''}</div><div class=coffee-subtitle>${e(c.roaster)} · ${e(c.origin)}</div></div>${icon('chevron')}</button>${open?`<div class=coffee-body>${firstStyle?firstPrompt:`<div class=style-row>${styleBadge(p.style)}${button('Change Style','style',`data-id="${e(c.id)}"`,'ghost compact')}</div><div class=recipe-label>${success?'Your Dialed In Window':p.style==='Custom'&&p.custom?'Your Custom Targets':'Starting Recommendation'}</div>${p.style==='Custom'&&!p.custom&&!success?'<p class="helper">Set your Custom targets to see your intended recipe. Existing shot history stays intact.</p>':recipeGrid(rec,v.advanced.temperature,v.tempUnit)}${p.style==='Custom'&&!p.custom&&!success?button('Set Custom Targets','style',`data-id="${e(c.id)}"`,'primary full log-cta'):button(`${icon('plus',16)} Log A Shot`,'log',`data-id="${e(c.id)}"`,'primary full log-cta')}`}${rec.reasons?.length?`<p class=recipe-reason>${e(rec.reasons[0])}</p>`:''}${last&&(!success||this.justSavedId===last.id)?`<section class=feedback-panel><div class="next-shot-heading"><span class="next-shot-label">${advice.next?'Next Shot Recommendation':'Shot Feedback'}</span>${advice.next?`<button type="button" class="inline-info-button" data-action="next-shot-info" aria-label="About Next Shot Recommendation" aria-expanded="false" aria-controls="next-shot-info-${e(c.id)}"><span aria-hidden="true">i</span></button>`:''}</div><h3>${e(nextShotTitle(advice))}</h3>${nextShotGuidance(advice,last,v.advanced.temperature,v.tempUnit)}${advice.next?`<p class="next-shot-info-text helper" id="next-shot-info-${e(c.id)}" hidden>${e(NEXT_SHOT_INFO)}</p>`:''}${chips(last.tasteScales)}${radar(last.tasteScales)}</section>`:''}<details class=inline-disclosure data-retain="facts-${e(c.id)}"><summary>Coffee Details</summary><dl class=coffee-facts>${[['Roaster',c.roaster],['Origin',c.origin],['Elevation',c.elevationM],['Roast Level',c.roastLevel],['Process',c.process],['Variety',c.variety],['Producer',c.producer],['Tasting Notes',c.tastingNotes]].filter(x=>x[1]).map(([k,val])=>`<div><dt>${e(k)}</dt><dd>${e(val)}</dd></div>`).join('')}</dl><p class=helper>${c.status==='verified'?'Approved coffee':'Pending approval · your shots stay private.'}</p>${button('Edit Coffee Details','edit-coffee',`data-id="${e(c.id)}"`,'ghost compact')}${c.status==='pending'?button('Check For A Verified Match','check-pending-match',`data-id="${e(c.id)}"`,'ghost compact'):''}${c.status==='pending'?button('Retry Automatic Approval','retry-member-auto-approval',`data-id="${e(c.id)}"`,'ghost compact'):''}${c.status==='pending'&&this.raw?.submissions?.find(sub=>sub.id===this.raw?.library?.find(l=>l.id===c.id)?.submission_id)?.source_url?button('Retry Official Source Check','retry-pending-source',`data-id="${e(c.id)}"`,'ghost compact'):''}${this.raw?.submissions?.some(sub=>sub.canonical_coffee_id&&sub.status==='pending'&&sub.canonical_coffee_id===this.raw?.library?.find(l=>l.id===c.id)?.coffee_id)?'<p class="helper">Correction pending review. The shared coffee record is unchanged.</p>':''}</details><details class=inline-disclosure data-retain="history-${e(c.id)}"><summary>Shot History (${shots.length})</summary>${shots.length?`<div class="history-actions">${button(shots.every(sh=>this.shotExpanded.has(sh.id))?'Collapse All':'Expand All','shot-toggle-all',`data-id="${e(c.id)}"`,'text-button')}</div>`:''}${shots.map(sh=>shotCard(sh,{expanded:this.shotExpanded.has(sh.id),activeVersionId:v.id,unit:v.tempUnit})).join('')}</details></div>`:''}</article>`;
   }).join('')||'<p class="helper space-top">Add your first coffee to get started.</p>'}`;
  }
  communityScreen(){
@@ -618,7 +618,8 @@ class CloudApp {
  }
  async startFirstShot(id,container){
   const coffee=this.state.coffees.find(x=>x.id===id),style=container?.querySelector('[name=first_style]')?.value;
-  if(!coffee||!C.STYLES.filter(s=>s!=='Custom').includes(style))throw new Error('Choose a starting shot style.');
+  if(!coffee||!C.STYLES.includes(style))throw new Error('Choose a starting shot style.');
+  if(style==='Custom'&&!M.coffeeState(this.state,id).custom){this.firstStylePromptId=null;this.showStyle(id,{afterSaveLog:true,preselect:'Custom'});return;}
   const version=M.activeVersion(this.state),setup=M.activeSetup(this.state),previous=M.coffeeState(this.state,id).style;
   if(style!==previous&&this.status?.admitted&&globalThis.navigator?.onLine!==false&&!this.pending.length){
    const rev=this.raw?.workspaceCoffees?.find(x=>x.library_entry_id===id&&x.setup_version_id===version.id)?.revision??0;
@@ -632,6 +633,34 @@ class CloudApp {
   }
   this.firstStylePromptId=null;this.showLog(id,null,style);
  }
+
+ showStyle(id,{afterSaveLog=false,preselect=null}={}){
+  const p=M.coffeeState(this.state,id),v=M.activeVersion(this.state);
+  if(!v||!this.state.coffees.some(c=>c.id===id))throw new Error('Choose a current coffee and setup.');
+  this.styleCoffee=id;
+  this.styleRevision=this.raw?.workspaceCoffees?.find(x=>x.library_entry_id===id&&x.setup_version_id===v.id)?.revision??0;
+  this.styleLogAfterSave=afterSaveLog?id:null;
+  const chosen=preselect||p.style,isCustom=chosen==='Custom',disabled=isCustom?'':'disabled';
+  const saved=p.custom,showTemperature=v.advanced.temperature||saved?.tempC!=null;
+  const temperature=saved?.tempC==null?'':v.tempUnit==='F'
+   ?C.round(saved.tempC*9/5+32,1):C.round(saved.tempC,1);
+  const markup='<form id=style>'
+   +select('Style','style',C.STYLES,chosen,'aria-controls="custom-targets"')
+   +'<div id="custom-targets" class="advanced" role="group" aria-label="Custom shot targets" '+(isCustom?'':'hidden')+'>'
+   +'<p class="helper">Define your starting ratio and time window. These are targets, not pass/fail rules for taste.</p>'
+   +'<div class="form-grid">'
+   +field('Brew Ratio (1:x)','ratio',saved?.ratioLow??'',{type:'number',step:'.01',min:.8,max:4.5,required:true,extra:disabled})
+   +field('Minimum Time (s)','time_low_s',saved?.timeLow??'',{type:'number',step:'.1',min:5,max:60,required:true,extra:disabled})
+   +field('Maximum Time (s)','time_high_s',saved?.timeHigh??'',{type:'number',step:'.1',min:5,max:60,required:true,extra:disabled})
+   +(showTemperature?field('Target Temperature (°'+v.tempUnit+', Optional)','temperature',temperature,{
+      type:'number',step:'.1',min:v.tempUnit==='F'?185:85,max:v.tempUnit==='F'?211.8:99.9,extra:disabled
+    }):'')
+   +'</div></div>'
+   +'<p class="helper space-top">Styles guide a starting recipe. Your actual shot ratings decide success.</p>'
+   +'<button class="primary full">'+(afterSaveLog?'Continue To Log Shot':'Use Style')+'</button></form>';
+  this.show('Shot Style',markup);
+ }
+
  showLog(cid,editing=null,styleOverride=null){
   const c=this.state.coffees.find(c=>c.id===cid),v=M.activeVersion(this.state);this.logCoffee=cid;this.editing=editing;
   this.draft=editing?C.clone(editing):E.prefill(this.state,cid,styleOverride?{style:styleOverride}:{});if(!editing)this.draft.recommendationContext=null;this.draft.id ||= uuid();this.logUnit=editing?.snapshot.tempUnit||v.tempUnit;
@@ -660,7 +689,7 @@ class CloudApp {
  async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;
   try{
    if(a==='dismiss-dose-advisory'){if(this.draft?.id)this.dismissedDoseAdvisories.add(this.draft.id);const panel=sheet.querySelector?.('#shot-dose-advisory');if(panel)panel.hidden=true;return;}
-   if(a==='close'){sheet.close();return;}
+   if(a==='close'){this.styleLogAfterSave=null;sheet.close();return;}
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
    if(a==='new-setup'){this.showSetup();return;}
@@ -797,7 +826,7 @@ class CloudApp {
    }
    if(a==='switch'){this.show('Your Workspaces',this.state.setups.map(x=>`<div class="switch-row"><div class="switch-info"><strong>${e(x.name)}</strong>${x.id===this.state.activeSetupId?'<small>Current Setup</small>':''}</div><div class="switch-actions">${button('Use','choose-setup',`data-id="${e(x.id)}"`,'secondary compact')}${button('Rename','rename-setup',`data-id="${e(x.id)}"`,'ghost compact')}</div></div>`).join(''));return;}
    if(a==='choose-setup'){await this.mutate('select_setup',{setup_id:id,expected_revision:this.raw.preferences.revision},{onlineOnly:true});this.expanded.clear();const pin=M.workspace(this.state).currentCoffeeId;if(pin)this.expanded.add(pin);sheet.close();this.render();return;}
-   if(a==='style'){const p=M.coffeeState(this.state,id);this.styleCoffee=id;this.styleRevision=this.raw.workspaceCoffees.find(x=>x.library_entry_id===id&&x.setup_version_id===M.activeVersion(this.state).id)?.revision||0;this.show('Shot Style',`<form id=style>${select('Style','style',C.STYLES.filter(s=>s!=='Custom'),p.style)}<p class="helper space-top">Styles are guidelines, not pass/fail rules.</p><button class="primary full">Use Style</button></form>`);return;}
+   if(a==='style'){this.showStyle(id);return;}
    if(a==='make-current'){const sh=this.state.shots.find(x=>x.id===id),rp=this.raw.recipePreferences.find(x=>x.library_entry_id===sh.coffeeId&&x.setup_version_id===sh.setupVersionId&&x.style===sh.style);await this.mutate('make_current',{shot_id:id,expected_revision:rp?.revision||0},{onlineOnly:true});return;}
    if(a==='community'){this.view='community';await this.loadCommunity();return;}
    if(a==='home'){this.view='coffees';this.render();return;}
@@ -836,7 +865,7 @@ class CloudApp {
   }catch(err){this.error(err);}
  }
  input(ev){if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
- change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
+ change(ev){if(ev.target.name==='style'&&ev.target.closest?.('#style')){const panel=sheet.querySelector('#custom-targets');if(panel){const active=ev.target.value==='Custom';panel.hidden=!active;for(const field of panel.querySelectorAll('input'))field.disabled=!active;}}if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);
   try{
    if(id==='auth-signup'||id==='auth-password'){const issue=validateNewPassword(d.password);if(issue)throw new Error(issue);}
@@ -879,7 +908,19 @@ class CloudApp {
    }
    else if(id==='preferences'){await this.mutate('save_preferences',{...d,expected_revision:this.prefRevision},{onlineOnly:true});this.prefRevision=this.raw.preferences.revision;sheet.querySelector('[role=alert]').textContent='Preferences saved.';}
    else if(id==='advanced'){await this.mutate('save_setup_settings',{setup_id:M.activeSetup(this.state).id,setup_version_id:M.activeVersion(this.state).id,expected_revision:this.setupPrefRevision,track_temperature:'track_temperature' in d,track_slow_feed:'track_slow_feed' in d,temperature_unit:d.temperature_unit},{onlineOnly:true});this.setupPrefRevision=this.raw.setupPreferences.find(x=>x.setup_version_id===M.activeVersion(this.state).id).revision;sheet.querySelector('[role=alert]').textContent='Advanced settings saved.';}
-   else if(id==='style'){await this.mutate('set_style',{setup_id:M.activeSetup(this.state).id,setup_version_id:M.activeVersion(this.state).id,library_entry_id:this.styleCoffee,style:d.style,expected_revision:this.styleRevision},{onlineOnly:true});sheet.close();}
+   else if(id==='style'){
+    const setup=M.activeSetup(this.state),version=M.activeVersion(this.state),coffeeId=this.styleCoffee;
+    if(!setup||!version||!coffeeId||!C.STYLES.includes(d.style))throw new Error('Choose a valid shot style.');
+    const context={setup_id:setup.id,setup_version_id:version.id,library_entry_id:coffeeId,expected_revision:this.styleRevision};
+    if(d.style==='Custom'){
+     const previous=M.coffeeState(this.state,coffeeId).custom;
+     const custom_targets=customTargetsForSave(d,{unit:version.tempUnit,previous});
+     await this.mutate('save_custom_targets',{...context,custom_targets},{onlineOnly:true});
+    }else await this.mutate('set_style',{...context,style:d.style},{onlineOnly:true});
+    const continueLogging=this.styleLogAfterSave===coffeeId;
+    this.styleLogAfterSave=null;sheet.close();
+    if(continueLogging)this.showLog(coffeeId,null,d.style);
+   }
    else if(id==='shot'){
     this.readDraft();const d=this.draft,validation=M.validateShot(d);if(validation.length)throw new Error(validation.join(' '));
     // New-shot basket variance is a nonblocking advisory. Existing edits never rewarn.
