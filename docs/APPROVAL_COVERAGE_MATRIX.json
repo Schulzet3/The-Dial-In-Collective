@@ -113,7 +113,7 @@
         },
         {
           "path": "site/cloud/main.js",
-          "contains": "C.STYLES.filter(style=>style!=='Custom')"
+          "contains": "C.STYLES,suggestion.style"
         },
         {
           "path": "supabase/migrations/20261022090000_dic_fast_flow_hybrid_style.sql",
@@ -644,6 +644,36 @@
         "required_evidence": "Source-readiness evidence is complete: original 603/201 replay, independent 42-case source review, all 603 current exports/offline checks, nonwaivable zero-loss gates, exact-source CI, fresh live acceptance, non-force integration and exact merged-source checks. The merged tree is identical to reviewed source. Publication and provider release readback are separate unperformed operations; source READY does not claim deployment.",
         "publication_authority": "Single new user instruction to publish all READY after PR121 READY, not permission to publish TESTING source."
       }
+    },
+    {
+      "id": "retired_custom_style_owner_supersession_20261026",
+      "decision_key": "UX-RETIRE-CUSTOM-STYLE-20261026",
+      "scope": "Five active styles; no Custom creation; historical and pending offline recovery without relabeling",
+      "implementation": "source_implementation_testing",
+      "device_acceptance": "Synthetic browser and owner records only; physical-device testing optional and not claimed",
+      "issue": 14,
+      "assertions": [
+        {
+          "path": "site/lib/constants.js",
+          "contains": "export const STYLES = ['Traditional', 'Turbo', 'Fast-Flow', 'Ristretto', 'Lungo'];"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Custom is retired. Your existing shots and notes are preserved."
+        },
+        {
+          "path": "site/lib/model.js",
+          "contains": "allowLegacyCustom=false"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "contains": "allowLegacyCustom:p.style==='Custom'"
+        },
+        {
+          "path": "tests/retired-custom-style.test.mjs",
+          "contains": "new Custom shots and new Custom coffee selection are rejected"
+        }
+      ]
     }
   ],
   "active_gap_flags": [

@@ -471,36 +471,6 @@
       "notes": "Source-tracking bookkeeping only, not a second migration or a second feature. Original DIC-Q-5-pending-retry-http-conflict stays DEPLOYED. This non-READY companion prevents false intake gaps while explicitly blocking duplicate SQL application or unapproved publication.\n[2026-10-24 owner deferred combined release] User explicitly stopped immediate Netlify publication and will request ONE later combined queue publish after extractor #33 passes. This item is unchanged in readiness; authoritative handoff: docs/RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md. Preserve SQL-only #5 DEPLOYED, carryover TESTING until source coverage/anti-replay acceptance resolves; do not run the migration again."
     },
     {
-      "id": "DIC-Q-14-custom-target-backend",
-      "issue": 14,
-      "pr": 138,
-      "title": "Backend Custom style targets: safe per-coffee workspace persistence",
-      "state": "TESTING",
-      "merged_source_sha": "aea8d62133575a56952619ca902500e96605d6f1",
-      "scope_paths": [
-        "supabase/migrations/20261026000000_dic_custom_targets_workspace.sql"
-      ],
-      "tests": [
-        "PR #138 merged source-only protected owner-scoped Custom-target SQL schema, revision/receipt idempotency and preexisting protected mutation route; file blob 1883f8d9c97921d26b37680868b613cfa0922edf unchanged.",
-        "Disposable PostgreSQL 17.11 Custom acceptance exercised valid/invalid target bounds, real owner-scope reload, two synthetic authenticated owners, deny cross-account/JWT mismatch, mutation replay/revision, old version denial, unchanged shots/favorites: SQL runs 40375560073 and 40375852495 SUCCESS.",
-        "Separate PostgREST synthetic HMAC-signed HTTP acceptance 65/65 PASS, run 40376427172; exact merged 29860303c65d57a9f2af71813a0cbbe55e3e4005 SQL/HTTP 40377137536, Node/build 40377137608, approval 40377173013, cloud/browser 40377137502 SUCCESS; UI not yet validated."
-      ],
-      "ci_runs": [
-        40375560073,
-        40375852495,
-        40376427172,
-        40377137536,
-        40377137608,
-        40377173013,
-        40377137502
-      ],
-      "blockers": [
-        "Dependent Custom frontend #142 and combined Log Shot regression acceptance are not integrated or verified; hold backend release readiness until UI handshake and exact integrated-source tests. New migration is NOT applied to production, and must not be executed without later owner publication approval."
-      ],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14",
-      "notes": "Backend implementation merged in PR138 and exercised in PR140+PR141 SQL/65 signed HTTP assertions; source checks PASS. Coordinator retains TESTING for joined Custom UI feature readiness, not because earlier SQL coverage is absent. No production SQL, Edge, Auth, member data or Netlify change."
-    },
-    {
       "id": "DIC-Q-26-shot-rating-focus",
       "issue": 26,
       "pr": 136,
@@ -527,34 +497,6 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/26; https://github.com/Schulzet3/The-Dial-In-Collective/issues/133#issuecomment-6424393544",
       "notes": "Conductor-only intake at TESTING, not an assertion that PR136 passed approval, was merged or deployed; preserve shots, offline outbox, access, and draft."
-    },
-    {
-      "id": "DIC-Q-14-custom-target-frontend",
-      "issue": 14,
-      "pr": 142,
-      "title": "Approved Custom style picker, editor, durable target hydration and offline cache",
-      "state": "TESTING",
-      "merged_source_sha": null,
-      "scope_paths": [
-        "site/cloud/main.js",
-        "site/cloud/mapping.js",
-        "site/cloud/outbox.js",
-        "site/cloud/cache.js",
-        "site/lib/engine.js"
-      ],
-      "tests": [
-        "PR142 head aeb30f1c1a982087c58b47cfd88c017af9ab2bd6 implements 6 styles, explicit Custom bounds 0.8–4.5 ratio/5–60 seconds/optional temperature, protected owner/revision-bound save_custom_targets, server reload, precise temperature and offline cache; focused Node and synthetic 390px Chromium evidence is scoped to its head.",
-        "Exact head SQL 40378041053 and source security 40378041058 SUCCESS; app 40378041264, visual 40378041045 and approval 40378041069 failed stale historical Fast-Flow assertion that requires hidden Custom (not code evidence of a new locked exclusion). Approval matrix must be positively updated only with combined code and tested."
-      ],
-      "ci_runs": [
-        40378041053,
-        40378041058
-      ],
-      "blockers": [
-        "Matrix fast_flow_sixth_style_hybrid currently asserts removed C.STYLES.filter(style=>style!=='Custom') marker; replace with positive actual all-six selector and guarded custom editor assertions alongside integrated PR142 code, retaining all other Fast-Flow assertions. Integrate overlapping PR136 without overwrites, rerun CI and browser acceptance. Backend DIC-Q-14-custom-target-backend remains TESTING until joined feature verified."
-      ],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; https://github.com/Schulzet3/The-Dial-In-Collective/issues/133#issuecomment-6424169578",
-      "notes": "Conductor-only TESTING intake; this does not bypass historical approval or imply production migration applied. Match PR142 actual added cache path."
     },
     {
       "id": "DIC-Q-33-single-selected-shopify-roast-tag",
@@ -585,6 +527,31 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33; https://github.com/Schulzet3/The-Dial-In-Collective/pull/139",
       "notes": "This independently bounded source-backed two-field extractor package is READY in development, NOT DEPLOYED; parent Issue #33 remains OPEN for 118 missing and 822 strict review. Original benchmark/oracle/scorer and private member data preserved. No production SQL/Edge/Auth/Netlify action."
+    },
+    {
+      "id": "DIC-Q-14-retired-custom-style",
+      "issue": 14,
+      "pr": null,
+      "title": "Retire Custom as selectable shot style; preserve offline and historical records",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/constants.js",
+        "site/lib/model.js",
+        "site/lib/engine.js",
+        "site/cloud/main.js",
+        "site/cloud/mapping.js"
+      ],
+      "tests": [
+        "Source-only five-style retirement unit tests, isolated SQL/HTTP application regression and real synthetic 390px mobile style selector to be verified on exact integrated SHA.",
+        "Read-only hosted Supabase aggregate: 0 Custom shots, 0 Custom workspace selections, 0 Custom personal recipe families, 0 Custom experiments; does not inspect disconnected device outboxes."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await exact-source Node, browser, SQL, approval and security CI, safe non-force merge and merged-source readback. No production publication authorized."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; direct owner 2026-10-26 Custom retirement instruction",
+      "notes": "Original Custom feature request intentionally superseded; UI PR142 closed unmerged. Custom backend PR138 source-only migration removed before publication; former queued feature entries preserved only as retired history. Leave older applied migrations, shot data, notes and offline outboxes intact."
     }
   ],
   "history": [
@@ -1269,6 +1236,68 @@
       "delivered_release_sha": "65ee38609db6bd5977dd0f2b393e7791a5e1b766",
       "delivered_netlify_deploy_id": "6adc20c03a07673c4dd08035",
       "delivered_at_utc": "2026-10-24T03:06:58.402Z"
+    },
+    {
+      "id": "DIC-Q-14-custom-target-backend",
+      "issue": 14,
+      "pr": 138,
+      "title": "Backend Custom style targets: safe per-coffee workspace persistence",
+      "state": "RETIRED_UNPUBLISHED",
+      "merged_source_sha": "aea8d62133575a56952619ca902500e96605d6f1",
+      "scope_paths": [
+        "supabase/migrations/20261026000000_dic_custom_targets_workspace.sql"
+      ],
+      "tests": [
+        "PR #138 merged source-only protected owner-scoped Custom-target SQL schema, revision/receipt idempotency and preexisting protected mutation route; file blob 1883f8d9c97921d26b37680868b613cfa0922edf unchanged.",
+        "Disposable PostgreSQL 17.11 Custom acceptance exercised valid/invalid target bounds, real owner-scope reload, two synthetic authenticated owners, deny cross-account/JWT mismatch, mutation replay/revision, old version denial, unchanged shots/favorites: SQL runs 40375560073 and 40375852495 SUCCESS.",
+        "Separate PostgREST synthetic HMAC-signed HTTP acceptance 65/65 PASS, run 40376427172; exact merged 29860303c65d57a9f2af71813a0cbbe55e3e4005 SQL/HTTP 40377137536, Node/build 40377137608, approval 40377173013, cloud/browser 40377137502 SUCCESS; UI not yet validated."
+      ],
+      "ci_runs": [
+        40375560073,
+        40375852495,
+        40376427172,
+        40377137536,
+        40377137608,
+        40377173013,
+        40377137502
+      ],
+      "blockers": [
+        "Dependent Custom frontend #142 and combined Log Shot regression acceptance are not integrated or verified; hold backend release readiness until UI handshake and exact integrated-source tests. New migration is NOT applied to production, and must not be executed without later owner publication approval."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14",
+      "notes": "Backend implementation merged in PR138 and exercised in PR140+PR141 SQL/65 signed HTTP assertions; source checks PASS. Coordinator retains TESTING for joined Custom UI feature readiness, not because earlier SQL coverage is absent. No production SQL, Edge, Auth, member data or Netlify change.",
+      "retired_at_utc": "2026-10-26T00:00:00Z",
+      "retirement_reason": "Owner superseded Custom UI/persistence. Never-hosted Custom-target source migration removed. Historical merged commits and exact synthetic tests remain in GitHub as audit evidence; no Custom SQL was applied to production."
+    },
+    {
+      "id": "DIC-Q-14-custom-target-frontend",
+      "issue": 14,
+      "pr": 142,
+      "title": "Approved Custom style picker, editor, durable target hydration and offline cache",
+      "state": "RETIRED_UNPUBLISHED",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/mapping.js",
+        "site/cloud/outbox.js",
+        "site/cloud/cache.js",
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "PR142 head aeb30f1c1a982087c58b47cfd88c017af9ab2bd6 implements 6 styles, explicit Custom bounds 0.8–4.5 ratio/5–60 seconds/optional temperature, protected owner/revision-bound save_custom_targets, server reload, precise temperature and offline cache; focused Node and synthetic 390px Chromium evidence is scoped to its head.",
+        "Exact head SQL 40378041053 and source security 40378041058 SUCCESS; app 40378041264, visual 40378041045 and approval 40378041069 failed stale historical Fast-Flow assertion that requires hidden Custom (not code evidence of a new locked exclusion). Approval matrix must be positively updated only with combined code and tested."
+      ],
+      "ci_runs": [
+        40378041053,
+        40378041058
+      ],
+      "blockers": [
+        "Matrix fast_flow_sixth_style_hybrid currently asserts removed C.STYLES.filter(style=>style!=='Custom') marker; replace with positive actual all-six selector and guarded custom editor assertions alongside integrated PR142 code, retaining all other Fast-Flow assertions. Integrate overlapping PR136 without overwrites, rerun CI and browser acceptance. Backend DIC-Q-14-custom-target-backend remains TESTING until joined feature verified."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/14; https://github.com/Schulzet3/The-Dial-In-Collective/issues/133#issuecomment-6424169578",
+      "notes": "Conductor-only TESTING intake; this does not bypass historical approval or imply production migration applied. Match PR142 actual added cache path.",
+      "retired_at_utc": "2026-10-26T00:00:00Z",
+      "retirement_reason": "Owner superseded Custom UI/persistence. Never-hosted Custom-target source migration removed. Historical merged commits and exact synthetic tests remain in GitHub as audit evidence; no Custom SQL was applied to production."
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
