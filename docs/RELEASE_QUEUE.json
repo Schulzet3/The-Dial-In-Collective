@@ -8,6 +8,39 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-literal-tasting-and-origin",
+      "issue": 33,
+      "pr": 126,
+      "title": "Recover explicit coffee tasting-note profiles and literal country-first locality",
+      "state": "READY",
+      "merged_source_sha": "318ae408a27f0fc49b0dced9b19d992dca1fe0c3",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-fact-compatibility.mjs"
+      ],
+      "tests": [
+        "Original immutable 603 coffees / 201 roasters / 4002 canonical assertions replayed through actual current handler at exact Git blob 5ef41d6b049fa2ef0037275166606d57ac05f84a. 603 usable; 3053 exact /127 missing /822 strict-review vs prior 3047 /132 /823. Exactly 8 changed canonical cases: 3 missing->exact tasting notes, 2 missing->review tasting notes, 3 reviewed->exact literal origin order. Zero previous exact losses.",
+        "Unchanged original 6474 supplementary assertions checked independently: 5458 all retained /337 partial /679 unconfirmed; all 603 per-case check records identical to previous PR124. Captured original source archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52, original oracle freeze 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb.",
+        "Original actual handler final replay SHA256 17ca11452d387f9ce3cc18c683c49cb488dd913f551031e23beebe9271a1430a, original strict comparison SHA256 2922e4e41d8720877071b2373beba687c75b65700560a33168d7ff76e6f13aee, supplementary retention SHA256 52d51c0e3527ea4980260e27dbc7d60efa76f3a8cf69d3c49c2a9e790b656e28.",
+        "24+ local focused acceptance tests passed for new source and independent origins; broader 64 local cases passed. Exact PR126 head CI all applicable checks PASS: Node/lint/build 40269936484, approval 40269936530, cloud/browser/mobile 40269936473, SQL 40269936648 (first Docker 502 infrastructure failure retried and passed), visual 40269936496, source security 40269936479. Existing HTML stress timeout 8s failed against both previous and new sources in current runner; retaining unchanged hostile input with measured finite 18s limit passes local four test cases.",
+        "PR126 merged non-force 318ae408a27f0fc49b0dced9b19d992dca1fe0c3 with explicit [skip netlify] title and identical reviewed PR head tree eec6df51bba184b60ddf41c41485896579b337a7. Exact merged-source GitHub app/build 40270180166, approval 40270180177, cloud/browser/mobile 40270180146 all SUCCESS. Hosted private frozen603, live public probes were SKIPPED; separately independent original-source complete replay and historical live public acceptance are distinguished."
+      ],
+      "ci_runs": [
+        40269936484,
+        40269936530,
+        40269936473,
+        40269936648,
+        40269936496,
+        40269936479,
+        40270180166,
+        40270180177,
+        40270180146
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Source READY NOT DEPLOYED; does not claim full Issue33 completion. No frozen oracle/scorer changes, no new paid services, no production SQL/Edge/Auth/member data, no publication."
+    },
+    {
       "id": "DIC-Q-33-selected-spec-geography",
       "issue": 33,
       "pr": 124,
@@ -43,24 +76,22 @@
       "id": "DIC-Q-33-residual-source-accuracy",
       "issue": 33,
       "pr": null,
-      "title": "Source-backed review of remaining 132 missing and 823 strict-review coffee assertions",
+      "title": "Remaining 127 missing and 822 strict-review coffee canonical assertions",
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs",
-        "src/server/coffee-fact-compatibility.mjs"
-      ],
+      "scope_paths": [],
       "tests": [
         "Original frozen603 comparison loaded locally; five presentation-equivalence tests passed. No new extractor runtime or updated frozen corpus run is claimed.",
         "PR #124 merged f5157b738092805caac0af3db15553829ff77e42 with original603 independent local acceptance (3047 exact / 132 missing / 823 review), strictly one improved source-backed Queen City origin and no other changed case or supplementary retention loss; does not settle remaining residual issues.",
-        "Local focused suites: 64/64 pass after fixing overly broad one-word Flavor Notes suppression; original immutable603 combined preview 3053 exact/127 missing/822 strict review, 5458 full supplemental and no prior loss; exact final-source CI and frozen replay pending."
+        "Local focused suites: 64/64 pass after fixing overly broad one-word Flavor Notes suppression; original immutable603 combined preview 3053 exact/127 missing/822 strict review, 5458 full supplemental and no prior loss; exact final-source CI and frozen replay pending.",
+        "PR126 source merged 318ae408a27f0fc49b0dced9b19d992dca1fe0c3 with original frozen 603 read-only replay: 3053 exact/127 blank/822 strict review, eight changed cases only, zero prior exact loss, 603 supplement retention rows unchanged. Narrow completed source package split into READY row DIC-Q-33-literal-tasting-and-origin."
       ],
       "ci_runs": [],
       "blockers": [
-        "Final proposed source replay and exact-source CI not yet accepted; 127 remaining missing and 822 review-required canonical assertions require further individual source adjudication. No basis to declare full Issue33 closed."
+        "Remaining 127 blank and 822 strict-review canonical fields require original source adjudication; 299 historical provisional presentation-equivalence cases are not source score passes. Real conflicting pages and intentionally unsupported fixed-category values must remain reviewable/blank instead of invented. Parent Issue33 remains OPEN."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Active follow-on in TESTING/IN_PROGRESS; do not classify as READY until full original603, invariant supplemental retention, exact-source CI, non-force merge and readback. Previously separate 603 Candidate12 and Queen City geography READY packages unchanged."
+      "notes": "Parent accuracy objective remains IN_PROGRESS, no scope paths until additional live-source-fix source added. Completed safe source improvements tracked separately in READY rows. Original source expectations and captures immutable. No publication authorized."
     },
     {
       "id": "DIC-Q-5-pending-retry-http-conflict",
