@@ -361,7 +361,6 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
  const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s),p=ensureCoffeeState(s,coffeeId);
  if(!c||!v)throw new Error('Coffee or setup not found.');
- const rec=recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode,ignoreAdvice:true});
  const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,bagId:c.activeBagId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';

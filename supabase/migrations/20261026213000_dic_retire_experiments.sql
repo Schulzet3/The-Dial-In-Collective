@@ -62,9 +62,9 @@ begin
   end if;
  end if;
  if exists (
-  select 1 from jsonb_array_elements(d->'shots') x
-  where (x ? 'experimentId' and x->'experimentId' <> 'null'::jsonb)
-     or (x ? 'experiment_id' and x->'experiment_id' <> 'null'::jsonb)
+  select 1 from jsonb_array_elements(d->'shots') as shot_data(value)
+  where (shot_data.value ? 'experimentId' and shot_data.value->'experimentId' <> 'null'::jsonb)
+     or (shot_data.value ? 'experiment_id' and shot_data.value->'experiment_id' <> 'null'::jsonb)
  ) then
   raise exception using errcode='22023',message='Retired Experiment shot links require archival recovery. Keep the original backup; nothing was imported.';
  end if;$new$;
