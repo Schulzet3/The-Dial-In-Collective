@@ -409,6 +409,19 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
    const countryFirst=compact.match(new RegExp('^('+COUNTRIES+')\\s+[-–—]\\s+([\\p{L}\\p{M} .,’’\'()-]{2,120})$','iu'));
    if(countryFirst&&!( /^h[1-6]$/.test(block.tag)&&key(compact)===key(name))&&
       !/\b(?:coffee|roast|process|blend|washed|natural|honey|anaerobic|decaf|finca|hacienda|farm|estate)\b/i.test(countryFirst[2]))originCandidates.push({value:countryFirst[2]+', '+countryFirst[1],quote:compact});
+   // A complete three-part current-product place tuple may precede the
+   // processing/cultivar/altitude specs on one compact product line.
+   // Require explicit country, process, cultivar and measured altitude;
+   // never guess geographic roles from an unrelated label or a title slug.
+   const specOrigin=compact.match(/^(.{5,180}?)\s+(?:Fully\s+)?(?:Washed|Natural|Honey|Anaerobic)\s+[\p{Lu}][\p{L}\p{M}\d'’ -]{1,75}\s*\/\/\s*\d{3,4}\s*(?:[-–—]\s*\d{3,4})?\s*(?:masl|m)$/iu);
+   if(specOrigin){
+    const components=specOrigin[1].split(/\s*,\s*/);
+    if(components.length===3&&components.slice(0,2).every(part=>
+       /^[\p{Lu}][\p{L}\p{M}'’ .-]{1,90}$/u.test(part))&&
+       COUNTRY_ONLY.test(components[2])&&
+       (!titleCountries.length||titleCountries.length===1&&key(titleCountries[0])===key(components[2])))
+      originCandidates.push({value:components.join(', '),quote:compact});
+   }
    const exact=compactProcess.exec(compact);
    if(exact)processes.push({value:processValue(exact[1]),quote:compact});
    // A grade shorthand is useful only when the exact current product name
