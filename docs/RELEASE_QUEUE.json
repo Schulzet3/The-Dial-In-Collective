@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-flavor-profile-priority",
+      "issue": 33,
+      "pr": null,
+      "title": "Prefer selected-coffee explicit Tasting Notes over coarser storefront Flavor Notes tags",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Actual selected-product saved-original local targeted replay recovered exact explicit tasting notes on three Talking Crow coffees while keeping broad flavor categories in source facts.",
+        "Three local pure helper regression tests passed; full original603 strict replay and independent retention still pending. Earlier exploratory local replay accidentally included an unmerged origin order formatter; that formatter was removed and the exact current GitHub metadata file reconstructed before starting the final full-corpus run."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Actual authoritative exact-source full original603 replay, unaffected-case diff, independent retention and exact GitHub CI/merge are not yet completed."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Owner-authorized accuracy follow-on. Only commit source-backed selected-coffee generic category hierarchy; no original corpus/oracle/scorer rewrite, no invented flavor data. This item is not READY and cannot publish. Previous Candidate12 and compact-geography READY items remain unchanged."
+    },
+    {
       "id": "DIC-Q-33-selected-spec-geography",
       "issue": 33,
       "pr": 124,

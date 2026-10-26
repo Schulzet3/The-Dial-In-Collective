@@ -341,6 +341,15 @@ function labeledFarmLocation(rawKey,value){
  }
  return {farm,origin};
 }
+// Prefer an explicit detailed selected-product tasting list over a short,
+// unseparated storefront flavor taxonomy. The taxonomy remains in source facts.
+// A separately itemized conflicting flavor list is *never* suppressed.
+export function isCoarseCoffeeFlavorTaxonomy(label,value,detailed){
+ const text=String(value||'').trim();
+ return keyOf(label)==='flavornotes'&&!/[,;|]/.test(text)&&text.length<=80&&
+  text.split(/\s+/).length>=2&&text.split(/\s+/).length<=6&&
+  typeof detailed==='string'&&detailed.split(/\s*,\s*/).length>=3;
+}
 function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
  // Layout extractors may pass either a visible roaster label or an
  // already-resolved internal field key such as release_label. Never drop a
@@ -379,6 +388,14 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
  // this selected product; the complete published value remains in facts.
  if(key==='origin'&&s)s=cleanCoffeeGeographyEntityPrefix(s,geographyRolesByFields.get(fields)||[]);
  if(key==='tasting_notes'&&s&&fields[key]){
+  // A compact unseparated "Flavor Notes" metadata taxonomy is a coarser
+  // storefront grouping, not a competing literal tasting list. Prefer the
+  // existing multi-note explicit profile and keep the taxonomy in source
+  // facts; a separately comma-delimited contrary list still conflicts.
+  if(isCoarseCoffeeFlavorTaxonomy(rawKey,s,fields[key]))return;
+  // A shorter generic "Tastes like" list may omit a flavor in an explicit
+  // longer selected-product profile without contradicting any printed note.
+  if(keyOf(rawKey)==='tasteslike'&&coffeeTastingNotesSubset(s,fields[key]))return;
   const prose=value=>!normalizeExplicitCoffeeTastingNotes(value)||/^(?:a|an)\b.*\b(?:cup|coffee|notes?|aroma|flavou?r|body|finish)\b/i.test(value);
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
