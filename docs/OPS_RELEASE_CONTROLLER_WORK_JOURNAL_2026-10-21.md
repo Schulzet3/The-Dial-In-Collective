@@ -37,3 +37,7 @@ Historical operations journal: [exact archive](archive/2026-10-23-operations/OPS
 
 ## October 26 UTC — weekly offline job setup correction (#134)
 Sunday scheduled run 40194860522 at immutable development source: Node/build and database passed; mobile owner and Admin browser passed; PWA offline assertion failed because the isolated mobile-offline job never generated dist/sw.js. Added Node 22 setup, npm ci and build:cloud with synthetic nonsecret configuration before the real PWA browser test. This is test infrastructure only, no app behavior or production deployment. PR exact-source CI and a fresh corrected weekly run remain to be verified; do not claim success prematurely. No changes to backup scheduling, 08:00 UTC Sunday cron, release branch, Supabase or member data.
+
+## 2026-10-27T19:01:58.873Z — Approved combined release #07: pre-destructive encrypted snapshot
+- Owner explicitly authorized one publication of every READY queue item on October 27, 2026. This is not authorization for the IN_PROGRESS extractor parent.
+- Request DIC-20261027-READY-QUEUE-07-BACKUP-01 triggers encrypted GitHub backup prior to any potentially destructive SQL; require a verified, recoverable offsite receipt and live database preconditions. No deployed application, member data or credentials modified by this snapshot request.
