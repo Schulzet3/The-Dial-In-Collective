@@ -229,6 +229,14 @@ export function mergePublicProductPreview(base,extra){
  if(base.fields?.roaster&&extra.fields?.roaster)
   fields.roaster=preferredCoffeeRoasterName(base.fields.roaster,extra.fields.roaster);
  const conflicts=new Set([...(base.conflicts||[]),...(extra.conflicts||[])]);
+ // Exact selected-coffee measured ground Agtron with a stated scale outranks
+ // descriptive roast wording. Uncalibrated/unknown readings do not.
+ const measured=preview=>preview?.roast_source==='agtron_ground_measurement'&&
+  typeof preview.fields?.roast_level==='string'&&
+  typeof preview.roaster_details?.agtron==='string'&&
+  !preview.conflicts?.includes('roast_level');
+ const measuredBase=measured(base),measuredExtra=measured(extra);
+ const measuredWinner=measuredBase&&!measuredExtra?base:measuredExtra&&!measuredBase?extra:null;
  const compatibleProcess=reconcileCoffeeProcessingClaims([base,extra]);
  if(compatibleProcess){fields.process=compatibleProcess;conflicts.delete('process');}
  let producerSource=base.fields?.producer?base.producer_source:extra.producer_source;
@@ -246,6 +254,11 @@ export function mergePublicProductPreview(base,extra){
   extra.fields?.process==='Other/Unknown'?extra:null;
  for(const key of ['origin','roast_level','process','variety','producer','release_label','elevation_m']){
   if(key==='process'&&compatibleProcess)continue;
+  if(key==='roast_level'&&measuredWinner){
+   fields.roast_level=measuredWinner.fields.roast_level;
+   conflicts.delete('roast_level');
+   continue;
+  }
   const equivalent=key==='variety'?equivalentCoffeeVarieties(base.fields?.[key],extra.fields?.[key]):
    key==='elevation_m'?equivalentCoffeeElevations(nativeElevation(base),nativeElevation(extra)):norm(base.fields?.[key])===norm(extra.fields?.[key]);
   if(base.fields?.[key]&&extra.fields?.[key]&&equivalent){
@@ -365,6 +378,11 @@ export function mergePublicProductPreview(base,extra){
    if(typeof extra[key]==='string'&&extra[key].trim())merged[key]=extra[key];
    else delete merged[key];
   }
+ }
+ if(measuredWinner&&fields.roast_level&&!conflicts.has('roast_level')){
+  merged.roast_source='agtron_ground_measurement';
+  merged.roast_hint=measuredWinner.roast_hint||
+   'The selected product has an explicitly scaled ground-coffee Agtron measurement.';
  }
  return merged;
 }

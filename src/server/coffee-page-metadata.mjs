@@ -10,6 +10,8 @@ import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extrac
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
+import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
+import {selectedCoffeeHeroFacts,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
@@ -984,6 +986,10 @@ function shopifyProduct(html,target){
 }
 export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(typeof html!=='string'||html.length>2_000_000||!source_url)return {ok:false,reason:'invalid_source'};
+ // A selected, exact-route Next.js Product is not an HTML heading: read only
+ // its bounded public conversion state, never nearby recommendations.
+ const nextProduct=extractSelectedNextCoffeeProduct(html,{source_url});
+ if(nextProduct)return nextProduct;
  let scopeTruncated=false;
  const meta=pageMeta(html),product=productMarkup(html,{onTruncated:()=>{scopeTruncated=true;}});
  const explicitHeading=productHeading(product,{explicitOnly:true});
@@ -1267,21 +1273,29 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roast_evidence.value=null;
   }else if(!fields.roast_level)fields.roast_level=roast_evidence.value;
  }
- // Agtron's manufacturer reference uses GROUND coffee and has two scales.
- // Show exact score and a reviewable seven-tier suggestion; an unspecified
- // scale/sample is provisional. Explicit labels and source conflicts win.
+ // A genuine, product-bound GROUND Agtron reading with a declared scale
+ // is a measured roast standard, stronger than descriptive roast wording.
+ // Unknown scale/sample stays provisional and cannot veto a roaster label.
+ // Whole-bean or unsupported scores have no calibrated seven-tier mapping.
  const agtron=interpretAgtron(roaster_details.agtron||'',{
   scale:roaster_details.agtron_scale||'',sample:roaster_details.agtron_sample||''
  });
  if(agtron?.roast){
-  const explicit=fields.roast_level||'';
-  if(!explicit&&!conflicts.has('roast_level')){
+  const prior=fields.roast_level||'';
+  if(!agtron.provisional&&!conflicts.has('roast_level')){
+   fields.roast_level=agtron.roast;
+   roast_evidence.value=agtron.roast;
+   roast_evidence.source='agtron_ground_measurement';
+   roast_evidence.hint=agtronExplanation(agtron)+
+    (prior&&prior!==agtron.roast?
+     ' The explicitly measured Agtron roast takes priority over the product wording "'+prior+'". The published description remains in its original source evidence.':'');
+  }else if(!prior&&!conflicts.has('roast_level')){
    fields.roast_level=agtron.roast;
    roast_evidence.value=agtron.roast;
    roast_evidence.hint=agtronExplanation(agtron);
-   roast_evidence.source=agtron.provisional?'agtron_provisional_review':'agtron_ground_anchor';
-  }else if(explicit&&explicit!==agtron.roast){
-   roast_evidence.hint=agtronExplanation(agtron,explicit);
+   roast_evidence.source='agtron_provisional_review';
+  }else if(prior&&prior!==agtron.roast){
+   roast_evidence.hint=agtronExplanation(agtron,prior);
   }
  }
  // A literal combined treatment can reconcile its own washing/drying
@@ -1379,6 +1393,29 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // in source_facts instead of inventing a new preferred entry.
    conflicts.add('tasting_notes');delete fields.tasting_notes;
   }
+ }
+ // The exact selected product's country-qualified hero, adjacent to its
+ // title, outranks a municipality guessed from the coffee's name. A three-
+ // part adjacent flavor profile outranks generic tasting-note education and
+ // unlabelled narrative, but not another incompatible direct labeled list.
+ const hero=selectedCoffeeHeroFacts(canonicalProduct,{name:fields.name});
+ if(hero?.origin&&!conflicts.has('origin')){
+  const previous=fields.origin||'';
+  if(!previous||keyOf(previous)===keyOf(fields.name)){
+   fields.origin=hero.origin;
+   if(source_facts.length<384)source_facts.push({field:'origin',
+    label:'Selected current coffee origin',value:hero.origin,source_url,
+    source_type:'html',section:'Selected product title banner'});
+  }
+ }
+ if(hero?.tasting_notes&&!hasIncompatibleCurrentTastingList(canonicalProduct,hero.tasting_notes)){
+  // A conflicting marketing paragraph does not outweigh the visible,
+  // explicitly paired product hero. Do not erase any original source fact.
+  fields.tasting_notes=hero.tasting_notes;
+  conflicts.delete('tasting_notes');
+  if(source_facts.length<384)source_facts.push({field:'tasting_notes',
+   label:'Selected current coffee flavor profile',value:hero.raw_notes,
+   source_url,source_type:'html',section:'Selected product title banner'});
  }
  // Section roles are source-verified only after the complete selected
  // product evidence set is assembled; do not suppress genuine conflicts from
