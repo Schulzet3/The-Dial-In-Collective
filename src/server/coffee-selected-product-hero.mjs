@@ -6,7 +6,7 @@ const decode=value=>String(value||'').replace(/&amp;/gi,'&').replace(/&nbsp;/gi,
  .replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
 const norm=value=>decode(value).normalize('NFKC').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const countries='Papua New Guinea|Costa Rica|El Salvador|Guatemala|Brazil|Mexico|Peru|Ethiopia|Kenya|Colombia|Honduras|Nicaragua|Rwanda|Uganda|Indonesia|Panama|Ecuador|Burundi|Tanzania|Yemen|India|Thailand|Vietnam';
-const validOrigin=value=>new RegExp('(?:,|\\\\s)('+countries+')$','i').test(value);
+const validOrigin=value=>countries.split('|').some(country=>value.toLowerCase().endsWith(', '+country.toLowerCase()));
 const notesFromHero=value=>{
  const parts=decode(value).split(/\s*\|\s*/).map(x=>x.trim()).filter(Boolean);
  if(parts.length<3||parts.length>6||parts.some(x=>x.length<2||x.length>50||/\d{2,}/.test(x)))return '';

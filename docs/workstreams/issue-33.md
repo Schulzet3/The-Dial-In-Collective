@@ -1217,3 +1217,8 @@ Source CI 40567829054 on PR174 head 92781b395ffe714e2e8f72a88354bddd1926976c fai
 ## October 27 UTC — PR174 second regression root cause repaired (TESTING)
 
 GitHub cloud run 40568566964 had 5 failed tests, all original compatible Anaerobic processing subtype integrations. The new Shopify endpoint adapter cloned result.fields; the existing source processing reconciler stores claim evidence in a WeakMap by EXACT fields-object identity, so the clone made literal claim reconciliation incomplete. Retain result.fields itself (an ephemeral, per-preview object with no member persistence) and preserve attached source claim ledger while applying safe new current-source classifications. No test or conflict gate weakened. Previous source/probe/dated-story fixes preserved. CI must rerun on repaired exact source; original private603 remained SKIPPED by restricted workflow. No production publish or database change.
+
+
+## October 27 UTC — PR176 exact-head selected-origin unit failure fixed (TESTING)
+
+Feature-head 4217afe04926890f911c6b5f56adcce2913094fe cloud test run 40573907228 failed only the new Counter Culture country-banner test. Root cause: the helper's programmatically built country regex contained an over-escaped whitespace pattern, so it refused the valid literal `San Marcos, Guatemala`. Replaced it with a bounded explicit comma-and-country suffix comparison against the known country list, with no generic fallback/guessed geography. The exact test remains unchanged and must pass on the new source. No other test/validator weakened. First-run approval and security PASS; original603 restricted hosted job SKIPPED (not a pass). Other CI run outcomes are preserved independently. No publication.
