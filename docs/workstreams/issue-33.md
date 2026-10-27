@@ -1,3 +1,13 @@
+## October 27 UTC — Issue33 #1, 90 missing assertion source recovery (IN_PROGRESS; NOT DEPLOYED)
+
+**Authority:** Owner explicitly instructed proceeding with step 1: investigate/recover missing original 603-coffee assertions, implement source-backed fixes, test and integrate without publishing. Live development at start `7916aadfe5e8c3f93b43abd3d0094932ab30b889`; issue33 OPEN, no open PRs. No new product decision or SQL/Auth/Edge/member data action.
+
+**Immutable provenance recovered:** User Library original `coffee-extractor-source-evidence.tar.gz` 113,755,359 bytes SHA256 `696c011e97e94eb2a9ec1b12c66efdf999751279bb0f381cce52`, matched immutable archive; recovery ZIP 88,577,532 bytes SHA256 `728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce`. Frozen 603 coffees, 201 roasters, 1,197 captured pages, 4,002 canonical oracle intact. PR162 source-backed independent 3,090 exact / 90 missing / 822 review is latest full reported comparison, not a fresh replay against current PR176/177 source. Candidate12 132-missing older receipt must NOT be confused with the newer 90.
+
+**Current audit work:** Prepare a temporary private branch-only GitHub Actions source snapshot for accurate local cross-checking with original archival captures. Archives contain code only, exclude env/secrets/accounts/production data, remain private 1 day; workflow to be removed before development PR integration. No production writes or CI results claimed yet. Source capture/missing assertion audit follows. Preserve every other workstream and READY item.
+
+---
+
 ## October 27 UTC — PR177 queue validator correction, audit-only work stays tracked
 
 **Failure repaired:** Documentation follow-up `94e87e8f08f4fbad5443845a13b8a1dec2d5f308` failed release queue intake in workflow 40581510754 because an audit-only fixture/privacy change has no exact deployable application scope paths. This is a release queue classification mistake, **not** a failing app test. Removed new `DIC-Q-33-public-source-fixture-privacy` item rather than inventing deployment paths or changing the validator. The completed, non-force merged audit-only improvements remain tracked under parent Issue33 IN_PROGRESS, with no standalone READY claim. Previous independently READY `DIC-Q-33-current-source-and-four-roasters` remains untouched. The original Counter Culture source-fact parity issue is OPEN. PR177 code/Node/SQL/Python/cloud/visual checks succeeded; merged source Node/cloud/Python/approval succeeded. Release #07 still published, no new production operations.

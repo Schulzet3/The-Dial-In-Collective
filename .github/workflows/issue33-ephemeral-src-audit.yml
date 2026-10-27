@@ -1,0 +1,28 @@
+name: DIC Issue33 temporary private source snapshot
+# Private, opt-in scoped audit support. This branch-only workflow never deploys.
+on:
+  push:
+    branches: [work/issue33-missing-original603-20261027]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Archive only tracked application and audit source (no secrets, env, user data)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/dic-issue33-src"
+          git archive --format=tar -o "$RUNNER_TEMP/dic-issue33-src/source.tar" HEAD             src scripts/audit netlify/functions supabase/functions/_shared             site/cloud/coffee-url-autofill.js tests package.json package-lock.json             docs/audits/extractor-reviewed-changes-candidate12.json
+          sha256sum "$RUNNER_TEMP/dic-issue33-src/source.tar" > "$RUNNER_TEMP/dic-issue33-src/source.sha256"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dic-issue33-private-source-${{ github.sha }}
+          path: ${{ runner.temp }}/dic-issue33-src/
+          retention-days: 1
+          if-no-files-found: error
