@@ -1,5 +1,15 @@
 # The Dial In Collective — Master Specification
 
+## Owner-Locked retirement of basket and equipment version management — October 26, 2026
+
+**UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026 (Locked).** The owner directed: "I don't want to include basket or equipment versions. Let's remove this and close issue #16." Cancel Issue #16's proposed **member-facing** basket creation, selection, correction, archive/reactivation and equipment-version history, restoration and calibration-management screens. Do not introduce hidden advanced versions, mandatory basket steps, or an active basket lifecycle. The existing cloud application already has no such management controls.
+
+**Preserved simple product:** New Setup retains one Basket Dose, Grinder Espresso Range and optional equipment text. Keep additional setups, setup switching and renaming, optional temperature and Slow Feed, and Log Shot → Rate → Recommendation. Actual Dose remains distinct from Basket Dose. The strictly more-than-2 g basket-dose advisory stays dismissible, nonblocking and limited to NEW shots (never repeat on edit). Keep the 5–40 g ordinary numeric bound and mandatory unusual-shot measurement confirmation. Independent Issue #17 grinder-scale research is not superseded.
+
+**Mandatory historical compatibility:** The database's internal immutable setup-version, basket-version and grinder-calibration IDs, original shot equipment snapshots, owner-scoped foreign keys, prior personal/Community evidence, private notes, old backups, offline outboxes, idempotent mutation receipts and RLS MUST remain intact. These are invisible provenance mechanisms, not product version-management features. For genuinely different hardware, an additional Setup is already supported without changing older shots. Do not drop, migrate, rewrite, rebind or delete historical member data or original applied SQL. Internal archival/model helpers can remain for old snapshots/tests; they do not authorize a new management UI.
+
+**Precise supersession:** This later Locked owner instruction replaces §13's active basket and hardware-version management expansion and Issue #16's original acceptance criteria. It does not remove internal shot provenance or distinct history, the ±2 g advisory, independent numeric/outlier guards, existing Setup workflow, private records, offline data, permissions or separate publication approval. No production DDL, member-data changes, Netlify publication, or spending are authorized by this development instruction.
+
 ## Owner-Locked retirement of Bag Management — October 26, 2026
 
 **UX-RETIRE-BAG-MANAGEMENT-20261026 (Locked):** At the owner's explicit direction, **retire Bag Management entirely as an active product feature**. Do not implement or display Roast Date, Frozen status, Bag Details, New Bag, bag archive/reactivation, bag-age reminders, dose-by-dose thaw tracking, or any required bag-specific question in Add Coffee or Log Shot. Name the product field **Coffee Name**, not “Name / Bag Label.” Members continue logging new and different coffee shots against the normal coffee/library entry, with one visible recommended/preferred recipe, exact measurements, five taste ratings, historical Shot History, successful internal recipe-family learning and existing coffee source/release identity. A later purchase of the same release does not require creating a new bag; an actually different harvest/release still follows the existing coffee identity/verification workflow.
@@ -833,6 +843,8 @@ Every shot must permanently record the setup used.
 Every shot should also preserve an immutable equipment snapshot/version as it existed at shot time.
 
 Editing a setup later affects future shots only; it must not rewrite historical shot context.
+
+**Current scope:** Immutable equipment/basket version references are internal historical provenance only, not a member-facing management feature. See the October 26 Locked retirement above.
 
 ## 13.5 Grind-range concept
 
