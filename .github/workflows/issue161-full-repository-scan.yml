@@ -12,6 +12,11 @@ on:
       - docs/workstreams/issue-161.md
   pull_request:
     branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue161-full-repository-scan.yml
+      - scripts/audit/issue161-full-source-review.mjs
+      - tests/issue161-full-source-review.test.mjs
+      - docs/workstreams/issue-161.md
   workflow_dispatch:
 permissions:
   contents: read

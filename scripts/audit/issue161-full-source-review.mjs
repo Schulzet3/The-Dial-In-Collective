@@ -29,7 +29,6 @@ export function classify(path,bytes){
  try{return {text:true,encoding:'utf8',value:new TextDecoder('utf-8',{fatal:true}).decode(bytes)};}
  catch{return {text:false,encoding:'non_utf8_binary'};}
 }
-const sha=x=>sha256(Buffer.from(x,'utf8'));
 export function runAudit({paths,read=(path)=>readFileSync(path),stat=(path)=>lstatSync(path),sourceSha,treeSha}){
  const files=[],findings=[],counts={};
  let textLines=0,textFiles=0,binaryFiles=0,totalBytes=0,invalidJSON=0;
