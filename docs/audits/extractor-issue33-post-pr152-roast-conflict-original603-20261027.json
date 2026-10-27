@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "scope": "Issue33 selected Shopify full-tag roast conflict correction; source-only, no publication",
+  "based_on_development_sha": "fb972684cef36bba410e4df9babc381fa9eb963c",
+  "latest_concurrent_development_sha": "dbe389e3a0255907d328edcb654f77282cc5ba4f",
+  "feature_tested_source_sha": "97d2009ae5e8269539b12401815525b68862ffc3",
+  "parser_baseline_git_blob": "53875bcb5b436bed7a74f09947bccb1f2e1cdd23",
+  "parser_candidate_git_blob": "bb68e3f29270cd96ccba0455399afc81a11336f0",
+  "focused_regression_git_blob": "3fba01bfe1d008f7d2927f5db6f49deb6b7adc50",
+  "frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "source_captures": 1197,
+    "canonical": 4002,
+    "supplementary": 6474,
+    "recovery_archive_sha256": "728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce",
+    "original_sources_sha256": "696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52",
+    "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+    "packet_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556",
+    "all_original_bytes_unchanged": true
+  },
+  "replayed_baseline": {
+    "parser_git_blob": "53875bcb5b436bed7a74f09947bccb1f2e1cdd23",
+    "complete603_sha256": "34e1d9821cee697836a45a717053b7c4659298f338b32ca4afa2897ce39f150e",
+    "strict_comparison_sha256": "47ba92c3237431be843b64202ace6e4604984b4ec18dd3db8cc742f4e1e78493",
+    "supplementary_retention_sha256": "e03381eca51bd7d2a31d21c168748a2667d1010f4539c680b83fefa66e2d0872",
+    "results": {
+      "successful": 603,
+      "exact": 3069,
+      "missing": 111,
+      "review": 822,
+      "withheld_conflicts": 64,
+      "unresolved_conflicts": 51,
+      "unexpected_canonical_facts": 20
+    }
+  },
+  "replayed_candidate": {
+    "parser_git_blob": "bb68e3f29270cd96ccba0455399afc81a11336f0",
+    "source_fingerprint_sha256": "b8fa0db88cb746ff37c8a5ad5ba6160f33773cea8895539079b330ff4c876428",
+    "complete603_sha256": "56adba457b16cc3737a6bea5bf44d95c51e9a052fe3fabe5136acf2eda1ebf60",
+    "strict_comparison_sha256": "d1b0f05b9b4bec6d4f5c9e91976c855606080f09274d33c7f237cb119cf56e7b",
+    "supplementary_retention_sha256": "9537518876e08c54db4fa83b1a4fa40c94f66cd579970f8c2f72a5350fadeba7",
+    "results": {
+      "successful": 603,
+      "exact": 3069,
+      "missing": 111,
+      "review": 822,
+      "withheld_conflicts": 65,
+      "unresolved_conflicts": 50,
+      "unexpected_canonical_facts": 20,
+      "supplementary_full": 5458,
+      "supplementary_partial": 337,
+      "supplementary_unconfirmed": 679,
+      "source_truncated_cases": 3
+    }
+  },
+  "differential": {
+    "zero_previous_exact_losses": true,
+    "zero_canonical_field_deltas": true,
+    "all_603_detailed_supplementary_retention_rows_identical": true,
+    "entire_handler_outputs_changed_for_two_cases": [
+      {
+        "case_id": "shop-justlovecoffee-com__uganda-aa-lifesong-61614efb",
+        "change": "Previously silently accepted Medium roast; now withholds it and flags explicit roast_level conflict. Other fields retained."
+      },
+      {
+        "case_id": "coppercanyoncoffee-com__guatemala-43415a16",
+        "change": "Previously conflicted roasted fact now receives explicit source_facts conflicting annotation/ordering; no field or conflict-status change."
+      }
+    ],
+    "other_601_complete_handler_outputs_unchanged": true
+  },
+  "tests": {
+    "local_scoped_node": {
+      "passed": 68,
+      "failed": 0
+    },
+    "full_node": {
+      "passed": 1635,
+      "failed": 0,
+      "skipped": 6
+    },
+    "existing_cloud_chromium_browser_pass": true,
+    "in_app_archived_browser": {
+      "passed": 19,
+      "mode_widths": [
+        "390 light",
+        "1280 dark"
+      ],
+      "coverage": "actual UI plus production cloud adapter and actual preview handler via an isolated test-only transport bridge; archived original product captures and synthetic membership/quota; successful URL autofill, conflict display, manual input preservation, source review safe download, explicit pending coffee save, first shot all-five sensory rating, updated visible recommendation, unavailable source, no JS exceptions/external network",
+      "report_sha256": "36e224380fc27844fef163b8a6d86cc781c56d2758b2f0a1cb50690affef6621",
+      "limitations": [
+        "not live Supabase Auth/member",
+        "not live Netlify",
+        "not native device",
+        "browser transport bridge instead of real HTTP request due sandbox loopback restriction"
+      ]
+    },
+    "github_exact_head": {
+      "sha": "97d2009ae5e8269539b12401815525b68862ffc3",
+      "successful_runs": [
+        40435663046,
+        40435656908,
+        40435656896,
+        40435656774,
+        40435657051,
+        40435657059
+      ],
+      "original_frozen_private_hosted_run": {
+        "id": 40435656892,
+        "conclusion": "skipped",
+        "replacement": "independent local original corpus unchanged 603 exact captured HTTP-handler replay"
+      }
+    }
+  },
+  "additional_opportunities": {
+    "historically_source_backed_not_integrated": "21 further original missing-to-exact gains in previous 3090 candidate: 12 selected release labels and 9 producer/roast/flavor facts. Its full source patch and per-case outputs were not recovered, so no claim of this improvement being merged.",
+    "residual": "111 canonical missing, 822 review-required, 50 unresolved source conflicts, 20 extra unscored facts; full review still needed."
+  },
+  "not_verified": [
+    "universal extraction accuracy",
+    "live roaster crawl",
+    "genuine signed-in user production verification",
+    "physical iOS/Android devices",
+    "real member data"
+  ],
+  "release": "NOT DEPLOYED; queue status cannot advance until safe nonforce merge and merged exact CI plus coordinator intake."
+}
