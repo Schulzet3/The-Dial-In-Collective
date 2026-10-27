@@ -22,6 +22,35 @@ export function shopifyProductRequest(raw){
  if(!safeCoffeeUrl(endpoint))return null;
  return {url:endpoint,handle,sourceUrl:url.toString()};
 }
+// Product-endpoint description is current and matched by exact Shopify handle.
+// Direct printed specs outrank cached SEO/story prose; incompatible current
+// claims remain withheld. Neither preview nor source selection saves a member.
+function ownerCurrentProductDetails(description){
+ const clean=String(description||'').replace(/<[^<>]{0,1000}>/g,' ').replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/\s+/g,' ').trim();
+ const specs={origin:[],roast_level:[],tasting_notes:[],process:[]};
+ const names={origin:'origin',country:'origin',roast:'roast_level',roastlevel:'roast_level',
+  tastingnotes:'tasting_notes',cuppingnotes:'tasting_notes',process:'process',
+  processing:'process',processingmethod:'process'};
+ const add=(key,value)=>{
+  const s=String(value||'').trim();
+  if(key&&s&&s.length<=220&&!specs[key].some(v=>norm(v)===norm(s))&&specs[key].length<8)specs[key].push(s);
+ };
+ for(const m of String(description||'').matchAll(/<(?:p|li|div|strong|b)\b[^<>]{0,350}>([^<>]{4,300})<\/(?:p|li|div|strong|b)>/gi)){
+  const row=m[1].replace(/&amp;/gi,'&').match(/^(Origin|Country|Roast(?: Level)?|Tasting Notes?|Cupping Notes?|Process(?:ing(?: Method)?)?)\s*[:|]\s*(.{2,220})$/i);
+  if(row)add(names[row[1].toLowerCase().replace(/[^a-z]/g,'')],row[2]);
+ }
+ const countries='Papua New Guinea|Costa Rica|El Salvador|Ethiopia|Colombia|Kenya|Brazil|Guatemala|Honduras|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand';
+ const location=clean.match(new RegExp('\\bcurrent\\s+(?:(?:organic|specialty|decaf(?:feinated)?)\\s+){0,3}coffee\\s+(?:location|origin|country)\\s*:\\s*('+countries+')\\b','i'));
+ const offering=clean.match(new RegExp('\\bcurrent\\s+(?:offering|coffee|lot|release)\\s+(?:is\\s+)?from\\s+('+countries+')\\b','i'));
+ const currentOriginConflict=location&&offering&&norm(location[1])!==norm(offering[1])?[location[1],offering[1]]:[];
+ const timed=/\b\d{1,3}[- ]hours?\s+(?:whole cherry\s+)?fermentation\b/i.test(clean)&&
+  /\b\d{1,3}[- ]hours?\s+secondary fermentation\b/i.test(clean);
+ const named=/\bextended\s+ferment(?:ation)?\s*\/\s*yeast\s+inoculation\b/i.test(clean);
+ const anaerobic=named&&(timed||specs.process.some(v=>/extended\s+ferment.*yeast\s+inoculation/i.test(v)))&&
+  !/\b(?:aerobic|open[- ]air|oxygenated|not anaerobic)\b/i.test(clean)&&
+  !specs.process.some(v=>/^(?:Washed|Natural|Honey|Other\/Unknown)$/i.test(v));
+ return {specs,currentOriginConflict,anaerobic};
+}
 export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffeeFacts}={}){
  if(!request||!data||Array.isArray(data)||typeof data!=='object'||
     typeof data.title!=='string'||!data.title.trim()||data.title.length>200||
@@ -49,7 +78,31 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  const endpointFacts=(originalFacts||[]).map(fact=>({...fact,source_type:'product_json',source_url:request.url}));
  const source_facts=mergeCoffeeSourceFacts(endpointFacts,
   collectStructuredCoffeeSourceFacts(data,{source_url:request.url,source_type:'product_json'}));
- return {...result,source_facts,...(result.source_facts_truncated||originalFacts?.truncated||source_facts.truncated?{source_facts_truncated:true}:{})};
+ const current=ownerCurrentProductDetails(description);
+ const fields={...result.fields},conflicts=new Set(result.conflicts||[]);
+ const conflict_options={...result.conflict_options};
+ const owner_current_spec_fields=[];
+ for(const key of ['origin','roast_level','tasting_notes']){
+  const values=current.specs[key];
+  if(values.length!==1)continue;
+  const value=values[0];
+  if(key==='roast_level'&&!/^(?:ultra[- ]light|very[- ]light|light|medium[- ]light|medium|medium[- ]dark|dark|very[- ]dark)$/i.test(value))continue;
+  fields[key]=value;conflicts.delete(key);owner_current_spec_fields.push(key);
+ }
+ if(current.anaerobic){
+  fields.process='Anaerobic';conflicts.delete('process');owner_current_spec_fields.push('process');
+ }
+ if(current.currentOriginConflict.length){
+  delete fields.origin;conflicts.add('origin');
+  delete conflict_options.origin;
+  conflict_options.origin=current.currentOriginConflict.map((value,i)=>({value,
+   label:i===0?'Current product location':'Current offering description'}));
+  const index=owner_current_spec_fields.indexOf('origin');if(index>=0)owner_current_spec_fields.splice(index,1);
+ }
+ return {...result,fields,available:Object.keys(fields),source_facts,
+  ...(conflicts.size?{conflicts:[...conflicts].sort(),conflict_options}:{conflicts:undefined,conflict_options:undefined}),
+  ...(owner_current_spec_fields.length?{owner_current_spec_fields}:{}),
+  ...(result.source_facts_truncated||originalFacts?.truncated||source_facts.truncated?{source_facts_truncated:true}:{})};
 }
 const recipeMasses=recipe=>[recipe?.dose_g,recipe?.dose_g_max??recipe?.dose_g,
  recipe?.yield_g??recipe?.yield_g_min,recipe?.yield_g??recipe?.yield_g_max];
@@ -185,6 +238,13 @@ export function mergePublicProductPreview(base,extra){
    if(elevation){fields.elevation_m=parseCoffeeElevation(elevation).display;elevationSource=elevation;continue;}
    retainAlternatives(key,key.replaceAll('_',' '),base.fields[key],extra.fields[key]);
    delete fields[key];conflicts.add(key);
+  }
+ }
+ // The exact current product endpoint's explicitly printed specification
+ // outranks non-current SEO and old narrative. A real endpoint conflict wins.
+ for(const key of extra.owner_current_spec_fields||[]){
+  if(extra.fields?.[key]&&!extra.conflicts?.includes(key)){
+   fields[key]=extra.fields[key];conflicts.delete(key);
   }
  }
  for(const key of conflicts)delete fields[key];
