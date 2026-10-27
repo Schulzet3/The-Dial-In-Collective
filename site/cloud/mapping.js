@@ -23,7 +23,7 @@ export function hydrate(raw){
  }
  for(const l of rows(raw,'library')){
   const canonical=rows(raw,'coffees').find(c=>c.id===l.coffee_id);const proposal=rows(raw,'submissions').find(p=>p.id===l.submission_id);const data=canonical||proposal?.proposed_data||{};
-  s.coffees.push({id:l.id,name:data.name||'Coffee under review',roaster:data.roaster||'',origin:data.origin||'',roastLevel:C.canonicalRoastLevel(data.roast_level||data.roastLevel)||'',elevationM:data.elevation_m||data.elevationM||'',process:data.process||'',variety:data.variety||'',producer:data.producer||'',tastingNotes:data.tasting_notes||data.tastingNotes||'',roasterUrl:proposal?.source_url||'',roasterRecipe:data.roaster_recipe||data.roasterRecipe||null,createdAt:l.created_at,hidden:!!l.hidden_at,status:canonical?'verified':'pending',bags:[],activeBagId:null});
+  s.coffees.push({id:l.id,name:data.name||'Coffee under review',roaster:data.roaster||'',origin:data.origin||'',roastLevel:C.canonicalRoastLevel(data.roast_level||data.roastLevel)||'',elevationM:data.elevation_m||data.elevationM||'',process:data.process||'',variety:data.variety||'',producer:data.producer||'',tastingNotes:data.tasting_notes||data.tastingNotes||'',roasterUrl:proposal?.source_url||'',roasterRecipe:data.roaster_recipe||data.roasterRecipe||null,createdAt:l.created_at,hidden:!!l.hidden_at,status:canonical?'verified':'pending'});
  }
  s.families=rows(raw,'families').map(f=>({id:f.id,coffeeId:f.library_entry_id,style:f.style,seedRatio:number(f.statistics?.ratio?.center),createdAt:f.created_at}));
  for(const sh of rows(raw,'shots')){
@@ -47,7 +47,7 @@ export function applyPending(state,events){
  for(const event of events){if(event.status!=='pending')continue;const p=event.payload;
   if(event.action==='save_shot'&&!s.shots.some(sh=>sh.id===p.id)&&(!p.expected_revision||p.expected_revision===0)){
    const previous=s.activeSetupId;s.activeSetupId=p.setup_id;
-   if(M.activeVersion(s)?.id===p.setup_version_id){try{const sh=E.saveShot(s,p.library_entry_id,{id:p.id,timestamp:p.pulled_at,doseG:p.dose_g,yieldG:p.yield_g,timeS:p.time_s,grindSetting:p.grind_setting,tempC:p.temperature_c,style:p.style,basketId:p.basket_version_id,feedMode:p.feed_mode,tasteScales:p.taste,notes:p.notes},{allowLegacyCustom:p.style==='Custom'});sh.cloudPending=true;}catch{/* Kept in the durable outbox even if it cannot be rendered. */}}
+   if(M.activeVersion(s)?.id===p.setup_version_id){try{const sh=E.saveShot(s,p.library_entry_id,{id:p.id,timestamp:p.pulled_at,doseG:p.dose_g,yieldG:p.yield_g,timeS:p.time_s,grindSetting:p.grind_setting,tempC:p.temperature_c,style:p.style,basketId:p.basket_version_id,feedMode:p.feed_mode,tasteScales:p.taste,notes:p.notes},{allowLegacyCustom:p.style==='Custom'});if(p.bag_id!=null)sh.bagId=p.bag_id;sh.cloudPending=true;}catch{/* Kept in the durable outbox even if it cannot be rendered. */}}
    s.activeSetupId=previous;
   }
  }

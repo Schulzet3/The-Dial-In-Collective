@@ -5,7 +5,7 @@ import {e} from '../lib/ui.js';
 export const MAX_SOURCE_REVIEW_FACTS=384;
 
 export const autofillFields=[
- ['name','Name / Bag Label'],['roaster','Roaster'],['release_label','Release / Harvest'],
+ ['name','Coffee Name'],['roaster','Roaster'],['release_label','Release / Harvest'],
  ['origin','Origin'],['roast_level','Roast Level'],['elevation_m','Elevation'],
  ['process','Process'],['variety','Variety'],['producer','Producer'],
  ['tasting_notes','Tasting Notes']
@@ -74,7 +74,7 @@ export function coffeeUrlPreviewMarkup(result){
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   ${catalog?'<button type="button" class="secondary compact" data-action="preview-coffee-url-refresh">Check Current Roaster Page</button><p class="helper">Check for newer published details. Wait 30 seconds between checks; the usual URL lookup limit applies.</p>':''}
-  ${Array.isArray(result.conflicts)&&result.conflicts.length?'<p class="helper" role="note">Conflicting source details were left blank. Check the current bag or roaster page.</p>':''}
+  ${Array.isArray(result.conflicts)&&result.conflicts.length?'<p class="helper" role="note">Conflicting source details were left blank. Check the roaster product page.</p>':''}
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.fields[key])}</dd></div>`).join('')}</dl>
   ${result.fields?.process==='Other/Unknown'&&result.roaster_details?.blend_components?'<p class="helper" role="note">This blend has multiple documented processing methods. Other/Unknown preserves that distinction; review the component details below.</p>':''}
   ${result.roast_hint?`<p class="helper" role="note"><strong>Roast graphic:</strong> ${e(result.roast_hint)}</p>`:''}

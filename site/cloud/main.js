@@ -502,7 +502,7 @@ class CloudApp {
      <span class="helper">Optional · Official coffee product page</span></div>
    </div>
    <div id="coffee-url-feedback" aria-live="polite"></div>
-   ${field('Name / Bag Label','name','',{required:true})}
+   ${field('Coffee Name','name','',{required:true})}
    ${field('Roaster','roaster','',{required:true})}
    ${field('Release / Harvest (If Shown)','release_label','')}
    <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>

@@ -94,8 +94,9 @@ export function restoreVersion(s,id) {
 export function addCoffee(s,data) {
  if(!data.name?.trim()||!data.roaster?.trim())throw new Error('Name and roaster are required.');
  if(data.style==='Custom')throw new Error('Custom is retired. Choose an available shot style.');
- const c={id:newId('coffee'),createdAt:now(),hidden:false,status:'local',bags:[{id:newId('bag'),roastDate:'',frozen:false,archived:false}],...pickCoffee(data)};
- c.activeBagId=c.bags[0].id;s.coffees.push(c);
+ // Retired bag management: an empty schema-1 archive carrier keeps old backups importable.
+ const c={id:newId('coffee'),createdAt:now(),hidden:false,status:'local',bags:[],...pickCoffee(data)};
+ s.coffees.push(c);
  if(activeSetup(s))ensureCoffeeState(s,c.id).style=STYLES.includes(data.style)?data.style:'Traditional';
  logAudit(s,'coffee.added',{coffeeId:c.id});return c;
 }
