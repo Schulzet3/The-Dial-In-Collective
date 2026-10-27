@@ -1,3 +1,9 @@
+## October 27 UTC — Issue33 owner-approved current-source rules and four roaster probes TESTING / NOT DEPLOYED
+
+New owner-Locked `EXTRACTOR-CURRENT-SELECTED-SOURCE-FERMENTATION-20261027` requires current selected-product specs over stale SEO (Brewpoint), staged named fermentation (Gnosis), and user review of simultaneous Mexico/Peru (Black River). Four additional owner product URLs (Stumptown, Blue Bottle, Counter Culture, Peet's) are in independent opt-in probe/targeted tests, not the immutable 603 original. Clean scoped source/test/doc branch replaces unsafe unfinished draft PR170; exact CI/integration is PENDING. Preserve 22 prior READY and other work; no publication.
+
+---
+
 ## October 27 UTC — Issue161 PR171 epoch-safe session repairs VERIFIED MERGED / source READY / NOT DEPLOYED
 
 Source-only follow-up fixed two additional, independently reproduced race conditions: a delayed failed RPC from a previous login of the same owner could overwrite the new login's sync indicator, and a former account's coffee expansion could attempt a first-style local claim after account switching while its previous recommendation-evidence request was in flight. Outbox now binds pending/final notices to owner+session epoch; the expansion continuation checks captured owner+epoch and uses an epoch-scoped first-style claim key. Both have deterministic held-request regression tests; durable queued changes, original shots/notes/history, authentic server authorization, and the frozen original 603-corpus are preserved.

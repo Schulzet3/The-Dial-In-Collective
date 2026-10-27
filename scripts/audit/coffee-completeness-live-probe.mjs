@@ -58,6 +58,11 @@ const targets=[
   expected:{origin:/Kenya|Meru/i,process:/^Washed$/i},expected_conflicts:['variety'],
   source_note:'Observed page title/summary says SL34, while Genesis says Ruiru 11. Report current source drift explicitly.'},
  {id:'queen-city-homepage-negative',url:'https://queencitycollectivecoffee.com/',negative:true}
+ // Four additional optional, URL-bound original-source probes; not frozen603.
+ {id:'owner-stumptown-nano-challa',url:'https://www.stumptowncoffee.com/products/ethiopia-nano-challa?variant=40006909722792',expected:{name:/Nano Challa/i,tasting_notes:/peach.*citrus.*orange blossom/i},source_note:'Selected tasting notes only; the espresso brew guide is generic and 2010 washing station history is not current process proof.'},
+ {id:'owner-blue-bottle-hayes-valley',url:'https://bluebottlecoffee.com/us/eng/product/hayes-valley-espresso?a_oID=hayes-valley-espresso',expected:{name:/Hayes Valley Espresso/i,roast_level:/^Dark$/i,process:/^Washed$/i,tasting_notes:/Baking Chocolate.*Orange Zest.*Brown Sugar/i},source_note:'Non-Shopify product page; record HTTP/HTML limitations and no invented origin or espresso grams.'},
+ {id:'owner-counter-culture-sipacapa',url:'https://counterculturecoffee.com/collections/coffee/products/sipacapa-1',expected:{name:/Sipacapa/i,origin:/San Marcos.*Guatemala/i,roast_level:/^Light$/i,process:/^Washed$/i,tasting_notes:/apple.*simple syrup.*cocoa/i,variety:/Caturra.*Bourbon/i,elevation_m:/1,?640.*2,?150/i},source_note:'Exact current selected harvest facts; exclude cart/store menus.'},
+ {id:'owner-peets-linda-vista',url:'https://www.peets.com/products/guatemala-linda-vista',expected:{name:/Guatemala Linda Vista/i,roast_level:/^Dark$/i,tasting_notes:/Dark Chocolate.*Caramel.*Cardamom/i},source_note:'86/100 roast indicator is not an Agtron score; do not use generic menu.'},
 ];
 const argv=process.argv.slice(2);
 let output=path.join(process.env.RUNNER_TEMP||tmpdir(),'dic-coffee-completeness');

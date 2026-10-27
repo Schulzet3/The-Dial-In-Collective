@@ -1074,5 +1074,26 @@
       "Isolated real cloud preview adapter/handler/app mobile and desktop journey"
     ],
     "release_authorization": "NOT GRANTED: source-only; prepare READY upon full acceptance"
+  },
+  "EXTRACTOR-CURRENT-SELECTED-SOURCE-FERMENTATION-20261027": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Direct October 27 2026 owner decisions and four roaster URL additions",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-shopify-ajax.mjs"
+    ],
+    "independent_probe_roasters": [
+      "Stumptown Ethiopia Nano Challa",
+      "Blue Bottle Hayes Valley Espresso",
+      "Counter Culture Sipacapa",
+      "Peet's Guatemala Linda Vista"
+    ],
+    "tests": [
+      "tests/coffee-owner-current-source-and-four-roasters.test.mjs",
+      "scripts/audit/coffee-completeness-live-probe.mjs (opt-in, live best effort)",
+      "app/Node/lint/build, cloud UX, original frozen603 unchanged canonical regression"
+    ],
+    "release_authorization": "NOT GRANTED: source-only, no production or member writes"
   }
 }
