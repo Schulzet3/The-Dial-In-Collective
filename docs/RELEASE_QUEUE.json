@@ -825,10 +825,10 @@
     {
       "id": "DIC-Q-33-source-conflict-provenance-links",
       "issue": 33,
-      "pr": null,
+      "pr": 168,
       "title": "Safe original-source links, provenance and credential-free conflict review exports",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "cba61c26ca8a44223d0929724b2d7d1eeeb6e59f",
       "scope_paths": [
         "site/cloud/coffee-url-autofill.js"
       ],
@@ -836,14 +836,25 @@
         "Five new focused regression tests for selected product evidence links, deduped provenance, redaction of pasted query credentials/tracking, HTTPS-only links and manual-only input. Exact-source GitHub CI pending.",
         "Original frozen603 parser/captures/oracle/scorer are NOT modified by this client review/export change; earlier 3090/90/822 and 5458/337/679 are separately verified archival results, not freshly rerun.",
         "Eight difficult original public source cases documented for owner review; no conflicting canonical value chosen automatically.",
-        "Dedicated regression source tests/coffee-conflict-source-provenance.test.mjs is test evidence only, not a deployable release path."
+        "Dedicated regression source tests/coffee-conflict-source-provenance.test.mjs is test evidence only, not a deployable release path.",
+        "Exact PR-head acc11b9159d1f7c9770cdfc402d080d3984f6873: Node/lint/build 40455540208, cloud/mobile/browser 40455540188, approval+queue continuity 40455540203, isolated SQL 40455540270, source security 40455540269 and private visual review 40455540201 all SUCCESS. Initial queue-intake failure 40455139250 repaired without weakening checks. Hosted private original603 40455540218 SKIPPED, not passed.",
+        "Non-force PR168 merge cba61c26ca8a44223d0929724b2d7d1eeeb6e59f, parents [aef221fe8d8d974fcb8729eb713590a1fdcb27f7, acc11b9159d1f7c9770cdfc402d080d3984f6873], tree ba08d37f06f50c186e5ba9d7e18f25771adf9c54 IDENTICAL to exact green PR tree. Exact merged-source Node/lint/build 40455791638, cloud/mobile 40455791618, approval/continuity 40455791628, visual 40455791664 all SUCCESS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await feature-head CI, non-force integration preserving concurrent Issue161 PR167, exact merged-source CI and source readback before READY."
+      "ci_runs": [
+        40455540208,
+        40455540188,
+        40455540203,
+        40455540270,
+        40455540269,
+        40455540201,
+        40455791638,
+        40455791618,
+        40455791628,
+        40455791664
       ],
+      "blockers": [],
       "owner_source": "Owner October26/27 request to continue Issue33 no-cost improvements and offer fringe case URLs; existing owner-Locked manual source conflict review and privacy behavior.",
-      "notes": "Separate review usability/privacy slice; not a new factual recovery, no change to the original 603 score, previous READY entries, production or private member data."
+      "notes": "Scoped client evidence/provenance improvement verified and READY ONLY for a future owner-approved release; NOT DEPLOYED. Source code Git blob 158e7f895ef4302f2e015483a858d0c9ddc48583; five regression tests 0afc87d504ce21c96138b25e0ca005f316407063; reviewed fringe-source cases in docs/audits/extractor-issue33-live-fringe-review-20261027.json (blob 95252c71f428f79c2752cdbc72ca88877ec11760). Immutable original603 parser/oracle/scorer/captures unchanged, reuse earlier 3090 exact/90 missing/822 review/49 archived conflicts; no new original603 run, real-member authentication or physical-device coverage claimed. Concurrent Issue161 TESTING and 19 prior READY entries protected. No production provider, SQL/Edge/Auth/member data or paid service."
     }
   ],
   "history": [
