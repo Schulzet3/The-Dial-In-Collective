@@ -6,7 +6,6 @@
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
-    "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026",
     "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023",
     "current_owner_admin_low_friction_review_20261021",
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
@@ -795,6 +794,43 @@
         {
           "path": "tests/retired-basket-version-management.test.mjs",
           "contains": "no member-facing basket or equipment-version controls"
+        }
+      ]
+    },
+    {
+      "id": "extractor_notes_masl_member_conflict_review_20261026",
+      "decision_key": "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026",
+      "scope": "New Coffee URL import only. Direct selected-product labeled notes override incidental prose; unitless explicit elevation is meters, and competing selected public source facts remain unselected with visible manual entry.",
+      "implementation": "SOURCE_TESTED_NOT_DEPLOYED; original 603 unchanged oracle+supplementary and isolated UI/browser tested",
+      "device_acceptance": "Synthetic Chromium 390 light and 1280 dark passed 33 assertions using original source captures and simulated auth/quota; genuine-member, physical device and live production remain unverified.",
+      "assertions": [
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "contains": "const printedNotes=[];"
+        },
+        {
+          "path": "src/server/coffee-shopify-ajax.mjs",
+          "contains": "const conflict_options={};"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "export function coffeeConflictReviewOptions(result)"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "export function elevationWithDefaultMeters(value)"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "input.classList?.add('coffee-needs-review');"
+        },
+        {
+          "path": "tests/coffee-owner-elevation-notes-conflict-review.test.mjs",
+          "contains": "Woods"
+        },
+        {
+          "path": "docs/audits/extractor-issue33-owner-rules-603-20261027.json",
+          "contains": "\"new_exact\": 3090"
         }
       ]
     }
