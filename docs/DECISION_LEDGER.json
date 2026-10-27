@@ -2266,6 +2266,17 @@
       "supersedes": "Only §28 and Issue15's original active bag lifecycle/optional user-interface expectation, obsolete Bag Details priority in §§6–7 and bag-specific wording in §§9,38–39; no changes to canonical coffee identity, published bag-page source evidence, other Locked decisions, permissions or release gate.",
       "approval": "Owner directly said 'Proceed. Remove as much as you can without affecting data' after read-only impact assessment of four live bags and fourteen linked shots, October 26, 2026.",
       "delivery": "SOURCE_ONLY_TO_BE_TESTED, NOT PUBLISHED. No SQL migration or production data changes for this retirement."
+    },
+    {
+      "id": "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "title": "Retire member-facing basket and equipment version management; keep immutable history",
+      "approval": "Owner explicitly: 'I don't want to include basket or equipment versions. Let's remove this and close issue #16'.",
+      "decision": "No planned member-facing basket create/select/correct/archive/reactivate or equipment-version history/create/restore/calibration-management flows. Keep simple new setup, one Basket Dose, rename/switch, optional equipment details, real shot dose, and strictly >2 g dismissible new-shot-only warning.",
+      "supersedes": "Issue #16 original active management acceptance and §13 planned expansion only. Preserve all internal immutable hardware/basket/calibration snapshots, real shot and Community context, note/offline/backups, existing validation and unrelated Issue #17 grinder semantics.",
+      "historical_safety": "Do not drop or rewrite existing database version records, foreign keys, shot snapshots, member data, RLS or idempotency receipts. Do not publish.",
+      "delivery": "Source-only retirement, no deployable feature."
     }
   ],
   "open_current_owner_decisions": [],
@@ -4337,5 +4348,16 @@
     "supersedes": "Only §28 and Issue15's original active bag lifecycle/optional user-interface expectation, obsolete Bag Details priority in §§6–7 and bag-specific wording in §§9,38–39; no changes to canonical coffee identity, published bag-page source evidence, other Locked decisions, permissions or release gate.",
     "approval": "Owner directly said 'Proceed. Remove as much as you can without affecting data' after read-only impact assessment of four live bags and fourteen linked shots, October 26, 2026.",
     "delivery": "SOURCE_ONLY_TO_BE_TESTED, NOT PUBLISHED. No SQL migration or production data changes for this retirement."
+  },
+  "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026": {
+    "id": "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026",
+    "status": "Locked",
+    "date": "2026-10-26",
+    "title": "Retire member-facing basket and equipment version management; keep immutable history",
+    "approval": "Owner explicitly: 'I don't want to include basket or equipment versions. Let's remove this and close issue #16'.",
+    "decision": "No planned member-facing basket create/select/correct/archive/reactivate or equipment-version history/create/restore/calibration-management flows. Keep simple new setup, one Basket Dose, rename/switch, optional equipment details, real shot dose, and strictly >2 g dismissible new-shot-only warning.",
+    "supersedes": "Issue #16 original active management acceptance and §13 planned expansion only. Preserve all internal immutable hardware/basket/calibration snapshots, real shot and Community context, note/offline/backups, existing validation and unrelated Issue #17 grinder semantics.",
+    "historical_safety": "Do not drop or rewrite existing database version records, foreign keys, shot snapshots, member data, RLS or idempotency receipts. Do not publish.",
+    "delivery": "Source-only retirement, no deployable feature."
   }
 }
