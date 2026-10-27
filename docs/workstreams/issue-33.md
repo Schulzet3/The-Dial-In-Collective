@@ -1,3 +1,11 @@
+## October 27 UTC — Owner approved three current-source extractor decisions (implementation pending)
+
+Direct owner clarification: for Brewpoint The Alchemist Decaf the selected/current product facts are Origin Brazil (Mountain Water Processed), Roast Medium, Notes Chocolate / Graham Cracker. Current selected-product specifications supersede archived SEO or stale metadata for the same release, without rewriting historical member records. For Gnosis Red Bourbon Decaf the specifically published Extended Ferment / Yeast Inoculation / Sugarcane EA, 48-hour cherry yeast and 68-hour secondary fermentation are to be categorized Anaerobic in the app; retain literal multi-stage processing evidence. Ordinary generic fermentation does not prove airtight conditions and must not be guessed without selected-product context. For rotating Black River Organic Specialty Decaf, Current Decaf Coffee Location Mexico and current-offering narrative Peru are both currently asserted; leave origin blank, display both for member selection, do not auto-pick an old Honduras endpoint/capture. Development authorization only, no release.
+
+Current development starting SHA 27ba86ef61dcc4453ab286b6568e46faa5fe7649. Branch work/extractor-source-20261027 created from it; Issue161 PR169 concurrently open; preserve latest source, historical 603 evidence, prior 20 READY and 1 TESTING queue entries. GitHub file/blob writes are returning platform safety-block errors; verify branch and do not claim integrated code or passing CI until actual provider readback.
+
+---
+
 ## October 27 UTC — Issue33 PR168 source-review provenance VERIFIED READY / NOT DEPLOYED
 
 **Authority:** Owner requested continuous no-cost extractor accuracy improvements and offered manual decisions for difficult roaster products. This bounded slice improves public selected-coffee conflict-review evidence and file exports without changing extractor canonical parser/oracle, original frozen 603 source, authenticated preview quota, member/shot/Community/offline history or Locked manual-selection rules. No publication authorization.
