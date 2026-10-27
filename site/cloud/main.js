@@ -33,7 +33,11 @@ class CloudApp {
    this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
   this.lastHeavySyncAt=0;this.pollingStatus=null;this.pollingOwner=null;this.pollingEpoch=null;
-  this.queue=new Outbox({store,remote:client,identity:()=>this.identity?{...this.identity,sessionEpoch:this.epoch}:null,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
+  this.queue=new Outbox({store,remote:client,identity:()=>this.identity?{...this.identity,sessionEpoch:this.epoch}:null,notify:r=>{
+    // A prior login's remote work may finish after the same member signs back in.
+    // Match the session epoch as well as owner before displaying its sync status.
+    if(r.owner===this.identity?.id&&r.sessionEpoch===this.epoch)this.syncState=r.state;
+   }});
  }
  async inSession(operation){
   const owner=this.identity?.id,epoch=this.epoch;
@@ -597,6 +601,7 @@ class CloudApp {
   }finally{this.recommendationEvidenceRequests.delete(key);}
  }
  async expandCoffee(id){
+  const owner=this.identity?.id,epoch=this.epoch;
   if(this.expanded.has(id)){
    this.expanded.delete(id);if(this.tempCoffee===id)this.tempCoffee=null;
    if(this.firstStylePromptId===id)this.firstStylePromptId=null;
@@ -605,8 +610,10 @@ class CloudApp {
   const coffee=this.state.coffees.find(x=>x.id===id);if(!coffee)return;
   this.expanded.add(id);this.firstStylePromptId=null;this.render();
    await this.loadRecommendationEvidence(id);
- if(!this.identity?.id||this.state.shots.some(sh=>sh.coffeeId===id))return;
-  const owner=this.identity.id,epoch=this.epoch,key=owner+':'+id;
+  // Do not continue an old coffee's first-shot claim in a replacement account.
+  if(owner!==this.identity?.id||epoch!==this.epoch)return;
+  if(!owner||this.state.shots.some(sh=>sh.coffeeId===id))return;
+  const key=JSON.stringify([owner,epoch,id]);
   if(this.firstStyleClaimInFlight.has(key))return;
   this.firstStyleClaimInFlight.add(key);
   let first=false;

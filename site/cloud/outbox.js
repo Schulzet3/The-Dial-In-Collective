@@ -14,8 +14,8 @@ export function independentMutations(held,event){
   return !!b.id&&!!b.setup_version_id&&!!b.library_entry_id;
  return false;
 }
-function stoppedWithAccess(state,sent,notify,owner){
- const result={state,sent,accessDenied:true};notify({...result,owner});return result;
+function stoppedWithAccess(state,sent,notify,who){
+ const result={state,sent,accessDenied:true};notify({...result,owner:who.id,sessionEpoch:who.sessionEpoch??null});return result;
 }
 export class Outbox {
  constructor({store,remote,identity,uuid=()=>crypto.randomUUID(),now=()=>new Date().toISOString(),notify=()=>{}}){Object.assign(this,{store,remote,identity,uuid,now,notify});this.runningBySession=new Map();}
@@ -23,7 +23,7 @@ export class Outbox {
   if(!ACTIONS.has(action))throw new CloudError('Unsupported cloud action.','unsupported_action');
   const who=await this.identity();if(!who?.id)throw new CloudError('Sign in first.','signed_out');
   const event={owner:who.id,id:this.uuid(),action,payload:structuredClone(payload),createdAt:this.now(),status:'pending'};
-  await this.store.put(event);this.notify({state:'pending',owner:who.id});return event;
+  await this.store.put(event);this.notify({state:'pending',owner:who.id,sessionEpoch:who.sessionEpoch??null});return event;
  }
  async pending(){const who=await this.identity();return who?.id?(await this.store.list(who.id)):[];}
  async flush(){
@@ -42,7 +42,7 @@ export class Outbox {
    (who.sessionEpoch==null||active?.sessionEpoch===who.sessionEpoch);};
   if(!(await matches()))return {state:'account_changed',sent:0};
   let sent=0;const held=[];
-  const stopped=state=>{const result={state,sent};this.notify({...result,owner:who.id});return result;};
+  const stopped=state=>{const result={state,sent};this.notify({...result,owner:who.id,sessionEpoch:who.sessionEpoch??null});return result;};
   for(const event of await this.store.list(who.id)){
    if(!(await matches()))return {state:'account_changed',sent};
    if(['conflict','rejected'].includes(event.status)){
@@ -64,7 +64,7 @@ export class Outbox {
       if(!accessDenied)throw storageError;
      }
     }
-    if(accessDenied)return stoppedWithAccess('rejected',sent,this.notify,who.id);
+    if(accessDenied)return stoppedWithAccess('rejected',sent,this.notify,who);
     if(!rejected)return stopped('offline');
     held.push(event);continue;
    }
@@ -79,7 +79,7 @@ export class Outbox {
   }
   if(!(await matches()))return {state:'account_changed',sent};
   const state=held.some(event=>event.status==='conflict'||event.result?.code==='conflict')?'conflict':held.length?'rejected':'synced';
-  const result={state,sent,at:this.now()};this.notify({...result,owner:who.id});return result;
+  const result={state,sent,at:this.now()};this.notify({...result,owner:who.id,sessionEpoch:who.sessionEpoch??null});return result;
  }
 }
 export class IndexedStore {

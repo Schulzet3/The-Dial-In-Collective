@@ -44,3 +44,37 @@ test('new owner admission polling is never delayed by prior account held status 
  }finally{clearTimeout(timer);blocked.resolve();await old;}
  assert.equal(app.status.admitted,true,'stale denial must not revoke new member');
 });
+test('late failed RPC from previous same-member login cannot override the new login sync notice',async()=>{
+ const blocked=deferred(),started=deferred();
+ const store={
+  events:[],
+  async put(event){this.events.push(structuredClone(event));},
+  async list(owner){return this.events.filter(event=>event.owner===owner);},
+  async acknowledge(event){this.events=this.events.filter(row=>row.id!==event.id);}
+ };
+ const client={async mutate(){started.resolve();await blocked.promise;throw new Error('Previous login offline');}};
+ const app=new CloudApp(client,store);app.identity={id:OWNER};app.status={admitted:true};app.render=()=>{};
+ await app.queue.enqueue('save_shot',{id:'previous-login-shot'});
+ const oldFlush=app.queue.flush();await started.promise;
+ app.resetAccount();app.identity={id:OWNER};app.status={admitted:true};
+ await app.queue.enqueue('save_shot',{id:'new-login-shot'});
+ assert.equal(app.syncState,'pending','new login reports its own pending write');
+ blocked.resolve();await oldFlush;
+ assert.equal(app.syncState,'pending','stale offline callback must not overwrite new login');
+ assert.equal(store.events.length,2,'both writes remain durable for retry');
+});
+test('late coffee expansion cannot claim the prior account coffee for a new member',async()=>{
+ const paused=deferred(),started=deferred(),claims=[];
+ const store={async claimFirstStylePrompt(owner,id){claims.push([owner,id]);return true;}};
+ const client={async claimFirstStylePrompt(){throw Error('Must never call server for previous owner');}};
+ const app=new CloudApp(client,store);app.identity={id:OWNER};app.status={admitted:true};app.render=()=>{};
+ app.state.coffees=[{id:'old-member-coffee'}];
+ app.loadRecommendationEvidence=async()=>{started.resolve();await paused.promise;};
+ const oldExpansion=app.expandCoffee('old-member-coffee');await started.promise;
+ app.resetAccount();
+ app.identity={id:'b1111111-1111-4111-8111-111111111111'};app.status={admitted:true};
+ app.state.coffees=[{id:'new-member-coffee'}];
+ paused.resolve();await oldExpansion;
+ assert.deepEqual(claims,[],'old expansion must not create foreign-coffee local claim');
+ assert.equal(app.firstStylePromptId,null);
+});
