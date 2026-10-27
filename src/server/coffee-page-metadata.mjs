@@ -821,8 +821,8 @@ function productDetails(fields,p){
   // Exact selected-product Coffee_ roast tags remain source evidence.
   // Other product tags or current prose may disagree: preserve the conflict
   // for review instead of silently discarding any published classification.
-  const roast=tag.match(/^(?:Coffee_)?((?:(?:ultra|very)\s+light|light\s*[-/ ]\s*medium|medium\s*[-/ ]\s*(?:light|dark)|dark\s*[-/ ]\s*medium|light|medium|dark)\s+roast)(?:\s+coffee)?\s*$/i);
-  if(roast)addField(fields,'roast_level',roast[1]);
+  const roast=tag.match(/^(?:Coffee_)?((?:(?:ultra|very)\s+light|light\s*[-/ ]\s*medium|medium\s*[-/ ]\s*(?:light|dark)|dark\s*[-/ ]\s*medium|light|medium|dark)(?:\s+|-)roast)(?:\s+coffee)?\s*$/i);
+  if(roast)addField(fields,'roast_level',roast[1].replace(/-roast$/i,' Roast'));
  }
 }
 function explicitNearbyFacts(html,fields){
