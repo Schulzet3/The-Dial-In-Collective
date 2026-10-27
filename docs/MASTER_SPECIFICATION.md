@@ -1,5 +1,14 @@
 # The Dial In Collective — Master Specification
 
+## Owner-Locked retirement of Bag Management — October 26, 2026
+
+**UX-RETIRE-BAG-MANAGEMENT-20261026 (Locked):** At the owner's explicit direction, **retire Bag Management entirely as an active product feature**. Do not implement or display Roast Date, Frozen status, Bag Details, New Bag, bag archive/reactivation, bag-age reminders, dose-by-dose thaw tracking, or any required bag-specific question in Add Coffee or Log Shot. Name the product field **Coffee Name**, not “Name / Bag Label.” Members continue logging new and different coffee shots against the normal coffee/library entry, with one visible recommended/preferred recipe, exact measurements, five taste ratings, historical Shot History, successful internal recipe-family learning and existing coffee source/release identity. A later purchase of the same release does not require creating a new bag; an actually different harvest/release still follows the existing coffee identity/verification workflow.
+
+**Non-destructive compatibility:** Read-only Supabase inventory on October 26: four pre-existing `public.bags` rows, all active, zero dated/Frozen, **14 of 23 saved shots** linked to bags and zero orphan references; 23 notes, four personal families and four preferences remain. **Do not delete, relabel, unlink, backfill, rewrite or implicitly replace any historical bag or associated shot.** Retain existing `public.bags`, `public.shots.bag_id`, composite owner/coffee FK, RLS and protected legacy importer solely as archival/offline/data-integrity compatibility. No new bag must be automatically created or assigned by the current frontend; new shots can have no bag association. Keep old cloud/offline `bag_id` receipts and legacy schema-1 import fields exactly as recorded; reject broken bag link archives before import rather than silently stripping them. Production schema cleanup is **not** approved or safe while real linked records exist; no migration that drops these references is part of this retirement.
+
+**Precise supersession:** This later Locked decision replaces the previous active Bag Management offering and acceptance in §§6–7, §9.3 (“Name / Bag Label” UI), §28, §38 Bag scope, §39's *future product feature* implication and Issue #15. It does **not** remove coffee identity research using published packaging/roaster text, user shots, successful recipe families, history, backups, Community data, account isolation, security or any release safeguard. Prior dated notes and original database migrations remain as immutable history, not active feature requirements. Only development/source work is authorized; publishing is separate.
+
+
 ## Owner-Locked retirement of Experiment workflow — October 26, 2026
 
 **UX-RETIRE-EXPERIMENTS-20261026 (Locked):** At the owner's explicit direction, the entire user-facing and internal **Experiment workflow** is retired: no start/decline prompts, meaningful-change Experiment thresholds, experiment workspaces or panels, active Experiment state, separate candidate/confirmation/promotion steps, or automatic switches back to an earlier recipe when ending an Experiment. A member may still vary dose, yield, grind, temperature and timing in ordinary Log Shot → Rate → Recommendation. Every shot retains its actual values, notes, sensory ratings and historical identity. All-green shots remain valid and Community-eligible under existing provenance/quality safeguards; distinct successful ratio/recipe families remain internally separated and inform **one** visible recommendation. A materially different green shot does **not** automatically override an existing *explicitly preferred* Make Current Recipe shot/family. The user can choose Make Current on any qualifying successful shot under existing owner, setup, and revision checks. Preserve offline queue and legacy backup records, account isolation, private notes, Community contributions, provenance and mutation receipts.
@@ -357,8 +366,8 @@ The app may contain sophisticated recommendation, community, equipment, identity
 - **Community learning must be robust.** More shots improve confidence, but one heavy user must not dominate the Collective.
 - **Raw data is preserved.** Derived recommendations and aggregates must be reproducible from underlying shot records.
 - **Coffee identity must be reliable.** Similar names must not cause accidental merging or duplicate community records.
-- **Facts and opinions are separated.** Coffee facts have one validated canonical record; user taste, notes, bags, and shots are user-level.
-- **Progressive disclosure.** Community detail, bag detail, advanced equipment, and diagnostics are available without crowding the main workflow.
+- **Facts and opinions are separated.** Coffee facts have one validated canonical record; user taste, notes, historic bag records and shots are owner-scoped.
+- **Progressive disclosure.** Community detail, advanced equipment and diagnostics are available without crowding the main workflow. Bag Management is retired.
 - **No false precision.** Once repeated successful shots exist, a useful recipe is often a successful window plus a centerpoint rather than one magical number.
 
 ---
@@ -555,7 +564,7 @@ Expected information:
 - Roast level/status where known.
 - Expand/collapse affordance.
 
-Bag detail should **not** appear on the collapsed card.
+Bag Details are retired and do **not** appear on collapsed or expanded cards.
 
 ## 7.2 Expanded card - primary content
 
@@ -567,7 +576,6 @@ The expanded card should prioritize:
 4. Shot History, retaining other successful approaches without a separate Alternate Recipes control.
 5. Coffee facts and source/roaster details.
 6. Community detail behind progressive disclosure.
-7. Optional Bag Details behind progressive disclosure.
 
 ## 7.3 Existing visual language to preserve
 
@@ -653,7 +661,7 @@ Preserve the current principle that only a small number of fields are required.
 
 Current user-facing baseline:
 
-- Name / Bag Label: required.
+- Coffee Name: required (the roaster's product/release name, not a separate tracked bag).
 - Roaster: required.
 - Origin: optional.
 - Elevation: optional.
@@ -1538,47 +1546,17 @@ Custom is not an option for new shots and does not have a configurable target ed
 
 ---
 
-# 28. Bag model - intentionally simple in V1
+# 28. Bag Management — intentionally retired in V1 (October 26, 2026)
 
-The product briefly explored richer bag-aging tracking and intentionally simplified it to avoid turning the app into work.
+The owner explicitly withdrew the planned optional bag experience. **Do not build a Bag Details editor, Roast Date or Frozen control, New Bag workflow, bag-age logic, per-bag recommendation reset, bag-selection affordance or any routine logging question.** Ordinary coffee records and shots remain the user's units of work. Existing evidence-based recipe recommendations and the user's explicit preferred recipe continue across ordinary shot logging; no artificial bag boundary is introduced.
 
-## 28.1 Coffee vs Bag
+## 28.1 Historical data and source compatibility
 
-- Canonical Coffee represents the release.
-- A user's Bag represents a specific purchase/roast instance of that coffee.
-- Buying the same canonical coffee again can create a new bag rather than overwriting old bag data.
-- Shots can be tied to the specific bag.
-- Coffee-level recipe learning can still learn across bags.
+The earlier prototype and database created bag records. Production retains four bag rows and 14 shot-to-bag associations. These are **read-only historical data**, not a new product feature. Keep their exact IDs, associations, dates/status if any, account ownership and private shot/notes payload. No automatic historical relabeling, deletion, archive state changes, backfill or schema drop. Old offline events and validated old backup imports may still carry bag identifiers; the backend must retain the original owner/coffee foreign-key protection and idempotent mutation/receipt semantics. Reject malformed old backups instead of silently discarding bag references. New app-created shots do not need bag IDs.
 
-## 28.2 V1 visible bag fields
+## 28.2 Future purchases
 
-Only:
-
-- **Roast Date** - optional.
-- **Frozen** - optional boolean/status.
-
-Defer richer room-temperature/refrigerated/opened/thawed lifecycle UI.
-
-## 28.3 UI placement
-
-- Bag details are hidden inside the expanded coffee view.
-- Do not show bag age/status on the collapsed card.
-- Do not ask bag questions during ordinary shot logging.
-- Do not issue maintenance reminders by default.
-
-## 28.4 Frozen logic
-
-- Frozen status effectively pauses age-related recommendation logic.
-- Batch-frozen users can leave a bag marked Frozen while logging individually frozen doses.
-- Do not assume a shot means the whole bag has thawed.
-
-## 28.5 New bag behavior
-
-- One bag may be marked active for a coffee.
-- New shots attach to the active bag automatically.
-- Creating a new bag archives the prior active bag by default.
-- Archived bags remain viewable and can be reactivated.
-- When starting a new bag of a previously used coffee, carry forward the prior coffee-level dialed-in recipe/window as the starting recommendation while building new bag-specific history.
+A repeat purchase of the same coffee/release stays in the usual coffee and shot workflow; no new bag must be created. Distinct genuine releases/harvests are handled through existing source-backed coffee identity, never by silently merging coffee releases. Historical bag records do not influence recommendation ranking or add visible controls.
 
 ---
 
@@ -1966,7 +1944,7 @@ The following issues were explicitly reconciled and should not be reopened witho
 - **Experiment continuity:** once started, subsequent Log a Shot actions stay in the experiment until End Experiment or promotion.
 - **Candidate lifecycle:** first successful experiment can become current immediately; second successful repeat confirms the family.
 - **Successful but not preferred:** valid all-green experiment can remain a community/candidate recipe even if user returns to the old preferred recipe.
-- **Bag scope:** V1 bag detail stays simple - optional Roast Date + Frozen only.
+- **Bag scope (superseded October 26):** No active Bag Management, Roast Date, Frozen, New Bag or bag-age lifecycle; preserve archived shot links and owner protections only.
 - **Search:** simple search + Recent/A-Z only; no filters.
 - **Current coffee pinning:** current coffee remains pinned even in A-Z, except it can disappear temporarily when search does not match.
 - **Shot detail:** expand inline to enable multi-shot comparison.
@@ -2052,12 +2030,12 @@ This is a direction, not a final provider-specific schema.
 - added_at
 - current/preferred context as appropriate
 
-### Bag
+### Bag (historical compatibility only; NOT a new feature to implement)
 
-- user_library_entry_id
-- roast_date optional
-- frozen optional
-- active/archived
+- owner-scoped user_library_entry_id
+- historical roast_date and frozen values, if any, retained without mutation
+- existing active/archived states and original shot associations retained
+- no new Bag Management UI, lifecycle or client-generated bag
 
 ### Shot
 
