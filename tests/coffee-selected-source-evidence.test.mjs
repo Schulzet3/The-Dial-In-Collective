@@ -116,3 +116,11 @@ test('valid cultivar names retain their extraction despite invalid equipment rej
  const r=extractPublicCoffeeFacts('<main><h1>Current Coffee</h1><p>Varietal: Bourbon, Caturra</p></main>',{source_url:currentUrl});
  assert.equal(r.fields.variety,'Bourbon, Caturra');
 });
+
+test('owner Oct27 Brewpoint listed Brazil and Medium win old SEO',()=>{
+ const req=shopifyProductRequest('https://examplecoffee.org/products/current-lot');
+ const r=extractShopifyAjaxData({title:'The Alchemist: Decaf Medium Roast',handle:'current-lot',description:'<p>Origin: Brazil (Mountain Water Processed)</p><p>Roast: Medium</p><p>Tasting Notes: Chocolate, Graham Cracker</p>'},req);
+ assert.equal(r.fields.origin,'Brazil (Mountain Water Processed)');
+ assert.equal(r.fields.roast_level,'Medium');
+ assert.equal(r.fields.tasting_notes,'Chocolate, Graham Cracker');
+});
