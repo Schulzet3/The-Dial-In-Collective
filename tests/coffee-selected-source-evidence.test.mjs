@@ -136,3 +136,18 @@ test('owner-source Gnosis staged yeast processing is classified Anaerobic',()=>{
  assert.match(JSON.stringify(result.source_facts),/48-hour whole cherry fermentation/);
  assert.match(JSON.stringify(result.source_facts),/68-hour secondary fermentation/);
 });
+
+test('owner-source Black River Mexico and Peru require selection, neither auto-filled',()=>{
+ const req=shopifyProductRequest('https://examplecoffee.org/products/current-lot');
+ const desc='<p>The current offering from Peru is rich and nutty.</p>'+
+ '<h3>Current Decaf Coffee</h3><p>Location: Mexico</p>'+
+ '<p>Altitude: 1000-1500 masl</p><p>Process: Washed, Water-Process Decaffeinated</p>';
+ const result=extractShopifyAjaxData({title:'Organic Specialty Decaf',handle:'current-lot',description:desc},req);
+ assert.equal(result.fields.origin,undefined);
+ assert.ok(result.conflicts.includes('origin'));
+ assert.deepEqual(result.conflict_options.origin.map(x=>x.value),['Mexico','Peru']);
+ const previous={ok:true,fields:{name:result.fields.name,origin:'Mexico'}};
+ const merged=mergePublicProductPreview(previous,result);
+ assert.equal(merged.fields.origin,undefined);
+ assert.ok(merged.conflicts?.includes('origin'));
+});
