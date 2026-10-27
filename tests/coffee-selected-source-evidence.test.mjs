@@ -124,3 +124,15 @@ test('owner Oct27 Brewpoint listed Brazil and Medium win old SEO',()=>{
  assert.equal(r.fields.roast_level,'Medium');
  assert.equal(r.fields.tasting_notes,'Chocolate, Graham Cracker');
 });
+
+test('owner-source Gnosis staged yeast processing is classified Anaerobic',()=>{
+ const req=shopifyProductRequest('https://examplecoffee.org/products/current-lot');
+ const desc='<p>Process: Extended Ferment / Yeast Inoculation / Sugarcane Decaffeination (EA)</p>'+
+ '<h3>Processing Method</h3><ol><li>48-hour whole cherry fermentation with Saccharomyces pastorianus yeast</li>'+
+ '<li>68-hour secondary fermentation using naturally developed coffee juices</li><li>Washed</li></ol>';
+ const result=extractShopifyAjaxData({title:'Red Bourbon DECAF',handle:'current-lot',description:desc},req);
+ assert.equal(result.fields.process,'Anaerobic',JSON.stringify(result.conflicts));
+ assert.ok(result.owner_current_spec_fields.includes('process'));
+ assert.match(JSON.stringify(result.source_facts),/48-hour whole cherry fermentation/);
+ assert.match(JSON.stringify(result.source_facts),/68-hour secondary fermentation/);
+});
