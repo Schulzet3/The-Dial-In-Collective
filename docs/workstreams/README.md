@@ -11,5 +11,6 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Internal recipe family reliability and two-family acceptance: Issue #10](issue-10.md)
 - [Owner-retired Experiment lifecycle and guarded SQL retirement: Issue #13](issue-13.md)
 - [Owner-retired Bag Management with preserved historical links: Issue #15](issue-15.md)
+- [Owner-retired basket/equipment version manager with historical snapshots preserved: Issue #16](issue-16.md)
 
 - [UI/UX accessibility and responsive Log Shot regression: Issue #26](issue-26.md)

@@ -758,6 +758,44 @@
           "contains": "Owner/coffee-bound historic bag FK was weakened"
         }
       ]
+    },
+    {
+      "id": "retired_basket_equipment_version_management_20261026",
+      "decision_key": "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026",
+      "issue": 16,
+      "scope": "No member basket/equipment-version manager; preserve internal snapshots, ordinary dose, warnings, offline and learning.",
+      "implementation": "SOURCE_ONLY_RETIREMENT_NO_NEW_UI_OR_PRODUCTION_CHANGE",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no physical-device or live-provider test claimed",
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "field('Basket Dose (g)','basket_dose_g'"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "'archive-basket'"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "'restore-version'"
+        },
+        {
+          "path": "site/cloud/dose-advisory.js",
+          "contains": "Math.abs(actual-reference)<=2"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "contains": "setupVersionId:sh.setup_version_id"
+        },
+        {
+          "path": "supabase/migrations/20261012015600_dic_shots_recipes_community.sql",
+          "contains": "Historical shot provenance is immutable"
+        },
+        {
+          "path": "tests/retired-basket-version-management.test.mjs",
+          "contains": "no member-facing basket or equipment-version controls"
+        }
+      ]
     }
   ],
   "active_gap_flags": [
