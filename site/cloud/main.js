@@ -29,7 +29,7 @@ class CloudApp {
   this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;this.coffeeUrlBusy=false;this.pendingCoffeeReview=null;this.firstStylePromptId=null;this.firstStyleClaimInFlight=new Set();
   this.view='coffees';this.communityRows=[];this.communityTotal=0;this.communityLoading=false;this.communityReloadRequested=false;this.communityError='';this.communityStyle='all';this.communityCoffee='all';this.communitySearch='';this.communityRevision=0;
   this.reviews=[];this.reviewError='';this.editCoffeeId=null;this.editCoffeeRevision=null;
-  this.recommendationEvidence={};this.recommendationEvidenceRequests=new Set();
+  this.recommendationEvidence={};this.recommendationEvidenceRequests=new Set();this.recommendationEvidenceAttemptedAt=new Map();
    this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
   this.lastHeavySyncAt=0;this.pollingStatus=null;
@@ -47,7 +47,7 @@ class CloudApp {
  resetAccount(){
   this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
-  this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();
+  this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
   this.lastHeavySyncAt=0;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.firstStylePromptId=null;this.firstStyleClaimInFlight.clear();
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
@@ -573,11 +573,15 @@ class CloudApp {
  }
  async loadRecommendationEvidence(id){
   if(!this.status?.admitted||globalThis.navigator?.onLine===false||!this.identity?.id)return;
-  const style=M.coffeeState(this.state,id).style,key=id+':'+style;
-  if(Object.hasOwn(this.recommendationEvidence[id]||{},style)||
-     this.recommendationEvidenceRequests.has(key))return;
+  const owner=this.identity.id,epoch=this.epoch,style=M.coffeeState(this.state,id).style;
+  // Refresh for open coffees during ordinary sync or after intentional expansion,
+  // not on each idle admission poll. The account/epoch also isolates stale tasks.
+  const key=JSON.stringify([owner,epoch,id,style]),now=Date.now();
+  const last=this.recommendationEvidenceAttemptedAt.get(key);
+  if(this.recommendationEvidenceRequests.has(key)||
+     (last!==undefined&&now>=last&&now-last<300000))return;
+  this.recommendationEvidenceAttemptedAt.set(key,now);
   this.recommendationEvidenceRequests.add(key);
-  const owner=this.identity.id,epoch=this.epoch;
   try{
    const evidence=await this.inSession(()=>this.client.recommendationCommunityEvidence(id,style));
    if(this.identity?.id===owner&&this.epoch===epoch){
@@ -587,7 +591,8 @@ class CloudApp {
    }
   }catch(error){
    if(isAccessDenied(error))throw error;
-   // Missing Community data must never block logging or personal recipes.
+   // Keep last successful evidence if refresh fails; do not block personal
+   // recommendations or repeatedly charge the quota during an outage.
   }finally{this.recommendationEvidenceRequests.delete(key);}
  }
  async expandCoffee(id){
