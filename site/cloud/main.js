@@ -32,7 +32,7 @@ class CloudApp {
   this.recommendationEvidence={};this.recommendationEvidenceRequests=new Set();this.recommendationEvidenceAttemptedAt=new Map();
    this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
-  this.lastHeavySyncAt=0;this.pollingStatus=null;
+  this.lastHeavySyncAt=0;this.pollingStatus=null;this.pollingOwner=null;this.pollingEpoch=null;
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity?{...this.identity,sessionEpoch:this.epoch}:null,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
  }
  async inSession(operation){
@@ -85,10 +85,11 @@ class CloudApp {
   this.poll=setInterval(()=>{if(document.visibilityState==='visible'&&this.identity&&this.status?.admitted&&!this.busy)this.pollOnce().catch(()=>{});},30000);
  }
  async pollOnce(){
-  if(this.pollingStatus)return this.pollingStatus;
   const user=this.identity,epoch=this.epoch;
   if(!user||!this.status?.admitted||this.busy||globalThis.navigator?.onLine===false)return;
-  this.pollingStatus=(async()=>{
+  if(this.pollingStatus&&this.pollingOwner===user.id&&this.pollingEpoch===epoch)return this.pollingStatus;
+  this.pollingOwner=user.id;this.pollingEpoch=epoch;
+  const task=(async()=>{
    try{
     const status=await this.client.status();
     if(epoch!==this.epoch||user.id!==this.identity?.id)return;
@@ -100,8 +101,11 @@ class CloudApp {
     if(isAccessDenied(err))await this.denyAccess(user,epoch);
     // A temporary admission-check outage must not trigger a full-data scan.
    }
-  })().finally(()=>this.pollingStatus=null);
-  return this.pollingStatus;
+  })();
+  const active=task.finally(()=>{
+   if(this.pollingStatus===active){this.pollingStatus=null;this.pollingOwner=null;this.pollingEpoch=null;}
+  });
+  this.pollingStatus=active;return active;
  }
  // Offline data is not an offline authorization token. Only the previously
  // admitted owner's cached records may be viewed, and only NEW shots can queue.
