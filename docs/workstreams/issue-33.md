@@ -1,3 +1,29 @@
+## October 27 UTC — Issue33 PR178 release-queue intake failure immediately repaired (TESTING)
+
+**Failure:** PR178 approval/continuity run `40586396617` failed at queue `--enforce-intake` because new application module `src/server/coffee-selected-source-evidence.mjs` lacked an active matching queue row. This is the queue recording omission, not original603 or runtime test failure. Added distinct `DIC-Q-33-original603-six-missing-facts` in TESTING, scope exact deployable parser path, 603 proof, specific pending CI/integration blocker; preserved existing 23 DEPLOYED / 1 READY / parent Issue33 IN_PROGRESS. No readiness promotion or deployment claimed before fresh CI and merged source. No code changes in this remedial commit.
+
+---
+
+## October 27 UTC — Issue33 step #1: six missing original-source facts restored (local original603 full verification)
+
+**Owner authorization:** Recover missing original603 assertions, source-identical replay; no publishing or paid service. Baseline dev SHA `7916aadfe5e8c3f93b43abd3d0094932ab30b889`. Only `src/server/coffee-selected-source-evidence.mjs` application module changed; new dedicated tests and source evidence receipt committed together. Temporary 24-hour GitHub source-export workflow was private, succeeded 40583446749, and is deleted from feature tree before PR. Do not rewrite original frozen capture/oracle/scorer; no secrets or member records in source snapshot.
+
+**Fresh true merged-source baseline:** Replay 603/603 from original 1,197 hash-verified captures through isolated actual HTTP preview handler, unchanged 4,002 oracle: **3,090 exact / 89 missing / 823 review** (not the historical 90/822). Candidate at parser blob `c5a16002857d5555ca12cc19f93e02c23e92fe1a` **3,096 exact / 83 missing / 823 review**, precisely six former missing→exact, ZERO prior exact loss or other canonical change. Two Methodical exact current selected badges, two S&W selected-correlated ultra/mega Light descriptors, the selected COMSA farmer cooperative, and Red Room literal sensory list. All six original source capture SHA256 values individually anchored in `docs/audits/extractor-issue33-missing-six-source-proof-20261027.json`; no baseline/oracle modification. Strict original supplementary retention exactly unchanged **5,458 full / 337 partial / 679 unconfirmed** across 6,474 facts; original conflict 67 withheld/48 unresolved and 21 unexpected fields unchanged. Baseline replay/candidate replay/scorer/retention SHA256 in audit receipt. No live backend or external network, no credential, quota, SQL, Auth, Edge, member, offline, Netlify or production operations.
+
+**Remaining:** 83 missing by field: 22 producer/14 roast/13 notes/12 release/11 process/10 origin/1 elevation. Several categories cannot safely fill from generic producers, recurring seasons, decaf method, conflicting variants or sources. These are not declared permanently unfixable. Focused 6/6 local Node regression tests and six original captured routes pass; full original replay/strict comparison/retention all exit zero. Independent PR exact-source CI, integration, queue readiness and production state still to verify. No owner decision required for scoped six; do not deploy.
+
+---
+
+## October 27 UTC — Issue33 #1, 90 missing assertion source recovery (IN_PROGRESS; NOT DEPLOYED)
+
+**Authority:** Owner explicitly instructed proceeding with step 1: investigate/recover missing original 603-coffee assertions, implement source-backed fixes, test and integrate without publishing. Live development at start `7916aadfe5e8c3f93b43abd3d0094932ab30b889`; issue33 OPEN, no open PRs. No new product decision or SQL/Auth/Edge/member data action.
+
+**Immutable provenance recovered:** User Library original `coffee-extractor-source-evidence.tar.gz` 113,755,359 bytes SHA256 `696c011e97e94eb2a9ec1b12c66efdf999751279bb0f381cce52`, matched immutable archive; recovery ZIP 88,577,532 bytes SHA256 `728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce`. Frozen 603 coffees, 201 roasters, 1,197 captured pages, 4,002 canonical oracle intact. PR162 source-backed independent 3,090 exact / 90 missing / 822 review is latest full reported comparison, not a fresh replay against current PR176/177 source. Candidate12 132-missing older receipt must NOT be confused with the newer 90.
+
+**Current audit work:** Prepare a temporary private branch-only GitHub Actions source snapshot for accurate local cross-checking with original archival captures. Archives contain code only, exclude env/secrets/accounts/production data, remain private 1 day; workflow to be removed before development PR integration. No production writes or CI results claimed yet. Source capture/missing assertion audit follows. Preserve every other workstream and READY item.
+
+---
+
 ## October 27 UTC — PR177 queue validator correction, audit-only work stays tracked
 
 **Failure repaired:** Documentation follow-up `94e87e8f08f4fbad5443845a13b8a1dec2d5f308` failed release queue intake in workflow 40581510754 because an audit-only fixture/privacy change has no exact deployable application scope paths. This is a release queue classification mistake, **not** a failing app test. Removed new `DIC-Q-33-public-source-fixture-privacy` item rather than inventing deployment paths or changing the validator. The completed, non-force merged audit-only improvements remain tracked under parent Issue33 IN_PROGRESS, with no standalone READY claim. Previous independently READY `DIC-Q-33-current-source-and-four-roasters` remains untouched. The original Counter Culture source-fact parity issue is OPEN. PR177 code/Node/SQL/Python/cloud/visual checks succeeded; merged source Node/cloud/Python/approval succeeded. Release #07 still published, no new production operations.
