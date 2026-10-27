@@ -9,7 +9,7 @@ const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|
 // Exact private-identity keys that may otherwise evade the substring screen.
 // Deliberately avoid matching ordinary product properties such as name,
 // profile, requires_shipping, public seller, or product release fields.
-const privateIdentityKey=/^(?:user(?:_?id)?|account(?:_?id)?|billing(?:_?address|_?contact)?|shipping_?address|payment(?:_?method|_?details)?|credit_?card|card_?(?:number|holder)|first_?name|last_?name|ip_?address|street_?address|order_?id)$/i;
+const privateIdentityKey=/^(?:user(?:_?(?:id|profile))?|account(?:_?id)?|billing(?:_?address|_?contact)?|shipping_?address|payment(?:_?method|_?details)?|credit_?card|card_?(?:number|holder)|first_?name|last_?name|ip_?address|street_?address|order_?id)$/i;
 const isPrivateKey=key=>sensitiveKey.test(key)||privateIdentityKey.test(key);
 
 // Classification is structural, never exports raw path/label/value strings.

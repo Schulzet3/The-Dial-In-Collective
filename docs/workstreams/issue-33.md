@@ -1,3 +1,5 @@
+**Pre-CI test review correction:** New exact-key privacy guard initially omitted snake-case `user_profile` (explicitly exercised by the new test). Fixed before PR review; do not count an unrun check as passing. Same-commit journal receipt applies.
+
 ## October 27 UTC — Issue33 public fixture privacy and source-fact diagnostic (development, TESTING)
 
 **Authority:** Owner directed continuation of the extractor completeness audit, privacy-safe resolution of Counter Culture Sipacapa's 19 sanitized `product_json` source-fact differences, no added cost or publication. Live source at start `f8cd450d33de749f7de58b8d9c1bbec2a1bdcfc4`, PR176 already merged and READY; no duplicate edits.
