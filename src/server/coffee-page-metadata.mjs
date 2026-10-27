@@ -21,6 +21,7 @@ import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevatio
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
+import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence} from './coffee-selected-source-evidence.mjs';
 const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
@@ -253,6 +254,9 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  if(field==='producer')s=s.replace(/\s+(?:read more|learn more|view details)\s*$/i,'').trim();
  if(field==='producer'&&/^(?:amount|quantity|size|weight|choose|select|add to cart|shop now)$/i.test(s))return '';
  if(field==='variety')s=s.replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'').replace(/\.$/,'').trim();
+ // Some seller specs mislabel post-harvest equipment as a coffee 'Varietal'.
+ // Withhold botanical autofill; preserve the literal label in source_facts.
+ if(field==='variety'&&/^(?:vertical|horizontal|mechanical|solar)\s+dryers?$/i.test(s))return '';
  if(field==='variety'){
   const marketed=s.match(/^(.{2,140}?),\s+(?:celebrated|renowned|prized|known|regarded|considered)\b/i);
   if(marketed&&explicitCoffeeVarietyList(marketed[1]))s=marketed[1].replace(/^100\s*%\s*/,'').trim();
@@ -824,6 +828,10 @@ function productDetails(fields,p){
   const roast=tag.match(/^(?:Coffee_)?((?:(?:ultra|very)\s+light|light\s*[-/ ]\s*medium|medium\s*[-/ ]\s*(?:light|dark)|dark\s*[-/ ]\s*medium|light|medium|dark)(?:\s+|-)roast)(?:\s+coffee)?\s*$/i);
   if(roast)addField(fields,'roast_level',roast[1].replace(/-roast$/i,' Roast'));
  }
+ // Exact selected Product only. Do not override stronger visible labels
+ // or resurrect a genuinely conflicting fact.
+ for(const fact of selectedStructuredCoffeeEvidence({title:selectedTitle,description:currentDescription,tags}))
+  if(!fields[fact.field]&&!conflictsByFields.get(fields)?.has(fact.field))addField(fields,fact.field,fact.value);
 }
 function explicitNearbyFacts(html,fields){
  // Some coffee labels place "Gedeb, Ethiopia" and a flavor list in
@@ -1083,6 +1091,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  productFlavorProfiles(fields,currentProduct);
  const onyxMetrics=/<div\b[^<>]{0,2000}class=["'][^"']{0,2000}a-stat[^"']{0,2000}["'][^<>]{0,2000}data-name=["']roast-level["']/i.test(canonicalProduct);
  if(!onyxMetrics)labeledPairs(canonicalProduct,fields);
+ // An independently bound selected-product hero and SEO description may
+ // contain literal evidence absent in Product JSON and current labels.
+ for(const fact of selectedPageCoffeeEvidence({html:canonicalProduct,name:fields.name,
+  seoTitle:clean((html.match(/<title\b[^<>]{0,2000}>([\s\S]{1,500}?)<\/title>/i)||[])[1]||'',500),
+  seoDescription:matchedDescriptions[0]||'',
+  seoPublisher:clean((html.match(/<meta\s+[^>]{0,800}property=["']og:site_name["'][^>]{0,800}content=["']([^"']{2,120})["']/i)||[])[1]||'',120)}))
+  if(!fields[fact.field]&&!conflicts.has(fact.field))addField(fields,fact.field,fact.value);
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.
  const roaster_details=extractLayoutEvidence(canonicalProduct,{
