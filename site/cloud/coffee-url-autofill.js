@@ -21,20 +21,43 @@ export function coffeeSourceDifferences(submitted,current){
 // A preview never authorizes a canonical edit. Source candidates are
 // explicitly presented for the member's manual decision, never auto-applied.
 const REVIEW_FIELDS=new Map(autofillFields.filter(([key])=>!['name','roaster'].includes(key)));
+// Source review is public evidence: strip pasted query credentials/tracking
+// while retaining a numeric Shopify variant that identifies a selected option.
+function publicReviewSourceUrl(value){
+ if(typeof value!=='string'||value.length>3000)return null;
+ try{
+  const url=new URL(value);
+  if(url.protocol!=='https:'||url.username||url.password)return null;
+  const variant=url.searchParams.get('variant');
+  url.search='';url.hash='';
+  if(variant&&/^\d{1,20}$/.test(variant))url.searchParams.set('variant',variant);
+  return url.href;
+ }catch{return null;}
+}
 export function coffeeConflictReviewOptions(result){
  if(!result?.ok)return [];
  const facts=Array.isArray(result.source_facts)?result.source_facts.slice(0,MAX_SOURCE_REVIEW_FACTS):[];
  return [...new Set(Array.isArray(result.conflicts)?result.conflicts:[])].filter(key=>REVIEW_FIELDS.has(key)).map(field=>{
-  const options=[],seen=new Set();
+  const options=[],seen=new Map();
   const add=(value,label,source_url='')=>{
-   if(typeof value!=='string'||!value.trim()||value.length>220||options.length>=8)return;
+   if(typeof value!=='string'||!value.trim()||value.length>220)return;
    const text=value.trim(),sig=text.normalize('NFKC').toLowerCase().replace(/\s+/g,' ');
-   if(seen.has(sig))return;
-   seen.add(sig);options.push({value:text,label:String(label||'Published source').slice(0,100),
-    source_url:typeof source_url==='string'&&source_url===result.source_url?source_url:''});
+   const verifiedUrl=typeof source_url==='string'&&source_url===result.source_url?
+    publicReviewSourceUrl(source_url):null;
+   // The first structured value retains its label; a matching literal fact
+   // can enrich its provenance rather than disappearing as a duplicate.
+   if(seen.has(sig)){
+    const previous=options[seen.get(sig)];
+    if(!previous.source_url&&verifiedUrl)previous.source_url=verifiedUrl;
+    return;
+   }
+   if(options.length>=8)return;
+   seen.set(sig,options.length);
+   options.push({value:text,label:String(label||'Published source').slice(0,100),
+    source_url:verifiedUrl||''});
   };
   for(const row of (Array.isArray(result.conflict_options?.[field])?result.conflict_options[field]:[]).slice(0,16))
-   add(row?.value,row?.label);
+   add(row?.value,row?.label,row?.source_url);
   for(const fact of facts){
    if(fact?.field===field&&!['json','projection','reference'].includes(fact.format))
     add(fact.value,fact.label,fact.source_url);
@@ -115,7 +138,7 @@ export function coffeeUrlPreviewMarkup(result){
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   ${catalog?'<button type="button" class="secondary compact" data-action="preview-coffee-url-refresh">Check Current Roaster Page</button><p class="helper">Check for newer published details. Wait 30 seconds between checks; the usual URL lookup limit applies.</p>':''}
-  ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label and type your choice in the matching field below.</p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map(option=>`<li><span class="coffee-conflict-value">${e(option.value)}</span><small>${e(option.label)}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. See the complete published source details below or check the product page.</p>'}</div>`).join('')}</section>`:''}
+  ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label and type your choice in the matching field below.</p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map(option=>`<li><span class="coffee-conflict-value">${e(option.value)}</span><small>${e(option.label)}${option.source_url?' · <a href="'+e(option.source_url)+'" target="_blank" rel="noopener noreferrer">View Original Source</a>':''}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. See the complete published source details below or check the product page.</p>'}</div>`).join('')}</section>`:''}
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(key==='elevation_m'?elevationWithDefaultMeters(result.fields[key]):result.fields[key])}</dd></div>`).join('')}</dl>
   ${result.fields?.process==='Other/Unknown'&&result.roaster_details?.blend_components?'<p class="helper" role="note">This blend has multiple documented processing methods. Other/Unknown preserves that distinction; review the component details below.</p>':''}
   ${fields.some(([key])=>key==='elevation_m'&&elevationWithDefaultMeters(result.fields[key])!==result.fields[key])?'<p class="helper">The roaster omitted the elevation unit. Meters above sea level (m) are assumed, per the approved import rule.</p>':''}
@@ -135,8 +158,8 @@ export function coffeeUrlPreviewMarkup(result){
 // responses, private catalog records, session state or a member's typed form.
 export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOString()}={}){
  if(!result?.ok||typeof result.source_url!=='string')return null;
- let url;try{url=new URL(result.source_url);}catch{return null;}
- if(url.protocol!=='https:'||url.username||url.password)return null;
+ const reviewUrl=publicReviewSourceUrl(result.source_url);
+ if(!reviewUrl)return null;
  let truncated=result.source_facts_truncated===true;
  const bounded=(value,max)=>{
   if(value.length>max)truncated=true;
@@ -151,10 +174,7 @@ export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOStr
   const row={};
   for(const [key,max] of [['label',100],['value',1600],['section',100],['source_type',30],['source_url',3000],['source_path',301],['source_locator',200],['format',10],['field',71]])
    if(typeof fact?.[key]==='string')row[key]=bounded(fact[key],max);
-  const publicSource=value=>{
-   if(typeof value!=='string'||value.length>3000)return null;
-   try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password?u.href:null;}catch{return null;}
-  };
+  const publicSource=publicReviewSourceUrl;
   if(row.source_url){const safe=publicSource(row.source_url);if(safe)row.source_url=safe;else delete row.source_url;}
   if(Array.isArray(fact?.supporting_sources)){
    const sources=fact.supporting_sources.slice(0,3).flatMap(source=>{
@@ -174,8 +194,9 @@ export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOStr
   .map(([key,value])=>[key,typeof value==='string'?bounded(value,500):value]));
  const roastReviewNote=typeof result.roast_hint==='string'?bounded(result.roast_hint,2000):null;
  const conflictOptions=coffeeConflictReviewOptions(result).map(group=>({field:group.field,
-  options:group.options.slice(0,8).map(option=>({value:bounded(option.value,220),label:bounded(option.label,100)}))}));
- return {schema_version:1,type:'coffee_source_review',source_url:url.href,checked_at:checkedAt,
+  options:group.options.slice(0,8).map(option=>({value:bounded(option.value,220),label:bounded(option.label,100),
+   ...(option.source_url?{source_url:option.source_url}:{})}))}));
+ return {schema_version:1,type:'coffee_source_review',source_url:reviewUrl,checked_at:checkedAt,
   verification:'unverified_public_source_suggestions',field_suggestions:fieldSuggestions,
   published_source_information:facts,roaster_details:details,roaster_espresso_reference:recipe,
   conflicts:Array.isArray(result.conflicts)?result.conflicts.filter(key=>autofillFields.some(([field])=>field===key)):[],
