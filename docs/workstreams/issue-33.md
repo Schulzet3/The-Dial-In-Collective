@@ -1,3 +1,9 @@
+## October 27 UTC — Independent candidate issue33 PR162 isolated intake CI correction
+
+PR-head approval run 40446169793 failed only `release-queue.mjs --enforce-intake`: newly added `src/server/coffee-selected-source-evidence.mjs` lacked an IN_PROGRESS/TESTING source queue path. No runtime or original corpus failure was reported. Add **TESTING** DIC-Q-33-independent-candidate21 to this **isolated feature branch ONLY**, merged_source_sha:null, explicit exclusion from current approved READY release, no deployment grant; retain all existing READY rows, published base, history, Locked policies and development branch unchanged. Original source/parser/test blobs ce4f6579/e503213f/a46865e5 unchanged. Exact PR-head approval and other CI must rerun/read back; do not label current CI passed before actual receipt. Source candidate remains NOT READY, NOT DEPLOYED. No actual provider or member writes.
+
+---
+
 ## October 27 UTC — Independent Issue33 source-backed 21-field / 50-conflict candidate, NOT IN RELEASE QUEUE
 
 **Owner authority:** Explicitly continue a separate no-cost improvement pass. Preserve the 17 existing READY items, existing audit chat, current development/operations/release branches, all pending publication approvals, and original coffee/shot/member/Community/offline data. No deployment instruction. Work branch: `work/issue33-21-source-gains-and-50-conflict-audit-20261027`, forked from existing source READY checkpoint `cb9b9013e1fc0caad05d4a0a6f1585f032088982`. Do NOT merge or update shared `docs/RELEASE_QUEUE.json` or `docs/CURRENT_STATUS.md` while the other audit runs. This is an independent non-READY candidate; a later source-bound integration and separate queue decision are required.
