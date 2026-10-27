@@ -1,0 +1,1730 @@
+{
+  "title": "Original immutable 603-coffee audit: 50 unresolved source ambiguities, individually classified",
+  "scope": "Reviewed captured source evidence only; not fresh roaster fact check or a production edit",
+  "original_oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+  "source_archive_sha256": "696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52",
+  "case_count": 603,
+  "ambiguity_count": 50,
+  "field_counts": {
+    "variety": 4,
+    "elevation_m": 4,
+    "origin": 13,
+    "roast_level": 7,
+    "producer": 5,
+    "process": 4,
+    "tasting_notes": 12,
+    "release_label": 1
+  },
+  "category_counts": {
+    "mislabelled_technical_equipment": 1,
+    "ambiguous_elevation_units_and_bounds": 4,
+    "whole_product_geography_disagreement": 5,
+    "roast_disagreement": 6,
+    "blend_country_disagreement": 1,
+    "ambiguous_variety_geography": 1,
+    "unclear_producer_relationship": 4,
+    "generic_cultivar_category": 1,
+    "process_stage_disagreement": 1,
+    "current_product_tasting_profile_disagreement": 10,
+    "variant_specific_tasting": 2,
+    "process_variant_undetermined": 1,
+    "rotating_coffee_origins": 1,
+    "noncurrent_process_comparison": 1,
+    "variant_specific_roast": 1,
+    "geographic_hierarchy_unresolved": 3,
+    "producer_name_identity_unresolved": 1,
+    "cultivar_disagreement": 1,
+    "crop_year_disagreement": 1,
+    "multi_component_processing": 1,
+    "geography_and_seo_stale_suspicion": 3
+  },
+  "work_policy": "Do not choose from contradictory current claims; preserve labeled source facts and ask the roaster/member for precise lot, product variant, current claim or cultivar. No live source confirmation performed.",
+  "review_status": "50 original source ambiguity records individually classified: 1 invalid autofill safely withheld by candidate, 49 continue to require source/variant/roaster confirmation. No new live website reads.",
+  "records": [
+    {
+      "index": 1,
+      "case_id": "queencitycoffeeroasters-com__colombia-decaf-04783dc2",
+      "source_url": "https://queencitycoffeeroasters.com/products/colombia-decaf",
+      "field": "variety",
+      "actual": "Vertical dryers",
+      "expected": "withhold",
+      "original_reason": "The source labels drying equipment as a varietal. Preserve the literal error as a source fact but withhold botanical variety; no substitute inferred.",
+      "source_alternatives": [
+        {
+          "value": "Vertical dryers",
+          "capture_id": "page",
+          "quote": "Varietal: Vertical dryers",
+          "file": "page.html",
+          "sha256": "62f247cdc654d872a13e1aa0d8d82d5dbc1546f8e4e6fc58974465f29a53ffb1",
+          "url": "https://queencitycoffeeroasters.com/products/colombia-decaf"
+        }
+      ],
+      "category": "mislabelled_technical_equipment",
+      "proposed_safe_handling": "withhold_invalid_variety",
+      "analysis": "Dryer is equipment, not botanical cultivar; keep literal source label as reviewable evidence.",
+      "automatically_resolved": true,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true,
+      "resolution": "Extractor now correctly withholds invalid literal dryer as variety; source itself still mislabels the field."
+    },
+    {
+      "index": 2,
+      "case_id": "singlespeedcoffeeroasters-com__copy-of-espresso-blend-2d25984e",
+      "source_url": "https://singlespeedcoffeeroasters.com/products/copy-of-espresso-blend",
+      "field": "elevation_m",
+      "actual": "1.800-2.000",
+      "expected": "withhold",
+      "original_reason": "The current farming network narrative and current specification give different upper elevation bounds. The specification omits its unit. Preserve both rather than choosing a range.",
+      "source_alternatives": [
+        {
+          "value": "1800–2200 meters",
+          "capture_id": "product-endpoint",
+          "quote": "farms in this area grow coffee at elevations of 1800-2200 meters above sea level",
+          "file": "product-endpoint.html",
+          "sha256": "3e51f26a539ba90dd0ae476f028dcbd3d4008a7fa687ce775534566e8d74d920",
+          "url": "https://singlespeedcoffeeroasters.com/products/copy-of-espresso-blend.js"
+        },
+        {
+          "value": "1.800–2.000, unit unstated in spec",
+          "capture_id": "product-endpoint",
+          "quote": "Elevation : 1.800-2.000",
+          "file": "product-endpoint.html",
+          "sha256": "3e51f26a539ba90dd0ae476f028dcbd3d4008a7fa687ce775534566e8d74d920",
+          "url": "https://singlespeedcoffeeroasters.com/products/copy-of-espresso-blend.js"
+        }
+      ],
+      "category": "ambiguous_elevation_units_and_bounds",
+      "proposed_safe_handling": "withhold_unsupported_unit",
+      "analysis": "The product exposes two incompatible elevation maxima; original specification omits unit.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 3,
+      "case_id": "singlespeedcoffeeroasters-com__sumatra-mandheling-5420380a",
+      "source_url": "https://singlespeedcoffeeroasters.com/products/sumatra-mandheling",
+      "field": "elevation_m",
+      "actual": "1.300-1.600",
+      "expected": "review_separately",
+      "original_reason": "The published elevation has no unit. Preserve its raw range; do not silently assert meters from another product.",
+      "source_alternatives": [
+        {
+          "value": "1.300–1.600, unit not stated",
+          "capture_id": "product-endpoint",
+          "quote": "Elevation : 1.300-1.600",
+          "file": "product-endpoint.html",
+          "sha256": "6652657abf9c05f7b1068781a57256868961f1081599b7259274b938b8f33431",
+          "url": "https://singlespeedcoffeeroasters.com/products/sumatra-mandheling.js"
+        }
+      ],
+      "category": "ambiguous_elevation_units_and_bounds",
+      "proposed_safe_handling": "withhold_unsupported_unit",
+      "analysis": "Do not infer meters for an unlabeled dotted thousands range.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 4,
+      "case_id": "lostsockroasters-com__yabitu-koba-ethiopia-copy-cd1abf8c",
+      "source_url": "https://lostsockroasters.com/products/yabitu-koba-ethiopia-copy",
+      "field": "elevation_m",
+      "actual": "2300 meters",
+      "expected": "withhold",
+      "original_reason": "Current specification gives 2300m, while current farm narrative gives 2316m without explicitly calling the former rounded. Preserve both readings.",
+      "source_alternatives": [
+        {
+          "value": "2300 meters",
+          "capture_id": "page",
+          "quote": "Altitude: 2300 meters",
+          "file": "page.html",
+          "sha256": "1a2c558a932d0ae9804038d3c510764bfc70dbc5c87e5b73c24603e5eb7c23fd",
+          "url": "https://lostsockroasters.com/products/yabitu-koba-ethiopia-copy"
+        },
+        {
+          "value": "2316 meters",
+          "capture_id": "page",
+          "quote": "2,316 meters above sea level",
+          "file": "page.html",
+          "sha256": "1a2c558a932d0ae9804038d3c510764bfc70dbc5c87e5b73c24603e5eb7c23fd",
+          "url": "https://lostsockroasters.com/products/yabitu-koba-ethiopia-copy"
+        }
+      ],
+      "category": "ambiguous_elevation_units_and_bounds",
+      "proposed_safe_handling": "retain_both_elevations",
+      "analysis": "2300 m and 2316 m may be rounding but no current source establishes equivalence.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 5,
+      "case_id": "brewpointcoffee-com__the-alchemist-decaf-blend-18d5dd47",
+      "source_url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend",
+      "field": "origin",
+      "actual": "Brazil (Mountain Water Processed)",
+      "expected": "withhold",
+      "original_reason": "Current visible specifications and endpoint describe Brazil, but the same-product search description says Mexico; no explicit historical marker resolves it.",
+      "source_alternatives": [
+        {
+          "value": "Brazil",
+          "capture_id": "page",
+          "quote": "Origin: Brazil (Mountain Water Processed)",
+          "file": "page.html",
+          "sha256": "683e8345d4893f6e9a303d7dfaebe7ecfdcedfbde409d191758743513e1237e7",
+          "url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend"
+        },
+        {
+          "value": "Mexico",
+          "capture_id": "page",
+          "quote": "Origin: Mexico Roast: Dark",
+          "file": "page.html",
+          "sha256": "683e8345d4893f6e9a303d7dfaebe7ecfdcedfbde409d191758743513e1237e7",
+          "url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend"
+        }
+      ],
+      "category": "whole_product_geography_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Product specification and SEO description name different countries.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 6,
+      "case_id": "brewpointcoffee-com__the-alchemist-decaf-blend-18d5dd47",
+      "source_url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend",
+      "field": "roast_level",
+      "actual": "Medium",
+      "expected": "withhold",
+      "original_reason": "Current title/body and endpoint say Medium, while current search description explicitly says Dark. Preserve both rather than silently selecting a source.",
+      "source_alternatives": [
+        {
+          "value": "Medium",
+          "capture_id": "page",
+          "quote": "Roast: Medium",
+          "file": "page.html",
+          "sha256": "683e8345d4893f6e9a303d7dfaebe7ecfdcedfbde409d191758743513e1237e7",
+          "url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend"
+        },
+        {
+          "value": "Dark",
+          "capture_id": "page",
+          "quote": "Origin: Mexico Roast: Dark",
+          "file": "page.html",
+          "sha256": "683e8345d4893f6e9a303d7dfaebe7ecfdcedfbde409d191758743513e1237e7",
+          "url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend"
+        }
+      ],
+      "category": "roast_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_roast",
+      "analysis": "Current Medium vs SEO Dark contradiction.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 7,
+      "case_id": "brewpointcoffee-com__the-illusionist-af3b907e",
+      "source_url": "https://brewpointcoffee.com/products/the-illusionist",
+      "field": "origin",
+      "actual": "Vietnam + Brazil",
+      "expected": "withhold",
+      "original_reason": "Current product body/endpoint and same-product search metadata provide incompatible whole-blend country sets. Do not merge them into a three-country blend.",
+      "source_alternatives": [
+        {
+          "value": "Vietnam and Brazil",
+          "capture_id": "page",
+          "quote": "Origin: Vietnam + Brazil",
+          "file": "page.html",
+          "sha256": "8dd480a805e7ce9640b3eaebfb678c22faa461089e990ba1d4a941445e93d375",
+          "url": "https://brewpointcoffee.com/products/the-illusionist"
+        },
+        {
+          "value": "Brazil and Guatemala",
+          "capture_id": "page",
+          "quote": "Origin: Brazil & Guatemala",
+          "file": "page.html",
+          "sha256": "8dd480a805e7ce9640b3eaebfb678c22faa461089e990ba1d4a941445e93d375",
+          "url": "https://brewpointcoffee.com/products/the-illusionist"
+        }
+      ],
+      "category": "blend_country_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Different country sets, no proven current composition or identity.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 8,
+      "case_id": "combatcoffeetea-com__white-knuckles-dark-roast-sumatra-2ba36829",
+      "source_url": "https://combatcoffeetea.com/products/white-knuckles-dark-roast-sumatra",
+      "field": "variety",
+      "actual": "Variety Sumatra Lake Tawar",
+      "expected": "withhold",
+      "original_reason": "The explicit varieties field contains a geographic-looking phrase and no independently identifiable cultivar. Preserve the literal label/value for review; do not invent a botanical variety.",
+      "source_alternatives": [
+        {
+          "value": "Variety Sumatra Lake Tawar",
+          "capture_id": "page",
+          "quote": "Varieties: Variety Sumatra Lake Tawar",
+          "file": "page.html",
+          "sha256": "90bbf4eac26e427d28ef6823293559c088afa5b49cad09ad5bdab6da318239a9",
+          "url": "https://combatcoffeetea.com/products/white-knuckles-dark-roast-sumatra"
+        }
+      ],
+      "category": "ambiguous_variety_geography",
+      "proposed_safe_handling": "withhold_invalid_variety",
+      "analysis": "Literal Variety Sumatra Lake Tawar is not a verified botanical cultivar.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 9,
+      "case_id": "baldguybrew-com__organic-costa-rican-coffee-a4712955",
+      "source_url": "https://baldguybrew.com/products/organic-costa-rican-coffee",
+      "field": "producer",
+      "actual": "family farm",
+      "expected": "withhold",
+      "original_reason": "The selected product narrative centers Hacienda La Minita; its current page metadata centers a differently named micromill without an explicit relationship. Preserve both attributions, do not invent a producer chain.",
+      "source_alternatives": [
+        {
+          "value": "Hacienda La Minita",
+          "capture_id": "page",
+          "quote": "Since the late 1960’s, Hacienda La Minita has been the foundation of our company.",
+          "file": "page.html",
+          "sha256": "cbe09f2562706c4faabf4ea7c95d75ad3ede2119982451e1588b6d60e4e946c2",
+          "url": "https://baldguybrew.com/products/organic-costa-rican-coffee"
+        },
+        {
+          "value": "La Montaña Tarrazu Micromill",
+          "capture_id": "page",
+          "quote": "La Montaña Tarrazu Micromill in Santa Maria Dota embodies the attention to detail that brings out the best in our Costa Rican coffee.",
+          "file": "page.html",
+          "sha256": "cbe09f2562706c4faabf4ea7c95d75ad3ede2119982451e1588b6d60e4e946c2",
+          "url": "https://baldguybrew.com/products/organic-costa-rican-coffee"
+        }
+      ],
+      "category": "unclear_producer_relationship",
+      "proposed_safe_handling": "withhold_conflicting_producer",
+      "analysis": "Estate and separate micromill relationship unproven.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 10,
+      "case_id": "baldguybrew-com__organic-colombian-coffee-14cfc5f3",
+      "source_url": "https://baldguybrew.com/products/organic-colombian-coffee",
+      "field": "producer",
+      "actual": "Cooperativa del Sur del Cauca - COSURCA",
+      "expected": "withhold",
+      "original_reason": "The overview describes a single estate and named couple, but the longer story identifies a 1423-family cooperative. The source does not connect the couple to that cooperative; keep both without inventing a relationship.",
+      "source_alternatives": [
+        {
+          "value": "Leonela and Alberto, single estate",
+          "capture_id": "page",
+          "quote": "For almost 30 years, Leonela and Alberto have produced the best Organic Colombian Coffee you’ll find on a single estate.",
+          "file": "page.html",
+          "sha256": "723206bdb91d6f2da5c043d86fbe4470af676f0c14d0a171f5a3ffc700e0cc91",
+          "url": "https://baldguybrew.com/products/organic-colombian-coffee"
+        },
+        {
+          "value": "Cooperativa del Sur del Cauca - COSURCA",
+          "capture_id": "page",
+          "quote": "Our Organic Colombian Coffee comes from The Cooperativa del Sur del Cauca - COSURCA",
+          "file": "page.html",
+          "sha256": "723206bdb91d6f2da5c043d86fbe4470af676f0c14d0a171f5a3ffc700e0cc91",
+          "url": "https://baldguybrew.com/products/organic-colombian-coffee"
+        }
+      ],
+      "category": "unclear_producer_relationship",
+      "proposed_safe_handling": "withhold_conflicting_producer",
+      "analysis": "Individual estate and grower-cooperative roles not connected.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 11,
+      "case_id": "frontsidecoffee-com__sumatra-lintong-bebdf1a5",
+      "source_url": "https://frontsidecoffee.com/products/sumatra-lintong",
+      "field": "roast_level",
+      "actual": "Dark",
+      "expected": "withhold",
+      "original_reason": "The current description explicitly calls this a dark roast; selected-product metadata explicitly says medium-dark. Preserve both named roast levels.",
+      "source_alternatives": [
+        {
+          "value": "Dark",
+          "capture_id": "page",
+          "quote": "premium dark roast Sumatra coffee",
+          "file": "page.html",
+          "sha256": "4bca3472d312fc10a3a7b990f68b88bca7f284add1d8fc05c2db35e813650f71",
+          "url": "https://frontsidecoffee.com/products/sumatra-lintong"
+        },
+        {
+          "value": "Medium-Dark",
+          "capture_id": "page",
+          "quote": "A medium-dark roast with notes of dark chocolate, bourbon, and forest floor",
+          "file": "page.html",
+          "sha256": "4bca3472d312fc10a3a7b990f68b88bca7f284add1d8fc05c2db35e813650f71",
+          "url": "https://frontsidecoffee.com/products/sumatra-lintong"
+        }
+      ],
+      "category": "roast_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_roast",
+      "analysis": "Body dark vs metadata medium-dark.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 12,
+      "case_id": "leapcoffeeroasters-com__ethiopian-organic-coffee-6d3b1463",
+      "source_url": "https://leapcoffeeroasters.com/products/ethiopian-organic-coffee",
+      "field": "variety",
+      "actual": "heirloom",
+      "expected": "review_separately",
+      "original_reason": "Regional categorical statement is not an explicit cultivar identification of the named Mendebo farm lot; retain for review.",
+      "source_alternatives": [
+        {
+          "value": "Indigenous heirloom cultivars",
+          "capture_id": "page",
+          "quote": "Yergecheffe coffees are exclusively indigenous heirloom cultivars",
+          "file": "page.html",
+          "sha256": "28042fcb5f12b8c5a4cae713d8d723235b286ded0552e22da386d9bc9206d070",
+          "url": "https://leapcoffeeroasters.com/products/ethiopian-organic-coffee"
+        }
+      ],
+      "category": "generic_cultivar_category",
+      "proposed_safe_handling": "withhold_unproven_cultivar",
+      "analysis": "Heirloom is a regional tendency not an observed current lot cultivar.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 13,
+      "case_id": "gnosiscoffee-com__red-bourbon-decaf-947e2539",
+      "source_url": "https://gnosiscoffee.com/products/red-bourbon-decaf",
+      "field": "process",
+      "actual": "Natural",
+      "expected": "withhold",
+      "original_reason": "Story calls it natural processing while detailed stages pulp then wash after two fermentations. The source does not explicitly reconcile the general natural wording with washed stages; retain raw full method for review.",
+      "source_alternatives": [
+        {
+          "value": "Natural",
+          "capture_id": "page",
+          "quote": "Because of its natural processing and sugarcane decaffeination",
+          "file": "page.html",
+          "sha256": "5c4bf8b33714b9b3a04ecbb240d3dfe8afbae8e7f315c97398baba548f7dc705",
+          "url": "https://gnosiscoffee.com/products/red-bourbon-decaf"
+        },
+        {
+          "value": "Washed",
+          "capture_id": "page",
+          "quote": "Following a careful wash and low-temperature drying process",
+          "file": "page.html",
+          "sha256": "5c4bf8b33714b9b3a04ecbb240d3dfe8afbae8e7f315c97398baba548f7dc705",
+          "url": "https://gnosiscoffee.com/products/red-bourbon-decaf"
+        }
+      ],
+      "category": "process_stage_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_process",
+      "analysis": "Natural marketing language and pulped/washed stages conflict.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 14,
+      "case_id": "pinewoodcoffeeco-com__coast-decaf-0940dec8",
+      "source_url": "https://pinewoodcoffeeco.com/products/coast-decaf",
+      "field": "origin",
+      "actual": "African Blend",
+      "expected": "withhold",
+      "original_reason": "Current product story and specification name incompatible growing regions; do not choose an origin from an apparently copied spec.",
+      "source_alternatives": [
+        {
+          "value": "Mexico",
+          "capture_id": "page",
+          "quote": "Crafted from Mexican coffees",
+          "file": "page.html",
+          "sha256": "1f3b15ce896b01e3231a2079a80f80c33329a4ea4e6b1cb1852dc631c93e362f",
+          "url": "https://pinewoodcoffeeco.com/products/coast-decaf"
+        },
+        {
+          "value": "African Blend",
+          "capture_id": "page",
+          "quote": "Origin: African Blend",
+          "file": "page.html",
+          "sha256": "1f3b15ce896b01e3231a2079a80f80c33329a4ea4e6b1cb1852dc631c93e362f",
+          "url": "https://pinewoodcoffeeco.com/products/coast-decaf"
+        }
+      ],
+      "category": "whole_product_geography_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Story and selected specification identify incompatible regions.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 15,
+      "case_id": "pinewoodcoffeeco-com__coast-decaf-0940dec8",
+      "source_url": "https://pinewoodcoffeeco.com/products/coast-decaf",
+      "field": "tasting_notes",
+      "actual": "Peaches, Golden Raisins, Juicy",
+      "expected": "withhold",
+      "original_reason": "Named story flavor profile and current product widget disagree; keep both.",
+      "source_alternatives": [
+        {
+          "value": "molasses, brown sugar",
+          "capture_id": "page",
+          "quote": "rich notes of molasses and brown sugar",
+          "file": "page.html",
+          "sha256": "1f3b15ce896b01e3231a2079a80f80c33329a4ea4e6b1cb1852dc631c93e362f",
+          "url": "https://pinewoodcoffeeco.com/products/coast-decaf"
+        },
+        {
+          "value": "Peaches, Golden Raisins, Juicy",
+          "capture_id": "page",
+          "quote": "Peaches, Golden Raisins, Juicy",
+          "file": "page.html",
+          "sha256": "1f3b15ce896b01e3231a2079a80f80c33329a4ea4e6b1cb1852dc631c93e362f",
+          "url": "https://pinewoodcoffeeco.com/products/coast-decaf"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Current story and widget disagree; no equivalence established.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 16,
+      "case_id": "www-cumbre-coffee__colombian-coffee-tintico-727b4c15",
+      "source_url": "https://www.cumbre.coffee/product/colombian-coffee-tintico",
+      "field": "tasting_notes",
+      "actual": "Chocolate, Grapefruit, Raw Sugar",
+      "expected": "withhold",
+      "original_reason": "Visible and selected-product structured descriptions publish different named profiles; preserve their context without silently choosing one.",
+      "source_alternatives": [
+        {
+          "value": "Chocolate, Grapefruit, Raw Sugar",
+          "capture_id": "page",
+          "quote": "Taste: Chocolate, Grapefruit, Raw Sugar",
+          "file": "page.html",
+          "sha256": "9673735b02ac102111360bbf58afd73f0f5bc6b4a3c19001f4a5dc621636e2df",
+          "url": "https://www.cumbre.coffee/product/colombian-coffee-tintico"
+        },
+        {
+          "value": "dried orange, raw sugar, chocolate",
+          "capture_id": "page",
+          "quote": "notes of dried orange, raw sugar, and chocolate",
+          "file": "page.html",
+          "sha256": "9673735b02ac102111360bbf58afd73f0f5bc6b4a3c19001f4a5dc621636e2df",
+          "url": "https://www.cumbre.coffee/product/colombian-coffee-tintico"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Visible and structured selected profiles differ.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 17,
+      "case_id": "dailyrisecoffee-com__organic-brazil-fc44847c",
+      "source_url": "https://dailyrisecoffee.com/products/organic-brazil",
+      "field": "roast_level",
+      "actual": "Dark",
+      "expected": "withhold",
+      "original_reason": "Current hero roast and exact selected coffee story give different roast levels.",
+      "source_alternatives": [
+        {
+          "value": "Dark",
+          "capture_id": "page",
+          "quote": "Roast Profile: Dark",
+          "file": "page.html",
+          "sha256": "59971c8e70ae5b36aac18d836c6ad365e8c17aa8c28d28c663adc3dfc103dad7",
+          "url": "https://dailyrisecoffee.com/products/organic-brazil"
+        },
+        {
+          "value": "Medium-Dark",
+          "capture_id": "page",
+          "quote": "Roasted to a developed medium/dark",
+          "file": "page.html",
+          "sha256": "59971c8e70ae5b36aac18d836c6ad365e8c17aa8c28d28c663adc3dfc103dad7",
+          "url": "https://dailyrisecoffee.com/products/organic-brazil"
+        }
+      ],
+      "category": "roast_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_roast",
+      "analysis": "Hero label and current story differ.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 18,
+      "case_id": "dailyrisecoffee-com__organic-brazil-fc44847c",
+      "source_url": "https://dailyrisecoffee.com/products/organic-brazil",
+      "field": "tasting_notes",
+      "actual": "Bakers Chocolate, Roasted Hazelnut, Molasses",
+      "expected": "withhold",
+      "original_reason": "Current hero and coffee story publish distinct full cup profiles; retain alternatives rather than silently selecting one.",
+      "source_alternatives": [
+        {
+          "value": "Bakers Chocolate, Roasted Hazelnut, Molasses",
+          "capture_id": "page",
+          "quote": "Tasting Notes: Bakers Chocolate | Roasted Hazelnut | Molasses",
+          "file": "page.html",
+          "sha256": "59971c8e70ae5b36aac18d836c6ad365e8c17aa8c28d28c663adc3dfc103dad7",
+          "url": "https://dailyrisecoffee.com/products/organic-brazil"
+        },
+        {
+          "value": "Milk chocolate, toasted hazelnut, caramelized sugar, dried cherry",
+          "capture_id": "page",
+          "quote": "notes of milk chocolate, toasted hazelnut, and caramelized sugar, layered with subtle dried cherry sweetness",
+          "file": "page.html",
+          "sha256": "59971c8e70ae5b36aac18d836c6ad365e8c17aa8c28d28c663adc3dfc103dad7",
+          "url": "https://dailyrisecoffee.com/products/organic-brazil"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Hero and exact coffee story conflict.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 19,
+      "case_id": "dailyrisecoffee-com__costa-rica-santa-elena-4b3f58a1",
+      "source_url": "https://dailyrisecoffee.com/products/costa-rica-santa-elena",
+      "field": "tasting_notes",
+      "actual": "Maple, Raisin, Buttered Toast",
+      "expected": "withhold",
+      "original_reason": "Hero and story publish different coffee-specific flavor profiles; preserve separately.",
+      "source_alternatives": [
+        {
+          "value": "Maple, Raisin, Buttered Toast",
+          "capture_id": "page",
+          "quote": "Tasting Notes: Maple | Raisin | Buttered Toast",
+          "file": "page.html",
+          "sha256": "822de0cab6ec80b2ae50748aaceacb7cdf10c9224e7b78f0d69112c577880353",
+          "url": "https://dailyrisecoffee.com/products/costa-rica-santa-elena"
+        },
+        {
+          "value": "Cotton candy, butterscotch",
+          "capture_id": "page",
+          "quote": "infusing flavors of cotton candy and butterscotch into her coffee",
+          "file": "page.html",
+          "sha256": "822de0cab6ec80b2ae50748aaceacb7cdf10c9224e7b78f0d69112c577880353",
+          "url": "https://dailyrisecoffee.com/products/costa-rica-santa-elena"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Hero and product story disagree.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 20,
+      "case_id": "woodscoffee-com__woods-blend-7dfbc76b",
+      "source_url": "https://woodscoffee.com/products/woods-blend",
+      "field": "tasting_notes",
+      "actual": "Almonds, Mild Fruit, Cocoa Powder",
+      "expected": "withhold",
+      "original_reason": "Current description and labeled notes publish different named cup profiles; retain both with source context.",
+      "source_alternatives": [
+        {
+          "value": "Almonds, Mild Fruit, Cocoa Powder",
+          "capture_id": "page",
+          "quote": "Notes: Almonds | Mild Fruit | Cocoa Powder",
+          "file": "page.html",
+          "sha256": "b6e6e667e920ee0d874a088f4d789772cdcfb2e62016ca3e12da31e461a77a38",
+          "url": "https://woodscoffee.com/products/woods-blend"
+        },
+        {
+          "value": "Delicate sweetness, cinnamon, semi-sweet cocoa",
+          "capture_id": "page",
+          "quote": "with a delicate sweetness and hints of cinnamon. It features semi-sweet cocoa characteristics",
+          "file": "page.html",
+          "sha256": "b6e6e667e920ee0d874a088f4d789772cdcfb2e62016ca3e12da31e461a77a38",
+          "url": "https://woodscoffee.com/products/woods-blend"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Labeled list and description disagree.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 21,
+      "case_id": "woodscoffee-com__brown-bear-0ed3089b",
+      "source_url": "https://woodscoffee.com/products/brown-bear",
+      "field": "tasting_notes",
+      "actual": "Rich, Earth, Spice",
+      "expected": "withhold",
+      "original_reason": "Description and labeled notes publish different profiles; retain both without selecting one.",
+      "source_alternatives": [
+        {
+          "value": "Rich, Earth, Spice",
+          "capture_id": "page",
+          "quote": "Notes: Rich | Earth | Spice",
+          "file": "page.html",
+          "sha256": "67a6c6e1b250ddaeed78212cac2873ce17c3dc9b571fd7d715eec4777ecc84f0",
+          "url": "https://woodscoffee.com/products/brown-bear"
+        },
+        {
+          "value": "Chocolate, vanilla, spice",
+          "capture_id": "page",
+          "quote": "hints of chocolate, vanilla, and spice",
+          "file": "page.html",
+          "sha256": "67a6c6e1b250ddaeed78212cac2873ce17c3dc9b571fd7d715eec4777ecc84f0",
+          "url": "https://woodscoffee.com/products/brown-bear"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Conflicting current product note lists.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 22,
+      "case_id": "www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07",
+      "source_url": "https://www.slowburncoffee.com/products/honduras-expreso-paraiseno",
+      "field": "producer",
+      "actual": "Gerardo Peñalva",
+      "expected": "review_separately",
+      "original_reason": "Story credits the Padilla family and Javier as growers while specifications identify another owner; roles may differ, so keep both source claims separately without silently choosing one.",
+      "source_alternatives": [
+        {
+          "value": "Javier Padilla",
+          "capture_id": "page",
+          "quote": "Today, Javier Padilla is committed to growing excellent quality coffee",
+          "file": "page.html",
+          "sha256": "cb830df35caf3a18b60ebefb8ca296c71b319fa78f01501a8905f6a9da3c67b8",
+          "url": "https://www.slowburncoffee.com/products/honduras-expreso-paraiseno"
+        },
+        {
+          "value": "Gerardo Peñalva",
+          "capture_id": "page",
+          "quote": "Owner: Gerardo Peñalva",
+          "file": "page.html",
+          "sha256": "cb830df35caf3a18b60ebefb8ca296c71b319fa78f01501a8905f6a9da3c67b8",
+          "url": "https://www.slowburncoffee.com/products/honduras-expreso-paraiseno"
+        }
+      ],
+      "category": "unclear_producer_relationship",
+      "proposed_safe_handling": "withhold_conflicting_producer",
+      "analysis": "Grower and owner roles not disambiguated.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 23,
+      "case_id": "www-downeastcoffee-com__seasonal-release-be79c66e",
+      "source_url": "https://www.downeastcoffee.com/products/seasonal-release",
+      "field": "elevation_m",
+      "actual": "1,525 – 1,950 MASL",
+      "expected": "withhold",
+      "original_reason": "Whole-blend altitude maximum is lower than the explicitly included Costa Rican component maximum; cannot silently reconcile.",
+      "source_alternatives": [
+        {
+          "value": "1,525 – 1,950 MASL",
+          "capture_id": "page",
+          "quote": "Altitude: 1,525 – 1,950 MASL",
+          "file": "page.html",
+          "sha256": "d8874e8ac6cd0faab7b402da554442f330bc20fccdecd72ca289780b074ae7a7",
+          "url": "https://www.downeastcoffee.com/products/seasonal-release"
+        },
+        {
+          "value": "1,525 to 2,400 MASL for Costa Rican component",
+          "capture_id": "page",
+          "quote": "Grown between 1,525 and 2,400 MASL",
+          "file": "page.html",
+          "sha256": "d8874e8ac6cd0faab7b402da554442f330bc20fccdecd72ca289780b074ae7a7",
+          "url": "https://www.downeastcoffee.com/products/seasonal-release"
+        }
+      ],
+      "category": "ambiguous_elevation_units_and_bounds",
+      "proposed_safe_handling": "retain_component_bounds",
+      "analysis": "Whole blend bound contradicts source component maximum.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 24,
+      "case_id": "www-unlockedcoffee-com__dedication-costa-rica-4667ab5c",
+      "source_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica",
+      "field": "tasting_notes",
+      "actual": "peach, clementine, honey, lemon, strawberry and brown sugar.",
+      "expected": "review_separately",
+      "original_reason": "Two distinct current-product labeled flavor profiles conflict.",
+      "source_alternatives": [
+        {
+          "value": "Cooked Cranberry, Toffee, Spices, Fresh Watermelon",
+          "capture_id": "page",
+          "quote": "Cooked Cranberry • Toffee • Spices • Fresh Watermelon",
+          "file": "page.html",
+          "sha256": "30995147b02d17f74e4c84b143d10fa20d9f45f92d62c1a6346ceb6d5760e304",
+          "url": "https://www.unlockedcoffee.com/products/dedication-costa-rica"
+        },
+        {
+          "value": "peach, clementine, honey, lemon, strawberry and brown sugar",
+          "capture_id": "page",
+          "quote": "Notes: peach, clementine, honey, lemon, strawberry and brown sugar.",
+          "file": "page.html",
+          "sha256": "30995147b02d17f74e4c84b143d10fa20d9f45f92d62c1a6346ceb6d5760e304",
+          "url": "https://www.unlockedcoffee.com/products/dedication-costa-rica"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Two current labeled note profiles disagree.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 25,
+      "case_id": "memoirscoffee-com__brazil-fazenda-mayara-natural-bdd9eecd",
+      "source_url": "https://memoirscoffee.com/products/brazil-fazenda-mayara-natural",
+      "field": "origin",
+      "actual": "Guimarânia, BRAZIL",
+      "expected": "withhold",
+      "original_reason": "Title and product story refer to different Brazilian growing regions; retained named producer/cultivars/altitude explicitly belong to narrative and require contextual review.",
+      "source_alternatives": [
+        {
+          "value": "Espirito Santo Immagrantes, Brazil",
+          "capture_id": "page",
+          "quote": "BRAZIL, ESPIRITO SANTO IMMAGRANTES",
+          "file": "page.html",
+          "sha256": "3ec68098a970dba1988fe2f8748b2ef9f6f85fc7399e5698ec0615167f248215",
+          "url": "https://memoirscoffee.com/products/brazil-fazenda-mayara-natural"
+        },
+        {
+          "value": "Guimarânia / Cerrado, Brazil",
+          "capture_id": "page",
+          "quote": "farms in the municipality of Guimarânia",
+          "file": "page.html",
+          "sha256": "3ec68098a970dba1988fe2f8748b2ef9f6f85fc7399e5698ec0615167f248215",
+          "url": "https://memoirscoffee.com/products/brazil-fazenda-mayara-natural"
+        },
+        {
+          "value": "Guimarânia / Cerrado, Brazil",
+          "capture_id": "page",
+          "quote": "characteristics of the Cerrado region",
+          "file": "page.html",
+          "sha256": "3ec68098a970dba1988fe2f8748b2ef9f6f85fc7399e5698ec0615167f248215",
+          "url": "https://memoirscoffee.com/products/brazil-fazenda-mayara-natural"
+        }
+      ],
+      "category": "whole_product_geography_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Current title vs source story growing regions differ.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 26,
+      "case_id": "mountainthunder-com__new-100-kona-half-caff-coffee-16oz-553c4228",
+      "source_url": "https://mountainthunder.com/products/new-100-kona-half-caff-coffee-16oz",
+      "field": "tasting_notes",
+      "actual": "Kona Coffee with very low acidity",
+      "expected": "review_separately",
+      "original_reason": "Flavor differs by roast choice; preserve contexts separately.",
+      "source_alternatives": [
+        {
+          "value": "Tropical fruit, Vienna",
+          "capture_id": "page",
+          "quote": "The Vienna roast level has notes of tropical fruit",
+          "file": "page.html",
+          "sha256": "057896832a2b794e0178108abe7b64c4b57b088525ea5a56295f7a6c0fb405f5",
+          "url": "https://mountainthunder.com/products/new-100-kona-half-caff-coffee-16oz"
+        },
+        {
+          "value": "Chocolate, French",
+          "capture_id": "page",
+          "quote": "the French roast is more chocolatey",
+          "file": "page.html",
+          "sha256": "057896832a2b794e0178108abe7b64c4b57b088525ea5a56295f7a6c0fb405f5",
+          "url": "https://mountainthunder.com/products/new-100-kona-half-caff-coffee-16oz"
+        }
+      ],
+      "category": "variant_specific_tasting",
+      "proposed_safe_handling": "require_selected_variant",
+      "analysis": "Tasting descriptor changes with roast variant.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 27,
+      "case_id": "www-woodshedroast-com__ethiopian-15584dcd",
+      "source_url": "https://www.woodshedroast.com/products/ethiopian",
+      "field": "process",
+      "actual": "Natural",
+      "expected": "withhold",
+      "original_reason": "Source explicitly presents both possible methods without identifying the current lot method; do not choose either.",
+      "source_alternatives": [
+        {
+          "value": "Washed or Natural",
+          "capture_id": "page",
+          "quote": "Whether washed or natural process",
+          "file": "page.html",
+          "sha256": "f3b275e2046173b66f5a0d419e45a0179b7a1ed4b2124426178b272d98bc8a6e",
+          "url": "https://www.woodshedroast.com/products/ethiopian"
+        }
+      ],
+      "category": "process_variant_undetermined",
+      "proposed_safe_handling": "withhold_unselected_process",
+      "analysis": "Either method offered without a current lot selection.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 28,
+      "case_id": "blackriverroasters-com__organic-specialty-decaf-4779854e",
+      "source_url": "https://blackriverroasters.com/products/organic-specialty-decaf",
+      "field": "origin",
+      "actual": "Mexico",
+      "expected": "withhold",
+      "original_reason": "Rotating decaf contains incompatible current country claims in story, explicit current specification and exact-product tag. No source time establishes which is authoritative.",
+      "source_alternatives": [
+        {
+          "value": "Peru",
+          "capture_id": "page",
+          "quote": "The current offering from Peru",
+          "file": "page.html",
+          "sha256": "8efd6917c82dd0eb15d1d76c5501b8ba35f02c5ce16c60b7b3914b67016f3370",
+          "url": "https://blackriverroasters.com/products/organic-specialty-decaf"
+        },
+        {
+          "value": "Mexico",
+          "capture_id": "page",
+          "quote": "Current Decaf Coffee Location: Mexico",
+          "file": "page.html",
+          "sha256": "8efd6917c82dd0eb15d1d76c5501b8ba35f02c5ce16c60b7b3914b67016f3370",
+          "url": "https://blackriverroasters.com/products/organic-specialty-decaf"
+        },
+        {
+          "value": "Honduras",
+          "capture_id": "product-endpoint",
+          "quote": "Honduras",
+          "file": "product-endpoint.html",
+          "sha256": "02a8fb2eb5a5d24d15dafd4ec4bceac133698d8c217a471a74e3eea71e9382a4",
+          "url": "https://blackriverroasters.com/products/organic-specialty-decaf.js"
+        }
+      ],
+      "category": "rotating_coffee_origins",
+      "proposed_safe_handling": "require_selected_release",
+      "analysis": "Rotating decaf current and static fields disagree; no timestamp precedence.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 29,
+      "case_id": "preludecoffeeroasters-com__ethiopia-guji-kercha-b7d5d3dd",
+      "source_url": "https://preludecoffeeroasters.com/products/ethiopia-guji-kercha",
+      "field": "process",
+      "actual": "Natural",
+      "expected": "review_separately",
+      "original_reason": "Natural is referenced in a flavor-comparison sentence; About the Process section gives only general growing conditions. Preserve the process hint without treating it as a definitive method label.",
+      "source_alternatives": [
+        {
+          "value": "Natural implied by flavor comparison",
+          "capture_id": "page",
+          "quote": "This coffee has those classic bursting fruit flavors we've come to love about natural Ethiopian coffees.",
+          "file": "page.html",
+          "sha256": "c645eb7df8b446fefbaf7ce7aff4446251b45d87100518e966cd4f5a86fe3802",
+          "url": "https://preludecoffeeroasters.com/products/ethiopia-guji-kercha"
+        }
+      ],
+      "category": "noncurrent_process_comparison",
+      "proposed_safe_handling": "withhold_unproven_process",
+      "analysis": "Natural references comparative flavor rather than current processing method.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 30,
+      "case_id": "lowcountrycoffeeroasters-com__special-house-blend-79a84f29",
+      "source_url": "https://lowcountrycoffeeroasters.com/products/special-house-blend",
+      "field": "tasting_notes",
+      "actual": "Almond, Chocolate",
+      "expected": "withhold",
+      "original_reason": "Current selected page has incompatible named profile sets in narrative, specification and structured metadata; retain alternatives without silently mixing them.",
+      "source_alternatives": [
+        {
+          "value": "Mocha",
+          "capture_id": "page",
+          "quote": "delivers rich mocha notes",
+          "file": "page.html",
+          "sha256": "ef92f67433d8741b23809204592c08f1b1ff66803376127455178dce2b19f700",
+          "url": "https://lowcountrycoffeeroasters.com/products/special-house-blend"
+        },
+        {
+          "value": "Nutmeg, Whole Bean Vanilla, Creamy Butter",
+          "capture_id": "page",
+          "quote": "Flavor: Nutmeg, Whole Bean Vanilla, Creamy Butter",
+          "file": "page.html",
+          "sha256": "ef92f67433d8741b23809204592c08f1b1ff66803376127455178dce2b19f700",
+          "url": "https://lowcountrycoffeeroasters.com/products/special-house-blend"
+        },
+        {
+          "value": "Almond, Chocolate",
+          "capture_id": "page",
+          "quote": "Almond, Chocolate",
+          "file": "page.html",
+          "sha256": "ef92f67433d8741b23809204592c08f1b1ff66803376127455178dce2b19f700",
+          "url": "https://lowcountrycoffeeroasters.com/products/special-house-blend"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Narrative, spec and JSON conflict.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 31,
+      "case_id": "lowcountrycoffeeroasters-com__breakfast-blend-ccc8cf9e",
+      "source_url": "https://lowcountrycoffeeroasters.com/products/breakfast-blend",
+      "field": "tasting_notes",
+      "actual": "brown sugar, almond, cherry & red apple",
+      "expected": "withhold",
+      "original_reason": "Narrative and labeled flavor list disagree; same alternate specification appears on another product, but a likely template error cannot be silently resolved.",
+      "source_alternatives": [
+        {
+          "value": "brown sugar, almond, cherry, red apple",
+          "capture_id": "page",
+          "quote": "notes of brown sugar, almond, cherry & red apple",
+          "file": "page.html",
+          "sha256": "4529b27ec6cd8d328fae0d782e263c9e810567bacbb6f9736de313d2ea0ff45b",
+          "url": "https://lowcountrycoffeeroasters.com/products/breakfast-blend"
+        },
+        {
+          "value": "Nutmeg, Whole Bean Vanilla, Creamy Butter",
+          "capture_id": "page",
+          "quote": "Flavor: Nutmeg, Whole Bean Vanilla, Creamy Butter",
+          "file": "page.html",
+          "sha256": "4529b27ec6cd8d328fae0d782e263c9e810567bacbb6f9736de313d2ea0ff45b",
+          "url": "https://lowcountrycoffeeroasters.com/products/breakfast-blend"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Current narrative vs reused other-product list.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 32,
+      "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+      "source_url": "https://hellolarsonscoffee.com/products/bless-your-heart-1",
+      "field": "roast_level",
+      "actual": "Medium",
+      "expected": "withhold",
+      "original_reason": "Medium is recommended but Dark also independently purchasable; canonical product URL fixes no roast variant.",
+      "source_alternatives": [
+        {
+          "value": "Medium",
+          "capture_id": "product-endpoint",
+          "quote": "Medium Ground",
+          "file": "product-endpoint.html",
+          "sha256": "6834039453b5a349bbf2e3040614984eda2e9288f7e7e12ec132fe6879310400",
+          "url": "https://hellolarsonscoffee.com/products/bless-your-heart-1.js"
+        },
+        {
+          "value": "Dark",
+          "capture_id": "product-endpoint",
+          "quote": "Dark Ground",
+          "file": "product-endpoint.html",
+          "sha256": "6834039453b5a349bbf2e3040614984eda2e9288f7e7e12ec132fe6879310400",
+          "url": "https://hellolarsonscoffee.com/products/bless-your-heart-1.js"
+        }
+      ],
+      "category": "variant_specific_roast",
+      "proposed_safe_handling": "require_selected_variant",
+      "analysis": "Medium and Dark both purchasable, URL does not select one.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 33,
+      "case_id": "cherryrivercoffee-com__ethiopia-wush-wush-f4b74878",
+      "source_url": "https://cherryrivercoffee.com/products/ethiopia-wush-wush",
+      "field": "origin",
+      "actual": "Hambela, Oromia, Ethiopia",
+      "expected": "withhold",
+      "original_reason": "Origin specification and actual-grown narrative supply different local region identities without explaining their relationship. Both establish Ethiopia, but do not silently choose or concatenate incompatible district claims.",
+      "source_alternatives": [
+        {
+          "value": "Hambela, Oromia, Ethiopia",
+          "capture_id": "page",
+          "quote": "Origin: Hambela, Oromia",
+          "file": "page.html",
+          "sha256": "299f0c31abd259728888f6424aa779c652d360645bcda056f92e4a47341b6e91",
+          "url": "https://cherryrivercoffee.com/products/ethiopia-wush-wush"
+        },
+        {
+          "value": "Hambela, Oromia, Ethiopia",
+          "capture_id": "page",
+          "quote": "Ethiopia Wush Wush",
+          "file": "page.html",
+          "sha256": "299f0c31abd259728888f6424aa779c652d360645bcda056f92e4a47341b6e91",
+          "url": "https://cherryrivercoffee.com/products/ethiopia-wush-wush"
+        },
+        {
+          "value": "Sama Village, Anasora, Ethiopia",
+          "capture_id": "page",
+          "quote": "Grown in Sama Village in Ethiopia’s Anasora region",
+          "file": "page.html",
+          "sha256": "299f0c31abd259728888f6424aa779c652d360645bcda056f92e4a47341b6e91",
+          "url": "https://cherryrivercoffee.com/products/ethiopia-wush-wush"
+        }
+      ],
+      "category": "geographic_hierarchy_unresolved",
+      "proposed_safe_handling": "retain_both_geography_claims",
+      "analysis": "Different district claims share Ethiopia but cannot be concatenated.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 34,
+      "case_id": "eastpole-coffee__granosacielo-71bcf407",
+      "source_url": "https://eastpole.coffee/products/granosacielo",
+      "field": "producer",
+      "actual": "Hazel Arias and Nelsyn Yoseles",
+      "expected": "withhold",
+      "original_reason": "Same product specification and story give different second names for Nelsyn. Could be an incomplete full name or error, but equivalence is not established in source; retain both rather than silently choose.",
+      "source_alternatives": [
+        {
+          "value": "Hazel Arias and Nelsyn Yoseles",
+          "capture_id": "page",
+          "quote": "PRODUCER Hazel Arias and Nelsyn Yoseles",
+          "file": "page.html",
+          "sha256": "4612b2a94ad6f73657391aebbb5ccebcf07f67b04122dfbd673d5361212c1e58",
+          "url": "https://eastpole.coffee/products/granosacielo"
+        },
+        {
+          "value": "Hazel Arias and Nelsyn Hernández",
+          "capture_id": "page",
+          "quote": "Granos al Cielo is a project led by Hazel Arias and Nelsyn Hernández",
+          "file": "page.html",
+          "sha256": "4612b2a94ad6f73657391aebbb5ccebcf07f67b04122dfbd673d5361212c1e58",
+          "url": "https://eastpole.coffee/products/granosacielo"
+        }
+      ],
+      "category": "producer_name_identity_unresolved",
+      "proposed_safe_handling": "require_source_confirmation",
+      "analysis": "Nelsyn full-name discrepancy without identity link.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 35,
+      "case_id": "whiterhinocoffee-com__ethiopia-kayon-mountain-6ec5e458",
+      "source_url": "https://whiterhinocoffee.com/products/ethiopia-kayon-mountain",
+      "field": "origin",
+      "actual": "Oromia, Guji, Shakiso, Ethiopia",
+      "expected": "withhold",
+      "original_reason": "Additional tasting-notes country map section names Colombia too, despite single-origin title and table; no explicit blend linkage. Withhold unresolved combined origin.",
+      "source_alternatives": [
+        {
+          "value": "Oromia, Guji, Shakiso, Ethiopia",
+          "capture_id": "product-endpoint",
+          "quote": "Origin Oromia, Guji, Shakiso, Ethiopia",
+          "file": "product-endpoint.html",
+          "sha256": "6d63805d3806b932f67287fb0863486e4cbac0fdf1156548ccb9ef19ef013da4",
+          "url": "https://whiterhinocoffee.com/products/ethiopia-kayon-mountain.js"
+        },
+        {
+          "value": "Ethiopia; Colombia",
+          "capture_id": "page",
+          "quote": "Ethiopia Colombia Brew Suggestions",
+          "file": "page.html",
+          "sha256": "d28ec8598bd6ff45544922fd4483f6281da4fadb8a1bd5b3d1146f123ad9602c",
+          "url": "https://whiterhinocoffee.com/products/ethiopia-kayon-mountain"
+        }
+      ],
+      "category": "whole_product_geography_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Country map suggests Colombia in Ethiopia single-origin.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 36,
+      "case_id": "sumatocoffee-com__the-sender-single-origin-costa-rican-114a246a",
+      "source_url": "https://sumatocoffee.com/products/the-sender-single-origin-costa-rican",
+      "field": "roast_level",
+      "actual": "Medium-Light",
+      "expected": "withhold",
+      "original_reason": "Description names Light-Medium; product image alt explicitly says medium. Retain source conflict, no arbitrary tier.",
+      "source_alternatives": [
+        {
+          "value": "Medium-Light",
+          "capture_id": "product-endpoint",
+          "quote": "Roast Level: Light-Medium",
+          "file": "product-endpoint.html",
+          "sha256": "01ee5fbf73a589fdccdb756c2e56dae54f3c61f726f5978e9212396e8e03f898",
+          "url": "https://sumatocoffee.com/products/the-sender-single-origin-costa-rican.js"
+        },
+        {
+          "value": "Medium",
+          "capture_id": "product-endpoint",
+          "quote": "The Sender medium roast coffee by Sumato",
+          "file": "product-endpoint.html",
+          "sha256": "01ee5fbf73a589fdccdb756c2e56dae54f3c61f726f5978e9212396e8e03f898",
+          "url": "https://sumatocoffee.com/products/the-sender-single-origin-costa-rican.js"
+        }
+      ],
+      "category": "roast_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_roast",
+      "analysis": "Light-Medium current copy and Medium packaging image.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 37,
+      "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+      "source_url": "https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process",
+      "field": "variety",
+      "actual": "Lempira",
+      "expected": "withhold",
+      "original_reason": "Current specification andSEO metadata disagree on cultivar.",
+      "source_alternatives": [
+        {
+          "value": "Lempira",
+          "capture_id": "product-endpoint",
+          "quote": "Varietals: Lempira",
+          "file": "product-endpoint.html",
+          "sha256": "483a4a6cdf7f070419b1b57d89493f606fa7c5820be33fd035c0dd11bf737bf0",
+          "url": "https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process.js"
+        },
+        {
+          "value": "Parainema",
+          "capture_id": "page",
+          "quote": "Legacy Farms Honduras Parainema",
+          "file": "page.html",
+          "sha256": "4d5733cd1db21931369ee82a4b43a8151e055fa7bd70bd3a5aafd665dbbca9c6",
+          "url": "https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process"
+        }
+      ],
+      "category": "cultivar_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_cultivar",
+      "analysis": "Spec vs SEO identify different cultivars.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 38,
+      "case_id": "nightswimcoffee-com__ea-decaf-de-cana-ccea25c5",
+      "source_url": "https://nightswimcoffee.com/products/ea-decaf-de-cana",
+      "field": "origin",
+      "actual": "Cauca, Colombia",
+      "expected": "withhold",
+      "original_reason": "Specification and current description assign different Colombian regions to the same coffee without a blend or variant explanation.",
+      "source_alternatives": [
+        {
+          "value": "Cauca, Colombia",
+          "capture_id": "product-endpoint",
+          "quote": "COUNTRY: Cauca, Colombia",
+          "file": "product-endpoint.html",
+          "sha256": "2e5bbba334f486129a651430c0a5581c338ba7ad5e8e68fa1188edf937f96c16",
+          "url": "https://nightswimcoffee.com/products/ea-decaf-de-cana.js"
+        },
+        {
+          "value": "Huila, Colombia",
+          "capture_id": "product-endpoint",
+          "quote": "offer this EA decaf from Huila",
+          "file": "product-endpoint.html",
+          "sha256": "2e5bbba334f486129a651430c0a5581c338ba7ad5e8e68fa1188edf937f96c16",
+          "url": "https://nightswimcoffee.com/products/ea-decaf-de-cana.js"
+        },
+        {
+          "value": "Huila, Colombia",
+          "capture_id": "page",
+          "quote": "coming from Huila, Colombia",
+          "file": "page.html",
+          "sha256": "5fd03b093be6c63b61cf4497d7d2b6fd2bfb6a0c6ad7a10ca434714ab2e41548",
+          "url": "https://nightswimcoffee.com/products/ea-decaf-de-cana"
+        }
+      ],
+      "category": "geographic_hierarchy_unresolved",
+      "proposed_safe_handling": "retain_both_geography_claims",
+      "analysis": "Different Colombian regions, no lot/variant boundary.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 39,
+      "case_id": "konaearth-com__100-kona-classic-coffee-8oz-1lb-5lb-a6e50784",
+      "source_url": "https://konaearth.com/products/100-kona-classic-coffee-8oz-1lb-5lb",
+      "field": "tasting_notes",
+      "actual": "nuts, chocolate, caramelized sugar, and bright citrus",
+      "expected": "review_separately",
+      "original_reason": "Profiles belong to distinct roast variants.",
+      "source_alternatives": [
+        {
+          "value": "Almond, brown sugar, cream, cocoa, apple, jasmine, milk chocolate, orange",
+          "capture_id": "page",
+          "quote": "Almond, brown sugar, cream, cocoa, apple, jasmine, milk chocolate, orange",
+          "file": "page.html",
+          "sha256": "975d8996e75635569e0114e9d5a0ae6b95385d5e39798d7d6e8e7a6a2d52f20f",
+          "url": "https://konaearth.com/products/100-kona-classic-coffee-8oz-1lb-5lb"
+        },
+        {
+          "value": "Roasted nuts, caramelized sugar, tobacco, bittersweet chocolate, lime",
+          "capture_id": "page",
+          "quote": "Roasted nuts, caramelized sugar, tobacco, bittersweet chocolate, lime",
+          "file": "page.html",
+          "sha256": "975d8996e75635569e0114e9d5a0ae6b95385d5e39798d7d6e8e7a6a2d52f20f",
+          "url": "https://konaearth.com/products/100-kona-classic-coffee-8oz-1lb-5lb"
+        },
+        {
+          "value": "Molasses and bittersweet chocolate",
+          "capture_id": "page",
+          "quote": "Molasses and bittersweet chocolate",
+          "file": "page.html",
+          "sha256": "975d8996e75635569e0114e9d5a0ae6b95385d5e39798d7d6e8e7a6a2d52f20f",
+          "url": "https://konaearth.com/products/100-kona-classic-coffee-8oz-1lb-5lb"
+        }
+      ],
+      "category": "variant_specific_tasting",
+      "proposed_safe_handling": "require_selected_variant",
+      "analysis": "Distinct roast profiles on same product.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 40,
+      "case_id": "mapscoffee-com__emerald-of-the-andes-50a512e2",
+      "source_url": "https://mapscoffee.com/products/emerald-of-the-andes",
+      "field": "origin",
+      "actual": "Colombia, Latin America",
+      "expected": "withhold",
+      "original_reason": "Current detailed description identifies Nariño; metadata describes Huila. Both source claims retained rather than merged.",
+      "source_alternatives": [
+        {
+          "value": "Nariño, Colombia",
+          "capture_id": "page",
+          "quote": "Nariño",
+          "file": "page.html",
+          "sha256": "4c5475ca807e29aea4572ed6e8138ff100b7711182eff6d9c5e3ff8631ca198e",
+          "url": "https://mapscoffee.com/products/emerald-of-the-andes"
+        },
+        {
+          "value": "Nariño, Colombia",
+          "capture_id": "page",
+          "quote": "Colombia",
+          "file": "page.html",
+          "sha256": "4c5475ca807e29aea4572ed6e8138ff100b7711182eff6d9c5e3ff8631ca198e",
+          "url": "https://mapscoffee.com/products/emerald-of-the-andes"
+        },
+        {
+          "value": "Huila, Colombia",
+          "capture_id": "page",
+          "quote": "grown in the Huila region",
+          "file": "page.html",
+          "sha256": "4c5475ca807e29aea4572ed6e8138ff100b7711182eff6d9c5e3ff8631ca198e",
+          "url": "https://mapscoffee.com/products/emerald-of-the-andes"
+        },
+        {
+          "value": "Huila, Colombia",
+          "capture_id": "page",
+          "quote": "Colombia",
+          "file": "page.html",
+          "sha256": "4c5475ca807e29aea4572ed6e8138ff100b7711182eff6d9c5e3ff8631ca198e",
+          "url": "https://mapscoffee.com/products/emerald-of-the-andes"
+        }
+      ],
+      "category": "geographic_hierarchy_unresolved",
+      "proposed_safe_handling": "retain_both_geography_claims",
+      "analysis": "Nariño vs Huila claims.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 41,
+      "case_id": "www-aldeacoffee-com__gracias-a-dios-single-origin-communal-lot-b81fd28d",
+      "source_url": "https://www.aldeacoffee.com/products/gracias-a-dios-single-origin-communal-lot",
+      "field": "roast_level",
+      "actual": "Medium-Dark",
+      "expected": "withhold",
+      "original_reason": "Product description and brewing paragraph assign different roast levels.",
+      "source_alternatives": [
+        {
+          "value": "Medium-Dark",
+          "capture_id": "page",
+          "quote": "Roasted medium-dark",
+          "file": "page.html",
+          "sha256": "808a3b9ae6d8ec99ddf6ddb43ab36ceb3cf9f41269372964823f264b3729b9d3",
+          "url": "https://www.aldeacoffee.com/products/gracias-a-dios-single-origin-communal-lot"
+        },
+        {
+          "value": "Medium",
+          "capture_id": "page",
+          "quote": "a medium roast coffee",
+          "file": "page.html",
+          "sha256": "808a3b9ae6d8ec99ddf6ddb43ab36ceb3cf9f41269372964823f264b3729b9d3",
+          "url": "https://www.aldeacoffee.com/products/gracias-a-dios-single-origin-communal-lot"
+        }
+      ],
+      "category": "roast_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_roast",
+      "analysis": "Product body and brewing paragraph use different roast levels.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 42,
+      "case_id": "www-rossstreetroasting-com__nicaragua-divine-inspiration-relationship-coffee-9cefd8c4",
+      "source_url": "https://www.rossstreetroasting.com/products/nicaragua-divine-inspiration-relationship-coffee",
+      "field": "release_label",
+      "actual": "2023",
+      "expected": "review_separately",
+      "original_reason": "Product lot table and SEO metadata publish different crop years; current lot table is more specific but discrepancy must stay visible.",
+      "source_alternatives": [
+        {
+          "value": "2023-'24 (Landed Sept '24)",
+          "capture_id": "page",
+          "quote": "2023-'24 (Landed Sept '24)",
+          "file": "page.html",
+          "sha256": "08a1739ddca9eea63b61f001d7d3f22399936e8d33e92d77d73efe3b162c15a4",
+          "url": "https://www.rossstreetroasting.com/products/nicaragua-divine-inspiration-relationship-coffee"
+        },
+        {
+          "value": "2020-21",
+          "capture_id": "page",
+          "quote": "2020-21 Crop is back in stock!",
+          "file": "page.html",
+          "sha256": "08a1739ddca9eea63b61f001d7d3f22399936e8d33e92d77d73efe3b162c15a4",
+          "url": "https://www.rossstreetroasting.com/products/nicaragua-divine-inspiration-relationship-coffee"
+        }
+      ],
+      "category": "crop_year_disagreement",
+      "proposed_safe_handling": "require_current_lot_confirmation",
+      "analysis": "Current table vs SEO year differ; cannot auto-select year.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 43,
+      "case_id": "konacoffee-nyc__ka-u-3cd62516",
+      "source_url": "https://konacoffee.nyc/products/ka-u",
+      "field": "origin",
+      "actual": "Ka’u, Hawai’i",
+      "expected": "review_separately",
+      "original_reason": "Labeled origin and product narrative identify neighboring Ka’u, while the product summary claims 100% Kona; retain conflicting geographic claims.",
+      "source_alternatives": [
+        {
+          "value": "Ka’u, Hawai’i",
+          "capture_id": "page",
+          "quote": "Ka’u, Hawai’i",
+          "file": "page.html",
+          "sha256": "e774a1a11e9aa1df3324a33a981ac2e2b3484f675d3341dcc2328e577c572421",
+          "url": "https://konacoffee.nyc/products/ka-u"
+        },
+        {
+          "value": "100% Kona Coffee",
+          "capture_id": "page",
+          "quote": "100% Kona Coffee",
+          "file": "page.html",
+          "sha256": "e774a1a11e9aa1df3324a33a981ac2e2b3484f675d3341dcc2328e577c572421",
+          "url": "https://konacoffee.nyc/products/ka-u"
+        }
+      ],
+      "category": "whole_product_geography_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Ka’u vs Kona not interchangeable geographic indications.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 44,
+      "case_id": "konacoffee-nyc__ka-u-3cd62516",
+      "source_url": "https://konacoffee.nyc/products/ka-u",
+      "field": "tasting_notes",
+      "actual": "Peach, Honey, Bergamot, Jasmine and Cherry",
+      "expected": "review_separately",
+      "original_reason": "Headline tasting profile and current product narrative give different note lists.",
+      "source_alternatives": [
+        {
+          "value": "Peach, Honey, Bergamot, Jasmine and Cherry",
+          "capture_id": "page",
+          "quote": "Peach, Honey, Bergamot, Jasmine and Cherry",
+          "file": "page.html",
+          "sha256": "e774a1a11e9aa1df3324a33a981ac2e2b3484f675d3341dcc2328e577c572421",
+          "url": "https://konacoffee.nyc/products/ka-u"
+        },
+        {
+          "value": "merlot, strawberries",
+          "capture_id": "page",
+          "quote": "merlot, strawberries",
+          "file": "page.html",
+          "sha256": "e774a1a11e9aa1df3324a33a981ac2e2b3484f675d3341dcc2328e577c572421",
+          "url": "https://konacoffee.nyc/products/ka-u"
+        }
+      ],
+      "category": "current_product_tasting_profile_disagreement",
+      "proposed_safe_handling": "retain_conflicting_profiles",
+      "analysis": "Headline and current narrative notes conflict.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 45,
+      "case_id": "www-stageline-coffee__brazil-capricornio-dulce-signature-4e3df727",
+      "source_url": "https://www.stageline.coffee/product-page/brazil-capricornio-dulce-signature",
+      "field": "process",
+      "actual": "Other/Unknown",
+      "expected": "review_separately",
+      "original_reason": "Different processing applies to each of two equal blend components; no single base process.",
+      "source_alternatives": [
+        {
+          "value": "Natural",
+          "capture_id": "page",
+          "quote": "50% naturally processed yellow catuai cherries",
+          "file": "page.html",
+          "sha256": "6344753c680c076f0232a3b270b2d3f567c8e033264dccea7ec9b1392762e5af",
+          "url": "https://www.stageline.coffee/product-page/brazil-capricornio-dulce-signature"
+        },
+        {
+          "value": "Honey",
+          "capture_id": "page",
+          "quote": "50% honey processed mondo novo cherries",
+          "file": "page.html",
+          "sha256": "6344753c680c076f0232a3b270b2d3f567c8e033264dccea7ec9b1392762e5af",
+          "url": "https://www.stageline.coffee/product-page/brazil-capricornio-dulce-signature"
+        }
+      ],
+      "category": "multi_component_processing",
+      "proposed_safe_handling": "retain_component_processes",
+      "analysis": "Two processes apply separately to blend components, no single canonical base.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 46,
+      "case_id": "skcoffeeplease-com__colombia-narino-585cbdd2",
+      "source_url": "https://skcoffeeplease.com/products/colombia-narino",
+      "field": "origin",
+      "actual": "La Union, Narino, Colombia",
+      "expected": "withhold",
+      "original_reason": "Selected specification and current SEO description conflict on country. Same Peru SEO appears on Mexico page, suggesting stale template copy, but no unsupported resolution is imposed.",
+      "source_alternatives": [
+        {
+          "value": "La Union, Narino, Colombia",
+          "capture_id": "product-endpoint",
+          "quote": "Region: La Union, Narino, Colombia",
+          "file": "product-endpoint.html",
+          "sha256": "8d5e9b53423a17485207dc2c227d88f79682684ebe38d6b81d34e53125e72158",
+          "url": "https://skcoffeeplease.com/products/colombia-narino.js"
+        },
+        {
+          "value": "Peru in SEO",
+          "capture_id": "page",
+          "quote": "Bold coffee from Peru.",
+          "file": "page.html",
+          "sha256": "f4f60876885830e99d32b843b981f4f279c960f4d540bfde3fb6039df51a13e8",
+          "url": "https://skcoffeeplease.com/products/colombia-narino"
+        }
+      ],
+      "category": "geography_and_seo_stale_suspicion",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Nariño vs same-product Peru SEO; suspected template cannot prove precedence.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 47,
+      "case_id": "skcoffeeplease-com__mexico-chiapas-7d16f49c",
+      "source_url": "https://skcoffeeplease.com/products/mexico-chiapas",
+      "field": "origin",
+      "actual": "Chiapas, Mexico",
+      "expected": "withhold",
+      "original_reason": "Current detail says Mexico while endpoint also carries Colombia tag and SEO says Peru. Retain all contradictory source geography for review.",
+      "source_alternatives": [
+        {
+          "value": "Chiapas, Mexico",
+          "capture_id": "product-endpoint",
+          "quote": "Region: Chiapas, Mexico",
+          "file": "product-endpoint.html",
+          "sha256": "3b1aa91356273070618fcdcac86b1cd27b7ef526af7c8658243f9f0fca422066",
+          "url": "https://skcoffeeplease.com/products/mexico-chiapas.js"
+        },
+        {
+          "value": "Colombia tag",
+          "capture_id": "product-endpoint",
+          "quote": "colombia",
+          "file": "product-endpoint.html",
+          "sha256": "3b1aa91356273070618fcdcac86b1cd27b7ef526af7c8658243f9f0fca422066",
+          "url": "https://skcoffeeplease.com/products/mexico-chiapas.js"
+        },
+        {
+          "value": "Peru in SEO",
+          "capture_id": "page",
+          "quote": "Bold coffee from Peru.",
+          "file": "page.html",
+          "sha256": "0fd2e85c42db58f306438f36eeef280aac0c35bc9c5913a0bf726fd65be55899",
+          "url": "https://skcoffeeplease.com/products/mexico-chiapas"
+        }
+      ],
+      "category": "geography_and_seo_stale_suspicion",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Mexico current detail vs Colombia tag vs Peru SEO.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 48,
+      "case_id": "skcoffeeplease-com__rwanda-ac124abe",
+      "source_url": "https://skcoffeeplease.com/products/rwanda",
+      "field": "origin",
+      "actual": "Western Province, Rwanda",
+      "expected": "withhold",
+      "original_reason": "Current selected detail and product SEO description assign different countries; no blend is asserted.",
+      "source_alternatives": [
+        {
+          "value": "Western Province, Rwanda",
+          "capture_id": "product-endpoint",
+          "quote": "Region: Western Province, Rwanda",
+          "file": "product-endpoint.html",
+          "sha256": "f25ba81d6792e35ae1c15e3ea8ae4685b8f87993db9ce63a34085952bdf12ab2",
+          "url": "https://skcoffeeplease.com/products/rwanda.js"
+        },
+        {
+          "value": "Colombia in SEO",
+          "capture_id": "page",
+          "quote": "Washed coffee from Colombia.",
+          "file": "page.html",
+          "sha256": "dd80ee816dd1c21341ba1603d4a7f68f7dddff4727eb29b2c736a38bfa3f0c43",
+          "url": "https://skcoffeeplease.com/products/rwanda"
+        }
+      ],
+      "category": "geography_and_seo_stale_suspicion",
+      "proposed_safe_handling": "withhold_conflicting_origin",
+      "analysis": "Rwanda current detail vs other country in SEO.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 49,
+      "case_id": "cortezcoffee-com__el-salvador-santa-ana-copy-1833d18d",
+      "source_url": "https://cortezcoffee.com/products/el-salvador-santa-ana-copy",
+      "field": "roast_level",
+      "actual": "Medium",
+      "expected": "withhold",
+      "original_reason": "Current product body and label say Medium; SEO says Light. Both current captured claims are explicit and conflict.",
+      "source_alternatives": [
+        {
+          "value": "Medium",
+          "capture_id": "product-endpoint",
+          "quote": "Medium roast",
+          "file": "product-endpoint.html",
+          "sha256": "281258936fd42eae435e1cf98ec30a796c2f75d51450a2509a46139e0501f00f",
+          "url": "https://cortezcoffee.com/products/el-salvador-santa-ana-copy.js"
+        },
+        {
+          "value": "Light",
+          "capture_id": "page",
+          "quote": "We roast it light to let those bright, juicy flavors shine through",
+          "file": "page.html",
+          "sha256": "a09f51c9268bcb5020ea97077afb3d445632ddb70fead0bbfc6e876644fe309d",
+          "url": "https://cortezcoffee.com/products/el-salvador-santa-ana-copy"
+        }
+      ],
+      "category": "roast_disagreement",
+      "proposed_safe_handling": "withhold_conflicting_roast",
+      "analysis": "Medium body vs SEO Light.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    },
+    {
+      "index": 50,
+      "case_id": "cortezcoffee-com__el-salvador-santa-ana-copy-1833d18d",
+      "source_url": "https://cortezcoffee.com/products/el-salvador-santa-ana-copy",
+      "field": "producer",
+      "actual": "smallholder farms",
+      "expected": "withhold",
+      "original_reason": "Body and SEO name different processing stations. No reliable single producer can be selected from these inconsistent descriptions.",
+      "source_alternatives": [
+        {
+          "value": "Lahamenegu wet mill",
+          "capture_id": "product-endpoint",
+          "quote": "carefully processed at the Lahamenegu wet mill",
+          "file": "product-endpoint.html",
+          "sha256": "281258936fd42eae435e1cf98ec30a796c2f75d51450a2509a46139e0501f00f",
+          "url": "https://cortezcoffee.com/products/el-salvador-santa-ana-copy.js"
+        },
+        {
+          "value": "Sawana Washing Station",
+          "capture_id": "page",
+          "quote": "expertly processed at the Sawana Washing Station",
+          "file": "page.html",
+          "sha256": "a09f51c9268bcb5020ea97077afb3d445632ddb70fead0bbfc6e876644fe309d",
+          "url": "https://cortezcoffee.com/products/el-salvador-santa-ana-copy"
+        }
+      ],
+      "category": "unclear_producer_relationship",
+      "proposed_safe_handling": "withhold_conflicting_producer",
+      "analysis": "Different processing stations named in body and SEO.",
+      "automatically_resolved": false,
+      "external_source_verification": "NOT_DONE",
+      "original_oracle_unchanged": true
+    }
+  ],
+  "post_candidate_unresolved_count": 49,
+  "post_candidate_withheld_count": 66,
+  "one_safe_parser_withholding_fix": {
+    "case_id": "queencitycoffeeroasters-com__colombia-decaf-04783dc2",
+    "field": "variety",
+    "bad_published_value": "Vertical dryers",
+    "new_canonical_autofill": null,
+    "literal_published_source_facts_retained": true,
+    "source_mislabel_remains_public_not_corrected_by_roaster": true
+  }
+}

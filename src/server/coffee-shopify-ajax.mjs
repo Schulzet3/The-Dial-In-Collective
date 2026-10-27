@@ -197,11 +197,26 @@ export function mergePublicProductPreview(base,extra){
    retainAlternatives(key,key.replaceAll('_',' '),value,other);
  }
  const source_facts=mergeCoffeeSourceFacts(alternatives,base.source_facts,extra.source_facts);
+ const conflict_options={};
+ for(const key of conflicts){
+  const rows=[];
+  const add=row=>{
+   const value=String(row?.value||'').trim();
+   if(!value||value.length>220||rows.some(other=>other.value.toLowerCase()===value.toLowerCase())||rows.length>=8)return;
+   rows.push({value,label:String(row?.label||key).slice(0,100)});
+  };
+  for(const part of [base,extra]){
+   for(const row of part.conflict_options?.[key]||[])add(row);
+   if(typeof part.fields?.[key]==='string')add({value:part.fields[key],label:'Selected product '+(part===base?'page':'JSON')});
+  }
+  for(const fact of alternatives)if(fact.field===key)add(fact);
+  if(rows.length)conflict_options[key]=rows;
+ }
  const merged={...base,fields,available:Object.keys(fields),
   roaster_details:{...extra.roaster_details,...base.roaster_details},
   source_facts,
   ...(base.source_facts_truncated||extra.source_facts_truncated||source_facts.truncated?{source_facts_truncated:true}:{}),
-  ...(conflicts.size?{conflicts:[...conflicts].sort()}:{}),
+  ...(conflicts.size?{conflicts:[...conflicts].sort(),conflict_options}:{}),
   ...(recipe?{roaster_recipe:recipe}:{})};
  mergeCoffeeProcessingClaims(fields,[base,extra]);
  if(!conflicts.size)delete merged.conflicts;

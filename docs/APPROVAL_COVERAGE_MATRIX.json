@@ -796,6 +796,43 @@
           "contains": "no member-facing basket or equipment-version controls"
         }
       ]
+    },
+    {
+      "id": "extractor_notes_masl_member_conflict_review_20261026",
+      "decision_key": "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026",
+      "scope": "New Coffee URL import only. Direct selected-product labeled notes override incidental prose; unitless explicit elevation is meters, and competing selected public source facts remain unselected with visible manual entry.",
+      "implementation": "SOURCE_TESTED_NOT_DEPLOYED; original 603 unchanged oracle+supplementary and isolated UI/browser tested",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; synthetic Chromium 390 light and 1280 dark passed 33 assertions using original source captures and simulated auth/quota; genuine-member, physical device and live production remain unverified.",
+      "assertions": [
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "contains": "const printedNotes=[];"
+        },
+        {
+          "path": "src/server/coffee-shopify-ajax.mjs",
+          "contains": "const conflict_options={};"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "export function coffeeConflictReviewOptions(result)"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "export function elevationWithDefaultMeters(value)"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "input.classList?.add('coffee-needs-review');"
+        },
+        {
+          "path": "tests/coffee-owner-elevation-notes-conflict-review.test.mjs",
+          "contains": "Woods"
+        },
+        {
+          "path": "docs/audits/extractor-issue33-owner-rules-603-20261027.json",
+          "contains": "\"new_exact\": 3090"
+        }
+      ]
     }
   ],
   "active_gap_flags": [
@@ -1018,5 +1055,24 @@
     "issue13_independent": "OPEN",
     "new_release_authorized": false,
     "original_requirements_preserved_except_test_modality": true
+  },
+  "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Direct owner Issue33 October 26/27 instruction",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/visual.css"
+    ],
+    "tests": [
+      "tests/coffee-owner-elevation-notes-conflict-review.test.mjs",
+      "Original frozen603 unchanged canonical and supplementary comparators",
+      "Isolated real cloud preview adapter/handler/app mobile and desktop journey"
+    ],
+    "release_authorization": "NOT GRANTED: source-only; prepare READY upon full acceptance"
   }
 }

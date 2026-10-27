@@ -18,6 +18,46 @@ export function coffeeSourceDifferences(submitted,current){
   .filter(([key])=>typeof submitted?.[key]==='string'&&submitted[key].trim()&&same(submitted[key])!==same(current?.[key]))
   .map(([key,label])=>({key,label,current:String(current?.[key]??''),submitted:submitted[key].trim()}));
 }
+// A preview never authorizes a canonical edit. Source candidates are
+// explicitly presented for the member's manual decision, never auto-applied.
+const REVIEW_FIELDS=new Map(autofillFields.filter(([key])=>!['name','roaster'].includes(key)));
+export function coffeeConflictReviewOptions(result){
+ if(!result?.ok)return [];
+ const facts=Array.isArray(result.source_facts)?result.source_facts.slice(0,MAX_SOURCE_REVIEW_FACTS):[];
+ return [...new Set(Array.isArray(result.conflicts)?result.conflicts:[])].filter(key=>REVIEW_FIELDS.has(key)).map(field=>{
+  const options=[],seen=new Set();
+  const add=(value,label,source_url='')=>{
+   if(typeof value!=='string'||!value.trim()||value.length>220||options.length>=8)return;
+   const text=value.trim(),sig=text.normalize('NFKC').toLowerCase().replace(/\s+/g,' ');
+   if(seen.has(sig))return;
+   seen.add(sig);options.push({value:text,label:String(label||'Published source').slice(0,100),
+    source_url:typeof source_url==='string'&&source_url===result.source_url?source_url:''});
+  };
+  for(const row of (Array.isArray(result.conflict_options?.[field])?result.conflict_options[field]:[]).slice(0,16))
+   add(row?.value,row?.label);
+  for(const fact of facts){
+   if(fact?.field===field&&!['json','projection','reference'].includes(fact.format))
+    add(fact.value,fact.label,fact.source_url);
+   if(field==='roast_level'&&fact?.label==='Published product tags'&&
+     fact.format==='json'&&fact.value?.length<=4000){
+    try{
+     const tags=JSON.parse(fact.value);
+     if(Array.isArray(tags))for(const tag of tags.slice(0,80))if(typeof tag==='string'&&
+      /^(?:Coffee_)?(?:(?:Ultra|Very)[ -]Light|Light[ -]Medium|Medium[ -](?:Light|Dark)|Light|Medium|Dark)[ -]Roast$/i.test(tag))
+      add(tag,'Selected product roast tag',fact.source_url);
+    }catch{/* Original literal JSON remains in published source details. */}
+   }
+  }
+  return {field,label:REVIEW_FIELDS.get(field),options};
+ });
+}
+export function elevationWithDefaultMeters(value){
+ // An elevation field is already source-bound. Only a complete number or
+ // range without a unit gets the owner-approved default meters label.
+ const raw=String(value||'').trim();
+ if(!/^(?:(?:[~><]=?|[≥≤])\s*)?(?:\d{1,2}(?:[,. ]\d{3}){1,2}|\d{1,5})(?:\s*(?:-|–|—|to|and|&)\s*(?:\d{1,2}(?:[,. ]\d{3}){1,2}|\d{1,5}))?\+?$/.test(raw))return raw;
+ return raw+' m';
+}
 const reasons={
  invalid_url:'Enter a secure HTTPS link to a public coffee product page.',
  unrecognized_official_roaster:'This source could not be recognized or accessed. Enter coffee details manually if needed.',
@@ -36,6 +76,7 @@ const reasons={
 export function coffeeUrlPreviewMarkup(result){
  if(!result?.ok)return `<div class="coffee-url-message" role="status">${e(reasons[result?.reason]||'We could not retrieve trustworthy details. Enter the coffee information manually.')}</div>`;
  const fields=autofillFields.filter(([name])=>typeof result.fields?.[name]==='string'&&result.fields[name].trim());
+ const conflictGroups=coffeeConflictReviewOptions(result);
  const existing=result.match?.classification==='exact_verified'?'This page also matches an existing verified coffee. Choosing Add Coffee will reuse its canonical record after the identity check.':
   result.match?.classification==='needs_confirmation'?'A similar verified coffee exists. You will be asked to confirm the right release before linking any records.':'';
  const official=result.source==='official_roaster_product_metadata';
@@ -74,9 +115,10 @@ export function coffeeUrlPreviewMarkup(result){
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   ${catalog?'<button type="button" class="secondary compact" data-action="preview-coffee-url-refresh">Check Current Roaster Page</button><p class="helper">Check for newer published details. Wait 30 seconds between checks; the usual URL lookup limit applies.</p>':''}
-  ${Array.isArray(result.conflicts)&&result.conflicts.length?'<p class="helper" role="note">Conflicting source details were left blank. Check the roaster product page.</p>':''}
-  <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.fields[key])}</dd></div>`).join('')}</dl>
+  ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label and type your choice in the matching field below.</p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map(option=>`<li><span class="coffee-conflict-value">${e(option.value)}</span><small>${e(option.label)}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. See the complete published source details below or check the product page.</p>'}</div>`).join('')}</section>`:''}
+  <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(key==='elevation_m'?elevationWithDefaultMeters(result.fields[key]):result.fields[key])}</dd></div>`).join('')}</dl>
   ${result.fields?.process==='Other/Unknown'&&result.roaster_details?.blend_components?'<p class="helper" role="note">This blend has multiple documented processing methods. Other/Unknown preserves that distinction; review the component details below.</p>':''}
+  ${fields.some(([key])=>key==='elevation_m'&&elevationWithDefaultMeters(result.fields[key])!==result.fields[key])?'<p class="helper">The roaster omitted the elevation unit. Meters above sea level (m) are assumed, per the approved import rule.</p>':''}
   ${result.roast_hint?`<p class="helper" role="note"><strong>Roast graphic:</strong> ${e(result.roast_hint)}</p>`:''}
   ${publishedRecipe?`<p class="helper"><strong>Roaster's published espresso ${fullRecipe?'recipe':'reference'}:</strong> ${publishedRecipe}. Reference only; not applied or saved automatically.</p>`:''}
   ${extras.length?`<details class="coffee-url-supplement"><summary>Other published details (${extras.length})</summary><dl class="coffee-url-fields">${extras.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.roaster_details[key])}</dd></div>`).join('')}</dl><p class="helper">Source details are for review. Agtron-derived levels may assume Gourmet ground-coffee readings; supplementary measurements are not saved as coffee fields.</p></details>`:''}
@@ -102,7 +144,7 @@ export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOStr
   return value.slice(0,end);
  };
  const fieldSuggestions=Object.fromEntries(autofillFields.filter(([key])=>typeof result.fields?.[key]==='string')
-  .map(([key])=>[key,bounded(result.fields[key],2000)]));
+  .map(([key])=>[key,bounded(key==='elevation_m'?elevationWithDefaultMeters(result.fields[key]):result.fields[key],2000)]));
  const sourceFacts=Array.isArray(result.source_facts)?result.source_facts:[];
  if(sourceFacts.length>MAX_SOURCE_REVIEW_FACTS)truncated=true;
  const facts=sourceFacts.slice(0,MAX_SOURCE_REVIEW_FACTS).map(fact=>{
@@ -131,11 +173,13 @@ export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOStr
   .filter(([key,value])=>/^[a-z_]{1,60}$/.test(key)&&(Number.isFinite(value)||typeof value==='string'))
   .map(([key,value])=>[key,typeof value==='string'?bounded(value,500):value]));
  const roastReviewNote=typeof result.roast_hint==='string'?bounded(result.roast_hint,2000):null;
+ const conflictOptions=coffeeConflictReviewOptions(result).map(group=>({field:group.field,
+  options:group.options.slice(0,8).map(option=>({value:bounded(option.value,220),label:bounded(option.label,100)}))}));
  return {schema_version:1,type:'coffee_source_review',source_url:url.href,checked_at:checkedAt,
   verification:'unverified_public_source_suggestions',field_suggestions:fieldSuggestions,
   published_source_information:facts,roaster_details:details,roaster_espresso_reference:recipe,
   conflicts:Array.isArray(result.conflicts)?result.conflicts.filter(key=>autofillFields.some(([field])=>field===key)):[],
-  source_information_truncated:truncated,
+  conflict_options:conflictOptions,source_information_truncated:truncated,
   ...(roastReviewNote!==null?{roast_review_note:roastReviewNote}:{}),
   limitations:'Extraction is a review aid. Image pixels, linked documents and unexposed dynamic content may contain additional or conflicting information. This file does not approve or update a shared coffee record.'};
 }
@@ -156,7 +200,7 @@ export function applyCoffeeUrlFields(form,result){
   if(!field||typeof value!=='string'||!value.trim())continue;
   if(String(field.value||'').trim()){skipped++;continue;}
   if(field.tagName==='SELECT'&&![...field.options].some(o=>o.value===value)){skipped++;continue;}
-  field.value=value;field.dispatchEvent(new Event('change',{bubbles:true}));filled++;
+  field.value=key==='elevation_m'?elevationWithDefaultMeters(value):value;field.dispatchEvent(new Event('change',{bubbles:true}));filled++;
  }
  return {filled,skipped};
 }
