@@ -92,5 +92,24 @@
     "scripts/audit/coffee-completeness-live-probe.mjs"
   ],
   "extra_cost": "none",
-  "source_facts_unverified_by_app": true
+  "source_facts_unverified_by_app": true,
+  "followup_20261027": {
+    "status": "SOURCE_REPAIR_AND_TESTING",
+    "merged_source": "fc9913decaacb4ff20014a0d0f79da58d09f52a6",
+    "live_run": 40569710438,
+    "original_required_results": "Prior 10 required target cases all passed.",
+    "owner_cases": {
+      "stumptown": "PASS live (origin Ethiopia, notes Peach/Citrus/Orange Blossom)",
+      "peets": "PASS live Dark and labeled tasting profile; Agtron absent",
+      "blue_bottle": "FAIL live source extraction: page contains exact selected Next.js conversion state, requires bounded parser",
+      "counter_culture": "FAIL live source fields: origin Sipacapa vs San Marcos Guatemala; notes conflict; sanitized product_json source_fact counts 64 original vs 45 redacted; original page parser fields/conflicts otherwise agree"
+    },
+    "counters": {
+      "required_failed": 2,
+      "real_backend_requests": 0,
+      "member_quota_charged": 0,
+      "production_writes": 0
+    },
+    "caution": "Optional Counter Culture sanitization diagnostic must remain visible and must NOT be counted as a full original-source parity pass; do not weaken public data privacy to silence the gap."
+  }
 }
