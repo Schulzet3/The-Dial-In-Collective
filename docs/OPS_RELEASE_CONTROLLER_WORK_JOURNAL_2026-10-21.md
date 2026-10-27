@@ -41,3 +41,9 @@ Sunday scheduled run 40194860522 at immutable development source: Node/build and
 ## 2026-10-27T19:01:58.873Z — Approved combined release #07: pre-destructive encrypted snapshot
 - Owner explicitly authorized one publication of every READY queue item on October 27, 2026. This is not authorization for the IN_PROGRESS extractor parent.
 - Request DIC-20261027-READY-QUEUE-07-BACKUP-01 triggers encrypted GitHub backup prior to any potentially destructive SQL; require a verified, recoverable offsite receipt and live database preconditions. No deployed application, member data or credentials modified by this snapshot request.
+
+## 2026-10-27T19:30:56.474Z — owner-approved production release DIC-20261027-READY-QUEUE-07
+- Exact source: ca7ab46e1e8c76ce117ffc88470d107aa5903729; expected development: fc9913decaacb4ff20014a0d0f79da58d09f52a6; expected production ref: 65ee38609db6bd5977dd0f2b393e7791a5e1b766; main request parent: 32fd766a4d262e3bfa3d0eca7f32e04fdfde0302; mode: publish.
+- Owner authorized ONE batch of 22 READY, excluding original Issue33 unfinished. All six exact source candidate checks PASS; 46 changed app paths covered by the READY queue.
+- Fresh encrypted backup artifact 12762602289, GitHub SHA-256 9cfa78dee4d497d6d1f9439c87f137942ff2c8346eb509023ea6b5db21739670. Same byte digest independently checked after download of private offsite Drive file 14524GwFcLHQztf5Te0jRWtdBH7Ui0yAU; encrypted backup.age only.
+- Supabase Experiment retirement migration applied with guarded zero Experiment rows and zero linked shots; postread shows 23 shots intact and no Experiment schema. Required JWT Edge function version 8 active with updated evidence helper. One serialized nonforce release requested; provider Netlify READY/current readback pending.
