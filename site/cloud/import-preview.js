@@ -42,16 +42,17 @@ export function parseImport(text) {
  if(!baskets.has(v.defaultBasketId)||!calibrations.has(v.calibrationId))fail('The selected basket or calibration is missing.');
  for(const b of baskets.values())numeric(b.doseG,5,40,'Basket Dose');
  for(const g of calibrations.values()){numeric(g.min,0,Number.MAX_VALUE,'finest grind setting');numeric(g.max,g.min+Number.EPSILON,Number.MAX_VALUE,'coarsest grind setting');if(g.max<=g.min)fail('The coarsest setting must exceed the finest setting.');}
- const legacyIds=new Set();
+ const legacyIds=new Set(),bagsByCoffee=new Map();
  for(const c of coffees.values()){
   if(typeof c.name!=='string'||!c.name.trim()||c.name.length>200||typeof c.roaster!=='string'||!c.roaster.trim()||c.roaster.length>200)fail('Each coffee needs a name and roaster.');
-  date(c.createdAt,'coffee date');index(c.bags,'bag');
+  date(c.createdAt,'coffee date');bagsByCoffee.set(c.id,index(c.bags,'archived bag'));
   const pref=w.coffees[c.id];if(!object(pref)||!STYLES.has(pref.style))fail('A coffee is missing its saved style preference.');
  }
  for(const f of families.values()){if(!coffees.has(f.coffeeId)||!STYLES.has(f.style))fail('A recipe family has a missing coffee or style.');date(f.createdAt,'recipe family date');}
  for(const sh of shots.values()){
   const legacy=id(sh.legacyId||sh.id,'legacy shot');if(legacyIds.has(legacy))fail('Duplicate legacy shot IDs. Nothing was imported.');legacyIds.add(legacy);
   if(!coffees.has(sh.coffeeId)||sh.setupId!==setup.id||sh.setupVersionId!==v.id||!STYLES.has(sh.style))fail('A shot has an invalid coffee, setup or style reference.');
+  if(sh.bagId!=null&&!bagsByCoffee.get(sh.coffeeId)?.has(sh.bagId))fail('A historical shot references a missing legacy bag. Keep the original backup; nothing was imported.');
   date(sh.timestamp,'shot timestamp');
   numeric(sh.doseG,5,40,'shot dose');numeric(sh.yieldG,5,200,'shot yield');numeric(sh.timeS,1,180,'shot time');
   numeric(sh.grindSetting,0,Number.MAX_VALUE,'grind setting',true);numeric(sh.tempC,70,100,'temperature',true);

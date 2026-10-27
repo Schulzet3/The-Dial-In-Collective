@@ -130,7 +130,7 @@ test('URL-first SQL prioritizes official URL evidence but cannot use URL alone a
 test('URL is first visual step but remaining fields retain compact paired layout',()=>{
  const main=read('site/cloud/main.js');
  const add=main.slice(main.indexOf('showAdd(){'),main.indexOf('async finishCoffeeAdd('));
- assert.ok(add.indexOf('Roaster Page URL')<add.indexOf('Name / Bag Label'));
+ assert.ok(add.indexOf('Roaster Page URL')<add.indexOf('Coffee Name'));
  assert.match(add,/Autofill From URL/);
  assert.match(add,/coffee-url-feedback/);
  assert.match(add,/class="form-grid coffee-detail-grid"/);

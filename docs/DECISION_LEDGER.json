@@ -2256,6 +2256,16 @@
       "supersedes": "Only original Experiment lifecycle/UI/threshold/experiment-specific candidate/confirmation requirements in §§6.2,7.2,18,19,37,41 and Issue13. Preserve successful recipe-family evidence states, shots/history/offline data, one visible recipe, identity, privacy, credits and separate production release consent.",
       "approval": "Owner directly said 'Proceed with your recommendation' after evaluating full Experiment product/database retirement on October 26, 2026.",
       "delivery": "SOURCE_ONLY; production Experiment retirement migration awaits separately authorized release"
+    },
+    {
+      "id": "UX-RETIRE-BAG-MANAGEMENT-20261026",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "title": "Retire active Bag Management and preserve linked historical shot data",
+      "decision": "No Bag Details, Roast Date, Frozen, New Bag, archives/reactivation, bag-age advice or automatic bag creation/association in the product. Log shots on coffee/library entries; one visible recommendation and distinct successful family evidence remain. Rename Coffee Name input. Keep 4 existing bag rows, 14 linked shots, private notes, shot history, linked account/coffee constraints, RLS, backup and offline queues unchanged. Retain the old bags table/shot bag_id and protected importer only for data integrity; reject malformed legacy links. Do not drop or rewrite production bag records/links or apply any SQL as part of this source-only change.",
+      "supersedes": "Only §28 and Issue15's original active bag lifecycle/optional user-interface expectation, obsolete Bag Details priority in §§6–7 and bag-specific wording in §§9,38–39; no changes to canonical coffee identity, published bag-page source evidence, other Locked decisions, permissions or release gate.",
+      "approval": "Owner directly said 'Proceed. Remove as much as you can without affecting data' after read-only impact assessment of four live bags and fourteen linked shots, October 26, 2026.",
+      "delivery": "SOURCE_ONLY_TO_BE_TESTED, NOT PUBLISHED. No SQL migration or production data changes for this retirement."
     }
   ],
   "open_current_owner_decisions": [],
@@ -4318,5 +4328,14 @@
     "supersedes": "Only original Experiment lifecycle/UI/threshold/experiment-specific candidate/confirmation requirements in §§6.2,7.2,18,19,37,41 and Issue13. Preserve successful recipe-family evidence states, shots/history/offline data, one visible recipe, identity, privacy, credits and separate production release consent.",
     "approval": "Owner directly said 'Proceed with your recommendation' after evaluating full Experiment product/database retirement on October 26, 2026.",
     "delivery": "SOURCE_ONLY; production Experiment retirement migration awaits separately authorized release"
+  },
+  "UX-RETIRE-BAG-MANAGEMENT-20261026": {
+    "status": "Locked",
+    "date": "2026-10-26",
+    "title": "Retire active Bag Management and preserve linked historical shot data",
+    "decision": "No Bag Details, Roast Date, Frozen, New Bag, archives/reactivation, bag-age advice or automatic bag creation/association in the product. Log shots on coffee/library entries; one visible recommendation and distinct successful family evidence remain. Rename Coffee Name input. Keep 4 existing bag rows, 14 linked shots, private notes, shot history, linked account/coffee constraints, RLS, backup and offline queues unchanged. Retain the old bags table/shot bag_id and protected importer only for data integrity; reject malformed legacy links. Do not drop or rewrite production bag records/links or apply any SQL as part of this source-only change.",
+    "supersedes": "Only §28 and Issue15's original active bag lifecycle/optional user-interface expectation, obsolete Bag Details priority in §§6–7 and bag-specific wording in §§9,38–39; no changes to canonical coffee identity, published bag-page source evidence, other Locked decisions, permissions or release gate.",
+    "approval": "Owner directly said 'Proceed. Remove as much as you can without affecting data' after read-only impact assessment of four live bags and fourteen linked shots, October 26, 2026.",
+    "delivery": "SOURCE_ONLY_TO_BE_TESTED, NOT PUBLISHED. No SQL migration or production data changes for this retirement."
   }
 }
