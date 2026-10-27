@@ -1,3 +1,17 @@
+**Pre-CI test review correction:** New exact-key privacy guard initially omitted snake-case `user_profile` (explicitly exercised by the new test). Fixed before PR review; do not count an unrun check as passing. Same-commit journal receipt applies.
+
+## October 27 UTC — Issue33 public fixture privacy and source-fact diagnostic (development, TESTING)
+
+**Authority:** Owner directed continuation of the extractor completeness audit, privacy-safe resolution of Counter Culture Sipacapa's 19 sanitized `product_json` source-fact differences, no added cost or publication. Live source at start `f8cd450d33de749f7de58b8d9c1bbec2a1bdcfc4`, PR176 already merged and READY; no duplicate edits.
+
+**Observed evidence:** Independent public run 40574895350: 13/13 mandatory products pass; Counter Culture current canonical coffee fields/conflicts identical between raw and sanitized captures, but 66 original versus 47 sanitized source-fact rows. Retrieved its 2026-10-27 sanitized CI artifact for read-only examination. A separate public JSON script includes purchase/payment metadata; the failed parity contains 19 product_json facts. Original private/session-sensitive values are not available in retained fixtures, so no evidence yet supports restoring any of the 19.
+
+**Scoped improvement:** Extend audit-only JSON redaction to exact personal user/account/billing/shipping/payment/address/order identity properties without suppressing normal public coffee profile and product offer properties. Add static, non-value structural categories for all missing source facts in the live public probe; sensitive paths and values are never logged. Existing all-source-facts equality still fails closed on any divergence, and the optional Counter Culture result remains a disclosed gap. Add targeted allow/deny and structural-classification Node tests. No runtime coffee extractor, member/private data, immutable 603 archive/oracle/scorer or provider operations changed.
+
+**Status:** TESTING until exact-head Node/lint/build/approval/privacy and applicable public-source acceptance; do not promote READY or claim original 603 replay without receipts. No Netlify, Supabase, deployment, paid service, private member write or production release authorized.
+
+---
+
 ## October 27 UTC — Issue33 PR176 exact merged-source READY / NOT DEPLOYED
 
 **Authorization:** Owner instructed that genuine measured Agtron is the strongest roast determination and supplied Stumptown Nano Challa, Blue Bottle Hayes Valley, Counter Culture Sipacapa, Peet's Guatemala Linda Vista. All live URL checks added to controlled public source acceptance. Earlier Brewpoint/Gnosis/Black River Locked decisions retained. No production publication authorized.
