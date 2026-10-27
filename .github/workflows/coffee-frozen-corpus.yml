@@ -1,0 +1,112 @@
+name: DIC original frozen coffee corpus
+
+# Restricted audit continuation. This job reads the exact original archives,
+# runs the existing scorers and actual handler offline, and never deploys.
+on:
+  pull_request:
+    branches:
+      - development/backend-foundation
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/workflows/coffee-frozen-corpus.yml'
+      - 'scripts/audit/**'
+      - 'docs/audits/extractor-reviewed-changes-candidate12.json'
+      - 'docs/audits/extractor-reviewed-change-gate.md'
+      - 'src/**'
+      - 'netlify/functions/**'
+      - 'supabase/functions/_shared/**'
+      - 'site/cloud/coffee-url-autofill.js'
+      - 'tests/**'
+      - 'package.json'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: dic-frozen-coffee-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  frozen603:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.repository == 'Schulzet3/The-Dial-In-Collective' &&
+      github.event.pull_request.head.ref == 'work/issue33-candidate12-full-audit-20261024'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Install free offline-review and encrypted-transfer prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes python3-pil python3-nacl
+      - name: Record interpreter and prerequisite versions
+        run: |
+          mkdir -p "$RUNNER_TEMP/dic-frozen-corpus/output/logs"
+          {
+            node --version
+            /usr/bin/python3 --version
+            /usr/bin/python3 -c "import PIL; print('Pillow ' + PIL.__version__)"
+            /usr/bin/python3 -c "import nacl; print('PyNaCl ' + nacl.__version__)"
+            dpkg-query --show python3-pil python3-nacl
+          } | tee "$RUNNER_TEMP/dic-frozen-corpus/output/logs/prerequisite-versions.log"
+      - name: Check archive and evidence-integrity failure boundaries
+        run: |
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py self-test
+          /usr/bin/python3 scripts/audit/coffee-reviewed-change-forensics.py --self-test
+      - name: Prepare the ephemeral private input channel
+        id: channel
+        run: >-
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py prepare-channel
+          --work "$RUNNER_TEMP/dic-frozen-corpus"
+      - name: Announce only the public receiver key
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.channel.outputs.artifact_name }}
+          path: ${{ runner.temp }}/dic-frozen-corpus/channel-public/public-key.json
+          if-no-files-found: error
+          retention-days: 1
+      - name: Decrypt and materialize the original hash-bound frozen inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py materialize
+          --work "$RUNNER_TEMP/dic-frozen-corpus"
+      - name: Run all 603 original cases, frozen scores, exports and independent review
+        # Empty pins mean strict C8 equality. Only an independently reviewed,
+        # committed manifest and its exact SHA-256 may enable reviewed changes.
+        env:
+          DIC_REVIEWED_CHANGES_PATH: 'docs/audits/extractor-reviewed-changes-candidate12.json'
+          DIC_REVIEWED_CHANGES_SHA256: 'd82f85051727908bfbea8985cd837636a37baee4b1b3262aa21e3c0049dd9d47'
+        shell: bash
+        run: |
+          set -euo pipefail
+          audit_review_args=()
+          if [[ -n "$DIC_REVIEWED_CHANGES_PATH" || -n "$DIC_REVIEWED_CHANGES_SHA256" ]]; then
+            audit_review_args+=(--reviewed-changes "$DIC_REVIEWED_CHANGES_PATH"
+                               --reviewed-changes-sha256 "$DIC_REVIEWED_CHANGES_SHA256")
+          fi
+          /usr/bin/python3 scripts/audit/coffee-frozen-ci.py run \
+            --repo "$GITHUB_WORKSPACE" \
+            --work "$RUNNER_TEMP/dic-frozen-corpus" \
+            --output "$RUNNER_TEMP/dic-frozen-corpus/output" \
+            --expected-fingerprint ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451 \
+            "${audit_review_args[@]}"
+      - name: Erase any remaining ephemeral receiver key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/dic-frozen-corpus/channel-private/receiver.key"
+      - name: Retain raw results, reports and logs without transfer data or source captures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-frozen603-candidate12-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/dic-frozen-corpus/output/
+          if-no-files-found: error
+          retention-days: 90

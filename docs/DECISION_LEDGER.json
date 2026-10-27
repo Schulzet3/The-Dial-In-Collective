@@ -2227,6 +2227,66 @@
       "decision": "Replace redundant Hold UI with no-action Pending; add compare/flag explanation and guarded one-confirm administrator deletion with dependent personal-shot cleanup.",
       "supersedes": "Earlier absence of Admin coffee/shot Delete UI and redundant Hold button only. Community durability, account retention, historical audit, permissions, release controls preserved.",
       "approval": "Owner explicitly requested Build it after approving screenshot and one-extra-click dependency-aware cascading shot deletion in project chat October 23."
+    },
+    {
+      "id": "TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023",
+      "status": "locked",
+      "date": "2026-10-23",
+      "title": "Accept isolated signed-JWT integration tests instead of production real-member acceptance for Issues #5 and #10",
+      "decision": "The owner explicitly accepted signed-JWT isolated PostgREST PostgreSQL tests as substitutes for the required real-member test evidence only in Issues #5/#10.",
+      "supersedes": "Only the real-member production-session test requirement for these two issues; not other acceptance clauses, live publication, contributor-balanced Community integration or experiment lifecycle.",
+      "approval": "Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10."
+    },
+    {
+      "id": "UX-RETIRE-CUSTOM-STYLE-20261026",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "title": "Retire Custom espresso style as an active product feature while preserving historical and offline records",
+      "decision": "Only Traditional, Turbo, Fast-Flow, Ristretto, and Lungo are selectable. Remove Custom from first-shot and Change Style choices, new shot logging and active editor/target persistence. Unshipped Custom-target SQL migration and synthetic tests are retired. Never automatically reclassify stored/queued Custom shots; retain original styles, measurements, ratings, notes, history, offline idempotency, account isolation and optional edits of historic records. Style numeric windows are guidance only; all-green taste remains authoritative. No published backend data may be deleted or modified for this product change.",
+      "supersedes": "Only the earlier Locked baseline §27/Issue14 requirement to offer and persist Custom and the October 22 Fast-Flow clause that the original Custom *active behavior* was unchanged; no removal of Fast-Flow, other style priors, approved visual badge history, member records, permissions or release safeguards.",
+      "approval": "Owner direct 2026-10-26 instruction to retire Custom completely as a product feature while retaining minimal data-loss safeguards; follow-up explicit 'Do it' twice; verified production aggregate zero saved Custom shots, workspace selections, personal families and experiments.",
+      "delivery": "SOURCE_ONLY_NOT_PUBLISHED; full CI and merge receipt recorded under GitHub Issue #14"
+    },
+    {
+      "id": "UX-RETIRE-EXPERIMENTS-20261026",
+      "title": "Retire Experiment workflow and stage guarded unused Experiment database cleanup",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "decision": "Retire the complete Experiment workflow, active lifecycle, post-rating prompt, threshold detection and special candidate/confirmation/promotion. Ordinary shot logging remains unrestricted within existing numeric safety bounds, five sensory ratings and required outlier checks. Retain exact shot/notes data, Community eligibility of qualifying green shots, one visible recommendation, separate successful internal families and explicit owner-scoped Make Current preference. A different green shot must not replace a manually chosen favorite automatically. Stage only a guarded, source-tested migration for unused Experiment table and shot column, aborting on any nonempty Experiment data; no production DDL until a separate owner publish instruction and verified recovery backup.",
+      "supersedes": "Only original Experiment lifecycle/UI/threshold/experiment-specific candidate/confirmation requirements in §§6.2,7.2,18,19,37,41 and Issue13. Preserve successful recipe-family evidence states, shots/history/offline data, one visible recipe, identity, privacy, credits and separate production release consent.",
+      "approval": "Owner directly said 'Proceed with your recommendation' after evaluating full Experiment product/database retirement on October 26, 2026.",
+      "delivery": "SOURCE_ONLY; production Experiment retirement migration awaits separately authorized release"
+    },
+    {
+      "id": "UX-RETIRE-BAG-MANAGEMENT-20261026",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "title": "Retire active Bag Management and preserve linked historical shot data",
+      "decision": "No Bag Details, Roast Date, Frozen, New Bag, archives/reactivation, bag-age advice or automatic bag creation/association in the product. Log shots on coffee/library entries; one visible recommendation and distinct successful family evidence remain. Rename Coffee Name input. Keep 4 existing bag rows, 14 linked shots, private notes, shot history, linked account/coffee constraints, RLS, backup and offline queues unchanged. Retain the old bags table/shot bag_id and protected importer only for data integrity; reject malformed legacy links. Do not drop or rewrite production bag records/links or apply any SQL as part of this source-only change.",
+      "supersedes": "Only §28 and Issue15's original active bag lifecycle/optional user-interface expectation, obsolete Bag Details priority in §§6–7 and bag-specific wording in §§9,38–39; no changes to canonical coffee identity, published bag-page source evidence, other Locked decisions, permissions or release gate.",
+      "approval": "Owner directly said 'Proceed. Remove as much as you can without affecting data' after read-only impact assessment of four live bags and fourteen linked shots, October 26, 2026.",
+      "delivery": "SOURCE_ONLY_TO_BE_TESTED, NOT PUBLISHED. No SQL migration or production data changes for this retirement."
+    },
+    {
+      "id": "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "title": "Retire member-facing basket and equipment version management; keep immutable history",
+      "approval": "Owner explicitly: 'I don't want to include basket or equipment versions. Let's remove this and close issue #16'.",
+      "decision": "No planned member-facing basket create/select/correct/archive/reactivate or equipment-version history/create/restore/calibration-management flows. Keep simple new setup, one Basket Dose, rename/switch, optional equipment details, real shot dose, and strictly >2 g dismissible new-shot-only warning.",
+      "supersedes": "Issue #16 original active management acceptance and §13 planned expansion only. Preserve all internal immutable hardware/basket/calibration snapshots, real shot and Community context, note/offline/backups, existing validation and unrelated Issue #17 grinder semantics.",
+      "historical_safety": "Do not drop or rewrite existing database version records, foreign keys, shot snapshots, member data, RLS or idempotency receipts. Do not publish.",
+      "delivery": "Source-only retirement, no deployable feature."
+    },
+    {
+      "id": "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026",
+      "status": "Locked",
+      "date": "2026-10-26",
+      "title": "Labeled current-coffee tasting notes priority, unitless elevation meters, public conflict alternatives visibly reviewed by member",
+      "decision": "Explicit labeled selected-coffee Notes / Tasting Notes / Cupping Notes outrank descriptive narrative. Incompatible current-coffee lists remain withheld and exposed; no guess. A unitless numeric value in an explicitly identified selected-coffee elevation field means meters above sea level, display m and disclose assumption; preserve raw source. On Add Coffee URL preview show both public selected-product conflicting alternatives with clear labels, linked to manually editable field, never pick conflicting fact automatically or override member edits. Preserve source_facts and safe downloadable review, quotas, authentication, privacy, offline and Community.",
+      "supersedes": "Only blanket equal-precedence of incidental flavor prose vs exact selected-product labeled Notes, absence of a unit label on explicit elevation and summary-only conflict information hidden in source disclosure. The original source identity, contradiction-withholding, approval, quota, anti-guess and provenance rules remain in force.",
+      "approval": "Owner direct instruction in October 26/27 Issue33 continuation: unitless elevations always meters above sea level; Woods Notes list supersedes story; display competing values on import and ask member to choose manually.",
+      "delivery": "SOURCE_ONLY; separate development integration then future owner-approved publication"
     }
   ],
   "open_current_owner_decisions": [],
@@ -3320,6 +3380,91 @@
       "merged_source_sha": "126304178bf255894af44633587052c7ef3b56d5",
       "tested_source_sha": "df9956fa269c705e98bc509a62146f491ce83c99",
       "tree_sha": "cf3023ec7b1a47ea278f06c511b2a0a5845ef885"
+    },
+    "expanded_us_roaster_audit_20261024": {
+      "status": "CANDIDATE11_EXACT_SOURCE_VERIFIED_READY_NOT_DEPLOYED",
+      "owner_source": "Current owner chat: exhaustive manual extractor audit, >=600 coffees / >=200 U.S. roasters / three coffees each; do everything feasible without API keys or additional incurred cost.",
+      "scope": "Corpus discovery, independent manual text oracle, bounded local browser/image source inspection, deterministic extraction repairs, local read-only OCR companion, source evidence export, save-flow preservation and repeated local actual-handler testing.",
+      "corpus": {
+        "coffees": 603,
+        "us_roasters": 201,
+        "canonical_assertions": 4002,
+        "supplementary_facts": 6474,
+        "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb"
+      },
+      "constraints": "No new API/model key or additional paid service, production publication, hosted SQL/Edge/Auth or member-data mutation. GitHub writes and Actions are explicitly authorized; normal exact-source readiness and separate release rules remain.",
+      "integration": "Candidate11 PR116 merged non-force into development at 5da3eba1e6a567defca572c54ac677c81f4b535c, exact head adc6ca5 and exact merged GitHub tests all PASS. Current development 30312b2 merely triggers public probe and records journal; exact live 40069154699 passes ten targets with zero source gaps. Same-runtime original frozen603 40066959055 fully PASS on 603 cases/1197 captures/4002 unchanged oracle assertions/603 client exports and offline helpers. Source comparison confirms no extractor-runtime change since successful frozen replay. A subsequent 40068786714 rerun aborted BEFORE corpus execution due single-use private input integrity when PR changed; not counted as PASS.",
+      "evidence": "docs/audits/2026-10-24-extractor-final-audit.md; docs/workstreams/issue-33.md; exact GitHub runs 40066959055 (frozen), 40068786736/40068786752 (PR tests), 40068783292 (PR live), 40069032400/40069032432/40069032372/40069032464 (merged), 40069154699/40069154717/40069154718/40069154691 (current development). Failed secure-input rerun 40068786714 independently disclosed.",
+      "readiness": "READY SOURCE ONLY for tested candidate11 extractor source and evidence-preserving public-fixture repairs. Issue33 remains OPEN for explicitly separate unmerged/unverified C9 residual origin/producer accuracy changes. No deployment or publication approval.",
+      "final_candidate": 11,
+      "final_fingerprint": "4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2",
+      "final_canonical": {
+        "cases": 603,
+        "ok_response": 603,
+        "canonical_assertions": 4002,
+        "exact_equivalent": 3024,
+        "missing": 167,
+        "review_required": 811,
+        "conflict_assertions": 115,
+        "conflict_withheld": 65,
+        "conflict_unresolved": 50,
+        "additional_facts": 6474,
+        "additional_literal_present": 1526,
+        "additional_unconfirmed": 4948,
+        "unexpected_fields": 19
+      },
+      "final_retention": {
+        "all_evidence_retained": 5458,
+        "cases": 603,
+        "additional_assertions": 6474,
+        "truncated_previews": 3,
+        "unconfirmed": 679,
+        "some_evidence_retained": 337
+      },
+      "product_policy_change": false,
+      "capacity_authorization_20261023_mdt": {
+        "owner_instruction": "increase the size limits if that would improve the results. Again I'm authorizing you to do anything and everything you can to improve the extractor in any in every possible way as long as it doesn't require me to pay for a service or increase my direct cost.",
+        "supersedes": "Earlier continuation constraint that source-evidence output must remain at 128 facts / 64000 character units. This is a scoped owner-authorized implementation increase, not an unlimited processing policy.",
+        "selected_local_limits": {
+          "facts": 384,
+          "content_character_units": 192000,
+          "value_character_units": 1600,
+          "structured_parts": 128,
+          "purchase_variants": 128
+        },
+        "evidence": "Complete immutable candidate8 replay, unchanged scorer, independent source/namespace reviews, all603exports, local fixture checks, and docs/audits/extractor-600-candidate8-capacity-verification.json.",
+        "unchanged": "Existing network/request/time/HTTPS/SSRF/admission/quota safeguards, 900KB initial / eligible single2MB source read, deterministic-only runtime, source conflicts, blank-only autofill, explicit save and Pending/Verified semantics. No new key, paid service, production action or direct charge. Later explicit owner permission resolves the earlier GitHub write/Actions hold."
+      },
+      "github_integration_authorization_20261023": {
+        "owner_request": "Please reference the new project instructions. I need you to figure this out proactively. Please get this done at all costs without incurring direct cost to me. GitHub should now allow writes.",
+        "owner_github_clarification": "You can use github as much as you need. That does not count as adding cost",
+        "supersedes_only": "Prior no-retry GitHub write hold and avoidance of GitHub Actions for this audit. Does not authorize publication or another paid service.",
+        "preserved": "Normal exact-source CI, private repository, non-force integration, all product/data/offline decisions and separate one-use release approval.",
+        "latest_preserved_upstream": "3529a9b628bedf3f294f6509f4628c9660914131",
+        "local_readiness_exception_implemented": false,
+        "publication_authorized": false
+      },
+      "pending_candidate": 11,
+      "recorded_candidate10_status": "Completed historical local benchmark and checks; original raw/runtime files currently unavailable. Recorded separately without claiming identical recovery.",
+      "completed_source_merge_sha": "5da3eba1e6a567defca572c54ac677c81f4b535c",
+      "c9_open_accuracy_residuals": "Onyx Cup of Excellence misclassified as geography; Alta Kirima AA grade geography; Alta Nevado nearby social-program region instead of current lot; Maps current producer roster missing one of two names; source-backed candidate files not integrated or accepted and not within this READY change."
+    },
+    "candidate12_followup_20261024": {
+      "status": "CANDIDATE12_EXACT_SOURCE_VERIFIED_READY_NOT_DEPLOYED",
+      "scope": "Source-backed additional origin, producer, sensory and release evidence in PR121; no new policy, oracle or paid services.",
+      "branch": "work/issue33-candidate12-full-audit-20261024",
+      "source_sha": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+      "runtime_fingerprint": "ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451",
+      "verification": "Reviewed run 40074270907 at source 3dc7fe4daab46b888368cdd8de4d59886fe5fb4f completed PASS_WITH_REVIEWED_CHANGES: 603 usable previews across 201 roasters and 1,197 original captures; 3,046 exact / 132 missing / 824 review-required across 4,002 unchanged canonical assertions; 5,458 full / 337 partial / 679 unconfirmed supplementary assertions; zero prior exact or full-retention losses; all 603 current client snapshot/download and offline checks passed. All 42 changed cases are covered by the exact review (41 source-supported changes and one nonsemantic order-only case). All 41 old-versus-new export byte differences are explicitly reviewed. Immutable reviewed receipt: docs/audits/extractor-candidate12-frozen-reviewed-run-40074270907.json / SHA-256 4e711444425fe4092151c946e2735acb4227c4c5ba4d9f0feba8ca3d289aaba1. PR121 merged non-force at 010f77a83ca1efbf447db6b838ef0f826aaf2f1a with parents a42bc757a3aedf02fcb213a4d8a7da807a68fa8c and 3dc7fe4daab46b888368cdd8de4d59886fe5fb4f. Its tree 9a00b4fa54f87f66a649a17db516bc049f326821 exactly matches the reviewed head. Runtime ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451 is unchanged. All five applicable merged-source workflows passed on 010f77a83ca1efbf447db6b838ef0f826aaf2f1a: app/Node/lint/build 40074669136; cloud/mobile 40074669168; approval/continuity 40074669164; fresh ten-target public-source acceptance 40074669139; Python 40074669171. Actual counts: 1,569 Node passes / zero failures / six explicit production-configuration skips (1,575 total), 1,201 cloud passes, 61 synthetic mobile checks plus admin flows, Python 44+23 offline/OCR. Live acceptance passed nine product cases and the required homepage negative with 19 public requests, zero gaps and zero backend/member operations. The separate controlled broader-roaster probe 40074669165 was SKIPPED, not passed. Merged-source receipt: docs/audits/extractor-candidate12-merged-ci-010f77a8.json; exact pre-merge ordinary evidence: docs/audits/extractor-candidate12-ordinary-ci-3dc7fe4d.json.",
+      "original_candidate_status": "CANDIDATE11_EXACT_SOURCE_VERIFIED_READY_NOT_DEPLOYED",
+      "original_candidate_11_frozen_pass": 40066959055,
+      "publication_authority": "Owner instruction in this chat: complete PR121, then publish all eligible READY queue items once, with combined preflight and actual Netlify provider readback. Do not release unready work or duplicate the three already-live SQL migrations.",
+      "approval_records": "PR121 body and docs/workstreams/issue-33.md",
+      "candidate12_source_record": {
+        "status": "CANDIDATE12_EXACT_SOURCE_VERIFIED_READY_NOT_DEPLOYED",
+        "integration": "PR121 merged non-force at 010f77a83ca1efbf447db6b838ef0f826aaf2f1a with parents a42bc757a3aedf02fcb213a4d8a7da807a68fa8c and 3dc7fe4daab46b888368cdd8de4d59886fe5fb4f. Its tree 9a00b4fa54f87f66a649a17db516bc049f326821 exactly matches the reviewed head. Runtime ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451 is unchanged. All five applicable merged-source workflows passed on 010f77a83ca1efbf447db6b838ef0f826aaf2f1a: app/Node/lint/build 40074669136; cloud/mobile 40074669168; approval/continuity 40074669164; fresh ten-target public-source acceptance 40074669139; Python 40074669171. Actual counts: 1,569 Node passes / zero failures / six explicit production-configuration skips (1,575 total), 1,201 cloud passes, 61 synthetic mobile checks plus admin flows, Python 44+23 offline/OCR. Live acceptance passed nine product cases and the required homepage negative with 19 public requests, zero gaps and zero backend/member operations. The separate controlled broader-roaster probe 40074669165 was SKIPPED, not passed. Exact merged-source receipt: docs/audits/extractor-candidate12-merged-ci-010f77a8.json.",
+        "readiness": "READY development source only, NOT DEPLOYED; no scoped source-readiness blockers remain. Reconciled from actual source/run metadata on 2026-10-24 at 07:36:39 UTC. The frozen answers, captures and scorers are unchanged. Missing and review-required results remain visible; no universal extraction-accuracy claim is made. The 22-case release-label review introduces no release policy or expected-value change, and three context-limited rows retain uncertainty. Concurrent future-publication instructions are preserved as recorded. This extractor audit does not consume or execute a release grant, publish/deploy, apply production SQL/Edge/Auth changes, mutate member data, provision a new API key or add a paid service. Other queue items and their existing states remain unchanged."
+      }
     }
   },
   "current_owner_grinder_range_info_20261019": {
@@ -4156,5 +4301,82 @@
     },
     "historical_scope": "Overrides only previous absence of administrator coffee/shot deletion and the Hold-for-Clarification UI option; does not authorize member-account deletion, arbitrary purging, Community destruction, other privacy or security policy changes.",
     "implementation": "READY_NOT_PUBLISHED: PR101 and PR102 merged; final source 7150a72e15e661867b909fa31ee7f7443455deab, applicable CI PASS. Production Supabase SQL and Netlify unchanged; separate publish required."
+  },
+  "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023": {
+    "decision_id": "TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023",
+    "status": "Locked owner-approved scoped acceptance substitution",
+    "owner_quote": "Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10.",
+    "owner_decision_date_local": "2026-10-23",
+    "issues": [
+      5,
+      10
+    ],
+    "substitutes_only": "Genuine real-member production-session acceptance evidence previously required for the Issue #5 official source/owner Pending Retry path and the Issue #10 two-eligible-family same-owner recipe switching tests.",
+    "accepted_evidence": {
+      "repository": "Schulzet3/The-Dial-In-Collective",
+      "pr": 107,
+      "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
+      "signed_http_assertions": "50/50 PASS in isolated PostgreSQL 17.11/PostgREST 12.2 with HMAC-signed CI-only JWT",
+      "merged_ci_runs": [
+        40059878206,
+        40059878199,
+        40059878227,
+        40059878239
+      ],
+      "premerge_visual_run": 40059738743,
+      "published_public_unauthenticated_security_smoke": 40058958473,
+      "provenance_limit": "Synthetic locally signed JWT is not a live Supabase GoTrue token; mock official product facts are not a current real roaster response."
+    },
+    "supersedes_only": "Exact original real-member acceptance test modality clauses of Issues #5 and #10; none of the underlying application behaviors or unrelated acceptance standards.",
+    "scope": "For GitHub Issues #5 and #10 only, the owner's explicitly accepted isolated PostgreSQL 17.11/PostgREST 12.2 cryptographically signed JWT acceptance (PR #107, 50/50 HTTP assertions, pre-merge and exact merged-source CI) replaces the prior requirement to obtain the corresponding real-member production-session testing evidence. The previously verified published production readbacks and public anonymous/invalid-JWT smoke remain distinct evidence. These synthetic signed tokens are not Supabase GoTrue member sessions and do not establish an actual official-roaster live fetch.",
+    "preserve": "Preserve the full product behavior, authentication/admission, member data, provenance, privacy, source-identity, recipe-family decisions, publication authorization, and all untested system claims. This acceptance does NOT publish staged migration 20261024034800_dic_pending_retry_http_conflict.sql or waive the requirement to deploy a known fix before marking Issue #5 complete. It does NOT waive remaining Community source/contributor-balanced integration in Issue #12 expressly referenced by Issue #10, or independently owned experimental lifecycle Issue #13. It does not transfer this acceptance to unrelated issues or create permissions for future releases.",
+    "remaining_to_close_issue_5": "Apply tested and queued but UNPUBLISHED 20261024034800_dic_pending_retry_http_conflict.sql only after a NEW explicit publish authorization; verify deployment receipt. Issue #5 remains OPEN.",
+    "remaining_to_close_issue_10": "Complete contributor-balanced cross-user Community evidence/source tier integration explicitly listed in #10 and tracked in #12. Issue #13 experimental lifecycle remains independent and OPEN. Issue #10 remains OPEN.",
+    "release_permission": "NOT_GRANTED"
+  },
+  "UX-RETIRE-CUSTOM-STYLE-20261026": {
+    "status": "Locked",
+    "date": "2026-10-26",
+    "decision": "Only Traditional, Turbo, Fast-Flow, Ristretto, and Lungo are selectable. Remove Custom from first-shot and Change Style choices, new shot logging and active editor/target persistence. Unshipped Custom-target SQL migration and synthetic tests are retired. Never automatically reclassify stored/queued Custom shots; retain original styles, measurements, ratings, notes, history, offline idempotency, account isolation and optional edits of historic records. Style numeric windows are guidance only; all-green taste remains authoritative. No published backend data may be deleted or modified for this product change.",
+    "supersedes": "Only the earlier Locked baseline §27/Issue14 requirement to offer and persist Custom and the October 22 Fast-Flow clause that the original Custom *active behavior* was unchanged; no removal of Fast-Flow, other style priors, approved visual badge history, member records, permissions or release safeguards.",
+    "approval": "Owner direct 2026-10-26 instruction to retire Custom completely as a product feature while retaining minimal data-loss safeguards; follow-up explicit 'Do it' twice; verified production aggregate zero saved Custom shots, workspace selections, personal families and experiments.",
+    "implementation": "source-only; see scoped_supersessions and Issue14"
+  },
+  "UX-RETIRE-EXPERIMENTS-20261026": {
+    "status": "Locked",
+    "date": "2026-10-26",
+    "decision": "Retire the complete Experiment workflow, active lifecycle, post-rating prompt, threshold detection and special candidate/confirmation/promotion. Ordinary shot logging remains unrestricted within existing numeric safety bounds, five sensory ratings and required outlier checks. Retain exact shot/notes data, Community eligibility of qualifying green shots, one visible recommendation, separate successful internal families and explicit owner-scoped Make Current preference. A different green shot must not replace a manually chosen favorite automatically. Stage only a guarded, source-tested migration for unused Experiment table and shot column, aborting on any nonempty Experiment data; no production DDL until a separate owner publish instruction and verified recovery backup.",
+    "supersedes": "Only original Experiment lifecycle/UI/threshold/experiment-specific candidate/confirmation requirements in §§6.2,7.2,18,19,37,41 and Issue13. Preserve successful recipe-family evidence states, shots/history/offline data, one visible recipe, identity, privacy, credits and separate production release consent.",
+    "approval": "Owner directly said 'Proceed with your recommendation' after evaluating full Experiment product/database retirement on October 26, 2026.",
+    "delivery": "SOURCE_ONLY; production Experiment retirement migration awaits separately authorized release"
+  },
+  "UX-RETIRE-BAG-MANAGEMENT-20261026": {
+    "status": "Locked",
+    "date": "2026-10-26",
+    "title": "Retire active Bag Management and preserve linked historical shot data",
+    "decision": "No Bag Details, Roast Date, Frozen, New Bag, archives/reactivation, bag-age advice or automatic bag creation/association in the product. Log shots on coffee/library entries; one visible recommendation and distinct successful family evidence remain. Rename Coffee Name input. Keep 4 existing bag rows, 14 linked shots, private notes, shot history, linked account/coffee constraints, RLS, backup and offline queues unchanged. Retain the old bags table/shot bag_id and protected importer only for data integrity; reject malformed legacy links. Do not drop or rewrite production bag records/links or apply any SQL as part of this source-only change.",
+    "supersedes": "Only §28 and Issue15's original active bag lifecycle/optional user-interface expectation, obsolete Bag Details priority in §§6–7 and bag-specific wording in §§9,38–39; no changes to canonical coffee identity, published bag-page source evidence, other Locked decisions, permissions or release gate.",
+    "approval": "Owner directly said 'Proceed. Remove as much as you can without affecting data' after read-only impact assessment of four live bags and fourteen linked shots, October 26, 2026.",
+    "delivery": "SOURCE_ONLY_TO_BE_TESTED, NOT PUBLISHED. No SQL migration or production data changes for this retirement."
+  },
+  "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026": {
+    "id": "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026",
+    "status": "Locked",
+    "date": "2026-10-26",
+    "title": "Retire member-facing basket and equipment version management; keep immutable history",
+    "approval": "Owner explicitly: 'I don't want to include basket or equipment versions. Let's remove this and close issue #16'.",
+    "decision": "No planned member-facing basket create/select/correct/archive/reactivate or equipment-version history/create/restore/calibration-management flows. Keep simple new setup, one Basket Dose, rename/switch, optional equipment details, real shot dose, and strictly >2 g dismissible new-shot-only warning.",
+    "supersedes": "Issue #16 original active management acceptance and §13 planned expansion only. Preserve all internal immutable hardware/basket/calibration snapshots, real shot and Community context, note/offline/backups, existing validation and unrelated Issue #17 grinder semantics.",
+    "historical_safety": "Do not drop or rewrite existing database version records, foreign keys, shot snapshots, member data, RLS or idempotency receipts. Do not publish.",
+    "delivery": "Source-only retirement, no deployable feature."
+  },
+  "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026": {
+    "status": "Locked",
+    "date": "2026-10-26",
+    "title": "Labeled current-coffee tasting notes priority, unitless elevation meters, public conflict alternatives visibly reviewed by member",
+    "decision": "Explicit labeled selected-coffee Notes / Tasting Notes / Cupping Notes outrank descriptive narrative. Incompatible current-coffee lists remain withheld and exposed; no guess. A unitless numeric value in an explicitly identified selected-coffee elevation field means meters above sea level, display m and disclose assumption; preserve raw source. On Add Coffee URL preview show both public selected-product conflicting alternatives with clear labels, linked to manually editable field, never pick conflicting fact automatically or override member edits. Preserve source_facts and safe downloadable review, quotas, authentication, privacy, offline and Community.",
+    "supersedes": "Only blanket equal-precedence of incidental flavor prose vs exact selected-product labeled Notes, absence of a unit label on explicit elevation and summary-only conflict information hidden in source disclosure. The original source identity, contradiction-withholding, approval, quota, anti-guess and provenance rules remain in force.",
+    "approval": "Owner direct instruction in October 26/27 Issue33 continuation: unitless elevations always meters above sea level; Woods Notes list supersedes story; display competing values on import and ask member to choose manually.",
+    "delivery": "SOURCE_ONLY; separate development integration then future owner-approved publication"
   }
 }

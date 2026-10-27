@@ -1,0 +1,316 @@
+{
+  "type": "candidate3_and_candidate4_independent_review_checkpoint",
+  "created_at": "2026-10-24T01:23:14.243602+00:00",
+  "not_final_full_corpus_candidate3_verification": true,
+  "no_remote_write_or_deployment": true,
+  "no_new_api_keys_or_paid_services": true,
+  "files": [
+    {
+      "path": "src/server/coffee-elevation-evidence.mjs",
+      "sha256": "9b6417e855f11f748530c7c2faf7b91c8372b3ee45acc797822213c5075aa2fa"
+    },
+    {
+      "path": "tests/coffee-elevation-recovery-residuals.test.mjs",
+      "sha256": "4534b87a7c39104b8e5eb3b4da0eb9fb64a254a0e76a265d9691eda34d40dae5"
+    },
+    {
+      "path": "src/server/coffee-page-metadata.mjs",
+      "sha256": "17477b030e1efee4a7593b4ef7686e5cb42535244f9e6b447f96e79c8742f6e9"
+    },
+    {
+      "path": "tests/coffee-product-group-alias.test.mjs",
+      "sha256": "06404824c2ff3cbe9e9cc37e81b7adaf0c41e3da4fdb6d9e174c58681828246d"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-retention.py",
+      "sha256": "d8a01532c502d402933976aac07eaf9bdd75901c0bae1133ba754b35cee89494"
+    },
+    {
+      "path": "tests/audit/test_coffee_retention.py",
+      "sha256": "588b394e38df05b426ab819a262a11acb4959dc94125283af3395335056f7b44"
+    },
+    {
+      "path": "docs/audits/extractor-600-candidate2-elevation-roaster-adjudication.json",
+      "sha256": "6a77d67f8ca27cf12ab77890222715c5c8c8adc338ffe6d87170c7c23a3a94b0"
+    },
+    {
+      "path": "docs/audits/extractor-600-candidate2-producer-role-review.json",
+      "sha256": "e8b83f2764304aa12c4bcf2204f179aa35f55780b50eec531131cbe70a0e664d"
+    }
+  ],
+  "repairs": [
+    {
+      "finding": "Split inline markup caused a bare height to win over its matching published unit.",
+      "repair": "Prefer the explicit unit only for compatible same-unit, same-qualifier measurements. Keep conflicts and bounds intact.",
+      "verified_real_cases": [
+        "daggermountain-com__guatemala-los-vientos-7c59a4d5",
+        "daggermountain-com__kenya-lenana-d38e45f8"
+      ]
+    },
+    {
+      "finding": "Selected Caffè d’Arte ProductGroup parent had a page-declared myshopify alias, while relative IDs linked only its purchase children; HTML identity was rejected.",
+      "repair": "Bind exactly one parent using same-page relative #product ID, exact visible heading, page-declared HTTPS Shopify alias and matching product path. Preserve original URLs in review records; make no alias fetch.",
+      "verified_real_cases": [
+        "shop-caffedarte-com__meaning-of-life-drip-coffee-e1fee194",
+        "shop-caffedarte-com__organico-drip-coffee-a019e46e",
+        "shop-caffedarte-com__swiss-water-decaf-drip-63e299e7"
+      ]
+    },
+    {
+      "finding": "Projected or referenced JSON could be misread as literal text, or lossless encoding could be counted as missing.",
+      "repair": "Exclude structured formats from text matching. Reconstruct document projections and references within the exact source URL, reject incomplete/cyclic/conflicting records and HTML attribute namespaces, then require deep typed equality against the original frozen node."
+    },
+    {
+      "finding": "Deduplicated literal prose lost the capture URL that also published it.",
+      "repair": "Retention now accepts bounded explicit supporting_sources only from original observed capture URLs, and joins continuation chunks only within their own explicit source/label/section/field namespaces. Structured records remain separate.",
+      "no_frozen_evidence_changed": true
+    },
+    {
+      "finding": "BaldGuy Gigesa inherited an additional family plantation height; Leap Ethiopia inherited a generic regional coffee-class range.",
+      "repair": "Candidate4 withholds these narrative scope mismatches unless a later sentence directly returns to the current lot. Literal source prose and independent labeled heights remain available.",
+      "verified_real_cases": [
+        "baldguybrew-com__organic-ethiopian-coffee-61dd1211",
+        "leapcoffeeroasters-com__ethiopian-organic-coffee-6d3b1463"
+      ],
+      "full_handler_candidate4_pending": true
+    },
+    {
+      "finding": "A literal yearless month or season range could be accepted as proof of a distinct release.",
+      "repair": "Shared bounded recurring-calendar predicate prevents canonical release proof for pure month/season windows. Dated ranges and distinctive named releases/lots retain their separate existing literal proof checks. The extractor uses the same helper for supplementary harvest-season retention.",
+      "deployable_paths": [
+        "supabase/functions/_shared/coffee-release-label.mjs",
+        "supabase/functions/dic-verify-coffee/evidence.mjs"
+      ],
+      "no_live_supabase_operations": true
+    }
+  ],
+  "verification": {
+    "node22_identity_scope_suite": {
+      "passed": 64,
+      "failed": 0,
+      "log": "/workspace/scratch/13d81ee504dd/independent-product-alias-tests-final.log",
+      "sha256": "82be8acf364eee2db443c074fde78794eb1f5f57dc56d6dc48833fb6a15bd960"
+    },
+    "node22_elevation_suite": {
+      "passed": 38,
+      "failed": 0,
+      "evidence": "Named TAP result from local escalated execution; the new split-unit fixture and bound/feet contradictions passed."
+    },
+    "python_audit_integrity_suite": {
+      "passed": 25,
+      "failed": 0,
+      "log": "/workspace/scratch/13d81ee504dd/independent-retention-reconstruction-tests.log",
+      "sha256": "b40600b109dfda2f5e5de5edd24fc622056171cde18cbe81c4ca1f0476e43100"
+    },
+    "actual_handler_frozen_subset": {
+      "cases": 5,
+      "passed": 5,
+      "source_tree_sha256": "3d33549a6c7e7139264cfd9a64ee057b99a011e41821c3adbc3414b2f33f2ad9",
+      "replay_path": "/workspace/scratch/13d81ee504dd/extractor-600/independent-candidate3-owned-replay.json",
+      "replay_sha256": "41f283d90e54e416ec848fae6bcbe9910f82503af8087cc70c2ceb4e54224722",
+      "records": [
+        {
+          "case_id": "daggermountain-com__guatemala-los-vientos-7c59a4d5",
+          "ok": true,
+          "fields": {
+            "name": "GUATEMALA LOS VIENTOS",
+            "tasting_notes": "Apple, Honey Graham, Dried Cranberry",
+            "origin": "Huehuetenango, GUATEMALA",
+            "process": "Washed",
+            "variety": "Bourbon, Arabigo, Cattura",
+            "elevation_m": "1600 masl",
+            "roaster": "DAGGER MOUNTAIN"
+          },
+          "html_source_fact_count": 10,
+          "wood_fire_evidence_retained": false
+        },
+        {
+          "case_id": "daggermountain-com__kenya-lenana-d38e45f8",
+          "ok": true,
+          "fields": {
+            "name": "KENYA LENANA",
+            "tasting_notes": "Black Currant, Cream Soda, Grapefruit, Star Anise",
+            "variety": "SL28, SL34, Bourbon",
+            "elevation_m": "1500-1700 masl",
+            "origin": "Mt. Kenya, KENYA",
+            "process": "Washed",
+            "roaster": "DAGGER MOUNTAIN"
+          },
+          "html_source_fact_count": 8,
+          "wood_fire_evidence_retained": false
+        },
+        {
+          "case_id": "shop-caffedarte-com__meaning-of-life-drip-coffee-e1fee194",
+          "ok": true,
+          "fields": {
+            "name": "Meaning of Life® Drip Coffee",
+            "roaster": "Caffé D'arte Coffee Roasters"
+          },
+          "html_source_fact_count": 7,
+          "wood_fire_evidence_retained": true
+        },
+        {
+          "case_id": "shop-caffedarte-com__organico-drip-coffee-a019e46e",
+          "ok": true,
+          "fields": {
+            "name": "Organico",
+            "roaster": "Caffé D'arte Coffee Roasters",
+            "roast_level": "Medium-Dark",
+            "tasting_notes": "bright, natural earthy"
+          },
+          "html_source_fact_count": 8,
+          "wood_fire_evidence_retained": true
+        },
+        {
+          "case_id": "shop-caffedarte-com__swiss-water-decaf-drip-63e299e7",
+          "ok": true,
+          "fields": {
+            "name": "Swiss Water Decaf Drip",
+            "roaster": "Caffé D'arte Coffee Roasters",
+            "roast_level": "Medium-Dark"
+          },
+          "html_source_fact_count": 7,
+          "wood_fire_evidence_retained": true
+        }
+      ]
+    },
+    "candidate2_reconstruction_verifier_backcheck": {
+      "all_603_cases_rechecked": true,
+      "counts_unchanged": true,
+      "counts": {
+        "all_evidence_retained": 5357,
+        "cases": 603,
+        "additional_assertions": 6474,
+        "truncated_previews": 96,
+        "unconfirmed": 935,
+        "some_evidence_retained": 182
+      },
+      "receipt_sha256": "f3210e6339ac44b821bb88385a9809677956aabd03e2be5c49a2b96e2c7ed5c8",
+      "retention_script_sha256": "d8a01532c502d402933976aac07eaf9bdd75901c0bae1133ba754b35cee89494"
+    },
+    "python_audit_integrity_with_supporting_sources": {
+      "passed": 27,
+      "failed": 0,
+      "path": "/workspace/scratch/13d81ee504dd/independent-retention-support-tests.log",
+      "sha256": "0c7d4e8a271ce95ea923d326c7bb14175ff56eb18fa28b4185e2b899d4285a31"
+    },
+    "node22_elevation_scope_suite": {
+      "passed": 54,
+      "failed": 0,
+      "path": "/workspace/scratch/13d81ee504dd/independent-elevation-scope-tests.log",
+      "sha256": "439bc8f47a89a8f69aee391edd1fbd8c1beab5470a96cd1060f5235e2f54fe71",
+      "initial_failure": "New positive control used a pre-existing unsupported plural noun These coffees. The positive control was corrected to already-supported These beans; runtime behavior was not relaxed to satisfy it."
+    },
+    "candidate2_updated_verifier_backcheck": {
+      "cases": 603,
+      "assertions": 6474,
+      "every_assertion_and_sub_evidence_status_unchanged": true,
+      "all": 5357,
+      "partial": 182,
+      "unconfirmed": 935,
+      "truncated": 96,
+      "path": "/workspace/scratch/13d81ee504dd/extractor-600/recovered-candidate-2-retention-support-verified.json",
+      "sha256": "0846207c10289a2c6738b9fafc1c9ec463651b9b06001b4c3f354d51dc8b5477"
+    },
+    "full_candidate3_purchase_reconstruction": {
+      "full_handler": true,
+      "actual_source_review_export": true,
+      "source_tree_sha256": "a41112541fbddbf4bdf2609ab964c8222dc26aa7f83a7b262faf24f8a91c26f2",
+      "path": "/workspace/scratch/13d81ee504dd/extractor-600/independent-candidate3-purchase-reconstruction-review.json",
+      "sha256": "1889a94dbb18f12be2c5ed7927a5ff14eb3dc9133d1ff27b9f9e0478f917518e"
+    },
+    "candidate4_real_elevation_source_check": {
+      "path": "/workspace/scratch/13d81ee504dd/extractor-600/independent-candidate4-elevation-scope-diagnostic.json",
+      "sha256": "416bca79140ea7a1d0fca33d60fe8ab36862f1847dc9df4fe867a25b35d77b60",
+      "not_full_handler": true,
+      "both_heights_withheld": true,
+      "both_original_contexts_retained": true
+    },
+    "node22_release_proof_and_admission_suite": {
+      "passed": 34,
+      "failed": 0,
+      "actual_edge_handler_with_isolated_fixtures": true,
+      "path": "/workspace/scratch/13d81ee504dd/independent-release-proof-tests.log",
+      "sha256": "5aee23e31a4ea1b2b5dfbad1d97633506bb3e5714f9049181cea3c3e57c43fa3"
+    },
+    "candidate4_frozen_retention_priority_check": {
+      "cases": 16,
+      "all_handler_outputs_ok": true,
+      "assertions": 189,
+      "all": 129,
+      "partial": 7,
+      "unconfirmed": 53,
+      "prior_58_full_losses_restored": 55,
+      "remaining_prior_full_losses": 3,
+      "new_candidate3_full_losses": 0,
+      "not_full603": true,
+      "source_tree_sha256": "0cbd83c5e64dfc7b5164bb2829476d49f138982ea59d05a6d39b2928f0bcd836",
+      "path": "/workspace/scratch/13d81ee504dd/extractor-600/independent-candidate4-retention-focused-comparison.json",
+      "sha256": "7fc0e080fb060c53cb18d182510a655d74cd809bf1c4897669f51b46eafc4e74"
+    }
+  },
+  "limitations": [
+    "The 98-case producer role review and 207-case elevation/roaster review are post-output source diagnoses, separate from strict benchmark passes.",
+    "The purchase reconstruction diagnostic is parser/merge evidence, not a full authenticated-handler replay.",
+    "Projection/reference support does not assert completeness unless the reconstructed object equals the original typed source object exactly.",
+    "Other agents were still repairing runtime source when this checkpoint was recorded; final full-corpus replay and repository-wide checks remain the root workflow."
+  ],
+  "updated_at": "2026-10-24T01:37:54.504572+00:00",
+  "not_final_full_corpus_candidate4_verification": true,
+  "current_owned_files": [
+    {
+      "path": "src/server/coffee-elevation-evidence.mjs",
+      "sha256": "99ddff5818689fbf265a4d71c6ae86a797d9bcc196ecb51256a753aec95fb77f"
+    },
+    {
+      "path": "tests/coffee-elevation-recovery-residuals.test.mjs",
+      "sha256": "a995c5cad8b28ab31855fb79084823e5ff727a1032019fbb3e9365bdc8b1c1c8"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-retention.py",
+      "sha256": "bc7ba9b59d880c319a8a8dc4c1965a8cb6ca1fae3d7d9b4a1577da737843b6df"
+    },
+    {
+      "path": "tests/audit/test_coffee_retention.py",
+      "sha256": "6c8a27adbc472ab516d525ea97ad06d72f2f0ca500a310a2121e83a44ba749b0"
+    },
+    {
+      "path": "docs/audits/extractor-600-candidate2-unexpected-field-adjudication.json",
+      "sha256": "ab24209ed122cee3b1768cd27d4316ce90d24592ab16dcc53df54ec37c17d0b8"
+    },
+    {
+      "path": "docs/audits/extractor-600-candidate2-partial-narrative-independent-review.json",
+      "sha256": "23c3b07710176af8fdc03cb3b701e7509a5ed580caa3d784994a18ad8b827b72"
+    },
+    {
+      "path": "docs/audits/extractor-600-candidate3-retention-loss-diagnosis.json",
+      "sha256": "11ab214d37d2d8e1b72d614fbe75a9372d9394daa1d3e435d68cb02dac80714b"
+    },
+    {
+      "path": "supabase/functions/_shared/coffee-release-label.mjs",
+      "sha256": "eb06d55e8c9f134e394388f76f6144eefec434d546e0defac997a6a40198dc13"
+    },
+    {
+      "path": "supabase/functions/dic-verify-coffee/evidence.mjs",
+      "sha256": "6cf2ea91feb4854996f7e8e35743529bf4abc8c54f1fda0415582823ddb39697"
+    },
+    {
+      "path": "tests/coffee-source-verification.test.mjs",
+      "sha256": "855347f1f8acc1a9d040113fe5871354d8fbd4ec0078497915db36ff5787f1a2"
+    },
+    {
+      "path": "tests/source-verifier-admission.test.mjs",
+      "sha256": "86e14080daa5e58be8eb1f0d2293747cb6de0b178434642118803c6c4680fc1a"
+    }
+  ],
+  "review_findings_since_v1": [
+    "All44 candidate2 unexpected fields manually source-reviewed; six real scope/fragment defects assigned or repaired. Literal source-quality ambiguities remain explicit.",
+    "All15 reused partial narrative profiles independently re-read and every source capture rehashed; findings and exact quotes sent to flavor reviewer.",
+    "Full candidate3 output has zero dangling references across all603 cases; all36 CoffeeExchange original variants and all87 Woo purchase cores reconstruct exactly through actual export.77of87 Woo full public variants complete; remaining losses separately classified.",
+    "Candidate3 has58 prior-full retention losses in16 truncated cases:55 meaningful typed purchase assertions, one typed caffeine tag, one coordinate quote, one trade-description quote. Source-aware priorities need repair; no oracle or equality relaxation.",
+    "Lionrush guidance survives final output and actual export for HuilaDecaf; ElSilencio and LaRoca omit it under explicitly flagged bounds.",
+    "Synthetic actual metadata parser accepts CSS-hidden Woo forms/ancestors as current purchase data. Root owns the demonstrated scoped exclusion repair.",
+    "Yearless recurring month ranges in release_label may not identify a unique annual harvest; release-identity consumer accepts literal labels. Parent reviewing narrow recurring-season handling.",
+    "Root repaired source-aware projection/global-record priorities and CSS-hidden Woo forms; frozen16-case fullhandler check restores55of58 prior full-retention losses with no new losses in189assertions. Remaining source-bound residuals sent for targeted review."
+  ]
+}

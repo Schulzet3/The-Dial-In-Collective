@@ -2,8 +2,11 @@
 // Keep real multi-origin / multi-producer values, never invent one origin or
 // attribute an unlabeled lot/station name to a producer.
 import {productMarkup} from './coffee-product-scope.mjs';
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
+import {explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
+import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
 
-const COUNTRIES=/\b(Ethiopia|Colombia|Peru|Panama|Brazil|Guatemala|Kenya|Honduras|Mexico|Rwanda|Nicaragua|Costa Rica|El Salvador|Uganda|Indonesia|Burundi|Ecuador|Bolivia|Yemen|India|Tanzania|Thailand|United States)\b/gi;
+const COUNTRIES=/\b(Papua New Guinea|Democratic Republic of the Congo|Dominican Republic|United States|Costa Rica|El Salvador|East Timor|Timor-Leste|Puerto Rico|DR Congo|Ethiopia|Colombia|Peru|Panama|Brazil|Guatemala|Kenya|Honduras|Mexico|Rwanda|Nicaragua|Uganda|Indonesia|Burundi|Ecuador|Bolivia|Yemen|India|Tanzania|Thailand|Vietnam|China|Taiwan|Laos|Myanmar|Venezuela|Philippines|Malawi|Zambia|Nepal|Australia|Cuba|Haiti|Jamaica|Cameroon)\b/gi;
 const METHODS=/\b(Washed|Natural|Honey|Anaerobic)\b/gi;
 const key=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
 const pretty=s=>s.toLowerCase().replace(/\b[a-z]/g,c=>c.toUpperCase());
@@ -32,13 +35,250 @@ function producersInComponent(description){
  }
  return unique(candidates.map(x=>x.slice(0,120)).filter(x=>x.length>=3));
 }
-export function extractCoffeeBlendEvidence(html){
+
+const COMPONENT_LABEL=/^(Country(?: of Origin)?|Region|Department|Province|Producer|Farmer|Farm|Mill|Co-?op|Cooperative|Cultivar(?:s)?|Variet(?:y|ies|al|als)|Process(?:ing)?(?: Method)?|Elevation|Altitude)\s*[:：]\s*(.{2,240})$/i;
+const NEXT_LABEL=/\b(?:Country|Region|Department|Province|Producer|Farmer|Farm|Mill|Cooperative|Cultivar|Variety|Process|Elevation|Altitude)\s*:/i;
+const ROW_TAGS=new Set(['p','li','div','span','em','strong','b','td','dd']);
+function componentKind(label){
+ if(/^country/i.test(label))return 'country';
+ if(/^(?:region|department|province)$/i.test(label))return 'region';
+ if(/^(?:producer|farmer|farm|mill|co-?op|cooperative)$/i.test(label))return 'producer';
+ if(/^(?:cultivar|variet)/i.test(label))return 'variety';
+ if(/^process/i.test(label))return 'process';
+ return 'elevation';
+}
+function methodIn(value){
+ const text=key(value);
+ if(/\b(?:wet[ -]hulled|semi[ -]washed)\b/.test(text))return 'Other/Unknown';
+ if(/\bpulped[ -]natural\b/.test(text))return 'Honey';
+ const single=text.replace(/\b(?:anaerobic[ -]+natural|natural[ -]+anaerobic)\b/g,'anaerobic');
+ const values=unique([...single.matchAll(METHODS)].map(match=>pretty(match[1])));
+ return values.length>1?'Other/Unknown':values[0]||'';
+}
+function componentRows(page){
+ const rows=[];
+ // Schema Product descriptions often flatten BR-separated captions into
+ // plain text, including "MexicoFarm:" without an intervening space.
+ // Only a line beginning with a recognized caption enters this reader.
+ if(!/<[A-Za-z][^>]*>/.test(page)){
+  const label=/((?:Country(?: of Origin)?|Region|Department|Province|Producer|Farmer|Farm|Mill|Co-?op|Cooperative|Cultivar(?:s)?|Variet(?:y|ies|al|als)|Process(?:ing)?(?: Method)?|Elevation|Altitude))\s*[:：]\s*/gi;
+  let cursor=0;
+  for(const line of page.split(/\r?\n/)){
+   if(line.length<=4500&&/^\s*(?:Country|Region|Department|Province|Producer|Farmer|Farm|Mill|Co-?op|Cooperative|Cultivar|Variet|Process|Elevation|Altitude)[^:：]{0,20}[:：]/i.test(line)){
+    const matches=[...line.matchAll(label)];
+    for(const [index,match] of matches.entries()){
+     const end=matches[index+1]?.index??line.length,value=clean(line.slice(match.index+match[0].length,end));
+     if(value.length>=2&&value.length<=240)rows.push({start:cursor+match.index,end:cursor+end,label:match[1],value,kind:componentKind(match[1])});
+    }
+   }
+   cursor+=line.length+(page.slice(cursor+line.length,cursor+line.length+2)==='\r\n'?2:1);
+   if(rows.length>=300)break;
+  }
+  return rows.slice(0,150);
+ }
+ scan:for(const node of coffeeHtmlElements(page).nodes){
+  if(!ROW_TAGS.has(node.tag)||node.contentEnd-node.headEnd>5000)continue;
+  const body=page.slice(node.headEnd,node.contentEnd);
+  // Inspect one literal row, never flatten a containing product description.
+  if(/<(?:p|div|li|table|ul|h[1-6])\b/i.test(body))continue;
+  let cursor=node.headEnd;
+  const breaks=[...body.matchAll(/<br\s*\/?>/gi)];
+  for(const boundary of [...breaks.map(match=>({start:node.headEnd+match.index,end:node.headEnd+match.index+match[0].length})),{start:node.contentEnd,end:node.contentEnd}]){
+   const raw=page.slice(cursor,boundary.start),text=clean(raw),match=COMPONENT_LABEL.exec(text);
+   if(match&&!NEXT_LABEL.test(match[2]))rows.push({start:cursor,end:boundary.start,label:match[1],value:match[2].trim(),kind:componentKind(match[1])});
+   cursor=boundary.end;
+   if(rows.length>=300)break scan;
+  }
+ }
+ // Inline wrappers produce duplicate row candidates. Retain only their
+ // innermost complete text range, while keeping every repeated component.
+ rows.sort((a,b)=>a.start-b.start||a.end-b.end);
+ return rows.filter((row,index)=>!rows.some((other,j)=>j!==index&&other.start>=row.start&&other.end<=row.end&&
+  (other.start>row.start||other.end<row.end)&&other.kind===row.kind&&key(other.value)===key(row.value)))
+  .filter((row,index,all)=>!index||row.start!==all[index-1].start||row.end!==all[index-1].end).slice(0,150);
+}
+function summarizeComponents(components,ranges,format){
+ const origins=unique(components.flatMap(component=>component.countries||[]));
+ const producers=unique(components.flatMap(component=>component.producers||[]));
+ const varieties=unique(components.flatMap(component=>component.varieties||[]));
+ const methods=components.map(component=>unique((component.methods||[]).map(methodIn).filter(Boolean)));
+ const processes=unique(methods.flat());
+ const completeProcess=methods.every(values=>values.length===1);
+ return {
+  display:components.map(component=>component.description).join('; ').slice(0,1200),
+  origins,producers,processes,varieties,
+  origin:components.some(component=>component.regions?.length)?unique(components.map(component=>[...(component.regions||[]),...(component.countries||[])].join(', '))).join('; '):origins.join(', '),
+  multi_country:origins.length>1,multi_producer:producers.length>1,multi_process:processes.length>1,
+  complete_process:completeProcess&&processes.length===1,
+  all_component_processes:completeProcess,
+  complete_producers:components.every(component=>component.producers?.length),
+  complete_varieties:components.every(component=>component.varieties?.length),
+  components:components.length,component_ranges:ranges,component_format:format
+ };
+}
+function labeledComponents(page,name){
+ const rows=componentRows(page);
+ for(let start=0;start<rows.length;start++){
+  if(rows[start].kind!=='country')continue;
+  const intro=clean(page.slice(Math.max(0,rows[start].start-12000),rows[start].start));
+  if(!/\b(?:blend|components?|composition)\b/i.test(name+' '+intro)||/\b(?:not a blend|single origin only)\b/i.test(intro.slice(-300)))continue;
+  const group=[];let previous=null;
+  for(let index=start;index<rows.length;index++){
+   const row=rows[index];
+   if(previous&&clean(page.slice(previous.end,row.start)).length>100)break;
+   if(previous&&/<h[1-6]\b/i.test(page.slice(previous.end,row.start)))break;
+   group.push(row);previous=row;
+   if(group.length>64)break;
+  }
+  const components=[];
+  for(const row of group){
+   if(row.kind==='country')components.push({rows:[],countries:[],regions:[],producers:[],varieties:[],methods:[]});
+   const component=components.at(-1);if(!component)break;
+   component.rows.push(row);
+   if(row.kind==='country'){
+    const countries=[...row.value.matchAll(COUNTRIES)];
+    if(countries.length!==1||key(countries[0][0])!==key(row.value)){component.invalid=true;continue;}
+    component.countries.push(row.value);
+   }else if(row.kind==='region')component.regions.push(row.value);
+   else if(row.kind==='producer')component.producers.push(row.value);
+   else if(row.kind==='variety')component.varieties.push(row.value);
+   else if(row.kind==='process')component.methods.push(row.value);
+  }
+  if(components.length<2||components.length>8||components.some(component=>component.invalid||
+    new Set(component.rows.map(row=>row.kind)).size<3))continue;
+  // Contradictory repeated labels inside one component are still ambiguous.
+  if(components.some(component=>['country','variety','process'].some(kind=>
+    unique(component.rows.filter(row=>row.kind===kind).map(row=>row.value)).length>1)))continue;
+  for(const component of components)component.description=component.rows.map(row=>row.label+': '+row.value).join('; ');
+  return summarizeComponents(components,group.map(row=>[row.start,row.end]),'labeled');
+ }
+ return null;
+}
+function enumeratedComponents(page){
+ // A complete visible list can identify components without percentages:
+ // "Guatemala ... (Washed Process), Colombia ... (Natural Process), and ...".
+ // Each entry needs its own literal country and explicit process caption.
+ for(const node of coffeeHtmlElements(page).nodes){
+  if(!['p','h2','h3','h4','li','div','span'].includes(node.tag)||node.contentEnd-node.headEnd>4500)continue;
+  const body=page.slice(node.headEnd,node.contentEnd);
+  if(/<(?:p|div|li|h[1-6]|table|ul)\b/i.test(body))continue;
+  const text=clean(body);if(text.length>900||text.length<30)continue;
+  const parts=text.split(/\)\s*,?\s*(?:and\s+)?(?=[A-Z])/).map(value=>value.trim().replace(/\)?\s*$/,'')+')');
+  if(parts.length<2||parts.length>8)continue;
+  const components=[];
+  for(const part of parts){
+   const match=part.match(/^(.{3,160}?)\s*\(([^()]{3,80}\bProcess)\)$/i);
+   if(!match||/\b(?:not|except|formerly|previous|example)\b/i.test(part)){components.length=0;break;}
+   const countries=[...match[1].matchAll(COUNTRIES)];
+   if(countries.length!==1||countries[0].index!==0||!methodIn(match[2])){components.length=0;break;}
+   components.push({description:part,countries:[countries[0][1]],methods:[match[2]],producers:[],varieties:[]});
+  }
+  if(components.length>=2)return summarizeComponents(components,[[node.headEnd,node.contentEnd]],'enumerated');
+ }
+ return null;
+}
+function percentageProseComponents(page){
+ for(const node of coffeeHtmlElements(page).nodes){
+  if(!['p','li','div'].includes(node.tag)||node.contentEnd-node.headEnd>5000)continue;
+  const raw=page.slice(node.headEnd,node.contentEnd);
+  if(/<(?:p|div|li|table|ul|h[1-6])\b/i.test(raw))continue;
+  const text=clean(raw);if(text.length>2400)continue;
+  for(const sentence of text.split(/(?<=[.!?])\s+/).slice(0,12)){
+   if(/\b(?:not|never|previous|formerly|example|other coffee|usually|typically)\b/i.test(sentence))continue;
+   const composition=sentence.match(/\b(?:is made up of|is composed of|consists of|is a blend of)\s+(?:a\s+)?(.{15,1000}?)\.?$/i);
+   if(!composition)continue;
+   const parts=composition[1].split(/\s*(?:,\s*(?:and\s+)?|and\s+|\+\s+)(?=\d{1,3}\s*%)/i);
+   if(parts.length<2||parts.length>8)continue;
+   const components=[];
+   for(const part of parts){
+    const match=part.match(/^(\d{1,3})\s*%\s+(naturally|natural|washed|honey|anaerobic(?:[ -]+natural)?)\s+processed\s+(.{2,120}?)\s+(?:cherries|variet(?:y|ies|als))$/i);
+    if(!match||Number(match[1])<=0||Number(match[1])>100||!explicitCoffeeVarietyList(match[3])){components.length=0;break;}
+    components.push({percentage:Number(match[1]),description:part,countries:[],producers:[],varieties:[match[3]],methods:[match[2].replace(/^naturally$/i,'Natural')]});
+   }
+   const sum=components.reduce((total,component)=>total+component.percentage,0);
+   if(components.length>=2&&sum>=99&&sum<=101)return summarizeComponents(components,[],'percentage_prose');
+  }
+ }
+ return null;
+}
+function narrativeComposition(page,name){
+ const blocks=productCoffeeProse(page,clean).filter(block=>!block.educational&&!/^h[1-6]$/.test(block.tag));
+ const blendNamed=/\bblend\b/i.test(name),origins=[],methods=[],quotes=[];
+ let wholeProcess=false,explicitMixture=false,wholeOrigins=false,incompleteOrigins=false;
+ for(const block of blocks){
+  const distinctExpressions=/\b(?:bringing|brings|bring)\s+together\s+(?:two|three|four|five|six|[2-6])\s+distinct\s+(?:expressions|process(?:es|ing methods))\b/i.test(block.text);
+  const context=blendNamed||distinctExpressions||/\b(?:(?:this|our|the|a)\s+(?:(?:coffee|espresso)\s+)?(?:blend|mixture|fusion|combination)|(?:hand\s+)?blended|blending|components?)\b/i.test(block.text);
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/).slice(0,60)){
+   if(sentence.length>1800||NONCURRENT_COFFEE_PROSE.test(sentence.replace(/\bnot only\b/gi,''))||
+      /\b(?:history|historical|visited|roasting style|coffee culture|border with|border of|genetics?|originally collected|variety was collected|variet(?:y|ies) (?:is|are|being) grown|first planted|first introduced)\b/i.test(sentence))continue;
+   // Exclude a named comparison coffee before the actual blending clause.
+   // "match the profile of our Colombia decaf by blending ..." does not
+   // make Colombia a component of the new coffee.
+   const composition=/\bmatch\b.{0,110}\b(?:flavou?r profile|character|style)\b.{0,200}\bby blending\b/i.test(sentence)?
+    sentence.slice(sentence.toLowerCase().indexOf('by blending')):sentence;
+   const sourced=/\b(?:coffees?|beans?|origins?|components?)\s+(?:(?:is|are|was|were|sourced|grown|selected|chosen|drawn|coming|come|comes)\s+){0,4}(?:from|of|with)\b/i.test(composition)||
+    /\b(?:blend|fusion|mixture|combination)\s+(?:(?:is|are|currently|made|up|composed|comprised)\s+){0,5}(?:from|of|with|contains?|includes?)\b/i.test(composition)||
+    /\b(?:combine[sd]?|blends?|blended)\b.{0,150}\b(?:coffees?|beans?|favorites)\b/i.test(composition);
+   // A named pair can mention a country for only one component. A later
+   // "cup of coffee" does not prove the other component's growing origin.
+   const namedPair=composition.match(/^(?:Our|The)\s+(.{2,250}?)\s+and\s+(?:our|the)\s+(.{2,250}?)\s+coffees\s+are\s+(?:hand\s+)?blended\s+together\b/i);
+   const partialNamedPair=!!namedPair&&[namedPair[1],namedPair[2]].some(part=>!literalCoffeeSourcePlaces(part).length);
+   incompleteOrigins||=partialNamedPair;
+   const completeOrigin=!partialNamedPair&&(/\b(?:blend|fusion|mixture|combination)\s+(?:(?:is|are|currently|made|up|composed|comprised)\s+){0,5}(?:from|of|with|contains?|includes?)\b/i.test(composition)||
+    /\b(?:combine[sd]?|blends?|blended)\b.{0,150}\b(?:coffees?|beans?|favorites)\b/i.test(composition));
+   const currentBase=context&&/\b(?:this season['’]s|current|our|the)\s+(?:base|component)\b.{0,120}\bfrom\b/i.test(composition);
+   const combined=context&&/\b(?:layered|combined|blended|blending)\b/i.test(composition);
+   const logisticsLocation=/\b(?:ships?|shipped|shipping)\b.{0,90}\bfrom\b|\b(?:roasted|roasting|packaged|packed|manufactured)\s+(?:in|at)\b/i.test(composition)&&
+    !/\b(?:grown|growing|cultivated|sourced|growing origins?)\b/i.test(composition);
+   const places=!logisticsLocation&&(sourced||combined||currentBase)?literalCoffeeSourcePlaces(composition):[];
+   // The source must actually describe the current composition. A country
+   // merely mentioned in a farm's history is not another component.
+   if(places.length&&(context||places.length>=2)&&(sourced||combined||currentBase)){
+    origins.push(...places);quotes.push(sentence);
+    wholeOrigins||=completeOrigin||(!partialNamedPair&&(sourced||combined)&&places.length>1&&!/\b(?:component|base)\b/i.test(composition));
+   }
+   const blendMethods=context&&(distinctExpressions||/\b(?:blend|blended|mixture|components?|individual tracks)\b/i.test(block.text));
+   if(!blendMethods)continue;
+   const treatment=/\b(anaerobic[ -]+(?:natural|washed|honey)|(?:natural|washed|honey)[ -]+anaerobic|pulped[ -]+natural|fully[ -]+washed|wet[ -]+process(?:ed|ing)?|dry[ -]+process(?:ed|ing)?|naturally|washed|natural|honey|anaerobic)\b/gi;
+   const mixture=sentence.match(/\b(?:blend|mixture|mix)\s+(?:(?:is|are|currently|made|up|composed|comprised)\s+){0,5}of\s+([^.!?]{3,240}?)(?:\s+(?:process(?:ed|ing)?\s+)?(?:coffees?|beans?)|[.!?]|$)/i);
+   if(mixture){
+    const values=unique([...mixture[1].matchAll(treatment)].map(match=>methodIn(match[1].replace(/^naturally$/i,'Natural'))).filter(Boolean));
+    if(values.length){methods.push(...values);wholeProcess=true;explicitMixture||=values.length>1;quotes.push(sentence);}
+   }
+   for(const match of sentence.matchAll(treatment)){
+    const after=sentence.slice(match.index+match[0].length);
+    if(!/^(?:wet|dry)[ -]+process(?:ed|ing)?$/i.test(match[1])&&
+       !/^\s+(?:process(?:ed|ing)?|carbonic maceration|coffee|coffees|beans?|Ethiopia|Brazil|Colombia|Guatemala|Sumatra)\b/i.test(after))continue;
+    const value=methodIn(match[1].replace(/^dry[ -]+process(?:ed|ing)?$/i,'Natural').replace(/^wet[ -]+process(?:ed|ing)?$/i,'Washed').replace(/^naturally$/i,'Natural'));
+    if(value){methods.push(value);quotes.push(sentence);}
+   }
+  }
+ }
+ const places=unique(origins),processes=unique(methods),multiProcess=processes.length>1;
+ if(!places.length&&!multiProcess&&!wholeProcess)return null;
+ return {display:unique(quotes).join(' | ').slice(0,1200),origins:places,origin:places.join(', '),
+  producers:[],varieties:[],processes,multi_country:places.length>1,multi_producer:false,
+  multi_process:multiProcess,complete_process:wholeProcess&&processes.length===1,
+  all_component_processes:wholeProcess||explicitMixture||multiProcess,
+  incomplete_component_process:!wholeProcess&&places.length>1&&!multiProcess,
+  complete_producers:false,complete_varieties:false,complete_origins:wholeOrigins,incomplete_component_origins:incompleteOrigins,component_format:'narrative'};
+}
+export function withoutCoffeeBlendComponentSpecs(html,blend){
+ if(!blend?.component_ranges?.length)return html;
+ const ranges=blend.component_ranges.filter(range=>Array.isArray(range)&&range.length===2&&range[0]>=0&&range[1]<=html.length&&range[1]>range[0]).sort((a,b)=>a[0]-b[0]);
+ const pieces=[];let cursor=0;
+ for(const [start,end] of ranges){if(end<=cursor)continue;if(start>cursor)pieces.push(html.slice(cursor,start));pieces.push(' ');cursor=end;}
+ pieces.push(html.slice(cursor));return pieces.join('');
+}
+export function extractCoffeeBlendEvidence(html,{name='',scoped=false}={}){
  if(typeof html!=='string'||html.length>2_000_000)return null;
- const page=productMarkup(html);
+ const page=scoped?html:productMarkup(html);
+ const labeled=labeledComponents(page,name)||enumeratedComponents(page)||percentageProseComponents(page);
+ if(labeled)return labeled;
  const marker=/<(?:p|h[2-6]|strong|b)\b[^<>]{0,350}>\s*(?:<strong\b[^<>]{0,2000}>)?\s*Components?\s*:\s*(?:<\/strong>\s*)?<\/(?:p|h[2-6]|strong|b)>/i.exec(page)||
   /<(?:p|strong|b)\b[^<>]{0,2000}>\s*Components?\s*:\s*(?:<br\s*\/?>)/i.exec(page)||
   /<(?:p|li)\b[^<>]{0,2000}>\s*Components?\s*:\s*(?=\d{1,3}\s*%\s+)/i.exec(page);
- if(!marker)return null;
+ if(!marker)return narrativeComposition(page,name);
  let tail=page.slice(marker.index+marker[0].length,marker.index+marker[0].length+2500);
  tail=tail.split(/<(?:h[2-6]|p|strong)\b[^<>]{0,2000}>\s*(?:tasting\s+notes?|espresso(?:\s+parameter)?|brew(?:ing)?\s+tips|about this coffee)\s*:/i)[0];
  const rows=tail.replace(/<\/(?:p|li|div)>|<br\s*\/?>/gi,'\n')
@@ -56,12 +296,18 @@ export function extractCoffeeBlendEvidence(html){
  // Partial lists, unrelated numeric deals, and overly broad page sections
  // are not reliable evidence of a complete product blend.
  if(components.length<2||components.length>8||sum<99||sum>101)return null;
- const originValues=[],producerValues=[],methodValues=[],componentMethods=[];
+ const originValues=[],producerValues=[],methodValues=[],componentMethods=[],componentProducers=[];
  for(const component of components){
-  const foundMethods=[...component.description.matchAll(METHODS)].map(m=>pretty(m[1]));
+  // Anaerobic-natural is one treatment with a drying subtype, consistent
+  // with the canonical process parser. Its two words are not two component
+  // methods; a separate washed/honey/natural component still makes a mixture.
+  const treatment=component.description.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+   .replace(/\b(?:anaerob(?:ic|ico|ica)[\s-]+natural|natural[\s-]+anaerob(?:ic|ico|ica))\b/gi,'Anaerobic');
+  const foundMethods=[...treatment.matchAll(METHODS)].map(m=>pretty(m[1]));
   componentMethods.push(unique(foundMethods));
   for(const m of component.description.matchAll(COUNTRIES))originValues.push(pretty(m[1]));
-  producerValues.push(...producersInComponent(component.description));
+  const producers=producersInComponent(component.description);
+  componentProducers.push(producers);producerValues.push(...producers);
   methodValues.push(...foundMethods);
  }
  const origins=unique(originValues),producers=unique(producerValues),processes=unique(methodValues);
@@ -72,6 +318,8 @@ export function extractCoffeeBlendEvidence(html){
   multi_producer:producers.length>1,
   multi_process:processes.length>1,
   complete_process:processes.length===1&&componentMethods.every(values=>values.length===1),
+  all_component_processes:componentMethods.every(values=>values.length===1),
+  complete_producers:componentProducers.every(values=>values.length>0),
   components:components.length
  };
 }

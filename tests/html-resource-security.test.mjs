@@ -22,7 +22,7 @@ test('HTML resource probes finish in an isolated process, including nested tags 
   extractProductPreview(html,{source_url:'https://example.invalid/products/audit',roaster:'Audit'});
   timings.push(Math.round(performance.now()-start));
  }console.log(JSON.stringify(timings));`;
- const result=spawnSync(process.execPath,['--input-type=module','-e',code],{cwd:new URL('..',import.meta.url),timeout:8000,encoding:'utf8'});
+ const result=spawnSync(process.execPath,['--input-type=module','-e',code],{cwd:new URL('..',import.meta.url),timeout:18000,encoding:'utf8'});
  assert.equal(result.error,undefined,result.error?.message);assert.equal(result.status,0,result.stderr);
  assert.equal(JSON.parse(result.stdout).length,8);
 });

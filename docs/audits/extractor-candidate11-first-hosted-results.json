@@ -1,0 +1,74 @@
+{
+  "head": "735db80606e5bf3a2458c84df1817f1d71a86646",
+  "full_node": {
+    "total": 1399,
+    "pass": 1392,
+    "fail": 1,
+    "skip": 6
+  },
+  "cloud_node": {
+    "total": 1026,
+    "pass": 1025,
+    "fail": 1
+  },
+  "python_audit": 38,
+  "python_offline_helper": 23,
+  "frozen_runner_self_tests": 11,
+  "frozen_benchmark": "NOT_RUN_MISSING_SECURE_INPUTS",
+  "failed_regression": "Selected Product.description Nyeri/Mount Kenya relation omitted",
+  "lint_build": "NOT_RUN_AFTER_NODE_FAILURE",
+  "other_pass": [
+    "approval",
+    "security inventory",
+    "isolated SQL with53 signed HTTP assertions",
+    "mobile61",
+    "private visual/offline review"
+  ],
+  "source_runs": [
+    {
+      "id": 40065850565,
+      "name": "DIC original frozen coffee corpus",
+      "conclusion": "failure"
+    },
+    {
+      "id": 40065850569,
+      "name": "DIC coffee audit Python checks",
+      "conclusion": "success"
+    },
+    {
+      "id": 40065850555,
+      "name": "DIC source security inventory and dependency advisory",
+      "conclusion": "success"
+    },
+    {
+      "id": 40065850536,
+      "name": "DIC approval, implementation and continuity contract",
+      "conclusion": "success"
+    },
+    {
+      "id": 40065850541,
+      "name": "DIC cloud UX regression checks",
+      "conclusion": "failure"
+    },
+    {
+      "id": 40065850551,
+      "name": "DIC cloud app build and tests",
+      "conclusion": "failure"
+    },
+    {
+      "id": 40065850617,
+      "name": "DIC isolated SQL release regression",
+      "conclusion": "success"
+    },
+    {
+      "id": 40065850547,
+      "name": "DIC private visual review",
+      "conclusion": "success"
+    }
+  ],
+  "privacy_rejection": {
+    "action": "PR body containing plaintext signed Library download URLs and completion tokens",
+    "result": "REJECTED_NO_CREDENTIALS_WRITTEN",
+    "continuation": "Clean PR116 created; encrypted-only ephemeral receiver being reviewed"
+  }
+}

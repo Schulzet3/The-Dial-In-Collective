@@ -1,4 +1,5 @@
 // Opt-in, credential-free acceptance against public roaster pages.
+// Exact merged-source public acceptance recheck after concurrent integration.
 // The application handler runs with LOCAL admission/quota responses; only its
 // existing DNS-pinned, bounded public HTTPS transports make network requests.
 // No real account, Supabase request, quota claim, database write or deployment.
@@ -14,7 +15,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
  MAX_HTML_BYTES,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {rawElements,removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
+import {fixtureCoffeeHtml as fixtureHtml,sanitizePublicJson as sanitizeJson} from './coffee-fixture-sanitize.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
 const ORIGINAL_URL=SWEET_URL+'?srsltid=AYCX9vKHwEAbPcEyS19XuoWD67cGIMJu47B764EfHZK_IkJ7c52nQlGl';
@@ -82,38 +83,6 @@ const publicUrl=raw=>{
   return url.toString();
  }catch{return '';}
 };
-const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
-function sanitizeJson(value){
- return JSON.stringify(value,(key,item)=>sensitiveKey.test(key)?undefined:item)
-  .replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
-}
-function fixtureHtml(html){
- const compact=compactCoffeeProductHtml(html);
- if(!compact)return '';
- const chunks=[];let cursor=0;
- for(const block of rawElements(compact)){
-  chunks.push(compact.slice(cursor,block.start));
-  const type=block.attributes.match(/\btype\s*=\s*["'](application\/(?:ld\+)?json)["']/i)?.[1];
-  if(type&&block.closed){
-   const id=block.attributes.match(/\bid\s*=\s*["']([a-z0-9_-]{1,160})["']/i)?.[1];
-   try{chunks.push('<script type="'+type+'"'+(id?' id="'+id+'"':'')+'>'+sanitizeJson(JSON.parse(block.body))+'</script>');}
-   catch{/* Invalid script data is not preserved as executable markup. */}
-  }
-  cursor=block.end;
- }
- chunks.push(compact.slice(cursor));
- // WooCommerce and Shopify can place the selected product title, variant
- // data, or specifications inside an add-to-cart form. Keep those children;
- // remove only the form shell and controls that cannot supply page facts.
- // The extractor already excludes selects, so country/grind options cannot
- // become evidence. Every capture still records exact extraction parity.
- return removeElements(chunks.join(''),['iframe','noscript','select','textarea'])
-  .replace(/<\/?form\b[^<>]{0,8000}>/gi,' ')
-  .replace(/<input\b[^<>]{0,4000}>/gi,'')
-  .replace(/\s(?:on[a-z]+|nonce)\s*=\s*(?:"[^"]{0,8000}"|'[^']{0,8000}'|[^\s>]{1,1000})/gi,'')
-  .replace(/\b(href|src)\s*=\s*(["'])\s*javascript:[^"']{0,8000}\2/gi,'$1="#"')
-  .replace(/<meta\b[^<>]{0,2000}(?:csrf|token|session)[^<>]{0,2000}>/gi,'');
-}
 function assess(target,result){
  const gaps=[],checked=[];
  if(target.negative){
@@ -181,18 +150,67 @@ async function probe(target){
  const capture=async(kind,url,result)=>{
   const record={kind,url:publicUrl(result.source_url||url),ok:result.ok===true,reason:result.reason||null};
   if(result.ok&&typeof result.html==='string'){
-   const sanitized=fixtureHtml(result.html);
+   const sanitized=fixtureHtml(result.html,{source_url:result.source_url||url});
    record.bytes=Buffer.byteLength(result.html);record.original_sha256=sha(result.html);
    record.fixture=target.id+'-'+captures.length+'.fixture.html';
    record.sanitized_sha256=sha(sanitized);record.sanitized_bytes=Buffer.byteLength(sanitized);
    const original=extractPublicCoffeeFacts(compactCoffeeProductHtml(result.html)||result.html,{source_url:result.source_url||url});
    const replay=extractPublicCoffeeFacts(sanitized,{source_url:result.source_url||url});
    record.sanitization_preserves_html_extraction=isDeepStrictEqual(original,replay);
+   if(!record.sanitization_preserves_html_extraction){
+    // Fail closed while retaining only public, bounded differences needed
+    // to repair capture parity; never hide a divergent source fact.
+    const keys=[...new Set([...Object.keys(original||{}),...Object.keys(replay||{})])];
+    record.parity_differences=keys.filter(key=>!isDeepStrictEqual(original?.[key],replay?.[key]));
+    record.parity_field_differences=[...new Set([...Object.keys(original?.fields||{}),...Object.keys(replay?.fields||{})])]
+     .filter(key=>!isDeepStrictEqual(original?.fields?.[key],replay?.fields?.[key]));
+    record.parity_conflicts_original=original?.conflicts||[];
+    record.parity_conflicts_replay=replay?.conflicts||[];
+    record.parity_source_fact_counts=[original?.source_facts?.length??0,replay?.source_facts?.length??0];
+    const factTag=f=>JSON.stringify(f);
+    const afterBag=new Map();
+    for(const fact of replay?.source_facts||[]){
+     const tag=factTag(fact);afterBag.set(tag,(afterBag.get(tag)||0)+1);
+    }
+    // Diagnostics describe structure only. Do not copy values from the
+    // pre-redaction output into retained logs, even when source parity fails.
+    record.parity_missing_source_fact_examples=(original?.source_facts||[]).filter(fact=>{
+     const tag=factTag(fact),count=afterBag.get(tag)||0;
+     if(!count)return true;
+     afterBag.set(tag,count-1);return false;
+    }).slice(0,12).map(fact=>({
+     field:fact.field||null,source_type:fact.source_type||null,
+     property_keys:Object.keys(fact).sort(),value_type:typeof fact.value,
+     value_utf8_bytes:Buffer.byteLength(String(fact.value??''))
+    }));
+    const factKey=f=>[f.field||'',f.label||'',f.source_type||'',f.section||''].join('|');
+    record.parity_changed_product_attributes=[];
+    for(const [factIndex,a] of (original?.source_facts||[]).filter(f=>f.source_type==='product_json').entries()){
+     const b=(replay?.source_facts||[]).find(f=>factKey(f)===factKey(a));
+     if(!b||String(a.value)===String(b.value))continue;
+     try{const old=JSON.parse(a.value),updated=JSON.parse(b.value);
+      const lost=Object.keys(old).filter(key=>!Object.hasOwn(updated,key));
+      const changed=Object.keys(old).filter(key=>Object.hasOwn(updated,key)&&JSON.stringify(old[key])!==JSON.stringify(updated[key]));
+      if(record.parity_changed_product_attributes.length<12)record.parity_changed_product_attributes.push({fact_index:factIndex,lost,changed});
+      if(changed.includes('offers')&&record.parity_offer_key_differences===undefined){
+       const one=Array.isArray(old.offers)?old.offers[0]:old.offers;
+       const two=Array.isArray(updated.offers)?updated.offers[0]:updated.offers;
+       if(one&&two&&typeof one==='object'&&typeof two==='object'){
+        const all=[...new Set([...Object.keys(one),...Object.keys(two)])];
+        record.parity_offer_key_differences=all.filter(key=>!isDeepStrictEqual(one[key],two[key])).map(key=>({key,oldType:typeof one[key],newType:typeof two[key],oldPresent:Object.hasOwn(one,key),newPresent:Object.hasOwn(two,key)}));
+       }
+      }
+
+     }catch{}
+    }
+
+
+   }
    await writeFile(path.join(output,record.fixture),sanitized,'utf8');
   }else if(result.ok&&typeof result.json==='string'){
    record.bytes=Buffer.byteLength(result.json);record.original_sha256=sha(result.json);
    try{
-    const sanitized=sanitizeJson(JSON.parse(result.json));
+    const sanitized=sanitizeJson(JSON.parse(result.json),{source_url:result.source_url||url});
     record.fixture=target.id+'-'+captures.length+'.fixture.json';
     record.sanitized_sha256=sha(sanitized);
     await writeFile(path.join(output,record.fixture),sanitized,'utf8');
@@ -253,6 +271,16 @@ for(let index=0;index<selected.length;index+=2){
  const batch=await Promise.all(selected.slice(index,index+2).map(probe));
  for(const result of batch){
   results.push(result);
+  const parityFailures=result.captures.filter(item=>item.sanitization_preserves_html_extraction===false).map(item=>({
+   kind:item.kind,original_sha256:item.original_sha256,sanitized_sha256:item.sanitized_sha256,
+   parity_differences:item.parity_differences,parity_field_differences:item.parity_field_differences,
+   parity_conflicts_original:item.parity_conflicts_original,parity_conflicts_replay:item.parity_conflicts_replay,
+   parity_source_fact_counts:item.parity_source_fact_counts,
+   parity_missing_source_fact_examples:item.parity_missing_source_fact_examples,
+   parity_changed_product_attributes:item.parity_changed_product_attributes,
+   parity_offer_key_differences:item.parity_offer_key_differences
+  }));
+  if(parityFailures.length)console.log('[DIC FIXTURE PARITY] '+JSON.stringify({id:result.id,captures:parityFailures}));
   console.log('[DIC COMPLETENESS SOURCE] '+JSON.stringify({id:result.id,status:result.status,
    required:result.required,fields:result.fields,recipe:result.recipe,conflicts:result.conflicts,
    gaps:result.gaps,public_request_count:result.public_request_count,elapsed_ms:result.elapsed_ms}));
@@ -281,3 +309,6 @@ await writeFile(path.join(output,'results.json'),JSON.stringify(result,null,2)+'
 console.log('[DIC COMPLETENESS SUMMARY] '+JSON.stringify(result.summary));
 console.log('[DIC COMPLETENESS ARTIFACTS] '+output);
 if(requiredFailures.length)process.exitCode=1;
+// Issue #33 exact-source audit trigger: full sanitized NOMAD variant parity must hold.
+
+// Exact merged-source public acceptance trigger for Issue #33; parser and original assertions unchanged.

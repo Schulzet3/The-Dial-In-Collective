@@ -1,8 +1,8 @@
 import {SCHEMA_VERSION,CONFIG,STYLES,canonicalRoastLevel,newId,now,clone,num,norm,canonicalUrl} from './constants.js';
 export const blankWorkspace = () => ({currentCoffeeId:null, recent:{}, coffees:{}});
-export const blankCoffeeState = () => ({style:'Traditional',currentFamilies:{},referenceFamilies:{},favoriteShots:{},basketId:null,experiments:{}});
+export const blankCoffeeState = () => ({style:'Traditional',currentFamilies:{},referenceFamilies:{},favoriteShots:{},basketId:null});
 export function blankState(mode='personal') {
- return {schemaVersion:SCHEMA_VERSION,mode,revision:0,theme:'system',activeSetupId:null,preferences:'',setups:[],coffees:[],shots:[],families:[],experiments:[],audit:[],consent:{},createdAt:now()};
+ return {schemaVersion:SCHEMA_VERSION,mode,revision:0,theme:'system',activeSetupId:null,preferences:'',setups:[],coffees:[],shots:[],families:[],audit:[],consent:{},createdAt:now()};
 }
 export function activeSetup(s) {return s.setups.find(x=>x.id===s.activeSetupId)||null;}
 export function activeVersion(s,setup=activeSetup(s)) {return setup?.versions.find(x=>x.id===setup.activeVersionId)||null;}
@@ -41,7 +41,7 @@ export function reviseSetup(s,input) {
   v=clone(old);v.id=newId('version');v.createdAt=now();v.label=input.versionLabel?.trim()||'Equipment update';
   if(['grinder','burrs'].some(k=>norm(input[k])!==norm(old[k]))) {v.calibrationId=newId('calibration');v.calibrations=[{id:v.calibrationId,min:lo,max:hi,at:now()}];}
   const w=clone(workspace(s));
-  for(const c of Object.values(w.coffees)){c.referenceFamilies={...c.currentFamilies};c.currentFamilies={};c.experiments={};}
+  for(const c of Object.values(w.coffees)){c.referenceFamilies={...c.currentFamilies};c.currentFamilies={};}
   setup.workspaces[v.id]=w;setup.versions.push(v);setup.activeVersionId=v.id;
   logAudit(s,'setup.versioned',{setupId:setup.id,from:old.id,to:v.id});
  }
@@ -93,8 +93,10 @@ export function restoreVersion(s,id) {
 }
 export function addCoffee(s,data) {
  if(!data.name?.trim()||!data.roaster?.trim())throw new Error('Name and roaster are required.');
- const c={id:newId('coffee'),createdAt:now(),hidden:false,status:'local',bags:[{id:newId('bag'),roastDate:'',frozen:false,archived:false}],...pickCoffee(data)};
- c.activeBagId=c.bags[0].id;s.coffees.push(c);
+ if(data.style==='Custom')throw new Error('Custom is retired. Choose an available shot style.');
+ // Retired bag management: an empty schema-1 archive carrier keeps old backups importable.
+ const c={id:newId('coffee'),createdAt:now(),hidden:false,status:'local',bags:[],...pickCoffee(data)};
+ s.coffees.push(c);
  if(activeSetup(s))ensureCoffeeState(s,c.id).style=STYLES.includes(data.style)?data.style:'Traditional';
  logAudit(s,'coffee.added',{coffeeId:c.id});return c;
 }
@@ -135,7 +137,7 @@ export function snapshot(s,coffeeId,basketId) {
 export function hasLocalSuccess(s,coffeeId,style) {
  const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn);
 }
-export function validateShot(d) {
+export function validateShot(d,{allowLegacyCustom=false}={}) {
  const errors=[];
  // PostgreSQL length(text) counts Unicode code points, not UTF-16 units.
  // Reject excess before enqueue/save; never silently discard a member's text.
@@ -144,12 +146,15 @@ export function validateShot(d) {
  if(num(d.grindSetting)==null||num(d.grindSetting)<0)errors.push('Enter the actual grind setting (0 or higher).');
  if(d.tempC!==''&&d.tempC!=null){const n=num(d.tempC);if(n==null||n<70||n>100)errors.push('Check temperature (70-100 degrees C).');}
  if(!d.tasteScales||!Object.entries({extraction:3,body:3,clarity:5,sweetness:5,astringency:1}).every(([k])=>Number.isInteger(d.tasteScales[k])&&d.tasteScales[k]>=1&&d.tasteScales[k]<=5))errors.push('Rate all five taste scales.');
- if(!STYLES.includes(d.style))errors.push('Choose a shot style.');
+ if(!STYLES.includes(d.style)&&!(allowLegacyCustom&&d.style==='Custom'))errors.push('Choose an available shot style.');
  return errors;
 }
 export function validateBackup(data) {
  if(!data||typeof data!=='object'||data.schemaVersion!==1)throw new Error('This is not a prototype backup.');
- for(const key of ['coffees','shots','setups','families','experiments','audit'])if(!Array.isArray(data[key]))throw new Error(`Backup is missing ${key}.`);
+ for(const key of ['coffees','shots','setups','families','audit'])if(!Array.isArray(data[key]))throw new Error(`Backup is missing ${key}.`);
+ // Legacy exports remain readable only when no old Experiment records would be lost.
+ if(data.experiments!==undefined&&(!Array.isArray(data.experiments)||data.experiments.length))throw new Error('Retired Experiment records require archival recovery; retain the original backup.');
+ if(data.shots.some(sh=>sh.experimentId!=null))throw new Error('Retired Experiment shot links require archival recovery; retain the original backup.');
  const ids=new Set();for(const c of data.coffees){if(!c.id||!c.name||!c.roaster||ids.has(c.id))throw new Error('Invalid coffee records.');ids.add(c.id);}
  for(const sh of data.shots){if(!ids.has(sh.coffeeId)||!sh.id||!sh.snapshot)throw new Error('Invalid shot references.');}
  for(const set of data.setups){if(!Array.isArray(set.versions)||!set.versions.some(v=>v.id===set.activeVersionId)||!set.workspaces)throw new Error('Invalid equipment setup.');}

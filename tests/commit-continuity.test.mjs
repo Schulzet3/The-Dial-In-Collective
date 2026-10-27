@@ -12,6 +12,16 @@ test('source changes without same-commit durable checkpoint are blocked',()=>{
 test('source changes with same-commit work journal pass',()=>{
  assert.deepEqual(auditLatestCommit({paths:['site/cloud/main.js',checkpoint],subject:'fix: approved control [skip netlify]'}),[]);
 });
+test('one immutable source-bound PR122 GitHub auto-merge receipt is accepted, never an arbitrary unmarked merge',()=>{
+ const subject='Merge pull request #122 from Schulzet3/work/issue33-presentation-triage-20261026';
+ const sha='644870aee66ad5c5f0bcdab0d4eeb66283cdd5fb';
+ const paths=['scripts/audit/coffee-corpus-presentation-review.mjs','docs/workstreams/issue-33.md'];
+ assert.deepEqual(auditLatestCommit({paths,subject,sha}),[]);
+ assert.match(auditLatestCommit({paths,subject,sha:'c'.repeat(40)}).join(' '),/Unmarked commit/);
+ assert.match(auditLatestCommit({paths,subject:subject+' changed',sha}).join(' '),/Unmarked commit/);
+ assert.match(auditLatestCommit({paths:['site/cloud/main.js'],subject,sha}).join(' '),/SAME-COMMIT/);
+});
+
 test('doc-only commits without skip are blocked; docs with skip are accepted',()=>{
  assert.ok(auditLatestCommit({paths:['docs/CURRENT_STATUS.md'],subject:'docs: status'}).length);
  assert.deepEqual(auditLatestCommit({paths:['docs/CURRENT_STATUS.md'],subject:'docs: status [skip netlify]'}),[]);

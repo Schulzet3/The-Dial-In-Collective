@@ -14,25 +14,37 @@ export function independentMutations(held,event){
   return !!b.id&&!!b.setup_version_id&&!!b.library_entry_id;
  return false;
 }
-function stoppedWithAccess(state,sent,notify,owner){
- const result={state,sent,accessDenied:true};notify({...result,owner});return result;
+function stoppedWithAccess(state,sent,notify,who){
+ const result={state,sent,accessDenied:true};notify({...result,owner:who.id,sessionEpoch:who.sessionEpoch??null});return result;
 }
 export class Outbox {
- constructor({store,remote,identity,uuid=()=>crypto.randomUUID(),now=()=>new Date().toISOString(),notify=()=>{}}){Object.assign(this,{store,remote,identity,uuid,now,notify});this.running=null;}
+ constructor({store,remote,identity,uuid=()=>crypto.randomUUID(),now=()=>new Date().toISOString(),notify=()=>{}}){Object.assign(this,{store,remote,identity,uuid,now,notify});this.runningBySession=new Map();}
  async enqueue(action,payload){
   if(!ACTIONS.has(action))throw new CloudError('Unsupported cloud action.','unsupported_action');
   const who=await this.identity();if(!who?.id)throw new CloudError('Sign in first.','signed_out');
   const event={owner:who.id,id:this.uuid(),action,payload:structuredClone(payload),createdAt:this.now(),status:'pending'};
-  await this.store.put(event);this.notify({state:'pending',owner:who.id});return event;
+  await this.store.put(event);this.notify({state:'pending',owner:who.id,sessionEpoch:who.sessionEpoch??null});return event;
  }
  async pending(){const who=await this.identity();return who?.id?(await this.store.list(who.id)):[];}
- async flush(){if(this.running)return this.running;this.running=this.run().finally(()=>this.running=null);return this.running;}
- async run(){
+ async flush(){
   const who=await this.identity();if(!who?.id)return {state:'signed_out'};
+  // A stalled prior member/session cannot hold the next signed-in member's
+  // durable queue. Session epoch also distinguishes a reauthenticated owner.
+  const key=JSON.stringify([who.id,who.sessionEpoch??null]);
+  if(this.runningBySession.has(key))return this.runningBySession.get(key);
+  const task=this.run(who).finally(()=>{
+   if(this.runningBySession.get(key)===task)this.runningBySession.delete(key);
+  });
+  this.runningBySession.set(key,task);return task;
+ }
+ async run(who){
+  const matches=async()=>{const active=await this.identity();return active?.id===who.id&&
+   (who.sessionEpoch==null||active?.sessionEpoch===who.sessionEpoch);};
+  if(!(await matches()))return {state:'account_changed',sent:0};
   let sent=0;const held=[];
-  const stopped=state=>{const result={state,sent};this.notify({...result,owner:who.id});return result;};
+  const stopped=state=>{const result={state,sent};this.notify({...result,owner:who.id,sessionEpoch:who.sessionEpoch??null});return result;};
   for(const event of await this.store.list(who.id)){
-   if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
+   if(!(await matches()))return {state:'account_changed',sent};
    if(['conflict','rejected'].includes(event.status)){
     if(isAccessDenied(event.error||event.result))return {state:event.status,sent,accessDenied:true,recheckAccess:true};
     held.push(event);
@@ -52,7 +64,7 @@ export class Outbox {
       if(!accessDenied)throw storageError;
      }
     }
-    if(accessDenied)return stoppedWithAccess('rejected',sent,this.notify,who.id);
+    if(accessDenied)return stoppedWithAccess('rejected',sent,this.notify,who);
     if(!rejected)return stopped('offline');
     held.push(event);continue;
    }
@@ -65,9 +77,9 @@ export class Outbox {
    // Lost responses always retain their original mutation ID for safe retries.
    await this.store.acknowledge(event,r);sent++;
   }
-  if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
+  if(!(await matches()))return {state:'account_changed',sent};
   const state=held.some(event=>event.status==='conflict'||event.result?.code==='conflict')?'conflict':held.length?'rejected':'synced';
-  const result={state,sent,at:this.now()};this.notify({...result,owner:who.id});return result;
+  const result={state,sent,at:this.now()};this.notify({...result,owner:who.id,sessionEpoch:who.sessionEpoch??null});return result;
  }
 }
 export class IndexedStore {
@@ -110,6 +122,19 @@ export class IndexedStore {
  put(event){return this.transaction(['events','meta'],tx=>{const events=tx.objectStore('events'),meta=tx.objectStore('meta');const exists=events.get([event.owner,event.id]);exists.onsuccess=()=>{if(exists.result){events.put({...event,sequence:exists.result.sequence});return;}const r=meta.get('sequence');r.onsuccess=()=>{const sequence=(r.result||0)+1;meta.put(sequence,'sequence');events.put({...event,sequence});};};});}
  async list(owner){const db=await this.db();return new Promise((resolve,reject)=>{const r=db.transaction('events').objectStore('events').getAll();r.onerror=()=>reject(r.error);r.onsuccess=()=>resolve(r.result.filter(e=>e.owner===owner).sort((a,b)=>a.sequence-b.sequence));});}
  acknowledge(event,result){return this.transaction(['events','receipts','cache'],tx=>{tx.objectStore('receipts').put({owner:event.owner,id:event.id,event:structuredClone(event),result,at:new Date().toISOString()});const cache=tx.objectStore('cache'),r=cache.get(event.owner);r.onsuccess=()=>{if(r.result)cache.put({...r.result,snapshot:patchAcknowledgement(r.result.snapshot,event,result),needsRefresh:true},event.owner);};tx.objectStore('events').delete([event.owner,event.id]);});}
+ async readReceipt(owner,id){
+  const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if(typeof owner!=='string'||typeof id!=='string'||!uuid.test(owner)||!uuid.test(id))return null;
+  const db=await this.db();
+  return new Promise((resolve,reject)=>{
+   const request=db.transaction('receipts','readonly').objectStore('receipts').get([owner,id]);
+   request.onerror=()=>reject(request.error);
+   request.onsuccess=()=>{
+    const receipt=request.result;
+    resolve(receipt?.owner===owner&&receipt.id===id&&receipt.event?.owner===owner&&receipt.event.id===id?receipt:null);
+   };
+  });
+ }
  async claimFirstStylePrompt(owner,libraryId){
   if(!owner||!libraryId)throw new CloudError('Owner and coffee are required.','invalid_prompt');
   const key='first-style:'+owner+':'+libraryId;let first=false;

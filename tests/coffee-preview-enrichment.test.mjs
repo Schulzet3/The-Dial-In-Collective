@@ -17,9 +17,9 @@ const htmlFor=fields=>'<script type="application/ld+json">'+JSON.stringify({
 const endpointData=fields=>({title:fields.name,handle:'arbey-cordoba-26',vendor:fields.roaster,
  description:Object.entries(fields).filter(([key])=>labels[key]).map(([key,value])=>'<p>'+labels[key]+': '+value+'</p>').join('')});
 const env=key=>({SUPABASE_URL:'https://fixture.supabase.co',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_fixture_nonfunctional'}[key]);
-const request=()=>new Request('https://app.dialincollective.com/api/coffee-preview',{
+const request=(refreshSource)=>new Request('https://app.dialincollective.com/api/coffee-preview',{
  method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer fixture.jwt',Origin:'https://app.dialincollective.com'},
- body:JSON.stringify({source_url:source})
+ body:JSON.stringify({source_url:source,...(refreshSource!==undefined?{refresh_source:refreshSource}:{})})
 });
 function fixture({catalog=null,fields=values,page=null,jsonData=endpointData(values),freshReason=null,cachedReason=null}={}){
  const state={catalog,admitted:true,emailVerified:true},calls=[];
@@ -42,7 +42,7 @@ function fixture({catalog=null,fields=values,page=null,jsonData=endpointData(val
   readLargeHtml:async (url,options)=>{sourceCalls.push({type:'large',url,options});return {ok:false,reason:'page_too_large'};},
   readJson:async (url,options)=>{sourceCalls.push({type:'json',url,options});return jsonData?{ok:true,json:JSON.stringify(jsonData)}:{ok:false,reason:'source_unavailable'};}
  });
- const invoke=async()=>{const response=await handler(request());return {status:response.status,body:await response.json()};};
+ const invoke=async(refreshSource)=>{const response=await handler(request(refreshSource));return {status:response.status,body:await response.json()};};
  return {state,calls,sourceCalls,invoke};
 }
 const catalog=fields=>({ok:true,source:'verified_catalog',source_url:source,fields});
@@ -95,6 +95,40 @@ test('a complete approved catalog retains the free cooldown-enforced fast path',
  assert.equal(body.cached,true);assert.equal(f.sourceCalls.length,0);
  assert.deepEqual(f.calls.filter(x=>x.method==='dic_preview_preflight').map(x=>x.body),[{p_cached:true}]);
  assert.equal(f.calls.some(x=>x.method==='dic_preview_complete'),false);
+});
+test('an explicit current-source check reads beyond a complete approved catalog under the normal quota',async()=>{
+ const f=fixture({catalog:catalog({...values,variety:'Old cultivar'})});
+ const first=await f.invoke();assert.equal(first.body.fields.variety,'Old cultivar');assert.equal(f.sourceCalls.length,0);
+ const {body}=await f.invoke(true);
+ assert.equal(body.fields.variety,'Bourbon Ají');assert.equal(body.catalog_approved,undefined);
+ assert.equal(body.verification,'unverified');assert.deepEqual(f.sourceCalls.map(x=>x.type),['html','json']);
+ assert.deepEqual(f.calls.filter(x=>x.method==='dic_preview_preflight').map(x=>x.body),[{p_cached:true},{p_cached:false}]);
+ assert.equal(f.calls.filter(x=>x.method==='dic_preview_complete').length,1);
+});
+test('explicit current-source refresh also bypasses only the warm public cache, not its quota',async()=>{
+ const f=fixture();await f.invoke();await f.invoke(true);
+ assert.deepEqual(f.sourceCalls.map(x=>x.type),['html','json','html','json']);
+ assert.deepEqual(f.calls.filter(x=>x.method==='dic_preview_preflight').map(x=>x.body),[{p_cached:false},{p_cached:false}]);
+ assert.equal(f.calls.filter(x=>x.method==='dic_preview_complete').length,2);
+});
+test('only boolean true requests a refresh and refused claims never cause a source read',async()=>{
+ for(const value of [false,'true',1,null]){
+  const f=fixture({catalog:catalog({...values})});const {body}=await f.invoke(value);
+  assert.equal(body.source,'approved_catalog');assert.equal(f.sourceCalls.length,0);
+ }
+ for(const reason of ['preview_cooldown','daily_preview_limit']){
+  const f=fixture({catalog:catalog({...values}),freshReason:reason});const {body}=await f.invoke(true);
+  assert.equal(f.sourceCalls.length,0);assert.equal(f.calls.some(x=>x.method==='dic_preview_complete'),false);
+  if(reason==='preview_cooldown')assert.equal(body.reason,reason);
+  else{assert.equal(body.source,'approved_catalog');assert.equal(body.refresh_reason,reason);}
+ }
+});
+test('explicit source refresh cannot bypass admission or turn an unavailable source into verified evidence',async()=>{
+ const denied=fixture({catalog:catalog({...values})});denied.state.admitted=false;
+ assert.equal((await denied.invoke(true)).status,403);assert.equal(denied.sourceCalls.length,0);
+ const unavailable=fixture({catalog:catalog({...values}),page:{ok:false,reason:'source_unavailable'},jsonData:null});
+ const {body}=await unavailable.invoke(true);assert.equal(body.source,'approved_catalog');assert.equal(body.source_verified,false);
+ assert.equal(body.refresh_reason,'source_unavailable');assert.equal(unavailable.calls.some(x=>x.method==='dic_preview_complete'),false);
 });
 test('an incomplete approved catalog cannot suppress fresh fields or confer approval on them',async()=>{
  const f=fixture({catalog:catalog({name:values.name,roaster:values.roaster})}),{body}=await f.invoke();

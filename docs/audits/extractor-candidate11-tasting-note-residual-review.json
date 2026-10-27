@@ -1,0 +1,2090 @@
+{
+  "schema_version": 1,
+  "type": "candidate11_missing_tasting_note_review_with_candidate12_repairs",
+  "review_date": "2026-10-24",
+  "scope": "All42 originally missing tasting_notes assertions from the exact completed C11 replay, not a claim about later candidate outputs.",
+  "source_bindings": {
+    "source_commit": "2eb32b247e2c47bd1646a234717a23d5cd14b6fc",
+    "runtime_fingerprint": "4974710994bcd9660200e2f983c5510dd9973b62ac66011cfc851559a2febca2",
+    "frozen_run": 40066959055,
+    "artifact_id": 12549831914,
+    "artifact_sha256": "58b16366a01377347d28cdcc8399bf94f5de95c9f9ed7fc1a54ad591ce891f8d",
+    "projection_run": 40068548616,
+    "projection_job": 120796818592,
+    "projection_log_sha256": "cfc39e85a52fa4a4b5e0922e263279c36d3930e372a3991c34f2b5811a9aeb37",
+    "oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb"
+  },
+  "limitations": [
+    "Bounded retained source excerpts do not replace complete original captures or a full603 run.",
+    "An unresolved parser opportunity is not declared impossible; no generic flavor dictionary or expected-answer rewrite is used.",
+    "Later scores and exact changes require the complete new runtime replay and independent source review.",
+    "Full current HTML/JSON focused tests cover prepared relationships separately; the frozen expected values remain unchanged."
+  ],
+  "counts": {
+    "rows": 42,
+    "original_explicit_conflicts": 10,
+    "prepared_source_repairs": 10
+  },
+  "records": [
+    {
+      "case_id": "beanstockcoffee-com__ethiopia-ayla-bombe-g1-natural-e4953428",
+      "field": "tasting_notes",
+      "expected": "Green grape; jasmine; tangelo",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "green grape and jasmine up front with mild tangelo juiciness in the finish."
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://beanstockcoffee.com/products/ethiopia-ayla-bombe-g1-natural",
+          "context": {
+            "text": " washing station, which is in the kebele, or village, of Chelchele, in the words, or district, of Kochere, in the Yirgacheffe region. This delightful coffee is soft and sweet with green grape and jasmine up front with mild tangelo juiciness in the finish. 12 oz and 1 lb bags will both be packed in our 12 oz retail bags, so they can be heat-sealed and Nitrogen-flushed to preserve freshness and create the best drinking experience possible. Coffees in Ethiopia are typically grown on very small plots of land by farmers who also grow other crops. The majority of smallholders will deliver their c offee in cherry to a nearby washing station or central processing unit, where their coffee will be sorted, weighed, and paid for or given a receipt. Cof",
+            "truncated": true,
+            "original_bytes": 1365
+          },
+          "normalized_excerpt_starts_at_character": 235,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1602
+        },
+        {
+          "source_fact_index": 2,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://beanstockcoffee.com/products/ethiopia-ayla-bombe-g1-natural.js",
+          "context": {
+            "text": " washing station, which is in the kebele, or village, of Chelchele, in the words, or district, of Kochere, in the Yirgacheffe region. This delightful coffee is soft and sweet with green grape and jasmine up front with mild tangelo juiciness in the finish. 12 oz and 1 lb bags will both be packed in our 12 oz retail bags, so they can be heat-sealed and Nitrogen-flushed to preserve freshness and create the best drinking experience possible. Coffees in Ethiopia are typically grown on very small plots of land by farmers who also grow other crops. The majority of smallholders will deliver their c offee in cherry to a nearby washing station or central processing unit, where their coffee will be sorted, weighed, and paid for or given a receipt. Cof",
+            "truncated": true,
+            "original_bytes": 1528
+          },
+          "normalized_excerpt_starts_at_character": 72,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1600
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "Parse the explicit current front/finish relationship; preserve green grape, jasmine and the literal mild tangelo juiciness modifier. Full603 impact pending."
+    },
+    {
+      "case_id": "blackriverroasters-com__organic-honduras-comsa-d92176d0",
+      "field": "tasting_notes",
+      "expected": "raspberry, jam, cranberry, cherry",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "fruit-forward notes of raspberry, jam, cranberry and cherry"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://blackriverroasters.com/products/organic-honduras-comsa",
+          "context": {
+            "text": "ator) Coarse (French Press) Extra Coarse (Cold Brew) Notify me when this product is available: Product notification for Quantity ( 0 in cart) A rich and incredibly sweet cup, with fruit-forward notes of raspberry, jam, cranberry and cherry. In the year 2000, 62 Honduran coffee farmers joined together with a common goal to transform their farms from conventional to organic production and formed COMSA (Cafe Organico Marcala, S.A). In 2001, fostered by a foundation called Funder, COMSA earned their organic certification from Bio Latina which has enabled them to market their coffee to more international buyers and realize better selling prices for their coffee. In February 2006, COMSA then applied for and was granted Fair Trade certification st",
+            "truncated": true,
+            "original_bytes": 1189
+          },
+          "normalized_excerpt_starts_at_character": 335,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1524
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://blackriverroasters.com/products/organic-honduras-comsa.js",
+          "context": {
+            "text": "Organic Honduras COMSA A rich and incredibly sweet cup, with fruit-forward notes of raspberry, jam, cranberry and cherry. In the year 2000, 62 Honduran coffee farmers joined together with a common goal to transform their farms from conventional to organic production and formed COMSA (Cafe Organico Marcala, S.A). In 2001, fostered by a foundation called Funder, COMSA earned their organic certification from Bio Latina which has enabled them to market their coffee to more international buyers and realize better selling prices for their coffee. In February 2006, COMSA then applied for and was granted Fair Trade certification status. COMSA uses the Fair Trade price premium to fund many social projects including paying teachers’ salaries and pu",
+            "truncated": true,
+            "original_bytes": 1070
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1070
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "A forward notes-of list must not compete with its own fruit-forward adjective. Full603 impact pending."
+    },
+    {
+      "case_id": "bleucoffee-com__copy-of-papua-new-guinea-741ec193",
+      "field": "tasting_notes",
+      "expected": "Floral; fruity; vanilla; pipe tobacco; black cherry; cocoa",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa."
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 10,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://bleucoffee.com/products/copy-of-papua-new-guinea",
+          "context": "Single Origin | 10 oz Sumatra Mandheling| Fair Trade Organic Sale price Price $14.99 Regular price Unit price per Coffee profile: Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa. Varietals: Bourbon, Tim Tim, Catimor Elevation: 1,200-1,500 Meters Special Orders: We are happy to accommodate special order requests in regards to roast profiles and bulk sized orders, please email sales@bleucoffee.com for more information. Profiles Quantity",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 540
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://bleucoffee.com/products/copy-of-papua-new-guinea.js",
+          "context": "Sumatra Mandheling| Fair Trade Organic Coffee profile: Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa. Varietals: Bourbon, Tim Tim, Catimor Elevation: 1,200-1,500 Meters Special Orders: We are happy to accommodate special order requests in regards to roast profiles and bulk sized orders, please email sales@bleucoffee.com for more information.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 447
+        }
+      ],
+      "disposition": "retained_complex_sensory_roles",
+      "reason": "One source sentence coordinates aroma and flavor roles with several modifiers. The complete public sentence is retained; a shorter unqualified canonical list requires further role parsing, not word deletion to fit the oracle."
+    },
+    {
+      "case_id": "bleucoffee-com__ethiopia-0a0d54ca",
+      "field": "tasting_notes",
+      "expected": "Dark chocolate; gardenia; scorched cedar; red plum; hazelnut; tangerine; citrus; wine; berry",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Dark chocolate, gardenia, gently scorched cedar, red plum, hazelnut in aroma and cup."
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The taste has a tones of tangerine and citrus along with wine and berry tones."
+        }
+      ],
+      "frozen_evidence_count": 2,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://bleucoffee.com/products/ethiopia",
+          "context": " the wet processing which also provides a medium body. The taste has a tones of tangerine and citrus along with wine and berry tones. Ethiopia Flavor: Richly sweet, roast-rounded. Dark chocolate, gardenia, gently scorched cedar, red plum, hazelnut in aroma and cup. Sweet structure with little discernible acidity; full, creamy mouthfeel. A chocolate-driven finish is supported by notes dark chocolate, gardenia and hazelnut. Special Orders: We are happy to accommodate special order requests in regards to roast profiles and bulk sized orders, please email sales@bleucoffee.com for more information. Profiles Quantity",
+          "normalized_excerpt_starts_at_character": 778,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1396
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://bleucoffee.com/products/ethiopia.js",
+          "context": " the wet processing which also provides a medium body. The taste has a tones of tangerine and citrus along with wine and berry tones. Ethiopia Flavor: Richly sweet, roast-rounded. Dark chocolate, gardenia, gently scorched cedar, red plum, hazelnut in aroma and cup. Sweet structure with little discernible acidity; full, creamy mouthfeel. A chocolate-driven finish is supported by notes dark chocolate, gardenia and hazelnut. Special Orders: We are happy to accommodate special order requests in regards to roast profiles and bulk sized orders, please email sales@bleucoffee.com for more information.",
+          "normalized_excerpt_starts_at_character": 703,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1303
+        }
+      ],
+      "disposition": "retained_independent_narratives",
+      "reason": "Separate aroma/cup and taste sentences publish overlapping and different sensory descriptions. Preserve source context rather than automatically union independent narrative profiles."
+    },
+    {
+      "case_id": "coffeeroasterlnk-com__nicaragua-pumpkin-spice-pacamara-8272581d",
+      "field": "tasting_notes",
+      "expected": "Pumpkin pie; warm cinnamon",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Pumpkin pie and warm cinnamon"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 5,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara",
+          "context": "ver saw a roaster. Everything you taste came in through fermentation. It's the same Pacamara as our Brix Breaker and our Washed Apple, which makes it the wildest stop on the tour. Pumpkin pie and warm cinnamon, with the fruit sweetness of the varietal still sitting underneath. Qty Notify me when this product is available:",
+          "normalized_excerpt_starts_at_character": 525,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 848
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara.js",
+          "context": "Nicaragua - Pumpkin Spice- Pacamara This one needs a quick explanation, because the name sets off alarms. There is no flavoring sprayed on these beans, and nothing gets added after roasting. What happened is that Gold Mountain sealed ripe Pacamara cherries in a tank without oxygen, fermented them twice, and put real pumpkin spice in with them. The spice went in with the fruit, at the farm, weeks before the coffee ever saw a roaster. Everything you taste came in through fermentation. It's the same Pacamara as our Brix Breaker and our Washed Apple, which makes it the wildest stop on the tour. Pumpkin pie and warm cinnamon, with the fruit sweetness of the varietal still sitting underneath.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 695
+        }
+      ],
+      "disposition": "retained_unlabeled_flavored_processing_context",
+      "reason": "The source explains intentional pumpkin-spice cofermentation and then supplies a bare sensory sentence. Preserve both processing/additive qualification and the source sentence; no guessed conventional sensory role or artificial-flavor policy change."
+    },
+    {
+      "case_id": "dekaf-com__brazil-arabela-e2d6dc66",
+      "field": "tasting_notes",
+      "expected": "Cinnamon; dried fig; graham cracker",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Warm cinnamon undertones dance with gentle dried fig notes and a graham cracker essence"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 11,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://dekaf.com/products/brazil-arabela",
+          "context": {
+            "text": "rced from Brazil’s Mogiana region, this medium roast single origin decaf coffee showcases dedicated farmers’ craftsmanship, delivering a naturally sweet flavor profile year-round. Warm cinnamon undertones dance with gentle dried fig notes and a graham cracker essence , culminating in a smooth, versatile cup. ROAST: Medium CAFFEINE: 0.1% Dekáf'd by way of Swiss Water® Process Originally pioneered in Switzerland, the Swiss Water® Process now operates in Canada. The gentle decaffeination method uses only water, temperature, and time. Zero chemical solvents. Swiss Water® Process involves using Green Coffee Extract to tempt the caffeine out of the beans - immersing the beans in water already saturated with coffee’s natural compounds (m",
+            "truncated": true,
+            "original_bytes": 1342
+          },
+          "normalized_excerpt_starts_at_character": 270,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1612
+        },
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://dekaf.com/products/brazil-arabela.js",
+          "context": "Brazil Arabela Sourced from Brazil’s Mogiana region, this medium roast single origin decaf coffee showcases dedicated farmers’ craftsmanship, delivering a naturally sweet flavor profile year-round. Warm cinnamon undertones dance with gentle dried fig notes and a graham cracker essence , culminating in a smooth, versatile cup. ROAST: Medium CAFFEINE: 0.1%",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 360
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "Explicit same-sentence undertone/notes/essence relationships support the three literal descriptors. Full603 impact pending."
+    },
+    {
+      "case_id": "dekaf-com__colombia-papayo-e5125d1e",
+      "field": "tasting_notes",
+      "expected": "Baking spice; cherry cobbler; red grape",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "lively baking spice notes, cherry cobbler sweetness, and a hint of red grape"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 10,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://dekaf.com/products/colombia-papayo",
+          "context": {
+            "text": " USD Regular price Sale price $21.95 USD Shipping calculated at checkout. 5.0 Rated 5.0 out of 5 stars 72 Reviews Enriched by volcanic soil, this single-origin decaf coffee boasts lively baking spice notes, cherry cobbler sweetness, and a hint of red grape . The medium roast accentuates its natural brightness and delicate acidity, making it a true standout among Colombian coffees. ROAST: Medium CAFFEINE: 0.1% Dekáf'd by way of Swiss Water® Process Originally pioneered in Switzerland, the Swiss Water® Process now operates in Canada. The gentle decaffeination method uses only water, temperature, and time. Zero chemical solvents. Swiss Water® Process involves using Green Coffee Extract to tempt the caffeine out of the beans - immersing the",
+            "truncated": true,
+            "original_bytes": 1458
+          },
+          "normalized_excerpt_starts_at_character": 154,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1612
+        },
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://dekaf.com/products/colombia-papayo.js",
+          "context": "Colombia Papayo Enriched by volcanic soil, this single-origin decaf coffee boasts lively baking spice notes, cherry cobbler sweetness, and a hint of red grape . The medium roast accentuates its natural brightness and delicate acidity, making it a true standout among Colombian coffees. ROAST: Medium CAFFEINE: 0.1%",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 314
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "Explicit current-coffee coordinated notes, sweetness and hint roles support the literal list. Full603 impact pending."
+    },
+    {
+      "case_id": "friedrichscoffee-com__traders-blend-1674f46b",
+      "field": "tasting_notes",
+      "expected": "Fruity",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Fruity"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 7,
+      "context": [
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://friedrichscoffee.com/wp-json/wc/store/v1/products/traders-blend",
+          "context": "Traders Blend – Medium Dark Rich and balanced, Smooth body, Fruity A rich blend of some of our Latin American favorites. This coffee has achieved balance in flavor, offering a smooth and voluminous aroma. Originally developed as Friedrich’s house coffee, it’s won over the hearts and palates of coffee drinkers both on the homefront and in the trading market.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 365
+        },
+        {
+          "source_fact_index": 66,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Page description",
+          "source_type": "html",
+          "section": "Published page metadata",
+          "source_url": "https://friedrichscoffee.com/product/traders-blend/",
+          "context": "Rich and balanced, Smooth body, Fruity",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 38
+        }
+      ],
+      "disposition": "retained_unlabeled_descriptor",
+      "reason": "A standalone Fruity descriptor in a mixed body/marketing list lacks an independently bound flavor label in this projection; the text remains review evidence."
+    },
+    {
+      "case_id": "glorycloudcoffee-com__honduras-decaf-reserva-pacavita-organic-7aaae2f3",
+      "field": "tasting_notes",
+      "expected": "Graham cracker, Citrus, Cherry, Dark chocolate",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Flavors vary by season and may include sweet graham cracker, citrus, cherry and dark chocolate"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 9,
+      "context": [
+        {
+          "source_fact_index": 37,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://glorycloudcoffee.com/products/honduras-decaf-reserva-pacavita-organic",
+          "context": {
+            "text": "rise you with great taste and none of the chemical processing or aftertaste. This ethically sourced blend has multiple origins: Colombia, Ethiopia, Honduras, Mexico and Indonesia. Flavors vary by season and may include sweet graham cracker, citrus, cherry and dark chocolate with a balance of sweetness and acidity and a pleasant mouthfeel. Decaffeinated . With regards to acidity and brightness, Kenya is widely recognized as the king of the hill, and our Kenya AB has been selected at auction as an expertly processed, top-notch offering not to be missed. It is cooperatively produced by many small farmers growing in the central Kenyan farmlands surrounding Mt. Kenya. The individual lots are consolidated at the local mill where they undergo a st",
+            "truncated": true,
+            "original_bytes": 954
+          },
+          "normalized_excerpt_starts_at_character": 649,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1603
+        },
+        {
+          "source_fact_index": 41,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://glorycloudcoffee.com/products/honduras-decaf-reserva-pacavita-organic.js",
+          "context": {
+            "text": "rise you with great taste and none of the chemical processing or aftertaste. This ethically sourced blend has multiple origins: Colombia, Ethiopia, Honduras, Mexico and Indonesia. Flavors vary by season and may include sweet graham cracker, citrus, cherry and dark chocolate with a balance of sweetness and acidity and a pleasant mouthfeel. Decaffeinated . With regards to acidity and brightness, Kenya is widely recognized as the king of the hill, and our Kenya AB has been selected at auction as an expertly processed, top-notch offering not to be missed. It is cooperatively produced by many small farmers growing in the central Kenyan farmlands surrounding Mt. Kenya. The individual lots are consolidated at the local mill where they undergo a st",
+            "truncated": true,
+            "original_bytes": 1392
+          },
+          "normalized_excerpt_starts_at_character": 212,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1604
+        }
+      ],
+      "disposition": "retained_conditional_or_seasonal",
+      "reason": "The source explicitly says flavors vary by season and may include these values, within a multi-coffee context. Do not turn possibilities into an unconditional selected-coffee profile."
+    },
+    {
+      "case_id": "grindinggearscoffee-com__ethiopia-9a78b7f7",
+      "field": "tasting_notes",
+      "expected": "Raspberry; cane sugar / sugarcane; lemon zest; ripe berries; jasmine; lavender",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Tasting Notes: Raspberry, Cane Sugar, Lemon Zest"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Ripe Berries and delicate Florals (think Jasmine or Lavender)"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "a clean, sweet finish of Sugarcane"
+        }
+      ],
+      "frozen_evidence_count": 3,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 14,
+      "context": [
+        {
+          "source_fact_index": 2,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://grindinggearscoffee.com/products/ethiopia",
+          "context": {
+            "text": "Ethiopia $25.00 off Final sale Grind Options Whole Bean Whole Bean Coarse Auto Fine Quantity Description Roast: Light-Medium Tasting Notes: Raspberry, Cane Sugar, Lemon Zest The Grind & The Origin This Ethiopian coffee comes from Mr. Mengeche Derso’s 15-hectare farm in Halo Beriti, in the Yirgacheffe region of Ethiopia’s Gedeo Zone. He works the farm alongside four of his children, tending native Ethiopian heirloom varieties in the highlands at 2,200–2,300 meters above sea level. Natural fertilizers, including animal manure and plant remnants, help enrich the soil. This Grade 1 lot is part of Café Imports’ Single Farmer Project, which makes it possible to trace the coffee to the individual producer behind it. The Profile: Vibrant, ",
+            "truncated": true,
+            "original_bytes": 1611
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1611
+        },
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://grindinggearscoffee.com/products/ethiopia.js",
+          "context": {
+            "text": "Ethiopia Roast: Light-Medium Tasting Notes: Raspberry, Cane Sugar, Lemon Zest The Grind & The Origin This Ethiopian coffee comes from Mr. Mengeche Derso’s 15-hectare farm in Halo Beriti, in the Yirgacheffe region of Ethiopia’s Gedeo Zone. He works the farm alongside four of his children, tending native Ethiopian heirloom varieties in the highlands at 2,200–2,300 meters above sea level. Natural fertilizers, including animal manure and plant remnants, help enrich the soil. This Grade 1 lot is part of Café Imports’ Single Farmer Project, which makes it possible to trace the coffee to the individual producer behind it. The Profile: Vibrant, Floral, & Jammy This is a Natural (Dry) Process coffee. Ripe cherries are sorted for quality, ri",
+            "truncated": true,
+            "original_bytes": 1615
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1615
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay explicitly withholds tasting_notes with a conflict. A selected expected quotation cannot clear the complete competing evidence."
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__bless-your-heart-1-ccbccf60",
+      "field": "tasting_notes",
+      "expected": "mildly sweet, nutty",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "A mildly sweet and nutty Brazilian variety"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 4,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://hellolarsonscoffee.com/products/bless-your-heart-1",
+          "context": {
+            "text": "hipping calculated at checkout. Size Optional Flavor Roast Purchase options One-time purchase Coffee Subscription - with a discount! Pickup or Ship Every Quantity Bless Your Heart A mildly sweet and nutty Brazilian variety, roasted to perfection with your sweet little heart in mind. This mild variety pairs well with all our flavor options and tastes great on its own! We recommend a medium roast Bless Your Heart as a daily go to. More Coffee Origin Info Hello Larsons personally guarantees all orders. If your coffee arrives damaged in any way please notify us immediately so we can replace your order. In the case of a late delivery or shipment, please notify immediately. (605) 690-1625 or hellolarsonscoffee@gmail.com All orders must be paid in",
+            "truncated": true,
+            "original_bytes": 818
+          },
+          "normalized_excerpt_starts_at_character": 66,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 884
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://hellolarsonscoffee.com/products/bless-your-heart-1.js",
+          "context": "Bless Your Heart - Brazilian Bless Your Heart A mildly sweet and nutty Brazilian variety, roasted to perfection with your sweet little heart in mind. This mild variety pairs well with all our flavor options and tastes great on its own! We recommend a medium roast Bless Your Heart as a daily go to. More Coffee Origin Info Hello Larsons personally guarantees all orders. If your coffee arrives damaged in any way please notify us immediately so we can replace your order. In the case of a late delivery or shipment, please notify immediately. (605) 690-1625 or hellolarsonscoffee@gmail.com All orders must be paid in full before delivery will occur.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 649
+        }
+      ],
+      "disposition": "retained_unlabeled_role",
+      "reason": "The source contains mildly sweet/nutty adjectives in a variety/optional-flavor sales description. Further role parsing is possible; do not infer a selected optional flavor or flatten its conditions."
+    },
+    {
+      "case_id": "hellolarsonscoffee-com__hello-darlin-1-4d1fcba2",
+      "field": "tasting_notes",
+      "expected": "Fruity",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "This rich cup of fruity Papua New Guinea goodness"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://hellolarsonscoffee.com/products/hello-darlin-1",
+          "context": "ated at checkout. Size Optional Flavor Roast Purchase options One-time purchase Coffee Subscription - with a discount! Pickup or Ship Every Quantity Hello Darlin' Nice to see you. This rich cup of fruity Papua New Guinea goodness will keep your toes tapping to its eloquent taste. Bold flavor to enjoy alone or with any optional flavor. More Coffee Origin Info Hello Larsons personally guarantees all orders. If your coffee arrives damaged in any way please notify us immediately so we can replace your order. In the case of a late delivery or shipment, please notify immediately. (605) 690-1625 or hellolarsonscoffee@gmail.com All orders must be paid in full before delivery will occur. Share on Facebook Pin on Pinterest",
+          "normalized_excerpt_starts_at_character": 84,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 806
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://hellolarsonscoffee.com/products/hello-darlin-1.js",
+          "context": "Hello Darlin' - Papua New Guinea Hello Darlin' Nice to see you. This rich cup of fruity Papua New Guinea goodness will keep your toes tapping to its eloquent taste. Bold flavor to enjoy alone or with any optional flavor. More Coffee Origin Info Hello Larsons personally guarantees all orders. If your coffee arrives damaged in any way please notify us immediately so we can replace your order. In the case of a late delivery or shipment, please notify immediately. (605) 690-1625 or hellolarsonscoffee@gmail.com All orders must be paid in full before delivery will occur.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 571
+        }
+      ],
+      "disposition": "retained_unlabeled_role",
+      "reason": "The Fruity adjective appears in a longer named-origin sales sentence alongside optional flavors. Retain the literal sentence without inventing a more specific sensory profile."
+    },
+    {
+      "case_id": "lowcountrycoffeeroasters-com__peru-hb-1-ad8af585",
+      "field": "tasting_notes",
+      "expected": "Cocoa, Almond",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Flavor: Cocoa, Almond"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 6,
+      "context": [
+        {
+          "source_fact_index": 2,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://lowcountrycoffeeroasters.com/products/peru-hb-1",
+          "context": "gh grown and fully washed. We roast it to a medium roast with low acidity, average body and low sweetness. Has flavor notes of cocoa and almond. A very smooth roast. Roast: Medium Flavor: Cocoa, Almond Location: Peru Elevation: 1,500 meters Process: Fully Washed Drying: Mechanical Dryer Varietals: Caturra, Castillo Subscribe & Save Grab the freshest coffee every 2-4 weeks with Lowcountry Coffee Roasters. Savor expertly roasted blends sent right to your door! LEARN MORE",
+          "normalized_excerpt_starts_at_character": 390,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 863
+        },
+        {
+          "source_fact_index": 0,
+          "match_basis": "explicit_field",
+          "field": "tasting_notes",
+          "label": "Flavor:",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://lowcountrycoffeeroasters.com/products/peru-hb-1",
+          "context": "Cocoa, Almond",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 13
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay has an explicit tasting-note conflict; a single Cocoa/Almond quotation is insufficient to remove it."
+    },
+    {
+      "case_id": "mauicoffeeroasters-com__fresh-trades-8oz-d0540271",
+      "field": "tasting_notes",
+      "expected": "Cola, butter",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "cola-like sweetness, buttery undertones"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://mauicoffeeroasters.com/products/fresh-trades-8oz.js",
+          "context": "Fresh Trades Introducing Fresh Trades: Dive into the refreshing taste of Guatemala with every sip. Our single-origin Guatemalan coffee boasts cola-like sweetness, buttery undertones, and a delightful sweetness, all captured in a light roast. Roasted locally in Maui, Hawaii and packaged in a Kanaha Beach Park Windsurfing inspired theme, Fresh Trades embodies the spirit of adventure and relaxation. Join us in savoring the flavors of the tropics and the thrill of the waves with each uplifting cup.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 499
+        },
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Introducing Fresh Trades",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://mauicoffeeroasters.com/products/fresh-trades-8oz",
+          "context": "Dive into the refreshing taste of Guatemala with every sip. Our single-origin Guatemalan coffee boasts cola-like sweetness, buttery undertones, and a delightful sweetness, all captured in a light roast. Roasted locally in Maui, Hawaii and packaged in a Kanaha Beach Park Windsurfing inspired theme, Fresh Trades embodies the spirit of adventure and relaxation. Join us in savoring the flavors of the tropics and the thrill of the waves with each uplifting cup.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 460
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "A current coffee explicitly boasts coordinated sweetness/undertone descriptors. Preserve literal modifiers rather than convert buttery to an invented normalized noun. Full603 impact pending."
+    },
+    {
+      "case_id": "mountainthunder-com__espresso16-000be6f3",
+      "field": "tasting_notes",
+      "expected": "Chocolate, smoky, caramel",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "noticeable chocolate overtones"
+        },
+        {
+          "capture_id": "page",
+          "quote": "Espresso - Smokey with caramel notes."
+        }
+      ],
+      "frozen_evidence_count": 2,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 9,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://mountainthunder.com/products/espresso16",
+          "context": {
+            "text": "e drinks like Lattes, Mochas, Cappuccinos, Macchiatos, Cubanos, and Americanos. Our Espresso Roast Kona Coffee is a dark roast, which creates a slightly bitter taste profile, with noticeable chocolate overtones. The acidity is low, and it has a smooth aftertaste. Mountain Thunder’s Espresso roast can be ordered in your choice of whole bean or ground. 100% Kona Espresso Roast Coffee…Our Process Our Kona Espresso Roast Coffee starts its journey to your cup on the slopes of volcanoes in the Kona Coffee Belt. This area on the leeward side of Hawaii Island, Hawaii, has ideal conditions for growing superb gourmet coffee … high elevations with mineral-rich volcanic soil. The gentle, cool mountain weather blesses this area with ideal amounts ",
+            "truncated": true,
+            "original_bytes": 1058
+          },
+          "normalized_excerpt_starts_at_character": 547,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1607
+        },
+        {
+          "source_fact_index": 2,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://mountainthunder.com/products/espresso16.js",
+          "context": {
+            "text": "e drinks like Lattes, Mochas, Cappuccinos, Macchiatos, Cubanos, and Americanos. Our Espresso Roast Kona Coffee is a dark roast, which creates a slightly bitter taste profile, with noticeable chocolate overtones. The acidity is low, and it has a smooth aftertaste. Mountain Thunder’s Espresso roast can be ordered in your choice of whole bean or ground. 100% Kona Espresso Roast Coffee…Our Process Our Kona Espresso Roast Coffee starts its journey to your cup on the slopes of volcanoes in the Kona Coffee Belt. This area on the leeward side of Hawaii Island, Hawaii, has ideal conditions for growing superb gourmet coffee … high elevations with mineral-rich volcanic soil. The gentle, cool mountain weather blesses this area with ideal amounts ",
+            "truncated": true,
+            "original_bytes": 1242
+          },
+          "normalized_excerpt_starts_at_character": 362,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1606
+        }
+      ],
+      "disposition": "retained_multiple_source_roles",
+      "reason": "Chocolate overtones and smoky/caramel descriptions come from differently scoped espresso/roast text. Complete source and preparation roles remain available for review; no automatic union."
+    },
+    {
+      "case_id": "quartermaine-com__sumatra-c84b9077",
+      "field": "tasting_notes",
+      "expected": "earthy, spicy, dark chocolate, tobacco",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "earthy, spicy notes"
+        },
+        {
+          "capture_id": "page",
+          "quote": "dark chocolate or tobacco"
+        }
+      ],
+      "frozen_evidence_count": 2,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://quartermaine.com/products/sumatra",
+          "context": "Sumatra Regular price $25.25 Sale Weight Grind Quantity A full-bodied coffee with low acidity, it has earthy, spicy notes that are sometimes described as tasting like dark chocolate or tobacco. Sumatran coffee is a great choice for those who prefer a bolder, richer coffee. Share on Facebook Tweet on Twitter Pin on Pinterest",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 325
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://quartermaine.com/products/sumatra.js",
+          "context": "Sumatra A full-bodied coffee with low acidity, it has earthy, spicy notes that are sometimes described as tasting like dark chocolate or tobacco. Sumatran coffee is a great choice for those who prefer a bolder, richer coffee.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 225
+        }
+      ],
+      "disposition": "retained_qualified_comparison",
+      "reason": "The source says earthy/spicy notes are sometimes described as dark chocolate or tobacco. Preserve that uncertainty and alternative comparison rather than a flat four-flavor assertion."
+    },
+    {
+      "case_id": "roasterympls-com__organic-ethiopia-guiji-4c206fc5",
+      "field": "tasting_notes",
+      "expected": "Strawberry, wine, floral",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Flavor: Strawberry, wine, and floral notes"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 16,
+      "context": [
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://roasterympls.com/products/organic-ethiopia-guiji",
+          "context": "lowing its complex fruit-forward notes to flourish. It’s also a delightful choice for drip coffee and espresso. Tasting Notes: Acidity: Bright and lively Body: Full bodied, smooth Flavor: Strawberry, wine, and floral notes Finish: Sweet and clean Enjoy the captivating taste of Natural Organic Ethiopia Guji Coffee — an",
+          "normalized_excerpt_starts_at_character": 1280,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1609
+        },
+        {
+          "source_fact_index": 6,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://roasterympls.com/products/organic-ethiopia-guiji.js",
+          "context": "lowing its complex fruit-forward notes to flourish. It’s also a delightful choice for drip coffee and espresso. Tasting Notes: Acidity: Bright and lively Body: Full bodied, smooth Flavor: Strawberry, wine, and floral notes Finish: Sweet and clean Enjoy the captivating taste of Natural Organic Ethiopia Guji Coffee — an elegant, fruit-forward cup that brings the magic of Ethiopia to your morning ritual. Origin: Guji, Ethiopia Process: Natural Certifications: Organic",
+          "normalized_excerpt_starts_at_character": 984,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1462
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay records a tasting-note conflict across the complete profile. Retain all evidence rather than choose the isolated expected line."
+    },
+    {
+      "case_id": "sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f",
+      "field": "tasting_notes",
+      "expected": "Almond, brown sugar, tart cherry",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The flavor starts off with a dry nutty bite similar to almonds; it’s the kind of Central American coffee you like to start and end the day with because it’s sweet, heavy-bodied, warm, and comforting. Lingering brown sugar notes, balanced acidity, and lovely slightly tart cherry flavor round out this cup."
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 10,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://sextantcoffee.com/products/plandanas-reserve-sextant-coffee",
+          "context": {
+            "text": "Sextant Coffee Roasters • Roasted Coffee Bean $ 26.00 Walia Ibex - Organic Decaf Coffee Description The flavor starts off with a dry nutty bite similar to almonds; it’s the kind of Central American coffee you like to start and end the day with because it’s sweet, heavy-bodied, warm, and comforting. Lingering brown sugar notes, balanced acidity, and lovely slightly tart cherry flavor round out this cup. This coffee is rather unique in that it is decaffeinated at origin in Colombia using a chemical-free process our Spanish-learning roaster loosely attempted to translate as “sugar process”. We think it leaves the original flavor more intact than traditional decaffeination processes. This Colombian coffee comes from the Department of ",
+            "truncated": true,
+            "original_bytes": 1365
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1365
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://sextantcoffee.com/products/plandanas-reserve-sextant-coffee.js",
+          "context": {
+            "text": "Walia Ibex - Organic Decaf Coffee The flavor starts off with a dry nutty bite similar to almonds; it’s the kind of Central American coffee you like to start and end the day with because it’s sweet, heavy-bodied, warm, and comforting. Lingering brown sugar notes, balanced acidity, and lovely slightly tart cherry flavor round out this cup. This coffee is rather unique in that it is decaffeinated at origin in Colombia using a chemical-free process our Spanish-learning roaster loosely attempted to translate as “sugar process”. We think it leaves the original flavor more intact than traditional decaffeination processes. This Colombian coffee comes from the Department of Tolima in the Andean mountain range, purchased from a Colombia expor",
+            "truncated": true,
+            "original_bytes": 1276
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1276
+        }
+      ],
+      "disposition": "retained_independent_narratives",
+      "reason": "An initial almond comparison and later sugar/cherry description are independently worded narratives with body/acidity clauses. Further co-reference parsing remains possible; no automatic union or qualifier removal."
+    },
+    {
+      "case_id": "shop-inkcoffee-com__6610-01ae1c21",
+      "field": "tasting_notes",
+      "expected": "Smoky undertones, bittersweet dark chocolate",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "slightly smoky undertones and bittersweet, dark chocolate"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://shop.inkcoffee.com/products/6610",
+          "context": "6610 Regular price $18.75 Sale Size Bean Prep Quantity Add to cart 6610 ft. This is the altitude we roast our coffee and the reason our High Altitude, Slow roasting process brings out the deepest, smoothest flavors of each and every bean. A blend so rich yet so smooth. Characteristics - A bold blend of full-bodied coffees roasted special dark to reveal a rich taste, slightly smoky undertones and bittersweet, dark chocolate. Origin - Central & South America Roast - Special Dark Body - Full Acidity - Very Low Share on Facebook Tweet on Twitter Pin on Pinterest",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 564
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://shop.inkcoffee.com/products/6610.js",
+          "context": "6610 6610 ft. This is the altitude we roast our coffee and the reason our High Altitude, Slow roasting process brings out the deepest, smoothest flavors of each and every bean. A blend so rich yet so smooth. Characteristics - A bold blend of full-bodied coffees roasted special dark to reveal a rich taste, slightly smoky undertones and bittersweet, dark chocolate. Origin - Central & South America Roast - Special Dark Body - Full Acidity - Very Low",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 450
+        }
+      ],
+      "disposition": "retained_mixed_characteristics_layout",
+      "reason": "A Characteristics section mixes roast, body, taste and origin. The complete literal source remains retained; extracting a compact profile safely needs stronger role boundaries than this bounded projection supplies."
+    },
+    {
+      "case_id": "shop-inkcoffee-com__espresso-89-bd5b9a13",
+      "field": "tasting_notes",
+      "expected": "Chocolate, licorice",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Darker roast chocolate taste, licorice sweetness"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 5,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://shop.inkcoffee.com/products/espresso-89",
+          "context": "Espresso 89 Regular price $18.75 Sale Size Bean Prep Quantity Add to cart We usually prefer our espresso Northern Italian style; a complex blend roasted delicately and taken straight. But when we took this single origin to a slightly darker roast, we found the resulting caramelized sugars matched perfectly in milk. So we thought, why not? Characteristics - Darker roast chocolate taste, licorice sweetness, Big body Origin - Africa/Asia/Americas Roast - Trade Secret Body - Full Acidity - Medium Share on Facebook Tweet on Twitter Pin on Pinterest",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 549
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://shop.inkcoffee.com/products/espresso-89.js",
+          "context": "Espresso 89 We usually prefer our espresso Northern Italian style; a complex blend roasted delicately and taken straight. But when we took this single origin to a slightly darker roast, we found the resulting caramelized sugars matched perfectly in milk. So we thought, why not? Characteristics - Darker roast chocolate taste, licorice sweetness, Big body Origin - Africa/Asia/Americas Roast - Trade Secret Body - Full Acidity - Medium",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 435
+        }
+      ],
+      "disposition": "retained_mixed_characteristics_layout",
+      "reason": "The mixed Characteristics section contains roast, chocolate taste, licorice sweetness and body; milk context is separate. Retain the full roles instead of assigning roast/body to tasting_notes."
+    },
+    {
+      "case_id": "shop-inkcoffee-com__vienna-d3ba19e6",
+      "field": "tasting_notes",
+      "expected": "Caramel sweetness",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Characteristics - Hints of dark roast, and caramel sweetness"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://shop.inkcoffee.com/products/vienna",
+          "context": "Vienna Roast Regular price $18.75 Sale Size Bean Prep Quantity Add to cart This popular favorite is roasted a tad bit darker than our High Altitude roasts, but not as dark and bittersweet as our French Roast coffee lending to a round caramelly, sweetness. Vienna Roast is the coffee served at most of our prestigious wholesale accounts. Characteristics - Hints of dark roast, and caramel sweetness Origin - Americas Roast - Dark Body - Full Acidity - Low Share on Facebook Tweet on Twitter Pin on Pinterest",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 506
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://shop.inkcoffee.com/products/vienna.js",
+          "context": "Vienna Roast This popular favorite is roasted a tad bit darker than our High Altitude roasts, but not as dark and bittersweet as our French Roast coffee lending to a round caramelly, sweetness. Vienna Roast is the coffee served at most of our prestigious wholesale accounts. Characteristics - Hints of dark roast, and caramel sweetness Origin - Americas Roast - Dark Body - Full Acidity - Low",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 392
+        }
+      ],
+      "disposition": "retained_mixed_characteristics_layout",
+      "reason": "The Characteristics section includes a roast hint plus caramel sweetness and neighboring origin/body labels. The sweetness is retained in context; no unsupported flavor/roast union."
+    },
+    {
+      "case_id": "shop-justlovecoffee-com__colombia-honey-process-8fa61c65",
+      "field": "tasting_notes",
+      "expected": "strawberry, orange, floral undertones",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "vibrant notes of strawberry and orange, complemented by delicate floral undertones"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 6,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://shop.justlovecoffee.com/products/colombia-honey-process",
+          "context": "Through careful cultivation and specialty processing methods, they produce exceptional coffees with distinctive flavor profiles. Our light-roasted Honey Process Colombian features vibrant notes of strawberry and orange, complemented by delicate floral undertones. The honey process removes the coffee cherry’s outer skin and some of its fruit before drying, creating unique fermentation characteristics that contribute to its bright, fruit-forward flavor. Link The Art of How We Roast Coffee for You Watch this short video to learn more about how we blend together both art and science to extract the perfect flavor from each coffee we roast for you.",
+          "normalized_excerpt_starts_at_character": 467,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1121
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://shop.justlovecoffee.com/products/colombia-honey-process.js",
+          "context": "Colombia- Honey Process Colombia Honey Process – Light Roast Grown on the Las Mercedes farm in northern Colombia, the Gamboa family has been cultivating coffee for sixty years, carrying on a family tradition that dates back to 1920. Through careful cultivation and specialty processing methods, they produce exceptional coffees with distinctive flavor profiles. Our light-roasted Honey Process Colombian features vibrant notes of strawberry and orange, complemented by delicate floral undertones. The honey process removes the coffee cherry’s outer skin and some of its fruit before drying, creating unique fermentation characteristics that contribute to its bright, fruit-forward flavor.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 692
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "A single current notes-of statement explicitly complements strawberry/orange with delicate floral undertones. Preserve the complete same-sentence relationship. Full603 impact pending."
+    },
+    {
+      "case_id": "south17roasters-com__rose-roots-4d6c4fe4",
+      "field": "tasting_notes",
+      "expected": "strawberry,rose,strawberry jam,chocolate",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "an enchanting aroma of strawberry and rose with each brew. Taste the complexity of strawberry jam and chocolate"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 10,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://south17roasters.com/products/rose-roots",
+          "context": " & Roots, a 72-hour natural process coffee from Honduras' Tres Pinos region. Expertly light roasted to highlight delicate floral and fruity notes, this single-origin bean delivers an enchanting aroma of strawberry and rose with each brew. Taste the complexity of strawberry jam and chocolate in every cup. Perfect for those seeking a nuanced, aromatic coffee experience. Let’s not forget that this bean was roasted by our co-owner, Ashley to kick off our \"Pink Bucket Series\" that highlights coffees that are beautifully crafted by female Roasters.\" Share Link View full details",
+          "normalized_excerpt_starts_at_character": 228,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 810
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://south17roasters.com/products/rose-roots.js",
+          "context": "Rosé & Roots Discover Rose & Roots, a 72-hour natural process coffee from Honduras' Tres Pinos region. Expertly light roasted to highlight delicate floral and fruity notes, this single-origin bean delivers an enchanting aroma of strawberry and rose with each brew. Taste the complexity of strawberry jam and chocolate in every cup. Perfect for those seeking a nuanced, aromatic coffee experience. Let’s not forget that this bean was roasted by our co-owner, Ashley to kick off our \"Pink Bucket Series\" that highlights coffees that are beautifully crafted by female Roasters.\"",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 578
+        }
+      ],
+      "disposition": "retained_independent_aroma_taste_roles",
+      "reason": "Aroma and taste are supplied in separate sentences among roast and named-series claims. Raw source remains complete; no unconditional union of independent narrative profiles."
+    },
+    {
+      "case_id": "sparkyscraftcoffeeroasting-com__below-zero-blend-ea45122b",
+      "field": "tasting_notes",
+      "expected": "Floral, Chocolatey",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Savor the unique floral and chocolatey notes of Below Zero Ethiopia Natural Coffee"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 10,
+      "context": [
+        {
+          "source_fact_index": 46,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Page description",
+          "source_type": "html",
+          "section": "Published page metadata",
+          "source_url": "https://sparkyscraftcoffeeroasting.com/products/below-zero-blend",
+          "context": "Savor the unique floral and chocolatey notes of Below Zero Ethiopia Natural Coffee, grown in the lush Yirgacheffe region. Perfect for discerning coffee lovers!",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 159
+        },
+        {
+          "source_fact_index": 0,
+          "match_basis": "expected_word_overlap",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://sparkyscraftcoffeeroasting.com/products/below-zero-blend",
+          "context": "and sparkling acidity. However, coffee has also adapted to the more arid climate of Harrar, in the northeast of the country; The varieties planted there have historically had more chocolatey, rich undertones. Regular price $18.00 USD Regular price Sale price $18.00 USD Unit price per Sale Sold out Shipping calculated at checkout. Style Whole Bean Variant sold out or unavailable Ground Paper Filter Variant sold out or unavailable Ground Metal Filter Variant sold out or unavailable Size 12 oz Variant sold out or unavailable 3 Pound Variant sold out or unavailable 5 Pound Variant sold out",
+          "normalized_excerpt_starts_at_character": 1008,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1604
+        }
+      ],
+      "disposition": "retained_regional_context_boundary",
+      "reason": "Current marketing and broader regional descriptions share sensory vocabulary. Further safe scope separation requires the complete original layout; retain source rather than promote regional statements."
+    },
+    {
+      "case_id": "spirituscoffee-com__mountain-water-process-decaf-59d29eb9",
+      "field": "tasting_notes",
+      "expected": "Milk chocolate, toasted almond, brown sugar, gentle citrus",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Tasting Notes: Milk chocolate, toasted almond, brown sugar, gentle citrus"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 17,
+      "context": [
+        {
+          "source_fact_index": 5,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text (continued 2)",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://spirituscoffee.com/products/mountain-water-process-decaf",
+          "context": {
+            "text": "le del Cauca, Colombia Altitude: 1,750 meters Producers: Smallholder farming families Varietals: Caturra, Castillo Process: Washed, Sugarcane EA Decaffeination Roast Level: Medium Tasting Notes: Milk chocolate, toasted almond, brown sugar, gentle citrus For those who understand that the best moments need presence, not caffeine. The Ritual: Coffee as Ritual: A Complete Guide Brewing Guides: Pour Over | French Press Never Run Out: Subscribe and save $1 per bag (new customers: 30% off your first order with code SUBSCRIBE30 ) Specifications Origin and process Valle del Cauca, Colombia, grown on volcanic mountainsides up to 1,750 meters. Caffeine is removed gently with ethyl acetate derived from... Grade Specialty grade, cupping 85+ Roast Level ",
+            "truncated": true,
+            "original_bytes": 932
+          },
+          "normalized_excerpt_starts_at_character": 666,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1598
+        },
+        {
+          "source_fact_index": 7,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://spirituscoffee.com/products/mountain-water-process-decaf.js",
+          "context": "le del Cauca, Colombia Altitude: 1,750 meters Producers: Smallholder farming families Varietals: Caturra, Castillo Process: Washed, Sugarcane EA Decaffeination Roast Level: Medium Tasting Notes: Milk chocolate, toasted almond, brown sugar, gentle citrus For those who understand that the best moments need presence, not caffeine. The Ritual: Coffee as Ritual: A Complete Guide Brewing Guides: Pour Over | French Press Never Run Out: Subscribe and save $1 per bag (new customers: 30% off your first order with code SUBSCRIBE30 )",
+          "normalized_excerpt_starts_at_character": 909,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1436
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay records a tasting-note conflict; the expected labeled quotation alone does not adjudicate the competing source."
+    },
+    {
+      "case_id": "subterracoffee-com__mexico-chiapas-bellavista-medium-11b61363",
+      "field": "tasting_notes",
+      "expected": "Nutty, Chocolatey",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "nutty and chocolatey, balanced, clean and sweet."
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 9,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://subterracoffee.com/products/mexico-chiapas-bellavista-medium",
+          "context": "omatically save 20% off any second bag from the menu (of equal or lesser value)! -brilliant clean washed mexico from Bellavista area of the Chiapas -produced by small farmholders -nutty and chocolatey, balanced, clean and sweet. what's not to love? roasted on the med-dark side of medium -brewing recommendation:",
+          "normalized_excerpt_starts_at_character": 1288,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1670
+        },
+        {
+          "source_fact_index": 2,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://subterracoffee.com/products/mexico-chiapas-bellavista-medium.js",
+          "context": "mexico chiapas bellavista medium Introducing Mix n' Match - Automatically save 20% off any second bag from the menu (of equal or lesser value)! -brilliant clean washed mexico from Bellavista area of the Chiapas -produced by small farmholders -nutty and chocolatey, balanced, clean and sweet. what's not to love? roasted on the med-dark side of medium -brewing recommendation: espresso or french press, but anything should work well",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 431
+        }
+      ],
+      "disposition": "retained_unlabeled_bullet",
+      "reason": "A compact bare sensory bullet appears among untyped marketing/processing/brewing bullets. Retain literal text; do not treat every unlabeled selected-product list as a taste profile."
+    },
+    {
+      "case_id": "talkingcrowcoffeeroasters-com__decaf-nicaragua-jinotega-micro-lot-2038f60a",
+      "field": "tasting_notes",
+      "expected": "Cherry, apple, red wine, grilled pineapple",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Tasting Notes: Cherry, apple, red wine, grilled pineapple"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 12,
+      "context": [
+        {
+          "source_fact_index": 6,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text (continued 2)",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://talkingcrowcoffeeroasters.com/products/decaf-nicaragua-jinotega-micro-lot",
+          "context": {
+            "text": "od: Swiss Water Process (chemical-free) Milling: Natural, carbonic maceration (5–10 day fermentation) Roast Level: Medium FLAVOR PROFILE Aroma: Fruity Body: Medium Acidity: Bright Tasting Notes: Cherry, apple, red wine, grilled pineapple WHY WE LOVE IT Decaf shouldn't be boring — and this one proves it. The carbonic maceration brings dramatic sweet fruit notes that are vibrant, not funky. The kind of coffee that makes you want to call someone and tell them about it. Varietals: Catuai, Caturra Estrella, Java, Pacamara, Pacas, Maracaturra, Bourbon Altitude: 1300–1600 meters above sea level Harvest: November–March Process detail: Carbonic maceration, 5–10 day fermentation Traceability: Lot-level (fermentation times, sugar content, pi",
+            "truncated": true,
+            "original_bytes": 1469
+          },
+          "normalized_excerpt_starts_at_character": 12,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1481
+        },
+        {
+          "source_fact_index": 7,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://talkingcrowcoffeeroasters.com/products/decaf-nicaragua-jinotega-micro-lot.js",
+          "context": "rocess Decaf Acidity: Bright Aroma: Fruity Body: Medium Milling Process: Natural, Carbonic maceration with a fermentation time of 5-10 days . Decaffeinated by Swiss Water process. Tasting Notes: Cherry, apple, red wine, grilled pineapple The growing altitude for this Nicaraguan coffee is 1300 - 1600 meters above sea level. The varietals are Catuai, Caturra Estrella, Java, Pacamara, Pacas, Maracaturra, and bourbon. The growing and harvest period is November - March. How Swiss Water Process decaf works →",
+          "normalized_excerpt_starts_at_character": 465,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 974
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay records a tasting-note conflict; preserve both source roles and complete evidence."
+    },
+    {
+      "case_id": "talkingcrowcoffeeroasters-com__decaf-peru-swiss-water-process-e0524dfb",
+      "field": "tasting_notes",
+      "expected": "Mango, orange, nougat, cocoa",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Tasting Notes: Mango, orange, nougat, cocoa"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 13,
+      "context": [
+        {
+          "source_fact_index": 3,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text (continued 2)",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://talkingcrowcoffeeroasters.com/products/decaf-peru-swiss-water-process",
+          "context": {
+            "text": "PROFILE Aroma: Toffee Body: Medium Acidity: Medium/balanced Tasting Notes: Mango, orange, nougat, cocoa WHY WE LOVE IT The tropical fruit notes here are a pleasant surprise — mango and orange give it a brightness that lifts the cocoa and nougat base. This is the decaf for people who want something a little different from the usual chocolate-and-nut profile. Varietals: Bourbon, Catimor, Caturra, Mundo Novo, Pache, Typica Altitude: 1250–1700 meters above sea level Harvest: August–October Certifications: Fair Trade, Organic, Grade 1 Region: Cajamarca Whole bean or ground? We send your coffee in whole-bean form for maximum freshness, but we're happy to grind your coffee to suit your brewing needs! Simply leave us a note at checkout with y",
+            "truncated": true,
+            "original_bytes": 1264
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1264
+        },
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://talkingcrowcoffeeroasters.com/products/decaf-peru-swiss-water-process.js",
+          "context": "nt for the cultivation of Arabica coffee. This coffee is Fair Trade Organic . Swiss Water Process Decaf Acidity: Medium/Balanced Aroma: Toffee Body: Medium Milling Process: Washed Tasting Notes: Mango, Orange, Nougat, Cocoa Special Features: Grade 1 , Fair Trade Organic The growing altitude: 1250 - 1700 meters above sea level. The varietals are Bourbon, Catimor, Caturra, Mundo Novo, Pache, and Typica. The harvest period is August - October. How Swiss Water Process decaf works →",
+          "normalized_excerpt_starts_at_character": 268,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 752
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay records a tasting-note conflict; preserve both source roles and complete evidence."
+    },
+    {
+      "case_id": "talkingcrowcoffeeroasters-com__decaf-whiskey-barrel-aged-brazil-fd6f9235",
+      "field": "tasting_notes",
+      "expected": "Vanilla, honey, oak, nutty, spice",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Tasting Notes: Vanilla, honey, oak, nutty, spice"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 17,
+      "context": [
+        {
+          "source_fact_index": 3,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text (continued 2)",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://talkingcrowcoffeeroasters.com/products/decaf-whiskey-barrel-aged-brazil",
+          "context": {
+            "text": "Trail Distillery bourbon barrels (American white oak, charred) Roast Level: Medium FLAVOR PROFILE Aroma: Sweet barley whiskey Body: Smooth/creamy Acidity: Medium/balanced Tasting Notes: Vanilla, honey, oak, nutty, spice WHY WE LOVE IT Produced in the heart of the Ozarks — two local crafts in one bag. There are no alcohol or artificial flavorings in this coffee. Just the ghost of good bourbon and a lot of patience. Varietals: Red and yellow Catuai, yellow Bourbon, Catucai Altitude: 1200 meters above sea level Harvest: July–September Barrel: American white oak, charred, Fox Trail Distillery Roast Level: Medium Whole bean or ground? We send your coffee in whole-bean form for maximum freshness, but we're happy to grind your coffee to suit y",
+            "truncated": true,
+            "original_bytes": 1324
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1324
+        },
+        {
+          "source_fact_index": 102,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Product text 11",
+          "source_type": "html",
+          "section": "Freshly Roasted in Arkansas-",
+          "source_url": "https://talkingcrowcoffeeroasters.com/products/decaf-whiskey-barrel-aged-brazil",
+          "context": "Tasting Notes: Vanilla, honey, oak, nutty, spice",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 48
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay records a tasting-note conflict; barrel/aroma and taste evidence require complete-source adjudication."
+    },
+    {
+      "case_id": "vtartisan-com__sumatra-gayo-2f774ec2",
+      "field": "tasting_notes",
+      "expected": "chocolaty, licorice-like, earthy",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "coffee that is chocolaty, licorice-like with bold, earthy undertones"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 11,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://vtartisan.com/products/sumatra-gayo",
+          "context": {
+            "text": "sian coffee is from a Co-op we have worked with for years, and is in the Gayo mountain region of Aceh. The beans are wet hulled just for us producing beautifully rich, full bodied coffee that is chocolaty, licorice-like with bold, earthy undertones. Notes: Farm Direct Roast: Medium Regular price $15.00 USD Regular price Sale price $15.00 USD Unit price per Sale Sold out Size 12 oz. Whole Bean Variant sold out or unavailable 5 lb. Whole Bean Variant sold out or unavailable 12 oz. Ground Variant sold out or unavailable Quantity ( 0 in cart) Purchase Options One-time Purchase Subscribe and Save Delivery Frequency monthly / delivery Once a month / delivery Every 6 weeks / delivery Every 2 weeks / delivery Every 8 weeks / delivery Every 3 Months",
+            "truncated": true,
+            "original_bytes": 805
+          },
+          "normalized_excerpt_starts_at_character": 80,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 885
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://vtartisan.com/products/sumatra-gayo.js",
+          "context": "Sumatra Gayo This popular Indonesian coffee is from a Co-op we have worked with for years, and is in the Gayo mountain region of Aceh. The beans are wet hulled just for us producing beautifully rich, full bodied coffee that is chocolaty, licorice-like with bold, earthy undertones. Notes: Farm Direct Roast: Medium",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 314
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "The current coffee-that-is clause explicitly supplies chocolaty/licorice-like/earthy undertones. Preserve the literal phrase and modifiers. Full603 impact pending."
+    },
+    {
+      "case_id": "www-alaskaartisancoffee-com__black-fog-rising-b7b1bac1",
+      "field": "tasting_notes",
+      "expected": "Milk chocolate; roasted cacao nibs",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The milk chocolate notes of the Black Satin pair perfectly with the notes of roasted cacao nibs from the Fog Riser"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.alaskaartisancoffee.com/products/black-fog-rising",
+          "context": {
+            "text": ", then this blend could quickly become your new favorite. What started as just a simple custom request from a walk-in customer, became a very popular blend for our local regulars. The milk chocolate notes of the Black Satin pair perfectly with the notes of roasted cacao nibs from the Fog Riser, and together they deliver a smooth, balanced, low-acid dark/medium roast. $5.00 Quantity: - + Share Now: Product Description This one's pretty straight forward. If you like our Fog Riser or Black Satin blends, then this blend could quickly become your new favorite. What started as just a simple custom request from a walk-in customer, became a very popular blend for our local regulars. The milk chocolate notes of the Black Satin pair perfectly with th",
+            "truncated": true,
+            "original_bytes": 873
+          },
+          "normalized_excerpt_starts_at_character": 519,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1392
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.alaskaartisancoffee.com/products/black-fog-rising.js",
+          "context": "Black Fog Rising This one's pretty straight forward. If you like our Fog Riser or Black Satin blends, then this blend could quickly become your new favorite. What started as just a simple custom request from a walk-in customer, became a very popular blend for our local regulars. The milk chocolate notes of the Black Satin pair perfectly with the notes of roasted cacao nibs from the Fog Riser, and together they deliver a smooth, balanced, low-acid dark/medium roast.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 469
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "A current selected blend explicitly pairs two named components' notes. Require the blend relationship and preserve both literal sensory phrases. Full603 impact pending."
+    },
+    {
+      "case_id": "www-blackcoffeeroastingco-com__red-room-blend-978d7a79",
+      "field": "tasting_notes",
+      "expected": "Clove; tamarind; starfruit",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Clove, tamarind, starfruit, and a touch of noir cinema."
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 7,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.blackcoffeeroastingco.com/product/red-room-blend/",
+          "context": "Red Room (Blend) Rated 4.83 out of 5 based on 12 customer ratings ( 12 customer reviews) $ 16.75 Free shipping on orders over $45 Silky smooth with a layered depth. Clove, tamarind, starfruit, and a touch of noir cinema. Roast Level: Dark Size 12 oz. 2 lb. 5 lb. Grind Clear Red Room (Blend) quantity GUARANTEED SAFE CHECKOUT Reviews (12)",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 338
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.blackcoffeeroastingco.com/wp-json/wc/store/v1/products/red-room-blend",
+          "context": "Red Room (Blend) Silky smooth with a layered depth. Clove, tamarind, starfruit, and a touch of noir cinema. Roast Level: Dark",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 125
+        }
+      ],
+      "disposition": "retained_fanciful_unlabeled_list",
+      "reason": "The bare list also includes a touch of noir cinema. Removing a fanciful phrase solely to match the oracle would not be source-grounded generic parsing; retain the complete sentence for review."
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-2-legacy-farms-honduras-natural-process-44a0d8d5",
+      "field": "tasting_notes",
+      "expected": "blackberry",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "The dominant flavor note of this coffee that we taste is blackberry"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 15,
+      "context": [
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text (continued 2)",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process",
+          "context": "ee roasting businesses such as ours can engage in direct trade with a coffee producer but in this case Ashley is both the producer and the exporter. FLAVOR PROFILE (What we taste) The dominant flavor note of this coffee that we taste is blackberry but think dark berries. Over the years, we have roasted and tasted lots of coffees with blackberry notes but this is the most balanced and most enjoyable one we have ever tasted. As a light roast , this coffee has floral and blackberry notes, moderate sweetness, lower to moderate acidity, and a heavier body. Using a scale of 0-10, we place the sweetness at a 6, the acidity at a 3, the body at a 7, and no bitterness. As a medium-dark",
+          "normalized_excerpt_starts_at_character": 916,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1600
+        },
+        {
+          "source_fact_index": 6,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text (continued 2)",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process.js",
+          "context": {
+            "text": "ee roasting businesses such as ours can engage in direct trade with a coffee producer but in this case Ashley is both the producer and the exporter. FLAVOR PROFILE (What we taste) The dominant flavor note of this coffee that we taste is blackberry but think dark berries. Over the years, we have roasted and tasted lots of coffees with blackberry notes but this is the most balanced and most enjoyable one we have ever tasted. As a light roast , this coffee has floral and blackberry notes, moderate sweetness, lower to moderate acidity, and a heavier body. Using a scale of 0-10, we place the sweetness at a 6, the acidity at a 3, the body at a 7, and no bitterness. As a medium-dark roast , this coffee has blackberry and caramelized sugar notes, m",
+            "truncated": true,
+            "original_bytes": 1307
+          },
+          "normalized_excerpt_starts_at_character": 289,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1596
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "An explicit dominant note of this coffee is unconditional even though later paragraphs describe roast-specific profiles. Preserve only that primary assertion; option profiles remain qualified. Full603 impact pending."
+    },
+    {
+      "case_id": "www-ketchcoffee-com__tier-3-mexico-san-isidro-zoquiapan-a9d137cc",
+      "field": "tasting_notes",
+      "expected": "chocolate",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "notes of chocolate"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 15,
+      "context": [
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text (continued 2)",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan",
+          "context": {
+            "text": "this one that offer something very different when roasted as a light roast and a medium-dark roast. As a light roast , this coffee had notes of chocolate, red apple, and mild nuttiness. As it aged, this coffee became more complex and citric notes like grapefruit began to emerge. The coffee has a high amount of sweetness, low to moderate acidity, medium body, and little no bitterness. Using a scale of 0-10, we place the sweetness at a 7-8, the acidity at a 3-4, and the body at a 5. As a medium-dark roast , this coffee has traditional coffee notes of chocolate and caramel and is just a really good cup of coffee. The coffee has a high amount of sweetness, lower acidity, a medium body, and little to no bitterness. Using a scale of 0-10, we rate",
+            "truncated": true,
+            "original_bytes": 1596
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1596
+        },
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan.js",
+          "context": "origin coffees. We really enjoy coffees like this one that offer something very different when roasted as a light roast and a medium-dark roast. As a light roast , this coffee had notes of chocolate, red apple, and mild nuttiness. As it aged, this coffee became more complex and citric notes like grapefruit began to emerge. The coffee has a high amount of sweetness, low to moderate acidity, medium body, and little no bitterness. Using a scale of 0-10, we place the sweetness at a 7-8, the acidity at a 3-4, and the body at a 5. As a medium-dark roast , this coffee has traditional coffee notes of chocolate and caramel and is just a really good cup of coffee.",
+          "normalized_excerpt_starts_at_character": 936,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1602
+        }
+      ],
+      "disposition": "retained_roast_option_qualification",
+      "reason": "Chocolate appears in separate light and medium-dark roast descriptions. Do not infer a selected roast or manufacture an intersection profile from conditional options."
+    },
+    {
+      "case_id": "www-kindercoffeelab-com__avalon-light-roast-892b1a46",
+      "field": "tasting_notes",
+      "expected": "Red fruit; candy; grapefruit; red grape; fruity; sugar-like sweetness; citrus acidity",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Notes: Red Fruit, Candy, Grapefruit"
+        },
+        {
+          "capture_id": "page",
+          "quote": "Notes: Red Grape, Fruity, Sugar-Like Sweetness, Citrus Acidity"
+        }
+      ],
+      "frozen_evidence_count": 2,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 7,
+      "context": [
+        {
+          "source_fact_index": 2,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.kindercoffeelab.com/products/avalon-light-roast",
+          "context": "cribe and save Deliver every month, 15% off Auto-renews, skip or cancel anytime. To add to cart, go to the product page and select a purchase option Whole Bean or Ground? Quantity Notes: Red Fruit, Candy, Grapefruit Feeling adventurous? This progressive roast is fruit-forward and sweet, giving you the most natural and unadulterated flavor of the coffee bean. Roast Details Roast Type: Light Roast Country/Region: Peru Cajamarca Process: Washed Notes: Red Grape, Fruity, Sugar-Like Sweetness, Citrus Acidity Share Link View full details",
+          "normalized_excerpt_starts_at_character": 233,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 773
+        },
+        {
+          "source_fact_index": 9,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Roast Details",
+          "source_type": "html",
+          "section": "Munsinger Light Roast",
+          "source_url": "https://www.kindercoffeelab.com/products/avalon-light-roast",
+          "context": "Roast Type: Light Roast Country/Region: Peru Cajamarca Process: Washed Notes: Red Grape, Fruity, Sugar-Like Sweetness, Citrus Acidity",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 133
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "Two explicit printed note lists differ. Preserve the conflict instead of uniting them into one asserted profile."
+    },
+    {
+      "case_id": "www-nunatakcoffee-com__raven-espresso-8fe55e93",
+      "field": "tasting_notes",
+      "expected": "Dark chocolate, nuttiness, blueberry preserves, hazelnut liqueur",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "dark chocolate sweetness"
+        },
+        {
+          "capture_id": "page",
+          "quote": "velvet-like nuttiness"
+        },
+        {
+          "capture_id": "page",
+          "quote": "creamy chocolate, blueberry preserves, and hazelnut liqueur"
+        }
+      ],
+      "frozen_evidence_count": 3,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 6,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.nunatakcoffee.com/products/raven-espresso",
+          "context": "Raven Espresso Price: $18.50 Regular Price Unit price per Size Grind Quantity Added to Cart View Cart or Continue Shopping . Cart Error Some items became unavailable. Update the quantity and try again. Share Share on Facebook Share on Twitter Share on Pinterest Product Info Straight shots mysteriously balance different worlds. They begin with a profound dark chocolate sweetness that is tamed with a velvet-like nuttiness, and end with a bright effervescent finish. Raven's brilliance is truly revealed when layered with milk, showcasing an artistic dance of creamy chocolate, blueberry preserves, and hazelnut liqueur. Product Type: Beans",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 641
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.nunatakcoffee.com/products/raven-espresso.js",
+          "context": "Raven Espresso Straight shots mysteriously balance different worlds. They begin with a profound dark chocolate sweetness that is tamed with a velvet-like nuttiness, and end with a bright effervescent finish. Raven's brilliance is truly revealed when layered with milk, showcasing an artistic dance of creamy chocolate, blueberry preserves, and hazelnut liqueur.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 361
+        }
+      ],
+      "disposition": "prepared_repair",
+      "reason": "Recover explicitly unconditioned straight-shot descriptors; milk-only blueberry preserves/hazelnut liqueur remain in complete qualified source evidence. Full603 impact pending."
+    },
+    {
+      "case_id": "www-readingcoffee-com__venezuela-finca-berlin-single-origin-coffee-851132b0",
+      "field": "tasting_notes",
+      "expected": "Fresh Coffee Cherry, Dried Cascara, Mellow Cocoa, Warm Spice",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Tasting Notes Fresh Coffee Cherry Dried Cascara Mellow Cocoa Warm Spice"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 12,
+      "context": [
+        {
+          "source_fact_index": 4,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee",
+          "context": {
+            "text": "y balanced. Roasted to highlight its intensity and layered profile, this Venezuelan microlot is a standout offering for those seeking something rare, modern, and deeply memorable. Tasting Notes Fresh Coffee Cherry Dried Cascara Mellow Cocoa Warm Spice Cup Profile Acidity: Boozy, wine-like Sweetness: Mild, fruit-like Body: Medium, silky Finish: Layered, lingering, and aromatic Roast Level Medium Roast (to showcase fermentation-driven complexity) Origin Details Country: Venezuela Region: Junín Municipality, Táchira State Farm: Finca Berlin Producer: Alfredo Rojas Lot: Microlot Elevation: ~1100 MASL Variety: Monte Claro Process: Anaerobic Honey Harvest: September – January Why This Coffee Stands Out Rare Venezuelan microlot with limited av",
+            "truncated": true,
+            "original_bytes": 760
+          },
+          "normalized_excerpt_starts_at_character": 837,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1602
+        },
+        {
+          "source_fact_index": 6,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee.js",
+          "context": {
+            "text": "y balanced. Roasted to highlight its intensity and layered profile, this Venezuelan microlot is a standout offering for those seeking something rare, modern, and deeply memorable. Tasting Notes Fresh Coffee Cherry Dried Cascara Mellow Cocoa Warm Spice Cup Profile Acidity: Boozy, wine-like Sweetness: Mild, fruit-like Body: Medium, silky Finish: Layered, lingering, and aromatic Roast Level Medium Roast (to showcase fermentation-driven complexity) Origin Details Country: Venezuela Region: Junín Municipality, Táchira State Farm: Finca Berlin Producer: Alfredo Rojas Lot: Microlot Elevation: ~1100 MASL Variety: Monte Claro Process: Anaerobic Honey Harvest: September – January Why This Coffee Stands Out Rare Venezuelan microlot with limited av",
+            "truncated": true,
+            "original_bytes": 888
+          },
+          "normalized_excerpt_starts_at_character": 708,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1601
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay records a tasting-note conflict across the complete profile/finish source; the one expected line cannot safely clear it."
+    },
+    {
+      "case_id": "www-swroasting-coffee__25NBJDMXCAYX4YC5XJZAYZDG-1d539602",
+      "field": "tasting_notes",
+      "expected": "chocolate",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "chocolate"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 3,
+      "context": [
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Page description",
+          "source_type": "html",
+          "section": "Published page metadata",
+          "source_url": "https://www.swroasting.coffee/product/guatemala-ella-todos-santos-medium-roast/25NBJDMXCAYX4YC5XJZAYZDG",
+          "context": {
+            "text": "Will it Spro? Profiled specifically for Traditional espresso and Milk Drinks, this will bring the chocolate to your favorite concoction (although Cortados are my recommendation). 1:2 Lever shots are great in milk drinks.Recommended Minimum Rest: 2 weeksRoast Color: 109.8 (higher is lighter)Bourbon, Caturra, and Catuai varietals grown by the 276 indigenous women of the \"Mujeres luchando por un mejor futuro,\" or \"Women fighting for a better future\" collective. Washed process, dried on patios, 1700-2100 masl.Sold in 300g bags.More about the producer:Ella: Todos Santos is grown by Mujeres Luchando por un Mejor Futuro—a collective of 276 women farmers who are transforming their remote community in Todos Santos Cuchumatán. In a region where ma",
+            "truncated": true,
+            "original_bytes": 1599
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1599
+        }
+      ],
+      "disposition": "retained_preparation_qualification",
+      "reason": "Chocolate is stated in a traditional-espresso/milk-drink preparation context. Keep the preparation-qualified source rather than claim an unconditional bean profile."
+    },
+    {
+      "case_id": "www-swroasting-coffee__XOJGV4EZXCTPBXV6RSP4SGVF-fe2617be",
+      "field": "tasting_notes",
+      "expected": "dragonfruit, starfruit, fresh basil",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "dragonfruit, starfruit"
+        },
+        {
+          "capture_id": "page",
+          "quote": "fresh basil"
+        }
+      ],
+      "frozen_evidence_count": 2,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 3,
+      "context": [
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Page description",
+          "source_type": "html",
+          "section": "Published page metadata",
+          "source_url": "https://www.swroasting.coffee/product/colombia-camacho-fragancia/XOJGV4EZXCTPBXV6RSP4SGVF",
+          "context": {
+            "text": "Our second offering from our new partners, LaREB in Colombia!This Washed Fragancia is a very light, soft and elegant cup, with dragonfruit, starfruit, and hints of fresh basil in the finish. Pushing your extraction can bring out more of a stonefruit tone with hints of citrus in the finish like candied tangerine peel. Personally, I pick up a few Mejorado notes in this one. This is a stellar megalight roast.Will it Spro? Turbos are light and lovely with stonefruit tones and citrus notes in the finish.Recommended Minimum Rest: 6 weeksRoast Color: 149.3 (higher is lighter - this is incredibly light)Fragancia varietal grown by Luis Édgar Camacho in the Southern Huila region, Palestina, Santa Bárbara. Fully Washed Process, Overripe picking, 48 ",
+            "truncated": true,
+            "original_bytes": 1589
+          },
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1589
+        }
+      ],
+      "disposition": "retained_preparation_and_narrative_roles",
+      "reason": "A first cup statement, extraction-dependent flavors, a variety comparison and turbo-espresso notes coexist. Keep their separate conditions and source text; no flat union."
+    },
+    {
+      "case_id": "www-woodshedroast-com__decaf-honduran-swiss-water--process-copy-535a0b51",
+      "field": "tasting_notes",
+      "expected": "citrus, fruity sweetness",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Our Decaf Honduras is citrus forward, a fruity sweetness with a syrup-y body!"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 5,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.woodshedroast.com/products/decaf-honduran-swiss-water%C2%AE-process-copy",
+          "context": {
+            "text": "an Decaf | Swiss Water® Processed The region of Copan lies in a fertile valley, known for its cool temperatures, and as a result is a perfect location for green coffee production. Our Decaf Honduras is citrus forward, a fruity sweetness with a syrup-y body! Well balanced and delicious, this coffee is sure to impress. The Swiss Water® Process is a chemical free decaffeination process that brings out the best flavor in the coffee beans. Regular price $12.00 Roast Level Grind Level Package Size Quantity In stock Enjoy our coffee at these fine establishments: Ames Farm Inn, Annie's Cafe, Arlington Hotel, Beaver Meadow Golf Course, The Ballard House Inn, Cofeeberries, Lyon's Den, Dulce’s Bakery And Many more. Shop all Newsletter Sign up belo",
+            "truncated": true,
+            "original_bytes": 971
+          },
+          "normalized_excerpt_starts_at_character": 417,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1391
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.woodshedroast.com/products/decaf-honduran-swiss-water%C2%AE-process-copy.js",
+          "context": "Honduran Decaf | Swiss Water® Processed The region of Copan lies in a fertile valley, known for its cool temperatures, and as a result is a perfect location for green coffee production. Our Decaf Honduras is citrus forward, a fruity sweetness with a syrup-y body! Well balanced and delicious, this coffee is sure to impress. The Swiss Water® Process is a chemical free decaffeination process that brings out the best flavor in the coffee beans.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 446
+        }
+      ],
+      "disposition": "retained_unlabeled_current_sensory_clause",
+      "reason": "A current named-decaf sentence contains citrus-forward/fruity-sweetness wording and body. It is retained; further name/role parsing remains possible and is not claimed fixed."
+    },
+    {
+      "case_id": "www-woodshedroast-com__ethiopian-15584dcd",
+      "field": "tasting_notes",
+      "expected": "fruity, stone fruits, orange blossom",
+      "status_at_original_source": "missing",
+      "explicit_conflict": false,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Our Ethiopian coffee is very fruity, clean body with stone fruits such as orange blossom with a crisp finish."
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 5,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.woodshedroast.com/products/ethiopian",
+          "context": {
+            "text": "argely natural farming practices. The country's ideal climate and high altitude contribute to the slow growth of coffee plants, resulting in quality beans with distinctive tastes. Our Ethiopian coffee is very fruity, clean body with stone fruits such as orange blossom with a crisp finish. Whether washed or natural process, it has an incredibly complex and delicious cup that all are sure to enjoy! Regular price $11.00 Grind Level Package Size Roast Level Quantity In stock Enjoy our coffee at these fine establishments: Ames Farm Inn, Annie's Cafe, Arlington Hotel, Beaver Meadow Golf Course, The Ballard House Inn, Cofeeberries, Lyon's Den, Dulce’s Bakery And Many more. Shop all Newsletter Sign up below for future new releases and to stay in ",
+            "truncated": true,
+            "original_bytes": 930
+          },
+          "normalized_excerpt_starts_at_character": 510,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1442
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published product text",
+          "source_type": "product_json",
+          "section": null,
+          "source_url": "https://www.woodshedroast.com/products/ethiopian.js",
+          "context": "Ethiopian | Single Origin Coffee Ethiopia is a leading coffee producer globally, known for its delicate yet complex flavors and largely natural farming practices. The country's ideal climate and high altitude contribute to the slow growth of coffee plants, resulting in quality beans with distinctive tastes. Our Ethiopian coffee is very fruity, clean body with stone fruits such as orange blossom with a crisp finish. Whether washed or natural process, it has an incredibly complex and delicious cup that all are sure to enjoy!",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 528
+        }
+      ],
+      "disposition": "retained_current_vs_generic_example_boundary",
+      "reason": "The source combines a current coffee description with a 'such as' example and broad processing alternatives. Retain the exact wording; no inferred taxonomy correction or unqualified generic example."
+    },
+    {
+      "case_id": "www-wreckingballcoffee-com__ethiopia-gedeb-banko-gotiti-12oz-5ae573be",
+      "field": "tasting_notes",
+      "expected": "Caramel, milk chocolate, mild berry",
+      "status_at_original_source": "missing",
+      "explicit_conflict": true,
+      "frozen_evidence": [
+        {
+          "capture_id": "page",
+          "quote": "Caramel, milk chocolate with a lovely mild berry finish"
+        }
+      ],
+      "frozen_evidence_count": 1,
+      "source_facts_truncated": false,
+      "matching_plain_context_count": 8,
+      "context": [
+        {
+          "source_fact_index": 0,
+          "match_basis": "frozen_quote",
+          "field": "tasting_notes",
+          "label": "Tastes like",
+          "source_type": "html",
+          "section": "Tastes like: Caramel, milk chocolate with a lovely mild berry finish.",
+          "source_url": "https://www.wreckingballcoffee.com/products/ethiopia-gedeb-banko-gotiti-12oz",
+          "context": "Caramel, milk chocolate with a lovely mild berry finish.",
+          "normalized_excerpt_starts_at_character": 0,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 56
+        },
+        {
+          "source_fact_index": 1,
+          "match_basis": "frozen_quote",
+          "field": "other",
+          "label": "Published primary product text",
+          "source_type": "html",
+          "section": null,
+          "source_url": "https://www.wreckingballcoffee.com/products/ethiopia-gedeb-banko-gotiti-12oz",
+          "context": " (6 orders) / delivery Every 4 Weeks (12 orders) / delivery Quantity This variant is currently sold out Smooth and velvety… nuts and chews from the box of chocolates. Tastes like: Caramel, milk chocolate with a lovely mild berry finish. Notes and Notes: This is the only natural process coffee we have on the menu. “Natural Process” means that the coffee ferments naturally, instead of through the help of the producer. The temperature of the day, and the ripe fruit sugars are the active elements in this case. Intact coffee cherry is dried after selected picking, past the raisin stage, all the way to little woody nuggets, before they are milled to reveal the green seed",
+          "normalized_excerpt_starts_at_character": 921,
+          "context_whitespace_normalized": true,
+          "source_value_bytes": 1600
+        }
+      ],
+      "disposition": "retained_recorded_conflict",
+      "reason": "The original replay explicitly records a tasting-note conflict. Complete source, including alternative prose, remains visible for adjudication."
+    }
+  ],
+  "expected_values_changed": false,
+  "scorers_changed": false
+}

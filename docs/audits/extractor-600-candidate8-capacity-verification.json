@@ -1,0 +1,157 @@
+{
+  "type": "independent_combined_candidate8_all603_capacity_and_request_receipt",
+  "created_at": "2026-10-24T03:47:02.091Z",
+  "baseline_replay": "/workspace/scratch/64e35b541d47/extractor-600/recovered-candidate-7-replay.json",
+  "baseline_replay_sha256": "e7b34f12e5d6aa61348b186e347d264225e7187c316f8ded450b1417fa45d986",
+  "candidate_replay": "/workspace/scratch/64e35b541d47/extractor-600/recovered-candidate-8-replay.json",
+  "candidate_replay_sha256": "d5e3b098c15595a4d03554024f8c57b7d4a1bf7251b4b743f96cb432099bcf12",
+  "source_tree_sha256": "301346616618784a5ff926ddb9302b3be6e2710bea74c3a47e3d476e02ca812c",
+  "source_facts_sha256": "eb005bbb0edbbcb94416af610b7f10b8aa72d9c77a1af0f915c5d7a7c2d75100",
+  "script_sha256": "d5cd4987b9576b6652b5e6b4c7ed60cc71a748032dccac372403b5598b9bb071",
+  "scope": "Read-only measurements of the completed combined603-case frozen replay; no new benchmark, application execution, tests, network requests or source edits.",
+  "cases": 603,
+  "successful_previews": 603,
+  "limits": {
+    "facts": 384,
+    "content_utf16": 192000,
+    "value_utf16": 1600,
+    "parts": 128,
+    "purchase_variants": 128
+  },
+  "bounds_violations": [],
+  "previously_truncated": 96,
+  "currently_truncated": [
+    {
+      "case_id": "www-congregationcoffee-com__colombia-the-journey-b0604340",
+      "source_url": "https://www.congregationcoffee.com/products/colombia-the-journey",
+      "status": 200,
+      "preview_ok": true,
+      "fact_count": 110,
+      "content_utf16": 49382,
+      "max_value_utf16": 1600,
+      "max_part": 2,
+      "invalid_part_count": 0,
+      "invalid_unicode_value_count": 0,
+      "serialized_response_utf8_bytes": 75155,
+      "elapsed_ms": 76.55,
+      "truncated": true,
+      "previous_truncated": true,
+      "captured_requests_exactly_equal": true,
+      "fixture_calls_exactly_equal": true
+    },
+    {
+      "case_id": "www-congregationcoffee-com__gallop-c3eaf093",
+      "source_url": "https://www.congregationcoffee.com/products/gallop",
+      "status": 200,
+      "preview_ok": true,
+      "fact_count": 123,
+      "content_utf16": 42986,
+      "max_value_utf16": 1600,
+      "max_part": 2,
+      "invalid_part_count": 0,
+      "invalid_unicode_value_count": 0,
+      "serialized_response_utf8_bytes": 68399,
+      "elapsed_ms": 77.18,
+      "truncated": true,
+      "previous_truncated": true,
+      "captured_requests_exactly_equal": true,
+      "fixture_calls_exactly_equal": true
+    },
+    {
+      "case_id": "www-congregationcoffee-com__peru-copy-aafd4f8f",
+      "source_url": "https://www.congregationcoffee.com/products/peru-copy",
+      "status": 200,
+      "preview_ok": true,
+      "fact_count": 109,
+      "content_utf16": 31217,
+      "max_value_utf16": 1600,
+      "max_part": 2,
+      "invalid_part_count": 0,
+      "invalid_unicode_value_count": 0,
+      "serialized_response_utf8_bytes": 53769,
+      "elapsed_ms": 102.81,
+      "truncated": true,
+      "previous_truncated": true,
+      "captured_requests_exactly_equal": true,
+      "fixture_calls_exactly_equal": true
+    }
+  ],
+  "newly_truncated": [],
+  "distributions": {
+    "fact_count": {
+      "min": 6,
+      "median": 78,
+      "p95": 160,
+      "max": 297
+    },
+    "content_utf16": {
+      "min": 3744,
+      "median": 23732,
+      "p95": 72444,
+      "max": 179666
+    },
+    "serialized_response_utf8_bytes": {
+      "min": 6754,
+      "median": 38491,
+      "p95": 105612,
+      "max": 222019
+    },
+    "elapsed_ms": {
+      "min": 19.7,
+      "median": 124.14,
+      "p95": 327.25,
+      "max": 602.1
+    }
+  },
+  "maximum_response_case": {
+    "case_id": "onyxcoffeelab-com__mexico-finca-santa-cruz-gesha-bd946347",
+    "source_url": "https://onyxcoffeelab.com/products/mexico-finca-santa-cruz-gesha",
+    "status": 200,
+    "preview_ok": true,
+    "fact_count": 285,
+    "content_utf16": 179666,
+    "max_value_utf16": 1600,
+    "max_part": 0,
+    "invalid_part_count": 0,
+    "invalid_unicode_value_count": 0,
+    "serialized_response_utf8_bytes": 222019,
+    "elapsed_ms": 398.14,
+    "truncated": false,
+    "previous_truncated": true,
+    "captured_requests_exactly_equal": true,
+    "fixture_calls_exactly_equal": true
+  },
+  "captured_requests": {
+    "baseline": {
+      "captured_call_count": 1217,
+      "by_kind": {
+        "html": 603,
+        "json": 600,
+        "large_html": 14
+      },
+      "captured_bytes_read": 230780939,
+      "nonfunctional_fixture_call_count": 3015
+    },
+    "candidate": {
+      "captured_call_count": 1217,
+      "by_kind": {
+        "html": 603,
+        "json": 600,
+        "large_html": 14
+      },
+      "captured_bytes_read": 230780939,
+      "nonfunctional_fixture_call_count": 3015
+    },
+    "exact_request_differences": [],
+    "fixture_call_differences": []
+  },
+  "interpretation": [
+    "Response byte size uses actual Node JSON.stringify plus UTF-8 byte count; content limits use the runtime UTF-16 label/value/section/path/locator accounting.",
+    "The request comparison includes captured URL, kind, byte limit, result, byte count and source hash, plus nonfunctional authentication/quota fixtures. These are replay reads, not actual production requests.",
+    "Canonical correctness, frozen retention, source reconstruction and client-export fidelity are measured in separate parent/independent receipts.",
+    "Remaining malformed-source flags are preserved; absence of a flag does not establish universal page, image or dynamic-state completeness."
+  ],
+  "runtime_or_tests_edited": false,
+  "new_tests_or_network_executed": false,
+  "remote_writes_or_publication": false
+}

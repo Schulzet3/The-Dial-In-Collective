@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {officialProductUrl,productNameMatches,extractOfficialEvidence,normalizeWords}
  from '../supabase/functions/dic-verify-coffee/evidence.mjs';
+import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../supabase/functions/_shared/coffee-release-label.mjs';
 
 const official='sweetbloomcoffee.com';
 const html=(title,description='',productUrl='https://sweetbloomcoffee.com/products/hambela')=>
@@ -87,6 +88,40 @@ test('explicit release ranges and product identity remain bounded evidence',()=>
  assert.equal(extractOfficialEvidence(html('Hambela 2025'),{name:'Hambela 2025',release_label:'2025'}).ok,true);
  assert.equal(extractOfficialEvidence(html('Hambela 2025','Harvest 2024'),
   {name:'Hambela 2025',release_label:'2025'}).ok,false);
+});
+test('recurring harvest months and seasons cannot establish a distinct release even when printed literally',()=>{
+ const recurring=['January','July–September','Sept - Dec','November - January','August–October',
+  'Harvest: Jan. through March','Crop season: Autumn / Winter','Spring and Summer','November harvest season',
+  'between May and June','Harvest Period: December–April','Feb., Mar. & Apr.',
+  ': November – April','： November – April','Harvest: : November – April'];
+ for(const release_label of recurring){
+  assert.equal(isRecurringCoffeeHarvestWindow(release_label),true,release_label);
+  const found=extractOfficialEvidence(html('Hambela','This coffee is washed. '+release_label+'.'),{name:'Hambela',release_label});
+  assert.equal(found.ok,false,release_label);assert.equal(found.reason,'product_title_not_verified');
+ }
+});
+test('dated windows and distinctive release or lot labels still require their existing literal source proof',()=>{
+ for(const release_label of ['January 2026','January 2024–June 2024','2025/2026 harvest','Lot 42',
+  'Spring Equinox','Summer Solstice Reserve','Winter Lot A','January Jubilee',
+  ': November 2026','： Winter Lot A']){
+  assert.equal(isRecurringCoffeeHarvestWindow(release_label),false,release_label);
+  assert.equal(extractOfficialEvidence(html('Hambela','Harvest 2026. Unrelated notes.'),{name:'Hambela',release_label}).ok,false,release_label);
+  assert.equal(extractOfficialEvidence(html('Hambela',release_label+'. Washed.'),{name:'Hambela',release_label}).ok,true,release_label);
+ }
+ for(const value of [null,undefined,{},'','January to the moon','May flowers','January '.repeat(100)])
+  assert.equal(isRecurringCoffeeHarvestWindow(value),false,String(value));
+});
+test('a generic production category cannot serve as a distinctive lot identifier',()=>{
+ for(const release_label of ['Microlot','Micro-lot','Nano lot','Regional Lot','Community lot',
+  'Communal','Single origin lot','Blend','Blended lot','Lot','Batch',': Microlot','Lot type: Microlot']){
+  assert.equal(isGenericCoffeeLotLabel(release_label),true,release_label);
+  assert.equal(extractOfficialEvidence(html('Hambela','Lot: '+release_label+'. Washed.'),{name:'Hambela',release_label}).ok,false,release_label);
+ }
+ for(const release_label of ['Microlot 7','Nano Lot Silver','Lot A','San Lorenzo X','Community Harvest Reserve','Blend 42']){
+  assert.equal(isGenericCoffeeLotLabel(release_label),false,release_label);
+  assert.equal(extractOfficialEvidence(html('Hambela','Lot: '+release_label+'. Washed.'),{name:'Hambela',release_label}).ok,true,release_label);
+  assert.equal(extractOfficialEvidence(html('Hambela','A washed microlot.'),{name:'Hambela',release_label}).ok,false,release_label);
+ }
 });
 test('source with different official product URL cannot verify another catalog item',()=>{
  const sample=html('Hambela','Guji natural','https://sweetbloomcoffee.com/products/different');

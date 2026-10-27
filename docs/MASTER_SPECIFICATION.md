@@ -1,5 +1,61 @@
 # The Dial In Collective — Master Specification
 
+## October 26/27, 2026 — Owner-Locked selected-source import defaults and human conflict review
+
+**EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026 (Locked):** Owner directed that an explicitly labeled **Notes**, **Tasting Notes**, **Cupping Notes**, or other direct current-coffee note list take precedence over generic descriptive tasting prose when current selected-product evidence identifies the exact same coffee; Woods Coffee's explicitly listed **Almonds | Mild Fruit | Cocoa Powder** is the concrete accepted case. Never combine incompatible independent current-coffee lists by guessing, and do not mistake a related product, marketing analogy, educational text, brewing taxonomy, roast graphic, or unrelated storefront collection for its current tasting list. Where the roaster omits units on a clearly identified current-coffee *elevation field*, display and treat the numeric elevation as **meters above sea level (m)**, not feet; retain the literal source text and disclose the default. Do not infer units on an unlabeled number or override an explicit feet/meters measurement, conflicting ranges, different origin or questionable source identity.
+
+**Member review on import:** On Add Coffee's URL preview, extract bounded literal alternatives for conflicting selected-product canonical fields and show them **visibly, adjacent to the editable form**, with provenance labels, readable on mobile and accessible to assistive technology. Do **not** automatically choose or save a conflicting value; preserve the field blank (except already manually entered data), present the alternatives for comparison, and let the member manually enter what they determine is correct. Preserve all original source fact text and downloadable source review; sanitize untrusted text and never include credentials, private member identifiers or tokens in source exports. This changes only presentation and member-confirmed source-fact selection, not authenticated preview quota, account permissions, canonical approval, Community, shot history, offline outboxes, favorite recipes or release gates.
+
+**Scope and delivery:** This narrowly supersedes previous blanket equal-weight tasting narrative/source-category handling, the missing-unit-only elevation presentation and conflict-message-only URL import UI. It does **not** automatically resolve genuine two-source contradictions. Complete original immutable 603-coffee/201-roaster, unchanged oracle/supplementary and test-to-app acceptance before tagging READY. Development only until separately authorized release; no production SQL/Edge/Auth/member records or deploy during this development instruction.
+
+---
+
+## Owner-Locked retirement of basket and equipment version management — October 26, 2026
+
+**UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026 (Locked).** The owner directed: "I don't want to include basket or equipment versions. Let's remove this and close issue #16." Cancel Issue #16's proposed **member-facing** basket creation, selection, correction, archive/reactivation and equipment-version history, restoration and calibration-management screens. Do not introduce hidden advanced versions, mandatory basket steps, or an active basket lifecycle. The existing cloud application already has no such management controls.
+
+**Preserved simple product:** New Setup retains one Basket Dose, Grinder Espresso Range and optional equipment text. Keep additional setups, setup switching and renaming, optional temperature and Slow Feed, and Log Shot → Rate → Recommendation. Actual Dose remains distinct from Basket Dose. The strictly more-than-2 g basket-dose advisory stays dismissible, nonblocking and limited to NEW shots (never repeat on edit). Keep the 5–40 g ordinary numeric bound and mandatory unusual-shot measurement confirmation. Independent Issue #17 grinder-scale research is not superseded.
+
+**Mandatory historical compatibility:** The database's internal immutable setup-version, basket-version and grinder-calibration IDs, original shot equipment snapshots, owner-scoped foreign keys, prior personal/Community evidence, private notes, old backups, offline outboxes, idempotent mutation receipts and RLS MUST remain intact. These are invisible provenance mechanisms, not product version-management features. For genuinely different hardware, an additional Setup is already supported without changing older shots. Do not drop, migrate, rewrite, rebind or delete historical member data or original applied SQL. Internal archival/model helpers can remain for old snapshots/tests; they do not authorize a new management UI.
+
+**Precise supersession:** This later Locked owner instruction replaces §13's active basket and hardware-version management expansion and Issue #16's original acceptance criteria. It does not remove internal shot provenance or distinct history, the ±2 g advisory, independent numeric/outlier guards, existing Setup workflow, private records, offline data, permissions or separate publication approval. No production DDL, member-data changes, Netlify publication, or spending are authorized by this development instruction.
+
+## Owner-Locked retirement of Bag Management — October 26, 2026
+
+**UX-RETIRE-BAG-MANAGEMENT-20261026 (Locked):** At the owner's explicit direction, **retire Bag Management entirely as an active product feature**. Do not implement or display Roast Date, Frozen status, Bag Details, New Bag, bag archive/reactivation, bag-age reminders, dose-by-dose thaw tracking, or any required bag-specific question in Add Coffee or Log Shot. Name the product field **Coffee Name**, not “Name / Bag Label.” Members continue logging new and different coffee shots against the normal coffee/library entry, with one visible recommended/preferred recipe, exact measurements, five taste ratings, historical Shot History, successful internal recipe-family learning and existing coffee source/release identity. A later purchase of the same release does not require creating a new bag; an actually different harvest/release still follows the existing coffee identity/verification workflow.
+
+**Non-destructive compatibility:** Read-only Supabase inventory on October 26: four pre-existing `public.bags` rows, all active, zero dated/Frozen, **14 of 23 saved shots** linked to bags and zero orphan references; 23 notes, four personal families and four preferences remain. **Do not delete, relabel, unlink, backfill, rewrite or implicitly replace any historical bag or associated shot.** Retain existing `public.bags`, `public.shots.bag_id`, composite owner/coffee FK, RLS and protected legacy importer solely as archival/offline/data-integrity compatibility. No new bag must be automatically created or assigned by the current frontend; new shots can have no bag association. Keep old cloud/offline `bag_id` receipts and legacy schema-1 import fields exactly as recorded; reject broken bag link archives before import rather than silently stripping them. Production schema cleanup is **not** approved or safe while real linked records exist; no migration that drops these references is part of this retirement.
+
+**Precise supersession:** This later Locked decision replaces the previous active Bag Management offering and acceptance in §§6–7, §9.3 (“Name / Bag Label” UI), §28, §38 Bag scope, §39's *future product feature* implication and Issue #15. It does **not** remove coffee identity research using published packaging/roaster text, user shots, successful recipe families, history, backups, Community data, account isolation, security or any release safeguard. Prior dated notes and original database migrations remain as immutable history, not active feature requirements. Only development/source work is authorized; publishing is separate.
+
+
+## Owner-Locked retirement of Experiment workflow — October 26, 2026
+
+**UX-RETIRE-EXPERIMENTS-20261026 (Locked):** At the owner's explicit direction, the entire user-facing and internal **Experiment workflow** is retired: no start/decline prompts, meaningful-change Experiment thresholds, experiment workspaces or panels, active Experiment state, separate candidate/confirmation/promotion steps, or automatic switches back to an earlier recipe when ending an Experiment. A member may still vary dose, yield, grind, temperature and timing in ordinary Log Shot → Rate → Recommendation. Every shot retains its actual values, notes, sensory ratings and historical identity. All-green shots remain valid and Community-eligible under existing provenance/quality safeguards; distinct successful ratio/recipe families remain internally separated and inform **one** visible recommendation. A materially different green shot does **not** automatically override an existing *explicitly preferred* Make Current Recipe shot/family. The user can choose Make Current on any qualifying successful shot under existing owner, setup, and revision checks. Preserve offline queue and legacy backup records, account isolation, private notes, Community contributions, provenance and mutation receipts.
+
+**Database scope:** Production read-only inventory on October 26 showed **0 public.experiments rows and 0 public.shots linked by experiment_id** (23 shots/4 personal families/4 preferences unchanged). Retire the table and obsolete shot column only through the separately source-tested forward-only migration that refuses to proceed if any Experiment row/linked shot appears. Keep the historic migration files and archival rejection safeguards; never silently discard an old backup, erase shot records or replay applied SQL. **No destructive live SQL, Netlify publication, Auth/Edge or member writes authorized by this development instruction.** The release owner must arrange an additional verified encrypted backup immediately before any future approved potentially destructive SQL operation.
+
+**Precise supersession:** This later Locked decision overrides the earlier Experiment-specific lifecycle provisions in §§6.2, 7.2, 18, 19, 37, 41 and the original Issue #13 acceptance criteria, including pending threshold/baseline/decline questions and Experiment-specific candidate/confirmed stages. It **does not** remove the independently approved recipe-family evidence states used for Community learning, one-visible-recipe policy, success ratings, preference confirmation, Log Shot feedback, or data/history safety. Historical dated descriptions remain as audit evidence, not active requirements. Source tracking: GitHub Issue #13; product retirement is distinct from a production deployment.
+
+
+## Owner-Locked Custom shot style retirement — October 26, 2026
+
+**UX-RETIRE-CUSTOM-STYLE-20261026 (Locked):** The owner explicitly directed retirement of Custom as an active product style after confirming no saved Custom shots. Read-only production aggregate independently confirmed zero Custom shots, workspace selections, personal recipe families or experiments. The current selectable espresso styles are **Traditional, Turbo, Fast-Flow, Ristretto and Lungo**. Do not offer Custom on Add Coffee, first expansion, Change Style, new shot logging or active recipe selection. Do not create a Custom editor or persist new Custom targets. Keep existing shot measurements editable regardless of style, never use rigid style-time/ratio thresholds to veto all-green taste, and preserve historical style labels, member notes, private/offline queued shots, family history and account separation. No automatic historical relabeling or destructive database cleanup. Existing older SQL style checks may continue accepting legacy queued records for data recovery; they are not a currently offered product feature. Remove the **never-applied** October 26 Custom-target migration rather than altering already-applied schema/history. This narrow supersession replaces only the original §27 and Issue #14 Custom offering/persistence obligation and the October 22 Fast-Flow decision's preservation of Custom as an **active choice**; Fast-Flow, original badge history, existing data, permissions and separate release approval remain intact. This is development authorization, **not** permission to deploy, apply SQL or modify member records.
+
+## Locked owner-scoped test acceptance — Issues #5 and #10 (2026-10-23 MDT)
+
+**TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023 — ACCEPTED, scope limited to test evidence.** Exact owner approval: “Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10.”
+
+For GitHub Issues #5 and #10 only, the owner's explicitly accepted isolated PostgreSQL 17.11/PostgREST 12.2 cryptographically signed JWT acceptance (PR #107, 50/50 HTTP assertions, pre-merge and exact merged-source CI) replaces the prior requirement to obtain the corresponding real-member production-session testing evidence. The previously verified published production readbacks and public anonymous/invalid-JWT smoke remain distinct evidence. These synthetic signed tokens are not Supabase GoTrue member sessions and do not establish an actual official-roaster live fetch.
+
+**Not waived:** Preserve the full product behavior, authentication/admission, member data, provenance, privacy, source-identity, recipe-family decisions, publication authorization, and all untested system claims. This acceptance does NOT publish staged migration 20261024034800_dic_pending_retry_http_conflict.sql or waive the requirement to deploy a known fix before marking Issue #5 complete. It does NOT waive remaining Community source/contributor-balanced integration in Issue #12 expressly referenced by Issue #10, or independently owned experimental lifecycle Issue #13. It does not transfer this acceptance to unrelated issues or create permissions for future releases.
+
+**Closure requirements still outstanding at approval:** Issue #5's separately READY, unpublished retry HTTP conflict migration remains to be released with an independent owner publish command; Issue #10's original explicit Community contributor/source evidence tier integration tracked in #12 remains unfinished. The #13 post-rating experiments retain separate open requirements. Thus **neither original GitHub issue is automatically closed by this test-evidence supersession**. No additional site/Edge/SQL release, member-data writes, or changes to other Locked decisions are authorized.
+
+**Specific verified acceptance evidence:** PR #107 merged `d9607f9b505f26f66c607d431b82e19d5450473b`; isolated PostgreSQL 17.11 and PostgREST 12.2 **50/50** signed JWT HTTP assertions PASS; exact merged SHA CI approval 40059878206, Node/build 40059878199, isolated SQL/signed HTTP 40059878227, cloud/mobile 40059878239 all SUCCESS; premerge visual 40059738743 SUCCESS. Published site's public safety smoke 40058958473 was 6/6 PASS, **not a substitute claim for real-account authenticated hosted behavior**. See scope-specific issue journals and release queue for required publication receipts.
+
+---
+
 **Scoped same-commit journals — owner-approved Issue #80 (2026-10-22):** Preserve same-commit GitHub development continuity while allowing an indexed `docs/workstreams/issue-<N>.md`, `ops-<slug>.md` or `release-<YYYYMMDD>.md` work journal instead of requiring all concurrent branches to update one giant file. The central work checkpoint remains the recovery entrypoint; reconcile CURRENT_STATUS, issue history and the release queue at integration/READY. No relaxation of privacy, owner approval, release consent, tests or readback. This narrowly supersedes only the single-file checkpoint requirement.
 
 ## Owner-approved narrow UX refinements (2026-10-22, Issue #80)
@@ -324,14 +380,14 @@ The app may contain sophisticated recommendation, community, equipment, identity
 ## 2.1 Product principles
 
 - **Simple on the surface, sophisticated underneath.** Advanced modeling must not create routine data-entry burden.
-- **Experimentation is a first-class behavior.** Espresso is not a fixed target. Recommendations are reference points, not rules.
+- **Recipe variation remains available without an Experiment workflow.** Espresso is not a fixed target. Log any shot normally, rate it and let successful evidence inform the single recommendation; recommendation priors are guidance, not rules.
 - **Personal taste matters.** Two successful recipe families may both be valid; the best recommendation can differ by user preference.
 - **Observed success beats generic theory.** A user's own successful shots on the same coffee/setup are highly valuable.
 - **Community learning must be robust.** More shots improve confidence, but one heavy user must not dominate the Collective.
 - **Raw data is preserved.** Derived recommendations and aggregates must be reproducible from underlying shot records.
 - **Coffee identity must be reliable.** Similar names must not cause accidental merging or duplicate community records.
-- **Facts and opinions are separated.** Coffee facts have one validated canonical record; user taste, notes, bags, and shots are user-level.
-- **Progressive disclosure.** Community detail, bag detail, advanced equipment, and diagnostics are available without crowding the main workflow.
+- **Facts and opinions are separated.** Coffee facts have one validated canonical record; user taste, notes, historic bag records and shots are owner-scoped.
+- **Progressive disclosure.** Community detail, advanced equipment and diagnostics are available without crowding the main workflow. Bag Management is retired.
 - **No false precision.** Once repeated successful shots exist, a useful recipe is often a successful window plus a centerpoint rather than one magical number.
 
 ---
@@ -469,7 +525,6 @@ On normal app open:
 - Its current/preferred recipe or active dial-in state is immediately visible.
 - **Log a Shot** is immediately available.
 - The last-used equipment setup is already selected.
-- If an Experiment is active for that coffee/setup, the Experiment panel is visible and the main Log a Shot action continues that experiment.
 
 ## 6.3 Changing current coffee
 
@@ -529,7 +584,7 @@ Expected information:
 - Roast level/status where known.
 - Expand/collapse affordance.
 
-Bag detail should **not** appear on the collapsed card.
+Bag Details are retired and do **not** appear on collapsed or expanded cards.
 
 ## 7.2 Expanded card - primary content
 
@@ -538,12 +593,9 @@ The expanded card should prioritize:
 1. Current/preferred recipe or current dial-in state.
 2. Log a Shot.
 3. If not dialed in: previous-shot feedback and next recommendation.
-4. If an experiment is active: Experiment panel.
-5. Shot History.
-6. Shot History retains other successful approaches; no separate Alternate Recipes control.
-7. Coffee facts and source/roaster details.
-8. Community detail behind progressive disclosure.
-9. Optional Bag Details behind progressive disclosure.
+4. Shot History, retaining other successful approaches without a separate Alternate Recipes control.
+5. Coffee facts and source/roaster details.
+6. Community detail behind progressive disclosure.
 
 ## 7.3 Existing visual language to preserve
 
@@ -629,7 +681,7 @@ Preserve the current principle that only a small number of fields are required.
 
 Current user-facing baseline:
 
-- Name / Bag Label: required.
+- Coffee Name: required (the roaster's product/release name, not a separate tracked bag).
 - Roaster: required.
 - Origin: optional.
 - Elevation: optional.
@@ -801,6 +853,8 @@ Every shot must permanently record the setup used.
 Every shot should also preserve an immutable equipment snapshot/version as it existed at shot time.
 
 Editing a setup later affects future shots only; it must not rewrite historical shot context.
+
+**Current scope:** Immutable equipment/basket version references are internal historical provenance only, not a member-facing management feature. See the October 26 Locked retirement above.
 
 ## 13.5 Grind-range concept
 
@@ -1046,81 +1100,15 @@ Community recommendation logic may choose among families based on the user's pre
 
 ---
 
-# 18. Experiment system
+# 18. Experiment workflow — retired (owner decision October 26, 2026)
 
-Experimentation should feel intentional and positive, not like the user has violated a rule.
+The former Experiment prompt, active state, panel, meaningful-change detector, end/promote action, and experiment-specific candidate/confirmation stages are **not part of the product**. Users try new recipes through ordinary shot logging. A green shot remains independently valid without automatically changing an explicitly preferred successful recipe. Keep internal personally confirmed recipe-family evidence for Community and recommendation correctness; it is **not** an Experiment lifecycle.
 
-## 18.1 Meaningful-change detection
-
-A meaningful change is a possible signal of intentional experimentation.
-
-Initial trigger thresholds:
-
-- Dose: **0.5 g** or more.
-- Yield: **5 g** or more.
-- Time: **5 s** or more.
-- Temperature: **2 C / approximately 4 F** or more.
-- Grind: adaptive to the grinder's configured espresso range; for the product owner's 0.0-5.0 grinder range, **0.1** is meaningful.
-- Shot style: any explicit style change is meaningful.
-
-Crossing **any one** threshold is enough to trigger possible-experiment logic.
-
-These are not warnings, errors, or hard bounds.
-
-Time should not infer experimentation for small natural shot-to-shot variation; approximately 5 seconds is the starting threshold.
-
-## 18.2 Prompt timing
-
-Do not interrupt the user while filling out the shot form.
-
-After the user finishes rating/saving a meaningfully changed shot, prompt with a lightweight question such as:
-
-**Trying something different?**  
-This shot changed meaningfully from your current recipe.  
-**Start an Experiment** | **No, just log it**
-
-## 18.3 Experiment workspace
-
-If the user confirms:
-
-- Coffee remains Dialed In based on the established recipe.
-- Existing preferred recipe remains intact.
-- Show a distinct, lightly separated **Experiment** panel with a small badge.
-- The Experiment panel contains:
-  - latest experimental shot;
-  - radar graph;
-  - tasting bubbles;
-  - what changed;
-  - next-shot recommendation;
-  - experiment-specific history/progress as appropriate.
-- Main Log a Shot action automatically continues the active experiment.
-- User does not reconfirm "experiment" for every subsequent shot.
-
-## 18.4 End Experiment
-
-- User can choose **End Experiment**.
-- If the new approach is not preferred, ending the experiment returns the interface to the original preferred recipe.
-- Failed/non-green experimental shots remain in private personal history.
-
-## 18.5 Candidate and confirmation lifecycle
-
-- First materially different **all-green** experimental shot -> **Candidate Recipe Family**.
-- Second successful repeat -> **Confirmed internal successful recipe family** (not a separate routine UI card).
-- User may choose **Make Current Recipe** immediately after the first successful candidate if they love it.
-- Candidate/confirmed status and current/preferred status are separate concepts.
-
-## 18.6 Successful experiment that is not preferred
-
-If an experiment produces an all-green result but the user decides the old recipe is still better:
-
-- The successful experimental shot remains valid.
-- It remains community-eligible.
-- It may remain a candidate or another valid internal recipe family.
-- Ending the experiment only changes the user's active preference/workspace; it does not invalidate the successful shot.
+Historical Experiment records or linked shots in an old backup must not be silently dropped. The import path rejects those records with recovery guidance. The staged backend retirement removes only the unoccupied Experiment schema after an explicit empty-data check and separate release approval.
 
 ---
 
-# 19. Non-experiment dial-in display behavior
+# 19. Standard dial-in display behavior
 
 ## 19.1 Coffee not yet dialed in
 
@@ -1140,7 +1128,7 @@ This is the active dial-in workspace.
 - Current/preferred recipe/window is primary.
 - Shot History remains available for inspection.
 - A later non-green shot does not automatically replace the main recipe with a large dial-in panel.
-- The large Experiment workspace should appear only after the user confirms that the meaningful change is an experiment.
+- No separate Experiment workspace or post-rating confirmation is offered; ordinary shots retain their feedback and history.
 
 A remaining UX detail is open regarding how much brief feedback to show for a non-green shot on an already dialed-in coffee when the user chooses "No, just log it." See Open Questions.
 
@@ -1153,7 +1141,7 @@ A remaining UX detail is open regarding how much brief feedback to show for a no
 - **Copy constraint — Locked:** Do **not** display the proposed badge/text **“One adjustment at a time”**. It was rejected as visible UI clutter, not as an algorithmic concept. The initial side-by-side Change/Keep metric-card graphic was also too busy.
 - **Layout choice — Locked as `RECOMMENDATION-OPTION-A-ARROW-INFO-20261019` (October 2026 owner clarification):** Use **Option A's uncluttered previous → next arrow** with the same **small lowercase i icon** beside **Next Shot Recommendation**. Show a specific previous **actual shot** → suggested next value for exactly one controllable variable, plus one muted sentence naming the other unchanged controllable settings. No separate Change/Keep metric cards, colored badges, or extra boxes. The i reveals a concise cause/effect explanation and mentions that measured shot time may change naturally. Keep the existing tasting bubbles and radar. If no single reliable measurable change exists (including distribution-only technique and successful shots), retain specific original textual feedback rather than inventing an arrow. The immediately previous **Option B text-only layout is explicitly superseded and never reached runtime**; keep its decision history while removing obsolete draft UI suggestions from the active design.
 - **Accessibility and data:** Reuse the New Setup lowercase i control styling and 36 px tap target, accessible label and live `aria-expanded` state; use a unique explanation ID per coffee. Derive arrows from recorded shot measurements and the next suggested action, never an estimated starting recipe or measured time outcome. Format values using existing units. Preserve evidence notes when a recommended grind step was sized from comparable shots. Preparation advice should focus on distribution alone instead of asking for a simultaneous tamp change.
-- Keep the recommendation panel fast to scan and compatible with the approved Log Shot → Rate → Recommendation flow and all existing Locked evidence, history and experiment rules.
+- Keep the recommendation panel fast to scan and compatible with the approved Log Shot → Rate → Recommendation flow and all existing Locked evidence, history and internal recipe-family rules.
 
 Source: owner conversation on the next-shot recommendation, recorded in [issue #39](https://github.com/Schulzet3/The-Dial-In-Collective/issues/39) on 2026-10-19/20. The initial decision approved the one-variable principle and removed visible badge copy. The owner's subsequent explicit correction Locked the arrow-and-info presentation, now implemented and tested in development but not published or accepted on a live device.
 
@@ -1426,6 +1414,8 @@ For a user's recommendation, stronger context should generally outrank weaker co
 
 Exact ordering may differ by variable. For example, grind should strongly favor the user's own grinder history.
 
+**October 24, 2026 implementation status (no new Locked decision):** Issue #12's staged read-only Community recommendation RPC now uses existing server-maintained personally confirmed recipe-family membership to preserve distinct successful member-family evidence, with per-contributor medians and one vote per independently contributing member in an observed ratio region. It excludes the requesting member's own Community contributions, protects anonymity and grinder calibration, and keeps exact, related-release and similar-coffee tiers distinct. Cross-member ratio grouping under the established 0.25 heuristic is explicitly **estimated**; two people in a similar bucket are not declared to share a globally verified family ID. Current UI still shows exactly one recipe. Original source/provenance and confirmed member-family fixtures pass exact CI at merge `3529a9b`. This is development READY, **not deployed**; previously written historical comments describing the feature as unfinished refer to the source state at their dates. Issue #13 experimental family lifecycle is separate and unaffected.
+
 ## 25.3 Roaster recipe
 
 A roaster-published espresso recipe is a strong prior, particularly for Traditional-style starting points, but real successful data should eventually outweigh it.
@@ -1525,7 +1515,8 @@ Current V1 style set:
 - Turbo.
 - Ristretto.
 - Lungo.
-- Custom.
+
+The active selectable styles are the five listed above. Historical Custom labels are preserved only for existing or previously queued records.
 
 The style selected by the user remains the shot's style. Remove the current rigid automatic reclassification logic.
 
@@ -1564,8 +1555,8 @@ Shorter, more concentrated espresso. Typical starting territory is about 1:1.1-1
 **Lungo**  
 Longer-ratio espresso. Typical starting territory is about 1:2.5-1:3.2 in 28-40 seconds, often increasing openness and clarity while reducing concentration. Ratio matters more than hitting an exact time.
 
-**Custom**  
-Set your own targets with no style assumptions.
+**Retired Custom (historical records only)**  
+Custom is not an option for new shots and does not have a configurable target editor. Preserve pre-existing Custom shot labels, notes and offline records without converting them into another style.
 
 ## 27.3 Style recommendation on Add Coffee
 
@@ -1577,47 +1568,17 @@ Set your own targets with no style assumptions.
 
 ---
 
-# 28. Bag model - intentionally simple in V1
+# 28. Bag Management — intentionally retired in V1 (October 26, 2026)
 
-The product briefly explored richer bag-aging tracking and intentionally simplified it to avoid turning the app into work.
+The owner explicitly withdrew the planned optional bag experience. **Do not build a Bag Details editor, Roast Date or Frozen control, New Bag workflow, bag-age logic, per-bag recommendation reset, bag-selection affordance or any routine logging question.** Ordinary coffee records and shots remain the user's units of work. Existing evidence-based recipe recommendations and the user's explicit preferred recipe continue across ordinary shot logging; no artificial bag boundary is introduced.
 
-## 28.1 Coffee vs Bag
+## 28.1 Historical data and source compatibility
 
-- Canonical Coffee represents the release.
-- A user's Bag represents a specific purchase/roast instance of that coffee.
-- Buying the same canonical coffee again can create a new bag rather than overwriting old bag data.
-- Shots can be tied to the specific bag.
-- Coffee-level recipe learning can still learn across bags.
+The earlier prototype and database created bag records. Production retains four bag rows and 14 shot-to-bag associations. These are **read-only historical data**, not a new product feature. Keep their exact IDs, associations, dates/status if any, account ownership and private shot/notes payload. No automatic historical relabeling, deletion, archive state changes, backfill or schema drop. Old offline events and validated old backup imports may still carry bag identifiers; the backend must retain the original owner/coffee foreign-key protection and idempotent mutation/receipt semantics. Reject malformed old backups instead of silently discarding bag references. New app-created shots do not need bag IDs.
 
-## 28.2 V1 visible bag fields
+## 28.2 Future purchases
 
-Only:
-
-- **Roast Date** - optional.
-- **Frozen** - optional boolean/status.
-
-Defer richer room-temperature/refrigerated/opened/thawed lifecycle UI.
-
-## 28.3 UI placement
-
-- Bag details are hidden inside the expanded coffee view.
-- Do not show bag age/status on the collapsed card.
-- Do not ask bag questions during ordinary shot logging.
-- Do not issue maintenance reminders by default.
-
-## 28.4 Frozen logic
-
-- Frozen status effectively pauses age-related recommendation logic.
-- Batch-frozen users can leave a bag marked Frozen while logging individually frozen doses.
-- Do not assume a shot means the whole bag has thawed.
-
-## 28.5 New bag behavior
-
-- One bag may be marked active for a coffee.
-- New shots attach to the active bag automatically.
-- Creating a new bag archives the prior active bag by default.
-- Archived bags remain viewable and can be reactivated.
-- When starting a new bag of a previously used coffee, carry forward the prior coffee-level dialed-in recipe/window as the starting recommendation while building new bag-specific history.
+A repeat purchase of the same coffee/release stays in the usual coffee and shot workflow; no new bag must be created. Distinct genuine releases/harvests are handled through existing source-backed coffee identity, never by silently merging coffee releases. Historical bag records do not influence recommendation ranking or add visible controls.
 
 ---
 
@@ -1838,28 +1799,9 @@ When a brand-new coffee is added but has no shot yet, decide:
 
 Do not silently make a coffee current merely because it was added unless explicitly decided.
 
-### C. "No, just log it" after a meaningful deviation
+### C–D. Retired Experiment decisions (resolved October 26, 2026)
 
-If the user declines Start an Experiment:
-
-- the shot should still be logged;
-- if non-green, it remains personal/private;
-- if all-green, it is community-eligible by the global Dialed-In rule.
-
-Still to define: should an all-green meaningful deviation that the user says was **not** an experiment affect the personal current family/window, form a hidden candidate family, or be retained as a successful outlier without changing personal recipe state?
-
-### D. Experiment trigger reference point
-
-Thresholds are defined, but the comparison baseline is not yet explicit.
-
-Candidates include:
-
-- current preferred family centerpoint;
-- current preferred window boundary;
-- previous actual shot;
-- current displayed recommendation.
-
-This matters especially for time and natural variability.
+No comparison threshold or Experiment baseline needs to be designed. A different shot is saved and rated normally; green evidence can form an internal family without changing an explicit favorite, and non-green results stay private under the existing contribution rules. No Start/Decline question is offered.
 
 ### E. Grinder scale semantics
 
@@ -1872,7 +1814,7 @@ Public V1 should decide how to handle grinders where:
 - the grinder is stepped vs stepless;
 - the meaningful adjustment step is not one decimal place.
 
-This affects normalization, experiment detection, and "Use Recommendation."
+This affects grinder guidance and "Use Recommendation"; Experiment detection is retired.
 
 ### F. Community correction after editing an already-contributed shot
 
@@ -1909,11 +1851,9 @@ Suggested design direction:
 - larger N: robust quantile/MAD/trimmed window;
 - center: median or trimmed mean rather than raw mean when outliers accumulate.
 
-### I. Adaptive grind experiment threshold
+### I. Retired grinder-based Experiment trigger
 
-The product owner confirmed 0.1 is meaningful on a 0.0-5.0 grinder.
-
-A candidate general rule is approximately one real adjustment increment or a small percentage of configured espresso range, but this is not yet approved.
+No grinder setting triggers an Experiment workflow. The approved grinder adjustment guidance and hardware-specific calibration remain in force independently.
 
 ### J. Preference-aware recipe families vs strict green sensory targets
 
@@ -2001,9 +1941,9 @@ Deferred until a paid model is defined.
 
 Earlier research covers blooming, declining-pressure, lever-style, low-flow, allonge, modern high-extraction, etc.
 
-Current product UI supports Traditional, Turbo, Ristretto, Lungo, Custom.
+Current selectable product styles are Traditional, Turbo, Fast-Flow, Ristretto and Lungo. Custom was explicitly retired October 26, 2026.
 
-Decide later whether advanced named profiles should become first-class styles or remain under Custom/advanced equipment modes.
+Decide later whether advanced named profiles should become first-class styles or remain under approved equipment modes; retirement is not permission to add new styles.
 
 ### T. Native apps
 
@@ -2026,7 +1966,7 @@ The following issues were explicitly reconciled and should not be reopened witho
 - **Experiment continuity:** once started, subsequent Log a Shot actions stay in the experiment until End Experiment or promotion.
 - **Candidate lifecycle:** first successful experiment can become current immediately; second successful repeat confirms the family.
 - **Successful but not preferred:** valid all-green experiment can remain a community/candidate recipe even if user returns to the old preferred recipe.
-- **Bag scope:** V1 bag detail stays simple - optional Roast Date + Frozen only.
+- **Bag scope (superseded October 26):** No active Bag Management, Roast Date, Frozen, New Bag or bag-age lifecycle; preserve archived shot links and owner protections only.
 - **Search:** simple search + Recent/A-Z only; no filters.
 - **Current coffee pinning:** current coffee remains pinned even in A-Z, except it can disappear temporarily when search does not match.
 - **Shot detail:** expand inline to enable multi-shot comparison.
@@ -2112,12 +2052,12 @@ This is a direction, not a final provider-specific schema.
 - added_at
 - current/preferred context as appropriate
 
-### Bag
+### Bag (historical compatibility only; NOT a new feature to implement)
 
-- user_library_entry_id
-- roast_date optional
-- frozen optional
-- active/archived
+- owner-scoped user_library_entry_id
+- historical roast_date and frozen values, if any, retained without mutation
+- existing active/archived states and original shot associations retained
+- no new Bag Management UI, lifecycle or client-generated bag
 
 ### Shot
 
@@ -2223,8 +2163,8 @@ A beta build is not ready unless all of these are true:
 8. Non-green shots do not contribute to community data.
 9. Repeated green shots build a successful window and robust centerpoint.
 10. Materially different green recipes can remain separate families.
-11. Experiment prompts occur after rating and only start the Experiment workspace if the user confirms.
-12. Candidate/confirmed **internal** successful recipe-family lifecycle works while the card shows one recommendation.
+11. Saving/rating a shot never requires Experiment confirmation; measurements, notes, outlier confirmation and five taste ratings retain their approved rules.
+12. Successful shots may support distinct **internal** recipe-family evidence while the coffee card shows one recommendation; no Experiment stages or competing recipe cards.
 13. Old successful recipes are never destroyed merely because a new one becomes current.
 14. Shot details expand inline and multiple shots can be compared.
 15. Current coffee stays pinned outside search.
@@ -2639,3 +2579,70 @@ The owner also expressly authorized administrator deletion of a pending coffee s
 **Locked Community preservation remains intact unless expressly superseded:** valid anonymous Community contributions survive deletion of a source personal shot with the origin link detached. For a canonical coffee with Community observations, merged-coffee references or other non-reconcilable historical pointers, deletion is **blocked** with a clear dependency count rather than silently removing valid Community/history. Additional explicit approval and safe preservation design are needed to change that boundary. Retain limited private deletion receipts and pre-existing historical audit/mutation receipts; never republish or expose private member data as part of the preview.
 
 **Release separation:** These features are under development on Issue #100 / PR #101. Only apply database changes or destructive live record actions during separately authorized publication/operation, with verified encrypted backup when a potentially destructive database operation is imminent. Application review UI, migration and tests must all pass and be merged before the complete item is READY. No website or hosted database publication is implied by this approval.
+
+
+## Historical candidate7 expanded extractor audit implementation (superseded by candidate8 below)
+
+This records implementation under existing deterministic-only, source-review, explicit-save and autonomous-development decisions. It creates no new Locked product policy or publication authority. Preserve bounded typed source records, exact same-source reference destinations and explicit truncation. Linked farm profiles, GTINs, catalog categories and graphic positions remain review evidence; never infer current-lot attributes, caffeine status, scale size or roast categories from them. Recurring harvest windows and generic Microlot labels do not establish distinctive releases.
+
+Preserve blank-only autofill, explicit refresh under existing quota/security gates, owner/epoch/exact-receipt save handoff, read-only retry after an acknowledged save, explicit canonical corrections, Pending/Verified boundaries, member history and offline outboxes. Local OCR remains outside the app and cannot approve or persist shared facts.
+
+The frozen 603-coffee / 201-U.S.-roaster audit is complete locally on candidate 7. All 603 previews succeed. Across 4,002 unchanged canonical assertions: **3023 exact, 171 missing, 808 requiring source/semantic review**. Baseline was 2,229 / 1,068 / 705; candidate4 was 3,003 / 192 / 807. No candidate4 exact match or fully retained frozen supplementary assertion was lost. Supplementary retention is 5457 full / 327 partial / 690 unconfirmed, with 96 explicit truncation flags. These are diagnostic counts, not universal completeness or semantic accuracy.
+
+The documented purchase, linked-profile, GTIN, category and graphic repairs are implemented and tested within the existing bounds and review-only semantics. All 614 original variants in 12 affected cases reconstruct exactly. All 603 actual client exports exactly match their bounded handler outputs, and 2,788 explicit reference destinations verify. All 27 candidate4-to-candidate5 canonical changes and 19 unexpected fields have source-bound post-output reviews. Intermediate losses of uniquely identified whole records and checked partial property sets were repaired; a separate review of ambiguous alternatives and plain source context exposes the remaining omissions. Expected values remain unchanged.
+
+Four source omissions remain versus candidate5 under the existing packing policy: one complete alternate Sumatra JSON-LD record, plus Tintico page description, Open Graph title and an image caption. Exact source evidence and capacity limits are recorded in the final audit; no universal source-preservation or complete-page claim. Sumatra's retained primary preserves price, currency, SKU, option name and offer URL, but omits the alternate's two identifiers, image-width URL and literal http availability URL. Tintico's omitted SEO description says dried orange while its body and preview say grapefruit. The frozen scores are not adjusted to excuse these omissions. Complete pages, universal source preservation, production readiness and exhausted encoding options are not established.
+
+Applicable local checks pass: 1328 named Node22 tests, 30 Python audit and 21 local OCR helper tests, offline lint, fixture build, 320/390/1280 import-browser checks, and actual packaged/offline service-worker, IndexedDB and outbox checks with exactly one synthetic save after reconnect. Production networking/authentication, physical devices and exhaustive image/dynamic-state review are not certified.
+
+Concurrent upstream is preserved through `38648487824f72bf35d82a0a27abe5b0ab264915` (tree `c74fe3a1adb0f79f40343706f9000ec33bdb3a1f`), including later recipe/source-verifier tests, existing READY entries and staged unapplied migrations. Queue `DIC-Q-33-expanded-603-audit` is **BLOCKED**, not READY: GitHub tree-write rejection: isError:true; user rejected MCP tool call. No more specific reason was supplied. No retry or alternate write route was used. No remote audit commit, PR, merge, hosted CI dispatch, publication, production SQL/Edge/Auth/member-data change, new API key or paid service occurred. Exact evidence: `docs/audits/extractor-600-benchmark-receipt.json` and `docs/workstreams/issue-33.md`.
+
+## October 23 MDT, 2026: owner-authorized larger extractor evidence capacity and candidate 8 verification
+
+The owner expressly authorized increasing size limits when this improves extraction without paid services or additional direct cost. This supersedes only the earlier 128-fact / 64,000-content-unit allowance. Final selected limits are 384 facts / 192,000 UTF-16 content units, 1,600-unit values, at most 128 structured parts and 128 purchase variants. The full 603-case corpus stays within these limits; all four known source omissions are restored, and only three original malformed-source scans remain explicitly incomplete. The existing network source allowances, request counts, deadlines, HTTPS/SSRF, authentication and quota safeguards are unchanged. Supplemental source records and published espresso references remain review-only; blank-only autofill, explicit refresh/save, Pending/Verified boundaries, original shots/notes and offline outboxes are preserved.
+
+Candidate 8 completes the unchanged frozen benchmark with 3,024 exact / 167 missing / 811 review-required canonical checks and 5,458 full / 337 partial / 679 unconfirmed supplementary checks. The audit receipt records actual source verification, local tests, larger download/helper compatibility and remaining ambiguity/measurement limits. No production acceptance or universal completeness is asserted. The earlier rejected GitHub write remains unresolved; local verification is not integration, READY status or publication. The separately recorded upstream releases and their own acceptance limits are preserved.
+
+
+## Candidate8 development integration authority — October23,2026 MDT
+
+The owner explicitly resolves the previously rejected GitHub write: “Please reference the new project instructions. I need you to figure this out proactively. Please get this done at all costs without incurring direct cost to me. GitHub should now allow writes.” The follow-up “You can use github as much as you need. That does not count as adding cost” authorizes normal GitHub Actions usage for completing this extractor task. This supersedes only the prior remote-write retry hold and task-specific avoidance of GitHub CI. Keep every frozen expectation/capture, product decision, member/offline record, private repository and normal source/queue/publication gate. No alternative local-CI readiness exception is implemented. Production still requires its distinct owner publish instruction. Current source is TESTING until real-parent integration and applicable exact-source checks pass. Earlier candidate8 local-blocked paragraphs are historical.
+
+
+## Candidate11 reconstruction and fresh audit evidence — October 24, 2026 UTC
+
+Existing deterministic-only and autonomous development authority covers these implementation repairs and verification. PR109's candidate8 source is merged but fresh public-source acceptance failed. Candidate10's subsequent local results were recorded before environment loss; its original unpublished files could not be recovered. Newly reconstructed candidate11 therefore requires a new source-bound full603 benchmark and current hosted checks, with all frozen expectations, captures and scoring rules unchanged.
+
+Preserve explicit current-source geography, genuine contradictions, selected-product card boundaries, complete HTML attribute consumption, narrowly sanitized public evidence, review-only imports and explicit save. The owner-authorized384fact/192000UTF-16 allowance remains bounded. GitHub execution is authorized; no new key, paid service or production publication is introduced. Preserve concurrent acf411c Community work and unrelated queue states. See `docs/audits/2026-10-24-extractor-final-audit.md` and the Issue33 journal. Queue remains TESTING until actual full benchmark, applicable CI, safe integration and fresh public acceptance pass. This is not a new product or release policy.
+
+
+Concurrent upstream through `2f4668fdc7918a04f6cc2432021c5f15cb30acd2` (tree `93f2ecd2713d74b8fbb0a82c7bbd40436ffc0bee`) is preserved exactly. It includes PR113's confirmed-personal-family Community evidence and source READY reconciliation, staged unapplied migrations, and independent regression tests. The other queue rows and root metadata retain their current upstream values. None of the32 extractor runtime files or actual client-export module changed; fresh combined hosted checks cover the overall source.
+
+
+## Final exact-source 603-coffee audit disposition — October 24, 2026 UTC
+
+**Implementation/status only; no new Locked product decision.** Current deterministic-only extractor source includes PR116's source scope, complete HTML attributes, source identity reconciliation and private-safe public fixture repairs. PR116 was merged non-force into development at `5da3eba1e6a567defca572c54ac677c81f4b535c`; exact reviewed PR head, merged-source standard CI and current-source ten-target public source acceptance all pass. The existing owner-authorized 384 source-fact/192,000-content allowance, strict actual product scoping, conflict withholding, source attribution, review-only preview and explicit user save remain in force. No BYOK, paid service or runtime OCR/AI is introduced.
+
+The original full 603-coffee/201-roaster immutable replay [40066959055](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40066959055) passed on the unchanged extractor runtime, with original 4,002 expectations: 3,024 exact, 167 missing and 811 review-required, without prior exact match or fully retained source-fact regression. The actual client exports and offline helper completed on all 603 cases. Later attempt 40068786714 stopped during single-use input materialization after the PR moved; it did *not* execute corpus or replace the completed immutable replay. The exact current public acceptance 40069154699 passes all ten existing positive/negative targets and saved-fixture parity without production or member operations.
+
+**Release queue:** `DIC-Q-33-expanded-603-audit` READY development source, **NOT DEPLOYED**. Issue #33 stays OPEN for additional separately reviewed C9 source-accuracy refinements, including incorrectly interpreting awards/grades/nearby landmarks and partial producer rosters. C9 candidate code is not accepted, tested against the full runtime or included in this READY batch. Avoid universal extraction-accuracy claims; retain explicit missing/review/conflict classifications. Publication requires a separate scoped owner release instruction, and the unrelated Issue5/10/12 queue, permissions, history, member and offline data remain unchanged.
+
+October 24, 2026 UTC: Owner now authorizes completing PR121 and ONE future combined publication of the verified READY queue, with no repeat production migrations, no unrelated TESTING scope and a separate release grant plus provider readback. This supersedes only the older pause on publication, not the source-integrity/safety/release controls. PR121 remains TESTING until its changed-runtime frozen603 has independently reviewed output deltas and exact-source passing checks; no publication has occurred.
+
+## October 24 UTC — Candidate12 extractor audit READY; not deployed
+
+**READY development source only; NOT DEPLOYED.** Applicable source-readiness checks, independent source review, non-force integration and exact merged-source verification are complete. This updates implementation status under the existing Locked decisions; it adds no product policy or publication action.
+
+Reviewed run [40074270907](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40074270907), at source `3dc7fe4daab46b888368cdd8de4d59886fe5fb4f`, completed **PASS_WITH_REVIEWED_CHANGES** on all **603 coffees / 201 roasters / 1,197 original captures**. The unchanged 4,002 canonical assertions returned **3,046 exact / 132 missing / 824 review-required**; 6,474 supplementary assertions returned **5,458 full / 337 partial / 679 unconfirmed**. There were **zero prior canonical-exact or full-retention losses**. All 603 current client snapshot/download pairs and 603 offline validations passed. All 42 observed case changes (41 source-supported and one nonsemantic order-only) and 41 changed export byte streams are explicitly covered by the pinned review; changed exports are not described as identical to the old baseline.
+
+PR121 merged non-force at `010f77a83ca1efbf447db6b838ef0f826aaf2f1a`, with parents `a42bc757a3aedf02fcb213a4d8a7da807a68fa8c` and `3dc7fe4daab46b888368cdd8de4d59886fe5fb4f`. The actual merge tree `9a00b4fa54f87f66a649a17db516bc049f326821` is exactly the reviewed head tree, and the 32-file runtime fingerprint remains `ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451`.
+
+All five applicable merged-source workflows passed on 010f77a83ca1efbf447db6b838ef0f826aaf2f1a: app/Node/lint/build 40074669136; cloud/mobile 40074669168; approval/continuity 40074669164; fresh ten-target public-source acceptance 40074669139; Python 40074669171. Actual counts: 1,569 Node passes / zero failures / six explicit production-configuration skips (1,575 total), 1,201 cloud passes, 61 synthetic mobile checks plus admin flows, Python 44+23 offline/OCR. Live acceptance passed nine product cases and the required homepage negative with 19 public requests, zero gaps and zero backend/member operations. The separate controlled broader-roaster probe 40074669165 was SKIPPED, not passed.
+
+Evidence: `docs/audits/extractor-candidate12-frozen-reviewed-run-40074270907.json` (SHA-256 `4e711444425fe4092151c946e2735acb4227c4c5ba4d9f0feba8ca3d289aaba1`), `docs/audits/extractor-candidate12-merged-ci-010f77a8.json`, and `docs/audits/extractor-candidate12-ordinary-ci-3dc7fe4d.json`. The exact review manifest is `docs/audits/extractor-reviewed-changes-candidate12.json`, SHA-256 `d82f85051727908bfbea8985cd837636a37baee4b1b3262aa21e3c0049dd9d47`. The reviewed runner passed 41 integrity controls, nine reader controls and all five execution stages.
+
+The implementation recovers the independently reviewed current producer and sensory roles while preserving selected-product boundaries, genuine conflicts, literal modifiers, historical/conditional distinctions, source attribution, blank-only autofill, explicit save and offline behavior. The frozen answers, captures and scorers are unchanged. Missing and review-required results remain visible; no universal extraction-accuracy claim is made. The 22-case release-label review introduces no release policy or expected-value change, and three context-limited rows retain uncertainty.
+
+The original C11 result and complete queue snapshot remain immutable historical evidence. First C12 strict runs 40070270334, 40071855281 and 40073531611 retain their actual failure dispositions; independent review and the later reviewed pass do not retroactively relabel them. The focused 95-test run 40069075479 validates only its historical 3deece8b source, not later runtime bytes.
+
+Only `DIC-Q-33-expanded-603-audit` is promoted to READY in this reconciliation. Concurrent future-publication instructions are preserved as recorded. This extractor audit does not consume or execute a release grant, publish/deploy, apply production SQL/Edge/Auth changes, mutate member data, provision a new API key or add a paid service. Other queue items and their existing states remain unchanged.

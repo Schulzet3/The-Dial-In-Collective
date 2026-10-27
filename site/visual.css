@@ -233,6 +233,18 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 .coffee-url-fields dd{margin:1px 0 0;font-size:13px;line-height:1.5;font-weight:500}
 .coffee-url-preview .coffee-match-alert{padding-top:10px;border-top:1px solid var(--line);font-weight:500}
 .coffee-url-preview [data-action=apply-coffee-url]{min-height:36px}
+/* Selected roaster-source contradictions are visible on the import screen,
+   without choosing a winner or blocking normal manual editing. */
+.coffee-source-conflicts{margin:12px 0 16px;padding:12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--well)}
+.coffee-source-conflicts h3{margin:0 0 7px;font:600 14px/1.45 var(--sans)}
+.coffee-conflict-group{padding:9px 0;border-top:1px solid var(--line)}
+.coffee-conflict-group>strong{font-size:13px}
+.coffee-conflict-group ul{list-style:none;padding:0;margin:7px 0 0;display:grid;gap:6px}
+.coffee-conflict-group li{padding:8px 10px;border:1px solid var(--line);border-radius:8px;overflow-wrap:anywhere;background:var(--surface)}
+.coffee-conflict-value{display:block;font-size:13px;font-weight:600}
+.coffee-conflict-group small{display:block;color:var(--muted);margin-top:2px;font-size:11px}
+#new-coffee .coffee-needs-review{outline:1px solid var(--line-strong);outline-offset:1px}
+
 @media(max-width:410px){.coffee-url-fields{grid-template-columns:1fr}.coffee-url-actions .helper{font-size:12px}}
 
 /* Preserve breathing room between full-width New Coffee fields without altering the paired grid. */

@@ -10,6 +10,6 @@ export function rawFixture(){return {
  library:[{id:'coffee',owner_id:OWNER,submission_id:'submission',created_at:TIME}],
  submissions:[{id:'submission',proposed_data:{name:'Test Coffee',roaster:'Fictional Roaster',roast_level:'Light',origin:'Test origin'},status:'pending'}],coffees:[],
  workspaces:[{owner_id:OWNER,setup_id:'setup',setup_version_id:'version',current_library_entry_id:null,revision:1}],
- workspaceCoffees:[{owner_id:OWNER,setup_id:'setup',setup_version_id:'version',library_entry_id:'coffee',selected_style:'Turbo',basket_version_id:'basketv',revision:1}],shots:[],notes:[],families:[],recipePreferences:[],experiments:[]
+ workspaceCoffees:[{owner_id:OWNER,setup_id:'setup',setup_version_id:'version',library_entry_id:'coffee',selected_style:'Turbo',basket_version_id:'basketv',revision:1}],shots:[],notes:[],families:[],recipePreferences:[]
 };}
 export function rawShot(overrides={}){return {id:'shot',owner_id:OWNER,setup_id:'setup',setup_version_id:'version',library_entry_id:'coffee',basket_version_id:'basketv',calibration_id:'cal',style:'Turbo',pulled_at:TIME,dose_g:18,yield_g:50,time_s:22,grind_setting:0,temperature_c:null,feed_mode:'unknown',extraction:3,body:3,clarity:5,sweetness:5,astringency:1,is_dialed_in:true,revision:2,personal_family_id:'family',equipment_snapshot:{machine_model:'Test machine',grinder_model:'Test grinder',burr_set:'Test burrs',finest_setting:0,coarsest_setting:5,basket_dose_g:18},...overrides};}

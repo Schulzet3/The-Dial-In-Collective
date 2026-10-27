@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "type": "issue33_original603_local_source_replay_and_exact_merged_source_receipt",
+  "date_utc": "2026-10-26",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "branch": "development/backend-foundation",
+  "pr": 124,
+  "merged_source_sha": "f5157b738092805caac0af3db15553829ff77e42",
+  "merged_source_tree": "af968b94c9abbf9e615f8a18fcb58683a1c82e6d",
+  "exact_parser_git_blob": "7d6b1578e280047c81372b4ec80c31955a0d71f0",
+  "benchmark": {
+    "cases": 603,
+    "roasters": 201,
+    "original_canonical_assertions": 4002,
+    "original_source_archive_sha256": "696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52",
+    "original_recovery_zip_sha256": "728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce",
+    "original_oracle_freeze_sha256": "0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb",
+    "original_packet_attestation_sha256": "0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556",
+    "unchanged_original_oracles": true,
+    "unchanged_original_scorers": true
+  },
+  "original_candidate12": {
+    "exact": 3046,
+    "missing": 132,
+    "review_required": 824
+  },
+  "current_replay": {
+    "actual_handler_replay_completed": true,
+    "successful_cases": 603,
+    "exact": 3047,
+    "missing": 132,
+    "review_required": 823,
+    "changed_full_case_records_excluding_elapsed_ms": 1,
+    "case_id": "queencitycollectivecoffee-com__los-magnificos-gesha-colombia-1cea64c3",
+    "field": "origin",
+    "before": "Colombia",
+    "after": "San Agustín, Huila, Colombia",
+    "previous_exact_losses": 0,
+    "other_case_changes": 0,
+    "all_original_supplementary_retention_records_unchanged": true,
+    "retention_counts": {
+      "full": 5458,
+      "partial": 337,
+      "unconfirmed": 679
+    },
+    "replay_sha256": "9107b42688b83b345a7a36d9d37d285ac0abd82cf0725edd6e1474789c41d6d5",
+    "comparison_sha256": "25b6563cc2dac6e45d64bfebaf718e01754f4b74015c421cb0607ec18eeefae4",
+    "retention_sha256": "f8ce42fb502ae24fc6ee09b313ade67c24ea3ffb3c312f166967b6eeb6edf077"
+  },
+  "source_tests": {
+    "exact_merge_ci_pass_runs": [
+      40266606286,
+      40266606279,
+      40266606259
+    ],
+    "pr_head_checks": [
+      40266053934,
+      40266053887,
+      40266053848,
+      40266053850,
+      40266053916,
+      40266053987
+    ],
+    "private_hosted_frozen603": "SKIPPED; distinct full-corpus local original-source replay completed"
+  },
+  "limits": [
+    "Only one additional canonical assertion resolved; 132 still missing and 823 strict-review results remain. The 299 provisional presentation-only classifications are non-scoring and not owner-accepted source corrections.",
+    "No fresh live crawl of 603 public sites, genuine member acceptance, physical device, provider deployment, production SQL or member-data modification is claimed."
+  ],
+  "release_state": "READY_SOURCE_ONLY_NOT_DEPLOYED",
+  "issue_state": "OPEN_REMAINING_ACCURACY",
+  "new_paid_service_or_api_key": false,
+  "production_deployed": false
+}

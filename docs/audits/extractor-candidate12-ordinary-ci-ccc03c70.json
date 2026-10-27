@@ -1,0 +1,650 @@
+{
+  "schema_version": 1,
+  "type": "candidate12_actual_ordinary_ci_receipt",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "pull_request": 121,
+  "candidate": 12,
+  "status": "ORDINARY_CI_PASS_FROZEN_REVIEW_PENDING",
+  "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+  "source_tree": "8082f78a977e44257d1738d1c190171104182afc",
+  "parents": [
+    "b23602ee91361e921be3d805cc34610c52c33e60"
+  ],
+  "runtime_fingerprint": "37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24",
+  "runtime_unchanged_from_parent": true,
+  "actual_commit_changes": [
+    "docs/audits/extractor-candidate12-ordinary-ci-b23602ee.json",
+    "docs/audits/extractor-candidate12-source-manifest.json",
+    "docs/audits/extractor-candidate12-superseded-run-40071062376.json",
+    "docs/workstreams/issue-33.md",
+    "tests/coffee-literal-sensory-residuals.test.mjs"
+  ],
+  "provenance": "Actual completed GitHub workflow/job metadata and complete job logs. All seven ordinary workflows passed for this exact source commit. The full frozen benchmark and source review remain separately reported.",
+  "full_node_and_app_build": {
+    "run_id": 40071855137,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/cloud-beta-ci.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806811837,
+    "job_name": "validate",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 656550,
+      "sha256": "a9970d1dc5d320dc84967c87c73b257353125690fc36150bebbf29ad0eceff5c"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify Netlify ignore guard on its pre-install Node 18 runtime",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install exact locked dependency tree",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run all checked-in Node tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Lint browser, server, Edge and audit JavaScript",
+        "conclusion": "success"
+      },
+      {
+        "name": "Build static beta assets with nonfunctional public test coordinates",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail if any development-only or private source leaks into dist",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain source validation timing receipts even on failure",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "tests": 1521,
+    "passed": 1515,
+    "failed": 0,
+    "skipped": 6,
+    "cancelled": 0,
+    "skipped_test_names": [
+      "published application serves its sign-in shell",
+      "published admin route serves its shell without granting private data",
+      "dic-verify-coffee rejects requests without an authenticated JWT",
+      "dic-verify-coffee rejects forged JWT without touching member data",
+      "dic-preview-coffee rejects requests without an authenticated JWT",
+      "dic-preview-coffee rejects forged JWT without touching member data"
+    ],
+    "preinstall_node18_guard": {
+      "passed": 12,
+      "failed": 0
+    },
+    "lint": "PASS",
+    "build": "PASS",
+    "private_source_dist_guard": "PASS"
+  },
+  "cloud_unit_and_build": {
+    "run_id": 40071855139,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/cloud-regression.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806811399,
+    "job_name": "cloud-tests",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 502302,
+      "sha256": "f3c3db371eac0474e807cde1d69cc473061f7d4daea4311d021d783233e638a0"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/setup-node@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install locked runtime dependencies",
+        "conclusion": "success"
+      },
+      {
+        "name": "Cloud unit and regression tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Syntax check",
+        "conclusion": "success"
+      },
+      {
+        "name": "Build allowlisted cloud preview",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain cloud regression timing receipts even on failure",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "tests": 1147,
+    "passed": 1147,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "syntax": "PASS",
+    "build": "PASS"
+  },
+  "python_audit": {
+    "run_id": 40071855140,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/coffee-audit-python.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806811330,
+    "job_name": "python-audit",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 50023,
+      "sha256": "2cec5b37ea62c65914f0deca660459f7776e67fd6f31e21909a09442661358f5"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7.0.1",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install existing free local-review test prerequisites",
+        "conclusion": "success"
+      },
+      {
+        "name": "Record test prerequisite versions",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify frozen-audit report and retention integrity",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify offline source review including real local OCR",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7.0.1",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "audit_tests": 44,
+    "offline_helper_and_ocr_tests": 23,
+    "failed": 0,
+    "skipped": 0,
+    "pillow": "10.2.0",
+    "tesseract": "5.3.4"
+  },
+  "mobile_browser": {
+    "run_id": 40071855139,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/cloud-regression.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806811218,
+    "job_name": "mobile-browser-qa",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 66644,
+      "sha256": "adac7b69d4ec0f467aa14106dd2da70cf11e3e9acfee4266193bda5257a5f998"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Install Playwright and Chromium",
+        "conclusion": "success"
+      },
+      {
+        "name": "Exercise 390px phone UX with synthetic accounts",
+        "conclusion": "success"
+      },
+      {
+        "name": "Exercise owner-only admin invitations and member access in 390px Chromium",
+        "conclusion": "success"
+      },
+      {
+        "name": "Retain synthetic phone screenshots for review",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "checks_passed": 61,
+    "synthetic_owner_admin_flow": "PASS",
+    "production_member_sessions_used": false
+  },
+  "approval_and_continuity": {
+    "run_id": 40071855217,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/approval-continuity.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806811775,
+    "job_name": "approval",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 32699,
+      "sha256": "619bf92ddc96ea5ce05a9ff9447736a262f05784bf4df426dfa7bc600cc054de"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Fail on missing owner decisions or approved UI/source tests",
+        "conclusion": "success"
+      },
+      {
+        "name": "Validate durable queue schema and show next-batch status (never publishes)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Audit EVERY pushed commit, including docs-only and earlier commits in batch",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "queue_intake": {
+      "status": "PASS",
+      "tracked_deployable_paths": 39
+    },
+    "same_commit_continuity": {
+      "status": "PASS",
+      "commit_count": 1,
+      "checked_paths": 5
+    }
+  },
+  "source_security_inventory": {
+    "run_id": 40071855228,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/security-inspection.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806811869,
+    "job_name": "security-inventory",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 19327,
+      "sha256": "eedbf17c511beebbb86d05dd5526078b89b1c0ed6fe362bc52c9a848c3167fb0"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Inventory every tracked file and screen text without printing secrets",
+        "conclusion": "success"
+      },
+      {
+        "name": "Check the exact production dependency lock against current advisories",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/upload-artifact@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v7.1.0",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "claim_limit": "The configured source inventory/advisory workflow passed; this is not a general guarantee that all vulnerabilities are absent."
+  },
+  "isolated_sql": {
+    "run_id": 40071855564,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/isolated-sql-regression.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806812926,
+    "job_name": "sql",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 108127,
+      "sha256": "1a74c03e75f59dc37836dac5ff174d8f82cd0c331ef7396e44ee8fb9364943c1"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Verify all production-applied migration filenames and exact SQL byte hashes",
+        "conclusion": "success"
+      },
+      {
+        "name": "Apply and exercise schema in network-isolated PostgreSQL 17.11",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify actual signed bearer JWT authorization, held-shot ownership and correction against disposable PostgREST",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify recovery snapshot consistency under concurrent writes and fail-closed errors",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "signed_postgrest_assertions": 53,
+    "production_gotrue_or_member_sessions_tested": false
+  },
+  "private_visual_review": {
+    "run_id": 40071855205,
+    "run_attempt": 1,
+    "workflow_path": ".github/workflows/visual-review.yml",
+    "source_commit": "ccc03c70f7532af7854e450cd4d98344daa6cd4a",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "job_id": 120806811561,
+    "job_name": "review",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "log": {
+      "bytes": 95263,
+      "sha256": "611bf5763190fd76bfa777e90118798c5fffe1e8fb305a33f2f9d8e1ed193f0d"
+    },
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Classify documentation-only change (unknown means full CI)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Explain optimized no-op CI",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "Run actions/setup-node@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run check:fast",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run npm run build:cloud",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify every shipped file and transitive module import",
+        "conclusion": "success"
+      },
+      {
+        "name": "Prepare isolated browser only",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run python tests/browser/cloud_owner_qa.py",
+        "conclusion": "success"
+      },
+      {
+        "name": "Verify real service-worker cached cold reopen in isolated Chromium",
+        "conclusion": "success"
+      },
+      {
+        "name": "Synthetic owner-only invitation portal mobile acceptance",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run python tests/browser/visual_review.py",
+        "conclusion": "success"
+      },
+      {
+        "name": "Exercise packaged production app in a real browser (no credentials)",
+        "conclusion": "success"
+      },
+      {
+        "name": "Run actions/upload-artifact@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/setup-node@v6",
+        "conclusion": "success"
+      },
+      {
+        "name": "Post Run actions/checkout@v7",
+        "conclusion": "success"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success"
+      }
+    ],
+    "source_guard_tests": 42,
+    "browser_checks": 61,
+    "visual_checks": 167,
+    "screenshots": 38,
+    "localhost_offline_cache_queue_session_isolation": "PASS",
+    "synthetic_admin_flow": "PASS",
+    "packaged_entry_assets": "PASS"
+  },
+  "test_fixture_correction": {
+    "file": "tests/coffee-literal-sensory-residuals.test.mjs",
+    "blob": "190a907f1ab6d53239b2c61dd1dadbb4eb0be931",
+    "sha256": "f31bda09e661622f0590727c4ff610042e40320c0dbd1af3a6cd91f66729e84d",
+    "actual_sensory_controls_passed": 18,
+    "success_field_conflict_source_assertions_preserved": true,
+    "explicit_nonnull_endpoint_request_assertion_added": true,
+    "no_network_request_added": true,
+    "historical_failure_receipt": "docs/audits/extractor-candidate12-ordinary-ci-b23602ee.json"
+  },
+  "live_acceptance": {
+    "separate_exact_runtime_run_id": 40071598036,
+    "source_commit": "b23602ee91361e921be3d805cc34610c52c33e60",
+    "runtime_fingerprint": "37253ab02a1cf137f3a9ec5e7faf8d4aabee81d7f65e8ca630cf8d8940d9fc24",
+    "reference": "docs/audits/extractor-candidate12-ordinary-ci-b23602ee.json",
+    "claim_limit": "The10public-target pass is historical evidence for identical runtime bytes; it is not relabeled as a new live request at this documentation/test-only head."
+  },
+  "frozen_benchmark": {
+    "run_id": 40071855281,
+    "job_id": 120806836457,
+    "complete603_evidence_in_this_record": false,
+    "review_manifest_enabled": false
+  },
+  "original_expectations_modified": false,
+  "publication_or_deployment_performed": false,
+  "new_paid_services_or_api_keys": false,
+  "limitations": [
+    "Six published-shell/JWT tests remain explicitly skipped. No production member session or published endpoint acceptance is inferred from synthetic/local checks.",
+    "This ordinary-CI pass does not by itself approve changed extraction outputs or establish a passing full603 benchmark.",
+    "The prior b236 test-fixture failure is retained as actual failed evidence; it is not relabeled as a passing run.",
+    "Source integration and publication/deployment are distinct; this receipt authorizes neither deployment nor member-data changes."
+  ]
+}

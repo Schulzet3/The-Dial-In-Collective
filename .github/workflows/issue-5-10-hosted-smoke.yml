@@ -1,0 +1,28 @@
+name: DIC deployed Issues 5 and 10 public safety smoke
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue-5-10-hosted-smoke.yml'
+      - 'tests/hosted-issue-5-10-smoke.test.mjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dic-hosted-5-10-public-smoke-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  public-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Check public HTTP and anonymous/forged-JWT denial only
+        env:
+          DIC_PUBLIC_HOSTED_PROBE: '1'
+        run: node --test tests/hosted-issue-5-10-smoke.test.mjs

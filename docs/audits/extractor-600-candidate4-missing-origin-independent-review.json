@@ -1,0 +1,825 @@
+{
+  "type": "independent_manual_review_of_all_candidate4_missing_origins",
+  "reviewer": "independent_review",
+  "source_tree_sha256": "95c80e702a9ac4faabf62a3c661c3fae43455cca23f065cfa9cd9d420424a6eb",
+  "replay_sha256": "a5cb4d10efd52f169273365e7838b7090da99610e6b425d810c7c5d7d6a3435e",
+  "source_packet_sha256": "012195387eaf0e41125344b0369b2a092488fcfe891077a3007b63de51de7b27",
+  "cases_reviewed": 21,
+  "original_source_hashes_verified": 42,
+  "no_oracle_or_score_changes": true,
+  "no_external_geography_assumptions": true,
+  "counts": {
+    "source_conflict_retained": 1,
+    "source_spelling_conflict_retained": 1,
+    "safe_structured_grammar_gap": 1,
+    "complementary_scope_and_caption_gap": 1,
+    "safe_current_origin_grammar_gap": 4,
+    "mixed_role_source_quality": 1,
+    "current_adjectival_origin_with_processing_caution": 1,
+    "current_icon_origin_with_variety_history_caution": 1,
+    "safe_current_blend_grammar_gap": 2,
+    "safe_current_origin_with_source_spelling": 1,
+    "source_spelling_and_spatial_qualifier_conflict": 1,
+    "complementary_labeled_geography_gap": 1,
+    "safe_current_blend_label_gap": 1,
+    "unlabeled_product_tag_role_ambiguity": 2,
+    "tag_and_metadata_role_caution": 1,
+    "safe_current_lot_origin_grammar_gap": 1
+  },
+  "records": [
+    {
+      "case_id": "sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f",
+      "source_url": "https://sextantcoffee.com/products/plandanas-reserve-sextant-coffee",
+      "frozen_expected": "Planadas, Tolima, Colombia",
+      "candidate4_fields": {
+        "name": "Walia Ibex - Organic Decaf Coffee",
+        "roaster": "Sextant Coffee Roasters"
+      },
+      "candidate4_conflicts": [
+        "origin"
+      ],
+      "review_class": "source_conflict_retained",
+      "independent_manual_review": "Direct current Colombian/Tolima/Planadas attribution is strong, but the introductory current-coffee prose also calls it Central American. Page and endpoint now use Walia Ibex, not the historical URL title. Do not rewrite the frozen expected value or silently resolve the contradictory source.",
+      "source_quote_receipts": [
+        "This Colombian coffee comes from the Department of Tolima",
+        "it’s the kind of Central American coffee you like to start and end the day with"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f/page.html",
+          "sha256": "ef2cf8495bbec2af55a4a652277cf382440a0db0b05ff04ddb6d4ad3bdacfe35"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/sextantcoffee-com__plandanas-reserve-sextant-coffee-7d031b1f/product-endpoint.html",
+          "sha256": "31a41ee7b9bbdc33e8faac0c0780e7b2a40fe5e324386d9bf97f11c6b9024526"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "This Colombian coffee comes from the Department of Tolima in the Andean mountain range, purchased from a Colombia export company that works with an association of small specialty coffee farmers in Planadas."
+        }
+      ]
+    },
+    {
+      "case_id": "novocoffee-com__danche-fe9eff8c",
+      "source_url": "https://novocoffee.com/product/danche",
+      "frozen_expected": "Danche, Worka Chelbessa, Gedeb, Ethiopia",
+      "candidate4_fields": {
+        "name": "Danche",
+        "process": "Washed",
+        "roaster": "Novo Coffee",
+        "variety": "Local Cultivars",
+        "elevation_m": "1900–2200m",
+        "producer": "Neguesse Debela",
+        "tasting_notes": "Lemon-lime, Honeysuckle, Blueberry Pie"
+      },
+      "candidate4_conflicts": [
+        "origin"
+      ],
+      "review_class": "source_spelling_conflict_retained",
+      "independent_manual_review": "GEDEB, ETHIOPIA in the current page short description/map disagrees literally with LOCATION Geed, Ethiopia in the detailed page and endpoint. Danche and Worka Chelbessa context is current. The extractor should preserve both spellings for review rather than assume a correction.",
+      "source_quote_receipts": [
+        "GEDEB, ETHIOPIA",
+        "Geed, Ethiopia",
+        "Danche, a small village within the renowned Worka Chelbessa coffee-producing region of southern Ethiopia"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/novocoffee-com__danche-fe9eff8c/page.html",
+          "sha256": "962d838d8494074457fce2f15dc680b490187581f23f2b6f66c3a2575fc67c02"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/novocoffee-com__danche-fe9eff8c/product-endpoint.json",
+          "sha256": "67fd84424134c9a9759d82869d2a410d51ddc71481baa4d26da15646f6e79309"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "page",
+          "quote": "Danche, a small village within the renowned Worka Chelbessa coffee-producing region of southern Ethiopia"
+        }
+      ]
+    },
+    {
+      "case_id": "gnosiscoffee-com__red-bourbon-decaf-947e2539",
+      "source_url": "https://gnosiscoffee.com/products/red-bourbon-decaf",
+      "frozen_expected": "Piendamó, Cauca, Colombia",
+      "candidate4_fields": {
+        "name": "Red Bourbon DECAF",
+        "roaster": "Gnosis Coffee",
+        "roast_level": "Light",
+        "tasting_notes": "bergamot and juicy red fruit",
+        "producer": "Wilton Benítez",
+        "process": "Natural",
+        "variety": "Red Bourbon",
+        "elevation_m": "1,900 masl"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_structured_grammar_gap",
+      "independent_manual_review": "Current description h4 rows pair Origin_16x16.png with Colombia and Region_1_16x16.png with Piendamó, Cauca. Stop the region value at / Producer: so producer and farm names do not enter geography.",
+      "source_quote_receipts": [
+        "Colombia",
+        "Piendamó, Cauca / Producer: Wilton Benítez and Paraíso 92"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/gnosiscoffee-com__red-bourbon-decaf-947e2539/page.html",
+          "sha256": "5c4bf8b33714b9b3a04ecbb240d3dfe8afbae8e7f315c97398baba548f7dc705"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/gnosiscoffee-com__red-bourbon-decaf-947e2539/product-endpoint.html",
+          "sha256": "9d45ef3e18d32129bfed084b4e60103f73f933c8c10e6851ca56d3cab40a52c6"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "page",
+          "quote": "Piendamó, Cauca / Producer: Wilton Benítez and Paraíso 92"
+        }
+      ]
+    },
+    {
+      "case_id": "www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07",
+      "source_url": "https://www.slowburncoffee.com/products/honduras-expreso-paraiseno",
+      "frozen_expected": "La Lodoza, El Paraíso, Honduras",
+      "candidate4_fields": {
+        "name": "Honduras - Expreso Paraiseño",
+        "producer": "Gerardo Peñalva",
+        "variety": "Parainema",
+        "process": "Washed",
+        "tasting_notes": "Milk Chocolate, Brown Sugar, Almond",
+        "elevation_m": "1,450 meters",
+        "roaster": "Slow Burn Coffee"
+      },
+      "candidate4_conflicts": [
+        "origin"
+      ],
+      "review_class": "complementary_scope_and_caption_gap",
+      "independent_manual_review": "Current title/prose supplies Honduras and La Lodoza, El Paraíso; labeled Region El Paraiso is a compatible broader scope. Captured origin fact includes colon and star marker. Do not let the unrelated Javier Padilla versus Owner Gerardo Peñalva role conflict decide geography.",
+      "source_quote_receipts": [
+        "In the Lodoza, El Paraíso region of Honduras",
+        "La Lodoza, El Paraíso",
+        "Region: El Paraiso"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07/page.html",
+          "sha256": "cb830df35caf3a18b60ebefb8ca296c71b319fa78f01501a8905f6a9da3c67b8"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/www-slowburncoffee-com__honduras-expreso-paraiseno-6155ee07/product-endpoint.html",
+          "sha256": "0cf5a7d8cbbabc1eadca4df20967f7a075143446c46748f1e3ee6a5637986a79"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "page",
+          "quote": "In the Lodoza, El Paraíso region of Honduras"
+        },
+        {
+          "capture_id": "page",
+          "quote": "La Lodoza, El Paraíso"
+        }
+      ]
+    },
+    {
+      "case_id": "summermooncoffee-com__en-fuego-8cc1b6ac",
+      "source_url": "https://summermooncoffee.com/products/en-fuego",
+      "frozen_expected": "Mexico",
+      "candidate4_fields": {
+        "name": "En Fuego",
+        "roaster": "Summer Moon Coffee",
+        "tasting_notes": "Candied Roasted Pecans"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_origin_grammar_gap",
+      "independent_manual_review": "The selected current roast is explicitly from the highlands of Mexico and page summary repeats Mexico; no need to infer it from Tex meets Mex or a roaster location.",
+      "source_quote_receipts": [
+        "This single-origin roast is from the highlands of Mexico."
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/summermooncoffee-com__en-fuego-8cc1b6ac/page.html",
+          "sha256": "5b702ce8d44267a6eb70027ef9f008cc1784824cb04d5c201e2b7e077ce107b5"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/summermooncoffee-com__en-fuego-8cc1b6ac/product-endpoint.html",
+          "sha256": "cacd452304051f638af50b14f26eb94ba3f1b64113787f408f5e09fbeb7666c7"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "page",
+          "quote": "from the highlands of Mexico"
+        }
+      ]
+    },
+    {
+      "case_id": "lowcountrycoffeeroasters-com__breakfast-blend-ccc8cf9e",
+      "source_url": "https://lowcountrycoffeeroasters.com/products/breakfast-blend",
+      "frozen_expected": "Colombia, Costa La Amistad",
+      "candidate4_fields": {
+        "name": "Breakfast Blend",
+        "roaster": "Lowcountry Coffee Roasters",
+        "tasting_notes": "brown sugar, almond, cherry & red apple",
+        "roast_level": "Medium"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "mixed_role_source_quality",
+      "independent_manual_review": "The blend-components sentence literally supplies Colombia and Costa La Amistad plus Robusta. Colombia is a geographic value; Costa La Amistad is a possibly truncated source/farm term and Robusta is a species. Preserve the literal list, do not invent Costa Rica or promote South Carolina roasting prose.",
+      "source_quote_receipts": [
+        "Breakfast Blend showcases Colombia, Costa La Amistad & Robusta."
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/lowcountrycoffeeroasters-com__breakfast-blend-ccc8cf9e/page.html",
+          "sha256": "4529b27ec6cd8d328fae0d782e263c9e810567bacbb6f9736de313d2ea0ff45b"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/lowcountrycoffeeroasters-com__breakfast-blend-ccc8cf9e/product-endpoint.html",
+          "sha256": "6fa7b0117b5d85a96d3710ee29f9a04ff54453a638f8a3688fcc60ef8093b013"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "page",
+          "quote": "Breakfast Blend showcases Colombia, Costa La Amistad & Robusta."
+        }
+      ]
+    },
+    {
+      "case_id": "www-nativocoffeeroasters-com__tranquilo-decaf-0d004043",
+      "source_url": "https://www.nativocoffeeroasters.com/products/tranquilo-decaf",
+      "frozen_expected": "Colombia",
+      "candidate4_fields": {
+        "name": "TRANQUILO, Decaffeinated, 12 oz",
+        "roaster": "Nativo Coffee Roasters",
+        "tasting_notes": "Sugar Cane, Chocolate, Creamy."
+      },
+      "candidate4_conflicts": [],
+      "review_class": "current_adjectival_origin_with_processing_caution",
+      "independent_manual_review": "Current product prose describes the authentic taste of Colombian specialty coffee, which can support a narrow adjective-to-country reading. The separate decaffeinated in Colombia sentence alone proves processing location, and site-wide 100% Colombian banners alone are insufficient current-product evidence.",
+      "source_quote_receipts": [
+        "authentic taste of Colombian specialty coffee",
+        "decaffeinated using the natural Sugar Cane Process in Colombia"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/www-nativocoffeeroasters-com__tranquilo-decaf-0d004043/page.html",
+          "sha256": "4fafef71aadb9b1d53c7e0213bebcf2f94bad7a2fc5c8d951f0b5b3185d654d0"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/www-nativocoffeeroasters-com__tranquilo-decaf-0d004043/product-endpoint.html",
+          "sha256": "591fc1fe06af0eb43de0b8aa01d2b8b4dc24fc4b12d88a89957d0b78138217ca"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "authentic taste of Colombian specialty coffee"
+        }
+      ]
+    },
+    {
+      "case_id": "shop-iconikcoffee-com__washed-sidra-giorgio-bressani-6098f7a9",
+      "source_url": "https://shop.iconikcoffee.com/products/washed-sidra-giorgio-bressani",
+      "frozen_expected": "San Jerónimo, Lake Atitlán, Guatemala",
+      "candidate4_fields": {
+        "name": "Bressani Family Washed Sidra",
+        "roaster": "ICONIK",
+        "variety": "Sidra",
+        "tasting_notes": "Chamomile, pear, juicy",
+        "process": "Washed",
+        "elevation_m": "1550m"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "current_icon_origin_with_variety_history_caution",
+      "independent_manual_review": "Current page icon text explicitly pairs Bressani Family with San Jerónimo Guatemala; farm prose says near Lake Atitlán. Sidra is an Ecuadorian variety is variety history, not the current growing location. San Jerónimo is also a farm name, so do not fabricate an administrative hierarchy.",
+      "source_quote_receipts": [
+        "Bressani Family, San Jerónimo Guatemala",
+        "Finca San Jerónimo Miramar sits on the side of a volcano near Lake Atitlán.",
+        "Sidra is an Ecuadorian variety"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/shop-iconikcoffee-com__washed-sidra-giorgio-bressani-6098f7a9/page.html",
+          "sha256": "6e42f07da72aa81753b882988e48266c8d122b5e855cb35f3bb7cbf6924b0ac6"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/shop-iconikcoffee-com__washed-sidra-giorgio-bressani-6098f7a9/product-endpoint.html",
+          "sha256": "e17683ac210d00d2e4cf438dbf9f9205bbfad16646c0c164157cad0ebe157664"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "page",
+          "quote": "Bressani Family, San Jerónimo Guatemala"
+        }
+      ]
+    },
+    {
+      "case_id": "wakecoffee-com__decaf-76048300",
+      "source_url": "https://wakecoffee.com/products/decaf",
+      "frozen_expected": "Latin America; Indonesia; Africa",
+      "candidate4_fields": {
+        "name": "Mountain Water Decaf",
+        "roaster": "Wake Coffee Roasters",
+        "tasting_notes": "herbal, dark chocolate, medium body"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_blend_grammar_gap",
+      "independent_manual_review": "A complete isolated line in the selected description explicitly gives the blend regions. Keep broad Africa/Latin America scope and Indonesia literal; do not invent component countries.",
+      "source_quote_receipts": [
+        "Latin American, Indonesian and African Blend"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/wakecoffee-com__decaf-76048300/page.html",
+          "sha256": "b07601546099c55f5fe6ad1b5e2a3cd4f2a592d8b917cca364b4f4973a18a421"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/wakecoffee-com__decaf-76048300/product-endpoint.html",
+          "sha256": "3859c904aa0e102d8ed8f981ba4fa1654e99e7f12e647fb2e1bb9c7ecd45a230"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Latin American, Indonesian and African Blend"
+        }
+      ]
+    },
+    {
+      "case_id": "www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d",
+      "source_url": "https://www.lilrhodycoffee.com/products/bellevue-decaf-blend",
+      "frozen_expected": "Hulia, Colombia",
+      "candidate4_fields": {
+        "name": "Bellevue - Decaf Blend",
+        "roaster": "The Lil’ Rhody Coffee Company",
+        "tasting_notes": "milk chocolate, cherry, and caramel"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_origin_with_source_spelling",
+      "independent_manual_review": "The Current Coffee label and following direct from Colombia sentence support the present lot. Retain the literal source typo Hulia; do not silently change it to Huila to fit external geography.",
+      "source_quote_receipts": [
+        "Current Coffee: Colombia Hulia MWP Decaf",
+        "Bellevue is a single-origin mountain water decaf from Colombia"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d/page.html",
+          "sha256": "b20571811ccda8cbb70fe539abaf1808d3da34e5e013f9b95b049c8c05e64f69"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/www-lilrhodycoffee-com__bellevue-decaf-blend-51eeb23d/product-endpoint.html",
+          "sha256": "0513bda98fbfa6983b6f4b45e58522ebd9c51b170a4340bc9905ca8bbe50878a"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Current Coffee: Colombia Hulia MWP Decaf"
+        }
+      ]
+    },
+    {
+      "case_id": "south17roasters-com__dark-raine-4408701d",
+      "source_url": "https://south17roasters.com/products/dark-raine",
+      "frozen_expected": "Sumatra Mandheling",
+      "candidate4_fields": {
+        "name": "Dark Raine",
+        "roaster": "South 17 Roasters",
+        "roast_level": "Dark",
+        "tasting_notes": "chocolate and hints of sweet tobacco",
+        "process": "Other/Unknown"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_origin_grammar_gap",
+      "independent_manual_review": "The selected product explicitly says single origin Sumatra Mandheling; stop before wet hulled process coffee. No inferred Indonesia is necessary.",
+      "source_quote_receipts": [
+        "Our Dark Raine is a single origin Sumatra Mandheling wet hulled process coffee."
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/south17roasters-com__dark-raine-4408701d/page.html",
+          "sha256": "6ac6929bb07f78851af2b86f1e150baea5261e86d248ca074efe2c3a465d6d3a"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/south17roasters-com__dark-raine-4408701d/product-endpoint.html",
+          "sha256": "037e3c4c87f6e478e27ed6b46fa2e6a2fc61b0cdf99a21fbb72f4a81900de5c3"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "single origin Sumatra Mandheling"
+        }
+      ]
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__fireworks-b1eaf3a1",
+      "source_url": "https://craftsmancliffroasters.com/products/fireworks",
+      "frozen_expected": "Brazil",
+      "candidate4_fields": {
+        "name": "Fireworks",
+        "roaster": "Craftsman Cliff Roasters",
+        "roast_level": "Dark",
+        "tasting_notes": "toasted almonds and sweet berry jam"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_origin_grammar_gap",
+      "independent_manual_review": "Two current-product sentences directly connect the single-origin roast to Brazil. Processing and roast adjectives between origin and country should not defeat this bounded phrase.",
+      "source_quote_receipts": [
+        "single-origin dark roast from Brazil",
+        "Micro-Batch Craft-Roasted Single-Origin from Brazil"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/craftsmancliffroasters-com__fireworks-b1eaf3a1/page.html",
+          "sha256": "5b4582fff36bc58f021dad5484be680d7dee27cbc00dd4c74fd308732ec374b5"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/craftsmancliffroasters-com__fireworks-b1eaf3a1/product-endpoint.html",
+          "sha256": "6848319437cde0b43fec76b1d7d5b1da50f0c0eb4aca68306253436fb8fbd34d"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "single-origin dark roast from Brazil"
+        }
+      ]
+    },
+    {
+      "case_id": "craftsmancliffroasters-com__mama-74e240f8",
+      "source_url": "https://craftsmancliffroasters.com/products/mama",
+      "frozen_expected": "Uganda",
+      "candidate4_fields": {
+        "name": "Mama",
+        "roaster": "Craftsman Cliff Roasters",
+        "roast_level": "Dark",
+        "tasting_notes": "earthy, cocoa, and umami"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_origin_grammar_gap",
+      "independent_manual_review": "The current product explicitly says Single-Origin from Uganda and a dark roast from the heart of Uganda; selected product tag Uganda corroborates but is not needed.",
+      "source_quote_receipts": [
+        "Single-Origin from Uganda",
+        "A dark roast straight from the heart of Uganda"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/craftsmancliffroasters-com__mama-74e240f8/page.html",
+          "sha256": "cc229a5dd8f2413734ad4cc5037951d00ba3070df374b54c81a4e8a1ff687f44"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/craftsmancliffroasters-com__mama-74e240f8/product-endpoint.html",
+          "sha256": "fc98c748aba94b126e8988a6e4c3454ea4e2554cb3e7841ffa4e79d8052ab7e6"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Single-Origin from Uganda"
+        }
+      ]
+    },
+    {
+      "case_id": "www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb",
+      "source_url": "https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume",
+      "frozen_expected": "Cayambe-Coca Natural Reserve,Ecuador",
+      "candidate4_fields": {
+        "name": "La Josefina Sudán Rumé / Natural Extended Fermentation",
+        "roaster": "Great Circle Coffee",
+        "producer": "Leopoldo Andrade / Ligia Merizalde",
+        "variety": "Sudán Rumé",
+        "elevation_m": "1,700 - 1,800 m",
+        "tasting_notes": "natural wine, rich cacao, and cherry cordial",
+        "roast_level": "Light"
+      },
+      "candidate4_conflicts": [
+        "origin",
+        "process"
+      ],
+      "review_class": "source_spelling_and_spatial_qualifier_conflict",
+      "independent_manual_review": "Page Region Cayambe-Coca Natura Reserve differs literally from Location Cayambe-Coca Natural Reserve, Ecuador. Narrative says the estate sits near the reserve; preserve that qualifier. Do not silently correct Natura or turn near into in to produce frozen exact expected text.",
+      "source_quote_receipts": [
+        "RegionCayambe-Coca Natura Reserve",
+        "Location: Cayambe-Coca Natural Reserve, Ecuador",
+        "La Josefina Estate sits near Ecuador’s Cayambe-Coca Natural Reserve"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb/page.html",
+          "sha256": "f17681f7093775304bac159ac60ad5cb769b21d0ce0dd2749606ded0dd940965"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/www-greatcirclecoffee-com__la-josefina-sudan-rume-230736cb/product-endpoint.html",
+          "sha256": "fc5a5c9649f5a66cfd5e95ca14e72b8f9d903e8cabda749bfc67aad79fc804e3"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Location: Cayambe-Coca Natural Reserve, Ecuador"
+        }
+      ]
+    },
+    {
+      "case_id": "highpointroasters-com__campfire-blend-e9a988ad",
+      "source_url": "https://highpointroasters.com/product/campfire-blend",
+      "frozen_expected": "Africa; Central America",
+      "candidate4_fields": {
+        "name": "Campfire Blend",
+        "roast_level": "Dark",
+        "roaster": "High Point Coffee Roasters"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_blend_grammar_gap",
+      "independent_manual_review": "The selected blend description directly assigns African and Central American coffees. These broad regions can be preserved without naming any country.",
+      "source_quote_receipts": [
+        "blend of dark roasted African and Central American coffees"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/highpointroasters-com__campfire-blend-e9a988ad/page.html",
+          "sha256": "a58e8c718b9642f7b8eff179b399300844b2b4cfe3c1ddb6877533bb2173fc96"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/highpointroasters-com__campfire-blend-e9a988ad/product-endpoint.json",
+          "sha256": "52531c0a78844bd671d90d874b80e5df38d3918f1a046eb363ef5ada68179ddc"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "African and Central American coffees"
+        }
+      ]
+    },
+    {
+      "case_id": "vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2",
+      "source_url": "https://vestacoffee.com/products/papayo-wushwush-elias-shady-bayter",
+      "frozen_expected": "Fresno, Tolima, Colombia",
+      "candidate4_fields": {
+        "name": "Wush Wush + Papayo, Anaerobic Natural - Elías & Shady Bayter",
+        "roaster": "VESTA Coffee Roasters",
+        "tasting_notes": "Tangerine, Tropical Fruit, Molasses",
+        "variety": "Papayo + Wush Wush",
+        "elevation_m": "1500 MASL",
+        "process": "Anaerobic"
+      },
+      "candidate4_conflicts": [
+        "origin"
+      ],
+      "review_class": "complementary_labeled_geography_gap",
+      "independent_manual_review": "The same current-product block says Origin Colombia, Tolima and Region Fresno. These are complementary labeled components without an observed contradiction; combine literal values only, retaining source provenance.",
+      "source_quote_receipts": [
+        "Origin: Colombia, Tolima",
+        "Region: Fresno"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2/page.html",
+          "sha256": "f5c476bf272b1ed1094e745744e1d67d3213f8deac3bde4ae1282b5dc3fe4345"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/vestacoffee-com__papayo-wushwush-elias-shady-bayter-b9b99ac2/product-endpoint.html",
+          "sha256": "87422028078632d3209d77c64bc89d1acdbd3e28b3caf55994d8fdb3dd92707b"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Origin: Colombia, Tolima"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Region: Fresno"
+        }
+      ]
+    },
+    {
+      "case_id": "www-congregationcoffee-com__gallop-c3eaf093",
+      "source_url": "https://www.congregationcoffee.com/products/gallop",
+      "frozen_expected": "Colombia, Guatemala",
+      "candidate4_fields": {
+        "name": "Gallop",
+        "roaster": "Congregation Coffee",
+        "tasting_notes": "Red Apple, S'mores, Black Cherry"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_blend_label_gap",
+      "independent_manual_review": "Visible selected HTML immediately after the current description says Blend: Colombia , Guatemala. The description explains seasonal changes but the current labeled values remain current and should not be replaced by stale assumptions.",
+      "source_quote_receipts": [
+        "Blend: Colombia , Guatemala"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/www-congregationcoffee-com__gallop-c3eaf093/page.html",
+          "sha256": "1b83cba969f80e1aa364ceb33407c9360dc4a6393dd372dc0a0079ce42c49a0e"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/www-congregationcoffee-com__gallop-c3eaf093/product-endpoint.html",
+          "sha256": "17941fb2f2a58f0f9de10e8efe7415959a0bef29d003e840a4d04db0e27decc8"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "page",
+          "quote": "Colombia"
+        },
+        {
+          "capture_id": "page",
+          "quote": "Guatemala"
+        }
+      ]
+    },
+    {
+      "case_id": "simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe",
+      "source_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee",
+      "frozen_expected": "Oaxaca",
+      "candidate4_fields": {
+        "name": "Simpatico Organic Low Acid Half-Caff Coffee",
+        "roaster": "Simpatico Coffee",
+        "tasting_notes": "clean, nutty/cocoa"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "unlabeled_product_tag_role_ambiguity",
+      "independent_manual_review": "Oaxaca appears in the selected product tag list and visible tag links. It is available source data, but no explicit origin-role clause is present in current description. Related nav product names must not establish this product’s origin; retain tags for review.",
+      "source_quote_receipts": [
+        "Oaxaca"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe/page.html",
+          "sha256": "7a9bff1cdf0783c46e58c49a1728152e12b16517b441ac0d121d4228d8e61ae8"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/simpaticocoffee-com__organic-low-acid-half-caff-coffee-4b6390fe/product-endpoint.html",
+          "sha256": "e0e2140c57e6d00daef2594f4c4bce1a1707ba3fdfd4c37f289cab47fdee41ee"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Oaxaca",
+          "locator": "/tags/3"
+        }
+      ]
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29",
+      "source_url": "https://simpaticocoffee.com/products/simpatico-low-acid-decaf-coffee-dark-smooth-roast",
+      "frozen_expected": "Oaxaca",
+      "candidate4_fields": {
+        "name": "Simpatico Low Acid Decaf: Dark Smooth Roast",
+        "roaster": "Simpatico Coffee",
+        "roast_level": "Dark",
+        "tasting_notes": "dark fruit"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "unlabeled_product_tag_role_ambiguity",
+      "independent_manual_review": "Oaxaca appears in the selected product tag list and visible tag links. Decaf processing text supplies no growing-region role. Preserve the literal tag without importing country names or origins from linked caffeinated products.",
+      "source_quote_receipts": [
+        "Oaxaca"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29/page.html",
+          "sha256": "7f212134a984c01e375a9fb1044682ecbdd6c442bffe7d829af2ee6fb487025d"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/simpaticocoffee-com__simpatico-low-acid-decaf-coffee-dark-smooth-roast-186b3c29/product-endpoint.html",
+          "sha256": "81ccfa64f77d883a21137d34493543b1a50884c04c20506007c5b9f5303c7f70"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Oaxaca",
+          "locator": "/tags/3"
+        }
+      ]
+    },
+    {
+      "case_id": "simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8",
+      "source_url": "https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast",
+      "frozen_expected": "Oaxaca, Mexico",
+      "candidate4_fields": {
+        "name": "Simpatico Organic Low Acid: Medium Smooth Roast",
+        "roaster": "Simpatico Coffee",
+        "roast_level": "Medium",
+        "tasting_notes": "clean, nutty"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "tag_and_metadata_role_caution",
+      "independent_manual_review": "Oaxaca is a selected product tag, while flavorful Mexican organic coffee appears only in current meta description/og:description. Preserve both source roles; visible description omits Mexican, and navigation has related Oaxacan/Mexican products that must not be used as this product’s evidence.",
+      "source_quote_receipts": [
+        "Oaxaca",
+        "flavorful Mexican organic coffee"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8/page.html",
+          "sha256": "e6e7df1b288307ab26183512473ec40b8b96ba8275889ba1971ebb02571cd7ff"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/simpaticocoffee-com__simpatico-low-acid-coffee-medium-smooth-roast-cd52ebf8/product-endpoint.html",
+          "sha256": "0fd63aad343273004e5831f92cf508f8f3812449b9dc7dcca4985f4cdf8d6d82"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "Oaxaca",
+          "locator": "/tags/2"
+        },
+        {
+          "capture_id": "page",
+          "quote": "flavorful Mexican organic coffee"
+        }
+      ]
+    },
+    {
+      "case_id": "www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0",
+      "source_url": "https://www.ixxacoffee.com/products/organic-ki-saya-tenejapa-microlot",
+      "frozen_expected": "Tenejapa, Chiapas",
+      "candidate4_fields": {
+        "name": "Organic Ki-Saya - Tenejapa Microlot",
+        "roaster": "IXXA COFFEE",
+        "tasting_notes": "Chocolate, creamy caramel, honey, hazelnut"
+      },
+      "candidate4_conflicts": [],
+      "review_class": "safe_current_lot_origin_grammar_gap",
+      "independent_manual_review": "The description names the current product as an organic gem from Chiapas, then says This lot hails from Tenejapa. Both are literal current-lot links. Do not invent Mexico unless independently published on this selected source.",
+      "source_quote_receipts": [
+        "our organic gem from Chiapas",
+        "This lot hails from Tenejapa"
+      ],
+      "original_sources_rehashed": [
+        {
+          "capture_id": "page",
+          "file": "cases/www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0/page.html",
+          "sha256": "1926c09fa88c396f54e2012c62bd1f986ec9721fc49cbc87404efb34fc05f667"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "file": "cases/www-ixxacoffee-com__organic-ki-saya-tenejapa-microlot-08ab53f0/product-endpoint.html",
+          "sha256": "c5d2493f737d80fe8900c40ffee8c50cedf433f0bfe1e812ff6a8bddd0cf37db"
+        }
+      ],
+      "frozen_evidence_unchanged": [
+        {
+          "capture_id": "product-endpoint",
+          "quote": "our organic gem from Chiapas"
+        },
+        {
+          "capture_id": "product-endpoint",
+          "quote": "This lot hails from Tenejapa"
+        }
+      ]
+    }
+  ]
+}

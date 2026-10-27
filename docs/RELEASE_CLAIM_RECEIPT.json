@@ -1,64 +1,270 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261024-READY-QUEUE-06",
-  "tested_source_sha": "28f908dc9828a45558bd56b532fed17022cef3d8",
-  "previous_release_head_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
-  "claimed_at_utc": "2026-10-24T03:06:35.740Z",
+  "release_id": "DIC-20261027-READY-QUEUE-07",
+  "tested_source_sha": "ca7ab46e1e8c76ce117ffc88470d107aa5903729",
+  "previous_release_head_sha": "65ee38609db6bd5977dd0f2b393e7791a5e1b766",
+  "claimed_at_utc": "2026-10-27T19:31:28.964Z",
   "status": "GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-33-product-completeness",
+      "id": "DIC-Q-33-reading-notes-versus-brewing-flavors",
       "issue": 33,
-      "title": "Recover complete selected-coffee details across semantic layouts and public product sources",
-      "merged_source_sha": "126304178bf255894af44633587052c7ef3b56d5",
+      "title": "Recover exact selected-product tasting profile separately from brewing flavor taxonomy",
+      "merged_source_sha": "c156297f26d30eb7efce70010eef420c4e5ef4b4",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-selected-title-roast",
+      "issue": 33,
+      "title": "Recover literal medium roast from the sole selected-coffee current product title",
+      "merged_source_sha": "f9ab5a4873b709fb0cf802e925333ac94a7382ef",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-gnosis-selected-bag-region",
+      "issue": 33,
+      "title": "Source-backed current Gnosis bag-photo locality recover without inferred origin",
+      "merged_source_sha": "e634d3a207d1708d645eafc39f318110b67bc86a",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-selected-roast-badge",
+      "issue": 33,
+      "title": "Exact selected product country / roast badge extraction",
+      "merged_source_sha": "dee154ef9763942db5fea622c3481cf514a7b259",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-literal-tasting-and-origin",
+      "issue": 33,
+      "title": "Recover explicit coffee tasting-note profiles and literal country-first locality",
+      "merged_source_sha": "318ae408a27f0fc49b0dced9b19d992dca1fe0c3",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-fact-compatibility.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-selected-spec-geography",
+      "issue": 33,
+      "title": "Exact selected-coffee origin from split published specification",
+      "merged_source_sha": "f5157b738092805caac0af3db15553829ff77e42",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-manuscript-selected-product-roast",
+      "issue": 33,
+      "title": "Recover literal Medium roast adjacent to selected Manuscript Coffee product H1",
+      "merged_source_sha": "b73599acd17160650f83a125aebfcad54f0d9b76",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-12-community-prior-hierarchy",
+      "issue": 12,
+      "title": "Contributor-balanced exact/related/similar Community starting priors for recipe recommendation (#10 dependency)",
+      "merged_source_sha": "3529a9b628bedf3f294f6509f4628c9660914131",
+      "scope_paths": [
+        "supabase/migrations/20261024041100_dic_community_recommendation_evidence.sql",
+        "site/lib/community-evidence.js",
+        "site/lib/engine.js",
+        "site/cloud/client.js",
+        "site/cloud/main.js",
+        "build_cloud.mjs",
+        "supabase/migrations/20261024041800_dic_recommendation_use_provenance.sql",
+        "site/cloud/mapping.js",
+        "site/cloud/shot_card.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-expanded-603-audit",
+      "issue": 33,
+      "title": "Expanded 603-coffee / 201-U.S.-roaster deterministic extractor and evidence audit",
+      "merged_source_sha": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
       "scope_paths": [
         "netlify/functions/coffee-url-preview.mjs",
+        "site/cloud/client.js",
         "site/cloud/coffee-url-autofill.js",
+        "site/cloud/main.js",
+        "site/cloud/outbox.js",
+        "src/server/coffee-blend-evidence.mjs",
+        "src/server/coffee-elevation-evidence.mjs",
         "src/server/coffee-espresso-evidence.mjs",
         "src/server/coffee-fact-compatibility.mjs",
         "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-geography-entity-roles.mjs",
         "src/server/coffee-html-structure.mjs",
+        "src/server/coffee-identity-evidence.mjs",
         "src/server/coffee-narrative-evidence.mjs",
         "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-product-identity.mjs",
         "src/server/coffee-product-layouts.mjs",
+        "src/server/coffee-product-prose.mjs",
         "src/server/coffee-product-scope.mjs",
         "src/server/coffee-semantic-specs.mjs",
         "src/server/coffee-shopify-ajax.mjs",
-        "src/server/coffee-woocommerce-store.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-100-admin-review-delete",
-      "issue": 100,
-      "title": "Side-by-side Admin coffee review and protected coffee/shot/submission deletion",
-      "merged_source_sha": "7150a72e15e661867b909fa31ee7f7443455deab",
-      "scope_paths": [
-        "site/admin/view.js",
-        "site/admin/main.js",
-        "site/admin/styles.css",
-        "site/admin/records.js",
-        "supabase/migrations/20261023225600_dic_admin_safe_delete.sql"
-      ]
-    },
-    {
-      "id": "DIC-Q-10-recipe-favorite-correction",
-      "issue": 10,
-      "title": "Preserve an explicitly chosen recipe through successful shot corrections",
-      "merged_source_sha": "8542286bb52a600a5c1c7ee962b5ad45ff3cd2aa",
-      "scope_paths": [
-        "site/lib/engine.js",
-        "supabase/migrations/20261024021000_dic_personal_family_lifecycle_integrity.sql"
-      ]
-    },
-    {
-      "id": "DIC-Q-5-source-fact-integrity",
-      "issue": 5,
-      "title": "Trusted source rejects conflicting origin/producer metadata",
-      "merged_source_sha": "a034fb727f7fa7a0fbbfd74bbbca40d2fce9a651",
-      "scope_paths": [
+        "src/server/coffee-source-facts.mjs",
+        "src/server/coffee-source-identity-scope.mjs",
+        "src/server/coffee-url-guard.mjs",
+        "src/server/coffee-woocommerce-store.mjs",
+        "src/server/roast-level-evidence.mjs",
+        "supabase/functions/_shared/coffee-release-label.mjs",
         "supabase/functions/dic-verify-coffee/evidence.mjs",
-        "supabase/migrations/20261024020500_dic_source_target_producer.sql"
+        "package.json",
+        "src/server/coffee-processing-evidence.mjs",
+        "src/server/coffee-supplementary-source-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-5-deployed-sql-source-carryover",
+      "issue": 5,
+      "title": "Already-applied Issue #5 SQL source inclusion; STRICTLY NO REPLAY",
+      "merged_source_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
+      "scope_paths": [
+        "supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-26-shot-rating-focus",
+      "issue": 26,
+      "title": "Log Shot accessible rating focus, validation focus, and truthful offline indicator",
+      "merged_source_sha": "9b8e20dd3cc6c95481e7962a37ab30fbb69c5ebe",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-single-selected-shopify-roast-tag",
+      "issue": 33,
+      "title": "Recover two selected Shopify coffee roast levels from sole exact-product tags",
+      "merged_source_sha": "74f85b54c2e88529f0eb31d918dc9f072f957b1e",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-14-retired-custom-style",
+      "issue": 14,
+      "title": "Retire Custom as selectable shot style; preserve offline and historical records",
+      "merged_source_sha": "e5477a3c17c813d5fd6f091c6d42054fd4d1c5a0",
+      "scope_paths": [
+        "site/lib/constants.js",
+        "site/lib/model.js",
+        "site/lib/engine.js",
+        "site/cloud/main.js",
+        "site/cloud/mapping.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-selected-product-release-literals",
+      "issue": 33,
+      "title": "Recover six literal selected-product release labels in the frozen 603-coffee benchmark",
+      "merged_source_sha": "b8ec73427b896723e5b4aec78a94602c2b37f3ea",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-whole-shopify-roast-taxonomy",
+      "issue": 33,
+      "title": "Resolve selected Shopify Medium Light Roast taxonomy without false product conflict",
+      "merged_source_sha": "d5ded1f290e910698a2fb7888d523cabf07589dc",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-13-retire-experiments",
+      "issue": 13,
+      "title": "Retire Experiment workflow and stage guarded unused SQL cleanup",
+      "merged_source_sha": "aac4db631510e746053a5a6d5b67a189ac9f7ad0",
+      "scope_paths": [
+        "site/lib/constants.js",
+        "site/lib/engine.js",
+        "site/lib/model.js",
+        "site/cloud/mapping.js",
+        "site/cloud/import-preview.js",
+        "supabase/migrations/20261026213000_dic_retire_experiments.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-15-retired-bag-management",
+      "issue": 15,
+      "title": "Retire unused bag tracking UI/model without altering historical shot data",
+      "merged_source_sha": "71017050a8d43b8fda418f08befe4535478e43c2",
+      "scope_paths": [
+        "site/lib/model.js",
+        "site/lib/engine.js",
+        "site/cloud/mapping.js",
+        "site/cloud/main.js",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/import-preview.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-161-cloud-reconciliation",
+      "issue": 161,
+      "title": "Indexed cloud workspace hydration and bounded account-safe Community evidence refresh",
+      "merged_source_sha": "8bd32e5fef37384c2a0bdac5ec5a370964e98c0b",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/mapping.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-independent-candidate21",
+      "issue": 33,
+      "title": "Original 21 source recoveries plus owner-approved explicit Notes, unitless MASL and manual conflict preview",
+      "merged_source_sha": "0a5d655c54235f90c3c007522200916a990e60ff",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/coffee-selected-source-evidence.mjs",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/main.js",
+        "site/visual.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-161-synthetic-session-safety",
+      "issue": 161,
+      "title": "Account-session-safe cloud synchronization plus synthetic fuzz, concurrency and 600-coffee load regression",
+      "merged_source_sha": "aef221fe8d8d974fcb8729eb713590a1fdcb27f7",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/outbox.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-source-conflict-provenance-links",
+      "issue": 33,
+      "title": "Safe original-source links, provenance and credential-free conflict review exports",
+      "merged_source_sha": "cba61c26ca8a44223d0929724b2d7d1eeeb6e59f",
+      "scope_paths": [
+        "site/cloud/coffee-url-autofill.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-161-epoch-bound-sync-notifications",
+      "issue": 161,
+      "title": "Epoch-bound sync notices and stale coffee expansion after account switching",
+      "merged_source_sha": "6a861f0b8fc331239df0a2f1fee6655529c707cf",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/outbox.js"
       ]
     }
   ]

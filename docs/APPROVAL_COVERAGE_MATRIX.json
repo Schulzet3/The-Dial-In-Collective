@@ -2,10 +2,11 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-10-23",
+  "reconciled_at_utc": "2026-10-26",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
+    "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023",
     "current_owner_admin_low_friction_review_20261021",
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
     "current_owner_admin_records_edit_20261021",
@@ -112,7 +113,7 @@
         },
         {
           "path": "site/cloud/main.js",
-          "contains": "C.STYLES.filter(style=>style!=='Custom')"
+          "contains": "C.STYLES,suggestion.style"
         },
         {
           "path": "supabase/migrations/20261022090000_dic_fast_flow_hybrid_style.sql",
@@ -272,7 +273,7 @@
     {
       "id": "internal_single_visible_recipe",
       "decision_key": "current_owner_one_visible_recipe_internal_families_20261020",
-      "scope": "One visible family is published; full candidate/confirmed/retired lifecycle and experiment transport remain #10/#13",
+      "scope": "One best-matching recipe is visible; distinct personally successful families and explicit Make Current remain. Former Experiment transport/lifecycle is owner-retired under Issue #13.",
       "implementation": "published_source",
       "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
       "issue": 10,
@@ -599,6 +600,239 @@
           "contains": "server-authoritative impact"
         }
       ]
+    },
+    {
+      "id": "coffee_expanded_603_source_audit",
+      "decision_key": "current_owner_extractor_deterministic_only_20261019",
+      "scope": "Owner-expanded no-key/no-additional-cost 603-coffee source audit; deterministic layout/scoping/identity/field repairs, evidence preservation/export, exact acknowledgement correction handoff, and separate local OCR review.",
+      "implementation": "CANDIDATE12_READY_NOT_DEPLOYED. Reviewed run 40074270907 at source 3dc7fe4daab46b888368cdd8de4d59886fe5fb4f completed PASS_WITH_REVIEWED_CHANGES: 603 usable previews across 201 roasters and 1,197 original captures; 3,046 exact / 132 missing / 824 review-required across 4,002 unchanged canonical assertions; 5,458 full / 337 partial / 679 unconfirmed supplementary assertions; zero prior exact or full-retention losses; all 603 current client snapshot/download and offline checks passed. All 42 changed cases are covered by the exact review (41 source-supported changes and one nonsemantic order-only case). All 41 old-versus-new export byte differences are explicitly reviewed. PR121 merged non-force at 010f77a83ca1efbf447db6b838ef0f826aaf2f1a with parents a42bc757a3aedf02fcb213a4d8a7da807a68fa8c and 3dc7fe4daab46b888368cdd8de4d59886fe5fb4f. Its tree 9a00b4fa54f87f66a649a17db516bc049f326821 exactly matches the reviewed head. Runtime ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451 is unchanged. All five applicable merged-source workflows passed on 010f77a83ca1efbf447db6b838ef0f826aaf2f1a: app/Node/lint/build 40074669136; cloud/mobile 40074669168; approval/continuity 40074669164; fresh ten-target public-source acceptance 40074669139; Python 40074669171. Actual counts: 1,569 Node passes / zero failures / six explicit production-configuration skips (1,575 total), 1,201 cloud passes, 61 synthetic mobile checks plus admin flows, Python 44+23 offline/OCR. Live acceptance passed nine product cases and the required homepage negative with 19 public requests, zero gaps and zero backend/member operations. The separate controlled broader-roaster probe 40074669165 was SKIPPED, not passed. Complete receipts: docs/audits/extractor-candidate12-frozen-reviewed-run-40074270907.json; docs/audits/extractor-candidate12-merged-ci-010f77a8.json; docs/audits/extractor-candidate12-ordinary-ci-3dc7fe4d.json. Exact C11 evidence remains under candidate12_followup.c11_covered_implementation. The frozen answers, captures and scorers are unchanged. Missing and review-required results remain visible; no universal extraction-accuracy claim is made. The 22-case release-label review introduces no release policy or expected-value change, and three context-limited rows retain uncertainty.",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; isolated automated mobile/browser and local OCR evidence is recorded separately; no physical-device acceptance claimed.",
+      "issue": 33,
+      "assertions": [
+        {
+          "path": "src/server/coffee-source-facts.mjs",
+          "contains": "MAX_SOURCE_FACT_CHARACTERS=192_000"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "coffeeSourceReviewSnapshot"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "reviewAddedCoffeeDetails"
+        },
+        {
+          "path": "site/cloud/outbox.js",
+          "contains": "readReceipt(owner,id)"
+        },
+        {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "contains": "source_url_fetched"
+        },
+        {
+          "path": "docs/workstreams/issue-33.md",
+          "contains": "4,002 canonical assertions"
+        }
+      ],
+      "candidate12_followup": {
+        "state": "READY",
+        "branch": "work/issue33-candidate12-full-audit-20261024",
+        "source_sha": "010f77a83ca1efbf447db6b838ef0f826aaf2f1a",
+        "scope": "Extra source-only identity/geography/producer/roast/release/tasting repairs; existing user confirmation, source privacy and actual client/save/offline code unchanged.",
+        "c11_covered_implementation": "CANDIDATE11_READY_NOT_DEPLOYED. PR116 non-force merged at 5da3eba. Exact PR head Node 1412 pass/0 fail/6 skips; cloud 1044 pass; Python/OCR, lint/build, mobile/browser/visual, security, isolated SQL/approval green. Original frozen603 run 40066959055 passed 603/603, unchanged scorer/oracle and zero prior losses; exact extractor runtime unchanged since that proof. Current merged and live acceptance pass: run 40069154699, ten targets, zero gaps including NOMAD/Circulor parity. Later private-input attempt 40068786714 stopped before cases, not a replay. C9 source-backed origin/producer residuals remain open and unintegrated; not called fixed. No Netlify publication or member/database changes, no paid service.",
+        "c12_candidate_implementation": "Reviewed run 40074270907 at source 3dc7fe4daab46b888368cdd8de4d59886fe5fb4f completed PASS_WITH_REVIEWED_CHANGES: 603 usable previews across 201 roasters and 1,197 original captures; 3,046 exact / 132 missing / 824 review-required across 4,002 unchanged canonical assertions; 5,458 full / 337 partial / 679 unconfirmed supplementary assertions; zero prior exact or full-retention losses; all 603 current client snapshot/download and offline checks passed. All 42 changed cases are covered by the exact review (41 source-supported changes and one nonsemantic order-only case). All 41 old-versus-new export byte differences are explicitly reviewed. PR121 merged non-force at 010f77a83ca1efbf447db6b838ef0f826aaf2f1a with parents a42bc757a3aedf02fcb213a4d8a7da807a68fa8c and 3dc7fe4daab46b888368cdd8de4d59886fe5fb4f. Its tree 9a00b4fa54f87f66a649a17db516bc049f326821 exactly matches the reviewed head. Runtime ac529dd5950b0fe63d904aed154dc901180013aacf65aae1adec9f890b0a2451 is unchanged. All five applicable merged-source workflows passed on 010f77a83ca1efbf447db6b838ef0f826aaf2f1a: app/Node/lint/build 40074669136; cloud/mobile 40074669168; approval/continuity 40074669164; fresh ten-target public-source acceptance 40074669139; Python 40074669171. Actual counts: 1,569 Node passes / zero failures / six explicit production-configuration skips (1,575 total), 1,201 cloud passes, 61 synthetic mobile checks plus admin flows, Python 44+23 offline/OCR. Live acceptance passed nine product cases and the required homepage negative with 19 public requests, zero gaps and zero backend/member operations. The separate controlled broader-roaster probe 40074669165 was SKIPPED, not passed. Source-bound receipts: docs/audits/extractor-candidate12-frozen-reviewed-run-40074270907.json (SHA-256 4e711444425fe4092151c946e2735acb4227c4c5ba4d9f0feba8ca3d289aaba1); docs/audits/extractor-candidate12-merged-ci-010f77a8.json. Concurrent future-publication instructions are preserved as recorded. This extractor audit does not consume or execute a release grant, publish/deploy, apply production SQL/Edge/Auth changes, mutate member data, provision a new API key or add a paid service. Other queue items and their existing states remain unchanged.",
+        "required_evidence": "Source-readiness evidence is complete: original 603/201 replay, independent 42-case source review, all 603 current exports/offline checks, nonwaivable zero-loss gates, exact-source CI, fresh live acceptance, non-force integration and exact merged-source checks. The merged tree is identical to reviewed source. Publication and provider release readback are separate unperformed operations; source READY does not claim deployment.",
+        "publication_authority": "Single new user instruction to publish all READY after PR121 READY, not permission to publish TESTING source."
+      }
+    },
+    {
+      "id": "retired_custom_style_owner_supersession_20261026",
+      "decision_key": "UX-RETIRE-CUSTOM-STYLE-20261026",
+      "scope": "Five active styles; no Custom creation; historical and pending offline recovery without relabeling",
+      "implementation": "source_READY_not_published",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; synthetic browser and no physical device claim",
+      "issue": 14,
+      "assertions": [
+        {
+          "path": "site/lib/constants.js",
+          "contains": "export const STYLES = ['Traditional', 'Turbo', 'Fast-Flow', 'Ristretto', 'Lungo'];"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Custom is retired. Your existing shots and notes are preserved."
+        },
+        {
+          "path": "site/lib/model.js",
+          "contains": "allowLegacyCustom=false"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "contains": "allowLegacyCustom:p.style==='Custom'"
+        },
+        {
+          "path": "tests/retired-custom-style.test.mjs",
+          "contains": "new Custom shots and new Custom coffee selection are rejected"
+        }
+      ]
+    },
+    {
+      "id": "retired_experiment_workflow_20261026",
+      "decision_key": "UX-RETIRE-EXPERIMENTS-20261026",
+      "scope": "No active Experiment lifecycle, preserve successful recipes and legacy backups; guarded unused SQL retirement",
+      "implementation": "source_READY_not_published",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; synthetic browser is scoped, physical-device testing optional and not claimed",
+      "issue": 13,
+      "assertions": [
+        {
+          "path": "site/lib/engine.js",
+          "absent": "export function startExperiment("
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "export function makeCurrent(s,shotId)"
+        },
+        {
+          "path": "site/lib/model.js",
+          "absent": "basketId:null,experiments:{}"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "absent": "experimentId:sh.experiment_id"
+        },
+        {
+          "path": "site/cloud/import-preview.js",
+          "contains": "Retired Experiment records cannot be imported without loss"
+        },
+        {
+          "path": "supabase/migrations/20261026213000_dic_retire_experiments.sql",
+          "contains": "drop table public.experiments restrict;"
+        },
+        {
+          "path": "tests/retired-experiment-workflow.test.mjs",
+          "contains": "green changed shot is stored"
+        },
+        {
+          "path": "supabase/tests/retired_experiments.sql",
+          "contains": "Retired Experiment table remains present"
+        }
+      ]
+    },
+    {
+      "id": "retired_bag_management_20261026",
+      "decision_key": "UX-RETIRE-BAG-MANAGEMENT-20261026",
+      "issue": 15,
+      "scope": "Remove active Bag Management, synthetic local bag creation and auto association while preserving legacy shot bag IDs, owner-bound database FK, offline payload and archival import",
+      "implementation": "source_READY_not_published",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no new real-device test required or claimed; synthetic browser evidence is scoped separately",
+      "assertions": [
+        {
+          "path": "site/lib/model.js",
+          "contains": "bags:[],...pickCoffee(data)"
+        },
+        {
+          "path": "site/lib/model.js",
+          "absent": "c.activeBagId=c.bags[0].id"
+        },
+        {
+          "path": "site/lib/engine.js",
+          "absent": "bagId:c.activeBagId"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "contains": "bagId:sh.bag_id"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "field('Coffee Name','name'"
+        },
+        {
+          "path": "site/cloud/import-preview.js",
+          "contains": "A historical shot references a missing legacy bag"
+        },
+        {
+          "path": "tests/retired-bag-management.test.mjs",
+          "contains": "old backups preserve archived bag facts and shot references exactly"
+        },
+        {
+          "path": "supabase/tests/retired_bag_history.sql",
+          "contains": "Owner/coffee-bound historic bag FK was weakened"
+        }
+      ]
+    },
+    {
+      "id": "retired_basket_equipment_version_management_20261026",
+      "decision_key": "UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026",
+      "issue": 16,
+      "scope": "No member basket/equipment-version manager; preserve internal snapshots, ordinary dose, warnings, offline and learning.",
+      "implementation": "SOURCE_ONLY_RETIREMENT_NO_NEW_UI_OR_PRODUCTION_CHANGE",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no physical-device or live-provider test claimed",
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "field('Basket Dose (g)','basket_dose_g'"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "'archive-basket'"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "'restore-version'"
+        },
+        {
+          "path": "site/cloud/dose-advisory.js",
+          "contains": "Math.abs(actual-reference)<=2"
+        },
+        {
+          "path": "site/cloud/mapping.js",
+          "contains": "setupVersionId:sh.setup_version_id"
+        },
+        {
+          "path": "supabase/migrations/20261012015600_dic_shots_recipes_community.sql",
+          "contains": "Historical shot provenance is immutable"
+        },
+        {
+          "path": "tests/retired-basket-version-management.test.mjs",
+          "contains": "no member-facing basket or equipment-version controls"
+        }
+      ]
+    },
+    {
+      "id": "extractor_notes_masl_member_conflict_review_20261026",
+      "decision_key": "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026",
+      "scope": "New Coffee URL import only. Direct selected-product labeled notes override incidental prose; unitless explicit elevation is meters, and competing selected public source facts remain unselected with visible manual entry.",
+      "implementation": "SOURCE_TESTED_NOT_DEPLOYED; original 603 unchanged oracle+supplementary and isolated UI/browser tested",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; synthetic Chromium 390 light and 1280 dark passed 33 assertions using original source captures and simulated auth/quota; genuine-member, physical device and live production remain unverified.",
+      "assertions": [
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "contains": "const printedNotes=[];"
+        },
+        {
+          "path": "src/server/coffee-shopify-ajax.mjs",
+          "contains": "const conflict_options={};"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "export function coffeeConflictReviewOptions(result)"
+        },
+        {
+          "path": "site/cloud/coffee-url-autofill.js",
+          "contains": "export function elevationWithDefaultMeters(value)"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "input.classList?.add('coffee-needs-review');"
+        },
+        {
+          "path": "tests/coffee-owner-elevation-notes-conflict-review.test.mjs",
+          "contains": "Woods"
+        },
+        {
+          "path": "docs/audits/extractor-issue33-owner-rules-603-20261027.json",
+          "contains": "\"new_exact\": 3090"
+        }
+      ]
     }
   ],
   "active_gap_flags": [
@@ -796,5 +1030,49 @@
     "community_preservation": "BLOCK_COFFEE_WITH_QUALIFYING_COMMUNITY",
     "owner_release_authorization": "NOT_GIVEN",
     "merged_source_sha": "7150a72e15e661867b909fa31ee7f7443455deab"
+  },
+  "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023": {
+    "decision_id": "TEST-ACCEPTANCE-ISOLATED-JWT-ISSUES-5-10-20261023",
+    "status": "ACCEPTED_SCOPED_TEST_EVIDENCE_NOT_ISSUE_CLOSED",
+    "owner_quote": "Yes I formally accept these isolated, signed-JWT integration tests as a substitute for the real-member acceptance requirements in Issues #5 and #10.",
+    "issues": [
+      5,
+      10
+    ],
+    "accepted_only": "Synthetic authenticated HMAC signed PostgreSQL/PostgREST acceptance replaces real production member tests for exactly these two issues.",
+    "pr": 107,
+    "merge_sha": "d9607f9b505f26f66c607d431b82e19d5450473b",
+    "http_assertions_passed": 50,
+    "merged_source_ci": [
+      40059878206,
+      40059878199,
+      40059878227,
+      40059878239
+    ],
+    "real_production_session_tested": false,
+    "issue5_staged_fix_release": "READY_NOT_DEPLOYED",
+    "issue10_community_integration": "OUTSTANDING_ISSUE_12",
+    "issue13_independent": "OPEN",
+    "new_release_authorized": false,
+    "original_requirements_preserved_except_test_modality": true
+  },
+  "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Direct owner Issue33 October 26/27 instruction",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/visual.css"
+    ],
+    "tests": [
+      "tests/coffee-owner-elevation-notes-conflict-review.test.mjs",
+      "Original frozen603 unchanged canonical and supplementary comparators",
+      "Isolated real cloud preview adapter/handler/app mobile and desktop journey"
+    ],
+    "release_authorization": "NOT GRANTED: source-only; prepare READY upon full acceptance"
   }
 }

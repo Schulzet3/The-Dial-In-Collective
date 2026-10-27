@@ -1,0 +1,76 @@
+{
+  "release_id": "DIC-20261024-READY-QUEUE-06",
+  "owner_instruction": "Please publish all items in the deployment queue",
+  "tested_source_sha": "28f908dc9828a45558bd56b532fed17022cef3d8",
+  "release_git_sha": "65ee38609db6bd5977dd0f2b393e7791a5e1b766",
+  "netlify_deploy_id": "6adc20c03a07673c4dd08035",
+  "published_at_utc": "2026-10-24T03:06:58.402Z",
+  "controller_run_id": 40056944878,
+  "items": [
+    {
+      "id": "DIC-Q-33-product-completeness",
+      "issue": 33,
+      "pr": 99
+    },
+    {
+      "id": "DIC-Q-100-admin-review-delete",
+      "issue": 100,
+      "pr": 101
+    },
+    {
+      "id": "DIC-Q-10-recipe-favorite-correction",
+      "issue": 10,
+      "pr": 104
+    },
+    {
+      "id": "DIC-Q-5-source-fact-integrity",
+      "issue": 5,
+      "pr": 105
+    }
+  ],
+  "sql_migrations": [
+    {
+      "version": "20261024030533",
+      "name": "dic_admin_safe_delete"
+    },
+    {
+      "version": "20261024030536",
+      "name": "dic_source_target_producer"
+    },
+    {
+      "version": "20261024030539",
+      "name": "dic_personal_family_lifecycle_integrity"
+    }
+  ],
+  "supabase_edge": {
+    "slug": "dic-verify-coffee",
+    "version": 7,
+    "status": "ACTIVE",
+    "verify_jwt": true
+  },
+  "backup": {
+    "artifact_id": 12545035289,
+    "sha256": "686b3c78417ab34c8607708ac52b7c7f1b3dc042256c3a6d870e4f954ef928d7",
+    "offsite_drive_id": "13cgHYP1ofSUhvye4PdgvN_tQ6Hr1bFZh"
+  },
+  "data_readback": {
+    "shots": 23,
+    "notes": 23,
+    "coffees": 8,
+    "library_entries": 10,
+    "submissions": 9,
+    "community": 2,
+    "receipts": 52,
+    "users": 5
+  },
+  "netlify_result": {
+    "state": "ready",
+    "commit_match": true,
+    "secret_scan_matches": 0
+  },
+  "unverified": [
+    "real authenticated member/Admin production negative acceptance",
+    "direct HTTP tests blocked by runtime DNS",
+    "physical mobile device optional"
+  ]
+}
