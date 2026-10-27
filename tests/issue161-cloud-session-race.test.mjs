@@ -63,3 +63,18 @@ test('late failed RPC from previous same-member login cannot override the new lo
  assert.equal(app.syncState,'pending','stale offline callback must not overwrite new login');
  assert.equal(store.events.length,2,'both writes remain durable for retry');
 });
+test('late coffee expansion cannot claim the prior account coffee for a new member',async()=>{
+ const paused=deferred(),started=deferred(),claims=[];
+ const store={async claimFirstStylePrompt(owner,id){claims.push([owner,id]);return true;}};
+ const client={async claimFirstStylePrompt(){throw Error('Must never call server for previous owner');}};
+ const app=new CloudApp(client,store);app.identity={id:OWNER};app.status={admitted:true};app.render=()=>{};
+ app.state.coffees=[{id:'old-member-coffee'}];
+ app.loadRecommendationEvidence=async()=>{started.resolve();await paused.promise;};
+ const oldExpansion=app.expandCoffee('old-member-coffee');await started.promise;
+ app.resetAccount();
+ app.identity={id:'b1111111-1111-4111-8111-111111111111'};app.status={admitted:true};
+ app.state.coffees=[{id:'new-member-coffee'}];
+ paused.resolve();await oldExpansion;
+ assert.deepEqual(claims,[],'old expansion must not create foreign-coffee local claim');
+ assert.equal(app.firstStylePromptId,null);
+});

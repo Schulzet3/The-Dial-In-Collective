@@ -1,6 +1,6 @@
 ## October 27 UTC — Issue161 same-owner epoch-bound sync notifications follow-up (TESTING / NOT DEPLOYED)
 
-Targeted code review found a separate same-account session race: an old failed RPC could mark a newer login's sync indicator offline. Fix: include the login epoch in pending and completion notices, preserve all durable shot queues, and add a held-RPC regression. `DIC-Q-161-epoch-bound-sync-notifications` is TESTING pending exact-source CI and non-force merge. Earlier independent Issue161 and Issue33 READY entries remain untouched. No production operations.
+Targeted code review found a separate same-account session race: an old failed RPC could mark a newer login's sync indicator offline. Fix: include the login epoch in sync notices and guard late first-shot expansion against account switching; preserve durable shot queues. Added held-RPC and held-evidence account-switch regressions. `DIC-Q-161-epoch-bound-sync-notifications` is TESTING pending exact-source CI and non-force merge. Earlier independent Issue161 and Issue33 READY entries remain untouched. No production operations.
 
 ---
 
