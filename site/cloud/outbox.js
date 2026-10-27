@@ -18,7 +18,7 @@ function stoppedWithAccess(state,sent,notify,owner){
  const result={state,sent,accessDenied:true};notify({...result,owner});return result;
 }
 export class Outbox {
- constructor({store,remote,identity,uuid=()=>crypto.randomUUID(),now=()=>new Date().toISOString(),notify=()=>{}}){Object.assign(this,{store,remote,identity,uuid,now,notify});this.running=null;}
+ constructor({store,remote,identity,uuid=()=>crypto.randomUUID(),now=()=>new Date().toISOString(),notify=()=>{}}){Object.assign(this,{store,remote,identity,uuid,now,notify});this.runningBySession=new Map();}
  async enqueue(action,payload){
   if(!ACTIONS.has(action))throw new CloudError('Unsupported cloud action.','unsupported_action');
   const who=await this.identity();if(!who?.id)throw new CloudError('Sign in first.','signed_out');
@@ -26,13 +26,25 @@ export class Outbox {
   await this.store.put(event);this.notify({state:'pending',owner:who.id});return event;
  }
  async pending(){const who=await this.identity();return who?.id?(await this.store.list(who.id)):[];}
- async flush(){if(this.running)return this.running;this.running=this.run().finally(()=>this.running=null);return this.running;}
- async run(){
+ async flush(){
   const who=await this.identity();if(!who?.id)return {state:'signed_out'};
+  // A stalled prior member/session cannot hold the next signed-in member's
+  // durable queue. Session epoch also distinguishes a reauthenticated owner.
+  const key=JSON.stringify([who.id,who.sessionEpoch??null]);
+  if(this.runningBySession.has(key))return this.runningBySession.get(key);
+  const task=this.run(who).finally(()=>{
+   if(this.runningBySession.get(key)===task)this.runningBySession.delete(key);
+  });
+  this.runningBySession.set(key,task);return task;
+ }
+ async run(who){
+  const matches=async()=>{const active=await this.identity();return active?.id===who.id&&
+   (who.sessionEpoch==null||active?.sessionEpoch===who.sessionEpoch);};
+  if(!(await matches()))return {state:'account_changed',sent:0};
   let sent=0;const held=[];
   const stopped=state=>{const result={state,sent};this.notify({...result,owner:who.id});return result;};
   for(const event of await this.store.list(who.id)){
-   if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
+   if(!(await matches()))return {state:'account_changed',sent};
    if(['conflict','rejected'].includes(event.status)){
     if(isAccessDenied(event.error||event.result))return {state:event.status,sent,accessDenied:true,recheckAccess:true};
     held.push(event);
@@ -65,7 +77,7 @@ export class Outbox {
    // Lost responses always retain their original mutation ID for safe retries.
    await this.store.acknowledge(event,r);sent++;
   }
-  if((await this.identity())?.id!==who.id)return {state:'account_changed',sent};
+  if(!(await matches()))return {state:'account_changed',sent};
   const state=held.some(event=>event.status==='conflict'||event.result?.code==='conflict')?'conflict':held.length?'rejected':'synced';
   const result={state,sent,at:this.now()};this.notify({...result,owner:who.id});return result;
  }

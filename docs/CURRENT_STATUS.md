@@ -1,3 +1,9 @@
+## October 27, 2026 UTC — Issue161 reproducible synthetic account-switch race under repair (TESTING, not deployed)
+
+In the owner's additional fuzz/load/concurrency audit, a synthetic blocked prior-owner remote RPC exposed that the Outbox global single-flight plus cloud sync wait could stall a newly authenticated member's independent shot queue. New fix and source-bound tests are **TESTING**, not READY or deployed; new queue item `DIC-Q-161-synthetic-session-safety`. Historical source classification and preserved limitations are in [semantic-review report](audits/issue161-historical-semantic-review-20261027.md). Original 603 extractor, all prior READY work and production remain untouched. **Do not publish.**
+
+---
+
 ## October 27, 2026 UTC — Issue33 PR162 VERIFIED MERGED / scoped READY, not deployed
 
 **Owner authority and scope:** Owner authorized implementing and queuing the source-backed 21-field extractor and three Locked source/import rules for the **next** release, not publication. Feature PR162 at c9ec559fe24c79c02325f68188070116affea0e4 repaired three prior full Node CI failures (restored Elevation label; RETIRED_NOT_REQUIRED approval prefix) with source-bound receipt and same-commit journal. Feature integrated all concurrent Issue161 source-audit changes from development SHA17914619deb6246bd1681877706e93d0e5e6311c; Issue161 indexed workspace hydration/cloud refresh, status and all 18 earlier READY entries preserved.
