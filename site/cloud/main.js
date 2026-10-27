@@ -33,7 +33,11 @@ class CloudApp {
    this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
   this.lastHeavySyncAt=0;this.pollingStatus=null;this.pollingOwner=null;this.pollingEpoch=null;
-  this.queue=new Outbox({store,remote:client,identity:()=>this.identity?{...this.identity,sessionEpoch:this.epoch}:null,notify:r=>{if(r.owner===this.identity?.id)this.syncState=r.state;}});
+  this.queue=new Outbox({store,remote:client,identity:()=>this.identity?{...this.identity,sessionEpoch:this.epoch}:null,notify:r=>{
+    // A prior login's remote work may finish after the same member signs back in.
+    // Match the session epoch as well as owner before displaying its sync status.
+    if(r.owner===this.identity?.id&&r.sessionEpoch===this.epoch)this.syncState=r.state;
+   }});
  }
  async inSession(operation){
   const owner=this.identity?.id,epoch=this.epoch;

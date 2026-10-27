@@ -44,3 +44,22 @@ test('new owner admission polling is never delayed by prior account held status 
  }finally{clearTimeout(timer);blocked.resolve();await old;}
  assert.equal(app.status.admitted,true,'stale denial must not revoke new member');
 });
+test('late failed RPC from previous same-member login cannot override the new login sync notice',async()=>{
+ const blocked=deferred(),started=deferred();
+ const store={
+  events:[],
+  async put(event){this.events.push(structuredClone(event));},
+  async list(owner){return this.events.filter(event=>event.owner===owner);},
+  async acknowledge(event){this.events=this.events.filter(row=>row.id!==event.id);}
+ };
+ const client={async mutate(){started.resolve();await blocked.promise;throw new Error('Previous login offline');}};
+ const app=new CloudApp(client,store);app.identity={id:OWNER};app.status={admitted:true};app.render=()=>{};
+ await app.queue.enqueue('save_shot',{id:'previous-login-shot'});
+ const oldFlush=app.queue.flush();await started.promise;
+ app.resetAccount();app.identity={id:OWNER};app.status={admitted:true};
+ await app.queue.enqueue('save_shot',{id:'new-login-shot'});
+ assert.equal(app.syncState,'pending','new login reports its own pending write');
+ blocked.resolve();await oldFlush;
+ assert.equal(app.syncState,'pending','stale offline callback must not overwrite new login');
+ assert.equal(store.events.length,2,'both writes remain durable for retry');
+});

@@ -1,3 +1,9 @@
+## October 27 UTC — Issue161 same-owner epoch-bound sync notifications follow-up (TESTING / NOT DEPLOYED)
+
+Targeted code review found a separate same-account session race: an old failed RPC could mark a newer login's sync indicator offline. Fix: include the login epoch in pending and completion notices, preserve all durable shot queues, and add a held-RPC regression. `DIC-Q-161-epoch-bound-sync-notifications` is TESTING pending exact-source CI and non-force merge. Earlier independent Issue161 and Issue33 READY entries remain untouched. No production operations.
+
+---
+
 ## October 27 UTC — Issue33 PR168 source-review provenance VERIFIED READY / NOT DEPLOYED
 
 **Authority:** Owner requested continuous no-cost extractor accuracy improvements and offered manual decisions for difficult roaster products. This bounded slice improves public selected-coffee conflict-review evidence and file exports without changing extractor canonical parser/oracle, original frozen 603 source, authenticated preview quota, member/shot/Community/offline history or Locked manual-selection rules. No publication authorization.
