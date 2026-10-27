@@ -1054,6 +1054,27 @@
       "blockers": [],
       "owner_source": "Direct owner October 27 decisions on Brewpoint/Gnosis/Black River and four requested new roaster product URLs; October 27 direct statement that measured Agtron is the most accurate roast determination.",
       "notes": "READY only for future owner-authorized release, NOT DEPLOYED. Original 603 immutable archive verified locally SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52, but NOT replayed on this exact source (restricted workflow skipped). Counter Culture fixture sanitization source_fact discrepancy is a separate open Issue33 audit QA finding: it does not change current source autofill values, cannot be treated as a passed full source_facts parity test, and must remain documented. Current published Netlify still previous release #07 deploy 6ae0fc16178b2f1241e441f8; no Netlify/database changes from PR176. Preserve all 23 previously DEPLOYED entries, Issue33 parent IN_PROGRESS."
+    },
+    {
+      "id": "DIC-Q-33-original603-six-missing-facts",
+      "issue": 33,
+      "pr": 178,
+      "title": "Restore six source-verified original603 missing coffee fields",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-selected-source-evidence.mjs"
+      ],
+      "tests": [
+        "Local full original frozen603 actual preview handler: baseline 3090 exact /89 missing /823 review; candidate 3096 exact /83 missing /823 review, zero prior exact losses, 6474 supplemental retention unchanged. Original oracle/capture SHA256 verified; proof under docs/audits/extractor-issue33-missing-six-source-proof-20261027.json.",
+        "6 focused local positive/negative source-bound tests PASS; GitHub exact-head verification pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Pending exact-head GitHub CI, non-force merge and merged-source verification before READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development authorized; this is TESTING, not deployed. Temporary source transfer workflow removed. No production SQL/Auth/Edge/member data or paid service. Parent Issue33 remains IN_PROGRESS for 83 further missing and 823 review-required original assertions."
     }
   ],
   "history": [

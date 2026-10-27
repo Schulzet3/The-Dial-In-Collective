@@ -1,3 +1,9 @@
+## October 27 UTC — Issue33 PR178 release-queue intake failure immediately repaired (TESTING)
+
+**Failure:** PR178 approval/continuity run `40586396617` failed at queue `--enforce-intake` because new application module `src/server/coffee-selected-source-evidence.mjs` lacked an active matching queue row. This is the queue recording omission, not original603 or runtime test failure. Added distinct `DIC-Q-33-original603-six-missing-facts` in TESTING, scope exact deployable parser path, 603 proof, specific pending CI/integration blocker; preserved existing 23 DEPLOYED / 1 READY / parent Issue33 IN_PROGRESS. No readiness promotion or deployment claimed before fresh CI and merged source. No code changes in this remedial commit.
+
+---
+
 ## October 27 UTC — Issue33 step #1: six missing original-source facts restored (local original603 full verification)
 
 **Owner authorization:** Recover missing original603 assertions, source-identical replay; no publishing or paid service. Baseline dev SHA `7916aadfe5e8c3f93b43abd3d0094932ab30b889`. Only `src/server/coffee-selected-source-evidence.mjs` application module changed; new dedicated tests and source evidence receipt committed together. Temporary 24-hour GitHub source-export workflow was private, succeeded 40583446749, and is deleted from feature tree before PR. Do not rewrite original frozen capture/oracle/scorer; no secrets or member records in source snapshot.
