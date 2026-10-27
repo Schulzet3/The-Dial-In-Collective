@@ -731,23 +731,35 @@
     {
       "id": "DIC-Q-161-cloud-reconciliation",
       "issue": 161,
-      "pr": null,
+      "pr": 163,
       "title": "Indexed cloud workspace hydration and bounded account-safe Community evidence refresh",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8bd32e5fef37384c2a0bdac5ec5a370964e98c0b",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/mapping.js"
       ],
       "tests": [
-        "Focused Node source/behavior/security regressions introduced; exact-source full CI pending."
+        "Exact PR163 head 87bfafb7fcd9d70680776f2ae483497ba893c719: full Node test runner 1,657 total, 1,651 PASS /0 FAIL/6 known configuration SKIPs; pinned lint, static cloud build and no-private-assets integrity PASS (GitHub run 40448231859 job 122004514087).",
+        "PR163 scoped cloud tests, 390px synthetic member/admin browser, packaged genuine Chromium without live member accounts, visual review, isolated PostgreSQL 17.11 migration and signed JWT/PostgREST, recovery snapshot, security inventory/dependency advisory and approval/queue/continuity all PASS on exact head.",
+        "PR163 non-force merge 8bd32e5fef37384c2a0bdac5ec5a370964e98c0b has first parent cb9b9013e1fc0caad05d4a0a6f1585f032088982 and second parent exact tested head 87bfafb7fcd9d70680776f2ae483497ba893c719; both share identical Git tree 620fee45086f7c88c8a5e5a2735442d2ff261fdc. Merge application blobs e25569cdd72d2abd94205ccb0169ccf08963676f (main.js), b2c514ef2ac98dacbce2f5f8f5baac142140fdc1 (mapping.js) equal PR tested blobs.",
+        "Four exact merged SHA push workflows SUCCESS: approval/continuity 40448473907, app Node/lint/build 40448473910, cloud/browser/mobile 40448474004, packaged visual 40448473905. PR-head isolated SQL 40448231906 and security 40448231877 SUCCESS; unchanged merged tree ensures exact runtime tests apply. Private original603 workflow SKIPPED as unrelated; separate Issue33 frozen corpus remains untouched."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Awaiting exact-source GitHub automated testing and non-force integration; no development readiness claim yet."
+      "ci_runs": [
+        40448231859,
+        40448231853,
+        40448231791,
+        40448231906,
+        40448231877,
+        40448231819,
+        40448473907,
+        40448473910,
+        40448474004,
+        40448473905
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/161",
-      "notes": "Source-only safe runtime improvement for Issue161. Keep all historical bag, Custom, Experiment, setup version, note, family, offline and Community records. No SQL/Edge/Auth/database or production publication. Parent Issue33 draft PR162 deliberately untouched."
+      "notes": "SAFE SOURCE READY, NOT DEPLOYED; exactly two tracked runtime files. No production data, SQL/Edge/Auth, Netlify or release ref modifications; all original owner/bag/offline/Custom/history semantics preserved; independent extractor PR162 stays draft/TESTING and excluded. Genuine member/device and backup courier observations are separate audit/provider residuals, not faked as passes."
     }
   ],
   "history": [

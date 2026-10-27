@@ -26,3 +26,13 @@
 - Real signed-in two-member and physical device acceptance, active browser network performance under real member load, and natural scheduled offsite Google Drive backup delivery/restore at the latest source.
 - Per-request SQL EXPLAIN workload for production release traffic; advisors do not replace measurement.
 - The independent extractor source candidate in PR162; it is not merged by Issue161.
+
+## October 27 UTC — Source integration and additional operations findings
+
+Safe tested runtime package PR163 merged `8bd32e5fef37384c2a0bdac5ec5a370964e98c0b`; exact merge tree and PR-head tree `620fee45086f7c88c8a5e5a2735442d2ff261fdc` identical. 1,651/1,657 Node pass, zero fail, six known skips, lint/build, isolated SQL and signed HTTP, packaged Chromium/synthetic mobile, source security, visual and approval checks successful; all four applicable merged-source push workflows SUCCESS. Full static source-pattern inspection included all 49 GitHub migrations (6,515 lines), 32 site text files, 27 source parser files and 51 scripts, and workflow definitions on development and default main. No original roster corpus or archived oracle changed.
+
+**Live operations:** GitHub scheduled Oct 26 encrypted backup run 40341453705 SUCCESS, Sunday Oct25 weekly full regression 40194860522 FAILED due missing dist/sw.js in then-running mobile/offline step, now addressed in main by PR135 but unverified as a naturally run Sunday. Sunday Oct25 isolated recovery verification 40202770692 SUCCESS, but not proof of newest daily encrypted ciphertext's offsite delivery. Default-main cron definitions remain 08:00 UTC; actual GitHub Actions job start is not guaranteed at that minute. Preserve #28 backup/alerts and #134 schedule-acceptance trackers.
+
+Netlify last-24-hour status totals at this check: 200=329, 404=218, 304=92, 301=11, 499=7, 429=1, no 5xx. Most 404s are non-existent WordPress installer, .env, .git and similar bot scans; they do not imply shipped app assets are missing. 499s were canceled connections, not proven application bugs. Supabase last-24-hour logs include 16 PG LOG, two PG ERROR (SQLSTATE 21000 and 42809), three Auth informational and five edge 200 records. One 21000 error matches a failed audit query; do not attribute the other error without source proof.
+
+No production SQL, auth/edge, member data, Netlify publication or spending was performed. Full physical-device and genuine user HTTP/privacy acceptance remains unverified; not a release blocker for this narrowly source-complete efficiency change, but not a claimed pass.
