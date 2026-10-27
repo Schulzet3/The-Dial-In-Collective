@@ -1,3 +1,9 @@
+## October 27 UTC — QA-only private exact-source integrated snapshot
+
+On a separate never-merged QA-only branch based on tested independent Issue33+Issue161 feature source `112db5a5a16ea06d2336ea7fde3770982015e0e5`, add a one-day private GitHub checkout artifact to independently repeat archived real-product Chromium app workflows against the exact integrated source. This temporary CI-only workflow must never join development or the release queue. No production deployment, member/provider writes, paid service or credentials. This does not prove a live signed-in user or physical device.
+
+---
+
 ## October 27 UTC — preserve concurrent Issue161 READY on independent Issue33 PR162 integration
 
 Owner has explicitly authorized the scoped Issue33 candidate and new source/import rules to enter the **next** READY deployment queue only when genuinely verified. Latest development 8c0254718c512b2db2a826e4a50d3fb517c65952 includes separate Issue161 indexed cloud refresh PR163 and a distinct READY queue entry. This independent two-parent feature-branch integration preserves Issue161's updated `site/cloud/main.js`, `site/cloud/mapping.js`, `tests/issue161-cloud-reconciliation.test.mjs`, status, queue and approval state, while adding ONLY approved New Coffee source display/UI handlers to that newer main.js. Parser/source Git blobs remain identical to the original603 tested candidate; after integration require fresh exact-source PR CI, current built-app QA and merged-sha checks before promoting the new scoped row from TESTING to READY. The newer development queue contains 18 old READY plus separate new candidate TESTING. No release/production, SQL/Edge/Auth, private records, payments, and no unrelated merge to operations/production.

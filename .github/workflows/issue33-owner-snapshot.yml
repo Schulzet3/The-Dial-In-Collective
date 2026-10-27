@@ -1,0 +1,34 @@
+name: Issue 33 private immutable-source replay transfer
+on:
+  push:
+    branches:
+      - work/issue33-owner-qa-snapshot-20261027
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    name: source-only forensic snapshot
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Bind tracked source to exact commit
+        shell: bash
+        run: |
+          git archive --format=tar "$GITHUB_SHA" | gzip -1 > source.tar.gz
+          {
+            echo "commit=$GITHUB_SHA"
+            echo "tree=$(git rev-parse "$GITHUB_SHA^{tree}")"
+            echo "parser_blob=$(git rev-parse "$GITHUB_SHA:src/server/coffee-page-metadata.mjs")"
+            sha256sum source.tar.gz
+          } > manifest.txt
+          test -s source.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: issue33-owner-integrated-source-${{ github.sha }}
+          path: |
+            source.tar.gz
+            manifest.txt
+          retention-days: 1
+          if-no-files-found: error
