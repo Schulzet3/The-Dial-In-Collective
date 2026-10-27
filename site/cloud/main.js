@@ -505,7 +505,7 @@ class CloudApp {
    ${field('Coffee Name','name','',{required:true})}
    ${field('Roaster','roaster','',{required:true})}
    ${field('Release / Harvest (If Shown)','release_label','')}
-   <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation (meters above sea level)','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
+   <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
    ${field('Tasting Notes','tasting_notes')}
    <button class="primary full space-top">Add Coffee</button>
    <p class="helper space-top">Check all suggested information before saving. Missing details can be entered manually.</p>
