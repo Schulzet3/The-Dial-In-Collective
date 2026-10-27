@@ -1,3 +1,13 @@
+## October 27 UTC — RELEASE #07 verified actually published; 22 READY items delivered
+
+Owner-approved one-use release `DIC-20261027-READY-QUEUE-07` SUCCESS via GitHub main controller run `40569838530`, release/production `f5f29a02f98304dd9d1bd4d2c840c490c85097e6`, tested application source `ca7ab46e1e8c76ce117ffc88470d107aa5903729`. Netlify independently confirmed deployment `6ae0fc16178b2f1241e441f8` **ready/current**, exact Git commit `f5f29a02f98304dd9d1bd4d2c840c490c85097e6`, published 2026-10-27T19:31:53.750Z on `https://app.dialincollective.com`. Exactly 22 READY queue entries delivered and now marked DEPLOYED; original Issue5 previously DEPLOYED stays so. Concurrent Issue33 `IN_PROGRESS` parent and independent `TESTING` item remain unshipped, unchanged.
+
+Release prerequisites: 22/22 source READY, all 46 changed deployable paths covered, exact-source Node/build/mobile/visual/SQL/approval CI PASS. Fresh encrypted predestructive backup run `40565440599`, artifact `12762602289`, SHA256 `9cfa78dee4d497d6d1f9439c87f137942ff2c8346eb509023ea6b5db21739670` independently redownloaded and SHA-matched to private Drive copy `14524GwFcLHQztf5Te0jRWtdBH7Ui0yAU`, age ciphertext only. Supabase `dic_retire_experiments` migration applied and read back: Experiment table and shot link column absent, all 23 shots remain. Already applied Issue5 and Issue12 SQL not replayed; JWT-required `dic-verify-coffee` Edge function version 8 ACTIVE. No extra publication or paid service.
+
+**Evidence limitations:** Netlify provider publication and source/migration receipts verified. No fresh authenticated live member-device end-to-end workflow claimed. Individual private Auth history/notes/receipt counts not yet separately asserted by this postflight; preserve current source of truth. Original hosted 603 coffee job skipped for issue161; parallel extractor work remains unready.
+
+---
+
 
 
 ## October 27 UTC — PR174 first cloud regression failure repaired (TESTING)
