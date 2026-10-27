@@ -16,6 +16,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {fixtureCoffeeHtml as fixtureHtml,sanitizePublicJson as sanitizeJson} from './coffee-fixture-sanitize.mjs';
+import {classifyCoffeeSourceFactPath} from './coffee-source-fixture-sanitization.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
 const ORIGINAL_URL=SWEET_URL+'?srsltid=AYCX9vKHwEAbPcEyS19XuoWD67cGIMJu47B764EfHZK_IkJ7c52nQlGl';
@@ -179,11 +180,19 @@ async function probe(target){
     }
     // Diagnostics describe structure only. Do not copy values from the
     // pre-redaction output into retained logs, even when source parity fails.
-    record.parity_missing_source_fact_examples=(original?.source_facts||[]).filter(fact=>{
+    const missingFacts=(original?.source_facts||[]).filter(fact=>{
      const tag=factTag(fact),count=afterBag.get(tag)||0;
      if(!count)return true;
      afterBag.set(tag,count-1);return false;
-    }).slice(0,12).map(fact=>({
+    });
+    // Track every removed fact by a fixed structural class. No raw path,
+    // label, value or source JSON is written to public audit artifacts.
+    record.parity_missing_source_fact_classes={private_property:0,checkout_template:0,unclassified:0};
+    for(const fact of missingFacts){
+     const kind=classifyCoffeeSourceFactPath(fact.source_path);
+     record.parity_missing_source_fact_classes[kind]++;
+    }
+    record.parity_missing_source_fact_examples=missingFacts.slice(0,12).map(fact=>({
      field:fact.field||null,source_type:fact.source_type||null,
      property_keys:Object.keys(fact).sort(),value_type:typeof fact.value,
      value_utf8_bytes:Buffer.byteLength(String(fact.value??''))
@@ -282,6 +291,7 @@ for(let index=0;index<selected.length;index+=2){
    parity_conflicts_original:item.parity_conflicts_original,parity_conflicts_replay:item.parity_conflicts_replay,
    parity_source_fact_counts:item.parity_source_fact_counts,
    parity_missing_source_fact_examples:item.parity_missing_source_fact_examples,
+   parity_missing_source_fact_classes:item.parity_missing_source_fact_classes,
    parity_changed_product_attributes:item.parity_changed_product_attributes,
    parity_offer_key_differences:item.parity_offer_key_differences
   }));

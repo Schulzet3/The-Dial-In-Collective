@@ -6,6 +6,21 @@ import {coffeeHtmlAttributes} from '../../src/server/coffee-product-scope.mjs';
 import {coffeeHtmlElements} from '../../src/server/coffee-html-structure.mjs';
 
 const sensitiveKey=/(?:password|secret|token|csrf|authorization|cookie|customer|session|email|phone|cart|checkout)/i;
+// Exact private-identity keys that may otherwise evade the substring screen.
+// Deliberately avoid matching ordinary product properties such as name,
+// profile, requires_shipping, public seller, or product release fields.
+const privateIdentityKey=/^(?:user(?:_?id)?|account(?:_?id)?|billing(?:_?address|_?contact)?|shipping_?address|payment(?:_?method|_?details)?|credit_?card|card_?(?:number|holder)|first_?name|last_?name|ip_?address|street_?address|order_?id)$/i;
+const isPrivateKey=key=>sensitiveKey.test(key)||privateIdentityKey.test(key);
+
+// Classification is structural, never exports raw path/label/value strings.
+// A missing source fact need not be private: keep unclassified gaps visible.
+export function classifyCoffeeSourceFactPath(rawPath){
+ if(typeof rawPath!=='string')return 'unclassified';
+ const keys=rawPath.split(/[^A-Za-z0-9_]+/).filter(Boolean);
+ if(keys.some(key=>key==='checkoutPageURLTemplate'))return 'checkout_template';
+ if(keys.some(isPrivateKey))return 'private_property';
+ return 'unclassified';
+}
 const numericVariant=/^[1-9]\d{0,29}$/;
 const trackingKey=/^utm_|^(?:srsltid|gclid|fbclid|msclkid|mc_cid|mc_eid)$/i;
 const hasType=(value,type)=>[].concat(value?.['@type']||[]).some(item=>typeof item==='string'&&item.toLowerCase()===type);
@@ -107,7 +122,7 @@ export function sanitizePublicCoffeeJson(value,{source_url}={}){
  const offers=source&&publicProductQuery(source)?selectedPublicOffers(value,source):new WeakMap();
  return JSON.stringify(value,function(key,item){
   if(key==='checkoutPageURLTemplate'&&offers.has(this)&&publicTemplate(item,source,offers.get(this)))return item;
-  return sensitiveKey.test(key)?undefined:item;
+  return isPrivateKey(key)?undefined:item;
  }).replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
 }
 
