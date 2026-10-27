@@ -19,6 +19,8 @@ Historical review grouped every original file by its *meaning*, not just an exte
 | Workflows and operational scripts | 70 | 10,572 | Check exact source, private CI, safety, backup and release authority |
 | Other configuration/assets | 37 | 3,819 | Inspect build/dependency boundaries and packaging |
 
+Original frozen corpus semantic structure was also checked across the five PRIMARY oracle segments only: 603 distinct coffee case IDs, 201 roasters with exactly three cases each, 4,002 canonical assertions and 6,474 additional source facts. Supplements and corrections are overlays, not additional original coffees. A permanent read-only Node test now guards those counts and every case's provenance fields. This does not re-verify each old roaster webpage against its original capture.
+
 Every historical JSON file was parsed with an object-pairs hook detecting repeated keys: **zero duplicate keys or JSON parse failures** in the unchanged baseline. Node syntax checks passed on **254 JS/MJS files**, Python AST on **20 Python files**, and `bash -n` on **8 shell scripts**. The earlier all-tracked-line audit reported 0 credential-pattern matches and 207 redacted findings; these represent a risk-prioritized review queue, not 207 demonstrated defects. No previously exact extractor case, historical note, source capture or approval was altered.
 
 ## Semantic finding reproduced by falsifiable interleaving
