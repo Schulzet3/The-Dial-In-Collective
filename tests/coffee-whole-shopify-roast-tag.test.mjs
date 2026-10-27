@@ -29,11 +29,11 @@ test('explicit product-prefixed Coffee_ tags still contradict an independently d
  assert.equal(v.fields.roast_level,undefined);
  assert.ok(v.conflicts?.includes('roast_level'));
 });
-test('broad Coffee_ collection category cannot erase a more specific source-backed product roast',()=>{
+test('simultaneous broad and specific roast evidence cannot silently bypass a genuine conflict',()=>{
  const v=extractShopifyAjaxData({title:'Test Coffee',handle:'test-coffee',description:'<p>Roast Level: Medium</p>',
   tags:['Coffee_Light Roast','Consumer Product','medium-roast']},request);
- assert.equal(v.fields.roast_level,'Medium');
- assert.ok(!v.conflicts?.includes('roast_level'));
+ assert.equal(v.fields.roast_level,undefined,'conflicting same-product roast facts must be withheld');
+ assert.ok(v.conflicts?.includes('roast_level'),'explicit conflict must be presented to review');
  const inconsistent=extractShopifyAjaxData({title:'Test Coffee',handle:'test-coffee',
   description:'<p>Current coffee.</p>',tags:['Coffee_Light Roast','medium-roast']},request);
  assert.equal(inconsistent.fields.roast_level,undefined,'ambiguous tags alone do not fabricate a roast');
