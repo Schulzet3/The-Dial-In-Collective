@@ -1,3 +1,9 @@
+## October 27 UTC — PR177 public fixture privacy merged READY, NOT DEPLOYED
+
+**Final source:** PR177 tested head `85f2da2ae5608b3e11136da25d08fa79132ab0c8`, tree `34cf93004a20c77a1921cb6ad77c021d5e6fcd39`; non-force merged `fc292fe09aa960a4ec871952a20c3cdbb0202e1a`, identical tree. All six applicable PR-head GitHub checks PASS: Node/build 40581055918, cloud/mobile 40581055729, approval 40581056030, isolated SQL 40581055844, Python 40581055675, visual 40581055829. Original603 restricted workflow 40581056040 SKIPPED, NOT PASSED. Public fresh source workflows not performed for this fix. No source/oracle changes or provider writes. New queue item `DIC-Q-33-public-source-fixture-privacy` READY as an independent audit/privacy improvement; parent Issue33 still OPEN for residual missing/review/conflicts and the 19 optional product_json fixture differences. Those 19 are not declared restored or parity-passed. Production release #07 remains the last published release. Do NOT publish without owner approval.
+
+---
+
 **Pre-CI test review correction:** New exact-key privacy guard initially omitted snake-case `user_profile` (explicitly exercised by the new test). Fixed before PR review; do not count an unrun check as passing. Same-commit journal receipt applies.
 
 ## October 27 UTC — Issue33 public fixture privacy and source-fact diagnostic (development, TESTING)
