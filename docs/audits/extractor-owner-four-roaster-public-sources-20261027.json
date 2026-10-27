@@ -94,15 +94,15 @@
   "extra_cost": "none",
   "source_facts_unverified_by_app": true,
   "followup_20261027": {
-    "status": "SOURCE_REPAIR_AND_TESTING",
+    "status": "OWNER_FOUR_ROASTERS_LIVE_VALUES_ACCEPTED_WITH_ONE_OPTIONAL_CAPTURE_PARITY_GAP",
     "merged_source": "fc9913decaacb4ff20014a0d0f79da58d09f52a6",
     "live_run": 40569710438,
     "original_required_results": "Prior 10 required target cases all passed.",
     "owner_cases": {
-      "stumptown": "PASS live (origin Ethiopia, notes Peach/Citrus/Orange Blossom)",
-      "peets": "PASS live Dark and labeled tasting profile; Agtron absent",
-      "blue_bottle": "FAIL live source extraction: page contains exact selected Next.js conversion state, requires bounded parser",
-      "counter_culture": "FAIL live source fields: origin Sipacapa vs San Marcos Guatemala; notes conflict; sanitized product_json source_fact counts 64 original vs 45 redacted; original page parser fields/conflicts otherwise agree"
+      "stumptown": "PASS Ethiopia Nano Challa: Origin Ethiopia, Peach/Citrus/Orange Blossom; no unsupported recipe",
+      "blue_bottle": "PASS Hayes Valley Espresso exact current Next.js conversion: Dark, Washed, Baking Chocolate/Orange Zest/Brown Sugar",
+      "counter_culture": "Current runtime values PASS: Sipacapa San Marcos, Guatemala, Light, Washed, apple/simple syrup/cocoa, Caturra and Bourbon, 1640-2150m. OPTIONAL audit capture source_facts original 66 vs sanitized 47; no canonical differences; source_facts parity NOT PASS.",
+      "peets": "PASS Guatemala Linda Vista Dark, Dark Chocolate/Caramel/Cardamom; 86/100 roast indicator not Agtron"
     },
     "counters": {
       "required_failed": 2,
@@ -110,6 +110,20 @@
       "member_quota_charged": 0,
       "production_writes": 0
     },
-    "caution": "Optional Counter Culture sanitization diagnostic must remain visible and must NOT be counted as a full original-source parity pass; do not weaken public data privacy to silence the gap."
+    "caution": "Optional Counter Culture sanitization diagnostic must remain visible and must NOT be counted as a full original-source parity pass; do not weaken public data privacy to silence the gap.",
+    "merged_sha": "7a691a2fa33d96614a14a05115e8686b07c55fed",
+    "source_acceptance_run": 40574895350,
+    "checks": {
+      "required_targets": 13,
+      "required_failures": 0,
+      "all_targets": 14,
+      "parsed": 13,
+      "public_requests": 27,
+      "real_backend_requests": 0,
+      "member_quota_consumed": 0,
+      "production_writes": 0,
+      "deployments": 0
+    },
+    "invariant": "Original frozen603 source archive intact SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52; original603 exact-source runner skipped, no new 603 result."
   }
 }
