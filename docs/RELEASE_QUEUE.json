@@ -1054,35 +1054,6 @@
       "blockers": [],
       "owner_source": "Direct owner October 27 decisions on Brewpoint/Gnosis/Black River and four requested new roaster product URLs; October 27 direct statement that measured Agtron is the most accurate roast determination.",
       "notes": "READY only for future owner-authorized release, NOT DEPLOYED. Original 603 immutable archive verified locally SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52, but NOT replayed on this exact source (restricted workflow skipped). Counter Culture fixture sanitization source_fact discrepancy is a separate open Issue33 audit QA finding: it does not change current source autofill values, cannot be treated as a passed full source_facts parity test, and must remain documented. Current published Netlify still previous release #07 deploy 6ae0fc16178b2f1241e441f8; no Netlify/database changes from PR176. Preserve all 23 previously DEPLOYED entries, Issue33 parent IN_PROGRESS."
-    },
-    {
-      "id": "DIC-Q-33-public-source-fixture-privacy",
-      "issue": 33,
-      "pr": 177,
-      "title": "Privacy-safe public fixture redaction and missing source-fact diagnostics",
-      "state": "READY",
-      "merged_source_sha": "fc292fe09aa960a4ec871952a20c3cdbb0202e1a",
-      "scope_paths": [
-        "scripts/audit/coffee-source-fixture-sanitization.mjs",
-        "scripts/audit/coffee-completeness-live-probe.mjs",
-        "tests/coffee-live-fixture-sanitization.test.mjs"
-      ],
-      "tests": [
-        "PR177 tested exact source tree 34cf93004a20c77a1921cb6ad77c021d5e6fcd39; CI Node/build 40581055918, cloud/mobile 40581055729, approval 40581056030, SQL 40581055844, Python 40581055675, private visual 40581055829 all SUCCESS.",
-        "Non-force merged fc292fe09aa960a4ec871952a20c3cdbb0202e1a, source tree identical to tested head; no production writes. Original hosted 603 workflow 40581056040 SKIPPED.",
-        "Older public run 40574895350 established 13/13 mandatory passes and an OPTIONAL Counter Culture 66 raw vs 47 sanitized source-fact discrepancy. New fixture privacy-class diagnostic is not yet proven to resolve or reproduce that live mismatch; preserve as unresolved."
-      ],
-      "ci_runs": [
-        40581055918,
-        40581055729,
-        40581056030,
-        40581055844,
-        40581055675,
-        40581055829
-      ],
-      "blockers": [],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Audit-only implemented and independently exact-head tested, non-force merged. More private user/account/address/payment/order fields are redacted; only fixed class labels and counts are exported for missing source facts. No runtime extractor, source oracle, 603 captures, user shots, quotas or schema modifications. Source-fact parity remains openly unresolved under parent Issue #33. Future fresh public-source check is not claimed. READY for separately authorized release; NOT DEPLOYED."
     }
   ],
   "history": [
