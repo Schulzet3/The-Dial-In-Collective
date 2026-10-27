@@ -872,23 +872,31 @@
     {
       "id": "DIC-Q-161-epoch-bound-sync-notifications",
       "issue": 161,
-      "pr": null,
+      "pr": 171,
       "title": "Epoch-bound sync notices and stale coffee expansion after account switching",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "6a861f0b8fc331239df0a2f1fee6655529c707cf",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/outbox.js"
       ],
       "tests": [
-        "Deterministic held-RPC same-owner reauthentication and held-evidence cross-owner coffee expansion regression tests added to tests/issue161-cloud-session-race.test.mjs; exact GitHub source CI pending."
+        "Deterministic PR-head Node regression covers prior-login same-owner failed RPC not overwriting new pending status, both queued shot writes retained, and stalled old-owner coffee expansion never claiming its coffee under the new account (tests/issue161-cloud-session-race.test.mjs).",
+        "Exact PR-head 4556d79ea07db813170335c70bf5eca40c369ebf Git tree 697ac1f146f90eba636c4080c9b6457ff2eed51f: application Node/lint/build 40556383904, source security 40556383928, approval 40556383911, isolated SQL 40556383952, complete historical tracked-source review 40556383898 and private visual/browser 40556383986 ALL SUCCESS.",
+        "Visual/browser workflow 40556383986 ran cloud_owner_qa.py 390px synthetic phone browser, owner-only admin mobile invitation acceptance, offline service-worker cold reopen, visual review and packaged production app in Chromium, all SUCCESS on same tested tree. Cloud regression run 40556383920 separate cloud unit job PASSED; its separate mobile-browser job still IN_PROGRESS installing Chromium at final receipt preparation. Do not label that run PASS until independently confirmed.",
+        "Non-force PR171 merged at 6a861f0b8fc331239df0a2f1fee6655529c707cf with first parent a988eaee30b61fa8e5f33dca887f224419801c5a and second parent 4556d79ea07db813170335c70bf5eca40c369ebf. Merged Git tree 697ac1f146f90eba636c4080c9b6457ff2eed51f is identical to tested PR head; only six intended files changed. Source-only readiness; original frozen 603 workflow 40556383916 SKIPPED."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source CI, non-force integration and final source readback pending."
+      "ci_runs": [
+        40556383904,
+        40556383928,
+        40556383911,
+        40556383952,
+        40556383898,
+        40556383986
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/161",
-      "notes": "Scoped owner+session notice isolation; no data, queued mutations, original corpus or independent Issue33 changes; NOT DEPLOYED."
+      "notes": "Exact tested source + equivalent full packaged 390px Chromium/browser and PWA test passed. Separate redundant cloud UX mobile setup workflow 40556383920 pending and not claimed. Source READY NOT DEPLOYED; user-requested manual every-historical-line verification remains outstanding under open Issue161, separate from scoped code readiness. No production SQL/Edge/Auth/member/Netlify change, no paid services; preserve all original shots, offline receipts, 603-corpus and Issue33."
     }
   ],
   "history": [
