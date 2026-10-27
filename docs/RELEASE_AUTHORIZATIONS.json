@@ -111,6 +111,26 @@
         "dic-verify-coffee JWT-required exact source"
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261027-READY-QUEUE-07",
+      "tested_source_sha": "ca7ab46e1e8c76ce117ffc88470d107aa5903729",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-10-27T19:03:33.042Z",
+      "expires_at_utc": "2026-10-28T23:59:00Z",
+      "approval_source": "Owner October 27, 2026 in this chat: 'Okay do any final tests you need to and you're approved to publish all items in the deployment queue'",
+      "scope": "ONE combined production publication of exactly 22 READY queue items at tested source ca7ab46e1e8c76ce117ffc88470d107aa5903729, excluding Issue33 unfinished IN_PROGRESS item and previously deployed Issue5. Apply only pending dic_retire_experiments SQL after independently verified fresh encrypted pre-destructive backup and exact hosted zero-data preconditions; reuse already applied Issue5 and Issue12 migrations without reapplication. Deploy necessary source-bundled JWT-required dic-verify-coffee Edge with shared modules and one Netlify release/production claim. Preserve all historical data, receipts, privacy, offline queues. No unrelated deletions, charges, plan upgrades or future publication.",
+      "sql_evidence": [
+        "20261026213000 dic_retire_experiments pending; pre-destructive backup mandatory",
+        "20261024034800, 20261024041100, 20261024041800 already applied in provider; do not repeat"
+      ],
+      "edge_evidence": [
+        "dic-verify-coffee JWT-required with source-bundled shared logic"
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
