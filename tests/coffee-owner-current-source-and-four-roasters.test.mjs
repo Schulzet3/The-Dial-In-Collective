@@ -37,7 +37,7 @@ test('Brewpoint: current selected direct specifications override demonstrably st
  assert.ok(!merged.conflicts?.includes('origin'));
 });
 test('current exact opposing product tags still veto the printed roast rather than bypassing conflicts',()=>{
- const r=selected('Current Coffee','<p>Roast Level: Dark</p>',['Coffee_Medium']);
+ const r=selected('Current Coffee','<p>Roast Level: Dark</p>',['Medium']);
  assert.equal(r.fields.roast_level,undefined);
  assert.ok(r.conflicts?.includes('roast_level'));
 });

@@ -1,3 +1,9 @@
+
+
+## October 27 UTC — PR174 first cloud regression failure repaired (TESTING)
+
+Source CI 40567829054 on PR174 head 92781b395ffe714e2e8f72a88354bddd1926976c failed 9/1316 tests: six original combined-process preservation tests were broken by an overly broad new process-conflict rule, one Stumptown historical washed-cooperative sentence was incorrectly promoted to current process, one new test used an unsupported roast tag Coffee_Medium rather than the current exact selected Medium tag, and the new optional probe array missed a comma. Removed blanket process-conflict rule, preserving literal multistage process reconciliation; added a narrowly dated-history processing guard only where no direct current selected-lot process exists; repaired the test and comma. All failures and steps remain recorded, not relabeled PASSED; exact new CI required. Prior PR-head security, approval, isolated SQL and Python audit were successful; frozen original603 job SKIPPED by workflow branch restriction and is NOT a pass. Source code now additionally changes coffee-page-metadata.mjs. No original603 oracle/capture/scorer changes, member writes or publication.
+
 ## October 27 UTC — Issue33 owner-approved current-source rules and four roaster probes TESTING / NOT DEPLOYED
 
 New owner-Locked `EXTRACTOR-CURRENT-SELECTED-SOURCE-FERMENTATION-20261027` requires current selected-product specs over stale SEO (Brewpoint), staged named fermentation (Gnosis), and user review of simultaneous Mexico/Peru (Black River). Four additional owner product URLs (Stumptown, Blue Bottle, Counter Culture, Peet's) are in independent opt-in probe/targeted tests, not the immutable 603 original. Clean scoped source/test/doc branch replaces unsafe unfinished draft PR170; exact CI/integration is PENDING. Preserve 22 prior READY and other work; no publication.

@@ -57,7 +57,7 @@ const targets=[
  {id:'circulor-source-conflict',url:'https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx',
   expected:{origin:/Kenya|Meru/i,process:/^Washed$/i},expected_conflicts:['variety'],
   source_note:'Observed page title/summary says SL34, while Genesis says Ruiru 11. Report current source drift explicitly.'},
- {id:'queen-city-homepage-negative',url:'https://queencitycollectivecoffee.com/',negative:true}
+ {id:'queen-city-homepage-negative',url:'https://queencitycollectivecoffee.com/',negative:true},
  // Four additional optional, URL-bound original-source probes; not frozen603.
  {id:'owner-stumptown-nano-challa',url:'https://www.stumptowncoffee.com/products/ethiopia-nano-challa?variant=40006909722792',expected:{name:/Nano Challa/i,tasting_notes:/peach.*citrus.*orange blossom/i},source_note:'Selected tasting notes only; the espresso brew guide is generic and 2010 washing station history is not current process proof.'},
  {id:'owner-blue-bottle-hayes-valley',url:'https://bluebottlecoffee.com/us/eng/product/hayes-valley-espresso?a_oID=hayes-valley-espresso',expected:{name:/Hayes Valley Espresso/i,roast_level:/^Dark$/i,process:/^Washed$/i,tasting_notes:/Baking Chocolate.*Orange Zest.*Brown Sugar/i},source_note:'Non-Shopify product page; record HTTP/HTML limitations and no invented origin or espresso grams.'},

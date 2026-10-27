@@ -135,8 +135,9 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
   if(!fields.tasting_notes)fields.tasting_notes=policy.specs.tasting_notes[0];
   current_spec_fields.push('tasting_notes');
  }
- if(conflictingSpec('process'))reviewConflict('process',policy.specs.process);
- else if(policy.controlledFermentation){
+ // Distinct published decaf/washing/fermentation stages need the existing
+ // literal stage reconciler, not a blanket new process conflict.
+ if(policy.controlledFermentation){
   fields.process='Anaerobic';conflicts.delete('process');
   current_spec_fields.push('process');
  }

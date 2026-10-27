@@ -1396,6 +1396,19 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Literal country-first middle-dot captions are equivalent when they have
  // one explicit country and a bounded named locality. Keep original source facts.
  if(fields.origin&&!conflicts.has('origin'))fields.origin=orderExplicitCoffeeOriginTuple(fields.origin);
+ // Dated cooperative histories (e.g. a transition to washed coffee in
+ // 2010) are not a statement of the currently selected lot's process.
+ // Preserve the source record but do not promote old history to the field.
+ if(fields.process==='Washed'){
+  const currentWords=clean(canonicalProduct,32000);
+  const historic=/\b(?:in|back in|since)\s+(?:19|20)\d{2}\b[^.!?]{0,260}\b(?:transition(?:ed|ing)?\s+to|began|introduced)\b[^.!?]{0,160}\b(?:fully\s+)?washed\b/i.test(currentWords);
+  const direct=/\b(?:process|processing(?:\s+method)?)\s*:\s*(?:fully\s+)?washed\b/i.test(currentWords)||
+   (Array.isArray(p.additionalProperty)&&p.additionalProperty.some(row=>
+    /^(?:process|processing(?: method)?)$/i.test(String(row?.name||'').trim())&&
+    /\bwashed\b/i.test(String(row?.value||''))));
+  const current=/\b(?:this|our|current)\s+(?:coffee|lot|release)\b[^.!?]{0,130}\b(?:processed\s+as|is\s+washed|washed\s+process)\b/i.test(currentWords);
+  if(historic&&!direct&&!current)delete fields.process;
+ }
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
