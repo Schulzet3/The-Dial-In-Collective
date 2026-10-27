@@ -101,7 +101,9 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  // after selected-title/handle verification above. Competing direct current
  // fields and exact-product roast taxonomy remain conflicts, not guesses.
  const policy=selectedCurrentProductSpecs(description);
- const fields={...result.fields},conflicts=new Set(result.conflicts||[]);
+ // Keep the WeakMap-backed source process claims attached to the original
+ // preview fields. Cloning them loses evidence needed for safe stage merge.
+ const fields=result.fields,conflicts=new Set(result.conflicts||[]);
  const conflict_options={...result.conflict_options};
  const current_spec_fields=[];
  const conflictingSpec=key=>policy.specs[key].length>1;
