@@ -6,6 +6,7 @@
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
+    "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026",
     "current_owner_accepts_isolated_signed_jwt_for_issues_5_10_20261023",
     "current_owner_admin_low_friction_review_20261021",
     "current_owner_admin_one_click_resolution_and_dose_warning_20261021",
@@ -1018,5 +1019,24 @@
     "issue13_independent": "OPEN",
     "new_release_authorized": false,
     "original_requirements_preserved_except_test_modality": true
+  },
+  "EXTRACTOR-EXPLICIT-NOTES-MASL-CONFLICT-REVIEW-20261026": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Direct owner Issue33 October 26/27 instruction",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/visual.css"
+    ],
+    "tests": [
+      "tests/coffee-owner-elevation-notes-conflict-review.test.mjs",
+      "Original frozen603 unchanged canonical and supplementary comparators",
+      "Isolated real cloud preview adapter/handler/app mobile and desktop journey"
+    ],
+    "release_authorization": "NOT GRANTED: source-only; prepare READY upon full acceptance"
   }
 }

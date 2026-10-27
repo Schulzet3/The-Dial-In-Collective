@@ -11,7 +11,7 @@ import {emailConfirmationView} from './confirmation.js';
 import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,autofillFields} from './coffee-url-autofill.js';
+import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,autofillFields} from './coffee-url-autofill.js';
 import {communityReviewBanner,communityPage} from './community.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
 const NEXT_SHOT_INFO="Changing only one setting helps isolate its effect on your espresso's flavor. Keep the other settings consistent and compare the results. Shot time may change naturally; record what happens.";
@@ -505,7 +505,7 @@ class CloudApp {
    ${field('Coffee Name','name','',{required:true})}
    ${field('Roaster','roaster','',{required:true})}
    ${field('Release / Harvest (If Shown)','release_label','')}
-   <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
+   <div class="form-grid coffee-detail-grid">${field('Origin','origin')}${select('Roast Level','roast_level',['',...C.ROASTS],'')}${field('Elevation (meters above sea level)','elevation_m')}${select('Process','process',['',...C.PROCESSES],'')}${field('Variety','variety')}${field('Producer','producer')}</div>
    ${field('Tasting Notes','tasting_notes')}
    <button class="primary full space-top">Add Coffee</button>
    <p class="helper space-top">Check all suggested information before saving. Missing details can be entered manually.</p>
@@ -711,6 +711,14 @@ class CloudApp {
       // presses Add Coffee. Never overwrite typed facts or silently approve.
       if(found?.ok)applyCoffeeUrlFields(form,found);
       panel.innerHTML=coffeeUrlPreviewMarkup(found);
+      // Announce review alternatives next to the associated editable field.
+      for(const group of coffeeConflictReviewOptions(found)){
+       const input=form.elements.namedItem(group.field);
+       if(input?.setAttribute){
+        input.setAttribute('aria-describedby','coffee-conflict-'+group.field);
+        input.classList?.add('coffee-needs-review');
+       }
+      }
      }catch{
       if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
      }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
@@ -843,7 +851,7 @@ class CloudApp {
    if(a==='signout'){const queued=await this.inSession(()=>this.queue.pending());if(queued.length&&!globalThis.confirm?.('You have '+queued.length+' unsynced change(s). They remain saved on this device for this account and will sync only after you sign in to the same account again. Sign out anyway?'))return;const epoch=this.epoch;await this.client.signOut();if(epoch===this.epoch){this.identity=null;this.resetAccount();this.render();}return;}
   }catch(err){this.error(err);}
  }
- input(ev){if(ev.target.closest?.('#shot')){ev.target.removeAttribute('aria-invalid');if(ev.target.getAttribute('aria-describedby')==='shot-validation-feedback')ev.target.removeAttribute('aria-describedby');}if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
+ input(ev){if(ev.target.closest?.('#shot')){ev.target.removeAttribute('aria-invalid');if(ev.target.getAttribute('aria-describedby')==='shot-validation-feedback')ev.target.removeAttribute('aria-describedby');}if(ev.target.name==='doseG'&&ev.target.closest?.('#shot'))this.updateDoseAdvisory();if(ev.target.name==='source_url'&&ev.target.closest('#new-coffee')){if(this.coffeeUrlPreviewInput!==ev.target.value.trim()){this.coffeeUrlPreviewInput=null;this.coffeeUrlSourceReview=null;const panel=sheet.querySelector('#coffee-url-feedback');if(panel)panel.replaceChildren();for(const key of ['origin','roast_level','elevation_m','process','variety','producer','tasting_notes','release_label']){const el=ev.target.closest('#new-coffee')?.elements.namedItem(key);if(el?.getAttribute?.('aria-describedby')==='coffee-conflict-'+key){el.removeAttribute('aria-describedby');el.classList?.remove('coffee-needs-review');}}}}if(ev.target.id==='search'){const value=ev.target.value,position=ev.target.selectionStart;this.search=value;this.render();const input=root.querySelector('#search');input.focus();input.setSelectionRange(position,position);}}
  change(ev){if(ev.target.id==='sort'){this.sort=ev.target.value;this.render();}if(ev.target.id==='community-style'){this.communityStyle=ev.target.value;this.communityCoffee='all';this.loadCommunity().catch(err=>this.error(err));}if(ev.target.id==='community-coffee'){this.communityCoffee=ev.target.value;this.render();}if(ev.target.name==='slowFeed'&&this.draft){this.readDraft();const v=M.activeVersion(this.state),rec=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});const box=sheet.querySelector('#log-reference');if(box)box.innerHTML=recipeGrid(rec,v.advanced.temperature,v.tempUnit);}}
  async submit(ev){ev.preventDefault();if(this.busy)return;const form=ev.target,id=form.id,d=Object.fromEntries(new FormData(form));this.busy=true;form.querySelectorAll('button').forEach(b=>b.disabled=true);let shotValidation=null;
   try{
