@@ -1,3 +1,9 @@
+## October 27 UTC — dedicated private integrated source browser snapshot (QA-only branch)
+
+Based on fully scoped extractor feature `ec5a2c9e3011cee9b7c0935072d3511c321e7a38`, run one-day private GitHub Actions source snapshot to transfer its exact full checkout into the isolated original-capture application QA environment. Temporary workflow is on a separate QA branch, NOT a deliverable PR or release queue item. Preserve tested extractor parser blob bb68e3f29270cd96ccba0455399afc81a11336f0, original corpus bytes, all concurrent UI/Backend changes and publication safeguards; this commit adds no application/runtime files and does not authorize production publication. Test integrated actual UI against real captured product source using a simulated cloud membership/quota service; note browser transport bridge versus real login/device and record any errors. No secrets/private member data, purchases, SQL/Edge/Auth or deployment. Do not merge this QA-only branch into development.
+
+---
+
 ## October 27 UTC — full immutable603 restoration, differential, isolated in-app browser and current concurrency integration
 
 **Authorization:** Owner explicitly requested complete original603, all applicable exact-source GitHub CI, comprehensive error sweep, near-real in-app simulation and safe READY preparation, **not publication**. Recovered original untouched owner ZIP/source SHA256 values (see docs/audits/extractor-issue33-post-pr152-roast-conflict-original603-20261027.json); current feature parser blob `bb68e3f29270cd96ccba0455399afc81a11336f0`, regression blob `3fba01bfe1d008f7d2927f5db6f49deb6b7adc50`; all 603 original captured product requests authenticated against frozen hashes. Current development `dbe389e3a0255907d328edcb654f77282cc5ba4f` includes concurrent Issue15 UI/backend changes; verify and preserve all paths, no overlap with our parser/test/journal/receipt paths.
