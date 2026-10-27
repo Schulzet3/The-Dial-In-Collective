@@ -1060,21 +1060,31 @@
       "issue": 33,
       "pr": 178,
       "title": "Restore six source-verified original603 missing coffee fields",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "b0de5a8432442d58f124c3cceddb86e3bed4ed08",
       "scope_paths": [
         "src/server/coffee-selected-source-evidence.mjs"
       ],
       "tests": [
-        "Local full original frozen603 actual preview handler: baseline 3090 exact /89 missing /823 review; candidate 3096 exact /83 missing /823 review, zero prior exact losses, 6474 supplemental retention unchanged. Original oracle/capture SHA256 verified; proof under docs/audits/extractor-issue33-missing-six-source-proof-20261027.json.",
-        "6 focused local positive/negative source-bound tests PASS; GitHub exact-head verification pending."
+        "Original immutable source SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb checked. Full 603 of 603 real isolated HTTP-preview handler replays on unchanged 1197 captures and 4002 canonical assertions: baseline 3090 exact/89 missing/823 review, new 3096 exact/83 missing/823 review. Precisely six old missing to exact, zero previously exact lost, zero other canonical changes. Original 6474 additional assertions retain 5458 full/337 partial/679 unconfirmed, identical per-case original retention. Source-bound audit and replay SHA256 listed in docs/audits/extractor-issue33-missing-six-source-proof-20261027.json.",
+        "Focused six source-bound positive/negative Node checks PASS and six actual original product captures run with matching proposed values; these isolated tests used no backend, member quota or provider network.",
+        "PR178 tested head 0e5d69e208d99d14a590437d401ca3f6b5190a8c exact Node/lint/build 40586627900, cloud/mobile 40586627949, security 40586628043, isolated SQL 40586627927, private visual/browser 40586628047 and approval/continuity 40586627881 all SUCCESS.",
+        "Non-force PR178 merge b0de5a8432442d58f124c3cceddb86e3bed4ed08; identical tested exact tree 96fd2340abaa4fd8008eadebf563796c73feb254 and source blob c5a16002857d5555ca12cc19f93e02c23e92fe1a; exact merged-source Node/build 40586968991, cloud/mobile 40586968841 and approval 40586968902 SUCCESS. Hosted original603 workflow 40586627934 SKIPPED due branch policy; merged public-source acceptance 40586968907 and controlled source probe 40586968983 SKIPPED. These are NOT claimed PASS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Pending exact-head GitHub CI, non-force merge and merged-source verification before READY."
+      "ci_runs": [
+        40586627881,
+        40586628043,
+        40586627927,
+        40586627949,
+        40586627900,
+        40586628047,
+        40586968991,
+        40586968841,
+        40586968902
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Development authorized; this is TESTING, not deployed. Temporary source transfer workflow removed. No production SQL/Auth/Edge/member data or paid service. Parent Issue33 remains IN_PROGRESS for 83 further missing and 823 review-required original assertions."
+      "notes": "Source READY, NOT DEPLOYED. Six original coffee assertions recovered, no previous exact loss. Parent Issue33 stays IN_PROGRESS for 83 missing and 823 strict-review cases. No frozen oracle/source/scorer, production Netlify/SQL/Edge/Auth/member/offline change, paid service or deployment. Separate owner publish instruction required."
     }
   ],
   "history": [
