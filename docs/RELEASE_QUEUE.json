@@ -675,10 +675,10 @@
     {
       "id": "DIC-Q-15-retired-bag-management",
       "issue": 15,
-      "pr": null,
+      "pr": 157,
       "title": "Retire unused bag tracking UI/model without altering historical shot data",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "71017050a8d43b8fda418f08befe4535478e43c2",
       "scope_paths": [
         "site/lib/model.js",
         "site/lib/engine.js",
@@ -688,16 +688,28 @@
         "site/cloud/import-preview.js"
       ],
       "tests": [
-        "Node regression covers fresh coffee without synthetic bag, ordinary green shot without bag link, preferred family and recommendation preservation, old hydrated bag associations, old queued event bytes and ID, and legacy prototype bag/frozen/roast fields preserved on import.",
-        "Isolated disposable PostgreSQL regression checks historical public.bags table and optional shots.bag_id owner/coffee composite FK, RLS, permissions and SQL backup/import; production unchanged.",
-        "Read-only production inventory: 4 active bags, 0 dated/frozen, 23 shots with 14 bag links and 0 orphan refs; existing notes/families/preferences unchanged. No destructive DB migration planned."
+        "Exact tested PR-head Node/lint/build 40435098303 SUCCESS including new seven retired-bag tests; full schema/isolated SQL 40435098681 SUCCESS; approval continuity 40435098321, security 40435098320, Python audit 40435098308 SUCCESS. All apply to PR157 head 2ca69e79b3476bdd1c5a5d4c88698a3f63c9f71d, tree db37aabde81d1f9b8ce8dbf079d9e601e231cd13.",
+        "Synthetic mobile-browser job 121960958756 and private visual review 40434847409 PASS on prior head 4ee298335fa32ec03dcaec5d6a2f00345ee0b85d; a GitHub commit comparison independently confirms the newer head changed only docs/APPROVAL_COVERAGE_MATRIX.json, docs/workstreams/issue-15.md and tests/coffee-url-autofill.test.mjs, not runtime/site/browser QA code. Do not claim initial full cloud workflow PASS: it failed an obsolete UI-copy assertion later corrected.",
+        "Nonforce PR157 merge a new development commit 71017050a8d43b8fda418f08befe4535478e43c2 with exact same tree db37aabde81d1f9b8ce8dbf079d9e601e231cd13. Exact merged-source app Node/lint/build 40435714826, isolated SQL 40435714774, cloud/mobile 40435714793, approval 40435714861 and Python audit 40435714750 SUCCESS. Merged optional visual run still in progress at this receipt; not claimed passed; previously passing exact-runtime visual evidence retained. Frozen extractor corpus and controlled public roaster source probe SKIPPED as unrelated, not called passed.",
+        "Isolated SQL asserts public.bags remains, optional public.shots.bag_id and owner/coffee FK retain RLS and limited permissions, original hosted legacy shot import and offline receipts remain valid. No database migration is created or required; old historical migrations remain source of truth.",
+        "Read-only actual Supabase production after merge: 4 bags (all active), 0 dated, 0 frozen, 23 shots, 14 bag-linked, 0 orphans, 23 notes, 4 personal families, 4 recipe preferences. No member-data or schema writes. Actual Netlify remains release commit 65ee38609db6bd5977dd0f2b393e7791a5e1b766 and deploy 6adc20c03a07673c4dd08035, READY/current but not this source."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await exact-source Node/lint/build, cloud/browser/offline and isolated SQL regressions, safe nonforce merge, final READY source receipt. No Netlify deployment authorized."
+      "ci_runs": [
+        40435098303,
+        40435098681,
+        40435098321,
+        40435098320,
+        40435098308,
+        40434847409,
+        40435714826,
+        40435714774,
+        40435714793,
+        40435714861,
+        40435714750
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/15; owner's October 26, 2026 explicit retirement instruction",
-      "notes": "Original #15 Bag Details feature intentionally withdrawn. No new hosted controls were present. New prototype entries no longer fabricate a bag; historical bag associations and old import format stay intact. No SQL migration or production writes. Preserve all unrelated READY packages and extractor #33 hold."
+      "notes": "Original #15 Bag Details feature intentionally withdrawn. No new hosted controls were present. New prototype entries no longer fabricate a bag; historical bag associations and old import format stay intact. No SQL migration or production writes. Preserve all unrelated READY packages and extractor #33 hold. Verified non-force source READY; planned Bag Details functionality is canceled. Only inert/legacy bag schema, owner-scoped shot associations and archival restore paths remain. No production DDL or data deletion, and no Netlify publication. Other 18 queue entries and extractor verification HOLD are unchanged."
     }
   ],
   "history": [
