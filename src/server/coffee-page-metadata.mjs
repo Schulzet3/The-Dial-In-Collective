@@ -21,6 +21,7 @@ import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProd
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
+import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
 import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence} from './coffee-selected-source-evidence.mjs';
@@ -1446,6 +1447,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const current=/\b(?:this|our|current)\s+(?:coffee|lot|release)\b[^.!?]{0,130}\b(?:processed\s+as|is\s+washed|washed\s+process)\b/i.test(currentWords);
   if(historic&&!direct&&!current)delete fields.process;
  }
+ // Only product-scoped, unconflicted source evidence can set a separate
+ // Decaffeination Method; never substitute for Washed/Natural/Honey Process.
+ const decaffeination_method=inferDecaffeinationMethod({
+  name:fields.name,processingDetail:roaster_details.processing_detail,
+  conflicting:detailConflicts.has('processing_detail')
+ });
+ if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
