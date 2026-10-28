@@ -1125,6 +1125,35 @@
       ],
       "owner_source": "Direct owner instructions 2026-10-27, Issue #33",
       "notes": "Merged, independently exact-source checked, TESTING awaiting original immutable 603 replay and scoped real-source acceptance; NOT READY and NOT DEPLOYED. The selected current product's Lempira variety prevails over SEO-only Parainema, which is hidden in the member preview (retained only as raw downloadable audit). Both Light and Medium-Dark roast choices share green coffee facts without false conflicts. Roast-specific notes, sensory ratings and espresso references only appear after member selection. No photos, no inferred extraction time, no member/private data writes, no production operations, no paid services. Parent Issue33 remains OPEN and other READY/DEPLOYED rows untouched."
+    },
+    {
+      "id": "DIC-Q-180-decaf-only-method",
+      "issue": 180,
+      "pr": 181,
+      "title": "Decaf-only source-verified method normalization, Coffee Details and staged canonical storage",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-decaffeination-method.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "site/cloud/main.js",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/mapping.js",
+        "site/lib/constants.js",
+        "site/lib/model.js",
+        "supabase/migrations/20261027170000_dic_decaf_only_method.sql"
+      ],
+      "tests": [
+        "Original source method parsing and processing regression initially 72/72 local PASS; merged-source exact CI pending; immutable 603-corpus not yet rerun"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source CI, SQL validation, source and database consumer integration verification pending",
+        "Nonforce development merge, merged-source CI and queue reconciliation pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/180",
+      "notes": "No publication authorized. Staged SQL only, not applied; no production member data writes. Preserves parallel Issue33 changes; ready only after full required integrated evidence."
     }
   ],
   "history": [
