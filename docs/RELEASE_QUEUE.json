@@ -1240,6 +1240,26 @@
       ],
       "owner_source": "Owner October 27 explicit Full City standardization, Issue #33",
       "notes": "Two independent coffee reviews resolved by official roast evidence. No production SQL, deployment or member history changes. Original frozen 603 untouched. PR185 tested and safely merged; no production changes. Prior PR184 closed unmerged after preserving its scope in PR185."
+    },
+    {
+      "id": "DIC-Q-33-white-coffee-manual-roast",
+      "issue": 33,
+      "pr": null,
+      "title": "Selected White Coffee nonstandard roast warning and user choice",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ],
+      "tests": [
+        "Exact selected White Coffee title and explicit Roast: White remain blank and show safe manual selection hint; contradictory and unrelated source protections tested synthetically. Exact-source CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact-source CI, safe merge and readback pending. Restricted original603 benchmark branch/private input gate remains unverified."
+      ],
+      "owner_source": "Owner October 27 source gap resolution: Alaska Artisan White Coffee #4, manual selection only",
+      "notes": "No automatic Ultra Light, Very Light, or Light classification; preserve product label. No original603, saved member data, production operations or release changed."
     }
   ],
   "history": [

@@ -154,3 +154,40 @@ test('conflicting current product roast source still requires human review',()=>
  assert.equal(r.fields.roast_level,undefined);
  assert.ok(r.conflicts?.includes('roast_level'));
 });
+
+test('White is a distinct roaster roast class and never silently a seven-tier roast',()=>{
+ for(const value of ['White','White Roast','White Coffee','Roast: White','Roast Level: White'])
+  assert.equal(normalizeRoastLabel(value),null,value);
+ const r=asPreview('<div data-roast-level="White"></div>');
+ assert.equal(r.fields?.roast_level,undefined);
+ assert.match(r.roast_hint,/white.*choose.*manually/i);
+});
+test('Alaska Artisan selected White Coffee product flags manual roast selection',()=>{
+ const html='<html><body><main><h1>White Coffee</h1>'+
+  '<h3>What is White Coffee?</h3><p>These beans roast at lower temperature to a light tan color.</p>'+
+  '<h3>Espresso Method</h3><p>Grounds swell before extraction.</p>'+
+  '</main></body></html>';
+ const r=extractPublicCoffeeFacts(html,{source_url:'https://www.alaskaartisancoffee.com/products/white-coffee'});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields?.roast_level,undefined);
+ assert.match(r.roast_hint,/white coffee.*choose.*manually/i);
+ const markup=coffeeUrlPreviewMarkup(r);
+ assert.match(markup,/White Coffee/);
+ assert.match(markup,/choose.*manually/i);
+});
+test('White roast review does not infer a category from product names or general prose',()=>{
+ for(const fragment of [
+  '<h1>Sunrise Blend</h1><p>Our guide explains White Coffee as a roasting tradition.</p>',
+  '<h1>Snow White Blend</h1><p>Nutty, floral light tan beans.</p>',
+  '<h1>Sunrise Blend</h1><h2>Our related products</h2><a href="/products/white-coffee">White Coffee</a>'
+ ]){
+  const r=asPreview(fragment);
+  assert.equal(r.fields?.roast_level,undefined,fragment);
+  assert.ok(!/White is outside|White Coffee.*choose/i.test(r.roast_hint||''),fragment);
+ }
+});
+test('a separately explicit selected seven-tier roast is respected even for White Coffee title',()=>{
+ const r=extractPublicCoffeeFacts('<main><h1>White Coffee</h1><figure data-roast-level="Very Light"></figure></main>',
+  {source_url:'https://www.alaskaartisancoffee.com/products/white-coffee'});
+ assert.equal(r.fields?.roast_level,'Very Light');
+});

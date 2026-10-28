@@ -1,3 +1,9 @@
+## October 28 UTC — Alaska Artisan White Coffee owner resolution (source TESTING; NOT DEPLOYED)
+
+Owner resolves original missing-field coffee #4/77: Alaska Artisan White Coffee remains blank in the seven-tier roast model, with a member-review hint from the selected White Coffee product or explicit Roast: White. Very Light/Ultra Light are owner-described possibilities only, neither verified nor auto-filled; old original603 expected Light stays untouched. Official product and category pages confirm White is a separate classification. New code/test regression and independent decision register follow same-commit journal, source CI/merge pending. PR186 concurrent Cortez is preserved, no publication authorized.
+
+---
+
 ## October 28 UTC — Full City PR185 source merged/verified; restricted corpus unverified (NOT DEPLOYED)
 
 Approved Full City → Medium-Dark source normalization is merged at 1abb7f92327c11e92b89a73fdb00c80235a70665, with tested head 0409852c8439fc7314c106e2d15040a5ff7c9cda, six applicable head CI SUCCESS and postmerge app/cloud/approval SUCCESS. PR184 superseded and closed unmerged; latest Kona/Cortez changes preserved. Frozen original603 workflow and public roaster checks SKIPPED, NOT PASS. Queue remains TESTING, not READY. User's separate publication approval not granted, no production writes. Coffee #4 White Coffee roaster source review presented for owner response.

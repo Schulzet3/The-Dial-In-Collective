@@ -44,8 +44,13 @@ export function normalizeRoastLabel(value){
 }
 export function roastLabelHint(value){
  const v=plain(value);
- if(!v||v.length>70||!/(?:light|medium|dark|blonde|city)/i.test(v))return '';
+ if(!v||v.length>70||!/(?:light|medium|dark|blonde|city|white)/i.test(v))return '';
  if(normalizeRoastLabel(v))return '';
+ // White is a distinct literal roaster category, not a supported seven-tier
+ // roast. Only an explicitly identified roast label triggers a manual hint.
+ const explicit=v.replace(/^roast(?:\s+(?:level|profile|degree|type))?\s*[:=]\s*/i,'').trim();
+ if(/^white(?:[ -](?:coffee|roast))?$/i.test(explicit))
+  return 'Roaster labels this coffee '+explicit+'. White is outside the standardized roast tiers; choose a level manually if known.';
  // Other unsupported labels remain reviewable; Full City has an approved mapping.
  if(/^(?:extra[\s-]?light|nordic[\s-]?light|(?:light|medium|dark)\+|lighter|darker)\s*(?:roast)?$/i.test(v))
   return 'Roaster describes the coffee as '+v+'. Choose the closest supported level manually.';
@@ -411,6 +416,12 @@ export function extractRoastVisualEvidence(html){
  }
  if(unique.length>1)return {value:null,confidence:'conflict',source:null,
   hint:'Conflicting roast labels were found. Check the roaster’s page before choosing a roast level.'};
+ // Exact selected White Coffee title is evidence of a named nonstandard
+ // category, not evidence of Light, Very Light or Ultra Light. Do not use
+ // unrelated recommendation titles or generic educational white-coffee text.
+ const onlyTitle=pageNodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=220);
+ if(onlyTitle.length===1&&/^white coffee$/i.test(plain(page.slice(onlyTitle[0].headEnd,onlyTitle[0].contentEnd))))
+  hints.unshift('Selected product is White Coffee. The roaster treats White as a separate roast class; choose a supported roast level manually if known.');
  if(hints.length)return {value:null,confidence:'uncertain',source:null,hint:hints[0]};
  // A graphic with "Light" and "Medium" labels alone isn't evidence that
  // either endpoint is the roast value; allow member to select manually.
