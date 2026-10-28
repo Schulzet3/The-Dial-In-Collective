@@ -1,3 +1,9 @@
+## October 28 UTC — Issue33 Cortez current-product-only decision recorded; handoff available
+
+Owner approved ignoring old copy at the reused Cortez product URL: read actual present product title/lot/specifications, not historical SEO, old slug or previous coffee's narrative; archive previous evidence without using it for extraction. This is a **new Locked decision**, **not an implemented code fix**. Issue33 remains OPEN and residual source accuracy IN_PROGRESS. See `docs/handoffs/ISSUE33_OWNER_COFFEE_REVIEW_HANDOFF_2026-10-27.md`. No deployment authorization or provider mutation; PR179 and PR183 remain merged but their new queue items TESTING because a fresh original603 replay is not evidenced.
+
+---
+
 ## October 28 UTC — Kona PR183 merged-source acceptance reconciliation
 
 Verified PR183 merge a7f77cb70e510d51580e2d076d7484281c020be9 retained exact PR-head source tree 369a375343024ec04e71fbc2729efb49c78e756e. Six original PR-head checks passed; postmerge app/Node/lint/build 40623117571 and cloud UX/mobile 40623117565 now independently SUCCESS, as was approval 40623117630. Current Netlify site readback remains READY production deploy 6ae0fc16178b2f1241e441f8 from the previous authorized release, so Kona work NOT DEPLOYED. Mandatory frozen603 40622879836 and postmerge live selected-source checks 40623117569/40623117577 SKIPPED due conditional workflow guards; these are NOT passes. Scoped queue stays TESTING for that evidence gate; no silent promotion to READY. Source-specific Kona regression tests pass. No member data, production settings, SQL, Edge/Auth, paid service or release command executed.
