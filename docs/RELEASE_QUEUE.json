@@ -1311,6 +1311,29 @@
       ],
       "owner_source": "Owner approval in Coffee #5 review, October 27-28 2026; Issue #33",
       "notes": "Preserve current source roast literal, no inferred single category or roast selection; keep private member data, original archive and oracle untouched. No deploy. Scope integrated, pending mandatory frozen603. Published Netlify deploy independently confirmed unchanged at 6ae0fc16178b2f1241e441f8; NOT DEPLOYED. Concurrent Cortez PR186 still open."
+    },
+    {
+      "id": "DIC-Q-33-cortez-reused-product-current-spec",
+      "issue": 33,
+      "pr": null,
+      "title": "Quarantine stale old-coffee narrative on reused Shopify product handles",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-shopify-ajax.mjs"
+      ],
+      "tests": [
+        "Previous PR186 head 753def1 failed two actual CI tests; both repaired at c0012c8. Rebased full CI on new branch is required before readiness.",
+        "Frozen original603 and live exact Cortez Shopify Product JSON remain unverified; do not claim skipped private workflow passed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source rebased tests and safe integration not yet verified.",
+        "Original frozen603 restricted archive replay unavailable, workflow hard-guarded to historical candidate12 branch.",
+        "Current actual Cortez Shopify Product JSON remains unverified, differing search index snapshots are not current facts."
+      ],
+      "owner_source": "Owner direct approval October 27, 2026; EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027",
+      "notes": "No publication or production/backend/member-data changes. Source-only TESTING. Preserve original immutable corpus and existing READY items."
     }
   ],
   "history": [
