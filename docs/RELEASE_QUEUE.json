@@ -284,7 +284,8 @@
       ],
       "ci_runs": [],
       "blockers": [
-        "Issue #33 individual source gaps remain independently unimplemented/unverified for Coffees #6-76 except the narrowly fixed #77 roast issue. 77 review rows exist, but chat review notes alone are not accepted live source facts or app changes. Current immutable603 strict 603/603: 3096 exact, 81 missing and 825 review-required, including 50 previously cataloged source conflicts requiring correct current product context. All 6474 supplementary evidence assessments unchanged (5458 full, 337 partial, 679 unconfirmed). Do not fabricate missing source data, alter oracle, or close the parent issue."
+        "Issue #33 individual source gaps remain independently unimplemented/unverified for Coffees #6-76 except the narrowly fixed #77 roast issue. 77 review rows exist, but chat review notes alone are not accepted live source facts or app changes. Current immutable603 strict 603/603: 3096 exact, 81 missing and 825 review-required, including 50 previously cataloged source conflicts requiring correct current product context. All 6474 supplementary evidence assessments unchanged (5458 full, 337 partial, 679 unconfirmed). Do not fabricate missing source data, alter oracle, or close the parent issue.",
+        "Additional #72 Thrive Farmers Horizon Organic producer attribution risk: synthetic page mirroring official selected product's current labelled specs plus later unrelated Meet Marta Solares / FARM La Esperanza produced `producer: La Esperanza`; ACODIHUE is source-backed Guatemalan coffee community, while Marta's separate profile is not selected coffee producer proof. Actual full live HTML/current provider-selected scope not yet independently captured; investigate robust profile-source boundaries before claiming #72 implemented/READY. No unverified producer should enter member autofill."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Parent Issue33 OPEN / IN_PROGRESS for 111 missing, 822 strict reviews and 50 unresolved original source conflicts; prior 3090 exact/90 missing candidate with 21 additional possible source-backed recoveries remains an opportunity, not current verified code. Independently completed PR158 fix and PR152 source correction are READY but not deployed. No production publication or pending data mutation. Oct27 Cortez owner approved: current exact product title/specifications override reused legacy URL slug, archived copy and obsolete same-page narrative. Ignore older copy in current extraction while retaining audit evidence. This Cortez implementation is NOT YET DONE OR TESTED; see docs/handoffs/ISSUE33_OWNER_COFFEE_REVIEW_HANDOFF_2026-10-27.md and Decision Ledger EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027."
@@ -1434,23 +1435,34 @@
     {
       "id": "DIC-Q-33-selected-image-relative-roast",
       "issue": 33,
-      "pr": null,
+      "pr": 191,
       "title": "Preserve current coffee-specific product-label Lighter roast as manual review without guessing seven-tier roast",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "7974c09a7e4973731c00928018dc113693277945",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
       ],
       "tests": [
-        "Local 33/33 focused Node tests PASS: exact B&W Diego Horta and Sebastian Red Fruits selected H1 image-label long alt 'lighter roast' -> manual hint, no canonical value; other coffee/guide/multiple H1 rejection; explicit supported roast stays authoritative; Beanstock reused slug same-country current selected coffee avoids stale FUDAM Washed inference. Local temporary candidate source SHA blob b26d642bc66c6d0a76098f9d2d367e6aa9f69052, test SHA e0ba4ccb27b0315de5dd6c44300c3ee5724a47c7."
+        "Exact Black & White current selected H1 bag ALT 'lighter roast' selected product only: canonical roast blank; user manual review hint visible in actual Add Coffee markup; unrelated brand bag/guide photo and competing H1 don't contaminate; explicit supported roast still wins. Beanstock historically FUDAM/Washed old URL selected current Tolima Suave medium/notes with process unpublished, no stale autofill.",
+        "Independent actual immutable603 source archive original hash 696c011... preserved. Full 603/603 201-roaster 1197-capture 4002 strict unchanged oracle: 3096 exact/81 missing/825 review; all 603 per-case results identical to PR190. 6474 supplemental original retention identical for all 603 (5458 full/337 partial/679 unconfirmed), zero previous exact losses; see docs/audits/extractor-issue33-selected-image-replay-20261028.json. Historical hosted locked workflow SKIPPED, not claimed passed.",
+        "Local focused 34/34 PASS, including real preview markup. Exact PR191 head c1f568625856bd13debc400d6ab26d06e82a3895 seven applicable CI PASS: Node/lint/build 40634343359, cloud/mobile 40634343132, visual/browser 40634343220, SQL 40634343187, security 40634343180, approval 40634343006, private source-bundle 40634343223.",
+        "Nonforce PR191 merge 7974c09a7e4973731c00928018dc113693277945 tree 843586933cc38e9ff0c1cffb555dc655c3b7a1bd identical to tested head, extractor blob b26d642... unchanged. Exact merged-source app/build 40634577253, cloud/mobile 40634577221, approval 40634577209 all PASS. Public source acceptance 40634577218 and controlled probe 40634577219 SKIPPED, not treated as passed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Full immutable 603-coffee exact changed-source strict/oracle replay and supplementary retention still in progress; no score claimed.",
-        "GitHub PR exact-source CI, safe merge and postmerge readback not yet completed."
+      "ci_runs": [
+        40634343359,
+        40634343132,
+        40634343220,
+        40634343187,
+        40634343180,
+        40634343006,
+        40634343223,
+        40634577253,
+        40634577221,
+        40634577209
       ],
+      "blockers": [],
       "owner_source": "Issue #33 original #7 and #9 exact Black & White official selected product pages; prior owner-Locked unsupported relative roast leaves canonical roast blank, manual review",
-      "notes": "Evidence-based generic selected product image ALT hint only. Does not infer Light/Very Light, modify historical captures/oracle or member records; #8 official exact current page inaccessible, not independently marked resolved. NOT READY, NOT DEPLOYED."
+      "notes": "READY, NOT DEPLOYED. Relative Lighter roast is intentionally not canonical Light/Very Light; preserved as selected current product-specific manual hint. #8 Black & White Franky Hoyos official source unavailable and is not claimed resolved. #6 current Beanstock source snapshot not live endpoint, no need for new code. Original immutable603 unchanged, real member data untouched, prior app synthetic Chromium 68/68 retained as unchanged frontend evidence."
     }
   ],
   "history": [

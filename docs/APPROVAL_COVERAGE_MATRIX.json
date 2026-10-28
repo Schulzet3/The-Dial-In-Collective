@@ -1557,7 +1557,7 @@
     }
   },
   "EXTRACTOR-CURRENT-SELECTED-IMAGE-RELATIVE-ROAST-HINT-20261028": {
-    "status": "APPROVED_SOURCE_TESTING",
+    "status": "READY_NOT_DEPLOYED",
     "owner_source": "Exact Black & White official selected-product pages Diego Horta and Sebastian Ramirez Red Fruits Decaf; owner Locked supported roast taxonomy and mandatory manual review of nonstandard relative descriptions",
     "canonical_master": "docs/MASTER_SPECIFICATION.md",
     "canonical_ledger": "docs/DECISION_LEDGER.json",
@@ -1566,14 +1566,20 @@
     ],
     "tests": [
       "tests/coffee-issue33-selected-photo-and-reused-slug.test.mjs",
-      "33 focused local regression checks passed; full original603 currently running"
+      "34 local focused PASS including actual Add Coffee UI markup",
+      "Independent original603 full actual-handler replay 603/603 strict per-case parity and all 6474 supplementary per-case unchanged: docs/audits/extractor-issue33-selected-image-replay-20261028.json",
+      "Local focused 34/34 PASS, including real preview markup. Exact PR191 head c1f568625856bd13debc400d6ab26d06e82a3895 seven applicable CI PASS: Node/lint/build 40634343359, cloud/mobile 40634343132, visual/browser 40634343220, SQL 40634343187, security 40634343180, approval 40634343006, private source-bundle 40634343223.",
+      "Nonforce PR191 merge 7974c09a7e4973731c00928018dc113693277945 tree 843586933cc38e9ff0c1cffb555dc655c3b7a1bd identical to tested head, extractor blob b26d642... unchanged. Exact merged-source app/build 40634577253, cloud/mobile 40634577221, approval 40634577209 all PASS. Public source acceptance 40634577218 and controlled probe 40634577219 SKIPPED, not treated as passed."
     ],
     "release_authority": "NOT GRANTED",
     "verified_source": {
-      "pr": null,
-      "feature_code_blob_sha": "b26d642bc66c6d0a76098f9d2d367e6aa9f69052",
-      "feature_test_blob_sha": "e0ba4ccb27b0315de5dd6c44300c3ee5724a47c7",
-      "status": "TESTING_NOT_READY",
+      "pr": 191,
+      "head_sha": "c1f568625856bd13debc400d6ab26d06e82a3895",
+      "merge_sha": "7974c09a7e4973731c00928018dc113693277945",
+      "tree_sha": "843586933cc38e9ff0c1cffb555dc655c3b7a1bd",
+      "code_sha": "b26d642bc66c6d0a76098f9d2d367e6aa9f69052",
+      "original603_receipt": "docs/audits/extractor-issue33-selected-image-replay-20261028.json",
+      "status": "READY_NOT_DEPLOYED",
       "publication": "NOT_AUTHORIZED"
     }
   }

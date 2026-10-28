@@ -208,7 +208,7 @@
       ],
       "review_track": "FORWARD_EXCLUSIVE_NEXT_REVIEW",
       "owner_authority": "CURRENT_OFFICIAL_PRODUCT_PLUS_EXISTING_LOCKED_ROAST_TAXONOMY",
-      "owner_review_status": "SOURCE_SUPPORTED_MANUAL_ROAST_REVIEW_IMPLEMENTATION_TESTING",
+      "owner_review_status": "RESOLVED_CURRENT_SELECTED_RELATIVE_ROAST_ONLY",
       "current_official_source": {
         "status": "CURRENT_OFFICIAL_SELECTED_RELATIVE_ROAST_IMAGE_LABEL_SOURCE",
         "checked": "2026-10-28",
@@ -216,15 +216,15 @@
         "method": "PUBLIC_OFFICIAL_PAGE_CRAWLED_2_DAYS_AGO",
         "finding": "Exact selected Black & White Diego Horta - Anaerobic Natural bag image alt explicitly says lighter roast. This is an unsupported relative roast, not Light/Very Light; preserve the source as manual roast hint and leave canonical roast blank. The exact selected current H1 must match the bag-label image; unrelated product alt is rejected."
       },
-      "implementation_status": "CANDIDATE_PR191_FOCUSED_REGRESSIONS_PASS_FULL603_PENDING",
+      "implementation_status": "MERGED_PR191",
       "tests": {
-        "focused": "PASS: exact selected H1 relative-image roast hint, no tier autofill or off-product contamination, 33/33 local focused Node.",
-        "original603": "PENDING exact changed-source full immutable603 replay and supplementary retention",
-        "built_app": "Frontend unchanged; previous 68 isolated Chromium synthetic app checks reused as unchanged front-end evidence, not provider acceptance."
+        "focused": "PASS: 34/34 local focused including real Add Coffee preview, full exact head GitHub CI.",
+        "original603": "PASS: current changed-source exact original603 actual preview handler 603/603, canonical per-case identical to PR190, supplementary all 6474 unchanged, zero prior exact lost. docs/audits/extractor-issue33-selected-image-replay-20261028.json",
+        "built_app": "PASS: actual Add Coffee markup visible manual hint and no roast autofill plus previous 68 synthetic Chromium workflows; no live auth."
       },
-      "merged_sha": null,
-      "release_status": "TESTING_NOT_READY_NOT_DEPLOYED",
-      "blocking_evidence": "Original603 changed-source replay, exact GitHub CI, safe non-force integration and postmerge receipt pending."
+      "merged_sha": "7974c09a7e4973731c00928018dc113693277945",
+      "release_status": "READY_SCOPED_SOURCE_FIX_NOT_DEPLOYED",
+      "blocking_evidence": null
     },
     {
       "number": 8,
@@ -266,7 +266,7 @@
       ],
       "review_track": "FORWARD_EXCLUSIVE_NEXT_REVIEW",
       "owner_authority": "CURRENT_OFFICIAL_PRODUCT_PLUS_EXISTING_LOCKED_ROAST_TAXONOMY",
-      "owner_review_status": "SOURCE_SUPPORTED_MANUAL_ROAST_REVIEW_IMPLEMENTATION_TESTING",
+      "owner_review_status": "RESOLVED_CURRENT_SELECTED_RELATIVE_ROAST_ONLY",
       "current_official_source": {
         "status": "CURRENT_OFFICIAL_SELECTED_RELATIVE_ROAST_IMAGE_LABEL_SOURCE",
         "checked": "2026-10-28",
@@ -274,15 +274,15 @@
         "method": "PUBLIC_OFFICIAL_PAGE_CRAWLED_TODAY",
         "finding": "Exact selected Black & White Sebastian Ramirez - Red Fruits Decaf bag image alt explicitly says lighter roast. This is an unsupported relative roast, not Light/Very Light; preserve the source as manual roast hint and leave canonical roast blank. The exact selected current H1 must match the bag-label image; unrelated product alt is rejected."
       },
-      "implementation_status": "CANDIDATE_PR191_FOCUSED_REGRESSIONS_PASS_FULL603_PENDING",
+      "implementation_status": "MERGED_PR191",
       "tests": {
-        "focused": "PASS: exact selected H1 relative-image roast hint, no tier autofill or off-product contamination, 33/33 local focused Node.",
-        "original603": "PENDING exact changed-source full immutable603 replay and supplementary retention",
-        "built_app": "Frontend unchanged; previous 68 isolated Chromium synthetic app checks reused as unchanged front-end evidence, not provider acceptance."
+        "focused": "PASS: 34/34 local focused including real Add Coffee preview, full exact head GitHub CI.",
+        "original603": "PASS: current changed-source exact original603 actual preview handler 603/603, canonical per-case identical to PR190, supplementary all 6474 unchanged, zero prior exact lost. docs/audits/extractor-issue33-selected-image-replay-20261028.json",
+        "built_app": "PASS: actual Add Coffee markup visible manual hint and no roast autofill plus previous 68 synthetic Chromium workflows; no live auth."
       },
-      "merged_sha": null,
-      "release_status": "TESTING_NOT_READY_NOT_DEPLOYED",
-      "blocking_evidence": "Original603 changed-source replay, exact GitHub CI, safe non-force integration and postmerge receipt pending."
+      "merged_sha": "7974c09a7e4973731c00928018dc113693277945",
+      "release_status": "READY_SCOPED_SOURCE_FIX_NOT_DEPLOYED",
+      "blocking_evidence": null
     },
     {
       "number": 10,
@@ -2242,8 +2242,12 @@
       "missing": 81,
       "review_required": 825
     },
-    "retention_delta": 0
+    "retention_delta": 0,
+    "latest_sha": "7974c09a7e4973731c00928018dc113693277945",
+    "latest_receipt": "docs/audits/extractor-issue33-selected-image-replay-20261028.json",
+    "per_case_strict_parity": true,
+    "per_case_supplementary_parity": true
   },
-  "reconciled_development_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+  "reconciled_development_sha": "7974c09a7e4973731c00928018dc113693277945",
   "release_state": "SCOPED_READY_ONLY_NOT_PRODUCTION;PARENT_ISSUE33_IN_PROGRESS"
 }
