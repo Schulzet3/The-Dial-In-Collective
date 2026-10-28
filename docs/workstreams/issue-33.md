@@ -1,3 +1,9 @@
+## October 28 UTC — hosted browser checkpoint not yet passing; add stage-safe diagnostics
+
+CI run 40766815651 exercised disposable GoTrue and one-time invite successfully and entered real Chromium, but a 25-second locator wait timed out before end-to-end saved-coffee assertion. The initial test incorrectly replaced the failing stage with its final cleanup stage; account disable still ran. Added safe non-identifying browser step markers to isolate actual failing page transition, preserving same-commit journal. Do not claim full auth/persistence pass. Disposable access disabled. No member records or shared coffee changed; no publish.
+
+---
+
 ## October 28 UTC — real hosted GoTrue/invite verified through test checkpoint; existing coffee choice path corrected
 
 CI run 40766534762 reached real hosted signup, disposable email confirmation, genuine GoTrue password login/user endpoint, admission denial, invite redemption and status. Its initial matcher assumption was invalid: all current eight verified catalog coffees have NULL `release_label`, so matcher deliberately returns `needs_confirmation` rather than `exact_verified` for same-name coffees. Test correctly refused to create a new shared coffee, disabled disposable member, and produced a failed run. Corrected test to exercise the real `Use Existing` Add Coffee confirmation button and independently verify its resulting library entry and fresh RPC readback. No existing member data changed; no production deploy.
