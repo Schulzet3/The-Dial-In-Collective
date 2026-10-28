@@ -1,3 +1,27 @@
+## October 28 UTC — PR200 source review and geography regressions repaired without weakening original tests
+
+First exact-head PR200 58cc738 had 8 failures: 2 geographic tests detected an improperly invented Cauca/Huila Colombia tuple, and 6 existing linked-farmer source-review tests lost valid supplementary provenance. Limit special-case typed Region + untyped Origin composition to explicitly printed country-FIRST Origin ("Colombia, Tolima" + "Fresno"). Country-LAST competing region names remain conflicts, avoiding gazetteer inference. Restore full sanitized productMarkup for public source review; export detached-profile filtering and apply ONLY to canonical current-product fields, while `collectSupplementaryCoffeePageFacts` receives original selected markup so source-linked farmer profile facts remain available to users for inspection without filling this coffee's producer. Updated positive/negative #72 test accordingly. Exact new-source CI and original603 replay required before merge; no production writes or deploy.
+
+---
+
+## October 28 UTC — PR200 source regression repaired and queue intake reconciled
+
+First cloud run 40705017317 failed four tests: global flavor-set subset relaxation wrongly suppressed two established independently printed-label conflicts; narrowed rule to directly printed selected Flavor subset outranking *structured Product metadata* only, preserved independent-versus-independent contradiction with new negative. New VESTA test exposed the second origin reconciliation path (typed Region plus untyped country-first Origin) which now uses a printed-components-only tuple in sensible region, state, country order; no gazetteer. New Thrive synthetic test detected uppercase MEET missing due case-sensitive pattern; made heading guard case-insensitive. Approval 40705017187 failure was absent changed-source intake row; now explicitly TESTING in same-commit release queue. None of these failed tests count PASSED until exact-source re-run. No deployment, live member changes or original603 fixture alterations.
+
+---
+
+## October 28 UTC — PR200 source compatibility approval intake failure repaired (CI retest)
+
+PR200 first exact-head approval workflow 40705017187 FAILED at release-queue --enforce-intake because new `src/server/coffee-product-scope.mjs` was not tracked in a same-scope TESTING queue item; not a runtime extractor failure. Added `DIC-Q-33-selected-source-compatible-roles-and-profile-boundary` with exact three changed app paths, source authority and pending CI/603 acceptance so the queue now tracks every changed application file. No release claim, CI not yet verified; continue full exact-head run and repair any other failing test. All original coffee facts, member data and production unchanged.
+
+---
+
+## October 28 UTC — source-bound reusable compatibility and producer-isolation repair TESTING
+
+PR199 merged and source-bound owner77 probe 40703208153 completed 77/77 direct official pages and actual Add Coffee preview output. It classified 50 requested fields as unpopulated/unextracted, 11 as source context only, 10 as requested-field conflicts, 6 as canonical suggestions; these counts are DIAGNOSTIC, not pass/fail against the decisions (intentionally blank is valid). Current source-backed cases: #41 Lowcountry Cocoa/Almond versus overlapping Cocoa/Almond/Chocolate, #65 Spiritus same Guaya'b women-producer program with qualifier, #74 VESTA labeled Fresno region and Tolima/Colombia origin, #23 Favor branded Token Dark Roast versus selected medium-dark roast prose, #72 Thrive unrelated MEET Marta Solares profile must never donate La Esperanza to Horizon Organic. Implement general selected-source compatibility and profile boundary with focused positive and contradictory negatives; leave unsupported fields blank. No hardcoded coffee outputs, credentials, member mutations, paid API or release. New parser tests/CI and immutable original603 replay still required.
+
+---
+
 ## October 28 — full owner 77 source-specific facts and preview capture staged (read-only)
 
 User confirms that exact acceptance means each coffee implements the specific approved decision, **not** that all optional fields have values. Original reviewed 77 product URLs uniquely numbered; first-pass source/presentation smoke passed 77/77, but field provenance and individual requirements were not verified. Introduce credential-free [dic-issue33-owner77] bounded current official source QA: for every original URL use actual server parser and frontend Add Coffee renderer, record selected facts, target field, printed related source context, status/contradictions and screenshots-equivalent markup warnings. Two known oversized pages use existing 2MB product guard. No member request, database, deploy, new spend, or changes to frozen original603 oracle. This is a DIAGNOSTIC, not automatic 77/77 decision acceptance. Exact-head CI, nonforce merge, read actual source diagnostics, then targeted implementation and per-decision acceptance remain required.

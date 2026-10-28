@@ -196,6 +196,11 @@ function explicitProseRoasts(html){
     if(/\b(?:version|alternative|equivalent|counterpart)\s+of\s+(?:our|the|their)\s*$/i.test(before))continue;
     const explicitCoffeeBean=/^\s+(?:(?:colombian|columbian|brazilian|ethiopian|guatemalan|honduran|nicaraguan|peruvian|mexican|sumatran)\s+)?(?:coffee|beans?)\b/i.test(after);
     if(sensoryContext(before)&&!explicitCoffeeBean)continue;
+    // "our year-round Token Dark Roast" is a named product, not
+    // necessarily its current categorical roast when selected prose
+    // separately says "this medium-dark roast".
+    const named=before.match(/\b(?:year-round|signature|house)\s+([\p{Lu}][\p{L}\p{M}'’-]{2,48})\s*$/u);
+    if(named&&titles.some(title=>title.includes(named[1].toLowerCase())))continue;
     const value=normalizeRoastLabel(match[1]);if(value)found.push(value);
    }
    for(const match of sentence.matchAll(/\blightly\s+roasted\b/gi))if(!sensoryContext(sentence.slice(0,match.index)))found.push('Light');

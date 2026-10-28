@@ -8,7 +8,7 @@ import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
-import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
@@ -180,6 +180,7 @@ function samePage(raw,target){
  }catch{return false;}
 }
 const conflictsByFields=new WeakMap();
+const structuredFlavorByFields=new WeakMap();
 // Public-only evidence for a member to compare.  Never submit these candidates
 // automatically; canonical fields still use the existing conflict gate.
 const reviewCandidatesByFields=new WeakMap();
@@ -487,6 +488,14 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
   if(afterProse&&!beforeProse)return;
+  if(structuredFlavorByFields.get(fields)===fields[key]&&
+   /^(?:flavor|flavour|flavornotes|flavournotes|tastingnotes|notes)$/.test(keyOf(rawKey))&&
+   coffeeTastingNotesSubset(s,fields[key])){
+   // Source hierarchy: a shorter direct selected Flavor label is preferred
+   // to an overlapping longer Product JSON flavor taxonomy; two independently
+   // printed labels remain genuinely contradictory, never merged.
+   fields[key]=s;structuredFlavorByFields.delete(fields);return;
+  }
   if(equivalentCoffeeTastingNotes(s,fields[key])){
    if(!/[,;&|•·/]/.test(fields[key])&&/[,;&|•·/]/.test(s))fields[key]=s;
    return;
@@ -498,6 +507,17 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   if(compatible){
    fields.variety=compatible;
    if(compatible===s)narrativeIdentityByFields.get(fields)?.delete(key);
+   return;
+  }
+ }
+ if(key==='producer'&&s&&fields.producer){
+  // Keep the identical named cooperative/program when another current
+  // caption merely qualifies it as a women-producers program.
+  const normalize=value=>keyOf(String(value).replace(/\b(?:women|female)\s+producers?\s+(?=program\b)/ig,''));
+  const prior=fields.producer;
+  if(normalize(prior)===normalize(s)&&/\bprogram\b/i.test(prior)&&/\bprogram\b/i.test(s)&&
+   prior.includes(',')&&s.includes(',')&&keyOf(prior.split(',')[0])===keyOf(s.split(',')[0])){
+   if(s.length>prior.length)fields.producer=s;
    return;
   }
  }
@@ -576,6 +596,17 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
     combined=combined?(compatibleGeography(combined,part)||combined+', '+part):part;
    for(const origin of geography.origins||[]){
     let compatible=compatibleGeography(combined,origin);
+    // Explicit Region: Fresno and Origin: Tolima, Colombia on the same
+    // selected coffee are complementary printed place parts. Do not
+    // infer any missing country, mutate provenance or merge distinct countries.
+    if(!compatible&&geography.region&&!geography.country&&!geography.area){
+     const items=String(origin).split(/\s*,\s*/u).filter(Boolean),tail=items.at(-1)||'';
+     const region=geographyParts(geography.region);
+     if(items.length>=2&&items.length<=3&&ORIGIN_COUNTRIES.has(keyOf(tail))&&
+      region.length>0&&region.every(x=>!ORIGIN_COUNTRIES.has(x))&&
+      !items.some(x=>keyOf(x)===keyOf(geography.region)))
+      compatible=[geography.region,...items].join(', ');
+    }
     if(!compatible&&geography.area){
      const withoutArea=combined.split(/\s*,\s*/).filter(part=>keyOf(part)!==keyOf(geography.area)).join(', ');
      const refined=compatibleGeography(withoutArea,origin);
@@ -614,7 +645,18 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
    if(geography.country&&!geography.region&&!otherCountries.length&&geographyParts(combined).every(part=>ORIGIN_COUNTRIES.has(part))){
     combined=origin+', '+geography.country;continue;
    }
-   if((firstCountries.length&&otherCountries.length)||(!geography.country&&!geography.region)||geography.country||
+   if(!geography.country&&geography.region&&!geography.area&&otherCountries.length===1){
+     const printed=String(origin).split(/\s*,\s*/u).filter(Boolean);
+     const first=keyOf(printed[0]||''),last=keyOf(printed.at(-1)||'');
+     const hasFirst=ORIGIN_COUNTRIES.has(first),hasLast=ORIGIN_COUNTRIES.has(last);
+     const region=geographyParts(geography.region);
+     if(printed.length===2&&hasFirst&&!hasLast&&region.length>0&&
+      region.every(place=>!ORIGIN_COUNTRIES.has(place))){
+      const ordered=hasFirst?[printed[1],printed[0]]:printed;
+      combined=[geography.region,...ordered].join(', ');continue;
+     }
+    }
+    if((firstCountries.length&&otherCountries.length)||(!geography.country&&!geography.region)||geography.country||
       (geography.region&&otherCountries.length)){
     reject();return;
    }
@@ -1055,7 +1097,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   [...new Set([meta['og:description'],meta.description].filter(value=>typeof value==='string'&&value.length<=16000))]:[];
  conflictsByFields.set(fields,conflicts);
  const titleCountry=extractCoffeeTitleOrigin(fields.name);
- const currentProduct=canonicalIdentityScope(fields,product);
+ const selectedProduct=canonicalIdentityScope(fields,product);
+ const currentProduct=withoutDetachedFarmerProfiles(selectedProduct);
  const canonicalProduct=canonicalComponentScope(fields,currentProduct);
  rememberGeographyEntityRoles(fields,canonicalProduct);
  for(const place of extractCoffeeGeographyTuples(canonicalProduct,{name:fields.name,clean}))addField(fields,'Origin',place);
@@ -1070,6 +1113,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  for(const equivalent of equivalentProducts){
   if(equivalent!==p&&keyOf(textOf(equivalent.name))===identity)productDetails(fields,equivalent);
  }
+ // Track structured-product notes BEFORE processing visible selected labels.
+ // This is not permission to suppress conflicting independently printed labels.
+ if(fields.tasting_notes)structuredFlavorByFields.set(fields,fields.tasting_notes);
  // An actual, literal lot number in the selected Product title is stronger
  // than an inferred harvest based on a URL, SKU, publication date or country.
  // Preserve exact source text; never manufacture release identifiers.
@@ -1339,7 +1385,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // A later direct blend fallback cannot resurrect rejected geography.
  for(const field of conflicts)delete fields[field];
  if(conflicts.has('roast_level')){roast_evidence.value=null;roast_evidence.source='';}
- const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:currentProduct,source_url});
+ const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:selectedProduct,source_url});
  if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
  const roaster_recipe=extractProductEspressoReference(currentProduct);
  const quarantined=(identityQuarantinesByFields.get(fields)||[]).flatMap(item=>{
