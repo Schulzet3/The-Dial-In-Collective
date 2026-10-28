@@ -1236,7 +1236,7 @@
     }
   },
   "COFFEE-DECAF-ONLY-METHOD-20261027": {
-    "status": "APPROVED_SOURCE_TESTING",
+    "status": "READY_NOT_DEPLOYED",
     "owner_source": "Oct 27 2026 owner instruction, Issue #180",
     "canonical_specification": "docs/MASTER_SPECIFICATION.md",
     "canonical_decision_ledger": "docs/DECISION_LEDGER.json",
@@ -1262,6 +1262,25 @@
       "Any automatic mutation of existing approved coffee, shots or original 603 oracle"
     ],
     "release_authority": "NOT GRANTED",
-    "issue": 180
+    "issue": 180,
+    "verified_source": {
+      "merged_sha": "e9a1895974c823e6fbe34e3a517dc298ed7bd5bf",
+      "pr": 181,
+      "ci_success": [
+        40618414981,
+        40618414871,
+        40618414942,
+        40618414853,
+        40618414936,
+        40618414845,
+        40618871585,
+        40618871586,
+        40618871532,
+        40618871626,
+        40618871635
+      ],
+      "original603": "SKIPPED by restricted workflow; not rebenchmarked",
+      "production": "No Netlify deployment or production database migration"
+    }
   }
 }

@@ -565,3 +565,7 @@ Core feature work #10/#12/#13/#14/#15/#16 and grinder decisions #17 remain. Focu
 Some provider settings, original chat/research bodies, new physical-device/VoiceOver/signed-member checks and fresh archive restoration remain unverified. This is not an every-line or zero-defect guarantee. The repository Project Instructions copy already matches current instructions, so no new settings paste is needed.
 
 [Completion receipt](audits/2026-10-23-reconciliation-receipt.json) · [Work journal](workstreams/issue-70.md) · [Exact previous status](archive/2026-10-23-reconciliation/CURRENT_STATUS.previous.md).
+
+
+## October 28, 2026 — Issue #180 decaf-only method READY, NOT DEPLOYED
+Owner-approved three-value Decaffeination Method applies only to fully decaffeinated coffees. It is separate from original Process. Source extractor, Coffee Details add/edit/display, admin corrections and staged Supabase schema/RPC support merged via PR181 at source e9a1895974c823e6fbe34e3a517dc298ed7bd5bf. Exact PR-head CI approval/security/SQL/UX/visual/Node passed. Exact merged-source CI approval 40618871585, isolated PostgreSQL 40618871586, UX 40618871532, visual 40618871626 and Node/build 40618871635 SUCCESS. Frozen603 and public source acceptance jobs were SKIPPED under workflow restrictions, not reported as passed. Queue item DIC-Q-180 is READY for separate owner release approval. NO production Netlify deployment, SQL migration, Edge/Auth change, member/shot data mutation or paid service was performed. Both canonical Locked decision records and approval coverage reconciled.
