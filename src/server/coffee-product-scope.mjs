@@ -204,31 +204,28 @@ function withoutRelatedProducts(page,onTruncated){
  chunks.push(page.slice(cursor));return chunks.join('');
 }
 export function withoutDetachedFarmerProfiles(page){
- // An unrelated "MEET Person" biography appended after a selected coffee
- // must not donate its farmer's farm, region, or processing to that product.
- const headings=coffeeHtmlElements(page).nodes.filter(n=>/^h[1-6]$/.test(n.tag)&&n.contentEnd-n.headEnd<=220);
- const value=n=>page.slice(n.headEnd,n.contentEnd).replace(/<[^<>]{0,350}>/g,' ').replace(/\s+/g,' ').trim();
- const h1=headings.find(n=>n.tag==='h1'),name=h1?value(h1).normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase():'';
- if(!h1||!name)return page;
- const ranges=[];
- for(const h of headings){
-  if(h.start<=h1.start)continue;
-  const m=/^meet\s+([\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,45}){1,3})$/iu.exec(value(h));
-  if(!m)continue;
-  const person=m[1].normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
-  if(name.includes(person))continue;
-  const resume=headings.find(n=>n.start>h.start&&Number(n.tag[1])<=Number(h.tag[1])&&
-   /^(?:product details|coffee details|about this coffee|coffee story|brew(?:ing)? guide|specifications)$/i.test(value(n)));
-  ranges.push([h.start,resume?.start??page.length]);if(!resume)break;
+ // Suppress only explicitly identified external farmer-profile widgets from
+ // canonical product facts. A generic "MEET" heading may describe the actual
+ // selected producer or precede real bean specifications on other storefronts;
+ // never truncate the remainder of a product at that heading.
+ const {nodes}=coffeeHtmlElements(page),ranges=[];
+ for(const node of nodes){
+  if(node.tag!=='div'||node.contentEnd-node.headEnd>120000)continue;
+  const a=coffeeHtmlAttributes(node.attributes);
+  if(a.id!=='meet-farmers-inline')continue;
+  const html=page.slice(node.headEnd,node.contentEnd);
+  if(!/<h[2-6]\b[^<>]{0,1000}\bclass=["'][^"']*\bmf-meet-kicker\b[^"']*["'][^<>]{0,1000}>/i.test(html))continue;
+  ranges.push([node.start,node.end]);
  }
  if(!ranges.length)return page;
- let out='',cursor=0;
+ let cursor=0,result='';
  for(const [start,end] of ranges.sort((a,b)=>a[0]-b[0])){
   if(start<cursor)continue;
-  out+=page.slice(cursor,start)+' ';cursor=end;
+  result+=page.slice(cursor,start)+' ';cursor=end;
  }
- return out+page.slice(cursor);
+ return result+page.slice(cursor);
 }
+
 function escapeAttributeAngles(page,onTruncated){
  // Preserve literal attribute text without letting downstream legacy text
  // regexes reinterpret title="<p>Origin: ...</p>" as a visible paragraph.

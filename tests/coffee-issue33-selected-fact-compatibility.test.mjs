@@ -62,8 +62,8 @@ test('direct contradictory selected roast specs remain conflicts',()=>{
 test('Thrive Horizon Organic cannot import unrelated MEET Marta Solares Farm La Esperanza',()=>{
  const markup='<main><h1>Horizon Organic</h1><p>Roast Level: Medium</p>'+
   '<p>Origin: Guatemala / Nicaragua</p><p>Process: Washed</p>'+
-  '<h3>MEET Marta Solares</h3><h2>Marta Solares</h2>'+
-  '<h3>FARM:</h3><p>La Esperanza</p><h3>REGION:</h3><p>San Jose Pinula, Guatemala</p></main>';
+  '<div id="meet-farmers-inline"><h3 class="mf-meet-kicker">MEET Marta Solares</h3><h2>Marta Solares</h2>'+
+  '<h3>FARM:</h3><p>La Esperanza</p><h3>REGION:</h3><p>San Jose Pinula, Guatemala</p></div></main>';
  assert.match(productMarkup(markup),/La Esperanza|Marta Solares/);
  assert.doesNotMatch(withoutDetachedFarmerProfiles(productMarkup(markup)),/La Esperanza|Marta Solares/);
  const r=extractPublicCoffeeFacts(markup,{source_url:'https://thrivefarmers.com/products/horizon-organic'});
@@ -74,4 +74,22 @@ test('Thrive Horizon Organic cannot import unrelated MEET Marta Solares Farm La 
 test('exact named selected farmer retains an explicitly relevant MEET person section',()=>{
  const html='<main><h1>Marta Solares</h1><h3>MEET Marta Solares</h3><p>This coffee comes from Marta Solares.</p></main>';
  assert.match(productMarkup(html),/MEET Marta Solares/);
+});
+
+test('unrelated generic MEET heading never truncates later selected coffee cultivar specifications',()=>{
+ const html='<main><h1>Organic Colombian Coffee</h1><h3>MEET Juan Santos</h3>'+
+  '<p>The partnership supports regional education.</p>'+
+  '<p>Variety: Caturra, Colombia, Castillo</p></main>';
+ assert.match(withoutDetachedFarmerProfiles(productMarkup(html)),/Variety: Caturra, Colombia, Castillo/);
+ const result=extractPublicCoffeeFacts(html,{source_url:'https://baldguybrew.com/products/organic-colombian'});
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.variety,'Caturra, Colombia, Castillo');
+});
+test('unrelated farmer profile widget must have exact wrapper AND marker to be excluded',()=>{
+ for(const html of [
+  '<main><h1>Current Coffee</h1><div id="meet-farmers-inline"><h3>MEET Marta Solares</h3><p>Variety: Bourbon</p></div></main>',
+  '<main><h1>Current Coffee</h1><div class="farmer"><h3 class="mf-meet-kicker">MEET Marta Solares</h3><p>Variety: Bourbon</p></div></main>'
+ ]){
+  assert.match(withoutDetachedFarmerProfiles(productMarkup(html)),/Variety: Bourbon/);
+ }
 });
