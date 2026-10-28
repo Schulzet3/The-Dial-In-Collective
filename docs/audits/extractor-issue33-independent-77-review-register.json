@@ -178,23 +178,23 @@
       ],
       "review_track": "FORWARD_EXCLUSIVE_NEXT_REVIEW",
       "owner_authority": "PRIOR_CHAT_REVIEW_NOTE",
-      "owner_review_status": "CONVERSATIONAL_REVIEW_ONLY",
+      "owner_review_status": "RESOLVED_SOURCE_GAP_ON_OBSERVED_CURRENT_OFFICIAL_SNAPSHOT",
       "current_official_source": {
-        "status": "CURRENT_IDENTITY_CONFLICT_REQUIRES_FRESH_ENDPOINT",
+        "status": "OFFICIAL_SELECTED_TOLIMA_PAGE_SNAPSHOT_PROCESS_UNPUBLISHED",
         "checked": "2026-10-28",
-        "finding": "Official URL indexed as Tolima Suave (Planadas, 154 producers) and Finca Las Flores in separately dated official captures; historical FUDAM not current evidence. Never merge their facts.",
         "url": "https://beanstockcoffee.com/products/colombian-supremo-organic",
-        "method": "PUBLIC_ROASTER_HTML_RETRIEVAL_NOT_LIVE_ENDPOINT_PROOF"
+        "method": "PUBLIC_OFFICIAL_PAGE_CRAWLED_TWO_MONTHS_AGO_NOT_DIRECT_LIVE_API",
+        "finding": "Official product URL currently indexed as New!! Colombia Organic Tolima Suave with Medium roast, caramel/milk chocolate/Honey Crisp Apple, Cafe Tolima Suave association of 154 growers in Planadas Tolima; published page omits primary process. Original master expected FUDAM La Union Washed from an older coffee at this reused URL; no FUDAM or Washed may be copied. Product-specific current field absent, leave process blank. Live Shopify .js endpoint could not be retrieved."
       },
-      "implementation_status": "NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE",
+      "implementation_status": "EXISTING_SELECTED_PRODUCT_HANDLER_FOCUSED_REGRESSION_NO_NEW_CODE",
       "tests": {
-        "focused": "NOT_RUN_FOR_THIS_CASE",
+        "focused": "PASS: Beanstock same-country reused slug / stale SEO negative current-product fixture, scoped Node 33/33.",
         "original603": "NOT_RUN_ON_NEW_SOURCE",
         "built_app": "NOT_RUN_FOR_THIS_CASE"
       },
       "merged_sha": null,
-      "release_status": "NOT_READY_AS_INDIVIDUAL_CASE",
-      "blocking_evidence": "Exact current product provenance and exact-source implementation/acceptance not yet verified"
+      "release_status": "REVIEW_RESOLVED_SOURCE_ABSENT_NO_DEPLOYABLE_CHANGE",
+      "blocking_evidence": "Page snapshot was crawled two months earlier and is not a verified live Shopify current endpoint; new product replacement must be rechecked by future user import; do not populate historical FUDAM Washed."
     },
     {
       "number": 7,
@@ -207,24 +207,24 @@
         "NONSTANDARD_ROAST"
       ],
       "review_track": "FORWARD_EXCLUSIVE_NEXT_REVIEW",
-      "owner_authority": "PRIOR_CHAT_REVIEW_NOTE",
-      "owner_review_status": "CONVERSATIONAL_REVIEW_ONLY",
+      "owner_authority": "CURRENT_OFFICIAL_PRODUCT_PLUS_EXISTING_LOCKED_ROAST_TAXONOMY",
+      "owner_review_status": "SOURCE_SUPPORTED_MANUAL_ROAST_REVIEW_IMPLEMENTATION_TESTING",
       "current_official_source": {
-        "status": "CURRENT_OFFICIAL_SELECTED_ROAST_CONTEXT_OBSERVED",
+        "status": "CURRENT_OFFICIAL_SELECTED_RELATIVE_ROAST_IMAGE_LABEL_SOURCE",
         "checked": "2026-10-28",
-        "finding": "Current Black & White Diego Horta label photo explicitly says lighter roast, not one of the seven tiers; handle for manual review.",
         "url": "https://www.blackwhiteroasters.com/products/r-diego-horta-anaerobic-natural",
-        "method": "PUBLIC_ROASTER_HTML_RETRIEVAL_NOT_LIVE_ENDPOINT_PROOF"
+        "method": "PUBLIC_OFFICIAL_PAGE_CRAWLED_2_DAYS_AGO",
+        "finding": "Exact selected Black & White Diego Horta - Anaerobic Natural bag image alt explicitly says lighter roast. This is an unsupported relative roast, not Light/Very Light; preserve the source as manual roast hint and leave canonical roast blank. The exact selected current H1 must match the bag-label image; unrelated product alt is rejected."
       },
-      "implementation_status": "NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE",
+      "implementation_status": "CANDIDATE_PR191_FOCUSED_REGRESSIONS_PASS_FULL603_PENDING",
       "tests": {
-        "focused": "NOT_RUN_FOR_THIS_CASE",
-        "original603": "NOT_RUN_ON_NEW_SOURCE",
-        "built_app": "NOT_RUN_FOR_THIS_CASE"
+        "focused": "PASS: exact selected H1 relative-image roast hint, no tier autofill or off-product contamination, 33/33 local focused Node.",
+        "original603": "PENDING exact changed-source full immutable603 replay and supplementary retention",
+        "built_app": "Frontend unchanged; previous 68 isolated Chromium synthetic app checks reused as unchanged front-end evidence, not provider acceptance."
       },
       "merged_sha": null,
-      "release_status": "NOT_READY_AS_INDIVIDUAL_CASE",
-      "blocking_evidence": "Exact current product provenance and exact-source implementation/acceptance not yet verified"
+      "release_status": "TESTING_NOT_READY_NOT_DEPLOYED",
+      "blocking_evidence": "Original603 changed-source replay, exact GitHub CI, safe non-force integration and postmerge receipt pending."
     },
     {
       "number": 8,
@@ -265,24 +265,24 @@
         "NONSTANDARD_ROAST"
       ],
       "review_track": "FORWARD_EXCLUSIVE_NEXT_REVIEW",
-      "owner_authority": "PRIOR_CHAT_REVIEW_NOTE",
-      "owner_review_status": "CONVERSATIONAL_REVIEW_ONLY",
+      "owner_authority": "CURRENT_OFFICIAL_PRODUCT_PLUS_EXISTING_LOCKED_ROAST_TAXONOMY",
+      "owner_review_status": "SOURCE_SUPPORTED_MANUAL_ROAST_REVIEW_IMPLEMENTATION_TESTING",
       "current_official_source": {
-        "status": "CURRENT_OFFICIAL_SELECTED_ROAST_CONTEXT_OBSERVED",
+        "status": "CURRENT_OFFICIAL_SELECTED_RELATIVE_ROAST_IMAGE_LABEL_SOURCE",
         "checked": "2026-10-28",
-        "finding": "Sebastian Ramirez Red Fruits Decaf official selected-product image alt says lighter roast; no canonical tier inferred.",
         "url": "https://www.blackwhiteroasters.com/products/r-sebastian-ramirez-red-fruits-decaf",
-        "method": "PUBLIC_ROASTER_HTML_RETRIEVAL_NOT_LIVE_ENDPOINT_PROOF"
+        "method": "PUBLIC_OFFICIAL_PAGE_CRAWLED_TODAY",
+        "finding": "Exact selected Black & White Sebastian Ramirez - Red Fruits Decaf bag image alt explicitly says lighter roast. This is an unsupported relative roast, not Light/Very Light; preserve the source as manual roast hint and leave canonical roast blank. The exact selected current H1 must match the bag-label image; unrelated product alt is rejected."
       },
-      "implementation_status": "NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE",
+      "implementation_status": "CANDIDATE_PR191_FOCUSED_REGRESSIONS_PASS_FULL603_PENDING",
       "tests": {
-        "focused": "NOT_RUN_FOR_THIS_CASE",
-        "original603": "NOT_RUN_ON_NEW_SOURCE",
-        "built_app": "NOT_RUN_FOR_THIS_CASE"
+        "focused": "PASS: exact selected H1 relative-image roast hint, no tier autofill or off-product contamination, 33/33 local focused Node.",
+        "original603": "PENDING exact changed-source full immutable603 replay and supplementary retention",
+        "built_app": "Frontend unchanged; previous 68 isolated Chromium synthetic app checks reused as unchanged front-end evidence, not provider acceptance."
       },
       "merged_sha": null,
-      "release_status": "NOT_READY_AS_INDIVIDUAL_CASE",
-      "blocking_evidence": "Exact current product provenance and exact-source implementation/acceptance not yet verified"
+      "release_status": "TESTING_NOT_READY_NOT_DEPLOYED",
+      "blocking_evidence": "Original603 changed-source replay, exact GitHub CI, safe non-force integration and postmerge receipt pending."
     },
     {
       "number": 10,
