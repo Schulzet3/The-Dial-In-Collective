@@ -311,10 +311,23 @@ class CloudApp {
   reviewSheet.querySelector('[data-action=community-confirm-outlier]')?.focus({preventScroll:true});
  }
  render(){
+  // Native DOM replacement discards the focused button on Search, coffee and
+  // history disclosures. Keep the same keyboard position after a redraw;
+  // leave modal focus and non-keyboard actions under the browser's control.
+  const focused=typeof document!=='undefined'&&root.contains?.(document.activeElement)
+   ?document.activeElement:null;
+  const focusAction=focused?.dataset?.action;
+  const focusId=focused?.dataset?.id??null;
+  const restoreFocus=['search-toggle','expand','shot-expand','shot-toggle-all'].includes(focusAction);
   const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
   this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;
   root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20),'settings','aria-label="Settings"','icon-button'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
   for(const details of root.querySelectorAll('details[data-retain]'))if(openDetails.includes(details.dataset.retain))details.open=true;
+  if(restoreFocus){
+   const matching=[...root.querySelectorAll('[data-action]')].find(el=>
+    el.dataset.action===focusAction&&(focusId===null||el.dataset.id===focusId));
+   matching?.focus({preventScroll:true});
+  }
   this.syncReviewDialog();
  }
  auth(){

@@ -2082,6 +2082,30 @@
       ],
       "owner_source": "Issue33 owner77 approved current Seeds Yirgacheffe Habtamu producing company Kuri Mountain Coffee; source-first/no stale slug inference",
       "notes": "Development only. Do not publish. This item is not part of separately completed Release08; preserve original603 immutable archive/oracle/scorer, member data, offline history and all prior DEPLOYED items."
+    },
+    {
+      "id": "DIC-Q-26-keyboard-dialog-responsive-regression",
+      "issue": 26,
+      "pr": 221,
+      "title": "Retain keyboard focus through coffee and search redraws and verify responsive/accessibility UI",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Initial synthetic Chromium browser run 40785496790 FAILED at Search/Sort Enter: root innerHTML replacement removes focused keyboard button; repaired focus restoration for four in-place controls.",
+        "Issue26 Chromium acceptance uses actual site JS/CSS with synthetic account: keyboard sign-in, Search/Sort and coffee focus, modal Tab/ShiftTab, touch sizes, invalid measurements and five ratings, light/dark contrast, reduced-motion, seven viewport/orientation geometries, one saved shot and recommendation.",
+        "Requires new exact-source Node, lint, build, browser/visual, SQL, security and approval CI, non-force merge and source readback."
+      ],
+      "ci_runs": [
+        40785496790
+      ],
+      "blockers": [
+        "Repaired code must pass fresh exact-source CI and merge/readback before READY."
+      ],
+      "owner_source": "Owner October 28, 2026 request to complete remaining Issue #26 accessibility, responsive, keyboard, dialog, error and visual regression tests; GitHub Issue #26.",
+      "notes": "Synthetic Chromium is not native VoiceOver or a physical-device guarantee. Locked colors, no text effects, approved style, member data, outboxes and provider configuration unchanged. No production publication authorized."
     }
   ],
   "history": [
