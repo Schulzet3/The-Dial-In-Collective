@@ -1,3 +1,9 @@
+## October 28 UTC — real hosted browser setup test selector repaired
+
+Run 40767113417 reached real hosted GoTrue signup, invitation redemption and authenticated Chromium UI; login and New Setup form displayed. The test clicked the first button in New Setup, which was the informational `Grinder Espresso Range` help control rather than the required `Create Setup` submit. No application defect evidenced. Fixed test selector to `form button.primary` and prepared retest. Run is FAILED; no save/readback yet. Disposable member access disabled, no shared or existing user data modified.
+
+---
+
 ## October 28 UTC — hosted browser checkpoint not yet passing; add stage-safe diagnostics
 
 CI run 40766815651 exercised disposable GoTrue and one-time invite successfully and entered real Chromium, but a 25-second locator wait timed out before end-to-end saved-coffee assertion. The initial test incorrectly replaced the failing stage with its final cleanup stage; account disable still ran. Added safe non-identifying browser step markers to isolate actual failing page transition, preserving same-commit journal. Do not claim full auth/persistence pass. Disposable access disabled. No member records or shared coffee changed; no publish.

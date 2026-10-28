@@ -52,7 +52,7 @@ def browser(email,password,coffee,roaster):
             form.locator("[name=basket_dose_g]").fill("18")
             form.locator("[name=finest_setting]").fill("1")
             form.locator("[name=coarsest_setting]").fill("20")
-            form.locator("button").first.click()
+            form.locator("button.primary").last.click()
             print("BROWSER: setup submitted, waiting for Add Coffee",flush=True)
             page.locator('[data-action="add"]').wait_for(timeout=25000)
             page.locator('[data-action="add"]').click()
