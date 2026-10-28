@@ -1,3 +1,9 @@
+## October 28 UTC — Issue #17 CLOSED as completed, code READY and NOT DEPLOYED
+
+GitHub Issue #17 independently read back CLOSED (completed) at 2026-10-28 21:08:50 UTC after nonforce PR212 merge d135702a3f27fb4bbb98aa92524cc5627783b921, corrected full Node tests 1,899 PASS/0 FAIL/6 SKIP, exact head and merged app/cloud/mobile/visual/security/SQL/approval CI all passed. Source queue DIC-Q-17-numeric-range-slow-feed-aware-grind READY, zero blockers. The previously dated "issue closure pending" entry below is historical; closure is DONE. Issue #18 is next. No deployment or member data changes.
+
+---
+
 ## October 28 UTC — Hosted GoTrue and Add Coffee genuine acceptance PASSED
 
 Owner-authorized real hosted disposable-member smoke **PASS**, GitHub Actions run 40767700050 / job 123096196386. Covered real GoTrue signup/password login/identity/refresh/logout, beta invite denial/redemption, hosted mobile Chromium Create Setup and Add Coffee via Use Existing, reload/sign-out/relogin, independent committed SQL library entry and fresh authenticated RPC readback. Test harness PR215 merged at 6bfc6e30267e056ec0adb5a639e094143bf60860, applicable exact-source CI successful. All test beta members disabled, test evidence retained; no existing private member or shared coffee data modified. Test-only database confirmation bypassed real confirmation-email click; password-reset delivery/completion also untested. Parent Issue33 open for independent source residuals, not hosted core auth/save; generic extractor READY/NOT DEPLOYED. No Netlify publish.
