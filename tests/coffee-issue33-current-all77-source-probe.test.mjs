@@ -43,3 +43,22 @@ test('only preexisting guarded 2MB product path is used for two known oversized 
  assert.match(src,/MAX_PRODUCT_RETRY_BYTES!==2_000_000/);
  assert.match(workflow,/issue33-oversized-products:[\s\S]*?\[dic-issue33-oversize-probe\]/);
 });
+
+test('source-bound verified 2MB retries retain selected public facts and mark no false individual approval',()=>{
+ const d=JSON.parse(readFileSync(new URL('../docs/audits/issue33-direct-oversized-source-retry-20261028.json',import.meta.url),'utf8'));
+ assert.equal(d.source_run,40640135160);
+ assert.deepEqual(d.rows.map(x=>x.number),[50,67]);
+ for(const rec of d.rows){
+  assert.equal(rec.max_bytes,2000000);
+  assert.equal(rec.source_status,'PARSED');
+  assert.match(rec.source_sha256,/^[a-f0-9]{64}$/);
+  const original=rows[rec.number-1];
+  assert.equal(rec.requested_url,original.original_product_url);
+  assert.equal(original.latest_direct_public_probe.retry.individual_acceptance,false);
+  assert.equal(original.latest_direct_public_probe.source_status,'PARSED_AFTER_GUARDED_2MB_RETRY');
+ }
+ assert.equal(d.rows[0].fields.process,'Honey');
+ assert.match(d.rows[0].fields.origin,/GUATEMALA/i);
+ assert.equal(d.rows[1].fields.process,'Other/Unknown');
+ assert.equal(d.rows[1].fields.producer,undefined);
+});
