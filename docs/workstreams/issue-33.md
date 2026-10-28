@@ -1,3 +1,21 @@
+## October 28 UTC — PR185 focused negative-test null-safety correction
+
+Initial PR185 full Node run 40624739750 had three failures: two legacy Full City-negative assertions (repaired in previous commit) and one new negative scenario where an intentionally invalid/non-product HTML fragment correctly returned no fields, but the test attempted to dereference fields.roast_level and threw before asserting. Corrected test to use optional fields access. No runtime code, member data or original603 archive change; this is a test-harness assertion fix. New exact-source CI required, older failed head remains historical.
+
+---
+
+## October 28 UTC — PR185 two obsolete Full City tests repaired
+
+**Initial CI failure:** Cloud unit workflow 40624739793 on PR185 head d904097d failed exactly two legacy tests still requiring explicit Full City roast to remain blank. This contradicts the owner's newly Locked Full City = Medium-Dark rule. Changed only affected test expectations: exact Full City roast and directly adjacent selected-product Full City label are now Medium-Dark. Unsupported labels, generic educational prose, related products, legends and conflicting direct current source remain negative tests. Original603 restricted workflow SKIPPED (not pass). No deployment. Exact-source rerun required.
+
+---
+
+## October 28 UTC — Ahrre's Full City owner approval, coffee reviews #2/#3
+
+Owner approved Full City as canonical Medium-Dark. Current official Ahrre's African Blend and Tanzanian Peaberry each publish Full City as their selected coffee ROAST. Tanzanian Peaberry is indeed the product title at the unusual /products/test URL. Original benchmark expected Medium-Dark for both. New exact-product parsing and regression tests cover explicit label, negative title/educational/related snippets and conflicting direct roast. Both reviewed cases resolved; proceed to Coffee #4 independently. No fabricated unpublished facts, original603 modifications, production writes or deployment. Concurrent Kona PR #183 already merged SHA a7f77cb; preserve it. Scope TESTING until exact CI and nonforce merge, original corpus branch guard separately unverified.
+
+---
+
 ## October 28 UTC / October 27 MDT — Cortez owner decision and cross-chat handoff
 
 Owner explicitly approved Cortez reused-URL interpretation: prefer the current exact selected product title and specs; **ignore older copy** even if it remains in prose; do not infer current product identity from old `el-salvador-santa-ana-copy` slug or crawler copies. Earlier indexed copies disagree (El Salvador, Papua New Guinea, Ethiopia), so today's live identity must be independently verified, not asserted. Canonical master and ledger both Locked under `EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027`; approval coverage marks **OWNER_APPROVED_NOT_IMPLEMENTED**, and Issue33 residual queue remains IN_PROGRESS. No runtime fix, new Cortez test, original603 replay, provider write or publication was performed in this handoff-only task.

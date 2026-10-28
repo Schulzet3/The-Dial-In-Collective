@@ -19,7 +19,6 @@ test('reject unrelated, unsupported, unscoped or ambiguous roast tags',()=>{
   '<div>'+tag('Medium')+'</div><h1>Costa Rica Guanacaste</h1>',
   '<div>'+tag('Medium')+'<p>Offer</p><h1>Costa Rica Guanacaste</h1></div>',
   '<div>'+tag('Medium')+'<h1>Other Coffee</h1></div><h1>Costa Rica Guanacaste</h1>',
-  tag('Full City')+'<h1>Costa Rica Guanacaste</h1>',
   tag('Medium+')+'<h1>Costa Rica Guanacaste</h1>',
   '<div class="related-products">'+tag('Medium')+'<h2>Other Coffee</h2></div><h1>Costa Rica Guanacaste</h1>'
  ])assert.equal(parse(source).fields?.roast_level,undefined,source);
@@ -28,4 +27,8 @@ test('genuinely contradictory roast facts remain withheld for review',()=>{
  const result=parse(selected('Medium')+'<p>Roast Level: Dark</p>');
  assert.notEqual(result.fields?.roast_level,'Medium');
  assert.ok(result.conflicts?.includes('roast_level'));
+});
+
+test('owner-approved exact selected product Full City tag is Medium-Dark',()=>{
+ assert.equal(parse(tag('Full City')+'<h1>Costa Rica Guanacaste</h1>').fields.roast_level,'Medium-Dark');
 });

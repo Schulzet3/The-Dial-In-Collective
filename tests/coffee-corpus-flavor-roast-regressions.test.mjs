@@ -73,8 +73,8 @@ test('an explicit title roast is evidence, but a roast-like coffee name is not',
  assert.equal(parse('','Current Lot - Dark Roast').fields.roast_level,'Dark');
  assert.equal(parse('<p>Sweet chocolate and a light body.</p>','Dark Skies').fields.roast_level,undefined);
 });
-test('unsupported traditional names and ranges remain raw source text',()=>{
- for(const value of ['Full City','Lighter','ExtraLight','French Roast','Light to Medium','Medium/Medium Dark'])
+test('unsupported traditional names and ranges other than approved Full City remain raw source text',()=>{
+ for(const value of ['Lighter','ExtraLight','French Roast','Light to Medium','Medium/Medium Dark'])
   assert.equal(parse('<p>Roast: '+value+'</p>').fields.roast_level,undefined,value);
 });
 test('ordinary prose cannot turn a roast legend, comparison or historical roast into a value',()=>{

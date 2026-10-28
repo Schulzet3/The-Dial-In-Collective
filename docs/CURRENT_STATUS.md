@@ -1,3 +1,9 @@
+## October 28 UTC — Ahrre's Full City → Medium-Dark review (TESTING, NOT DEPLOYED)
+
+Owner-approved Full City normalization is source-implemented with regression tests for exact Ahrre's African Blend and Tanzanian Peaberry product roast labels, including /products/test identity, and negative off-product assertions. Canonical Master Specification, Decision Ledger, approval coverage, review register and release queue synchronized; PR183 prior Kona merge preserved at a7f77cb. No publication, original603 rewrite or member data mutation. New CI pending.
+
+---
+
 ## October 28 UTC — Issue33 Cortez current-product-only decision recorded; handoff available
 
 Owner approved ignoring old copy at the reused Cortez product URL: read actual present product title/lot/specifications, not historical SEO, old slug or previous coffee's narrative; archive previous evidence without using it for extraction. This is a **new Locked decision**, **not an implemented code fix**. Issue33 remains OPEN and residual source accuracy IN_PROGRESS. See `docs/handoffs/ISSUE33_OWNER_COFFEE_REVIEW_HANDOFF_2026-10-27.md`. No deployment authorization or provider mutation; PR179 and PR183 remain merged but their new queue items TESTING because a fresh original603 replay is not evidenced.
