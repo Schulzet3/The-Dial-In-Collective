@@ -1209,7 +1209,7 @@
     {
       "id": "DIC-Q-33-full-city-roast-normalization",
       "issue": 33,
-      "pr": null,
+      "pr": 185,
       "title": "Official current selected-product Full City to Medium-Dark normalization",
       "state": "TESTING",
       "merged_source_sha": null,
@@ -1217,9 +1217,12 @@
         "src/server/roast-level-evidence.mjs"
       ],
       "tests": [
-        "Roast label alias, exact Ahrre's African Blend/Tanzanian Peaberry selected-product evidence and negative regression tests added; exact-source GitHub CI pending."
+        "Roast label alias, exact Ahrre's African Blend/Tanzanian Peaberry selected-product evidence and negative regression tests added; exact-source GitHub CI pending.",
+        "Initial cloud unit workflow 40624739793 FAILED 2 stale Full City-negative expectations; corrected in follow-up same-journal test commit; rerun pending."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40624739793
+      ],
       "blockers": [
         "Require passing exact-source checks, non-force merge and verified merged source. Restricted original603 replay remains unverified separately."
       ],
