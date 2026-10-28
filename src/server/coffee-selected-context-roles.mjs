@@ -5,6 +5,11 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 export function selectedCoffeeContextRoles(html,{name='',clean}={}){
  const out={};
  if(typeof html!=='string'||html.length>2_000_000||typeof name!=='string'||name.length<3||typeof clean!=='function')return out;
+ // Avoid a second full DOM scan for unrelated coffee pages. This conservative
+ // prefilter recognizes only the same directly printed patterns as below.
+ const explicit=/(?:\bFlavor\s*:|\bMicro[ -]?lot\b|\bmain\s+harvest\s+season\b)/i.test(html);
+ const namedLocality=/,\s*[\p{L}\p{M}'’.\s-]{3,90}\s+(?:Guatemala|Colombia|Ethiopia|Honduras|Peru|Kenya|Brazil)\s*<\/(?:span|li|p)>/iu.test(html);
+ if(!explicit&&!namedLocality)return out;
  const blocks=productCoffeeProse(html,clean).filter(b=>!b.educational&&b.text.length<=4000);
  const headings=[...new Set(blocks.filter(b=>b.tag==='h1').map(b=>fold(b.text)))];
  if(headings.length!==1||headings[0]!==fold(name))return out;
