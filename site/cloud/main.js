@@ -44,6 +44,22 @@ reviewSheet.setAttribute('aria-label','Required shot measurement confirmation');
 if(typeof document.createElement==='function')document.body.append(reviewSheet);
 const uuid=()=>crypto.randomUUID();
 function exportFile(data){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`Dial_In_Collective_Pending_Changes_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
+const OFFLINE_DENIED_PREFIX='dic-offline-denied:';
+// Preserve access revocation across reload even if IndexedDB cache deletion fails.
+// Stores no private content or credentials; never clears a member's outbox.
+function previouslyDeniedOffline(owner){
+ try{return globalThis.localStorage?.getItem(OFFLINE_DENIED_PREFIX+owner)==='1';}
+ catch{return false;}
+}
+function rememberOfflineDenial(owner){
+ try{globalThis.localStorage?.setItem(OFFLINE_DENIED_PREFIX+owner,'1');}
+ catch{/* Still attempt cached-data removal; no successful cleanup claim. */}
+}
+function clearOfflineDenial(owner){
+ try{globalThis.localStorage?.removeItem(OFFLINE_DENIED_PREFIX+owner);}
+ catch{/* Deny offline reopening until durable marker can be cleared. */}
+}
+
 class CloudApp {
  constructor(client,store=new IndexedStore()){
   Object.assign(this,{client,store,identity:null,status:null,raw:null,state:M.blankState(),pending:[],expanded:new Set(),shotExpanded:new Set(),search:'',sort:'recent',searchOpen:false,tempCoffee:null,justSavedId:null,notice:'',authView:'signin',confirmationEmail:'',recovery:false,syncState:'connecting',busy:false,flushing:null,epoch:0,localOfflineOwner:null});
@@ -137,7 +153,7 @@ class CloudApp {
  async restoreOfflineCache(){
   const user=this.identity,epoch=this.epoch;
   if(!user||globalThis.navigator?.onLine!==false)return false;
-  if(this.deniedOfflineOwners.has(user.id)){
+  if(this.deniedOfflineOwners.has(user.id)||previouslyDeniedOffline(user.id)){
    this.notice='Reconnect to verify your account before opening saved coffees.';this.render();return false;
   }
   const credential=await this.client.offlineIdentity?.();
@@ -163,6 +179,7 @@ class CloudApp {
  async denyAccess(user,epoch,status=this.status){
   if(epoch!==this.epoch||user.id!==this.identity?.id)return;
   this.deniedOfflineOwners.add(user.id);
+  rememberOfflineDenial(user.id);
   this.resetAccount();
   const deniedEpoch=this.epoch;
   this.status={...status,admitted:false,admin:false};this.syncState='access_denied';
@@ -185,6 +202,7 @@ class CloudApp {
     await this.denyAccess(user,epoch,status);return;
    }
    this.deniedOfflineOwners.delete(user.id);
+   clearOfflineDenial(user.id);
    const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
    await this.sync();
   }catch(err){if(epoch===this.epoch&&user.id===this.identity?.id){if(isAccessDenied(err)){await this.denyAccess(user,epoch);return;}this.notice=err.message;this.syncState='offline';this.render();}}
