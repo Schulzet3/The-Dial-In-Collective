@@ -203,7 +203,7 @@ function withoutRelatedProducts(page,onTruncated){
  }
  chunks.push(page.slice(cursor));return chunks.join('');
 }
-function withoutDetachedFarmerProfiles(page){
+export function withoutDetachedFarmerProfiles(page){
  // An unrelated "MEET Person" biography appended after a selected coffee
  // must not donate its farmer's farm, region, or processing to that product.
  const headings=coffeeHtmlElements(page).nodes.filter(n=>/^h[1-6]$/.test(n.tag)&&n.contentEnd-n.headEnd<=220);
@@ -257,7 +257,7 @@ export function productMarkup(html,{onTruncated}={}){
  const main=scan.nodes.find(node=>node.tag==='main');
  if(main)page=page.slice(main.headEnd,main.contentEnd);
  page=withoutRelatedProducts(page,onTruncated);
- page=withoutDetachedFarmerProfiles(page);
+ // Retain public linked profile for supplemental review; canonical parser applies a separate boundary.
  // The remaining asides are narrowly identified selected-product cost or
  // transparency panels. Expose their content to shared text collectors as
  // an ordinary product div; generic promotional/sidebar asides stay removed.

@@ -8,7 +8,7 @@ import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
-import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
@@ -650,7 +650,7 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
      const first=keyOf(printed[0]||''),last=keyOf(printed.at(-1)||'');
      const hasFirst=ORIGIN_COUNTRIES.has(first),hasLast=ORIGIN_COUNTRIES.has(last);
      const region=geographyParts(geography.region);
-     if(printed.length===2&&hasFirst!==hasLast&&region.length>0&&
+     if(printed.length===2&&hasFirst&&!hasLast&&region.length>0&&
       region.every(place=>!ORIGIN_COUNTRIES.has(place))){
       const ordered=hasFirst?[printed[1],printed[0]]:printed;
       combined=[geography.region,...ordered].join(', ');continue;
@@ -1097,7 +1097,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   [...new Set([meta['og:description'],meta.description].filter(value=>typeof value==='string'&&value.length<=16000))]:[];
  conflictsByFields.set(fields,conflicts);
  const titleCountry=extractCoffeeTitleOrigin(fields.name);
- const currentProduct=canonicalIdentityScope(fields,product);
+ const selectedProduct=canonicalIdentityScope(fields,product);
+ const currentProduct=withoutDetachedFarmerProfiles(selectedProduct);
  const canonicalProduct=canonicalComponentScope(fields,currentProduct);
  rememberGeographyEntityRoles(fields,canonicalProduct);
  for(const place of extractCoffeeGeographyTuples(canonicalProduct,{name:fields.name,clean}))addField(fields,'Origin',place);
@@ -1384,7 +1385,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // A later direct blend fallback cannot resurrect rejected geography.
  for(const field of conflicts)delete fields[field];
  if(conflicts.has('roast_level')){roast_evidence.value=null;roast_evidence.source='';}
- const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:currentProduct,source_url});
+ const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:selectedProduct,source_url});
  if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
  const roaster_recipe=extractProductEspressoReference(currentProduct);
  const quarantined=(identityQuarantinesByFields.get(fields)||[]).flatMap(item=>{

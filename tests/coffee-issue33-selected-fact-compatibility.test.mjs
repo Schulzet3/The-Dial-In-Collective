@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {productMarkup} from '../src/server/coffee-product-scope.mjs';
+import {productMarkup,withoutDetachedFarmerProfiles} from '../src/server/coffee-product-scope.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 const parse=(name,body,url='https://example-coffee.com/products/selected')=>
  extractPublicCoffeeFacts('<main><h1>'+name+'</h1>'+body+'</main>',{source_url:url});
@@ -64,7 +64,8 @@ test('Thrive Horizon Organic cannot import unrelated MEET Marta Solares Farm La 
   '<p>Origin: Guatemala / Nicaragua</p><p>Process: Washed</p>'+
   '<h3>MEET Marta Solares</h3><h2>Marta Solares</h2>'+
   '<h3>FARM:</h3><p>La Esperanza</p><h3>REGION:</h3><p>San Jose Pinula, Guatemala</p></main>';
- assert.doesNotMatch(productMarkup(markup),/La Esperanza|Marta Solares/);
+ assert.match(productMarkup(markup),/La Esperanza|Marta Solares/);
+ assert.doesNotMatch(withoutDetachedFarmerProfiles(productMarkup(markup)),/La Esperanza|Marta Solares/);
  const r=extractPublicCoffeeFacts(markup,{source_url:'https://thrivefarmers.com/products/horizon-organic'});
  assert.equal(r.ok,true);assert.equal(r.fields.roast_level,'Medium');
  assert.equal(r.fields.producer,undefined);
