@@ -1719,3 +1719,23 @@ GitHub cloud run 40568566964 had 5 failed tests, all original compatible Anaerob
 ## October 27 UTC — PR176 exact-head selected-origin unit failure fixed (TESTING)
 
 Feature-head 4217afe04926890f911c6b5f56adcce2913094fe cloud test run 40573907228 failed only the new Counter Culture country-banner test. Root cause: the helper's programmatically built country regex contained an over-escaped whitespace pattern, so it refused the valid literal `San Marcos, Guatemala`. Replaced it with a bounded explicit comma-and-country suffix comparison against the known country list, with no generic fallback/guessed geography. The exact test remains unchanged and must pass on the new source. No other test/validator weakened. First-run approval and security PASS; original603 restricted hosted job SKIPPED (not a pass). Other CI run outcomes are preserved independently. No publication.
+
+
+## October 28 UTC — Follow-up owner77 source-gap corrections (CI pending, no deploy)
+
+Owner authorized all safe Issue33 implementation and acceptance; no publication. Recovered exact development source 961c9f54eae772cb6086f4b1da6c19c73580b3bd, zero open PR, and the latest owner77 public replay 40732832637/122973423205 (77 PARSED and 77 previews; individual certification, actual hosted Auth and writes explicitly FALSE). Public selected source rechecks confirm #10 Black River COMSA product names the cooperative formed by coffee farmers, while existing parser omitted Producer; #75 Woodshed selected Ethiopian paragraph supplies fruity, stone fruits and orange blossom but omitted canonical notes. Source remains bounded by selected product H1/body, same-selected-name subject, source roles, true conflicts, and negative controls. Added generic source-backed named farmer-founded organization and named selected-coffee sensory narrative recognition, with positive and unrelated-product negative tests. Frozen 603 not rerun on this changed source; exact-source CI / original immutable source replay and live 77 comparison are pending. This is source code + tests in this SAME commit. Do not promote parent #33 or mark any code READY until verification; no member/private data changes, migrations, release branch, Netlify deploy, paid API or oracle edits.
+
+
+## October 28 UTC — PR208 rapid compile repair (CI retest pending)
+
+The initial PR208 flavor helper mistakenly generated malformed JavaScript from a string-escaping error. Replaced only the bounded selected-name regex with an alphabetic/hyphen-safe direct match; no untrusted regex characters are accepted by the capturing pattern. Preserved same-commit journal and all existing data, receipts and other branches. Exact PR-head tests must rerun; original603 remains skipped until independently reverified. No deploy.
+
+
+## October 28 UTC — PR208 intake enforcement repair
+
+GitHub exact-head approval run 40738983102 rejected untracked new runtime source paths, despite source approval coverage and queue schema passing. Added a scoped TESTING queue row for both new runtime files with the real outstanding changed-source, 603 and hosted-auth gates. Kept all 42 existing queue entries intact. Same-commit journal provided. No code changes, deployment or member writes.
+
+
+## October 28 UTC — 77-coffee traceable decision acceptance evidence matrix (NOT certification)
+
+Captured all 77 individual source rows from actual merged-source GitHub run 40732832637 job 122973423205 and joined to authoritative approved source register with selected current coffee, exact URL, HTML digest, canonical field/value, literal context, conflicts, field warnings and rendered-preview evidence. New docs/audits/issue33-owner77-decision-acceptance-20261028.json deliberately labels each row REQUIRES_INDIVIDUAL_SOURCE_DECISION_CERTIFICATION; this accurate 77-row baseline is NOT a false 77/77 decision PASS. The changed PR208 code has not had an independent 77-site replay, original immutable603 run or genuine hosted member Auth/readback. No deployment or member changes. Same-commit journal updated.
