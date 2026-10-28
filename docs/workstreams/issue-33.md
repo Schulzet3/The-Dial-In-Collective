@@ -1,3 +1,9 @@
+## October 28 UTC — reused Beanstock product slug: explicit wrong-current-coffee negative
+
+Public search/cached official URLs show the same reused /products/colombian-supremo-organic handle historically selecting Tolima Suave or Finca Las Flores as well as FUDAM under collection paths; cached search indexes disagree, and are NOT authoritative for live current identity. Added exact-current-h1 regression ensuring neither current Tolima nor current Finca Las Flores ever inherits FUDAM association-level processing from stale SEO, even when the URL slug matches. Current official live page will be checked by the controlled 77 URL probe after merge. No inference or production mutation.
+
+---
+
 ## October 28 UTC — live FUDAM collection URL identity regression discovered and repaired (NO DEPLOY)
 
 During review of PR216, recovered previously owner-supplied direct Beanstock FUDAM URLs include Shopify /collections/medium-roasts/products/colombian-supremo-organic and /collections/frontpage/products/colombian-supremo-organic, in addition to /products/colombian-supremo-organic. Prior qualified review note was limited to the direct path, making it silently absent for official collection product URLs. Normalize exact selected product identity to support both official forms while retaining exact host, slug and structured URL location checks; do not allow unrelated hosts, products or arbitrary nested paths. Keep qualified "generally washed" association prose only as a human-readable source-review hint and source fact, never canonical Process without lot-specific selected evidence. Regression verifies all three official paths and three nonmatching negatives, source review export, and blank Process. Source/oracle/frozen603 unchanged; run exact-source CI and guarded public owner77 probe, then queue READY only with real receipts. No publish or existing private user data modified.

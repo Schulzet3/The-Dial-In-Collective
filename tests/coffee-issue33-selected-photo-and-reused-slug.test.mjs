@@ -144,3 +144,18 @@ test('official Beanstock Shopify collection URLs preserve current FUDAM processi
   assert.equal(result.process_review_note,undefined,url);
  }
 });
+
+test('reused Beanstock URL must not inherit FUDAM processing hints when current selected product changed',()=>{
+ const url='https://beanstockcoffee.com/products/colombian-supremo-organic';
+ for(const [name,description] of [
+  ['New!! Colombia Organic Tolima Suave','This is a Tolima coffee with caramel and milk chocolate notes.'],
+  ['Colombia Organic Finca Las Flores','This washed lot is from the Sierra Nevada and tastes of amaretto and pear.']
+ ]){
+  const html='<html><head><meta name="description" content="Old FUDAM growers generally washed two or three times"></head>'+
+   '<body><main><h1>'+name+'</h1><p>'+description+'</p></main></body></html>';
+  const result=extractPublicCoffeeFacts(html,{source_url:url});
+  assert.equal(result.fields.name,name);
+  assert.equal(result.process_review_note,undefined);
+  assert.equal(coffeeSourceReviewSnapshot(result)?.processing_review_note,undefined);
+ }
+});
