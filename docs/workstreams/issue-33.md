@@ -1,3 +1,43 @@
+## October 28 UTC — Ketch stale SEO display failure diagnosed and repaired
+
+**Exact-source CI failure:** PR179 SHA ee4ee3bd workflows app 40616179398 and cloud 40616179344 each failed one new regression: current canonical variety correctly stayed `Lempira` and no `variety` conflict remained, but expanded current product details still surfaced `Parainema` from a stale `Historical SEO` row and synthetic rejected comparison pair. Fixed the user-facing preview to exclude SEO/archived source facts when a canonical current field already exists, and suppress synthetic conflicting alternatives for fields whose conflicts were resolved. Genuine unresolved current-product alternatives remain displayed. The full unmodified source evidence remains in explicitly downloaded JSON; no history is deleted. Code/test CI must be rerun on this new exact SHA. No production publication or member mutation.
+
+---
+
+## October 28 UTC — SEO-only variety suppression in member preview
+
+Owner specifically rejected Ketch Parainema from unrelated/SEO values. Added explicit regression: stale `page_meta` Parainema versus current selected-product Varietals Lempira resolves to Lempira with NO member conflict; ordinary review hides the stale SEO fact when a direct current field is available. Raw archived audit provenance remains in a consciously downloaded source-review file under the existing evidence-retention Locked rule, not a current coffee suggestion. Exact-current-source tests and new CI still pending; no publication.
+
+---
+
+## October 28 UTC — Ketch PR179 first exact cloud test failure repaired
+
+**Actual failure:** Cloud job 122577497187 in run 40615682791 on feature SHA f7845290d5bc433f07baee4e090ebacd14ec0966 ran 1,342 tests: 1,341 PASS, 1 FAIL. Ketch source-review snapshot test called the pure parser without the `source_url` the real Netlify preview handler attaches, so snapshot intentionally returned null. The provider endpoint already attaches the validated source URL; repaired only the test fixture to exercise that production-shaped boundary. Additionally removed any global roaster espresso recipe before a roast is selected (light and medium-dark references differ); selected roast still shows exact recipe. Capitalized Ketch tasting note display. New exact-source CI required; no test or publication claims for the new SHA. No frozen oracle, member/private data or provider mutation.
+
+---
+
+## October 27 UTC — Issue33 roast-specific espresso clause correction
+
+The new parser's first-sentence boundary could stop at a period inside Ketch's `e.g.`, dropping the Light 203–205°F / 1:3 / 18-to-54g espresso facts. Repaired before treating any CI result as acceptance: bounded to the already isolated selected-roast text. Earlier feature CI is exact to prior SHA and cannot validate this follow-up. New source-bound CI/merge/readback required; no production publication.
+
+---
+
+## October 27 UTC — Issue33 approved Ketch two-roast UI integrated into source PR179 (TESTING)
+
+**Owner authority:** User approved shared Legacy Farms Honduras Natural details, two separate purchased roast profiles and earlier shown interactive HTML preview, explicitly no photos; asked to incorporate into real extractor and give next difficult coffee. Prior source/SEO fallback rule and Black River Mexico/Peru review remain Locked.
+
+**Implementation:** Add exact selected-product Roast Level option reader and bounded roast-scoped note/sensory/espresso parser (src/server/coffee-roast-variants.mjs); integrate into exact Shopify product preview and cross-source merge. Do not select a roast by default, invent dose/time, borrow adjacent or marketing sources, or promote Parainema from SEO to selected-product variety. Add real Add Coffee variant buttons, selected roast helper/source review export and protected member-edit switch, keep original form submission and shared facts intact. Add theme-matched CSS, no photographs. Add Ketch light/medium-dark factual and UI regression tests. The previously owner-approved source-priority-only PR179 implementation remains preserved and its parent SHA has seven success CI checks, with frozen603 hosted workflow SKIPPED (not a pass).
+
+**Verification:** This new Ketch change is TESTING, not yet CI passed or merged, not READY. Do not alter immutable original603 corpus/oracle/scorer, existing user coffee/shot/notes, access, Community, offline queues or provider configuration. No Netlify publication, SQL, Edge/Auth, paid services or member writes. Next: exact-head tests and integrated release-queue readback; repair any failures.
+
+---
+
+## October 27 UTC — Owner priority follow-up, exact current product vs archived SEO-only contradiction (TESTING)
+
+Owner explicitly directed that the selected current product page and labeled specifications always supersede archived/SEO values, which are fallback only. Black River Mexico/Peru are both current selected-page claims and MUST both be flagged, never silently selected. Unitless labeled elevation already defaults to meters; rotating origin is not universally mandatory. This source patch permits only a documented all-low-priority archived/SEO conflict to yield to exact selected current product specifications. A direct current opposing reading still blocks auto-fill. Frozen 603 and stored member records untouched. Tests added; exact-source GitHub CI/merge and queue evidence pending. No publish authorization.
+
+---
+
 ## October 27 UTC — Issue33 PR178 complete: six original603 source recoveries READY / NOT DEPLOYED
 
 **Integration and tests:** PR178 non-force merged at `b0de5a8432442d58f124c3cceddb86e3bed4ed08`, first parent `7916aadfe5e8c3f93b43abd3d0094932ab30b889`, tested feature head `0e5d69e208d99d14a590437d401ca3f6b5190a8c`, identical Git tree `96fd2340abaa4fd8008eadebf563796c73feb254`. Exact PR-head app/build 40586627900, cloud/mobile 40586627949, source security 40586628043, isolated SQL 40586627927, visual/packaged-browser 40586628047, approval 40586627881 all SUCCESS. Exact merged app/build 40586968991, cloud/mobile 40586968841 and approval 40586968902 SUCCESS. Restricted private-hosted original603 40586627934 SKIPPED; independent original 603 actual-handler full replay PASS. Merged live URL checks 40586968907/40586968983 SKIPPED, no fresh live URL claim.

@@ -127,3 +127,14 @@ test('Peets Linda Vista: 86 out of 100 is a roast chart, never an Agtron measure
  assert.equal(result.roaster_details?.agtron,undefined);
  assert.ok(!String(result.fields.elevation_m||'').includes('86'));
 });
+
+test('origin rotation is mandatory only for an explicitly labeled selected-coffee rotating origin',()=>{
+ const explicit=selected('Rotating Decaf','<p>Origin: Rotating</p><p>Current Coffee Origin: Mexico</p>');
+ assert.equal(explicit.origin_confirmation_required,true);
+ const ordinary=selected('Stable Coffee','<p>Origin: Mexico</p><p>Roaster sells seasonal releases</p>');
+ assert.equal(ordinary.origin_confirmation_required,undefined);
+ const current=selected('Current Coffee','<p>This coffee has a rotating origin.</p>');
+ assert.equal(current.origin_confirmation_required,true);
+ const merged=mergePublicProductPreview({ok:true,fields:{name:'Current Coffee'}},current);
+ assert.equal(merged.origin_confirmation_required,true);
+});

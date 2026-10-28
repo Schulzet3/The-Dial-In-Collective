@@ -1085,6 +1085,33 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Source READY, NOT DEPLOYED. Six original coffee assertions recovered, no previous exact loss. Parent Issue33 stays IN_PROGRESS for 83 missing and 823 strict-review cases. No frozen oracle/source/scorer, production Netlify/SQL/Edge/Auth/member/offline change, paid service or deployment. Separate owner publish instruction required."
+    },
+    {
+      "id": "DIC-Q-33-owner-source-precedence-rotating-origin",
+      "issue": 33,
+      "pr": 179,
+      "title": "Exact current product priority, explicitly rotating origin review and source-backed purchased roast variants",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-selected-source-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/main.js",
+        "src/server/coffee-roast-variants.mjs",
+        "site/visual.css"
+      ],
+      "tests": [
+        "New source-level tests added; exact-source CI pending, not claimed PASS.",
+        "Ketch roast variant source/UI and member edit preservation regression added in tests/coffee-ketch-roast-variants.test.mjs; CI pending, NOT claimed passed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source checks and non-force merge pending"
+      ],
+      "owner_source": "Direct owner instructions 2026-10-27, Issue #33",
+      "notes": "No deployment authorization. Protect original 603 benchmark and member records. Owner-approved light and medium-dark Ketch variant selector based on selected product only. Distinct roast notes/espresso references never mixed. No review photos."
     }
   ],
   "history": [

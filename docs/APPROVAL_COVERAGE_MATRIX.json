@@ -1159,5 +1159,40 @@
       "original603_run": "SKIPPED_BY_WORKFLOW_BRANCH_GUARD; no new original corpus score",
       "residual": "Counter Culture supplemental capture loses 19 original source_facts under privacy-safe fixture sanitizer; canonical fields and conflicts unchanged; separate Issue33 audit finding"
     }
+  },
+  "EXTRACTOR-CURRENT-PRODUCT-SEO-FALLBACK-ROTATION-20261027": {
+    "status": "SOURCE_TESTING",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-selected-source-evidence.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js"
+    ],
+    "tests": [
+      "tests/coffee-owner-current-source-and-four-roasters.test.mjs",
+      "Existing Node and cloud CI"
+    ],
+    "release_authority": "NOT GRANTED"
+  },
+  "EXTRACTOR-CURRENT-COFFEE-ROAST-VARIANTS-KETCH-20261027": {
+    "status": "SOURCE_TESTING",
+    "owner_source": "Owner October 27 Ketch two-roast HTML preview approval",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-roast-variants.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/visual.css"
+    ],
+    "tests": [
+      "tests/coffee-ketch-roast-variants.test.mjs",
+      "Targeted source/HTML, full Node/cloud UI/build, visual and security CI pending"
+    ],
+    "release_authority": "NOT GRANTED"
   }
 }

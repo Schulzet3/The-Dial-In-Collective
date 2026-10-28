@@ -1,3 +1,15 @@
+## October 27 UTC — Ketch selected roast option parsing and Add Coffee preview (TESTING, NOT DEPLOYED)
+
+Owner approved the interactive two-roast Ketch preview. Real extractor/app code now under PR179 includes selected purchase roast options and roast-specific tasting/sensory/espresso details with shared coffee identity, product-only facts over SEO and no photos. Source tests added, exact-head CI and safe merge PENDING. No production or member data changes, no immutable original603 changes. Existing READY queue entries unchanged.
+
+---
+
+## October 27 UTC — Issue33 exact product/SEO fallback and explicitly rotating origin, TESTING
+
+Owner-authorized current exact product data/specs precede archives/SEO; SEO remains fallback only. Original contradictory Mexico/Peru on Black River stays withheld with both alternatives. Unitless labeled elevation already uses meters. New source tests and rotating-origin confirmation only for coffees explicitly labeled as rotating; do not add blanket origin prompts. This is a development change under CI, NOT DEPLOYED, no production operations. Frozen original 603 archive/oracle untouched.
+
+---
+
 ## October 27 UTC — Issue33 six original603 missing assertions recovered, exact merged-source READY (NOT DEPLOYED)
 
 **Owner step #1 completed for six proven source facts:** Actual unchanged original 603-coffee/201-roaster/1,197-capture isolated-preview-handler replay: true baseline 3,090 exact /89 missing /823 review; new **3,096 exact /83 missing /823 review** across 4,002 original canonical assertions. Precisely six original missing→exact, no previously exact lost and no other canonical case change. Original supplementary 5,458 fully retained /337 partial /679 unconfirmed across 6,474 unchanged, conflict/extra counts unchanged. Original captures/oracle/scorer hash verified and not rewritten. Six source-bound proofs + hashes: `docs/audits/extractor-issue33-missing-six-source-proof-20261027.json`.

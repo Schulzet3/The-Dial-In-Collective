@@ -96,6 +96,48 @@ const reasons={
  not_html:'The URL must point to a coffee product web page, not a download.',
  admitted_member_required:'Sign in with an admitted beta account to check URLs.'
 };
+
+// A roast option belongs to the member's selected purchase, not to a
+// conflicting second source. Keep the untouched preview for another choice.
+export function coffeeRoastVariantPreview(base,id){
+ if(!base?.ok||!Array.isArray(base.roast_variants))return base;
+ const chosen=base.roast_variants.find(v=>v?.id===id);
+ if(!chosen)return {...base,selected_roast_variant:null};
+ return {...base,selected_roast_variant:id,
+  fields:{...base.fields,...chosen.fields},
+  ...(chosen.roaster_recipe?{roaster_recipe:chosen.roaster_recipe}:{})};
+}
+export function applyCoffeeRoastVariant(form,previous,next){
+ let changed=0;
+ for(const key of ['roast_level','tasting_notes']){
+  const control=form?.elements?.namedItem?.(key);
+  if(!control)continue;
+  const oldValue=String(previous?.fields?.[key]||'');
+  const nextValue=String(next?.fields?.[key]||'');
+  // Never overwrite something the member typed, including corrections.
+  if(String(control.value||'').trim()&&control.value!==oldValue)continue;
+  if(control.tagName==='SELECT'&&nextValue&&![...control.options].some(x=>x.value===nextValue))continue;
+  if(control.value===nextValue)continue;
+  control.value=nextValue;
+  control.dispatchEvent(new Event('change',{bubbles:true}));
+  changed++;
+ }
+ return changed;
+}
+function roastVariantMarkup(result){
+ const variants=Array.isArray(result.roast_variants)?result.roast_variants.filter(v=>
+  v&&/^[a-z-]{1,25}$/.test(v.id)&&typeof v.label==='string'&&typeof v.fields?.roast_level==='string').slice(0,7):[];
+ if(variants.length<2)return '';
+ const current=variants.find(v=>v.id===result.selected_roast_variant);
+ const headings=variants.map(v=>`<button type="button" class="secondary compact coffee-roast-option" data-action="choose-coffee-roast-variant" data-roast-variant="${e(v.id)}" aria-pressed="${current?.id===v.id}">${e(v.label)}</button>`).join('');
+ const recipe=current?.roaster_recipe||{},sensory=current?.sensory;
+ const metrics=sensory?`<p class="helper" aria-label="Roaster sensory ratings">Roaster sensory ratings: Sweetness ${e(sensory.sweetness)}/10 · Acidity ${e(sensory.acidity)}/10 · Body ${e(sensory.body)}/10${sensory.bitterness!=null?' · Bitterness '+e(sensory.bitterness)+'/10':''}</p>`:'';
+ const dose=Number.isFinite(recipe.dose_g)&&Number.isFinite(recipe.yield_g)?`${e(recipe.dose_g)} g in / ${e(recipe.yield_g)} g out`:'Dose and yield not published';
+ const brew=Number.isFinite(recipe.ratio)||recipe.temperature_reference?
+  `<div class="coffee-roast-brew"><strong>Roaster's suggested espresso starting point</strong><p class="helper">Ratio: ${Number.isFinite(recipe.ratio)?'1:'+e(recipe.ratio):'not published'} · Temperature: ${e(recipe.temperature_reference||'not published')} · ${dose}. Shot time not published.</p><p class="helper">Published guidance, not a validated shot recipe. Not saved automatically.</p></div>`:'';
+ return `<section class="coffee-roast-variants" aria-label="Choose purchased roast"><h3>Which roast did you buy?</h3><div class="coffee-roast-options" role="group" aria-label="Roast options">${headings}</div><p class="helper">Both options share the underlying coffee details. Choose one to populate its roast level and tasting notes; the other roast is not a conflict.</p>${current?`<div class="coffee-roast-selected" aria-live="polite"><strong>Selected roast: ${e(current.label)}</strong><p class="helper"><strong>Tasting notes:</strong> ${e(current.fields.tasting_notes||'Not published')}</p>${metrics}${brew}</div>`:'<p class="helper" role="status">Choose Light or Medium-dark to see its specific details. No roast was selected automatically.</p>'}</section>`;
+}
+
 export function coffeeUrlPreviewMarkup(result){
  if(!result?.ok)return `<div class="coffee-url-message" role="status">${e(reasons[result?.reason]||'We could not retrieve trustworthy details. Enter the coffee information manually.')}</div>`;
  const fields=autofillFields.filter(([name])=>typeof result.fields?.[name]==='string'&&result.fields[name].trim());
@@ -118,7 +160,33 @@ export function coffeeUrlPreviewMarkup(result){
  const extras=Object.entries(detailsLabels).filter(([key])=>typeof result.roaster_details?.[key]==='string'&&result.roaster_details[key]);
  const allPublishedFacts=Array.isArray(result.source_facts)?result.source_facts.slice(0,MAX_SOURCE_REVIEW_FACTS).filter(fact=>
   fact&&typeof fact.label==='string'&&fact.label.trim()&&typeof fact.value==='string'&&fact.value.trim()):[];
- const publishedFacts=allPublishedFacts.filter(fact=>!['json','projection','reference'].includes(fact.format));
+ const selectedSpecs=new Set(Array.isArray(result.current_product_spec_fields)?result.current_product_spec_fields:[]);
+ const currentFacts=new Set(allPublishedFacts.filter(fact=>
+  fact.field&&['html','product_json'].includes(fact.source_type)&&
+  typeof result.fields?.[fact.field]==='string'&&
+  String(fact.value||'').trim().toLowerCase()===result.fields[fact.field].trim().toLowerCase()
+ ).map(fact=>fact.field));
+ const currentConflicts=new Set(Array.isArray(result.conflicts)?result.conflicts:[]);
+ const publishedFacts=allPublishedFacts.filter(fact=>{
+  if(['json','projection','reference'].includes(fact.format))return false;
+  const canonical=typeof result.fields?.[fact.field]==='string'?result.fields[fact.field].trim():'';
+  // Do not show any lower-rank SEO/archived row as a competing current
+  // product reading when its canonical field is already populated. Retain
+  // original provenance in the explicitly downloaded audit source review.
+  if(canonical&&/^(?:seo|page_meta|archived_metadata|html_meta)$/i.test(String(fact.source_type||'')))return false;
+  if(canonical&&/\b(?:historical|archived|stale|seo|meta description)\b/i.test(String(fact.label||'')))return false;
+  // Merge diagnostics can contain a synthetic opposing pair that was later
+  // resolved by higher-priority product evidence. It is not a live conflict.
+  if(canonical&&fact.conflicting===true&&!currentConflicts.has(fact.field)&&
+     String(fact.value||'').trim().toLowerCase()!==canonical.toLowerCase())return false;
+  // SEO is fallback, not a competing selected-product detail. Keep raw
+  // evidence in the optional source export, never in the ordinary review.
+  if(['seo','page_meta','archived_metadata','html_meta'].includes(fact.source_type)&&
+     fact.field&&(selectedSpecs.has(fact.field)||currentFacts.has(fact.field))&&
+     typeof result.fields?.[fact.field]==='string'&&
+     String(fact.value||'').trim().toLowerCase()!==result.fields[fact.field].trim().toLowerCase())return false;
+  return true;
+ });
  const structuredRecords=allPublishedFacts.filter(fact=>['json','projection','reference'].includes(fact.format));
  const recipe=result.roaster_recipe||{};
  const validYield=Number.isFinite(recipe.yield_g)||
@@ -138,6 +206,8 @@ export function coffeeUrlPreviewMarkup(result){
   <div class="coffee-url-preview-title"><strong>${e(heading)}</strong><span class="coffee-source-label">${e(sourceLabel)}</span></div>
   <p class="helper">${e(caution)} Fields you already entered will not be overwritten.</p>
   ${catalog?'<button type="button" class="secondary compact" data-action="preview-coffee-url-refresh">Check Current Roaster Page</button><p class="helper">Check for newer published details. Wait 30 seconds between checks; the usual URL lookup limit applies.</p>':''}
+  ${result.origin_confirmation_required===true?`<div class="coffee-rotation-review" role="group" aria-label="Rotating origin confirmation"><p class="helper">This product explicitly says its origin rotates. Confirm the origin shown on your current bag or offering.</p><label class="checkline"><input id="coffee-rotating-origin-confirmed" type="checkbox"><span>I checked this coffee's current origin.</span></label></div>`:''}
+  ${roastVariantMarkup(result)}
   ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label and type your choice in the matching field below.</p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map(option=>`<li><span class="coffee-conflict-value">${e(option.value)}</span><small>${e(option.label)}${option.source_url?' · <a href="'+e(option.source_url)+'" target="_blank" rel="noopener noreferrer">View Original Source</a>':''}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. See the complete published source details below or check the product page.</p>'}</div>`).join('')}</section>`:''}
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(key==='elevation_m'?elevationWithDefaultMeters(result.fields[key]):result.fields[key])}</dd></div>`).join('')}</dl>
   ${result.fields?.process==='Other/Unknown'&&result.roaster_details?.blend_components?'<p class="helper" role="note">This blend has multiple documented processing methods. Other/Unknown preserves that distinction; review the component details below.</p>':''}
@@ -201,6 +271,9 @@ export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOStr
   published_source_information:facts,roaster_details:details,roaster_espresso_reference:recipe,
   conflicts:Array.isArray(result.conflicts)?result.conflicts.filter(key=>autofillFields.some(([field])=>field===key)):[],
   conflict_options:conflictOptions,source_information_truncated:truncated,
+  ...(Array.isArray(result.roast_variants)?{roast_variants:result.roast_variants.slice(0,7).map(v=>({id:bounded(String(v.id||''),25),label:bounded(String(v.label||''),50),fields:{roast_level:bounded(String(v.fields?.roast_level||''),50),tasting_notes:bounded(String(v.fields?.tasting_notes||''),250)},...(v.sensory?{sensory:v.sensory}:{}) ,...(v.roaster_recipe?{roaster_recipe:v.roaster_recipe}:{})}))}:{}),
+  ...(typeof result.selected_roast_variant==='string'?{selected_roast_variant:result.selected_roast_variant}:{}),
+  ...(result.origin_confirmation_required===true?{origin_confirmation_required:true}:{}),
   ...(roastReviewNote!==null?{roast_review_note:roastReviewNote}:{}),
   limitations:'Extraction is a review aid. Image pixels, linked documents and unexposed dynamic content may contain additional or conflicting information. This file does not approve or update a shared coffee record.'};
 }

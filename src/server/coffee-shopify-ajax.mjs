@@ -10,6 +10,8 @@ import {reconcileCoffeeProcessingClaims,mergeCoffeeProcessingClaims} from './cof
 // A response must identify the exact handle on the supplied product URL.
 import {safeCoffeeUrl,fetchPublicCoffeeJson,MAX_HTML_BYTES,coffeeProductHandle} from './coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from './coffee-page-metadata.mjs';
+import {explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
+import {extractSelectedCoffeeRoastVariants} from './coffee-roast-variants.mjs';
 
 const norm=coffeeIdentityKey;
 export function shopifyProductRequest(raw){
@@ -32,12 +34,13 @@ function selectedCurrentProductSpecs(description){
   .replace(/&(?:nbsp|amp|quot|apos);/gi,x=>({'&nbsp;':' ','&amp;':'&','&quot;':'"','&apos;':"'"}[x.toLowerCase()]||x))
   .replace(/\s+/g,' ').trim();
  const text=clean(raw);
- const specs={origin:[],roast_level:[],tasting_notes:[],process:[]};
+ const specs={origin:[],roast_level:[],tasting_notes:[],process:[],variety:[]};
  const kind=name=>({
   origin:'origin',country:'origin',countryoforigin:'origin',
   roast:'roast_level',roastlevel:'roast_level',
   notes:'tasting_notes',tastingnotes:'tasting_notes',cuppingnotes:'tasting_notes',
-  process:'process',processing:'process',processingmethod:'process'
+  process:'process',processing:'process',processingmethod:'process',
+  variety:'variety',varieties:'variety',varietal:'variety',varietals:'variety'
  })[String(name).toLowerCase().replace(/[^a-z]/g,'')];
  const add=(field,value)=>{
   const s=clean(value).replace(/\s*[|;,]\s*$/,'');
@@ -48,7 +51,7 @@ function selectedCurrentProductSpecs(description){
  // a full nested processing story and a related-products card are not labels.
  for(const match of raw.matchAll(/<(p|li|dd|span|strong|b)\b[^<>]{0,600}>([^<>]{2,450})<\/\1\s*>/gi)){
   const row=clean(match[2]);
-  const m=row.match(/^(Origin|Country(?: of Origin)?|Roast(?: Level)?|Notes|Tasting Notes?|Cupping Notes?|Process(?:ing(?: Method)?)?)\s*[:：|]\s*(.{2,220})$/i);
+  const m=row.match(/^(Origin|Country(?: of Origin)?|Roast(?: Level)?|Notes|Tasting Notes?|Cupping Notes?|Process(?:ing(?: Method)?)?|Variet(?:y|ies|als?))\s*[:：|]\s*(.{2,220})$/i);
   if(m)add(kind(m[1]),m[2]);
  }
  const countries='Papua New Guinea|Costa Rica|El Salvador|Ethiopia|Colombia|Kenya|Brazil|Guatemala|Honduras|Nicaragua|Panama|Peru|Rwanda|Burundi|Mexico|Ecuador|Bolivia|Indonesia|Uganda|Tanzania|Yemen|India|Thailand';
@@ -101,6 +104,7 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  // after selected-title/handle verification above. Competing direct current
  // fields and exact-product roast taxonomy remain conflicts, not guesses.
  const policy=selectedCurrentProductSpecs(description);
+ const roast_variants=extractSelectedCoffeeRoastVariants({description,options:data.options});
  // Keep the WeakMap-backed source process claims attached to the original
  // preview fields. Cloning them loses evidence needed for safe stage merge.
  const fields=result.fields,conflicts=new Set(result.conflicts||[]);
@@ -137,17 +141,30 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
   if(!fields.tasting_notes)fields.tasting_notes=policy.specs.tasting_notes[0];
   current_spec_fields.push('tasting_notes');
  }
+ if(conflictingSpec('variety'))reviewConflict('variety',policy.specs.variety);
+ else if(policy.specs.variety.length===1&&!conflicts.has('variety')){
+  fields.variety=policy.specs.variety[0];
+  current_spec_fields.push('variety');
+ }
  // Distinct published decaf/washing/fermentation stages need the existing
  // literal stage reconciler, not a blanket new process conflict.
  if(policy.controlledFermentation){
   fields.process='Anaerobic';conflicts.delete('process');
   current_spec_fields.push('process');
  }
+ // Two offered roast preparations are options, not contradictory products.
+ // Do not erase an unrelated direct printed specification conflict.
+ if(roast_variants.length>1){
+  if(!policy.specs.roast_level.length){delete fields.roast_level;conflicts.delete('roast_level');}
+  if(!policy.specs.tasting_notes.length){delete fields.tasting_notes;conflicts.delete('tasting_notes');}
+ }
  // Preserve the published raw stages/method in source facts. Do not create
  // unverifiable fermentation-oxygen claims or overwrite stored member data.
  const details={...result.roaster_details};
  if(policy.processCaption&&!details.processing_detail)details.processing_detail=policy.processCaption;
  return {...result,fields,available:Object.keys(fields),source_facts,
+  ...(roast_variants.length>1?{roast_variants,roaster_recipe:undefined}:{}),
+  ...(explicitlyRotatingCoffeeOrigin(description)?{origin_confirmation_required:true}:{}),
   ...(Object.keys(details).length?{roaster_details:details}:{}),
   ...(conflicts.size?{conflicts:[...conflicts].sort(),conflict_options}:{conflicts:undefined,conflict_options:undefined}),
   ...(current_spec_fields.length?{current_product_spec_fields:current_spec_fields}:{}),
@@ -313,7 +330,7 @@ export function mergePublicProductPreview(base,extra){
    /\b(?:og:description|meta description|archived|historical seo)\b/i.test(String(f.label||'')));
  };
  for(const key of extra.current_product_spec_fields||[]){
-  if(!['origin','roast_level','tasting_notes','process'].includes(key)||!extra.fields?.[key]||
+  if(!['origin','roast_level','tasting_notes','process','variety'].includes(key)||!extra.fields?.[key]||
    extra.conflicts?.includes(key)||base.conflicts?.includes(key))continue;
   if(!base.fields?.[key]||norm(base.fields[key])===norm(extra.fields[key])||olderSeoOnly(key,base.fields[key])){
    fields[key]=extra.fields[key];conflicts.delete(key);
@@ -345,6 +362,9 @@ export function mergePublicProductPreview(base,extra){
   if(rows.length)conflict_options[key]=rows;
  }
  const merged={...base,fields,available:Object.keys(fields),
+  ...(extra.current_product_spec_fields?.length?{current_product_spec_fields:extra.current_product_spec_fields}:{}),
+  ...(extra.roast_variants?.length>1?{roast_variants:extra.roast_variants}:{}),
+  ...(base.origin_confirmation_required||extra.origin_confirmation_required?{origin_confirmation_required:true}:{}),
   roaster_details:{...extra.roaster_details,...base.roaster_details},
   source_facts,
   ...(base.source_facts_truncated||extra.source_facts_truncated||source_facts.truncated?{source_facts_truncated:true}:{}),
@@ -383,6 +403,24 @@ export function mergePublicProductPreview(base,extra){
   merged.roast_source='agtron_ground_measurement';
   merged.roast_hint=measuredWinner.roast_hint||
    'The selected product has an explicitly scaled ground-coffee Agtron measurement.';
+ }
+ if(extra.roast_variants?.length>1){
+  delete merged.roaster_recipe;
+  // There is no current selected roast until the member chooses. Preserve
+  // independent contradictory direct facts, but not the two options alone.
+  const variantValues=key=>extra.roast_variants.map(v=>v.fields?.[key]).filter(Boolean).map(norm);
+  for(const key of ['roast_level','tasting_notes']){
+   const options=base.conflict_options?.[key]||[];
+   const onlyOptions=!base.conflicts?.includes(key)||
+    (options.length>0&&options.every(o=>variantValues(key).includes(norm(o.value))));
+   if(!extra.conflicts?.includes(key)&&onlyOptions){
+    delete merged.fields[key];conflicts.delete(key);
+    if(merged.conflict_options)delete merged.conflict_options[key];
+   }
+  }
+  merged.available=Object.keys(merged.fields);
+  if(conflicts.size)merged.conflicts=[...conflicts].sort();
+  else{delete merged.conflicts;delete merged.conflict_options;}
  }
  return merged;
 }
