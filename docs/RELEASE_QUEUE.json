@@ -1279,22 +1279,38 @@
     {
       "id": "DIC-Q-33-bald-guy-roast-choice",
       "issue": 33,
-      "pr": null,
+      "pr": 188,
       "title": "Bald Guy Brew exact selected Medium/Medium Dark user roast choice",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "591f72fd758d1196c0e5e12ce9867088a41096c5",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
       ],
       "tests": [
-        "Direct selected Organic Colombian Coffee Roast: Medium/Medium Dark remains blank with two-option manual warning; off-product and standard tier negative/positive cases staged; exact CI pending."
+        "Direct selected Organic Colombian Coffee Roast: Medium/Medium Dark remains blank with two-option manual warning; off-product and standard tier negative/positive cases staged; exact CI pending.",
+        "PR188 exact feature head fdeef6892f9a9d60f0663f71f01a7b2ecfc09a87: six applicable workflows SUCCESS: Node/lint/build 40627863051, cloud/mobile 40627863044, private visual/browser 40627863210, isolated SQL 40627863265, security 40627863058, approval/continuity 40627863079.",
+        "PR188 non-force merge 591f72fd758d1196c0e5e12ce9867088a41096c5 read back on development; exact tree e90e7d86cd0997887e48f39e715add2c7c0b4f4e equals tested feature source. Postmerge approval 40628104415, cloud/mobile 40628104399 and public-source acceptance 40628104446 SUCCESS; final postmerge Node/build awaiting result.",
+        "Merged public-source acceptance 40628104446: 13/13 required, 14 total targets, 13 parsed, 27 anonymous public requests, 0 real backend, 0 member quota, 0 production writes, 0 deployments; one optional Counter Culture source fixture sanitization gap remains. Bald Guy and Beanstock URLs were not among those 13 live accepted targets.",
+        "Original frozen603 workflow 40627863007 SKIPPED by historical candidate12 head branch/private ephemeral input guard; not a PASS. Postmerge controlled roaster probe 40628104462 also SKIPPED.",
+        "Final exact merged head Node/lint/build 40628104808 SUCCESS. All four actual postmerge applicable checks 40628104415, 40628104399, 40628104446, 40628104808 SUCCESS."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40627863051,
+        40627863044,
+        40627863210,
+        40627863265,
+        40627863058,
+        40627863079,
+        40628104415,
+        40628104399,
+        40628104446,
+        40628104808
+      ],
       "blockers": [
-        "Exact CI, non-force merge, postmerge source checks and original immutable603 replay acceptance are not yet verified."
+        "Full original immutable 603-coffee exact-source replay cannot run under current historical candidate12-only head branch and ephemeral private input restriction; workflow 40627863007 SKIPPED. Mandatory original603 impact, supplementary retention and source-level score unverified; keep TESTING pending genuine accepted replay."
       ],
       "owner_source": "Owner approval in Coffee #5 review, October 27-28 2026; Issue #33",
-      "notes": "Preserve current source roast literal, no inferred single category or roast selection; keep private member data, original archive and oracle untouched. No deploy."
+      "notes": "Preserve current source roast literal, no inferred single category or roast selection; keep private member data, original archive and oracle untouched. No deploy. Scope integrated, pending mandatory frozen603. Published Netlify deploy independently confirmed unchanged at 6ae0fc16178b2f1241e441f8; NOT DEPLOYED. Concurrent Cortez PR186 still open."
     }
   ],
   "history": [

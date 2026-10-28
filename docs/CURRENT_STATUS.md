@@ -1,3 +1,9 @@
+## October 28 UTC — Bald Guy Brew approved two-tier review PR188 merged, original603 TESTING / NOT DEPLOYED
+
+Owner case #5/77 confirmed blank canonical roast and member choice Medium versus Medium-Dark. PR188 exact reviewed head fdeef6892f9a9d60f0663f71f01a7b2ecfc09a87 six applicable CI SUCCESS, non-force merge 591f72fd758d1196c0e5e12ce9867088a41096c5 exact tested tree; postmerge approval/cloud/13-of-13 required public-source acceptance SUCCESS, postmerge Node/build 40628104808 SUCCESS. Original frozen603 workflow SKIPPED by branch/private inputs, so queue item TESTING, not READY, and no deployed app change. Next coffee #6 Beanstock slug reused; source freshness remains unverified. Concurrent PR186 not touched. Current published Netlify READY deploy remains 6ae0fc16178b2f1241e441f8.
+
+---
+
 ## October 28 UTC — Bald Guy Brew two-tier roast owner decision staged (TESTING, NOT DEPLOYED)
 
 Owner confirmed case #5 of 77: published Medium/Medium Dark is ambiguous across Medium and Medium-Dark, so preserve the exact source label, keep canonical roast blank, ask member to choose manually; no guessing. Regression tests and roast hint code staged in separate source PR, existing concurrency PR186 preserved. Original immutable 603, all member data and production unchanged. Coffee #6 Beanstock Colombian Supremo Organic URL has historical reused products; direct public page showed Tolima Suave but indexes disagree; current product identity not independently validated. Follow already Locked current selected-product precedence; no new guess. CI/merge pending; source only.
