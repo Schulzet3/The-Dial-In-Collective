@@ -476,6 +476,26 @@ function explicitFarmOwnership(page,nodes){
  }
  return found.size===1?[...found.values()][0]:null;
 }
+// A selected coffee can be named after a farmer-founded producing association.
+// Require the organization's literal acronym in BOTH the selected coffee name
+// and a selected-product sentence identifying the founding coffee farmers.
+// Historical generic cooperative descriptions and off-product aliases cannot
+// confer producer identity on a different coffee.
+export function selectedFoundedFarmerOrganization(paragraphs,name){
+ if(!Array.isArray(paragraphs)||typeof name!=='string'||name.length>220)return '';
+ const named=new Set((name.match(/\b[A-Z][A-Z0-9-]{2,14}\b/g)||[]));
+ const found=new Set();
+ for(const paragraph of paragraphs.slice(0,90)){
+  if(typeof paragraph!=='string'||paragraph.length>1600)continue;
+  for(const sentence of sentences(paragraph)){
+   if(!factualSentence(sentence))continue;
+   const match=sentence.match(/\b(?:\d{1,4}\s+)?(?:[\p{L}-]+\s+){0,4}coffee\s+farmers\s+joined\s+together\b[^.!?]{0,240}\bformed\s+([A-Z][A-Z0-9-]{2,14})(?=\s*\(|\s*[,.;]|\s+which\b|\s+to\b|$)/iu);
+   if(match&&named.has(match[1]))found.add(match[1]);
+  }
+ }
+ return found.size===1?[...found][0]:'';
+}
+
 export function extractNarrativeCoffeeEvidence(html,{name='',fields={},origin=fields.origin||'',originConflict=false}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name)return {fields:{},details:{}};
  const page=scopedPage(html);
@@ -516,6 +536,11 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={},origin=fi
  const relationshipGroups=currentProducerParagraphGroups(proseBlocks);
  const producerContext={origin,originConflict};
  const namedGrower=foundGrower(paragraphs,name,relationshipGroups,producerContext);
+ const foundedOrganization=selectedFoundedFarmerOrganization(paragraphs,name);
+ if(foundedOrganization&&!fields.producer&&!output.producer){
+  output.producer=foundedOrganization;details.named_producer=foundedOrganization;
+ }
+
  if(namedGrower&&!details.named_producer)details.named_producer=namedGrower;
  if(namedGrower&&!fields.producer&&!output.producer)output.producer=namedGrower;
  if(!fields.producer&&!output.producer){

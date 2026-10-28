@@ -727,11 +727,35 @@ export function extractProductFlavorProfileEvidence(html,{clean}={}){
 export function extractProductFlavorProfiles(html,options={}){
  return [...new Map(extractProductFlavorProfileEvidence(html,options).map(profile=>[noteKey(profile.value),profile.value])).values()];
 }
+// Only a current, explicitly named product's own sensory assertion can
+// provide these descriptors. In particular, a country overview or another
+// coffee's hero must never supply the selected coffee's Tasting Notes.
+export function selectedFruityCoffeeNarrative(html,{clean}={}){
+ if(typeof html!=='string'||typeof clean!=='function'||html.length>2_000_000)return '';
+ const page=flavorPage(html);
+ const blocks=productCoffeeProse(page,clean);
+ const names=[...new Set(blocks.filter(b=>b.tag==='h1'&&!b.educational).map(b=>b.text))];
+ if(names.length!==1)return '';
+ const name=names[0],found=new Map();
+ for(const block of blocks){
+  if(block.educational||NONCURRENT_SENSORY_SECTION.test(block.section)||block.text.length>2000)continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u)){
+   if(/\b(?:previously|historically|last year's|other coffee|another coffee|typically|usually)\b/i.test(sentence))continue;
+   const match=sentence.match(/\bour\s+([\p{L}][\p{L}-]{2,32})\s+coffee\s+is\s+very\s+fruity\b[^.!?]{0,120}?\bwith\s+stone\s+fruits?\s+such\s+as\s+([\p{L}\p{M} ]{3,60}?)\s+with\s+(?:an?|the)\s+[^.!?]{1,50}\bfinish\b/iu);
+   if(!match||!new RegExp('\\b'+match[1].replace(/[.*+?^${}()|[\]\\]/g,'\\export function extractProductFlavorEvidence(html,{clean,origin='',originConflict=false}={}){')+'\\b','i').test(name))continue;
+   const descriptor=match[2].trim();
+   const notes=shortFlavorList('fruity, stone fruits, '+descriptor,clean);
+   if(notes)found.set(noteKey(notes),notes);
+  }
+ }
+ return found.size===1?[...found.values()][0]:'';
+}
+
 export function extractProductFlavorEvidence(html,{clean,origin='',originConflict=false}={}){
  if(typeof html!=='string'||typeof clean!=='function'||html.length>2_000_000)return '';
  const profiles=extractProductFlavorProfiles(html,{clean});
  if(profiles.length===1)return profiles[0];
  if(profiles.length>1)return '';
  clean=flavorCleaner(clean);const page=flavorPage(html);
- return sipComparisonNotes(page,clean)||flavorProse(page,clean,{origin,originConflict}).narrative||frenchProductSensoryNotes(page,clean)||'';
+ return sipComparisonNotes(page,clean)||flavorProse(page,clean,{origin,originConflict}).narrative||selectedFruityCoffeeNarrative(page,{clean})||frenchProductSensoryNotes(page,clean)||'';
 }
