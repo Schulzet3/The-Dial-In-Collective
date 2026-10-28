@@ -53,9 +53,9 @@ const rowFields=(item,shot)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
  const input=multiline?'<textarea name="'+e(key)+'" rows="2" maxlength="'+maxLength+'">'+e(value)+'</textarea>':
   '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+readonly+' ' +(['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
  return '<label>'+e(label)+input+'</label>';
-}).join('');
+}).join('')+(!shot?'<label>Fully Decaffeinated (Decaf)<input type="checkbox" name="is_decaf" '+((item.is_decaf===true||(/\\bdecaf(?:feinated)?\\b/i.test(String(item.name||''))&&!/\\bhalf[ -]?caf/i.test(String(item.name||''))))?'checked':'')+'></label><label class="admin-decaf-method" '+((item.is_decaf===true||(/\\bdecaf(?:feinated)?\\b/i.test(String(item.name||''))&&!/\\bhalf[ -]?caf/i.test(String(item.name||''))))?'':'hidden')+'>Decaffeination Method<select name="decaffeination_method"><option value="">Unknown / Not Published</option>'+['Water Process','Sugar Process','Carbon Dioxide (CO2)'].map(value=>'<option value="'+e(value)+'" '+(value===item.decaffeination_method?'selected':'')+'>'+e(value)+'</option>').join('')+'</select></label>':'');
 export function renderAdminCoffeeFacts(item){
- return '<dl class="admin-coffee-facts">'+[...fields.coffee,['source_url','Source URL']].map(([key,label])=>
+ return '<dl class="admin-coffee-facts">'+[...fields.coffee,...((item.is_decaf===true||(/\bdecaf(?:feinated)?\b/i.test(String(item.name||''))&&!/\bhalf[ -]?caf/i.test(String(item.name||''))))?[['decaffeination_method','Decaffeination Method']]:[]),['source_url','Source URL']].map(([key,label])=>
   '<div><dt>'+e(label)+'</dt><dd>'+e(string(item[key])||'—')+'</dd></div>').join('')+'</dl>';
 }
 export function renderAdminRecord(item,kind,{reviewActions=null,reviewComparison=null}={}){
