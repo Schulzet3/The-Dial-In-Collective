@@ -2,7 +2,7 @@
   "schema_version": 1,
   "release_id": "DIC-20261028-READY-QUEUE-08",
   "owner_instruction": "Please do a full audit of all items in deployment queue, then publish.",
-  "audited_development_sha": "b4e883d31d973d3ecb43851e0c2b2c7f88d0a816",
+  "audited_development_sha": "829e123700efd10dae2836980b89d710852a7339",
   "published_base": {
     "tested_source_sha": "ca7ab46e1e8c76ce117ffc88470d107aa5903729",
     "release_sha": "f5f29a02f98304dd9d1bd4d2c840c490c85097e6",
@@ -1492,9 +1492,98 @@
       "scope_paths": [
         "site/lib/engine.js"
       ]
+    },
+    {
+      "id": "DIC-Q-33-current-selected-quality-grade-collection",
+      "issue": 33,
+      "pr": 218,
+      "title": "Current selected coffee quality collection from corroborated visible specifications and own-product story",
+      "state": "READY",
+      "merged_source_sha": "b4ed955a7ddcf05a06bd83e3d99b46e57777a823",
+      "scope_paths": [
+        "src/server/coffee-selected-source-evidence.mjs"
+      ],
+      "tests": [
+        "Exact PR218 head d9adff35 all seven applicable workflows SUCCESS: app/full Node/build 40781751339, cloud/mobile 40781751460, visual 40781751546, SQL 40781751493, security 40781751477, approval 40781751433, source bundle 40781751492; restricted original603 40781751390 SKIPPED.",
+        "Merged PR218 non-force SHA b4ed955a7ddcf05a06bd83e3d99b46e57777a823, first parent b4e883d3, second parent exact tested head d9adff35.",
+        "Fresh exact merged-parser current official77 job 123146205920 run40782137959 SUCCESS on trigger SHA 22a0bab8 (audit script no-op comment only); 77/77 PARSED, 77/77 Add Coffee previews; #13 Gold Collection now canonical; no other 76 field classification or conflict-set changes; original frozen603 unchanged.",
+        "Previously verified genuine GoTrue hosted member Add Coffee saving/relogin SQL readback run40767700050 reused without repeat; no new auth or schema path affected.",
+        "Source-bound 77 diagnostic docs/audits/issue33-owner77-post-pr218-quality-grade-20261028.json. Remaining Bonjo conflicting elevation withheld as before."
+      ],
+      "ci_runs": [
+        40781751339,
+        40781751460,
+        40781751546,
+        40781751493,
+        40781751477,
+        40781751433,
+        40781751492,
+        40782137959
+      ],
+      "blockers": [],
+      "owner_source": "Issue #33 owner-approved 77-coffee #13 Bonjo current Gold Collection designation; no new product decision",
+      "notes": "No production deployment. Preserves original immutable603 source/oracle/scorer, member data, current conflict warnings, and previous READY items. Parent Issue33 residual remains IN_PROGRESS.",
+      "github_merge_readback_matches": true,
+      "reviewed_head_sha": "d9adff35b2c8e0e006d0abf1c77a8c3fb5b2451f",
+      "checks": [
+        {
+          "name": "frozen603",
+          "conclusion": "skipped",
+          "status": "completed",
+          "id": 123144897258
+        },
+        {
+          "name": "cloud-tests",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144895457
+        },
+        {
+          "name": "review",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144895222
+        },
+        {
+          "name": "approval",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144895089
+        },
+        {
+          "name": "mobile-browser-qa",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144895070
+        },
+        {
+          "name": "security-inventory",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144895066
+        },
+        {
+          "name": "sql",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144894902
+        },
+        {
+          "name": "exact-source-archive",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144894516
+        },
+        {
+          "name": "validate",
+          "conclusion": "success",
+          "status": "completed",
+          "id": 123144894508
+        }
+      ]
     }
   ],
-  "queue_schema_and_ancestry": "PASS:22 READY items cover all24 deployable changed files; zero errors; original GitHub compare graph used for ancestry",
+  "queue_schema_and_ancestry": "PASS:23 READY items cover all24 changed deployable files; initial22 independently audited, concurrentPR218 scope independently reconciled and current77PASS",
   "changed_application_paths": [
     "site/admin/main.js",
     "site/admin/records.js",
@@ -1538,7 +1627,9 @@
     "risk": "potentially_destructive",
     "provider_pending": true,
     "pre_migration_backup_run": 40782154176,
-    "sql_apply_status": "NOT_APPLIED"
+    "sql_apply_status": "NOT_APPLIED",
+    "encrypted_sha256": "2fbf8031b5b29351e10b7c5d738e9f4b64793c92d04495e7abd9197e4190fc56",
+    "offsite_file_id": "1sjBMLM3_btgI2jagq7hI50RpHjb8Op0h"
   },
   "existing_combined_evidence": {
     "exact_source_head": "3f54c398e47df50ef8abc36928c9eafec6ada8ec",
@@ -1560,5 +1651,19 @@
     "No physical device or confirmation-email/password-reset delivery verification.",
     "Publication and migration not yet performed by this audit record."
   ],
-  "status": "AUDITED_SOURCE_READY_FINAL_COMBINED_CI_AND_RECOVERY_PENDING"
+  "status": "AUDITED_SOURCE_READY_FINAL_COMBINED_CI_AND_RECOVERY_PENDING",
+  "recovered_initial_development_sha": "b4e883d31d973d3ecb43851e0c2b2c7f88d0a816",
+  "concurrent_recovery": {
+    "pr": 218,
+    "merged_sha": "b4ed955a7ddcf05a06bd83e3d99b46e57777a823",
+    "current77_run": 40782137959,
+    "conclusion": "SUCCESS;#13 Gold Collection recovered;other76 unchanged"
+  },
+  "local_tests": {
+    "tests": 1908,
+    "pass": 1902,
+    "fail": 0,
+    "skip": 6,
+    "scope": "Original22 runtime;latestPR218+combined exact CI pending"
+  }
 }
