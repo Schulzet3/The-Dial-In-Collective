@@ -1169,6 +1169,28 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/180",
       "notes": "READY for separate owner-authorized publication; NOT DEPLOYED. Staged migration has not been applied; no member or shot records changed. Exact selected Decaf only, three normalized methods, half-caf/regular suppression, Process kept separate, unrecognized chemical methods blank. Parallel Issue33 source changes preserved via nonforce merge."
+    },
+    {
+      "id": "DIC-Q-33-kona-specific-purchased-roast-notes",
+      "issue": 33,
+      "pr": null,
+      "title": "Kona Earth selected roast profile notes over generic product flavor description",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-roast-variants.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "tests/coffee-kona-roast-profiles.test.mjs"
+      ],
+      "tests": [
+        "Kona 3-roast printed notes/Full City normalization/Green Unroasted excluded, specific over generic, negative educational scope and member-preview coverage added; exact-source CI/merge pending and NOT claimed PASSED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source tests, non-force merge and postmerge CI not yet verified. Original frozen 603 replay remains a separate unperformed gate."
+      ],
+      "owner_source": "Owner 2026-10-27 direct Kona Earth approval: ignore general description in favor of explicitly roast-specific tasting lists.",
+      "notes": "Maintain source-first fallback and current coffee identity; never infer unsupported roast, process, elevation or espresso parameters. Do not rewrite original603 or member records. No production publication authorized."
     }
   ],
   "history": [

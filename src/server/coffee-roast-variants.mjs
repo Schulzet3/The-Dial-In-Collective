@@ -11,8 +11,10 @@ const tidy=s=>String(s||'').replace(/<[^<>]{0,2000}>/g,' ')
  .replace(/&(?:nbsp|amp|quot|apos);/gi,x=>({'&nbsp;':' ','&amp;':'&','&quot;':'"','&apos':"'"}[x.toLowerCase()]||x))
  .replace(/&#(\d{2,6});/g,(_,n)=>String.fromCodePoint(Math.min(0x10ffff,Number(n))))
  .replace(/\s+/g,' ').trim();
-const roastId=s=>String(s||'').toLowerCase().replace(/\s+roast\b/g,'')
- .replace(/[\s–—_]+/g,'-').trim();
+// Some current purchase options include an official alternate roast name,
+// e.g. Medium Dark (Full City). That is still Medium-Dark, not a new level.
+const roastId=s=>String(s||'').toLowerCase().replace(/\s*\(\s*full\s+city\s*\)\s*/g,'')
+ .replace(/\s+roast\b/g,'').replace(/[\s–—_]+/g,'-').trim();
 const matchSegment=(text,key)=>{
  const rx=/\bAs\s+(?:a|an)\s+(medium[\s-]dark|medium[\s-]light|light|medium|dark)\s+roast\s*[,.:]/gi;
  const markers=[...text.matchAll(rx)].map(m=>({at:m.index,end:m.index+m[0].length,id:roastId(m[1])}));
@@ -30,6 +32,29 @@ function noteOf(sections){
  }
  return '';
 }
+// Read a directly labelled per-roast tasting list from the SELECTED product.
+// The overarching "notes of ..." paragraph is less specific and must not
+// donate flavors to a purchased roast when this list exists.
+function printedRoastNotes(description, offeredIds){
+ const text=tidy(description);
+ const heading=/\bTasting\s+Notes\s+by\s+Roast\s*:\s*/i.exec(text);
+ if(!heading)return new Map();
+ const start=heading.index+heading[0].length;
+ const excerpt=text.slice(start,start+1250).split(/\b(?:Ingredients|Care\s+In\s+Every\s+Cup|Shipping\s+Information|Frequently\s+Asked\s+Questions)\s*:?/i)[0];
+ const marker=/\b(Medium\s*[- ]\s*Dark(?:\s*\(\s*Full\s+City\s*\))?|Medium\s*[- ]\s*Light|Medium|Dark|Light)\s*:\s*/gi;
+ const labels=[...excerpt.matchAll(marker)].slice(0,12).map(m=>({id:roastId(m[1]),at:m.index,end:m.index+m[0].length}));
+ const notes=new Map();
+ for(let index=0;index<labels.length;index++){
+  const item=labels[index];
+  if(!offeredIds.includes(item.id)||notes.has(item.id))continue;
+  const next=labels[index+1];
+  const value=excerpt.slice(item.end,next?next.at:excerpt.length).trim();
+  // A complete bounded notes line is a value, not a paragraph or a URL.
+  if(value.length>=3&&value.length<=240&&!/https?:\/\//i.test(value))notes.set(item.id,value);
+ }
+ return notes;
+}
+
 function sensory(sections){
  for(const text of sections){
   const match=n=>text.match(new RegExp('\\b'+n+'\\s+(?:at|of|is)\\s+(?:a\\s+)?(\\d+(?:\\s*[-–]\\s*\\d+)?)','i'));
@@ -81,9 +106,10 @@ export function extractSelectedCoffeeRoastVariants({description='',options=[]}={
  // to the standard parser. This prevents educational comparisons from
  // creating fictional products or variant confirmations.
  if(ids.length<2)return [];
+ const printed=printedRoastNotes(description,ids);
  const variants=ids.slice(0,7).map(id=>{
   const sections=matchSegment(text,id);
-  const notes=noteOf(sections),ratings=sensory(sections),recipe=espresso(sections);
+  const notes=printed.get(id)||noteOf(sections),ratings=sensory(sections),recipe=espresso(sections);
   return {...labels[id],fields:{roast_level:labels[id].roast_level,...(notes?{tasting_notes:notes}:{})},
    ...(ratings?{sensory:ratings}:{}),
    ...(recipe?{roaster_recipe:recipe}:{})};
