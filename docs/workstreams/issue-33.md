@@ -1,3 +1,9 @@
+## October 28 UTC — isolate actual hosted Create Setup failure
+
+Actual run 40767394875 completed failure: real GoTrue login and admitted browser opened New Setup, clicked the correct primary Create Setup button, but no Add Coffee was visible after 25s. Independent owner-scoped SQL found zero setup and coffee rows for the test users; all throwaway beta members were disabled. Added bounded, sanitized dialog and toast diagnostics before the next live attempt. Do not claim setup or Add Coffee saved; no deployed source change.
+
+---
+
 ## October 28 UTC — real hosted browser setup test selector repaired
 
 Run 40767113417 reached real hosted GoTrue signup, invitation redemption and authenticated Chromium UI; login and New Setup form displayed. The test clicked the first button in New Setup, which was the informational `Grinder Espresso Range` help control rather than the required `Create Setup` submit. No application defect evidenced. Fixed test selector to `form button.primary` and prepared retest. Run is FAILED; no save/readback yet. Disposable member access disabled, no shared or existing user data modified.
