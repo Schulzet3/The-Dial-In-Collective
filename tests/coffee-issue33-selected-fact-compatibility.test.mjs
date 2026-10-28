@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {productMarkup,withoutDetachedFarmerProfiles} from '../src/server/coffee-product-scope.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
+import {compatibleCoffeeOrigins} from '../src/server/coffee-fact-compatibility.mjs';
 const parse=(name,body,url='https://example-coffee.com/products/selected')=>
  extractPublicCoffeeFacts('<main><h1>'+name+'</h1>'+body+'</main>',{source_url:url});
 test('VESTA two explicit current labels Region Fresno and Origin Colombia Tolima form a selected tuple',()=>{
@@ -92,4 +93,22 @@ test('unrelated farmer profile widget must have exact wrapper AND marker to be e
  ]){
   assert.match(withoutDetachedFarmerProfiles(productMarkup(html)),/Variety: Bourbon/);
  }
+});
+
+test('selected natural reserve location and abbreviated secondary Region do not create a false origin conflict',()=>{
+ const r=parse('La Josefina Sudán Rumé / Natural Extended Fermentation',
+  '<p>Location: Cayambe-Coca Natural Reserve, Ecuador</p>'+
+  '<p>Origin: Ecuador</p><p>Region: Cayambe-Coca Natura Reserve</p>',
+  'https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume');
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.origin,'Cayambe-Coca Natural Reserve, Ecuador');
+ assert.ok(!r.conflicts?.includes('origin'));
+});
+test('reserve truncation reconciliation requires identical long locality stem and cannot erase geographic disagreement',()=>{
+ assert.equal(
+  compatibleCoffeeOrigins('Cayambe-Coca Natural Reserve, Ecuador','Cayambe-Coca Natura Reserve'),
+  'Cayambe-Coca Natural Reserve, Ecuador');
+ assert.equal(compatibleCoffeeOrigins('Cayambe-Coca Natural Reserve, Ecuador','Other-Coca Natura Reserve, Ecuador'),null);
+ assert.equal(compatibleCoffeeOrigins('Cayambe-Coca Natural Reserve, Ecuador','Cayambe-Coca Natura Reserve, Peru'),null);
+ assert.equal(compatibleCoffeeOrigins('Cayambe-Coca Natural Reserve, Ecuador','Cayambe-Coca Nature Reserve, Ecuador'),null);
 });
