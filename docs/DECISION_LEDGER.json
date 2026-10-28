@@ -4534,5 +4534,31 @@
       40768289345,
       40768289023
     ]
+  },
+  "current_owner_retire_screenshot_claude_20261028": {
+    "decision_id": "UX-ISSUE18-RETIRE-SCREENSHOT-CLAUDE-20261028",
+    "status": "Locked",
+    "date": "2026-10-28",
+    "issue": 18,
+    "owner_source": "Owner direct message in Issue #18 review on 2026-10-28: 'I don't want screenshot or claude anymore. Let's close 18 and move on to the next one please.'",
+    "decision": "Remove optional screenshot-based coffee extraction and Claude BYOK from present and deferred product scope. Issue #18 is closed not planned, not considered implemented.",
+    "supersedes": [
+      "Sections 9 and 12 baseline screenshot/Claude inputs and BYOK as current implementation obligations",
+      "2026-10-22 Issue #18 future deferred screenshot/Claude scope",
+      "Historical EXTRACTOR-CLAUDE-BYOK-20261019 plan insofar as it proposed Claude/screenshot support"
+    ],
+    "preserve": [
+      "Deterministic source-backed roaster URL autofill and manual entry",
+      "Review and edit extracted facts; keep unpublished fields blank and support private Pending",
+      "Approved existing auth, data, security and cost boundaries; no AI required for shot logging",
+      "Historical requirements and test/QA screenshots as provenance"
+    ],
+    "not_authorized": [
+      "New screenshot/OCR or other AI-provider integration",
+      "Deletion of historical screenshots or member data",
+      "Production publishing, database migrations, provider or billing changes"
+    ],
+    "implementation": "Scope retirement only. Relevant current app sources have URL/manual input and no screenshot/Claude workflow; no runtime code change needed. No new deployable queue item.",
+    "closure": "Close Issue #18 with reason not_planned; outstanding checkboxes are canceled by owner, not passed."
   }
 }

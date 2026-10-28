@@ -1,3 +1,9 @@
+## October 28 UTC — Issue #18 retired by owner; closure action pending GitHub issue readback
+
+Owner explicitly rejected both optional member coffee screenshot extraction and Claude device-local BYOK. Locked supersession `UX-ISSUE18-RETIRE-SCREENSHOT-CLAUDE-20261028` recorded in Master Specification and Decision Ledger; approval coverage and current requirements view reconciled. The deterministic roaster URL autofill, manual and private Pending entry remain in scope. Relevant current application source contains no screenshot/Claude workflow; no runtime code, migrations, member data or deployable release item altered. Release queue remains unchanged: no READY/DEPLOYED fiction for an intentionally canceled feature. GitHub Issue #18 should close **not planned**, without marking historical feature acceptance checks as passed. Next open original-scope issue: #22, offline outbox, concurrent device conflicts and account isolation. No deployment authorized or executed by this scope retirement.
+
+---
+
 ## October 28 UTC — Issue #17 CLOSED as completed, code READY and NOT DEPLOYED
 
 GitHub Issue #17 independently read back CLOSED (completed) at 2026-10-28 21:08:50 UTC after nonforce PR212 merge d135702a3f27fb4bbb98aa92524cc5627783b921, corrected full Node tests 1,899 PASS/0 FAIL/6 SKIP, exact head and merged app/cloud/mobile/visual/security/SQL/approval CI all passed. Source queue DIC-Q-17-numeric-range-slow-feed-aware-grind READY, zero blockers. The previously dated "issue closure pending" entry below is historical; closure is DONE. Issue #18 is next. No deployment or member data changes.

@@ -1,3 +1,11 @@
+## October 28 owner retirement of optional screenshot and Claude extraction (Locked)
+
+**UX-ISSUE18-RETIRE-SCREENSHOT-CLAUDE-20261028** — The owner explicitly decided, while reviewing GitHub Issue #18 on October 28, 2026: **"I don't want screenshot or claude anymore. Let's close 18 and move on to the next one please."** Coffee-entry screenshot uploads/extraction, screenshot OCR, Claude-based coffee extraction, device-local Claude BYOK/key-entry UI and the related speculative provider integration are **retired from the product scope**, not deferred future implementation work. Close Issue #18 as **not planned by explicit owner decision**, rather than asserting that its historic unchecked acceptance tests passed.
+
+Retain deterministic, source-backed HTTPS roaster product URL autofill, editable manual coffee entry, private Pending coffee handling when evidence is unavailable, member review of sourced facts, existing safeguards, and shot/community data. No alternative AI provider, image-processing feature, paid service, credentials, backend migration, screenshot cleanup of historical artifacts, or deployment is authorized by this retirement. Quality-assurance screenshots, historical product photographs used for source evaluation, and existing test evidence are unaffected; this choice concerns member-facing coffee-information screenshot extraction. Earlier sections 9, 11, 12 and historical Claude/BYOK approvals in the Master Specification and Decision Ledger are retained for provenance but superseded on this exact topic. Only a new explicit owner decision can restore the retired features.
+
+---
+
 ## October 28 owner-approved generic coffee extractor source hierarchy (Locked)
 
 **EXTRACTOR-DESCRIPTION-FIRST-SELECTED-PRODUCT-20261028** — Owner direct supersession, 2026-10-28: The extractor should collect every source-supported available fact, with the current selected coffee description strongest, then its other product text/page detail; current matched SEO or archived data only as a last resort when direct current field is unavailable, flagged for member review. Missing or genuinely contradictory details must be shown for final user review. Universal 603-perfect matching is NOT required before this generic source-priority logic can be queued for deployment.

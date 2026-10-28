@@ -2,7 +2,7 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-10-26",
+  "reconciled_at_utc": "2026-10-28",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
@@ -52,6 +52,7 @@
     "current_owner_remove_hide_shot_control_20261021",
     "current_owner_required_outlier_review",
     "current_owner_retire_hide_shot_backend_20261021",
+    "current_owner_retire_screenshot_claude_20261028",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
     "current_owner_single_instruction_development_and_publication_20261022",
@@ -1640,5 +1641,21 @@
       40768627501,
       40768627507
     ]
+  },
+  "current_owner_retire_screenshot_claude_20261028": {
+    "decision_id": "UX-ISSUE18-RETIRE-SCREENSHOT-CLAUDE-20261028",
+    "issue": 18,
+    "status": "OWNER_RETIRED_NOT_PLANNED_NO_RUNTIME_CHANGE",
+    "owner_scope": "Do not implement coffee screenshot extraction, Claude AI extraction, Claude device BYOK UI, or treat them as future backlog obligations.",
+    "retained": "Deterministic URL autofill, manual and Pending flows, source review, security and privacy, historic QA screenshots unaffected.",
+    "supersedes": "Historical screenshot/Claude requirements and 2026-10-22 deferred Issue #18 future scope.",
+    "verified_source_paths": [
+      "site/cloud/main.js",
+      "site/cloud/client.js",
+      "src/server/coffee-page-metadata.mjs"
+    ],
+    "source_test_note": "Documentation-only scope retirement; prior app source inspection found no active screenshot or Claude integration. No new browser, provider or physical device run asserted.",
+    "release_queue": "NO_NEW_DEPLOYABLE_ITEM; Issue #18 is closed NOT_PLANNED without adding READY or DEPLOYED entry",
+    "no_publication": true
   }
 }

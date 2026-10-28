@@ -8,6 +8,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
 - [Numeric grinder range and Slow Feed recommendation: Issue #17](issue-17.md)
+- [Owner-retired screenshot extraction and Claude BYOK: Issue #18](issue-18.md)
 - [Post-#1–16 full reconciliation and safe performance audit: Issue #161](issue-161.md)
 
 - [Internal recipe family reliability and two-family acceptance: Issue #10](issue-10.md)
