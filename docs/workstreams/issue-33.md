@@ -1,3 +1,9 @@
+## October 28 UTC — PR191 actual Add Coffee markup regression added, no changed parser behavior
+
+Independent QA confirmed the exact selected Black & White relative bag-image "lighter roast" hint is displayed by the actual site/cloud/coffee-url-autofill.js user-facing Add Coffee preview, while no seven-tier Roast Level autofill is manufactured. Added an explicit preview markup regression to the same feature test and kept off-product, conflicting and stale Beanstock cases. Server source remains blob b26d642bc66c6d0a76098f9d2d367e6aa9f69052, unchanged from the fully replayed 603-coffee local source. Prior original603 full modified-source strict comparison: 603/603, 3096 exact/81 missing/825 review, **zero per-case differences** from the immediately prior PR190 accepted source; supplementary evidence all 6474 unchanged. Rerun exact amended-head CI and preserve historical candidate12-only branch guard unchanged; no deployed or private user data operations.
+
+---
+
 ## October 28 UTC — PR191 proposed: exact current selected-image relative roast and reused-product negative controls (TESTING, NO DEPLOY)
 
 Issue33 master #6 historical Beanstock FUDAM La Union reused /products/colombian-supremo-organic slug now displays official selected Colombia Organic Tolima Suave in an older official snapshot; its Process field is genuinely absent from observed selected page. Existing parser already preserves selected Tolima identity, Medium and its own tasting notes without borrowing FUDAM's old Washed process. Do not fabricate Wash or assign prior FUDAM facts; leave blank and retain snapshot freshness caveat.

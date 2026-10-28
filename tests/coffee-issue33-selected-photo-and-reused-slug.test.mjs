@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {extractShopifyAjaxData,shopifyProductRequest,mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
+import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
 const blackWhite='https://www.blackwhiteroasters.com/products/r-diego-horta-anaerobic-natural';
 const selected='Diego Horta - Anaerobic Natural';
@@ -56,4 +57,13 @@ test('Beanstock historical same-country slug and stale SEO cannot fill a noncurr
  assert.equal(merged.fields.process,undefined);
  assert.ok(!JSON.stringify(merged.fields).includes('FUDAM'));
  assert.ok(!JSON.stringify(merged.fields).includes('Washed'));
+});
+
+test('the real Add Coffee preview visibly shows the relative selected-image roast hint but never auto-fills a tier',()=>{
+ const r=page('<img alt="'+label+'"><p>Origin | Santa Maria, Huila, Colombia</p>');
+ const markup=coffeeUrlPreviewMarkup(r,{applied:true});
+ assert.equal(r.fields.roast_level,undefined);
+ assert.match(markup,/Roaster describes the coffee as lighter/i);
+ assert.match(markup,/Choose the closest supported level manually/i);
+ assert.doesNotMatch(markup,/<dt>Roast Level<\/dt><dd>(?:Light|Very Light|Ultra Light)<\/dd>/i);
 });
