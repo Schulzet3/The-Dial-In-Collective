@@ -50,3 +50,17 @@ jobs:
           node-version: '22'
       - name: Compare bounded HTML parsers in disposable runner temp copies
         run: node --expose-gc scripts/audit/coffee-extractor-2mb-study.mjs
+
+  issue33-all77-direct-current:
+    if: contains(github.event.head_commit.message, '[dic-issue33-77-probe]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Probe all 77 exact official URLs through isolated selected-product parser
+        run: node scripts/audit/issue33-current-all77-source-probe.mjs
