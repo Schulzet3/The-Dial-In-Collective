@@ -1,3 +1,15 @@
+## October 28 UTC — Coffee #5 Bald Guy Brew owner confirmed two-tier manual roast review
+
+**Authorization:** Owner explicitly accepted prior proposal: Bald Guy Brew Organic Colombian current selected product Roast: Medium/Medium Dark should remain canonical roast_level null with clear manual member choice Medium or Medium-Dark, neither automatically selected. Official roaster source https://baldguybrew.com/products/organic-colombian-coffee lists this exact roast and only grind/size purchase choices (not roast-specific options). No producer/processing facts derived beyond current selected source; frozen oracle unchanged.
+
+**Implementation:** Extend roast evidence's literal unsupported-category hint for explicitly selected Medium/Medium Dark; leave existing seven-tier normalization and source hierarchy untouched. Add synthetic current selected product, visible import preview and negative unrelated/guide/bare-range tests. Preserve prior Full City and White behavior; owner case #5 review record RESOLVED_SOURCE_GAP_USER_CHOICE. Master Specification and Decision Ledger owner supersession, coverage and TESTING queue staged in same change. PR186 concurrent Cortez remains separate. 
+
+**Coffee #6 initial source review:** Original benchmark case Beanstock Coffee Colombia Supremo Organic had frozen expected FUDAM association producer. Directly opened https://beanstockcoffee.com/products/colombian-supremo-organic displayed a current *Tolima Suave* product (Planadas/Tolima, 154 producers, Medium) in one public capture; other search-index snapshots on the same slug displayed FUDAM La Union (Nariño) and Finca Las Flores (Sierra Nevada). Because cached captures differ and current live Shopify product ID not independently verified, source identity remains PENDING_CURRENT_VERIFICATION. Do not infer that FUDAM supplies Tolima, invent named grower, or treat the older slug as the identity; locked Cortez reused-URL rule applies. No unresolved new owner rule is presumed, and source freshness must be confirmed before resolving case #6.
+
+**Testing:** Feature head CI, nonforce integration, merged-source readback and original603 checks to be recorded only after actual evidence. Existing frozen603 restricted branch/private archival channel not equivalent to an accepted replay. No Netlify/SQL/Edge/Auth changes, paid services, member writes or production publish.
+
+---
+
 ## October 28 UTC — White Coffee #4 source verified, owner decision recorded; original603 restricted
 
 **Owner:** Approved leaving Alaska Artisan White Coffee roast_level blank and flagging for member selection. Very Light / Ultra Light are possibilities, NOT source-confirmed; never automatically populate them. The roaster distinguishes White from Light and describes a low-temperature light tan roast, without a verified seven-tier category. Next coffee #5 is Bald Guy Brew Organic Colombian: current official selected-product Roast: Medium/Medium Dark, unresolved individual choice.
