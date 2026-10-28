@@ -160,7 +160,32 @@ with sync_playwright() as p:
     check(page.locator('.feedback-panel').count()==1,'Rating and saving generates one visible recommendation')
     check(page.evaluate('window.__raw.shots.length===1'),'One submission creates exactly one synthetic shot')
     check(page.locator('.current-mark').count()==1,'Completed shot retains a single current coffee')
-    check(not errors,'No JavaScript page exceptions in keyboard and viewport scenarios: '+repr(errors))
+    # History controls also redraw the root: keyboard focus must survive both directions.
+    page.get_by_text('Shot History (1)',exact=True).click()
+    history=page.locator('[data-action=shot-expand]').first
+    history.focus()
+    history.press('Enter')
+    check(page.locator('[data-action=shot-expand]').first.get_attribute('aria-expanded')=='true','Keyboard Enter expands the saved shot history row')
+    check(page.evaluate("document.activeElement?.dataset?.action==='shot-expand'"),'Shot-history expansion preserves keyboard focus')
+    page.locator('[data-action=shot-expand]').first.press('Enter')
+    check(page.locator('[data-action=shot-expand]').first.get_attribute('aria-expanded')=='false','Keyboard Enter collapses the shot without losing history')
+
+    context.set_offline(True)
+    page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Offline')")
+    check(page.locator('.coffee-card').count()==1 and page.get_by_role('button',name='Community',exact=True).count()==0,'Network loss preserves private coffee and hides unavailable Community')
+    context.set_offline(False)
+    page.wait_for_function("document.querySelector('.sync-indicator')?.textContent.includes('Synced')")
+    check(page.get_by_role('button',name='Community',exact=True).count()==1,'Network reconnect restores online controls only after revalidation')
+
+    # A verified account with no saved coffees still offers a reachable action.
+    page.evaluate("""async()=>{
+      const raw=window.__raw;
+      raw.library=[];raw.submissions=[];raw.workspaceCoffees=[];raw.shots=[];raw.notes=[];
+      await window.__app.sync();
+    }""")
+    check(page.locator('.coffee-card').count()==0,'Empty coffee library renders no stale private cards')
+    check(page.get_by_role('button',name='Add Coffee',exact=False).count()==1,'Empty library preserves a keyboard-reachable Add Coffee action')
+    check(not errors,'No JavaScript page exceptions in keyboard, offline and viewport scenarios: '+repr(errors))
 
     context.close()
     browser.close()
