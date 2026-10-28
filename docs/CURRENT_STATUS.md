@@ -1,3 +1,19 @@
+## October 27 UTC — Issue33 exact product/SEO fallback and explicitly rotating origin, TESTING
+
+Owner-authorized current exact product data/specs precede archives/SEO; SEO remains fallback only. Original contradictory Mexico/Peru on Black River stays withheld with both alternatives. Unitless labeled elevation already uses meters. New source tests and rotating-origin confirmation only for coffees explicitly labeled as rotating; do not add blanket origin prompts. This is a development change under CI, NOT DEPLOYED, no production operations. Frozen original 603 archive/oracle untouched.
+
+---
+
+## October 27 UTC — Issue33 six original603 missing assertions recovered, exact merged-source READY (NOT DEPLOYED)
+
+**Owner step #1 completed for six proven source facts:** Actual unchanged original 603-coffee/201-roaster/1,197-capture isolated-preview-handler replay: true baseline 3,090 exact /89 missing /823 review; new **3,096 exact /83 missing /823 review** across 4,002 original canonical assertions. Precisely six original missing→exact, no previously exact lost and no other canonical case change. Original supplementary 5,458 fully retained /337 partial /679 unconfirmed across 6,474 unchanged, conflict/extra counts unchanged. Original captures/oracle/scorer hash verified and not rewritten. Six source-bound proofs + hashes: `docs/audits/extractor-issue33-missing-six-source-proof-20261027.json`.
+
+**What improved:** Exact current selected-product Methodical labels (Ethiopia Layo Teraga Limited Release; Colombia Andrés Cardona Single Origin Staple), S&W extra-/mega-light roast (two Camacho lots), Coffee Exchange COMSA cooperative, and Black Coffee Roasting Red Room's three current notes without its cinematic analogy. Guarded against related products, mismatched title/publisher, unsupported color scale, non-coffee producer history and generic marketing. **TESTED** PR178 head `0e5d69e208d99d14a590437d401ca3f6b5190a8c` with all six applicable GitHub checks SUCCESS; original private hosted603 SKIPPED (independent full original replay completed). Nonforce merge `b0de5a8432442d58f124c3cceddb86e3bed4ed08`, same tested source tree `96fd2340abaa4fd8008eadebf563796c73feb254`; merged app/build `40586968991`, cloud/mobile `40586968841`, approval `40586968902` SUCCESS. Live public URL probe SKIPPED; no production source test claimed.
+
+**Queue/release:** `DIC-Q-33-original603-six-missing-facts` TESTING→**READY** with merged exact SHA and zero blockers. Preserve 23 DEPLOYED, previous current-source Issue33 READY and parent Issue33 IN_PROGRESS: **23 DEPLOYED /2 READY /1 IN_PROGRESS**. No publication approval and no Netlify, Supabase, live member/Community, offline, Auth, Edge, SQL, or paid service writes. Parent Issue33 remains OPEN: 83 original missing (22 producer,14 roast,13 notes,12 release,11 process,10 origin,1 elevation), 823 review required. Honest withholding of recurring harvest windows, conflicting roasts, decaf method vs primary process, generic producers and incompatible source lists is not an error. This documentation-only receipt has its own pending exact-source continuity check.
+
+---
+
 ## October 27 UTC — Issue33 PR176 exact merged-source READY / NOT DEPLOYED
 
 **Authorization:** Owner instructed that genuine measured Agtron is the strongest roast determination and supplied Stumptown Nano Challa, Blue Bottle Hayes Valley, Counter Culture Sipacapa, Peet's Guatemala Linda Vista. All live URL checks added to controlled public source acceptance. Earlier Brewpoint/Gnosis/Black River Locked decisions retained. No production publication authorized.
