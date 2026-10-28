@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "owner_review": "77 original missing-field coffees reviewed one at a time",
+  "last_reviewed_utc": "2026-10-27",
+  "cases": [
+    {
+      "sequence": 1,
+      "coffee": "44 North Coffee — Decaf – Honduras COMSA",
+      "source_url": "https://44northcoffee.com/products/honduras-decaf",
+      "review_status": "RESOLVED_SOURCE_GAP",
+      "classification": "Not a software defect: primary green-coffee processing was not published; intentionally withhold; do not fabricate or keep as a repair failure",
+      "original_benchmark": {
+        "field": "process",
+        "expected": "Water process decaffeination",
+        "issue": "Benchmark conflated decaffeination with primary green-coffee processing; immutable oracle is preserved, not silently edited"
+      },
+      "owner_instruction": "Use published seasonal origin schedule relative to date URL is consulted; preserve processing as blank and flag; if primary processing is not published, close case and move on.",
+      "source_confirmed": {
+        "selected_product_title": "Decaf - Honduras COMSA",
+        "current_origin": "Honduras, Municipality of La Encarnación, Ocotepeque",
+        "farmer_partner": "COMSA",
+        "decaffeination_method": "Water Process",
+        "primary_processing_method": null,
+        "seasonal_rotation": [
+          {
+            "origin": "Peru",
+            "window": "winter–spring"
+          },
+          {
+            "origin": "Honduras",
+            "window": "spring–summer"
+          },
+          {
+            "origin": "Mexico",
+            "window": "fall–winter"
+          }
+        ]
+      },
+      "resolution": {
+        "canonical_origin": "Honduras — explicitly selected product, not calendar inference",
+        "canonical_processing": null,
+        "decaffeination_method": "Water Process",
+        "flag": "Primary processing method not supplied by roaster",
+        "seasonality": "Keep literal roaster schedule as contextual evidence dated to URL retrieval. Apply current-date contextual season only when product identity does not conflict; named current product always outranks generic rotation, and overlapping undefined season boundaries must not be forced into exact months.",
+        "lookup_date_used": "2026-10-27",
+        "source_parity_note": "In October, seasonal language indicates Mexico generally but the exact selected URL and title still say Honduras. Do not silently relabel a Honduras product as Mexico.",
+        "data_mutation": false,
+        "immutable603_rewritten": false
+      },
+      "evidence": {
+        "source_url": "https://44northcoffee.com/products/honduras-decaf",
+        "related_roaster_faq": "https://44northcoffee.com/pages/faqs",
+        "verified_against_public_page": "2026-10-27"
+      }
+    }
+  ]
+}

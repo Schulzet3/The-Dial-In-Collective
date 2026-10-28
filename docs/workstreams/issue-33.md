@@ -1,3 +1,15 @@
+## October 27, 2026 — Owner manual review Coffee 1/77 (44 North Honduras COMSA): RESOLVED SOURCE GAP
+
+**Owner decision:** Original 603-corpus canonical `process` expected Water Process decaffeination, but this is a different operation from pre-decaffeination green-coffee cherry Processing. Roaster does not publish primary processing. Do not invent it. Keep canonical Process blank; preserve Water Process under the separately approved Decaffeination Method (#180, READY/NOT DEPLOYED); flag source-unspecified primary process informatively. Owner considers genuinely unpublished fields closed, rather than ongoing extractor failures.
+
+**Dated origin:** Current roaster page `https://44northcoffee.com/products/honduras-decaf` explicitly titles the selected coffee Honduras COMSA and gives a Honduras locality/COMSA producer; schedule says Decaf Peru winter–spring, Honduras spring–summer, Mexico fall–winter. Capture lookup date and literal schedule; dates can provide seasonal context but the named product takes precedence over general schedule, particularly where season boundaries overlap or current page identity conflicts (October seasonal context says Mexico; current named URL says Honduras). Never fabricate exact month boundaries or rewrite Honduras as Mexico.
+
+**Traceability:** New `docs/audits/extractor-issue33-owner-missing-field-decisions-20261027.json` and specific source-bound synthetic regressions `tests/coffee-issue33-44north-missing-source.test.mjs`. No original frozen603 archive/oracle/scorer rewrite, data mutations, production publication or provider writes. Parent Issue33 remains OPEN for remaining 76 individual coffees; this case individually RESOLVED. Upcoming Coffee #2 Ahrre's African Blend publishes `Full City` roast, not a literal 7-bin Medium-Dark label, so do not silently normalize absent calibration.
+
+**Status:** Source-only audit record and tests require exact-head GitHub checks before calling them passed.
+
+---
+
 ## October 28 UTC — PR179 merged exact current product/roast profiles, TESTING / NOT DEPLOYED
 
 **Owner authority:** Explicit current selected roaster product data beats SEO/archives (fallback only), current Mexico/Peru disagreements require manual review, unitless elevation is meters, rotating origin confirmation only when explicitly labeled; Ketch Light and Medium-Dark bought-roast profiles separated, no review photographs, shared Lempira/producer/origin/process/elevation preserved. No production publication granted.
