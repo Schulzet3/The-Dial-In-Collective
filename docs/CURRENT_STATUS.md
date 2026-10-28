@@ -1,3 +1,9 @@
+## October 28 UTC — Kona PR183 merged-source acceptance reconciliation
+
+Verified PR183 merge a7f77cb70e510d51580e2d076d7484281c020be9 retained exact PR-head source tree 369a375343024ec04e71fbc2729efb49c78e756e. Six original PR-head checks passed; postmerge app/Node/lint/build 40623117571 and cloud UX/mobile 40623117565 now independently SUCCESS, as was approval 40623117630. Current Netlify site readback remains READY production deploy 6ae0fc16178b2f1241e441f8 from the previous authorized release, so Kona work NOT DEPLOYED. Mandatory frozen603 40622879836 and postmerge live selected-source checks 40623117569/40623117577 SKIPPED due conditional workflow guards; these are NOT passes. Scoped queue stays TESTING for that evidence gate; no silent promotion to READY. Source-specific Kona regression tests pass. No member data, production settings, SQL, Edge/Auth, paid service or release command executed.
+
+---
+
 ## October 28 UTC — Kona selected roast printed notes PR183 integrated, TESTING / NOT DEPLOYED
 
 Owner's approved rule is implemented in `src/server/coffee-roast-variants.mjs` and `coffee-shopify-ajax.mjs`: exact printed `Tasting Notes by Roast` for Kona Medium, Medium Dark (Full City), and Dark outrank generic prose; selected roast controls editable notes; Green Unroasted is excluded as a roasted profile; missing roast-specific note is never invented. No photos. Existing Ketch route/roast and member data untouched. Tests: `tests/coffee-kona-roast-profiles.test.mjs` checked source-bound direct vs generic precedence, exactly three roasts, negative generic and no default selection. Initial approval CI failure 40622781642 was queue metadata only (test file mistakenly in deployable paths); repaired and passed.
