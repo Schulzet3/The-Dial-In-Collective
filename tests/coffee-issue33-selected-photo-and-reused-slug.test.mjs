@@ -67,3 +67,18 @@ test('the real Add Coffee preview visibly shows the relative selected-image roas
  assert.match(markup,/Choose the closest supported level manually/i);
  assert.doesNotMatch(markup,/<dt>Roast Level<\/dt><dd>(?:Light|Very Light|Ultra Light)<\/dd>/i);
 });
+
+test('FUDAM currently selected page excludes stale Tolima metadata and never invents processing',()=>{
+ const url='https://beanstockcoffee.com/products/colombian-supremo-organic';
+ const current='New!! Colombia Fair Trade Organic FUDAM LA Union';
+ const html='<html><head><meta property="og:title" content="New!! Colombia Organic Tolima Suave">'+
+  '<meta name="description" content="Historic Tolima Washed and Honey Crisp Apple"></head><body><main>'+
+  '<h1>'+current+'</h1><p>Origin: Colombia</p><p>Roast Level: Medium</p>'+
+  '<p>Producer: FUDAM</p><p>Tasting Notes: carmelized sugar and dark chocolate</p></main></body></html>';
+ const parsed=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(parsed.fields.name,current);
+ assert.equal(parsed.fields.roast_level,'Medium');
+ assert.equal(parsed.fields.process,undefined);
+ assert.doesNotMatch(JSON.stringify(parsed.fields),/Tolima|Washed|Honey Crisp/i);
+ assert.match(coffeeUrlPreviewMarkup(parsed,{applied:true}),/FUDAM/);
+});
