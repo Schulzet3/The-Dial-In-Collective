@@ -97,10 +97,15 @@ export function selectedPageCoffeeEvidence({html='',name='',seoTitle='',seoDescr
   add('release_label',category[1],description+' | '+tidy(categories[0],270),'selected_product_woocommerce_category_and_description');
  // Named release tier is printed in THIS selected product's quality-grade
  // specifications and the product's own description names it in that tier.
- const grade=html.match(/<strong\b[^<>]{0,160}>\s*Quality\s+Grade\s*:\s*<\/strong>\s*([\p{L}][\p{L} ]{3,45}\s+Collection)\b/iu);
+ // Selected product templates use <b>, <strong>, spans and separate
+ // paragraphs. Flatten only the already-scoped current product, preserving
+ // the grade and selected coffee's explicit tier attribution.
+ const selectedText=tidy(html,200000);
+ const grade=selectedText.match(/\bQuality\s+Grade\s*:\s*([\p{L}][\p{L} ]{3,45}\s+Collection)\b/iu);
  if(grade){
-  const nameWords=norm(name).split(' ').filter(word=>word.length>3);
-  const story=html.match(/\bour\s+([\p{L}][\p{L} ]{3,45}\s+Collection)\s+is\s+reserved\b[^.]{0,320}\bwe\s+selected\s+([^.!?]{2,90})\s+for\s+this\s+tier\b/iu);
+  const nameWords=norm(name).split(' ').filter(word=>word.length>3&&
+   !/^(?:costa|rica|guatemala|honduras|colombia|ethiopia|peru|coffee|beans|organic|single|origin|blend|roast|decaf)$/.test(word));
+  const story=selectedText.match(/\bour\s+([\p{L}][\p{L} ]{3,45}\s+Collection)\s+is\s+reserved\b[\s\S]{0,420}?\bwe\s+selected\s+([^.!?]{2,90}?)\s+for\s+this\s+tier\b/iu);
   if(story&&norm(story[1])===norm(grade[1])&&nameWords.some(word=>norm(story[2]).split(' ').includes(word)))
    add('release_label',grade[1],grade[0]+' | '+story[0],'selected_product_quality_grade_and_story');
  }
