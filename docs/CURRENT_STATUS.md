@@ -1,3 +1,13 @@
+## October 28 UTC — PR179 merged exact current product/roast profiles, TESTING / NOT DEPLOYED
+
+**Owner authority:** Explicit current selected roaster product data beats SEO/archives (fallback only), current Mexico/Peru disagreements require manual review, unitless elevation is meters, rotating origin confirmation only when explicitly labeled; Ketch Light and Medium-Dark bought-roast profiles separated, no review photographs, shared Lempira/producer/origin/process/elevation preserved. No production publication granted.
+
+**Verified source:** PR179 final head 598622a56415fa3abc51aa4aed191a86acaf9cff, merge 4331031e96b5e594a6e640dd91f6c59ae5969a97, identical source tree 36347734afa66b15d5e74622c13c7c28a78e7d9e. Exact-head app/Node/lint/build 40616568413, cloud 40616568388, visual 40616568360, security 40616568381, SQL 40616568410, approval 40616568565 all SUCCESS. Postmerge app 40616781803, cloud 40616782266, visual 40616782318 and approval 40616782109 SUCCESS. Initial test failures were repaired and full suites rerun; no regression is claimed green on a failed SHA.
+
+**Honest limits:** immutable original603 run 40616568385 SKIPPED by historical source-branch/private ephemeral input; no new original603 score or supplemental retention score. Postmerge public URL acceptance runs 40616782014 and 40616781934 SKIPPED; live authenticated Ketch preview not exercised. Prior immutable corpus/oracle/scorer and member coffee, shots, privacy, offline, Community unchanged. Queue item remains TESTING, not READY, until missing source acceptance is actually verified. Release #07 remains last authorized publication; this scope is NOT DEPLOYED. No Netlify, production SQL/Edge/Auth or member writes.
+
+---
+
 ## October 27 UTC — Ketch selected roast option parsing and Add Coffee preview (TESTING, NOT DEPLOYED)
 
 Owner approved the interactive two-roast Ketch preview. Real extractor/app code now under PR179 includes selected purchase roast options and roast-specific tasting/sensory/espresso details with shared coffee identity, product-only facts over SEO and no photos. Source tests added, exact-head CI and safe merge PENDING. No production or member data changes, no immutable original603 changes. Existing READY queue entries unchanged.
