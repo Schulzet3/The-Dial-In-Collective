@@ -1,3 +1,14 @@
+## October 28 UTC — PR189 exact-source failing diagnostics leak fixed, retest required
+
+PR189 original source aea216d8be50d1b60f35853cabd4a0316567724a: isolated SQL 40629091982, approval 40629092015 and security 40629091979 SUCCESS; app 40629091974 and cloud 40629091995 each failed exactly one Cortez test. The removed Lahamenegu old-coffee paragraph was still included in JSON-serializable legacy_copy_excerpts (not autofill fields). Keep the excerpts for internal current-page HTML-versus-JSON provenance reconciliation, but mark their property nonenumerable so serialized user-facing previews cannot expose quarantined historical copy. Add an explicit regression asserting the internal excerpts are available, while JSON and returned source facts remain free of stale text. The existing full-description final-source-fact retention regression passed and remains intact. This code/test and journal are the same commit. Exact new-source CI must rerun and pass before merge. Restricted original603 workflow SKIPPED, not a pass; historical benchmark and member data unchanged. No production release.
+
+---
+
+## October 28 UTC — Coordinator: supersede conflicting PR186, run Cortez source tests on latest development (NOT DEPLOYED)
+
+PR186 had two exact-source failures on 753def1 (1600m source-unit expectation and missing final-source-fact from long description). The corrective c0012c8 restored full source-fact preservation for ordinary selected products and asserted the printed 1600m label. Its branch became 12 commits behind and unmergeable after concurrent Coffee #4/#5 work. This integration copies only the corrected code and focused tests onto fresh development source ec6af0235af9d3e116840fa13ff392236b80194f, preserving owner review #1–5, both Locked files, current queue and history. Separate new PR exact-source app, cloud, approval, security, browser/visual and SQL checks must pass before merge. Original immutable 603 source/oracle/scorer untouched; restricted hosted frozen workflow skip is NOT PASS. Live Cortez selected Shopify JSON cannot be substituted with stale search snippets. No production publication.
+
+---
 ## October 28 UTC — Owner Bald Guy Brew manual roast warning merged at PR188; source acceptance evidence
 
 Owner Coffee #5/77 approval was applied: Bald Guy Brew Organic Colombian exact selected Roast: Medium/Medium Dark remains blank and prompts member to select Medium or Medium-Dark. No automatic tier or manufactured roast purchase options. Source code/test positive, negative off-product/guide and preview coverage in same-commit journal with Master Specification/Decision Ledger Locked supersession. Owner case register #5 RESOLVED_SOURCE_GAP_USER_CHOICE. Current source facts and 603 immutable oracle/retention unchanged.
