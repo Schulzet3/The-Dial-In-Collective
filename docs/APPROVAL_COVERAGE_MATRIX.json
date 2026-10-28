@@ -1610,5 +1610,22 @@
       40755500263,
       40755500169
     ]
+  },
+  "GRINDER-ISSUE17-DIRECTION-RANGE-SLOWFEED-20261028": {
+    "status": "OWNER_APPROVED_IMPLEMENTATION_TESTING",
+    "issue": 17,
+    "authority": "User explicit direction/scale confirmation and Slow Feed example on 2026-10-28",
+    "scope_paths": [
+      "site/lib/engine.js"
+    ],
+    "test_paths": [
+      "tests/grinder17-slow-feed-default.test.mjs",
+      "tests/grinder17-standard-anchor.test.mjs",
+      "tests/grinder17-success-pair.test.mjs",
+      "tests/grinder17-range-bound.test.mjs",
+      "tests/grinder17-history-guard.test.mjs"
+    ],
+    "acceptance": "Preserve lower=finer higher=coarser, numeric 0.1 and user espresso range; no stepped/stepless or multi-turn controls. Slow Feed successful observations first, paired owner-specific shift next and cautious unproven fallback last. No history/data reinterpretation. Exact CI and source merge required; no publication.",
+    "status_detail": "Source test/implementation in scope, not production."
   }
 }

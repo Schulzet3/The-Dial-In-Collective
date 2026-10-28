@@ -132,7 +132,39 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   return sh.coffeeId!==c.id&&rank>=0&&other>=0&&Math.abs(other-rank)===1&&(rank<2||other<2);
  });
  if(nearby.length)return {value:round(quantile(nearby.map(sh=>sh.grindSetting),.5)),source:'Nearby light-roast reference, unproven on this coffee',proven:false};
- return {value:round(v.grinderMin+(v.grinderMax-v.grinderMin)*(['Turbo','Fast-Flow'].includes(style)?.75:.5)),source:'Espresso range starting estimate',proven:false};
+ // An unproven slow-feed grind must not reuse a Standard Feed number:
+ // slower feeding changes burr loading, sometimes by a large amount. Prefer
+ // actual successful slow-feed shots above; transfer a per-calibration paired
+ // Standard/Slow difference only when the member has measured both modes.
+ const starterFraction=['Turbo','Fast-Flow'].includes(style)?.75:.5;
+ if(feed==='slow'){
+  const span=v.grinderMax-v.grinderMin;
+  const paired=new Map();
+  for(const sh of s.shots){
+   if(sh.hidden||!sh.dialedIn||sh.setupVersionId!==v.id||
+      sh.calibrationId!==v.calibrationId||sh.style!==style||
+      sh.basketId!==basket.id||!finite(sh.grindSetting)||
+      !['standard','slow'].includes(sh.feedMode))continue;
+   const row=paired.get(sh.coffeeId)||{standard:[],slow:[]};
+   row[sh.feedMode].push(sh.grindSetting);paired.set(sh.coffeeId,row);
+  }
+  const gaps=[...paired.values()].filter(x=>x.standard.length&&x.slow.length)
+   .map(x=>quantile(x.standard,.5)-quantile(x.slow,.5))
+   .filter(x=>x>=.1&&x<=span);
+  const shift=gaps.length?quantile(gaps,.5):span*.4;
+  const standard=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&
+   sh.setupVersionId===v.id&&sh.calibrationId===v.calibrationId&&
+   sh.coffeeId===c.id&&sh.style===style&&sh.basketId===basket.id&&
+   sh.feedMode==='standard'&&finite(sh.grindSetting));
+  const anchor=standard.length?quantile(standard.map(sh=>sh.grindSetting),.5):
+   v.grinderMin+span*starterFraction;
+  const value=round(clamp(anchor-shift,v.grinderMin,v.grinderMax));
+  return {value,source:gaps.length?
+   'Slow Feed starting estimate from your paired feed-mode results':
+   standard.length?'Slow Feed starting estimate adjusted from your Standard Feed result':
+   'Cautious Slow Feed starting estimate (not yet proven)',proven:false};
+ }
+ return {value:round(v.grinderMin+(v.grinderMax-v.grinderMin)*starterFraction),source:'Espresso range starting estimate',proven:false};
 }
 export function learnSensitivity(shots) {
  const groups=new Map();
@@ -315,6 +347,9 @@ export function recommendation(s,coffeeId,options={}) {
    rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};
   }
  }
+ // Every recommendation is a selectable tenth inside this setup's actual
+ // espresso range. The guard also protects older measurements and fallbacks.
+ if(rec.grind&&finite(rec.grind.value))rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
  if(!rec.established&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
   // A calibrated starting search band is NOT a statistical confidence interval.
@@ -333,7 +368,7 @@ export function prefill(s,coffeeId,options={}) {
  const temps=shots.filter(x=>finite(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
  return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
 }
-export function nextAdvice(s,shot,rec) {
+function nextAdviceRaw(s,shot,rec) {
  const v=activeVersion(s),t=shot.tasteScales;
  if(isDialed(t))return {title:'Dialed in. Nicely done.',text:'Balanced, sweet and clean for your taste. This shot adds to your successful recipe window.',next:null};
  const step=grindStep(v),fast=shot.timeS<rec.time.low,slow=shot.timeS>rec.time.high;
@@ -343,7 +378,7 @@ export function nextAdvice(s,shot,rec) {
   const pairs=s.shots.filter(x=>x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
   const exact=pairs.filter(x=>x.coffeeId===shot.coffeeId),sens=learnSensitivity(exact)||learnSensitivity(pairs);
   let move=step;if(sens){move=Math.max(.1,round(Math.min(step*4,Math.abs((rec.time.center-shot.timeS)/sens.secondsPerUnit))));}
-  const val=round(clamp(shot.grindSetting+(direction==='finer'?-move:move),v.grinderMin,v.grinderMax));
+  const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
   if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
  }
  if(t.extraction!==3){const delta=t.extraction<3?2:-2,center=clamp(shot.yieldG+delta,5,200);return {title:t.extraction<3?'Try a slightly longer yield':'Try a slightly shorter yield',text:`Aim around ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out, with the same dose and grind. Compare the balance.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};}
@@ -351,6 +386,14 @@ export function nextAdvice(s,shot,rec) {
  if(t.astringency>1&&v.advanced.temperature&&finite(shot.tempC)){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
  const center=clamp(shot.yieldG+1,5,200);
  return {title:'A small refinement',text:`Try ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out with the same grind. Compare sweetness and clarity before making a larger change.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};
+}
+// Applies to every next-shot advice path, including non-grind taste advice
+// which retains the last shot's setting even when history used an old range.
+export function nextAdvice(s,shot,rec){
+ const advice=nextAdviceRaw(s,shot,rec),v=activeVersion(s);
+ if(!v||!advice?.next||!finite(advice.next.grindSetting))return advice;
+ return {...advice,next:{...advice.next,
+  grindSetting:clamp(round(advice.next.grindSetting),v.grinderMin,v.grinderMax)}};
 }
 export function isExtreme(s,shot) {
  const prior=s.shots.filter(x=>!x.hidden&&x.dialedIn&&x.coffeeId===shot.coffeeId&&x.style===shot.style&&x.setupVersionId===shot.setupVersionId&&x.id!==shot.id);

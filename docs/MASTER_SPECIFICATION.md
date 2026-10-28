@@ -892,9 +892,15 @@ Editing a setup later affects future shots only; it must not rewrite historical 
 
 ## 13.5 Grind-range concept
 
-The current app defines an espresso range for the grinder and normalizes community grind position against that range. This concept should be preserved, but public-scale implementation must support arbitrary grinder scales reliably.
+The current app defines an espresso range for the grinder and normalizes community grind position against that range. This concept is preserved.
 
-A final product decision is still needed on grinder direction and discrete/stepless handling. See the Open Questions register.
+**GRINDER-ISSUE17-DIRECTION-RANGE-SLOWFEED-20261028 — Locked, owner confirmation October 28, 2026.** The grinder's setting is an ordinary numerical value: **lower numbers always finer; higher numbers always coarser**, consistent with existing setups, snapshots, shot histories and recommendations. Preserve the original Finest Espresso Setting / Coarsest Espresso Setting fields and the rule that coarsest is numerically higher. The user enters the normal espresso-working range and is responsible for their own grinder's multi-turn or wraparound position.
+
+All NEW grind recommendations, including fresh starting estimates, a recommendation derived from a logged shot, sensitivity adjustments and historical-reference translations, must remain inside the active setup's user-entered espresso range, at 0.1 numerical recommendation precision where representable. Do not reinterpret, rewrite, migrate, truncate or delete historical observations, personal or Community records, old calibrations, offline submissions or snapshots. No direction toggle, stepped/stepless selector, multi-turn tracking, wraparound tracking, new grinder schema, or fixed mechanical tick size. The user can directly enter their grinder's numbers.
+
+**Slow Feed correction.** Never reuse an actual Standard Feed setting unmodified as a Slow Feed starting recommendation when no Slow Feed success exists. Give successful Slow Feed shots on this calibration and style priority. Next, use successful comparable Slow Feed shots where already available; when absent, use the member's own paired successful Standard/Slow Feed observations on the SAME calibration, basket and shot style to estimate a feed-mode offset for a new coffee. If no paired evidence is available, provide a cautious **unproven** lower-number Slow Feed starting estimate, shifted about 40% of the configured espresso range finer than a comparable Standard Feed result or the baseline estimate, clamped to the range. This 40% is an initial heuristic, **not a claimed universal grinder conversion**; the user observation (2.5–3.5 Standard Feed vs 0.2–1.0 Slow Feed for the same coffee) illustrates why a substantial difference may be necessary, not a fixed rule for other hardware. Never turn this estimated shift into independent proof, new recipe family or a false Community fact; adapt to actual member results and respect Unknown historical feed.
+
+This explicit owner decision resolves the earlier Section 37.1E direction/scale open question and overrides that issue's earlier proposed higher=finer, stepped, wraparound and multi-turn implementations. It does not supersede other grinder calibration, slow-feed persistence or Log Shot → Rate → Recommendation Locked decisions. No publication is authorized by this approval.
 
 
 ## 13.6 Grinder range help — approved October 19, 2026
