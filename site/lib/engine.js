@@ -121,7 +121,12 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const cross=qual.filter(sh=>sh.coffeeId===c.id&&sh.setupVersionId!==v.id&&(!familyId||sh.familyId===familyId));
  if(cross.length)return {value:round(quantile(cross.map(sh=>sh.grindSetting),.5)),source:'Starting reference from matching grinder and burrs',proven:false};
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
- if(sameOld.length)return {value:translateGrind(sameOld.sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0],v),source:'Estimated from previous calibration',proven:false};
+ // Old calibration rows may legitimately seed an estimated translation, but
+ // legacy rows without an equipment snapshot must not yield null guidance.
+ const translated=sameOld.filter(sh=>sh.snapshot&&sh.timestamp)
+  .sort((a,b)=>b.timestamp.localeCompare(a.timestamp))
+  .map(sh=>translateGrind(sh,v)).find(finite);
+ if(finite(translated))return {value:translated,source:'Estimated from previous calibration',proven:false};
  const rank=roastIndex(c.roastLevel);
  const similar=current.filter(sh=>sh.coffeeId!==c.id&&rank>=0&&roastIndex(s.coffees.find(x=>x.id===sh.coffeeId)?.roastLevel)===rank);
  if(similar.length)return {value:round(quantile(similar.map(sh=>sh.grindSetting),.5)),source:`From ${similar.length} successful shot${similar.length===1?'':'s'} on your similar coffees`,proven:false};

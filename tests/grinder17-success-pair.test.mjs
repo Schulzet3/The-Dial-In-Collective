@@ -26,3 +26,14 @@ test('old calibration and unrecorded feed never count as current slow successes'
  add(s,'standard',3,'coffee','old');add(s,null,4);
  assert.equal(grindGuidance(s,c,'Turbo',basket,'slow').value,1.8);
 });
+
+test('complete historical calibration can still seed an explicitly unproven translated reference',()=>{
+ const {s,c,basket}=base();add(s,'slow',0.4,'coffee','old');
+ const older=s.shots.at(-1);
+ older.timestamp='2026-10-20T00:00:00Z';
+ older.snapshot={grinderMin:0,grinderMax:5};
+ const r=grindGuidance(s,c,'Turbo',basket,'slow');
+ assert.equal(r.value,0.4);assert.equal(r.proven,false);
+ assert.match(r.source,/previous calibration/);
+ assert.equal(older.grindSetting,0.4);
+});
