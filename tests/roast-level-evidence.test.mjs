@@ -147,12 +147,13 @@ test('a coffee name, educational prose or related Full City cannot donate select
   assert.equal(r.fields?.roast_level,undefined,detail);
  }
 });
-test('conflicting current product roast source still requires human review',()=>{
+test('exact selected Full City roast wins over contradictory SEO-only meta roast',()=>{
  const r=extractPublicCoffeeFacts('<html><head><meta name="product:roast_level" content="Dark"></head>'+
   '<body><main><section><h2>COFFEE DETAILS</h2><h6>ROAST</h6><p>Full City</p><h1>AFRICAN BLEND</h1></section></main></body></html>',
   {source_url:'https://www.ahrre.com/products/african-blend'});
- assert.equal(r.fields.roast_level,undefined);
- assert.ok(r.conflicts?.includes('roast_level'));
+ assert.equal(r.fields.roast_level,'Medium-Dark');
+ assert.ok(!r.conflicts?.includes('roast_level'));
+ assert.ok(!r.seo_fallback_fields?.includes('roast_level'));
 });
 
 test('White is a distinct roaster roast class and never silently a seven-tier roast',()=>{

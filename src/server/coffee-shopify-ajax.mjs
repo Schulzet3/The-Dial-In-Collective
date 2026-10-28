@@ -341,6 +341,10 @@ export function mergePublicProductPreview(base,extra){
  if(base.fields?.roaster&&extra.fields?.roaster)
   fields.roaster=preferredCoffeeRoasterName(base.fields.roaster,extra.fields.roaster);
  const conflicts=new Set([...(legacyScreened?(base.conflicts||[]).filter(genuineBaseConflict):(base.conflicts||[])),...(extra.conflicts||[])]);
+ // A current, selected Product description from the live public endpoint
+ // outranks the HTML page's matched SEO/meta fallback (and vice versa).
+ // These are unequal evidence tiers, not two contradictory current products.
+ const baseSeo=new Set(base.seo_fallback_fields||[]),extraSeo=new Set(extra.seo_fallback_fields||[]);
  // Exact selected-coffee measured ground Agtron with a stated scale outranks
  // descriptive roast wording. Uncalibrated/unknown readings do not.
  const measured=preview=>preview?.roast_source==='agtron_ground_measurement'&&
@@ -374,6 +378,14 @@ export function mergePublicProductPreview(base,extra){
  const mixedProcess=base.fields?.process==='Other/Unknown'?base:
   extra.fields?.process==='Other/Unknown'?extra:null;
  for(const key of ['origin','roast_level','process','variety','producer','release_label','elevation_m','decaffeination_method']){
+  const currentBase=base.fields?.[key]&&!baseSeo.has(key)&&!base.conflicts?.includes(key);
+  const currentExtra=extra.fields?.[key]&&!extraSeo.has(key)&&!extra.conflicts?.includes(key);
+  if(baseSeo.has(key)&&currentExtra){
+   fields[key]=extra.fields[key];conflicts.delete(key);continue;
+  }
+  if(extraSeo.has(key)&&currentBase){
+   fields[key]=base.fields[key];conflicts.delete(key);continue;
+  }
   if(key==='process'&&compatibleProcess)continue;
   if(key==='roast_level'&&measuredWinner){
    fields.roast_level=measuredWinner.fields.roast_level;
@@ -470,7 +482,12 @@ export function mergePublicProductPreview(base,extra){
   for(const fact of alternatives)if(fact.field===key)add(fact);
   if(rows.length)conflict_options[key]=rows;
  }
+ const survivingSeo=[...new Set([...baseSeo,...extraSeo])].filter(key=>
+  typeof fields[key]==='string'&&fields[key]&&!conflicts.has(key)&&
+  !(base.fields?.[key]&&!baseSeo.has(key)&&!base.conflicts?.includes(key))&&
+  !(extra.fields?.[key]&&!extraSeo.has(key)&&!extra.conflicts?.includes(key)));
  const merged={...base,fields,available:Object.keys(fields),
+  seo_fallback_fields:survivingSeo.length?survivingSeo:undefined,
   ...(extra.current_product_spec_fields?.length?{current_product_spec_fields:extra.current_product_spec_fields}:{}),
   ...(extra.roast_variants?.length>1?{roast_variants:extra.roast_variants}:{}),
   ...(base.origin_confirmation_required||extra.origin_confirmation_required?{origin_confirmation_required:true}:{}),

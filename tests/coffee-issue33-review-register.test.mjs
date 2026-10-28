@@ -110,7 +110,11 @@ test('source-bound #27 and #72 exact merged public acceptance changed only reque
   assert.equal(r.latest_direct_public_probe.html_sha256,receipt.records.find(x=>x.number===n).html_sha256);
  }
  for(const id of ['DIC-Q-33-same-reserve-selected-origin','DIC-Q-33-thrive-component-community']){
-  const r=releaseQueue.items.find(x=>x.id===id);assert.equal(r.state,'TESTING');
-  assert.ok(r.merged_source_sha);assert.ok(r.blockers.length);
+  const r=releaseQueue.items.find(x=>x.id===id);
+  // The historical receipt remains TESTING evidence; later source-bound
+  // merged acceptance independently cleared these current queue entries.
+  assert.equal(r.state,'READY');
+  assert.match(r.merged_source_sha,/^[a-f0-9]{40}$/);
+  assert.ok(r.ci_runs?.length>0);assert.deepEqual(r.blockers,[]);
  }
 });

@@ -142,6 +142,13 @@ export function coffeeUrlPreviewMarkup(result){
  if(!result?.ok)return `<div class="coffee-url-message" role="status">${e(reasons[result?.reason]||'We could not retrieve trustworthy details. Enter the coffee information manually.')}</div>`;
  const fields=autofillFields.filter(([name])=>typeof result.fields?.[name]==='string'&&result.fields[name].trim());
  const conflictGroups=coffeeConflictReviewOptions(result);
+ const missingFields=autofillFields.filter(([key])=>
+  !['name','roaster','decaffeination_method'].includes(key)&&
+  !String(result.fields?.[key]||'').trim()&&
+  !(Array.isArray(result.conflicts)&&result.conflicts.includes(key)));
+ const seoFallbackFields=autofillFields.filter(([key])=>
+  Array.isArray(result.seo_fallback_fields)&&result.seo_fallback_fields.includes(key)&&
+  String(result.fields?.[key]||'').trim());
  const existing=result.match?.classification==='exact_verified'?'This page also matches an existing verified coffee. Choosing Add Coffee will reuse its canonical record after the identity check.':
   result.match?.classification==='needs_confirmation'?'A similar verified coffee exists. You will be asked to confirm the right release before linking any records.':'';
  const official=result.source==='official_roaster_product_metadata';
@@ -209,6 +216,8 @@ export function coffeeUrlPreviewMarkup(result){
   ${result.origin_confirmation_required===true?`<div class="coffee-rotation-review" role="group" aria-label="Rotating origin confirmation"><p class="helper">This product explicitly says its origin rotates. Confirm the origin shown on your current bag or offering.</p><label class="checkline"><input id="coffee-rotating-origin-confirmed" type="checkbox"><span>I checked this coffee's current origin.</span></label></div>`:''}
   ${roastVariantMarkup(result)}
   ${conflictGroups.length?`<section class="coffee-source-conflicts" role="region" aria-label="Conflicting coffee information"><h3>Review conflicting details</h3><p class="helper">These published readings disagree. Nothing was selected automatically. Compare them with the roaster's label and type your choice in the matching field below.</p>${conflictGroups.map(group=>`<div id="coffee-conflict-${e(group.field)}" class="coffee-conflict-group"><strong>${e(group.label)}</strong>${group.options.length?`<ul>${group.options.map(option=>`<li><span class="coffee-conflict-value">${e(option.value)}</span><small>${e(option.label)}${option.source_url?' · <a href="'+e(option.source_url)+'" target="_blank" rel="noopener noreferrer">View Original Source</a>':''}</small></li>`).join('')}</ul>`:'<p class="helper">Exact alternatives could not be isolated. See the complete published source details below or check the product page.</p>'}</div>`).join('')}</section>`:''}
+  ${seoFallbackFields.length?`<p class="helper" role="note"><strong>Verify metadata-only suggestions:</strong> ${seoFallbackFields.map(([,label])=>e(label)).join(', ')}. These values were not confirmed in the selected coffee's current product description or page details. They are last-resort SEO/metadata suggestions, not verified facts.</p>`:''}
+  ${missingFields.length?`<p class="helper" role="note"><strong>Not found on this product page:</strong> ${missingFields.map(([,label])=>e(label)).join(', ')}. Leave these blank unless you can confirm them from the roaster or your bag.</p>`:''}
   <dl class="coffee-url-fields">${fields.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(key==='elevation_m'?elevationWithDefaultMeters(result.fields[key]):result.fields[key])}</dd></div>`).join('')}</dl>
   ${result.fields?.process==='Other/Unknown'&&result.roaster_details?.blend_components?'<p class="helper" role="note">This blend has multiple documented processing methods. Other/Unknown preserves that distinction; review the component details below.</p>':''}
   ${fields.some(([key])=>key==='elevation_m'&&elevationWithDefaultMeters(result.fields[key])!==result.fields[key])?'<p class="helper">The roaster omitted the elevation unit. Meters above sea level (m) are assumed, per the approved import rule.</p>':''}
@@ -273,6 +282,7 @@ export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOStr
   verification:'unverified_public_source_suggestions',field_suggestions:fieldSuggestions,
   published_source_information:facts,roaster_details:details,roaster_espresso_reference:recipe,
   conflicts:Array.isArray(result.conflicts)?result.conflicts.filter(key=>autofillFields.some(([field])=>field===key)):[],
+  ...(Array.isArray(result.seo_fallback_fields)?{seo_fallback_fields:result.seo_fallback_fields.filter(key=>autofillFields.some(([field])=>field===key))}:{}),
   conflict_options:conflictOptions,source_information_truncated:truncated,
   ...(Array.isArray(result.roast_variants)?{roast_variants:result.roast_variants.slice(0,7).map(v=>({id:bounded(String(v.id||''),25),label:bounded(String(v.label||''),50),fields:{roast_level:bounded(String(v.fields?.roast_level||''),50),tasting_notes:bounded(String(v.fields?.tasting_notes||''),250)},...(v.sensory?{sensory:v.sensory}:{}) ,...(v.roaster_recipe?{roaster_recipe:v.roaster_recipe}:{})}))}:{}),
   ...(typeof result.selected_roast_variant==='string'?{selected_roast_variant:result.selected_roast_variant}:{}),
