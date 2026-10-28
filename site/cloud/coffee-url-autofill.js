@@ -166,8 +166,19 @@ export function coffeeUrlPreviewMarkup(result){
   typeof result.fields?.[fact.field]==='string'&&
   String(fact.value||'').trim().toLowerCase()===result.fields[fact.field].trim().toLowerCase()
  ).map(fact=>fact.field));
+ const currentConflicts=new Set(Array.isArray(result.conflicts)?result.conflicts:[]);
  const publishedFacts=allPublishedFacts.filter(fact=>{
   if(['json','projection','reference'].includes(fact.format))return false;
+  const canonical=typeof result.fields?.[fact.field]==='string'?result.fields[fact.field].trim():'';
+  // Do not show any lower-rank SEO/archived row as a competing current
+  // product reading when its canonical field is already populated. Retain
+  // original provenance in the explicitly downloaded audit source review.
+  if(canonical&&/^(?:seo|page_meta|archived_metadata|html_meta)$/i.test(String(fact.source_type||'')))return false;
+  if(canonical&&/\b(?:historical|archived|stale|seo|meta description)\b/i.test(String(fact.label||'')))return false;
+  // Merge diagnostics can contain a synthetic opposing pair that was later
+  // resolved by higher-priority product evidence. It is not a live conflict.
+  if(canonical&&fact.conflicting===true&&!currentConflicts.has(fact.field)&&
+     String(fact.value||'').trim().toLowerCase()!==canonical.toLowerCase())return false;
   // SEO is fallback, not a competing selected-product detail. Keep raw
   // evidence in the optional source export, never in the ordinary review.
   if(['seo','page_meta','archived_metadata','html_meta'].includes(fact.source_type)&&

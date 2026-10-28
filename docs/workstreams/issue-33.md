@@ -1,3 +1,9 @@
+## October 28 UTC — Ketch stale SEO display failure diagnosed and repaired
+
+**Exact-source CI failure:** PR179 SHA ee4ee3bd workflows app 40616179398 and cloud 40616179344 each failed one new regression: current canonical variety correctly stayed `Lempira` and no `variety` conflict remained, but expanded current product details still surfaced `Parainema` from a stale `Historical SEO` row and synthetic rejected comparison pair. Fixed the user-facing preview to exclude SEO/archived source facts when a canonical current field already exists, and suppress synthetic conflicting alternatives for fields whose conflicts were resolved. Genuine unresolved current-product alternatives remain displayed. The full unmodified source evidence remains in explicitly downloaded JSON; no history is deleted. Code/test CI must be rerun on this new exact SHA. No production publication or member mutation.
+
+---
+
 ## October 28 UTC — SEO-only variety suppression in member preview
 
 Owner specifically rejected Ketch Parainema from unrelated/SEO values. Added explicit regression: stale `page_meta` Parainema versus current selected-product Varietals Lempira resolves to Lempira with NO member conflict; ordinary review hides the stale SEO fact when a direct current field is available. Raw archived audit provenance remains in a consciously downloaded source-review file under the existing evidence-retention Locked rule, not a current coffee suggestion. Exact-current-source tests and new CI still pending; no publication.
