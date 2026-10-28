@@ -422,6 +422,14 @@ function coordinatedFlavorSentence(sentence,blockText,clean){
   !/\b(?:previously|formerly|historically|(?:last|previous)\s+season|with\s+milk|served|prepared|brewed|added|adding|mixed|combined|diluted)\b/i.test(text));
  if(match&&fold(match[2])!==fold(match[4])&&currentBlend&&
   SENSORY_ROLE.test(match[1])&&SENSORY_ROLE.test(match[3]))return combine([match[1],match[3]]);
+ // A current coffee's standalone sensory sentence can pair literal flavor
+ // nouns and then qualify the remaining fruit sweetness of its varietal.
+ // That final descriptive qualifier is not another tasting-note ingredient.
+ // Keep the paired words only; never infer post-roast flavor additives from
+ // a separate fermentation explanation.
+ match=sentence.match(/^([\p{L}\p{M}][^.!?;,]{2,130}?\s+and\s+[\p{L}\p{M}][^.!?;,]{2,90}?),\s+with\s+(?:the|a)\s+fruit\s+sweetness\s+of\s+(?:the|this)\s+varietal\s+still\s+sitting\s+underneath[.!?]?$/iu);
+ if(match&&SENSORY_ROLE.test(match[1])&&noteParts(match[1]).length>=2)
+  return combine([match[1]]);
  return '';
 }
 
