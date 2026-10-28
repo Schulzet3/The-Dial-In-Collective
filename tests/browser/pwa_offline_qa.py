@@ -152,8 +152,35 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    assert count==1,'Pending shot not synchronized exactly once'
    page.close()
    context.close()
+   # Issue 22: exercise the actual packaged browser app through server denial,
+   # failed IndexedDB cache deletion, cold offline restart and readmission.
+   isolated=browser.new_context(viewport={'width':390,'height':844},service_workers='allow')
+   candidate=isolated.new_page()
+   candidate.goto(url,wait_until='domcontentloaded')
+   candidate.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
+   assert candidate.locator('.coffee-card').count()==1
+   candidate.evaluate('async()=>await navigator.serviceWorker.ready')
+   marker=candidate.evaluate("""async()=>{
+    const app=window.__app,owner=app.identity.id;
+    app.store.clearCache=async()=>{throw Error('synthetic cache deletion failure');};
+    await app.denyAccess(app.identity,app.epoch,{admitted:false});
+    return localStorage.getItem('dic-offline-denied:'+owner);
+   }""")
+   assert marker=='1','Server denial must persist after failed cache deletion'
+   assert candidate.locator('.coffee-card').count()==0
+   isolated.set_offline(True)
+   candidate.reload(wait_until='domcontentloaded')
+   candidate.get_by_text('Reconnect To Continue',exact=True).wait_for(timeout=20000)
+   assert candidate.locator('.coffee-card').count()==0,'Revoked owner saw old cache after cold offline reload'
+   isolated.set_offline(False)
+   candidate.reload(wait_until='domcontentloaded')
+   candidate.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
+   assert candidate.locator('.coffee-card').count()==1,'Fresh admission failed to restore legitimate owner'
+   assert candidate.evaluate("localStorage.getItem('dic-offline-denied:'+window.__app.identity.id)")==None
+   candidate.close()
+   isolated.close()
    browser.close()
-   print('PASS: Localhost Chromium PWA offline shell, private owner cache, queued shot durability, session expiry, cross-owner isolation and revalidation/sync.')
+   print('PASS: Localhost Chromium PWA offline queue, update, revoked-access cold reload and verified readmission.')
  finally:
   web.shutdown()
   web.server_close()

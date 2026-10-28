@@ -11,3 +11,5 @@
 **Status:** TESTING; execute CI and isolated SQL/PostgREST, reconcile evidence, and close conditionally. No deployment, paid service or migration.
 
 **Additional same-commit Node tests:** Eight deterministic Outbox tests explicitly exercise 1 through 6, including two independent tabs against a revision-checked fake server, cross-account preservation, lost responses, cache eviction and failed receipt commit. Tests are pending exact-source PR CI; no production/physical-device pass claimed.
+
+**Built-PWA Chromium regression added:** trigger a real app access-denial UI transition with IndexedDB cache deletion forced to fail, cold reload while offline with cached session, assert no private coffee cards, then reconnect with positive server status and verify only then can records reappear. No live Supabase session or private account accessed; provider integration remains independently verified by isolated signed JWT tests.
