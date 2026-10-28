@@ -164,6 +164,20 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  // Keep the WeakMap-backed source process claims attached to the original
  // preview fields. Cloning them loses evidence needed for safe stage merge.
  const fields=result.fields,conflicts=new Set(result.conflicts||[]);
+ // Shopify marketing catalog tags can overlap roast categories
+ // (e.g. Light Roast + Medium Roast) even when the exact selected coffee
+ // explicitly prints one in-between tier. Do not treat broad tags as direct
+ // contradictory product specifications.
+ const roastTags=new Set(tags.flatMap(tag=>{
+  const match=tag.match(/^(Ultra[- ]Light|Very[- ]Light|Light[- ]Medium|Medium[- ]Light|Light|Medium[- ]Dark|Medium|Dark)\s+Roast$/i);
+  return match?[norm(match[1])]:[];
+ }));
+ const tagConflictValues=result.conflict_options?.roast_level||[];
+ const tagOnlyRoastConflict=conflicts.has('roast_level')&&policy.specs.roast_level.length===0&&
+  roastTags.size>=2&&tagConflictValues.length>=2&&
+  tagConflictValues.every(item=>roastTags.has(norm(item.value)))&&
+  !source_facts.some(fact=>fact.field==='roast_level'&&
+   /^(?:roast(?: level| profile)?|selected roast)$/i.test(String(fact.label||'')));
  const conflict_options={...result.conflict_options};
  const current_spec_fields=[];
  const conflictingSpec=key=>policy.specs[key].length>1;
@@ -228,6 +242,7 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
   ...(Object.keys(details).length?{roaster_details:details}:{}),
   ...(conflicts.size?{conflicts:[...conflicts].sort(),conflict_options}:{conflicts:undefined,conflict_options:undefined}),
   ...(current_spec_fields.length?{current_product_spec_fields:current_spec_fields}:{}),
+  ...(tagOnlyRoastConflict?{roast_tag_ambiguity_only:true}:{}),
   ...(result.source_facts_truncated||originalFacts?.truncated||source_facts.truncated?{source_facts_truncated:true}:{})};
  // The quarantined excerpts exist only for same-process provenance checks.
  // Never serialize rejected old-coffee text back to an import preview.
@@ -334,6 +349,15 @@ export function mergePublicProductPreview(base,extra){
   !preview.conflicts?.includes('roast_level');
  const measuredBase=measured(base),measuredExtra=measured(extra);
  const measuredWinner=measuredBase&&!measuredExtra?base:measuredExtra&&!measuredBase?extra:null;
+ // Exact selected-coffee roast beats two broad Shopify catalog tag categories.
+ // An absent selected roast or a genuine independently printed conflicting
+ // specification still requires member review rather than an inferred level.
+ if(extra.roast_tag_ambiguity_only&&base.fields?.roast_level&&
+    !base.conflicts?.includes('roast_level')&&
+    ['product_explicit_text','selected_product_roast_detail',
+     'selected_product_adjacent_roast_badge','selected_product_country_roast_badge',
+     'selected_product_geography_roast_title','product_attribute',
+     'agtron_ground_measurement'].includes(base.roast_source))conflicts.delete('roast_level');
  const compatibleProcess=reconcileCoffeeProcessingClaims([base,extra]);
  if(compatibleProcess){fields.process=compatibleProcess;conflicts.delete('process');}
  let producerSource=base.fields?.producer?base.producer_source:extra.producer_source;

@@ -37,6 +37,17 @@ jobs:
             fs.writeFileSync("qa_artifacts/issue33-source/source-receipt.json",JSON.stringify(receipt,null,2)+String.fromCharCode(10));
             process.stdout.write(JSON.stringify(receipt)+String.fromCharCode(10));
           '
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Build actual public app from the same exact source
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run build:cloud
+          tar -czf qa_artifacts/issue33-source/built-app-dist.tar.gz -C dist .
       - name: Retain exact-source bundle privately for isolated 603 audit
         uses: actions/upload-artifact@v7
         with:
