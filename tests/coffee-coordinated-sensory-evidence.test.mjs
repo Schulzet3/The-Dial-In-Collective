@@ -150,3 +150,43 @@ test('an unconditional layered milk-chocolate flavor is not an added-milk prepar
  assert.ok(result.source_facts?.some(fact=>String(fact.value).includes(source)));
  assert.equal(notes('<p>If you add milk chocolate, this coffee has notes of raspberry and caramel.</p>'),'');
 });
+
+
+const pumpkinUrl='https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara';
+const pumpkinTitle='Nicaragua - Pumpkin Spice- Pacamara';
+const pumpkinNotes='Pumpkin pie and warm cinnamon, with the fruit sweetness of the varietal still sitting underneath.';
+const pumpkinStory='What happened is that Gold Mountain sealed ripe Pacamara cherries in a tank without oxygen, fermented them twice, and put real pumpkin spice in with them. The spice went in with the fruit, at the farm, weeks before the coffee ever saw a roaster. Everything you taste came in through fermentation.';
+
+test('Issue33 #17 current selected pumpkin Pacamara recovers literal sensory pair but not fermentation ingredients',()=>{
+ const body='<h1>'+pumpkinTitle+'</h1><p>'+pumpkinStory+'</p><p>'+pumpkinNotes+'</p>';
+ const json={'@type':'Product',name:pumpkinTitle,url:pumpkinUrl,description:'<p>'+pumpkinStory+'</p><p>'+pumpkinNotes+'</p>'};
+ for(const html of [
+  '<main>'+body+'</main>',
+  '<script type="application/ld+json">'+JSON.stringify(json)+'</script><main>'+body+'</main>'
+ ]){
+  const result=extractPublicCoffeeFacts(html,{source_url:pumpkinUrl});
+  assert.equal(result.ok,true);
+  assert.equal(result.fields.name,pumpkinTitle);
+  assert.equal(result.fields.tasting_notes,'Pumpkin pie and warm cinnamon');
+  assert.ok(!result.conflicts?.includes('tasting_notes'));
+  assert.ok(result.source_facts?.some(fact=>String(fact.value).includes(pumpkinNotes)));
+  assert.ok(result.source_facts?.some(fact=>String(fact.value).includes('fermented them twice')));
+ }
+});
+
+test('Issue33 current sensory pair grammar rejects noncurrent, hypothetical, prepared, recipe and educational text',()=>{
+ for(const source of [
+  'Last year this tasted like '+pumpkinNotes,
+  'Another coffee: '+pumpkinNotes,
+  'Hypothetically, '+pumpkinNotes,
+  'When served with milk, '+pumpkinNotes,
+  'A customer requested '+pumpkinNotes,
+  'Pumpkin pie and warm cinnamon were added after roasting, with the fruit sweetness of the varietal still sitting underneath.',
+  'Pumpkin pie and warm cinnamon, with the fruit sweetness of another coffee sitting underneath.'
+ ]){
+  assert.equal(notes('<p>'+source+'</p>'),'',source);
+ }
+ assert.equal(notes('<h2>Brewing Guide</h2><p>'+pumpkinNotes+'</p>'),'');
+ assert.equal(notes('<section class="related-products"><p>'+pumpkinNotes+'</p></section>'),'');
+ assert.equal(notes('<p>'+pumpkinStory+'</p>'),'');
+});
