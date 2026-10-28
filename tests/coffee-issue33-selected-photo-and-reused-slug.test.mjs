@@ -82,3 +82,28 @@ test('FUDAM currently selected page excludes stale Tolima metadata and never inv
  assert.doesNotMatch(JSON.stringify(parsed.fields),/Tolima|Washed|Honey Crisp/i);
  assert.match(coffeeUrlPreviewMarkup(parsed,{applied:true}),/FUDAM/);
 });
+
+test('selected FUDAM generally washed is visible, preserved, but never auto-selected as lot Process',()=>{
+ const url='https://beanstockcoffee.com/products/colombian-supremo-organic';
+ const title='New!! Colombia Fair Trade Organic FUDAM LA Union';
+ const html='<main><h1>'+title+'</h1><p>FUDAM is a 300-member association of growers.</p>'+
+  '<p>The coffees are generally washed two or three times before being dried.</p></main>';
+ const r=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.process,undefined);
+ assert.match(r.process_review_note||'',/generally washed/i);
+ assert.ok(r.source_facts.some(f=>f.field==='processing_context'&&/generally washed/.test(f.value)));
+ assert.match(coffeeUrlPreviewMarkup(r),/Processing review/);
+});
+test('stale old Beanstock product and explicit current process do not trigger the qualified FUDAM fallback',()=>{
+ const url='https://beanstockcoffee.com/products/colombian-supremo-organic';
+ for(const [name,markup,expect] of [
+  ['New!! Colombia Organic Tolima Suave','<p>FUDAM is another association of growers. The coffees are generally washed two or three times.</p>',undefined],
+  ['New!! Colombia Fair Trade Organic FUDAM LA Union','<p>FUDAM is an association of growers.</p><p>The coffees are generally washed two or three times.</p><p>Process: Natural</p>','Natural']
+ ]){
+  const r=extractPublicCoffeeFacts('<main><h1>'+name+'</h1>'+markup+'</main>',{source_url:url});
+  assert.equal(r.ok,true);
+  assert.equal(r.fields.process,expect);
+  assert.equal(r.process_review_note,undefined);
+ }
+});
