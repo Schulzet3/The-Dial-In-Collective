@@ -9,6 +9,7 @@ import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './cof
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
 import {selectedCoffeeHeroFacts,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
@@ -1447,6 +1448,30 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const current=/\b(?:this|our|current)\s+(?:coffee|lot|release)\b[^.!?]{0,130}\b(?:processed\s+as|is\s+washed|washed\s+process)\b/i.test(currentWords);
   if(historic&&!direct&&!current)delete fields.process;
  }
+ // Selected FUDAM association text describes a qualified, general
+ // washing practice, not this particular lot's explicit Process label.
+ // Never auto-promote it or resurrect the historical reused Tolima product.
+ let qualified_process_review_note='';
+ try{
+  const selectedUrl=new URL(source_url);
+  if(selectedUrl.hostname.toLowerCase().replace(/^www\./,'')==='beanstockcoffee.com'&&
+   selectedUrl.pathname.replace(/\/+$/,'')==='/products/colombian-supremo-organic'&&
+   /\bFUDAM\b/i.test(fields.name||'')&&!fields.process&&!conflicts.has('process')){
+   const prose=productCoffeeProse(canonicalProduct,clean);
+   const qualified=prose.some(block=>!block.educational&&
+    /\bthe coffees are generally washed two or three times\b/i.test(block.text)&&
+    !/\b(?:unlike|another coffee|previous product)\b/i.test(block.text));
+   const selectedAssociation=prose.some(block=>!block.educational&&
+    /\bFUDAM\b/i.test(block.text)&&/\b(?:association|growers|smallholders|membership)\b/i.test(block.text));
+   if(qualified&&selectedAssociation){
+    qualified_process_review_note='The selected FUDAM product describes the coffees as generally washed two or three times. This is association-wide practice, not an explicit processing guarantee for this lot. Confirm Washed from the current bag if known; otherwise leave Process blank.';
+    if(source_facts.length<384)source_facts.push({field:'processing_context',
+     label:'General washing practice (not lot-specific)',
+     value:'The coffees are generally washed two or three times before being dried.',
+     source_url,source_type:'html',section:'Current selected FUDAM product'});
+   }
+  }
+ }catch{/* Invalid source URLs cannot supply contextual autofill. */}
  // Decaf-only selected-product evidence, separate from green-coffee Process.
  const decaffeination_method=inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
@@ -1468,6 +1493,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(roaster_recipe?{roaster_recipe}:{}),
   ...(Object.keys(roaster_details).length?{roaster_details}:{}),
   ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),
+  ...(qualified_process_review_note?{process_review_note:qualified_process_review_note}:{}),
   ...(roast_evidence.value?{roast_source:roast_evidence.source}:{}),
   note:'Best-effort webpage suggestions. The roaster, lot and release still require verification.'};
 }

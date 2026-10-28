@@ -62,3 +62,24 @@ test('source-bound verified 2MB retries retain selected public facts and mark no
  assert.equal(d.rows[1].fields.process,'Other/Unknown');
  assert.equal(d.rows[1].fields.producer,undefined);
 });
+
+test('all 77 saved real current official source parses render in actual Add Coffee preview with conflict flags retained',async()=>{
+ const {coffeeUrlPreviewMarkup}=await import('../site/cloud/coffee-url-autofill.js');
+ const original=JSON.parse(readFileSync(new URL('../docs/audits/issue33-direct-current-all77-source-probe-20261028.json',import.meta.url),'utf8'));
+ const retries=JSON.parse(readFileSync(new URL('../docs/audits/issue33-direct-oversized-source-retry-20261028.json',import.meta.url),'utf8'));
+ const live=new Map(original.records.map(r=>[r.number,r]));
+ for(const r of retries.rows)live.set(r.number,{number:r.number,original_url:r.requested_url,source_status:r.source_status,
+   parsed_current_fields:r.fields,conflicts:r.conflicts});
+ assert.equal(live.size,77);
+ let flagged=0;
+ for(let i=1;i<=77;i++){
+  const r=live.get(i);assert.equal(r.original_url,rows[i-1].original_product_url);
+  assert.equal(r.source_status,'PARSED');assert.ok(r.parsed_current_fields?.name);
+  const html=coffeeUrlPreviewMarkup({ok:true,source:'official_roaster_product_metadata',
+   source_url:r.original_url,fields:r.parsed_current_fields,conflicts:r.conflicts});
+  assert.match(html,/coffee-url-preview/);
+  assert.match(html,/Details Found On Official Roaster Page/);
+  if(r.conflicts?.length){assert.match(html,/Review conflicting details/);flagged++;}
+ }
+ assert.equal(flagged,15);
+});
