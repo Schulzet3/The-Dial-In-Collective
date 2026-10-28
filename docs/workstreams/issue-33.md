@@ -1,3 +1,33 @@
+## October 28 UTC — PR206 clean replacement tracked
+
+Nonforce replacement PR206 opened at clean-source head 26f64a9767e883b411cecb81702a42ea080ef66f on authoritative dev 8fa0769, retains approved #53/#68 and all previous authorizations; no #44 unsupported cupping. Update queue PR reference 206; exact current CI and live 77/603 still separate pending gates. Historical PR202 remains open until actual successful merge; do not force or rewrite. Not deployed.
+
+---
+
+## October 28 UTC — Clean lineage integration for owner #53/#68 (PR202 preserved)
+
+After PR202 nonforce branch reconciliation, approval run 40722890344 FAILED continuity traversal because merge ancestry imports historic PR203 commit 986c48e8 without a [skip netlify] marker. The actual app/test/queue files had no content conflict, but that ancestor cannot be rewritten. Create clean descendant branch from verified authoritative development 8fa076960409c84eaffcc5a360001af7d334c977 with reviewed exact code/test source blobs and reconciled queue/journal; do not force Git refs or weaken CI. Original PR202 remains untouched until replacement merged; then close as superseded with receipt. New scope carries just #53 Liliana and #68 Karumandi current named Washed processing; #44 roast-specific cupping remains unverified. No database or Netlify operations, no hidden source rewriting.
+
+---
+
+## October 28 UTC — PR202 merge-conflict recovery with newer #27/#72 and live receipts
+
+Initial direct merge attempt returned HTTP 405 due overlapping docs/RELEASE_QUEUE.json and docs/workstreams/issue-33.md. No mutation happened; inspected actual PR and development heads. Explicitly reconciled original #53/#68 passing Washed code and negative tests from PR202 atop latest development 8fa076960409c84eaffcc5a360001af7d334c977, retaining #27/#72, all live receipts, all 40 existing release queue rows, and all recent journal history. Added new scoped TESTING entry #202 as row 41. #44 selected roast cupping is NOT implemented; the earlier parser candidate wrongly attributed caramel from another roast and was safely dropped. Parent branch merge is nonforce, source/CI/77 acceptance pending. No original603 changes, prod data, Netlify release or paid cost.
+
+---
+
+## October 28 UTC — PR202 existing cross-roast flavor attribution issue isolated
+
+Exact-source PR202 cloud run 40710952306 failed two new cup comparison tests: current generic parser extracts "caramel" from an Espresso flavor comparison even when selected coffee is Kona Peaberry. New note extraction could not safely override the earlier wrong field. Rather than weaken a failing test or merge a false attribution, remove unverified cupping code and the two incomplete cupping tests from PR202. Retain only owner's two direct Washed selected-stage rules #53 Liliana and #68 Karumandi, plus positive/negative tests. #44 remains explicitly unresolved for separate repair. Exact-head retest and original603 source replay needed, unchanged oracle, no production writes or deployment.
+
+---
+
+## October 28 UTC — selected coffee processing stages and named roast notes TESTING
+
+Owner decisions #53 Queen City Liliana: selected traditional Tres Cochadas lot's depulping, fermentation and fourth-day washing support Washed while preserving named technique. #68 Stumptown Kenya Karumandi: named selected factory wet fermentation, depulping and raised-bed drying support Washed. #44 Mountain Thunder Kona Espresso: selected Espresso variation has literal Smokey/caramel cupping alongside selected chocolate overtones; do not merge unrelated American, Vienna or French roast claims. Added narrow named current-product narrative rules and five positive/negative tests, original603 oracle/captures/scorer unchanged. Exact-source CI and 77 live rerun required, no publication or production member modifications.
+
+---
+
 ## October 28 UTC — 27/72 independent merged current-source parity receipt and scoped queue reconciliation
 
 PR204 exact tested head d51c0a8b3d3b18c79a4e22e1816fd3e50ed7dd6c non-force merged at 7283049dfdb70f37911502a8f915916acb5f4a86 (tested tree unchanged). PR203 #27 earlier merged 986c48e8ad629dcdee31cbacc5f90139e1669d2c. Corrected head PR204 CI seven applicable SUCCESS: 40718601895 approval, 40718601980 security, 40718602092 isolated SQL, 40718601933 cloud/browser/mobile, 40718601960 app/Node/lint/build, 40718602246 visual, 40718602050 private source bundle. Postmerge 40719154070 approval, 40719154389 app/build, 40719154531 cloud UX, 40719153735 visual SUCCESS; controlled exact merged source 77 probe 40719153801 SUCCESS.
