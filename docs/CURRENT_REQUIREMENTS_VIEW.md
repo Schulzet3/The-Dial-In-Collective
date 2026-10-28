@@ -35,7 +35,7 @@ Reconciled October 23, 2026 UTC / October 22 MDT. This is navigation, not a repl
 
 Core feature/decision work: #10 family lifecycle; #12 full evidence hierarchy; #13 experiment lifecycle; #14 Custom targets; #15 bag dates/Frozen/new-bag lifecycle; #16 version-safe equipment and baskets; #17 grinder direction/scale decisions. Deployed foundations do not erase these gaps.
 
-Focused assurance: #5 member/source identity; #22 offline/conflicts; #26 accessibility/responsiveness; #33 extractor/graphics; #47 Admin review/records. Security/provider residuals are #27; backup/courier/alerts #28. Physical-device observations are optional, not a blanket release hold.
+Focused assurance: #5 member/source identity; #22 offline/conflicts (source READY, issue CLOSED; not deployed); #26 accessibility/responsiveness; #33 extractor/graphics; #47 Admin review/records. Security/provider residuals are #27; backup/courier/alerts #28. Physical-device observations are optional, not a blanket release hold.
 
 Deferred/nonblocking: #18 screenshot/BYOK, #30 missing research/transcripts, #37 future guide, #50 release-speed measurement. The 10x end-to-end objective is unproven.
 
