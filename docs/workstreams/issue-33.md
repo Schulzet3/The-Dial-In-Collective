@@ -1,3 +1,9 @@
+## October 28 UTC — PR200 source compatibility approval intake failure repaired (CI retest)
+
+PR200 first exact-head approval workflow 40705017187 FAILED at release-queue --enforce-intake because new `src/server/coffee-product-scope.mjs` was not tracked in a same-scope TESTING queue item; not a runtime extractor failure. Added `DIC-Q-33-selected-source-compatible-roles-and-profile-boundary` with exact three changed app paths, source authority and pending CI/603 acceptance so the queue now tracks every changed application file. No release claim, CI not yet verified; continue full exact-head run and repair any other failing test. All original coffee facts, member data and production unchanged.
+
+---
+
 ## October 28 UTC — source-bound reusable compatibility and producer-isolation repair TESTING
 
 PR199 merged and source-bound owner77 probe 40703208153 completed 77/77 direct official pages and actual Add Coffee preview output. It classified 50 requested fields as unpopulated/unextracted, 11 as source context only, 10 as requested-field conflicts, 6 as canonical suggestions; these counts are DIAGNOSTIC, not pass/fail against the decisions (intentionally blank is valid). Current source-backed cases: #41 Lowcountry Cocoa/Almond versus overlapping Cocoa/Almond/Chocolate, #65 Spiritus same Guaya'b women-producer program with qualifier, #74 VESTA labeled Fresno region and Tolima/Colombia origin, #23 Favor branded Token Dark Roast versus selected medium-dark roast prose, #72 Thrive unrelated MEET Marta Solares profile must never donate La Esperanza to Horizon Organic. Implement general selected-source compatibility and profile boundary with focused positive and contradictory negatives; leave unsupported fields blank. No hardcoded coffee outputs, credentials, member mutations, paid API or release. New parser tests/CI and immutable original603 replay still required.
