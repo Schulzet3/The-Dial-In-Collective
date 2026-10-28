@@ -18,3 +18,5 @@ Oct 28 UTC read-only production Supabase function audit found that current priva
 Oct 28 UTC admin correction recovered: production read-only inspection found current private.dic_admin_edit_record rejects new decaf fields; staged additive override retains full existing audit/revision/ownership and shot correction code, validates boolean/is-decaf and method enum, and permits reviewed canonical correction. Admin record UI only displays method when fully decaf, with explicit checkbox and safe boolean payload, and suppresses the method on regular/half-caf. New current GitHub CI still required; no production SQL change or data write.
 
 Oct 28 UTC added explicit tests/coffee-decaf-admin.test.mjs for decaf-only admin facts, three-value editing, half-caf/regular withholding, and staged audited admin SQL contract. Exact-source CI still required; SQL DDL not applied.
+
+Oct 28: CI SQL job 40618095095 confirmed syntax failure before second copied RPC: pg_get_functiondef omitted required terminating semicolon. Added semicolon to both staged RPC CREATE statements, without altering their bodies. Isolated SQL retest required; no production SQL executed.

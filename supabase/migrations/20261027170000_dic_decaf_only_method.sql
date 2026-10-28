@@ -169,7 +169,7 @@ begin
   returning id into updated_id;
  end if;
  return jsonb_build_object('ok',true,'kind','correction_requested','submission_id',updated_id);
-end $function$
+end $function$;
 
 
 -- Owner-approved correction path, preserving the present audited admin function.
@@ -354,5 +354,5 @@ begin
   before_revision,reason,before_values,after_values)
  values(actor,record_owner,p_kind,p_record_id,p_expected_revision,reason_text,snapshot,after_snapshot);
  return jsonb_build_object('ok',true,'revision',revision_after,'audited',true);
-end $function$
+end $function$;
 
