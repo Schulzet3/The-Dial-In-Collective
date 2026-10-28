@@ -1632,6 +1632,30 @@
       ],
       "owner_source": "Owner-approved coffee #53 Liliana Queen City and #68 Karumandi Stumptown; #44 Mountain Thunder still pending separate positive/negative validation.",
       "notes": "No roaster URL hardcoded, no unsupported fact, no paid API, no production DB/Auth/member writes or deployment. PR206 is clean integrated replacement for PR202's attempted merge; PR202 to be closed as superseded only after successful verified merge."
+    },
+    {
+      "id": "DIC-Q-33-owner77-context-microlot-community-cupping",
+      "issue": 33,
+      "pr": null,
+      "title": "Owner77 generic selected coffee facts: regional component elevations, exact Micro-Lot, selected-roast cupping, named community",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-blend-evidence.mjs",
+        "site/cloud/coffee-url-autofill.js"
+      ],
+      "tests": [
+        "Focused source-bounded #12, #32/#33/#34, #44 and #46 positive and adverse cross-product/ambiguous-source regression in tests/coffee-issue33-owner77-selected-context.test.mjs.",
+        "Original untouched 603 source archive 696c011e... and oracle 0bd751f6... replayed 603/603 locally on source blobs coffee-page-metadata 77f53ffca444..., blend-evidence 1ad508d637ab...: 3104 exact/70 missing/828 review vs PR206 previous 3101/75/826; zero former exact losses; supplemental retained full5458/partial337/unconfirmed679 unchanged. Local-only receipt; exact-head GitHub CI still pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-head GitHub CI, public live selected pages #12/32/33/34/44/46 and safe non-force merged SHA remain to be verified.",
+        "Full 77 per-owner-decision acceptance, genuine live GoTrue Add Coffee persistence and app E2E separate Issue #33 gates. Do not mark parent READY from 77 URL parsing alone."
+      ],
+      "owner_source": "Issue #33 owner complete 77 review; #12 Blue Jazz blend regions/altitudes, #32–34 Iwana Micro-Lot taxonomy, #44 Mountain Thunder Espresso-only cupping, #46 Night Swim Koba producing community.",
+      "notes": "Source scope and negative controls prohibit borrowing unrelated roast/cart/card/region facts, keep unsupported canonical elevation blank, preserve field reviews. No 603 oracle edits, no Netlify publication or production member changes."
     }
   ],
   "history": [

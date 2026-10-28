@@ -5,7 +5,7 @@ import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supa
 import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
-import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
+import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
@@ -1028,6 +1028,81 @@ function shopifyProduct(html,target){
  }
  return out;
 }
+/**
+ * A generic cross-roast cupping table is evidence ONLY for a specifically
+ * selected named roast, never for a nearby coffee that merely shares a site.
+ * Preserve the literal selected row. Product-specific chocolate/body prose is
+ * separate context, never a replacement for the printed cupping line.
+ */
+export function selectedNamedRoastCuppingEvidence(productHtml,selectedName){
+ if(typeof productHtml!=='string'||productHtml.length>2_000_000||
+    typeof selectedName!=='string')return null;
+ const selected=selectedName.match(/\b(American|Vienna|French|Espresso|Black and Tan|Organic)\s+roast\b/i);
+ if(!selected)return null;
+ const expected=selected[1].toLowerCase();
+ const found=new Map();
+ for(const paragraph of productHtml.matchAll(/<p\b[^>]{0,750}>([\s\S]{1,4200}?)<\/p>/gi)){
+  if(!/\bCupping Notes\b/i.test(paragraph[1]))continue;
+  const lines=paragraph[1].replace(/<br\b[^>]{0,500}>/gi,'\n').split(/\n+/)
+   .map(line=>clean(line,380)).filter(Boolean);
+  if(!lines.slice(0,3).some(line=>/\bCupping Notes\b/i.test(line)))continue;
+  const rows=new Map();
+  for(const line of lines){
+   const item=line.match(/^(American|Vienna|French|Espresso|Black and Tan|Organic)\s*[-–—:]\s*(.{3,180})$/i);
+   if(!item)continue;
+   const k=item[1].toLowerCase(),notes=item[2].replace(/[.\s]+$/,'').trim();
+   if(rows.has(k)&&rows.get(k)!==notes){rows.clear();break;}
+   rows.set(k,notes);
+  }
+  // Three different roast descriptions prove that the paragraph is a
+  // comparison matrix, not an arbitrary single title/SEO/marketing phrase.
+  if(rows.size<3||!rows.has(expected))continue;
+  const value=rows.get(expected);
+  if(value&&value.length<=180)found.set(value.toLowerCase(),value);
+ }
+ if(found.size!==1)return null;
+ return {roast:selected[1],notes:[...found.values()][0],
+  source_label:'Cupping Notes — '+selected[1]+' roast only'};
+}
+
+/** Selected WooCommerce single-product taxonomy can declare a MICRO-LOT.
+ * Do not read category chips from related cards, navigation or a different
+ * product; the actual product wrapper MUST contain the exact selected H1/H2.
+ */
+export function selectedMicroLotCategory(productHtml,name){
+ if(typeof productHtml!=='string'||productHtml.length>2_000_000||!name)return false;
+ const {nodes}=coffeeHtmlElements(productHtml);
+ const expected=keyOf(name);
+ for(const node of nodes){
+  if(!['div','article','main'].includes(node.tag)||node.contentEnd-node.headEnd>160000)continue;
+  const attrs=node.attributes||'';
+  if(!/\bproduct_cat-micro-lots\b/i.test(attrs)||!/(?:\btype-product\b|\bdata-elementor-type=['"]product['"])/i.test(attrs))continue;
+  const body=productHtml.slice(node.headEnd,node.contentEnd);
+  // Require one intact selected product heading. A related item whose title
+  // differs is not evidence for the selected coffee's release designation.
+  const selected=[...body.matchAll(/<h[12]\b[^>]{0,650}>([\s\S]{1,500}?)<\/h[12]>/gi)]
+   .some(match=>keyOf(clean(match[1],220))===expected);
+  if(selected)return true;
+ }
+ return false;
+}
+/** Distinguish a printed producing COMMUNITY from a farmer/person/farm.
+ * Every source label must belong to the current selected product section.
+ */
+export function selectedProducingCommunity(productHtml){
+ if(typeof productHtml!=='string'||productHtml.length>2_000_000)return null;
+ const blocks=productCoffeeProse(productHtml,clean).filter(x=>!x.educational&&x.tag==='p');
+ const names=new Map();let hasLocation=false,hasProcess=false;
+ for(const block of blocks){
+  const value=block.text.trim();
+  if(/^LOCATION\s*[:：]\s*[^:]{3,160}$/i.test(value))hasLocation=true;
+  if(/^PROCESS\s*[:：]\s*[^:]{3,120}$/i.test(value))hasProcess=true;
+  const m=value.match(/^COMMUNITY\s*[:：]\s*([\p{L}\p{M}][\p{L}\p{M}'’\s-]{1,80})$/iu);
+  if(m&&m[1].length<90)names.set(keyOf(m[1]),m[1].trim());
+ }
+ return hasLocation&&hasProcess&&names.size===1?[...names.values()][0]:null;
+}
+
 export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(typeof html!=='string'||html.length>2_000_000||!source_url)return {ok:false,reason:'invalid_source'};
  // A selected, exact-route Next.js Product is not an HTML heading: read only
@@ -1103,6 +1178,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  rememberGeographyEntityRoles(fields,canonicalProduct);
  for(const place of extractCoffeeGeographyTuples(canonicalProduct,{name:fields.name,clean}))addField(fields,'Origin',place);
  productDetails(fields,p);
+ // Only a selected WooCommerce product taxonomy, never a related card,
+ // proves the literal product-level Micro-Lot designation.
+ if(!fields.release_label&&selectedMicroLotCategory(product,fields.name))fields.release_label='Micro-Lot';
  // Repeated JSON-LD/inline nodes may describe the same selected product.
  // Deduplicating its title must not discard contradictory roast, process,
  // or release evidence. Retain the chosen node's precedence for compatible
@@ -1382,12 +1460,33 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    delete fields.process;
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
+ // Community is an explicitly labeled producing group, not a named farmer.
+ // Reject mentions missing the same selected Product's location and process.
+ const producingCommunity=selectedProducingCommunity(canonicalProduct);
+ let community_review_note='';
+ if(producingCommunity&&!fields.producer&&!conflicts.has('producer')){
+  fields.producer=producingCommunity;
+  roaster_details.named_producer=producingCommunity+' (producing community, not an individual grower)';
+  community_review_note='Producer is the published '+producingCommunity+' producing community, not an individually named farmer.';
+ }
+ // A source-backed two-region blend must not inherit one component's
+ // elevation or the first region as the entire blended origin.
+ const regionalBlend=extractSelectedRegionalBlendElevation(canonicalProduct,{name:fields.name});
+ let elevation_review_note='';
+ if(regionalBlend){
+  roaster_details.blend_components=[roaster_details.blend_components,regionalBlend.display].filter(Boolean).join(' | ').slice(0,1200);
+  elevation_review_note=regionalBlend.review;
+  delete fields.elevation_m;
+  if(fields.origin&&regionalBlend.components.some(component=>
+   fields.origin.toLowerCase().includes(component.region.toLowerCase())))
+   fields.origin=regionalBlend.country;
+ }
  // A named producing community for ONE country in a multi-origin blend is
  // useful source context but cannot populate a blend-wide Producer field.
  const componentCredit=extractSelectedBlendCommunityCredit(canonicalProduct,{
   name:fields.name,origin:fields.origin||'',clean
  });
- let producer_review_note='';
+ let producer_review_note=community_review_note;
  if(componentCredit){
   const {organization,country,region,other_countries}=componentCredit;
   const extra=country+' ('+region+'): '+organization+' (named producing community; component only)';
@@ -1417,12 +1516,34 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ if(producingCommunity&&source_facts.length<384)source_facts.push({
+  field:'producer',label:'Community',value:producingCommunity,source_url,
+  source_type:'html',section:'Selected coffee producing-community label'
+ });
+ if(regionalBlend)for(const part of regionalBlend.components){
+  if(source_facts.length>=384)break;
+  source_facts.push({field:'component_elevation',label:'Component elevation: '+part.region,
+   value:part.elevation_m,source_type:'html',source_url,
+   section:'Selected blended regional lot — '+part.process});
+ }
  if(componentCredit&&source_facts.length<384)source_facts.push({
   field:'component_producer',
   label:'Producing community ('+componentCredit.country+' component only)',
   value:componentCredit.organization,source_url,source_type:'html',
   section:'Selected current blend description'
  });
+ // The source may contain a roast-comparison cupping matrix for several
+ // DIFFERENT products. Pick only the row matching the actual selected H1
+ // roast; generic cocoa, citrus or caramel rows never become other coffees.
+ const selectedRoastCupping=selectedNamedRoastCuppingEvidence(canonicalProduct,fields.name);
+ if(selectedRoastCupping){
+  if(!fields.tasting_notes&&!conflicts.has('tasting_notes'))
+   fields.tasting_notes=selectedRoastCupping.notes;
+  if(source_facts.length<384)source_facts.push({
+   field:'tasting_notes',label:'Cupping Notes',value:selectedRoastCupping.notes,
+   source_url,source_type:'html',section:selectedRoastCupping.source_label
+  });
+ }
  // Owner-approved preference: a current-coffee labeled notes list outranks
  // incidental flavor prose, but a second coarse taxonomy/graphic is not an
  // equally strong source. Preserve established equivalent notes verbatim.
@@ -1561,6 +1682,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),
   ...(qualified_process_review_note?{process_review_note:qualified_process_review_note}:{}),
   ...(producer_review_note?{producer_review_note}:{}),
+  ...(elevation_review_note?{elevation_review_note}:{}),
   ...(roast_evidence.value?{roast_source:roast_evidence.source}:{}),
   note:'Best-effort webpage suggestions. The roaster, lot and release still require verification.'};
 }

@@ -359,3 +359,28 @@ export function extractSelectedBlendCommunityCredit(html,{name='',origin='',clea
  }
  return results.length===1?results[0]:null;
 }
+
+
+/** Two explicitly sourced regional lots of ONE selected coffee are not one
+ * altitude range. Keep each component with its region/roast/process context.
+ * Intentionally do not infer a canonical elevation or identify producers.
+ */
+export function extractSelectedRegionalBlendElevation(html,{name=''}={}){
+ if(typeof html!=='string'||html.length>2_000_000||!name)return null;
+ const names=unique([...String(name).matchAll(COUNTRIES)].map(x=>x[1]));
+ if(names.length!==1)return null;
+ const blocks=productCoffeeProse(html,clean).filter(x=>!x.educational&&x.tag==='p');
+ const text=blocks.map(x=>x.text).join(' ').slice(0,16000);
+ const current=text.match(/\bour\s+current\s+([\p{L}\p{M}][\p{L}\p{M} ]{2,40})\s+offering\b/iu);
+ if(!current||key(current[1])!==key(names[0]))return null;
+ if(!/\b(?:two|2)\s+regional\s+lots\b[^.!?]{0,200}\bcombined\b[^.!?]{0,130}\b(?:single\s+origin\s+)?blend\b/i.test(text))return null;
+ const first=text.match(/\bone\s+of\s+the\s+coffees\s+is\s+a\s+(?:fully\s+)?washed\s+selection\s+from\s+the\s+([\p{L}\p{M}][\p{L}\p{M}\s'’-]{2,65}?)\s+region\s+grown\s+at\s+(\d{3,4})\s*[-–—]\s*(\d{3,4})\s+(?:meters?\s+above\s+sea\s+level|m(?:eters?|asl))\b/iu);
+ const second=text.match(/\bthe\s+other\s+is\s+a\s+(?:fully\s+)?washed\s+([\p{L}\p{M}][\p{L}\p{M}\s'’-]{2,65}?)\s+grown\s+at\s+(\d{3,4})\s*[-–—]\s*(\d{3,4})\s+(?:meters?|m(?:asl)?)\b/iu);
+ if(!first||!second||first.index>second.index||second.index-first.index>650)return null;
+ const regions=[first[1].trim(),second[1].trim()],lows=[+first[2],+second[2]],highs=[+first[3],+second[3]];
+ if(key(regions[0])===key(regions[1])||regions.some(x=>x.length<3||x.length>65)||
+    lows.some((v,i)=>v<100||v>highs[i]||highs[i]>6000))return null;
+ const display=regions.map((region,i)=>region+': '+lows[i]+'–'+highs[i]+' m (Washed)').join('; ');
+ return {country:names[0],components:regions.map((region,i)=>({region,elevation_m:lows[i]+'–'+highs[i]+' m',process:'Washed'})),display,
+  review:'This selected coffee blends two regional lots with different elevation ranges. The roaster did not publish one whole-blend elevation; leave Elevation blank and review each regional component.'};
+}
