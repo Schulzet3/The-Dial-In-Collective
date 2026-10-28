@@ -24,6 +24,14 @@ test('canonical owner approvals stay distinct from bounded individual source fix
     assert.equal(r.implementation_status,expectedStatus);
     assert.match(r.tests.original603,/603\/603/);
    }
+   else if([27,72].includes(r.number)){
+    const expected=r.number===27?'MERGED_PR203_LIVE_VERIFIED':'MERGED_PR204_LIVE_VERIFIED';
+    assert.equal(r.implementation_status,expected);
+    assert.equal(r.latest_direct_public_probe.run,40719153801);
+    assert.equal(r.latest_direct_public_probe.source_status,'PARSED');
+    assert.equal(r.latest_direct_public_probe.targeted_live_acceptance,true);
+    assert.match(r.release_status,/^TESTING_/);
+   }
    else if(r.number===6){
     assert.equal(r.implementation_status,'EXISTING_SELECTED_PRODUCT_HANDLER_FOCUSED_REGRESSION_NO_NEW_CODE');
     assert.equal(r.release_status,'PROCESS_UNVERIFIED_CURRENT_SOURCE_PENDING');
@@ -81,4 +89,28 @@ test('current direct source receipt pins exact 3 official product identities wit
  assert.equal(cortez.html.fields.process,'Washed');
  assert.equal(releaseQueue.items.find(x=>x.pr===189).state,'READY');
  assert.equal(register.records.filter(x=>x.owner_review_status.startsWith('RESOLVED_')).length,8);
+});
+
+test('source-bound #27 and #72 exact merged public acceptance changed only requested coffee fields',()=>{
+ const receipt=JSON.parse(readFileSync(new URL('../docs/audits/issue33-27-72-merged-live-acceptance-20261028.json',import.meta.url),'utf8'));
+ assert.equal(receipt.issue,33);assert.equal(receipt.merged_source_sha,'7283049dfdb70f37911502a8f915916acb5f4a86');
+ assert.equal(receipt.current_live_probe.attempted,77);assert.equal(receipt.current_live_probe.parsed,77);
+ assert.equal(receipt.current_live_probe.preview_visible,77);
+ assert.equal(receipt.exact_comparison.unchanged_cases,75);
+ assert.deepEqual(receipt.exact_comparison.changed.map(x=>x.number),[27,72]);
+ assert.equal(receipt.exact_comparison.other_canonical_field_losses,0);
+ assert.equal(receipt.records[0].after.origin,'Cayambe-Coca Natural Reserve, Ecuador');
+ assert.equal(receipt.records[0].after.origin_conflict,false);
+ assert.equal(receipt.records[1].after.producer,null);
+ assert.match(receipt.records[1].after.blend_components,/Guatemala \(Huehuetenango\): ACODIHUE/);
+ assert.equal(receipt.original603_oracle_modified,false);assert.equal(receipt.production_writes,0);
+ assert.match(receipt.tests.frozen603,/NOT RUN/);assert.match(receipt.release,/TESTING_NOT_READY/);
+ for(const n of [27,72]){
+  const r=register.records[n-1];assert.match(r.current_official_source.finding, n===27?/Natural Reserve/:/ACODIHUE/);
+  assert.equal(r.latest_direct_public_probe.html_sha256,receipt.records.find(x=>x.number===n).html_sha256);
+ }
+ for(const id of ['DIC-Q-33-same-reserve-selected-origin','DIC-Q-33-thrive-component-community']){
+  const r=releaseQueue.items.find(x=>x.id===id);assert.equal(r.state,'TESTING');
+  assert.ok(r.merged_source_sha);assert.ok(r.blockers.length);
+ }
 });
