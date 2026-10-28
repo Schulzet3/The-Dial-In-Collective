@@ -28,18 +28,3 @@ test('only matching selected Karumandi factory with complete wet-ferment/dry seq
  assert.equal(parsed('Kenya Karumandi',story,'https://www.stumptowncoffee.com/products/kenya-karumandi').fields.process,'Washed');
  assert.equal(parsed('Kenya Kamwangi',story,'https://www.stumptowncoffee.com/products/kenya-kamwangi').fields.process,undefined);
 });
-test('selected Kona Espresso roast comparison keeps its own cupping notes, never other roast flavor claims',()=>{
- const r=parsed('100% Kona Espresso Roast Coffee 16oz',
-  '<h2>Cupping Notes on Mountain Thunder’s Coffee:</h2>'+
-  '<p>American - Floral. Vienna - Nutty. French - Bittersweet chocolate. Espresso - Smokey with caramel notes. Black and Tan - Orange.</p>'+
-  '<p>Our Espresso Roast has noticeable chocolate overtones.</p>',
-  'https://mountainthunder.com/products/espresso16');
- assert.equal(r.fields.tasting_notes,'Smokey, Caramel, Chocolate');
- assert.doesNotMatch(r.fields.tasting_notes,/Floral|Nutty|Orange/);
-});
-test('no selected named roast variation means no other roasted coffee notes',()=>{
- const r=parsed('100% Kona Peaberry',
-  '<h2>Cupping Notes on Mountain Thunder’s Coffee:</h2><p>Espresso - Smokey with caramel notes. Vienna - Nutty.</p>',
-  'https://mountainthunder.com/products/peaberry');
- assert.equal(r.fields.tasting_notes,undefined);
-});

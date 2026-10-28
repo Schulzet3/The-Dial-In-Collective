@@ -570,26 +570,6 @@ export function extractNarrativeCoffeeEvidence(html,{name='',fields={},origin=fi
    if(!details.processing_detail)details.processing_detail='Named selected factory: depulping, wet fermentation and drying';
   }
  }
- // Cupping lists containing other roast offerings are NOT mixed profiles:
- // associate the only matching roast's literal notes with selected title.
- if(!fields.tasting_notes&&!output.tasting_notes){
-  const selected=name.match(/\b(American|Vienna|French|Espresso|Black and Tan)\s+Roast\b/i);
-  const heading=/\bCupping Notes on [^.!?]{2,110} Coffee\s*:/i.test(page.replace(/<[^<>]{0,800}>/g,' '));
-  if(selected&&heading){
-   const expression=new RegExp('(?:^|[.!?]\\s+)'+selected[1]+'\\s*[-–—:]\\s*([^.!?;]{3,90})(?=[.!?;]|$)','i');
-   const note=story.match(expression)?.[1]?.trim()||'';
-   if(note&&!/\b(?:process|roast|origin|variety|brew)\b/i.test(note)){
-    const words=note.replace(/\bwith\s+([\p{L}\p{M}'’-]+)\s+notes?\b/iu,', $1')
-     .replace(/\s+along with\s+/i,', ').split(/\s*,\s*/).filter(w=>w.length>=3&&w.length<=65);
-    const flavor=words.join(', ');
-    if(flavor&&flavor.length<=150){
-     const chocolate=/^espresso$/i.test(selected[1])&&
-      /\b(?:our|mountain thunder['’]s)\s+espresso\s+roast\b[^.!?]{0,240}\bchocolate\s+overtones\b/i.test(story);
-     output.tasting_notes=chocolate&&!/\bchocolate\b/i.test(flavor)?flavor+', Chocolate':flavor;
-    }
-   }
-  }
- }
  if(technique&&paragraphs.some(p=>TECHNIQUE.test(p)&&!GENERAL_CONTEXT.test(p)&&
    sentences(p).some(s=>factualSentence(s)&&/\b(?:before .*?\bwashed\b|then\s+washed\b|washed clean and dried)\b/i.test(s))))
   details.processing_detail=(technique+'; washed finish').slice(0,190);

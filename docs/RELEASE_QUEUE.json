@@ -1538,20 +1538,22 @@
       "id": "DIC-Q-33-current-named-process-and-roast-cupping",
       "issue": 33,
       "pr": 202,
-      "title": "Current-lot Washed stages and current purchased roast-specific cupping notes",
+      "title": "Current named selected Washed processing stages",
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
         "src/server/coffee-narrative-evidence.mjs"
       ],
       "tests": [
-        "Five focused positive/negative owner #53/#68/#44 regression tests pending CI."
+        "Five focused positive/negative owner #53/#68/#44 regression tests pending CI.",
+        "PR202 exact-source test exposed generic incorrect caramel attributed from another roast; unfinished cupping branch and both cupping tests removed, not counted PASS."
       ],
       "ci_runs": [],
       "blockers": [
-        "Exact-head CI and safe merge, live 77 current source acceptance and immutable original 603 regression pending."
+        "Exact-head CI and safe merge, live 77 current source acceptance and immutable original 603 regression pending.",
+        "Coffee #44 selected-roast cupping not resolved by this scope; separate source-compatible implementation required."
       ],
-      "owner_source": "Owner-approved coffee #53 Liliana Queen City, #68 Kenya Karumandi Stumptown, #44 Kona Espresso Mountain Thunder.",
+      "owner_source": "Owner-approved coffee #53 Liliana Queen City and #68 Karumandi Stumptown; #44 Mountain Thunder still pending separate positive/negative validation.",
       "notes": "No roaster URL hardcoded, no unsupported fact, no paid API, no production DB/Auth/member writes or deployment."
     }
   ],

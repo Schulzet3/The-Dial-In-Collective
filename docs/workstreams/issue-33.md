@@ -1,3 +1,9 @@
+## October 28 UTC — PR202 existing cross-roast flavor attribution issue isolated
+
+Exact-source PR202 cloud run 40710952306 failed two new cup comparison tests: current generic parser extracts "caramel" from an Espresso flavor comparison even when selected coffee is Kona Peaberry. New note extraction could not safely override the earlier wrong field. Rather than weaken a failing test or merge a false attribution, remove unverified cupping code and the two incomplete cupping tests from PR202. Retain only owner's two direct Washed selected-stage rules #53 Liliana and #68 Karumandi, plus positive/negative tests. #44 remains explicitly unresolved for separate repair. Exact-head retest and original603 source replay needed, unchanged oracle, no production writes or deployment.
+
+---
+
 ## October 28 UTC — selected coffee processing stages and named roast notes TESTING
 
 Owner decisions #53 Queen City Liliana: selected traditional Tres Cochadas lot's depulping, fermentation and fourth-day washing support Washed while preserving named technique. #68 Stumptown Kenya Karumandi: named selected factory wet fermentation, depulping and raised-bed drying support Washed. #44 Mountain Thunder Kona Espresso: selected Espresso variation has literal Smokey/caramel cupping alongside selected chocolate overtones; do not merge unrelated American, Vienna or French roast claims. Added narrow named current-product narrative rules and five positive/negative tests, original603 oracle/captures/scorer unchanged. Exact-source CI and 77 live rerun required, no publication or production member modifications.
