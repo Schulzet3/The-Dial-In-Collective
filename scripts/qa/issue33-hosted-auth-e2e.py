@@ -57,6 +57,8 @@ def browser(email,password,coffee,roaster):
             form.locator("[name=name]").fill(coffee)
             form.locator("[name=roaster]").fill(roaster)
             form.locator("button.primary").last.click()
+            page.locator('[data-action="choose-coffee-match"]').first.wait_for(timeout=15000)
+            page.locator('[data-action="choose-coffee-match"]').first.click()
             page.wait_for_timeout(1500)
             # Reopen in a new browser tab: independent authenticated SDK state/cache refresh.
             page.reload(wait_until="domcontentloaded",timeout=35000)
@@ -124,10 +126,11 @@ def main():
         chosen=None
         for name,roaster in choices:
             match=api(key,"/rest/v1/rpc/dic_find_coffee_matches",{"payload":{"name":name,"roaster":roaster}},token)
-            if match.get("classification")=="exact_verified" and match.get("exact_id"):
-                chosen=(name,roaster,match["exact_id"])
+            if match.get("classification")=="needs_confirmation" and any(c.get("name")==name and c.get("roaster")==roaster for c in match.get("candidates",[])):
+                target=next(c for c in match["candidates"] if c.get("name")==name and c.get("roaster")==roaster)
+                chosen=(name,roaster,target["id"])
                 break
-        require(chosen,"BLOCKED: no existing verified coffee matched; refusing to create a shared test coffee")
+        require(chosen,"BLOCKED: no existing verified same-name candidate found; refusing to create a shared test coffee")
         stage="live Chromium signup-session Add Coffee, reopen, sign out, sign in"
         browser(email,password,chosen[0],chosen[1])
         stage="independent committed SQL readback"
