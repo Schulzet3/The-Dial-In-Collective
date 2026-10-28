@@ -323,3 +323,39 @@ export function extractCoffeeBlendEvidence(html,{name='',scoped=false}={}){
   components:components.length
  };
 }
+
+
+/**
+ * A named community can be identified for exactly one geographic component
+ * of a multi-country blend without being the producer of the whole blend.
+ * Receives current selected product markup AFTER unrelated farmer widgets
+ * are excluded. Never creates canonical field suggestions.
+ */
+export function extractSelectedBlendCommunityCredit(html,{name='',origin='',clean:decode}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof decode!=='function'||!name)return null;
+ const countries=unique([...String(origin).matchAll(COUNTRIES)].map(match=>match[1]));
+ if(countries.length<2||countries.length>8||countries.some(country=>!/^[A-Za-z -]{3,50}$/.test(country)))return null;
+ const location=new RegExp('\\b([\\p{Lu}][\\p{L}\\p{M} -]{2,72}),\\s*('+countries.join('|')+')\\b','giu');
+ const results=[];
+ for(const block of productCoffeeProse(html,decode)){
+  if(block.educational||!['p','li','div'].includes(block.tag)||block.text.length>2200)continue;
+  const prose=block.text,lead=prose.slice(0,390);
+  // The paragraph must directly identify this selected product as a blend.
+  if(!key(lead).includes(key(name))||
+   !/\bblend\b[^.!?]{0,140}\b(?:two|three|four|five|six|[2-6])\b[^.!?]{0,100}\b(?:coffee|communities|origins?|components?)\b/i.test(lead))continue;
+  const credits=[...prose.matchAll(/\bproducing\s+communities\s*,\s*([A-Z][A-Z0-9-]{2,32})\b/g)];
+  if(credits.length!==1)continue;
+  const credit=credits[0],organization=credit[1];
+  // A marketing acronym alone is not a producer-role attribution.
+  if(!new RegExp('\\b'+organization+'\\s+is\\s+an?\\s+(?:association|cooperative|co-?op)\\b','i')
+    .test(prose.slice(credit.index+credit[0].length)))continue;
+  const places=[...prose.slice(0,credit.index).matchAll(location)];
+  if(!places.length||new Set(places.map(match=>key(match[2]))).size!==1)continue;
+  const chosen=places.at(-1),region=chosen[1].trim(),country=chosen[2];
+  if(!region||countries.some(value=>key(value)===key(region)))continue;
+  results.push({organization,country,region,
+   other_countries:countries.filter(value=>key(value)!==key(country)),
+   quote:prose.slice(0,1350)});
+ }
+ return results.length===1?results[0]:null;
+}

@@ -5,7 +5,7 @@ import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supa
 import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
-import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
+import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
@@ -1382,6 +1382,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    delete fields.process;
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
+ // A named producing community for ONE country in a multi-origin blend is
+ // useful source context but cannot populate a blend-wide Producer field.
+ const componentCredit=extractSelectedBlendCommunityCredit(canonicalProduct,{
+  name:fields.name,origin:fields.origin||'',clean
+ });
+ let producer_review_note='';
+ if(componentCredit){
+  const {organization,country,region,other_countries}=componentCredit;
+  const extra=country+' ('+region+'): '+organization+' (named producing community; component only)';
+  roaster_details.blend_components=[roaster_details.blend_components,extra].filter(Boolean).join(' | ').slice(0,1200);
+  producer_review_note=organization+' is identified as a producing community in '+region+', '+country+
+   ', for one component of this blend. It is not evidence of a producer for the entire blend or for '+
+   other_countries.join(' / ')+'. Confirm any whole-blend Producer manually.';
+ }
  // A later direct blend fallback cannot resurrect rejected geography.
  for(const field of conflicts)delete fields[field];
  if(conflicts.has('roast_level')){roast_evidence.value=null;roast_evidence.source='';}
@@ -1403,6 +1417,12 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ if(componentCredit&&source_facts.length<384)source_facts.push({
+  field:'component_producer',
+  label:'Producing community ('+componentCredit.country+' component only)',
+  value:componentCredit.organization,source_url,source_type:'html',
+  section:'Selected current blend description'
+ });
  // Owner-approved preference: a current-coffee labeled notes list outranks
  // incidental flavor prose, but a second coarse taxonomy/graphic is not an
  // equally strong source. Preserve established equivalent notes verbatim.
@@ -1540,6 +1560,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(Object.keys(roaster_details).length?{roaster_details}:{}),
   ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),
   ...(qualified_process_review_note?{process_review_note:qualified_process_review_note}:{}),
+  ...(producer_review_note?{producer_review_note}:{}),
   ...(roast_evidence.value?{roast_source:roast_evidence.source}:{}),
   note:'Best-effort webpage suggestions. The roaster, lot and release still require verification.'};
 }

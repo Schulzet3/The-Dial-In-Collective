@@ -1,3 +1,9 @@
+## October 28 UTC — PR202 merge-conflict recovery with newer #27/#72 and live receipts
+
+Initial direct merge attempt returned HTTP 405 due overlapping docs/RELEASE_QUEUE.json and docs/workstreams/issue-33.md. No mutation happened; inspected actual PR and development heads. Explicitly reconciled original #53/#68 passing Washed code and negative tests from PR202 atop latest development 8fa076960409c84eaffcc5a360001af7d334c977, retaining #27/#72, all live receipts, all 40 existing release queue rows, and all recent journal history. Added new scoped TESTING entry #202 as row 41. #44 selected roast cupping is NOT implemented; the earlier parser candidate wrongly attributed caramel from another roast and was safely dropped. Parent branch merge is nonforce, source/CI/77 acceptance pending. No original603 changes, prod data, Netlify release or paid cost.
+
+---
+
 ## October 28 UTC — PR202 existing cross-roast flavor attribution issue isolated
 
 Exact-source PR202 cloud run 40710952306 failed two new cup comparison tests: current generic parser extracts "caramel" from an Espresso flavor comparison even when selected coffee is Kona Peaberry. New note extraction could not safely override the earlier wrong field. Rather than weaken a failing test or merge a false attribution, remove unverified cupping code and the two incomplete cupping tests from PR202. Retain only owner's two direct Washed selected-stage rules #53 Liliana and #68 Karumandi, plus positive/negative tests. #44 remains explicitly unresolved for separate repair. Exact-head retest and original603 source replay needed, unchanged oracle, no production writes or deployment.
@@ -7,6 +13,45 @@ Exact-source PR202 cloud run 40710952306 failed two new cup comparison tests: cu
 ## October 28 UTC — selected coffee processing stages and named roast notes TESTING
 
 Owner decisions #53 Queen City Liliana: selected traditional Tres Cochadas lot's depulping, fermentation and fourth-day washing support Washed while preserving named technique. #68 Stumptown Kenya Karumandi: named selected factory wet fermentation, depulping and raised-bed drying support Washed. #44 Mountain Thunder Kona Espresso: selected Espresso variation has literal Smokey/caramel cupping alongside selected chocolate overtones; do not merge unrelated American, Vienna or French roast claims. Added narrow named current-product narrative rules and five positive/negative tests, original603 oracle/captures/scorer unchanged. Exact-source CI and 77 live rerun required, no publication or production member modifications.
+
+---
+
+## October 28 UTC — 27/72 independent merged current-source parity receipt and scoped queue reconciliation
+
+PR204 exact tested head d51c0a8b3d3b18c79a4e22e1816fd3e50ed7dd6c non-force merged at 7283049dfdb70f37911502a8f915916acb5f4a86 (tested tree unchanged). PR203 #27 earlier merged 986c48e8ad629dcdee31cbacc5f90139e1669d2c. Corrected head PR204 CI seven applicable SUCCESS: 40718601895 approval, 40718601980 security, 40718602092 isolated SQL, 40718601933 cloud/browser/mobile, 40718601960 app/Node/lint/build, 40718602246 visual, 40718602050 private source bundle. Postmerge 40719154070 approval, 40719154389 app/build, 40719154531 cloud UX, 40719153735 visual SUCCESS; controlled exact merged source 77 probe 40719153801 SUCCESS.
+
+Compared parsed selected, conflicts, details and review values for all 77 current official source results with previous live 40709001857: exactly #27 origin restored and its false conflict cleared; #72 noncanonical component credit Guatemala/Huehuetenango ACODIHUE added; 75 other cases identical and zero other canonical output losses. #72 Producer remains blank, no unrelated Marta Solares / La Esperanza. Receipt docs/audits/issue33-27-72-merged-live-acceptance-20261028.json. Verified original private 603 corpus cannot be claimed current-source PASS: 40718601972 SKIPPED by historic branch-only gate; old 3096/81/825 applies to PR190 source. Scoped release queue and register remain TESTING until changed-source original603 and parent authenticated DB E2E; no production writes/deploy, no new cost. Concurrent PR202 remains untouched.
+
+---
+
+## October 28 UTC — PR204 first cloud CI negative-fixture correction (same-commit)
+
+First scoped head ed123962c91d38196d20dfcab7e5a35fc84b4d2a: source security 40718142683, approval 40718142820, private source bundle 40718142825 and isolated SQL 40718142739 passed. Cloud UX run 40718142801 failed exactly one new test: a supposedly generic negative fixture included the *same complete valid selected ACODIHUE source evidence*, so the correct parser emitted the component credit. This was a flawed negative fixture, not proof of a parser defect. Replace that example with roaster education context lacking any selected component credit; preserve all positive source checks and no guess at blend-wide Producer. All exact-source CI must rerun before merge. Original603 hosted workflow 40718142624 skipped, not passed.
+
+---
+
+## October 28 UTC — Owner #27 and #72 scoped implementation staged (CI/merge pending)
+
+Authority: owner explicitly requests fix coffees #27 Great Circle La Josefina Sudan Rume and #72 Thrive Horizon Organic. Development source 6ae7895eadcfc07aeac8661a6974d145af18ed01; Netlify published 6ae0fc16178b2f1241e441f8 from f5f29a02; Supabase ACTIVE_HEALTHY. Concurrent PR202 remains open and untouched.
+
+#27 current roaster URL https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume describes Cayambe-Coca Natural Reserve, Ecuador, producer Leopoldo Andrade / Ligia Merizalde. PR203 previously merged same-reserve Natural/Natura spelling guard; direct current-parser and immutable603 parity still pending.
+#72 current official URL https://thrivefarmers.com/products/horizon-organic describes Guatemala/Nicaragua, Huehuetenango(GT)/Matagalpa(NI), Medium roast, Washed, Caturra/Pache Verde, elevation 1750masl, Fruity/Toasted Cereal/Chocolate. It names ACODIHUE as a producing community only in the Guatemalan component narrative. Later Marta Solares/La Esperanza is a separate farmer profile and must never be selected product Producer.
+
+New bounded reusable selected-blend association reader adds only component-qualified roaster_details.blend_components, a visible Producer review note, and source-linked component_producer review fact. It leaves whole-blend canonical Producer blank and never claims the Nicaraguan component. Tests cover #27 same-reserve positive and country disagreement negatives; #72 explicit association, wrong product identity, unrelated farmer widget, absent role and persistence-suggestion exclusion.
+
+Scope is TESTING until exact-head CI, fresh public-source cases, immutable original603 changed-source and safe nonforce merge readback. No member, database, original oracle, Netlify release/production, or paid service changed.
+
+---
+
+## October 28 UTC — PR203 reserve-origin fix merged, exact CI readback, scoped TESTING
+
+PR #203 non-force merged at 986c48e8ad629dcdee31cbacc5f90139e1669d2c; exact tested head 6739285c916d4d41cf5c7179ce0cd96b6b8f4f09. Corrected head CI app/build 40714042857, cloud UX 40714042566, private visual 40714042794, isolated SQL 40714042783, approval 40714042578, security 40714042643 and private source bundle 40714042655 SUCCESS. Initial approval 40713629744 failed due missing queue intake; corrected scoped item in same PR, retested SUCCESS. The original603 protected workflow 40714042606 SKIPPED, so new exact-source immutable603 remains unverified; Great Circle live 77 current source replay and real authenticated Add Coffee persistence also pending. Keep DIC-Q-33-same-reserve-selected-origin TESTING, parent #33 IN_PROGRESS. No Netlify deployment, member writes, or prod migrations. Preserve concurrent PR202.
+
+---
+
+## October 28 UTC — Issue33 Great Circle #27 selected origin false-conflict repair staged (PR pending)
+
+Authority: 77-coffee owner review #27 and current selected roaster page, with direct public H1 La Josefina Sudán Rumé / Natural Extended Fermentation, Location "Cayambe-Coca Natural Reserve, Ecuador", country Origin "Ecuador", and secondary Region "Cayambe-Coca Natura Reserve" (one-letter loss). Prior merged-source owner77 job 122888810868 at 0b8e4088 found false origin conflict despite compatible primary location/country. Narrow place comparison only for exact long shared "-Natura(l) Reserve" stem; preserve original literal evidence, do not fuzzy-match competing towns or countries. Add positive current-product fixture and independent negative geography assertions in tests/coffee-issue33-selected-fact-compatibility.test.mjs. Code/test are development-only, not yet CI-verified or merged; original 603 changed-source and full 77 decision parity still pending. Concurrent PR #202 modifies different parser helper and new tests; preserve it and reconcile before integration. No member/provider data, original frozen corpus, Netlify publication, or production SQL edited.
 
 ---
 

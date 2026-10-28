@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "scope": "Coffee #27 Great Circle and #72 Thrive targeted current selected source verification; not all 77 individually approved or frozen603",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "merged_source_sha": "7283049dfdb70f37911502a8f915916acb5f4a86",
+  "pr": 204,
+  "pr_head_sha": "d51c0a8b3d3b18c79a4e22e1816fd3e50ed7dd6c",
+  "previous_live_probe": {
+    "run": 40709001857,
+    "job": 122888810868,
+    "attempted": 77,
+    "parsed": 77
+  },
+  "current_live_probe": {
+    "run": 40719153801,
+    "job": 122924969608,
+    "attempted": 77,
+    "parsed": 77,
+    "preview_visible": 77,
+    "all_source_requests_public": true,
+    "member_requests": 0,
+    "production_writes": 0
+  },
+  "exact_comparison": {
+    "compared": 77,
+    "changed": [
+      {
+        "number": 27,
+        "changed_keys": [
+          "selected",
+          "conflicts"
+        ]
+      },
+      {
+        "number": 72,
+        "changed_keys": [
+          "details"
+        ]
+      }
+    ],
+    "unchanged_cases": 75,
+    "other_canonical_field_losses": 0,
+    "prior_conflicts_added": 0
+  },
+  "records": [
+    {
+      "number": 27,
+      "url": "https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume",
+      "html_sha256": "337b62a1ea2de9683fd8e30c0f0626b983255fc90ae8494f6d130a6072d73ac1",
+      "previous_html_sha256": "5f10dac5e24efb7cadd7d66123227672d3c8932b9146a1562c00d613c6157046",
+      "before": {
+        "origin": null,
+        "origin_conflict": true
+      },
+      "after": {
+        "origin": "Cayambe-Coca Natural Reserve, Ecuador",
+        "origin_conflict": false,
+        "producer": "Leopoldo Andrade / Ligia Merizalde"
+      },
+      "review": "CANONICAL_FIELD_PRESENT",
+      "retained_literal_source_facts": [
+        {
+          "field": "origin",
+          "label": "Location",
+          "value": "Cayambe-Coca Natural Reserve, Ecuador",
+          "type": "html",
+          "section": "",
+          "conflicting": false
+        },
+        {
+          "field": "origin",
+          "label": "Origin",
+          "value": "Ecuador",
+          "type": "html",
+          "section": "",
+          "conflicting": false
+        },
+        {
+          "field": "origin",
+          "label": "Region",
+          "value": "Cayambe-Coca Natura Reserve",
+          "type": "html",
+          "section": "",
+          "conflicting": false
+        }
+      ]
+    },
+    {
+      "number": 72,
+      "url": "https://thrivefarmers.com/products/horizon-organic",
+      "html_sha256": "bb99d684af7044f69b232e881ee304ee67e09bb56ddc3bd804cbd2c0b540b08c",
+      "previous_html_sha256": "a208b11cddfcc5f8874f588fc80dd14e39d76625a121648fca12aa1936f193a9",
+      "before": {
+        "blend_components": null
+      },
+      "after": {
+        "blend_components": "Guatemala (Huehuetenango): ACODIHUE (named producing community; component only)",
+        "producer": null,
+        "origin": "Huehuetenango(GT) / Matagalpa(NI), Guatemala / Nicaragua"
+      },
+      "preview": "Named Guatemalan component association shown only in noncanonical context and visible producer review warning; no whole-blend Producer autofill",
+      "other_farm_profile_not_used": true
+    }
+  ],
+  "tests": {
+    "pr203_exact_head": [
+      40714042578,
+      40714042643,
+      40714042783,
+      40714042566,
+      40714042857,
+      40714042794,
+      40714042655
+    ],
+    "pr204_corrected_exact_head": [
+      40718601895,
+      40718601980,
+      40718602092,
+      40718601933,
+      40718601960,
+      40718602246,
+      40718602050
+    ],
+    "merge_exact_source": [
+      40719154070,
+      40719154389,
+      40719154531,
+      40719153735,
+      40719153801
+    ],
+    "frozen603": "NOT RUN: historical secure workflow 40718601972 SKIPPED on this PR head; old PR190 603/603 does not apply to current changed source",
+    "genuine_signed_in_auth_database": "NOT RUN; no test credentials or member rows were modified"
+  },
+  "release": "TESTING_NOT_READY_NOT_DEPLOYED",
+  "original603_oracle_modified": false,
+  "production_writes": 0,
+  "netlify_deploys": 0
+}
