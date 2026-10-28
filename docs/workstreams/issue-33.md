@@ -1,3 +1,19 @@
+## October 28 UTC — Kona queue approval CI repair
+
+PR183 first exact-source approval workflow 40622781642 failed at queue validation: the newly added test file was mistakenly included in the `scope_paths` list, which accepts only deployable code paths. Removed the test from scope metadata and retained it under test evidence, as required. New exact-source CI required. No production, data or security changes.
+
+---
+
+## October 28 UTC — Owner Kona roast-specific printed notes approval, Issue #33
+
+**Authority:** Owner explicitly approved Kona Earth 100% Kona Classic source interpretations and said to ignore general coffee notes in favor of the more specific information for each roast level. Later asked to proceed to next coffee. No publication authorized.
+
+**Scoped code:** `src/server/coffee-roast-variants.mjs` now recognizes verified current Shopify purchase options labelled Roast Profile, canonicalizes `Medium Dark (Full City)` to Medium-Dark, and pairs them with bounded, explicitly labelled `Tasting Notes by Roast` lines. Green Unroasted never becomes a roast option. Generic product taste description cannot populate a differently roasted version. Existing narrative Ketch parsing remains untouched. `src/server/coffee-shopify-ajax.mjs` clears generic flavor/default roast until the purchased roast is chosen, preserving a genuine independent multi-spec conflict. New source-backed 2026-10-27 Kona tests assert three correct flavor lists, no Green option, no automatic roast and no review photos, safe missing-detail behavior and no unsupported global flavor. Frozen original603 unchanged. Existing Cloud, member, privacy and offline systems are not intentionally altered.
+
+**Acceptance:** TESTING; no exact-source CI or merge claimed. Next run GitHub exact-source Node/cloud/browser/visual checks, repair failures, non-force merge/readback and queue update. Do not alter production or original corpus.
+
+---
+
 ## October 27, 2026 — Owner manual review Coffee 1/77 (44 North Honduras COMSA): RESOLVED SOURCE GAP
 
 **Owner decision:** Original 603-corpus canonical `process` expected Water Process decaffeination, but this is a different operation from pre-decaffeination green-coffee cherry Processing. Roaster does not publish primary processing. Do not invent it. Keep canonical Process blank; preserve Water Process under the separately approved Decaffeination Method (#180, READY/NOT DEPLOYED); flag source-unspecified primary process informatively. Owner considers genuinely unpublished fields closed, rather than ongoing extractor failures.

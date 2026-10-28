@@ -155,8 +155,11 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  // Two offered roast preparations are options, not contradictory products.
  // Do not erase an unrelated direct printed specification conflict.
  if(roast_variants.length>1){
-  if(!policy.specs.roast_level.length){delete fields.roast_level;conflicts.delete('roast_level');}
-  if(!policy.specs.tasting_notes.length){delete fields.tasting_notes;conflicts.delete('tasting_notes');}
+  // An available default variant and generic product flavor are not the
+  // user's selected roast. More-specific purchased-roast profiles take
+  // precedence; a genuine independent pair of direct spec conflicts stays.
+  if(policy.specs.roast_level.length<=1){delete fields.roast_level;conflicts.delete('roast_level');}
+  if(policy.specs.tasting_notes.length<=1){delete fields.tasting_notes;conflicts.delete('tasting_notes');}
  }
  // Preserve the published raw stages/method in source facts. Do not create
  // unverifiable fermentation-oxygen claims or overwrite stored member data.

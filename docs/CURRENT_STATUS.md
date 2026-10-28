@@ -1,3 +1,9 @@
+## October 28 UTC — Owner-approved Kona per-roast tasting notes (TESTING, NOT DEPLOYED)
+
+Current development contains Ketch's purchased-roast UI; Kona Earth also provides explicitly labelled `Tasting Notes by Roast` for Medium, Medium Dark (Full City), and Dark. A scoped source branch now teaches the extractor to use each specific list instead of generic product flavor text and excludes Green Unroasted from roasted options. New regressions and full CI/merge pending. Issue33 remains OPEN and immutable original603 replay remains separately unverified; no production publication.
+
+---
+
 ## October 28 UTC — PR179 merged exact current product/roast profiles, TESTING / NOT DEPLOYED
 
 **Owner authority:** Explicit current selected roaster product data beats SEO/archives (fallback only), current Mexico/Peru disagreements require manual review, unitless elevation is meters, rotating origin confirmation only when explicitly labeled; Ketch Light and Medium-Dark bought-roast profiles separated, no review photographs, shared Lempira/producer/origin/process/elevation preserved. No production publication granted.

@@ -1,3 +1,7 @@
+## October 27, 2026 — Specific printed roast notes override generic product flavor (Locked)
+
+**EXTRACTOR-SELECTED-ROAST-PRINTED-NOTES-PRIORITY-20261027:** For the exact selected coffee page with actual offered roast purchase options, an explicitly titled **Tasting Notes by Roast** list outranks the page's general taste narrative. Use only the tasting note line associated with the member's chosen purchasable roast, never fill absent variant flavor from broad copy, silently select a roast, or manufacture a conflict between the roast alternatives. Normalize actual option `Medium Dark (Full City)` to canonical Medium-Dark while retaining its displayed source label; Medium, Medium-Dark, Dark are independent roasted options. Green Unroasted is not a fourth roasted profile. Kona Earth 100% Kona Classic specifics: Medium — Almond, brown sugar, cream, cocoa, apple, jasmine, milk chocolate, orange; Medium Dark (Full City) — Roasted nuts, caramelized sugar, tobacco, bittersweet chocolate, lime; Dark — Molasses and bittersweet chocolate. Keep current common origin/grade, leave unpublished roast-dependent espresso/dose/time or processing/elevation facts blank. The existing no-review-photos and member-edit protection remain locked. **No publication authorized.**
+
 # The Dial In Collective — Master Specification
 
 ## October 26/27, 2026 — Owner-Locked selected-source import defaults and human conflict review
