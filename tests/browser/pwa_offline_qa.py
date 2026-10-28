@@ -121,6 +121,16 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    assert page.locator('.coffee-card').count()==1,'Cached owner cannot reopen after queued shot'
    assert page.get_by_role('button',name='1 Pending',exact=False).count()>0,'Outbox did not survive reload'
 
+   # Issue 22: a failed offline service-worker update cannot consume queued events.
+   before=page.evaluate("window.__app.queue.pending().then(es=>es.map(e=>e.id))")
+   assert len(before)==1
+   page.evaluate("""async()=>{
+    const sw=await navigator.serviceWorker.getRegistration();
+    if(!sw)throw Error('No registered service worker');
+    try{await sw.update();}catch{/* Expected while offline */}
+   }""")
+   after=page.evaluate("window.__app.queue.pending().then(es=>es.map(e=>e.id))")
+   assert after==before,'Offline app update discarded queued shot'
    page.evaluate("localStorage.setItem('dic_fake_owner','b2222222-2222-4222-8222-222222222222')")
    page.reload(wait_until='domcontentloaded')
    page.get_by_text('Reconnect To Continue',exact=True).wait_for(timeout=20000)

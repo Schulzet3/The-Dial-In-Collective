@@ -1,3 +1,9 @@
+## October 28 UTC — Issue #22 offline and account isolation acceptance under test
+
+Owner approved six-scenario automated regression and conditional closure without publication. A fresh browser-reload risk after denied-member IndexedDB cache deletion failure prompted durable owner-scoped offline-denial marker plus cold-reload regression; real built-PWA offline service-worker update test added. Existing Node and isolated signed-JWT PostgREST tests cover stale revisions, lost response, signout/account swap, credential expiration and access denials. Exact-source CI and approval/queue reconciliation pending; no tests or source READY asserted before provider evidence. No production writes or deployment.
+
+---
+
 ## October 28 UTC — Issue #33 FUDAM collection URLs / qualified review export READY; live official77 PASS, NO DEPLOY
 
 Owner-authorized PR216 fixed a real narrow Beanstock exact-current-product source gap: FUDAM association-level "generally washed" is now shown under official direct and collection Shopify product URLs, never silently promoted into canonical lot Process, never carried over to Tolima/Finca Las Flores recycled slug identities. Processing review remains visible and survives member source-review export. New source-focused positive and negative tests and all applicable exact PR-head CI SUCCESS on 3f54c398e47df50ef8abc36928c9eafec6ada8ec: approval 40774376796, app/Node/build 40774376866, cloud/mobile 40774376976, visual 40774376798, security 40774376852, isolated SQL 40774376883, Python 40774376905, private source bundle 40774376784. Initial harness shape failure was repaired and retested on final passing source. Frozen603 restricted workflow 40774376794 explicitly SKIPPED, not passed. Nonforce PR216 merge independently verified at 9250b44a74ab25433db8e3aa635aef1daaf8c7bc; merged CI approval 40774763747, Python 40774763701, cloud/mobile 40774763676, app/build 40774763641 SUCCESS.
