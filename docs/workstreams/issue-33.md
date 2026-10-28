@@ -1734,3 +1734,8 @@ The initial PR208 flavor helper mistakenly generated malformed JavaScript from a
 ## October 28 UTC — PR208 intake enforcement repair
 
 GitHub exact-head approval run 40738983102 rejected untracked new runtime source paths, despite source approval coverage and queue schema passing. Added a scoped TESTING queue row for both new runtime files with the real outstanding changed-source, 603 and hosted-auth gates. Kept all 42 existing queue entries intact. Same-commit journal provided. No code changes, deployment or member writes.
+
+
+## October 28 UTC — 77-coffee traceable decision acceptance evidence matrix (NOT certification)
+
+Captured all 77 individual source rows from actual merged-source GitHub run 40732832637 job 122973423205 and joined to authoritative approved source register with selected current coffee, exact URL, HTML digest, canonical field/value, literal context, conflicts, field warnings and rendered-preview evidence. New docs/audits/issue33-owner77-decision-acceptance-20261028.json deliberately labels each row REQUIRES_INDIVIDUAL_SOURCE_DECISION_CERTIFICATION; this accurate 77-row baseline is NOT a false 77/77 decision PASS. The changed PR208 code has not had an independent 77-site replay, original immutable603 run or genuine hosted member Auth/readback. No deployment or member changes. Same-commit journal updated.
