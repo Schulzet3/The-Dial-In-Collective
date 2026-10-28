@@ -1,3 +1,9 @@
+## October 28 UTC — Original603 PR208 exact-source acceptance independently PASS; owner77 public capture test staged
+
+Both immutable recovered PR207/208 source archives replayed against the original hash-verified 603 oracle: 3104/70/828 -> 3105/68/829, with zero previously exact losses, 6474 supplemental retention unchanged. Fresh 77 live source and actual GoTrue logged-in app still require independent checks. This is source-only development, not a release.
+
+---
+
 ## October 28 UTC — Issue33 PR208 merged, 77-case evidence matrix recorded; NOT fully READY
 
 PR #208 non-force merged at 4ba6cc383fb391a0d3a3d4c05fde87b3922cdd22, code/test journal and queue intake validated with exact PR-head app/build, cloud/mobile, private visual, SQL, security, approval and source-bundle GitHub jobs SUCCESS. New source-bound selected COMSA producer and Woodshed Ethiopian flavor heuristics have positive/negative test coverage. This is not a verified real 77-live changed-source comparison or immutable original603 changed-source acceptance: original protected corpus job SKIPPED. Source reads remain unverified on actual authenticated hosted app and no permitted disposable GoTrue identity/session was available. `docs/audits/issue33-owner77-decision-acceptance-20261028.json` now has one accurate diagnostic row per approved coffee, not falsely 77 certified; 77 official pages parsed and 77 previews rendered on previous merge SHA 961c9f54, with 18 field-present, 11 context-only, 5 conflicts, 43 blanks/unextracted. Parent Issue #33 remains IN_PROGRESS, new scoped PR208 item TESTING, and nothing was deployed. No real member data modified.

@@ -93,4 +93,14 @@ jobs:
         with:
           node-version: '22'
       - name: Audit all 77 owner decisions against current official page and Add Coffee preview
+        env:
+          DIC_OWNER77_PUBLIC_CAPTURE_DIR: ${{ runner.temp }}/dic33-owner77-public-sources
         run: node scripts/audit/issue33-owner77-evidence-probe.mjs
+      - name: Retain bounded selected public HTML and 77-row actual parser readback for independent owner decision certification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-owner77-current-public-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-owner77-public-sources/
+          if-no-files-found: error
+          retention-days: 1
