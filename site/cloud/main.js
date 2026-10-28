@@ -884,6 +884,10 @@ class CloudApp {
     sheet.close();this.notice='Setup Name saved.';this.render();
    }
    else if(id==='new-coffee'){
+     const originCheck=form.querySelector('#coffee-rotating-origin-confirmed');
+     if(originCheck&&this.coffeeUrlPreviewInput===String(d.source_url||'').trim()&&
+        (!originCheck.checked||!String(d.origin||'').trim()))
+      throw new Error("Confirm this explicitly rotating coffee's current origin before adding it.");
      // Lookup is read-only. No near-match is ever merged without confirmation.
      const matched=await this.inSession(()=>this.client.findCoffeeMatches(d));
      const choice=nextCoffeeAction(matched);

@@ -10,6 +10,7 @@ import {reconcileCoffeeProcessingClaims,mergeCoffeeProcessingClaims} from './cof
 // A response must identify the exact handle on the supplied product URL.
 import {safeCoffeeUrl,fetchPublicCoffeeJson,MAX_HTML_BYTES,coffeeProductHandle} from './coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from './coffee-page-metadata.mjs';
+import {explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 
 const norm=coffeeIdentityKey;
 export function shopifyProductRequest(raw){
@@ -148,6 +149,7 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  const details={...result.roaster_details};
  if(policy.processCaption&&!details.processing_detail)details.processing_detail=policy.processCaption;
  return {...result,fields,available:Object.keys(fields),source_facts,
+  ...(explicitlyRotatingCoffeeOrigin(description)?{origin_confirmation_required:true}:{}),
   ...(Object.keys(details).length?{roaster_details:details}:{}),
   ...(conflicts.size?{conflicts:[...conflicts].sort(),conflict_options}:{conflicts:undefined,conflict_options:undefined}),
   ...(current_spec_fields.length?{current_product_spec_fields:current_spec_fields}:{}),
@@ -345,6 +347,7 @@ export function mergePublicProductPreview(base,extra){
   if(rows.length)conflict_options[key]=rows;
  }
  const merged={...base,fields,available:Object.keys(fields),
+  ...(base.origin_confirmation_required||extra.origin_confirmation_required?{origin_confirmation_required:true}:{}),
   roaster_details:{...extra.roaster_details,...base.roaster_details},
   source_facts,
   ...(base.source_facts_truncated||extra.source_facts_truncated||source_facts.truncated?{source_facts_truncated:true}:{}),

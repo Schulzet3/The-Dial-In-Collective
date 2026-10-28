@@ -23,7 +23,7 @@ import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevatio
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
-import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence} from './coffee-selected-source-evidence.mjs';
+import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
@@ -1449,6 +1449,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
+  ...(explicitlyRotatingCoffeeOrigin(canonicalProduct)||explicitlyRotatingCoffeeOrigin(p?.description)?{origin_confirmation_required:true}:{}),
   ...(source_facts.length?{source_facts}:{}),
   ...(source_facts.truncated||scopeTruncated||identityScopeTruncatedByFields.has(fields)?{source_facts_truncated:true}:{}),
   ...(fields.producer&&narrativeProducerByFields.has(fields)?{producer_source:'narrative'}:{}),

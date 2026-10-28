@@ -1,3 +1,9 @@
+## October 27 UTC — Owner priority follow-up, exact current product vs archived SEO-only contradiction (TESTING)
+
+Owner explicitly directed that the selected current product page and labeled specifications always supersede archived/SEO values, which are fallback only. Black River Mexico/Peru are both current selected-page claims and MUST both be flagged, never silently selected. Unitless labeled elevation already defaults to meters; rotating origin is not universally mandatory. This source patch permits only a documented all-low-priority archived/SEO conflict to yield to exact selected current product specifications. A direct current opposing reading still blocks auto-fill. Frozen 603 and stored member records untouched. Tests added; exact-source GitHub CI/merge and queue evidence pending. No publish authorization.
+
+---
+
 ## October 27 UTC — Issue33 PR178 complete: six original603 source recoveries READY / NOT DEPLOYED
 
 **Integration and tests:** PR178 non-force merged at `b0de5a8432442d58f124c3cceddb86e3bed4ed08`, first parent `7916aadfe5e8c3f93b43abd3d0094932ab30b889`, tested feature head `0e5d69e208d99d14a590437d401ca3f6b5190a8c`, identical Git tree `96fd2340abaa4fd8008eadebf563796c73feb254`. Exact PR-head app/build 40586627900, cloud/mobile 40586627949, source security 40586628043, isolated SQL 40586627927, visual/packaged-browser 40586628047, approval 40586627881 all SUCCESS. Exact merged app/build 40586968991, cloud/mobile 40586968841 and approval 40586968902 SUCCESS. Restricted private-hosted original603 40586627934 SKIPPED; independent original 603 actual-handler full replay PASS. Merged live URL checks 40586968907/40586968983 SKIPPED, no fresh live URL claim.
