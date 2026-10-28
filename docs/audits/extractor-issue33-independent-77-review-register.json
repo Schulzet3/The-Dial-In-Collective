@@ -171,30 +171,31 @@
       "original_coffee": "Colombia FUDAM La Union",
       "original_product_url": "https://beanstockcoffee.com/products/colombian-supremo-organic",
       "original_missing_claim": "Processing: Washed",
-      "reverse_chat_assessment": "Reused product URL: historical FUDAM La Union differs from currently displayed Tolima Suave and other indexed identities. Do not transfer old Washed/producer facts into a different selected product.",
+      "reverse_chat_assessment": "Reused product URL: prior official snapshot showed Tolima Suave, but direct official HTML 2026-10-28 now names FUDAM LA Union. Direct selected product outranks historical indexed identities. Current HTML extraction did not yield a primary process; preserve blank, do not transfer Washed from an older capture.",
       "risk_flags": [
         "REUSED_IDENTITY",
-        "SOURCE_CURRENT_UNCONFIRMED"
+        "LIVE_SELECTED_FUDAM_PROCESS_UNVERIFIED"
       ],
       "review_track": "FORWARD_EXCLUSIVE_NEXT_REVIEW",
       "owner_authority": "PRIOR_CHAT_REVIEW_NOTE",
-      "owner_review_status": "RESOLVED_SOURCE_GAP_ON_OBSERVED_CURRENT_OFFICIAL_SNAPSHOT",
+      "owner_review_status": "SOURCE_REOPENED_LIVE_IDENTITY_CHANGED_PROCESS_UNVERIFIED",
       "current_official_source": {
-        "status": "OFFICIAL_SELECTED_TOLIMA_PAGE_SNAPSHOT_PROCESS_UNPUBLISHED",
-        "checked": "2026-10-28",
+        "status": "DIRECT_LIVE_FUDAM_PROCESS_UNEXTRACTED",
+        "checked": "2026-10-28T05:34:20Z",
         "url": "https://beanstockcoffee.com/products/colombian-supremo-organic",
-        "method": "PUBLIC_OFFICIAL_PAGE_CRAWLED_TWO_MONTHS_AGO_NOT_DIRECT_LIVE_API",
-        "finding": "Official product URL currently indexed as New!! Colombia Organic Tolima Suave with Medium roast, caramel/milk chocolate/Honey Crisp Apple, Cafe Tolima Suave association of 154 growers in Planadas Tolima; published page omits primary process. Original master expected FUDAM La Union Washed from an older coffee at this reused URL; no FUDAM or Washed may be copied. Product-specific current field absent, leave process blank. Live Shopify .js endpoint could not be retrieved."
+        "method": "LIVE_GITHUB_DNS_PINNED_OFFICIAL_HTML_40638754513",
+        "html_sha256": "acc0ae03f45cfc7f030c40059397a81fd8bb37c3989e929b8ae3f79809f1f063",
+        "finding": "Live official selected H1 New!! Colombia Fair Trade Organic FUDAM LA Union; Colombia, Medium, FUDAM producer and carmelized sugar/dark chocolate as parsed. Prior official Tolima Suave snapshot was stale. Live Shopify JSON not_html. No primary processing extracted from current direct selected HTML; original Washed expectation remains unconfirmed. Do not infer, copy historical values, or claim complete source process review."
       },
       "implementation_status": "EXISTING_SELECTED_PRODUCT_HANDLER_FOCUSED_REGRESSION_NO_NEW_CODE",
       "tests": {
-        "focused": "PASS: Beanstock same-country reused slug / stale SEO negative current-product fixture, scoped Node 33/33.",
+        "focused": "PASS: Beanstock same-country reused slug / stale SEO negative current-product fixture, scoped Node 33/33. Live direct selected HTML probe 40638754513 fetched FUDAM not cached Tolima; staged opposite-identity negative regression to be tested on new exact source.",
         "original603": "NOT_RUN_ON_NEW_SOURCE",
         "built_app": "NOT_RUN_FOR_THIS_CASE"
       },
       "merged_sha": null,
-      "release_status": "REVIEW_RESOLVED_SOURCE_ABSENT_NO_DEPLOYABLE_CHANGE",
-      "blocking_evidence": "Page snapshot was crawled two months earlier and is not a verified live Shopify current endpoint; new product replacement must be rechecked by future user import; do not populate historical FUDAM Washed."
+      "release_status": "PROCESS_UNVERIFIED_CURRENT_SOURCE_PENDING",
+      "blocking_evidence": "Original Process: Washed is not directly verified for the now-current selected FUDAM product; live parser did not extract processing. Re-review selected product for an actual explicit primary process, otherwise leave blank and mark genuine absence. Shopify Ajax JSON not_html; historical Tolima snapshot stale."
     },
     {
       "number": 7,
@@ -2069,11 +2070,12 @@
       "owner_authority": "OWNER_APPROVED_FROM_REVERSE_HANDOFF",
       "owner_review_status": "OWNER_DECISION_RECORDED_IN_HANDOFF",
       "current_official_source": {
-        "status": "CURRENT_OFFICIAL_SELECTED_SOURCE_SUPPORTED",
-        "checked": "2026-10-28",
-        "finding": "Current exact Horizon Organic page: Medium, Fruity/Toasted Cereal/Chocolate, Guatemala/Nicaragua, Huehuetenango(GT)/Matagalpa(NI), Washed, Caturra/Pache Verde, 1750masl; ACODIHUE is Guatemalan coffee community only. Unrelated Marta Solares biography later on page must not be confused with selected coffee.",
+        "status": "DIRECT_LIVE_SELECTED_FIELDS_CONFIRMED_NO_PROFILE_PRODUCER_CONTAMINATION",
+        "checked": "2026-10-28T05:34:20Z",
+        "finding": "Current exact Horizon Organic page: Medium, Fruity/Toasted Cereal/Chocolate, Guatemala/Nicaragua, Huehuetenango(GT)/Matagalpa(NI), Washed, Caturra/Pache Verde, 1750masl; ACODIHUE is Guatemalan coffee community only. Unrelated Marta Solares biography later on page must not be confused with selected coffee. NEW INDEPENDENT DIRECT LIVE SOURCE: selected Horizon Organic full official HTML parsed Medium, Washed, listed mixed regions/varieties/elevation/tasting notes; unrelated 'Meet Marta Solares' profile PRESENT but parser did not attribute producer La Esperanza (producer left blank). ACODIHUE component relationship still needs verified built-app representation; a prior synthetic source contamination edge case remains under investigation.",
         "url": "https://thrivefarmers.com/products/horizon-organic",
-        "method": "PUBLIC_ROASTER_HTML_RETRIEVAL_NOT_LIVE_ENDPOINT_PROOF"
+        "method": "LIVE_GITHUB_DNS_PINNED_OFFICIAL_HTML_40638754513",
+        "html_sha256": "b9ae99de581921ae84d4fd094c901ded244ab41a2e8348cf265af6762e506485"
       },
       "implementation_status": "NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE",
       "tests": {
@@ -2083,7 +2085,7 @@
       },
       "merged_sha": null,
       "release_status": "NOT_READY_AS_INDIVIDUAL_CASE",
-      "blocking_evidence": "Exact current product provenance and exact-source implementation/acceptance not yet verified"
+      "blocking_evidence": "Current live HTML selected fields match owner approved data without La Esperanza contamination; must independently regression-test the synthetic off-product profile edge case and component-specific ACODIHUE representation in the built app, plus real authenticated save. Do not assign La Esperanza."
     },
     {
       "number": 73,

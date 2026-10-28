@@ -26,8 +26,8 @@ test('canonical owner approvals stay distinct from bounded individual source fix
    }
    else if(r.number===6){
     assert.equal(r.implementation_status,'EXISTING_SELECTED_PRODUCT_HANDLER_FOCUSED_REGRESSION_NO_NEW_CODE');
-    assert.equal(r.release_status,'REVIEW_RESOLVED_SOURCE_ABSENT_NO_DEPLOYABLE_CHANGE');
-    assert.match(r.current_official_source.status,/TOLIMA_PAGE_SNAPSHOT_PROCESS_UNPUBLISHED/);
+    assert.equal(r.release_status,'PROCESS_UNVERIFIED_CURRENT_SOURCE_PENDING');
+    assert.match(r.current_official_source.status,/DIRECT_LIVE_FUDAM_PROCESS_UNEXTRACTED/);
     assert.match(r.current_official_source.finding,/FUDAM/);
    }else if([7,9].includes(r.number)){
     assert.ok(imageScope,'Image roast enhancement must have distinct release-queue row');
@@ -55,7 +55,30 @@ test('review tracks cannot overlap and raw product identity cannot be substitute
  assert.equal(forward.at(-1)+1,reverse[0]);
  const reused=register.records[5];
  assert.match(reused.current_official_source.finding,/Tolima/);
- assert.match(reused.current_official_source.status,/TOLIMA_PAGE_SNAPSHOT_PROCESS_UNPUBLISHED/);
+ assert.match(reused.current_official_source.status,/DIRECT_LIVE_FUDAM_PROCESS_UNEXTRACTED/);
  assert.match(reused.current_official_source.finding,/FUDAM/);
- assert.match(reused.blocking_evidence,/not a verified live Shopify/i);
+ assert.match(reused.blocking_evidence,/Washed/);
+});
+
+test('current direct source receipt pins exact 3 official product identities without granting all-77 acceptance',()=>{
+ const evidence=JSON.parse(readFileSync(new URL('../docs/audits/issue33-direct-current-source-probe-20261028.json',import.meta.url)));
+ assert.equal(evidence.source_probe_run,40638754513);
+ assert.equal(evidence.summary.total,3);
+ assert.equal(evidence.summary.direct_html_fetched,3);
+ assert.equal(evidence.summary.shopify_json_usable,0);
+ assert.equal(evidence.summary.production_writes,0);
+ const bean=evidence.attempts.find(x=>x.id===6);
+ const thrive=evidence.attempts.find(x=>x.id===72);
+ const cortez=evidence.attempts.find(x=>x.id==='Cortez');
+ assert.match(bean.html.fields.name,/FUDAM LA Union/);
+ assert.doesNotMatch(JSON.stringify(bean.html.fields),/Tolima|Washed/);
+ assert.equal(bean.html.source_sha256,register.records[5].current_official_source.html_sha256);
+ assert.equal(thrive.html.contains_other_farmer_profile,true);
+ assert.equal(thrive.html.possible_cross_profile_producer,false);
+ assert.equal(thrive.html.fields.producer,undefined);
+ assert.match(cortez.html.fields.name,/ethiopia guji benti neka/i);
+ assert.match(cortez.html.fields.origin,/Ethiopia/);
+ assert.equal(cortez.html.fields.process,'Washed');
+ assert.equal(releaseQueue.items.find(x=>x.pr===189).state,'READY');
+ assert.equal(register.records.filter(x=>x.owner_review_status.startsWith('RESOLVED_')).length,8);
 });
