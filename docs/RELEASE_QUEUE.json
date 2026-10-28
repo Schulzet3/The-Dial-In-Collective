@@ -2112,8 +2112,8 @@
       "issue": 26,
       "pr": 221,
       "title": "Retain keyboard focus through coffee and search redraws and verify responsive/accessibility UI",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c30636fec07d5dcbbb353c0310306a44dc1cc763",
       "scope_paths": [
         "site/cloud/main.js",
         "scripts/pwa/service-worker.template.txt"
@@ -2123,17 +2123,28 @@
         "Issue26 Chromium acceptance uses actual site JS/CSS with synthetic account: keyboard sign-in, Search/Sort and coffee focus, modal Tab/ShiftTab, touch sizes, invalid measurements and five ratings, light/dark contrast, reduced-motion, seven viewport/orientation geometries, one saved shot and recommendation.",
         "Requires new exact-source Node, lint, build, browser/visual, SQL, security and approval CI, non-force merge and source readback.",
         "Visual QA run40786978447 FAILED real service-worker upgrade cold offline reload: older worker lost its still-needed public-shell cache during new worker activation. Repair defers stale public-shell deletion while any older-controlled window exists and retries only after all clients use the new worker.",
-        "New Node service-worker lifecycle test validates protected legacy cache; real Chromium offline reload and pending shot preservation required after fix."
+        "New Node service-worker lifecycle test validates protected legacy cache; real Chromium offline reload and pending shot preservation required after fix.",
+        "All six applicable PR-head workflows completed SUCCESS on bd2c1374c4d9a720a5f5ce705ffbbe25bcfccf7f: full Node/lint/build 40787849664 (1919 PASS, 0 FAIL, 6 explicit SKIP), cloud/mobile 40787849651, real Chromium visual/PWA 40787849643, isolated SQL signed-bearer HTTP 40787849708, security 40787849652, approval 40787849645. Unrelated frozen coffee source corpus SKIPPED as configured.",
+        "Real Chromium visual run 40787849643 verifies 78 focused keyboard, dialog, touch-target, layout, selected light/dark contrast and reduced-motion checks; saved-shot -> recommendation; offline queue survives actual service-worker cache version update and cold offline reload. No real screen-reader/VoiceOver or physical iPhone claim.",
+        "Non-force PR221 merged c30636fec07d5dcbbb353c0310306a44dc1cc763; merged tree 52067345721252e44977e85b1e02a62cdab19dab IDENTICAL to tested PR head tree. Independent merged-source approval 40788152583, cloud/mobile 40788152750, visual/PWA 40788152642 and Node/lint/build 40788152600 all SUCCESS."
       ],
       "ci_runs": [
         40785496790,
-        40786978447
+        40786978447,
+        40787849645,
+        40787849652,
+        40787849708,
+        40787849651,
+        40787849643,
+        40787849664,
+        40788152583,
+        40788152642,
+        40788152750,
+        40788152600
       ],
-      "blockers": [
-        "Repaired code must pass fresh exact-source CI and merge/readback before READY."
-      ],
+      "blockers": [],
       "owner_source": "Owner October 28, 2026 request to complete remaining Issue #26 accessibility, responsive, keyboard, dialog, error and visual regression tests; GitHub Issue #26.",
-      "notes": "Synthetic Chromium is not native VoiceOver or a physical-device guarantee. Locked colors, no text effects, approved style, member data, outboxes and provider configuration unchanged. No production publication authorized."
+      "notes": "Synthetic Chromium is not native VoiceOver or a physical-device guarantee. Locked colors, no text effects, approved style, member data, outboxes and provider configuration unchanged. No production publication authorized. Verified READY for source-only scope after exact-source CI, non-force merge and byte-for-byte tree readback. Does NOT mean deployed, native VoiceOver certified or all badge color contrast WCAG AA. Existing palette Locked; known badge contrast caveat preserved, no color changes. Full browser storage loss limitations still apply."
     }
   ],
   "history": [

@@ -1918,5 +1918,39 @@
     ],
     "unpublished_concurrent_pr": 220,
     "broader_issue33": "IN_PROGRESS"
+  },
+  "issue26_accessibility_and_pwa_acceptance_20261028": {
+    "issue": 26,
+    "source_authority": "Owner 2026-10-28 direct instruction to continue automated UI accessibility/responsive acceptance; Issue #26",
+    "status": "READY_SOURCE_NOT_DEPLOYED",
+    "tested_head": "bd2c1374c4d9a720a5f5ce705ffbbe25bcfccf7f",
+    "merge_sha": "c30636fec07d5dcbbb353c0310306a44dc1cc763",
+    "identical_tree_sha": "52067345721252e44977e85b1e02a62cdab19dab",
+    "runtime_scope": [
+      "site/cloud/main.js",
+      "scripts/pwa/service-worker.template.txt"
+    ],
+    "tests": [
+      "78 Chromium synthetic-account checks spanning keyboard/dialogs/validation/sensory ratings/touch/contrast/reduced motion/responsiveness/offline/empty/one-shot recommendation",
+      "Actual Chromium PWA upgrade and offline cold reopen with pending shot",
+      "Node 1919 PASS, 0 FAIL, 6 explicit SKIP; lint/build SUCCESS; signed-JWT isolated SQL, security and approval workflows SUCCESS"
+    ],
+    "pr_ci_runs": [
+      40787849664,
+      40787849643,
+      40787849651,
+      40787849708,
+      40787849652,
+      40787849645
+    ],
+    "merged_ci_runs": [
+      40788152600,
+      40788152750,
+      40788152642,
+      40788152583
+    ],
+    "preserved": "Owner Locked palette, text effects, shot history/notes, offline outbox, Auth, data and privacy; no publication.",
+    "limits": "No native VoiceOver, physical Safari, device safe-area or blanket WCAG certification. Known badge color contrast caveat remains.",
+    "queue_item_id": "DIC-Q-26-keyboard-dialog-responsive-regression"
   }
 }
