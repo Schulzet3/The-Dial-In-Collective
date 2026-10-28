@@ -1,3 +1,9 @@
+## October 28 UTC — preflight correction to earlier test harness patch
+
+GitHub readback showed the first attempted regex replacement did not apply to the exact script source. A line-specific correction now accepts the production build's JSON-quoted key. The prior queued run remains untrusted for successful auth testing until this corrected source runs; preserve failures as evidence. No source deployment.
+
+---
+
 ## October 28 UTC — first genuine hosted CI failure repaired before account writes
 
 Actual GitHub run 40766285634 job 123091192491 reached hosted script and failed on preliminary config parsing before GoTrue signup or database writes. Cause: production build serializes `publishableKey` as a quoted JSON property, while the test harness expected an unquoted JavaScript property. Corrected parser to accept both JSON/JS forms, and made database URL explicitly passed via psql `-d`. This is a test harness fix; first run is FAILED, not evidence of hosted authentication or saved coffees. Repeat exact-source CI. No publication or existing private data mutation.

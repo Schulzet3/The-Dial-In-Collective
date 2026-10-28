@@ -82,7 +82,7 @@ def main():
     require(os.environ.get("SUPABASE_DB_URL"),"BLOCKED: existing SUPABASE_DB_URL Actions secret is unavailable")
     stage="read public live configuration"
     raw=urllib.request.urlopen(SITE+"/cloud/config.js",timeout=20).read().decode()
-    m=re.search(r"publishableKey\s*:\s*['\"]([^'\"]+)['\"]",raw)
+    m=re.search(r"""["']?publishableKey["']?\s*:\s*["']([^"']+)["']""",raw)
     require(m and m.group(1).startswith(("sb_publishable_","eyJ")),"Published app public config not readable")
     key=m.group(1)
     stage="read-only database connection"
