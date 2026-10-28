@@ -79,6 +79,22 @@ begin
   and proposed_data->>'is_decaf'='true'
   and proposed_data->>'decaffeination_method'='Water Process') then
   raise exception 'Older client omitted fields erased pending decaf method';end if;
+ select revision into rev from public.coffee_submissions where id=sid;
+ perform set_config('request.jwt.claim.sub',u1::text,true);
+ execute 'set local role authenticated';
+ denied:=false;
+ begin perform public.dic_edit_my_coffee(lid,rev,
+  '{"name":"Synthetic Decaf Acceptance","roaster":"Release08 Fixture","is_decaf":"true"}'::jsonb,null);
+ exception when invalid_parameter_value then denied:=true;end;
+ if not denied then raise exception 'String decaf flag accepted';end if;
+ resp:=public.dic_edit_my_coffee(lid,rev,
+  '{"name":"Synthetic Decaf Acceptance","roaster":"Release08 Fixture","is_decaf":false}'::jsonb,null);
+ if resp->>'ok'<>'true' then raise exception 'Explicit regular correction rejected';end if;
+ execute 'reset role';
+ if not exists(select 1 from public.coffee_submissions where id=sid
+  and proposed_data->>'is_decaf'='false'
+  and proposed_data->>'decaffeination_method' is null) then
+  raise exception 'Explicit regular correction retained stale method';end if;
  -- Administrator corrections retain revision checks and protected audit.
  select revision into rev from public.coffees where id=cid;
  perform set_config('request.jwt.claim.sub',admin_id::text,true);

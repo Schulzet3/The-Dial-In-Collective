@@ -157,6 +157,13 @@ begin
   if p_expected_revision<>sub.revision then
    return jsonb_build_object('ok',false,'code','conflict','revision',sub.revision);
   end if;
+  -- Old clients omit both additive keys. Preserve previously submitted
+  -- decaf details when updating an existing canonical correction too.
+  if not (p_details ? 'is_decaf' or p_details ? 'decaffeination_method') then
+   clean:=clean||(select coalesce(jsonb_object_agg(e.key,e.value),'{}'::jsonb)
+    from jsonb_each(sub.proposed_data) e
+    where e.key in ('is_decaf','decaffeination_method'));
+  end if;
   update public.coffee_submissions set proposed_data=clean,source_url=url_text,
    base_coffee_revision=canonical.revision where id=sub.id returning id into updated_id;
  else
