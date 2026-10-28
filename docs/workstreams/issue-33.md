@@ -1,3 +1,14 @@
+## October 28 UTC — ACTUAL hosted disposable-member GoTrue + Add Coffee E2E PASSED (NO DEPLOY)
+
+Owner authorized all four previously unverified parent #33 acceptance items. GitHub workflow **40767700050**, job **123096196386**, source **8d27bd940e903d8aa087dfbe6f922598d4730f20**, independently inspected: **SUCCESS**. On real currently deployed https://app.dialincollective.com using a unique disposable identity, it tested live GoTrue signup, password login, authenticated /user, session refresh and logout; real invitation denial before redemption, invalid-code denial, one-use beta invite redemption and admission; live 390px Chromium browser sign-in, new setup creation, Add Coffee with real "Use Existing" identity confirmation for an already verified public coffee; page reload and fresh signed-in reopen, sign-out, new password sign-in, and fresh RPC state read. Actual production PostgreSQL committed-row readback confirmed the precise owner's library entry and selected existing canonical coffee ID, with **no new shared catalog coffee** created. Test succeeded after fixing test harness assumptions/selectors; prior unsuccessful runs are recorded below, not mislabeled as passes.
+
+**Boundaries:** This verifies actual deployed published Auth + member Add Coffee persistence, not deployment of the READY source-priority PR211 changes. The test used explicit owner-scoped database email confirmation for a throwaway identity; a real confirmation-email click, password reset email delivery/completion and other untested Auth branches are **NOT PASSED**. The disposable beta member was disabled after the run. Read-only provider cleanup receipt: 5 labeled test auth accounts total, 0 enabled test beta members, 1 test-owned setup, 1 test-owned library entry. Test records remain intentionally for audit; do not delete without proper backup/safety authorization. Production real-member data, shots, notes and shared coffee catalog were not altered by this test.
+
+Parent Issue #33 stays OPEN for historical residual source accuracy, which the owner has explicitly removed as a gate for independently READY generic source priority. The previously missing genuine hosted sign-in and persisted Add Coffee verification is **now fulfilled** with the stated email-confirmation limitation. No application deployment, migrations or member-data deletion. Source-only generic feature remains separately READY.
+
+
+---
+
 ## October 28 UTC — isolate actual hosted Create Setup failure
 
 Actual run 40767394875 completed failure: real GoTrue login and admitted browser opened New Setup, clicked the correct primary Create Setup button, but no Add Coffee was visible after 25s. Independent owner-scoped SQL found zero setup and coffee rows for the test users; all throwaway beta members were disabled. Added bounded, sanitized dialog and toast diagnostics before the next live attempt. Do not claim setup or Add Coffee saved; no deployed source change.
