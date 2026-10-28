@@ -1,3 +1,15 @@
+## October 28 UTC — Full original603 optimized selected context current-source acceptance completed
+
+Independent full original frozen603 actual handler replay **603/603 succeeded** on exact optimized runtime blobs (`coffee-page-metadata` 54129c15, `coffee-selected-context-roles` b3067a79), original 4002 fixed oracle assertions. Before 3105 exact/68 missing/829 review; after **3106 exact/64 missing/832 review**, zero prior exact losses. Exact five output changes (Bleu, two Iconik, Reading, Tandem harvest context); **6474** supplemental preserved 5458 full/337 partial/679 unconfirmed. Full source manifest SHA256 ed43310391303019cd22655adaefaa7ad1e7f1458237249cb0b3ccdd16a07bc1; replay d422a0c2, comparison 6d68bb4c, retention 3d96d455. The earlier incremental proof is historical and superseded by a newly executed actual full603; no original oracle changed. PR210 exact optimized source seven applicable GitHub CI SUCCESS app 40749601508, cloud/mobile 40749601521, visual 40749601668, SQL 40749601496, approval 40749601485, security 40749601419, original source bundle 40749601667. Original restricted GitHub job 40749601813 SKIPPED; actual full603 independently run outside that job. Safe PR merge and merged current77 live recheck pending, true GoTrue member test unverified. No Netlify publication.
+
+---
+
+## October 28 UTC — Issue33 true current-source 77 follow-up selected role repair PR210 TESTING
+
+Owner approved continuation, no deploy. Current merged PR209 readback 384c72b2, original77 real source/preview run40746151200 77/77 SUCCESS. Candidate generic selected-context facts repair #11,#29,#30,#54 and #70 contextual harvest, five adverse regression tests pass. New immutable original603 **incremental** strict score 3105 exact/66 missing/831 review, 0 lost previous exact, 6474 supplement same, see docs/audits/issue33-current-context-roles-regression-20261028.json. The 600 unchanged records are reused with source-eligibility proof, **not** a newly rerun full 603. PR-head CI, live recheck, GoTrue signed-in save/readback and remaining 77 individual acceptance pending; no release.
+
+---
+
 ## October 28 UTC — Original603 PR208 exact-source acceptance independently PASS; owner77 public capture test staged
 
 Both immutable recovered PR207/208 source archives replayed against the original hash-verified 603 oracle: 3104/70/828 -> 3105/68/829, with zero previously exact losses, 6474 supplemental retention unchanged. Fresh 77 live source and actual GoTrue logged-in app still require independent checks. This is source-only development, not a release.
