@@ -22,8 +22,8 @@ def http(url, key=None, token=None, payload=None, method=None):
     except urllib.error.HTTPError as error:
         raise RuntimeError("Hosted request returned HTTP "+str(error.code)+" at "+stage) from None
 def sql(query):
-    env={**os.environ,"PGDATABASE":os.environ["SUPABASE_DB_URL"],"PGCONNECT_TIMEOUT":"8"}
-    out=subprocess.run(["psql","-X","-qAt","-v","ON_ERROR_STOP=1","-c",query],capture_output=True,text=True,env=env,timeout=22)
+    env={**os.environ,"PGCONNECT_TIMEOUT":"8"}
+    out=subprocess.run(["psql","-X","-qAt","-v","ON_ERROR_STOP=1","-d",os.environ["SUPABASE_DB_URL"],"-c",query],capture_output=True,text=True,env=env,timeout=22)
     if out.returncode: raise RuntimeError("Hosted database operation refused at "+stage)
     return out.stdout.strip()
 def api(key,endpoint,payload,token=None):

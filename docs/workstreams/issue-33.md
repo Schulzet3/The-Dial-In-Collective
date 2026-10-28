@@ -1,3 +1,9 @@
+## October 28 UTC — first genuine hosted CI failure repaired before account writes
+
+Actual GitHub run 40766285634 job 123091192491 reached hosted script and failed on preliminary config parsing before GoTrue signup or database writes. Cause: production build serializes `publishableKey` as a quoted JSON property, while the test harness expected an unquoted JavaScript property. Corrected parser to accept both JSON/JS forms, and made database URL explicitly passed via psql `-d`. This is a test harness fix; first run is FAILED, not evidence of hosted authentication or saved coffees. Repeat exact-source CI. No publication or existing private data mutation.
+
+---
+
 ## October 28 UTC — owner-authorized genuine hosted GoTrue/Add Coffee acceptance started, NO DEPLOY
 
 Owner explicitly authorized disposable-member GoTrue sign-in, real Add Coffee save/readback, reopening, and full hosted application authentication workflow. Existing tests were synthetic and cannot satisfy these. Current production Netlify is prior f5f29a02 release; source-only hierarchy PR211 remains independently READY, NOT DEPLOYED. No production app publication approved.
