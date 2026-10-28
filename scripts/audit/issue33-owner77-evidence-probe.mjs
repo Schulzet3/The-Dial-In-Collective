@@ -1,6 +1,7 @@
 // Owner-reviewed 77 independent current official product fact audit.
 // This probe does not authenticate, mutate production or approve a missing fact.
-import {readFileSync} from 'node:fs';
+import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
+import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {fetchPublicCoffeeHtml,safeCoffeeUrl,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
@@ -8,6 +9,8 @@ import {coffeeUrlPreviewMarkup} from '../../site/cloud/coffee-url-autofill.js';
 const rows=JSON.parse(readFileSync(new URL('../../docs/audits/extractor-issue33-independent-77-review-register.json',import.meta.url),'utf8')).records;
 if(rows.length!==77||new Set(rows.map(x=>x.original_product_url)).size!==77||
  rows.some((x,i)=>x.number!==i+1||!safeCoffeeUrl(x.original_product_url)))throw Error('Original 77 URL intake changed');
+const evidenceDir=process.env.DIC_OWNER77_PUBLIC_CAPTURE_DIR||'';
+if(evidenceDir)mkdirSync(evidenceDir,{recursive:true});
 const clamp=(s,n=250)=>String(s??'').replace(/\s+/g,' ').trim().slice(0,n);
 const fieldOf=claim=>/producer/i.test(claim)?'producer':/roast/i.test(claim)?'roast_level':
  /notes?/i.test(claim)?'tasting_notes':/processing/i.test(claim)?'process':
@@ -23,6 +26,10 @@ async function audit(row){
   if(!page?.ok){out.status='UNAVAILABLE';out.reason=clamp(page?.reason);}
   else{
    out.digest=createHash('sha256').update(page.html).digest('hex');
+   // Exact public HTTP response only. Preserve the original page bytes in
+   // a private, short-retention CI artifact for independent decision review.
+   // Never save tokens, member data, cookies or arbitrary linked resources.
+   if(evidenceDir)writeFileSync(join(evidenceDir,'coffee-'+String(row.number).padStart(2,'0')+'.html'),page.html,'utf8');
    const result=extractPublicCoffeeFacts(page.html,{source_url:page.source_url||row.original_product_url});
    if(!result?.ok){out.status='REJECTED';out.reason=clamp(result?.reason);}
    else{
@@ -64,6 +71,20 @@ async function audit(row){
 const all=[];
 for(let i=0;i<rows.length;i+=4)all.push(...await Promise.all(rows.slice(i,i+4).map(audit)));
 const states={};for(const x of all)states[x.review]=(states[x.review]||0)+1;
-console.log('[DIC33 OWNER77 SUMMARY] '+JSON.stringify({attempted:all.length,parsed:all.filter(x=>x.status==='PARSED').length,
+const summary={attempted:all.length,parsed:all.filter(x=>x.status==='PARSED').length,
  states,preview_pass:all.filter(x=>x.preview?.visible&&x.preview?.conflict_warning&&x.preview?.qualified_process_warning).length,
- oracle_edited:false,authenticated:false,database_writes:0,individual_source_certification:false}));
+ oracle_edited:false,authenticated:false,database_writes:0,individual_source_certification:false};
+if(evidenceDir){
+ writeFileSync(join(evidenceDir,'owner77-selected-replay.json'),JSON.stringify({
+  schema_version:1,source_head_sha:process.env.GITHUB_SHA||'unbound_local',
+  source_kind:'BOUNDED_DIRECT_PUBLIC_OFFICIAL_HTTPS_ONLY',
+  confidential_member_data_included:false,immutable603_modified:false,
+  assessment:'SELECTED_PARSER_AND_PREVIEW_DIAGNOSTIC_NOT_ALL77_APPROVAL',
+  summary,records:all
+ },null,2)+'\n','utf8');
+}
+console.log('[DIC33 OWNER77 SUMMARY] '+JSON.stringify(summary));
+if(summary.parsed!==77||summary.preview_pass!==77){
+ console.error('[DIC33 OWNER77 ACCEPTANCE] INCOMPLETE: public source or UI preview failed; inspect private artifact');
+ process.exitCode=1;
+}
