@@ -7,7 +7,7 @@ const parse=(name,body,url='https://example-coffee.com/products/selected')=>
  extractPublicCoffeeFacts('<main><h1>'+name+'</h1>'+body+'</main>',{source_url:url});
 test('VESTA two explicit current labels Region Fresno and Origin Colombia Tolima form a selected tuple',()=>{
  const r=parse('Wush Wush + Papayo','<p>Origin: Colombia, Tolima</p><p>Region: Fresno</p>','https://vestacoffee.com/products/papayo-wushwush-elias-shady-bayter');
- assert.equal(r.ok,true);assert.equal(r.fields.origin,'Fresno, Colombia, Tolima');
+ assert.equal(r.ok,true);assert.equal(r.fields.origin,'Fresno, Tolima, Colombia');
  assert.ok(!r.conflicts?.includes('origin'));
 });
 test('contradictory countries cannot be combined by the region tuple rule',()=>{
@@ -27,10 +27,19 @@ test('different real named producers must still flag conflict',()=>{
  assert.equal(r.fields.producer,undefined);assert.ok(r.conflicts?.includes('producer'));
 });
 test('Peru HB compatible Cocoa Almond notes and broader Chocolate list do not conflict',()=>{
- const r=parse('Peru HB','<p>Flavor: Cocoa, Almond</p><p>Flavor: Cocoa, Almond, Chocolate</p>',
-  'https://lowcountrycoffeeroasters.com/products/peru-hb-1');
+ const url='https://lowcountrycoffeeroasters.com/products/peru-hb-1';
+ const product={'@type':'Product',name:'Peru HB',url,
+  additionalProperty:[{name:'Flavor',value:'Cocoa, Almond, Chocolate'}]};
+ const html='<script type="application/ld+json">'+JSON.stringify(product)+'</script>'+
+  '<main><h1>Peru HB</h1><p>Flavor: Cocoa, Almond</p></main>';
+ const r=extractPublicCoffeeFacts(html,{source_url:url});
  assert.equal(r.ok,true);assert.equal(r.fields.tasting_notes,'Cocoa, Almond');
  assert.ok(!r.conflicts?.includes('tasting_notes'));
+});
+test('independent overlapping Flavor labels remain real conflicts',()=>{
+ const r=parse('Peru HB','<p>Flavor: Cocoa, Almond</p><p>Flavor: Cocoa, Almond, Chocolate</p>');
+ assert.equal(r.fields.tasting_notes,undefined);
+ assert.ok(r.conflicts?.includes('tasting_notes'));
 });
 test('actual different selected tasting lists still require manual review',()=>{
  const r=parse('Ethiopia','<p>Tasting Notes: Raspberry, Cane Sugar, Lemon Zest</p>'+

@@ -1,3 +1,9 @@
+## October 28 UTC — PR200 source regression repaired and queue intake reconciled
+
+First cloud run 40705017317 failed four tests: global flavor-set subset relaxation wrongly suppressed two established independently printed-label conflicts; narrowed rule to directly printed selected Flavor subset outranking *structured Product metadata* only, preserved independent-versus-independent contradiction with new negative. New VESTA test exposed the second origin reconciliation path (typed Region plus untyped country-first Origin) which now uses a printed-components-only tuple in sensible region, state, country order; no gazetteer. New Thrive synthetic test detected uppercase MEET missing due case-sensitive pattern; made heading guard case-insensitive. Approval 40705017187 failure was absent changed-source intake row; now explicitly TESTING in same-commit release queue. None of these failed tests count PASSED until exact-source re-run. No deployment, live member changes or original603 fixture alterations.
+
+---
+
 ## October 28 UTC — PR200 source compatibility approval intake failure repaired (CI retest)
 
 PR200 first exact-head approval workflow 40705017187 FAILED at release-queue --enforce-intake because new `src/server/coffee-product-scope.mjs` was not tracked in a same-scope TESTING queue item; not a runtime extractor failure. Added `DIC-Q-33-selected-source-compatible-roles-and-profile-boundary` with exact three changed app paths, source authority and pending CI/603 acceptance so the queue now tracks every changed application file. No release claim, CI not yet verified; continue full exact-head run and repair any other failing test. All original coffee facts, member data and production unchanged.

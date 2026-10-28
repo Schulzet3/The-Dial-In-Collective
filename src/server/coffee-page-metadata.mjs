@@ -180,6 +180,7 @@ function samePage(raw,target){
  }catch{return false;}
 }
 const conflictsByFields=new WeakMap();
+const structuredFlavorByFields=new WeakMap();
 // Public-only evidence for a member to compare.  Never submit these candidates
 // automatically; canonical fields still use the existing conflict gate.
 const reviewCandidatesByFields=new WeakMap();
@@ -487,11 +488,13 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
   if(afterProse&&!beforeProse)return;
-  if(coffeeTastingNotesSubset(s,fields[key])||coffeeTastingNotesSubset(fields[key],s)){
-   // Additional literal notes on one list do not contradict the compact
-   // current printed list (Peru HB: Cocoa, Almond / Cocoa, Almond, Chocolate).
-   if(coffeeTastingNotesSubset(s,fields[key]))fields[key]=s;
-   return;
+  if(structuredFlavorByFields.get(fields)===fields[key]&&
+   /^(?:flavor|flavour|flavornotes|flavournotes|tastingnotes|notes)$/.test(keyOf(rawKey))&&
+   coffeeTastingNotesSubset(s,fields[key])){
+   // Source hierarchy: a shorter direct selected Flavor label is preferred
+   // to an overlapping longer Product JSON flavor taxonomy; two independently
+   // printed labels remain genuinely contradictory, never merged.
+   fields[key]=s;structuredFlavorByFields.delete(fields);return;
   }
   if(equivalentCoffeeTastingNotes(s,fields[key])){
    if(!/[,;&|•·/]/.test(fields[key])&&/[,;&|•·/]/.test(s))fields[key]=s;
@@ -642,7 +645,18 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
    if(geography.country&&!geography.region&&!otherCountries.length&&geographyParts(combined).every(part=>ORIGIN_COUNTRIES.has(part))){
     combined=origin+', '+geography.country;continue;
    }
-   if((firstCountries.length&&otherCountries.length)||(!geography.country&&!geography.region)||geography.country||
+   if(!geography.country&&geography.region&&!geography.area&&otherCountries.length===1){
+     const printed=String(origin).split(/\s*,\s*/u).filter(Boolean);
+     const first=keyOf(printed[0]||''),last=keyOf(printed.at(-1)||'');
+     const hasFirst=ORIGIN_COUNTRIES.has(first),hasLast=ORIGIN_COUNTRIES.has(last);
+     const region=geographyParts(geography.region);
+     if(printed.length===2&&hasFirst!==hasLast&&region.length>0&&
+      region.every(place=>!ORIGIN_COUNTRIES.has(place))){
+      const ordered=hasFirst?[printed[1],printed[0]]:printed;
+      combined=[geography.region,...ordered].join(', ');continue;
+     }
+    }
+    if((firstCountries.length&&otherCountries.length)||(!geography.country&&!geography.region)||geography.country||
       (geography.region&&otherCountries.length)){
     reject();return;
    }
@@ -1098,6 +1112,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  for(const equivalent of equivalentProducts){
   if(equivalent!==p&&keyOf(textOf(equivalent.name))===identity)productDetails(fields,equivalent);
  }
+ // Track structured-product notes BEFORE processing visible selected labels.
+ // This is not permission to suppress conflicting independently printed labels.
+ if(fields.tasting_notes)structuredFlavorByFields.set(fields,fields.tasting_notes);
  // An actual, literal lot number in the selected Product title is stronger
  // than an inferred harvest based on a URL, SKU, publication date or country.
  // Preserve exact source text; never manufacture release identifiers.

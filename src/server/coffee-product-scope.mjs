@@ -213,7 +213,7 @@ function withoutDetachedFarmerProfiles(page){
  const ranges=[];
  for(const h of headings){
   if(h.start<=h1.start)continue;
-  const m=/^meet\s+([\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,45}){1,3})$/u.exec(value(h));
+  const m=/^meet\s+([\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,45}){1,3})$/iu.exec(value(h));
   if(!m)continue;
   const person=m[1].normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
   if(name.includes(person))continue;
