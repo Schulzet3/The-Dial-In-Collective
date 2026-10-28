@@ -1234,5 +1234,34 @@
       "frozen603": "SKIPPED_PRIVATE_INPUT_BRANCH_GUARD_NOT_PASSED",
       "publication": "NOT_AUTHORIZED"
     }
+  },
+  "COFFEE-DECAF-ONLY-METHOD-20261027": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Oct 27 2026 owner instruction, Issue #180",
+    "canonical_specification": "docs/MASTER_SPECIFICATION.md",
+    "canonical_decision_ledger": "docs/DECISION_LEDGER.json",
+    "scope": [
+      "site/cloud/main.js",
+      "site/cloud/mapping.js",
+      "site/cloud/coffee-url-autofill.js",
+      "site/lib/constants.js",
+      "site/lib/model.js",
+      "src/server/coffee-decaffeination-method.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "supabase/migrations/20261027170000_dic_decaf_only_method.sql"
+    ],
+    "tests": [
+      "tests/coffee-decaffeination-method.test.mjs",
+      "tests/coffee-decaf-app-persistence.test.mjs"
+    ],
+    "exclusions": [
+      "Half-caf and regular coffee",
+      "Unsupported methylene chloride decaf",
+      "Conflicting product-source methods",
+      "Any automatic mutation of existing approved coffee, shots or original 603 oracle"
+    ],
+    "release_authority": "NOT GRANTED",
+    "issue": 180
   }
 }

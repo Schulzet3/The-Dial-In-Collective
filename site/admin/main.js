@@ -178,6 +178,14 @@ async function start(){
     if(newOpen&&kindsForSection(kind).length)requestSectionRefresh();
    }else openSections.delete(kind);
   },true);
+  root.addEventListener?.('change',event=>{
+   if(event.target?.name!=='is_decaf')return;
+   const editor=event.target.closest?.('[data-record-form]');
+   const method=editor?.querySelector?.('.admin-decaf-method');
+   if(method)method.hidden=!event.target.checked;
+   const select=method?.querySelector?.('select');
+   if(select&&!event.target.checked)select.value='';
+  });
   // Delegate actions from stable root, which survives refresh renders.
   root.addEventListener?.('submit',event=>{
    if(event.target?.id==='admin-search-form'){
@@ -195,7 +203,8 @@ async function start(){
      const form=event.target,type=form.dataset.type,id=form.dataset.id;
      const rev=Number(form.dataset.revision);
      if(!/^[0-9a-f-]{36}$/i.test(id)||!Number.isSafeInteger(rev)||rev<1)throw new Error('A valid record and current revision are required.');
-     const changes=Object.fromEntries(Array.from(form.elements).filter(el=>el.name).map(el=>[el.name,el.value]));
+     const changes=Object.fromEntries(Array.from(form.elements).filter(el=>el.name).map(el=>[el.name,el.name==='is_decaf'?el.checked:el.value]));
+     if(type!=='shot'&&changes.is_decaf===false)changes.decaffeination_method='';
      await adminRpc(type==='shot'?'dic_admin_edit_shot':'dic_admin_edit_coffee',{
       p_record_id:id,p_expected_revision:rev,p_details:changes,p_reason:'',p_kind:type
      });

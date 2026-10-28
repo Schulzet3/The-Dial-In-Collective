@@ -269,7 +269,7 @@ export function mergePublicProductPreview(base,extra){
  };
  const mixedProcess=base.fields?.process==='Other/Unknown'?base:
   extra.fields?.process==='Other/Unknown'?extra:null;
- for(const key of ['origin','roast_level','process','variety','producer','release_label','elevation_m']){
+ for(const key of ['origin','roast_level','process','variety','producer','release_label','elevation_m','decaffeination_method']){
   if(key==='process'&&compatibleProcess)continue;
   if(key==='roast_level'&&measuredWinner){
    fields.roast_level=measuredWinner.fields.roast_level;
