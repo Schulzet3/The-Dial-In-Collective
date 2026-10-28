@@ -10,6 +10,9 @@ export function canonicalRoastLevel(value){
 }
 export const roastIndex=value=>ROASTS.indexOf(canonicalRoastLevel(value));
 export const PROCESSES = ['Washed', 'Natural', 'Honey', 'Anaerobic', 'Other/Unknown'];
+export const DECAFFEINATION_METHODS = ['Water Process', 'Sugar Process', 'Carbon Dioxide (CO2)'];
+export const isHalfCaffName = name => /\b(?:half[ -]?caf(?:f|feinated)?|semi[ -]?decaf(?:feinated)?|partially[ -]?decaf(?:feinated)?)\b/i.test(String(name||''));
+export const isFullyDecafName = name => !isHalfCaffName(name)&&/\bdecaf(?:feinated)?\b/i.test(String(name||''));
 export const SCALES = [
   { key: 'extraction', label: 'Extraction', low: 'Sour', high: 'Bitter', ideal: 3, hint: 'Balanced for this coffee and style.' },
   { key: 'body', label: 'Body', low: 'Thin', high: 'Heavy', ideal: 3, hint: 'The texture you want for this style, without hollowness or heaviness.' },

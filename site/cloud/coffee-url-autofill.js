@@ -7,7 +7,7 @@ export const MAX_SOURCE_REVIEW_FACTS=384;
 export const autofillFields=[
  ['name','Coffee Name'],['roaster','Roaster'],['release_label','Release / Harvest'],
  ['origin','Origin'],['roast_level','Roast Level'],['elevation_m','Elevation'],
- ['process','Process'],['variety','Variety'],['producer','Producer'],
+ ['process','Process'],['decaffeination_method','Decaffeination Method'],['variety','Variety'],['producer','Producer'],
  ['tasting_notes','Tasting Notes']
 ];
 // Identity has already been confirmed by the matching flow. Preserve that
