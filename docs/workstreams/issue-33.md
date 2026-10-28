@@ -1,3 +1,8 @@
+## October 28 UTC — Correct source archive workflow quoted JS before interpreting CI outcome
+
+The initial private QA workflow contained doubly escaped JavaScript null separators and a path-filter regexp when generated through the connector. Replaced these with deterministic null-byte splitting and explicit safe tracked-path checks before rerunning CI; no change to product extractor, 603 source/oracle, application behavior, member data or release authorization. The GitHub artifact source receipt must expose a credible tracked file count and SHA256 before local replay. Same-commit Issue33 journal update.
+
+---
 ## 2026-10-28 UTC — Independent 77-row review register and secure source-bound corpus replay preparation (NO DEPLOY)
 
 Owner authorized two handoff reconciliation, exact current source checks, real isolated app QA and original frozen603. Original reverse intake #6–77 is conversational review with NO implementation/CI and must not be called READY; #1–5 are canonical previous owner decisions. Independently compared all 77 numbered URLs to original Library master list: **77 exact URL/number matches; zero renumbering**. New independent register has unique ownership forward #6–41/reverse #42–77, source verification and owner authority statuses, with exact #49 Orleans/#72 Thrive owner approval preserved. Current official public source HTML was reviewed for ten high-risk numbers (including #6 reused identity discrepancy; #7/#9 relative Lighter; #12 distinct elevation ranges; #49/72 approved notes; #67 split processing; #77 Medium-Light). These are leads and bounded evidence, not live Product endpoint or all-source acceptance.

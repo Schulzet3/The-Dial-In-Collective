@@ -30,12 +30,12 @@ jobs:
             const fs=require("node:fs"),cp=require("node:child_process"),crypto=require("node:crypto");
             const src="qa_artifacts/issue33-source/repository-tracked-source.tar.gz";
             const sha=s=>cp.execFileSync("git",s,{encoding:"utf8"}).trim();
-            const names=cp.execFileSync("git",["ls-files","-z"]).toString("utf8").split("\\0").filter(Boolean);
-            if(names.some(n=>/(^|\\/)(\\.env(?:\\.|$)|node_modules|\\.git)(\\/|$)|\\.(?:pem|p12|pfx|key)$/.test(n)))throw Error("Blocked secret-like tracked source");
+            const names=cp.execFileSync("git",["ls-files","-z"]).toString("utf8").split(String.fromCharCode(0)).filter(Boolean);
+            if(names.some(n=>n.startsWith(".env")||n.includes("/.env")||n.startsWith("node_modules/")||n.endsWith(".pem")||n.endsWith(".p12")||n.endsWith(".pfx")||n.endsWith(".key")))throw Error("Blocked secret-like tracked source");
             const sha256=crypto.createHash("sha256").update(fs.readFileSync(src)).digest("hex");
             const receipt={schema_version:1,head_sha:sha(["rev-parse","HEAD"]),tree_sha:sha(["rev-parse","HEAD^{tree}"]),tracked_files:names.length,archive_sha256:sha256,archive_name:"repository-tracked-source.tar.gz",scope:"immutable Git tracked source, not original603 input",published:false};
-            fs.writeFileSync("qa_artifacts/issue33-source/source-receipt.json",JSON.stringify(receipt,null,2)+"\\n");
-            process.stdout.write(JSON.stringify(receipt)+"\\n");
+            fs.writeFileSync("qa_artifacts/issue33-source/source-receipt.json",JSON.stringify(receipt,null,2)+String.fromCharCode(10));
+            process.stdout.write(JSON.stringify(receipt)+String.fromCharCode(10));
           '
       - name: Retain exact-source bundle privately for isolated 603 audit
         uses: actions/upload-artifact@v7
