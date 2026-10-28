@@ -1872,31 +1872,37 @@
       "notes": "No production deployment. Preserves original immutable603 source/oracle/scorer, member data, current conflict warnings, and previous READY items. Parent Issue33 residual remains IN_PROGRESS."
     },
     {
-      "id": "DIC-Q-22-revoked-offline-cold-reload-isolation",
+      "id": "DIC-Q-22-offline-denial-reload-protection",
       "issue": 22,
       "pr": 217,
-      "title": "Persist revoked-access offline denial across cold reload while preserving outbox and PWA updates",
+      "title": "Retain denied-owner privacy across offline cold reload and verify six offline/auth/conflict scenarios",
       "state": "READY",
       "merged_source_sha": "45ae4561205c0527e8dcf67d0ec65b06f1724616",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "tests": [
-        "PR217 exact reviewed head cfbe886a9ce1b526cccb91897d776eff36915295: app/build40782759803, approval40782759668, cloud/mobile40782759651, visual/PWA40782759711, source security40782759664 and isolatedSQL40782759633 SUCCESS independently read back.",
-        "Six isolated automated scenarios exercised concurrent stale revisions, offline conflict retention, account changes, expired/refreshing credentials, IndexedDB failure, real service-worker upgrade/outbox preservation, lost acknowledgment/idempotent replay and cross-reload access denial. Actual GoTrue/live member/device not newly tested by this scope.",
-        "Nonforce merge45ae4561205c0527e8dcf67d0ec65b06f1724616 read back. Exact merged review40783051941, cloud/mobile40783051989 and approval40783052022 SUCCESS; app40783051945 final outcome verified before release. Combined release candidate must complete final exact-source checks before publication."
+        "Owner-authorized six-case 1–6 coverage: concurrent stale revision, delayed offline conflict, signout/account switching and in-flight ownership, expired/denied auth, IndexedDB/cache failure plus real service-worker update, and lost/duplicate acknowledgement recovery.",
+        "Exact tested PR head cfbe886a9ce1b526cccb91897d776eff36915295 (tree e43640c9f6aa3a767f43a407f2735fa1a0b3fd9d) and actual merged SHA45ae4561205c0527e8dcf67d0ec65b06f1724616 have byte-identical trees.",
+        "Final PR-head 1913 Node PASS / 0 FAIL / 6 explicit SKIP; Node lint/build and cloud/mobile/regression/security/approval and isolated signed-JWT HTTP/SQL SUCCESS.",
+        "Isolated built-Chromium PWA actual service-worker version upgrade retains pending shot through cold offline reload; simulated provider/Auth, no live member mutation. Original Issue21 genuine iPhone one-shot reconnect and independent DB count evidence retained.",
+        "Merged-source approval 40783052022, visual 40783051941 and cloud regression 40783051989 independently SUCCESS. Merged-source full Node/build job 40783051945 additional run, PR-head identical-tree passing validation accepted.",
+        "Release audit reconciles scope_paths to deployable application files only; test/browser paths remain validation evidence, not shipped file coverage. Exact merged Node/build40783051945 independently SUCCESS."
       ],
       "ci_runs": [
         40782759803,
-        40782759668,
         40782759651,
         40782759711,
+        40782759633,
         40782759664,
-        40782759633
+        40782759668,
+        40783052022,
+        40783051941,
+        40783051989
       ],
       "blockers": [],
-      "owner_source": "Owner October28 Issue22 direction to test scenarios1–6 fully, repair defects and close with substantive automated evidence; current owner explicitly requests full queue audit then publish.",
-      "notes": "No hosted schema/API/auth changes or member writes. Nonsecret per-owner localStorage denial marker supplements in-memory guard and failed cache deletion, cleared only after fresh server admission; keeps outbox/receipts. Total browser storage failure remains a known platform limit."
+      "owner_source": "Owner direct instruction, 2026-10-28: Perform complete 1–6 regression, repair failures and close Issue #22 when automated acceptance is sufficient.",
+      "notes": "Development source READY only; private on GitHub Free. No deployment, production SQL, data changes or provider settings. Actual iOS Safari and genuinely concurrent physical-device exercise not performed; owner device testing optional. Total browser-storage eviction cannot recover data deleted by the browser."
     }
   ],
   "history": [

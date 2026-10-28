@@ -1,3 +1,9 @@
+## October 28 UTC — Issue #22 six-scenario offline/privacy tests READY; NO DEPLOYMENT
+
+PR217 non-force merged at 45ae4561205c0527e8dcf67d0ec65b06f1724616; exact tested head cfbe886a9ce1b526cccb91897d776eff36915295 and merge tree e43640c9f6aa3a767f43a407f2735fa1a0b3fd9d byte-identical. Owner-authorized scenarios 1–6 passed isolated concurrent/stale revision, offline pending, signout/switching, auth-denial/expiry, IndexedDB/cache loss, real localhost service-worker update, lost reply/idempotency, and failed denial-cache-delete cold restart. PR-head exact Node 1913 pass/0 fail/6 skip, lint/build and six relevant CI workflows SUCCESS (runs 40782759803, 40782759651, 40782759711, 40782759633, 40782759664, 40782759668). Merged-source approval40783052022, cloud/mobile40783051989, visual/PWA40783051941 also SUCCESS; additional merged Node/build run40783051945 pending at this documentation readback, identical source tree to tested PR head. Release queue `DIC-Q-22-offline-denial-reload-protection` READY, zero blockers, not deployed. Issue22 closure must be read back, not presumed. Genuine original Issue21 iPhone one-shot acceptance reused; no new physical Safari run, production auth/user data mutation, or publication.
+
+---
+
 ## October 28 UTC — Issue #22 offline and account isolation acceptance under test
 
 Owner approved six-scenario automated regression and conditional closure without publication. A fresh browser-reload risk after denied-member IndexedDB cache deletion failure prompted durable owner-scoped offline-denial marker plus cold-reload regression; real built-PWA offline service-worker update test added. Existing Node and isolated signed-JWT PostgREST tests cover stale revisions, lost response, signout/account swap, credential expiration and access denials. Exact-source CI and approval/queue reconciliation pending; no tests or source READY asserted before provider evidence. No production writes or deployment.
