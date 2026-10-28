@@ -64,3 +64,17 @@ jobs:
           node-version: '22'
       - name: Probe all 77 exact official URLs through isolated selected-product parser
         run: node scripts/audit/issue33-current-all77-source-probe.mjs
+
+  issue33-oversized-products:
+    if: contains(github.event.head_commit.message, '[dic-issue33-oversize-probe]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Retry only two safe oversized selected-product URLs at the preexisting product-only cap
+        run: node scripts/audit/issue33-oversized-source-probe.mjs

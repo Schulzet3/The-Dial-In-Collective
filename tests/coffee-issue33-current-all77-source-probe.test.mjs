@@ -21,3 +21,25 @@ test('all77 direct probe remains explicit, isolated from production member/API w
  assert.match(src,/for\(let index=0;index<rows.length;index\+=4\)/);
  assert.doesNotMatch(src,/supabase\.co\/auth|service_role|createClient|execute_sql|apply_migration|fetch\(['"]https:\/\/api\.anthropic/);
 });
+
+test('immutable all77 public receipt records each original URL once, including 15 conflicts and 2 bounded-size exceptions',()=>{
+ const doc=JSON.parse(readFileSync(new URL('../docs/audits/issue33-direct-current-all77-source-probe-20261028.json',import.meta.url),'utf8'));
+ assert.equal(doc.summary.attempted,77);
+ assert.equal(doc.summary.statuses.PARSED,75);
+ assert.equal(doc.summary.statuses.UNAVAILABLE,2);
+ assert.equal(doc.summary.conflict_case_count,15);
+ assert.deepEqual(doc.summary.oversized_case_numbers,[50,67]);
+ assert.deepEqual(doc.records.map(x=>x.number),Array.from({length:77},(_,i)=>i+1));
+ for(const item of doc.records){
+  assert.equal(item.original_url,rows[item.number-1].original_product_url);
+  if(item.source_status==='PARSED')assert.match(item.html_sha256,/^[a-f0-9]{64}$/);
+ }
+});
+test('only preexisting guarded 2MB product path is used for two known oversized URL retries',()=>{
+ const src=readFileSync(new URL('../scripts/audit/issue33-oversized-source-probe.mjs',import.meta.url),'utf8');
+ const workflow=readFileSync(new URL('../.github/workflows/roaster-source-probe.yml',import.meta.url),'utf8');
+ assert.match(src,/const ids=\[50,67\]/);
+ assert.match(src,/maxBytes:MAX_PRODUCT_RETRY_BYTES/);
+ assert.match(src,/MAX_PRODUCT_RETRY_BYTES!==2_000_000/);
+ assert.match(workflow,/issue33-oversized-products:[\s\S]*?\[dic-issue33-oversize-probe\]/);
+});
