@@ -1,3 +1,9 @@
+## October 28 UTC — Issue33 Cortez candidate implementation (TESTING, NOT DEPLOYED)
+
+A new isolated source branch implements the owner-Locked reused-handle current-product rule in Shopify extraction and cross-source merge, with regression fixtures and same-commit Issue33 journal. Open concurrent PR184 (Full City/Ahrre's) is untouched. Exact PR CI, safe integration and original immutable603 replay remain to be verified; no new READY or production claim. The actual Cortez selected Shopify JSON endpoint was not independently retrievable, and conflicting historical search indexes are not proof of the live endpoint. No publication permission.
+
+---
+
 ## October 28 UTC — Issue33 Cortez current-product-only decision recorded; handoff available
 
 Owner approved ignoring old copy at the reused Cortez product URL: read actual present product title/lot/specifications, not historical SEO, old slug or previous coffee's narrative; archive previous evidence without using it for extraction. This is a **new Locked decision**, **not an implemented code fix**. Issue33 remains OPEN and residual source accuracy IN_PROGRESS. See `docs/handoffs/ISSUE33_OWNER_COFFEE_REVIEW_HANDOFF_2026-10-27.md`. No deployment authorization or provider mutation; PR179 and PR183 remain merged but their new queue items TESTING because a fresh original603 replay is not evidenced.
