@@ -1173,24 +1173,38 @@
     {
       "id": "DIC-Q-33-kona-specific-purchased-roast-notes",
       "issue": 33,
-      "pr": null,
+      "pr": 183,
       "title": "Kona Earth selected roast profile notes over generic product flavor description",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "a7f77cb70e510d51580e2d076d7484281c020be9",
       "scope_paths": [
         "src/server/coffee-roast-variants.mjs",
         "src/server/coffee-shopify-ajax.mjs"
       ],
       "tests": [
-        "Kona 3-roast printed notes/Full City normalization/Green Unroasted excluded, specific over generic, negative educational scope and member-preview coverage added; exact-source CI/merge pending and NOT claimed PASSED.",
-        "Approval queue 40622781642 failed because tests/coffee-kona-roast-profiles.test.mjs was mistakenly listed as a deployable scope path; scope metadata corrected without deleting tests."
+        "PR183 final code SHA 6d8f28117864a1a3aa95d116ca34eeaf87dd8eaf: exactly six applicable SUCCESS workflows: approval 40622879825, security 40622879856, isolated SQL 40622879955, Node/lint/build 40622879832, cloud UX/mobile 40622879835, private visual 40622879861.",
+        "The first approval workflow 40622781642 failed deployable-scope queue metadata because a test path was listed in scope_paths. Corrected on same tested PR head, reran and passed; source tests preserved.",
+        "Non-force PR183 merge SHA a7f77cb70e510d51580e2d076d7484281c020be9, exact merged tree 369a375343024ec04e71fbc2729efb49c78e756e equals reviewed PR-head tree; parents original development 15b5591f337e2cba227401960159d5670cf78b61 and feature 6d8f28117864a1a3aa95d116ca34eeaf87dd8eaf.",
+        "Post-merge approval 40623117630 SUCCESS, app/build 40623117571 and cloud 40623117565 still PENDING at this journal read; public real-source checks 40623117569 and 40623117577 SKIPPED by workflow guards.",
+        "Original immutable 603-coffee/201-roaster workflow 40622879836 SKIPPED by its historical branch/private source guard, no current exact-corpus replay or retained-fact score claimed."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40622781642,
+        40622879825,
+        40622879856,
+        40622879955,
+        40622879832,
+        40622879835,
+        40622879861,
+        40623117630,
+        40623117571,
+        40623117565
+      ],
       "blockers": [
-        "Exact-source tests, non-force merge and postmerge CI not yet verified. Original frozen 603 replay remains a separate unperformed gate."
+        "Original immutable 603/201 roaster actual-handler replay was not performed on merged-source SHA; PR183 frozen workflow 40622879836 skipped because it is restricted to a historical audit branch and requires private original captures. Exact corpus/retention acceptance remains unverified; do not mark READY without evidence."
       ],
       "owner_source": "Owner 2026-10-27 direct Kona Earth approval: ignore general description in favor of explicitly roast-specific tasting lists.",
-      "notes": "Maintain source-first fallback and current coffee identity; never infer unsupported roast, process, elevation or espresso parameters. Do not rewrite original603 or member records. No production publication authorized."
+      "notes": "Code merged after exact-head six PASS; no photographs, no default purchase roast. Printed medium/medium-dark/dark Kona tasting notes override general flavor text, unroasted excluded. No current member data/shot rewrites. PREPARED TESTING pending mandatory original603 replay; NOT READY/NOT DEPLOYED. Postmerge app/cloud still in progress at time of this record."
     }
   ],
   "history": [

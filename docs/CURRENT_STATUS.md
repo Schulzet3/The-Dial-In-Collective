@@ -1,3 +1,11 @@
+## October 28 UTC — Kona selected roast printed notes PR183 integrated, TESTING / NOT DEPLOYED
+
+Owner's approved rule is implemented in `src/server/coffee-roast-variants.mjs` and `coffee-shopify-ajax.mjs`: exact printed `Tasting Notes by Roast` for Kona Medium, Medium Dark (Full City), and Dark outrank generic prose; selected roast controls editable notes; Green Unroasted is excluded as a roasted profile; missing roast-specific note is never invented. No photos. Existing Ketch route/roast and member data untouched. Tests: `tests/coffee-kona-roast-profiles.test.mjs` checked source-bound direct vs generic precedence, exactly three roasts, negative generic and no default selection. Initial approval CI failure 40622781642 was queue metadata only (test file mistakenly in deployable paths); repaired and passed.
+
+PR183 final head 6d8f28117864a1a3aa95d116ca34eeaf87dd8eaf had approval 40622879825, security 40622879856, SQL 40622879955, app/Node/lint/build 40622879832, cloud UX/mobile 40622879835 and visual 40622879861 all SUCCESS. Non-force merge a7f77cb70e510d51580e2d076d7484281c020be9 has the identical reviewed Git tree 369a375343024ec04e71fbc2729efb49c78e756e. Postmerge approval 40623117630 passed; app 40623117571/cloud 40623117565 pending at this checkpoint. Frozen603 workflow 40622879836 SKIPPED under historical-branch/private-input restriction, so NO immutable corpus replay claimed. Queue item remains TESTING, not READY, due original603 acceptance gap. Nothing published or deployed.
+
+---
+
 ## October 28 UTC — Owner-approved Kona per-roast tasting notes (TESTING, NOT DEPLOYED)
 
 Current development contains Ketch's purchased-roast UI; Kona Earth also provides explicitly labelled `Tasting Notes by Roast` for Medium, Medium Dark (Full City), and Dark. A scoped source branch now teaches the extractor to use each specific list instead of generic product flavor text and excludes Green Unroasted from roasted options. New regressions and full CI/merge pending. Issue33 remains OPEN and immutable original603 replay remains separately unverified; no production publication.
