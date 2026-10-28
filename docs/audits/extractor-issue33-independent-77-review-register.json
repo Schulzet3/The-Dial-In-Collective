@@ -2212,21 +2212,29 @@
       "owner_authority": "PRIOR_CHAT_REVIEW_NOTE",
       "owner_review_status": "CONVERSATIONAL_REVIEW_ONLY",
       "current_official_source": {
-        "status": "CURRENT_OFFICIAL_SELECTED_SOURCE_SUPPORTED",
+        "status": "CURRENT_SELECTED_PRODUCT_DIRECT_MEDIUM_LIGHT_CONFIRMED",
         "checked": "2026-10-28",
-        "finding": "Exact Yellowstone Colombia Huila source says Medium-Light (synonym of historical Light-Medium) and Washed/Sun Dried with Huila origin; original benchmark remains unchanged. Original frozen capture also revealed generic Shopify Light Roast and Medium Roast tags wrongly overriding selected Medium-Light. Source-priority fix under test.",
+        "finding": "Exact Yellowstone Colombia Huila source says Medium-Light (synonym of historical Light-Medium) and Washed/Sun Dried with Huila origin; original benchmark remains unchanged. Original frozen capture also revealed generic Shopify Light Roast and Medium Roast tags wrongly overriding selected Medium-Light. Source-priority fix under test. Public official product HTML confirms Medium-Light roast but HTTP page retrieval is indexed/crawled, not provider-authenticated Product JSON.",
         "url": "https://yellowstonecoffee.com/products/colombia-huila",
         "method": "PUBLIC_ROASTER_HTML_RETRIEVAL_NOT_LIVE_ENDPOINT_PROOF"
       },
-      "implementation_status": "SOURCED_EXTRACTOR_FIX_CANDIDATE_PR190_TESTING",
+      "implementation_status": "TESTED_PR190_AWAITING_MERGE",
       "tests": {
-        "focused": "25 local regressions PASS with four new tag-specific safety assertions",
-        "original603": "Original frozen603 current-source replay underway; no READY claim",
-        "built_app": "NOT_RUN_FOR_THIS_CASE"
+        "focused": "PASS: 4 targeted Yellowstone roast tag regressions, source and non-source controls; six exact-source CI workflows at 75c08d...",
+        "original603": "PASS: 603/603 captured actual handlers, old exact 3096 and new exact 3096; one expected literal variant now review_required, 0 old exact lost; full supplementary 6474 unchanged. See original603 receipt.",
+        "built_app": "PASS: 68 synthetic Chromium checks using packaged frontend JS; not live provider auth or native IndexedDB"
       },
       "merged_sha": null,
       "release_status": "NOT_READY_AS_INDIVIDUAL_CASE",
       "blocking_evidence": "Exact current product provenance and exact-source implementation/acceptance not yet verified"
     }
-  ]
+  ],
+  "current_source_original603_replay": {
+    "receipt_path": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json",
+    "tested_sha": "b9f56d48a2f580cca66939288ce6ed9260117f6d",
+    "cases": 603,
+    "original_capture_cases_mapped_to_review_list": 77,
+    "previous_exact_lost": 0,
+    "supplementary_retention_delta": 0
+  }
 }
