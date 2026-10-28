@@ -1131,8 +1131,8 @@
       "issue": 180,
       "pr": 181,
       "title": "Decaf-only source-verified method normalization, Coffee Details and staged canonical storage",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e9a1895974c823e6fbe34e3a517dc298ed7bd5bf",
       "scope_paths": [
         "src/server/coffee-decaffeination-method.mjs",
         "src/server/coffee-page-metadata.mjs",
@@ -1147,17 +1147,28 @@
         "site/admin/main.js"
       ],
       "tests": [
-        "Original source method parsing and processing regression initially 72/72 local PASS; merged-source exact CI pending; immutable 603-corpus not yet rerun",
-        "Read-only live RPC definitions inspected; staged member/editor/admin RPC variants retain owner identity, revisions, audit and data constraints, exact-source tests pending",
-        "tests/coffee-decaf-admin.test.mjs"
+        "72/72 focused local parser and processing tests PASS before combined feature branch merge, not a full original603 replay.",
+        "Exact PR-head b5daeded6dc3c99e83a1f7722b9d754919457527: approval 40618414981, security 40618414871, isolated PostgreSQL 17.11 40618414942, UX 40618414853, visual 40618414936, Node/build 40618414845 all SUCCESS.",
+        "Nonforce PR181 merge e9a1895974c823e6fbe34e3a517dc298ed7bd5bf independently read back; exact merged approval 40618871585, isolated SQL 40618871586, UX 40618871532, visual 40618871626, Node/build 40618871635 SUCCESS.",
+        "Production Supabase functions and schema inspected read-only. New coffee columns absent: staged migration has NOT been applied. Current personal-state RPC serializes all canonical coffee fields.",
+        "Original frozen603 runner SKIPPED due branch restriction, not passed. Public source acceptance and controlled roaster probe also SKIPPED."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source CI, SQL validation, source and database consumer integration verification pending",
-        "Nonforce development merge, merged-source CI and queue reconciliation pending"
+      "ci_runs": [
+        40618414981,
+        40618414871,
+        40618414942,
+        40618414853,
+        40618414936,
+        40618414845,
+        40618871585,
+        40618871586,
+        40618871532,
+        40618871626,
+        40618871635
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/180",
-      "notes": "No publication authorized. Staged SQL only, not applied; no production member data writes. Preserves parallel Issue33 changes; ready only after full required integrated evidence."
+      "notes": "READY for separate owner-authorized publication; NOT DEPLOYED. Staged migration has not been applied; no member or shot records changed. Exact selected Decaf only, three normalized methods, half-caf/regular suppression, Process kept separate, unrecognized chemical methods blank. Parallel Issue33 source changes preserved via nonforce merge."
     }
   ],
   "history": [
