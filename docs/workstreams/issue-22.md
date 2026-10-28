@@ -9,3 +9,5 @@
 **Scenario matrix for exact-source tests:** (1) two tabs stale revision/one winner; (2) offline stale edit holds while independent new shot proceeds; (3) signout and cross-owner delayed operations; (4) expired/refreshing credential rejection and recovery; (5) IndexedDB failure/eviction and pending outbox through a PWA update; (6) lost acknowledgement, idempotent replay, and denial/cache-deletion failure after browser reload. All tests are isolated/synthetic except the previously accepted #21 real-owner evidence; no new actual device or production member writes asserted.
 
 **Status:** TESTING; execute CI and isolated SQL/PostgREST, reconcile evidence, and close conditionally. No deployment, paid service or migration.
+
+**Additional same-commit Node tests:** Eight deterministic Outbox tests explicitly exercise 1 through 6, including two independent tabs against a revision-checked fake server, cross-account preservation, lost responses, cache eviction and failed receipt commit. Tests are pending exact-source PR CI; no production/physical-device pass claimed.
