@@ -1612,7 +1612,7 @@
     ]
   },
   "GRINDER-ISSUE17-DIRECTION-RANGE-SLOWFEED-20261028": {
-    "status": "OWNER_APPROVED_IMPLEMENTATION_TESTING",
+    "status": "VERIFIED_SOURCE_READY_NOT_DEPLOYED",
     "issue": 17,
     "authority": "User explicit direction/scale confirmation and Slow Feed example on 2026-10-28",
     "scope_paths": [
@@ -1626,6 +1626,19 @@
       "tests/grinder17-history-guard.test.mjs"
     ],
     "acceptance": "Preserve lower=finer higher=coarser, numeric 0.1 and user espresso range; no stepped/stepless or multi-turn controls. Slow Feed successful observations first, paired owner-specific shift next and cautious unproven fallback last. No history/data reinterpretation. Exact CI and source merge required; no publication.",
-    "status_detail": "Source test/implementation in scope, not production."
+    "status_detail": "All focused and full Node tests passed 1899/0/6 skips; six exact PR-head CI and four exact merged-source CI SUCCESS. Historical incomplete equipment snapshot null failure repaired and retested. Never deployed; no SQL/persistence, production member, or backup modifications.",
+    "merged_source_sha": "d135702a3f27fb4bbb98aa92524cc5627783b921",
+    "verification_ci_runs": [
+      40768289292,
+      40768289089,
+      40768288972,
+      40768288993,
+      40768289023,
+      40768289345,
+      40768627816,
+      40768627506,
+      40768627501,
+      40768627507
+    ]
   }
 }

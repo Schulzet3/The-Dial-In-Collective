@@ -1793,24 +1793,37 @@
     {
       "id": "DIC-Q-17-numeric-range-slow-feed-aware-grind",
       "issue": 17,
-      "pr": null,
+      "pr": 212,
       "title": "Fixed finer/coarser number semantics, range-safe grinder recommendations and evidence-aware Slow Feed estimates",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "d135702a3f27fb4bbb98aa92524cc5627783b921",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "New focused Node tests: existing direction, 0.1 recommended precision, current-range clamp, explicit Slow Feed lower default, calibrated same-feed priority, paired personal feed difference, unknown/old calibration isolation, unchanged historical shot.",
         "Applicable full Node/build, cloud/mobile/browser, visual/approval/security and SQL regression checks at exact PR head; pending.",
-        "No original member data or production database writes, no schema or settings migration, no Netlify deployment."
+        "No original member data or production database writes, no schema or settings migration, no Netlify deployment.",
+        "Corrected exact PR212 head d6a8382f991863507685644d986920fc3a172092: full Node 1899 passed/0 failed/6 intentionally skipped, frontend build success, and focused standard-vs-slow, paired success, old-calibration null fallback, 0.1 precision and range-bound tests passed. Initial PR head 2448bf2 app CI 40767547501 FAILED a newly detected null fallback; diagnosed and repaired in same-commit source/test/journal, rerun success.",
+        "Exact reviewed PR-head GitHub checks SUCCESS: app/build 40768289292, cloud/mobile 40768289089, visual 40768288972, isolated SQL 40768288993, security 40768289023, approval 40768289345. Original unrelated 603-coffee restricted workflow 40768289131 SKIPPED, not called passing.",
+        "Non-force PR212 merged at d135702a3f27fb4bbb98aa92524cc5627783b921; GitHub readback parents [6a18a3a245d1834ebef82254c33978203198e716,d6a8382f991863507685644d986920fc3a172092], exact code tree efecde8855680461648867cd899fabb30d7c5d14. Post-merge app/build 40768627816, cloud/mobile 40768627506, visual 40768627501, approval 40768627507 all SUCCESS.",
+        "Netlify live project current deploy 6ae0fc16178b2f1241e441f8 is previous published release; this change remains source READY, no production data or schema modification."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head CI, non-force merge/readback, merged-source verification pending."
+      "ci_runs": [
+        40768289292,
+        40768289089,
+        40768288972,
+        40768288993,
+        40768289023,
+        40768289345,
+        40768627816,
+        40768627506,
+        40768627501,
+        40768627507
       ],
+      "blockers": [],
       "owner_source": "October 28 2026 direct owner approval: higher numbers always coarser, lower finer; decimal 0.1 numerical range, no equipment directions/multi-turn/stepped switch; Slow Feed usually needs significantly finer, actual owner examples Standard 2.5–3.5 and Slow 0.2–1.0.",
-      "notes": "The provisional 40%-of-range Slow Feed correction is explicitly an unproven starting heuristic used only when matching successful slow-feed evidence is absent. Prioritize own successes and calibrated paired outcomes. Preserve current history/Unknown feed and do not universalize owner example. User requested close Issue #17 when verified. No publish authorization."
+      "notes": "The provisional 40%-of-range Slow Feed correction is explicitly an unproven starting heuristic used only when matching successful slow-feed evidence is absent. Prioritize own successes and calibrated paired outcomes. Preserve current history/Unknown feed and do not universalize owner example. User requested close Issue #17 when verified. No publish authorization. Source-only feature READY; issue may be closed with code merged and tested without Netlify publication. Synthetic browser evidence is NOT physical device or real-member production test."
     }
   ],
   "history": [

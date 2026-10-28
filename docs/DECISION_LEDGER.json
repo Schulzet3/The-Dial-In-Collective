@@ -2340,8 +2340,9 @@
       "decision": "lower numeric setting is finer; higher numeric setting is coarser for the app, no toggle; user numeric espresso range only, no stepped/stepless or turn count representation, 0.1 recommendation precision, validate lower finest/higher coarsest. Prioritize successful matching slow-feed observations. Learn eligible paired slow-vs-standard successful offset within the same active setup/calibration/style/basket. When no paired evidence exists, use a cautious, clearly unproven lower-number Slow Feed starting estimate, approximately 40% of configured espresso range finer than the Standard Feed successful reference or unproven baseline. Never treat one member's numbers as universal.",
       "scope": "Issue17 numeric grinder direction/range safety and slow-feed recommendation estimate only",
       "supersedes": "Only unresolved wider grinder-direction/scales branch of original baseline §13.5 / §37.1E and historical Issue #17 tentative acceptance. Existing approved New Setup range information icon and preserved lower=finer calibration direction remain unchanged.",
-      "delivery": "DEVELOPMENT_TESTING_NOT_DEPLOYED",
-      "issue": 17
+      "delivery": "SOURCE_READY_NOT_DEPLOYED",
+      "issue": 17,
+      "merged_source_sha": "d135702a3f27fb4bbb98aa92524cc5627783b921"
     }
   ],
   "open_current_owner_decisions": [],
@@ -4522,6 +4523,16 @@
     "slow_feed": "Prioritize successful matching slow-feed observations. Learn eligible paired slow-vs-standard successful offset within the same active setup/calibration/style/basket. When no paired evidence exists, use a cautious, clearly unproven lower-number Slow Feed starting estimate, approximately 40% of configured espresso range finer than the Standard Feed successful reference or unproven baseline. Never treat one member's numbers as universal.",
     "safeguards": "Clamp all new recommended grind numbers to current entered range. Preserve all prior shot records, successful recipe families, calibration snapshots, offline outbox, private/community data and actual feed-mode labeling. Legacy unknown must remain unknown. No real member writes or schema changes.",
     "supersedes": "Only unresolved wider grinder-direction/scales branch of original baseline §13.5 / §37.1E and historical Issue #17 tentative acceptance. Existing approved New Setup range information icon and preserved lower=finer calibration direction remain unchanged.",
-    "release": "DEVELOPMENT_ONLY_NOT_DEPLOYED"
+    "release": "SOURCE_READY_NOT_DEPLOYED",
+    "merged_source_sha": "d135702a3f27fb4bbb98aa92524cc5627783b921",
+    "tested_pr_head_sha": "d6a8382f991863507685644d986920fc3a172092",
+    "verification_ci_runs": [
+      40768289292,
+      40768289089,
+      40768288993,
+      40768288972,
+      40768289345,
+      40768289023
+    ]
   }
 }
