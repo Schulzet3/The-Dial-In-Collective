@@ -2064,24 +2064,48 @@
     {
       "id": "DIC-Q-33-current-producing-enterprise",
       "issue": 33,
-      "pr": 222,
+      "pr": 223,
       "title": "Recognize current selected growing-export enterprise and its source-backed alias as Producer",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a95dd6d763cc11a0f5ecb410e540d1d371922b3e",
       "scope_paths": [
         "src/server/coffee-selected-source-evidence.mjs"
       ],
       "tests": [
-        "PR222 first candidate head 186c53cc6837474dcb461e570f3b16ec00a6988e; approval 40785515963 FAIL because newly changed source path not yet tracked in queue, now repaired in this integration commit.",
-        "Focused positive current Seeds Yirgacheffe Habtamu selected Product / Shopify parser and negative historical/mismatched Product/founder-only tests committed; exact merged-source public77 verification pending.",
-        "Post-Release08 source acceptance tests updated for actual READY-to-DEPLOYED states only with a valid published source and release SHA; earlier cloud regression40785515845 diagnosed and repaired."
+        "PR222 initial merge af77ec781235032abb7ee08c735285c90bc16d30 produced unsafe `Lime Candy Habtamu Fekadu Aga...` in real merged-source current77 job123161543863/run40786690727. It was withheld from READY. Initial approval/test failures due Release08 queue intake and obsolete READY-only test expectations were diagnosed, repaired and retested; visual offline reload timeout passed upon isolated rerun.",
+        "PR222 final reviewed head 34230bcb08bca8b50bf6aaa137281370620647fc app/full Node/build40786188923, cloud/mobile40786189055, visual40786188935 rerun SUCCESS, isolated SQL40786188890, security40786188757, approval40786188967 and source bundle40786188862 SUCCESS; original603 restricted40786188819 SKIPPED.",
+        "Corrected PR223 head 661cb7921995cea56a8fd37602383dd4eaba2a69 exact CI seven SUCCESS: app/Node/build40786985918, cloud/mobile40786985857, visual40786985865, isolated SQL40786986127, security40786985908, approval40786985878 and source bundle40786988917; original frozen60340786985855 SKIPPED.",
+        "PR223 nonforce merge a95dd6d763cc11a0f5ecb410e540d1d371922b3e, parents verified [af77ec781235032abb7ee08c735285c90bc16d30,661cb7921995cea56a8fd37602383dd4eaba2a69]. Postmerge app/build40787299489, cloud/mobile40787299335 and approval40787299404 SUCCESS.",
+        "Fresh official selected current77 run40787299424 job123163570829 SUCCESS: 77/77 public pages/77 Add Coffee previews; compared every canonical field/conflict set to verified pre-#59 run40784736501 job123154975941, exactly #59 Producer newly canonical `Habtamu Fekadu Aga (Kuri Mountain Coffee)`, no other 76 field or conflict change. New docs/audits/issue33-owner77-post-pr223-producer-boundary-20261028.json.",
+        "Source-backed current selected Product/Yirgacheffe title and growing/export enterprise corroboration without historical reused Guji Getachew slug contamination. Previously valid genuine hosted GoTrue Add Coffee persistence SQL readback40767700050 reused without repeated Auth tests. No original603 archive/oracle/scorer/member/SQL/Auth/Edge/production write."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await corrected exact PR-head full Node/cloud/visual/security/SQL/approval, fresh official77, safe merge, final queue reconciliation."
+      "ci_runs": [
+        40786188923,
+        40786189055,
+        40786188935,
+        40786188890,
+        40786188757,
+        40786188967,
+        40786188862,
+        40786985918,
+        40786985857,
+        40786985865,
+        40786986127,
+        40786985908,
+        40786985878,
+        40786988917,
+        40787299424,
+        40787299489,
+        40787299335,
+        40787299404
       ],
+      "blockers": [],
       "owner_source": "Issue33 owner77 approved current Seeds Yirgacheffe Habtamu producing company Kuri Mountain Coffee; source-first/no stale slug inference",
-      "notes": "Development only. Do not publish. This item is not part of separately completed Release08; preserve original603 immutable archive/oracle/scorer, member data, offline history and all prior DEPLOYED items."
+      "notes": "Source corrected and independent current77 exact field audited; READY NOT DEPLOYED. Producer no longer includes preceding Lime Candy Tasting Notes. Do not publish without new explicit release approval. Preserve Release08 deployed items and existing original603.",
+      "related_prs": [
+        222,
+        223
+      ]
     }
   ],
   "history": [

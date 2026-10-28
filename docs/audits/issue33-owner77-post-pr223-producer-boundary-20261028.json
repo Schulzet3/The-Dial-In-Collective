@@ -1,0 +1,1396 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "as_of_utc": "2026-10-28",
+  "corrected_pr": 223,
+  "original_pr": 222,
+  "corrected_pr_head": "661cb7921995cea56a8fd37602383dd4eaba2a69",
+  "merged_source_sha": "a95dd6d763cc11a0f5ecb410e540d1d371922b3e",
+  "source_workflow_run": 40787299424,
+  "source_job": 123163570829,
+  "source_ci": "SUCCESS",
+  "baseline_workflow_run": 40784736501,
+  "baseline_job": 123154975941,
+  "regression_caught_in_run": 40786690727,
+  "regression_caught_job": 123161543863,
+  "scope": "Fresh selected current official77 public pages, exact parser + Add Coffee preview; no login, database or member writes",
+  "summary": {
+    "attempted": 77,
+    "parsed": 77,
+    "preview_pass": 77,
+    "states": {
+      "UNPUBLISHED_OR_NOT_EXTRACTED": 35,
+      "CANONICAL_FIELD_PRESENT": 27,
+      "LITERAL_SOURCE_CONTEXT_ONLY": 10,
+      "CURRENT_FIELD_CONFLICT": 5
+    },
+    "conflict_rows": 11,
+    "other_76_canonical_or_conflict_regressions": 0
+  },
+  "changed_rows": [
+    {
+      "number": 59,
+      "old_status": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "new_status": "CANONICAL_FIELD_PRESENT",
+      "canonical_field_changes": [
+        {
+          "field": "producer",
+          "from": null,
+          "to": "Habtamu Fekadu Aga (Kuri Mountain Coffee)"
+        }
+      ],
+      "prior_conflicts": [],
+      "current_conflicts": []
+    }
+  ],
+  "problem_and_repair": {
+    "incorrect_initial_producer": "Lime Candy Habtamu Fekadu Aga (Kuri Mountain Coffee)",
+    "cause": "Flattened current selected Product description allowed adjacent Tastes Like copy to prefix a producer-enterprise name",
+    "exact_verified_producer": "Habtamu Fekadu Aga (Kuri Mountain Coffee)",
+    "identity_check": "Current Seeds Yirgacheffe Habtamu title and current growing/export-enterprise founder, farm and outgrower prose; historical URL slug is not source identity",
+    "fix": "Strip unmatched leading source label words by starting company name at distinctive current selected product identity token"
+  },
+  "immutable_original603_modified": false,
+  "limitations": [
+    "Original restricted603 workflow40786985855 SKIPPED, not passed",
+    "All77 parsed/source-preview assertions do not independently certify every source decision",
+    "Remaining blanks can be genuinely unpublished and conflicts require member review",
+    "Prior hosted disposable GoTrue Add Coffee SQL readback40767700050 reused, not repeated",
+    "Separate already-authorized Release08 Netlify deploy6ae27f32bfae09ad8745e19b is earlier and does not include PR222 or PR223"
+  ],
+  "records": [
+    {
+      "number": 1,
+      "official_url": "https://44northcoffee.com/products/honduras-decaf",
+      "current_selected_name": "Decaf - Honduras COMSA",
+      "selected_source_sha256": "994b25176272015112e417351e215a3e72106fd1cbaabd294e55514b5bad2eff",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [
+        "roast_level"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 4,
+      "official_url": "https://www.alaskaartisancoffee.com/products/white-coffee",
+      "current_selected_name": "White Coffee",
+      "selected_source_sha256": "54f08c82aa7a71b85e1284fbcd7287ec69d638acd51a77d2f2ef4e3f4d493f1b",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 2,
+      "official_url": "https://www.ahrre.com/products/african-blend",
+      "current_selected_name": "AFRICAN BLEND",
+      "selected_source_sha256": "2d0d228997e5d33143e1d67772305b9aff2060d432ca0044bafa0f88b9865aff",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": "Medium-Dark",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 3,
+      "official_url": "https://www.ahrre.com/products/test",
+      "current_selected_name": "TANZANIAN PEABERRY",
+      "selected_source_sha256": "8c8886a30fd733fc0f681385b40364ccc94d65ed7e8042ab85eb044815debf37",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": "Medium-Dark",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 8,
+      "official_url": "https://www.blackwhiteroasters.com/products/franky-hoyos-gesha-tropical",
+      "current_selected_name": "Franky Hoyos - Gesha Tropical",
+      "selected_source_sha256": "82e60ef9a46bc26a4e11bd5f4c551dc331656b63a754a9a987571509e618fd46",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 7,
+      "official_url": "https://www.blackwhiteroasters.com/products/r-diego-horta-anaerobic-natural",
+      "current_selected_name": "Diego Horta - Anaerobic Natural",
+      "selected_source_sha256": "41b8b5a8ab9f6b31fccb365e25aa2dd7a5ad98dbe506f83e8c587313275bd4bc",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 5,
+      "official_url": "https://baldguybrew.com/products/organic-colombian-coffee",
+      "current_selected_name": "Organic Colombian Coffee",
+      "selected_source_sha256": "d2675fde25b5079f1f6122a864961992d66a8870efeaa4098a4e81eac737bc21",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 6,
+      "official_url": "https://beanstockcoffee.com/products/colombian-supremo-organic",
+      "current_selected_name": "New!! Colombia Fair Trade Organic FUDAM LA Union",
+      "selected_source_sha256": "356c045fb9d1bd562ad0f00a1826231f71a0685b2fd6aec87ee7b2da952dca79",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 9,
+      "official_url": "https://www.blackwhiteroasters.com/products/r-sebastian-ramirez-red-fruits-decaf",
+      "current_selected_name": "Sebastian Ramirez - Red Fruits Decaf",
+      "selected_source_sha256": "61ef56c2a9480bc1111ab3af218136ff094a947748e2844f9d14101a7ddebbe0",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 10,
+      "official_url": "https://blackriverroasters.com/products/organic-honduras-comsa",
+      "current_selected_name": "Organic Honduras COMSA",
+      "selected_source_sha256": "845d46b9a4de6ccaf413787afe2825e477940b1ffa8002e1595483fdbe0d04d9",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": "COMSA",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 11,
+      "official_url": "https://bleucoffee.com/products/ethiopia",
+      "current_selected_name": "Ethiopia Yirgacheffe",
+      "selected_source_sha256": "08b4c8b2b3974e564dda858385958e09665a6a3de574fdcd1f22d9a1570ca27e",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": "Dark chocolate, gardenia, gently scorched cedar, red plum, hazelnut",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 12,
+      "official_url": "https://www.bluejazzcoffee.com/products/guatemala-antigua",
+      "current_selected_name": "Guatemala",
+      "selected_source_sha256": "4227c2d3670662c2f57ff9029a0edbd77120bfa29fef045e71061b38e18f72d0",
+      "status": "PARSED",
+      "decision_field": "elevation_m",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 14,
+      "official_url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend",
+      "current_selected_name": "The Alchemist: Decaf Medium Roast",
+      "selected_source_sha256": "d81cd4f338dc1fee6ef915164204f85fdcd87a9b4316fd55bd20ae2f36cd773a",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 13,
+      "official_url": "https://bonjocoffee.com/products/guatemala-finca-el-rincon-copy",
+      "current_selected_name": "Costa Rica, El Poeta",
+      "selected_source_sha256": "a3ea84176892d5d1da7f5e4a074b8e0ffa01f562f4692404c0e8159825a74d7d",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": "Gold Collection",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [
+        "elevation_m"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 16,
+      "official_url": "https://www.thecoffeeexchange.com/products/peru-cafe-canchaque-natural-process-american-roast-limited-offering",
+      "current_selected_name": "Peru Cafe Canchaque – Natural, American",
+      "selected_source_sha256": "7092f447be34149855d52aa525341c172ce00f06b48819c20c625f6c70ec39dd",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 15,
+      "official_url": "https://brewtusroasting.com/products/ethiopia-natural",
+      "current_selected_name": "Ethiopia Natural",
+      "selected_source_sha256": "1478ab9549447f4ca278c264eb63fcacebb1bd4be250a221cca82cf12aeba488",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 20,
+      "official_url": "https://www.darkmattercoffee.com/products/anthrax-cursum-perficio",
+      "current_selected_name": "Anthrax - Cursum Perficio",
+      "selected_source_sha256": "675fd8e0df4d4ab4d688d7f332f46e8b1fcc207df5e9c068327dbe0c4a2d8fcc",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 18,
+      "official_url": "https://combatcoffeetea.com/products/night-vision-medium-roast-kenya",
+      "current_selected_name": "NIGHT VISION - MEDIUM ROAST - KENYA",
+      "selected_source_sha256": "7de15c8606ca9aa67843714de46f25029572330774cea5a023f2616102d60b6d",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 19,
+      "official_url": "https://contemporoast.com/products/black-honey-berries",
+      "current_selected_name": "Black Honey Berries",
+      "selected_source_sha256": "d16173936f45afcc1c2338083d8b4bdc948f1d75a10dc9ca91ee514782050130",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "CURRENT_FIELD_CONFLICT",
+      "conflicts": [
+        "producer"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 17,
+      "official_url": "https://coffeeroasterlnk.com/products/nicaragua-pumpkin-spice-pacamara",
+      "current_selected_name": "Nicaragua - Pumpkin Spice- Pacamara",
+      "selected_source_sha256": "8301ceec310505d145d5eccbf0dc7403f60d454b8d13ff83ebb545a65943adca",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": "Pumpkin pie and warm cinnamon",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 22,
+      "official_url": "https://earthbackcoffee.com/products/ethiopian-yirgacheffe-medium-roast",
+      "current_selected_name": "Ethiopian Yirgacheffe",
+      "selected_source_sha256": "1cea79b943032a6440741b07fc6f3b12d9a902a1eab759d27ea9183a0e6c8eee",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 24,
+      "official_url": "https://www.fazendacoffee.com/products/colombia-decaf-sugar-process",
+      "current_selected_name": "Colombia Decaf",
+      "selected_source_sha256": "3c144c1f9a43574f2f09bdc4e41bb792def7898d260ce0c861ddb07b0205ff65",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 21,
+      "official_url": "https://disciplescoffee.com/products/hunduras",
+      "current_selected_name": "Honduras - Organic Coffee Beans",
+      "selected_source_sha256": "f16e6660f3ca73366b02a7b04e7cd48b8d67a8dd5f3661b698fa9052788df9a2",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 23,
+      "official_url": "https://favor.coffee/products/the-token-dark-blend",
+      "current_selected_name": "The Token Dark Blend",
+      "selected_source_sha256": "e460a2825065bec928ed824a72e5782f8e03357206a66d95ac141289b4899cb1",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": "Medium-Dark",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 27,
+      "official_url": "https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume",
+      "current_selected_name": "La Josefina Sudán Rumé / Natural Extended Fermentation",
+      "selected_source_sha256": "06a33082d829d875ae0b3358cd4d545d4ad04cf6d1b8acfe2621262c9c3eb9c4",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": "Cayambe-Coca Natural Reserve, Ecuador",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 28,
+      "official_url": "https://grindinggearscoffee.com/products/ethiopia",
+      "current_selected_name": "Ethiopia",
+      "selected_source_sha256": "52cf87314c36a646e89fd85671a9cf7b4c5147dc4cffcafe52b291f2b7a88fd8",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": null,
+      "decision_diagnostic": "CURRENT_FIELD_CONFLICT",
+      "conflicts": [
+        "tasting_notes"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 26,
+      "official_url": "https://glorycloudcoffee.com/products/honduras-decaf-reserva-pacavita-organic",
+      "current_selected_name": "Decaf - Swiss Water Process - Medium Roast",
+      "selected_source_sha256": "8864d11dbeb6358065ec0c021c2c80ec66d8f8620fda55fb5a918487b062718a",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 25,
+      "official_url": "https://friedrichscoffee.com/product/traders-blend",
+      "current_selected_name": "Traders Blend – Medium Dark",
+      "selected_source_sha256": "c1b35161f87dffc604fefd13e5439405060f04d057fb51e0a69df824cc811efe",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 31,
+      "official_url": "https://ironcladcoffee.com/products/honduras-san-lazaro",
+      "current_selected_name": "Honduras San Lazaro",
+      "selected_source_sha256": "fffc180ae49ee20388d893ab9d69cb1020d78473c3f36035291532b9455aea44",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 32,
+      "official_url": "https://iwanacoffee.com/product/maragogipe-washed-process",
+      "current_selected_name": "Maragogipe – Washed Process",
+      "selected_source_sha256": "763ca46b2f53ecac3be3ab00caac0f9af5b010f04cc517a9be3d7a8c4ab2e261",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": "Micro-Lot",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 29,
+      "official_url": "https://shop.iconikcoffee.com/products/washed-sidra-giorgio-bressani",
+      "current_selected_name": "Bressani Family Washed Sidra",
+      "selected_source_sha256": "84d3ece1913a3e0e38bd268def562c0cb7165e8e2697407cdf1f8692fdfd3b7a",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": "Bressani Family",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 30,
+      "official_url": "https://shop.iconikcoffee.com/products/washed-guatemala-finca-san-jeronimo",
+      "current_selected_name": "Volcán Atitlán Guatemala",
+      "selected_source_sha256": "98aa12d9f33c0ecd7604c2b5a2f4fc99c765fd43347def29f06401e6c7dd8c6d",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": "Giorgio Bressani",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 36,
+      "official_url": "https://www.kindercoffeelab.com/products/avalon-light-roast",
+      "current_selected_name": "Munsinger Light Roast",
+      "selected_source_sha256": "352369b58d79a21ed589335e035cb2d176132c6ed6b90fb39c5cb05e6f0f8c5c",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": null,
+      "decision_diagnostic": "CURRENT_FIELD_CONFLICT",
+      "conflicts": [
+        "tasting_notes"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 33,
+      "official_url": "https://iwanacoffee.com/product/pink-bourbon-washed-process",
+      "current_selected_name": "PINK BOURBON – Washed Process",
+      "selected_source_sha256": "c0119379f144f29a85616dc9cf5a734cec069ab57e388697844326e8221abb5c",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": "Micro-Lot",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 35,
+      "official_url": "https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan",
+      "current_selected_name": "Tier 3: Mexico San Isidro Zoquiapan",
+      "selected_source_sha256": "d7e20bd67fefe19ab6b1a64b978bdca89b5415753725d5ca4cc38d847fa0f218",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [
+        "roast_level"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 34,
+      "official_url": "https://iwanacoffee.com/product/tabi-natural-process",
+      "current_selected_name": "TABi – Natural Process",
+      "selected_source_sha256": "7ccd569d25d67890abee310b431e22f479df2d713efe00d6998a8eef5f6c5428",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": "Micro-Lot",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 38,
+      "official_url": "https://www.limacoffeeroasters.com/products/ethiopia-guji",
+      "current_selected_name": "Guji Ethiopia- Organic",
+      "selected_source_sha256": "e0176168901ac01b07d9bdcf3702bdce3d6da2435c70eccf84dcfa79783ce0c4",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 37,
+      "official_url": "https://lamulitacoffee.com/products/san-vicente-huila",
+      "current_selected_name": "San Vicente",
+      "selected_source_sha256": "1258a4d26c11a5be53cb5a1f22db7162d1b6ae0e9a53a58e228572fd6866165e",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": null,
+      "decision_diagnostic": "CURRENT_FIELD_CONFLICT",
+      "conflicts": [
+        "roast_level"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 39,
+      "official_url": "https://www.lineageroasting.com/products/copy-of-kenya-gaikundo-2",
+      "current_selected_name": "Ethiopia, Dry Processed - Sulladjah Coffee Beans",
+      "selected_source_sha256": "ef0254758774e118bf7663e06ada197241a8e6608a9cd721e3622890884d2f67",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 40,
+      "official_url": "https://lowcountrycoffeeroasters.com/products/breakfast-blend",
+      "current_selected_name": "Breakfast Blend",
+      "selected_source_sha256": "f02167b5b42b7b91497e32c7b76c1426985119274230913885c4ed3bef60dcf3",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 41,
+      "official_url": "https://lowcountrycoffeeroasters.com/products/peru-hb-1",
+      "current_selected_name": "Peru HB",
+      "selected_source_sha256": "7efd186d234a754f6f1d941490207b390c441f751546568632669a325e605eeb",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": "Cocoa, Almond",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 42,
+      "official_url": "https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural",
+      "current_selected_name": "ETHIOPIA GUJI ORGANIC DAMBI UDDO NATURAL",
+      "selected_source_sha256": "0d83c2cdb0c764fe63897609b7fb348ee775319afe7c7561e66215192573776b",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 43,
+      "official_url": "https://memoirscoffee.com/products/papua-new-guinea-lahamenegu-red-mountain-natural-ax",
+      "current_selected_name": "PAPUA NEW GUINEA, LAHAMENEGU RED MOUNTAIN NATURAL AX",
+      "selected_source_sha256": "466525cf81c7ae6f7164df46f67be2e8496a90b976fdc57eb0864dd70e357aed",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 44,
+      "official_url": "https://mountainthunder.com/products/espresso16",
+      "current_selected_name": "100% Kona Espresso Roast Coffee 16oz",
+      "selected_source_sha256": "4e3d2b1c50bb77e530b4bdc915c7a78b0afdef943cc3652f3b8c1d62b808e0f8",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": "Smokey with caramel notes",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 48,
+      "official_url": "https://shop.ohenryscoffee.com/products/ethiopia-yirgacheffe",
+      "current_selected_name": "Ethiopia Yirgacheffe",
+      "selected_source_sha256": "f82c976f753d4787dfa25422aa22ea176caf863c681052d8a699e7a016b8b469",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": "Light",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 45,
+      "official_url": "https://www.nativocoffeeroasters.com/products/tranquilo-decaf",
+      "current_selected_name": "TRANQUILO, Decaffeinated, 12 oz",
+      "selected_source_sha256": "cd7473bccee9e1c1a67f8730b53d791bf0073810cdc18a611b75934f4183fc9d",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 46,
+      "official_url": "https://nightswimcoffee.com/products/ghost-roast",
+      "current_selected_name": "Ghost Roast",
+      "selected_source_sha256": "9c1206363ed9106aaa1e7853737d2d0b0184a823d836e04eb228069669c7b951",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": "Koba",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 47,
+      "official_url": "https://novocoffee.com/product/danche",
+      "current_selected_name": "Danche",
+      "selected_source_sha256": "9f9f05bc52adc926aabab3e9144c9ed5541955cf0477e91066c9f671bb002b4c",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": "Geed, Ethiopia",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 52,
+      "official_url": "https://queencitycoffeeroasters.com/products/colombia-decaf",
+      "current_selected_name": "Colombia Decaf",
+      "selected_source_sha256": "ba84082ca0444b4dd96690d3369c002da5bec8220aaf087401025c0e7a5ad23b",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 51,
+      "official_url": "https://quartermaine.com/products/sumatra",
+      "current_selected_name": "Sumatra",
+      "selected_source_sha256": "d96e80746f9b6b974b48e33f89b81cf6a311f676b05d707e01b08f2c9fe8393d",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 50,
+      "official_url": "https://www.paperplanecoffee.com/products/tres-cruces-honey-processed-guatemala",
+      "current_selected_name": "TRES CRUCES, HONEY PROCESSED, GUATEMALA",
+      "selected_source_sha256": "7c74f39bee46df5e6cf79d607868271debbd52e55160a6dc9ddfebc907068637",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 49,
+      "official_url": "https://orleanscoffee.com/product/espresso-decaf-blend",
+      "current_selected_name": "Decaf Espresso Blend",
+      "selected_source_sha256": "c6172935033a4b7e649edbdfc4ccb300843c2f1cbed967293ae3293a7190f72d",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 53,
+      "official_url": "https://queencitycollectivecoffee.com/products/liliana-ramirez-colombia",
+      "current_selected_name": "Liliana Ramírez // Colombia",
+      "selected_source_sha256": "6af2ea849bf81dbaaef217b37bdcc5d2c7d0e6a295c5403befc036047d6d1930",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": "Washed",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 56,
+      "official_url": "https://roadmapcoffeeworks.com/products/ethiopia-worka-sakaro-anaerobic",
+      "current_selected_name": "ETHIOPIA WORKA SAKARO",
+      "selected_source_sha256": "0d3bde043a2e54cd50aeba742b1b0dacb93d0e924e8f2a573a8f9d863eea33b2",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 54,
+      "official_url": "https://www.readingcoffee.com/products/venezuela-finca-berlin-single-origin-coffee",
+      "current_selected_name": "Venezuela",
+      "selected_source_sha256": "2cea5bfb3eab1d9d85218fe6a501d0b89ea41aa37f3ad2ad082c25414f672d7d",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": "Micro-Lot",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 55,
+      "official_url": "https://redhouseroasters.com/products/sumatra",
+      "current_selected_name": "Sumatra",
+      "selected_source_sha256": "9fa50ad83425263df8e0d5f892477ea095bcae61e5dbeb883d650ee5d2b578fc",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": "Medium-Dark",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 57,
+      "official_url": "https://roadmapcoffeeworks.com/products/mexico-cesmach",
+      "current_selected_name": "MEXICO ANGEL ALBINO CORZO",
+      "selected_source_sha256": "7ecf8f379e4815849275770ec1ddb793bcdc82769d32fd7034589e8fa68c949d",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 59,
+      "official_url": "https://seedscoffee.com/products/ethiopia-guji-getachew-copy",
+      "current_selected_name": "Ethiopia Yirgacheffe Habtamu",
+      "selected_source_sha256": "dca28cba7e94dc5a731f94d8d289eb509990c2d5b36741e86477d3af5c7281f2",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": "Habtamu Fekadu Aga (Kuri Mountain Coffee)",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 58,
+      "official_url": "https://www.swroasting.coffee/product/guatemala-ella-todos-santos-medium-roast/25NBJDMXCAYX4YC5XJZAYZDG",
+      "current_selected_name": "Guatemala Ella Todos Santos MEDIUM ROAST",
+      "selected_source_sha256": "b9a117aa2b12d2d925c5ac1ae11dd4d2b61391bc4d3b8725b77f8917d046b13e",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 60,
+      "official_url": "https://sextantcoffee.com/products/plandanas-reserve-sextant-coffee",
+      "current_selected_name": "Walia Ibex - Organic Decaf Coffee",
+      "selected_source_sha256": "2e759004dee0548809ec5a0828db52f2542c721fe282ed68748f03161e098625",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [
+        "origin"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 63,
+      "official_url": "https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast",
+      "current_selected_name": "Simpatico Organic Low Acid: Medium Smooth Roast",
+      "selected_source_sha256": "08d9206976ab36609c604b02e30f68b98c5ec5c46d1158a1d65081899c92817f",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 62,
+      "official_url": "https://simpaticocoffee.com/products/simpatico-low-acid-decaf-coffee-dark-smooth-roast",
+      "current_selected_name": "Simpatico Low Acid Decaf: Dark Smooth Roast",
+      "selected_source_sha256": "5f436741b4240a93bb598e984dbbc0bd3af756a6350e32d0d7095a8c4311752b",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 61,
+      "official_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee",
+      "current_selected_name": "Simpatico Organic Low Acid Half-Caff Coffee",
+      "selected_source_sha256": "1e7b22f8ebb6c0ddce26048c5e051013ff6bcd0046cf9f6126c963d1bb7c861b",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 64,
+      "official_url": "https://sodality.coffee/products/supremo-colombia-decaf",
+      "current_selected_name": "Supremo Colombia Decaf",
+      "selected_source_sha256": "1294ba54d9528a0c2148a426e24f203714c1d842963e65add1b2460da9fba4b1",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 66,
+      "official_url": "https://staccatoroasters.com/products/honduras-elvin-suazo-natural-coffee",
+      "current_selected_name": "Honduras Elvin Suazo Coffee Beans",
+      "selected_source_sha256": "530c01fccc42e9b20e68f19b3b628aaf93a31b91b0a40f4ec220bdee6f944e21",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 68,
+      "official_url": "https://www.stumptowncoffee.com/products/kenya-karumandi",
+      "current_selected_name": "Kenya Karumandi",
+      "selected_source_sha256": "3ca8ad1735edb1156db9cc40616961ddd853aadfe27b1ee69f92ca68bf1c310c",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": "Washed",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 65,
+      "official_url": "https://spirituscoffee.com/products/guatemala-manos-de-mujer",
+      "current_selected_name": "Guatemala Manos de Mujer",
+      "selected_source_sha256": "1c41cf1c66ac1ea1f998caf03af5113d753bc66d23dfffb16be743df79218147",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": "Guaya'b Asociación Civil, Manos de Mujer women producers program",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [
+        "tasting_notes"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 67,
+      "official_url": "https://www.stageline.coffee/product-page/brazil-capricornio-dulce-signature",
+      "current_selected_name": "Brazil Capricornio Dulce Signature",
+      "selected_source_sha256": "a63e4b1d039b9a3dec6f1f76fc0647db34b455fcd73d7f4669a1c2b14ff378fb",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 69,
+      "official_url": "https://subterracoffee.com/products/decaf-colombia-sugarcane-medium-roast",
+      "current_selected_name": "decaf colombia sugarcane medium roast",
+      "selected_source_sha256": "8319548a0e5332b948fbe93c0867f6e82dcfe0cb49b61b05265be13f1af6da06",
+      "status": "PARSED",
+      "decision_field": "process",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 70,
+      "official_url": "https://www.tandemcoffee.com/products/faver-ninco-santa-maria-huila-colombia",
+      "current_selected_name": "Faver Ninco - Colombia",
+      "selected_source_sha256": "32f5715a76bdacc1f06be501612c7e3d4644c2eae10615fa54c842d25a5223be",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 72,
+      "official_url": "https://thrivefarmers.com/products/horizon-organic",
+      "current_selected_name": "Horizon Organic",
+      "selected_source_sha256": "59917afc32d9fde482cd3619ee3e37be8a87fca909623b3149abfa845ce7d22c",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 71,
+      "official_url": "https://roasterympls.com/products/organic-ethiopia-guiji",
+      "current_selected_name": "Natural Organic Ethiopia Guiji",
+      "selected_source_sha256": "723810707bb26978d08f0c156f03b3f12b79e9795b33e07dc46115b2605540c5",
+      "status": "PARSED",
+      "decision_field": "producer",
+      "canonical_field_value": null,
+      "decision_diagnostic": "UNPUBLISHED_OR_NOT_EXTRACTED",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 74,
+      "official_url": "https://vestacoffee.com/products/papayo-wushwush-elias-shady-bayter",
+      "current_selected_name": "Wush Wush + Papayo, Anaerobic Natural - Elías & Shady Bayter",
+      "selected_source_sha256": "90ef108b18a9cb9fc0452d1b6855d354b88f1a121f394280df8f02e8f0ddb2de",
+      "status": "PARSED",
+      "decision_field": "origin",
+      "canonical_field_value": "Fresno, Tolima, Colombia",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 75,
+      "official_url": "https://www.woodshedroast.com/products/ethiopian",
+      "current_selected_name": "Ethiopian | Single Origin Coffee",
+      "selected_source_sha256": "5ed6d84fe78001dc36eb3193ab285dd7c12a32d30395ca907cfa7f3064092a02",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": "fruity, stone fruits, orange blossom",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 76,
+      "official_url": "https://www.wreckingballcoffee.com/products/ethiopia-gedeb-banko-gotiti-12oz",
+      "current_selected_name": "Ethiopia Gera, Natural Process, Gr. 1",
+      "selected_source_sha256": "7c6d504c1e8044d6711211fb486180ef4a9b298c7e4c3047683fd4c206ca6bed",
+      "status": "PARSED",
+      "decision_field": "tasting_notes",
+      "canonical_field_value": null,
+      "decision_diagnostic": "CURRENT_FIELD_CONFLICT",
+      "conflicts": [
+        "tasting_notes"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 73,
+      "official_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica",
+      "current_selected_name": "Dedication- Costa Rica",
+      "selected_source_sha256": "86f0fa0324e90c11ba92fb1469bc35ac9baf845760ec89297fe54ef5459e1361",
+      "status": "PARSED",
+      "decision_field": "release_label",
+      "canonical_field_value": null,
+      "decision_diagnostic": "LITERAL_SOURCE_CONTEXT_ONLY",
+      "conflicts": [
+        "origin",
+        "process",
+        "variety"
+      ],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    },
+    {
+      "number": 77,
+      "official_url": "https://yellowstonecoffee.com/products/colombia-huila",
+      "current_selected_name": "COLOMBIA HUILA",
+      "selected_source_sha256": "cf913e24aa515c6213a5044e30d94579786a45c515572124842a4761c172970c",
+      "status": "PARSED",
+      "decision_field": "roast_level",
+      "canonical_field_value": "Medium-Light",
+      "decision_diagnostic": "CANONICAL_FIELD_PRESENT",
+      "conflicts": [],
+      "preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      }
+    }
+  ]
+}
