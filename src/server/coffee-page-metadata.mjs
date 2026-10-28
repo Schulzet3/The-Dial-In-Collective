@@ -1684,8 +1684,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  let qualified_process_review_note='';
  try{
   const selectedUrl=new URL(source_url);
+  const selectedPath=selectedUrl.pathname.replace(/\/+$/,'');
+  const selectedFudamProduct=selectedPath==='/products/colombian-supremo-organic'||
+   /^\/collections\/[^/]+\/products\/colombian-supremo-organic$/.test(selectedPath);
   if(selectedUrl.hostname.toLowerCase().replace(/^www\./,'')==='beanstockcoffee.com'&&
-   selectedUrl.pathname.replace(/\/+$/,'')==='/products/colombian-supremo-organic'&&
+   selectedFudamProduct&&
    /\bFUDAM\b/i.test(fields.name||'')&&!fields.process&&!conflicts.has('process')){
    const prose=productCoffeeProse(canonicalProduct,clean);
    const qualified=prose.some(block=>!block.educational&&

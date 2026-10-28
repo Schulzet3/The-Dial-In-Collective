@@ -122,3 +122,25 @@ test('selected FUDAM qualified source context survives bounded review export wit
  assert.ok(snapshot.published_source_information.some(f=>f.field==='processing_context'&&/generally washed/i.test(f.value)));
  assert.equal(snapshot.verification,'unverified_public_source_suggestions');
 });
+
+test('official Beanstock Shopify collection URLs preserve current FUDAM processing review without inventing Washed',()=>{
+ const title='New!! Colombia Fair Trade Organic FUDAM LA Union';
+ const html='<main><h1>'+title+'</h1><p>FUDAM is an association of growers.</p>'+
+  '<p>The coffees are generally washed two or three times before being dried.</p></main>';
+ for(const path of ['/products/colombian-supremo-organic',
+  '/collections/medium-roasts/products/colombian-supremo-organic',
+  '/collections/frontpage/products/colombian-supremo-organic']){
+  const url='https://beanstockcoffee.com'+path;
+  const result=extractPublicCoffeeFacts(html,{source_url:url});
+  assert.equal(result.ok,true,path);
+  assert.equal(result.fields.process,undefined,path);
+  assert.match(result.process_review_note||'',/generally washed/i,path);
+  assert.equal(coffeeSourceReviewSnapshot(result)?.processing_review_note,result.process_review_note,path);
+ }
+ for(const url of ['https://otherroaster.example/products/colombian-supremo-organic',
+  'https://beanstockcoffee.com/collections/medium-roasts/products/different-coffee',
+  'https://beanstockcoffee.com/collections/medium-roasts/other/colombian-supremo-organic']){
+  const result=extractPublicCoffeeFacts(html,{source_url:url});
+  assert.equal(result.process_review_note,undefined,url);
+ }
+});
