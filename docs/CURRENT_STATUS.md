@@ -1,3 +1,9 @@
+## October 28 UTC — Issue #26 keyboard accessibility defect reproduced and repaired (TESTING)
+
+Owner authorized remaining accessibility/responsive tests. Initial PR221 test-only run40785496790 captured actual Chromium failure: Search/Sort Enter drops focus after CloudApp.render() replaces the root DOM. Narrow fix restores the same keyed keyboard control after Search, coffee expansion and shot-history in-place redraws, without altering modal/focused form actions or approved visuals. Dedicated synthetic Chromium checks include dialog focus, five sensory ratings, validation, touch, contrast, motion, portrait/landscape, one-shot recommendation. Queue DIC-Q-26-keyboard-dialog-responsive-regression TESTING, same-commit journal; exact-source CI and integration pending. No live Supabase/Netlify changes or publication; physical VoiceOver test unperformed.
+
+---
+
 ## October28 — 24 audited items DEPLOYED; later PR220 separately READY
 
 Release **DIC-20261028-READY-QUEUE-08** published 2026-10-28T23:03:32.392Z from tested source`506b267204cd19d7b1f13c511e437186b8d92bb9`; actual release`05cf9eb156f63110cd434034ec3914a1e92b76d3`, Netlify **READY/current`6ae27f32bfae09ad8745e19b`** independently verified. All24 selected queue items are DEPLOYED. Dedicated SQL acceptance caught/fixed older-client pending decaf fact loss. Final1913NodePASS/0FAIL/6explicit configurationSKIP, lint/build, SQL/permissions, browser/mobile/PWA and five exact merged-source releasechecksPASS. Live32/32 security/public probes+6/6 hosted smoke and9/9 changed frontend blobhashesPASS. Fresh encrypted/offsite backup byte-matched; decafSQL20261028230056 applied once; all6 original table counts/digests unchanged; Edge8/4JWT unchanged. Main recoverypin actualpublished05cf9eb;08:00UTCdaily/Sunday schedulesverified.
