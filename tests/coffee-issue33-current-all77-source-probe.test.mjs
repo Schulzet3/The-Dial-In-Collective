@@ -83,3 +83,15 @@ test('all 77 saved real current official source parses render in actual Add Coff
  }
  assert.equal(flagged,15);
 });
+
+test('owner77 current selected source probe is bounded, source-only and retains manual review',()=>{
+ const s=readFileSync(new URL('../scripts/audit/issue33-owner77-evidence-probe.mjs',import.meta.url),'utf8');
+ const workflow=readFileSync(new URL('../.github/workflows/roaster-source-probe.yml',import.meta.url),'utf8');
+ assert.match(workflow,/owner77-evidence:[\s\S]*?\[dic-issue33-owner77\]/);
+ assert.match(s,/fetchPublicCoffeeHtml\(row.original_product_url,opts\)/);
+ assert.match(s,/extractPublicCoffeeFacts\(page.html/);
+ assert.match(s,/coffeeUrlPreviewMarkup\(result\)/);
+ assert.match(s,/UNPUBLISHED_OR_NOT_EXTRACTED/);
+ assert.match(s,/CURRENT_FIELD_CONFLICT/);
+ assert.doesNotMatch(s,/service_role|createClient|insert into public|delete from public|update public|apply_migration/i);
+});

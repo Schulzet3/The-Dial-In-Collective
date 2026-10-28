@@ -78,3 +78,19 @@ jobs:
           node-version: '22'
       - name: Retry only two safe oversized selected-product URLs at the preexisting product-only cap
         run: node scripts/audit/issue33-oversized-source-probe.mjs
+
+  owner77-evidence:
+    if: contains(github.event.head_commit.message, '[dic-issue33-owner77]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Audit all 77 owner decisions against current official page and Add Coffee preview
+        run: node scripts/audit/issue33-owner77-evidence-probe.mjs
