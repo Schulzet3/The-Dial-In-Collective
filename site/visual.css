@@ -310,3 +310,17 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
  .shot-topline{grid-template-columns:minmax(0,1fr) auto;align-items:baseline;column-gap:12px}
  .shot-topline .shot-date{justify-self:end;white-space:nowrap}
 }
+
+/* Exact selected coffee roast purchase alternatives. No imagery or
+   false contradiction between two roast preparations of one coffee. */
+.coffee-roast-variants{margin:12px 0 17px;padding:13px;border:1px solid var(--line-strong);border-radius:10px;background:var(--well)}
+.coffee-roast-variants h3{font:650 14px/1.45 var(--sans);margin:0 0 10px}
+.coffee-roast-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.coffee-roast-variants .coffee-roast-option{min-height:43px;font-size:13px}
+.coffee-roast-option[aria-pressed="true"]{background:var(--surface);border:2px solid var(--action-line);box-shadow:inset 0 0 0 1px var(--action-line)}
+.coffee-roast-selected{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:12px;margin-top:12px}
+.coffee-roast-selected>strong{font-size:14px}
+.coffee-roast-brew{padding:10px 11px;background:var(--well);border:1px solid var(--line);border-radius:8px;margin:10px 0 0}
+.coffee-roast-brew>strong{font-size:12px}
+.coffee-roast-variants .coffee-roast-selected p.helper{margin:7px 0 0}
+@media(max-width:380px){.coffee-roast-options{grid-template-columns:1fr}}

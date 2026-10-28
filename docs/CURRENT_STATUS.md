@@ -1,3 +1,25 @@
+## October 28 UTC — PR179 merged exact current product/roast profiles, TESTING / NOT DEPLOYED
+
+**Owner authority:** Explicit current selected roaster product data beats SEO/archives (fallback only), current Mexico/Peru disagreements require manual review, unitless elevation is meters, rotating origin confirmation only when explicitly labeled; Ketch Light and Medium-Dark bought-roast profiles separated, no review photographs, shared Lempira/producer/origin/process/elevation preserved. No production publication granted.
+
+**Verified source:** PR179 final head 598622a56415fa3abc51aa4aed191a86acaf9cff, merge 4331031e96b5e594a6e640dd91f6c59ae5969a97, identical source tree 36347734afa66b15d5e74622c13c7c28a78e7d9e. Exact-head app/Node/lint/build 40616568413, cloud 40616568388, visual 40616568360, security 40616568381, SQL 40616568410, approval 40616568565 all SUCCESS. Postmerge app 40616781803, cloud 40616782266, visual 40616782318 and approval 40616782109 SUCCESS. Initial test failures were repaired and full suites rerun; no regression is claimed green on a failed SHA.
+
+**Honest limits:** immutable original603 run 40616568385 SKIPPED by historical source-branch/private ephemeral input; no new original603 score or supplemental retention score. Postmerge public URL acceptance runs 40616782014 and 40616781934 SKIPPED; live authenticated Ketch preview not exercised. Prior immutable corpus/oracle/scorer and member coffee, shots, privacy, offline, Community unchanged. Queue item remains TESTING, not READY, until missing source acceptance is actually verified. Release #07 remains last authorized publication; this scope is NOT DEPLOYED. No Netlify, production SQL/Edge/Auth or member writes.
+
+---
+
+## October 27 UTC — Ketch selected roast option parsing and Add Coffee preview (TESTING, NOT DEPLOYED)
+
+Owner approved the interactive two-roast Ketch preview. Real extractor/app code now under PR179 includes selected purchase roast options and roast-specific tasting/sensory/espresso details with shared coffee identity, product-only facts over SEO and no photos. Source tests added, exact-head CI and safe merge PENDING. No production or member data changes, no immutable original603 changes. Existing READY queue entries unchanged.
+
+---
+
+## October 27 UTC — Issue33 exact product/SEO fallback and explicitly rotating origin, TESTING
+
+Owner-authorized current exact product data/specs precede archives/SEO; SEO remains fallback only. Original contradictory Mexico/Peru on Black River stays withheld with both alternatives. Unitless labeled elevation already uses meters. New source tests and rotating-origin confirmation only for coffees explicitly labeled as rotating; do not add blanket origin prompts. This is a development change under CI, NOT DEPLOYED, no production operations. Frozen original 603 archive/oracle untouched.
+
+---
+
 ## October 27 UTC — Issue33 six original603 missing assertions recovered, exact merged-source READY (NOT DEPLOYED)
 
 **Owner step #1 completed for six proven source facts:** Actual unchanged original 603-coffee/201-roaster/1,197-capture isolated-preview-handler replay: true baseline 3,090 exact /89 missing /823 review; new **3,096 exact /83 missing /823 review** across 4,002 original canonical assertions. Precisely six original missing→exact, no previously exact lost and no other canonical case change. Original supplementary 5,458 fully retained /337 partial /679 unconfirmed across 6,474 unchanged, conflict/extra counts unchanged. Original captures/oracle/scorer hash verified and not rewritten. Six source-bound proofs + hashes: `docs/audits/extractor-issue33-missing-six-source-proof-20261027.json`.

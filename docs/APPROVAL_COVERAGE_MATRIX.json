@@ -1160,35 +1160,79 @@
       "residual": "Counter Culture supplemental capture loses 19 original source_facts under privacy-safe fixture sanitizer; canonical fields and conflicts unchanged; separate Issue33 audit finding"
     }
   },
-  "COFFEE-DECAF-ONLY-METHOD-20261027": {
-    "status": "APPROVED_SOURCE_TESTING",
-    "owner_source": "Owner instruction October 27 2026, Issue #180",
-    "canonical_specification": "docs/MASTER_SPECIFICATION.md",
-    "canonical_decision_ledger": "docs/DECISION_LEDGER.json",
-    "scope": [
-      "src/server/coffee-decaffeination-method.mjs",
+  "EXTRACTOR-CURRENT-PRODUCT-SEO-FALLBACK-ROTATION-20261027": {
+    "status": "MERGED_TESTING_ORIGINAL603_UNVERIFIED",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-selected-source-evidence.mjs",
       "src/server/coffee-page-metadata.mjs",
       "src/server/coffee-shopify-ajax.mjs",
-      "site/cloud/main.js",
-      "site/cloud/mapping.js",
       "site/cloud/coffee-url-autofill.js",
-      "site/lib/constants.js",
-      "site/lib/model.js",
-      "supabase/migrations/20261027170000_dic_decaf_only_method.sql"
+      "site/cloud/main.js"
     ],
     "tests": [
-      "tests/coffee-decaffeination-method.test.mjs",
-      "tests/coffee-decaf-app-persistence.test.mjs",
-      "tests/coffee-processing-residual-integrity.test.mjs"
-    ],
-    "exclusions": [
-      "Half-caf and regular coffee",
-      "Generic chemical-free/natural claims",
-      "Unsupported methylene chloride method",
-      "Mixing with primary green-coffee processing",
-      "Silent modification of approved coffee, original603 benchmark and historical shots"
+      "tests/coffee-owner-current-source-and-four-roasters.test.mjs",
+      "Existing Node and cloud CI"
     ],
     "release_authority": "NOT GRANTED",
-    "issue": 180
+    "verified_source": {
+      "pr": 179,
+      "head": "598622a56415fa3abc51aa4aed191a86acaf9cff",
+      "merge_sha": "4331031e96b5e594a6e640dd91f6c59ae5969a97",
+      "tree_sha": "36347734afa66b15d5e74622c13c7c28a78e7d9e",
+      "ci_success": [
+        40616568565,
+        40616568381,
+        40616568410,
+        40616568413,
+        40616568388,
+        40616568360,
+        40616782109,
+        40616782266,
+        40616781803,
+        40616782318
+      ],
+      "frozen603": "SKIPPED_PRIVATE_INPUT_BRANCH_GUARD_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED"
+    }
+  },
+  "EXTRACTOR-CURRENT-COFFEE-ROAST-VARIANTS-KETCH-20261027": {
+    "status": "MERGED_TESTING_ORIGINAL603_UNVERIFIED",
+    "owner_source": "Owner October 27 Ketch two-roast HTML preview approval",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-roast-variants.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/visual.css"
+    ],
+    "tests": [
+      "tests/coffee-ketch-roast-variants.test.mjs",
+      "Targeted source/HTML, full Node/cloud UI/build, visual and security CI pending"
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 179,
+      "head": "598622a56415fa3abc51aa4aed191a86acaf9cff",
+      "merge_sha": "4331031e96b5e594a6e640dd91f6c59ae5969a97",
+      "tree_sha": "36347734afa66b15d5e74622c13c7c28a78e7d9e",
+      "ci_success": [
+        40616568565,
+        40616568381,
+        40616568410,
+        40616568413,
+        40616568388,
+        40616568360,
+        40616782109,
+        40616782266,
+        40616781803,
+        40616782318
+      ],
+      "frozen603": "SKIPPED_PRIVATE_INPUT_BRANCH_GUARD_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED"
+    }
   }
 }

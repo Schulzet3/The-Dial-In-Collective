@@ -1085,6 +1085,46 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Source READY, NOT DEPLOYED. Six original coffee assertions recovered, no previous exact loss. Parent Issue33 stays IN_PROGRESS for 83 missing and 823 strict-review cases. No frozen oracle/source/scorer, production Netlify/SQL/Edge/Auth/member/offline change, paid service or deployment. Separate owner publish instruction required."
+    },
+    {
+      "id": "DIC-Q-33-owner-source-precedence-rotating-origin",
+      "issue": 33,
+      "pr": 179,
+      "title": "Exact current product priority, explicitly rotating origin review and source-backed purchased roast variants",
+      "state": "TESTING",
+      "merged_source_sha": "4331031e96b5e594a6e640dd91f6c59ae5969a97",
+      "scope_paths": [
+        "src/server/coffee-selected-source-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-shopify-ajax.mjs",
+        "site/cloud/coffee-url-autofill.js",
+        "site/cloud/main.js",
+        "src/server/coffee-roast-variants.mjs",
+        "site/visual.css"
+      ],
+      "tests": [
+        "PR179 reviewed exact code head 598622a56415fa3abc51aa4aed191a86acaf9cff: six applicable workflows SUCCESS, including app/Node/lint/build 40616568413, cloud unit/mobile/browser 40616568388, private visual 40616568360, isolated SQL 40616568410, source security 40616568381, approval/continuity 40616568565. First two failed Ketch test rounds were repaired and rerun; their failures are preserved in issue-33 work journal.",
+        "PR179 non-force merge 4331031e96b5e594a6e640dd91f6c59ae5969a97 with parent 5f7448c5081f84c60aa4cae49c3589115fcafc6d and reviewed head 598622a56415fa3abc51aa4aed191a86acaf9cff; merged tree 36347734afa66b15d5e74622c13c7c28a78e7d9e equals exact source feature head. Postmerge app/build 40616781803, cloud 40616782266, visual 40616782318, approval 40616782109 SUCCESS.",
+        "Exact original603 workflow 40616568385 was SKIPPED by strict single historical head-branch guard; postmerge public roaster checks 40616782014 and 40616781934 were SKIPPED. No fresh original603 score or authenticated live Ketch-UI verification is claimed; original archive and scorer unchanged.",
+        "Ketch product-page fixture asserts 2 purchased roast alternatives, shared Honduras/Cerro Bueno/Lempira/Natural/elevation, correct roast-specific tasting/sensory/espresso guidance, separate ratio/temperature/dose, no product photos, no automatic variant selection or guessed shot time, manual edits retained, SEO-only Parainema absent from member review, and raw audit provenance retained."
+      ],
+      "ci_runs": [
+        40616568565,
+        40616568381,
+        40616568410,
+        40616568413,
+        40616568388,
+        40616568360,
+        40616782109,
+        40616782266,
+        40616781803,
+        40616782318
+      ],
+      "blockers": [
+        "Original immutable 603-coffee/201-roaster exact-current-source replay and all supplementary checks have not run: workflow 40616568385 SKIPPED under locked historical-branch + ephemeral private-input restrictions. Source benchmark/expectations not available in this session; cannot assert score or promote this code to READY under Master Specification's 603 acceptance gate."
+      ],
+      "owner_source": "Direct owner instructions 2026-10-27, Issue #33",
+      "notes": "Merged, independently exact-source checked, TESTING awaiting original immutable 603 replay and scoped real-source acceptance; NOT READY and NOT DEPLOYED. The selected current product's Lempira variety prevails over SEO-only Parainema, which is hidden in the member preview (retained only as raw downloadable audit). Both Light and Medium-Dark roast choices share green coffee facts without false conflicts. Roast-specific notes, sensory ratings and espresso references only appear after member selection. No photos, no inferred extraction time, no member/private data writes, no production operations, no paid services. Parent Issue33 remains OPEN and other READY/DEPLOYED rows untouched."
     }
   ],
   "history": [

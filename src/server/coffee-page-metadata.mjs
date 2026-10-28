@@ -24,7 +24,7 @@ import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconci
 import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
-import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence} from './coffee-selected-source-evidence.mjs';
+import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
@@ -1447,8 +1447,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const current=/\b(?:this|our|current)\s+(?:coffee|lot|release)\b[^.!?]{0,130}\b(?:processed\s+as|is\s+washed|washed\s+process)\b/i.test(currentWords);
   if(historic&&!direct&&!current)delete fields.process;
  }
- // Only product-scoped, unconflicted source evidence can set a separate
- // Decaffeination Method; never substitute for Washed/Natural/Honey Process.
+ // Decaf-only selected-product evidence, separate from green-coffee Process.
  const decaffeination_method=inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
   conflicting:detailConflicts.has('processing_detail')
@@ -1457,6 +1456,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
+  ...(explicitlyRotatingCoffeeOrigin(canonicalProduct)||explicitlyRotatingCoffeeOrigin(p?.description)?{origin_confirmation_required:true}:{}),
   ...(source_facts.length?{source_facts}:{}),
   ...(source_facts.truncated||scopeTruncated||identityScopeTruncatedByFields.has(fields)?{source_facts_truncated:true}:{}),
   ...(fields.producer&&narrativeProducerByFields.has(fields)?{producer_source:'narrative'}:{}),

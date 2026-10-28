@@ -162,3 +162,11 @@ export function selectedPageCoffeeEvidence({html='',name='',seoTitle='',seoDescr
   add('roast_level','Light','we approached the roast with a lot of restraint; We kept development deliberately light','selected_product_roast_development');
  return unique(facts);
 }
+
+export function explicitlyRotatingCoffeeOrigin(raw){
+ if(typeof raw!=='string'||raw.length>160000)return false;
+ const text=raw.replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ return /\b(?:origin|origins)\s*[:：]\s*(?:rotating|seasonal|variable|varies?\s+by\s+(?:lot|release|batch))\b/i.test(text)||
+  /\b(?:this|our|current)\s+(?:coffee|decaf|product|lot)\s+(?:has|uses|features)\s+(?:a\s+)?(?:rotating|changing|seasonal)\s+origin\b/i.test(text)||
+  /\borigins?\s+(?:changes?|var(?:y|ies))\s+(?:by|between|with|per)\s+(?:lot|batch|season|release)\b/i.test(text);
+}
