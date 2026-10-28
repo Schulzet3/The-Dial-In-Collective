@@ -265,6 +265,13 @@ function selectedScaleAnchors(page,nodes){
 export function extractRoastVisualEvidence(html){
  if(typeof html!=='string'||html.length>2_000_000)return {value:null,confidence:'none',source:null,hint:''};
  const page=cropProduct(html),pageNodes=coffeeHtmlElements(page).nodes,found=[],hints=[];
+ // A product-specific photographed label can state a relative roast without
+ // publishing a supported seven-tier category. Use this only for a member
+ // review hint, and require the caption to name the ONE selected H1 exactly;
+ // unrelated product cards and broad photo descriptions cannot contribute.
+ const selectedTitles=pageNodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=220);
+ const selectedTitle=selectedTitles.length===1?
+  plain(page.slice(selectedTitles[0].headEnd,selectedTitles[0].contentEnd)):'';
  const offer=(value,source,confidence='explicit')=>{
   const v=normalizeRoastLabel(value)||roastLabelInPhrase(value);
   if(v)found.push({value:v,source,confidence});
@@ -316,6 +323,16 @@ export function extractRoastVisualEvidence(html){
   }
   const label=a['aria-label']||a.alt||a.title||'';
   if(/\broast\b/i.test(label))offer(label,'graphic_accessible_label');
+  if(node.tag==='img'&&selectedTitle){
+   const alt=coffeeHtmlAttributes(node.attributes).alt||'';
+   // attrs() intentionally budgets arbitrary labels at 90 characters; the
+   // fully quoted attribute is needed for a longer selected bag-label ALT.
+   if(alt.length<=300&&alt.toLowerCase().startsWith(
+     'product label for '+selectedTitle.toLowerCase()+' with ')){
+    const relative=alt.match(/\b(lighter|darker)\s+roast\b/i);
+    if(relative)offer(relative[1],'selected_product_image_relative_roast');
+   }
+  }
  }
  // Inline SVG titles/tags can express the graphic's value without OCR.
  const svgNodes=new Set();
