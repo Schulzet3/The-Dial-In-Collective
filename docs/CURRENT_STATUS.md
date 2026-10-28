@@ -1,3 +1,9 @@
+## October 27 UTC — Ketch selected roast option parsing and Add Coffee preview (TESTING, NOT DEPLOYED)
+
+Owner approved the interactive two-roast Ketch preview. Real extractor/app code now under PR179 includes selected purchase roast options and roast-specific tasting/sensory/espresso details with shared coffee identity, product-only facts over SEO and no photos. Source tests added, exact-head CI and safe merge PENDING. No production or member data changes, no immutable original603 changes. Existing READY queue entries unchanged.
+
+---
+
 ## October 27 UTC — Issue33 exact product/SEO fallback and explicitly rotating origin, TESTING
 
 Owner-authorized current exact product data/specs precede archives/SEO; SEO remains fallback only. Original contradictory Mexico/Peru on Black River stays withheld with both alternatives. Unitless labeled elevation already uses meters. New source tests and rotating-origin confirmation only for coffees explicitly labeled as rotating; do not add blanket origin prompts. This is a development change under CI, NOT DEPLOYED, no production operations. Frozen original 603 archive/oracle untouched.

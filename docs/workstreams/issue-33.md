@@ -1,3 +1,13 @@
+## October 27 UTC — Issue33 approved Ketch two-roast UI integrated into source PR179 (TESTING)
+
+**Owner authority:** User approved shared Legacy Farms Honduras Natural details, two separate purchased roast profiles and earlier shown interactive HTML preview, explicitly no photos; asked to incorporate into real extractor and give next difficult coffee. Prior source/SEO fallback rule and Black River Mexico/Peru review remain Locked.
+
+**Implementation:** Add exact selected-product Roast Level option reader and bounded roast-scoped note/sensory/espresso parser (src/server/coffee-roast-variants.mjs); integrate into exact Shopify product preview and cross-source merge. Do not select a roast by default, invent dose/time, borrow adjacent or marketing sources, or promote Parainema from SEO to selected-product variety. Add real Add Coffee variant buttons, selected roast helper/source review export and protected member-edit switch, keep original form submission and shared facts intact. Add theme-matched CSS, no photographs. Add Ketch light/medium-dark factual and UI regression tests. The previously owner-approved source-priority-only PR179 implementation remains preserved and its parent SHA has seven success CI checks, with frozen603 hosted workflow SKIPPED (not a pass).
+
+**Verification:** This new Ketch change is TESTING, not yet CI passed or merged, not READY. Do not alter immutable original603 corpus/oracle/scorer, existing user coffee/shot/notes, access, Community, offline queues or provider configuration. No Netlify publication, SQL, Edge/Auth, paid services or member writes. Next: exact-head tests and integrated release-queue readback; repair any failures.
+
+---
+
 ## October 27 UTC — Owner priority follow-up, exact current product vs archived SEO-only contradiction (TESTING)
 
 Owner explicitly directed that the selected current product page and labeled specifications always supersede archived/SEO values, which are fallback only. Black River Mexico/Peru are both current selected-page claims and MUST both be flagged, never silently selected. Unitless labeled elevation already defaults to meters; rotating origin is not universally mandatory. This source patch permits only a documented all-low-priority archived/SEO conflict to yield to exact selected current product specifications. A direct current opposing reading still blocks auto-fill. Frozen 603 and stored member records untouched. Tests added; exact-source GitHub CI/merge and queue evidence pending. No publish authorization.
