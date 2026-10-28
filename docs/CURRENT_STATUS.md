@@ -1,3 +1,9 @@
+## October 28 UTC — Full City PR185 source merged/verified; restricted corpus unverified (NOT DEPLOYED)
+
+Approved Full City → Medium-Dark source normalization is merged at 1abb7f92327c11e92b89a73fdb00c80235a70665, with tested head 0409852c8439fc7314c106e2d15040a5ff7c9cda, six applicable head CI SUCCESS and postmerge app/cloud/approval SUCCESS. PR184 superseded and closed unmerged; latest Kona/Cortez changes preserved. Frozen original603 workflow and public roaster checks SKIPPED, NOT PASS. Queue remains TESTING, not READY. User's separate publication approval not granted, no production writes. Coffee #4 White Coffee roaster source review presented for owner response.
+
+---
+
 ## October 28 UTC — Ahrre's Full City → Medium-Dark review (TESTING, NOT DEPLOYED)
 
 Owner-approved Full City normalization is source-implemented with regression tests for exact Ahrre's African Blend and Tanzanian Peaberry product roast labels, including /products/test identity, and negative off-product assertions. Canonical Master Specification, Decision Ledger, approval coverage, review register and release queue synchronized; PR183 prior Kona merge preserved at a7f77cb. No publication, original603 rewrite or member data mutation. New CI pending.

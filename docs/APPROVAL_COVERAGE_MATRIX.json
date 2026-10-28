@@ -1334,7 +1334,7 @@
     "release_authority": "NOT GRANTED"
   },
   "EXTRACTOR-FULL-CITY-MEDIUM-DARK-20261027": {
-    "status": "SOURCE_TESTING",
+    "status": "MERGED_TESTING_ORIGINAL603_UNVERIFIED",
     "owner_source": "October 27, 2026 owner explicit Full City → Medium-Dark decision",
     "canonical_master": "docs/MASTER_SPECIFICATION.md",
     "canonical_ledger": "docs/DECISION_LEDGER.json",
@@ -1343,8 +1343,32 @@
       "tests/roast-level-evidence.test.mjs"
     ],
     "tests": [
-      "Selected-product Ahrre's regressions, negatives and source conflict tests added; exact-source GitHub CI pending."
+      "New Ahrre's direct selected-product/negative/conflict regressions + adapted superseded Full City negative cases in original CI tests.",
+      "Final PR185 exact-head six workflows SUCCESS; original603 workflow SKIPPED branch restriction, not passed.",
+      "Post-merge Node/cloud/approval workflows SUCCESS on merged source."
     ],
-    "release_authority": "NOT GRANTED"
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 185,
+      "head_sha": "0409852c8439fc7314c106e2d15040a5ff7c9cda",
+      "merge_sha": "1abb7f92327c11e92b89a73fdb00c80235a70665",
+      "tree_sha": "93cf96ff6d79828280d722138916e54a78ba802b",
+      "exact_head_passed": [
+        40625136665,
+        40625136742,
+        40625136700,
+        40625136725,
+        40625136683,
+        40625136681
+      ],
+      "merged_passed": [
+        40625424495,
+        40625424465,
+        40625424306
+      ],
+      "original603": "SKIPPED_NOT_PASSED",
+      "live_source": "SKIPPED_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED"
+    }
   }
 }
