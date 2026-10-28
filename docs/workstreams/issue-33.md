@@ -1,3 +1,9 @@
+## October 28 UTC — Ahrre's Full City owner approval, coffee reviews #2/#3
+
+Owner approved Full City as canonical Medium-Dark. Current official Ahrre's African Blend and Tanzanian Peaberry each publish Full City as their selected coffee ROAST. Tanzanian Peaberry is indeed the product title at the unusual /products/test URL. Original benchmark expected Medium-Dark for both. New exact-product parsing and regression tests cover explicit label, negative title/educational/related snippets and conflicting direct roast. Both reviewed cases resolved; proceed to Coffee #4 independently. No fabricated unpublished facts, original603 modifications, production writes or deployment. Concurrent Kona PR #183 already merged SHA a7f77cb; preserve it. Scope TESTING until exact CI and nonforce merge, original corpus branch guard separately unverified.
+
+---
+
 ## October 28 UTC — Kona queue approval CI repair
 
 PR183 first exact-source approval workflow 40622781642 failed at queue validation: the newly added test file was mistakenly included in the `scope_paths` list, which accepts only deployable code paths. Removed the test from scope metadata and retained it under test evidence, as required. New exact-source CI required. No production, data or security changes.

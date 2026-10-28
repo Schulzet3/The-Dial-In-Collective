@@ -27,7 +27,7 @@ export function normalizeRoastLabel(value){
  const qualifiedSentence=v.match(/^(ultra light|very light|light medium|medium light|medium dark|dark medium|light|medium|dark),\s+(?:keeping|with)\b(.+)$/);
  if(qualifiedSentence&&!/\b(?:light|medium|dark|not|rather|instead)\b/.test(qualifiedSentence[2]))v=qualifiedSentence[1];
  // A merchant may print its traditional label beside an explicit supported
- // category. The category is evidence; Full City by itself remains unmapped.
+ // category. The category is evidence; owner-approved Full City is Medium-Dark.
  const qualified=v.match(/^(ultra light|very light|light medium|medium light|medium dark|dark medium|light|medium|dark)\s*\([^()]{1,45}\)$/)||
   v.match(/^[^()]{1,45}\s*\((ultra light|very light|light medium|medium light|medium dark|dark medium|light|medium|med|dark)\)$/);
  if(qualified)v=qualified[1]==='med'?'medium':qualified[1];
@@ -35,6 +35,7 @@ export function normalizeRoastLabel(value){
   ['ultra light','Ultra Light'],['very light','Very Light'],['light','Light'],
   ['light medium','Medium-Light'],['medium light','Medium-Light'],
   ['medium','Medium'],['medium dark','Medium-Dark'],['dark medium','Medium-Dark'],
+   ['full city','Medium-Dark'],
   ['dark','Dark']
  ]);
  // Never infer an Ultra Light roast from a roaster's brand/reputation,
@@ -45,8 +46,8 @@ export function roastLabelHint(value){
  const v=plain(value);
  if(!v||v.length>70||!/(?:light|medium|dark|blonde|city)/i.test(v))return '';
  if(normalizeRoastLabel(v))return '';
- // Strictly represent roaster-provided text; no silent canonical coercion.
- if(/^(?:extra[\s-]?light|nordic[\s-]?light|(?:light|medium|dark)\+|lighter|darker|full[ -]city)\s*(?:roast)?$/i.test(v))
+ // Other unsupported labels remain reviewable; Full City has an approved mapping.
+ if(/^(?:extra[\s-]?light|nordic[\s-]?light|(?:light|medium|dark)\+|lighter|darker)\s*(?:roast)?$/i.test(v))
   return 'Roaster describes the coffee as '+v+'. Choose the closest supported level manually.';
  return '';
 }
@@ -269,6 +270,22 @@ export function extractRoastVisualEvidence(html){
   if(block.educational||block.text.length>160)continue;
   const label=block.text.match(/^roast(?:\s+(?:level|profile|degree|type))?\s*[:=–—-]\s*(.{2,70})[.!]?$/i);
   if(label){const hint=roastLabelHint(label[1]);if(hint)hints.push(hint);}
+ }
+ // Ahrre's prints COFFEE DETAILS / ROAST / Full City in distinct blocks.
+ // The selected product must have exactly one title and the roast value must
+ // immediately follow the explicit field label. This does not interpret a
+ // generic roast guide, product name, related product or chart legend.
+ const currentTitles=pageNodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=220);
+ if(currentTitles.length===1){
+  for(const node of pageNodes){
+   if(!/^h[2-6]$/.test(node.tag)||node.contentEnd-node.headEnd>70||
+    !/^roast$/i.test(plain(page.slice(node.headEnd,node.contentEnd))))continue;
+   const preceding=page.slice(Math.max(0,node.start-12000),node.start);
+   if(!/<h[2-6]\b[^<>]{0,300}>\s*coffee details\s*<\/h[2-6]>/i.test(preceding))continue;
+   const next=page.slice(node.end,Math.min(page.length,node.end+400));
+   const value=next.match(/^\s*(?:<\/(?:div|section|span)>\s*){0,2}(?:<(?:p|span|div|dd|strong)\b[^<>]{0,200}>\s*){0,3}(full[ -]city(?:\s+roast)?)(?=\s*(?:<|$))/i);
+   if(value)offer(value[1],'selected_product_roast_detail');
+  }
  }
  // Meta tags are included only with explicitly roast-specific names, NOT
  // generic SEO descriptions which often mention several roast levels.

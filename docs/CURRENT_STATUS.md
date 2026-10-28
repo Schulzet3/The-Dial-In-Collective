@@ -1,3 +1,9 @@
+## October 28 UTC — Ahrre's Full City → Medium-Dark review (TESTING, NOT DEPLOYED)
+
+Owner-approved Full City normalization is source-implemented with regression tests for exact Ahrre's African Blend and Tanzanian Peaberry product roast labels, including /products/test identity, and negative off-product assertions. Canonical Master Specification, Decision Ledger, approval coverage, review register and release queue synchronized; PR183 prior Kona merge preserved at a7f77cb. No publication, original603 rewrite or member data mutation. New CI pending.
+
+---
+
 ## October 28 UTC — Owner-approved Kona per-roast tasting notes (TESTING, NOT DEPLOYED)
 
 Current development contains Ketch's purchased-roast UI; Kona Earth also provides explicitly labelled `Tasting Notes by Roast` for Medium, Medium Dark (Full City), and Dark. A scoped source branch now teaches the extractor to use each specific list instead of generic product flavor text and excludes Green Unroasted from roasted options. New regressions and full CI/merge pending. Issue33 remains OPEN and immutable original603 replay remains separately unverified; no production publication.

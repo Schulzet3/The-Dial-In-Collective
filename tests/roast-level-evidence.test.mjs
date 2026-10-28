@@ -111,3 +111,46 @@ test('untrusted graphic markup remains escaped in preview',()=>{
  assert.doesNotMatch(markup,/<script>/);
  assert.equal(r.fields.roast_level,undefined);
 });
+
+test('Full City explicit labels map to Medium-Dark, not compound unrelated labels',()=>{
+ for(const label of ['Full City','Full-City','Full City Roast','Roast: Full City','ROAST LEVEL: full city'])
+  assert.equal(normalizeRoastLabel(label),'Medium-Dark',label);
+ for(const label of ['Full City +','Full City Dark','Full City Blend','City','City+','Vienna Roast'])
+  assert.equal(normalizeRoastLabel(label),null,label);
+});
+test('Ahrres African Blend selected COFFEE DETAILS Full City is Medium-Dark',()=>{
+ const r=extractPublicCoffeeFacts('<html><body><main><section class="selected-product">'+
+  '<h2>COFFEE DETAILS</h2><h6>FLAVOR NOTES</h6><p>Floral, Fruity, Berry</p>'+
+  '<h6>REGION</h6><p>Africa</p><h6>ROAST</h6><p>Full City</p>'+
+  '<h1>AFRICAN BLEND</h1><p>The African Blend is medium to full-bodied.</p>'+
+  '</section></main></body></html>',{source_url:'https://www.ahrre.com/products/african-blend'});
+ assert.equal(r.ok,true);assert.equal(r.fields.roast_level,'Medium-Dark');
+ assert.equal(r.roast_source,'selected_product_roast_detail');
+});
+test('Ahrres Tanzanian Peaberry is read from its exact current /products/test identity',()=>{
+ const r=extractPublicCoffeeFacts('<html><body><main><section class="selected-product">'+
+  '<h2>COFFEE DETAILS</h2><h6>FLAVOR NOTES</h6><p>Floral, Fruity, Berry</p>'+
+  '<h6>REGION</h6><p>Africa</p><h6>ROAST</h6><p>Full City</p>'+
+  '<h1>TANZANIAN PEABERRY</h1><p>Wet-processed beans grown in Tanzania.</p>'+
+  '</section></main></body></html>',{source_url:'https://www.ahrre.com/products/test'});
+ assert.equal(r.ok,true);assert.equal(r.fields.roast_level,'Medium-Dark');
+ assert.equal(r.roast_source,'selected_product_roast_detail');
+});
+test('a coffee name, educational prose or related Full City cannot donate selected roast',()=>{
+ for(const detail of [
+  '<h1>Full City</h1><p>A named coffee without a roast level.</p>',
+  '<h1>African Blend</h1><p>Full City is traditionally a roast classification.</p>',
+  '<h1>African Blend</h1><h2>Roast guide</h2><h6>ROAST</h6><p>Full City</p>',
+  '<h1>African Blend</h1><h2>More coffees</h2><a href="/products/full-city"><h6>ROAST</h6><p>Full City</p></a>'
+ ]){
+  const r=asPreview(detail);
+  assert.equal(r.fields.roast_level,undefined,detail);
+ }
+});
+test('conflicting current product roast source still requires human review',()=>{
+ const r=extractPublicCoffeeFacts('<html><head><meta name="product:roast_level" content="Dark"></head>'+
+  '<body><main><section><h2>COFFEE DETAILS</h2><h6>ROAST</h6><p>Full City</p><h1>AFRICAN BLEND</h1></section></main></body></html>',
+  {source_url:'https://www.ahrre.com/products/african-blend'});
+ assert.equal(r.fields.roast_level,undefined);
+ assert.ok(r.conflicts?.includes('roast_level'));
+});
