@@ -72,6 +72,23 @@ export function selectedStructuredCoffeeEvidence({title='',description='',tags=[
  const coop=body.match(/\bthe\s+(COMSA)\s+Cooperative\s*,?\s+founded\s+in\s+\d{4}\b[^.!?]{0,170}\bindividual\s+farmers\b/i);
  if(namedCoop&&coop&&norm(namedCoop[1])===norm(coop[1]))
   add('producer','Comsa Cooperative',coop[0],'selected_product_named_grower_cooperative');
+ // A named current-coffee growing/exporting enterprise may have a separate
+ // public-facing alias. A founder biography alone is NOT producer evidence.
+ // Require the enterprise to overlap this selected coffee's title and its
+ // founder's inherited farm to supply its operating coffee export business.
+ const enterprise=body.match(/\b([\p{Lu}][\p{L}\p{M}'’.-]{2,40}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40}){1,4})\s*\(\s*[‘'“"]([\p{Lu}][\p{L}\p{M}'’.-]{2,40}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40}){1,5})[’'”"]\s*\)\s+was\s+founded\s+in\s+\d{4}\s+by\s+([\p{Lu}][\p{L}\p{M}'’.-]{2,40}\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40})\b/u);
+ if(enterprise){
+  const titleWords=new Set(norm(name).split(' '));
+  const namedCurrent=norm(enterprise[1]).split(' ').some(word=>
+   word.length>=5&&!/^(?:ethiopia|colombia|honduras|guatemala|coffee|beans|organic|farm|estate|company|roasters)$/.test(word)&&titleWords.has(word));
+  const preceding=body.slice(Math.max(0,enterprise.index-90),enterprise.index);
+  const historical=/\b(?:last|previous|former|other|another|historical)\s+(?:year|season|lot|release|coffee|farm)\b/i.test(preceding);
+  const founder=enterprise[3].split(/\s+/).join('\\s+');
+  const cultivation=new RegExp('\\bthe\\s+farm\\s+'+founder+
+   '\\s+inherited\\b[^.!?]{0,220}\\bexport\\s+operation\\b[^.!?]{0,240}\\boutgrowers\\b[^.!?]{0,150}\\bcontribute\\s+cherry\\b','iu').exec(body);
+  if(namedCurrent&&!historical&&cultivation)
+   add('producer',enterprise[1]+' ('+enterprise[2]+')',enterprise[0]+' | '+cultivation[0],'selected_product_named_growing_export_enterprise');
+ }
  // Literal selected product title includes the roast class and its description
  // independently identifies roasting "on the ... side of [same level]".
  const roastTitle=name.match(/\b(light|medium|dark)\s*$/i),roastCopy=body.match(/\broasted\s+on\s+the\s+[^.!?]{1,50}?\b(?:side\s+of\s+)(light|medium|dark)\b/i);

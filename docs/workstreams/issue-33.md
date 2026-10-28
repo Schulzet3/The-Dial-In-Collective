@@ -1,3 +1,27 @@
+## October 28 UTC — PR222 test variable conflict repaired, pending rerun (NO DEPLOY)
+
+Corrected earlier post-release acceptance repair: Node/cloud runs 40785962286 and 40785962322 caught duplicate `const cortez` declaration in the same historical test, accidentally introduced by the READY→DEPLOYED assertion update. Renamed the new queue row variable `queueCortez`; kept both actual selected Cortez product source evidence and deployed-source/release SHA checks unchanged. All fixed source parser tests are otherwise unaffected. Retest exact-source all relevant CI before merge; no production/member/Supabase changes.
+
+---
+
+## October 28 UTC — PR222 post-Release08 QA receipt test recovery (NO DEPLOY)
+
+Initial PR222 head `186c53cc6837474dcb461e570f3b16ec00a6988e` approval40785515963 failed because parser path lacked queue tracking, repaired by non-force upstream integration commit9017c406 and TESTING queue row. Initial cloud UX40785515845 revealed two preexisting `tests/coffee-issue33-review-register.test.mjs` historical READY assertions for Cortez and #27/#72 after Release08 legitimately moved these queue rows to DEPLOYED. All actual historical selected source digests, selected identities, provenance and CI references remain unchanged; allow READY→DEPLOYED state only if actual deployed source and release SHAs are valid. No source semantics or production writes. Retest PR-head exact Node/cloud/approval, public77 acceptance, integration. This is not publication authorization.
+
+---
+
+## October 28 UTC — PR222 approval-intake failure diagnosed and repaired before merge (NO DEPLOY)
+
+PR222 initial exact PR-head approval workflow40785515963 returned FAIL solely because the new selected-source parser path lacked a tracked TESTING queue row. Concurrent Release08 postflight merged and marked its previously published24 items DEPLOYED; the correction branch was originally based on the older development head. Reconciled full current upstream development source and all release08 queues/journals into this PR branch via non-force two-parent Git merge, preserving private data and previously published receipts. Added `DIC-Q-33-current-producing-enterprise` as TESTING until complete CI, official77 source proof and later integration; do not claim READY. No new published code/SQL/Edge/Auth or member changes. Rerun exact-source checks on corrected PR head and inspect results.
+
+---
+
+## October 28 UTC — Issue #33 #59 current Seeds Yirgacheffe Habtamu producer organization candidate, NO DEPLOY
+
+Owner-approved 77-coffee #59 exact official [Seeds Ethiopia Yirgacheffe Habtamu](https://seedscoffee.com/products/ethiopia-guji-getachew-copy) identifies `Habtamu Fekadu Aga (‘Kuri Mountain Coffee’)` founded by Aaga Dinsa, whose inherited farm is the center of its export operation; 144 registered outgrowers contribute cherry to company washing stations. Historical reused Shopify slug names Guji Getachew; the **current exact selected Product title/story** determines identity. Latest official77 merged-source probe40784736501 still left Producer blank despite this producing-enterprise evidence. Candidate extends selected Product-only extraction, requiring title overlap, founder/farm/export cultivation relationship and cherry-contributing outgrowers; only current source literal enterprise and alias can populate. Founder biography alone, wrong selected title, unrelated Product or historical organization are withheld. Adds Shopify, selected JSON-LD, positive and negative tests; no immutable original603 data/scorer, member data, permissions, SQL/Auth/Edge, Release08 or existing READY changes touched. Status **TESTING, NOT READY** pending exact-head CI, current77 probe, safe nonforce merge/readback, and queue/documentation reconciliation. No production deployment authorized.
+
+---
+
 ## October 28 UTC — Issue #33 #17 literal Pacamara sensory pair independently READY, NO DEPLOY
 
 Approved residual #17 Coffee Roaster Nicaragua Pumpkin Spice Pacamara exact current source names `Pumpkin pie and warm cinnamon` and says pumpkin spice was introduced during on-farm cherry fermentation, not after roasting. Generic bounded grammatical selected-source reader in PR220, current flavor module plus positive, negative, structured/current selected tests; no roaster URL hardcoding or inferred additive processing. PR220 exact tested head `89c4bdf61b59b0aeac230eacc87de2a1f8aa383f` all seven applicable GitHub CI SUCCESS: Node/build40784332001, cloud/mobile40784332039, visual40784331972, SQL40784332004, security40784332085, approval40784332003, private source bundle40784331982. Restricted original603 job40784332120 SKIPPED, not passed. Merged nonforce `4498aa2acb0ae50cdf78fad1ea394e451b24f5db`, parents verified, exact merged-source app40784736509, cloud40784736519, approval40784736518 all SUCCESS.
