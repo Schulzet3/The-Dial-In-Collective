@@ -160,7 +160,22 @@ export function coffeeUrlPreviewMarkup(result){
  const extras=Object.entries(detailsLabels).filter(([key])=>typeof result.roaster_details?.[key]==='string'&&result.roaster_details[key]);
  const allPublishedFacts=Array.isArray(result.source_facts)?result.source_facts.slice(0,MAX_SOURCE_REVIEW_FACTS).filter(fact=>
   fact&&typeof fact.label==='string'&&fact.label.trim()&&typeof fact.value==='string'&&fact.value.trim()):[];
- const publishedFacts=allPublishedFacts.filter(fact=>!['json','projection','reference'].includes(fact.format));
+ const selectedSpecs=new Set(Array.isArray(result.current_product_spec_fields)?result.current_product_spec_fields:[]);
+ const currentFacts=new Set(allPublishedFacts.filter(fact=>
+  fact.field&&['html','product_json'].includes(fact.source_type)&&
+  typeof result.fields?.[fact.field]==='string'&&
+  String(fact.value||'').trim().toLowerCase()===result.fields[fact.field].trim().toLowerCase()
+ ).map(fact=>fact.field));
+ const publishedFacts=allPublishedFacts.filter(fact=>{
+  if(['json','projection','reference'].includes(fact.format))return false;
+  // SEO is fallback, not a competing selected-product detail. Keep raw
+  // evidence in the optional source export, never in the ordinary review.
+  if(['seo','page_meta','archived_metadata','html_meta'].includes(fact.source_type)&&
+     fact.field&&(selectedSpecs.has(fact.field)||currentFacts.has(fact.field))&&
+     typeof result.fields?.[fact.field]==='string'&&
+     String(fact.value||'').trim().toLowerCase()!==result.fields[fact.field].trim().toLowerCase())return false;
+  return true;
+ });
  const structuredRecords=allPublishedFacts.filter(fact=>['json','projection','reference'].includes(fact.format));
  const recipe=result.roaster_recipe||{};
  const validYield=Number.isFinite(recipe.yield_g)||

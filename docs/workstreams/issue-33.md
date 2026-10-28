@@ -1,3 +1,9 @@
+## October 28 UTC — SEO-only variety suppression in member preview
+
+Owner specifically rejected Ketch Parainema from unrelated/SEO values. Added explicit regression: stale `page_meta` Parainema versus current selected-product Varietals Lempira resolves to Lempira with NO member conflict; ordinary review hides the stale SEO fact when a direct current field is available. Raw archived audit provenance remains in a consciously downloaded source-review file under the existing evidence-retention Locked rule, not a current coffee suggestion. Exact-current-source tests and new CI still pending; no publication.
+
+---
+
 ## October 28 UTC — Ketch PR179 first exact cloud test failure repaired
 
 **Actual failure:** Cloud job 122577497187 in run 40615682791 on feature SHA f7845290d5bc433f07baee4e090ebacd14ec0966 ran 1,342 tests: 1,341 PASS, 1 FAIL. Ketch source-review snapshot test called the pure parser without the `source_url` the real Netlify preview handler attaches, so snapshot intentionally returned null. The provider endpoint already attaches the validated source URL; repaired only the test fixture to exercise that production-shaped boundary. Additionally removed any global roaster espresso recipe before a roast is selected (light and medium-dark references differ); selected roast still shows exact recipe. Capitalized Ketch tasting note display. New exact-source CI required; no test or publication claims for the new SHA. No frozen oracle, member/private data or provider mutation.

@@ -97,3 +97,17 @@ test('switching roast preserves manually corrected flavor or roast instead of ov
  assert.equal(controls.roast_level.value,'Medium-Dark');
  assert.equal(controls.tasting_notes.value,'My personally confirmed notes');
 });
+
+test('SEO-only Parainema is not offered against Ketch selected-product Lempira',()=>{
+ const current=extractShopifyAjaxData(data,request);
+ const stale={ok:true,source_url:url,fields:{name:current.fields.name,variety:'Parainema'},
+  source_facts:[{field:'variety',label:'Historical SEO',value:'Parainema',source_type:'page_meta',source_url:url}]};
+ const merged={...mergePublicProductPreview(stale,current),source_url:url};
+ assert.equal(merged.fields.variety,'Lempira');
+ assert.ok(!merged.conflicts?.includes('variety'));
+ const html=coffeeUrlPreviewMarkup(merged);
+ assert.match(html,/Lempira/);
+ assert.doesNotMatch(html,/Parainema/);
+ const audit=coffeeSourceReviewSnapshot(merged);
+ assert.ok(audit.published_source_information.some(x=>x.value==='Parainema'));
+});
