@@ -15,7 +15,8 @@ test('only existing canonical #1-5 are claimed implemented; later reverse review
   const r=register.records[i],c=canon.cases.find(x=>x.sequence===r.number);
   assert.equal(r.owner_authority==='CANONICAL_APPROVED',!!c);
   if(!c){
-   assert.equal(r.implementation_status,'NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE');
+   if(r.number===77)assert.equal(r.implementation_status,'SOURCED_EXTRACTOR_FIX_CANDIDATE_PR190_TESTING');
+   else assert.equal(r.implementation_status,'NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE');
    assert.notEqual(r.release_status,'READY');
   }
  }
