@@ -1159,5 +1159,36 @@
       "original603_run": "SKIPPED_BY_WORKFLOW_BRANCH_GUARD; no new original corpus score",
       "residual": "Counter Culture supplemental capture loses 19 original source_facts under privacy-safe fixture sanitizer; canonical fields and conflicts unchanged; separate Issue33 audit finding"
     }
+  },
+  "COFFEE-DECAF-ONLY-METHOD-20261027": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Owner instruction October 27 2026, Issue #180",
+    "canonical_specification": "docs/MASTER_SPECIFICATION.md",
+    "canonical_decision_ledger": "docs/DECISION_LEDGER.json",
+    "scope": [
+      "src/server/coffee-decaffeination-method.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/main.js",
+      "site/cloud/mapping.js",
+      "site/cloud/coffee-url-autofill.js",
+      "site/lib/constants.js",
+      "site/lib/model.js",
+      "supabase/migrations/20261027170000_dic_decaf_only_method.sql"
+    ],
+    "tests": [
+      "tests/coffee-decaffeination-method.test.mjs",
+      "tests/coffee-decaf-app-persistence.test.mjs",
+      "tests/coffee-processing-residual-integrity.test.mjs"
+    ],
+    "exclusions": [
+      "Half-caf and regular coffee",
+      "Generic chemical-free/natural claims",
+      "Unsupported methylene chloride method",
+      "Mixing with primary green-coffee processing",
+      "Silent modification of approved coffee, original603 benchmark and historical shots"
+    ],
+    "release_authority": "NOT GRANTED",
+    "issue": 180
   }
 }

@@ -4397,5 +4397,18 @@
     "approval": "Owner direct instruction October 27 2026: 'Remember an agtron reading IS the most accurate way to determine roast level.'",
     "source": "https://www.agtroninc.com/wp-content/uploads/m-basic-operating-system.pdf",
     "release_scope": "SOURCE_ONLY; no permission for production publish, migrations, SQL/Edge/Auth, member mutations or paid services."
+  },
+  "COFFEE-DECAF-ONLY-METHOD-20261027": {
+    "status": "Locked",
+    "date": "2026-10-27",
+    "title": "Decaffeination method appears only for fully decaffeinated coffees",
+    "decision": "In Coffee Details and the source-backed extractor, present a separate Decaffeination Method only for fully decaffeinated coffee. Exactly three normalized values: Water Process (Swiss Water/Mountain Water/water decaf), Sugar Process (sugarcane/cane sugar/ethyl acetate/EA), Carbon Dioxide (CO2) (CO2/supercritical/liquid carbon dioxide). Never misclassify regular/half-caf coffee, unrelated product copy, contradictory methods, generic organic/chemical-free/natural claims, or unsupported methods such as methylene chloride. Keep original coffee Process separate, with unknown method blank and source evidence preserved; new previews do not rewrite historical approved member data.",
+    "approval": "Owner Oct 27 2026: ONLY if a coffee is Decaf ONLY include its method; 3 standardized choices Water, Sugar, Carbon Dioxide; research alternate roaster labels.",
+    "issue": 180,
+    "sources": [
+      "https://www.swisswater.com/pages/coffee-decaffeination-process",
+      "https://sca.coffee/sca-news/coffee-decoded-21-chemistry-of-decaf"
+    ],
+    "release_scope": "DEVELOPMENT_ONLY; no production publication, SQL/Edge/Auth changes or member-data mutation granted."
   }
 }
