@@ -1563,6 +1563,33 @@
       ],
       "owner_source": "Issue #33 owner-approved Great Circle #27 selected current Location Cayambe-Coca Natural Reserve, Ecuador versus second Region Cayambe-Coca Natura Reserve.",
       "notes": "This is only a literal same-reserve one-letter omission comparator, not geographic inference or blanket fuzzy matching. Preserve source facts. PR #202 developed concurrently; keep separate. No publication, schema mutation or member-data modification. PR203 non-force merged at 986c48e8ad629dcdee31cbacc5f90139e1669d2c after all applicable exact-head ordinary CI succeeded. TESTING NOT DEPLOYED."
+    },
+    {
+      "id": "DIC-Q-33-thrive-component-community",
+      "issue": 33,
+      "pr": 204,
+      "title": "Selected multi-origin blend producing-community credit, without whole-blend Producer autofill",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-blend-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "site/cloud/coffee-url-autofill.js"
+      ],
+      "tests": [
+        "Targeted #72 selected-product component-only origin/producer evidence and Add Coffee/source-review export, plus #27 same-reserve/country positive and conflicting-country negative tests.",
+        "Exact-source Node/build, cloud/browser/mobile, security, isolated SQL, approval, current live #27/#72, immutable original603 require readback.",
+        "Initial PR204 cloud UX 40718142801 failed a single flawed generic negative fixture (valid source included inadvertently). Same-commit fixture corrected; code unchanged. Await exact-head rerun before READY."
+      ],
+      "ci_runs": [
+        40718142801
+      ],
+      "blockers": [
+        "Exact-head CI and fresh public-source #27/#72 acceptance not yet verified.",
+        "Original immutable603 changed-source regression and non-force merge receipt pending."
+      ],
+      "owner_source": "Owner-approved Issue #33 case #72 ACODIHUE is a producing community only for Guatemalan component of Horizon Organic; #27 selected Great Circle Location Cayambe-Coca Natural Reserve, Ecuador and compatible Origin Ecuador.",
+      "notes": "Leave blend-wide canonical Producer blank; preserve unrelated Marta Solares farmer biography only in supplemental review. No production DB/Netlify edits or purchases."
     }
   ],
   "history": [

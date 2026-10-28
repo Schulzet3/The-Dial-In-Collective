@@ -214,6 +214,7 @@ export function coffeeUrlPreviewMarkup(result){
   ${fields.some(([key])=>key==='elevation_m'&&elevationWithDefaultMeters(result.fields[key])!==result.fields[key])?'<p class="helper">The roaster omitted the elevation unit. Meters above sea level (m) are assumed, per the approved import rule.</p>':''}
   ${result.roast_hint?`<p class="helper" role="note"><strong>Roast graphic:</strong> ${e(result.roast_hint)}</p>`:''}
   ${result.process_review_note?`<p class="helper" role="note"><strong>Processing review:</strong> ${e(result.process_review_note)}</p>`:''}
+  ${result.producer_review_note?`<p class="helper" role="note"><strong>Producer review:</strong> ${e(result.producer_review_note)}</p>`:''}
   ${publishedRecipe?`<p class="helper"><strong>Roaster's published espresso ${fullRecipe?'recipe':'reference'}:</strong> ${publishedRecipe}. Reference only; not applied or saved automatically.</p>`:''}
   ${extras.length?`<details class="coffee-url-supplement"><summary>Other published details (${extras.length})</summary><dl class="coffee-url-fields">${extras.map(([key,label])=>`<div><dt>${e(label)}</dt><dd>${e(result.roaster_details[key])}</dd></div>`).join('')}</dl><p class="helper">Source details are for review. Agtron-derived levels may assume Gourmet ground-coffee readings; supplementary measurements are not saved as coffee fields.</p></details>`:''}
   ${publishedFacts.length?`<details class="coffee-url-supplement"><summary>Published source information (${publishedFacts.length})</summary><p class="helper">Review the roaster's product text, specifications and purchase options. These details are not saved automatically.</p><dl class="coffee-url-fields">${publishedFacts.map(fact=>`<div><dt>${fact.section?e(fact.section)+' · ':''}${e(fact.label)}${fact.conflicting?' · conflicting sources':''}</dt><dd>${e(fact.value)}</dd></div>`).join('')}</dl></details>`:''}
@@ -277,6 +278,7 @@ export function coffeeSourceReviewSnapshot(result,{checkedAt=new Date().toISOStr
   ...(result.origin_confirmation_required===true?{origin_confirmation_required:true}:{}),
   ...(roastReviewNote!==null?{roast_review_note:roastReviewNote}:{}),
   ...(typeof result.process_review_note==='string'?{processing_review_note:bounded(result.process_review_note,2000)}:{}),
+  ...(typeof result.producer_review_note==='string'?{producer_review_note:bounded(result.producer_review_note,2000)}:{}),
   limitations:'Extraction is a review aid. Image pixels, linked documents and unexposed dynamic content may contain additional or conflicting information. This file does not approve or update a shared coffee record.'};
 }
 export function downloadCoffeeSourceReview(snapshot){

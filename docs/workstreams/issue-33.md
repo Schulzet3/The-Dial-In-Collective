@@ -1,3 +1,22 @@
+## October 28 UTC — PR204 first cloud CI negative-fixture correction (same-commit)
+
+First scoped head ed123962c91d38196d20dfcab7e5a35fc84b4d2a: source security 40718142683, approval 40718142820, private source bundle 40718142825 and isolated SQL 40718142739 passed. Cloud UX run 40718142801 failed exactly one new test: a supposedly generic negative fixture included the *same complete valid selected ACODIHUE source evidence*, so the correct parser emitted the component credit. This was a flawed negative fixture, not proof of a parser defect. Replace that example with roaster education context lacking any selected component credit; preserve all positive source checks and no guess at blend-wide Producer. All exact-source CI must rerun before merge. Original603 hosted workflow 40718142624 skipped, not passed.
+
+---
+
+## October 28 UTC — Owner #27 and #72 scoped implementation staged (CI/merge pending)
+
+Authority: owner explicitly requests fix coffees #27 Great Circle La Josefina Sudan Rume and #72 Thrive Horizon Organic. Development source 6ae7895eadcfc07aeac8661a6974d145af18ed01; Netlify published 6ae0fc16178b2f1241e441f8 from f5f29a02; Supabase ACTIVE_HEALTHY. Concurrent PR202 remains open and untouched.
+
+#27 current roaster URL https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume describes Cayambe-Coca Natural Reserve, Ecuador, producer Leopoldo Andrade / Ligia Merizalde. PR203 previously merged same-reserve Natural/Natura spelling guard; direct current-parser and immutable603 parity still pending.
+#72 current official URL https://thrivefarmers.com/products/horizon-organic describes Guatemala/Nicaragua, Huehuetenango(GT)/Matagalpa(NI), Medium roast, Washed, Caturra/Pache Verde, elevation 1750masl, Fruity/Toasted Cereal/Chocolate. It names ACODIHUE as a producing community only in the Guatemalan component narrative. Later Marta Solares/La Esperanza is a separate farmer profile and must never be selected product Producer.
+
+New bounded reusable selected-blend association reader adds only component-qualified roaster_details.blend_components, a visible Producer review note, and source-linked component_producer review fact. It leaves whole-blend canonical Producer blank and never claims the Nicaraguan component. Tests cover #27 same-reserve positive and country disagreement negatives; #72 explicit association, wrong product identity, unrelated farmer widget, absent role and persistence-suggestion exclusion.
+
+Scope is TESTING until exact-head CI, fresh public-source cases, immutable original603 changed-source and safe nonforce merge readback. No member, database, original oracle, Netlify release/production, or paid service changed.
+
+---
+
 ## October 28 UTC — PR203 reserve-origin fix merged, exact CI readback, scoped TESTING
 
 PR #203 non-force merged at 986c48e8ad629dcdee31cbacc5f90139e1669d2c; exact tested head 6739285c916d4d41cf5c7179ce0cd96b6b8f4f09. Corrected head CI app/build 40714042857, cloud UX 40714042566, private visual 40714042794, isolated SQL 40714042783, approval 40714042578, security 40714042643 and private source bundle 40714042655 SUCCESS. Initial approval 40713629744 failed due missing queue intake; corrected scoped item in same PR, retested SUCCESS. The original603 protected workflow 40714042606 SKIPPED, so new exact-source immutable603 remains unverified; Great Circle live 77 current source replay and real authenticated Add Coffee persistence also pending. Keep DIC-Q-33-same-reserve-selected-origin TESTING, parent #33 IN_PROGRESS. No Netlify deployment, member writes, or prod migrations. Preserve concurrent PR202.
