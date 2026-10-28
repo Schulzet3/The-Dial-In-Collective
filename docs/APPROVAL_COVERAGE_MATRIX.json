@@ -2,7 +2,7 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-10-26",
+  "reconciled_at_utc": "2026-10-28",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
@@ -52,6 +52,7 @@
     "current_owner_remove_hide_shot_control_20261021",
     "current_owner_required_outlier_review",
     "current_owner_retire_hide_shot_backend_20261021",
+    "current_owner_retire_screenshot_claude_20261028",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
     "current_owner_single_instruction_development_and_publication_20261022",
@@ -1074,5 +1075,616 @@
       "Isolated real cloud preview adapter/handler/app mobile and desktop journey"
     ],
     "release_authorization": "NOT GRANTED: source-only; prepare READY upon full acceptance"
+  },
+  "EXTRACTOR-CURRENT-SELECTED-SOURCE-FERMENTATION-20261027": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Direct October 27 2026 owner decisions and four roaster URL additions",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs"
+    ],
+    "independent_probe_roasters": [
+      "Stumptown Ethiopia Nano Challa",
+      "Blue Bottle Hayes Valley Espresso",
+      "Counter Culture Sipacapa",
+      "Peet's Guatemala Linda Vista"
+    ],
+    "tests": [
+      "tests/coffee-owner-current-source-and-four-roasters.test.mjs",
+      "scripts/audit/coffee-completeness-live-probe.mjs (opt-in, live best effort)",
+      "app/Node/lint/build, cloud UX, original frozen603 unchanged canonical regression",
+      "Historical co-op washed story without current-lot confirmation must not become canonical processing."
+    ],
+    "release_authorization": "NOT GRANTED: source-only, no production or member writes",
+    "verified_source": {
+      "merged_sha": "7a691a2fa33d96614a14a05115e8686b07c55fed",
+      "pr": 176,
+      "status": "READY_NOT_DEPLOYED",
+      "owner_authorization": "source only",
+      "ci_success": [
+        40574408431,
+        40574408406,
+        40574408430,
+        40574408717,
+        40574408438,
+        40574408424,
+        40574895385,
+        40574895350,
+        40574895532,
+        40574895252,
+        40574895167
+      ],
+      "original603_run": "SKIPPED_BY_WORKFLOW_BRANCH_GUARD; no new original corpus score",
+      "residual": "Counter Culture supplemental capture loses 19 original source_facts under privacy-safe fixture sanitizer; canonical fields and conflicts unchanged; separate Issue33 audit finding"
+    }
+  },
+  "EXTRACTOR-VERIFIED-AGTRON-GROUND-PRIORITY-20261027": {
+    "status": "APPROVED_SOURCE_TESTING",
+    "owner_source": "Explicit owner October 27 2026 Agtron reading priority clarification",
+    "canonical_specification": "docs/MASTER_SPECIFICATION.md",
+    "canonical_decision_ledger": "docs/DECISION_LEDGER.json",
+    "scope": [
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs"
+    ],
+    "tests": [
+      "tests/coffee-agtron-current-source-live.test.mjs",
+      "Existing seven-tier Agtron interpretation, roast conflict and original coffee regression tests, exact-source Node/lint/build/mobile"
+    ],
+    "exclusions": [
+      "Peet's 86/100 arbitrary roast slider",
+      "Unspecified or whole-bean score overriding labeled current roast",
+      "Rewriting historical member coffees or frozen603"
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "merged_sha": "7a691a2fa33d96614a14a05115e8686b07c55fed",
+      "pr": 176,
+      "status": "READY_NOT_DEPLOYED",
+      "owner_authorization": "source only",
+      "ci_success": [
+        40574408431,
+        40574408406,
+        40574408430,
+        40574408717,
+        40574408438,
+        40574408424,
+        40574895385,
+        40574895350,
+        40574895532,
+        40574895252,
+        40574895167
+      ],
+      "original603_run": "SKIPPED_BY_WORKFLOW_BRANCH_GUARD; no new original corpus score",
+      "residual": "Counter Culture supplemental capture loses 19 original source_facts under privacy-safe fixture sanitizer; canonical fields and conflicts unchanged; separate Issue33 audit finding"
+    }
+  },
+  "EXTRACTOR-CURRENT-PRODUCT-SEO-FALLBACK-ROTATION-20261027": {
+    "status": "READY_NOT_DEPLOYED",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-selected-source-evidence.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js"
+    ],
+    "tests": [
+      "tests/coffee-owner-current-source-and-four-roasters.test.mjs",
+      "Existing Node and cloud CI",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 179,
+      "head": "598622a56415fa3abc51aa4aed191a86acaf9cff",
+      "merge_sha": "4331031e96b5e594a6e640dd91f6c59ae5969a97",
+      "tree_sha": "36347734afa66b15d5e74622c13c7c28a78e7d9e",
+      "ci_success": [
+        40616568565,
+        40616568381,
+        40616568410,
+        40616568413,
+        40616568388,
+        40616568360,
+        40616782109,
+        40616782266,
+        40616781803,
+        40616782318
+      ],
+      "frozen603": "SKIPPED_PRIVATE_INPUT_BRANCH_GUARD_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED",
+      "original603_independent_replay": {
+        "scope": "ALL_CURRENT_EXTRACTOR_CODE",
+        "pr": 190,
+        "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+        "exact": 3096,
+        "missing": 81,
+        "review_required": 825,
+        "zero_previous_exact_losses": true,
+        "supplementary_unchanged": true,
+        "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json"
+      }
+    }
+  },
+  "EXTRACTOR-CURRENT-COFFEE-ROAST-VARIANTS-KETCH-20261027": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "Owner October 27 Ketch two-roast HTML preview approval",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-roast-variants.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/visual.css"
+    ],
+    "tests": [
+      "tests/coffee-ketch-roast-variants.test.mjs",
+      "Targeted source/HTML, full Node/cloud UI/build, visual and security CI pending",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 179,
+      "head": "598622a56415fa3abc51aa4aed191a86acaf9cff",
+      "merge_sha": "4331031e96b5e594a6e640dd91f6c59ae5969a97",
+      "tree_sha": "36347734afa66b15d5e74622c13c7c28a78e7d9e",
+      "ci_success": [
+        40616568565,
+        40616568381,
+        40616568410,
+        40616568413,
+        40616568388,
+        40616568360,
+        40616782109,
+        40616782266,
+        40616781803,
+        40616782318
+      ],
+      "frozen603": "SKIPPED_PRIVATE_INPUT_BRANCH_GUARD_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED",
+      "original603_independent_replay": {
+        "scope": "ALL_CURRENT_EXTRACTOR_CODE",
+        "pr": 190,
+        "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+        "exact": 3096,
+        "missing": 81,
+        "review_required": 825,
+        "zero_previous_exact_losses": true,
+        "supplementary_unchanged": true,
+        "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json"
+      }
+    }
+  },
+  "COFFEE-DECAF-ONLY-METHOD-20261027": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "Oct 27 2026 owner instruction, Issue #180",
+    "canonical_specification": "docs/MASTER_SPECIFICATION.md",
+    "canonical_decision_ledger": "docs/DECISION_LEDGER.json",
+    "scope": [
+      "site/cloud/main.js",
+      "site/cloud/mapping.js",
+      "site/cloud/coffee-url-autofill.js",
+      "site/lib/constants.js",
+      "site/lib/model.js",
+      "src/server/coffee-decaffeination-method.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "supabase/migrations/20261027170000_dic_decaf_only_method.sql"
+    ],
+    "tests": [
+      "tests/coffee-decaffeination-method.test.mjs",
+      "tests/coffee-decaf-app-persistence.test.mjs"
+    ],
+    "exclusions": [
+      "Half-caf and regular coffee",
+      "Unsupported methylene chloride decaf",
+      "Conflicting product-source methods",
+      "Any automatic mutation of existing approved coffee, shots or original 603 oracle"
+    ],
+    "release_authority": "NOT GRANTED",
+    "issue": 180,
+    "verified_source": {
+      "merged_sha": "e9a1895974c823e6fbe34e3a517dc298ed7bd5bf",
+      "pr": 181,
+      "ci_success": [
+        40618414981,
+        40618414871,
+        40618414942,
+        40618414853,
+        40618414936,
+        40618414845,
+        40618871585,
+        40618871586,
+        40618871532,
+        40618871626,
+        40618871635
+      ],
+      "original603": "SKIPPED by restricted workflow; not rebenchmarked",
+      "production": "No Netlify deployment or production database migration"
+    }
+  },
+  "EXTRACTOR-SELECTED-ROAST-PRINTED-NOTES-PRIORITY-20261027": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "Owner explicit October 27 approval of Kona Earth 100% Kona Classic: each roast's printed tasting notes outrank generic current description",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-roast-variants.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "tests/coffee-kona-roast-profiles.test.mjs"
+    ],
+    "tests": [
+      "tests/coffee-kona-roast-profiles.test.mjs: exact-source Node/cloud and browser checks pending",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 183,
+      "feature_head": "6d8f28117864a1a3aa95d116ca34eeaf87dd8eaf",
+      "merge_sha": "a7f77cb70e510d51580e2d076d7484281c020be9",
+      "tree_sha": "369a375343024ec04e71fbc2729efb49c78e756e",
+      "passed": [
+        40622879825,
+        40622879856,
+        40622879955,
+        40622879832,
+        40622879835,
+        40622879861,
+        40623117630,
+        40623117571,
+        40623117565
+      ],
+      "frozen603": "SKIPPED_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED",
+      "original603_independent_replay": {
+        "scope": "ALL_CURRENT_EXTRACTOR_CODE",
+        "pr": 190,
+        "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+        "exact": 3096,
+        "missing": 81,
+        "review_required": 825,
+        "zero_previous_exact_losses": true,
+        "supplementary_unchanged": true,
+        "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json"
+      }
+    }
+  },
+  "EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027": {
+    "status": "MERGED_SOURCE_READY_LIVE_SELECTED_HTML_VERIFIED_NOT_DEPLOYED",
+    "owner_source": "Owner direct approval October 27, 2026, exact Cortez question",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-shopify-ajax.mjs"
+    ],
+    "tests": [
+      "PR189 exact head 6f81af9 passes six applicable workflows: 40629362551, 40629362565, 40629362567, 40629362576, 40629362581, 40629362577; merged-source 40b271ada app/cloud/approval success 40629575873, 40629575863, 40629576034.",
+      "Original frozen603 workflow 40629362624 SKIPPED; exact current source original-corpus replay not run; source and recovery archive hashes locally verified, not scored.",
+      "Cortez exact live Shopify .js endpoint inaccessible; historic indexed El Salvador/Papua New Guinea/Ethiopia snapshots are never promoted to current facts.",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+      "Independent current direct HTTPS official selected HTML run 40638754513 SUCCESS after PR192 merge d7d0e11208f5425c82a79ad657d25959b676a6d9; exact current selected Ethiopian identity and current specs parsed, original stale El Salvador/PNG copy ignored, no parsed conflicts. Source receipt docs/audits/issue33-direct-current-source-probe-20261028.json. Shopify .js response not_html: no Ajax pass claimed. Full original603 current parser replay PR191 3096/81/825 strict, no regressions."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 189,
+      "head_sha": "6f81af9e5878b975258323163b7379111dc51f35",
+      "merge_sha": "40b271adabcb8c71354c1272ea7227e6df3d3c88",
+      "tree_sha": "a196549de4dea23a8c0d20ce70daa13fbba5a201",
+      "status": "READY_LIVE_SELECTED_HTML_NOT_DEPLOYED",
+      "original603_independent_replay": {
+        "scope": "ALL_CURRENT_EXTRACTOR_CODE",
+        "pr": 190,
+        "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+        "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json"
+      }
+    }
+  },
+  "EXTRACTOR-FULL-CITY-MEDIUM-DARK-20261027": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "October 27, 2026 owner explicit Full City → Medium-Dark decision",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/roast-level-evidence.mjs",
+      "tests/roast-level-evidence.test.mjs"
+    ],
+    "tests": [
+      "New Ahrre's direct selected-product/negative/conflict regressions + adapted superseded Full City negative cases in original CI tests.",
+      "Final PR185 exact-head six workflows SUCCESS; original603 workflow SKIPPED branch restriction, not passed.",
+      "Post-merge Node/cloud/approval workflows SUCCESS on merged source.",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 185,
+      "head_sha": "0409852c8439fc7314c106e2d15040a5ff7c9cda",
+      "merge_sha": "1abb7f92327c11e92b89a73fdb00c80235a70665",
+      "tree_sha": "93cf96ff6d79828280d722138916e54a78ba802b",
+      "exact_head_passed": [
+        40625136665,
+        40625136742,
+        40625136700,
+        40625136725,
+        40625136683,
+        40625136681
+      ],
+      "merged_passed": [
+        40625424495,
+        40625424465,
+        40625424306
+      ],
+      "original603": "SKIPPED_NOT_PASSED",
+      "live_source": "SKIPPED_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED",
+      "original603_independent_replay": {
+        "scope": "ALL_CURRENT_EXTRACTOR_CODE",
+        "pr": 190,
+        "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+        "exact": 3096,
+        "missing": 81,
+        "review_required": 825,
+        "zero_previous_exact_losses": true,
+        "supplementary_unchanged": true,
+        "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json"
+      }
+    }
+  },
+  "EXTRACTOR-WHITE-COFFEE-MANUAL-ROAST-20261027": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "Owner October 27 2026 White Coffee case #4/77: leave blank, flag for member review; Very/Ultra Light are unverified possibilities",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/roast-level-evidence.mjs",
+      "tests/roast-level-evidence.test.mjs"
+    ],
+    "tests": [
+      "Explicit White label, selected White Coffee title, non-canonical roast, preview manual flag, off-product and explicit seven-tier negative/positive regressions; exact-source CI pending",
+      "Original immutable603 restricted replay unperformed on current branch; do not call passed",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 187,
+      "head_sha": "58e97501def83de20a2beca0931d8dbd639de670",
+      "merge_sha": "3947b1ba32a89a9f42db5cd0335a96444166ce9c",
+      "tree_sha": "c391ac5f3e1798c7b47b7c3af7abc4a83168f2a3",
+      "head_success": [
+        40626499237,
+        40626499274,
+        40626499194,
+        40626499255,
+        40626499146,
+        40626499207
+      ],
+      "postmerge_success": [
+        40626715337,
+        40626715299,
+        40626715382,
+        40626715331
+      ],
+      "original603": "SKIPPED_NOT_PASSED",
+      "white_live_url": "NOT_IN_PUBLIC_PROBE",
+      "publication": "NOT_AUTHORIZED",
+      "original603_independent_replay": {
+        "scope": "ALL_CURRENT_EXTRACTOR_CODE",
+        "pr": 190,
+        "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+        "exact": 3096,
+        "missing": 81,
+        "review_required": 825,
+        "zero_previous_exact_losses": true,
+        "supplementary_unchanged": true,
+        "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json"
+      }
+    }
+  },
+  "EXTRACTOR-BALD-GUY-MEDIUM-RANGE-MANUAL-20261027": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "October 27 owner approval of Bald Guy Brew Organic Colombian blank/Medium or Medium-Dark user choice",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/roast-level-evidence.mjs",
+      "tests/roast-level-evidence.test.mjs"
+    ],
+    "tests": [
+      "Exact source-selected roast label and preview manual warning, independent seven-tier control and off-product negative cases; exact GitHub CI pending",
+      "Original 603 frozen-corpus replay under historic branch guard not yet performed",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 188,
+      "head_sha": "fdeef6892f9a9d60f0663f71f01a7b2ecfc09a87",
+      "merge_sha": "591f72fd758d1196c0e5e12ce9867088a41096c5",
+      "tree_sha": "e90e7d86cd0997887e48f39e715add2c7c0b4f4e",
+      "feature_head_passed": [
+        40627863051,
+        40627863044,
+        40627863210,
+        40627863265,
+        40627863058,
+        40627863079
+      ],
+      "merge_postchecks_passed": [
+        40628104415,
+        40628104399,
+        40628104446,
+        40628104808
+      ],
+      "merge_node_build": "SUCCESS_40628104808",
+      "original603": "SKIPPED_NOT_PASSED",
+      "publication": "NOT_AUTHORIZED",
+      "original603_independent_replay": {
+        "scope": "ALL_CURRENT_EXTRACTOR_CODE",
+        "pr": 190,
+        "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+        "exact": 3096,
+        "missing": 81,
+        "review_required": 825,
+        "zero_previous_exact_losses": true,
+        "supplementary_unchanged": true,
+        "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json"
+      }
+    }
+  },
+  "EXTRACTOR-SELECTED-CURRENT-ROAST-OVER-CATALOG-TAGS-20261028": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "Owner approved current exact selected-product direct facts priority, Locked Master Specification & Decision Ledger; source page https://yellowstonecoffee.com/products/colombia-huila",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/coffee-shopify-ajax.mjs"
+    ],
+    "tests": [
+      "tests/coffee-issue33-roast-tags.test.mjs",
+      "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+      "PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS.",
+      "68 isolated Chromium synthetic app assertions; no live auth, IndexedDB or production writes"
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 190,
+      "head_sha": "8baaa3f439dcbe49169bc0b6dba78db9528af04a",
+      "merge_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
+      "tree_sha": "259ca2b4394133c2a6d4c09e95b5afe219c2e632",
+      "receipt": "docs/audits/extractor-issue33-original603-current-source-replay-20261028.json",
+      "publication": "NOT_AUTHORIZED"
+    }
+  },
+  "EXTRACTOR-CURRENT-SELECTED-IMAGE-RELATIVE-ROAST-HINT-20261028": {
+    "status": "READY_NOT_DEPLOYED",
+    "owner_source": "Exact Black & White official selected-product pages Diego Horta and Sebastian Ramirez Red Fruits Decaf; owner Locked supported roast taxonomy and mandatory manual review of nonstandard relative descriptions",
+    "canonical_master": "docs/MASTER_SPECIFICATION.md",
+    "canonical_ledger": "docs/DECISION_LEDGER.json",
+    "source_scope": [
+      "src/server/roast-level-evidence.mjs"
+    ],
+    "tests": [
+      "tests/coffee-issue33-selected-photo-and-reused-slug.test.mjs",
+      "34 local focused PASS including actual Add Coffee UI markup",
+      "Independent original603 full actual-handler replay 603/603 strict per-case parity and all 6474 supplementary per-case unchanged: docs/audits/extractor-issue33-selected-image-replay-20261028.json",
+      "Local focused 34/34 PASS, including real preview markup. Exact PR191 head c1f568625856bd13debc400d6ab26d06e82a3895 seven applicable CI PASS: Node/lint/build 40634343359, cloud/mobile 40634343132, visual/browser 40634343220, SQL 40634343187, security 40634343180, approval 40634343006, private source-bundle 40634343223.",
+      "Nonforce PR191 merge 7974c09a7e4973731c00928018dc113693277945 tree 843586933cc38e9ff0c1cffb555dc655c3b7a1bd identical to tested head, extractor blob b26d642... unchanged. Exact merged-source app/build 40634577253, cloud/mobile 40634577221, approval 40634577209 all PASS. Public source acceptance 40634577218 and controlled probe 40634577219 SKIPPED, not treated as passed."
+    ],
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 191,
+      "head_sha": "c1f568625856bd13debc400d6ab26d06e82a3895",
+      "merge_sha": "7974c09a7e4973731c00928018dc113693277945",
+      "tree_sha": "843586933cc38e9ff0c1cffb555dc655c3b7a1bd",
+      "code_sha": "b26d642bc66c6d0a76098f9d2d367e6aa9f69052",
+      "original603_receipt": "docs/audits/extractor-issue33-selected-image-replay-20261028.json",
+      "status": "READY_NOT_DEPLOYED",
+      "publication": "NOT_AUTHORIZED"
+    }
+  },
+  "EXTRACTOR-DESCRIPTION-FIRST-SELECTED-PRODUCT-20261028": {
+    "status": "VERIFIED_SOURCE_READY_NOT_DEPLOYED",
+    "issue": 33,
+    "authority": "Owner explicit request 2026-10-28 for generic current coffee description priority, SEO/archive fallback only and missing/conflicting data member review; no deployment",
+    "scope_paths": [
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js"
+    ],
+    "test_path": "tests/coffee-source-hierarchy-generic.test.mjs",
+    "acceptance": "Description beats lower-ranked SEO, current direct conflicts remain withheld, last-resort metadata is flagged, missing facts shown, 77 existing official captures regression, build/CI and safe merge. 603 perfect extraction is waived as scoped gate.",
+    "status_detail": "Generic extractor/preview source code, ten adversarial regressions, saved official HTML 77-case replay, exact PR head and merged-source applicable CI PASSED; no original603-perfect gate; genuine hosted GoTrue member persistence not tested and no production deployment.",
+    "merge_source_sha": "bcd924a2bd5ca3e42b84e9e5ff01e1d3792f1ab8",
+    "verification_ci_runs": [
+      40755052299,
+      40755052351,
+      40755052294,
+      40755052185,
+      40755052097,
+      40755051981,
+      40755052292,
+      40755500278,
+      40755500214,
+      40755500263,
+      40755500169
+    ]
+  },
+  "GRINDER-ISSUE17-DIRECTION-RANGE-SLOWFEED-20261028": {
+    "status": "VERIFIED_SOURCE_READY_NOT_DEPLOYED",
+    "issue": 17,
+    "authority": "User explicit direction/scale confirmation and Slow Feed example on 2026-10-28",
+    "scope_paths": [
+      "site/lib/engine.js"
+    ],
+    "test_paths": [
+      "tests/grinder17-slow-feed-default.test.mjs",
+      "tests/grinder17-standard-anchor.test.mjs",
+      "tests/grinder17-success-pair.test.mjs",
+      "tests/grinder17-range-bound.test.mjs",
+      "tests/grinder17-history-guard.test.mjs"
+    ],
+    "acceptance": "Preserve lower=finer higher=coarser, numeric 0.1 and user espresso range; no stepped/stepless or multi-turn controls. Slow Feed successful observations first, paired owner-specific shift next and cautious unproven fallback last. No history/data reinterpretation. Exact CI and source merge required; no publication.",
+    "status_detail": "All focused and full Node tests passed 1899/0/6 skips; six exact PR-head CI and four exact merged-source CI SUCCESS. Historical incomplete equipment snapshot null failure repaired and retested. Never deployed; no SQL/persistence, production member, or backup modifications.",
+    "merged_source_sha": "d135702a3f27fb4bbb98aa92524cc5627783b921",
+    "verification_ci_runs": [
+      40768289292,
+      40768289089,
+      40768288972,
+      40768288993,
+      40768289023,
+      40768289345,
+      40768627816,
+      40768627506,
+      40768627501,
+      40768627507
+    ]
+  },
+  "current_owner_retire_screenshot_claude_20261028": {
+    "decision_id": "UX-ISSUE18-RETIRE-SCREENSHOT-CLAUDE-20261028",
+    "issue": 18,
+    "status": "OWNER_RETIRED_NOT_PLANNED_NO_RUNTIME_CHANGE",
+    "owner_scope": "Do not implement coffee screenshot extraction, Claude AI extraction, Claude device BYOK UI, or treat them as future backlog obligations.",
+    "retained": "Deterministic URL autofill, manual and Pending flows, source review, security and privacy, historic QA screenshots unaffected.",
+    "supersedes": "Historical screenshot/Claude requirements and 2026-10-22 deferred Issue #18 future scope.",
+    "verified_source_paths": [
+      "site/cloud/main.js",
+      "site/cloud/client.js",
+      "src/server/coffee-page-metadata.mjs"
+    ],
+    "source_test_note": "Documentation-only scope retirement; prior app source inspection found no active screenshot or Claude integration. No new browser, provider or physical device run asserted.",
+    "release_queue": "NO_NEW_DEPLOYABLE_ITEM; Issue #18 is closed NOT_PLANNED without adding READY or DEPLOYED entry",
+    "no_publication": true
+  },
+  "issue22_offline_regression_acceptance_20261028": {
+    "issue": 22,
+    "status": "READY_SOURCE_ONLY",
+    "pr": 217,
+    "merged_source_sha": "45ae4561205c0527e8dcf67d0ec65b06f1724616",
+    "tested_pr_head": "cfbe886a9ce1b526cccb91897d776eff36915295",
+    "identical_tree_sha": "e43640c9f6aa3a767f43a407f2735fa1a0b3fd9d",
+    "owner_authorization": "Owner instructed complete tests 1–6, fix and close on sufficient automated evidence.",
+    "acceptance": "Node/browser/SQL/signed-HMAC PostgREST source QA for stale concurrent edits, offline conflicts, cross-account isolation, auth expiry, cache/PWA transition, lost response and revoked-cache cleanup failure.",
+    "workflow_runs": [
+      40782759803,
+      40782759651,
+      40782759711,
+      40782759633,
+      40782759664,
+      40782759668
+    ],
+    "source_vs_live": "Synthetic tests and disposable local signed-JWT database; genuine former Issue21 iPhone one-shot accepted. No newly performed real-device or production-member test claimed.",
+    "release_queue_id": "DIC-Q-22-offline-denial-reload-protection",
+    "no_production_publication": true,
+    "github_issue_state": "CLOSED_COMPLETED_VERIFIED_2026-10-28T22:54:58Z",
+    "merged_ci_runs": [
+      40783051945,
+      40783051989,
+      40783051941,
+      40783052022,
+      40783464213
+    ]
   }
 }

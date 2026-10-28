@@ -96,3 +96,26 @@ test('offline SDK identity requires local unexpired session, token and same-orig
  finally{Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:false}});}
  c.dispose();
 });
+
+test('Issue 22: failed cache deletion plus browser cold reload cannot restore revoked member; verified readmission clears block',async()=>{
+ const prior=globalThis.localStorage,values=new Map(),f=fixture();
+ globalThis.localStorage={getItem:k=>values.get(k)??null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};
+ f.store.clearCache=async()=>{throw Error('IndexedDB cache deletion unavailable');};
+ try{
+  await f.app.denyAccess(f.app.identity,f.app.epoch,{admitted:false});
+  assert.equal(values.get('dic-offline-denied:'+OWNER),'1');
+  const reload=new CloudApp(f.client,f.store);reload.identity={id:OWNER};reload.render=()=>{};
+  assert.equal(await reload.restoreOfflineCache(),false);
+  assert.equal(reload.raw,null);assert.equal(reload.state.coffees.length,0);
+  Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:true}});
+  f.client.status=async()=>({admitted:true});reload.sync=async()=>{};
+  await reload.connect();
+  assert.equal(values.has('dic-offline-denied:'+OWNER),false);
+  Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:false}});
+  const recovered=new CloudApp(f.client,f.store);recovered.identity={id:OWNER};recovered.render=()=>{};
+  assert.equal(await recovered.restoreOfflineCache(),true);
+ }finally{
+  Object.defineProperty(globalThis,'navigator',{configurable:true,value:{onLine:false}});
+  if(prior===undefined)delete globalThis.localStorage;else globalThis.localStorage=prior;
+ }
+});

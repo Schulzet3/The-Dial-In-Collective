@@ -120,14 +120,15 @@ test('countrywide growing-height descriptions are not this lot altitude',()=>{
   assert.equal(parse('<p>'+line+'</p>').fields.elevation_m,undefined,line);
  assert.match(parse('<p>This coffee is grown at 1600 meters.</p>').fields.elevation_m||'',/1600/);
 });
-test('long descriptions require an exact page binding and may refine a published elevation bound',()=>{
+test('current product elevation outranks even an exact-page SEO description with a narrower bound',()=>{
  const description='This is the current release from a longstanding producer partnership. '.repeat(12)+
   'This coffee is grown at 1600–1800 meters.';
  const page=(identity,body='')=>'<html><head>'+identity+'<meta name="description" content="'+description+'"></head>'+
   '<body><main><h1>Current Coffee</h1>'+body+'</main></body></html>';
  const canonical='<link rel="canonical" href="'+url+'">';
  const positive=extractPublicCoffeeFacts(page(canonical,'<p>Elevation: up to 1800m</p>'),{source_url:url});
- assert.match(positive.fields.elevation_m||'',/1600.*1800/);
+ // Later owner policy: SEO is fallback only; a directly published bound stands.
+ assert.match(positive.fields.elevation_m||'',/up to 1800m/);
  assert.equal(extractPublicCoffeeFacts(page(''),{source_url:url}).fields.elevation_m,undefined);
  assert.equal(extractPublicCoffeeFacts(page(canonical+'<meta property="og:url" content="https://roaster.example.org/products/different">'),{source_url:url}).fields.elevation_m,undefined);
 });

@@ -45,17 +45,29 @@ export function renderAdminShotGroups(items,{openCoffeeGroups=new Set()}={}){
   ' shot'+(g.shots.length===1?'':'s')+' on this page</small><span class="admin-chevron" aria-hidden="true">⌄</span></summary>'+
   '<div class="admin-coffee-shots">'+g.shots.map(row=>renderAdminRecord(row,'shots')).join('')+'</div></details>').join('');
 }
-const rowFields=(item,shot)=>fields[shot?'shots':'coffee'].map(([key,label])=>{
- const value=string(item[key]);
- const multiline=['notes','tasting_notes','summary','espressoNotes'].includes(key);
- const maxLength=key==='notes'?16000:8000;
- const readonly=''; // Admin may edit canonical identity with server-side collision and revision checks.
- const input=multiline?'<textarea name="'+e(key)+'" rows="2" maxlength="'+maxLength+'">'+e(value)+'</textarea>':
-  '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+readonly+' ' +(['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
- return '<label>'+e(label)+input+'</label>';
-}).join('');
+const fullyDecaf=item=>!/\b(?:half[ -]?caf|semi[ -]?decaf|partially[ -]?decaf)\b/i.test(String(item.name||''))
+ && (item.is_decaf===true||/\bdecaf(?:feinated)?\b/i.test(String(item.name||'')));
+const rowFields=(item,shot)=>{
+ const main=fields[shot?'shots':'coffee'].map(([key,label])=>{
+  const value=string(item[key]);
+  const multiline=['notes','tasting_notes','summary','espressoNotes'].includes(key);
+  const maxLength=key==='notes'?16000:8000;
+  const input=multiline?'<textarea name="'+e(key)+'" rows="2" maxlength="'+maxLength+'">'+e(value)+'</textarea>':
+   '<input name="'+e(key)+'" value="'+e(value)+'" maxlength="8000" '+
+   (['dose_g','yield_g','time_s','grind_setting','temperature_c','extraction','body','clarity','sweetness','astringency'].includes(key)?'inputmode="decimal"':'')+'>';
+  return '<label>'+e(label)+input+'</label>';
+ }).join('');
+ if(shot)return main;
+ const decaf=fullyDecaf(item);
+ return main+'<label>Fully Decaffeinated (Decaf)<input type="checkbox" name="is_decaf" '+(decaf?'checked':'')+'></label>'+
+  '<label class="admin-decaf-method" '+(decaf?'':'hidden')+'>Decaffeination Method<select name="decaffeination_method">'+
+  '<option value="">Unknown / Not Published</option>'+
+  ['Water Process','Sugar Process','Carbon Dioxide (CO2)'].map(value=>
+   '<option value="'+e(value)+'" '+(value===item.decaffeination_method?'selected':'')+'>'+e(value)+'</option>').join('')+
+  '</select></label>';
+};
 export function renderAdminCoffeeFacts(item){
- return '<dl class="admin-coffee-facts">'+[...fields.coffee,['source_url','Source URL']].map(([key,label])=>
+ return '<dl class="admin-coffee-facts">'+[...fields.coffee,...(fullyDecaf(item)?[['decaffeination_method','Decaffeination Method']]:[]),['source_url','Source URL']].map(([key,label])=>
   '<div><dt>'+e(label)+'</dt><dd>'+e(string(item[key])||'—')+'</dd></div>').join('')+'</dl>';
 }
 export function renderAdminRecord(item,kind,{reviewActions=null,reviewComparison=null}={}){

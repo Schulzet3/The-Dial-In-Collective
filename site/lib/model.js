@@ -101,9 +101,12 @@ export function addCoffee(s,data) {
  logAudit(s,'coffee.added',{coffeeId:c.id});return c;
 }
 export function pickCoffee(d) {
- const obj={};for(const k of ['name','roaster','origin','elevationM','roastLevel','process','variety','producer','tastingNotes','roasterUrl','release','summary','espressoNotes'])obj[k]=String(d[k]??'').trim().slice(0,k==='summary'?2000:1000);
+ const obj={};for(const k of ['name','roaster','origin','elevationM','roastLevel','process','decaffeinationMethod','variety','producer','tastingNotes','roasterUrl','release','summary','espressoNotes'])obj[k]=String(d[k]??'').trim().slice(0,k==='summary'?2000:1000);
  if(obj.roasterUrl&&!canonicalUrl(obj.roasterUrl))throw new Error('Use an http or https product URL.');
  obj.roastLevel=canonicalRoastLevel(obj.roastLevel);
+ obj.isDecaf=d.isDecaf===true||d.is_decaf===true||/\bdecaf(?:feinated)?\b/i.test(obj.name);
+ if(/\bhalf[ -]?caf/i.test(obj.name))obj.isDecaf=false;
+ if(!obj.isDecaf||!['Water Process','Sugar Process','Carbon Dioxide (CO2)'].includes(obj.decaffeinationMethod))obj.decaffeinationMethod='';
  obj.roasterRecipe=d.roasterRecipe && num(d.roasterRecipe.ratio)>0?clone(d.roasterRecipe):null;
  if(d.provenance)obj.provenance=clone(d.provenance);
  return obj;

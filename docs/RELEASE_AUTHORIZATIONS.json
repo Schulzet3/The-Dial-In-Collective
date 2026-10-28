@@ -131,6 +131,22 @@
         "dic-verify-coffee JWT-required with source-bundled shared logic"
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261028-READY-QUEUE-08",
+      "tested_source_sha": "506b267204cd19d7b1f13c511e437186b8d92bb9",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-10-28T23:02:12.146Z",
+      "expires_at_utc": "2026-10-29T23:02:12.146Z",
+      "approval_source": "Owner October 28, 2026 in this chat: 'Please do a full audit of all items in deployment queue, then publish.'",
+      "scope": "ONE production publication of exactly24 independently verified READY queue items at source506b267, including source-backed extractor, decaf-only method with older-client correction preservation, numeric/Slow Feed estimates and offline denial reload protection. All applicable source CI, SQL/browser/offline checks passed. Apply only named decaf migration (already applied and independently verified version20261028230056; DO NOT REAPPLY). No Edge/Auth changes required; preserve current JWT functions and all member records. Exclude unfinished Issue33 research, retired items and future work. No purchases, plan changes or future publication.",
+      "sql_evidence": [
+        "Source20261027170000_dic_decaf_only_method.sql blob6f474a56384afb3b7a7c3bfda2a29005a12d96f5 applied as provider20261028230056; constraints, old-client fix, helper permissions and all six before/after data digests independently verified."
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."

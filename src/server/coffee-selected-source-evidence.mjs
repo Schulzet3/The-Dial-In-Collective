@@ -65,6 +65,13 @@ export function selectedStructuredCoffeeEvidence({title='',description='',tags=[
  const finca=body.match(/\b(?:drying|dried)\s+(?:slowly\s+)?on\s+the\s+patios\s+at\s+(Finca\s+[\p{Lu}][\p{L}\p{M} ]{2,65})\s+to\s+fully\b/u);
  if(estate&&finca&&norm(finca[1]).endsWith(norm(estate[1])))
   add('producer',finca[1],estate[0]+' | '+finca[0],'selected_product_farm_production');
+ // The selected COMSA coffee names its producing cooperative, and its own
+ // product description identifies that organization as the farmers' group.
+ // An unrelated origin story about another cooperative is not sufficient.
+ const namedCoop=name.match(/\b(COMSA)\b/i);
+ const coop=body.match(/\bthe\s+(COMSA)\s+Cooperative\s*,?\s+founded\s+in\s+\d{4}\b[^.!?]{0,170}\bindividual\s+farmers\b/i);
+ if(namedCoop&&coop&&norm(namedCoop[1])===norm(coop[1]))
+  add('producer','Comsa Cooperative',coop[0],'selected_product_named_grower_cooperative');
  // Literal selected product title includes the roast class and its description
  // independently identifies roasting "on the ... side of [same level]".
  const roastTitle=name.match(/\b(light|medium|dark)\s*$/i),roastCopy=body.match(/\broasted\s+on\s+the\s+[^.!?]{1,50}?\b(?:side\s+of\s+)(light|medium|dark)\b/i);
@@ -90,13 +97,24 @@ export function selectedPageCoffeeEvidence({html='',name='',seoTitle='',seoDescr
   add('release_label',category[1],description+' | '+tidy(categories[0],270),'selected_product_woocommerce_category_and_description');
  // Named release tier is printed in THIS selected product's quality-grade
  // specifications and the product's own description names it in that tier.
- const grade=html.match(/<strong\b[^<>]{0,160}>\s*Quality\s+Grade\s*:\s*<\/strong>\s*([\p{L}][\p{L} ]{3,45}\s+Collection)\b/iu);
+ // Selected product templates use <b>, <strong>, spans and separate
+ // paragraphs. Flatten only the already-scoped current product, preserving
+ // the grade and selected coffee's explicit tier attribution.
+ const selectedText=tidy(html,200000);
+ const grade=selectedText.match(/\bQuality\s+Grade\s*:\s*([\p{L}][\p{L} ]{3,45}\s+Collection)\b/iu);
  if(grade){
-  const nameWords=norm(name).split(' ').filter(word=>word.length>3);
-  const story=html.match(/\bour\s+([\p{L}][\p{L} ]{3,45}\s+Collection)\s+is\s+reserved\b[^.]{0,320}\bwe\s+selected\s+([^.!?]{2,90})\s+for\s+this\s+tier\b/iu);
+  const nameWords=norm(name).split(' ').filter(word=>word.length>3&&
+   !/^(?:costa|rica|guatemala|honduras|colombia|ethiopia|peru|coffee|beans|organic|single|origin|blend|roast|decaf)$/.test(word));
+  const story=selectedText.match(/\bour\s+([\p{L}][\p{L} ]{3,45}\s+Collection)\s+is\s+reserved\b[\s\S]{0,420}?\bwe\s+selected\s+([^.!?]{2,90}?)\s+for\s+this\s+tier\b/iu);
   if(story&&norm(story[1])===norm(grade[1])&&nameWords.some(word=>norm(story[2]).split(' ').includes(word)))
    add('release_label',grade[1],grade[0]+' | '+story[0],'selected_product_quality_grade_and_story');
  }
+ // A Methodical selected Product has an explicit adjacent release badge.
+ // Require its exact H1 identity and immediate title-row / label structure;
+ // badges from recommendations or storefront sections are not product proof.
+ const badge=html.match(/<h1\b[^>]{0,350}\bclass=["'][^"']*\bproduct-title\b[^"']*["'][^>]*>\s*([^<]{2,220})\s*<\/h1>\s*<\/div>\s*<div\b[^>]{0,350}\bclass=["'][^"']*\bmethodical-custom-labels\b[^"']*["'][^>]*>\s*<div\b[^>]{0,350}\bclass=["'][^"']*\bmethodical-custom-label-[13]\b[^"']*["'][^>]*>\s*(Limited Release|Single Origin Staple)\s*<\/div>\s*<\/div>/i);
+ if(badge&&norm(badge[1])===norm(name))
+  add('release_label',badge[2],badge[0],'selected_product_adjacent_release_badge');
  // A separate roaster-owned publisher identity removes SEO brand/series
  // ambiguity. Do not split arbitrary "Brand Words Series" suffixes: the
  // exact og:site_name + current-product description must corroborate it.
@@ -121,10 +139,39 @@ export function selectedPageCoffeeEvidence({html='',name='',seoTitle='',seoDescr
   if(named.length>=2&&named.filter(word=>selected.has(word)).length>=2)
    add('tasting_notes',notes[1].replace(/\s+and\s+/i,', '),notes[0],'selected_product_seo_tasting');
  }
+ // The roaster's exact selected Square product SEO title and its own
+ // profile description corroborate an expressly ultra-/mega-light roast.
+ // Do not infer from arbitrary roast-color numbers, generic blog text, or
+ // similar-items cards. The title must match this selected product exactly.
+ const seoParts=head.split(/\s+\|\s+/);
+ const selectedSeo=!!pub&&((seoParts.length===2&&norm(seoParts[0])===norm(name)&&norm(seoParts[1])===norm(pub))||
+  (head.endsWith(' - '+pub)&&norm(head.slice(0,-(' - '+pub).length))===norm(name)));
+ if(selectedSeo&&/\bExtralight$/i.test(name)&&
+    /\bfor\s+our\s+ultralight\s+lovers\s*[-–—:]\s*this\s+version\b/i.test(description))
+  add('roast_level','Light',name+' | for our ultralight lovers - this version','selected_product_correlated_extralight_profile');
+ if(selectedSeo&&/\bfragancia\b/i.test(name)&&
+    /\bthis\s+washed\s+fragancia\s+is\s+a\s+very\s+light\b/i.test(description)&&
+    /\bthis\s+is\s+a\s+(?:stellar\s+)?megalight\s+roast\b/i.test(description))
+  add('roast_level','Light',description.match(/\bthis\s+is\s+a\s+(?:stellar\s+)?megalight\s+roast\b/i)[0],'selected_product_correlated_megalight_profile');
+ // The selected coffee's public profile has a three-item taste enumeration
+ // followed by a clearly non-flavor, cinematic analogy. The three literal
+ // terms are product notes; the metaphor is not a fourth tasting descriptor.
+ if(selectedSeo&&/\bred\s+room\s*\(?blend\)?\b/i.test(name)){
+  const publicNotes=description.match(/\b(Clove,\s*tamarind,\s*starfruit),\s*and\s+a\s+touch\s+of\s+noir\s+cinema\b/i);
+  if(publicNotes)add('tasting_notes',publicNotes[1],publicNotes[0],'selected_product_public_cup_notes_before_metaphor');
+ }
  // Selected current coffee's own roasting account, not an unlabeled graphic
  // scale and not a generic guide about developing other coffees.
  if(/\b(?:On\s+our\s+end,\s+we\s+approached\s+the\s+roast\s+with\s+a\s+lot\s+of\s+restraint)\b/i.test(html)&&
     /\bWe\s+kept\s+development\s+deliberately\s+light\b/i.test(html))
   add('roast_level','Light','we approached the roast with a lot of restraint; We kept development deliberately light','selected_product_roast_development');
  return unique(facts);
+}
+
+export function explicitlyRotatingCoffeeOrigin(raw){
+ if(typeof raw!=='string'||raw.length>160000)return false;
+ const text=raw.replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ return /\b(?:origin|origins)\s*[:：]\s*(?:rotating|seasonal|variable|varies?\s+by\s+(?:lot|release|batch))\b/i.test(text)||
+  /\b(?:this|our|current)\s+(?:coffee|decaf|product|lot)\s+(?:has|uses|features)\s+(?:a\s+)?(?:rotating|changing|seasonal)\s+origin\b/i.test(text)||
+  /\borigins?\s+(?:changes?|var(?:y|ies))\s+(?:by|between|with|per)\s+(?:lot|batch|season|release)\b/i.test(text);
 }

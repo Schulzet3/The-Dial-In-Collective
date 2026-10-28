@@ -203,6 +203,29 @@ function withoutRelatedProducts(page,onTruncated){
  }
  chunks.push(page.slice(cursor));return chunks.join('');
 }
+export function withoutDetachedFarmerProfiles(page){
+ // Suppress only explicitly identified external farmer-profile widgets from
+ // canonical product facts. A generic "MEET" heading may describe the actual
+ // selected producer or precede real bean specifications on other storefronts;
+ // never truncate the remainder of a product at that heading.
+ const {nodes}=coffeeHtmlElements(page),ranges=[];
+ for(const node of nodes){
+  if(node.tag!=='div'||node.contentEnd-node.headEnd>120000)continue;
+  const a=coffeeHtmlAttributes(node.attributes);
+  if(a.id!=='meet-farmers-inline')continue;
+  const html=page.slice(node.headEnd,node.contentEnd);
+  if(!/<h[2-6]\b[^<>]{0,1000}\bclass=["'][^"']*\bmf-meet-kicker\b[^"']*["'][^<>]{0,1000}>/i.test(html))continue;
+  ranges.push([node.start,node.end]);
+ }
+ if(!ranges.length)return page;
+ let cursor=0,result='';
+ for(const [start,end] of ranges.sort((a,b)=>a[0]-b[0])){
+  if(start<cursor)continue;
+  result+=page.slice(cursor,start)+' ';cursor=end;
+ }
+ return result+page.slice(cursor);
+}
+
 function escapeAttributeAngles(page,onTruncated){
  // Preserve literal attribute text without letting downstream legacy text
  // regexes reinterpret title="<p>Origin: ...</p>" as a visible paragraph.
@@ -231,6 +254,7 @@ export function productMarkup(html,{onTruncated}={}){
  const main=scan.nodes.find(node=>node.tag==='main');
  if(main)page=page.slice(main.headEnd,main.contentEnd);
  page=withoutRelatedProducts(page,onTruncated);
+ // Retain public linked profile for supplemental review; canonical parser applies a separate boundary.
  // The remaining asides are narrowly identified selected-product cost or
  // transparency panels. Expose their content to shared text collectors as
  // an ordinary product div; generic promotional/sidebar asides stay removed.

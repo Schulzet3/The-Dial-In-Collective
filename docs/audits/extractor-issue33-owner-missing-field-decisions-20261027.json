@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "owner_review": "77 original missing-field coffees reviewed one at a time",
+  "last_reviewed_utc": "2026-10-27",
+  "cases": [
+    {
+      "sequence": 1,
+      "coffee": "44 North Coffee — Decaf – Honduras COMSA",
+      "source_url": "https://44northcoffee.com/products/honduras-decaf",
+      "review_status": "RESOLVED_SOURCE_GAP",
+      "classification": "Not a software defect: primary green-coffee processing was not published; intentionally withhold; do not fabricate or keep as a repair failure",
+      "original_benchmark": {
+        "field": "process",
+        "expected": "Water process decaffeination",
+        "issue": "Benchmark conflated decaffeination with primary green-coffee processing; immutable oracle is preserved, not silently edited"
+      },
+      "owner_instruction": "Use published seasonal origin schedule relative to date URL is consulted; preserve processing as blank and flag; if primary processing is not published, close case and move on.",
+      "source_confirmed": {
+        "selected_product_title": "Decaf - Honduras COMSA",
+        "current_origin": "Honduras, Municipality of La Encarnación, Ocotepeque",
+        "farmer_partner": "COMSA",
+        "decaffeination_method": "Water Process",
+        "primary_processing_method": null,
+        "seasonal_rotation": [
+          {
+            "origin": "Peru",
+            "window": "winter–spring"
+          },
+          {
+            "origin": "Honduras",
+            "window": "spring–summer"
+          },
+          {
+            "origin": "Mexico",
+            "window": "fall–winter"
+          }
+        ]
+      },
+      "resolution": {
+        "canonical_origin": "Honduras — explicitly selected product, not calendar inference",
+        "canonical_processing": null,
+        "decaffeination_method": "Water Process",
+        "flag": "Primary processing method not supplied by roaster",
+        "seasonality": "Keep literal roaster schedule as contextual evidence dated to URL retrieval. Apply current-date contextual season only when product identity does not conflict; named current product always outranks generic rotation, and overlapping undefined season boundaries must not be forced into exact months.",
+        "lookup_date_used": "2026-10-27",
+        "source_parity_note": "In October, seasonal language indicates Mexico generally but the exact selected URL and title still say Honduras. Do not silently relabel a Honduras product as Mexico.",
+        "data_mutation": false,
+        "immutable603_rewritten": false
+      },
+      "evidence": {
+        "source_url": "https://44northcoffee.com/products/honduras-decaf",
+        "related_roaster_faq": "https://44northcoffee.com/pages/faqs",
+        "verified_against_public_page": "2026-10-27"
+      }
+    },
+    {
+      "sequence": 2,
+      "coffee": "Ahrre's — African Blend",
+      "source_url": "https://www.ahrre.com/products/african-blend",
+      "review_status": "RESOLVED_SOURCE_SUPPORTED",
+      "original_benchmark": {
+        "field": "roast_level",
+        "expected": "Medium-Dark",
+        "extracted": null
+      },
+      "source_confirmed": {
+        "selected_product_title": "AFRICAN BLEND",
+        "explicit_roast_label": "Full City",
+        "section": "COFFEE DETAILS / ROAST"
+      },
+      "owner_instruction": "Full City should be standardized as Medium-Dark.",
+      "resolution": {
+        "canonical_roast_level": "Medium-Dark",
+        "original603_rewritten": false,
+        "member_data_mutation": false
+      },
+      "evidence": {
+        "checked": "2026-10-27",
+        "source_url": "https://www.ahrre.com/products/african-blend"
+      }
+    },
+    {
+      "sequence": 3,
+      "coffee": "Ahrre's — Tanzanian Peaberry",
+      "source_url": "https://www.ahrre.com/products/test",
+      "review_status": "RESOLVED_SOURCE_SUPPORTED",
+      "original_benchmark": {
+        "field": "roast_level",
+        "expected": "Medium-Dark",
+        "extracted": null
+      },
+      "source_confirmed": {
+        "selected_product_title": "TANZANIAN PEABERRY",
+        "explicit_roast_label": "Full City",
+        "section": "COFFEE DETAILS / ROAST"
+      },
+      "resolution": {
+        "canonical_roast_level": "Medium-Dark",
+        "original603_rewritten": false,
+        "member_data_mutation": false,
+        "source_identity_note": "Exact /products/test page is titled Tanzanian Peaberry"
+      },
+      "evidence": {
+        "checked": "2026-10-27",
+        "source_url": "https://www.ahrre.com/products/test"
+      }
+    },
+    {
+      "sequence": 4,
+      "coffee": "Alaska Artisan — White Coffee",
+      "source_url": "https://www.alaskaartisancoffee.com/products/white-coffee",
+      "review_status": "RESOLVED_SOURCE_GAP_USER_CHOICE",
+      "original_benchmark": {
+        "field": "roast_level",
+        "expected": "Light",
+        "extracted": null
+      },
+      "classification": "Nonstandard roaster White category; no source-supported calibration to seven roast tiers",
+      "source_confirmed": {
+        "selected_product_title": "White Coffee",
+        "roaster_category": "White (separate from Light)",
+        "roaster_roasting_description": "Lower-temperature roast; light tan color",
+        "published_canonical_seven_tier": null
+      },
+      "owner_instruction": "Keep roast blank and flag for user selection. Very Light or Ultra Light are possibilities, not verified facts.",
+      "resolution": {
+        "canonical_roast_level": null,
+        "flag": "White Coffee: choose a supported roast tier manually if known",
+        "possible_categories_unverified": [
+          "Very Light",
+          "Ultra Light"
+        ],
+        "infer_default": false,
+        "owner_review_status": "resolved",
+        "frozen_expected_preserved": true,
+        "member_data_mutation": false
+      },
+      "evidence": {
+        "product_url": "https://www.alaskaartisancoffee.com/products/white-coffee",
+        "category_url": "https://www.alaskaartisancoffee.com/collections/featured-roasts",
+        "public_page_checked": "2026-10-27"
+      }
+    },
+    {
+      "sequence": 5,
+      "coffee": "Bald Guy Brew — Organic Colombian Coffee",
+      "source_url": "https://baldguybrew.com/products/organic-colombian-coffee",
+      "review_status": "RESOLVED_SOURCE_GAP_USER_CHOICE",
+      "original_benchmark": {
+        "field": "roast_level",
+        "expected": "Medium/Medium Dark",
+        "extracted": null
+      },
+      "source_confirmed": {
+        "selected_product_title": "Organic Colombian Coffee",
+        "explicit_roast_label": "Medium/Medium Dark",
+        "roast_specific_purchase_options": [],
+        "purchase_options_observed": [
+          "Grind",
+          "Size"
+        ]
+      },
+      "owner_instruction": "Leave the roast level blank, preserve the published Medium/Medium Dark range, and prompt the user to choose Medium or Medium-Dark manually; neither preselected.",
+      "resolution": {
+        "canonical_roast_level": null,
+        "manual_choices": [
+          "Medium",
+          "Medium-Dark"
+        ],
+        "flag": "Roaster publishes Medium/Medium Dark. Choose Medium or Medium-Dark manually.",
+        "original603_rewritten": false,
+        "member_data_mutation": false
+      },
+      "evidence": {
+        "source_url": "https://baldguybrew.com/products/organic-colombian-coffee",
+        "checked": "2026-10-27",
+        "source_provenance": "Current official product page"
+      }
+    }
+  ]
+}

@@ -1,3 +1,629 @@
+## October 28 UTC — Issue #33 PR218 current Bonjo Gold Collection recovered and scoped READY; residual OPEN, NO DEPLOY
+
+PR218 merged non-force at `b4ed955a7ddcf05a06bd83e3d99b46e57777a823`, tested head `d9adff35b2c8e0e006d0abf1c77a8c3fb5b2451f`. Seven applicable exact-source workflows SUCCESS: full Node/build 40781751339, cloud/mobile 40781751460, visual 40781751546, isolated SQL 40781751493, security 40781751477, approval 40781751433, private source bundle 40781751492. Restricted original603 40781751390 SKIPPED, not passed. Fixed generic current selected product Quality Grade collection parsing across HTML tags and multiple sentences, with selected coffee identity corroboration and adversarial negative tests. No provider/data changes.
+
+Fresh official current77 run [40782137959](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40782137959), job 123146205920 SUCCESS on no-op audit trigger 22a0bab8 (exact same parser as merge): 77/77 official current pages parsed, 77/77 real selected parser + Add Coffee preview/review checks. Only #13 Bonjo El Poeta changed from absent to literal canonical `Gold Collection`. Decision diagnostics now 25 present, 10 contextual, 37 missing/not extracted, 5 direct field conflicts; all other 76 decisions and all 11 conflicting row flags unchanged. #13 elevation remains withheld due current source contradictory units. Source digest/77-row index at docs/audits/issue33-owner77-post-pr218-quality-grade-20261028.json. This is not certification of all 77 coffees.
+
+Queue `DIC-Q-33-current-selected-quality-grade-collection` is **READY / NOT DEPLOYED**, zero blockers. Parent `DIC-Q-33-residual-source-accuracy` remains IN_PROGRESS; Issue #33 remains OPEN for remaining source-supported defects and documented source limitations. Previously verified actual hosted GoTrue, App/SQL readback run 40767700050 reused without unnecessary retest. Frozen603 capture/oracle/scorer untouched. Production publication NOT authorized; Netlify actual deploy remains 6ae0fc16178b2f1241e441f8.
+
+---
+
+## October 28 UTC — Issue #33 FUDAM and refreshed public77 scoped READY; parent source residual OPEN (NO DEPLOY)
+
+Owner authorized continuing Issue33. Source PR198 FUDAM contextual extraction already merged b0f876b; discovered missing support for the exact current Beanstock Shopify collection-scoped product URLs. PR216 fixed only current exact product matching (direct and official /collections/<collection>/products/<slug>), protected current-title identity from recycled Tolima/Finca Las Flores SEO, and added positive/negative tests for qualified "generally washed" association practice, review export and withholding canonical Process without lot evidence. Safe, URL-bound review note is not a Washed lot auto-fill. The initial new test passed raw parser output directly to the source-review snapshot and caused two CI failures, diagnosed/adjusted to the actual preview wrapper contract; the final head test suite passes, no ignored failures.
+
+PR216 final source 3f54c398e47df50ef8abc36928c9eafec6ada8ec had exact-head CI SUCCESS: app/full Node/build 40774376866, cloud/mobile 40774376976, visual 40774376798, security 40774376852, SQL 40774376883, Python 40774376905, approval 40774376796, private exact source bundle 40774376784. Frozen603 restricted job 40774376794 was SKIPPED and is not claimed passed. Nonforce merged PR216 at 9250b44a74ab25433db8e3aa635aef1daaf8c7bc, independently read back; postmerge app 40774763641, cloud/mobile 40774763676, Python 40774763701 and approval 40774763747 SUCCESS.
+
+Owner-authorized no-login official-current 77-case source run 40774763646, job 123121030979 SUCCESS on exact merged 9250b44: 77/77 official pages fetched/parsed and 77/77 actual Add Coffee preview + bounded processing-review export checks passed. Latest 77 target diagnostic (not independent owner-certified answers): 24 canonical field present, 10 literal source context only, 38 unpublished or not extracted, 5 directly conflicting target fields; 11 rows had some source conflicts (which remain member-reviewed, not guessed). Compared to earlier owner77 diagnostic six source-backed fields now populate (#10 Black River COMSA, #11 Bleu notes, #29/30 ICONIK producer names, #54 Reading Coffee Micro-Lot, #75 Woodshed notes). Current selected Beanstock #6 identified FUDAM, left lot Process blank, retained qualified general washing notice and preserved it in review export. Auditable 77-row public digest/field-status index at docs/audits/issue33-owner77-post-pr216-direct-current-20261028.json. Raw selected public source artifact kept briefly in private CI, not uploaded into repository.
+
+READY scoped queue DIC-Q-33-qualified-fudam-processing-77-ui, blockers 0, merged exact source; independent generic description-first queue remains READY. Parent Issue33 OPEN/IN_PROGRESS for original603 and latest public77 genuine source-accuracy residual triage. No 603-perfect score or 77 manual hardcoding/individual decision certification is claimed or required to release the approved general feature. Genuine hosted disposable GoTrue sign-in/Add Coffee save/SQL/readback already PASS run 40767700050 and was not repeated. No production Netlify publication, new SQL/Auth/Edge, private member, shots, notes, Community or frozen oracle/source changes. Netlify current production independently unchanged at deploy 6ae0fc16178b2f1241e441f8, prior released f5f29a02f98304dd9d1bd4d2c840c490c85097e6. Next: prioritize genuine, source-supported remaining omissions and direct contradictions; preserve unavailable values blank, report exact evidence, never mark all residual metrics as actionable bugs.
+
+---
+
+## October 28 UTC — PR216 exact-source cloud test harness failure and correction
+
+Actual GitHub cloud CI 40774024111 failed 2 new assertions (selected FUDAM review export and official collection URLs). Root cause: the deterministic extractPublicCoffeeFacts low-level method returns no source_url attribute, while the public HTTP preview wrapper adds the safe source_url before calling coffeeSourceReviewSnapshot. The new test and source audit incorrectly called the snapshot on the raw parser result and got null; this is a test construction mismatch, not a runtime regression. Correct both tests and current official77 audit to use actual wrapped preview result {...result,source_url: official selected URL}; retain HTTPS sanitation and no Process guessing. Unchanged already passing mobile browser, source bundle, security, Python/SQL/approval checks are not misrepresented as sufficient for failed cloud suite. Rerun exact-head CI, repair any further failure, merge only on success. No deployment or private member changes.
+
+---
+
+## October 28 UTC — reused Beanstock product slug: explicit wrong-current-coffee negative
+
+Public search/cached official URLs show the same reused /products/colombian-supremo-organic handle historically selecting Tolima Suave or Finca Las Flores as well as FUDAM under collection paths; cached search indexes disagree, and are NOT authoritative for live current identity. Added exact-current-h1 regression ensuring neither current Tolima nor current Finca Las Flores ever inherits FUDAM association-level processing from stale SEO, even when the URL slug matches. Current official live page will be checked by the controlled 77 URL probe after merge. No inference or production mutation.
+
+---
+
+## October 28 UTC — live FUDAM collection URL identity regression discovered and repaired (NO DEPLOY)
+
+During review of PR216, recovered previously owner-supplied direct Beanstock FUDAM URLs include Shopify /collections/medium-roasts/products/colombian-supremo-organic and /collections/frontpage/products/colombian-supremo-organic, in addition to /products/colombian-supremo-organic. Prior qualified review note was limited to the direct path, making it silently absent for official collection product URLs. Normalize exact selected product identity to support both official forms while retaining exact host, slug and structured URL location checks; do not allow unrelated hosts, products or arbitrary nested paths. Keep qualified "generally washed" association prose only as a human-readable source-review hint and source fact, never canonical Process without lot-specific selected evidence. Regression verifies all three official paths and three nonmatching negatives, source review export, and blank Process. Source/oracle/frozen603 unchanged; run exact-source CI and guarded public owner77 probe, then queue READY only with real receipts. No publish or existing private user data modified.
+
+---
+
+## October 28 UTC — Issue #33 remaining FUDAM source-review acceptance strengthening (NO DEPLOY)
+
+Owner authorized continuation under existing Locked selected-product precedence. PR198 already MERGED at b0f876b131d077ff488bc3abef9e6799cd446553, with exact source tests and seven successful PR-head checks (40695550606, 40695550549, 40695550611, 40695550610, 40695550584, 40695550732, 40695550551); gated frozen603 workflow 40695550605 explicitly SKIPPED, not passed. Existing FUDAM logic preserves published "generally washed" only as qualified association-wide review context, never automatically inferring current lot Process, never reviving stale Tolima slug data. Existing saved public77 UI test covers 77/77 captured pages and 15 conflicts, not 77 independently certified field values. The later exact-source full original603 acceptance receipt docs/audits/issue33-merged-owner77-current-acceptance-20261028.json records 603/603 and zero prior exact losses on a code tree which includes PR198.
+
+New owner-authorized regression tests the member-visible FUDAM review-note export and confirms no Process autofill. The actual public owner77 source probe additionally verifies that qualified context displayed in Add Coffee survives the bounded source-review export, records selected current #6 FUDAM identity and qualification, and fails if the client loses any such note. Run applicable exact-source CI, safely merge, then use the restricted no-credentials public77 source probe to capture refreshed official-current 77 evidence. Do not certify missing facts or override real direct conflicts. Leave scoped queue item TESTING until source/CI/readback support READY. The genuine live disposable GoTrue/Add Coffee save/SQL/readback completed in run 40767700050, not repeated or misrepresented as FUDAM-specific save. Owner states email delivery already verified elsewhere, no need to repeat it. No deploy or production member modification.
+
+---
+
+## October 28 UTC — ACTUAL hosted disposable-member GoTrue + Add Coffee E2E PASSED (NO DEPLOY)
+
+Owner authorized all four previously unverified parent #33 acceptance items. GitHub workflow **40767700050**, job **123096196386**, source **8d27bd940e903d8aa087dfbe6f922598d4730f20**, independently inspected: **SUCCESS**. On real currently deployed https://app.dialincollective.com using a unique disposable identity, it tested live GoTrue signup, password login, authenticated /user, session refresh and logout; real invitation denial before redemption, invalid-code denial, one-use beta invite redemption and admission; live 390px Chromium browser sign-in, new setup creation, Add Coffee with real "Use Existing" identity confirmation for an already verified public coffee; page reload and fresh signed-in reopen, sign-out, new password sign-in, and fresh RPC state read. Actual production PostgreSQL committed-row readback confirmed the precise owner's library entry and selected existing canonical coffee ID, with **no new shared catalog coffee** created. Test succeeded after fixing test harness assumptions/selectors; prior unsuccessful runs are recorded below, not mislabeled as passes.
+
+**Boundaries:** This verifies actual deployed published Auth + member Add Coffee persistence, not deployment of the READY source-priority PR211 changes. The test used explicit owner-scoped database email confirmation for a throwaway identity; a real confirmation-email click, password reset email delivery/completion and other untested Auth branches are **NOT PASSED**. The disposable beta member was disabled after the run. Read-only provider cleanup receipt: 5 labeled test auth accounts total, 0 enabled test beta members, 1 test-owned setup, 1 test-owned library entry. Test records remain intentionally for audit; do not delete without proper backup/safety authorization. Production real-member data, shots, notes and shared coffee catalog were not altered by this test.
+
+Parent Issue #33 stays OPEN for historical residual source accuracy, which the owner has explicitly removed as a gate for independently READY generic source priority. The previously missing genuine hosted sign-in and persisted Add Coffee verification is **now fulfilled** with the stated email-confirmation limitation. No application deployment, migrations or member-data deletion. Source-only generic feature remains separately READY.
+
+
+---
+
+## October 28 UTC — isolate actual hosted Create Setup failure
+
+Actual run 40767394875 completed failure: real GoTrue login and admitted browser opened New Setup, clicked the correct primary Create Setup button, but no Add Coffee was visible after 25s. Independent owner-scoped SQL found zero setup and coffee rows for the test users; all throwaway beta members were disabled. Added bounded, sanitized dialog and toast diagnostics before the next live attempt. Do not claim setup or Add Coffee saved; no deployed source change.
+
+---
+
+## October 28 UTC — real hosted browser setup test selector repaired
+
+Run 40767113417 reached real hosted GoTrue signup, invitation redemption and authenticated Chromium UI; login and New Setup form displayed. The test clicked the first button in New Setup, which was the informational `Grinder Espresso Range` help control rather than the required `Create Setup` submit. No application defect evidenced. Fixed test selector to `form button.primary` and prepared retest. Run is FAILED; no save/readback yet. Disposable member access disabled, no shared or existing user data modified.
+
+---
+
+## October 28 UTC — hosted browser checkpoint not yet passing; add stage-safe diagnostics
+
+CI run 40766815651 exercised disposable GoTrue and one-time invite successfully and entered real Chromium, but a 25-second locator wait timed out before end-to-end saved-coffee assertion. The initial test incorrectly replaced the failing stage with its final cleanup stage; account disable still ran. Added safe non-identifying browser step markers to isolate actual failing page transition, preserving same-commit journal. Do not claim full auth/persistence pass. Disposable access disabled. No member records or shared coffee changed; no publish.
+
+---
+
+## October 28 UTC — real hosted GoTrue/invite verified through test checkpoint; existing coffee choice path corrected
+
+CI run 40766534762 reached real hosted signup, disposable email confirmation, genuine GoTrue password login/user endpoint, admission denial, invite redemption and status. Its initial matcher assumption was invalid: all current eight verified catalog coffees have NULL `release_label`, so matcher deliberately returns `needs_confirmation` rather than `exact_verified` for same-name coffees. Test correctly refused to create a new shared coffee, disabled disposable member, and produced a failed run. Corrected test to exercise the real `Use Existing` Add Coffee confirmation button and independently verify its resulting library entry and fresh RPC readback. No existing member data changed; no production deploy.
+
+---
+
+## October 28 UTC — preflight correction to earlier test harness patch
+
+GitHub readback showed the first attempted regex replacement did not apply to the exact script source. A line-specific correction now accepts the production build's JSON-quoted key. The prior queued run remains untrusted for successful auth testing until this corrected source runs; preserve failures as evidence. No source deployment.
+
+---
+
+## October 28 UTC — first genuine hosted CI failure repaired before account writes
+
+Actual GitHub run 40766285634 job 123091192491 reached hosted script and failed on preliminary config parsing before GoTrue signup or database writes. Cause: production build serializes `publishableKey` as a quoted JSON property, while the test harness expected an unquoted JavaScript property. Corrected parser to accept both JSON/JS forms, and made database URL explicitly passed via psql `-d`. This is a test harness fix; first run is FAILED, not evidence of hosted authentication or saved coffees. Repeat exact-source CI. No publication or existing private data mutation.
+
+---
+
+## October 28 UTC — owner-authorized genuine hosted GoTrue/Add Coffee acceptance started, NO DEPLOY
+
+Owner explicitly authorized disposable-member GoTrue sign-in, real Add Coffee save/readback, reopening, and full hosted application authentication workflow. Existing tests were synthetic and cannot satisfy these. Current production Netlify is prior f5f29a02 release; source-only hierarchy PR211 remains independently READY, NOT DEPLOYED. No production app publication approved.
+
+A narrowly triggered, single-use-branch live workflow was prepared using existing repository SUPABASE_DB_URL secret (never printed or committed) and the already published public client key, not a new paid service or API key. It exercises actual GoTrue signup/password login/identity/refresh/logout, guest invite denial and single-use invite redemption, current hosted Chromium beta UI (390px) setup and Add Coffee using an existing verified catalog coffee only, sign-out/re-login, reload, fresh authenticated RPC and independently committed SQL owner-bound readback. It refuses to create a new shared coffee. It flags the email confirmation link as not exercised: the newly created disposable identity is explicitly email-confirmed in SQL because no inbox identity is available. Test records remain for audit, with only the throwaway beta access disabled (no destructive cleanup). No existing member data are read by the test beyond the shared verified-coffee catalog.
+
+**This is implementation of a test harness, not test evidence.** No hosted GoTrue, account write, persistence or browser pass is claimed until the actual GitHub Actions job and provider readback succeed. If the pre-existing SUPABASE_DB_URL secret is unavailable on the runner or the test setup fails, record the precise provider blocker, repair feasible code errors, and preserve existing READY extractor work. Ordinary development remains [skip netlify]; do not publish.
+
+---
+
+## October 28 UTC — Owner77 implementation: selected product regional lot, micro-lot, roast cupping, producing-community rules TESTING
+
+Authority: owner instructed finish all 77 reusable source-backed decisions without inventing blank fields or publishing. Recovered current development a1feb72df6b544d9f0fce00dcbb8fbe0df4e2e69 with no open PR. Exact original private 603 corpus recovery independently hash-verified: 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb. Replayed 603/603 actual handler on exact new source parser blob 77f53ffca444ee31e93dc4fdd830ec1b8a5b1f6f and blend blob 1ad508d637ab6a95a0fdb7af4daf706869fcabfe; strict results 3104 exact/70 missing/828 review (old PR206 3101/75/826) with ZERO former exact losses; all 603 supplemental retention rows unchanged aggregate 5458 full/337 partial/679 unconfirmed. This is LOCAL test evidence, exact GitHub checks still pending. No frozen capture/oracle/scorer edits.
+
+Reusable rules: #12 Guatemala two selected regional elevations preserved separately in component details, canonical elevation blank, explicit review warning and provenance; #32–34 selected WooCommerce literal Micro-Lot category becomes canonical release label without inventing dates/editions; #44 selected named Espresso roast cupping facts isolated from other Kona roast matrix rows, never sharing across products; #46 labeled community Koba credited as a group, with role warning, never an invented individual. New focused adversarial test checks false country, unrelated notes and navigation, wrong roast, missing community source roles. Code and same-commit queue are in TESTING, not READY until exact-head CI, merged source/live 77 comparison, and separate genuine authenticated Add Coffee. Preserve concurrent work, credentials, member data, backend and published Netlify source; no deployment.
+
+---
+
+## October 28 UTC — PR206 clean replacement tracked
+
+Nonforce replacement PR206 opened at clean-source head 26f64a9767e883b411cecb81702a42ea080ef66f on authoritative dev 8fa0769, retains approved #53/#68 and all previous authorizations; no #44 unsupported cupping. Update queue PR reference 206; exact current CI and live 77/603 still separate pending gates. Historical PR202 remains open until actual successful merge; do not force or rewrite. Not deployed.
+
+---
+
+## October 28 UTC — Clean lineage integration for owner #53/#68 (PR202 preserved)
+
+After PR202 nonforce branch reconciliation, approval run 40722890344 FAILED continuity traversal because merge ancestry imports historic PR203 commit 986c48e8 without a [skip netlify] marker. The actual app/test/queue files had no content conflict, but that ancestor cannot be rewritten. Create clean descendant branch from verified authoritative development 8fa076960409c84eaffcc5a360001af7d334c977 with reviewed exact code/test source blobs and reconciled queue/journal; do not force Git refs or weaken CI. Original PR202 remains untouched until replacement merged; then close as superseded with receipt. New scope carries just #53 Liliana and #68 Karumandi current named Washed processing; #44 roast-specific cupping remains unverified. No database or Netlify operations, no hidden source rewriting.
+
+---
+
+## October 28 UTC — PR202 merge-conflict recovery with newer #27/#72 and live receipts
+
+Initial direct merge attempt returned HTTP 405 due overlapping docs/RELEASE_QUEUE.json and docs/workstreams/issue-33.md. No mutation happened; inspected actual PR and development heads. Explicitly reconciled original #53/#68 passing Washed code and negative tests from PR202 atop latest development 8fa076960409c84eaffcc5a360001af7d334c977, retaining #27/#72, all live receipts, all 40 existing release queue rows, and all recent journal history. Added new scoped TESTING entry #202 as row 41. #44 selected roast cupping is NOT implemented; the earlier parser candidate wrongly attributed caramel from another roast and was safely dropped. Parent branch merge is nonforce, source/CI/77 acceptance pending. No original603 changes, prod data, Netlify release or paid cost.
+
+---
+
+## October 28 UTC — PR202 existing cross-roast flavor attribution issue isolated
+
+Exact-source PR202 cloud run 40710952306 failed two new cup comparison tests: current generic parser extracts "caramel" from an Espresso flavor comparison even when selected coffee is Kona Peaberry. New note extraction could not safely override the earlier wrong field. Rather than weaken a failing test or merge a false attribution, remove unverified cupping code and the two incomplete cupping tests from PR202. Retain only owner's two direct Washed selected-stage rules #53 Liliana and #68 Karumandi, plus positive/negative tests. #44 remains explicitly unresolved for separate repair. Exact-head retest and original603 source replay needed, unchanged oracle, no production writes or deployment.
+
+---
+
+## October 28 UTC — selected coffee processing stages and named roast notes TESTING
+
+Owner decisions #53 Queen City Liliana: selected traditional Tres Cochadas lot's depulping, fermentation and fourth-day washing support Washed while preserving named technique. #68 Stumptown Kenya Karumandi: named selected factory wet fermentation, depulping and raised-bed drying support Washed. #44 Mountain Thunder Kona Espresso: selected Espresso variation has literal Smokey/caramel cupping alongside selected chocolate overtones; do not merge unrelated American, Vienna or French roast claims. Added narrow named current-product narrative rules and five positive/negative tests, original603 oracle/captures/scorer unchanged. Exact-source CI and 77 live rerun required, no publication or production member modifications.
+
+---
+
+## October 28 UTC — 27/72 independent merged current-source parity receipt and scoped queue reconciliation
+
+PR204 exact tested head d51c0a8b3d3b18c79a4e22e1816fd3e50ed7dd6c non-force merged at 7283049dfdb70f37911502a8f915916acb5f4a86 (tested tree unchanged). PR203 #27 earlier merged 986c48e8ad629dcdee31cbacc5f90139e1669d2c. Corrected head PR204 CI seven applicable SUCCESS: 40718601895 approval, 40718601980 security, 40718602092 isolated SQL, 40718601933 cloud/browser/mobile, 40718601960 app/Node/lint/build, 40718602246 visual, 40718602050 private source bundle. Postmerge 40719154070 approval, 40719154389 app/build, 40719154531 cloud UX, 40719153735 visual SUCCESS; controlled exact merged source 77 probe 40719153801 SUCCESS.
+
+Compared parsed selected, conflicts, details and review values for all 77 current official source results with previous live 40709001857: exactly #27 origin restored and its false conflict cleared; #72 noncanonical component credit Guatemala/Huehuetenango ACODIHUE added; 75 other cases identical and zero other canonical output losses. #72 Producer remains blank, no unrelated Marta Solares / La Esperanza. Receipt docs/audits/issue33-27-72-merged-live-acceptance-20261028.json. Verified original private 603 corpus cannot be claimed current-source PASS: 40718601972 SKIPPED by historic branch-only gate; old 3096/81/825 applies to PR190 source. Scoped release queue and register remain TESTING until changed-source original603 and parent authenticated DB E2E; no production writes/deploy, no new cost. Concurrent PR202 remains untouched.
+
+---
+
+## October 28 UTC — PR204 first cloud CI negative-fixture correction (same-commit)
+
+First scoped head ed123962c91d38196d20dfcab7e5a35fc84b4d2a: source security 40718142683, approval 40718142820, private source bundle 40718142825 and isolated SQL 40718142739 passed. Cloud UX run 40718142801 failed exactly one new test: a supposedly generic negative fixture included the *same complete valid selected ACODIHUE source evidence*, so the correct parser emitted the component credit. This was a flawed negative fixture, not proof of a parser defect. Replace that example with roaster education context lacking any selected component credit; preserve all positive source checks and no guess at blend-wide Producer. All exact-source CI must rerun before merge. Original603 hosted workflow 40718142624 skipped, not passed.
+
+---
+
+## October 28 UTC — Owner #27 and #72 scoped implementation staged (CI/merge pending)
+
+Authority: owner explicitly requests fix coffees #27 Great Circle La Josefina Sudan Rume and #72 Thrive Horizon Organic. Development source 6ae7895eadcfc07aeac8661a6974d145af18ed01; Netlify published 6ae0fc16178b2f1241e441f8 from f5f29a02; Supabase ACTIVE_HEALTHY. Concurrent PR202 remains open and untouched.
+
+#27 current roaster URL https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume describes Cayambe-Coca Natural Reserve, Ecuador, producer Leopoldo Andrade / Ligia Merizalde. PR203 previously merged same-reserve Natural/Natura spelling guard; direct current-parser and immutable603 parity still pending.
+#72 current official URL https://thrivefarmers.com/products/horizon-organic describes Guatemala/Nicaragua, Huehuetenango(GT)/Matagalpa(NI), Medium roast, Washed, Caturra/Pache Verde, elevation 1750masl, Fruity/Toasted Cereal/Chocolate. It names ACODIHUE as a producing community only in the Guatemalan component narrative. Later Marta Solares/La Esperanza is a separate farmer profile and must never be selected product Producer.
+
+New bounded reusable selected-blend association reader adds only component-qualified roaster_details.blend_components, a visible Producer review note, and source-linked component_producer review fact. It leaves whole-blend canonical Producer blank and never claims the Nicaraguan component. Tests cover #27 same-reserve positive and country disagreement negatives; #72 explicit association, wrong product identity, unrelated farmer widget, absent role and persistence-suggestion exclusion.
+
+Scope is TESTING until exact-head CI, fresh public-source cases, immutable original603 changed-source and safe nonforce merge readback. No member, database, original oracle, Netlify release/production, or paid service changed.
+
+---
+
+## October 28 UTC — PR203 reserve-origin fix merged, exact CI readback, scoped TESTING
+
+PR #203 non-force merged at 986c48e8ad629dcdee31cbacc5f90139e1669d2c; exact tested head 6739285c916d4d41cf5c7179ce0cd96b6b8f4f09. Corrected head CI app/build 40714042857, cloud UX 40714042566, private visual 40714042794, isolated SQL 40714042783, approval 40714042578, security 40714042643 and private source bundle 40714042655 SUCCESS. Initial approval 40713629744 failed due missing queue intake; corrected scoped item in same PR, retested SUCCESS. The original603 protected workflow 40714042606 SKIPPED, so new exact-source immutable603 remains unverified; Great Circle live 77 current source replay and real authenticated Add Coffee persistence also pending. Keep DIC-Q-33-same-reserve-selected-origin TESTING, parent #33 IN_PROGRESS. No Netlify deployment, member writes, or prod migrations. Preserve concurrent PR202.
+
+---
+
+## October 28 UTC — Issue33 Great Circle #27 selected origin false-conflict repair staged (PR pending)
+
+Authority: 77-coffee owner review #27 and current selected roaster page, with direct public H1 La Josefina Sudán Rumé / Natural Extended Fermentation, Location "Cayambe-Coca Natural Reserve, Ecuador", country Origin "Ecuador", and secondary Region "Cayambe-Coca Natura Reserve" (one-letter loss). Prior merged-source owner77 job 122888810868 at 0b8e4088 found false origin conflict despite compatible primary location/country. Narrow place comparison only for exact long shared "-Natura(l) Reserve" stem; preserve original literal evidence, do not fuzzy-match competing towns or countries. Add positive current-product fixture and independent negative geography assertions in tests/coffee-issue33-selected-fact-compatibility.test.mjs. Code/test are development-only, not yet CI-verified or merged; original 603 changed-source and full 77 decision parity still pending. Concurrent PR #202 modifies different parser helper and new tests; preserve it and reconcile before integration. No member/provider data, original frozen corpus, Netlify publication, or production SQL edited.
+
+---
+
+## October 28 UTC — PR200 live 77 replay uncovered Bald Guy #5 variety regression; targeted fix staged
+
+After nonforce PR200 merge `c4f63ef6ce697a00a3192d2d6b2cdc0f20c7cc6a` and successful controlled live public 77/77 run 40707624196 (job 122883896305), four owner cases improved as intended: Favor #23 roast Medium-Dark, Lowcountry #41 Cocoa/Almond notes, Spiritus #65 Guaya'b program producer without false conflict, VESTA #74 Fresno/Tolima/Colombia origin without false conflict. However #5 Bald Guy had existing cultivar list Caturra/Colombia/Castillo removed (unapproved exact field loss). Treat as runtime regression; do not mark PR200's scope READY until this repair. Cause: generic MEET-heading remainder truncation in `withoutDetachedFarmerProfiles` is too broad. Restrict filter to uniquely identified Thrive-style `div#meet-farmers-inline` containing `h*.mf-meet-kicker`; preserve any ordinary MEET headings and following product fields. Keep original supplemental linked farmer evidence, already separately preserved by PR200. Add negative test verifying selected variety after ordinary MEET remains; exact-wrapper positive current unrelated profile still excluded. Await exact-source CI and postmerge direct 77 replay to verify no lost data; original603 privately immutable, hosted gated suite still skipped. No production changes or deploy.
+
+---
+
+## October 28 UTC — PR200 source review and geography regressions repaired without weakening original tests
+
+First exact-head PR200 58cc738 had 8 failures: 2 geographic tests detected an improperly invented Cauca/Huila Colombia tuple, and 6 existing linked-farmer source-review tests lost valid supplementary provenance. Limit special-case typed Region + untyped Origin composition to explicitly printed country-FIRST Origin ("Colombia, Tolima" + "Fresno"). Country-LAST competing region names remain conflicts, avoiding gazetteer inference. Restore full sanitized productMarkup for public source review; export detached-profile filtering and apply ONLY to canonical current-product fields, while `collectSupplementaryCoffeePageFacts` receives original selected markup so source-linked farmer profile facts remain available to users for inspection without filling this coffee's producer. Updated positive/negative #72 test accordingly. Exact new-source CI and original603 replay required before merge; no production writes or deploy.
+
+---
+
+## October 28 UTC — PR200 source regression repaired and queue intake reconciled
+
+First cloud run 40705017317 failed four tests: global flavor-set subset relaxation wrongly suppressed two established independently printed-label conflicts; narrowed rule to directly printed selected Flavor subset outranking *structured Product metadata* only, preserved independent-versus-independent contradiction with new negative. New VESTA test exposed the second origin reconciliation path (typed Region plus untyped country-first Origin) which now uses a printed-components-only tuple in sensible region, state, country order; no gazetteer. New Thrive synthetic test detected uppercase MEET missing due case-sensitive pattern; made heading guard case-insensitive. Approval 40705017187 failure was absent changed-source intake row; now explicitly TESTING in same-commit release queue. None of these failed tests count PASSED until exact-source re-run. No deployment, live member changes or original603 fixture alterations.
+
+---
+
+## October 28 UTC — PR200 source compatibility approval intake failure repaired (CI retest)
+
+PR200 first exact-head approval workflow 40705017187 FAILED at release-queue --enforce-intake because new `src/server/coffee-product-scope.mjs` was not tracked in a same-scope TESTING queue item; not a runtime extractor failure. Added `DIC-Q-33-selected-source-compatible-roles-and-profile-boundary` with exact three changed app paths, source authority and pending CI/603 acceptance so the queue now tracks every changed application file. No release claim, CI not yet verified; continue full exact-head run and repair any other failing test. All original coffee facts, member data and production unchanged.
+
+---
+
+## October 28 UTC — source-bound reusable compatibility and producer-isolation repair TESTING
+
+PR199 merged and source-bound owner77 probe 40703208153 completed 77/77 direct official pages and actual Add Coffee preview output. It classified 50 requested fields as unpopulated/unextracted, 11 as source context only, 10 as requested-field conflicts, 6 as canonical suggestions; these counts are DIAGNOSTIC, not pass/fail against the decisions (intentionally blank is valid). Current source-backed cases: #41 Lowcountry Cocoa/Almond versus overlapping Cocoa/Almond/Chocolate, #65 Spiritus same Guaya'b women-producer program with qualifier, #74 VESTA labeled Fresno region and Tolima/Colombia origin, #23 Favor branded Token Dark Roast versus selected medium-dark roast prose, #72 Thrive unrelated MEET Marta Solares profile must never donate La Esperanza to Horizon Organic. Implement general selected-source compatibility and profile boundary with focused positive and contradictory negatives; leave unsupported fields blank. No hardcoded coffee outputs, credentials, member mutations, paid API or release. New parser tests/CI and immutable original603 replay still required.
+
+---
+
+## October 28 — full owner 77 source-specific facts and preview capture staged (read-only)
+
+User confirms that exact acceptance means each coffee implements the specific approved decision, **not** that all optional fields have values. Original reviewed 77 product URLs uniquely numbered; first-pass source/presentation smoke passed 77/77, but field provenance and individual requirements were not verified. Introduce credential-free [dic-issue33-owner77] bounded current official source QA: for every original URL use actual server parser and frontend Add Coffee renderer, record selected facts, target field, printed related source context, status/contradictions and screenshots-equivalent markup warnings. Two known oversized pages use existing 2MB product guard. No member request, database, deploy, new spend, or changes to frozen original603 oracle. This is a DIAGNOSTIC, not automatic 77/77 decision acceptance. Exact-head CI, nonforce merge, read actual source diagnostics, then targeted implementation and per-decision acceptance remain required.
+
+---
+
+## October 28 UTC — qualified Beanstock FUDAM process and all-77 source-bound Add Coffee UI TESTING
+
+Recovered owner-reviewed 77 case register, original immutable 603 benchmark and current live 77 source retrieval results. Current Beanstock FUDAM text says **generally washed** two or three times; this is a FUDAM association practice, not explicit guaranteed processing of current bag. Add exact selected FUDAM source-only contextual review hint and raw source evidence; no canonical Washed auto-fill, old reused Tolima contamination, or historical member mutation. New tests cover qualification, stale product negative/current direct process override and actual frontend Add Coffee HTML markup for all 77 real captured current-source parsed cases including 15 conflict warnings. This is not authenticated real-app save or 77 individually adjudicated facts. Queue DIC-Q-33-qualified-fudam-processing-77-ui TESTING until exact-source CI and safe merge, 603 unchanged-source scoring and full acceptance. No deploy.
+
+---
+
+## October 28 UTC — #50/#67 guarded 2MB official source retry PASSED, complete 77/77 retrievable selected HTML
+
+PR196 exact-head code/test, cloud/mobile, visual, SQL, Python, approval, Issue33 source CI passed, original candidate12 hosted workflow SKIPPED; nonforce merge `48d836f8d2f0de9bd124fd0bcde2962c3f024780` was read back. Unique merge-triggered development-only source workflow [40640135160](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40640135160) ran with **no credentials or database writes** and fetched the two formerly oversized original pages via preexisting safe **2,000,000-byte product-detail-only cap**, not a default global relaxation. #50 Paper Plane Tres Cruces: direct selected product 1,101,232-byte HTML, Honey, Joyabaj Guatemala, Caturra/Bourbon/Catuai, 1,500–1,900 m, guava/pear/nougat; no independently extracted source-specific producer. #67 Stage Line Capricornio Dulce Signature: 1,513,650-byte HTML, Brazil, Yellow Catuai/Mondo Novo, a blend of natural + honey processing mapped conservatively to Other/Unknown, but Capricornio organization role remains source-indeterminate for producer. Both parsed with zero conflicts. Raw original first-pass 75 PARSED+2 page_too_large receipt is immutable; linked retry receipt `docs/audits/issue33-direct-oversized-source-retry-20261028.json` completes technical 77/77 URL retrieval/parser smoke only, not fact accuracy or individual acceptance. Fifteen existing conflict cases, other source gaps and real authenticated app tests remain open. No production publication.
+
+---
+
+## October 28 UTC — all 77 direct exact public source diagnostic complete: 75 parsed, 2 oversized, 15 field-conflict cases
+
+PR195 non-force merged at `a4b51e1b44c9bf8da7ad2e92c48575ee547d2eb4` after exact-head app/lint/build, cloud/mobile, private visual, isolated SQL, Python, Issue33 source and approval CI passed (frozen original candidate12 hosted guard SKIPPED). Its GitHub workflow [40639632214](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40639632214), job 122654495102, independently made bounded DNS-pinned official public requests to **all 77** original distinct URLs and invoked the real selected `extractPublicCoffeeFacts` parser on raw official HTML. All 77 attempted; **75 PARSED, two UNAVAILABLE/page_too_large (#50 Paper Plane Tres Cruces, #67 Stage Line Brazil Capricornio), 15 parsed cases with at least one canonical field conflict** (IDs 1, 13, 19, 23, 27, 28, 35, 36, 37, 41, 60, 65, 73, 74, 76). Source digest, printed current selected fields, untrusted-source boundary and exact receipt per case in `docs/audits/issue33-direct-current-all77-source-probe-20261028.json`. This is real public-source retrieval/parser coverage, not 75 individually correct records, not a user-level login/DB write or 77/77 acceptance. Named aliases differing in punctuation are not automatic identity defects. No original603 archive/oracle/scorer changes.
+
+A safe existing `MAX_PRODUCT_RETRY_BYTES` 2MB product-detail-only fetch is now exercised in a *separate* marker-controlled two-page probe for #50/#67, preserving the normal 900k limit and denying arbitrary larger fetches. Its result must be read from new GitHub workflow before accepting either case. No production changes, member requests, paid services or publication. The broader issue remains IN_PROGRESS.
+
+---
+
+## October 28 UTC — Complete 77 original-URL current public source diagnostic (TESTING / read-only only)
+
+Owner has directed independently testing **all 77** exact coffee URLs in as close to real app extractor as available. This scoped CI workflow introduces an explicit one-use development merge marker `[dic-issue33-77-probe]` to read the immutable numbered 77-entry review register and execute the actual server `fetchPublicCoffeeHtml`/selected `extractPublicCoffeeFacts` logic for every exact saved official URL with four bounded concurrent requests, DNS-pinned HTTPS, no secrets, login, member data or third-party paid service. It emits SHA256 of the public HTML, bounded current selected facts, conflicts and explicit retrieval/parse failures; no raw page capture, no Shopify JSON guessing and no writeback or source mutation. The controlled probe is strictly diagnostic, **not a claim** of all 77 accepted, full browser/mobile/PWA/real-member acceptance, or original frozen603 scoring. It runs only after a deliberate marker-bearing non-Netlify development merge. Failed/unpublished sources must remain flagged, fields not guessed; old URL slug identities may rotate. Add static scope/77-intake test and exact same-commit Issue33 journal. All concurrent source, database, baseline, user history and release authority preserved. This proposed code remains TESTING until exact-head CI/nonforce merge/current probe receipt; no deployment.
+
+---
+
+## October 28 UTC — PR192 merged/current direct source probe independently PASSED; Cortez scoped READY, Beanstock earlier Tolima snapshot superseded (no deploy)
+
+After PR192 exact-head app/cloud/browser/SQL/approval/Python checks succeeded (historical branch-gated original603 SKIPPED), merged non-force to development at `d7d0e11208f5425c82a79ad657d25959b676a6d9`, with live controlled public-source marker in merge message. GitHub workflow [40638754513](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40638754513) successfully executed the exact source probe step, job 122651708318. All three official direct HTML requests returned and parsed. Cortez currently selects **ethiopia guji benti neka** (Ethiopia/Wolisho, Medium, Washed, Kurmue/Dago/Wolisho, 1600m, directly labelled flavor terms), SHA256 `6a6b63104b9783f50130a5bcc2c88a84794d7edfb06eb6c227714775bdca2d24`; historical El Salvador/PNG identities are not accepted. This closes PR189's only live-current-source gap via DIRECT current HTML, rather than falsely claiming inaccessible Shopify Ajax .js succeeded. Original source tests/merge, 603/603 changed-source replay 3096 exact/81 missing/825 review with no loss and 6474 unchanged supplementary, all remain valid without any changed extractor runtime. Promote only Cortez PR189 source queue TESTING→READY/NOT DEPLOYED and update approval coverage.
+
+Beanstock #6 exact official page now selects **New!! Colombia Fair Trade Organic FUDAM LA Union**, not earlier stale two-month-old Tolima Suave. Direct parsed source yields Medium, Colombia, FUDAM, carmelized sugar/dark chocolate, but no primary process: **Washed not independently proven**. Reopen source process adjudication and add negative regression ensuring old Tolima/Washed data is never copied into selected FUDAM. Thrive #72 exact Horizon Organic selected product fields read correctly; unrelated on-page Marta Solares / La Esperanza profile exists but direct parser output did not assign La Esperanza as selected producer. Prior synthetic contamination remains a separate test/fix risk; ACODIHUE source-backed Guatemalan component must not be attributed to Nicaragua.
+
+New immutable evidence receipt: `docs/audits/issue33-direct-current-source-probe-20261028.json`. Original 603 frozen captures, oracle, scorer, numbering, stored member records, Auth, SQL/Edge, main, release/production, Netlify remain unchanged. Direct public proof is **not real member JWT/app persistence**; all 77 individually accepted cases remain incomplete. Post-merge ordinary CI for diagnostic PR192: cloud app [40638754595](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40638754595), approval [40638754531](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40638754531), Python [40638754630](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40638754630), controlled public source [40638754513](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40638754513) SUCCESS.
+
+---
+
+## October 28 UTC — Independent live source QA route for #72 Thrive / #6 Beanstock / Cortez (not a release)
+
+The three exact public URLs are still source-freshness blockers/risks. Existing authenticated-free public DNS-pinned transport is reused to probe current selected HTML and public Shopify Product JSON, preserving only SHA256, bounded selected fields, HTTP-source status and explicit profile-identity flags (not HTML, secrets, cookies or member data). Added a new **explicit one-use development-commit marker** [dic-issue33-source-probe] to the already controlled public probe workflow, so no unrelated large roaster suite is run. This only executes if a separate safe development merge commit carries the marker; no production workflows or Netlify deploy. This first commit adds diagnostics and journal, **not source acceptance or a fix**. In particular, a synthetic Horizon Organic reproduction showed an unrelated Meet Marta Solares farm could contaminate producer; do not change the current selected product from ACODIHUE to La Esperanza. Evaluate actual direct provider result before editing extractor and keep all 77 original cases, member history and 603 oracle unchanged. No paid services.
+
+---
+
+## October 28 UTC — PR191 independently merged and frozen original603 strict-parity proof, release queue scoped READY (NOT DEPLOYED)
+
+PR191 exact tested head c1f568625856bd13debc400d6ab26d06e82a3895 non-force merged at 7974c09a7e4973731c00928018dc113693277945; merged tree 843586933cc38e9ff0c1cffb555dc655c3b7a1bd equals tested PR head tree; exact runtime roast evidence blob b26d642bc66c6d0a76098f9d2d367e6aa9f69052 equals locally 603-replayed source. All seven PR-head applicable GitHub CI PASS: app/build 40634343359, cloud/mobile 40634343132, browser/visual 40634343220, isolated SQL 40634343187, source security 40634343180, approval 40634343006 and private original-source bundle 40634343223. Postmerge exact source Node/build 40634577253, cloud/mobile 40634577221 and approval 40634577209 PASS.
+
+Original immutable 603/201/1197 captures and oracle have hash-verified source provenance; full selected handler strict 4002 canonical per-case result *identical* to PR190 baseline: 3096 exact, 81 missing, 825 review; zero previous exact lost. All 6474 supplementary per-case retention identical (5458 full, 337 partial, 679 unconfirmed). Local focused 34/34 passed including actual Add Coffee rendered markup. Original candidate12 historical workflow 40634343281 SKIPPED as intended, NOT passed/changed. Evidence docs/audits/extractor-issue33-selected-image-replay-20261028.json with SHA256 for exact source and output.
+
+#7 Black & White Diego Horta and #9 Sebastian Ramirez Red Fruits Decaf current selected bag ALT "lighter roast" now yield only manual nonstandard roast hint, no seven-tier autofill; #6 Beanstock current Tolima Suave official page snapshot old FUDAM Washed fact not imported (no new handler patch needed), with snapshot freshness caveat. #8 Franky current product unavailable; do not invent. No user/member, shot, private data, original oracle, release/production, paid service or Netlify write. Scoped PR191 READY, NOT DEPLOYED. Parent Issue33 remains IN_PROGRESS for individual #6–76 unsupported source gaps plus specifically logged #72 Thrive producer risk from an observed *synthetic* later Meet Marta Solares profile; do not equate fixture with verified live provider markup, and do not attribute unrelated farm La Esperanza to Horizon Organic. Cortez PR189 stays TESTING until direct current Shopify product identity independent confirmation.
+
+---
+
+## October 28 UTC — PR191 exact-head cloud register-state failures repaired (code and corpus unchanged)
+
+Initial PR191 amended head bcc9d8b389fd4df2d38f87ad9d445575e29d8614: cloud run 40634072382 failed two **register-only** assertions, not extractor behavior: #6 Beanstock changed from the initial IDENTITY_CONFLICT intake to honest OFFICIAL_SELECTED_TOLIMA_PAGE_SNAPSHOT_PROCESS_UNPUBLISHED and existing-code negative regression; #7/#9 now have source-backed scoped PR191 TESTING candidates rather than the original review-only status. Repaired test now requires #6 genuine unpublished Process and historical FUDAM exclusion, #7/#9 specific TESTING or merged-READY status based strictly on exact scoped queue merged SHA, untouched #8 and #10-76 remain NOT_VERIFIED, and all 77 identities/URLs and owner #1-5 plus #49/#72 authority unchanged. Explicitly asserts the observed Beanstock source is NOT a verified live Shopify endpoint. No parser/oracle/scorer test weakened. New PR head requires full Node/cloud/visual/security/approval/SQL CI and safe merge; existing full immutable603 candidate-source replay had zero per-case differences / all 6474 supplementary unchanged. Code source blob b26d642bc66c6d0a76098f9d2d367e6aa9f69052 unmodified. Same-commit journal update. No deployment.
+
+---
+
+## October 28 UTC — PR191 actual Add Coffee markup regression added, no changed parser behavior
+
+Independent QA confirmed the exact selected Black & White relative bag-image "lighter roast" hint is displayed by the actual site/cloud/coffee-url-autofill.js user-facing Add Coffee preview, while no seven-tier Roast Level autofill is manufactured. Added an explicit preview markup regression to the same feature test and kept off-product, conflicting and stale Beanstock cases. Server source remains blob b26d642bc66c6d0a76098f9d2d367e6aa9f69052, unchanged from the fully replayed 603-coffee local source. Prior original603 full modified-source strict comparison: 603/603, 3096 exact/81 missing/825 review, **zero per-case differences** from the immediately prior PR190 accepted source; supplementary evidence all 6474 unchanged. Rerun exact amended-head CI and preserve historical candidate12-only branch guard unchanged; no deployed or private user data operations.
+
+---
+
+## October 28 UTC — PR191 proposed: exact current selected-image relative roast and reused-product negative controls (TESTING, NO DEPLOY)
+
+Issue33 master #6 historical Beanstock FUDAM La Union reused /products/colombian-supremo-organic slug now displays official selected Colombia Organic Tolima Suave in an older official snapshot; its Process field is genuinely absent from observed selected page. Existing parser already preserves selected Tolima identity, Medium and its own tasting notes without borrowing FUDAM's old Washed process. Do not fabricate Wash or assign prior FUDAM facts; leave blank and retain snapshot freshness caveat.
+
+Official selected Black & White Diego Horta #7 (page crawled two days ago) and Sebastian Ramirez Red Fruits Decaf #9 (page crawled today) have a bag-label ALT naming the exact selected H1 and relative "lighter roast", outside owner-Locked seven-tier classification. Current visual extractor intentionally budgets arbitrary ALT to 90 characters and loses the later relative label. Narrow improvement reads at most 300 characters of the selected matching bag-label ALT and offers ONLY a safe manual roast hint; no guessed roast. Reject unrelated bag captions, generic education and multiple current H1 identities; explicit supported current roast outranks relative prose. Local 33/33 focused Node regressions PASS including Beanstock stale SEO negative, no member or production writes. Original immutable 603 full changed-source replay initiated and remains PENDING; no new source score or READY asserted. Added one-day private exact-source archive workflow trigger for subsequent extractor changes, without touching original candidate12-only secure frozen corpus guard. All code/tests/source journal included same commit; source-bounded GitHub CI, private source artifact, non-force merge and real-app verification pending.
+
+---
+
+## October 28 UTC — PR190 successfully merged, exact original603 evidence clears five prior gates and #77; Cortez still source-TESTING, NO PUBLISH
+
+PR190 non-force merged 8ccacd4db09cfd7922d6beb57c13464bf89e877b, exact matching tested source tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 and unchanged extractor file blob c8347cd96da02a280c3602a1759a3d9fc586536b. PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS.
+
+Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.
+
+Reconciled 77-row independent master register without renumbering; #1 source blank resolved without inventing primary process, #2/#3 PR185, #4 PR187, #5 PR188 approved merged decisions, #77 PR190 selected-direct roast-over-generic-marketing-tag fix. Scoped READY (NOT DEPLOYED) source items PR179, PR183, PR185, PR187, PR188 and PR190 because the *only* historical READY blocker was the exact changed-source frozen603 replay, which was separately executed with verified immutable private capture/oracle rather than weakening the GitHub candidate12-only secure guard. Current official exact product pages for Ahrre's, Alaska Artisan, Bald Guy, Ketch and Kona Earth checked in independent QA; these are public retrieved snapshots, not real-time authenticated provider/current-lot guarantees, and synthetic browser QA is not live Supabase testing. Cortez PR189 remains TESTING: direct current product .js cannot be independently retrieved and historical SEO/older indexed pages are stale; do not promote. Parent Issue33 stays IN_PROGRESS, #6–76 individual source review/implementation incomplete; original603 current strict 3096 exact/81 missing/825 review, all 6474 supplementary unchanged. No production records, release/production, Netlify, original oracle, or paid services changed.
+
+---
+
+## October 28 UTC — Repair late PR190 register-state assertion failed exact-source CI
+
+PR190 e44a75d84fb88606b47ba01610d8b221f4f96893 reached full Node 40632372263 and cloud 40632372301: both FAILED one register-only assertion (test expected initial SOURCED_EXTRACTOR_FIX_CANDIDATE_PR190_TESTING, while the separately updated audited register now correctly reported TESTED_PR190_AWAITING_MERGE). All coffee extraction positive/negative regressions were unaffected. Corrected test asserts exact process-aware state derived from the scoped release-queue merged SHA: unmerged candidate must say TESTED_PR190_AWAITING_MERGE; once merged it must say MERGED_PR190; always require actual original603 receipt. This is a bookkeeping test repair, not a weakening of extractor or frozen original603 acceptance. Re-run exact-source full CI before merge; no data, production or original-corpus modification. Same-commit journal included.
+
+---
+
+## October 28 UTC — PR190 exact immutable 603 and isolated app verification (TESTING, NO DEPLOY)
+
+Completed original frozen 603 coffee / 201 roaster / 1,197 capture replay on exact GitHub private source archive b9f56d48a2f580cca66939288ce6ed9260117f6d, tree 87312e9280d5542a82dd7153aaa8caa4bd87dbd1, code-identical documentation/test commit 75c08d684b863c6e679b02283b898c9071716217. Strict unchanged oracle 0bd751f... and source archive 696c011...; full 4,002 checks: baseline exact 3,096/missing 82/review 824; now exact 3,096/missing 81/review 825; only change #77 Yellowstone raw current selected label Medium-Light instead of frozen expected alias Light-Medium, no old exact lost. All 6,474 supplementary unchanged: 5,458 full/337 partial/679 unconfirmed; 0 original source/oracle/scorer mutation. Isolated Chromium with ACTUAL packaged JS and synthetic accounts/storage PASS 68 (Log Shot/Rate/Recommendation/edit/mobile/offline/privacy fixtures) but localhost HTTP test BLOCKED by execution policy and no actual Supabase login/IndexedDB exercised. Source-bound, immutable archive and replay output SHA256 detailed in docs/audits/extractor-issue33-original603-current-source-replay-20261028.json. Recovered archives verified; existing candidate12-only hosted original603 workflow remains SKIPPED and unchanged, not PASS. New #77 queue row TESTING pending PR190 integration/postmerge CI; parent Issue33 IN_PROGRESS and #6-76 source-specific still unresolved. No production data or release.
+
+---
+## October 28 UTC — QA register test reconciliation after scoped #77 implementation (NO DEPLOY)
+
+Local exact-bundle readback at b9f56d48a2f580cca66939288ce6ed9260117f6d found one test bookkeeping failure: the original 77-register integrity assertion assumed all coffees #6–77 were unchanged unimplemented, but Coffee #77 is now explicitly identified as an unmerged implemented candidate undergoing acceptance. Correct the assertion to accept **only #77 as TESTING**, while requiring all other #6–76 to remain NOT_VERIFIED, and leave every READY flag false. This is not relaxation of parser/oracle/scoring acceptance. Re-run full exact-source tests and preserve same-commit journal. Current code and frozen benchmark untouched in this follow-up; original603 changed-source verification still pending.
+
+---
+## October 28 UTC — Yellowstone #77 direct selected roast outranks generic conflicting Shopify tags (TESTING, NO DEPLOY)
+
+The original unchanged 603-coffee replay at exact prior PR190 source b2e4564 completed all 603 cases/201 roasters, 4002 canonical strict checks (3096 exact/82 missing/824 review) and 6474 supplementary (5458 retained/337 partial/679 unconfirmed). It identified a concrete false roast conflict on original Yellowstone Colombia Huila: the live selected product prints "Juicy & Dynamic - Medium-Light Roast", but the same exact Shopify product's broad catalog tags list Light Roast and Medium Roast, previously producing a false withheld conflict despite clear selected specification. This is *not* an independent contradictory pair of direct printed current specifications. A bounded source-priority fix marks the endpoint's tag-only ambiguity and preserves the exact selected product's explicit roast while continuing to withhold genuinely contradictory direct roast claims or tag-only cases without selected roast. Four new positive/negative regressions; local focused 25/25 PASS, including existing long-description and Cortez preservation. Current changed-source full603 replay and original retention comparison must finish before integration/readiness.
+
+This same commit additionally requests the actual built public app distribution as a short-lived private GitHub artifact from the exact PR head using synthetic nonfunctional public configuration. The historical secure frozen603 workflow remains untouched; the original captures, oracle, scorer, member accounts, operations branch and Netlify production are unchanged. Entire Issue33 stays OPEN, PR190 and scope TESTING until exact-source ordinary CI, full original603 regression audit, isolated actual app QA, merged source readback, and recorded evidence.
+
+---
+
+## October 28 UTC — Correct source archive workflow quoted JS before interpreting CI outcome
+
+The initial private QA workflow contained doubly escaped JavaScript null separators and a path-filter regexp when generated through the connector. Replaced these with deterministic null-byte splitting and explicit safe tracked-path checks before rerunning CI; no change to product extractor, 603 source/oracle, application behavior, member data or release authorization. The GitHub artifact source receipt must expose a credible tracked file count and SHA256 before local replay. Same-commit Issue33 journal update.
+
+---
+## 2026-10-28 UTC — Independent 77-row review register and secure source-bound corpus replay preparation (NO DEPLOY)
+
+Owner authorized two handoff reconciliation, exact current source checks, real isolated app QA and original frozen603. Original reverse intake #6–77 is conversational review with NO implementation/CI and must not be called READY; #1–5 are canonical previous owner decisions. Independently compared all 77 numbered URLs to original Library master list: **77 exact URL/number matches; zero renumbering**. New independent register has unique ownership forward #6–41/reverse #42–77, source verification and owner authority statuses, with exact #49 Orleans/#72 Thrive owner approval preserved. Current official public source HTML was reviewed for ten high-risk numbers (including #6 reused identity discrepancy; #7/#9 relative Lighter; #12 distinct elevation ranges; #49/72 approved notes; #67 split processing; #77 Medium-Light). These are leads and bounded evidence, not live Product endpoint or all-source acceptance.
+
+This scoped commit adds a checked-in 77-row schema regression test and an **additional private exact-Git-tracked-source artifact** workflow to allow local original603 replay using the previously recovered immutable archive without weakening or changing the historical candidate12-only GitHub private-input guard. The one-day GitHub artifact contains only exact checked-in tracked files, no production data/secrets, and must be hash-matched to tested PR head. Only after obtaining and running it with original immutable sources/scorer may the frozen603 requirement be considered satisfied. All code, canonical 603 inputs, owner/member data, Netlify and release/production are untouched. Remain TESTING / IN_PROGRESS until concrete acceptance.
+
+---
+
+## October 28 UTC — Independent coordinator/QA handoff created (documentation only)
+
+Owner requested an independent deployment coordinator and quality auditor handoff with verified distinction between code already merged/tested, formally recorded owner coffee decisions #1–#5, conversational triage only #6–#17, and unreviewed #18–#77. Created docs/handoffs/ISSUE33_INDEPENDENT_COORDINATOR_QA_HANDOFF_2026-10-28.md from source 73b2428f5504caed032f92776a682f05b4ecc1f2, AFTER verified Cortez PR189 nonforce merge 40b271adabcb8c71354c1272ea7227e6df3d3c88 and documentation reconciliation. The handoff specifies realistic isolated built-app Log Shot → Rate → Recommendation QA, exact-source original603 acceptance, privacy, no fabrication and honest READY queue gates. This documentation-only commit did NOT change extractor code, tests, member data, original603 inputs/oracle, release queue states, release/production or Netlify publication. No production authorization.
+
+---
+
+## October 28 UTC — PR189 merged, exact-source ordinary CI fully successful; frozen603 remains restricted (TESTING, NO DEPLOY)
+
+Cortez historical-description quarantine after Coffee #4 and #5 was repaired and nonforce merged in PR189 at 40b271adabcb8c71354c1272ea7227e6df3d3c88, exact same source tree a196549de4dea23a8c0d20ce70daa13fbba5a201 as tested head 6f81af9e5878b975258323163b7379111dc51f35. Six exact-head CI workflows SUCCESS (Node/lint/build 40629362551, cloud/mobile 40629362565, private visual/browser/offline 40629362567, SQL 40629362576, security 40629362581, approval 40629362577). Merged-source app 40629575873, cloud/mobile 40629575863 and approval 40629576034 independently SUCCESS. Earlier PR186 closed unmerged, initial PR189 failure corrected and retested; no source-test assertion weakened.
+
+Frozen original603 40629362624 SKIPPED by historical branch/private input restriction. Independently recovered source archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 (113755359 bytes) and recovery ZIP SHA256 728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce (88577532 bytes), ZIP internal test passed; source archive paths safe. This is archive integrity evidence, NOT exact-source 603 acceptance. Current Cortez direct .js remains unverified (web cache is dated). Optional postmerge public acceptance and roaster probe SKIPPED. Queue Cortez row remains TESTING, not READY. Forward Coffee #5 PR188 already merged, #6 next; reverse #77 unverified. No production or member-data mutations and no publication authorization.
+
+---
+
+## October 28 UTC — PR189 exact-source failing diagnostics leak fixed, retest required
+
+PR189 original source aea216d8be50d1b60f35853cabd4a0316567724a: isolated SQL 40629091982, approval 40629092015 and security 40629091979 SUCCESS; app 40629091974 and cloud 40629091995 each failed exactly one Cortez test. The removed Lahamenegu old-coffee paragraph was still included in JSON-serializable legacy_copy_excerpts (not autofill fields). Keep the excerpts for internal current-page HTML-versus-JSON provenance reconciliation, but mark their property nonenumerable so serialized user-facing previews cannot expose quarantined historical copy. Add an explicit regression asserting the internal excerpts are available, while JSON and returned source facts remain free of stale text. The existing full-description final-source-fact retention regression passed and remains intact. This code/test and journal are the same commit. Exact new-source CI must rerun and pass before merge. Restricted original603 workflow SKIPPED, not a pass; historical benchmark and member data unchanged. No production release.
+
+---
+
+## October 28 UTC — Coordinator: supersede conflicting PR186, run Cortez source tests on latest development (NOT DEPLOYED)
+
+PR186 had two exact-source failures on 753def1 (1600m source-unit expectation and missing final-source-fact from long description). The corrective c0012c8 restored full source-fact preservation for ordinary selected products and asserted the printed 1600m label. Its branch became 12 commits behind and unmergeable after concurrent Coffee #4/#5 work. This integration copies only the corrected code and focused tests onto fresh development source ec6af0235af9d3e116840fa13ff392236b80194f, preserving owner review #1–5, both Locked files, current queue and history. Separate new PR exact-source app, cloud, approval, security, browser/visual and SQL checks must pass before merge. Original immutable 603 source/oracle/scorer untouched; restricted hosted frozen workflow skip is NOT PASS. Live Cortez selected Shopify JSON cannot be substituted with stale search snippets. No production publication.
+
+---
+## October 28 UTC — Owner Bald Guy Brew manual roast warning merged at PR188; source acceptance evidence
+
+Owner Coffee #5/77 approval was applied: Bald Guy Brew Organic Colombian exact selected Roast: Medium/Medium Dark remains blank and prompts member to select Medium or Medium-Dark. No automatic tier or manufactured roast purchase options. Source code/test positive, negative off-product/guide and preview coverage in same-commit journal with Master Specification/Decision Ledger Locked supersession. Owner case register #5 RESOLVED_SOURCE_GAP_USER_CHOICE. Current source facts and 603 immutable oracle/retention unchanged.
+
+PR188 feature head fdeef6892f9a9d60f0663f71f01a7b2ecfc09a87 passed 6 applicable GitHub workflows: Node/lint/build 40627863051, cloud/mobile 40627863044, visual/browser 40627863210, SQL 40627863265, security 40627863058, approval/continuity 40627863079. PR188 safely non-force merged 591f72fd758d1196c0e5e12ce9867088a41096c5, matching tested tree e90e7d86cd0997887e48f39e715add2c7c0b4f4e. Postmerge approval 40628104415, cloud/mobile 40628104399 and current public selected-source acceptance 40628104446 PASS; the last reports 13/13 required, 14 targets, 27 public anonymous requests, zero real backend/quota/production writes/deploys, one optional sanitized fixture gap. Postmerge Node/build 40628104808 also SUCCESS, independently verified against exact merged SHA. Frozen603 40627863007 and controlled roaster probe 40628104462 were SKIPPED by existing restricted conditions; do not report as passed. Queue TESTING not READY under mandatory exact original603 acceptance. Netlify site readback published READY deploy remains 6ae0fc16178b2f1241e441f8, no new release.
+
+Next individual owner review #6 is Beanstock Colombian Supremo Organic: the URL has drifted across Tolima Suave, FUDAM La Unión, Finca Las Flores public index snapshots. No verified current live product identity; do not overwrite archived expected FUDAM with a guess, and follow previously approved Cortez current identity/old-copy quarantine. Concurrent PR186 preserved.
+
+---
+
+## October 28 UTC — Coffee #5 Bald Guy Brew owner confirmed two-tier manual roast review
+
+**Authorization:** Owner explicitly accepted prior proposal: Bald Guy Brew Organic Colombian current selected product Roast: Medium/Medium Dark should remain canonical roast_level null with clear manual member choice Medium or Medium-Dark, neither automatically selected. Official roaster source https://baldguybrew.com/products/organic-colombian-coffee lists this exact roast and only grind/size purchase choices (not roast-specific options). No producer/processing facts derived beyond current selected source; frozen oracle unchanged.
+
+**Implementation:** Extend roast evidence's literal unsupported-category hint for explicitly selected Medium/Medium Dark; leave existing seven-tier normalization and source hierarchy untouched. Add synthetic current selected product, visible import preview and negative unrelated/guide/bare-range tests. Preserve prior Full City and White behavior; owner case #5 review record RESOLVED_SOURCE_GAP_USER_CHOICE. Master Specification and Decision Ledger owner supersession, coverage and TESTING queue staged in same change. PR186 concurrent Cortez remains separate. 
+
+**Coffee #6 initial source review:** Original benchmark case Beanstock Coffee Colombia Supremo Organic had frozen expected FUDAM association producer. Directly opened https://beanstockcoffee.com/products/colombian-supremo-organic displayed a current *Tolima Suave* product (Planadas/Tolima, 154 producers, Medium) in one public capture; other search-index snapshots on the same slug displayed FUDAM La Union (Nariño) and Finca Las Flores (Sierra Nevada). Because cached captures differ and current live Shopify product ID not independently verified, source identity remains PENDING_CURRENT_VERIFICATION. Do not infer that FUDAM supplies Tolima, invent named grower, or treat the older slug as the identity; locked Cortez reused-URL rule applies. No unresolved new owner rule is presumed, and source freshness must be confirmed before resolving case #6.
+
+**Testing:** Feature head CI, nonforce integration, merged-source readback and original603 checks to be recorded only after actual evidence. Existing frozen603 restricted branch/private archival channel not equivalent to an accepted replay. No Netlify/SQL/Edge/Auth changes, paid services, member writes or production publish.
+
+---
+
+## October 28 UTC — White Coffee #4 source verified, owner decision recorded; original603 restricted
+
+**Owner:** Approved leaving Alaska Artisan White Coffee roast_level blank and flagging for member selection. Very Light / Ultra Light are possibilities, NOT source-confirmed; never automatically populate them. The roaster distinguishes White from Light and describes a low-temperature light tan roast, without a verified seven-tier category. Next coffee #5 is Bald Guy Brew Organic Colombian: current official selected-product Roast: Medium/Medium Dark, unresolved individual choice.
+
+**Code & source:** PR187 added a source-scoped selected exact White Coffee title or explicit Roast: White manual hint, with no automatic tier. Negative cases protect generic educational copy, related products and similar names; a separately explicit supported current tier remains meaningful. UI preview regression verifies visible user hint. Both canonical Locked files, approval coverage, independent original77 decision register and release queue updated. No immutable603 source/oracle/scorer, history or member data changed; concurrent Cortez PR186 preserved.
+
+**Exact CI & integration:** Final PR187 feature SHA 58e97501def83de20a2beca0931d8dbd639de670: approval 40626499237, security 40626499274, isolated SQL 40626499194, visual/browser 40626499255, cloud/mobile 40626499146 and full Node/lint/build 40626499207 all SUCCESS. Non-force merge 3947b1ba32a89a9f42db5cd0335a96444166ce9c verified same tested tree c391ac5f3e1798c7b47b7c3af7abc4a83168f2a3. Exact merged approval 40626715337, Node/build 40626715299, cloud/mobile 40626715382 and live source acceptance 40626715331 SUCCESS. Public acceptance 13/13 REQUIRED (14 total/13 parsed), 27 anonymous requests, 0 real backend/member quota/production changes, one optional Counter Culture fixture sanitization gap. White exact URL itself not independently included in public probe; negative/positive synthetic tests passed.
+
+**Gates:** Original frozen603 PR187 run 40626499213 SKIPPED due historical candidate12 branch and private ephemeral captures. Controlled source probe on merge 40626715360 SKIPPED. These checks are not asserted PASS; individual White source queue row is TESTING awaiting original603, not READY. Netlify current published deploy independently unchanged 6ae0fc16178b2f1241e441f8. No publish command or production SQL/Edge/Auth.
+
+---
+
+## October 28 UTC — Coffee #4 White Coffee owner-confirmed manual roast classification
+
+**Owner instruction:** "Yeah that makes sense. If anything it would be very or ultra light. but I'd probably flag it for the user to decide." This explicitly resolves case #4 with roast_level null; do not automatically infer Light, Very Light or Ultra Light. Alaska Artisan's [selected product](https://www.alaskaartisancoffee.com/products/white-coffee) explicitly identifies White Coffee, and [its categories](https://www.alaskaartisancoffee.com/collections/featured-roasts) list White separately from Light; its low-temperature light-tan prose is educational and not calibrated to our seven tiers.
+
+**Code/tests:** Add current selected exact White Coffee H1 and explicit Roast: White hint, blank canonical tier, member manual review, negative unrelated title/educational prose tests and positive explicit verified tier case. Do not reclassify any historic data or original603 oracle. Owner review register updated as RESOLVED_SOURCE_GAP_USER_CHOICE. The next owner coffee is #5 Bald Guy Brew Organic Colombian: current literal product Roast: Medium/Medium Dark, with no roast choice purchase option; ask owner whether to leave blank/manual select. Original 603 acceptance restricted on current branch: retain TESTING unless genuine exact-source run evidence obtained; don't claim PASS. Concurrent Cortez PR186 untouched. Source branch TESTING before CI; no deployment.
+
+---
+
+## October 28 UTC — PR185 final exact-source verification and non-force merge (NOT DEPLOYED)
+
+Owner's Full City → Medium-Dark rule is implemented for official current selected-roast evidence, with Ahrre's African Blend and Tanzanian Peaberry source positives, unrelated/educational/coffee-title negatives and conflict protection. Final PR185 head 0409852c8439fc7314c106e2d15040a5ff7c9cda passed six applicable GitHub CI workflows: security 40625136665, approval 40625136742, isolated SQL 40625136700, cloud UX/mobile 40625136725, Node/lint/build 40625136683, private visual/browser 40625136681. Earlier failed stale tests were repaired in same-journal commits and rerun; no failed source is called passing. PR185 non-force merged to development at 1abb7f92327c11e92b89a73fdb00c80235a70665; tree 93cf96ff6d79828280d722138916e54a78ba802b matches final tested source. Postmerge approval 40625424495, cloud UX 40625424465 and Node/lint/build 40625424306 SUCCESS. PR184 superseded closed unmerged; concurrent Kona and Cortez documents preserved. Original frozen603 40625136709 SKIPPED by historical private branch guard and postmerge public checks 40625424374/40625424434 SKIPPED: status TESTING, not READY. Owner Coffee #4 Alaska Artisan White Coffee presented; its current official product lists White independently of Light and gives no direct seven-tier roast, so recommend blank/flag pending owner's individual review. No member data, original oracle, production SQL or deployment changes.
+
+---
+
+## October 28 UTC — PR185 focused negative-test null-safety correction
+
+Initial PR185 full Node run 40624739750 had three failures: two legacy Full City-negative assertions (repaired in previous commit) and one new negative scenario where an intentionally invalid/non-product HTML fragment correctly returned no fields, but the test attempted to dereference fields.roast_level and threw before asserting. Corrected test to use optional fields access. No runtime code, member data or original603 archive change; this is a test-harness assertion fix. New exact-source CI required, older failed head remains historical.
+
+---
+
+## October 28 UTC — PR185 two obsolete Full City tests repaired
+
+**Initial CI failure:** Cloud unit workflow 40624739793 on PR185 head d904097d failed exactly two legacy tests still requiring explicit Full City roast to remain blank. This contradicts the owner's newly Locked Full City = Medium-Dark rule. Changed only affected test expectations: exact Full City roast and directly adjacent selected-product Full City label are now Medium-Dark. Unsupported labels, generic educational prose, related products, legends and conflicting direct current source remain negative tests. Original603 restricted workflow SKIPPED (not pass). No deployment. Exact-source rerun required.
+
+---
+
+## October 28 UTC — Ahrre's Full City owner approval, coffee reviews #2/#3
+
+Owner approved Full City as canonical Medium-Dark. Current official Ahrre's African Blend and Tanzanian Peaberry each publish Full City as their selected coffee ROAST. Tanzanian Peaberry is indeed the product title at the unusual /products/test URL. Original benchmark expected Medium-Dark for both. New exact-product parsing and regression tests cover explicit label, negative title/educational/related snippets and conflicting direct roast. Both reviewed cases resolved; proceed to Coffee #4 independently. No fabricated unpublished facts, original603 modifications, production writes or deployment. Concurrent Kona PR #183 already merged SHA a7f77cb; preserve it. Scope TESTING until exact CI and nonforce merge, original corpus branch guard separately unverified.
+
+---
+
+## October 28 UTC / October 27 MDT — Cortez owner decision and cross-chat handoff
+
+Owner explicitly approved Cortez reused-URL interpretation: prefer the current exact selected product title and specs; **ignore older copy** even if it remains in prose; do not infer current product identity from old `el-salvador-santa-ana-copy` slug or crawler copies. Earlier indexed copies disagree (El Salvador, Papua New Guinea, Ethiopia), so today's live identity must be independently verified, not asserted. Canonical master and ledger both Locked under `EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027`; approval coverage marks **OWNER_APPROVED_NOT_IMPLEMENTED**, and Issue33 residual queue remains IN_PROGRESS. No runtime fix, new Cortez test, original603 replay, provider write or publication was performed in this handoff-only task.
+
+Latest readback at handoff preparation: development `88c544f6e24da7aa00d6a731b53c0a3f58af0fb4`; main `115f129b9bbab3b7522c4a95ebdc34995d27e759`; production `f5f29a02f98304dd9d1bd4d2c840c490c85097e6`. No open pull requests, Issue33 OPEN. PR179 and PR183 safely merged; Ketch and Kona queue rows TESTING, original603 current-source replay skipped under historical audit-head and ephemeral private input restriction. Netlify site `153277f2-e19e-4862-b9a6-f2e18ccde271` published deploy `6ae0fc16178b2f1241e441f8` remains READY/current from previous separately owner-authorized release; later extractor changes NOT published. Companion recovery document: `docs/handoffs/ISSUE33_OWNER_COFFEE_REVIEW_HANDOFF_2026-10-27.md`. Continue by recovering exact live state, implementing approved Cortez source quarantine, running bounded source tests and exact-source GitHub CI, then safe non-force merge, queue reconciliation and next unresolved owner review. No production publication authorized.
+
+---
+
+## October 28 UTC — Kona PR183 merged-source acceptance reconciliation
+
+Verified PR183 merge a7f77cb70e510d51580e2d076d7484281c020be9 retained exact PR-head source tree 369a375343024ec04e71fbc2729efb49c78e756e. Six original PR-head checks passed; postmerge app/Node/lint/build 40623117571 and cloud UX/mobile 40623117565 now independently SUCCESS, as was approval 40623117630. Current Netlify site readback remains READY production deploy 6ae0fc16178b2f1241e441f8 from the previous authorized release, so Kona work NOT DEPLOYED. Mandatory frozen603 40622879836 and postmerge live selected-source checks 40623117569/40623117577 SKIPPED due conditional workflow guards; these are NOT passes. Scoped queue stays TESTING for that evidence gate; no silent promotion to READY. Source-specific Kona regression tests pass. No member data, production settings, SQL, Edge/Auth, paid service or release command executed.
+
+---
+
+## October 28 UTC — Kona selected roast printed notes PR183 integrated, TESTING / NOT DEPLOYED
+
+Owner's approved rule is implemented in `src/server/coffee-roast-variants.mjs` and `coffee-shopify-ajax.mjs`: exact printed `Tasting Notes by Roast` for Kona Medium, Medium Dark (Full City), and Dark outrank generic prose; selected roast controls editable notes; Green Unroasted is excluded as a roasted profile; missing roast-specific note is never invented. No photos. Existing Ketch route/roast and member data untouched. Tests: `tests/coffee-kona-roast-profiles.test.mjs` checked source-bound direct vs generic precedence, exactly three roasts, negative generic and no default selection. Initial approval CI failure 40622781642 was queue metadata only (test file mistakenly in deployable paths); repaired and passed.
+
+PR183 final head 6d8f28117864a1a3aa95d116ca34eeaf87dd8eaf had approval 40622879825, security 40622879856, SQL 40622879955, app/Node/lint/build 40622879832, cloud UX/mobile 40622879835 and visual 40622879861 all SUCCESS. Non-force merge a7f77cb70e510d51580e2d076d7484281c020be9 has the identical reviewed Git tree 369a375343024ec04e71fbc2729efb49c78e756e. Postmerge approval 40623117630 passed; app 40623117571/cloud 40623117565 pending at this checkpoint. Frozen603 workflow 40622879836 SKIPPED under historical-branch/private-input restriction, so NO immutable corpus replay claimed. Queue item remains TESTING, not READY, due original603 acceptance gap. Nothing published or deployed.
+
+---
+
+## October 28 UTC — Kona queue approval CI repair
+
+PR183 first exact-source approval workflow 40622781642 failed at queue validation: the newly added test file was mistakenly included in the `scope_paths` list, which accepts only deployable code paths. Removed the test from scope metadata and retained it under test evidence, as required. New exact-source CI required. No production, data or security changes.
+
+---
+
+## October 28 UTC — Owner Kona roast-specific printed notes approval, Issue #33
+
+**Authority:** Owner explicitly approved Kona Earth 100% Kona Classic source interpretations and said to ignore general coffee notes in favor of the more specific information for each roast level. Later asked to proceed to next coffee. No publication authorized.
+
+**Scoped code:** `src/server/coffee-roast-variants.mjs` now recognizes verified current Shopify purchase options labelled Roast Profile, canonicalizes `Medium Dark (Full City)` to Medium-Dark, and pairs them with bounded, explicitly labelled `Tasting Notes by Roast` lines. Green Unroasted never becomes a roast option. Generic product taste description cannot populate a differently roasted version. Existing narrative Ketch parsing remains untouched. `src/server/coffee-shopify-ajax.mjs` clears generic flavor/default roast until the purchased roast is chosen, preserving a genuine independent multi-spec conflict. New source-backed 2026-10-27 Kona tests assert three correct flavor lists, no Green option, no automatic roast and no review photos, safe missing-detail behavior and no unsupported global flavor. Frozen original603 unchanged. Existing Cloud, member, privacy and offline systems are not intentionally altered.
+
+**Acceptance:** TESTING; no exact-source CI or merge claimed. Next run GitHub exact-source Node/cloud/browser/visual checks, repair failures, non-force merge/readback and queue update. Do not alter production or original corpus.
+
+---
+
+## October 27, 2026 — Owner manual review Coffee 1/77 (44 North Honduras COMSA): RESOLVED SOURCE GAP
+
+**Owner decision:** Original 603-corpus canonical `process` expected Water Process decaffeination, but this is a different operation from pre-decaffeination green-coffee cherry Processing. Roaster does not publish primary processing. Do not invent it. Keep canonical Process blank; preserve Water Process under the separately approved Decaffeination Method (#180, READY/NOT DEPLOYED); flag source-unspecified primary process informatively. Owner considers genuinely unpublished fields closed, rather than ongoing extractor failures.
+
+**Dated origin:** Current roaster page `https://44northcoffee.com/products/honduras-decaf` explicitly titles the selected coffee Honduras COMSA and gives a Honduras locality/COMSA producer; schedule says Decaf Peru winter–spring, Honduras spring–summer, Mexico fall–winter. Capture lookup date and literal schedule; dates can provide seasonal context but the named product takes precedence over general schedule, particularly where season boundaries overlap or current page identity conflicts (October seasonal context says Mexico; current named URL says Honduras). Never fabricate exact month boundaries or rewrite Honduras as Mexico.
+
+**Traceability:** New `docs/audits/extractor-issue33-owner-missing-field-decisions-20261027.json` and specific source-bound synthetic regressions `tests/coffee-issue33-44north-missing-source.test.mjs`. No original frozen603 archive/oracle/scorer rewrite, data mutations, production publication or provider writes. Parent Issue33 remains OPEN for remaining 76 individual coffees; this case individually RESOLVED. Upcoming Coffee #2 Ahrre's African Blend publishes `Full City` roast, not a literal 7-bin Medium-Dark label, so do not silently normalize absent calibration.
+
+**Status:** Source-only audit record and tests require exact-head GitHub checks before calling them passed.
+
+---
+
+## October 28 UTC — PR179 merged exact current product/roast profiles, TESTING / NOT DEPLOYED
+
+**Owner authority:** Explicit current selected roaster product data beats SEO/archives (fallback only), current Mexico/Peru disagreements require manual review, unitless elevation is meters, rotating origin confirmation only when explicitly labeled; Ketch Light and Medium-Dark bought-roast profiles separated, no review photographs, shared Lempira/producer/origin/process/elevation preserved. No production publication granted.
+
+**Verified source:** PR179 final head 598622a56415fa3abc51aa4aed191a86acaf9cff, merge 4331031e96b5e594a6e640dd91f6c59ae5969a97, identical source tree 36347734afa66b15d5e74622c13c7c28a78e7d9e. Exact-head app/Node/lint/build 40616568413, cloud 40616568388, visual 40616568360, security 40616568381, SQL 40616568410, approval 40616568565 all SUCCESS. Postmerge app 40616781803, cloud 40616782266, visual 40616782318 and approval 40616782109 SUCCESS. Initial test failures were repaired and full suites rerun; no regression is claimed green on a failed SHA.
+
+**Honest limits:** immutable original603 run 40616568385 SKIPPED by historical source-branch/private ephemeral input; no new original603 score or supplemental retention score. Postmerge public URL acceptance runs 40616782014 and 40616781934 SKIPPED; live authenticated Ketch preview not exercised. Prior immutable corpus/oracle/scorer and member coffee, shots, privacy, offline, Community unchanged. Queue item remains TESTING, not READY, until missing source acceptance is actually verified. Release #07 remains last authorized publication; this scope is NOT DEPLOYED. No Netlify, production SQL/Edge/Auth or member writes.
+
+---
+
+## October 28 UTC — Ketch stale SEO display failure diagnosed and repaired
+
+**Exact-source CI failure:** PR179 SHA ee4ee3bd workflows app 40616179398 and cloud 40616179344 each failed one new regression: current canonical variety correctly stayed `Lempira` and no `variety` conflict remained, but expanded current product details still surfaced `Parainema` from a stale `Historical SEO` row and synthetic rejected comparison pair. Fixed the user-facing preview to exclude SEO/archived source facts when a canonical current field already exists, and suppress synthetic conflicting alternatives for fields whose conflicts were resolved. Genuine unresolved current-product alternatives remain displayed. The full unmodified source evidence remains in explicitly downloaded JSON; no history is deleted. Code/test CI must be rerun on this new exact SHA. No production publication or member mutation.
+
+---
+
+## October 28 UTC — SEO-only variety suppression in member preview
+
+Owner specifically rejected Ketch Parainema from unrelated/SEO values. Added explicit regression: stale `page_meta` Parainema versus current selected-product Varietals Lempira resolves to Lempira with NO member conflict; ordinary review hides the stale SEO fact when a direct current field is available. Raw archived audit provenance remains in a consciously downloaded source-review file under the existing evidence-retention Locked rule, not a current coffee suggestion. Exact-current-source tests and new CI still pending; no publication.
+
+---
+
+## October 28 UTC — Ketch PR179 first exact cloud test failure repaired
+
+**Actual failure:** Cloud job 122577497187 in run 40615682791 on feature SHA f7845290d5bc433f07baee4e090ebacd14ec0966 ran 1,342 tests: 1,341 PASS, 1 FAIL. Ketch source-review snapshot test called the pure parser without the `source_url` the real Netlify preview handler attaches, so snapshot intentionally returned null. The provider endpoint already attaches the validated source URL; repaired only the test fixture to exercise that production-shaped boundary. Additionally removed any global roaster espresso recipe before a roast is selected (light and medium-dark references differ); selected roast still shows exact recipe. Capitalized Ketch tasting note display. New exact-source CI required; no test or publication claims for the new SHA. No frozen oracle, member/private data or provider mutation.
+
+---
+
+## October 27 UTC — Issue33 roast-specific espresso clause correction
+
+The new parser's first-sentence boundary could stop at a period inside Ketch's `e.g.`, dropping the Light 203–205°F / 1:3 / 18-to-54g espresso facts. Repaired before treating any CI result as acceptance: bounded to the already isolated selected-roast text. Earlier feature CI is exact to prior SHA and cannot validate this follow-up. New source-bound CI/merge/readback required; no production publication.
+
+---
+
+## October 27 UTC — Issue33 approved Ketch two-roast UI integrated into source PR179 (TESTING)
+
+**Owner authority:** User approved shared Legacy Farms Honduras Natural details, two separate purchased roast profiles and earlier shown interactive HTML preview, explicitly no photos; asked to incorporate into real extractor and give next difficult coffee. Prior source/SEO fallback rule and Black River Mexico/Peru review remain Locked.
+
+**Implementation:** Add exact selected-product Roast Level option reader and bounded roast-scoped note/sensory/espresso parser (src/server/coffee-roast-variants.mjs); integrate into exact Shopify product preview and cross-source merge. Do not select a roast by default, invent dose/time, borrow adjacent or marketing sources, or promote Parainema from SEO to selected-product variety. Add real Add Coffee variant buttons, selected roast helper/source review export and protected member-edit switch, keep original form submission and shared facts intact. Add theme-matched CSS, no photographs. Add Ketch light/medium-dark factual and UI regression tests. The previously owner-approved source-priority-only PR179 implementation remains preserved and its parent SHA has seven success CI checks, with frozen603 hosted workflow SKIPPED (not a pass).
+
+**Verification:** This new Ketch change is TESTING, not yet CI passed or merged, not READY. Do not alter immutable original603 corpus/oracle/scorer, existing user coffee/shot/notes, access, Community, offline queues or provider configuration. No Netlify publication, SQL, Edge/Auth, paid services or member writes. Next: exact-head tests and integrated release-queue readback; repair any failures.
+
+---
+
+## October 27 UTC — Owner priority follow-up, exact current product vs archived SEO-only contradiction (TESTING)
+
+Owner explicitly directed that the selected current product page and labeled specifications always supersede archived/SEO values, which are fallback only. Black River Mexico/Peru are both current selected-page claims and MUST both be flagged, never silently selected. Unitless labeled elevation already defaults to meters; rotating origin is not universally mandatory. This source patch permits only a documented all-low-priority archived/SEO conflict to yield to exact selected current product specifications. A direct current opposing reading still blocks auto-fill. Frozen 603 and stored member records untouched. Tests added; exact-source GitHub CI/merge and queue evidence pending. No publish authorization.
+
+---
+
+## October 27 UTC — Issue33 PR178 complete: six original603 source recoveries READY / NOT DEPLOYED
+
+**Integration and tests:** PR178 non-force merged at `b0de5a8432442d58f124c3cceddb86e3bed4ed08`, first parent `7916aadfe5e8c3f93b43abd3d0094932ab30b889`, tested feature head `0e5d69e208d99d14a590437d401ca3f6b5190a8c`, identical Git tree `96fd2340abaa4fd8008eadebf563796c73feb254`. Exact PR-head app/build 40586627900, cloud/mobile 40586627949, source security 40586628043, isolated SQL 40586627927, visual/packaged-browser 40586628047, approval 40586627881 all SUCCESS. Exact merged app/build 40586968991, cloud/mobile 40586968841 and approval 40586968902 SUCCESS. Restricted private-hosted original603 40586627934 SKIPPED; independent original 603 actual-handler full replay PASS. Merged live URL checks 40586968907/40586968983 SKIPPED, no fresh live URL claim.
+
+**Full frozen603 delta:** 3090/89/823→3096/83/823 (exact/missing/review) from 4002 canonical assertions; only six prior missing→exact. No old exact regression, no other canonical changes, no original 6474 supplementary retention change (5458 full/337 partial/679 unconfirmed), original source, oracle and scorer unchanged. SHA-bound source proof and no member/provider calls in `docs/audits/extractor-issue33-missing-six-source-proof-20261027.json`. `DIC-Q-33-original603-six-missing-facts` promoted to READY, no blockers, preserved prior READY/DEPLOYED. Parent Issue33 OPEN for 83 missing and 823 review. Production release #07 unchanged; owner publication not authorized. Documentation-only reconciliation needs its own continuity readback, not presumed.
+
+---
+
+## October 27 UTC — Issue33 PR178 release-queue intake failure immediately repaired (TESTING)
+
+**Failure:** PR178 approval/continuity run `40586396617` failed at queue `--enforce-intake` because new application module `src/server/coffee-selected-source-evidence.mjs` lacked an active matching queue row. This is the queue recording omission, not original603 or runtime test failure. Added distinct `DIC-Q-33-original603-six-missing-facts` in TESTING, scope exact deployable parser path, 603 proof, specific pending CI/integration blocker; preserved existing 23 DEPLOYED / 1 READY / parent Issue33 IN_PROGRESS. No readiness promotion or deployment claimed before fresh CI and merged source. No code changes in this remedial commit.
+
+---
+
+## October 27 UTC — Issue33 step #1: six missing original-source facts restored (local original603 full verification)
+
+**Owner authorization:** Recover missing original603 assertions, source-identical replay; no publishing or paid service. Baseline dev SHA `7916aadfe5e8c3f93b43abd3d0094932ab30b889`. Only `src/server/coffee-selected-source-evidence.mjs` application module changed; new dedicated tests and source evidence receipt committed together. Temporary 24-hour GitHub source-export workflow was private, succeeded 40583446749, and is deleted from feature tree before PR. Do not rewrite original frozen capture/oracle/scorer; no secrets or member records in source snapshot.
+
+**Fresh true merged-source baseline:** Replay 603/603 from original 1,197 hash-verified captures through isolated actual HTTP preview handler, unchanged 4,002 oracle: **3,090 exact / 89 missing / 823 review** (not the historical 90/822). Candidate at parser blob `c5a16002857d5555ca12cc19f93e02c23e92fe1a` **3,096 exact / 83 missing / 823 review**, precisely six former missing→exact, ZERO prior exact loss or other canonical change. Two Methodical exact current selected badges, two S&W selected-correlated ultra/mega Light descriptors, the selected COMSA farmer cooperative, and Red Room literal sensory list. All six original source capture SHA256 values individually anchored in `docs/audits/extractor-issue33-missing-six-source-proof-20261027.json`; no baseline/oracle modification. Strict original supplementary retention exactly unchanged **5,458 full / 337 partial / 679 unconfirmed** across 6,474 facts; original conflict 67 withheld/48 unresolved and 21 unexpected fields unchanged. Baseline replay/candidate replay/scorer/retention SHA256 in audit receipt. No live backend or external network, no credential, quota, SQL, Auth, Edge, member, offline, Netlify or production operations.
+
+**Remaining:** 83 missing by field: 22 producer/14 roast/13 notes/12 release/11 process/10 origin/1 elevation. Several categories cannot safely fill from generic producers, recurring seasons, decaf method, conflicting variants or sources. These are not declared permanently unfixable. Focused 6/6 local Node regression tests and six original captured routes pass; full original replay/strict comparison/retention all exit zero. Independent PR exact-source CI, integration, queue readiness and production state still to verify. No owner decision required for scoped six; do not deploy.
+
+---
+
+## October 27 UTC — Issue33 #1, 90 missing assertion source recovery (IN_PROGRESS; NOT DEPLOYED)
+
+**Authority:** Owner explicitly instructed proceeding with step 1: investigate/recover missing original 603-coffee assertions, implement source-backed fixes, test and integrate without publishing. Live development at start `7916aadfe5e8c3f93b43abd3d0094932ab30b889`; issue33 OPEN, no open PRs. No new product decision or SQL/Auth/Edge/member data action.
+
+**Immutable provenance recovered:** User Library original `coffee-extractor-source-evidence.tar.gz` 113,755,359 bytes SHA256 `696c011e97e94eb2a9ec1b12c66efdf999751279bb0f381cce52`, matched immutable archive; recovery ZIP 88,577,532 bytes SHA256 `728bd52965538879f116d0e384984d7a49becbb9224b092f587a71e24b4e6cce`. Frozen 603 coffees, 201 roasters, 1,197 captured pages, 4,002 canonical oracle intact. PR162 source-backed independent 3,090 exact / 90 missing / 822 review is latest full reported comparison, not a fresh replay against current PR176/177 source. Candidate12 132-missing older receipt must NOT be confused with the newer 90.
+
+**Current audit work:** Prepare a temporary private branch-only GitHub Actions source snapshot for accurate local cross-checking with original archival captures. Archives contain code only, exclude env/secrets/accounts/production data, remain private 1 day; workflow to be removed before development PR integration. No production writes or CI results claimed yet. Source capture/missing assertion audit follows. Preserve every other workstream and READY item.
+
+---
+
+## October 27 UTC — PR177 queue validator correction, audit-only work stays tracked
+
+**Failure repaired:** Documentation follow-up `94e87e8f08f4fbad5443845a13b8a1dec2d5f308` failed release queue intake in workflow 40581510754 because an audit-only fixture/privacy change has no exact deployable application scope paths. This is a release queue classification mistake, **not** a failing app test. Removed new `DIC-Q-33-public-source-fixture-privacy` item rather than inventing deployment paths or changing the validator. The completed, non-force merged audit-only improvements remain tracked under parent Issue33 IN_PROGRESS, with no standalone READY claim. Previous independently READY `DIC-Q-33-current-source-and-four-roasters` remains untouched. The original Counter Culture source-fact parity issue is OPEN. PR177 code/Node/SQL/Python/cloud/visual checks succeeded; merged source Node/cloud/Python/approval succeeded. Release #07 still published, no new production operations.
+
+---
+
+## October 27 UTC — PR177 public fixture privacy merged READY, NOT DEPLOYED
+
+**Final source:** PR177 tested head `85f2da2ae5608b3e11136da25d08fa79132ab0c8`, tree `34cf93004a20c77a1921cb6ad77c021d5e6fcd39`; non-force merged `fc292fe09aa960a4ec871952a20c3cdbb0202e1a`, identical tree. All six applicable PR-head GitHub checks PASS: Node/build 40581055918, cloud/mobile 40581055729, approval 40581056030, isolated SQL 40581055844, Python 40581055675, visual 40581055829. Original603 restricted workflow 40581056040 SKIPPED, NOT PASSED. Public fresh source workflows not performed for this fix. No source/oracle changes or provider writes. New queue item `DIC-Q-33-public-source-fixture-privacy` READY as an independent audit/privacy improvement; parent Issue33 still OPEN for residual missing/review/conflicts and the 19 optional product_json fixture differences. Those 19 are not declared restored or parity-passed. Production release #07 remains the last published release. Do NOT publish without owner approval.
+
+---
+
+**Pre-CI test review correction:** New exact-key privacy guard initially omitted snake-case `user_profile` (explicitly exercised by the new test). Fixed before PR review; do not count an unrun check as passing. Same-commit journal receipt applies.
+
+## October 27 UTC — Issue33 public fixture privacy and source-fact diagnostic (development, TESTING)
+
+**Authority:** Owner directed continuation of the extractor completeness audit, privacy-safe resolution of Counter Culture Sipacapa's 19 sanitized `product_json` source-fact differences, no added cost or publication. Live source at start `f8cd450d33de749f7de58b8d9c1bbec2a1bdcfc4`, PR176 already merged and READY; no duplicate edits.
+
+**Observed evidence:** Independent public run 40574895350: 13/13 mandatory products pass; Counter Culture current canonical coffee fields/conflicts identical between raw and sanitized captures, but 66 original versus 47 sanitized source-fact rows. Retrieved its 2026-10-27 sanitized CI artifact for read-only examination. A separate public JSON script includes purchase/payment metadata; the failed parity contains 19 product_json facts. Original private/session-sensitive values are not available in retained fixtures, so no evidence yet supports restoring any of the 19.
+
+**Scoped improvement:** Extend audit-only JSON redaction to exact personal user/account/billing/shipping/payment/address/order identity properties without suppressing normal public coffee profile and product offer properties. Add static, non-value structural categories for all missing source facts in the live public probe; sensitive paths and values are never logged. Existing all-source-facts equality still fails closed on any divergence, and the optional Counter Culture result remains a disclosed gap. Add targeted allow/deny and structural-classification Node tests. No runtime coffee extractor, member/private data, immutable 603 archive/oracle/scorer or provider operations changed.
+
+**Status:** TESTING until exact-head Node/lint/build/approval/privacy and applicable public-source acceptance; do not promote READY or claim original 603 replay without receipts. No Netlify, Supabase, deployment, paid service, private member write or production release authorized.
+
+---
+
+## October 27 UTC — Issue33 PR176 exact merged-source READY / NOT DEPLOYED
+
+**Authorization:** Owner instructed that genuine measured Agtron is the strongest roast determination and supplied Stumptown Nano Challa, Blue Bottle Hayes Valley, Counter Culture Sipacapa, Peet's Guatemala Linda Vista. All live URL checks added to controlled public source acceptance. Earlier Brewpoint/Gnosis/Black River Locked decisions retained. No production publication authorized.
+
+**Verified implementation:** New exact-route bounded Next.js conversion-state parser now extracts **Blue Bottle Hayes Valley** Dark/Washed/Baking Chocolate–Orange Zest–Brown Sugar without borrowing unrelated product recommendations, generic brewing guides or executing scripts. Product-title banner priority fixes **Counter Culture Sipacapa** to San Marcos, Guatemala and apple/simple syrup/cocoa, while retaining an unrelated-current-list conflict guard. **Stumptown** and **Peet's** source-backed checks remain green. Genuine exact current **Agtron GROUND** score with stated Gourmet/Commercial scale can supersede only subjective roast wording; preserve score and original label; unknown scale/sample is provisional, whole-bean cannot use ground table, 86/100 Peet's slider is not Agtron. Both canonical Locked files and approval coverage updated in same source commit; all stored member shots/notes/Community records untouched.
+
+**Exact-source receipts:** PR176 head `110491bab7ae4f7e2dc50ada915021a8b5750521` app/lint/build 40574408717, cloud unit 40574408435, approval 40574408431, source security 40574408406, isolated SQL 40574408430, Python 40574408438, visual 40574408424 all succeeded on source tested in merged tree. Non-force merge at `7a691a2fa33d96614a14a05115e8686b07c55fed`; merge tree `6af53cca85320ad6494dcd5042d3ab15f5f42011` equals tested feature tree exactly, first parent `4360981af78c6c7bcdea1471791cbfd10094e5bb`. Exact merged-source Node/build 40574895532, cloud/mobile 40574895252, approval 40574895385 and Python 40574895167 SUCCESS. Historical test failures and repairs remain in journal. No app/source code changed after exact-green feature head.
+
+**Live acceptance:** Source-bound run 40574895350 SUCCESS with **13/13 REQUIRED URL checks green**, **14 targets total, 13 parsed**, 27 guarded anonymous public HTTPS requests and **zero actual backend calls, member quota, production writes or deployments**. Four new owner URLs yielded accurate current product fields. One Counter Culture supplemental **OPTIONAL** source fixture differs only in source_facts: 66 raw vs 47 sanitized (19 product_json rows redacted); the canonical fields and conflicts were identical. Do **not** call original/sanitized all-source-facts parity passed; follow up under parent Issue33 for privacy-safe audit diagnostics. This known audit artifact limitation is isolated from actual source autofill correctness and is not a production permission. Original immutable 603 archive verified SHA256 `696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52` locally; special original603 GH workflow 40574408416 SKIPPED due branch restriction; no new 603 score claimed.
+
+**Queue/release:** Only `DIC-Q-33-current-source-and-four-roasters` promoted TESTING→READY with exact merged SHA and no outstanding *runtime* blockers. Preserve 23 DEPLOYED, Issue33 parent IN_PROGRESS and other queue history. New total is **23 DEPLOYED / 1 READY / 1 IN_PROGRESS**. Production from independent owner-authorized release #07 remains actual Netlify current/READY `6ae0fc16178b2f1241e441f8`; PR176 has not deployed and no SQL/Edge/Auth/provider/member changes occurred. Owner must separately authorize publication. This documentation-only receipt requires own GitHub continuity CI/readback; do not predeclare a future pass.
+
+---
+
+## October 27 UTC — Issue33 source follow-up: measured Agtron, Blue Bottle Next product state, Counter Culture (TESTING)
+
+**Owner instruction:** Agtron is the most accurate roast determination. Added exact Locked `EXTRACTOR-VERIFIED-AGTRON-GROUND-PRIORITY-20261027` to **both** canonical Master Specification and Decision Ledger plus approval coverage. Current explicitly scaled and GROUND Agtron from exact selected roaster Product can supersede subjective label in new URL preview; unspecified scale/sample stays provisional and never overrides explicit label, whole bean remains nonconvertible with ground table, arbitrary 86/100 roast gauge never Agtron. Preserve original reading and the superseded printed text, all member records and historic immutable 603 values.
+
+**Recovery:** development source `4360981af78c6c7bcdea1471791cbfd10094e5bb` after separate owner-authorized production release #07, 23 previously DEPLOYED queue entries, Issue33 parent IN_PROGRESS and source item TESTING. PR174 merged at fc9913decaacb4ff20014a0d0f79da58d09f52a6 with byte-identical tested source tree and passing Node/cloud/mobile/SQL/approval. Public acceptance run 40569710438 failed two new exact source URLs: Blue Bottle was a large Next.js `pageProps.conversion` document without standard HTML product markup; Counter Culture Sipacapa was parsed but incorrectly chose the coffee's own name as origin rather than the selected San Marcos/Guatemala banner, flagged its current apple/simple syrup/cocoa profile as conflict, and captured public JSON source facts were reduced 64→45 by audit sanitization (canonical fields unchanged). Stumptown and Peet's passed. No previous score is relabeled. No unrelated production or member changes.
+
+**Improvement scope:** Bounded source-backed Next.js extraction selects ONLY the exact route `pageProps.conversion` and rejects mismatched slugs/cross-sells and generic brewing guides. Separate selected Coffee hero parser retrieves adjacent current region/country and three-note profile, preserving separate current incompatible labeled lists. Genuine current calibration of Agtron and source evidence precedence improved in page parser + Shopify merge. Add positive/negative/identity, privacy, conflict and roast metric tests. Real-source probe fixes its previously unconditional required=true for additional optional targets; Counter Culture remains an optional *reported* parity diagnostic (not a fabricated pass) pending safe product_json fixture parity resolution. Original baseline core required cases remain strict. No archive/oracle/scorer modification. No deployment authorization.
+
+**Next:** exact-source GitHub app/lint/build/cloud/browser/security, original603 (if runnable), live public URLs and safe reconciliation against other workstreams; promote READY only with actual passing evidence and no blockers. Current production already reflects independent release #07; this issue's source patch is not published.
+
+---
+
+## October 27 UTC — Owner current-source priorities and four new roasters, clean replacement branch (TESTING)
+
+**Authority:** Owner approved direct current exact-product specs over archives/old SEO (Brewpoint Brazil / Medium / Chocolate, Graham Cracker); named staged inoculated processing on Gnosis classified as app Anaerobic while preserving exact stage and EA decaf text; Black River current Mexico/Peru conflict withheld with both alternatives. Owner supplied four new exact URLs: Stumptown Nano Challa numeric Shopify variant, Blue Bottle Hayes Valley non-Shopify route, Counter Culture Sipacapa, Peet's Guatemala Linda Vista. No publication or production edits.
+
+**Interrupted work recovery:** PR170 from Oct27 `work/extractor-source-20261027` is draft and broken. Exact head `7515f787e6b2ae6ff204d30fa1b9692f602405c0` had approval continuity failures because sequential code/test commits lacked same-commit journal and Node/cloud regressions because the broad override defeated valid same-product conflicts; old test lacked mergePublicProductPreview import. Preserve its failure history; do NOT merge/rewrite it. Prepare clean new branch `work/issue33-current-sources-four-roasters-20261027` from verified active development `e20e6a093849ef83201d980cc963049321921881`, including concurrently merged Issue161 PR169/171 and 22 prior READY records, and use a single multi-file source+tests+doc+journal commit.
+
+**Scoped implementation:** exact current Shopify public endpoint field reader is additive; current direct facts and named yeast stage mapping are used only after product handle/title match. A printed country with parenthetical decaffeination has geographically clean origin; method and stages remain raw review data. Two current countries, conflicting direct roast categories, different exact current tags/variants and historical member edits remain withheld and unaffected. Only proven archived/SEO-only mismatches can yield to selected endpoint specs; never broadly clear source conflicts. Four URL-specific optional HTTPS live-probe targets have explicit known false-positive boundaries. Independent tests cover Brewpoint, Gnosis, Black River, four other roasters, negative contradictory specs, unrelated product scope and generic fermentation. Current source screenshots/crawled indexes are not authenticated live extraction receipts.
+
+**Audit state:** `DIC-Q-33-current-source-and-four-roasters` TESTING; 603 original captures and oracle/scorer unchanged; no new accuracy score claimed. Feature-head GitHub Node/lint/build, browser/cloud/visual, security/SQL as applicable, frozen original603 and opt-in controlled four URL probes require independent receipts. Preserve all previous READY queue states and only promote after safe nonforce merge and exact merged CI. No Netlify, production SQL/Edge/Auth, member history, paid API or release.
+
+---
+
 ## October 27 UTC — Issue33 PR168 source-review provenance VERIFIED READY / NOT DEPLOYED
 
 **Authority:** Owner requested continuous no-cost extractor accuracy improvements and offered manual decisions for difficult roaster products. This bounded slice improves public selected-coffee conflict-review evidence and file exports without changing extractor canonical parser/oracle, original frozen 603 source, authenticated preview quota, member/shot/Community/offline history or Locked manual-selection rules. No publication authorization.
@@ -1178,3 +1804,100 @@ Exact feature-head approval/continuity run 40455139250 on 90784efab0d23bf8757814
 ## October 27 UTC — Cross-workstream Issue161 integration on Issue33 PR168 (TESTING)
 
 Read back active development aef221fe8d8d974fcb8729eb713590a1fdcb27f7 after concurrent Issue161 PR167 merged. Its ten changed paths include cloud main.js/outbox.js/session-race protections, current status, Issue161 journal/forensic review, three stress/fuzz tests plus original603 history-integrity test, and one separate TESTING release-queue row. Bring forward those exact development blobs as a second non-force parent while retaining independent Issue33 source-review/UI/test/frozen evidence. Reconstruct the queue from current development with its entire history and original 19 READY/1 IN_PROGRESS/1 DEPLOYED plus Issue161 TESTING, then append ONLY isolated DIC-Q-33-source-conflict-provenance-links TESTING; no READY count change, no production authorization or member writes. Fresh exact-source combined GitHub CI required; old PR168 runs do not certify new combined tree.
+
+
+## October 27 UTC — PR174 fresh feature-head CI event trigger (TESTING)
+
+New non-force one-commit feature branch work/issue33-current-sources-four-roasters-20261027 at 57accaae59aff234aaf790eacbaf1359ae983485 has documented owner-Locked rule, scoped source, eleven synthetic source/negative tests, four optional real HTTPS targets, TESTING queue and journal in the same commit. Draft PR174 is open, not merged, but the PR-open event produced zero GitHub Action runs; this docs-only follow-up synchronizes the PR to request ordinary exact-source CI. Treat missing CI as not tested; no code, locked decision or member data modified by this note. Prior draft PR170 must not merge. No Netlify publication.
+
+
+## October 27 UTC — PR174 first cloud regression failure repaired (TESTING)
+
+Source CI 40567829054 on PR174 head 92781b395ffe714e2e8f72a88354bddd1926976c failed 9/1316 tests: six original combined-process preservation tests were broken by an overly broad new process-conflict rule, one Stumptown historical washed-cooperative sentence was incorrectly promoted to current process, one new test used an unsupported roast tag Coffee_Medium rather than the current exact selected Medium tag, and the new optional probe array missed a comma. Removed blanket process-conflict rule, preserving literal multistage process reconciliation; added a narrowly dated-history processing guard only where no direct current selected-lot process exists; repaired the test and comma. All failures and steps remain recorded, not relabeled PASSED; exact new CI required. Prior PR-head security, approval, isolated SQL and Python audit were successful; frozen original603 job SKIPPED by workflow branch restriction and is NOT a pass. Source code now additionally changes coffee-page-metadata.mjs. No original603 oracle/capture/scorer changes, member writes or publication.
+
+
+## October 27 UTC — PR174 second regression root cause repaired (TESTING)
+
+GitHub cloud run 40568566964 had 5 failed tests, all original compatible Anaerobic processing subtype integrations. The new Shopify endpoint adapter cloned result.fields; the existing source processing reconciler stores claim evidence in a WeakMap by EXACT fields-object identity, so the clone made literal claim reconciliation incomplete. Retain result.fields itself (an ephemeral, per-preview object with no member persistence) and preserve attached source claim ledger while applying safe new current-source classifications. No test or conflict gate weakened. Previous source/probe/dated-story fixes preserved. CI must rerun on repaired exact source; original private603 remained SKIPPED by restricted workflow. No production publish or database change.
+
+
+## October 27 UTC — PR176 exact-head selected-origin unit failure fixed (TESTING)
+
+Feature-head 4217afe04926890f911c6b5f56adcce2913094fe cloud test run 40573907228 failed only the new Counter Culture country-banner test. Root cause: the helper's programmatically built country regex contained an over-escaped whitespace pattern, so it refused the valid literal `San Marcos, Guatemala`. Replaced it with a bounded explicit comma-and-country suffix comparison against the known country list, with no generic fallback/guessed geography. The exact test remains unchanged and must pass on the new source. No other test/validator weakened. First-run approval and security PASS; original603 restricted hosted job SKIPPED (not a pass). Other CI run outcomes are preserved independently. No publication.
+
+
+## October 28 UTC — Follow-up owner77 source-gap corrections (CI pending, no deploy)
+
+Owner authorized all safe Issue33 implementation and acceptance; no publication. Recovered exact development source 961c9f54eae772cb6086f4b1da6c19c73580b3bd, zero open PR, and the latest owner77 public replay 40732832637/122973423205 (77 PARSED and 77 previews; individual certification, actual hosted Auth and writes explicitly FALSE). Public selected source rechecks confirm #10 Black River COMSA product names the cooperative formed by coffee farmers, while existing parser omitted Producer; #75 Woodshed selected Ethiopian paragraph supplies fruity, stone fruits and orange blossom but omitted canonical notes. Source remains bounded by selected product H1/body, same-selected-name subject, source roles, true conflicts, and negative controls. Added generic source-backed named farmer-founded organization and named selected-coffee sensory narrative recognition, with positive and unrelated-product negative tests. Frozen 603 not rerun on this changed source; exact-source CI / original immutable source replay and live 77 comparison are pending. This is source code + tests in this SAME commit. Do not promote parent #33 or mark any code READY until verification; no member/private data changes, migrations, release branch, Netlify deploy, paid API or oracle edits.
+
+
+## October 28 UTC — PR208 rapid compile repair (CI retest pending)
+
+The initial PR208 flavor helper mistakenly generated malformed JavaScript from a string-escaping error. Replaced only the bounded selected-name regex with an alphabetic/hyphen-safe direct match; no untrusted regex characters are accepted by the capturing pattern. Preserved same-commit journal and all existing data, receipts and other branches. Exact PR-head tests must rerun; original603 remains skipped until independently reverified. No deploy.
+
+
+## October 28 UTC — PR208 intake enforcement repair
+
+GitHub exact-head approval run 40738983102 rejected untracked new runtime source paths, despite source approval coverage and queue schema passing. Added a scoped TESTING queue row for both new runtime files with the real outstanding changed-source, 603 and hosted-auth gates. Kept all 42 existing queue entries intact. Same-commit journal provided. No code changes, deployment or member writes.
+
+
+## October 28 UTC — 77-coffee traceable decision acceptance evidence matrix (NOT certification)
+
+Captured all 77 individual source rows from actual merged-source GitHub run 40732832637 job 122973423205 and joined to authoritative approved source register with selected current coffee, exact URL, HTML digest, canonical field/value, literal context, conflicts, field warnings and rendered-preview evidence. New docs/audits/issue33-owner77-decision-acceptance-20261028.json deliberately labels each row REQUIRES_INDIVIDUAL_SOURCE_DECISION_CERTIFICATION; this accurate 77-row baseline is NOT a false 77/77 decision PASS. The changed PR208 code has not had an independent 77-site replay, original immutable603 run or genuine hosted member Auth/readback. No deployment or member changes. Same-commit journal updated.
+
+
+## October 28 UTC — PR208 postmerge source readback and honest queue reconciliation
+
+Non-force PR #208 merged at 4ba6cc383fb391a0d3a3d4c05fde87b3922cdd22, parents verified as development 961c9f54eae772cb6086f4b1da6c19c73580b3bd and exact reviewed head 593cb12e4fca87db95392d83584389cb467cadc0. Exact-head CI SUCCESS: app 40739522072, cloud/mobile 40739522024, visual 40739521979, SQL 40739521932, approval 40739521983, security 40739522168, private source bundle 40739522139; original secure frozen603 40739522030 SKIPPED. Added all77 traceable source diagnostics matrix, but none falsely designated certified. Reconciled stale merged-PR statuses in queue without falsely promoting READY; parent issue remains IN_PROGRESS with genuine hosted Auth, changed-source 603 and source replay blockers. No deployment, member writes or original oracle edits.
+
+
+## October 28 UTC — PR208 exact original603 independently recovered and re-executed, public77 capture instrumentation staging
+
+Recovered two private GitHub source artifacts: PR207 source b0051ba39 and PR208 source 593cb12e. Original public source archive verified SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52, freeze 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb, packet attestation 0767e52af1a5483ef31beba01d9fa70666a17de10634bb9cb1cc933a6b105556. Ran 603/603 original actual handler for BOTH exact source trees in independent hash-checked disjoint cases (baseline 3104/70/828, PR208 3105/68/829); full strict case-by-case comparison proves exactly TWO previously missing changes (Woodshed notes now exact, Black River producer now review vs frozen long-form), ZERO previous exact losses. All 6474 original supplementary retention classifications remain 5458/337/679. Complete source-bound receipt docs/audits/issue33-pr208-exact-original603-20261028.json; historical protected PR-only workflow SKIPPED, not claimed PASS. Separate production Supabase read-only synthetic authenticated identity 000...033 returned zero visible shots/workspace coffees/library/setup preferences (not GoTrue). This commit adds SHORT-retention private public-only 77 source HTML+actual field artifact to verify remaining owner decisions against original published bytes, with explicit 77/77 parser/preview failure gate. No credentials or private member data in artifact, no migrations or Netlify deployment. Source CI, live 77 recheck and PR integration pending. 
+
+
+## October 28 UTC — selected context-owner77 generic role repair and source acceptance (PR210 TESTING)
+
+Authority: complete issue33 owner decisions, improve source fidelity and queue for separate release, no deployment. Recovered and inspected true merged-source 77 current selected original official product HTML run 40746151200 (77 parsed and preview rendered, SHA 384c72b2). New generic safe roles read only selected H1-bound literal source paragraphs and same-product details: #11 Bleu Ethiopia exact sensory aroma/cup list; #29 Iconik Bressani Family and #30 Giorgio Bressani producer from own product section + farm relationship; #54 Reading Venezuela explicit Lot: Microlot in Origin Details; #70 Tandem first-lot May–August harvest only as historical contextual season, never release label. Wrong-current-product, historical, unrelated bestseller or incomplete source rejected by five focused Node tests. No roaster-URL hardcodes. Local actual 77 replay proved exactly 4 new canonical fields and 1 honest contextual field, other 73 coffees' canonical fields/conflicts unchanged. Original frozen603 unchanged archive/oracle/score: old PR208 full actual handler 3105 exact/68 missing/829 review. Only 3 of original603 selected captured HTML meet new helper source triggers; reran those 3 through actual original handler and rescored full strict603 using 600 previously proven byte-invariant outputs (3105 exact/66 missing/831 review), zero former exact losses, all6474 supplementary classifications unchanged. This is clearly an INCREMENTAL STRICT original603 acceptance, NOT a fresh 603/603 new-handler invocation; full details and SHA in docs/audits/issue33-current-context-roles-regression-20261028.json. Live GoTrue auth/save and remaining individual77 decision certification not yet passed; do not mark parent READY. Same-commit code/test/journal. Exact PR-head CI and nonforce integration pending; production/Member data untouched.
+
+
+## October 28 UTC — PR210 performance guard and retest (TESTING)
+
+Replaying the full original603 on new source with a redundant whole-product prose traversal exposed severe performance stalls under parallel workers. Diagnosed it as a second unneeded traversal on unrelated source pages, NOT an original source or oracle failure. Implemented a conservative raw literal prefilter in the new helper so sites lacking any selected Flavor/Micro-Lot/main-harvest or producer-locality pattern return without re-traversal. Verified all 5 focused unit negatives, 18 combined owner77 selected tests and exact current public 77 capture comparison: still exactly four canonical recoveries (#11/#29/#30/#54), contextual #70, zero prior fields/conflicts lost. Previously slow individual original frozen five-case groups 154, 156 and 157 completed in 2–3 seconds after optimization. **Full fresh 603 new-parser run not yet completed:** 600 original records remain valid under source-eligibility static review and three original real-handler target reruns, as separately labeled incremental strict comparison. Do not call earlier stalled runs PASS. CI must pass on this optimized exact head; no publication or member data writes.
+
+
+## October 28 UTC — Full original603 optimized selected context current-source acceptance completed
+
+Independent full original frozen603 actual handler replay **603/603 succeeded** on exact optimized runtime blobs (`coffee-page-metadata` 54129c15, `coffee-selected-context-roles` b3067a79), original 4002 fixed oracle assertions. Before 3105 exact/68 missing/829 review; after **3106 exact/64 missing/832 review**, zero prior exact losses. Exact five output changes (Bleu, two Iconik, Reading, Tandem harvest context); **6474** supplemental preserved 5458 full/337 partial/679 unconfirmed. Full source manifest SHA256 ed43310391303019cd22655adaefaa7ad1e7f1458237249cb0b3ccdd16a07bc1; replay d422a0c2, comparison 6d68bb4c, retention 3d96d455. The earlier incremental proof is historical and superseded by a newly executed actual full603; no original oracle changed. PR210 exact optimized source seven applicable GitHub CI SUCCESS app 40749601508, cloud/mobile 40749601521, visual 40749601668, SQL 40749601496, approval 40749601485, security 40749601419, original source bundle 40749601667. Original restricted GitHub job 40749601813 SKIPPED; actual full603 independently run outside that job. Safe PR merge and merged current77 live recheck pending, true GoTrue member test unverified. No Netlify publication.
+
+
+
+## October 28 UTC — PR210 merged and verified: seven independently scoped Issue33 queue rows READY
+
+Source PR210 nonforce merge 19275671332297fc7eb489993e954a97399c91ba, parents [384c72b2b5accfc6c07cd357051255ee08e7eccc,59ff7828c4277f24e3a9583af343b97b1b08d9e0] verified, exact tested tree retained. All seven optimized PR-head applicable CI checks SUCCESS and merged exact-source app/build 40750573720, cloud/mobile 40750573932, approval 40750573637 SUCCESS. Controlled live official source and actual Add Coffee preview run 40750573943 77/77 PASS: only expected four canonical source recoveries #11,#29,#30,#54 and harvest context #70, 72 other current selected cases field/conflict identical. Original603 actual full frozen handler 603/603:3106 exact/64 missing/832 strict review (zero former exact lost), all6474 supplemental retained. Readback receipt docs/audits/issue33-merged-owner77-current-acceptance-20261028.json. Narrow scoped PR200/201/203/204/206/207/210 changes now independently source verified READY, NOT DEPLOYED. Parent remains IN_PROGRESS (77 owner decision-by-decision certification incomplete; genuine hosted GoTrue member auth/save/readback not run). No release branch/Netlify/prod SQL/member changes.
+
+
+
+## October 28 UTC — Immediate release queue intake recovery for verified READY scopes
+
+The documentation-only queue validation 40751051620 failed intake on three newly READY rows (#200, #201, #207) because their historical metadata lacked exact merge SHAs and full linked original PR-head CI receipts; this was an evidence classification failure, not code regression. Independently re-read actual merged GitHub PR200 c4f63ef6, PR201 0b8e4088, PR207 961c9f54 and all seven successful exact original PR-head app/cloud/visual/security/SQL/approval/source checks for each. Updated only those three rows with true merged SHAs and actual run IDs, retained scoped tests and original histories. No fabricated fresh tests, production operations or member changes. Retry validation, repair if still rejected.
+
+
+## October 28 UTC — OWNER SUPERCEDES ORIGINAL603 GATE: universal current-description-first source hierarchy (TESTING)
+
+Owner explicitly clarified the generic expected rule, not a 603-perfect-match audit or 77 hardcoded exceptions: current selected coffee DESCRIPTION most authoritative, followed by other current selected product text/specifications, SEO/archived only as demonstrably same-current-product last resort; withheld field/visible alternatives for genuine direct conflicts and member-facing warning for missing/unverified lower-source fields. All 603 oracle/capture files remain unchanged but are not a readiness criterion for this current source priority feature. Recorded Locked scoped supersession EXTRACTOR-DESCRIPTION-FIRST-SELECTED-PRODUCT-20261028 in Master Specification + Decision Ledger and coverage matrix. Generic server parser preserves precedence, late SEO/meta fallback and selected current Shopify endpoint merge; UI visibly distinguishes missing and SEO-only suggestions. Nine adversarial tests and all 1269 coffee tests PASS locally. Exact 77 official saved live source HTML replay 77/77 parsed and unchanged canonical/conflict sets; metadata-only suggestions newly labeled for coffee #58. No new per-coffee branch/hardcoded rule, no production member data/auth/SQL/Netlify modifications. Scope remains TESTING awaiting exact-source GitHub CI, non-force integration and READY source readback. Recovered preexisting failed queue validation at 5a797b (run 40751051620): three historical READY records missing SHA/CI evidence; recovered true merged PRs 200/201/207 and exact PR-head green CI, filled receipts rather than pretending the failures passed; next CI must validate.
+
+
+## October 28 UTC — Generic precedence first exact-head CI repair (TESTING)
+
+PR211 original head 501197c82e23f7e897f45a2e69e148101d8bc759 exact GitHub checks passed approval 40753598717, SQL 40753600175, security 40753598568, exact source bundle 40753598619, and mobile-browser portion of 40753598582. Full app 40753613648 failed two historical assertions and cloud 40753598582 failed one shared assertion: old roast test expected SEO-only Dark to conflict with selected product direct Full City, while owner's newly Locked rule requires Medium-Dark without false conflict; old issue33 review test expected PR203/204 current queue rows TESTING even though later merged-source evidence made them READY. No production parser failure in these two old tests. Updated roast test to require direct selected source precedence, no SEO fallback, no conflict. Updated queue test to require exact merged SHA, successful CI receipts and zero blockers, preserving historic receipt status. Same-commit journal/test update. All original failures retained as FAILED evidence; exact corrected PR-head CI required. No deployment, SQL or member writes.
+
+
+## October 28 UTC — PR211 closes remaining metadata-assisted tier leak (full retest required)
+
+An audit of selectedPageCoffeeEvidence revealed that a helper generating SEO/OG-derived tasting, roast and publisher-series facts was still feeding addField directly before the current product's visible details had been evaluated. This violated the owner's general description-first requirement even though the initial 9 hierarchy tests passed. Fixed all SEO/OG-derived selectedPageCoffeeEvidence roles to go through the same last-resort source tier, requiring the current exact page URL and rejecting stale wrong-country/other-coffee prose. Preserve current direct selected category/quality-badge facts independently. Specifically live original #29 Iconik Exceptional Series remains the same canonical release label, but is now marked seo_fallback_fields=['release_label'] for member confirmation; all77 original selected official current HTML cases re-parsed with ZERO changed canonical field or conflicts. New adversarial SEO publisher-series test added. **Full local source suite 1270/1270 PASS**, prior exact PR211 head eaf4a88 applicable GitHub CI SUCCESS, new source exact-head CI must be re-run; no universal603 scoring gate or hardcoded coffee exception. No deploy, credentials, data writes or SQL.
+
+
+## October 28 UTC — User's requested GENERAL description-first extractor hierarchy: MERGED and SOURCE READY, no deploy
+
+Owner approved direct selected coffee description highest, other current selected product page details next, SEO/archived last-resort and visibly flagged; leave missing and genuine direct contradictory source values for member final review. No 77 hardcoded exception program or universal original603-perfect benchmark is a feature acceptance gate. PR211 final corrected exact source head d55d9e1bdf2a6d6b50ce6c012855bbb5c236d4c7, all 7 applicable PR-head GitHub CI SUCCESS: 40755052299 approval, 40755052351 cloud app build/full tests, 40755052292 cloud + mobile, 40755052294 visual, 40755052185 private source bundle, 40755052097 security, 40755051981 isolated SQL. Frozen603 workflow explicitly SKIPPED by design, not misclassified. Existing 77 public HTML captures from 40746151200 replayed through final source 77/77, no canonical/conflict regression; 1270/1270 local coffee tests passing, visible metadata and missing review. PR211 non-force merge independently read back sha bcd924a2bd5ca3e42b84e9e5ff01e1d3792f1ab8 with parents 941fe5c4 and d55d9e1, postmerge exact source applicable approval 40755500278, app/build 40755500214, cloud/mobile 40755500263, visual 40755500169 all SUCCESS. Marked scoped queue DIC-Q-33-generic-current-description-first-priority READY, blockers zero; parent Issue33 still IN_PROGRESS for genuinely untested real hosted disposable account GoTrue sign-in + Add Coffee save/readback; no auth, RLS, member data, SQL, offline/outbox or publishing code changed. Netlify independently read 153277f2-e19e-4862-b9a6-f2e18ccde271 current deploy still 6ae0fc16178b2f1241e441f8 release SHA f5f29a02. No deployment approval or publication. This is a documentation/readback-only SAME COMMIT reconciliation.

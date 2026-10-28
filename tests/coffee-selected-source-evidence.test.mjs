@@ -116,3 +116,42 @@ test('valid cultivar names retain their extraction despite invalid equipment rej
  const r=extractPublicCoffeeFacts('<main><h1>Current Coffee</h1><p>Varietal: Bourbon, Caturra</p></main>',{source_url:currentUrl});
  assert.equal(r.fields.variety,'Bourbon, Caturra');
 });
+
+
+// Current selected Bonjo product, not the older Guatemala coffee named by its URL.
+// Reproduces split label/value markup and the two-sentence product tier story.
+const bonjoUrl='https://bonjocoffee.com/products/guatemala-finca-el-rincon-copy';
+const bonjoGrade='<section><p><b>Quality Grade:</b> <span>Gold Collection (Strictly Hard Bean)</span></p></section>';
+const bonjoStory='<section><h2>Why We Love It</h2>'+
+ '<p>Our Gold Collection is reserved for coffees that exceed the standards of our everyday offerings.</p>'+
+ '<p>At Bonjo Coffee Roasters, we selected El Poeta for this tier because it exemplifies clarity, balance and sweetness.</p></section>';
+const bonjoSelected=(grade=bonjoGrade,story=bonjoStory)=>
+ '<main><h1>Costa Rica, El Poeta</h1>'+grade+story+'</main>';
+
+test('Issue33 #13 exact selected Gold Collection recovers from multi-paragraph product text',()=>{
+ const html='<html><head><script type="application/ld+json">'+JSON.stringify({
+  '@type':'Product',name:'Costa Rica, El Poeta',url:bonjoUrl,description:'Small family-owned farms in Costa Rica.'
+ })+'</script></head><body>'+bonjoSelected()+'</body></html>';
+ const parsed=extractPublicCoffeeFacts(html,{source_url:bonjoUrl});
+ assert.equal(parsed.ok,true);
+ assert.equal(parsed.fields.name,'Costa Rica, El Poeta');
+ assert.equal(parsed.fields.release_label,'Gold Collection');
+ assert.ok(!parsed.conflicts?.includes('release_label'));
+ const inline=selectedPageCoffeeEvidence({html:bonjoSelected(),name:'Costa Rica, El Poeta'});
+ assert.deepEqual(found(inline,'release_label'),['Gold Collection']);
+ assert.match(inline.find(f=>f.field==='release_label').quote,/we selected El Poeta for this tier/i);
+});
+
+test('Issue33 quality-grade guard rejects uncorroborated tier and other current product',()=>{
+ for(const html of [
+  bonjoSelected(bonjoGrade,'<p>We offer Gold Collection products in our shop.</p>'),
+  bonjoSelected('',bonjoStory),
+  bonjoSelected(bonjoGrade,bonjoStory.replace('El Poeta','Costa Rica, Other Coffee')),
+  '<main><h1>Costa Rica, El Poeta</h1></main><aside>'+bonjoGrade+bonjoStory+'</aside>'
+ ]){
+  // A sidebar is not part of the selected product passed by the caller.
+  const selected=html.includes('<aside>')?html.split('</main>')[0]+'</main>':html;
+  const candidates=selectedPageCoffeeEvidence({html:selected,name:'Costa Rica, El Poeta'});
+  assert.deepEqual(found(candidates,'release_label'),[],html);
+ }
+});

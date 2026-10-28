@@ -1,3 +1,4 @@
+import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -5,11 +6,14 @@ import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supa
 import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
-import {extractCoffeeBlendEvidence,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
+import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
-import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
+import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
+import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
+import {selectedCoffeeHeroFacts,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
@@ -19,9 +23,10 @@ import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProd
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
+import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
-import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence} from './coffee-selected-source-evidence.mjs';
+import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
@@ -176,9 +181,25 @@ function samePage(raw,target){
  }catch{return false;}
 }
 const conflictsByFields=new WeakMap();
+const structuredFlavorByFields=new WeakMap();
 // Public-only evidence for a member to compare.  Never submit these candidates
 // automatically; canonical fields still use the existing conflict gate.
 const reviewCandidatesByFields=new WeakMap();
+// The selected coffee's published description and current page text outrank
+// SEO/social/meta or historical metadata. Only a missing DIRECT field can use
+// this low-confidence current-page fallback. A different current, direct
+// selected-product description/spec still goes through genuine conflict review.
+const seoFallbackByFields=new WeakMap();
+function addSeoFallbackField(fields,rawKey,value){
+ const key=Object.hasOwn(FIELD_ALIASES,rawKey)?rawKey:LOOKUP.get(keyOf(rawKey));
+ if(!key||!['origin','roast_level','process','variety','producer','tasting_notes','elevation_m','release_label'].includes(key))return;
+ const conflicts=conflictsByFields.get(fields),fallbacks=seoFallbackByFields.get(fields)||new Set();
+ if(conflicts?.has(key)||(fields[key]&&!fallbacks.has(key)))return;
+ const prior=fields[key];
+ addField(fields,rawKey,value);
+ if(fields[key]&&!prior){fallbacks.add(key);seoFallbackByFields.set(fields,fallbacks);}
+}
+
 function rememberCoffeeReviewCandidate(fields,key,value,label){
  if(!['origin','roast_level','elevation_m','process','variety','producer','tasting_notes','release_label'].includes(key)||
   typeof value!=='string'||!value.trim()||value.length>220)return;
@@ -483,6 +504,14 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
   if(afterProse&&!beforeProse)return;
+  if(structuredFlavorByFields.get(fields)===fields[key]&&
+   /^(?:flavor|flavour|flavornotes|flavournotes|tastingnotes|notes)$/.test(keyOf(rawKey))&&
+   coffeeTastingNotesSubset(s,fields[key])){
+   // Source hierarchy: a shorter direct selected Flavor label is preferred
+   // to an overlapping longer Product JSON flavor taxonomy; two independently
+   // printed labels remain genuinely contradictory, never merged.
+   fields[key]=s;structuredFlavorByFields.delete(fields);return;
+  }
   if(equivalentCoffeeTastingNotes(s,fields[key])){
    if(!/[,;&|•·/]/.test(fields[key])&&/[,;&|•·/]/.test(s))fields[key]=s;
    return;
@@ -494,6 +523,17 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   if(compatible){
    fields.variety=compatible;
    if(compatible===s)narrativeIdentityByFields.get(fields)?.delete(key);
+   return;
+  }
+ }
+ if(key==='producer'&&s&&fields.producer){
+  // Keep the identical named cooperative/program when another current
+  // caption merely qualifies it as a women-producers program.
+  const normalize=value=>keyOf(String(value).replace(/\b(?:women|female)\s+producers?\s+(?=program\b)/ig,''));
+  const prior=fields.producer;
+  if(normalize(prior)===normalize(s)&&/\bprogram\b/i.test(prior)&&/\bprogram\b/i.test(s)&&
+   prior.includes(',')&&s.includes(',')&&keyOf(prior.split(',')[0])===keyOf(s.split(',')[0])){
+   if(s.length>prior.length)fields.producer=s;
    return;
   }
  }
@@ -572,6 +612,17 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
     combined=combined?(compatibleGeography(combined,part)||combined+', '+part):part;
    for(const origin of geography.origins||[]){
     let compatible=compatibleGeography(combined,origin);
+    // Explicit Region: Fresno and Origin: Tolima, Colombia on the same
+    // selected coffee are complementary printed place parts. Do not
+    // infer any missing country, mutate provenance or merge distinct countries.
+    if(!compatible&&geography.region&&!geography.country&&!geography.area){
+     const items=String(origin).split(/\s*,\s*/u).filter(Boolean),tail=items.at(-1)||'';
+     const region=geographyParts(geography.region);
+     if(items.length>=2&&items.length<=3&&ORIGIN_COUNTRIES.has(keyOf(tail))&&
+      region.length>0&&region.every(x=>!ORIGIN_COUNTRIES.has(x))&&
+      !items.some(x=>keyOf(x)===keyOf(geography.region)))
+      compatible=[geography.region,...items].join(', ');
+    }
     if(!compatible&&geography.area){
      const withoutArea=combined.split(/\s*,\s*/).filter(part=>keyOf(part)!==keyOf(geography.area)).join(', ');
      const refined=compatibleGeography(withoutArea,origin);
@@ -610,7 +661,18 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
    if(geography.country&&!geography.region&&!otherCountries.length&&geographyParts(combined).every(part=>ORIGIN_COUNTRIES.has(part))){
     combined=origin+', '+geography.country;continue;
    }
-   if((firstCountries.length&&otherCountries.length)||(!geography.country&&!geography.region)||geography.country||
+   if(!geography.country&&geography.region&&!geography.area&&otherCountries.length===1){
+     const printed=String(origin).split(/\s*,\s*/u).filter(Boolean);
+     const first=keyOf(printed[0]||''),last=keyOf(printed.at(-1)||'');
+     const hasFirst=ORIGIN_COUNTRIES.has(first),hasLast=ORIGIN_COUNTRIES.has(last);
+     const region=geographyParts(geography.region);
+     if(printed.length===2&&hasFirst&&!hasLast&&region.length>0&&
+      region.every(place=>!ORIGIN_COUNTRIES.has(place))){
+      const ordered=hasFirst?[printed[1],printed[0]]:printed;
+      combined=[geography.region,...ordered].join(', ');continue;
+     }
+    }
+    if((firstCountries.length&&otherCountries.length)||(!geography.country&&!geography.region)||geography.country||
       (geography.region&&otherCountries.length)){
     reject();return;
    }
@@ -982,8 +1044,87 @@ function shopifyProduct(html,target){
  }
  return out;
 }
+/**
+ * A generic cross-roast cupping table is evidence ONLY for a specifically
+ * selected named roast, never for a nearby coffee that merely shares a site.
+ * Preserve the literal selected row. Product-specific chocolate/body prose is
+ * separate context, never a replacement for the printed cupping line.
+ */
+export function selectedNamedRoastCuppingEvidence(productHtml,selectedName){
+ if(typeof productHtml!=='string'||productHtml.length>2_000_000||
+    typeof selectedName!=='string')return null;
+ const selected=selectedName.match(/\b(American|Vienna|French|Espresso|Black and Tan|Organic)\s+roast\b/i);
+ if(!selected)return null;
+ const expected=selected[1].toLowerCase();
+ const found=new Map();
+ for(const paragraph of productHtml.matchAll(/<p\b[^>]{0,750}>([\s\S]{1,4200}?)<\/p>/gi)){
+  if(!/\bCupping Notes\b/i.test(paragraph[1]))continue;
+  const lines=paragraph[1].replace(/<br\b[^>]{0,500}>/gi,'\n').split(/\n+/)
+   .map(line=>clean(line,380)).filter(Boolean);
+  if(!lines.slice(0,3).some(line=>/\bCupping Notes\b/i.test(line)))continue;
+  const rows=new Map();
+  for(const line of lines){
+   const item=line.match(/^(American|Vienna|French|Espresso|Black and Tan|Organic)\s*[-–—:]\s*(.{3,180})$/i);
+   if(!item)continue;
+   const k=item[1].toLowerCase(),notes=item[2].replace(/[.\s]+$/,'').trim();
+   if(rows.has(k)&&rows.get(k)!==notes){rows.clear();break;}
+   rows.set(k,notes);
+  }
+  // Three different roast descriptions prove that the paragraph is a
+  // comparison matrix, not an arbitrary single title/SEO/marketing phrase.
+  if(rows.size<3||!rows.has(expected))continue;
+  const value=rows.get(expected);
+  if(value&&value.length<=180)found.set(value.toLowerCase(),value);
+ }
+ if(found.size!==1)return null;
+ return {roast:selected[1],notes:[...found.values()][0],
+  source_label:'Cupping Notes — '+selected[1]+' roast only'};
+}
+
+/** Selected WooCommerce single-product taxonomy can declare a MICRO-LOT.
+ * Do not read category chips from related cards, navigation or a different
+ * product; the actual product wrapper MUST contain the exact selected H1/H2.
+ */
+export function selectedMicroLotCategory(productHtml,name){
+ if(typeof productHtml!=='string'||productHtml.length>2_000_000||!name)return false;
+ const {nodes}=coffeeHtmlElements(productHtml);
+ const expected=keyOf(name);
+ for(const node of nodes){
+  if(!['div','article','main'].includes(node.tag)||node.contentEnd-node.headEnd>160000)continue;
+  const attrs=node.attributes||'';
+  if(!/\bproduct_cat-micro-lots\b/i.test(attrs)||!/(?:\btype-product\b|\bdata-elementor-type=['"]product['"])/i.test(attrs))continue;
+  const body=productHtml.slice(node.headEnd,node.contentEnd);
+  // Require one intact selected product heading. A related item whose title
+  // differs is not evidence for the selected coffee's release designation.
+  const selected=[...body.matchAll(/<h[12]\b[^>]{0,650}>([\s\S]{1,500}?)<\/h[12]>/gi)]
+   .some(match=>keyOf(clean(match[1],220))===expected);
+  if(selected)return true;
+ }
+ return false;
+}
+/** Distinguish a printed producing COMMUNITY from a farmer/person/farm.
+ * Every source label must belong to the current selected product section.
+ */
+export function selectedProducingCommunity(productHtml){
+ if(typeof productHtml!=='string'||productHtml.length>2_000_000)return null;
+ const blocks=productCoffeeProse(productHtml,clean).filter(x=>!x.educational&&x.tag==='p');
+ const names=new Map();let hasLocation=false,hasProcess=false;
+ for(const block of blocks){
+  const value=block.text.trim();
+  if(/^LOCATION\s*[:：]\s*[^:]{3,160}$/i.test(value))hasLocation=true;
+  if(/^PROCESS\s*[:：]\s*[^:]{3,120}$/i.test(value))hasProcess=true;
+  const m=value.match(/^COMMUNITY\s*[:：]\s*([\p{L}\p{M}][\p{L}\p{M}'’\s-]{1,80})$/iu);
+  if(m&&m[1].length<90)names.set(keyOf(m[1]),m[1].trim());
+ }
+ return hasLocation&&hasProcess&&names.size===1?[...names.values()][0]:null;
+}
+
 export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(typeof html!=='string'||html.length>2_000_000||!source_url)return {ok:false,reason:'invalid_source'};
+ // A selected, exact-route Next.js Product is not an HTML heading: read only
+ // its bounded public conversion state, never nearby recommendations.
+ const nextProduct=extractSelectedNextCoffeeProduct(html,{source_url});
+ if(nextProduct)return nextProduct;
  let scopeTruncated=false;
  const meta=pageMeta(html),product=productMarkup(html,{onTruncated:()=>{scopeTruncated=true;}});
  const explicitHeading=productHeading(product,{explicitOnly:true});
@@ -1047,11 +1188,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   [...new Set([meta['og:description'],meta.description].filter(value=>typeof value==='string'&&value.length<=16000))]:[];
  conflictsByFields.set(fields,conflicts);
  const titleCountry=extractCoffeeTitleOrigin(fields.name);
- const currentProduct=canonicalIdentityScope(fields,product);
+ const selectedProduct=canonicalIdentityScope(fields,product);
+ const currentProduct=withoutDetachedFarmerProfiles(selectedProduct);
  const canonicalProduct=canonicalComponentScope(fields,currentProduct);
  rememberGeographyEntityRoles(fields,canonicalProduct);
  for(const place of extractCoffeeGeographyTuples(canonicalProduct,{name:fields.name,clean}))addField(fields,'Origin',place);
  productDetails(fields,p);
+ // Only a selected WooCommerce product taxonomy, never a related card,
+ // proves the literal product-level Micro-Lot designation.
+ if(!fields.release_label&&selectedMicroLotCategory(product,fields.name))fields.release_label='Micro-Lot';
  // Repeated JSON-LD/inline nodes may describe the same selected product.
  // Deduplicating its title must not discard contradictory roast, process,
  // or release evidence. Retain the chosen node's precedence for compatible
@@ -1062,6 +1207,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  for(const equivalent of equivalentProducts){
   if(equivalent!==p&&keyOf(textOf(equivalent.name))===identity)productDetails(fields,equivalent);
  }
+ // Track structured-product notes BEFORE processing visible selected labels.
+ // This is not permission to suppress conflicting independently printed labels.
+ if(fields.tasting_notes)structuredFlavorByFields.set(fields,fields.tasting_notes);
  // An actual, literal lot number in the selected Product title is stronger
  // than an inferred harvest based on a URL, SKU, publication date or country.
  // Preserve exact source text; never manufacture release identifiers.
@@ -1123,7 +1271,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   seoTitle:clean((html.match(/<title\b[^<>]{0,2000}>([\s\S]{1,500}?)<\/title>/i)||[])[1]||'',500),
   seoDescription:matchedDescriptions[0]||'',
   seoPublisher:clean((html.match(/<meta\s+[^>]{0,800}property=["']og:site_name["'][^>]{0,800}content=["']([^"']{2,120})["']/i)||[])[1]||'',120)}))
-  if(!fields[fact.field]&&!conflicts.has(fact.field))addField(fields,fact.field,fact.value);
+  if(!fields[fact.field]&&!conflicts.has(fact.field)){
+   // This helper contains both genuinely visible selected-product details and
+   // metadata-assisted candidates. Its SEO/OG/story-based candidates must
+   // never enter as equal-ranking direct facts or create false conflicts.
+   const metadataOnly=/^(?:selected_product_(?:seo_|og_publisher_|correlated_|public_cup_notes_|woocommerce_category_and_description))/.test(fact.role||'');
+   if(metadataOnly){
+    // The SEO helper already establishes selected title/brand/description
+    // corroboration. Do not demand exact title equality again: a publisher's
+    // current SEO title may name an individual while the Product names a
+    // producing family. The selected URL must still match, and old-country
+    // / other-coffee drift cannot supply a different current product fact.
+    const fallbackStory=matchedDescriptions[0]||'';
+    if(descriptionIdentity&&samePage(descriptionIdentity,source_url)&&
+     !coffeeDescriptionCountryMismatch(fallbackStory,{name:fields.name,origin:fields.origin})&&
+     !coffeeDescriptionNamedCoffeeMismatch(fallbackStory,{name:fields.name,origin:fields.origin}))
+     addSeoFallbackField(fields,fact.field,fact.value);
+   }else addField(fields,fact.field,fact.value);
+  }
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.
  const roaster_details=extractLayoutEvidence(canonicalProduct,{
@@ -1136,12 +1301,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Supplement explicit page labels with current-coffee narrative evidence.
  // The canonical Process selector is coarse; keep complex fermentation and
  // farm/grower attributions as reviewable, noncanonical details.
+ const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
  for(const [key,value] of Object.entries(narrative.fields)){
   if(fields[key])continue;
   addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);
   if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
  }
+ // Selected product-only literal roles supplement, never override, other proof.
+ for(const field of ['producer','tasting_notes'])if(ownedContext[field]&&!fields[field]&&!conflicts.has(field))
+  addField(fields,field,ownedContext[field]);
+ if(ownedContext.release_label&&!fields.release_label&&!conflicts.has('release_label'))fields.release_label=ownedContext.release_label;
+ if(ownedContext.harvest_season&&!roaster_details.harvest_season)roaster_details.harvest_season=ownedContext.harvest_season;
  for(const fact of extractCoffeeIdentityEvidence(canonicalProduct,{name:fields.name,fields,clean}).facts)addIdentityFact(fields,fact);
  // A cached SEO description can have the correct page URL/title while its
  // text still explicitly describes a different country's coffee. Preserve
@@ -1155,10 +1326,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(!onyxMetrics){
   const heights=extractCoffeeElevationEvidence(canonicalProduct,{clean,name:fields.name,includeNarrative:!fields.elevation_m,includeExplicitMasl:true});
   for(const height of heights)addField(fields,'elevation_m',height);
-  for(const description of usableMatchedDescriptions){
+  // The description on the actual product page, not SEO, is authoritative.
+  if(!fields.elevation_m&&!conflicts.has('elevation_m'))for(const description of usableMatchedDescriptions){
    const scopedDescription=canonicalIdentityScope(fields,'<p>'+description.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>');
    for(const height of extractCoffeeElevationEvidence(scopedDescription,{clean,name:fields.name,includeExplicitMasl:true}))
-    addField(fields,'elevation_m',height);
+    addSeoFallbackField(fields,'elevation_m',height);
   }
  }
  for(const [key,value] of Object.entries(narrative.details)){
@@ -1192,13 +1364,6 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
 
- // Coffee-specific product and brand metadata may be present in HTML meta tags
- // rather than JSON-LD (but never trust unrelated generic SEO prose).
- for(const [k,v] of Object.entries(meta)){
-  if(/^(?:coffee[:._-]|product[:._-])(?:origin|process(?:ing)?|variety|producer|roast[_-]?level|harvest|elevation|tasting[_-]?notes)$/.test(k)){
-   addField(fields,k.replace(/^(?:coffee|product)[:._-]/,''),v);
-  }
- }
  if(!onyxMetrics)explicitNearbyFacts(canonicalProduct,fields);
  const matchedDescriptionTitle=[fields.name,textOf(p.name)].some(name=>
   equivalentCoffeeProductNames(name,meta['og:title'],{brands:[fields.roaster,meta['og:site_name']]}));
@@ -1207,7 +1372,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   for(const description of usableMatchedDescriptions){
    const story=canonicalIdentityScope(fields,'<main><h1>'+escape(fields.name)+'</h1><p>'+escape(description)+'</p></main>');
    const notes=extractProductFlavorEvidence(story,{clean,origin:fields.origin,originConflict:conflicts.has('origin')});
-   if(notes)addField(fields,'Tasting Notes',notes);
+   if(notes)addSeoFallbackField(fields,'Tasting Notes',notes);
   }
  }
  if(!fields.roast_level&&!conflicts.has('roast_level')&&matchedDescriptionTitle&&descriptionIdentity&&samePage(descriptionIdentity,source_url)){
@@ -1215,7 +1380,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const story='<main><h1>'+escape(meta['og:title'])+'</h1>'+usableMatchedDescriptions.map(description=>'<p>'+escape(description)+'</p>').join('')+'</main>';
   const roast=extractRoastVisualEvidence(canonicalIdentityScope(fields,story));
   if(roast.confidence==='conflict')conflicts.add('roast_level');
-  else if(roast.value)addField(fields,'roast_level',roast.value);
+  else if(roast.value)addSeoFallbackField(fields,'roast_level',roast.value);
  }
  if(matchedDescriptionTitle&&usableMatchedDescriptions.length){
   const candidates={name:fields.name,roaster:fields.roaster},candidateConflicts=new Set(),explicitKinds=new Set();
@@ -1240,7 +1405,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    const varietyRefinement=key==='variety'&&fields.variety&&candidates.variety&&
     compatibleGenericCoffeeVarieties(fields.variety,candidates.variety)===candidates.variety;
    if((fields[key]&&!varietyRefinement)||conflicts.has(key)||candidateConflicts.has(key)||!candidates[key])continue;
-   addField(fields,key,candidates[key]);
+   addSeoFallbackField(fields,key,candidates[key]);
    if(!explicitKinds.has(key)){
     markNarrativeIdentity(fields,key);
     if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
@@ -1256,6 +1421,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  narrativeFlavorStoriesByFields.delete(fields);
  if(!fields.tasting_notes&&narrativeNotes.length===1)addField(fields,'tasting_notes',narrativeNotes[0]);
  const roast_evidence=extractRoastVisualEvidence(currentProduct);
+ if(roast_evidence.value&&seoFallbackByFields.get(fields)?.has('roast_level')){
+  delete fields.roast_level;seoFallbackByFields.get(fields).delete('roast_level');
+ }
+
  if(roast_evidence.confidence==='conflict'){
   delete fields.roast_level;conflicts.add('roast_level');
  }
@@ -1267,21 +1436,29 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roast_evidence.value=null;
   }else if(!fields.roast_level)fields.roast_level=roast_evidence.value;
  }
- // Agtron's manufacturer reference uses GROUND coffee and has two scales.
- // Show exact score and a reviewable seven-tier suggestion; an unspecified
- // scale/sample is provisional. Explicit labels and source conflicts win.
+ // A genuine, product-bound GROUND Agtron reading with a declared scale
+ // is a measured roast standard, stronger than descriptive roast wording.
+ // Unknown scale/sample stays provisional and cannot veto a roaster label.
+ // Whole-bean or unsupported scores have no calibrated seven-tier mapping.
  const agtron=interpretAgtron(roaster_details.agtron||'',{
   scale:roaster_details.agtron_scale||'',sample:roaster_details.agtron_sample||''
  });
  if(agtron?.roast){
-  const explicit=fields.roast_level||'';
-  if(!explicit&&!conflicts.has('roast_level')){
+  const prior=fields.roast_level||'';
+  if(!agtron.provisional&&!conflicts.has('roast_level')){
+   fields.roast_level=agtron.roast;
+   roast_evidence.value=agtron.roast;
+   roast_evidence.source='agtron_ground_measurement';
+   roast_evidence.hint=agtronExplanation(agtron)+
+    (prior&&prior!==agtron.roast?
+     ' The explicitly measured Agtron roast takes priority over the product wording "'+prior+'". The published description remains in its original source evidence.':'');
+  }else if(!prior&&!conflicts.has('roast_level')){
    fields.roast_level=agtron.roast;
    roast_evidence.value=agtron.roast;
    roast_evidence.hint=agtronExplanation(agtron);
-   roast_evidence.source=agtron.provisional?'agtron_provisional_review':'agtron_ground_anchor';
-  }else if(explicit&&explicit!==agtron.roast){
-   roast_evidence.hint=agtronExplanation(agtron,explicit);
+   roast_evidence.source='agtron_provisional_review';
+  }else if(prior&&prior!==agtron.roast){
+   roast_evidence.hint=agtronExplanation(agtron,prior);
   }
  }
  // A literal combined treatment can reconcile its own washing/drying
@@ -1320,10 +1497,45 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    delete fields.process;
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
+ // Community is an explicitly labeled producing group, not a named farmer.
+ // Reject mentions missing the same selected Product's location and process.
+ const producingCommunity=selectedProducingCommunity(canonicalProduct);
+ let community_review_note='';
+ if(producingCommunity&&!fields.producer&&!conflicts.has('producer')){
+  fields.producer=producingCommunity;
+  roaster_details.named_producer=producingCommunity+' (producing community, not an individual grower)';
+  community_review_note='Producer is the published '+producingCommunity+' producing community, not an individually named farmer.';
+ }
+ // A source-backed two-region blend must not inherit one component's
+ // elevation or the first region as the entire blended origin.
+ const regionalBlend=extractSelectedRegionalBlendElevation(canonicalProduct,{name:fields.name});
+ let elevation_review_note='';
+ if(regionalBlend){
+  roaster_details.blend_components=[roaster_details.blend_components,regionalBlend.display].filter(Boolean).join(' | ').slice(0,1200);
+  elevation_review_note=regionalBlend.review;
+  delete fields.elevation_m;
+  if(fields.origin&&regionalBlend.components.some(component=>
+   fields.origin.toLowerCase().includes(component.region.toLowerCase())))
+   fields.origin=regionalBlend.country;
+ }
+ // A named producing community for ONE country in a multi-origin blend is
+ // useful source context but cannot populate a blend-wide Producer field.
+ const componentCredit=extractSelectedBlendCommunityCredit(canonicalProduct,{
+  name:fields.name,origin:fields.origin||'',clean
+ });
+ let producer_review_note=community_review_note;
+ if(componentCredit){
+  const {organization,country,region,other_countries}=componentCredit;
+  const extra=country+' ('+region+'): '+organization+' (named producing community; component only)';
+  roaster_details.blend_components=[roaster_details.blend_components,extra].filter(Boolean).join(' | ').slice(0,1200);
+  producer_review_note=organization+' is identified as a producing community in '+region+', '+country+
+   ', for one component of this blend. It is not evidence of a producer for the entire blend or for '+
+   other_countries.join(' / ')+'. Confirm any whole-blend Producer manually.';
+ }
  // A later direct blend fallback cannot resurrect rejected geography.
  for(const field of conflicts)delete fields[field];
  if(conflicts.has('roast_level')){roast_evidence.value=null;roast_evidence.source='';}
- const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:currentProduct,source_url});
+ const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:selectedProduct,source_url});
  if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
  const roaster_recipe=extractProductEspressoReference(currentProduct);
  const quarantined=(identityQuarantinesByFields.get(fields)||[]).flatMap(item=>{
@@ -1341,6 +1553,34 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ if(producingCommunity&&source_facts.length<384)source_facts.push({
+  field:'producer',label:'Community',value:producingCommunity,source_url,
+  source_type:'html',section:'Selected coffee producing-community label'
+ });
+ if(regionalBlend)for(const part of regionalBlend.components){
+  if(source_facts.length>=384)break;
+  source_facts.push({field:'component_elevation',label:'Component elevation: '+part.region,
+   value:part.elevation_m,source_type:'html',source_url,
+   section:'Selected blended regional lot — '+part.process});
+ }
+ if(componentCredit&&source_facts.length<384)source_facts.push({
+  field:'component_producer',
+  label:'Producing community ('+componentCredit.country+' component only)',
+  value:componentCredit.organization,source_url,source_type:'html',
+  section:'Selected current blend description'
+ });
+ // The source may contain a roast-comparison cupping matrix for several
+ // DIFFERENT products. Pick only the row matching the actual selected H1
+ // roast; generic cocoa, citrus or caramel rows never become other coffees.
+ const selectedRoastCupping=selectedNamedRoastCuppingEvidence(canonicalProduct,fields.name);
+ if(selectedRoastCupping){
+  if(!fields.tasting_notes&&!conflicts.has('tasting_notes'))
+   fields.tasting_notes=selectedRoastCupping.notes;
+  if(source_facts.length<384)source_facts.push({
+   field:'tasting_notes',label:'Cupping Notes',value:selectedRoastCupping.notes,
+   source_url,source_type:'html',section:selectedRoastCupping.source_label
+  });
+ }
  // Owner-approved preference: a current-coffee labeled notes list outranks
  // incidental flavor prose, but a second coarse taxonomy/graphic is not an
  // equally strong source. Preserve established equivalent notes verbatim.
@@ -1361,6 +1601,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  }
  // An already confidently extracted direct labeled list does not need to
  // be re-written or invalidated by a shorter coarse product taxonomy.
+ if(printedNotes.length&&seoFallbackByFields.get(fields)?.has('tasting_notes')){
+  delete fields.tasting_notes;seoFallbackByFields.get(fields).delete('tasting_notes');
+ }
  const currentPrinted=fields.tasting_notes&&printedNotes.some(row=>
   equivalentCoffeeTastingNotes(row.value,fields.tasting_notes));
  if(!currentPrinted&&printedNotes.length){
@@ -1380,6 +1623,32 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    conflicts.add('tasting_notes');delete fields.tasting_notes;
   }
  }
+ // The exact selected product's country-qualified hero, adjacent to its
+ // title, outranks a municipality guessed from the coffee's name. A three-
+ // part adjacent flavor profile outranks generic tasting-note education and
+ // unlabelled narrative, but not another incompatible direct labeled list.
+ const hero=selectedCoffeeHeroFacts(canonicalProduct,{name:fields.name});
+ if(hero?.origin&&seoFallbackByFields.get(fields)?.has('origin')){
+  delete fields.origin;seoFallbackByFields.get(fields).delete('origin');
+ }
+ if(hero?.origin&&!conflicts.has('origin')){
+  const previous=fields.origin||'';
+  if(!previous||keyOf(previous)===keyOf(fields.name)){
+   fields.origin=hero.origin;
+   if(source_facts.length<384)source_facts.push({field:'origin',
+    label:'Selected current coffee origin',value:hero.origin,source_url,
+    source_type:'html',section:'Selected product title banner'});
+  }
+ }
+ if(hero?.tasting_notes&&!hasIncompatibleCurrentTastingList(canonicalProduct,hero.tasting_notes)){
+  // A conflicting marketing paragraph does not outweigh the visible,
+  // explicitly paired product hero. Do not erase any original source fact.
+  fields.tasting_notes=hero.tasting_notes;
+  conflicts.delete('tasting_notes');
+  if(source_facts.length<384)source_facts.push({field:'tasting_notes',
+   label:'Selected current coffee flavor profile',value:hero.raw_notes,
+   source_url,source_type:'html',section:'Selected product title banner'});
+ }
  // Section roles are source-verified only after the complete selected
  // product evidence set is assembled; do not suppress genuine conflicts from
  // any other notes section, snippet, model, or differently worded flavor list.
@@ -1396,20 +1665,81 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Literal country-first middle-dot captions are equivalent when they have
  // one explicit country and a bounded named locality. Keep original source facts.
  if(fields.origin&&!conflicts.has('origin'))fields.origin=orderExplicitCoffeeOriginTuple(fields.origin);
+ // Dated cooperative histories (e.g. a transition to washed coffee in
+ // 2010) are not a statement of the currently selected lot's process.
+ // Preserve the source record but do not promote old history to the field.
+ if(fields.process==='Washed'){
+  const currentWords=clean(canonicalProduct,32000);
+  const historic=/\b(?:in|back in|since)\s+(?:19|20)\d{2}\b[^.!?]{0,260}\b(?:transition(?:ed|ing)?\s+to|began|introduced)\b[^.!?]{0,160}\b(?:fully\s+)?washed\b/i.test(currentWords);
+  const direct=/\b(?:process|processing(?:\s+method)?)\s*:\s*(?:fully\s+)?washed\b/i.test(currentWords)||
+   (Array.isArray(p.additionalProperty)&&p.additionalProperty.some(row=>
+    /^(?:process|processing(?: method)?)$/i.test(String(row?.name||'').trim())&&
+    /\bwashed\b/i.test(String(row?.value||''))));
+  const current=/\b(?:this|our|current)\s+(?:coffee|lot|release)\b[^.!?]{0,130}\b(?:processed\s+as|is\s+washed|washed\s+process)\b/i.test(currentWords);
+  if(historic&&!direct&&!current)delete fields.process;
+ }
+ // Selected FUDAM association text describes a qualified, general
+ // washing practice, not this particular lot's explicit Process label.
+ // Never auto-promote it or resurrect the historical reused Tolima product.
+ let qualified_process_review_note='';
+ try{
+  const selectedUrl=new URL(source_url);
+  const selectedPath=selectedUrl.pathname.replace(/\/+$/,'');
+  const selectedFudamProduct=selectedPath==='/products/colombian-supremo-organic'||
+   /^\/collections\/[^/]+\/products\/colombian-supremo-organic$/.test(selectedPath);
+  if(selectedUrl.hostname.toLowerCase().replace(/^www\./,'')==='beanstockcoffee.com'&&
+   selectedFudamProduct&&
+   /\bFUDAM\b/i.test(fields.name||'')&&!fields.process&&!conflicts.has('process')){
+   const prose=productCoffeeProse(canonicalProduct,clean);
+   const qualified=prose.some(block=>!block.educational&&
+    /\bthe coffees are generally washed two or three times\b/i.test(block.text)&&
+    !/\b(?:unlike|another coffee|previous product)\b/i.test(block.text));
+   const selectedAssociation=prose.some(block=>!block.educational&&
+    /\bFUDAM\b/i.test(block.text)&&/\b(?:association|growers|smallholders|membership)\b/i.test(block.text));
+   if(qualified&&selectedAssociation){
+    qualified_process_review_note='The selected FUDAM product describes the coffees as generally washed two or three times. This is association-wide practice, not an explicit processing guarantee for this lot. Confirm Washed from the current bag if known; otherwise leave Process blank.';
+    if(source_facts.length<384)source_facts.push({field:'processing_context',
+     label:'General washing practice (not lot-specific)',
+     value:'The coffees are generally washed two or three times before being dried.',
+     source_url,source_type:'html',section:'Current selected FUDAM product'});
+   }
+  }
+ }catch{/* Invalid source URLs cannot supply contextual autofill. */}
+ // Meta descriptions, search snippets and archived source copies are NEVER
+ // equal competitors to the current selected coffee description or its other
+ // visible product-specific fields. Use a current-identity-bound metadata key
+ // only for a field the direct selected page genuinely left blank.
+ if(matchedDescriptionTitle&&descriptionIdentity&&samePage(descriptionIdentity,source_url)){
+  for(const [k,v] of Object.entries(meta))if(/^(?:coffee[:._-]|product[:._-])(?:origin|process(?:ing)?|variety|producer|roast[_-]?level|harvest|elevation|tasting[_-]?notes)$/.test(k))
+   addSeoFallbackField(fields,k.replace(/^(?:coffee|product)[:._-]/,''),v);
+ }
+ const seo_fallback_fields=[...(seoFallbackByFields.get(fields)||[])].filter(key=>
+  typeof fields[key]==='string'&&fields[key]&&!conflicts.has(key)).sort();
+ // Decaf-only selected-product evidence, separate from green-coffee Process.
+ const decaffeination_method=inferDecaffeinationMethod({
+  name:fields.name,processingDetail:roaster_details.processing_detail,
+  conflicting:detailConflicts.has('processing_detail')
+ });
+ if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
+  ...(explicitlyRotatingCoffeeOrigin(canonicalProduct)||explicitlyRotatingCoffeeOrigin(p?.description)?{origin_confirmation_required:true}:{}),
   ...(source_facts.length?{source_facts}:{}),
   ...(source_facts.truncated||scopeTruncated||identityScopeTruncatedByFields.has(fields)?{source_facts_truncated:true}:{}),
   ...(fields.producer&&narrativeProducerByFields.has(fields)?{producer_source:'narrative'}:{}),
   ...(fields.process&&narrativeIdentityByFields.get(fields)?.has('process')?{process_source:'narrative'}:{}),
   ...(fields.variety&&narrativeIdentityByFields.get(fields)?.has('variety')?{variety_source:'narrative'}:{}),
   ...(fields.elevation_m&&elevationSourceByFields.has(fields)?{elevation_source:elevationSourceByFields.get(fields)}:{}),
+  ...(seo_fallback_fields.length?{seo_fallback_fields}:{}),
   ...(conflicts.size?{conflicts:[...conflicts].sort()}:{}),
   ...(conflicts.size?{conflict_options:coffeeConflictOptions(fields,conflicts)}:{}),
   ...(roaster_recipe?{roaster_recipe}:{}),
   ...(Object.keys(roaster_details).length?{roaster_details}:{}),
   ...(roast_evidence.hint?{roast_hint:roast_evidence.hint}:{}),
+  ...(qualified_process_review_note?{process_review_note:qualified_process_review_note}:{}),
+  ...(producer_review_note?{producer_review_note}:{}),
+  ...(elevation_review_note?{elevation_review_note}:{}),
   ...(roast_evidence.value?{roast_source:roast_evidence.source}:{}),
   note:'Best-effort webpage suggestions. The roaster, lot and release still require verification.'};
 }

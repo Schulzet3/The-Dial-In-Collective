@@ -323,3 +323,64 @@ export function extractCoffeeBlendEvidence(html,{name='',scoped=false}={}){
   components:components.length
  };
 }
+
+
+/**
+ * A named community can be identified for exactly one geographic component
+ * of a multi-country blend without being the producer of the whole blend.
+ * Receives current selected product markup AFTER unrelated farmer widgets
+ * are excluded. Never creates canonical field suggestions.
+ */
+export function extractSelectedBlendCommunityCredit(html,{name='',origin='',clean:decode}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof decode!=='function'||!name)return null;
+ const countries=unique([...String(origin).matchAll(COUNTRIES)].map(match=>match[1]));
+ if(countries.length<2||countries.length>8||countries.some(country=>!/^[A-Za-z -]{3,50}$/.test(country)))return null;
+ const location=new RegExp('\\b([\\p{Lu}][\\p{L}\\p{M} -]{2,72}),\\s*('+countries.join('|')+')\\b','giu');
+ const results=[];
+ for(const block of productCoffeeProse(html,decode)){
+  if(block.educational||!['p','li','div'].includes(block.tag)||block.text.length>2200)continue;
+  const prose=block.text,lead=prose.slice(0,390);
+  // The paragraph must directly identify this selected product as a blend.
+  if(!key(lead).includes(key(name))||
+   !/\bblend\b[^.!?]{0,140}\b(?:two|three|four|five|six|[2-6])\b[^.!?]{0,100}\b(?:coffee|communities|origins?|components?)\b/i.test(lead))continue;
+  const credits=[...prose.matchAll(/\bproducing\s+communities\s*,\s*([A-Z][A-Z0-9-]{2,32})\b/g)];
+  if(credits.length!==1)continue;
+  const credit=credits[0],organization=credit[1];
+  // A marketing acronym alone is not a producer-role attribution.
+  if(!new RegExp('\\b'+organization+'\\s+is\\s+an?\\s+(?:association|cooperative|co-?op)\\b','i')
+    .test(prose.slice(credit.index+credit[0].length)))continue;
+  const places=[...prose.slice(0,credit.index).matchAll(location)];
+  if(!places.length||new Set(places.map(match=>key(match[2]))).size!==1)continue;
+  const chosen=places.at(-1),region=chosen[1].trim(),country=chosen[2];
+  if(!region||countries.some(value=>key(value)===key(region)))continue;
+  results.push({organization,country,region,
+   other_countries:countries.filter(value=>key(value)!==key(country)),
+   quote:prose.slice(0,1350)});
+ }
+ return results.length===1?results[0]:null;
+}
+
+
+/** Two explicitly sourced regional lots of ONE selected coffee are not one
+ * altitude range. Keep each component with its region/roast/process context.
+ * Intentionally do not infer a canonical elevation or identify producers.
+ */
+export function extractSelectedRegionalBlendElevation(html,{name=''}={}){
+ if(typeof html!=='string'||html.length>2_000_000||!name)return null;
+ const names=unique([...String(name).matchAll(COUNTRIES)].map(x=>x[1]));
+ if(names.length!==1)return null;
+ const blocks=productCoffeeProse(html,clean).filter(x=>!x.educational&&x.tag==='p');
+ const text=blocks.map(x=>x.text).join(' ').slice(0,16000);
+ const current=text.match(/\bour\s+current\s+([\p{L}\p{M}][\p{L}\p{M} ]{2,40})\s+offering\b/iu);
+ if(!current||key(current[1])!==key(names[0]))return null;
+ if(!/\b(?:two|2)\s+regional\s+lots\b[^.!?]{0,200}\bcombined\b[^.!?]{0,130}\b(?:single\s+origin\s+)?blend\b/i.test(text))return null;
+ const first=text.match(/\bone\s+of\s+the\s+coffees\s+is\s+a\s+(?:fully\s+)?washed\s+selection\s+from\s+the\s+([\p{L}\p{M}][\p{L}\p{M}\s'’-]{2,65}?)\s+region\s+grown\s+at\s+(\d{3,4})\s*[-–—]\s*(\d{3,4})\s+(?:meters?\s+above\s+sea\s+level|m(?:eters?|asl))\b/iu);
+ const second=text.match(/\bthe\s+other\s+is\s+a\s+(?:fully\s+)?washed\s+([\p{L}\p{M}][\p{L}\p{M}\s'’-]{2,65}?)\s+grown\s+at\s+(\d{3,4})\s*[-–—]\s*(\d{3,4})\s+(?:meters?|m(?:asl)?)\b/iu);
+ if(!first||!second||first.index>second.index||second.index-first.index>650)return null;
+ const regions=[first[1].trim(),second[1].trim()],lows=[+first[2],+second[2]],highs=[+first[3],+second[3]];
+ if(key(regions[0])===key(regions[1])||regions.some(x=>x.length<3||x.length>65)||
+    lows.some((v,i)=>v<100||v>highs[i]||highs[i]>6000))return null;
+ const display=regions.map((region,i)=>region+': '+lows[i]+'–'+highs[i]+' m (Washed)').join('; ');
+ return {country:names[0],components:regions.map((region,i)=>({region,elevation_m:lows[i]+'–'+highs[i]+' m',process:'Washed'})),display,
+  review:'This selected coffee blends two regional lots with different elevation ranges. The roaster did not publish one whole-blend elevation; leave Elevation blank and review each regional component.'};
+}

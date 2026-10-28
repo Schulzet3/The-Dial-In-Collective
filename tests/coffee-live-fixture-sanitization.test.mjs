@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sanitizePublicCoffeeJson,sanitizePublicCoffeeFixtureHtml} from '../scripts/audit/coffee-source-fixture-sanitization.mjs';
+import {sanitizePublicCoffeeJson,sanitizePublicCoffeeFixtureHtml,classifyCoffeeSourceFactPath} from '../scripts/audit/coffee-source-fixture-sanitization.mjs';
 import {compactCoffeeProductHtml} from '../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 
@@ -358,4 +358,30 @@ test('independent Product page identities allow only public Product fragments an
  assert.ok(clean(grouped).hasVariant[0].offers.offers[0].checkoutPageURLTemplate);
  delete selectedOffer.url;
  assert.equal(Object.hasOwn(clean(grouped).hasVariant[0].offers.offers[0],'checkoutPageURLTemplate'),false);
+});
+
+
+test('audit sanitization strips precise personal identities but keeps unrelated public coffee evidence',()=>{
+ const input=product();
+ Object.assign(input,{userId:'PRIVATE_USER',account_id:'PRIVATE_ACCOUNT',billingAddress:{city:'PRIVATE_CITY'},
+  shipping_address:{line1:'PRIVATE_STREET'},paymentMethod:{last4:'PRIVATE_CARD'},
+  firstName:'PRIVATE_FIRST',last_name:'PRIVATE_LAST',orderId:'PRIVATE_ORDER'});
+ input.details={user_profile:{address:'PRIVATE_PROFILE'},producerName:'Public Farmer',
+  roastProfile:'Medium',requires_shipping:true};
+ const actual=clean(input),serialized=JSON.stringify(actual);
+ assert.doesNotMatch(serialized,/PRIVATE_/);
+ for(const key of ['userId','account_id','billingAddress','shipping_address',
+  'paymentMethod','firstName','last_name','orderId'])assert.equal(Object.hasOwn(actual,key),false,key);
+ assert.equal(actual.details.producerName,'Public Farmer');
+ assert.equal(actual.details.roastProfile,'Medium');
+ assert.equal(actual.details.requires_shipping,true);
+ assert.equal(actual.offers[0].checkoutPageURLTemplate,input.offers[0].checkoutPageURLTemplate);
+});
+
+test('privacy diagnostic emits fixed classes only, never source paths or values',()=>{
+ assert.equal(classifyCoffeeSourceFactPath('$.offers[0].checkoutPageURLTemplate'),'checkout_template');
+ assert.equal(classifyCoffeeSourceFactPath('$.private.sessionToken.customer.email'),'private_property');
+ assert.equal(classifyCoffeeSourceFactPath('$.billingAddress.line1'),'private_property');
+ assert.equal(classifyCoffeeSourceFactPath('$.product.variants[0].title'),'unclassified');
+ assert.equal(classifyCoffeeSourceFactPath('PRIVATE_LITERAL_UNKNOWN'),'unclassified');
 });

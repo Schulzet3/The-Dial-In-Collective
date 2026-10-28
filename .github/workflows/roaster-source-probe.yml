@@ -12,7 +12,7 @@ permissions:
   contents: read
 jobs:
   unprivileged-public-pages:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]') || contains(github.event.head_commit.message, '[dic-platform-probe]')
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]') || contains(github.event.head_commit.message, '[dic-platform-probe]') || contains(github.event.head_commit.message, '[dic-issue33-source-probe]')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -34,6 +34,9 @@ jobs:
       - name: Check public platform-specific product endpoints without tokens
         if: contains(github.event.head_commit.message, '[dic-platform-probe]')
         run: node scripts/audit/public-product-endpoint-probe.mjs
+      - name: Record Issue33 exact selected current product source provenance without credentials
+        if: contains(github.event.head_commit.message, '[dic-issue33-source-probe]')
+        run: node scripts/audit/issue33-current-selected-source-probe.mjs
   isolated-size-study:
     if: contains(github.event.head_commit.message, '[dic-size-study]')
     runs-on: ubuntu-latest
@@ -47,3 +50,57 @@ jobs:
           node-version: '22'
       - name: Compare bounded HTML parsers in disposable runner temp copies
         run: node --expose-gc scripts/audit/coffee-extractor-2mb-study.mjs
+
+  issue33-all77-direct-current:
+    if: contains(github.event.head_commit.message, '[dic-issue33-77-probe]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Probe all 77 exact official URLs through isolated selected-product parser
+        run: node scripts/audit/issue33-current-all77-source-probe.mjs
+
+  issue33-oversized-products:
+    if: contains(github.event.head_commit.message, '[dic-issue33-oversize-probe]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Retry only two safe oversized selected-product URLs at the preexisting product-only cap
+        run: node scripts/audit/issue33-oversized-source-probe.mjs
+
+  owner77-evidence:
+    if: contains(github.event.head_commit.message, '[dic-issue33-owner77]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Audit all 77 owner decisions against current official page and Add Coffee preview
+        env:
+          DIC_OWNER77_PUBLIC_CAPTURE_DIR: ${{ runner.temp }}/dic33-owner77-public-sources
+        run: node scripts/audit/issue33-owner77-evidence-probe.mjs
+      - name: Retain bounded selected public HTML and 77-row actual parser readback for independent owner decision certification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-owner77-current-public-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-owner77-public-sources/
+          if-no-files-found: error
+          retention-days: 1

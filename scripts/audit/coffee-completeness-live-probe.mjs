@@ -16,6 +16,7 @@ import {fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJso
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {fixtureCoffeeHtml as fixtureHtml,sanitizePublicJson as sanitizeJson} from './coffee-fixture-sanitize.mjs';
+import {classifyCoffeeSourceFactPath} from './coffee-source-fixture-sanitization.mjs';
 
 const SWEET_URL='https://sweetbloomcoffee.com/products/arbey-cordoba-26';
 const ORIGINAL_URL=SWEET_URL+'?srsltid=AYCX9vKHwEAbPcEyS19XuoWD67cGIMJu47B764EfHZK_IkJ7c52nQlGl';
@@ -57,7 +58,12 @@ const targets=[
  {id:'circulor-source-conflict',url:'https://coffeacirculor.com/products/kenya-coffea-circulor-outo-isolated-sl34-aa-washed-wx',
   expected:{origin:/Kenya|Meru/i,process:/^Washed$/i},expected_conflicts:['variety'],
   source_note:'Observed page title/summary says SL34, while Genesis says Ruiru 11. Report current source drift explicitly.'},
- {id:'queen-city-homepage-negative',url:'https://queencitycollectivecoffee.com/',negative:true}
+ {id:'queen-city-homepage-negative',url:'https://queencitycollectivecoffee.com/',negative:true},
+ // Four additional optional, URL-bound original-source probes; not frozen603.
+ {id:'owner-stumptown-nano-challa',url:'https://www.stumptowncoffee.com/products/ethiopia-nano-challa?variant=40006909722792',expected:{name:/Nano Challa/i,tasting_notes:/peach.*citrus.*orange blossom/i},source_note:'Selected tasting notes only; the espresso brew guide is generic and 2010 washing station history is not current process proof.'},
+ {id:'owner-blue-bottle-hayes-valley',url:'https://bluebottlecoffee.com/us/eng/product/hayes-valley-espresso?a_oID=hayes-valley-espresso',expected:{name:/Hayes Valley Espresso/i,roast_level:/^Dark$/i,process:/^Washed$/i,tasting_notes:/Baking Chocolate.*Orange Zest.*Brown Sugar/i},source_note:'Non-Shopify product page; record HTTP/HTML limitations and no invented origin or espresso grams.'},
+ {id:'owner-counter-culture-sipacapa',url:'https://counterculturecoffee.com/collections/coffee/products/sipacapa-1',required:false,expected:{name:/Sipacapa/i,origin:/San Marcos.*Guatemala/i,roast_level:/^Light$/i,process:/^Washed$/i,tasting_notes:/apple.*simple syrup.*cocoa/i,variety:/Caturra.*Bourbon/i,elevation_m:/1,?640.*2,?150/i},source_note:'Exact current selected harvest facts; exclude cart/store menus. Additional OPTIONAL strict diagnostic while public fixture redaction changes source-fact inventory; preserve real parity failure, never claim a pass.'},
+ {id:'owner-peets-linda-vista',url:'https://www.peets.com/products/guatemala-linda-vista',expected:{name:/Guatemala Linda Vista/i,roast_level:/^Dark$/i,tasting_notes:/Dark Chocolate.*Caramel.*Cardamom/i},source_note:'86/100 roast indicator is not an Agtron score; do not use generic menu.'},
 ];
 const argv=process.argv.slice(2);
 let output=path.join(process.env.RUNNER_TEMP||tmpdir(),'dic-coffee-completeness');
@@ -70,7 +76,7 @@ for(let i=0;i<argv.length;i++){
 // This is an opt-in acceptance suite with reviewed source expectations.
 // Every sampled source and the negative control must pass; a changed or
 // unavailable source is reported as a failure, never hidden by a green run.
-const selected=(only?targets.filter(x=>x.id===only):targets).map(target=>({...target,required:true}));
+const selected=(only?targets.filter(x=>x.id===only):targets).map(target=>({...target,required:target.required!==false}));
 if(!selected.length)throw new Error('Unknown target ID; arbitrary external targets are not accepted.');
 await mkdir(output,{recursive:true});
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -174,11 +180,19 @@ async function probe(target){
     }
     // Diagnostics describe structure only. Do not copy values from the
     // pre-redaction output into retained logs, even when source parity fails.
-    record.parity_missing_source_fact_examples=(original?.source_facts||[]).filter(fact=>{
+    const missingFacts=(original?.source_facts||[]).filter(fact=>{
      const tag=factTag(fact),count=afterBag.get(tag)||0;
      if(!count)return true;
      afterBag.set(tag,count-1);return false;
-    }).slice(0,12).map(fact=>({
+    });
+    // Track every removed fact by a fixed structural class. No raw path,
+    // label, value or source JSON is written to public audit artifacts.
+    record.parity_missing_source_fact_classes={private_property:0,checkout_template:0,unclassified:0};
+    for(const fact of missingFacts){
+     const kind=classifyCoffeeSourceFactPath(fact.source_path);
+     record.parity_missing_source_fact_classes[kind]++;
+    }
+    record.parity_missing_source_fact_examples=missingFacts.slice(0,12).map(fact=>({
      field:fact.field||null,source_type:fact.source_type||null,
      property_keys:Object.keys(fact).sort(),value_type:typeof fact.value,
      value_utf8_bytes:Buffer.byteLength(String(fact.value??''))
@@ -277,6 +291,7 @@ for(let index=0;index<selected.length;index+=2){
    parity_conflicts_original:item.parity_conflicts_original,parity_conflicts_replay:item.parity_conflicts_replay,
    parity_source_fact_counts:item.parity_source_fact_counts,
    parity_missing_source_fact_examples:item.parity_missing_source_fact_examples,
+   parity_missing_source_fact_classes:item.parity_missing_source_fact_classes,
    parity_changed_product_attributes:item.parity_changed_product_attributes,
    parity_offer_key_differences:item.parity_offer_key_differences
   }));

@@ -111,3 +111,120 @@ test('untrusted graphic markup remains escaped in preview',()=>{
  assert.doesNotMatch(markup,/<script>/);
  assert.equal(r.fields.roast_level,undefined);
 });
+
+test('Full City explicit labels map to Medium-Dark, not compound unrelated labels',()=>{
+ for(const label of ['Full City','Full-City','Full City Roast','Roast: Full City','ROAST LEVEL: full city'])
+  assert.equal(normalizeRoastLabel(label),'Medium-Dark',label);
+ for(const label of ['Full City +','Full City Dark','Full City Blend','City','City+','Vienna Roast'])
+  assert.equal(normalizeRoastLabel(label),null,label);
+});
+test('Ahrres African Blend selected COFFEE DETAILS Full City is Medium-Dark',()=>{
+ const r=extractPublicCoffeeFacts('<html><body><main><section class="selected-product">'+
+  '<h2>COFFEE DETAILS</h2><h6>FLAVOR NOTES</h6><p>Floral, Fruity, Berry</p>'+
+  '<h6>REGION</h6><p>Africa</p><h6>ROAST</h6><p>Full City</p>'+
+  '<h1>AFRICAN BLEND</h1><p>The African Blend is medium to full-bodied.</p>'+
+  '</section></main></body></html>',{source_url:'https://www.ahrre.com/products/african-blend'});
+ assert.equal(r.ok,true);assert.equal(r.fields.roast_level,'Medium-Dark');
+ assert.equal(r.roast_source,'selected_product_roast_detail');
+});
+test('Ahrres Tanzanian Peaberry is read from its exact current /products/test identity',()=>{
+ const r=extractPublicCoffeeFacts('<html><body><main><section class="selected-product">'+
+  '<h2>COFFEE DETAILS</h2><h6>FLAVOR NOTES</h6><p>Floral, Fruity, Berry</p>'+
+  '<h6>REGION</h6><p>Africa</p><h6>ROAST</h6><p>Full City</p>'+
+  '<h1>TANZANIAN PEABERRY</h1><p>Wet-processed beans grown in Tanzania.</p>'+
+  '</section></main></body></html>',{source_url:'https://www.ahrre.com/products/test'});
+ assert.equal(r.ok,true);assert.equal(r.fields.roast_level,'Medium-Dark');
+ assert.equal(r.roast_source,'selected_product_roast_detail');
+});
+test('a coffee name, educational prose or related Full City cannot donate selected roast',()=>{
+ for(const detail of [
+  '<h1>Full City</h1><p>A named coffee without a roast level.</p>',
+  '<h1>African Blend</h1><p>Full City is traditionally a roast classification.</p>',
+  '<h1>African Blend</h1><h2>Roast guide</h2><h6>ROAST</h6><p>Full City</p>',
+  '<h1>African Blend</h1><h2>More coffees</h2><a href="/products/full-city"><h6>ROAST</h6><p>Full City</p></a>'
+ ]){
+  const r=asPreview(detail);
+  assert.equal(r.fields?.roast_level,undefined,detail);
+ }
+});
+test('exact selected Full City roast wins over contradictory SEO-only meta roast',()=>{
+ const r=extractPublicCoffeeFacts('<html><head><meta name="product:roast_level" content="Dark"></head>'+
+  '<body><main><section><h2>COFFEE DETAILS</h2><h6>ROAST</h6><p>Full City</p><h1>AFRICAN BLEND</h1></section></main></body></html>',
+  {source_url:'https://www.ahrre.com/products/african-blend'});
+ assert.equal(r.fields.roast_level,'Medium-Dark');
+ assert.ok(!r.conflicts?.includes('roast_level'));
+ assert.ok(!r.seo_fallback_fields?.includes('roast_level'));
+});
+
+test('White is a distinct roaster roast class and never silently a seven-tier roast',()=>{
+ for(const value of ['White','White Roast','White Coffee','Roast: White','Roast Level: White'])
+  assert.equal(normalizeRoastLabel(value),null,value);
+ const r=asPreview('<div data-roast-level="White"></div>');
+ assert.equal(r.fields?.roast_level,undefined);
+ assert.match(r.roast_hint,/white.*choose.*manually/i);
+});
+test('Alaska Artisan selected White Coffee product flags manual roast selection',()=>{
+ const html='<html><body><main><h1>White Coffee</h1>'+
+  '<h3>What is White Coffee?</h3><p>These beans roast at lower temperature to a light tan color.</p>'+
+  '<h3>Espresso Method</h3><p>Grounds swell before extraction.</p>'+
+  '</main></body></html>';
+ const r=extractPublicCoffeeFacts(html,{source_url:'https://www.alaskaartisancoffee.com/products/white-coffee'});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields?.roast_level,undefined);
+ assert.match(r.roast_hint,/white coffee.*choose.*manually/i);
+ const markup=coffeeUrlPreviewMarkup(r);
+ assert.match(markup,/White Coffee/);
+ assert.match(markup,/choose.*manually/i);
+});
+test('White roast review does not infer a category from product names or general prose',()=>{
+ for(const fragment of [
+  '<h1>Sunrise Blend</h1><p>Our guide explains White Coffee as a roasting tradition.</p>',
+  '<h1>Snow White Blend</h1><p>Nutty, floral light tan beans.</p>',
+  '<h1>Sunrise Blend</h1><h2>Our related products</h2><a href="/products/white-coffee">White Coffee</a>'
+ ]){
+  const r=asPreview(fragment);
+  assert.equal(r.fields?.roast_level,undefined,fragment);
+  assert.ok(!/White is outside|White Coffee.*choose/i.test(r.roast_hint||''),fragment);
+ }
+});
+test('a separately explicit selected seven-tier roast is respected even for White Coffee title',()=>{
+ const r=extractPublicCoffeeFacts('<main><h1>White Coffee</h1><figure data-roast-level="Very Light"></figure></main>',
+  {source_url:'https://www.alaskaartisancoffee.com/products/white-coffee'});
+ assert.equal(r.fields?.roast_level,'Very Light');
+});
+
+
+test('Bald Guy Brew Medium/Medium Dark is not one canonical roast, and is flagged for human choice',()=>{
+ for(const label of ['Medium/Medium Dark','Medium / Medium Dark','Roast: Medium/Medium Dark','Roast Level: Medium/Medium Dark'])
+  assert.equal(normalizeRoastLabel(label),null,label);
+ const html='<html><body><main><h1>Organic Colombian Coffee</h1>'+
+  '<p>Colombian Coffee Overview: Fragrance of tangerine peel with a hint of cinnamon.</p>'+
+  '<p>Roast: Medium/Medium Dark</p>'+
+  '<p>Lot: Single Origin</p></main></body></html>';
+ const r=extractPublicCoffeeFacts(html,{source_url:'https://baldguybrew.com/products/organic-colombian-coffee'});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields?.roast_level,undefined);
+ assert.match(r.roast_hint,/Medium\/Medium Dark/);
+ assert.match(r.roast_hint,/Choose Medium or Medium-Dark manually/);
+ const preview=coffeeUrlPreviewMarkup(r);
+ assert.match(preview,/Medium or Medium-Dark manually/);
+});
+test('ambiguous neighboring tiers cannot contaminate an unrelated selected product',()=>{
+ for(const value of [
+  '<h1>Other Coffee</h1><p>In general coffees may be Medium/Medium Dark.</p>',
+  '<h1>Other Coffee</h1><h2>Our roast guide</h2><p>Medium/Medium Dark</p>',
+  '<h1>Other Coffee</h1><h2>Related products</h2><p>Roast: Medium/Medium Dark</p>'
+ ]){
+  const r=extractPublicCoffeeFacts('<html><body><main>'+value+'</main></body></html>',
+   {source_url:'https://roaster.examplecoffee.com/products/other-coffee'});
+  assert.equal(r.fields?.roast_level,undefined,value);
+  assert.ok(!/Choose Medium or Medium-Dark manually/.test(r.roast_hint||''),value);
+ }
+});
+test('a distinct explicit supported roast still parses; freeform tier ranges stay blank',()=>{
+ const chosen=asPreview('<p>Roast: Medium-Dark</p>');
+ assert.equal(chosen.fields?.roast_level,'Medium-Dark');
+ const ambiguous=asPreview('<p>Roast: Medium/Medium Dark</p>');
+ assert.equal(ambiguous.fields?.roast_level,undefined);
+ assert.match(ambiguous.roast_hint,/Choose Medium or Medium-Dark manually/);
+});
