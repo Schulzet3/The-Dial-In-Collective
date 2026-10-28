@@ -1,3 +1,4 @@
+// This tracked no-op comment intentionally triggers the authenticated-free current77 source probe on merged PR218 tree (no production writes).
 // Owner-reviewed 77 independent current official product fact audit.
 // This probe does not authenticate, mutate production or approve a missing fact.
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';

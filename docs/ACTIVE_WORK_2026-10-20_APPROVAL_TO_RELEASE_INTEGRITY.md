@@ -1,3 +1,9 @@
+## October 28 UTC — PR218 merged and source-bound public77 recheck initiated (NO DEPLOY)
+
+PR218 source `d9adff35b2c8e0e006d0abf1c77a8c3fb5b2451f` merged non-force at `b4ed955a7ddcf05a06bd83e3d99b46e57777a823`, with first parent `b4e883d3` and reviewed/tested second parent `d9adff35`. Exact PR-head GitHub CI SUCCESS: app full Node/build 40781751339; cloud/mobile 40781751460; visual 40781751546; isolated SQL 40781751493; security 40781751477; approval 40781751433; private source bundle 40781751492. Restricted original603 40781751390 SKIPPED. Trigger fresh no-login 77 current official roaster-page + actual Add Coffee/source review probe with `[dic-issue33-owner77]` marker and only a script comment, no parser/runtime edits. Scope: validate current #13 Gold Collection exact-product recovery and no 77 regression; README/queue READY pending independent result. No deployment, member, SQL, Auth, offline, oracle changes.
+
+---
+
 ## October 28 UTC — Issue #33 selected Bonjo quality-tier repair candidate (NO DEPLOY)
 
 Owner-authorized continued source accuracy work. Source at https://bonjocoffee.com/products/guatemala-finca-el-rincon-copy currently names Costa Rica El Poeta and prints `Quality Grade: Gold Collection` with a separate `we selected El Poeta for this tier` statement. Prior live77 audit #13 shows release_label blank. Existing extractor only recognizes `<strong>` directly adjoining the value and requires the subsequent story to have no punctuation, so a published selected grade may be missed. Candidate uses bounded selected-product visible text, literal named grade and explicit same-coffee tier attribution with negative guards. Added parser + adversarial tests. **TESTING, NOT READY pending exact-source CI and safe integration.** No original603 archive/oracle, SQL/Auth, member data or production changes.
