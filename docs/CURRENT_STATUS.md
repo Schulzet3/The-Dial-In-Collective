@@ -1,3 +1,9 @@
+## October28 — all24 READY items audited; decafSQL applied, website publication pending
+
+Owner explicitly requested full queue audit then publish. PR219 merged506b267, full1913 NodePASS/0FAIL/6 intentionalSKIP, lint/build, isolatedSQL/negative permissions, mobile/browser/PWA and five exact merged-source release checksPASS. Strict queue coverage24READY/24deployable paths/no errors. Reconciled concurrent PR218 and PR217 without overwriting data/source; caught/fixed old-client pending decaf correction data-loss defect with dedicated rollback-only SQL acceptance. Fresh encrypted/offsite backup byte-matched. Decaf providerSQL20261028230056 applied and6 existing data table digests/counts unchanged. JWT Edge8/4 unchanged. ReleaseDIC-20261028-READY-QUEUE-08 source506b267204cd19d7b1f13c511e437186b8d92bb9 one-use grant recorded; actual website remains prior Netlify6ae0fc16 until provider publication receipt. BroaderIssue33 residualIN_PROGRESS and retired history excluded.
+
+---
+
 ## October 28 UTC — Issue #22 independently read back CLOSED; source READY, NOT DEPLOYED
 
 GitHub Issue #22 CLOSED completed at 2026-10-28 22:54:58 UTC after exact-source PR217 merge 45ae4561205c0527e8dcf67d0ec65b06f1724616 (byte-identical tested tree). All six scenario suites, real temporary localhost SW upgrade + offline queue persistence, disposable signed-JWT/PostgREST, full Node/lint/build (1913 pass, zero fail, six known skips), cloud/mobile/visual/security/approval passed. PR-head runs 40782759803/59651/59711/59633/59664/59668 and merged-source app/build40783051945, cloud/mobile40783051989, visual40783051941, approval40783052022 SUCCESS. Initial docs queue classification failure was repaired; docs approval40783464213 PASS. Release queue DIC-Q-22-offline-denial-reload-protection READY, zero blockers. Verified Netlify remains the previous current deploy 6ae0fc16178b2f1241e441f8. No production writes, migrations, release, or new real-device test.
