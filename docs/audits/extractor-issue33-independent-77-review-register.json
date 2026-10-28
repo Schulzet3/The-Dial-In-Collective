@@ -1081,20 +1081,35 @@
       "owner_authority": "PRIOR_CHAT_REVIEW_NOTE",
       "owner_review_status": "CONVERSATIONAL_REVIEW_ONLY",
       "current_official_source": {
-        "status": "PENDING_INDEPENDENT_CURRENT_RECHECK",
-        "checked": null,
-        "method": null
+        "status": "DIRECT_LIVE_SELECTED_ORIGIN_ACCEPTED",
+        "checked": "2026-10-28",
+        "method": "GitHub no-credential DNS-pinned bounded direct official HTML parser, 40719153801",
+        "finding": "The exact selected current roaster HTML explicitly lists Location Cayambe-Coca Natural Reserve, Ecuador; a second Region copy says Natura Reserve and broad Origin says Ecuador. Current merged parser resolves only the compatible same-reserve spelling and preserves direct producer Leopoldo Andrade / Ligia Merizalde.",
+        "url": "https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume",
+        "html_sha256": "337b62a1ea2de9683fd8e30c0f0626b983255fc90ae8494f6d130a6072d73ac1"
       },
-      "implementation_status": "NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE",
+      "implementation_status": "MERGED_PR203_LIVE_VERIFIED",
       "tests": {
-        "focused": "NOT_RUN_FOR_THIS_CASE",
-        "original603": "NOT_RUN_ON_NEW_SOURCE",
-        "built_app": "NOT_RUN_FOR_THIS_CASE"
+        "focused": "PASS: selected reserve spelling, strict country conflict negative, explicit producer; PR203 exact-head all 7 applicable CI PASS.",
+        "original603": "PENDING: frozen603 protected historical workflow SKIPPED on current source; latest earlier PR190 independent 603/603 baseline not a pass for current changed parser.",
+        "built_app": "PASS: actual current source through Add Coffee preview in 77 public probe, all 77 preview visibility checks and exact source app/cloud/mobile/visual CI; NOT genuine signed-in persistent application/database acceptance."
       },
-      "merged_sha": null,
-      "release_status": "NOT_READY_AS_INDIVIDUAL_CASE",
-      "blocking_evidence": "Exact current product provenance and exact-source implementation/acceptance not yet verified",
+      "merged_sha": "986c48e8ad629dcdee31cbacc5f90139e1669d2c",
+      "release_status": "TESTING_FROZEN603_EXACT_SOURCE_PENDING",
+      "blocking_evidence": "Targeted live current page and Add Coffee previews verified; changed-source immutable original603 regression plus genuine auth/database E2E not performed; parent Issue33 remains open.",
       "latest_direct_public_probe": {
+        "run": 40719153801,
+        "job": 122924969608,
+        "observed_at_utc": "2026-10-28",
+        "source_status": "PARSED",
+        "html_sha256": "337b62a1ea2de9683fd8e30c0f0626b983255fc90ae8494f6d130a6072d73ac1",
+        "current_selected_name": "La Josefina Sudán Rumé / Natural Extended Fermentation",
+        "parser_conflict_fields": [],
+        "source_receipt": "docs/audits/issue33-27-72-merged-live-acceptance-20261028.json",
+        "individual_acceptance": false,
+        "targeted_live_acceptance": true
+      },
+      "previous_direct_public_probe": {
         "run": 40639632214,
         "observed_at_utc": "2026-10-28T05:43:58.851Z",
         "source_status": "PARSED",
@@ -2912,23 +2927,35 @@
       "owner_authority": "OWNER_APPROVED_FROM_REVERSE_HANDOFF",
       "owner_review_status": "OWNER_DECISION_RECORDED_IN_HANDOFF",
       "current_official_source": {
-        "status": "DIRECT_LIVE_SELECTED_FIELDS_CONFIRMED_NO_PROFILE_PRODUCER_CONTAMINATION",
-        "checked": "2026-10-28T05:34:20Z",
-        "finding": "Current exact Horizon Organic page: Medium, Fruity/Toasted Cereal/Chocolate, Guatemala/Nicaragua, Huehuetenango(GT)/Matagalpa(NI), Washed, Caturra/Pache Verde, 1750masl; ACODIHUE is Guatemalan coffee community only. Unrelated Marta Solares biography later on page must not be confused with selected coffee. NEW INDEPENDENT DIRECT LIVE SOURCE: selected Horizon Organic full official HTML parsed Medium, Washed, listed mixed regions/varieties/elevation/tasting notes; unrelated 'Meet Marta Solares' profile PRESENT but parser did not attribute producer La Esperanza (producer left blank). ACODIHUE component relationship still needs verified built-app representation; a prior synthetic source contamination edge case remains under investigation.",
+        "status": "DIRECT_LIVE_GUATEMALA_COMPONENT_CREDIT_ACCEPTED",
+        "checked": "2026-10-28",
+        "finding": "Current selected Horizon Organic coffee explicitly lists two country components Guatemala/Nicaragua. Guatemalan Huehuetenango component names producing community ACODIHUE, but no Nicaraguan producer is published. Distinct downstream Marta Solares / Farm La Esperanza profile remains unrelated to current coffee and canonical whole-blend Producer must stay blank.",
         "url": "https://thrivefarmers.com/products/horizon-organic",
-        "method": "LIVE_GITHUB_DNS_PINNED_OFFICIAL_HTML_40638754513",
-        "html_sha256": "b9ae99de581921ae84d4fd094c901ded244ab41a2e8348cf265af6762e506485"
+        "method": "GitHub no-credential DNS-pinned bounded direct official HTML parser, 40719153801",
+        "html_sha256": "bb99d684af7044f69b232e881ee304ee67e09bb56ddc3bd804cbd2c0b540b08c"
       },
-      "implementation_status": "NOT_VERIFIED_FOR_INDIVIDUAL_COFFEE",
+      "implementation_status": "MERGED_PR204_LIVE_VERIFIED",
       "tests": {
-        "focused": "NOT_RUN_FOR_THIS_CASE",
-        "original603": "NOT_RUN_ON_NEW_SOURCE",
-        "built_app": "NOT_RUN_FOR_THIS_CASE"
+        "focused": "PASS: 6 targeted source/UI/privacy negatives plus full current official page; PR204 corrected head seven applicable CI PASS.",
+        "original603": "PENDING: frozen603 protected historical workflow SKIPPED on current source; latest earlier PR190 independent 603/603 baseline not a pass for current changed parser.",
+        "built_app": "PASS: actual current source through Add Coffee preview in 77 public probe, all 77 preview visibility checks and exact source app/cloud/mobile/visual CI; NOT genuine signed-in persistent application/database acceptance."
       },
-      "merged_sha": null,
-      "release_status": "NOT_READY_AS_INDIVIDUAL_CASE",
-      "blocking_evidence": "Current live HTML selected fields match owner approved data without La Esperanza contamination; must independently regression-test the synthetic off-product profile edge case and component-specific ACODIHUE representation in the built app, plus real authenticated save. Do not assign La Esperanza.",
+      "merged_sha": "7283049dfdb70f37911502a8f915916acb5f4a86",
+      "release_status": "TESTING_FROZEN603_EXACT_SOURCE_PENDING",
+      "blocking_evidence": "Targeted live current page and Add Coffee previews verified; changed-source immutable original603 regression plus genuine auth/database E2E not performed; parent Issue33 remains open.",
       "latest_direct_public_probe": {
+        "run": 40719153801,
+        "job": 122924969608,
+        "observed_at_utc": "2026-10-28",
+        "source_status": "PARSED",
+        "html_sha256": "bb99d684af7044f69b232e881ee304ee67e09bb56ddc3bd804cbd2c0b540b08c",
+        "current_selected_name": "Horizon Organic",
+        "parser_conflict_fields": [],
+        "source_receipt": "docs/audits/issue33-27-72-merged-live-acceptance-20261028.json",
+        "individual_acceptance": false,
+        "targeted_live_acceptance": true
+      },
+      "previous_direct_public_probe": {
         "run": 40639632214,
         "observed_at_utc": "2026-10-28T05:43:58.851Z",
         "source_status": "PARSED",
