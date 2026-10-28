@@ -163,7 +163,7 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  const details={...result.roaster_details};
  if(policy.processCaption&&!details.processing_detail)details.processing_detail=policy.processCaption;
  return {...result,fields,available:Object.keys(fields),source_facts,
-  ...(roast_variants.length>1?{roast_variants}:{}),
+  ...(roast_variants.length>1?{roast_variants,roaster_recipe:undefined}:{}),
   ...(explicitlyRotatingCoffeeOrigin(description)?{origin_confirmation_required:true}:{}),
   ...(Object.keys(details).length?{roaster_details:details}:{}),
   ...(conflicts.size?{conflicts:[...conflicts].sort(),conflict_options}:{conflicts:undefined,conflict_options:undefined}),
@@ -405,6 +405,7 @@ export function mergePublicProductPreview(base,extra){
    'The selected product has an explicitly scaled ground-coffee Agtron measurement.';
  }
  if(extra.roast_variants?.length>1){
+  delete merged.roaster_recipe;
   // There is no current selected roast until the member chooses. Preserve
   // independent contradictory direct facts, but not the two options alone.
   const variantValues=key=>extra.roast_variants.map(v=>v.fields?.[key]).filter(Boolean).map(norm);

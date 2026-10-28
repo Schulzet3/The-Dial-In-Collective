@@ -31,8 +31,8 @@ test('Ketch: parse exactly two purchased roast alternatives, no mixed flavors or
  const [light,dark]=extractSelectedCoffeeRoastVariants({description,options});
  assert.deepEqual([light.id,dark.id],['light','medium-dark']);
  assert.deepEqual([light.fields.roast_level,dark.fields.roast_level],['Light','Medium-Dark']);
- assert.equal(light.fields.tasting_notes,'floral, blackberry');
- assert.equal(dark.fields.tasting_notes,'blackberry, caramelized sugar');
+ assert.equal(light.fields.tasting_notes,'Floral, blackberry');
+ assert.equal(dark.fields.tasting_notes,'Blackberry, caramelized sugar');
  assert.deepEqual(light.sensory,{sweetness:'6',acidity:'3',body:'7',bitterness:'0'});
  assert.deepEqual(dark.sensory,{sweetness:'5-7',acidity:'2',body:'7',bitterness:'0'});
  assert.equal(light.roaster_recipe.ratio,3);
@@ -48,6 +48,7 @@ test('Ketch selected-product endpoint exposes shared facts without picking a roa
  assert.equal(parsed.ok,true);
  assert.equal(parsed.roast_variants.length,2);
  assert.equal(parsed.fields.roast_level,undefined);
+ assert.equal(parsed.roaster_recipe,undefined); // An unchosen roast has no global recipe.
  assert.equal(parsed.fields.tasting_notes,undefined);
  assert.ok(!parsed.conflicts?.includes('roast_level'));
  assert.ok(!parsed.conflicts?.includes('tasting_notes'));
@@ -56,9 +57,10 @@ test('Ketch selected-product endpoint exposes shared facts without picking a roa
  const merged=mergePublicProductPreview({ok:true,source_url:url,fields:{name:parsed.fields.name}},parsed);
  assert.equal(merged.roast_variants.length,2);
  assert.equal(merged.fields.roast_level,undefined);
+ assert.equal(merged.roaster_recipe,undefined);
  const chosen=coffeeRoastVariantPreview(merged,'medium-dark');
  assert.equal(chosen.fields.roast_level,'Medium-Dark');
- assert.equal(chosen.fields.tasting_notes,'blackberry, caramelized sugar');
+ assert.equal(chosen.fields.tasting_notes,'Blackberry, caramelized sugar');
  assert.equal(chosen.fields.variety,'Lempira');
 });
 test('No purchase roast options means no fabricated alternatives from narrative, guides or SEO',()=>{
@@ -79,7 +81,7 @@ test('Add Coffee shows no photos, prompts for selected roast, changes review wit
  assert.match(coffeeUrlPreviewMarkup(dark),/200–202°F/);
  assert.match(coffeeUrlPreviewMarkup(dark),/Selected roast: Medium-dark/);
  assert.doesNotMatch(coffeeUrlPreviewMarkup(dark),/<img\b/i);
- const saved=coffeeSourceReviewSnapshot(dark);
+ const saved=coffeeSourceReviewSnapshot({...dark,source_url:url});
  assert.equal(saved.selected_roast_variant,'medium-dark');
  assert.deepEqual(saved.roast_variants.map(v=>v.id),['light','medium-dark']);
 });

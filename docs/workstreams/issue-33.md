@@ -1,3 +1,9 @@
+## October 28 UTC — Ketch PR179 first exact cloud test failure repaired
+
+**Actual failure:** Cloud job 122577497187 in run 40615682791 on feature SHA f7845290d5bc433f07baee4e090ebacd14ec0966 ran 1,342 tests: 1,341 PASS, 1 FAIL. Ketch source-review snapshot test called the pure parser without the `source_url` the real Netlify preview handler attaches, so snapshot intentionally returned null. The provider endpoint already attaches the validated source URL; repaired only the test fixture to exercise that production-shaped boundary. Additionally removed any global roaster espresso recipe before a roast is selected (light and medium-dark references differ); selected roast still shows exact recipe. Capitalized Ketch tasting note display. New exact-source CI required; no test or publication claims for the new SHA. No frozen oracle, member/private data or provider mutation.
+
+---
+
 ## October 27 UTC — Issue33 roast-specific espresso clause correction
 
 The new parser's first-sentence boundary could stop at a period inside Ketch's `e.g.`, dropping the Light 203–205°F / 1:3 / 18-to-54g espresso facts. Repaired before treating any CI result as acceptance: bounded to the already isolated selected-roast text. Earlier feature CI is exact to prior SHA and cannot validate this follow-up. New source-bound CI/merge/readback required; no production publication.

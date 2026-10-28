@@ -26,7 +26,7 @@ const matchSegment=(text,key)=>{
 function noteOf(sections){
  for(const text of sections){
   const m=text.match(/\b(?:this\s+coffee\s+has|we\s+taste|notes?\s*(?:of|:))\s+([\w\s-]{3,130}?)\s+notes?\b/i);
-  if(m)return m[1].trim().replace(/\s+and\s+/gi,', ').replace(/\s*,\s*/g,', ');
+  if(m){const note=m[1].trim().replace(/\s+and\s+/gi,', ').replace(/\s*,\s*/g,', ');return note[0].toUpperCase()+note.slice(1);}
  }
  return '';
 }
