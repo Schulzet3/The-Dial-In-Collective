@@ -87,7 +87,12 @@ test('current direct source receipt pins exact 3 official product identities wit
  assert.match(cortez.html.fields.name,/ethiopia guji benti neka/i);
  assert.match(cortez.html.fields.origin,/Ethiopia/);
  assert.equal(cortez.html.fields.process,'Washed');
- assert.equal(releaseQueue.items.find(x=>x.pr===189).state,'READY');
+ const cortez=releaseQueue.items.find(x=>x.pr===189);
+ assert.ok(['READY','DEPLOYED'].includes(cortez?.state));
+ if(cortez.state==='DEPLOYED'){
+  assert.match(cortez.deployed_source_sha,/^[a-f0-9]{40}$/);
+  assert.match(cortez.deployed_release_sha,/^[a-f0-9]{40}$/);
+ }
  assert.equal(register.records.filter(x=>x.owner_review_status.startsWith('RESOLVED_')).length,8);
 });
 
@@ -113,7 +118,11 @@ test('source-bound #27 and #72 exact merged public acceptance changed only reque
   const r=releaseQueue.items.find(x=>x.id===id);
   // The historical receipt remains TESTING evidence; later source-bound
   // merged acceptance independently cleared these current queue entries.
-  assert.equal(r.state,'READY');
+  assert.ok(['READY','DEPLOYED'].includes(r.state));
+  if(r.state==='DEPLOYED'){
+   assert.match(r.deployed_source_sha,/^[a-f0-9]{40}$/);
+   assert.match(r.deployed_release_sha,/^[a-f0-9]{40}$/);
+  }
   assert.match(r.merged_source_sha,/^[a-f0-9]{40}$/);
   assert.ok(r.ci_runs?.length>0);assert.deepEqual(r.blockers,[]);
  }

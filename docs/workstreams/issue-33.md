@@ -1,3 +1,9 @@
+## October 28 UTC — PR222 post-Release08 QA receipt test recovery (NO DEPLOY)
+
+Initial PR222 head `186c53cc6837474dcb461e570f3b16ec00a6988e` approval40785515963 failed because parser path lacked queue tracking, repaired by non-force upstream integration commit9017c406 and TESTING queue row. Initial cloud UX40785515845 revealed two preexisting `tests/coffee-issue33-review-register.test.mjs` historical READY assertions for Cortez and #27/#72 after Release08 legitimately moved these queue rows to DEPLOYED. All actual historical selected source digests, selected identities, provenance and CI references remain unchanged; allow READY→DEPLOYED state only if actual deployed source and release SHAs are valid. No source semantics or production writes. Retest PR-head exact Node/cloud/approval, public77 acceptance, integration. This is not publication authorization.
+
+---
+
 ## October 28 UTC — PR222 approval-intake failure diagnosed and repaired before merge (NO DEPLOY)
 
 PR222 initial exact PR-head approval workflow40785515963 returned FAIL solely because the new selected-source parser path lacked a tracked TESTING queue row. Concurrent Release08 postflight merged and marked its previously published24 items DEPLOYED; the correction branch was originally based on the older development head. Reconciled full current upstream development source and all release08 queues/journals into this PR branch via non-force two-parent Git merge, preserving private data and previously published receipts. Added `DIC-Q-33-current-producing-enterprise` as TESTING until complete CI, official77 source proof and later integration; do not claim READY. No new published code/SQL/Edge/Auth or member changes. Rerun exact-source checks on corrected PR head and inspect results.
