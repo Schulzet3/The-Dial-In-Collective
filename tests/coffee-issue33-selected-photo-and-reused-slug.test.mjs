@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {extractShopifyAjaxData,shopifyProductRequest,mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
-import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
+import {coffeeSourceReviewSnapshot,coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
 const blackWhite='https://www.blackwhiteroasters.com/products/r-diego-horta-anaerobic-natural';
 const selected='Diego Horta - Anaerobic Natural';
@@ -106,4 +106,19 @@ test('stale old Beanstock product and explicit current process do not trigger th
   assert.equal(r.fields.process,expect);
   assert.equal(r.process_review_note,undefined);
  }
+});
+
+// Source review must retain qualified FUDAM context after leaving the visible preview.
+test('selected FUDAM qualified source context survives bounded review export without becoming canonical Process',()=>{
+ const url='https://beanstockcoffee.com/products/colombian-supremo-organic';
+ const html='<main><h1>New!! Colombia Fair Trade Organic FUDAM LA Union</h1>'+
+  '<p>FUDAM is an association of growers.</p><p>The coffees are generally washed two or three times before being dried.</p></main>';
+ const result=extractPublicCoffeeFacts(html,{source_url:url});
+ const snapshot=coffeeSourceReviewSnapshot(result,{checkedAt:'2026-10-28T00:00:00.000Z'});
+ assert.equal(result.fields.process,undefined);
+ assert.equal(snapshot.field_suggestions.process,undefined);
+ assert.equal(snapshot.processing_review_note,result.process_review_note);
+ assert.match(snapshot.processing_review_note,/not an explicit processing guarantee for this lot/i);
+ assert.ok(snapshot.published_source_information.some(f=>f.field==='processing_context'&&/generally washed/i.test(f.value)));
+ assert.equal(snapshot.verification,'unverified_public_source_suggestions');
 });
