@@ -1578,9 +1578,12 @@
       ],
       "tests": [
         "Targeted #72 selected-product component-only origin/producer evidence and Add Coffee/source-review export, plus #27 same-reserve/country positive and conflicting-country negative tests.",
-        "Exact-source Node/build, cloud/browser/mobile, security, isolated SQL, approval, current live #27/#72, immutable original603 require readback."
+        "Exact-source Node/build, cloud/browser/mobile, security, isolated SQL, approval, current live #27/#72, immutable original603 require readback.",
+        "Initial PR204 cloud UX 40718142801 failed a single flawed generic negative fixture (valid source included inadvertently). Same-commit fixture corrected; code unchanged. Await exact-head rerun before READY."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40718142801
+      ],
       "blockers": [
         "Exact-head CI and fresh public-source #27/#72 acceptance not yet verified.",
         "Original immutable603 changed-source regression and non-force merge receipt pending."

@@ -51,7 +51,7 @@ test('component association is withheld for single-origin, wrong product identit
  for(const html of [
   page({country:'Guatemala'}),
   page({name:'Other coffee'}),
-  page({body:'This coffee comes from Guatemala. '+chapter}),
+  page({body:'This coffee comes from Guatemala. A roaster education guide discusses ACODIHUE in general, without any selected component credit.'}),
   page({body:'Huehuetenango, Guatemala is home to ACODIHUE. This coffee is locally roasted.'})
  ]){
   const r=extractPublicCoffeeFacts(html,{source_url:url});

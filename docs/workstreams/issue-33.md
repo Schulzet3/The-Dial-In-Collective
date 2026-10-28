@@ -1,3 +1,9 @@
+## October 28 UTC — PR204 first cloud CI negative-fixture correction (same-commit)
+
+First scoped head ed123962c91d38196d20dfcab7e5a35fc84b4d2a: source security 40718142683, approval 40718142820, private source bundle 40718142825 and isolated SQL 40718142739 passed. Cloud UX run 40718142801 failed exactly one new test: a supposedly generic negative fixture included the *same complete valid selected ACODIHUE source evidence*, so the correct parser emitted the component credit. This was a flawed negative fixture, not proof of a parser defect. Replace that example with roaster education context lacking any selected component credit; preserve all positive source checks and no guess at blend-wide Producer. All exact-source CI must rerun before merge. Original603 hosted workflow 40718142624 skipped, not passed.
+
+---
+
 ## October 28 UTC — Owner #27 and #72 scoped implementation staged (CI/merge pending)
 
 Authority: owner explicitly requests fix coffees #27 Great Circle La Josefina Sudan Rume and #72 Thrive Horizon Organic. Development source 6ae7895eadcfc07aeac8661a6974d145af18ed01; Netlify published 6ae0fc16178b2f1241e441f8 from f5f29a02; Supabase ACTIVE_HEALTHY. Concurrent PR202 remains open and untouched.
