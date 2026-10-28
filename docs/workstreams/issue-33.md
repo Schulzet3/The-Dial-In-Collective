@@ -1,3 +1,9 @@
+## October 28 UTC — Ahrre's Full City owner approval, coffee reviews #2/#3
+
+Owner approved Full City as canonical Medium-Dark. Current official Ahrre's African Blend and Tanzanian Peaberry each publish Full City as their selected coffee ROAST. Tanzanian Peaberry is indeed the product title at the unusual /products/test URL. Original benchmark expected Medium-Dark for both. New exact-product parsing and regression tests cover explicit label, negative title/educational/related snippets and conflicting direct roast. Both reviewed cases resolved; proceed to Coffee #4 independently. No fabricated unpublished facts, original603 modifications, production writes or deployment. Concurrent Kona PR #183 already merged SHA a7f77cb; preserve it. Scope TESTING until exact CI and nonforce merge, original corpus branch guard separately unverified.
+
+---
+
 ## October 28 UTC — Kona PR183 merged-source acceptance reconciliation
 
 Verified PR183 merge a7f77cb70e510d51580e2d076d7484281c020be9 retained exact PR-head source tree 369a375343024ec04e71fbc2729efb49c78e756e. Six original PR-head checks passed; postmerge app/Node/lint/build 40623117571 and cloud UX/mobile 40623117565 now independently SUCCESS, as was approval 40623117630. Current Netlify site readback remains READY production deploy 6ae0fc16178b2f1241e441f8 from the previous authorized release, so Kona work NOT DEPLOYED. Mandatory frozen603 40622879836 and postmerge live selected-source checks 40623117569/40623117577 SKIPPED due conditional workflow guards; these are NOT passes. Scoped queue stays TESTING for that evidence gate; no silent promotion to READY. Source-specific Kona regression tests pass. No member data, production settings, SQL, Edge/Auth, paid service or release command executed.

@@ -1,3 +1,9 @@
+## October 28 UTC — Ahrre's Full City → Medium-Dark review (TESTING, NOT DEPLOYED)
+
+Owner-approved Full City normalization is source-implemented with regression tests for exact Ahrre's African Blend and Tanzanian Peaberry product roast labels, including /products/test identity, and negative off-product assertions. Canonical Master Specification, Decision Ledger, approval coverage, review register and release queue synchronized; PR183 prior Kona merge preserved at a7f77cb. No publication, original603 rewrite or member data mutation. New CI pending.
+
+---
+
 ## October 28 UTC — Kona PR183 merged-source acceptance reconciliation
 
 Verified PR183 merge a7f77cb70e510d51580e2d076d7484281c020be9 retained exact PR-head source tree 369a375343024ec04e71fbc2729efb49c78e756e. Six original PR-head checks passed; postmerge app/Node/lint/build 40623117571 and cloud UX/mobile 40623117565 now independently SUCCESS, as was approval 40623117630. Current Netlify site readback remains READY production deploy 6ae0fc16178b2f1241e441f8 from the previous authorized release, so Kona work NOT DEPLOYED. Mandatory frozen603 40622879836 and postmerge live selected-source checks 40623117569/40623117577 SKIPPED due conditional workflow guards; these are NOT passes. Scoped queue stays TESTING for that evidence gate; no silent promotion to READY. Source-specific Kona regression tests pass. No member data, production settings, SQL, Edge/Auth, paid service or release command executed.
