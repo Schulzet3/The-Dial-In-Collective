@@ -1657,5 +1657,26 @@
     "source_test_note": "Documentation-only scope retirement; prior app source inspection found no active screenshot or Claude integration. No new browser, provider or physical device run asserted.",
     "release_queue": "NO_NEW_DEPLOYABLE_ITEM; Issue #18 is closed NOT_PLANNED without adding READY or DEPLOYED entry",
     "no_publication": true
+  },
+  "issue22_offline_regression_acceptance_20261028": {
+    "issue": 22,
+    "status": "READY_SOURCE_ONLY",
+    "pr": 217,
+    "merged_source_sha": "45ae4561205c0527e8dcf67d0ec65b06f1724616",
+    "tested_pr_head": "cfbe886a9ce1b526cccb91897d776eff36915295",
+    "identical_tree_sha": "e43640c9f6aa3a767f43a407f2735fa1a0b3fd9d",
+    "owner_authorization": "Owner instructed complete tests 1–6, fix and close on sufficient automated evidence.",
+    "acceptance": "Node/browser/SQL/signed-HMAC PostgREST source QA for stale concurrent edits, offline conflicts, cross-account isolation, auth expiry, cache/PWA transition, lost response and revoked-cache cleanup failure.",
+    "workflow_runs": [
+      40782759803,
+      40782759651,
+      40782759711,
+      40782759633,
+      40782759664,
+      40782759668
+    ],
+    "source_vs_live": "Synthetic tests and disposable local signed-JWT database; genuine former Issue21 iPhone one-shot accepted. No newly performed real-device or production-member test claimed.",
+    "release_queue_id": "DIC-Q-22-offline-denial-reload-protection",
+    "no_production_publication": true
   }
 }
