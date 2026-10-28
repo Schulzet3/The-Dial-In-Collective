@@ -93,3 +93,14 @@ test('conflicting current HTML and current Shopify product detail remains unreso
  assert.equal(merged.fields.process,undefined);
  assert.ok(merged.conflicts?.includes('process'));
 });
+
+test('current same-URL SEO-derived series is an explicitly unverified last resort',()=>{
+ const html=source({ogDescription:'This Bean Lab Exceptional Series coffee is a current selected release.',
+  seoName:'Selected Current Coffee | Bean Lab Exceptional Series'})
+  .replace('<meta property="og:title"','<title>Selected Current Coffee | Bean Lab Exceptional Series</title><meta property="og:title"')
+  .replace('<meta property="og:description"','<meta property="og:site_name" content="Bean Lab"><meta property="og:description"');
+ const result=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(result.fields.release_label,'Exceptional Series');
+ assert.ok(result.seo_fallback_fields?.includes('release_label'));
+ assert.ok(!result.conflicts?.includes('release_label'));
+});

@@ -1271,7 +1271,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   seoTitle:clean((html.match(/<title\b[^<>]{0,2000}>([\s\S]{1,500}?)<\/title>/i)||[])[1]||'',500),
   seoDescription:matchedDescriptions[0]||'',
   seoPublisher:clean((html.match(/<meta\s+[^>]{0,800}property=["']og:site_name["'][^>]{0,800}content=["']([^"']{2,120})["']/i)||[])[1]||'',120)}))
-  if(!fields[fact.field]&&!conflicts.has(fact.field))addField(fields,fact.field,fact.value);
+  if(!fields[fact.field]&&!conflicts.has(fact.field)){
+   // This helper contains both genuinely visible selected-product details and
+   // metadata-assisted candidates. Its SEO/OG/story-based candidates must
+   // never enter as equal-ranking direct facts or create false conflicts.
+   const metadataOnly=/^(?:selected_product_(?:seo_|og_publisher_|correlated_|public_cup_notes_|woocommerce_category_and_description))/.test(fact.role||'');
+   if(metadataOnly){
+    // The SEO helper already establishes selected title/brand/description
+    // corroboration. Do not demand exact title equality again: a publisher's
+    // current SEO title may name an individual while the Product names a
+    // producing family. The selected URL must still match, and old-country
+    // / other-coffee drift cannot supply a different current product fact.
+    const fallbackStory=matchedDescriptions[0]||'';
+    if(descriptionIdentity&&samePage(descriptionIdentity,source_url)&&
+     !coffeeDescriptionCountryMismatch(fallbackStory,{name:fields.name,origin:fields.origin})&&
+     !coffeeDescriptionNamedCoffeeMismatch(fallbackStory,{name:fields.name,origin:fields.origin}))
+     addSeoFallbackField(fields,fact.field,fact.value);
+   }else addField(fields,fact.field,fact.value);
+  }
  // Source-backed storefront layouts beyond JSON-LD: metrics, localized
  // labels, reversed Onyx captions, honest extra facts and product notes.
  const roaster_details=extractLayoutEvidence(canonicalProduct,{
