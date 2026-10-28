@@ -1318,7 +1318,7 @@
     }
   },
   "EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027": {
-    "status": "IMPLEMENTED_PENDING_EXACT_SOURCE_TEST_AND_MERGE",
+    "status": "MERGED_TESTING_ORIGINAL603_AND_LIVE_PRODUCT_UNVERIFIED",
     "owner_source": "Owner direct approval October 27, 2026, exact Cortez question",
     "canonical_master": "docs/MASTER_SPECIFICATION.md",
     "canonical_ledger": "docs/DECISION_LEDGER.json",
@@ -1326,10 +1326,18 @@
       "src/server/coffee-shopify-ajax.mjs"
     ],
     "tests": [
-      "New src/server Shopify current exact-product/Cortez fixture regression in tests/coffee-cortez-reused-product.test.mjs; pending CI",
-      "Original immutable 603-coffee exact handler replay has not run; web indexed current page is not direct Shopify Product JSON readback"
+      "PR189 exact head 6f81af9 passes six applicable workflows: 40629362551, 40629362565, 40629362567, 40629362576, 40629362581, 40629362577; merged-source 40b271ada app/cloud/approval success 40629575873, 40629575863, 40629576034.",
+      "Original frozen603 workflow 40629362624 SKIPPED; exact current source original-corpus replay not run; source and recovery archive hashes locally verified, not scored.",
+      "Cortez exact live Shopify .js endpoint inaccessible; historic indexed El Salvador/Papua New Guinea/Ethiopia snapshots are never promoted to current facts."
     ],
-    "release_authority": "NOT GRANTED"
+    "release_authority": "NOT GRANTED",
+    "verified_source": {
+      "pr": 189,
+      "head_sha": "6f81af9e5878b975258323163b7379111dc51f35",
+      "merge_sha": "40b271adabcb8c71354c1272ea7227e6df3d3c88",
+      "tree_sha": "a196549de4dea23a8c0d20ce70daa13fbba5a201",
+      "status": "TESTING_NOT_READY_NOT_DEPLOYED"
+    }
   },
   "EXTRACTOR-FULL-CITY-MEDIUM-DARK-20261027": {
     "status": "MERGED_TESTING_ORIGINAL603_UNVERIFIED",

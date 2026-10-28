@@ -1315,25 +1315,35 @@
     {
       "id": "DIC-Q-33-cortez-reused-product-current-spec",
       "issue": 33,
-      "pr": null,
+      "pr": 189,
       "title": "Quarantine stale old-coffee narrative on reused Shopify product handles",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "40b271adabcb8c71354c1272ea7227e6df3d3c88",
       "scope_paths": [
         "src/server/coffee-shopify-ajax.mjs"
       ],
       "tests": [
-        "Previous PR186 head 753def1 failed two actual CI tests; both repaired at c0012c8. Rebased full CI on new branch is required before readiness.",
-        "Frozen original603 and live exact Cortez Shopify Product JSON remain unverified; do not claim skipped private workflow passed."
+        "PR189 exact tested head 6f81af9e5878b975258323163b7379111dc51f35: full Node/lint/build 40629362551, cloud/mobile 40629362565, private browser/visual/offline 40629362567, isolated SQL 40629362576, source security 40629362581, approval/continuity 40629362577 all SUCCESS.",
+        "Non-force merge 40b271adabcb8c71354c1272ea7227e6df3d3c88 preserved identical fully tested source tree a196549de4dea23a8c0d20ce70daa13fbba5a201. Exact merged app/build 40629575873, cloud/mobile 40629575863 and approval/continuity 40629576034 all SUCCESS.",
+        "Original frozen603 40629362624 SKIPPED by historical branch guard; optional postmerge live public acceptance 40629575869 and controlled probe 40629575899 SKIPPED. Two original archived inputs recovered and locally hash-verified but no current-source 603 replay claimed."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40629362551,
+        40629362565,
+        40629362567,
+        40629362576,
+        40629362581,
+        40629362577,
+        40629575873,
+        40629575863,
+        40629576034
+      ],
       "blockers": [
-        "Exact-source rebased tests and safe integration not yet verified.",
-        "Original frozen603 restricted archive replay unavailable, workflow hard-guarded to historical candidate12 branch.",
-        "Current actual Cortez Shopify Product JSON remains unverified, differing search index snapshots are not current facts."
+        "Original immutable 603-coffee exact current-source replay not executed: runner restricted to candidate12 branch and private ephemeral transfer. Recovered original archives verified SHA256 but cannot equate that to source-bound acceptance.",
+        "Actual current live Cortez Shopify Product .js endpoint not independently fetched; dated search-cache snapshots disagree and are not authoritative."
       ],
       "owner_source": "Owner direct approval October 27, 2026; EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027",
-      "notes": "No publication or production/backend/member-data changes. Source-only TESTING. Preserve original immutable corpus and existing READY items."
+      "notes": "Source implementation/ordinary CI and nonforce merge VERIFIED, but frozen603 and direct live selected source acceptance unverified: TESTING, NOT READY/NOT DEPLOYED. No member records, production SQL, release branch or Netlify publication changed. Original captures/oracle/scorer intact."
     }
   ],
   "history": [
