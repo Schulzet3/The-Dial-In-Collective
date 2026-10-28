@@ -20,3 +20,13 @@ Exact-source 7e85020749 Node/cloud checks failed because a newly authored test-o
 
 ## 2026-10-26 — offline badge clarity with no queue mutation
 Found a source bug: `init` only listened for `online`; after a mid-session connection loss the Coffees header could continue displaying a stale green `Synced` badge and offering Community/Add Coffee actions that cannot work offline. The new `offline` event updates visible status without touching an open Log Shot dialog, preserves cached personal coffees and all owner-bound queued shots/receipts, hides online-only discovery and shows `Offline` (plus pending count when needed). Reconnect uses existing admission recheck to restore accurate sync state. Added real Chromium connection toggle/regression at 390px; no Auth bypass, prior five-scale validations, or server/SQL/source changes. Scoped paths unchanged (site/cloud/main.js and site/lib/ui.js); queue row request remains the same, tests require fresh CI.
+
+# Issue #26 — Accessibility and responsive UI regression
+
+## October 28 — owner authorized remaining tests (no publication)
+
+Owner instructed completion of keyboard/focus/dialog/error, touch targets, orientation/safe areas, reduced-motion, contrast within Locked palette, empty/pending/offline states and fastest Log Shot -> Rate -> Recommendation automated tests. Do not mistake synthetic Chromium for native VoiceOver/device certification, do not alter approved palette or remove shots/history.
+
+**Source inspection:** Existing PR136 rating-focus and offline indicator fixes already merged and deployed; retained. Existing responsive shot-history #78 deployed. Identified unverified keyboard continuity after `CloudApp.render()` replaces the root on search-toggle and coffee expansion. New isolated Chromium acceptance `tests/browser/issue26_accessibility_qa.py` checks this plus native modal Tab/Shift+Tab, invalid fields, five explicit Space selections, physical size, light/dark contrast tokens, reduced motion, portrait/landscape and end-to-end one-shot recommendation. This test uses a fully synthetic owner/backend and actual application JS and CSS; it does not call live Supabase or Netlify. Native VoiceOver, hardware safe-area behavior and owner physical-device sessions remain unperformed and must not be called PASS.
+
+**Status:** TESTING. First run designed to expose lost keyboard focus; when reproduced, repair only targeted accessible focus recovery, add matching Node/browser guards, then independently verify exact-source CI/merge and reconcile release queue. No publish.
