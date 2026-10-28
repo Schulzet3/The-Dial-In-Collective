@@ -1540,22 +1540,29 @@
       "pr": 203,
       "title": "Reconcile selected current reserve location and compatible country/region labels without fuzzy matching",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "986c48e8ad629dcdee31cbacc5f90139e1669d2c",
       "scope_paths": [
         "src/server/coffee-fact-compatibility.mjs"
       ],
       "tests": [
-        "Focused Great Circle #27 selected-product positive and conflicting-country/different-place negative tests in tests/coffee-issue33-selected-fact-compatibility.test.mjs."
+        "Focused Great Circle #27 selected-product positive and conflicting-country/different-place negative tests in tests/coffee-issue33-selected-fact-compatibility.test.mjs.",
+        "PR203 corrected exact-head 6739285: approval 40714042578, source security 40714042643, isolated SQL 40714042783, cloud UX 40714042566, app/Node/build 40714042857, visual 40714042794 and private source bundle 40714042655 all SUCCESS. Historical original frozen603 40714042606 SKIPPED and not a passing source replay."
       ],
       "ci_runs": [
-        40713629744
+        40714042578,
+        40714042643,
+        40714042783,
+        40714042566,
+        40714042857,
+        40714042794,
+        40714042655
       ],
       "blockers": [
-        "Initial exact-head approval CI failed because this scope was not registered in the release queue; added scoped TESTING intake here and require fresh CI readback.",
-        "Exact-source CI, changed-source original immutable 603 comparison, current 77 source parity, non-force merge and release queue proof still pending."
+        "Immutable original603 on exact new parser source not re-scored; candidate12-protected workflow SKIPPED, so this scoped change cannot be certified READY.",
+        "Real current 77-page owner-decision parity and genuine member auth/database E2E still require independent evidence for parent Issue33. Postmerge exact source CI pending."
       ],
       "owner_source": "Issue #33 owner-approved Great Circle #27 selected current Location Cayambe-Coca Natural Reserve, Ecuador versus second Region Cayambe-Coca Natura Reserve.",
-      "notes": "This is only a literal same-reserve one-letter omission comparator, not geographic inference or blanket fuzzy matching. Preserve source facts. PR #202 developed concurrently; keep separate. No publication, schema mutation or member-data modification."
+      "notes": "This is only a literal same-reserve one-letter omission comparator, not geographic inference or blanket fuzzy matching. Preserve source facts. PR #202 developed concurrently; keep separate. No publication, schema mutation or member-data modification. PR203 non-force merged at 986c48e8ad629dcdee31cbacc5f90139e1669d2c after all applicable exact-head ordinary CI succeeded. TESTING NOT DEPLOYED."
     }
   ],
   "history": [
