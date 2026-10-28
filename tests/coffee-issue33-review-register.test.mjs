@@ -87,11 +87,11 @@ test('current direct source receipt pins exact 3 official product identities wit
  assert.match(cortez.html.fields.name,/ethiopia guji benti neka/i);
  assert.match(cortez.html.fields.origin,/Ethiopia/);
  assert.equal(cortez.html.fields.process,'Washed');
- const cortez=releaseQueue.items.find(x=>x.pr===189);
- assert.ok(['READY','DEPLOYED'].includes(cortez?.state));
- if(cortez.state==='DEPLOYED'){
-  assert.match(cortez.deployed_source_sha,/^[a-f0-9]{40}$/);
-  assert.match(cortez.deployed_release_sha,/^[a-f0-9]{40}$/);
+ const queueCortez=releaseQueue.items.find(x=>x.pr===189);
+ assert.ok(['READY','DEPLOYED'].includes(queueCortez?.state));
+ if(queueCortez.state==='DEPLOYED'){
+  assert.match(queueCortez.deployed_source_sha,/^[a-f0-9]{40}$/);
+  assert.match(queueCortez.deployed_release_sha,/^[a-f0-9]{40}$/);
  }
  assert.equal(register.records.filter(x=>x.owner_review_status.startsWith('RESOLVED_')).length,8);
 });

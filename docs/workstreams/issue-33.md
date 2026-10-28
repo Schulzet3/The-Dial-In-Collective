@@ -1,3 +1,9 @@
+## October 28 UTC — PR222 test variable conflict repaired, pending rerun (NO DEPLOY)
+
+Corrected earlier post-release acceptance repair: Node/cloud runs 40785962286 and 40785962322 caught duplicate `const cortez` declaration in the same historical test, accidentally introduced by the READY→DEPLOYED assertion update. Renamed the new queue row variable `queueCortez`; kept both actual selected Cortez product source evidence and deployed-source/release SHA checks unchanged. All fixed source parser tests are otherwise unaffected. Retest exact-source all relevant CI before merge; no production/member/Supabase changes.
+
+---
+
 ## October 28 UTC — PR222 post-Release08 QA receipt test recovery (NO DEPLOY)
 
 Initial PR222 head `186c53cc6837474dcb461e570f3b16ec00a6988e` approval40785515963 failed because parser path lacked queue tracking, repaired by non-force upstream integration commit9017c406 and TESTING queue row. Initial cloud UX40785515845 revealed two preexisting `tests/coffee-issue33-review-register.test.mjs` historical READY assertions for Cortez and #27/#72 after Release08 legitimately moved these queue rows to DEPLOYED. All actual historical selected source digests, selected identities, provenance and CI references remain unchanged; allow READY→DEPLOYED state only if actual deployed source and release SHAs are valid. No source semantics or production writes. Retest PR-head exact Node/cloud/approval, public77 acceptance, integration. This is not publication authorization.
