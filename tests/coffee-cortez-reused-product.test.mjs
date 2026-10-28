@@ -25,7 +25,7 @@ test('reused old-country slug follows current exact Product and quarantines the 
  const current=endpoint(description);
  assert.equal(current.fields.name,title);
  assert.equal(current.fields.origin,'Wolisho, Ethiopia');
- assert.equal(current.fields.elevation_m,'1600');
+ assert.equal(current.fields.elevation_m,'1600m');
  assert.equal(current.fields.process,'Washed');
  assert.equal(current.fields.roast_level,'Medium');
  assert.match(current.fields.tasting_notes||'',/honey/i);

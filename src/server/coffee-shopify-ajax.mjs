@@ -148,8 +148,13 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  if(!result?.ok||norm(result.fields?.name)!==norm(data.title))return null;
  const originalFacts=result.source_facts;
  const endpointFacts=(originalFacts||[]).map(fact=>({...fact,source_type:'product_json',source_url:request.url}));
+ // A source can legitimately carry a full description larger than the HTML
+ // parse budget. Preserve its original bounded source facts unless actual
+ // legacy-copy quarantine was needed; never replace unrelated source data
+ // with an empty/sliced parser description.
+ const sourceFactProduct=screened.quarantined?{...data,description}:data;
  const source_facts=mergeCoffeeSourceFacts(endpointFacts,
-  collectStructuredCoffeeSourceFacts({...data,description},{source_url:request.url,source_type:'product_json'}));
+  collectStructuredCoffeeSourceFacts(sourceFactProduct,{source_url:request.url,source_type:'product_json'}));
 
  // Current printed specifications outrank an archived/SEO description only
  // after selected-title/handle verification above. Competing direct current
