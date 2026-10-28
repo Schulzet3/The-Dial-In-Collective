@@ -20,3 +20,5 @@ Oct 28 UTC admin correction recovered: production read-only inspection found cur
 Oct 28 UTC added explicit tests/coffee-decaf-admin.test.mjs for decaf-only admin facts, three-value editing, half-caf/regular withholding, and staged audited admin SQL contract. Exact-source CI still required; SQL DDL not applied.
 
 Oct 28: CI SQL job 40618095095 confirmed syntax failure before second copied RPC: pg_get_functiondef omitted required terminating semicolon. Added semicolon to both staged RPC CREATE statements, without altering their bodies. Isolated SQL retest required; no production SQL executed.
+
+Oct 28: caught and corrected a two-backslash admin form regexp typo on readback; replaced with one shared fullyDecaf helper used by editor and display (explicitly blocks half-caf even on an incorrect is_decaf flag). Added title-only and half-caf regression. Latest SQL migration semicolon fix also committed. All exact-source checks still pending; not deployed.

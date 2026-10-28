@@ -36,3 +36,11 @@ test('staged admin SQL retains original audit and revision guards',()=>{
  assert.match(sql,/decaffeination_method=case/);
  assert.match(sql,/is_decaf=case/);
 });
+
+test('decaf name without explicit flag still exposes edit control; half-caf never does',()=>{
+ const titled=renderAdminRecord({...base,is_decaf:false,created_at:'2026-10-27'},'approved');
+ assert.doesNotMatch(titled,/class="admin-decaf-method" hidden/);
+ const mixed=renderAdminRecord({...base,name:'Colombia Half-Caf',is_decaf:true,created_at:'2026-10-27'},'approved');
+ assert.match(mixed,/class="admin-decaf-method" hidden/);
+ assert.doesNotMatch(renderAdminCoffeeFacts({...base,name:'Colombia Half-Caf',is_decaf:true}),/Decaffeination Method/);
+});
