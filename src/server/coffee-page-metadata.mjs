@@ -487,6 +487,12 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   const beforeProse=prose(fields[key]),afterProse=prose(s);
   if(beforeProse&&!afterProse){fields[key]=s;return;}
   if(afterProse&&!beforeProse)return;
+  if(coffeeTastingNotesSubset(s,fields[key])||coffeeTastingNotesSubset(fields[key],s)){
+   // Additional literal notes on one list do not contradict the compact
+   // current printed list (Peru HB: Cocoa, Almond / Cocoa, Almond, Chocolate).
+   if(coffeeTastingNotesSubset(s,fields[key]))fields[key]=s;
+   return;
+  }
   if(equivalentCoffeeTastingNotes(s,fields[key])){
    if(!/[,;&|•·/]/.test(fields[key])&&/[,;&|•·/]/.test(s))fields[key]=s;
    return;
@@ -498,6 +504,17 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   if(compatible){
    fields.variety=compatible;
    if(compatible===s)narrativeIdentityByFields.get(fields)?.delete(key);
+   return;
+  }
+ }
+ if(key==='producer'&&s&&fields.producer){
+  // Keep the identical named cooperative/program when another current
+  // caption merely qualifies it as a women-producers program.
+  const normalize=value=>keyOf(String(value).replace(/\b(?:women|female)\s+producers?\s+(?=program\b)/ig,''));
+  const prior=fields.producer;
+  if(normalize(prior)===normalize(s)&&/\bprogram\b/i.test(prior)&&/\bprogram\b/i.test(s)&&
+   prior.includes(',')&&s.includes(',')&&keyOf(prior.split(',')[0])===keyOf(s.split(',')[0])){
+   if(s.length>prior.length)fields.producer=s;
    return;
   }
  }
@@ -576,6 +593,17 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
     combined=combined?(compatibleGeography(combined,part)||combined+', '+part):part;
    for(const origin of geography.origins||[]){
     let compatible=compatibleGeography(combined,origin);
+    // Explicit Region: Fresno and Origin: Tolima, Colombia on the same
+    // selected coffee are complementary printed place parts. Do not
+    // infer any missing country, mutate provenance or merge distinct countries.
+    if(!compatible&&geography.region&&!geography.country&&!geography.area){
+     const items=String(origin).split(/\s*,\s*/u).filter(Boolean),tail=items.at(-1)||'';
+     const region=geographyParts(geography.region);
+     if(items.length>=2&&items.length<=3&&ORIGIN_COUNTRIES.has(keyOf(tail))&&
+      region.length>0&&region.every(x=>!ORIGIN_COUNTRIES.has(x))&&
+      !items.some(x=>keyOf(x)===keyOf(geography.region)))
+      compatible=[geography.region,...items].join(', ');
+    }
     if(!compatible&&geography.area){
      const withoutArea=combined.split(/\s*,\s*/).filter(part=>keyOf(part)!==keyOf(geography.area)).join(', ');
      const refined=compatibleGeography(withoutArea,origin);

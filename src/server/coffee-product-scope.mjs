@@ -203,6 +203,32 @@ function withoutRelatedProducts(page,onTruncated){
  }
  chunks.push(page.slice(cursor));return chunks.join('');
 }
+function withoutDetachedFarmerProfiles(page){
+ // An unrelated "MEET Person" biography appended after a selected coffee
+ // must not donate its farmer's farm, region, or processing to that product.
+ const headings=coffeeHtmlElements(page).nodes.filter(n=>/^h[1-6]$/.test(n.tag)&&n.contentEnd-n.headEnd<=220);
+ const value=n=>page.slice(n.headEnd,n.contentEnd).replace(/<[^<>]{0,350}>/g,' ').replace(/\s+/g,' ').trim();
+ const h1=headings.find(n=>n.tag==='h1'),name=h1?value(h1).normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase():'';
+ if(!h1||!name)return page;
+ const ranges=[];
+ for(const h of headings){
+  if(h.start<=h1.start)continue;
+  const m=/^meet\s+([\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,45}){1,3})$/u.exec(value(h));
+  if(!m)continue;
+  const person=m[1].normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
+  if(name.includes(person))continue;
+  const resume=headings.find(n=>n.start>h.start&&Number(n.tag[1])<=Number(h.tag[1])&&
+   /^(?:product details|coffee details|about this coffee|coffee story|brew(?:ing)? guide|specifications)$/i.test(value(n)));
+  ranges.push([h.start,resume?.start??page.length]);if(!resume)break;
+ }
+ if(!ranges.length)return page;
+ let out='',cursor=0;
+ for(const [start,end] of ranges.sort((a,b)=>a[0]-b[0])){
+  if(start<cursor)continue;
+  out+=page.slice(cursor,start)+' ';cursor=end;
+ }
+ return out+page.slice(cursor);
+}
 function escapeAttributeAngles(page,onTruncated){
  // Preserve literal attribute text without letting downstream legacy text
  // regexes reinterpret title="<p>Origin: ...</p>" as a visible paragraph.
@@ -231,6 +257,7 @@ export function productMarkup(html,{onTruncated}={}){
  const main=scan.nodes.find(node=>node.tag==='main');
  if(main)page=page.slice(main.headEnd,main.contentEnd);
  page=withoutRelatedProducts(page,onTruncated);
+ page=withoutDetachedFarmerProfiles(page);
  // The remaining asides are narrowly identified selected-product cost or
  // transparency panels. Expose their content to shared text collectors as
  // an ordinary product div; generic promotional/sidebar asides stay removed.
