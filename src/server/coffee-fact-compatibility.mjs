@@ -52,6 +52,12 @@ export function coffeeOriginParts(value){
 // Competing qualifiers still disagree (North Kona versus South Kona).
 function placeContains(precise,broad){
  if(precise===broad)return true;
+ // A printed protected-area name occasionally omits the final "l" from
+ // "Natural Reserve" in a secondary Region caption. Require the SAME
+ // complete long place stem and reserve designation; never fuzzy-match
+ // other towns, countries or labels. Keep both literal source readings.
+ if(precise.length>=20&&broad.length>=20&&
+  precise.replace(/naturareserve$/,'naturalreserve')===broad.replace(/naturareserve$/,'naturalreserve'))return true;
  const withoutRole=value=>value.replace(/(?:woreda|municipality|province|district|department|region|zone)$/,'');
  const preciseName=withoutRole(precise),broadName=withoutRole(broad);
  if(preciseName.length>=3&&preciseName===broadName)return true;

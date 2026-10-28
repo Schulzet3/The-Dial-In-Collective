@@ -1533,6 +1533,29 @@
       ],
       "owner_source": "Owner approved selected-product exact source, historical immutable 603, farmer-profile source-review preservation; PR200 live 77 regression on Bald Guy #5.",
       "notes": "No change to producer facts; guard is source-bound HTML component. No Netlify/production SQL/member changes."
+    },
+    {
+      "id": "DIC-Q-33-same-reserve-selected-origin",
+      "issue": 33,
+      "pr": 203,
+      "title": "Reconcile selected current reserve location and compatible country/region labels without fuzzy matching",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-fact-compatibility.mjs"
+      ],
+      "tests": [
+        "Focused Great Circle #27 selected-product positive and conflicting-country/different-place negative tests in tests/coffee-issue33-selected-fact-compatibility.test.mjs."
+      ],
+      "ci_runs": [
+        40713629744
+      ],
+      "blockers": [
+        "Initial exact-head approval CI failed because this scope was not registered in the release queue; added scoped TESTING intake here and require fresh CI readback.",
+        "Exact-source CI, changed-source original immutable 603 comparison, current 77 source parity, non-force merge and release queue proof still pending."
+      ],
+      "owner_source": "Issue #33 owner-approved Great Circle #27 selected current Location Cayambe-Coca Natural Reserve, Ecuador versus second Region Cayambe-Coca Natura Reserve.",
+      "notes": "This is only a literal same-reserve one-letter omission comparator, not geographic inference or blanket fuzzy matching. Preserve source facts. PR #202 developed concurrently; keep separate. No publication, schema mutation or member-data modification."
     }
   ],
   "history": [
