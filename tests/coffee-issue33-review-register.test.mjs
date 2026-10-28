@@ -68,6 +68,18 @@ test('review tracks cannot overlap and raw product identity cannot be substitute
  assert.match(reused.blocking_evidence,/Washed/);
 });
 
+function assertReadyOrDeployed(row){
+ assert.ok(row,'Expected original source-bound release-queue record');
+ assert.ok(['READY','DEPLOYED'].includes(row.state),'Verified feature must be READY or actually DEPLOYED');
+ assert.match(row.merged_source_sha,/^[0-9a-f]{40}$/);
+ assert.ok(row.ci_runs?.length>0,'Exact source check receipts retained');
+ assert.deepEqual(row.blockers,[]);
+ if(row.state==='DEPLOYED'){
+  assert.match(row.deployed_release_sha,/^[0-9a-f]{40}$/,'Released source-bound feature has a concrete release SHA');
+  assert.ok(row.deployed_netlify_deploy_id,'Publication must have an actual provider deploy receipt');
+ }
+}
+
 test('current direct source receipt pins exact 3 official product identities without granting all-77 acceptance',()=>{
  const evidence=JSON.parse(readFileSync(new URL('../docs/audits/issue33-direct-current-source-probe-20261028.json',import.meta.url)));
  assert.equal(evidence.source_probe_run,40638754513);
@@ -87,7 +99,7 @@ test('current direct source receipt pins exact 3 official product identities wit
  assert.match(cortez.html.fields.name,/ethiopia guji benti neka/i);
  assert.match(cortez.html.fields.origin,/Ethiopia/);
  assert.equal(cortez.html.fields.process,'Washed');
- assert.equal(releaseQueue.items.find(x=>x.pr===189).state,'READY');
+ assertReadyOrDeployed(releaseQueue.items.find(x=>x.pr===189));
  assert.equal(register.records.filter(x=>x.owner_review_status.startsWith('RESOLVED_')).length,8);
 });
 
@@ -113,8 +125,6 @@ test('source-bound #27 and #72 exact merged public acceptance changed only reque
   const r=releaseQueue.items.find(x=>x.id===id);
   // The historical receipt remains TESTING evidence; later source-bound
   // merged acceptance independently cleared these current queue entries.
-  assert.equal(r.state,'READY');
-  assert.match(r.merged_source_sha,/^[a-f0-9]{40}$/);
-  assert.ok(r.ci_runs?.length>0);assert.deepEqual(r.blockers,[]);
+  assertReadyOrDeployed(r);
  }
 });
