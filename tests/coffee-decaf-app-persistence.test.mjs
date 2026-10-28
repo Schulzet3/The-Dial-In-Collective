@@ -34,3 +34,13 @@ test('canonical SQL is staged and refuses duplicate/cross-member overwrites',()=
  assert.match(sql,/coffee_decaffeination_only_when_decaf_check/);
  assert.match(sql,/revoke all on function/);
 });
+
+test('existing server coffee edit accepts decaf boolean/method without changing owner, revision or approval gate',()=>{
+ assert.match(sql,/CREATE OR REPLACE FUNCTION private\.dic_edit_my_coffee/);
+ assert.match(sql,/k='is_decaf'/);
+ assert.match(sql,/jsonb_typeof\(p_details->k\) is distinct from 'boolean'/);
+ assert.match(sql,/coalesce\(\(p_details->>'is_decaf'\)::boolean/);
+ assert.match(sql,/p_expected_revision/);
+ assert.match(sql,/canonical\.revision/);
+ assert.match(sql,/kind','correction_requested'/);
+});
