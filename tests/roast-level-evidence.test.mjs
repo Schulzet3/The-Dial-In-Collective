@@ -191,3 +191,39 @@ test('a separately explicit selected seven-tier roast is respected even for Whit
   {source_url:'https://www.alaskaartisancoffee.com/products/white-coffee'});
  assert.equal(r.fields?.roast_level,'Very Light');
 });
+
+
+test('Bald Guy Brew Medium/Medium Dark is not one canonical roast, and is flagged for human choice',()=>{
+ for(const label of ['Medium/Medium Dark','Medium / Medium Dark','Roast: Medium/Medium Dark','Roast Level: Medium/Medium Dark'])
+  assert.equal(normalizeRoastLabel(label),null,label);
+ const html='<html><body><main><h1>Organic Colombian Coffee</h1>'+
+  '<p>Colombian Coffee Overview: Fragrance of tangerine peel with a hint of cinnamon.</p>'+
+  '<p>Roast: Medium/Medium Dark</p>'+
+  '<p>Lot: Single Origin</p></main></body></html>';
+ const r=extractPublicCoffeeFacts(html,{source_url:'https://baldguybrew.com/products/organic-colombian-coffee'});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields?.roast_level,undefined);
+ assert.match(r.roast_hint,/Medium\/Medium Dark/);
+ assert.match(r.roast_hint,/Choose Medium or Medium-Dark manually/);
+ const preview=coffeeUrlPreviewMarkup(r);
+ assert.match(preview,/Medium or Medium-Dark manually/);
+});
+test('ambiguous neighboring tiers cannot contaminate an unrelated selected product',()=>{
+ for(const value of [
+  '<h1>Other Coffee</h1><p>In general coffees may be Medium/Medium Dark.</p>',
+  '<h1>Other Coffee</h1><h2>Our roast guide</h2><p>Medium/Medium Dark</p>',
+  '<h1>Other Coffee</h1><h2>Related products</h2><p>Roast: Medium/Medium Dark</p>'
+ ]){
+  const r=extractPublicCoffeeFacts('<html><body><main>'+value+'</main></body></html>',
+   {source_url:'https://roaster.examplecoffee.com/products/other-coffee'});
+  assert.equal(r.fields?.roast_level,undefined,value);
+  assert.ok(!/Choose Medium or Medium-Dark manually/.test(r.roast_hint||''),value);
+ }
+});
+test('a distinct explicit supported roast still parses; freeform tier ranges stay blank',()=>{
+ const chosen=asPreview('<p>Roast: Medium-Dark</p>');
+ assert.equal(chosen.fields?.roast_level,'Medium-Dark');
+ const ambiguous=asPreview('<p>Roast: Medium/Medium Dark</p>');
+ assert.equal(ambiguous.fields?.roast_level,undefined);
+ assert.match(ambiguous.roast_hint,/Choose Medium or Medium-Dark manually/);
+});

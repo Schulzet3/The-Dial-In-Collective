@@ -51,6 +51,10 @@ export function roastLabelHint(value){
  const explicit=v.replace(/^roast(?:\s+(?:level|profile|degree|type))?\s*[:=]\s*/i,'').trim();
  if(/^white(?:[ -](?:coffee|roast))?$/i.test(explicit))
   return 'Roaster labels this coffee '+explicit+'. White is outside the standardized roast tiers; choose a level manually if known.';
+ // Adjacent categories on an exact selected-product Roast line are a
+ // range, not one chosen roast. Retain the literal text and ask the member.
+ if(/^medium\s*\/\s*medium[\s-]+dark(?:\s+roast)?$/i.test(explicit))
+  return 'Roaster labels this coffee '+explicit+'. Choose Medium or Medium-Dark manually; neither is selected automatically.';
  // Other unsupported labels remain reviewable; Full City has an approved mapping.
  if(/^(?:extra[\s-]?light|nordic[\s-]?light|(?:light|medium|dark)\+|lighter|darker)\s*(?:roast)?$/i.test(v))
   return 'Roaster describes the coffee as '+v+'. Choose the closest supported level manually.';

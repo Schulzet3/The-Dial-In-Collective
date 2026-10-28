@@ -1,3 +1,9 @@
+## October 28 UTC — Bald Guy Brew two-tier roast owner decision staged (TESTING, NOT DEPLOYED)
+
+Owner confirmed case #5 of 77: published Medium/Medium Dark is ambiguous across Medium and Medium-Dark, so preserve the exact source label, keep canonical roast blank, ask member to choose manually; no guessing. Regression tests and roast hint code staged in separate source PR, existing concurrency PR186 preserved. Original immutable 603, all member data and production unchanged. Coffee #6 Beanstock Colombian Supremo Organic URL has historical reused products; direct public page showed Tolima Suave but indexes disagree; current product identity not independently validated. Follow already Locked current selected-product precedence; no new guess. CI/merge pending; source only.
+
+---
+
 ## October 28 UTC — White Coffee user-choice roast flag merged, exact normal CI green / TESTING NOT DEPLOYED
 
 Owner resolved Alaska Artisan White Coffee review #4/77: keep canonical roast blank and flag nonstandard White for user manual selection; Ultra/Very Light are unverified possibilities. PR187 merged nonforce at 3947b1ba32a89a9f42db5cd0335a96444166ce9c, same tree as final tested feature. Six exact feature-head checks and postmerge Node/cloud/approval plus public selected-source acceptance (13/13 required) SUCCESS. Original 603 workflow SKIPPED on restricted branch, so queue DIC-Q-33-white-coffee-manual-roast remains TESTING. Separate Cortez PR186 still preserved; owner next coffee #5 Bald Guy Brew Organic Colombian is a two-tier Medium/Medium Dark source, pending individual review. Netlify published deploy still 6ae0fc16178b2f1241e441f8. No data migration or publication.
