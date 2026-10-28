@@ -1,3 +1,9 @@
+## October 27 UTC — Issue33 roast-specific espresso clause correction
+
+The new parser's first-sentence boundary could stop at a period inside Ketch's `e.g.`, dropping the Light 203–205°F / 1:3 / 18-to-54g espresso facts. Repaired before treating any CI result as acceptance: bounded to the already isolated selected-roast text. Earlier feature CI is exact to prior SHA and cannot validate this follow-up. New source-bound CI/merge/readback required; no production publication.
+
+---
+
 ## October 27 UTC — Issue33 approved Ketch two-roast UI integrated into source PR179 (TESTING)
 
 **Owner authority:** User approved shared Legacy Farms Honduras Natural details, two separate purchased roast profiles and earlier shown interactive HTML preview, explicitly no photos; asked to incorporate into real extractor and give next difficult coffee. Prior source/SEO fallback rule and Black River Mexico/Peru review remain Locked.

@@ -43,9 +43,11 @@ function sensory(sections){
 }
 function espresso(sections){
  for(const text of sections){
-  const esp=text.match(/(?:\bif\s+you\s+decide\s+to\s+brew\s+it\s+as\s+espresso\b|\bfor\s+espresso\b)([^.]{15,700})/i);
+  const esp=text.match(/\b(?:if\s+you\s+decide\s+to\s+brew\s+it\s+as\s+espresso|for\s+espresso)\b/i);
   if(!esp)continue;
-  const clause=esp[0],temp=clause.match(/\b(\d{2,3})\s*[-–]\s*(\d{2,3})\s*°?\s*F\b/i);
+  // e.g. within the selected roast's published espresso example is not
+  // a section terminator: preserve its following temperature and ratio.
+  const clause=text.slice(esp.index,esp.index+900),temp=clause.match(/\b(\d{2,3})\s*[-–]\s*(\d{2,3})\s*°?\s*F\b/i);
   const ratio=clause.match(/\b1\s*:\s*(\d+(?:\.\d+)?)\b/i);
   const dose=clause.match(/\b(\d+(?:\.\d+)?)\s*grams?\s+of\s+coffee\s+to\s+(\d+(?:\.\d+)?)\s*grams?/i);
   if(!temp&&!ratio&&!dose)continue;
