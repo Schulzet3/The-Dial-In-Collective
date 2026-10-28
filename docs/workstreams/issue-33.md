@@ -1,3 +1,9 @@
+## October 28 UTC — PR206 clean replacement tracked
+
+Nonforce replacement PR206 opened at clean-source head 26f64a9767e883b411cecb81702a42ea080ef66f on authoritative dev 8fa0769, retains approved #53/#68 and all previous authorizations; no #44 unsupported cupping. Update queue PR reference 206; exact current CI and live 77/603 still separate pending gates. Historical PR202 remains open until actual successful merge; do not force or rewrite. Not deployed.
+
+---
+
 ## October 28 UTC — Clean lineage integration for owner #53/#68 (PR202 preserved)
 
 After PR202 nonforce branch reconciliation, approval run 40722890344 FAILED continuity traversal because merge ancestry imports historic PR203 commit 986c48e8 without a [skip netlify] marker. The actual app/test/queue files had no content conflict, but that ancestor cannot be rewritten. Create clean descendant branch from verified authoritative development 8fa076960409c84eaffcc5a360001af7d334c977 with reviewed exact code/test source blobs and reconciled queue/journal; do not force Git refs or weaken CI. Original PR202 remains untouched until replacement merged; then close as superseded with receipt. New scope carries just #53 Liliana and #68 Karumandi current named Washed processing; #44 roast-specific cupping remains unverified. No database or Netlify operations, no hidden source rewriting.
