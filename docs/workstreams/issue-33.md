@@ -1729,3 +1729,8 @@ Owner authorized all safe Issue33 implementation and acceptance; no publication.
 ## October 28 UTC — PR208 rapid compile repair (CI retest pending)
 
 The initial PR208 flavor helper mistakenly generated malformed JavaScript from a string-escaping error. Replaced only the bounded selected-name regex with an alphabetic/hyphen-safe direct match; no untrusted regex characters are accepted by the capturing pattern. Preserved same-commit journal and all existing data, receipts and other branches. Exact PR-head tests must rerun; original603 remains skipped until independently reverified. No deploy.
+
+
+## October 28 UTC — PR208 intake enforcement repair
+
+GitHub exact-head approval run 40738983102 rejected untracked new runtime source paths, despite source approval coverage and queue schema passing. Added a scoped TESTING queue row for both new runtime files with the real outstanding changed-source, 603 and hosted-auth gates. Kept all 42 existing queue entries intact. Same-commit journal provided. No code changes, deployment or member writes.
