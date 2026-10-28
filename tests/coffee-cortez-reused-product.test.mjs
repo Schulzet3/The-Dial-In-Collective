@@ -29,7 +29,9 @@ test('reused old-country slug follows current exact Product and quarantines the 
  assert.equal(current.fields.process,'Washed');
  assert.equal(current.fields.roast_level,'Medium');
  assert.match(current.fields.tasting_notes||'',/honey/i);
+ assert.ok(current.legacy_copy_excerpts.some(quote=>quote.includes('Lahamenegu')));
  assert.ok(!JSON.stringify(current).includes('Lahamenegu'));
+ assert.ok(!JSON.stringify(current.source_facts||[]).includes('Lahamenegu'));
  const joined=mergePublicProductPreview(page(description),current);
  assert.equal(joined.fields.origin,'Wolisho, Ethiopia');
  assert.ok(!joined.conflicts?.includes('origin'));

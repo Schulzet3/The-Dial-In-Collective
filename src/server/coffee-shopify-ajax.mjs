@@ -221,14 +221,19 @@ export function extractShopifyAjaxData(data,request,{extract=extractPublicCoffee
  // unverifiable fermentation-oxygen claims or overwrite stored member data.
  const details={...result.roaster_details};
  if(policy.processCaption&&!details.processing_detail)details.processing_detail=policy.processCaption;
- return {...result,fields,available:Object.keys(fields),source_facts,
-  ...(screened.quarantined?{legacy_copy_quarantined:true,legacy_copy_excerpts:screened.quarantined_excerpts}:{}),
+ const preview={...result,fields,available:Object.keys(fields),source_facts,
+  ...(screened.quarantined?{legacy_copy_quarantined:true}:{}),
   ...(roast_variants.length>1?{roast_variants,roaster_recipe:undefined}:{}),
   ...(explicitlyRotatingCoffeeOrigin(description)?{origin_confirmation_required:true}:{}),
   ...(Object.keys(details).length?{roaster_details:details}:{}),
   ...(conflicts.size?{conflicts:[...conflicts].sort(),conflict_options}:{conflicts:undefined,conflict_options:undefined}),
   ...(current_spec_fields.length?{current_product_spec_fields:current_spec_fields}:{}),
   ...(result.source_facts_truncated||originalFacts?.truncated||source_facts.truncated?{source_facts_truncated:true}:{})};
+ // The quarantined excerpts exist only for same-process provenance checks.
+ // Never serialize rejected old-coffee text back to an import preview.
+ if(screened.quarantined)Object.defineProperty(preview,'legacy_copy_excerpts',{
+  value:screened.quarantined_excerpts,enumerable:false,configurable:false});
+ return preview;
 }
 const recipeMasses=recipe=>[recipe?.dose_g,recipe?.dose_g_max??recipe?.dose_g,
  recipe?.yield_g??recipe?.yield_g_min,recipe?.yield_g??recipe?.yield_g_max];
