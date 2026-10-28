@@ -56,7 +56,7 @@ async function audit(row){
       section:clamp(x.section,105),conflicting:x.conflicting===true});
     }
     const preview=coffeeUrlPreviewMarkup(result);
-    const reviewExport=coffeeSourceReviewSnapshot(result);
+    const reviewExport=coffeeSourceReviewSnapshot({...result,source_url:page.source_url||row.original_product_url});
     out.preview={visible:/class="coffee-url-preview"/.test(preview),
      conflict_warning:out.conflicts.length===0||/Review conflicting details/.test(preview),
      qualified_process_warning:!result.process_review_note||preview.includes('Processing review:'),

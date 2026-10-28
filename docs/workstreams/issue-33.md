@@ -1,3 +1,9 @@
+## October 28 UTC — PR216 exact-source cloud test harness failure and correction
+
+Actual GitHub cloud CI 40774024111 failed 2 new assertions (selected FUDAM review export and official collection URLs). Root cause: the deterministic extractPublicCoffeeFacts low-level method returns no source_url attribute, while the public HTTP preview wrapper adds the safe source_url before calling coffeeSourceReviewSnapshot. The new test and source audit incorrectly called the snapshot on the raw parser result and got null; this is a test construction mismatch, not a runtime regression. Correct both tests and current official77 audit to use actual wrapped preview result {...result,source_url: official selected URL}; retain HTTPS sanitation and no Process guessing. Unchanged already passing mobile browser, source bundle, security, Python/SQL/approval checks are not misrepresented as sufficient for failed cloud suite. Rerun exact-head CI, repair any further failure, merge only on success. No deployment or private member changes.
+
+---
+
 ## October 28 UTC — reused Beanstock product slug: explicit wrong-current-coffee negative
 
 Public search/cached official URLs show the same reused /products/colombian-supremo-organic handle historically selecting Tolima Suave or Finca Las Flores as well as FUDAM under collection paths; cached search indexes disagree, and are NOT authoritative for live current identity. Added exact-current-h1 regression ensuring neither current Tolima nor current Finca Las Flores ever inherits FUDAM association-level processing from stale SEO, even when the URL slug matches. Current official live page will be checked by the controlled 77 URL probe after merge. No inference or production mutation.

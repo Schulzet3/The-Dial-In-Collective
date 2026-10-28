@@ -114,7 +114,7 @@ test('selected FUDAM qualified source context survives bounded review export wit
  const html='<main><h1>New!! Colombia Fair Trade Organic FUDAM LA Union</h1>'+
   '<p>FUDAM is an association of growers.</p><p>The coffees are generally washed two or three times before being dried.</p></main>';
  const result=extractPublicCoffeeFacts(html,{source_url:url});
- const snapshot=coffeeSourceReviewSnapshot(result,{checkedAt:'2026-10-28T00:00:00.000Z'});
+ const snapshot=coffeeSourceReviewSnapshot({...result,source_url:url},{checkedAt:'2026-10-28T00:00:00.000Z'});
  assert.equal(result.fields.process,undefined);
  assert.equal(snapshot.field_suggestions.process,undefined);
  assert.equal(snapshot.processing_review_note,result.process_review_note);
@@ -135,7 +135,7 @@ test('official Beanstock Shopify collection URLs preserve current FUDAM processi
   assert.equal(result.ok,true,path);
   assert.equal(result.fields.process,undefined,path);
   assert.match(result.process_review_note||'',/generally washed/i,path);
-  assert.equal(coffeeSourceReviewSnapshot(result)?.processing_review_note,result.process_review_note,path);
+  assert.equal(coffeeSourceReviewSnapshot({...result,source_url:url})?.processing_review_note,result.process_review_note,path);
  }
  for(const url of ['https://otherroaster.example/products/colombian-supremo-organic',
   'https://beanstockcoffee.com/collections/medium-roasts/products/different-coffee',
@@ -156,6 +156,6 @@ test('reused Beanstock URL must not inherit FUDAM processing hints when current 
   const result=extractPublicCoffeeFacts(html,{source_url:url});
   assert.equal(result.fields.name,name);
   assert.equal(result.process_review_note,undefined);
-  assert.equal(coffeeSourceReviewSnapshot(result)?.processing_review_note,undefined);
+  assert.equal(coffeeSourceReviewSnapshot({...result,source_url:url})?.processing_review_note,undefined);
  }
 });
