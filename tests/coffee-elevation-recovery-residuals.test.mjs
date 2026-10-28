@@ -55,11 +55,11 @@ test('an exact-page description can carry a discrete altitude after processing d
  const html='<head><meta property="og:url" content="'+url+'"><meta name="description" content="'+description+'"></head><main><h1>Current Coffee</h1></main>';
  assert.match(extractPublicCoffeeFacts(html,{source_url:url}).fields.elevation_m||'',/1720/);
 });
-test('original feet evidence reconciles its rounded metric display with a published metric range',()=>{
+test('original selected-product feet remain authoritative over compatible lower-tier SEO metric range',()=>{
  const html='<head><meta property="og:url" content="'+url+'"><meta name="description" content="The coffee is grown between 1800 and 2100 meters above sea level."></head>'+
   '<main><h1>Current Coffee</h1><p>Elevation: 5900-6890 feet</p></main>';
  const result=extractPublicCoffeeFacts(html,{source_url:url});
- assert.match(result.fields.elevation_m||'',/1800.*2100/);assert.equal(result.conflicts,undefined);
+ assert.match(result.fields.elevation_m||'',/1798.*2100/);assert.equal(result.conflicts,undefined);
  const contradiction=parse('<p>Elevation: 1800m</p><p>Elevation: 1850m</p>');
  assert.equal(contradiction.fields.elevation_m,undefined);assert.ok(contradiction.conflicts?.includes('elevation_m'));
 });
@@ -75,13 +75,13 @@ test('a later unrelated negative in an exact product description cannot erase it
  const negative='<p>This coffee is not from a site, 1720 masl.</p>';
  assert.equal(parse(negative).fields.elevation_m,undefined);
 });
-test('the same exact endpoint preserves native feet provenance across preview merging',()=>{
+test('same exact endpoint preserves native feet provenance without SEO refinement during merging',()=>{
  const html='<head><meta property="og:url" content="'+url+'"><meta name="description" content="The coffee is grown between 1800 and 2100 meters above sea level."></head>'+
   '<main><h1>Current Coffee</h1><p>Elevation: 5900-6890 feet</p></main>';
  const base=extractPublicCoffeeFacts(html,{source_url:url});
  const extra=extractShopifyAjaxData({title:'Current Coffee',handle:'current-coffee',description:'<p>Elevation: 5900-6890 feet</p>'},shopifyProductRequest(url));
  const result=mergePublicProductPreview(base,extra);
- assert.match(result.fields.elevation_m||'',/1800.*2100/);assert.equal(result.conflicts,undefined);
+ assert.match(result.fields.elevation_m||'',/1798.*2100/);assert.equal(result.conflicts,undefined);
  const contradictory=mergePublicProductPreview(parse('<p>Elevation: 1800m</p>'),parse('<p>Elevation: 1850m</p>'));
  assert.equal(contradictory.fields.elevation_m,undefined);assert.equal(contradictory.elevation_source,undefined);
  const spoofed=mergePublicProductPreview(parse('<p>Elevation: 1800m</p>'),{...parse('<p>Elevation: 2200m</p>'),elevation_source:'5900 feet'});

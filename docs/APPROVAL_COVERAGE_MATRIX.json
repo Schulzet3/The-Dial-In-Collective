@@ -1583,5 +1583,18 @@
       "status": "READY_NOT_DEPLOYED",
       "publication": "NOT_AUTHORIZED"
     }
+  },
+  "EXTRACTOR-DESCRIPTION-FIRST-SELECTED-PRODUCT-20261028": {
+    "status": "OWNER_APPROVED_IMPLEMENTATION_TESTING",
+    "issue": 33,
+    "authority": "Owner explicit request 2026-10-28 for generic current coffee description priority, SEO/archive fallback only and missing/conflicting data member review; no deployment",
+    "scope_paths": [
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-shopify-ajax.mjs",
+      "site/cloud/coffee-url-autofill.js"
+    ],
+    "test_path": "tests/coffee-source-hierarchy-generic.test.mjs",
+    "acceptance": "Description beats lower-ranked SEO, current direct conflicts remain withheld, last-resort metadata is flagged, missing facts shown, 77 existing official captures regression, build/CI and safe merge. 603 perfect extraction is waived as scoped gate.",
+    "status_detail": "SOURCE_ONLY_TESTING; no real user auth or provider deployment claims"
   }
 }
