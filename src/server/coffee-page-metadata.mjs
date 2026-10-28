@@ -1,3 +1,4 @@
+import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -1268,12 +1269,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // Supplement explicit page labels with current-coffee narrative evidence.
  // The canonical Process selector is coarse; keep complex fermentation and
  // farm/grower attributions as reviewable, noncanonical details.
+ const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
  for(const [key,value] of Object.entries(narrative.fields)){
   if(fields[key])continue;
   addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);
   if(key==='producer'&&fields.producer)narrativeProducerByFields.add(fields);
  }
+ // Selected product-only literal roles supplement, never override, other proof.
+ for(const field of ['producer','tasting_notes'])if(ownedContext[field]&&!fields[field]&&!conflicts.has(field))
+  addField(fields,field,ownedContext[field]);
+ if(ownedContext.release_label&&!fields.release_label&&!conflicts.has('release_label'))fields.release_label=ownedContext.release_label;
+ if(ownedContext.harvest_season&&!roaster_details.harvest_season)roaster_details.harvest_season=ownedContext.harvest_season;
  for(const fact of extractCoffeeIdentityEvidence(canonicalProduct,{name:fields.name,fields,clean}).facts)addIdentityFact(fields,fact);
  // A cached SEO description can have the correct page URL/title while its
  // text still explicitly describes a different country's coffee. Preserve

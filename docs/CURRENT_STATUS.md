@@ -1,3 +1,9 @@
+## October 28 UTC — Issue33 true current-source 77 follow-up selected role repair PR210 TESTING
+
+Owner approved continuation, no deploy. Current merged PR209 readback 384c72b2, original77 real source/preview run40746151200 77/77 SUCCESS. Candidate generic selected-context facts repair #11,#29,#30,#54 and #70 contextual harvest, five adverse regression tests pass. New immutable original603 **incremental** strict score 3105 exact/66 missing/831 review, 0 lost previous exact, 6474 supplement same, see docs/audits/issue33-current-context-roles-regression-20261028.json. The 600 unchanged records are reused with source-eligibility proof, **not** a newly rerun full 603. PR-head CI, live recheck, GoTrue signed-in save/readback and remaining 77 individual acceptance pending; no release.
+
+---
+
 ## October 28 UTC — Original603 PR208 exact-source acceptance independently PASS; owner77 public capture test staged
 
 Both immutable recovered PR207/208 source archives replayed against the original hash-verified 603 oracle: 3104/70/828 -> 3105/68/829, with zero previously exact losses, 6474 supplemental retention unchanged. Fresh 77 live source and actual GoTrue logged-in app still require independent checks. This is source-only development, not a release.
