@@ -1,3 +1,9 @@
+## October 28 UTC — Hosted GoTrue and Add Coffee genuine acceptance PASSED
+
+Owner-authorized real hosted disposable-member smoke **PASS**, GitHub Actions run 40767700050 / job 123096196386. Covered real GoTrue signup/password login/identity/refresh/logout, beta invite denial/redemption, hosted mobile Chromium Create Setup and Add Coffee via Use Existing, reload/sign-out/relogin, independent committed SQL library entry and fresh authenticated RPC readback. Test harness PR215 merged at 6bfc6e30267e056ec0adb5a639e094143bf60860, applicable exact-source CI successful. All test beta members disabled, test evidence retained; no existing private member or shared coffee data modified. Test-only database confirmation bypassed real confirmation-email click; password-reset delivery/completion also untested. Parent Issue33 open for independent source residuals, not hosted core auth/save; generic extractor READY/NOT DEPLOYED. No Netlify publish.
+
+---
+
 ## October 28 UTC — Issue #17 verified source READY; next issue #18
 
 The member-selected numeric espresso range remains lower=finer, higher=coarser with 0.1 recommendation precision. New Slow Feed starting estimates are significantly finer only when lacking suitable measured slow-feed evidence, use same-calibration paired personal results when available, and never overrun the entered range. Historical shot records/Unknown feed preserved, no extra grinder scale controls. Issue17 PR212 merged d135702a3f27fb4bbb98aa92524cc5627783b921; app/build 1,899 passed/0 failed/6 skipped; exact head and merged CI checks PASS. Queue item DIC-Q-17-numeric-range-slow-feed-aware-grind READY, no blockers, publication NOT authorized. Netlify remains old deploy 6ae0fc16178b2f1241e441f8. Remaining action is closing GitHub issue after final docs approval validation; issue18 is next.
