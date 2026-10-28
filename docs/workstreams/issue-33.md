@@ -1,3 +1,9 @@
+## October 28 UTC — Kona queue approval CI repair
+
+PR183 first exact-source approval workflow 40622781642 failed at queue validation: the newly added test file was mistakenly included in the `scope_paths` list, which accepts only deployable code paths. Removed the test from scope metadata and retained it under test evidence, as required. New exact-source CI required. No production, data or security changes.
+
+---
+
 ## October 28 UTC — Owner Kona roast-specific printed notes approval, Issue #33
 
 **Authority:** Owner explicitly approved Kona Earth 100% Kona Classic source interpretations and said to ignore general coffee notes in favor of the more specific information for each roast level. Later asked to proceed to next coffee. No publication authorized.
