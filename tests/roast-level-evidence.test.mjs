@@ -144,7 +144,7 @@ test('a coffee name, educational prose or related Full City cannot donate select
   '<h1>African Blend</h1><h2>More coffees</h2><a href="/products/full-city"><h6>ROAST</h6><p>Full City</p></a>'
  ]){
   const r=asPreview(detail);
-  assert.equal(r.fields.roast_level,undefined,detail);
+  assert.equal(r.fields?.roast_level,undefined,detail);
  }
 });
 test('conflicting current product roast source still requires human review',()=>{
