@@ -2091,15 +2091,19 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/cloud/main.js"
+        "site/cloud/main.js",
+        "scripts/pwa/service-worker.template.txt"
       ],
       "tests": [
         "Initial synthetic Chromium browser run 40785496790 FAILED at Search/Sort Enter: root innerHTML replacement removes focused keyboard button; repaired focus restoration for four in-place controls.",
         "Issue26 Chromium acceptance uses actual site JS/CSS with synthetic account: keyboard sign-in, Search/Sort and coffee focus, modal Tab/ShiftTab, touch sizes, invalid measurements and five ratings, light/dark contrast, reduced-motion, seven viewport/orientation geometries, one saved shot and recommendation.",
-        "Requires new exact-source Node, lint, build, browser/visual, SQL, security and approval CI, non-force merge and source readback."
+        "Requires new exact-source Node, lint, build, browser/visual, SQL, security and approval CI, non-force merge and source readback.",
+        "Visual QA run40786978447 FAILED real service-worker upgrade cold offline reload: older worker lost its still-needed public-shell cache during new worker activation. Repair defers stale public-shell deletion while any older-controlled window exists and retries only after all clients use the new worker.",
+        "New Node service-worker lifecycle test validates protected legacy cache; real Chromium offline reload and pending shot preservation required after fix."
       ],
       "ci_runs": [
-        40785496790
+        40785496790,
+        40786978447
       ],
       "blockers": [
         "Repaired code must pass fresh exact-source CI and merge/readback before READY."

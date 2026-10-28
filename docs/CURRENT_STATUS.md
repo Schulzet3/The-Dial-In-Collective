@@ -1,3 +1,9 @@
+## October 28 UTC — Issue #26 UI focus and PWA cache-lifecycle fixes TESTING
+
+Real Chromium keyboard focus and 78-case accessibility/contrast matrix PASS; source PR221 repaired focus restoration for Search, coffee and shot-history controls. Subsequent visual run40786978447 found offline cold-reload timeout after service-worker version upgrade, due to deleting legacy public-shell cache while an existing tab remained controlled by the old worker. Patched worker cleanup to wait for all existing windows to migrate, with bounded retry; added Node and real-browser acceptance and included worker template in deployable queue classification. PR221 and queue DIC-Q-26-keyboard-dialog-responsive-regression TESTING until new exact-source CI and merge/readback. Owner-approved palette, private member data and production unchanged; no deployment authorized.
+
+---
+
 ## October 28 UTC — Issue #26 keyboard accessibility defect reproduced and repaired (TESTING)
 
 Owner authorized remaining accessibility/responsive tests. Initial PR221 test-only run40785496790 captured actual Chromium failure: Search/Sort Enter drops focus after CloudApp.render() replaces the root DOM. Narrow fix restores the same keyed keyboard control after Search, coffee expansion and shot-history in-place redraws, without altering modal/focused form actions or approved visuals. Dedicated synthetic Chromium checks include dialog focus, five sensory ratings, validation, touch, contrast, motion, portrait/landscape, one-shot recommendation. Queue DIC-Q-26-keyboard-dialog-responsive-regression TESTING, same-commit journal; exact-source CI and integration pending. No live Supabase/Netlify changes or publication; physical VoiceOver test unperformed.

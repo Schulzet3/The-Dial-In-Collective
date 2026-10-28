@@ -42,7 +42,7 @@ test('all app source edits must be covered by Ready inventory, no unrelated SQL 
  for(const p of ['site/cloud/new-feature.js','supabase/migrations/20261022120000_new.sql','package.json',
  'netlify/functions/sensitive.js','build_cloud.mjs',
  'scripts/netlify/should-ignore-build.mjs','scripts/audit/approval-coverage.mjs',
- 'scripts/release/one-use-claim.mjs']){
+ 'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt']){
   const r=assess(q,['site/cloud/shot_card.js',p]);assert.equal(r.ready,false,p);
   assert.match(r.errors.join(' '),/Unqueued or not-ready/);
  }

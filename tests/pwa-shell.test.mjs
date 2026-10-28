@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import vm from 'node:vm';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const template=readFileSync(path.join(root,'scripts/pwa/service-worker.template.txt'),'utf8');
-function mockWorker(offline=false){
+function mockWorker(offline=false,{legacyClient=false}={}){
  const handlers=new Map(),calls=[],cached={status:'cached'};
  const routes=['/','/index.html','/icon.svg','/icon-192.png','/icon-512.png','/manifest.webmanifest','/cloud/main.js','/vendor/supabase.js'];
  const storage={async open(name){calls.push({type:'open',name});return {
@@ -18,12 +18,15 @@ function mockWorker(offline=false){
  const code=template.replaceAll('__DIC_BUILD_ID__','test').replaceAll('__DIC_ASSETS__',JSON.stringify(routes));
  vm.runInNewContext(code,{
   self:{location:{origin:'https://app.example'},addEventListener:(name,fn)=>handlers.set(name,fn),
+   clients:{async matchAll(options){return legacyClient&&options?.includeUncontrolled?[{id:'legacy-client'}]:[];}},
    skipWaiting:async()=>{calls.push({type:'skipWaiting'});}},
   caches:storage,URL,fetch:async()=>{network++;if(offline)throw Error('offline');return {ok:true,status:'network'};}
  });
  const dispatch=async request=>{
   let response=null;
-  handlers.get('fetch')({request,respondWith(p){response=p;}});
+  let background;
+  handlers.get('fetch')({request,respondWith(p){response=p;},waitUntil(p){background=p;}});
+  if(background)await background;
   return response?await response:null;};
  return {handlers,calls,routes,dispatch,network:()=>network};
 }
@@ -65,4 +68,13 @@ test('online navigation revalidates HTML; offline reopening falls back to the re
  assert.equal((await offline.dispatch(request)).status,'cached');
  assert.equal(offline.calls.some(x=>x.type==='match'&&x.path==='/'),true);
  assert.equal(await offline.dispatch({...request,url:'https://app.example/admin.html'}),null);
+});
+
+test('upgrading worker preserves old public-shell cache while legacy client remains open',async()=>{
+ const w=mockWorker(false,{legacyClient:true});
+ let pending;w.handlers.get('activate')({waitUntil(p){pending=p;}});await pending;
+ assert.deepEqual(w.calls.filter(c=>c.type==='delete'),[],
+  'New worker must not delete a shell still needed by an existing old-controlled tab');
+ assert.equal(w.calls.some(c=>c.type==='skipWaiting'),false,
+  'This test exercises only activation; install keeps the existing immediate-upgrade policy');
 });
