@@ -1,3 +1,60 @@
+## October 28 UTC — ACTUAL hosted disposable-member GoTrue + Add Coffee E2E PASSED (NO DEPLOY)
+
+Owner authorized all four previously unverified parent #33 acceptance items. GitHub workflow **40767700050**, job **123096196386**, source **8d27bd940e903d8aa087dfbe6f922598d4730f20**, independently inspected: **SUCCESS**. On real currently deployed https://app.dialincollective.com using a unique disposable identity, it tested live GoTrue signup, password login, authenticated /user, session refresh and logout; real invitation denial before redemption, invalid-code denial, one-use beta invite redemption and admission; live 390px Chromium browser sign-in, new setup creation, Add Coffee with real "Use Existing" identity confirmation for an already verified public coffee; page reload and fresh signed-in reopen, sign-out, new password sign-in, and fresh RPC state read. Actual production PostgreSQL committed-row readback confirmed the precise owner's library entry and selected existing canonical coffee ID, with **no new shared catalog coffee** created. Test succeeded after fixing test harness assumptions/selectors; prior unsuccessful runs are recorded below, not mislabeled as passes.
+
+**Boundaries:** This verifies actual deployed published Auth + member Add Coffee persistence, not deployment of the READY source-priority PR211 changes. The test used explicit owner-scoped database email confirmation for a throwaway identity; a real confirmation-email click, password reset email delivery/completion and other untested Auth branches are **NOT PASSED**. The disposable beta member was disabled after the run. Read-only provider cleanup receipt: 5 labeled test auth accounts total, 0 enabled test beta members, 1 test-owned setup, 1 test-owned library entry. Test records remain intentionally for audit; do not delete without proper backup/safety authorization. Production real-member data, shots, notes and shared coffee catalog were not altered by this test.
+
+Parent Issue #33 stays OPEN for historical residual source accuracy, which the owner has explicitly removed as a gate for independently READY generic source priority. The previously missing genuine hosted sign-in and persisted Add Coffee verification is **now fulfilled** with the stated email-confirmation limitation. No application deployment, migrations or member-data deletion. Source-only generic feature remains separately READY.
+
+
+---
+
+## October 28 UTC — isolate actual hosted Create Setup failure
+
+Actual run 40767394875 completed failure: real GoTrue login and admitted browser opened New Setup, clicked the correct primary Create Setup button, but no Add Coffee was visible after 25s. Independent owner-scoped SQL found zero setup and coffee rows for the test users; all throwaway beta members were disabled. Added bounded, sanitized dialog and toast diagnostics before the next live attempt. Do not claim setup or Add Coffee saved; no deployed source change.
+
+---
+
+## October 28 UTC — real hosted browser setup test selector repaired
+
+Run 40767113417 reached real hosted GoTrue signup, invitation redemption and authenticated Chromium UI; login and New Setup form displayed. The test clicked the first button in New Setup, which was the informational `Grinder Espresso Range` help control rather than the required `Create Setup` submit. No application defect evidenced. Fixed test selector to `form button.primary` and prepared retest. Run is FAILED; no save/readback yet. Disposable member access disabled, no shared or existing user data modified.
+
+---
+
+## October 28 UTC — hosted browser checkpoint not yet passing; add stage-safe diagnostics
+
+CI run 40766815651 exercised disposable GoTrue and one-time invite successfully and entered real Chromium, but a 25-second locator wait timed out before end-to-end saved-coffee assertion. The initial test incorrectly replaced the failing stage with its final cleanup stage; account disable still ran. Added safe non-identifying browser step markers to isolate actual failing page transition, preserving same-commit journal. Do not claim full auth/persistence pass. Disposable access disabled. No member records or shared coffee changed; no publish.
+
+---
+
+## October 28 UTC — real hosted GoTrue/invite verified through test checkpoint; existing coffee choice path corrected
+
+CI run 40766534762 reached real hosted signup, disposable email confirmation, genuine GoTrue password login/user endpoint, admission denial, invite redemption and status. Its initial matcher assumption was invalid: all current eight verified catalog coffees have NULL `release_label`, so matcher deliberately returns `needs_confirmation` rather than `exact_verified` for same-name coffees. Test correctly refused to create a new shared coffee, disabled disposable member, and produced a failed run. Corrected test to exercise the real `Use Existing` Add Coffee confirmation button and independently verify its resulting library entry and fresh RPC readback. No existing member data changed; no production deploy.
+
+---
+
+## October 28 UTC — preflight correction to earlier test harness patch
+
+GitHub readback showed the first attempted regex replacement did not apply to the exact script source. A line-specific correction now accepts the production build's JSON-quoted key. The prior queued run remains untrusted for successful auth testing until this corrected source runs; preserve failures as evidence. No source deployment.
+
+---
+
+## October 28 UTC — first genuine hosted CI failure repaired before account writes
+
+Actual GitHub run 40766285634 job 123091192491 reached hosted script and failed on preliminary config parsing before GoTrue signup or database writes. Cause: production build serializes `publishableKey` as a quoted JSON property, while the test harness expected an unquoted JavaScript property. Corrected parser to accept both JSON/JS forms, and made database URL explicitly passed via psql `-d`. This is a test harness fix; first run is FAILED, not evidence of hosted authentication or saved coffees. Repeat exact-source CI. No publication or existing private data mutation.
+
+---
+
+## October 28 UTC — owner-authorized genuine hosted GoTrue/Add Coffee acceptance started, NO DEPLOY
+
+Owner explicitly authorized disposable-member GoTrue sign-in, real Add Coffee save/readback, reopening, and full hosted application authentication workflow. Existing tests were synthetic and cannot satisfy these. Current production Netlify is prior f5f29a02 release; source-only hierarchy PR211 remains independently READY, NOT DEPLOYED. No production app publication approved.
+
+A narrowly triggered, single-use-branch live workflow was prepared using existing repository SUPABASE_DB_URL secret (never printed or committed) and the already published public client key, not a new paid service or API key. It exercises actual GoTrue signup/password login/identity/refresh/logout, guest invite denial and single-use invite redemption, current hosted Chromium beta UI (390px) setup and Add Coffee using an existing verified catalog coffee only, sign-out/re-login, reload, fresh authenticated RPC and independently committed SQL owner-bound readback. It refuses to create a new shared coffee. It flags the email confirmation link as not exercised: the newly created disposable identity is explicitly email-confirmed in SQL because no inbox identity is available. Test records remain for audit, with only the throwaway beta access disabled (no destructive cleanup). No existing member data are read by the test beyond the shared verified-coffee catalog.
+
+**This is implementation of a test harness, not test evidence.** No hosted GoTrue, account write, persistence or browser pass is claimed until the actual GitHub Actions job and provider readback succeed. If the pre-existing SUPABASE_DB_URL secret is unavailable on the runner or the test setup fails, record the precise provider blocker, repair feasible code errors, and preserve existing READY extractor work. Ordinary development remains [skip netlify]; do not publish.
+
+---
+
 ## October 28 UTC — Owner77 implementation: selected product regional lot, micro-lot, roast cupping, producing-community rules TESTING
 
 Authority: owner instructed finish all 77 reusable source-backed decisions without inventing blank fields or publishing. Recovered current development a1feb72df6b544d9f0fce00dcbb8fbe0df4e2e69 with no open PR. Exact original private 603 corpus recovery independently hash-verified: 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb. Replayed 603/603 actual handler on exact new source parser blob 77f53ffca444ee31e93dc4fdd830ec1b8a5b1f6f and blend blob 1ad508d637ab6a95a0fdb7af4daf706869fcabfe; strict results 3104 exact/70 missing/828 review (old PR206 3101/75/826) with ZERO former exact losses; all 603 supplemental retention rows unchanged aggregate 5458 full/337 partial/679 unconfirmed. This is LOCAL test evidence, exact GitHub checks still pending. No frozen capture/oracle/scorer edits.
