@@ -79,15 +79,25 @@ export function selectedStructuredCoffeeEvidence({title='',description='',tags=[
  const enterprise=body.match(/\b([\p{Lu}][\p{L}\p{M}'’.-]{2,40}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40}){1,4})\s*\(\s*[‘'“"]([\p{Lu}][\p{L}\p{M}'’.-]{2,40}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40}){1,5})[’'”"]\s*\)\s+was\s+founded\s+in\s+\d{4}\s+by\s+([\p{Lu}][\p{L}\p{M}'’.-]{2,40}\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40})\b/u);
  if(enterprise){
   const titleWords=new Set(norm(name).split(' '));
-  const namedCurrent=norm(enterprise[1]).split(' ').some(word=>
-   word.length>=5&&!/^(?:ethiopia|colombia|honduras|guatemala|coffee|beans|organic|farm|estate|company|roasters)$/.test(word)&&titleWords.has(word));
+  // Preserve the company name beginning at its first distinctive selected-
+  // coffee identity token. Flattened Product copy can join a preceding
+  // tasting-note label (e.g. "... Lime Candy Habtamu Fekadu Aga") to the
+  // next heading, which is *not* part of the grower's legal name.
+  const candidateWords=enterprise[1].split(/\s+/);
+  const firstCurrentWord=candidateWords.findIndex(word=>{
+   const token=norm(word);
+   return token.length>=5&&titleWords.has(token)&&
+    !/^(?:ethiopia|colombia|honduras|guatemala|coffee|beans|organic|farm|estate|company|roasters)$/.test(token);
+  });
+  const companyName=firstCurrentWord<0?'':candidateWords.slice(firstCurrentWord).join(' ');
+  const namedCurrent=companyName.split(/\s+/).length>=2;
   const preceding=body.slice(Math.max(0,enterprise.index-90),enterprise.index);
   const historical=/\b(?:last|previous|former|other|another|historical)\s+(?:year|season|lot|release|coffee|farm)\b/i.test(preceding);
   const founder=enterprise[3].split(/\s+/).join('\\s+');
   const cultivation=new RegExp('\\bthe\\s+farm\\s+'+founder+
    '\\s+inherited\\b[^.!?]{0,220}\\bexport\\s+operation\\b[^.!?]{0,240}\\boutgrowers\\b[^.!?]{0,150}\\bcontribute\\s+cherry\\b','iu').exec(body);
   if(namedCurrent&&!historical&&cultivation)
-   add('producer',enterprise[1]+' ('+enterprise[2]+')',enterprise[0]+' | '+cultivation[0],'selected_product_named_growing_export_enterprise');
+   add('producer',companyName+' ('+enterprise[2]+')',companyName+' ('+enterprise[2]+') | '+enterprise[0]+' | '+cultivation[0],'selected_product_named_growing_export_enterprise');
  }
  // Literal selected product title includes the roast class and its description
  // independently identifies roasting "on the ... side of [same level]".
