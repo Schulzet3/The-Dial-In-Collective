@@ -201,3 +201,23 @@ test('Issue33 grower/export enterprise rejects founder-only, another lot and his
   '</script><main><h1>Other Coffee</h1></main>',{source_url:seedsUrl});
  assert.equal(result.fields.producer,undefined);
 });
+
+
+test('Issue33 #59 real flattened selected coffee notes never become part of the producing enterprise name',()=>{
+ const withLeadingNotes='<p>Tastes Like: Cherry, Papaya, Lime Candy</p>'+seedsStory;
+ const variants=[
+  selectedStructuredCoffeeEvidence({title:seedsName,description:withLeadingNotes,tags:[]}),
+  selectedStructuredCoffeeEvidence({title:seedsName,description:'Tastes Like: Cherry, Papaya, Lime Candy '+seedsEnterprise+' '+seedsCultivation,tags:[]})
+ ];
+ for(const facts of variants){
+  assert.deepEqual(found(facts,'producer'),['Habtamu Fekadu Aga (Kuri Mountain Coffee)']);
+  assert.ok(!JSON.stringify(found(facts,'producer')).includes('Lime Candy'));
+ }
+ const shopify=extractShopifyAjaxData({title:seedsName,handle:'ethiopia-guji-getachew-copy',tags:[],description:withLeadingNotes},shopifyProductRequest(seedsUrl));
+ assert.equal(shopify?.fields?.producer,'Habtamu Fekadu Aga (Kuri Mountain Coffee)');
+ const json={'@type':'Product',name:seedsName,url:seedsUrl,description:withLeadingNotes};
+ const html='<script type="application/ld+json">'+JSON.stringify(json)+'</script><main><h1>'+seedsName+'</h1><p>Tastes Like: Cherry, Papaya, Lime Candy</p></main>';
+ const result=extractPublicCoffeeFacts(html,{source_url:seedsUrl});
+ assert.equal(result.fields.producer,'Habtamu Fekadu Aga (Kuri Mountain Coffee)');
+ assert.ok(!result.conflicts?.includes('producer'));
+});
