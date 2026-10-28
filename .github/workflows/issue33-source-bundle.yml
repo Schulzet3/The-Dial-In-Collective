@@ -1,0 +1,57 @@
+name: DIC Issue33 private exact-source review bundle
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - '.github/workflows/issue33-source-bundle.yml'
+      - 'tests/coffee-issue33-review-register.test.mjs'
+      - 'docs/audits/extractor-issue33-independent-77-review-register.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-source-archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact PR head, not synthetic merge or production
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Produce private tracked-source-only archive and source-bound receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p qa_artifacts/issue33-source
+          git archive --format=tar HEAD | gzip -n > qa_artifacts/issue33-source/repository-tracked-source.tar.gz
+          node -e '
+            const fs=require("node:fs"),cp=require("node:child_process"),crypto=require("node:crypto");
+            const src="qa_artifacts/issue33-source/repository-tracked-source.tar.gz";
+            const sha=s=>cp.execFileSync("git",s,{encoding:"utf8"}).trim();
+            const names=cp.execFileSync("git",["ls-files","-z"]).toString("utf8").split(String.fromCharCode(0)).filter(Boolean);
+            if(names.some(n=>n.startsWith(".env")||n.includes("/.env")||n.startsWith("node_modules/")||n.endsWith(".pem")||n.endsWith(".p12")||n.endsWith(".pfx")||n.endsWith(".key")))throw Error("Blocked secret-like tracked source");
+            const sha256=crypto.createHash("sha256").update(fs.readFileSync(src)).digest("hex");
+            const receipt={schema_version:1,head_sha:sha(["rev-parse","HEAD"]),tree_sha:sha(["rev-parse","HEAD^{tree}"]),tracked_files:names.length,archive_sha256:sha256,archive_name:"repository-tracked-source.tar.gz",scope:"immutable Git tracked source, not original603 input",published:false};
+            fs.writeFileSync("qa_artifacts/issue33-source/source-receipt.json",JSON.stringify(receipt,null,2)+String.fromCharCode(10));
+            process.stdout.write(JSON.stringify(receipt)+String.fromCharCode(10));
+          '
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Build actual public app from the same exact source
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run build:cloud
+          tar -czf qa_artifacts/issue33-source/built-app-dist.tar.gz -C dist .
+      - name: Retain exact-source bundle privately for isolated 603 audit
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-exact-source-${{ github.run_id }}
+          path: qa_artifacts/issue33-source/
+          if-no-files-found: error
+          retention-days: 1
