@@ -5,7 +5,7 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {fetchPublicCoffeeHtml,safeCoffeeUrl,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {coffeeUrlPreviewMarkup} from '../../site/cloud/coffee-url-autofill.js';
+import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const rows=JSON.parse(readFileSync(new URL('../../docs/audits/extractor-issue33-independent-77-review-register.json',import.meta.url),'utf8')).records;
 if(rows.length!==77||new Set(rows.map(x=>x.original_product_url)).size!==77||
  rows.some((x,i)=>x.number!==i+1||!safeCoffeeUrl(x.original_product_url)))throw Error('Original 77 URL intake changed');
@@ -56,9 +56,16 @@ async function audit(row){
       section:clamp(x.section,105),conflicting:x.conflicting===true});
     }
     const preview=coffeeUrlPreviewMarkup(result);
+    const reviewExport=coffeeSourceReviewSnapshot({...result,source_url:page.source_url||row.original_product_url});
     out.preview={visible:/class="coffee-url-preview"/.test(preview),
      conflict_warning:out.conflicts.length===0||/Review conflicting details/.test(preview),
-     qualified_process_warning:!result.process_review_note||preview.includes('Processing review:')};
+     qualified_process_warning:!result.process_review_note||preview.includes('Processing review:'),
+     qualified_process_review_export:!result.process_review_note||reviewExport?.processing_review_note===result.process_review_note};
+    if(row.number===6)out.fudam_qualification={
+     selected_current_identity:/\bFUDAM\b/i.test(result.fields?.name||''),
+     explicit_selected_process:result.fields?.process||null,
+     qualified_association_review_present:Boolean(result.process_review_note),
+     qualifier_retained_in_source_review:out.preview.qualified_process_review_export};
     out.review=out.conflicts.includes(field)?'CURRENT_FIELD_CONFLICT':
      out.selected[field]?'CANONICAL_FIELD_PRESENT':
      out.related.length||out.details[field]?'LITERAL_SOURCE_CONTEXT_ONLY':

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {extractShopifyAjaxData,shopifyProductRequest,mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
-import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
+import {coffeeSourceReviewSnapshot,coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
 
 const blackWhite='https://www.blackwhiteroasters.com/products/r-diego-horta-anaerobic-natural';
 const selected='Diego Horta - Anaerobic Natural';
@@ -105,5 +105,57 @@ test('stale old Beanstock product and explicit current process do not trigger th
   assert.equal(r.ok,true);
   assert.equal(r.fields.process,expect);
   assert.equal(r.process_review_note,undefined);
+ }
+});
+
+// Source review must retain qualified FUDAM context after leaving the visible preview.
+test('selected FUDAM qualified source context survives bounded review export without becoming canonical Process',()=>{
+ const url='https://beanstockcoffee.com/products/colombian-supremo-organic';
+ const html='<main><h1>New!! Colombia Fair Trade Organic FUDAM LA Union</h1>'+
+  '<p>FUDAM is an association of growers.</p><p>The coffees are generally washed two or three times before being dried.</p></main>';
+ const result=extractPublicCoffeeFacts(html,{source_url:url});
+ const snapshot=coffeeSourceReviewSnapshot({...result,source_url:url},{checkedAt:'2026-10-28T00:00:00.000Z'});
+ assert.equal(result.fields.process,undefined);
+ assert.equal(snapshot.field_suggestions.process,undefined);
+ assert.equal(snapshot.processing_review_note,result.process_review_note);
+ assert.match(snapshot.processing_review_note,/not an explicit processing guarantee for this lot/i);
+ assert.ok(snapshot.published_source_information.some(f=>f.field==='processing_context'&&/generally washed/i.test(f.value)));
+ assert.equal(snapshot.verification,'unverified_public_source_suggestions');
+});
+
+test('official Beanstock Shopify collection URLs preserve current FUDAM processing review without inventing Washed',()=>{
+ const title='New!! Colombia Fair Trade Organic FUDAM LA Union';
+ const html='<main><h1>'+title+'</h1><p>FUDAM is an association of growers.</p>'+
+  '<p>The coffees are generally washed two or three times before being dried.</p></main>';
+ for(const path of ['/products/colombian-supremo-organic',
+  '/collections/medium-roasts/products/colombian-supremo-organic',
+  '/collections/frontpage/products/colombian-supremo-organic']){
+  const url='https://beanstockcoffee.com'+path;
+  const result=extractPublicCoffeeFacts(html,{source_url:url});
+  assert.equal(result.ok,true,path);
+  assert.equal(result.fields.process,undefined,path);
+  assert.match(result.process_review_note||'',/generally washed/i,path);
+  assert.equal(coffeeSourceReviewSnapshot({...result,source_url:url})?.processing_review_note,result.process_review_note,path);
+ }
+ for(const url of ['https://otherroaster.example/products/colombian-supremo-organic',
+  'https://beanstockcoffee.com/collections/medium-roasts/products/different-coffee',
+  'https://beanstockcoffee.com/collections/medium-roasts/other/colombian-supremo-organic']){
+  const result=extractPublicCoffeeFacts(html,{source_url:url});
+  assert.equal(result.process_review_note,undefined,url);
+ }
+});
+
+test('reused Beanstock URL must not inherit FUDAM processing hints when current selected product changed',()=>{
+ const url='https://beanstockcoffee.com/products/colombian-supremo-organic';
+ for(const [name,description] of [
+  ['New!! Colombia Organic Tolima Suave','This is a Tolima coffee with caramel and milk chocolate notes.'],
+  ['Colombia Organic Finca Las Flores','This washed lot is from the Sierra Nevada and tastes of amaretto and pear.']
+ ]){
+  const html='<html><head><meta name="description" content="Old FUDAM growers generally washed two or three times"></head>'+
+   '<body><main><h1>'+name+'</h1><p>'+description+'</p></main></body></html>';
+  const result=extractPublicCoffeeFacts(html,{source_url:url});
+  assert.equal(result.fields.name,name);
+  assert.equal(result.process_review_note,undefined);
+  assert.equal(coffeeSourceReviewSnapshot({...result,source_url:url})?.processing_review_note,undefined);
  }
 });
