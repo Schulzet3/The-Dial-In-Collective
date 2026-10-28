@@ -19,3 +19,5 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [UI/UX accessibility and responsive Log Shot regression: Issue #26](issue-26.md)
 
 - [Issue #22: offline synchronization and account isolation](issue-22.md)
+
+- [October28 queue audit and release](release-20261028.md)
