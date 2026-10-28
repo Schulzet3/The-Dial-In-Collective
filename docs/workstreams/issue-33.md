@@ -1,3 +1,15 @@
+## October 28 UTC — White Coffee #4 source verified, owner decision recorded; original603 restricted
+
+**Owner:** Approved leaving Alaska Artisan White Coffee roast_level blank and flagging for member selection. Very Light / Ultra Light are possibilities, NOT source-confirmed; never automatically populate them. The roaster distinguishes White from Light and describes a low-temperature light tan roast, without a verified seven-tier category. Next coffee #5 is Bald Guy Brew Organic Colombian: current official selected-product Roast: Medium/Medium Dark, unresolved individual choice.
+
+**Code & source:** PR187 added a source-scoped selected exact White Coffee title or explicit Roast: White manual hint, with no automatic tier. Negative cases protect generic educational copy, related products and similar names; a separately explicit supported current tier remains meaningful. UI preview regression verifies visible user hint. Both canonical Locked files, approval coverage, independent original77 decision register and release queue updated. No immutable603 source/oracle/scorer, history or member data changed; concurrent Cortez PR186 preserved.
+
+**Exact CI & integration:** Final PR187 feature SHA 58e97501def83de20a2beca0931d8dbd639de670: approval 40626499237, security 40626499274, isolated SQL 40626499194, visual/browser 40626499255, cloud/mobile 40626499146 and full Node/lint/build 40626499207 all SUCCESS. Non-force merge 3947b1ba32a89a9f42db5cd0335a96444166ce9c verified same tested tree c391ac5f3e1798c7b47b7c3af7abc4a83168f2a3. Exact merged approval 40626715337, Node/build 40626715299, cloud/mobile 40626715382 and live source acceptance 40626715331 SUCCESS. Public acceptance 13/13 REQUIRED (14 total/13 parsed), 27 anonymous requests, 0 real backend/member quota/production changes, one optional Counter Culture fixture sanitization gap. White exact URL itself not independently included in public probe; negative/positive synthetic tests passed.
+
+**Gates:** Original frozen603 PR187 run 40626499213 SKIPPED due historical candidate12 branch and private ephemeral captures. Controlled source probe on merge 40626715360 SKIPPED. These checks are not asserted PASS; individual White source queue row is TESTING awaiting original603, not READY. Netlify current published deploy independently unchanged 6ae0fc16178b2f1241e441f8. No publish command or production SQL/Edge/Auth.
+
+---
+
 ## October 28 UTC — Coffee #4 White Coffee owner-confirmed manual roast classification
 
 **Owner instruction:** "Yeah that makes sense. If anything it would be very or ultra light. but I'd probably flag it for the user to decide." This explicitly resolves case #4 with roast_level null; do not automatically infer Light, Very Light or Ultra Light. Alaska Artisan's [selected product](https://www.alaskaartisancoffee.com/products/white-coffee) explicitly identifies White Coffee, and [its categories](https://www.alaskaartisancoffee.com/collections/featured-roasts) list White separately from Light; its low-temperature light-tan prose is educational and not calibrated to our seven tiers.

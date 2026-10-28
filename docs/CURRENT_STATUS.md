@@ -1,3 +1,9 @@
+## October 28 UTC — White Coffee user-choice roast flag merged, exact normal CI green / TESTING NOT DEPLOYED
+
+Owner resolved Alaska Artisan White Coffee review #4/77: keep canonical roast blank and flag nonstandard White for user manual selection; Ultra/Very Light are unverified possibilities. PR187 merged nonforce at 3947b1ba32a89a9f42db5cd0335a96444166ce9c, same tree as final tested feature. Six exact feature-head checks and postmerge Node/cloud/approval plus public selected-source acceptance (13/13 required) SUCCESS. Original 603 workflow SKIPPED on restricted branch, so queue DIC-Q-33-white-coffee-manual-roast remains TESTING. Separate Cortez PR186 still preserved; owner next coffee #5 Bald Guy Brew Organic Colombian is a two-tier Medium/Medium Dark source, pending individual review. Netlify published deploy still 6ae0fc16178b2f1241e441f8. No data migration or publication.
+
+---
+
 ## October 28 UTC — Alaska Artisan White Coffee owner resolution (source TESTING; NOT DEPLOYED)
 
 Owner resolves original missing-field coffee #4/77: Alaska Artisan White Coffee remains blank in the seven-tier roast model, with a member-review hint from the selected White Coffee product or explicit Roast: White. Very Light/Ultra Light are owner-described possibilities only, neither verified nor auto-filled; old original603 expected Light stays untouched. Official product and category pages confirm White is a separate classification. New code/test regression and independent decision register follow same-commit journal, source CI/merge pending. PR186 concurrent Cortez is preserved, no publication authorized.

@@ -1244,22 +1244,37 @@
     {
       "id": "DIC-Q-33-white-coffee-manual-roast",
       "issue": 33,
-      "pr": null,
+      "pr": 187,
       "title": "Selected White Coffee nonstandard roast warning and user choice",
       "state": "TESTING",
-      "merged_source_sha": null,
+      "merged_source_sha": "3947b1ba32a89a9f42db5cd0335a96444166ce9c",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
       ],
       "tests": [
-        "Exact selected White Coffee title and explicit Roast: White remain blank and show safe manual selection hint; contradictory and unrelated source protections tested synthetically. Exact-source CI pending."
+        "Exact selected White Coffee title and explicit Roast: White remain blank and show safe manual selection hint; contradictory and unrelated source protections tested synthetically. Exact-source CI pending.",
+        "PR187 final exact head 58e97501def83de20a2beca0931d8dbd639de670: approval 40626499237, security 40626499274, isolated SQL 40626499194, private visual/browser 40626499255, cloud/mobile 40626499146 and full Node/build 40626499207 all SUCCESS.",
+        "Nonforce PR187 merged at 3947b1ba32a89a9f42db5cd0335a96444166ce9c; merge tree c391ac5f3e1798c7b47b7c3af7abc4a83168f2a3 matches tested head. Exact merged approval 40626715337, full Node/build 40626715299, cloud/mobile 40626715382 and live public-source acceptance 40626715331 SUCCESS.",
+        "Merged public source acceptance 13/13 REQUIRED pass; 14 targets, 13 parsed, 27 anonymous public requests, zero production writes, member quota or backend; one optional Counter Culture fixture gap. White Coffee selected URL is not an individual live probe target.",
+        "Original immutable frozen603 replay 40626499213 SKIPPED under historical-branch/private ephemeral capture guard (NOT PASS); postmerge controlled roaster probe 40626715360 SKIPPED. No fresh original 603 exact-source score."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        40626499237,
+        40626499274,
+        40626499194,
+        40626499255,
+        40626499146,
+        40626499207,
+        40626715337,
+        40626715299,
+        40626715382,
+        40626715331
+      ],
       "blockers": [
-        "Applicable exact-source CI, safe merge and readback pending. Restricted original603 benchmark branch/private input gate remains unverified."
+        "Full original immutable 603-coffee exact-source acceptance is not available on this branch; workflow 40626499213 SKIPPED due candidate12-only branch/private ephemeral input. Cannot mark READY under existing Locked gate."
       ],
       "owner_source": "Owner October 27 source gap resolution: Alaska Artisan White Coffee #4, manual selection only",
-      "notes": "No automatic Ultra Light, Very Light, or Light classification; preserve product label. No original603, saved member data, production operations or release changed."
+      "notes": "No automatic Ultra Light, Very Light, or Light classification; preserve product label. No original603, saved member data, production operations or release changed. All normal exact-source tests, actual public-source acceptance and merge verified. Do not claim White URL itself in live probe. Netlify current published deploy remains 6ae0fc16178b2f1241e441f8; NOT DEPLOYED."
     }
   ],
   "history": [
