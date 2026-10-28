@@ -55,6 +55,7 @@ stub = r"""
    if(name==='dic_apply_client_change'){
     const event=params;
     if(event.action!=='save_shot')throw Error('Only shot synchronization is mocked');
+    if(localStorage.getItem('dic_fake_hold_sync')==='1')throw Error('Intentional sync hold during service-worker upgrade');
     const existing=remoteShots(),shot=record(event.payload);
     if(!existing.some(x=>x.id===shot.id))existing.push(shot);
     localStorage.setItem('dic_fake_remote_shots',JSON.stringify(existing));
@@ -129,6 +130,24 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
     try{await sw.update();}catch{/* Expected while offline */}
    }""")
    assert page.get_by_role('button',name='1 Pending',exact=False).count()>0,'Offline app update discarded queued shot'
+   # Real isolated service-worker version transition while a durable shot is pending.
+   # Block only the synthetic remote mutation so reconnect cannot consume the shot.
+   page.evaluate("localStorage.setItem('dic_fake_hold_sync','1')")
+   context.set_offline(False)
+   worker=www/'sw.js'
+   original_worker=worker.read_text()
+   assert "dic-public-shell-" in original_worker
+   worker.write_text(original_worker.replace("dic-public-shell-","dic-public-shell-updated-",1))
+   page.evaluate("async()=>{const r=await navigator.serviceWorker.ready;await r.update();}")
+   page.wait_for_function("""async()=>{
+    const keys=await caches.keys();
+    return keys.some(k=>k.startsWith('dic-public-shell-updated-'));
+   }""",timeout=25000)
+   assert page.get_by_role('button',name='1 Pending',exact=False).count()>0
+   context.set_offline(True)
+   page.reload(wait_until='domcontentloaded')
+   page.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
+   assert page.get_by_role('button',name='1 Pending',exact=False).count()>0,'Actual SW version upgrade lost pending shot'
    page.evaluate("localStorage.setItem('dic_fake_owner','b2222222-2222-4222-8222-222222222222')")
    page.reload(wait_until='domcontentloaded')
    page.get_by_text('Reconnect To Continue',exact=True).wait_for(timeout=20000)
@@ -141,7 +160,7 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    page.wait_for_function("!document.querySelector('.coffee-card')",timeout=20000)
    assert page.locator('.coffee-card').count()==0,'Expired SDK session exposed cache'
 
-   page.evaluate("localStorage.removeItem('dic_fake_expired')")
+   page.evaluate("localStorage.removeItem('dic_fake_expired');localStorage.removeItem('dic_fake_hold_sync')")
    context.set_offline(False)
    page.reload(wait_until='domcontentloaded')
    page.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
