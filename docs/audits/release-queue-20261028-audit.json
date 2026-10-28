@@ -1581,9 +1581,86 @@
           "id": 123144894508
         }
       ]
+    },
+    {
+      "id": "DIC-Q-22-revoked-offline-cold-reload-isolation",
+      "issue": 22,
+      "pr": 217,
+      "title": "Persist revoked-access offline denial across cold reload while preserving outbox and PWA updates",
+      "state": "READY",
+      "merged_source_sha": "45ae4561205c0527e8dcf67d0ec65b06f1724616",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "PR217 exact reviewed head cfbe886a9ce1b526cccb91897d776eff36915295: app/build40782759803, approval40782759668, cloud/mobile40782759651, visual/PWA40782759711, source security40782759664 and isolatedSQL40782759633 SUCCESS independently read back.",
+        "Six isolated automated scenarios exercised concurrent stale revisions, offline conflict retention, account changes, expired/refreshing credentials, IndexedDB failure, real service-worker upgrade/outbox preservation, lost acknowledgment/idempotent replay and cross-reload access denial. Actual GoTrue/live member/device not newly tested by this scope.",
+        "Nonforce merge45ae4561205c0527e8dcf67d0ec65b06f1724616 read back. Exact merged review40783051941, cloud/mobile40783051989 and approval40783052022 SUCCESS; app40783051945 final outcome verified before release. Combined release candidate must complete final exact-source checks before publication."
+      ],
+      "ci_runs": [
+        40782759803,
+        40782759668,
+        40782759651,
+        40782759711,
+        40782759664,
+        40782759633
+      ],
+      "blockers": [],
+      "owner_source": "Owner October28 Issue22 direction to test scenarios1–6 fully, repair defects and close with substantive automated evidence; current owner explicitly requests full queue audit then publish.",
+      "notes": "No hosted schema/API/auth changes or member writes. Nonsecret per-owner localStorage denial marker supplements in-memory guard and failed cache deletion, cleared only after fresh server admission; keeps outbox/receipts. Total browser storage failure remains a known platform limit.",
+      "checks": [
+        {
+          "name": "validate",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 123148302252
+        },
+        {
+          "name": "frozen603",
+          "status": "completed",
+          "conclusion": "skipped",
+          "id": 123148301675
+        },
+        {
+          "name": "approval",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 123148299786
+        },
+        {
+          "name": "cloud-tests",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 123148299519
+        },
+        {
+          "name": "review",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 123148299429
+        },
+        {
+          "name": "security-inventory",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 123148299350
+        },
+        {
+          "name": "mobile-browser-qa",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 123148299184
+        },
+        {
+          "name": "sql",
+          "status": "completed",
+          "conclusion": "success",
+          "id": 123148299030
+        }
+      ]
     }
   ],
-  "queue_schema_and_ancestry": "PASS:23 READY items cover all24 changed deployable files; initial22 independently audited, concurrentPR218 scope independently reconciled and current77PASS",
+  "queue_schema_and_ancestry": "24 READY scoped items,24 application files; source-bound final combined CI pending. No retired or parent research scope included.",
   "changed_application_paths": [
     "site/admin/main.js",
     "site/admin/records.js",
@@ -1629,7 +1706,8 @@
     "pre_migration_backup_run": 40782154176,
     "sql_apply_status": "NOT_APPLIED",
     "encrypted_sha256": "2fbf8031b5b29351e10b7c5d738e9f4b64793c92d04495e7abd9197e4190fc56",
-    "offsite_file_id": "1sjBMLM3_btgI2jagq7hI50RpHjb8Op0h"
+    "offsite_file_id": "1sjBMLM3_btgI2jagq7hI50RpHjb8Op0h",
+    "preservation_fix": "Existing correction reuses prior decaf keys only when old client omits both optional keys; new disposableSQL regression must pass."
   },
   "existing_combined_evidence": {
     "exact_source_head": "3f54c398e47df50ef8abc36928c9eafec6ada8ec",
@@ -1665,5 +1743,6 @@
     "fail": 0,
     "skip": 6,
     "scope": "Original22 runtime;latestPR218+combined exact CI pending"
-  }
+  },
+  "audit_concurrent_offline_merge": "45ae4561205c0527e8dcf67d0ec65b06f1724616"
 }
