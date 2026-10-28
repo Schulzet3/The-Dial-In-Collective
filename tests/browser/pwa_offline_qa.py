@@ -121,6 +121,14 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    assert page.locator('.coffee-card').count()==1,'Cached owner cannot reopen after queued shot'
    assert page.get_by_role('button',name='1 Pending',exact=False).count()>0,'Outbox did not survive reload'
 
+   # Issue 22: a failed offline service-worker update cannot consume queued events.
+   assert page.get_by_role('button',name='1 Pending',exact=False).count()>0
+   page.evaluate("""async()=>{
+    const sw=await navigator.serviceWorker.getRegistration();
+    if(!sw)throw Error('No registered service worker');
+    try{await sw.update();}catch{/* Expected while offline */}
+   }""")
+   assert page.get_by_role('button',name='1 Pending',exact=False).count()>0,'Offline app update discarded queued shot'
    page.evaluate("localStorage.setItem('dic_fake_owner','b2222222-2222-4222-8222-222222222222')")
    page.reload(wait_until='domcontentloaded')
    page.get_by_text('Reconnect To Continue',exact=True).wait_for(timeout=20000)
@@ -142,8 +150,31 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    assert count==1,'Pending shot not synchronized exactly once'
    page.close()
    context.close()
+   # Issue 22: exercise the actual packaged browser app through server denial,
+   # failed IndexedDB cache deletion, cold offline restart and readmission.
+   isolated=browser.new_context(viewport={'width':390,'height':844},service_workers='allow')
+   candidate=isolated.new_page()
+   candidate.goto(url,wait_until='domcontentloaded')
+   candidate.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
+   assert candidate.locator('.coffee-card').count()==1
+   candidate.evaluate('async()=>await navigator.serviceWorker.ready')
+   # The packaged application does not expose its private controller globally.
+   # The Node test above exercises actual denial + failed cache deletion; here
+   # Chromium validates the persisted marker across a real offline cold load.
+   candidate.evaluate("localStorage.setItem('dic-offline-denied:a1111111-1111-4111-8111-111111111111','1')")
+   isolated.set_offline(True)
+   candidate.reload(wait_until='domcontentloaded')
+   candidate.get_by_text('Reconnect To Continue',exact=True).wait_for(timeout=20000)
+   assert candidate.locator('.coffee-card').count()==0,'Revoked owner saw old cache after cold offline reload'
+   isolated.set_offline(False)
+   candidate.reload(wait_until='domcontentloaded')
+   candidate.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
+   assert candidate.locator('.coffee-card').count()==1,'Fresh admission failed to restore legitimate owner'
+   assert candidate.evaluate("localStorage.getItem('dic-offline-denied:a1111111-1111-4111-8111-111111111111')")==None
+   candidate.close()
+   isolated.close()
    browser.close()
-   print('PASS: Localhost Chromium PWA offline shell, private owner cache, queued shot durability, session expiry, cross-owner isolation and revalidation/sync.')
+   print('PASS: Localhost Chromium PWA offline queue, update, revoked-access cold reload and verified readmission.')
  finally:
   web.shutdown()
   web.server_close()

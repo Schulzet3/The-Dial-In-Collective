@@ -17,3 +17,5 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Owner-retired basket/equipment version manager with historical snapshots preserved: Issue #16](issue-16.md)
 
 - [UI/UX accessibility and responsive Log Shot regression: Issue #26](issue-26.md)
+
+- [Issue #22: offline synchronization and account isolation](issue-22.md)

@@ -1,3 +1,9 @@
+## October 28 UTC — Issue #22 offline and account isolation acceptance under test
+
+Owner approved six-scenario automated regression and conditional closure without publication. A fresh browser-reload risk after denied-member IndexedDB cache deletion failure prompted durable owner-scoped offline-denial marker plus cold-reload regression; real built-PWA offline service-worker update test added. Existing Node and isolated signed-JWT PostgREST tests cover stale revisions, lost response, signout/account swap, credential expiration and access denials. Exact-source CI and approval/queue reconciliation pending; no tests or source READY asserted before provider evidence. No production writes or deployment.
+
+---
+
 ## October 28 UTC — Issue #33 PR218 current Bonjo Gold Collection recovered and scoped READY; residual OPEN, NO DEPLOY
 
 PR218 merged non-force at `b4ed955a7ddcf05a06bd83e3d99b46e57777a823`, tested head `d9adff35b2c8e0e006d0abf1c77a8c3fb5b2451f`. Seven applicable exact-source workflows SUCCESS: full Node/build 40781751339, cloud/mobile 40781751460, visual 40781751546, isolated SQL 40781751493, security 40781751477, approval 40781751433, private source bundle 40781751492. Restricted original603 40781751390 SKIPPED, not passed. Fixed generic current selected product Quality Grade collection parsing across HTML tags and multiple sentences, with selected coffee identity corroboration and adversarial negative tests. No provider/data changes.
