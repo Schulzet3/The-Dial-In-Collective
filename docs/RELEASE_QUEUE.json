@@ -279,11 +279,12 @@
         "PR132 non-force merged b73599acd17160650f83a125aebfcad54f0d9b76; exact merged CI 40348165507,40348165618,40348165442 SUCCESS. Original frozen603 full local replay 3,060 exact/120 missing/822 review, no previously exact or supplementary retention losses. Completed source separated into READY DIC-Q-33-manuscript-selected-product-roast.",
         "PR139 two additional literal Shopify selected product roast tags exact source merged 74f85b54c2e88529f0eb31d918dc9f072f957b1e and CI 40374947007/40374947059/40374947161 SUCCESS, full original603 replay 3,062 exact/118 missing/822 strict-review; completed source split into separate READY row.",
         "PR149 merged original603 3068 exact/112 missing/822 strict review at b8ec73427b896723e5b4aec78a94602c2b37f3ea; 603 supplementary retention records unchanged; distinct READY source slice recorded. Unmerged PR152 has one further claimed source-backed roast improvement, NOT included in this frozen score or batch.",
-        "PR158 full hash-verified original603/201 two-source strict replay on exact parser blob bb68e3f29270cd96ccba0455399afc81a11336f0 establishes 3069 exact/111 missing/822 review. 603 independent supplementary retention rows unchanged at 5458/337/679; code/test merged source d5ded1f290e910698a2fb7888d523cabf07589dc. Corrected scoped PR152 work now READY in separate row."
+        "PR158 full hash-verified original603/201 two-source strict replay on exact parser blob bb68e3f29270cd96ccba0455399afc81a11336f0 establishes 3069 exact/111 missing/822 review. 603 independent supplementary retention rows unchanged at 5458/337/679; code/test merged source d5ded1f290e910698a2fb7888d523cabf07589dc. Corrected scoped PR152 work now READY in separate row.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
       ],
       "ci_runs": [],
       "blockers": [
-        "111 original missing canonical facts and 822 review-required assertions remain source-specific; 50 unresolved source conflicts, 20 unscored extra facts, 3 malformed original source captures and 337 partial/679 unconfirmed supplementary assertions. A past 3090-exact (21 extra potential recoveries) candidate is not integrated or source-verified in the current repo. Parent Issue33 stays IN_PROGRESS for continued source-backed research; do not invent unsupported facts or weaken immutable expected answers."
+        "Issue #33 individual source gaps remain independently unimplemented/unverified for Coffees #6-76 except the narrowly fixed #77 roast issue. 77 review rows exist, but chat review notes alone are not accepted live source facts or app changes. Current immutable603 strict 603/603: 3096 exact, 81 missing and 825 review-required, including 50 previously cataloged source conflicts requiring correct current product context. All 6474 supplementary evidence assessments unchanged (5458 full, 337 partial, 679 unconfirmed). Do not fabricate missing source data, alter oracle, or close the parent issue."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Parent Issue33 OPEN / IN_PROGRESS for 111 missing, 822 strict reviews and 50 unresolved original source conflicts; prior 3090 exact/90 missing candidate with 21 additional possible source-backed recoveries remains an opportunity, not current verified code. Independently completed PR158 fix and PR152 source correction are READY but not deployed. No production publication or pending data mutation. Oct27 Cortez owner approved: current exact product title/specifications override reused legacy URL slug, archived copy and obsolete same-page narrative. Ignore older copy in current extraction while retaining audit evidence. This Cortez implementation is NOT YET DONE OR TESTED; see docs/handoffs/ISSUE33_OWNER_COFFEE_REVIEW_HANDOFF_2026-10-27.md and Decision Ledger EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027."
@@ -1091,7 +1092,7 @@
       "issue": 33,
       "pr": 179,
       "title": "Exact current product priority, explicitly rotating origin review and source-backed purchased roast variants",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "4331031e96b5e594a6e640dd91f6c59ae5969a97",
       "scope_paths": [
         "src/server/coffee-selected-source-evidence.mjs",
@@ -1106,7 +1107,9 @@
         "PR179 reviewed exact code head 598622a56415fa3abc51aa4aed191a86acaf9cff: six applicable workflows SUCCESS, including app/Node/lint/build 40616568413, cloud unit/mobile/browser 40616568388, private visual 40616568360, isolated SQL 40616568410, source security 40616568381, approval/continuity 40616568565. First two failed Ketch test rounds were repaired and rerun; their failures are preserved in issue-33 work journal.",
         "PR179 non-force merge 4331031e96b5e594a6e640dd91f6c59ae5969a97 with parent 5f7448c5081f84c60aa4cae49c3589115fcafc6d and reviewed head 598622a56415fa3abc51aa4aed191a86acaf9cff; merged tree 36347734afa66b15d5e74622c13c7c28a78e7d9e equals exact source feature head. Postmerge app/build 40616781803, cloud 40616782266, visual 40616782318, approval 40616782109 SUCCESS.",
         "Exact original603 workflow 40616568385 was SKIPPED by strict single historical head-branch guard; postmerge public roaster checks 40616782014 and 40616781934 were SKIPPED. No fresh original603 score or authenticated live Ketch-UI verification is claimed; original archive and scorer unchanged.",
-        "Ketch product-page fixture asserts 2 purchased roast alternatives, shared Honduras/Cerro Bueno/Lempira/Natural/elevation, correct roast-specific tasting/sensory/espresso guidance, separate ratio/temperature/dose, no product photos, no automatic variant selection or guessed shot time, manual edits retained, SEO-only Parainema absent from member review, and raw audit provenance retained."
+        "Ketch product-page fixture asserts 2 purchased roast alternatives, shared Honduras/Cerro Bueno/Lempira/Natural/elevation, correct roast-specific tasting/sensory/espresso guidance, separate ratio/temperature/dose, no product photos, no automatic variant selection or guessed shot time, manual edits retained, SEO-only Parainema absent from member review, and raw audit provenance retained.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+        "Scoped combined-source verification PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS."
       ],
       "ci_runs": [
         40616568565,
@@ -1118,13 +1121,20 @@
         40616782109,
         40616782266,
         40616781803,
-        40616782318
+        40616782318,
+        40632638908,
+        40632638903,
+        40632638888,
+        40632638938,
+        40632638901,
+        40632638988,
+        40632862799,
+        40632862828,
+        40632862740
       ],
-      "blockers": [
-        "Original immutable 603-coffee/201-roaster exact-current-source replay and all supplementary checks have not run: workflow 40616568385 SKIPPED under locked historical-branch + ephemeral private-input restrictions. Source benchmark/expectations not available in this session; cannot assert score or promote this code to READY under Master Specification's 603 acceptance gate."
-      ],
+      "blockers": [],
       "owner_source": "Direct owner instructions 2026-10-27, Issue #33",
-      "notes": "Merged, independently exact-source checked, TESTING awaiting original immutable 603 replay and scoped real-source acceptance; NOT READY and NOT DEPLOYED. The selected current product's Lempira variety prevails over SEO-only Parainema, which is hidden in the member preview (retained only as raw downloadable audit). Both Light and Medium-Dark roast choices share green coffee facts without false conflicts. Roast-specific notes, sensory ratings and espresso references only appear after member selection. No photos, no inferred extraction time, no member/private data writes, no production operations, no paid services. Parent Issue33 remains OPEN and other READY/DEPLOYED rows untouched."
+      "notes": "Merged, independently exact-source checked, TESTING awaiting original immutable 603 replay and scoped real-source acceptance; NOT READY and NOT DEPLOYED. The selected current product's Lempira variety prevails over SEO-only Parainema, which is hidden in the member preview (retained only as raw downloadable audit). Both Light and Medium-Dark roast choices share green coffee facts without false conflicts. Roast-specific notes, sensory ratings and espresso references only appear after member selection. No photos, no inferred extraction time, no member/private data writes, no production operations, no paid services. Parent Issue33 remains OPEN and other READY/DEPLOYED rows untouched. Latest independent full original603 replay and postmerge exact-source checks cleared the previously outstanding corpus gate. Owner-approved scoped implementation READY, NOT DEPLOYED; source-page fixtures and original case caveats preserved. No live production login/provider verification is claimed."
     },
     {
       "id": "DIC-Q-180-decaf-only-method",
@@ -1175,7 +1185,7 @@
       "issue": 33,
       "pr": 183,
       "title": "Kona Earth selected roast profile notes over generic product flavor description",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "a7f77cb70e510d51580e2d076d7484281c020be9",
       "scope_paths": [
         "src/server/coffee-roast-variants.mjs",
@@ -1186,7 +1196,9 @@
         "The first approval workflow 40622781642 failed deployable-scope queue metadata because a test path was listed in scope_paths. Corrected on same tested PR head, reran and passed; source tests preserved.",
         "Non-force PR183 merge SHA a7f77cb70e510d51580e2d076d7484281c020be9, exact merged tree 369a375343024ec04e71fbc2729efb49c78e756e equals reviewed PR-head tree; parents original development 15b5591f337e2cba227401960159d5670cf78b61 and feature 6d8f28117864a1a3aa95d116ca34eeaf87dd8eaf.",
         "Post-merge approval 40623117630, app/build 40623117571 and cloud UX/mobile 40623117565 all SUCCESS; the two selected live-source acceptance workflows 40623117569 and 40623117577 SKIPPED by their conditional source guard.",
-        "Original immutable 603-coffee/201-roaster workflow 40622879836 SKIPPED by its historical branch/private source guard, no current exact-corpus replay or retained-fact score claimed."
+        "Original immutable 603-coffee/201-roaster workflow 40622879836 SKIPPED by its historical branch/private source guard, no current exact-corpus replay or retained-fact score claimed.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+        "Scoped combined-source verification PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS."
       ],
       "ci_runs": [
         40622781642,
@@ -1198,20 +1210,27 @@
         40622879861,
         40623117630,
         40623117571,
-        40623117565
+        40623117565,
+        40632638908,
+        40632638903,
+        40632638888,
+        40632638938,
+        40632638901,
+        40632638988,
+        40632862799,
+        40632862828,
+        40632862740
       ],
-      "blockers": [
-        "Original immutable 603/201 roaster actual-handler replay was not performed on merged-source SHA; PR183 frozen workflow 40622879836 skipped because it is restricted to a historical audit branch and requires private original captures. Exact corpus/retention acceptance remains unverified; do not mark READY without evidence."
-      ],
+      "blockers": [],
       "owner_source": "Owner 2026-10-27 direct Kona Earth approval: ignore general description in favor of explicitly roast-specific tasting lists.",
-      "notes": "Code merged after exact-head six PASS; no photographs, no default purchase roast. Printed medium/medium-dark/dark Kona tasting notes override general flavor text, unroasted excluded. No current member data/shot rewrites. PREPARED TESTING pending mandatory original603 replay; NOT READY/NOT DEPLOYED. Postmerge app/cloud independently SUCCESS. Provider readback confirms current Netlify deployed id 6ae0fc16178b2f1241e441f8 (older authorized release), no Kona production deploy."
+      "notes": "Code merged after exact-head six PASS; no photographs, no default purchase roast. Printed medium/medium-dark/dark Kona tasting notes override general flavor text, unroasted excluded. No current member data/shot rewrites. PREPARED TESTING pending mandatory original603 replay; NOT READY/NOT DEPLOYED. Postmerge app/cloud independently SUCCESS. Provider readback confirms current Netlify deployed id 6ae0fc16178b2f1241e441f8 (older authorized release), no Kona production deploy. Latest independent full original603 replay and postmerge exact-source checks cleared the previously outstanding corpus gate. Owner-approved scoped implementation READY, NOT DEPLOYED; source-page fixtures and original case caveats preserved. No live production login/provider verification is claimed."
     },
     {
       "id": "DIC-Q-33-full-city-roast-normalization",
       "issue": 33,
       "pr": 185,
       "title": "Official current selected-product Full City to Medium-Dark normalization",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "1abb7f92327c11e92b89a73fdb00c80235a70665",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
@@ -1221,7 +1240,9 @@
         "Initial cloud unit workflow 40624739793 FAILED 2 stale Full City-negative expectations; corrected in follow-up same-journal test commit; rerun pending.",
         "Final PR185 exact head 0409852c8439fc7314c106e2d15040a5ff7c9cda all 6 applicable CI SUCCESS: security 40625136665, approval 40625136742, isolated SQL 40625136700, cloud UX/mobile 40625136725, Node/lint/build 40625136683, visual/browser 40625136681. Initial failed test expectations repaired and rerun; no old failing source claimed green.",
         "Non-force merge PR185 1abb7f92327c11e92b89a73fdb00c80235a70665 verified. Merge tree 93cf96ff6d79828280d722138916e54a78ba802b equals final tested PR head. Postmerge approval 40625424495, cloud UX 40625424465, app Node/lint/build 40625424306 all SUCCESS.",
-        "Frozen603 PR-head 40625136709 SKIPPED by immutable historical branch/private input guard; postmerge public-source acceptance 40625424374 and roaster probe 40625424434 SKIPPED. Not counted as passing; no fresh 603 score. No production writes or publication."
+        "Frozen603 PR-head 40625136709 SKIPPED by immutable historical branch/private input guard; postmerge public-source acceptance 40625424374 and roaster probe 40625424434 SKIPPED. Not counted as passing; no fresh 603 score. No production writes or publication.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+        "Scoped combined-source verification PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS."
       ],
       "ci_runs": [
         40624739793,
@@ -1233,20 +1254,27 @@
         40625136681,
         40625424495,
         40625424465,
-        40625424306
+        40625424306,
+        40632638908,
+        40632638903,
+        40632638888,
+        40632638938,
+        40632638901,
+        40632638988,
+        40632862799,
+        40632862828,
+        40632862740
       ],
-      "blockers": [
-        "Original immutable 603-coffee replay cannot run on this branch under existing strict candidate12-specific private-input guard; workflow 40625136709 SKIPPED, NOT PASSED. Separate source acceptance and live roaster probe also SKIPPED on merged head. Preserve TESTING until mandated evidence is genuinely available, or an expressly approved alternative acceptance standard is recorded; do not weaken Locked guard."
-      ],
+      "blockers": [],
       "owner_source": "Owner October 27 explicit Full City standardization, Issue #33",
-      "notes": "Two independent coffee reviews resolved by official roast evidence. No production SQL, deployment or member history changes. Original frozen 603 untouched. PR185 tested and safely merged; no production changes. Prior PR184 closed unmerged after preserving its scope in PR185."
+      "notes": "Two independent coffee reviews resolved by official roast evidence. No production SQL, deployment or member history changes. Original frozen 603 untouched. PR185 tested and safely merged; no production changes. Prior PR184 closed unmerged after preserving its scope in PR185. Latest independent full original603 replay and postmerge exact-source checks cleared the previously outstanding corpus gate. Owner-approved scoped implementation READY, NOT DEPLOYED; source-page fixtures and original case caveats preserved. No live production login/provider verification is claimed."
     },
     {
       "id": "DIC-Q-33-white-coffee-manual-roast",
       "issue": 33,
       "pr": 187,
       "title": "Selected White Coffee nonstandard roast warning and user choice",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "3947b1ba32a89a9f42db5cd0335a96444166ce9c",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
@@ -1256,7 +1284,9 @@
         "PR187 final exact head 58e97501def83de20a2beca0931d8dbd639de670: approval 40626499237, security 40626499274, isolated SQL 40626499194, private visual/browser 40626499255, cloud/mobile 40626499146 and full Node/build 40626499207 all SUCCESS.",
         "Nonforce PR187 merged at 3947b1ba32a89a9f42db5cd0335a96444166ce9c; merge tree c391ac5f3e1798c7b47b7c3af7abc4a83168f2a3 matches tested head. Exact merged approval 40626715337, full Node/build 40626715299, cloud/mobile 40626715382 and live public-source acceptance 40626715331 SUCCESS.",
         "Merged public source acceptance 13/13 REQUIRED pass; 14 targets, 13 parsed, 27 anonymous public requests, zero production writes, member quota or backend; one optional Counter Culture fixture gap. White Coffee selected URL is not an individual live probe target.",
-        "Original immutable frozen603 replay 40626499213 SKIPPED under historical-branch/private ephemeral capture guard (NOT PASS); postmerge controlled roaster probe 40626715360 SKIPPED. No fresh original 603 exact-source score."
+        "Original immutable frozen603 replay 40626499213 SKIPPED under historical-branch/private ephemeral capture guard (NOT PASS); postmerge controlled roaster probe 40626715360 SKIPPED. No fresh original 603 exact-source score.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+        "Scoped combined-source verification PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS."
       ],
       "ci_runs": [
         40626499237,
@@ -1268,20 +1298,27 @@
         40626715337,
         40626715299,
         40626715382,
-        40626715331
+        40626715331,
+        40632638908,
+        40632638903,
+        40632638888,
+        40632638938,
+        40632638901,
+        40632638988,
+        40632862799,
+        40632862828,
+        40632862740
       ],
-      "blockers": [
-        "Full original immutable 603-coffee exact-source acceptance is not available on this branch; workflow 40626499213 SKIPPED due candidate12-only branch/private ephemeral input. Cannot mark READY under existing Locked gate."
-      ],
+      "blockers": [],
       "owner_source": "Owner October 27 source gap resolution: Alaska Artisan White Coffee #4, manual selection only",
-      "notes": "No automatic Ultra Light, Very Light, or Light classification; preserve product label. No original603, saved member data, production operations or release changed. All normal exact-source tests, actual public-source acceptance and merge verified. Do not claim White URL itself in live probe. Netlify current published deploy remains 6ae0fc16178b2f1241e441f8; NOT DEPLOYED."
+      "notes": "No automatic Ultra Light, Very Light, or Light classification; preserve product label. No original603, saved member data, production operations or release changed. All normal exact-source tests, actual public-source acceptance and merge verified. Do not claim White URL itself in live probe. Netlify current published deploy remains 6ae0fc16178b2f1241e441f8; NOT DEPLOYED. Latest independent full original603 replay and postmerge exact-source checks cleared the previously outstanding corpus gate. Owner-approved scoped implementation READY, NOT DEPLOYED; source-page fixtures and original case caveats preserved. No live production login/provider verification is claimed."
     },
     {
       "id": "DIC-Q-33-bald-guy-roast-choice",
       "issue": 33,
       "pr": 188,
       "title": "Bald Guy Brew exact selected Medium/Medium Dark user roast choice",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "591f72fd758d1196c0e5e12ce9867088a41096c5",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
@@ -1292,7 +1329,9 @@
         "PR188 non-force merge 591f72fd758d1196c0e5e12ce9867088a41096c5 read back on development; exact tree e90e7d86cd0997887e48f39e715add2c7c0b4f4e equals tested feature source. Postmerge approval 40628104415, cloud/mobile 40628104399 and public-source acceptance 40628104446 SUCCESS; final postmerge Node/build awaiting result.",
         "Merged public-source acceptance 40628104446: 13/13 required, 14 total targets, 13 parsed, 27 anonymous public requests, 0 real backend, 0 member quota, 0 production writes, 0 deployments; one optional Counter Culture source fixture sanitization gap remains. Bald Guy and Beanstock URLs were not among those 13 live accepted targets.",
         "Original frozen603 workflow 40627863007 SKIPPED by historical candidate12 head branch/private ephemeral input guard; not a PASS. Postmerge controlled roaster probe 40628104462 also SKIPPED.",
-        "Final exact merged head Node/lint/build 40628104808 SUCCESS. All four actual postmerge applicable checks 40628104415, 40628104399, 40628104446, 40628104808 SUCCESS."
+        "Final exact merged head Node/lint/build 40628104808 SUCCESS. All four actual postmerge applicable checks 40628104415, 40628104399, 40628104446, 40628104808 SUCCESS.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+        "Scoped combined-source verification PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS."
       ],
       "ci_runs": [
         40627863051,
@@ -1304,13 +1343,20 @@
         40628104415,
         40628104399,
         40628104446,
-        40628104808
+        40628104808,
+        40632638908,
+        40632638903,
+        40632638888,
+        40632638938,
+        40632638901,
+        40632638988,
+        40632862799,
+        40632862828,
+        40632862740
       ],
-      "blockers": [
-        "Full original immutable 603-coffee exact-source replay cannot run under current historical candidate12-only head branch and ephemeral private input restriction; workflow 40627863007 SKIPPED. Mandatory original603 impact, supplementary retention and source-level score unverified; keep TESTING pending genuine accepted replay."
-      ],
+      "blockers": [],
       "owner_source": "Owner approval in Coffee #5 review, October 27-28 2026; Issue #33",
-      "notes": "Preserve current source roast literal, no inferred single category or roast selection; keep private member data, original archive and oracle untouched. No deploy. Scope integrated, pending mandatory frozen603. Published Netlify deploy independently confirmed unchanged at 6ae0fc16178b2f1241e441f8; NOT DEPLOYED. Concurrent Cortez PR186 still open."
+      "notes": "Preserve current source roast literal, no inferred single category or roast selection; keep private member data, original archive and oracle untouched. No deploy. Scope integrated, pending mandatory frozen603. Published Netlify deploy independently confirmed unchanged at 6ae0fc16178b2f1241e441f8; NOT DEPLOYED. Concurrent Cortez PR186 still open. Latest independent full original603 replay and postmerge exact-source checks cleared the previously outstanding corpus gate. Owner-approved scoped implementation READY, NOT DEPLOYED; source-page fixtures and original case caveats preserved. No live production login/provider verification is claimed."
     },
     {
       "id": "DIC-Q-33-cortez-reused-product-current-spec",
@@ -1325,7 +1371,8 @@
       "tests": [
         "PR189 exact tested head 6f81af9e5878b975258323163b7379111dc51f35: full Node/lint/build 40629362551, cloud/mobile 40629362565, private browser/visual/offline 40629362567, isolated SQL 40629362576, source security 40629362581, approval/continuity 40629362577 all SUCCESS.",
         "Non-force merge 40b271adabcb8c71354c1272ea7227e6df3d3c88 preserved identical fully tested source tree a196549de4dea23a8c0d20ce70daa13fbba5a201. Exact merged app/build 40629575873, cloud/mobile 40629575863 and approval/continuity 40629576034 all SUCCESS.",
-        "Original frozen603 40629362624 SKIPPED by historical branch guard; optional postmerge live public acceptance 40629575869 and controlled probe 40629575899 SKIPPED. Two original archived inputs recovered and locally hash-verified but no current-source 603 replay claimed."
+        "Original frozen603 40629362624 SKIPPED by historical branch guard; optional postmerge live public acceptance 40629575869 and controlled probe 40629575899 SKIPPED. Two original archived inputs recovered and locally hash-verified but no current-source 603 replay claimed.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
       ],
       "ci_runs": [
         40629362551,
@@ -1339,26 +1386,27 @@
         40629576034
       ],
       "blockers": [
-        "Original immutable 603-coffee exact current-source replay not executed: runner restricted to candidate12 branch and private ephemeral transfer. Recovered original archives verified SHA256 but cannot equate that to source-bound acceptance.",
-        "Actual current live Cortez Shopify Product .js endpoint not independently fetched; dated search-cache snapshots disagree and are not authoritative."
+        "Current live exact Cortez Shopify product .js is inaccessible for independent current identity/spec verification; older indexed El Salvador, PNG, Ethiopia versions cannot prove today's selected current product. Source-specific acceptance remains open even though current-code original603 replay passed."
       ],
       "owner_source": "Owner direct approval October 27, 2026; EXTRACTOR-CORTEZ-REUSED-URL-CURRENT-PRODUCT-20261027",
-      "notes": "Source implementation/ordinary CI and nonforce merge VERIFIED, but frozen603 and direct live selected source acceptance unverified: TESTING, NOT READY/NOT DEPLOYED. No member records, production SQL, release branch or Netlify publication changed. Original captures/oracle/scorer intact."
+      "notes": "Source implementation/ordinary CI and nonforce merge VERIFIED, but frozen603 and direct live selected source acceptance unverified: TESTING, NOT READY/NOT DEPLOYED. No member records, production SQL, release branch or Netlify publication changed. Original captures/oracle/scorer intact. Original603 replay common gate resolved; scoped READY remains blocked solely by live current selected Cortez source. PR189 already safely merged; no duplicate PR186 integration."
     },
     {
       "id": "DIC-Q-33-selected-roast-over-catalog-tags",
       "issue": 33,
       "pr": 190,
       "title": "Exact selected coffee roast outranks overlapping generic Shopify marketing tags",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8ccacd4db09cfd7922d6beb57c13464bf89e877b",
       "scope_paths": [
         "src/server/coffee-shopify-ajax.mjs"
       ],
       "tests": [
         "Focused direct-source positive and contradictory-label negative regressions at PR190 SHA 75c08d..., all current head app/build/cloud/visual/security/approval/SQL workflows success at corresponding source; no old frozen exact losses.",
         "Independent immutable 603/201/1197 original capture full actual-preview handler replay: baseline exact 3096 -> current exact 3096, missing 82 -> 81, review-required 824 -> 825 (Yellowstone only, historical Light-Medium versus current Medium-Light alias), old exact losses 0; 6474 supplementary results unchanged (5458 full,337 partial,679 unconfirmed).",
-        "68 real Chromium synthetic workflow checks using exact compiled distribution JS; not real Supabase or HTTP due sandbox restrictions. Detailed source-bound evidence in docs/audits/extractor-issue33-original603-current-source-replay-20261028.json."
+        "68 real Chromium synthetic workflow checks using exact compiled distribution JS; not real Supabase or HTTP due sandbox restrictions. Detailed source-bound evidence in docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+        "Private exact-source original immutable603 replay at extractor source b9f56d48a2f580cca66939288ce6ed9260117f6d (source blob c8347cd96da02a280c3602a1759a3d9fc586536b unchanged at PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b). All 603 actual preview cases, 4002 strict assertions, 3096 exact, 81 missing, 825 review-required; zero previously exact lost. All original 6474 supplementary assertions retain their prior full/partial/unconfirmed state (5458/337/679). Original capture archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 and oracle SHA256 0bd751f68aba81d17204418a6d016a66815afdc82095d7a89c5f856eab05b2cb verified. Original hosted candidate12-only workflow SKIPPED, never counted PASS. Receipt docs/audits/extractor-issue33-original603-current-source-replay-20261028.json.",
+        "PR190 exact tested HEAD 8baaa3f439dcbe49169bc0b6dba78db9528af04a all seven applicable CI SUCCESS: app/build 40632638908, cloud/mobile 40632638903, visual/browser 40632638888, isolated SQL 40632638938, security 40632638901, approval 40632638988, private source-bundle 40632639014. Non-force PR190 merge 8ccacd4db09cfd7922d6beb57c13464bf89e877b tree 259ca2b4394133c2a6d4c09e95b5afe219c2e632 identical to tested PR HEAD; postmerge app/build 40632862799, cloud/mobile 40632862828, approval 40632862740 SUCCESS."
       ],
       "ci_runs": [
         40631874190,
@@ -1367,13 +1415,21 @@
         40631874191,
         40631874196,
         40631874234,
-        40631874185
+        40631874185,
+        40632638908,
+        40632638903,
+        40632638888,
+        40632638938,
+        40632638901,
+        40632638988,
+        40632639014,
+        40632862799,
+        40632862828,
+        40632862740
       ],
-      "blockers": [
-        "Non-force PR190 integration, postmerge exact-source check and final source/status readback pending."
-      ],
+      "blockers": [],
       "owner_source": "Issue #33: owner-approved exact current selected product specification precedence and seven-tier Medium-Light taxonomy",
-      "notes": "Scoped review only, original 603 frozen oracle and all member data unchanged; NOT READY pending merge and readback. No publication."
+      "notes": "READY, NOT DEPLOYED: owner-Locked exact selected current roast specifications outrank overlapping generic Shopify catalog tags when not independently printed selected coffee contradictions. Yellowstone direct current roaster page says Medium-Light; original immutable oracle says Light-Medium (owner-approved synonym), preserved unchanged and strict review counter increases one. 603 full replay 0 old exact lost / supplementary unchanged. Packaged app 68 synthetic Chromium checks; no live provider auth/IndexedDB or production member access performed. Original gated GitHub replay SKIPPED, local private input-equivalent full replay verified and documented."
     }
   ],
   "history": [
