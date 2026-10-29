@@ -47,7 +47,8 @@ test('unspecified marketing region is not canonical coffee origin',()=>{
  const text='Premium Central American coffee regions';
  const result=parse('Per My Last Email (Decaf)',
   '<p>Region: '+text+'</p>');
- assert.equal(result.fields.origin,undefined);
+ assert.notEqual(result.fields.origin,text,'Generic marketing cannot become canonical');
+ assert.equal(result.fields.origin,'Central America','Independently derived broad geographical fallback is reviewable, not a precise region');
  assert.ok(!result.conflicts?.includes('origin'));
  assert.ok(result.source_facts?.some(f=>String(f.value||'').includes(text)));
 });
