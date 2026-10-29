@@ -1,4 +1,5 @@
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
+import {selectedDirectProductCredits} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -1303,6 +1304,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // farm/grower attributions as reviewable, noncanonical details.
  const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
+  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean});
+  if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
+   addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
+  }
+  if(directSelected.tasting_notes&&!fields.tasting_notes&&!conflicts.has('tasting_notes'))
+   addField(fields,'Tasting Notes',directSelected.tasting_notes);
+  if(directSelected.farm&&!roaster_details.farm)roaster_details.farm=directSelected.farm;
  for(const [key,value] of Object.entries(narrative.fields)){
   if(fields[key])continue;
   addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);
@@ -1656,7 +1664,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const explicit=explicitCoffeeNotesSeparateFromBrewingTags(source_facts);
   if(explicit){fields.tasting_notes=explicit;conflicts.delete('tasting_notes');}
  }
- for(const fact of source_facts){
+ // Selected direct Tastes like descriptions supersede unlabeled marketing prose,
+  // but cannot override a separate current explicit notes list or structured
+  // Product field. Other source facts remain visible for review.
+  if(directSelected.explicit_tastes_like&&!structuredFlavorByFields.get(fields)){
+   fields.tasting_notes=directSelected.explicit_tastes_like;conflicts.delete('tasting_notes');
+   if(source_facts.length<384&&!source_facts.some(f=>f.field==='tasting_notes'&&
+      f.label==='Tastes like'&&f.value===directSelected.explicit_tastes_like))
+    source_facts.push({field:'tasting_notes',label:'Tastes like',
+      value:directSelected.explicit_tastes_like,source_url,source_type:'html',
+      section:'Exact selected product literal tasting description'});
+  }
+  for(const fact of source_facts){
   if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
   else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
   if((fact.field&&(conflicts.has(fact.field)||detailConflicts.has(fact.field)))||
