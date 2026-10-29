@@ -6,7 +6,9 @@ test('historical 757-file source and direct semantic intervals reconcile without
  const data=readIssue267Coverage();
  assert.deepEqual(validateIssue267Coverage(data),[]);
  const covered=data.ledger.coverage_summary.direct_assistant_semantic_lines;
- assert.equal(covered,8212);
+ assert.ok(covered>=8212&&covered<=579961,'previous independently recorded direct coverage must not regress');
+ const spec=data.ledger.files.find(f=>f.path==='docs/archive/requirements/The_Dial-In_Collective_Master_Specification_v1.0.md');
+ assert.equal(spec?.reviewed_ranges?.[0]?.last_line,1929,'original Master Specification audit must be retained');
  assert.equal(data.ledger.coverage_summary.still_not_documented_as_semantically_reviewed_lines,579961-covered);
  assert.ok(covered<579961,'machine counts must not be upgraded to complete semantic review');
 });
