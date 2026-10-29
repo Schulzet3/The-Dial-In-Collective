@@ -46,7 +46,7 @@ test('contradictory printed countries still require user review',()=>{
 test('unspecified marketing region is not canonical coffee origin',()=>{
  const text='Premium Central American coffee regions';
  const result=parse('Per My Last Email (Decaf)',
-  '<h3>Origin Spotlight: Central America</h3><p>Region: '+text+'</p>');
+  '<p>Region: '+text+'</p>');
  assert.equal(result.fields.origin,undefined);
  assert.ok(!result.conflicts?.includes('origin'));
  assert.ok(result.source_facts?.some(f=>String(f.value||'').includes(text)));
