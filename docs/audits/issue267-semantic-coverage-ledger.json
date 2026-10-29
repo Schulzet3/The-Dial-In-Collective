@@ -20,12 +20,14 @@
     "source": "GitHub git tree API"
   },
   "coverage_summary": {
-    "direct_assistant_semantic_files": 41,
-    "direct_assistant_semantic_lines": 3960,
-    "still_not_documented_as_semantically_reviewed_lines": 576001,
+    "direct_assistant_semantic_files": 48,
+    "direct_assistant_semantic_lines": 6512,
+    "still_not_documented_as_semantically_reviewed_lines": 573449,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 576001
+    "remaining_line_count_checked": 573449,
+    "fully_reviewed_text_files": 47,
+    "partially_reviewed_text_files": 1
   },
   "line_count_limit": "Resolved with pinned historical-source manifest; distinct 503,938 archived subtype is historical categorization and not independently recategorized by this count.",
   "method_rules": {
@@ -81,6 +83,18 @@
       ],
       "classification": "HISTORICAL_SUPERSEDED",
       "summary": "Frozen mobile/offline QA lacked explicit app build; current main workflow includes npm ci + build:cloud. Not a claim that next naturally scheduled Sunday ran."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-001",
+      "risk": "informational",
+      "type": "HISTORICAL_PRODUCT_VARIANT_DATA_DISCREPANCY",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        208,
+        225
+      ],
+      "classification": "HISTORICAL_SOURCE_OBSERVATION_NOT_CURRENT_DEFECT",
+      "summary": "Archived exact SEY product endpoint 250g purchase option includes weight=454 while other 250g variants have weight=318. Shopify weight might represent packaged shipment rather than net coffee mass; do NOT assume error, change frozen oracle, or duplicate #33 live coffee adjudication."
     }
   ],
   "files": [
@@ -5305,11 +5319,22 @@
       "source_bytes": 2322236,
       "source_kind": "utf8_text",
       "original_line_count": 77960,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "PARTIAL_AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
+          "last_line": 1490,
+          "line_count": 1490,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B011",
+          "finding_ids": []
+        }
+      ],
+      "remaining_ranges": [
+        {
+          "first_line": 1491,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
@@ -8569,15 +8594,20 @@
       "source_bytes": 1699,
       "source_kind": "utf8_text",
       "original_line_count": 27,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 27,
-          "status": "UNREVIEWED"
+          "line_count": 27,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B010",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "7a95d87af25cb8ad9f467849f3735368f07663a45f8fd71a1378939c61a8dbb7"
     },
     {
@@ -8587,15 +8617,20 @@
       "source_bytes": 6153,
       "source_kind": "utf8_text",
       "original_line_count": 86,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 86,
-          "status": "UNREVIEWED"
+          "line_count": 86,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B010",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "025dbd8093bb90aa552c9a2ffb6c5c31eeffa8000a88f8f7778c08a1b3a2fcf4"
     },
     {
@@ -8605,15 +8640,20 @@
       "source_bytes": 34133,
       "source_kind": "utf8_text",
       "original_line_count": 421,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 421,
-          "status": "UNREVIEWED"
+          "line_count": 421,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B010",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "3f879900363b174aabd2c79ae6ce452ee8c07436b33f110a1450c08054f76734"
     },
     {
@@ -8623,15 +8663,20 @@
       "source_bytes": 12684,
       "source_kind": "utf8_text",
       "original_line_count": 162,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 162,
-          "status": "UNREVIEWED"
+          "line_count": 162,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B010",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "f2f9e3cf268690c71ba820beb276ba0ce8aa8ee4ca465fed79768fb53a387f9e"
     },
     {
@@ -8641,15 +8686,20 @@
       "source_bytes": 13344,
       "source_kind": "utf8_text",
       "original_line_count": 156,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 156,
-          "status": "UNREVIEWED"
+          "line_count": 156,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B010",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "7e13599876d7380cfadb981b83692965cc3b15ab3734c209a4be4a51f27459fd"
     },
     {
@@ -9145,15 +9195,20 @@
       "source_bytes": 11620,
       "source_kind": "utf8_text",
       "original_line_count": 210,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 210,
-          "status": "UNREVIEWED"
+          "line_count": 210,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B012",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "bccfdb07691ce550c81e62aa5f5004db63f6fd349f039e1b16e150134e047484"
     },
     {
