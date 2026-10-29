@@ -18,6 +18,10 @@ export function classifyMigrationDiff(text,readSql){
   // Remove comments only. False positives from SQL string bodies are safe
   // conservatism; do not ignore opaque dynamic SQL or write procedures.
   sql=sql.replace(/\/\*[\s\S]*?\*\//g,' ').replace(/--[^\n]*/g,' ');
+  // A narrowly scoped GRANT EXECUTE ON FUNCTION ... TO authenticated never edits
+  // existing rows. Do not conceal dynamic EXECUTE, broad grants, public/anon
+  // privileges, or destructive statements elsewhere in the same SQL file.
+  sql=sql.replace(/\\bGRANT\\s+EXECUTE\\s+ON\\s+FUNCTION\\s+(?:[A-Za-z_][\\w]*\\.)?[A-Za-z_][\\w]*\\s*\\([^;()]*\\)\\s+TO\\s+authenticated\\s*;/gi,' ');
   if(/\b(?:TRUNCATE|DELETE\s+FROM|UPDATE\s+[A-Za-z_"']|DROP\s+(?:TABLE|SCHEMA|DATABASE|INDEX|FUNCTION|COLUMN)|ALTER\s+TABLE[\s\S]{0,160}(?:DROP\s+COLUMN|ALTER\s+COLUMN[\s\S]{0,80}\bTYPE\b|RENAME\s+TO)|DO\s+\$|EXECUTE\s+)/i.test(sql))
    return {risk:'potentially_destructive',files,reason:'SQL_CAN_MODIFY_OR_REMOVE_EXISTING_DATA'};
  }
