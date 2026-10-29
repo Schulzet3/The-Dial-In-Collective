@@ -141,6 +141,8 @@ with sync_playwright() as p:
     last.locator('[data-record-form] [name="name"]').fill('Updated Fixture Coffee 55')
     last.locator('[data-record-form] button[type="submit"]').click()
     page.get_by_text("Audited correction saved.",exact=True).wait_for()
+    assert page.locator('#admin-action-notice').inner_text().strip()=='Audited correction saved.'
+    assert page.locator('#admin-refresh').count()==1,'saving a correction must not replace the dashboard'
     last=page.locator('#admin-approved .admin-record').last
     assert last.locator('h3').inner_text().strip()=='Updated Fixture Coffee 55',last.locator('h3').inner_text()
     audit=page.evaluate("window.__audits")
