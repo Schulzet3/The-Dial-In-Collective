@@ -2,9 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractSelectedCoffeeRoastVariants,extractSelectedCoffeeRoastVariantsFromHtml} from '../src/server/coffee-roast-variants.mjs';
 import {createPreviewHandler} from '../netlify/functions/coffee-url-preview.mjs';
-import {applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
 import {shopifyProductRequest,extractShopifyAjaxData,mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
-import {coffeeRoastVariantPreview,coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot,applyCoffeeRoastVariant} from '../site/cloud/coffee-url-autofill.js';
+import {coffeeRoastVariantPreview,coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot,applyCoffeeRoastVariant,applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
 
 // Literal selected Ketch product-page clauses, read 2026-10-27. This is
 // supplementary acceptance, never a rewrite of the immutable original603.
