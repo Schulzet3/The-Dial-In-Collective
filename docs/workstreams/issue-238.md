@@ -1,0 +1,17 @@
+# Issue #238 — Research-driven recommendation guardrails
+
+**Owner authorization:** 2026-10-29 research pack integration; develop/test/queue but **NO publish/deploy**.
+
+**Recovered source:** development `31000d7a56b6eea799160d8934b1f2db24ccad5c`; original package snapshot `c0f76902a8acd36f7e0ccdc99022262ebddbd25c`. Current authority: docs/MASTER_SPECIFICATION.md, docs/DECISION_LEDGER.json, approval coverage, release queue. Original research package has 15 files, 21 sources, 27 findings, 35 non-empirical prior profiles, 15 candidate diagnostic rules, 10 policies, 48 reference scenarios. Local `node validate.js`: VALIDATION_OK; `node test.js`: 48/48. **Research test success is not app acceptance.**
+
+**Scoped source modifications in this commit:** block numeric next-shot advice for incomplete/invalid five-axis ratings; abstain rather than advertise unchanged yield or temperature at legal limits; use same-calibration family shots for measured recipe time while keeping family ratio/identity/history intact when only older calibration observations exist. Add five real-module fixture-based regression cases. No source-backed basis to replace 35 profile priors or move to universal statistical confidence values; preserve five active styles, seven roast levels, all-green success, one visible recipe, explicit family favorites, no extra form steps and capability-gated controls. No data, schema, Community eligibility, privacy, or production modifications.
+
+**Research decisions:** F001/F002/F009 indicate plausible nonlinear grind/uneven-flow concerns but app has no verified observation field or proven seconds-per-tick threshold. R003-R013 experimental rules, automatic reversal, model fitting and extra telemetry require validation and any necessary scoped owner approval; no speculative user-facing diagnoses. Confidence remains qualitative, not a statistical probability. 21 source records include explicitly unverified expert-video details; no external raw-study reproduction claimed.
+
+**Verification at initial commit:** Source change proposed; actual app CI and integration unverified pending exact-head checks. Release queue must remain TESTING until exact-head and merged-source checks pass. Preserve concurrent extractor PRs #235/#237 and all unrelated queued items. Actual production Netlify published release `05cf9eb156f63110cd434034ec3914a1e92b76d3`, deploy `6ae27f32bfae09ad8745e19b` READY/current before work. No deployment authorized.
+
+**Next:** Run exact PR-head Node, lint/build, cloud/visual/offline/security/approval CI; fix failures, non-force merge, verify merged SHA and reconcile queue if passing.
+
+## Exact-head CI failure and immediate fixture correction
+
+PR #239 head b4969e83509ebc2ee2f509629d066e196f2708cc: 1,962 Node PASS, 6 preexisting SKIP, 1 new fixture failure. The lower-yield boundary test used a 22 s Turbo shot against a 12–18 s baseline and inadvertently exercised the existing valid coarse-grind recommendation before the targeted yield path. Corrected **only** its time to 16 s so the test isolates a real yield-boundary no-op; both extraction and body rules remain unchanged. Prior SQL, security, approval, visual and cloud UX checks passed; rerun the full exact-head suite on this new source SHA. No publication.
