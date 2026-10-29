@@ -1308,6 +1308,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
+  if(directSelected.roast_level&&!fields.roast_level&&!conflicts.has('roast_level'))
+   addField(fields,'Roast Level',directSelected.roast_level);
   if(directSelected.tasting_notes&&!fields.tasting_notes&&!conflicts.has('tasting_notes'))
    addField(fields,'Tasting Notes',directSelected.tasting_notes);
   if(directSelected.farm&&!roaster_details.farm)roaster_details.farm=directSelected.farm;

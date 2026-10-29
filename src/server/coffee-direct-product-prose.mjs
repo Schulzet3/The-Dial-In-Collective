@@ -10,10 +10,17 @@ export function selectedDirectProductCredits(html,{name='',clean}={}){
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
   !/\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(x.section));
- const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set();
+ const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
  let anotherExplicitList=false;
  for(const b of body){
   const line=b.text.replace(/\s+/g,' ').trim();
+  // A full current selected coffee name directly credited as "is roasted"
+  // can identify a standard tier. Reject another coffee, older harvest,
+  // incidental brewing prose, and relative language such as "lighter".
+  const namedRoast=line.match(/\b(.{3,200}?)\s+is\s+roasted\s+(light|medium|dark)\b/iu);
+  if(namedRoast&&fold(namedRoast[1]).includes(fold(name))&&
+     !/\b(?:formerly|previously|previous|prior|former|last (?:season|harvest|year)|historically|typically|generally|another coffee|other coffee)\b/i.test(line))
+   roasts.add(namedRoast[2].slice(0,1).toUpperCase()+namedRoast[2].slice(1).toLowerCase());
   const organization=line.match(/^(?:Single[- ]Origin\s+)?(?:Organic\s+)?([\p{L}\p{M}' -]{3,70}?)\s+coffee\s+from\s+([A-Z][A-Z\d-]{2,18})\s+in\s+([\p{L}\p{M}'’,. -]{3,90})(?:[.!]|$)/iu);
   if(organization&&fold(name).includes(fold(organization[1]))&&
      !/\b(?:blends?|rotating|mixed)\b/i.test(name))organizations.add(organization[2]);
@@ -37,6 +44,7 @@ export function selectedDirectProductCredits(html,{name='',clean}={}){
   const farm='Finca '+[...farms][0];
   if(body.some(b=>b.text.includes(farm))){out.producer=farm;out.farm=farm;}
  }
+ if(roasts.size===1)out.roast_level=[...roasts][0];
  if(sensory.size===1)out.tasting_notes=[...sensory][0];
  if(literals.size===1&&!anotherExplicitList)out.explicit_tastes_like=[...literals][0];
  return out;
