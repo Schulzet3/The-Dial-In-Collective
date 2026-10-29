@@ -260,6 +260,27 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
     else add(currentLocality[1],sentence);
     continue;
    }
+   // The selected-coffee product may describe its direct growing locality
+   // before naming the producing country: "From the Tarrazu region of Costa
+   // Rica, this coffee..." A broader mountain range in the same sentence
+   // is only setting, not a second origin ("Andes Mountains in Colombia's
+   // Huila region"). Require the exact current-coffee clause and the printed
+   // country; never guess a region from the URL, country or roaster.
+   const mountain=sentence.match(new RegExp(
+    '^From\\s+the\\s+('+PLACE+')\\s+Mountains?\\s+in\\s+('+COUNTRIES+')[’\\']s\\s+('+PLACE+')\\s+region\\s*,\\s*this\\s+coffee\\b','iu'));
+   const regional=sentence.match(new RegExp(
+    '^From\\s+the\\s+('+PLACE+')\\s+region\\s+of\\s+('+COUNTRIES+')\\s*,\\s*this\\s+coffee\\b','iu'));
+   if(mountain||regional){
+    const locality=(mountain?.[3]||regional?.[1]||'').trim();
+    const country=(mountain?.[2]||regional?.[2]||'').trim();
+    // No named locality, duplicate country, or promotional generic phrase
+    // may become the member's location, even if matched in prose.
+    if(locality.length>=3&&locality.length<=70&&!COUNTRY_ONLY.test(locality)&&
+     !/\b(?:coffees?|offerings?|blends?|roasts?|products?|assortments?)\b/iu.test(locality)){
+     add(locality+', '+country,sentence);
+     continue;
+    }
+   }
    if(currentLocalityOnly)continue;
    // A neighboring social project is context, not a claim that this lot
    // grew there. Keep a direct current-lot source clause if one is printed.
