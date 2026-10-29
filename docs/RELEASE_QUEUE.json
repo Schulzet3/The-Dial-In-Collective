@@ -2603,23 +2603,31 @@
     {
       "id": "DIC-Q-47-admin-candidate-nested-grant",
       "issue": 47,
-      "pr": null,
+      "pr": 254,
       "title": "Restore protected Admin review candidate access",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8f4bbf530c12f31ab5478217c4459368bbcc4aec",
       "scope_paths": [
         "supabase/migrations/20261029193000_dic_admin_review_candidates_grant.sql"
       ],
       "tests": [
-        "Real Admin dashboard/records 200, review candidates 403/42501, four requests",
-        "Live private privilege mismatch independently confirmed; SQL Admin/member/anon acceptance added; CI PENDING"
+        "Owner's actual signed-in Admin mobile screenshot plus live Supabase authenticated RPC trace: dashboard 200, paged records 200, candidate comparison 403 / SQLSTATE 42501 in four attempts (19:20-19:21 UTC).",
+        "Read-only PostgreSQL catalog identified only the private review-candidates function lacking authenticated EXECUTE; existing public invoker wrapper, server-side Admin/Member checks and anonymous denial preserved.",
+        "Exact PR head 50112fd653f558e662c31d1c607b27178c79baee: isolated PostgreSQL 40944204855 SUCCESS, approval/journal 40944205010 SUCCESS, Node/lint/build 40944204844 SUCCESS, cloud/mobile 40944204843 SUCCESS, private Chromium/visual 40944204784 SUCCESS.",
+        "PR #254 merged non-force 8f4bbf530c12f31ab5478217c4459368bbcc4aec; tested/merged Git trees BOTH f5d4a5682ca0222c68796b2217fc932644413943, identical.",
+        "Disposable SQL now asserts authenticated Admin can load candidates, admitted ordinary member and anonymous are denied; no member records or hosted permissions changed. Production migration still pending owner release."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await exact-source isolated SQL, CI, safe merge, source readback; production SQL not approved"
+      "ci_runs": [
+        40944204855,
+        40944205010,
+        40944204844,
+        40944204843,
+        40944204784
       ],
+      "blockers": [],
       "owner_source": "Owner October 29 Admin screenshots and Supabase real-provider logs",
-      "notes": "Only private nested function authenticated EXECUTE. No role-check weakening or production changes."
+      "notes": "READY source only. Apply single scoped migration 20261029193000_dic_admin_review_candidates_grant.sql only on separate owner publish/release authorization. This is a hosted-Supabase SQL change, not a Netlify-only deploy; after release must independently read back has_function_privilege authenticated=true anon=false and real iPhone Admin Pending comparison remains visible. Parent Issue #47 still OPEN for distinct other account acceptance. No deployment occurred in development.",
+      "tested_source_sha": "50112fd653f558e662c31d1c607b27178c79baee"
     }
   ],
   "history": [
