@@ -28,6 +28,27 @@ const matchSegment=(text,key)=>{
 };
 function noteOf(sections){
  for(const text of sections){
+  // Some selected roast variants publish the list AFTER "notes of"
+  // instead of BEFORE "notes" (current Ketch Tier 3). It is not a
+  // product-wide tasting list: matchSegment already scopes this paragraph
+  // to one offered purchase roast. Stop before non-flavor cup commentary.
+  const direct=[...text.matchAll(/\bthis\s+coffee\s+(?:has|had)\s+(?:(?:traditional|classic)\s+coffee\s+)?notes?\s+of\s+([^.!?;]{3,180})(?=[.!?;]|$)/gi)];
+  if(direct.length){
+   // Multiple incompatible current lists belong in member review, not a
+   // first-encounter canonical selection. Nor should a past lot lend flavor.
+   if(direct.length!==1)return '';
+   const match=direct[0],context=text.slice(Math.max(0,match.index-40),match.index+match[0].length);
+   if(/\b(?:previously|historically|last\s+(?:lot|year|harvest)|former|prior\s+(?:lot|harvest))\b/i.test(context))return '';
+   const clause=match[1].replace(/\s+(?:and|but)\s+(?:is|was|are|were|has|have|remains|offers|provides)\b.*$/i,'')
+    .replace(/\s+(?:which|while|whereas)\b.*$/i,'').trim();
+   const items=clause.replace(/,\s*(?:and|&)\s+/gi,', ').replace(/\s+(?:and|&)\s+/gi,', ')
+    .split(/\s*,\s*/).map(item=>item.trim()).filter(Boolean);
+   if(!items.length||items.length>8||items.some(item=>item.length>45||/[\d<>]/.test(item)||
+     /\b(?:coffee|cup|roast|brewing|extraction|ratio|temperature|process)\b/i.test(item)))return '';
+   const note=items.join(', ');
+   return note[0].toUpperCase()+note.slice(1);
+  }
+  // Preserve pre-existing "has floral and blackberry notes" behavior.
   const m=text.match(/\b(?:this\s+coffee\s+has|we\s+taste|notes?\s*(?:of|:))\s+([\w\s-]{3,130}?)\s+notes?\b/i);
   if(m){const note=m[1].trim().replace(/\s+and\s+/gi,', ').replace(/\s*,\s*/g,', ');return note[0].toUpperCase()+note.slice(1);}
  }
