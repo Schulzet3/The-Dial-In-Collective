@@ -1,3 +1,9 @@
+## October 29 UTC — Release09 provider-verified DEPLOYED: ten READY items
+
+Netlify reports new READY/current deploy `6ae38ba0a56bed8fa17d20ac` with exact production release Git SHA `816949840f22b2a181670de20410786d0a8de79b` and tested source `fa30abd6b5c96308f0957063efcc7ffb4402c8c6`. Single-use release `DIC-20261029-READY-QUEUE-10` consumed once via successful GitHub controller run 40927950440; published `2026-10-29T18:09:16.428Z`. **10 READY items marked DEPLOYED**, 0 remaining READY, 2 research-only Issue33 items remain IN_PROGRESS. Ketch roast-select and roast-specific notes included, with source improvements, responsive/keyboard, shot history ratio and espresso recommendations. Full source PR-head CI PASS: 1,975 Node PASS / 0 FAIL / 6 intentional SKIP plus lint/build/cloud/browser/SQL/security/approval/visual. Production Supabase row counts coffees8/shots24/submissions9 unchanged, Edge JWT v8/v4 and migration `20261028230056` unchanged; zero database/member writes. Existing encrypted verified Drive backup reused, no destructive work, no plan or credit operations. Real signed-in Ketch and physical device remain UNVERIFIED because this chat lacks an authenticated browser. Direct HTTP probe unavailable; do not imply hosted interaction independently passed. [Source-bound receipt](PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_VERIFIED.json). Earlier failed controller attempt safely repaired; no duplicate publication.
+
+---
+
 ## October 29 UTC — Ten READY changes selected for owner-authorized one-time Release09
 
 Exact candidate fa30abd6b5c96308f0957063efcc7ffb4402c8c6 has passed required PR-head checks and was safely merged. One-use grant DIC-20261029-READY-QUEUE-10 replaces unconsumed 09. Current production not yet changed; no SQL or Edge/Auth operations. Excludes unfinished research and later independent unqueued work. Provider verification required before DEPLOYED.
