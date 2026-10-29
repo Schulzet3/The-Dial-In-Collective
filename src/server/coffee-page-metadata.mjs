@@ -1485,6 +1485,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
 
  if(roast_evidence.confidence==='conflict'){
   delete fields.roast_level;conflicts.add('roast_level');
+  // Generic roast visual/prose extraction used to report an unqualified
+  // conflict with no candidate values. Keep its actual bounded alternatives
+  // for source review. If they exactly match two selected *purchase* roasts,
+  // the Shopify merger may safely clear that false same-coffee conflict.
+  for(const value of roast_evidence.conflicting_roast_values||[])
+   rememberCoffeeReviewCandidate(fields,'roast_level',value,
+    'Current selected-product roast evidence');
  }
  if(roast_evidence.value){
   if(fields.roast_level&&fields.roast_level!==roast_evidence.value){

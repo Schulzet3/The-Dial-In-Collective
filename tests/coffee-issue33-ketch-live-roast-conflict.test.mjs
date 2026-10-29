@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
+import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 
 // These cases preserve the owner-Locked distinction: two real purchase roasts
 // for ONE selected green coffee are options, not a contradictory roast claim.
@@ -54,5 +55,32 @@ test('a categorical tag hint must not overwrite a genuine explicit selected roas
   roast_tag_ambiguity_only:true,
   current_product_spec_fields:['roast_level']
  }));
+ assert.ok(result.conflicts?.includes('roast_level'));
+});
+
+test('real selected-product HTML visual conflict retains its two public roast values for safe purchase reconciliation',()=>{
+ const markup='<html><head><meta property="og:type" content="product"></head><body><main>'+
+  '<h1>Current Split Roast</h1>'+
+  '<p>As a light roast, this coffee has cherry and cocoa notes.</p>'+
+  '<p>As a medium-dark roast, this coffee has cocoa and caramel notes.</p>'+
+  '</main></body></html>';
+ const base=extractPublicCoffeeFacts(markup,{source_url:url});
+ assert.ok(base.ok);
+ assert.ok(base.conflicts?.includes('roast_level'));
+ assert.deepEqual((base.conflict_options?.roast_level||[]).map(x=>x.value).sort(),['Light','Medium-Dark']);
+ const result=mergePublicProductPreview(base,json({conflicts:[],roast_tag_ambiguity_only:false}));
+ assert.equal(result.fields.roast_level,undefined);
+ assert.ok(!result.conflicts?.includes('roast_level'));
+ assert.deepEqual(result.roast_variants.map(v=>v.fields.tasting_notes),['Cocoa, cherry','Cocoa, caramel']);
+});
+test('a genuinely different current printed roast stays conflicted even when purchase options are offered',()=>{
+ const markup='<html><head><meta property="og:type" content="product"></head><body><main>'+
+  '<h1>Current Split Roast</h1>'+
+  '<p>Roast Level: Dark</p>'+
+  '<p>As a light roast, this coffee has cherry and cocoa notes.</p>'+
+  '<p>As a medium-dark roast, this coffee has cocoa and caramel notes.</p>'+
+  '</main></body></html>';
+ const base=extractPublicCoffeeFacts(markup,{source_url:url});
+ const result=mergePublicProductPreview(base,json({conflicts:[],roast_tag_ambiguity_only:false}));
  assert.ok(result.conflicts?.includes('roast_level'));
 });
