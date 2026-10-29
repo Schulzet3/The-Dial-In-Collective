@@ -1,24 +1,24 @@
-# Issue #30 — private historical-source recovery, October 29, 2026
+# Issue #30 — original JSON/JSX reconciliation and science handoff, 2026-10-29
 
-**Authority:** Owner asked to complete independently feasible open-issue work; GitHub canonical source and existing source inventory remain authoritative. This is a **read-only availability correction**, not a product decision, approval or publication.
+Owner confirms relevant history remains in the ChatGPT Project, the standalone workshop addendum is not needed, original JSON should be read from Project docs, and the original app code should be compared line by line against the current app. Owner will commission a fresh structured scientific research pack separately (Samo Smrke first, Lance Hedrick second, James Hoffmann and Kyle Rowsell subsequently).
 
-## Newly located and read
+## Recovered provenance
 
-In the user's existing private ChatGPT Library (not GitHub), five previously unavailable-in-that-turn historical PDF titles were located and their actual first-page text and PDF page count independently read:
+- Original GitHub archived decision JSON `docs/archive/requirements/The_Dial-In_Collective_Decision_Ledger_v1.0.json`: 79 Locked + 20 Open, deep-equal to `docs/DECISION_LEDGER.json#/baseline/content`. No reupload required.
+- Original GitHub archived specification v1.0 exists, complete 1,929 lines; Project JSX `dial-in-collective.jsx` exists at 5,288 lines, 289,465 bytes, SHA256 `54971f6286175aba7554351096c6d3640fec0211b4cef78fa13503d3c18ee980`, distinct from older 4,421-line GitHub source variant. Original source has 5,288 linewise AST ownership/area mappings in named user-download CSV; the inventory is not an independent behavior test.
+- Detailed [source/feature disposition, existing implementation references and new tests](../audits/issue30-legacy-prototype-continuity-20261029.md). Old AI/screenshot, Experiment, Bag Management, Custom and member basket/version controls are retired by explicit later owner approvals; restoring these old JSX paths is forbidden.
+- New Node regression `tests/legacy-prototype-continuity.test.mjs`: original JSON exact value preservation, active style list/retirement, taste-only Dialed In outside time/ratio starting windows, fresh measured field handling, and non-mutating search/current coffee semantics.
+- Applicable suites must run on exact source SHA and be read back. A code/test commit includes this journal in the SAME commit and `[skip netlify]`; no external app deployment.
+- The research prompt is supplied in the owner chat as a practical independently executable assignment to generate schema-validated JSON rule pack, citations, deterministic tests, and proposal only, without repository/provider mutation.
 
-| Private historical title | Verified length | What this establishes |
-| --- | ---: | --- |
-| `Old Chat.pdf` | 194 PDF pages | A readable historical conversation *excerpt*, including earlier beta/prototype discussions |
-| `Old 2.pdf` | 33 PDF pages | Another readable historical conversation excerpt |
-| `Build Web App.pdf` | 66 PDF pages | Readable historical development handoff discussion |
-| `Recommend email domain hosting.pdf` | 16 PDF pages | Historical domain/email discussion |
-| `DIC Backup Watchdog.pdf` | 11 PDF pages | Historical backup-monitoring discussion |
+## Known limits and next action
 
-The Library copies remain private and were not copied into GitHub, uploaded to a provider, republished or treated as current requirements. They correct **source availability**, not any existing Locked decision or the content identity/chronology of a complete chat archive. Old Chat contains mentions of the historical `Prototype_v0.2.0.zip` and settings label, but no verified standalone prototype workshop addendum was recovered. The original files must be cited by exact private source if a future requirement depends on them; no inferred missing approvals.
+Static AST line mapping cannot prove 5,288 manual semantic equivalences. The old nine research study bodies and a standalone workshop addendum remain unrecovered, but the owner does not want them as ongoing build requirements. The user says chats are in their Project, not a direct API export guarantee. No blocked access to the original JSON or JSX. Repair any source test failure, run all required exact-source CI, merge without force, reconcile issue status and stop before publication. If a specific unsuperseded behavior is later proven missing, track it as an implementation bug rather than recreating obsolete code.
 
-## Search outcomes and remaining gaps
+## Exact-source CI failure, diagnosis and same-commit browser-harness repair (Oct29)
 
-- Current private Library title/content searches for the nine exact original espresso report titles returned historical handoffs/specification references but **no independently retrievable complete bodies**. Direct connected Google Drive title searches for all nine research bodies plus the prototype workshop addendum returned no matching files. Their pointers in August ZIP manifests are not the reports.
-- The complete **nine original research reports** remain unavailable as full bodies; the standalone `v0.2.0` workshop addendum and a complete, **untruncated** previous conversation export remain unverified. A 194-page PDF is useful but not proof of an entire multi-chat history.
-- Existing `docs/audits/2026-10-22-source-recovery.json` preserves all nine exact titles and the available archives/manifests. The report `Espresso Extraction Windows by Roast Level and Shot Style` remains a *separate synthesis*, not a substitute original.
-- Issue #30 **remains OPEN** for genuinely missing source bodies and complete original provenance. Do not invent original citations, re-create owner decisions, import private chats or block unrelated approved development. No source code, production data, credentials, backend, provider or release queue change was made.
+Initial PR234 head `2c2d3a6569b3254148eee366824c6fb219a82674`: approval run `40910880604`, isolated SQL `40910880629`, full Node/lint/build `40910880577`, cloud UX/mobile `40910880438` all SUCCESS. Visual `40910880638` FAILED at `tests/browser/pwa_offline_qa.py:152`: Chromium `page.reload(wait_until='domcontentloaded')` timed out 30 s offline after a real service-worker cache upgrade and switching synthetic owner identity. Prior 68 visual/browser checks and offline caching/queue tests passed. The failure occurred BEFORE the required privacy-denial view was asserted; not evidence of a leak, and that missing assertion is not claimed PASS. Repair changes exactly the account-switch offline navigation to `page.reload(wait_until='commit')` then retains unchanged assertion that the page rendered `Reconnect To Continue` and `coffee-card.count()==0`. This removes a documented fragile DOMContentLoaded timing dependency, **not a privacy assertion or feature gate**. No app/backend/provider behavior touched. Rerun full exact-source CI; if actual isolation fails, investigate and repair.
+
+## CI rerun confirmed navigation stall; cold-open recovery test (October 29)
+
+Source head `ab8c063a71310c7dff669e491ee8a55ba3e46043`: approval `40911592921` SUCCESS, isolated SQL `40911592884` SUCCESS; private visual `40911592947` again FAILED **before the account privacy assertion**, now with even `wait_until='commit'` timing out at line 155 after a service-worker update and an old-tab offline reload. This disproves the earlier simple DOMContentLoaded-only explanation. To test the actual user scenario, replace the stale old window with a **new offline page in the same browser context**, preserving the same origin's localStorage, IndexedDB and Service Worker, and require the same `Reconnect To Continue` and zero private coffee cards assertions. This adds cold-open fidelity rather than skipping verification; if that new page cannot navigate or leaks data, stop and repair the actual PWA. No product source or provider data changed. Re-run exact-head CI and record the true result.
