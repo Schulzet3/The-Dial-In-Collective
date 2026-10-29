@@ -310,7 +310,7 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   // Preserve meaningful internal hyphens such as SL-28.
   const stray=s.match(/^\s*(?:--+|[–—]{1,2}|[:：])\s*(\S[\s\S]*)$/u);
   if(stray)s=stray[1].replace(/\s*,\s*(?=\S)/g,', ').trim();
-  s=s.replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'').replace(/\.$/,'').trim();
+  s=s.replace(/\s*,\s*(?=\S)/g,', ').replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'').replace(/\.$/,'').trim();
  }
  // Some seller specs mislabel post-harvest equipment as a coffee 'Varietal'.
  // Withhold botanical autofill; preserve the literal label in source_facts.
@@ -1560,6 +1560,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // A later direct blend fallback cannot resurrect rejected geography.
  for(const field of conflicts)delete fields[field];
  if(conflicts.has('roast_level')){roast_evidence.value=null;roast_evidence.source='';}
+ // Country enrichment can run after the initial label normalization.
+ // Remove only an exactly repeated Region-of country at final field assembly.
+ // Never suppress genuine country disagreement or product-source conflicts.
+ if(fields.origin&&!conflicts.has('origin')){
+  const repeated=fields.origin.match(/^(.*?)\bRegion\s+of\s+([^,]{3,45})\s*,\s*(.+)$/iu);
+  if(repeated&&repeated[1].trim()&&keyOf(repeated[2])===keyOf(repeated[3]))
+   fields.origin=`${repeated[1].trim()} Region, ${repeated[2].trim()}`;
+ }
  const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:selectedProduct,source_url});
  if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
  const roaster_recipe=extractProductEspressoReference(currentProduct);
