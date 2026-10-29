@@ -17,12 +17,12 @@ test('current product literal Location and Tasting notes autofill clean geograph
  const r=parse('<p>Tasting notes: '+notes+'</p><p>Roast level: Medium</p>'+
   '<p>Location: '+location+'</p><p>Farmer Cooperative: Finca Triunfo Verde, S.C</p>');
  assert.equal(r.fields.origin,'El Triunfo Reserve, La Paz, Chiapas, Mexico');
- assert.equal(r.fields.tasting_notes,'sweet candied lemon, dried blueberry');
+ assert.equal(r.fields.tasting_notes,'sweet candied lemon and dried blueberry');
  assert.equal(r.fields.roast_level,'Medium');
  assert.ok(!r.conflicts?.includes('origin'));
  const preview=coffeeUrlPreviewMarkup(r);
  assert.ok(preview.includes('El Triunfo Reserve, La Paz, Chiapas, Mexico'));
- assert.ok(preview.includes('sweet candied lemon, dried blueberry'));
+ assert.ok(preview.includes('sweet candied lemon and dried blueberry'));
  assert.ok(r.source_facts?.some(f=>String(f.value||'').includes(location)),
   'literal roaster location remains reviewable source evidence');
  assert.ok(r.source_facts?.some(f=>String(f.value||'').includes(notes)),
@@ -32,7 +32,7 @@ test('generic bounded named reserve and country without inferred geography',()=>
  const r=parse('<p>Location: At the edge of the Monte Verde Reserve, Santa Elena, Puntarenas, Costa Rica.</p>'+
   '<p>Tasting notes: Pleasing body with tasting notes of red plum and lemon peel.</p>');
  assert.equal(r.fields.origin,'Monte Verde Reserve, Santa Elena, Puntarenas, Costa Rica');
- assert.equal(r.fields.tasting_notes,'red plum, lemon peel');
+ assert.equal(r.fields.tasting_notes,'red plum and lemon peel');
 });
 test('explicit contradictory country still requires member review',()=>{
  const r=parse('<p>Country: Peru</p><p>Location: '+location+'</p>');
