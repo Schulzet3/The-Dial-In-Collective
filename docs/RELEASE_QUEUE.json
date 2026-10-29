@@ -2632,23 +2632,31 @@
     {
       "id": "DIC-Q-33-repeated-selected-product-heading-identity",
       "issue": 33,
-      "pr": null,
+      "pr": 255,
       "title": "Honor repeated identical current-coffee headings without weakening product identity",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a0cc9fa9b357db681230eb3d394dce3b86b1f031",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ],
       "tests": [
-        "Structural source audit: selectedDirectProductCredits previously rejected all direct fields if an exact coffee H1 occurred twice; repair requires every in-scope H1 to match the selected coffee. Added six exact-product, duplicate, accented-name, competing-identity and missing-H1 Node tests, including actual public Add Coffee preview path.",
-        "Exact PR-head CI, non-force integration and merged-source checks pending. Frozen 603/77 current-source replay and genuine member runtime acceptance not claimed for this narrow structural fix."
+        "Generic exact-selected product parser permits two or three identical current H1 elements from responsive layouts but rejects missing or competing H1; six real-handler/Add Coffee-preview and negative identity cases.",
+        "Final PR255 head 062fdace9014f2638c76e22af65d062b56f22bba: approval 40946043199, full Node/lint/build 40946043270, cloud/mobile 40946043057, Chromium visual 40946043374, isolated SQL 40946043165, security 40946043098 and source bundle 40946043359 all SUCCESS. Frozen603 restricted job 40946043164 SKIPPED.",
+        "Nonforce merge a0cc9fa9b357db681230eb3d394dce3b86b1f031 tree b701cad290ea64af0e486514796033968189447a exactly equals PR255 tested head tree; merged-source validate, approval, cloud tests and mobile browser check-runs all SUCCESS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-head applicable GitHub CI, non-force merge and readback pending."
+      "ci_runs": [
+        40946043199,
+        40946043270,
+        40946043057,
+        40946043374,
+        40946043165,
+        40946043098,
+        40946043359
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Generic selected current-product identity guard improvement only, not a roaster URL exception. A desktop/mobile duplicated exact current H1 no longer suppresses direct roast and sensory evidence, but different/absent H1 still blocks cross-product donation. No original 603 oracle/captures or member/offline/Community change, no production deployment."
+      "notes": "Generic selected current-product identity guard improvement only, not a roaster URL exception. A desktop/mobile duplicated exact current H1 no longer suppresses direct roast and sensory evidence, but different/absent H1 still blocks cross-product donation. No original 603 oracle/captures or member/offline/Community change, no production deployment. Scoped READY after exact source and nonforce merge; no verified real published product with duplicate H1, no full 603-case current/live replay or signed-in production acceptance. Parent Issue #33 remains OPEN. Source included only in an owner-approved combined READY release, not deployed by this status.",
+      "tested_source_sha": "062fdace9014f2638c76e22af65d062b56f22bba"
     }
   ],
   "history": [
