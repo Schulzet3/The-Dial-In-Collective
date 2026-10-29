@@ -241,3 +241,12 @@ test('delete controls render on real editable records with a revision',()=>{
  const disabled=renderAdminRecord({name:'No identifier'},'approved');
  assert.doesNotMatch(disabled,/data-action="admin-delete-record"/);
 });
+
+test('admin dashboard retains an accessible inline action status region after a successful correction',()=>{
+ const html=renderAdminDashboard({counts:{approved_coffees:55}},null,null,{}, {});
+ const matches=html.match(/<p id="admin-action-notice"[^>]*><\/p>/g)||[];
+ assert.equal(matches.length,1,'the dashboard has exactly one durable feedback region');
+ assert.match(matches[0],/role="status"/);
+ assert.match(matches[0],/aria-live="polite"/);
+ assert.match(html,/id="admin-refresh"/,'the dashboard remains navigable after feedback');
+});
