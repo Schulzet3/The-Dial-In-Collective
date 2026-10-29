@@ -2366,6 +2366,39 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
       "notes": "Source-only READY; no Netlify, SQL, Edge, Auth, member-data or public release change. Distinct manual whole-history semantic review and genuine-account tests remain open under #96. Engine research #238 and extractor #33 not touched.",
       "tested_source_sha": "350b2c361a69d4b95393a677ee6cea353e58f61d"
+    },
+    {
+      "id": "DIC-Q-33-original603-source-field-cleanup",
+      "issue": 33,
+      "pr": 240,
+      "title": "Clean five current selected coffee variety/origin autofill values in Add Coffee",
+      "state": "READY",
+      "merged_source_sha": "44018fe47e4d5a5d0e95d335c72b5c8dc70fc19d",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Original603 current selected-source adjudication field-map static check identified exactly 5 malformed display values (3 Varietal separators/comma lists; 2 Region-of-country double-country labels); these are input candidate findings, not 603 exact handler replay results.",
+        "Actual extractor public selected-product handler plus Add Coffee preview renderer exercised by new focused positives/negatives; preservations include unrelated product card, cultivar internal hyphens, false/mismatched country duplicates and conflict behavior. Initial CI failures repaired with corrected stages/fixtures; final exact PR head checks all SUCCESS.",
+        "Exact PR head 2961174cd6ce0aea9d6d5cb58d8a05f1851581ef successful app/build 40924805018, cloud/mobile 40924805183, visual 40924805087, SQL 40924805078, approval 40924805159, security 40924805675, exact source-bundle 40924805188; private hosted frozen603 run 40924805154 SKIPPED.",
+        "PR240 non-force merge 44018fe47e4d5a5d0e95d335c72b5c8dc70fc19d preserves concurrent development; merged-source exact app/build 40925257924, cloud/mobile 40925257879, approval 40925258103 SUCCESS. Public source probes 40925257978 and 40925258078 SKIPPED, not called passed."
+      ],
+      "ci_runs": [
+        40924805018,
+        40924805183,
+        40924805087,
+        40924805078,
+        40924805159,
+        40924805675,
+        40924805188,
+        40925257924,
+        40925257879,
+        40925258103
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Real extractor and Add Coffee preview field-quality improvements verified in synthetic source fixtures; no genuine hosted member login or actual full 603 current-source replay for this specific patch. Preserve source literals, ambiguity/conflict review, member edits, frozen original 603 captures/oracle/scorer. Scoped READY, NOT DEPLOYED; parent Issue33 original603 source-level adjudication remains IN_PROGRESS due unresolved current source limitations. No production SQL/Auth/Edge/member mutations or publishing authorized.",
+      "tested_source_sha": "2961174cd6ce0aea9d6d5cb58d8a05f1851581ef"
     }
   ],
   "history": [
