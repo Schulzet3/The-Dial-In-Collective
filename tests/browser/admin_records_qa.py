@@ -137,7 +137,7 @@ with sync_playwright() as p:
 
     last=approved.locator('.admin-record').last
     assert last.locator('[data-record-form]').count()==1
-    last.locator('[data-action="edit-toggle"]').click()
+    last.get_by_role('button',name='Edit Details',exact=True).click()
     last.locator('[data-record-form] [name="name"]').fill('Updated Fixture Coffee 55')
     last.locator('[data-record-form] button[type="submit"]').click()
     page.get_by_text("Audited correction saved.",exact=True).wait_for()
@@ -153,7 +153,7 @@ with sync_playwright() as p:
 
     # Provoke a real front-end stale-revision rejection against the fake server.
     page.evaluate("window.__data.approved[54].revision=4")
-    last.locator('[data-action="edit-toggle"]').click()
+    last.get_by_role('button',name='Edit Details',exact=True).click()
     last.locator('[data-record-form] [name="name"]').fill('UNSAVED STALE CHANGE')
     last.locator('[data-record-form] button[type="submit"]').click()
     page.get_by_text("Stale revision: refresh this record before editing.",exact=False).wait_for()
@@ -172,7 +172,7 @@ with sync_playwright() as p:
     shots.locator('.admin-coffee-group summary').click()
     lastShot=shots.locator('.admin-record').last
     assert lastShot.get_by_text("PRIVATE SYNTHETIC NOTE 51",exact=False).count()==1
-    lastShot.locator('[data-action="edit-toggle"]').click()
+    lastShot.get_by_role('button',name='Edit Details',exact=True).click()
     lastShot.locator('[data-record-form] [name="notes"]').fill('Amended synthetic private note')
     lastShot.locator('[data-record-form] button[type="submit"]').click()
     page.get_by_text("Audited correction saved.",exact=True).wait_for()
