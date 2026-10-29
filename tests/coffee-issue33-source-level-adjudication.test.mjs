@@ -61,3 +61,8 @@ test('current named release outranks generic product banner',()=>{
  const p=parse('Holy Grail No. 2: Strawberry Jam','<p><strong>LIMITED RELEASE | WHOLE BEAN ONLY</strong></p><p>Release: Holy Grail No. 2</p>');
  assert.equal(p.fields.release_label,'Holy Grail No. 2');
 });
+
+test('bare generic Limited Release and Gold Collection must not invent selected release identity',()=>{
+ const p=parse('Test Coffee','<p>Limited Release</p><p>Gold Collection</p>');
+ assert.equal(p.ok,true);assert.equal(p.fields.release_label,undefined);
+});

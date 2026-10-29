@@ -57,7 +57,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   const line=b.text.replace(/\s+/g,' ').trim();
   // Literal current selected-product release declaration, not a site-wide
   // 'Limited Releases' collection or a historical release quoted in prose.
-  if(b.tag==='p'&&/^limited release(?:\s*[|·]\s*(?:whole bean only|single origin))?\.?$/iu.test(line))
+  if(b.tag==='p'&&/^limited release\s*[|·]\s*(?:whole bean only|single origin)\.?$/iu.test(line))
    releases.add(/^LIMITED RELEASE(?:\b|[|·])/u.test(line)?'LIMITED RELEASE':'Limited Release');
   // A full current selected coffee name directly credited as "is roasted"
   // can identify a standard tier. Reject another coffee, older harvest,
@@ -88,7 +88,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  // release banner. Never accept site-wide collection navigation text.
  for(const b of productCoffeeProse(optionHtml,clean)){
   const val=b.text.replace(/\s+/g,' ').trim();
-  if(b.tag==='p'&&/^limited release(?:\s*[|·]\s*(?:whole bean only|single origin))?\.?$/iu.test(val))
+  if(b.tag==='p'&&/^limited release\s*[|·]\s*(?:whole bean only|single origin)\.?$/iu.test(val))
    releases.add(/^LIMITED RELEASE(?:\b|[|·])/u.test(val)?'LIMITED RELEASE':'Limited Release');
  }
  const out={};
