@@ -1,3 +1,9 @@
+## October 29 UTC — Correct source-shebang negative test literal before CI (NO DEPLOY)
+
+After restoring the official603 probe's Node shebang and relaunching live run `40896796488`, independently inspected the new negative test source and found its fixture inadvertently expected a literal `\\n` sequence rather than a real linefeed. Corrected test string to JS escaped `\n` (one backslash). Only test and same-commit journal; deployed app and current official-603 runner remain unchanged and source capture continues at its tested SHA. No production or member mutation.
+
+---
+
 ## October 29 UTC — Repair failed original603 live source probe before source access (NO DEPLOY)
 
 Observed actual GitHub source job `40896352347` all three shards FAILED immediately with `SyntaxError: Invalid or unexpected token` at line 2 because the trigger comment was inserted before `#!/usr/bin/env node` in the prior CI trigger commit. This is a workflow syntax issue, **not** any coffee source failure or data change. Fixed by restoring Node shebang to byte-zero, keeping event marker in the git commit message, and adding explicit negative regression that no comment precedes the hashbang. Relaunch the same source-only public 603 review under exact new source; no deployment, member data, frozen oracle or database change.

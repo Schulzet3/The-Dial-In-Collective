@@ -45,7 +45,7 @@ test('live source probe retains 201 x three distinct coffees and does not auto-c
  assert.doesNotMatch(script,/createClient|service_role|SUPABASE_SERVICE|apply_migration|delete from|insert into|update public|deployToProduction/);
 });
 test('source-only runner keeps Node shebang at byte zero',()=>{
- assert.ok(script.startsWith('#!/usr/bin/env node\\n'), 'The executable hashbang must be the first line, never preceded by a CI trigger comment');
+ assert.ok(script.startsWith('#!/usr/bin/env node\n'), 'The executable hashbang must be the first line, never preceded by a CI trigger comment');
 });
 test('workflow runs three isolated no-secret public shards, private one-day evidence only, never deploys',()=>{
  assert.match(workflow,/shard:\s*\[0,\s*1,\s*2\]/);
