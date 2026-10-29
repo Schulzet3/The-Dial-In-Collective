@@ -7,6 +7,7 @@ import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {extractEcwidProduct,ecwidProductRequest,sameEcwidTitle} from '../../src/server/coffee-ecwid-snapshot.mjs';
 import {shopifyProductRequest,extractShopifyProduct,mergePublicProductPreview} from '../../src/server/coffee-shopify-ajax.mjs';
+import {extractSelectedCoffeeRoastVariantsFromHtml} from '../../src/server/coffee-roast-variants.mjs';
 import {wooProductRequest,extractWooProduct} from '../../src/server/coffee-woocommerce-store.mjs';
 
 const json=(value,status=200)=>new Response(JSON.stringify(value),{
@@ -166,6 +167,15 @@ export function createPreviewHandler({
     if(Date.now()<deadlineAt){
      const fromPublic=await publicProduct(finalUrl);
      preview=mergePublicProductPreview(preview,fromPublic);
+    }
+    // A live selected-product page can independently prove purchasable roast
+    // choices when its optional Shopify .js request fails or times out.
+    if(preview?.ok&&!(preview.roast_variants?.length>1)){
+     const roastChoices=extractSelectedCoffeeRoastVariantsFromHtml(page.html);
+     if(roastChoices.length>1)preview=mergePublicProductPreview(preview,{
+      ok:true,source_url:finalUrl,fields:{name:preview.fields.name,roaster:preview.fields.roaster},
+      roast_variants:roastChoices
+     });
     }
     }
    }

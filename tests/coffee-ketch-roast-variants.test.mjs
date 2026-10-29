@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {extractSelectedCoffeeRoastVariants} from '../src/server/coffee-roast-variants.mjs';
+import {extractSelectedCoffeeRoastVariants,extractSelectedCoffeeRoastVariantsFromHtml} from '../src/server/coffee-roast-variants.mjs';
+import {createPreviewHandler} from '../netlify/functions/coffee-url-preview.mjs';
 import {shopifyProductRequest,extractShopifyAjaxData,mergePublicProductPreview} from '../src/server/coffee-shopify-ajax.mjs';
-import {coffeeRoastVariantPreview,coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot,applyCoffeeRoastVariant} from '../site/cloud/coffee-url-autofill.js';
+import {coffeeRoastVariantPreview,coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot,applyCoffeeRoastVariant,applyCoffeeUrlFields} from '../site/cloud/coffee-url-autofill.js';
 
 // Literal selected Ketch product-page clauses, read 2026-10-27. This is
 // supplementary acceptance, never a rewrite of the immutable original603.
@@ -110,4 +111,81 @@ test('SEO-only Parainema is not offered against Ketch selected-product Lempira',
  assert.doesNotMatch(html,/Parainema/);
  const audit=coffeeSourceReviewSnapshot(merged);
  assert.ok(audit.published_source_information.some(x=>x.value==='Parainema'));
+});
+
+const selectedHtml=(control='<fieldset class="product-form__input"><legend>Roast Level</legend><input type="radio" name="Roast Level" value="Light"><input type="radio" name="Roast Level" value="Medium-dark"></fieldset>',
+ prose=description)=>'<html><head><meta property="og:type" content="product"></head><body><main id="MainContent"><h1>Tier 2: Legacy Farms Honduras Natural Process</h1>'+control+'<section class="product__description">'+prose+'</section></main></body></html>';
+test('Live Shopify HTML fieldset fallback recovers both roast profiles without JSON API',()=>{
+ const variants=extractSelectedCoffeeRoastVariantsFromHtml(selectedHtml());
+ assert.deepEqual(variants.map(v=>v.fields.roast_level),['Light','Medium-Dark']);
+ assert.deepEqual(variants.map(v=>v.fields.tasting_notes),['Floral, blackberry','Blackberry, caramelized sugar']);
+ assert.deepEqual(variants.map(v=>v.roaster_recipe.ratio),[3,2]);
+ assert.deepEqual(variants.map(v=>v.roaster_recipe.temperature_reference),['203–205°F','200–202°F']);
+});
+test('HTML fallback also supports named Shopify roast select and rejects mere marketing copy',()=>{
+ const selection='<select name="options[Roast Level]"><option value="Light">Light</option><option value="Medium-dark">Medium-dark</option></select>';
+ assert.equal(extractSelectedCoffeeRoastVariantsFromHtml(selectedHtml(selection)).length,2);
+ for(const control of ['', '<fieldset><legend>Grind Size</legend><input type="radio" value="Light"><input type="radio" value="Medium-dark"></fieldset>',
+  '<fieldset hidden><legend>Roast Level</legend><input type="radio" value="Light"><input type="radio" value="Medium-dark"></fieldset>',
+  '<fieldset><legend>Roast Level</legend><input type="radio" value="Light"></fieldset>']){
+  assert.deepEqual(extractSelectedCoffeeRoastVariantsFromHtml(selectedHtml(control)),[]);
+ }
+ assert.deepEqual(extractSelectedCoffeeRoastVariantsFromHtml(selectedHtml(selection,'<p>Light roast and dark roast are both possible ways to brew coffee.</p>')),[]);
+ assert.deepEqual(extractSelectedCoffeeRoastVariantsFromHtml('<html><p>'+description+'</p>'+selection+'</html>'),[],
+   'a non-product/SEO document cannot invent purchase variants');
+});
+test('Selecting purchased roast replaces generic autofill but never manually edited tasting notes',()=>{
+ const controls={
+  roast_level:{value:'',tagName:'SELECT',options:[{value:''},{value:'Light'},{value:'Medium-Dark'}],dataset:{},dispatchEvent(){}},
+  tasting_notes:{value:'',tagName:'INPUT',dataset:{},dispatchEvent(){}}
+ };
+ const form={elements:{namedItem:key=>controls[key]}};
+ const generic={ok:true,fields:{tasting_notes:'Blackberry'}};
+ assert.equal(applyCoffeeUrlFields(form,generic).filled,1);
+ assert.equal(controls.tasting_notes.value,'Blackberry');
+ const base={ok:true,fields:{},roast_variants:extractSelectedCoffeeRoastVariantsFromHtml(selectedHtml())};
+ const light=coffeeRoastVariantPreview(base,'light'),dark=coffeeRoastVariantPreview(base,'medium-dark');
+ assert.equal(applyCoffeeRoastVariant(form,base,light),2);
+ assert.equal(controls.tasting_notes.value,'Floral, blackberry');
+ assert.equal(applyCoffeeRoastVariant(form,light,dark),2);
+ assert.equal(controls.tasting_notes.value,'Blackberry, caramelized sugar');
+ controls.tasting_notes.value='My own bag notes';
+ assert.equal(applyCoffeeRoastVariant(form,dark,light),1);
+ assert.equal(controls.tasting_notes.value,'My own bag notes');
+});
+test('Full authenticated preview handler offers roast selection when Shopify JSON is unavailable',async()=>{
+ const calls=[];
+ const apiFetch=async (uri,options)=>{
+  const end=uri.split('/').at(-1),body=options.body?JSON.parse(options.body):{};
+  calls.push({end,body});
+  const response=end==='user'?{id:'fixture-user'}:
+   end==='dic_session_status'?{admitted:true,emailVerified:true}:
+   end==='dic_preview_preflight'?{allowed:true,ticket:'00000000-0000-4000-8000-000000000123'}:
+   end==='dic_preview_complete'?{charged:true}:null;
+  return {ok:true,json:async()=>response};
+ };
+ const handler=createPreviewHandler({
+  env:key=>({SUPABASE_URL:'https://fixture.supabase.co',SUPABASE_PUBLISHABLE_KEY:'sb_publishable_fixture_nonfunctional'}[key]),
+  apiFetch,
+  readHtml:async()=>({ok:true,source_url:url,html:selectedHtml()}),
+  readJson:async()=>({ok:false,reason:'source_unavailable'}),
+  extract:(_html,{source_url})=>({ok:true,source_url,source:'unverified_public_page',
+   fields:{name:'Tier 2: Legacy Farms Honduras Natural Process',roaster:'Ketch',origin:'Cerro Bueno, Honduras',
+    tasting_notes:'Blackberry',roast_level:'Medium'},source_facts:[]})
+ });
+ const response=await handler(new Request('https://app.dialincollective.com/api/coffee-preview',{
+  method:'POST',headers:{Origin:'https://app.dialincollective.com','Content-Type':'application/json',
+   Authorization:'Bearer fixture.jwt'},body:JSON.stringify({source_url:url})
+ }));
+ const result=await response.json();
+ assert.equal(response.status,200,JSON.stringify(result));
+ assert.equal(result.roast_variants?.length,2);
+ assert.equal(result.fields.roast_level,undefined);
+ assert.equal(result.fields.tasting_notes,undefined);
+ assert.equal(result.roaster_recipe,undefined);
+ assert.match(coffeeUrlPreviewMarkup(result),/Which roast did you buy\?/);
+ const picked=coffeeRoastVariantPreview(result,'medium-dark');
+ assert.equal(picked.fields.tasting_notes,'Blackberry, caramelized sugar');
+ assert.equal(coffeeSourceReviewSnapshot(picked).selected_roast_variant,'medium-dark');
+ assert.equal(calls.filter(x=>x.end==='dic_preview_complete').length,1);
 });
