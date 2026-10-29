@@ -1,3 +1,9 @@
+## October 29 UTC — Issue33 live audit exact CI repair, unused-helper lint (NO DEPLOY)
+
+PR263 corrected audit-only queue schema; exact head `08ffad80f79777b9720dd9679c8021c677790aae` passed all **2,050 Node tests /0 fail/6 skipped** in GitHub app job `40961853502`. Lint then correctly FAILED its zero-warning policy because the new public probe declared `targetById` but never called it. Removed this unused helper only; no parser logic, live-source test expectations, Locked Ketch decisions, runtime or queue change. Full exact new head CI, nonforce merge, genuine live page probe still required before any actual-source acceptance claim.
+
+---
+
 ## October 29 UTC — Corrected release-queue intake failure immediately (no application code changed)
 
 PR263 exact initial head `17484abad3a169e6df294618e6ba99d5cb94ba23` **approval/continuity job 40961615151 FAILED** release-queue schema: the new audit-only Issue33 job had `scripts/audit/**`, `tests/**` and `.github/workflows/**` as `scope_paths`, but these are NOT deployable application assets. Queue validator correctly enforces deployable paths, so the test-only queue item is removed rather than weakening rules or falsely associating unchanged application files. The original release queue is restored byte-for-byte from development blob `93a018d1c89583e6aff7147e82bce7e3279e7f3a`; the three independently verified READY extractor items remain preserved. Audit evidence stays tracked in this work journal, PR263 and Issue #33; any real live defect will be filed/queued against its actual deployable parser module. This correction requires exact-source CI retest, nonforce merge and a genuine five-page HTTPS run. No production action.

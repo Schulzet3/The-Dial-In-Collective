@@ -30,7 +30,6 @@ const variantsOf=preview=>new Map((preview?.roast_variants||[]).map(v=>[v.id,v])
 const checkedFields=['name','roaster','origin','roast_level','process','producer',
  'variety','elevation_m','tasting_notes','decaffeination_method','release_label'];
 const fieldsOf=preview=>Object.fromEntries(checkedFields.filter(k=>preview?.fields?.[k]!=null).map(k=>[k,clip(preview.fields[k])]));
-const targetById=id=>CURRENT_READY_CASES.find(x=>x.id===id);
 
 // Explicit expectations only for data literally present on the corresponding
 // CURRENT official product pages. Unknown or changed current data is not guessed.
