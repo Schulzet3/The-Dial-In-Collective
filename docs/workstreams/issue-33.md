@@ -1,3 +1,9 @@
+## October 29 UTC — correct selected cultivar fixture to an actual labeled specification (NO DEPLOY)
+
+Corrected PR240 cloud CI exposed two synthetic positives without a recognizable explicit key/value separator (`Varietal-- Chiroso` and `Varietal-- San Pacho`), causing the extractor correctly to leave the canonical value blank. The original audit reports values left after label parsing rather than the complete original DOM label. Revised fixtures to `Varietal: -- Chiroso` and `Varietal: -- San Pacho` so they exercise the genuine normalized value at the labeled-field boundary without weakening the parser's unlabelled-text safeguards. The other six new tests passed. Exact-source rerun required. Previous fix origin/cultivar comma and all approved privacy rules unchanged. No deployment.
+
+---
+
 ## October 29 UTC — repaired exact-head cloud test failures for selected-field cleanup (NO DEPLOY)
 
 PR240 initial head source had three targeted test failures among the new positives: Uganda's HTML label parser had already stripped the leading colon before `normalized`, leaving only comma formatting; country enrichment appended Mexico/Colombia *after* the first normalization call, so earlier country de-duplication never saw the complete value. Fixed at the correct stages: always space commas in normalized variety, and de-duplicate SAME-country `Region of` expression immediately after country enrichment, guarded by no origin conflict. All unrelated CI data and original benchmark remain unchanged; retest required on corrected exact source. Also repaired concurrent Git fast-forward ancestry (two-parent non-force merge) after development advanced. Original restricted cloud603 SKIPPED, not claimed PASS.

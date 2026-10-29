@@ -12,8 +12,8 @@ function parse(name,body){
  return data;
 }
 for(const [name,label,expected] of [
- ['Colombia El Silencio','Varietal-- Chiroso','Chiroso'],
- ['El Salvador Las Veraneras','Varietal-- San Pacho','San Pacho'],
+ ['Colombia El Silencio','Varietal: -- Chiroso','Chiroso'],
+ ['El Salvador Las Veraneras','Varietal: -- San Pacho','San Pacho'],
  ['Uganda Organic','Varietals: Bourbon,Kenya SL14,Kenya SL28','Bourbon, Kenya SL14, Kenya SL28']
 ]){
  test('source-backed varietal autofill: '+name,()=>{
