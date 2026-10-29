@@ -404,6 +404,39 @@ function selectedCoffeeBagAltOrigin(html,name){
  }
  return claims;
 }
+// Combine only two independently printed places about this exact selected
+// coffee: its named product story "X, our ... from Region" and its current
+// "This lot hails from Locality" statement. No gazetteer/country guess.
+function pairedSelectedLotRegion(blocks,name,previousOrigin=''){
+ const titles=blocks.filter(block=>block.tag==='h1').map(block=>key(block.text));
+ if(!titles.length||titles.some(value=>value!==key(name)))return null;
+ const regions=new Map(),towns=new Map();
+ for(const block of blocks){
+  if(!['p','li','div'].includes(block.tag)||block.text.length>900)continue;
+  for(const sentence of sentences(block.text)){
+   if(sentence.length>550||!current(sentence)||
+      /\b(?:previous|prior|former|historical|last year|other coffee|other lot|another coffee|another lot)\b/i.test(sentence))continue;
+   const named=sentence.match(/^([\p{Lu}][\p{L}\p{M}'’ -]{3,80}?),\s+our\s+[^.!?]{2,90}?\s+from\s+([\p{Lu}][\p{L}\p{M}’'-]{2,50}(?:\s+[\p{Lu}][\p{L}\p{M}’'-]{2,50}){0,2})(?=\s*[,.;:—–]|$)/u);
+   if(named&&key(named[1]).length>=5&&key(name).includes(key(named[1]))&&
+      !/^(?:coffee|blend|roast|organic|decaf)$/i.test(named[1])){
+    const value=named[2].trim();
+    if(!regions.has(key(value)))regions.set(key(value),{value,quote:sentence});
+   }
+   const lot=sentence.match(/\b(?:this|our)\s+(?:current\s+)?(?:lot|coffee|beans?)\s+hails?\s+from\s+([\p{Lu}][\p{L}\p{M}’'-]{2,50}(?:\s+[\p{Lu}][\p{L}\p{M}’'-]{2,50}){0,2})(?=\s*[,.;:—–]|$)/iu);
+   if(lot){
+    const value=lot[1].trim();
+    if(!towns.has(key(value)))towns.set(key(value),{value,quote:sentence});
+   }
+  }
+ }
+ // Never resolve contradictory current lots or stronger existing evidence
+ // by source order. Preserve literal place names without inferring a country.
+ if(regions.size!==1||towns.size!==1)return null;
+ const region=[...regions.values()][0],town=[...towns.values()][0];
+ if(key(region.value)===key(town.value)||(previousOrigin&&key(previousOrigin)!==key(town.value)))return null;
+ return {value:town.value+', '+region.value,quote:town.quote+' | '+region.quote};
+}
+
 export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={}){
  const facts=[],blocks=productCoffeeProse(html,clean).filter(block=>!block.educational);
  if(!name||!blocks.length)return {facts};
@@ -431,6 +464,9 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   if(compatible)add('Origin',compatible,place.quote);
   else if(!existing||incompatibleCountry||COUNTRY_ONLY.test(existing))add(place.label,place.value,place.quote);
  }
+ // Join explicitly named current lot and region only for the selected coffee.
+ const pairedLot=pairedSelectedLotRegion(blocks,name,fields.origin);
+ if(pairedLot)add('Origin',pairedLot.value,pairedLot.quote);
  const titleOrigin=extractCoffeeTitleOrigin(name);
  const titleMatches=titleOrigin?.label==='Country'?titleOrigin.value.split(', '):[];
  const titleCountries=titleMatches.length>1&&!/\bblend\b/i.test(name)?[]:titleMatches;
