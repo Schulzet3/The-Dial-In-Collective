@@ -1,3 +1,9 @@
+## October 29 UTC — PR265 exact-head CI dispatch repair (NO DEPLOY)
+
+After safe two-parent reconciliation `b374f9b627cce214502df7d71ebefc64955d1fc3`, GitHub PR #265 readback confirms it is mergeable against actual development `08665da0f0a1f7df0edb9ae2d6028e77bfb74dc9`, but Git-data `update_ref` produced **zero** CI runs for that exact SHA. A documentation-only Contents API update is used as the GitHub PR synchronize trigger without changing runtime, tests, READY or production. A passing CI outcome remains unverified until exact run completion.
+
+---
+
 ## October 29 UTC — Issue33 PR265 exact-source CI ancestry recovery (NO DEPLOY)
 
 Initial PR265 head `af9207d414b49b0dd7ea8f25728975f64fe6d1f5` approval job `40963556527` failed **ancestry validation**, not extractor functional tests: concurrent Issue50/active CURRENT_STATUS documentation commit moved development to `08665da0f0a1f7df0edb9ae2d6028e77bfb74dc9` after source branch creation. Diff inspection confirmed that concurrent change touched only docs/ACTIVE_WORK, docs/CURRENT_STATUS, docs/workstreams/issue-50.md, not the Ketch parser or queue. Recovered with a non-force two-parent integration of the exact intended source/test/queue blobs onto the newest development tree; both parents included and all unrelated docs preserved. New exact-head approval, Node/SQL/visual/cloud CI, nonforce PR merge and genuine five-page HTTPS check still required. Do not mistake the first 5/5 assertion verdict for a Ketch no-conflicts acceptance.
