@@ -1,34 +1,146 @@
-# The Dial In Collective — First Shot Quickstart (DRAFT)
+# Your First Espresso Shot
 
-**Status:** Private, unpublished beginner-guide candidate for Issue #37. **Evidence baseline:** released application source `release/production` SHA `05cf9eb156f63110cd434034ec3914a1e92b76d3`, Netlify READY/current deploy `6ae27f32bfae09ad8745e19b` (October 28, 2026). Source checked against `site/cloud/main.js`, `site/lib/constants.js`, `site/lib/ui.js`, and `site/cloud/shot_card.js` at that release. Do not present development-only features as available.
+*The Dial In Collective · Beginner Guide*
 
-## First shot: the short path
+New to the app? Follow these **six simple steps** to set up your equipment, save your first espresso shot, and see what to try next.
 
-1. **Sign in to the private beta.** Use **Sign In** with your verified email and existing password. If you see **Your Invitation**, enter the invitation code supplied for *your* account. Do not share invitations or passwords.
-2. **Set up your equipment.** If this is a new workspace, choose **Set Up My Workspace**, add your machine and grinder, and save the setup. Grinder numbers use *your grinder's actual scale*; they are not universal. Where supported, choose the feed mode that matches how you grind.
-3. **Add a coffee.** From **Coffees**, tap **Add Coffee**. Optionally paste the official product URL into **Roaster Page URL** and choose **Autofill From URL**. Review every suggested detail, especially roast, origin, process and tasting notes, before pressing **Add Coffee**. You can enter the coffee name and roaster manually if source information is missing. If an exact identity cannot be confirmed, your coffee can remain **Pending** and your own shots remain usable; it is not automatically shared as a verified coffee.
-4. **Choose a starting shot.** Open the coffee card. A new coffee may show a suggested **Starting Shot Style** and **Log First Shot**. Otherwise review **Starting Recommendation** and tap **Log A Shot**. **Change Style** is optional. The available starting styles are Traditional, Turbo, Fast-Flow, Ristretto and Lungo; they are starting approaches, not pass/fail standards.
-5. **Measure and rate the shot.** Fill **Dose (g)**, **Yield (g)**, **Time (s)** and **Grind Setting** using the measurements you actually observed. Optional temperature and Slow Feed appear only when supported by the saved setup. Rate all five scales under **How did it taste?**: **Extraction**, **Body**, **Clarity**, **Sweetness**, and **Astringency / Dryness**. For dryness, less is better. Add a private note if useful.
-6. **Get the next adjustment.** Tap **Save Shot & Get Suggestion**. Reopen the coffee for **Next Shot Recommendation** or **Shot Feedback**. The suggestion may recommend changing one controllable variable while keeping the others constant. Think of dose, yield, time and taste as observations and starting guidance, not strict ideals. Log the next shot to learn what actually tastes best to you.
+> **Draft for review:** This guide is not published in the app yet. A companion video is planned.
 
-## After the first shot
+## Start Here: Your First Shot
 
-- **Review or correct history.** Open the coffee card's **Shot History**, expand a saved shot, and use the available edit action. Historical shots remain attributed to their original setup/version and shot style. When eligible, **Make Current Recipe** selects a prior successful shot without rewriting its measurements.
-- **Switch equipment.** Select the workspace name at the top of **Coffees** to use another setup. Recipe context depends on the chosen setup and coffee/style.
-- **Community is different from private history.** **Community Shots** shows qualifying shared observations when online; it is not a feed of members' private notes. Coffee facts can be source-backed and member-reviewed. Personal tasting notes are private from other members, with the approved narrow administrator records exception.
-- **Understand sync.** **Synced** means saved server state is up to date; **Offline** or **Pending** means some work may live on this device until reconnection. **Cloud Sync Details** shows pending changes. When you reconnect, check that your pending shot has synced before editing existing records or switching online-only controls. Do not erase browser storage while you have pending shots.
-- **When the source is uncertain.** Inspect **Coffee Details**. Missing or contradictory coffee information should be left blank or corrected by you, not guessed from a roaster's unrelated coffee. **Retry Official Source Check** or **Check For A Verified Match** may be available for Pending entries while online.
+### Step 1 — Create an account or sign in
 
-## Accessibility and support notes
+- **Already have an account?** Choose **Sign In**.
+- **New here?** Select **Create An Account**, verify your email, then sign in.
+- If you see **Your Invitation**, enter the one-use **Invitation Code** you received from the beta administrator and choose **Use Invitation**.
 
-Every taste rating is a separately selectable control; complete all five before saving. The application supports keyboard operation and labels, but this draft **does not claim native VoiceOver or physical-phone certification**. Avoid relying on color alone to interpret feedback. If access is denied, sign in again with an admitted beta account rather than retrying someone else's invitation.
+Keep your password and invitation code private. Already-admitted members don't need another invitation for normal sign-in.
 
-## Publication and maintenance checklist (not yet passed)
+### Step 2 — Set up your equipment
 
-- [ ] The owner selects written, video, or combined final format and launch window. This written candidate is **not** an inferred final decision.
-- [ ] Capture and review screenshots of the **actual authenticated production UI** on mobile and desktop, with synthetic/no-member-private data; verify every label and current layout against the live release. No prototype, unshipped screens, invitation tokens or member data.
-- [ ] Complete real mobile readability and accessibility review, including screen-reader checks; if a video is chosen, prepare captions and transcript.
-- [ ] Verify the complete first-shot walkthrough with a safely admitted test member or approved production-like test environment, including account/notes privacy, pending/offline cases and button labels. Existing synthetic Chromium/isolated tests alone do not satisfy this.
-- [ ] Obtain separate explicit release approval before linking this guide from the app, publishing it on a domain, or producing any paid video. After each release, compare the guide's source SHA and UI labels, update screenshots and re-run the walkthrough.
+Choose **Set Up My Workspace** and enter these required details:
 
-**Maintainer:** Issue #37. **Next check:** current deployed interface + owner-chosen format and final accessibility; retain this revision as a draft until then. This document neither changes product behavior nor publishes content.
+- **Setup Name** — for example, Home.
+- **Basket Dose (g)** — the dose your basket is designed to hold.
+- **Grinder Espresso Range** — your **Finest Espresso Setting** and **Coarsest Espresso Setting**.
+
+Use the grinder numbers you actually use for espresso, not its full adjustment range. The finest number must be below the coarsest number.
+
+Your **Machine**, **Grinder**, **Burr Set**, and **Basket Model** are under **Equipment Details (Optional)**. Add them if you'd like, then choose **Create Setup**.
+
+### Step 3 — Add your coffee
+
+From **Coffees**, select **Add Coffee**.
+
+1. Enter **Coffee Name** and **Roaster**.
+2. Optionally paste the official product link into **Roaster Page URL** and choose **Autofill From URL**.
+3. Review suggested roast, origin, process, tasting notes, and any conflicts against the actual coffee you purchased.
+4. Correct any mistakes, leave uncertain information blank, and select **Add Coffee**.
+
+**Good to know:** Autofill only suggests information; it does not automatically verify the coffee. A **Pending** coffee can still be used for your private shots while its identity is reviewed.
+
+### Step 4 — Pick a starting shot style
+
+Open your coffee card. You'll see either:
+
+- **Starting Shot Style** with **Log First Shot** (a one-time first-shot suggestion), or
+- **Starting Recommendation** with **Log A Shot**.
+
+To choose a different approach, use **Change Style**. The available styles are **Traditional, Turbo, Fast-Flow, Ristretto, and Lungo**.
+
+These are helpful starting points, not strict rules.
+
+### Step 5 — Measure and rate your shot
+
+In **Log A Shot**, record what you *actually measured*:
+
+- **Dose (g)** — coffee in.
+- **Yield (g)** — espresso out.
+- **Time (s)** — how long the shot ran.
+- **Grind Setting** — the setting you used.
+
+**Yield and time deliberately start blank.** Dose or grind may reuse a previous real measurement. **Use Recommendation** is a separate optional action for a suggested grind or temperature; it does not mean you already used those settings.
+
+Under **How did it taste?**, rate **all five** scales:
+
+- **Extraction**
+- **Body**
+- **Clarity**
+- **Sweetness**
+- **Astringency / Dryness** (less dryness is better)
+
+Temperature, when enabled, and **Notes (Optional · Private)** are optional.
+
+### Step 6 — Save and get your next recommendation
+
+Choose **Save Shot & Get Suggestion**.
+
+The logging sheet closes and returns you automatically to the **expanded coffee card**. Look for **Next Shot Recommendation** or **Shot Feedback**.
+
+The app may suggest changing one controllable setting while keeping others steady. Time and taste are measurements, not controls the app can change for you. Try the suggestion—or your own adjustment—and log another shot.
+
+## How Do I Know When I'm “Dialed In”?
+
+A shot is marked **Dialed In** when all five taste ratings reach the preferred values:
+
+| Taste rating | Preferred value |
+| --- | ---: |
+| Extraction | **3** |
+| Body | **3** |
+| Clarity | **5** |
+| Sweetness | **5** |
+| Astringency / Dryness | **1** |
+
+An unusual but plausible time or espresso ratio does **not** disqualify your successful shot. Every other saved shot remains in your personal history, too.
+
+## Explore More When You're Ready
+
+### Review or edit previous shots
+
+Open **Shot History** inside a coffee card. Expand any saved shot to see its measurements, taste ratings, notes, and radar chart.
+
+Choose **Edit** when available. **Make Current Recipe** can select an eligible previously successful shot on your current setup without deleting the other shots.
+
+### Enable Slow Feed or temperature tracking
+
+Go to **Settings → Advanced Setup Options**. Enable **Track Slow Feeding** or **Track Brew Temperature**, then choose **Save Advanced Options**.
+
+When Slow Feed tracking is enabled, a **Slow Feed** choice appears on new shot forms. Don't assume the same grind setting works equally well for standard and slow feeding.
+
+To switch equipment, select your setup name near the top of **Coffees**.
+
+### Understand recommendations and Community
+
+A **Starting Recommendation** is an estimate, not a measurement you made. **Community** shows eligible, validated, anonymized **Dialed In** observations when online—not other members' private notes.
+
+Your notes are private from other members. **Authorized administrators** have a separate, limited ability to review account-linked records and notes.
+
+### Keep your shots safe when offline
+
+The app may show **Synced**, **Offline**, or **Pending**. Open **Cloud Sync Details** to inspect unfinished changes.
+
+**Offline logging** is only available to a previously admitted, locally recognized account. Adding a coffee, URL lookups, and Community require a connection. Don't erase browser storage while shots are waiting to sync.
+
+### Check missing coffee information
+
+Open **Coffee Details**. Don't guess missing or conflicting facts. If the coffee is **Pending**, you may see **Check For A Verified Match**, **Retry Automatic Approval**, or **Retry Official Source Check**. Results depend on the source, and verification isn't guaranteed.
+
+## If You Get Stuck
+
+- **Can't find Log A Shot?** Open the coffee card first.
+- **Can't add a coffee?** Reconnect to the internet. Adding a new coffee requires a connection.
+- **Shot won't save?** Check your dose, yield, time, grind setting, and all five taste ratings.
+- **Access denied?** Reconnect and sign in with your admitted beta account. If you don't have an invitation, contact the beta administrator.
+- **Something didn't sync?** Open **Cloud Sync Details** and check for **Pending** changes before trying again.
+
+**Still need help? Email [support@dialincollective.com](mailto:support@dialincollective.com).** Tell us what you were trying to do and what happened. Never include a password or invitation code.
+
+## Privacy and Accessibility
+
+You can operate the taste rating controls without relying on color alone. Notes and personal measurements are not published to Community as personal records. Don't share private account details in screenshots.
+
+---
+
+*Guide status: DRAFT · Written guide + companion video selected; neither is published. Verified against actual published app source `816949840f22b2a181670de20410786d0a8de79b` / Netlify deploy `6ae38ba0a56bed8fa17d20ac`, October 29, 2026. Authenticated production walkthrough, genuine phone and named screen-reader acceptance remain unverified.*
+
+*Maintained in [Issue #37](https://github.com/Schulzet3/The-Dial-In-Collective/issues/37). [Validation register](ISSUE37_VALIDATION_REGISTER.md) · [Video plan](ISSUE37_VIDEO_STORYBOARD.md). Publication requires separate owner release authorization.*

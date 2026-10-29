@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "id": "DIC-20261029-READY-QUEUE-10",
+  "status": "PROVIDER_PUBLISHED_VERIFIED",
+  "owner_instructions": [
+    "Okay that looks great. Publish that and any other pending items in the Queue",
+    "If more items are now ready, go ahead and publish those too"
+  ],
+  "tested_source_sha": "fa30abd6b5c96308f0957063efcc7ffb4402c8c6",
+  "release_sha": "816949840f22b2a181670de20410786d0a8de79b",
+  "netlify_deploy_id": "6ae38ba0a56bed8fa17d20ac",
+  "netlify_state": "ready",
+  "netlify_current_verified": true,
+  "published_at_utc": "2026-10-29T18:09:16.428Z",
+  "verified_at_utc": "2026-10-29T18:12:13.795Z",
+  "controller_run_id": 40927950440,
+  "controller_request_main_sha": "9a8384bd3fbb830fb39050a48c364e133b64044f",
+  "recovery": {
+    "initial_denied_controller_run": 40927509566,
+    "reason": "Legacy main queue validator omitted approved service-worker.template.txt, no claim occurred",
+    "controller_repair_main_sha": "075388ebe07d734957aa54e0b60d4edc429f219c",
+    "controller_repair_ci_run": 40927787731,
+    "successful_single_claims": 1
+  },
+  "publications_consumed": 1,
+  "ready_item_count": 10,
+  "ready_ids": [
+    "DIC-Q-33-current-pacamara-sensory-pair",
+    "DIC-Q-33-current-producing-enterprise",
+    "DIC-Q-26-keyboard-dialog-responsive-regression",
+    "DIC-Q-33-50-source-corrections",
+    "DIC-Q-33-source-backed-five-current-products",
+    "DIC-Q-33-603-selected-narrative-roast-guard",
+    "DIC-Q-33-live-purchased-roast-html-autofill",
+    "DIC-Q-238-research-recommendation-guardrails",
+    "DIC-Q-96-shot-history-measured-ratio",
+    "DIC-Q-33-original603-source-field-cleanup"
+  ],
+  "remaining_in_progress": [
+    "DIC-Q-33-residual-source-accuracy",
+    "DIC-Q-33-original603-independent-source-review"
+  ],
+  "tests": {
+    "node": {
+      "passed": 1975,
+      "failed": 0,
+      "skipped": 6
+    },
+    "source_ci": [
+      {
+        "name": "approval",
+        "id": 123634049946,
+        "conclusion": "success"
+      },
+      {
+        "name": "validate",
+        "id": 123634049997,
+        "conclusion": "success"
+      },
+      {
+        "name": "cloud-tests",
+        "id": 123634049434,
+        "conclusion": "success"
+      },
+      {
+        "name": "mobile-browser-qa",
+        "id": 123634048895,
+        "conclusion": "success"
+      },
+      {
+        "name": "sql",
+        "id": 123634048097,
+        "conclusion": "success"
+      },
+      {
+        "name": "review",
+        "id": 123634048033,
+        "conclusion": "success"
+      },
+      {
+        "name": "exact-source-archive",
+        "id": 123634048236,
+        "conclusion": "success"
+      }
+    ],
+    "original_frozen603": "SKIPPED_BY_GUARD",
+    "real_authenticated_ketch": "UNVERIFIED (no logged-in browser available)",
+    "direct_live_http": "UNVERIFIED (web verifier could not access app origin)",
+    "native_ios_voiceover": "NOT_RUN"
+  },
+  "netlify": {
+    "site_id": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+    "branch": "release/production",
+    "commit_ref": "816949840f22b2a181670de20410786d0a8de79b",
+    "context": "production",
+    "function": "coffee-url-preview",
+    "function_route": "POST /api/coffee-preview",
+    "provider_secret_scan": "no matches among 863 scanned files",
+    "no_edge_functions_deployed": true
+  },
+  "supabase": {
+    "project_id": "azviqqejypsefzilgonr",
+    "migrations_unchanged": true,
+    "latest_applied_migration": "20261028230056 dic_decaf_only_method",
+    "edges": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "verify_jwt": true
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "verify_jwt": true
+      }
+    ],
+    "before_counts": {
+      "coffees": 8,
+      "shots": 24,
+      "submissions": 9
+    },
+    "after_counts": {
+      "coffees": 8,
+      "shots": 24,
+      "submissions": 9
+    },
+    "member_writes_performed": 0
+  },
+  "backup_reused": {
+    "artifact_id": 12858130628,
+    "encrypted_sha256": "2fbf8031b5b29351e10b7c5d738e9f4b64793c92d04495e7abd9197e4190fc56",
+    "private_drive_file_id": "1sjBMLM3_btgI2jagq7hI50RpHjb8Op0h",
+    "private_folder_id": "1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf",
+    "previous_byte_verified_at_utc": "2026-10-28T23:02:49.155Z",
+    "additional_destructive_backup_required": false
+  },
+  "limitations": [
+    "No new signed-in owner Ketch preview, manual device, or native VoiceOver acceptance; source-specific tests passed without creating production member data.",
+    "No full independent original603 field certification; two unfinished research-only queue items remain IN_PROGRESS.",
+    "Only aggregate database counts and unchanged migrations/Edge versions independently checked; no full row-by-row production data digest performed."
+  ]
+}

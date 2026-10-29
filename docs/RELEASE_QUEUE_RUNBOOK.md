@@ -1,3 +1,9 @@
+## October 29, 2026 UTC — Current verified production release
+
+Release DIC-20261029-READY-QUEUE-10 delivered all 10 READY items; Netlify provider READY/current 6ae38ba0a56bed8fa17d20ac at Git release SHA 816949840f22b2a181670de20410786d0a8de79b from tested source fa30abd6b5c96308f0957063efcc7ffb4402c8c6. Current queue baseline updated; two independent Issue33 research-only tasks remain IN_PROGRESS. No SQL/Auth/Edge or member-data changes. Details: docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_VERIFIED.json. Earlier sections below remain historical.
+
+---
+
 ## October 24, 2026 UTC — Deferred combined release (CURRENT)
 
 The owner paused publication after closing GitHub #5/#10/#12, asking to wait until the 603-coffee extractor #33 is READY. **No Netlify release now; a new explicit publish instruction will be needed for the future combined READY queue.** Production SQL versions 20261024052303, 20261024052411 and 20261024052419 are already applied under different versions than Git source filenames; never replay automatically. Original #5 is DEPLOYED SQL-only. Its independent source-carryover item is TESTING until exact release-gate/anti-replay evidence. Queue #12 READY for frontend; #33 TESTING. See [full verified deferred release handoff](RELEASE_HANDOFF_2026-10-24_ISSUES_5_10_12_DEFERRED_EXTRACTOR.md). Older dates/approval examples below are history, not new authorization.

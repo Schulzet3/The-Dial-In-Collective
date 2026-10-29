@@ -60,6 +60,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective <small>Admin</small></span><div class="admin-nav"><button id="admin-refresh" type="button" class="ghost compact">Refresh</button><a href="/">Back To App</a></div></header>
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
+ <p id="admin-action-notice" class="helper" role="status" aria-live="polite" aria-atomic="true"></p>
  <form id="admin-search-form" class="admin-search-form" role="search" autocomplete="off">
    <label for="admin-search-query">Search records</label>
    <input id="admin-search-query" name="query" maxlength="80" value="${e(searchText)}" placeholder="Coffee, roaster, member email, shot notes…" aria-label="Search all Admin records">
@@ -141,7 +142,7 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
   </form>
   <p class="admin-invite-footnote helper">Unused codes never expire by date and can be revoked at any time. After one account uses a code, it cannot be used again. Already admitted accounts stay active until you remove their access.</p>
   ${secret}
-  <p id="admin-action-notice" class="admin-action-notice" role="alert" aria-live="assertive"></p>
+
   <h3>Existing Codes <span class="helper">${formatCount(invitesTotal)}</span></h3>
   <ul class="admin-invite-list">${inviteRows||'<li class="helper">No codes created yet.</li>'}</ul>
   ${inviteFallback}

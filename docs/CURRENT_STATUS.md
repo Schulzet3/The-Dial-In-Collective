@@ -1,3 +1,33 @@
+## October 29 UTC — Issue #47 Administrator feedback persistence fixed and verified READY, unpublished
+
+PR249 merged nonforce `ffcb768b363fcc772eda38b122ef4c7aedb78ef2` (exact source tree equals tested PR `d5d98708f634cde68705f65685b68e4aeecd13b4`). Missing Admin `#admin-action-notice` formerly replaced the entire dashboard after successful edits; now one accessible inline status region preserves the record view. All applicable exact-source app/build, security, approval, isolated SQL, mobile/cloud UX and real Chromium synthetic 55-coffee/51-shot page-two/edit/private-note/stale-revision/access-denial checks PASS (IDs in `docs/workstreams/issue-47.md`); unrelated frozen coffee corpus SKIPPED. Queue `DIC-Q-47-admin-feedback-persistence` is **READY, NOT DEPLOYED**, blockers zero. No production/Auth/Edge/SQL/member writes. Whole Issue #47 remains OPEN for genuine signed-in admin and non-admin acceptance; no manual owner-device release gate. No Netlify deployment authorized.
+
+---
+
+## October 29 UTC — Issue #37 readable beginner guide and companion video draft integrated, not deployed
+
+Owner selected **written + short video** and requested more readable headings plus source-verified support contact. PR247 was merged non-force at `45fdfc86b7899015f3069286dc68a2909fa5e170` with tested PR head `4ca8a780f58302ff780833786a86e3bb0046d1a7`; published-source recheck is release/production `816949840f22b2a181670de20410786d0a8de79b`, Netlify READY/current `6ae38ba0a56bed8fa17d20ac`. Written six-step guide now has distinct headers and troubleshooting contact `support@dialincollective.com` sourced from the official Master Specification and prior verified routing test. A 90–120-second video storyboard and transcript plus a separately delivered **91-second illustrated, captioned concept video** were prepared, **not** actual authenticated production footage. PR checks approval `40929528337`, SQL `40929528390`, visual `40929528445`, cloud/mobile `40929528530`, Node/lint/build `40929528284` PASS; unrelated frozen603 `40929528273` SKIPPED. Exact merged-source approval `40929960723`, cloud/mobile `40929960708`, Node/lint/build `40929960545` all PASS. No new live link, publication, Netlify build, database/Edge/Auth writes or costs. Issue37 remains OPEN for authentic signed-in production screen capture and walkthrough, physical/mobile and named screen-reader checks, final video QA, owner-selected release window and explicit publication. No READY release-queue item for unapproved draft publication.
+
+---
+
+## October 29 UTC — original603 identity safety fixes READY, no publication
+
+Issue33 PR245 nonforce merged `9738ce3af04931adf82eca7d7b5a236173c3cf02`. Four sourced Add Coffee canonical corrections: Costa Rica/Kenya Koffee Kult nickname origins corrected to published countries; Bald Guy Ethiopian Gigesa unnamed family-business bio no longer becomes a producer; 44 North Honduras COMSA locality prints municipality, department and origin country, not neighboring border country. Sumato generic marketing-region text is blocked but broad separately derived Central America remains. Product raw evidence retained. Exact PR-head app40928169822, cloud/mobile40928169897, visual40928169665, SQL40928169904, security40928169903, approval40928169735, bundle40928169690 SUCCESS; merged app40928621908, cloud40928621801, approval40928621921 SUCCESS. Restricted original603 job SKIPPED, no new live 603-wide replay or real member authentication claim. Queue `DIC-Q-33-603-source-identity-guard` READY, independent parent residual IN_PROGRESS. Prior Release09 authorization/released source excludes this new scope; never mark it DEPLOYED. No production provider/data work.
+
+---
+
+## October 29 UTC — Release09 provider-verified DEPLOYED: ten READY items
+
+Netlify reports new READY/current deploy `6ae38ba0a56bed8fa17d20ac` with exact production release Git SHA `816949840f22b2a181670de20410786d0a8de79b` and tested source `fa30abd6b5c96308f0957063efcc7ffb4402c8c6`. Single-use release `DIC-20261029-READY-QUEUE-10` consumed once via successful GitHub controller run 40927950440; published `2026-10-29T18:09:16.428Z`. **10 READY items marked DEPLOYED**, 0 remaining READY, 2 research-only Issue33 items remain IN_PROGRESS. Ketch roast-select and roast-specific notes included, with source improvements, responsive/keyboard, shot history ratio and espresso recommendations. Full source PR-head CI PASS: 1,975 Node PASS / 0 FAIL / 6 intentional SKIP plus lint/build/cloud/browser/SQL/security/approval/visual. Production Supabase row counts coffees8/shots24/submissions9 unchanged, Edge JWT v8/v4 and migration `20261028230056` unchanged; zero database/member writes. Existing encrypted verified Drive backup reused, no destructive work, no plan or credit operations. Real signed-in Ketch and physical device remain UNVERIFIED because this chat lacks an authenticated browser. Direct HTTP probe unavailable; do not imply hosted interaction independently passed. [Source-bound receipt](PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_VERIFIED.json). Earlier failed controller attempt safely repaired; no duplicate publication.
+
+---
+
+## October 29 UTC — Ten READY changes selected for owner-authorized one-time Release09
+
+Exact candidate fa30abd6b5c96308f0957063efcc7ffb4402c8c6 has passed required PR-head checks and was safely merged. One-use grant DIC-20261029-READY-QUEUE-10 replaces unconsumed 09. Current production not yet changed; no SQL or Edge/Auth operations. Excludes unfinished research and later independent unqueued work. Provider verification required before DEPLOYED.
+
+---
+
 ## October 29 UTC — Release09 nine-item READY source accepted, production not yet published
 
 Single owner authorization for combined READY queue, nine items including Ketch roast-specific selector, shot-history ratio, extractor and espresso guidance. Source 6e0792bf3266723d9a6bf745cc588a486e162cbe has full exact-source GitHub required five checks PASS and 1,966 Node PASS/0 FAIL/6 SKIP; PR242 merged nonforce c3ddad2f93ace48370165c1375ae4a2357e7f64b. Unqueued concurrently merged #240 excluded through tested-source pin. One-use grant DIC-20261029-READY-QUEUE-09 is in progress. No SQL/Edge/Auth/member mutation; production Netlify remains 6ae27f32bfae09ad8745e19b and release 05cf9eb1 until provider evidence says otherwise. Do not mark items DEPLOYED before postflight.

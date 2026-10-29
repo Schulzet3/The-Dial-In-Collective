@@ -81,6 +81,9 @@ jobs:
       - name: Synthetic owner-only invitation portal mobile acceptance
         if: steps.scope.outputs.docs_only != 'true'
         run: python tests/browser/admin_invitation_qa.py
+      - name: Synthetic signed-in administrator records and paging in Chromium
+        if: steps.scope.outputs.docs_only != 'true'
+        run: python tests/browser/admin_records_qa.py
       - run: python tests/browser/visual_review.py
         if: steps.scope.outputs.docs_only != 'true'
         env:
