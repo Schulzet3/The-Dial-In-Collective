@@ -11,3 +11,7 @@
 **Verification at initial commit:** Source change proposed; actual app CI and integration unverified pending exact-head checks. Release queue must remain TESTING until exact-head and merged-source checks pass. Preserve concurrent extractor PRs #235/#237 and all unrelated queued items. Actual production Netlify published release `05cf9eb156f63110cd434034ec3914a1e92b76d3`, deploy `6ae27f32bfae09ad8745e19b` READY/current before work. No deployment authorized.
 
 **Next:** Run exact PR-head Node, lint/build, cloud/visual/offline/security/approval CI; fix failures, non-force merge, verify merged SHA and reconcile queue if passing.
+
+## Exact-head CI failure and immediate fixture correction
+
+PR #239 head b4969e83509ebc2ee2f509629d066e196f2708cc: 1,962 Node PASS, 6 preexisting SKIP, 1 new fixture failure. The lower-yield boundary test used a 22 s Turbo shot against a 12–18 s baseline and inadvertently exercised the existing valid coarse-grind recommendation before the targeted yield path. Corrected **only** its time to 16 s so the test isolates a real yield-boundary no-op; both extraction and body rules remain unchanged. Prior SQL, security, approval, visual and cloud UX checks passed; rerun the full exact-head suite on this new source SHA. No publication.

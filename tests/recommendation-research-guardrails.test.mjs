@@ -34,7 +34,7 @@ test('research F011: all green stays successful outside nominal time and ratio w
 });
 test('research F023: yield limits do not masquerade as an adjustment',()=>{
  for(const [yieldG,extraction] of [[200,2],[5,4]]) {
-  const {state,shot,reference}=setup({yieldG,tasteScales:{extraction,body:3,clarity:5,sweetness:5,astringency:1}});
+  const {state,shot,reference}=setup({yieldG,timeS:16,tasteScales:{extraction,body:3,clarity:5,sweetness:5,astringency:1}});
   const advice=nextAdvice(state,shot,reference);
   assert.equal(advice.next,null);
   assert.match(advice.text,/limit/i);
