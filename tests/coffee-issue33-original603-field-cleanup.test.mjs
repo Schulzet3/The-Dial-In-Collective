@@ -53,3 +53,15 @@ test('unrelated product recommendation cannot donate cultivar',()=>{
   '<h3>Another Coffee</h3><p>Varietal-- Chiroso</p></section>');
  assert.equal(data.fields.variety,undefined);
 });
+
+test('combined READY source: selected product variety and region normalize without borrowing unrelated roast flavor',()=>{
+ const data=parse('Current Coffee','<p>Varietals: Bourbon,Kenya SL14,Kenya SL28</p><p>Region: Tolima Region of Colombia</p>'+ 
+  '<section class="product-recommendations"><h3>Other Coffee</h3><p>Roast: Dark</p><p>Tasting Notes: Chocolate</p></section>');
+ assert.equal(data.fields.variety,'Bourbon, Kenya SL14, Kenya SL28');
+ assert.equal(data.fields.origin,'Tolima Region of Colombia');
+ assert.equal(data.fields.roast_level,undefined);
+ assert.equal(data.fields.tasting_notes,undefined);
+ const preview=coffeeUrlPreviewMarkup(data);
+ assert.match(preview,/Tolima Region of Colombia/);
+ assert.match(preview,/Bourbon, Kenya SL14, Kenya SL28/);
+});
