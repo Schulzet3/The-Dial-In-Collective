@@ -1,3 +1,4 @@
+-- Release12 owner-approved READY source combined SQL/JWT acceptance for Issue47 grant and two Issue33 source corrections; no provider operations from CI.
 -- Release11 runs the already-approved isolated SQL acceptance on the same combined READY source; no new schema.
 -- Release09 revised ten-item batch: rerun existing disposable SQL/JWT regression on exact selected source; no production schema change.
 -- Disposable PostgreSQL only: these are test doubles for Supabase's Auth schema.
