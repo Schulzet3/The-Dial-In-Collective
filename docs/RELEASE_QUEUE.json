@@ -2179,15 +2179,11 @@
     {
       "id": "DIC-Q-33-original603-independent-source-review",
       "issue": 33,
-      "pr": null,
-      "title": "Independently verify each original 603 coffee against frozen captures and current exact official URL",
-      "state": "TESTING",
-      "merged_source_sha": "1a1e33038fc09afcaed1040b3adfc543e0dfb49e",
-      "scope_paths": [
-        "src/server/coffee-direct-product-prose.mjs",
-        "src/server/coffee-page-metadata.mjs",
-        "src/server/roast-level-evidence.mjs"
-      ],
+      "pr": 231,
+      "title": "Original603 per-coffee source adjudication with remaining inaccessible, changed-product and qualified field decisions",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [],
       "tests": [
         "Original source archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 validated; frozen oracle 603 cases, 201 roasters and 1197 captures verified unchanged.",
         "Original frozen full 603 real preview handler replay on source 9c5975b81da06913633b3995ee3100118e976b1a: all 603 responses OK; strict scorer 3108 exact, 57 missing, 837 review required; original 6474 supplemental assertions retained 5458 full/337 partial/679 unconfirmed; original oracle/scorer/captures not modified.",
@@ -2199,7 +2195,10 @@
         "Focused direct selected roast tests and prior 50 coffee tests PASS (12/12). O.Henry source description Light vs product taxonomy Light/Medium properly kept in review, Maui Dark retained after regex correction.",
         "PR231 exact tested head cb1cf5924dad100dc650cb4a23e4536aa52a7f44: applicable Node/build, mobile/browser, visual/offline, isolated SQL, Python audit, source security, approval and validation checks all SUCCESS; frozen603 GitHub job SKIPPED (restricted to historical audit branch); immutable local 603 full real-handler unchanged.",
         "PR231 non-force integrated into development on top of unrelated concurrent AGENTS/current requirements update. Merged SHA 1a1e33038fc09afcaed1040b3adfc543e0dfb49e read back; controlled 603 live official source current capture intentionally triggered on next exact-source marker.",
-        "Initial actual 3-shard official source job 40896352347 failed before HTTP requests because the trigger comment was prepended ABOVE the executable Node shebang, making script syntax invalid; corrected shebang byte zero and added a regression test, rerun pending."
+        "Initial actual 3-shard official source job 40896352347 failed before HTTP requests because the trigger comment was prepended ABOVE the executable Node shebang, making script syntax invalid; corrected shebang byte zero and added a regression test, rerun pending.",
+        "Fresh public official source run 40896796488: 603 original URLs attempted, 597 read and parsed with Add Coffee preview; 6 inaccessible, plus rendered content gates/meta-only in retrieved pages. Full 603-row individual source-anchored adjudication report produced (historical frozen expectations distinct from current official source).",
+        "Source-level review: 199 current roaster facts changed from original expected history; 158 compatible; 153 contextual/semantic review; 42 selected meta/body identity; 29 missing-field qualified review; 5 current conflicts; 5 directly supported fixes in PR236; 3 Iowa access-gated, 3 S&W metadata-only, 2 Thunder unavailable, 1 Daylily reused URL. Per-case report does NOT certify all current fields.",
+        "Original603 source code from PR231 independently tested at cb1cf5924dad100dc650cb4a23e4536aa52a7f44 and merged 1a1e33038fc09afcaed1040b3adfc543e0dfb49e; its deployable scope is tracked separately as READY after focused source/CI evidence. Outstanding review-only acceptance has no new unpublished code."
       ],
       "ci_runs": [
         40892086626,
@@ -2211,20 +2210,20 @@
         40892086774
       ],
       "blockers": [
-        "Current exact all-603 official HTTPS source collection and per-coffee decision-level source certification not yet performed.",
-        "Original 57 missing /837 strict review entries require owner-rule-aware adjudication; current product evidence may differ from historical captures.",
-        "Actual exact merged-source official current run 603/603 and release-bound regression evidence pending."
+        "Complete individual semantic field certification still unresolved for qualified/historical-changing records; original frozen oracle must remain immutable.",
+        "Official product body inaccessible for Iowa Coffee Roasters three wholesale-gated products, S&W three Square metadata-only products, two Thunder product pages; one Daylily reused URL now identifies different coffee. Treat as source-limited, not verified absent.",
+        "Other 35 source-present/extracted-blank field indications require discriminating source context from literal selected current evidence before any further correction."
       ],
       "owner_source": "Owner instruction October 29 2026: do the same individual official source-backed review for the original 603 benchmark as the previous 50-coffee review.",
-      "notes": "No publication authorized. Current live source, frozen historical source and owner Locked current rules must be distinguished. No restricted corpus mutation, new provider, keys, purchases, member data or production database writes."
+      "notes": "Research/acceptance only; deployment scope transferred to code-complete scoped queue items. Never label all 603 independently certified or alter original source/oracle."
     },
     {
       "id": "DIC-Q-33-source-backed-five-current-products",
       "issue": 33,
-      "pr": null,
+      "pr": 236,
       "title": "Recover five current selected-product roast and limited-release facts in Add Coffee",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "f98d8ff469e23671627c2eda21849569f10f911a",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -2235,14 +2234,57 @@
         "Current official 597/597 downloaded source SHA256 matched before/after parser runs; exactly five intended selected fields recovered with all other 592 case field and conflict outputs unchanged; official run 40896796488.",
         "Original frozen 603 full actual-handler replay with immutable source/oracle/strict comparator/retention unchanged: 603/603 responses OK; 3108 exact,57 missing,837 review-required canonical, supplement 5458 full/337 partial/679 unconfirmed; 603 canonical case maps and supplemental retention rows unchanged. This baseline is historical, does not assert independent 603 source completion.",
         "Exact-head GitHub CI, merge and postmerge 597 source acceptance pending.",
-        "Exact PR head efe75fa541091b5425e45ee3365274613a7a434c full Node CI initially failed unrelated-looking but VALID locked negative test: bare 'Limited Release' plus 'Gold Collection' must remain source-only, not canonical. Refined parser to require a specific selected 'LIMITED RELEASE | WHOLE BEAN ONLY' product banner and added a negative regression. Exact CI retest needed."
+        "Exact PR head efe75fa541091b5425e45ee3365274613a7a434c full Node CI initially failed unrelated-looking but VALID locked negative test: bare 'Limited Release' plus 'Gold Collection' must remain source-only, not canonical. Refined parser to require a specific selected 'LIMITED RELEASE | WHOLE BEAN ONLY' product banner and added a negative regression. Exact CI retest needed.",
+        "PR236 exact corrected head 2dce38d1c2a6fbbfe590353445eb3f0ee1ff2e3e passed Node/build, cloud integration, browser/mobile, visual/offline, isolated SQL, security, release intake and approval CI. One earlier generic bare Limited Release false-positive caught by existing test, fixed before merge; added negative coverage and retested.",
+        "Non-force merged PR236 at f98d8ff469e23671627c2eda21849569f10f911a; unchanged source module/test blobs read back. Original local 603 corpus full actual-handler canonical maps and conflicts unchanged; fresh 597 official current product captures exactly five intended changes, 592 unchanged; locked oracle, captures/scorer untouched.",
+        "Actual Netlify production deploy 6ae27f32bfae09ad8745e19b on release SHA 05cf9eb156f63110cd434034ec3914a1e92b76d3 confirmed READY separately; PR236 NOT deployed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact new-source CI and non-force merge not yet verified; no production publication authorization."
+      "ci_runs": [
+        40912102155,
+        40912101985,
+        40912101867,
+        40912101798,
+        40912101999,
+        40912101824,
+        40912101936
       ],
+      "blockers": [],
       "owner_source": "October 29 2026 owner instruction: resume 603 source-level adjudication and ensure each change materially improves actual app/extractor",
-      "notes": "Five exact current product source-backed changes, source roles/canonical release validation; original frozen oracle untouched. Parent 603 unresolved acceptance remains tracked separately, no user private data or production changes."
+      "notes": "READY only for five independently source-supported Add Coffee improvements; no production publication approval. Full 603 field-by-field certification still unfinished and tracked independently.",
+      "tested_source_sha": "2dce38d1c2a6fbbfe590353445eb3f0ee1ff2e3e"
+    },
+    {
+      "id": "DIC-Q-33-603-selected-narrative-roast-guard",
+      "issue": 33,
+      "pr": 231,
+      "title": "Preserve selected product roast identity and prevent unrelated-product roast attribution",
+      "state": "READY",
+      "merged_source_sha": "1a1e33038fc09afcaed1040b3adfc543e0dfb49e",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs",
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "PR231 final exact-head cb1cf5924dad100dc650cb4a23e4536aa52a7f44 Node/build, cloud/mobile, visual/offline, Python audit, SQL, security, approval, source bundle PASS. Historical restricted GitHub frozen603 job SKIPPED; separate actual archived local 603 replay PASS with zero canonical/retention changes.",
+        "Non-force PR231 merged 1a1e33038fc09afcaed1040b3adfc543e0dfb49e, preserving concurrent approved work. Selected-name roast phrase support and negative other-product/historical/generic controls verified against current product source, including conflicting O.Henry Light/Light-Medium withheld for member review, Maui Dark preserved.",
+        "2026-10-29 source workflow 40896796488 603 attempted /597 retrieved and parsed, 597 Add Coffee previews passed; source-limited items remain review/blank, not fabricated.",
+        "Subsequent PR236 strengthens selected direct title/variant and release handling on those same source modules without 603 historical regression."
+      ],
+      "ci_runs": [
+        40895568163,
+        40895568191,
+        40895568122,
+        40895568056,
+        40895568107,
+        40895568039,
+        40895568027,
+        40895567911,
+        40896796488
+      ],
+      "blockers": [],
+      "owner_source": "October 29 2026 owner request for original603 source-backed review and explicit October29 requirement that changes improve actual app/extractor",
+      "notes": "Scoped tested implemented source only, READY not deployed; this does NOT certify 603 individual coffee field decisions. No production or private member mutations."
     }
   ],
   "history": [
