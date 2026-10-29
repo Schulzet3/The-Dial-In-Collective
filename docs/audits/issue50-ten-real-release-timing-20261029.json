@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "title": "Issue #50: ten independently Netlify-verified historic release latencies",
+  "checked_at_utc": "2026-10-29T21:58:10.823Z",
+  "scope": "Historical release-grant recorded timestamp to actual Netlify publication; nine additionally include real GitHub controller-event start. No extra releases triggered.",
+  "sources": {
+    "git_grants": "docs/RELEASE_AUTHORIZATIONS.json",
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "netlify_provider": "Netlify get_deploy historical record, matched deploy id, commit_sha and publish timestamp",
+    "controller_provider": "GitHub Actions run GET, run created_at and conclusion=success"
+  },
+  "measurements": {
+    "release_count": 10,
+    "earlier_four_release_ids": [
+      "DIC-20261021-ALL-PENDING-02",
+      "DIC-20261022-FASTFLOW-ADMIN-03",
+      "DIC-20261022-READY-QUEUE-04",
+      "DIC-20261023-READY-QUEUE-05"
+    ],
+    "later_four_release_ids": [
+      "DIC-20261028-READY-QUEUE-08",
+      "DIC-20261029-READY-QUEUE-10",
+      "DIC-20261029-READY-QUEUE-11",
+      "DIC-20261029-READY-QUEUE-12"
+    ],
+    "earlier_grant_to_publish_median_seconds": 1861.1154999999999,
+    "later_grant_to_publish_median_seconds": 207.112,
+    "earlier_vs_later_descriptive_ratio": 8.986,
+    "all_grant_to_publish_median_seconds": 826.9515,
+    "controller_event_count": 9,
+    "controller_event_to_publish_median_seconds": 32.402,
+    "controller_event_to_publish_min_seconds": 29.482,
+    "controller_event_to_publish_max_seconds": 56.428
+  },
+  "rows": [
+    {
+      "release_id": "DIC-20261021-ALL-PENDING-02",
+      "grant_approved_at_utc": "2026-10-22T01:15:48.881Z",
+      "netlify_published_at_utc": "2026-10-22T01:36:01.787Z",
+      "netlify_deploy_id": "6ad968689f42fbe8e871e151",
+      "netlify_commit_sha": "eee687dd4d7fc19493139bc106e63c16849ac91d",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 1212.906,
+      "controller_run_id": 39706556610,
+      "controller_run_created_at_utc": "2026-10-22T01:35:23Z",
+      "controller_event_to_published_seconds": 38.787,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261022-FASTFLOW-ADMIN-03",
+      "grant_approved_at_utc": "2026-10-22T15:54:00Z",
+      "netlify_published_at_utc": "2026-10-22T16:35:49.325Z",
+      "netlify_deploy_id": "6ada3b5018ccdd080d3b4584",
+      "netlify_commit_sha": "fe2eee66717b13b9c9d203d1728bfc863961732e",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 2509.325,
+      "controller_run_id": 39815256276,
+      "controller_run_created_at_utc": "2026-10-22T16:35:11Z",
+      "controller_event_to_published_seconds": 38.325,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261022-READY-QUEUE-04",
+      "grant_approved_at_utc": "2026-10-22T23:51:00Z",
+      "netlify_published_at_utc": "2026-10-23T01:48:46.334Z",
+      "netlify_deploy_id": "6adabcecd4a2a68e94cdc09a",
+      "netlify_commit_sha": "f97b8f30c25f6d4ef30c5d79d12daf4fb0670e2f",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 7066.334,
+      "controller_run_id": 39886055063,
+      "controller_run_created_at_utc": "2026-10-23T01:48:16Z",
+      "controller_event_to_published_seconds": 30.334,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261023-READY-QUEUE-05",
+      "grant_approved_at_utc": "2026-10-23T14:26:38.196Z",
+      "netlify_published_at_utc": "2026-10-23T14:40:52.519Z",
+      "netlify_deploy_id": "6adb71e2a2e52cd3bbeef5e5",
+      "netlify_commit_sha": "99ad6148e1a540619d67adb07b18f32c93dee9db",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 854.323,
+      "controller_run_id": null,
+      "controller_run_created_at_utc": null,
+      "controller_event_to_published_seconds": null,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "No independent controller run fetched"
+      }
+    },
+    {
+      "release_id": "DIC-20261024-READY-QUEUE-06",
+      "grant_approved_at_utc": "2026-10-24T03:04:28Z",
+      "netlify_published_at_utc": "2026-10-24T03:06:58.402Z",
+      "netlify_deploy_id": "6adc20c03a07673c4dd08035",
+      "netlify_commit_sha": "65ee38609db6bd5977dd0f2b393e7791a5e1b766",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 150.402,
+      "controller_run_id": 40056944878,
+      "controller_run_created_at_utc": "2026-10-24T03:06:26Z",
+      "controller_event_to_published_seconds": 32.402,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261027-READY-QUEUE-07",
+      "grant_approved_at_utc": "2026-10-27T19:03:33.042Z",
+      "netlify_published_at_utc": "2026-10-27T19:31:53.750Z",
+      "netlify_deploy_id": "6ae0fc16178b2f1241e441f8",
+      "netlify_commit_sha": "f5f29a02f98304dd9d1bd4d2c840c490c85097e6",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 1700.708,
+      "controller_run_id": 40569838530,
+      "controller_run_created_at_utc": "2026-10-27T19:31:11Z",
+      "controller_event_to_published_seconds": 42.75,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261028-READY-QUEUE-08",
+      "grant_approved_at_utc": "2026-10-28T23:02:12.146Z",
+      "netlify_published_at_utc": "2026-10-28T23:03:32.392Z",
+      "netlify_deploy_id": "6ae27f32bfae09ad8745e19b",
+      "netlify_commit_sha": "05cf9eb156f63110cd434034ec3914a1e92b76d3",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 80.246,
+      "controller_run_id": 40784526904,
+      "controller_run_created_at_utc": "2026-10-28T23:03:02Z",
+      "controller_event_to_published_seconds": 30.392,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261029-READY-QUEUE-10",
+      "grant_approved_at_utc": "2026-10-29T18:04:19.112Z",
+      "netlify_published_at_utc": "2026-10-29T18:09:16.428Z",
+      "netlify_deploy_id": "6ae38ba0a56bed8fa17d20ac",
+      "netlify_commit_sha": "816949840f22b2a181670de20410786d0a8de79b",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 297.316,
+      "controller_run_id": 40927950440,
+      "controller_run_created_at_utc": "2026-10-29T18:08:20Z",
+      "controller_event_to_published_seconds": 56.428,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261029-READY-QUEUE-11",
+      "grant_approved_at_utc": "2026-10-29T18:44:28.584Z",
+      "netlify_published_at_utc": "2026-10-29T18:46:25.492Z",
+      "netlify_deploy_id": "6ae394725b3465c277210618",
+      "netlify_commit_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 116.908,
+      "controller_run_id": 40933876312,
+      "controller_run_created_at_utc": "2026-10-29T18:45:56Z",
+      "controller_event_to_published_seconds": 29.492,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    },
+    {
+      "release_id": "DIC-20261029-READY-QUEUE-12",
+      "grant_approved_at_utc": "2026-10-29T20:21:36.902Z",
+      "netlify_published_at_utc": "2026-10-29T20:34:56.482Z",
+      "netlify_deploy_id": "6ae3addff345331a70ad8d9d",
+      "netlify_commit_sha": "2f7ef0eb0eb22ece986ba3e6bcaa3735a312578f",
+      "netlify_reported_state": "ready",
+      "netlify_reported_branch": "release/production",
+      "grant_to_published_seconds": 799.58,
+      "controller_run_id": 40950232142,
+      "controller_run_created_at_utc": "2026-10-29T20:34:27Z",
+      "controller_event_to_published_seconds": 29.482,
+      "verification": {
+        "grant": "GitHub docs/RELEASE_AUTHORIZATIONS.json",
+        "provider": "Direct Netlify deploy_get_deploy by ID on 2026-10-29",
+        "controller": "Direct GitHub Actions run GET by id on 2026-10-29"
+      }
+    }
+  ],
+  "interpretation": {
+    "target": "Owner-request to completed-development/tests/approval/provider publication/independent postflight: 10x goal",
+    "finding": "NOT_VERIFIED_10X_END_TO_END",
+    "early_late_comparison": "DESCRIPTIVE_ONLY; cohorts are not matched for scope, SQL, delays, or changed code; both cohorts occur after PR54 optimization, so not pre-vs-post causal proof.",
+    "grant_time_limitation": "The stored GitHub grant approved_at_utc is not independently shown to be the actual first owner request or beginning of development.",
+    "controller_time_limitation": "Controller event-to-published excludes the earlier approval/preflight, earlier development/test work, release failures and later independent postflight.",
+    "device_and_provider_limitations": "No new owner-device authentication check; current Netlify provider independently confirmed already-published deployments, not retrospective full request cycle. No credit balance checks allowed or needed.",
+    "release12_retry": "Release12 initial controller rejected before claim; the successful controller event's 29.482 seconds omits the pre-claim failed attempt and recovery; its recorded grant-to-publication was 799.58 seconds.",
+    "future": "Only reuse future separately authorized real releases; capture the earliest dated owner request, first development commit, code/CI readiness, one-use grant, controller request, Netlify publication, and independent postflight. Record external waits and release complexity. Do not deploy to benchmark."
+  },
+  "safety": {
+    "production_publications": 0,
+    "production_database_mutations": 0,
+    "credential_reads": 0,
+    "member_reads": 0,
+    "netlify_credit_checks": 0,
+    "changes": "Evidence-only; no application/CI/release policy modified."
+  }
+}
