@@ -20,12 +20,12 @@
     "source": "GitHub git tree API"
   },
   "coverage_summary": {
-    "direct_assistant_semantic_files": 4,
-    "direct_assistant_semantic_lines": 312,
-    "still_not_documented_as_semantically_reviewed_lines": 579649,
+    "direct_assistant_semantic_files": 41,
+    "direct_assistant_semantic_lines": 3960,
+    "still_not_documented_as_semantically_reviewed_lines": 576001,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 579649
+    "remaining_line_count_checked": 576001
   },
   "line_count_limit": "Resolved with pinned historical-source manifest; distinct 503,938 archived subtype is historical categorization and not independently recategorized by this count.",
   "method_rules": {
@@ -45,6 +45,42 @@
       ],
       "classification": "observation_only_not_confirmed_current_bug",
       "summary": "apt prerequisite versions float with Ubuntu package repository; not shown to cause an exploit, test failure or deviation; no change justified in this audit."
+    },
+    {
+      "id": "ISSUE267-HIST-001",
+      "risk": "medium",
+      "type": "HISTORICAL_SESSION_AVAILABILITY",
+      "path": "site/cloud/outbox.js",
+      "range": [
+        20,
+        35
+      ],
+      "classification": "HISTORICAL_REMEDIATED",
+      "summary": "Original global this.running serialized cross-owner session flush; current development site/cloud/outbox.js uses runningBySession Map, existing issue161-cloud-session-race regression covers prior session."
+    },
+    {
+      "id": "ISSUE267-HIST-002",
+      "risk": "low",
+      "type": "HISTORICAL_BACKUP_SCHEDULE",
+      "path": ".github/workflows/nightly-backup.yml",
+      "range": [
+        14,
+        16
+      ],
+      "classification": "HISTORICAL_SUPERSEDED",
+      "summary": "Frozen workflow scheduled 09:23 UTC; current main operations branch specifies 08:00 UTC daily."
+    },
+    {
+      "id": "ISSUE267-HIST-003",
+      "risk": "medium",
+      "type": "HISTORICAL_WEEKLY_CI_SETUP",
+      "path": ".github/workflows/weekly-full-regression.yml",
+      "range": [
+        69,
+        86
+      ],
+      "classification": "HISTORICAL_SUPERSEDED",
+      "summary": "Frozen mobile/offline QA lacked explicit app build; current main workflow includes npm ci + build:cloud. Not a claim that next naturally scheduled Sunday ran."
     }
   ],
   "files": [
@@ -64,6 +100,7 @@
           "method": "ai_assisted_direct_line_by_line_semantic_read",
           "reviewer": "ChatGPT assistant, not an independent human",
           "date_utc": "2026-10-29",
+          "batch_id": "B001",
           "finding_ids": []
         }
       ],
@@ -86,6 +123,7 @@
           "method": "ai_assisted_direct_line_by_line_semantic_read",
           "reviewer": "ChatGPT assistant, not an independent human",
           "date_utc": "2026-10-29",
+          "batch_id": "B001",
           "finding_ids": []
         }
       ],
@@ -108,6 +146,7 @@
           "method": "ai_assisted_direct_line_by_line_semantic_read",
           "reviewer": "ChatGPT assistant, not an independent human",
           "date_utc": "2026-10-29",
+          "batch_id": "B001",
           "finding_ids": []
         }
       ],
@@ -130,6 +169,7 @@
           "method": "ai_assisted_direct_line_by_line_semantic_read",
           "reviewer": "ChatGPT assistant, not an independent human",
           "date_utc": "2026-10-29",
+          "batch_id": "B001",
           "finding_ids": []
         }
       ],
@@ -143,15 +183,20 @@
       "source_bytes": 1588,
       "source_kind": "utf8_text",
       "original_line_count": 41,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 41,
-          "status": "UNREVIEWED"
+          "line_count": 41,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "f11f54074438dbb51a905243122bef02e749ed0c023a9f20914a8c977e528bc1"
     },
     {
@@ -161,15 +206,20 @@
       "source_bytes": 4927,
       "source_kind": "utf8_text",
       "original_line_count": 112,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 112,
-          "status": "UNREVIEWED"
+          "line_count": 112,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "86025ca4b86253eb962dc73b964dfb6e535526cc2025f6601544209d70184501"
     },
     {
@@ -179,15 +229,20 @@
       "source_bytes": 987,
       "source_kind": "utf8_text",
       "original_line_count": 36,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 36,
-          "status": "UNREVIEWED"
+          "line_count": 36,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "e98f180b00c7b6b20b85aa2f6c2016d507bafe09daccddb8f832a3bd9511c48f"
     },
     {
@@ -197,15 +252,20 @@
       "source_bytes": 1595,
       "source_kind": "utf8_text",
       "original_line_count": 39,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 39,
-          "status": "UNREVIEWED"
+          "line_count": 39,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "7ba2e16242ea073e93f0bedca0c6a88143effe3b3702e6ed7f7dfb9e40047416"
     },
     {
@@ -215,15 +275,20 @@
       "source_bytes": 2387,
       "source_kind": "utf8_text",
       "original_line_count": 53,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 53,
-          "status": "UNREVIEWED"
+          "line_count": 53,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "763fd58b7db03ed5a24d995c1eb2f80668feedf21f6a67de9c18d9791e73c222"
     },
     {
@@ -233,15 +298,20 @@
       "source_bytes": 2418,
       "source_kind": "utf8_text",
       "original_line_count": 53,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 53,
-          "status": "UNREVIEWED"
+          "line_count": 53,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "44023b8eb2df806adf5b76f39541725606e63aedc22bb81bd72b28e872b63d35"
     },
     {
@@ -251,15 +321,20 @@
       "source_bytes": 812,
       "source_kind": "utf8_text",
       "original_line_count": 28,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 28,
-          "status": "UNREVIEWED"
+          "line_count": 28,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "71460437adae2ebbb7e4ef01a30a4462adbd5f6739540f626cdc1dadaffc0023"
     },
     {
@@ -269,15 +344,20 @@
       "source_bytes": 3157,
       "source_kind": "utf8_text",
       "original_line_count": 81,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 81,
-          "status": "UNREVIEWED"
+          "line_count": 81,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "d1f86bffe23d04f52e05c17989e00210fa7767268a7b3a272111a8a53dadd4ee"
     },
     {
@@ -287,15 +367,20 @@
       "source_bytes": 721,
       "source_kind": "utf8_text",
       "original_line_count": 23,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 23,
-          "status": "UNREVIEWED"
+          "line_count": 23,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "e9cf92672a821cd7b8e24e73ba6234fe54b7c9a6a0d4e51110f469de453b51fd"
     },
     {
@@ -305,15 +390,20 @@
       "source_bytes": 1988,
       "source_kind": "utf8_text",
       "original_line_count": 56,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 56,
-          "status": "UNREVIEWED"
+          "line_count": 56,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "8909555587ceeac9446335fd8c9d0ebd3709bf2c5f6863e4ce52a0704feb95bd"
     },
     {
@@ -323,15 +413,20 @@
       "source_bytes": 2144,
       "source_kind": "utf8_text",
       "original_line_count": 49,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 49,
-          "status": "UNREVIEWED"
+          "line_count": 49,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "963702d4a348fedf56672f506a4e0daa5b19ff99faad218d143af4c0ad8cedb5"
     },
     {
@@ -341,15 +436,20 @@
       "source_bytes": 1201,
       "source_kind": "utf8_text",
       "original_line_count": 37,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 37,
-          "status": "UNREVIEWED"
+          "line_count": 37,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "b7202c8e395af7e0470e40ef71b798c61d0ab8e1b48ddfdd85967377a004f9f3"
     },
     {
@@ -359,15 +459,20 @@
       "source_bytes": 4178,
       "source_kind": "utf8_text",
       "original_line_count": 91,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 91,
-          "status": "UNREVIEWED"
+          "line_count": 91,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "3ecae5f1184382479e1a1c13a07b2748e83aeab7955635d8f615144956c903c0"
     },
     {
@@ -377,15 +482,20 @@
       "source_bytes": 2802,
       "source_kind": "utf8_text",
       "original_line_count": 86,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 86,
-          "status": "UNREVIEWED"
+          "line_count": 86,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B002",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "17be43ce5b5bdb9867ad8eb6ca1baeee7f81468babf2f5438fabbf36fd8297a4"
     },
     {
@@ -3634,7 +3744,7 @@
       "source_blob_sha": "6e6abd31557530778cf7595e170b5247cf9b6dd4",
       "source_bytes": 178464,
       "source_kind": "binary",
-      "original_line_count": null,
+      "original_line_count": 0,
       "coverage": "BINARY_NON_TEXT",
       "reviewed_ranges": [],
       "remaining_ranges": [],
@@ -6959,15 +7069,20 @@
       "source_bytes": 1637,
       "source_kind": "utf8_text",
       "original_line_count": 27,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 27,
-          "status": "UNREVIEWED"
+          "line_count": 27,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B005",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "cd2c7b73c13ef34b48a16de170c95e731ea644c170ea55bc10cc6b4c69fe1027"
     },
     {
@@ -7589,15 +7704,20 @@
       "source_bytes": 4444,
       "source_kind": "utf8_text",
       "original_line_count": 68,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 68,
-          "status": "UNREVIEWED"
+          "line_count": 68,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B005",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "5d1e61a0eb86a496f8c4d48795c763342f4bde8a458bc4379e7fc4edfa43d132"
     },
     {
@@ -7643,15 +7763,20 @@
       "source_bytes": 522,
       "source_kind": "utf8_text",
       "original_line_count": 12,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 12,
-          "status": "UNREVIEWED"
+          "line_count": 12,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B006",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "0fdc24110eae9c8e6391c8b9579f2501d8facab81af42d7230cb47dbfd460206"
     },
     {
@@ -7661,15 +7786,20 @@
       "source_bytes": 4477,
       "source_kind": "utf8_text",
       "original_line_count": 103,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 103,
-          "status": "UNREVIEWED"
+          "line_count": 103,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B006",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "06af191781a118b3b9ba09178aaabe637ad5049ff39c8113a232029d0aa27351"
     },
     {
@@ -7679,15 +7809,20 @@
       "source_bytes": 5938,
       "source_kind": "utf8_text",
       "original_line_count": 96,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 96,
-          "status": "UNREVIEWED"
+          "line_count": 96,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B006",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "a455a51de6184978377f1bfc1cbaccbe1c66cfda429adfca746454bf2bc0e8bd"
     },
     {
@@ -7697,15 +7832,20 @@
       "source_bytes": 12510,
       "source_kind": "utf8_text",
       "original_line_count": 213,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 213,
-          "status": "UNREVIEWED"
+          "line_count": 213,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B006",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "0e2094ff397cb5bee34cda8250cccc81bde70b9b0a8032ab52414bb6faf931fb"
     },
     {
@@ -7787,15 +7927,20 @@
       "source_bytes": 8351,
       "source_kind": "utf8_text",
       "original_line_count": 136,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 136,
-          "status": "UNREVIEWED"
+          "line_count": 136,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B004",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "f4d8583c37ec3351a011dd7da7751d12f05493f602a7ff515c1d479806e05304"
     },
     {
@@ -7805,15 +7950,20 @@
       "source_bytes": 19103,
       "source_kind": "utf8_text",
       "original_line_count": 305,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 305,
-          "status": "UNREVIEWED"
+          "line_count": 305,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B004",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "3af74847297579a4299eef0e6e074470284c87b173fb7b2462df94a7da9bb8d0"
     },
     {
@@ -7823,15 +7973,20 @@
       "source_bytes": 3269,
       "source_kind": "utf8_text",
       "original_line_count": 44,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 44,
-          "status": "UNREVIEWED"
+          "line_count": 44,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B004",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "65bf3a0f1d7a30c816ddaa867e3c0e440cf158bb8aaffafa9997bad7b1412db9"
     },
     {
@@ -7841,15 +7996,20 @@
       "source_bytes": 4726,
       "source_kind": "utf8_text",
       "original_line_count": 72,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 72,
-          "status": "UNREVIEWED"
+          "line_count": 72,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B004",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "93987386807698c1b9c5f18cc3e0b0636c5f70fc7538782628cb4a231cc365c4"
     },
     {
@@ -7859,15 +8019,20 @@
       "source_bytes": 9408,
       "source_kind": "utf8_text",
       "original_line_count": 149,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 149,
-          "status": "UNREVIEWED"
+          "line_count": 149,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B004",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "d3e173c10e91adb5500771cd0fefb6c5ef32336253063aba06a5805656f4e935"
     },
     {
@@ -7895,15 +8060,20 @@
       "source_bytes": 19838,
       "source_kind": "utf8_text",
       "original_line_count": 364,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 364,
-          "status": "UNREVIEWED"
+          "line_count": 364,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B007",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "0b964d120a68ade7e5102e59acceb955b30cdc83a84a61009db571d3ac854103"
     },
     {
@@ -7913,15 +8083,20 @@
       "source_bytes": 8947,
       "source_kind": "utf8_text",
       "original_line_count": 110,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 110,
-          "status": "UNREVIEWED"
+          "line_count": 110,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B007",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "e25e1145aaa8a028f48ecf78d36003d913fe1b3e793aa106e5c4f9a1e85aae11"
     },
     {
@@ -7949,15 +8124,20 @@
       "source_bytes": 16879,
       "source_kind": "utf8_text",
       "original_line_count": 157,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 157,
-          "status": "UNREVIEWED"
+          "line_count": 157,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B007",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "2ec76b4a5425213b7d62b5f69f6f8ddd2495ca0d383a239d7d4b59edbc79d7b5"
     },
     {
@@ -8021,15 +8201,20 @@
       "source_bytes": 2449,
       "source_kind": "utf8_text",
       "original_line_count": 28,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 28,
-          "status": "UNREVIEWED"
+          "line_count": 28,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B003",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "45261c7e60f5dd19f1fa56e076bfdae7868cb8854eaefb7af430e5a10f20ff61"
     },
     {
@@ -8039,15 +8224,20 @@
       "source_bytes": 8567,
       "source_kind": "utf8_text",
       "original_line_count": 102,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 102,
-          "status": "UNREVIEWED"
+          "line_count": 102,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B003",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "f5b4f186dbea52e70d1601067f555051959c48a043b3fb3dcd6661ddf0b631c2"
     },
     {
@@ -8201,15 +8391,20 @@
       "source_bytes": 9029,
       "source_kind": "utf8_text",
       "original_line_count": 84,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 84,
-          "status": "UNREVIEWED"
+          "line_count": 84,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B003",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "72f0365942c1954cafeb357cf28d159e93d4e6451d573b921e43672ad345886c"
     },
     {
@@ -8291,15 +8486,20 @@
       "source_bytes": 10052,
       "source_kind": "utf8_text",
       "original_line_count": 159,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 159,
-          "status": "UNREVIEWED"
+          "line_count": 159,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B003",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "d2251b9fd64f46f690485d874ef72b2d4f2935f7261551fbb946f2c44846c963"
     },
     {
@@ -8326,7 +8526,7 @@
       "source_blob_sha": "93cf77c2161c8b26b5e86e3c59d73183cc81573d",
       "source_bytes": 986,
       "source_kind": "binary",
-      "original_line_count": null,
+      "original_line_count": 0,
       "coverage": "BINARY_NON_TEXT",
       "reviewed_ranges": [],
       "remaining_ranges": [],
@@ -8338,7 +8538,7 @@
       "source_blob_sha": "f69c97c053310ebbc841d6f63acde4dbb6fab3b0",
       "source_bytes": 2680,
       "source_kind": "binary",
-      "original_line_count": null,
+      "original_line_count": 0,
       "coverage": "BINARY_NON_TEXT",
       "reviewed_ranges": [],
       "remaining_ranges": [],
@@ -9143,15 +9343,20 @@
       "source_bytes": 6019,
       "source_kind": "utf8_text",
       "original_line_count": 112,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 112,
-          "status": "UNREVIEWED"
+          "line_count": 112,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B009",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "487705b4399274dc5ef246a61a78adbd3dae71c1d1366abbdd5626c9e5f47c50"
     },
     {
@@ -9161,15 +9366,20 @@
       "source_bytes": 6427,
       "source_kind": "utf8_text",
       "original_line_count": 86,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 86,
-          "status": "UNREVIEWED"
+          "line_count": 86,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B009",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "a1e4e2e8f66bf6b933ff5f058887c6da8fcfa74df9d27f0767af0172b403d5d9"
     },
     {
@@ -9197,15 +9407,20 @@
       "source_bytes": 20348,
       "source_kind": "utf8_text",
       "original_line_count": 224,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 224,
-          "status": "UNREVIEWED"
+          "line_count": 224,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B009",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "c80f16bfaa27186e3bacb345239fd73ca3897b97b4f26a59cbfe132f100339aa"
     },
     {
@@ -9215,15 +9430,20 @@
       "source_bytes": 595,
       "source_kind": "utf8_text",
       "original_line_count": 10,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 10,
-          "status": "UNREVIEWED"
+          "line_count": 10,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B009",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "a3d08ee66816b439a71f3a9d8ec31473dc6a1cddf2ab96b7df94ee01162a69ed"
     },
     {
@@ -9899,15 +10119,20 @@
       "source_bytes": 12707,
       "source_kind": "utf8_text",
       "original_line_count": 202,
-      "coverage": "UNREVIEWED",
-      "reviewed_ranges": [],
-      "remaining_ranges": [
+      "coverage": "AI_ASSISTED_DIRECT_SEMANTIC_REVIEW",
+      "reviewed_ranges": [
         {
           "first_line": 1,
           "last_line": 202,
-          "status": "UNREVIEWED"
+          "line_count": 202,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B008",
+          "finding_ids": []
         }
       ],
+      "remaining_ranges": [],
       "sha256": "10bf15c52a690f8f7a28e7254d32ecce53c031e954157ba796776150db7b4107"
     },
     {
