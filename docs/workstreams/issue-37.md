@@ -29,3 +29,7 @@ Original owner preference now recorded in Issue37: **written + companion video**
 ## October 29: owner green-rating UI parity correction, Issue #37
 
 Owner explicitly requested replacing the beginner guide's five hidden model numbers with **green** to match the actual application. Checked `site/lib/ui.js` rating choices (colored `severity-0` and selected checkmarks), `site/lib/constants.js` descriptions and all-green `isDialed`, plus Master Specification §17.4 confirming all required markers pure green. Revised only the green-target table, not the underlying taste scoring: Balanced for Extraction/Body, Distinct Clarity, Exceptional Sweetness, and None Astringency/Dryness. Enhanced `tests/issue37-beginner-guide-contract.test.mjs` to bind rendered labels and green severity to source without exposing numeric internals. The draft video already says to rate all five scales and has no numeric guidance, so unchanged. Source/CI/merge receipt pending; private preview remains unpublished, issue OPEN; no release authorization, production or member-data operation.
+
+
+## Source readback fix: pre-CI escaped contract literals
+Read back the newly created test blob and identified escaped newline and regex tokens that would have searched for literal backslash-n rather than Markdown line breaks. Corrected both the green section split and numeric-value guard before PR CI. Documentation and runtime app code untouched; test must pass exact-head CI before merge.

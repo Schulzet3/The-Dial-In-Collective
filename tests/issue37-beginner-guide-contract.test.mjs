@@ -40,7 +40,7 @@ test('Guide separates actual measurements, suggestions, saved results and privac
  'Pending','private shots','Authorized administrators','Offline logging',
  'previously admitted','**Synced**','**Offline**','**Pending**'])
   assert.ok(guide.includes(phrase),phrase);
- const greenSection=guide.split('## How Do I Know When I\'m “Dialed In”?\\n')[1]?.split('\\n## ')[0];
+ const greenSection=guide.split('## How Do I Know When I\'m “Dialed In”?\n')[1]?.split('\n## ')[0];
  assert.ok(greenSection,'Guide must retain the Dialed In section');
  assert.match(greenSection,/all five taste ratings are green/i);
  const preferredRatings=Object.fromEntries(SCALES.map(sc=>[sc.key,sc.ideal]));
@@ -50,7 +50,7 @@ test('Guide separates actual measurements, suggestions, saved results and privac
   assert.ok(greenSection.includes('| '+sc.label+' | 🟢 Green — '+tasteLabel(sc,sc.ideal)+' |'),
    'Missing green rating and actual on-screen label for '+sc.label);
  }
- assert.doesNotMatch(greenSection,/^\\|[^\\n]+\\|\\s*\\*\\*[1-5]\\*\\*\\s*\\|/m,
+ assert.doesNotMatch(greenSection,/^\|[^\n]+\|\s*\*\*[1-5]\*\*\s*\|/m,
   'The guide must not expose internal numeric taste values as UI choices');
  assert.ok(ui.includes('severity-${tasteSeverity(sc,n)}'),'Rating choices must be severity-colored');
  assert.ok(ui.includes('tasteLabel(sc,n)'),'Rating choices must expose descriptive labels');
