@@ -2316,28 +2316,28 @@
       "issue": 238,
       "pr": 239,
       "title": "Research-consistent next-shot validity, control-limit abstention and calibration-safe time evidence",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "bba4589f1012ef53d3461260e486ab345fd7b981",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Research package 48/48 reference scenarios + Node structural validator: PASS, research-only; actual app fixture and exact-source CI PENDING",
-        "First exact-head app CI 40922584705: 1962 PASS / 1 invalid new test fixture / 6 known SKIP; fixed fixture, full rerun pending."
+        "First exact-head app CI 40922584705: 1962 PASS / 1 invalid new test fixture / 6 known SKIP; fixed fixture, full rerun pending.",
+        "PR239 exact tested head 5e12221b6935faa58b0e6565b123470f4da4b752: app/build 40923384082 SUCCESS; cloud UX 40923383939 SUCCESS; private visual 40923384017 SUCCESS; isolated SQL 40923383986 SUCCESS; security 40923384012 SUCCESS; approval 40923383991 SUCCESS. Frozen coffee corpus 40923383951 SKIPPED as unrelated. No authenticated live-member test performed for this client-only change.",
+        "PR239 non-force merged bba4589f1012ef53d3461260e486ab345fd7b981; verified merged tree fa5bb04c82d2c8a4a5350a34787423db78735d2f equals independently tested head tree; development branch and merged PR readback correct."
       ],
       "ci_runs": [
-        40922584695,
-        40922584724,
-        40922584762,
-        40922584698,
-        40922584697,
-        40922584705
+        40923384082,
+        40923384012,
+        40923383991,
+        40923383986,
+        40923383939,
+        40923384017
       ],
-      "blockers": [
-        "New real app regression suite and exact-source CI not yet verified; non-force integration pending."
-      ],
+      "blockers": [],
       "owner_source": "Owner 2026-10-29 explicit research implementation development authorization; separate deploy approval withheld",
-      "notes": "No SQL/Auth/Edge/privacy changes. Research experimental/not_ready suggestions intentionally excluded. Preserve original shots, community data and successful family records."
+      "notes": "No SQL/Auth/Edge/privacy changes. Research experimental/not_ready suggestions intentionally excluded. Preserve original shots, community data and successful family records. Complete scoped engine guardrails READY, not deployed. No unsupported full scientific optimality/causal claims."
     }
   ],
   "history": [
