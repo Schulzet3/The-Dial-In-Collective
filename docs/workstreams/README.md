@@ -30,3 +30,5 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #133 completed conductor setup and residual ownership](issue-133.md)
 
 - [Issue #28 owner-approved single encrypted Drive backup folder](issue-28.md)
+
+- [Issue #28 permanent backup acceptance and no-retest evidence](../audits/issue28-acceptance-evidence-no-repeat-20261029.md)

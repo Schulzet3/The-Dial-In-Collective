@@ -8,6 +8,9 @@ Implementation receipt: The existing enabled ChatGPT courier (task `6ae02966919c
 
 A prior report mistook the automatically courier-named October 28 Drive file `dic-nightly-12824981645.zip` for missing because it searched a different folder/name; that file's existence, original creation timestamp and matching GitHub artifact ID/size are now confirmed. The later manually uploaded `dic-encrypted-nightly-40708113153.zip` is a separate duplicate logical recovery point, **not proof of prior courier failure**. No user data, encrypted contents, app deployment or production configuration were changed by this folder correction.
 
+
+**Accepted testing/no repeat (owner instruction, October 29):** Previously verified Issue #28 backup acceptance is permanent reusable evidence (scheduled encrypted backups and matching Drive SHA-256 checks on Oct 15/16/18/22/26/27/28, owner-confirmed real Apps Script test-alert email Oct 16, owner-proven running Apps Script trigger Oct 18, and owner Tasks Push/Email screenshots). See docs/audits/issue28-acceptance-evidence-no-repeat-20261029.md. Never ask the owner to repeat a passed screenshot, alert-email test, backup hash or restore absent material configuration change or actual defect; never induce a production backup failure to satisfy a natural exception-alert test. Only monitor genuinely new backup delivery and natural exceptions. Preserve the distinction between a delivered TEST email and an unobserved real failure notification.
+
 ---
 
 ## October 28 owner retirement of optional screenshot and Claude extraction (Locked)
