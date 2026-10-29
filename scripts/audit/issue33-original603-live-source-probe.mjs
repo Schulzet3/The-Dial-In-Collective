@@ -1,5 +1,5 @@
-// Owner-authorized 603 independent official-source capture on exact merged source; source-only, no certification from parse.
 #!/usr/bin/env node
+// Owner-authorized 603 independent official-source capture on exact merged source; source-only, no certification from parse.
 // Read-only live HTTPS source evidence for each immutable original603 URL.
 // This does not authorize an outdated oracle to override a current product.
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
