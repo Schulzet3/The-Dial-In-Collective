@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 48,
-    "direct_assistant_semantic_lines": 6512,
-    "still_not_documented_as_semantically_reviewed_lines": 573449,
+    "direct_assistant_semantic_lines": 8212,
+    "still_not_documented_as_semantically_reviewed_lines": 571749,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 573449,
+    "remaining_line_count_checked": 571749,
     "fully_reviewed_text_files": 47,
     "partially_reviewed_text_files": 1
   },
@@ -95,6 +95,18 @@
       ],
       "classification": "HISTORICAL_SOURCE_OBSERVATION_NOT_CURRENT_DEFECT",
       "summary": "Archived exact SEY product endpoint 250g purchase option includes weight=454 while other 250g variants have weight=318. Shopify weight might represent packaged shipment rather than net coffee mass; do NOT assume error, change frozen oracle, or duplicate #33 live coffee adjudication."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-002",
+      "risk": "informational",
+      "type": "HISTORICAL_EVIDENCE_SEMANTIC_BOUNDARY",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        2615,
+        2663
+      ],
+      "classification": "SAFE_HISTORICAL_DISTINCTION",
+      "summary": "Sweet Bloom archived roast CSS level is deliberately ambiguous; do not infer a canonical roast enum from two visual scale endpoints, source date/relationship not equal harvest; current source adjudication belongs to Issue #33."
     }
   ],
   "files": [
@@ -5330,11 +5342,21 @@
           "date_utc": "2026-10-29",
           "batch_id": "B011",
           "finding_ids": []
+        },
+        {
+          "first_line": 1491,
+          "last_line": 3190,
+          "line_count": 1700,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-29",
+          "batch_id": "B013",
+          "finding_ids": []
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 1491,
+          "first_line": 3191,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
