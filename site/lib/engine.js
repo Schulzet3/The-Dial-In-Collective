@@ -1,4 +1,4 @@
-import {CONFIG,RATIOS,TIMES,TEMPS,roastIndex,num,round,clamp,norm,finite,newId,now,isDialed} from './constants.js';
+import {CONFIG,RATIOS,TIMES,TEMPS,roastIndex,num,round,clamp,norm,finite,newId,now,isDialed,tastesComplete} from './constants.js';
 import {activeSetup,activeVersion,workspace,coffeeState,ensureCoffeeState,selectedBasket,feedMode,snapshot,hasLocalSuccess,validateShot,logAudit} from './model.js';
 import {selectCommunityPrior} from './community-evidence.js';
 export const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
@@ -297,7 +297,7 @@ export function recommendation(s,coffeeId,options={}) {
   const ratioEvidence=basketFeed.length?basketFeed:feedLocal.length?feedLocal:local.length?local:all;
   rec.ratio=stats(ratioEvidence.map(x=>x.yieldG/x.doseG),{singleWidth:CONFIG.singleYieldHalfWidth/basket.doseG});
   // Time from another setup, basket or feed must not masquerade as local proof.
-  if(basketFeed.length)rec.time=stats(basketFeed.map(x=>x.timeS),{singleWidth:CONFIG.singleTimeHalfWidth});
+  if(comparable.length)rec.time=stats(comparable.map(x=>x.timeS),{singleWidth:CONFIG.singleTimeHalfWidth});
   rec.familyId=chosen.id;rec.observations=ratioEvidence.length;rec.established=local.length>0;
   rec.source=local.length?'Your dialed in window':'Starting reference from your other setup';
   rec.familySelection={basis:familyChoice.basis,candidates:familiesFor(s,coffeeId,style).length,
@@ -375,6 +375,7 @@ export function prefill(s,coffeeId,options={}) {
 }
 function nextAdviceRaw(s,shot,rec) {
  const v=activeVersion(s),t=shot.tasteScales;
+ if(!tastesComplete(t))return {title:'Finish your taste ratings',text:'Rate all five sensory qualities before using taste feedback to adjust the next shot.',next:null};
  if(isDialed(t))return {title:'Dialed in. Nicely done.',text:'Balanced, sweet and clean for your taste. This shot adds to your successful recipe window.',next:null};
  const step=grindStep(v),fast=shot.timeS<rec.time.low,slow=shot.timeS>rec.time.high;
  const direction=t.extraction<3?'finer':t.extraction>3?'coarser':null;
@@ -386,10 +387,11 @@ function nextAdviceRaw(s,shot,rec) {
   const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
   if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
  }
- if(t.extraction!==3){const delta=t.extraction<3?2:-2,center=clamp(shot.yieldG+delta,5,200);return {title:t.extraction<3?'Try a slightly longer yield':'Try a slightly shorter yield',text:`Aim around ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out, with the same dose and grind. Compare the balance.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};}
- if(t.body!==3){const center=clamp(shot.yieldG+(t.body<3?-2:2),5,200);return {title:t.body<3?'Try a little more concentration':'Try opening up the texture',text:`Keep dose and grind steady; try ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out. Let taste decide.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};}
- if(t.astringency>1&&v.advanced.temperature&&finite(shot.tempC)){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
+ if(t.extraction!==3){const delta=t.extraction<3?2:-2,center=clamp(shot.yieldG+delta,5,200);if(center===shot.yieldG)return {title:'Check your extraction',text:'Yield is already at its allowed limit. Keep your recorded recipe unchanged and review the result before adjusting another control.',next:null};return {title:t.extraction<3?'Try a slightly longer yield':'Try a slightly shorter yield',text:`Aim around ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out, with the same dose and grind. Compare the balance.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};}
+ if(t.body!==3){const center=clamp(shot.yieldG+(t.body<3?-2:2),5,200);if(center===shot.yieldG)return {title:'Check your texture',text:'Yield is already at its allowed limit. Keep the recipe unchanged and review the result before another adjustment.',next:null};return {title:t.body<3?'Try a little more concentration':'Try opening up the texture',text:`Keep dose and grind steady; try ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out. Let taste decide.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};}
+ if(t.astringency>1&&v.advanced.temperature&&finite(shot.tempC)&&shot.tempC>70){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
  const center=clamp(shot.yieldG+1,5,200);
+ if(center===shot.yieldG)return {title:'Review before adjusting',text:'Yield is at its allowed limit. Keep this shot as recorded; no additional numeric change is supported by these ratings.',next:null};
  return {title:'A small refinement',text:`Try ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out with the same grind. Compare sweetness and clarity before making a larger change.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};
 }
 // Applies to every next-shot advice path, including non-grind taste advice
