@@ -1,3 +1,9 @@
+## October 29, 2026 correction — already verified, no repeat owner tests
+
+The historical Oct15/16 scheduled offsite ZIP SHA-256 matches below remain VALID and have been supplemented by Oct18/22/26/27/28 true scheduled original Drive backup ZIP matches. Owner's **actual delivered Oct16 `[TEST]` alert email**, accepted Tasks Push/Email settings (three screenshots), Oct18 live Apps Script running trigger screenshot (0% displayed error), and Oct27 real watchdog run remain PASS — **DO NOT ask again**. The earlier Oct28 missing-backup claim was a wrong-name/wrong-folder check; original `dic-nightly-12824981645.zip` was present, independently hashed and matched GitHub original artifact, so the later ChatGPT manual copy was redundant. New historical reconciliation and unobserved conditional alert/retention limits are in [the authoritative Issue #28 no-retest evidence register](audits/issue28-acceptance-evidence-no-repeat-20261029.md). All earlier text remains below as date-specific historical evidence and should not override this corrected current conclusion.
+
+---
+
 # DIC scheduled backup / Drive courier / failure-alert verification — 2026-10-16
 
 **CURRENT RESULT — PASS with precise limits:** Two consecutive scheduled encrypted GitHub artifacts were transferred to private Drive with exact byte SHA-256 matches. The owner also **received a clearly labeled test alert** generated through the existing Apps Script `sendBackupAlert_()` function, and a separate independent daily read-only backup watchdog was enabled. **Still unverified:** actual failed-transfer or 36-hour-overdue-trigger execution, Apps Script's own trigger health, real 30-day Drive expiration. See the dated evidence below and [CURRENT_STATUS.md](CURRENT_STATUS.md); do not request a duplicate synthetic alert email.
