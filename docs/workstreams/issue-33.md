@@ -1,3 +1,13 @@
+## October 29 UTC — Issue33 Quartermaine current-source origin fix READY, NOT DEPLOYED
+
+PR251 merged nonforce at `a8c12fdb0f3182d2173554c7bd3b988149feec64`; final PR head `b86b974b0cab0c06f3b0d31e7c4b22aa6770491b` tested all applicable exact-source checks SUCCESS: Node/lint/build `40933880113`, cloud/mobile `40933880075`, visual `40933880217`, isolated SQL `40933880126`, security `40933880310`, approval and intake `40933880172`, source bundle `40933880171`. Independently validated merged-source Node/lint/build `40934305048`, cloud/mobile `40934305128`, approval `40934304975` all SUCCESS. PR and merge source/test blobs verified identical. The original restricted 603-corpus job and optional public source workflows were SKIPPED, never called a pass; original immutable 603 captures/oracle/scorer untouched.
+
+**Actual benefit:** For Quartermaine Colombia, selected current prose now gives Origin `Huila, Colombia` instead of `From the Andes, Colombia, Huila, Andes`; for Quartermaine Costa Rica, `Tarrazu, Costa Rica` instead of `From the Tarrazu, Costa Rica, Tarrazu`. Exact current official page text plus original603 source register corroborate both. The new generic rule also recognizes a named mountain/country as a broad literal place and declines to manufacture an unnamed/merchandising region. Public extractor and rendered Add Coffee preview positive/negative tests pass; complete 603 live-source replay and real authenticated production workflow for this change not performed.
+
+Queue `DIC-Q-33-original603-direct-region-country-prose` READY with no scoped blockers, **not deployed**. Independently owner-authorized Release11 source was published without this subsequent TESTING work; do not assume release approval extends to it. Parent Issue33 residual semantic/source limitations remain IN_PROGRESS. No Netlify publication, SQL/Auth/Edge/member records, secrets, purchases or original archive changes in this development request.
+
+---
+
 ## October 29 UTC — exact-head PR251 lint failure repaired, Node suite PASS (NO DEPLOY)
 
 Actual GitHub run `40933369108` executed 2,004 Node tests PASS / 0 FAIL (see GitHub job receipt), including new Quartermaine direct-source handler and Add Coffee tests, but the lint stage correctly failed on one `no-unused-vars` warning from `html` in the new test after its unneeded internal-only assertion was removed. Fixed that single unused binding without changing runtime source or assertions. Approval/queue validation, cloud/mobile browser, visual, SQL, security and source-bundle checks for this head passed; new exact-head lint/build and rest required before merge or READY. Original 603 private workflow was SKIPPED, not PASS.
