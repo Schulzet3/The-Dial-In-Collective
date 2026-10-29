@@ -45,3 +45,9 @@
 | Final launch date | **OPEN OWNER PRODUCT CHOICE** |
 
 The guide and planned video are not source READY for public publication until the exact released UI is captured and assessed with a safe admitted test account, screenshots have no private information, the user journey is exercised, and any captions/transcript are checked. Maintain a versioned guide and update after releases. No Netlify/backend/SQL/Edge/Auth/member data change under this workstream.
+
+## October 29: owner-approved green sensory rating representation
+
+The owner observed that the app's taste ratings are not presented as numbers. The written draft's Dialed In table now uses **🟢 Green** in every row together with the on-screen descriptions: Extraction/Body **Balanced**, Clarity **Distinct**, Sweetness **Exceptional**, and Astringency / Dryness **None**. Confirmed against current app `site/lib/ui.js` colored severity buttons and `site/lib/constants.js` taste labels, severity zero, and `isDialed` criteria. The selected option displays a checkmark; the guide does not rely on color alone. A static regression contract now derives table expectations from the source and rejects exposed internal values.
+
+**Scope:** documentation and tests only; no actual rating-engine or production change. Existing video storyboard contains no numeric targets and remains accurate. Final signed-in production/user-device acceptance and publication remain outstanding.
