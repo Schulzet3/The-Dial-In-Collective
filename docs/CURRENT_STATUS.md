@@ -1,3 +1,9 @@
+## October 29 2026 UTC — Historical 579,961-line review split to OPEN Issue #267, no waiver
+
+Owner explicitly transferred the never-completed literal expert semantic inspection of 757 historical files/579,961 text lines (503,938 archived evidence) from #96 to [new #267](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267), preserving old #161 and #96 original evidence/acceptance. #96 remains OPEN for real Admin/ordinary-member Supabase GoTrue login, private-data/IDOR/RLS tests and provider security. The 5,288-line original JSX AST inventory is not a complete manual semantic review. New scoped journal `workstreams/issue-267.md` and independent new-chat handoff `handoffs/ISSUE267_HISTORICAL_LINE_REVIEW_NEW_CHAT_2026-10-29.md` are prepared. **No historical semantic lines newly certified, no waiver, no production/provider/user data changes or release.** Work with real signed-in roles must not request or publish passwords/tokens. No deployed issue #96 fix was undone.
+
+---
+
 ## October 29, 2026 — Owner-approved Issue #50 closure, verified GitHub CLOSED
 
 Owner answered **"yes. Next issue please"** to the specific proposal to close #50 as **Engineering optimization implemented and independently measured; 10× full-cycle improvement NOT demonstrated**. Live [GitHub Issue #50](https://github.com/Schulzet3/The-Dial-In-Collective/issues/50) was updated with this exact outcome and read back **CLOSED / completed** 2026-10-29T22:06:14Z. The original 10× full request-to-tested/released/independently verified target remains **UNVERIFIED**, a nonblocking future performance aspiration—not a passed result and not a new release gate.

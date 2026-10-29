@@ -1,3 +1,13 @@
+## October 29, 2026 UTC — Owner-authorized transfer of full historical review to #267
+
+The owner explicitly approved separating the 757-file / **579,961-original-text-line** manual semantic audit from Issue #96 and requested a dedicated new-chat continuation. GitHub [#267](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267) was created OPEN and #96 was read back OPEN with its updated authoritative first section assigning full historical-review responsibility **exclusively to #267**. The historical review originally flowed from closed [#161](https://github.com/Schulzet3/The-Dial-In-Collective/issues/161) into #96. Original reference 503,938 archived espresso/extractor source-evidence lines, original JSX 5,288 lines, 79 Locked + 20 Open baseline decisions, hashes, source variants, existing tests and source provenance remain immutable. Static screening, AST inventory and previous partial review **DO NOT** count as blanket line-by-line semantic completion; no line newly certified during this transfer. There is no waiver or silent deletion of the requirement.
+
+**#96 remains OPEN for distinct current production security assurance:** real Supabase GoTrue admitted-Admin vs ordinary-member sessions, cross-account/RLS/IDOR/privacy and private note isolation, invitation lifecycle and session revocation, provider security configuration/credentials where connectors expose it, current security/dependency/secret assurance, and precise inaccessible-provider/device limitations. #47 retains detailed Admin editing acceptance, #33 current coffee-source semantics. Existing Issue96 six repaired security defects were separately provider-verified DEPLOYED in Release05. Physical device checking is optional; synthetic signed tests cannot be relabeled genuine sessions. Do not ask for passwords or session tokens in chat. Current single-use release grants, private GitHub Free status and owner-approved Supabase Free beta warning are unchanged.
+
+New workstream journal `docs/workstreams/issue-267.md` and ready-to-copy new-chat handoff `docs/handoffs/ISSUE267_HISTORICAL_LINE_REVIEW_NEW_CHAT_2026-10-29.md` preserve #267's exact acceptance and safe batch execution. **Documentation/issue split only**: no application, production deploy, Supabase SQL/Auth/Edge, member records, backup or billing change; no READY/DEPLOYED assertion for an audit not performed.
+
+---
+
 # Issue 96: repository-wide source and security inspection
 
 ## October 23 UTC / October 22 MDT: authorized intake
