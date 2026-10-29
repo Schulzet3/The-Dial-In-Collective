@@ -1,4 +1,5 @@
 // Direct exact-selected-product prose credits. No network access, no roaster-specific rules.
+// Exact official 77-page selected-source replay gate: never equate a parsed HTML page with a certified owner field.
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\d]+/gu,' ').trim();
 export function selectedDirectProductCredits(html,{name='',clean}={}){
