@@ -1,0 +1,1418 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "scope": "50 selected coffee decision-level official source records",
+  "original_official_workflow": 40822673151,
+  "original_tested_source_sha": "96486e9d503c029cc87adc5133226f7f3a0886af",
+  "artifact_id": 12874948413,
+  "raw_html_sha256_verified": 50,
+  "original_frozen_603_rerun": false,
+  "source_defect_numbers": [
+    21,
+    31,
+    51,
+    76
+  ],
+  "status": "SOURCE_REVIEW_COMPLETED_REPAIR_TESTING_NOT_FINAL_CERTIFICATION",
+  "limitations": [
+    "Source-limited #58 Square dynamic page cannot prove absence",
+    "PR227 new correction source has not yet been retested against all77",
+    "Exact merged SHA requires integration"
+  ],
+  "records": [
+    {
+      "number": 1,
+      "coffee": "Honduras COMSA Decaf",
+      "exact_official_url": "https://44northcoffee.com/products/honduras-decaf",
+      "owner_approved_rule": "Owner-resolved separate Water Process decaffeination vs unpublished primary process.",
+      "observed_official_source_excerpt": "Decaffeination: Water process (non-chemical)",
+      "raw_official_html_sha256": "02dedcfb5df3a5763362ac3c4ee3d7ae4f8e5ae4fc21fb6b73770e0f269619c9",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Decaffeination: Water process (non-chemical)"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [
+        "roast_level"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 4,
+      "coffee": "White Coffee",
+      "exact_official_url": "https://www.alaskaartisancoffee.com/products/white-coffee",
+      "owner_approved_rule": "White category -> no automatic seven-tier roast; manual prompt. Merged PR187; frozen603 gate pending.",
+      "observed_official_source_excerpt": "White Coffee",
+      "raw_official_html_sha256": "dbcf94826acc13787ef88e3c57ad6134b90c83d5140e6d76dab07fb72aec9636",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 6,
+      "coffee": "Colombia FUDAM La Union",
+      "exact_official_url": "https://beanstockcoffee.com/products/colombian-supremo-organic",
+      "owner_approved_rule": "Reused product URL: prior official snapshot showed Tolima Suave, but direct official HTML 2026-10-28 now names FUDAM LA Union. Direct selected product outranks historical indexed identities. Current HTML extraction did not yield a primary process; preserve blank, do not transfer Washed from an older capture.",
+      "observed_official_source_excerpt": "FUDAM",
+      "raw_official_html_sha256": "d7b495991034dc6956c2fd8340b7a3581a064d58486209acf6613d4b942ef475",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "named_producer": "FUDAM"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 5,
+      "coffee": "Organic Colombian",
+      "exact_official_url": "https://baldguybrew.com/products/organic-colombian-coffee",
+      "owner_approved_rule": "Medium/Medium Dark range -> blank roast and manual Medium or Medium-Dark. Merged PR188; frozen603 gate pending.",
+      "observed_official_source_excerpt": "Medium/Medium Dark",
+      "raw_official_html_sha256": "8ec2cccbe93bf791503ccc80fc9ec6c3270aec01f2c541923adc273062d560ac",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "named_producer": "Cooperativa del Sur del Cauca - COSURCA,"
+      },
+      "actual_source_facts": [
+        {
+          "field": "roast_level",
+          "label": "Roast",
+          "value": "Medium/Medium Dark",
+          "section": "Fair Trade & Organic Certified",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 8,
+      "coffee": "Franky Hoyos Gesha Tropical",
+      "exact_official_url": "https://www.blackwhiteroasters.com/products/franky-hoyos-gesha-tropical",
+      "owner_approved_rule": "Roaster says Lighter; preserve label without inventing Light/Very Light; manual roast review.",
+      "observed_official_source_excerpt": "Lighter",
+      "raw_official_html_sha256": "18a795b3e5ab46432a232253f5e819e3478c9289cfb4d4d1ab34118423dfbf14",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Advanced Washed",
+        "named_producer": "Franky Stiven Hoyos",
+        "farm": "El Encanto"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 7,
+      "coffee": "Diego Horta",
+      "exact_official_url": "https://www.blackwhiteroasters.com/products/r-diego-horta-anaerobic-natural",
+      "owner_approved_rule": "Roaster says Lighter; preserve literal relative roast label but do not infer one of seven roast tiers. Offer manual choice.",
+      "observed_official_source_excerpt": "Lighter",
+      "raw_official_html_sha256": "80f1122bdf3a78f95051c3fa5255399a41b5f6dcd680b565fda21e6aeefbdfea",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Anaerobic Natural",
+        "named_producer": "Diego",
+        "farm": "El Rincon"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 12,
+      "coffee": "Guatemala",
+      "exact_official_url": "https://www.bluejazzcoffee.com/products/guatemala-antigua",
+      "owner_approved_rule": "Two distinct elevations: Lake Atitlan 1800-2000 m and Huehuetenango 1500-1700 m. Preserve component ranges, not a merged numerical range.",
+      "observed_official_source_excerpt": "Lake Atitlan",
+      "raw_official_html_sha256": "c90c4b5cb0d4d1f2a0b925fd665ed362f60dcaa6c984ea347d8441e68604d59a",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "blend_components": "Lake Atitlan: 1800–2000 m (Washed); HueHuetenengo: 1500–1700 m (Washed)"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 9,
+      "coffee": "Sebastian Ramirez Red Fruits Decaf",
+      "exact_official_url": "https://www.blackwhiteroasters.com/products/r-sebastian-ramirez-red-fruits-decaf",
+      "owner_approved_rule": "Roaster says Lighter for the decaf; preserve label without guessing seven-tier roast.",
+      "observed_official_source_excerpt": "Lighter",
+      "raw_official_html_sha256": "0219bc463c66140a5ec37cfa712577158a80762aa9816ae3cce4bd2b8913345d",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Co-ferment",
+        "named_producer": "Sebastián Ramírez",
+        "farm": "Finca El Placer"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 14,
+      "coffee": "The Alchemist Decaf",
+      "exact_official_url": "https://brewpointcoffee.com/products/the-alchemist-decaf-blend",
+      "owner_approved_rule": "Mountain Water Process describes decaffeination only: Water Process method for fully decaf; primary green coffee processing unverified. Existing Issue #180 may already cover rule.",
+      "observed_official_source_excerpt": "Mountain Water",
+      "raw_official_html_sha256": "cee5a403857bdd387ec7cbd5cdb16eaa800ded1650bcc53a402e6c32f4f3b2c3",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Decaffeination: Mountain Water method"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 15,
+      "coffee": "Ethiopia Natural",
+      "exact_official_url": "https://brewtusroasting.com/products/ethiopia-natural",
+      "owner_approved_rule": "Producer attribution reported as smallholder farmers from Sidama. Check current actual Brewtus URL and selected coffee identity.",
+      "observed_official_source_excerpt": "smallholder farmers",
+      "raw_official_html_sha256": "fd410dc69bbf621c2007fbe8e7223c26de1db624923fa19f85dc43d87501ed08",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 16,
+      "coffee": "Peru Cafe Canchaque",
+      "exact_official_url": "https://www.thecoffeeexchange.com/products/peru-cafe-canchaque-natural-process-american-roast-limited-offering",
+      "owner_approved_rule": "Producer Cooperativa Agraria Cafetalera Jose Gabriel Condorcanqui reported. Roast label American Roast described as lightest; do not silently normalize to Light without source calibration.",
+      "observed_official_source_excerpt": "Cooperativa Agraria Cafetalera Jose Gabriel Condorcanqui",
+      "raw_official_html_sha256": "7097c5c88b7e89b7ed3292430762928c5f79819faad07c2eb4f5e0ffddb8dbf8",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 19,
+      "coffee": "Black Honey Berries",
+      "exact_official_url": "https://contemporoast.com/products/black-honey-berries",
+      "owner_approved_rule": "Historic expected Forest / Huver Castillo cannot be confirmed from inaccessible selected roaster page; do not populate solely from another source/product.",
+      "observed_official_source_excerpt": "Producer: Forest; Farmer/Farm: Huver Castillo, El Paseo farm",
+      "raw_official_html_sha256": "3e63ec0702668226c2cf48cc289290d0d5bf1bce03d71db9c9d7d41f675237ae",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "This mixture is combined with the beans for ten days of anaerobic fermentation."
+      },
+      "actual_source_facts": [
+        {
+          "field": "producer",
+          "label": "Producer",
+          "value": "Forest",
+          "section": "",
+          "conflicting": true
+        },
+        {
+          "field": "producer",
+          "label": "Farmer/Farm",
+          "value": "Huver Castillo, El Paseo farm",
+          "section": "",
+          "conflicting": true
+        }
+      ],
+      "existing_conflicts": [
+        "producer"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_CURRENT_LITERAL_CONFLICT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 20,
+      "coffee": "Anthrax Cursum Perficio",
+      "exact_official_url": "https://www.darkmattercoffee.com/products/anthrax-cursum-perficio",
+      "owner_approved_rule": "Pacas family in El Salvador and Cafe Tuxpal processing mill reported, alongside a Nicaraguan component; preserve geography and producer/mill roles separately.",
+      "observed_official_source_excerpt": "Mill: Cafe Tuxpal",
+      "raw_official_html_sha256": "b210c63e619ca2fbc83f686d22538f58064dcfd0d656c1d5560c2cccd306b1c9",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "blend_components": "Country: Nicaragua; Department: Nueva Segovia; Cultivar: Catuai; Process: Washed; Country: El Salvador; Mill: Cafe Tuxpal; Cultivar: Bourbon & Pacas; Process: Washed"
+      },
+      "actual_source_facts": [
+        {
+          "field": "producer",
+          "label": "Mill",
+          "value": "Cafe Tuxpal",
+          "section": "",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 18,
+      "coffee": "Night Vision Kenya",
+      "exact_official_url": "https://combatcoffeetea.com/products/night-vision-medium-roast-kenya",
+      "owner_approved_rule": "Producer listed as unnamed smallholder farmer cooperatives, not individual producer names.",
+      "observed_official_source_excerpt": "smallholder",
+      "raw_official_html_sha256": "ef5ea2f48d993f4830b46af5310848185e13b421a9a7b9dc95999e99ab383099",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Hand Picked, Washed",
+        "harvest_season": "November - January"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 22,
+      "coffee": "Ethiopian Yirgacheffe",
+      "exact_official_url": "https://earthbackcoffee.com/products/ethiopian-yirgacheffe-medium-roast",
+      "owner_approved_rule": "Producer attribution: unnamed small farmers within a cooperative; no named cooperative invented.",
+      "observed_official_source_excerpt": "small farmers",
+      "raw_official_html_sha256": "59a56e7e23956357b8c3318d0b85879f0a002b1e0e60f1e3d2a2edef6943b1a8",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 21,
+      "coffee": "Honduras Organic",
+      "exact_official_url": "https://disciplescoffee.com/products/hunduras",
+      "owner_approved_rule": "COMSA appears in secondary product records but original current Disciples product page was inaccessible. Withhold as current-source verified pending better proof.",
+      "observed_official_source_excerpt": "Single Origin Organic Honduras coffee from COMSA in Marcala, La Paz",
+      "raw_official_html_sha256": "e475f806800fda9fcc00df471a8bb4ee6d1d89d6072364d6aa9d3fff94f7c4cc",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Light roast and Natural"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "SOURCE_CONFIRMED_DEFECT_REPAIR_IN_PR227",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": "Current COMSA organization should be producer",
+      "tested_merged_sha": null,
+      "remaining_blocker": "PR227 tests, merge and live all77 replay outstanding"
+    },
+    {
+      "number": 24,
+      "coffee": "Colombia Decaf",
+      "exact_official_url": "https://www.fazendacoffee.com/products/colombia-decaf-sugar-process",
+      "owner_approved_rule": "Sugar Cane EA is decaffeination (Sugar Process); previous review inferred Washed from documented pulping/fermentation/rinsing. Reverify stages before filling primary process.",
+      "observed_official_source_excerpt": "Sugar Cane Decaffeination",
+      "raw_official_html_sha256": "20059f56e7e0ac3186e05a293e5c27bf95236cd90e2c2c5a26c786c920d1ebab",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Sugar Cane Decaffeination Process",
+        "named_producer": "Centra Cooperativa Indígena del Cauca,"
+      },
+      "actual_source_facts": [
+        {
+          "field": "process",
+          "label": "Process",
+          "value": "Sugar Cane Decaffeination Process",
+          "section": "Colombia Decaf",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 26,
+      "coffee": "Honduras Decaf",
+      "exact_official_url": "https://glorycloudcoffee.com/products/honduras-decaf-reserva-pacavita-organic",
+      "owner_approved_rule": "Historic Honduras-specific URL now denotes rotating multi-origin decaf. Current selected identity wins; Swiss Water is a decaf method only, not primary processing.",
+      "observed_official_source_excerpt": "Swiss Water",
+      "raw_official_html_sha256": "c85c31786b50ba6dec6eeaacc5a9ac49b5e7625f019ec81974db7b8c741fc9f0",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Decaffeination: Swiss Water Process"
+      },
+      "actual_source_facts": [
+        {
+          "field": "process",
+          "label": "Processing",
+          "value": "Washed, and then sun dried",
+          "section": "Different coffee in the source",
+          "conflicting": true
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 28,
+      "coffee": "Ethiopia",
+      "exact_official_url": "https://grindinggearscoffee.com/products/ethiopia",
+      "owner_approved_rule": "Two different current-looking note groups reported: raspberry/cane sugar/lemon zest vs ripe berries/floral/sugarcane. Preserve source facts separately and flag genuine contradiction for member review.",
+      "observed_official_source_excerpt": "Raspberry, Cane Sugar, Lemon Zest; Ripe Berries, Florals, Sugarcane",
+      "raw_official_html_sha256": "a9c5ec74e830cb4d24591320464f799f265c6269169933065556ae13ce75e50b",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "named_producer": "Mengeche Derso"
+      },
+      "actual_source_facts": [
+        {
+          "field": "tasting_notes",
+          "label": "Tasting Notes",
+          "value": "Raspberry, Cane Sugar, Lemon Zest",
+          "section": "",
+          "conflicting": true
+        },
+        {
+          "field": "tasting_notes",
+          "label": "Tasting Notes",
+          "value": "Ripe Berries, Florals, Sugarcane",
+          "section": "",
+          "conflicting": true
+        }
+      ],
+      "existing_conflicts": [
+        "tasting_notes"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_CURRENT_LITERAL_CONFLICT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 25,
+      "coffee": "Traders Blend",
+      "exact_official_url": "https://friedrichscoffee.com/product/traders-blend",
+      "owner_approved_rule": "Old official catalog reports Fruity but current selected page lacks independently verified tasting-note parity. Preserve historical context; do not auto-fill as current.",
+      "observed_official_source_excerpt": "Latin American favorites",
+      "raw_official_html_sha256": "5b5141710a5b8b387cd32c6ddd9849a13056dc374465180ca75bd93929a480d7",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "blend_components": "A rich blend of some of our Latin American favorites."
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 31,
+      "coffee": "Honduras San Lazaro",
+      "exact_official_url": "https://ironcladcoffee.com/products/honduras-san-lazaro",
+      "owner_approved_rule": "Finca San Lazaro farm and Mission Lazarus organization are not interchangeable; retain their explicit respective roles.",
+      "observed_official_source_excerpt": "working directly with the San Lazaro farm; Finca San Lazaro sits high above the town",
+      "raw_official_html_sha256": "383823a614f88ca7e1c6c78ece6d379dd5ca34394008c2bc7212884585837f22",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "SOURCE_CONFIRMED_DEFECT_REPAIR_IN_PR227",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": "Finca San Lazaro is credited farm; Mission Lazarus distinct",
+      "tested_merged_sha": null,
+      "remaining_blocker": "PR227 tests, merge and live all77 replay outstanding"
+    },
+    {
+      "number": 35,
+      "coffee": "Mexico San Isidro Zoquiapan",
+      "exact_official_url": "https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan",
+      "owner_approved_rule": "Ketch Light and Medium-Dark selected variants both mention chocolate but have different companion notes/recipes. Preserve roast-specific notes and shared identity. Existing PR179 may cover parser.",
+      "observed_official_source_excerpt": "As a light roast ... chocolate, red apple, mild nuttiness; as a medium-dark roast ... chocolate, caramel",
+      "raw_official_html_sha256": "921ea67380e37f102a1807ccd5c22c49cb8408c54db449a3bb62f6eef38a2399",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [
+        "roast_level"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 36,
+      "coffee": "Munsinger Light Roast",
+      "exact_official_url": "https://www.kindercoffeelab.com/products/avalon-light-roast",
+      "owner_approved_rule": "Munsinger product could not be confirmed at old Avalon slug. Do not borrow red fruit/candy/grapefruit/red grape/citrus notes from unrelated Kinder coffee.",
+      "observed_official_source_excerpt": "Notes: Red Fruit, Candy, Grapefruit; Notes: Red Grape, Fruity, Sugar-Like Sweetness, Citrus Acidity",
+      "raw_official_html_sha256": "08654453fdc0fcb23fcc04a055bd3a7cbc5919ddc57d9eee15052a02afc3c7ab",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [
+        {
+          "field": "tasting_notes",
+          "label": "Notes",
+          "value": "Red Fruit, Candy, Grapefruit",
+          "section": "Munsinger Light Roast",
+          "conflicting": true
+        },
+        {
+          "field": "tasting_notes",
+          "label": "Notes",
+          "value": "Red Grape, Fruity, Sugar-Like Sweetness, Citrus Acidity",
+          "section": "Roast Details",
+          "conflicting": true
+        }
+      ],
+      "existing_conflicts": [
+        "tasting_notes"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_CURRENT_LITERAL_CONFLICT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 37,
+      "coffee": "San Vicente",
+      "exact_official_url": "https://lamulitacoffee.com/products/san-vicente-huila",
+      "owner_approved_rule": "Selected product prose lists Medium, while image caption may suggest Medium-Dark. Preserve direct selected roast evidence and flag any real current conflicting specification.",
+      "observed_official_source_excerpt": "San Vicente Medium and Medium-dark Roast",
+      "raw_official_html_sha256": "58fc109b99e618e10f4c6d559db516d44b9fa867dfb989d07076baa2ef18903e",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Washed, Sun-dried"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [
+        "roast_level"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_CURRENT_LITERAL_CONFLICT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 39,
+      "coffee": "Ethiopia Sulladjah",
+      "exact_official_url": "https://www.lineageroasting.com/products/copy-of-kenya-gaikundo-2",
+      "owner_approved_rule": "Product lists Abana Estate as producer, but slug is copied from Kenya Gaikundo; direct selected title/specs outrank old URL context.",
+      "observed_official_source_excerpt": "Country Ethiopia, Limu, Abana Estate",
+      "raw_official_html_sha256": "5ddf5d758ba09a6b376c9039ab0c85facb77e507837fdaff07e79a8e8fd1865e",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Dried In Cherry",
+        "harvest_season": "November - January"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 40,
+      "coffee": "Breakfast Blend",
+      "exact_official_url": "https://lowcountrycoffeeroasters.com/products/breakfast-blend",
+      "owner_approved_rule": "Historical origin says Colombia, Costa La Amistad; direct current product component origins not verified. Do not guess missing country for Costa La Amistad or infer all origins.",
+      "observed_official_source_excerpt": "Breakfast Blend showcases Colombia, Costa La Amistad & Robusta",
+      "raw_official_html_sha256": "c7fbddd8ae3ea2613187926a8b7d6789509649715653748d6de65e22bb24b34f",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 38,
+      "coffee": "Guji Ethiopia Organic",
+      "exact_official_url": "https://www.limacoffeeroasters.com/products/ethiopia-guji",
+      "owner_approved_rule": "Harvest October-January reported for selected Lima product; subscription catalog rotates, so separate selected coffee from subscription sourcing.",
+      "observed_official_source_excerpt": "harvested between October and January",
+      "raw_official_html_sha256": "1ae4fcbe375b0a491bccfcd0b3a2d66ec893094a9efc6aeeb1494ab287123414",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "harvest_season": "October and January"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 43,
+      "coffee": "Papua New Guinea Lahamenegu",
+      "exact_official_url": "https://memoirscoffee.com/products/papua-new-guinea-lahamenegu-red-mountain-natural-ax",
+      "owner_approved_rule": "Historical smallholders supplying Lahamenegu wet mill supported indirectly; exact Memoirs lot page inaccessible. Keep claim unverified for current selected lot.",
+      "observed_official_source_excerpt": "The mill’s supply chain services smallholder farms within a 30-kilometer radius",
+      "raw_official_html_sha256": "c2e33640cd3abc8ea9f32066ef152362dcf92977cf7ca78547932449e5723bcd",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 42,
+      "coffee": "Ethiopia Guji Dambi Uddo",
+      "exact_official_url": "https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural",
+      "owner_approved_rule": "Producer attribution: approximately 450 smallholder farms supplying Dambi Uddo Station. Do not claim the station is one individual producer.",
+      "observed_official_source_excerpt": "approximately 450 smallholder farms",
+      "raw_official_html_sha256": "3ce6c0e1d0d92c3938bc5266601edac50b2a4c674629233c6dbea4e39779eeed",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 45,
+      "coffee": "Tranquilo Decaf",
+      "exact_official_url": "https://www.nativocoffeeroasters.com/products/tranquilo-decaf",
+      "owner_approved_rule": "Current Tranquilo decaf lists Colombia origin and Sugar Cane EA decaffeination; primary coffee processing not supplied by decaf method.",
+      "observed_official_source_excerpt": "Colombian specialty coffee; Process: Natural Sugar Cane (EA) Decaf",
+      "raw_official_html_sha256": "550c6f0525196a1135fe1028a8ffc1a2cfa6b0bd265a12f4312052a3e3570a36",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 52,
+      "coffee": "Colombia Decaf",
+      "exact_official_url": "https://queencitycoffeeroasters.com/products/colombia-decaf",
+      "owner_approved_rule": "Swiss Water Process is a separate decaf method, primary processing unknown. Vertical dryers was misplaced as varietal by source: equipment is never cultivar.",
+      "observed_official_source_excerpt": "Varietal: Vertical dryers; Process: Swiss Water Process",
+      "raw_official_html_sha256": "ead4aaa709775eaf1a7f986faef4e7f2948748d0aec94aa1cb2f75c82fd94105",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Swiss Water Process"
+      },
+      "actual_source_facts": [
+        {
+          "field": "process",
+          "label": "Process",
+          "value": "Swiss Water Process",
+          "section": "",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 51,
+      "coffee": "Sumatra",
+      "exact_official_url": "https://quartermaine.com/products/sumatra",
+      "owner_approved_rule": "Earthy, spicy, dark chocolate and tobacco notes appear in older product copy; verify freshness before current source auto-fill.",
+      "observed_official_source_excerpt": "it has earthy, spicy notes that are sometimes described as tasting like dark chocolate or tobacco",
+      "raw_official_html_sha256": "c4c63e6cf843508e6d45a8fba457c240adcc629002bb4f48bb1711f801303dea",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "SOURCE_CONFIRMED_DEFECT_REPAIR_IN_PR227",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": "Literal earthy, spicy notes should be extracted",
+      "tested_merged_sha": null,
+      "remaining_blocker": "PR227 tests, merge and live all77 replay outstanding"
+    },
+    {
+      "number": 50,
+      "coffee": "Tres Cruces Guatemala",
+      "exact_official_url": "https://www.paperplanecoffee.com/products/tres-cruces-honey-processed-guatemala",
+      "owner_approved_rule": "Smallholder farmers in Joyabaj reported for selected Tres Cruces honey Guatemala. Do not invent named producer.",
+      "observed_official_source_excerpt": "smallholder farmers",
+      "raw_official_html_sha256": "0d43ccdf6c185378f7e4b9c9921bcb9b85e4a10f83d74b3742ef004238a9c3b0",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 49,
+      "coffee": "Decaf Espresso Blend",
+      "exact_official_url": "https://orleanscoffee.com/product/espresso-decaf-blend",
+      "owner_approved_rule": "OWNER APPROVED: Dark roast; origin Central America, South America, and Indonesia; notes cocoa, toasted nuts, and a touch of earthiness. Do not invent additional fields.",
+      "observed_official_source_excerpt": "This blend can be used as a drip coffee if you like a dark roasted coffee",
+      "raw_official_html_sha256": "b5b8ad65561d27497724c2c14150eda9ae9f88078067adcf11eb4f47427456e9",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "blend_components": "Crafted from a carefully selected blend of high quality decaf beans from Central America, South America, and Indonesia, this espresso delivers a cup that’s as rich and satisfying as our original espresso."
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 56,
+      "coffee": "Ethiopia Worka Sakaro",
+      "exact_official_url": "https://roadmapcoffeeworks.com/products/ethiopia-worka-sakaro-anaerobic",
+      "owner_approved_rule": "Harvest November-January explicitly reported for selected Ethiopia Worka Sakaro.",
+      "observed_official_source_excerpt": "harvest November-January",
+      "raw_official_html_sha256": "3b644bb851f79955eedf0f31458fb9ef9af49f489165f2d2766548bb35591b9f",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Anaerobic Natural",
+        "named_producer": "Worka Sakaro Washing Station",
+        "farm": "400 smallholder farms",
+        "harvest_season": "Nov - Jan"
+      },
+      "actual_source_facts": [
+        {
+          "field": "harvest_season",
+          "label": "Harvest",
+          "value": "Nov - Jan",
+          "section": "",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 57,
+      "coffee": "Mexico Angel Albino Corzo",
+      "exact_official_url": "https://roadmapcoffeeworks.com/products/mexico-cesmach",
+      "owner_approved_rule": "Harvest December-March explicitly reported for selected Mexico Angel Albino Corzo.",
+      "observed_official_source_excerpt": "harvest December-March",
+      "raw_official_html_sha256": "6f87f2bfa404ce997661070e58bfb8ea23a990e79d658ceec3b5b922365f4889",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "named_producer": "FFESICH cooperative",
+        "farm": "FFESICH Cooperative",
+        "harvest_season": "December - March"
+      },
+      "actual_source_facts": [
+        {
+          "field": "harvest_season",
+          "label": "Harvest",
+          "value": "December - March",
+          "section": "",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 58,
+      "coffee": "Guatemala Ella Todos Santos",
+      "exact_official_url": "https://www.swroasting.coffee/product/guatemala-ella-todos-santos-medium-roast/25NBJDMXCAYX4YC5XJZAYZDG",
+      "owner_approved_rule": "Chocolate note was found in third-party copies, but exact official selected page inaccessible; do not fill from third-party as confirmed current fact.",
+      "observed_official_source_excerpt": "Official product page only rendered static Square HTML shell with meta description, no selected product body",
+      "raw_official_html_sha256": "b9a117aa2b12d2d925c5ac1ae11dd4d2b61391bc4d3b8725b77f8917d046b13e",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "SOURCE_UNAVAILABLE_DYNAMIC_BODY",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": "Square dynamic source content unavailable"
+    },
+    {
+      "number": 60,
+      "coffee": "Walia Ibex Organic Decaf",
+      "exact_official_url": "https://sextantcoffee.com/products/plandanas-reserve-sextant-coffee",
+      "owner_approved_rule": "Selected Planadas/Tolima, Colombia decaf reportedly identifies 39 unnamed growers, Sugar Process decaffeination, almond/brown sugar/tart cherry; old Walia Ibex vs Planadas URL identity must be checked.",
+      "observed_official_source_excerpt": "Walia Ibex - Organic Decaf; an association gathers 39 small coffee growers",
+      "raw_official_html_sha256": "3ff763e31f75ca2f2f09b82d63259150880e8d6634255eaf5e8f4aebbede8fbc",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Decaffeination: sugar process"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [
+        "origin"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 61,
+      "coffee": "Organic Half-Caff",
+      "exact_official_url": "https://simpaticocoffee.com/products/organic-low-acid-half-caff-coffee",
+      "owner_approved_rule": "Simpatico Half-Caff lists Oaxaca; maintain half-caf state and do not apply fully decaf-only method field.",
+      "observed_official_source_excerpt": "Oaxaca tag; half-caff",
+      "raw_official_html_sha256": "faa8a036c56543fec61a050bb06b3c43cb7a300d4e209f7546830a8c5bc5d12f",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 62,
+      "coffee": "Low Acid Decaf Dark",
+      "exact_official_url": "https://simpaticocoffee.com/products/simpatico-low-acid-decaf-coffee-dark-smooth-roast",
+      "owner_approved_rule": "Simpatico Dark Decaf exact product has Oaxaca sourcing tag; roaster sourcing may support Mexico. Water Process decaffeination separate from primary process.",
+      "observed_official_source_excerpt": "Oaxaca tag; mountain water processed",
+      "raw_official_html_sha256": "6ca5d41de83b9998ee88090e006669cbe257475f0348bd6137764fc5b7592bf7",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 63,
+      "coffee": "Organic Low Acid Medium",
+      "exact_official_url": "https://simpaticocoffee.com/products/simpatico-low-acid-coffee-medium-smooth-roast",
+      "owner_approved_rule": "Simpatico Medium Smooth describes Oaxaca, Mexico; verify whether product-specific vs general sourcing before populating.",
+      "observed_official_source_excerpt": "Oaxaca tag; medium smooth roast",
+      "raw_official_html_sha256": "c934868172634d48b7a261e6f685265c4e8bf9b6f0a9439b0d0a8cfd4ae4ab25",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 64,
+      "coffee": "Supremo Colombia Decaf",
+      "exact_official_url": "https://sodality.coffee/products/supremo-colombia-decaf",
+      "owner_approved_rule": "Swiss Water on historical Sodality product not verified against current exact product/lot; primary processing must remain unknown if unpublished.",
+      "observed_official_source_excerpt": "Process: Swiss Water Decaf; Producer: COMEXIM Ltda",
+      "raw_official_html_sha256": "0a4960331fc0143c09a10b20ffc23776803368eedcd6d37d74e6b1e0a8efe241",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Swiss Water Decaf"
+      },
+      "actual_source_facts": [
+        {
+          "field": "process",
+          "label": "Process:",
+          "value": "Swiss Water Decaf",
+          "section": "Supremo Colombia Decaf",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 66,
+      "coffee": "Honduras Elvin Suazo",
+      "exact_official_url": "https://staccatoroasters.com/products/honduras-elvin-suazo-natural-coffee",
+      "owner_approved_rule": "Historical December-March harvest window could not be substantiated on current Staccato page; do not fill or infer.",
+      "observed_official_source_excerpt": "Harvest: December–March",
+      "raw_official_html_sha256": "861d2d36557c53ef082742adbe1d6685e4757262eebed382c0da36904e15b997",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "named_producer": "Elvin Suazo",
+        "farm": "Finca Rancho Escondido",
+        "harvest_season": "December–March"
+      },
+      "actual_source_facts": [
+        {
+          "field": "harvest_season",
+          "label": "Harvest",
+          "value": "December–March",
+          "section": "Coffee Details",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 67,
+      "coffee": "Brazil Capricornio Dulce Signature",
+      "exact_official_url": "https://www.stageline.coffee/product-page/brazil-capricornio-dulce-signature",
+      "owner_approved_rule": "Capricornio explicitly named as producing organization. Mixed processing Natural Yellow Catuai (50%) and Honey Mondo Novo (50%) uses existing owner-approved multi-component policy; no new question.",
+      "observed_official_source_excerpt": "50% naturally processed yellow catuai cherries and 50% honey processed mondo novo cherries",
+      "raw_official_html_sha256": "7fc5ca907a63f90a3a8b3d1e46d94d640efc35df3d3f5f11920d76d711760ad1",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "blend_components": "50% naturally processed yellow catuai cherries; 50% honey processed mondo novo cherries",
+        "processing_detail": "Natural, Honey"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 70,
+      "coffee": "Faver Ninco Colombia",
+      "exact_official_url": "https://www.tandemcoffee.com/products/faver-ninco-santa-maria-huila-colombia",
+      "owner_approved_rule": "Selected Tandem Faver Ninco main harvest May-August explicitly reported.",
+      "observed_official_source_excerpt": "main harvest season that runs from May to August",
+      "raw_official_html_sha256": "72516c8fdc7449c7143774898b915b4b4a38bf654404ba0ba44858f2f0ec29af",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "harvest_season": "May–August",
+        "named_producer": "Faver Ninco"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 72,
+      "coffee": "Horizon Organic",
+      "exact_official_url": "https://thrivefarmers.com/products/horizon-organic",
+      "owner_approved_rule": "OWNER APPROVED exact selected page: Roast Medium; Notes Fruity, Toasted Cereal, Chocolate; Origin Guatemala / Nicaragua; Region Huehuetenango(GT) / Matagalpa(NI); Process Washed; Varietal Caturra, Pache Verde; Elevation 1750 masl; Producer ACODIHUE. Associate ACODIHUE with Guatemalan component rather than claiming producer for both countries.",
+      "observed_official_source_excerpt": "ACODIHUE ... organic producing communities ... Huehuetenango, Guatemala (one component of Guatemala/Nicaragua blend)",
+      "raw_official_html_sha256": "1e1e28df9aa98a426a8e59e10668324be0904c4e0e9f7fb8663a48307102d65f",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "blend_components": "Guatemala (Huehuetenango): ACODIHUE (named producing community; component only)"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 71,
+      "coffee": "Ethiopia Guji Organic",
+      "exact_official_url": "https://roasterympls.com/products/organic-ethiopia-guiji",
+      "owner_approved_rule": "Smallholder farmers producer attribution. Owner later wrote \"Smallholder farmers for 72\" while discussing #71, and previous assistant interpreted as #71; avoid replacing #72 ACODIHUE.",
+      "observed_official_source_excerpt": "Ethiopia Guji grown by smallholder farmers",
+      "raw_official_html_sha256": "253afb009b594f617f235b542f9945e1c82d75417624cd847ab22ea034308d6f",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {},
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 69,
+      "coffee": "Colombia Sugarcane Decaf",
+      "exact_official_url": "https://subterracoffee.com/products/decaf-colombia-sugarcane-medium-roast",
+      "owner_approved_rule": "Sugarcane decaf is Sugar Process decaffeination, not proof of primary coffee processing.",
+      "observed_official_source_excerpt": "Sugarcane decaf",
+      "raw_official_html_sha256": "e2650fe3fa6c47f80786fa029ebdbefc23dd4acf9e2858f1119b269ed0fa8ef3",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "processing_detail": "Decaffeination: sugarcane decaffeination process"
+      },
+      "actual_source_facts": [],
+      "existing_conflicts": [],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_LEGITIMATE_BLANK_OR_RESTRICTED",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 73,
+      "coffee": "Dedication Costa Rica",
+      "exact_official_url": "https://www.unlockedcoffee.com/products/dedication-costa-rica",
+      "owner_approved_rule": "Selected Unlocked Dedication Costa Rica reports harvest December-April and Microlot; preserve categories distinctly.",
+      "observed_official_source_excerpt": "Harvest: December–April; Lot: Microlot; main product and bottom taxonomy differ on process/variety",
+      "raw_official_html_sha256": "bce55166049334e1a06851b4e2592013e6d2a6a86fb707c1da2875ac085e9d6d",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "named_producer": "Las Lajas Micromill",
+        "farm": "Finca Chilamate",
+        "harvest_season": "December–April"
+      },
+      "actual_source_facts": [
+        {
+          "field": "harvest_season",
+          "label": "Harvest",
+          "value": "December–April",
+          "section": "Shop our best sellers! / Coffee Details",
+          "conflicting": false
+        },
+        {
+          "field": "lot_type",
+          "label": "Lot",
+          "value": "Microlot",
+          "section": "Shop our best sellers! / Coffee Details",
+          "conflicting": false
+        }
+      ],
+      "existing_conflicts": [
+        "origin",
+        "process",
+        "variety"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "VERIFIED_QUALIFIED_SOURCE_CONTEXT",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": null,
+      "tested_merged_sha": null,
+      "remaining_blocker": null
+    },
+    {
+      "number": 76,
+      "coffee": "Ethiopia Gera Natural",
+      "exact_official_url": "https://www.wreckingballcoffee.com/products/ethiopia-gedeb-banko-gotiti-12oz",
+      "owner_approved_rule": "Historical Ethiopia Gera Natural notes caramel, milk chocolate, mild berry; same URL now appears to serve different Yirgacheffe coffee. Do not transplant prior coffee notes into current product.",
+      "observed_official_source_excerpt": "Tastes like: Caramel, milk chocolate with a lovely mild berry finish",
+      "raw_official_html_sha256": "95e15e5c05b1079213f20178157cc4628e2f64dced4b9c174aeb5d21cb8ad807",
+      "previous_extracted_canonical_value": null,
+      "actual_extraction_context": {
+        "farm": "Abana Coffee Estate"
+      },
+      "actual_source_facts": [
+        {
+          "field": "tasting_notes",
+          "label": "Tastes like",
+          "value": "Caramel, milk chocolate with a lovely mild berry finish.",
+          "section": "Tastes like: Caramel, milk chocolate with a lovely mild berry finish.",
+          "conflicting": true
+        }
+      ],
+      "existing_conflicts": [
+        "tasting_notes"
+      ],
+      "add_coffee_preview": {
+        "visible": true,
+        "conflict_warning": true,
+        "qualified_process_warning": true,
+        "qualified_process_review_export": true
+      },
+      "expected_result": "SOURCE_CONFIRMED_DEFECT_REPAIR_IN_PR227",
+      "independently_reviewed_actual_source_html": true,
+      "issue33_correction": "Selected Tastes like direct statement should outrank marketing boilerplate",
+      "tested_merged_sha": null,
+      "remaining_blocker": "PR227 tests, merge and live all77 replay outstanding"
+    }
+  ]
+}
