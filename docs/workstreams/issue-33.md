@@ -1,3 +1,9 @@
+## October 29 UTC — Ketch purchased-roast HTML fallback safely merged, exact CI verified, READY NOT DEPLOYED
+
+Owner reported already-deployed PR179 Ketch roast selection did not appear. Root cause pathway: optional Shopify product JSON unavailable leaves no `roast_variants`, so no chooser, and generic preliminary autofill may remain mistaken for member entry. PR237 adds a strict current-product-only HTML fieldset/select purchase option fallback reusing existing Ketch roast-specific tasting/espresso description parser; updates generated notes on selection, preserves genuinely edited inputs, and does not perform new outbound requests. This is generic to roasters with similarly explicit data, NOT a guarantee for arbitrary platforms. PR head bde416b15c7708b924cf4a734c7219476280294c passed validate/lint/build, cloud/mobile-browser, SQL, security, approval, exact archive and visual review; first test HEAD e2125870 lint warning corrected and full rerun PASS. Non-force merged SHA 35059b37968229e422cf7f09a9e906c2c5d2e839 independently read back; merged-source validate, approval, cloud, review, mobile-browser PASS. Frozen603 and public source workflows SKIPPED, no claims of direct production signed-in Ketch acceptance. Queue DIC-Q-33-live-purchased-roast-html-autofill READY not deployed. Actual Netlify current deploy 6ae27f32bfae09ad8745e19b still points at release 05cf9eb1; owner has not authorized a new publish. All previous member data, locked decisions, original603 corpus, current SQL/Edge/Auth and unrelated release items untouched.
+
+---
+
 ### CI repair: Ketch PR237
 Exact first PR HEAD e2125870 had 1,958 passing Node tests/6 skips but `validate` failed lint `no-duplicate-imports` on a newly appended test import; no production/runtime test failed. Consolidated the test's import line in this same-commit repair. Re-run exact corrected-head CI before claiming READY; no deployment.
 
