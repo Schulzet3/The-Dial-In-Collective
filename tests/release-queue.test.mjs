@@ -63,3 +63,12 @@ test('CI must detect any app file introduced without even an IN_PROGRESS queue i
  assert.equal(assessIntakeCoverage({...q,items:[pending]},['site/cloud/shot_card.js']).tracked,true);
  assert.equal(assessIntakeCoverage({...q,items:[]},[]).tracked,true);
 });
+
+test('approved service-worker template is deployable but arbitrary PWA scripts remain excluded',()=>{
+ const path='scripts/pwa/service-worker.template.txt';
+ assert.deepEqual(deployableChangedPaths([path,'scripts/pwa/arbitrary.sh']),[path]);
+ const item={...queued,scope_paths:[path]};
+ const result=assess({...q,items:[item]},[path]);
+ assert.equal(result.ready,true,result.errors.join('; '));
+ assert.deepEqual(queueSchemaErrors({...q,items:[item]}),[]);
+});
