@@ -1,3 +1,17 @@
+## October 29 UTC — Corrected blocked approval/intake CI on PR227
+
+Head 9c5975 approval CI failed because code paths were not included in docs/RELEASE_QUEUE.json; promptly added TESTING row DIC-Q-33-50-source-corrections with both exact app paths, CI and merge/replay requirements and no READY/publish assertion. Re-run exact-head CI after this correction.
+
+---
+
+## October 29 UTC — Issue #33 source-level 50-row independent review; corrections under test (NO DEPLOY)
+
+Owner-authorized continuation from development `27920ea2f7ed8e36adc6eb0fa4f115e3b06ac2cf`. Retrieved prior official 77-page workflow `40822673151`, downloaded artifact `12874948413`, and **independently inspected the actual exact selected HTML page content** for all 50 residual coffees, verifying all 50 archived SHA256 source digests. This supersedes the earlier diagnostic-only 50-row report but does not claim all 50 application decisions are complete. Initial independent outcomes: 21 legitimately blank, 20 qualified source-context-only, 4 actual competing review cases, 4 clear parser defects (#21 COMSA selected supplier, #31 Finca San Lazaro not the Mission Lazarus nonprofit, #51 Quartermaine Sumatra literal earthy/spicy notes, #76 Wrecking Ball current Gera direct Tastes like versus generic marketing), 1 source-limited Square page (#58; JS shell does not prove absence). Source-bound original capture tested at `96486e9d503c029cc87adc5133226f7f3a0886af` with 77/77 parses/previews, but not yet retested for these corrections.
+
+This code commit adds generic selected-product producer/flavor evidence with negative cross-product, noncurrent educational and competing-direct-list tests; no roaster/URL hardcoding. Reconcile exact-head CI and rerun all 77 before queue status changes. Immutable restricted original 603 not rerun; no claim of production SQL/Auth/browser repeat; prior independent scoped READY items and all member data preserved. Only isolated development; no deploy/publish.
+
+---
+
 ## October 29 UTC — 50-case decision-level structured source review (NO DEPLOY)
 
 Reviewed all 50 non-present target rows individually against their owner-approved decision, fresh selected-product parser output, exact official URL/digest, literal related source facts, component details, current conflict flags and rendered Add Coffee preview. Receipt `docs/audits/issue33-50-individual-decision-source-review-20261029.json` lists each case, no skipped rows. Five real field conflicts retained, ten contextual-only cases retained, 35 target blanks retained; no unsafe automatic value fill authorized by structured evidence. **Important limitation:** the structured parser output is not independent human inspection of the captured raw HTML and cannot certify that 35 missing values are unpublished; do not mark all 50 independently source-certified or parent Issue33 READY on this basis. Current direct source #49 wording 'if you like a dark roasted coffee' is not unambiguous exact roast tier; leave auto field blank despite historical owner Dark decision until exact product evidence supports it. Continue raw-source verification where accessible. Existing scoped READY items unchanged, no production or original603 changes.
