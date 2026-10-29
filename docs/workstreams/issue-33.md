@@ -1,3 +1,9 @@
+## October 29 UTC — Corrected blocked approval/intake CI on PR227
+
+Head 9c5975 approval CI failed because code paths were not included in docs/RELEASE_QUEUE.json; promptly added TESTING row DIC-Q-33-50-source-corrections with both exact app paths, CI and merge/replay requirements and no READY/publish assertion. Re-run exact-head CI after this correction.
+
+---
+
 ## October 29 UTC — Issue #33 source-level 50-row independent review; corrections under test (NO DEPLOY)
 
 Owner-authorized continuation from development `27920ea2f7ed8e36adc6eb0fa4f115e3b06ac2cf`. Retrieved prior official 77-page workflow `40822673151`, downloaded artifact `12874948413`, and **independently inspected the actual exact selected HTML page content** for all 50 residual coffees, verifying all 50 archived SHA256 source digests. This supersedes the earlier diagnostic-only 50-row report but does not claim all 50 application decisions are complete. Initial independent outcomes: 21 legitimately blank, 20 qualified source-context-only, 4 actual competing review cases, 4 clear parser defects (#21 COMSA selected supplier, #31 Finca San Lazaro not the Mission Lazarus nonprofit, #51 Quartermaine Sumatra literal earthy/spicy notes, #76 Wrecking Ball current Gera direct Tastes like versus generic marketing), 1 source-limited Square page (#58; JS shell does not prove absence). Source-bound original capture tested at `96486e9d503c029cc87adc5133226f7f3a0886af` with 77/77 parses/previews, but not yet retested for these corrections.
