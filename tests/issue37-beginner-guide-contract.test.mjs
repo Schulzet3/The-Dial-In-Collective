@@ -8,6 +8,7 @@ const guide=read('docs/guides/BEGINNER_QUICKSTART_DRAFT.md');
 const register=read('docs/guides/ISSUE37_VALIDATION_REGISTER.md');
 const app=read('site/cloud/main.js');
 const ui=read('site/lib/ui.js');
+const shotCard=read('site/cloud/shot_card.js');
 
 test('First Shot guide uses actual supported login, setup, Add Coffee and Log Shot labels',()=>{
  const mainLabels=[
@@ -18,13 +19,14 @@ test('First Shot guide uses actual supported login, setup, Add Coffee and Log Sh
   'Starting Shot Style','Log First Shot','Starting Recommendation','Log A Shot',
   'Dose (g)','Yield (g)','Time (s)','Grind Setting','Use Recommendation',
   'Notes (Optional','Save Shot & Get Suggestion','Next Shot Recommendation','Shot Feedback',
-  'Shot History','Make Current Recipe','Advanced Setup Options','Track Slow Feeding',
+  'Shot History','Advanced Setup Options','Track Slow Feeding',
   'Track Brew Temperature','Save Advanced Options','Cloud Sync Details'
  ];
  for(const label of mainLabels){
   assert.ok(app.includes(label),'app source lacks expected control: '+label);
   assert.ok(guide.includes(label),'guide lacks actual control: '+label);
  }
+ assert.ok(shotCard.includes('Make Current Recipe'),'history card has the owner-approved action');
  assert.match(ui,/How did it taste\?/);
  assert.match(guide,/How did it taste\?/);
  assert.deepEqual(STYLES,['Traditional','Turbo','Fast-Flow','Ristretto','Lungo']);
