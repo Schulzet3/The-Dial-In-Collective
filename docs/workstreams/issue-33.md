@@ -1,3 +1,9 @@
+## October 29 UTC — PR251 tracked in release queue for exact-source validation (NO DEPLOY)
+
+Issue33 direct selected coffee prose Origin correction has an explicit, nonpublishable TESTING entry `DIC-Q-33-original603-direct-region-country-prose` covering `src/server/coffee-identity-evidence.mjs`. First approval workflow correctly blocked untracked application source. Registered it in the queue with scoped test evidence and precise pending blockers; after exact CI/nonforce integration, reconcile into READY only with independent proof. No production or member data operations.
+
+---
+
 ## October 29 UTC — pre-CI parser literal correction for Quartermaine source rule (NO DEPLOY)
 
 Read the authored regex back from exact PR251 source and identified a single-quoted JS string containing an invalid escaped apostrophe in the new mountain possessive pattern. Replaced it with literal RegExp Unicode escapes `[\\u2019\\x27]` for curly/ASCII apostrophe without altering matched source semantics. This is a syntax correction in the same code+scoped-journal commit; fresh exact-head GitHub CI remains required. No deployment.
