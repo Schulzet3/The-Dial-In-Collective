@@ -1,3 +1,4 @@
+import {productMarkup,coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 // Explicit selected-coffee roast alternatives, never SEO or an unrelated
 // product. Each option belongs to one purchase roast, not a source conflict.
 const labels={
@@ -115,5 +116,58 @@ export function extractSelectedCoffeeRoastVariants({description='',options=[]}={
    ...(recipe?{roaster_recipe:recipe}:{})};
  });
  if(variants.filter(v=>v.fields.tasting_notes).length<2)return [];
+ return variants;
+}
+
+/* Sometimes the exact Shopify product JSON endpoint is unavailable or runs
+   beyond the shared lookup deadline. The *visible product purchase controls*
+   are sufficient to recover its real roast choices; generic descriptions,
+   SEO, scripts, other products, and educational roast comparisons are not. */
+export function extractSelectedCoffeeRoastVariantsFromHtml(html){
+ if(typeof html!=='string'||html.length>2_000_000)return [];
+ const main=html.match(/<main\b[^>]{0,1500}>[\s\S]*?<\/main\s*>/i);
+ // No positive product-page scope, no invented purchasable variants.
+ if(!main)return [];
+ const controls=main[0]
+  .replace(/<(?:script|style|template|noscript)\b[^>]*>[\s\S]*?<\/(?:script|style|template|noscript)\s*>/gi,' ')
+  .slice(0,600000);
+ const offered=[];
+ const add=values=>{
+  const options=[...new Set(values.map(roastId))].filter(id=>labels[id]);
+  if(options.length>1)offered.push(options);
+ };
+ for(const item of controls.matchAll(/<fieldset\b[^>]{0,1500}>([\s\S]{0,18000}?)<\/fieldset\s*>/gi)){
+  const opening=item[0].slice(0,item[0].indexOf('>')+1);
+  if(/\s(?:hidden|aria-hidden\s*=\s*["']true["'])\b/i.test(opening))continue;
+  const legend=item[1].match(/<legend\b[^>]*>([\s\S]{0,600}?)<\/legend\s*>/i);
+  if(!legend||!/^Roast(?:\s+Level|\s+Profile)?$/i.test(tidy(legend[1])))continue;
+  add([...item[1].matchAll(/<input\b([^>]{0,1500})>/gi)]
+   .map(input=>coffeeHtmlAttributes(input[1]))
+   .filter(attrs=>/^(?:radio|checkbox)$/i.test(attrs.type||'')&&
+     !Object.hasOwn(attrs,'disabled'))
+   .map(attrs=>attrs.value||''));
+ }
+ for(const item of controls.matchAll(/<select\b([^>]{0,1500})>([\s\S]{0,18000}?)<\/select\s*>/gi)){
+  const attrs=coffeeHtmlAttributes(item[1]);
+  if(!/^(?:options\[\s*roast(?:\s+level|\s+profile)?\s*\]|roast(?:\s+level|\s+profile)?)$/i.test(attrs.name||'')||
+    Object.hasOwn(attrs,'disabled'))continue;
+  add([...item[2].matchAll(/<option\b([^>]{0,1200})>([\s\S]{0,500}?)<\/option\s*>/gi)]
+   .filter(option=>!Object.hasOwn(coffeeHtmlAttributes(option[1]),'disabled'))
+   .map(option=>coffeeHtmlAttributes(option[1]).value||tidy(option[2])));
+ }
+ if(!offered.length)return [];
+ // Multiple independent option controls must agree; never union unrelated
+ // products or two conflicting purchase selectors into a fictional choice.
+ const unique=offered.map(ids=>ids.slice().sort().join('|'));
+ if(new Set(unique).size!==1)return [];
+ const description=productMarkup(html);
+ if(!description)return [];
+ const anchor=description.search(/\b(?:Tasting\s+Notes\s+by\s+Roast|Flavor\s+Profile|As\s+(?:a|an)\s+(?:light|medium|dark))\b/i);
+ const excerpt=description.length<=159000?description:
+  anchor>=0?description.slice(anchor,anchor+159000):description.slice(0,159000);
+ const variants=extractSelectedCoffeeRoastVariants({description:excerpt,
+  options:[{name:'Roast Level',values:offered[0]}]});
+ // The extractor requires directly attributed tasting notes for at least
+ // two purchase options, so a generic "light vs dark" guide cannot pass.
  return variants;
 }

@@ -115,10 +115,14 @@ export function applyCoffeeRoastVariant(form,previous,next){
   const oldValue=String(previous?.fields?.[key]||'');
   const nextValue=String(next?.fields?.[key]||'');
   // Never overwrite something the member typed, including corrections.
-  if(String(control.value||'').trim()&&control.value!==oldValue)continue;
+  // Original lookup can pre-fill generic tasting notes before a user chooses
+  // a roast. Treat only our unchanged autofill as replaceable, not user edits.
+  const autoValue=control.dataset?.coffeeAutofillValue;
+  if(String(control.value||'').trim()&&control.value!==oldValue&&control.value!==autoValue)continue;
   if(control.tagName==='SELECT'&&nextValue&&![...control.options].some(x=>x.value===nextValue))continue;
   if(control.value===nextValue)continue;
   control.value=nextValue;
+  if(control.dataset)control.dataset.coffeeAutofillValue=nextValue;
   control.dispatchEvent(new Event('change',{bubbles:true}));
   changed++;
  }
@@ -310,7 +314,9 @@ export function applyCoffeeUrlFields(form,result){
   if(!field||typeof value!=='string'||!value.trim())continue;
   if(String(field.value||'').trim()){skipped++;continue;}
   if(field.tagName==='SELECT'&&![...field.options].some(o=>o.value===value)){skipped++;continue;}
-  field.value=key==='elevation_m'?elevationWithDefaultMeters(value):value;field.dispatchEvent(new Event('change',{bubbles:true}));filled++;
+  field.value=key==='elevation_m'?elevationWithDefaultMeters(value):value;
+  if(field.dataset)field.dataset.coffeeAutofillValue=field.value;
+  field.dispatchEvent(new Event('change',{bubbles:true}));filled++;
  }
  return {filled,skipped};
 }

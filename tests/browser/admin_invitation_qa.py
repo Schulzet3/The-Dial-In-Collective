@@ -125,6 +125,21 @@ with sync_playwright() as p:
  assert page.get_by_text("One code admits one verified account, once.",exact=False).count()==1
  assert page.locator('#admin-invite-uses').count()==0
  assert page.evaluate("Object.keys(window.__calls.find(x=>x.name==='dic_admin_issue_invite').args).join(',')")=="p_label"
+ # Actual button/handler/render path with controlled clipboard outcomes; this
+ # does not certify native iOS clipboard permission prompts or production auth.
+ page.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>{window.__copiedInvite=value;}}})")
+ page.get_by_role("button",name="Copy Code",exact=True).click()
+ page.get_by_text("Code copied. Share it privately with your tester.",exact=True).wait_for()
+ assert page.evaluate("window.__copiedInvite")==code
+ page.evaluate("() => { navigator.clipboard.writeText=async()=>{throw Error('Clipboard denied by test browser');}; }")
+ page.get_by_role("button",name="Copy Code",exact=True).click()
+ page.get_by_text("Clipboard denied by test browser",exact=False).wait_for()
+ assert page.locator("#admin-new-code").inner_text()==code
+ assert page.get_by_text("Code copied. Share it privately with your tester.",exact=True).count()==0
+ page.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:undefined})")
+ page.get_by_role("button",name="Copy Code",exact=True).click()
+ page.get_by_text("Clipboard unavailable. Select the displayed code to copy manually.",exact=False).wait_for()
+ assert page.locator("#admin-new-code").inner_text()==code
  page.screenshot(path=str(OUT/"admin_invitation_generated_mobile.png"),full_page=True)
 
  page.get_by_role("button",name="Refresh",exact=True).click()

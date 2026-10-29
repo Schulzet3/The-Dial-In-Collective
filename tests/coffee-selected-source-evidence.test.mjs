@@ -155,3 +155,69 @@ test('Issue33 quality-grade guard rejects uncorroborated tier and other current 
   assert.deepEqual(found(candidates,'release_label'),[],html);
  }
 });
+
+
+// Issue33 #59: the current Seeds product is Yirgacheffe Habtamu although its
+// recycled Shopify URL slug still names a different Guji Getachew coffee.
+const seedsUrl='https://seedscoffee.com/products/ethiopia-guji-getachew-copy';
+const seedsName='Ethiopia Yirgacheffe Habtamu';
+const seedsEnterprise='Habtamu Fekadu Aga (‘Kuri Mountain Coffee’) was founded in 2015 by Aaga Dinsa, the grandson of a coffee farmer in Kuri kebele.';
+const seedsCultivation='The farm Aaga Dinsa inherited from his grandfather continues to serve as the center of the export operation with 105 hectares of planting in Kuri kebele and 837 hectares total including the farms of the 144 registered outgrowers that contribute cherry to company washing stations in Wolega, Guji and Jimma.';
+const seedsStory='<p>'+seedsEnterprise+'</p><p>'+seedsCultivation+'</p>';
+
+test('Issue33 #59 exact selected grower/export enterprise requires founder, farm, outgrowers and selected coffee identity',()=>{
+ const candidates=selectedStructuredCoffeeEvidence({title:seedsName,description:seedsStory,tags:[]});
+ assert.deepEqual(found(candidates,'producer'),['Habtamu Fekadu Aga (Kuri Mountain Coffee)']);
+ assert.match(candidates.find(f=>f.field==='producer').quote,/outgrowers that contribute cherry/);
+ const shopify=extractShopifyAjaxData({
+  title:seedsName,handle:'ethiopia-guji-getachew-copy',tags:[],description:seedsStory
+ },shopifyProductRequest(seedsUrl));
+ assert.equal(shopify?.fields?.producer,'Habtamu Fekadu Aga (Kuri Mountain Coffee)');
+ const html='<script type="application/ld+json">'+JSON.stringify({
+  '@type':'Product',name:seedsName,url:seedsUrl,description:seedsStory
+ })+'</script><main><h1>'+seedsName+'</h1></main>';
+ const result=extractPublicCoffeeFacts(html,{source_url:seedsUrl});
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.name,seedsName);
+ assert.equal(result.fields.producer,'Habtamu Fekadu Aga (Kuri Mountain Coffee)');
+ assert.ok(!result.conflicts?.includes('producer'));
+});
+
+test('Issue33 grower/export enterprise rejects founder-only, another lot and historical source identities',()=>{
+ for(const [title,description] of [
+  [seedsName,'<p>'+seedsEnterprise+'</p>'],
+  [seedsName,'<p>'+seedsCultivation+'</p>'],
+  [seedsName,'<p>'+seedsEnterprise+'</p><p>The founder advises a roastery but has no company farm or cherry suppliers.</p>'],
+  [seedsName,'<p>'+seedsEnterprise+'</p><p>'+seedsCultivation.replace('contribute cherry','sell packaging')+'</p>'],
+  ['Ethiopia Guji Getachew',seedsStory],
+  [seedsName,'<p>Last season, '+seedsEnterprise+'</p><p>'+seedsCultivation+'</p>']
+ ]){
+  const result=selectedStructuredCoffeeEvidence({title,description,tags:[]});
+  assert.deepEqual(found(result,'producer'),[],title+' / '+description);
+ }
+ const offProduct={'@type':'Product',name:seedsName,url:'https://seedscoffee.com/products/other-coffee',description:seedsStory};
+ const current={'@type':'Product',name:'Other Coffee',url:seedsUrl,description:'Other selected lot with no specified producer'};
+ const result=extractPublicCoffeeFacts('<script type="application/ld+json">'+JSON.stringify([current,offProduct])+
+  '</script><main><h1>Other Coffee</h1></main>',{source_url:seedsUrl});
+ assert.equal(result.fields.producer,undefined);
+});
+
+
+test('Issue33 #59 real flattened selected coffee notes never become part of the producing enterprise name',()=>{
+ const withLeadingNotes='<p>Tastes Like: Cherry, Papaya, Lime Candy</p>'+seedsStory;
+ const variants=[
+  selectedStructuredCoffeeEvidence({title:seedsName,description:withLeadingNotes,tags:[]}),
+  selectedStructuredCoffeeEvidence({title:seedsName,description:'Tastes Like: Cherry, Papaya, Lime Candy '+seedsEnterprise+' '+seedsCultivation,tags:[]})
+ ];
+ for(const facts of variants){
+  assert.deepEqual(found(facts,'producer'),['Habtamu Fekadu Aga (Kuri Mountain Coffee)']);
+  assert.ok(!JSON.stringify(found(facts,'producer')).includes('Lime Candy'));
+ }
+ const shopify=extractShopifyAjaxData({title:seedsName,handle:'ethiopia-guji-getachew-copy',tags:[],description:withLeadingNotes},shopifyProductRequest(seedsUrl));
+ assert.equal(shopify?.fields?.producer,'Habtamu Fekadu Aga (Kuri Mountain Coffee)');
+ const json={'@type':'Product',name:seedsName,url:seedsUrl,description:withLeadingNotes};
+ const html='<script type="application/ld+json">'+JSON.stringify(json)+'</script><main><h1>'+seedsName+'</h1><p>Tastes Like: Cherry, Papaya, Lime Candy</p></main>';
+ const result=extractPublicCoffeeFacts(html,{source_url:seedsUrl});
+ assert.equal(result.fields.producer,'Habtamu Fekadu Aga (Kuri Mountain Coffee)');
+ assert.ok(!result.conflicts?.includes('producer'));
+});

@@ -4560,5 +4560,40 @@
     ],
     "implementation": "Scope retirement only. Relevant current app sources have URL/manual input and no screenshot/Claude workflow; no runtime code change needed. No new deployable queue item.",
     "closure": "Close Issue #18 with reason not_planned; outstanding checkboxes are canceled by owner, not passed."
+  },
+  "current_owner_backup_direct_folder_20261029": {
+    "decision_id": "OPS-BACKUP-ONLY-DIRECT-FOLDER-20261029",
+    "status": "Locked",
+    "date": "2026-10-29",
+    "issue": 28,
+    "owner_source": "Owner explicitly requested: only save encrypted backups in DIC Automated Encrypted Backups; reported moving all files there.",
+    "decision": "Only the existing private Google Drive folder DIC Automated Encrypted Backups (ID 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf) may receive new offsite encrypted backup archives, as direct children; never My Drive root or nested The Dial In Collective Backups (ID 1opb3JySDaNVaP0t9ocpNeXm2Kh23jQhv).",
+    "supersedes": "Earlier references to The Dial In Collective Backups as the backup destination; changes only the folder placement, not the external backup provider, schedules, privacy or protection model.",
+    "implementation": "Updated existing enabled ChatGPT backup courier and watchdog tasks to exact direct parent and logical artifact deduplication; per-file Google Drive metadata confirmed 32 existing backup objects moved from nested to approved folder; zero My Drive root backup objects.",
+    "limits": "Two older Oct22 attempt archives remain intact in nested folder because provider move was blocked by OpenAI safety checks. Historical Apps Script project remains nested to avoid trigger breakage; live Apps Script source/settings not exposed via connected Drive (403); next natural destination, retention and natural exception alert remain separate verification under Issue #28.",
+    "preserve": [
+      "All archived ciphertext and file IDs; do not delete, overwrite or decrypt for folder organization",
+      "Owner-only permissions and private age recovery key custody",
+      "Previously approved encrypted backup creation and 30-day retention, duplicate checks, failure alerts, restore evidence and daily 08:00 UTC backup schedule",
+      "Existing GitHub Free private and one-use nonforce deployment boundaries; no Netlify or production Supabase writes"
+    ],
+    "publication": "No new application/provider release or backup export authorized by this metadata-only organization request.",
+    "verified_historical_acceptance": {
+      "evidence_register": "docs/audits/issue28-acceptance-evidence-no-repeat-20261029.md",
+      "scheduled_encrypted_export": "PASS: repeated genuine schedule runs Oct 15,16,18,22,26,27,28,29 2026; exact GH run IDs in evidence register",
+      "unattended_offsite_delivery": "PASS: independently confirmed scheduled original archive arrivals in Google Drive Oct 15/16/18/22/26/27/28; Oct 28 original artifact 12824981645 full ZIP SHA-256 matched GitHub",
+      "actual_alert_handler_email_delivery": "PASS: owner received actual [TEST] MailApp sendBackupAlert_ email Oct 16; no repeat required",
+      "trigger_history": "PASS: owner screenshot shows time-based syncPrivateBackups ran Oct 18, 0 percent displayed errors",
+      "monitoring": "PASS: DIC Backup Watchdog daily task enabled with completed Oct 27 check of two scheduled offsite byte hashes",
+      "owner_task_notifications": "PASS: owner supplied three screenshots of Tasks Push and Email enabled; do not request more",
+      "restore": "PASS historical owner-confirmed encrypted hosted restore and isolated Auth/database recovery; not claimed for every later ZIP",
+      "still_unobserved": [
+        "real naturally triggered failure/staleness alert, NOT synthetic TEST delivery",
+        "new unattended direct-child delivery after Oct 29 folder-only correction",
+        "actual Drive 30-day retention purge when age threshold reached",
+        "live Apps Script settings unavailable via Drive 403"
+      ],
+      "never_repeat": "Never request already accepted alert email test, notification screenshots, same unchanged backup archive hashes, or prior restore unless the relevant system materially changes or a real defect is observed."
+    }
   }
 }

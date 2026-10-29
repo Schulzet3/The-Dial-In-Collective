@@ -1,0 +1,40 @@
+name: DIC Issue33 original603 bounded current official-source verification
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-603-public-source.yml
+      - scripts/audit/issue33-original603-live-source-probe.mjs
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  official603:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-issue33-603-live]')
+    name: current-official-shard-${{ matrix.shard }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Probe 201 original benchmark URLs directly at official HTTPS sources without credentials
+        env:
+          DIC_ORIGINAL603_SHARD: ${{ matrix.shard }}
+          DIC_ORIGINAL603_PUBLIC_CAPTURE_DIR: ${{ runner.temp }}/dic33-603-current/shard-${{ matrix.shard }}
+        run: node scripts/audit/issue33-original603-live-source-probe.mjs
+      - name: Retain current public HTML and exact source selections for independent decisions
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-current603-shard-${{ matrix.shard }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-603-current/shard-${{ matrix.shard }}/
+          if-no-files-found: error
+          retention-days: 1

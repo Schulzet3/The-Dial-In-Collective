@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {createHmac,randomUUID} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFileSync} from 'node:fs';
+import {invitationSecurityAcceptance} from './issue27-invitation-acceptance.mjs';
 
 const url=process.env.DIC_CI_HTTP_URL;
 const secret=process.env.DIC_CI_JWT_SECRET;
@@ -302,5 +303,7 @@ assert.equal(r.status,200);
 assert.ok(!r.data?.shots?.some(x=>x.id===attributedShot));
 pass('Another signed member never receives private recommendation source context');
 
+
+await invitationSecurityAcceptance({rpc,sql,scalar,sign,pass,denied,adminToken:tokens.admin,pg});
 
 console.log('RESULT: '+passed+' isolated genuine-HMAC-signed PostgREST HTTP/quality assertions PASS; NO GoTrue or production sessions tested.');

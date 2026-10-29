@@ -10,6 +10,7 @@ on:
       - 'eslint.config.mjs'
       - 'package.json'
       - 'package-lock.json'
+      - 'scripts/pwa/**'
       - 'build_cloud.mjs'
       - 'scripts/audit/site-integrity.mjs'
       - '.github/workflows/visual-review.yml'
@@ -71,6 +72,9 @@ jobs:
           curl --fail --location --max-time 40 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf' -o /tmp/dic-render-assets/JetBrainsMono.ttf
       - run: python tests/browser/cloud_owner_qa.py
         if: steps.scope.outputs.docs_only != 'true'
+      - name: Test Issue 26 keyboard, modal, responsive and contrast behavior
+        if: steps.scope.outputs.docs_only != 'true'
+        run: python tests/browser/issue26_accessibility_qa.py
       - name: Verify real service-worker cached cold reopen in isolated Chromium
         if: steps.scope.outputs.docs_only != 'true'
         run: python tests/browser/pwa_offline_qa.py

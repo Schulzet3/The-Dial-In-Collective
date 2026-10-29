@@ -173,6 +173,13 @@ function explicitProseRoasts(html){
   }
   for(const sentence of block.text.split(/(?<=[.!?])\s+/u)){
    if(sentence.length>1600)continue;
+   // A named foreign product in the current page cannot donate its roast.
+   const namedOther=sentence.match(/\b([\p{Lu}][\p{L}\p{M}'’.-]{2,40}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40}){1,7})\s+is\s+roasted\s+(?:ultra\s+light|very\s+light|light|medium|dark)\b/u);
+   if(namedOther&&titles.length===1){
+    const key=value=>String(value).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\d]+/gu,' ').trim();
+    const selected=key(titles[0]),described=key(namedOther[1]);
+    if(!selected.includes(described)&&!described.includes(selected))continue;
+   }
    // A contrast can expressly distinguish this coffee from the company's
    // general roasting style. Accept only its complete, current assertion.
    const current=sentence.match(new RegExp('^(?:While|Although)\\b[^.!?;]{1,650}\\broast\\b[^.!?;]{0,300},\\s*this (?:coffee|blend|lot) is\\s+(?:(?:a|an)\\s+)?('+ROAST_WORDS+')\\s*(?:roast)?[.!]?$','i'));
@@ -180,7 +187,8 @@ function explicitProseRoasts(html){
    const context=sentence.replace(/\bnot only\b/gi,'')
     .replace(/^not for (?:the )?faint[ -]?hearted(?: coffee drinker)?\s*,\s*/i,'')
     .replace(/\bwithout chaos\b/gi,'');
-   if(NONCURRENT_COFFEE_PROSE.test(context)||
+   if(/\b(?:our|the|a)\s+(?:previous|prior|former|historical)\b|\b(?:many|most|some|other)\s+roasters?\b/i.test(context)||
+    NONCURRENT_COFFEE_PROSE.test(context)||
     /\b(?:light|medium|dark)\s+to\s+(?:light|medium|dark)\b|\bmedium\s*\/\s*medium[ -]dark\b/i.test(sentence)||
     /\b(?:roast (?:levels|scale|spectrum|options|range)|range (?:of|from)|from light to|between light and|than|for (?:fans|lovers) of|if you (?:like|prefer)|each coffee|every coffee|every bean|our specialty|specialty has been|roast specialists|roast coffees|other decaf|average beans|also available as|guided brew|brewing preset|(?:ideal|suited|suitable) for|touch of|roast component)\b/i.test(sentence))continue;
    const patterns=[

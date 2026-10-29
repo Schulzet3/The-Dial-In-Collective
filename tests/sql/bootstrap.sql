@@ -1,3 +1,4 @@
+-- Release09 revised ten-item batch: rerun existing disposable SQL/JWT regression on exact selected source; no production schema change.
 -- Disposable PostgreSQL only: these are test doubles for Supabase's Auth schema.
 -- They do not prove hosted Auth/JWT/email behavior and must NEVER run on Supabase.
 do $$ begin

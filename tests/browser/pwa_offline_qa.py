@@ -149,7 +149,13 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    page.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
    assert page.get_by_role('button',name='1 Pending',exact=False).count()>0,'Actual SW version upgrade lost pending shot'
    page.evaluate("localStorage.setItem('dic_fake_owner','b2222222-2222-4222-8222-222222222222')")
-   page.reload(wait_until='domcontentloaded')
+   # A genuine offline cold reopen must use persisted origin storage in a new
+   # tab after the SW version transition; a repeated reload of the old,
+   # already-controlled window can hang before any new document commits.
+   # The new page MUST render the denied owner's login-only view below.
+   page.close()
+   page=context.new_page()
+   page.goto(url,wait_until='domcontentloaded')
    page.get_by_text('Reconnect To Continue',exact=True).wait_for(timeout=20000)
    assert page.locator('.coffee-card').count()==0,'Former owner cache leaked to another session'
 

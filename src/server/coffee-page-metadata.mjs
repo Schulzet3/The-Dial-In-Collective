@@ -1,4 +1,5 @@
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
+import {selectedDirectProductCredits} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -292,10 +293,25 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  if(!raw)return '';
  let s=['tasting_notes','origin','producer','variety','elevation_m','release_label','process','roast_level'].includes(field)?
   cleanTrailingProductLabels(raw):raw;
- if(field==='origin')s=s.replace(/\s*[|;,]+\s*$/,'').trim();
+ if(field==='origin'){
+  s=s.replace(/\s*[|;,]+\s*$/,'').trim();
+  // Roaster "Oaxaca Region of Mexico" is not "Oaxaca Region of Mexico, Mexico".
+  // Only de-duplicate the SAME country after an explicit Region of phrase;
+  // preserve geographic names such as Mt. Kenya and any true conflict.
+  const repeated=s.match(/^(.*?)\bRegion\s+of\s+([^,]{3,45})\s*,\s*(.+)$/iu);
+  if(repeated&&repeated[1].trim()&&keyOf(repeated[2])===keyOf(repeated[3]))
+   s=`${repeated[1].trim()} Region, ${repeated[2].trim()}`;
+ }
  if(field==='producer')s=s.replace(/\s+(?:read more|learn more|view details)\s*$/i,'').trim();
  if(field==='producer'&&/^(?:amount|quantity|size|weight|choose|select|add to cart|shop now)$/i.test(s))return '';
- if(field==='variety')s=s.replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'').replace(/\.$/,'').trim();
+ if(field==='variety'){
+  // Selected-product labels "Varietal-- Chiroso" and "Varietals: Bourbon,..."
+  // sometimes retain a leading HTML separator in the extracted cultivar.
+  // Preserve meaningful internal hyphens such as SL-28.
+  const stray=s.match(/^\s*(?:--+|[–—]{1,2}|[:：])\s*(\S[\s\S]*)$/u);
+  if(stray)s=stray[1].replace(/\s*,\s*(?=\S)/g,', ').trim();
+  s=s.replace(/\s*,\s*(?=\S)/g,', ').replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'').replace(/\.$/,'').trim();
+ }
  // Some seller specs mislabel post-harvest equipment as a coffee 'Varietal'.
  // Withhold botanical autofill; preserve the literal label in source_facts.
  if(field==='variety'&&/^(?:vertical|horizontal|mechanical|solar)\s+dryers?$/i.test(s))return '';
@@ -1303,6 +1319,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // farm/grower attributions as reviewable, noncanonical details.
  const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
+  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html});
+  if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
+   addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
+  }
+  if(directSelected.roast_level&&!fields.roast_level&&!conflicts.has('roast_level'))
+   addField(fields,'Roast Level',directSelected.roast_level);
+  if(directSelected.tasting_notes&&!fields.tasting_notes&&!conflicts.has('tasting_notes'))
+   addField(fields,'Tasting Notes',directSelected.tasting_notes);
+  if(directSelected.farm&&!roaster_details.farm)roaster_details.farm=directSelected.farm;
  for(const [key,value] of Object.entries(narrative.fields)){
   if(fields[key])continue;
   addField(fields,key,value,{literalAnonymousProducer:key==='producer'&&narrative.literal_anonymous_producer===value});markNarrativeIdentity(fields,key);
@@ -1535,6 +1560,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // A later direct blend fallback cannot resurrect rejected geography.
  for(const field of conflicts)delete fields[field];
  if(conflicts.has('roast_level')){roast_evidence.value=null;roast_evidence.source='';}
+ // Country enrichment can run after the initial label normalization.
+ // Remove only an exactly repeated Region-of country at final field assembly.
+ // Never suppress genuine country disagreement or product-source conflicts.
+ if(fields.origin&&!conflicts.has('origin')){
+  const repeated=fields.origin.match(/^(.*?)\bRegion\s+of\s+([^,]{3,45})\s*,\s*(.+)$/iu);
+  if(repeated&&repeated[1].trim()&&keyOf(repeated[2])===keyOf(repeated[3]))
+   fields.origin=`${repeated[1].trim()} Region, ${repeated[2].trim()}`;
+ }
  const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:selectedProduct,source_url});
  if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
  const roaster_recipe=extractProductEspressoReference(currentProduct);
@@ -1656,7 +1689,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const explicit=explicitCoffeeNotesSeparateFromBrewingTags(source_facts);
   if(explicit){fields.tasting_notes=explicit;conflicts.delete('tasting_notes');}
  }
- for(const fact of source_facts){
+ // Selected direct Tastes like descriptions supersede unlabeled marketing prose,
+  // but cannot override a separate current explicit notes list or structured
+  // Product field. Other source facts remain visible for review.
+  if(directSelected.explicit_tastes_like&&!structuredFlavorByFields.get(fields)){
+   fields.tasting_notes=directSelected.explicit_tastes_like;conflicts.delete('tasting_notes');
+   if(source_facts.length<384&&!source_facts.some(f=>f.field==='tasting_notes'&&
+      f.label==='Tastes like'&&f.value===directSelected.explicit_tastes_like))
+    source_facts.push({field:'tasting_notes',label:'Tastes like',
+      value:directSelected.explicit_tastes_like,source_url,source_type:'html',
+      section:'Exact selected product literal tasting description'});
+  }
+  for(const fact of source_facts){
   if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
   else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
   if((fact.field&&(conflicts.has(fact.field)||detailConflicts.has(fact.field)))||
@@ -1721,6 +1765,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   conflicting:detailConflicts.has('processing_detail')
  });
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
+ // Standalone selected Limited Release is a fallback only. Named current
+ // releases (e.g. Holy Grail No. 2) established later in the product
+ // evidence hierarchy must never be erased by a generic limited banner.
+ if(directSelected.release_label&&!fields.release_label&&!conflicts.has('release_label')){
+  addField(fields,'release_label',directSelected.release_label);
+  if(source_facts.length<384)source_facts.push({field:'release_label',
+   label:'Exact selected product release banner',value:directSelected.release_label,
+   source_url,source_type:'html',section:'Selected product description'});
+ }
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
