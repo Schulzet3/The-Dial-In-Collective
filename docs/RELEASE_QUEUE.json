@@ -2759,23 +2759,34 @@
     {
       "id": "DIC-Q-33-ketch-variant-notes-of-parser",
       "issue": 33,
-      "pr": null,
+      "pr": 262,
       "title": "Correct direct current per-roast tasting-note parsing when a roaster says notes of flavors",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "7d63919c36916ce7db36b4e7983b32f1d111547e",
       "scope_paths": [
         "src/server/coffee-roast-variants.mjs"
       ],
       "tests": [
         "Current official Ketch Tier 3: Mexico San Isidro Zoquiapan selected page explicitly offers Light and Medium-dark roasts, with different tasting notes and espresso ratios (source: https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan). Existing shared noteOf handles 'X notes' but not 'this coffee had notes of X' or 'has traditional coffee notes of X'; this wrongly loses two source-supported roast-specific flavor lists.",
-        "Seven new Node test cases staged: real current wording, Shopify Add Coffee roast selection with withheld unchosen global fields, HTML fallback, no other purchase options, historic and incompatible same-roast notes, nonflavor guidance, and old Tier 2 grammar. Exact GitHub CI/merge pending."
+        "Seven new Node test cases staged: real current wording, Shopify Add Coffee roast selection with withheld unchosen global fields, HTML fallback, no other purchase options, historic and incompatible same-roast notes, nonflavor guidance, and old Tier 2 grammar. Exact GitHub CI/merge pending.",
+        "Exact final PR #262 head 4acd7a8e3b843162d862427b2a15f428be4c2a4a: 7 applicable workflows SUCCESS — Node/build/lint 40958184217 (2043 passed/0 failed/6 skipped), cloud/Chromium UX 40958184261 (1587 passed/0 failed), visual 40958184035, isolated SQL 40958184138, security 40958184068, approval 40958184142, private source bundle 40958184081. Restricted immutable603 workflow 40958184158 SKIPPED.",
+        "PR262 merged non-force as 7d63919c36916ce7db36b4e7983b32f1d111547e; tested head and merged Git tree both 1d5192713237d099ca18e07464864ba5481ac612. Development branch HEAD independently read back. Exact merged-source cloud app/build 40958543029, cloud UX/mobile 40958543063, approval/continuity 40958543002 all SUCCESS. Optional public source acceptance 40958543209 and controlled roaster probe 40958543380 SKIPPED, not passed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Applicable exact-source GitHub CI, non-force merge, exact merged-source verification and READY reconciliation pending. Original restricted603 run must be called SKIPPED if gated; no whole live603 or genuine production login claim."
+      "ci_runs": [
+        40958184217,
+        40958184261,
+        40958184035,
+        40958184138,
+        40958184068,
+        40958184142,
+        40958184081,
+        40958543029,
+        40958543063,
+        40958543002
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Generic shared parser, no roaster URL special case. Only a current explicitly offered roast variant can receive its corresponding flavor notes; different roast choices must never mix or autoselect. Preserve existing confidence, manually edited values, recommendations, SQL/Auth/Edge/member/offline data, original603 captures/oracle/scorer. Development only; no publication."
+      "notes": "Generic shared parser, no roaster URL special case. Only a current explicitly offered roast variant can receive its corresponding flavor notes; different roast choices must never mix or autoselect. Preserve existing confidence, manually edited values, recommendations, SQL/Auth/Edge/member/offline data, original603 captures/oracle/scorer. Development only; no publication. READY, NOT DEPLOYED. No complete new 603-live replay or genuine signed-in production member verification. The new Ketch Tier3 public quote was checked against its official product page but product HTML fixture, not a complete live authenticated browser replay, was used for parser/UI tests. All prior READY changes unaffected; parent Issue33 residual review remains IN_PROGRESS."
     }
   ],
   "history": [
