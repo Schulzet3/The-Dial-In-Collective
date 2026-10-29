@@ -2488,20 +2488,27 @@
       "issue": 47,
       "pr": 249,
       "title": "Keep the Admin dashboard visible after audited edits and actions",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "ffcb768b363fcc772eda38b122ef4c7aedb78ef2",
       "scope_paths": [
         "site/admin/view.js"
       ],
       "tests": [
-        "New direct dashboard live-region regression and realistic synthetic Chromium editing/permission/paging acceptance PENDING exact-source CI"
+        "Corrected exact PR249 head d5d98708f634cde68705f65685b68e4aeecd13b4; Node/lint/cloud build 40930845583 SUCCESS, synthetic 390px and desktop Chromium visual including complete page-2, correction, stale-revision, notes, search, access-denial suite 40930845557 SUCCESS, cloud/mobile 40930845631 SUCCESS, isolated SQL 40930845653 SUCCESS, security 40930845640 SUCCESS, approval/journal 40930845624 SUCCESS. Frozen coffee corpus run 40930845680 SKIPPED as unrelated.",
+        "PR #249 merged non-force ffcb768b363fcc772eda38b122ef4c7aedb78ef2; merged Git tree 969c55d8d77caeb210a34b1d46e300b06eb00150 equals exact fully tested head tree. Verified development ref and merged PR readback.",
+        "Read-only current Supabase 8 coffees/9 submissions/24 shots/24 notes/11 memberships and zero admin content or deletion audit receipts. Never modified production/member records. True authenticated admin and cross-member acceptance not yet performed; parent Issue #47 stays open."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head visual, Node/build, cloud/SQL/security/approval checks and safe merge/readback required."
+      "ci_runs": [
+        40930845640,
+        40930845624,
+        40930845653,
+        40930845631,
+        40930845583,
+        40930845557
       ],
+      "blockers": [],
       "owner_source": "October 29 2026 owner collaboration on Issue #47, development/test authorization only",
-      "notes": "View-only accessible status region; no changes to database, live records, privacy, user roles, or production. Full Issue47 authenticated acceptance remains open."
+      "notes": "Narrow browser-proven fix for missing persistent accessible Admin action status element. Fix is merged/tested READY, not DEPLOYED. Parent Issue #47 remains OPEN for real authenticated administrative browser/RLS/source-matching and safe deletion acceptance. No prod member, Auth, SQL, Edge or Netlify changes."
     }
   ],
   "history": [
