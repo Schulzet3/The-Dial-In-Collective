@@ -2599,6 +2599,27 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Confirmed direct current-product display improvements for original603 case #5. Canonical Origin becomes 'El Triunfo Reserve, La Paz, Chiapas, Mexico' and Tasting Notes becomes 'sweet candied lemon and dried blueberry'; roaster's literal sentences preserved in source review. Original frozen603 captures/oracle/scorer, historical member/offline/shots/notes, auth/privacy and other approved code preserved. Scoped READY, not deployed. Requires separate future release instruction; previously consumed Release11 authorization does not cover this change.",
       "tested_source_sha": "af71d11fc8aaf5d81991ca40553906e86b464ca3"
+    },
+    {
+      "id": "DIC-Q-47-admin-candidate-nested-grant",
+      "issue": 47,
+      "pr": null,
+      "title": "Restore protected Admin review candidate access",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261029193000_dic_admin_review_candidates_grant.sql"
+      ],
+      "tests": [
+        "Real Admin dashboard/records 200, review candidates 403/42501, four requests",
+        "Live private privilege mismatch independently confirmed; SQL Admin/member/anon acceptance added; CI PENDING"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await exact-source isolated SQL, CI, safe merge, source readback; production SQL not approved"
+      ],
+      "owner_source": "Owner October 29 Admin screenshots and Supabase real-provider logs",
+      "notes": "Only private nested function authenticated EXECUTE. No role-check weakening or production changes."
     }
   ],
   "history": [
