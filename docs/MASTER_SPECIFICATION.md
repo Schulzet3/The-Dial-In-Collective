@@ -1,3 +1,15 @@
+## October 29, 2026 — single encrypted offsite Drive folder (Locked owner supersession)
+
+**Owner's explicit instruction:** "Can you please only save to DIC Automated Encrypted Backups? I moved all the files to that folder." This is approved for **backup destination only**, not permission to change encryption, 30-day retention, schedule, recovery keys, credentials, privacy, production databases or release authorization.
+
+Store every offsite encrypted backup only as a direct child of the owner-private Google Drive folder **DIC Automated Encrypted Backups** (ID `1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf`). Never save backups in My Drive root or the old nested `The Dial In Collective Backups` folder (ID `1opb3JySDaNVaP0t9ocpNeXm2Kh23jQhv`); check exact parent and existing run/artifact identities before transfer to prevent duplicates. The former backend-addendum folder reference is historical and superseded **solely for backup placement**. Preserve every existing ciphertext and backup identifier; never delete or overwrite a historical backup to consolidate storage.
+
+Implementation receipt: The existing enabled ChatGPT courier (task `6ae02966919c8191bc601c263d00f6a8`) was changed to upload only to the correct direct parent, detect both `dic-nightly-<artifact-id>.zip` and `dic-encrypted-nightly-<run-id>.zip` as equivalent when artifact and digest actually match, and fail closed on wrong parent. The enabled watchdog task `6ad2807d3f408191a1aa9d5affe092a3` now checks only direct children in that folder. Drive metadata confirmed **32 pre-existing encrypted backup objects safely moved** directly into the approved folder; two older October 22 archive attempts could not be moved because the connected Drive write was blocked by platform safety checks (IDs `14i459rTJguLcaFAQWD_vGT37IzzxiIbJ` and `1PuIkpvzg6xDHFBjqHBnoy-2cGryd5JgS`). Both remain intact in the old nested folder, alongside its historical Apps Script project. A direct inspection of current Google Apps Script source/settings is unavailable (Drive `403`); the next unattended courier run and natural failure alert remain to be verified under Issue #28.
+
+A prior report mistook the automatically courier-named October 28 Drive file `dic-nightly-12824981645.zip` for missing because it searched a different folder/name; that file's existence, original creation timestamp and matching GitHub artifact ID/size are now confirmed. The later manually uploaded `dic-encrypted-nightly-40708113153.zip` is a separate duplicate logical recovery point, **not proof of prior courier failure**. No user data, encrypted contents, app deployment or production configuration were changed by this folder correction.
+
+---
+
 ## October 28 owner retirement of optional screenshot and Claude extraction (Locked)
 
 **UX-ISSUE18-RETIRE-SCREENSHOT-CLAUDE-20261028** — The owner explicitly decided, while reviewing GitHub Issue #18 on October 28, 2026: **"I don't want screenshot or claude anymore. Let's close 18 and move on to the next one please."** Coffee-entry screenshot uploads/extraction, screenshot OCR, Claude-based coffee extraction, device-local Claude BYOK/key-entry UI and the related speculative provider integration are **retired from the product scope**, not deferred future implementation work. Close Issue #18 as **not planned by explicit owner decision**, rather than asserting that its historic unchecked acceptance tests passed.
@@ -2297,7 +2309,7 @@ The next external beta must have real accounts, cloud syncing and shared communi
 
 Development uses the existing Supabase Free organization/project. Do not create paid projects, paid branches, upgrade plans or buy a domain without approval. Source changes live in the private GitHub repository on development/backend-foundation. The local phone prototype is unchanged by database migrations.
 
-Google Drive is the approved automatic backup destination. The agreed folder is The Dial In Collective Backups. A ChatGPT Drive connection is not authorization for an unattended job. Scheduled encrypted exports, authentication/storage/configuration coverage, failure alerts, retention, and a tested restore remain required before real beta data. A database status table alone does not implement backups.
+Google Drive is the approved automatic backup destination. The older agreed-folder name (The Dial In Collective Backups) is superseded for all future writes by the October 29, 2026 single-folder owner decision: DIC Automated Encrypted Backups, direct children only (see above). A ChatGPT Drive connection is not authorization for an unattended job. Scheduled encrypted exports, authentication/storage/configuration coverage, failure alerts, retention, and a tested restore remain required before real beta data. A database status table alone does not implement backups.
 
 ## Identity and access
 
