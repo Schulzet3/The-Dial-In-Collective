@@ -1,3 +1,4 @@
+// Owner-authorized 603 independent official-source capture on exact merged source; source-only, no certification from parse.
 #!/usr/bin/env node
 // Read-only live HTTPS source evidence for each immutable original603 URL.
 // This does not authorize an outdated oracle to override a current product.
