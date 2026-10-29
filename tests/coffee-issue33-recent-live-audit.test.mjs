@@ -57,3 +57,10 @@ test('IXXA must actually recover Chiapas as well as Tenejapa from live source',(
  const audit=assessReadyPreview('ixxa-current-ki-saya',result,{renderedHtml:rendered});
  assert.ok(audit.failed.some(f=>f.label==='ixxa:paired_locality_region'));
 });
+
+test('two selected roast options are not a source conflict even if fields remain unchosen',()=>{
+ const fixture={...structuredClone(sampleKetch),conflicts:['roast_level'],
+  conflict_options:{roast_level:[{value:'Light'},{value:'Medium-Dark'}]}};
+ const result=assessReadyPreview('ketch-tier2-locked-honduras',fixture,{renderedHtml:rendered});
+ assert.ok(result.failed.some(x=>x.label==='ketch:no_purchase_option_conflict'));
+});

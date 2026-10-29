@@ -13,6 +13,7 @@ import {createPreviewHandler} from '../../netlify/functions/coffee-url-preview.m
 import {safeCoffeeUrl,fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {extractShopifyAjaxData,shopifyProductRequest} from '../../src/server/coffee-shopify-ajax.mjs';
 import {coffeeRoastVariantPreview,coffeeUrlPreviewMarkup} from '../../site/cloud/coffee-url-autofill.js';
 
 export const CURRENT_READY_CASES=Object.freeze([
@@ -69,6 +70,8 @@ export function assessReadyPreview(id,preview,{realHtmlReceived=true,renderedHtm
  if(id.startsWith('ketch-')){
   check('ketch:two_roast_purchase_variants',v.size===2&&v.has('light')&&v.has('medium-dark'),
    'Light and Medium-Dark',Array.from(v.keys()).join(','));
+  check('ketch:no_purchase_option_conflict',!(preview.conflicts||[]).includes('roast_level'),
+   'selected offered roast options are not a conflict',JSON.stringify(preview.conflicts||[]));
   check('ketch:roast_not_assumed',blank(f.roast_level),'blank',f.roast_level);
   check('ketch:global_notes_not_assumed',blank(f.tasting_notes),'blank',f.tasting_notes);
   check('ketch:global_espresso_not_assumed',preview.roaster_recipe==null,'blank',JSON.stringify(preview.roaster_recipe));
@@ -127,7 +130,7 @@ export function assessReadyPreview(id,preview,{realHtmlReceived=true,renderedHtm
 }
 
 async function probeOne(target){
- const events=[],apiCalls=[],capture={html:null,htmlSourceUrl:null,jsonBytes:0,jsonSha256:null};
+ const events=[],apiCalls=[],capture={html:null,htmlSourceUrl:null,jsonBytes:0,jsonSha256:null,endpoint:null};
  const readHtml=async(url,opts)=>{
   const result=await fetchPublicCoffeeHtml(url,opts);
   events.push({kind:'guarded_html',ok:result?.ok===true,reason:result?.reason||null,
@@ -146,7 +149,23 @@ async function probeOne(target){
   const result=await fetchPublicCoffeeJson(url,opts);
   events.push({kind:'guarded_public_product_json',ok:result?.ok===true,reason:result?.reason||null,
    final_url:result?.source_url||null,bytes:result?.ok?Buffer.byteLength(result.json):null});
-  if(result?.ok){capture.jsonBytes=Buffer.byteLength(result.json);capture.jsonSha256=sha(result.json);}
+  if(result?.ok){
+   capture.jsonBytes=Buffer.byteLength(result.json);capture.jsonSha256=sha(result.json);
+   // This is the identical already-fetched public JSON; no second request.
+   const request=shopifyProductRequest(target.url);
+   if(request&&url===request.url){
+    try{
+     const endpoint=extractShopifyAjaxData(JSON.parse(result.json),request);
+     capture.endpoint={
+      conflicts:endpoint?.conflicts||[],
+      roast_tag_ambiguity_only:endpoint?.roast_tag_ambiguity_only===true,
+      roast_options:endpoint?.conflict_options?.roast_level?.slice(0,8).map(o=>clip(o.value))||[],
+      roast_source:endpoint?.roast_source||null,
+      current_specs:endpoint?.current_product_spec_fields||[]
+     };
+    }catch{/* Diagnostics only; app handler separately validates JSON. */}
+   }
+  }
   return result;
  };
  const apiFetch=async(uri,opts={})=>{
@@ -198,6 +217,10 @@ async function probeOne(target){
   actual_https_reads:events,actual_https_html_sha256:rawHtml?sha(rawHtml):null,
   actual_https_json_sha256:capture.jsonSha256,live_html_bytes:rawHtml?Buffer.byteLength(rawHtml):0,
   html_compact_parser_ok:rawResult?.ok===true,
+  html_compact_conflicts:rawResult?.conflicts||[],
+  html_compact_roast_options:rawResult?.conflict_options?.roast_level?.slice(0,8).map(o=>clip(o.value))||[],
+  endpoint_roast_evidence:capture.endpoint,
+  merged_roast_options:preview?.conflict_options?.roast_level?.slice(0,8).map(o=>clip(o.value))||[],
   html_compact_parser_name:clip(rawResult?.fields?.name),html_compact_parser_fields:fieldsOf(rawResult),
   response_http_status:status,response_ok:preview?.ok===true,response_reason:clip(preview?.reason),
   full_preview_fields:fieldsOf(preview),
