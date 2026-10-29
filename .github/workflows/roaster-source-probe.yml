@@ -12,7 +12,7 @@ permissions:
   contents: read
 jobs:
   unprivileged-public-pages:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]') || contains(github.event.head_commit.message, '[dic-platform-probe]') || contains(github.event.head_commit.message, '[dic-issue33-source-probe]')
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-live-probe]') || contains(github.event.head_commit.message, '[dic-platform-probe]') || contains(github.event.head_commit.message, '[dic-issue33-source-probe]') || contains(github.event.head_commit.message, '[dic-issue33-ready-live]')
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -37,6 +37,19 @@ jobs:
       - name: Record Issue33 exact selected current product source provenance without credentials
         if: contains(github.event.head_commit.message, '[dic-issue33-source-probe]')
         run: node scripts/audit/issue33-current-selected-source-probe.mjs
+      - name: Real full public-page extraction acceptance for latest READY Issue33 fixes
+        if: contains(github.event.head_commit.message, '[dic-issue33-ready-live]')
+        env:
+          DIC_ISSUE33_READY_LIVE_OUTDIR: ${{ runner.temp }}/dic33-ready-live
+        run: node scripts/audit/issue33-recent-ready-live-probe.mjs
+      - name: Preserve exact-source, credential-free live extraction evidence
+        if: always() && contains(github.event.head_commit.message, '[dic-issue33-ready-live]')
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-ready-live-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-ready-live/
+          if-no-files-found: error
+          retention-days: 30
   isolated-size-study:
     if: contains(github.event.head_commit.message, '[dic-size-study]')
     runs-on: ubuntu-latest

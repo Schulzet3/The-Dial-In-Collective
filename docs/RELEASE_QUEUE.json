@@ -2787,6 +2787,30 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Generic shared parser, no roaster URL special case. Only a current explicitly offered roast variant can receive its corresponding flavor notes; different roast choices must never mix or autoselect. Preserve existing confidence, manually edited values, recommendations, SQL/Auth/Edge/member/offline data, original603 captures/oracle/scorer. Development only; no publication. READY, NOT DEPLOYED. No complete new 603-live replay or genuine signed-in production member verification. The new Ketch Tier3 public quote was checked against its official product page but product HTML fixture, not a complete live authenticated browser replay, was used for parser/UI tests. All prior READY changes unaffected; parent Issue33 residual review remains IN_PROGRESS."
+    },
+    {
+      "id": "DIC-Q-33-live-recent-ready-extractor-acceptance",
+      "issue": 33,
+      "pr": null,
+      "title": "Run exact current full public-page extraction of recent READY fixes and preserve receipts",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "scripts/audit/issue33-recent-ready-live-probe.mjs",
+        ".github/workflows/roaster-source-probe.yml",
+        "tests/coffee-issue33-recent-live-audit.test.mjs"
+      ],
+      "tests": [
+        "Five explicit current official URLs: Leap Coffee Decaf; IXXA Organic Ki-Saya; Ketch Tier3 Mexico; Locked Ketch Tier2 Honduras; 44 North Mexico Triunfo Verde.",
+        "Real standard guarded HTTPS fetch/retry, complete current product HTML, exact Shopify public JSON when available, unmodified application preview handler with stubbed local-only admissions/quota and real Add Coffee review/roast selection. SHA-256, response status, selected fields, explicit assertion failures and short-lived audit artifact retained; zero Supabase/production-member requests.",
+        "Seven fail-closed unit checks prepared; exact-source full GitHub CI and one-shot five-page current-live run with SHA-bound receipts NOT YET PERFORMED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact new-source CI and safe merge; authorized development branch one-shot live source workflow; classify each of 5 real HTTPS results; repair any true parser regressions and rerun; reconcile READY only after demonstrably complete evidence. Mark unavailable/changed sources as unverified, not passing."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Source-only development QA; no production credentials, no member/shot/offline writes, no Netlify deploy, no original immutable603 source/oracle edits. Existing three READY extractor scopes are unchanged pending source readback; a proven defect will create a scoped blocker and code repair before release."
     }
   ],
   "history": [
