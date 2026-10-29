@@ -1304,7 +1304,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // farm/grower attributions as reviewable, noncanonical details.
  const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
-  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean});
+  const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html});
   if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
@@ -1742,6 +1742,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   conflicting:detailConflicts.has('processing_detail')
  });
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
+ // Standalone selected Limited Release is a fallback only. Named current
+ // releases (e.g. Holy Grail No. 2) established later in the product
+ // evidence hierarchy must never be erased by a generic limited banner.
+ if(directSelected.release_label&&!fields.release_label&&!conflicts.has('release_label')){
+  addField(fields,'release_label',directSelected.release_label);
+  if(source_facts.length<384)source_facts.push({field:'release_label',
+   label:'Exact selected product release banner',value:directSelected.release_label,
+   source_url,source_type:'html',section:'Selected product description'});
+ }
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
