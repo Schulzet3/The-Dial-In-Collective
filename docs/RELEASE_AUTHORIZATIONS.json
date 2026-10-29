@@ -187,6 +187,22 @@
       "approval_source": "Owner October 29, 2026, separate publication instruction: 'If more items are now ready, go ahead and publish those too'",
       "scope": "Exactly ONE additional production publication of two later READY items DIC-Q-33-603-source-identity-guard and DIC-Q-47-admin-feedback-persistence with Admin duplicate feedback ID regression correction, tested source d04be7189b5e9983a83624d5d8c0e76d2f24e8da. Excludes ten prior Release10 items and all unready research/Issue37 drafts. No new SQL migrations, Edge/Auth changes, private member-data mutations, destructive operations, paid purchases or future publications.",
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-12",
+      "tested_source_sha": "eb1249d68c0ff424346752a5e4876c10ae11823f",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-10-29T20:21:36.902Z",
+      "expires_at_utc": "2026-10-30T20:21:36.902Z",
+      "approval_source": "Owner October 29, 2026 in this conversation: 'Yes, you're approved to publish everything in the queue'",
+      "scope": "ONE production publication of exactly four independently source-tested READY queue items: DIC-Q-33-original603-direct-region-country-prose, DIC-Q-33-44north-literal-origin-and-flavor-display, DIC-Q-33-repeated-selected-product-heading-identity, and DIC-Q-47-admin-candidate-nested-grant. Release candidate eb1249d68c0ff424346752a5e4876c10ae11823f; deploy protected Netlify release/production and apply only the minimal non-destructive authenticated GRANT on private.dic_admin_review_candidates(uuid) while keeping existing role guards and anon restrictions. Excludes two original603 independent source research IN_PROGRESS items; preserves original captures/oracle and every existing member record. No unapproved deletion, Auth/Edge changes, credentials, paid purchases, upgrades or future publications.",
+      "sql_evidence": [
+        "Only new migration supabase/migrations/20261029193000_dic_admin_review_candidates_grant.sql: REVOKE PUBLIC/anon and GRANT EXECUTE authenticated on private.dic_admin_review_candidates(uuid), with existing admin+membership guard unchanged; SQLSTATE42501 real signed-in Admin failure originally observed; isolated SQL 40947676348 SUCCESS; provider application and readback pending."
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
