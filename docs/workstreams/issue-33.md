@@ -1,3 +1,15 @@
+## October 29 UTC — Issue #33 selected-current decaf method prose recovery (TESTING, NO DEPLOY)
+
+Recovered development at a0cc9fa9b357db681230eb3d394dce3b86b1f031; prior PR #255 repeated identical H1 fix is non-force merged at a0cc9fa9b357db681230eb3d394dce3b86b1f031 with all seven applicable PR-head workflows SUCCESS (approval 40946043199, private bundle 40946043359, SQL 40946043165, Node/build 40946043270, visual 40946043374, security 40946043098, cloud/browser/mobile 40946043057). Restricted private original603 40946043164 SKIPPED, not a pass; exact merged-source workflows pending. Preserve already READY independent Issue33 items.
+
+Actual public selected product: [Leap Coffee Roasters Decaf Coffee](https://leapcoffeeroasters.com/products/decaf-coffee) explicitly prints "The SWISS WATER® Process is a 100% chemical free decaffeination process that delivers coffee that is caffeine-free". The existing handler only used structured `roaster_details.processing_detail` for decaffeination inference; standalone selected-product prose could leave `decaffeination_method` blank despite that literal direct evidence. This is a generic data-recovery defect, not permission to guess undocumented primary green-coffee Process.
+
+Change: limit method descriptions to the exact selected coffee body and heading identity, fully-decaf names, short directly attributed current prose (including a narrow explicit decaf process explanation), and existing standardized method inference. Exclude navigation/recommendations/educational headings/previous coffees, noncurrent wording, ambiguous full-vs-half caf and contradictions. Preserve current literal method sentence(s) as bounded `source_facts`; leave competing methods blank for member review. Tests cover current Leap quote, direct Water/Sugar/CO2 assertions, rendered Add Coffee preview, rejected negative/related/education/regular/half-caf/previous cases, contradictory methods and repeated current H1. Frozen original603 captures/oracle/scorer, member/offline and Community data unchanged. Full real HTTPS page parsing, original603 replay and signed-in live acceptance not yet claimed. Queue DIC-Q-33-selected-decaf-method-prose TESTING until exact-head CI, non-force merge and merged-source receipt.
+
+No Netlify publication, production Auth/SQL/Edge/member-data changes or paid service authorized.
+
+---
+
 ## October 29 UTC — Issue33 repeated exact current-product heading identity fix (TESTING; NO DEPLOY)
 
 Recovered authoritative development source `5e9aa4bd4e5ad1a04f96ca60e8a678afe81b6e5e` and Issue33 full current review. Audited `selectedDirectProductCredits`: it refused *all* direct current selected-product roast, sensory, producer, and release evidence when a responsive storefront duplicated the SAME exact selected coffee H1 for desktop/mobile. This is a generic data-loss bug, not a missing roaster fact. The new identity check permits repeated H1 headings only when EVERY in-scope H1 independently normalizes to the exact selected coffee. It still rejects a missing H1 or any competing second coffee identity, with no fallback to historic SEO, unrelated product, or invented values.
