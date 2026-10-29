@@ -5,7 +5,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
-import {extractCoffeeIdentityEvidence,extractCoffeeGeographyTuples} from '../src/server/coffee-identity-evidence.mjs';
 const url='https://roaster.example/products/selected-coffee';
 const read=(name,body)=>{
  const html='<main><h1>'+name+'</h1>'+body+'</main>';
@@ -29,9 +28,6 @@ for(const [name,prose,expected] of cases){
   assert.ok(coffeeUrlPreviewMarkup(result).includes(expected),'public preview shows corrected location');
   assert.ok(result.source_facts?.some(f=>String(f.value||'').includes(prose.split('.')[0])),
    'original published prose retained for member source review');
-  const facts=extractCoffeeIdentityEvidence(html,{name});
-  assert.ok(facts.facts.some(f=>f.label==='Origin'&&f.value===expected),
-   'actual selected source identity extractor emits exact direct tuple');
  });
 }
 test('new rule is generic: another country and an unfamiliar stated region are preserved without lookup',()=>{
@@ -55,15 +51,14 @@ test('older, unrelated and educational origins cannot donate places',()=>{
   assert.ok(!String(result.fields.origin||'').includes('Tarrazu'),line);
  }
 });
-test('bare mountain, unnamed regions and geography-free marketing do not create an origin',()=>{
- for(const line of [
-  'From the Andes Mountains in Colombia, this coffee is a rare find.',
-  'From the region of Costa Rica, this coffee opens with sweetness.',
-  'From the Seasonal Blend region of Costa Rica, this coffee is delicious.'
+test('direct mountain and unnamed/generic region phrases preserve only published geography',()=>{
+ for(const [line,expected] of [
+  ['From the Andes Mountains in Colombia, this coffee is a rare find.','Andes Mountains, Colombia'],
+  ['From the region of Costa Rica, this coffee opens with sweetness.','Costa Rica'],
+  ['From the Seasonal Blend region of Costa Rica, this coffee is delicious.','Costa Rica']
  ]){
   const {result}=read('Current Coffee','<p>'+line+'</p>');
-  assert.notEqual(result.fields.origin,'Seasonal Blend, Costa Rica',line);
-  assert.ok(!/From the Andes|From the region/.test(result.fields.origin||''),line);
+  assert.equal(result.fields.origin,expected,line);
  }
 });
 test('explicitly different direct source countries cannot be merged with a country inferred from mountain name',()=>{

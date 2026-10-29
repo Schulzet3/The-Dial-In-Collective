@@ -1,3 +1,9 @@
+## October 29 UTC — source-bound provenance test repair and mountain-only scope (NO DEPLOY)
+
+First executable cloud CI on corrected syntax passed two actual `extractPublicCoffeeFacts`/Add Coffee Quartermaine source values, but two tests failed because a direct `extractCoffeeIdentityEvidence` internal subroutine (called without the production source context) was incorrectly required to return the same final field as the complete public handler. Removed this invalid extra assertion while retaining the real public handler, rendered Add Coffee and literal source-fact checks. A third test showed the generic preexisting narrative extractor could produce a `From the Andes` marketing prefix when there was only a broad mountain and country. Extended the same bounded current-product grammar to keep `Andes Mountains, Colombia` as the printed broad area, retain `Costa Rica` when the phrase publishes no specific region, and suppress `Seasonal Blend` as geographic identity. All exact country conflicts remain guarded. New complete exact-source CI required; the queue remains TESTING, no publication.
+
+---
+
 ## October 29 UTC — PR251 tracked in release queue for exact-source validation (NO DEPLOY)
 
 Issue33 direct selected coffee prose Origin correction has an explicit, nonpublishable TESTING entry `DIC-Q-33-original603-direct-region-country-prose` covering `src/server/coffee-identity-evidence.mjs`. First approval workflow correctly blocked untracked application source. Registered it in the queue with scoped test evidence and precise pending blockers; after exact CI/nonforce integration, reconcile into READY only with independent proof. No production or member data operations.

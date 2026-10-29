@@ -270,16 +270,23 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
     '^From\\s+the\\s+('+PLACE+')\\s+Mountains?\\s+in\\s+('+COUNTRIES+')[\\u2019\\x27]s\\s+('+PLACE+')\\s+region\\s*,\\s*this\\s+coffee\\b','iu'));
    const regional=sentence.match(new RegExp(
     '^From\\s+the\\s+('+PLACE+')\\s+region\\s+of\\s+('+COUNTRIES+')\\s*,\\s*this\\s+coffee\\b','iu'));
-   if(mountain||regional){
-    const locality=(mountain?.[3]||regional?.[1]||'').trim();
-    const country=(mountain?.[2]||regional?.[2]||'').trim();
-    // No named locality, duplicate country, or promotional generic phrase
-    // may become the member's location, even if matched in prose.
-    if(locality.length>=3&&locality.length<=70&&!COUNTRY_ONLY.test(locality)&&
-     !/\b(?:coffees?|offerings?|blends?|roasts?|products?|assortments?)\b/iu.test(locality)){
-     add(locality+', '+country,sentence);
-     continue;
-    }
+   // If only a named mountain range and country are published, retain
+   // both as a broad literal growing area; never manufacture a smaller town.
+   const mountainOnly=sentence.match(new RegExp(
+    '^From\\s+the\\s+('+PLACE+')\\s+Mountains?\\s+in\\s+('+COUNTRIES+')\\s*,\\s*this\\s+coffee\\b','iu'));
+   // "From the region of Costa Rica" prints a country, not a named region.
+   const unnamed=sentence.match(new RegExp(
+    '^From\\s+the\\s+region\\s+of\\s+('+COUNTRIES+')\\s*,\\s*this\\s+coffee\\b','iu'));
+   if(mountain||regional||mountainOnly||unnamed){
+    const country=(mountain?.[2]||regional?.[2]||mountainOnly?.[2]||unnamed?.[1]||'').trim();
+    const locality=(mountain?.[3]||regional?.[1]||
+     (mountainOnly?mountainOnly[1].trim()+' Mountains':'')).trim();
+    // Do not silently turn a merchandised "Seasonal Blend region" into a
+    // geographic region. The directly printed country remains available.
+    const valid=locality.length>=3&&locality.length<=70&&!COUNTRY_ONLY.test(locality)&&
+     !/\b(?:coffees?|offerings?|blends?|roasts?|products?|assortments?)\b/iu.test(locality);
+    add((valid?locality+', ':'')+country,sentence);
+    continue;
    }
    if(currentLocalityOnly)continue;
    // A neighboring social project is context, not a claim that this lot
