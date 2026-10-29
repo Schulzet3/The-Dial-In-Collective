@@ -37,3 +37,7 @@ Read back the newly created test blob and identified escaped newline and regex t
 
 ## Parallel development integration before PR CI
 Concurrent, unrelated changes advanced the development branch to `d04be7189b5e9983a83624d5d8c0e76d2f24e8da`. Read back and verified the prior Issue37 guide, contract, validation register and journal blobs are unchanged on that development head. Created a two-parent nonforce integration commit over the latest development tree, retaining only the reviewed guide/test/acceptance updates and recorded continuation. No database/production/member changes; exact-source PR tests required.
+
+
+## October 29 — owner-authorized in-app tutorial, development only
+The owner authorized building video plus written help links without publishing. First-use and Settings Help & Getting Started actions, native captioned video player, text transcript, accessible written quickstart, responsive CSS and deterministic Node tests are staged on feature branch. Corrected source video: 135.56s, 2,320,714 bytes, SHA-256 e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa. **BLOCKER: connected GitHub tool cannot upload binary MP4; text files alone are NOT complete or READY.** Add the exact MP4 to site/media/first-shot-walkthrough.mp4 and release allowlist, hash-verify, run full application/CI/mobile/captions checks and integrate nonforce before declaring READY. The incomplete feature must not be deployed. No SQL, Auth, member data, provider or production changes.

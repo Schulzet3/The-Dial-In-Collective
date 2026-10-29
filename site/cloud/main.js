@@ -13,6 +13,7 @@ import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant} from './coffee-url-autofill.js';
 import {communityReviewBanner,communityPage} from './community.js';
+import {walkthroughMarkup,gettingStartedMarkup} from './help.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
 function decafOptions(name='',isDecaf=false,method=''){
  const decaf=!C.isHalfCaffName(name)&&(isDecaf===true||C.isFullyDecafName(name));
@@ -343,7 +344,7 @@ class CloudApp {
  }
  coffees(){
   const s=this.state,setup=M.activeSetup(s),w=M.workspace(s);
-  if(!setup)return `<section class="welcome text-center"><h2>A better next shot.</h2><p class=helper>Add your equipment setup to start logging shots and dialing in.</p>${button('Set Up My Workspace','new-setup','','primary')}</section>`;
+  if(!setup)return `<section class="welcome text-center"><h2>A better next shot.</h2><p class=helper>Add your equipment setup to start logging shots and dialing in.</p>${button('Set Up My Workspace','new-setup','','primary')}${button('Watch Walkthrough','watch-walkthrough','','ghost full space-top')}${button('Read Getting Started Guide','getting-started-guide','','text-button space-top')}</section>`;
   if(this.view==='community')return this.communityScreen();
   const list=M.visibleCoffees(s,this.sort,this.search,this.tempCoffee);
   const offlineNow=globalThis.navigator?.onLine===false;
@@ -399,6 +400,8 @@ class CloudApp {
    }
   }
  }
+ showWalkthrough(){this.show('Watch Walkthrough',walkthroughMarkup());const v=sheet.querySelector('[data-walkthrough-player]');v?.addEventListener('error',()=>{const p=sheet.querySelector('[data-walkthrough-error]');if(p)p.hidden=false;},{once:true});}
+ showGettingStarted(){this.show('Getting Started',gettingStartedMarkup());}
  settings(){
   const v=M.activeVersion(this.state),setup=M.activeSetup(this.state),pref=this.raw?.preferences;
   this.prefRevision=pref?.revision;
@@ -426,6 +429,7 @@ class CloudApp {
      <p class="helper">Eligible Dialed-In shots from approved coffees contribute anonymously after validation. Community does not show private notes, account names, or personal setup details. Authorized administrators can review account-linked records and notes. Remove Access is reversible and retains your records and Community contributions.</p>
     </details>
    </section>
+   <section class="settings-section" aria-label="Help and getting started"><h3 class="settings-heading">Help &amp; Getting Started</h3>${button(`${icon('book',18)}<span>Read Getting Started Guide</span>${icon('chevron',16)}`,'getting-started-guide','','settings-row')}${button(`${icon('coffee',18)}<span>Watch Walkthrough</span>${icon('chevron',16)}`,'watch-walkthrough','','settings-row')}</section>
    <section class="settings-section settings-system" aria-label="Cloud Sync">
     ${button(`${icon('cloud',18)}<span>Cloud Sync Details</span>${icon('chevron',16)}`,'sync','','settings-row')}
    </section>
@@ -738,6 +742,8 @@ class CloudApp {
    if(a==='close'){sheet.close();return;}
    if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}
    if(a==='settings'){this.settings();return;}
+   if(a==='watch-walkthrough'){this.showWalkthrough();return;}
+   if(a==='getting-started-guide'){this.showGettingStarted();return;}
    if(a==='new-setup'){this.showSetup();return;}
    if(a==='grinder-range-info'||a==='next-shot-info'){
     const description=a==='grinder-range-info'
