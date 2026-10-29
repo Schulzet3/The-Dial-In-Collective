@@ -5,7 +5,7 @@ declare
  admin_id uuid:='10000000-0000-4000-8000-000000000001';
  member_id uuid:=gen_random_uuid(); member2 uuid:=gen_random_uuid();
  reviewed_coffee uuid; linked_library uuid; merge_submission uuid;
- pending_id uuid; hold_id uuid; original_library uuid; got jsonb; status text;
+ pending_id uuid; hold_id uuid; original_library uuid; got jsonb; candidate_list jsonb; status text;
  rev bigint; denied boolean; before_shots integer; before_coffees integer;
 begin
  if current_database()<>'dic_ci' then raise exception 'Disposable database only';end if;
@@ -43,6 +43,9 @@ begin
  exception when insufficient_privilege then denied:=true;
  end;
  if not denied then raise exception 'Member could read administrator candidates';end if;
+ denied:=false;
+ begin perform public.dic_admin_review_candidates(pending_id); exception when insufficient_privilege then denied:=true; end;
+ if not denied then raise exception 'Member accessed private admin comparison';end if;
  execute 'reset role';
 
  -- Registered administrator may reject stale version and then review intentionally.
@@ -98,6 +101,8 @@ begin
  execute 'set local role authenticated';
  select revision into rev from public.coffee_submissions where id=merge_submission;
  got:=public.dic_admin_coffee_candidates(merge_submission);
+ candidate_list:=public.dic_admin_review_candidates(merge_submission);
+ if jsonb_typeof(candidate_list->'candidates')<>'array' or not (candidate_list->'candidates') @> jsonb_build_array(jsonb_build_object('id',reviewed_coffee)) then raise exception 'Admin comparison RPC failed: %',candidate_list;end if;
  if not (got->'candidates') @> jsonb_build_array(jsonb_build_object(
    'id',reviewed_coffee,'name','Admin Manual 2026 Unique','roaster','Sweet Bloom',
    'release_label',null,'origin',null,'process',null)) then
@@ -149,9 +154,12 @@ begin
  exception when insufficient_privilege then denied:=true;
  end;
  if not denied then raise exception 'Anon reached admin review RPC';end if;
+ denied:=false;
+ begin perform public.dic_admin_review_candidates(hold_id); exception when insufficient_privilege then denied:=true;end;
+ if not denied then raise exception 'Anon accessed admin comparison';end if;
  execute 'reset role';
- if has_function_privilege('anon','public.dic_admin_review_coffee(uuid,bigint,text,text,uuid)','EXECUTE') then
-   raise exception 'Anon granted admin review execute';end if;
+ if has_function_privilege('anon','public.dic_admin_review_coffee(uuid,bigint,text,text,uuid)','EXECUTE') then raise exception 'Anon granted admin review execute';end if;
+ if not has_function_privilege('authenticated','private.dic_admin_review_candidates(uuid)','EXECUTE') or not has_function_privilege('authenticated','public.dic_admin_review_candidates(uuid)','EXECUTE') or has_function_privilege('anon','private.dic_admin_review_candidates(uuid)','EXECUTE') or has_function_privilege('anon','public.dic_admin_review_candidates(uuid)','EXECUTE') then raise exception 'Nested Admin comparison privilege mismatch';end if;
 end $admin_coffee$;
 select 'PASS: admin-only review, stale revision refusal, evidence labeling, safe hold, original library, anon/member denial; rolled back' result;
 rollback;

@@ -1,28 +1,46 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261029-READY-QUEUE-11",
-  "tested_source_sha": "d04be7189b5e9983a83624d5d8c0e76d2f24e8da",
-  "previous_release_head_sha": "816949840f22b2a181670de20410786d0a8de79b",
-  "claimed_at_utc": "2026-10-29T18:46:07.348Z",
+  "release_id": "DIC-20261029-READY-QUEUE-12",
+  "tested_source_sha": "eb1249d68c0ff424346752a5e4876c10ae11823f",
+  "previous_release_head_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+  "claimed_at_utc": "2026-10-29T20:34:35.967Z",
   "status": "GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-33-603-source-identity-guard",
+      "id": "DIC-Q-33-original603-direct-region-country-prose",
       "issue": 33,
-      "title": "Prevent marketing origin and anonymous producer from contaminating Add Coffee",
-      "merged_source_sha": "9738ce3af04931adf82eca7d7b5a236173c3cf02",
+      "title": "Recover selected current-coffee published region-country Origin from direct prose",
+      "merged_source_sha": "a8c12fdb0f3182d2173554c7bd3b988149feec64",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-44north-literal-origin-and-flavor-display",
+      "issue": 33,
+      "title": "Clean location prose and tasting-note lead-in for current source coffee",
+      "merged_source_sha": "3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ]
     },
     {
-      "id": "DIC-Q-47-admin-feedback-persistence",
+      "id": "DIC-Q-47-admin-candidate-nested-grant",
       "issue": 47,
-      "title": "Keep the Admin dashboard visible after audited edits and actions",
-      "merged_source_sha": "ffcb768b363fcc772eda38b122ef4c7aedb78ef2",
+      "title": "Restore protected Admin review candidate access",
+      "merged_source_sha": "8f4bbf530c12f31ab5478217c4459368bbcc4aec",
       "scope_paths": [
-        "site/admin/view.js"
+        "supabase/migrations/20261029193000_dic_admin_review_candidates_grant.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-repeated-selected-product-heading-identity",
+      "issue": 33,
+      "title": "Honor repeated identical current-coffee headings without weakening product identity",
+      "merged_source_sha": "a0cc9fa9b357db681230eb3d394dce3b86b1f031",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
       ]
     }
   ]

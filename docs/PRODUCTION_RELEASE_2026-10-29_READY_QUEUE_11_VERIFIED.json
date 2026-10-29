@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "id": "DIC-20261029-READY-QUEUE-11",
+  "status": "PROVIDER_PUBLISHED_VERIFIED",
+  "owner_instruction": "If more items are now ready, go ahead and publish those too",
+  "tested_source_sha": "d04be7189b5e9983a83624d5d8c0e76d2f24e8da",
+  "release_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+  "netlify_deploy_id": "6ae394725b3465c277210618",
+  "netlify_state": "ready",
+  "netlify_current_verified": true,
+  "published_at_utc": "2026-10-29T18:46:25.492Z",
+  "verified_at_utc": "2026-10-29T18:49:26.264Z",
+  "controller_run_id": 40933876312,
+  "controller_request_main_sha": "4c88663f4266bc42c250ac95afd9508fc2a7a147",
+  "publications_consumed": 1,
+  "ready_item_count": 2,
+  "ready_ids": [
+    "DIC-Q-33-603-source-identity-guard",
+    "DIC-Q-47-admin-feedback-persistence"
+  ],
+  "previous_release_id": "DIC-20261029-READY-QUEUE-10",
+  "previous_published_source_sha": "fa30abd6b5c96308f0957063efcc7ffb4402c8c6",
+  "combined_source_checks": [
+    {
+      "name": "approval",
+      "run_id": 40932916520,
+      "job_id": 123655797399,
+      "conclusion": "success"
+    },
+    {
+      "name": "sql",
+      "run_id": 40932916523,
+      "job_id": 123655796474,
+      "conclusion": "success"
+    },
+    {
+      "name": "validate",
+      "run_id": 40932916490,
+      "job_id": 123655797188,
+      "conclusion": "success"
+    },
+    {
+      "name": "cloud-tests",
+      "run_id": 40932916358,
+      "job_id": 123655795952,
+      "conclusion": "success"
+    },
+    {
+      "name": "mobile-browser-qa",
+      "run_id": 40932916358,
+      "job_id": 123655796736,
+      "conclusion": "success"
+    },
+    {
+      "name": "review",
+      "run_id": 40932916636,
+      "job_id": 123655815339,
+      "conclusion": "success"
+    }
+  ],
+  "tests": {
+    "node": {
+      "passed": 1994,
+      "failed": 0,
+      "skipped": 6
+    },
+    "lint": "PASS",
+    "build": "PASS",
+    "synthetic_admin_expanded_accounts": "PASS",
+    "actual_signed_in_admin": "UNVERIFIED",
+    "actual_signed_in_ketch": "UNVERIFIED",
+    "original_frozen603": "SKIPPED_BY_GUARD",
+    "direct_live_http": "UNVERIFIED (public verifier could not access app origin)"
+  },
+  "netlify": {
+    "site_id": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+    "branch": "release/production",
+    "commit_ref": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+    "context": "production",
+    "function": "coffee-url-preview",
+    "function_route": "POST /api/coffee-preview",
+    "secret_scan": {
+      "files": 870,
+      "matches": 0
+    },
+    "build_error": null
+  },
+  "supabase": {
+    "project_id": "azviqqejypsefzilgonr",
+    "migrations_unchanged": true,
+    "latest_applied_migration": "20261028230056 dic_decaf_only_method",
+    "edges": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "verify_jwt": true
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "verify_jwt": true
+      }
+    ],
+    "before_counts": {
+      "coffees": 8,
+      "shots": 24,
+      "notes": 24,
+      "submissions": 9,
+      "membership_rows": 11,
+      "admin_edit_receipts": 0,
+      "admin_delete_receipts": 0
+    },
+    "after_counts": {
+      "coffees": 8,
+      "shots": 24,
+      "notes": 24,
+      "submissions": 9,
+      "membership_rows": 11,
+      "admin_edit_receipts": 0,
+      "admin_delete_receipts": 0
+    },
+    "member_writes_performed": 0
+  },
+  "backup_reused": {
+    "artifact_id": 12858130628,
+    "encrypted_sha256": "2fbf8031b5b29351e10b7c5d738e9f4b64793c92d04495e7abd9197e4190fc56",
+    "private_drive_file_id": "1sjBMLM3_btgI2jagq7hI50RpHjb8Op0h",
+    "private_folder_id": "1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf",
+    "previous_byte_verified_at_utc": "2026-10-28T23:02:49.155Z",
+    "additional_destructive_backup_required": false
+  },
+  "limitations": [
+    "No live authenticated Ketch or administrator acceptance: actual credentials unavailable; synthetic browser tested.",
+    "Direct public HTTP page could not be reached by web verifier; Netlify READY/current exact commit and function independently observed.",
+    "Two Issue33 source-research items remain IN_PROGRESS; no claim of full independent 603-coffee field certification.",
+    "Read-only aggregates and provider metadata checked; no fresh row-by-row member digest or physical device VoiceOver test."
+  ]
+}

@@ -1,3 +1,84 @@
+## October 29 UTC — Repeated selected-product H1 fix independently reconciled READY (not deployed)
+
+PR #255 exact tested head `062fdace9014f2638c76e22af65d062b56f22bba` passed all seven applicable source checks: approval40946043199, full Node/lint/build40946043270, cloud/mobile40946043057, Chromium/visual40946043374, isolated SQL40946043165, security40946043098, source-bundle40946043359. The restricted original603 job40946043164 SKIPPED, not passed. Non-force merged `a0cc9fa9b357db681230eb3d394dce3b86b1f031`; its tree `b701cad290ea64af0e486514796033968189447a` equals the exact tested PR head, and merged validate/approval/cloud/mobile check-runs succeeded. The actual selected-product handler's six focused tests preserve repeated SAME current H1 desktop/mobile evidence and reject different/missing headings. No independent real official page with duplicate H1 or new whole603 source certification claimed. Queue `DIC-Q-33-repeated-selected-product-heading-identity` now READY, zero source blockers. Owner's concurrent release approval allows one combined batch including this newly verified fourth READY change, not the two residual IN_PROGRESS Issue33 research tasks. No production provider, member, Auth/Edge, SQL or Netlify changes from this documentation/test reconciliation.
+
+---
+
+## October 29 UTC — Issue33 repeated exact current-product heading identity fix (TESTING; NO DEPLOY)
+
+Recovered authoritative development source `5e9aa4bd4e5ad1a04f96ca60e8a678afe81b6e5e` and Issue33 full current review. Audited `selectedDirectProductCredits`: it refused *all* direct current selected-product roast, sensory, producer, and release evidence when a responsive storefront duplicated the SAME exact selected coffee H1 for desktop/mobile. This is a generic data-loss bug, not a missing roaster fact. The new identity check permits repeated H1 headings only when EVERY in-scope H1 independently normalizes to the exact selected coffee. It still rejects a missing H1 or any competing second coffee identity, with no fallback to historic SEO, unrelated product, or invented values.
+
+New six-case regression covers duplicate exact H1 (two/three occurrences), accent equivalence, mixed-product and absent-heading negatives, single-heading baseline, plus real `extractPublicCoffeeFacts` and rendered Add Coffee preview path. No current official roaster URL with repeated H1 has been independently certified for this patch; full original603/owner77 replay and genuine signed-in production acceptance are not claimed. Frozen original 603 capture/oracle/scorer and all historical member, notes, offline and Community records remain unchanged.
+
+Source, tests, scoped journal and queue row `DIC-Q-33-repeated-selected-product-heading-identity` are staged together for PR-head exact CI, safe nonforce integration and source-bound READY readback. No deployment, Supabase/Auth/Edge/SQL/member mutations, secrets or paid-service changes.
+
+---
+
+## October 29 UTC — Issue33 44 North origin and tasting-note source cleanup READY, not deployed
+
+PR #253 merged nonforce `3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3` from final tested PR head `af71d11fc8aaf5d81991ca40553906e86b464ca3`. Real Add Coffee public extractor/preview improves current 44 North **Mexico Triunfo Verde** Original603 #5: Origin `At the edge of the El Triunfo Reserve, La Paz, Chiapas, Mexico.` -> `El Triunfo Reserve, La Paz, Chiapas, Mexico`; Tasting Notes `Pleasing body with notes of sweet candied lemon and dried blueberry.` -> `sweet candied lemon and dried blueberry`. Current literal source URL `https://44northcoffee.com/products/mexico-chiapas` independently verified; raw source-fact prose remains reviewable. No roaster-URL exception; named landmarks need complete explicit country; true Peru-vs-Mexico conflict and unrelated product quarantines preserved. The frozen 603 source expectations/captures/scorer, and member/offline history, remain untouched.
+
+All applicable final PR-head checks SUCCESS: Node/lint/build `40937526472`, cloud/mobile-browser `40937526416`, visual `40937526559`, SQL `40937526584`, security `40937526374`, approval/intake `40937526440`, source bundle `40937526667`. Exact merged-source Node/lint/build `40937948025`, cloud/mobile `40937947879`, approval `40937947818` SUCCESS; tested and merged source and test blob SHA readbacks identical. Initial synthetic comma-note expectations repaired to preserve the actual roaster's conjunction. Restricted original 603 job `40937526480` and merged public-source live probes `40937947809`, `40937948101` SKIPPED, **not passed**; no complete current 603 live replay or production signed-in browser claim.
+
+Release queue `DIC-Q-33-44north-literal-origin-and-flavor-display` now **READY**, zero scoped blockers, **NOT DEPLOYED**. Parent Issue #33 semantic field adjudication remains IN_PROGRESS. No production publication, Edge/Auth/SQL/member data writes, additional direct cost or credentials changes. Prior Release11 approval consumed and does not authorize this fix.
+
+---
+
+## October 29 UTC — exact current sensory conjunction preserved in source-led Add Coffee test (NO DEPLOY)
+
+First PR253 cloud regression run `40937128844` failed two newly added assertions expecting commas where the official current roaster notes said `sweet candied lemon and dried blueberry` (and synthetic positive `red plum and lemon peel`). The runtime **already correctly strips** the inappropriate intro `Pleasing body with notes of`, retaining the literal flavor conjunction; demanding a comma was a synthetic fixture error. Corrected both tests and rendered preview expectation to the actual source-backed wording without changing extraction behavior or weakening unrelated controls. Continue exact-head CI and merge only when all applicable checks pass. No original603 historical/oracle change or publication.
+
+---
+## October 29 UTC — original603 #5 44 North selected Origin and Tasting Notes cleanup (NO DEPLOY)
+
+Owner requested another real extractor/Add Coffee improvement. Recovered authoritative development `d91a975a4e63f938bddd380239d183ddfd02d82e` and reviewed current source. A proposed blanket removal of anonymous family/farmer producer groups was rejected because the frozen oracle explicitly accepts source-published group descriptions; do not destroy their approved facts. Original603 current case #5 (Mexico Triunfo Verde) still extracts `At the edge of the El Triunfo Reserve, La Paz, Chiapas, Mexico.` as Origin and `Pleasing body with notes of sweet candied lemon and dried blueberry.` as Tasting Notes, both confirmed on the official current roaster page `https://44northcoffee.com/products/mexico-chiapas`. A source-bounded generic formatter now keeps the named landmark + printed county/state/country but removes intro words, and keeps the two literal flavors without a nonflavor mouthfeel intro. Full source language remains reviewable in `source_facts` and no producer facts are changed. New real public handler/Add Coffee preview tests cover current positives and unrelated product, country conflicts, unknown countries, named reserve, existing body and published literal preservation. Original frozen 603 captures, expected results, scoring and all member/offline/Community history preserved.
+
+Queue `DIC-Q-33-44north-literal-origin-and-flavor-display` TESTING in the same code/test commit; require full applicable exact-source PR checks, nonforce integration, post-merge check and READY receipt. No publication or SQL/Auth/Edge/member data operations authorized; owner Release11 grant not reusable.
+
+---
+
+## October 29 UTC — Issue33 Quartermaine current-source origin fix READY, NOT DEPLOYED
+
+PR251 merged nonforce at `a8c12fdb0f3182d2173554c7bd3b988149feec64`; final PR head `b86b974b0cab0c06f3b0d31e7c4b22aa6770491b` tested all applicable exact-source checks SUCCESS: Node/lint/build `40933880113`, cloud/mobile `40933880075`, visual `40933880217`, isolated SQL `40933880126`, security `40933880310`, approval and intake `40933880172`, source bundle `40933880171`. Independently validated merged-source Node/lint/build `40934305048`, cloud/mobile `40934305128`, approval `40934304975` all SUCCESS. PR and merge source/test blobs verified identical. The original restricted 603-corpus job and optional public source workflows were SKIPPED, never called a pass; original immutable 603 captures/oracle/scorer untouched.
+
+**Actual benefit:** For Quartermaine Colombia, selected current prose now gives Origin `Huila, Colombia` instead of `From the Andes, Colombia, Huila, Andes`; for Quartermaine Costa Rica, `Tarrazu, Costa Rica` instead of `From the Tarrazu, Costa Rica, Tarrazu`. Exact current official page text plus original603 source register corroborate both. The new generic rule also recognizes a named mountain/country as a broad literal place and declines to manufacture an unnamed/merchandising region. Public extractor and rendered Add Coffee preview positive/negative tests pass; complete 603 live-source replay and real authenticated production workflow for this change not performed.
+
+Queue `DIC-Q-33-original603-direct-region-country-prose` READY with no scoped blockers, **not deployed**. Independently owner-authorized Release11 source was published without this subsequent TESTING work; do not assume release approval extends to it. Parent Issue33 residual semantic/source limitations remain IN_PROGRESS. No Netlify publication, SQL/Auth/Edge/member records, secrets, purchases or original archive changes in this development request.
+
+---
+
+## October 29 UTC — exact-head PR251 lint failure repaired, Node suite PASS (NO DEPLOY)
+
+Actual GitHub run `40933369108` executed 2,004 Node tests PASS / 0 FAIL (see GitHub job receipt), including new Quartermaine direct-source handler and Add Coffee tests, but the lint stage correctly failed on one `no-unused-vars` warning from `html` in the new test after its unneeded internal-only assertion was removed. Fixed that single unused binding without changing runtime source or assertions. Approval/queue validation, cloud/mobile browser, visual, SQL, security and source-bundle checks for this head passed; new exact-head lint/build and rest required before merge or READY. Original 603 private workflow was SKIPPED, not PASS.
+
+---
+
+## October 29 UTC — source-bound provenance test repair and mountain-only scope (NO DEPLOY)
+
+First executable cloud CI on corrected syntax passed two actual `extractPublicCoffeeFacts`/Add Coffee Quartermaine source values, but two tests failed because a direct `extractCoffeeIdentityEvidence` internal subroutine (called without the production source context) was incorrectly required to return the same final field as the complete public handler. Removed this invalid extra assertion while retaining the real public handler, rendered Add Coffee and literal source-fact checks. A third test showed the generic preexisting narrative extractor could produce a `From the Andes` marketing prefix when there was only a broad mountain and country. Extended the same bounded current-product grammar to keep `Andes Mountains, Colombia` as the printed broad area, retain `Costa Rica` when the phrase publishes no specific region, and suppress `Seasonal Blend` as geographic identity. All exact country conflicts remain guarded. New complete exact-source CI required; the queue remains TESTING, no publication.
+
+---
+
+## October 29 UTC — PR251 tracked in release queue for exact-source validation (NO DEPLOY)
+
+Issue33 direct selected coffee prose Origin correction has an explicit, nonpublishable TESTING entry `DIC-Q-33-original603-direct-region-country-prose` covering `src/server/coffee-identity-evidence.mjs`. First approval workflow correctly blocked untracked application source. Registered it in the queue with scoped test evidence and precise pending blockers; after exact CI/nonforce integration, reconcile into READY only with independent proof. No production or member data operations.
+
+---
+
+## October 29 UTC — pre-CI parser literal correction for Quartermaine source rule (NO DEPLOY)
+
+Read the authored regex back from exact PR251 source and identified a single-quoted JS string containing an invalid escaped apostrophe in the new mountain possessive pattern. Replaced it with literal RegExp Unicode escapes `[\\u2019\\x27]` for curly/ASCII apostrophe without altering matched source semantics. This is a syntax correction in the same code+scoped-journal commit; fresh exact-head GitHub CI remains required. No deployment.
+
+---
+
+## October 29 UTC — original603 Quartermaine origin/region current-product correction (NO DEPLOY)
+
+Owner authorized continued real extractor improvements. Recovered authoritative development SHA `a1eaa3f7e5c10e97ae73d70284276bed41cd9890`, independently observed production Release10 current deploy remains separate. Two original603 source-level review cases (Quartermaine Colombia #262 and Costa Rica #263) expose visibly wrong Add Coffee canonical Origin values: `From the Andes, Colombia, Huila, Andes` and `From the Tarrazu, Costa Rica, Tarrazu`, respectively. The current official roaster product descriptions explicitly state `From the Andes Mountains in Colombia's Huila region, this coffee...` and `From the Tarrazu region of Costa Rica, this coffee...`. Their source-supported region/country values are `Huila, Colombia` and `Tarrazu, Costa Rica`. This is not a preference or a frozen historical expected-value promotion.
+
+Implemented a bounded, generic selected-current-coffee prose relationship in `src/server/coffee-identity-evidence.mjs` so an explicitly named region and country outrank a broader mountain-setting phrase and do not duplicate the region in the canonical Origin. Guarded by literal `this coffee` subject, current selected product scope and existing field-conflict logic. Retain original source text, avoid url/roaster-specific exceptions and preserve other regions, competing-country conflicts and member review. Added actual handler, identity extraction and Add Coffee preview positives and negatives. No changes to original603 captured bytes, oracle or scoring; 603 live source replay NOT performed for this patch. New PR-head CI, safe merge, exact-source merged CI and READY-queue receipt required before completion. No deployment, production member data, SQL/Auth/Edge or provider spending.
+
+---
+
 ## October 29 UTC — original603 identity safety fixes READY, no publication
 
 Issue33 PR245 nonforce merged `9738ce3af04931adf82eca7d7b5a236173c3cf02`. Four sourced Add Coffee canonical corrections: Costa Rica/Kenya Koffee Kult nickname origins corrected to published countries; Bald Guy Ethiopian Gigesa unnamed family-business bio no longer becomes a producer; 44 North Honduras COMSA locality prints municipality, department and origin country, not neighboring border country. Sumato generic marketing-region text is blocked but broad separately derived Central America remains. Product raw evidence retained. Exact PR-head app40928169822, cloud/mobile40928169897, visual40928169665, SQL40928169904, security40928169903, approval40928169735, bundle40928169690 SUCCESS; merged app40928621908, cloud40928621801, approval40928621921 SUCCESS. Restricted original603 job SKIPPED, no new live 603-wide replay or real member authentication claim. Queue `DIC-Q-33-603-source-identity-guard` READY, independent parent residual IN_PROGRESS. Prior Release09 authorization/released source excludes this new scope; never mark it DEPLOYED. No production provider/data work.

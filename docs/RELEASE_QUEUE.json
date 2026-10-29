@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "fa30abd6b5c96308f0957063efcc7ffb4402c8c6",
-    "release_sha": "816949840f22b2a181670de20410786d0a8de79b",
-    "netlify_deploy_id": "6ae38ba0a56bed8fa17d20ac"
+    "tested_source_sha": "d04be7189b5e9983a83624d5d8c0e76d2f24e8da",
+    "release_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+    "netlify_deploy_id": "6ae394725b3465c277210618"
   },
   "items": [
     {
@@ -2455,7 +2455,7 @@
       "issue": 33,
       "pr": 245,
       "title": "Prevent marketing origin and anonymous producer from contaminating Add Coffee",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "9738ce3af04931adf82eca7d7b5a236173c3cf02",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
@@ -2464,7 +2464,8 @@
         "Four source-backed canonical corrections grounded in original603 current selected-source adjudication: two Koffee Kult marketing nicknames to printed country, one Bald Guy anonymous supplier biography withheld, one 44 North municipal geography cleaned. Sumato broad regional marketing text filtered; separately sourced Central America remains permissible, no claim of fifth changed field.",
         "Actual extractor and Add Coffee preview positive/negative regression cases validated; source literal facts preserved; no original603 full fresh-page actual-handler replay performed or implied.",
         "PR245 head 6202c164577306b7994ac9fd6bb3ec98e92d3d36: app/build40928169822, cloud/mobile40928169897, visual40928169665, SQL40928169904, security40928169903, approval40928169735, source bundle40928169690 all SUCCESS; frozen603 hosted job40928169658 SKIPPED.",
-        "Nonforce merge 9738ce3af04931adf82eca7d7b5a236173c3cf02; exact merged-source Node/build40928621908, cloud/mobile40928621801, approval40928621921 SUCCESS; optional source probes skipped."
+        "Nonforce merge 9738ce3af04931adf82eca7d7b5a236173c3cf02; exact merged-source Node/build40928621908, cloud/mobile40928621801, approval40928621921 SUCCESS; optional source probes skipped.",
+        "Combined PR250 exact merged-source d04be718: 1,994 Node PASS / 0 FAIL / 6 intentionally SKIP; lint/build, cloud/mobile, isolated SQL, approval and full Chromium/visual PASS. Duplicate Admin feedback target corrected, expanded-account regression PASS; original frozen603 job not run."
       ],
       "ci_runs": [
         40928169822,
@@ -2476,19 +2477,29 @@
         40928169690,
         40928621908,
         40928621801,
-        40928621921
+        40928621921,
+        40932916520,
+        40932916523,
+        40932916490,
+        40932916358,
+        40932916636
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "tested_source_sha": "6202c164577306b7994ac9fd6bb3ec98e92d3d36",
-      "notes": "Source-backed runtime identity safety for selected current coffee READY, not deployed. Parent Issue33 original603 full semantic review remains IN_PROGRESS; original captures/oracle/scorer and member/offline/source evidence preserved. Released Release09 is separate and predates this queued scope. No production deployment, member records, migrations or paid services."
+      "notes": "PRODUCTION VERIFIED: DIC-20261029-READY-QUEUE-11 Netlify READY/current 6ae394725b3465c277210618 on Git release 064918ca946b12250fe36e6fadf009a9c77b98ca, tested app d04be7189b5e9983a83624d5d8c0e76d2f24e8da. Read-only Supabase before/after coffees8, shots24, notes24, submissions9, membership11, admin edit/delete receipts0; JWT-required Edge v8/v4 and latest migration 20261028230056 unchanged, no member/provider SQL/Edge/Auth changes. Browser synthetic PASS, real logged-in user/Admin and direct public HTTP UNVERIFIED.\n\nEarlier source history:\nSource-backed runtime identity safety for selected current coffee READY, not deployed. Parent Issue33 original603 full semantic review remains IN_PROGRESS; original captures/oracle/scorer and member/offline/source evidence preserved. Released Release09 is separate and predates this queued scope. No production deployment, member records, migrations or paid services.",
+      "deployed_release_id": "DIC-20261029-READY-QUEUE-11",
+      "deployed_release_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+      "deployed_netlify_deploy_id": "6ae394725b3465c277210618",
+      "deployed_source_sha": "d04be7189b5e9983a83624d5d8c0e76d2f24e8da",
+      "deployed_at_utc": "2026-10-29T18:46:25.492Z"
     },
     {
       "id": "DIC-Q-47-admin-feedback-persistence",
       "issue": 47,
       "pr": 249,
       "title": "Keep the Admin dashboard visible after audited edits and actions",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "ffcb768b363fcc772eda38b122ef4c7aedb78ef2",
       "scope_paths": [
         "site/admin/view.js"
@@ -2496,7 +2507,8 @@
       "tests": [
         "Corrected exact PR249 head d5d98708f634cde68705f65685b68e4aeecd13b4; Node/lint/cloud build 40930845583 SUCCESS, synthetic 390px and desktop Chromium visual including complete page-2, correction, stale-revision, notes, search, access-denial suite 40930845557 SUCCESS, cloud/mobile 40930845631 SUCCESS, isolated SQL 40930845653 SUCCESS, security 40930845640 SUCCESS, approval/journal 40930845624 SUCCESS. Frozen coffee corpus run 40930845680 SKIPPED as unrelated.",
         "PR #249 merged non-force ffcb768b363fcc772eda38b122ef4c7aedb78ef2; merged Git tree 969c55d8d77caeb210a34b1d46e300b06eb00150 equals exact fully tested head tree. Verified development ref and merged PR readback.",
-        "Read-only current Supabase 8 coffees/9 submissions/24 shots/24 notes/11 memberships and zero admin content or deletion audit receipts. Never modified production/member records. True authenticated admin and cross-member acceptance not yet performed; parent Issue #47 stays open."
+        "Read-only current Supabase 8 coffees/9 submissions/24 shots/24 notes/11 memberships and zero admin content or deletion audit receipts. Never modified production/member records. True authenticated admin and cross-member acceptance not yet performed; parent Issue #47 stays open.",
+        "Combined PR250 exact merged-source d04be718: 1,994 Node PASS / 0 FAIL / 6 intentionally SKIP; lint/build, cloud/mobile, isolated SQL, approval and full Chromium/visual PASS. Duplicate Admin feedback target corrected, expanded-account regression PASS; original frozen603 job not run."
       ],
       "ci_runs": [
         40930845640,
@@ -2504,11 +2516,147 @@
         40930845653,
         40930845631,
         40930845583,
-        40930845557
+        40930845557,
+        40932916520,
+        40932916523,
+        40932916490,
+        40932916358,
+        40932916636
       ],
       "blockers": [],
       "owner_source": "October 29 2026 owner collaboration on Issue #47, development/test authorization only",
-      "notes": "Narrow browser-proven fix for missing persistent accessible Admin action status element. Fix is merged/tested READY, not DEPLOYED. Parent Issue #47 remains OPEN for real authenticated administrative browser/RLS/source-matching and safe deletion acceptance. No prod member, Auth, SQL, Edge or Netlify changes."
+      "notes": "PRODUCTION VERIFIED: DIC-20261029-READY-QUEUE-11 Netlify READY/current 6ae394725b3465c277210618 on Git release 064918ca946b12250fe36e6fadf009a9c77b98ca, tested app d04be7189b5e9983a83624d5d8c0e76d2f24e8da. Read-only Supabase before/after coffees8, shots24, notes24, submissions9, membership11, admin edit/delete receipts0; JWT-required Edge v8/v4 and latest migration 20261028230056 unchanged, no member/provider SQL/Edge/Auth changes. Browser synthetic PASS, real logged-in user/Admin and direct public HTTP UNVERIFIED.\n\nEarlier source history:\nNarrow browser-proven fix for missing persistent accessible Admin action status element. Fix is merged/tested READY, not DEPLOYED. Parent Issue #47 remains OPEN for real authenticated administrative browser/RLS/source-matching and safe deletion acceptance. No prod member, Auth, SQL, Edge or Netlify changes.",
+      "deployed_release_id": "DIC-20261029-READY-QUEUE-11",
+      "deployed_release_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+      "deployed_netlify_deploy_id": "6ae394725b3465c277210618",
+      "deployed_source_sha": "d04be7189b5e9983a83624d5d8c0e76d2f24e8da",
+      "deployed_at_utc": "2026-10-29T18:46:25.492Z"
+    },
+    {
+      "id": "DIC-Q-33-original603-direct-region-country-prose",
+      "issue": 33,
+      "pr": 251,
+      "title": "Recover selected current-coffee published region-country Origin from direct prose",
+      "state": "READY",
+      "merged_source_sha": "a8c12fdb0f3182d2173554c7bd3b988149feec64",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "tests": [
+        "Original603 adjudication #262 Colombia and #263 Costa Rica have two malformed current canonical Origin strings; current official roaster descriptions explicitly publish Huila, Colombia and Tarrazu, Costa Rica. Independent scan of all 603 archived result maps found exactly these two current malformed From-the cases.",
+        "Actual public extractor handler and rendered Add Coffee preview tests with literal official selected-product sentences verify both exact field corrections, original source facts and negative cases for direct country conflicts, unrelated product, noncurrent claims, unnamed region and broad mountain scope.",
+        "Final PR251 exact tested head b86b974b0cab0c06f3b0d31e7c4b22aa6770491b: full Node/lint/build 40933880113, cloud/mobile 40933880075, visual 40933880217, isolated SQL 40933880126, security 40933880310, approval/queue 40933880172, private source bundle 40933880171 all SUCCESS.",
+        "PR251 merged nonforce a8c12fdb0f3182d2173554c7bd3b988149feec64 with prior development parent e2743fdc1770c2ad29757d5c837463c0991e79e2 and exact PR source parent b86b974b0cab0c06f3b0d31e7c4b22aa6770491b. Merged-source Node/lint/build 40934305048, cloud/mobile 40934305128, approval 40934304975 all SUCCESS.",
+        "Original hosted restricted 603-corpus workflow 40933880084 and merged public source acceptance/probe 40934305251 / 40934305100 SKIPPED, explicitly not treated as passed or a new 603-case live replay."
+      ],
+      "ci_runs": [
+        40933880113,
+        40933880075,
+        40933880217,
+        40933880126,
+        40933880310,
+        40933880172,
+        40933880171,
+        40934305048,
+        40934305128,
+        40934304975
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Two real selected-product Add Coffee Origin canonical corrections from original 603 audit using generic direct current-coffee region/country grammar; no roaster-specific URL or invented geography. Selected literal source quotes, real conflicts, archived 603 captures/oracle/scorer, member/offline and Community data unchanged. No genuine live 603 entire corpus replay nor signed-in production acceptance for this patch. Scoped READY; NOT DEPLOYED. Owner Release11 grant was source-pinned and published without this item; do not mark DEPLOYED or include in any later publish absent separate approval.",
+      "tested_source_sha": "b86b974b0cab0c06f3b0d31e7c4b22aa6770491b"
+    },
+    {
+      "id": "DIC-Q-33-44north-literal-origin-and-flavor-display",
+      "issue": 33,
+      "pr": 253,
+      "title": "Clean location prose and tasting-note lead-in for current source coffee",
+      "state": "READY",
+      "merged_source_sha": "3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Official current 44 North Mexico Triunfo Verde product (original frozen603 #5) publishes Location: At the edge of the El Triunfo Reserve, La Paz, Chiapas, Mexico and Tasting notes: Pleasing body with notes of sweet candied lemon and dried blueberry. Bounded generic selected-product normalizers remove display-only intro language and preserve the original geography/flavor exactly.",
+        "New real public extractor and Add Coffee preview tests cover original literal current source, a distinct printed named reserve, known-country check, conflicting Peru/Mexico claims, unrelated recommended coffee, incomplete location, and previously clean independent Full Body notes. Full published source strings remain available in source_facts.",
+        "Final exact PR head af71d11fc8aaf5d81991ca40553906e86b464ca3: Node/lint/build 40937526472, cloud/mobile-browser 40937526416, visual 40937526559, isolated SQL 40937526584, source security 40937526374, approval/intake 40937526440, private source bundle 40937526667 all SUCCESS. Initial cloud test expectations repaired without changing source flavor semantics.",
+        "PR253 merged nonforce at 3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3 (parents d91a975a4e63f938bddd380239d183ddfd02d82e and af71d11fc8aaf5d81991ca40553906e86b464ca3). Verified actual runtime source/test blob identities match tested PR. Merged-source Node/lint/build 40937948025, cloud/mobile 40937947879, approval 40937947818 all SUCCESS.",
+        "Original restricted hosted 603-corpus 40937526480 SKIPPED, merged current public source acceptance/probe 40937947809 and 40937948101 SKIPPED; no full live 603-case replay or real production member authentication claimed."
+      ],
+      "ci_runs": [
+        40937526472,
+        40937526416,
+        40937526559,
+        40937526584,
+        40937526374,
+        40937526440,
+        40937526667,
+        40937948025,
+        40937947879,
+        40937947818
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Confirmed direct current-product display improvements for original603 case #5. Canonical Origin becomes 'El Triunfo Reserve, La Paz, Chiapas, Mexico' and Tasting Notes becomes 'sweet candied lemon and dried blueberry'; roaster's literal sentences preserved in source review. Original frozen603 captures/oracle/scorer, historical member/offline/shots/notes, auth/privacy and other approved code preserved. Scoped READY, not deployed. Requires separate future release instruction; previously consumed Release11 authorization does not cover this change.",
+      "tested_source_sha": "af71d11fc8aaf5d81991ca40553906e86b464ca3"
+    },
+    {
+      "id": "DIC-Q-47-admin-candidate-nested-grant",
+      "issue": 47,
+      "pr": 254,
+      "title": "Restore protected Admin review candidate access",
+      "state": "READY",
+      "merged_source_sha": "8f4bbf530c12f31ab5478217c4459368bbcc4aec",
+      "scope_paths": [
+        "supabase/migrations/20261029193000_dic_admin_review_candidates_grant.sql"
+      ],
+      "tests": [
+        "Owner's actual signed-in Admin mobile screenshot plus live Supabase authenticated RPC trace: dashboard 200, paged records 200, candidate comparison 403 / SQLSTATE 42501 in four attempts (19:20-19:21 UTC).",
+        "Read-only PostgreSQL catalog identified only the private review-candidates function lacking authenticated EXECUTE; existing public invoker wrapper, server-side Admin/Member checks and anonymous denial preserved.",
+        "Exact PR head 50112fd653f558e662c31d1c607b27178c79baee: isolated PostgreSQL 40944204855 SUCCESS, approval/journal 40944205010 SUCCESS, Node/lint/build 40944204844 SUCCESS, cloud/mobile 40944204843 SUCCESS, private Chromium/visual 40944204784 SUCCESS.",
+        "PR #254 merged non-force 8f4bbf530c12f31ab5478217c4459368bbcc4aec; tested/merged Git trees BOTH f5d4a5682ca0222c68796b2217fc932644413943, identical.",
+        "Disposable SQL now asserts authenticated Admin can load candidates, admitted ordinary member and anonymous are denied; no member records or hosted permissions changed. Production migration still pending owner release."
+      ],
+      "ci_runs": [
+        40944204855,
+        40944205010,
+        40944204844,
+        40944204843,
+        40944204784
+      ],
+      "blockers": [],
+      "owner_source": "Owner October 29 Admin screenshots and Supabase real-provider logs",
+      "notes": "READY source only. Apply single scoped migration 20261029193000_dic_admin_review_candidates_grant.sql only on separate owner publish/release authorization. This is a hosted-Supabase SQL change, not a Netlify-only deploy; after release must independently read back has_function_privilege authenticated=true anon=false and real iPhone Admin Pending comparison remains visible. Parent Issue #47 still OPEN for distinct other account acceptance. No deployment occurred in development.",
+      "tested_source_sha": "50112fd653f558e662c31d1c607b27178c79baee"
+    },
+    {
+      "id": "DIC-Q-33-repeated-selected-product-heading-identity",
+      "issue": 33,
+      "pr": 255,
+      "title": "Honor repeated identical current-coffee headings without weakening product identity",
+      "state": "READY",
+      "merged_source_sha": "a0cc9fa9b357db681230eb3d394dce3b86b1f031",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ],
+      "tests": [
+        "Generic exact-selected product parser permits two or three identical current H1 elements from responsive layouts but rejects missing or competing H1; six real-handler/Add Coffee-preview and negative identity cases.",
+        "Final PR255 head 062fdace9014f2638c76e22af65d062b56f22bba: approval 40946043199, full Node/lint/build 40946043270, cloud/mobile 40946043057, Chromium visual 40946043374, isolated SQL 40946043165, security 40946043098 and source bundle 40946043359 all SUCCESS. Frozen603 restricted job 40946043164 SKIPPED.",
+        "Nonforce merge a0cc9fa9b357db681230eb3d394dce3b86b1f031 tree b701cad290ea64af0e486514796033968189447a exactly equals PR255 tested head tree; merged-source validate, approval, cloud tests and mobile browser check-runs all SUCCESS."
+      ],
+      "ci_runs": [
+        40946043199,
+        40946043270,
+        40946043057,
+        40946043374,
+        40946043165,
+        40946043098,
+        40946043359
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Generic selected current-product identity guard improvement only, not a roaster URL exception. A desktop/mobile duplicated exact current H1 no longer suppresses direct roast and sensory evidence, but different/absent H1 still blocks cross-product donation. No original 603 oracle/captures or member/offline/Community change, no production deployment. Scoped READY after exact source and nonforce merge; no verified real published product with duplicate H1, no full 603-case current/live replay or signed-in production acceptance. Parent Issue #33 remains OPEN. Source included only in an owner-approved combined READY release, not deployed by this status.",
+      "tested_source_sha": "062fdace9014f2638c76e22af65d062b56f22bba"
     }
   ],
   "history": [
@@ -3350,6 +3498,19 @@
         "DIC-Q-33-original603-source-field-cleanup"
       ],
       "receipt": "docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_VERIFIED.json"
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-11",
+      "state": "DEPLOYED",
+      "tested_source_sha": "d04be7189b5e9983a83624d5d8c0e76d2f24e8da",
+      "release_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+      "netlify_deploy_id": "6ae394725b3465c277210618",
+      "deployed_at_utc": "2026-10-29T18:46:25.492Z",
+      "item_ids": [
+        "DIC-Q-33-603-source-identity-guard",
+        "DIC-Q-47-admin-feedback-persistence"
+      ],
+      "receipt": "docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_11_VERIFIED.json"
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"

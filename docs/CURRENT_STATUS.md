@@ -1,3 +1,43 @@
+## October 29 UTC — Issue47 real signed-in Admin failure diagnosed and grant-only repair READY, NOT DEPLOYED
+
+Owner iPhone dashboard succeeds but opening Pending Coffees causes immediate access-unavailable. Real Supabase request logs confirmed dashboard/records HTTP 200 then pending review comparison 403/SQLSTATE 42501 four times. Live private RPC catalog confirmed only `private.dic_admin_review_candidates(uuid)` was missing authenticated EXECUTE; public invoker wrapper had it, while private role checks still require real admitted Administrator. PR254 fixed ONLY the missing nested privilege via migration `20261029193000_dic_admin_review_candidates_grant.sql`, with Admin/member/anon SQL regression. Exact source checks all PASS: SQL40944204855, approval40944205010, app40944204844, cloud UX40944204843, Chromium visual40944204784. PR head 50112fd653f558e662c31d1c607b27178c79baee non-force merged 8f4bbf530c12f31ab5478217c4459368bbcc4aec with byte-identical tested Git tree f5d4a5682ca0222c68796b2217fc932644413943. New queue `DIC-Q-47-admin-candidate-nested-grant` READY, NOT DEPLOYED; existing Release11 remains production. No hosted SQL/Auth/Edge/Netlify or member-data writes. Separate owner publish approval needed for hosted migration and postflight readback; no user account, note, or record changes permitted. Parent #47 remains OPEN for other genuine signed-in acceptance.
+
+---
+
+## October 29 UTC — Issue33 44 North origin and tasting-note source cleanup READY, not deployed
+
+PR #253 merged nonforce `3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3` from final tested PR head `af71d11fc8aaf5d81991ca40553906e86b464ca3`. Real Add Coffee public extractor/preview improves current 44 North **Mexico Triunfo Verde** Original603 #5: Origin `At the edge of the El Triunfo Reserve, La Paz, Chiapas, Mexico.` -> `El Triunfo Reserve, La Paz, Chiapas, Mexico`; Tasting Notes `Pleasing body with notes of sweet candied lemon and dried blueberry.` -> `sweet candied lemon and dried blueberry`. Current literal source URL `https://44northcoffee.com/products/mexico-chiapas` independently verified; raw source-fact prose remains reviewable. No roaster-URL exception; named landmarks need complete explicit country; true Peru-vs-Mexico conflict and unrelated product quarantines preserved. The frozen 603 source expectations/captures/scorer, and member/offline history, remain untouched.
+
+All applicable final PR-head checks SUCCESS: Node/lint/build `40937526472`, cloud/mobile-browser `40937526416`, visual `40937526559`, SQL `40937526584`, security `40937526374`, approval/intake `40937526440`, source bundle `40937526667`. Exact merged-source Node/lint/build `40937948025`, cloud/mobile `40937947879`, approval `40937947818` SUCCESS; tested and merged source and test blob SHA readbacks identical. Initial synthetic comma-note expectations repaired to preserve the actual roaster's conjunction. Restricted original 603 job `40937526480` and merged public-source live probes `40937947809`, `40937948101` SKIPPED, **not passed**; no complete current 603 live replay or production signed-in browser claim.
+
+Release queue `DIC-Q-33-44north-literal-origin-and-flavor-display` now **READY**, zero scoped blockers, **NOT DEPLOYED**. Parent Issue #33 semantic field adjudication remains IN_PROGRESS. No production publication, Edge/Auth/SQL/member data writes, additional direct cost or credentials changes. Prior Release11 approval consumed and does not authorize this fix.
+
+---
+
+## October 29 UTC — Issue33 Quartermaine current-source origin fix READY, NOT DEPLOYED
+
+PR251 merged nonforce at `a8c12fdb0f3182d2173554c7bd3b988149feec64`; final PR head `b86b974b0cab0c06f3b0d31e7c4b22aa6770491b` tested all applicable exact-source checks SUCCESS: Node/lint/build `40933880113`, cloud/mobile `40933880075`, visual `40933880217`, isolated SQL `40933880126`, security `40933880310`, approval and intake `40933880172`, source bundle `40933880171`. Independently validated merged-source Node/lint/build `40934305048`, cloud/mobile `40934305128`, approval `40934304975` all SUCCESS. PR and merge source/test blobs verified identical. The original restricted 603-corpus job and optional public source workflows were SKIPPED, never called a pass; original immutable 603 captures/oracle/scorer untouched.
+
+**Actual benefit:** For Quartermaine Colombia, selected current prose now gives Origin `Huila, Colombia` instead of `From the Andes, Colombia, Huila, Andes`; for Quartermaine Costa Rica, `Tarrazu, Costa Rica` instead of `From the Tarrazu, Costa Rica, Tarrazu`. Exact current official page text plus original603 source register corroborate both. The new generic rule also recognizes a named mountain/country as a broad literal place and declines to manufacture an unnamed/merchandising region. Public extractor and rendered Add Coffee preview positive/negative tests pass; complete 603 live-source replay and real authenticated production workflow for this change not performed.
+
+Queue `DIC-Q-33-original603-direct-region-country-prose` READY with no scoped blockers, **not deployed**. Independently owner-authorized Release11 source was published without this subsequent TESTING work; do not assume release approval extends to it. Parent Issue33 residual semantic/source limitations remain IN_PROGRESS. No Netlify publication, SQL/Auth/Edge/member records, secrets, purchases or original archive changes in this development request.
+
+---
+
+## October 29 UTC — Release11 provider READY/current, complete queue state
+
+**One-use Release11 deployed** exactly the two additional READY items (#33 source-identity safeguard, #47 Admin feedback + duplicate-ID correction), after separately deployed ten-item Release10. Production release Git `064918ca946b12250fe36e6fadf009a9c77b98ca`; Netlify READY/current `6ae394725b3465c277210618`, published 2026-10-29T18:46:25.492Z; exact tested app source `d04be7189b5e9983a83624d5d8c0e76d2f24e8da`. Single-use controller SUCCESS run 40933876312; six applicable merged-source checks PASS with Node 1,994 PASS/0 FAIL/6 SKIP. Ketch Light/Medium-Dark selector and selected notes previously deployed in Release10 remain included. SQL migrations and Edge JWT v8/v4 unchanged. Read-only database aggregates coffees8, shots24, notes24, submissions9, membership11 unchanged; zero Admin edit/delete receipts; no private writes, paid upgrades or extra destructive backup. Existing encrypted Drive backup reused.
+
+**Current durable queue:** 59 DEPLOYED, **0 READY**, **1 TESTING** (`DIC-Q-33-original603-direct-region-country-prose`, not merged/ready and NOT in this release), **2 IN_PROGRESS** original603 research tasks. No approval for a third release. Direct public HTTP, live authenticated Ketch/Admin and owner native device checks remain UNVERIFIED; synthetic browser tests PASS. [Release11 exact provider receipt](PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_11_VERIFIED.json); prior Release10 receipt remains immutable.
+
+---
+
+## October 29 UTC — Second READY batch of two, exact merged-source checks PASS; publication not yet verified
+
+Owner latest explicit instruction permits one further release of Issue33 source identity and Issue47 Admin feedback (including duplicate status ID cleanup); tested source d04be7189b5e9983a83624d5d8c0e76d2f24e8da. Six merged-source checks PASS, 1,994 Node tests passed. Unique grant DIC-20261029-READY-QUEUE-11 is recorded on development for one source-bound release. Existing Release10 remains published until new Netlify READY/current readback. No database/Edge/Auth/member mutations. Unfinished original603 and Issue37 draft excluded.
+
+---
+
 ## October 29 UTC — Issue #47 Administrator feedback persistence fixed and verified READY, unpublished
 
 PR249 merged nonforce `ffcb768b363fcc772eda38b122ef4c7aedb78ef2` (exact source tree equals tested PR `d5d98708f634cde68705f65685b68e4aeecd13b4`). Missing Admin `#admin-action-notice` formerly replaced the entire dashboard after successful edits; now one accessible inline status region preserves the record view. All applicable exact-source app/build, security, approval, isolated SQL, mobile/cloud UX and real Chromium synthetic 55-coffee/51-shot page-two/edit/private-note/stale-revision/access-denial checks PASS (IDs in `docs/workstreams/issue-47.md`); unrelated frozen coffee corpus SKIPPED. Queue `DIC-Q-47-admin-feedback-persistence` is **READY, NOT DEPLOYED**, blockers zero. No production/Auth/Edge/SQL/member writes. Whole Issue #47 remains OPEN for genuine signed-in admin and non-admin acceptance; no manual owner-device release gate. No Netlify deployment authorized.
