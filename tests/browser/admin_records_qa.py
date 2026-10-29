@@ -184,7 +184,8 @@ with sync_playwright() as p:
 
     # Deletion is previewed but intentionally cancelled. Never simulate a real destructive write.
     shots=page.locator('#admin-shots')
-    shots.locator('.admin-coffee-group summary').click() if not shots.locator('.admin-coffee-group').last.get_attribute('open') else None
+    if not shots.locator('.admin-coffee-group').last.evaluate("(el) => el.open"):
+        shots.locator('.admin-coffee-group summary').click()
     shots.locator('.admin-record').last.locator('[data-action="admin-delete-record"]').click()
     page.wait_for_function("window.__calls.some(c=>c.name==='dic_admin_delete_preview')")
     assert "Associated records:" in page.evaluate("window.__confirmText")
