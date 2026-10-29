@@ -2285,6 +2285,48 @@
       "blockers": [],
       "owner_source": "October 29 2026 owner request for original603 source-backed review and explicit October29 requirement that changes improve actual app/extractor",
       "notes": "Scoped tested implemented source only, READY not deployed; this does NOT certify 603 individual coffee field decisions. No production or private member mutations."
+    },
+    {
+      "id": "DIC-Q-33-live-purchased-roast-html-autofill",
+      "issue": 33,
+      "pr": null,
+      "title": "Recover live purchased roast choices and variant-specific tasting notes when Shopify JSON is unavailable",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-roast-variants.mjs",
+        "netlify/functions/coffee-url-preview.mjs",
+        "site/cloud/coffee-url-autofill.js"
+      ],
+      "tests": [
+        "Prepared direct Ketch light/medium-dark fixture, Shopify HTML radios/select fallback, negative non-product/marketing tests, autofill/manual-edit persistence, authenticated public-preview handler regression. GitHub exact-head CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source GitHub CI, safe non-force integration and final merged-source readback pending."
+      ],
+      "owner_source": "Owner 2026-10-29: actual Ketch Legacy Farms Honduras Natural process URL missing selected-roast preview and tasting note import.",
+      "notes": "Scoped generic HTML purchase-option fallback and safe roast-aware form autofill; preserve exact-product source hierarchy and manual corrections; no Supabase data writes, no deployment authorized."
+    },
+    {
+      "id": "DIC-Q-238-research-recommendation-guardrails",
+      "issue": 238,
+      "pr": null,
+      "title": "Research-consistent next-shot validity, control-limit abstention and calibration-safe time evidence",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Research package 48/48 reference scenarios + Node structural validator: PASS, research-only; actual app fixture and exact-source CI PENDING"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "New real app regression suite and exact-source CI not yet verified; non-force integration pending."
+      ],
+      "owner_source": "Owner 2026-10-29 explicit research implementation development authorization; separate deploy approval withheld",
+      "notes": "No SQL/Auth/Edge/privacy changes. Research experimental/not_ready suggestions intentionally excluded. Preserve original shots, community data and successful family records."
     }
   ],
   "history": [
