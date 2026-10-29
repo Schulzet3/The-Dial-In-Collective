@@ -250,3 +250,14 @@ test('admin dashboard retains an accessible inline action status region after a 
  assert.match(matches[0],/aria-live="polite"/);
  assert.match(html,/id="admin-refresh"/,'the dashboard remains navigable after feedback');
 });
+
+test('expanded Admin Accounts retain a single action status target',()=>{
+ const html=renderAdminDashboard({counts:{active_accounts:1}},
+  {members:[{id:'fixture-member',email:'member@example.invalid',enabled:true}],invites:[]},
+  null,{}, {accounts:{items:[{id:'fixture-member',email:'member@example.invalid'}],total:1,offset:0}},
+  {openSections:new Set(['accounts'])});
+ assert.equal((html.match(/id="admin-action-notice"/g)||[]).length,1);
+ assert.match(html,/<p id="admin-action-notice"[^>]*role="status"[^>]*><\/p>/);
+ assert.match(html,/id="admin-invite-form"/);
+ assert.match(html,/id="admin-refresh"/);
+});

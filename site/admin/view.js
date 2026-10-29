@@ -142,7 +142,7 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
   </form>
   <p class="admin-invite-footnote helper">Unused codes never expire by date and can be revoked at any time. After one account uses a code, it cannot be used again. Already admitted accounts stay active until you remove their access.</p>
   ${secret}
-  <p id="admin-action-notice" class="admin-action-notice" role="alert" aria-live="assertive"></p>
+
   <h3>Existing Codes <span class="helper">${formatCount(invitesTotal)}</span></h3>
   <ul class="admin-invite-list">${inviteRows||'<li class="helper">No codes created yet.</li>'}</ul>
   ${inviteFallback}
