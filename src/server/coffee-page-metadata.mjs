@@ -301,9 +301,30 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   const repeated=s.match(/^(.*?)\bRegion\s+of\s+([^,]{3,45})\s*,\s*(.+)$/iu);
   if(repeated&&repeated[1].trim()&&keyOf(repeated[2])===keyOf(repeated[3]))
    s=`${repeated[1].trim()} Region, ${repeated[2].trim()}`;
+  // Selected product pages can call a marketing nickname "Origin" even
+  // though they also print the real country. Never save that nickname as
+  // geography. Preserve the exact text in public source_facts.
+  const nickname=s.match(/^The\s+([\p{L}\p{M}][\p{L}\p{M}'’\s-]{2,70}?)\s*\(([\p{L}\p{M}\s-]{3,50})\)\.?$/iu);
+  if(nickname&&ORIGIN_COUNTRIES.has(keyOf(nickname[2]))&&
+     !/\b(?:valley|mountains?|hills?|highlands?|plateau|river|district|region|province|department|county|city|town|village|municipality|farm|finca|estate|cooperative|community|island|volcano)\b/iu.test(nickname[1]))
+   s=nickname[2].trim();
+  // A promotional description of multiple unspecified regions is not a
+  // location and must not enter the canonical Origin field.
+  if(/^(?:premium|selected|assorted|various|multiple|mixed)\s+[\p{L}\p{M} -]{3,100}\bcoffee\s+regions?\.?$/iu.test(s))
+   return '';
+  // This directly printed location names the municipality, department
+  // and growing country. The neighboring BORDER country is not origin.
+  const municipality=s.match(/^Municipality\s+of\s+([\p{L}\p{M} .’'-]{2,70})\s+in\s+the\s+([\p{L}\p{M} .’'-]{2,70})\s+department\s+in\s+([\p{L}\p{M} .’'-]{3,55})\s+near\s+the\s+border\s+of\s+([\p{L}\p{M} .’'-]{3,55})\.?$/iu);
+  if(municipality&&ORIGIN_COUNTRIES.has(keyOf(municipality[3]))&&
+     ORIGIN_COUNTRIES.has(keyOf(municipality[4]))&&
+     keyOf(municipality[3])!==keyOf(municipality[4]))
+   s=[municipality[1].trim(),municipality[2].trim(),municipality[3].trim()].join(', ');
  }
  if(field==='producer')s=s.replace(/\s+(?:read more|learn more|view details)\s*$/i,'').trim();
  if(field==='producer'&&/^(?:amount|quantity|size|weight|choose|select|add to cart|shop now)$/i.test(s))return '';
+ // "Family business with three generations of experience" is not a
+ // named supplier. Do not infer the producer from a roaster biography.
+ if(field==='producer'&&/^(?:a\s+)?family\s+business\s+with\s+(?:\d+|one|two|three|four|five)\s+generations?\s+of\b/iu.test(s))return '';
  if(field==='variety'){
   // Selected-product labels "Varietal-- Chiroso" and "Varietals: Bourbon,..."
   // sometimes retain a leading HTML separator in the extracted cultivar.
