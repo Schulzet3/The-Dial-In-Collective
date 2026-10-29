@@ -2569,22 +2569,36 @@
     {
       "id": "DIC-Q-33-44north-literal-origin-and-flavor-display",
       "issue": 33,
-      "pr": null,
+      "pr": 253,
       "title": "Clean location prose and tasting-note lead-in for current source coffee",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "Original603 #5 44 North Mexico Triunfo Verde current official page has a qualified full location and sensory lead-in; new actual extractor, Add Coffee preview, provenance and negative tests; exact-source CI pending."
+        "Official current 44 North Mexico Triunfo Verde product (original frozen603 #5) publishes Location: At the edge of the El Triunfo Reserve, La Paz, Chiapas, Mexico and Tasting notes: Pleasing body with notes of sweet candied lemon and dried blueberry. Bounded generic selected-product normalizers remove display-only intro language and preserve the original geography/flavor exactly.",
+        "New real public extractor and Add Coffee preview tests cover original literal current source, a distinct printed named reserve, known-country check, conflicting Peru/Mexico claims, unrelated recommended coffee, incomplete location, and previously clean independent Full Body notes. Full published source strings remain available in source_facts.",
+        "Final exact PR head af71d11fc8aaf5d81991ca40553906e86b464ca3: Node/lint/build 40937526472, cloud/mobile-browser 40937526416, visual 40937526559, isolated SQL 40937526584, source security 40937526374, approval/intake 40937526440, private source bundle 40937526667 all SUCCESS. Initial cloud test expectations repaired without changing source flavor semantics.",
+        "PR253 merged nonforce at 3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3 (parents d91a975a4e63f938bddd380239d183ddfd02d82e and af71d11fc8aaf5d81991ca40553906e86b464ca3). Verified actual runtime source/test blob identities match tested PR. Merged-source Node/lint/build 40937948025, cloud/mobile 40937947879, approval 40937947818 all SUCCESS.",
+        "Original restricted hosted 603-corpus 40937526480 SKIPPED, merged current public source acceptance/probe 40937947809 and 40937948101 SKIPPED; no full live 603-case replay or real production member authentication claimed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head CI, nonforce merge, merged-source checks and postmerge queue reconciliation pending. Original frozen 603 corpus not replayed live."
+      "ci_runs": [
+        40937526472,
+        40937526416,
+        40937526559,
+        40937526584,
+        40937526374,
+        40937526440,
+        40937526667,
+        40937948025,
+        40937947879,
+        40937947818
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Preserve all literal raw source facts, original frozen oracle, members/history. Generic bounded parser formatting only, no roaster URL-specific behavior; NOT DEPLOYED or authorized for publication."
+      "notes": "Confirmed direct current-product display improvements for original603 case #5. Canonical Origin becomes 'El Triunfo Reserve, La Paz, Chiapas, Mexico' and Tasting Notes becomes 'sweet candied lemon and dried blueberry'; roaster's literal sentences preserved in source review. Original frozen603 captures/oracle/scorer, historical member/offline/shots/notes, auth/privacy and other approved code preserved. Scoped READY, not deployed. Requires separate future release instruction; previously consumed Release11 authorization does not cover this change.",
+      "tested_source_sha": "af71d11fc8aaf5d81991ca40553906e86b464ca3"
     }
   ],
   "history": [
