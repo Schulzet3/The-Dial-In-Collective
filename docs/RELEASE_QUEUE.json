@@ -2723,6 +2723,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "No deployment or provider/member changes; original603 frozen capture/oracle/scorer unchanged. Supersedes earlier conflicted PRs #257/#259; preserve all concurrent READY queue entries. Scoped implementation READY for a future owner-approved release, NOT DEPLOYED. Parent Issue #33 original603 audit remains IN_PROGRESS; genuine live 603 current acceptance and signed-in production member test for this fix not claimed. Superseded PR257/259 closed unmerged."
+    },
+    {
+      "id": "DIC-Q-33-selected-lot-region-corroboration",
+      "issue": 33,
+      "pr": null,
+      "title": "Recover same selected-coffee named region and lot locality from separate explicit source statements",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "tests": [
+        "Original immutable603 #501 current official IXXA Ki-Saya product page explicitly states Chiapas in the named current coffee story and Tenejapa in this-lot sourcing sentence, while original extraction only preserved Tenejapa.",
+        "Seven new tests staged against public extractor, Add Coffee preview and source attribution: current exact product, generic other product, cross-coffee/historical/educational/missing parts, multiple conflicting statements, competing origin and duplicate H1. Exact CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-head full applicable GitHub CI, non-force merge, exact-source merged check and READY receipt pending. Full private immutable603 and live 603 source replay not yet performed."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Never infer Mexico or another unstated place. Requires exact selected H1, name-bound current region statement and this-lot hails-from locality, unique consistent pair; preserves source quote and existing conflicting evidence. No production changes."
     }
   ],
   "history": [
