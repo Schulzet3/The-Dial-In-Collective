@@ -1,6 +1,6 @@
 # The Dial In Collective — Your First Shot (DRAFT)
 
-**Private, unpublished written guide for Issue #37.** Checked against **currently published** release source \`05cf9eb156f63110cd434034ec3914a1e92b76d3\` and Netlify READY/current deploy \`6ae27f32bfae09ad8745e19b\` on October 29, 2026. The first-shot text and controls also match the development app at source \`814fe413ea0c9947621559add4e78044329f3b0c\`; development changes must not be described as live. The owner has **not** selected the final written/video/combined format or publication window. This guide is not linked from the app.
+**Private, unpublished written guide for Issue #37.** Checked against **currently published** release source `05cf9eb156f63110cd434034ec3914a1e92b76d3` and Netlify READY/current deploy `6ae27f32bfae09ad8745e19b` on October 29, 2026. The first-shot text and controls also match the development app at source `814fe413ea0c9947621559add4e78044329f3b0c`; development changes must not be described as live. The owner has **not** selected the final written/video/combined format or publication window. This guide is not linked from the app.
 
 ## Your first espresso shot — six steps
 

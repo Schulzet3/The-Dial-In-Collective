@@ -6,11 +6,11 @@
 
 | Item | Independently checked |
 | --- | --- |
-| Published source commit | \`05cf9eb156f63110cd434034ec3914a1e92b76d3\` on \`release/production\` |
-| Actual Netlify deploy | \`6ae27f32bfae09ad8745e19b\`, state READY/current, published Oct 28 2026 23:03:32 UTC |
-| Public app URL | \`https://app.dialincollective.com\` |
-| Source crosscheck | \`site/cloud/main.js\` (auth/setup/Add Coffee/shot/sync), \`site/lib/ui.js\` (taste controls), \`site/lib/constants.js\` (five scales/styles), \`site/cloud/shot_card.js\` (history) |
-| Proposed guide | \`docs/guides/BEGINNER_QUICKSTART_DRAFT.md\`; no live link |
+| Published source commit | `05cf9eb156f63110cd434034ec3914a1e92b76d3` on `release/production` |
+| Actual Netlify deploy | `6ae27f32bfae09ad8745e19b`, state READY/current, published Oct 28 2026 23:03:32 UTC |
+| Public app URL | `https://app.dialincollective.com` |
+| Source crosscheck | `site/cloud/main.js` (auth/setup/Add Coffee/shot/sync), `site/lib/ui.js` (taste controls), `site/lib/constants.js` (five scales/styles), `site/cloud/shot_card.js` (history) |
+| Proposed guide | `docs/guides/BEGINNER_QUICKSTART_DRAFT.md`; no live link |
 
 ## Corrections from the previous draft
 
@@ -22,8 +22,8 @@
 
 ## Source-only verification, not device certification
 
-- Static document-to-current-app-label contract: \`tests/issue37-beginner-guide-contract.test.mjs\`. It checks displayed actions/setup fields, five taste scales, flow order and draft status against live-source-derived labels in checked-in code. CI result must be recorded, not inferred.
-- Prior PR228's published-source audit remains valid for unchanged release \`05cf9eb\`.
+- Static document-to-current-app-label contract: `tests/issue37-beginner-guide-contract.test.mjs`. It checks displayed actions/setup fields, five taste scales, flow order and draft status against live-source-derived labels in checked-in code. CI result must be recorded, not inferred.
+- Prior PR228's published-source audit remains valid for unchanged release `05cf9eb`.
 - Existing synthetic browser/mobile and PWA/offline suites may check general layout/controls, but they **do not** prove an admitted production member completed this guide, VoiceOver/TalkBack worked or a user successfully read these steps on a physical phone.
 
 ## Outstanding acceptance — do not silently waive
