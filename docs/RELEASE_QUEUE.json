@@ -2727,23 +2727,34 @@
     {
       "id": "DIC-Q-33-selected-lot-region-corroboration",
       "issue": 33,
-      "pr": null,
+      "pr": 261,
       "title": "Recover same selected-coffee named region and lot locality from separate explicit source statements",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c38244e5f9eb87e35b15c5001176d574b78361ec",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ],
       "tests": [
         "Original immutable603 #501 current official IXXA Ki-Saya product page explicitly states Chiapas in the named current coffee story and Tenejapa in this-lot sourcing sentence, while original extraction only preserved Tenejapa.",
-        "Seven new tests staged against public extractor, Add Coffee preview and source attribution: current exact product, generic other product, cross-coffee/historical/educational/missing parts, multiple conflicting statements, competing origin and duplicate H1. Exact CI pending."
+        "Seven new tests staged against public extractor, Add Coffee preview and source attribution: current exact product, generic other product, cross-coffee/historical/educational/missing parts, multiple conflicting statements, competing origin and duplicate H1. Exact CI pending.",
+        "Final PR261 exact tested head 2341e4ebb370b28ddc5b8fa0ed624e26a6d403a7: all seven applicable CI SUCCESS. Node/lint/cloud build 40956131481 (2036 PASS/0 FAIL/6 SKIP); cloud/mobile Chromium 40956131163 (1580 PASS/0 FAIL); visual 40956131093; isolated SQL 40956131231; security 40956131233; approval/continuity 40956131406; exact private source bundle 40956131510.",
+        "PR261 non-force merged c38244e5f9eb87e35b15c5001176d574b78361ec, exact Git tree 51225ff0c679a032671c56b7da9865017a23a7eb matches tested head and development ref was read back. Merged-source app/build 40956603522, cloud/mobile 40956603511 and approval 40956635382 all SUCCESS. Restricted original603 job 40956131115 and optional postmerge live public workflows 40956603634 and 40956603529 SKIPPED, not passed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-head full applicable GitHub CI, non-force merge, exact-source merged check and READY receipt pending. Full private immutable603 and live 603 source replay not yet performed."
+      "ci_runs": [
+        40956131481,
+        40956131163,
+        40956131093,
+        40956131231,
+        40956131233,
+        40956131406,
+        40956131510,
+        40956603522,
+        40956603511,
+        40956635382
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Never infer Mexico or another unstated place. Requires exact selected H1, name-bound current region statement and this-lot hails-from locality, unique consistent pair; preserves source quote and existing conflicting evidence. No production changes."
+      "notes": "Never infer Mexico or another unstated place. Requires exact selected H1, name-bound current region statement and this-lot hails-from locality, unique consistent pair; preserves source quote and existing conflicting evidence. No production changes. Scope independently verified READY, NOT DEPLOYED. Original frozen603 corpus unchanged; full source replay of original603 and signed-in production member acceptance not performed. Parent Issue33 review still IN_PROGRESS. PR261 has no production permission."
     }
   ],
   "history": [
