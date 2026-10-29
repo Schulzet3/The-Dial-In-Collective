@@ -1,6 +1,6 @@
 ## October 29 UTC — CI requeue recovery after Issue33 safety correction (NO DEPLOY)
 
-After shared regular-coffee decaf-method guard commit `cc3f80d64feae9ba84c9a676be3a37400efbd5b1`, GitHub PR #257 and branch readback confirmed the exact corrective source, but no Actions runs were enqueued for that SHA by the Git-data ref update. This documentation-only Contents API push re-triggers normal PR synchronize workflows; it makes no application/test changes or claims a passing test. Exact-head CI still REQUIRED before merging or marking READY.
+After shared regular-coffee decaf-method guard commit `cc3f80d64feae9ba84c9a676be3a37400efbd5b1`, GitHub PR #257 and branch readback confirmed the exact corrective source, but no Actions runs were enqueued for that SHA by the Git-data ref update. This documentation-only Contents API push attempted to re-trigger PR synchronize workflows, but GitHub Actions produced no new run for the corrected head (confirmed by branch and exact SHA run readbacks). It made no application/test changes or passing-test claim. A replacement pull request from the identical corrected source is required to trigger full exact-head checks; the original failing PR must be closed as superseded, never merged. Exact-head CI remains REQUIRED before merging or READY.
 
 ---
 
