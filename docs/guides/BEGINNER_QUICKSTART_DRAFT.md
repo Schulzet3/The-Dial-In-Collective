@@ -81,15 +81,15 @@ The app may suggest changing one controllable setting while keeping others stead
 
 ## How Do I Know When I'm “Dialed In”?
 
-A shot is marked **Dialed In** when all five taste ratings reach the preferred values:
+A shot is marked **Dialed In** when **all five taste ratings are green**. Select the green option in each row of the app; the selected choice also displays a checkmark.
 
-| Taste rating | Preferred value |
-| --- | ---: |
-| Extraction | **3** |
-| Body | **3** |
-| Clarity | **5** |
-| Sweetness | **5** |
-| Astringency / Dryness | **1** |
+| Taste rating | Preferred selection in the app |
+| --- | --- |
+| Extraction | 🟢 Green — Balanced |
+| Body | 🟢 Green — Balanced |
+| Clarity | 🟢 Green — Distinct |
+| Sweetness | 🟢 Green — Exceptional |
+| Astringency / Dryness | 🟢 Green — None |
 
 An unusual but plausible time or espresso ratio does **not** disqualify your successful shot. Every other saved shot remains in your personal history, too.
 
