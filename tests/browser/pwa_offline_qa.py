@@ -149,7 +149,10 @@ with tempfile.TemporaryDirectory(prefix='dic-pwa-qa-') as folder:
    page.get_by_role('button',name='Settings',exact=True).wait_for(timeout=20000)
    assert page.get_by_role('button',name='1 Pending',exact=False).count()>0,'Actual SW version upgrade lost pending shot'
    page.evaluate("localStorage.setItem('dic_fake_owner','b2222222-2222-4222-8222-222222222222')")
-   page.reload(wait_until='domcontentloaded')
+   # Chromium may commit the cached offline document before its DOMContentLoaded
+   # event following a real SW upgrade. Wait for the rendered denial below,
+   # rather than timing out on a navigation event before testing privacy.
+   page.reload(wait_until='commit')
    page.get_by_text('Reconnect To Continue',exact=True).wait_for(timeout=20000)
    assert page.locator('.coffee-card').count()==0,'Former owner cache leaked to another session'
 
