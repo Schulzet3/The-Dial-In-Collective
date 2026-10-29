@@ -217,12 +217,15 @@
   "interpretation": {
     "target": "Owner-request to completed-development/tests/approval/provider publication/independent postflight: 10x goal",
     "finding": "NOT_VERIFIED_10X_END_TO_END",
-    "early_late_comparison": "DESCRIPTIVE_ONLY; cohorts are not matched for scope, SQL, delays, or changed code; both cohorts occur after PR54 optimization, so not pre-vs-post causal proof.",
+    "early_late_comparison": "DESCRIPTIVE ONLY: mixed feature scope and SQL/recovery complexity. Release02 published BEFORE PR54 optimization merged on 2026-10-22T02:30:29Z, while the other nine releases published AFTER; the four-vs-four cohorts are NOT pure pre/post optimization groups, so the 8.986x comparison does not establish causal speedup.",
     "grant_time_limitation": "The stored GitHub grant approved_at_utc is not independently shown to be the actual first owner request or beginning of development.",
     "controller_time_limitation": "Controller event-to-published excludes the earlier approval/preflight, earlier development/test work, release failures and later independent postflight.",
     "device_and_provider_limitations": "No new owner-device authentication check; current Netlify provider independently confirmed already-published deployments, not retrospective full request cycle. No credit balance checks allowed or needed.",
     "release12_retry": "Release12 initial controller rejected before claim; the successful controller event's 29.482 seconds omits the pre-claim failed attempt and recovery; its recorded grant-to-publication was 799.58 seconds.",
-    "future": "Only reuse future separately authorized real releases; capture the earliest dated owner request, first development commit, code/CI readiness, one-use grant, controller request, Netlify publication, and independent postflight. Record external waits and release complexity. Do not deploy to benchmark."
+    "future": "Only reuse future separately authorized real releases; capture the earliest dated owner request, first development commit, code/CI readiness, one-use grant, controller request, Netlify publication, and independent postflight. Record external waits and release complexity. Do not deploy to benchmark.",
+    "optimization_pr54_merge_utc": "2026-10-22T02:30:29Z",
+    "verified_pre_pr54_release_count_in_sample": 1,
+    "verified_post_pr54_release_count_in_sample": 9
   },
   "safety": {
     "production_publications": 0,
