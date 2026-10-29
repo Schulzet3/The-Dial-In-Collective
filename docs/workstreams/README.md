@@ -17,6 +17,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Owner-retired basket/equipment version manager with historical snapshots preserved: Issue #16](issue-16.md)
 
 - [UI/UX accessibility and responsive Log Shot regression: Issue #26](issue-26.md)
+- [Signed-in administrator record workflow acceptance: Issue #47](issue-47.md)
 
 - [Issue #22: offline synchronization and account isolation](issue-22.md)
 - [Issue #27: provider, invitation and release security acceptance](issue-27.md)
