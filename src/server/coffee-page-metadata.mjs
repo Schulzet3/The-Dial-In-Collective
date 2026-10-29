@@ -319,6 +319,15 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
      ORIGIN_COUNTRIES.has(keyOf(municipality[4]))&&
      keyOf(municipality[3])!==keyOf(municipality[4]))
    s=[municipality[1].trim(),municipality[2].trim(),municipality[3].trim()].join(', ');
+  // The published "At the edge of the El Triunfo Reserve, La Paz,
+  // Chiapas, Mexico" is a location sentence, not the literal place name.
+  // Require a NAMED landmark, two named localities, and printed country.
+  const edge=s.match(/^At\s+the\s+edge\s+of\s+the\s+([\p{Lu}][\p{L}\p{M} .’'-]{2,100}\b(?:Reserve|National Park|Forest|Valley))\s*,\s*([\p{Lu}][\p{L}\p{M} .’'-]{1,60})\s*,\s*([\p{Lu}][\p{L}\p{M} .’'-]{1,60})\s*,\s*([\p{Lu}][\p{L}\p{M} .’'-]{1,60})\.?$/u);
+  if(edge){
+   const country=edge[4].replace(/\.$/u,'').trim();
+   if(ORIGIN_COUNTRIES.has(keyOf(country)))
+    s=[edge[1],edge[2],edge[3],country].map(part=>part.trim()).join(', ');
+  }
  }
  if(field==='producer')s=s.replace(/\s+(?:read more|learn more|view details)\s*$/i,'').trim();
  if(field==='producer'&&/^(?:amount|quantity|size|weight|choose|select|add to cart|shop now)$/i.test(s))return '';
@@ -350,7 +359,10 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   // An explicit product flavor label sometimes includes a prose lead-in.
   // Keep the roaster's actual listed notes, not the words "coffee with notes of".
   // Remove only this anchored, clearly extraneous introductory phrase.
-  const labelled=s.match(/^(?:this )?coffee\s+(?:with|has)\s+(?:tasting\s+)?notes?\s+of\s+(.+)$/i);
+  const labelled=s.match(/^(?:this )?coffee\s+(?:with|has)\s+(?:tasting\s+)?notes?\s+of\s+(.+)$/i)||
+   // Mouthfeel introductory language in a literal selected Tasting Notes
+   // label must not be mistaken for another flavor; retain full source.
+   s.match(/^Pleasing\s+body\s+with\s+(?:tasting\s+)?notes?\s+of\s+(.+)$/i);
   const notes=(labelled?labelled[1].replace(/[.!?]+\s*$/,'').trim():s)
    .replace(/\s*[•·]\s*/g,', ').replace(/^(?:,\s*)+|(?:,\s*)+$/g,'').trim();
   return normalizeExplicitCoffeeTastingNotes(notes,{allowProse:allowFlavorProse});
