@@ -2628,6 +2628,27 @@
       "owner_source": "Owner October 29 Admin screenshots and Supabase real-provider logs",
       "notes": "READY source only. Apply single scoped migration 20261029193000_dic_admin_review_candidates_grant.sql only on separate owner publish/release authorization. This is a hosted-Supabase SQL change, not a Netlify-only deploy; after release must independently read back has_function_privilege authenticated=true anon=false and real iPhone Admin Pending comparison remains visible. Parent Issue #47 still OPEN for distinct other account acceptance. No deployment occurred in development.",
       "tested_source_sha": "50112fd653f558e662c31d1c607b27178c79baee"
+    },
+    {
+      "id": "DIC-Q-33-repeated-selected-product-heading-identity",
+      "issue": 33,
+      "pr": null,
+      "title": "Honor repeated identical current-coffee headings without weakening product identity",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ],
+      "tests": [
+        "Structural source audit: selectedDirectProductCredits previously rejected all direct fields if an exact coffee H1 occurred twice; repair requires every in-scope H1 to match the selected coffee. Added six exact-product, duplicate, accented-name, competing-identity and missing-H1 Node tests, including actual public Add Coffee preview path.",
+        "Exact PR-head CI, non-force integration and merged-source checks pending. Frozen 603/77 current-source replay and genuine member runtime acceptance not claimed for this narrow structural fix."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-head applicable GitHub CI, non-force merge and readback pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Generic selected current-product identity guard improvement only, not a roaster URL exception. A desktop/mobile duplicated exact current H1 no longer suppresses direct roast and sensory evidence, but different/absent H1 still blocks cross-product donation. No original 603 oracle/captures or member/offline/Community change, no production deployment."
     }
   ],
   "history": [
