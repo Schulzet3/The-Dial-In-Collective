@@ -14,6 +14,8 @@ for(const [name,detail,expected] of [
  ['Decaf Colombia','CO₂ decaffeination','Carbon Dioxide (CO2)'],
  ['Decaf Colombia','Supercritical Carbon Dioxide process','Carbon Dioxide (CO2)'],
  ['Regular Colombia','Swiss Water Process',''],
+ ['Regular Colombia','Our decaf coffee is decaffeinated using Swiss Water.',''],
+ ['Decaf Colombia','Our decaf coffee is decaffeinated using Swiss Water.','Water Process'],
  ['Half-Caf Colombia','Swiss Water Process',''],
  ['Decaf Colombia','Methylene chloride decaffeination',''],
  ['Decaf Colombia','Chemical free decaf',''],
