@@ -25,6 +25,7 @@
     "current_owner_approved_url_autofill",
     "current_owner_autofill_button_only_20261019",
     "current_owner_autonomous_build_test_queue_20261022",
+    "current_owner_backup_direct_folder_20261029",
     "current_owner_beta_breached_password_opt_out_20261018",
     "current_owner_beta_member_soft_remove_only_20261018",
     "current_owner_defer_private_hide_shot_retirement_20261021",
@@ -1954,5 +1955,23 @@
     "queue_item_id": "DIC-Q-26-keyboard-dialog-responsive-regression",
     "github_issue_state": "CLOSED_COMPLETED_VERIFIED_2026-10-28T23:37:02Z",
     "final_queue_approval_run": 40788531065
+  },
+  "current_owner_backup_direct_folder_20261029": {
+    "decision_id": "OPS-BACKUP-ONLY-DIRECT-FOLDER-20261029",
+    "status": "LOCKED_PARTIAL_PROVIDER_VERIFICATION",
+    "scope": "All future offsite encrypted backups directly in private DIC Automated Encrypted Backups folder ID 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf; no root or nested folder writes, no duplicate artifacts.",
+    "implemented": [
+      "Existing courier and watchdog automation prompt updates (enabled and reread)",
+      "32 encrypted backup files moved by Google Drive parent metadata only; all 32 target parents verified",
+      "No DIC backup files remain in My Drive root after existing owner moves"
+    ],
+    "outstanding": [
+      "Two older Oct22 backup-attempt archives remain in nested folder due to platform safety blocks, preserved intact",
+      "Apps Script live source and next natural delivery to direct target cannot be certified via connected Drive (403)",
+      "Real failure alert delivery, retention, exact-file restore remain separately tracked Issue28"
+    ],
+    "no_deployment": true,
+    "issue": 28,
+    "owner_approved": "2026-10-29"
   }
 }

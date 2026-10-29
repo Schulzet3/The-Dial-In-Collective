@@ -28,3 +28,5 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 
 - [Issue #50 real-release controller-stage timing evidence](issue-50.md)
 - [Issue #133 completed conductor setup and residual ownership](issue-133.md)
+
+- [Issue #28 owner-approved single encrypted Drive backup folder](issue-28.md)
