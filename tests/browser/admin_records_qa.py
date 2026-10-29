@@ -142,7 +142,7 @@ with sync_playwright() as p:
     last.locator('[data-record-form] button[type="submit"]').click()
     page.get_by_text("Audited correction saved.",exact=True).wait_for()
     last=page.locator('#admin-approved .admin-record').last
-    assert last.get_by_text("Updated Fixture Coffee 55",exact=True).count()==1
+    assert last.locator('h3').inner_text().strip()=='Updated Fixture Coffee 55',last.locator('h3').inner_text()
     audit=page.evaluate("window.__audits")
     assert len(audit)==1 and audit[0]["kind"]=="approved"
     assert audit[0]["before"]["name"]=="Fixture Coffee 55"
@@ -171,7 +171,7 @@ with sync_playwright() as p:
     page.wait_for_function("document.querySelector('#admin-shots .admin-pagination')?.textContent.includes('51–51 of 51')")
     shots.locator('.admin-coffee-group summary').click()
     lastShot=shots.locator('.admin-record').last
-    assert lastShot.get_by_text("PRIVATE SYNTHETIC NOTE 51",exact=False).count()==1
+    assert 'PRIVATE SYNTHETIC NOTE 51' in lastShot.locator('.admin-record-note').inner_text()
     lastShot.get_by_role('button',name='Edit Details',exact=True).click()
     lastShot.locator('[data-record-form] [name="notes"]').fill('Amended synthetic private note')
     lastShot.locator('[data-record-form] button[type="submit"]').click()
