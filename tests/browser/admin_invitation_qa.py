@@ -131,7 +131,7 @@ with sync_playwright() as p:
  page.get_by_role("button",name="Copy Code",exact=True).click()
  page.get_by_text("Code copied. Share it privately with your tester.",exact=True).wait_for()
  assert page.evaluate("window.__copiedInvite")==code
- page.evaluate("navigator.clipboard.writeText=async()=>{throw Error('Clipboard denied by test browser');}")
+ page.evaluate("() => { navigator.clipboard.writeText=async()=>{throw Error('Clipboard denied by test browser');}; }")
  page.get_by_role("button",name="Copy Code",exact=True).click()
  page.get_by_text("Clipboard denied by test browser",exact=False).wait_for()
  assert page.locator("#admin-new-code").inner_text()==code

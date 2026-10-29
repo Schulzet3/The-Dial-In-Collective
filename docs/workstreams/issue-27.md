@@ -35,3 +35,7 @@ No code, database/Auth/Edge, account records, backups, Netlify, provider permiss
 ## Additional browser acceptance
 
 PR225 also exercises the real 390px Chromium Copy Code button/handler on clipboard success, rejection and API absence. Failure must preserve the visible one-time code and cannot retain a success message. Clipboard implementation is controlled; no native-device permission or production-account claim. Exact-source CI must pass before integration.
+
+## Browser fixture failure and repair
+
+Run40823735580 failed before exercising clipboard denial because Playwright interpreted the assignment expression's returned function as a callback and invoked it immediately. Wrapped fixture setup in an explicit callback returning undefined; application behavior is unchanged. Earlier SQL run40823638407 passed all 65 signed-HTTP assertions, including the demonstrably overlapping race. Rerun the corrected browser test on the new exact source before completion.
