@@ -18,9 +18,9 @@ test('data writes, destructive DDL, renamed old migrations, dynamic blocks fail 
  assert.equal(classifyMigrationDiff('A\t'+add,()=>{throw Error('missing');}).risk,'potentially_destructive');
 });
 test('specific authenticated function execution privilege is non-destructive but broad/dynamic execution remains risky',()=>{
- const grant='REVOKE ALL ON FUNCTION private.dic_admin_review_candidates(uuid) FROM PUBLIC, anon;\\n'+
+ const grant='REVOKE ALL ON FUNCTION private.dic_admin_review_candidates(uuid) FROM PUBLIC, anon;\n'+
    'GRANT EXECUTE ON FUNCTION private.dic_admin_review_candidates(uuid) TO authenticated;';
- assert.equal(classifyMigrationDiff('A\\t'+add+'\\n',()=>grant).risk,'non_destructive');
+ assert.equal(classifyMigrationDiff('A\t'+add+'\n',()=>grant).risk,'non_destructive');
  const dangerous=[
   'GRANT EXECUTE ON FUNCTION public.any(uuid) TO anon;',
   'GRANT EXECUTE ON FUNCTION public.any(uuid) TO PUBLIC;',
@@ -29,7 +29,7 @@ test('specific authenticated function execution privilege is non-destructive but
   'GRANT EXECUTE ON FUNCTION private.safe(uuid) TO authenticated; DELETE FROM public.shots;',
   'GRANT EXECUTE ON FUNCTION private.safe(uuid) TO authenticated; DO $ BEGIN EXECUTE x; END $;'
  ];
- for(const sql of dangerous)assert.equal(classifyMigrationDiff('A\\t'+add+'\\n',()=>sql).risk,'potentially_destructive',sql);
+ for(const sql of dangerous)assert.equal(classifyMigrationDiff('A\t'+add+'\n',()=>sql).risk,'potentially_destructive',sql);
 });
 
 test('readiness report never misstates publication or owner-device acceptance',()=>{
