@@ -1,3 +1,9 @@
+## October 29 UTC — CI requeue recovery after Issue33 safety correction (NO DEPLOY)
+
+After shared regular-coffee decaf-method guard commit `cc3f80d64feae9ba84c9a676be3a37400efbd5b1`, GitHub PR #257 and branch readback confirmed the exact corrective source, but no Actions runs were enqueued for that SHA by the Git-data ref update. This documentation-only Contents API push re-triggers normal PR synchronize workflows; it makes no application/test changes or claims a passing test. Exact-head CI still REQUIRED before merging or marking READY.
+
+---
+
 ## October 29 UTC — Issue33 real CI failure repaired: prevent regular-coffee decaf method contamination (TESTING; NO DEPLOY)
 
 First exact PR257 source `7d1b23702621f504c99a4c91e7da97c60017306e` passed approval 40947617199, security 40947617195, private source 40947617172, SQL 40947617176, visual 40947617354 and mobile Chromium inside cloud 40947617174; restricted original603 40947617110 SKIPPED. **Full Node/build 40947617352 and cloud unit regression 40947617174 FAILED one newly added negative**: a *Regular Colombia* page containing copy about another decaf coffee produced `decaffeination_method=Water Process`. Direct-current prose reader correctly withheld the statement, but pre-existing `inferDecaffeinationMethod` allowed the roaster-details prose to establish full-decaf identity despite the selected regular coffee name. This is a genuine cross-product source contamination risk, not a failing target recipe or a reason to weaken the negative.
