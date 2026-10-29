@@ -9,7 +9,12 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
  const headings=blocks.filter(x=>x.tag==='h1').map(x=>fold(x.text));
- if(headings.length!==1||headings[0]!==fold(name))return {};
+ // Responsive storefronts can render the same selected product heading in
+ // desktop and mobile shells. Accept repeats ONLY when every in-scope H1
+ // identifies that same exact coffee; a missing or different H1 still
+ // blocks every direct product credit and prevents cross-coffee leakage.
+ const selected=fold(name);
+ if(!headings.length||headings.some(heading=>heading!==selected))return {};
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
   !/\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(x.section));

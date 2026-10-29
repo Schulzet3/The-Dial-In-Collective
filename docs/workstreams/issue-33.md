@@ -1,3 +1,13 @@
+## October 29 UTC — Issue33 repeated exact current-product heading identity fix (TESTING; NO DEPLOY)
+
+Recovered authoritative development source `5e9aa4bd4e5ad1a04f96ca60e8a678afe81b6e5e` and Issue33 full current review. Audited `selectedDirectProductCredits`: it refused *all* direct current selected-product roast, sensory, producer, and release evidence when a responsive storefront duplicated the SAME exact selected coffee H1 for desktop/mobile. This is a generic data-loss bug, not a missing roaster fact. The new identity check permits repeated H1 headings only when EVERY in-scope H1 independently normalizes to the exact selected coffee. It still rejects a missing H1 or any competing second coffee identity, with no fallback to historic SEO, unrelated product, or invented values.
+
+New six-case regression covers duplicate exact H1 (two/three occurrences), accent equivalence, mixed-product and absent-heading negatives, single-heading baseline, plus real `extractPublicCoffeeFacts` and rendered Add Coffee preview path. No current official roaster URL with repeated H1 has been independently certified for this patch; full original603/owner77 replay and genuine signed-in production acceptance are not claimed. Frozen original 603 capture/oracle/scorer and all historical member, notes, offline and Community records remain unchanged.
+
+Source, tests, scoped journal and queue row `DIC-Q-33-repeated-selected-product-heading-identity` are staged together for PR-head exact CI, safe nonforce integration and source-bound READY readback. No deployment, Supabase/Auth/Edge/SQL/member mutations, secrets or paid-service changes.
+
+---
+
 ## October 29 UTC — Issue33 44 North origin and tasting-note source cleanup READY, not deployed
 
 PR #253 merged nonforce `3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3` from final tested PR head `af71d11fc8aaf5d81991ca40553906e86b464ca3`. Real Add Coffee public extractor/preview improves current 44 North **Mexico Triunfo Verde** Original603 #5: Origin `At the edge of the El Triunfo Reserve, La Paz, Chiapas, Mexico.` -> `El Triunfo Reserve, La Paz, Chiapas, Mexico`; Tasting Notes `Pleasing body with notes of sweet candied lemon and dried blueberry.` -> `sweet candied lemon and dried blueberry`. Current literal source URL `https://44northcoffee.com/products/mexico-chiapas` independently verified; raw source-fact prose remains reviewable. No roaster-URL exception; named landmarks need complete explicit country; true Peru-vs-Mexico conflict and unrelated product quarantines preserved. The frozen 603 source expectations/captures/scorer, and member/offline history, remain untouched.
