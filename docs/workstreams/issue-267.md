@@ -82,7 +82,7 @@ Before PR273 merge, caught a stale literal `assert.equal(covered,8212)` in `test
 
 ## October 29, 2026 UTC — PR273 integration and B015–B018 direct original-source review
 
-PR #273 independently confirmed merged at `a4b7564c943a4dfdf12c628e42aa6f9257c10c5b`, parents previous dev `cf0cd3cef4efeca824215460807f46127f9cc9f9` and exact tested head `c338e35359cf253cdfd04673d430235c3ebf97b5`, identical tested/merged ledger blob. All six applicable PR-head workflows SUCCESS: approval 40968948013, isolated SQL 40968948087, Node/lint/build 40968948168, cloud/mobile 40968948001, visual 40968947926; frozen603 40968948139 SKIPPED. No app/runtime or production change.
+PR #273 independently confirmed merged at `a4b7564c943a4dfdf12c628e42aa6f9257c10c5b`, parents previous dev `cf0cd3cef4efeca824215460807f46127f9cc9f9` and exact tested head `c338e35359cf253cdfd04673d430235c3ebf97b5`, identical tested/merged ledger blob. All five applicable PR-head workflows SUCCESS: approval 40968948013, isolated SQL 40968948087, Node/lint/build 40968948168, cloud/mobile 40968948001, visual 40968947926; frozen603 40968948139 SKIPPED. No app/runtime or production change.
 
 Direct original numbered-line semantic B015: **all 656 lines** of original `docs/archive/requirements/The_Dial-In_Collective_Decision_Ledger_v1.0.json` blob `bc4ca3be971a35d21586d21bb985227a8c098f7b`, 79 original Locked + 20 original Open, Oct14 owner-only import exception; historic no longer active Experiment/Bag/Custom/Claude/screenshot prescriptions superseded by explicit later owner decisions. No baseline edit.
 
