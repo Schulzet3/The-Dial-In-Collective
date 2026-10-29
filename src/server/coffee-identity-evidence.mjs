@@ -267,7 +267,7 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
    // Huila region"). Require the exact current-coffee clause and the printed
    // country; never guess a region from the URL, country or roaster.
    const mountain=sentence.match(new RegExp(
-    '^From\\s+the\\s+('+PLACE+')\\s+Mountains?\\s+in\\s+('+COUNTRIES+')[’\\']s\\s+('+PLACE+')\\s+region\\s*,\\s*this\\s+coffee\\b','iu'));
+    '^From\\s+the\\s+('+PLACE+')\\s+Mountains?\\s+in\\s+('+COUNTRIES+')[\\u2019\\x27]s\\s+('+PLACE+')\\s+region\\s*,\\s*this\\s+coffee\\b','iu'));
    const regional=sentence.match(new RegExp(
     '^From\\s+the\\s+('+PLACE+')\\s+region\\s+of\\s+('+COUNTRIES+')\\s*,\\s*this\\s+coffee\\b','iu'));
    if(mountain||regional){

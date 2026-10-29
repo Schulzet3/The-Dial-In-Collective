@@ -1,3 +1,9 @@
+## October 29 UTC — pre-CI parser literal correction for Quartermaine source rule (NO DEPLOY)
+
+Read the authored regex back from exact PR251 source and identified a single-quoted JS string containing an invalid escaped apostrophe in the new mountain possessive pattern. Replaced it with literal RegExp Unicode escapes `[\\u2019\\x27]` for curly/ASCII apostrophe without altering matched source semantics. This is a syntax correction in the same code+scoped-journal commit; fresh exact-head GitHub CI remains required. No deployment.
+
+---
+
 ## October 29 UTC — original603 Quartermaine origin/region current-product correction (NO DEPLOY)
 
 Owner authorized continued real extractor improvements. Recovered authoritative development SHA `a1eaa3f7e5c10e97ae73d70284276bed41cd9890`, independently observed production Release10 current deploy remains separate. Two original603 source-level review cases (Quartermaine Colombia #262 and Costa Rica #263) expose visibly wrong Add Coffee canonical Origin values: `From the Andes, Colombia, Huila, Andes` and `From the Tarrazu, Costa Rica, Tarrazu`, respectively. The current official roaster product descriptions explicitly state `From the Andes Mountains in Colombia's Huila region, this coffee...` and `From the Tarrazu region of Costa Rica, this coffee...`. Their source-supported region/country values are `Huila, Colombia` and `Tarrazu, Costa Rica`. This is not a preference or a frozen historical expected-value promotion.
