@@ -2669,15 +2669,17 @@
       "merged_source_sha": null,
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs",
-        "src/server/coffee-page-metadata.mjs"
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-decaffeination-method.mjs"
       ],
       "tests": [
         "Official current Leap Coffee Roasters Decaf Coffee product page explicitly publishes Swiss Water process; existing handler reads structured processing_detail but cannot infer from this standalone visible product description.",
-        "Ten new focused tests cover literal current Swiss Water, direct Sugar/CO2, actual Add Coffee preview, full-versus-half caf, negative/history, product education, unrelated recommendations, method contradictions and duplicate selected H1; exact CI pending."
+        "Ten new focused tests cover literal current Swiss Water, direct Sugar/CO2, actual Add Coffee preview, full-versus-half caf, negative/history, product education, unrelated recommendations, method contradictions and duplicate selected H1; exact CI pending.",
+        "First PR257 run 40947617352 Node and 40947617174 cloud FAILED one meaningful new regular-coffee negative; direct reader guarded but preexisting inference trusted generic decaf processing prose. Corrected in shared classifier, new exact-head retest pending."
       ],
       "ci_runs": [],
       "blockers": [
-        "Final applicable exact-source GitHub CI, safe non-force integration, merged-source tests and READY readback pending."
+        "Post-repair full exact-source applicable CI, nonforce merge, merged-source CI and READY receipt pending."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Selected current source only. Preserve raw sentence as source_facts, leave primary process blank, conflict methods withheld. Never infer from product-wide SEO, education, another product or historical roaster information. No database, auth, production, original frozen 603 evidence, member/offline or paid-service changes."

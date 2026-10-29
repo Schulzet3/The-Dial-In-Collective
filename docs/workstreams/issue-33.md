@@ -1,3 +1,11 @@
+## October 29 UTC — Issue33 real CI failure repaired: prevent regular-coffee decaf method contamination (TESTING; NO DEPLOY)
+
+First exact PR257 source `7d1b23702621f504c99a4c91e7da97c60017306e` passed approval 40947617199, security 40947617195, private source 40947617172, SQL 40947617176, visual 40947617354 and mobile Chromium inside cloud 40947617174; restricted original603 40947617110 SKIPPED. **Full Node/build 40947617352 and cloud unit regression 40947617174 FAILED one newly added negative**: a *Regular Colombia* page containing copy about another decaf coffee produced `decaffeination_method=Water Process`. Direct-current prose reader correctly withheld the statement, but pre-existing `inferDecaffeinationMethod` allowed the roaster-details prose to establish full-decaf identity despite the selected regular coffee name. This is a genuine cross-product source contamination risk, not a failing target recipe or a reason to weaken the negative.
+
+Repair: the shared decaffeination method classifier now refuses a named regular product even when its processing-detail prose says another coffee is decaf. Fully decaf selected coffee names and existing distinct Water/Sugar/CO2 methods remain eligible. Added a direct classifier positive/negative pair to the existing decaf suite, retaining the full Add Coffee negative already added in PR257. Same code, tests and journal commit; exact new-head CI and safe integration still required. No production, member, SQL/Auth/Edge, original603 oracle or paid-service change.
+
+---
+
 ## October 29 UTC — Issue #33 selected-current decaf method prose recovery (TESTING, NO DEPLOY)
 
 Recovered development at a0cc9fa9b357db681230eb3d394dce3b86b1f031; prior PR #255 repeated identical H1 fix is non-force merged at a0cc9fa9b357db681230eb3d394dce3b86b1f031 with all seven applicable PR-head workflows SUCCESS (approval 40946043199, private bundle 40946043359, SQL 40946043165, Node/build 40946043270, visual 40946043374, security 40946043098, cloud/browser/mobile 40946043057). Restricted private original603 40946043164 SKIPPED, not a pass; exact merged-source workflows pending. Preserve already READY independent Issue33 items.
