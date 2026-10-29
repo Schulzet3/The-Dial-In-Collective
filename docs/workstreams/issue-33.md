@@ -1,3 +1,9 @@
+## October 29 UTC — exact-head PR251 lint failure repaired, Node suite PASS (NO DEPLOY)
+
+Actual GitHub run `40933369108` executed 2,004 Node tests PASS / 0 FAIL (see GitHub job receipt), including new Quartermaine direct-source handler and Add Coffee tests, but the lint stage correctly failed on one `no-unused-vars` warning from `html` in the new test after its unneeded internal-only assertion was removed. Fixed that single unused binding without changing runtime source or assertions. Approval/queue validation, cloud/mobile browser, visual, SQL, security and source-bundle checks for this head passed; new exact-head lint/build and rest required before merge or READY. Original 603 private workflow was SKIPPED, not PASS.
+
+---
+
 ## October 29 UTC — source-bound provenance test repair and mountain-only scope (NO DEPLOY)
 
 First executable cloud CI on corrected syntax passed two actual `extractPublicCoffeeFacts`/Add Coffee Quartermaine source values, but two tests failed because a direct `extractCoffeeIdentityEvidence` internal subroutine (called without the production source context) was incorrectly required to return the same final field as the complete public handler. Removed this invalid extra assertion while retaining the real public handler, rendered Add Coffee and literal source-fact checks. A third test showed the generic preexisting narrative extractor could produce a `From the Andes` marketing prefix when there was only a broad mountain and country. Extended the same bounded current-product grammar to keep `Andes Mountains, Colombia` as the printed broad area, retain `Costa Rica` when the phrase publishes no specific region, and suppress `Seasonal Blend` as geographic identity. All exact country conflicts remain guarded. New complete exact-source CI required; the queue remains TESTING, no publication.

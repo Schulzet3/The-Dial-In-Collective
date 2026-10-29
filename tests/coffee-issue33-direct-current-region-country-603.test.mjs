@@ -22,7 +22,7 @@ const cases=[
 ];
 for(const [name,prose,expected] of cases){
  test('actual current selected description supplies correct Add Coffee origin: '+name,()=>{
-  const {result,html}=read(name,'<p>'+prose+'</p>');
+  const {result}=read(name,'<p>'+prose+'</p>');
   assert.equal(result.fields.origin,expected,'direct region-country should win over mountain/general intro');
   assert.ok(!result.conflicts?.includes('origin'),'current product facts agree');
   assert.ok(coffeeUrlPreviewMarkup(result).includes(expected),'public preview shows corrected location');
