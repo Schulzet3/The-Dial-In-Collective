@@ -2344,27 +2344,28 @@
       "issue": 96,
       "pr": 241,
       "title": "Display measured brew ratio in compact and expanded Shot History",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "590686b46c3d1558035ff5a3a96832cbe3165aa2",
       "scope_paths": [
         "site/lib/ui.js"
       ],
       "tests": [
-        "Two committed focused Node cases cover measured ratio display and absent invalid legacy ratio. Full exact-source PR CI pending."
+        "Measured ratio display: two focused Node cases, compact/expanded history, invalid older values, actual notes and radar; exact-source cloud app/build Node suite SUCCESS run 40924392641.",
+        "Applicable exact-head GitHub CI SUCCESS: approval 40924393064, security 40924392788, isolated SQL 40924392682, cloud/mobile 40924392692, private browser/visual 40924392987, app/build 40924392641. Frozen603 workflow 40924392926 SKIPPED, unrelated.",
+        "PR241 nonforce merged and development exact SHA readback 590686b46c3d1558035ff5a3a96832cbe3165aa2; merge tree e1417d554570e056ca30a1e6af3f80f37a7178ea equals tested head tree."
       ],
       "ci_runs": [
-        40924066505,
-        40924066651,
-        40924066607,
-        40924066568,
-        40924066384,
-        40924066497
+        40924393064,
+        40924392788,
+        40924392682,
+        40924392692,
+        40924392987,
+        40924392641
       ],
-      "blockers": [
-        "All applicable CI must pass; PR #241 not merged."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
-      "notes": "No research-engine/extractor overlap and no provider/member data changes. Publication not authorized."
+      "notes": "Source-only READY; no Netlify, SQL, Edge, Auth, member-data or public release change. Distinct manual whole-history semantic review and genuine-account tests remain open under #96. Engine research #238 and extractor #33 not touched.",
+      "tested_source_sha": "350b2c361a69d4b95393a677ee6cea353e58f61d"
     }
   ],
   "history": [
