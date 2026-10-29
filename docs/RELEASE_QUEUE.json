@@ -2755,6 +2755,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Never infer Mexico or another unstated place. Requires exact selected H1, name-bound current region statement and this-lot hails-from locality, unique consistent pair; preserves source quote and existing conflicting evidence. No production changes. Scope independently verified READY, NOT DEPLOYED. Original frozen603 corpus unchanged; full source replay of original603 and signed-in production member acceptance not performed. Parent Issue33 review still IN_PROGRESS. PR261 has no production permission."
+    },
+    {
+      "id": "DIC-Q-33-ketch-variant-notes-of-parser",
+      "issue": 33,
+      "pr": null,
+      "title": "Correct direct current per-roast tasting-note parsing when a roaster says notes of flavors",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-roast-variants.mjs"
+      ],
+      "tests": [
+        "Current official Ketch Tier 3: Mexico San Isidro Zoquiapan selected page explicitly offers Light and Medium-dark roasts, with different tasting notes and espresso ratios (source: https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan). Existing shared noteOf handles 'X notes' but not 'this coffee had notes of X' or 'has traditional coffee notes of X'; this wrongly loses two source-supported roast-specific flavor lists.",
+        "Seven new Node test cases staged: real current wording, Shopify Add Coffee roast selection with withheld unchosen global fields, HTML fallback, no other purchase options, historic and incompatible same-roast notes, nonflavor guidance, and old Tier 2 grammar. Exact GitHub CI/merge pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact-source GitHub CI, non-force merge, exact merged-source verification and READY reconciliation pending. Original restricted603 run must be called SKIPPED if gated; no whole live603 or genuine production login claim."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Generic shared parser, no roaster URL special case. Only a current explicitly offered roast variant can receive its corresponding flavor notes; different roast choices must never mix or autoselect. Preserve existing confidence, manually edited values, recommendations, SQL/Auth/Edge/member/offline data, original603 captures/oracle/scorer. Development only; no publication."
     }
   ],
   "history": [
