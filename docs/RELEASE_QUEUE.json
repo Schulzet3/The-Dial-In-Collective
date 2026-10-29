@@ -2175,6 +2175,32 @@
       "owner_source": "Owner's October 29, 2026 Issue #33 full 50-coffee verification authorization",
       "notes": "Scoped four repaired outcomes READY, NOT DEPLOYED. Parent Issue33 stays OPEN due restricted603 and #58 source limitation. No member data/production changes; one publish approval still required.",
       "tested_source_sha": "3c0adcbdcb27d43ad34be18b042f3a216c96e8ee"
+    },
+    {
+      "id": "DIC-Q-33-original603-independent-source-review",
+      "issue": 33,
+      "pr": null,
+      "title": "Independently verify each original 603 coffee against frozen captures and current exact official URL",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "scripts/audit/issue33-original603-live-source-probe.mjs",
+        ".github/workflows/issue33-603-public-source.yml",
+        "tests/coffee-issue33-original603-live-probe.test.mjs"
+      ],
+      "tests": [
+        "Original source archive SHA256 696c011e97e94eb2a9ec1b12c66efdf1ce15636d7df999751279bb0f381cce52 validated; frozen oracle 603 cases, 201 roasters and 1197 captures verified unchanged.",
+        "Original frozen full 603 real preview handler replay on source 9c5975b81da06913633b3995ee3100118e976b1a: all 603 responses OK; strict scorer 3108 exact, 57 missing, 837 review required; original 6474 supplemental assertions retained 5458 full/337 partial/679 unconfirmed; original oracle/scorer/captures not modified.",
+        "603-case archive source-anchored evidence index generated with per-field quote and SHA; current exact official HTTPS retrieval not yet complete.",
+        "Public no-credential current 603 probe and exact-head CI pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Source-only workflow must first be tested and safely integrated; exact-source official current 603 capture run and per-coffee adjudication pending.",
+        "Original strict 57 missing and 837 review required assertions need independent semantic decisions; do not equate format-only mismatches with defects."
+      ],
+      "owner_source": "Owner instruction October 29 2026: do the same individual official source-backed review for the original 603 benchmark as the previous 50-coffee review.",
+      "notes": "No publication authorized. Current live source, frozen historical source and owner Locked current rules must be distinguished. No restricted corpus mutation, new provider, keys, purchases, member data or production database writes."
     }
   ],
   "history": [
