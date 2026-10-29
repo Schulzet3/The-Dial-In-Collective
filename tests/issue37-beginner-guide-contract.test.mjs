@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {STYLES, SCALES} from '../site/lib/constants.js';
+import {STYLES, SCALES, tasteSeverity, tasteLabel, isDialed} from '../site/lib/constants.js';
 
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const guide=read('docs/guides/BEGINNER_QUICKSTART_DRAFT.md');
@@ -40,10 +40,20 @@ test('Guide separates actual measurements, suggestions, saved results and privac
  'Pending','private shots','Authorized administrators','Offline logging',
  'previously admitted','**Synced**','**Offline**','**Pending**'])
   assert.ok(guide.includes(phrase),phrase);
- for(const expected of [/Extraction \| \*\*3\*\*/,/Body \| \*\*3\*\*/,
-  /Clarity \| \*\*5\*\*/,/Sweetness \| \*\*5\*\*/,
-  /Astringency \/ Dryness \| \*\*1\*\*/])
-  assert.match(guide,expected);
+ const greenSection=guide.split('## How Do I Know When I\'m “Dialed In”?\n')[1]?.split('\n## ')[0];
+ assert.ok(greenSection,'Guide must retain the Dialed In section');
+ assert.match(greenSection,/all five taste ratings are green/i);
+ const preferredRatings=Object.fromEntries(SCALES.map(sc=>[sc.key,sc.ideal]));
+ assert.equal(isDialed(preferredRatings),true,'Green scales must match actual Dialed In logic');
+ for(const sc of SCALES){
+  assert.equal(tasteSeverity(sc,sc.ideal),0,'ideal rating must map to green');
+  assert.ok(greenSection.includes('| '+sc.label+' | 🟢 Green — '+tasteLabel(sc,sc.ideal)+' |'),
+   'Missing green rating and actual on-screen label for '+sc.label);
+ }
+ assert.doesNotMatch(greenSection,/^\|[^\n]+\|\s*\*\*[1-5]\*\*\s*\|/m,
+  'The guide must not expose internal numeric taste values as UI choices');
+ assert.ok(ui.includes('severity-${tasteSeverity(sc,n)}'),'Rating choices must be severity-colored');
+ assert.ok(ui.includes('tasteLabel(sc,n)'),'Rating choices must expose descriptive labels');
  assert.match(guide,/does \*\*not\*\* disqualify your successful shot/);
 });
 
