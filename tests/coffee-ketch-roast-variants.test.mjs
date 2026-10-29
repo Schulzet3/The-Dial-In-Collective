@@ -189,3 +189,13 @@ test('Full authenticated preview handler offers roast selection when Shopify JSO
  assert.equal(coffeeSourceReviewSnapshot(picked).selected_roast_variant,'medium-dark');
  assert.equal(calls.filter(x=>x.end==='dic_preview_complete').length,1);
 });
+
+test('owner Ketch URL with tracking and Shopify variant preserves per-roast source options',()=>{
+ const supplied='https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process?utm_source=chatgpt.com&variant=47417784074460';
+ const selected=shopifyProductRequest(supplied);
+ assert.equal(selected?.handle,request.handle);
+ assert.equal(selected?.url,request.url);
+ const result=extractShopifyAjaxData(data,selected);
+ assert.deepEqual(result.roast_variants.map(v=>v.fields.tasting_notes),['Floral, blackberry','Blackberry, caramelized sugar']);
+ assert.equal(result.fields.tasting_notes,undefined);
+});
