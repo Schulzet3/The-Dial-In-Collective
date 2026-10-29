@@ -1,3 +1,9 @@
+## October 29 UTC — Ten READY changes selected for owner-authorized one-time Release09
+
+Exact candidate fa30abd6b5c96308f0957063efcc7ffb4402c8c6 has passed required PR-head checks and was safely merged. One-use grant DIC-20261029-READY-QUEUE-10 replaces unconsumed 09. Current production not yet changed; no SQL or Edge/Auth operations. Excludes unfinished research and later independent unqueued work. Provider verification required before DEPLOYED.
+
+---
+
 ## October 29 UTC — Release09 nine-item READY source accepted, production not yet published
 
 Single owner authorization for combined READY queue, nine items including Ketch roast-specific selector, shot-history ratio, extractor and espresso guidance. Source 6e0792bf3266723d9a6bf745cc588a486e162cbe has full exact-source GitHub required five checks PASS and 1,966 Node PASS/0 FAIL/6 SKIP; PR242 merged nonforce c3ddad2f93ace48370165c1375ae4a2357e7f64b. Unqueued concurrently merged #240 excluded through tested-source pin. One-use grant DIC-20261029-READY-QUEUE-09 is in progress. No SQL/Edge/Auth/member mutation; production Netlify remains 6ae27f32bfae09ad8745e19b and release 05cf9eb1 until provider evidence says otherwise. Do not mark items DEPLOYED before postflight.
