@@ -1,3 +1,9 @@
+## October 29 UTC — Second READY batch of two, exact merged-source checks PASS; publication not yet verified
+
+Owner latest explicit instruction permits one further release of Issue33 source identity and Issue47 Admin feedback (including duplicate status ID cleanup); tested source d04be7189b5e9983a83624d5d8c0e76d2f24e8da. Six merged-source checks PASS, 1,994 Node tests passed. Unique grant DIC-20261029-READY-QUEUE-11 is recorded on development for one source-bound release. Existing Release10 remains published until new Netlify READY/current readback. No database/Edge/Auth/member mutations. Unfinished original603 and Issue37 draft excluded.
+
+---
+
 ## October 29 UTC — Issue #47 Administrator feedback persistence fixed and verified READY, unpublished
 
 PR249 merged nonforce `ffcb768b363fcc772eda38b122ef4c7aedb78ef2` (exact source tree equals tested PR `d5d98708f634cde68705f65685b68e4aeecd13b4`). Missing Admin `#admin-action-notice` formerly replaced the entire dashboard after successful edits; now one accessible inline status region preserves the record view. All applicable exact-source app/build, security, approval, isolated SQL, mobile/cloud UX and real Chromium synthetic 55-coffee/51-shot page-two/edit/private-note/stale-revision/access-denial checks PASS (IDs in `docs/workstreams/issue-47.md`); unrelated frozen coffee corpus SKIPPED. Queue `DIC-Q-47-admin-feedback-persistence` is **READY, NOT DEPLOYED**, blockers zero. No production/Auth/Edge/SQL/member writes. Whole Issue #47 remains OPEN for genuine signed-in admin and non-admin acceptance; no manual owner-device release gate. No Netlify deployment authorized.
