@@ -22,3 +22,6 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #27: provider, invitation and release security acceptance](issue-27.md)
 
 - [October28 queue audit and release](release-20261028.md)
+
+- [Issue #30 recovered private historical-source inventory](issue-30.md)
+- [Issue #37 source-checked beginner walkthrough draft](issue-37.md)
