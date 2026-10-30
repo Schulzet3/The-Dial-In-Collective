@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 71,
-    "direct_assistant_semantic_lines": 13470,
-    "still_not_documented_as_semantically_reviewed_lines": 566491,
+    "direct_assistant_semantic_lines": 16701,
+    "still_not_documented_as_semantically_reviewed_lines": 563260,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 566491,
+    "remaining_line_count_checked": 563260,
     "fully_reviewed_text_files": 70,
     "partially_reviewed_text_files": 1
   },
@@ -143,6 +143,18 @@
       ],
       "classification": "SOURCE_AMBIGUITY_PRESERVED_NOT_CONFIRMED_CURRENT_BUG",
       "summary": "Stumptown Kenya Karumandi original formally stated Red Currant/Blackberry/Dark Chocolate but SEO description gives honey/peach/cranberry; archived review keeps semantic contradiction separate, not assuming SEO is current exact selected source. Historical slider roast level ambiguous; do not derive categorical roast mapping from unlabeled numeric slider. Issue #33 owns current exact roaster truth."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-004",
+      "risk": "informational",
+      "type": "HISTORICAL_COFFEE_SOURCE_SEMANTIC_CONFLICTS",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        7070,
+        8269
+      ],
+      "classification": "HISTORICAL_SOURCE_CONTRADICTIONS_WITHHELD_NOT_CONFIRMED_CURRENT_RUNTIME_DEFECT",
+      "summary": "Source-record-only review: Queen City Brazil Cerrado archive body simultaneously states Medium and Medium-Dark (withheld); Queen City Colombia Decaf 'Varietal: Vertical dryers' is a drying-system labeling error (botanical variety withheld); Onyx Mexico Santa Cruz Gesha generic caffeine 0mg/12oz panel conflicts with exact-product full-caffeine tag (withheld), and filter 18g/280g disagrees with printed 1:15 ratio (retained separately). Unrelated Queen City Peru SEO descriptions are excluded from selected coffees. Never transfer frozen ambiguities into new current product facts or alter the immutable oracle; #33 owns live source adjudication."
     }
   ],
   "files": [
@@ -5408,11 +5420,23 @@
           "date_utc": "2026-10-29",
           "batch_id": "B019",
           "finding_ids": []
+        },
+        {
+          "first_line": 5101,
+          "last_line": 8331,
+          "line_count": 3231,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B020",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-004"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 5101,
+          "first_line": 8332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
