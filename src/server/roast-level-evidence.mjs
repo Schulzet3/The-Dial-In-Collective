@@ -449,6 +449,10 @@ export function extractRoastVisualEvidence(html){
   return {value:ev.value,confidence:ev.confidence,source:ev.source,hint:scaleNote};
  }
  if(unique.length>1)return {value:null,confidence:'conflict',source:null,
+  // Preserve precisely which supported roast labels were actually observed.
+  // The product merger may compare them against an explicit purchase-roast
+  // selector, never assuming that two valid options mean two coffees.
+  conflicting_roast_values:unique.slice(0,7),
   hint:'Conflicting roast labels were found. Check the roaster’s page before choosing a roast level.'};
  // Exact selected White Coffee title is evidence of a named nonstandard
  // category, not evidence of Light, Very Light or Ultra Light. Do not use

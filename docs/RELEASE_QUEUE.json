@@ -2796,16 +2796,20 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "src/server/coffee-shopify-ajax.mjs"
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/roast-level-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
         "Real exact merged-source live probe run 40962638203 fetched both current Ketch page HTML and exact public Shopify JSON on 2026-10-29. Correct Light/Medium-Dark flavor/recipe variants were returned but BOTH previews retained spurious conflicts:['roast_level'] despite one underlying coffee; original Owner Locked decision forbids treating two offered roast profiles as contradiction.",
         "Narrowly guard generic Shopify tag-only roast ambiguity when more than one actual purchasable roast matches all current HTML conflict options; genuine mismatched direct roast specification conflicts remain held for member review.",
-        "Five independent negative/positive model tests plus stricter Ketch live source test and source tier diagnostic staged; postmerge real 5-URL end-to-end CI and exact-source app/visual/SQL/privacy checks NOT YET COMPLETE."
+        "Five independent negative/positive model tests plus stricter Ketch live source test and source tier diagnostic staged; postmerge real 5-URL end-to-end CI and exact-source app/visual/SQL/privacy checks NOT YET COMPLETE.",
+        "Exact real postmerge 5-page source probe 40964238981 against merged a364930eb4b95ce7fc406fe357aeef7da4204931 FAILED 2/5, exclusively Ketch Tier2 and Tier3. Diagnostic: full selected HTML parser conflicts=['roast_level'] with ZERO conflict_options, exact Shopify endpoint has two valid roast variants and ZERO conflicts. Earlier tag-only JSON fix cannot resolve absent HTML alternatives. Five pages 10 real HTTPS reads with public hashes captured, all other 3 cases PASS.",
+        "New generic roast visual evidence retains supported conflicting values in bounded `conflicting_roast_values`, HTML parser forwards them to existing `coffeeConflictOptions` source review. Merge then verifies each HTML alternative is one of actual offered purchasable roast options; independently different explicit current tier remains manual-review conflict. Two focused real extractor+Shopify tests staged. No user-authorized Ketch profile or saved data changes."
       ],
       "ci_runs": [],
       "blockers": [
-        "Exact PR-head CI, nonforce integration, second genuine five-page HTTPS source acceptance, merged-source CI, documented READY receipts; do not call first 5/5 green proof of Ketch conflict integrity."
+        "Retest exact-PR full CI; safe nonforce merge; exact merged-source five full live roaster pages PASS without hidden Ketch roast conflict; approval/cloud app readback; READY receipt. All original603 corpus/source gates distinct; no live member auth or production data mutation."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Preserve October27 Locked Ketch one shared green coffee, exact purchased Light/Medium-Dark variants, taste/sensory/espresso separation, no automatic roast preselection, no SEO variant contamination, manual edits, historical shots/offline/Community data. No Netlify deployment or production database writes. Test harness logs only public source facts, no secrets."
