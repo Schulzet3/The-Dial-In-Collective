@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 38120,
-    "still_not_documented_as_semantically_reviewed_lines": 541841,
+    "direct_assistant_semantic_lines": 47120,
+    "still_not_documented_as_semantically_reviewed_lines": 532841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 541841,
+    "remaining_line_count_checked": 532841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -179,6 +179,18 @@
       ],
       "classification": "HISTORICAL_SOURCE_PROVENANCE_AMBIGUITIES_PRESERVED",
       "summary": "Complete B023 numbered original review: Novo Danche/Elite Honey farm provenance (source facility dates and awards not harvest, farm-wide cultivars not lot), Victus three roast blends lack origin/process/producer and 'Espresso' grind choice not brewing recipe, Lost Sock Yabitu Koba Natural source older washed/sibling version excluded and 2300m versus 2316m altitude withheld, Lost Sock Madre Laura URL current decaf multi-producer identity, Dueling Rabbits Burundi Amasho Medium/Light conflict; semi-washed process vs broad tags and full varieties retained, Koffee Kult Kilimanjaro versus Mbeya region ambiguity and peaberry morphology not botanical variety, Dope Coffee filter tablespoon/ounces not espresso ratio, Maui Hawaii roast site not bean origin, minimal mechanical processing not washed/natural, Friedrichs 'is_purchasable true' but 'is_in_stock false' source variance, and WooCommerce variation prices and current product titles preserved. No current app vulnerability established, no external source reconfirmation or frozen oracle change."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-007",
+      "risk": "informational",
+      "type": "HISTORICAL_SELECTED_SOURCE_CONFLICTS_AND_VARIANT_SCHEMA",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        26332,
+        35331
+      ],
+      "classification": "HISTORICAL_EVIDENCE_BOUNDARY_NOT_CONFIRMED_CURRENT_RUNTIME_DEFECT",
+      "summary": "B024 historical frozen oracle: Friedrichs Traders blend title says medium-dark while unqualified Dark collection tag remains supplementary, Epiphany Solar Flare named artist collaborator Joelle Ater is NOT farmer Claudia Samboni and awards not releases, Electrify 3-component Washed/Natural/Honey blend cannot inherit one canonical process, Brewpoint The Alchemist decaf current body Brazil/Medium conflicts same-product search Mexico/Dark (withhold), Brewpoint Illusionist Vietnam/Brazil vs Brazil/Guatemala composition conflict (withhold), Brewpoint Sidamo search price $15 vs exact endpoint $18, Wood Warbler old URL 'legacy farms'/SMBC/RFA/Huehuetenango not current verified region/certification, Blue Jazz Guatemala two regional lots elevation separate and Antigua URL not current, Sumatra double-pick is selection not processing, Heine Brothers Traveler light-medium vs medium and body conflict withhold, Fazenda legacy Antioquia vs selected Colombia Community Harvest and unrelated Huila SEO, decaf sugarcane EA vs primary cherry washing (separate methods), plus source variant weights and subscription choices do not imply bean net mass or an espresso recipe. Original source intact and no current app defect demonstrated."
     }
   ],
   "files": [
@@ -5490,11 +5502,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-006"
           ]
+        },
+        {
+          "first_line": 26332,
+          "last_line": 35331,
+          "line_count": 9000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B024",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-007"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 26332,
+          "first_line": 35332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
