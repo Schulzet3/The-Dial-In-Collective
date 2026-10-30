@@ -44,7 +44,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(!headings.length||headings.some(heading=>heading!==selected))return {};
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
-  !/\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(x.section));
+  !/\b(?:related products?|you may also like|recommended|more coffees?|other coffees?)\b/i.test(x.section));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
@@ -110,6 +110,14 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // A full current selected coffee name directly credited as "is roasted"
   // can identify a standard tier. Reject another coffee, older harvest,
   // incidental brewing prose, and relative language such as "lighter".
+  // Current selected WHOLE blend roast, not City + Full City components.
+  // Require exact selected H1 above, direct product paragraph, one roast label.
+  if(b.tag==='p'&&/\bblend\b/iu.test(name)&&
+     /^(?:A|An|Our|This)\s+[^.!?]{0,175}\bblend\.\s+Full\s+City\s+Roast\b/iu.test(line)&&
+     !/\b(?:formerly|previously|prior|historically|typically|generally|another\s+coffee|other\s+coffees?|components?|some\s+beans|roast\s+options?|roast\s+range)\b/iu.test(line)){
+   const labels=[...line.matchAll(/\b(?:full\s+city|ultra\s+light|very\s+light|medium(?:[ -](?:light|dark))?|light|dark|city|french|italian)\s+roast\b/giu)];
+   if(labels.length===1&&normalizeRoastLabel(labels[0][0])==='Medium-Dark')roasts.add('Medium-Dark');
+  }
   const namedRoast=line.match(/\b(.{3,200}?)\s+is\s+roasted\s+(light|medium|dark)\b/iu);
   if(namedRoast&&fold(namedRoast[1]).includes(fold(name))&&
      !/\b(?:formerly|previously|previous|prior|former|last (?:season|harvest|year)|historically|typically|generally|another coffee|other coffee)\b/i.test(line))
