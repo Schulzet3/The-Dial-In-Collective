@@ -268,6 +268,21 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
    const selectedCountries=countryNames(name);
    const directlySelected=!/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'');
    if(directlySelected&&selectedCountries.length===1){
+    // A current selected coffee can give its station, village, district
+    // and region in one explicit chain. Accept only a named locality that
+    // independently appears in this selected title; the country is the
+    // literal selected-title country. A neighboring farm history cannot
+    // turn an unlabelled location into the current coffee's origin.
+    const stationChain=sentence.match(new RegExp(
+     '^(?:this|our|the current)\\s+(?:coffee|lot|beans?)\\s+comes?\\s+from\\s+(?:the\\s+)?'+PLACE+
+     '\\s+(?:washing\\s+station|wet\\s+mill|processing\\s+station),?\\s+which\\s+is\\s+(?:located\\s+)?in\\s+the\\s+'+
+     '(?:[\\p{L}-]{3,22},\\s*or\\s+)?(?:village|town|kebele),?\\s+(?:of|in)\\s+('+PLACE+')\\s*,\\s+in\\s+the\\s+'+
+     '(?:[\\p{L}-]{3,22},\\s*or\\s+)?(?:district|woreda|wereda),?\\s+(?:of|in)\\s+('+PLACE+')\\s*,\\s+in\\s+the\\s+'+
+     '('+PLACE+')\\s+region(?=[.,;!?]|$)','iu'));
+    if(stationChain&&stationChain[1].length>=4&&key(name).includes(key(stationChain[1]))){
+     add([stationChain[1],stationChain[2],stationChain[3],selectedCountries[0]].join(', '),sentence);
+     continue;
+    }
     // The selected coffee's OWN current sentence can name its growing
     // region before its exact H1: "Grown in the famed Cerrado region,
     // Brazil Oberon is ...". The country must be literally printed at
