@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 65120,
-    "still_not_documented_as_semantically_reviewed_lines": 514841,
+    "direct_assistant_semantic_lines": 68120,
+    "still_not_documented_as_semantically_reviewed_lines": 511841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 514841,
+    "remaining_line_count_checked": 511841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -239,6 +239,18 @@
       ],
       "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
       "summary": "B028 direct frozen oracle-A historic source: Sodality Las Brisas Nicaragua evidence identifies La Bastilla Coffee Estates separately from Las Brisas Microfarm, 1300-1500 masl, Washed Centroamericano, and its April Dripper 1:16/20-second bloom is FILTER not espresso or total shot duration; Sodality Supremo Colombian Decaf explicitly Swiss Water decaf method (not independent proof of a separate primary processing method), COMEXIM is named as source producer without specific grower certainty, and Chemex 1:17/30-second bloom is filter-only; Sodality Qunqana Honey explicitly Honey process despite flavor prose comparing washed/natural, smallholders and Qunqana station separate from Daye Bensa founders, Orea 1:16 recipe filter-only. Frontside Costa Rica Tarrazu stated Light washed and Hacienda La Minita 1200-2000 masl, with original source cultivar spelling 'catuia' preserved, farm-wide 1,200-acre figure not altitude, seller 12oz variant shipping weight 454g mismatch. Frontside old /sumatra-lintong URL selected Sumatra Mandheling, explicit wet hulling Giling Basah versus separate greenhouse sun drying, 1000-1800 masl multiple smallholder suppliers, Bourbon listed as cup flavor not cultivar, conflicting Dark vs Medium-Dark roast evidence withheld; 12oz and 5lb source shipping weights 454g and 2449g are unreliable net mass. Multiple retailer subscriptions and machine-like option strings are checkout data, not shot recipes. Frontside Veracruz Finca La Laja stated medium roast, 1250-1300 masl, Yellow Honey process and Milo Sampieri & Family farm, limited offering not necessarily year-specific release; names Gárnica/Caturra kept per source; source recommends only pour-over, drip and French press. No images rendered/live product rechecked, no verified current runtime or security defect."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-012",
+      "risk": "low",
+      "type": "FROZEN_ARCHIVE_SOURCE_PROVENANCE",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        53332,
+        56331
+      ],
+      "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
+      "summary": "B029 historic original oracle-A direct review: Frontside Mexico Veracruz Finca La Laja purchase size and historical family cultivation since 1920 do not prove a roast/release year. Red House Geisha/Gesha El Paraiso Nariño 8oz explicit producer Jose Gomez Lopez, medium roast, 1900m, farm El Paraiso and cupping fruit/hibiscus; source misspells Geisha/Gesha but same named variety; harvest/process missing, Shopify 340g weight differs from advertised 8oz, grind variant inventory differs and identical SKU is purchase detail, not provenance. Red House Kerinci Sumatra explicit Full City roast (approved canonical Medium-Dark mapping belongs to Issue33), wet-hulled Djember S-795, producer unavailable; subscription recharge IDs not coffee brew details. Red House Mexican Oaxaca explicitly Wet-Hulled in a Mexican coffee, unusual geography alone cannot override named process, Typica/Bourbon both published varieties, medium for drip purchase grind does not establish medium roast, no published roast or producer, espresso pregrind variant 1540 source minor units versus 1740 other grinds is purchase price not a coffee conflict. Subterra Colombia medium sugarcane decaf explicitly sugarcane decaffeination method only, lacks primary crop process/elevation/variety/grower, 12oz/1lb/2lb variants' shipping weight often stale (e.g. 2lb Turkish/pod listed 340g), 'finer for darker flavors' isn't another roast label. Subterra Bellavista Chiapas medium roast qualified as med-dark side of medium, Washed from smallholders, espresso/French Press recommendations do not give numeric espresso recipe, 2lb drip shipping 227g anomaly. Subterra previous Guji Hambela Buliye URL now current selected archived Sidama Ayla Bombe Natural Light with Grade1 and fresh crop but no vintage, fine-grind recommendation not a recipe; old slug must not override selected product. Source-only observations; no current live source, rendered imagery, authorized authenticated security, or extractor defect proven."
     }
   ],
   "files": [
@@ -5610,11 +5622,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-011"
           ]
+        },
+        {
+          "first_line": 53332,
+          "last_line": 56331,
+          "line_count": 3000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B029",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-012"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 53332,
+          "first_line": 56332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
