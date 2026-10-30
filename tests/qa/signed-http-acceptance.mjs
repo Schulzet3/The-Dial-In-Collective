@@ -136,6 +136,84 @@ r=await rpc('dic_admin_search_records',tokens.admin,
 assert.equal(r.status,200);assert.ok(Array.isArray(r.data?.items));
 pass('Same two new protected listings remain usable to the genuine signed Admin fixture');
 
+// Issue #96: exercise real signed PostgREST Admin editing and protected audit
+// on the isolated dic_ci fixture, without any GoTrue/production credentials.
+const adminEditShotId=scalar(`(select s.id::text from public.shots s join public.shot_notes n
+ on n.shot_id=s.id and n.owner_id=s.owner_id where s.owner_id='${member}'::uuid
+ order by s.id limit 1)`);
+assert.match(adminEditShotId,/^[a-f0-9-]{36}$/i,'Existing member-owned synthetic shot with private note required');
+const adminEditShotRevision=Number(scalar(`(select revision from public.shots
+ where id='${adminEditShotId}'::uuid)`));
+assert.ok(Number.isSafeInteger(adminEditShotRevision)&&adminEditShotRevision>0);
+const adminEditShotInvariant=()=>scalar(`(select md5(jsonb_build_object(
+ 'owner',s.owner_id,'library_entry',s.library_entry_id,'setup',s.setup_id,
+ 'style',s.style,'dose',s.dose_g,'yield',s.yield_g,'time',s.time_s,
+ 'family',s.personal_family_id,'snapshot',s.equipment_snapshot)::text)
+ from public.shots s where s.id='${adminEditShotId}'::uuid)`);
+const adminEditNoteHash=()=>scalar(`(select md5(n.notes) from public.shot_notes n
+ where n.shot_id='${adminEditShotId}'::uuid)`);
+const adminEditAuditCount=()=>Number(scalar(`(select count(*) from private.admin_content_edits
+ where record_id='${adminEditShotId}'::uuid and record_kind='shot')`));
+const editInvariantBefore=adminEditShotInvariant();
+const editNotesBefore=adminEditNoteHash();
+const editAuditBefore=adminEditAuditCount();
+const newAdminFixtureNote='DIC96 synthetic approved Admin-only correction - no member content';
+const adminEditArgs={p_record_id:adminEditShotId,p_expected_revision:adminEditShotRevision,
+ p_details:{notes:newAdminFixtureNote},p_reason:'Issue96 isolated signed HTTP Admin audit acceptance',p_kind:'shot'};
+await denied('Admitted ordinary member cannot use Admin edit on own existing shot',
+ '/rpc/dic_admin_edit_shot',tokens.member,adminEditArgs);
+await denied('Forged admin metadata cannot change existing private notes',
+ '/rpc/dic_admin_edit_shot',tokens.forged,adminEditArgs);
+await denied('Disabled signed member cannot change private notes using Admin route',
+ '/rpc/dic_admin_edit_shot',tokens.disabled,adminEditArgs);
+await denied('Anonymous cannot change existing private notes using Admin route',
+ '/rpc/dic_admin_edit_shot',undefined,adminEditArgs);
+assert.equal(adminEditNoteHash(),editNotesBefore);
+assert.equal(adminEditAuditCount(),editAuditBefore);
+pass('Denied real-record Admin HTTP attempts preserve private note and audit');
+let editResponse=await rpc('dic_admin_edit_shot',tokens.admin,
+ {...adminEditArgs,p_expected_revision:adminEditShotRevision+9});
+assert.notEqual(editResponse.status,200,'Stale Admin edit must not succeed');
+assert.equal(editResponse.data?.code,'40001','Stale edit SQLSTATE');
+assert.equal(adminEditNoteHash(),editNotesBefore);
+assert.equal(adminEditAuditCount(),editAuditBefore);
+pass('Stale signed Admin HTTP edit rejects before note or audit mutation');
+editResponse=await rpc('dic_admin_edit_shot',tokens.admin,adminEditArgs);
+assert.equal(editResponse.status,200,'Signed admitted Admin must be able to correct fixture note');
+assert.equal(editResponse.data?.ok,true);
+assert.equal(editResponse.data?.audited,true);
+assert.equal(adminEditAuditCount(),editAuditBefore+1);
+assert.equal(scalar(`(select n.notes from public.shot_notes n where
+ n.shot_id='${adminEditShotId}'::uuid)`),newAdminFixtureNote);
+pass('Signed Admin HTTP correction updates member fixture note once and records audit');
+assert.equal(adminEditShotInvariant(),editInvariantBefore,
+ 'Admin note-only correction must preserve member ownership, recipe measurements and history links');
+const verifiedAudit=scalar(`(select exists(select 1 from private.admin_content_edits e
+ where e.record_id='${adminEditShotId}'::uuid and e.record_kind='shot'
+ and e.actor_id='${admin}'::uuid and e.subject_owner_id='${member}'::uuid
+ and md5(e.before_values->>'notes')='${editNotesBefore}'
+ and e.after_values->>'notes'='${newAdminFixtureNote}'))`);
+assert.equal(verifiedAudit,'t');
+pass('Cross-owner Admin audit records exact actor/subject/before/after with no shot-history change');
+let noteRead=await call('/shot_notes?select=notes&shot_id=eq.'+adminEditShotId,tokens.member);
+assert.equal(noteRead.status,200);
+assert.ok(noteRead.data?.some(x=>x.notes===newAdminFixtureNote));
+noteRead=await call('/shot_notes?select=notes&shot_id=eq.'+adminEditShotId,tokens.owner);
+assert.equal(noteRead.status,200);
+assert.deepEqual(noteRead.data,[]);
+pass('Edited note remains visible to its owner but never to unrelated member');
+let adminEditListed=false;
+for(let offset=0;offset<250;offset+=50){
+ const listing=await rpc('dic_admin_records',tokens.admin,{p_kind:'shots',p_offset:offset,p_limit:50});
+ assert.equal(listing.status,200);
+ const item=listing.data?.items?.find(x=>x.id===adminEditShotId);
+ if(item){assert.equal(item.notes,newAdminFixtureNote);assert.equal(item.creator_id,member);
+  adminEditListed=true;break;}
+ if(!listing.data?.items?.length||offset+50>=Number(listing.data?.total||0))break;
+}
+assert.ok(adminEditListed,'Signed Admin records must include edited cross-owner note in scoped fixture');
+pass('Admin-only paginated HTTP record projection displays audited private-note correction');
+
 const invitesBefore=scalar('(select count(*) from private.beta_invites)');
 const eventsBefore=scalar('(select count(*) from private.admin_access_events)');
 await denied('Ordinary member cannot issue an administrator invitation',
