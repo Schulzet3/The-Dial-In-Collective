@@ -1,3 +1,9 @@
+## October 30 UTC — PR297 exact CI second approval failure: queue scope classified deployable paths only (TESTING)
+
+Exact PR297 follow-up approval run `41009380831` FAILED active queue schema: new TESTING item `scope_paths` mistakenly contained tests and audit runner script, while `scripts/release/release-queue.mjs` requires *only deployable app code paths* there. Scoped the queue row to its sole deployable change `src/server/coffee-direct-product-prose.mjs` (test and public live runner files stay in the source/test PR and original evidence). No changes to original603 or existing released/ready queue rows. Both prior approval failures are retained as failures; exact latest CI must pass. No publication.
+
+---
+
 ## October 30 UTC — PR297 first approval queue intake failure diagnosed and repaired (TESTING)
 
 Exact PR-head approval job `41009253573` executed and FAILED queue intake because the new TESTING record was accidentally appended to the queue's historical `history` list rather than active `items` list; JSON schema alone passed but `--enforce-intake` correctly detected untracked `src/server/coffee-direct-product-prose.mjs`. Moved only that identical new record into `items` without changing any published item, archival history, other queue data, source, tests or locked behaviors. **First failure remains FAILED evidence.** Fresh corrected-source exact CI, live current Nativo source, nonforce merge and original603 remaining review still required; do not call READY. No publication or provider data write.
