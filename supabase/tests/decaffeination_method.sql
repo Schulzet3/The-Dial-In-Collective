@@ -107,7 +107,7 @@ begin
  begin perform public.dic_admin_edit_coffee(cid,rev,
   '{"is_decaf":true,"decaffeination_method":"Carbon Dioxide (CO2)"}'::jsonb,
   'Stale administrator revision denied','approved');
- exception when serialization_failure then denied:=true;end;
+ exception when sqlstate 'PT409' then denied:=true;end;
  if not denied then raise exception 'Stale admin decaf correction accepted';end if;
  execute 'reset role';
  if not exists(select 1 from private.admin_content_edits where record_id=cid
