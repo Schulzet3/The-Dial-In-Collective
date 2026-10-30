@@ -64,6 +64,29 @@ for(const target of targets){
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));
     r.add_coffee_ui_rendered=coffeeUrlPreviewMarkup(p).includes('coffee-url-preview');
     r.source_review_rendered=!!coffeeSourceReviewSnapshot({...p,source_url:r.final_url});
+
+    // Diagnostic only: a DIFFERENT Lowcountry coffee's flavor appears in
+    // review-only source_facts for Breakfast Blend. Find the precise public
+    // HTML product scope/ancestor rather than silently filtering genuine
+    // selected-product conflicting labels. No page content is changed.
+    if(r.number===205){
+      const selectedHtml=productMarkup(res.html);
+      const pattern=/Nutmeg[\s\S]{0,160}(?:Whole Bean )?Vanilla[\s\S]{0,160}(?:Creamy )?Butter/gi;
+      const contexts={};
+      for(const [kind,html] of [['raw',res.html],['selected_markup',selectedHtml]]){
+        const matches=[...html.matchAll(pattern)].slice(0,3);
+        contexts[kind]={matches:matches.length,fragments:matches.map(match=>{
+          const at=match.index;
+          return clip(html.slice(Math.max(0,at-1100),Math.min(html.length,at+650)),1750);
+        })};
+      }
+      console.log('[DIC33 LOWCOUNTRY PUBLIC RELATED-SCOPE DIAG] '+JSON.stringify({
+        case:205,correct_selected_tasting_notes:r.current_fields?.tasting_notes,
+        unrelated_fact_retained:r.source_facts?.some(f=>f.field==='tasting_notes'&&/Nutmeg.*Vanilla/i.test(f.value)),
+        contexts
+      }));
+    }
+
    }
   }
  }catch(e){r.status='ERROR';r.error=clip(e?.name||'Error',100);}
