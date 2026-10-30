@@ -1,5 +1,5 @@
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
-import {selectedDirectProductCredits} from './coffee-direct-product-prose.mjs';
+import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -1800,8 +1800,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const seo_fallback_fields=[...(seoFallbackByFields.get(fields)||[])].filter(key=>
   typeof fields[key]==='string'&&fields[key]&&!conflicts.has(key)).sort();
  // Decaf-only selected-product evidence, separate from green-coffee Process.
- const selectedDecafStatements=Array.isArray(directSelected.decaffeination_method_evidence)?
-  directSelected.decaffeination_method_evidence:[];
+ // Retain only a directly named exact current selected coffee's decaffeination
+ // sentence when canonical identity/geography filtering drops its description.
+ // Bounded product scope supplies an exact H1; this does not restore raw SEO,
+ // general coffee claims, other coffee facts or uncertain bean processing.
+ const selectedDecafStatements=[...new Set([
+  ...(Array.isArray(directSelected.decaffeination_method_evidence)?
+   directSelected.decaffeination_method_evidence:[]),
+  ...selectedNamedCurrentDecafEvidence(product,{name:fields.name,clean})
+ ])];
  const decaffeination_method=inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
   selectedMethod:selectedDecafStatements.join('\n'),

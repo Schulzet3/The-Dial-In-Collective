@@ -152,3 +152,17 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(decafEvidence.size&&!decafEvidenceOverflow)out.decaffeination_method_evidence=[...decafEvidence];
  return out;
 }
+
+
+// The current selected coffee's direct named decaffeination sentence must not
+// be lost when a stricter identity/geography cohort filter drops prose about
+// where decaffeination happened. Only the matched current coffee as grammatical
+// subject qualifies from the already-bounded product H1/description. Never
+// restore generic "our coffee" claims, unrelated items, historic lots, SEO,
+// cultivation origins or green-bean processing from the broader product scope.
+export function selectedNamedCurrentDecafEvidence(productHtml,{name,clean}={}){
+ if(!decafOnlyCoffee(name)||typeof clean!=='function')return [];
+ const direct=selectedDirectProductCredits(productHtml,{name,clean,optionHtml:productHtml});
+ return (direct.decaffeination_method_evidence||[])
+  .filter(statement=>currentNamedDecafMethod(name,statement));
+}

@@ -13,9 +13,6 @@ import {createPreviewHandler} from '../../netlify/functions/coffee-url-preview.m
 import {safeCoffeeUrl,fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
-import {selectedDirectProductCredits} from '../../src/server/coffee-direct-product-prose.mjs';
-import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
-import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {extractShopifyAjaxData,shopifyProductRequest} from '../../src/server/coffee-shopify-ajax.mjs';
 import {coffeeRoastVariantPreview,coffeeUrlPreviewMarkup} from '../../site/cloud/coffee-url-autofill.js';
 
@@ -261,36 +258,6 @@ async function probeOne(target){
   status=response.status;preview=await response.json();
  }catch(error){errorClass=String(error?.name||'Error');}
  const rawHtml=capture.html;
- let nativo_source_diagnostics=null;
- // Narrow, read-only public HTML trace ONLY after Nativo's first guarded
- // official current page failed to expose its printed named decaf method.
- // No passwords, member data, private source or full HTML in stdout/artifact.
- if(target.id==='nativo-tranquilo-current-sugar-decaf'&&rawHtml){
-  const page=compactCoffeeProductHtml(rawHtml)||rawHtml;
-  const scope=productMarkup(page);
-  const tidy=value=>String(value??'').replace(/<[^<>]{0,1000}>/g,' ')
-    .replace(/&nbsp;|&#160;/gi,' ').replace(/\s+/g,' ').trim().slice(0,6001);
-  const h1=markup=>[...markup.matchAll(/<h1\b[^<>]{0,1500}>([\s\S]{0,500}?)<\/h1\s*>/gi)]
-    .map(x=>clip(tidy(x[1]),90)).slice(0,12);
-  const blockDiagnostics=markup=>{
-   const blocks=productCoffeeProse(markup,tidy);
-   return {block_count:blocks.length,
-    selected_h1:blocks.filter(x=>x.tag==='h1').map(x=>clip(x.text,90)).slice(0,10),
-    named_method_blocks:blocks.filter(x=>/tranquilo.{0,35}decaffeinated|sugar\s*cane\s+process/i.test(x.text))
-     .slice(0,10).map(x=>({tag:x.tag,section:clip(x.section,75),
-      educational:x.educational,chars:x.text.length,prefix:clip(x.text,340)}))};
-  };
-  const direct=markup=>selectedDirectProductCredits(markup,{name:'TRANQUILO, Decaffeinated, 12 oz',clean:tidy,optionHtml:page});
-  nativo_source_diagnostics={
-   compact_html_size:page.length,product_scope_size:scope.length,
-   compact_html_selected_phrase:/Tranquilo is decaffeinated/i.test(page),
-   product_scope_selected_phrase:/Tranquilo is decaffeinated/i.test(scope),
-   raw_h1:h1(page),scoped_h1:h1(scope),
-   raw_blocks:blockDiagnostics(page),scoped_blocks:blockDiagnostics(scope),
-   direct_on_compact:Object.keys(direct(page)),
-   direct_on_scoped:Object.keys(direct(scope))
-  };
- }
  let rawResult=null,matchingH1=0,visibleOldCaption=false;
  if(rawHtml){
   const compact=compactCoffeeProductHtml(rawHtml);
@@ -327,7 +294,6 @@ async function probeOne(target){
   exact_title_h1_count:matchingH1,
   repeated_identical_h1_live_evidence:matchingH1>1,
   selected_product_has_stale_legacy_caption:visibleOldCaption,
-  ...(nativo_source_diagnostics?{nativo_source_diagnostics}:{}),
   roast_variants:(preview?.roast_variants||[]).map(v=>({id:v.id,fields:fieldsOf(v),
    sensory:v.sensory||null,roaster_recipe:v.roaster_recipe||null})),
   ui_rendered:rendered.length>50,ui_roast_picker:/Which roast did you buy\?/i.test(rendered),

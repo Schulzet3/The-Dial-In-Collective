@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
+import {selectedNamedCurrentDecafEvidence} from '../src/server/coffee-direct-product-prose.mjs';
 const source_url='https://leapcoffeeroasters.com/products/decaf-coffee';
 const page=(name,body)=>'<html><head><meta property="og:type" content="product"></head><body>'+
  '<main><h1>'+name+'</h1>'+body+'</main></body></html>';
@@ -113,4 +114,30 @@ test('named selected decaf conflicting current methods stay reviewable rather th
   '<p>'+nativo+'</p><p>Tranquilo is decaffeinated using Swiss Water.</p>');
  assert.equal(result.fields.decaffeination_method,undefined);
  assert.equal(result.source_facts?.filter(x=>x.field==='decaffeination_method').length,2);
+});
+
+
+test('strict current exact H1 restores named decaf-method evidence after geography context isolation',()=>{
+ const name='TRANQUILO, Decaffeinated, 12 oz';
+ const paragraph='Savor the richness of world-class coffee without the caffeine kick. '+
+  'Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia, '+
+  'which preserves the bean cellular structure and flavor integrity unlike harsh chemical methods.';
+ const current='<main><h1>'+name+'</h1><p>'+paragraph+'</p></main>';
+ const dropped='<main><h1>'+name+'</h1></main>';
+ const clean=html=>String(html).replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(dropped,{name,clean}),[]);
+ const facts=selectedNamedCurrentDecafEvidence(current,{name,clean});
+ assert.equal(facts.length,1);
+ assert.match(facts[0],/Tranquilo is decaffeinated using the natural Sugar Cane Process/);
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(current,{name:'Other Decaf',clean}),[]);
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(current,{name:'TRANQUILO, Half-Caf',clean}),[]);
+ for(const body of [
+  'Our coffee is decaffeinated using Swiss Water.',
+  'Previously, Tranquilo is decaffeinated using Swiss Water.',
+  'Last year Tranquilo is decaffeinated using Swiss Water.',
+  'Tranquilo is naturally sweet, with notes of sugar cane.'
+ ])assert.deepEqual(selectedNamedCurrentDecafEvidence('<main><h1>'+name+'</h1><p>'+body+'</p></main>',{name,clean}),[],body);
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(
+  '<main><h1>'+name+'</h1><section class="product-recommendations"><p>'+paragraph+'</p></section></main>',
+  {name,clean}),[],'related coffee prose cannot enter current selected product');
 });
