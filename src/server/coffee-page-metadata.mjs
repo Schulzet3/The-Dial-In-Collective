@@ -28,6 +28,27 @@ import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
 import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
+
+// A chosen current selected coffee description can be more authoritative than
+// another labeled tasting list printed in the same selected product detail
+// panel. Keep the preferred suggestion, but flag its genuinely incompatible
+// printed alternative for member review. Never rewrite or discard source facts.
+// This is not a cross-product suppression rule; both are actual source claims.
+export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
+ if(!Array.isArray(facts)||!selectedNotes||typeof selectedNotes!=='string')return facts;
+ for(const fact of facts){
+  if(fact.field!=='tasting_notes'||fact.conflicting===true||
+   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
+   !['html','product_json'].includes(fact.source_type)||
+   /(?:different coffee|general guidance|education|recommendation|brewing recommendation|published page metadata)/i.test(String(fact.section||'')))continue;
+  const printed=normalizeExplicitCoffeeTastingNotes(fact.value);
+  if(printed&&!equivalentCoffeeTastingNotes(printed,selectedNotes)&&
+   !coffeeTastingNotesSubset(printed,selectedNotes)&&
+   !coffeeTastingNotesSubset(selectedNotes,printed))fact.conflicting=true;
+ }
+ return facts;
+}
+
 const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
@@ -1740,6 +1761,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
       value:directSelected.explicit_tastes_like,source_url,source_type:'html',
       section:'Exact selected product literal tasting description'});
   }
+  // Flag only direct selected-source disagreements, not unsupported SEO.
+  // A higher-priority current description may remain the canonical suggestion
+  // while the contrary exact selected product Flavor caption is reviewable.
+  if(fields.tasting_notes&&!seoFallbackByFields.get(fields)?.has('tasting_notes'))
+   markSelectedTastingSourceDisagreements(source_facts,fields.tasting_notes);
   for(const fact of source_facts){
   if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
   else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
