@@ -114,7 +114,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // Require exact selected H1 above, direct product paragraph, one roast label.
   if(b.tag==='p'&&/\bblend\b/iu.test(name)&&
      /^(?:A|An|Our|This)\s+[^.!?]{0,175}\bblend\.\s+Full\s+City\s+Roast\b/iu.test(line)&&
-     !/\b(?:formerly|previously|prior|historically|typically|generally|another\s+coffee|other\s+coffees?|components?|some\s+beans|roast\s+options?|roast\s+range)\b/iu.test(line)){
+     !/\b(?:formerly|previous|previously|prior|historically|typically|generally|another\s+coffee|other\s+coffees?|components?|some\s+beans|roast\s+options?|roast\s+range)\b/iu.test(line)){
    const labels=[...line.matchAll(/\b(?:full\s+city|ultra\s+light|very\s+light|medium(?:[ -](?:light|dark))?|light|dark|city|french|italian)\s+roast\b/giu)];
    if(labels.length===1&&normalizeRoastLabel(labels[0][0])==='Medium-Dark')roasts.add('Medium-Dark');
   }
