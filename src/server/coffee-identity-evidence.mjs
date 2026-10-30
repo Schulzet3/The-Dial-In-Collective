@@ -187,7 +187,7 @@ export function extractCoffeeGeographyTuples(html,{clean,name='',includeCurrentL
   if(!found.some(item=>key(item)===key(value)))found.push(value);
   if(found.length>=12)break;
  }
- if(includeCurrentLocality)for(const place of narrativeGeography(blocks.filter(block=>!block.educational),{currentLocalityOnly:true})){
+ if(includeCurrentLocality)for(const place of narrativeGeography(blocks.filter(block=>!block.educational),{currentLocalityOnly:true,name})){
   // Early tuple reconciliation needs a country in this same source claim.
   // Keep partial geography as source evidence, without forcing a conflict
   // when the page's separate Region and Country labels arrive later.
@@ -233,7 +233,7 @@ function directOriginClaims(sentence){
  }
  return claims;
 }
-function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
+function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  const candidates=[];
  const add=(value,quote)=>{
   value=value.replace(/\s+/g,' ').replace(/[,; ]+$/,'').trim();
@@ -259,6 +259,33 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
      add(currentLocality[1]+', '+literalCountries[0],sentence);
     else add(currentLocality[1],sentence);
     continue;
+   }
+   // The EXACT selected coffee's current description can state a named town
+   // and district after its explicitly printed country: "Guatemala coffee
+   // from Joyabaj, Quiché". No country/region lookup and no page SEO guessing.
+   // Require the same country in the selected H1 so a rotated description or
+   // related coffee cannot donate a more specific origin.
+   const selectedCountries=countryNames(name);
+   const directlySelected=!/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'');
+   if(directlySelected&&selectedCountries.length===1){
+    const from=sentence.match(new RegExp(
+     '^(?:(?:Single[ -]Origin|Organic|Fair[ -]Trade)\\s+){0,3}('+COUNTRIES+')\\s+coffee\\s+from\\s+('+PLACE+')(?:\\s*,\\s*('+PLACE+'))?(?=[.!?]|$)','iu'));
+    if(from&&key(from[1])===key(selectedCountries[0])){
+     const locality=[from[2],from[3]].filter(Boolean).map(part=>part.replace(/[.,;:!?]+$/u,'').trim()).join(', ');
+     if(locality.length>=4)add(locality+', '+from[1],sentence);
+     continue;
+    }
+    // Two appearances of the SAME literal regional name in an explicitly
+    // selected current lot sentence can corroborate a locality. "Brazil
+    // Mogiana ... Mogiana growing region in Brazil" is direct source text,
+    // not a geographic inference from the product slug or adjacent coffee.
+    const repeated=sentence.match(new RegExp(
+     '^('+COUNTRIES+')\\s+('+PLACE+')\\s+is\\s+(?:produced|grown|sourced|cultivated)\\s+in\\s+the\\s+(?:renowned\\s+)?\\2\\s+growing\\s+region\\s+in\\s+\\1(?=[.!?]|$)','iu'));
+    if(repeated&&key(repeated[1])===key(selectedCountries[0])&&
+       key(name).includes(key(repeated[1]+' '+repeated[2]))){
+     add(repeated[2]+', '+repeated[1],sentence);
+     continue;
+    }
    }
    // The selected-coffee product may describe its direct growing locality
    // before naming the producing country: "From the Tarrazu region of Costa
@@ -453,7 +480,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
    if(quote)add('Release',numbered[1]+' '+numbered[2],name+' | '+quote);
   }
  }
- for(const place of narrativeGeography(blocks)){
+ for(const place of narrativeGeography(blocks,{name})){
   // A prose fragment may name a neighboring town, a broader district or
   // just a mountain. It can refine an explicit caption only when its
   // complete named places are compatible. Different explicit countries
