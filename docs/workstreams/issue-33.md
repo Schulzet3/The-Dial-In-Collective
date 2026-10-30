@@ -1,3 +1,11 @@
+## October 30 UTC — Issue33 original603 fifth 20 ORIGINAL selected official source cases WIRED, TESTING, NOT DEPLOYED
+
+**Authoritative recovered branch:** `71d5ada2d13065c2aa8faffd2fb0e786bd5a9e03` after PR322 nonforce merged and merged-source approval [41055795593](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41055795593) SUCCESS. Netlify provider Release13 remains production current deploy `6ae421f5de038d292bd66407`, git `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`. Parent Issue33 OPEN, Issues267/96 parallel PRs untouched. Immutable original603 CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, original captures/oracle preserved.
+
+**THIS SAME-COMMIT diagnostic (NOT a verified extraction improvement):** Add only distinct `[dic-issue33-fifth20]` controlled public roaster source workflow trigger and 20 fresh, non-overlapping original603 cases `14,26,59,62,98,101,107,119,152,263,269,283,484,499,502,517,520,526,532,571`. Full current primary roaster source, identity/H1, actual extracted fields and Add Coffee preview to be separately guarded-tested after all exact PR-head CI passes and a nonforce merge. Historical 153 semantic/context plus29 missing-literal qualified remain historical unresolved; no current product claims, independent certifications, parser changes or READY queue rows from this preliminary wiring. Case-specific risk register `docs/audits/issue33-original603-fifth20-source-review-20261030.md`. Do not guess coffee facts, rely on URL slugs or stale SEO, declare skipped tests PASS, deploy or write production SQL/Auth/Edge/member data.
+
+---
+
 ## October 30 UTC — PR321 Foster #126 selected Mountain Water method independently source-verified NARROW READY (NOT DEPLOYED)
 
 **Recovered source and production:** authoritative development `6783a8cdc7d725f651e8d06c9916ae548dc6852c` (safe nonforce PR321 merge from exact PR head `0b3497d4fda8a41d7ad7001e2b802521014d7db1`); Issue33 remains OPEN, concurrent Issue267/Issue96 protected. Netlify read-only READY/current deploy `6ae421f5de038d292bd66407` source `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`; no deploy or production member/Auth/SQL/Edge writes. Original603 frozen 603 coffees/201 roasters, 1197 captures, original CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, captures/oracle unchanged.
