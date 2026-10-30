@@ -5,6 +5,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Owner-approved refinements: Issue #80](issue-80.md)
 - [Current-workflow reconciliation: Issue #70](issue-70.md)
 - [Repository-wide source and security inspection: Issue #96](issue-96.md)
+- [Frozen 579,961-line historical expert semantic review: Issue #267](issue-267.md)
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
 - [Numeric grinder range and Slow Feed recommendation: Issue #17](issue-17.md)
