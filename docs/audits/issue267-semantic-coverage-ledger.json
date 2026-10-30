@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 80120,
-    "still_not_documented_as_semantically_reviewed_lines": 499841,
+    "direct_assistant_semantic_lines": 83120,
+    "still_not_documented_as_semantically_reviewed_lines": 496841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 499841,
+    "remaining_line_count_checked": 496841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -299,6 +299,18 @@
       ],
       "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
       "summary": "Honduras COMSA sold as Espresso Roast but archived Coffee Exchange product text explicitly says not recommended for espresso; its Dark roast, La Paz washed COMSA 1200–1750m, dark chocolate/pepper distinguish product facts from seller pregrind selectors and historic business dates. Black Hills Jefferson's Blend includes differently roasted South American/African/Indonesian components, no single certified roast. Black Hills House Blend includes City and Full City roast components, not one whole-product Full City/Medium-Dark. The Medium purchase option belongs to Grind; medium body/acidity not roast. Black Hills Course shipping weight 0 conflicts with labelled nonzero bag quantity, not proof of no coffee. Subscriptions/discounts/prices minor units are commerce, never numeric espresso recipes. Historic text only; no live product/image/browser/auth verification or newly proven current runtime defect."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-017",
+      "risk": "informational",
+      "type": "HISTORICAL_SELECTED_COFFEE_PROVENANCE_AND_SOURCE_CONTRADICTIONS",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        68332,
+        71331
+      ],
+      "classification": "HISTORICAL_SOURCE_ONLY_WITHHELD_NOT_CONFIRMED_CURRENT_RUNTIME_DEFECT",
+      "summary": "B034 direct original historical source-only reading: Black Hills Washington’s Breakfast South/Central American beans explicitly Light (roaster calls city roast) rather than treating the ‘Medium’ retail grind option as roast, with natural sweetness a sensory phrase not Natural processing, and president-name not a producer. Pinewood Kibaya selected Rwanda/Kigali washed Red Bourbon at 1600–2000m by regional smallholders, with Rwamatamu washing station distinct from grower; its roast widget 2/5 with labels at Light/Medium/Dark provides no named second-step roast enum. Pinewood Hacienda Rio Negro selected Costa Rica Coto Brus washed Mixed at 1000–1300m; center 3/5 explicitly Medium, source tasting ‘Cantelope’ verbatim, sister Hacienda La Minita is stewardship not a blend component and Beneficio Rio Negro is mill. Pinewood Coast Decaf exact same-product description calls Mexican coffees natural sugar decaffeination but specification calls origin ‘African Blend’; story molasses/brown sugar conflicts with widget peaches/golden raisins/juicy; withhold origin and tasting notes, label washed/cultivar/elevation as dependent on disputed geographic spec, and do not misclassify sugar decaf as Natural/Honey bean processing. Cumbre Cafezinho Brazil original selected Cerrado/Mogiana/Sul de Minas, smallholders, 600–1200m, Natural, Medium, Catuai and source-spelling Mundo Novo/Mondo Nuovo; harvest May–Aug is season not product release year, and Santos is a trade label not farm region. All Shopify sizes, seller Espresso/Drip grind selectors, repeated SKUs and shipping weights are commerce, not espresso shot dose, yield, time or machine grinder settings; no current live app/roaster/auth source defect proven."
     }
   ],
   "files": [
@@ -5730,11 +5742,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-016"
           ]
+        },
+        {
+          "first_line": 68332,
+          "last_line": 71331,
+          "line_count": 3000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B034",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-017"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 68332,
+          "first_line": 71332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
