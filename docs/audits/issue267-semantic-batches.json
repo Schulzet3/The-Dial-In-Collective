@@ -782,16 +782,71 @@
       ],
       "total_lines": 3231,
       "actual_tests": "NOT_EXECUTED_WITHIN_THIS_SEMANTIC_BATCH"
+    },
+    {
+      "id": "B021",
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "source_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "review_date_utc": "2026-10-30",
+      "reviewer": "ChatGPT assistant (not independent human)",
+      "method": "direct_numbered_original_blob_line_by_line_semantic_read",
+      "description": "Original historical application/frontend and extractor trust-boundary review. Inspected entire 924-line cloud main controller (session epochs, fail-closed admission, offline owner cache, pending mutation receipts, modal escapes, review gating, UI workflows and single-flight evidence), 913-line source-fact collector (Unicode/HTML and budget validation, JSON pointer/variant retention, source attribution/truncation, source-text vs canonical), 1334-line page-metadata parser (source URL/selected product identity, geo/roast/tasting conflicts, stale SEO exclusion, structured variants, provenance), 182-line Netlify public URL preview (bearer/admission checks, same-origin, bounded parsing, cached vs verified catalog, quota, safe public fetch), 37-line build_cloud.mjs (public key, output whitelist, service-worker shell/CSP), 29-line .gitignore (credential and backup exclusion). Historical source semantics only; no current runtime security or current product regression proven and no source code changes.",
+      "files": [
+        {
+          "path": "site/cloud/main.js",
+          "source_blob_sha": "e25569cdd72d2abd94205ccb0169ccf08963676f",
+          "first_line": 1,
+          "last_line": 924,
+          "line_count": 924
+        },
+        {
+          "path": "src/server/coffee-source-facts.mjs",
+          "source_blob_sha": "248f98c06f484c66fdd8016df61c45a766846a7b",
+          "first_line": 1,
+          "last_line": 913,
+          "line_count": 913
+        },
+        {
+          "path": "src/server/coffee-page-metadata.mjs",
+          "source_blob_sha": "bb68e3f29270cd96ccba0455399afc81a11336f0",
+          "first_line": 1,
+          "last_line": 1334,
+          "line_count": 1334
+        },
+        {
+          "path": "netlify/functions/coffee-url-preview.mjs",
+          "source_blob_sha": "fcc268aa083ef981940c8fa1b6ad3b9a0856a2c3",
+          "first_line": 1,
+          "last_line": 182,
+          "line_count": 182
+        },
+        {
+          "path": "build_cloud.mjs",
+          "source_blob_sha": "4352b50ae7bbe5b41904fb3c317978220c82dfe1",
+          "first_line": 1,
+          "last_line": 37,
+          "line_count": 37
+        },
+        {
+          "path": ".gitignore",
+          "source_blob_sha": "cc33dc08440db607da17b3af8f82295036561bec",
+          "first_line": 1,
+          "last_line": 29,
+          "line_count": 29
+        }
+      ],
+      "total_lines": 3419,
+      "actual_tests": "No runtime tests in this semantic-reading batch. Exact-source CI is required before merge."
     }
   ],
   "coverage": {
     "source_files_total": 757,
     "source_text_files": 754,
     "original_total_text_lines": 579961,
-    "fully_reviewed_text_files": 70,
+    "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1,
-    "reviewed_original_lines": 16701,
-    "unreviewed_original_lines": 563260
+    "reviewed_original_lines": 20120,
+    "unreviewed_original_lines": 559841
   },
   "boundary": "Every listed original line was displayed and inspected directly by ChatGPT. Not human external attestation or executed security proof."
 }
