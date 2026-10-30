@@ -1,5 +1,5 @@
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
-import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence} from './coffee-direct-product-prose.mjs';
+import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -1804,15 +1804,34 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // sentence when canonical identity/geography filtering drops its description.
  // Bounded product scope supplies an exact H1; this does not restore raw SEO,
  // general coffee claims, other coffee facts or uncertain bean processing.
+ const namedDecafStatements=selectedNamedCurrentDecafEvidence(product,{name:fields.name,clean});
  const selectedDecafStatements=[...new Set([
   ...(Array.isArray(directSelected.decaffeination_method_evidence)?
    directSelected.decaffeination_method_evidence:[]),
-  ...selectedNamedCurrentDecafEvidence(product,{name:fields.name,clean})
+  ...namedDecafStatements
  ])];
+ // Generic Process labels can conflict in the layout reader while the EXACT
+ // selected named decaf sentence and the selected EA Process spec AGREE.
+ // Suppress only that unrelated processing-detail conflict when both direct
+ // method witnesses match. Opposing/unknown selected methods still fail closed.
+ const decafSpec=selectedCurrentDecafSpecMethodEvidence(product,{name:fields.name,clean});
+ const exactNamedDecafMethod=inferDecaffeinationMethod({
+  name:fields.name,selectedMethod:namedDecafStatements.join('\n')
+ });
+ const exactNamedAndSpecAgreement=Boolean(exactNamedDecafMethod&&decafSpec.complete&&
+  decafSpec.candidates.length&&
+  decafSpec.candidates.every(spec=>spec.method===exactNamedDecafMethod));
+ const decafSpecConflict=decafSpec.candidates.length>0&&
+  (!decafSpec.complete||decafSpec.candidates.some(spec=>!spec.method)||
+   new Set(decafSpec.candidates.map(spec=>spec.method)).size>1||
+   Boolean(exactNamedDecafMethod&&
+    decafSpec.candidates.some(spec=>spec.method!==exactNamedDecafMethod)));
+ const decafSourceConflict=decafSpecConflict||
+  (detailConflicts.has('processing_detail')&&!exactNamedAndSpecAgreement);
  const decaffeination_method=inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
   selectedMethod:selectedDecafStatements.join('\n'),
-  conflicting:detailConflicts.has('processing_detail')
+  conflicting:decafSourceConflict
  });
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
  // Preserve the literal selected-product method sentence for member review.
@@ -1822,6 +1841,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   source_facts.push({field:'decaffeination_method',
    label:'Current selected coffee decaffeination statement',value:sentence,
    source_url,source_type:'html',section:'Selected product description',
+   ...(decaffeination_method?{}:{conflicting:true})});
+ }
+ // Expose independent exact selected method labels, including contradictions,
+ // rather than hiding dissenting printed evidence behind a chosen field.
+ for(const spec of decafSpec.candidates.slice(0,8)){
+  if(source_facts.length>=384)break;
+  source_facts.push({field:'decaffeination_method',
+   label:'Exact selected decaf process caption',value:spec.label+': '+spec.value,
+   source_url,source_type:'html',section:'Selected product current specification',
    ...(decaffeination_method?{}:{conflicting:true})});
  }
  // Standalone selected Limited Release is a fallback only. Named current

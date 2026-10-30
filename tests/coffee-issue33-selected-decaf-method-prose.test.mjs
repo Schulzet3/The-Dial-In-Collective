@@ -141,3 +141,33 @@ test('strict current exact H1 restores named decaf-method evidence after geograp
   '<main><h1>'+name+'</h1><section class="product-recommendations"><p>'+paragraph+'</p></section></main>',
   {name,clean}),[],'related coffee prose cannot enter current selected product');
 });
+
+
+test('independent exact Sugar Cane EA named sentence and printed spec corroborate under layout disagreement',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Savor the richness of world-class coffee without the caffeine kick. '+
+  'Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.</p>'+
+  '<ul><li>Process: Natural Sugar Cane (EA) Decaf.</li></ul>'+
+  '<p>Decaffeination Method: Sugar Cane EA Decaf.</p>');
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+ assert.equal(result.fields.process,undefined,'Natural describes EA treatment, not green processing');
+ assert.equal(result.fields.origin,undefined,'decaffeination country is not farm origin');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&/Natural Sugar Cane \(EA\) Decaf/.test(f.value)));
+});
+
+test('contrary exact current decaf spec blocks named method even without prior layout conflict',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.</p>'+
+  '<li>Process: Swiss Water Decaf.</li>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&f.conflicting));
+});
+
+test('unrelated green processing or related coffee spec never overrides direct decaf evidence',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.</p>'+
+  '<li>Process: Washed.</li>'+
+  '<section class="product-recommendations"><li>Decaffeination Method: Swiss Water Decaf.</li></section>');
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+});
