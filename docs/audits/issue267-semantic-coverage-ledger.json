@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 77120,
-    "still_not_documented_as_semantically_reviewed_lines": 502841,
+    "direct_assistant_semantic_lines": 80120,
+    "still_not_documented_as_semantically_reviewed_lines": 499841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 502841,
+    "remaining_line_count_checked": 499841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -287,6 +287,18 @@
       ],
       "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
       "summary": "B032 original historic source direct reading: Gnosis Costa Rica Honey 3/12oz and 5lb variants all Shopify shipping weight=0 and many blank SKU; blank weight and purchase Drip/French Press/Pour Over are not empty coffee quantities or espresso recipes. Gnosis Colombia Mina Rica current product explicit medium washed Castillo, 1700masl, San Gabriel Antioquia, producer current Carolina Posada owner of Mina Rica and 'direct trade' seller claim; historical grandfather Mario not current grower; image alt text names full surname but photo pixels not read. Gnosis Red Bourbon DECAF Light from Wilton Benitez / Paraiso 92 Piendamo Cauca at 1900masl, Sugarcane ethyl acetate decaffeination; 48h whole cherry yeast fermentation then 68h secondary with coffee juices, ozonated+UV wash and low temp drying are process-stage facts, but headline says Natural while stages mention washed: do not force either primary process, yeast inoculation alone not proof of anaerobic; La Macarena named in photo alt as farm, keep distinct from producer. Coffee Exchange Peru Cafe Canchaque current American Roast defined roaster's lightest, hence Light, Natural, coop Condorcanqui member Norandino, Canchaque Piura 1500–2350m, but Bourbon in historical description refers to Spanish Bourbon reforms not coffee cultivar; 1969 founding not harvest, Fair Trade/Organic claim unverified outside source. Coffee Exchange Dominican Republic Red Honey Vienna explicitly Medium-Dark per roaster 'medium/dark', Jarabacoa Cibao 1300m family-farm producer without named grower, Honey with 24h fermentation and Organic/Direct Trade source claim not independent certification. Both Coffee Exchange product variants #1 Turkish, #2/2.5/3 espresso, #4 Aeropress etc are SELLER PRE-GRIND options, not member grinder settings, espresso dose/yield/time, or universal roast style; seller subscription frequency and discount flags commercial not extraction. All are archived historic source observations only; current product pages, visual images, browser-only state, current extractor/Issue33 and authenticated security/Issue96 not rechecked."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-016",
+      "risk": "low",
+      "type": "FROZEN_ARCHIVE_SOURCE_PROVENANCE",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        65332,
+        68331
+      ],
+      "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
+      "summary": "Honduras COMSA sold as Espresso Roast but archived Coffee Exchange product text explicitly says not recommended for espresso; its Dark roast, La Paz washed COMSA 1200–1750m, dark chocolate/pepper distinguish product facts from seller pregrind selectors and historic business dates. Black Hills Jefferson's Blend includes differently roasted South American/African/Indonesian components, no single certified roast. Black Hills House Blend includes City and Full City roast components, not one whole-product Full City/Medium-Dark. The Medium purchase option belongs to Grind; medium body/acidity not roast. Black Hills Course shipping weight 0 conflicts with labelled nonzero bag quantity, not proof of no coffee. Subscriptions/discounts/prices minor units are commerce, never numeric espresso recipes. Historic text only; no live product/image/browser/auth verification or newly proven current runtime defect."
     }
   ],
   "files": [
@@ -5706,11 +5718,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-015"
           ]
+        },
+        {
+          "first_line": 65332,
+          "last_line": 68331,
+          "line_count": 3000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B033",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-016"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 65332,
+          "first_line": 68332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
