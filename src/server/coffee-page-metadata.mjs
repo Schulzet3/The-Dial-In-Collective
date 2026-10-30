@@ -41,7 +41,13 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
    !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
    !['html','product_json'].includes(fact.source_type)||
    /(?:different coffee|general guidance|education|recommendation|brewing recommendation|published page metadata)/i.test(String(fact.section||'')))continue;
-  const printed=normalizeExplicitCoffeeTastingNotes(fact.value);
+  // An actual labeled Flavor list may contain unusual literal merchant words
+  // (e.g. Whole Bean Vanilla) rejected by the canonical flavor sanitizer.
+  // Keep that source's own caption as review-only evidence when it is a
+  // bounded multi-item literal, never as an inferred canonical flavor.
+  const raw=String(fact.value||'').trim();
+  const printed=normalizeExplicitCoffeeTastingNotes(raw)||
+   (raw.length<=240&&raw.length>=6&&/[,;|]/.test(raw)&&!/[<>]/.test(raw)?raw:'');
   if(printed&&!equivalentCoffeeTastingNotes(printed,selectedNotes)&&
    !coffeeTastingNotesSubset(printed,selectedNotes)&&
    !coffeeTastingNotesSubset(selectedNotes,printed))fact.conflicting=true;

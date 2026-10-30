@@ -45,6 +45,12 @@ test('unlabeled prose, metadata, general guidance and unrelated sources are not 
  assert.equal(facts[4].conflicting,true);
 });
 
+test('arbitrary unlabeled or non-list scalar does not manufacture a source conflict',()=>{
+ const facts=[row('Flavor','Single uncertain descriptor'),row('Product Info','Unrelated, longer, multiline prose')];
+ markSelectedTastingSourceDisagreements(facts,preferred);
+ assert.ok(facts.every(f=>f.conflicting!==true));
+});
+
 test('unavailable preferred current notes cannot invent a competing canonical profile',()=>{
  const facts=[row('Flavor',conflicting)];
  assert.strictEqual(markSelectedTastingSourceDisagreements(facts,''),facts);
