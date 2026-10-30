@@ -175,24 +175,41 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
  if(!decafOnlyCoffee(name)||typeof clean!=='function'||
     typeof productHtml!=='string'||productHtml.length>2_000_000)return empty;
  const blocks=productCoffeeProse(productHtml,clean),headings=blocks.filter(b=>b.tag==='h1').map(b=>fold(b.text));
- if(!headings.length||headings.some(heading=>heading!==fold(name))||
+ const selected=fold(name);
+ // Some product descriptions use H1 for editorial subsections. Allow only
+ // these generic selected-product headings after the exact product H1.
+ // Any competing product H1, missing selected H1 or generic shop H1 fails closed.
+ const editorial=/^(?:tasting notes?|origin notes?|why you ll love this coffee|frequently asked questions)$/u;
+ if(!headings.length||headings[0]!==selected||
+    headings.some((heading,i)=>i>0&&heading!==selected&&!editorial.test(heading))||
     /^(?:all|shop|catalog|collection)\s+(?:decaf|coffee)/iu.test(String(name)))return empty;
+ // FAQ and educational examples are not actual selected-product specs.
+ const faqStart=blocks.find(b=>b.tag==='h1'&&fold(b.text)==='frequently asked questions')?.start??Infinity;
  const seen=new Map();
  for(const block of blocks){
-  if(block.educational||!['li','p','div','span'].includes(block.tag)||
+  if(block.start>=faqStart||block.educational||!['li','p','div','span'].includes(block.tag)||
      block.text.length>300||
      /\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(block.section))continue;
-  const hit=block.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
-  if(!hit)continue;
-  const value=hit[2].trim();
-  // Process: Natural is green processing; Natural Sugar Cane (EA) Decaf is not.
-  if(!/^decaffeination/i.test(hit[1])&&
-     !/\b(?:decaf(?:feinat(?:ed|ion|ing))?|caffeine[- ]?free|swiss[- ]?water|mountain[- ]?water|sugar[- ]?cane|ethyl[- ]?acetate|carbon[- ]?dioxide|co[- ]?2)\b/iu.test(value))continue;
-  const key=fold(hit[1]+' '+value);
-  if(!seen.has(key)){
-   seen.set(key,{label:hit[1],value,
-    method:inferDecaffeinationMethod({name,selectedMethod:value})||null});
-   if(seen.size>8)return {candidates:[...seen.values()],complete:false};
+  // A selected product's printed spec card may use BR-separated labels in
+  // a single paragraph. Inspect individual explicit label lines, never
+  // freeform descriptions, hidden markup or a generic title/SEO match.
+  const captions=[block.text];
+  if(/<br\b/iu.test(block.html))
+   captions.push(...block.html.split(/<br\b[^>]{0,150}>/giu).map(part=>clean(part,300)));
+  for(const caption of captions){
+   const hit=caption.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+   if(!hit)continue;
+   const value=hit[2].trim();
+   // Process: Washed is green processing; Process: Washed + EA Sugarcane
+   // Decaffeination explicitly supplies an independent decaf treatment.
+   if(!/^decaffeination/i.test(hit[1])&&
+      !/\b(?:decaf(?:feinat(?:ed|ion|ing))?|caffeine[- ]?free|swiss[- ]?water|mountain[- ]?water|sugar[- ]?cane|ethyl[- ]?acetate|carbon[- ]?dioxide|co[- ]?2)\b/iu.test(value))continue;
+   const key=fold(hit[1]+' '+value);
+   if(!seen.has(key)){
+    seen.set(key,{label:hit[1],value,
+     method:inferDecaffeinationMethod({name,selectedMethod:value})||null});
+    if(seen.size>8)return {candidates:[...seen.values()],complete:false};
+   }
   }
  }
  return {candidates:[...seen.values()],complete:true};
