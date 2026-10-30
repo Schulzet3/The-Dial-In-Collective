@@ -268,6 +268,21 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
    const selectedCountries=countryNames(name);
    const directlySelected=!/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'');
    if(directlySelected&&selectedCountries.length===1){
+    // The selected coffee's OWN current sentence can name its growing
+    // region before its exact H1: "Grown in the famed Cerrado region,
+    // Brazil Oberon is ...". The country must be literally printed at
+    // the start of that same selected H1, not inferred from a gazetteer,
+    // slug, unrelated product or a free-floating site-wide region.
+    const selectedNamePattern=Array.from(name).map(char=>
+     '\\^$.*+?()[]{}|'.includes(char)?'\\'+char:char).join('');
+    const selectedRegion=sentence.match(new RegExp(
+     '^Grown\\s+in\\s+the\\s+(?:(?:famed|renowned)\\s+)?('+PLACE+')\\s+region\\s*,\\s*'+
+      selectedNamePattern+'\\s+is\\b','iu'));
+    if(selectedRegion&&new RegExp('^'+selectedCountries[0]+'\\s','iu').test(name)&&
+       !/\b(?:coffees?|blends?|roasts?|products?|catalog|related|previous|other)\b/iu.test(selectedRegion[1])){
+     add(selectedRegion[1]+', '+selectedCountries[0],sentence);
+     continue;
+    }
     const from=sentence.match(new RegExp(
      '^(?:(?:Single[ -]Origin|Organic|Fair[ -]Trade)\\s+){0,3}('+COUNTRIES+')\\s+coffee\\s+from\\s+('+PLACE+')(?:\\s*,\\s*('+PLACE+'))?(?=[.!?]|$)','iu'));
     if(from&&key(from[1])===key(selectedCountries[0])){
