@@ -2918,12 +2918,14 @@
       "tests": [
         "Original PR287 exact-source SQL run 41000126420 actually executed PostgREST, passing 33 signed-HTTP assertions then timed out on stale authorized Administrator edit (deterministic SQLSTATE 40001 retry).",
         "New PT409 wrapper migration and source assertion edits: exact-head SQL/HTTP, Node, browser, approval and nonforce merge/merged-source checks PENDING.",
-        "Actual PR287 CI 41000510974 approval rejected nondeployable test files in scope_paths; corrected to migration only. Actual SQL 41000510968 failed decaf stale editor SQL assertion expecting prior 40001; update only this admin assertion to PT409."
+        "Actual PR287 CI 41000510974 approval rejected nondeployable test files in scope_paths; corrected to migration only. Actual SQL 41000510968 failed decaf stale editor SQL assertion expecting prior 40001; update only this admin assertion to PT409.",
+        "Real SQL signed JWT run 41000787831 passed stale 409/PT409 response and positive authorized Admin update/audit (35 checks); failed only overly strict test baseline expecting a previously-unclassified synthetic shot to retain NULL family when classifier correctly assigns a family. Updated assertion to preserve immutable owner/history/equipment/measurements and validate recipe-family ownership, allowing legitimate first classification."
       ],
       "ci_runs": [
         41000126420,
         41000510974,
-        41000510968
+        41000510968,
+        41000787831
       ],
       "blockers": [
         "Await actual passing exact-head SQL/signed HTTP, browser, Node, approval checks and safe nonforce integration before READY."

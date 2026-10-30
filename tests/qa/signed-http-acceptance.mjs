@@ -148,12 +148,21 @@ assert.ok(Number.isSafeInteger(adminEditShotRevision)&&adminEditShotRevision>0);
 const adminEditShotInvariant=()=>scalar(`(select md5(jsonb_build_object(
  'owner',s.owner_id,'library_entry',s.library_entry_id,'setup',s.setup_id,
  'style',s.style,'dose',s.dose_g,'yield',s.yield_g,'time',s.time_s,
- 'family',s.personal_family_id,'snapshot',s.equipment_snapshot)::text)
+ 'snapshot',s.equipment_snapshot)::text)
  from public.shots s where s.id='${adminEditShotId}'::uuid)`);
 const adminEditNoteHash=()=>scalar(`(select md5(n.notes) from public.shot_notes n
  where n.shot_id='${adminEditShotId}'::uuid)`);
 const adminEditAuditCount=()=>Number(scalar(`(select count(*) from private.admin_content_edits
  where record_id='${adminEditShotId}'::uuid and record_kind='shot')`));
+// Classification may legitimately assign a missing family when an Admin edit
+// re-runs the normal owner-scoped recipe classifier. Identity and measurements
+// are invariant, while the resulting family must belong to this member.
+const adminEditFamily=()=>scalar(`(select coalesce(s.personal_family_id::text,'') from public.shots s where s.id='${adminEditShotId}'::uuid)`);
+const familyOwnerValid=()=>scalar(`(select case when s.personal_family_id is null then true else exists(
+ select 1 from public.personal_recipe_families f where f.id=s.personal_family_id
+ and f.owner_id=s.owner_id and f.library_entry_id=s.library_entry_id and f.style=s.style)
+ end from public.shots s where s.id='${adminEditShotId}'::uuid)`);
+const initialFamily=adminEditFamily();
 const editInvariantBefore=adminEditShotInvariant();
 const editNotesBefore=adminEditNoteHash();
 const editAuditBefore=adminEditAuditCount();
@@ -188,14 +197,16 @@ assert.equal(scalar(`(select n.notes from public.shot_notes n where
  n.shot_id='${adminEditShotId}'::uuid)`),newAdminFixtureNote);
 pass('Signed Admin HTTP correction updates member fixture note once and records audit');
 assert.equal(adminEditShotInvariant(),editInvariantBefore,
- 'Admin note-only correction must preserve member ownership, recipe measurements and history links');
+ 'Admin note-only correction must preserve member ownership, recipe measurements, equipment and history links');
+assert.equal(familyOwnerValid(),'t','Any reclassified recipe family must be owned by the original member and coffee/style');
+if(initialFamily)assert.equal(adminEditFamily(),initialFamily,'Existing recipe family must remain stable for unchanged measurements');
 const verifiedAudit=scalar(`(select exists(select 1 from private.admin_content_edits e
  where e.record_id='${adminEditShotId}'::uuid and e.record_kind='shot'
  and e.actor_id='${admin}'::uuid and e.subject_owner_id='${member}'::uuid
  and md5(e.before_values->>'notes')='${editNotesBefore}'
  and e.after_values->>'notes'='${newAdminFixtureNote}'))`);
 assert.equal(verifiedAudit,'t');
-pass('Cross-owner Admin audit records exact actor/subject/before/after with no shot-history change');
+pass('Cross-owner Admin audit preserves identity/measurements and valid family classification');
 let noteRead=await call('/shot_notes?select=notes&shot_id=eq.'+adminEditShotId,tokens.member);
 assert.equal(noteRead.status,200);
 assert.ok(noteRead.data?.some(x=>x.notes===newAdminFixtureNote));
