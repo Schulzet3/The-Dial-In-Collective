@@ -14,7 +14,7 @@ const sampleKetch={
    roaster_recipe:{ratio:2,temperature_reference:'200–202°F'}}
  ]};
 test('live-source suite runs exactly named official product URLs with no arbitrary input',()=>{
- assert.equal(CURRENT_READY_CASES.length,9);
+ assert.equal(CURRENT_READY_CASES.length,10);
  assert.ok(CURRENT_READY_CASES.every(x=>x.url.startsWith('https://')&&/\/products?\//.test(x.url)));
  assert.equal(new Set(CURRENT_READY_CASES.map(x=>x.id)).size,CURRENT_READY_CASES.length);
 });
@@ -89,5 +89,21 @@ test('three additional original603 exact current product contracts fail closed',
   assert.deepEqual(good.failed,[],id);
   const bad=assessReadyPreview(id,{ok:true,fields:{...fields,roast_level:undefined,release_label:undefined,origin:undefined},conflicts:['roast_level','release_label']},{renderedHtml:rendered});
   assert.ok(bad.failed.length,id);
+ }
+});
+
+test('new selected Nativo sugarcane decaf case requires direct evidence and no invented green Natural process',()=>{
+ const exact={ok:true,fields:{name:'TRANQUILO, Decaffeinated, 12 oz',
+  decaffeination_method:'Sugar Process',tasting_notes:'Sugar Cane, Chocolate, Creamy.'},
+  source_facts:[{field:'decaffeination_method',
+   value:'Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.'}]};
+ assert.deepEqual(assessReadyPreview('nativo-tranquilo-current-sugar-decaf',exact,{renderedHtml:rendered}).failed,[]);
+ for(const bad of [
+  {...structuredClone(exact),fields:{...exact.fields,process:'Natural'}},
+  {...structuredClone(exact),fields:{...exact.fields,decaffeination_method:undefined}},
+  {...structuredClone(exact),source_facts:[]}
+ ]){
+  assert.ok(assessReadyPreview('nativo-tranquilo-current-sugar-decaf',bad,
+   {renderedHtml:rendered}).failed.length>0);
  }
 });
