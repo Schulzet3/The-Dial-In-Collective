@@ -21,6 +21,11 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  // identifies that same exact coffee; a missing or different H1 still
  // blocks every direct product credit and prevents cross-coffee leakage.
  const selected=fold(name);
+ // A generic catalog/shop H1 can become the provisional parsed name. That
+ // is not a selected purchasable coffee, even when a nearby tile has a
+ // one-option roast selector. Fail closed rather than attribute the tile's
+ // roast to a nonexistent selected product.
+ if(/^(?:(?:our|the)\s+)?(?:catalog(?:ue)?|collections?|all\s+(?:coffees?|products?)|shop\s+(?:all|coffees?)|coffees?|products?|store|home)$/u.test(selected))return {};
  if(!headings.length||headings.some(heading=>heading!==selected))return {};
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&

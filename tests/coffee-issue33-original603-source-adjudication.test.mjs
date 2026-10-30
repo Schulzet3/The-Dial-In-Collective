@@ -48,9 +48,11 @@ test('an independently named selected release outranks a generic limited banner'
  const x=parse('Holy Grail No. 2: Strawberry Jam','<p><strong>LIMITED RELEASE | WHOLE BEAN ONLY</strong></p><p>Release: Holy Grail No. 2</p>');
  assert.equal(x.fields.release_label,'Holy Grail No. 2');
 });
-test('without unique selected product H1, unrelated variant cannot establish selected roast',()=>{
- const x=extractPublicCoffeeFacts('<html><body><h1>Our Catalog</h1><select name="options[Coffee roast]"><option value="Dark" selected>Dark</option></select></body></html>',{source_url});
- assert.notEqual(x.fields?.roast_level,'Dark');
+test('without a selected coffee H1, generic catalog and shop pages cannot steal a roast from a tile',()=>{
+ for(const heading of ['Our Catalog','Catalog','All Coffees','Shop All','Products']){
+  const x=extractPublicCoffeeFacts('<html><body><h1>'+heading+'</h1><select name="options[Coffee roast]"><option value="Dark" selected>Dark</option></select></body></html>',{source_url});
+  assert.notEqual(x.fields?.roast_level,'Dark',heading);
+ }
 });
 
 test('a valid roast control plus another unclassified control cannot establish one fixed roast',()=>{
