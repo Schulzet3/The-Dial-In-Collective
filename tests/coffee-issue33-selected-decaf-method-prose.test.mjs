@@ -226,3 +226,47 @@ test('opposing exact current printed decaf method captions remain unfilled',()=>
  assert.equal(result.fields.decaffeination_method,undefined);
  assert.ok(result.source_facts?.filter(f=>f.field==='decaffeination_method').every(f=>f.conflicting===true));
 });
+
+
+// Original603 #126 live current raw HTML: product-only strong label and
+// <br>-separated value lack the colon normally expected after Processing.
+const fosterExact='https://fostercoffee.co/products/yes-its-decaf-decaf';
+const strongSpec=(value)=>'<p><strong>Country </strong>Mexico<strong><br>'+
+ 'Region </strong>Amatenago<strong><br>Producer </strong>Smallholder Farms'+
+ '<strong><br>Processing </strong>'+value+'</p>';
+const parseFoster=(name,body)=>extractPublicCoffeeFacts(
+ '<html><head><meta property="og:type" content="product"></head><body><main><h1>'+name+'</h1>'+body+'</main></body></html>',
+ {source_url:fosterExact});
+test('original603 #126 current strong-labeled Processing spec splits washed and mountain-water decaf',()=>{
+ const result=parseFoster('Yes It&#39;s Decaf (Decaf)',strongSpec('Washed: Mountain Water Decaf'));
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.process,'Washed');
+ assert.equal(result.fields.decaffeination_method,'Water Process');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&
+  /Processing: Washed: Mountain Water Decaf/.test(f.value)));
+});
+test('current selected strong decaf source must not donate to regular or half-caf',()=>{
+ for(const name of ['Regular Coffee','Half-Caf Blend']){
+  const result=parseFoster(name,strongSpec('Washed: Mountain Water Decaf'));
+  assert.equal(result.fields.decaffeination_method,undefined,name);
+ }
+});
+test('selected strong-labeled decaf contradictory methods remain review-only',()=>{
+ const result=parseFoster('Selected Decaf',strongSpec('Washed: Mountain Water Decaf')+
+  '<p><strong>Decaffeination Method</strong>Swiss Water Decaf.</p>'+
+  '<p><strong>Decaffeination Method</strong>Sugar Cane EA Decaf.</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&f.conflicting));
+});
+test('related recommendation and educational sections cannot supply strong decaf specs',()=>{
+ const result=parseFoster('Selected Decaf','<p>Selected decaf.</p>'+
+  '<section class="product-recommendations"><h2>Recommended coffees</h2>'+strongSpec('Washed: Mountain Water Decaf')+'</section>'+
+  '<section><h2>Decaf Process Education</h2>'+strongSpec('Washed: Swiss Water Decaf')+'</section>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+});
+test('unsupported or ambiguous processing spec must not invent decaf method',()=>{
+ for(const value of ['Washed: Unspecified Decaf','Washed: Mountain Water or Sugar Cane Decaf']){
+  const result=parseFoster('Selected Decaf',strongSpec(value));
+  assert.equal(result.fields.decaffeination_method,undefined,value);
+ }
+});

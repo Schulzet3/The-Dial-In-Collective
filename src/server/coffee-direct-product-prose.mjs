@@ -197,15 +197,28 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
  for(const block of blocks){
   if(block.start>=faqStart||block.educational||!['li','p','div','span'].includes(block.tag)||
      block.text.length>300||
-     /\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(block.section))continue;
+     /\b(?:related products?|you may also like|recommended|more coffees?|education|educational|decaf guide|decaf faq)\b/i.test(block.section))continue;
   // A selected product's printed spec card may use BR-separated labels in
   // a single paragraph. Inspect individual explicit label lines, never
   // freeform descriptions, hidden markup or a generic title/SEO match.
-  const captions=[block.text];
-  if(/<br\b/iu.test(block.html))
-   captions.push(...block.html.split(/<br\b[^>]{0,150}>/giu).map(part=>clean(part,300)));
+  const captions=[{text:block.text,html:block.html}];
+  if(/<br\b/iu.test(block.html)){
+   const parts=block.html.split(/<br\b[^>]{0,150}>/giu);
+   captions.push(...parts.map((part,i)=>({text:clean(part,300),html:part,
+    splitStrong:i>0&&/<strong\b[^>]{0,240}>\s*$/iu.test(parts[i-1])})));
+  }
   for(const caption of captions){
-   const hit=caption.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+   // Some selected product spec cards separate a strong label from its
+   // literal value without a colon: <strong>Processing</strong>Washed:
+   // Mountain Water Decaf. Require an actual adjacent strong label in a
+   // bounded product BR segment, not a freeform prose or FAQ substring.
+   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+   if(!hit){
+    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu);
+    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu):null;
+    const selected=structured||splitLabel;
+    if(selected)hit=[selected[0],selected[1],clean(selected[2],180)];
+   }
    if(!hit)continue;
    const value=hit[2].trim();
    // Process: Washed is green processing; Process: Washed + EA Sugarcane
