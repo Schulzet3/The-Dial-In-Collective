@@ -1,3 +1,9 @@
+## October 30 UTC — correct diagnostic-only escape literals before source run
+
+Fixed the new public-only trace's whitespace normalization and newline separator source text; this does not alter the actual extractor or assertions. Keep the real Nativo 9/10 LIVE failure, original603 limitations and TESTING status unchanged. No deployment.
+
+---
+
 ## October 30 UTC — PR299 live original603 Nativo #531 still fails; targeted non-mutating public diagnostic (TESTING)
 
 PR299 exactly sourced candidate `f6ae75253f1c693b4bfce00a8037f97625078a35` passed eight executed GitHub Actions suites (Node/lint/build, cloud/mobile, SQL, security, Python, visual, approval and private archive); the restricted frozen603 workflow was SKIPPED, not PASS. PR299 merged nonforce to development as `cc682138229111e4255e1c71dd04b5b942336a21` and GitHub merge/head readback agreed. On exact merged source, the real current ten-product full public HTML + Shopify Add Coffee run `41011260810` fetched 20 official public HTTPS objects, **9/10 PASS**, with specific Nativo method FAIL (8/9 Nativo checks; expected Sugar Process, actual blank). All other nine coffees passed, including Ketch two roast options. The real failing source cannot be marked READY despite green PR CI. Captures/oracle unchanged, no GoTrue or hosted member check.

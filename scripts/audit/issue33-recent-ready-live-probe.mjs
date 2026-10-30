@@ -276,7 +276,7 @@ async function probeOne(target){
  if(target.id==='nativo-tranquilo-current-sugar-decaf'&&rawHtml){
   const name=String(rawResult?.fields?.name||preview?.fields?.name||'');
   const cleanText=markup=>String(markup||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&nbsp;|&#160;/gi,' ')
-   .replace(/\\s+/g,' ').trim();
+   .replace(/\s+/g,' ').trim();
   const compact=compactCoffeeProductHtml(rawHtml)||rawHtml;
   const layers=[['raw_page',rawHtml],['compact_page',compact],
    ['raw_product_scope',productMarkup(rawHtml)],['compact_product_scope',productMarkup(compact)]];
@@ -291,10 +291,10 @@ async function probeOne(target){
     return {layer,bytes:markup.length,
      named_sentence_present:/Tranquilo is decaffeinated using the natural Sugar Cane Process/i.test(markup),
      direct_count:(direct.decaffeination_method_evidence||[]).length,named_count:named.length,
-     direct_method:inferDecaffeinationMethod({name,selectedMethod:(direct.decaffeination_method_evidence||[]).join('\\n')}),
-     named_method:inferDecaffeinationMethod({name,selectedMethod:named.join('\\n')}),
+     direct_method:inferDecaffeinationMethod({name,selectedMethod:(direct.decaffeination_method_evidence||[]).join('\n')}),
+     named_method:inferDecaffeinationMethod({name,selectedMethod:named.join('\n')}),
      current_method:inferDecaffeinationMethod({name,processingDetail:rawResult?.roaster_details?.processing_detail,
-      selectedMethod:named.join('\\n')})};
+      selectedMethod:named.join('\n')})};
    })
   };
  }
