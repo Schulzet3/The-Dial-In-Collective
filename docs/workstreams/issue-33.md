@@ -1,3 +1,11 @@
+## October 30 UTC — original603 Nativo #531 corroborating current decaf method candidate (TESTING)
+
+After PR300 nonforce merge `b409402462d5494b73924d7bff9e53b2f1a75612` (6/6 applicable exact-head CI success, frozen603 **SKIPPED**), a fresh independent real official full-HTML + Shopify JSON Add Coffee acceptance `41011999200` made 20 public HTTPS reads: 9/10 products PASS, Nativo Sugar Process FAIL (8/9 checks). The exact Nativo source H1 and current direct decaffeination sentence are present. A direct live diagnostic recovered one named selected method fact, but it was `conflicting:true`; in all four bounded raw/compact scopes, independent named and direct method classifiers returned **Sugar Process**. The generic `processing_detail` layout conflict is what withheld the correctly sourced method; method value was not missing. No unrelated nine-product regressions shown.
+
+Official selected page `https://www.nativocoffeeroasters.com/products/tranquilo-decaf` separately publishes its direct current named Sugar Cane decaffeination sentence and `Process: Natural Sugar Cane (EA) Decaf.` spec. These independently agree on decaffeination, **not** green Natural processing or Colombian farm origin. This generic candidate introduces a strict exact selected H1 bounded spec corroboration rule: waive only an otherwise unrelated `processing_detail` layout conflict when the named current method and all exact selected decaf specs agree; retain any contrary, unidentified, overflowed or nonselected method as a conflicting blank. Add adversarial tests for agreeing EA specs, contradicting Swiss Water spec, green washed, recommendation leakage. Existing tests and all immutable 603 captures/oracle remain untouched. Queue narrowly TESTING; **not verified or READY** until new exact PR-head CI, nonforce safe merge, real 10/10 source acceptance and merged-source checks. Parent 153+29 independent current-product review OPEN. No Netlify publish or production backend/member write.
+
+---
+
 ## October 30 UTC — correct diagnostic-only escape literals before source run
 
 Fixed the new public-only trace's whitespace normalization and newline separator source text; this does not alter the actual extractor or assertions. Keep the real Nativo 9/10 LIVE failure, original603 limitations and TESTING status unchanged. No deployment.

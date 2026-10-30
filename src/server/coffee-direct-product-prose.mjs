@@ -166,3 +166,34 @@ export function selectedNamedCurrentDecafEvidence(productHtml,{name,clean}={}){
  return (direct.decaffeination_method_evidence||[])
   .filter(statement=>currentNamedDecafMethod(name,statement));
 }
+
+// Exact selected decaf product specs may independently corroborate its named
+// current decaffeination sentence, even if generic green-processing layout
+// comparisons disagree. Unknown/contrary method captions remain blockers.
+export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}={}){
+ const empty={candidates:[],complete:false};
+ if(!decafOnlyCoffee(name)||typeof clean!=='function'||
+    typeof productHtml!=='string'||productHtml.length>2_000_000)return empty;
+ const blocks=productCoffeeProse(productHtml,clean),headings=blocks.filter(b=>b.tag==='h1').map(b=>fold(b.text));
+ if(!headings.length||headings.some(heading=>heading!==fold(name))||
+    /^(?:all|shop|catalog|collection)\s+(?:decaf|coffee)/iu.test(String(name)))return empty;
+ const seen=new Map();
+ for(const block of blocks){
+  if(block.educational||!['li','p','div','span'].includes(block.tag)||
+     block.text.length>300||
+     /\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(block.section))continue;
+  const hit=block.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+  if(!hit)continue;
+  const value=hit[2].trim();
+  // Process: Natural is green processing; Natural Sugar Cane (EA) Decaf is not.
+  if(!/^decaffeination/i.test(hit[1])&&
+     !/\b(?:decaf(?:feinat(?:ed|ion|ing))?|caffeine[- ]?free|swiss[- ]?water|mountain[- ]?water|sugar[- ]?cane|ethyl[- ]?acetate|carbon[- ]?dioxide|co[- ]?2)\b/iu.test(value))continue;
+  const key=fold(hit[1]+' '+value);
+  if(!seen.has(key)){
+   seen.set(key,{label:hit[1],value,
+    method:inferDecaffeinationMethod({name,selectedMethod:value})||null});
+   if(seen.size>8)return {candidates:[...seen.values()],complete:false};
+  }
+ }
+ return {candidates:[...seen.values()],complete:true};
+}
