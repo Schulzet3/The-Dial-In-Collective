@@ -126,7 +126,7 @@ begin
  begin perform public.dic_admin_edit_coffee(pending_id,rev+1,
    '{"name":"Admin Content Test","roaster":"Test Roaster"}'::jsonb,
    'Stale revision must not win','submission');
- exception when serialization_failure then denied:=true;end;
+ exception when sqlstate 'PT409' then denied:=true;end;
  if not denied then raise exception 'Stale revision was accepted';end if;
  data:=public.dic_admin_edit_coffee(pending_id,rev,
    '{"name":"Admin Content Test","roaster":"Test Roaster","origin":"Kenya","source_url":"https://example.invalid/coffee"}'::jsonb,
@@ -214,7 +214,7 @@ begin
  begin perform public.dic_admin_edit_shot(shot_id,shot_rev+1,
    '{"time_s":26,"notes":"Stale correction"}'::jsonb,
    'Reject stale administrator shot correction','shot');
- exception when serialization_failure then denied:=true;end;
+ exception when sqlstate 'PT409' then denied:=true;end;
  if not denied then raise exception 'Stale administrator shot revision accepted';end if;
  data:=public.dic_admin_edit_shot(shot_id,shot_rev,'{"notes":"Corrected private fixture notes"}'::jsonb,
    '','shot');

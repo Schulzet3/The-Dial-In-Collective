@@ -2904,6 +2904,32 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Verified READY, NOT DEPLOYED. General selected product roast takes precedence over rotating seasonal catalog/program comparisons; genuine direct conflicting roast facts remain manual review. Six exact current public product pages + six Shopify JSON received and verified live, no provider credentials or member records. Original603 independent source audit remains IN_PROGRESS."
+    },
+    {
+      "id": "DIC-Q-96-admin-stale-http-conflict",
+      "issue": 96,
+      "pr": 287,
+      "title": "Non-retryable HTTP 409 for stale Administrator coffee and shot edits",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261030035900_dic_admin_edit_stale_http_conflict.sql",
+        "supabase/tests/admin_content_review.sql",
+        "tests/qa/signed-http-acceptance.mjs",
+        "tests/browser/admin_records_qa.py"
+      ],
+      "tests": [
+        "Original PR287 exact-source SQL run 41000126420 actually executed PostgREST, passing 33 signed-HTTP assertions then timed out on stale authorized Administrator edit (deterministic SQLSTATE 40001 retry).",
+        "New PT409 wrapper migration and source assertion edits: exact-head SQL/HTTP, Node, browser, approval and nonforce merge/merged-source checks PENDING."
+      ],
+      "ci_runs": [
+        41000126420
+      ],
+      "blockers": [
+        "New HTTP 409 stale-revision and successful Admin audit test not yet passed on exact new source. Do not mark READY until applicable CI passes and safely merged."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
+      "notes": "Source-only fix to original privileged Admin edit RPC wrappers, retaining private logic and grants. New SQL migration is NOT applied to production and requires a distinct owner-authorized future release. Existing member records, shots, private notes and audit history preserved. No production deploy or SQL/Auth/Edge operations permitted in development."
     }
   ],
   "history": [

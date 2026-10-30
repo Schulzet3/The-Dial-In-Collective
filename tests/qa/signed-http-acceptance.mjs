@@ -173,8 +173,9 @@ assert.equal(adminEditAuditCount(),editAuditBefore);
 pass('Denied real-record Admin HTTP attempts preserve private note and audit');
 let editResponse=await rpc('dic_admin_edit_shot',tokens.admin,
  {...adminEditArgs,p_expected_revision:adminEditShotRevision+9});
-assert.notEqual(editResponse.status,200,'Stale Admin edit must not succeed');
-assert.equal(editResponse.data?.code,'40001','Stale edit SQLSTATE');
+assert.equal(editResponse.status,409,'Stale Admin edit must promptly return HTTP conflict (no retry loop)');
+assert.equal(editResponse.data?.code,'PT409','Stale edit must use nonretryable PostgREST conflict SQLSTATE');
+assert.match(editResponse.data?.message||'',/changed; refresh before editing/i);
 assert.equal(adminEditNoteHash(),editNotesBefore);
 assert.equal(adminEditAuditCount(),editAuditBefore);
 pass('Stale signed Admin HTTP edit rejects before note or audit mutation');
