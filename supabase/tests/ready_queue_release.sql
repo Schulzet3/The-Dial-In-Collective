@@ -19,3 +19,4 @@ begin
 end $verify$;
 select 'PASS: ready-batch search and preview procedures present' as result;
 rollback;
+-- Release13 combined scope: keep full isolated SQL and signed HTTP regression on the exact source.
