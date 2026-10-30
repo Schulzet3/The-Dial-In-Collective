@@ -2907,6 +2907,37 @@
       "notes": "Verified READY, NOT DEPLOYED. General selected product roast takes precedence over rotating seasonal catalog/program comparisons; genuine direct conflicting roast facts remain manual review. Six exact current public product pages + six Shopify JSON received and verified live, no provider credentials or member records. Original603 independent source audit remains IN_PROGRESS."
     },
     {
+      "id": "DIC-Q-96-admin-stale-http-conflict",
+      "issue": 96,
+      "pr": 287,
+      "title": "Non-retryable HTTP 409 for stale Administrator coffee and shot edits",
+      "state": "READY",
+      "merged_source_sha": "b627fba36fcaae5f56ac5b20042bf228a462f52d",
+      "scope_paths": [
+        "supabase/migrations/20261030035900_dic_admin_edit_stale_http_conflict.sql"
+      ],
+      "tests": [
+        "Isolated exact PR-head 82af380297ceef6061f4b25f1fc710029f5d50e0: SQL+HMAC-signed disposable PostgREST run41000974580 SUCCESS, 89/89 assertions, including actual authorized Admin edit, immutable shot/owner/privacy, audit actor/subject/before/after, stale PT409 response and no member-note leakage. Auth via local signed tokens, not hosted GoTrue.",
+        "Exact PR-head Node/lint/build41000974443 SUCCESS (2071 PASS, 0 FAIL, 6 SKIP), approval/continuity41000974461 SUCCESS, cloud/mobile41000974563 SUCCESS, full Chromium/browser/visual41000974569 SUCCESS; original frozen603 explicitly SKIPPED as unrelated.",
+        "Non-force PR #287 merge b627fba36fcaae5f56ac5b20042bf228a462f52d is byte-identical to tested head tree eac4f09648934abd688ce83e1f7e49cc8600eff1. Exact merged-source approval41001222491, SQL/signed HTTP41001222461 (89/89), visual41001222472, cloud/mobile41001222463 and Node/lint/build41001222527 ALL SUCCESS."
+      ],
+      "ci_runs": [
+        41000974461,
+        41000974580,
+        41000974563,
+        41000974569,
+        41000974443,
+        41001222491,
+        41001222461,
+        41001222472,
+        41001222463,
+        41001222527
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
+      "notes": "READY but NOT DEPLOYED. One safe, non-destructive migration 20261030035900_dic_admin_edit_stale_http_conflict.sql switches public SECURITY INVOKER Admin edit wrappers from deterministic 40001 PostgREST retry to explicitly non-retryable PT409 HTTP 409, preserving backend privileged role/owner/audit checks. No production SQL applied. Requires a separate express owner publish/release command for publication and migration. Original member/shot/note/audit data untouched. Owner-verified genuine ordinary-member no-Admin/no-foreign-data and immediate disabled/offline lockout accepted in Issue96; actual current-release GoTrue Admin editing and provider-only settings remain UNVERIFIED; Issue96 OPEN. Earlier failed source attempts preserved in scoped journal, not counted among successful ci_runs."
+    },
+    {
       "id": "DIC-Q-33-single-roast-selector-uniqueness",
       "issue": 33,
       "pr": null,

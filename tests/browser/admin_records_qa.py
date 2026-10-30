@@ -76,7 +76,7 @@ window.__sdk={
    const kind=name==='dic_admin_edit_shot'?'shots':'approved';
    const row=window.__data[kind].find(x=>x.id===args.p_record_id);
    if(!row||row.revision!==args.p_expected_revision)
-    return {data:null,error:{message:'Stale revision: refresh this record before editing.',code:'40001'}};
+    return {data:null,error:{message:'Stale revision: refresh this record before editing.',code:'PT409'}};
    const before=structuredClone(row);
    if(kind==='shots'){
     row.notes=String(args.p_details.notes);
