@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Issue #33: exact-current, public-only end-to-end extraction acceptance.
-// Explicit five URL allowlist, no credentials, database, production, external
+// Explicit six URL allowlist, no credentials, database, production, external
 // image downloads, member quota, auto-save or archived oracle modification.
 // The real production preview handler calls its DNS-pinned HTTPS transports;
 // ONLY auth/session/quota RPCs are locally simulated with disposable responses.
@@ -21,7 +21,8 @@ export const CURRENT_READY_CASES=Object.freeze([
  {id:'ixxa-current-ki-saya',url:'https://www.ixxacoffee.com/products/organic-ki-saya-tenejapa-microlot'},
  {id:'ketch-tier3-current-mexico',url:'https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan'},
  {id:'ketch-tier2-locked-honduras',url:'https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process'},
- {id:'44north-current-mexico',url:'https://44northcoffee.com/products/mexico-chiapas'}
+ {id:'44north-current-mexico',url:'https://44northcoffee.com/products/mexico-chiapas'},
+ {id:'44north-decaf-rotating-program',url:'https://44northcoffee.com/products/honduras-decaf'}
 ]);
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=250)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -58,6 +59,22 @@ export function assessReadyPreview(id,preview,{realHtmlReceived=true,renderedHtm
    'Tenejapa, Chiapas',f.origin);
   check('ixxa:exact_tasting_notes',/chocolate.*creamy caramel.*honey.*hazelnut/i.test(f.tasting_notes||''),
    'chocolate creamy caramel honey hazelnut',f.tasting_notes);
+ }
+ if(id==='44north-decaf-rotating-program'){
+  check('44north-decaf:exact_selected_coffee',/Decaf.*Honduras COMSA/i.test(f.name||''),
+   'Decaf Honduras COMSA',f.name);
+  check('44north-decaf:exact_selected_roast',f.roast_level==='Medium','Medium',f.roast_level);
+  check('44north-decaf:no_false_roast_conflict',!(preview.conflicts||[]).includes('roast_level'),
+   'no roast conflict from rotating catalog copy',JSON.stringify(preview.conflicts||[]));
+  check('44north-decaf:water_decaffeination',f.decaffeination_method==='Water Process',
+   'Water Process',f.decaffeination_method);
+  check('44north-decaf:no_invented_primary_processing',blank(f.process),'blank',f.process);
+  check('44north-decaf:exact_honduras_origin',/Honduras/i.test(f.origin||'')&&!/Mexico/i.test(f.origin||''),
+   'current selected Honduras',f.origin);
+  check('44north-decaf:current_warm_peach_notes',/warm peach/i.test(f.tasting_notes||''),
+   'published warm peach tasting notes',f.tasting_notes);
+  check('44north-decaf:no_unoffered_roast_picker',v.size===0,
+   'no purchase-roast choice',Array.from(v.keys()).join(','));
  }
  if(id==='44north-current-mexico'){
   check('44north:exact_coffee',/Mexico Triunfo Verde/i.test(f.name||''),'Mexico Triunfo Verde',f.name);
@@ -210,6 +227,12 @@ async function probeOne(target){
  }
  const rendered=preview?.ok?coffeeUrlPreviewMarkup(preview):'';
  const audit=assessReadyPreview(target.id,preview,{realHtmlReceived:!!rawHtml,renderedHtml:rendered});
+ // Do not allow Shopify merging to conceal a source HTML contradiction.
+ // The selected current HTML source must itself not invent the seasonal
+ // catalog program as a second roast claim.
+ if(target.id==='44north-decaf-rotating-program'&&rawResult?.conflicts?.includes('roast_level'))
+  audit.failed.push({label:'44north-decaf:raw_html_no_false_roast_conflict',passed:false,
+   expected:'no current selected roast conflict',actual:JSON.stringify(rawResult.conflicts)});
  if(status!==200)audit.failed.push({label:'handler:http_status',passed:false,expected:'200',actual:String(status)});
  if(errorClass)audit.failed.push({label:'handler:exception',passed:false,expected:'none',actual:errorClass});
  const summary={
