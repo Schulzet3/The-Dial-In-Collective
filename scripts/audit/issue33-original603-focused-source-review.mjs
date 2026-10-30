@@ -9,7 +9,14 @@ import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
-const targetNumbers=[1,13,22,28,37,91,205];
+const defaultTargetNumbers=[1,13,22,28,37,91,205];
+const explicitTargetNumbers=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS;
+if(explicitTargetNumbers!=null &&
+ !/^[1-9][0-9]{0,2}(?:,[1-9][0-9]{0,2}){0,19}$/.test(explicitTargetNumbers))
+ throw Error('invalid_bounded_original603_case_subset');
+const targetNumbers=explicitTargetNumbers?explicitTargetNumbers.split(',').map(Number):defaultTargetNumbers;
+if(targetNumbers.some(n=>n>603)||new Set(targetNumbers).size!==targetNumbers.length)
+ throw Error('invalid_duplicate_or_out_of_range_original603_cases');
 function csv(text){
  const rows=[];let arr=[],s='',quoted=false;
  for(let i=0;i<text.length;i++){const c=text[i];
