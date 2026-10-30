@@ -74,3 +74,43 @@ test('exact selected coffee repeated H1 remains eligible after PR255',()=>{
  const result=extractPublicCoffeeFacts(html,{source_url});
  assert.equal(result.fields.decaffeination_method,'Water Process');
 });
+
+
+const nativo='Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.';
+test('selected exact named current decaf recovers Sugar Process from second sentence without borrowing Colombian origin',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Savor the richness of world-class coffee without the caffeine kick. '+nativo+'</p>'+
+  '<p>Notes: Sugar Cane, Chocolate, Creamy.</p>');
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+ assert.equal(result.fields.process,undefined,'decaffeination is not green-bean Natural processing');
+ assert.equal(result.fields.origin,undefined,'decaffeination location is not a growing origin');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&f.value.includes(nativo)));
+ assert.match(coffeeUrlPreviewMarkup(result),/Sugar Process/);
+});
+test('named current decaf evidence must match EXACT selected coffee, not another decaf or regular product',()=>{
+ for(const name of ['Other Decaf, 12 oz','Regular Tranquilo','TRANQUILO, Half-Caf']){
+  const result=parse(name,'<p>'+nativo+'</p>');
+  assert.equal(result.fields.decaffeination_method,undefined,name);
+ }
+});
+test('named current decaf method is not donated by past lot, unrelated current subject or education',()=>{
+ for(const sentence of [
+  'Previously, Tranquilo is decaffeinated using the natural Sugar Cane Process.',
+  'Last year Tranquilo is decaffeinated using the natural Sugar Cane Process.',
+  'Our other coffee is decaffeinated using the natural Sugar Cane Process.',
+  'Tranquilo is naturally sweet, with notes of sugar cane.'
+ ]){
+  const result=parse('TRANQUILO, Decaffeinated, 12 oz','<p>'+sentence+'</p>');
+  assert.equal(result.fields.decaffeination_method,undefined,sentence);
+ }
+ const educational=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<section><h2>What is decaffeination?</h2><p>'+nativo+'</p></section>');
+ assert.equal(educational.fields.decaffeination_method,undefined);
+});
+test('named selected decaf conflicting current methods stay reviewable rather than arbitrary',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>'+nativo+'</p><p>Tranquilo is decaffeinated using Swiss Water.</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.equal(result.source_facts?.filter(x=>x.field==='decaffeination_method').length,2);
+});

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Issue #33: exact-current, public-only end-to-end extraction acceptance.
-// Explicit six URL allowlist, no credentials, database, production, external
+// Explicit ten URL allowlist, no credentials, database, production, external
 // image downloads, member quota, auto-save or archived oracle modification.
 // The real production preview handler calls its DNS-pinned HTTPS transports;
 // ONLY auth/session/quota RPCs are locally simulated with disposable responses.
@@ -25,7 +25,8 @@ export const CURRENT_READY_CASES=Object.freeze([
  {id:'44north-decaf-rotating-program',url:'https://44northcoffee.com/products/honduras-decaf'},
  {id:'south17-dark-raine-single-roast',url:'https://south17roasters.com/products/dark-raine'},
  {id:'friedrichs-rise-shine-title-roast',url:'https://friedrichscoffee.com/product/rise-and-shine'},
- {id:'koffee-kult-perla-negra-release',url:'https://www.koffeekult.com/products/costa-rica-perla-negra-peaberry'}
+ {id:'koffee-kult-perla-negra-release',url:'https://www.koffeekult.com/products/costa-rica-perla-negra-peaberry'},
+ {id:'nativo-tranquilo-current-sugar-decaf',url:'https://www.nativocoffeeroasters.com/products/tranquilo-decaf'}
 ]);
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=250)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -70,6 +71,21 @@ export function assessReadyPreview(id,preview,{realHtmlReceived=true,renderedHtm
    'Costa Rica',f.origin);
   check('koffee-kult:release_not_conflicted',!(preview.conflicts||[]).includes('release_label'),
    'no conflicting release',JSON.stringify(preview.conflicts||[]));
+ }
+ if(id==='nativo-tranquilo-current-sugar-decaf'){
+  check('nativo:exact_selected_coffee',/^Tranquilo\b/i.test(f.name||''),
+   'TRANQUILO, Decaffeinated, 12 oz',f.name);
+  check('nativo:current_sugar_decaffeination',f.decaffeination_method==='Sugar Process',
+   'Sugar Process',f.decaffeination_method);
+  check('nativo:no_false_green_processing',blank(f.process),'unknown, not Natural',f.process);
+  check('nativo:direct_selected_method_proof',
+   (preview.source_facts||[]).some(x=>x.field==='decaffeination_method'&&
+    /Tranquilo is decaffeinated using the natural Sugar Cane Process/i.test(x.value||'')),
+   'exact selected-product current decaf statement','missing');
+  check('nativo:published_tasting',/sugar cane.*chocolate.*creamy/i.test(f.tasting_notes||''),
+   'Sugar Cane, Chocolate, Creamy',f.tasting_notes);
+  check('nativo:no_method_conflict',!(preview.conflicts||[]).includes('decaffeination_method'),
+   'no direct current method contradiction',JSON.stringify(preview.conflicts||[]));
  }
  if(id==='leap-current-decaf-prose'){
   check('leap:exact_coffee',/^Decaf Coffee$/i.test(f.name||''),'Decaf Coffee',f.name);
