@@ -70,6 +70,19 @@ for(const target of targets){
  records.push(r);
  console.log('[DIC33 FOCUSED SOURCE] '+JSON.stringify({number:r.number,status:r.status,h1:r.selected_h1||[],
   name:r.current_fields?.name||null,parser_ok:r.parser_ok===true,sha256:r.html_sha256||null}));
+
+ // Manual semantic review needs the actual publicly published field claims,
+ // not just seven green parse outcomes. These are bounded *public* product
+ // facts already in the private one-day artifact, never member credentials.
+ console.log('[DIC33 FOCUSED PUBLIC FIELD EVIDENCE] '+JSON.stringify({
+  number:r.number,official_url:r.official_url,current_h1:r.selected_h1||[],
+  archived_expected:r.immutable_expected,current_fields:r.current_fields||{},
+  conflicts:r.conflicts||[],evidence:(r.source_facts||[]).slice(0,25).map(f=>({
+   field:f.field,value:clip(f.value,240),section:f.section,
+   source_type:f.source_type,conflicting:f.conflicting
+  }))
+ }));
+
 }
 const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUTOMATIC_CERTIFICATION',
  source_sha:process.env.GITHUB_SHA||null,utc:new Date().toISOString(),
