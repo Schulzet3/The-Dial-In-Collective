@@ -2815,8 +2815,8 @@
       "issue": 37,
       "pr": 268,
       "title": "Accessible in-app first-shot video and beginner guide",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "00fbb23a4dabea4d2e85309e1dd3405ff981f9d7",
       "scope_paths": [
         "build_cloud.mjs",
         "site/cloud/help.js",
@@ -2829,15 +2829,26 @@
       ],
       "tests": [
         "Exact approved 2,320,714-byte 135.56s MP4 transferred from private staging to GitHub blob 81e8c145336f1837bbc8580bf91e2980e019e8b6; original SHA-256 e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa.",
-        "Build SHA gate, caption timing, source file integrity, 390px synthetic Chromium Settings/video/guide and accessibility checks are staged."
+        "Build SHA gate, caption timing, source file integrity, 390px synthetic Chromium Settings/video/guide and accessibility checks are staged.",
+        "Final tested PR head f6385df194569c2fcd1aeaf7a30ff86ff41d170e: six applicable checks SUCCESS, security 40984576272, approval 40984576286, Node/lint/build 40984576256, isolated SQL 40984576360, visual 40984576262, synthetic Chromium UX/mobile 40984576359. Frozen603 40984576307 SKIPPED (not passed).",
+        "PR268 merged non-force at 00fbb23a4dabea4d2e85309e1dd3405ff981f9d7; merged-source approval 40984916418, mobile/Chromium UX 40984916416, Node/lint/build 40984916533, visual 40984916433 all SUCCESS; verified exact Git MP4 blob 81e8c145336f1837bbc8580bf91e2980e019e8b6.",
+        "Independently decoded complete 135.56s H.264 MP4 in FFmpeg and exercised exact data-URL player in local Chromium at 390x844 and 1280x800: metadata duration/resolution, 16:9 layout, seek to 70s, playback progression, 20 caption cues, zero JS errors. This is NOT a live Netlify HTTP range, authenticated-account, physical iPhone or named screen-reader test."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact latest PR-head app, approval and browser CI not yet verified; nonforce merge and merged-source CI pending.",
-        "Authenticated real-member use and physical mobile/screen reader still unverified; source-level accessibility tests do not establish these."
+      "ci_runs": [
+        40984576272,
+        40984576286,
+        40984576256,
+        40984576360,
+        40984576262,
+        40984576359,
+        40984916418,
+        40984916416,
+        40984916533,
+        40984916433
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/37",
-      "notes": "Explicit owner authorization in Oct 29, 2026 chat to integrate corrected video and written guide for next separate release. No deployment permission. MP4 excluded from pre-cache to preserve streaming; video/guide are public static assets within SSO-protected app, no member data."
+      "notes": "Explicit owner authorization in Oct 29, 2026 chat to integrate corrected video and written guide for next separate release. No deployment permission. MP4 excluded from pre-cache to preserve streaming; video/guide are public static assets within SSO-protected app, no member data. Source QA VERIFIED READY (not DEPLOYED), owner-approved content and placement. Actual Netlify HTTP range delivery/real-account physical device and named screen-reader checks remain explicitly unverified and must not be called PASS. Parent issue37 remains OPEN for publication and broader acceptance; no production approval."
     }
   ],
   "history": [
