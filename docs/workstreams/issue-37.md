@@ -49,3 +49,7 @@ The owner requested completion of the previously blocked feature. Uploaded only 
 
 ## October 29 — non-force concurrent development preservation and queue intake
 Integrated Issue37 branch on top of verified development `907a1b978f82b335bf7090f300ee5eeeb2a10b76` without replacing concurrent source: all 11 feature-scope paths matched original base on development. The merge tree includes all latest development files and the exact Issue37 reviewed blobs, plus DIC-Q-37-in-app-walkthrough TESTING queue entry. Exact GitHub PR and merged-source CI pending, source not yet READY or DEPLOYED. The binary is actual 2,320,714 bytes, Git SHA 81e8c145336f1837bbc8580bf91e2980e019e8b6. No production publication.
+
+
+## October 29 — targeted PR #268 Node lint recovery
+At exact reviewed source `789f2b481565c94af42bd100c55a2fce2c56c781`, all 2,065 non-skipped Node tests passed (6 skipped), but app/build workflow 40984209279 failed at ESLint because the new Issue37 test imported unused `statSync`. Fixed only the unused import in `tests/issue37-in-app-help.test.mjs`; media bytes and application logic untouched. New exact-head CI and merge source verification required; prior failed lint not called PASS.

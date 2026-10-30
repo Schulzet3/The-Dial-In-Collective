@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,statSync} from 'node:fs';
+import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {walkthroughMarkup,gettingStartedMarkup,WALKTHROUGH_SHA256} from '../site/cloud/help.js';
 import {fileAllowlist} from '../scripts/audit/site-integrity.mjs';
