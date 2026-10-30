@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 29120,
-    "still_not_documented_as_semantically_reviewed_lines": 550841,
+    "direct_assistant_semantic_lines": 38120,
+    "still_not_documented_as_semantically_reviewed_lines": 541841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 550841,
+    "remaining_line_count_checked": 541841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -167,6 +167,18 @@
       ],
       "classification": "HISTORICAL_SOURCE_AMBIGUITY_RETAINED_NOT_CONFIRMED_CURRENT_APP_DEFECT",
       "summary": "Historical oracle-A examples: Onyx reusable caffeine 0mg panels conflict with exact-product full-caffeine Shopify tags; Onyx pressure-stage durations are not explicit total espresso times and 18g/280g filter masses do not equal printed 1:15; current lot cultivar differs from farm-wide varietal inventory; Single Speed reused /copy-of-espresso-blend URL now names Yirgacheffe and published elevations disagree or omit units; O.Henrys/Sextant size-specific Shopify shipping weights inconsistent with printed bag sizes and contradictory Sextant Light/Medium roast tags withheld; Novo Buesaco headline profile differs from explicit Tasting Notes list, and recipe 19g/350g not exactly 1:18; current source facts retained with provenance, not rewritten. No live current-roaster source validation under Issue267; #33 owns it."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-006",
+      "risk": "informational",
+      "type": "HISTORICAL_ROASTER_PRODUCT_EVIDENCE_NOT_RUNTIME_DEFECT",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        17332,
+        26331
+      ],
+      "classification": "HISTORICAL_SOURCE_PROVENANCE_AMBIGUITIES_PRESERVED",
+      "summary": "Complete B023 numbered original review: Novo Danche/Elite Honey farm provenance (source facility dates and awards not harvest, farm-wide cultivars not lot), Victus three roast blends lack origin/process/producer and 'Espresso' grind choice not brewing recipe, Lost Sock Yabitu Koba Natural source older washed/sibling version excluded and 2300m versus 2316m altitude withheld, Lost Sock Madre Laura URL current decaf multi-producer identity, Dueling Rabbits Burundi Amasho Medium/Light conflict; semi-washed process vs broad tags and full varieties retained, Koffee Kult Kilimanjaro versus Mbeya region ambiguity and peaberry morphology not botanical variety, Dope Coffee filter tablespoon/ounces not espresso ratio, Maui Hawaii roast site not bean origin, minimal mechanical processing not washed/natural, Friedrichs 'is_purchasable true' but 'is_in_stock false' source variance, and WooCommerce variation prices and current product titles preserved. No current app vulnerability established, no external source reconfirmation or frozen oracle change."
     }
   ],
   "files": [
@@ -5466,11 +5478,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-005"
           ]
+        },
+        {
+          "first_line": 17332,
+          "last_line": 26331,
+          "line_count": 9000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B023",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-006"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 17332,
+          "first_line": 26332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
