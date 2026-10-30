@@ -3170,24 +3170,34 @@
       "id": "DIC-Q-33-direct-whole-blend-full-city",
       "issue": 33,
       "title": "Current selected whole-blend Full City roast distinct from component roasts",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "2058f93c14c4ef29207096db5a188933a7347413",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ],
       "tests": [
-        "Eight new direct selected-product and Add Coffee positive/negative tests authored; execution on exact candidate CI and current 20 official product re-probe NOT YET VERIFIED.",
-        "First exact PR316 head c4ff28ecda53 cloud run41047258221 FAIL (1655 PASS/1 FAIL), Node run41047258234 FAIL same new historical 'Our previous' adversarial case; completed approval/security/archive/SQL/visual/mobile success. Generic noncurrent 'previous' guard fixed; retest required."
+        "First PR316 head c4ff28ecda536b4cef67de7271c5360995b56ec0 exposed one actual source-safety flaw: 'Our previous ... Blend. Full City Roast' incorrectly selected Medium-Dark; cloud41047258221 1655 PASS/1 FAIL, Node41047258234 FAILED same adversarial test. Fixed with explicit 'previous' disqualifier on corrected head fbb7c181ba067ff2c07b5f5b5828a58d5123de06; never represent original failing head as PASS.",
+        "Corrected exact PR316 head fbb7c181ba067ff2c07b5f5b5828a58d5123de06: Node/lint/build run41047624330 SUCCESS 2121 PASS/0 FAIL/6 configuration SKIP; cloud/mobile 41047624359 SUCCESS 1656 PASS/0 FAIL and synthetic phone PASS; approval 41047624326, visual 41047624391, isolated SQL 41047624385, exact source/archive 41047624345 and security 41047624338 all executed SUCCESS. Frozen603 branch-restricted 41047624355 SKIPPED, not PASS.",
+        "Nonforce PR316 merge 2058f93c14c4ef29207096db5a188933a7347413; actual exact merged-source Node/lint/build 41047975382 SUCCESS 2121 PASS/0 FAIL/6 SKIP, cloud+mobile 41047975376 SUCCESS 1656 PASS/0 FAIL, approval/continuity 41047975344 SUCCESS.",
+        "Before real official baseline run41046330526 (job124031211142) vs exact merged current official [dic-issue33-third20] run41047975349 (job124036664716): both 20/20 exact selected public HTML fetched/parsed and Add Coffee preview. Structured source-evidence log compare showed precisely original603 #469 Creative Coffees Breakfast Blend current Full City Roast gains canonical roast_level Medium-Dark (previously blank), zero other field changes or conflict-array changes across 19 other selected official products, including #436 House Blend component City and Full City beans remaining blank. 20-page current sources are not independently certified entire coffees (manual_certified:0); original603 603-case global and genuine GoTrue hosted auth remain separate unmet Issue33 acceptance."
       ],
       "ci_runs": [
-        41047258221,
-        41047258234
+        41047624330,
+        41047624359,
+        41047624326,
+        41047624391,
+        41047624385,
+        41047624345,
+        41047624338,
+        41047975382,
+        41047975376,
+        41047975344,
+        41047975349
       ],
-      "blockers": [
-        "Corrected exact PR-head CI and merged 20 official pages invariant check pending; original frozen603 workflow SKIPPED."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Generic source literal whole-blend Full City => Locked Medium-Dark; no component/global roast misclassification. Candidate TESTING, NOT READY/DEPLOYED. Preserve original603 archive and Ketch."
+      "notes": "NARROW READY, NOT DEPLOYED: exact current selected Breakfast Blend #469 direct whole-product Full City Roast is normalized to owner's Locked Medium-Dark. Actual 20/20 official public HTML and parser snapshots on merged source yielded exactly one added field, 19 other cases and all conflicts unchanged, with negative component/history/other-coffees regressions. Full original603 human semantic review and true current hosted GoTrue remain outstanding; 603 restricted CI SKIPPED, not PASS. Preserve frozen CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, original captures/oracle, Ketch offered variants, all member data and queue. Owner deployment not authorized; Netlify Release13 current deploy 6ae421f5de038d292bd66407 unchanged.",
+      "pr": 316
     }
   ],
   "history": [
