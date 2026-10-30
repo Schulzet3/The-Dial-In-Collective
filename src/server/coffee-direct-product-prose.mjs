@@ -38,6 +38,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(typeof optionHtml==='string'&&optionHtml.length<=2_000_000){
   const tree=coffeeHtmlElements(optionHtml);
   const candidates=[];
+  let eligibleRoastControls=0;
   if(!tree.truncated)for(const node of tree.nodes){
    if(node.tag!=='select')continue;
    const attrs=coffeeHtmlAttributes(node.attributes);
@@ -53,6 +54,10 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
     parent=ancestor.parent;
    }
    if(unselected||node.contentEnd-node.headEnd>3500)continue;
+   // A second eligible roast menu may contain an unsupported purchase option.
+   // Never treat the sole recognized tier as the selected product's only
+   // available roast when another menu's value cannot be classified.
+   eligibleRoastControls++;
    const content=optionHtml.slice(node.headEnd,node.contentEnd);
    const options=[...content.matchAll(/<option\b([^>]{0,500})>([\s\S]{0,180}?)<\/option>/giu)];
    if(options.length!==1||!/\bselected(?:\s*=|\s|$)/i.test(options[0][1]))continue;
@@ -63,7 +68,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    if(/[\/&+]/.test(value)||/\b(?:white coffee|lighter|darker|custom|medium to dark)\b/i.test(value))continue;
    const tier=normalizeRoastLabel(value);if(tier)candidates.push(tier);
   }
-  if(candidates.length===1)roasts.add(candidates[0]);
+  if(eligibleRoastControls===1&&candidates.length===1)roasts.add(candidates[0]);
  }
  let anotherExplicitList=false;
  for(const b of body){

@@ -14,7 +14,7 @@ const sampleKetch={
    roaster_recipe:{ratio:2,temperature_reference:'200–202°F'}}
  ]};
 test('live-source suite runs exactly named official product URLs with no arbitrary input',()=>{
- assert.equal(CURRENT_READY_CASES.length,6);
+ assert.equal(CURRENT_READY_CASES.length,9);
  assert.ok(CURRENT_READY_CASES.every(x=>x.url.startsWith('https://')&&/\/products\//.test(x.url)));
  assert.equal(new Set(CURRENT_READY_CASES.map(x=>x.id)).size,CURRENT_READY_CASES.length);
 });
@@ -77,4 +77,17 @@ test('44 North current decaf exact roast beats generic seasonal catalog copy',()
  const denied=assessReadyPreview('44north-decaf-rotating-program',conflicted,{renderedHtml:rendered});
  assert.ok(denied.failed.some(x=>x.label==='44north-decaf:no_false_roast_conflict'));
  assert.ok(denied.failed.some(x=>x.label==='44north-decaf:exact_selected_roast'));
+});
+
+test('three additional original603 exact current product contracts fail closed',()=>{
+ for(const [id,fields] of [
+  ['south17-dark-raine-single-roast',{name:'Dark Raine',roast_level:'Dark'}],
+  ['friedrichs-rise-shine-title-roast',{name:'Rise and Shine – Medium',roast_level:'Medium'}],
+  ['koffee-kult-perla-negra-release',{name:'Costa Rica Perla Negra Peaberry',origin:'Costa Rica',release_label:'LIMITED RELEASE'}]
+ ]){
+  const good=assessReadyPreview(id,{ok:true,fields,conflicts:[]},{renderedHtml:rendered});
+  assert.deepEqual(good.failed,[],id);
+  const bad=assessReadyPreview(id,{ok:true,fields:{...fields,roast_level:undefined,release_label:undefined,origin:undefined},conflicts:['roast_level','release_label']},{renderedHtml:rendered});
+  assert.ok(bad.failed.length,id);
+ }
 });

@@ -22,7 +22,10 @@ export const CURRENT_READY_CASES=Object.freeze([
  {id:'ketch-tier3-current-mexico',url:'https://www.ketchcoffee.com/products/tier-3-mexico-san-isidro-zoquiapan'},
  {id:'ketch-tier2-locked-honduras',url:'https://www.ketchcoffee.com/products/tier-2-legacy-farms-honduras-natural-process'},
  {id:'44north-current-mexico',url:'https://44northcoffee.com/products/mexico-chiapas'},
- {id:'44north-decaf-rotating-program',url:'https://44northcoffee.com/products/honduras-decaf'}
+ {id:'44north-decaf-rotating-program',url:'https://44northcoffee.com/products/honduras-decaf'},
+ {id:'south17-dark-raine-single-roast',url:'https://south17roasters.com/products/dark-raine'},
+ {id:'friedrichs-rise-shine-title-roast',url:'https://friedrichscoffee.com/product/rise-and-shine'},
+ {id:'koffee-kult-perla-negra-release',url:'https://www.koffeekult.com/products/costa-rica-perla-negra-peaberry'}
 ]);
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=250)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -45,6 +48,29 @@ export function assessReadyPreview(id,preview,{realHtmlReceived=true,renderedHtm
  if(!preview?.ok)return {checks,failed:checks.filter(x=>!x.passed),passed:checks.filter(x=>x.passed).length};
  const f=preview.fields||{},v=variantsOf(preview);
  check('preview:rendered',typeof renderedHtml==='string'&&renderedHtml.length>50,'Add Coffee markup','empty');
+ if(id==='south17-dark-raine-single-roast'){
+  check('south17:exact_selected',/^Dark Raine$/i.test(f.name||''),'Dark Raine',f.name);
+  check('south17:actual_single_dark_roast',f.roast_level==='Dark','Dark',f.roast_level);
+  check('south17:no_false_roast_conflict',!(preview.conflicts||[]).includes('roast_level'),
+   'no conflicting direct roast',JSON.stringify(preview.conflicts||[]));
+ }
+ if(id==='friedrichs-rise-shine-title-roast'){
+  check('friedrichs:exact_coffee',/^Rise and Shine\b/i.test(f.name||''),
+   'Rise and Shine – Medium',f.name);
+  check('friedrichs:current_title_medium',f.roast_level==='Medium','Medium',f.roast_level);
+  check('friedrichs:no_false_roast_conflict',!(preview.conflicts||[]).includes('roast_level'),
+   'no conflicting roast',JSON.stringify(preview.conflicts||[]));
+ }
+ if(id==='koffee-kult-perla-negra-release'){
+  check('koffee-kult:exact_coffee',/Costa Rica Perla Negra Peaberry/i.test(f.name||''),
+   'Costa Rica Perla Negra Peaberry',f.name);
+  check('koffee-kult:current_release_banner',/limited release/i.test(f.release_label||''),
+   'literal selected LIMITED RELEASE',f.release_label);
+  check('koffee-kult:costa_rica',/Costa Rica/i.test(f.origin||''),
+   'Costa Rica',f.origin);
+  check('koffee-kult:release_not_conflicted',!(preview.conflicts||[]).includes('release_label'),
+   'no conflicting release',JSON.stringify(preview.conflicts||[]));
+ }
  if(id==='leap-current-decaf-prose'){
   check('leap:exact_coffee',/^Decaf Coffee$/i.test(f.name||''),'Decaf Coffee',f.name);
   check('leap:water_process',f.decaffeination_method==='Water Process','Water Process',f.decaffeination_method);
