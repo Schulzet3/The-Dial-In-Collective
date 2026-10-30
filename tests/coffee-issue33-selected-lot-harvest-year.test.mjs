@@ -45,7 +45,8 @@ test('explicit same-sentence selected-coffee harvest still supplies current rele
   'For the 2026 harvest, Liliana selected this lot.',
   'This coffee comes from the 2026 harvest.',
   'Preorder this coffee from the 2026 harvest.',
-  'This lot belongs to the 2026 crop.'
+  'This lot belongs to the 2026 crop.',
+  'This is the 2026 harvest.'
  ]){
   const result=parse([story]);
   assert.equal(result.ok,true,story);

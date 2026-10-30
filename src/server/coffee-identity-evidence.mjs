@@ -711,7 +711,8 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
     // A producer's dated biography is not proof that this selected coffee
     // is being offered as that harvest. Require same-sentence lot identity;
     // exact printed Harvest/Release specifications remain handled separately.
-    const selectedLotHarvest=/\b(?:this|our|the|current|selected)\s+(?:coffee|lot|beans?|cherries|batch|offering|release)\b/i.test(sentence);
+    const selectedLotHarvest=/\b(?:this|our|the|current|selected)\s+(?:coffee|lot|beans?|cherries|batch|offering|release)\b/i.test(sentence) ||
+     /^This is the 20\d{2}\s+(?:harvest|crop)\b/i.test(sentence);
     if(harvest&&selectedLotHarvest)add('Harvest',harvest[1],sentence);
     const datedOffering=sentence.match(/\b(?:our|this)\s+(?:(?:first|last|new|current|rotating|washed|natural|honey|anaerobic|single)\s+){0,5}(?:selection|offering|release|single origin)\b[^.!?]{0,65}\b(?:of|for)\s+(20\d{2})\b/i)||
      sentence.match(/\bbring\s+you\s+(?:the\s+)?(20\d{2})\s+lot\b/i)||

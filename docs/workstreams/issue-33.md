@@ -1,3 +1,11 @@
+## October 30 UTC — Issue33 #269 PR328 exact-head inherited identity regression repaired (still TESTING)
+
+On exact PR-head `6ec85b0d8971df34b16ec3d83117e9eb158f6c09`, Node run [41073944417](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41073944417) genuinely FAILED **one** preexisting source-identity regression (tests/coffee-corpus-identity-regressions.test.mjs:503): an exact URL/title-matched selected coffee long meta description explicitly says `This is the 2026 harvest.` and must continue dating that selected offering. 2144 other Node tests passed, six skipped. The generic initial guard was too restrictive; no merge/READY occurred.
+
+**SAME-COMMIT repair:** permit the direct deictic selected-coffee `This is the 2026 harvest/crop` expression as well as explicit `this coffee/lot` same-sentence claims, but continue excluding Queen City #269 grower biography `And sure enough, for the 2026 harvest, she has been able to do so.`. Preserve identity-matched source precedence, existing explicit Harvest spec, all other product facts and source_facts. Add positive regression in tests/coffee-issue33-selected-lot-harvest-year.test.mjs. Exact new-head CI and real official fifth20 20-case before/after source check are still required; frozen603 SKIPPED is not PASS, issue33 remains OPEN, no provider writes/deploy/paid costs.
+
+---
+
 ## October 30 UTC — Issue33 #269 grower-biography harvest year CANDIDATE, TESTING, NOT DEPLOYED
 
 **Recovered authoritative source:** development/backend-foundation `75d1c2f97848121fddfc3c2a741ca7c644728c96`, tree `f59201558c2b316e2595c6d9db29b1e4ff23569d`; Issue33 OPEN and parallel Issue267/96 PRs unmodified. Netlify provider read-only currently publishes Release13 deploy `6ae421f5de038d292bd66407`, source `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`. Original603 immutable case CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`; frozen captures/oracle remain unchanged.
