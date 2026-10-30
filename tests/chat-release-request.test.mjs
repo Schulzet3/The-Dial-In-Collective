@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {validateChatReleaseRequest as validate,validateManualReleaseRequest as validateManual,
  CHAT_REQUEST_PATH,OPS_JOURNAL_PATH,CHAT_REQUEST_SCHEMA,assertChatPushEnvelope}
  from '../scripts/release/chat-release-request.mjs';
@@ -169,4 +170,18 @@ test('normal releases reuse scheduled encrypted backup despite newer logged shot
  for(const database_change_risk of ['none','non_destructive'])
   assert.equal(validate({...base,request:{...request,database_change_risk,backup_evidence:backup}}).releaseId,request.release_id);
  assert.throws(()=>validate({...base,request:{...request,database_change_risk:'potentially_destructive',backup_evidence:backup}}),/stale|snapshot start/);
+});
+
+test('release controller reads historical journal bytes exactly, including trailing whitespace',()=>{
+ const prior='Existing durable approvals with a trailing space. \n';
+ const appendix=request.release_id+' '+S+' validate_only\n';
+ const envelope={eventForced:'false',eventAfterSha:E,eventHeadSha:E,remoteMainSha:E,
+  request,previousJournal:prior,currentJournal:prior+appendix};
+ assert.equal(assertChatPushEnvelope(envelope),true);
+ assert.throws(()=>assertChatPushEnvelope({...envelope,currentJournal:
+  prior.trimEnd()+'\n'+appendix}),/history/);
+ // Git's normalized metadata reads must NEVER be used for the append-only journal.
+ const source=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
+ assert.match(source,/previousJournal:git\(\['show',parents\[1\]\+':'\+OPS_JOURNAL_PATH\],\{trim:false\}\)/);
+ assert.match(source,/currentJournal:git\(\['show','HEAD:'\+OPS_JOURNAL_PATH\],\{trim:false\}\)/);
 });
