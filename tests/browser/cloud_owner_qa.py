@@ -8,7 +8,7 @@ def bundle():
   t=re.sub(r"import \* as (\w+) from ['\"](.+?)['\"];",lambda m:f'const {m[1]}=Modules.{Path(m[2]).stem.replace('-','_')};',t)
   t=re.sub(r"import\s*\{([^}]+)\}\s*from\s*['\"](.+?)['\"];",lambda m:'const {'+m[1]+'}=Modules.'+Path(m[2]).stem.replace('-','_')+';',t)
   return t
- for name in ['constants','model','community-evidence','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill','dose-advisory']:
+ for name in ['constants','model','community-evidence','engine','ui','appearance','client','cache','outbox','mapping','confirmation','shot_card','community','coffee-match-ui','coffee-url-autofill','dose-advisory','help']:
   folder='lib' if name in ['constants','model','community-evidence','engine','ui'] else 'cloud'
   t=(SITE/folder/f'{name}.js').read_text();exports=re.findall(r'export\s+(?:async\s+)?(?:function|const|class|let)\s+(\w+)',t)
   t=re.sub(r'\bexport\s+','',imports(t));s+=f'Modules.{name.replace("-","_")}=(()=>{{\n{t}\nreturn {{{",".join(exports)}}};\n}})();\n'
@@ -135,6 +135,23 @@ with sync_playwright() as p:
  assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')
  assert page.locator('.settings-signout').count()==1;checks.append('Sign Out follows Cloud Sync in Settings')
  assert page.locator('#claude-key-options').count()==0;checks.append('Removed AI settings stay absent on mobile')
+ # The real Settings modal routes to a self-hosted captioned video without autoplay.
+ page.locator('#sheet [data-action="watch-walkthrough"]').click()
+ video=page.locator('#sheet video[data-walkthrough-player]')
+ assert video.count()==1
+ assert video.get_attribute('controls') is not None
+ assert video.get_attribute('autoplay') is None
+ assert video.locator('source[type="video/mp4"]').get_attribute('src')=='/media/first-shot-walkthrough.mp4'
+ assert video.locator('track[kind="captions"]').get_attribute('src')=='/media/first-shot.en.vtt'
+ assert page.locator('#sheet .help-transcript').count()==1
+ assert video.bounding_box()['width']<=page.locator('#sheet .sheet-content').bounding_box()['width']
+ page.locator('#sheet [data-action="getting-started-guide"]').click()
+ assert page.locator('#sheet-title').inner_text()=='Getting Started'
+ assert page.locator('#sheet .help-steps li').count()==6
+ assert 'Save Shot & Get Suggestion' in page.locator('#sheet .help-guide').inner_text()
+ page.locator('#sheet [data-action="close"]').click()
+ page.get_by_role('button',name='Settings',exact=True).click()
+ checks.append('390px Settings video and written guide open with controls, captions, no autoplay and six steps')
  # Regression for the real approved New Setup control. Source-string checks
  # alone previously said this was "done" without opening it on a phone.
  page.get_by_role('button',name='Add Another Setup').click()

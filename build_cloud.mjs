@@ -12,7 +12,10 @@ if(!url||!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)||!key?.startsWith('sb
 checkRepository();
 validateSiteSource(root);
 await rm(path.join(root,'dist'),{recursive:true,force:true});
-const files=['visual.css','cloud/appearance.js','cloud/appearance-bootstrap.js','admin/styles.css','admin/view.js','admin/records.js','admin/main.js','styles.css','icon.svg','icon-192.png','icon-512.png','manifest.webmanifest','cloud/client.js','cloud/cache.js','cloud/outbox.js','cloud/mapping.js','cloud/shot_card.js','cloud/community.js','cloud/coffee-match-ui.js','cloud/coffee-url-autofill.js','cloud/dose-advisory.js','cloud/main.js','cloud/confirmation.js','cloud/help.js','media/first-shot.en.vtt','media/first-shot-transcript.txt','media/first-shot-poster.svg','lib/constants.js','lib/model.js','lib/community-evidence.js','lib/engine.js','lib/ui.js'];
+const files=['visual.css','cloud/appearance.js','cloud/appearance-bootstrap.js','admin/styles.css','admin/view.js','admin/records.js','admin/main.js','styles.css','icon.svg','icon-192.png','icon-512.png','manifest.webmanifest','cloud/client.js','cloud/cache.js','cloud/outbox.js','cloud/mapping.js','cloud/shot_card.js','cloud/community.js','cloud/coffee-match-ui.js','cloud/coffee-url-autofill.js','cloud/dose-advisory.js','cloud/main.js','cloud/confirmation.js','cloud/help.js','media/first-shot.en.vtt','media/first-shot-transcript.txt','media/first-shot-poster.svg','media/first-shot-walkthrough.mp4','lib/constants.js','lib/model.js','lib/community-evidence.js','lib/engine.js','lib/ui.js'];
+// No release can substitute, omit or silently alter the owner-approved video.
+const walkthrough=await readFile(path.join(root,'site','media/first-shot-walkthrough.mp4'));
+if(createHash('sha256').update(walkthrough).digest('hex')!=='e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa')throw new Error('Walkthrough video missing or SHA-256 does not match approved source');
 for(const file of files){const dst=path.join(root,'dist',file);await mkdir(path.dirname(dst),{recursive:true});await copyFile(path.join(root,'site',file),dst);}
 await mkdir(path.join(root,'dist/vendor'),{recursive:true});
 await copyFile(path.join(root,'node_modules/@supabase/supabase-js/dist/umd/supabase.js'),path.join(root,'dist/vendor/supabase.js'));
@@ -21,7 +24,7 @@ await copyFile(path.join(root,'site/admin.html'),path.join(root,'dist/admin.html
 await writeFile(path.join(root,'dist/cloud/config.js'),`// Public project coordinates only.\nexport const CLOUD_CONFIG=${JSON.stringify({enabled:true,supabaseUrl:url,publishableKey:key})};\n`);
 // Cache only a revisioned public app shell; never cache Auth, API or user data.
 const publicShellAssets=[...new Set(['/', '/index.html',
- ...files.filter(file=>!file.startsWith('admin/')).map(file=>'/'+file),
+ ...files.filter(file=>!file.startsWith('admin/')&&!file.endsWith('.mp4')).map(file=>'/'+file),
  '/vendor/supabase.js','/cloud/config.js'])];
 const shellHash=createHash('sha256');
 for(const asset of publicShellAssets){
