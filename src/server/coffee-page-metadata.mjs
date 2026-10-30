@@ -1860,11 +1860,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     decafSpec.candidates.some(spec=>spec.method!==exactNamedDecafMethod)));
  const decafSourceConflict=decafSpecConflict||
   (detailConflicts.has('processing_detail')&&!exactNamedAndSpecAgreement);
- const decaffeination_method=inferDecaffeinationMethod({
+ // A generic page layout may contain labeled decaf PROCESS prose inside a
+ // FAQ, related item, or contradictory second product heading. Only the
+ // independently verified current selected-product decaf sentence or a
+ // safely scoped exact selected spec can authorize member autofill.
+ // Roaster processing_details alone are never sufficient for method identity.
+ const eligibleSelectedDecafMethod=selectedDecafStatements.length>0||
+  decafSpec.candidates.length>0;
+ const decaffeination_method=eligibleSelectedDecafMethod?inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
   selectedMethod:selectedDecafStatements.join('\n'),
   conflicting:decafSourceConflict
- });
+ }):'';
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
  // Preserve the literal selected-product method sentence for member review.
  // Contradictory stated methods remain blank, not a guessed winner.
