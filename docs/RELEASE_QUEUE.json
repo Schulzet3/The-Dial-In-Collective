@@ -2910,28 +2910,31 @@
       "issue": 96,
       "pr": 287,
       "title": "Non-retryable HTTP 409 for stale Administrator coffee and shot edits",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "b627fba36fcaae5f56ac5b20042bf228a462f52d",
       "scope_paths": [
         "supabase/migrations/20261030035900_dic_admin_edit_stale_http_conflict.sql"
       ],
       "tests": [
-        "Original PR287 exact-source SQL run 41000126420 actually executed PostgREST, passing 33 signed-HTTP assertions then timed out on stale authorized Administrator edit (deterministic SQLSTATE 40001 retry).",
-        "New PT409 wrapper migration and source assertion edits: exact-head SQL/HTTP, Node, browser, approval and nonforce merge/merged-source checks PENDING.",
-        "Actual PR287 CI 41000510974 approval rejected nondeployable test files in scope_paths; corrected to migration only. Actual SQL 41000510968 failed decaf stale editor SQL assertion expecting prior 40001; update only this admin assertion to PT409.",
-        "Real SQL signed JWT run 41000787831 passed stale 409/PT409 response and positive authorized Admin update/audit (35 checks); failed only overly strict test baseline expecting a previously-unclassified synthetic shot to retain NULL family when classifier correctly assigns a family. Updated assertion to preserve immutable owner/history/equipment/measurements and validate recipe-family ownership, allowing legitimate first classification."
+        "Isolated exact PR-head 82af380297ceef6061f4b25f1fc710029f5d50e0: SQL+HMAC-signed disposable PostgREST run41000974580 SUCCESS, 89/89 assertions, including actual authorized Admin edit, immutable shot/owner/privacy, audit actor/subject/before/after, stale PT409 response and no member-note leakage. Auth via local signed tokens, not hosted GoTrue.",
+        "Exact PR-head Node/lint/build41000974443 SUCCESS (2071 PASS, 0 FAIL, 6 SKIP), approval/continuity41000974461 SUCCESS, cloud/mobile41000974563 SUCCESS, full Chromium/browser/visual41000974569 SUCCESS; original frozen603 explicitly SKIPPED as unrelated.",
+        "Non-force PR #287 merge b627fba36fcaae5f56ac5b20042bf228a462f52d is byte-identical to tested head tree eac4f09648934abd688ce83e1f7e49cc8600eff1. Exact merged-source approval41001222491, SQL/signed HTTP41001222461 (89/89), visual41001222472, cloud/mobile41001222463 and Node/lint/build41001222527 ALL SUCCESS."
       ],
       "ci_runs": [
-        41000126420,
-        41000510974,
-        41000510968,
-        41000787831
+        41000974461,
+        41000974580,
+        41000974563,
+        41000974569,
+        41000974443,
+        41001222491,
+        41001222461,
+        41001222472,
+        41001222463,
+        41001222527
       ],
-      "blockers": [
-        "Await actual passing exact-head SQL/signed HTTP, browser, Node, approval checks and safe nonforce integration before READY."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/96",
-      "notes": "Source-only fix to original privileged Admin edit RPC wrappers, retaining private logic and grants. New SQL migration is NOT applied to production and requires a distinct owner-authorized future release. Existing member records, shots, private notes and audit history preserved. No production deploy or SQL/Auth/Edge operations permitted in development."
+      "notes": "READY but NOT DEPLOYED. One safe, non-destructive migration 20261030035900_dic_admin_edit_stale_http_conflict.sql switches public SECURITY INVOKER Admin edit wrappers from deterministic 40001 PostgREST retry to explicitly non-retryable PT409 HTTP 409, preserving backend privileged role/owner/audit checks. No production SQL applied. Requires a separate express owner publish/release command for publication and migration. Original member/shot/note/audit data untouched. Owner-verified genuine ordinary-member no-Admin/no-foreign-data and immediate disabled/offline lockout accepted in Issue96; actual current-release GoTrue Admin editing and provider-only settings remain UNVERIFIED; Issue96 OPEN. Earlier failed source attempts preserved in scoped journal, not counted among successful ci_runs."
     }
   ],
   "history": [
