@@ -46,7 +46,7 @@ test('unlabeled prose, metadata, general guidance and unrelated sources are not 
 });
 
 test('arbitrary unlabeled or non-list scalar does not manufacture a source conflict',()=>{
- const facts=[row('Flavor','Single uncertain descriptor'),row('Product Info','Unrelated, longer, multiline prose')];
+ const facts=[row('Product Information','Single uncertain descriptor'),row('Product Info','Unrelated, longer, multiline prose')];
  markSelectedTastingSourceDisagreements(facts,preferred);
  assert.ok(facts.every(f=>f.conflicting!==true));
 });
@@ -69,5 +69,5 @@ test('selected current product direct description is not replaced by contrary se
  assert.equal(r.ok,true);
  assert.equal(r.fields.tasting_notes,preferred,'current selected product description takes priority');
  assert.ok(r.source_facts?.some(f=>f.field==='tasting_notes'&&f.value===conflicting&&f.conflicting===true),
-  'opposing selected Flavor caption remains visible as an explicit source discrepancy');
+  'opposing selected Flavor caption must remain flagged; actual='+JSON.stringify(r.source_facts?.filter(f=>f.field==='tasting_notes')));
 });

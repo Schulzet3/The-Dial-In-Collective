@@ -38,7 +38,7 @@ export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
  if(!Array.isArray(facts)||!selectedNotes||typeof selectedNotes!=='string')return facts;
  for(const fact of facts){
   if(fact.field!=='tasting_notes'||fact.conflicting===true||
-   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim())||
+   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim().replace(/[:：]\s*$/u,''))||
    !['html','product_json'].includes(fact.source_type)||
    /(?:different coffee|general guidance|education|recommendation|brewing recommendation|published page metadata)/i.test(String(fact.section||'')))continue;
   // An actual labeled Flavor list may contain unusual literal merchant words
