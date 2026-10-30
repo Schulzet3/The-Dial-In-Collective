@@ -2787,6 +2787,57 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Generic shared parser, no roaster URL special case. Only a current explicitly offered roast variant can receive its corresponding flavor notes; different roast choices must never mix or autoselect. Preserve existing confidence, manually edited values, recommendations, SQL/Auth/Edge/member/offline data, original603 captures/oracle/scorer. Development only; no publication. READY, NOT DEPLOYED. No complete new 603-live replay or genuine signed-in production member verification. The new Ketch Tier3 public quote was checked against its official product page but product HTML fixture, not a complete live authenticated browser replay, was used for parser/UI tests. All prior READY changes unaffected; parent Issue33 residual review remains IN_PROGRESS."
+    },
+    {
+      "id": "DIC-Q-33-ketch-live-roast-variant-false-conflict",
+      "issue": 33,
+      "pr": null,
+      "title": "Fix false roast-level conflict for current selected purchase-roast alternatives detected by live Ketch pages",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-shopify-ajax.mjs"
+      ],
+      "tests": [
+        "Real exact merged-source live probe run 40962638203 fetched both current Ketch page HTML and exact public Shopify JSON on 2026-10-29. Correct Light/Medium-Dark flavor/recipe variants were returned but BOTH previews retained spurious conflicts:['roast_level'] despite one underlying coffee; original Owner Locked decision forbids treating two offered roast profiles as contradiction.",
+        "Narrowly guard generic Shopify tag-only roast ambiguity when more than one actual purchasable roast matches all current HTML conflict options; genuine mismatched direct roast specification conflicts remain held for member review.",
+        "Five independent negative/positive model tests plus stricter Ketch live source test and source tier diagnostic staged; postmerge real 5-URL end-to-end CI and exact-source app/visual/SQL/privacy checks NOT YET COMPLETE."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head CI, nonforce integration, second genuine five-page HTTPS source acceptance, merged-source CI, documented READY receipts; do not call first 5/5 green proof of Ketch conflict integrity."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Preserve October27 Locked Ketch one shared green coffee, exact purchased Light/Medium-Dark variants, taste/sensory/espresso separation, no automatic roast preselection, no SEO variant contamination, manual edits, historical shots/offline/Community data. No Netlify deployment or production database writes. Test harness logs only public source facts, no secrets."
+    },
+    {
+      "id": "DIC-Q-37-in-app-walkthrough",
+      "issue": 37,
+      "pr": 268,
+      "title": "Accessible in-app first-shot video and beginner guide",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "build_cloud.mjs",
+        "site/cloud/help.js",
+        "site/cloud/main.js",
+        "site/media/first-shot-poster.svg",
+        "site/media/first-shot-transcript.txt",
+        "site/media/first-shot-walkthrough.mp4",
+        "site/media/first-shot.en.vtt",
+        "site/visual.css"
+      ],
+      "tests": [
+        "Exact approved 2,320,714-byte 135.56s MP4 transferred from private staging to GitHub blob 81e8c145336f1837bbc8580bf91e2980e019e8b6; original SHA-256 e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa.",
+        "Build SHA gate, caption timing, source file integrity, 390px synthetic Chromium Settings/video/guide and accessibility checks are staged."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact latest PR-head app, approval and browser CI not yet verified; nonforce merge and merged-source CI pending.",
+        "Authenticated real-member use and physical mobile/screen reader still unverified; source-level accessibility tests do not establish these."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/37",
+      "notes": "Explicit owner authorization in Oct 29, 2026 chat to integrate corrected video and written guide for next separate release. No deployment permission. MP4 excluded from pre-cache to preserve streaming; video/guide are public static assets within SSO-protected app, no member data."
     }
   ],
   "history": [

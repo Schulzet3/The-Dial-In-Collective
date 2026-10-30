@@ -1,3 +1,15 @@
+## October 29 UTC — Corrected Issue #96 real-account prior acceptance continuity
+
+Authenticated ordinary-member/Administrator accounts are **already available and tested**. Closed [Issue #41](https://github.com/Schulzet3/The-Dial-In-Collective/issues/41) contains real owner-run member 33/33 and foreign-owner 17/17, admin-denied reads/mutations, real disabled/reinstated and never-admitted security probes, with scoped private-data and audit receipt. Further October 28 genuine hosted GoTrue run40767700050 PASSED login/session refresh/logout/invitation/Add Coffee/persisted SQL readback. Do NOT request a repeat account signup, password, session token or re-run already passed tests without an evidence-based changed code surface; preserve original administrator v1 32 PASS/1 incorrect assertion. #96 still owns current newer-path security deltas, provider visibility limits and post-Release12 Admin tap; full historical line review belongs to #267. This note is documentation-only; no live member/provider/SQL/deploy changes.
+
+---
+
+## October 29 2026 — Owner-approved audit continuity split, no source/deploy action
+
+New OPEN [Issue #267](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267) owns the **uncompleted 579,961-line literal expert historical semantic audit** from previously closed #161 through #96. #96 issue header reconciled and remains OPEN for genuine live GoTrue Admin/member auth, privacy, authorization and accessible provider controls. Archive denominator 757 files (503,938 archived evidence lines) is a historical checkpoint, not a current branch count. Retain full source and Locked decisions; no waiver, machine scanning is not manual inspection. New workstream/issue-267.md and handoff `docs/handoffs/ISSUE267_HISTORICAL_LINE_REVIEW_NEW_CHAT_2026-10-29.md`. No member data, provider, release queue, auth, SQL or production changes. GitHub issue creation and documentation-only branch transfer are this session's scope.
+
+---
+
 ## October 29, 2026 — Owner-approved Issue #50 closure, verified GitHub CLOSED
 
 Owner answered **"yes. Next issue please"** to the specific proposal to close #50 as **Engineering optimization implemented and independently measured; 10× full-cycle improvement NOT demonstrated**. Live [GitHub Issue #50](https://github.com/Schulzet3/The-Dial-In-Collective/issues/50) was updated with this exact outcome and read back **CLOSED / completed** 2026-10-29T22:06:14Z. The original 10× full request-to-tested/released/independently verified target remains **UNVERIFIED**, a nonblocking future performance aspiration—not a passed result and not a new release gate.
