@@ -13,6 +13,9 @@ import {createPreviewHandler} from '../../netlify/functions/coffee-url-preview.m
 import {safeCoffeeUrl,fetchPublicCoffeeHtml,fetchPublicCoffeeProductRetry,fetchPublicCoffeeJson} from '../../src/server/coffee-url-guard.mjs';
 import {compactCoffeeProductHtml} from '../../src/server/coffee-product-prep.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
+import {selectedNamedCurrentDecafEvidence,selectedDirectProductCredits} from '../../src/server/coffee-direct-product-prose.mjs';
+import {inferDecaffeinationMethod} from '../../src/server/coffee-decaffeination-method.mjs';
 import {extractShopifyAjaxData,shopifyProductRequest} from '../../src/server/coffee-shopify-ajax.mjs';
 import {coffeeRoastVariantPreview,coffeeUrlPreviewMarkup} from '../../site/cloud/coffee-url-autofill.js';
 
@@ -267,6 +270,34 @@ async function probeOne(target){
   matchingH1=hs.filter(h=>h===norm(preview?.fields?.name)).length;
   visibleOldCaption=/legacy farms honduras/i.test(rawHtml)&&target.id==='ketch-tier3-current-mexico';
  }
+ let nativo_method_diagnostics=null;
+ // Public-only exact selected product diagnostic; no raw HTML or member data
+ // leaves the disposable runner. It cannot make a failed assertion pass.
+ if(target.id==='nativo-tranquilo-current-sugar-decaf'&&rawHtml){
+  const name=String(rawResult?.fields?.name||preview?.fields?.name||'');
+  const cleanText=markup=>String(markup||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/&nbsp;|&#160;/gi,' ')
+   .replace(/\s+/g,' ').trim();
+  const compact=compactCoffeeProductHtml(rawHtml)||rawHtml;
+  const layers=[['raw_page',rawHtml],['compact_page',compact],
+   ['raw_product_scope',productMarkup(rawHtml)],['compact_product_scope',productMarkup(compact)]];
+  nativo_method_diagnostics={
+   name,
+   roaster_processing_detail:clip(rawResult?.roaster_details?.processing_detail,240),
+   method_source_facts:(rawResult?.source_facts||[]).filter(f=>f.field==='decaffeination_method')
+    .slice(0,8).map(f=>({label:clip(f.label,90),text:clip(f.value,290),conflicting:!!f.conflicting})),
+   layers:layers.map(([layer,markup])=>{
+    const direct=selectedDirectProductCredits(markup,{name,clean:cleanText,optionHtml:markup});
+    const named=selectedNamedCurrentDecafEvidence(markup,{name,clean:cleanText});
+    return {layer,bytes:markup.length,
+     named_sentence_present:/Tranquilo is decaffeinated using the natural Sugar Cane Process/i.test(markup),
+     direct_count:(direct.decaffeination_method_evidence||[]).length,named_count:named.length,
+     direct_method:inferDecaffeinationMethod({name,selectedMethod:(direct.decaffeination_method_evidence||[]).join('\n')}),
+     named_method:inferDecaffeinationMethod({name,selectedMethod:named.join('\n')}),
+     current_method:inferDecaffeinationMethod({name,processingDetail:rawResult?.roaster_details?.processing_detail,
+      selectedMethod:named.join('\n')})};
+   })
+  };
+ }
  const rendered=preview?.ok?coffeeUrlPreviewMarkup(preview):'';
  const audit=assessReadyPreview(target.id,preview,{realHtmlReceived:!!rawHtml,renderedHtml:rendered});
  // Do not allow Shopify merging to conceal a source HTML contradiction.
@@ -294,6 +325,7 @@ async function probeOne(target){
   exact_title_h1_count:matchingH1,
   repeated_identical_h1_live_evidence:matchingH1>1,
   selected_product_has_stale_legacy_caption:visibleOldCaption,
+  ...(nativo_method_diagnostics?{nativo_method_diagnostics}:{}),
   roast_variants:(preview?.roast_variants||[]).map(v=>({id:v.id,fields:fieldsOf(v),
    sensory:v.sensory||null,roaster_recipe:v.roaster_recipe||null})),
   ui_rendered:rendered.length>50,ui_roast_picker:/Which roast did you buy\?/i.test(rendered),
