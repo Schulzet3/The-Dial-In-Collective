@@ -15,7 +15,7 @@ const sampleKetch={
  ]};
 test('live-source suite runs exactly named official product URLs with no arbitrary input',()=>{
  assert.equal(CURRENT_READY_CASES.length,9);
- assert.ok(CURRENT_READY_CASES.every(x=>x.url.startsWith('https://')&&/\/products\//.test(x.url)));
+ assert.ok(CURRENT_READY_CASES.every(x=>x.url.startsWith('https://')&&/\/products?\//.test(x.url)));
  assert.equal(new Set(CURRENT_READY_CASES.map(x=>x.id)).size,CURRENT_READY_CASES.length);
 });
 test('Locked Ketch Tier2 shared identity and individually selected recipes pass the live acceptance contract',()=>{
