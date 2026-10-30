@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 74120,
-    "still_not_documented_as_semantically_reviewed_lines": 505841,
+    "direct_assistant_semantic_lines": 77120,
+    "still_not_documented_as_semantically_reviewed_lines": 502841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 505841,
+    "remaining_line_count_checked": 502841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -275,6 +275,18 @@
       ],
       "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
       "summary": "B031 direct source reading: Ready Set Mexico Chiapas from small family farms explicitly Fully Washed Medium, 3200ft/975m, Bourbon/Caturra/Mundo Nova (source spelling); light-bodied sensory term not Light roast. Ready Set Guatemala Antigua Los Volcanes farms Ciudad Vieja, 5000ft/1524m, Washed and patio drying (not Honey), Bourbon/Typica, but source Medium vs Light Roast endpoint tag requires withhold. Leap Decaf Medium Swiss Water signature blend has no published origin, producer, primary processing, variety, elevation; Swiss Water is decaf method, not Washed. Leap Brazil Natural Café do Vale Cooperative from 15 small family farms Sul de Minas, importer Bertagna not producer; 'organic' only legacy URL not published current fact, high altitude has no number, roast unspecified. Leap Ethiopia Natural Light Gelgelu Edema Farm/Mendebo Mountains, regional Yergecheffe 5700-7500ft and general indigenous heirloom not specific farm elevation/cultivar; legacy organic URL not certification. Gnosis old /costa-rica-san-diego-light-roast URL now selects Costa Rica Honey Light, Tarrazu 1200-1750m, Caturra/Catuai, San Diego wet mill distinct from producer farmers; 22 hours is explicitly COLD BREW, not espresso shot duration; 3oz Shopify shipping weight zero is not zero bag mass. Source retail grind options/SKUs/bag sizes/gift and recurring selling plans not espresso recipes. Historical captured source only, image pixels/dynamic browser/live product/current extractor/auth security unverified."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-015",
+      "risk": "low",
+      "type": "FROZEN_ARCHIVE_SOURCE_PROVENANCE",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        62332,
+        65331
+      ],
+      "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
+      "summary": "B032 original historic source direct reading: Gnosis Costa Rica Honey 3/12oz and 5lb variants all Shopify shipping weight=0 and many blank SKU; blank weight and purchase Drip/French Press/Pour Over are not empty coffee quantities or espresso recipes. Gnosis Colombia Mina Rica current product explicit medium washed Castillo, 1700masl, San Gabriel Antioquia, producer current Carolina Posada owner of Mina Rica and 'direct trade' seller claim; historical grandfather Mario not current grower; image alt text names full surname but photo pixels not read. Gnosis Red Bourbon DECAF Light from Wilton Benitez / Paraiso 92 Piendamo Cauca at 1900masl, Sugarcane ethyl acetate decaffeination; 48h whole cherry yeast fermentation then 68h secondary with coffee juices, ozonated+UV wash and low temp drying are process-stage facts, but headline says Natural while stages mention washed: do not force either primary process, yeast inoculation alone not proof of anaerobic; La Macarena named in photo alt as farm, keep distinct from producer. Coffee Exchange Peru Cafe Canchaque current American Roast defined roaster's lightest, hence Light, Natural, coop Condorcanqui member Norandino, Canchaque Piura 1500–2350m, but Bourbon in historical description refers to Spanish Bourbon reforms not coffee cultivar; 1969 founding not harvest, Fair Trade/Organic claim unverified outside source. Coffee Exchange Dominican Republic Red Honey Vienna explicitly Medium-Dark per roaster 'medium/dark', Jarabacoa Cibao 1300m family-farm producer without named grower, Honey with 24h fermentation and Organic/Direct Trade source claim not independent certification. Both Coffee Exchange product variants #1 Turkish, #2/2.5/3 espresso, #4 Aeropress etc are SELLER PRE-GRIND options, not member grinder settings, espresso dose/yield/time, or universal roast style; seller subscription frequency and discount flags commercial not extraction. All are archived historic source observations only; current product pages, visual images, browser-only state, current extractor/Issue33 and authenticated security/Issue96 not rechecked."
     }
   ],
   "files": [
@@ -5682,11 +5694,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-014"
           ]
+        },
+        {
+          "first_line": 62332,
+          "last_line": 65331,
+          "line_count": 3000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B032",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-015"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 62332,
+          "first_line": 65332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
