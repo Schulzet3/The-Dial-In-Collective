@@ -95,6 +95,47 @@ await denied('Ordinary member cannot read administrator dashboard','/rpc/dic_adm
 await denied('Ordinary member cannot read administrator access overview','/rpc/dic_admin_access_overview',tokens.member,{});
 await denied('Forged user_metadata and app_metadata cannot read administrator dashboard','/rpc/dic_admin_dashboard',tokens.forged,{});
 
+// Issue #96: endpoints introduced after the owner's accepted October 20-21
+// two-account checks. Exercise real cryptographic JWTs in disposable PostgREST,
+// never reuse owner credentials or send protected data outside dic_ci.
+const adminDeltaSnapshot=()=>({
+ shots:scalar('(select count(*) from public.shots)'),
+ privateNotes:scalar('(select count(*) from public.shot_notes)'),
+ coffeeReviews:scalar('(select count(*) from public.admin_reviews)'),
+ editAudit:scalar('(select count(*) from private.admin_content_edits)'),
+ deleteReceipts:scalar('(select count(*) from private.dic_admin_delete_receipts)')
+});
+const beforeAdminDeltas=adminDeltaSnapshot();
+const newAdminEndpoints=[
+ ['paged creator and private note listing','dic_admin_records',{p_kind:'shots',p_offset:0,p_limit:1}],
+ ['bounded searchable private record listing','dic_admin_search_records',{p_kind:'shots',p_query:'',p_offset:0,p_limit:1}],
+ ['Admin Pending candidates','dic_admin_coffee_candidates',{p_submission_id:null}],
+ ['Admin conflict comparison','dic_admin_review_candidates',{p_submission_id:null}],
+ ['Admin impact preview','dic_admin_delete_preview',{p_kind:'shot',p_record_id:null}],
+ ['Admin coffee correction','dic_admin_edit_coffee',{p_record_id:null,p_expected_revision:1,p_details:{},p_reason:'UNAUTHORIZED_CI',p_kind:'approved'}],
+ ['Admin shot/private-note correction','dic_admin_edit_shot',{p_record_id:null,p_expected_revision:1,p_details:{},p_reason:'UNAUTHORIZED_CI',p_kind:'shot'}],
+ ['Admin review or merge','dic_admin_review_coffee',{p_submission_id:null,p_expected_revision:1,p_action:'approve',p_reason:'UNAUTHORIZED_CI',p_canonical_id:null}],
+ ['Admin irreversible delete','dic_admin_delete_record',{p_kind:'shot',p_record_id:null,p_expected_revision:1,p_expected_impact:{}}]
+];
+for(const [purpose,name,args] of newAdminEndpoints){
+ await denied('Ordinary member blocked from newer '+purpose,'/rpc/'+name,tokens.member,args);
+}
+await denied('Forged role metadata cannot search private Admin records',
+ '/rpc/dic_admin_search_records',tokens.forged,{p_kind:'shots',p_query:'',p_offset:0,p_limit:1});
+await denied('Disabled signed user cannot read newer Admin records',
+ '/rpc/dic_admin_records',tokens.disabled,{p_kind:'shots',p_offset:0,p_limit:1});
+await denied('Anonymous cannot execute newer Admin review comparison',
+ '/rpc/dic_admin_review_candidates',undefined,{p_submission_id:null});
+assert.deepEqual(adminDeltaSnapshot(),beforeAdminDeltas,
+ 'Denied newer Admin RPCs must not change any private shots, notes or audit receipts');
+pass('Denied newer signed Admin endpoints preserved all private shot/note/decision records');
+r=await rpc('dic_admin_records',tokens.admin,{p_kind:'shots',p_offset:0,p_limit:1});
+assert.equal(r.status,200);assert.ok(Array.isArray(r.data?.items));
+r=await rpc('dic_admin_search_records',tokens.admin,
+ {p_kind:'shots',p_query:'',p_offset:0,p_limit:1});
+assert.equal(r.status,200);assert.ok(Array.isArray(r.data?.items));
+pass('Same two new protected listings remain usable to the genuine signed Admin fixture');
+
 const invitesBefore=scalar('(select count(*) from private.beta_invites)');
 const eventsBefore=scalar('(select count(*) from private.admin_access_events)');
 await denied('Ordinary member cannot issue an administrator invitation',
