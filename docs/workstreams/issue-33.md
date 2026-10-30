@@ -1,3 +1,23 @@
+## October 30 UTC — Issue33 #269 PR328 exact-head inherited identity regression repaired (still TESTING)
+
+On exact PR-head `6ec85b0d8971df34b16ec3d83117e9eb158f6c09`, Node run [41073944417](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41073944417) genuinely FAILED **one** preexisting source-identity regression (tests/coffee-corpus-identity-regressions.test.mjs:503): an exact URL/title-matched selected coffee long meta description explicitly says `This is the 2026 harvest.` and must continue dating that selected offering. 2144 other Node tests passed, six skipped. The generic initial guard was too restrictive; no merge/READY occurred.
+
+**SAME-COMMIT repair:** permit the direct deictic selected-coffee `This is the 2026 harvest/crop` expression as well as explicit `this coffee/lot` same-sentence claims, but continue excluding Queen City #269 grower biography `And sure enough, for the 2026 harvest, she has been able to do so.`. Preserve identity-matched source precedence, existing explicit Harvest spec, all other product facts and source_facts. Add positive regression in tests/coffee-issue33-selected-lot-harvest-year.test.mjs. Exact new-head CI and real official fifth20 20-case before/after source check are still required; frozen603 SKIPPED is not PASS, issue33 remains OPEN, no provider writes/deploy/paid costs.
+
+---
+
+## October 30 UTC — Issue33 #269 grower-biography harvest year CANDIDATE, TESTING, NOT DEPLOYED
+
+**Recovered authoritative source:** development/backend-foundation `75d1c2f97848121fddfc3c2a741ca7c644728c96`, tree `f59201558c2b316e2595c6d9db29b1e4ff23569d`; Issue33 OPEN and parallel Issue267/96 PRs unmodified. Netlify provider read-only currently publishes Release13 deploy `6ae421f5de038d292bd66407`, source `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`. Original603 immutable case CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`; frozen captures/oracle remain unchanged.
+
+**Independently checked current exact selected roaster page:** https://queencitycollectivecoffee.com/products/liliana-ramirez-colombia prints H1 Liliana Ramírez // Colombia. Its 2026 phrase describes the farmer's ability to work on her farm full-time (after a 2025 conversation), **not** a selected-coffee release edition. Earlier official exact selected twenty-case run 41059053128 (case #269) parsed `release_label:2026`. This is a provisional scoped source-fact error, not yet a CI-verified correction or whole-coffee certification.
+
+**SAME-COMMIT candidate code/tests:** `src/server/coffee-identity-evidence.mjs` now lets narrative-only YEAR Harvest/Crop become a release candidate only when the very same sentence explicitly identifies this selected coffee, lot, batch or offering. A farmer career/harvest-year anecdote alone stays provenance-visible but cannot populate `release_label`; directly labelled Harvest/Release and independently date-identified current product offerings retain their existing separate parsing. New `tests/coffee-issue33-selected-lot-harvest-year.test.mjs` covers the exact biography, adversarial other grower milestones, positive current-lot dates, explicit specs, and conflict safety. These tests are **NOT YET EXECUTED**. Narrow correction is TESTING only, not READY; no queue state or issuer closure change.
+
+**Next required:** run narrowly applicable actual PR-head CI and inspect failures, full exact-source CI, guarded fresh original603 fifth20 20-product HTML/JSON Add Coffee before/after with same URLs/H1 and complete field/conflict objects, original603 immutable replay if available; only mark narrow READY after verified zero scoped blockers. Historical 153 context-qualified +29 missing-literal qualified remain unresolved; real hosted GoTrue remains unverified; restricted frozen603 SKIPPED is never PASS. No production publication, SQL/Auth/Edge/member writes, paid services, or forced git.
+
+---
+
 ## October 30 UTC — Issue33 #59 cultivar-name-as-origin NARROW READY, NOT DEPLOYED
 
 **Authoritative code integration:** [PR325](https://github.com/Schulzet3/The-Dial-In-Collective/pull/325) safely nonforce merged exact tested head `78c106cc519658b637fe86d9463e14d679598a93` at `f9502a9b8e41f9852f8ce975287de5ead0b8c8ed`, preserving all parallel Issue267/96 code, frozen original603 CSV/captures/oracle and Locked Ketch variants. CI defect in original PR-head queue schema was repaired at same PR-head `78c106c` before successful new exact-head CI. All seven executed applicable PR-head workflows SUCCESS (approval 41058726461, Node 41058726624, cloud/mobile 41058727228, SQL 41058726659, security 41058726896, private source 41058726652, visual 41058726634), original frozen corpus 41058726972 SKIPPED, not passed.
