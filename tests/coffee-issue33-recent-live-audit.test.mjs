@@ -14,7 +14,7 @@ const sampleKetch={
    roaster_recipe:{ratio:2,temperature_reference:'200–202°F'}}
  ]};
 test('live-source suite runs exactly named official product URLs with no arbitrary input',()=>{
- assert.equal(CURRENT_READY_CASES.length,5);
+ assert.equal(CURRENT_READY_CASES.length,6);
  assert.ok(CURRENT_READY_CASES.every(x=>x.url.startsWith('https://')&&/\/products\//.test(x.url)));
  assert.equal(new Set(CURRENT_READY_CASES.map(x=>x.id)).size,CURRENT_READY_CASES.length);
 });
@@ -63,4 +63,18 @@ test('two selected roast options are not a source conflict even if fields remain
   conflict_options:{roast_level:[{value:'Light'},{value:'Medium-Dark'}]}};
  const result=assessReadyPreview('ketch-tier2-locked-honduras',fixture,{renderedHtml:rendered});
  assert.ok(result.failed.some(x=>x.label==='ketch:no_purchase_option_conflict'));
+});
+
+// The sixth real-source case must fail closed on seasonal roast contamination.
+test('44 North current decaf exact roast beats generic seasonal catalog copy',()=>{
+ const good={ok:true,fields:{name:'Decaf - Honduras COMSA',origin:'Municipality of La Encarnacion, Honduras',
+  roast_level:'Medium',decaffeination_method:'Water Process',
+  tasting_notes:'Rich body with aroma of lemongrass and notes of warm peach.'},
+  roast_variants:[],conflicts:[]};
+ const accepted=assessReadyPreview('44north-decaf-rotating-program',good,{renderedHtml:rendered});
+ assert.deepEqual(accepted.failed,[]);
+ const conflicted={...good,fields:{...good.fields,roast_level:undefined},conflicts:['roast_level']};
+ const denied=assessReadyPreview('44north-decaf-rotating-program',conflicted,{renderedHtml:rendered});
+ assert.ok(denied.failed.some(x=>x.label==='44north-decaf:no_false_roast_conflict'));
+ assert.ok(denied.failed.some(x=>x.label==='44north-decaf:exact_selected_roast'));
 });

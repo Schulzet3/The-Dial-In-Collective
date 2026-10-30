@@ -1,3 +1,9 @@
+## October 30 UTC — CI ancestry recovery without concurrent work loss (TESTING)
+
+First PR #278 source head `f4d7e8faf3c1e34d79ad6f2b206b4aec0e0f726d` passed queue/approval coverage but the **approval continuity** gate rejected its ancestry: the development source moved from `437031c999b97ff2875d77846f3760380fc5f534` to concurrent Issue33 `69c75ec793b9789728456cc13e040b300ed6afa1` after branch creation. Actual GitHub [run40994648592](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40994648592) FAILED at `git merge-base --is-ancestor`. This is **not** a passed CI and not evidence of a security defect. GitHub compare confirmed no overlap with this Issue96's four changed paths. Recover by a normal non-force two-parent Git integration: retain original audit commit as one parent, current development as the other, use current development tree plus **only the four Issue96 reviewed blobs**, and append this same-commit journal. Then rerun all required exact PR-head checks before merge; no weakening of continuity gate, no production or other owner data changes.
+
+---
+
 ## October 30, 2026 — Issue96 security-drift verification after accepted actual two-account tests (TESTING)
 
 Owner authorized **only #96 current authentication/permission source-drift testing**, not historical #267 or Issue33 and **not** production release. Reused [closed #41](https://github.com/Schulzet3/The-Dial-In-Collective/issues/41) owner-run genuine 33/33 member role, 17/17 cross-owner negative, Admin-read/mutate denial, disabled/restore and never-admitted acceptance (original Admin report 32 PASS/1 invalid expectation remains truthful), and later genuine GoTrue hosted one-off [run40767700050](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/40767700050) PASS. No repeated owner second-account question.

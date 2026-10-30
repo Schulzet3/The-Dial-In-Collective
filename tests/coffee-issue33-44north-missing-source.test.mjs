@@ -18,6 +18,8 @@ test('44 North selected Honduras COMSA Decaf keeps decaffeination separate from 
  const result=extractPublicCoffeeFacts(html,{source_url:'https://44northcoffee.com/products/honduras-decaf'});
  assert.equal(result.ok,true);
  assert.equal(result.fields.decaffeination_method,'Water Process');
+ assert.equal(result.fields.roast_level,'Medium','Current exact Roast level: Medium must not conflict with the rotating catalog-wide medium-dark description');
+ assert.ok(!(result.conflicts||[]).includes('roast_level'),'The seasonal decaf PROGRAM is not a second selected-product roast claim');
  assert.equal(result.fields.process,undefined,'Published water decaffeination must never be used as cherry processing');
  assert.notEqual(result.fields.origin,'Mexico','Do not override explicitly selected Honduras product with generic fall-winter schedule');
 });
@@ -28,4 +30,31 @@ test('44 North generic rotation is informational, not proof of a primary process
   {source_url:'https://44northcoffee.com/products/honduras-decaf'});
  assert.equal(result.fields.process,undefined);
  assert.equal(result.fields.decaffeination_method,undefined);
+});
+
+// These controls ensure the exclusion is source-role-specific, not a blanket
+// bypass of contradictory current roast claims or a roast guessed from catalog
+// marketing when the exact chosen bag has no explicit roast specification.
+test('seasonal catalog roast copy alone cannot select an exact decaf coffee roast',()=>{
+ const html='<main><h1>Decaf - Honduras COMSA</h1>'+
+  '<p>Our decaf offering is a medium-dark roast rotating seasonally between 3 decaf options: Decaf Peru (winter-spring), Decaf Honduras (spring-summer), and Decaf Mexico (fall-winter).</p>'+
+  '</main>';
+ const r=extractPublicCoffeeFacts(html,{source_url:'https://44northcoffee.com/products/honduras-decaf'});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.roast_level,undefined);
+ assert.ok(!(r.conflicts||[]).includes('roast_level'));
+});
+test('two independent direct selected-coffee roast labels remain a genuine conflict',()=>{
+ const html='<main><h1>Decaf - Honduras COMSA</h1>'+
+  '<p>Our decaf offering is a medium-dark roast rotating seasonally between 3 decaf options: Decaf Peru (winter-spring), Decaf Honduras (spring-summer), and Decaf Mexico (fall-winter).</p>'+
+  '<p>Roast level: Medium</p><p>Roast Profile: Dark</p></main>';
+ const r=extractPublicCoffeeFacts(html,{source_url:'https://44northcoffee.com/products/honduras-decaf'});
+ assert.equal(r.fields.roast_level,undefined);
+ assert.ok(r.conflicts?.includes('roast_level'));
+});
+test('literal roast of this one chosen coffee is not suppressed as a seasonal marketing program',()=>{
+ const html='<main><h1>Decaf - Honduras COMSA</h1>'+
+  '<p>This coffee is a medium-dark roast and has a seasonal harvest.</p></main>';
+ const r=extractPublicCoffeeFacts(html,{source_url:'https://44northcoffee.com/products/honduras-decaf'});
+ assert.equal(r.fields.roast_level,'Medium-Dark');
 });
