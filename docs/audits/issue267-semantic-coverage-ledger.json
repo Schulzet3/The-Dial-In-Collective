@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 68120,
-    "still_not_documented_as_semantically_reviewed_lines": 511841,
+    "direct_assistant_semantic_lines": 71120,
+    "still_not_documented_as_semantically_reviewed_lines": 508841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 511841,
+    "remaining_line_count_checked": 508841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -251,6 +251,18 @@
       ],
       "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
       "summary": "B029 historic original oracle-A direct review: Frontside Mexico Veracruz Finca La Laja purchase size and historical family cultivation since 1920 do not prove a roast/release year. Red House Geisha/Gesha El Paraiso Nariño 8oz explicit producer Jose Gomez Lopez, medium roast, 1900m, farm El Paraiso and cupping fruit/hibiscus; source misspells Geisha/Gesha but same named variety; harvest/process missing, Shopify 340g weight differs from advertised 8oz, grind variant inventory differs and identical SKU is purchase detail, not provenance. Red House Kerinci Sumatra explicit Full City roast (approved canonical Medium-Dark mapping belongs to Issue33), wet-hulled Djember S-795, producer unavailable; subscription recharge IDs not coffee brew details. Red House Mexican Oaxaca explicitly Wet-Hulled in a Mexican coffee, unusual geography alone cannot override named process, Typica/Bourbon both published varieties, medium for drip purchase grind does not establish medium roast, no published roast or producer, espresso pregrind variant 1540 source minor units versus 1740 other grinds is purchase price not a coffee conflict. Subterra Colombia medium sugarcane decaf explicitly sugarcane decaffeination method only, lacks primary crop process/elevation/variety/grower, 12oz/1lb/2lb variants' shipping weight often stale (e.g. 2lb Turkish/pod listed 340g), 'finer for darker flavors' isn't another roast label. Subterra Bellavista Chiapas medium roast qualified as med-dark side of medium, Washed from smallholders, espresso/French Press recommendations do not give numeric espresso recipe, 2lb drip shipping 227g anomaly. Subterra previous Guji Hambela Buliye URL now current selected archived Sidama Ayla Bombe Natural Light with Grade1 and fresh crop but no vintage, fine-grind recommendation not a recipe; old slug must not override selected product. Source-only observations; no current live source, rendered imagery, authorized authenticated security, or extractor defect proven."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-013",
+      "risk": "low",
+      "type": "FROZEN_ARCHIVE_SOURCE_PROVENANCE",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        56332,
+        59331
+      ],
+      "classification": "historical_observation_only_not_confirmed_current_runtime_defect",
+      "summary": "B030 direct original oracle-A historical review: Subterra old Guji Hambela Buliye URL explicitly contains SEO legacy lot while current endpoint and text identify Sidama Ayla Bombe Natural Light; do not merge lots. Glory Cloud old Honduras Decaf Reserva Pacavita URL instead currently selects Swiss Water Medium Decaf multi-origin blend (Colombia/Ethiopia/Honduras/Mexico/Indonesia); raw page includes an unrelated pasted Kenya AB section listing Kenyan origin, washed process, 1400-2000m that must not contaminate decaf blend. Vendor seasonally variable flavor examples are not year-specific release, and Swiss Water is decaf method, not primary processing. Glory Cloud Indonesia Java Blawan selected Medium fully washed, 1100-1600m, Java Typica/Catimor from Blawan/Jampit estates; contrasting description of other wet-hulled Indonesian coffees cannot overwrite explicit Washed. Old Africa/Ras Enjori tags and Ethiopia image filename conflict with selected Java identity; feet range approx, meter range specifically given, estate hectares with odd punctuation are not elevation. Glory Cloud obsolete Brazil Fazenda Sao Manuel slug selects Brazil Light [Rosa Morena - Mogiano], explicit Natural and three cultivars, alternate Cerrado Mineiro OR Alta Mogiana not blend, no current farm identified, two inconsistent shorthand altitude values '3-4,000 feet' versus '1-1,300 MASL' must be withheld, not interpreted as 1m; purchase 12oz Shopify shipping 425g and 16oz 539g cannot be coffee net mass. Ready Set Honduras Manos de Mujer COMSA women's producer group Honey 4000 ft converted 1219m, source claims Organic/Fair Trade not independently certified, explicit Medium versus Light Roast endpoint tag conflict withheld, 2000 COMSA founding is not crop year, 5lb endpoint shipping 340g implausible. Ready Set Mexico Chiapas current product at copy-of URL identified at batch end; no inferred lot details beyond inspected source. Buy grind/variant SKUs and subscriptions are commercial metadata, not espresso dose/time/recipe. No source images, dynamic browser, fresh roaster page or current live security/extractor verification."
     }
   ],
   "files": [
@@ -5634,11 +5646,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-012"
           ]
+        },
+        {
+          "first_line": 56332,
+          "last_line": 59331,
+          "line_count": 3000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B030",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-013"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 56332,
+          "first_line": 59332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
