@@ -171,3 +171,58 @@ test('unrelated green processing or related coffee spec never overrides direct d
   '<section class="product-recommendations"><li>Decaffeination Method: Swiss Water Decaf.</li></section>');
  assert.equal(result.fields.decaffeination_method,'Sugar Process');
 });
+
+
+// An actual Shopify/JSON-LD product page identifies the selected item
+// independently of editorial H1 sections. A synthetic page without Product
+// identity is intentionally ambiguous and cannot validate multi-H1 handling.
+const hillTreeExactUrl='https://hilltreeroastery.com/products/colombia-valle-del-cauca-sugarcane-ea-decaf';
+const parseEditorial=(name,body)=>{
+ const html='<html><head><meta property="og:type" content="product">'+
+  '<meta property="og:title" content="'+name+'">'+
+  '<meta property="og:url" content="'+hillTreeExactUrl+'">'+
+  '<script type="application/ld+json">'+JSON.stringify({
+   '@context':'https://schema.org','@type':'Product',name,url:hillTreeExactUrl
+  })+'</script></head><body><main><h1>'+name+'</h1>'+body+'</main></body></html>';
+ return extractPublicCoffeeFacts(html,{source_url:hillTreeExactUrl});
+};
+
+// Current original603 #151's actual selected page uses editorial H1 headings
+// and a BR-separated printed spec. This is not general FAQ decaf education.
+test('Hill Tree current selected sugarcane EA caption retains distinct Washed and Sugar Process',()=>{
+ const name='COLOMBIA VALLE DEL CAUCA SUGARCANE EA DECAF';
+ const body='<h1>Tasting Notes</h1>'+
+  '<p>FLAVOR: Warm Chocolate • Roasted Almond • Cane Sugar • Bright Citrus<br>'+
+  'BODY: Medium & Smooth<br>ACIDITY: Low to Medium<br>'+
+  'PROCESS: Washed • EA Sugarcane Decaffeination</p>'+
+  '<p>Process: Washed.</p>'+
+  '<h1>Origin Notes</h1><p>Colombia Valle del Cauca Sugarcane Decaf is washed processed before decaffeination.</p>'+
+  '<h1>Why You’ll Love This Coffee</h1><p>This is a rich dark roast.</p>'+
+  '<h1>Frequently Asked Questions</h1><p>What is EA decaf?</p>';
+ const result=parseEditorial(name,body);
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+ assert.equal(result.fields.process,'Washed','green-coffee washed processing must remain distinct');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&/Washed • EA Sugarcane Decaffeination/.test(f.value)));
+ assert.match(coffeeUrlPreviewMarkup(result),/Sugar Process/);
+});
+test('a competing product H1 cannot donate a selected decaf caption',()=>{
+ const name='Selected Decaf';
+ const result=parseEditorial(name,'<h1>Other Coffee Guatemala</h1>'+
+  '<p>Process: Sugarcane EA Decaffeination</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+});
+test('selected-product editorial H1 does not turn FAQ examples into published specs',()=>{
+ const name='Selected Decaf';
+ const result=parseEditorial(name,'<h1>Frequently Asked Questions</h1>'+
+  '<p>Process: Sugarcane EA Decaffeination</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+});
+test('opposing exact current printed decaf method captions remain unfilled',()=>{
+ const name='Selected Decaf';
+ const result=parseEditorial(name,'<h1>Tasting Notes</h1>'+
+  '<p>PROCESS: Washed • EA Sugarcane Decaffeination<br>'+
+  'Decaffeination Method: Swiss Water Decaf</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.ok(result.source_facts?.filter(f=>f.field==='decaffeination_method').every(f=>f.conflicting===true));
+});
