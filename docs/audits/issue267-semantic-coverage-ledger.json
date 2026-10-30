@@ -21,11 +21,11 @@
   },
   "coverage_summary": {
     "direct_assistant_semantic_files": 77,
-    "direct_assistant_semantic_lines": 20120,
-    "still_not_documented_as_semantically_reviewed_lines": 559841,
+    "direct_assistant_semantic_lines": 29120,
+    "still_not_documented_as_semantically_reviewed_lines": 550841,
     "original_prior_manual_partial_unquantified": true,
     "original_total_count_reconciled": 579961,
-    "remaining_line_count_checked": 559841,
+    "remaining_line_count_checked": 550841,
     "fully_reviewed_text_files": 76,
     "partially_reviewed_text_files": 1
   },
@@ -155,6 +155,18 @@
       ],
       "classification": "HISTORICAL_SOURCE_CONTRADICTIONS_WITHHELD_NOT_CONFIRMED_CURRENT_RUNTIME_DEFECT",
       "summary": "Source-record-only review: Queen City Brazil Cerrado archive body simultaneously states Medium and Medium-Dark (withheld); Queen City Colombia Decaf 'Varietal: Vertical dryers' is a drying-system labeling error (botanical variety withheld); Onyx Mexico Santa Cruz Gesha generic caffeine 0mg/12oz panel conflicts with exact-product full-caffeine tag (withheld), and filter 18g/280g disagrees with printed 1:15 ratio (retained separately). Unrelated Queen City Peru SEO descriptions are excluded from selected coffees. Never transfer frozen ambiguities into new current product facts or alter the immutable oracle; #33 owns live source adjudication."
+    },
+    {
+      "id": "ISSUE267-ARCHIVE-005",
+      "risk": "informational",
+      "type": "FROZEN_SOURCE_IDENTITY_CONFLICT_AND_RECIPE_PROVENANCE",
+      "path": "docs/audits/extractor-600-oracle-a.json",
+      "range": [
+        8332,
+        17331
+      ],
+      "classification": "HISTORICAL_SOURCE_AMBIGUITY_RETAINED_NOT_CONFIRMED_CURRENT_APP_DEFECT",
+      "summary": "Historical oracle-A examples: Onyx reusable caffeine 0mg panels conflict with exact-product full-caffeine Shopify tags; Onyx pressure-stage durations are not explicit total espresso times and 18g/280g filter masses do not equal printed 1:15; current lot cultivar differs from farm-wide varietal inventory; Single Speed reused /copy-of-espresso-blend URL now names Yirgacheffe and published elevations disagree or omit units; O.Henrys/Sextant size-specific Shopify shipping weights inconsistent with printed bag sizes and contradictory Sextant Light/Medium roast tags withheld; Novo Buesaco headline profile differs from explicit Tasting Notes list, and recipe 19g/350g not exactly 1:18; current source facts retained with provenance, not rewritten. No live current-roaster source validation under Issue267; #33 owns it."
     }
   ],
   "files": [
@@ -5442,11 +5454,23 @@
           "finding_ids": [
             "ISSUE267-ARCHIVE-004"
           ]
+        },
+        {
+          "first_line": 8332,
+          "last_line": 17331,
+          "line_count": 9000,
+          "method": "ai_assisted_direct_line_by_line_semantic_read",
+          "reviewer": "ChatGPT assistant, not an independent human",
+          "date_utc": "2026-10-30",
+          "batch_id": "B022",
+          "finding_ids": [
+            "ISSUE267-ARCHIVE-005"
+          ]
         }
       ],
       "remaining_ranges": [
         {
-          "first_line": 8332,
+          "first_line": 17332,
           "last_line": 77960,
           "status": "UNREVIEWED"
         }
