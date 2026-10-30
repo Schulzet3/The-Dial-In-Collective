@@ -1,3 +1,9 @@
+## October 30 UTC — PR297 first approval queue intake failure diagnosed and repaired (TESTING)
+
+Exact PR-head approval job `41009253573` executed and FAILED queue intake because the new TESTING record was accidentally appended to the queue's historical `history` list rather than active `items` list; JSON schema alone passed but `--enforce-intake` correctly detected untracked `src/server/coffee-direct-product-prose.mjs`. Moved only that identical new record into `items` without changing any published item, archival history, other queue data, source, tests or locked behaviors. **First failure remains FAILED evidence.** Fresh corrected-source exact CI, live current Nativo source, nonforce merge and original603 remaining review still required; do not call READY. No publication or provider data write.
+
+---
+
 ## October 30 UTC — Issue33 new exact-selected named decaf method gap in original603 #531 (TESTING, NO NEW DEPLOY)
 
 Recovered development source `4dbaea0cd2e8d0e54caa1e1e0afbc5642770ce41`, AGENTS, Master Specification/Decision Ledger, approval coverage, original603 adjudication, concurrent Issue267 PRs and queue (71 DEPLOYED, 0 READY, 2 parent IN_PROGRESS). Independently read actual Netlify production READY/current Release13 deploy `6ae421f5de038d292bd66407`, source `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`; **new release already happened under separate owner grant**, do not relabel older PR281 as merely READY. PR281 already merged and PR235 already safely closed, no duplication.
