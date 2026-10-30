@@ -1,3 +1,9 @@
+## October 30 UTC — stale PR235 duplicate safely CLOSED, historical corpus preserved
+
+After exact PR281 nonforce merge `656db8d10a807eb4489780fd1177434b599add49` and current official nine product PASS `41002865806`, independently verified PR235 head `0ea192561d3210d4543494c683caa36370b6dd17` still OPEN. Reviewed its three source/test patches: five selected-current South17/Friedrichs/Koffee Kult repairs already incorporated and tested in current development, with additional new guard. PR235's original frozen603 adjudication CSV/MD blob hashes still **byte-identical** in merged development (CSV `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, MD `d8d19b543631d0a007b8e064c0d73d6f40a63032`). Left a durable PR235 evidence comment `6515005989`, then safely **CLOSED without merge**; GitHub readback confirmed state CLOSED, merged=false, original head unchanged. This removes duplicate stale integration risk; **not Issue33 closure** and no claim of full semantic 603 pass. Issue33 records verified READY progress via comment `6515003802`. No publication, production data/provider access, deletion or cost.
+
+---
+
 ## October 30 UTC — PR281 exact-source merge and nine genuine official-product checks PASS; narrow READY, not deployed
 
 **Authorization:** owner instructed autonomous Issue33 development, independent source testing and safe integration; **no publication or hosted DB/Auth/member writes**. PR281 exact corrected head `df81fc64d9753bfcc96f9e864af96cea2817e1b8` passed all eight applicable real GitHub Actions suites after runner recovery and the real catalog-H1 cross-product Dark roast bug was fixed. Source runs: approval `41002611489`, security `41002611487`, Python `41002611515`, private source archive `41002611486`, isolated SQL `41002611464`, Chromium visual `41002611477`, cloud/mobile `41002611466`, Node/lint/build `41002611848`. Frozen603 restricted workflow `41002611461` was SKIPPED (not PASS).
