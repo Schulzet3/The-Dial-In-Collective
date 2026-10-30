@@ -2809,6 +2809,35 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Preserve October27 Locked Ketch one shared green coffee, exact purchased Light/Medium-Dark variants, taste/sensory/espresso separation, no automatic roast preselection, no SEO variant contamination, manual edits, historical shots/offline/Community data. No Netlify deployment or production database writes. Test harness logs only public source facts, no secrets."
+    },
+    {
+      "id": "DIC-Q-37-in-app-walkthrough",
+      "issue": 37,
+      "pr": 268,
+      "title": "Accessible in-app first-shot video and beginner guide",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "build_cloud.mjs",
+        "site/cloud/help.js",
+        "site/cloud/main.js",
+        "site/media/first-shot-poster.svg",
+        "site/media/first-shot-transcript.txt",
+        "site/media/first-shot-walkthrough.mp4",
+        "site/media/first-shot.en.vtt",
+        "site/visual.css"
+      ],
+      "tests": [
+        "Exact approved 2,320,714-byte 135.56s MP4 transferred from private staging to GitHub blob 81e8c145336f1837bbc8580bf91e2980e019e8b6; original SHA-256 e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa.",
+        "Build SHA gate, caption timing, source file integrity, 390px synthetic Chromium Settings/video/guide and accessibility checks are staged."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact latest PR-head app, approval and browser CI not yet verified; nonforce merge and merged-source CI pending.",
+        "Authenticated real-member use and physical mobile/screen reader still unverified; source-level accessibility tests do not establish these."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/37",
+      "notes": "Explicit owner authorization in Oct 29, 2026 chat to integrate corrected video and written guide for next separate release. No deployment permission. MP4 excluded from pre-cache to preserve streaming; video/guide are public static assets within SSO-protected app, no member data."
     }
   ],
   "history": [
