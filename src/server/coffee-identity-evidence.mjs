@@ -543,7 +543,13 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   for(const compact of compactCandidates){
   if(compact.length<=160&&current(compact)){
    const countryFirst=compact.match(new RegExp('^('+COUNTRIES+')\\s+[-–—]\\s+([\\p{L}\\p{M} .,’’\'()-]{2,120})$','iu'));
-   if(countryFirst&&!( /^h[1-6]$/.test(block.tag)&&key(compact)===key(name))&&
+   // A country-first product title or repeated breadcrumb can carry a coffee
+   // VARIETY rather than a geographic region: "Nicaragua - Pumpkin Spice-
+   // Pacamara" never means a village called "Pumpkin Spice- Pacamara".
+   // Country remains explicit; only a separately published, unambiguous
+   // selected regional label may support a cultivar-homonymous location.
+   const countryFirstHasCultivar=Boolean(countryFirst?.[2].match(VARIETY_RE)?.length);
+   if(countryFirst&&!countryFirstHasCultivar&&!( /^h[1-6]$/.test(block.tag)&&key(compact)===key(name))&&
       !/\b(?:coffee|roast|process|blend|washed|natural|honey|anaerobic|decaf|finca|hacienda|farm|estate)\b/i.test(countryFirst[2]))originCandidates.push({value:countryFirst[2]+', '+countryFirst[1],quote:compact});
    // A complete three-part current-product place tuple may precede the
    // processing/cultivar/altitude specs on one compact product line.
