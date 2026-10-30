@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "issue": 96,
+  "recorded_at_utc": "2026-10-30",
+  "scope": "Production published Oct29 source auth/role/privacy drift vs accepted Oct20-21 genuine two-account coverage. Authenticated delta tests use isolated CI only.",
+  "actual_production": {
+    "sha": "2f7ef0eb0eb22ece986ba3e6bcaa3735a312578f",
+    "netlify_deploy": "6ae3addff345331a70ad8d9d",
+    "netlify_ready_and_exact_source_confirmed": true,
+    "edge_functions_jwt_required": [
+      "dic-verify-coffee",
+      "dic-preview-coffee"
+    ]
+  },
+  "baseline_genuine_acceptance": {
+    "sha": "e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60",
+    "issue": 41,
+    "state": "CLOSED",
+    "ordinary_member_owner_run": "33 PASS, 0 FAIL",
+    "cross_owner_table_negative": "17 of 17 no foreign rows",
+    "administrator_original": "32 PASS, 1 incorrect pre-correction expectation",
+    "real_admin_denial_and_disabled_never_admitted": "PASS",
+    "source": "docs/AUTHENTICATED_READ_ONLY_ACCEPTANCE_2026-10-20.md"
+  },
+  "later_genuine_gotrue": {
+    "date": "2026-10-28",
+    "actions_run": 40767700050,
+    "conclusion": "SUCCESS",
+    "scope": "Disposable real hosted GoTrue password sign-in, refresh, logout, beta invitation, hosted Chromium Setup/Add Coffee save/relogin and committed SQL readback",
+    "email_verification_click": "NOT VERIFIED, test bypassed",
+    "password_reset_delivery": "NOT VERIFIED"
+  },
+  "immutable_tree_comparison": {
+    "older_blob_files": 267,
+    "published_blob_files": 884,
+    "changed_or_added_or_removed_paths": 721,
+    "app_runtime_files_changed": 58,
+    "migration_paths_changed": 21,
+    "note": "Entire Git-tree diff counted, not 721 security defects. Includes historical archives, tests, documentation and extractor modules."
+  },
+  "hosted_read_only_provider": {
+    "project_status": "ACTIVE_HEALTHY",
+    "app_tables": 46,
+    "app_tables_without_rls": 0,
+    "public_dic_rpc_count": 41,
+    "anon_executable_public_dic_rpc_count": 0,
+    "missing_identity_authenticated_admin_read_rpc_test_count": 7,
+    "missing_identity_result": "ALL DENIED SQLSTATE 42501 in READ ONLY transaction, ROLLBACK, no actual GoTrue account",
+    "private_schema_anonymous_usage": false,
+    "private_admin_delete_privilege_caveat": "Two private delete functions still inherit PUBLIC/anon EXECUTE on function but anon has no USAGE on private schema and both private functions enforce require_member and is_admin; not an independently demonstrated data exposure. Consider least privilege cleanup only with tested scoped migration and separate release approval."
+  },
+  "recent_exact_published_source_ci": {
+    "release_id": "DIC-20261029-READY-QUEUE-12",
+    "tested_source_sha": "eb1249d68c0ff424346752a5e4876c10ae11823f",
+    "node_pass": 2016,
+    "node_fail": 0,
+    "node_skip": 6,
+    "sql_workflow_run_id": 40947676348,
+    "visual_workflow_run_id": 40947676399,
+    "owner_approval_workflow_run_id": 40947676048,
+    "all_five_required": true
+  },
+  "new_source_test": {
+    "path": "tests/qa/signed-http-acceptance.mjs",
+    "status": "PASS_VERIFIED_ISOLATED_SIGNED_POSTGREST_NOT_GOTRUE",
+    "new_admin_rpc_member_denial_count": 9,
+    "additional_forged_disabled_anonymous_denials": 3,
+    "admin_positive_read_listings": 2,
+    "private_record_snapshot_unchanged_assertion": true,
+    "transport": "Isolated PostgreSQL 17.11 and PostgREST 12.2, real HMAC-signed role JWTs but NOT production GoTrue sessions",
+    "evidence": {
+      "verified_at_utc": "2026-10-30",
+      "test_commit": "7ef6e257134522b183bbf89e2ee6423893d0dff8",
+      "merged_development_commit": "792cec84f89ddee1a5ca6dca4cafe40c9d661009",
+      "exact_git_tree": "515ca27ed838e6651909f46753b7bb867de7aea2",
+      "pr_number": 278,
+      "pr_merged_nonforce": true,
+      "pr_head_required_ci_success": {
+        "approval": 40994970113,
+        "sql": 40994970331,
+        "visual": 40994970199,
+        "cloud_mobile": 40994970149,
+        "node_build": 40994970252
+      },
+      "merged_sha_ci_success": {
+        "approval": 40995246680,
+        "sql": 40995246697,
+        "cloud_mobile": 40995246682,
+        "node_build": 40995246813
+      },
+      "original_frozen603_job": {
+        "run": 40994970099,
+        "status": "SKIPPED - unrelated restricted benchmark, not PASS"
+      },
+      "node_pass": 2071,
+      "node_fail": 0,
+      "node_skip": 6,
+      "isolated_hmac_signed_postgrest_assertions_pass": 79,
+      "signed_test_added_assertions": 14,
+      "real_gotrue_current_release_admin_editor": "NOT VERIFIED",
+      "real_owner_post_release_admin_pending_tap": "NOT VERIFIED",
+      "data_or_provider_mutations": 0
+    }
+  },
+  "limitations": [
+    "The formerly accepted real role/owner checks cover their tested 2026-10-20-21 source and states, not every new Admin editor introduced later.",
+    "No current published-release signed-in actual Administrator editing/delete/compare was performed; remains Issue #47.",
+    "No physical iPhone owner retap after 2026-10-29 grant fix was independently seen.",
+    "No production account/session tokens/private member records were read or changed.",
+    "Provider admin settings and password email/reset flows remain separately outstanding.",
+    "The original client-side Admin/member tests and later disposable hosted GoTrue run are preserved as separate genuine historical evidence; no new production real-account session was run during this isolated authorization-delta audit."
+  ],
+  "safety": {
+    "production_mutations": 0,
+    "auth_account_mutations": 0,
+    "sql_migrations_applied_to_production": 0,
+    "netlify_deployments": 0,
+    "credit_checks": 0,
+    "member_record_reads": 0,
+    "member_record_changes": 0
+  },
+  "scope_completion": "FINISHED_BOUNDED_SECURITY_DRIFT_AUDIT; #96 REMAINS OPEN FOR NEWER GENUINE ADMIN/MEMBER ENDPOINT ACCEPTANCE AND PROVIDER CONTROLS"
+}

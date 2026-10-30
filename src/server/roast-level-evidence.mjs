@@ -184,6 +184,13 @@ function explicitProseRoasts(html){
    // general roasting style. Accept only its complete, current assertion.
    const current=sentence.match(new RegExp('^(?:While|Although)\\b[^.!?;]{1,650}\\broast\\b[^.!?;]{0,300},\\s*this (?:coffee|blend|lot) is\\s+(?:(?:a|an)\\s+)?('+ROAST_WORDS+')\\s*(?:roast)?[.!]?$','i'));
    if(current){found.push(normalizeRoastLabel(current[1]));continue;}
+   // A rotating seasonal CATALOG/program comparison describes multiple
+   // different coffees, not the chosen bag's actual roast. A separately
+   // printed selected-coffee Roast Level is authoritative; never manufacture
+   // a second roast from a catalog-wide seasonal marketing sentence.
+   // A direct "this coffee is ... roast" statement and two conflicting
+   // current product specifications still follow normal conflict review.
+   if(/\b(?:our|the)\s+(?:seasonal\s+)?(?:decaf|coffee)\s+(?:offering|program|selection|range)\b[^.!?]{0,180}\broast\b[^.!?]{0,75}\brotat(?:e|es|ed|ing)\s+seasonal(?:ly)?\s+between\s+(?:\d{1,2}|several)\s+(?:[\p{L}-]+\s+){0,3}(?:options?|origins?|coffees?|offerings?)\b/iu.test(sentence))continue;
    const context=sentence.replace(/\bnot only\b/gi,'')
     .replace(/^not for (?:the )?faint[ -]?hearted(?: coffee drinker)?\s*,\s*/i,'')
     .replace(/\bwithout chaos\b/gi,'');
@@ -449,6 +456,10 @@ export function extractRoastVisualEvidence(html){
   return {value:ev.value,confidence:ev.confidence,source:ev.source,hint:scaleNote};
  }
  if(unique.length>1)return {value:null,confidence:'conflict',source:null,
+  // Preserve precisely which supported roast labels were actually observed.
+  // The product merger may compare them against an explicit purchase-roast
+  // selector, never assuming that two valid options mean two coffees.
+  conflicting_roast_values:unique.slice(0,7),
   hint:'Conflicting roast labels were found. Check the roaster’s page before choosing a roast level.'};
  // Exact selected White Coffee title is evidence of a named nonstandard
  // category, not evidence of Light, Very Light or Ultra Light. Do not use

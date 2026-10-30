@@ -539,9 +539,19 @@ export function mergePublicProductPreview(base,extra){
    const options=base.conflict_options?.[key]||[];
    const onlyOptions=!base.conflicts?.includes(key)||
     (options.length>0&&options.every(o=>variantValues(key).includes(norm(o.value))));
-   if(!extra.conflicts?.includes(key)&&onlyOptions){
+   // An unchosen selected-product roast is not two contradictory coffees.
+   // The public endpoint can report competing generic Shopify roast tags,
+   // even though the SAME current product offers both roast purchases.
+   // Suppress that known tag-only ambiguity ONLY if every conflicting HTML
+   // roast is explained by a real selected purchase option. Genuine direct
+   // current product-spec conflicts stay in member review.
+   const tagOnlyPurchaseConflict=key==='roast_level'&&
+    extra.roast_tag_ambiguity_only===true&&
+    !extra.current_product_spec_fields?.includes(key);
+   if((!extra.conflicts?.includes(key)||tagOnlyPurchaseConflict)&&onlyOptions){
     delete merged.fields[key];conflicts.delete(key);
     if(merged.conflict_options)delete merged.conflict_options[key];
+    if(key==='roast_level'){delete merged.roast_hint;delete merged.roast_source;}
    }
   }
   merged.available=Object.keys(merged.fields);

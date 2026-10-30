@@ -203,6 +203,22 @@
         "Only new migration supabase/migrations/20261029193000_dic_admin_review_candidates_grant.sql: REVOKE PUBLIC/anon and GRANT EXECUTE authenticated on private.dic_admin_review_candidates(uuid), with existing admin+membership guard unchanged; SQLSTATE42501 real signed-in Admin failure originally observed; isolated SQL 40947676348 SUCCESS; provider application and readback pending."
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261030-READY-QUEUE-13",
+      "tested_source_sha": "ac0672a45efdc52a96932027161547b31b2a0ab9",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-10-30T04:46:57.402Z",
+      "expires_at_utc": "2026-10-31T04:46:57.402Z",
+      "approval_source": "Owner October 29, 2026 at 22:36 MDT in this chat: 'publish all items in the queue please.'",
+      "scope": "Exactly ONE owner-approved publication of eight source-verified READY queue entries: DIC-Q-33-selected-decaf-method-prose, DIC-Q-33-selected-lot-region-corroboration, DIC-Q-33-ketch-variant-notes-of-parser, DIC-Q-33-ketch-live-roast-variant-false-conflict, DIC-Q-37-in-app-walkthrough, DIC-Q-33-rotating-decaf-roast-context, DIC-Q-96-admin-stale-http-conflict, DIC-Q-33-single-roast-selector-uniqueness. New included database operation only: non-destructive SQL migration 20261030035900_dic_admin_edit_stale_http_conflict.sql to correct Admin stale edits (PT409), preserve prior role checks, grants, member data and history. Exclude IN_PROGRESS original603 source research and Issue267 historical audit, unready proposals, destructive member changes, unrelated Auth/Edge or database changes, purchases/upgrades and future releases.",
+      "sql_evidence": [
+        "Exact reviewed SQL blob eba2ff06190e5d03034d8f14e7c03b57bd2edf5a; PR287 isolated signed PostgREST 89/89 PASS; combined Release13 PR291 exact SQL check 123895964636 SUCCESS; production migration NOT APPLIED at grant creation."
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."

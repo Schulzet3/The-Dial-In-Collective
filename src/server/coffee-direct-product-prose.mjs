@@ -2,9 +2,16 @@
 // Exact official 77-page selected-source replay gate: never equate a parsed HTML page with a certified owner field.
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {normalizeRoastLabel} from './roast-level-evidence.mjs';
+import {inferDecaffeinationMethod,decafOnlyCoffee} from './coffee-decaffeination-method.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\d]+/gu,' ').trim();
+// A current decaf's actual product description sometimes states its method in
+// a prose sentence rather than a labeled spec (Leap Coffee's Swiss Water page).
+// Accept direct, selected-product usage or a narrow current decaf process
+// description; never scan site-wide education, menus, other products or SEO.
+const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
+const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
@@ -14,12 +21,18 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  // identifies that same exact coffee; a missing or different H1 still
  // blocks every direct product credit and prevents cross-coffee leakage.
  const selected=fold(name);
+ // A generic catalog/shop H1 can become the provisional parsed name. That
+ // is not a selected purchasable coffee, even when a nearby tile has a
+ // one-option roast selector. Fail closed rather than attribute the tile's
+ // roast to a nonexistent selected product.
+ if(/^(?:(?:our|the)\s+)?(?:catalog(?:ue)?|collections?|all\s+(?:coffees?|products?)|shop\s+(?:all|coffees?)|coffees?|products?|store|home)$/u.test(selected))return {};
  if(!headings.length||headings.some(heading=>heading!==selected))return {};
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
   !/\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(x.section));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
- const releases=new Set();
+ const releases=new Set(),decafEvidence=new Set();
+ let decafEvidenceOverflow=false;
  const selectedTitleTier=String(name).match(/\s+[—–-]\s+(Ultra Light|Very Light|Light|Medium[- ]Light|Medium|Medium[- ]Dark|Dark)$/iu);
  if(selectedTitleTier)roasts.add(normalizeRoastLabel(selectedTitleTier[1]));
  // A single current Product 'Coffee roast' option is a product-specific fixed tier,
@@ -30,6 +43,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(typeof optionHtml==='string'&&optionHtml.length<=2_000_000){
   const tree=coffeeHtmlElements(optionHtml);
   const candidates=[];
+  let eligibleRoastControls=0;
   if(!tree.truncated)for(const node of tree.nodes){
    if(node.tag!=='select')continue;
    const attrs=coffeeHtmlAttributes(node.attributes);
@@ -45,6 +59,10 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
     parent=ancestor.parent;
    }
    if(unselected||node.contentEnd-node.headEnd>3500)continue;
+   // A second eligible roast menu may contain an unsupported purchase option.
+   // Never treat the sole recognized tier as the selected product's only
+   // available roast when another menu's value cannot be classified.
+   eligibleRoastControls++;
    const content=optionHtml.slice(node.headEnd,node.contentEnd);
    const options=[...content.matchAll(/<option\b([^>]{0,500})>([\s\S]{0,180}?)<\/option>/giu)];
    if(options.length!==1||!/\bselected(?:\s*=|\s|$)/i.test(options[0][1]))continue;
@@ -55,11 +73,20 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    if(/[\/&+]/.test(value)||/\b(?:white coffee|lighter|darker|custom|medium to dark)\b/i.test(value))continue;
    const tier=normalizeRoastLabel(value);if(tier)candidates.push(tier);
   }
-  if(candidates.length===1)roasts.add(candidates[0]);
+  if(eligibleRoastControls===1&&candidates.length===1)roasts.add(candidates[0]);
  }
  let anotherExplicitList=false;
  for(const b of body){
   const line=b.text.replace(/\s+/g,' ').trim();
+  // A decaf identity plus a current selected-product sentence is required.
+  // Reuse the conservative method classifier; if multiple incompatible
+  // methods are printed, the caller withholds autofill and keeps both sources.
+  if(decafOnlyCoffee(name)&&line.length<=360&&CURRENT_DECAF_METHOD.test(line)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
+   if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
   // Literal current selected-product release declaration, not a site-wide
   // 'Limited Releases' collection or a historical release quoted in prose.
   if(b.tag==='p'&&/^limited release\s*[|·]\s*(?:whole bean only|single origin)\.?$/iu.test(line))
@@ -106,5 +133,6 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(releases.size===1)out.release_label=[...releases][0];
  if(sensory.size===1)out.tasting_notes=[...sensory][0];
  if(literals.size===1&&!anotherExplicitList)out.explicit_tastes_like=[...literals][0];
+ if(decafEvidence.size&&!decafEvidenceOverflow)out.decaffeination_method_evidence=[...decafEvidence];
  return out;
 }

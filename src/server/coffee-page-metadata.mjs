@@ -1485,6 +1485,13 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
 
  if(roast_evidence.confidence==='conflict'){
   delete fields.roast_level;conflicts.add('roast_level');
+  // Generic roast visual/prose extraction used to report an unqualified
+  // conflict with no candidate values. Keep its actual bounded alternatives
+  // for source review. If they exactly match two selected *purchase* roasts,
+  // the Shopify merger may safely clear that false same-coffee conflict.
+  for(const value of roast_evidence.conflicting_roast_values||[])
+   rememberCoffeeReviewCandidate(fields,'roast_level',value,
+    'Current selected-product roast evidence');
  }
  if(roast_evidence.value){
   if(fields.roast_level&&fields.roast_level!==roast_evidence.value){
@@ -1793,11 +1800,23 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const seo_fallback_fields=[...(seoFallbackByFields.get(fields)||[])].filter(key=>
   typeof fields[key]==='string'&&fields[key]&&!conflicts.has(key)).sort();
  // Decaf-only selected-product evidence, separate from green-coffee Process.
+ const selectedDecafStatements=Array.isArray(directSelected.decaffeination_method_evidence)?
+  directSelected.decaffeination_method_evidence:[];
  const decaffeination_method=inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
+  selectedMethod:selectedDecafStatements.join('\n'),
   conflicting:detailConflicts.has('processing_detail')
  });
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
+ // Preserve the literal selected-product method sentence for member review.
+ // Contradictory stated methods remain blank, not a guessed winner.
+ for(const sentence of selectedDecafStatements){
+  if(source_facts.length>=384)break;
+  source_facts.push({field:'decaffeination_method',
+   label:'Current selected coffee decaffeination statement',value:sentence,
+   source_url,source_type:'html',section:'Selected product description',
+   ...(decaffeination_method?{}:{conflicting:true})});
+ }
  // Standalone selected Limited Release is a fallback only. Named current
  // releases (e.g. Holy Grail No. 2) established later in the product
  // evidence hierarchy must never be erased by a generic limited banner.

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "issue": 37,
+  "scope": "Exact approved video local media QA only; no authenticated hosted app or CDN range test",
+  "video": {
+    "sha256": "e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa",
+    "github_blob_sha": "81e8c145336f1837bbc8580bf91e2980e019e8b6",
+    "bytes": 2320714,
+    "codec": "H.264",
+    "resolution": [
+      1600,
+      900
+    ],
+    "duration_s": 135.56,
+    "ffmpeg_full_decode": "PASS"
+  },
+  "chromium": {
+    "mode": "data URL in local headless Chromium, not Netlify",
+    "views": [
+      {
+        "width": 390,
+        "height": 844,
+        "rendered": [
+          308,
+          173
+        ],
+        "seek_70": true,
+        "play_progression": true,
+        "captions": 20,
+        "errors": []
+      },
+      {
+        "width": 1280,
+        "height": 800,
+        "rendered": [
+          598,
+          336
+        ],
+        "seek_70": true,
+        "play_progression": true,
+        "captions": 20,
+        "errors": []
+      }
+    ]
+  },
+  "not_verified": [
+    "Live CDN HTTP Range",
+    "Real authenticated app user",
+    "Physical iPhone/Safari",
+    "Named screen-reader assessment",
+    "Published Netlify media URL"
+  ]
+}

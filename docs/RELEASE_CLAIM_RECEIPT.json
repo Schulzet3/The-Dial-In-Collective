@@ -1,44 +1,91 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261029-READY-QUEUE-12",
-  "tested_source_sha": "eb1249d68c0ff424346752a5e4876c10ae11823f",
-  "previous_release_head_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
-  "claimed_at_utc": "2026-10-29T20:34:35.967Z",
+  "release_id": "DIC-20261030-READY-QUEUE-13",
+  "tested_source_sha": "ac0672a45efdc52a96932027161547b31b2a0ab9",
+  "previous_release_head_sha": "2f7ef0eb0eb22ece986ba3e6bcaa3735a312578f",
+  "claimed_at_utc": "2026-10-30T04:49:52.877Z",
   "status": "GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-33-original603-direct-region-country-prose",
+      "id": "DIC-Q-33-selected-decaf-method-prose",
       "issue": 33,
-      "title": "Recover selected current-coffee published region-country Origin from direct prose",
-      "merged_source_sha": "a8c12fdb0f3182d2173554c7bd3b988149feec64",
+      "title": "Recover selected current decaf method from source prose without regular-coffee contamination",
+      "merged_source_sha": "99dfbc7a2615e4169c30afb8e37bf96bd24120a9",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-decaffeination-method.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-selected-lot-region-corroboration",
+      "issue": 33,
+      "title": "Recover same selected-coffee named region and lot locality from separate explicit source statements",
+      "merged_source_sha": "c38244e5f9eb87e35b15c5001176d574b78361ec",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-44north-literal-origin-and-flavor-display",
+      "id": "DIC-Q-33-ketch-variant-notes-of-parser",
       "issue": 33,
-      "title": "Clean location prose and tasting-note lead-in for current source coffee",
-      "merged_source_sha": "3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3",
+      "title": "Correct direct current per-roast tasting-note parsing when a roaster says notes of flavors",
+      "merged_source_sha": "7d63919c36916ce7db36b4e7983b32f1d111547e",
       "scope_paths": [
+        "src/server/coffee-roast-variants.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-ketch-live-roast-variant-false-conflict",
+      "issue": 33,
+      "title": "Fix false roast-level conflict for current selected purchase-roast alternatives detected by live Ketch pages",
+      "merged_source_sha": "d85dde9b0249ba7e05cae2eab2c3ffb800aeeffa",
+      "scope_paths": [
+        "src/server/coffee-shopify-ajax.mjs",
+        "src/server/roast-level-evidence.mjs",
         "src/server/coffee-page-metadata.mjs"
       ]
     },
     {
-      "id": "DIC-Q-47-admin-candidate-nested-grant",
-      "issue": 47,
-      "title": "Restore protected Admin review candidate access",
-      "merged_source_sha": "8f4bbf530c12f31ab5478217c4459368bbcc4aec",
+      "id": "DIC-Q-37-in-app-walkthrough",
+      "issue": 37,
+      "title": "Accessible in-app first-shot video and beginner guide",
+      "merged_source_sha": "00fbb23a4dabea4d2e85309e1dd3405ff981f9d7",
       "scope_paths": [
-        "supabase/migrations/20261029193000_dic_admin_review_candidates_grant.sql"
+        "build_cloud.mjs",
+        "site/cloud/help.js",
+        "site/cloud/main.js",
+        "site/media/first-shot-poster.svg",
+        "site/media/first-shot-transcript.txt",
+        "site/media/first-shot-walkthrough.mp4",
+        "site/media/first-shot.en.vtt",
+        "site/visual.css"
       ]
     },
     {
-      "id": "DIC-Q-33-repeated-selected-product-heading-identity",
+      "id": "DIC-Q-33-rotating-decaf-roast-context",
       "issue": 33,
-      "title": "Honor repeated identical current-coffee headings without weakening product identity",
-      "merged_source_sha": "a0cc9fa9b357db681230eb3d394dce3b86b1f031",
+      "title": "Recover exact selected decaf roast without catalog-wide seasonal program conflict",
+      "merged_source_sha": "69c75ec793b9789728456cc13e040b300ed6afa1",
+      "scope_paths": [
+        "src/server/roast-level-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-96-admin-stale-http-conflict",
+      "issue": 96,
+      "title": "Non-retryable HTTP 409 for stale Administrator coffee and shot edits",
+      "merged_source_sha": "b627fba36fcaae5f56ac5b20042bf228a462f52d",
+      "scope_paths": [
+        "supabase/migrations/20261030035900_dic_admin_edit_stale_http_conflict.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-single-roast-selector-uniqueness",
+      "issue": 33,
+      "title": "Withhold false single roast tier when multiple exact-product roast selectors exist",
+      "merged_source_sha": "656db8d10a807eb4489780fd1177434b599add49",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ]
