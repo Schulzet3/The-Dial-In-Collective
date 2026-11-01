@@ -1,3 +1,7 @@
+## November 1, 2026 — Issue #33 original603 #31 selected regional blend FIXED, VERIFIED narrow READY (not deployed)
+
+PR339 nonforce squash merged `f2b086cd76c2961f00842c3e0bfa03664528757c` with identical tested source tree. Current exact official four-case run 41350857995 fetched/parsed 4/4: only Boston Common Brazil Oberon #31 origin **Brazil → Cerrado, Brazil**, supported by direct selected “100 percent Cerrado blend ... this region” prose; other three product fields/conflicts unchanged. Seven applicable PR-head checks SUCCESS; exact merged Node41350857972 **2161 PASS/0 FAIL/6 SKIP** + lint/build, cloud/mobile41350857902 **1689 cloud PASS/0 FAIL**, approval41350857950 SUCCESS. Original frozen603 SKIPPED not PASS. New queue row READY, not deployed. 153 context-qualified/29 missing-literal-qualified and original603 oracle/captures/CSV unchanged; Issue33 remains OPEN. [Source audit](audits/issue33-selected-region-blend-current4-before-after-20261101.json).
+
 ## November 1, 2026 — Issue #33 selected 100-percent regional-blend prose candidate TESTING
 
 Official current selected Boston Common Brazil Oberon text directly prints Cerrado; earlier live parser returned Brazil only. Source/test/journal/TESTING queue candidate is staged; exact-source CI and fresh official after-read pending. Other READY items and frozen603/153/29 caveats preserved; no deployment.

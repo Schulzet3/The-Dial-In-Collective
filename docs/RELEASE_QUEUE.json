@@ -11,7 +11,7 @@
       "id": "DIC-Q-33-selected-regional-blend-prose",
       "issue": 33,
       "title": "Exact selected 100-percent regional blend sentence recovers directly printed growing region",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ],
@@ -19,14 +19,15 @@
         "Original603 #31 official selected Boston Common Brazil Oberon prints 'Brazil Oberon is a 100 percent Cerrado blend ... this region'; official before-run 41346030000 parsed origin Brazil only; h3 and selected metadata/body match, no h1.",
         "Five source-bounded positive/negative regression groups; exact-source CI and fresh official after-read pending.",
         "PR339 first approval run 41350201155 genuinely FAILED schema: missing merged_source_sha and ci_runs; corrected on this branch, not relabeled PASS.",
-        "Exact head f4831f5 Node 41350282460 and cloud 41350282471 each FAILED same new positive regression; code relevance gate repaired and new CI required."
+        "Exact head f4831f5 Node 41350282460 and cloud 41350282471 each FAILED same new positive regression; code relevance gate repaired and new CI required.",
+        "Exact corrected PR head 22eb3276 seven applicable workflows SUCCESS: Node41350623295, cloud/mobile41350623480, SQL41350623239, visual41350623336, approval41350623349, security41350623273, private source41350623258. Frozen original603 41350623275 SKIPPED not PASS.",
+        "Nonforce squash merge PR339 f2b086cd; exact identical Git tree to passing PR head. Exact merged-source Node41350857972 2161 PASS/0 FAIL/6 SKIP + lint/build SUCCESS; cloud/mobile41350857902 1689 cloud PASS/0 FAIL; approval41350857950 SUCCESS.",
+        "Fresh official four-case source run 41350857995 SUCCESS: 4 fetched/parsed; only #31 origin Brazil -> Cerrado, Brazil; #16/#25/#490 all canonical fields/conflicts unchanged, 0 conflicts; selected #31 h3 and product metadata/body verified, no h1. Raw source hashes and full field maps in docs/audits/issue33-selected-region-blend-current4-before-after-20261101.json."
       ],
-      "blockers": [
-        "Exact PR-head CI, nonforce merge and merged-source live #31 verification pending."
-      ],
-      "notes": "Preserve frozen603/oracle/captures and 153 context/29 missing-literal caveats; no deployment.",
+      "blockers": [],
+      "notes": "NARROW READY, NOT DEPLOYED. Only exact current selected #31 directly published regional blend evidence improved; no all603 semantic certification, real hosted GoTrue, or production action. 153 context-qualified/29 missing-literal-qualified unchanged.",
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "merged_source_sha": null,
+      "merged_source_sha": "f2b086cd76c2961f00842c3e0bfa03664528757c",
       "ci_runs": [
         41350282460,
         41350282471,
@@ -34,7 +35,18 @@
         41350282540,
         41350282474,
         41350282536,
-        41350282521
+        41350282521,
+        41350623295,
+        41350623480,
+        41350623239,
+        41350623336,
+        41350623349,
+        41350623273,
+        41350623258,
+        41350857972,
+        41350857902,
+        41350857950,
+        41350857995
       ],
       "pr": 339
     },
