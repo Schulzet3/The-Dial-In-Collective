@@ -1,3 +1,15 @@
+## November 1, 2026 — nine-source permanent original Markdown preservation (new verified follow-up)
+
+**Owner authorization:** continue resolving safe permanent source-storage gaps. Existing research archive `Espresso_Research_Reports.zip` has SHA-256 `8ebd0cdfed6d7cc71dcb355f7987f6bf56dd56dd2dd19d9cfa76b18a7c998584`. Nine Markdown originals, total **552,702 bytes**, privacy-pattern screened for obvious personal contact details, secrets and account identifiers, with zero obvious hits; source-faithful copy does not prove full privacy or scientific citation review.
+
+**Source-bound write and verification:** All nine original bytes were transferred through temporary owner Library staging and written to private GitHub blobs. Every resulting Git blob SHA exactly matched the hash computed from the original ZIP bytes, and all nine paths were retrieved at source commit `23feea01906f1d1cc1de04b42701dd83cee2bdce`. The active `docs/research/originals/README.md` indexes nine individual Markdown files; `docs/ai/SOURCE_REGISTER.json` records GitHub paths/verified blobs and original SHA-256s. The archive remains unmodified. Raw JSON conversation exports, slow-feed PDF, Implementation Pack and S019 PDF were intentionally **not** copied.
+
+**Unresolved research limits:** The reports contain original machine-generated citation markers whose underlying publisher links are not all independently checked. No recommendation engine thresholds, evidence authority, Locked decisions, application code, tests, CI, source oracle, member data, backup logic, release queue or production operations were changed. Old intake/knowledge documentation reporting attachment-only copies is a preserved historical checkpoint, superseded only as to nine Markdown source availability.
+
+**Integration checklist:** Verify exact branch readback/JSON/source hashes and relevant PR-head CI; non-force merge documentation branch; verify development ref and source file blobs. Record actual merge receipt. Remove only temporary files created for this transfer once GitHub storage is verified; retain the original Project archive.
+
+---
+
 ## Verified integration receipt — November 1, 2026
 
 [PR #344](https://github.com/Schulzet3/The-Dial-In-Collective/pull/344) non-force **squash merged** exact documentation changes into `development/backend-foundation` at `8d3ca8e8d2538bc765e84d4f0b67ef9c22c31961`; eight changed paths only (five `docs/ai` files, `AGENTS.md`, `docs/README.md`, and this scoped journal). The post-merge GitHub ref and all eight file blobs were read back and matched the PR version. This was not a production deploy.
