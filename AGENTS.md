@@ -2,6 +2,10 @@
 
 Before doing #267 work, follow `docs/audits/issue267-review-restart-v2-20261101.json` and `docs/workstreams/issue-267.md`: fresh semantic re-review starts at frozen inventory file #1 line 1, 0/579,961 credited to V2; independent current-code review also starts at its first eligible pinned file line 1. Preserve all old B001+ V1 evidence and draft PRs intact; never credit V1 lines to V2, delete immutable history, bypass CI or deploy. Five task owners/schedules and their boundaries appear in `docs/audits/2026-11-01-dic-automations-registry.json`. This workflow change does not alter product Locked decisions or authorize production operations.
 
+## Permanent knowledge-context preflight — November 1, 2026
+
+For every substantive DIC prompt, apply the ChatGPT Project Instructions and use [`docs/ai/CONTEXT_ENTRYPOINT.md`](docs/ai/CONTEXT_ENTRYPOINT.md) with [`docs/ai/PREFLIGHT.md`](docs/ai/PREFLIGHT.md) to retrieve **current topic-relevant** GitHub requirements, decisions, research, journals and status. Read only relevant materials for routine questions; retain the full existing recover-first, risk-based test, approval and release procedure for implementation and publication. The [source register](docs/ai/SOURCE_REGISTER.json) distinguishes inventoring, substantive review, and independently verified claims. No context document overrides Locked decisions, source-specific CI, private-data protection or #267's separate line-by-line audit; no publication authority is conferred. When GitHub is unavailable, disclose uncertainty and fail closed for unsafe changes. ChatGPT's actual Project Settings are owner-edited and cannot be verified by a GitHub commit alone.
+
 # The Dial In Collective: current operating guide
 
 This is the active guide, reconciled October 23, 2026 UTC / October 22 MDT. The exact previous guide is preserved at `docs/archive/2026-10-23-reconciliation/AGENTS.previous.md`; its dated superseded gates are history, not instructions to repeat them.
