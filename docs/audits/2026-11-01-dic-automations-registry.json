@@ -33,11 +33,23 @@
     {
       "id": "6ae7914901d08191bb0564fd336563d5",
       "title": "DIC Sunday Regression Acceptance",
-      "is_enabled": true,
+      "is_enabled": false,
       "schedule": "BEGIN:VEVENT\nDTSTART:20261101T220000Z\nRRULE:FREQ=DAILY;INTERVAL=1\nEND:VEVENT",
       "timing_mode": "condition_watch",
       "prompt": "Resolve GitHub Issue #134 using the NEXT actually completed natural event=schedule Sunday 08:00 UTC run of main .github/workflows/weekly-full-regression.yml in private Schulzet3/The-Dial-In-Collective. First read issue state; if closed and verified, disable this task with no duplicate comments. If no post-PR135 natural run yet or GitHub is delayed, leave OPEN and silently retry on next scheduled task check, avoiding expensive redundant inspection. For a candidate natural run, verify actual event=schedule, immutable development SHA resolved once, full job/step/log results for Node/lint/cloud build, isolated SQL/signed HTTP, cloud owner/admin Chromium checks and built offline PWA. Confirm historical Oct 25 dist/sw.js failure is resolved in THIS natural run, not via manual dispatch. Check exact run/job IDs and previously accepted PR135 evidence; no success claim if missing, skipped unexpectedly, wrong source or failed. If verified complete, create concise exact-source GitHub issue/journal acceptance receipt, CLOSE #134, independently read back closed, then disable this automation. If a real failure: trace and safely repair only authorized main-owned workflow/test setup, SAME-COMMIT ops journal, risk-appropriate exact-source CI and nonforce integration; #134 stays OPEN until next natural PASS, no manufactured evidence or repeated alerts. Preserve original GitHub Sunday cron 0 8 * * 0, daily backups, application, production, privacy and unrelated work; no deploy, production SQL/Auth/Edge/member/provider edits or paid operations. Notify owner only verified closure or genuine actionable blocker. Independently own only #134 scheduled natural-run acceptance; the #267 V2 re-review from line 1 is not a precondition and must not be altered. Consult docs/audits/2026-11-01-dic-automations-registry.json.",
-      "run_success_unverified": true
+      "run_success_unverified": false,
+      "completion": {
+        "accepted_utc": "2026-11-01T21:44:25Z",
+        "issue": 134,
+        "issue_state": "closed",
+        "natural_run_id": 41317000737,
+        "event": "schedule",
+        "conclusion": "success",
+        "workflow_main_sha": "f771e1e75dcf66715233bcbe3c146596d2111d30",
+        "pinned_development_sha": "c1deffa685bd8049876c1b4b58d97618b8e46322",
+        "ops_journal_commit": "e76cf02d1685232eb3429733410f3e41e82585ad",
+        "automation_disabled_readback": true
+      }
     },
     {
       "id": "6ae79149c8b88191b2bfd068b5a388ac",
