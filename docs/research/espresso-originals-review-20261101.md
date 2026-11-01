@@ -1,3 +1,11 @@
+## November 1, 2026 — permanent, byte-identical Markdown source storage follow-up
+
+The owner-provided original archive remains unmodified. All **nine recovered Markdown report bodies (552,702 bytes total)** are now preserved in private GitHub under [`docs/research/originals/`](originals/README.md), one exact, independently readable file per source. Every complete Git blob SHA was compared with the original ZIP member and matched. [`SOURCE_REGISTER.json`](../ai/SOURCE_REGISTER.json) now includes the corresponding GitHub path, source SHA-256, byte size, Git blob SHA and provenance. The source-bearing commit is `23feea01906f1d1cc1de04b42701dd83cee2bdce` (feature branch integration evidence pending at time of this note). The prior section below correctly described **attachment-only storage at its historical intake checkpoint** and is preserved unchanged.
+
+This preservation is **not** a scientific citation audit, peer-review certification, or permission to change Locked espresso recommendations. The nine raw JSON conversation exports, slow-feeding PDF, prior Implementation Pack and S019 PDF remain separate external materials. Bounded privacy pattern checks on Markdown identified no obvious contact identifiers, API secrets or account-token patterns; this does **not** establish exhaustive privacy or copyright clearance.
+
+---
+
 # Recovered espresso report intake and scoped implementation — November 1, 2026
 
 **Archive observed in Project working files:** `Espresso_Research_Reports.zip`, SHA-256 `8ebd0cdfed6d7cc71dcb355f7987f6bf56dd56dd2dd19d9cfa76b18a7c998584`. The ZIP has exactly nine `Espresso_Research_Reports/Markdown/NN_*.md` texts and nine `Original_Data/NN_*.json` ChatGPT export records, plus a separate slow-feeding PDF (SHA-256 `a4db4f38c7c347de5c11332f762321e317a4abb24a323bed7a3b3d37ff156f33`). The ZIP README says **no factual or source audit was performed**. The Markdown's original ChatGPT citation markers are not independently resolvable externally. **These are user-supplied research reports, not independently verified peer-reviewed articles.** No raw exported conversation identifiers or user data added to GitHub. Full source files retained in user attachment, not duplicated in repo.
