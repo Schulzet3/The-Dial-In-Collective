@@ -1,3 +1,9 @@
+## November 1 UTC — Issue33 PR337 queue intake failure corrected (TESTING, not READY)
+
+Exact PR337 first-head approval [41345225998](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345225998) genuinely **FAILED** the queue-intake gate, not app tests: `Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: src/server/coffee-selected-source-evidence.mjs`. This same-commit docs correction adds one narrow **TESTING** row `DIC-Q-33-selected-product-price-badge` to `docs/RELEASE_QUEUE.json` covering both changed runtime paths, preserves all preexisting rows and states, and records the initial failed CI. New exact-head checks are required; do not treat original frozen603 SKIPPED as PASS or publish. No production changes.
+
+---
+
 ## November 1 UTC — Issue33 #490 exact selected product price badge candidate (TESTING; NOT READY)
 
 **Independent official-source proof:** exact bounded [Great Circle La Josefina Sudán Rumé](https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume) H1 from source job [41345004665](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345004665) (job 124962844499 SUCCESS), raw current official HTML SHA256 `f4ad9956fdffea83f54685dff4836296b5c2063804a8b64c133a537169afe273`, original603 case #490. The exact selected product price panel contains `<div class="badge next-level" data-badge="next-level">NEXT LEVEL</div>`, but current parser output has **no release_label** despite the direct source's printed label. Distinct general navigation, review quotations and catalog recommendations also contain those words; none may become selected release facts. Case #31 Boston Common still omits directly selected Cerrado and is a **separate diagnostic**, not part of this narrow code change. Cases #16 Nitro Washed and #25 reused slug remain safely selected, no forced historic oracle parity.
