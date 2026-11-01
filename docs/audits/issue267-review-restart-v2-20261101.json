@@ -14,26 +14,93 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 0,
-    "remaining_v2_lines": 579961,
-    "status": "NOT_STARTED_UNTIL_ACTUAL_V2_LINE_REVIEW",
-    "next_file_index_1_based": 1,
-    "next_file": ".github/workflows/approval-continuity.yml",
-    "next_source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "verified_new_v2_reviewed_lines": 312,
+    "remaining_v2_lines": 579649,
+    "status": "IN_PROGRESS_R2_001_VERIFIED_SOURCE_BOUND",
+    "next_file_index_1_based": 5,
+    "next_file": ".github/workflows/coffee-completeness.yml",
+    "next_source_blob_sha": "686cb3f64e6880872ad2e31ae5dd452280cb73d3",
     "next_line_1_based": 1,
-    "next_action": "Read original numbered lines starting at exact first frozen file line 1; inspect each line semantically under expanded audit; record new R2-001 V2 receipt separately before incrementing V2 coverage.",
-    "independently_reviewed_v2_ranges": [],
-    "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed."
+    "next_action": "Review frozen inventory file #5 coffee-completeness.yml exact original blob 686cb3f... from line 1, then proceed in order; append R2-002 disjoint receipt.",
+    "independently_reviewed_v2_ranges": [
+      {
+        "path": ".github/workflows/approval-continuity.yml",
+        "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "first_line": 1,
+        "last_line": 41,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-beta-ci.yml",
+        "source_blob_sha": "d6de476890f09c8b8814b0feb4d4f750117fd8cb",
+        "first_line": 1,
+        "last_line": 107,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-regression.yml",
+        "source_blob_sha": "a8cabb7cd9f81149aa8d363c20c9ebeda6695260",
+        "first_line": 1,
+        "last_line": 112,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      },
+      {
+        "path": ".github/workflows/coffee-audit-python.yml",
+        "source_blob_sha": "e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77",
+        "first_line": 1,
+        "last_line": 52,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      }
+    ],
+    "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
+    "coverage_ledger": "docs/audits/issue267-v2-frozen-coverage-ledger.json"
   },
   "current_code_v2": {
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
-    "inventory_status": "NOT_YET_PINNED_OR_ENUMERATED",
-    "development_sha_to_pin_on_first_run": null,
-    "reviewed_current_source_lines": 0,
-    "reviewed_ranges": [],
-    "next_file": "FIRST_ELIGIBLE_FILE_FROM_VERIFIED_CURRENT_CODE_INVENTORY",
+    "inventory_status": "PINNED_436_FILES_296_LINE_COUNT_VERIFIED_140_PENDING",
+    "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "reviewed_current_source_lines": 314,
+    "reviewed_ranges": [
+      {
+        "path": ".github/workflows/approval-continuity.yml",
+        "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "first_line": 1,
+        "last_line": 41,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-beta-ci.yml",
+        "source_blob_sha": "dd324212bfbcb14fc24b057eb376f1b325471322",
+        "first_line": 1,
+        "last_line": 108,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-regression.yml",
+        "source_blob_sha": "7dd903e5006f8adc6bdf0bd63b75d7fd3c72b25e",
+        "first_line": 1,
+        "last_line": 113,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      },
+      {
+        "path": ".github/workflows/coffee-audit-python.yml",
+        "source_blob_sha": "e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77",
+        "first_line": 1,
+        "last_line": 52,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      }
+    ],
+    "next_file": ".github/workflows/coffee-completeness.yml",
     "next_line_1_based": 1,
-    "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded."
+    "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
+    "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+    "eligible_files": 436,
+    "line_count_verified_files": 296,
+    "line_count_pending_files": 140,
+    "known_line_count_subtotal": 35476,
+    "full_eligible_line_denominator": null,
+    "coverage_ledger": "docs/audits/issue267-v2-current-code-ledger.json"
   },
   "legacy_v1_immutable_reference": {
     "integrated_historical_semantic_lines_reported": 71120,
@@ -54,8 +121,9 @@
     28,
     134
   ],
-  "state": "RESET_CONFIGURATION_VERIFIED_NOT_A_NEW_REVIEW_PASS",
+  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_FIRST_BATCHES_RECORDED",
   "app_code_changes_in_this_record": 0,
   "production_changes": 0,
-  "completed_tests_in_this_record": 0
+  "completed_tests_in_this_record": 0,
+  "last_verified_audit_batch_utc_date": "2026-11-01"
 }

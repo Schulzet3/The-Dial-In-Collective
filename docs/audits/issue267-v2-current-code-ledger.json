@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "track": "V2_CURRENT_EXECUTABLE",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+  "eligible_files": 436,
+  "verified_line_count_files": 296,
+  "pending_line_count_files": 140,
+  "known_line_count_subtotal": 35476,
+  "full_eligible_line_denominator": null,
+  "coverage": {
+    "reviewed_lines": 314,
+    "fully_reviewed_files": 4,
+    "partially_reviewed_files": 0,
+    "next_file": ".github/workflows/coffee-completeness.yml",
+    "next_line": 1
+  },
+  "batches": [
+    {
+      "id": "C2-001",
+      "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json",
+      "line_count": 314,
+      "reviewed_ranges": [
+        {
+          "path": ".github/workflows/approval-continuity.yml",
+          "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+          "first_line": 1,
+          "last_line": 41,
+          "line_count": 41
+        },
+        {
+          "path": ".github/workflows/cloud-beta-ci.yml",
+          "blob_sha": "dd324212bfbcb14fc24b057eb376f1b325471322",
+          "first_line": 1,
+          "last_line": 108,
+          "line_count": 108
+        },
+        {
+          "path": ".github/workflows/cloud-regression.yml",
+          "blob_sha": "7dd903e5006f8adc6bdf0bd63b75d7fd3c72b25e",
+          "first_line": 1,
+          "last_line": 113,
+          "line_count": 113
+        },
+        {
+          "path": ".github/workflows/coffee-audit-python.yml",
+          "blob_sha": "e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77",
+          "first_line": 1,
+          "last_line": 52,
+          "line_count": 52
+        }
+      ]
+    }
+  ],
+  "drift_policy": "Pin this exact current source; reconcile changed executable blobs and their numbered deltas after branch updates. Do not conflate with frozen 579961 denominator.",
+  "append_only_policy": "Never erase accepted current V2 receipts or double-count overlapping source ranges."
+}

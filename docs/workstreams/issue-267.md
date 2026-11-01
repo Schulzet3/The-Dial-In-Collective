@@ -1,5 +1,15 @@
 # Issue #267 — Historical 579,961-line expert semantic review
 
+## November 1, 2026 — #267 V2 R2-001 and C2-001 first direct source-bound audit batches (no app change)
+
+**Newly reviewed:** frozen original manifest files #1–4, every original line **312 / 579,961**, **579,649 remaining**, next original file #5 `.github/workflows/coffee-completeness.yml` line 1. Independently pinned current development executable tree `9707553a64f88127826e8f5b2b36cd0651296e83` / `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`; classified **436 eligible** source/test/workflow/config files of **951 tracked blobs** (515 explicit exclusions), obtained verified line counts for **296** files (**35,476** known lines), **140** current line counts still pending, so **full current denominator remains unknown**. Fresh current semantic reading **314 lines**, first four active workflows, next current file #5 line 1. **These are separate totals; V1 71,120 not credited.**
+
+**Receipts/ledgers:** [frozen R2-001](../audits/issue267-v2-frozen-batches/R2-001.json), [frozen ledger](../audits/issue267-v2-frozen-coverage-ledger.json), [current C2-001](../audits/issue267-v2-current-batches/C2-001.json), [current ledger](../audits/issue267-v2-current-code-ledger.json), [current 436-file source inventory](../audits/issue267-v2-current-code-inventory-20261101.json), [checkpoint](../audits/issue267-review-restart-v2-20261101.json). Exact source blob SHA and contiguous line interpretation spans recorded for every reviewed line; reviewer AI, **not human**.
+
+**Findings:** Frozen cloud-beta and cloud-regression workflows lacked `scripts/pwa/**` push trigger; current workflows already contain the trigger. Old cloud-regression work branch still exists, so **no proven dead code** and no deletion. Existing 390px browser checks are synthetic, not owner-device certification. No current actionable bug proven in these four workflows; no speculative code edits, test PASS claims, READY change, deployment or production writes. Previously passing approval CI at exact pre-audit development SHA `9707553a64f88127826e8f5b2b36cd0651296e83`: run 41346414648 SUCCESS; this is **prior source evidence**, not CI for the new audit commit. Next: finish 140 missing current file line counts, read both next exact file #5 lines 1 onward, trace any verified defects before changing code, verify new exact-source approval CI.
+
+---
+
 **State: OPEN — original literal historical review NOT COMPLETE.**
 
 ## November 1, 2026 — explicit full line-1 restart (V2 controls over earlier continuation notes)
