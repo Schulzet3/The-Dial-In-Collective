@@ -41,6 +41,7 @@
 - [Original decision-to-code crosswalk](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md)
 
 ## Research and source inventories (November 1, 2026)
+- [Nine exact original espresso research Markdown files](research/originals/README.md) — private GitHub source-faithful copies, per-file SHA-256 and explicit scientific-verification caveats.
 - [Recovered nine espresso reports and research limitations](research/espresso-originals-review-20261101.md) — nine Markdown bodies, nine JSON exports, and a separate slow-feeding PDF were inventoried from `Espresso_Research_Reports.zip`. Their original citations are **not universally independently verified**.
 - [Pinned GitHub document/file inventory](audits/project-doc-index-20261101.json) — a metadata snapshot, **not** line-by-line or semantic review. Its earlier `nine_prior_docs: lost and replaced` field is historical, superseded as to availability by the recovered originals; retain the snapshot unchanged.
 - The earlier `DIC_Espresso_Research_Implementation_Pack.zip` and *Espresso Extraction Windows by Roast Level and Shot Style* (S019) remain complementary research. S019's windows are heuristics; the recovered slow-feeding PDF is separate from S019.
