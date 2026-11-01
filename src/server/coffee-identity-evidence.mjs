@@ -283,6 +283,19 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
      add(selectedRegion[1]+', '+selectedCountries[0],sentence);
      continue;
     }
+    // The exact selected coffee may directly name its whole-blend growing
+    // region without a separate Region: spec. Require literal selected name,
+    // country, quantitative blend and same-sentence region reference.
+    const namedRegionBlend=sentence.match(new RegExp(
+     '^'+selectedNamePattern+'\\s+is\\s+a\\s+100\\s*(?:percent|%)\\s+('+PLACE+')\\s+blend\\b[^.!?]{0,200}\\bthis\\s+region\\b','iu'));
+    const literalSentenceCountries=countryNames(sentence);
+    if(namedRegionBlend&&new RegExp('^'+selectedCountries[0]+'\\s','iu').test(name)&&
+       literalSentenceCountries.length===1&&key(literalSentenceCountries[0])===key(selectedCountries[0])&&
+       !completeVarietyPhrase(namedRegionBlend[1],{explicit:true})&&
+       !/\b(?:flavou?r|tasting|notes?|roast|beans?|coffee|chocolate|caramel|cocoa|citrus|nutty|fruity|sweet|spice|vanilla|berry|pumpkin|catalog|product)\b/iu.test(namedRegionBlend[1])){
+     add(namedRegionBlend[1]+', '+selectedCountries[0],sentence);
+     continue;
+    }
     const from=sentence.match(new RegExp(
      '^(?:(?:Single[ -]Origin|Organic|Fair[ -]Trade)\\s+){0,3}('+COUNTRIES+')\\s+coffee\\s+from\\s+('+PLACE+')(?:\\s*,\\s*('+PLACE+'))?(?=[.!?]|$)','iu'));
     if(from&&key(from[1])===key(selectedCountries[0])){
