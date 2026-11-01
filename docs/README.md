@@ -1,6 +1,12 @@
 # The Dial In Collective — Documentation Index
 **Navigation reconciled November 1, 2026 (links and source provenance only).** This index is not a certification that every linked document was updated or reviewed. The previous 34 KB index remains [preserved as a dated snapshot](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md). Dated reports describe their historical checkpoints; use [Current Status](CURRENT_STATUS.md) and actual provider readbacks for current operational facts.
 
+## Permanent knowledge navigation — November 1, 2026
+- [Central project-context entrypoint](ai/CONTEXT_ENTRYPOINT.md) — first short map for **every substantive DIC task**, followed by topic-specific retrieval and existing full change/release recovery.
+- [Complete accessible-attachment source register](ai/SOURCE_REGISTER.json) — four top-level Project files, 46 substantive direct ZIP members, 41 nested ZIP members, SHA-256 and privacy/access/duplicate caveats; no claim of full semantic review or durable attachment retrieval.
+- [Authority and supersession rules](ai/AUTHORITY_RULES.md), [preflight](ai/PREFLIGHT.md), [maintenance](ai/MAINTENANCE.md) — link to canonical documents, do not replace them.
+- [Knowledge-intake receipt](workstreams/ops-knowledge-context-20261101.md) — exact scope, verified attachment hashes, limitations and pending durable research storage.
+
 ## Read first
 1. [Active per-commit Work Journal](ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) — read FIRST to resume interrupted sessions, current exact attempts and blockers.
 2. [Current Status](CURRENT_STATUS.md) — current published SHA, production counts, safety, next action.
