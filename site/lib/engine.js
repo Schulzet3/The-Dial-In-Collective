@@ -173,14 +173,21 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
 }
 export function learnSensitivity(shots) {
  const groups=new Map();
- for(const s of shots){if(!finite(s.grindSetting)||!finite(s.timeS)||s.hidden||s.feedMode==null)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
+ for(const s of shots){
+  // Legacy and offline entries can be partial. Only complete measured inputs
+  // with ordered timestamps can calibrate a grind-to-time response.
+  if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
+     !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
+     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
  for(const group of groups.values()){
   group.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
   for(let i=1;i<group.length;i++){
    const a=group[i-1],b=group[i],dg=b.grindSetting-a.grindSetting;
    if(Math.abs(dg)<.09||Math.abs(a.doseG-b.doseG)>.6||Math.abs(a.yieldG-b.yieldG)>3)continue;
-   if(a.tempC!=null&&b.tempC!=null&&Math.abs(a.tempC-b.tempC)>1)continue;
+   // A missing temperature on only one side is not a controlled comparison.
+   if((a.tempC==null)!==(b.tempC==null))continue;
+   if(a.tempC!=null&&(!finite(a.tempC)||!finite(b.tempC)||Math.abs(a.tempC-b.tempC)>1))continue;
    const slope=(b.timeS-a.timeS)/dg;if(slope<-.5&&slope>-1000)slopes.push(slope);
   }
  }
@@ -391,8 +398,14 @@ function nextAdviceRaw(s,shot,rec) {
  const direction=t.extraction<3?'finer':t.extraction>3?'coarser':null;
  if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',kind:'diagnostic',next:null};
  if((direction==='finer'&&fast)||(direction==='coarser'&&slow)){
-  const pairs=s.shots.filter(x=>x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
-  const exact=pairs.filter(x=>x.coffeeId===shot.coffeeId),sens=learnSensitivity(exact)||learnSensitivity(pairs);
+  // The response of another bean is not a calibrated response for this coffee.
+  // Roast/processing/PSD and puck permeability can differ even on one grinder.
+  // Use the existing bounded fixed step when this exact coffee has too few
+  // controlled same-calibration, same-style, same-feed, same-basket pairs.
+  const exact=s.shots.filter(x=>x.coffeeId===shot.coffeeId&&
+   x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&
+   x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
+  const sens=learnSensitivity(exact);
   let move=step;if(sens){move=Math.max(.1,round(Math.min(step*4,Math.abs((rec.time.center-shot.timeS)/sens.secondsPerUnit))));}
   const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
   if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
