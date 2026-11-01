@@ -5,6 +5,7 @@ import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {fetchPublicCoffeeHtml,safeCoffeeUrl,MAX_PRODUCT_RETRY_BYTES} from '../../src/server/coffee-url-guard.mjs';
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
+import {selectedCurrentCoffeeReleaseBadge} from '../../src/server/coffee-selected-source-evidence.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -71,6 +72,20 @@ for(const target of targets){
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));
     r.add_coffee_ui_rendered=coffeeUrlPreviewMarkup(p).includes('coffee-url-preview');
     r.source_review_rendered=!!coffeeSourceReviewSnapshot({...p,source_url:r.final_url});
+    // Independent exact selected current #490 H1/price badge acceptance:
+    // never treat general navigation or customer-review prose as a release.
+    if(r.number===490){
+     r.selected_price_badge=selectedCurrentCoffeeReleaseBadge(selected,{name:r.current_fields?.name||''});
+     r.selected_price_badge_accepted=r.selected_price_badge?
+      r.current_fields?.release_label===r.selected_price_badge:null;
+     console.log('[DIC33 SELECTED PRICE BADGE] '+JSON.stringify({
+      number:r.number,selected_h1:r.selected_h1,source_sha256:r.html_sha256,
+      literal_selected_price_badge:r.selected_price_badge||null,
+      parsed_release_label:r.current_fields?.release_label||null,
+      acceptance:r.selected_price_badge_accepted
+     }));
+    }
+
 
     // Diagnostic only: a DIFFERENT Lowcountry coffee's flavor appears in
     // review-only source_facts for Breakfast Blend. Find the precise public
@@ -124,4 +139,4 @@ const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUT
 writeFileSync(join(dest,'focused-current-evidence.json'),JSON.stringify(summary,null,2)+'\n');
 console.log('[DIC33 FOCUSED SUMMARY] '+JSON.stringify({attempted:records.length,fetched:summary.fetched,
  parsed:summary.parsed,manual_certified:0}));
-if(records.length!==targetNumbers.length||records.some(x=>x.status==='FETCHED'&&(!x.parser_ok||!x.add_coffee_ui_rendered)))process.exitCode=1;
+if(records.length!==targetNumbers.length||records.some(x=>x.status==='FETCHED'&&(!x.parser_ok||!x.add_coffee_ui_rendered||x.selected_price_badge_accepted===false)))process.exitCode=1;
