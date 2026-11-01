@@ -322,6 +322,15 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   cleanTrailingProductLabels(raw):raw;
  if(field==='origin'){
   s=s.replace(/\s*[|;,]+\s*$/,'').trim();
+  // Some exact selected Origin captions append a green processing stage or
+  // a decaffeination method to one literally printed producing country.
+  // Keep that raw source caption in source_facts; neither method is a place.
+  // Only remove a fully matched, closed suffix with one known country.
+  // Do not rewrite regional tuples, multi-country blends or unknown prose.
+  const countryAndProcess=s.match(/^100\s*%\s*([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*,\s*(?:fully\s+)?(?:washed|natural|honey|anaerobic)(?:\s+process(?:ed)?)?\.?$/iu);
+  const countryAndDecaf=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*\(\s*(?:Mountain|Swiss)\s+Water(?:\s+Process(?:ed)?)?\s*\)\.?$/iu);
+  const printedCountry=(countryAndProcess?.[1]||countryAndDecaf?.[1]||'').trim();
+  if(printedCountry&&ORIGIN_COUNTRIES.has(keyOf(printedCountry)))s=printedCountry;
   // Roaster "Oaxaca Region of Mexico" is not "Oaxaca Region of Mexico, Mexico".
   // Only de-duplicate the SAME country after an explicit Region of phrase;
   // preserve geographic names such as Mt. Kenya and any true conflict.
