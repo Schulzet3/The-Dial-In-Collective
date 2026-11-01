@@ -1,3 +1,11 @@
+## Verified integration receipt — November 1, 2026
+
+[PR #344](https://github.com/Schulzet3/The-Dial-In-Collective/pull/344) non-force **squash merged** exact documentation changes into `development/backend-foundation` at `8d3ca8e8d2538bc765e84d4f0b67ef9c22c31961`; eight changed paths only (five `docs/ai` files, `AGENTS.md`, `docs/README.md`, and this scoped journal). The post-merge GitHub ref and all eight file blobs were read back and matched the PR version. This was not a production deploy.
+
+All five exact PR-head `df1f5d47f3c898ced153f2e93d696479928d65ba` workflows **SUCCESS**: approval/continuity `41363000784`, isolated SQL `41363000649`, cloud UX `41363000759`, Node/build `41363000729`, visual `41363000810`. The connector's post-merge commit-workflow lookup only searches PR-triggered runs and returned none at the squash SHA; do not assert a separate merged-SHA CI PASS without that independent evidence. Documentation-only record update does not assert application device tests or deploy. Exact full research-text copies and durable source access remain open, explicitly as above.
+
+---
+
 # Permanent project knowledge system — November 1, 2026
 
 ## Owner authorization and boundaries
