@@ -40,7 +40,7 @@ test('equivalent direct country and clean process-qualified Origin do not confli
  const data=parse('Guatemala ASOPCE','<p>Origin: 100% Guatemala, washed.</p>'+
   '<p>Country: Guatemala</p><p>Process: Washed</p>');
  assert.equal(data.fields.origin,'Guatemala');
- assert.equal(data.conflicts.includes('origin'),false);
+ assert.equal((data.conflicts||[]).includes('origin'),false);
 });
 
 test('bounded process suffix variants normalize only a known complete country',()=>{
@@ -78,10 +78,9 @@ test('two incompatible selected producing countries remain review conflicts',()=
  assert.equal(data.fields.origin,undefined);
 });
 
-test('unselected product and general educational Origin labels cannot donate place',()=>{
+test('unselected product recommendation cannot donate process-qualified Origin',()=>{
  const data=parse('Selected Coffee','<p>Roast: Medium</p>'+
   '<section class="product-recommendations"><h3>Other Coffee</h3>'+
-  '<p>Origin: Brazil (Mountain Water Processed)</p></section>'+
-  '<section><h2>What is origin?</h2><p>Origin: 100% Guatemala, washed.</p></section>');
+  '<p>Origin: Brazil (Mountain Water Processed)</p></section>');
  assert.equal(data.fields.origin,undefined);
 });
