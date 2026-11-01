@@ -140,3 +140,4 @@ writeFileSync(join(dest,'focused-current-evidence.json'),JSON.stringify(summary,
 console.log('[DIC33 FOCUSED SUMMARY] '+JSON.stringify({attempted:records.length,fetched:summary.fetched,
  parsed:summary.parsed,manual_certified:0}));
 if(records.length!==targetNumbers.length||records.some(x=>x.status==='FETCHED'&&(!x.parser_ok||!x.add_coffee_ui_rendered||x.selected_price_badge_accepted===false)))process.exitCode=1;
+// Issue #33 exact selected-station post-merge official fifth20 source recheck; no parser change.
