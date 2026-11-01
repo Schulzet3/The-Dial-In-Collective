@@ -1,3 +1,9 @@
+## November 1 UTC — Issue33 PR337 adversarial H1 adjacency failure fixed (TESTING)
+
+Exact PR337 head `513ba3a4206e911dcf2bedd7c62dccb86a1bbe0c` cloud [41345507469](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345507469) genuinely FAILED **one** newly added adversarial test: a general paragraph between the matching H1 and later price badge was accepted because only a 120-character distance was enforced. This SAME-COMMIT repair additionally requires **only whitespace** between the exact selected H1 and its immediately adjacent price-container opening tag. No related catalog/review source can bridge that gap. Previous 968 failures were fixed by defining the missing variable; the new single failure is separate. Retest exact PR head and official live #490 before READY; no other app/provider changes.
+
+---
+
 ## November 1 UTC — Issue33 PR337 actual cloud regression diagnosed and repaired (TESTING)
 
 PR337 corrected queue-intake head `f117b13f591d2decb46b796845fc92b86e07771d`: approval [41345309835](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345309835) SUCCESS, but cloud tests [41345309876](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345309876) genuinely FAILED because `selectedPriceBadge` was referenced in the source-fact assembly but its declaration was missing (the first patch did not match the actual two-space indentation of `directSelected`). This is a **real candidate code defect**, not a runner allocation failure or evidence of a product bug. This SAME-COMMIT repair inserts the bounded selected H1/price badge declaration and missing-field assignment at the actual current `directSelected` scope. Re-run all applicable exact-head CI; original frozen603 job SKIPPED remains unverified, and no READY/merge/deploy claim.

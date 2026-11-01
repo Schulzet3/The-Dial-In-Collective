@@ -33,7 +33,7 @@ export function selectedCurrentCoffeeReleaseBadge(html,{name=''}={}){
  const {nodes}=coffeeHtmlElements(near);
  const price=nodes.find(node=>node.tag==='div'&&node.start<120&&
   coffeeHtmlAttributes(node.attributes).class?.split(/\s+/).includes('product-price-container'));
- if(!price||price.end>near.length)return '';
+ if(!price||price.end>near.length||near.slice(0,price.start).trim())return '';
  const badges=nodes.filter(node=>{
   if(node.tag!=='div'||node.start<price.headEnd||node.end>price.contentEnd)return false;
   const attrs=coffeeHtmlAttributes(node.attributes);
