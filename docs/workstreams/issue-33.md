@@ -1,3 +1,9 @@
+## November 1 UTC — PR339 queue-schema gate failure repaired on candidate branch
+
+Exact first PR339 approval [run 41350201155](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41350201155) **FAILED** in queue schema validation: missing `merged_source_sha` and `ci_runs` keys on the new TESTING row. No application test failure is implied. Repair adds `merged_source_sha:null`, `ci_runs:[]` and PR reference to the same row; new PR-head CI is required. Earlier failure receipt preserved. No production action.
+
+---
+
 ## November 1 UTC — Issue33 original603 #31 selected regional blend candidate TESTING (not deployed)
 
 Exact current official [Boston Common Brazil Oberon](https://bostoncommoncoffee.com/products/brazil-oberon) selected description states “Brazil Oberon is a 100 percent Cerrado blend that consistently captures the qualities this region is celebrated for.” Prior [source-bound four-case run 41346030000](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41346030000) fetched and parsed this selected page but returned origin **Brazil**, omitting **Cerrado**. Exact selected identity is corroborated by product h3 plus matching metadata/body, not H1. Other roasters' similarly named SKUs are not evidence for this product.
