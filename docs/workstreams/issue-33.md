@@ -1,3 +1,9 @@
+## November 1 UTC — Issue33 PR337 CI discovered cross-chat instruction contract drift (docs-only fix)
+
+Exact PR337 head [41345507359](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345507359) visual/check:fast failed owner-Locked approval-coverage contract because a **concurrent compact Project Instructions edit** removed three required literal safeguards: no recommending public/paid GitHub upgrades, advisory Free-plan branch restrictions, and exact paste-ready instruction replacement text. These requirements remain Locked and were already enforced in `tests/approval-coverage.test.mjs`. This same-commit development-branch docs-only correction restores the three approved instructions **within 8,000 characters** without touching application, CI assertions, deployment or owner policy. PR337 still TESTING; revalidate against updated base, do not count the failing run PASS.
+
+---
+
 ## November 1 UTC — Issue33 sixth four-case source verification (DIAGNOSTIC; NOT READY)
 
 **Reason / source-bound targets:** Incremental original603 selected current source review: **#16 Be Bright Colombia Finca Milan Nitro Caturra** (selected Nitro Washed processing versus old Anaerobic oracle), **#25 Bleu Sumatra Mandheling** (reused `copy-of-papua-new-guinea` slug must not override current selected Sumatra), **#31 Boston Common Brazil Oberon** (direct Cerrado growing region versus earlier country-only extraction), and **#490 Great Circle La Josefina Sudán Rumé** (current exact selected NEXT LEVEL release badge must not be confused with general collection navigation). The immutable original603 register supplies original exact URLs and case IDs; public indexed sources are provisional until guarded actual-current fetch.
