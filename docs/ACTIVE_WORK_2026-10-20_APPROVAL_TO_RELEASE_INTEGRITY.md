@@ -13,3 +13,7 @@ This checkpoint is documentation-only. No publication or production mutation; co
 ## November 1, 2026 UTC — Issue #330 published-source recovery pin correction (main ops, no application release)
 
 Owner-authorized operations-only fix: `main` nightly `backup-app-source` pin corrected from historical 05cf9eb156f63110cd434034ec3914a1e92b76d3 to independently verified Netlify READY/current 42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7. Source/release evidence, exact test outcome and follow-up are recorded in [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md) and [Issue #330](https://github.com/Schulzet3/The-Dial-In-Collective/issues/330). No app publication or private member changes. At source-preparation time, CI and post-merge backup-run receipts remain pending; do not call them PASS prematurely.
+
+## 2026-11-01 UTC — Issue #332 late backup schedule mitigation
+
+Owner-authorized safe fallback opportunities 08:17, 09:37, 12:17 UTC added beside untouched primary 08:00 cron, with ciphertext-artifact-verified duplicate guard (scheduled only, GitHub API fail-open) and dedicated Node CI tests on `main`. This is a mitigation of GitHub upstream scheduling delays, **not proof of punctuality**; inspect future actual GitHub schedule executions/offsite delivery separately. Do not deploy the app or modify production data. Full scope, test limitations and next verification in [main operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md) and [Issue #332](https://github.com/Schulzet3/The-Dial-In-Collective/issues/332).
