@@ -1,3 +1,29 @@
+## November 1 UTC — Issue33 PR337 adversarial H1 adjacency failure fixed (TESTING)
+
+Exact PR337 head `513ba3a4206e911dcf2bedd7c62dccb86a1bbe0c` cloud [41345507469](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345507469) genuinely FAILED **one** newly added adversarial test: a general paragraph between the matching H1 and later price badge was accepted because only a 120-character distance was enforced. This SAME-COMMIT repair additionally requires **only whitespace** between the exact selected H1 and its immediately adjacent price-container opening tag. No related catalog/review source can bridge that gap. Previous 968 failures were fixed by defining the missing variable; the new single failure is separate. Retest exact PR head and official live #490 before READY; no other app/provider changes.
+
+---
+
+## November 1 UTC — Issue33 PR337 actual cloud regression diagnosed and repaired (TESTING)
+
+PR337 corrected queue-intake head `f117b13f591d2decb46b796845fc92b86e07771d`: approval [41345309835](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345309835) SUCCESS, but cloud tests [41345309876](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345309876) genuinely FAILED because `selectedPriceBadge` was referenced in the source-fact assembly but its declaration was missing (the first patch did not match the actual two-space indentation of `directSelected`). This is a **real candidate code defect**, not a runner allocation failure or evidence of a product bug. This SAME-COMMIT repair inserts the bounded selected H1/price badge declaration and missing-field assignment at the actual current `directSelected` scope. Re-run all applicable exact-head CI; original frozen603 job SKIPPED remains unverified, and no READY/merge/deploy claim.
+
+---
+
+## November 1 UTC — Issue33 PR337 queue intake failure corrected (TESTING, not READY)
+
+Exact PR337 first-head approval [41345225998](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345225998) genuinely **FAILED** the queue-intake gate, not app tests: `Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: src/server/coffee-selected-source-evidence.mjs`. This same-commit docs correction adds one narrow **TESTING** row `DIC-Q-33-selected-product-price-badge` to `docs/RELEASE_QUEUE.json` covering both changed runtime paths, preserves all preexisting rows and states, and records the initial failed CI. New exact-head checks are required; do not treat original frozen603 SKIPPED as PASS or publish. No production changes.
+
+---
+
+## November 1 UTC — Issue33 #490 exact selected product price badge candidate (TESTING; NOT READY)
+
+**Independent official-source proof:** exact bounded [Great Circle La Josefina Sudán Rumé](https://www.greatcirclecoffee.com/products/la-josefina-sudan-rume) H1 from source job [41345004665](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345004665) (job 124962844499 SUCCESS), raw current official HTML SHA256 `f4ad9956fdffea83f54685dff4836296b5c2063804a8b64c133a537169afe273`, original603 case #490. The exact selected product price panel contains `<div class="badge next-level" data-badge="next-level">NEXT LEVEL</div>`, but current parser output has **no release_label** despite the direct source's printed label. Distinct general navigation, review quotations and catalog recommendations also contain those words; none may become selected release facts. Case #31 Boston Common still omits directly selected Cerrado and is a **separate diagnostic**, not part of this narrow code change. Cases #16 Nitro Washed and #25 reused slug remain safely selected, no forced historic oracle parity.
+
+**SAME-COMMIT narrow candidate:** `src/server/coffee-selected-source-evidence.mjs` adds bounded generic H1-adjacent price-container badge validation; `src/server/coffee-page-metadata.mjs` uses it only for a missing, nonconflicted selected release and retains exact public source provenance; `tests/coffee-issue33-selected-price-release-badge.test.mjs` adds four positive/adversarial tests. No roaster name/URL hardcode, no SEO/collection inference, no override of a more specific existing named release. **NOT YET CI-VERIFIED / NOT READY.** Exact PR-head Node, cloud/mobile, approval, security and merged live original603 four-case before/after verification required. Original603 153 context +29 missing qualified, frozen corpus, Issue267 V2, Issue96 and all READY/DEPLOYED queue rows unchanged; no deployment/provider/member writes.
+
+---
+
 ## November 1 UTC — Issue33 PR337 CI discovered cross-chat instruction contract drift (docs-only fix)
 
 Exact PR337 head [41345507359](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345507359) visual/check:fast failed owner-Locked approval-coverage contract because a **concurrent compact Project Instructions edit** removed three required literal safeguards: no recommending public/paid GitHub upgrades, advisory Free-plan branch restrictions, and exact paste-ready instruction replacement text. These requirements remain Locked and were already enforced in `tests/approval-coverage.test.mjs`. This same-commit development-branch docs-only correction restores the three approved instructions **within 8,000 characters** without touching application, CI assertions, deployment or owner policy. PR337 still TESTING; revalidate against updated base, do not count the failing run PASS.

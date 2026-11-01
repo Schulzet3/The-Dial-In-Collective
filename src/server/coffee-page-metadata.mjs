@@ -27,7 +27,7 @@ import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconci
 import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
-import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
+import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -1380,6 +1380,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
   const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html});
+  const selectedPriceBadge=selectedCurrentCoffeeReleaseBadge(canonicalProduct,{name:fields.name});
+  if(selectedPriceBadge&&!fields.release_label&&!conflicts.has('release_label'))
+   addField(fields,'release_label',selectedPriceBadge);
+
   if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
@@ -1653,6 +1657,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ if(selectedPriceBadge&&fields.release_label===selectedPriceBadge&&source_facts.length<384)
+  source_facts.push({field:'release_label',label:'Selected product release badge',
+   value:selectedPriceBadge,source_url,source_type:'html',section:'Exact selected product price panel'});
  if(producingCommunity&&source_facts.length<384)source_facts.push({
   field:'producer',label:'Community',value:producingCommunity,source_url,
   source_type:'html',section:'Selected coffee producing-community label'
