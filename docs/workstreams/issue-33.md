@@ -1,3 +1,9 @@
+## November 1 UTC — PR339 true Node/cloud positive test failure repaired (candidate still TESTING)
+
+Exact PR-head `f4831f5017367754bab754b845f853d2c1bab052` Node [41350282460](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41350282460) **2160 PASS/1 FAIL/6 SKIP**, cloud [41350282471](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41350282471) **1688 PASS/1 FAIL**. Both failed the SAME new positive source test: exact selected whole-blend sentence lacked generic “coffee/grown/farm” keywords and was skipped before the new region pattern. This is an actual code defect, not runner failure. Narrow same-commit fix admits only exact selected-name, quantitative whole-blend and same-sentence region prose to existing geography scrutiny; negative/country/cultivar guards remain. New exact-source CI pending. PR-head approval 41350282514, SQL 41350282540, security 41350282474, private bundle 41350282536, visual 41350282521 SUCCESS; original frozen603 41350282508 SKIPPED, not PASS. No merge or READY yet.
+
+---
+
 ## November 1 UTC — PR339 queue-schema gate failure repaired on candidate branch
 
 Exact first PR339 approval [run 41350201155](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41350201155) **FAILED** in queue schema validation: missing `merged_source_sha` and `ci_runs` keys on the new TESTING row. No application test failure is implied. Repair adds `merged_source_sha:null`, `ci_runs:[]` and PR reference to the same row; new PR-head CI is required. Earlier failure receipt preserved. No production action.

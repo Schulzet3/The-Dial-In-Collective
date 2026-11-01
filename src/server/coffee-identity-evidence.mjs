@@ -243,7 +243,12 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  for(const block of blocks){
   if(/^h[1-6]$/.test(block.tag))continue;
   for(let sentence of sentences(block.text)){
-   if(sentence.length>1800||!current(sentence)||! /\b(?:coffee|coffees|beans?|cherries|grow(?:n|ing|s)?|cultivat|sourc|farm|finca|hacienda|estate|cooperative|station|mill|producer)\w*\b/i.test(sentence)||
+   // Some selected product descriptions use the exact coffee name + whole
+   // regional blend claim without the literal word "coffee". Admit only
+   // that bounded direct source pattern to the normal geographic review.
+   const namedWholeBlend=Boolean(name&&key(sentence.slice(0,name.length))===key(name)&&
+    /^\s+is\s+a\s+100\s*(?:percent|%)\s+[\p{Lu}][\p{L}\p{M}'’ .-]{2,100}\s+blend\b[^.!?]{0,200}\bthis\s+region\b/iu.test(sentence.slice(name.length)));
+   if(sentence.length>1800||!current(sentence)||(! /\b(?:coffee|coffees|beans?|cherries|grow(?:n|ing|s)?|cultivat|sourc|farm|finca|hacienda|estate|cooperative|station|mill|producer)\w*\b/i.test(sentence)&&!namedWholeBlend)||
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
       /\b(?:variety|cultivar)\b.{0,65}\b(?:grown|collected|introduced|originated|discovered)\b/i.test(sentence))continue;
