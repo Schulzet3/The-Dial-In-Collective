@@ -17,9 +17,15 @@ on:
   # 08:00 UTC = fixed 01:00 MST (02:00 MDT in daylight-saving months).
   schedule:
     - cron: '0 8 * * *'
+    # Backstop opportunities; the ciphertext guard prevents duplicate scheduled archives.
+    # GitHub schedule is best-effort: these times are NOT an on-time guarantee.
+    - cron: '17 8 * * *'
+    - cron: '37 9 * * *'
+    - cron: '17 12 * * *'
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: dic-private-encrypted-backup
@@ -38,7 +44,13 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+      - name: Avoid duplicate successful scheduled ciphertext archive
+        id: scheduled_guard
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/backups/scheduled-backup-guard.mjs
       - name: Checkout verified live cloud app source for independent offsite recovery
+        if: steps.scheduled_guard.outputs.run_backup == 'true'
         uses: actions/checkout@v7
         with:
           # Update only after independent evidence confirms a newer live deploy.
@@ -46,10 +58,13 @@ jobs:
           path: backup-app-source
           persist-credentials: false
       - name: Install age encryption
+        if: steps.scheduled_guard.outputs.run_backup == 'true'
         run: sudo apt-get update -qq && sudo apt-get install -y age
       - name: Encrypted PostgreSQL snapshot
+        if: steps.scheduled_guard.outputs.run_backup == 'true'
         run: bash scripts/backups/create-nightly-encrypted-dump.sh
       - name: Upload ciphertext only
+        if: steps.scheduled_guard.outputs.run_backup == 'true'
         uses: actions/upload-artifact@v7
         with:
           name: dic-encrypted-nightly-${{ github.run_id }}
