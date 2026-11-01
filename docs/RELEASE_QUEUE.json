@@ -8,6 +8,37 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-selected-regional-blend-prose",
+      "issue": 33,
+      "title": "Exact selected 100-percent regional blend sentence recovers directly printed growing region",
+      "state": "TESTING",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "tests": [
+        "Original603 #31 official selected Boston Common Brazil Oberon prints 'Brazil Oberon is a 100 percent Cerrado blend ... this region'; official before-run 41346030000 parsed origin Brazil only; h3 and selected metadata/body match, no h1.",
+        "Five source-bounded positive/negative regression groups; exact-source CI and fresh official after-read pending.",
+        "PR339 first approval run 41350201155 genuinely FAILED schema: missing merged_source_sha and ci_runs; corrected on this branch, not relabeled PASS.",
+        "Exact head f4831f5 Node 41350282460 and cloud 41350282471 each FAILED same new positive regression; code relevance gate repaired and new CI required."
+      ],
+      "blockers": [
+        "Exact PR-head CI, nonforce merge and merged-source live #31 verification pending."
+      ],
+      "notes": "Preserve frozen603/oracle/captures and 153 context/29 missing-literal caveats; no deployment.",
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "merged_source_sha": null,
+      "ci_runs": [
+        41350282460,
+        41350282471,
+        41350282514,
+        41350282540,
+        41350282474,
+        41350282536,
+        41350282521
+      ],
+      "pr": 339
+    },
+    {
       "id": "DIC-Q-335-exact-coffee-grind-response",
       "issue": 335,
       "title": "Keep time-based grind sensitivity specific to same coffee and controlled measurements",

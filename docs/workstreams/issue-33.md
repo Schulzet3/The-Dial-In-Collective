@@ -1,3 +1,23 @@
+## November 1 UTC — PR339 true Node/cloud positive test failure repaired (candidate still TESTING)
+
+Exact PR-head `f4831f5017367754bab754b845f853d2c1bab052` Node [41350282460](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41350282460) **2160 PASS/1 FAIL/6 SKIP**, cloud [41350282471](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41350282471) **1688 PASS/1 FAIL**. Both failed the SAME new positive source test: exact selected whole-blend sentence lacked generic “coffee/grown/farm” keywords and was skipped before the new region pattern. This is an actual code defect, not runner failure. Narrow same-commit fix admits only exact selected-name, quantitative whole-blend and same-sentence region prose to existing geography scrutiny; negative/country/cultivar guards remain. New exact-source CI pending. PR-head approval 41350282514, SQL 41350282540, security 41350282474, private bundle 41350282536, visual 41350282521 SUCCESS; original frozen603 41350282508 SKIPPED, not PASS. No merge or READY yet.
+
+---
+
+## November 1 UTC — PR339 queue-schema gate failure repaired on candidate branch
+
+Exact first PR339 approval [run 41350201155](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41350201155) **FAILED** in queue schema validation: missing `merged_source_sha` and `ci_runs` keys on the new TESTING row. No application test failure is implied. Repair adds `merged_source_sha:null`, `ci_runs:[]` and PR reference to the same row; new PR-head CI is required. Earlier failure receipt preserved. No production action.
+
+---
+
+## November 1 UTC — Issue33 original603 #31 selected regional blend candidate TESTING (not deployed)
+
+Exact current official [Boston Common Brazil Oberon](https://bostoncommoncoffee.com/products/brazil-oberon) selected description states “Brazil Oberon is a 100 percent Cerrado blend that consistently captures the qualities this region is celebrated for.” Prior [source-bound four-case run 41346030000](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41346030000) fetched and parsed this selected page but returned origin **Brazil**, omitting **Cerrado**. Exact selected identity is corroborated by product h3 plus matching metadata/body, not H1. Other roasters' similarly named SKUs are not evidence for this product.
+
+Scoped generic source change `src/server/coffee-identity-evidence.mjs`, five adversarial groups `tests/coffee-issue33-selected-region-blend.test.mjs`, same-commit journal and queue `DIC-Q-33-selected-regional-blend-prose` **TESTING** until exact PR-head CI, nonforce merge, fresh official #31 after-read and source/conflict readback. No #267 V2 or #96 overlap, no source/oracle/603 CSV mutation, no change to 153 context-qualified/29 missing-literal-qualified caveats, no deployment or production/provider/member writes.
+
+---
+
 ## November 1 UTC — Issue33 PR337 #490 selected price release badge VERIFIED narrow READY, NOT DEPLOYED
 
 **Actual official before/after:** [before run 41345004665](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345004665) versus [after run 41346030000](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41346030000) on exact current official URLs: **4/4 guarded HTTPS pages fetched, 4/4 parsed** both times. Exact H1 and URL identities unchanged. Only original603 **#490 Great Circle La Josefina Sudán Rumé** changed `release_label` **blank → Next Level**, independently printed as exact selected H1-adjacent `data-badge="next-level"` price badge. #16 Be Bright Nitro Caturra, #25 Bleu reused Papua slug/current Sumatra and #31 Boston Common Brazil Oberon all canonical fields and conflict arrays **byte-for-byte equal** across runs; all four conflicts unchanged/empty. Full per-case field maps and raw source SHA256s in `docs/audits/issue33-selected-price-release-badge-current4-before-after-20261101.json`. This is **one** source-backed omission fixed, not all603 accuracy.
