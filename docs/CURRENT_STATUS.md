@@ -1,3 +1,9 @@
+## November 1, 2026 — Issue #335 recovered research originals and calibrated-grind safety TESTING
+
+Recovered `Espresso_Research_Reports.zip` (9 Markdown + 9 export JSON originals, plus slow-feeding PDF) now accessible and hashed; [source review](research/espresso-originals-review-20261101.md) documents nine scoped findings and unverified original citation markers. Source-guided safe code change staged in `feature/335-exact-coffee-grind-sensitivity-20261101` from `0b74b9bceecb946fc0d266eb446b7e9e4ee8abe3`: no more borrowing grind/time sensitivity from unrelated coffees, and don't calibrate using incomplete or temperature-inconsistent history. Keeps existing bounded conservative step when exact-coffee evidence missing. [Issue #335](https://github.com/Schulzet3/The-Dial-In-Collective/issues/335); queue `DIC-Q-335-exact-coffee-grind-response` TESTING until application and exact-source CI / nonforce merge. No DEPLOY, production DB/Auth/Edge/member modifications or new numeric ratios/temperatures.
+
+---
+
 ## November 1, 2026 — #267 V2 first source-bound batches (audit only, no deployment)
 
 Fresh V2 historical semantic review: **312/579,961**, next original file #5 line 1; V1 71,120 remains separate. Fresh current executable-code semantic review: **314** lines on pinned `9707553a64f88127826e8f5b2b36cd0651296e83` (tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`), 436 eligible files, 296 verified line-count files, 140 pending; total current line denominator **not yet known**. Historical/current receipts and append-only ledgers in `docs/audits/issue267-v2-*`; [journal](workstreams/issue-267.md). Historical scripts/pwa workflow trigger omission already corrected in current code; no proven new code defect, no code/test/CI change, no READY/deploy/production writes. Exact-source approval CI for this documentation commit must be checked separately; no PASS claimed yet. Issue #267 remains OPEN.
