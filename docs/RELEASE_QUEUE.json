@@ -3545,24 +3545,36 @@
       "id": "DIC-Q-33-selected-origin-method-suffix",
       "issue": 33,
       "title": "Keep selected coffee Origin country separate from an appended green-process or water-decaf method",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
         "Independent official selected #3 and #35 current baseline 41360857286: 4/4 fetched/parsed; raw H1/source hashes and exact malformed origin outputs recorded in same-commit Issue33 journal.",
         "Seven focused positive/adversarial Node regression groups staged; exact-source CI, merge and fresh official after-run pending.",
-        "Source controls #10 and #550 must remain unchanged; no historical original603 qualification count is certified."
+        "Source controls #10 and #550 must remain unchanged; no historical original603 qualification count is certified.",
+        "Corrected PR343 exact head d79cfd2: Node/lint/build 41361260821 2175 PASS/0 FAIL/6 SKIP; cloud/mobile 41361260839 1703 PASS/0 FAIL; SQL41361260828, visual41361260786, approval41361261498, security41361260865, private source41361260779 all SUCCESS. Original frozen60341361260783 SKIPPED, not PASS.",
+        "PR343 nonforce squash merged f1ddad170a497bc4c42de608e7911494291d3719; tested PR-head and merged Git trees identical 5bca47fd8ef0cfae3591aa296a1be4805794c1d0. Exact merged Node/lint/build41361523002 2175 PASS/0 FAIL/6 SKIP, cloud/mobile41361523005 SUCCESS, approval41361523062 SUCCESS.",
+        "Fresh exact merged official four-case after 41361523001 fetched/parsed 4/4, H1/source facts/conflicts unchanged; only original603 #3 and #35 canonical origin fields corrected, #10/#550 unchanged. Audit docs/audits/issue33-selected-origin-method-current4-before-after-20261101.json."
       ],
-      "blockers": [
-        "Exact applicable PR-head CI and safe nonforce merge not yet verified.",
-        "Fresh official selected four-case after-read, precise only-two-field changes, conflicts/source facts and exact merged-source CI pending."
-      ],
-      "notes": "TESTING ONLY. Do not publish; source captions are literal process/decaf provenance, not geographic place. Original603 oracle/captures/CSV and 153 context-qualified/29 missing-literal-qualified unchanged.",
+      "blockers": [],
+      "notes": "NARROW READY, NOT DEPLOYED. Original603 #3 Guatemala ASOPCE and #35 Brewpoint Alchemist geographic Origin excludes printed processing/decaf suffix; raw source facts preserved. Independent official 4/4 exact merged after-read and PR/merged CI PASS. Educational-heading synthetic boundary concern separately unresolved under parent #33; no blanket educational safety claim. Immutable603, 153 context-qualified, 29 missing-literal-qualified, #267 V2 and #96 preserved.",
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "merged_source_sha": null,
-      "ci_runs": [],
-      "pr": null
+      "merged_source_sha": "f1ddad170a497bc4c42de608e7911494291d3719",
+      "ci_runs": [
+        41361260821,
+        41361260839,
+        41361260828,
+        41361260786,
+        41361261498,
+        41361260865,
+        41361260779,
+        41361523002,
+        41361523005,
+        41361523062,
+        41361523001
+      ],
+      "pr": 343
     }
   ],
   "history": [
