@@ -11,7 +11,7 @@
       "id": "DIC-Q-335-diagnostic-feedback-noop",
       "issue": 335,
       "title": "Do not present unchanged puck preparation feedback as numeric shot adjustment",
-      "state": "TESTING",
+      "state": "READY",
       "pr": 336,
       "scope_paths": [
         "site/lib/engine.js"
@@ -20,7 +20,9 @@
         "Research-only pack 48/48 reference cases PASS locally; not app CI.",
         "Application regression and exact-source checks PENDING.",
         "PR336 original head approval 41344289349 and visual 41344289364 FAILED: queue schema and pre-existing compact instruction wording. SQL 41344289354, security 41344289331 SUCCESS; original603 41344289251 SKIPPED. Corrected on follow-up source; new CI pending.",
-        "PR336 head 97680eac: approval 41344508553, SQL 41344508518, security 41344508537, visual 41344508467, cloud/mobile 41344508536 SUCCESS; Node 41344508653 FAILED one obsolete grinder17 diagnostic fixture, corrected with separate clamp and no-op regressions, retest pending."
+        "PR336 head 97680eac: approval 41344508553, SQL 41344508518, security 41344508537, visual 41344508467, cloud/mobile 41344508536 SUCCESS; Node 41344508653 FAILED one obsolete grinder17 diagnostic fixture, corrected with separate clamp and no-op regressions, retest pending.",
+        "PR336 final head ce3b0f8c37bce9fc3d6ebdbb9345667bb92644e2: approval 41344793021, security 41344793017, isolated SQL 41344792989, visual 41344793009, cloud/mobile 41344792998, Node/lint/build 41344793222 SUCCESS; frozen603 41344792991 SKIPPED, not PASSED.",
+        "Nonforce merged at 1131b5add9fd156b418d60137e3f7ae801fbfa95; exact merged approval 41345062063, visual 41345062088, cloud/mobile 41345062047 and Node/lint/build 41345062090 all SUCCESS, 2148 PASS/0 FAIL/6 intentionally SKIPPED from 2154 Node tests."
       ],
       "ci_runs": [
         41344289349,
@@ -32,14 +34,22 @@
         41344508537,
         41344508467,
         41344508536,
-        41344508653
+        41344508653,
+        41344793021,
+        41344793017,
+        41344792989,
+        41344793009,
+        41344792998,
+        41344793222,
+        41345062063,
+        41345062088,
+        41345062047,
+        41345062090
       ],
-      "blockers": [
-        "Retest corrected Node regression and exact-source applicable checks; nonforce merge, merged-source CI required before READY."
-      ],
-      "notes": "No original nine research texts accessible. Fix is narrow and NOT DEPLOYED.",
+      "blockers": [],
+      "notes": "NARROW READY, NOT DEPLOYED: diagnostic-only prep/evenness feedback never invents a numeric setting change; previous measured recipe, historical cached suggestions, personal shots and Locked behavior preserved. Nine new full originals not accessible; Issue335 remains OPEN for source intake. Netlify still Oct30 Release13 published.",
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
-      "merged_source_sha": null
+      "merged_source_sha": "1131b5add9fd156b418d60137e3f7ae801fbfa95"
     },
     {
       "id": "DIC-Q-33-selected-current-harvest-year-provenance",

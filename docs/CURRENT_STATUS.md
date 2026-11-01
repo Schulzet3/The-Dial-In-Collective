@@ -1,3 +1,9 @@
+## November 1 — Issue #335 narrow recommendation fix READY, not DEPLOYED
+
+[PR336](https://github.com/Schulzet3/The-Dial-In-Collective/pull/336) safely nonforce merged code `1131b5add9fd156b418d60137e3f7ae801fbfa95`. Final PR head six applicable CI SUCCESS; original603 replay SKIPPED. Exact merged Node/lint/build [41345062090](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345062090): 2148 PASS/0 FAIL/6 intentional SKIP, cloud/mobile41345062047, visual41345062088, approval41345062063 SUCCESS. Queue `DIC-Q-335-diagnostic-feedback-noop` narrow READY; not published. Netlify still October30 current deployment 6ae421f5de038d292bd66407 / git 42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7. Original nine recovered research full-text files not accessible, broader [Issue335](https://github.com/Schulzet3/The-Dial-In-Collective/issues/335) OPEN. [Journal](workstreams/issue-335.md); no production SQL/Auth/Edge/member changes or Locked decision supersession.
+
+---
+
 ## November 1 — Issue #335 full Node regression fixture corrected (retest pending)
 
 PR [#336](https://github.com/Schulzet3/The-Dial-In-Collective/pull/336): at corrected source `97680eac0b96fecb368957f955bb5e36535fce61`, approval41344508553, SQL41344508518, security41344508537, visual41344508467 and cloud/mobile41344508536 SUCCESS, but Node41344508653 failed one stale grinder17 fixture expecting a no-op diagnostic numeric recommendation. Test now explicitly distinguishes actual fast-underextracted grind-clamp behavior from diagnostic-only unchanged historical data; new exact-source CI pending. Frozen603 SKIPPED. Not deployed.
