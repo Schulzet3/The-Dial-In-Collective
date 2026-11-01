@@ -62,3 +62,13 @@ test('unrelated generic washing-station guidance leaves only the published count
  assert.equal(result.ok,true,JSON.stringify(result));
  assert.equal(result.fields.origin,'Ethiopia');
 });
+
+test('fresh official November 1 selected Chelchele kebele and district wording is source-bound',()=>{
+ const published='This coffee comes from the Chelchele washing station, which is in the kebele, or village, of Chelchele, in the words, or district, of Kochere, in the Yirgacheffe region.';
+ const result=parse('Ethiopia Chelchele G1 Natural',published);
+ assert.equal(result.ok,true,JSON.stringify(result));
+ assert.equal(result.fields.origin,'Chelchele, Kochere, Yirgacheffe, Ethiopia');
+ assert.match(coffeeUrlPreviewMarkup(result),/Kochere/);
+ const other=parse('Ethiopia Ayla Bombe G1 Natural',published);
+ assert.notEqual(other.fields.origin,'Chelchele, Kochere, Yirgacheffe, Ethiopia');
+});

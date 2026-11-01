@@ -257,12 +257,12 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
    const stationCountry=countryNames(name);
    if(stationCountry.length===1&&countryNames(sentence).every(value=>key(value)===key(stationCountry[0]))){
     const district=sentence.match(new RegExp(
-     '^(?:This|Our)\\s+coffee\\s+comes\\s+from\\s+(?:the\\s+)?('+PLACE+')\\s+washing\\s+station,\\s+which\\s+is\\s+in\\s+the\\s+village\\s+of\\s+('+PLACE+'),\\s+district\\s+('+PLACE+'),\\s+('+PLACE+')[.!?]?$','iu'));
+     '^(?:This|Our)\\s+coffee\\s+comes\\s+from\\s+(?:the\\s+)?('+PLACE+')\\s+washing\\s+station,\\s+which\\s+is\\s+in\\s+the\\s+(?:kebele,\\s+or\\s+)?village,?\\s+of\\s+('+PLACE+'),\\s+(?:in\\s+the\\s+(?:[A-Za-z]{3,12},\\s+or\\s+)?district,?\\s+of\\s+|district\\s+)('+PLACE+'),\\s+(?:in\\s+the\\s+)?('+PLACE+')(?:\\s+region)?[.!?]?$','iu'));
     const village=sentence.match(new RegExp(
      '^From\\s+the\\s+('+PLACE+')\\s+Washing\\s+Station,\\s+which\\s+serves\\s+(?:the\\s+)?(?:nearly\\s+)?\\d{1,5}\\s+(?:small\\s+)?farmers\\s+in\\s+the\\s+village\\s+of\\s+('+PLACE+')\\s+in\\s+('+PLACE+'),\\s+comes\\s+this\\b','iu'));
     const station=(district?.[1]||village?.[1]||'').trim();
     const localities=(district?district.slice(2):village?.slice(2)||[])
-     .map(value=>value.replace(/[.!?]+$/u,'').trim());
+     .map(value=>value.replace(/\s+region[.!?]*$/iu,'').replace(/[.!?]+$/u,'').trim());
     if(station.length>=4&&key(name).includes(key(station))&&localities.length>=2&&
        localities.every(value=>value.length>=3&&value.length<=65&&
         !completeVarietyPhrase(value,{explicit:true})&&
