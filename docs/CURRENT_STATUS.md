@@ -1,3 +1,9 @@
+## November 1 — Issue #335 first PR CI validation failures repaired, retest pending
+
+PR [#336](https://github.com/Schulzet3/The-Dial-In-Collective/pull/336) original source `8cc7315367872ec54f277ffc45ce1bb1c496c03b` failed approval run41344289349 on queue schema and visual run41344289364 on pre-existing Project Instructions safety phrases. Corrected required nullable merged SHA, deployable-only scope and existing owner safety wording without a new policy; new exact-source CI pending. SQL41344289354 and security41344289331 SUCCESS; frozen603 SKIPPED. No production writes or deployment.
+
+---
+
 ## November 1, 2026 — Issue #335 diagnostic recommendation fix staged for tests (NOT READY/DEPLOYED)
 
 Owner requested recovered nine originals; Project Files inventory does not yet expose their full texts. Prior research implementation ZIP and S019 PDF hash verified; research-only validator and 48/48 reference test cases PASS, not app performance evidence. Staged a narrow source-verified fix for no-op evenness guidance plus legacy cached suggestions on isolated `feature/research-diagnostic-noop-20261101`; application CI, merge and source READY still pending. [Issue #335](https://github.com/Schulzet3/The-Dial-In-Collective/issues/335), [journal](workstreams/issue-335.md), [intake](research/espresso-research-intake-20261101.md). No Locked change, deploy, SQL/Auth/Edge/member write.

@@ -12,21 +12,27 @@
       "issue": 335,
       "title": "Do not present unchanged puck preparation feedback as numeric shot adjustment",
       "state": "TESTING",
-      "pr": null,
+      "pr": 336,
       "scope_paths": [
-        "site/lib/engine.js",
-        "tests/next-shot-control-consistency.test.mjs"
+        "site/lib/engine.js"
       ],
       "tests": [
         "Research-only pack 48/48 reference cases PASS locally; not app CI.",
-        "Application regression and exact-source checks PENDING."
+        "Application regression and exact-source checks PENDING.",
+        "PR336 original head approval 41344289349 and visual 41344289364 FAILED: queue schema and pre-existing compact instruction wording. SQL 41344289354, security 41344289331 SUCCESS; original603 41344289251 SKIPPED. Corrected on follow-up source; new CI pending."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        41344289349,
+        41344289364,
+        41344289354,
+        41344289331
+      ],
       "blockers": [
-        "Need app tests and exact-source CI/nonforce merge before READY."
+        "Await corrected exact-head Node/build, cloud/mobile, approval, visual checks and nonforce merged-source CI."
       ],
       "notes": "No original nine research texts accessible. Fix is narrow and NOT DEPLOYED.",
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335"
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
+      "merged_source_sha": null
     },
     {
       "id": "DIC-Q-33-selected-current-harvest-year-provenance",
