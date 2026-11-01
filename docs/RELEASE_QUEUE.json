@@ -11,22 +11,46 @@
       "id": "DIC-Q-33-selected-station-village-locality",
       "issue": 33,
       "title": "Exact selected washing-station source retains printed village and district without unrelated-lot leakage",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ],
       "tests": [
         "October30 source-bound original603 #14 selected Chelchele description prints station, village, district and Yirgacheffe; old parser only Yirgacheffe/Ethiopia.",
         "Six-group bounded regression candidate, exact-source CI pending.",
-        "Fresh selected official #14 H1, current lot and field/conflict readback pending; older Ayla cache is not current proof."
+        "Fresh selected official #14 H1, current lot and field/conflict readback pending; older Ayla cache is not current proof.",
+        "PR340 exact head 5c04375 seven applicable workflows SUCCESS, Node41355942788 2167 PASS/0 FAIL/6 SKIP; original frozen603 41355942877 SKIPPED.",
+        "First fresh current official fifth20 41356209421 fetched/parsed 20/20 but exposed real #14 kebele/or village phrasing gap; PR341 repaired with exact current source quote regression.",
+        "PR341 exact head ffcc90f seven applicable workflows SUCCESS: Node41356341719 2168 PASS/0 FAIL/6 SKIP, cloud41356342003, SQL41356341769, visual41356341833, approval41356341897, security41356341809, private source41356341792; original frozen603 41356341852 SKIPPED.",
+        "PR341 nonforce squash merged de27b59; exact merged source b40ab055 Node/lint/build41356573590 2168 PASS/0 FAIL/6 SKIP, approval41356573611 SUCCESS, Python41356573648 SUCCESS.",
+        "Exact official after-run 41356573624 20/20 fetched/parsed; only #14 origin Yirgacheffe, Ethiopia -> Chelchele, Kochere, Yirgacheffe, Ethiopia, no changed conflicts, other 19 canonical fields/conflicts unchanged; see docs/audits/issue33-selected-station-village-current20-before-after-20261101.json."
       ],
-      "blockers": [
-        "Exact PR-head applicable CI, nonforce integration and fresh selected official source comparison not yet complete."
-      ],
-      "notes": "TESTING, not READY/DEPLOYED; 153 contextual and 29 missing-literal qualified remain; no all603/hosted GoTrue claim.",
+      "blockers": [],
+      "notes": "NARROW READY, NOT DEPLOYED. Exact current selected Beanstock #14 village/district directly printed; no stale Ayla identity, no all603/hosted GoTrue claim, original603 and 153 context-qualified/29 missing-literal-qualified unchanged. PR340 simplified pattern initially insufficient; PR341 fixed actual live wording.",
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "merged_source_sha": null,
-      "ci_runs": []
+      "merged_source_sha": "de27b59a53312f9ce63e333a94a052aaaf270e8e",
+      "ci_runs": [
+        41355942788,
+        41355942767,
+        41355942724,
+        41355942925,
+        41355942782,
+        41355942731,
+        41355942760,
+        41356209421,
+        41356341719,
+        41356342003,
+        41356341769,
+        41356341833,
+        41356341897,
+        41356341809,
+        41356341792,
+        41356573590,
+        41356573611,
+        41356573648,
+        41356573624
+      ],
+      "pr": 341
     },
     {
       "id": "DIC-Q-33-selected-regional-blend-prose",
