@@ -1,0 +1,9 @@
+# Issue #335 — research intake and next-shot diagnostic correction
+
+Nov 1, 2026. Owner authorized research ingestion and safe app improvements, not publication. Base source `52b59ba129260998af37dcd2e42037595d9c1d0a`; isolated branch `feature/research-diagnostic-noop-20261101`. Issue: https://github.com/Schulzet3/The-Dial-In-Collective/issues/335.
+
+Accessible Project Files showed three older items, **not the actual nine newly recovered reports**. Older nested archive contains nine JSON source-reference stubs, not full research texts. Verified available implementation ZIP SHA-256 `7d562a4536cf4f79bfa17898672ff6a2ec30aa6c1147e7a33f3d06017776bf1d` and S019 PDF SHA-256 `d4d9cc5b41e3ac25fc6840b65e11cc8df9e3f32759a5831c992c448723bcabb6`. Local standalone research validator PASS and reference scenarios 48/48 PASS, **not app CI or proof of better coffee**. Thirteen research-only diagnostic rules are experimental.
+
+Source-verified defect: `nextAdviceRaw` represented unchanged grind/yield as `next` under low-clarity/high-astringency evenness advice. Correction returns `kind:'diagnostic', next:null`, retains last measured controls in displayed recipe with diagnostic source, suppresses false grind search band, and re-evaluates legacy cached unchanged advice without altering stored records. Added fresh/legacy tests. Scoped files engine, next-shot tests, this journal, README, status, queue, intake. Existing five all-green success, one controllable variable, roast/style separation, consent/privacy, offline, Community, 603 source and member records unchanged.
+
+**Initial state TESTING:** actual app Node/lint/build, cloud/mobile, approval and exact-source CI not yet run. No PR merge/READY/deploy, production SQL/Auth/Edge or private record writes. Next verify checks, repair, merge nonforce only when safe, read back exact source and CI; later ingest original nine only once actual files are available. No new Locked decision or project-instruction rule.

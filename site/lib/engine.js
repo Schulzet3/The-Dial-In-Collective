@@ -337,17 +337,27 @@ export function recommendation(s,coffeeId,options={}) {
  if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
-  const a=last.suggestion||nextAdvice(s,last,rec);
-  if(a.next){
+  const cached=last.suggestion;
+  // Legacy evenness feedback stored unchanged controls as 'next'; re-evaluate
+  // without mutating the original shot or its stored suggestion.
+  const oldNoOp=cached?.next&&cached.next.grindSetting===last.grindSetting&&
+   cached.next.yieldCenter===last.yieldG&&
+   (cached.next.tempC==null||cached.next.tempC===last.tempC);
+  const a=oldNoOp?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
+  if(a.next||a.kind==='diagnostic'){
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.
    // The owner-Locked Dose caption remains unchanged; the initial starting
    // recipe above still uses basket dose, while this adjustment uses actuals.
-   rec.reasons=[];rec.source='Adjustment from your latest taste rating';
-   rec.doseG=a.next.doseG??last.doseG;
-   rec.tempC=a.next.tempC??last.tempC??null;
-   rec.grind={value:a.next.grindSetting??last.grindSetting,source:'Next setting to try',proven:false};
-   const nextYield=a.next.yieldCenter??last.yieldG;
+   const diagnostic=a.kind==='diagnostic';
+   rec.reasons=diagnostic?['Review distribution and tamp consistency before changing a setting.']:[];
+   rec.source=diagnostic?'Your last measured shot (preparation check)':'Adjustment from your latest taste rating';
+   rec.diagnosticOnly=diagnostic;
+   rec.doseG=a.next?.doseG??last.doseG;
+   rec.tempC=a.next?.tempC??last.tempC??null;
+   rec.grind={value:a.next?.grindSetting??last.grindSetting,
+    source:diagnostic?'Last measured grind; no change suggested':'Next setting to try',proven:false};
+   const nextYield=a.next?.yieldCenter??last.yieldG;
    rec.yield={low:Math.max(5,round(nextYield-1)),high:round(nextYield+1),center:round(nextYield)};
    rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};
   }
@@ -355,7 +365,7 @@ export function recommendation(s,coffeeId,options={}) {
  // Every recommendation is a selectable tenth inside this setup's actual
  // espresso range. The guard also protects older measurements and fallbacks.
  if(rec.grind&&finite(rec.grind.value))rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
- if(!rec.established&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
+ if(!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
   // A calibrated starting search band is NOT a statistical confidence interval.
   // A pure espresso-scale heuristic is intentionally less precise than personal evidence.
@@ -379,7 +389,7 @@ function nextAdviceRaw(s,shot,rec) {
  if(isDialed(t))return {title:'Dialed in. Nicely done.',text:'Balanced, sweet and clean for your taste. This shot adds to your successful recipe window.',next:null};
  const step=grindStep(v),fast=shot.timeS<rec.time.low,slow=shot.timeS>rec.time.high;
  const direction=t.extraction<3?'finer':t.extraction>3?'coarser':null;
- if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG}};
+ if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',kind:'diagnostic',next:null};
  if((direction==='finer'&&fast)||(direction==='coarser'&&slow)){
   const pairs=s.shots.filter(x=>x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
   const exact=pairs.filter(x=>x.coffeeId===shot.coffeeId),sens=learnSensitivity(exact)||learnSensitivity(pairs);

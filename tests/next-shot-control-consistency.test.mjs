@@ -36,3 +36,28 @@ test('fresh starting recipes and ignoreAdvice references retain their basket-bas
  const reference=recommendation(state,'coffee',{ignoreAdvice:true});assert.equal(reference.doseG,18);assert.equal(reference.tempC,95);
  state.shots=[];const fresh=recommendation(state,'coffee');assert.equal(fresh.doseG,18);assert.equal(fresh.tempC,95);
 });
+
+test('research: check-evenness feedback has no proposed numeric change',()=>{
+ const {state,shot}=fixture({tempC:null,tasteScales:{extraction:2,body:3,clarity:2,sweetness:4,astringency:3}});
+ const before=structuredClone(shot);
+ const advice=nextAdvice(state,shot,recommendation(state,'coffee',{ignoreAdvice:true}));
+ assert.equal(advice.kind,'diagnostic');
+ assert.equal(advice.next,null);
+ assert.equal(nextShotAdjustment(advice,shot,true,'C'),null);
+ const rec=recommendation(state,'coffee');
+ assert.equal(rec.source,'Your last measured shot (preparation check)');
+ assert.equal(rec.diagnosticOnly,true);
+ assert.deepEqual([rec.doseG,rec.yield.center,rec.grind.value,rec.tempC],[20,50,1.2,null]);
+ assert.equal(rec.grind.range,undefined);
+ assert.deepEqual(shot,before);
+});
+test('research: older cached unchanged controls remain read-only diagnostic feedback',()=>{
+ const {state,shot}=fixture({tasteScales:{extraction:3,body:3,clarity:2,sweetness:4,astringency:3}});
+ shot.suggestion={title:'Check evenness first',text:'Legacy advice',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG}};
+ const before=structuredClone(shot),rec=recommendation(state,'coffee');
+ assert.equal(rec.source,'Your last measured shot (preparation check)');
+ assert.equal(rec.diagnosticOnly,true);
+ assert.deepEqual([rec.doseG,rec.yield.center,rec.grind.value],[20,50,1.2]);
+ assert.equal(rec.grind.range,undefined);
+ assert.deepEqual(shot,before);
+});
