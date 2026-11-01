@@ -1,0 +1,162 @@
+{
+  "date": "2026-11-01",
+  "status": "BOUNDED AUDIT; NOT 100% CERTIFICATION",
+  "github": {
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "visibility": "private",
+    "development_before_audit": "be777ccd34789f10197fc34657469b711166d5a9",
+    "main": "e76cf02d1685232eb3429733410f3e41e82585ad",
+    "published_release": "42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7",
+    "queue_statuses": {
+      "TESTING": 1,
+      "READY": 13,
+      "DEPLOYED": 71,
+      "IN_PROGRESS": 2
+    },
+    "issues_open": [
+      28,
+      33,
+      37,
+      47,
+      96,
+      267,
+      332,
+      335
+    ],
+    "draft_audit_prs_retained": [
+      295,
+      296,
+      327
+    ],
+    "obsolete_pr286": "closed unmerged with comment, original evidence preserved"
+  },
+  "netlify": {
+    "site": "the-dial-in-collective",
+    "site_id": "153277f2-e19e-4862-b9a6-f2e18ccde271",
+    "published_deploy": "6ae421f5de038d292bd66407",
+    "state": "current/ready",
+    "git_commit": "42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7",
+    "published_at": "2026-10-30T04:50:15.707Z",
+    "nonprod_sso": true,
+    "functions": [
+      "coffee-url-preview"
+    ],
+    "forms_enabled": false,
+    "secret_scan_matches": 0,
+    "environment_key_names": [
+      "SUPABASE_URL",
+      "SUPABASE_PUBLISHABLE_KEY"
+    ],
+    "http_404_last_window": 136,
+    "top_404": "WordPress scanner probes; not proven app defects"
+  },
+  "supabase": {
+    "project": "azviqqejypsefzilgonr",
+    "state": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "tables_public": 22,
+    "tables_private": 24,
+    "rls_disabled": 0,
+    "dic_public_rpc_count": 41,
+    "anon_executable_dic_rpcs": 0,
+    "authenticated_executable_security_definer_rpcs": 10,
+    "edge_functions": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "jwt": true
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "jwt": true
+      }
+    ],
+    "branches": 0,
+    "security_advisors": [
+      {
+        "name": "rls_enabled_no_policy",
+        "count": 6,
+        "level": "INFO",
+        "note": "private schema; deny-by-default; do not add permissive policies automatically"
+      },
+      {
+        "name": "authenticated_security_definer_function_executable",
+        "count": 10,
+        "level": "WARN",
+        "note": "review actual guards, ownership, grants and search_path; not evidence of exploitation"
+      },
+      {
+        "name": "auth_leaked_password_protection",
+        "count": 1,
+        "level": "WARN",
+        "note": "existing owner-Locked optional beta decision; no Auth/plan changes"
+      }
+    ],
+    "performance_advisors": [
+      {
+        "name": "unindexed_foreign_keys",
+        "count": 12,
+        "level": "INFO"
+      },
+      {
+        "name": "unused_index",
+        "count": 9,
+        "level": "INFO",
+        "note": "do not drop based solely on usage statistics"
+      }
+    ]
+  },
+  "verification": {
+    "backup_source_pin": "matches published SHA, Issue330 closed",
+    "nov1_backup_run": 41316998335,
+    "nov1_ciphertext_artifact": 13087632285,
+    "nov1_artifact_bytes": 5940899,
+    "nov1_natural_sunday_regression_run": 41317000737,
+    "nov1_natural_sunday_regression": "SUCCESS",
+    "issue134": "closed",
+    "backup_crons_utc": [
+      "0 8 * * *",
+      "17 8 * * *",
+      "37 9 * * *",
+      "17 12 * * *"
+    ],
+    "backstop_punctuality": "UNVERIFIED after workflow change",
+    "node_cloud_full_success_at": "f2b086cd76c2961f00842c3e0bfa03664528757c",
+    "node_run": 41350857972,
+    "cloud_run": 41350857902,
+    "latest_app_source_ci": "MUST VERIFY LIVE: Issue33 continues changing development source",
+    "offsite_backup_reverify": "NOT PERFORMED IN THIS AUDIT",
+    "fresh_restoration": "NOT PERFORMED"
+  },
+  "research_and_reviews": {
+    "issue267_v2_historical_reviewed": 755,
+    "total_historical": 579961,
+    "issue267_v2_current_reviewed": 758,
+    "current_eligible_files": 436,
+    "current_pending_line_count_files": 139,
+    "current_code_denominator": "UNKNOWN",
+    "original603": "NOT FULLY CERTIFIED",
+    "issue335": "nine recovered original espresso report texts + exported JSON indexed; narrow recommendation fixes READY, scientific outcomes unverified"
+  },
+  "unresolved": [
+    "Issue96 real post-release Admin/member and ten security-definer RPC authorization review",
+    "Issue332 scheduled 08:00 UTC punctuality and fresh offsite acceptance",
+    "Issue267 full two-track V2 audit",
+    "Issue33 full original603 exact source certification",
+    "Issue335 field outcomes and broader science",
+    "Issue47 signed-in Admin editing QA",
+    "Current development changes may have queued or in-progress CI",
+    "No fresh physical-device/browser/restore testing in this audit"
+  ],
+  "safeguards": {
+    "no_publish": true,
+    "no_supabase_write": true,
+    "no_auth_change": true,
+    "no_member_data_changes": true,
+    "no_historical_deletions": true,
+    "no_force_git": true,
+    "no_purchases": true
+  },
+  "next": "Recover newer GitHub issue journal, queue, CI and live provider status before future changes. This dated report is archival evidence, not a static assertion of future readiness."
+}

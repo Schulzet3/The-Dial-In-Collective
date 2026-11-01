@@ -36,3 +36,5 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #28 permanent backup acceptance and no-retest evidence](../audits/issue28-acceptance-evidence-no-repeat-20261029.md)
 
 - [Issue #335 research intake and diagnostic feedback](issue-335.md)
+
+- [Cross-provider readiness and obsolete-item audit — November 1](ops-provider-readiness-20261101.md)
