@@ -11,21 +11,32 @@
       "id": "DIC-Q-335-exact-coffee-grind-response",
       "issue": 335,
       "title": "Keep time-based grind sensitivity specific to same coffee and controlled measurements",
-      "state": "TESTING",
-      "merged_source_sha": null,
-      "pr": null,
+      "state": "READY",
+      "merged_source_sha": "9c585cc93a5bcd33f380822b25441ad6fb54f9a5",
+      "pr": 338,
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Research reports 01–09 inspected from user-provided ZIP, SHA-256 provenance recorded; document citation claims unverified.",
-        "Focused engine regression and exact-source PR/merged CI PENDING."
+        "Exact PR338 head aae4f86a5e48412bfcc77745bbc1cb32669eb6cd: approval 41348286845, security 41348286860, SQL 41348286969, visual 41348286861, cloud/mobile 41348286888, Node/lint/build 41348286872 all SUCCESS; original frozen603 41348286849 SKIPPED not PASS.",
+        "PR338 nonforce merged exact code SHA 9c585cc93a5bcd33f380822b25441ad6fb54f9a5; verified dev branch and PR state. Exact merged push approval 41348534031, visual 41348534042, cloud/mobile 41348534027, Node/lint/build 41348534088 all SUCCESS. 2156 Node PASS/0 FAIL/6 intentional SKIP of 2162; lint and build passed.",
+        "Research pack local validate.js PASS and test.js 48/48 PASS (reference only); nine original report archive unzipped and hashes checked. Two central primary publications confirmed externally; full report-source fact audit and real user outcome validation NOT performed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Requires exact-source CI, safe non-force integration and merged-source verification."
+      "ci_runs": [
+        41348286845,
+        41348286860,
+        41348286969,
+        41348286861,
+        41348286888,
+        41348286872,
+        41348534031,
+        41348534042,
+        41348534027,
+        41348534088
       ],
-      "notes": "Development-only; no numeric roast/style priors, source data edits, production writes or app deploy.",
+      "blockers": [],
+      "notes": "NARROW READY NOT DEPLOYED. Exact-coffee-only timing slope calibrated using controlled observations, incomplete/temperature-mismatched pairs excluded. Conservative existing grind step when insufficient data. Historical recorded shots and Locked priors unchanged. This is not claim of empirically better flavor; original603 scheduled replay skipped. Netlify current remains 6ae421f5de038d292bd66407.",
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335"
     },
     {
