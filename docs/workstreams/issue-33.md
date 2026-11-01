@@ -1,3 +1,9 @@
+## November 1 UTC — Issue33 candidate tool-side source repair (TESTING)
+
+First isolated feature-branch commit `a87439f99962c5ccf04317f09920f41079896120` incorrectly expanded a literal JavaScript `$'` replacement token into 556 extra source lines. **No PR, CI, integration or publication** used that erroneous commit. This same-commit correction regenerates from exact development base with callback replacement, retaining only the intended bounded source addition; earlier commit remains auditable in branch history. Queue remains TESTING; exact CI still required.
+
+---
+
 ## November 1 UTC — Issue33 selected station-village locality candidate TESTING (no deployment)
 
 **Authority/source:** Issue #33; development base `7585360e86d7d70927007cf17a8a3a78d638e00e`. October 30 source-bound original603 #14 selected Beanstock H1 `New!! Ethiopia Chelchele G1 Natural` explicitly said “This coffee comes from the Chelchele washing station, which is in the village of Chelchele, district Kochere, Yirgacheffe”; parser retained only Yirgacheffe/Ethiopia. The same official product URL's older web cache identifies a **different** Ayla Bombe H1 and separately states “From the Ayla Washing Station ... village of Bombe in Sidama”. These are distinct selected identities, never merged or declared simultaneously current; exact official URL https://beanstockcoffee.com/products/ethiopia-ayla-bombe-g1-natural . New generic rule requires the current selected name to contain the exact printed washing station, country explicitly in that selected title, and a direct same-sentence village/district/region claim; no stale SEO or gazetteer. Six bounded adversarial tests include unrelated station, historic/general text and contradictory-country cases.
