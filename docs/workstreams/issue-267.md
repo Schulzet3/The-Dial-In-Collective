@@ -2,6 +2,17 @@
 
 **State: OPEN — original literal historical review NOT COMPLETE.**
 
+## November 1, 2026 — explicit full line-1 restart (V2 controls over earlier continuation notes)
+
+**New owner instruction:** Restart the **entire** Issue #267 line-by-line review at **LINE 1** using the expanded historical-and-current-code review, cleanup, bug-fixing and optimization scope. This intentionally supersedes the prior efficiency directive to resume only from the next historically unreviewed range. It does **not** erase or repudiate the genuine earlier source-bound AI reviews; they remain separate historical **V1** evidence, not fresh V2 credit.
+
+**Authoritative fresh checkpoint:** [V2 review restart](../audits/issue267-review-restart-v2-20261101.json). V2 frozen original review = **0/579,961**, next = **first frozen inventory file `.github/workflows/approval-continuity.yml`, original blob `2cf28b22c69547c15c5f300dc4a68ed96a58791e`, line 1**. Then inspect line 2 and onward in exact sorted 757-file inventory order; review every original UTF-8 line again in manageable bounded batches. V2 live-code audit = **0 reviewed lines** until an actual pinned development inventory is created; start at its first eligible source file's **line 1**, account for later source drift separately. No V2 line has yet been semantically re-reviewed by this configuration change.
+
+**Record separately:** New V2 historical and current-code nonoverlap ledgers/receipts; V1 integrated reported 71,120 lines through B030 and PRs B031–B033 remain intact and never silently transfer to V2 counts. Draft/unmerged legacy PRs are evidence, not V2 review or permission to overwrite development; inspect current PRs and exact-source CI before any integration. Keep both V2 denominators separate (live source denominator determined from pinned inventory). For each V2 line, inspect actual logic/evidence/quality, trace current counterpart, identify obsolete and duplicate current implementations, fix independently proven bugs, and optimize with regression and performance evidence. Do not delete frozen historical materials, migrations, member data or approved code on name/age alone. Changes to current code require same-commit journal, safe nonforce integration and passing exact-source CI; independently queue only genuinely READY changes. No deploy/production data/provider changes.
+
+**Coordination:** The enabled hourly #267 task reads this V2 checkpoint first, staggered from #33. Other scheduled roles retain their independent scopes and safety; exact task prompts/schedules are recorded in [automation registry](../audits/2026-11-01-dic-automations-registry.json). Old continuation sections later in this journal remain dated historical records, NOT instructions to jump ahead to oracle line 59,332 or prior B034+ progress.
+
+
 ## November 1, 2026 — owner-expanded current-code remediation mandate
 
 **Owner direction:** "Please review and edit/update all of those to increase efficiency and/or effectiveness, reduce redundancy and otherwise improve them however you can. Specifically I'd like the line by line review for issue #267 to not only review every line, but to remove old/outdated/redundant code, fix bugs, optimize and improve however possible the code and logic."

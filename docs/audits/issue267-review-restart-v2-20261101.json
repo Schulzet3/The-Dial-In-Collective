@@ -1,0 +1,61 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "decision": "OWNER_DIRECTED_FRESH_REVIEW_FROM_FIRST_LINE_2026-11-01",
+  "effective_date_utc": "2026-11-01",
+  "supersession": "Prior resume-at-next-unreviewed-line optimization is superseded for V2 only. Re-read every line from first file, never erase V1 historical evidence.",
+  "source_of_truth": "docs/workstreams/issue-267.md",
+  "frozen_historical_v2": {
+    "review_pass": "V2_FRESH_REVIEW",
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "inventory": "docs/audits/issue267-frozen-source-inventory.json",
+    "tracked_files": 757,
+    "text_files": 754,
+    "original_text_line_denominator": 579961,
+    "verified_new_v2_reviewed_lines": 0,
+    "remaining_v2_lines": 579961,
+    "status": "NOT_STARTED_UNTIL_ACTUAL_V2_LINE_REVIEW",
+    "next_file_index_1_based": 1,
+    "next_file": ".github/workflows/approval-continuity.yml",
+    "next_source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "next_line_1_based": 1,
+    "next_action": "Read original numbered lines starting at exact first frozen file line 1; inspect each line semantically under expanded audit; record new R2-001 V2 receipt separately before incrementing V2 coverage.",
+    "independently_reviewed_v2_ranges": [],
+    "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed."
+  },
+  "current_code_v2": {
+    "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
+    "inventory_status": "NOT_YET_PINNED_OR_ENUMERATED",
+    "development_sha_to_pin_on_first_run": null,
+    "reviewed_current_source_lines": 0,
+    "reviewed_ranges": [],
+    "next_file": "FIRST_ELIGIBLE_FILE_FROM_VERIFIED_CURRENT_CODE_INVENTORY",
+    "next_line_1_based": 1,
+    "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded."
+  },
+  "legacy_v1_immutable_reference": {
+    "integrated_historical_semantic_lines_reported": 71120,
+    "integrated_batches_reported": "B001-B030",
+    "old_review_and_ledger": "docs/audits/issue267-semantic-coverage-ledger.json",
+    "old_batch_register": "docs/audits/issue267-semantic-batches.json",
+    "additional_pending_legacy_PRs": [
+      295,
+      296,
+      327
+    ],
+    "notes": "Legacy work remains source-linked historical evidence; none counts toward the fresh V2 re-review. Exact current legacy PR merges must be recovered and reconciled independently before acting."
+  },
+  "active_task_id": "6ae78ce168b08191bb8696c22cd038e7",
+  "separate_issue_owners": [
+    33,
+    96,
+    28,
+    134
+  ],
+  "state": "RESET_CONFIGURATION_VERIFIED_NOT_A_NEW_REVIEW_PASS",
+  "app_code_changes_in_this_record": 0,
+  "production_changes": 0,
+  "completed_tests_in_this_record": 0
+}

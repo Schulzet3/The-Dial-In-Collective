@@ -1,3 +1,7 @@
+## November 1, 2026 — owner-approved Issue #267 audit-process restart (not a product-behavior change)
+
+Owner directed the expanded historical semantic and current-code cleanup/optimization review **restart completely at line 1**. New V2 historical audit starts at first frozen inventory file line 1 (0/579,961 newly reviewed); separate V2 current-code audit starts at first eligible current source line 1 after pinning its exact development SHA (0 initially). Historical V1 source-bound receipts, integrated progress and all draft PRs stay preserved and readable but earn no V2 credit. The restart supersedes the earlier optimization to skip already-reviewed lines only for the *new V2 pass*; it does not change original audit denominator, any current Locked product requirement, historical evidence, user data or publication restrictions. Verified current code may be safely simplified/cleaned/fixed, tested and nonforce-integrated without publishing. Authority and source: Issue #267, `docs/workstreams/issue-267.md`, and `docs/audits/issue267-review-restart-v2-20261101.json`.
+
 ## October 29, 2026 — single encrypted offsite Drive folder (Locked owner supersession)
 
 **Owner's explicit instruction:** "Can you please only save to DIC Automated Encrypted Backups? I moved all the files to that folder." This is approved for **backup destination only**, not permission to change encryption, 30-day retention, schedule, recovery keys, credentials, privacy, production databases or release authorization.

@@ -1,3 +1,7 @@
+## Issue #267 owner-directed V2 line-1 restart — November 1, 2026
+
+Before doing #267 work, follow `docs/audits/issue267-review-restart-v2-20261101.json` and `docs/workstreams/issue-267.md`: fresh semantic re-review starts at frozen inventory file #1 line 1, 0/579,961 credited to V2; independent current-code review also starts at its first eligible pinned file line 1. Preserve all old B001+ V1 evidence and draft PRs intact; never credit V1 lines to V2, delete immutable history, bypass CI or deploy. Five task owners/schedules and their boundaries appear in `docs/audits/2026-11-01-dic-automations-registry.json`. This workflow change does not alter product Locked decisions or authorize production operations.
+
 # The Dial In Collective: current operating guide
 
 This is the active guide, reconciled October 23, 2026 UTC / October 22 MDT. The exact previous guide is preserved at `docs/archive/2026-10-23-reconciliation/AGENTS.previous.md`; its dated superseded gates are history, not instructions to repeat them.
