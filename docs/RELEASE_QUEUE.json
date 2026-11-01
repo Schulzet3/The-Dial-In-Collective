@@ -8,6 +8,40 @@
   },
   "items": [
     {
+      "id": "DIC-Q-335-diagnostic-feedback-noop",
+      "issue": 335,
+      "title": "Do not present unchanged puck preparation feedback as numeric shot adjustment",
+      "state": "TESTING",
+      "pr": 336,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Research-only pack 48/48 reference cases PASS locally; not app CI.",
+        "Application regression and exact-source checks PENDING.",
+        "PR336 original head approval 41344289349 and visual 41344289364 FAILED: queue schema and pre-existing compact instruction wording. SQL 41344289354, security 41344289331 SUCCESS; original603 41344289251 SKIPPED. Corrected on follow-up source; new CI pending.",
+        "PR336 head 97680eac: approval 41344508553, SQL 41344508518, security 41344508537, visual 41344508467, cloud/mobile 41344508536 SUCCESS; Node 41344508653 FAILED one obsolete grinder17 diagnostic fixture, corrected with separate clamp and no-op regressions, retest pending."
+      ],
+      "ci_runs": [
+        41344289349,
+        41344289364,
+        41344289354,
+        41344289331,
+        41344508553,
+        41344508518,
+        41344508537,
+        41344508467,
+        41344508536,
+        41344508653
+      ],
+      "blockers": [
+        "Retest corrected Node regression and exact-source applicable checks; nonforce merge, merged-source CI required before READY."
+      ],
+      "notes": "No original nine research texts accessible. Fix is narrow and NOT DEPLOYED.",
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
+      "merged_source_sha": null
+    },
+    {
       "id": "DIC-Q-33-selected-current-harvest-year-provenance",
       "issue": 33,
       "title": "Current selected coffee harvest references must not promote a producer biography into release edition",

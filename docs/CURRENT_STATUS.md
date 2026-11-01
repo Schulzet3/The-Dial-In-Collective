@@ -1,3 +1,21 @@
+## November 1 — Issue #335 full Node regression fixture corrected (retest pending)
+
+PR [#336](https://github.com/Schulzet3/The-Dial-In-Collective/pull/336): at corrected source `97680eac0b96fecb368957f955bb5e36535fce61`, approval41344508553, SQL41344508518, security41344508537, visual41344508467 and cloud/mobile41344508536 SUCCESS, but Node41344508653 failed one stale grinder17 fixture expecting a no-op diagnostic numeric recommendation. Test now explicitly distinguishes actual fast-underextracted grind-clamp behavior from diagnostic-only unchanged historical data; new exact-source CI pending. Frozen603 SKIPPED. Not deployed.
+
+---
+
+## November 1 — Issue #335 first PR CI validation failures repaired, retest pending
+
+PR [#336](https://github.com/Schulzet3/The-Dial-In-Collective/pull/336) original source `8cc7315367872ec54f277ffc45ce1bb1c496c03b` failed approval run41344289349 on queue schema and visual run41344289364 on pre-existing Project Instructions safety phrases. Corrected required nullable merged SHA, deployable-only scope and existing owner safety wording without a new policy; new exact-source CI pending. SQL41344289354 and security41344289331 SUCCESS; frozen603 SKIPPED. No production writes or deployment.
+
+---
+
+## November 1, 2026 — Issue #335 diagnostic recommendation fix staged for tests (NOT READY/DEPLOYED)
+
+Owner requested recovered nine originals; Project Files inventory does not yet expose their full texts. Prior research implementation ZIP and S019 PDF hash verified; research-only validator and 48/48 reference test cases PASS, not app performance evidence. Staged a narrow source-verified fix for no-op evenness guidance plus legacy cached suggestions on isolated `feature/research-diagnostic-noop-20261101`; application CI, merge and source READY still pending. [Issue #335](https://github.com/Schulzet3/The-Dial-In-Collective/issues/335), [journal](workstreams/issue-335.md), [intake](research/espresso-research-intake-20261101.md). No Locked change, deploy, SQL/Auth/Edge/member write.
+
+---
+
 ## November 1, 2026 — Issue #267 V2 full review restart configured (documentation/task change only)
 
 Owner ordered a fresh line-by-line review at original frozen inventory file #1 line 1, plus a full line-1 review of live executable code and verified cleanup/bug/optimization work. Distinct V2 progress **0/579,961** frozen lines; current-code V2 also **0** until pinned current inventory. V1 historical B001+ ledgers, 71,120 integrated historical lines and draft PRs preserved as evidence and not credited toward V2. New source-bound checkpoint: `docs/audits/issue267-review-restart-v2-20261101.json`; five enabled task prompts/schedules: `docs/audits/2026-11-01-dic-automations-registry.json`. No code reviewed anew, removed, merged, marked READY, tested, deployed or production data changed by this administrative reset. Other Issue #33, #134 and #28 roles remain independent; no repeat accepted backup testing.
