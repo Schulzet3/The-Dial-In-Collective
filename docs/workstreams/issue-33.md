@@ -1,3 +1,9 @@
+## November 1 UTC — Issue33 PR337 actual cloud regression diagnosed and repaired (TESTING)
+
+PR337 corrected queue-intake head `f117b13f591d2decb46b796845fc92b86e07771d`: approval [41345309835](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345309835) SUCCESS, but cloud tests [41345309876](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345309876) genuinely FAILED because `selectedPriceBadge` was referenced in the source-fact assembly but its declaration was missing (the first patch did not match the actual two-space indentation of `directSelected`). This is a **real candidate code defect**, not a runner allocation failure or evidence of a product bug. This SAME-COMMIT repair inserts the bounded selected H1/price badge declaration and missing-field assignment at the actual current `directSelected` scope. Re-run all applicable exact-head CI; original frozen603 job SKIPPED remains unverified, and no READY/merge/deploy claim.
+
+---
+
 ## November 1 UTC — Issue33 PR337 queue intake failure corrected (TESTING, not READY)
 
 Exact PR337 first-head approval [41345225998](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41345225998) genuinely **FAILED** the queue-intake gate, not app tests: `Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: src/server/coffee-selected-source-evidence.mjs`. This same-commit docs correction adds one narrow **TESTING** row `DIC-Q-33-selected-product-price-badge` to `docs/RELEASE_QUEUE.json` covering both changed runtime paths, preserves all preexisting rows and states, and records the initial failed CI. New exact-head checks are required; do not treat original frozen603 SKIPPED as PASS or publish. No production changes.
