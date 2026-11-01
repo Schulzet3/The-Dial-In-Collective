@@ -252,6 +252,25 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
       /\b(?:variety|cultivar)\b.{0,65}\b(?:grown|collected|introduced|originated|discovered)\b/i.test(sentence))continue;
+   // Bind printed village and district to this exact selected station/H1.
+   // Never infer a location from a reused URL, an older lot or a gazetteer.
+   const stationCountry=countryNames(name);
+   if(stationCountry.length===1&&countryNames(sentence).every(value=>key(value)===key(stationCountry[0]))){
+    const district=sentence.match(new RegExp(
+     '^(?:This|Our)\\s+coffee\\s+comes\\s+from\\s+(?:the\\s+)?('+PLACE+')\\s+washing\\s+station,\\s+which\\s+is\\s+in\\s+the\\s+village\\s+of\\s+('+PLACE+'),\\s+district\\s+('+PLACE+'),\\s+('+PLACE+')[.!?]?$','iu'));
+    const village=sentence.match(new RegExp(
+     '^From\\s+the\\s+('+PLACE+')\\s+Washing\\s+Station,\\s+which\\s+serves\\s+(?:the\\s+)?(?:nearly\\s+)?\\d{1,5}\\s+(?:small\\s+)?farmers\\s+in\\s+the\\s+village\\s+of\\s+('+PLACE+')\\s+in\\s+('+PLACE+'),\\s+comes\\s+this\\b','iu'));
+    const station=(district?.[1]||village?.[1]||'').trim();
+    const localities=(district?district.slice(2):village?.slice(2)||[])
+     .map(value=>value.replace(/[.!?]+$/u,'').trim());
+    if(station.length>=4&&key(name).includes(key(station))&&localities.length>=2&&
+       localities.every(value=>value.length>=3&&value.length<=65&&
+        !completeVarietyPhrase(value,{explicit:true})&&
+        !/\b(?:coffee|roast|blend|tasting|chocolate|caramel|cocoa|flavou?r|spice|pumpkin|vanilla|product)\b/iu.test(value))){
+     add([...localities,stationCountry[0]].join(', '),sentence);
+     continue;
+    }
+   }
    // The selected coffee's direct source locality outranks a nearby
    // landmark in the same sentence. SEY describes Ruarai as coming from
    // Nyeri *on the slopes of Mount Kenya*: the mountain is context, not a
