@@ -1,5 +1,5 @@
 # The Dial In Collective — Documentation Index
-**Current as of 2026-10-21.** This is the short, actionable index. The previous 34 KB running index is preserved [as a dated archival snapshot](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md), not discarded. Statements inside dated reports remain true only for their historical checkpoint. Never interpret a prior "unpublished" milestone as current without checking [Current Status](CURRENT_STATUS.md).
+**Navigation reconciled November 1, 2026 (links and source provenance only).** This index is not a certification that every linked document was updated or reviewed. The previous 34 KB index remains [preserved as a dated snapshot](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md). Dated reports describe their historical checkpoints; use [Current Status](CURRENT_STATUS.md) and actual provider readbacks for current operational facts.
 
 ## Read first
 1. [Active per-commit Work Journal](ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) — read FIRST to resume interrupted sessions, current exact attempts and blockers.
@@ -16,7 +16,7 @@
 - [Autonomous build-to-ready and queue runbook](RELEASE_QUEUE_RUNBOOK.md) — default implementation pipeline, release gate and honest blocking semantics.
 - [October 21 consolidated deployment readiness, backups and blockers](RELEASE_READINESS_2026-10-21.md) — dated preflight and receipts for the completed admin/duplicate-first and recipe-source release; use Current Status for the present development and production state.
 - [Active GitHub Free/private continuity and release safety plan](GITHUB_FREE_PRIVATE_CONTINUITY_AND_RELEASE_PLAN_2026-10-20.md) — owner refuses Pro/public; advisory CI, manual controls, remaining release risks.
-- [Project instructions ready to paste](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) — owner reports these were saved in ChatGPT Project settings; that completed step must not be requested again.
+- [GitHub copy of ChatGPT Project Instructions](CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md) — updated reference text; GitHub edits do not automatically update ChatGPT Project Settings. Earlier owner-saved settings are historical evidence, not proof this version is live.
 - [Oct20 forensic approval-gap and continuity investigation](APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md) — verified evidence, root causes, missing sources, and remaining safeguards.
 - [Approved change/source/CI/production acceptance register](APPROVAL_COVERAGE_MATRIX.json) — enforced subset, 79 historical Locked unchanged, unverified gaps explicit.
 - [Always-on approval/continuity CI](../.github/workflows/approval-continuity.yml) — reads ALL commits in a push (up to 400), including docs-only; a failed check must stop later work.
@@ -34,6 +34,12 @@
 - [Source audit/repair ledger](AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md)
 - [Original decision-to-code crosswalk](DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md)
 
+## Research and source inventories (November 1, 2026)
+- [Recovered nine espresso reports and research limitations](research/espresso-originals-review-20261101.md) — nine Markdown bodies, nine JSON exports, and a separate slow-feeding PDF were inventoried from `Espresso_Research_Reports.zip`. Their original citations are **not universally independently verified**.
+- [Pinned GitHub document/file inventory](audits/project-doc-index-20261101.json) — a metadata snapshot, **not** line-by-line or semantic review. Its earlier `nine_prior_docs: lost and replaced` field is historical, superseded as to availability by the recovered originals; retain the snapshot unchanged.
+- The earlier `DIC_Espresso_Research_Implementation_Pack.zip` and *Espresso Extraction Windows by Roast Level and Shot Style* (S019) remain complementary research. S019's windows are heuristics; the recovered slow-feeding PDF is separate from S019.
+- [Issue #267 V2 pinned audit checkpoint](audits/issue267-review-restart-v2-20261101.json) and [active work journal](workstreams/issue-267.md) govern historical/current-code audit coverage; never infer current counts from this navigation page.
+
 ## October 21 three-pass audit
 
 - [Complete three-pass audit and repair record](audits/2026-10-21-three-pass-audit.md) — scope, all three passes, confirmed repairs, execution receipts and remaining boundaries.
@@ -50,7 +56,7 @@
 - [Pre-cleanup complete status](archive/CURRENT_STATUS_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md) — all past updates.
 - [Pre-cleanup full index](archive/DOCUMENTATION_INDEX_SNAPSHOT_BEFORE_GLOBAL_RECONCILIATION_2026-10-19.md) — dated file references and historical links.
 - Original dated extractor, UX, security, recovery, backup, deployment, PWA and user-acceptance reports remain at their original paths to preserve links and provenance. Their older descriptions/claims are not automatically current.
-- Original research archives contain pointers to nine missing full study bodies; see [issue #30](https://github.com/Schulzet3/The-Dial-In-Collective/issues/30).
+- Older research archives and [Issue #30](https://github.com/Schulzet3/The-Dial-In-Collective/issues/30) describe the nine reports as unavailable **at that historical checkpoint**. Their November 1 recovery is recorded in the [current research intake](research/espresso-originals-review-20261101.md); other historic source gaps are not presumed resolved.
 
 ## Guardrails
 Do not delete originals, rewrite source evidence, alter Locked decisions without an explicit approved scoped supersession, publish from an ordinary commit, spend Netlify credits without per-release authorization, or change existing private shot data as part of documentation/cleanup.
