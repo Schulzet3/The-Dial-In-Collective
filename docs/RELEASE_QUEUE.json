@@ -19,16 +19,23 @@
       "tests": [
         "Research-only pack 48/48 reference cases PASS locally; not app CI.",
         "Application regression and exact-source checks PENDING.",
-        "PR336 original head approval 41344289349 and visual 41344289364 FAILED: queue schema and pre-existing compact instruction wording. SQL 41344289354, security 41344289331 SUCCESS; original603 41344289251 SKIPPED. Corrected on follow-up source; new CI pending."
+        "PR336 original head approval 41344289349 and visual 41344289364 FAILED: queue schema and pre-existing compact instruction wording. SQL 41344289354, security 41344289331 SUCCESS; original603 41344289251 SKIPPED. Corrected on follow-up source; new CI pending.",
+        "PR336 head 97680eac: approval 41344508553, SQL 41344508518, security 41344508537, visual 41344508467, cloud/mobile 41344508536 SUCCESS; Node 41344508653 FAILED one obsolete grinder17 diagnostic fixture, corrected with separate clamp and no-op regressions, retest pending."
       ],
       "ci_runs": [
         41344289349,
         41344289364,
         41344289354,
-        41344289331
+        41344289331,
+        41344508553,
+        41344508518,
+        41344508537,
+        41344508467,
+        41344508536,
+        41344508653
       ],
       "blockers": [
-        "Await corrected exact-head Node/build, cloud/mobile, approval, visual checks and nonforce merged-source CI."
+        "Retest corrected Node regression and exact-source applicable checks; nonforce merge, merged-source CI required before READY."
       ],
       "notes": "No original nine research texts accessible. Fix is narrow and NOT DEPLOYED.",
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
