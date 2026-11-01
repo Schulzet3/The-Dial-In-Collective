@@ -1,3 +1,5 @@
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
+import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 // Selected-product-only candidate facts. Public, bounded, literal evidence;
 // no URL slug, roast-color axis, storefront menu or related-product inference.
 // Keep this independent from the immutable 603-coffee oracle and scorer.
@@ -15,6 +17,32 @@ const norm=value=>tidy(value,250).normalize('NFKD').replace(/[\u0300-\u036f]/g,'
 const exactTag=(tags,value)=>tags.some(tag=>norm(tag)===norm(value));
 const evidence=(field,value,quote,role)=>({field,value,quote:tidy(quote,550),role});
 const unique=facts=>[...new Map(facts.map(f=>[f.field+'\0'+norm(f.value),f])).values()];
+
+
+// Exact current-product price badges are stronger than shop navigation,
+// collection cards, review quotes or unverified Shopify taxonomy tags.
+// Limit the scan to one matching H1 and its immediately adjacent price panel;
+// never infer a release from URL, catalog labels or a different coffee.
+export function selectedCurrentCoffeeReleaseBadge(html,{name=''}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof name!=='string'||!name||name.length>220)return '';
+ const headings=[...html.matchAll(/<h1\b[^>]{0,600}>([\s\S]{1,700}?)<\/h1>/gi)]
+  .filter(match=>norm(match[1])===norm(name)).slice(0,3);
+ if(headings.length!==1)return '';
+ const start=headings[0].index+headings[0][0].length;
+ const near=html.slice(start,start+2200);
+ const {nodes}=coffeeHtmlElements(near);
+ const price=nodes.find(node=>node.tag==='div'&&node.start<120&&
+  coffeeHtmlAttributes(node.attributes).class?.split(/\s+/).includes('product-price-container'));
+ if(!price||price.end>near.length)return '';
+ const badges=nodes.filter(node=>{
+  if(node.tag!=='div'||node.start<price.headEnd||node.end>price.contentEnd)return false;
+  const attrs=coffeeHtmlAttributes(node.attributes);
+  return attrs['data-badge']==='next-level'&&
+   attrs.class?.split(/\s+/).includes('badge')&&
+   norm(near.slice(node.headEnd,node.contentEnd))==='next level';
+ });
+ return badges.length===1?'Next Level':'';
+}
 
 export function selectedStructuredCoffeeEvidence({title='',description='',tags=[]}={}){
  if(typeof title!=='string'||title.length<3||title.length>220||typeof description!=='string'||description.length>160000)return [];
