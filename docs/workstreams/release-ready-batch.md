@@ -51,3 +51,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — honest source-isolation CI certificate classification
 - Source-bound CI receipt schema v2 now includes strict source-isolation assessment, actual READY item IDs, error reasons and explicit CERTIFIED_READY_SOURCE / NO_BATCH / BLOCKED_NOT_RELEASABLE state. Green tests cannot be confused with a releasable batch. The production controller still independently rechecks exact source and grant before any claim. Added positive/negative classification tests; no release, provider write or queue promotion. Exact-source CI pending.
+
+## 2026-11-02 — safe backup fallback decision regression
+- Added read-only backup decision helper and negative tests: GitHub artifact availability, Drive direct-parent, ciphertext SHA-256 proof and snapshot coverage of latest observed write must all pass to reuse backup; otherwise request and verify a fresh encrypted snapshot. Provider metadata alone is explicitly insufficient proof of ciphertext integrity. Independently read back GitHub artifact 13097561218 (unexpired, nonempty) and Drive file 1396aSuRA-5wApeiRRkgi6A44wtKZEBwB (direct child of approved folder). No new backup created or production data touched. CI pending.
