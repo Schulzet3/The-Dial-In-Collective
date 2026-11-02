@@ -48,3 +48,18 @@ test('#248 selected archived Washed lot cannot inherit a Natural related product
  assert.doesNotMatch(JSON.stringify(result.fields),/Costa Rica|Las Lajas/i);
  assert.ok(!result.conflicts?.includes('process'),JSON.stringify(result.conflicts));
 });
+
+test('seasonal program wording is not a lot release; explicit dated release remains available',()=>{
+ for(const sentence of [
+  'This coffee is a cornerstone of our 2026 summer coffee program.',
+  'This coffee will be part of our 2026 winter coffee program.'
+ ]){
+  const result=extractPublicCoffeeFacts(selected(specs+'<p>'+sentence+'</p>'),{source_url:url});
+  assert.equal(result.ok,true,JSON.stringify(result));
+  assert.doesNotMatch(String(result.fields.release_label||''),/2026/i,sentence);
+ }
+ const actualRelease=extractPublicCoffeeFacts(selected(specs+
+  '<p>Our current release for 2026 is this coffee.</p>'),{source_url:url});
+ assert.equal(actualRelease.ok,true,JSON.stringify(actualRelease));
+ assert.equal(actualRelease.fields.release_label,'2026');
+});
