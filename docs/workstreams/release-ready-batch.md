@@ -93,3 +93,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — bind READY certificate to immutable artifact bytes
 - Fixed critical certification gap: READY certificate schema v3 now records SHA-256 of the exact `dist-immutable.zip` produced in the same CI run, names its source-bound artifact and fails if READY is otherwise claimed without that ZIP. This does not prove Netlify Functions parity or authorize publication; publication controller must independently rehash downloaded artifact and match certificate before any provider write. Node regression added. No production changes; CI pending.
+
+## 2026-11-02 — release evidence preflight coordination
+- Added nonpublishing preflight coordinator: reuse verified encrypted recovery only after direct-parent/ciphertext/snapshot check; otherwise request existing main encrypted backup exactly once per preflight invocation and HOLD until offsite ciphertext verification. Independently SHA-256-verify exact certified artifact before declaring evidence ready. Four focused regressions cover reuse, fallback HOLD, unavailable dispatch, tamper denial. This is not connected to main hosted controller yet; repeated invocations need idempotent dispatch deduplication before production activation. No provider write or deployment.
