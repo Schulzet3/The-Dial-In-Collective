@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "state": "SOURCE_REVIEW_AND_SYNTHETIC_TESTS_PENDING_EXACT_PR_CI_AND_RAW_OFFICIAL_REPLAY",
+  "development_base_sha": "70d34f03567e9e34165be843f72c62b6dd17a996",
+  "case_number": 480,
+  "coffee": "Strawberry Fields Forever (seasonal release)",
+  "original603_register": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+  "original603_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "original_review": "2026-10-29 row #480 recorded tasting_notes absent in archived extraction; this is not proof of a current runtime defect.",
+  "current_official_product_url": "https://www.downeastcoffee.com/products/seasonal-release",
+  "current_official_web_observation": "2026-11-02 current public official product, crawled within last week; exact current raw HTML SHA256/H1 and parser not yet verified",
+  "selected_product_title": "Strawberry Fields Forever (seasonal release)",
+  "selected_source_facts": {
+    "roast": "Medium Light",
+    "top_tasting": "Juicy Strawberries / Milk Chocolate / Peach",
+    "description_tasting": "Juicy Strawberry, Dark Chocolate",
+    "origin": "Colombia & Costa Rica",
+    "process": "Anaerobic Co-Ferment, Washed",
+    "producer": "Smallholder Farmers from Tolima, Huila & Caldas & Coopedota",
+    "component_roles": "El Vergel Estate co-ferment component; Coopedota Santa Maria washed base",
+    "brewing": "V60 1:17 / three minutes; espresso 1:2.25 / 26 seconds; no explicit espresso dose or yield"
+  },
+  "caution": "Two printed current selected tasting lists are not byte-identical. Preserve both direct source facts and review provenance, do not invent a combined canonical list. Blend component methods/producer roles cannot be silently promoted to single-lot facts; brewing guide is not a complete espresso dose/yield recipe.",
+  "tests": "tests/coffee-issue33-downeast-selected-notes.test.mjs",
+  "selector": "[dic-issue33-twelfth1]",
+  "acceptance": "Guarded GitHub public fetch must verify current raw selected H1, HTML SHA256, parser fields/conflicts and Add Coffee preview. Only then determine whether missing tasting is a real current omission and whether a runtime change is justified.",
+  "immutable": "Original603 CSV/captures/oracle/scorer, 153 context-qualified and 29 missing-literal-qualified caveats, prior review-required and missing classifications unchanged.",
+  "exclusions": "No #267 V2/#96/PR367, production SQL/Auth/Edge/provider/member, publication, account, purchase or READY promotion. Frozen603 and real hosted GoTrue not claimed."
+}
