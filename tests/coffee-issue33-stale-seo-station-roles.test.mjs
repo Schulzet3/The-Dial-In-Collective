@@ -55,3 +55,34 @@ test('#268 washing station and importing partner do not become a fabricated indi
  assert.notEqual(result.fields.producer,'Leafy Coffee');
  assert.doesNotMatch(String(result.fields.producer||''),/Kidane Teklu|Leafy Coffee/i);
 });
+
+const bankoNatural='https://queencitycollectivecoffee.com/products/banko-gotiti-natural-ethiopia';
+const selectedBankoWithSibling=(selected,sibling)=>'<html><head><meta property="og:type" content="product">'+
+ '<meta property="og:title" content="Banko Gotiti ~ '+sibling+' // Ethiopia"></head><body><main>'+
+ '<article class="product"><h1>Banko Gotiti ~ '+selected+' // Ethiopia</h1>'+
+ '<div itemprop="description"><p>Banko Gotiti CWS // Gedeb, Yirgacheffe, Gedeo Zone, Ethiopia</p>'+
+ '<p>'+selected+'-processed heirloom varietals // 2170 masl</p>'+
+ '<p>For this '+selected.toLowerCase()+'-process lot, ripe coffee cherries are carefully handled at the washing station.</p>'+
+ '</div></article><aside class="related-products" aria-label="You may also like">'+
+ '<h3>Banko Gotiti ~ '+sibling+' // Ethiopia</h3>'+
+ '<p>'+sibling+'-processed heirloom varietals // 2170 masl</p>'+
+ '</aside></main></body></html>';
+
+// Both official Queen City products currently exist as distinct selected
+// Washed and Natural lots sharing Banko Gotiti CWS. Synthetic adversarial
+// fixtures (NOT live raw captures) protect against opposite-process SEO and
+// sibling recommendation cards contaminating the selected product.
+test('#268 selected Washed lot resists Natural sibling card and stale Natural SEO',()=>{
+ const result=parse(selectedBankoWithSibling('Washed','Natural'),banko);
+ assert.equal(result.ok,true,JSON.stringify(result));
+ assert.equal(result.fields.name,'Banko Gotiti ~ Washed // Ethiopia');
+ assert.equal(result.fields.process,'Washed');
+ assert.ok(!result.conflicts?.includes('process'),JSON.stringify(result.conflicts));
+});
+test('distinct selected Natural lot resists Washed sibling card and stale Washed SEO',()=>{
+ const result=parse(selectedBankoWithSibling('Natural','Washed'),bankoNatural);
+ assert.equal(result.ok,true,JSON.stringify(result));
+ assert.equal(result.fields.name,'Banko Gotiti ~ Natural // Ethiopia');
+ assert.equal(result.fields.process,'Natural');
+ assert.ok(!result.conflicts?.includes('process'),JSON.stringify(result.conflicts));
+});
