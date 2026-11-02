@@ -16,11 +16,11 @@ test('strict release marker on dedicated branch authorizes build without any cre
  }])assert.equal(decide({...release,ledger,today:'2099-01-01'}).ignore,false);
 });
 test('immutable release-claim skip marker suppresses Git-connected rebuild despite release subject',()=>{
- const claim={...release,commitMessage:release.subject+'\\n\\n[skip netlify]\\n'};
+ const claim={...release,commitMessage:release.subject+'\n\n[skip netlify]\n'};
  assert.equal(decide(claim).ignore,true);
  assert.match(decide(claim).reason,/suppress Git-connected rebuild/);
- assert.equal(decide({...claim,commitMessage:release.subject+'\\n\\n[SKIP NETLIFY]\\n'}).ignore,true);
- assert.equal(decide({...claim,commitMessage:release.subject+'\\n\\n[skip netlify-extra]'}).ignore,false);
+ assert.equal(decide({...claim,commitMessage:release.subject+'\n\n[SKIP NETLIFY]\n'}).ignore,true);
+ assert.equal(decide({...claim,commitMessage:release.subject+'\n\n[skip netlify-extra]'}).ignore,false);
  const source=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
  assert.match(source,/--format=%B/,'must inspect entire Git commit message, not just subject');
  assert.match(source,/subject,commitMessage/,'full commit message must reach the decision gate');
