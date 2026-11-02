@@ -1,3 +1,7 @@
+## November 2 UTC — Issue267 V2 eighth ordered batch (documentation-only, no deployment)
+
+Frozen historical V2 **2,328/579,961** (**577,633 remaining**), matrix original #30 next line **641**; independent pinned current-code V2 **3,210** lines, next #41 `scripts/audit/coffee-corpus-replay.mjs` line1. New R2-008/C2-008 receipts record **260+334** freshly AI-reviewed source lines, disjoint from legacy V1. Inventory **306/436** line counts known, **130 pending**; 19 changed eligible source/test/CI paths require separate post-pin delta review. Audit-only image URL malformed-port exception candidate needs #33 fixture; no proven production bug, deletion, or performance change. Existing live READY certification at `8f9ab40b42e48e01be7abd7d17df013e3e1d9cae` failed its queue coverage step; #267 does not change the release queue. Documentation-only exact-source CI pending. No app/provider/production changes by this audit.
+
 ## November 2 UTC — #267 seventh batch exact-source CI repair follow-up
 
 Source `7804151ca701242eb0930d5e1ddac1530dced68b`: approval CI PASS, cloud UX PASS, Python coffee PASS; full Node and automatic READY certification FAILED one existing approval-coverage test because a shortened project-instructions sentence omitted explicit owner no-public-upgrade and branch-protection wording. Restored exact owner policy within 8,000 characters; exact-source Node/certification retest pending. Audit counts remain frozen V2 **2,068/579,961**, current pinned V2 **2,876**; no deployment or queue changes.

@@ -14,14 +14,14 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 2068,
-    "remaining_v2_lines": 577893,
-    "status": "IN_PROGRESS_R2_007_SOURCE_BOUND",
+    "verified_new_v2_reviewed_lines": 2328,
+    "remaining_v2_lines": 577633,
+    "status": "IN_PROGRESS_R2_008_SOURCE_BOUND",
     "next_file_index_1_based": 30,
     "next_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
     "next_source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
-    "next_line_1_based": 381,
-    "next_action": "Resume original matrix #30 line381; never skip to next file.",
+    "next_line_1_based": 641,
+    "next_action": "Resume original matrix #30 line 641; do not skip historical or V1 ranges.",
     "independently_reviewed_v2_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -239,6 +239,13 @@
         "first_line": 61,
         "last_line": 380,
         "receipt": "docs/audits/issue267-v2-frozen-batches/R2-007.json"
+      },
+      {
+        "path": "docs/APPROVAL_COVERAGE_MATRIX.json",
+        "source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+        "first_line": 381,
+        "last_line": 640,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-008.json"
       }
     ],
     "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
@@ -248,7 +255,7 @@
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
     "inventory_status": "PINNED_436_FILES_306_LINE_COUNT_VERIFIED_130_PENDING",
     "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
-    "reviewed_current_source_lines": 2876,
+    "reviewed_current_source_lines": 3210,
     "reviewed_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -501,9 +508,37 @@
         "first_line": 1,
         "last_line": 65,
         "receipt": "docs/audits/issue267-v2-current-batches/C2-007.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-image-audit.py",
+        "source_blob_sha": "2cc81eae9c06a5f337a908ca016d3885137cf084",
+        "first_line": 1,
+        "last_line": 151,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-008.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-normalize.mjs",
+        "source_blob_sha": "a4d66794088924290001b19e8453174e22b5b50d",
+        "first_line": 1,
+        "last_line": 11,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-008.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-presentation-review.mjs",
+        "source_blob_sha": "ea55e5f36867bea57bc1cf1f24fadb07edc4b89d",
+        "first_line": 1,
+        "last_line": 107,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-008.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-render.mjs",
+        "source_blob_sha": "4f10bd3c97b1e96c448e242912d6c6c5758af136",
+        "first_line": 1,
+        "last_line": 65,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-008.json"
       }
     ],
-    "next_file": "scripts/audit/coffee-corpus-image-audit.py",
+    "next_file": "scripts/audit/coffee-corpus-replay.mjs",
     "next_line_1_based": 1,
     "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
     "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
@@ -514,9 +549,13 @@
     "known_line_count_subtotal": 36532,
     "full_eligible_line_denominator": null,
     "coverage_ledger": "docs/audits/issue267-v2-current-code-ledger.json",
-    "unreviewed_source_drift_as_of_development_sha": "f54d76798a62c9be962c79d6b15568d375cbb006",
+    "unreviewed_source_drift_as_of_development_sha": "8f9ab40b42e48e01be7abd7d17df013e3e1d9cae",
     "unreviewed_current_delta_paths": [
+      ".github/workflows/cloud-beta-ci.yml",
+      ".github/workflows/cloud-regression.yml",
       ".github/workflows/dic-ready-batch-certification.yml",
+      ".github/workflows/isolated-sql-regression.yml",
+      ".github/workflows/visual-review.yml",
       "scripts/audit/issue33-original603-focused-source-review.mjs",
       "site/lib/engine.js",
       "src/server/coffee-identity-evidence.mjs",
@@ -572,11 +611,11 @@
     28,
     134
   ],
-  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_SEVENTH_BATCHES_RECORDED_CI_GUARD_FIX_PENDING_CI",
+  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_EIGHTH_BATCHES_RECORDED_EXACT_CI_PENDING",
   "app_code_changes_in_this_record": 0,
   "production_changes": 0,
   "completed_tests_in_this_record": 0,
   "last_verified_audit_batch_utc_date": "2026-11-02",
-  "ci_guard_changes_in_this_record": 1,
-  "tests_added_in_this_record": 1
+  "ci_guard_changes_in_this_record": 0,
+  "tests_added_in_this_record": 0
 }
