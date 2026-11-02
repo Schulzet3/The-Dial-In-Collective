@@ -49,7 +49,7 @@ test('#248 selected archived Washed lot cannot inherit a Natural related product
  assert.ok(!result.conflicts?.includes('process'),JSON.stringify(result.conflicts));
 });
 
-test('seasonal program wording is not a lot release; explicit dated release remains available',()=>{
+test('archived seasonal programs are not current releases; active programs and explicit dated releases remain',()=>{
  for(const sentence of [
   'This coffee is a cornerstone of our 2026 summer coffee program.',
   'This coffee will be part of our 2026 winter coffee program.'
@@ -58,6 +58,13 @@ test('seasonal program wording is not a lot release; explicit dated release rema
   assert.equal(result.ok,true,JSON.stringify(result));
   assert.doesNotMatch(String(result.fields.release_label||''),/2026/i,sentence);
  }
+ const activePage=selected(specs+
+  '<p>Yukro will be a cornerstone of our 2026 summer coffee program.</p>',
+  '<aside class="related-products"><p>This product is archived.</p></aside>')
+  .replace('<p>This product is archived.</p><h1>','<h1>');
+ const active=extractPublicCoffeeFacts(activePage,{source_url:url});
+ assert.equal(active.ok,true,JSON.stringify(active));
+ assert.equal(active.fields.release_label,'Summer 2026');
  const actualRelease=extractPublicCoffeeFacts(selected(specs+
   '<p>Our current release for 2026 is this coffee.</p>'),{source_url:url});
  assert.equal(actualRelease.ok,true,JSON.stringify(actualRelease));
