@@ -1,3 +1,13 @@
+## November 2 UTC — Issue #335 grinder evidence guard READY (NOT DEPLOYED)
+
+PR [#442](https://github.com/Schulzet3/The-Dial-In-Collective/pull/442) source-fixed on development. Original head `eac90e25cc7bdd6a7f80cd814cee8cc6ac4932d5` Node run 41529593868 **FAILED 1 new fixture ReferenceError**; diagnosed loop `grinderSetting` vs fixture shorthand `grindSetting`, fixed test only with same-commit journal at `6f622b8641634255b83bffd230335e35db298091`. Corrected PR head 7/7 applicable jobs SUCCESS (approval41530106838, validate41530106829, SQL41530106866, cloud/mobile41530106826, security41530106929, review41530106801); immutable original60341530107023 **SKIPPED**, not PASS.
+
+Nonforce squash merge `e2957ab1ada581b593302ceaf56d8f14c6481cce` verified on development; engine blob `bc8bbcee9ec349145a51552ab5dd3337115feca6`, regression blob `dfae876fba526ff8020ff6fb3a7893db3a35ab20`. Exact merged CI: validate41530621353, approval41530621346, cloud/mobile41530621411, review41530621457, certify-ready-batch41530621378 all **SUCCESS**. All old shot measurements preserved; valid inclusive old espresso endpoints still translate to explicitly unproven starting references; out-of-range historical measurements no longer become fabricated current-range endpoints. Existing cautious baseline applies instead. No numeric research threshold change, new profile, Locked decision change or production publication.
+
+Queue `DIC-Q-335-historical-grind-range-evidence` promoted **READY, NOT DEPLOYED** with exact source proof; parent #335 remains OPEN for broader citation/real-quality outcome evaluation. This docs-only status recording does not trigger new full app CI. Next: include only in a separately authorized, truly source-isolated release; no provider/SQL/Auth/member or backup changes.
+
+---
+
 ## November 2 UTC — PR442 exact-head CI correction (TESTING)
 
 PR #442 initial head `eac90e25cc7bdd6a7f80cd814cee8cc6ac4932d5`: six applicable checks SUCCESS (approval, security-inventory, SQL, mobile-browser-qa, cloud-tests, review). Full Node `validate` run 41529593868 **FAILED 1 of 2286 tests** (2279 PASS, 1 FAIL, 6 SKIP), before lint/build: newly added lower/upper historical range test mistakenly destructured `grindSetting` instead of the loop's `grinderSetting` variable. The neighboring old-calibration and endpoint regressions passed. Corrected **test fixture only**, from shorthand `{grindSetting}` to `{grindSetting:grinderSetting}`; application logic unchanged. Exact corrected-head test/CI and integration still pending. Do not represent initial failed run as pass; no deploy.
