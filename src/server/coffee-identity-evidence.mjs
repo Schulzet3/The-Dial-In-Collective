@@ -587,7 +587,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
    if(!fields.origin&&fields.producer&&key(fields.producer).length>=7&&
       key(name).includes(key(fields.producer))&&compact.length<=125){
     const credited=compact.match(new RegExp(
-     '^([\\p{Lu}][\\p{L}\\p{M}’\\' .&-]{4,95}),\\s+([\\p{Lu}][\\p{L}\\p{M}’\\' .-]{2,65})\\s+('+COUNTRIES+')$','iu'));
+     '^([\\p{Lu}][\\p{L}\\p{M} .&-]{4,95}),\\s+([\\p{Lu}][\\p{L}\\p{M} .-]{2,65})\\s+('+COUNTRIES+')$','iu'));
     if(credited&&key(credited[1])===key(fields.producer)&&
        !/\b(?:coffee|roast|process|washed|natural|honey|anaerobic|decaf|shipping|delivery|street|avenue|farm|estate)\b/i.test(credited[2])&&
        !completeVarietyPhrase(credited[2])&&!COUNTRY_ONLY.test(credited[2]))
