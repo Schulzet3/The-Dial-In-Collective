@@ -8,6 +8,25 @@
   },
   "items": [
     {
+      "id": "DIC-Q-335-historical-grind-range-evidence",
+      "issue": 335,
+      "title": "Reject out-of-range historic grinder readings as invalid cross-calibration evidence",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source-bound targeted regression authored for lower/upper historical out-of-bounds, inclusive historical endpoints, unchanged stored measurements and old calibration route; execution pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source applicable CI, nonforce merge, and final source readback pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
+      "notes": "Evidence-quality refinement only. The earlier relative-range cross-version heuristic remains explicitly unproven. Historical shots remain immutable, and missing or out-of-bounds old espresso-range context produces a cautious baseline rather than an invented current dial endpoint. No Netlify deployment authorized."
+    },
+    {
       "id": "DIC-Q-33-selected-producer-credit-locality",
       "issue": 33,
       "pr": 352,
