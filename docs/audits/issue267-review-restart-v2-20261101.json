@@ -14,14 +14,14 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 3217,
-    "remaining_v2_lines": 576744,
-    "status": "IN_PROGRESS_R2_011_SOURCE_BOUND",
-    "next_file_index_1_based": 37,
-    "next_file": "docs/BACKEND_CHECKPOINT.md",
-    "next_source_blob_sha": "e24eb718097ced4bf6d30d6006dac3b074ce43b8",
+    "verified_new_v2_reviewed_lines": 3461,
+    "remaining_v2_lines": 576500,
+    "status": "IN_PROGRESS_R2_012_SOURCE_BOUND",
+    "next_file_index_1_based": 42,
+    "next_file": "docs/COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md",
+    "next_source_blob_sha": "131d67cf76ad5b7abc9fabed28ef40e5c28e3003",
     "next_line_1_based": 1,
-    "next_action": "Continue frozen #37 line1; V1 remains historical.",
+    "next_action": "Continue original frozen manifest #42 line1; V1 unchanged.",
     "independently_reviewed_v2_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -302,6 +302,41 @@
         "first_line": 1,
         "last_line": 61,
         "receipt": "docs/audits/issue267-v2-frozen-batches/R2-011.json"
+      },
+      {
+        "path": "docs/BACKEND_CHECKPOINT.md",
+        "source_blob_sha": "e24eb718097ced4bf6d30d6006dac3b074ce43b8",
+        "first_line": 1,
+        "last_line": 62,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-012.json"
+      },
+      {
+        "path": "docs/BADGE_PALETTE_SOURCE.json",
+        "source_blob_sha": "9fe9160ee93b0d56cb318cc5e23b33eaf1a335b5",
+        "first_line": 1,
+        "last_line": 28,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-012.json"
+      },
+      {
+        "path": "docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md",
+        "source_blob_sha": "d228b1958794ca1d31af3840468e3f765ebe6d4a",
+        "first_line": 1,
+        "last_line": 29,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-012.json"
+      },
+      {
+        "path": "docs/CLOUD_OWNER_TEST_CHECKPOINT.md",
+        "source_blob_sha": "e184ed7ab9a3310d5667a10828ba882a8f6182e8",
+        "first_line": 1,
+        "last_line": 56,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-012.json"
+      },
+      {
+        "path": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md",
+        "source_blob_sha": "8ded351392b66559337283bd5961113e98032417",
+        "first_line": 1,
+        "last_line": 69,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-012.json"
       }
     ],
     "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
@@ -311,7 +346,7 @@
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
     "inventory_status": "PINNED_436_FILES_306_LINE_COUNT_VERIFIED_130_PENDING",
     "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
-    "reviewed_current_source_lines": 4239,
+    "reviewed_current_source_lines": 4412,
     "reviewed_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -641,9 +676,23 @@
         "first_line": 1,
         "last_line": 33,
         "receipt": "docs/audits/issue267-v2-current-batches/C2-011.json"
+      },
+      {
+        "path": "scripts/audit/coffee-extractor-2mb-study.mjs",
+        "source_blob_sha": "44097e5cab10f7f9d3c8cc417145e717269de10e",
+        "first_line": 1,
+        "last_line": 169,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-012.json"
+      },
+      {
+        "path": "scripts/audit/coffee-fixture-sanitize.mjs",
+        "source_blob_sha": "97de21e05a12f5f47b13c79090f182abfbc96936",
+        "first_line": 1,
+        "last_line": 4,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-012.json"
       }
     ],
-    "next_file": "scripts/audit/coffee-extractor-2mb-study.mjs",
+    "next_file": "scripts/audit/coffee-frozen-ci.py",
     "next_line_1_based": 1,
     "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
     "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
@@ -718,8 +767,17 @@
           "tests/netlify-live-readback.test.mjs"
         ],
         "separate_from_pinned_snapshot": true
+      },
+      {
+        "receipt": "docs/audits/issue267-v2-current-delta-batches/D2-004.json",
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "old_post_pin_blob_sha": "cc87aa9f686cbde0e854e4dca66f39dd6a56e0c1",
+        "changed_original_line": 4,
+        "separate_from_pinned_snapshot": true
       }
-    ]
+    ],
+    "latest_known_development_sha": "c24e009ba3208b22cc34e06825daaae439085203",
+    "latest_known_development_sha_note": "112 commits ahead of pinned current snapshot at 2026-11-02 07:28 UTC; older unreviewed_current_delta_paths list is partial, and D2 post-pin review is outstanding."
   },
   "legacy_v1_immutable_reference": {
     "integrated_historical_semantic_lines_reported": 71120,
@@ -740,8 +798,8 @@
     28,
     134
   ],
-  "state": "V2_R2_011_C2_011_D2_003_PR_CI_PENDING",
-  "app_code_changes_in_this_record": 0,
+  "state": "V2_R2_012_C2_012_D2_004_ONE_LINE_LINT_FIX_PR_CI_PENDING",
+  "app_code_changes_in_this_record": 1,
   "production_changes": 0,
   "completed_tests_in_this_record": 0,
   "last_verified_audit_batch_utc_date": "2026-11-02",

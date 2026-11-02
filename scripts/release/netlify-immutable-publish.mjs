@@ -1,7 +1,6 @@
 // Exact immutable ZIP publication adapter. NEVER run during preflight.
 // POST is production publication: only an explicitly authorized, consumed
 // one-use release controller may invoke this function.
-import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 const SITE='153277f2-e19e-4862-b9a6-f2e18ccde271';
 const SHA=/^[a-f0-9]{40}$/;

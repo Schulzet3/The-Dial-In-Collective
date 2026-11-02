@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "C2-012",
+  "track": "V2_CURRENT_EXECUTABLE_SEMANTIC_REVIEW",
+  "review_date_utc": "2026-11-02",
+  "reviewer": "ChatGPT AI assistant (not human)",
+  "method": "Fresh direct numbered pinned-current code-line interpretation; D2 drift separate",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "source_inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+  "reviewed_files": [
+    {
+      "path": "scripts/audit/coffee-extractor-2mb-study.mjs",
+      "git_blob_sha": "44097e5cab10f7f9d3c8cc417145e717269de10e",
+      "original_inventory_index_1_based": 46,
+      "first_line": 1,
+      "last_line": 169,
+      "line_count": 169,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 20,
+          "interpretation": "Nonproduction study imports parsers, hashes server source and sets 900KB/2MB comparison; no member/production write."
+        },
+        {
+          "first_line": 21,
+          "last_line": 44,
+          "interpretation": "Temporary source copies raise guard/parser limits with exact-one token assertion; fail closed if source syntax drifts."
+        },
+        {
+          "first_line": 45,
+          "last_line": 66,
+          "interpretation": "Twenty dated public product URLs and homepage negative control are samples, not current product-truth proof."
+        },
+        {
+          "first_line": 67,
+          "last_line": 93,
+          "interpretation": "Trial CPU/heap/timing and upper-middle median; String field equality may hide type differences, only unverified metric concern."
+        },
+        {
+          "first_line": 94,
+          "last_line": 116,
+          "interpretation": "Temporary module imports, read-only public fetch and baseline/full/prefix/stripped parse trials; production caps unchanged."
+        },
+        {
+          "first_line": 117,
+          "last_line": 139,
+          "interpretation": "Records field/timing/compression/HTML-digest metrics and rejects homepage false positives; network-dependent."
+        },
+        {
+          "first_line": 140,
+          "last_line": 153,
+          "interpretation": "Read-only Ecwid/Shopify/Woo comparisons and original source hash assertions; public GETs still have remote cost."
+        },
+        {
+          "first_line": 154,
+          "last_line": 169,
+          "interpretation": "Summary distinguishes readable/unavailable, preserves source, finally cleans temp; no live benchmark executed in this audit."
+        }
+      ],
+      "quality_and_locked_fit": "Historical evidence, current owner-Locked requirements and source ownership preserved.",
+      "risk_and_obsolescence": "Dated or audit-only evidence; no verified current unused code, performance gain, provider or device result.",
+      "verification_and_testability": "Fresh direct numbered AI-not-human semantic interpretation with original blob and exact inclusive line count; no regression, benchmark or provider test performed.",
+      "current_counterpart": {
+        "path": "src/server/coffee-url-guard.mjs; src/server/coffee-page-metadata.mjs; docs/workstreams/issue-33.md",
+        "disposition": "No speculative deletion or production mutation."
+      },
+      "disposition": "REVIEW_ONLY_NO_PROVEN_SAFE_DELETION"
+    },
+    {
+      "path": "scripts/audit/coffee-fixture-sanitize.mjs",
+      "git_blob_sha": "97de21e05a12f5f47b13c79090f182abfbc96936",
+      "original_inventory_index_1_based": 47,
+      "first_line": 1,
+      "last_line": 4,
+      "line_count": 4,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 4,
+          "interpretation": "Compatibility alias reexports two named sanitized fixture functions; verified both exports exist in pinned shared module lines120/160. Retain until all callers proven unused."
+        }
+      ],
+      "quality_and_locked_fit": "Historical evidence, current owner-Locked requirements and source ownership preserved.",
+      "risk_and_obsolescence": "Dated or audit-only evidence; no verified current unused code, performance gain, provider or device result.",
+      "verification_and_testability": "Fresh direct numbered AI-not-human semantic interpretation with original blob and exact inclusive line count; no regression, benchmark or provider test performed.",
+      "current_counterpart": {
+        "path": "scripts/audit/coffee-source-fixture-sanitization.mjs; audit fixture callers",
+        "disposition": "No speculative deletion or production mutation."
+      },
+      "disposition": "REVIEW_ONLY_NO_PROVEN_SAFE_DELETION"
+    }
+  ],
+  "batch_lines": 173,
+  "previous_v2_lines": 4239,
+  "total_v2_lines": 4412,
+  "next_file": "scripts/audit/coffee-frozen-ci.py",
+  "next_line_1_based": 1,
+  "findings": [
+    "2MB script is nonproduction temporary-copy/public-GET study, not proof of live extractor accuracy or speed.",
+    "String-based field equality could mask typed differences in benchmark report, but no verified production defect or measured baseline/after result.",
+    "Sanitizer compatibility alias resolves to two actual pinned shared exports; retain pending caller trace."
+  ],
+  "code_changes": 0,
+  "production_changes": 0,
+  "tests_executed": []
+}
