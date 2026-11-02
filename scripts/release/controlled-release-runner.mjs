@@ -301,7 +301,7 @@ export async function executeSingleUseRelease(settings=process.env){
   setBlob(journalPath,newJournal,env);
   setBlob('docs/RELEASE_CLAIM_RECEIPT.json',JSON.stringify(claimReceipt,null,2)+'\n',env);
   const tree=git(['write-tree'],{env});
-  const {subject,body}=immutableReleaseClaimMessage({id,sourceSha:sha});
+  const {subject,body}=gitConnectedReleaseClaimMessage({id,sourceSha:sha});
   const commit=git(['commit-tree',tree,'-p',releaseHead,'-m',subject,'-m',body],{env});
   if(!SHA.test(commit))throw Error('No immutable Git release commit');
   // Capture a recoverable candidate without claiming the ref was accepted.
