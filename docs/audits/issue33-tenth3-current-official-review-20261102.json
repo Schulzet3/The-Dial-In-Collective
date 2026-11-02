@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "status": "TESTING_RAW_SOURCE_PENDING",
+  "base_sha": "388b109f29012177fe458595530b7ec40882cb5b",
+  "case_numbers": [
+    217,
+    354,
+    380
+  ],
+  "official_sources": [
+    {
+      "n": 217,
+      "url": "https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural",
+      "h1": "ETHIOPIA GUJI ORGANIC DAMBI UDDO NATURAL",
+      "question": "Verify PR406 harvesting group producer on current raw HTML."
+    },
+    {
+      "n": 354,
+      "url": "https://staccatoroasters.com/products/honduras-elvin-suazo-natural-coffee",
+      "h1": "Honduras Elvin Suazo Coffee Beans",
+      "question": "Harvest December–March is not release; farm Finca Rancho Escondido is separate from producer Elvin Suazo."
+    },
+    {
+      "n": 380,
+      "url": "https://thrivefarmers.com/products/horizon-organic",
+      "h1": "Horizon Organic",
+      "question": "Guatemala/Nicaragua blend; ACODIHUE one component community and MEET Marta unrelated profile cannot become whole-blend producer."
+    }
+  ],
+  "web_limit": "Official current public-web H1/prose observed Nov 2 for #354/#380; not DNS-pinned raw HTML or exact parser replay. #217 source prior verified synthetic PR406.",
+  "workflow_selector": "[dic-issue33-tenth3]",
+  "test_path": "tests/coffee-issue33-harvest-and-blend-producer-boundaries.test.mjs",
+  "original603_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "caveats": {
+    "context_qualified": 153,
+    "missing_literal_qualified": 29
+  },
+  "preserved": "Frozen CSV/captures/oracle; original missing/review; #267 V2/#96; excluded PR367; queue/production unchanged.",
+  "next": "Exact PR-head CI; safe nonforce merge with selector; inspect actual current official H1/HTML hash/fields/conflicts/preview before any READY."
+}
