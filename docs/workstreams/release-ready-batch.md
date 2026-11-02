@@ -48,3 +48,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — provider readback schema correction
 - Compared live Netlify project response to verifier and found currentDeploy nested inside _enrichedFields, not project root. Corrected verifier and fixtures before acceptance; actual production deploy/site/hostname/source remain unchanged. Exact-source CI rerun required. No publication or provider mutation.
+
+## 2026-11-02 — honest source-isolation CI certificate classification
+- Source-bound CI receipt schema v2 now includes strict source-isolation assessment, actual READY item IDs, error reasons and explicit CERTIFIED_READY_SOURCE / NO_BATCH / BLOCKED_NOT_RELEASABLE state. Green tests cannot be confused with a releasable batch. The production controller still independently rechecks exact source and grant before any claim. Added positive/negative classification tests; no release, provider write or queue promotion. Exact-source CI pending.

@@ -7,3 +7,11 @@ test('CI certificate binds exact source and does not claim publication',()=>{
  assert.match(s,/NOT_RELEASE_APPROVAL/);
  assert.match(s,/github_run_id/);
 });
+
+test('certificate explicitly distinguishes safe READY from no batch and blocked source',async()=>{
+ const {classifyBatch}=await import('../scripts/release/ci-batch-classification.mjs');
+ assert.equal(classifyBatch({ready:true,ready_items:[{id:'A'}],deployable_paths:['site/a'],errors:[]}), 'CERTIFIED_READY_SOURCE');
+ assert.equal(classifyBatch({ready:false,ready_items:[],deployable_paths:[],errors:['No new deployable application changes since published source']}),'NO_BATCH');
+ assert.equal(classifyBatch({ready:false,ready_items:[],deployable_paths:['site/a'],errors:['Unqueued or not-ready deployable file: site/a']}),'BLOCKED_NOT_RELEASABLE');
+ assert.equal(classifyBatch({ready:false,ready_items:[{id:'A'}],deployable_paths:['site/a'],errors:['unready']}),'BLOCKED_NOT_RELEASABLE');
+});
