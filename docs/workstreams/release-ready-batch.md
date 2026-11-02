@@ -99,3 +99,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — avoid duplicate manual encrypted backup dispatch
 - Backup fallback now queries recent main workflow runs before dispatch; if an existing manual backup is active, returns BACKUP_ALREADY_RUNNING_NOT_VERIFIED and does not launch a second. API lookup uncertainty fails closed; neither response is accepted as verified offsite recovery. Mock regressions cover active suppression, malformed/API denial and new dispatch. A race between simultaneous independent dispatchers still requires a durable cross-run claim before production activation. No backup was requested here.
+
+## 2026-11-02 — exact artifact certificate verification gate
+- Added fail-closed pure verification of READY certificate schema v3, source SHA, isolated queue item IDs, successful source-specific CI receipt, GitHub run ID, artifact name and actual ZIP SHA-256. Added tamper, mismatch, duplicate ID and no-batch regression cases to hosted nonpublishing rehearsal. This is the read-only verifier to integrate before any release-controller provider action; no artifact download or production publication occurs here. Remaining blockers: wire into hosted controller, provider function parity and durable cross-run backup claim. No release status changed.
