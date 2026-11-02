@@ -31,6 +31,16 @@ test('#480 selected Medium Light roast outranks unrelated light-roast filter gui
  assert.equal(r.fields.roast_level,'Medium-Light',JSON.stringify(r.fields));
  assert.match(r.fields.tasting_notes||'',/Juicy Strawberry.*Dark Chocolate/i);
 });
+test('#480 two incompatible current selected tasting captions must remain reviewable, not silently chosen',()=>{
+ const body='<p>Roast: Medium Light</p>'+
+  '<p>Tasting Notes: Juicy Strawberries Milk Chocolate Peach</p>'+
+  '<p>Strawberry Fields Forever is back, and it won\'t be here long!</p>'+
+  '<p>Tasting Notes: Juicy Strawberry, Dark Chocolate</p>';
+ const r=parse(body);
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.tasting_notes,undefined,JSON.stringify(r.fields));
+ assert.ok(r.conflicts?.includes('tasting_notes'),JSON.stringify(r));
+});
 test('guarded current official #480 selector uses original603 URL, actual parser and preview',()=>{
  const workflow=readFileSync(new URL('../.github/workflows/roaster-source-probe.yml',import.meta.url),'utf8');
  assert.match(workflow,/\[dic-issue33-twelfth1\]/);

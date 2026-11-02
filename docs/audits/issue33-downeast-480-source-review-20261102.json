@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-02",
-  "state": "SOURCE_REVIEW_AND_SYNTHETIC_TESTS_PENDING_EXACT_PR_CI_AND_RAW_OFFICIAL_REPLAY",
+  "state": "VERIFIED_BOUNDED_REAL_OFFICIAL_CONFLICT_NOT_A_RUNTIME_DEFECT_NO_READY",
   "development_base_sha": "70d34f03567e9e34165be843f72c62b6dd17a996",
   "case_number": 480,
   "coffee": "Strawberry Fields Forever (seasonal release)",
@@ -27,5 +27,57 @@
   "selector": "[dic-issue33-twelfth1]",
   "acceptance": "Guarded GitHub public fetch must verify current raw selected H1, HTML SHA256, parser fields/conflicts and Add Coffee preview. Only then determine whether missing tasting is a real current omission and whether a runtime change is justified.",
   "immutable": "Original603 CSV/captures/oracle/scorer, 153 context-qualified and 29 missing-literal-qualified caveats, prior review-required and missing classifications unchanged.",
-  "exclusions": "No #267 V2/#96/PR367, production SQL/Auth/Edge/provider/member, publication, account, purchase or READY promotion. Frozen603 and real hosted GoTrue not claimed."
+  "exclusions": "No #267 V2/#96/PR367, production SQL/Auth/Edge/provider/member, publication, account, purchase or READY promotion. Frozen603 and real hosted GoTrue not claimed.",
+  "actual_current_source": {
+    "merged_source_sha": "4e5d7909e77abcdc9739748f223bcff29db01a7f",
+    "pr": 422,
+    "exact_official_probe_run": 41498336839,
+    "job_id": 125459063900,
+    "attempted": 1,
+    "fetched": 1,
+    "parsed": 1,
+    "add_coffee_preview": true,
+    "manual_certified": 0,
+    "current_h1": [],
+    "identity": "Current selected product visible title + parser name, not a fabricated H1",
+    "raw_html_sha256": "e3a3c4eeced7419069b7abdbb2ef79b7cb358f253e10f412e5c9092d0e4c908c",
+    "artifact_id": 13166314782,
+    "artifact_digest": "sha256:16d9350c8853b5ec7f08986fae40889bbeefee5d61ede67b44f279c00da41f79",
+    "artifact_expiry_utc": "2026-11-03T18:12:33Z",
+    "canonical_fields": {
+      "name": "Strawberry Fields Forever (seasonal release)",
+      "roaster": "Downeast Coffee Roasters",
+      "producer": "Smallholder Farmers from Tolima, Huila & Caldas & Coopedota",
+      "origin": "Colombia & Costa Rica",
+      "elevation_m": "1,525 – 1,950 MASL",
+      "variety": "Caturra, Castillo, Colombia & Catuai, Caturra",
+      "process": "Other/Unknown",
+      "roast_level": "Medium-Light",
+      "tasting_notes": null
+    },
+    "conflicts": [
+      "tasting_notes"
+    ],
+    "source_facts": {
+      "tasting_1": "Juicy Strawberry, Dark Chocolate",
+      "tasting_2": "Juicy Strawberries Milk Chocolate Peach",
+      "method": "Anaerobic Co-Ferment, Washed"
+    },
+    "adjudication": "Two independently direct selected tasting captions differ in chocolate type and additional peach; correct conservative current parser withholds canonical tasting_notes, marks explicit conflict and retains both literal source_facts. Original Oct29 blank was not a current omission. Blend has two processing methods; Other/Unknown is a conservative canonical value, not a missed single process. Product page has no H1 in guarded product scope; selected title is independently matched. No runtime correction or READY."
+  },
+  "pr422_pr_head_ci": {
+    "head_sha": "715b8e1cddb2065b2043ee1b41724a555362ae6e",
+    "node_run": 41497221738,
+    "initial_node_attempt": "FAIL_ONE_UNRELATED_HTML_RESOURCE_SECURITY_SPAWNSYNC_ETIMEDOUT_4S",
+    "node_retry_attempt": 2,
+    "node_retry": "SUCCESS_2269_PASS_0_FAIL_6_SKIP",
+    "approval": 41497221719,
+    "visual": 41497221733,
+    "sql": 41497221576,
+    "private_review": 41497222214,
+    "cloud": 41497221916,
+    "all_other_applicable": "SUCCESS",
+    "frozen603": "SKIPPED"
+  },
+  "remaining": "Source-backed dual-caption conflict needs a bounded adversarial synthetic regression, then exact CI and nonforce integration; no current runtime bug established. Full603/hosted GoTrue acceptance unverified."
 }
