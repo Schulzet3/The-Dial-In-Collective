@@ -29,3 +29,8 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 - The automatic CI job now reports release-queue status rather than requiring a READY release on every development push; it still runs the full combined tests, lint and build. The production controller retains its strict fail-closed release gate.
 - Previous test-only commit `2e0105ba93bd859a5e617a958697164839f2893d` violated the same-commit journal rule. This entry records the defect without rewriting immutable history or falsely claiming that prior CI passed. This commit includes its own same-commit journal.
 - Issue #356 source-isolation follow-up and end-to-end release rehearsal remain open; no production release or provider write.
+
+## 2026-11-02 — post-release read-only public smoke
+- Added bounded GET-only public route smoke (home, cloud shell, web manifest), reject unexpected origins/paths, redirects, HTTP failures and empty/mismatched responses; no login or production writes.
+- Added focused tests and serialized post-release workflow triggered by release/production push or manual dispatch. This is a public reachability check, NOT proof that Netlify deployed the expected source SHA. Provider READY/current SHA receipt remains mandatory before DEPLOYED status.
+- No deployment authorized or triggered by this development-branch change. No production member/session/SQL writes. Same-commit journal included.
