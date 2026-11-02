@@ -27,14 +27,25 @@ export async function requestEncryptedBackup({token,freshnessKey,fetcher=fetch}=
   if(!r.ok)throw Error('Cannot inspect backup claim/runs; refusing duplicate dispatch');
   return r.json();
  };
- const runs=await get('/actions/workflows/nightly-backup.yml/runs?branch=main&per_page=20');
- if(!Array.isArray(runs.workflow_runs))throw Error('Malformed backup runs; refusing dispatch');
- const active=runs.workflow_runs.find(r=>['workflow_dispatch','schedule'].includes(r.event)&&
-  ['queued','in_progress','waiting','requested','pending'].includes(r.status)&&
-  Number.isFinite(Date.parse(r.created_at))&&
-  Date.now()-Date.parse(r.created_at)<60*60*1000);
- if(active)return {status:'BACKUP_ALREADY_RUNNING_NOT_VERIFIED',run_id:active.id,
-  workflow:'nightly-backup.yml'};
+ // Include ALL active backup events (including push smoke runs) and old,
+ // still-running jobs. A 20-run recent page or one-hour cutoff can miss them.
+ // Each status-filtered inventory must be complete before any claim/dispatch.
+ const activeStatuses=['requested','queued','pending','waiting','in_progress'];
+ for(const status of activeStatuses){
+  const runs=await get('/actions/workflows/nightly-backup.yml/runs?branch=main&status='+
+   status+'&per_page=100');
+  if(!Number.isSafeInteger(runs?.total_count)||runs.total_count<0||
+   runs.total_count>100||!Array.isArray(runs.workflow_runs)||
+   runs.workflow_runs.length!==runs.total_count)
+   throw Error('Incomplete active backup run inventory; refusing dispatch');
+  for(const run of runs.workflow_runs){
+   if(!Number.isSafeInteger(run?.id)||run.id<=0||typeof run.status!=='string')
+    throw Error('Malformed active backup run; refusing dispatch');
+   if(activeStatuses.includes(run.status))
+    return {status:'BACKUP_ALREADY_RUNNING_NOT_VERIFIED',run_id:run.id,
+     workflow:'nightly-backup.yml'};
+  }
+ }
  const main=await get('/git/ref/heads/main');
  const mainSha=main?.object?.sha;
  if(!SHA.test(mainSha||''))throw Error('Cannot pin main backup workflow source');
