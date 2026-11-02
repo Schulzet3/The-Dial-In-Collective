@@ -69,6 +69,12 @@ jobs:
           npm run build:cloud
           python3 scripts/release/package-immutable-dist.py dist dist-immutable.zip
           sha256sum dist-immutable.zip > dist-immutable.zip.sha256
+      - name: Bundle exact Netlify server function for immutable release
+        if: steps.ready_scope.outputs.has_ready == 'true'
+        run: |
+          npm exec --yes --package=esbuild@0.25.12 -- esbuild netlify/functions/coffee-url-preview.mjs --bundle --platform=node --format=esm --target=node22 --outfile=coffee-url-preview.mjs
+          python3 scripts/release/package-immutable-function.py coffee-url-preview.mjs coffee-url-preview-function.zip
+          sha256sum coffee-url-preview-function.zip > coffee-url-preview-function.zip.sha256
       - name: Retain exact immutable production artifact
         if: success() && steps.ready_scope.outputs.has_ready == 'true'
         uses: actions/upload-artifact@v4
@@ -77,6 +83,8 @@ jobs:
           path: |
             dist-immutable.zip
             dist-immutable.zip.sha256
+            coffee-url-preview-function.zip
+            coffee-url-preview-function.zip.sha256
           retention-days: 90
           if-no-files-found: error
       - name: Write source-bound machine-readable CI certificate

@@ -102,3 +102,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — exact artifact certificate verification gate
 - Added fail-closed pure verification of READY certificate schema v3, source SHA, isolated queue item IDs, successful source-specific CI receipt, GitHub run ID, artifact name and actual ZIP SHA-256. Added tamper, mismatch, duplicate ID and no-batch regression cases to hosted nonpublishing rehearsal. This is the read-only verifier to integrate before any release-controller provider action; no artifact download or production publication occurs here. Remaining blockers: wire into hosted controller, provider function parity and durable cross-run backup claim. No release status changed.
+
+## 2026-11-02 — include Netlify Function in immutable CI artifact
+- Added deterministic ZIP packaging and tests for prebundled `coffee-url-preview` server function. READY certification now bundles function dependencies in CI with pinned esbuild 0.25.12 and uploads exact function ZIP and SHA-256 alongside static artifact. No publish-time function compilation is permitted by this design. **Not yet certified:** provider function digest upload, runtime parity and production routing must pass before main controller cutover. No production write; tests pending.
