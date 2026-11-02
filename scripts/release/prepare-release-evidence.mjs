@@ -4,8 +4,9 @@
 import {decideReleaseBackup} from './release-backup-decision.mjs';
 import {requestEncryptedBackup} from './request-encrypted-backup.mjs';
 import {verifyImmutableArchive} from './netlify-immutable-publish.mjs';
-export async function prepareReleaseEvidence({backup,artifact,githubToken,
- backupRequester=requestEncryptedBackup}={}){
+import {retrieveVerifiedReleaseBundle} from './retrieve-certified-release-bundle.mjs';
+export async function prepareReleaseEvidence({backup,artifact,githubToken,sourceSha,
+ backupRequester=requestEncryptedBackup,artifactRetriever=retrieveVerifiedReleaseBundle}={}){
  const recovery=decideReleaseBackup(backup||{});
  if(!recovery.reusable){
   if(!githubToken)return {ready:false,status:'BACKUP_UNVERIFIED_DISPATCH_UNAVAILABLE',
@@ -15,7 +16,8 @@ export async function prepareReleaseEvidence({backup,artifact,githubToken,
   return {ready:false,status:'WAITING_FOR_NEW_BACKUP_OFFSITE_VERIFICATION',
    backup_request:request,reasons:recovery.reasons};
  }
- const immutable=verifyImmutableArchive(artifact||{});
+ const immutable=artifact?verifyImmutableArchive(artifact):null;
+ const certified=immutable?null:await artifactRetriever({token:githubToken,sourceSha});
  return {ready:true,status:'PREFLIGHT_EVIDENCE_READY_NOT_AUTHORIZED_TO_PUBLISH',
-  recovery_action:recovery.action,artifact:immutable};
+  recovery_action:recovery.action,artifact:immutable,certified_bundle:certified};
 }

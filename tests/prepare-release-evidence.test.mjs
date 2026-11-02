@@ -27,3 +27,18 @@ test('unverified backup with no token blocks and never silently reuses',async()=
 test('tampered immutable ZIP fails even when recovery verified',async()=>{
  await assert.rejects(prepareReleaseEvidence({backup,artifact:{...artifact,expectedSha256:'c'.repeat(64)}}));
 });
+
+test('verified backup automatically retrieves exact CI bytes when artifact omitted',async()=>{
+ const bundle={status:'EXACT_SOURCE_STATIC_FUNCTION_VERIFIED_NO_PUBLICATION'};
+ let calls=0;
+ const r=await prepareReleaseEvidence({backup,githubToken:'fake',sourceSha:sha,
+  artifactRetriever:async args=>{calls++;assert.equal(args.sourceSha,sha);return bundle;}});
+ assert.equal(calls,1);assert.equal(r.ready,true);assert.equal(r.certified_bundle,bundle);
+});
+test('unverified backup never fetches artifact or reports ready',async()=>{
+ let calls=0;
+ const r=await prepareReleaseEvidence({backup:{},githubToken:'fake',sourceSha:sha,
+  backupRequester:async()=>({status:'BACKUP_REQUESTED_NOT_VERIFIED'}),
+  artifactRetriever:async()=>{calls++;}});
+ assert.equal(r.ready,false);assert.equal(calls,0);
+});
