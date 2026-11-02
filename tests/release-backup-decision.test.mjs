@@ -35,3 +35,30 @@ test('only independently verified, sufficiently recent encrypted backups may be 
   assert.ok(result.reasons.length);
  }
 });
+
+test('microsecond and nanosecond writes AFTER snapshot are never covered',()=>{
+ const start='2026-11-01T11:00:00.000000000Z';
+ for(const latestDataWriteUtc of [
+  '2026-11-01T11:00:00.000001Z',
+  '2026-11-01T11:00:00.000000001Z',
+  '2026-11-01T11:00:00.000000999Z']){
+  const result=decide({...evidence,snapshotStartUtc:start,latestDataWriteUtc});
+  assert.equal(result.reusable,false,latestDataWriteUtc);
+  assert.match(result.reasons.join('; '),/latest observed database write/);
+ }
+ assert.equal(decide({...evidence,snapshotStartUtc:start,
+  latestDataWriteUtc:'2026-11-01T11:00:00.000000000Z'}).reusable,true);
+ assert.equal(decide({...evidence,snapshotStartUtc:start,
+  latestDataWriteUtc:'2026-11-01T10:59:59.999999999Z'}).reusable,true);
+});
+test('verification instant must follow snapshot at full precision; malformed UTC fails shut',()=>{
+ const snapshotStartUtc='2026-11-01T11:00:00.000000009Z';
+ for(const verificationUtc of ['2026-11-01T11:00:00.000000008Z',
+  '2026-02-31T12:00:00Z','2026-11-01T12:00:00+00:00',
+  '2026-11-01T12:00:00.1234567890Z']){
+  assert.equal(decide({...evidence,snapshotStartUtc,verificationUtc}).reusable,false,
+   verificationUtc);
+ }
+ assert.equal(decide({...evidence,snapshotStartUtc,
+  verificationUtc:'2026-11-01T11:00:00.000000009Z'}).reusable,true);
+});
