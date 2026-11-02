@@ -96,3 +96,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — release evidence preflight coordination
 - Added nonpublishing preflight coordinator: reuse verified encrypted recovery only after direct-parent/ciphertext/snapshot check; otherwise request existing main encrypted backup exactly once per preflight invocation and HOLD until offsite ciphertext verification. Independently SHA-256-verify exact certified artifact before declaring evidence ready. Four focused regressions cover reuse, fallback HOLD, unavailable dispatch, tamper denial. This is not connected to main hosted controller yet; repeated invocations need idempotent dispatch deduplication before production activation. No provider write or deployment.
+
+## 2026-11-02 — avoid duplicate manual encrypted backup dispatch
+- Backup fallback now queries recent main workflow runs before dispatch; if an existing manual backup is active, returns BACKUP_ALREADY_RUNNING_NOT_VERIFIED and does not launch a second. API lookup uncertainty fails closed; neither response is accepted as verified offsite recovery. Mock regressions cover active suppression, malformed/API denial and new dispatch. A race between simultaneous independent dispatchers still requires a durable cross-run claim before production activation. No backup was requested here.
