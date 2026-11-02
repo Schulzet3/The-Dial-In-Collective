@@ -60,6 +60,14 @@ export function assessReleaseQueue(queue,{publishedSourceSha,candidateSha,change
   typeof isAncestor!=='function')errors.push('Exact source refs or ancestry verification unavailable');
  if(queue?.published_base?.tested_source_sha!==publishedSourceSha)
   errors.push('Queue published baseline differs from actual consumed production source');
+ // A candidate must extend the exact published source; matching changed paths
+ // or a READY item alone cannot certify a disconnected/replaced source history.
+ if(SHA.test(publishedSourceSha||'')&&SHA.test(candidateSha||'')&&typeof isAncestor==='function'){
+  try{
+   if(isAncestor(publishedSourceSha,candidateSha)!==true)
+    errors.push('Candidate source does not descend from published baseline');
+  }catch{errors.push('Cannot verify candidate ancestry from published baseline');}
+ }
  const diff=deployableChangedPaths(changedPaths||[]);
  for(const item of queue?.items||[]){
   // A DEPLOYED label is not proof that a post-baseline commit was published.
@@ -146,7 +154,15 @@ export function evaluateLocalQueue(){
  const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
  const head=git(['rev-parse','HEAD']),base=queue.published_base?.tested_source_sha;
  const changes=git(['diff','--name-only','--no-renames',base+'..'+head]).split(/\r?\n/).filter(Boolean);
- const ancestor=(a,b)=>{try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}catch{return false;}};
+ const ancestor=(a,b)=>{
+  try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
+  catch(error){
+   // Git status 1 means a proven non-ancestor. A missing object/repository or
+   // other git failure must not be silently treated as evidence of non-inclusion.
+   if(error?.status===1)return false;
+   throw Error('Git ancestry verification unavailable (exit '+String(error?.status)+')');
+  }
+ };
  return assessReleaseQueue(queue,{publishedSourceSha:base,candidateSha:head,changedPaths:changes,isAncestor:ancestor});
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
