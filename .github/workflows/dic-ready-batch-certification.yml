@@ -21,7 +21,19 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Classify READY queue before expensive certification
+        id: ready_scope
+        shell: bash
+        run: |
+          node --input-type=module -e "import {readFileSync} from 'node:fs';const q=JSON.parse(readFileSync('docs/RELEASE_QUEUE.json'));const ready=q.items.filter(x=>x.state==='READY');console.log('READY items: '+ready.length);process.stdout.write('');" 
+          if node --input-type=module -e "import {readFileSync} from 'node:fs';const q=JSON.parse(readFileSync('docs/RELEASE_QUEUE.json'));process.exit(q.items.some(x=>x.state==='READY')?0:1)"; then
+            echo 'has_ready=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'has_ready=false' >> "$GITHUB_OUTPUT"
+            echo 'No READY batch: skip duplicate combined suites; regular application checks still run.' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Install locked dependencies
+        if: steps.ready_scope.outputs.has_ready == 'true'
         run: npm ci
       - name: Verify queue schema and complete unpublished source coverage
         run: |
@@ -30,24 +42,28 @@ jobs:
           # Certification runs tests even when the queue is empty; only the release controller grants publication.
           node scripts/release/release-queue.mjs --status
       - name: Combined Node regressions
+        if: steps.ready_scope.outputs.has_ready == 'true'
         run: npm test
       - name: Combined cloud, offline and UI regressions
+        if: steps.ready_scope.outputs.has_ready == 'true'
         run: npm run test:cloud
       - name: Lint
+        if: steps.ready_scope.outputs.has_ready == 'true'
         run: npm run lint
       - name: Production-style build using nonfunctional public CI coordinates
+        if: steps.ready_scope.outputs.has_ready == 'true'
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
         run: npm run build:cloud
       - name: Write source-bound machine-readable CI certificate
-        if: success()
+        if: success() && steps.ready_scope.outputs.has_ready == 'true'
         env:
           DIC_SOURCE_SHA: ${{ github.sha }}
           DIC_RUN_ID: ${{ github.run_id }}
         run: node scripts/release/write-ci-certificate.mjs
       - name: Retain certificate as GitHub Actions artifact
-        if: success()
+        if: success() && steps.ready_scope.outputs.has_ready == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: dic-ci-certificate-${{ github.sha }}
