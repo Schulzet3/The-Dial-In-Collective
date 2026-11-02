@@ -33,3 +33,6 @@ GitHub artifact discovery now fails closed on truncated/missing/oversized API re
 ## November 2, 2026 UTC — Issue #368 active backup run dedup hardening
 
 The fallback now checks complete bounded GitHub active-run inventories for queued/waiting/pending/requested/in-progress backup jobs, including old and push-triggered runs, before any claim/dispatch. Incomplete API evidence fails closed. Same-commit tests/journal; exact hosted CI and nonforce merge required. Existing Git-connected production remains unchanged; no backup dispatch or provider/data writes. Same-archive restore and atomic provider compatibility remain unverified.
+
+## November 2, 2026 — Issue #417 pending safe controller restoration
+Nonpublishing main controller source+test candidate restores one Git-connected publisher and retains all exact-source authorization and READY gates. No production changes or claim. See OPS journal and #417.
