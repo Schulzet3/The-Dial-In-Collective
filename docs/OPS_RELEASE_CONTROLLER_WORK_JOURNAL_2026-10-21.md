@@ -158,3 +158,7 @@ Issue #134 natural-run acceptance is satisfied. Documentation-only acceptance; n
 ## Release 14 single-use request — 2026-11-02T03:14:58.930Z
 
 Owner approved immediate 17-item publication. Source 2c8e1ffe3b83a7524968f50efca3ead4da282cf8 has five exact-SHA CI PASS. Backup GitHub artifact 13097561218 ZIP contains age ciphertext SHA256 6baf7ce563e2157a83b7b5c589dc945144c0734e9f3ab17b452a654df55f60f5; verified uploaded as direct child of approved private Drive folder, ID 1396aSuRA-5wApeiRRkgi6A44wtKZEBwB. No source-to-production SQL migration changes in GitHub compare. This push triggers the guarded one-use controller; never claim Netlify READY without provider receipt.
+
+## Release 14 corrected request — 2026-11-02T03:15:35.388Z
+
+The previous one-use controller rejected its request envelope before any release claim because the appended journal lacked the literal mode. Re-issue unique commit for DIC-20261102-READY17-14 exact source 2c8e1ffe3b83a7524968f50efca3ead4da282cf8 mode publish; existing backup evidence and five CI remain unchanged. The earlier failed request is retained in history; no force/replay/duplicate publication.
