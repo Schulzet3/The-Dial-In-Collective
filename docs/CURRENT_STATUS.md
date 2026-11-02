@@ -1,3 +1,10 @@
+## November 2, 2026 — Issue33 #312 current selected producer-credit origin narrow READY, not deployed
+
+PR352 nonforce merged `64e923b35e62100d05dae0f302cf78d5f3a16068` with tested code/test blobs identical to PR head; exact corrected PR-head and merged Node/cloud/approval CI PASS, security/SQL/visual/private source PASS, frozen603 SKIPPED. Current official selected #312 ICONIK Bressani Family Washed Sidra direct published `Bressani Family, San Jerónimo Guatemala` now yields Origin `San Jerónimo, Guatemala` (previously blank), only one field changed across independent 3/3 before and 3/3 after current official selected product runs; #4/#308 and all conflicts unchanged, raw HTML hashes varied. See `docs/audits/issue33-ninth3-current-official-review-20261102.json` and `docs/workstreams/issue-33.md`. Release queue **18 READY/71 DEPLOYED/2 IN_PROGRESS**, no publication. Parent Issue33 OPEN; 153 context-qualified, 29 missing-literal-qualified, frozen original603 and hosted GoTrue limits preserved.
+
+
+---
+
 ## November 2 UTC — #267 seventh batch exact-source CI repair follow-up
 
 Source `7804151ca701242eb0930d5e1ddac1530dced68b`: approval CI PASS, cloud UX PASS, Python coffee PASS; full Node and automatic READY certification FAILED one existing approval-coverage test because a shortened project-instructions sentence omitted explicit owner no-public-upgrade and branch-protection wording. Restored exact owner policy within 8,000 characters; exact-source Node/certification retest pending. Audit counts remain frozen V2 **2,068/579,961**, current pinned V2 **2,876**; no deployment or queue changes.
