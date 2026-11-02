@@ -10,9 +10,13 @@ const workflow=join(root,'.github/workflows/verified-drive-archive-restore.yml')
 const source=readFileSync(script,'utf8');
 const yml=readFileSync(workflow,'utf8');
 
-test('restoring saved ciphertext requires the independent Drive digest, exact scheduled run and explicit manual dispatch',()=>{
-  assert.match(yml,/^on:\n  workflow_dispatch:/m);
-  assert.doesNotMatch(yml,/^  (push|schedule|pull_request):/m);
+test('restoring saved ciphertext requires original scheduled source, weekly schedule or manual Drive-digest dispatch',()=>{
+  assert.match(yml,/^on:\n(?:.|\n)*?  schedule:\n    - cron: '17 13 \* \* 2'/m);
+  assert.match(yml,/^  workflow_dispatch:/m);
+  assert.match(yml,/select-archived-restore-source\.mjs/);
+  assert.match(yml,/independent-drive-nov1-2026/);
+  assert.match(yml,/github-artifact-only/);
+  assert.doesNotMatch(yml,/^  (push|pull_request):/m);
   assert.match(yml,/verified_drive_zip_sha256:/);
   assert.match(yml,/get\('digest'\)!='sha256:'\+expected/);
   assert.match(yml,/run\.get\('event'\)!='schedule'/);
