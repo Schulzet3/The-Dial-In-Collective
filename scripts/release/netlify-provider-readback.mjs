@@ -11,9 +11,9 @@ export function assertNetlifyPublishedSource({deploy,project,expectedReleaseSha,
   deploy.context!=='production'||deploy.commit_ref!==expectedReleaseSha)
   throw Error('Netlify deployment is not READY for exact approved release SHA');
  if(!deploy.id||deploy.id!==expectedDeployId||
-  project.currentDeploy?.currentDeploy?.id!==deploy.id||
-  project.currentDeploy?.currentDeploy?.state!=='ready'||
-  project.currentDeploy?.state!=='current')
+  project._enrichedFields?.currentDeploy?.currentDeploy?.id!==deploy.id||
+  project._enrichedFields?.currentDeploy?.currentDeploy?.state!=='ready'||
+  project._enrichedFields?.currentDeploy?.state!=='current')
   throw Error('Netlify deployment is not current or receipt mismatch');
  if(deploy.ssl_url!==ORIGIN||project._enrichedFields?.urls?.primarySiteUrl!==ORIGIN)
   throw Error('Unexpected production hostname');
