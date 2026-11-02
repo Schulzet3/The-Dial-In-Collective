@@ -1,3 +1,11 @@
+## November 2 UTC — #33 Bleu Ethiopia Yirgacheffe hypothetical roast boundary (TESTING; no deploy)
+
+Recovered exact development `679c0ccacdb6fe203b8a666974eaf75722ee7a15`, AGENTS, #33 scoped journal, Current Status, Master Spec, Decision Ledger, approval matrix, queue **0 READY / 89 DEPLOYED / 2 IN_PROGRESS**, source-bound original603 fifth20 #26 review, #267 V2/#96 boundaries and automation registry. #267 owns generic current-code cleanup; this is #33-owned test-only work, with no shared runtime writes. User-excluded PR367 was not used or changed.
+
+Official selected [Bleu Ethiopia Yirgacheffe](https://bleucoffee.com/products/ethiopia) H1 is `Ethiopia Yirgacheffe`; direct prose says washed and mentions both Dark and Medium **only as conditional roast outcomes**, with special-order roast profiles. No selected fixed tier is established. This is a public-web source read, not a fresh DNS-pinned raw capture/hash or exact-source live parser replay. Source receipt: `docs/audits/issue33-bleu-ethiopia-yirgacheffe-roast-boundary-20261102.json`. Two bounded synthetic adversarial tests in `tests/coffee-issue33-bleu-hypothetical-roast-boundary.test.mjs` protect against false selected roast and unrelated SEO/related-product identity leakage. **TESTING** pending exact-source Node/cloud/approval CI; any genuine regression must be repaired before merge. No runtime code, release queue, original603 CSV/captures/oracle, 153 context-qualified/29 missing-literal-qualified caveats, #267 V2 ledger, #96, PR367, provider/member data or production changes. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 Favor Token Dark direct selected roast versus Dark branding (TESTING; no deploy)
 
 Recovered exact development `a466b1d2b0310fe8c7e9e2b52cee45500b8ef465`, AGENTS, current scoped journal, Status, Master Spec, Decision Ledger, approval matrix, release queue (0 READY / 89 DEPLOYED / 2 IN_PROGRESS), original603 review register, #267 V2/#96 boundaries and automation registry. The user expressly excluded PR367; it was not modified or used.
