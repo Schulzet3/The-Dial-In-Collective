@@ -1,4 +1,4 @@
-// Controlled GitHub Actions release runner (private, inert until hosted cutover).
+// Controlled one-use Git-connected single publisher; no API artifact publisher.
 // Serialized main OPS Actions: explicit manual fallback OR verified narrow chat request.
 // GitHub private Free checks are advisory, not enforced. Use exact approved
 // grant, live five-check API readback and atomic non-force one-use claim.
@@ -6,7 +6,6 @@
 // is the single atomic claim. Never retry a failed push automatically.
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync,rmSync,appendFileSync} from 'node:fs';
-import {retrieveVerifiedReleaseBundle} from './retrieve-certified-release-bundle.mjs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
@@ -20,15 +19,13 @@ const SHA=/^[a-f0-9]{40}$/;
 // pinned hashes prevent stale/legacy build guards or silent claim history loss.
 export const RELEASE_GENESIS_SHA='e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60';
 export const MINIMUM_GUARDED_SOURCE_SHA='994a4d9f91e2475a96df42a46564c06e29f1c8d7';
-// The future Git claim must NOT itself trigger a second Git-connected build.
-// Preserve the exact [dic-publish] subject for claim validation, and place
-// [skip netlify] in the commit BODY. The tested source's own Netlify guard
-// independently checks the full message if Netlify does not honor the marker.
-export function immutableReleaseClaimMessage({id,sourceSha}={}){
+// Publish via ONE authorized Git-connected Netlify release-branch build.
+// Ordinary operations commits still use [skip netlify].
+export function gitConnectedReleaseClaimMessage({id,sourceSha}={}){
  if(!/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/.test(id||'')||!SHA.test(sourceSha||''))
   throw Error('Invalid immutable release claim identity');
  return {subject:'Release DIC: '+id+' [dic-publish]',
-  body:'[skip netlify]\n\nImmutable Netlify digest/function publication only; do not rebuild from Git.\nTested source: '+sourceSha};
+  body:'Single owner-approved Git-connected production build; no API publisher.\nTested source: '+sourceSha};
 }
 
 export function initialLedgerOnMissing({releaseHead,readLedger}){
@@ -208,9 +205,9 @@ export async function executeSingleUseRelease(settings=process.env){
  if(!checkedGuard.includes("branch!=='release/production'")||
     !checkedGuard.includes('assertProductionClaim'))
   throw new Error('Tested source lacks protected dedicated-release build gate');
- if(!checkedGuard.includes('Immutable release claim: suppress Git-connected rebuild')||
-    !checkedGuard.includes('--format=%B'))
-  throw new Error('Tested source lacks independent immutable claim Git-CD suppression');
+ if(!checkedGuard.includes('--format=%B')||
+    !checkedGuard.includes('assertProductionClaim'))
+  throw new Error('Tested source lacks full-message one-use production guard');
  const approvals=json(git(['show',developmentHead+':docs/RELEASE_AUTHORIZATIONS.json']),'Owner grants');
  const grant=sourceGrant(approvals,id);
  if(!enforcedProtection&&(!privateFreeMode||
@@ -266,28 +263,8 @@ export async function executeSingleUseRelease(settings=process.env){
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
  assertApprovedReadyBatch(grant,queueGate);
- // A Git SHA cannot certify deployable bytes. The automatic bridge fetches
- // the exact successful CI run and verifies static ZIP + function ZIP + v4
- // certificate before ANY grant claim or provider mutation.
- if(!(chatPush&&chatRequest.mode==='validate_only')){
-  const bundle=await retrieveVerifiedReleaseBundle({token,sourceSha:sha});
-  const certified=bundle.receipt.ready_item_ids.slice().sort();
-  const approved=queueGate.ready_items.map(x=>x.id).sort();
-  if(JSON.stringify(certified)!==JSON.stringify(approved))
-   throw Error('Immutable artifact READY scope differs from approved source batch');
-  if(bundle.manifest.functions['coffee-url-preview']!==bundle.receipt.immutable_function_sha256)
-   throw Error('Certified Netlify Function digest differs from manifest');
-  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,
-   '\n## Exact-source immutable artifact readback\n- Source: '+sha+
-   '\n- CI run: '+bundle.run_id+
-   '\n- Static files: '+Object.keys(bundle.files).length+
-   '\n- Function: coffee-url-preview (SHA-256 verified)\n'+
-   '- Status: verified bytes; **NOT published**, owner grant unconsumed.\n');
-  // The existing Git-connected production publication is preserved until
-  // backup verification and one atomic digest+function provider transaction
-  // can be proven. Never use a Git push as a second rebuild publisher.
-  throw Error('Immutable deployment HOLD: verified artifact retrieved, but provider transaction and independent offsite backup verification are not activated; no Git push');
- }
+ // Source-bound CI, approved READY items, deployable-path coverage and ancestry
+ // are verified above. Netlify performs the one authorized production build.
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
   ledger,currentPublishedSourceSha:ledger.consumed.at(-1)?.tested_source_sha||releaseHead});
@@ -311,7 +288,7 @@ export async function executeSingleUseRelease(settings=process.env){
   // append the contemporaneous *GitHub claim*, and do not claim Netlify READY.
   const claimReceipt={schema_version:1,release_id:id,tested_source_sha:sha,
    previous_release_head_sha:releaseHead,claimed_at_utc:nowIso,
-   status:'GITHUB_CLAIM_PENDING_NETLIFY_PROVIDER_READBACK',
+   status:'GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK',
    granted_single_publication:true,
    approved_ready_queue_items:queueGate.ready_items};
   const journalPath='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
