@@ -170,3 +170,8 @@ The previous one-use controller rejected its request envelope before any release
 
 ## 2026-11-02 — repair exact historical journal byte preservation
 - Main acceptance run 41389322471 failed 1/71 tests: the controller normalized historical journal trailing whitespace, breaking exact-byte append-only validation. Repaired Git helper with opt-in trim:false for both historical/current journal reads, preserving original bytes. Focused tests and full main acceptance must pass before declaring verified. No production publication or provider write.
+
+
+## 2026-11-02 — independent offsite encrypted backup integrity verification
+- Downloaded GitHub artifact 13097561218 (run 41341512530) and Drive ZIP 1396aSuRA-5wApeiRRkgi6A44wtKZEBwB; both contain 8,728,008-byte backup.age SHA-256 `6baf7ce563e2157a83b7b5c589dc945144c0734e9f3ab17b452a654df55f60f5`. Drive parent verified `1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf`. No restore or later write-cutoff claim.
+- Development no-publish rehearsal run 41390284062 SUCCESS at SHA 8d82d6e2b0fdb08c73a24ff19da48408c68d66ce. Exact-source combined CI pending. Zero READY items. No publication.
