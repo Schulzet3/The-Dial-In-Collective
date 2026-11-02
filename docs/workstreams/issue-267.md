@@ -1,3 +1,15 @@
+## November 2 UTC — #267 V2 R2-023/C2-023 ordered semantic review (exact PR/merged-source CI PENDING)
+
+Frozen original commit `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree `c54ade64eca30946df8858297578a172f5cf6fa8`: manifest #56 `docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md` blob `b1698030de2539bbd2f342251cece4c546477227` **lines 91–163 (73)**, then manifest #57 `docs/CURRENT_STATUS_PRE_SWEEP_2026-10-17.md` blob `9a3b0aad18211b914af1520de385785c855d4e09` **lines 1–27 (27)**. **100 fresh AI-not-human historical lines; V2 4,815/579,961, 575,146 remaining; next #57 line28.** [R2-023](../audits/issue267-v2-frozen-batches/R2-023.json) interprets all numbered segments and flags contradictory old 60/day handoff/credit screenshot gates as superseded historical instructions, not current app defects.
+
+Pinned current source `9707553a64f88127826e8f5b2b36cd0651296e83` / tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`: eligible #48 `scripts/audit/coffee-frozen-ci.py` blob `266631b5a9abf05f574e2a1058a9cd7372172d08` **lines 1331–1410 (80)**. **V2 5,822/57,913 current lines, 52,091 remaining; next line1411.** [C2-023](../audits/issue267-v2-current-batches/C2-023.json) reviews accepted-change receipts, 603 export/zero-loss blockers, offline helper no-fetch and hash gates, and deterministic artifact manifest. The same file blob was independently read at development `8316e8fed43ad45dd8c2cdea8c683638dd5e0bee`; unrelated post-pin source drift remains unreviewed.
+
+Both append-only ledgers re-summed and checked for overlapping path/ranges; V1 B001+/B031+ and machine inventory not counted. No reproduced current defect, proven unused code, measured performance win, full603, browser, hosted GoTrue or provider test; no app/test/queue/production/SQL/Auth/Edge/member writes or deployment. #33/#96/#28 and concurrent draft PRs preserved. Issue #267 **OPEN**. PR-head and merged-source CI for this batch **PENDING**, not PASS. [skip netlify]
+
+Next: verify exact PR-head CI, nonforce merge with explicit `[skip netlify]` merge title, verify exact merged-source approval and READY CI; resume frozen #57 line28 and pinned current #48 line1411, audit D2 drift separately.
+
+---
+
 ## November 2 UTC — #267 V2 R2-022/C2-022 source-bound review (CI PENDING)
 
 Frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree c54ade64eca30946df8858297578a172f5cf6fa8, manifest #56 `docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md` blob `b1698030de2539bbd2f342251cece4c546477227` lines **1–90** (90 fresh AI-not-human lines): **4,715/579,961** historical, **575,246 remaining**, next line91. [R2-022](../audits/issue267-v2-frozen-batches/R2-022.json) interprets every numbered segment; old credit screenshot gate superseded, no old release/SQL authority.
