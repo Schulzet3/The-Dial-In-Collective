@@ -1,3 +1,9 @@
+## November 2 UTC — Issue33 PR346 approval intake failure triaged, candidate TESTING (no deploy)
+
+Exact PR head `e418785a077f924700e060127a93b1210d8dfe2a` approval run [41365457457](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41365457457) genuinely **FAILED** queue intake: `Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: src/server/coffee-semantic-specs.mjs`. Source archive 41365457354 and security 41365457390 succeeded; frozen603 41365457320 SKIPPED, not PASS. Added new narrow `DIC-Q-33-educational-origin-label-boundary` **TESTING** queue item, without modifying any existing READY/DEPLOYED statuses, and this SAME-COMMIT journal. New exact-source CI remains pending. No production writes or deployment. [skip netlify].
+
+---
+
 ## November 2 UTC — Issue33 educational boundary candidate immediate source review correction (TESTING)
 
 Pre-PR inspection of first candidate commit `6903b030d8b78a239143ebf963f9868463132581` found accidentally double-escaped backslashes in JavaScript regex literals, which would match literal backslashes instead of HTML paragraph tags and word boundaries. Corrected the regex syntax in this code+SAME-COMMIT journal follow-up before opening the PR or asserting tests passed. Earlier commit remains historical evidence, not PASS. No scope expansion, no release, no production writes. [skip netlify].
