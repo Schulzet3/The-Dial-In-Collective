@@ -1,3 +1,9 @@
+## November 2 UTC — #423 existing SSH key approved (NO LIVE RESTORE)
+
+Owner authorized using existing private OpenSSH Ed25519/age recovery identity only as encrypted GitHub repository Actions secret DIC_ARCHIVE_AGE_IDENTITY; preserve owner offline copy. Operations PR #431 merged `760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c`, PR CI 137 tests PASS including actual synthetic SSH key pair. Owner-side secret installation and historical saved Drive ciphertext isolated restoration remain BLOCKED/UNTESTED. This changes backup key custody only, not encryption, DB/Auth/privacy, release queue or Netlify. Canonical Locked entry: current_owner_existing_ssh_backup_key_github_actions_secret_20261102.
+
+---
+
 ## November 2 UTC — #417 source isolation code and exact CI VERIFIED, no publication
 
 Main PR #424 merged at `827cc068aa8d9a6f186bdaa86684ff732e82531a`; main PR #427 merged at `af9c913d05277b1c4b059e6165fcad6f146849bb`. Exact main GitHub CI verified **129 tests PASS / 0 FAIL**, including real disposable-Git READY-only stage, same-file unready overlap/post-READY source denial, parent/ref/blob checks. Development PR #426 merged at `5e6e32a8cbf86ffd202e1b526ba5de8805cf20c8`; exact merged-source approval, validate, cloud, mobile, SQL, visual and lightweight READY checks all **SUCCESS**. One guarded Git-connected publisher; no immutable API uploader or duplicate READY suite. Queue **89 DEPLOYED / 0 READY / 3 IN_PROGRESS**. No real candidate with READY items exists, so no live candidate GitHub staging or new Netlify publication was performed. Netlify Release14 remains READY/current. Issue #417 tracks first actual READY-batch stage/provider proof and recovery-source pin synchronization; incident #356 is preserved, not backdated. Project Instructions copy updated; only owner may paste into ChatGPT Settings.

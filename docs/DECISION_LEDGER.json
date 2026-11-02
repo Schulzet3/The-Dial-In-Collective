@@ -4639,5 +4639,23 @@
     "v2_initial_status": "0/579961 original text lines, current-code 0 lines until pinned inventory; no actual new review yet",
     "evidence": "docs/audits/issue267-review-restart-v2-20261101.json",
     "publication": "No deploy, production/provider/member writes, paid services or removal of historical materials authorized."
+  },
+  "current_owner_existing_ssh_backup_key_github_actions_secret_20261102": {
+    "decision_id": "OPS-OWNER-REUSE-EXISTING-SSH-RECOVERY-KEY-20261102",
+    "status": "Locked",
+    "date": "2026-11-02",
+    "issue": 423,
+    "owner_source": "Owner explicitly said 'yes do it so I can upload my key and provide me with instructions on how to upload it to github' after discussing existing key instead of a new key.",
+    "decision": "Allow owner's existing unencrypted OpenSSH Ed25519 or native age private key to be placed directly in GitHub encrypted repository Actions secret DIC_ARCHIVE_AGE_IDENTITY. CI may decrypt historical archives addressed to its matching public recipient. Preserve owner offline copy; derive only public recipient and avoid duplicate ciphertext stanza if key matches configured original recipient.",
+    "supersedes": "Only Issue #423 requirement for a DIFFERENT automation-only recovery identity and exclusive offline custody of the personal key; not the ban on key upload to ChatGPT, Git source/issues, Drive or logs; no plaintext offsite, security/auth/privacy relaxation, or hosted DB restore.",
+    "constraints": [
+      "Only owner installs the private key directly as a repository Actions secret; current ChatGPT GitHub connector cannot install secrets",
+      "Unencrypted SSH Ed25519 or native age identity required; fail closed on noninteractive passphrase, invalid type or unsupported format",
+      "Existing encrypted backups and private offsite Drive direct-child destination remain unchanged; preserve offline key copy and all historical ciphertext",
+      "Existing daily/weekly backups and privacy protections remain; real saved Drive ciphertext decryption and isolated database restoration must PASS before claiming success"
+    ],
+    "ops_implementation_sha": "760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c",
+    "archived_restore_status": "BLOCKED pending secret and real isolated test",
+    "production_write_or_release_authorized": false
   }
 }
