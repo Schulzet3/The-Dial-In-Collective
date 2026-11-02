@@ -14,14 +14,14 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 2328,
-    "remaining_v2_lines": 577633,
-    "status": "IN_PROGRESS_R2_008_SOURCE_BOUND",
+    "verified_new_v2_reviewed_lines": 2648,
+    "remaining_v2_lines": 577313,
+    "status": "IN_PROGRESS_R2_009_SOURCE_BOUND",
     "next_file_index_1_based": 30,
     "next_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
     "next_source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
-    "next_line_1_based": 641,
-    "next_action": "Resume original matrix #30 line 641; do not skip historical or V1 ranges.",
+    "next_line_1_based": 961,
+    "next_action": "Continue frozen matrix #30 at original line 961; V1 remains separate.",
     "independently_reviewed_v2_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -246,6 +246,13 @@
         "first_line": 381,
         "last_line": 640,
         "receipt": "docs/audits/issue267-v2-frozen-batches/R2-008.json"
+      },
+      {
+        "path": "docs/APPROVAL_COVERAGE_MATRIX.json",
+        "source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+        "first_line": 641,
+        "last_line": 960,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-009.json"
       }
     ],
     "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
@@ -255,7 +262,7 @@
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
     "inventory_status": "PINNED_436_FILES_306_LINE_COUNT_VERIFIED_130_PENDING",
     "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
-    "reviewed_current_source_lines": 3210,
+    "reviewed_current_source_lines": 3629,
     "reviewed_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -536,10 +543,31 @@
         "first_line": 1,
         "last_line": 65,
         "receipt": "docs/audits/issue267-v2-current-batches/C2-008.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-replay.mjs",
+        "source_blob_sha": "adf7115358cf9069c6e146e9ec983705575e1863",
+        "first_line": 1,
+        "last_line": 147,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-009.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-report-browser.mjs",
+        "source_blob_sha": "03869094aca9b88baf1c235af49dfd5bf996098f",
+        "first_line": 1,
+        "last_line": 52,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-009.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-report.py",
+        "source_blob_sha": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+        "first_line": 1,
+        "last_line": 220,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-009.json"
       }
     ],
-    "next_file": "scripts/audit/coffee-corpus-replay.mjs",
-    "next_line_1_based": 1,
+    "next_file": "scripts/audit/coffee-corpus-report.py",
+    "next_line_1_based": 221,
     "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
     "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
     "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
@@ -549,19 +577,25 @@
     "known_line_count_subtotal": 36532,
     "full_eligible_line_denominator": null,
     "coverage_ledger": "docs/audits/issue267-v2-current-code-ledger.json",
-    "unreviewed_source_drift_as_of_development_sha": "8f9ab40b42e48e01be7abd7d17df013e3e1d9cae",
+    "unreviewed_source_drift_as_of_development_sha": "61d59c8ef459780a42ea4ab3f887f913e6f16fb5",
     "unreviewed_current_delta_paths": [
       ".github/workflows/cloud-beta-ci.yml",
       ".github/workflows/cloud-regression.yml",
+      ".github/workflows/dic-post-release-readonly-smoke.yml",
       ".github/workflows/dic-ready-batch-certification.yml",
       ".github/workflows/isolated-sql-regression.yml",
       ".github/workflows/visual-review.yml",
       "scripts/audit/issue33-original603-focused-source-review.mjs",
+      "scripts/release/controlled-release-runner.mjs",
+      "scripts/release/production-readonly-smoke.mjs",
+      "scripts/release/release-queue.mjs",
+      "scripts/release/write-ci-certificate.mjs",
       "site/lib/engine.js",
       "src/server/coffee-identity-evidence.mjs",
       "src/server/coffee-page-metadata.mjs",
       "src/server/coffee-semantic-specs.mjs",
       "tests/approval-coverage.test.mjs",
+      "tests/ci-certificate.test.mjs",
       "tests/coffee-issue33-educational-origin-boundary.test.mjs",
       "tests/coffee-issue33-origin-method-suffix.test.mjs",
       "tests/coffee-issue33-producer-credit-locality.test.mjs",
@@ -569,7 +603,9 @@
       "tests/coffee-issue33-selected-station-locality.test.mjs",
       "tests/coffee-issue33-stale-seo-station-roles.test.mjs",
       "tests/grind-cross-version-range.test.mjs",
-      "tests/recommendation-research-guardrails.test.mjs"
+      "tests/production-readonly-smoke.test.mjs",
+      "tests/recommendation-research-guardrails.test.mjs",
+      "tests/release-queue.test.mjs"
     ],
     "reviewed_post_snapshot_delta_receipts": [
       {
@@ -611,7 +647,7 @@
     28,
     134
   ],
-  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_EIGHTH_BATCHES_RECORDED_EXACT_CI_PENDING",
+  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_NINTH_BATCHES_RECORDED_EXACT_CI_PENDING",
   "app_code_changes_in_this_record": 0,
   "production_changes": 0,
   "completed_tests_in_this_record": 0,

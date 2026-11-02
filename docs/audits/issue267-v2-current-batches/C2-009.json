@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "C2-009",
+  "track": "V2_CURRENT_EXECUTABLE_SEMANTIC_REVIEW",
+  "review_date_utc": "2026-11-02",
+  "reviewer": "ChatGPT AI assistant (not human)",
+  "method": "Direct numbered semantic review of pinned current source files #41 and #42 entirely, #43 lines 1–220 only; no automated/V1 credit",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "source_inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+  "reviewed_files": [
+    {
+      "path": "scripts/audit/coffee-corpus-replay.mjs",
+      "git_blob_sha": "adf7115358cf9069c6e146e9ec983705575e1863",
+      "original_inventory_index_1_based": 41,
+      "first_line": 1,
+      "last_line": 147,
+      "line_count": 147,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 33,
+          "interpretation": "Isolated real preview-handler replay reads immutable freeze, oracle and capture-index hashes; validates unique case/capture IDs; no live credentials or network."
+        },
+        {
+          "first_line": 34,
+          "last_line": 50,
+          "interpretation": "Checks captured file basename, uniqueness, packet attestation SHA and selected identity; later attestation is explicitly post-freeze, not part of original oracle lock."
+        },
+        {
+          "first_line": 51,
+          "last_line": 74,
+          "interpretation": "Reproducibility manifest hashes active server/Netlify/shared sources, checks selected 603 case mapping and requested subset; this fingerprint is replay-scope, not entire frontend."
+        },
+        {
+          "first_line": 75,
+          "last_line": 102,
+          "interpretation": "Per-case source-packet identity, captured request status, byte length, SHA, label and normalized URL uniqueness checks reject mutation or missing captured bytes."
+        },
+        {
+          "first_line": 103,
+          "last_line": 127,
+          "interpretation": "Captured fetch adapter applies 900KB/2MB limits and explicit unavailable outcomes; synthetic authenticated/quota endpoints are nonfunctional fixture responses, not production auth proof."
+        },
+        {
+          "first_line": 128,
+          "last_line": 147,
+          "interpretation": "Runs handler against synthetic Request, records response/calls/timing, verifies selected count and source/freeze integrity again, writes source-bound local replay receipt."
+        }
+      ],
+      "quality_and_locked_fit": "Preserves original603 captures/oracle, immutable source evidence, private member isolation and deterministic #33 extraction boundaries.",
+      "risk_and_obsolescence": "No demonstrated live auth/network coverage; source manifest intentionally excludes unrelated frontend. Avoid rewriting #33 corpus or scorer.",
+      "verification_and_testability": "Direct AI-not-human numbered source review; no local 603 replay execution or performance measurement in this batch.",
+      "current_counterpart": {
+        "path": "netlify/functions/coffee-url-preview.mjs; src/server/coffee-page-metadata.mjs; docs/workstreams/issue-33.md",
+        "disposition": "#33 owns current extractor; no source edit."
+      },
+      "disposition": "SOURCE_AUDIT_ONLY_NO_PROVEN_SAFE_CROSS_OWNER_EDIT"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-report-browser.mjs",
+      "git_blob_sha": "03869094aca9b88baf1c235af49dfd5bf996098f",
+      "original_inventory_index_1_based": 42,
+      "first_line": 1,
+      "last_line": 52,
+      "line_count": 52,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 16,
+          "interpretation": "Standalone local Playwright browser uses provided Chromium, offline report bytes and SHA; intercepts all HTTP(S) requests."
+        },
+        {
+          "first_line": 17,
+          "last_line": 34,
+          "interpretation": "At mobile 390px and desktop 1280px, asserts exactly 603 report cases, 10 field rows, embedded data and named search/expanded detail with no overflow."
+        },
+        {
+          "first_line": 35,
+          "last_line": 52,
+          "interpretation": "Writes two local screenshots, verifies filter/reset counts and no page errors/network requests, closes browser in finally and saves receipt with script/report hashes."
+        }
+      ],
+      "quality_and_locked_fit": "Read-only offline report verification; no screenshot feature reintroduced into member app and no private data.",
+      "risk_and_obsolescence": "Hard-coded 603 count is correct for immutable corpus; script requires external browser runtime and is not proof of real mobile device or hosted acceptance.",
+      "verification_and_testability": "Direct AI-not-human numbered review only; browser script not executed in this batch.",
+      "current_counterpart": {
+        "path": "scripts/audit/coffee-corpus-report.py; docs/workstreams/issue-33.md",
+        "disposition": "Preserve #33 audit-only tool."
+      },
+      "disposition": "SOURCE_AUDIT_ONLY_NO_PROVEN_SAFE_DELETION"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-report.py",
+      "git_blob_sha": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+      "original_inventory_index_1_based": 43,
+      "first_line": 1,
+      "last_line": 220,
+      "line_count": 220,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 23,
+          "interpretation": "Local JSON and SHA256 read helpers for self-contained frozen coffee report; no network path."
+        },
+        {
+          "first_line": 24,
+          "last_line": 69,
+          "interpretation": "Separates receipt-recorded READY from deployment, validates merged SHA format, run IDs, empty blockers and explicit CI status; does not independently query GitHub."
+        },
+        {
+          "first_line": 70,
+          "last_line": 93,
+          "interpretation": "Cost/hosted/deployment wording explicitly distinguishes recorded true, recorded false and unknown, avoiding unsupported negative evidence."
+        },
+        {
+          "first_line": 94,
+          "last_line": 140,
+          "interpretation": "Hashes complete case records excluding timing, verifies 603-case identity and client-export fidelity counts/digest; unverified receipt claims are not promoted to observed execution."
+        },
+        {
+          "first_line": 141,
+          "last_line": 177,
+          "interpretation": "Accepted change review requires exact changed-case ID set, before/after hashes, reviewed export hashes and pinned manifest; otherwise labels changes unaccepted."
+        },
+        {
+          "first_line": 178,
+          "last_line": 220,
+          "interpretation": "Begins report assembly by validating freeze manifest/oracle, 603 identities, baseline/candidate/retention/replay hashes, source fingerprints and packet attestation."
+        }
+      ],
+      "quality_and_locked_fit": "Preserves immutable 603 corpus and exact-source provenance; separates source readiness from publication and records unknown evidence honestly.",
+      "risk_and_obsolescence": "Remaining lines 221–370 are NOT reviewed; helper trusts recorded receipts and is not independent hosted CI attestation. Do not delete or rewrite #33 tooling.",
+      "verification_and_testability": "Direct AI-not-human numbered review of lines 1–220 only; no Python report run, browser, source network or benchmark in this batch.",
+      "current_counterpart": {
+        "path": "scripts/audit/coffee-corpus-report.py; docs/workstreams/issue-33.md",
+        "disposition": "Continue current file at line 221; #33 owns scientific/fixture changes."
+      },
+      "disposition": "PARTIAL_SOURCE_AUDIT_NO_PROVEN_SAFE_EDIT"
+    }
+  ],
+  "batch_lines": 419,
+  "previous_v2_lines": 3210,
+  "total_v2_lines": 3629,
+  "next_file": "scripts/audit/coffee-corpus-report.py",
+  "next_line_1_based": 221,
+  "findings": [
+    "The corpus replay/report scripts are audit-only; their synthetic auth and offline Chromium checks are not production member, network or physical-device verification.",
+    "The report requires full 603-case source identity, changed-case hash and export fidelity evidence; no independently established current defect or safe deletion in reviewed lines.",
+    "Current development has 27 post-pin eligible source/test/workflow paths not yet separately reviewed at 61d59c8ef459780a42ea4ab3f887f913e6f16fb5; three earlier delta paths have separate D2 receipts.",
+    "Release14 out-of-batch source inclusion is tracked by separate open issue #356; no production release repair or new publication authorized by #267."
+  ],
+  "code_changes": 0,
+  "production_changes": 0,
+  "tests_executed": []
+}
