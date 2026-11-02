@@ -33,6 +33,16 @@ test('never release mixed Ready+unready merged source, including overlapping pat
   assert.match(result.errors.join(' '),/unready MERGED/);
  }
 });
+test('candidate must descend from published source, including overlapping READY paths',()=>{
+ const disconnected=(from,to)=>from===A&&to===C?false:graph(from,to);
+ const result=assess(q,['site/cloud/shot_card.js'],disconnected);
+ assert.equal(result.ready,false);
+ assert.match(result.errors.join(' '),/Candidate source does not descend from published baseline/);
+ const unavailable=(from,to)=>{if(from===A&&to===C)throw Error('missing Git object');return graph(from,to);};
+ const uncertain=assess(q,['site/cloud/shot_card.js'],unavailable);
+ assert.equal(uncertain.ready,false);
+ assert.match(uncertain.errors.join(' '),/Cannot verify candidate ancestry/);
+});
 test('open unmerged PR stays tracked but does not enter a release batch',()=>{
  const pending={...queued,id:'DIC-Q-102',issue:102,state:'TESTING',merged_source_sha:null,tests:[],ci_runs:[],blockers:['PR open']};
  const r=assess({...q,items:[queued,pending]});
