@@ -25,7 +25,7 @@ test('#248 archived selected lot retains its direct process and rejects educatio
  const result=extractPublicCoffeeFacts(html,{source_url:url});
  assert.equal(result.ok,true,JSON.stringify(result));
  assert.equal(result.fields.name,'Ethiopia Agaro Yukro G1');
- assert.equal(result.fields.origin,'Ethiopia');
+ assert.equal(result.fields.origin,'Agaro, Ethiopia');
  assert.equal(result.fields.process,'Washed');
  assert.equal(result.fields.roast_level,'Ultra Light');
  assert.equal(result.fields.decaffeination_method,undefined);
@@ -43,7 +43,7 @@ test('#248 selected archived Washed lot cannot inherit a Natural related product
  const result=extractPublicCoffeeFacts(html,{source_url:url});
  assert.equal(result.ok,true,JSON.stringify(result));
  assert.equal(result.fields.name,'Ethiopia Agaro Yukro G1');
- assert.equal(result.fields.origin,'Ethiopia');
+ assert.equal(result.fields.origin,'Agaro, Ethiopia');
  assert.equal(result.fields.process,'Washed');
  assert.doesNotMatch(JSON.stringify(result.fields),/Costa Rica|Las Lajas/i);
  assert.ok(!result.conflicts?.includes('process'),JSON.stringify(result.conflicts));
