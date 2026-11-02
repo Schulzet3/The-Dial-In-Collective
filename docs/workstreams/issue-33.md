@@ -1,3 +1,11 @@
+## November 2 UTC — Issue33 ninth3 actual skipped source-job trigger repaired (TESTING; no deploy)
+
+PR350 safely merged as `44c3bb67b78026e9899016d26ec71fb8d050c7bb` with identical reviewed tree, five applicable PR-head workflows SUCCESS, and exact merged approval run 41375939764 SUCCESS. However actual public source run **41375939774** did NOT exercise any #4/#308/#312 product: `issue33-original603-focused-current-review` job **SKIPPED** (job 125056074095). Root cause verified in merged workflow: ninth3 was added to the environment's case-number mapping but **omitted from the job-level `if` expression**; the merge message correctly contained `[dic-issue33-ninth3]`, so this is a real workflow selector omission, not a parser/product test failure. No fetched/parsed or official field claim from the skipped run.
+
+**Same-commit correction:** append exactly `[dic-issue33-ninth3]` to the focused job's existing bounded trigger, preserving all older selectors and unchanged source script. Exact PR-head checks, nonforce integration and merged-source approval plus actual 3-case DNS-pinned public source job are required; only then adjudicate source-specific fields. No code/parser/oracle/CSV/capture, #267 V2, #96, queue or production changes. [skip netlify].
+
+---
+
 ## November 2 UTC — Issue33 ninth3 unresolved original603 official source diagnostic (TESTING; no extraction claim)
 
 **Recovered actual development base:** `abd202aa06f64ade8c14bc7b3dc75d14e790d13d`, current #33 OPEN; AGENTS, Current Status, Master Specification, Decision Ledger, approval coverage, queue (17 READY/71 DEPLOYED/2 IN_PROGRESS), source-level immutable original603 CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, current selected-source audit and #267 V2/#96 boundaries checked. This is a distinct, bounded source recheck for original603 **#4 44 North Decaf Honduras COMSA**, **#308 Compass Emblem Espresso** and **#312 ICONIK Bressani Family Washed Sidra**. The October29 historical register flags #4 roast conflict/verbose locality, #308 absent component origins and #312 absent origin despite other current source facts. These historical mismatches are **not** proof of current defects or of still-active original SKUs. The #4 public search snapshot is cached, not current DNS-pinned source evidence; #308/#312 URLs may have changed products. Never import old product/SEO facts.
