@@ -40,8 +40,8 @@
       "web_snapshot": "2026-11-02; web cache last month"
     }
   ],
-  "current_official_raw_html_sha256": null,
-  "exact_development_parser_replay": null,
+  "current_official_raw_html_sha256": "Per-case hashes in verification.cases",
+  "exact_development_parser_replay": "3/3 FETCHED and PARSED on merged SHA daa07dc34ac3e04dae40e2ec77dd52cbe68b6829; raw SHA256 verified against artifact, Add Coffee preview/review flags 3/3.",
   "independent_field_certification": false,
   "existing_accepted_regressions": [
     "tests/coffee-issue33-prelude-generic-section-boundaries.test.mjs"
@@ -55,10 +55,137 @@
   "no_release_queue_edit": true,
   "no_production_operation": true,
   "required_next": [
-    "PR-head applicable CI success",
-    "nonforce integration of exact reviewed workflow",
-    "merged-source guarded source job success with all three fetched and parsed",
-    "inspect selected H1, raw hashes, actual canonical fields, conflicts and Add Coffee preview individually",
-    "only correct a demonstrated source-backed omission with bounded tests and same-commit journal"
-  ]
+    "Adjudicate #65 source locality context and #261 natural-process evidence without inventing a canonical answer",
+    "Find demonstrable high-value unresolved selected-product omission before runtime changes",
+    "Full original603 and hosted GoTrue remain unverified; preserve qualified caveats"
+  ],
+  "verification": {
+    "verified_at_utc": "2026-11-02T23:08:00Z",
+    "source_merge_sha": "daa07dc34ac3e04dae40e2ec77dd52cbe68b6829",
+    "tested_pr": 447,
+    "tested_head_sha": "3c681070aa589ccdc8f1e1807e6d4c22c39b9049",
+    "tested_head_tree": "e80f135f0adbcd2c797d2ea29d0f9cda8ea3b8aa",
+    "merged_tree": "e80f135f0adbcd2c797d2ea29d0f9cda8ea3b8aa",
+    "pr_ci": {
+      "node": {
+        "run": 41542416477,
+        "pass": 2283,
+        "fail": 0,
+        "skip": 6
+      },
+      "cloud": {
+        "run": 41542416417,
+        "pass": 1754,
+        "fail": 0,
+        "skip": 0
+      },
+      "approval": {
+        "run": 41542416413,
+        "result": "success"
+      },
+      "sql": {
+        "run": 41542416476,
+        "result": "success"
+      },
+      "visual": {
+        "run": 41542416479,
+        "result": "success"
+      }
+    },
+    "merged_ci": {
+      "approval": {
+        "run": 41542867244,
+        "result": "success"
+      },
+      "ready_certification": {
+        "run": 41542867229,
+        "result": "success",
+        "does_not_promote_issue33": true
+      },
+      "official_source": {
+        "run": 41542867367,
+        "job": 125611102138,
+        "result": "success",
+        "fetched": 3,
+        "parsed": 3,
+        "manual_certified": 0,
+        "add_coffee_ui_rendered": 3,
+        "source_review_rendered": 3
+      }
+    },
+    "private_artifact": {
+      "artifact_id": 13187148013,
+      "artifact_zip_sha256": "ba0614619fdb854ca14406048e3f35e35263e7ada0092ebc0df2c9edb1aaeb91",
+      "retention_days": 1,
+      "original603_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+      "each_raw_html_sha256_verified_against_artifact": true
+    },
+    "cases": [
+      {
+        "number": 38,
+        "h1": [
+          "Ethiopia Natural"
+        ],
+        "html_sha256": "f610a05bcd77b005919cf6e86b1d92ba1836b68ef126d719a576b7112f931fc0",
+        "parser_fields": {
+          "name": "Ethiopia Natural",
+          "producer": "smallholder farmers",
+          "origin": "Sidama, Ethiopia",
+          "process": "Natural",
+          "roast_level": "Light",
+          "tasting_notes": "strawberry, peach, and brown sugar"
+        },
+        "conflicts": [],
+        "add_coffee_ui": true,
+        "source_review": true,
+        "conclusion": "Selected Shantawane lot paragraph supports generic smallholder producer credit; exact locality narrower than archival oracle is not inferred."
+      },
+      {
+        "number": 65,
+        "h1": [
+          "NIGHT VISION - MEDIUM ROAST - KENYA",
+          "NIGHT VISION - MEDIUM ROAST - KENYA"
+        ],
+        "html_sha256": "82359ee848b983825a2e33078e2399318e74503563927a918d4e31360eeaac86",
+        "parser_fields": {
+          "name": "NIGHT VISION - MEDIUM ROAST - KENYA",
+          "producer": "Smallholder farmers",
+          "origin": "Kiambu, KENYA",
+          "process": "Washed",
+          "roast_level": "Medium",
+          "tasting_notes": "Cocoa, Fruity, Sweet"
+        },
+        "conflicts": [],
+        "add_coffee_ui": true,
+        "source_review": true,
+        "conclusion": "Selected narrative supports group producer; direct Location: Kiambu vs other county supply narrative remains a contextual geography question, not independently certified one-origin resolution."
+      },
+      {
+        "number": 261,
+        "h1": [
+          "Ethiopia Guji Kercha",
+          "About the Producer:",
+          "About the Process:",
+          "What you'll find in the cup:"
+        ],
+        "html_sha256": "752611dbf6c049b06f5622ff680ae7ba92e459ef9f3bfc8800bec2e3d73370ed",
+        "parser_fields": {
+          "name": "Ethiopia Guji Kercha",
+          "producer": null,
+          "origin": "Ethiopia",
+          "process": "Natural",
+          "tasting_notes": "This coffee has those classic bursting fruit flavors we've come to love about natural Ethiopian coffees. It reminds us of sweet strawberries and agave nectar with a buttery mouthfeel and a pleasant acidity that makes us think of granny smith apples."
+        },
+        "conflicts": [],
+        "add_coffee_ui": true,
+        "source_review": true,
+        "conclusion": "No named producer leaked from generic heading. Parser reports Natural from cup narrative; this is not a direct labeled primary-process fact and remains source-semantic review, not a certified correct process."
+      }
+    ],
+    "full_original603_verified": false,
+    "real_hosted_gotrue_verified": false,
+    "no_new_runtime_defect_established": true,
+    "release_queue_unchanged": true,
+    "production_untouched": true
+  }
 }
