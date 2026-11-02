@@ -1,3 +1,9 @@
+## November 2 UTC — #33 PR406 approval intake failure diagnosed and corrected (still TESTING)
+
+PR406 initial exact-head approval [41469477038](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469477038) FAILED because the changed `src/server/coffee-narrative-evidence.mjs` was not inventoried in the release queue. This is a real queue-intake contract failure, not a product test failure. Added only this path and pending test receipt to the existing `DIC-Q-33-residual-source-accuracy` **IN_PROGRESS** item; no new queue row, READY promotion, DEPLOYED edit or unrelated scope. Exact new-head CI required. Frozen603 SKIPPED is not PASS. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 original603 #217 Mbingo selected harvest producer candidate (TESTING; no deploy)
 
 Recovered development `733b263839af850bf5dfc03bb8ead3c3febc1c99`, AGENTS, #33 journal/issue, Current Status, Master Spec, Decision Ledger, approval matrix, release queue, original603 source register, #267 V2/#96 and automation registry. Since prior #33 integration, development delta was #267 audit-only; no shared extractor runtime overlap. PR367 excluded.
