@@ -91,3 +91,13 @@ test('unindexed docs cannot satisfy a same-commit code checkpoint',()=>{
  for(const fake of ['docs/workstreams/README.md','docs/notes.md','docs/workstreams/issue-.md'])
   assert.match(auditLatestCommit({paths:['site/cloud/main.js',fake],subject:'fix [skip netlify]'}).join(' '),/SAME-COMMIT/);
 });
+
+test('READY batch journal is explicitly scoped, without admitting arbitrary release journals',()=>{
+ const subject='fix(ci): public CI build coordinates [skip netlify]';
+ const code='.github/workflows/dic-ready-batch-certification.yml';
+ assert.deepEqual(auditLatestCommit({paths:[code,'docs/workstreams/release-ready-batch.md'],subject}),[]);
+ for(const invalid of ['docs/workstreams/release-ready-batch-copy.md','docs/workstreams/release-unknown.md','docs/workstreams/release-ready-batch.md.bak']){
+  assert.match(auditLatestCommit({paths:[code,invalid],subject}).join(' '),/SAME-COMMIT/);
+ }
+ assert.match(auditLatestCommit({paths:[code,'docs/workstreams/release-ready-batch.md'],subject:'unmarked commit'}).join(' '),/Unmarked commit/);
+});
