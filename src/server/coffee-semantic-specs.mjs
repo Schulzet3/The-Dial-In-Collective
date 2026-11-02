@@ -384,6 +384,19 @@ export function withoutEducationalCoffeeGeography(html,{clean}={}){
   .filter(fact=>['origin','origin_process','farm_region'].includes(fact.kind)&&
    sections.some(section=>fact.start>=section.start&&fact.end<=section.end))
   .sort((a,b)=>a.start-b.start||b.end-a.end);
+ // An educational section can print an ordinary "Origin: ..." paragraph
+ // that is not represented by the semantic-spec scanner. The generic
+ // labeled-pair reader must not turn that teaching example into the selected
+ // coffee's geographic Origin. Mask only these labeled bodies in the
+ // canonical view; original page bytes remain available in source_facts.
+ for(const match of html.matchAll(/<(p|li)\b[^<>]{0,1200}>([\s\S]{0,900}?)<\/\1\s*>/gi)){
+  const openEnd=match[0].indexOf('>')+1,closeAt=match[0].lastIndexOf('<');
+  const begin=match.index+openEnd,end=match.index+closeAt;
+  if(begin>=end||!sections.some(section=>begin>=section.start&&end<=section.end))continue;
+  if(/^(?:origin|country(?:\s+of\s+origin)?|region|growing\s+region)\s*[:：|=]\s*\S/iu.test(clean(match[2],450)))
+   ranges.push({start:begin,end});
+ }
+ ranges.sort((a,b)=>a.start-b.start||b.end-a.end);
  const chunks=[];let cursor=0;
  for(const range of ranges){
   if(range.end<=cursor)continue;

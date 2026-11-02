@@ -1,3 +1,23 @@
+## November 2 UTC — Issue33 PR346 approval intake failure triaged, candidate TESTING (no deploy)
+
+Exact PR head `e418785a077f924700e060127a93b1210d8dfe2a` approval run [41365457457](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41365457457) genuinely **FAILED** queue intake: `Untracked app change; add an IN_PROGRESS/TESTING/READY queue item: src/server/coffee-semantic-specs.mjs`. Source archive 41365457354 and security 41365457390 succeeded; frozen603 41365457320 SKIPPED, not PASS. Added new narrow `DIC-Q-33-educational-origin-label-boundary` **TESTING** queue item, without modifying any existing READY/DEPLOYED statuses, and this SAME-COMMIT journal. New exact-source CI remains pending. No production writes or deployment. [skip netlify].
+
+---
+
+## November 2 UTC — Issue33 educational boundary candidate immediate source review correction (TESTING)
+
+Pre-PR inspection of first candidate commit `6903b030d8b78a239143ebf963f9868463132581` found accidentally double-escaped backslashes in JavaScript regex literals, which would match literal backslashes instead of HTML paragraph tags and word boundaries. Corrected the regex syntax in this code+SAME-COMMIT journal follow-up before opening the PR or asserting tests passed. Earlier commit remains historical evidence, not PASS. No scope expansion, no release, no production writes. [skip netlify].
+
+---
+
+## November 2 UTC — Issue33 educational Origin heading boundary, scoped candidate TESTING (NOT DEPLOYED)
+
+**Independent selected current-source controls:** 1951 Guatemala ASOPCE current official H1 at https://1951coffee.com/collections/single-origin/products/guatemala-asopcce directly prints `Origin: 100% Guatemala, washed.`; Brewpoint Alchemist current official H1 at https://brewpointcoffee.com/collections/retail-coffee/products/the-alchemist-decaf-blend prints `Origin: Brazil (Mountain Water Processed)`. Exact prior official source-backed 4/4 before/after receipt `docs/audits/issue33-selected-origin-method-current4-before-after-20261101.json` verified their legitimate canonical origins. This patch does NOT claim that either current page contains the synthetic educational heading.
+
+**Verified prior failure:** PR343's first test attempt observed a synthetic `What is origin?` teaching heading *inside* the selected wrapper, followed by a competing `Origin:` paragraph, still influencing canonical geography. This is a separate preexisting boundary defect, not the earlier process-suffix normalization. The canonical educational geography filter currently masks semantic-spec facts but misses ordinary labeled `p/li` bodies consumed by generic labeledPairs. Patch only `src/server/coffee-semantic-specs.mjs`: mask the body of explicit geographic label rows within an H2-H6 educational section, preserving original HTML/source_facts and direct selected Product Details after the section. Five bounded adversarial tests in `tests/coffee-issue33-educational-origin-boundary.test.mjs` cover negative teaching examples, country/region conflict, exact official selected-H1 control captions, and ordinary direct labels. No guessed country, no other product, no original603 edits. Exact PR-head Node/cloud/security/approval and postmerge official current-source acceptance PENDING; **no READY item** for this candidate until verified. #267 V2 ledgers and #96 Auth untouched; no Netlify, SQL/Auth/Edge/member/provider writes. [skip netlify].
+
+---
+
 ## November 1 UTC — Issue33 original603 #3/#35 selected Origin process suffix VERIFIED narrow READY (NOT DEPLOYED)
 
 **Source-bound current official before/after:** [before run 41360857286](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41360857286) exact merged source `b02b377efbb7709ec482d1ad2c8b3ac0cf5aa020` vs [after run 41361523001](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41361523001) exact merged source `f1ddad170a497bc4c42de608e7911494291d3719`. Both **4/4 FETCHED and PARSED**, exact current selected H1 identity identical for all four. Only original603 **#3** 1951 Guatemala ASOPCE `origin: 100% Guatemala, washed.` → **Guatemala**, and **#35** Brewpoint Alchemist `origin: Brazil (Mountain Water Processed)` → **Brazil**. Both current roaster pages print those exact Origin captions; green process/decaf method is not a place. Raw selected `source_facts` and all four conflicts unchanged (empty), all other target fields and #10/#550 comparator fields unchanged. HTML SHA256s differ between current HTTP reads; preserve both and do not claim identical bytes. Source H1s, URLs, hashes, full field maps and conflicts: `docs/audits/issue33-selected-origin-method-current4-before-after-20261101.json`. Not all603 semantic certification.
