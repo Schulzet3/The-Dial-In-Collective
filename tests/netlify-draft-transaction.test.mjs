@@ -11,7 +11,8 @@ const bundle={status:'EXACT_SOURCE_STATIC_FUNCTION_VERIFIED_NO_PUBLICATION',
  functionZip:zip};
 const args={token:'fake',bundle,sourceSha:sha,releaseSha:release,
  approvedReadyItemIds:['DIC-Q-1'],expectedCurrentDeployId:'old',
- ownerGrantVerified:true,oneUseClaimConsumed:true,backupVerified:true,allowProductionPublication:true};
+ ownerGrantVerified:true,oneUseClaimConsumed:true,backupVerified:true,allowProductionPublication:true,
+ recheckPublicationAuthority:async()=>true};
 function provider({draft=true,functionRoute=true,uploadOk=true,restoreStatus=201,
  changeCurrentBeforeRestore=false}={}){
  let current='old',commit=null,restores=0,siteReads=0;
@@ -53,6 +54,7 @@ test('authorization, queue and certified Function gates make zero provider calls
  let calls=0;
  const fetcher=async()=>{calls++;throw Error('should never call');};
  for(const patch of [{ownerGrantVerified:false},{oneUseClaimConsumed:false},
+  {recheckPublicationAuthority:null},
   {backupVerified:false},{allowProductionPublication:false},
   {bundle:{...bundle,source_sha:'c'.repeat(40)}},
   {approvedReadyItemIds:['wrong']},
@@ -84,4 +86,11 @@ test('uncertain restore fails without retry or READY claim',async()=>{
  const p=provider({restoreStatus:503});
  await assert.rejects(publishCertifiedDraftTransaction({...args,fetcher:p.fetcher}));
  assert.equal(p.getRestores(),1);
+});
+
+test('late owner/ref/claim recheck prevents irreversible restore',async()=>{
+ const p=provider();
+ await assert.rejects(publishCertifiedDraftTransaction({...args,fetcher:p.fetcher,
+  recheckPublicationAuthority:async()=>false}));
+ assert.equal(p.getRestores(),0);
 });

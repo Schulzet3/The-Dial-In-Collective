@@ -29,10 +29,11 @@ const publishedId=site=>site?.published_deploy?.id||site?.published_deploy_id;
 export async function publishCertifiedDraftTransaction({token,bundle,sourceSha,releaseSha,
  approvedReadyItemIds,expectedCurrentDeployId,ownerGrantVerified=false,
  oneUseClaimConsumed=false,backupVerified=false,allowProductionPublication=false,
- fetcher=fetch,pause=async()=>{}}={}){
+ fetcher=fetch,pause=async()=>{},recheckPublicationAuthority}={}){
  // ALL irreversible gates precede the first provider request.
  if(!token||!ownerGrantVerified||!oneUseClaimConsumed||!backupVerified||
-  !allowProductionPublication)throw Error('Atomic Netlify publication not authorized');
+  !allowProductionPublication||typeof recheckPublicationAuthority!=='function')
+  throw Error('Atomic Netlify publication not authorized');
  if(!SHA.test(sourceSha||'')||!SHA.test(releaseSha||'')||
   bundle?.status!=='EXACT_SOURCE_STATIC_FUNCTION_VERIFIED_NO_PUBLICATION'&&
   bundle?.status!=='EXACT_SOURCE_STATIC_AND_FUNCTION_BYTES_VERIFIED_NO_PUBLICATION'||
@@ -107,6 +108,8 @@ export async function publishCertifiedDraftTransaction({token,bundle,sourceSha,r
  const before=await get('sites/'+SITE);
  if(before.id!==SITE||publishedId(before)!==expectedCurrentDeployId)
   throw Error('Published baseline changed during draft; no publication');
+ if(await recheckPublicationAuthority({sourceSha,releaseSha,expectedCurrentDeployId})!==true)
+  throw Error('Source refs, owner grant or consumed claim changed before restore');
  // ONE irreversible publication request. Never retry after an uncertain result.
  const restored=await fetcher(API+'sites/'+SITE+'/deploys/'+encodeURIComponent(created.id)+
   '/restore',{method:'POST',headers});
