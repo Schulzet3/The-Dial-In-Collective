@@ -67,3 +67,32 @@ test('simultaneous claim contenders dispatch at most once',async()=>{
  assert.deepEqual([a.status,b.status].sort(),
   ['BACKUP_ALREADY_CLAIMED_NOT_VERIFIED','BACKUP_REQUESTED_NOT_VERIFIED'].sort());
 });
+
+test('different write instants on one UTC day share a durable dispatch claim',()=>{
+ const later='2026-11-02T23:59:59.999999999Z';
+ assert.equal(backupClaimRef(key),backupClaimRef(later));
+ assert.notEqual(backupClaimRef(key),backupClaimRef('2026-11-03T00:00:00Z'));
+ assert.throws(()=>backupClaimRef('2026-02-31T12:00:00Z'),/timestamp required/);
+});
+test('concurrent DIFFERENT freshness keys on one UTC day cannot double-dispatch',async()=>{
+ let claimed=false,dispatches=0;
+ const fetcher=async url=>{
+  if(url.includes('/runs?'))return {ok:true,json:async()=>({workflow_runs:[]})};
+  if(url.endsWith('/git/ref/heads/main'))return {ok:true,json:async()=>({object:{sha}})};
+  if(url.endsWith('/git/refs')){
+   if(claimed)return {status:422};
+   claimed=true;
+   return {status:201,json:async()=>({ref:backupClaimRef(key),object:{sha}})};
+  }
+  if(url.includes('/git/ref/heads/dic-backup-claims/'))return {ok:true,
+   json:async()=>({ref:backupClaimRef(key),object:{sha}})};
+  if(url.endsWith('/dispatches')){dispatches++;return {status:204};}
+  throw Error('Unexpected mock URL '+url);
+ };
+ const [a,b]=await Promise.all([
+  requestEncryptedBackup({token:'fake',freshnessKey:key,fetcher}),
+  requestEncryptedBackup({token:'fake',freshnessKey:'2026-11-02T23:59:59.999999Z',fetcher})]);
+ assert.equal(dispatches,1);
+ assert.deepEqual([a.status,b.status].sort(),
+  ['BACKUP_ALREADY_CLAIMED_NOT_VERIFIED','BACKUP_REQUESTED_NOT_VERIFIED'].sort());
+});
