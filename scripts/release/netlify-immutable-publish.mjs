@@ -17,10 +17,10 @@ export function verifyImmutableArchive({archive,expectedSha256,sourceSha,certifi
 }
 export async function publishExactArtifact({token,archive,expectedSha256,sourceSha,
  certifiedSourceSha,ownerGrantVerified=false,oneUseClaimConsumed=false,
- allowProductionPublication=false,fetcher=fetch}={}){
+ allowProductionPublication=false,functionsPreservedVerified=false,fetcher=fetch}={}){
  const receipt=verifyImmutableArchive({archive,expectedSha256,sourceSha,certifiedSourceSha});
- if(!ownerGrantVerified||!oneUseClaimConsumed||!allowProductionPublication)
-  throw Error('Production publication denied: owner grant, consumed claim and explicit publication gate required');
+ if(!ownerGrantVerified||!oneUseClaimConsumed||!allowProductionPublication||!functionsPreservedVerified)
+  throw Error('Production publication denied: owner grant, consumed claim, complete Netlify Functions coverage and explicit publication gate required');
  if(!token)throw Error('Missing Netlify publication token');
  const response=await fetcher('https://api.netlify.com/api/v1/sites/'+SITE+'/deploys',{
   method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/zip'},

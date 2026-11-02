@@ -87,3 +87,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — exact artifact Netlify ZIP publication adapter (inert)
 - Official Netlify API documents POST /sites/{site_id}/deploys with application/zip and no rebuild. Added isolated adapter verifying source SHA and ZIP SHA-256, requiring explicit owner-grant proof, consumed one-use claim and production publication flag before network call. CLI refuses publication. Mock tests assert no network request for unauthorized/tampered source and fail closed on provider HTTP error. Adapter is NOT connected to the main controller and no production write is performed; existing Git-connected build still requires safe cutover before use. Netlify provider response and exact SHA require separate readback; no release claimed.
+
+## 2026-11-02 — protect live Netlify Functions during immutable artifact cutover
+- Current app includes `netlify/functions/coffee-url-preview.mjs`; static ZIP alone does NOT prove equivalent function deployment. Added explicit `functionsPreservedVerified` fail-closed requirement to inert ZIP adapter, with negative test. Real publication must include or independently verify exact function continuity and Netlify routing before enabling this flag; no release may silently drop the function. No production action.

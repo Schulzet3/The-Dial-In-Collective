@@ -14,9 +14,10 @@ test('immutable publish refuses uncertified, tampered or unauthorized ZIP before
  await assert.rejects(publishExactArtifact({...valid,token:'fake',fetcher}));
  await assert.rejects(publishExactArtifact({...valid,token:'fake',ownerGrantVerified:true,fetcher}));
  await assert.rejects(publishExactArtifact({...valid,token:'fake',ownerGrantVerified:true,oneUseClaimConsumed:true,fetcher}));
+ await assert.rejects(publishExactArtifact({...valid,token:'fake',ownerGrantVerified:true,oneUseClaimConsumed:true,allowProductionPublication:true,fetcher}));
  assert.equal(calls,0);
- const result=await publishExactArtifact({...valid,token:'fake',ownerGrantVerified:true,oneUseClaimConsumed:true,allowProductionPublication:true,fetcher});
+ const result=await publishExactArtifact({...valid,token:'fake',ownerGrantVerified:true,oneUseClaimConsumed:true,allowProductionPublication:true,functionsPreservedVerified:true,fetcher});
  assert.equal(calls,1);
  assert.equal(result.status,'PROVIDER_PUBLICATION_REQUESTED_VERIFY_CURRENT_BEFORE_DEPLOYED');
- await assert.rejects(publishExactArtifact({...valid,token:'fake',ownerGrantVerified:true,oneUseClaimConsumed:true,allowProductionPublication:true,fetcher:async()=>({ok:false,status:409})}));
+ await assert.rejects(publishExactArtifact({...valid,token:'fake',ownerGrantVerified:true,oneUseClaimConsumed:true,allowProductionPublication:true,functionsPreservedVerified:true,fetcher:async()=>({ok:false,status:409})}));
 });
