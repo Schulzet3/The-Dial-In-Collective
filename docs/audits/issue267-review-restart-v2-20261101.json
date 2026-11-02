@@ -14,14 +14,14 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 1536,
-    "remaining_v2_lines": 578425,
-    "status": "IN_PROGRESS_R2_005_SOURCE_BOUND",
-    "next_file_index_1_based": 27,
-    "next_file": "docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md",
-    "next_source_blob_sha": "538ca6adec844dd02fa50d9964e5cc628564bec9",
-    "next_line_1_based": 1,
-    "next_action": "Continue original frozen file #27 line 1; append R2-006 only after direct semantic review.",
+    "verified_new_v2_reviewed_lines": 1748,
+    "remaining_v2_lines": 578213,
+    "status": "IN_PROGRESS_R2_006_SOURCE_BOUND",
+    "next_file_index_1_based": 30,
+    "next_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+    "next_source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+    "next_line_1_based": 61,
+    "next_action": "Resume original frozen matrix #30 at line 61, never skip or count beyond reviewed partial.",
     "independently_reviewed_v2_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -204,6 +204,34 @@
         "first_line": 1,
         "last_line": 31,
         "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md",
+        "source_blob_sha": "538ca6adec844dd02fa50d9964e5cc628564bec9",
+        "first_line": 1,
+        "last_line": 55,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
+      },
+      {
+        "path": "docs/ADMIN_PORTAL_RELEASE_CANDIDATE_2026-10-21.md",
+        "source_blob_sha": "0f30ad26b277b2ed675d5b91e487a3483684c9f1",
+        "first_line": 1,
+        "last_line": 26,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
+      },
+      {
+        "path": "docs/AGTRON_AND_PERC_NARRATIVE_EXTRACTION_2026-10-17.md",
+        "source_blob_sha": "4a38c7f7c78bf3ceabc539bf922db054c6eeadab",
+        "first_line": 1,
+        "last_line": 71,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
+      },
+      {
+        "path": "docs/APPROVAL_COVERAGE_MATRIX.json",
+        "source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+        "first_line": 1,
+        "last_line": 60,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
       }
     ],
     "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
@@ -211,9 +239,9 @@
   },
   "current_code_v2": {
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
-    "inventory_status": "PINNED_436_FILES_305_LINE_COUNT_VERIFIED_131_PENDING",
+    "inventory_status": "PINNED_436_FILES_306_LINE_COUNT_VERIFIED_130_PENDING",
     "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
-    "reviewed_current_source_lines": 1826,
+    "reviewed_current_source_lines": 2300,
     "reviewed_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -417,20 +445,34 @@
         "first_line": 1,
         "last_line": 27,
         "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
+        "source_blob_sha": "8c5347d3e4443628b2245b722da0434442a5bd57",
+        "first_line": 1,
+        "last_line": 145,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-006.json"
+      },
+      {
+        "path": "scripts/audit/coffee-completeness-live-probe.mjs",
+        "source_blob_sha": "8f5d708497050f70ad92b6df4c9de07fe83f0794",
+        "first_line": 1,
+        "last_line": 329,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-006.json"
       }
     ],
-    "next_file": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
+    "next_file": "scripts/audit/coffee-corpus-build.py",
     "next_line_1_based": 1,
     "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
     "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
     "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
     "eligible_files": 436,
-    "line_count_verified_files": 305,
-    "line_count_pending_files": 131,
-    "known_line_count_subtotal": 36203,
+    "line_count_verified_files": 306,
+    "line_count_pending_files": 130,
+    "known_line_count_subtotal": 36532,
     "full_eligible_line_denominator": null,
     "coverage_ledger": "docs/audits/issue267-v2-current-code-ledger.json",
-    "unreviewed_source_drift_as_of_development_sha": "40f0bc3272cd9e99fd2f9d4372ffa5943eace083",
+    "unreviewed_source_drift_as_of_development_sha": "8cc8571b2a3e49cfdaff9543f31cfb2a2ffa8da2",
     "unreviewed_current_delta_paths": [
       "scripts/audit/issue33-original603-focused-source-review.mjs",
       "site/lib/engine.js",
@@ -442,6 +484,8 @@
       "tests/coffee-issue33-origin-method-suffix.test.mjs",
       "tests/coffee-issue33-selected-region-blend.test.mjs",
       "tests/coffee-issue33-selected-station-locality.test.mjs",
+      "tests/coffee-issue33-stale-seo-station-roles.test.mjs",
+      "tests/grind-cross-version-range.test.mjs",
       "tests/recommendation-research-guardrails.test.mjs"
     ],
     "reviewed_post_snapshot_delta_receipts": [
@@ -476,7 +520,7 @@
     28,
     134
   ],
-  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_FOURTH_BATCHES_RECORDED",
+  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_SIXTH_BATCHES_RECORDED",
   "app_code_changes_in_this_record": 0,
   "production_changes": 0,
   "completed_tests_in_this_record": 0,
