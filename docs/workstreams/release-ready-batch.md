@@ -117,3 +117,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — fix YAML folded Python test commands
 - Run 41405139854: 18 Node tests PASS; Python tests never ran because YAML `run:` folded two lines into one shell command. Corrected `run: |` literal block; exact-source rerun pending. No production action.
+
+## 2026-11-02 — exact immutable ZIP to Netlify digest manifest
+- Added bounded ZIP reader (no disk extraction; rejects traversal, duplicate entries, symlinks, nonregular entries, excessive decompression and missing index), Node bridge converting bytes into SHA-1 static manifest and existing SHA-256 function digest. Tests cover valid and malformed archives and bridge; hosted rehearsal updated. ZIP bytes must first pass certificate hash verification. No provider write, no release-controller activation. Next: wire verified archive and CI download to controller and provider readback.
