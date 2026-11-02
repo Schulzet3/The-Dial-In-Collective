@@ -7,9 +7,14 @@ const API='https://api.github.com/repos/'+REPO;
 const SHA=/^[a-f0-9]{40}$/;
 export function backupClaimRef(freshnessKey){
  if(typeof freshnessKey!=='string'||!/^20\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z$/.test(freshnessKey)||
-  !Number.isFinite(Date.parse(freshnessKey)))
+  !Number.isFinite(Date.parse(freshnessKey))||
+  new Date(Date.parse(freshnessKey)).toISOString().slice(0,19)!==freshnessKey.slice(0,19))
   throw Error('Current observed database-write UTC timestamp required for durable backup claim');
- const key=createHash('sha256').update('dic-release-backup-v1:'+freshnessKey).digest('hex');
+ // A per-write ref allows TWO simultaneous callers with different observed
+ // write instants to dispatch duplicate backups. One UTC-day claim serializes
+ // every freshness key in that day. Later legitimate requests HOLD for manual
+ // reconciliation instead of silently creating duplicate offsite ciphertext.
+ const key=createHash('sha256').update('dic-release-backup-v2-utc-day:'+freshnessKey.slice(0,10)).digest('hex');
  return 'refs/heads/dic-backup-claims/'+key.slice(0,40);
 }
 export async function requestEncryptedBackup({token,freshnessKey,fetcher=fetch}={}){

@@ -21,3 +21,7 @@ Owner-authorized safe fallback opportunities 08:17, 09:37, 12:17 UTC added besid
 ## November 2, 2026 UTC — Issue #368 submillisecond snapshot coverage hardening
 
 Source/test regression on `main` rejects snapshots that predate the latest PostgreSQL write by even 1 nanosecond; strict UTC calendar validation prevents rollover dates from passing backup recovery decisions. Exact-source hosted CI and nonforce merge must pass before this is VERIFIED. This is structural timestamp correctness only, **not** independently verified offsite decryption/restore, READY approval or Netlify publication. See [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md) and Issue #368. No deployment or provider/data writes.
+
+## November 2, 2026 UTC — Issue #368 same-day cross-key backup dispatch dedup
+
+Backup fallback now uses one atomic GitHub claim per UTC day, closing the race where different microsecond latest-write keys previously created independent claims. Later same-day requests fail closed for manual reconciliation; midnight cross-day and independently verified restore evidence remain outstanding. Exact PR/merged CI required. No backup dispatched, provider write or deployment. See [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md).
