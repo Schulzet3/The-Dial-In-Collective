@@ -85,6 +85,6 @@ test('DEPLOYED label cannot launder unpublished merged changes into an approved 
  const result=assess({...q,items:[queued,premature]});
  assert.equal(result.ready,false);
  assert.match(result.errors.join(' '),/DEPLOYED-labelled merged work is new/);
- const alreadyPublished=(a,b)=>a===A&&b===B?false:graph(a,b);
- assert.equal(assess({...q,items:[queued,premature]},['site/cloud/shot_card.js'],alreadyPublished).ready,true);
+ const baselineDelivered={...premature,merged_source_sha:A};
+ assert.equal(assess({...q,items:[queued,baselineDelivered]}).ready,true);
 });
