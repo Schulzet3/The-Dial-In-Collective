@@ -72,3 +72,10 @@ test('candidate with unknown/dangling ancestry or changed READY file is rejected
  assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
   sourceObjectAt:(sha,path)=>path==='site/card.js'&&sha===C?'tampered':validate.sourceObjectAt(sha,path)}),/candidate HOLD/);
 });
+
+test('later untracked edits in same READY path are never laundered into release',()=>{
+ const bad= {...validate,sourceObjectAt:(sha,path)=>
+  path==='site/card.js'&&sha===D?'different READY merged blob':
+   validate.sourceObjectAt(sha,path)};
+ assert.throws(()=>validateReadyOnlyCandidate(q,bad),/edits after its verified READY merge/);
+});

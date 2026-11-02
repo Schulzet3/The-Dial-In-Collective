@@ -113,9 +113,18 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  for(const path of plan.restored_paths)
   if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(publishedSourceSha,path))
    reject('Unready file was not exactly restored to published bytes: '+path);
- for(const path of plan.included_paths)
-  if(sourceObjectAt(candidateSha,path)!==sourceObjectAt(manifest.development_source_sha,path))
+ for(const path of plan.included_paths){
+  const candidateBlob=sourceObjectAt(candidateSha,path);
+  if(candidateBlob!==sourceObjectAt(manifest.development_source_sha,path))
    reject('Selected READY file was changed during isolation: '+path);
+  // A later, UNTRACKED commit touching an already READY path must not be
+  // laundered into the release merely because the same path has a READY owner.
+  // Require the final blob to equal the exact Git blob from at least one
+  // selected READY merged commit that owns this file.
+  const readyOwners=plan.ready_items.filter(i=>i.scope_paths.includes(path));
+  if(!readyOwners.some(i=>sourceObjectAt(i.merged_source_sha,path)===candidateBlob))
+   reject('Selected file includes edits after its verified READY merge: '+path);
+ }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
   excluded_paths:plan.restored_paths,

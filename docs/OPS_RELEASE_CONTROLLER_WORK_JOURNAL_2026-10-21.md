@@ -288,3 +288,6 @@ Real independently published Release14 tested baseline guard uses `git log --for
 
 ### #417 exact PR test failure repair
 Initial PR-head run 41497649014 FAILED a real policy test because its *static* check expected the old single `const queueGate=assessReleaseQueue` declaration and did not recognize the new isolated+direct branches. Production code's gates still execute before grant and push; update the regression to assert BOTH branch gates precede the claim. Preserve historical failed run as failure, rerun hosted exact-source CI. No release.
+
+### #417 selected READY file exact merge-byte boundary
+The staged-candidate validator now requires every included app file to match not just current development/candidate, but at least one exact selected READY merged-source Git tree blob for that path. This blocks a later untracked/unapproved same-file edit from being laundered by an existing READY path (historical #356 class). Added negative regression. This is conservative: if subsequent legitimate READY modifications exist, each changed selected path must still have exact READY merge-source evidence. No production action; exact PR-head CI required.
