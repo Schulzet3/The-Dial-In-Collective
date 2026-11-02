@@ -34,7 +34,10 @@ jobs:
         run: npm run test:cloud
       - name: Lint
         run: npm run lint
-      - name: Production-style build
+      - name: Production-style build using nonfunctional public CI coordinates
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
         run: npm run build:cloud
       - name: Publish exact-source certification summary
         if: always()
@@ -44,6 +47,6 @@ jobs:
           {
             echo '## READY batch automatic source certification'
             echo "Source: \`$DIC_SOURCE_SHA\`"
-            echo "Combined test and source gates: \`$([[ \"\${{ job.status }}\" == success ]] && echo PASS || echo NOT_VERIFIED)\`"
+            echo "Combined test and source gates: ${{ job.status }}"
             echo 'This check does not verify offsite backup freshness, provider routing or issue a one-use production grant.'
           } >> "$GITHUB_STEP_SUMMARY"
