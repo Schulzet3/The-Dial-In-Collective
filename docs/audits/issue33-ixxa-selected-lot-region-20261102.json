@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "scope": "original603 #501 IXXA current selected lot/region boundary",
-  "status": "TESTING_PENDING_EXACT_SOURCE_CI",
+  "status": "VERIFIED_REGRESSION_TESTS_ONLY_NO_READY",
   "date_utc": "2026-11-02",
   "development_base_sha": "34101e043edc1a983acbcc8774bd41baa93f1018",
   "original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
@@ -28,6 +28,44 @@
   "limits": [
     "No current raw official source SHA256 or full current source replay",
     "No all603 or hosted GoTrue acceptance",
-    "Test execution pending; no PASS claimed"
-  ]
+    "Test execution pending; no PASS claimed",
+    "No runtime extractor code changed; passing tests verify existing selected-lot behavior, not a new fixed omission."
+  ],
+  "integration": {
+    "pr": 397,
+    "first_head_sha": "12397ae3a4aa1f6a1111811683ef55263b9944d7",
+    "corrected_head_sha": "3a1f4ac3af38c0525978341558cdc9bf74e8cc27",
+    "merged_sha": "e861da865147bdf47fa0e843f5b08c359b027407",
+    "exact_head_tree": "4dbd574d760d11614fe6ecf754b667c8b946cec5",
+    "exact_merged_tree": "4dbd574d760d11614fe6ecf754b667c8b946cec5",
+    "initial_node_failure_run": 41451350518,
+    "initial_cloud_failure_run": 41451350507,
+    "initial_failure": "Unsupported test assertion requiring a synthesized narrative origin in source_facts; canonical origin and Add Coffee preview passed. Corrected test, not runtime.",
+    "head_ci": {
+      "node": 41451859275,
+      "node_pass": 2253,
+      "node_fail": 0,
+      "node_skip": 6,
+      "cloud": 41451859241,
+      "cloud_pass": 1727,
+      "cloud_fail": 0,
+      "approval": 41451859342,
+      "sql": 41451859355,
+      "visual": 41451859352,
+      "private_issue33": 41451859333,
+      "original603": 41451859302,
+      "original603_conclusion": "SKIPPED"
+    },
+    "merged_ci": {
+      "node": 41452320327,
+      "node_pass": 2253,
+      "node_fail": 0,
+      "node_skip": 6,
+      "cloud": 41452320341,
+      "cloud_pass": 1727,
+      "cloud_fail": 0,
+      "approval": 41452320325,
+      "ready_certification": 41452320394
+    }
+  }
 }
