@@ -192,6 +192,23 @@ function selectedStewardshipFarmCredits(paragraphs,name,fields){
  }
  return [...result];
 }
+// Credit an unnamed harvesting group only when its receiving station is
+// also named in this selected H1. Never infer from a regional story or old lot.
+function selectedHarvestSmallholderCredits(paragraphs,name,fields){
+ const fold=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu,' ').trim();
+ const selected=fold(name),credits=new Set();
+ const direct=/\b(?:the|this|our)\s+(?:meticulous\s+)?(?:process\s+of\s+)?harvesting\s+(?:involves|includes)\s+[^.!?]{0,160}\b(?:coffee\s+)?cherries\s+across\s+((?:approximately|around|over|nearly)\s+\d{1,5}\s+smallholder\s+farms)\.\s+These\s+cherries\s+(?:are|were)\s+then\s+delivered\s+to\s+(?:the\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Station\b/iu;
+ for(const paragraph of paragraphs){
+  const match=paragraph.match(direct);
+  if(!match)continue;
+  const [harvest,delivery]=producerSentences(match[0]),station=fold(match[2]);
+  if(!station||!selected.includes(station)||!currentProducerSentence(harvest)||
+     !currentProducerSentence(delivery)||!producerCountriesAgree(match[0],name,fields))continue;
+  credits.add(match[1]);
+ }
+ return [...credits];
+}
+
 function explicitAnonymousProducerCredits(paragraphs,name,fields){
  const result=new Set();
  for(const paragraph of paragraphs)for(const line of producerSentences(paragraph)){
@@ -216,6 +233,8 @@ function foundGrower(paragraphs,name='',relationshipGroups=[paragraphs],fields={
   for(const group of relationshipGroups)for(const credit of [...selectedStewardshipFarmCredits(group,name,fields),...explicitAnonymousProducerCredits(group,name,fields)])
    collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  }
+ for(const credit of selectedHarvestSmallholderCredits(paragraphs,name,fields))
+  collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  for(const alias of cooperativeAliasCredits(paragraphs))collectives.set(alias.normalize('NFKC').toLowerCase(),alias);
  for(const paragraph of paragraphs){
   for(const list of explicitFarmList(paragraph))

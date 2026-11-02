@@ -1,3 +1,11 @@
+## November 2 UTC — #33 original603 #217 Mbingo selected harvest producer candidate (TESTING; no deploy)
+
+Recovered development `733b263839af850bf5dfc03bb8ead3c3febc1c99`, AGENTS, #33 journal/issue, Current Status, Master Spec, Decision Ledger, approval matrix, release queue, original603 source register, #267 V2/#96 and automation registry. Since prior #33 integration, development delta was #267 audit-only; no shared extractor runtime overlap. PR367 excluded.
+
+Independent [current official Mbingo product](https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural) H1 `ETHIOPIA GUJI ORGANIC DAMBI UDDO NATURAL` directly describes harvesting cherries across approximately 450 smallholder farms and delivering **these cherries** to Dambi Uddo Station. The October29 #217 structured extractor omitted producer. New narrow generic selected-H1/station-correlated group credit in `src/server/coffee-narrative-evidence.mjs`, four bounded adversarial synthetic tests and source receipt `docs/audits/issue33-mbingo-selected-harvest-farms-20261102.json`. SAME-COMMIT journal. **TESTING** pending exact-source CI and nonforce merge; public-web text is not DNS-pinned raw HTML/hash or live official parser replay. No READY promotion, all603 or hosted GoTrue claim. Frozen603 original blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, captures/oracle, 153 context/29 missing-literal caveats, #267 V2, #96, queue and production unchanged. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 original603 #585 selected American roast legend regression VERIFIED (no READY or deploy)
 
 [PR400](https://github.com/Schulzet3/The-Dial-In-Collective/pull/400) test+official-source receipt+SAME-COMMIT journal merged nonforce at `e13ca07bfe9ddb58e005d747ba0098a714b997ad`. Reviewed exact head `8af0a52a5d843520d42cc1412fc8edc88d3caefc` → merged GitHub compare: ahead 1/behind 0/**zero changed files**, preserving exact tested source tree. Two new #585 synthetic adversarial tests PASS: selected H1/Natural/notes; no invented Medium from Medium Body, Full City/Vienna/French comparative roast, stale SEO, related coffee or grind option. The current extractor already conservatively leaves unsupported canonical American roast blank; **no new runtime defect or fix claimed**.
