@@ -185,3 +185,6 @@ Owner directed preparation of all release-queue work without publication. The op
 
 ## 2026-11-02 — exact bundled function receipt promoted to hosted release preflight
 - Updated main preflight to require immutable function ZIP path and validate its SHA-256 against source-bound READY certificate v4 alongside static ZIP; promoted development verifier source `96eff211900ce0fa0fadd6b994de56d9b1174518`. Controller remains deliberately blocked before any Git release push because provider direct artifact deployment with Netlify Function upload is not yet integrated. Main parent `1ace0bf2242a180c3548dba4eef33b0fbf849a27`. No production action.
+
+## 2026-11-02 — main controller validates exact static/function Netlify manifest
+- Main preflight now safely parses SHA-verified immutable static ZIP into bounded Netlify digest manifest and confirms server function digest against certified source. Promoted development `11cc51287d8294223104054bf9374b46a35455ec` reader/manifest utilities and publisher adapter; production remains intentionally blocked before any Git ref push. Pending provider deployment transaction and readback; no publication. Parent `ba50ac96b5555d15d0680a5066951374bff30438`.

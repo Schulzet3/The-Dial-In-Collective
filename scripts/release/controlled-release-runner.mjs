@@ -7,6 +7,7 @@
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync,rmSync,appendFileSync,readFileSync} from 'node:fs';
 import {verifyReleaseArtifactReceipt} from './verify-release-artifact-receipt.mjs';
+import {verifiedDistFiles} from './verified-dist-files.mjs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
@@ -270,6 +271,9 @@ export async function executeSingleUseRelease(settings=process.env){
    artifactName:settings.DIC_IMMUTABLE_ARTIFACT_NAME,verifiedRequiredChecks:true});
   if(JSON.stringify(receipt.ready_item_ids)!==JSON.stringify(queueGate.ready_items.map(x=>x.id).sort()))
    throw Error('Immutable artifact READY item scope differs from approved batch');
+  const staticReceipt=verifiedDistFiles({zipPath:settings.DIC_IMMUTABLE_ARCHIVE_PATH,functionZip:functionArchive});
+  if(Object.keys(staticReceipt.files).length<1||staticReceipt.functionHash!==receipt.immutable_function_sha256)
+   throw Error('Immutable function/static manifest verification failed');
   // Until the provider uses these exact bytes, a Git push would trigger a
   // second rebuild. Never consume a grant for that unsafe path.
   throw Error('Immutable deployment HOLD: provider artifact publisher not activated; no Git push');
