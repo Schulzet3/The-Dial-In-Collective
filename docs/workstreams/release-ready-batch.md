@@ -63,3 +63,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — provider-integrated postrelease verification
 - Added GET-only Netlify API postflight verifying current published deploy, production branch/context, READY status, exact release SHA, site ID and hostname. Postrelease smoke workflow now runs provider readback before public route checks and fails closed when NETLIFY_AUTH_TOKEN is absent. Added mocked positive/negative provider tests. This requires a configured GitHub Actions NETLIFY_AUTH_TOKEN secret; actual postrelease run remains unverified until an authorized deployment. No deploy or provider write.
+
+## 2026-11-02 — Netlify canonical domain mapping correction
+- Raw Netlify sites API can return the Netlify-managed ssl_url while the custom domain is authoritative. Normalize `custom_domain` to HTTPS before exact-hostname assertion, preserving failure on unexpected host. Focused fixture now exercises this distinction. Same-commit tests and journal; CI pending.

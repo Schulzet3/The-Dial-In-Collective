@@ -17,7 +17,7 @@ export async function verifyLiveNetlify({token,expectedReleaseSha,fetcher=fetch}
  const deploy=await get('deploys/'+encodeURIComponent(currentId));
  const project={id:site.id,_enrichedFields:{
   currentDeploy:{state:'current',currentDeploy:{id:currentId,state:deploy.state}},
-  urls:{primarySiteUrl:site.ssl_url||site.url}}};
+  urls:{primarySiteUrl:site.custom_domain?'https://'+site.custom_domain:(site.ssl_url||site.url)}}};
  return assertNetlifyPublishedSource({deploy,project,expectedReleaseSha,expectedDeployId:currentId});
 }
 if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1]){
