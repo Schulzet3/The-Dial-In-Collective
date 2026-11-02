@@ -56,6 +56,29 @@ jobs:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
         run: npm run build:cloud
+      - name: Build immutable production-coordinate artifact only for READY source
+        if: steps.ready_scope.outputs.has_ready == 'true'
+        env:
+          SUPABASE_URL: ${{ vars.DIC_PRODUCTION_SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ vars.DIC_PRODUCTION_SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
+            echo 'Production public build coordinates are not configured; cannot certify deployable artifact.' >&2
+            exit 1
+          fi
+          npm run build:cloud
+          python3 scripts/release/package-immutable-dist.py dist dist-immutable.zip
+          sha256sum dist-immutable.zip > dist-immutable.zip.sha256
+      - name: Retain exact immutable production artifact
+        if: success() && steps.ready_scope.outputs.has_ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dic-production-dist-${{ github.sha }}
+          path: |
+            dist-immutable.zip
+            dist-immutable.zip.sha256
+          retention-days: 90
+          if-no-files-found: error
       - name: Write source-bound machine-readable CI certificate
         if: success() && steps.ready_scope.outputs.has_ready == 'true'
         env:

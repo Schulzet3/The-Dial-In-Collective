@@ -72,3 +72,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — eliminate certification-triggered redundant workflows
 - Removed automatic READY-certification workflow path as a trigger from cloud app, cloud UX, isolated SQL and private visual workflows. Each still runs on its own relevant source/test changes and keeps existing manual/PR coverage. Certification itself remains push-triggered with queue preflight; owner-approved release gates unchanged. Prevents a workflow-only certification edit from spawning unrelated SQL/visual/cloud suites. No production changes; exact-source CI pending.
+
+## 2026-11-02 — immutable production artifact preparation (nonpublishing)
+- READY-only combined CI now requires explicit public production build coordinates in GitHub vars `DIC_PRODUCTION_SUPABASE_URL` and `DIC_PRODUCTION_SUPABASE_PUBLISHABLE_KEY`; builds a deterministic ZIP, stores SHA-256 and retains the ZIP as a source-named artifact. No READY => no production artifact build or upload. This is artifact PREPARATION only; existing Netlify Git-connected publication is not replaced until exact-artifact consumption and prevention of duplicate Git builds are independently verified. No production publication. CI pending.
