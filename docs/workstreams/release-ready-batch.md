@@ -60,3 +60,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — executable no-write rehearsal workflow
 - Added read-only GitHub Actions workflow that runs focused backup fallback, release scope, CI certificate and Netlify provider readback regressions; executes real current-source rehearsal and requires explicit DENIED_NO_PUBLICATION with exit 2 while queue has zero READY. The job must fail if source unexpectedly becomes publishable, requiring review/update of rehearsal expectations. No GitHub write permissions or production mutation. CI pending.
+
+## 2026-11-02 — provider-integrated postrelease verification
+- Added GET-only Netlify API postflight verifying current published deploy, production branch/context, READY status, exact release SHA, site ID and hostname. Postrelease smoke workflow now runs provider readback before public route checks and fails closed when NETLIFY_AUTH_TOKEN is absent. Added mocked positive/negative provider tests. This requires a configured GitHub Actions NETLIFY_AUTH_TOKEN secret; actual postrelease run remains unverified until an authorized deployment. No deploy or provider write.

@@ -14,9 +14,21 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: development/backend-foundation
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify exact current Netlify provider deployment (read-only)
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          DIC_EXPECTED_RELEASE_SHA: ${{ github.sha }}
+        run: |
+          for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            if node scripts/release/netlify-live-readback.mjs; then exit 0; fi
+            if [ "$attempt" -lt 10 ]; then sleep 20; fi
+          done
+          exit 1
       - name: Wait for public deployment and verify read-only routes
         shell: bash
         run: |
