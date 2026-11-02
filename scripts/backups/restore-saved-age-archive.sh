@@ -26,6 +26,12 @@ cleanup() {
 trap cleanup EXIT
 printf '%s\n' "$DIC_ARCHIVE_AGE_IDENTITY" > "$root/identity"
 chmod 600 "$root/identity"
+# Reject encrypted SSH keys which would require an unavailable interactive passphrase.
+# Only the derived PUBLIC recipient is checked, never printed.
+if ! bash "$(dirname "$0")/derive-recovery-recipient.sh" "$root/identity" > /dev/null; then
+  echo "::error::Archived recovery key is invalid or requires an interactive passphrase." >&2
+  exit 2
+fi
 python3 - "$1" <<'PY'
 import pathlib,sys
 p=pathlib.Path(sys.argv[1])

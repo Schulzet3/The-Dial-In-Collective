@@ -13,7 +13,8 @@ test('backup encrypts before uploading and blocks unbacked Storage objects', () 
     assert.match(sh,/AGE_RECIPIENT_ARGS=\(--recipient "\$BACKUP_AGE_RECIPIENT"\)/);
     assert.match(sh,/AGE_RECIPIENT_ARGS\+=\(--recipient "\$BACKUP_AGE_SECOND_RECIPIENT"\)/);
     assert.match(yml,/secrets.DIC_ARCHIVE_AGE_IDENTITY/);
-    assert.match(yml,/age-keygen -y "\$identity_file"/);
+    assert.match(yml,/bash scripts\/backups\/derive-recovery-recipient\.sh "\$identity_file"/);
+    assert.match(yml,/if \[\[ "\$recipient" == "\$BACKUP_AGE_RECIPIENT" \]\]/);
     assert.doesNotMatch(yml,/^\s+BACKUP_AGE_SECOND_RECIPIENT:\s*\$\{\{\s*secrets\./m);
     assert.doesNotMatch(yml,/- scripts\/backups\/create-nightly-encrypted-dump\.sh/);
   assert.match(sh,/ssh-ed25519/);
