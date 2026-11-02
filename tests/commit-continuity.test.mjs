@@ -122,3 +122,32 @@ test('READY batch journal is explicitly scoped, without admitting arbitrary rele
  }
  assert.match(auditLatestCommit({paths:[code,'docs/workstreams/release-ready-batch.md'],subject:'unmarked commit'}).join(' '),/Unmarked commit/);
 });
+
+test('actual Git merge body-only skip marker passes full-message audit without relaxing journal gate',()=>{
+ const dir=mkdtempSync(join(tmpdir(),'dic-continuity-body-'));
+ const previous={cwd:process.cwd(),base:process.env.DIC_BASE_SHA,head:process.env.DIC_HEAD_SHA};
+ const git=(...args)=>execFileSync('git',['-C',dir,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+ try{
+  git('init','-q','-b','main');git('config','user.name','Isolated continuity test');
+  git('config','user.email','continuity@example.invalid');
+  writeFileSync(join(dir,'base.md'),'Baseline');git('add','.');git('commit','-qm','Base [skip netlify]');
+  git('checkout','-qb','feature');mkdirSync(join(dir,'scripts'));mkdirSync(join(dir,'docs'));
+  mkdirSync(join(dir,'docs/workstreams'));
+  writeFileSync(join(dir,'scripts','safe.mjs'),'export const safe=true;');
+  writeFileSync(join(dir,'docs/workstreams','release-ready-batch.md'),'Contemporaneous code journal');
+  git('add','.');git('commit','-qm','Safe feature [skip netlify]');
+  git('checkout','-q','main');writeFileSync(join(dir,'main.md'),'Main note');
+  git('add','.');git('commit','-qm','Main note [skip netlify]');
+  const start=git('rev-parse','HEAD');
+  git('merge','--no-ff','-m','Merge pull request #382\n\nNetlify skip in body [skip netlify]','feature');
+  const head=git('rev-parse','HEAD');
+  process.chdir(dir);process.env.DIC_BASE_SHA=start;process.env.DIC_HEAD_SHA=head;
+  const receipt=verifyLatestCommit();
+  assert.equal(receipt.commitCount,1);assert.equal(receipt.lastCommit,head);
+ }finally{
+  process.chdir(previous.cwd);
+  if(previous.base===undefined)delete process.env.DIC_BASE_SHA;else process.env.DIC_BASE_SHA=previous.base;
+  if(previous.head===undefined)delete process.env.DIC_HEAD_SHA;else process.env.DIC_HEAD_SHA=previous.head;
+  rmSync(dir,{recursive:true,force:true});
+ }
+});
