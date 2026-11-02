@@ -86,6 +86,14 @@ export function selectLatestCiConclusions(checkRuns,sha){
   name,check.status==='completed'?check.conclusion:'pending'
  ]));
 }
+// Only Git exit 1 establishes a non-ancestor. Other errors fail the release shut.
+export function verifiedGitAncestry(a,b,{run=execFileSync}={}){
+ try{run('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
+ catch(error){
+  if(error?.status===1)return false;
+  throw Error('Git ancestry verification unavailable; cannot certify release isolation');
+ }
+}
 export function assertCurrentReleaseRefs({developmentHead,releaseHead,actualDevelopmentHead,actualReleaseHead}){
  if(!SHA.test(actualDevelopmentHead||'')||!SHA.test(actualReleaseHead||'')||
    actualDevelopmentHead!==developmentHead||actualReleaseHead!==releaseHead)
@@ -238,7 +246,7 @@ export async function executeSingleUseRelease(settings=process.env){
   .split(/\r?\n/).filter(Boolean);
  const queueGate=assessReleaseQueue(queuedSource,{
   publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,changedPaths:changedSourcePaths,
-  isAncestor:(a,b)=>{try{git(['merge-base','--is-ancestor',a,b]);return true;}catch{return false;}}
+  isAncestor:(a,b)=>verifiedGitAncestry(a,b)
  });
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
