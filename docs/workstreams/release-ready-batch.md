@@ -75,3 +75,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — immutable production artifact preparation (nonpublishing)
 - READY-only combined CI now requires explicit public production build coordinates in GitHub vars `DIC_PRODUCTION_SUPABASE_URL` and `DIC_PRODUCTION_SUPABASE_PUBLISHABLE_KEY`; builds a deterministic ZIP, stores SHA-256 and retains the ZIP as a source-named artifact. No READY => no production artifact build or upload. This is artifact PREPARATION only; existing Netlify Git-connected publication is not replaced until exact-artifact consumption and prevention of duplicate Git builds are independently verified. No production publication. CI pending.
+
+## 2026-11-02 — deterministic artifact negative regression
+- Added Python regression to no-publish rehearsal: repeated ZIPs must have identical hashes, missing entrypoint must fail, and symlinks must fail closed. No live provider write. CI pending.
