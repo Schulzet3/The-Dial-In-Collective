@@ -143,7 +143,7 @@ test('actual Git merge body-only skip marker passes full-message audit without r
   const head=git('rev-parse','HEAD');
   process.chdir(dir);process.env.DIC_BASE_SHA=start;process.env.DIC_HEAD_SHA=head;
   const receipt=verifyLatestCommit();
-  assert.equal(receipt.commitCount,1);assert.equal(receipt.lastCommit,head);
+  assert.equal(receipt.commitCount,2,'range audits feature commit and merge commit');assert.equal(receipt.lastCommit,head);
  }finally{
   process.chdir(previous.cwd);
   if(previous.base===undefined)delete process.env.DIC_BASE_SHA;else process.env.DIC_BASE_SHA=previous.base;
