@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "scope": "original603 #585 Coffee Exchange current selected American roast legend boundary",
+  "status": "TESTING_PENDING_EXACT_SOURCE_CI_NO_READY",
+  "date_utc": "2026-11-02",
+  "development_base_sha": "a4e300816d43ec28f00b6df9427e3b338755b606",
+  "original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "official_product_url": "https://www.thecoffeeexchange.com/products/peru-cafe-canchaque-natural-process-american-roast-limited-offering",
+  "selected_h1": "Peru Cafe Canchaque – Natural, American",
+  "official_collection_url": "https://www.thecoffeeexchange.com/collections/single-origin",
+  "current_selected_source": [
+    "Flavor Notes: Milk Chocolate, Caramel, Vanilla, Medium Body",
+    "The Canchaque region of northern Piura is one of the only producers of high-quality, unwashed (“natural process”) coffees in all of Peru.",
+    "American Roast: Our lightest roast",
+    "Full City Roast: A medium/light roast",
+    "Vienna Roast: A medium/dark roast",
+    "French Roast: A classic dark roast",
+    "American Roast - 1 lb"
+  ],
+  "official_collection_classification": "American (Light) (3) shown in roaster collection taxonomy, not as a direct selected-product canonical label",
+  "historical_register": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv #585: QUALIFIED_MISSING_VALUE_NEEDS_REVIEW; extraction roast_level blank; frozen oracle Light (not independently accepted as current parser output)",
+  "adjudication": "Selected H1 is current American, and roaster collection categorizes American as Light. Product page also contains generic roast comparison and Medium Body sensory note. Do not auto-infer a seven-tier roast solely from a relative lightest comparison, collection taxonomy or stale SEO. Keep original historical qualified status unchanged; this is protective test coverage, not a demonstrated runtime defect.",
+  "test_path": "tests/coffee-issue33-coffee-exchange-american-legend.test.mjs",
+  "source_limit": "Live official public-web text observed November 2, 2026; no DNS-pinned raw HTML SHA256, exact current official parser replay, complete 603 certification or hosted GoTrue acceptance",
+  "preservation": [
+    "original603 CSV/captures/oracle immutable",
+    "153 context-qualified and 29 missing-literal-qualified caveats unchanged",
+    "#267 V2 separate",
+    "#96 untouched",
+    "PR367 excluded",
+    "no queue promotion, production change or deployment"
+  ]
+}
