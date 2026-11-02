@@ -3682,6 +3682,23 @@
         41361523001
       ],
       "pr": 343
+    },
+    {
+      "id": "DIC-Q-368-immutable-claim-git-cd-suppression",
+      "issue": 368,
+      "title": "Independent Git-connected rebuild suppression for immutable release claims",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "scripts/netlify/should-ignore-build.mjs"
+      ],
+      "tests": [],
+      "ci_runs": [],
+      "blockers": [
+        "PR #382 exact-source CI and nonforce merge pending; main OPS one-use claim-body integration and independent provider/backup cutover acceptance pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/368",
+      "notes": "Issue #368 infrastructure safety prerequisite. This guard is not an owner-approved READY app feature and must not be published alone. Source isolation and immutable provider cutover required; no deploy."
     }
   ],
   "history": [
