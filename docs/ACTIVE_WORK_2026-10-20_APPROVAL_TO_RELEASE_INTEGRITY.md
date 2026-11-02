@@ -263,3 +263,8 @@ Owner's separate "If more items are now ready, go ahead and publish those too" i
 ## 2026-10-29T18:50:28.901Z — Explicit Release11 postflight concurrent queue status
 
 The newly tracked DIC-Q-33-original603-direct-region-country-prose is TESTING, not merged/READY and not published. Current queue 59 DEPLOYED/0 READY/1 TESTING/2 IN_PROGRESS. Release11 one-use claim remains consumed once; no further publication authorized. Source-bound provider receipt is `docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_11_VERIFIED.json`.
+
+## November 2, 2026 — #417 exact-source READY-only branch CI (nonpublishing)
+- Existing five applicable GitHub checks now trigger on nonproduction `release-candidates/**` and `docs/RELEASE_CANDIDATE.json` changes: approval, validate, cloud-tests, mobile-browser-qa and SQL; private visual review also accepts a changed candidate with site edits. No separate publisher, no duplicate new suite, no automatic deployment. Development tests, nightly backups and Sunday comprehensive regressions remain intact.
+- Candidate requires an exact one-parent development source plus same-commit journal/manifest, published-file restoration for unrelated unfinished code, READY-only path provenance, and all five checks on that exact SHA before a single owner-approved production claim. With zero READY items, no real release candidate is authorized or staged.
+- This scoped commit is CI/journal only; exact PR and merged-source tests are required. No Netlify, database, Auth, member, backup or release action.

@@ -1,7 +1,7 @@
 name: DIC isolated SQL release regression
 on:
   push:
-    branches: [work/visual-refresh-20261015, development/backend-foundation]
+    branches: [work/visual-refresh-20261015, development/backend-foundation, 'release-candidates/**']
     paths:
       - 'supabase/migrations/**'
       - 'supabase/tests/**'
@@ -16,6 +16,7 @@ on:
       - 'scripts/audit/verify-migration-baseline.mjs'
       - 'docs/SUPABASE_PRODUCTION_MIGRATION_BASELINE_2026-10-18.json'
       - '.github/workflows/isolated-sql-regression.yml'
+      - 'docs/RELEASE_CANDIDATE.json'
   pull_request:
     branches: [development/backend-foundation]
   workflow_dispatch:
