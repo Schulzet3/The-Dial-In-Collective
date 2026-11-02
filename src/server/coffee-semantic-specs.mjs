@@ -389,11 +389,11 @@ export function withoutEducationalCoffeeGeography(html,{clean}={}){
  // labeled-pair reader must not turn that teaching example into the selected
  // coffee's geographic Origin. Mask only these labeled bodies in the
  // canonical view; original page bytes remain available in source_facts.
- for(const match of html.matchAll(/<(p|li)\\b[^<>]{0,1200}>([\\s\\S]{0,900}?)<\\/\\1\\s*>/gi)){
+ for(const match of html.matchAll(/<(p|li)\b[^<>]{0,1200}>([\s\S]{0,900}?)<\/\1\s*>/gi)){
   const openEnd=match[0].indexOf('>')+1,closeAt=match[0].lastIndexOf('<');
   const begin=match.index+openEnd,end=match.index+closeAt;
   if(begin>=end||!sections.some(section=>begin>=section.start&&end<=section.end))continue;
-  if(/^(?:origin|country(?:\\s+of\\s+origin)?|region|growing\\s+region)\\s*[:：|=]\\s*\\S/iu.test(clean(match[2],450)))
+  if(/^(?:origin|country(?:\s+of\s+origin)?|region|growing\s+region)\s*[:：|=]\s*\S/iu.test(clean(match[2],450)))
    ranges.push({start:begin,end});
  }
  ranges.sort((a,b)=>a.start-b.start||b.end-a.end);

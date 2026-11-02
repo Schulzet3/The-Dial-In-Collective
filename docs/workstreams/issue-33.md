@@ -1,3 +1,9 @@
+## November 2 UTC — Issue33 educational boundary candidate immediate source review correction (TESTING)
+
+Pre-PR inspection of first candidate commit `6903b030d8b78a239143ebf963f9868463132581` found accidentally double-escaped backslashes in JavaScript regex literals, which would match literal backslashes instead of HTML paragraph tags and word boundaries. Corrected the regex syntax in this code+SAME-COMMIT journal follow-up before opening the PR or asserting tests passed. Earlier commit remains historical evidence, not PASS. No scope expansion, no release, no production writes. [skip netlify].
+
+---
+
 ## November 2 UTC — Issue33 educational Origin heading boundary, scoped candidate TESTING (NOT DEPLOYED)
 
 **Independent selected current-source controls:** 1951 Guatemala ASOPCE current official H1 at https://1951coffee.com/collections/single-origin/products/guatemala-asopcce directly prints `Origin: 100% Guatemala, washed.`; Brewpoint Alchemist current official H1 at https://brewpointcoffee.com/collections/retail-coffee/products/the-alchemist-decaf-blend prints `Origin: Brazil (Mountain Water Processed)`. Exact prior official source-backed 4/4 before/after receipt `docs/audits/issue33-selected-origin-method-current4-before-after-20261101.json` verified their legitimate canonical origins. This patch does NOT claim that either current page contains the synthetic educational heading.
