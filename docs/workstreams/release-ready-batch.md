@@ -193,3 +193,8 @@ Owner approved a simpler Git-connected single publisher. This scoped change repl
 
 ## 2026-11-02 — #423 explicit Locked recovery-key custody supersession (no deployment)
 Owner approved reusing EXISTING unencrypted SSH Ed25519/age recovery private key directly in GitHub Actions encrypted secret DIC_ARCHIVE_AGE_IDENTITY; prior separate-automation-only-key decision is superseded solely for key custody. Record in Master Spec and Decision Ledger current_owner_existing_ssh_backup_key_github_actions_secret_20261102. Main operations PR #431 merged source `760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c`; exact PR CI included real synthetic SSH test. No key has been shared through ChatGPT; no archive decrypted or production changes. Preserve existing backups, independent offline copy and block archived-restoration PASS until real digest-matched offline test. Project Instructions updated to under 8,000 characters. Docs-only development change [skip netlify].
+
+
+### 2026-11-02 #423 canonical approval matrix reconciliation on exact PR head
+- Initial documentation PR #432 CI correctly rejected new `current_owner_existing_ssh_backup_key_github_actions_secret_20261102` because the owner decision inventory lacked deliberate classification; this was NOT a passing test.
+- Updated `docs/APPROVAL_COVERAGE_MATRIX.json` sorted decision inventory and explicit Locked scope/implementation/blocked restore entry without modifying historical baseline, existing contracts or receipt fingerprints. Same-commit scoped journal repair. Require new exact PR-head CI pass and new merged-development CI pass before VERIFIED; no app deployment, backup export, secret, production SQL or member write.

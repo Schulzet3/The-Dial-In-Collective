@@ -2,7 +2,7 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-10-28",
+  "reconciled_at_utc": "2026-11-02",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
@@ -30,6 +30,7 @@
     "current_owner_beta_member_soft_remove_only_20261018",
     "current_owner_defer_private_hide_shot_retirement_20261021",
     "current_owner_duplicate_first_automatic_catalog_approval_20261021",
+    "current_owner_existing_ssh_backup_key_github_actions_secret_20261102",
     "current_owner_expedited_two_migrations_and_production_20261021",
     "current_owner_extractor_deterministic_only_20261019",
     "current_owner_fast_flow_hybrid_20261022",
@@ -2001,5 +2002,24 @@
     "preserve": "All legacy V1 reviewed-line ledgers and B001+ PR source evidence remain unchanged; never credit V1 as fresh V2.",
     "improvement_scope": "Proven safe current-code dead/obsolete/duplicate removal, bug fixes and optimizations with Locked-decision comparison, focused tests, same-commit journal, nonforce integration and exact-source CI.",
     "limit": "Classification of user instructions only; no V2 line reviewed/tested, no code edits, production changes, existing baseline waiver, queue READY or publication."
+  },
+  "current_owner_existing_ssh_backup_key_github_actions_secret_20261102": {
+    "status": "LOCKED_OWNER_APPROVED_MANAGED_EXISTING_KEY_NO_LIVE_RESTORE",
+    "date": "2026-11-02",
+    "decision_id": "OPS-OWNER-REUSE-EXISTING-SSH-RECOVERY-KEY-20261102",
+    "issue": 423,
+    "scope": "Existing owner private SSH Ed25519/native age recovery key may be entered DIRECTLY into GitHub encrypted repository Actions secret DIC_ARCHIVE_AGE_IDENTITY by owner. Supersedes only independent automation-only key requirement, not encrypted backups, offline copy or privacy.",
+    "source_verified": "Main ops PR431 merged source 760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c; 137 PR tests included real synthetic SSH key derivation, merged main CI succeeded",
+    "not_yet_verified": [
+      "No actual owner's key has been provisioned into GitHub through this ChatGPT session",
+      "Actual old Drive ciphertext decryption and isolated PostgreSQL restore not run; remain BLOCKED until test PASS",
+      "Current branch changes only docs; no production release"
+    ],
+    "preserve": [
+      "Keep owner's offline copy, existing historical archives and encrypted daily backups",
+      "No GitHub source/issues/ChatGPT/Drive uploads of private keys",
+      "Maintain owner-private Drive direct-child destination and existing weekly fresh-snapshot drill",
+      "Never claim production hosted restore or alter Netlify/member/Auth data"
+    ]
   }
 }
