@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport}
+import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport,assertApprovedReadyBatch}
  from '../scripts/release/release-queue.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const queued={id:'DIC-Q-100',issue:100,pr:101,title:'Safe shot-page update',
@@ -42,7 +42,7 @@ test('all app source edits must be covered by Ready inventory, no unrelated SQL 
  for(const p of ['site/cloud/new-feature.js','supabase/migrations/20261022120000_new.sql','package.json',
  'netlify/functions/sensitive.js','build_cloud.mjs',
  'scripts/netlify/should-ignore-build.mjs','scripts/audit/approval-coverage.mjs',
- 'scripts/release/one-use-claim.mjs']){
+ 'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt']){
   const r=assess(q,['site/cloud/shot_card.js',p]);assert.equal(r.ready,false,p);
   assert.match(r.errors.join(' '),/Unqueued or not-ready/);
  }
@@ -64,11 +64,35 @@ test('CI must detect any app file introduced without even an IN_PROGRESS queue i
  assert.equal(assessIntakeCoverage({...q,items:[]},[]).tracked,true);
 });
 
-test('approved service-worker template is deployable but arbitrary PWA scripts remain excluded',()=>{
- const path='scripts/pwa/service-worker.template.txt';
- assert.deepEqual(deployableChangedPaths([path,'scripts/pwa/arbitrary.sh']),[path]);
- const item={...queued,scope_paths:[path]};
- const result=assess({...q,items:[item]},[path]);
- assert.equal(result.ready,true,result.errors.join('; '));
- assert.deepEqual(queueSchemaErrors({...q,items:[item]}),[]);
+
+test('a separately applied Supabase SQL-only migration is covered only by exact verified receipt and source blob',()=>{
+ const sql='supabase/migrations/20261024034800_dic_pending_retry_http_conflict.sql';
+ const deployed={...queued,id:'DIC-Q-5',issue:5,state:'DEPLOYED',scope_paths:[sql],
+  delivered_provider:'Supabase production only',delivered_release_id:'DIC-20261024-ISSUE5-SQL-ONLY-07',
+  delivered_sql_migration_version:'20261024052303',delivered_sql_source_blob_sha:C};
+ const candidate={...q,items:[queued,deployed]};
+ assert.equal(assessIntakeCoverage(candidate,[sql],{currentBlobSha:()=>C}).tracked,true);
+ assert.equal(assessIntakeCoverage(candidate,[sql],{currentBlobSha:()=>B}).tracked,false);
+ assert.equal(assessIntakeCoverage(candidate,[sql]).tracked,false);
+ assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,delivered_provider:'unverified'}]},[sql],{currentBlobSha:()=>C}).tracked,false);
+ assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,delivered_sql_migration_version:null}]},[sql],{currentBlobSha:()=>C}).tracked,false);
+ assert.equal(assessIntakeCoverage(candidate,['site/cloud/shot_card.js',sql,'supabase/migrations/new.sql'],{currentBlobSha:()=>C}).tracked,false);
+ assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,scope_paths:['site/cloud/shot_card.js']}]},['site/cloud/shot_card.js'],{currentBlobSha:()=>C}).tracked,true,
+  'a separate non-DEPLOYED READY item still covers its own frontend path');
+});
+test('DEPLOYED label cannot launder unpublished merged changes into an approved release',()=>{
+ const premature={...queued,id:'DIC-Q-101',issue:101,state:'DEPLOYED',scope_paths:['site/cloud/shot_card.js']};
+ const result=assess({...q,items:[queued,premature]});
+ assert.equal(result.ready,false);
+ assert.match(result.errors.join(' '),/DEPLOYED-labelled merged work is new/);
+ const baselineDelivered={...premature,merged_source_sha:A};
+ assert.equal(assess({...q,items:[queued,baselineDelivered]}).ready,true);
+});
+
+test('release grant must exactly name READY items, not merely cover overlapping files',()=>{
+ const result=assess();
+ assert.equal(assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},result),true);
+ for(const ids of [undefined,[],['DIC-Q-101'],['DIC-Q-100','DIC-Q-101'],['DIC-Q-100','DIC-Q-100']])
+  assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:ids},result));
+ assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},{...result,ready:false}));
 });

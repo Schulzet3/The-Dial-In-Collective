@@ -11,7 +11,7 @@ import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
-import {assessReleaseQueue,formatQueueReport} from './release-queue.mjs';
+import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -55,13 +55,10 @@ export function gitFailureDiagnostic(error,{operation='command',secrets=[]}={}){
  return {operation:/^[a-z-]+$/.test(operation)?operation:'command',
   exit_code:Number.isInteger(error?.status)?error.status:null,category,stdout,stderr};
 }
-const git=(args,{input,env,trim=true}={})=>{
+const git=(args,{input,env}={})=>{
  const environment=env||process.env;
- try{
-  const output=execFileSync('git',args,{encoding:'utf8',input,
-   stdio:['pipe','pipe','pipe'],env:environment,timeout:60_000,maxBuffer:4*1024*1024});
-  return trim?output.trim():output;
- }
+ try{return execFileSync('git',args,{encoding:'utf8',input,
+  stdio:['pipe','pipe','pipe'],env:environment,timeout:60_000,maxBuffer:4*1024*1024}).trim();}
  catch(error){
   const secrets=Object.entries(environment).filter(([key])=>/TOKEN|SECRET|PASSWORD|AUTH|CREDENTIAL|DB_URL|PRIVATE_KEY/i.test(key)).map(([,value])=>value);
   throw Error('Git operation failed: '+JSON.stringify(gitFailureDiagnostic(error,{operation:args[0],secrets})));
@@ -142,8 +139,8 @@ export async function executeSingleUseRelease(settings=process.env){
    eventForced:settings.DIC_PUSH_FORCED,eventAfterSha:settings.DIC_PUSH_AFTER_SHA,
    eventHeadSha:settings.GITHUB_SHA,
    remoteMainSha:git(['ls-remote','origin','refs/heads/main']).split(/\s+/)[0],
-   request,previousJournal:git(['show',parents[1]+':'+OPS_JOURNAL_PATH],{trim:false}),
-   currentJournal:git(['show','HEAD:'+OPS_JOURNAL_PATH],{trim:false})
+   request,previousJournal:git(['show',parents[1]+':'+OPS_JOURNAL_PATH])+'\n',
+   currentJournal:git(['show','HEAD:'+OPS_JOURNAL_PATH])+'\n'
   });
   validatePushEnvelope();
  }
@@ -244,6 +241,7 @@ export async function executeSingleUseRelease(settings=process.env){
  });
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
+ assertApprovedReadyBatch(grant,queueGate);
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
   ledger,currentPublishedSourceSha:ledger.consumed.at(-1)?.tested_source_sha||releaseHead});

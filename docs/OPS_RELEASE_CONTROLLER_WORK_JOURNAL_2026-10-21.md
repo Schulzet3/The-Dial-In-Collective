@@ -162,3 +162,7 @@ Owner approved immediate 17-item publication. Source 2c8e1ffe3b83a7524968f50efca
 ## Release 14 corrected request — 2026-11-02T03:15:35.388Z
 
 The previous one-use controller rejected its request envelope before any release claim because the appended journal lacked the literal mode. Re-issue unique commit for DIC-20261102-READY17-14 exact source 2c8e1ffe3b83a7524968f50efca3ead4da282cf8 mode publish; existing backup evidence and five CI remain unchanged. The earlier failed request is retained in history; no force/replay/duplicate publication.
+
+
+## 2026-11-02 — Operational release-isolation guard promotion
+- Ported exact READY item ID grant binding, merged unready code isolation and DEPLOYED-label laundering protection from development SHA 61d59c8ef459780a42ea4ab3f887f913e6f16fb5 (CI run 41388922128 SUCCESS) to operational main release controller and focused tests. Main-specific CI verification remains required. No release request, grant consumption, publication, database/member write or backup change.
