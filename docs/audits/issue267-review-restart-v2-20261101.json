@@ -14,14 +14,14 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 2648,
-    "remaining_v2_lines": 577313,
-    "status": "IN_PROGRESS_R2_009_SOURCE_BOUND",
-    "next_file_index_1_based": 30,
-    "next_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
-    "next_source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
-    "next_line_1_based": 961,
-    "next_action": "Continue frozen matrix #30 at original line 961; V1 remains separate.",
+    "verified_new_v2_reviewed_lines": 2917,
+    "remaining_v2_lines": 577044,
+    "status": "IN_PROGRESS_R2_010_SOURCE_BOUND",
+    "next_file_index_1_based": 34,
+    "next_file": "docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md",
+    "next_source_blob_sha": "e48cc099d8693f374017985a9b2aac949aa7a881",
+    "next_line_1_based": 1,
+    "next_action": "Resume original frozen manifest #34 line 1, preserve all V1/V2 receipts.",
     "independently_reviewed_v2_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -253,6 +253,34 @@
         "first_line": 641,
         "last_line": 960,
         "receipt": "docs/audits/issue267-v2-frozen-batches/R2-009.json"
+      },
+      {
+        "path": "docs/APPROVAL_COVERAGE_MATRIX.json",
+        "source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+        "first_line": 961,
+        "last_line": 1022,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-010.json"
+      },
+      {
+        "path": "docs/APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md",
+        "source_blob_sha": "40f89c393b96f679c51b09caafb177d95a41d3f0",
+        "first_line": 1,
+        "last_line": 76,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-010.json"
+      },
+      {
+        "path": "docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md",
+        "source_blob_sha": "abac1fb2ad0b6b851cbd9c2765c75821b455da2b",
+        "first_line": 1,
+        "last_line": 93,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-010.json"
+      },
+      {
+        "path": "docs/AUDIT_AND_RELEASE_PREFLIGHT_2026-10-20.md",
+        "source_blob_sha": "bfde7bd4926b32dfdc502104eb0a30fa98486ef1",
+        "first_line": 1,
+        "last_line": 38,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-010.json"
       }
     ],
     "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
@@ -262,7 +290,7 @@
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
     "inventory_status": "PINNED_436_FILES_306_LINE_COUNT_VERIFIED_130_PENDING",
     "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
-    "reviewed_current_source_lines": 3629,
+    "reviewed_current_source_lines": 3879,
     "reviewed_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -564,10 +592,24 @@
         "first_line": 1,
         "last_line": 220,
         "receipt": "docs/audits/issue267-v2-current-batches/C2-009.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-report.py",
+        "source_blob_sha": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+        "first_line": 221,
+        "last_line": 370,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-010.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-retention.py",
+        "source_blob_sha": "9b5250457e1e5b6d91e738b54bafcba78df10043",
+        "first_line": 1,
+        "last_line": 100,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-010.json"
       }
     ],
-    "next_file": "scripts/audit/coffee-corpus-report.py",
-    "next_line_1_based": 221,
+    "next_file": "scripts/audit/coffee-corpus-retention.py",
+    "next_line_1_based": 101,
     "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
     "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
     "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
@@ -577,17 +619,22 @@
     "known_line_count_subtotal": 36532,
     "full_eligible_line_denominator": null,
     "coverage_ledger": "docs/audits/issue267-v2-current-code-ledger.json",
-    "unreviewed_source_drift_as_of_development_sha": "61d59c8ef459780a42ea4ab3f887f913e6f16fb5",
+    "unreviewed_source_drift_as_of_development_sha": "4566d92aecb0229f470767def4bb0437be8f6f71",
     "unreviewed_current_delta_paths": [
       ".github/workflows/cloud-beta-ci.yml",
       ".github/workflows/cloud-regression.yml",
       ".github/workflows/dic-post-release-readonly-smoke.yml",
       ".github/workflows/dic-ready-batch-certification.yml",
+      ".github/workflows/dic-release-safety-rehearsal.yml",
       ".github/workflows/isolated-sql-regression.yml",
       ".github/workflows/visual-review.yml",
       "scripts/audit/issue33-original603-focused-source-review.mjs",
+      "scripts/release/ci-batch-classification.mjs",
       "scripts/release/controlled-release-runner.mjs",
+      "scripts/release/netlify-provider-readback.mjs",
       "scripts/release/production-readonly-smoke.mjs",
+      "scripts/release/rehearse-no-publish.mjs",
+      "scripts/release/release-backup-decision.mjs",
       "scripts/release/release-queue.mjs",
       "scripts/release/write-ci-certificate.mjs",
       "site/lib/engine.js",
@@ -603,8 +650,11 @@
       "tests/coffee-issue33-selected-station-locality.test.mjs",
       "tests/coffee-issue33-stale-seo-station-roles.test.mjs",
       "tests/grind-cross-version-range.test.mjs",
+      "tests/netlify-provider-readback.test.mjs",
       "tests/production-readonly-smoke.test.mjs",
       "tests/recommendation-research-guardrails.test.mjs",
+      "tests/rehearse-no-publish.test.mjs",
+      "tests/release-backup-decision.test.mjs",
       "tests/release-queue.test.mjs"
     ],
     "reviewed_post_snapshot_delta_receipts": [
@@ -647,7 +697,7 @@
     28,
     134
   ],
-  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_NINTH_BATCHES_RECORDED_EXACT_CI_PENDING",
+  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_TENTH_BATCHES_RECORDED_EXACT_CI_PENDING",
   "app_code_changes_in_this_record": 0,
   "production_changes": 0,
   "completed_tests_in_this_record": 0,
