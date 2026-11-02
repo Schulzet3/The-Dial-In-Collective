@@ -244,6 +244,6 @@ Owner's separate "If more items are now ready, go ahead and publish those too" i
 
 The newly tracked DIC-Q-33-original603-direct-region-country-prose is TESTING, not merged/READY and not published. Current queue 59 DEPLOYED/0 READY/1 TESTING/2 IN_PROGRESS. Release11 one-use claim remains consumed once; no further publication authorized. Source-bound provider receipt is `docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_11_VERIFIED.json`.
 
-## Release controller claim — 2026-10-30T04:49:52.877Z
-- Approved release DIC-20261030-READY-QUEUE-13 from tested application SHA ac0672a45efdc52a96932027161547b31b2a0ab9 claimed exactly once against previous release ref 2f7ef0eb0eb22ece986ba3e6bcaa3735a312578f. Five GitHub CI checks passed and one-use authorization ledger was written.
+## Release controller claim — 2026-11-02T03:15:53.138Z
+- Approved release DIC-20261102-READY17-14 from tested application SHA 2c8e1ffe3b83a7524968f50efca3ead4da282cf8 claimed exactly once against previous release ref 42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7. Five GitHub CI checks passed and one-use authorization ledger was written.
 - **Not yet a Netlify publication receipt:** independently check READY/current deployed SHA before marking Deployed.

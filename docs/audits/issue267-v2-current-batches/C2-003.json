@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "review_date_utc": "2026-11-01",
+  "reviewer": "ChatGPT AI assistant (not human or independent auditor)",
+  "method": "Direct reading of every numbered line in ordered source files; contiguous semantic segments include blanks/comments. Machine scans do not count.",
+  "source_drift_as_of_development_sha": "27ebf6427619e0330f1eff61a54e6ea7dbb02085",
+  "unreviewed_current_code_deltas": [
+    "scripts/audit/issue33-original603-focused-source-review.mjs",
+    "site/lib/engine.js",
+    "src/server/coffee-identity-evidence.mjs",
+    "tests/coffee-issue33-selected-region-blend.test.mjs",
+    "tests/coffee-issue33-selected-station-locality.test.mjs",
+    "tests/recommendation-research-guardrails.test.mjs"
+  ],
+  "code_changes": 0,
+  "production_changes": 0,
+  "batch_id": "C2-003",
+  "track": "V2_CURRENT_EXECUTABLE_SEMANTIC_REVIEW",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "source_inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+  "reviewed_files": [
+    {
+      "path": ".github/workflows/issue267-frozen-inventory.yml",
+      "git_blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+      "first_line": 1,
+      "last_line": 68,
+      "line_count": 68,
+      "original_inventory_index_1_based": 13,
+      "source_url": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/9707553a64f88127826e8f5b2b36cd0651296e83/.github/workflows/issue267-frozen-inventory.yml",
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 16,
+          "interpretation": "Audit-only branch push, write token for metadata persistence and repository guard."
+        },
+        {
+          "first_line": 17,
+          "last_line": 25,
+          "interpretation": "Checkout frozen SHA, Node22 and machine scanner (not semantic review)."
+        },
+        {
+          "first_line": 26,
+          "last_line": 40,
+          "interpretation": "Inline Node asserts frozen commit/tree and original 757-file/579961-line totals."
+        },
+        {
+          "first_line": 41,
+          "last_line": 55,
+          "interpretation": "Enumerates regular Git blobs and builds metadata-only manifest with NOT_REVIEWED markers."
+        },
+        {
+          "first_line": 56,
+          "last_line": 68,
+          "interpretation": "Writes request and publishes manifest only to audit branch."
+        }
+      ],
+      "quality_and_locked_fit": "Direct AI (not human) numbered line interpretation, including blanks/comments. No independently established Locked violation.",
+      "risk_and_obsolescence": "Write permission is scoped to audit manifest; do not delete without usage proof.",
+      "verification_and_testability": "Actual CI/hosted/official-source evidence required; no job executed by this audit.",
+      "current_counterpart": {
+        "path": null,
+        "reason": "Not in frozen inventory"
+      },
+      "disposition": "NO_PROVEN_SAFE_CURRENT_CODE_CHANGE"
+    },
+    {
+      "path": ".github/workflows/issue33-603-public-source.yml",
+      "git_blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+      "first_line": 1,
+      "last_line": 40,
+      "line_count": 40,
+      "original_inventory_index_1_based": 14,
+      "source_url": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/9707553a64f88127826e8f5b2b36cd0651296e83/.github/workflows/issue33-603-public-source.yml",
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 20,
+          "interpretation": "#33 path/manual trigger, opt-in marker, three 201-URL shards."
+        },
+        {
+          "first_line": 21,
+          "last_line": 32,
+          "interpretation": "Nonpersistent Node22 and official HTTPS source probe into runner temp."
+        },
+        {
+          "first_line": 33,
+          "last_line": 40,
+          "interpretation": "Always-upload private HTML/source-selection artifacts with one-day retention."
+        }
+      ],
+      "quality_and_locked_fit": "Direct AI (not human) numbered line interpretation, including blanks/comments. No independently established Locked violation.",
+      "risk_and_obsolescence": "Skipped/partial shard is not 603 PASS; immutable oracle preserved.",
+      "verification_and_testability": "Actual CI/hosted/official-source evidence required; no job executed by this audit.",
+      "current_counterpart": {
+        "path": null,
+        "reason": "Not in frozen inventory"
+      },
+      "disposition": "NO_PROVEN_SAFE_CURRENT_CODE_CHANGE"
+    },
+    {
+      "path": ".github/workflows/issue33-hosted-auth-e2e.yml",
+      "git_blob_sha": "9bf42b40a7bea17234dee6e8bf4d847053d79cd7",
+      "first_line": 1,
+      "last_line": 29,
+      "line_count": 29,
+      "original_inventory_index_1_based": 15,
+      "source_url": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/9707553a64f88127826e8f5b2b36cd0651296e83/.github/workflows/issue33-hosted-auth-e2e.yml",
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 15,
+          "interpretation": "Manual-only serialized hosted auth job with database URL secret."
+        },
+        {
+          "first_line": 16,
+          "last_line": 29,
+          "interpretation": "Python/Playwright Chromium and psql presence, then disposable account persistence test."
+        }
+      ],
+      "quality_and_locked_fit": "Direct AI (not human) numbered line interpretation, including blanks/comments. No independently established Locked violation.",
+      "risk_and_obsolescence": "No hosted test or provider data writes performed; #33/#96 own acceptance.",
+      "verification_and_testability": "Actual CI/hosted/official-source evidence required; no job executed by this audit.",
+      "current_counterpart": {
+        "path": null,
+        "reason": "Not in frozen inventory"
+      },
+      "disposition": "NO_PROVEN_SAFE_CURRENT_CODE_CHANGE"
+    },
+    {
+      "path": ".github/workflows/issue33-source-bundle.yml",
+      "git_blob_sha": "a24f076ef3f47289a0dd14708e0481b8039ec2ef",
+      "first_line": 1,
+      "last_line": 60,
+      "line_count": 60,
+      "original_inventory_index_1_based": 16,
+      "source_url": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/9707553a64f88127826e8f5b2b36cd0651296e83/.github/workflows/issue33-source-bundle.yml",
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 18,
+          "interpretation": "PR-path/manual source-bundle trigger, read-only token, bounded job."
+        },
+        {
+          "first_line": 19,
+          "last_line": 30,
+          "interpretation": "Exact PR-head checkout and private Git-tracked tarball."
+        },
+        {
+          "first_line": 31,
+          "last_line": 42,
+          "interpretation": "Node receipt records commit/tree/hash; selected secret-like filename screen."
+        },
+        {
+          "first_line": 43,
+          "last_line": 53,
+          "interpretation": "Node22 synthetic-key build and archived dist."
+        },
+        {
+          "first_line": 54,
+          "last_line": 60,
+          "interpretation": "One-day private source bundle artifact with fail-on-missing."
+        }
+      ],
+      "quality_and_locked_fit": "Direct AI (not human) numbered line interpretation, including blanks/comments. No independently established Locked violation.",
+      "risk_and_obsolescence": "Filename screen is bounded, not proof of comprehensive secret-content screening.",
+      "verification_and_testability": "Actual CI/hosted/official-source evidence required; no job executed by this audit.",
+      "current_counterpart": {
+        "path": null,
+        "reason": "Not in frozen inventory"
+      },
+      "disposition": "NO_PROVEN_SAFE_CURRENT_CODE_CHANGE"
+    },
+    {
+      "path": ".github/workflows/issue96-source-audit.yml",
+      "git_blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+      "first_line": 1,
+      "last_line": 23,
+      "line_count": 23,
+      "original_inventory_index_1_based": 17,
+      "source_url": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/9707553a64f88127826e8f5b2b36cd0651296e83/.github/workflows/issue96-source-audit.yml",
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 7,
+          "interpretation": "Legacy provider probe branch/path scope and read-only token."
+        },
+        {
+          "first_line": 8,
+          "last_line": 16,
+          "interpretation": "Six-minute nonpersistent checkout and Python security probe."
+        },
+        {
+          "first_line": 17,
+          "last_line": 23,
+          "interpretation": "Always-upload seven-day private artifact; missing files warn."
+        }
+      ],
+      "quality_and_locked_fit": "Direct AI (not human) numbered line interpretation, including blanks/comments. No independently established Locked violation.",
+      "risk_and_obsolescence": "Exact frozen blob; #96 owns live provider assurance.",
+      "verification_and_testability": "Actual CI/hosted/official-source evidence required; no job executed by this audit.",
+      "current_counterpart": {
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "git_blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9"
+      },
+      "disposition": "NO_PROVEN_SAFE_CURRENT_CODE_CHANGE"
+    },
+    {
+      "path": ".github/workflows/nightly-backup.yml",
+      "git_blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+      "first_line": 1,
+      "last_line": 56,
+      "line_count": 56,
+      "original_inventory_index_1_based": 18,
+      "source_url": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/9707553a64f88127826e8f5b2b36cd0651296e83/.github/workflows/nightly-backup.yml",
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 17,
+          "interpretation": "Development snapshot retains historical 09:23 UTC backup cron and main push selector."
+        },
+        {
+          "first_line": 18,
+          "last_line": 33,
+          "interpretation": "Read-only permissions, noncanceling concurrency, secret env."
+        },
+        {
+          "first_line": 34,
+          "last_line": 44,
+          "interpretation": "Nonpersistent checkout of historical live app SHA."
+        },
+        {
+          "first_line": 45,
+          "last_line": 56,
+          "interpretation": "Age encryption and ciphertext-only artifact with missing-file error."
+        }
+      ],
+      "quality_and_locked_fit": "Direct AI (not human) numbered line interpretation, including blanks/comments. No independently established Locked violation.",
+      "risk_and_obsolescence": "Live main is corrected operational authority; #28 owns backup.",
+      "verification_and_testability": "Actual CI/hosted/official-source evidence required; no job executed by this audit.",
+      "current_counterpart": {
+        "path": ".github/workflows/nightly-backup.yml",
+        "git_blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9"
+      },
+      "disposition": "NO_PROVEN_SAFE_CURRENT_CODE_CHANGE"
+    }
+  ],
+  "batch_lines": 276,
+  "previous_v2_lines": 758,
+  "total_v2_lines": 1034,
+  "remaining_frozen_lines": null,
+  "next_file_index_1_based": 19,
+  "next_file": ".github/workflows/roaster-source-probe.yml",
+  "next_line_1_based": 1,
+  "findings": [
+    "#267 machine scanner writes metadata only to audit branch; no semantic credit.",
+    "#33 source archive screens selected filenames but not all content; no proven exposure.",
+    "#33 hosted auth uses privileged DB secret; this audit did not execute it.",
+    "Development backup copy differs from operational main; #28 owns schedule.",
+    "Six non-document source deltas after current pin remain unreviewed.",
+    "No verified safe deletion or benchmark gain."
+  ]
+}

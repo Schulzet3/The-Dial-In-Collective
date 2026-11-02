@@ -61,7 +61,7 @@ test('owner locked private Free plan and owner-only credits remain enforced desp
  assert.match(instructions,/private on GitHub Free/i,'current instructions must keep the repository private Free');
  assert.match(instructions,/do not (?:suggest|recommend)[^\n]*(?:public visibility|paid upgrades|upgrade)/i,'no public/paid upgrade recommendations');
  assert.match(instructions,/CI and branch protections are advisory|CI\/branch restrictions are advisory/i);
- assert.match(instructions,/I alone monitor credits|I alone monitor Netlify credits/i);
+ assert.match(instructions,/I alone monitor credits|I alone monitor Netlify credits|Only owner monitors credits/i);
  assert.match(instructions,/Never request[^\n]*screenshots/i);
  assert.match(instructions,/provide exact paste-ready replacement text|Proactively recommend Project Instructions changes/i);
  assert.match(spec,/Owner-Locked GitHub Free\/private operating constraint/);

@@ -187,7 +187,7 @@ export function extractCoffeeGeographyTuples(html,{clean,name='',includeCurrentL
   if(!found.some(item=>key(item)===key(value)))found.push(value);
   if(found.length>=12)break;
  }
- if(includeCurrentLocality)for(const place of narrativeGeography(blocks.filter(block=>!block.educational),{currentLocalityOnly:true})){
+ if(includeCurrentLocality)for(const place of narrativeGeography(blocks.filter(block=>!block.educational),{currentLocalityOnly:true,name})){
   // Early tuple reconciliation needs a country in this same source claim.
   // Keep partial geography as source evidence, without forcing a conflict
   // when the page's separate Region and Country labels arrive later.
@@ -233,7 +233,7 @@ function directOriginClaims(sentence){
  }
  return claims;
 }
-function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
+function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  const candidates=[];
  const add=(value,quote)=>{
   value=value.replace(/\s+/g,' ').replace(/[,; ]+$/,'').trim();
@@ -243,10 +243,34 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
  for(const block of blocks){
   if(/^h[1-6]$/.test(block.tag))continue;
   for(let sentence of sentences(block.text)){
-   if(sentence.length>1800||!current(sentence)||! /\b(?:coffee|coffees|beans?|cherries|grow(?:n|ing|s)?|cultivat|sourc|farm|finca|hacienda|estate|cooperative|station|mill|producer)\w*\b/i.test(sentence)||
+   // Some selected product descriptions use the exact coffee name + whole
+   // regional blend claim without the literal word "coffee". Admit only
+   // that bounded direct source pattern to the normal geographic review.
+   const namedWholeBlend=Boolean(name&&key(sentence.slice(0,name.length))===key(name)&&
+    /^\s+is\s+a\s+100\s*(?:percent|%)\s+[\p{Lu}][\p{L}\p{M}'’ .-]{2,100}\s+blend\b[^.!?]{0,200}\bthis\s+region\b/iu.test(sentence.slice(name.length)));
+   if(sentence.length>1800||!current(sentence)||(! /\b(?:coffee|coffees|beans?|cherries|grow(?:n|ing|s)?|cultivat|sourc|farm|finca|hacienda|estate|cooperative|station|mill|producer)\w*\b/i.test(sentence)&&!namedWholeBlend)||
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
       /\b(?:variety|cultivar)\b.{0,65}\b(?:grown|collected|introduced|originated|discovered)\b/i.test(sentence))continue;
+   // Bind printed village and district to this exact selected station/H1.
+   // Never infer a location from a reused URL, an older lot or a gazetteer.
+   const stationCountry=countryNames(name);
+   if(stationCountry.length===1&&countryNames(sentence).every(value=>key(value)===key(stationCountry[0]))){
+    const district=sentence.match(new RegExp(
+     '^(?:This|Our)\\s+coffee\\s+comes\\s+from\\s+(?:the\\s+)?('+PLACE+')\\s+washing\\s+station,\\s+which\\s+is\\s+in\\s+the\\s+(?:kebele,\\s+or\\s+)?village,?\\s+of\\s+('+PLACE+'),\\s+(?:in\\s+the\\s+(?:[A-Za-z]{3,12},\\s+or\\s+)?district,?\\s+of\\s+|district\\s+)('+PLACE+'),\\s+(?:in\\s+the\\s+)?('+PLACE+')(?:\\s+region)?[.!?]?$','iu'));
+    const village=sentence.match(new RegExp(
+     '^From\\s+the\\s+('+PLACE+')\\s+Washing\\s+Station,\\s+which\\s+serves\\s+(?:the\\s+)?(?:nearly\\s+)?\\d{1,5}\\s+(?:small\\s+)?farmers\\s+in\\s+the\\s+village\\s+of\\s+('+PLACE+')\\s+in\\s+('+PLACE+'),\\s+comes\\s+this\\b','iu'));
+    const station=(district?.[1]||village?.[1]||'').trim();
+    const localities=(district?district.slice(2):village?.slice(2)||[])
+     .map(value=>value.replace(/\s+region[.!?]*$/iu,'').replace(/[.!?]+$/u,'').trim());
+    if(station.length>=4&&key(name).includes(key(station))&&localities.length>=2&&
+       localities.every(value=>value.length>=3&&value.length<=65&&
+        !completeVarietyPhrase(value,{explicit:true})&&
+        !/\b(?:coffee|roast|blend|tasting|chocolate|caramel|cocoa|flavou?r|spice|pumpkin|vanilla|product)\b/iu.test(value))){
+     add([...localities,stationCountry[0]].join(', '),sentence);
+     continue;
+    }
+   }
    // The selected coffee's direct source locality outranks a nearby
    // landmark in the same sentence. SEY describes Ruarai as coming from
    // Nyeri *on the slopes of Mount Kenya*: the mountain is context, not a
@@ -259,6 +283,61 @@ function narrativeGeography(blocks,{currentLocalityOnly=false}={}){
      add(currentLocality[1]+', '+literalCountries[0],sentence);
     else add(currentLocality[1],sentence);
     continue;
+   }
+   // The EXACT selected coffee's current description can state a named town
+   // and district after its explicitly printed country: "Guatemala coffee
+   // from Joyabaj, Quiché". No country/region lookup and no page SEO guessing.
+   // Require the same country in the selected H1 so a rotated description or
+   // related coffee cannot donate a more specific origin.
+   const selectedCountries=countryNames(name);
+   const directlySelected=!/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'');
+   if(directlySelected&&selectedCountries.length===1){
+    // The selected coffee's OWN current sentence can name its growing
+    // region before its exact H1: "Grown in the famed Cerrado region,
+    // Brazil Oberon is ...". The country must be literally printed at
+    // the start of that same selected H1, not inferred from a gazetteer,
+    // slug, unrelated product or a free-floating site-wide region.
+    const selectedNamePattern=Array.from(name).map(char=>
+     '\\^$.*+?()[]{}|'.includes(char)?'\\'+char:char).join('');
+    const selectedRegion=sentence.match(new RegExp(
+     '^Grown\\s+in\\s+the\\s+(?:(?:famed|renowned)\\s+)?('+PLACE+')\\s+region\\s*,\\s*'+
+      selectedNamePattern+'\\s+is\\b','iu'));
+    if(selectedRegion&&new RegExp('^'+selectedCountries[0]+'\\s','iu').test(name)&&
+       !/\b(?:coffees?|blends?|roasts?|products?|catalog|related|previous|other)\b/iu.test(selectedRegion[1])){
+     add(selectedRegion[1]+', '+selectedCountries[0],sentence);
+     continue;
+    }
+    // The exact selected coffee may directly name its whole-blend growing
+    // region without a separate Region: spec. Require literal selected name,
+    // country, quantitative blend and same-sentence region reference.
+    const namedRegionBlend=sentence.match(new RegExp(
+     '^'+selectedNamePattern+'\\s+is\\s+a\\s+100\\s*(?:percent|%)\\s+('+PLACE+')\\s+blend\\b[^.!?]{0,200}\\bthis\\s+region\\b','iu'));
+    const literalSentenceCountries=countryNames(sentence);
+    if(namedRegionBlend&&new RegExp('^'+selectedCountries[0]+'\\s','iu').test(name)&&
+       literalSentenceCountries.length===1&&key(literalSentenceCountries[0])===key(selectedCountries[0])&&
+       !completeVarietyPhrase(namedRegionBlend[1],{explicit:true})&&
+       !/\b(?:flavou?r|tasting|notes?|roast|beans?|coffee|chocolate|caramel|cocoa|citrus|nutty|fruity|sweet|spice|vanilla|berry|pumpkin|catalog|product)\b/iu.test(namedRegionBlend[1])){
+     add(namedRegionBlend[1]+', '+selectedCountries[0],sentence);
+     continue;
+    }
+    const from=sentence.match(new RegExp(
+     '^(?:(?:Single[ -]Origin|Organic|Fair[ -]Trade)\\s+){0,3}('+COUNTRIES+')\\s+coffee\\s+from\\s+('+PLACE+')(?:\\s*,\\s*('+PLACE+'))?(?=[.!?]|$)','iu'));
+    if(from&&key(from[1])===key(selectedCountries[0])){
+     const locality=[from[2],from[3]].filter(Boolean).map(part=>part.replace(/[.,;:!?]+$/u,'').trim()).join(', ');
+     if(locality.length>=4)add(locality+', '+from[1],sentence);
+     continue;
+    }
+    // Two appearances of the SAME literal regional name in an explicitly
+    // selected current lot sentence can corroborate a locality. "Brazil
+    // Mogiana ... Mogiana growing region in Brazil" is direct source text,
+    // not a geographic inference from the product slug or adjacent coffee.
+    const repeated=sentence.match(new RegExp(
+     '^('+COUNTRIES+')\\s+('+PLACE+')\\s+is\\s+(?:produced|grown|sourced|cultivated)\\s+in\\s+the\\s+(?:renowned\\s+)?\\2\\s+growing\\s+region\\s+in\\s+\\1(?=[.!?]|$)','iu'));
+    if(repeated&&key(repeated[1])===key(selectedCountries[0])&&
+       key(name).includes(key(repeated[1]+' '+repeated[2]))){
+     add(repeated[2]+', '+repeated[1],sentence);
+     continue;
+    }
    }
    // The selected-coffee product may describe its direct growing locality
    // before naming the producing country: "From the Tarrazu region of Costa
@@ -453,7 +532,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
    if(quote)add('Release',numbered[1]+' '+numbered[2],name+' | '+quote);
   }
  }
- for(const place of narrativeGeography(blocks)){
+ for(const place of narrativeGeography(blocks,{name})){
   // A prose fragment may name a neighboring town, a broader district or
   // just a mountain. It can refine an explicit caption only when its
   // complete named places are compatible. Different explicit countries
@@ -500,8 +579,28 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   if(block.tag==='p'&&compactLines.length===2&&value.length<=160)compactCandidates.push(value);
   for(const compact of compactCandidates){
   if(compact.length<=160&&current(compact)){
+   // A compact CURRENT selected lot credit can publish the producer and
+   // a named locality followed by an explicit country without a comma before
+   // the country: "Bressani Family, San Jerónimo Guatemala". Require the
+   // same producer already verified in canonical fields AND the selected H1.
+   // No roaster lookup, SEO/URL, generic comma sentence or country inference.
+   if(!fields.origin&&fields.producer&&key(fields.producer).length>=7&&
+      key(name).includes(key(fields.producer))&&compact.length<=125){
+    const credited=compact.match(new RegExp(
+     '^([\\p{Lu}][\\p{L}\\p{M} .&-]{4,95}),\\s+([\\p{Lu}][\\p{L}\\p{M} .-]{2,65})\\s+('+COUNTRIES+')$','iu'));
+    if(credited&&key(credited[1])===key(fields.producer)&&
+       !/\b(?:coffee|roast|process|washed|natural|honey|anaerobic|decaf|shipping|delivery|street|avenue|farm|estate)\b/i.test(credited[2])&&
+       !completeVarietyPhrase(credited[2])&&!COUNTRY_ONLY.test(credited[2]))
+     originCandidates.push({value:credited[2].trim()+', '+credited[3],quote:compact});
+   }
    const countryFirst=compact.match(new RegExp('^('+COUNTRIES+')\\s+[-–—]\\s+([\\p{L}\\p{M} .,’’\'()-]{2,120})$','iu'));
-   if(countryFirst&&!( /^h[1-6]$/.test(block.tag)&&key(compact)===key(name))&&
+   // A country-first product title or repeated breadcrumb can carry a coffee
+   // VARIETY rather than a geographic region: "Nicaragua - Pumpkin Spice-
+   // Pacamara" never means a village called "Pumpkin Spice- Pacamara".
+   // Country remains explicit; only a separately published, unambiguous
+   // selected regional label may support a cultivar-homonymous location.
+   const countryFirstHasCultivar=Boolean(countryFirst?.[2].match(VARIETY_RE)?.length);
+   if(countryFirst&&!countryFirstHasCultivar&&!( /^h[1-6]$/.test(block.tag)&&key(compact)===key(name))&&
       !/\b(?:coffee|roast|process|blend|washed|natural|honey|anaerobic|decaf|finca|hacienda|farm|estate)\b/i.test(countryFirst[2]))originCandidates.push({value:countryFirst[2]+', '+countryFirst[1],quote:compact});
    // A complete three-part current-product place tuple may precede the
    // processing/cultivar/altitude specs on one compact product line.
@@ -660,7 +759,12 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
     const productionPlan=/\b(?:plan(?:s|ned|ning)?|aim(?:s|ing)?|work(?:s|ing)?|hop(?:e|es|ing)|intend(?:s|ing)?|target(?:s|ing)?)\b.{0,100}\b(?:double|triple|increase|expand|begin|start|plant|grow|produce)\b.{0,180}\b(?:harvest|crop)\b/i.test(sentence);
     const harvest=!productionPlan&&(sentence.match(/\b((?:20\d{2})(?:\s*[-–—/]\s*(?:20)?\d{2})?)\s+(?:harvest|crop)\b/i)||
      sentence.match(/\b(?:harvest|crop)(?:\s+(?:year|season))?\s*(?:of|for|:|was|is)?\s*((?:20\d{2})(?:\s*[-–—/]\s*(?:20)?\d{2})?)\b/i));
-    if(harvest)add('Harvest',harvest[1],sentence);
+    // A producer's dated biography is not proof that this selected coffee
+    // is being offered as that harvest. Require same-sentence lot identity;
+    // exact printed Harvest/Release specifications remain handled separately.
+    const selectedLotHarvest=/\b(?:this|our|the|current|selected)\s+(?:coffee|lot|beans?|cherries|batch|offering|release)\b/i.test(sentence) ||
+     /^This is the 20\d{2}\s+(?:harvest|crop)\b/i.test(sentence);
+    if(harvest&&selectedLotHarvest)add('Harvest',harvest[1],sentence);
     const datedOffering=sentence.match(/\b(?:our|this)\s+(?:(?:first|last|new|current|rotating|washed|natural|honey|anaerobic|single)\s+){0,5}(?:selection|offering|release|single origin)\b[^.!?]{0,65}\b(?:of|for)\s+(20\d{2})\b/i)||
      sentence.match(/\bbring\s+you\s+(?:the\s+)?(20\d{2})\s+lot\b/i)||
      (!/\b(?:could|would|might|may|hypothetical|imagine|suppose)\b/i.test(sentence)&&

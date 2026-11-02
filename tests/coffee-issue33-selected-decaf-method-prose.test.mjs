@@ -3,6 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup} from '../site/cloud/coffee-url-autofill.js';
+import {selectedNamedCurrentDecafEvidence} from '../src/server/coffee-direct-product-prose.mjs';
 const source_url='https://leapcoffeeroasters.com/products/decaf-coffee';
 const page=(name,body)=>'<html><head><meta property="og:type" content="product"></head><body>'+
  '<main><h1>'+name+'</h1>'+body+'</main></body></html>';
@@ -73,4 +74,199 @@ test('exact selected coffee repeated H1 remains eligible after PR255',()=>{
  const html='<main><h1>Decaf Coffee</h1><h1>Decaf Coffee</h1><p>'+official+'</p></main>';
  const result=extractPublicCoffeeFacts(html,{source_url});
  assert.equal(result.fields.decaffeination_method,'Water Process');
+});
+
+
+const nativo='Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.';
+test('selected exact named current decaf recovers Sugar Process from second sentence without borrowing Colombian origin',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Savor the richness of world-class coffee without the caffeine kick. '+nativo+'</p>'+
+  '<p>Notes: Sugar Cane, Chocolate, Creamy.</p>');
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+ assert.equal(result.fields.process,undefined,'decaffeination is not green-bean Natural processing');
+ assert.equal(result.fields.origin,undefined,'decaffeination location is not a growing origin');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&f.value.includes(nativo)));
+ assert.match(coffeeUrlPreviewMarkup(result),/Sugar Process/);
+});
+test('named current decaf evidence must match EXACT selected coffee, not another decaf or regular product',()=>{
+ for(const name of ['Other Decaf, 12 oz','Regular Tranquilo','TRANQUILO, Half-Caf']){
+  const result=parse(name,'<p>'+nativo+'</p>');
+  assert.equal(result.fields.decaffeination_method,undefined,name);
+ }
+});
+test('named current decaf method is not donated by past lot, unrelated current subject or education',()=>{
+ for(const sentence of [
+  'Previously, Tranquilo is decaffeinated using the natural Sugar Cane Process.',
+  'Last year Tranquilo is decaffeinated using the natural Sugar Cane Process.',
+  'Our other coffee is decaffeinated using the natural Sugar Cane Process.',
+  'Tranquilo is naturally sweet, with notes of sugar cane.'
+ ]){
+  const result=parse('TRANQUILO, Decaffeinated, 12 oz','<p>'+sentence+'</p>');
+  assert.equal(result.fields.decaffeination_method,undefined,sentence);
+ }
+ const educational=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<section><h2>What is decaffeination?</h2><p>'+nativo+'</p></section>');
+ assert.equal(educational.fields.decaffeination_method,undefined);
+});
+test('named selected decaf conflicting current methods stay reviewable rather than arbitrary',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>'+nativo+'</p><p>Tranquilo is decaffeinated using Swiss Water.</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.equal(result.source_facts?.filter(x=>x.field==='decaffeination_method').length,2);
+});
+
+
+test('strict current exact H1 restores named decaf-method evidence after geography context isolation',()=>{
+ const name='TRANQUILO, Decaffeinated, 12 oz';
+ const paragraph='Savor the richness of world-class coffee without the caffeine kick. '+
+  'Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia, '+
+  'which preserves the bean cellular structure and flavor integrity unlike harsh chemical methods.';
+ const current='<main><h1>'+name+'</h1><p>'+paragraph+'</p></main>';
+ const dropped='<main><h1>'+name+'</h1></main>';
+ const clean=html=>String(html).replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(dropped,{name,clean}),[]);
+ const facts=selectedNamedCurrentDecafEvidence(current,{name,clean});
+ assert.equal(facts.length,1);
+ assert.match(facts[0],/Tranquilo is decaffeinated using the natural Sugar Cane Process/);
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(current,{name:'Other Decaf',clean}),[]);
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(current,{name:'TRANQUILO, Half-Caf',clean}),[]);
+ for(const body of [
+  'Our coffee is decaffeinated using Swiss Water.',
+  'Previously, Tranquilo is decaffeinated using Swiss Water.',
+  'Last year Tranquilo is decaffeinated using Swiss Water.',
+  'Tranquilo is naturally sweet, with notes of sugar cane.'
+ ])assert.deepEqual(selectedNamedCurrentDecafEvidence('<main><h1>'+name+'</h1><p>'+body+'</p></main>',{name,clean}),[],body);
+ assert.deepEqual(selectedNamedCurrentDecafEvidence(
+  '<main><h1>'+name+'</h1><section class="product-recommendations"><p>'+paragraph+'</p></section></main>',
+  {name,clean}),[],'related coffee prose cannot enter current selected product');
+});
+
+
+test('independent exact Sugar Cane EA named sentence and printed spec corroborate under layout disagreement',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Savor the richness of world-class coffee without the caffeine kick. '+
+  'Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.</p>'+
+  '<ul><li>Process: Natural Sugar Cane (EA) Decaf.</li></ul>'+
+  '<p>Decaffeination Method: Sugar Cane EA Decaf.</p>');
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+ assert.equal(result.fields.process,undefined,'Natural describes EA treatment, not green processing');
+ assert.equal(result.fields.origin,undefined,'decaffeination country is not farm origin');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&/Natural Sugar Cane \(EA\) Decaf/.test(f.value)));
+});
+
+test('contrary exact current decaf spec blocks named method even without prior layout conflict',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.</p>'+
+  '<li>Process: Swiss Water Decaf.</li>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&f.conflicting));
+});
+
+test('unrelated green processing or related coffee spec never overrides direct decaf evidence',()=>{
+ const result=parse('TRANQUILO, Decaffeinated, 12 oz',
+  '<p>Tranquilo is decaffeinated using the natural Sugar Cane Process in Colombia.</p>'+
+  '<li>Process: Washed.</li>'+
+  '<section class="product-recommendations"><li>Decaffeination Method: Swiss Water Decaf.</li></section>');
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+});
+
+
+// An actual Shopify/JSON-LD product page identifies the selected item
+// independently of editorial H1 sections. A synthetic page without Product
+// identity is intentionally ambiguous and cannot validate multi-H1 handling.
+const hillTreeExactUrl='https://hilltreeroastery.com/products/colombia-valle-del-cauca-sugarcane-ea-decaf';
+const parseEditorial=(name,body)=>{
+ const html='<html><head><meta property="og:type" content="product">'+
+  '<meta property="og:title" content="'+name+'">'+
+  '<meta property="og:url" content="'+hillTreeExactUrl+'">'+
+  '<script type="application/ld+json">'+JSON.stringify({
+   '@context':'https://schema.org','@type':'Product',name,url:hillTreeExactUrl
+  })+'</script></head><body><main><h1>'+name+'</h1>'+body+'</main></body></html>';
+ return extractPublicCoffeeFacts(html,{source_url:hillTreeExactUrl});
+};
+
+// Current original603 #151's actual selected page uses editorial H1 headings
+// and a BR-separated printed spec. This is not general FAQ decaf education.
+test('Hill Tree current selected sugarcane EA caption retains distinct Washed and Sugar Process',()=>{
+ const name='COLOMBIA VALLE DEL CAUCA SUGARCANE EA DECAF';
+ const body='<h1>Tasting Notes</h1>'+
+  '<p>FLAVOR: Warm Chocolate • Roasted Almond • Cane Sugar • Bright Citrus<br>'+
+  'BODY: Medium & Smooth<br>ACIDITY: Low to Medium<br>'+
+  'PROCESS: Washed • EA Sugarcane Decaffeination</p>'+
+  '<p>Process: Washed.</p>'+
+  '<h1>Origin Notes</h1><p>Colombia Valle del Cauca Sugarcane Decaf is washed processed before decaffeination.</p>'+
+  '<h1>Why You’ll Love This Coffee</h1><p>This is a rich dark roast.</p>'+
+  '<h1>Frequently Asked Questions</h1><p>What is EA decaf?</p>';
+ const result=parseEditorial(name,body);
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.decaffeination_method,'Sugar Process');
+ assert.equal(result.fields.process,'Washed','green-coffee washed processing must remain distinct');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&/Washed • EA Sugarcane Decaffeination/.test(f.value)));
+ assert.match(coffeeUrlPreviewMarkup(result),/Sugar Process/);
+});
+test('a competing product H1 cannot donate a selected decaf caption',()=>{
+ const name='Selected Decaf';
+ const result=parseEditorial(name,'<h1>Other Coffee Guatemala</h1>'+
+  '<p>Process: Sugarcane EA Decaffeination</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+});
+test('selected-product editorial H1 does not turn FAQ examples into published specs',()=>{
+ const name='Selected Decaf';
+ const result=parseEditorial(name,'<h1>Frequently Asked Questions</h1>'+
+  '<p>Process: Sugarcane EA Decaffeination</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+});
+test('opposing exact current printed decaf method captions remain unfilled',()=>{
+ const name='Selected Decaf';
+ const result=parseEditorial(name,'<h1>Tasting Notes</h1>'+
+  '<p>PROCESS: Washed • EA Sugarcane Decaffeination<br>'+
+  'Decaffeination Method: Swiss Water Decaf</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.ok(result.source_facts?.filter(f=>f.field==='decaffeination_method').every(f=>f.conflicting===true));
+});
+
+
+// Original603 #126 live current raw HTML: product-only strong label and
+// <br>-separated value lack the colon normally expected after Processing.
+const fosterExact='https://fostercoffee.co/products/yes-its-decaf-decaf';
+const strongSpec=(value)=>'<p><strong>Country </strong>Mexico<strong><br>'+
+ 'Region </strong>Amatenago<strong><br>Producer </strong>Smallholder Farms'+
+ '<strong><br>Processing </strong>'+value+'</p>';
+const parseFoster=(name,body)=>extractPublicCoffeeFacts(
+ '<html><head><meta property="og:type" content="product"></head><body><main><h1>'+name+'</h1>'+body+'</main></body></html>',
+ {source_url:fosterExact});
+test('original603 #126 current strong-labeled Processing spec splits washed and mountain-water decaf',()=>{
+ const result=parseFoster('Yes It&#39;s Decaf (Decaf)',strongSpec('Washed: Mountain Water Decaf'));
+ assert.equal(result.ok,true);
+ assert.equal(result.fields.process,'Washed');
+ assert.equal(result.fields.decaffeination_method,'Water Process');
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&
+  /Processing: Washed: Mountain Water Decaf/.test(f.value)));
+});
+test('current selected strong decaf source must not donate to regular or half-caf',()=>{
+ for(const name of ['Regular Coffee','Half-Caf Blend']){
+  const result=parseFoster(name,strongSpec('Washed: Mountain Water Decaf'));
+  assert.equal(result.fields.decaffeination_method,undefined,name);
+ }
+});
+test('selected strong-labeled decaf contradictory methods remain review-only',()=>{
+ const result=parseFoster('Selected Decaf',strongSpec('Washed: Mountain Water Decaf')+
+  '<p><strong>Decaffeination Method</strong>Swiss Water Decaf.</p>'+
+  '<p><strong>Decaffeination Method</strong>Sugar Cane EA Decaf.</p>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+ assert.ok(result.source_facts?.some(f=>f.field==='decaffeination_method'&&f.conflicting));
+});
+test('related recommendation and educational sections cannot supply strong decaf specs',()=>{
+ const result=parseFoster('Selected Decaf','<p>Selected decaf.</p>'+
+  '<section class="product-recommendations"><h2>Recommended coffees</h2>'+strongSpec('Washed: Mountain Water Decaf')+'</section>'+
+  '<section><h2>Decaf Process Education</h2>'+strongSpec('Washed: Swiss Water Decaf')+'</section>');
+ assert.equal(result.fields.decaffeination_method,undefined);
+});
+test('unsupported or ambiguous processing spec must not invent decaf method',()=>{
+ for(const value of ['Washed: Unspecified Decaf','Washed: Mountain Water or Sugar Cane Decaf']){
+  const result=parseFoster('Selected Decaf',strongSpec(value));
+  assert.equal(result.fields.decaffeination_method,undefined,value);
+ }
 });

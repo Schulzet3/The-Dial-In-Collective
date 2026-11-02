@@ -219,6 +219,19 @@
         "Exact reviewed SQL blob eba2ff06190e5d03034d8f14e7c03b57bd2edf5a; PR287 isolated signed PostgREST 89/89 PASS; combined Release13 PR291 exact SQL check 123895964636 SUCCESS; production migration NOT APPLIED at grant creation."
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261102-READY17-14",
+      "tested_source_sha": "2c8e1ffe3b83a7524968f50efca3ead4da282cf8",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-02T03:09:15.395Z",
+      "expires_at_utc": "2026-11-03T03:09:15.398Z",
+      "approval_source": "Owner explicit 2026-11-01/02 conversation: 'Get this deployed immediately' and 'Then what are you waiting for? ... Why aren’t you implementing it?' for the 17 READY item batch.",
+      "scope": "Exactly one guarded production publication of the 17 READY queue items at source 2c8e1ffe3b83a7524968f50efca3ead4da282cf8, excluding all TESTING and IN_PROGRESS items, unrelated future work, destructive database/member changes, paid services, Auth/Edge changes and credentials. Require all five exact-source checks, queue isolation, existing encrypted offsite recovery evidence, nonforce serialized claim and Netlify postflight.",
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."

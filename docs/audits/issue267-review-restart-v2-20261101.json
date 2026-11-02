@@ -1,0 +1,582 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "decision": "OWNER_DIRECTED_FRESH_REVIEW_FROM_FIRST_LINE_2026-11-01",
+  "effective_date_utc": "2026-11-01",
+  "supersession": "Prior resume-at-next-unreviewed-line optimization is superseded for V2 only. Re-read every line from first file, never erase V1 historical evidence.",
+  "source_of_truth": "docs/workstreams/issue-267.md",
+  "frozen_historical_v2": {
+    "review_pass": "V2_FRESH_REVIEW",
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "inventory": "docs/audits/issue267-frozen-source-inventory.json",
+    "tracked_files": 757,
+    "text_files": 754,
+    "original_text_line_denominator": 579961,
+    "verified_new_v2_reviewed_lines": 2068,
+    "remaining_v2_lines": 577893,
+    "status": "IN_PROGRESS_R2_007_SOURCE_BOUND",
+    "next_file_index_1_based": 30,
+    "next_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+    "next_source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+    "next_line_1_based": 381,
+    "next_action": "Resume original matrix #30 line381; never skip to next file.",
+    "independently_reviewed_v2_ranges": [
+      {
+        "path": ".github/workflows/approval-continuity.yml",
+        "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "first_line": 1,
+        "last_line": 41,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-beta-ci.yml",
+        "source_blob_sha": "d6de476890f09c8b8814b0feb4d4f750117fd8cb",
+        "first_line": 1,
+        "last_line": 107,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-regression.yml",
+        "source_blob_sha": "a8cabb7cd9f81149aa8d363c20c9ebeda6695260",
+        "first_line": 1,
+        "last_line": 112,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      },
+      {
+        "path": ".github/workflows/coffee-audit-python.yml",
+        "source_blob_sha": "e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77",
+        "first_line": 1,
+        "last_line": 52,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-001.json"
+      },
+      {
+        "path": ".github/workflows/coffee-completeness.yml",
+        "source_blob_sha": "686cb3f64e6880872ad2e31ae5dd452280cb73d3",
+        "first_line": 1,
+        "last_line": 41,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/coffee-frozen-corpus.yml",
+        "source_blob_sha": "01bc0f34b4a311720f93c6c06a942d6669f93b0f",
+        "first_line": 1,
+        "last_line": 112,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/database-recovery-drill.yml",
+        "source_blob_sha": "854177acaa53f2098e94a1532393ce75b22f6b22",
+        "first_line": 1,
+        "last_line": 36,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/dic-chat-approved-release.yml",
+        "source_blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+        "first_line": 1,
+        "last_line": 39,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/dic-single-use-release.yml",
+        "source_blob_sha": "e5079152b5d912d0fbeee8a63c7d22d2794402ef",
+        "first_line": 1,
+        "last_line": 53,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/isolated-sql-regression.yml",
+        "source_blob_sha": "c80828ebe47c18f236f4edebb1edbc27a1deafc4",
+        "first_line": 1,
+        "last_line": 53,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/issue-5-10-hosted-smoke.yml",
+        "source_blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+        "first_line": 1,
+        "last_line": 28,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/issue161-full-repository-scan.yml",
+        "source_blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+        "first_line": 1,
+        "last_line": 81,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-002.json"
+      },
+      {
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "source_blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "first_line": 1,
+        "last_line": 23,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-003.json"
+      },
+      {
+        "path": ".github/workflows/nightly-backup.yml",
+        "source_blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "first_line": 1,
+        "last_line": 56,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-003.json"
+      },
+      {
+        "path": ".github/workflows/roaster-source-probe.yml",
+        "source_blob_sha": "30561a9361c4e6c47e6ddca2adb0ff6eb6750cfa",
+        "first_line": 1,
+        "last_line": 49,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-003.json"
+      },
+      {
+        "path": ".github/workflows/security-inspection.yml",
+        "source_blob_sha": "0eb072639634963edb4374b4578630ff7f3d96d3",
+        "first_line": 1,
+        "last_line": 37,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-003.json"
+      },
+      {
+        "path": ".github/workflows/visual-review.yml",
+        "source_blob_sha": "11f7d6ad56bfe5228a4e5357aa9061d9b1f00b23",
+        "first_line": 1,
+        "last_line": 91,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-003.json"
+      },
+      {
+        "path": ".github/workflows/weekly-full-regression.yml",
+        "source_blob_sha": "1fae89f9b7f514986a65b622506a11f78d623b36",
+        "first_line": 1,
+        "last_line": 86,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-003.json"
+      },
+      {
+        "path": ".gitignore",
+        "source_blob_sha": "cc33dc08440db607da17b3af8f82295036561bec",
+        "first_line": 1,
+        "last_line": 29,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-004.json"
+      },
+      {
+        "path": "AGENTS.md",
+        "source_blob_sha": "a0f7a7aeee70f5ff8810e63b4a2940497223510f",
+        "first_line": 1,
+        "last_line": 47,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-004.json"
+      },
+      {
+        "path": "README.md",
+        "source_blob_sha": "98f3264dfd13168838b921164396ba9e30e5f224",
+        "first_line": 1,
+        "last_line": 38,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-004.json"
+      },
+      {
+        "path": "build_cloud.mjs",
+        "source_blob_sha": "4352b50ae7bbe5b41904fb3c317978220c82dfe1",
+        "first_line": 1,
+        "last_line": 37,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-004.json"
+      },
+      {
+        "path": "docs/ACTIVE_DECISION_AND_REQUIREMENT_RECONCILIATION_2026-10-19.md",
+        "source_blob_sha": "1c78797e184c6cb8122bc45b59398c7530333496",
+        "first_line": 1,
+        "last_line": 53,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md",
+        "source_blob_sha": "7a2be3d0ee3102e62ca5679bfe91b41697089302",
+        "first_line": 1,
+        "last_line": 135,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md",
+        "source_blob_sha": "98f07574b096d450604be2c5d0a86f2083711af8",
+        "first_line": 1,
+        "last_line": 69,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ADMIN_FOUNDATION_CHECKPOINT_2026-10-14.md",
+        "source_blob_sha": "2c9c4f8d1392e9a6a6145a3c2b69f4b5475cad89",
+        "first_line": 1,
+        "last_line": 31,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md",
+        "source_blob_sha": "538ca6adec844dd02fa50d9964e5cc628564bec9",
+        "first_line": 1,
+        "last_line": 55,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
+      },
+      {
+        "path": "docs/ADMIN_PORTAL_RELEASE_CANDIDATE_2026-10-21.md",
+        "source_blob_sha": "0f30ad26b277b2ed675d5b91e487a3483684c9f1",
+        "first_line": 1,
+        "last_line": 26,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
+      },
+      {
+        "path": "docs/AGTRON_AND_PERC_NARRATIVE_EXTRACTION_2026-10-17.md",
+        "source_blob_sha": "4a38c7f7c78bf3ceabc539bf922db054c6eeadab",
+        "first_line": 1,
+        "last_line": 71,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
+      },
+      {
+        "path": "docs/APPROVAL_COVERAGE_MATRIX.json",
+        "source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+        "first_line": 1,
+        "last_line": 60,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-006.json"
+      },
+      {
+        "path": "docs/APPROVAL_COVERAGE_MATRIX.json",
+        "source_blob_sha": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+        "first_line": 61,
+        "last_line": 380,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-007.json"
+      }
+    ],
+    "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
+    "coverage_ledger": "docs/audits/issue267-v2-frozen-coverage-ledger.json"
+  },
+  "current_code_v2": {
+    "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
+    "inventory_status": "PINNED_436_FILES_306_LINE_COUNT_VERIFIED_130_PENDING",
+    "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "reviewed_current_source_lines": 2876,
+    "reviewed_ranges": [
+      {
+        "path": ".github/workflows/approval-continuity.yml",
+        "source_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+        "first_line": 1,
+        "last_line": 41,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-beta-ci.yml",
+        "source_blob_sha": "dd324212bfbcb14fc24b057eb376f1b325471322",
+        "first_line": 1,
+        "last_line": 108,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      },
+      {
+        "path": ".github/workflows/cloud-regression.yml",
+        "source_blob_sha": "7dd903e5006f8adc6bdf0bd63b75d7fd3c72b25e",
+        "first_line": 1,
+        "last_line": 113,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      },
+      {
+        "path": ".github/workflows/coffee-audit-python.yml",
+        "source_blob_sha": "e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77",
+        "first_line": 1,
+        "last_line": 52,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-001.json"
+      },
+      {
+        "path": ".github/workflows/coffee-completeness.yml",
+        "source_blob_sha": "686cb3f64e6880872ad2e31ae5dd452280cb73d3",
+        "first_line": 1,
+        "last_line": 41,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/coffee-frozen-corpus.yml",
+        "source_blob_sha": "01bc0f34b4a311720f93c6c06a942d6669f93b0f",
+        "first_line": 1,
+        "last_line": 112,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/database-recovery-drill.yml",
+        "source_blob_sha": "854177acaa53f2098e94a1532393ce75b22f6b22",
+        "first_line": 1,
+        "last_line": 36,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/dic-chat-approved-release.yml",
+        "source_blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+        "first_line": 1,
+        "last_line": 39,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/dic-single-use-release.yml",
+        "source_blob_sha": "e5079152b5d912d0fbeee8a63c7d22d2794402ef",
+        "first_line": 1,
+        "last_line": 53,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/isolated-sql-regression.yml",
+        "source_blob_sha": "a3d8225a912a1fc90071247c182516e727dde89e",
+        "first_line": 1,
+        "last_line": 54,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/issue-5-10-hosted-smoke.yml",
+        "source_blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+        "first_line": 1,
+        "last_line": 28,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/issue161-full-repository-scan.yml",
+        "source_blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+        "first_line": 1,
+        "last_line": 81,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-002.json"
+      },
+      {
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "source_blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "first_line": 1,
+        "last_line": 68,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-003.json"
+      },
+      {
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "source_blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "first_line": 1,
+        "last_line": 40,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-003.json"
+      },
+      {
+        "path": ".github/workflows/issue33-hosted-auth-e2e.yml",
+        "source_blob_sha": "9bf42b40a7bea17234dee6e8bf4d847053d79cd7",
+        "first_line": 1,
+        "last_line": 29,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-003.json"
+      },
+      {
+        "path": ".github/workflows/issue33-source-bundle.yml",
+        "source_blob_sha": "a24f076ef3f47289a0dd14708e0481b8039ec2ef",
+        "first_line": 1,
+        "last_line": 60,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-003.json"
+      },
+      {
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "source_blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "first_line": 1,
+        "last_line": 23,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-003.json"
+      },
+      {
+        "path": ".github/workflows/nightly-backup.yml",
+        "source_blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "first_line": 1,
+        "last_line": 56,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-003.json"
+      },
+      {
+        "path": ".github/workflows/roaster-source-probe.yml",
+        "source_blob_sha": "663b8c01f7d164cd732ea5fb047a6c70230dedfe",
+        "first_line": 1,
+        "last_line": 146,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": ".github/workflows/security-inspection.yml",
+        "source_blob_sha": "0eb072639634963edb4374b4578630ff7f3d96d3",
+        "first_line": 1,
+        "last_line": 37,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": ".github/workflows/visual-review.yml",
+        "source_blob_sha": "2b266cfe079d7d93815446cf49c099e26d7e7cef",
+        "first_line": 1,
+        "last_line": 98,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": ".github/workflows/weekly-full-regression.yml",
+        "source_blob_sha": "1fae89f9b7f514986a65b622506a11f78d623b36",
+        "first_line": 1,
+        "last_line": 86,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": "build_cloud.mjs",
+        "source_blob_sha": "e7b64951452601c25cdc2a5e1069d4816e1421c2",
+        "first_line": 1,
+        "last_line": 40,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": "eslint.config.mjs",
+        "source_blob_sha": "5687bf820206a9a682e11544afd372a4a6c11b1f",
+        "first_line": 1,
+        "last_line": 34,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": "netlify.toml",
+        "source_blob_sha": "a8bb6cd41d2e2c939da8d369ee510eb9f2b4cc56",
+        "first_line": 1,
+        "last_line": 19,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": "netlify/functions/coffee-url-preview.mjs",
+        "source_blob_sha": "b982650d78920f77342f5ac78dce91ca394094cc",
+        "first_line": 1,
+        "last_line": 192,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "package.json",
+        "source_blob_sha": "63518161d81489993cceffad18f55ce3a47f1958",
+        "first_line": 1,
+        "last_line": 15,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "scripts/audit/approval-coverage.mjs",
+        "source_blob_sha": "788e174d264a040b5fdb9bbe9ca81cccb952022c",
+        "first_line": 1,
+        "last_line": 98,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "scripts/audit/ci-scope.mjs",
+        "source_blob_sha": "591a988e13b2bc2fd06760e13cb98a98da2c69c5",
+        "first_line": 1,
+        "last_line": 27,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
+        "source_blob_sha": "8c5347d3e4443628b2245b722da0434442a5bd57",
+        "first_line": 1,
+        "last_line": 145,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-006.json"
+      },
+      {
+        "path": "scripts/audit/coffee-completeness-live-probe.mjs",
+        "source_blob_sha": "8f5d708497050f70ad92b6df4c9de07fe83f0794",
+        "first_line": 1,
+        "last_line": 329,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-006.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-build.py",
+        "source_blob_sha": "84b7e9b137db74d70f7e471304ef86638fc1882c",
+        "first_line": 1,
+        "last_line": 237,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-007.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-capture.py",
+        "source_blob_sha": "77710632ac842004fbd979208165cacdab295f5c",
+        "first_line": 1,
+        "last_line": 120,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-007.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-compare.mjs",
+        "source_blob_sha": "133d6dbab5edde53180d86d04849bda8b2afb9ea",
+        "first_line": 1,
+        "last_line": 68,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-007.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-enrich.py",
+        "source_blob_sha": "3b01264afa39a679e873571657eed9d9de2f59c9",
+        "first_line": 1,
+        "last_line": 86,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-007.json"
+      },
+      {
+        "path": "scripts/audit/coffee-corpus-freeze.py",
+        "source_blob_sha": "989928dc2b2881b01c780e0940f68ae677782e0d",
+        "first_line": 1,
+        "last_line": 65,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-007.json"
+      }
+    ],
+    "next_file": "scripts/audit/coffee-corpus-image-audit.py",
+    "next_line_1_based": 1,
+    "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
+    "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+    "eligible_files": 436,
+    "line_count_verified_files": 306,
+    "line_count_pending_files": 130,
+    "known_line_count_subtotal": 36532,
+    "full_eligible_line_denominator": null,
+    "coverage_ledger": "docs/audits/issue267-v2-current-code-ledger.json",
+    "unreviewed_source_drift_as_of_development_sha": "f54d76798a62c9be962c79d6b15568d375cbb006",
+    "unreviewed_current_delta_paths": [
+      ".github/workflows/dic-ready-batch-certification.yml",
+      "scripts/audit/issue33-original603-focused-source-review.mjs",
+      "site/lib/engine.js",
+      "src/server/coffee-identity-evidence.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-semantic-specs.mjs",
+      "tests/approval-coverage.test.mjs",
+      "tests/coffee-issue33-educational-origin-boundary.test.mjs",
+      "tests/coffee-issue33-origin-method-suffix.test.mjs",
+      "tests/coffee-issue33-producer-credit-locality.test.mjs",
+      "tests/coffee-issue33-selected-region-blend.test.mjs",
+      "tests/coffee-issue33-selected-station-locality.test.mjs",
+      "tests/coffee-issue33-stale-seo-station-roles.test.mjs",
+      "tests/grind-cross-version-range.test.mjs",
+      "tests/recommendation-research-guardrails.test.mjs"
+    ],
+    "reviewed_post_snapshot_delta_receipts": [
+      {
+        "receipt": "docs/audits/issue267-v2-current-delta-batches/D2-001.json",
+        "path": ".github/workflows/roaster-source-probe.yml",
+        "live_blob_sha": "89801cc7a76c9d8ad3d8628bb234213dc13f8a0c",
+        "changed_line_numbers": [
+          122,
+          137
+        ],
+        "separate_from_pinned_snapshot": true
+      },
+      {
+        "receipt": "docs/audits/issue267-v2-current-delta-batches/D2-002.json",
+        "paths": [
+          "scripts/audit/verify-commit-checkpoint.mjs",
+          "tests/commit-continuity.test.mjs"
+        ],
+        "separate_from_pinned_snapshot": true
+      }
+    ]
+  },
+  "legacy_v1_immutable_reference": {
+    "integrated_historical_semantic_lines_reported": 71120,
+    "integrated_batches_reported": "B001-B030",
+    "old_review_and_ledger": "docs/audits/issue267-semantic-coverage-ledger.json",
+    "old_batch_register": "docs/audits/issue267-semantic-batches.json",
+    "additional_pending_legacy_PRs": [
+      295,
+      296,
+      327
+    ],
+    "notes": "Legacy work remains source-linked historical evidence; none counts toward the fresh V2 re-review. Exact current legacy PR merges must be recovered and reconciled independently before acting."
+  },
+  "active_task_id": "6ae78ce168b08191bb8696c22cd038e7",
+  "separate_issue_owners": [
+    33,
+    96,
+    28,
+    134
+  ],
+  "state": "V2_ACTIVE_SEPARATE_FROZEN_AND_CURRENT_SEVENTH_BATCHES_RECORDED_CI_GUARD_FIX_PENDING_CI",
+  "app_code_changes_in_this_record": 0,
+  "production_changes": 0,
+  "completed_tests_in_this_record": 0,
+  "last_verified_audit_batch_utc_date": "2026-11-02",
+  "ci_guard_changes_in_this_record": 1,
+  "tests_added_in_this_record": 1
+}

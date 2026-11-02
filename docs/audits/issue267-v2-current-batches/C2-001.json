@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "batch_id": "C2-001",
+  "issue": 267,
+  "track": "V2_CURRENT_EXECUTABLE_SEMANTIC_REVIEW",
+  "review_date_utc": "2026-11-01",
+  "reviewer": "ChatGPT AI assistant (not a human or independent auditor)",
+  "method": "Direct numbered line reading of pinned current development Git blobs; semantic descriptions partition each file into complete contiguous spans. Counts do not borrow V1 or frozen V2 credit.",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+  "reviewed_files": [
+    {
+      "path": ".github/workflows/approval-continuity.yml",
+      "git_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "first_line": 1,
+      "last_line": 41,
+      "line_count": 41,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 1,
+          "interpretation": "Workflow name only"
+        },
+        {
+          "first_line": 2,
+          "last_line": 4,
+          "interpretation": "Scope comments: every application push, no provider mutation"
+        },
+        {
+          "first_line": 5,
+          "last_line": 12,
+          "interpretation": "Push/PR/dispatch event selectors; app branch only"
+        },
+        {
+          "first_line": 13,
+          "last_line": 17,
+          "interpretation": "Read-only token and per-ref cancellation concurrency"
+        },
+        {
+          "first_line": 18,
+          "last_line": 29,
+          "interpretation": "Ubuntu runner, short timeout, credential-free full-history checkout and Node22"
+        },
+        {
+          "first_line": 30,
+          "last_line": 36,
+          "interpretation": "Owner approval, release queue schema/intake/status checks; no publication"
+        },
+        {
+          "first_line": 37,
+          "last_line": 41,
+          "interpretation": "Explicit before/head Git SHAs for bounded per-commit continuity audit"
+        }
+      ],
+      "findings": "Exact current counterpart unchanged; no verified actionable defect."
+    },
+    {
+      "path": ".github/workflows/cloud-beta-ci.yml",
+      "git_blob_sha": "dd324212bfbcb14fc24b057eb376f1b325471322",
+      "first_line": 1,
+      "last_line": 108,
+      "line_count": 108,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 4,
+          "interpretation": "Name and no-secret CI intent"
+        },
+        {
+          "first_line": 5,
+          "last_line": 29,
+          "interpretation": "Push/PR/dispatch selectors; scripts/pwa/** explicitly included versus frozen snapshot"
+        },
+        {
+          "first_line": 30,
+          "last_line": 35,
+          "interpretation": "Read-only token and cancel-in-progress concurrency"
+        },
+        {
+          "first_line": 36,
+          "last_line": 45,
+          "interpretation": "Runner, timeout, safe checkout and full history"
+        },
+        {
+          "first_line": 46,
+          "last_line": 55,
+          "interpretation": "Fail-closed docs-only classifier and explanation"
+        },
+        {
+          "first_line": 56,
+          "last_line": 69,
+          "interpretation": "Node18 Netlify guard tests and Node22 app setup"
+        },
+        {
+          "first_line": 70,
+          "last_line": 84,
+          "interpretation": "Locked install, full tests, lint and fake-coordinate build"
+        },
+        {
+          "first_line": 85,
+          "last_line": 100,
+          "interpretation": "Positive build outputs and private-tree exclusions"
+        },
+        {
+          "first_line": 101,
+          "last_line": 108,
+          "interpretation": "Always-run timing receipt artifact"
+        }
+      ],
+      "findings": "Verified current scripts/pwa path coverage; no present gap proven."
+    },
+    {
+      "path": ".github/workflows/cloud-regression.yml",
+      "git_blob_sha": "7dd903e5006f8adc6bdf0bd63b75d7fd3c72b25e",
+      "first_line": 1,
+      "last_line": 113,
+      "line_count": 113,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 20,
+          "interpretation": "Push/PR/dispatch selectors; scripts/pwa/** now included; old work branch still exists"
+        },
+        {
+          "first_line": 21,
+          "last_line": 24,
+          "interpretation": "Read-only permissions and blank boundary"
+        },
+        {
+          "first_line": 25,
+          "last_line": 33,
+          "interpretation": "Cloud runner, timeout and safe checkout"
+        },
+        {
+          "first_line": 34,
+          "last_line": 43,
+          "interpretation": "Fail-closed docs-only classification and explanation"
+        },
+        {
+          "first_line": 44,
+          "last_line": 63,
+          "interpretation": "Node22 install, cloud test, syntax checks, synthetic build"
+        },
+        {
+          "first_line": 64,
+          "last_line": 71,
+          "interpretation": "Always-run cloud timing artifact"
+        },
+        {
+          "first_line": 72,
+          "last_line": 80,
+          "interpretation": "Mobile runner, timeout and safe checkout"
+        },
+        {
+          "first_line": 81,
+          "last_line": 90,
+          "interpretation": "Docs-only classifier and no-op explanation"
+        },
+        {
+          "first_line": 91,
+          "last_line": 105,
+          "interpretation": "Pinned Python and Playwright, synthetic 390px browser/admin tests"
+        },
+        {
+          "first_line": 106,
+          "last_line": 113,
+          "interpretation": "Always-run synthetic screenshot artifact, not owner-device certification"
+        }
+      ],
+      "findings": "Old work/setup-feed-history-recovery-20261014 branch confirmed still exists; no safe deletion claim."
+    },
+    {
+      "path": ".github/workflows/coffee-audit-python.yml",
+      "git_blob_sha": "e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77",
+      "first_line": 1,
+      "last_line": 52,
+      "line_count": 52,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 4,
+          "interpretation": "Workflow title and comments describing secret-free local audit"
+        },
+        {
+          "first_line": 5,
+          "last_line": 22,
+          "interpretation": "Scoped push/PR path filters and manual dispatch"
+        },
+        {
+          "first_line": 23,
+          "last_line": 29,
+          "interpretation": "Read-only permissions and cancel-on-supersession concurrency"
+        },
+        {
+          "first_line": 30,
+          "last_line": 38,
+          "interpretation": "Ubuntu Python job, timeout and credential-free checkout"
+        },
+        {
+          "first_line": 39,
+          "last_line": 48,
+          "interpretation": "Ubuntu apt prerequisites, OCR/Pillow/font versions recorded"
+        },
+        {
+          "first_line": 49,
+          "last_line": 52,
+          "interpretation": "Python report/retention integrity and local OCR regression test invocations"
+        }
+      ],
+      "findings": "Current identical Git blob; no observed test failure."
+    }
+  ],
+  "batch_lines": 314,
+  "previous_current_v2_lines": 0,
+  "total_current_v2_lines": 314,
+  "next_file": ".github/workflows/coffee-completeness.yml",
+  "next_line_1_based": 1,
+  "findings": [
+    {
+      "id": "C2-F001",
+      "classification": "VERIFIED_EXISTING_CORRECTION_NO_NEW_FIX",
+      "evidence": "Current cloud-beta-ci.yml and cloud-regression.yml include scripts/pwa/**; frozen versions did not.",
+      "disposition": "Retain; no edit."
+    },
+    {
+      "id": "C2-F002",
+      "classification": "UNPROVEN_DEAD_BRANCH_NO_REMOVAL",
+      "evidence": "cloud-regression.yml line 7 refers to work/setup-feed-history-recovery-20261014, and GitHub branch lookup returned an existing ref at 7a57a18043e5bfa63e25f0f7be8069aaac8d3dc9.",
+      "disposition": "Do not delete without proving unneeded and checking owner/CI dependencies."
+    },
+    {
+      "id": "C2-F003",
+      "classification": "TEST_SCOPE_LIMITATION",
+      "evidence": "cloud-regression.yml lines 91-105 run synthetic Chromium 390px QA, not physical owner-device acceptance.",
+      "disposition": "Keep scope explicit; no test labeled unperformed PASS."
+    }
+  ],
+  "source_drift_policy": "Future branch SHA changes are compared against this pinned snapshot. Audit changed executable lines separately; documentation-only commits do not inflate code-line denominator.",
+  "code_changes": 0,
+  "production_changes": 0
+}

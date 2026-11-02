@@ -1,3 +1,5 @@
+**SUPERSEDED CONTINUATION INSTRUCTION (Nov 1 V2):** Do NOT resume from prior B031+ or the next unreviewed original range. The owner explicitly ordered a complete fresh audit starting at original frozen inventory FILE #1 LINE 1, with new V2 line counters initially 0/579,961, AND complete current-code line-1 review/improvement. Read `docs/audits/issue267-review-restart-v2-20261101.json`, `docs/workstreams/issue-267.md` and the current task registry before proceeding. Keep all pre-Nov1 instructions below only as historical scope/evidence, not the restart cursor; preserve old V1 receipts untouched.
+
 # New chat prompt — The Dial In Collective historical source audit #267
 
 Continue The Dial In Collective [GitHub Issue #267](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267) autonomously as the lead historical source auditor and senior security/code reviewer.

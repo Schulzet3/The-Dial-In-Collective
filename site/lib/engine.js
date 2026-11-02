@@ -108,7 +108,12 @@ function hardwareMatch(sh,v) {
 }
 export function grindStep(v) {return Math.max(.1,round(Math.abs(v.grinderMax-v.grinderMin)*CONFIG.grindRangeFraction));}
 export function translateGrind(sh,v) {
- const old=sh.snapshot;if(!old||!finite(sh.grindSetting)||!(old.grinderMax>old.grinderMin))return null;
+ const old=sh.snapshot;
+ // Legacy snapshots may omit one end of the recorded espresso range; do not
+ // coerce null into a numeric zero or transfer across invalid calibrations.
+ if(!old||!finite(sh.grindSetting)||!finite(old.grinderMin)||
+    !finite(old.grinderMax)||old.grinderMax<=old.grinderMin||
+    !finite(v.grinderMin)||!finite(v.grinderMax)||v.grinderMax<=v.grinderMin)return null;
  const pos=clamp((sh.grindSetting-old.grinderMin)/(old.grinderMax-old.grinderMin),0,1);
  return round(v.grinderMin+pos*(v.grinderMax-v.grinderMin));
 }
@@ -119,7 +124,12 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
  if(same.length)return {value:round(quantile(same.map(sh=>sh.grindSetting),.5)),source:'Reference from your other basket or setup',proven:false};
  const cross=qual.filter(sh=>sh.coffeeId===c.id&&sh.setupVersionId!==v.id&&(!familyId||sh.familyId===familyId));
- if(cross.length)return {value:round(quantile(cross.map(sh=>sh.grindSetting),.5)),source:'Starting reference from matching grinder and burrs',proven:false};
+ // A matching grinder/burr set does not mean the stored dial number is on
+ // today's calibration scale. Use only snapshots with two valid bounds and
+ // translate their relative positions; still an unproven starting reference.
+ const translatedCross=cross.map(sh=>translateGrind(sh,v)).filter(finite);
+ if(translatedCross.length)return {value:round(quantile(translatedCross,.5)),
+  source:'Starting reference from matching grinder and burrs (relative range estimate)',proven:false};
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  // Old calibration rows may legitimately seed an estimated translation, but
  // legacy rows without an equipment snapshot must not yield null guidance.
@@ -173,14 +183,21 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
 }
 export function learnSensitivity(shots) {
  const groups=new Map();
- for(const s of shots){if(!finite(s.grindSetting)||!finite(s.timeS)||s.hidden||s.feedMode==null)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
+ for(const s of shots){
+  // Legacy and offline entries can be partial. Only complete measured inputs
+  // with ordered timestamps can calibrate a grind-to-time response.
+  if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
+     !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
+     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
  for(const group of groups.values()){
   group.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
   for(let i=1;i<group.length;i++){
    const a=group[i-1],b=group[i],dg=b.grindSetting-a.grindSetting;
    if(Math.abs(dg)<.09||Math.abs(a.doseG-b.doseG)>.6||Math.abs(a.yieldG-b.yieldG)>3)continue;
-   if(a.tempC!=null&&b.tempC!=null&&Math.abs(a.tempC-b.tempC)>1)continue;
+   // A missing temperature on only one side is not a controlled comparison.
+   if((a.tempC==null)!==(b.tempC==null))continue;
+   if(a.tempC!=null&&(!finite(a.tempC)||!finite(b.tempC)||Math.abs(a.tempC-b.tempC)>1))continue;
    const slope=(b.timeS-a.timeS)/dg;if(slope<-.5&&slope>-1000)slopes.push(slope);
   }
  }
@@ -337,17 +354,27 @@ export function recommendation(s,coffeeId,options={}) {
  if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
-  const a=last.suggestion||nextAdvice(s,last,rec);
-  if(a.next){
+  const cached=last.suggestion;
+  // Legacy evenness feedback stored unchanged controls as 'next'; re-evaluate
+  // without mutating the original shot or its stored suggestion.
+  const oldNoOp=cached?.next&&cached.next.grindSetting===last.grindSetting&&
+   cached.next.yieldCenter===last.yieldG&&
+   (cached.next.tempC==null||cached.next.tempC===last.tempC);
+  const a=oldNoOp?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
+  if(a.next||a.kind==='diagnostic'){
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.
    // The owner-Locked Dose caption remains unchanged; the initial starting
    // recipe above still uses basket dose, while this adjustment uses actuals.
-   rec.reasons=[];rec.source='Adjustment from your latest taste rating';
-   rec.doseG=a.next.doseG??last.doseG;
-   rec.tempC=a.next.tempC??last.tempC??null;
-   rec.grind={value:a.next.grindSetting??last.grindSetting,source:'Next setting to try',proven:false};
-   const nextYield=a.next.yieldCenter??last.yieldG;
+   const diagnostic=a.kind==='diagnostic';
+   rec.reasons=diagnostic?['Review distribution and tamp consistency before changing a setting.']:[];
+   rec.source=diagnostic?'Your last measured shot (preparation check)':'Adjustment from your latest taste rating';
+   rec.diagnosticOnly=diagnostic;
+   rec.doseG=a.next?.doseG??last.doseG;
+   rec.tempC=a.next?.tempC??last.tempC??null;
+   rec.grind={value:a.next?.grindSetting??last.grindSetting,
+    source:diagnostic?'Last measured grind; no change suggested':'Next setting to try',proven:false};
+   const nextYield=a.next?.yieldCenter??last.yieldG;
    rec.yield={low:Math.max(5,round(nextYield-1)),high:round(nextYield+1),center:round(nextYield)};
    rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};
   }
@@ -355,7 +382,7 @@ export function recommendation(s,coffeeId,options={}) {
  // Every recommendation is a selectable tenth inside this setup's actual
  // espresso range. The guard also protects older measurements and fallbacks.
  if(rec.grind&&finite(rec.grind.value))rec.grind.value=clamp(round(rec.grind.value),v.grinderMin,v.grinderMax);
- if(!rec.established&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
+ if(!rec.established&&!rec.diagnosticOnly&&!rec.grind?.proven&&finite(rec.grind?.value)&&rec.source!=='Adjustment from your latest taste rating'){
   const step=grindStep(v);
   // A calibrated starting search band is NOT a statistical confidence interval.
   // A pure espresso-scale heuristic is intentionally less precise than personal evidence.
@@ -379,10 +406,16 @@ function nextAdviceRaw(s,shot,rec) {
  if(isDialed(t))return {title:'Dialed in. Nicely done.',text:'Balanced, sweet and clean for your taste. This shot adds to your successful recipe window.',next:null};
  const step=grindStep(v),fast=shot.timeS<rec.time.low,slow=shot.timeS>rec.time.high;
  const direction=t.extraction<3?'finer':t.extraction>3?'coarser':null;
- if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG}};
+ if(t.astringency>=3 || t.clarity<=2) return {title:'Check evenness first',text:'Try distributing the grounds more evenly while keeping tamp and recipe settings unchanged. Dryness or muddled flavors can have more than one cause.',kind:'diagnostic',next:null};
  if((direction==='finer'&&fast)||(direction==='coarser'&&slow)){
-  const pairs=s.shots.filter(x=>x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
-  const exact=pairs.filter(x=>x.coffeeId===shot.coffeeId),sens=learnSensitivity(exact)||learnSensitivity(pairs);
+  // The response of another bean is not a calibrated response for this coffee.
+  // Roast/processing/PSD and puck permeability can differ even on one grinder.
+  // Use the existing bounded fixed step when this exact coffee has too few
+  // controlled same-calibration, same-style, same-feed, same-basket pairs.
+  const exact=s.shots.filter(x=>x.coffeeId===shot.coffeeId&&
+   x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&
+   x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
+  const sens=learnSensitivity(exact);
   let move=step;if(sens){move=Math.max(.1,round(Math.min(step*4,Math.abs((rec.time.center-shot.timeS)/sens.secondsPerUnit))));}
   const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
   if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};

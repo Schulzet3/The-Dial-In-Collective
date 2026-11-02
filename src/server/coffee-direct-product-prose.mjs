@@ -12,6 +12,21 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
+// Current selected coffee names can be longer than the grammatical subject
+// printed in their own description: e.g. "TRANQUILO, Decaffeinated, 12 oz"
+// prints "Tranquilo is decaffeinated using the natural Sugar Cane Process".
+// Require an exact name-prefix subject, direct current-product prose, and an
+// explicit decaffeination verb. Never infer decaf from a regional or roaster
+// sentence, generic product titles, site-wide education or tasting notes.
+const SELECTED_NAME_DECAF_SENTENCE=/^([\p{L}\p{M}\d][\p{L}\p{M}\d'’ -]{2,100}?)\s+(?:is|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:natural\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl[\s-]?acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
+function currentNamedDecafMethod(name,line){
+ const subject=String(name||'').split(/[,;|]/u)[0].trim();
+ if(subject.length<4||subject.length>90||!decafOnlyCoffee(name))return false;
+ return String(line).split(/(?<=[.!?])\s+/u).slice(0,8).some(sentence=>{
+  const claim=sentence.trim().match(SELECTED_NAME_DECAF_SENTENCE);
+  return Boolean(claim&&fold(claim[1])===fold(subject));
+ });
+}
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
@@ -29,7 +44,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(!headings.length||headings.some(heading=>heading!==selected))return {};
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
-  !/\b(?:related products?|you may also like|recommended|more coffees?)\b/i.test(x.section));
+  !/\b(?:related products?|you may also like|recommended|more coffees?|other coffees?)\b/i.test(x.section));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
@@ -81,7 +96,8 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
-  if(decafOnlyCoffee(name)&&line.length<=360&&CURRENT_DECAF_METHOD.test(line)&&
+  if(decafOnlyCoffee(name)&&line.length<=360&&
+     (CURRENT_DECAF_METHOD.test(line)||currentNamedDecafMethod(name,line))&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
@@ -94,6 +110,14 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // A full current selected coffee name directly credited as "is roasted"
   // can identify a standard tier. Reject another coffee, older harvest,
   // incidental brewing prose, and relative language such as "lighter".
+  // Current selected WHOLE blend roast, not City + Full City components.
+  // Require exact selected H1 above, direct product paragraph, one roast label.
+  if(b.tag==='p'&&/\bblend\b/iu.test(name)&&
+     /^(?:A|An|Our|This)\s+[^.!?]{0,175}\bblend\.\s+Full\s+City\s+Roast\b/iu.test(line)&&
+     !/\b(?:formerly|previous|previously|prior|historically|typically|generally|another\s+coffee|other\s+coffees?|components?|some\s+beans|roast\s+options?|roast\s+range)\b/iu.test(line)){
+   const labels=[...line.matchAll(/\b(?:full\s+city|ultra\s+light|very\s+light|medium(?:[ -](?:light|dark))?|light|dark|city|french|italian)\s+roast\b/giu)];
+   if(labels.length===1&&normalizeRoastLabel(labels[0][0])==='Medium-Dark')roasts.add('Medium-Dark');
+  }
   const namedRoast=line.match(/\b(.{3,200}?)\s+is\s+roasted\s+(light|medium|dark)\b/iu);
   if(namedRoast&&fold(namedRoast[1]).includes(fold(name))&&
      !/\b(?:formerly|previously|previous|prior|former|last (?:season|harvest|year)|historically|typically|generally|another coffee|other coffee)\b/i.test(line))
@@ -135,4 +159,79 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(literals.size===1&&!anotherExplicitList)out.explicit_tastes_like=[...literals][0];
  if(decafEvidence.size&&!decafEvidenceOverflow)out.decaffeination_method_evidence=[...decafEvidence];
  return out;
+}
+
+
+// The current selected coffee's direct named decaffeination sentence must not
+// be lost when a stricter identity/geography cohort filter drops prose about
+// where decaffeination happened. Only the matched current coffee as grammatical
+// subject qualifies from the already-bounded product H1/description. Never
+// restore generic "our coffee" claims, unrelated items, historic lots, SEO,
+// cultivation origins or green-bean processing from the broader product scope.
+export function selectedNamedCurrentDecafEvidence(productHtml,{name,clean}={}){
+ if(!decafOnlyCoffee(name)||typeof clean!=='function')return [];
+ const direct=selectedDirectProductCredits(productHtml,{name,clean,optionHtml:productHtml});
+ return (direct.decaffeination_method_evidence||[])
+  .filter(statement=>currentNamedDecafMethod(name,statement));
+}
+
+// Exact selected decaf product specs may independently corroborate its named
+// current decaffeination sentence, even if generic green-processing layout
+// comparisons disagree. Unknown/contrary method captions remain blockers.
+export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}={}){
+ const empty={candidates:[],complete:false};
+ if(!decafOnlyCoffee(name)||typeof clean!=='function'||
+    typeof productHtml!=='string'||productHtml.length>2_000_000)return empty;
+ const blocks=productCoffeeProse(productHtml,clean),headings=blocks.filter(b=>b.tag==='h1').map(b=>fold(b.text));
+ const selected=fold(name);
+ // Some product descriptions use H1 for editorial subsections. Allow only
+ // these generic selected-product headings after the exact product H1.
+ // Any competing product H1, missing selected H1 or generic shop H1 fails closed.
+ const editorial=/^(?:tasting notes?|origin notes?|why you ll love this coffee|frequently asked questions)$/u;
+ if(!headings.length||headings[0]!==selected||
+    headings.some((heading,i)=>i>0&&heading!==selected&&!editorial.test(heading))||
+    /^(?:all|shop|catalog|collection)\s+(?:decaf|coffee)/iu.test(String(name)))return empty;
+ // FAQ and educational examples are not actual selected-product specs.
+ const faqStart=blocks.find(b=>b.tag==='h1'&&fold(b.text)==='frequently asked questions')?.start??Infinity;
+ const seen=new Map();
+ for(const block of blocks){
+  if(block.start>=faqStart||block.educational||!['li','p','div','span'].includes(block.tag)||
+     block.text.length>300||
+     /\b(?:related products?|you may also like|recommended|more coffees?|education|educational|decaf guide|decaf faq)\b/i.test(block.section))continue;
+  // A selected product's printed spec card may use BR-separated labels in
+  // a single paragraph. Inspect individual explicit label lines, never
+  // freeform descriptions, hidden markup or a generic title/SEO match.
+  const captions=[{text:block.text,html:block.html}];
+  if(/<br\b/iu.test(block.html)){
+   const parts=block.html.split(/<br\b[^>]{0,150}>/giu);
+   captions.push(...parts.map((part,i)=>({text:clean(part,300),html:part,
+    splitStrong:i>0&&/<strong\b[^>]{0,240}>\s*$/iu.test(parts[i-1])})));
+  }
+  for(const caption of captions){
+   // Some selected product spec cards separate a strong label from its
+   // literal value without a colon: <strong>Processing</strong>Washed:
+   // Mountain Water Decaf. Require an actual adjacent strong label in a
+   // bounded product BR segment, not a freeform prose or FAQ substring.
+   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+   if(!hit){
+    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu);
+    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu):null;
+    const selected=structured||splitLabel;
+    if(selected)hit=[selected[0],selected[1],clean(selected[2],180)];
+   }
+   if(!hit)continue;
+   const value=hit[2].trim();
+   // Process: Washed is green processing; Process: Washed + EA Sugarcane
+   // Decaffeination explicitly supplies an independent decaf treatment.
+   if(!/^decaffeination/i.test(hit[1])&&
+      !/\b(?:decaf(?:feinat(?:ed|ion|ing))?|caffeine[- ]?free|swiss[- ]?water|mountain[- ]?water|sugar[- ]?cane|ethyl[- ]?acetate|carbon[- ]?dioxide|co[- ]?2)\b/iu.test(value))continue;
+   const key=fold(hit[1]+' '+value);
+   if(!seen.has(key)){
+    seen.set(key,{label:hit[1],value,
+     method:inferDecaffeinationMethod({name,selectedMethod:value})||null});
+    if(seen.size>8)return {candidates:[...seen.values()],complete:false};
+   }
+  }
+ }
+ return {candidates:[...seen.values()],complete:true};
 }

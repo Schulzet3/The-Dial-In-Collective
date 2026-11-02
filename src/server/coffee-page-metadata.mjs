@@ -1,5 +1,5 @@
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
-import {selectedDirectProductCredits} from './coffee-direct-product-prose.mjs';
+import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -27,7 +27,34 @@ import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconci
 import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
-import {selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
+import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
+
+// A chosen current selected coffee description can be more authoritative than
+// another labeled tasting list printed in the same selected product detail
+// panel. Keep the preferred suggestion, but flag its genuinely incompatible
+// printed alternative for member review. Never rewrite or discard source facts.
+// This is not a cross-product suppression rule; both are actual source claims.
+export function markSelectedTastingSourceDisagreements(facts,selectedNotes){
+ if(!Array.isArray(facts)||!selectedNotes||typeof selectedNotes!=='string')return facts;
+ for(const fact of facts){
+  if(fact.field!=='tasting_notes'||fact.conflicting===true||
+   !/^(?:tasting(?:\s+notes?)?|cupping(?:\s+notes?)?|flavou?r(?:\s+notes?)?|cup(?:\s+notes?)?|notes?|we\s+taste|what\s+you(?:'|’)?ll\s+taste)$/i.test(String(fact.label||'').trim().replace(/[:：]\s*$/u,''))||
+   !['html','product_json'].includes(fact.source_type)||
+   /(?:different coffee|general guidance|education|recommendation|brewing recommendation|published page metadata)/i.test(String(fact.section||'')))continue;
+  // An actual labeled Flavor list may contain unusual literal merchant words
+  // (e.g. Whole Bean Vanilla) rejected by the canonical flavor sanitizer.
+  // Keep that source's own caption as review-only evidence when it is a
+  // bounded multi-item literal, never as an inferred canonical flavor.
+  const raw=String(fact.value||'').trim();
+  const printed=normalizeExplicitCoffeeTastingNotes(raw)||
+   (raw.length<=240&&raw.length>=6&&/[,;|]/.test(raw)&&!/[<>]/.test(raw)?raw:'');
+  if(printed&&!equivalentCoffeeTastingNotes(printed,selectedNotes)&&
+   !coffeeTastingNotesSubset(printed,selectedNotes)&&
+   !coffeeTastingNotesSubset(selectedNotes,printed))fact.conflicting=true;
+ }
+ return facts;
+}
+
 const FIELD_ALIASES=COFFEE_FIELD_ALIASES;
 const LOOKUP=new Map(Object.entries(FIELD_ALIASES).flatMap(([field,names])=>names.map(name=>[keyOf(name),field])));
 function keyOf(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');}
@@ -295,6 +322,15 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   cleanTrailingProductLabels(raw):raw;
  if(field==='origin'){
   s=s.replace(/\s*[|;,]+\s*$/,'').trim();
+  // Some exact selected Origin captions append a green processing stage or
+  // a decaffeination method to one literally printed producing country.
+  // Keep that raw source caption in source_facts; neither method is a place.
+  // Only remove a fully matched, closed suffix with one known country.
+  // Do not rewrite regional tuples, multi-country blends or unknown prose.
+  const countryAndProcess=s.match(/^100\s*%\s*([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*,\s*(?:fully\s+)?(?:washed|natural|honey|anaerobic)(?:\s+process(?:ed)?)?\.?$/iu);
+  const countryAndDecaf=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*\(\s*(?:Mountain|Swiss)\s+Water(?:\s+Process(?:ed)?)?\s*\)\.?$/iu);
+  const printedCountry=(countryAndProcess?.[1]||countryAndDecaf?.[1]||'').trim();
+  if(printedCountry&&ORIGIN_COUNTRIES.has(keyOf(printedCountry)))s=printedCountry;
   // Roaster "Oaxaca Region of Mexico" is not "Oaxaca Region of Mexico, Mexico".
   // Only de-duplicate the SAME country after an explicit Region of phrase;
   // preserve geographic names such as Mt. Kenya and any true conflict.
@@ -1353,6 +1389,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const ownedContext=selectedCoffeeContextRoles(canonicalProduct,{name:fields.name,clean});
  const narrative=extractNarrativeCoffeeEvidence(canonicalProduct,{name:fields.name,fields,originConflict:conflicts.has('origin')});
   const directSelected=selectedDirectProductCredits(canonicalProduct,{name:fields.name,clean,optionHtml:html});
+  const selectedPriceBadge=selectedCurrentCoffeeReleaseBadge(canonicalProduct,{name:fields.name});
+  if(selectedPriceBadge&&!fields.release_label&&!conflicts.has('release_label'))
+   addField(fields,'release_label',selectedPriceBadge);
+
   if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
@@ -1626,6 +1666,9 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ if(selectedPriceBadge&&fields.release_label===selectedPriceBadge&&source_facts.length<384)
+  source_facts.push({field:'release_label',label:'Selected product release badge',
+   value:selectedPriceBadge,source_url,source_type:'html',section:'Exact selected product price panel'});
  if(producingCommunity&&source_facts.length<384)source_facts.push({
   field:'producer',label:'Community',value:producingCommunity,source_url,
   source_type:'html',section:'Selected coffee producing-community label'
@@ -1740,6 +1783,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
       value:directSelected.explicit_tastes_like,source_url,source_type:'html',
       section:'Exact selected product literal tasting description'});
   }
+  // Flag only direct selected-source disagreements, not unsupported SEO.
+  // A higher-priority current description may remain the canonical suggestion
+  // while the contrary exact selected product Flavor caption is reviewable.
+  if(fields.tasting_notes&&!seoFallbackByFields.get(fields)?.has('tasting_notes'))
+   markSelectedTastingSourceDisagreements(source_facts,fields.tasting_notes);
   for(const fact of source_facts){
   if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
   else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
@@ -1800,13 +1848,46 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const seo_fallback_fields=[...(seoFallbackByFields.get(fields)||[])].filter(key=>
   typeof fields[key]==='string'&&fields[key]&&!conflicts.has(key)).sort();
  // Decaf-only selected-product evidence, separate from green-coffee Process.
- const selectedDecafStatements=Array.isArray(directSelected.decaffeination_method_evidence)?
-  directSelected.decaffeination_method_evidence:[];
- const decaffeination_method=inferDecaffeinationMethod({
+ // Retain only a directly named exact current selected coffee's decaffeination
+ // sentence when canonical identity/geography filtering drops its description.
+ // Bounded product scope supplies an exact H1; this does not restore raw SEO,
+ // general coffee claims, other coffee facts or uncertain bean processing.
+ const namedDecafStatements=selectedNamedCurrentDecafEvidence(product,{name:fields.name,clean});
+ const selectedDecafStatements=[...new Set([
+  ...(Array.isArray(directSelected.decaffeination_method_evidence)?
+   directSelected.decaffeination_method_evidence:[]),
+  ...namedDecafStatements
+ ])];
+ // Generic Process labels can conflict in the layout reader while the EXACT
+ // selected named decaf sentence and the selected EA Process spec AGREE.
+ // Suppress only that unrelated processing-detail conflict when both direct
+ // method witnesses match. Opposing/unknown selected methods still fail closed.
+ const decafSpec=selectedCurrentDecafSpecMethodEvidence(product,{name:fields.name,clean});
+ const exactNamedDecafMethod=inferDecaffeinationMethod({
+  name:fields.name,selectedMethod:namedDecafStatements.join('\n')
+ });
+ const exactNamedAndSpecAgreement=Boolean(exactNamedDecafMethod&&decafSpec.complete&&
+  decafSpec.candidates.length&&
+  decafSpec.candidates.every(spec=>spec.method===exactNamedDecafMethod));
+ const decafSpecConflict=decafSpec.candidates.length>0&&
+  (!decafSpec.complete||decafSpec.candidates.some(spec=>!spec.method)||
+   new Set(decafSpec.candidates.map(spec=>spec.method)).size>1||
+   Boolean(exactNamedDecafMethod&&
+    decafSpec.candidates.some(spec=>spec.method!==exactNamedDecafMethod)));
+ const decafSourceConflict=decafSpecConflict||
+  (detailConflicts.has('processing_detail')&&!exactNamedAndSpecAgreement);
+ // A generic page layout may contain labeled decaf PROCESS prose inside a
+ // FAQ, related item, or contradictory second product heading. Only the
+ // independently verified current selected-product decaf sentence or a
+ // safely scoped exact selected spec can authorize member autofill.
+ // Roaster processing_details alone are never sufficient for method identity.
+ const eligibleSelectedDecafMethod=selectedDecafStatements.length>0||
+  decafSpec.candidates.length>0;
+ const decaffeination_method=eligibleSelectedDecafMethod?inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
   selectedMethod:selectedDecafStatements.join('\n'),
-  conflicting:detailConflicts.has('processing_detail')
- });
+  conflicting:decafSourceConflict
+ }):'';
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
  // Preserve the literal selected-product method sentence for member review.
  // Contradictory stated methods remain blank, not a guessed winner.
@@ -1815,6 +1896,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   source_facts.push({field:'decaffeination_method',
    label:'Current selected coffee decaffeination statement',value:sentence,
    source_url,source_type:'html',section:'Selected product description',
+   ...(decaffeination_method?{}:{conflicting:true})});
+ }
+ // Expose independent exact selected method labels, including contradictions,
+ // rather than hiding dissenting printed evidence behind a chosen field.
+ for(const spec of decafSpec.candidates.slice(0,8)){
+  if(source_facts.length>=384)break;
+  source_facts.push({field:'decaffeination_method',
+   label:'Exact selected decaf process caption',value:spec.label+': '+spec.value,
+   source_url,source_type:'html',section:'Selected product current specification',
    ...(decaffeination_method?{}:{conflicting:true})});
  }
  // Standalone selected Limited Release is a fallback only. Named current
