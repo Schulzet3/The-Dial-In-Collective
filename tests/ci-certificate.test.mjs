@@ -15,3 +15,11 @@ test('certificate explicitly distinguishes safe READY from no batch and blocked 
  assert.equal(classifyBatch({ready:false,ready_items:[],deployable_paths:['site/a'],errors:['Unqueued or not-ready deployable file: site/a']}),'BLOCKED_NOT_RELEASABLE');
  assert.equal(classifyBatch({ready:false,ready_items:[{id:'A'}],deployable_paths:['site/a'],errors:['unready']}),'BLOCKED_NOT_RELEASABLE');
 });
+
+test('READY certificate cannot be issued without the exact hashed immutable artifact',()=>{
+ const s=readFileSync(new URL('../scripts/release/write-ci-certificate.mjs',import.meta.url),'utf8');
+ assert.match(s,/CERTIFIED_READY_SOURCE'&&!artifactHash/);
+ assert.match(s,/createHash\('sha256'\)/);
+ assert.match(s,/immutable_artifact_sha256:artifactHash/);
+ assert.match(s,/immutable_artifact_name:artifactHash\?/);
+});

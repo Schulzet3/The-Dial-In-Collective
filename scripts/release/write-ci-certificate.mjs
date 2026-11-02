@@ -1,5 +1,6 @@
 // Exact-source CI receipt; not a release authorization.
-import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
+import {mkdirSync,writeFileSync,readFileSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {evaluateLocalQueue} from './release-queue.mjs';
 import {classifyBatch} from './ci-batch-classification.mjs';
@@ -10,7 +11,13 @@ if(!/^[a-f0-9]{40}$/.test(sha||'')||sha!==head||
 const queue=JSON.parse(readFileSync('docs/RELEASE_QUEUE.json','utf8'));
 const assessment=evaluateLocalQueue();
 const batchStatus=classifyBatch(assessment);
-const receipt={schema_version:2,batch_status:batchStatus,
+const artifactPath='dist-immutable.zip';
+const artifactHash=existsSync(artifactPath)?createHash('sha256').update(readFileSync(artifactPath)).digest('hex'):null;
+if(batchStatus==='CERTIFIED_READY_SOURCE'&&!artifactHash)
+ throw Error('READY certification cannot omit immutable production build ZIP');
+const receipt={schema_version:3,batch_status:batchStatus,
+ immutable_artifact_sha256:artifactHash,
+ immutable_artifact_name:artifactHash?'dic-production-dist-'+sha:null,
  strict_source_isolation_passed:assessment.ready,
  isolation_errors:assessment.errors,
  assessed_ready_item_ids:assessment.ready_items.map(x=>x.id).sort(),kind:'DIC_CI_SOURCE_CERTIFICATE_NOT_RELEASE_APPROVAL',

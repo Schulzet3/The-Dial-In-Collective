@@ -90,3 +90,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — protect live Netlify Functions during immutable artifact cutover
 - Current app includes `netlify/functions/coffee-url-preview.mjs`; static ZIP alone does NOT prove equivalent function deployment. Added explicit `functionsPreservedVerified` fail-closed requirement to inert ZIP adapter, with negative test. Real publication must include or independently verify exact function continuity and Netlify routing before enabling this flag; no release may silently drop the function. No production action.
+
+## 2026-11-02 — bind READY certificate to immutable artifact bytes
+- Fixed critical certification gap: READY certificate schema v3 now records SHA-256 of the exact `dist-immutable.zip` produced in the same CI run, names its source-bound artifact and fails if READY is otherwise claimed without that ZIP. This does not prove Netlify Functions parity or authorize publication; publication controller must independently rehash downloaded artifact and match certificate before any provider write. Node regression added. No production changes; CI pending.
