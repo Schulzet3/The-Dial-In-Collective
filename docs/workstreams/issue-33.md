@@ -1,3 +1,9 @@
+## November 2 UTC — Issue33 eighth3 source trigger repair and raw SEO title provenance (TESTING, no deploy)
+
+PR348 merged nonforce as `409fbec53ec55e2ea9b1c75e2d5adacbb4f4820e` with three bounded stale SEO/station-role tests and exact PR-head CI SUCCESS (approval, source archive, Node, cloud/mobile, SQL, visual); frozen603 was SKIPPED. Its merge message omitted the `[dic-issue33-eighth3]` selector, so the official 3-case public-source job was SKIPPED. This is a workflow invocation issue, **not** an extractor failure or an official source PASS. Correcting without rewriting history: the focused public probe now records bounded raw HTML `<title>` alongside the selected H1 for #316 provenance, and the follow-up merge must include `[dic-issue33-eighth3]` to run exactly #119/#268/#316. No canonical extraction change, no #267/#96 overlap, no original603 or queue status mutation. This code+SAME-COMMIT journal requires exact-source CI and current official evidence before any READY claim. [skip netlify].
+
+---
+
 ## November 2 UTC — Issue33 eighth3 targeted official source recheck and SEO/role adversarial regression (TESTING; no deploy)
 
 Recovered exact development source `01e6f5b38559f92398fe34e803d82e672cfea3da` and current Issue33/Issue267 boundaries before editing. Fresh public browser review of [#316 Just Love Colombia Honey](https://shop.justlovecoffee.com/products/colombia-honey-process) finds current selected H1 Colombia- Honey Process while browser SEO title names Uganda AA - Lifesong; [#268 Queen City Banko Gotiti](https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia) describes Banko Gotiti CWS as a washing station working with smallholders and Kidane Teklu as an importer. The separate #119 Epiphany blend remains source-qualified. Browser retrieval may be cached and is **not** a DNS-pinned current parser acceptance.
