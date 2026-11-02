@@ -92,6 +92,15 @@ test('unindexed docs cannot satisfy a same-commit code checkpoint',()=>{
   assert.match(auditLatestCommit({paths:['site/cloud/main.js',fake],subject:'fix [skip netlify]'}).join(' '),/SAME-COMMIT/);
 });
 
+test('exact queue preparation journal is recognized without admitting arbitrary names',()=>{
+ const subject='fix(release): source-bound queue prep [skip netlify]';
+ const change=['scripts/release/release-queue.mjs','docs/workstreams/release-queue-prep-20261102.md'];
+ assert.deepEqual(auditLatestCommit({paths:change,subject}),[]);
+ const invalid=['docs/workstreams/release-queue-prep-20261103.md',
+  'docs/workstreams/release-queue-prep.md','docs/workstreams/release-ready-batch-copy.md'];
+ for(const path of invalid)
+  assert.match(auditLatestCommit({paths:['scripts/release/release-queue.mjs',path],subject}).join(' '),/SAME-COMMIT/);
+});
 test('READY batch journal is explicitly scoped, without admitting arbitrary release journals',()=>{
  const subject='fix(ci): public CI build coordinates [skip netlify]';
  const code='.github/workflows/dic-ready-batch-certification.yml';
