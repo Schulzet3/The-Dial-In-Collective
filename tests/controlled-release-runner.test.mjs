@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {executeSingleUseRelease,initialLedgerOnMissing,RELEASE_GENESIS_SHA,MINIMUM_GUARDED_SOURCE_SHA,
- selectLatestCiConclusions,assertCurrentReleaseRefs,gitFailureDiagnostic,redactTransportText} from '../scripts/release/controlled-release-runner.mjs';
+ selectLatestCiConclusions,assertCurrentReleaseRefs,gitFailureDiagnostic,redactTransportText,verifiedGitAncestry} from '../scripts/release/controlled-release-runner.mjs';
 test('release controller cannot operate outside controlled main OPS Actions',async()=>{
  await assert.rejects(executeSingleUseRelease({}),/only valid in controlled main-branch/);
  await assert.rejects(executeSingleUseRelease({GITHUB_ACTIONS:'true',GITHUB_REF:'refs/heads/development/backend-foundation',
@@ -98,4 +98,14 @@ test('porcelain refusal reasons survive diagnostics without credential or URL di
  assert.equal(redactTransportText(escaped,[token]).includes('hidden'),false);
  assert.ok(redactTransportText('x'.repeat(5000)).length<=1600);
  assert.equal(gitFailureDiagnostic({status:1,stdout:'[rejected] (non-fast-forward)'},{operation:'push'}).category,'REF_CONFLICT');
+});
+
+test('release controller distinguishes verified non-ancestor from missing Git evidence',()=>{
+ const pass=()=>{};
+ const no=()=>{throw Object.assign(Error('not ancestor'),{status:1});};
+ const missing=()=>{throw Object.assign(Error('missing object'),{status:128});};
+ assert.equal(verifiedGitAncestry('a'.repeat(40),'b'.repeat(40),{run:pass}),true);
+ assert.equal(verifiedGitAncestry('a'.repeat(40),'b'.repeat(40),{run:no}),false);
+ assert.throws(()=>verifiedGitAncestry('a'.repeat(40),'b'.repeat(40),{run:missing}),/verification unavailable/);
+ assert.throws(()=>verifiedGitAncestry('a'.repeat(40),'b'.repeat(40),{run:()=>{throw Error('timeout');}}),/verification unavailable/);
 });
