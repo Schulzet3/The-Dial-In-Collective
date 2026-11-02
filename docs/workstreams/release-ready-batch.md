@@ -141,6 +141,14 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 - `prepare-release-evidence.mjs` now automatically retrieves source-bound CI bytes only after independently reusable recovery when explicit archive not provided; original preflight API remains compatible. Positive and adversarial tests added.
 - Branch base `62161b2d76e8b4460edab21aa3d3d3865c1e6137`. **Hosted CI and integration PENDING**. Main controller, durable backup dedup, atomic publication and provider readback still pending. No deploy, backup dispatch or production write.
 
+## 2026-11-02 — Issue #368 durable backup dispatch claim (source-only)
+- `request-encrypted-backup.mjs` now requires exact latest-observed database-write UTC freshness key; atomically creates a durable GitHub backup-claim ref against pinned main SHA before any `nightly-backup.yml` dispatch. Concurrent claims, existing active backups, uncertain GitHub readback, claim failure or dispatch failure all fail closed. A failed dispatch leaves claim for manual reconciliation, never blind retry. The existing scheduled ciphertext duplicate guard remains unchanged.
+- `prepare-release-evidence.mjs` supplies freshness key from backup evidence; it still HOLDs until independently verified ciphertext, snapshot coverage and approved direct Drive parent. Added mock concurrent-claim and failure tests. **Not yet merged, hosted CI pending.** No actual branch claim, workflow dispatch, backup, provider or production write performed.
+
+- Follow-up hardening: re-read pinned main backup workflow ref **after** durable claim and before dispatch; deny changed main SHA and require manual reconciliation. Updated test call-order assertion; hosted CI still pending.
+
+- Accepted real request evidence uses PostgreSQL microsecond UTC precision (e.g. five fractional digits). Durable claim now preserves 1–9 fractional digits rather than collapsing distinct writes to milliseconds; test fixture covers five-digit precision.
+
 ## 2026-11-02 — Issue #368 read-only Netlify Function continuity check
 - Actual connected Netlify site readback: site `153277f2-e19e-4862-b9a6-f2e18ccde271`, published deploy `6ae8006cd64b30ae9046e44d` READY/current, production source `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe`, hostname `app.dialincollective.com`, bundled `coffee-url-preview` Node22 Function and POST `/api/coffee-preview` route. This is **existing live deployment**, not proof a new digest publication succeeded.
 - Hardened GET-only Netlify postflight to require exact function identity, route, POST method and runtime in provider inventory. Added positive/negative mocked readback tests. Source parent `46cd5e1d6a23606686d7f1e2e8ff0dc4796af2b1`; hosted CI pending. No provider write, production deploy, release grant or data change.
