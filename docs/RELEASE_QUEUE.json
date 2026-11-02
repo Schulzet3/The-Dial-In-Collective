@@ -3688,17 +3688,26 @@
       "issue": 368,
       "title": "Independent Git-connected rebuild suppression for immutable release claims",
       "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "merged_source_sha": "2c58c10ff16e81ebd38699eac3cf74881602b9f7",
       "scope_paths": [
         "scripts/netlify/should-ignore-build.mjs"
       ],
-      "tests": [],
-      "ci_runs": [],
+      "tests": [
+        "PR #382 exact head 03779bcf243ac600be36bd5c95ee7b615a854cb4: approval, validate, cloud-tests, mobile-browser-qa, sql and review SUCCESS; frozen603 SKIPPED, not PASS. Netlify full-message skip marker positive/negative tests executed in hosted Node CI. Main OPS PR #383 merged 7a68ac802d71e09ebb266f10bd3fb537da9249bc; merged-main release-controller-validate SUCCESS. No live Netlify draft/restore or new publication."
+      ],
+      "ci_runs": [
+        41422615087,
+        41422615439,
+        41422614947,
+        41422614729,
+        41422614737,
+        41422648541
+      ],
       "blockers": [
-        "PR #382 exact-source CI and nonforce merge pending; main OPS one-use claim-body integration and independent provider/backup cutover acceptance pending"
+        "Main release controller still explicitly HOLD before one-use claim/provider mutation; independently verified current offsite recovery/latest-write snapshot/restore evidence and authorized nonempty READY batch absent; no live draft/restore compatibility proof."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/368",
-      "notes": "Issue #368 infrastructure safety prerequisite. This guard is not an owner-approved READY app feature and must not be published alone. Source isolation and immutable provider cutover required; no deploy."
+      "notes": "Issue #368 guard merged at 2c58c10ff16e81ebd38699eac3cf74881602b9f7, exact PR head six applicable checks SUCCESS; original merge auto-subject omitted [skip netlify] but body contains it, so continuity parser is being corrected to inspect actual full Git message. No app READY promotion or deployment."
     }
   ],
   "history": [
