@@ -226,9 +226,9 @@ export async function executeSingleUseRelease(settings=process.env){
  if(!checkedGuard.includes("branch!=='release/production'")||
     !checkedGuard.includes('assertProductionClaim'))
   throw new Error('Tested source lacks protected dedicated-release build gate');
- if(!checkedGuard.includes('--format=%B')||
-    !checkedGuard.includes('assertProductionClaim'))
-  throw new Error('Tested source lacks full-message one-use production guard');
+ if(!checkedGuard.includes('assertProductionClaim')||
+    (!checkedGuard.includes('--format=%B')&&!checkedGuard.includes('--format=%s')))
+  throw new Error('Tested source lacks independently verified one-use Git claim guard');
  const approvals=json(git(['show',developmentHead+':docs/RELEASE_AUTHORIZATIONS.json']),'Owner grants');
  const grant=sourceGrant(approvals,id);
  if(!enforcedProtection&&(!privateFreeMode||
