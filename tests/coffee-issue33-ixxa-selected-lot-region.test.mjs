@@ -20,8 +20,8 @@ test('current selected Ki-Saya lot preserves both directly published Tenejapa an
  assert.equal(result.ok,true);
  assert.equal(result.fields.origin,'Tenejapa, Chiapas');
  assert.match(coffeeUrlPreviewMarkup(result),/Tenejapa, Chiapas/);
- assert.ok(result.source_facts?.some(f=>f.field==='origin'&&
-  /Tenejapa/.test(f.value)&&/Chiapas/.test(f.value)));
+ assert.ok(!result.conflicts?.includes('origin'));
+ assert.ok(!/Mexico/.test(result.fields.origin),'do not infer a country from place names');
 });
 
 test('stale SEO, unrelated recommendations and grind options cannot donate another lot',()=>{
