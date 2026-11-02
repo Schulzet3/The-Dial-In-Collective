@@ -11,7 +11,7 @@
 ## Route by requested topic
 | Topic | Required relevant context |
 | --- | --- |
-| Log Shot / Rate / Recommendation / grinder | Master Spec, Decision Ledger, `site/lib/engine.js`, [recovered espresso research intake](../research/espresso-originals-review-20261101.md), [#335](https://github.com/Schulzet3/The-Dial-In-Collective/issues/335); distinguish approved heuristics from independently checked evidence |
+| Log Shot / Rate / Recommendation / grinder | Master Spec, Decision Ledger, `site/lib/engine.js`, [recovered espresso research intake](../research/espresso-originals-review-20261101.md) and [nine full original Markdown reports](../research/originals/README.md), [#335](https://github.com/Schulzet3/The-Dial-In-Collective/issues/335); distinguish approved heuristics from independently checked evidence |
 | Add Coffee / URL autofill | [#33](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33), extractor source and its frozen oracle/current official source receipts; do not revive retired screenshots/Claude |
 | UX / offline / Community | Current Master Spec, relevant `site/cloud/`, `site/lib/`, stylesheet and scoped issues; preserve all private data/offline outboxes |
 | Auth / privacy / migrations | [#96](https://github.com/Schulzet3/The-Dial-In-Collective/issues/96), RLS/migrations, provider evidence, permission tests; no unauthorised production writes |
