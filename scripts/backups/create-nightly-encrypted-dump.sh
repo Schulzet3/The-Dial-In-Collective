@@ -89,7 +89,15 @@ tar -czf "$OUT/bundle.tar.gz" -C "$OUT/plain" database.dump manifest.json toc.tx
 # Verify the compressed archive is readable before destroying its plaintext
 # and uploading only its age-encrypted counterpart.
 tar -tzf "$OUT/bundle.tar.gz" > /dev/null
-age --encrypt --recipient "$BACKUP_AGE_RECIPIENT" \
+AGE_RECIPIENT_ARGS=(--recipient "$BACKUP_AGE_RECIPIENT")
+if [[ -n "${BACKUP_AGE_SECOND_RECIPIENT:-}" ]]; then
+  if ! [[ "$BACKUP_AGE_SECOND_RECIPIENT" =~ ^age1[a-z0-9]{20,}$ || "$BACKUP_AGE_SECOND_RECIPIENT" =~ ^ssh-ed25519[[:space:]][A-Za-z0-9+/]+={0,2}$ ]]; then
+    echo "::error::Invalid automation-only public recovery recipient."
+    exit 1
+  fi
+  AGE_RECIPIENT_ARGS+=(--recipient "$BACKUP_AGE_SECOND_RECIPIENT")
+fi
+age --encrypt "${AGE_RECIPIENT_ARGS[@]}" \
   --output "$OUT/encrypted/backup.age" "$OUT/bundle.tar.gz"
 test -s "$OUT/encrypted/backup.age"
 echo 'Encrypted archive created; no plaintext artifact will be uploaded.'
