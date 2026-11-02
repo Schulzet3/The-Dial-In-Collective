@@ -29,3 +29,7 @@ Backup fallback now uses one atomic GitHub claim per UTC day, closing the race w
 ## November 2, 2026 UTC — Issue #368 CI artifact pagination and temp cleanup
 
 GitHub artifact discovery now fails closed on truncated/missing/oversized API result inventories, preventing a false unique exact-source artifact selection. Certified retrieval cleans private downloaded containers even when identity validation fails, and refuses unsafe temporary directories. Tests and same-commit operations journal accompany this main-only safety fix. Hosted PR/merged-main CI pending. No production, backup or provider writes; release remains HOLD. See Issue #368.
+
+## November 2, 2026 UTC — Issue #368 active backup run dedup hardening
+
+The fallback now checks complete bounded GitHub active-run inventories for queued/waiting/pending/requested/in-progress backup jobs, including old and push-triggered runs, before any claim/dispatch. Incomplete API evidence fails closed. Same-commit tests/journal; exact hosted CI and nonforce merge required. Existing Git-connected production remains unchanged; no backup dispatch or provider/data writes. Same-archive restore and atomic provider compatibility remain unverified.
