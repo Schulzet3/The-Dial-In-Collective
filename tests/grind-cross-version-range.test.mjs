@@ -67,7 +67,7 @@ test('out-of-range historical dial readings do not become invented range endpoin
  for(const grinderSetting of [-0.1,5.1]){
   const {s,v,coffee,basket}=fixture();
   v.grinderMin=10;v.grinderMax=60;
-  const sh=prior(coffee,{grindSetting});
+  const sh=prior(coffee,{grindSetting:grinderSetting});
   const before=structuredClone(sh);
   assert.equal(translateGrind(sh,v),null);
   s.shots.push(sh);

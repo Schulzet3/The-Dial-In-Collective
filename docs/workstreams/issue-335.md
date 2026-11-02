@@ -1,3 +1,9 @@
+## November 2 UTC — PR442 exact-head CI correction (TESTING)
+
+PR #442 initial head `eac90e25cc7bdd6a7f80cd814cee8cc6ac4932d5`: six applicable checks SUCCESS (approval, security-inventory, SQL, mobile-browser-qa, cloud-tests, review). Full Node `validate` run 41529593868 **FAILED 1 of 2286 tests** (2279 PASS, 1 FAIL, 6 SKIP), before lint/build: newly added lower/upper historical range test mistakenly destructured `grindSetting` instead of the loop's `grinderSetting` variable. The neighboring old-calibration and endpoint regressions passed. Corrected **test fixture only**, from shorthand `{grindSetting}` to `{grindSetting:grinderSetting}`; application logic unchanged. Exact corrected-head test/CI and integration still pending. Do not represent initial failed run as pass; no deploy.
+
+---
+
 ## November 2 UTC — out-of-range historical grind evidence guard (isolated PR head; TESTING)
 
 Owner continuation: "Okay let's dig in" on Issue #335, following recommendation-science prioritization. Pinned development source `db612f6c33356ebfbf72df2d40e932c1415f8c99`. Current `site/lib/engine.js::translateGrind` previously clamped any historic successful dial number outside the *recorded* old espresso range to 0/1 relative position. That may fabricate a boundary calibration reference on the current range, even though the original measurement does not belong to the purported old espresso calibration. The nine recovered research reports and documented citation limits caution against transferring precise grinder settings without reliable context.
