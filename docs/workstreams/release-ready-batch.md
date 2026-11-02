@@ -34,3 +34,7 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 - Added bounded GET-only public route smoke (home, cloud shell, web manifest), reject unexpected origins/paths, redirects, HTTP failures and empty/mismatched responses; no login or production writes.
 - Added focused tests and serialized post-release workflow triggered by release/production push or manual dispatch. This is a public reachability check, NOT proof that Netlify deployed the expected source SHA. Provider READY/current SHA receipt remains mandatory before DEPLOYED status.
 - No deployment authorized or triggered by this development-branch change. No production member/session/SQL writes. Same-commit journal included.
+
+## 2026-11-02 — exact owner-selected READY batch binding
+- Future release grants must contain `approved_ready_item_ids` exactly matching the assessed READY candidate inventory; source overlap, queue status and free-form scope text cannot silently expand the authorized batch. Controller fails closed before any one-use claim or production push. Focused positive/negative tests added.
+- The historical Release14 grant lacks this new field; it is consumed and not rewritten. New grants must be source-and-item-bound. Development-only integration pending exact-source CI and promotion of controller to operational main. No publication.

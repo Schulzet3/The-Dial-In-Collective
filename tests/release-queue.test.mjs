@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport}
+import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport,assertApprovedReadyBatch}
  from '../scripts/release/release-queue.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const queued={id:'DIC-Q-100',issue:100,pr:101,title:'Safe shot-page update',
@@ -87,4 +87,12 @@ test('DEPLOYED label cannot launder unpublished merged changes into an approved 
  assert.match(result.errors.join(' '),/DEPLOYED-labelled merged work is new/);
  const baselineDelivered={...premature,merged_source_sha:A};
  assert.equal(assess({...q,items:[queued,baselineDelivered]}).ready,true);
+});
+
+test('release grant must exactly name READY items, not merely cover overlapping files',()=>{
+ const result=assess();
+ assert.equal(assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},result),true);
+ for(const ids of [undefined,[],['DIC-Q-101'],['DIC-Q-100','DIC-Q-101'],['DIC-Q-100','DIC-Q-100']])
+  assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:ids},result));
+ assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},{...result,ready:false}));
 });

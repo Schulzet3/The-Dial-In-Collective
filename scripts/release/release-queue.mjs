@@ -120,6 +120,17 @@ export function assessIntakeCoverage(queue,changedPaths,{currentBlobSha=()=>null
  }
  return {tracked:errors.length===0,errors,deployable_paths:paths};
 }
+export function assertApprovedReadyBatch(grant,assessment){
+ if(!assessment?.ready)throw Error('Release queue not certified READY');
+ const approved=grant?.approved_ready_item_ids;
+ if(!Array.isArray(approved)||!approved.length||approved.some(id=>typeof id!=='string')||
+    new Set(approved).size!==approved.length)
+  throw Error('Owner release grant must name unique READY queue item IDs');
+ const actual=assessment.ready_items.map(item=>item.id);
+ if(approved.length!==actual.length||approved.slice().sort().join('|')!==actual.slice().sort().join('|'))
+  throw Error('Owner-approved READY item IDs differ from actual candidate source inventory');
+ return true;
+}
 export function formatQueueReport(result){
  return ['## Deployment queue (source-only assessment)','**Batch source ready:** '+(result.ready?'YES':'NO'),
   '**Queued ready changes:** '+result.ready_items.length,
