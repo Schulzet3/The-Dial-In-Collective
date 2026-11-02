@@ -1,3 +1,9 @@
+## November 1, 2026 — verified final GitHub integration
+
+[PR #345](https://github.com/Schulzet3/The-Dial-In-Collective/pull/345) merged non-force at `de2aaef2376485c186d2198af10385b152c2567c`. All nine original Markdown report paths under [`docs/research/originals/`](originals/README.md) were fetched from that exact merged SHA and the Git blobs matched the originals. The current [source register](../ai/SOURCE_REGISTER.json) pins those nine records to the merged source commit. No application deploy, provider/production write, research-policy alteration or unredacted JSON export occurred. The historical "pending integration" description below is preserved as a dated checkpoint.
+
+---
+
 ## November 1, 2026 — permanent, byte-identical Markdown source storage follow-up
 
 The owner-provided original archive remains unmodified. All **nine recovered Markdown report bodies (552,702 bytes total)** are now preserved in private GitHub under [`docs/research/originals/`](originals/README.md), one exact, independently readable file per source. Every complete Git blob SHA was compared with the original ZIP member and matched. [`SOURCE_REGISTER.json`](../ai/SOURCE_REGISTER.json) now includes the corresponding GitHub path, source SHA-256, byte size, Git blob SHA and provenance. The source-bearing commit is `23feea01906f1d1cc1de04b42701dd83cee2bdce` (feature branch integration evidence pending at time of this note). The prior section below correctly described **attachment-only storage at its historical intake checkpoint** and is preserved unchanged.
