@@ -11,3 +11,7 @@ Exact-source GitHub run 41377555013 passed queue validation, Node, cloud/offline
 ## Release exact-source five-check CI restoration — November 2
 
 The 17-item combined certification passed at source `a2daf144e6b02e94dd29ca97a00449beba156f84`, but path-filtered legacy check workflows omitted checks on that exact SHA. Add the automatic READY certification workflow as a trigger path to the four existing CI workflows so a single nonpublishing CI-only source change runs the required `validate`, `cloud-tests`, `mobile-browser-qa`, and `sql` jobs alongside unconditional `approval`. This does not relax required checks, change product logic or publish. Retain all workflow tests and verify each exact-source conclusion before considering a release grant.
+
+## Owner-authorized one-use Release14 grant — 2026-11-02T03:09:15.395Z
+
+Owner explicitly directed immediate publication of the 17 READY items. Grant `DIC-20261102-READY17-14` binds to exact-source five-check passing SHA `2c8e1ffe3b83a7524968f50efca3ead4da282cf8`; no SQL/Auth/Edge/member-data operations are authorized. Historical encrypted offsite artifact metadata readback confirmed direct child of approved folder; provider routing and queue isolation remain controller-gated. This commit is a nonpublishing grant only, not a deployment or Netlify receipt.
