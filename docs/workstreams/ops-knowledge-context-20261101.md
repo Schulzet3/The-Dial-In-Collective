@@ -1,3 +1,17 @@
+## November 1, 2026 — PR #345 research-originals integration VERIFIED
+
+**Scope:** Exactly nine original, source-faithful Markdown reports under `docs/research/originals/` totaling **552,702 bytes**, a README, source register and research/context documentation. No product code, tests, CI definitions, migrations, member records, Supabase/Netlify/provider writes, or READY queue changes.
+
+**Exact-source PR verification:** [PR #345](https://github.com/Schulzet3/The-Dial-In-Collective/pull/345), head `b80f2f0931f6f3924138b58b41a77092ea0dfe28`, five completed SUCCESS workflows: approval/continuity `41364835949`, isolated SQL `41364835920`, Node/build `41364835895`, cloud UX `41364835956`, private visual `41364835896`. These are PR-head checks, **not** independently observed post-squash CI.
+
+**Merge + source readback:** Non-force squash merged `de2aaef2376485c186d2198af10385b152c2567c`. Actual development ref equaled that merge at source verification. Every one of the nine report files was retrieved by that exact SHA; each Git blob SHA matched byte-for-byte original Project ZIP bytes, not merely a name or Markdown rendering. `docs/ai/SOURCE_REGISTER.json` now references the merged SHA, nine path/blob SHA identifiers and original SHA-256s. Research original ZIP and other external complementary sources remain unchanged.
+
+**Cleanup:** Nine temporary owner Library transfer files created solely for this operation were moved to Library Trash (tool reported succeeded for all nine); our temporary `/DIC-GitHub-Research-Transfer-20261101` folder was deleted (success). This does **not** claim permanent purge of Trash. Original Project archive and owner laptop copies were not touched.
+
+**Remaining non-blocking limitations:** User-supplied report citations need independent validation; the original nine JSON conversation exports and distinct PDFs remain external, with future external retrieval not guaranteed. Bounded privacy-pattern scan does not certify all text or external rights. No app release or publication was requested or performed. Source integration is DONE, not an app release.
+
+---
+
 ## November 1, 2026 — nine-source permanent original Markdown preservation (new verified follow-up)
 
 **Owner authorization:** continue resolving safe permanent source-storage gaps. Existing research archive `Espresso_Research_Reports.zip` has SHA-256 `8ebd0cdfed6d7cc71dcb355f7987f6bf56dd56dd2dd19d9cfa76b18a7c998584`. Nine Markdown originals, total **552,702 bytes**, privacy-pattern screened for obvious personal contact details, secrets and account identifiers, with zero obvious hits; source-faithful copy does not prove full privacy or scientific citation review.
