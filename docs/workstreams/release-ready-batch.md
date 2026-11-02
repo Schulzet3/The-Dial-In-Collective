@@ -81,3 +81,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — fix Python rehearsal test discovery
 - GitHub run 41401602292 failed because Python unittest discovery intentionally only recognizes test*.py files; custom filename yielded zero tests. Run the named Python test module directly; no change to production logic. Reverify exact-source hosted rehearsal.
+
+## 2026-11-02 — explicit encrypted backup fallback dispatcher
+- Added authenticated GitHub workflow-dispatch adapter to trigger the EXISTING main encrypted backup workflow without modifying data, backup files, secrets or Apps Script. Adapter intentionally returns BACKUP_REQUESTED_NOT_VERIFIED and cannot satisfy a release gate until independent Drive direct-parent and ciphertext verification succeeds. Added fail-closed mocked dispatch tests in nonpublishing rehearsal. Not yet automatically invoked by the main release controller; no live backup requested in this commit.
