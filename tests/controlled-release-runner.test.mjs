@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {executeSingleUseRelease,initialLedgerOnMissing,RELEASE_GENESIS_SHA,MINIMUM_GUARDED_SOURCE_SHA,
- selectLatestCiConclusions,assertCurrentReleaseRefs,gitFailureDiagnostic,redactTransportText,verifiedGitAncestry} from '../scripts/release/controlled-release-runner.mjs';
+ selectLatestCiConclusions,assertCurrentReleaseRefs,gitFailureDiagnostic,redactTransportText,verifiedGitAncestry,immutableReleaseClaimMessage} from '../scripts/release/controlled-release-runner.mjs';
 test('release controller cannot operate outside controlled main OPS Actions',async()=>{
  await assert.rejects(executeSingleUseRelease({}),/only valid in controlled main-branch/);
  await assert.rejects(executeSingleUseRelease({GITHUB_ACTIONS:'true',GITHUB_REF:'refs/heads/development/backend-foundation',
@@ -104,4 +105,18 @@ test('operational release controller fails closed when Git ancestry object is mi
  assert.equal(verifiedGitAncestry('a'.repeat(40),'b'.repeat(40),{run:()=>{}}),true);
  assert.equal(verifiedGitAncestry('a'.repeat(40),'b'.repeat(40),{run:()=>{throw Object.assign(Error('unrelated'),{status:1});}}),false);
  assert.throws(()=>verifiedGitAncestry('a'.repeat(40),'b'.repeat(40),{run:()=>{throw Object.assign(Error('missing object'),{status:128});}}),/verification unavailable/);
+});
+
+test('future immutable claim retains exact one-use subject but suppresses Git-connected publication',()=>{
+ const id='DIC-20261102-CLAIM123',sourceSha='a'.repeat(40);
+ const {subject,body}=immutableReleaseClaimMessage({id,sourceSha});
+ assert.equal(subject,'Release DIC: '+id+' [dic-publish]');
+ assert.match(body,/^\\[skip netlify\\]/);
+ assert.ok(body.includes(sourceSha));
+ assert.throws(()=>immutableReleaseClaimMessage({id:'bad',sourceSha}),/identity/);
+ assert.throws(()=>immutableReleaseClaimMessage({id,sourceSha:'bad'}),/identity/);
+ const src=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
+ assert.match(src,/checkedGuard\\.includes\\('Immutable release claim: suppress Git-connected rebuild'\\)/);
+ assert.match(src,/\\['commit-tree',tree,'-p',releaseHead,'-m',subject,'-m',body\\]/);
+ assert.match(src,/Immutable deployment HOLD/,'live controller must still fail closed');
 });

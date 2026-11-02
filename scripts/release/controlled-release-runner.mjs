@@ -20,6 +20,17 @@ const SHA=/^[a-f0-9]{40}$/;
 // pinned hashes prevent stale/legacy build guards or silent claim history loss.
 export const RELEASE_GENESIS_SHA='e7e16e5e13b35a6f4b6aa81db5b09b93b1aefc60';
 export const MINIMUM_GUARDED_SOURCE_SHA='994a4d9f91e2475a96df42a46564c06e29f1c8d7';
+// The future Git claim must NOT itself trigger a second Git-connected build.
+// Preserve the exact [dic-publish] subject for claim validation, and place
+// [skip netlify] in the commit BODY. The tested source's own Netlify guard
+// independently checks the full message if Netlify does not honor the marker.
+export function immutableReleaseClaimMessage({id,sourceSha}={}){
+ if(!/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/.test(id||'')||!SHA.test(sourceSha||''))
+  throw Error('Invalid immutable release claim identity');
+ return {subject:'Release DIC: '+id+' [dic-publish]',
+  body:'[skip netlify]\\n\\nImmutable Netlify digest/function publication only; do not rebuild from Git.\\nTested source: '+sourceSha};
+}
+
 export function initialLedgerOnMissing({releaseHead,readLedger}){
  try{return readLedger();}
  catch{
@@ -197,6 +208,9 @@ export async function executeSingleUseRelease(settings=process.env){
  if(!checkedGuard.includes("branch!=='release/production'")||
     !checkedGuard.includes('assertProductionClaim'))
   throw new Error('Tested source lacks protected dedicated-release build gate');
+ if(!checkedGuard.includes('Immutable release claim: suppress Git-connected rebuild')||
+    !checkedGuard.includes('--format=%B'))
+  throw new Error('Tested source lacks independent immutable claim Git-CD suppression');
  const approvals=json(git(['show',developmentHead+':docs/RELEASE_AUTHORIZATIONS.json']),'Owner grants');
  const grant=sourceGrant(approvals,id);
  if(!enforcedProtection&&(!privateFreeMode||
@@ -310,8 +324,8 @@ export async function executeSingleUseRelease(settings=process.env){
   setBlob(journalPath,newJournal,env);
   setBlob('docs/RELEASE_CLAIM_RECEIPT.json',JSON.stringify(claimReceipt,null,2)+'\n',env);
   const tree=git(['write-tree'],{env});
-  const subject='Release DIC: '+id+' [dic-publish]';
-  const commit=git(['commit-tree',tree,'-p',releaseHead,'-m',subject],{env});
+  const {subject,body}=immutableReleaseClaimMessage({id,sourceSha:sha});
+  const commit=git(['commit-tree',tree,'-p',releaseHead,'-m',subject,'-m',body],{env});
   if(!SHA.test(commit))throw Error('No immutable Git release commit');
   // Capture a recoverable candidate without claiming the ref was accepted.
   console.log('[DIC immutable claim prepared] '+JSON.stringify({release_id:id,
