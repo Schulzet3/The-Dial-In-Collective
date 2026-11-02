@@ -1,3 +1,11 @@
+## November 2 UTC — Issue33 eighth3 targeted official source recheck and SEO/role adversarial regression (TESTING; no deploy)
+
+Recovered exact development source `01e6f5b38559f92398fe34e803d82e672cfea3da` and current Issue33/Issue267 boundaries before editing. Fresh public browser review of [#316 Just Love Colombia Honey](https://shop.justlovecoffee.com/products/colombia-honey-process) finds current selected H1 Colombia- Honey Process while browser SEO title names Uganda AA - Lifesong; [#268 Queen City Banko Gotiti](https://queencitycollectivecoffee.com/products/banko-gotiti-washed-ethiopia) describes Banko Gotiti CWS as a washing station working with smallholders and Kidane Teklu as an importer. The separate #119 Epiphany blend remains source-qualified. Browser retrieval may be cached and is **not** a DNS-pinned current parser acceptance.
+
+Added three bounded synthetic adversarial regressions for selected H1 versus stale SEO title/description and station/importer versus farmer. Expanded existing guarded, credential-free original603 focused-source workflow with the exact **119,268,316** selector `[dic-issue33-eighth3]`; actual GitHub runner official HTML/H1/fields/conflicts and source SHA256 are required before any source-based parser change or READY promotion. No change to canonical extraction, original603 oracle/captures/CSV, 153 context-qualified or 29 missing-literal-qualified cases, #267 V2 coverage, #96 security, or existing READY/DEPLOYED queue items. This code/test/CI commit includes its SAME-COMMIT journal. No production writes or release. [skip netlify].
+
+---
+
 ## November 2 UTC — Issue33 READY queue wording reconciliation (documentation only)
 
 Corrected one stale TESTING-era phrase in the already verified READY item's first tests entry (it said exact PR-head CI pending). Exact PR-head and merged-source CI, source receipts, blocker-free status and scope remain unchanged and verified in subsequent entries. No code/test/CI changes, no new READY item, no provider or production writes. [skip netlify].
