@@ -1,3 +1,9 @@
+## November 2 UTC — Owner-authorized streamlined single publisher, no production deployment (#417)
+
+Main PR418 has merged guarded Git-connected controller restoration; latest main exact merged acceptance must be checked before claiming VERIFIED. Dev automatic READY certification will validate queue/intake only; retain existing source-bound Node/cloud/mobile/SQL/approval workflows, eliminate duplicate combined full test/artifact ZIP generation. Exact READY owner IDs and unready/overlapping merged work must block until source isolated and tested. Release14 remains current production; no publication, provider/SQL/Auth/member writes or backup dispatch. This policy is Locked in the Master Spec and Decision Ledger; source-isolation design and active main/provider verification remain tracked under [Issue #417](https://github.com/Schulzet3/The-Dial-In-Collective/issues/417). Historical reports unchanged.
+
+---
+
 ## November 2 UTC — #267 V2 R2-016/C2-016 direct source review (PR CI pending)
 
 Frozen original #54 `docs/CURRENT_STATUS.md` lines1–50: **4,132/579,961** fresh V2, **575,829 remaining**, next line51. Pinned current #48 `scripts/audit/coffee-frozen-ci.py` lines611–730: **5,142**, next line731. Distinct ledgers/receipts; 130 inventory line counts pending. No proven safe deletion, current bug, benchmark, app/queue/deploy change. Historic CI/READY not live acceptance; offline guard is in-process and exporter is mocked. See [#267 journal](workstreams/issue-267.md). New exact-source CI pending.
