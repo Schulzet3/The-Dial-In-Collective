@@ -19,7 +19,8 @@ const bundle={status:'EXACT_SOURCE_STATIC_FUNCTION_VERIFIED_NO_PUBLICATION',
  manifest:{functions:{'coffee-url-preview':hash}}};
 const live={status:'PROVIDER_READY_CURRENT_EXACT_SHA',release_sha:release,
  deploy_id:'existing',function_continuity:{function_name:'coffee-url-preview',
- route:'/api/coffee-preview',method:'POST',runtime:'nodejs22.x'}};
+ route:'/api/coffee-preview',method:'POST',runtime:'nodejs22.x',
+ rate_limit:{algorithm:'sliding_window',window_size:60,window_limit:12,aggregate_key:'ip'}}};
 const args={backup,githubToken:'fake',netlifyToken:'fake',sourceSha:sha,
  expectedReleaseSha:release,approvedReadyItemIds:['DIC-Q-1']};
 test('read-only end-to-end rehearsal checks certified bytes and live existing function, never READY',async()=>{
@@ -57,7 +58,8 @@ test('tampered CI identity, READY scope, function digest or missing index blocks
 test('unverified or mismatched live production function never reports success',async()=>{
  for(const bad of [{...live,release_sha:sha},
   {...live,function_continuity:{...live.function_continuity,method:'GET'}},
-  {...live,status:'stale'}])
+  {...live,status:'stale'},
+  {...live,function_continuity:{...live.function_continuity,rate_limit:null}}])
   await assert.rejects(rehearse({...args,artifactRetriever:async()=>bundle,
    liveReadback:async()=>bad}),/Function continuity missing/);
 });

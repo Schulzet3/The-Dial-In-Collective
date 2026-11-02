@@ -14,7 +14,7 @@ const args={token:'fake',bundle,sourceSha:sha,releaseSha:release,
  ownerGrantVerified:true,oneUseClaimConsumed:true,backupVerified:true,allowProductionPublication:true,
  recheckPublicationAuthority:async()=>true};
 function provider({draft=true,functionRoute=true,uploadOk=true,restoreStatus=201,
- changeCurrentBeforeRestore=false}={}){
+ changeCurrentBeforeRestore=false,rateLimit=true,extraMethod=false}={}){
  let current='old',commit=null,restores=0,siteReads=0;
  const calls=[];
  const fetcher=async(url,options)=>{
@@ -40,7 +40,9 @@ function provider({draft=true,functionRoute=true,uploadOk=true,restoreStatus=201
    id:'new',site_id:siteId,draft,state:'ready',branch:'release/production',
    context:'production',commit_ref:commit,ssl_url:'https://app.dialincollective.com',
    available_functions:functionRoute?[{n:'coffee-url-preview',r:'nodejs22.x',
-    ro:[{p:'/api/coffee-preview',m:['POST']}]}]:[]})};
+    ro:[{p:'/api/coffee-preview',m:extraMethod?['POST','GET']:['POST']}],
+    tr:rateLimit?tr:{action:{type:'rate_limit',config:{aggregate:{keys:[{type:'ip'}]},
+  rate_limit_config:{algorithm:'sliding_window',window_size:60,window_limit:12}}}}:null}]:[]})};
   if(method==='POST'&&url.endsWith('/deploys/new/restore')){
    restores++;
    if(restoreStatus===201)current='new';
@@ -76,7 +78,7 @@ test('draft static/function upload and one restore yield exact current READY/fun
 });
 test('wrong draft, missing route, failed upload or baseline race never restores',async()=>{
  for(const opts of [{draft:false},{functionRoute:false},{uploadOk:false},
-  {changeCurrentBeforeRestore:true}]){
+  {changeCurrentBeforeRestore:true},{rateLimit:false},{extraMethod:true}]){
   const p=provider(opts);
   await assert.rejects(publishCertifiedDraftTransaction({...args,fetcher:p.fetcher}));
   assert.equal(p.getRestores(),0);

@@ -9,11 +9,19 @@ export function assertCoffeePreviewFunctionContinuity(deploy){
  const matches=functions.filter(f=>f?.n==='coffee-url-preview');
  if(matches.length!==1||!Array.isArray(matches[0].ro)||
   !matches[0].ro.some(r=>r.p==='/api/coffee-preview'&&
-   Array.isArray(r.m)&&r.m.includes('POST'))||
+   Array.isArray(r.m)&&r.m.length===1&&r.m[0]==='POST')||
   matches[0].r!=='nodejs22.x')
-  throw Error('Netlify coffee preview Function POST route/runtime missing');
+  throw Error('Netlify coffee preview Function POST-only route/runtime missing');
+ const rule=matches[0].tr?.action;
+ const config=rule?.config,limit=config?.rate_limit_config;
+ if(rule?.type!=='rate_limit'||limit?.algorithm!=='sliding_window'||
+  limit?.window_size!==60||limit?.window_limit!==12||
+  !Array.isArray(config?.aggregate?.keys)||config.aggregate.keys.length!==1||
+  config.aggregate.keys[0]?.type!=='ip')
+  throw Error('Netlify coffee preview IP rate-limit continuity missing');
  return {function_name:'coffee-url-preview',route:'/api/coffee-preview',
-  method:'POST',runtime:'nodejs22.x'};
+  method:'POST',runtime:'nodejs22.x',rate_limit:{algorithm:'sliding_window',
+   window_size:60,window_limit:12,aggregate_key:'ip'}};
 }
 
 export async function verifyLiveNetlify({token,expectedReleaseSha,fetcher=fetch}={}){
