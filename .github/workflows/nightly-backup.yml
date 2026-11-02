@@ -9,9 +9,7 @@ on:
     branches:
       - main
     paths:
-      # Workflow-only configuration edits rely on exact main CI, not an
-      # unnecessary extra live database snapshot. Scheduled/manual remain active.
-      - scripts/backups/create-nightly-encrypted-dump.sh
+      # Backup-script edits use exact-source CI; no duplicate live export on push.
       # A new scoped request file update triggers one additional encrypted backup.
       - docs/BACKUP_REQUEST.json
   workflow_dispatch:
@@ -61,6 +59,30 @@ jobs:
       - name: Install age encryption
         if: steps.scheduled_guard.outputs.run_backup == 'true'
         run: sudo apt-get update -qq && sudo apt-get install -y age
+      - name: Derive automation-only public recipient when a recovery secret exists
+        if: steps.scheduled_guard.outputs.run_backup == 'true'
+        env:
+          DIC_ARCHIVE_AGE_IDENTITY: ${{ secrets.DIC_ARCHIVE_AGE_IDENTITY }}
+        run: |
+          set -Eeuo pipefail
+          if [[ -n "${DIC_ARCHIVE_AGE_IDENTITY:-}" ]]; then
+            umask 077
+            identity_file="$RUNNER_TEMP/dic-automation-age-identity"
+            trap 'rm -f -- "$identity_file"' EXIT
+            printf '%s\n' "$DIC_ARCHIVE_AGE_IDENTITY" > "$identity_file"
+            if ! recipient="$(age-keygen -y "$identity_file" 2>/dev/null)"; then
+              echo "::error::Managed archive-restore identity could not derive a public recipient."
+              exit 1
+            fi
+            if [[ ! "$recipient" =~ ^age1[a-z0-9]{20,}$ && ! "$recipient" =~ ^ssh-ed25519[[:space:]][A-Za-z0-9+/]+={0,2}$ ]]; then
+              echo "::error::Managed archive-restore recipient has invalid format."
+              exit 1
+            fi
+            echo "BACKUP_AGE_SECOND_RECIPIENT=$recipient" >> "$GITHUB_ENV"
+            echo "Future archive includes a second independent recovery recipient."
+          else
+            echo "No managed archive-restore identity: preserving original owner-only encrypted backup."
+          fi
       - name: Encrypted PostgreSQL snapshot
         if: steps.scheduled_guard.outputs.run_backup == 'true'
         run: bash scripts/backups/create-nightly-encrypted-dump.sh
