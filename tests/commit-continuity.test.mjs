@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {mkdtempSync,mkdirSync,writeFileSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -22,6 +23,17 @@ test('one immutable source-bound PR122 GitHub auto-merge receipt is accepted, ne
  assert.match(auditLatestCommit({paths:['site/cloud/main.js'],subject,sha}).join(' '),/SAME-COMMIT/);
 });
 
+test('GitHub merge with skip marker only in commit body is nonpublishing but still journal-bound',()=>{
+ const subject='Merge pull request #382 from Schulzet3/fix/368-immutable-claim-suppress-git-cd-20261102';
+ const message=subject+'\n\nfix(release): independently suppress Git CD [skip netlify]';
+ const paths=['scripts/netlify/should-ignore-build.mjs','docs/workstreams/release-ready-batch.md'];
+ assert.deepEqual(auditLatestCommit({paths,subject,message,sha:'a'.repeat(40)}),[]);
+ assert.match(auditLatestCommit({paths,subject,message:subject,sha:'a'.repeat(40)}).join(' '),/Unmarked commit/);
+ assert.match(auditLatestCommit({paths:[paths[0]],subject,message}).join(' '),/SAME-COMMIT/);
+ assert.match(auditLatestCommit({paths,subject,message:subject+'\n\n[skip netlify-extra]'}).join(' '),/Unmarked commit/);
+ const source=readFileSync(new URL('../scripts/audit/verify-commit-checkpoint.mjs',import.meta.url),'utf8');
+ assert.match(source,/--format=%B/);
+});
 test('doc-only commits without skip are blocked; docs with skip are accepted',()=>{
  assert.ok(auditLatestCommit({paths:['docs/CURRENT_STATUS.md'],subject:'docs: status'}).length);
  assert.deepEqual(auditLatestCommit({paths:['docs/CURRENT_STATUS.md'],subject:'docs: status [skip netlify]'}),[]);
