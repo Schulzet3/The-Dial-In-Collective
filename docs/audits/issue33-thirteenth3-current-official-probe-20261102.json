@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "kind": "BOUNDED_CURRENT_OFFICIAL_SOURCE_REPLAY_REQUEST_NOT_CERTIFICATION",
+  "development_parent_sha": "435e45917b9255247edc8b8d85cf9e84bae075ba",
+  "source_register": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+  "source_register_git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "case_numbers": [
+    38,
+    65,
+    261
+  ],
+  "selector": "[dic-issue33-thirteenth3]",
+  "workflow": ".github/workflows/roaster-source-probe.yml",
+  "runner": "scripts/audit/issue33-original603-focused-source-review.mjs",
+  "official_public_web_observations": [
+    {
+      "number": 38,
+      "url": "https://brewtusroasting.com/products/ethiopia-natural",
+      "selected_h1": "Ethiopia Natural",
+      "selected_fact": "Current Shantawane Washing Station lot explicitly describes premiums paid to smallholder farmers for cherries.",
+      "boundary": "Station is not itself a named farmer; require current selected source and station identity.",
+      "web_snapshot": "2026-11-02"
+    },
+    {
+      "number": 65,
+      "url": "https://combatcoffeetea.com/products/night-vision-medium-roast-kenya",
+      "selected_h1": "NIGHT VISION - MEDIUM ROAST - KENYA",
+      "selected_fact": "Current selected narrative credits smallholder farmers working in cooperatives.",
+      "boundary": "Embu/Kirinyaga/Nyeri narrative and selected Kiambu location differ; preserve conflict/review rather than manufacture an exact bean locality.",
+      "web_snapshot": "2026-11-02"
+    },
+    {
+      "number": 261,
+      "url": "https://preludecoffeeroasters.com/products/ethiopia-guji-kercha",
+      "selected_h1": "Ethiopia Guji Kercha",
+      "selected_fact": "About the Producer describes Guji regional history; About the Process describes climate/soil; cup text references natural Ethiopian coffees.",
+      "boundary": "Headings alone are not evidence of named producer or primary process.",
+      "web_snapshot": "2026-11-02; web cache last month"
+    }
+  ],
+  "current_official_raw_html_sha256": null,
+  "exact_development_parser_replay": null,
+  "independent_field_certification": false,
+  "existing_accepted_regressions": [
+    "tests/coffee-issue33-prelude-generic-section-boundaries.test.mjs"
+  ],
+  "protected_original603": true,
+  "protected_caveats": {
+    "context_qualified": 153,
+    "missing_literal_qualified": 29
+  },
+  "no_runtime_edit": true,
+  "no_release_queue_edit": true,
+  "no_production_operation": true,
+  "required_next": [
+    "PR-head applicable CI success",
+    "nonforce integration of exact reviewed workflow",
+    "merged-source guarded source job success with all three fetched and parsed",
+    "inspect selected H1, raw hashes, actual canonical fields, conflicts and Add Coffee preview individually",
+    "only correct a demonstrated source-backed omission with bounded tests and same-commit journal"
+  ]
+}
