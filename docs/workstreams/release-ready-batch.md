@@ -123,3 +123,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — correct ZIP mode interpretation
 - Hosted rehearsal `41405384537` failed safe ZIP fixture because Python zipfile encodes permissions without POSIX file-type bits. Accept mode with no file-type bits, still reject explicit symlinks and nonregular file types; update both main and development. Re-run exact-source CI; no production changes.
+
+## 2026-11-02 — source-bound GitHub Actions artifact discovery
+- Added read-only CI artifact locator requiring successful completed push run for exact source SHA on development, nonexpired unique matching immutable dist and certificate artifacts with run+SHA metadata. Refuses stale, ambiguous, missing or API-uncertain evidence; mocked tests added to nonpublishing rehearsal. It returns IDs only; download and archive extraction still pending. No production changes.
