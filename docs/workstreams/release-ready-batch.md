@@ -108,3 +108,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — require exact function bytes in READY certificate
 - Certificate schema v4 now requires SHA-256 for bundled Netlify Function ZIP. Artifact verifier checks both static and server function byte hashes; mismatch, absent function and stale schema fail closed. Updated mocked regressions. Main hosted controller still has schema v3 verifier and remains intentionally nonpublishing until reviewed promotion; no deploy.
+
+## 2026-11-02 — repair CI Python test invocation
+- Run 41404804152 passed all 14 Node preflight regressions but failed before Python cases because workflow concatenated two script paths into one Python invocation. Split into two shell commands. Re-run exact-source rehearsal; no production change.
