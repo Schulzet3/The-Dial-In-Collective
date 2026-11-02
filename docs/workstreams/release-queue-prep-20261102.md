@@ -11,3 +11,7 @@ PR #360 initial head `952bf955ead428d35c61271cd6b4312cba8dbee2`: exact approval,
 
 ## Preservation and handoff
 All changes remain on isolated branch/PR until passing exact-source CI and nonforce Git integration. Scoped journal is independent of the concurrently edited central READY journal. No queue state promotion, application behavior change, production provider/SQL/Auth/member write, release grant or deployment. Preserve #33/#267/#96/#28, historic Release14 and original603 evidence. Queue readiness remains zero until actual integrated release-scope evidence exists. On future publish, separately verify offsite recovery, owner-selected one-use grant, exact five-source CI, netlify READY/current SHA and permitted live authenticated postflight.
+
+## November 2, 2026 — independent concurrent CI correction retained
+
+Development at `5e9dd7ac4958b89cd03ddd4e95222e4c4d11341d` independently corrected the unused `opts` parameter by removing it from the mock declaration, as part of other CI/rehearsal work. This PR's final merge reconciles against that newer source, keeps its exact `tests/netlify-live-readback.test.mjs` blob untouched, and retains only this PR's separate release-lineage gate, tests and journal. No overlapping regression was dropped; previous PR-head checks do not count as final exact merged-source checks.

@@ -5,7 +5,7 @@ const sha='a'.repeat(40),siteId='153277f2-e19e-4862-b9a6-f2e18ccde271';
 const site={id:siteId,published_deploy:{id:'deploy-1'},ssl_url:'https://sample.netlify.app',custom_domain:'app.dialincollective.com'};
 const deploy={id:'deploy-1',site_id:siteId,state:'ready',branch:'release/production',
  context:'production',commit_ref:sha,ssl_url:'https://app.dialincollective.com'};
-const fetcher=async(url,_opts)=>({ok:true,json:async()=>url.endsWith('/deploy-1')?deploy:site});
+const fetcher=async(url)=>({ok:true,json:async()=>url.endsWith('/deploy-1')?deploy:site});
 test('live provider verifier uses GET-only and exact published SHA',async()=>{
  const calls=[];
  const result=await verifyLiveNetlify({token:'fake',expectedReleaseSha:sha,fetcher:async(url,opts)=>{
