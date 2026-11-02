@@ -148,3 +148,7 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 - Follow-up hardening: re-read pinned main backup workflow ref **after** durable claim and before dispatch; deny changed main SHA and require manual reconciliation. Updated test call-order assertion; hosted CI still pending.
 
 - Accepted real request evidence uses PostgreSQL microsecond UTC precision (e.g. five fractional digits). Durable claim now preserves 1–9 fractional digits rather than collapsing distinct writes to milliseconds; test fixture covers five-digit precision.
+
+## 2026-11-02 — Issue #368 read-only Netlify Function continuity check
+- Actual connected Netlify site readback: site `153277f2-e19e-4862-b9a6-f2e18ccde271`, published deploy `6ae8006cd64b30ae9046e44d` READY/current, production source `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe`, hostname `app.dialincollective.com`, bundled `coffee-url-preview` Node22 Function and POST `/api/coffee-preview` route. This is **existing live deployment**, not proof a new digest publication succeeded.
+- Hardened GET-only Netlify postflight to require exact function identity, route, POST method and runtime in provider inventory. Added positive/negative mocked readback tests. Source parent `46cd5e1d6a23606686d7f1e2e8ff0dc4796af2b1`; hosted CI pending. No provider write, production deploy, release grant or data change.
