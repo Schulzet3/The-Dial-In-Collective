@@ -41,7 +41,7 @@ function provider({draft=true,functionRoute=true,uploadOk=true,restoreStatus=201
    context:'production',commit_ref:commit,ssl_url:'https://app.dialincollective.com',
    available_functions:functionRoute?[{n:'coffee-url-preview',r:'nodejs22.x',
     ro:[{p:'/api/coffee-preview',m:extraMethod?['POST','GET']:['POST']}],
-    tr:rateLimit?tr:{action:{type:'rate_limit',config:{aggregate:{keys:[{type:'ip'}]},
+    tr:rateLimit?{action:{type:'rate_limit',config:{aggregate:{keys:[{type:'ip'}]},
   rate_limit_config:{algorithm:'sliding_window',window_size:60,window_limit:12}}}}:null}]:[]})};
   if(method==='POST'&&url.endsWith('/deploys/new/restore')){
    restores++;
