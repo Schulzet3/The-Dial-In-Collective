@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "status": "TESTING_SYNTHETIC_SOURCE_BACKED_GUARDED_CURRENT_REPLAY_PENDING",
+  "base_development_sha": "53a40fe4481ed3ba7ac20c4899f53797e830c416",
+  "scope": "Three original603 exact official URLs with reused historic SEO slugs and selected current H1; no runtime fix unless regression proves one.",
+  "original603_cases": [
+    {
+      "n": 30,
+      "url": "https://bonjocoffee.com/products/guatemala-finca-el-rincon-copy",
+      "selected_h1": "Costa Rica, El Poeta",
+      "source": "Official roaster product publicly observed 2026-11-02 (web crawl last week)",
+      "fact": "Costa Rica; named four producers; fully washed; Gold Collection is quality tier, not invented dated release."
+    },
+    {
+      "n": 293,
+      "url": "https://seedscoffee.com/products/ethiopia-guji-getachew-copy",
+      "selected_h1": "Ethiopia Yirgacheffe Habtamu",
+      "source": "Official roaster product public retrieval crawled 2026-11-02",
+      "fact": "Cherry/Papaya/Lime Candy; selected Habtamu Fekadu Aga (Kuri Mountain Coffee), founder Aaga Dinsa distinct; old Getachew slug is stale."
+    },
+    {
+      "n": 520,
+      "url": "https://www.lineageroasting.com/collections/coffee/products/copy-of-kenya-gaikundo-2",
+      "selected_h1": "Ethiopia, Dry Processed - Sulladjah Coffee Beans",
+      "source": "Official roaster collection-to-product navigation crawled 2026-11-02",
+      "fact": "Current Dried In Cherry; Abana Estate appears as location/farm, not independently proven producer; historic washed/natural sentence does not override selected current method."
+    }
+  ],
+  "archived_source": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+  "original603_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "caveats": {
+    "context_qualified": 153,
+    "missing_literal_qualified": 29
+  },
+  "test_path": "tests/coffee-issue33-reused-slug-selected-identity.test.mjs",
+  "selector": "[dic-issue33-eleventh3]",
+  "current_raw_html_sha256": null,
+  "actual_current_parser_replay": "PENDING_POST_MERGE_GUARDED_RUN",
+  "restrictions": "Do not change immutable corpus, oracle, captures, #267 V2, #96, PR367, queue READY/DEPLOYED, production SQL/Auth/Edge/member/provider or publish. Web text is not raw source hash or live parser proof.",
+  "next": "Exact PR-head Node/cloud/approval, safe nonforce merge, guarded three-source raw HTML/H1/parser/preview readback and bounded independent case adjudication; no all603 or hosted GoTrue claim."
+}
