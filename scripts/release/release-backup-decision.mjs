@@ -6,14 +6,21 @@ export function decideReleaseBackup({githubArtifact,driveFile,expectedArtifactId
  const problems=[];
  if(approvedFolderId!==APPROVED_OFFSITE_FOLDER_ID)
   problems.push('Release backup folder configuration differs from owner-locked direct Drive folder');
- if(!githubArtifact||githubArtifact.id!==expectedArtifactId||
-  githubArtifact.expired!==false||!(githubArtifact.size_in_bytes>0))
+ if(!Number.isSafeInteger(expectedArtifactId)||expectedArtifactId<=0||
+  !githubArtifact||githubArtifact.id!==expectedArtifactId||
+  githubArtifact.expired!==false||!Number.isSafeInteger(githubArtifact.size_in_bytes)||
+  githubArtifact.size_in_bytes<=0)
   problems.push('GitHub ciphertext artifact missing, expired or empty');
- if(!driveFile||driveFile.id!==expectedDriveId||
+ if(typeof expectedDriveId!=='string'||!expectedDriveId.trim()||
+  !driveFile||driveFile.id!==expectedDriveId||
   !Array.isArray(driveFile.parent_ids)||driveFile.parent_ids.length!==1||
   driveFile.parent_ids[0]!==APPROVED_OFFSITE_FOLDER_ID||
-  !(Number(driveFile.size)>0))
+  !Number.isSafeInteger(Number(driveFile.size))||Number(driveFile.size)<=0)
   problems.push('Offsite backup absent, empty or not a direct child of approved private folder');
+ if(githubArtifact&&driveFile&&Number.isSafeInteger(githubArtifact.size_in_bytes)&&
+  Number.isSafeInteger(Number(driveFile.size))&&
+  githubArtifact.size_in_bytes!==Number(driveFile.size))
+  problems.push('GitHub and offsite archive byte lengths differ');
  if(!/^[a-f0-9]{64}$/.test(verifiedCiphertextSha256||'')||
   verifiedCiphertextSha256!==expectedCiphertextSha256)
   problems.push('Ciphertext SHA-256 not independently verified against the backup');
