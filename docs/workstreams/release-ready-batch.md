@@ -198,3 +198,9 @@ Owner approved reusing EXISTING unencrypted SSH Ed25519/age recovery private key
 ### 2026-11-02 #423 canonical approval matrix reconciliation on exact PR head
 - Initial documentation PR #432 CI correctly rejected new `current_owner_existing_ssh_backup_key_github_actions_secret_20261102` because the owner decision inventory lacked deliberate classification; this was NOT a passing test.
 - Updated `docs/APPROVAL_COVERAGE_MATRIX.json` sorted decision inventory and explicit Locked scope/implementation/blocked restore entry without modifying historical baseline, existing contracts or receipt fingerprints. Same-commit scoped journal repair. Require new exact PR-head CI pass and new merged-development CI pass before VERIFIED; no app deployment, backup export, secret, production SQL or member write.
+
+
+## Nov 2, 2026 — Issue #423 owner-reaffirmed weekly encrypted archive restore schedule (nonpublishing)
+- User explicitly questioned manual Run workflow and reaffirmed goal of automatic restored archived backups. Main PR #437 merged exact SHA `5b6a056adf9cb6a39ce363f6530859e2239b1970`, CI PASS; GitHub-native weekly Tuesday 13:17 UTC offline saved ciphertext restore, no ChatGPT dispatch capability, no new dump or app publisher. First run pinned to Nov1 privately Drive SHA-matched ciphertext; later runs select recent GitHub scheduled archive but do NOT automatically prove Drive copy. Source-bound real decryption/rows/schema still pending.
+- Updated existing single Backup Watchdog ID 6ad2807d3f408191a1aa9d5affe092a3 to check archive test with Wednesday 18 UTC grace, daily delivery and Sunday drill; read back enabled, no duplicate task.
+- Locked scheduled-recovery owner reaffirmation recorded in BOTH Master Specification and existing Decision Ledger Issue #423 entry; update full Project Instructions under 8,000 characters and CURRENT_STATUS. Docs only, [skip netlify]. No publication, production data writes or secrets.

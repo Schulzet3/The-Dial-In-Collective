@@ -1,3 +1,9 @@
+## November 2 UTC — Issue #423 encrypted-archive restore AUTOMATED SCHEDULE, real test PENDING
+
+Owner requires automatic isolated restoration without recurring manual GitHub clicks. Operations PR #437 is merged to main `5b6a056adf9cb6a39ce363f6530859e2239b1970` with passing exact-source CI. Tuesday 13:17 UTC GitHub Actions scheduled saved-archive restore: first pin Nov1 independently Drive/GitHub matched ZIP; subsequent recent scheduled GitHub artifacts only, which do not independently prove Drive delivery. Existing Backup Watchdog was extended and confirmed enabled, monitoring both weekly restore jobs and daily courier delivery. **NO actual archived age decryption/isolated PostgreSQL restoration has passed yet**; Issue #423 remains open. No app publication, extra exports or production SQL/Auth/member writes.
+
+---
+
 ## November 2 UTC — #423 existing SSH key approved (NO LIVE RESTORE)
 
 Owner authorized using existing private OpenSSH Ed25519/age recovery identity only as encrypted GitHub repository Actions secret DIC_ARCHIVE_AGE_IDENTITY; preserve owner offline copy. Operations PR #431 merged `760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c`, PR CI 137 tests PASS including actual synthetic SSH key pair. Owner-side secret installation and historical saved Drive ciphertext isolated restoration remain BLOCKED/UNTESTED. This changes backup key custody only, not encryption, DB/Auth/privacy, release queue or Netlify. Canonical Locked entry: current_owner_existing_ssh_backup_key_github_actions_secret_20261102.
