@@ -285,3 +285,6 @@ Initial PR head used old helper identifier in the callsite/negative tests and at
 
 ### #417 pre-PR baseline guard compatibility correction
 Real independently published Release14 tested baseline guard uses `git log --format=%s` and verified grant/claim, while development immutable-era full-message guard uses `--format=%B`. Both are one-use guarded and should be accepted for isolated READY snapshots so an unfinished immutable skip-marker tweak cannot block unrelated READY changes. Require `assertProductionClaim` plus either exact Git subject/full-message extraction. Corrected controller static regression expectation to actual binding syntax; exact PR and merged CI needed. No production release.
+
+### #417 exact PR test failure repair
+Initial PR-head run 41497649014 FAILED a real policy test because its *static* check expected the old single `const queueGate=assessReleaseQueue` declaration and did not recognize the new isolated+direct branches. Production code's gates still execute before grant and push; update the regression to assert BOTH branch gates precede the claim. Preserve historical failed run as failure, rerun hosted exact-source CI. No release.
