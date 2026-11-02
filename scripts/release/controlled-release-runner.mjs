@@ -12,6 +12,7 @@ import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BR
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
+import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH} from './ready-only-candidate.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -187,6 +188,21 @@ export async function executeSingleUseRelease(settings=process.env){
   '+refs/heads/'+RELEASE_BRANCH+':refs/remotes/origin/'+RELEASE_BRANCH]);
  const developmentHead=git(['rev-parse','refs/remotes/origin/development/backend-foundation']);
  const releaseHead=git(['rev-parse','refs/remotes/origin/'+RELEASE_BRANCH]);
+ // A READY-only source has the current development tree with unfinished file
+ // blobs explicitly restored to last published bytes. Fetch only its exact,
+ // nonproduction candidate ref. No staging branch can itself publish Netlify.
+ const candidateLines=git(['ls-remote','--heads','origin','refs/heads/release-candidates/*'])
+  .split(/\r?\n/).filter(Boolean).map(line=>line.split(/\s+/));
+ const matchingCandidates=candidateLines.filter(([value,ref])=>
+  value===sha&&/^refs\/heads\/release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/.test(ref||''));
+ if(matchingCandidates.length>1)throw Error('Ambiguous source-bound candidate branch');
+ const candidateBranch=matchingCandidates[0]?.[1]?.slice('refs/heads/'.length)||null;
+ if(candidateBranch){
+  git(['fetch','--no-tags','origin',
+   '+refs/heads/'+candidateBranch+':refs/remotes/origin/'+candidateBranch]);
+  if(git(['rev-parse','refs/remotes/origin/'+candidateBranch])!==sha)
+   throw Error('Isolated candidate ref moved during fetch');
+ }
  if(!SHA.test(developmentHead)||!SHA.test(releaseHead))throw Error('Exact remote branches unavailable');
  const recheckRemoteRefs=()=>{
   const refs=new Map(git(['ls-remote','origin','refs/heads/development/backend-foundation',
@@ -197,7 +213,12 @@ export async function executeSingleUseRelease(settings=process.env){
    actualDevelopmentHead:refs.get('refs/heads/development/backend-foundation'),
    actualReleaseHead:refs.get('refs/heads/'+RELEASE_BRANCH)});
  };
- git(['merge-base','--is-ancestor',sha,developmentHead]);
+ if(!candidateBranch)git(['merge-base','--is-ancestor',sha,developmentHead]);
+ const recheckCandidateRef=()=>{
+  if(candidateBranch&&git(['ls-remote','origin','refs/heads/'+candidateBranch]).split(/\s+/)[0]!==sha)
+   throw Error('Isolated candidate branch moved; restage and retest');
+ };
+ recheckCandidateRef();
  // Exclude historically green application SHAs which still had the old
  // development-branch publication guard. Never silently deploy an old build.
  git(['merge-base','--is-ancestor',MINIMUM_GUARDED_SOURCE_SHA,sha]);
@@ -205,9 +226,9 @@ export async function executeSingleUseRelease(settings=process.env){
  if(!checkedGuard.includes("branch!=='release/production'")||
     !checkedGuard.includes('assertProductionClaim'))
   throw new Error('Tested source lacks protected dedicated-release build gate');
- if(!checkedGuard.includes('--format=%B')||
-    !checkedGuard.includes('assertProductionClaim'))
-  throw new Error('Tested source lacks full-message one-use production guard');
+ if(!checkedGuard.includes('assertProductionClaim')||
+    (!checkedGuard.includes('--format=%B')&&!checkedGuard.includes('--format=%s')))
+  throw new Error('Tested source lacks independently verified one-use Git claim guard');
  const approvals=json(git(['show',developmentHead+':docs/RELEASE_AUTHORIZATIONS.json']),'Owner grants');
  const grant=sourceGrant(approvals,id);
  if(!enforcedProtection&&(!privateFreeMode||
@@ -256,10 +277,42 @@ export async function executeSingleUseRelease(settings=process.env){
  const queuedSource=json(git(['show',sha+':docs/RELEASE_QUEUE.json']),'Durable release queue');
  const changedSourcePaths=git(['diff','--name-only','--no-renames',lastPublishedTestedSha,sha])
   .split(/\r?\n/).filter(Boolean);
- const queueGate=assessReleaseQueue(queuedSource,{
-  publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,changedPaths:changedSourcePaths,
-  isAncestor:(a,b)=>verifiedGitAncestry(a,b)
- });
+ let queueGate;
+ if(candidateBranch){
+  const manifest=json(git(['show',sha+':'+CANDIDATE_RECEIPT_PATH]),'READY-only source manifest');
+  const sourceAnchor=manifest.development_source_sha;
+  if(!SHA.test(sourceAnchor||''))throw Error('Isolated candidate source anchor missing');
+  const listDiff=(from,to)=>git(['diff','--name-only','--no-renames',from,to])
+   .split(/\r?\n/).filter(Boolean);
+  // Compare exact Git object mode and SHA, not textual equivalence, including
+  // restored deletions. No unready file may survive a shared READY path.
+  const objectAt=(ref,path)=>{
+   const entries=git(['ls-tree','-z',ref,'--',path],{trim:false}).split('\0').filter(Boolean);
+   if(!entries.length)return null;
+   if(entries.length!==1)throw Error('Ambiguous candidate Git tree entry');
+   const match=/^([0-7]{6}) blob ([a-f0-9]{40})\t(.+)$/.exec(entries[0]);
+   if(!match||match[3]!==path)throw Error('Unsafe candidate Git tree entry');
+   return match[1]+':'+match[2];
+  };
+  const originalQueue=git(['show',sourceAnchor+':docs/RELEASE_QUEUE.json'],{trim:false});
+  const liveQueue=git(['show',developmentHead+':docs/RELEASE_QUEUE.json'],{trim:false});
+  const candidateQueue=git(['show',sha+':docs/RELEASE_QUEUE.json'],{trim:false});
+  queueGate=validateReadyOnlyCandidate(queuedSource,{
+   manifest,publishedSourceSha:lastPublishedTestedSha,developmentHead,
+   candidateSha:sha,candidateBranch,actualParents:git(['rev-list','--parents','-n','1',sha]).split(/\s+/),
+   developmentChangedPaths:listDiff(lastPublishedTestedSha,sourceAnchor),
+   candidateChangedPaths:changedSourcePaths,
+   stagedCommitChangedPaths:listDiff(sourceAnchor,sha),
+   developmentDriftPaths:listDiff(sourceAnchor,developmentHead),
+   queueContentMatches:originalQueue===liveQueue&&liveQueue===candidateQueue,
+   sourceObjectAt:objectAt,isAncestor:(a,b)=>verifiedGitAncestry(a,b)
+  });
+ }else{
+  queueGate=assessReleaseQueue(queuedSource,{
+   publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,changedPaths:changedSourcePaths,
+   isAncestor:(a,b)=>verifiedGitAncestry(a,b)
+  });
+ }
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
  assertApprovedReadyBatch(grant,queueGate);
@@ -272,6 +325,7 @@ export async function executeSingleUseRelease(settings=process.env){
  // write, provider activity or grant consumption. A later publish request must be a NEW
  // exact two-file owner-authorized commit and re-checks ALL fresh evidence.
  recheckRemoteRefs();
+ recheckCandidateRef();
  validateRequest();
  if(chatPush)validatePushEnvelope();
  if(chatPush&&chatRequest.mode==='validate_only')
@@ -309,6 +363,7 @@ export async function executeSingleUseRelease(settings=process.env){
    release_commit:commit,tested_source_sha:sha,previous_release_head:releaseHead,
    status:'PREPARED_NOT_PUSHED_NETLIFY_UNVERIFIED'}));
   recheckRemoteRefs();
+  recheckCandidateRef();
   validateReleaseGrant(grant,{releaseId:id,sourceSha:sha,nowIso:new Date().toISOString()});
   validateRequest();
   if(chatPush)validatePushEnvelope();

@@ -121,3 +121,15 @@ test('single-publisher owner claim accepts one Git-connected build, never duplic
  assert.doesNotMatch(src,/Immutable deployment HOLD|retrieveVerifiedReleaseBundle/);
  assert.match(src,/git\(\['push','--porcelain'/);
 });
+
+test('candidate verification is between source queue readback and the one-use release claim',()=>{
+ const src=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
+ assert.match(src,/candidateBranch=matchingCandidates/);
+ assert.match(src,/validateReadyOnlyCandidate\(queuedSource,/);
+ assert.match(src,/queueContentMatches:originalQueue===liveQueue&&liveQueue===candidateQueue/);
+ assert.match(src,/recheckCandidateRef\(\)/);
+ const verify=src.indexOf('queueGate=validateReadyOnlyCandidate');
+ const granted=src.indexOf('assertApprovedReadyBatch(grant,queueGate)');
+ const claimed=src.indexOf('const planned=planSingleUseClaim');
+ assert.ok(verify>0&&granted>verify&&claimed>granted);
+});
