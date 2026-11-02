@@ -59,6 +59,11 @@ for(const target of targets){
    const selected=productMarkup(res.html);
    r.selected_h1=[...selected.matchAll(/<h1\b[^>]{0,500}>([\s\S]{0,1800}?)<\/h1>/gi)]
      .slice(0,4).map(m=>clip(m[1].replace(/<[^>]+>/g,' '),200));
+   // Diagnostic provenance only: an old SEO page title may name a DIFFERENT
+   // coffee even while the current selected product H1 and body are correct.
+   // Never use this as a canonical identity or field assertion.
+   r.html_title=clip((res.html.match(/<title\b[^<>]{0,500}>([\s\S]{0,1000}?)<\/title>/i)||[])[1]
+     ?.replace(/<[^<>]{0,300}>/g,' ')||'',220);
    r.html_artifact='case-'+r.number+'.html';
    writeFileSync(join(dest,r.html_artifact),res.html,'utf8');
    const p=extractPublicCoffeeFacts(res.html,{source_url:r.final_url});
