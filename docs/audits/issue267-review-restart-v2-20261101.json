@@ -931,11 +931,33 @@
     28,
     134
   ],
-  "state": "V2_R2_017_C2_017_DOC_ONLY_PR_CI_PENDING",
+  "state": "V2_R2_017_C2_017_MERGED_SOURCE_APPROVAL_MARKER_REPAIR_PENDING",
   "app_code_changes_in_this_record": 0,
   "production_changes": 0,
   "completed_tests_in_this_record": 0,
   "last_verified_audit_batch_utc_date": "2026-11-02",
   "ci_guard_changes_in_this_record": 0,
-  "tests_added_in_this_record": 0
+  "tests_added_in_this_record": 0,
+  "merged_source_ci_incident": {
+    "issue": 267,
+    "track": "V2_CI_INTEGRATION_REPAIR_NO_NEW_LINE_CREDIT",
+    "date_utc": "2026-11-02",
+    "original_pr": 392,
+    "pr_head_sha": "346ea05b1d7be0fdfa022863a55b1ae912a34cd3",
+    "merged_source_sha": "b8e60a820f586e133634c4d0fe7a05077178108b",
+    "merged_tree_sha": "681073afcfe80c5852deb8c7c88c7b7af749943e",
+    "pr_head_checks": "6/6 SUCCESS on exact PR head",
+    "merged_approval_run_id": 41446674100,
+    "merged_approval_job_id": 125281388383,
+    "merged_approval_conclusion": "FAILURE",
+    "failure_reason": "GitHub default merge commit title omitted mandatory [skip netlify] marker; verify-commit-checkpoint.mjs correctly failed closed on merge commit b8e60a820f586e133634c4d0fe7a05077178108b.",
+    "merged_ready_certification_run_id": 41446674149,
+    "merged_ready_certification_conclusion": "SUCCESS",
+    "remediation": "New nonforce docs-only journal/checkpoint commit with [skip netlify] marker; merge follow-up PR with explicit [skip netlify] merge commit title; verify exact merged-source approval and READY push checks. Preserve original failed run and immutable earlier commits.",
+    "new_semantic_lines": 0,
+    "code_changes": 0,
+    "production_changes": 0,
+    "ci_guard_changes": 0,
+    "release_queue_changes": 0
+  }
 }

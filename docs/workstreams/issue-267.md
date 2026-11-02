@@ -1,3 +1,11 @@
+## November 2 UTC — #267 R2-017/C2-017 merge-marker continuity CI repair (zero new audit lines)
+
+PR [#392](https://github.com/Schulzet3/The-Dial-In-Collective/pull/392) exact head `346ea05b1d7be0fdfa022863a55b1ae912a34cd3` passed all **six** applicable PR checks; nonforce merge `b8e60a820f586e133634c4d0fe7a05077178108b` / tree `681073afcfe80c5852deb8c7c88c7b7af749943e` retained only the seven scoped V2 receipt/ledger/checkpoint/inventory/journal files. The merged-source automatic READY certification [run 41446674149](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41446674149) **SUCCESS**, but approval/continuity [run 41446674100](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41446674100), job 125281388383, **FAILED**: GitHub's default merge commit title omitted required `[skip netlify]`, and the existing `verify-commit-checkpoint.mjs` correctly rejected this unmarked merge. No CI guard relaxation, forced history or replay of the failed SHA. [Source-bound incident receipt](../audits/issue267-v2-merge-marker-repair-20261102.json).
+
+Repair in separate nonforce docs-only PR with explicit `[skip netlify]` **both on the source commit and GitHub merge commit title**; verify new exact merged-source CI before acceptance. Frozen V2 remains **4,222/579,961** (575,739 remaining), current V2 **5,262**; no additional semantic lines or app code/tests credited. #267 OPEN, no release queue, provider, original603, production or deployment changes.
+
+---
+
 ## November 2 UTC — #267 V2 R2-017/C2-017 ordered source review (PR CI pending)
 
 Frozen historical source `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree `c54ade64eca30946df8858297578a172f5cf6fa8`, manifest #54 `docs/CURRENT_STATUS.md` blob `2d7f55bcad8fd92663c4790c4164b9bacfed0667`: **lines 51–140 (90 new AI-not-human semantic lines)**; V2 **4,222/579,961**, **575,739 remaining**, next line141. [R2-017](../audits/issue267-v2-frozen-batches/R2-017.json) records per-segment original source and current mapping. The October26 PR149/152 603 replay dispute, Custom-style retirement, already-applied SQL anti-replay, Conductor HOLD and narrow Issue33 READY rows are historical; they do not authorize present deployment or deleting preserved member/offline history.
