@@ -11,20 +11,35 @@
       "id": "DIC-Q-335-historical-grind-range-evidence",
       "issue": 335,
       "title": "Reject out-of-range historic grinder readings as invalid cross-calibration evidence",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e2957ab1ada581b593302ceaf56d8f14c6481cce",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "Source-bound targeted regression authored for lower/upper historical out-of-bounds, inclusive historical endpoints, unchanged stored measurements and old calibration route; execution pending."
+        "Original PR442 head eac90e25cc7bdd6a7f80cd814cee8cc6ac4932d5 Node validate run41529593868 FAILED 1 new fixture ReferenceError (2279 PASS, 1 FAIL, 6 SKIP); corrected same-commit fixture with unchanged engine logic at 6f622b8641634255b83bffd230335e35db298091.",
+        "Corrected exact PR head: approval41530106838, validate Node/lint/build41530106829, SQL41530106866, cloud/mobile41530106826, security41530106929 and review41530106801 all SUCCESS; original60341530107023 SKIPPED, not PASS.",
+        "PR442 nonforce squash merged e2957ab1ada581b593302ceaf56d8f14c6481cce, readback engine blob bc8bbcee9ec349145a51552ab5dd3337115feca6 and test blob dfae876fba526ff8020ff6fb3a7893db3a35ab20.",
+        "Exact merged source CI certify-ready-batch41530621378, validate Node/lint/build41530621353, approval41530621346, cloud/mobile41530621411 and review41530621457 all SUCCESS. No actual authenticated app/Netlify outcome measured."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head and merged-source applicable CI, nonforce merge, and final source readback pending."
+      "ci_runs": [
+        41529593868,
+        41530106838,
+        41530106829,
+        41530106866,
+        41530106826,
+        41530106929,
+        41530106801,
+        41530107023,
+        41530621378,
+        41530621353,
+        41530621346,
+        41530621411,
+        41530621457
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
-      "notes": "Evidence-quality refinement only. The earlier relative-range cross-version heuristic remains explicitly unproven. Historical shots remain immutable, and missing or out-of-bounds old espresso-range context produces a cautious baseline rather than an invented current dial endpoint. No Netlify deployment authorized."
+      "notes": "VERIFIED READY, NOT DEPLOYED. Historic dial outside its own archived snapshot espresso range is not forcibly mapped to today's espresso-range boundary. Within-range endpoints and middle values retain explicitly unproven relative-range starting estimates. Existing shots and all Locked one-change, taste, family, privacy, offline and Community behavior preserved. Does not prove physical grind-transfer equivalence or real-world taste improvement. Not a new release authorization."
     },
     {
       "id": "DIC-Q-33-selected-producer-credit-locality",

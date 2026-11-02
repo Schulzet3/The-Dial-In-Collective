@@ -1,3 +1,9 @@
+## November 2 UTC — #335 out-of-range historical grinder reading guard READY, NOT DEPLOYED
+
+[#442](https://github.com/Schulzet3/The-Dial-In-Collective/pull/442) merged nonforce at `e2957ab1ada581b593302ceaf56d8f14c6481cce`: discard historical grind-setting translations outside the recorded original espresso range instead of clamping into fabricated current-range endpoint evidence; preserve all shots and valid-range estimates. One new-test fixture typo corrected after preserved initial failing run. Corrected PR-head seven applicable checks SUCCESS, merged-source validate/approval/cloud/mobile/review/READY certification SUCCESS. Frozen603 SKIPPED, not PASS. Scoped `DIC-Q-335-historical-grind-range-evidence` is READY pending separately authorized release. No Netlify, Supabase, member-data writes or empirical taste improvement assertion.
+
+---
+
 ## November 2 UTC — Issue #423 encrypted-archive restore AUTOMATED SCHEDULE, real test PENDING
 
 Owner requires automatic isolated restoration without recurring manual GitHub clicks. Operations PR #437 is merged to main `5b6a056adf9cb6a39ce363f6530859e2239b1970` with passing exact-source CI. Tuesday 13:17 UTC GitHub Actions scheduled saved-archive restore: first pin Nov1 independently Drive/GitHub matched ZIP; subsequent recent scheduled GitHub artifacts only, which do not independently prove Drive delivery. Existing Backup Watchdog was extended and confirmed enabled, monitoring both weekly restore jobs and daily courier delivery. **NO actual archived age decryption/isolated PostgreSQL restoration has passed yet**; Issue #423 remains open. No app publication, extra exports or production SQL/Auth/member writes.
