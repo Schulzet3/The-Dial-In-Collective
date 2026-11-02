@@ -10,6 +10,16 @@ const HASH=/^[a-f0-9]{64}$/;
 export async function prepareReleaseEvidence({backup,artifact,githubToken,sourceSha,
  approvedReadyItemIds,backupRequester=requestEncryptedBackup,
  artifactRetriever=retrieveVerifiedReleaseBundle}={}){
+ // Refuse any caller-controlled bypass or invalid release scope BEFORE a
+ // fallback can create a durable claim and dispatch a live-read backup.
+ if(artifact!==undefined&&artifact!==null)
+  throw Error('Raw artifact override is not a certified release bundle');
+ if(!SHA.test(sourceSha||'')||
+  !Array.isArray(approvedReadyItemIds)||!approvedReadyItemIds.length||
+  approvedReadyItemIds.some(id=>typeof id!=='string'||!id.trim())||
+  new Set(approvedReadyItemIds).size!==approvedReadyItemIds.length)
+  return {ready:false,status:'HOLD_EXACT_SOURCE_CI_AND_READY_SCOPE_REQUIRED',
+   provider_write_calls:0};
  const recovery=decideReleaseBackup(backup||{});
  if(!recovery.reusable){
   if(!githubToken)return {ready:false,status:'BACKUP_UNVERIFIED_DISPATCH_UNAVAILABLE',
@@ -21,14 +31,10 @@ export async function prepareReleaseEvidence({backup,artifact,githubToken,source
  }
  // A raw ZIP plus a matching caller-provided SHA is NOT a source-bound CI
  // certificate. No bypass of the v4 static+Function retrieval is permitted.
- if(artifact!==undefined&&artifact!==null)
-  throw Error('Raw artifact override is not a certified release bundle');
- if(!githubToken||!SHA.test(sourceSha||'')||
-  !Array.isArray(approvedReadyItemIds)||!approvedReadyItemIds.length||
-  approvedReadyItemIds.some(id=>typeof id!=='string'||!id.trim())||
-  new Set(approvedReadyItemIds).size!==approvedReadyItemIds.length)
+ if(!githubToken)
   return {ready:false,status:'HOLD_EXACT_SOURCE_CI_AND_READY_SCOPE_REQUIRED',
-   recovery_action:recovery.action,backup_structural_evidence_only:true};
+   recovery_action:recovery.action,backup_structural_evidence_only:true,
+   provider_write_calls:0};
  const certified=await artifactRetriever({token:githubToken,sourceSha});
  const functionZip=certified?.functionZip;
  const functionHash=certified?.receipt?.immutable_function_sha256;
