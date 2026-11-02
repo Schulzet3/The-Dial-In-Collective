@@ -27,7 +27,8 @@ jobs:
         run: |
           node scripts/release/release-queue.mjs --validate
           node scripts/release/release-queue.mjs --enforce-intake
-          node scripts/release/release-queue.mjs --strict
+          # Certification runs tests even when the queue is empty; only the release controller grants publication.
+          node scripts/release/release-queue.mjs --status
       - name: Combined Node regressions
         run: npm test
       - name: Combined cloud, offline and UI regressions

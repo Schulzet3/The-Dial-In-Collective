@@ -24,3 +24,8 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 - Added fail-closed check: a DEPLOYED-labelled item with a merged commit newer than the actual published source cannot be silently included in a future release candidate. A label alone is not a deployment receipt.
 - Added regression for a prematurely marked DEPLOYED overlapping-path item; source-bound CI still required before READY. Incident #356 remains open pending end-to-end verification and the broader replacement workflow.
 - No Netlify/Supabase/member data writes, no publication, no queue state promotion.
+
+## 2026-11-02 — CI no-batch distinction and continuity incident
+- The automatic CI job now reports release-queue status rather than requiring a READY release on every development push; it still runs the full combined tests, lint and build. The production controller retains its strict fail-closed release gate.
+- Previous test-only commit `2e0105ba93bd859a5e617a958697164839f2893d` violated the same-commit journal rule. This entry records the defect without rewriting immutable history or falsely claiming that prior CI passed. This commit includes its own same-commit journal.
+- Issue #356 source-isolation follow-up and end-to-end release rehearsal remain open; no production release or provider write.
