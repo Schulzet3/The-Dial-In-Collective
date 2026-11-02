@@ -1,3 +1,15 @@
+## November 2 UTC — #33 original603 #501 current selected lot/region bounded adversarial test (TESTING; no deploy)
+
+Recovered actual development `34101e043edc1a983acbcc8774bd41baa93f1018`, AGENTS, scoped journal, Current Status, Master Specification, Decision Ledger, approval matrix, release queue **0 READY / 89 DEPLOYED / 3 IN_PROGRESS**, original603 immutable source register blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, #267 V2 and #96 boundaries and November 1 automation registry. Since PR391, source delta is #267 audit-only; no shared extractor runtime file modified. User-excluded PR367 remains untouched.
+
+Independent November 2 public-web review of the [official selected IXXA Ki-Saya product](https://www.ixxacoffee.com/products/organic-ki-saya-tenejapa-microlot) shows selected H1 `Organic Ki-Saya - Tenejapa Microlot`; direct named product prose says `Ki-Saya, our organic gem from Chiapas`, and its separate current lot sentence says `This lot hails from Tenejapa`. Original603 #501 October29 register had only `origin: Tenejapa` and qualified missing locality; current runtime already contains a generic two-claim selected-lot rule, so **do not assume a still-live defect or change runtime without testing**. Web search reports current-day crawl but is not DNS-pinned raw HTML/hash or exact-source parser replay; the page displays sold out, so no current purchasability claim.
+
+**Same-commit narrow test+receipt+journal:** four bounded adversarial tests in `tests/coffee-issue33-ixxa-selected-lot-region.test.mjs` assert the directly printed locality/region composition, source fact and Add Coffee preview, reject unrelated recommendation/SEO/grind claims, contradictory named regions and historic/mismatched selected H1. Source receipt `docs/audits/issue33-ixxa-selected-lot-region-20261102.json`. This is **TESTING** until exact PR-head applicable CI. A true regression requires scoped diagnosis/fix before integration; if all tests pass, only verified regression coverage is claimed, not a new runtime defect. No READY promotion.
+
+Original603 CSV/captures/oracle, 153 context-qualified and 29 missing-literal-qualified caveats, original missing/review cases, #267 V2 counts, #96, PR367, existing READY/DEPLOYED queue, SQL/Auth/Edge/member/provider and production untouched. Original frozen603 SKIPPED is not PASS; no hosted GoTrue or all603 claim. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 original603 #248 current official Onyx archive boundary (source-only review; no READY or deploy)
 
 **Recovery:** development source `83fcb9df391f8ba7b2a1954e57c7a3371662991f`; current AGENTS, #33 journal/issue, Current Status, Master Spec, Decision Ledger, approval matrix, release queue (**0 READY / 89 DEPLOYED / 3 IN_PROGRESS**), original603 fifth20 source register, #267 V2 and #96 boundaries, and November 1 automation ownership registry. The prior development comparison from `c064f9de` contains only #267 documentation/ledger changes; no extractor runtime overlap. PR367 remains expressly excluded.
