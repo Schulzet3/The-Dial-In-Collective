@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {decideReleaseBackup as decide} from '../scripts/release/release-backup-decision.mjs';
-const folder='approved-folder',hash='a'.repeat(64);
+const folder='1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf',hash='a'.repeat(64);
 const evidence={githubArtifact:{id:12,expired:false,size_in_bytes:99},
  driveFile:{id:'file-1',parent_ids:[folder],size:'99'},expectedArtifactId:12,
  expectedDriveId:'file-1',approvedFolderId:folder,verifiedCiphertextSha256:hash,
@@ -14,6 +14,8 @@ test('only independently verified, sufficiently recent encrypted backups may be 
  {githubArtifact:{...evidence.githubArtifact,size_in_bytes:0}},
  {driveFile:{...evidence.driveFile,parent_ids:['wrong']}},
  {driveFile:{...evidence.driveFile,parent_ids:[folder,'other']}},
+ {approvedFolderId:'attacker-folder',driveFile:{...evidence.driveFile,parent_ids:['attacker-folder']}},
+ {approvedFolderId:undefined},
  {verifiedCiphertextSha256:undefined},
  {verifiedCiphertextSha256:'b'.repeat(64)},
  {latestDataWriteUtc:'2026-11-01T11:01:00Z'},

@@ -6,8 +6,8 @@ const sha='a'.repeat(40),archive=Buffer.concat([Buffer.from('PK'),Buffer.alloc(1
 const artifact={archive,sourceSha:sha,certifiedSourceSha:sha,
  expectedSha256:createHash('sha256').update(archive).digest('hex')};
 const backup={githubArtifact:{id:5,expired:false,size_in_bytes:200},
- driveFile:{id:'d',parent_ids:['approved'],size:200},expectedArtifactId:5,
- expectedDriveId:'d',approvedFolderId:'approved',verifiedCiphertextSha256:'b'.repeat(64),
+ driveFile:{id:'d',parent_ids:['1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf'],size:200},expectedArtifactId:5,
+ expectedDriveId:'d',approvedFolderId:'1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf',verifiedCiphertextSha256:'b'.repeat(64),
  expectedCiphertextSha256:'b'.repeat(64),latestDataWriteUtc:'2026-11-01T01:00:00Z',
  snapshotStartUtc:'2026-11-01T02:00:00Z',verificationUtc:'2026-11-01T03:00:00Z'};
 test('preflight reuses verified recovery and exact immutable bytes without publishing',async()=>{
