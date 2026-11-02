@@ -22,10 +22,10 @@ test('creates durable GitHub claim before dispatch; returns no offsite verificat
  const f=fixture();
  const r=await requestEncryptedBackup({token:'fake',freshnessKey:key,fetcher:f.fetcher});
  assert.equal(r.status,'BACKUP_REQUESTED_NOT_VERIFIED');
- assert.equal(f.calls.length,4);
+ assert.equal(f.calls.length,5);
  assert.match(f.calls[2][0],/\/git\/refs$/);
- assert.equal(f.calls[3][1].method,'POST');
- assert.deepEqual(JSON.parse(f.calls[3][1].body),{ref:'main'});
+ assert.equal(f.calls[4][1].method,'POST');
+ assert.deepEqual(JSON.parse(f.calls[4][1].body),{ref:'main'});
  assert.equal(r.claim_ref,backupClaimRef(key));
 });
 test('existing claim or running backup suppresses dispatch',async()=>{

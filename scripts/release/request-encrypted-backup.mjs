@@ -47,6 +47,10 @@ export async function requestEncryptedBackup({token,freshnessKey,fetcher=fetch}=
  const claim=await created.json();
  if(claim?.ref!==claimRef||claim?.object?.sha!==mainSha)
   throw Error('Durable backup claim readback mismatch; do not dispatch');
+ // A main change after claim would dispatch different backup code; HOLD instead.
+ const currentMain=await get('/git/ref/heads/main');
+ if(currentMain?.object?.sha!==mainSha)
+  throw Error('Main backup source changed after durable claim; manual reconciliation required');
  // Dispatch exactly once AFTER a durable atomic claim. Any failure is HOLD.
  const response=await fetcher(API+'/actions/workflows/nightly-backup.yml/dispatches',{
   method:'POST',headers:{...headers,'Content-Type':'application/json'},
