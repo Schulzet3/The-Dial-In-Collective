@@ -14,14 +14,14 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 5131,
-    "remaining_v2_lines": 574830,
-    "status": "IN_PROGRESS_R2_027_SOURCE_BOUND",
+    "verified_new_v2_reviewed_lines": 5291,
+    "remaining_v2_lines": 574670,
+    "status": "IN_PROGRESS_R2_028_SOURCE_BOUND",
     "next_file_index_1_based": 59,
     "next_file": "docs/DECISION_LEDGER.json",
     "next_source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
-    "next_line_1_based": 241,
-    "next_action": "Resume frozen manifest #59 docs/DECISION_LEDGER.json line241.",
+    "next_line_1_based": 401,
+    "next_action": "Resume frozen manifest #59 docs/DECISION_LEDGER.json line401.",
     "independently_reviewed_v2_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -526,6 +526,13 @@
         "first_line": 161,
         "last_line": 240,
         "receipt": "docs/audits/issue267-v2-frozen-batches/R2-027.json"
+      },
+      {
+        "path": "docs/DECISION_LEDGER.json",
+        "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+        "first_line": 241,
+        "last_line": 400,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-028.json"
       }
     ],
     "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
@@ -535,7 +542,7 @@
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
     "inventory_status": "PINNED_436_FILES_ALL_436_SHA_BYTE_LINE_COUNTS_VERIFIED",
     "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
-    "reviewed_current_source_lines": 6142,
+    "reviewed_current_source_lines": 6302,
     "reviewed_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -984,10 +991,17 @@
         "first_line": 1651,
         "last_line": 1730,
         "receipt": "docs/audits/issue267-v2-current-batches/C2-027.json"
+      },
+      {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "source_blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "first_line": 1731,
+        "last_line": 1890,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-028.json"
       }
     ],
     "next_file": "scripts/audit/coffee-frozen-ci.py",
-    "next_line_1_based": 1731,
+    "next_line_1_based": 1891,
     "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
     "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
     "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
@@ -1070,8 +1084,8 @@
         "separate_from_pinned_snapshot": true
       }
     ],
-    "latest_known_development_sha": "101df25f7c43bff6fb6394e906ce4a54c3e51bb6",
-    "latest_known_development_sha_note": "Pinned Python blob identical at development 101df25f7c43bff6fb6394e906ce4a54c3e51bb6; other post-pin source drift remains unreviewed."
+    "latest_known_development_sha": "58652ba00c2444b9e22944f615961b1225d27279",
+    "latest_known_development_sha_note": "As of 58652ba00c2444b9e22944f615961b1225d27279: pinned coffee-frozen-ci.py blob 266631b5a9abf05f574e2a1058a9cd7372172d08 identical; compare from pinned snapshot shows 224 later commits/207 changed paths, not semantic review. Existing post-pin source-drift path inventory remains nonexhaustive and unreviewed outside separate D2 receipts."
   },
   "legacy_v1_immutable_reference": {
     "integrated_historical_semantic_lines_reported": 71120,
