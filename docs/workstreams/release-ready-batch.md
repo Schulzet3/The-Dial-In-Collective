@@ -135,3 +135,8 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — exact-source CI failure diagnosis and instruction repair
 - Run 41406059039: 2228/2235 Node tests PASS, one failure `tests/approval-coverage.test.mjs` due to shortened Project Instructions omitting exact owner-locked `Never request ... screenshots` clause. Restored explicit no-screenshot wording in GitHub paste-ready instructions without weakening original owner constraint. Rerun exact-source CI pending; no release status change.
+
+## 2026-11-02 — Issue #368 exact-source automatic artifact retrieval bridge
+- Added `retrieve-certified-release-bundle.mjs` with live five-check SHA readback, exact-source discovery/download, strict allowlist ZIP unpack, two SHA-256 sidecars, schema-v4 certificate and function/static hash checks, immutable Netlify digest manifest and guaranteed temp cleanup. No provider mutation.
+- `prepare-release-evidence.mjs` now automatically retrieves source-bound CI bytes only after independently reusable recovery when explicit archive not provided; original preflight API remains compatible. Positive and adversarial tests added.
+- Branch base `62161b2d76e8b4460edab21aa3d3d3865c1e6137`. **Hosted CI and integration PENDING**. Main controller, durable backup dedup, atomic publication and provider readback still pending. No deploy, backup dispatch or production write.
