@@ -10,25 +10,40 @@
     {
       "id": "DIC-Q-33-selected-producer-credit-locality",
       "issue": 33,
-      "pr": null,
+      "pr": 352,
       "title": "Extract current selected producer-credit locality with an explicit country and corroborated current H1",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "64e923b35e62100d05dae0f302cf78d5f3a16068",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ],
       "tests": [
-        "Fresh exact current official source run 41376320559, job 125057219690: 3/3 original603 #4/#308/#312 fetched and parsed; #312 direct selected H1 Bressani Family Washed Sidra, producer Bressani Family, selected product text Bressani Family, San Jerónimo Guatemala, canonical origin blank. #4 already has current Medium and La Encarnación/Ocotepeque/Honduras; #308 no selected origin publication. Raw source SHA and private artifact receipt docs/audits/issue33-ninth3-current-official-review-20261102.json.",
-        "Six bounded synthetic adversarial groups staged; exact PR-head CI, nonforce integration, exact merged-source official three-case before/after and full scoped tests are pending. Never claim PASS or READY before evidence."
+        "Fresh independent current official before run 41376320559/job125057219690 3/3 FETCHED/PARSED and exact merged after run 41377229523/job125060004529 3/3 FETCHED/PARSED; original603 #312 Bressani Family Washed Sidra gains only origin San Jerónimo, Guatemala from directly published selected producer-credit locality, #4 and #308 field maps unchanged, all three H1 arrays and conflict arrays unchanged. Raw HTML SHA256 differs between fetches; do NOT claim byte-identical live pages.",
+        "Six bounded synthetic adversarial groups PASS for matching selected H1+producer, Unicode BR line, absent/mismatched producer, stale SEO, cultivar/no country/hidden DOM, two contradictory localities and existing stronger origin.",
+        "First PR352 head 0a310459f9c075fbcb221dd6c1e98e92827458e8 Node41376728815 and cloud41376728859 FAILED real JS regex syntax; corrected same-commit journal on head dc931f54655ff7f9d713b7268a922c7a2d870749. No false PASS for failing head.",
+        "Corrected exact PR352 head: Node/lint/build 41376920258 SUCCESS (2194 PASS, 0 FAIL, 6 SKIP); cloud/mobile 41376920261 SUCCESS (1717 cloud PASS), visual41376920280, SQL41376920267, security41376920269, approval41376920302 and private exact-source41376920352 all SUCCESS; original frozen60341376920379 SKIPPED, not PASS.",
+        "PR352 nonforce merge 64e923b35e62100d05dae0f302cf78d5f3a16068, all five changed path blobs identical to tested head; concurrent #267 release runbook-only change preserved. Exact merged-source Node/lint/build 41377229441 SUCCESS (2194 PASS/0 FAIL/6 SKIP), cloud/mobile 41377229604 SUCCESS (1717 PASS/0 FAIL), approval41377229450 SUCCESS; source run41377229523 SUCCESS. Restricted source acceptance41377229435 SKIPPED."
       ],
       "ci_runs": [
-        41376320559
+        41376728815,
+        41376728859,
+        41376920258,
+        41376920261,
+        41376920280,
+        41376920267,
+        41376920269,
+        41376920302,
+        41376920352,
+        41376920379,
+        41377229441,
+        41377229604,
+        41377229450,
+        41377229523,
+        41377229435
       ],
-      "blockers": [
-        "Exact-source applicable CI, safe integration and independently verified current official after-run are required. Only #312 origin is proposed; all other fields/conflicts must remain unchanged."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING, NOT DEPLOYED. Direct selected current source supports San Jerónimo, Guatemala, not an inferred Lake Atitlán prefix. Producer and selected H1 must corroborate. No universal 603 source certification, frozen oracle/captures edits, GoTrue claims, production SQL/Auth/Edge/member/provider writes or #267 V2 changes."
+      "notes": "NARROW VERIFIED READY, NOT DEPLOYED. Actual selected current ICONIK Bressani Family Washed Sidra direct producer credit says Bressani Family, San Jerónimo Guatemala; exact selected H1 and already-canonical producer corroborate, so Origin gains San Jerónimo, Guatemala only. Do not infer Lake Atitlán from archived expectation/SEO. #4 44 North and #308 Compass unchanged, all three conflicts unchanged, raw HTML bytes varied between fetches. 0 full original603 products manually certified, 153 context-qualified and 29 missing-literal-qualified remain, frozen603 CI skipped, real hosted GoTrue not run. #267 V2/#96, immutable CSV/captures/oracle and all prior READY/DEPLOYED preserved; no production deploy or provider/member data write."
     },
     {
       "id": "DIC-Q-335-cross-version-grinder-range",

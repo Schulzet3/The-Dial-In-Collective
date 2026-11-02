@@ -1,3 +1,9 @@
+## November 2, 2026 — Issue33 #312 current selected producer-credit origin narrow READY, not deployed
+
+PR352 nonforce merged `64e923b35e62100d05dae0f302cf78d5f3a16068` with tested code/test blobs identical to PR head; exact corrected PR-head and merged Node/cloud/approval CI PASS, security/SQL/visual/private source PASS, frozen603 SKIPPED. Current official selected #312 ICONIK Bressani Family Washed Sidra direct published `Bressani Family, San Jerónimo Guatemala` now yields Origin `San Jerónimo, Guatemala` (previously blank), only one field changed across independent 3/3 before and 3/3 after current official selected product runs; #4/#308 and all conflicts unchanged, raw HTML hashes varied. See `docs/audits/issue33-ninth3-current-official-review-20261102.json` and `docs/workstreams/issue-33.md`. Release queue **18 READY/71 DEPLOYED/2 IN_PROGRESS**, no publication. Parent Issue33 OPEN; 153 context-qualified, 29 missing-literal-qualified, frozen original603 and hosted GoTrue limits preserved.
+
+---
+
 ## November 2 UTC — Issue267 V2 sixth ordered batch (audit only, no deployment)
 
 Fresh frozen V2 **1,748/579,961** (578,213 remain), original matrix #30 next line **61**; independent pinned current-code V2 **2,300** lines, next #32 `scripts/audit/coffee-corpus-build.py` line1. Source-bound receipts R2-006/C2-006, append-only ledgers and checkpoint in `docs/audits/`; inventory **306/436** file line counts verified, **130 pending**, full current denominator unknown. Thirteen changed executable/test paths since pin remain separately unreviewed; no app defect/deletion proved. No application code, READY queue, production/provider or deployment changes; documentation-only exact-source approval CI must be verified. See `docs/workstreams/issue-267.md`.
