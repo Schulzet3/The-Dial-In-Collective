@@ -55,10 +55,11 @@ export function gitFailureDiagnostic(error,{operation='command',secrets=[]}={}){
  return {operation:/^[a-z-]+$/.test(operation)?operation:'command',
   exit_code:Number.isInteger(error?.status)?error.status:null,category,stdout,stderr};
 }
-const git=(args,{input,env}={})=>{
+const git=(args,{input,env,trim=true}={})=>{
  const environment=env||process.env;
- try{return execFileSync('git',args,{encoding:'utf8',input,
-  stdio:['pipe','pipe','pipe'],env:environment,timeout:60_000,maxBuffer:4*1024*1024}).trim();}
+ try{const output=execFileSync('git',args,{encoding:'utf8',input,
+  stdio:['pipe','pipe','pipe'],env:environment,timeout:60_000,maxBuffer:4*1024*1024});
+  return trim?output.trim():output;}
  catch(error){
   const secrets=Object.entries(environment).filter(([key])=>/TOKEN|SECRET|PASSWORD|AUTH|CREDENTIAL|DB_URL|PRIVATE_KEY/i.test(key)).map(([,value])=>value);
   throw Error('Git operation failed: '+JSON.stringify(gitFailureDiagnostic(error,{operation:args[0],secrets})));
@@ -139,8 +140,8 @@ export async function executeSingleUseRelease(settings=process.env){
    eventForced:settings.DIC_PUSH_FORCED,eventAfterSha:settings.DIC_PUSH_AFTER_SHA,
    eventHeadSha:settings.GITHUB_SHA,
    remoteMainSha:git(['ls-remote','origin','refs/heads/main']).split(/\s+/)[0],
-   request,previousJournal:git(['show',parents[1]+':'+OPS_JOURNAL_PATH])+'\n',
-   currentJournal:git(['show','HEAD:'+OPS_JOURNAL_PATH])+'\n'
+   request,previousJournal:git(['show',parents[1]+':'+OPS_JOURNAL_PATH],{trim:false}),
+   currentJournal:git(['show','HEAD:'+OPS_JOURNAL_PATH],{trim:false})
   });
   validatePushEnvelope();
  }

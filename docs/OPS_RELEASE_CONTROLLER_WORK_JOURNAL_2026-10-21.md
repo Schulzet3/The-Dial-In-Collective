@@ -166,3 +166,7 @@ The previous one-use controller rejected its request envelope before any release
 
 ## 2026-11-02 — Operational release-isolation guard promotion
 - Ported exact READY item ID grant binding, merged unready code isolation and DEPLOYED-label laundering protection from development SHA 61d59c8ef459780a42ea4ab3f887f913e6f16fb5 (CI run 41388922128 SUCCESS) to operational main release controller and focused tests. Main-specific CI verification remains required. No release request, grant consumption, publication, database/member write or backup change.
+
+
+## 2026-11-02 — repair exact historical journal byte preservation
+- Main acceptance run 41389322471 failed 1/71 tests: the controller normalized historical journal trailing whitespace, breaking exact-byte append-only validation. Repaired Git helper with opt-in trim:false for both historical/current journal reads, preserving original bytes. Focused tests and full main acceptance must pass before declaring verified. No production publication or provider write.
