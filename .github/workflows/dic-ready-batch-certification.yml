@@ -1,0 +1,49 @@
+name: DIC automatic READY batch certification
+# Non-publishing CI. A green batch check is evidence, never a release grant.
+on:
+  push:
+    branches: [development/backend-foundation]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dic-ready-batch-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  certify-ready-batch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Verify queue schema and complete unpublished source coverage
+        run: |
+          node scripts/release/release-queue.mjs --validate
+          node scripts/release/release-queue.mjs --enforce-intake
+          node scripts/release/release-queue.mjs --strict
+      - name: Combined Node regressions
+        run: npm test
+      - name: Combined cloud, offline and UI regressions
+        run: npm run test:cloud
+      - name: Lint
+        run: npm run lint
+      - name: Production-style build
+        run: npm run build:cloud
+      - name: Publish exact-source certification summary
+        if: always()
+        env:
+          DIC_SOURCE_SHA: ${{ github.sha }}
+        run: |
+          {
+            echo '## READY batch automatic source certification'
+            echo "Source: \`$DIC_SOURCE_SHA\`"
+            echo "Combined test and source gates: \`$([[ \"\${{ job.status }}\" == success ]] && echo PASS || echo NOT_VERIFIED)\`"
+            echo 'This check does not verify offsite backup freshness, provider routing or issue a one-use production grant.'
+          } >> "$GITHUB_STEP_SUMMARY"
