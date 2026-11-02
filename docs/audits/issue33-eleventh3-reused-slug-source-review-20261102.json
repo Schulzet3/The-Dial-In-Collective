@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-02",
-  "status": "TESTING_SYNTHETIC_SOURCE_BACKED_GUARDED_CURRENT_REPLAY_PENDING",
+  "status": "VERIFIED_THREE_CURRENT_OFFICIAL_SOURCE_H1_PARSER_PREVIEW_NO_NEW_RUNTIME_DEFECT_NO_READY",
   "base_development_sha": "53a40fe4481ed3ba7ac20c4899f53797e830c416",
   "scope": "Three original603 exact official URLs with reused historic SEO slugs and selected current H1; no runtime fix unless regression proves one.",
   "original603_cases": [
@@ -36,14 +36,117 @@
   },
   "test_path": "tests/coffee-issue33-reused-slug-selected-identity.test.mjs",
   "selector": "[dic-issue33-eleventh3]",
-  "current_raw_html_sha256": null,
-  "actual_current_parser_replay": "PENDING_POST_MERGE_GUARDED_RUN",
+  "current_raw_html_sha256": [
+    {
+      "number": 30,
+      "sha256": "ee70a6f9d63aa122976f47044ad1547d32fea2c3c84fbb1da03afa7a32d110e7"
+    },
+    {
+      "number": 293,
+      "sha256": "a6759d19cb7e57119fa965006fc2c3881370951d9bff1a0ecb3b056fa94c5d61"
+    },
+    {
+      "number": 520,
+      "sha256": "cad96d7d4d9e41834123253ae6cc16ff028674aade9bcd5f03e726411e03483f"
+    }
+  ],
+  "actual_current_parser_replay": "PASS_BOUNDED_3_OF_3_SOURCE_FETCH_PARSE_PREVIEW_NOT_UNIVERSAL_603",
   "restrictions": "Do not change immutable corpus, oracle, captures, #267 V2, #96, PR367, queue READY/DEPLOYED, production SQL/Auth/Edge/member/provider or publish. Web text is not raw source hash or live parser proof.",
-  "next": "Exact PR-head Node/cloud/approval, safe nonforce merge, guarded three-source raw HTML/H1/parser/preview readback and bounded independent case adjudication; no all603 or hosted GoTrue claim.",
+  "next": "Continue only unresolved source-backed omissions, verify exact official H1/lot, avoid repeating unchanged cases. Parent Issue33 OPEN; full original603 semantic acceptance and current hosted GoTrue not established.",
   "first_head_ci": {
     "run": 41488066993,
     "conclusion": "FAIL",
     "reason": "Synthetic #30 omitted current official selected Gold Collection corroboration paragraph; other 3 tests passed.",
     "correction": "Added exact selected product Gold Collection explanatory sentence to fixture; no runtime change; rerun required."
+  },
+  "integration": {
+    "pr": 415,
+    "corrected_head_sha": "908fe6f9a3ce9e572e7506853aa7b72509ca00c6",
+    "merge_sha": "59cab0b6c37dd364c24af66a936b203a253a8325",
+    "tree_parity": "GitHub compare head to merge ahead1/behind0/zero changed files",
+    "first_head_cloud_failure": 41488066993,
+    "first_head_cause": "Synthetic Bonjo fixture lacked selected official Gold Collection explanatory sentence; corrected fixture only, no runtime change.",
+    "exact_corrected_pr_head_ci": {
+      "node": 41488534956,
+      "node_pass": 2266,
+      "node_fail": 0,
+      "node_skip": 6,
+      "cloud": 41488534910,
+      "cloud_pass": 1740,
+      "cloud_fail": 0,
+      "approval": 41488534683,
+      "sql": 41488535167,
+      "visual": 41488535448,
+      "private_source_bundle": 41488534970,
+      "frozen603": 41488535176,
+      "frozen603_conclusion": "SKIPPED"
+    },
+    "exact_merged_source_ci": {
+      "node": 41488967791,
+      "node_pass": 2266,
+      "node_fail": 0,
+      "node_skip": 6,
+      "cloud": 41488967743,
+      "cloud_pass": 1740,
+      "cloud_fail": 0,
+      "approval": 41488967816,
+      "automatic_ready_certification": 41488967768,
+      "guarded_official_source": 41488967819
+    }
+  },
+  "guarded_source": {
+    "run_id": 41488967819,
+    "job_id": 125426618436,
+    "source_sha": "59cab0b6c37dd364c24af66a936b203a253a8325",
+    "conclusion": "SUCCESS",
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "preview_rendered": 3,
+    "manual_certified": 0,
+    "artifact_id": 13164230100,
+    "artifact_sha256": "3faf2fb2da50e298ec2e5fcbe590132d2fa15fb04814f63c02588ce1abb6a39b",
+    "artifact_expiry_utc": "2026-11-03T17:12:59Z",
+    "cases": [
+      {
+        "number": 30,
+        "selected_h1": "Costa Rica, El Poeta",
+        "html_sha256": "ee70a6f9d63aa122976f47044ad1547d32fea2c3c84fbb1da03afa7a32d110e7",
+        "name": "Costa Rica, El Poeta",
+        "origin": "West Valley – San Rafael de San Ramón, Costa Rica",
+        "process": "Washed",
+        "release_label": "Gold Collection",
+        "producer": "Julia Vega Rodríguez, Olman Cruz Vega, Ricardo Chávez Garita, and Juan Bautista Mejia Rojas",
+        "tasting_notes": "Brown Sugar, Hibiscus, Raspberry, Honey",
+        "roast_level": null,
+        "conflicts": [
+          "elevation_m"
+        ],
+        "finding": "Current Costa Rica selected H1 outranks old Guatemala URL slug. Four direct selected producers and Gold Collection quality tier retained. Contradictory 5,200 feet versus 1,100 MASL remains elevation conflict; do not infer seven-tier roast from unlabeled 4/8 icon."
+      },
+      {
+        "number": 293,
+        "selected_h1": "Ethiopia Yirgacheffe Habtamu",
+        "html_sha256": "a6759d19cb7e57119fa965006fc2c3881370951d9bff1a0ecb3b056fa94c5d61",
+        "name": "Ethiopia Yirgacheffe Habtamu",
+        "origin": "Ethiopia",
+        "producer": "Habtamu Fekadu Aga (Kuri Mountain Coffee)",
+        "tasting_notes": "Cherry, Papaya, Lime Candy",
+        "conflicts": [],
+        "finding": "Current selected H1 and structured product identity outrank stale Guji Getachew URL; founder Aaga Dinsa not substituted as producer. Yirgacheffe in H1 does not by itself certify specific current lot region beyond parsed country."
+      },
+      {
+        "number": 520,
+        "selected_h1": "Ethiopia, Dry Processed - Sulladjah Coffee Beans",
+        "html_sha256": "cad96d7d4d9e41834123253ae6cc16ff028674aade9bcd5f03e726411e03483f",
+        "name": "Ethiopia, Dry Processed - Sulladjah Coffee Beans",
+        "origin": "Ethiopia, Limu, Abana Estate",
+        "process": "Natural",
+        "producer": null,
+        "tasting_notes": "Caramel, Fig",
+        "conflicts": [],
+        "finding": "Current selected H1 outranks stale Kenya slug; selected Dried In Cherry is Natural despite historic mixed washed/natural prose. Abana Estate appears as farm/location, not independently proven canonical producer. Historic floral description not selected tasting-note proof."
+      }
+    ]
   }
 }
