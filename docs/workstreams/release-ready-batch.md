@@ -126,3 +126,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — source-bound GitHub Actions artifact discovery
 - Added read-only CI artifact locator requiring successful completed push run for exact source SHA on development, nonexpired unique matching immutable dist and certificate artifacts with run+SHA metadata. Refuses stale, ambiguous, missing or API-uncertain evidence; mocked tests added to nonpublishing rehearsal. It returns IDs only; download and archive extraction still pending. No production changes.
+
+## 2026-11-02 — read-only GitHub CI artifact download
+- Added exact-source discovered artifact archive download with size/magic validation, private temporary files and cleanup on errors; explicit NOT_YET_VERIFIED status until certificate and inner ZIPs are checked. Mock positive/negative tests included in hosted rehearsal. No GitHub release or Netlify publication. Next: secure unpack of outer artifact ZIPs and bind to certificate verification.
