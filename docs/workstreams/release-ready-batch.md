@@ -78,3 +78,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — deterministic artifact negative regression
 - Added Python regression to no-publish rehearsal: repeated ZIPs must have identical hashes, missing entrypoint must fail, and symlinks must fail closed. No live provider write. CI pending.
+
+## 2026-11-02 — fix Python rehearsal test discovery
+- GitHub run 41401602292 failed because Python unittest discovery intentionally only recognizes test*.py files; custom filename yielded zero tests. Run the named Python test module directly; no change to production logic. Reverify exact-source hosted rehearsal.
