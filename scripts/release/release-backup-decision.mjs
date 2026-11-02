@@ -1,14 +1,17 @@
 // Read-only release backup evidence decision. Never infer ciphertext integrity from ZIP metadata.
+export const APPROVED_OFFSITE_FOLDER_ID='1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf';
 export function decideReleaseBackup({githubArtifact,driveFile,expectedArtifactId,expectedDriveId,
  approvedFolderId,verifiedCiphertextSha256,expectedCiphertextSha256,latestDataWriteUtc,
  snapshotStartUtc,verificationUtc}={}){
  const problems=[];
+ if(approvedFolderId!==APPROVED_OFFSITE_FOLDER_ID)
+  problems.push('Release backup folder configuration differs from owner-locked direct Drive folder');
  if(!githubArtifact||githubArtifact.id!==expectedArtifactId||
   githubArtifact.expired!==false||!(githubArtifact.size_in_bytes>0))
   problems.push('GitHub ciphertext artifact missing, expired or empty');
  if(!driveFile||driveFile.id!==expectedDriveId||
   !Array.isArray(driveFile.parent_ids)||driveFile.parent_ids.length!==1||
-  driveFile.parent_ids[0]!==approvedFolderId||
+  driveFile.parent_ids[0]!==APPROVED_OFFSITE_FOLDER_ID||
   !(Number(driveFile.size)>0))
   problems.push('Offsite backup absent, empty or not a direct child of approved private folder');
  if(!/^[a-f0-9]{64}$/.test(verifiedCiphertextSha256||'')||
