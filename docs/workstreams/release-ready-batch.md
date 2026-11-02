@@ -54,3 +54,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — safe backup fallback decision regression
 - Added read-only backup decision helper and negative tests: GitHub artifact availability, Drive direct-parent, ciphertext SHA-256 proof and snapshot coverage of latest observed write must all pass to reuse backup; otherwise request and verify a fresh encrypted snapshot. Provider metadata alone is explicitly insufficient proof of ciphertext integrity. Independently read back GitHub artifact 13097561218 (unexpired, nonempty) and Drive file 1396aSuRA-5wApeiRRkgi6A44wtKZEBwB (direct child of approved folder). No new backup created or production data touched. CI pending.
+
+## 2026-11-02 — nonpublishing source isolation rehearsal
+- Added inert release rehearsal CLI and focused negative tests. Current development queue contains zero READY items and two IN_PROGRESS items, so expected result is DENIED_NO_PUBLICATION, not a false PASS. With a synthetic READY assessment, only an exactly matching owner grant passes scope preflight. Rehearsal never claims a release, touches Netlify or writes Git/Supabase. Full live provider/backup/release controller rehearsal remains separate.
