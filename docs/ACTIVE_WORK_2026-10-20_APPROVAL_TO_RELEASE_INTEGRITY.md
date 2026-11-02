@@ -36,3 +36,6 @@ The fallback now checks complete bounded GitHub active-run inventories for queue
 
 ## November 2, 2026 — Issue #417 pending safe controller restoration
 Nonpublishing main controller source+test candidate restores one Git-connected publisher and retains all exact-source authorization and READY gates. No production changes or claim. See OPS journal and #417.
+
+## November 2 — Issue #417 bounded current published app recovery pin
+Proposed nightly source checkout correction to verified Release14 SHA and removal of unnecessary workflow-file-only push backup trigger. Retains schedules, explicit backup requests, encryption and offsite settings. Requires exact PR and merged main CI; no new backup or deployment claimed. See OPS journal.
