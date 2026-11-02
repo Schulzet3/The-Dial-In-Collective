@@ -1,0 +1,43 @@
+name: DIC nonpublishing release safety rehearsal
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - 'scripts/release/**'
+      - 'tests/release-*.test.mjs'
+      - 'tests/rehearse-no-publish.test.mjs'
+      - '.github/workflows/dic-release-safety-rehearsal.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: dic-release-safety-rehearsal-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  rehearsal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rehearse backup fallback and owner scope rejection
+        run: |
+          node --test tests/release-backup-decision.test.mjs tests/rehearse-no-publish.test.mjs tests/netlify-provider-readback.test.mjs tests/ci-certificate.test.mjs
+      - name: Assert current queue cannot accidentally publish
+        run: |
+          set +e
+          node scripts/release/rehearse-no-publish.mjs > rehearsal.json
+          status=$?
+          set -e
+          cat rehearsal.json
+          if [ "$status" -ne 2 ]; then
+            echo 'Unexpected publishable release source or rehearsal error'; exit 1
+          fi
+          node --input-type=module -e "import {readFileSync} from 'node:fs';const r=JSON.parse(readFileSync('rehearsal.json'));if(r.status!=='DENIED_NO_PUBLICATION'||r.ready!==false)process.exit(1)"
+      - name: Publish no-write rehearsal result
+        if: always()
+        run: echo 'No production publication, member write, database mutation, backup deletion or provider action was performed.' >> "$GITHUB_STEP_SUMMARY"

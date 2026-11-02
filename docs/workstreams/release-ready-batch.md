@@ -57,3 +57,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — nonpublishing source isolation rehearsal
 - Added inert release rehearsal CLI and focused negative tests. Current development queue contains zero READY items and two IN_PROGRESS items, so expected result is DENIED_NO_PUBLICATION, not a false PASS. With a synthetic READY assessment, only an exactly matching owner grant passes scope preflight. Rehearsal never claims a release, touches Netlify or writes Git/Supabase. Full live provider/backup/release controller rehearsal remains separate.
+
+## 2026-11-02 — executable no-write rehearsal workflow
+- Added read-only GitHub Actions workflow that runs focused backup fallback, release scope, CI certificate and Netlify provider readback regressions; executes real current-source rehearsal and requires explicit DENIED_NO_PUBLICATION with exit 2 while queue has zero READY. The job must fail if source unexpectedly becomes publishable, requiring review/update of rehearsal expectations. No GitHub write permissions or production mutation. CI pending.
