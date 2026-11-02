@@ -37,7 +37,11 @@ export async function rehearseNoWriteTransaction({backup,githubToken,netlifyToke
   live.function_continuity?.function_name!=='coffee-url-preview'||
   live.function_continuity?.route!=='/api/coffee-preview'||
   live.function_continuity?.method!=='POST'||
-  live.function_continuity?.runtime!=='nodejs22.x')
+  live.function_continuity?.runtime!=='nodejs22.x'||
+  live.function_continuity?.rate_limit?.algorithm!=='sliding_window'||
+  live.function_continuity?.rate_limit?.window_size!==60||
+  live.function_continuity?.rate_limit?.window_limit!==12||
+  live.function_continuity?.rate_limit?.aggregate_key!=='ip')
   throw Error('No-write rehearsal: live Netlify READY/current Function continuity missing');
  return {ready:false,status:'INERT_READONLY_REHEARSAL_PASS_NOT_RELEASE_APPROVAL',
   source_sha:sourceSha,certified_run_id:bundle.run_id,

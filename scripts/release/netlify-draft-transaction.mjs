@@ -4,6 +4,7 @@
 // A single final restore is the publication event; NEVER retry uncertain writes.
 import {buildDigestManifest} from './netlify-digest-deploy.mjs';
 import {assertNetlifyPublishedSource} from './netlify-provider-readback.mjs';
+import {assertCoffeePreviewFunctionContinuity} from './netlify-live-readback.mjs';
 const SITE='153277f2-e19e-4862-b9a6-f2e18ccde271';
 const API='https://api.netlify.com/api/v1/';
 const SHA=/^[a-f0-9]{40}$/;
@@ -18,11 +19,7 @@ export const PREVIEW_FUNCTION_CONFIG={
  }
 };
 export function assertPreviewFunction(deploy){
- const matches=deploy?.available_functions?.filter(x=>x?.n==='coffee-url-preview');
- if(!Array.isArray(matches)||matches.length!==1||matches[0].r!=='nodejs22.x'||
-  !Array.isArray(matches[0].ro)||
-  !matches[0].ro.some(r=>r.p==='/api/coffee-preview'&&r.m?.includes('POST')))
-  throw Error('Netlify draft/live Function continuity not verified');
+ assertCoffeePreviewFunctionContinuity(deploy);
  return true;
 }
 const publishedId=site=>site?.published_deploy?.id||site?.published_deploy_id;
