@@ -1,10 +1,13 @@
-name: DIC encrypted Drive-copy isolated restore (manual, no live writes)
-# Explicit manual-only recovery test. It reads the GitHub ciphertext bytes whose
-# artifact digest must be independently verified against a PRIVATE DRIVE copy.
-# A matching digest is NOT a substitute for supplying the private age identity.
-# Do not schedule until a dedicated automation-only key has been provisioned and
-# a real Drive-to-GitHub digest receipt is available to the runner.
+name: DIC encrypted Drive-copy isolated restore (weekly + manual, no live writes)
+# Encrypted recovery: manual owner-selected Drive-verified ZIP or weekly recent
+# scheduled GitHub archive. First scheduled test pins the previously independently
+# Drive-verified Nov 1 2026 ZIP; later runs report GH-only offsite proof limitation.
+# No production DB writes, extra exports, or automatic Netlify publication.
 on:
+  # 13:17 UTC Tuesday; separate from Sunday fresh-snapshot restore and daily exports.
+  # GitHub scheduled jobs are best effort and may run late.
+  schedule:
+    - cron: '17 13 * * 2'
   workflow_dispatch:
     inputs:
       source_run_id:
@@ -27,15 +30,29 @@ jobs:
     timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
-      DIC_SOURCE_RUN_ID: ${{ inputs.source_run_id }}
-      DIC_VERIFIED_DRIVE_SHA256: ${{ inputs.verified_drive_zip_sha256 }}
-      DIC_ARCHIVE_AGE_IDENTITY: ${{ secrets.DIC_ARCHIVE_AGE_IDENTITY }}
       DIC_ARCHIVE_PROJECT_REF: azviqqejypsefzilgonr
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
-      - name: Require a dedicated recovery secret; block rather than fake success
+      - name: Resolve one existing archived source (scheduled or manual)
+        env:
+          MANUAL_SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+          MANUAL_DRIVE_SHA256: ${{ inputs.verified_drive_zip_sha256 }}
+        run: |
+          set -Eeuo pipefail
+          if [[ "$GITHUB_EVENT_NAME" == "schedule" ]]; then
+            node scripts/backups/select-archived-restore-source.mjs
+          elif [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
+            printf 'DIC_SOURCE_RUN_ID=%s\n' "$MANUAL_SOURCE_RUN_ID" >> "$GITHUB_ENV"
+            printf 'DIC_EXPECTED_ZIP_SHA256=%s\n' "$MANUAL_DRIVE_SHA256" >> "$GITHUB_ENV"
+            echo 'DIC_ARCHIVE_SOURCE_PROOF=independent-drive-manual' >> "$GITHUB_ENV"
+          else
+            echo "::error::Unexpected event; no restore action permitted"; exit 2
+          fi
+      - name: Require configured recovery secret and exact archive source
+        env:
+          DIC_ARCHIVE_AGE_IDENTITY: ${{ secrets.DIC_ARCHIVE_AGE_IDENTITY }}
         run: |
           set -Eeuo pipefail
           if [[ -z "$DIC_ARCHIVE_AGE_IDENTITY" ]]; then
@@ -43,11 +60,11 @@ jobs:
             exit 2
           fi
           if [[ ! "$DIC_SOURCE_RUN_ID" =~ ^[1-9][0-9]{7,15}$ ||
-                ! "$DIC_VERIFIED_DRIVE_SHA256" =~ ^[a-f0-9]{64}$ ]]; then
+                ! "$DIC_EXPECTED_ZIP_SHA256" =~ ^[a-f0-9]{64}$ ]]; then
             echo '::error::Invalid scheduled backup run ID or independent Drive digest'
             exit 2
           fi
-      - name: Verify scheduled source and independent Drive/GitHub ZIP digest
+      - name: Verify scheduled backup provenance and scope of archive hash evidence
         run: |
           set -Eeuo pipefail
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$DIC_SOURCE_RUN_ID" > "$RUNNER_TEMP/run.json"
@@ -55,7 +72,7 @@ jobs:
           python3 - "$RUNNER_TEMP/run.json" "$RUNNER_TEMP/artifacts.json" <<'PY'
           import json,os,re,sys
           run=json.load(open(sys.argv[1])); listing=json.load(open(sys.argv[2]))
-          requested=os.environ['DIC_SOURCE_RUN_ID']; expected=os.environ['DIC_VERIFIED_DRIVE_SHA256']
+          requested=os.environ['DIC_SOURCE_RUN_ID']; expected=os.environ['DIC_EXPECTED_ZIP_SHA256']; proof=os.environ['DIC_ARCHIVE_SOURCE_PROOF']
           if (str(run.get('id'))!=requested or run.get('event')!='schedule' or
               run.get('head_branch')!='main' or run.get('conclusion')!='success' or
               run.get('path')!='.github/workflows/nightly-backup.yml'):
@@ -65,8 +82,13 @@ jobs:
           if len(files)!=1 or files[0].get('expired') or files[0].get('size_in_bytes',0)<128:
               raise SystemExit('Unique live ciphertext artifact unavailable')
           if files[0].get('digest')!='sha256:'+expected:
-              raise SystemExit('Github ciphertext ZIP digest differs from verified PRIVATE Drive ZIP')
-          print('PASS: Exact scheduled GitHub archive digest matches independently supplied private Drive digest')
+              raise SystemExit('GitHub artifact ZIP digest differs from expected source-bound SHA-256')
+          if proof in ('independent-drive-manual','independent-drive-nov1-2026'):
+              print('PASS: Exact historical scheduled artifact matches independently verified private Drive ZIP SHA-256')
+          elif proof=='github-artifact-only':
+              print('PASS: GitHub scheduled source and artifact digest verified; Drive copy NOT independently checked by this job')
+          else:
+              raise SystemExit('Missing recognized Drive/source evidence classification')
           PY
       - name: Download verified original ciphertext artifact (no new backup)
         run: |
@@ -76,6 +98,8 @@ jobs:
             --name "dic-encrypted-nightly-$DIC_SOURCE_RUN_ID" --dir "$RUNNER_TEMP/source"
           test -s "$RUNNER_TEMP/source/backup.age"
       - name: Install age and restore exact saved ciphertext into disconnected PostgreSQL
+        env:
+          DIC_ARCHIVE_AGE_IDENTITY: ${{ secrets.DIC_ARCHIVE_AGE_IDENTITY }}
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y age
