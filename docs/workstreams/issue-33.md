@@ -1,3 +1,17 @@
+## November 2 UTC — #33 PR415 first-head synthetic source fixture corrected (TESTING)
+
+Exact first-head cloud run [41488066993](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41488066993) failed only new Bonjo #30 assertion: the synthetic page omitted the selected product's actual explicit “Our Gold Collection ... selected El Poeta for this tier” paragraph, so parser did not derive Gold Collection from a bare quality-grade label. Corrected synthetic fixture to include the independently observed selected official sentence, without changing runtime or weakening identity/source checks. New exact-source CI required. Other three new tests passed. Original603 SKIPPED, not PASS. [skip netlify]
+
+---
+
+## November 2 UTC — #33 original603 #30/#293/#520 reused-URL selected-H1 provenance (TESTING; no deploy)
+
+Recovered actual development `53a40fe4481ed3ba7ac20c4899f53797e830c416`, AGENTS, #33 issue/journal, Current Status, Master Spec, Decision Ledger, approval matrix, queue (0 READY/89 DEPLOYED/3 IN_PROGRESS), original603 source register, #267 V2/#96 and automation registry. Since PR412, development changed only #267 V2 audit documentation; no shared extractor runtime edits. PR367 excluded.
+
+Independent current official public-web product/H1 review: #30 Bonjo Costa Rica El Poeta despite old Guatemala slug, explicit Gold Collection quality tier and named producers; #293 Seeds Ethiopia Yirgacheffe Habtamu despite old Guji Getachew slug, selected sensory descriptors and founder role separate; #520 Lineage Ethiopia Sulladjah despite old Kenya slug, selected Dried In Cherry versus mixed historic washed/natural narrative and Abana Estate farm/location not an independently established producer. Three synthetic adversarial field/identity regressions and a guarded three-case original603 official-source probe selector added, with source-bound receipt `docs/audits/issue33-eleventh3-reused-slug-source-review-20261102.json`. **TESTING**: no fresh DNS-pinned raw HTML SHA256 or actual current official parser replay yet; no runtime defect or READY claim until proven. Same-commit scoped journal, workflow and tests. Preserve immutable original603 CSV/captures/oracle, 153 context/29 missing-literal caveats, original missing/review, #267 V2, #96, queue, production and ignored PR367. No publication, member/provider writes or paid action. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 original603 #217 Mbingo selected smallholder producer fix VERIFIED (not READY or deployed)
 
 [PR406](https://github.com/Schulzet3/The-Dial-In-Collective/pull/406) safely nonforce merged exact tested head `bcb4b236c090080e012047adf73162343bade099` at `c3a80a1688573a9912cfe9052542083c8b8c5fd1`. GitHub compare tested head → merge: **ahead 1 / behind 0 / zero changed files**, so source tree identical. The official selected [Mbingo Dambi Uddo product](https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural) H1 and current harvesting paragraph directly credit approximately 450 smallholder farms delivering cherries to the selected H1-named Dambi Uddo Station; the old structured register #217 had no producer. The generic repair credits the literal group without falsely assigning the receiving station, unrelated/mismatched stations, historic/hypothetical context or a single component of a blend.
