@@ -15,3 +15,7 @@ All changes remain on isolated branch/PR until passing exact-source CI and nonfo
 ## November 2, 2026 — independent concurrent CI correction retained
 
 Development at `5e9dd7ac4958b89cd03ddd4e95222e4c4d11341d` independently corrected the unused `opts` parameter by removing it from the mock declaration, as part of other CI/rehearsal work. This PR's final merge reconciles against that newer source, keeps its exact `tests/netlify-live-readback.test.mjs` blob untouched, and retains only this PR's separate release-lineage gate, tests and journal. No overlapping regression was dropped; previous PR-head checks do not count as final exact merged-source checks.
+
+## November 2, 2026 — exact queue-preparation scoped journal recognition
+
+Exact merged-source continuity run 41402325484 failed because `scripts/audit/verify-commit-checkpoint.mjs` did not recognize the otherwise contemporaneous and owner-directed `docs/workstreams/release-queue-prep-20261102.md` in merge `a6817f5fb638a66cb5b626027fc09f1f3776072e`. This follow-up accepts only that exact new journal path (not arbitrary release journals) with positive/negative regression tests, preserving earlier commit history and its failure receipt. No application, queue states, release grant, Netlify/Supabase/member mutation or publication. Retest exact source, verify earlier commit range against updated checker, and preserve journal provenance rather than rewriting history.
