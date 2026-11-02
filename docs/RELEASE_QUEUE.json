@@ -10,25 +10,40 @@
     {
       "id": "DIC-Q-33-selected-producer-credit-locality",
       "issue": 33,
-      "pr": null,
+      "pr": 352,
       "title": "Extract current selected producer-credit locality with an explicit country and corroborated current H1",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "DEPLOYED",
+      "merged_source_sha": "64e923b35e62100d05dae0f302cf78d5f3a16068",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ],
       "tests": [
-        "Fresh exact current official source run 41376320559, job 125057219690: 3/3 original603 #4/#308/#312 fetched and parsed; #312 direct selected H1 Bressani Family Washed Sidra, producer Bressani Family, selected product text Bressani Family, San Jerónimo Guatemala, canonical origin blank. #4 already has current Medium and La Encarnación/Ocotepeque/Honduras; #308 no selected origin publication. Raw source SHA and private artifact receipt docs/audits/issue33-ninth3-current-official-review-20261102.json.",
-        "Six bounded synthetic adversarial groups staged; exact PR-head CI, nonforce integration, exact merged-source official three-case before/after and full scoped tests are pending. Never claim PASS or READY before evidence."
+        "Before exact official source run 41376320559/job125057219690 and after exact merged source run 41377229523/job125060004529: 3/3 current selected official products fetched/parsed both times. #312 ICONIK Bressani Family Washed Sidra direct current producer credit Bressani Family, San Jerónimo Guatemala; origin blank -> San Jerónimo, Guatemala only. #4/#308 fields and all 3 conflicts/H1 unchanged; raw HTML hashes differed.",
+        "Six bounded adversarial regression groups passed (selected producer/H1 corroboration, split BR, absent/mismatched producer, stale SEO, cultivar/hidden DOM, conflicting localities, stronger origin). First PR352 head failed JS syntax Node41376728815/cloud41376728859; corrected head dc931f54655ff7f9d713b7268a922c7a2d870749 passed Node/lint/build41376920258 (2194 PASS/0 FAIL/6 SKIP), cloud/mobile41376920261 (1717 PASS), security41376920269, visual41376920280, SQL41376920267, private source41376920352 and approval41376920302. Frozen60341376920379 SKIPPED, not PASS.",
+        "Nonforce PR352 merge 64e923b35e62100d05dae0f302cf78d5f3a16068 exact merged Node/lint/build41377229441, cloud41377229604, approval41377229450, official selected 3-case source41377229523 SUCCESS; original60341377229435 SKIPPED.",
+        "RELEASE INTEGRITY INCIDENT #356: PR352 code blob 3140ea095f834df354d9c9d212344f17f1da905c is identical in merged source, Release14 tested source 2c8e1ffe3b83a7524968f50efca3ead4da282cf8 and published release/production 8e3808f0d7532f47ea348ef9a58e5aa87d714ffe. Netlify deploy 6ae8006cd64b30ae9046e44d READY/current. This item was TESTING and NOT in the authorized 17 item IDs. DEPLOYED describes source inclusion only, NOT authorized batch membership or live signed-in feature execution."
       ],
       "ci_runs": [
-        41376320559
+        41376320559,
+        41376728815,
+        41376728859,
+        41376920258,
+        41376920261,
+        41376920280,
+        41376920267,
+        41376920269,
+        41376920302,
+        41376920352,
+        41376920379,
+        41377229441,
+        41377229604,
+        41377229450,
+        41377229523,
+        41377229435
       ],
-      "blockers": [
-        "Exact-source applicable CI, safe integration and independently verified current official after-run are required. Only #312 origin is proposed; all other fields/conflicts must remain unchanged."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING, NOT DEPLOYED. Direct selected current source supports San Jerónimo, Guatemala, not an inferred Lake Atitlán prefix. Producer and selected H1 must corroborate. No universal 603 source certification, frozen oracle/captures edits, GoTrue claims, production SQL/Auth/Edge/member/provider writes or #267 V2 changes."
+      "notes": "DEPLOYED SOURCE OUTSIDE AUTHORIZED RELEASE14 BATCH — ISSUE #356 OPEN. Source was tested and nonforce merged but remained TESTING at the one-use Release14 authorization; the authorized 17 item IDs exclude it. Published Release14 source includes the exact PR352 blob; Netlify READY/current at release SHA. Do not backdate READY or alter immutable release grant/item list. Live signed-in URL extraction was not exercised. #312 only direct published San Jerónimo, Guatemala; no inferred Lake Atitlán. 153 context-qualified, 29 missing-literal-qualified, original603 oracle/captures, #267 V2/#96 and real hosted GoTrue limitations preserved. No new production operations in this reconciliation."
     },
     {
       "id": "DIC-Q-335-cross-version-grinder-range",
