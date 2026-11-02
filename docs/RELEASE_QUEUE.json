@@ -8,6 +8,30 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-seasonal-program-release-provenance",
+      "issue": 33,
+      "pr": 367,
+      "title": "Do not infer a selected coffee release edition from roaster-wide dated seasonal programming",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "tests": [
+        "Original603 #248 current official Onyx selected source is archived, explicitly Washed/Ultra Light/Agaro Ethiopia; its 2026 summer coffee program is marketing, not a selected SKU release. Initial exact Node/cloud runs 41405559444/41405559441 exposed release_label Summer 2026; corrected candidate removes only the seasonalProgram promotion. Three synthetic adversarial tests; exact corrected CI pending, no live raw HTML replay."
+      ],
+      "ci_runs": [
+        41405559444,
+        41405559441
+      ],
+      "blockers": [
+        "Corrected candidate exact-source applicable Node/cloud/approval CI and nonforce integration not yet verified; original frozen603 restricted job skipped.",
+        "Unrelated owner Project Instructions screenshot-policy regression under existing owner scope; do not bypass or change #267 V2."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "TESTING ONLY. No publication. Preserve original603 immutable CSV/captures/oracle, 153 context-qualified and 29 missing-literal-qualified caveats, #267 V2, #96 and all existing READY/DEPLOYED statuses. A seasonal coffee program is not a named product release; explicit selected dated harvest/lot/offering remain supported."
+    },
+    {
       "id": "DIC-Q-33-selected-producer-credit-locality",
       "issue": 33,
       "pr": 352,
