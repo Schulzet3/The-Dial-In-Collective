@@ -10,7 +10,8 @@ export async function prepareReleaseEvidence({backup,artifact,githubToken,
  if(!recovery.reusable){
   if(!githubToken)return {ready:false,status:'BACKUP_UNVERIFIED_DISPATCH_UNAVAILABLE',
    reasons:recovery.reasons};
-  const request=await backupRequester({token:githubToken});
+  const request=await backupRequester({token:githubToken,
+   freshnessKey:backup?.latestDataWriteUtc});
   return {ready:false,status:'WAITING_FOR_NEW_BACKUP_OFFSITE_VERIFICATION',
    backup_request:request,reasons:recovery.reasons};
  }

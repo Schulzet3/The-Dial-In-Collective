@@ -135,3 +135,7 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — exact-source CI failure diagnosis and instruction repair
 - Run 41406059039: 2228/2235 Node tests PASS, one failure `tests/approval-coverage.test.mjs` due to shortened Project Instructions omitting exact owner-locked `Never request ... screenshots` clause. Restored explicit no-screenshot wording in GitHub paste-ready instructions without weakening original owner constraint. Rerun exact-source CI pending; no release status change.
+
+## 2026-11-02 — Issue #368 durable backup dispatch claim (source-only)
+- `request-encrypted-backup.mjs` now requires exact latest-observed database-write UTC freshness key; atomically creates a durable GitHub backup-claim ref against pinned main SHA before any `nightly-backup.yml` dispatch. Concurrent claims, existing active backups, uncertain GitHub readback, claim failure or dispatch failure all fail closed. A failed dispatch leaves claim for manual reconciliation, never blind retry. The existing scheduled ciphertext duplicate guard remains unchanged.
+- `prepare-release-evidence.mjs` supplies freshness key from backup evidence; it still HOLDs until independently verified ciphertext, snapshot coverage and approved direct Drive parent. Added mock concurrent-claim and failure tests. **Not yet merged, hosted CI pending.** No actual branch claim, workflow dispatch, backup, provider or production write performed.
