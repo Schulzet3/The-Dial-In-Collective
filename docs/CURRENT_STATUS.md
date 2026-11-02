@@ -1,3 +1,9 @@
+## November 2 UTC — #417 source isolation code and exact CI VERIFIED, no publication
+
+Main PR #424 merged at `827cc068aa8d9a6f186bdaa86684ff732e82531a`; main PR #427 merged at `af9c913d05277b1c4b059e6165fcad6f146849bb`. Exact main GitHub CI verified **129 tests PASS / 0 FAIL**, including real disposable-Git READY-only stage, same-file unready overlap/post-READY source denial, parent/ref/blob checks. Development PR #426 merged at `5e6e32a8cbf86ffd202e1b526ba5de8805cf20c8`; exact merged-source approval, validate, cloud, mobile, SQL, visual and lightweight READY checks all **SUCCESS**. One guarded Git-connected publisher; no immutable API uploader or duplicate READY suite. Queue **89 DEPLOYED / 0 READY / 3 IN_PROGRESS**. No real candidate with READY items exists, so no live candidate GitHub staging or new Netlify publication was performed. Netlify Release14 remains READY/current. Issue #417 tracks first actual READY-batch stage/provider proof and recovery-source pin synchronization; incident #356 is preserved, not backdated. Project Instructions copy updated; only owner may paste into ChatGPT Settings.
+
+---
+
 ## November 2 UTC — #417 CI for isolated READY-only source (no deployment)
 
 Nonpublishing candidate-branch check triggers for the existing five mandatory jobs. Source isolation still needs exact-source main integration and a real READY batch before release; current queue has zero READY. This CI-only change does not publish or alter stored member data. See [#417](https://github.com/Schulzet3/The-Dial-In-Collective/issues/417).
