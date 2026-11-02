@@ -29,6 +29,7 @@ test('recovery identity stays in a managed secret; no live DB, networked target 
   assert.match(source,/trap cleanup EXIT/);
   assert.match(source,/rm -rf -- "\$root"/);
   assert.match(source,/age --decrypt -i/);
+  assert.match(source,/derive-recovery-recipient\.sh/);
   assert.match(source,/--exit-on-error/);
   assert.match(source,/not restored/);
 });
