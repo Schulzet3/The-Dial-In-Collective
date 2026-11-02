@@ -1,3 +1,15 @@
+## November 2 UTC — #267 V2 R2-025/C2-025 source-bound semantic review (PR/merged CI PENDING)
+
+Frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree `c54ade64eca30946df8858297578a172f5cf6fa8`: manifest **#59** `docs/DECISION_LEDGER.json` blob `195c3e4de415afef4515a6291c399a1c9001b610` original lines **1–80 (80)**, fresh AI-not-human semantic reading of canonical provenance and Locked core loop/UX/PWA/auth/beta/provider/BYOK. **V2 historical 4,971/579,961 (574,990 remaining); next #59 line81.** [R2-025](../audits/issue267-v2-frozen-batches/R2-025.json) records each numbered interpretation segment; old source precedence does not override current scoped owner supersessions.
+
+Pinned current `9707553a64f88127826e8f5b2b36cd0651296e83` / tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`: eligible **#48** `scripts/audit/coffee-frozen-ci.py` blob `266631b5a9abf05f574e2a1058a9cd7372172d08` lines **1491–1570 (80)**, reviewing full603 case/source binding, frozen comparator/retention, guarded client exports, and fail-closed reviewed-change manifest. **V2 current 5,982/57,913 (51,931 remaining); next #48 line1571.** [C2-025](../audits/issue267-v2-current-batches/C2-025.json) binds pinned/current source; same blob verified at development `060b9ef25d327cf4c342b10203c63ae0b660ea54`. Unrelated post-pin source drift remains unaudited.
+
+**Verified metadata repair:** current inventory's `semantically_reviewed_v2_lines` and file #48 `reviewed_v2_lines` lagged accepted C2-024 by 80 (5,822 vs ledger 5,902). Reconciled them to **5,982**, including this batch's 80 new lines, with **no extra semantic credit** for the prior 80. Both append-only ledgers checked for disjoint ranges and exact totals; legacy B001+/B031+ untouched. No reproduced app defect, proven safe unused deletion, measured performance win, full603 execution, browser, hosted GoTrue, or provider test. No app/test/queue/production/SQL/Auth/Edge/member changes or deployment. #267 stays **OPEN**. CI not yet claimed; verify exact PR-head and merged-source before integration. [skip netlify]
+
+Next: exact-source PR CI, nonforce merge with explicit `[skip netlify]` merge title, exact merged approval/READY CI; continue frozen #59 line81 and pinned current #48 line1571, audit D2 drift separately.
+
+---
+
 ## November 2 UTC — #267 V2 R2-024/C2-024 ordered semantic review (PR/merged CI PENDING)
 
 Frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree `c54ade64eca30946df8858297578a172f5cf6fa8`: manifest #57 `docs/CURRENT_STATUS_PRE_SWEEP_2026-10-17.md` blob `9a3b0aad18211b914af1520de385785c855d4e09` lines **28–54 (27)**, then manifest #58 `docs/DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md` blob `eb55a5bd54865229bebb999272409947f0f53a23` lines **1–49 (49)**. **76 fresh AI-not-human historical lines; V2 4891/579,961, 575070 remaining; next #59 `docs/DECISION_LEDGER.json` line1.** [R2-024](../audits/issue267-v2-frozen-batches/R2-024.json) records segment-level interpretation. Old credit screenshot/publish gates are superseded; historical 20 Open topics and code observations do not create new Locked decisions.
