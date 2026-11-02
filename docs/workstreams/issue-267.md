@@ -1,3 +1,15 @@
+## November 2 UTC — #267 V2 R2-019/C2-019 direct ordered source review (exact-source CI pending)
+
+Frozen immutable commit `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree `c54ade64eca30946df8858297578a172f5cf6fa8`, manifest #54 `docs/CURRENT_STATUS.md` blob `2d7f55bcad8fd92663c4790c4164b9bacfed0667` **lines 231–320** = **90** fresh AI-not-human semantic lines. V2 **4,402/579,961**, **575,559 remaining**; next #54 line321. [R2-019](../audits/issue267-v2-frozen-batches/R2-019.json) binds dated Oct23–24 SQL/Community/extractor statuses to original source. Old SQL READY/not-applied language predates applied-once production receipts; no migration replay or present release authority.
+
+Pinned current commit `9707553a64f88127826e8f5b2b36cd0651296e83` / tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`, eligible #48 `scripts/audit/coffee-frozen-ci.py` blob `266631b5a9abf05f574e2a1058a9cd7372172d08` **lines 951–1050** = **100** fresh AI-not-human semantic lines. V2 **5,462/57,913** pinned lines, **52,451 remaining**, next #48 line1051. [C2-019](../audits/issue267-v2-current-batches/C2-019.json) reviews reviewed-change manifest SHA/path bounds, typed canonical/supplementary recount, 1,197 captures/603 packet provenance and recursive quote search. Identical blob observed at development `6c4f44bcf793562ed90697d1376edb0cd7c4924c`; D2 drift on other files remains separate and uncredited.
+
+**Verification:** Both append-only ledgers recomputed with no overlapping ranges and exact 4,402/5,462 totals. Pinned machine inventory remains **436/436 files, 57,913 lines**; no machine count credited as semantic reading. No proven current code defect, safe deletion, or measured speedup; no app code/tests or queue edits, no original603/scorer/captures/legacy V1/draft PR changes, no full603/hosted GoTrue/benchmark. #33/#96/#28/#368 boundaries preserved. **PR-head and merged-source CI for this batch PENDING, not PASS.** No production SQL/Auth/Edge/provider/member operations or deployment. #267 **OPEN**.
+
+**Next:** Verify exact PR-head CI, nonforce integrate with explicit `[skip netlify]` merge title, then verify exact merged-source approval and READY CI; continue frozen #54 line321 and pinned current #48 line1051. 
+
+---
+
 ## November 2 UTC — #267 V2 R2-018/C2-018 ordered direct review; FULL PINNED CURRENT INVENTORY MACHINE-COUNTED (CI pending)
 
 Frozen original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree `c54ade64eca30946df8858297578a172f5cf6fa8`: manifest #54 `docs/CURRENT_STATUS.md` blob `2d7f55bcad8fd92663c4790c4164b9bacfed0667` **lines 141–230** = **90** fresh AI-not-human semantic lines. V2 **4,312/579,961**, **575,649 remaining**, next original #54 line231. [R2-018](../audits/issue267-v2-frozen-batches/R2-018.json) documents every ordered segment and original/current mapping. October24 extractor READY/TESTING/PAUSED and publication notes are historical, not current release grants.
