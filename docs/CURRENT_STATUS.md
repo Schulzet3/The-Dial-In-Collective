@@ -1,3 +1,9 @@
+## November 2 UTC — #417 CI for isolated READY-only source (no deployment)
+
+Nonpublishing candidate-branch check triggers for the existing five mandatory jobs. Source isolation still needs exact-source main integration and a real READY batch before release; current queue has zero READY. This CI-only change does not publish or alter stored member data. See [#417](https://github.com/Schulzet3/The-Dial-In-Collective/issues/417).
+
+---
+
 ## November 2 UTC — Owner-authorized streamlined single publisher, no production deployment (#417)
 
 Main PR418 has merged guarded Git-connected controller restoration; latest main exact merged acceptance must be checked before claiming VERIFIED. Dev automatic READY certification will validate queue/intake only; retain existing source-bound Node/cloud/mobile/SQL/approval workflows, eliminate duplicate combined full test/artifact ZIP generation. Exact READY owner IDs and unready/overlapping merged work must block until source isolated and tested. Release14 remains current production; no publication, provider/SQL/Auth/member writes or backup dispatch. This policy is Locked in the Master Spec and Decision Ledger; source-isolation design and active main/provider verification remain tracked under [Issue #417](https://github.com/Schulzet3/The-Dial-In-Collective/issues/417). Historical reports unchanged.
