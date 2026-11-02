@@ -14,6 +14,7 @@ test('#30 Bonjo reused Guatemala slug must retain selected Costa Rica El Poeta i
  const body='<p>Sourced exclusively from a small group of family-owned farms—cultivated by dedicated producers Julia Vega Rodríguez, Olman Cruz Vega, Ricardo Chávez Garita, and Juan Bautista Mejia Rojas—this coffee is a testament to meticulous craftsmanship.</p>'+
   '<h2>Details & Origin</h2><p>Country: Costa Rica</p><p>Region: West Valley – San Rafael de San Ramón</p>'+
   '<p>Process: Fully Washed & Sun Dried</p><p>Quality Grade: Gold Collection (Strictly Hard Bean)</p>'+
+  '<p>Our Gold Collection is reserved for coffees that exceed the standards of our everyday offerings. At Bonjo Coffee Roasters, we selected El Poeta for this tier because it exemplifies everything we look for in a world-class cup.</p>'+
   '<h2>Flavor Notes</h2><p>Brown Sugar, Hibiscus, Raspberry, Honey</p>';
  const r=parse(url,'Costa Rica, El Poeta',body,
   '<title>Old Guatemala Finca El Rincon</title><meta name="description" content="Old Guatemala estate coffee">');

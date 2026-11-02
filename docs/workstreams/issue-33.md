@@ -1,3 +1,9 @@
+## November 2 UTC — #33 PR415 first-head synthetic source fixture corrected (TESTING)
+
+Exact first-head cloud run [41488066993](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41488066993) failed only new Bonjo #30 assertion: the synthetic page omitted the selected product's actual explicit “Our Gold Collection ... selected El Poeta for this tier” paragraph, so parser did not derive Gold Collection from a bare quality-grade label. Corrected synthetic fixture to include the independently observed selected official sentence, without changing runtime or weakening identity/source checks. New exact-source CI required. Other three new tests passed. Original603 SKIPPED, not PASS. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 original603 #30/#293/#520 reused-URL selected-H1 provenance (TESTING; no deploy)
 
 Recovered actual development `53a40fe4481ed3ba7ac20c4899f53797e830c416`, AGENTS, #33 issue/journal, Current Status, Master Spec, Decision Ledger, approval matrix, queue (0 READY/89 DEPLOYED/3 IN_PROGRESS), original603 source register, #267 V2/#96 and automation registry. Since PR412, development changed only #267 V2 audit documentation; no shared extractor runtime edits. PR367 excluded.
