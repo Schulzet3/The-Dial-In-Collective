@@ -1,3 +1,15 @@
+## November 2 UTC — #267 V2 R2-022/C2-022 source-bound review (CI PENDING)
+
+Frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree c54ade64eca30946df8858297578a172f5cf6fa8, manifest #56 `docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md` blob `b1698030de2539bbd2f342251cece4c546477227` lines **1–90** (90 fresh AI-not-human lines): **4,715/579,961** historical, **575,246 remaining**, next line91. [R2-022](../audits/issue267-v2-frozen-batches/R2-022.json) interprets every numbered segment; old credit screenshot gate superseded, no old release/SQL authority.
+
+Pinned `9707553a64f88127826e8f5b2b36cd0651296e83` / tree 626d241ef5888bddee71b6e94ee30ea0cb8bee1e, current #48 `scripts/audit/coffee-frozen-ci.py` blob `266631b5a9abf05f574e2a1058a9cd7372172d08` lines **1251–1330** (80 fresh AI-not-human lines): **5,742/57,913**, **52,171 remaining**, next line1331. [C2-022](../audits/issue267-v2-current-batches/C2-022.json) covers failed-run provenance, raw hashes, changed-case and source-quote gates. Blob identical at development `e6f09a5f9be7bd4289ddd978783b2f946cbe7390`; other post-pin D2 changes remain unreviewed.
+
+Both append-only ledgers reconciled without overlap; machine counts and V1 B001+/B031+ not credited. No proven bug, unused code, benchmark, full603, hosted GoTrue/browser test, app/test/queue/production write/deployment. #33/#96/#28 preserved; #267 OPEN. PR/merged-source CI pending. [skip netlify]
+
+Next: exact PR-head checks, nonforce merge with [skip netlify], exact merged-source approval/READY CI; frozen #56 line91, current #48 line1331, D2 drift separately.
+
+---
+
 ## November 2 UTC — #267 V2 R2-021/C2-021 fresh ordered semantic review (PR/merged CI NOT YET VERIFIED)
 
 Frozen original commit `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree `c54ade64eca30946df8858297578a172f5cf6fa8`: manifest #54 `docs/CURRENT_STATUS.md` blob `2d7f55bcad8fd92663c4790c4164b9bacfed0667` **411–434** (24), then manifest #55 `docs/CURRENT_STATUS_PRE_CONTINUITY_2026-10-16.md` blob `0b65c58819c41ce8ccb83754901a0e1381abd60c` **1–109** (109). **133 fresh AI-not-human lines; V2 4,625/579,961, 575,336 remaining**; next manifest #56 `docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md` line1. [R2-021](../audits/issue267-v2-frozen-batches/R2-021.json) interprets every numbered segment. Oct16–23 provider counts, release grants and missing-research status are dated, not current; owner now reports original research files recovered.
