@@ -5,7 +5,8 @@
 // Does NOT create Netlify deploys; one NON-FORCE push to release/production
 // is the single atomic claim. Never retry a failed push automatically.
 import {execFileSync} from 'node:child_process';
-import {mkdtempSync,rmSync,appendFileSync} from 'node:fs';
+import {mkdtempSync,rmSync,appendFileSync,readFileSync} from 'node:fs';
+import {verifyReleaseArtifactReceipt} from './verify-release-artifact-receipt.mjs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
@@ -251,6 +252,26 @@ export async function executeSingleUseRelease(settings=process.env){
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
  assertApprovedReadyBatch(grant,queueGate);
+ // A Git SHA does not prove identical deployable bytes. Publication must
+ // have the certified ZIP and a function-preserving Netlify deployment path.
+ // This intentionally denies the old Git-connected rebuild release path.
+ if(!(chatPush&&chatRequest.mode==='validate_only')){
+  if(settings.DIC_IMMUTABLE_FUNCTION_PARITY_VERIFIED!=='YES')
+   throw Error('Immutable deployment HOLD: Netlify Function parity not independently verified');
+  if(!settings.DIC_IMMUTABLE_CERTIFICATE_PATH||!settings.DIC_IMMUTABLE_ARCHIVE_PATH||
+    !settings.DIC_IMMUTABLE_CI_RUN_ID||!settings.DIC_IMMUTABLE_ARTIFACT_NAME)
+   throw Error('Immutable deployment HOLD: exact CI certificate and artifact missing');
+  const cert=json(readFileSync(settings.DIC_IMMUTABLE_CERTIFICATE_PATH,'utf8'),'Immutable CI certificate');
+  const artifact=readFileSync(settings.DIC_IMMUTABLE_ARCHIVE_PATH);
+  const receipt=verifyReleaseArtifactReceipt({certificate:cert,sourceSha:sha,
+   archive:artifact,runId:Number(settings.DIC_IMMUTABLE_CI_RUN_ID),
+   artifactName:settings.DIC_IMMUTABLE_ARTIFACT_NAME,verifiedRequiredChecks:true});
+  if(JSON.stringify(receipt.ready_item_ids)!==JSON.stringify(queueGate.ready_items.map(x=>x.id).sort()))
+   throw Error('Immutable artifact READY item scope differs from approved batch');
+  // Until the provider uses these exact bytes, a Git push would trigger a
+  // second rebuild. Never consume a grant for that unsafe path.
+  throw Error('Immutable deployment HOLD: provider artifact publisher not activated; no Git push');
+ }
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
   ledger,currentPublishedSourceSha:ledger.consumed.at(-1)?.tested_source_sha||releaseHead});
