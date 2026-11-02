@@ -32,6 +32,7 @@ jobs:
           python3 tests/immutable-dist.test.py
           python3 tests/immutable-function.test.py
           python3 tests/immutable-dist-manifest.test.py
+          python3 tests/unpack-certified-artifact.test.py
       - name: Assert current queue cannot accidentally publish
         run: |
           set +e
