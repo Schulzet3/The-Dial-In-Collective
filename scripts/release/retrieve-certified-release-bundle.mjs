@@ -2,7 +2,8 @@
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFileSync,rmSync,mkdirSync} from 'node:fs';
-import {join} from 'node:path';
+import {join,dirname,basename} from 'node:path';
+import {tmpdir} from 'node:os';
 import {downloadCertifiedArtifactContainers} from './download-certified-artifacts.mjs';
 import {verifyReleaseArtifactReceipt} from './verify-release-artifact-receipt.mjs';
 import {verifiedDistFiles} from './verified-dist-files.mjs';
@@ -46,11 +47,17 @@ export async function retrieveVerifiedReleaseBundle({token,sourceSha,fetcher=fet
  if(await checkVerifier({token,sourceSha,fetcher})!==true)
   throw Error('Exact-source CI not independently verified');
  const downloaded=await downloader({token,sourceSha,fetcher});
- if(!downloaded||downloaded.source_sha!==sourceSha||
-  !Number.isSafeInteger(downloaded.run_id)||downloaded.run_id<=0||
-  typeof downloaded.temporary_dir!=='string'||!downloaded.temporary_dir)
-  throw Error('Downloaded artifact identity not source-bound');
+ const temporaryDir=downloaded?.temporary_dir;
+ // Never extract into or recursively remove a caller-supplied arbitrary path.
+ // The production downloader owns a fresh dic-certified-ci-* child of tmpdir().
+ if(typeof temporaryDir!=='string'||dirname(temporaryDir)!==tmpdir()||
+  !/^dic-certified-ci-[A-Za-z0-9_-]{6,}$/.test(basename(temporaryDir)))
+  throw Error('Unsafe artifact temporary directory; refusing extraction or cleanup');
  try{
+  // Identity failures must also remove downloaded private containers.
+  if(!downloaded||downloaded.source_sha!==sourceSha||
+   !Number.isSafeInteger(downloaded.run_id)||downloaded.run_id<=0)
+   throw Error('Downloaded artifact identity not source-bound');
   const dist=join(downloaded.temporary_dir,'dist');
   const cert=join(downloaded.temporary_dir,'certificate');
   mkdirSync(dist,{recursive:true,mode:0o700});
@@ -79,5 +86,5 @@ export async function retrieveVerifiedReleaseBundle({token,sourceSha,fetcher=fet
    run_id:downloaded.run_id,dist_artifact_id:downloaded.dist_artifact_id,
    certificate_artifact_id:downloaded.certificate_artifact_id,
    receipt,files:manifest.files,manifest:manifest.manifest,functionZip};
- }finally{rmSync(downloaded.temporary_dir,{recursive:true,force:true});}
+ }finally{rmSync(temporaryDir,{recursive:true,force:true});}
 }

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {mkdtempSync,writeFileSync,existsSync} from 'node:fs';
+import {mkdtempSync,writeFileSync,existsSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {retrieveVerifiedReleaseBundle,verifyExactSourceReleaseChecks} from '../scripts/release/retrieve-certified-release-bundle.mjs';
@@ -24,7 +24,7 @@ function fixture({certificate=cert,distHash=sidecar(archive,'dist-immutable.zip'
  functionHash=sidecar(functionZip,'coffee-url-preview-function.zip'),extra={}}={}){
  let folder;
  return {download:async()=>{
-  folder=mkdtempSync(join(tmpdir(),'dic-retrieval-test-'));
+  folder=mkdtempSync(join(tmpdir(),'dic-certified-ci-'));
   writeFileSync(join(folder,'dist.zip'),zip({'dist-immutable.zip':archive,
    'dist-immutable.zip.sha256':distHash,'coffee-url-preview-function.zip':functionZip,
    'coffee-url-preview-function.zip.sha256':functionHash,...extra}));
@@ -70,4 +70,23 @@ test('unverified CI stops before any artifact download',async()=>{
  await assert.rejects(retrieveVerifiedReleaseBundle({token:'fake',sourceSha:sha,
   checkVerifier:async()=>false,downloader:async()=>{calls++;}}));
  assert.equal(calls,0);
+});
+
+test('invalid downloaded source/run identity cleans downloaded private archive containers',async()=>{
+ for(const patch of [{source_sha:'b'.repeat(40)},{run_id:0}]){
+  const f=fixture();
+  await assert.rejects(retrieveVerifiedReleaseBundle({token:'fake',sourceSha:sha,
+   checkVerifier:async()=>true,downloader:async()=>({...await f.download(),...patch})}),
+   /identity not source-bound/);
+  assert.equal(existsSync(f.folder()),false);
+ }
+});
+test('untrusted temp path cannot be extracted into or recursively removed',async()=>{
+ const unrelated=mkdtempSync(join(tmpdir(),'unrelated-data-'));
+ try{
+  await assert.rejects(retrieveVerifiedReleaseBundle({token:'fake',sourceSha:sha,
+   checkVerifier:async()=>true,downloader:async()=>({source_sha:sha,run_id:42,
+    temporary_dir:unrelated})}),/Unsafe artifact temporary directory/);
+  assert.equal(existsSync(unrelated),true);
+ }finally{rmSync(unrelated,{recursive:true,force:true});}
 });

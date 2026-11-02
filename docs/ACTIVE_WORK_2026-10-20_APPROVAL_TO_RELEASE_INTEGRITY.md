@@ -25,3 +25,7 @@ Source/test regression on `main` rejects snapshots that predate the latest Postg
 ## November 2, 2026 UTC — Issue #368 same-day cross-key backup dispatch dedup
 
 Backup fallback now uses one atomic GitHub claim per UTC day, closing the race where different microsecond latest-write keys previously created independent claims. Later same-day requests fail closed for manual reconciliation; midnight cross-day and independently verified restore evidence remain outstanding. Exact PR/merged CI required. No backup dispatched, provider write or deployment. See [operations journal](OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md).
+
+## November 2, 2026 UTC — Issue #368 CI artifact pagination and temp cleanup
+
+GitHub artifact discovery now fails closed on truncated/missing/oversized API result inventories, preventing a false unique exact-source artifact selection. Certified retrieval cleans private downloaded containers even when identity validation fails, and refuses unsafe temporary directories. Tests and same-commit operations journal accompany this main-only safety fix. Hosted PR/merged-main CI pending. No production, backup or provider writes; release remains HOLD. See Issue #368.
