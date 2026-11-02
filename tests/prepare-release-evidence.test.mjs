@@ -45,7 +45,8 @@ test('unverified backup dispatches at most through durable requester and always 
  assert.equal(r.ready,false);assert.equal(r.status,'WAITING_FOR_NEW_BACKUP_OFFSITE_VERIFICATION');
 });
 test('unverified backup without GitHub token never dispatches',async()=>{
- const r=await prepareReleaseEvidence({backup:{},sourceSha:sha});
+ const r=await prepareReleaseEvidence({backup:{},sourceSha:sha,
+  approvedReadyItemIds:['DIC-Q-1']});
  assert.equal(r.ready,false);assert.equal(r.status,'BACKUP_UNVERIFIED_DISPATCH_UNAVAILABLE');
 });
 test('no token, invalid source or missing/duplicate READY IDs deny before retrieval',async()=>{
@@ -72,4 +73,25 @@ test('tampered CI identity, READY scope, function bytes, manifest or index canno
 test('retrieval failure propagates; no ready or fallback after a CI error',async()=>{
  await assert.rejects(prepareReleaseEvidence({...args,
   artifactRetriever:async()=>{throw Error('GitHub CI unavailable');}}),/GitHub CI unavailable/);
+});
+
+test('invalid source/READY scope and raw ZIP never dispatch an unverified backup',async()=>{
+ let dispatches=0,retrievals=0;
+ const unverified={latestDataWriteUtc:'2026-11-02T01:00:00Z'};
+ const requester=async()=>{dispatches++;throw Error('unexpected backup dispatch');};
+ const retriever=async()=>{retrievals++;throw Error('unexpected CI retrieval');};
+ for(const patch of [{sourceSha:'bad'},{approvedReadyItemIds:[]},
+  {approvedReadyItemIds:['DIC-Q-1','DIC-Q-1']},
+  {approvedReadyItemIds:[' ']},{approvedReadyItemIds:null}]){
+  const result=await prepareReleaseEvidence({...args,...patch,backup:unverified,
+   backupRequester:requester,artifactRetriever:retriever});
+  assert.equal(result.ready,false);
+  assert.equal(result.status,'HOLD_EXACT_SOURCE_CI_AND_READY_SCOPE_REQUIRED');
+  assert.equal(result.provider_write_calls,0);
+ }
+ await assert.rejects(prepareReleaseEvidence({...args,backup:unverified,
+  artifact:{archive:zip},backupRequester:requester,artifactRetriever:retriever}),
+ /Raw artifact override/);
+ assert.equal(dispatches,0);
+ assert.equal(retrievals,0);
 });
