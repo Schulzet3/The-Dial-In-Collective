@@ -114,3 +114,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — Netlify atomic digest publisher adapter
 - Added source-inert Netlify API digest uploader with SHA-1 static manifest, SHA-256 zipped `coffee-url-preview` function, required-hash validation and function PUT upload. Positive and fail-closed mocked tests added to hosted nonpublishing rehearsal. Uses official Netlify API digest/function endpoint rather than ZIP-only deploy; does not build at publication. **Still pending:** artifact unzip/exact certificate and controller transaction integration, live provider compatibility verification without production publication, release receipts and readback. No provider mutation or deploy.
+
+## 2026-11-02 — fix YAML folded Python test commands
+- Run 41405139854: 18 Node tests PASS; Python tests never ran because YAML `run:` folded two lines into one shell command. Corrected `run: |` literal block; exact-source rerun pending. No production action.
