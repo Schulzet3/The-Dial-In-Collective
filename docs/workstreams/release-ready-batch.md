@@ -66,3 +66,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — Netlify canonical domain mapping correction
 - Raw Netlify sites API can return the Netlify-managed ssl_url while the custom domain is authoritative. Normalize `custom_domain` to HTTPS before exact-hostname assertion, preserving failure on unexpected host. Focused fixture now exercises this distinction. Same-commit tests and journal; CI pending.
+
+## 2026-11-02 — streamline empty-queue certification
+- Automatic certification first checks READY count and always validates queue schema/source intake. When READY count is zero, it skips duplicate npm ci, full Node/cloud tests, lint and build; ordinary path-scoped application CI remains authoritative for those checks. It emits no READY certificate on empty batches. When READY exists, it retains full exact-source combined certification, certificate artifact and independent production grant. No change to five-check release controller or source isolation; no publication. CI pending.
