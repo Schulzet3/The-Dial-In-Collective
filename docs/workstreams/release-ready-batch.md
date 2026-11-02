@@ -132,3 +132,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — strict inner CI artifact unpacker
 - Added allowlist-only unpack of exact GitHub Actions artifact members: static ZIP, static checksum, function ZIP, function checksum and CI_CERTIFICATE.json. Rejects extra, missing, unsafe or duplicate members, never extracts arbitrary paths. Mocked Python cases in nonpublishing rehearsal. Next integrate downloaded containers, SHA receipt and main controller; no provider writes.
+
+## 2026-11-02 — exact-source CI failure diagnosis and instruction repair
+- Run 41406059039: 2228/2235 Node tests PASS, one failure `tests/approval-coverage.test.mjs` due to shortened Project Instructions omitting exact owner-locked `Never request ... screenshots` clause. Restored explicit no-screenshot wording in GitHub paste-ready instructions without weakening original owner constraint. Rerun exact-source CI pending; no release status change.
