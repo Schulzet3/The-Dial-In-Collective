@@ -11,21 +11,34 @@
       "id": "DIC-Q-335-cross-version-grinder-range",
       "issue": 335,
       "title": "Translate matching grinder's earlier successful setting across espresso-range calibration changes",
-      "state": "TESTING",
-      "pr": null,
-      "merged_source_sha": null,
+      "state": "READY",
+      "pr": 347,
+      "merged_source_sha": "68a77bfa12682fd6150e2b1014c9edb3a451f96c",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "Five cross-version grinder-range regression tests authored, not yet verified by CI."
+        "Five added regressions: normalized old-to-current range estimate, same range preservation, missing/null/invalid old bounds rejected, current calibration precedence, unrelated grinder excluded.",
+        "Exact PR-head 6db565c4def2750f3f94fdbb280aeb73e99c6325: Node/lint/build 41368339114, cloud/mobile 41368339168, visual 41368339143, isolated SQL 41368339171, security 41368339216 and approval 41368339123 all SUCCESS; original frozen coffee corpus 41368339112 SKIPPED, not PASS.",
+        "Nonforce PR347 merged 68a77bfa12682fd6150e2b1014c9edb3a451f96c; engine and new test blob SHA identical to PR head. Later unrelated Issue267 audit files on base were preserved.",
+        "Exact merged-source PUSH CI: Node/lint/build 41368639725 SUCCESS (2191 tests, 2185 PASS, 0 FAIL, 6 SKIP; lint and build PASS); cloud/mobile 41368639827, visual 41368639608 and approval 41368639584 all SUCCESS.",
+        "Recovered nine original Markdown research reports provide context-specific caution about coffee/grinder/puck behavior; no universal dial or sensory improvement is claimed. Two independent publication landing pages verified, broader citations and real-shot outcomes NOT verified."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await exact-source Node/lint/build, cloud/mobile and approval CI and safe nonforce integration."
+      "ci_runs": [
+        41368339123,
+        41368339216,
+        41368339171,
+        41368339168,
+        41368339143,
+        41368339114,
+        41368639584,
+        41368639608,
+        41368639827,
+        41368639725
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
-      "notes": "Narrow, unproven-relative-dial range conversion. No change to saved shots, Locked priors, private records or product release. Original source reports support caution only, not a scientifically calibrated scale conversion."
+      "notes": "NARROW READY, NOT DEPLOYED. When same grinder/burrs but different setup version carries a different espresso calibration range, normalize historical successful grind by its relative position in VALID old range to current range; label unproven. Legacy null bounds skipped. No persisted shot edits, mandatory new fields, roast/style/temperature priors, numeric taste thresholds or provider writes. Relative range conversion is a UX heuristic, not proven physical burr equivalence. Issue335 stays OPEN for citation/empirical validation."
     },
     {
       "id": "DIC-Q-33-educational-origin-label-boundary",
