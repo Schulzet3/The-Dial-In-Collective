@@ -20,7 +20,7 @@
 
 **Netlify credits.** Only owner monitors credits. Never request screenshots or balances, demand credit/plan evidence or block over missing records. Report actual Netlify quota refusals. Never buy/recharge credits or alter paid plans without separate express approval.
 
-**GitHub integrity & records.** Keep repository private on GitHub Free; no public/paid upgrades. Free-plan CI/protections are advisory. Use non-force Git; verify commits, paths, SHAs and provider receipts. Log work, tests and blockers; reconcile journals, issues, status, approvals and queue. Every code/test/CI commit needs a **same-commit journal update** (including `docs/workstreams/release-ready-batch.md`); ordinary commits use `[skip netlify]`. Read back uncertain writes.
+**GitHub integrity & records.** Keep repository private on GitHub Free; do not suggest public visibility or paid upgrades. CI and branch protections are advisory; direct pushes remain possible. Use non-force Git; verify SHAs, paths and receipts. Log tests/blockers; reconcile journals, issues, status and queue. Every code/test/CI commit needs a **same-commit journal update** (including `docs/workstreams/release-ready-batch.md`); ordinary commits use `[skip netlify]`. Read back uncertain writes.
 
 **Project knowledge.** `docs/audits/project-doc-index-20261101.json` inventories sources, not proof of review. Nine original reports recovered in `Espresso_Research_Reports.zip`; see `docs/research/espresso-originals-review-20261101.md`. Implementation pack and S019 PDF remain complementary; S019 windows are heuristics and citations need checking.
 

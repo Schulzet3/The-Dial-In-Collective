@@ -1,3 +1,7 @@
+## November 2 UTC — #267 seventh batch exact-source CI repair follow-up
+
+Source `7804151ca701242eb0930d5e1ddac1530dced68b`: approval CI PASS, cloud UX PASS, Python coffee PASS; full Node and automatic READY certification FAILED one existing approval-coverage test because a shortened project-instructions sentence omitted explicit owner no-public-upgrade and branch-protection wording. Restored exact owner policy within 8,000 characters; exact-source Node/certification retest pending. Audit counts remain frozen V2 **2,068/579,961**, current pinned V2 **2,876**; no deployment or queue changes.
+
 ## November 2 UTC — Issue267 V2 seventh ordered batch and CI journal recognition fix (not deployed)
 
 Fresh frozen V2 **2,068/579,961** (577,893 remain), original matrix #30 next line381; independent pinned current-code V2 **2,876** lines, next #37 `scripts/audit/coffee-corpus-image-audit.py` line1. R2-007/C2-007 receipts and separate D2-002 targeted CI delta; original V1 preserved. Inventory **306/436** line counts known, **130 pending**, 36,532 known lines; 15 other post-pin code/test paths pending. Exact approval CI run 41377972126 failed because its same-commit `release-ready-batch.md` journal path was not recognized. Narrow path recognition and focused negative tests are in the current integration; retest required before PASS. No app runtime change, queue READY change, provider write or deployment.
