@@ -174,3 +174,5 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 - Added real disposable-Git merge integration test: exact commit subject lacks marker, full commit body contains `[skip netlify]`, first-parent code delta includes contemporaneous workstream journal; verifyLatestCommit must PASS without relaxing same-commit code checkpoint. No provider operations; hosted CI pending.
 
 - Hosted PR #385 review job `125203925800` exposed one fixture-only expectation: `git rev-list base..merge` correctly includes both the feature commit and merge commit (2), not 1. Corrected assertion to require both audited commits, preserving the stricter range audit. All other 47 focused review tests passed; rerun exact PR CI, no provider action.
+
+- Hosted PR #385 full Node suite 2249 PASS/0 FAIL/6 expected SKIP; review and other scoped checks SUCCESS, but validate lint failed one `no-duplicate-imports` warning in the newly added test (`node:fs`). Consolidated the imports without changing behavior; exact-source CI rerun required. Historical failed run remains recorded, no production action.
