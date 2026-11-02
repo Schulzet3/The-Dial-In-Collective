@@ -105,3 +105,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 
 ## 2026-11-02 — include Netlify Function in immutable CI artifact
 - Added deterministic ZIP packaging and tests for prebundled `coffee-url-preview` server function. READY certification now bundles function dependencies in CI with pinned esbuild 0.25.12 and uploads exact function ZIP and SHA-256 alongside static artifact. No publish-time function compilation is permitted by this design. **Not yet certified:** provider function digest upload, runtime parity and production routing must pass before main controller cutover. No production write; tests pending.
+
+## 2026-11-02 — require exact function bytes in READY certificate
+- Certificate schema v4 now requires SHA-256 for bundled Netlify Function ZIP. Artifact verifier checks both static and server function byte hashes; mismatch, absent function and stale schema fail closed. Updated mocked regressions. Main hosted controller still has schema v3 verifier and remains intentionally nonpublishing until reviewed promotion; no deploy.

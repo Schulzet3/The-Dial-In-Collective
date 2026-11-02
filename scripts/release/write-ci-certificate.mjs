@@ -15,7 +15,13 @@ const artifactPath='dist-immutable.zip';
 const artifactHash=existsSync(artifactPath)?createHash('sha256').update(readFileSync(artifactPath)).digest('hex'):null;
 if(batchStatus==='CERTIFIED_READY_SOURCE'&&!artifactHash)
  throw Error('READY certification cannot omit immutable production build ZIP');
-const receipt={schema_version:3,batch_status:batchStatus,
+const functionPath='coffee-url-preview-function.zip';
+const functionHash=existsSync(functionPath)?createHash('sha256').update(readFileSync(functionPath)).digest('hex'):null;
+if(batchStatus==='CERTIFIED_READY_SOURCE'&&!functionHash)
+ throw Error('READY certification cannot omit immutable Netlify server function');
+const receipt={schema_version:4,batch_status:batchStatus,
+ immutable_function_sha256:functionHash,
+ immutable_function_name:functionHash?'coffee-url-preview-function.zip':null,
  immutable_artifact_sha256:artifactHash,
  immutable_artifact_name:artifactHash?'dic-production-dist-'+sha:null,
  strict_source_isolation_passed:assessment.ready,
