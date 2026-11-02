@@ -40,6 +40,20 @@ jobs:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
         run: npm run build:cloud
+      - name: Write source-bound machine-readable CI certificate
+        if: success()
+        env:
+          DIC_SOURCE_SHA: ${{ github.sha }}
+          DIC_RUN_ID: ${{ github.run_id }}
+        run: node scripts/release/write-ci-certificate.mjs
+      - name: Retain certificate as GitHub Actions artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dic-ci-certificate-${{ github.sha }}
+          path: docs/generated/CI_CERTIFICATE.json
+          retention-days: 90
+          if-no-files-found: error
       - name: Publish exact-source certification summary
         if: always()
         env:

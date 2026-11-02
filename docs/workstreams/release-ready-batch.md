@@ -38,3 +38,7 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 ## 2026-11-02 — exact owner-selected READY batch binding
 - Future release grants must contain `approved_ready_item_ids` exactly matching the assessed READY candidate inventory; source overlap, queue status and free-form scope text cannot silently expand the authorized batch. Controller fails closed before any one-use claim or production push. Focused positive/negative tests added.
 - The historical Release14 grant lacks this new field; it is consumed and not rewritten. New grants must be source-and-item-bound. Development-only integration pending exact-source CI and promotion of controller to operational main. No publication.
+
+## 2026-11-02 — source-bound CI certificate artifact
+- After successful automatic queue validation, combined Node/cloud tests, lint and build, CI writes and uploads a machine-readable receipt with exact checkout SHA, Actions run ID and READY item IDs. Certificate explicitly does not authorize publication, certify backup, or verify Netlify SHA. Focused contract test added; same-commit journal preserved.
+- No production publication, member writes or provider mutation.
