@@ -80,3 +80,11 @@ test('a separately applied Supabase SQL-only migration is covered only by exact 
  assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,scope_paths:['site/cloud/shot_card.js']}]},['site/cloud/shot_card.js'],{currentBlobSha:()=>C}).tracked,true,
   'a separate non-DEPLOYED READY item still covers its own frontend path');
 });
+test('DEPLOYED label cannot launder unpublished merged changes into an approved release',()=>{
+ const premature={...queued,id:'DIC-Q-101',issue:101,state:'DEPLOYED',scope_paths:['site/cloud/shot_card.js']};
+ const result=assess({...q,items:[queued,premature]});
+ assert.equal(result.ready,false);
+ assert.match(result.errors.join(' '),/DEPLOYED-labelled merged work is new/);
+ const alreadyPublished=(a,b)=>a===A&&b===B?false:graph(a,b);
+ assert.equal(assess({...q,items:[queued,premature]},['site/cloud/shot_card.js'],alreadyPublished).ready,true);
+});

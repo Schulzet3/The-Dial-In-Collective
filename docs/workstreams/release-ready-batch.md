@@ -19,3 +19,8 @@ Owner explicitly directed immediate publication of the 17 READY items. Grant `DI
 ## Release 14 deployed — November 2
 
 Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe` and Netlify production deploy `6ae8006cd64b30ae9046e44d` READY/current with matching commit at 03:16:13 UTC. Seventeen formerly READY queue items now DEPLOYED; two ongoing unfinished items remain excluded. Verified encrypted `backup.age` SHA-256 and direct-child Google Drive offsite ZIP. Authenticated member-session and live DB write integrity were not exercised; no such PASS claimed.
+
+## 2026-11-02 — release isolation hardening (no deployment)
+- Added fail-closed check: a DEPLOYED-labelled item with a merged commit newer than the actual published source cannot be silently included in a future release candidate. A label alone is not a deployment receipt.
+- Added regression for a prematurely marked DEPLOYED overlapping-path item; source-bound CI still required before READY. Incident #356 remains open pending end-to-end verification and the broader replacement workflow.
+- No Netlify/Supabase/member data writes, no publication, no queue state promotion.

@@ -62,8 +62,20 @@ export function assessReleaseQueue(queue,{publishedSourceSha,candidateSha,change
   errors.push('Queue published baseline differs from actual consumed production source');
  const diff=deployableChangedPaths(changedPaths||[]);
  for(const item of queue?.items||[]){
-  if(item?.state==='DEPLOYED')continue;
+  // A DEPLOYED label is not proof that a post-baseline commit was published.
+  // Fail closed if an allegedly delivered item first enters this candidate.
+  // This also catches premature queue reconciliation before a real release.
   const merged=item?.merged_source_sha;
+  if(item?.state==='DEPLOYED'){
+   if(SHA.test(merged||'')){
+    try{
+     if(isAncestor(publishedSourceSha,merged)===true&&merged!==publishedSourceSha&&
+        isAncestor(merged,candidateSha)===true)
+      errors.push(item.id+' DEPLOYED-labelled merged work is new since published baseline; release receipt/source isolation required');
+    }catch{errors.push(item.id+' unable to verify DEPLOYED commit ancestry');}
+   }
+   continue;
+  }
   if(!SHA.test(merged||''))continue; // Unmerged work stays tracked but cannot enter release.
   let isIncluded=false,isNew=false;
   try{
