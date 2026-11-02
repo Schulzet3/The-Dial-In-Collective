@@ -11,7 +11,7 @@ def files_from_zip(path):
             mode=item.external_attr>>16
             if (not name or name.startswith('/') or '\\' in name or
                 any(p in ('','.','..') for p in parts) or
-                stat.S_ISLNK(mode) or (mode and not stat.S_ISREG(mode)) or
+                stat.S_ISLNK(mode) or (stat.S_IFMT(mode) and not stat.S_ISREG(mode)) or
                 item.file_size>20_000_000 or item.compress_size==0):
                 raise ValueError('Unsafe ZIP entry')
             if len(result)>=500 or total+item.file_size>80_000_000:

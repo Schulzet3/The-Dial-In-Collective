@@ -188,3 +188,6 @@ Owner directed preparation of all release-queue work without publication. The op
 
 ## 2026-11-02 — main controller validates exact static/function Netlify manifest
 - Main preflight now safely parses SHA-verified immutable static ZIP into bounded Netlify digest manifest and confirms server function digest against certified source. Promoted development `11cc51287d8294223104054bf9374b46a35455ec` reader/manifest utilities and publisher adapter; production remains intentionally blocked before any Git ref push. Pending provider deployment transaction and readback; no publication. Parent `ba50ac96b5555d15d0680a5066951374bff30438`.
+
+## 2026-11-02 — correct ZIP mode interpretation
+- Hosted rehearsal `41405384537` failed safe ZIP fixture because Python zipfile encodes permissions without POSIX file-type bits. Accept mode with no file-type bits, still reject explicit symlinks and nonregular file types; update both main and development. Re-run exact-source CI; no production changes.
