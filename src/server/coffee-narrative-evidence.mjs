@@ -238,6 +238,28 @@ function selectedStationPremiumGrowerCredits(paragraphs,name,fields){
  return [...credits];
 }
 
+// Credit the literal smallholder group only when this selected coffee's
+// traceable county-supply sentence directly precedes its co-op farmer credit.
+// Generic regional history, previous lots and blends are not producer facts.
+function selectedCooperativeSupplyCredits(paragraphs,name,fields){
+ if(/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' ')))return [];
+ const credits=new Set();
+ const selected=/\bThis coffee,\s*crafted from fully traceable sources of supply in [^.!?]{5,140}\bcounties\b[^.!?]{0,130}[.!?]/i;
+ const group=/\b(Smallholder farmers),\s+each with (?:around|about|approximately) \d{1,4} trees,\s+work together in co-ops\b/i;
+ for(const paragraph of paragraphs){
+  if(paragraph.length>1800)continue;
+  const match=paragraph.match(selected);if(!match)continue;
+  const before=paragraph.slice(Math.max(0,match.index-100),match.index);
+  if(/\b(?:previously|formerly|historically|hypothetically|prior|last year|other coffee)\b/i.test(before))continue;
+  const after=paragraph.slice(match.index+match[0].length,match.index+match[0].length+230);
+  if(/\b(?:other|another|different|previous|historical)\s+(?:coffee|lot)\b/i.test(after))continue;
+  const growers=after.match(group);
+  if(growers&&currentProducerSentence(match[0])&&currentProducerSentence(growers[0])&&
+     producerCountriesAgree(paragraph,name,fields))credits.add(growers[1]);
+ }
+ return [...credits];
+}
+
 function explicitAnonymousProducerCredits(paragraphs,name,fields){
  const result=new Set();
  for(const paragraph of paragraphs)for(const line of producerSentences(paragraph)){
@@ -265,6 +287,8 @@ function foundGrower(paragraphs,name='',relationshipGroups=[paragraphs],fields={
  for(const credit of selectedHarvestSmallholderCredits(paragraphs,name,fields))
   collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  for(const credit of selectedStationPremiumGrowerCredits(paragraphs,name,fields))
+  collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
+ for(const credit of selectedCooperativeSupplyCredits(paragraphs,name,fields))
   collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  for(const alias of cooperativeAliasCredits(paragraphs))collectives.set(alias.normalize('NFKC').toLowerCase(),alias);
  for(const paragraph of paragraphs){
