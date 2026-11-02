@@ -28,7 +28,7 @@ export function immutableReleaseClaimMessage({id,sourceSha}={}){
  if(!/^DIC-[0-9]{8}-[A-Z0-9][A-Z0-9_-]{5,63}$/.test(id||'')||!SHA.test(sourceSha||''))
   throw Error('Invalid immutable release claim identity');
  return {subject:'Release DIC: '+id+' [dic-publish]',
-  body:'[skip netlify]\\n\\nImmutable Netlify digest/function publication only; do not rebuild from Git.\\nTested source: '+sourceSha};
+  body:'[skip netlify]\n\nImmutable Netlify digest/function publication only; do not rebuild from Git.\nTested source: '+sourceSha};
 }
 
 export function initialLedgerOnMissing({releaseHead,readLedger}){

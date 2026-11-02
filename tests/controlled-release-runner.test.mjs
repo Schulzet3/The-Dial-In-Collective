@@ -111,12 +111,12 @@ test('future immutable claim retains exact one-use subject but suppresses Git-co
  const id='DIC-20261102-CLAIM123',sourceSha='a'.repeat(40);
  const {subject,body}=immutableReleaseClaimMessage({id,sourceSha});
  assert.equal(subject,'Release DIC: '+id+' [dic-publish]');
- assert.match(body,/^\\[skip netlify\\]/);
+ assert.match(body,/^\[skip netlify\]/);
  assert.ok(body.includes(sourceSha));
  assert.throws(()=>immutableReleaseClaimMessage({id:'bad',sourceSha}),/identity/);
  assert.throws(()=>immutableReleaseClaimMessage({id,sourceSha:'bad'}),/identity/);
  const src=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
- assert.match(src,/checkedGuard\\.includes\\('Immutable release claim: suppress Git-connected rebuild'\\)/);
- assert.match(src,/\\['commit-tree',tree,'-p',releaseHead,'-m',subject,'-m',body\\]/);
+ assert.match(src,/checkedGuard\.includes\('Immutable release claim: suppress Git-connected rebuild'\)/);
+ assert.match(src,/\['commit-tree',tree,'-p',releaseHead,'-m',subject,'-m',body\]/);
  assert.match(src,/Immutable deployment HOLD/,'live controller must still fail closed');
 });
