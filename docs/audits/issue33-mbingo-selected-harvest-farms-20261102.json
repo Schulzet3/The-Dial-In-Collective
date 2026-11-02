@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "status": "TESTING_PENDING_EXACT_SOURCE_CI",
+  "original603_number": 217,
+  "original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "development_base_sha": "733b263839af850bf5dfc03bb8ead3c3febc1c99",
+  "official_product_url": "https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural",
+  "selected_h1": "ETHIOPIA GUJI ORGANIC DAMBI UDDO NATURAL",
+  "selected_quotes": [
+    "The meticulous process of harvesting involves hand-picking ripe, red coffee cherries across approximately 450 smallholder farms.",
+    "These cherries are then delivered to the Dambi Uddo Station, where they undergo a critical floating process to remove any underweight or damaged cherries.",
+    "PROCESS: Natural",
+    "CUPPING NOTES: Strawberry, Dried Fruit, Rose, Green Tea"
+  ],
+  "prior_source_register": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv #217 had blank producer; frozen expected is not live evidence.",
+  "change": "Selected station/H1-corroborated harvesting group; preserve literal approximately 450 smallholder farms, not station as producer.",
+  "test_path": "tests/coffee-issue33-mbingo-selected-harvest-farms.test.mjs",
+  "runtime_path": "src/server/coffee-narrative-evidence.mjs",
+  "source_limit": "Official selected H1 and prose independently read via public web November 2; no DNS-pinned raw HTML/hash, actual official parser replay, all603 or hosted GoTrue PASS.",
+  "boundaries": [
+    "original603 CSV/captures/oracle and 153/29 caveats immutable",
+    "#267 V2 and #96 unchanged",
+    "PR367 excluded",
+    "no READY/deployment/provider/member writes"
+  ]
+}
