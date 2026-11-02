@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - development/backend-foundation
+      - 'release-candidates/**'
       - work/setup-feed-history-recovery-20261014
     paths:
       - 'site/**'
@@ -14,6 +15,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/cloud-regression.yml'
+      - 'docs/RELEASE_CANDIDATE.json'
   pull_request:
     branches:
       - development/backend-foundation

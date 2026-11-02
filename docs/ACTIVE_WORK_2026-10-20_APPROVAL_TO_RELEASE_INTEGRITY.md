@@ -267,3 +267,11 @@ Owner's separate "If more items are now ready, go ahead and publish those too" i
 ## 2026-10-29T18:50:28.901Z — Explicit Release11 postflight concurrent queue status
 
 The newly tracked DIC-Q-33-original603-direct-region-country-prose is TESTING, not merged/READY and not published. Current queue 59 DEPLOYED/0 READY/1 TESTING/2 IN_PROGRESS. Release11 one-use claim remains consumed once; no further publication authorized. Source-bound provider receipt is `docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_11_VERIFIED.json`.
+
+## November 2, 2026 — #417 exact-source READY-only branch CI (nonpublishing)
+- Existing five applicable GitHub checks now trigger on nonproduction `release-candidates/**` and `docs/RELEASE_CANDIDATE.json` changes: approval, validate, cloud-tests, mobile-browser-qa and SQL; private visual review also accepts a changed candidate with site edits. No separate publisher, no duplicate new suite, no automatic deployment. Development tests, nightly backups and Sunday comprehensive regressions remain intact.
+- Candidate requires an exact one-parent development source plus same-commit journal/manifest, published-file restoration for unrelated unfinished code, READY-only path provenance, and all five checks on that exact SHA before a single owner-approved production claim. With zero READY items, no real release candidate is authorized or staged.
+- This scoped commit is CI/journal only; exact PR and merged-source tests are required. No Netlify, database, Auth, member, backup or release action.
+
+## November 2 — #417 preserve Locked GitHub Free and credits phrasing (PR acceptance correction)
+Exact-source PR426 visual review failed its existing instruction-continuity regression because a concurrent 7,909-character Project Instructions rewrite had changed the literal private-Free, advisory CI, no paid/public suggestion, screenshot prohibition and paste-ready strings. This commit restores those unchanged owner Locked requirements in clearer words under 8,000 characters, preserves the newly approved #423 recovery-key controls, and does not change executable code, permissions, publisher, privacy, production or test policy. Earlier CI failure remains recorded; rerun all applicable exact-source checks before integration.
