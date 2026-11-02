@@ -12,11 +12,11 @@
     "git_tracked_blobs": 951,
     "eligible_files": 436,
     "excluded_files": 515,
-    "verified_line_count_files": 304,
-    "pending_line_count_files": 132,
+    "verified_line_count_files": 305,
+    "pending_line_count_files": 131,
     "verified_eligible_line_denominator": null,
-    "verified_counted_lines_to_date": 36011,
-    "semantically_reviewed_v2_lines": 1494
+    "verified_counted_lines_to_date": 36203,
+    "semantically_reviewed_v2_lines": 1826
   },
   "files": [
     {
@@ -223,9 +223,9 @@
       "path": "netlify/functions/coffee-url-preview.mjs",
       "blob_sha": "b982650d78920f77342f5ac78dce91ca394094cc",
       "bytes": 12485,
-      "line_count": null,
-      "line_count_evidence": "PENDING_UNVERIFIED",
-      "reviewed_v2_lines": 0
+      "line_count": 192,
+      "line_count_evidence": "Direct numbered read of exact pinned Git blob in C2-005",
+      "reviewed_v2_lines": 192
     },
     {
       "path": "package.json",
@@ -233,7 +233,7 @@
       "bytes": 1081,
       "line_count": 15,
       "line_count_evidence": "identical_git_blob_to_frozen_machine_inventory",
-      "reviewed_v2_lines": 0
+      "reviewed_v2_lines": 15
     },
     {
       "path": "scripts/audit/approval-coverage.mjs",
@@ -241,7 +241,7 @@
       "bytes": 5713,
       "line_count": 98,
       "line_count_evidence": "identical_git_blob_to_frozen_machine_inventory",
-      "reviewed_v2_lines": 0
+      "reviewed_v2_lines": 98
     },
     {
       "path": "scripts/audit/ci-scope.mjs",
@@ -249,7 +249,7 @@
       "bytes": 1637,
       "line_count": 27,
       "line_count_evidence": "identical_git_blob_to_frozen_machine_inventory",
-      "reviewed_v2_lines": 0
+      "reviewed_v2_lines": 27
     },
     {
       "path": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
@@ -6601,6 +6601,6 @@
     }
   ],
   "review_ledger": "docs/audits/issue267-v2-current-code-ledger.json",
-  "next_file": "netlify/functions/coffee-url-preview.mjs",
+  "next_file": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
   "next_line": 1
 }

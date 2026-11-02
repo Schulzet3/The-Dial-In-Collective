@@ -14,14 +14,14 @@
     "tracked_files": 757,
     "text_files": 754,
     "original_text_line_denominator": 579961,
-    "verified_new_v2_reviewed_lines": 1248,
-    "remaining_v2_lines": 578713,
-    "status": "IN_PROGRESS_R2_004_SOURCE_BOUND",
-    "next_file_index_1_based": 23,
-    "next_file": "docs/ACTIVE_DECISION_AND_REQUIREMENT_RECONCILIATION_2026-10-19.md",
-    "next_source_blob_sha": "1c78797e184c6cb8122bc45b59398c7530333496",
+    "verified_new_v2_reviewed_lines": 1536,
+    "remaining_v2_lines": 578425,
+    "status": "IN_PROGRESS_R2_005_SOURCE_BOUND",
+    "next_file_index_1_based": 27,
+    "next_file": "docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md",
+    "next_source_blob_sha": "538ca6adec844dd02fa50d9964e5cc628564bec9",
     "next_line_1_based": 1,
-    "next_action": "Review original manifest file #23 line 1 in order; append R2-005 after direct reading.",
+    "next_action": "Continue original frozen file #27 line 1; append R2-006 only after direct semantic review.",
     "independently_reviewed_v2_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -176,6 +176,34 @@
         "first_line": 1,
         "last_line": 37,
         "receipt": "docs/audits/issue267-v2-frozen-batches/R2-004.json"
+      },
+      {
+        "path": "docs/ACTIVE_DECISION_AND_REQUIREMENT_RECONCILIATION_2026-10-19.md",
+        "source_blob_sha": "1c78797e184c6cb8122bc45b59398c7530333496",
+        "first_line": 1,
+        "last_line": 53,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md",
+        "source_blob_sha": "7a2be3d0ee3102e62ca5679bfe91b41697089302",
+        "first_line": 1,
+        "last_line": 135,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md",
+        "source_blob_sha": "98f07574b096d450604be2c5d0a86f2083711af8",
+        "first_line": 1,
+        "last_line": 69,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
+      },
+      {
+        "path": "docs/ADMIN_FOUNDATION_CHECKPOINT_2026-10-14.md",
+        "source_blob_sha": "2c9c4f8d1392e9a6a6145a3c2b69f4b5475cad89",
+        "first_line": 1,
+        "last_line": 31,
+        "receipt": "docs/audits/issue267-v2-frozen-batches/R2-005.json"
       }
     ],
     "method_boundary": "AI semantic line-reading only; regex/AST/dedup/search never counts; no human-independent attestation claimed.",
@@ -183,9 +211,9 @@
   },
   "current_code_v2": {
     "review_pass": "V2_CURRENT_EXECUTABLE_ALL_LINES",
-    "inventory_status": "PINNED_436_FILES_304_LINE_COUNT_VERIFIED_132_PENDING",
+    "inventory_status": "PINNED_436_FILES_305_LINE_COUNT_VERIFIED_131_PENDING",
     "development_sha_to_pin_on_first_run": "9707553a64f88127826e8f5b2b36cd0651296e83",
-    "reviewed_current_source_lines": 1494,
+    "reviewed_current_source_lines": 1826,
     "reviewed_ranges": [
       {
         "path": ".github/workflows/approval-continuity.yml",
@@ -361,26 +389,56 @@
         "first_line": 1,
         "last_line": 19,
         "receipt": "docs/audits/issue267-v2-current-batches/C2-004.json"
+      },
+      {
+        "path": "netlify/functions/coffee-url-preview.mjs",
+        "source_blob_sha": "b982650d78920f77342f5ac78dce91ca394094cc",
+        "first_line": 1,
+        "last_line": 192,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "package.json",
+        "source_blob_sha": "63518161d81489993cceffad18f55ce3a47f1958",
+        "first_line": 1,
+        "last_line": 15,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "scripts/audit/approval-coverage.mjs",
+        "source_blob_sha": "788e174d264a040b5fdb9bbe9ca81cccb952022c",
+        "first_line": 1,
+        "last_line": 98,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
+      },
+      {
+        "path": "scripts/audit/ci-scope.mjs",
+        "source_blob_sha": "591a988e13b2bc2fd06760e13cb98a98da2c69c5",
+        "first_line": 1,
+        "last_line": 27,
+        "receipt": "docs/audits/issue267-v2-current-batches/C2-005.json"
       }
     ],
-    "next_file": "netlify/functions/coffee-url-preview.mjs",
+    "next_file": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
     "next_line_1_based": 1,
     "rules": "Audit every active source/test/build/CI line once per pinned snapshot, track later code SHA/deltas separately, trace callers and Locked requirements, fix justified defects and optimize with focused tests; historical archived/binary/generated material is classified separately, not silently discarded.",
     "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
     "inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
     "eligible_files": 436,
-    "line_count_verified_files": 304,
-    "line_count_pending_files": 132,
-    "known_line_count_subtotal": 36011,
+    "line_count_verified_files": 305,
+    "line_count_pending_files": 131,
+    "known_line_count_subtotal": 36203,
     "full_eligible_line_denominator": null,
     "coverage_ledger": "docs/audits/issue267-v2-current-code-ledger.json",
-    "unreviewed_source_drift_as_of_development_sha": "be2727b66ed160ca63b50df8c99acf2b1c49edb6",
+    "unreviewed_source_drift_as_of_development_sha": "40f0bc3272cd9e99fd2f9d4372ffa5943eace083",
     "unreviewed_current_delta_paths": [
       "scripts/audit/issue33-original603-focused-source-review.mjs",
       "site/lib/engine.js",
       "src/server/coffee-identity-evidence.mjs",
       "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-semantic-specs.mjs",
       "tests/approval-coverage.test.mjs",
+      "tests/coffee-issue33-educational-origin-boundary.test.mjs",
       "tests/coffee-issue33-origin-method-suffix.test.mjs",
       "tests/coffee-issue33-selected-region-blend.test.mjs",
       "tests/coffee-issue33-selected-station-locality.test.mjs",
@@ -422,5 +480,5 @@
   "app_code_changes_in_this_record": 0,
   "production_changes": 0,
   "completed_tests_in_this_record": 0,
-  "last_verified_audit_batch_utc_date": "2026-11-01"
+  "last_verified_audit_batch_utc_date": "2026-11-02"
 }
