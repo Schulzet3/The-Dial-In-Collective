@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "status": "CURRENT_SELECTED_THREE_CASE_SOURCE_REVIEW_AND_NARROW_CODE_CANDIDATE_NOT_READY",
+  "source_sha": "ed73d8e6e402b05da733d7c32aea0aec703d6485",
+  "run_id": 41376320559,
+  "job_id": 125057219690,
+  "conclusion": "success",
+  "attempted": 3,
+  "fetched": 3,
+  "parsed": 3,
+  "manual_certified": 0,
+  "artifact_id": 13111545826,
+  "artifact_sha256": "128f8d86fe4e94afdfc40e445a137bac47250e449c6512d27de27ee8473dccc1",
+  "historical_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "cases": [
+    {
+      "number": 4,
+      "url": "https://44northcoffee.com/products/honduras-decaf",
+      "selected_h1": "Decaf - Honduras COMSA",
+      "html_sha256": "389b158f245f506cec9107367dc9bc1915675939224f7d917a62e0d79d8952a9",
+      "fields": {
+        "origin": "La Encarnación, Ocotepeque, Honduras",
+        "roast_level": "Medium",
+        "producer": "COMSA",
+        "decaffeination_method": "Water Process"
+      },
+      "decision": "CURRENT_DIRECT_ROAST_AND_ORIGIN_ALREADY_PRESENT_NO_FIX",
+      "limit": "Current selected Medium label differs from rotating medium-dark marketing narrative; no new global roast inference."
+    },
+    {
+      "number": 308,
+      "url": "https://shop.compasscoffee.com/products/emblem-espresso-1",
+      "selected_h1": "Emblem Espresso",
+      "html_sha256": "11ff603a93d3ee1ff6c212efa0d7d8bd9550319d6c92d9ec83d70221f2fbf610",
+      "fields": {
+        "name": "Emblem Espresso",
+        "tasting_notes": "Rich, Caramel, Classic"
+      },
+      "decision": "CURRENT_SELECTED_COMPONENT_ORIGINS_NOT_PUBLISHED_IN_BOUND_SOURCE",
+      "limit": "Archived Brazil/Guatemala/Sumatra component origins cannot be imported from history or home-page category; keep blank."
+    },
+    {
+      "number": 312,
+      "url": "https://shop.iconikcoffee.com/products/washed-sidra-giorgio-bressani",
+      "selected_h1": "Bressani Family Washed Sidra",
+      "html_sha256": "418eb851b3475b3a0d633b972523ad8e1ab1f83e932c77f636a20326d44a3188",
+      "fields": {
+        "name": "Bressani Family Washed Sidra",
+        "producer": "Bressani Family",
+        "process": "Washed",
+        "variety": "Sidra",
+        "elevation_m": "1550m",
+        "origin": null
+      },
+      "selected_direct_literal": "Bressani Family, San Jerónimo Guatemala",
+      "decision": "SOURCE_BACKED_NARROW_ORIGIN_OMISSION_CANDIDATE",
+      "proposed_origin": "San Jerónimo, Guatemala",
+      "limit": "Do not infer Lake Atitlán from historic oracle or SEO. Exact selected producer, H1 and direct literal required. Await CI and current after-run."
+    }
+  ],
+  "original603_oracle_captures_csv_modified": false,
+  "qualified_context_153_preserved": true,
+  "qualified_missing_literal_29_preserved": true,
+  "issue267_v2_modified": false,
+  "production_operations": 0,
+  "next": "Run six adversarial tests and applicable CI, repair failures, nonforce merge, compare exact current three official HTML/H1 and all fields/conflicts before/after; READY only for proven single-field improvement."
+}

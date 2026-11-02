@@ -579,6 +579,20 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   if(block.tag==='p'&&compactLines.length===2&&value.length<=160)compactCandidates.push(value);
   for(const compact of compactCandidates){
   if(compact.length<=160&&current(compact)){
+   // A compact CURRENT selected lot credit can publish the producer and
+   // a named locality followed by an explicit country without a comma before
+   // the country: "Bressani Family, San Jerónimo Guatemala". Require the
+   // same producer already verified in canonical fields AND the selected H1.
+   // No roaster lookup, SEO/URL, generic comma sentence or country inference.
+   if(!fields.origin&&fields.producer&&key(fields.producer).length>=7&&
+      key(name).includes(key(fields.producer))&&compact.length<=125){
+    const credited=compact.match(new RegExp(
+     '^([\\p{Lu}][\\p{L}\\p{M} .&-]{4,95}),\\s+([\\p{Lu}][\\p{L}\\p{M} .-]{2,65})\\s+('+COUNTRIES+')$','iu'));
+    if(credited&&key(credited[1])===key(fields.producer)&&
+       !/\b(?:coffee|roast|process|washed|natural|honey|anaerobic|decaf|shipping|delivery|street|avenue|farm|estate)\b/i.test(credited[2])&&
+       !completeVarietyPhrase(credited[2])&&!COUNTRY_ONLY.test(credited[2]))
+     originCandidates.push({value:credited[2].trim()+', '+credited[3],quote:compact});
+   }
    const countryFirst=compact.match(new RegExp('^('+COUNTRIES+')\\s+[-–—]\\s+([\\p{L}\\p{M} .,’’\'()-]{2,120})$','iu'));
    // A country-first product title or repeated breadcrumb can carry a coffee
    // VARIETY rather than a geographic region: "Nicaragua - Pumpkin Spice-
