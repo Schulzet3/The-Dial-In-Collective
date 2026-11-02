@@ -1,3 +1,9 @@
+## November 2 UTC — #33 PR439 first-head CI assertion API corrected (TESTING)
+
+Actual exact first-head cloud run [41525253309](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41525253309) ran the new positive selected-grower test successfully, but three new negative tests failed because Node's strict assert API is `assert.doesNotMatch`, not `assert.notMatch`. This is a test harness mistake, **not** proof of a runtime producer defect. Corrected only the assertion API in the same commit as this journal and receipt. Exact corrected-head CI is required before integration. Original603 job SKIPPED, not PASS; no READY or deployment. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 original603 #65 selected Kenyan smallholder co-op attribution (TESTING; no deploy)
 
 Recovered exact development `090f4b3ee58896e95a8d873bb7cee45dee56d552`, AGENTS, issue/journal, status, Master Spec, Decision Ledger, approval matrix, release queue and original603 #65 register. Current official [Combat Night Vision Kenya](https://combatcoffeetea.com/products/night-vision-medium-roast-kenya) selected H1 and current traceable supply paragraph explicitly describe smallholder farmers working in co-ops; October29 source register has producer blank. Proposed credit preserves literal `Smallholder farmers` rather than inventing a cooperative name or forcing the oracle's fuller phrase. Four bounded synthetic adversarial tests cover regional-only, historical, wrong-country, blend and related-product claims. Same-commit source receipt `docs/audits/issue33-combat-night-vision-smallholder-coops-20261102.json`. **TESTING**: exact PR-head CI and raw official HTML/parser replay not yet verified. Original603 CSV/captures/oracle, 153 context-qualified/29 missing-literal-qualified, #267 V2, #96, PR367, queue (0 READY/89 DEPLOYED/3 IN_PROGRESS), and production unchanged. No publication or provider/member writes. [skip netlify]

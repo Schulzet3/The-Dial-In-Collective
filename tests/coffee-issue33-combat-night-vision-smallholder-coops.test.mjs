@@ -18,22 +18,22 @@ test('#65 selected Kenyan coffee credits literal co-op smallholder growers, not 
 test('#65 generic regional smallholders without selected traceable supply cannot be promoted',()=>{
  const r=parse('NIGHT VISION - MEDIUM ROAST - KENYA',[intro,growers+' '+process]);
  assert.equal(r.ok,true,JSON.stringify(r));
- assert.notMatch(r.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(r.fields));
+ assert.doesNotMatch(r.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(r.fields));
 });
 test('#65 prior coffee or incompatible selected country cannot inherit co-op grower credit',()=>{
  const prior=parse('NIGHT VISION - MEDIUM ROAST - KENYA',[intro,'Previously, '+selected+' '+growers]);
  assert.equal(prior.ok,true,JSON.stringify(prior));
- assert.notMatch(prior.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(prior.fields));
+ assert.doesNotMatch(prior.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(prior.fields));
  const wrong=parse('NIGHT VISION - MEDIUM ROAST - COLOMBIA',[intro,selected+' '+growers]);
  assert.equal(wrong.ok,true,JSON.stringify(wrong));
- assert.notMatch(wrong.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(wrong.fields));
+ assert.doesNotMatch(wrong.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(wrong.fields));
 });
 test('#65 selected blend and unrelated product card cannot supply whole-product growers',()=>{
  const blend=parse('KENYA AND COLOMBIA BLEND',[intro,selected+' '+growers]);
  assert.equal(blend.ok,true,JSON.stringify(blend));
- assert.notMatch(blend.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(blend.fields));
+ assert.doesNotMatch(blend.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(blend.fields));
  const related=parse('NIGHT VISION - MEDIUM ROAST - KENYA',[intro,selected],
   '<aside class="related-products"><h2>Other coffee</h2><p>'+growers+'</p></aside>');
  assert.equal(related.ok,true,JSON.stringify(related));
- assert.notMatch(related.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(related.fields));
+ assert.doesNotMatch(related.fields.producer||'',/^Smallholder farmers$/i,JSON.stringify(related.fields));
 });
