@@ -27,7 +27,9 @@ test('live provider verifier uses GET-only and exact published SHA',async()=>{
  for(const functionChange of [{tr:null},{tr:{action:{type:'rate_limit',config:{
   aggregate:{keys:[{type:'ip'}]},rate_limit_config:{algorithm:'sliding_window',
    window_size:60,window_limit:120}}}}},
-  {ro:[{p:'/api/coffee-preview',m:['POST','GET']}]}]){
+  {ro:[{p:'/api/coffee-preview',m:['POST','GET']}]},
+  {ro:[{p:'/api/coffee-preview',m:['POST']},{p:'/api/unapproved',m:['GET']}]},
+  {ro:[{p:'/api/coffee-preview',m:['POST']},{p:'/api/coffee-preview',m:['POST']}]}]){
   await assert.rejects(verifyLiveNetlify({token:'fake',expectedReleaseSha:sha,
    fetcher:async url=>({ok:true,json:async()=>url.endsWith('/deploy-1')?
     {...deploy,available_functions:[{...deploy.available_functions[0],...functionChange}]}:site})}));

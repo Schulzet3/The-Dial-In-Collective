@@ -8,8 +8,10 @@ export function assertCoffeePreviewFunctionContinuity(deploy){
  if(!Array.isArray(functions))throw Error('Netlify function inventory unavailable');
  const matches=functions.filter(f=>f?.n==='coffee-url-preview');
  if(matches.length!==1||!Array.isArray(matches[0].ro)||
-  !matches[0].ro.some(r=>r.p==='/api/coffee-preview'&&
-   Array.isArray(r.m)&&r.m.length===1&&r.m[0]==='POST')||
+  matches[0].ro.length!==1||
+  matches[0].ro[0]?.p!=='/api/coffee-preview'||
+  !Array.isArray(matches[0].ro[0]?.m)||
+  matches[0].ro[0].m.length!==1||matches[0].ro[0].m[0]!=='POST'||
   matches[0].r!=='nodejs22.x')
   throw Error('Netlify coffee preview Function POST-only route/runtime missing');
  const rule=matches[0].tr?.action;
