@@ -1,3 +1,9 @@
+## November 2 UTC — Issue33 READY queue wording reconciliation (documentation only)
+
+Corrected one stale TESTING-era phrase in the already verified READY item's first tests entry (it said exact PR-head CI pending). Exact PR-head and merged-source CI, source receipts, blocker-free status and scope remain unchanged and verified in subsequent entries. No code/test/CI changes, no new READY item, no provider or production writes. [skip netlify].
+
+---
+
 ## November 2 UTC — Issue33 educational Origin example boundary FIXED, VERIFIED, narrow READY (NOT DEPLOYED)
 
 **Real defect:** The prior PR343 adversarial test exposed a teaching `What is origin?` section inside the selected product wrapper whose ordinary `Origin:` paragraph could enter canonical growing geography. PR346 now masks only such geographic label bodies inside educational H2-H6 sections, preserving the original HTML and reviewable source facts; direct Product Details after the section still parse. Five bounded adversarial tests cover negative examples, selected current Guatemala ASOPCE/Brewpoint control captions, conflict safety and ordinary direct specs. Neither real current official page is claimed to contain the synthetic heading.
