@@ -141,3 +141,5 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 - `prepare-release-evidence.mjs` supplies freshness key from backup evidence; it still HOLDs until independently verified ciphertext, snapshot coverage and approved direct Drive parent. Added mock concurrent-claim and failure tests. **Not yet merged, hosted CI pending.** No actual branch claim, workflow dispatch, backup, provider or production write performed.
 
 - Follow-up hardening: re-read pinned main backup workflow ref **after** durable claim and before dispatch; deny changed main SHA and require manual reconciliation. Updated test call-order assertion; hosted CI still pending.
+
+- Accepted real request evidence uses PostgreSQL microsecond UTC precision (e.g. five fractional digits). Durable claim now preserves 1–9 fractional digits rather than collapsing distinct writes to milliseconds; test fixture covers five-digit precision.

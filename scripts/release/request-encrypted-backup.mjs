@@ -6,10 +6,10 @@ const REPO='Schulzet3/The-Dial-In-Collective';
 const API='https://api.github.com/repos/'+REPO;
 const SHA=/^[a-f0-9]{40}$/;
 export function backupClaimRef(freshnessKey){
- if(typeof freshnessKey!=='string'||!/^20\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,3})?Z$/.test(freshnessKey)||
+ if(typeof freshnessKey!=='string'||!/^20\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z$/.test(freshnessKey)||
   !Number.isFinite(Date.parse(freshnessKey)))
   throw Error('Current observed database-write UTC timestamp required for durable backup claim');
- const key=createHash('sha256').update('dic-release-backup-v1:'+new Date(freshnessKey).toISOString()).digest('hex');
+ const key=createHash('sha256').update('dic-release-backup-v1:'+freshnessKey).digest('hex');
  return 'refs/heads/dic-backup-claims/'+key.slice(0,40);
 }
 export async function requestEncryptedBackup({token,freshnessKey,fetcher=fetch}={}){

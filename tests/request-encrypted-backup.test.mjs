@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {backupClaimRef,requestEncryptedBackup} from '../scripts/release/request-encrypted-backup.mjs';
-const key='2026-11-02T01:00:00.000Z',sha='a'.repeat(40);
+const key='2026-11-02T01:00:00.80395Z',sha='a'.repeat(40);
 function fixture({active=false,claimed=false,dispatchStatus=204,claimStatus=201}={}){
  const calls=[];
  const fetcher=async(url,options)=>{
