@@ -27,6 +27,7 @@ jobs:
       - name: Syntax validation (no external calls)
         run: |
           node --check scripts/backups/scheduled-backup-guard.mjs
+          node --check scripts/backups/select-archived-restore-source.mjs
           node --check scripts/release/one-use-claim.mjs
           node --check scripts/release/chat-release-request.mjs
           node --check scripts/release/controlled-release-runner.mjs
@@ -40,7 +41,7 @@ jobs:
           node --check scripts/release/release-queue.mjs
           node --check scripts/release/ready-only-candidate.mjs
           node --check scripts/release/stage-ready-only-candidate.mjs
-          for script in scripts/backups/create-nightly-encrypted-dump.sh scripts/backups/derive-recovery-recipient.sh scripts/backups/isolated-recovery-drill.sh scripts/backups/restore-saved-age-archive.sh scripts/backups/select-archived-restore-source.mjs scripts/audit/isolated-backup-snapshot-regression.sh; do
+          for script in scripts/backups/create-nightly-encrypted-dump.sh scripts/backups/derive-recovery-recipient.sh scripts/backups/isolated-recovery-drill.sh scripts/backups/restore-saved-age-archive.sh scripts/audit/isolated-backup-snapshot-regression.sh; do
             bash -n "$script"
           done
           for script in scripts/backups/capture-recovery-snapshot.sh scripts/backups/assert-recovery-inventory.sh tests/backups/snapshot-regression.sh; do
