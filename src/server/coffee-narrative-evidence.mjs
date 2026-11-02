@@ -195,6 +195,8 @@ function selectedStewardshipFarmCredits(paragraphs,name,fields){
 // Credit an unnamed harvesting group only when its receiving station is
 // also named in this selected H1. Never infer from a regional story or old lot.
 function selectedHarvestSmallholderCredits(paragraphs,name,fields){
+ // A component's growers are not automatically producers of a whole blend.
+ if(/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' ')))return [];
  const fold=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu,' ').trim();
  const selected=fold(name),credits=new Set();
  const direct=/\b(?:the|this|our)\s+(?:meticulous\s+)?(?:process\s+of\s+)?harvesting\s+(?:involves|includes)\s+[^.!?]{0,160}\b(?:coffee\s+)?cherries\s+across\s+((?:approximately|around|over|nearly)\s+\d{1,5}\s+smallholder\s+farms)\.\s+These\s+cherries\s+(?:are|were)\s+then\s+delivered\s+to\s+(?:the\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Station\b/iu;

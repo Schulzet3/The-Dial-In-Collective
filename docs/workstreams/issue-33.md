@@ -1,3 +1,9 @@
+## November 2 UTC — #33 #217 prevent component producer promoted to blend (TESTING)
+
+Additional adversarial review identified a whole-blend attribution risk: a station-correlated harvesting group for one component must not populate canonical producer for an explicitly blended coffee. Reused existing source-wide blend guard, plus a fifth synthetic negative test. No frozen original603 data, queue status or other workstream changed. Exact new-head CI required. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 PR406 first-head synthetic historical-prefix regression repaired (still TESTING)
 
 Initial PR406 cloud [41469476910](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469476910) **FAILED one new test**: the selected harvest group rule matched a positive sentence after a same-paragraph `Previously,` or `Hypothetically,` prefix. The positive selected-source, mismatched station/H1 and conflicting group tests passed. The rule now checks the immediate pre-match paragraph context, preserving fail-closed historical/hypothetical boundaries; no test expectation weakened. Initial approval [41469477038](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469477038) failed queue intake; separate same-PR commit registered this file in existing #33 IN_PROGRESS row, and new-head approval [41469764622](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469764622) passed. New exact-source CI required. [skip netlify]

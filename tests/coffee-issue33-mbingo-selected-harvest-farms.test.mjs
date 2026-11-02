@@ -27,6 +27,10 @@ test('#217 prior/hypothetical/SEO/related prose cannot donate a producer',()=>{
  const r=parse(title,'This coffee is naturally processed.',seo,related);
  assert.equal(r.ok,true);assert.equal(r.fields.producer,undefined,JSON.stringify(r.fields));
 });
+test('#217 a blend component farm group cannot become the whole blend producer',()=>{
+ const r=parse(title+' BLEND',harvest+' This blend also includes coffee from another producer.');
+ assert.equal(r.ok,true);assert.equal(r.fields.producer,undefined,JSON.stringify(r.fields));
+});
 test('#217 conflicting current harvest-group counts cannot be silently selected',()=>{
  const r=parse(title,harvest+'</p><p>'+harvest.replace('450 smallholder farms','320 smallholder farms'));
  assert.equal(r.ok,true);assert.equal(r.fields.producer,undefined,JSON.stringify(r.fields));
