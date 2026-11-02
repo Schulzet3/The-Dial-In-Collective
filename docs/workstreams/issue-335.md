@@ -1,3 +1,19 @@
+## November 2 UTC — PR442 exact-head CI correction (TESTING)
+
+PR #442 initial head `eac90e25cc7bdd6a7f80cd814cee8cc6ac4932d5`: six applicable checks SUCCESS (approval, security-inventory, SQL, mobile-browser-qa, cloud-tests, review). Full Node `validate` run 41529593868 **FAILED 1 of 2286 tests** (2279 PASS, 1 FAIL, 6 SKIP), before lint/build: newly added lower/upper historical range test mistakenly destructured `grindSetting` instead of the loop's `grinderSetting` variable. The neighboring old-calibration and endpoint regressions passed. Corrected **test fixture only**, from shorthand `{grindSetting}` to `{grindSetting:grinderSetting}`; application logic unchanged. Exact corrected-head test/CI and integration still pending. Do not represent initial failed run as pass; no deploy.
+
+---
+
+## November 2 UTC — out-of-range historical grind evidence guard (isolated PR head; TESTING)
+
+Owner continuation: "Okay let's dig in" on Issue #335, following recommendation-science prioritization. Pinned development source `db612f6c33356ebfbf72df2d40e932c1415f8c99`. Current `site/lib/engine.js::translateGrind` previously clamped any historic successful dial number outside the *recorded* old espresso range to 0/1 relative position. That may fabricate a boundary calibration reference on the current range, even though the original measurement does not belong to the purported old espresso calibration. The nine recovered research reports and documented citation limits caution against transferring precise grinder settings without reliable context.
+
+Narrow behavior: require the old actual dial to be **within inclusive historical snapshot espresso bounds** before using relative-range translation; otherwise return no translated evidence and retain the cautious existing fallback. Valid old endpoints and middle settings remain usable as **unproven estimates**. No old shot, setup, family, Community or cloud record is modified. No new numeric espresso science constant, fifth-style change or owner-Locked UI decision.
+
+Same-commit paths: `site/lib/engine.js`, `tests/grind-cross-version-range.test.mjs`, this journal and the `TESTING` release queue entry `DIC-Q-335-historical-grind-range-evidence`. New tests cover below/above-old-range exclusions, both valid historical endpoints, same-version changed calibration, source labeling and nonmutating history. Source-bound CI, nonforce integration and queue READY **NOT YET VERIFIED** at this entry; expected next action: open PR, check all applicable exact-head CI, fix any failures, nonforce merge, read back merged SHA and checks, then promote queue only with evidence. No production publication or provider/SQL/Auth/member writes.
+
+---
+
 ## November 2 UTC — PR347 merged and exact-source CI READY (NOT DEPLOYED)
 
 Owner-approved research-aware narrow correction: source branch `feature/335-cross-version-grind-range-20261101` exact head `6db565c4def2750f3f94fdbb280aeb73e99c6325` with code/test/this journal/TESTING queue **same-commit**. PR [#347](https://github.com/Schulzet3/The-Dial-In-Collective/pull/347) nonforce merged at `68a77bfa12682fd6150e2b1014c9edb3a451f96c` despite concurrent Issue267 audit documentation (eight non-overlapping files), preserving that work. New engine blob `2a3c3ea096a8309920c996c9b22cc4e295c32124`, new test blob `2e5c9ae308dd913499e00a33a827349da842ff41` identical in tested head and merged source. No production publication.
