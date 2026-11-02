@@ -182,3 +182,6 @@ Owner directed preparation of all release-queue work without publication. The op
 
 ## 2026-11-02 — fail-closed immutable artifact cutover guard
 - Main hosted single-use controller now checks exact source-bound CI certificate/ZIP SHA-256 and approved READY IDs, and requires independently verified Netlify Function parity before any publish path. It explicitly refuses the legacy Git-connected rebuild path even after those checks; no release ref push, grant consumption or production action. This is a deliberate BLOCKED cutover until an immutable provider uploader preserving Netlify Functions is implemented and verified. No deploy. Source checkpoint development `bec80599d212fa9a5840906019231bff81892481`; main parent `b497a76c7203b4e786c41a777200e36b4207cacf`.
+
+## 2026-11-02 — exact bundled function receipt promoted to hosted release preflight
+- Updated main preflight to require immutable function ZIP path and validate its SHA-256 against source-bound READY certificate v4 alongside static ZIP; promoted development verifier source `96eff211900ce0fa0fadd6b994de56d9b1174518`. Controller remains deliberately blocked before any Git release push because provider direct artifact deployment with Netlify Function upload is not yet integrated. Main parent `1ace0bf2242a180c3548dba4eef33b0fbf849a27`. No production action.

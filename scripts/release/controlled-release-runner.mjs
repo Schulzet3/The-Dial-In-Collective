@@ -259,12 +259,14 @@ export async function executeSingleUseRelease(settings=process.env){
   if(settings.DIC_IMMUTABLE_FUNCTION_PARITY_VERIFIED!=='YES')
    throw Error('Immutable deployment HOLD: Netlify Function parity not independently verified');
   if(!settings.DIC_IMMUTABLE_CERTIFICATE_PATH||!settings.DIC_IMMUTABLE_ARCHIVE_PATH||
-    !settings.DIC_IMMUTABLE_CI_RUN_ID||!settings.DIC_IMMUTABLE_ARTIFACT_NAME)
+    !settings.DIC_IMMUTABLE_CI_RUN_ID||!settings.DIC_IMMUTABLE_ARTIFACT_NAME||
+    !settings.DIC_IMMUTABLE_FUNCTION_ARCHIVE_PATH)
    throw Error('Immutable deployment HOLD: exact CI certificate and artifact missing');
   const cert=json(readFileSync(settings.DIC_IMMUTABLE_CERTIFICATE_PATH,'utf8'),'Immutable CI certificate');
   const artifact=readFileSync(settings.DIC_IMMUTABLE_ARCHIVE_PATH);
+  const functionArchive=readFileSync(settings.DIC_IMMUTABLE_FUNCTION_ARCHIVE_PATH);
   const receipt=verifyReleaseArtifactReceipt({certificate:cert,sourceSha:sha,
-   archive:artifact,runId:Number(settings.DIC_IMMUTABLE_CI_RUN_ID),
+   archive:artifact,functionArchive,runId:Number(settings.DIC_IMMUTABLE_CI_RUN_ID),
    artifactName:settings.DIC_IMMUTABLE_ARTIFACT_NAME,verifiedRequiredChecks:true});
   if(JSON.stringify(receipt.ready_item_ids)!==JSON.stringify(queueGate.ready_items.map(x=>x.id).sort()))
    throw Error('Immutable artifact READY item scope differs from approved batch');
