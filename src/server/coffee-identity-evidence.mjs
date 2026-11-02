@@ -770,8 +770,8 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
      (!/\b(?:could|would|might|may|hypothetical|imagine|suppose)\b/i.test(sentence)&&
       sentence.match(/\bexpect\s+from\s+this\s+coffee\s+in\s+(20\d{2}(?:\s*[-–—/]\s*(?:20)?\d{2})?)\b/i));
     if(datedOffering)add('Release',datedOffering[1],sentence);
-    const seasonalProgram=sentence.match(/\b(?:cornerstone|part)\s+of\s+our\s+(20\d{2})\s+(spring|summer|autumn|fall|winter)\s+coffee\s+program\b/i);
-    if(seasonalProgram)add('Release',seasonalProgram[2][0].toUpperCase()+seasonalProgram[2].slice(1).toLowerCase()+' '+seasonalProgram[1],sentence);
+    // A roaster's dated seasonal coffee program is marketing context, not
+    // a selected SKU release edition. Keep explicit harvest/release claims above.
     const lot=sentence.match(/\bLot\s*#\s*([A-Z0-9][A-Z0-9/-]{0,25})\b/i);
     if(lot)add('Lot','Lot #'+lot[1],sentence);
    }
