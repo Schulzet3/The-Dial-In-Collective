@@ -215,6 +215,29 @@ function selectedHarvestSmallholderCredits(paragraphs,name,fields){
  return [...credits];
 }
 
+// Credit literal growers when a selected current lot and a delivery-credit
+// sentence independently identify the same receiving washing station.
+function selectedStationPremiumGrowerCredits(paragraphs,name,fields){
+ if(/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' ')))return [];
+ const fold=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu,' ').trim();
+ const lot=/\b(?:our|this|the)\s+(?:(?:latest|current|newest)\s+)?(?:(?:natural|washed|honey|anaerobic)\s+)?(?:coffee|lot|offering)\s+from\s+(?:the\s+)?(?:renowned\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Washing Station\b/iu;
+ const selected=new Set();
+ for(const paragraph of paragraphs)for(const sentence of producerSentences(paragraph)){
+  const match=sentence.match(lot);
+  if(match&&currentProducerSentence(sentence)&&producerCountriesAgree(sentence,name,fields))
+   selected.add(fold(match[1]));
+ }
+ if(selected.size!==1)return [];
+ const station=[...selected][0],credits=new Set();
+ const premium=/\b(?:the\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Washing Station\b[^.!?]{0,180}?\b(?:paying|pays?|offers?)\s+(?:\w+\s+){0,2}premiums?\s+to\s+((?:smallholder|local|independent)\s+farmers)\b[^.!?]{0,120}?\b(?:delivering|supplying|growing|harvesting)\b[^.!?]{0,90}?\b(?:coffee\s+)?cherries\b/iu;
+ for(const paragraph of paragraphs)for(const sentence of producerSentences(paragraph)){
+  const match=sentence.match(premium);
+  if(match&&fold(match[1])===station&&currentProducerSentence(sentence)&&
+     producerCountriesAgree(sentence,name,fields))credits.add(match[2]);
+ }
+ return [...credits];
+}
+
 function explicitAnonymousProducerCredits(paragraphs,name,fields){
  const result=new Set();
  for(const paragraph of paragraphs)for(const line of producerSentences(paragraph)){
@@ -240,6 +263,8 @@ function foundGrower(paragraphs,name='',relationshipGroups=[paragraphs],fields={
    collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  }
  for(const credit of selectedHarvestSmallholderCredits(paragraphs,name,fields))
+  collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
+ for(const credit of selectedStationPremiumGrowerCredits(paragraphs,name,fields))
   collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  for(const alias of cooperativeAliasCredits(paragraphs))collectives.set(alias.normalize('NFKC').toLowerCase(),alias);
  for(const paragraph of paragraphs){
