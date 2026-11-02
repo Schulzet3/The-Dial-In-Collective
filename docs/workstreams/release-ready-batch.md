@@ -15,3 +15,7 @@ The 17-item combined certification passed at source `a2daf144e6b02e94dd29ca97a00
 ## Owner-authorized one-use Release14 grant — 2026-11-02T03:09:15.395Z
 
 Owner explicitly directed immediate publication of the 17 READY items. Grant `DIC-20261102-READY17-14` binds to exact-source five-check passing SHA `2c8e1ffe3b83a7524968f50efca3ead4da282cf8`; no SQL/Auth/Edge/member-data operations are authorized. Historical encrypted offsite artifact metadata readback confirmed direct child of approved folder; provider routing and queue isolation remain controller-gated. This commit is a nonpublishing grant only, not a deployment or Netlify receipt.
+
+## Release 14 deployed — November 2
+
+Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe` and Netlify production deploy `6ae8006cd64b30ae9046e44d` READY/current with matching commit at 03:16:13 UTC. Seventeen formerly READY queue items now DEPLOYED; two ongoing unfinished items remain excluded. Verified encrypted `backup.age` SHA-256 and direct-child Google Drive offsite ZIP. Authenticated member-session and live DB write integrity were not exercised; no such PASS claimed.
