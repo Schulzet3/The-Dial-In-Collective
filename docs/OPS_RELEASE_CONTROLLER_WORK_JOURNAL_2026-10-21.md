@@ -191,3 +191,8 @@ Owner directed preparation of all release-queue work without publication. The op
 
 ## 2026-11-02 — correct ZIP mode interpretation
 - Hosted rehearsal `41405384537` failed safe ZIP fixture because Python zipfile encodes permissions without POSIX file-type bits. Accept mode with no file-type bits, still reject explicit symlinks and nonregular file types; update both main and development. Re-run exact-source CI; no production changes.
+
+## 2026-11-02 — Issue #368 main controller automatic immutable artifact gate (no publication)
+- Staged read-only `retrieve-certified-release-bundle.mjs` and dependencies from verified development PR #372 merged `46cd5e1d6a23606686d7f1e2e8ff0dc4796af2b1`. The main controller now automatically discovers/downloads exact-source CI containers, verifies five checks, strict ZIP members, two SHA-256 sidecars, v4 certificate and function/static digest manifest against queue item IDs before claim. No manual artifact path environment variables.
+- **Fail closed:** controller still intentionally HALTs before grant consumption, Git push or Netlify publication until independently verified offsite recovery and single atomic provider digest/function publication transaction are activated. Existing production Git-connected path untouched.
+- Added main CI syntax and bounded positive/adversarial artifact tests. Branch parent `e9a6af408d399fa62521454052e92d294d522e49`; hosted CI/nonforce integration pending. No deployment, backup dispatch, member/SQL/Auth writes or queue READY change.

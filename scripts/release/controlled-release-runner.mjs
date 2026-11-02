@@ -5,9 +5,8 @@
 // Does NOT create Netlify deploys; one NON-FORCE push to release/production
 // is the single atomic claim. Never retry a failed push automatically.
 import {execFileSync} from 'node:child_process';
-import {mkdtempSync,rmSync,appendFileSync,readFileSync} from 'node:fs';
-import {verifyReleaseArtifactReceipt} from './verify-release-artifact-receipt.mjs';
-import {verifiedDistFiles} from './verified-dist-files.mjs';
+import {mkdtempSync,rmSync,appendFileSync} from 'node:fs';
+import {retrieveVerifiedReleaseBundle} from './retrieve-certified-release-bundle.mjs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
@@ -253,30 +252,27 @@ export async function executeSingleUseRelease(settings=process.env){
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
  assertApprovedReadyBatch(grant,queueGate);
- // A Git SHA does not prove identical deployable bytes. Publication must
- // have the certified ZIP and a function-preserving Netlify deployment path.
- // This intentionally denies the old Git-connected rebuild release path.
+ // A Git SHA cannot certify deployable bytes. The automatic bridge fetches
+ // the exact successful CI run and verifies static ZIP + function ZIP + v4
+ // certificate before ANY grant claim or provider mutation.
  if(!(chatPush&&chatRequest.mode==='validate_only')){
-  if(settings.DIC_IMMUTABLE_FUNCTION_PARITY_VERIFIED!=='YES')
-   throw Error('Immutable deployment HOLD: Netlify Function parity not independently verified');
-  if(!settings.DIC_IMMUTABLE_CERTIFICATE_PATH||!settings.DIC_IMMUTABLE_ARCHIVE_PATH||
-    !settings.DIC_IMMUTABLE_CI_RUN_ID||!settings.DIC_IMMUTABLE_ARTIFACT_NAME||
-    !settings.DIC_IMMUTABLE_FUNCTION_ARCHIVE_PATH)
-   throw Error('Immutable deployment HOLD: exact CI certificate and artifact missing');
-  const cert=json(readFileSync(settings.DIC_IMMUTABLE_CERTIFICATE_PATH,'utf8'),'Immutable CI certificate');
-  const artifact=readFileSync(settings.DIC_IMMUTABLE_ARCHIVE_PATH);
-  const functionArchive=readFileSync(settings.DIC_IMMUTABLE_FUNCTION_ARCHIVE_PATH);
-  const receipt=verifyReleaseArtifactReceipt({certificate:cert,sourceSha:sha,
-   archive:artifact,functionArchive,runId:Number(settings.DIC_IMMUTABLE_CI_RUN_ID),
-   artifactName:settings.DIC_IMMUTABLE_ARTIFACT_NAME,verifiedRequiredChecks:true});
-  if(JSON.stringify(receipt.ready_item_ids)!==JSON.stringify(queueGate.ready_items.map(x=>x.id).sort()))
-   throw Error('Immutable artifact READY item scope differs from approved batch');
-  const staticReceipt=verifiedDistFiles({zipPath:settings.DIC_IMMUTABLE_ARCHIVE_PATH,functionZip:functionArchive});
-  if(Object.keys(staticReceipt.files).length<1||staticReceipt.functionHash!==receipt.immutable_function_sha256)
-   throw Error('Immutable function/static manifest verification failed');
-  // Until the provider uses these exact bytes, a Git push would trigger a
-  // second rebuild. Never consume a grant for that unsafe path.
-  throw Error('Immutable deployment HOLD: provider artifact publisher not activated; no Git push');
+  const bundle=await retrieveVerifiedReleaseBundle({token,sourceSha:sha});
+  const certified=bundle.receipt.ready_item_ids.slice().sort();
+  const approved=queueGate.ready_items.map(x=>x.id).sort();
+  if(JSON.stringify(certified)!==JSON.stringify(approved))
+   throw Error('Immutable artifact READY scope differs from approved source batch');
+  if(bundle.manifest.functions['coffee-url-preview']!==bundle.receipt.immutable_function_sha256)
+   throw Error('Certified Netlify Function digest differs from manifest');
+  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,
+   '\n## Exact-source immutable artifact readback\n- Source: '+sha+
+   '\n- CI run: '+bundle.run_id+
+   '\n- Static files: '+Object.keys(bundle.files).length+
+   '\n- Function: coffee-url-preview (SHA-256 verified)\n'+
+   '- Status: verified bytes; **NOT published**, owner grant unconsumed.\n');
+  // The existing Git-connected production publication is preserved until
+  // backup verification and one atomic digest+function provider transaction
+  // can be proven. Never use a Git push as a second rebuild publisher.
+  throw Error('Immutable deployment HOLD: verified artifact retrieved, but provider transaction and independent offsite backup verification are not activated; no Git push');
  }
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
