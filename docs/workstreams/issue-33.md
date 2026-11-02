@@ -1,3 +1,13 @@
+## November 2 UTC — #33 Favor Token Dark direct selected roast versus Dark branding (TESTING; no deploy)
+
+Recovered exact development `a466b1d2b0310fe8c7e9e2b52cee45500b8ef465`, AGENTS, current scoped journal, Status, Master Spec, Decision Ledger, approval matrix, release queue (0 READY / 89 DEPLOYED / 2 IN_PROGRESS), original603 review register, #267 V2/#96 boundaries and automation registry. The user expressly excluded PR367; it was not modified or used.
+
+Independently inspected official Favor Token Dark selected product public-web page: H1 `The Token Dark Blend`, marketing `Token Dark Roast`, but direct current selected prose calls it `medium-dark roast`, and prints Brazil/Santo Antônio do Amparo, Natural and five tasting notes. This is a public-web snapshot, **not** a fresh DNS-pinned raw HTML/hash or exact-source live parser replay. Source-bound receipt: `docs/audits/issue33-favor-token-dark-selected-source-20261102.json`. Two synthetic bounded adversarial Node regressions assert current direct roast beats Dark branding, stale SEO, related Dark coffee and Medium grind selector, with supported selected notes/origin/process. Test path `tests/coffee-issue33-favor-token-dark-current-roast.test.mjs`. **TESTING** pending exact PR-head CI; no claim of demonstrated live defect, READY or complete original603 acceptance.
+
+This same candidate commit contains TEST + SOURCE RECEIPT + this scoped journal. No runtime code, queue, original603 CSV/captures/oracle, 153 context-qualified /29 missing-literal-qualified classifications, #267 V2, #96, PR367, production/provider/member or deployment change. If CI shows a real regression, diagnose and narrowly repair under #33 ownership; otherwise preserve only verified test coverage. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 Banko Gotiti sibling-lot process isolation regression (TESTING; no deploy)
 
 **Recovered authority:** exact development base `8d82d6e2b0fdb08c73a24ff19da48408c68d66ce`, current AGENTS/Issue33/Issue267 V2/Issue96, Master Specification, Decision Ledger, approval matrix, queue **0 READY / 89 DEPLOYED / 2 IN_PROGRESS**, and original603 register with immutable CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`. Issue #356 release-source isolation remains open; no new release receipt or promotion is implied. #267 PR358 is documentation-only and does not overlap this #33-owned test path.
