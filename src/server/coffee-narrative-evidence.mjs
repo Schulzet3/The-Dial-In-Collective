@@ -201,6 +201,10 @@ function selectedHarvestSmallholderCredits(paragraphs,name,fields){
  for(const paragraph of paragraphs){
   const match=paragraph.match(direct);
   if(!match)continue;
+  // A prior/hypothetical introduction must not be lost by matching only
+  // the subsequent harvesting sentence within the same product paragraph.
+  const lead=paragraph.slice(Math.max(0,match.index-140),match.index);
+  if(/\b(?:previously|formerly|historically|hypothetically|hypothetical|imagine|suppose|prior|last year)\b/i.test(lead))continue;
   const [harvest,delivery]=producerSentences(match[0]),station=fold(match[2]);
   if(!station||!selected.includes(station)||!currentProducerSentence(harvest)||
      !currentProducerSentence(delivery)||!producerCountriesAgree(match[0],name,fields))continue;

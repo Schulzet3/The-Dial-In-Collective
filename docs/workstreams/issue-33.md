@@ -1,3 +1,9 @@
+## November 2 UTC — #33 PR406 first-head synthetic historical-prefix regression repaired (still TESTING)
+
+Initial PR406 cloud [41469476910](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469476910) **FAILED one new test**: the selected harvest group rule matched a positive sentence after a same-paragraph `Previously,` or `Hypothetically,` prefix. The positive selected-source, mismatched station/H1 and conflicting group tests passed. The rule now checks the immediate pre-match paragraph context, preserving fail-closed historical/hypothetical boundaries; no test expectation weakened. Initial approval [41469477038](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469477038) failed queue intake; separate same-PR commit registered this file in existing #33 IN_PROGRESS row, and new-head approval [41469764622](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469764622) passed. New exact-source CI required. [skip netlify]
+
+---
+
 ## November 2 UTC — #33 PR406 approval intake failure diagnosed and corrected (still TESTING)
 
 PR406 initial exact-head approval [41469477038](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41469477038) FAILED because the changed `src/server/coffee-narrative-evidence.mjs` was not inventoried in the release queue. This is a real queue-intake contract failure, not a product test failure. Added only this path and pending test receipt to the existing `DIC-Q-33-residual-source-accuracy` **IN_PROGRESS** item; no new queue row, READY promotion, DEPLOYED edit or unrelated scope. Exact new-head CI required. Frozen603 SKIPPED is not PASS. [skip netlify]
