@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "source_development_sha": "090f4b3ee58896e95a8d873bb7cee45dee56d552",
+  "original603_number": 65,
+  "owner_decision_register_number": 18,
+  "selected_official_url": "https://combatcoffeetea.com/products/night-vision-medium-roast-kenya",
+  "selected_h1": "NIGHT VISION - MEDIUM ROAST - KENYA",
+  "official_current_source_observed": {
+    "source": "Current official product page, public rendered text independently opened 2026-11-02",
+    "selected_supply": "This coffee, crafted from fully traceable sources of supply in Embu, Kirinyaga and Nyeri counties",
+    "grower_credit": "Smallholder farmers, each with around 200 trees, work together in co-ops.",
+    "other_source": "Location: Kiambu; Processing: Hand Picked, Washed",
+    "source_limit": "Do not resolve county-versus-Kiambu geography by guessing; group credit is independent of geographic precision"
+  },
+  "historical_register": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+  "historical_register_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "historical_gap": "#65 producer blank; original oracle expects Smallholder farmer cooperatives, but only literal Smallholder farmers is proposed",
+  "change": "Narrow selected county-supply and adjacent literal co-op smallholder credit; no named cooperative invention; reject regional-only, historical, mismatched-country, blend and related-product text",
+  "test_path": "tests/coffee-issue33-combat-night-vision-smallholder-coops.test.mjs",
+  "raw_html_sha256": null,
+  "live_official_parser_replay": "UNVERIFIED",
+  "exact_source_ci": {
+    "initial_head_cloud_run": 41525253309,
+    "initial_head_cloud": "FAIL_TEST_ASSERTION_API",
+    "corrected_head": "PENDING"
+  },
+  "caveats": {
+    "context_qualified": 153,
+    "missing_literal_qualified": 29
+  },
+  "coordination": "#267 V2 active current source is scripts/audit/coffee-frozen-ci.py; no shared runtime path in latest PR #436",
+  "limits": "No full original603, live official raw-HTML/hash or hosted GoTrue certification; no READY promotion or production change"
+}
