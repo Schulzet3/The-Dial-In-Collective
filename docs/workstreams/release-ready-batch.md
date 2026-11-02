@@ -42,3 +42,6 @@ Single-use GitHub controller run 41382114139 SUCCESS; release/production `8e3808
 ## 2026-11-02 — source-bound CI certificate artifact
 - After successful automatic queue validation, combined Node/cloud tests, lint and build, CI writes and uploads a machine-readable receipt with exact checkout SHA, Actions run ID and READY item IDs. Certificate explicitly does not authorize publication, certify backup, or verify Netlify SHA. Focused contract test added; same-commit journal preserved.
 - No production publication, member writes or provider mutation.
+
+## 2026-11-02 — Netlify postflight exact-source receipt validation
+- Added pure fail-closed Netlify project/deploy readback verifier requiring expected release SHA, deployment ID, READY/current state, production branch/context, approved site and hostname. Negative tests reject wrong source, preview, stale, wrong site and mismatched receipts. This verifier does not itself fetch provider data, deploy, or mark queue items DEPLOYED; release operator must pass independently fetched provider receipts. Same-commit journal included.
