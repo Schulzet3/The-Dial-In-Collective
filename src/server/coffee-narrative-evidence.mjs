@@ -229,7 +229,7 @@ function selectedStationPremiumGrowerCredits(paragraphs,name,fields){
  }
  if(selected.size!==1)return [];
  const station=[...selected][0],credits=new Set();
- const premium=/\b([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Washing Station\b[^.!?]{0,180}?\b(?:paying|pays?|offers?)\s+(?:\w+\s+){0,2}premiums?\s+to\s+((?:smallholder|local|independent)\s+farmers)\b[^.!?]{0,120}?\b(?:delivering|supplying|growing|harvesting)\b[^.!?]{0,90}?\b(?:coffee\s+)?cherries\b/iu;
+ const premium=/\b(?:the\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Washing Station\b[^.!?]{0,180}?\b(?:paying|pays?|offers?)\s+(?:\w+\s+){0,2}premiums?\s+to\s+((?:smallholder|local|independent)\s+farmers)\b[^.!?]{0,120}?\b(?:delivering|supplying|growing|harvesting)\b[^.!?]{0,90}?\b(?:coffee\s+)?cherries\b/iu;
  for(const paragraph of paragraphs)for(const sentence of producerSentences(paragraph)){
   const match=sentence.match(premium);
   if(match&&fold(match[1])===station&&currentProducerSentence(sentence)&&
