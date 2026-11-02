@@ -1,3 +1,14 @@
+## November 1 — same-grinder cross-version range correction (source-bound branch, TESTING)
+
+Owner requested comprehensive research-grounded recommendation review, safe implementation, exact-source tests and READY preparation, **not publication**. Directly reviewed relevant sections from the nine recovered research reports and current engine; reports 03/04/06/07/08/09 caution that grinder setting, particle distribution, puck resistance and shot time are context dependent, not universally transferable. Sources are user-provided narratives whose original external citations remain incompletely independently verified. Existing Locked 7 roast tiers, five styles, five all-green ratings, single-variable diagnostic, source hierarchy and research caveats preserved.
+
+Verified defect from current `site/lib/engine.js`: `grindGuidance` used raw `grindSetting` from a different setup version with a matching grinder/burr snapshot, even if that historical shot's espresso range differs from the current range. This could show a misleading dial number on the new calibration. Safe correction translates each historical successful value to the current espresso range **only when both old and new snapshot boundaries are valid**; skips incomplete old calibration data, and labels the result as an unproven relative range estimate. Historical measurements are not edited. Earlier same-version/current-calibration successful shots stay higher-priority.
+
+Five new tests: changed-scale conversion (0–5 dial #3 → 10–60 dial #40), same-range preservation, null/invalid range exclusion, current-proven precedence and wrong-grinder exclusion. App CI and merge **UNVERIFIED** until actual checks run; QUEUE TESTING, not READY or DEPLOYED. No newly invented roast/temperature/time thresholds, production/auth/Edge/member/provider writes, backup changes, or Netlify deploy. Parent Issue #335 remains open for full citation audit and empirical real-user quality evidence.
+
+
+---
+
 # Issue #335 — research intake and next-shot diagnostic correction
 
 Nov 1, 2026. Owner authorized research ingestion and safe app improvements, not publication. Base source `52b59ba129260998af37dcd2e42037595d9c1d0a`; isolated branch `feature/research-diagnostic-noop-20261101`. Issue: https://github.com/Schulzet3/The-Dial-In-Collective/issues/335.

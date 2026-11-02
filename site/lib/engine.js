@@ -108,7 +108,12 @@ function hardwareMatch(sh,v) {
 }
 export function grindStep(v) {return Math.max(.1,round(Math.abs(v.grinderMax-v.grinderMin)*CONFIG.grindRangeFraction));}
 export function translateGrind(sh,v) {
- const old=sh.snapshot;if(!old||!finite(sh.grindSetting)||!(old.grinderMax>old.grinderMin))return null;
+ const old=sh.snapshot;
+ // Legacy snapshots may omit one end of the recorded espresso range; do not
+ // coerce null into a numeric zero or transfer across invalid calibrations.
+ if(!old||!finite(sh.grindSetting)||!finite(old.grinderMin)||
+    !finite(old.grinderMax)||old.grinderMax<=old.grinderMin||
+    !finite(v.grinderMin)||!finite(v.grinderMax)||v.grinderMax<=v.grinderMin)return null;
  const pos=clamp((sh.grindSetting-old.grinderMin)/(old.grinderMax-old.grinderMin),0,1);
  return round(v.grinderMin+pos*(v.grinderMax-v.grinderMin));
 }
@@ -119,7 +124,12 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
  if(same.length)return {value:round(quantile(same.map(sh=>sh.grindSetting),.5)),source:'Reference from your other basket or setup',proven:false};
  const cross=qual.filter(sh=>sh.coffeeId===c.id&&sh.setupVersionId!==v.id&&(!familyId||sh.familyId===familyId));
- if(cross.length)return {value:round(quantile(cross.map(sh=>sh.grindSetting),.5)),source:'Starting reference from matching grinder and burrs',proven:false};
+ // A matching grinder/burr set does not mean the stored dial number is on
+ // today's calibration scale. Use only snapshots with two valid bounds and
+ // translate their relative positions; still an unproven starting reference.
+ const translatedCross=cross.map(sh=>translateGrind(sh,v)).filter(finite);
+ if(translatedCross.length)return {value:round(quantile(translatedCross,.5)),
+  source:'Starting reference from matching grinder and burrs (relative range estimate)',proven:false};
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  // Old calibration rows may legitimately seed an estimated translation, but
  // legacy rows without an equipment snapshot must not yield null guidance.
