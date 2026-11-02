@@ -12,6 +12,13 @@ test('only independently verified, sufficiently recent encrypted backups may be 
  const mutations=[
  {githubArtifact:{...evidence.githubArtifact,expired:true}},
  {githubArtifact:{...evidence.githubArtifact,size_in_bytes:0}},
+ {githubArtifact:{...evidence.githubArtifact,size_in_bytes:100}},
+ {githubArtifact:{...evidence.githubArtifact,size_in_bytes:99.5}},
+ {githubArtifact:{...evidence.githubArtifact,id:undefined},expectedArtifactId:undefined},
+ {expectedArtifactId:undefined},
+ {expectedDriveId:undefined,driveFile:{...evidence.driveFile,id:undefined}},
+ {driveFile:{...evidence.driveFile,size:'100'}},
+ {driveFile:{...evidence.driveFile,size:'99.5'}},
  {driveFile:{...evidence.driveFile,parent_ids:['wrong']}},
  {driveFile:{...evidence.driveFile,parent_ids:[folder,'other']}},
  {approvedFolderId:'attacker-folder',driveFile:{...evidence.driveFile,parent_ids:['attacker-folder']}},
