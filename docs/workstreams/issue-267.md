@@ -1,3 +1,31 @@
+## November 3, 2026 — #267 strict S2-004 original/pinned/live workflow #4 [skip netlify]
+
+**Source verified:** `.github/workflows/coffee-audit-python.yml` **52/52 source numbered lines** original commit `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned commit `9707553a64f88127826e8f5b2b36cd0651296e83`, and observed live, all exactly identical Git blob `e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77`. Each line directly read and source-exact nine-dimension behavior/risk/quality/deadness/duplicates/counterparts/testability/fix/Locked fit in [S2-004](../audits/issue267-v2-strict-batches/S2-004.json). This is AI semantic review, not human. Strict historical total **312/579,961**, pinned current total **314/57,913**, with old V2 R2/C2 counters unchanged (no duplicate credit). No net new live delta in file #4.
+
+**Finding/limit:** Python coffee-audit workflow sends any `scripts/audit/**` PR to apt-get PIL/Tesseract even for JS-only helpers; may be inefficient but need measured evidence and dependency checks before narrowing. Frozen report and local OCR test scope not equivalent to complete #267 appraisal or real authenticated app acceptance. No proven active defect or safe unused-code removal, no app/test changes, browser/provider/production writes, READY or deployment. Next frozen/pinned file #5 `.github/workflows/coffee-completeness.yml` line 1. #267 OPEN.
+
+---
+
+## November 3, 2026 — #267 strict S2-003 review of workflow #3 [skip netlify]
+
+**Source evidence:** frozen original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` blob `a8cabb7cd9f81149aa8d363c20c9ebeda6695260` **112/112** lines; pinned `9707553a64f88127826e8f5b2b36cd0651296e83` blob `7dd903e5006f8adc6bdf0bd63b75d7fd3c72b25e` **113/113**; live at `60b33d15acb7ed04ea7a3bcc773204c28408f627` blob `f6dee8efcfdeefdaa28beba8c97d77fe7bd093ef` **132/132**. Per-line source text, nine owner criteria, exact counterpart, classification and independently written AI semantic interpretation recorded [S2-003](../audits/issue267-v2-strict-batches/S2-003.json). Historic old V2 grouped summaries are not nine-criteria line proof; do not double count. Strict totals now **260/579,961** frozen, **262/57,913** pinned; old V2 provisional 5,451/6,462 unchanged. This is not independent human review.
+
+**Post-pin current drift:** full GitHub compare pinned `9707553a...` to live `60b33d15acb7ed04ea7a3bcc773204c28408f627` returned **222 changed paths across 243 commits**; every status/path machine-inventoried in S2-003 but NOT semantically credited. Source complete live workflow #2 106 lines, #3 132 lines, and #1 one inserted trigger are reviewed so far. All other live delta files/new paths remain open, no silent coverage PASS.
+
+**Findings:** original lacked `scripts/pwa/**` trigger (already repaired pinned/live); legacy recovery branch push trigger exists (not safe-to-delete proof); live #457 risk-scoped cloud/compiled mobile browser tests reviewed as tests/config, not proof of hosted signed-in/physical device performance. #33 and #96 owners unmodified. Git blob/line/counterpart verification PASS; no new application tests, member/Supabase/Netlify writes, READY queue changes or deployments. Strict continuation next frozen/pinned manifest #4 `.github/workflows/coffee-audit-python.yml` line1. #267 OPEN.
+
+---
+
+## November 3, 2026 — #267 strict per-line S2-002 frozen/current/live workflow #2 [skip netlify]
+
+**Recovery source:** development `7d3418c69120a569c781e91b8e88a4007bb33e4d`, main `8b58dbf803a60cc201996f250e71444c03a9e7c8`, release `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe`; checked AGENTS, preflight/entrypoint, issue #267, original and pinned inventories, original R2-001/C2-001 grouped receipts, old V2 and newer strict ledgers, status, Master Spec/Nov3 #457 Lock, Decision Ledger, approval matrix, release queue, #33 and #96 ownership, open #267 V1 draft PRs. No overlapping current strict S2 receipts found after S2-001.
+
+**Direct reviewed evidence:** Entire original frozen manifest #2 `.github/workflows/cloud-beta-ci.yml` blob `d6de476890f09c8b8814b0feb4d4f750117fd8cb` **107/107 lines**; pinned-current same path blob `dd324212bfbcb14fc24b057eb376f1b325471322` **108/108 lines**; current live same path blob `af54d0af2cbdf1e6978ef1635c7fd93f5b79d684` **106/106 lines**, all numbered source and per-line behavioral assessment plus quality, risk, deadness, duplication, exact counterpart, tests, safe fix, Locked fit in [S2-002](../audits/issue267-v2-strict-batches/S2-002.json). AI reviewer, not human. Original/pinned exact SHA anchored to immutable `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` and `9707553a64f88127826e8f5b2b36cd0651296e83`. Counts strict frozen now **148/579961** and strict pinned **149/57913**, earlier R2 5,451 / C2 6,462 *provisional* unchanged; zero additional old V2 credit. One current file separately reviewed to its live 106 lines; other live code drift NOT cleared. Earlier group-summary V2 receipts not treated as nine-field per-line certification.
+
+**Findings:** Older `scripts/pwa/**` omission already fixed by current CI. Nov3 #457 risk-based classified Node tests/build and `site-integrity.mjs` replaced historical broad suite/inline dist guards; exact source reviewed but downstream scripts and test execution remain separate. The workflow's Netlify-development-deploy comment may be dated; NOT a proven publish bypass or real defect. No reproduced active bug, safe dead code, deleted history, or provider writes. Original603/coffee #33 and Auth #96 untouched. Blob SHA and per-line integrity PASS, no application tests run in this documentation batch. Production NOT authorized. Next frozen/current #3 `.github/workflows/cloud-regression.yml` line 1.
+
+---
+
 ## November 3, 2026 — #267 strict per-line S2-002 frozen/current/live workflow #2 [skip netlify]
 
 **Recovery source:** development `7d3418c69120a569c781e91b8e88a4007bb33e4d`, main `8b58dbf803a60cc201996f250e71444c03a9e7c8`, release `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe`; checked AGENTS, preflight/entrypoint, issue #267, original and pinned inventories, original R2-001/C2-001 grouped receipts, old V2 and newer strict ledgers, status, Master Spec/Nov3 #457 Lock, Decision Ledger, approval matrix, release queue, #33 and #96 ownership, open #267 V1 draft PRs. No overlapping current strict S2 receipts found after S2-001.
