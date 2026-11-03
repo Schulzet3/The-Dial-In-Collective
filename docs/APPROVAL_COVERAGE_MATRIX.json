@@ -2037,6 +2037,29 @@
       ".github/workflows/isolated-sql-regression.yml",
       ".github/workflows/visual-review.yml"
     ],
-    "evidence": "tests/ci-impact.test.mjs and tests/ci-optimization.test.mjs; exact-source CI and provider nonpublication readback must be verified"
+    "evidence": "tests/ci-impact.test.mjs and tests/ci-optimization.test.mjs; exact-source CI and provider nonpublication readback must be verified",
+    "verification": {
+      "state": "VERIFIED_NONPUBLISHING",
+      "merged_sha": "7d3418c69120a569c781e91b8e88a4007bb33e4d",
+      "source_tree_sha": "b297c0d658df243cdac82b9b6a110cf5165af229",
+      "pr": 458,
+      "checks": {
+        "approval": 41728785262,
+        "validate": 41728785093,
+        "cloud_and_mobile": 41728785142,
+        "sql": 41728785128,
+        "python_audit": 41728785081,
+        "queue": 41728785159
+      },
+      "node_tests": {
+        "pass": 2297,
+        "fail": 0,
+        "skipped": 6
+      },
+      "original603": "SKIPPED_NOT_PASS",
+      "release": "NOT_AUTHORIZED_NO_CANDIDATE",
+      "netlify_current": "6ae8006cd64b30ae9046e44d",
+      "pending": "FIRST_REAL_OWNER_APPROVED_BATCH_STAGING_AND_PROVIDER_POSTFLIGHT_UNEXERCISED_ISSUE_417"
+    }
   }
 }
