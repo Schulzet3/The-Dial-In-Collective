@@ -1,0 +1,2513 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-013",
+  "frozen": {
+    "file_index_1_based": 13,
+    "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "path": ".github/workflows/issue96-source-audit.yml",
+    "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+    "total_lines": 23,
+    "per_line": [
+      {
+        "line": 1,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "name: DIC authorized provider security checks",
+        "classification": "configuration",
+        "behavior": "Authorized provider security workflow name",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 1,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 1
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 2,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "on:",
+        "classification": "configuration",
+        "behavior": "Actions events wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 2,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 2
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 3,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "  push:",
+        "classification": "configuration",
+        "behavior": "Push event",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 3,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 3
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 4,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "    branches: [work/issue96-security-audit-20261023]",
+        "classification": "configuration",
+        "behavior": "Issue96 audit branch only",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 4,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 4
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 5,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "    paths: [.github/workflows/issue96-source-audit.yml, scripts/audit/provider-security-probes.py]",
+        "classification": "configuration",
+        "behavior": "Workflow and provider-probe script path filters",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 5,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 5
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 6,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "permissions:",
+        "classification": "configuration",
+        "behavior": "Token permissions wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 6,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 6
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 7,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "  contents: read",
+        "classification": "configuration",
+        "behavior": "contents read only",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 7,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 7
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 8,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "jobs:",
+        "classification": "configuration",
+        "behavior": "Jobs wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 8,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 8
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 9,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "  nonmutating-provider-checks:",
+        "classification": "configuration",
+        "behavior": "Nonmutating provider checks job",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 9,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 9
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 10,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "    runs-on: ubuntu-24.04",
+        "classification": "configuration",
+        "behavior": "Ubuntu 24.04 runner",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 10,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 10
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 11,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "    timeout-minutes: 6",
+        "classification": "configuration",
+        "behavior": "Six-minute timeout",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 11,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 11
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 12,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "    steps:",
+        "classification": "configuration",
+        "behavior": "Steps wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 12,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 12
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 13,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "      - uses: actions/checkout@v7",
+        "classification": "action",
+        "behavior": "Checkout action v7",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 13,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 13
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 14,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Checkout inputs wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 14,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 14
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 15,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "          persist-credentials: false",
+        "classification": "configuration",
+        "behavior": "Do not persist git token",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 15,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 15
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 16,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "      - run: python3 scripts/audit/provider-security-probes.py",
+        "classification": "list_entry",
+        "behavior": "Invoke provider security probes Python",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 16,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 16
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 17,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "      - uses: actions/upload-artifact@v7",
+        "classification": "action",
+        "behavior": "Upload artifact action v7",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 17,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 17
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 18,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "        if: always()",
+        "classification": "configuration",
+        "behavior": "Upload artifact even if prior step fails",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 18,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 18
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 19,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Artifact input map",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 19,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 19
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 20,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "          name: dic-provider-security-${{ github.run_id }}",
+        "classification": "configuration",
+        "behavior": "Run-bound security artifact name",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 20,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 20
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 21,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "          path: qa_artifacts/security/",
+        "classification": "configuration",
+        "behavior": "Security report artifact directory",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Provider probe and private artifacts require redaction and source-script review",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 21,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 21
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 22,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "          if-no-files-found: warn",
+        "classification": "configuration",
+        "behavior": "Warn if no report files",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 22,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 22
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 23,
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "source_text": "          retention-days: 7",
+        "classification": "configuration",
+        "behavior": "Seven-day artifact retention",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "pinned_current": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "inventory_index_1_based": 17,
+            "line": 23,
+            "strict_credit_now": 0
+          },
+          "live": {
+            "path": ".github/workflows/issue96-source-audit.yml",
+            "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+            "line": 23
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#96 controls live auth/privacy and no production writes",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      }
+    ]
+  },
+  "pinned_current": {
+    "file_index_1_based": 13,
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "path": ".github/workflows/issue267-frozen-inventory.yml",
+    "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+    "total_lines": 68,
+    "per_line": [
+      {
+        "line": 1,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "name: DIC Issue267 pinned historical file and line inventory",
+        "classification": "configuration",
+        "behavior": "Pinned historical inventory workflow title",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 1
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 2,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "# Audit-only. Checkout the historical immutable source. Never build/publish.",
+        "classification": "comment",
+        "behavior": "Audit-only header comment",
+        "quality": "Descriptive; no security effect by itself",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 2
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 3,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "on:",
+        "classification": "configuration",
+        "behavior": "Event wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 3
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 4,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "  push:",
+        "classification": "configuration",
+        "behavior": "Push event",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 4
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 5,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "    branches:",
+        "classification": "configuration",
+        "behavior": "Push branch filter",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 5
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 6,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "      - audit/issue267-semantic-ledger-20261029",
+        "classification": "list_entry",
+        "behavior": "Historical audit branch",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 6
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 7,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "    paths:",
+        "classification": "configuration",
+        "behavior": "Changed-path filter",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 7
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 8,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "      - .github/workflows/issue267-frozen-inventory.yml",
+        "classification": "list_entry",
+        "behavior": "Workflow self-change path",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 8
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 9,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "permissions:",
+        "classification": "configuration",
+        "behavior": "Token permissions wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 9
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 10,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "  contents: write",
+        "classification": "configuration",
+        "behavior": "contents write for audit manifest",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 10
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 11,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "jobs:",
+        "classification": "configuration",
+        "behavior": "Jobs wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 11
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 12,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "  inventory:",
+        "classification": "configuration",
+        "behavior": "Inventory job name",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 12
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 13,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "    if: github.repository == 'Schulzet3/The-Dial-In-Collective'",
+        "classification": "configuration",
+        "behavior": "Repository identity gate",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 13
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 14,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "    runs-on: ubuntu-24.04",
+        "classification": "configuration",
+        "behavior": "Ubuntu runner 24.04",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 14
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 15,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "    timeout-minutes: 12",
+        "classification": "configuration",
+        "behavior": "12-minute timeout",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 15
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 16,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "    steps:",
+        "classification": "configuration",
+        "behavior": "Steps map",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 16
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 17,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "      - uses: actions/checkout@v7",
+        "classification": "action",
+        "behavior": "Checkout action v7",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 17
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 18,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Checkout inputs map",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 18
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 19,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          ref: abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+        "classification": "configuration",
+        "behavior": "Pin historical commit",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 19
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 20,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          persist-credentials: false",
+        "classification": "configuration",
+        "behavior": "Checkout credentials not persisted",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 20
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 21,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "      - uses: actions/setup-node@v7.1.0",
+        "classification": "action",
+        "behavior": "Setup Node action v7.1.0",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 21
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 22,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Node setup inputs",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 22
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 23,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          node-version: '22'",
+        "classification": "configuration",
+        "behavior": "Use Node 22",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 23
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 24,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "      - name: Screen every original tracked UTF-8 line using the existing verified scanner",
+        "classification": "list_entry",
+        "behavior": "Label machine full UTF8 scan",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 24
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 25,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "        run: node scripts/audit/issue161-full-source-review.mjs",
+        "classification": "command",
+        "behavior": "Run machine scanner script",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 25
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 26,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "      - name: Verify frozen tree and construct per-file metadata-only manifest",
+        "classification": "list_entry",
+        "behavior": "Label original tree verification and manifest",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 26
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 27,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "        run: |",
+        "classification": "command",
+        "behavior": "Multi-line shell run",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 27
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 28,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          node --input-type=module <<'NODE'",
+        "classification": "configuration",
+        "behavior": "Start inline Node ESM here-doc",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 28
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 29,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          import {readFileSync,writeFileSync} from 'node:fs';",
+        "classification": "configuration",
+        "behavior": "Import fs IO",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 29
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 30,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          import {execFileSync} from 'node:child_process';",
+        "classification": "configuration",
+        "behavior": "Import child process",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 30
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 31,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          import {strict as assert} from 'node:assert';",
+        "classification": "configuration",
+        "behavior": "Import strict assert",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 31
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 32,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const source='abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9';",
+        "classification": "configuration",
+        "behavior": "Declare frozen commit",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 32
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 33,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const expectedTree='c54ade64eca30946df8858297578a172f5cf6fa8';",
+        "classification": "configuration",
+        "behavior": "Declare frozen tree SHA",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 33
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 34,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();",
+        "classification": "configuration",
+        "behavior": "Get local Git HEAD",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 34
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 35,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const tree=execFileSync('git',['rev-parse','HEAD^{tree}'],{encoding:'utf8'}).trim();",
+        "classification": "configuration",
+        "behavior": "Get local tree SHA",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 35
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 36,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          assert.equal(head,source,'Historical source commit drift');",
+        "classification": "configuration",
+        "behavior": "Assert exact original HEAD",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 36
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 37,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          assert.equal(tree,expectedTree,'Historical tree drift');",
+        "classification": "configuration",
+        "behavior": "Assert exact original tree",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 37
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 38,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const report=JSON.parse(readFileSync('qa_artifacts/issue161/full-tracked-source-line-audit.json','utf8'));",
+        "classification": "configuration",
+        "behavior": "Read JSON scanner report",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 38
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 39,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          assert.deepEqual([report.totals.tracked_files,report.totals.total_bytes,report.totals.text_files,report.totals.text_lines,report.totals.binary_files,report.totals.invalid_json_files,report.totals.critical_candidates],[757,32436318,754,579961,3,0,0],'Historical denominator drift');",
+        "classification": "configuration",
+        "behavior": "Assert frozen counts and absence of critical candidates",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 39
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 40,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const blobs=new Map();",
+        "classification": "configuration",
+        "behavior": "Initialize blob mapping",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 40
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 41,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          for(const record of execFileSync('git',['ls-files','--stage','-z'],{encoding:'utf8'}).split('\\0').filter(Boolean)){",
+        "classification": "configuration",
+        "behavior": "Iterate ls-files stage NUL-delimited",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 41
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 42,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            const tab=record.indexOf('\\t');",
+        "classification": "configuration",
+        "behavior": "Find stage-entry tab",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 42
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 43,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            assert.ok(tab>0,'Unparsable indexed path');",
+        "classification": "configuration",
+        "behavior": "Assert tab found",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 43
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 44,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            const entry=record.slice(0,tab).split(' ');",
+        "classification": "configuration",
+        "behavior": "Parse staged metadata fields",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 44
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 45,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            assert.equal(entry[0],'100644','Original source includes nonregular file');",
+        "classification": "configuration",
+        "behavior": "Assert 100644 regular file mode",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 45
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 46,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            blobs.set(record.slice(tab+1),entry[1]);",
+        "classification": "configuration",
+        "behavior": "Map path to blob SHA",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 46
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 47,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          }",
+        "classification": "configuration",
+        "behavior": "Close staged-file loop; all tracked blobs captured",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 47
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 48,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const files=report.files.map(f=>{",
+        "classification": "configuration",
+        "behavior": "Transform scanner file records",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 48
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 49,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            const blob_sha=blobs.get(f.path);",
+        "classification": "configuration",
+        "behavior": "Look up blob SHA",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 49
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 50,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            assert.match(blob_sha||'',/^[a-f0-9]{40}$/);",
+        "classification": "configuration",
+        "behavior": "Verify hex blob sha",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 50
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 51,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "            return {path:f.path,source_blob_sha:blob_sha,sha256:f.sha256,bytes:f.bytes,kind:f.kind,line_count:f.lines,source_line_first:f.lines?1:null,source_line_last:f.lines||null,semantic_status:'NOT_REVIEWED_BY_THIS_MACHINE_INVENTORY'};",
+        "classification": "configuration",
+        "behavior": "Return metadata record with explicit unreviewed flag",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 51
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 52,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          });",
+        "classification": "configuration",
+        "behavior": "Close report map",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 52
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 53,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          assert.equal(files.length,757);",
+        "classification": "configuration",
+        "behavior": "Assert 757 original records",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 53
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 54,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          assert.equal(new Set(files.map(f=>f.path)).size,757);",
+        "classification": "configuration",
+        "behavior": "Assert 757 unique file paths",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 54
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 55,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const output={schema_version:1,issue:267,source_commit:source,source_tree:tree,totals:report.totals,method:'Verified original-source Git checkout + existing deterministic full UTF-8 line scanner; MACHINE INVENTORY ONLY, never line-level semantic certification',files};",
+        "classification": "configuration",
+        "behavior": "Construct machine-only JSON manifest",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 55
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 56,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const json=JSON.stringify(output,null,2)+'\\n';",
+        "classification": "configuration",
+        "behavior": "Serialize deterministic JSON output",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 56
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 57,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          writeFileSync('/tmp/issue267-frozen-source-inventory.json',json);",
+        "classification": "configuration",
+        "behavior": "Write manifest to temporary file",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 57
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 58,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          const request={branch:'audit/issue267-semantic-ledger-20261029',message:'docs(issue267): pin 757 original blob per-file line counts [skip netlify]',content:Buffer.from(json).toString('base64')};",
+        "classification": "configuration",
+        "behavior": "Prepare branch-limited GitHub PUT request",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 58
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 59,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          writeFileSync('/tmp/issue267-publish-request.json',JSON.stringify(request));",
+        "classification": "configuration",
+        "behavior": "Write prepared request JSON",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 59
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 60,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          console.log('Verified exact frozen original source: '+JSON.stringify(report.totals));",
+        "classification": "configuration",
+        "behavior": "Log verified totals",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 60
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 61,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          NODE",
+        "classification": "configuration",
+        "behavior": "Terminate here-doc",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 61
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 62,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "      - name: Persist original file SHA and line counts to the audit branch only",
+        "classification": "list_entry",
+        "behavior": "Label persistence to audit branch only",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 62
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 63,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "        env:",
+        "classification": "configuration",
+        "behavior": "Environment wrapper",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 63
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 64,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          GH_TOKEN: ${{ github.token }}",
+        "classification": "configuration",
+        "behavior": "Assign GH_TOKEN from Actions",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 64
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 65,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "        run: |",
+        "classification": "command",
+        "behavior": "Shell multiline execution",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 65
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 66,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          set -euo pipefail",
+        "classification": "configuration",
+        "behavior": "Enable bash fail-fast pipeline",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "No specific defect from line alone; test actual step and timeout on exact source",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 66
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 67,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          gh api --method PUT \"repos/${GITHUB_REPOSITORY}/contents/docs/audits/issue267-frozen-source-inventory.json\" --input /tmp/issue267-publish-request.json >/tmp/issue267-write.json",
+        "classification": "configuration",
+        "behavior": "PUT manifest file via gh api",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 67
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      },
+      {
+        "line": 68,
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "source_text": "          node -e \"const r=require('/tmp/issue267-write.json'); console.log('Audit-branch manifest commit '+r.commit.sha)\"",
+        "classification": "configuration",
+        "behavior": "Print returned manifest commit SHA",
+        "quality": "Meaningful Actions/inline Node or CLI syntax verified by context",
+        "bug_security_privacy_performance_risk": "Elevated audit-branch write and frozen manifest provenance must remain constrained",
+        "obsolete_status": "Historical audit-only branch may be inactive, not verified safe to remove",
+        "duplicate_status": "Machine inventory/probe not equivalent to a semantic review or duplicate implementation",
+        "exact_counterpart": {
+          "frozen": {
+            "exists_in_frozen": false
+          },
+          "live": {
+            "path": ".github/workflows/issue267-frozen-inventory.yml",
+            "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+            "line": 68
+          }
+        },
+        "testability": "Review exact Actions trigger/step logs and provider/CLI script; no privileged source writes executed here",
+        "safe_fix_removal_opportunity": "Retain unless source-bound proof of dead, unsafe, or inefficient behavior; no speculative deletion",
+        "locked_fit": "#267 original snapshot integrity 757/579961; inventory is MACHINE ONLY and does not certify semantics",
+        "review_method": "AI direct numbered source-line reading; not independent human reviewer"
+      }
+    ]
+  },
+  "live": {
+    "commit": "ca0316771e18e081729c9f280b3ce73f0e1235dd",
+    "fully_read_files": [
+      {
+        "path": ".github/workflows/issue96-source-audit.yml",
+        "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f",
+        "lines": 23
+      },
+      {
+        "path": ".github/workflows/issue267-frozen-inventory.yml",
+        "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+        "lines": 68
+      }
+    ]
+  },
+  "strict_credit": {
+    "frozen": 23,
+    "pinned_current": 68,
+    "prior_V2_extra": 0
+  },
+  "findings": [
+    {
+      "priority": "WATCH",
+      "disposition": "RETAIN",
+      "detail": "Historical Issue96 provider script needs independent source/effect audit and security artifact seven-day retention. Real Auth privacy belongs #96."
+    },
+    {
+      "priority": "WATCH",
+      "disposition": "RETAIN",
+      "detail": "Current Issue267 original inventory workflow uses write token restricted by path/branch and pinned source. Scanner metadata explicitly NOT_REVIEWED_BY_THIS_MACHINE_INVENTORY, never certify as semantic lines."
+    }
+  ]
+}
