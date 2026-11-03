@@ -232,6 +232,22 @@
       "approval_source": "Owner explicit 2026-11-01/02 conversation: 'Get this deployed immediately' and 'Then what are you waiting for? ... Why aren’t you implementing it?' for the 17 READY item batch.",
       "scope": "Exactly one guarded production publication of the 17 READY queue items at source 2c8e1ffe3b83a7524968f50efca3ead4da282cf8, excluding all TESTING and IN_PROGRESS items, unrelated future work, destructive database/member changes, paid services, Auth/Edge changes and credentials. Require all five exact-source checks, queue isolation, existing encrypted offsite recovery evidence, nonforce serialized claim and Netlify postflight.",
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261103-READY335-15",
+      "tested_source_sha": "f1e150a2e7c95764c4a2d8760886aab23c2bfc5e",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-03T22:36:35.923Z",
+      "expires_at_utc": "2026-11-04T01:36:35.923Z",
+      "approval_source": "Owner Nov 3, 2026 current conversation: 'Okay so it's implemented and ready? Can we try a deployment to test it?' (explicit approval to publish previously discussed READY #335 only)",
+      "scope": "ONE guarded Git-connected Netlify production release of ONLY DIC-Q-335-historical-grind-range-evidence (Issue #335 historic grinder calibration); READY-only candidate f1e150a2e7c95764c4a2d8760886aab23c2bfc5e. Exclude other READY Issue #33 and all IN_PROGRESS/untracked code; no SQL migrations, Supabase Auth/Edge/DB writes, member modifications, extra backup, deletion, purchases or future releases.",
+      "approved_ready_item_ids": [
+        "DIC-Q-335-historical-grind-range-evidence"
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
