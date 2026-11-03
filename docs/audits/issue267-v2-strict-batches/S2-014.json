@@ -1,0 +1,3159 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-014",
+  "frozen": {
+    "file_index": 14,
+    "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "path": ".github/workflows/nightly-backup.yml",
+    "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+    "lines": 56,
+    "per_line": [
+      {
+        "line": 1,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "name: DIC encrypted database backup",
+        "classification": "configuration",
+        "behavior": "Encrypted database backup workflow name",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Job identity not offsite copy",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 1,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 1,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Job identity not offsite copy",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 2,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Blank separator",
+        "quality": "Read whitespace, no executable effect",
+        "bug_security_privacy_performance_risk": "None",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 2,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 2,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; None",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 3,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "# Run operational backups from the default branch only. Development keeps the",
+        "classification": "comment",
+        "behavior": "Comment specifies default main backups only",
+        "quality": "Operational assertion, not verifiable provider behavior",
+        "bug_security_privacy_performance_risk": "Source file on development must not trigger live backup",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 3,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 3,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Source file on development must not trigger live backup",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 4,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "# same reviewed definition without creating a second backup on each code edit.",
+        "classification": "comment",
+        "behavior": "Comment says development copy not second backup",
+        "quality": "Operational assertion, not verifiable provider behavior",
+        "bug_security_privacy_performance_risk": "No guarantee without branch filter",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 4,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 4,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; No guarantee without branch filter",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 5,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "# The private offsite courier ignores push smoke tests; verify their private",
+        "classification": "comment",
+        "behavior": "Comment warns courier ignores push smoke",
+        "quality": "Operational assertion, not verifiable provider behavior",
+        "bug_security_privacy_performance_risk": "Offsite copy must be separately checked",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 5,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 5,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Offsite copy must be separately checked",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 6,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "# offsite copy independently before using one as release recovery evidence.",
+        "classification": "comment",
+        "behavior": "Comment requires independent recovery evidence",
+        "quality": "Operational assertion, not verifiable provider behavior",
+        "bug_security_privacy_performance_risk": "Provider/Drive status not in source",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 6,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 6,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Provider/Drive status not in source",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 7,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "on:",
+        "classification": "configuration",
+        "behavior": "Actions events wrapper",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Syntax",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 7,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 7,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Syntax",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 8,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "  push:",
+        "classification": "configuration",
+        "behavior": "Push trigger",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Main backup cost",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 8,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 8,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Main backup cost",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 9,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    branches:",
+        "classification": "configuration",
+        "behavior": "Branch filter map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Scope",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 9,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 9,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Scope",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 10,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - main",
+        "classification": "list_entry",
+        "behavior": "Main branch allowed",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Production backup source controlled by main",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 10,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 10,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Production backup source controlled by main",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 11,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    paths:",
+        "classification": "configuration",
+        "behavior": "Push path filter",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Backup may run on workflow/script edits",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 11,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 11,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Backup may run on workflow/script edits",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 12,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - .github/workflows/nightly-backup.yml",
+        "classification": "list_entry",
+        "behavior": "Workflow path trigger",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Could duplicate backup on policy change",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 12,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 12,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Could duplicate backup on policy change",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 13,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - scripts/backups/create-nightly-encrypted-dump.sh",
+        "classification": "list_entry",
+        "behavior": "Encrypted dump shell path trigger",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Backup script change affects security",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 13,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 13,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Backup script change affects security",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 14,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "  workflow_dispatch:",
+        "classification": "configuration",
+        "behavior": "Manual dispatch",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Explicit cost/secreted live backup if used",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 14,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 14,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Explicit cost/secreted live backup if used",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 15,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "  schedule:",
+        "classification": "configuration",
+        "behavior": "Scheduled event",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Time-based backup",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 15,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 15,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Time-based backup",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 16,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    - cron: '23 9 * * *'",
+        "classification": "list_entry",
+        "behavior": "09:23 UTC daily cron",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Legacy schedule; main now supersedes",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 16,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 16,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Legacy schedule; main now supersedes",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 17,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Blank separator",
+        "quality": "Read whitespace, no executable effect",
+        "bug_security_privacy_performance_risk": "None",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 17,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 17,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; None",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 18,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "permissions:",
+        "classification": "configuration",
+        "behavior": "Token permissions map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Least privilege",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 18,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 18,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Least privilege",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 19,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "  contents: read",
+        "classification": "configuration",
+        "behavior": "Contents read",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Appropriate",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 19,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 19,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Appropriate",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 20,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Blank separator",
+        "quality": "Read whitespace, no executable effect",
+        "bug_security_privacy_performance_risk": "None",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 20,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 20,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; None",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 21,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "concurrency:",
+        "classification": "configuration",
+        "behavior": "Concurrency map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Duplicate backup avoidance",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 21,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 21,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Duplicate backup avoidance",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 22,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "  group: dic-private-encrypted-backup",
+        "classification": "configuration",
+        "behavior": "Shared encrypted backup concurrency group",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Serializes same group",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 22,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 22,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Serializes same group",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 23,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "  cancel-in-progress: false",
+        "classification": "configuration",
+        "behavior": "Do not cancel in-progress backup",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Avoid partial archives",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 23,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 23,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Avoid partial archives",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 24,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Blank separator",
+        "quality": "Read whitespace, no executable effect",
+        "bug_security_privacy_performance_risk": "None",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 24,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 24,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; None",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 25,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "jobs:",
+        "classification": "configuration",
+        "behavior": "Jobs map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Structure",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 25,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 25,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Structure",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 26,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "  backup:",
+        "classification": "configuration",
+        "behavior": "Backup job",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Live database export high stakes",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 26,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 26,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Live database export high stakes",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 27,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    # Pin OS so the Oct-Nov 2026 ubuntu-latest migration does not change backup behavior.",
+        "classification": "comment",
+        "behavior": "Comment pins Ubuntu version",
+        "quality": "Operational assertion, not verifiable provider behavior",
+        "bug_security_privacy_performance_risk": "Hosted image updates still possible",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 27,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 27,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Hosted image updates still possible",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 28,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    runs-on: ubuntu-24.04",
+        "classification": "configuration",
+        "behavior": "Ubuntu 24.04",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Build/runtime drift",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 28,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 28,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Build/runtime drift",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 29,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    timeout-minutes: 20",
+        "classification": "configuration",
+        "behavior": "20 minute timeout",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Backup size could exceed",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 29,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 29,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Backup size could exceed",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 30,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    env:",
+        "classification": "configuration",
+        "behavior": "Environment map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Sensitive secrets",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 30,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 30,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Sensitive secrets",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 31,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      SUPABASE_PROJECT_REF: azviqqejypsefzilgonr",
+        "classification": "configuration",
+        "behavior": "Project ref identifier",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Public-ish metadata, not credential",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 31,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 31,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Public-ish metadata, not credential",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 32,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}",
+        "classification": "configuration",
+        "behavior": "DB URL from secret",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Sensitive live database connection",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 32,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 32,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Sensitive live database connection",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 33,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      BACKUP_AGE_RECIPIENT: ${{ vars.BACKUP_AGE_RECIPIENT }}",
+        "classification": "configuration",
+        "behavior": "age recipient from variable",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Encryption key correctness essential",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 33,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 33,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Encryption key correctness essential",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 34,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "    steps:",
+        "classification": "configuration",
+        "behavior": "Steps wrapper",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Structure",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 34,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 34,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Structure",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 35,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - uses: actions/checkout@v7",
+        "classification": "action",
+        "behavior": "Checkout v7",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Supply chain",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 35,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 35,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Supply chain",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 36,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Checkout settings",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Nesting",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 36,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 36,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Nesting",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 37,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          persist-credentials: false",
+        "classification": "configuration",
+        "behavior": "No persisted credentials",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Reduced exposure",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 37,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 37,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Reduced exposure",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 38,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - name: Checkout verified live cloud app source for independent offsite recovery",
+        "classification": "list_entry",
+        "behavior": "Label checkout of published app source",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Backup restore context",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 38,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 38,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Backup restore context",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 39,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "        uses: actions/checkout@v7",
+        "classification": "configuration",
+        "behavior": "Second checkout v7",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Source pin",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 39,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 39,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Source pin",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 40,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Second checkout config",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Nesting",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 40,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 40,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Nesting",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 41,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          # Update only after independent evidence confirms a newer live deploy.",
+        "classification": "comment",
+        "behavior": "Comment says update only after verified publish",
+        "quality": "Operational assertion, not verifiable provider behavior",
+        "bug_security_privacy_performance_risk": "Policy, not enforcement",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 41,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 41,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Policy, not enforcement",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 42,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          ref: 1e79c4585c49ab517abb912887ee05ed7f4c4c4d",
+        "classification": "configuration",
+        "behavior": "Pins historical live app SHA",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Old from original; main live pin is newer",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 42,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 42,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Old from original; main live pin is newer",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 43,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          path: backup-app-source",
+        "classification": "configuration",
+        "behavior": "Checkout path backup-app-source",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Source tree included in recovery",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 43,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 43,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Source tree included in recovery",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 44,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          persist-credentials: false",
+        "classification": "configuration",
+        "behavior": "No persisted credentials",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Privacy positive",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 44,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 44,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Privacy positive",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 45,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - name: Install age encryption",
+        "classification": "list_entry",
+        "behavior": "Age encryption install label",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Binary provenance",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 45,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 45,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Binary provenance",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 46,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "        run: sudo apt-get update -qq && sudo apt-get install -y age",
+        "classification": "command",
+        "behavior": "Installs age apt package",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Depends on package mirror/version",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 46,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 46,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Depends on package mirror/version",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 47,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - name: Encrypted PostgreSQL snapshot",
+        "classification": "list_entry",
+        "behavior": "Snapshot step label",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Includes live database",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 47,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 47,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Includes live database",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 48,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "        run: bash scripts/backups/create-nightly-encrypted-dump.sh",
+        "classification": "command",
+        "behavior": "Runs encrypted pg dump script",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Requires source security audit",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 48,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 48,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Requires source security audit",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 49,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "      - name: Upload ciphertext only",
+        "classification": "list_entry",
+        "behavior": "Upload ciphertext only label",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Claims exclusion of plaintext",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 49,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 49,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Claims exclusion of plaintext",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 50,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "        uses: actions/upload-artifact@v7",
+        "classification": "configuration",
+        "behavior": "Upload-artifact v7",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Potential private recovery artifacts",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 50,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 50,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Potential private recovery artifacts",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 51,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Upload options",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Nesting",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 51,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 51,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Nesting",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 52,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          name: dic-encrypted-nightly-${{ github.run_id }}",
+        "classification": "configuration",
+        "behavior": "Encrypted artifact name run id",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Traceability",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 52,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 52,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Traceability",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 53,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          path: ${{ runner.temp }}/dic-nightly-${{ github.run_id }}/encrypted/backup.age",
+        "classification": "configuration",
+        "behavior": "Encrypted backup.age file path",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Must verify only ciphertext",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 53,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 53,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Must verify only ciphertext",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 54,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          if-no-files-found: error",
+        "classification": "configuration",
+        "behavior": "Error if ciphertext absent",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Good fail closed",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 54,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 54,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Good fail closed",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 55,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          retention-days: 30",
+        "classification": "configuration",
+        "behavior": "30 day artifact retention",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Lifecycle control",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 55,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 55,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Lifecycle control",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 56,
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "source_text": "          compression-level: 0",
+        "classification": "configuration",
+        "behavior": "No extra compression",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Ciphertext already compressed",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "line": 56,
+            "identical": true
+          },
+          "pinned_development": {
+            "path": ".github/workflows/nightly-backup.yml",
+            "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+            "index_in_pinned_inventory": 18,
+            "line": 56,
+            "not_yet_credited": true
+          },
+          "main_ops": {
+            "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+            "not_exact": true,
+            "workflow_revised": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Ciphertext already compressed",
+        "locked_fit": "Main encrypted offsite recovery, one approved backup folder, preserve keys, no DB writes in audit",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      }
+    ]
+  },
+  "pinned_current": {
+    "file_index": 14,
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "path": ".github/workflows/issue33-603-public-source.yml",
+    "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+    "lines": 40,
+    "per_line": [
+      {
+        "line": 1,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "name: DIC Issue33 original603 bounded current official-source verification",
+        "classification": "configuration",
+        "behavior": "Named #33 original603 current official-source probe",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Not full 603 source correctness proof",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 1,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Not full 603 source correctness proof",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 2,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "on:",
+        "classification": "configuration",
+        "behavior": "Actions event map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Syntax",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 2,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Syntax",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 3,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "  push:",
+        "classification": "configuration",
+        "behavior": "Push event",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Public network test may spend resources",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 3,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Public network test may spend resources",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 4,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    branches: [development/backend-foundation]",
+        "classification": "configuration",
+        "behavior": "Development branch only",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "No release publishing",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 4,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; No release publishing",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 5,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    paths:",
+        "classification": "configuration",
+        "behavior": "Path triggers",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Probe changes only",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 5,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Probe changes only",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 6,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      - .github/workflows/issue33-603-public-source.yml",
+        "classification": "list_entry",
+        "behavior": "Workflow self-trigger",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "CI guard coverage",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 6,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; CI guard coverage",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 7,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      - scripts/audit/issue33-original603-live-source-probe.mjs",
+        "classification": "list_entry",
+        "behavior": "Probe source script trigger",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Harness changes",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 7,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Harness changes",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 8,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "  workflow_dispatch:",
+        "classification": "configuration",
+        "behavior": "Manual workflow dispatch",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Explicit request required",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 8,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Explicit request required",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 9,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "permissions:",
+        "classification": "configuration",
+        "behavior": "Permissions wrapper",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Least privilege",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 9,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Least privilege",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 10,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "  contents: read",
+        "classification": "configuration",
+        "behavior": "Contents read",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Appropriate",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 10,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Appropriate",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 11,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "jobs:",
+        "classification": "configuration",
+        "behavior": "Jobs map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Structure",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 11,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Structure",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 12,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "  official603:",
+        "classification": "configuration",
+        "behavior": "official603 job",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Three shards",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 12,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Three shards",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 13,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[dic-issue33-603-live]')",
+        "classification": "configuration",
+        "behavior": "Only dispatch or commit marker",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "SKIPPED on ordinary push is not PASS",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 13,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; SKIPPED on ordinary push is not PASS",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 14,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    name: current-official-shard-${{ matrix.shard }}",
+        "classification": "configuration",
+        "behavior": "Shard-specific job name",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Distinguishes results",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 14,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Distinguishes results",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 15,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    runs-on: ubuntu-24.04",
+        "classification": "configuration",
+        "behavior": "Ubuntu 24.04",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Image drift",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 15,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Image drift",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 16,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    timeout-minutes: 25",
+        "classification": "configuration",
+        "behavior": "25 minute timeout",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Public HTTP rate limits",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 16,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Public HTTP rate limits",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 17,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    strategy:",
+        "classification": "configuration",
+        "behavior": "Matrix strategy",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Parallel network load",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 17,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Parallel network load",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 18,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      fail-fast: false",
+        "classification": "configuration",
+        "behavior": "fail-fast false",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "All shards attempted",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 18,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; All shards attempted",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 19,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      matrix:",
+        "classification": "configuration",
+        "behavior": "Matrix map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Structure",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 19,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Structure",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 20,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        shard: [0, 1, 2]",
+        "classification": "configuration",
+        "behavior": "Three shard indices 0 1 2",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Coverage per 201",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 20,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Coverage per 201",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 21,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "    steps:",
+        "classification": "configuration",
+        "behavior": "Job steps",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Structure",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 21,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Structure",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 22,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      - uses: actions/checkout@v7.0.1",
+        "classification": "action",
+        "behavior": "Checkout v7.0.1",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Action tag provenance",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 22,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Action tag provenance",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 23,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Checkout config",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Nesting",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 23,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Nesting",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 24,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          persist-credentials: false",
+        "classification": "configuration",
+        "behavior": "No persisted credentials",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Read-only scope",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 24,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Read-only scope",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 25,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      - uses: actions/setup-node@v7.1.0",
+        "classification": "action",
+        "behavior": "Setup Node v7.1.0",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Action provenance",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 25,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Action provenance",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 26,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Node args",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Nesting",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 26,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Nesting",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 27,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          node-version: '22'",
+        "classification": "configuration",
+        "behavior": "Node 22",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Runtime compatibility",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 27,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Runtime compatibility",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 28,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      - name: Probe 201 original benchmark URLs directly at official HTTPS sources without credentials",
+        "classification": "list_entry",
+        "behavior": "Label original 201 source URLs per shard",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Must verify selected URLs/HTTP status",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 28,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Must verify selected URLs/HTTP status",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 29,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        env:",
+        "classification": "configuration",
+        "behavior": "Env map",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Probe settings",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 29,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Probe settings",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 30,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          DIC_ORIGINAL603_SHARD: ${{ matrix.shard }}",
+        "classification": "configuration",
+        "behavior": "Shard variable from matrix",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Must map original oracle deterministically",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 30,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Must map original oracle deterministically",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 31,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          DIC_ORIGINAL603_PUBLIC_CAPTURE_DIR: ${{ runner.temp }}/dic33-603-current/shard-${{ matrix.shard }}",
+        "classification": "configuration",
+        "behavior": "Capture temp path",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "May contain roaster public HTML",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 31,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; May contain roaster public HTML",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 32,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        run: node scripts/audit/issue33-original603-live-source-probe.mjs",
+        "classification": "command",
+        "behavior": "Run official source probe script",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "No production/member writes, network external",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 32,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; No production/member writes, network external",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 33,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "      - name: Retain current public HTML and exact source selections for independent decisions",
+        "classification": "list_entry",
+        "behavior": "Label public HTML and selections retained",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Artifact provenance",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 33,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Artifact provenance",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 34,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        if: always()",
+        "classification": "configuration",
+        "behavior": "Always upload",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Partial failed results may be saved",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 34,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Partial failed results may be saved",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 35,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        uses: actions/upload-artifact@v7",
+        "classification": "configuration",
+        "behavior": "Upload-artifact v7",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Private source HTML capture",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 35,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Private source HTML capture",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 36,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "        with:",
+        "classification": "configuration",
+        "behavior": "Artifact settings",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Retention concern",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 36,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Retention concern",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 37,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          name: dic33-current603-shard-${{ matrix.shard }}-${{ github.run_id }}",
+        "classification": "configuration",
+        "behavior": "Shard and run-id named capture",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Distinguishes dynamic sources",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 37,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Distinguishes dynamic sources",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 38,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          path: ${{ runner.temp }}/dic33-603-current/shard-${{ matrix.shard }}/",
+        "classification": "configuration",
+        "behavior": "Temp capture directory",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Ensure no secrets stored",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 38,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Ensure no secrets stored",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 39,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          if-no-files-found: error",
+        "classification": "configuration",
+        "behavior": "Error if captures absent",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Good fail closed",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 39,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Good fail closed",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      },
+      {
+        "line": 40,
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "source_text": "          retention-days: 1",
+        "classification": "configuration",
+        "behavior": "One day retention",
+        "quality": "Relevant Actions configuration under scoping rules",
+        "bug_security_privacy_performance_risk": "Minimize public page archive lifetime",
+        "obsolete_status": "Original/pinned scope may be superseded on main or in #33; no modification of historic source authorized",
+        "duplicate_status": "No proven redundant current code; scheduled backups and public source verification are different roles",
+        "exact_current_counterpart": {
+          "live_development": {
+            "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+            "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+            "line": 40,
+            "identical": true
+          },
+          "frozen_original": {
+            "path_absent": true
+          }
+        },
+        "testability": "Check exact Actions trigger/step status and original603/backup safeguards separately; no new network or DB test in audit",
+        "safe_fix_opportunity": "No safe deletion or speed claim without measured evidence; Minimize public page archive lifetime",
+        "locked_fit": "Original603 immutable benchmark and #33 source-backed, no invented current coffee facts",
+        "reviewer": "Direct AI numbered source-line read, not human independent"
+      }
+    ]
+  },
+  "observed_live_development": {
+    "commit": "580ed8a84491de7e58aef331c91525a838df28af",
+    "files": [
+      {
+        "path": ".github/workflows/nightly-backup.yml",
+        "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+        "lines": 56
+      },
+      {
+        "path": ".github/workflows/issue33-603-public-source.yml",
+        "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+        "lines": 40
+      }
+    ]
+  },
+  "separate_main_ops_read": {
+    "path": ".github/workflows/nightly-backup.yml",
+    "blob_sha": "a92476be18ab2e7da5af93ca1915792d0d7796f2",
+    "total_lines": 97,
+    "active_schedule": "08:00 UTC plus guarded backstops",
+    "app_source_pin": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "counted_toward_original_or_pinned_current_denominator": false
+  },
+  "strict_line_credit": {
+    "frozen": 56,
+    "pinned": 40,
+    "old_v2": 0
+  },
+  "findings": [
+    {
+      "priority": "INFO",
+      "status": "TRIAGED_NO_CHANGE",
+      "finding": "Development/release backup workflow snapshot is older than actual main backup, but it triggers backup only on main. Main 97-line workflow has guarded scheduled attempts, pinned Release15 app source and backup key handling. No proof of active stale recovery source, no need to edit development's historical twin."
+    },
+    {
+      "priority": "INFO",
+      "status": "TRIAGED_NO_CHANGE",
+      "finding": "#33 official603 three-shard workflow intentionally guarded by explicit marker or dispatch; ordinary skipped job is not evidence of actual 603 current web source verification."
+    }
+  ]
+}
