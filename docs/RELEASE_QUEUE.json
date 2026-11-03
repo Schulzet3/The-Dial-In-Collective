@@ -11,16 +11,33 @@
       "id": "DIC-Q-455-pending-edited-shot-preview",
       "issue": 455,
       "title": "Show queued offline edits to existing shot values and recomputed taste guidance without changing the stored server record",
-      "state": "TESTING",
-      "merged_source_sha": null,
-      "scope_paths": ["site/cloud/mapping.js"],
-      "tests": ["Four new focused Node regression tests authored; PR-head CI pending. Earlier local execution environment unavailable, so no tests claimed PASS."],
-      "ci_runs": [],
-      "blockers": ["PR-head CI, mobile/offline acceptance, non-force integration and exact merged-source verification pending"],
+      "state": "READY",
+      "merged_source_sha": "0a7f82b5fe6724358a86e88f90c83fff0f518fe6",
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ],
+      "tests": [
+        "First PR head 823d4f62c4720c47a5daaf9cdf240811c3e6b6c5 FAILED approval (test path invalid as deployable scope) and 1 of 177 cloud tests (new fixture incorrectly stored notes on shot instead of notes table). Both diagnosed and repaired in same-commit journal; failures retained, not counted PASS.",
+        "Corrected exact PR head 6543c9de92dd679356fc082a062b8e388cf4e45b: cloud 177 PASS/0 FAIL incl. four new edit preview, stale/conflict/invalid, inactive historical version and new-shot preservation tests; run41733463232 SUCCESS (cloud/mobile Chromium PWA). Approval41733463234, validate lint/build41733463180, SQL41733463175 and security41733463149 SUCCESS. Frozen603 41733463179 SKIPPED, NOT PASS.",
+        "Non-force PR466 squash merge 0a7f82b5fe6724358a86e88f90c83fff0f518fe6; exact mapping blob 2d28357906488f8b840792d1e73da7a7ea794931 and test blob de8d6f284604bda0316c3ced3120270b9da167b7 match tested PR-head. Source branch advanced only in unrelated approval/status/runbook docs; no overlapping application files.",
+        "Exact merged push CI: approval41733793531 SUCCESS; READY coverage41733793443 SUCCESS; validate lint41733793526 SUCCESS (Node regression stage correctly NOT_APPLICABLE under medium source-scoped CI, not claimed PASS); cloud/browser41733794048 SUCCESS with 177 cloud tests PASS/0 FAIL, focused responsive visual/browser 167 cases, 69 mobile workflow cases and real localhost PWA offline queue/reopen/revoked-access tests PASS. One browser build reused; isolated SQL at PR head, merged SQL NOT_APPLICABLE."
+      ],
+      "ci_runs": [
+        41733463234,
+        41733463180,
+        41733463175,
+        41733463149,
+        41733463232,
+        41733793531,
+        41733793443,
+        41733793526,
+        41733794048
+      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Owner-authorized Locked-compatible offline display correction. Pending existing-shot edits are already durable outbox events but are not locally projected until remote sync; preview only, never server writes. Preserve owner identity, revisions, historical setup snapshots, original shots, notes, success families and pending conflict receipts. NO publication."
+      "notes": "READY, NOT DEPLOYED. Offline authorized revisioned edit already queued by Cloud app now projects corrected values, notes and recomputed taste guidance locally while retaining original owner cache/server data until successful sync; hides edit controls until pending resolves. Exact revision/shot ID checks, invalid/conflict fail-closed, historic setup-version restoration and newer-shot projection intact. No hosted member/empirical taste validation asserted. Only site/cloud/mapping.js is deployable scope; release gate #417 must isolate all other unready code before any separately owner-authorized production publication.",
+      "pr": 466
     },
-
     {
       "id": "DIC-Q-33-selected-buncho-station-history",
       "issue": 33,
