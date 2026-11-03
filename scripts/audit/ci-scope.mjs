@@ -12,6 +12,14 @@ const APP_FILES=new Set(['build_cloud.mjs','netlify.toml','package.json','packag
  'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt']);
 const SAFE_META=new Set(['docs/RELEASE_QUEUE.json','docs/DECISION_LEDGER.json',
  'docs/APPROVAL_COVERAGE_MATRIX.json','docs/RELEASE_CANDIDATE.json']);
+// Issue #267 source-bound audit receipts are governance records, not executable inputs.
+// Keep explicit allowlist narrow: unknown JSON and all source/code paths remain HIGH.
+const AUDIT_EVIDENCE_META=new Set([
+ 'docs/audits/issue267-review-restart-v2-20261101.json',
+ 'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json'
+]);
+const AUDIT_EVIDENCE_RECEIPT=/^docs\/audits\/issue267-v2-strict-batches\/S2-[0-9]{3,6}\.json$/;
+
 export function deployableRiskPaths(paths){
  return Array.isArray(paths)?paths.filter(p=>typeof p==='string'&&
   (APP_PREFIX.some(pre=>p.startsWith(pre))||APP_FILES.has(p))):[];
@@ -23,7 +31,8 @@ export function docsOnlyPaths(paths){
 }
 function impactKind(path){
  if(!/^[A-Za-z0-9_.\/-]+$/.test(path)||path.includes('..')||path.startsWith('/'))return 'unknown';
- if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path))
+ if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path)||
+  AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path))
   return 'docs';
  if(/^site\/.*\.css$/.test(path))return 'style';
  if(/^site\/lib\//.test(path))return 'shots';

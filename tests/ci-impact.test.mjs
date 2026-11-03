@@ -53,3 +53,37 @@ test('release candidate uses published baseline and deployable paths, not manife
  assert.equal(classifyChanges({...selected,git:()=>{throw Error('missing source');}}).tier,'high');
  assert.equal(classifyChanges({base:'0'.repeat(40),head:B}).tier,'high');
 });
+
+
+test('Strict Issue #267 audit-only JSON receipts avoid expensive app/SQL/browser CI',()=>{
+ const files=[
+  'docs/audits/issue267-review-restart-v2-20261101.json',
+  'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json',
+  'docs/audits/issue267-v2-strict-batches/S2-001.json',
+  'docs/audits/issue267-v2-strict-batches/S2-002.json',
+  'docs/audits/issue267-v2-strict-batches/S2-1000.json',
+  'docs/workstreams/issue-267.md'
+ ];
+ const v=classifyImpactPaths(files);
+ assert.equal(v.tier,'docs');assert.equal(v.docs_only,true);
+ assert.equal(v.node_mode,'none');assert.equal(v.cloud_mode,'none');
+ assert.equal(v.browser_mode,'none');assert.equal(v.sql,false);
+ assert.equal(v.lint,false);assert.equal(v.provider_guard,false);
+ assert.equal(v.build_validate,false);assert.equal(v.build_browser,false);
+ const run=(name,args)=>{assert.equal(name,'git');return files.join('\n')+'\n';};
+ const tested=classifyChanges({base:A,head:B,event:'pull_request',git:run});
+ assert.equal(tested.tier,'docs');assert.equal(tested.node_mode,'none');
+});
+test('Strict #267 JSON path exemption never weakens unknown/mixed-source fail-closed HIGH',()=>{
+ for(const paths of [
+  ['docs/audits/issue267-executable-fixture.json'],
+  ['docs/audits/issue267-v2-strict-batches/S2-002.json','scripts/audit/ci-scope.mjs'],
+  ['docs/audits/issue267-v2-strict-batches/S2-002.json','supabase/migrations/new.sql'],
+  ['docs/audits/issue267-v2-strict-batches/S2-002.json','docs/audits/issue267-v2-strict-batches/../unsafe.json'],
+  ['docs/audits/issue267-v2-strict-batches/S2-002.json','docs/audits/unexpected.json']
+ ]){
+  const v=classifyImpactPaths(paths);
+  assert.equal(v.tier,'high',paths.join(';'));
+  assert.equal(v.node_mode,'full');assert.equal(v.sql,true);
+ }
+});
