@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 834,
-    "first_unvalidated_manifest_file_index": 15,
-    "first_unvalidated_path": ".github/workflows/roaster-source-probe.yml",
+    "strict_validated_lines": 883,
+    "first_unvalidated_manifest_file_index": 16,
+    "first_unvalidated_path": ".github/workflows/security-inspection.yml",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,26 +15,35 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 866,
-    "first_unvalidated_file_index": 15,
-    "first_unvalidated_path": ".github/workflows/issue33-hosted-auth-e2e.yml",
+    "strict_validated_lines": 895,
+    "first_unvalidated_file_index": 16,
+    "first_unvalidated_path": ".github/workflows/issue33-source-bundle.yml",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "580ed8a84491de7e58aef331c91525a838df28af",
+    "observed_development_commit": "df47d1430046cd007415909d82418554171a7f4a",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
-    "live_fully_reviewed_files": 15,
-    "live_fully_reviewed_file_lines": 925,
-    "latest_reviewed_live_path": ".github/workflows/issue33-603-public-source.yml",
+    "live_fully_reviewed_files": 16,
+    "live_fully_reviewed_file_lines": 954,
+    "latest_reviewed_live_path": ".github/workflows/issue33-hosted-auth-e2e.yml",
     "remaining_live_changes": "OTHER SOURCE DRIFT UNREVIEWED; do not claim current 100%",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
-    "other_live_paths_direct_semantic_status": "UNREVIEWED — unchanged first 4 workflows newly audited plus prior S2-001..004 only"
+    "other_live_paths_direct_semantic_status": "UNREVIEWED — unchanged first 4 workflows newly audited plus prior S2-001..004 only",
+    "partially_read_live_paths": [
+      {
+        "path": ".github/workflows/roaster-source-probe.yml",
+        "blob_sha": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
+        "total_lines": 146,
+        "strict_individual_line_coverage": 0,
+        "reason": "Full source fetched and inspected for change scope but individual live line review incomplete; explicit noncredit"
+      }
+    ]
   },
   "batches": [
     {
@@ -361,6 +370,31 @@
           "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
           "lines": 40
         }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-015",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-015.json",
+      "frozen_file": ".github/workflows/roaster-source-probe.yml",
+      "frozen_lines": [
+        1,
+        49
+      ],
+      "frozen_blob": "30561a9361c4e6c47e6ddca2adb0ff6eb6750cfa",
+      "pinned_file": ".github/workflows/issue33-hosted-auth-e2e.yml",
+      "pinned_lines": [
+        1,
+        29
+      ],
+      "pinned_blob": "9bf42b40a7bea17234dee6e8bf4d847053d79cd7",
+      "live_frozen_path_blob": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
+      "live_frozen_path_total_lines": 146,
+      "live_individual_credited": 0,
+      "live_pinned_path_blob": "9bf42b40a7bea17234dee6e8bf4d847053d79cd7",
+      "live_pinned_full_lines": [
+        1,
+        29
       ],
       "old_v2_extra_credit": 0
     }
