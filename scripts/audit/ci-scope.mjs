@@ -30,7 +30,7 @@ function impactKind(path){
  if(/^src\/server\/coffee[-/]/.test(path))return 'coffee';
  if(/^site\/cloud\/(?:main|auth|session|account|membership|permissions)[^/]*\.js$/.test(path)||
   /^site\/admin\//.test(path))return 'auth';
- if(/^site\//.test(path))return 'ui';
+ if(/^site\/.*\.(?:js|html|json)$/.test(path))return 'ui';
  if(/^supabase\//.test(path))return 'sql';
  if(/^netlify\/functions\//.test(path))return 'auth';
  if(/^tests\/(?:grind|grinder|recommendation|shot-|recipe-|next-shot|offline|legacy-shot|fast-flow)/.test(path))

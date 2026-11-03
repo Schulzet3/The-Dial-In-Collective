@@ -44,7 +44,8 @@ jobs:
         run: node scripts/audit/ci-scope.mjs
       - name: Explicit targeted cloud NOT_APPLICABLE
         if: steps.scope.outputs.cloud_mode == 'none'
-        run: echo 'NOT_APPLICABLE: cloud-specific tests not needed; high-risk full Node is in validate.'
+        run: |
+          echo 'NOT_APPLICABLE: cloud-specific tests not needed; high-risk full Node is in validate.'
       - uses: actions/setup-node@v7.1.0
         if: steps.scope.outputs.cloud_mode == 'targeted'
         with:
@@ -74,7 +75,8 @@ jobs:
         run: node scripts/audit/ci-scope.mjs
       - name: Explicit browser NOT_APPLICABLE
         if: steps.scope.outputs.browser_mode == 'none'
-        run: echo 'NOT_APPLICABLE: no UI, Auth or browser risk.'
+        run: |
+          echo 'NOT_APPLICABLE: no UI, Auth or browser risk.'
       - uses: actions/setup-node@v7.1.0
         if: steps.scope.outputs.build_browser == 'true'
         with:

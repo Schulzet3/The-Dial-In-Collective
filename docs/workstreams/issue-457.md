@@ -9,3 +9,7 @@ Acceptance: adversarial classifiers, CI-level browser/cloud/SQL applicability an
 ## Same-commit canonical owner policy reconciliation, November 3
 
 Owner authority recorded as a NEW Locked scoped supersession at the top of docs/MASTER_SPECIFICATION.md and in docs/DECISION_LEDGER.json with approval coverage inventory. Explicit rejected proactive READY release staging corrected in docs/RELEASE_QUEUE_RUNBOOK.md and full Project Instructions (<8000 chars), CURRENT_STATUS. Existing exact five named checks and single release controller retained; new CI suite classification no Netlify/Supabase/backup action. This commit is documentation-only, not CI acceptance or publication; PR exact-source CI and merge still pending.
+
+## Corrected initial pre-job YAML and unknown-file risk (same-commit, not a PASS)
+
+Initial branch push workflow runs 41727959264, 41727961082 and 41727957046 FAILED before any jobs because unquoted inline echo with a colon in YAML `run:` is invalid. Converted those messages to block scalars. Adversarial source test also identified unknown `site/*.tx` was classified medium due an overly broad `site/**` match; now only recognized site JS/HTML/JSON routes are medium, unknown file formats high. No product source, release, backup or provider change. Retest exact corrected PR head, preserve historical failed runs.

@@ -42,7 +42,8 @@ jobs:
         run: node scripts/audit/ci-scope.mjs
       - name: Explicit SQL NOT_APPLICABLE, not a database PASS
         if: steps.scope.outputs.sql == 'false'
-        run: echo 'NOT_APPLICABLE: no SQL/Auth/database scope.'
+        run: |
+          echo 'NOT_APPLICABLE: no SQL/Auth/database scope.'
       - name: Verify applied SQL filename and byte hashes
         if: steps.scope.outputs.sql == 'true'
         run: node scripts/audit/verify-migration-baseline.mjs
