@@ -252,6 +252,20 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
       /\b(?:variety|cultivar)\b.{0,65}\b(?:grown|collected|introduced|originated|discovered)\b/i.test(sentence))continue;
+   // A founder's first station is biography, not the selected lot's origin.
+   if(/\b(?:first(?: ever)?|former|previous|original|initial)\s+(?:(?:coffee|wet)\s+)?washing\s+station\b/iu.test(sentence)&&
+      !/\b(?:this|our|the current)\s+(?:coffee|lot|offering)\s+(?:comes?\s+from|(?:is|are)\s+(?:grown|sourced|processed)\s+(?:in|at|from))\b/iu.test(sentence))continue;
+   // Directly printed selected station: require station in H1 and same-sentence country.
+   const selectedStation=sentence.match(new RegExp(
+    '^('+PLACE+')\\s+(?:washing\\s+station|wet\\s+mill)\\s+is\\s+(?:located|situated)\\s+in\\s+(?:the\\s+)?('+PLACE+')\\s+(?:of|in)\\s+('+COUNTRIES+')[.!?]?$','iu'));
+   if(selectedStation&&selectedStation[1].length>=4&&key(name).includes(key(selectedStation[1]))&&
+      selectedStation[2].length>=4&&selectedStation[2].length<=65&&
+      !COUNTRY_ONLY.test(selectedStation[2])&&
+      !/^(?:region|district|zone|village|municipality|state|province|department|country)$/iu.test(selectedStation[2])&&
+      !completeVarietyPhrase(selectedStation[2],{explicit:true})){
+    add(selectedStation[2]+', '+selectedStation[3],sentence);
+    continue;
+   }
    // Bind printed village and district to this exact selected station/H1.
    // Never infer a location from a reused URL, an older lot or a gazetteer.
    const stationCountry=countryNames(name);
