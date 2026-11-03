@@ -1,0 +1,2630 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-012",
+  "source_path": ".github/workflows/issue161-full-repository-scan.yml",
+  "file_index_1_based": 12,
+  "source_revisions": {
+    "frozen": {
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+      "lines": 81
+    },
+    "pinned": {
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+      "lines": 81
+    },
+    "live": {
+      "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+      "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+      "lines": 81
+    }
+  },
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "name: DIC Issue161 exhaustive tracked source review",
+      "classification": "configuration",
+      "behavior": "Names historical Issue161 tracked-source review",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Inventory not semantic audit",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 1
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 1
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 1
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Inventory not semantic audit",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 2,
+      "source_text": "# Temporary private source artifact for authorized line-level GitHub forensic",
+      "classification": "comment",
+      "behavior": "Comment describes private one-day artifact",
+      "quality": "Explanatory and not executable guarantee",
+      "risk": "Artifact may contain proprietary source",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 2
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 2
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 2
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Artifact may contain proprietary source",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 3,
+      "source_text": "# inspection, one-day retention. No secrets, data APIs, production or deploy.",
+      "classification": "comment",
+      "behavior": "Comment prohibits secrets, APIs, production",
+      "quality": "Explanatory and not executable guarantee",
+      "risk": "No proof of absence by comment",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 3
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 3
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 3
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; No proof of absence by comment",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 4,
+      "source_text": "on:",
+      "classification": "configuration",
+      "behavior": "Actions events map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Syntax",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 4
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 4
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 4
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Syntax",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 5,
+      "source_text": "  push:",
+      "classification": "configuration",
+      "behavior": "Push event",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Triggered by specific branch",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 5
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 5
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 5
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Triggered by specific branch",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 6,
+      "source_text": "    branches:",
+      "classification": "configuration",
+      "behavior": "Branch filter key",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Historical branch scope",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 6
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 6
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 6
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Historical branch scope",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 7,
+      "source_text": "      - work/issue161-full-repository-scan-20261027",
+      "classification": "list_item",
+      "behavior": "Only issue161 work branch",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "May be legacy, no deletion proof",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 7
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 7
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 7
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; May be legacy, no deletion proof",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 8,
+      "source_text": "    paths:",
+      "classification": "configuration",
+      "behavior": "Path trigger map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Only scanner edits",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 8
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 8
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 8
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Only scanner edits",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 9,
+      "source_text": "      - .github/workflows/issue161-full-repository-scan.yml",
+      "classification": "list_item",
+      "behavior": "Workflow self-trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Guard edit coverage",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 9
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 9
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 9
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Guard edit coverage",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 10,
+      "source_text": "      - scripts/audit/issue161-full-source-review.mjs",
+      "classification": "list_item",
+      "behavior": "Scanner script trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Source review engine",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 10
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 10
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 10
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Source review engine",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 11,
+      "source_text": "      - tests/issue161-full-source-review.test.mjs",
+      "classification": "list_item",
+      "behavior": "Scanner tests trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Safety harness",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 11
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 11
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 11
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Safety harness",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 12,
+      "source_text": "      - docs/workstreams/issue-161.md",
+      "classification": "list_item",
+      "behavior": "Issue161 journal trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Docs-only CI overhead",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 12
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 12
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 12
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Docs-only CI overhead",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 13,
+      "source_text": "  pull_request:",
+      "classification": "configuration",
+      "behavior": "PR event trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Target development PR",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 13
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 13
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 13
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Target development PR",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 14,
+      "source_text": "    branches: [development/backend-foundation]",
+      "classification": "configuration",
+      "behavior": "PR base development",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Relevant code branch",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 14
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 14
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 14
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Relevant code branch",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 15,
+      "source_text": "    paths:",
+      "classification": "configuration",
+      "behavior": "PR path map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Scoped",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 15
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 15
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 15
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Scoped",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 16,
+      "source_text": "      - .github/workflows/issue161-full-repository-scan.yml",
+      "classification": "list_item",
+      "behavior": "Workflow file PR change",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Correct",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 16
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 16
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 16
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Correct",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 17,
+      "source_text": "      - scripts/audit/issue161-full-source-review.mjs",
+      "classification": "list_item",
+      "behavior": "Scanner script PR change",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Correct",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 17
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 17
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 17
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Correct",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 18,
+      "source_text": "      - tests/issue161-full-source-review.test.mjs",
+      "classification": "list_item",
+      "behavior": "Scanner tests PR change",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Correct",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 18
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 18
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 18
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Correct",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 19,
+      "source_text": "      - docs/workstreams/issue-161.md",
+      "classification": "list_item",
+      "behavior": "Issue161 journal PR change",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Docs-only suite may run",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 19
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 19
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 19
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Docs-only suite may run",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 20,
+      "source_text": "  workflow_dispatch:",
+      "classification": "configuration",
+      "behavior": "Manual workflow_dispatch",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Can trigger artifact generation",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 20
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 20
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 20
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Can trigger artifact generation",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 21,
+      "source_text": "permissions:",
+      "classification": "configuration",
+      "behavior": "Permissions map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Token scope",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 21
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 21
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 21
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Token scope",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 22,
+      "source_text": "  contents: read",
+      "classification": "configuration",
+      "behavior": "Contents read",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Appropriate",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 22
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 22
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 22
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Appropriate",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 23,
+      "source_text": "jobs:",
+      "classification": "configuration",
+      "behavior": "Jobs map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Structure",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 23
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 23
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 23
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Structure",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 24,
+      "source_text": "  inspect:",
+      "classification": "configuration",
+      "behavior": "Inspect job name",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Machine scan cannot certify every-line semantics",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 24
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 24
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 24
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Machine scan cannot certify every-line semantics",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 25,
+      "source_text": "    runs-on: ubuntu-24.04",
+      "classification": "configuration",
+      "behavior": "Ubuntu 24.04",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Image drift",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 25
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 25
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 25
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Image drift",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 26,
+      "source_text": "    timeout-minutes: 12",
+      "classification": "configuration",
+      "behavior": "12-minute timeout",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Could miss huge repository",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 26
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 26
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 26
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Could miss huge repository",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 27,
+      "source_text": "    steps:",
+      "classification": "configuration",
+      "behavior": "Steps map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "YAML",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 27
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 27
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 27
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; YAML",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 28,
+      "source_text": "      - uses: actions/checkout@v7",
+      "classification": "action",
+      "behavior": "Checkout v7",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Mutable tag",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 28
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 28
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 28
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Mutable tag",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 29,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Checkout options",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Nesting",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 29
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 29
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 29
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Nesting",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 30,
+      "source_text": "          persist-credentials: false",
+      "classification": "configuration",
+      "behavior": "No credential persistence",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Privacy positive",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 30
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 30
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 30
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Privacy positive",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 31,
+      "source_text": "          fetch-depth: 0",
+      "classification": "configuration",
+      "behavior": "Full git history",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Cost vs provenance",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 31
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 31
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 31
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Cost vs provenance",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 32,
+      "source_text": "      - uses: actions/setup-node@v7.1.0",
+      "classification": "action",
+      "behavior": "Setup Node v7.1.0",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Mutable tag",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 32
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 32
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 32
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Mutable tag",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 33,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Setup Node config",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Nesting",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 33
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 33
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 33
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Nesting",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 34,
+      "source_text": "          node-version: '22'",
+      "classification": "configuration",
+      "behavior": "Node 22",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Matches scripts",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 34
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 34
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 34
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Matches scripts",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 35,
+      "source_text": "      - name: Screen all tracked files and every UTF-8 text line",
+      "classification": "list_item",
+      "behavior": "Label screens every tracked UTF8 line",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Screening not independent semantics",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 35
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 35
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 35
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Screening not independent semantics",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 36,
+      "source_text": "        run: node scripts/audit/issue161-full-source-review.mjs",
+      "classification": "command",
+      "behavior": "Runs issue161 source review script",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Source scanners cannot replace direct review",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 36
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 36
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 36
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Source scanners cannot replace direct review",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 37,
+      "source_text": "      - name: Test redaction and full-coverage scanner rules",
+      "classification": "list_item",
+      "behavior": "Label tests redaction and coverage rules",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Important privacy validation",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 37
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 37
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 37
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Important privacy validation",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 38,
+      "source_text": "        run: node --test tests/issue161-full-source-review.test.mjs",
+      "classification": "command",
+      "behavior": "Runs source-review Node tests",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Must see exact PASS for claim",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 38
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 38
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 38
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Must see exact PASS for claim",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 39,
+      "source_text": "      - name: Reproducible tracked-only source archive for private independent audit",
+      "classification": "list_item",
+      "behavior": "Label creates reproducible source archive",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Private source exposure risk",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 39
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 39
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 39
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Private source exposure risk",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 40,
+      "source_text": "        run: |",
+      "classification": "command",
+      "behavior": "Multiline shell block",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Requires bash strict errors",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 40
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 40
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 40
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Requires bash strict errors",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 41,
+      "source_text": "          set -euo pipefail",
+      "classification": "configuration",
+      "behavior": "Enable e/u/pipefail",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Fail closed on shell errors",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 41
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 41
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 41
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Fail closed on shell errors",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 42,
+      "source_text": "          git archive --format=tar.gz --output=qa_artifacts/issue161/tracked-source.tar.gz HEAD",
+      "classification": "configuration",
+      "behavior": "Creates tracked git archive tar.gz",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Could include private tracked content; no provider write",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 42
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 42
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 42
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Could include private tracked content; no provider write",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 43,
+      "source_text": "          tar -tzf qa_artifacts/issue161/tracked-source.tar.gz >/dev/null",
+      "classification": "configuration",
+      "behavior": "Verifies tar members readable",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Archive integrity",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 43
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 43
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 43
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Archive integrity",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 44,
+      "source_text": "          test -s qa_artifacts/issue161/tracked-source.tar.gz",
+      "classification": "configuration",
+      "behavior": "Requires nonempty archive",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Basic file check",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 44
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 44
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 44
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Basic file check",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 45,
+      "source_text": "          sha256sum qa_artifacts/issue161/tracked-source.tar.gz > qa_artifacts/issue161/archive.sha256",
+      "classification": "configuration",
+      "behavior": "Computes archive SHA256",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Provenance not semantics",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 45
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 45
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 45
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Provenance not semantics",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 46,
+      "source_text": "      - name: Private report and source archive (one day only)",
+      "classification": "list_item",
+      "behavior": "Artifact label one-day private report",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Cloud retention risk",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 46
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 46
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 46
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Cloud retention risk",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 47,
+      "source_text": "        uses: actions/upload-artifact@v7",
+      "classification": "configuration",
+      "behavior": "Upload-artifact action v7",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Copies source artifact off runner",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 47
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 47
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 47
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Copies source artifact off runner",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 48,
+      "source_text": "        if: always()",
+      "classification": "configuration",
+      "behavior": "Always uploads even after failure",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "May expose partial sensitive artifacts",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 48
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 48
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 48
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; May expose partial sensitive artifacts",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 49,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Artifact settings map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Validation",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 49
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 49
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 49
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Validation",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 50,
+      "source_text": "          name: dic-issue161-full-review-${{ github.run_id }}",
+      "classification": "configuration",
+      "behavior": "Artifact name keyed run_id",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Run provenance",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 50
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 50
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 50
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Run provenance",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 51,
+      "source_text": "          path: qa_artifacts/issue161/",
+      "classification": "configuration",
+      "behavior": "Artifact path qa_artifacts",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Ensure no secrets in generated reports",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 51
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 51
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 51
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Ensure no secrets in generated reports",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 52,
+      "source_text": "          if-no-files-found: error",
+      "classification": "configuration",
+      "behavior": "Require files exist",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Failure if missing",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 52
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 52
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 52
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Failure if missing",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 53,
+      "source_text": "          retention-days: 1",
+      "classification": "configuration",
+      "behavior": "One-day retention",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Limits persistence, not zero exposure",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 53
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 53
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 53
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Limits persistence, not zero exposure",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 54,
+      "source_text": "          compression-level: 0",
+      "classification": "configuration",
+      "behavior": "Compression-level zero",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Avoids recompression, bigger storage",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 54
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 54
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 54
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Avoids recompression, bigger storage",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 55,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank separator",
+      "quality": "Read and classified as non-executable separator",
+      "risk": "No runtime effect",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 55
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 55
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 55
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; No runtime effect",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 56,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank separator",
+      "quality": "Read and classified as non-executable separator",
+      "risk": "No runtime effect",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 56
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 56
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 56
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; No runtime effect",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 57,
+      "source_text": "  offline-browser:",
+      "classification": "configuration",
+      "behavior": "Offline-browser job name",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Separate browser acceptance",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 57
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 57
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 57
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Separate browser acceptance",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 58,
+      "source_text": "    runs-on: ubuntu-24.04",
+      "classification": "configuration",
+      "behavior": "Ubuntu 24.04",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Image drift",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 58
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 58
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 58
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Image drift",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 59,
+      "source_text": "    timeout-minutes: 23",
+      "classification": "configuration",
+      "behavior": "23-minute timeout",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Bounded larger install",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 59
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 59
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 59
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Bounded larger install",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 60,
+      "source_text": "    steps:",
+      "classification": "configuration",
+      "behavior": "Steps map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "YAML",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 60
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 60
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 60
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; YAML",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 61,
+      "source_text": "      - uses: actions/checkout@v7",
+      "classification": "action",
+      "behavior": "Checkout v7",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Action provenance",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 61
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 61
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 61
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Action provenance",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 62,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Checkout options",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Nesting",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 62
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 62
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 62
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Nesting",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 63,
+      "source_text": "          persist-credentials: false",
+      "classification": "configuration",
+      "behavior": "No checkout credentials",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Privacy positive",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 63
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 63
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 63
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Privacy positive",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 64,
+      "source_text": "      - uses: actions/setup-node@v7.1.0",
+      "classification": "action",
+      "behavior": "Node setup v7.1.0",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Action provenance",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 64
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 64
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 64
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Action provenance",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 65,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Node setup config",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Nesting",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 65
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 65
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 65
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Nesting",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 66,
+      "source_text": "          node-version: '22'",
+      "classification": "configuration",
+      "behavior": "Node 22",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Runtime compatibility",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 66
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 66
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 66
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Runtime compatibility",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 67,
+      "source_text": "          cache: npm",
+      "classification": "configuration",
+      "behavior": "Uses npm cache",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Speeds repeated installs but supply-chain cache integrity",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 67
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 67
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 67
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Speeds repeated installs but supply-chain cache integrity",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 68,
+      "source_text": "      - run: npm ci --ignore-scripts --no-audit --no-fund",
+      "classification": "list_item",
+      "behavior": "npm ci ignores scripts/audit/fund",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Safer install, dependency lock critical",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 68
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 68
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 68
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Safer install, dependency lock critical",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 69,
+      "source_text": "      - uses: actions/setup-python@v6",
+      "classification": "action",
+      "behavior": "Python setup action v6",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Action provenance",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 69
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 69
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 69
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Action provenance",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 70,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Python setup settings",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Nesting",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 70
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 70
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 70
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Nesting",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 71,
+      "source_text": "          python-version: '3.12'",
+      "classification": "configuration",
+      "behavior": "Python 3.12",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Browser harness runtime",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 71
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 71
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 71
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Browser harness runtime",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 72,
+      "source_text": "      - run: |",
+      "classification": "list_item",
+      "behavior": "Multiline install block",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Shell failure handling depends default",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 72
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 72
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 72
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Shell failure handling depends default",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 73,
+      "source_text": "          python -m pip install playwright==1.55.0",
+      "classification": "configuration",
+      "behavior": "Pip installs pinned Playwright 1.55.0",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Potential stale version, supported source proof required",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 73
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 73
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 73
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Potential stale version, supported source proof required",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 74,
+      "source_text": "          python -m playwright install --with-deps chromium",
+      "classification": "configuration",
+      "behavior": "Installs Chromium and OS deps",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Large CI cost, controlled browser",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 74
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 74
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 74
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Large CI cost, controlled browser",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 75,
+      "source_text": "      - name: Build real allowlisted PWA before offline smoke (PR135 fixed order)",
+      "classification": "list_item",
+      "behavior": "Label builds PWA first",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Avoids test on stale build",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 75
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 75
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 75
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Avoids test on stale build",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 76,
+      "source_text": "        run: npm run build:cloud && node scripts/audit/site-integrity.mjs --dist",
+      "classification": "command",
+      "behavior": "Builds cloud app then checks dist integrity",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Requires source-specific test evidence",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 76
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 76
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 76
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Requires source-specific test evidence",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 77,
+      "source_text": "        env:",
+      "classification": "configuration",
+      "behavior": "Environment map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Test values",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 77
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 77
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 77
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Test values",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 78,
+      "source_text": "          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co",
+      "classification": "configuration",
+      "behavior": "Supabase URL configured in test",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Public endpoint, synthetic key not real auth",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 78
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 78
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 78
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Public endpoint, synthetic key not real auth",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 79,
+      "source_text": "          SUPABASE_PUBLISHABLE_KEY: sb_publishable_issue161_offline_synthetic_only",
+      "classification": "configuration",
+      "behavior": "Synthetic publishable key",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Do not infer live service auth",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 79
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 79
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 79
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Do not infer live service auth",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 80,
+      "source_text": "      - name: Exercise installed Chromium offline, owner cache and durable queued shot",
+      "classification": "list_item",
+      "behavior": "Label offline Chromium owner cache and durable outbox",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Browser scope not complete app privacy proof",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 80
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 80
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 80
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Browser scope not complete app privacy proof",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 81,
+      "source_text": "        run: python tests/browser/pwa_offline_qa.py",
+      "classification": "command",
+      "behavior": "Executes pwa_offline_qa.py",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Must check browser run result",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 81
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 81
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+          "line": 81
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Must check browser run result",
+      "locked_fit": "Machine-source artifact is not line-by-line semantic audit; protect private source, PWA offline history and user data",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    }
+  ],
+  "strict_credited": {
+    "frozen": 81,
+    "pinned": 81
+  },
+  "old_v2_increment": 0,
+  "findings": [
+    {
+      "priority": "WATCH",
+      "disposition": "TRIAGED_NO_CHANGE",
+      "finding": "Historical Issue161 artifact upload contains tracked source; one-day retention and read-only GITHUB_TOKEN reduce exposure but do not prove contents have no secrets. Repo-private scanner/report is machine screening, not AI semantic audit; static artifact scope separately needs verification. Offline Playwright job is historical and may be expensive, do not delete without measured tests."
+    }
+  ]
+}
