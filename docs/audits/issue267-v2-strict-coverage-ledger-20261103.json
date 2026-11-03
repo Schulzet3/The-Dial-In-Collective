@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 920,
-    "first_unvalidated_manifest_file_index": 17,
-    "first_unvalidated_path": ".github/workflows/visual-review.yml",
+    "strict_validated_lines": 1011,
+    "first_unvalidated_manifest_file_index": 18,
+    "first_unvalidated_path": ".github/workflows/weekly-full-regression.yml",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,21 +15,21 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 955,
-    "first_unvalidated_file_index": 17,
-    "first_unvalidated_path": ".github/workflows/issue96-source-audit.yml",
+    "strict_validated_lines": 978,
+    "first_unvalidated_file_index": 18,
+    "first_unvalidated_path": ".github/workflows/nightly-backup.yml",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "689fc73dfbb0cc238c5cc03d9dad4cc8e28795c6",
+    "observed_development_commit": "ce85173bd66354da93b6f028d5d08d8ece41896c",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
-    "live_fully_reviewed_files": 18,
-    "live_fully_reviewed_file_lines": 1051,
-    "latest_reviewed_live_path": ".github/workflows/issue33-source-bundle.yml",
+    "live_fully_reviewed_files": 19,
+    "live_fully_reviewed_file_lines": 1074,
+    "latest_reviewed_live_path": ".github/workflows/issue96-source-audit.yml",
     "remaining_live_changes": "OTHER SOURCE DRIFT UNREVIEWED; do not claim current 100%",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
@@ -42,6 +42,13 @@
         "total_lines": 146,
         "strict_individual_line_coverage": 0,
         "reason": "Full source fetched and inspected for change scope but individual live line review incomplete; explicit noncredit"
+      },
+      {
+        "path": ".github/workflows/visual-review.yml",
+        "blob_sha": "61173f8a9dffdd5fba82823b2b2cf3d5ba4841bf",
+        "total_lines": 86,
+        "strict_individual_line_coverage": 0,
+        "reason": "Historical source reviewed, live refactored manual-only workflow still needs separate per-line evidence"
       }
     ]
   },
@@ -424,6 +431,30 @@
           "blob_sha": "a24f076ef3f47289a0dd14708e0481b8039ec2ef",
           "lines": 60
         }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-017",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-017.json",
+      "frozen_file": ".github/workflows/visual-review.yml",
+      "frozen_lines": [
+        1,
+        91
+      ],
+      "frozen_blob": "11f7d6ad56bfe5228a4e5357aa9061d9b1f00b23",
+      "pinned_file": ".github/workflows/issue96-source-audit.yml",
+      "pinned_lines": [
+        1,
+        23
+      ],
+      "pinned_blob": "135226b7970f29b20cbd62da83345f6abae7d80f",
+      "reused_pinned_semantic_receipt": "S2-013",
+      "live_frozen_path_blob": "61173f8a9dffdd5fba82823b2b2cf3d5ba4841bf",
+      "live_uncredited_lines": 86,
+      "live_pinned_full_lines": [
+        1,
+        23
       ],
       "old_v2_extra_credit": 0
     }
