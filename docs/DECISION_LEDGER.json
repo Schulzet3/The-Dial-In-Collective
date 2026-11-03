@@ -4242,7 +4242,18 @@
     ],
     "schedule": "Fixed MST: 01:00 MST = 08:00 UTC; during MDT clock shows 02:00; Sunday comprehensive run.",
     "implementation_status": "PARTIALLY_IMPLEMENTED pending verification of main backup schedule and auto pre-destructive backup/release report",
-    "owner_nov2_2026_single_publisher_supersession": {"decision_id":"OPS-ONE-GIT-PUBLISHER-NO-REDUNDANT-TESTS-20261102","status":"Locked","owner_source":"Owner direct instruction November 2, 2026; GitHub Issue #417","supersedes":"Unfinished immutable-artifact API publisher cutover and duplicate READY combined test/artifact pipeline","publisher":"One guarded Git-connected Netlify production build from serialized nonforce release/production one-use grant; no direct artifact API publisher, no automatic development publishing","ready_isolation":"Release only exact owner-approved READY items and required dependencies; fail closed on any unready merged or overlapping code; independently test isolated source or block","testing":"Focused dev tests and applicable exact-source CI; reuse unchanged passing evidence, no redundant READY Node/cloud/lint/build or extra release-time build/test suite","safety":"Keep all release approvals, exact-source CI, private Free controls, nonforce Git, Netlify provider/Function readback, encrypted recovery, source/queue receipts, privacy, history and scheduled protections","publication_authorized":false,"historic_code_and_data_deletion_authorized":false},
+    "owner_nov2_2026_single_publisher_supersession": {
+      "decision_id": "OPS-ONE-GIT-PUBLISHER-NO-REDUNDANT-TESTS-20261102",
+      "status": "Locked",
+      "owner_source": "Owner direct instruction November 2, 2026; GitHub Issue #417",
+      "supersedes": "Unfinished immutable-artifact API publisher cutover and duplicate READY combined test/artifact pipeline",
+      "publisher": "One guarded Git-connected Netlify production build from serialized nonforce release/production one-use grant; no direct artifact API publisher, no automatic development publishing",
+      "ready_isolation": "Release only exact owner-approved READY items and required dependencies; fail closed on any unready merged or overlapping code; independently test isolated source or block",
+      "testing": "Focused dev tests and applicable exact-source CI; reuse unchanged passing evidence, no redundant READY Node/cloud/lint/build or extra release-time build/test suite",
+      "safety": "Keep all release approvals, exact-source CI, private Free controls, nonforce Git, Netlify provider/Function readback, encrypted recovery, source/queue receipts, privacy, history and scheduled protections",
+      "publication_authorized": false,
+      "historic_code_and_data_deletion_authorized": false
+    },
     "no_release_approval": true
   },
   "current_owner_autonomous_build_test_queue_20261022": {
@@ -4666,5 +4677,33 @@
     },
     "first_archived_restore_evidence": "Run 41709488687, 2026-11-03 20:06 UTC, head 5b6a056adf9cb6a39ce363f6530859e2239b1970, no new backup, exact ZIP SHA-256 1cd12b8b9b7ef4dded07cebc96578f2903e9fb3a85195e6afd42e677aa92b746, disposable disconnected PostgreSQL, cleanup PASS; independent Drive delivery verified for Nov1 only",
     "production_write_or_release_authorized": false
+  },
+  "current_owner_risk_based_queue_owner_publishes_only_20261103": {
+    "decision_id": "OPS-RISK-BASED-OWNER-CONTROLLED-RELEASE-20261103",
+    "status": "Locked explicit owner supersession",
+    "date": "2026-11-03",
+    "issue": 457,
+    "owner_source": "Direct owner instructions in conversation Nov 3, 2026; GitHub Issue #457",
+    "approved": [
+      "Eliminate repeated builds, Node/cloud/browser tests where not needed",
+      "Automatically classify exact source risk and execute relevant impacted suites; unknown/high-risk fail closed",
+      "Reuse passing relevant exact-source evidence without repeated builds/restores",
+      "One publish command handles candidate preparation, tests, scoped grant, single publisher, independent postflight without repeated owner confirmation"
+    ],
+    "rejected": [
+      "Automatic/proactive assembly, refreshing or certification of release candidates before owner publish instruction",
+      "Automatic production publication from development or READY queue changes"
+    ],
+    "supersedes_only": [
+      "November 2 blanket interpretation that every named check runs full expensive test suite",
+      "Proposed auto-assembly/refresh wording in READY queue runbook"
+    ],
+    "preserves": [
+      "Existing named exact-source status checks and truthful tests PASS vs NOT_APPLICABLE distinction",
+      "READY item eligibility and owner-discretion publication",
+      "READY-only isolation, explicit one-use source/IDs, nonforce single Git-connected publisher and Netlify READY/current receipts",
+      "Mandatory applicable Auth, SQL/RLS, privacy, offline/recommendation, recovery and member-data safety"
+    ],
+    "approval": "Development and documented workflow implementation only; queued #335 is not authorized to publish"
   }
 }
