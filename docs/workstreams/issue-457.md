@@ -13,3 +13,7 @@ Owner authority recorded as a NEW Locked scoped supersession at the top of docs/
 ## Corrected initial pre-job YAML and unknown-file risk (same-commit, not a PASS)
 
 Initial branch push workflow runs 41727959264, 41727961082 and 41727957046 FAILED before any jobs because unquoted inline echo with a colon in YAML `run:` is invalid. Converted those messages to block scalars. Adversarial source test also identified unknown `site/*.tx` was classified medium due an overly broad `site/**` match; now only recognized site JS/HTML/JSON routes are medium, unknown file formats high. No product source, release, backup or provider change. Retest exact corrected PR head, preserve historical failed runs.
+
+## Concurrent owner-authorized extractor source integration (merge-only)
+
+Latest development `4f36301cc25ea61e593590b5a59ef13df4227da4` (Issue #33 PR456) advanced after this branch fork, changing selected Buncho source identity, regression and its same-commit #33 journal. This non-force two-parent merge brings those exact code/test/journal bytes into the #457 branch without rewriting, staging or publishing them. The sole overlapping Project Instructions file was reconciled to retain the new #457 risk policy plus the concurrently restored PRIVATE GitHub Free and owner-only credit/screenshot literal constraints. PR exact-source CI after this merge is required; no result from the premerge PR head is accepted as final.
