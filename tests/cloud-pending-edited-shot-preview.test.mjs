@@ -8,6 +8,7 @@ const changed={...good,extraction:2};
 function scene(override={}){
  const raw=rawFixture();
  raw.shots.push(rawShot({notes:'Original private note',feed_mode:'standard',...override}));
+ raw.notes.push({shot_id:'shot',notes:'Original private note'});
  return {raw,state:hydrate(raw)};
 }
 function edit(overrides={}){
