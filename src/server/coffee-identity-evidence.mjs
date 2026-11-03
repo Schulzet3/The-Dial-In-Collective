@@ -685,7 +685,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
      // this selected lot. Keep direct Process labels and actual method prose.
      const lead=processSentence.slice(Math.max(0,match.index-130),match.index);
      const comparison=/\b(?:about|like|similar to|reminiscent of|compared to|typical of|reminds? (?:us )?of)\s+(?:(?:the|a|an|classic|other|traditional)\s+){0,3}$/i.test(lead);
-     if(comparison&&/\bcoffees?\b/i.test(match[0]))continue;
+     if(comparison)continue;
      processes.push({value:processValue(match[1]),quote:sentence});
     }
     // A direct current-method assertion outranks historical farm methods.
