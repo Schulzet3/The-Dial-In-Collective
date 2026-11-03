@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 1011,
-    "first_unvalidated_manifest_file_index": 18,
-    "first_unvalidated_path": ".github/workflows/weekly-full-regression.yml",
+    "strict_validated_lines": 1097,
+    "first_unvalidated_manifest_file_index": 19,
+    "first_unvalidated_path": ".gitignore",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,21 +15,21 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 978,
-    "first_unvalidated_file_index": 18,
-    "first_unvalidated_path": ".github/workflows/nightly-backup.yml",
+    "strict_validated_lines": 1034,
+    "first_unvalidated_file_index": 19,
+    "first_unvalidated_path": ".github/workflows/roaster-source-probe.yml",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "ce85173bd66354da93b6f028d5d08d8ece41896c",
+    "observed_development_commit": "9d0e9fa77b87dbe7a828951442332f6485ef13cd",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
-    "live_fully_reviewed_files": 19,
-    "live_fully_reviewed_file_lines": 1074,
-    "latest_reviewed_live_path": ".github/workflows/issue96-source-audit.yml",
+    "live_fully_reviewed_files": 21,
+    "live_fully_reviewed_file_lines": 1216,
+    "latest_reviewed_live_path": ".github/workflows/nightly-backup.yml",
     "remaining_live_changes": "OTHER SOURCE DRIFT UNREVIEWED; do not claim current 100%",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
@@ -455,6 +455,36 @@
       "live_pinned_full_lines": [
         1,
         23
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-018",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-018.json",
+      "frozen_file": ".github/workflows/weekly-full-regression.yml",
+      "frozen_lines": [
+        1,
+        86
+      ],
+      "frozen_blob": "1fae89f9b7f514986a65b622506a11f78d623b36",
+      "pinned_file": ".github/workflows/nightly-backup.yml",
+      "pinned_lines": [
+        1,
+        56
+      ],
+      "pinned_blob": "3632be8d583ebfdf17974ed19029d18302d035a7",
+      "reused_pinned_semantic_receipt": "S2-014",
+      "live_files": [
+        {
+          "path": ".github/workflows/weekly-full-regression.yml",
+          "blob_sha": "1fae89f9b7f514986a65b622506a11f78d623b36",
+          "lines": 86
+        },
+        {
+          "path": ".github/workflows/nightly-backup.yml",
+          "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+          "lines": 56
+        }
       ],
       "old_v2_extra_credit": 0
     }
