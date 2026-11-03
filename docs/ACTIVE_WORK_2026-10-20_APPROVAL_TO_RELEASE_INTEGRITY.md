@@ -275,3 +275,10 @@ The newly tracked DIC-Q-33-original603-direct-region-country-prose is TESTING, n
 
 ## November 2 — #417 preserve Locked GitHub Free and credits phrasing (PR acceptance correction)
 Exact-source PR426 visual review failed its existing instruction-continuity regression because a concurrent 7,909-character Project Instructions rewrite had changed the literal private-Free, advisory CI, no paid/public suggestion, screenshot prohibition and paste-ready strings. This commit restores those unchanged owner Locked requirements in clearer words under 8,000 characters, preserves the newly approved #423 recovery-key controls, and does not change executable code, permissions, publisher, privacy, production or test policy. Earlier CI failure remains recorded; rerun all applicable exact-source checks before integration.
+
+## READY-only source candidate (not published)
+- Development parent: 96e2a89577f57a55206df88f31e78a251ce0ac7d
+- Published baseline: 2c8e1ffe3b83a7524968f50efca3ead4da282cf8
+- Selected READY IDs: DIC-Q-335-historical-grind-range-evidence
+- Restored unfinished paths: scripts/netlify/should-ignore-build.mjs, src/server/coffee-identity-evidence.mjs, src/server/coffee-narrative-evidence.mjs
+- Exact candidate CI and separate owner publication authorization required. No production claim.
