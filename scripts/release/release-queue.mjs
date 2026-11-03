@@ -60,10 +60,30 @@ export function assessReleaseQueue(queue,{publishedSourceSha,candidateSha,change
   typeof isAncestor!=='function')errors.push('Exact source refs or ancestry verification unavailable');
  if(queue?.published_base?.tested_source_sha!==publishedSourceSha)
   errors.push('Queue published baseline differs from actual consumed production source');
+ // A candidate must extend the exact published source; matching changed paths
+ // or a READY item alone cannot certify a disconnected/replaced source history.
+ if(SHA.test(publishedSourceSha||'')&&SHA.test(candidateSha||'')&&typeof isAncestor==='function'){
+  try{
+   if(isAncestor(publishedSourceSha,candidateSha)!==true)
+    errors.push('Candidate source does not descend from published baseline');
+  }catch{errors.push('Cannot verify candidate ancestry from published baseline');}
+ }
  const diff=deployableChangedPaths(changedPaths||[]);
  for(const item of queue?.items||[]){
-  if(item?.state==='DEPLOYED')continue;
+  // A DEPLOYED label is not proof that a post-baseline commit was published.
+  // Fail closed if an allegedly delivered item first enters this candidate.
+  // This also catches premature queue reconciliation before a real release.
   const merged=item?.merged_source_sha;
+  if(item?.state==='DEPLOYED'){
+   if(SHA.test(merged||'')){
+    try{
+     if(isAncestor(publishedSourceSha,merged)===true&&merged!==publishedSourceSha&&
+        isAncestor(merged,candidateSha)===true)
+      errors.push(item.id+' DEPLOYED-labelled merged work is new since published baseline; release receipt/source isolation required');
+    }catch{errors.push(item.id+' unable to verify DEPLOYED commit ancestry');}
+   }
+   continue;
+  }
   if(!SHA.test(merged||''))continue; // Unmerged work stays tracked but cannot enter release.
   let isIncluded=false,isNew=false;
   try{
@@ -108,6 +128,17 @@ export function assessIntakeCoverage(queue,changedPaths,{currentBlobSha=()=>null
  }
  return {tracked:errors.length===0,errors,deployable_paths:paths};
 }
+export function assertApprovedReadyBatch(grant,assessment){
+ if(!assessment?.ready)throw Error('Release queue not certified READY');
+ const approved=grant?.approved_ready_item_ids;
+ if(!Array.isArray(approved)||!approved.length||approved.some(id=>typeof id!=='string')||
+    new Set(approved).size!==approved.length)
+  throw Error('Owner release grant must name unique READY queue item IDs');
+ const actual=assessment.ready_items.map(item=>item.id);
+ if(approved.length!==actual.length||approved.slice().sort().join('|')!==actual.slice().sort().join('|'))
+  throw Error('Owner-approved READY item IDs differ from actual candidate source inventory');
+ return true;
+}
 export function formatQueueReport(result){
  return ['## Deployment queue (source-only assessment)','**Batch source ready:** '+(result.ready?'YES':'NO'),
   '**Queued ready changes:** '+result.ready_items.length,
@@ -123,7 +154,15 @@ export function evaluateLocalQueue(){
  const queue=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
  const head=git(['rev-parse','HEAD']),base=queue.published_base?.tested_source_sha;
  const changes=git(['diff','--name-only','--no-renames',base+'..'+head]).split(/\r?\n/).filter(Boolean);
- const ancestor=(a,b)=>{try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}catch{return false;}};
+ const ancestor=(a,b)=>{
+  try{execFileSync('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
+  catch(error){
+   // Git status 1 means a proven non-ancestor. A missing object/repository or
+   // other git failure must not be silently treated as evidence of non-inclusion.
+   if(error?.status===1)return false;
+   throw Error('Git ancestry verification unavailable (exit '+String(error?.status)+')');
+  }
+ };
  return assessReleaseQueue(queue,{publishedSourceSha:base,candidateSha:head,changedPaths:changes,isAncestor:ancestor});
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){

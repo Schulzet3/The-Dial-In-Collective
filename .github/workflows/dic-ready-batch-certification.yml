@@ -1,5 +1,7 @@
-name: DIC automatic READY batch certification
-# Non-publishing CI. A green batch check is evidence, never a release grant.
+name: DIC automatic READY source and queue coverage
+# Owner Nov 2 #417: lightweight nonpublishing queue check only. Existing mandatory
+# exact-source Node/cloud/mobile/SQL/approval checks remain independent. Never
+# re-run those suites or package duplicate immutable API publisher artifacts here.
 on:
   push:
     branches: [development/backend-foundation]
@@ -12,7 +14,7 @@ concurrency:
 jobs:
   certify-ready-batch:
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,33 +22,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
-      - name: Install locked dependencies
-        run: npm ci
-      - name: Verify queue schema and complete unpublished source coverage
+      - name: Validate queue schema, intake and candidate source
         run: |
           node scripts/release/release-queue.mjs --validate
           node scripts/release/release-queue.mjs --enforce-intake
-          node scripts/release/release-queue.mjs --strict
-      - name: Combined Node regressions
-        run: npm test
-      - name: Combined cloud, offline and UI regressions
-        run: npm run test:cloud
-      - name: Lint
-        run: npm run lint
-      - name: Production-style build using nonfunctional public CI coordinates
-        env:
-          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
-          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
-        run: npm run build:cloud
-      - name: Publish exact-source certification summary
+          node scripts/release/release-queue.mjs --status
+      - name: Report source-only READY classification
         if: always()
         env:
           DIC_SOURCE_SHA: ${{ github.sha }}
         run: |
           {
-            echo '## READY batch automatic source certification'
-            echo "Source: \`$DIC_SOURCE_SHA\`"
-            echo "Combined test and source gates: ${{ job.status }}"
-            echo 'This check does not verify offsite backup freshness, provider routing or issue a one-use production grant.'
+            echo '## Source-only READY queue classification'
+            echo "Source: \u0060$DIC_SOURCE_SHA\u0060"
+            echo 'This job validates queue schema/intake only; required exact-source test workflows are independent.'
+            echo 'Not a release grant, immutable artifact certificate, backup or provider readback.'
           } >> "$GITHUB_STEP_SUMMARY"

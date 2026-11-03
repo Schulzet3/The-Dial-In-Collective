@@ -11,7 +11,7 @@ import {join} from 'node:path';
 import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BRANCH} from './one-use-claim.mjs';
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
-import {assessReleaseQueue,formatQueueReport} from './release-queue.mjs';
+import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const SHA=/^[a-f0-9]{40}$/;
 // The protected release ref must first be seeded at the independently
@@ -84,6 +84,15 @@ export function selectLatestCiConclusions(checkRuns,sha){
  return Object.fromEntries([...scores].map(([name,check])=>[
   name,check.status==='completed'?check.conclusion:'pending'
  ]));
+}
+// A genuine non-ancestor is Git exit 1; missing refs/objects or repository
+// failures must never be silently interpreted as evidence of non-inclusion.
+export function verifiedGitAncestry(a,b,{run=execFileSync}={}){
+ try{run('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}
+ catch(error){
+  if(error?.status===1)return false;
+  throw Error('Git ancestry verification unavailable; cannot certify release isolation');
+ }
 }
 export function assertCurrentReleaseRefs({developmentHead,releaseHead,actualDevelopmentHead,actualReleaseHead}){
  if(!SHA.test(actualDevelopmentHead||'')||!SHA.test(actualReleaseHead||'')||
@@ -237,10 +246,11 @@ export async function executeSingleUseRelease(settings=process.env){
   .split(/\r?\n/).filter(Boolean);
  const queueGate=assessReleaseQueue(queuedSource,{
   publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,changedPaths:changedSourcePaths,
-  isAncestor:(a,b)=>{try{git(['merge-base','--is-ancestor',a,b]);return true;}catch{return false;}}
+  isAncestor:(a,b)=>verifiedGitAncestry(a,b)
  });
  if(settings.GITHUB_STEP_SUMMARY)appendFileSync(settings.GITHUB_STEP_SUMMARY,formatQueueReport(queueGate));
  if(!queueGate.ready)throw Error('Release queue HOLD: '+queueGate.errors.join('; ').slice(0,1200));
+ assertApprovedReadyBatch(grant,queueGate);
  const nowIso=new Date().toISOString();
  const planned=planSingleUseClaim({grant,releaseId:id,sourceSha:sha,nowIso,
   ledger,currentPublishedSourceSha:ledger.consumed.at(-1)?.tested_source_sha||releaseHead});

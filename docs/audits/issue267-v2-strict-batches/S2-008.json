@@ -1,0 +1,1295 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "S2-008",
+  "review_date_utc": "2026-11-03",
+  "source": {
+    "path": ".github/workflows/dic-chat-approved-release.yml",
+    "original": {
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+      "line_count": 39
+    },
+    "pinned_current": {
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+      "line_count": 39
+    },
+    "observed_live": {
+      "commit": "5c46d009f3d4366bc71fcb4590b2d0a619ae6ace",
+      "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+      "line_count": 39
+    }
+  },
+  "method": "Direct numbered AI review of exact source blob, frozen/pinned/live all identical. Each individual line has original text and explicit behavior, quality, security/bug/perf risk, obsolescence, redundancy, exact counterpart, testability, safe fix opportunity and Locked fit. Machine blob match only validates identical text; no human review claimed. Prior R2/C2 grouped receipts preserved, no duplicate old V2 credit.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "name: DIC chat-approved single-use production request",
+      "classification": "label",
+      "behavior_and_specific_review": "Title identifies production chat approval request; sensitive workflow, no publication authorized here.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Human-readable label does not establish executed behavior. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 1
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 1
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 1
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 2,
+      "source_text": "# Free/private compensating controls are advisory; no GitHub Free protected refs.",
+      "classification": "comment",
+      "behavior_and_specific_review": "Comment admits private GitHub Free compensating controls advisory, not protected refs.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Statement may be stale; source/provider evidence required to verify. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 2
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 2
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 2
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 3,
+      "source_text": "# A source commit by itself NEVER publishes. Only a NEW approved request",
+      "classification": "comment",
+      "behavior_and_specific_review": "Comment states mere source commit never publishes; verify runner invariants separately.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Statement may be stale; source/provider evidence required to verify. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 3
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 3
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 3
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 4,
+      "source_text": "# commit touching exactly the request plus its contemporaneous ops journal",
+      "classification": "comment",
+      "behavior_and_specific_review": "Comment requires new request commit limited to request and ops journal.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Statement may be stale; source/provider evidence required to verify. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 4
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 4
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 4
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 5,
+      "source_text": "# can invoke the already-reviewed single-use runner after hosted cutover.",
+      "classification": "comment",
+      "behavior_and_specific_review": "Comment says invoke one-use runner after hosted cutover, potentially superseded by Nov3 owner Git-only flow; not executable.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Statement may be stale; source/provider evidence required to verify. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 5
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 5
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 5
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 6,
+      "source_text": "on:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Actions event selector mapping.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 6
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 6
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 6
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 7,
+      "source_text": "  push:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Push trigger starts, potentially sensitive.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 7
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 7
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 7
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 8,
+      "source_text": "    branches: [main]",
+      "classification": "setting",
+      "behavior_and_specific_review": "Only main branch receives release request push, not dev.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Setting behavior depends on enclosing event/job; no observed defect solely in this source line. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 8
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 8
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 8
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 9,
+      "source_text": "    paths:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Push path allowlist begins.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 9
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 9
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 9
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 10,
+      "source_text": "      - 'docs/RELEASE_REQUEST.json'",
+      "classification": "path_selector",
+      "behavior_and_specific_review": "docs/RELEASE_REQUEST.json modification triggers, so request file can reach privileged runner if signed guard accepts.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Missing or excessively broad event path can skip/multiply tests; check dependency routing. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 10
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 10
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 10
+        },
+        "exact_identical": true
+      },
+      "testability": "Verify matching and nonmatching PR/push/dispatch event against expected source",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 11,
+      "source_text": "permissions:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Token permissions map begins.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 11
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 11
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 11
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 12,
+      "source_text": "  contents: write",
+      "classification": "permission",
+      "behavior_and_specific_review": "contents:write grants broad repository write to job; security-critical if runner compromised, must enforce one-use owner gate.",
+      "quality": "Sensitive privilege; least-authority requirement must be verified",
+      "bug_security_privacy_performance_risk": "Privilege level can affect confidentiality/integrity; ensure Locked controls and least access. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 12
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 12
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 12
+        },
+        "exact_identical": true
+      },
+      "testability": "Inspect GitHub job token permissions/runner audit logs, never test by production write",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 13,
+      "source_text": "  checks: read",
+      "classification": "permission",
+      "behavior_and_specific_review": "checks:read allows checking exact-source CI statuses.",
+      "quality": "Sensitive privilege; least-authority requirement must be verified",
+      "bug_security_privacy_performance_risk": "Privilege level can affect confidentiality/integrity; ensure Locked controls and least access. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 13
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 13
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 13
+        },
+        "exact_identical": true
+      },
+      "testability": "Inspect GitHub job token permissions/runner audit logs, never test by production write",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 14,
+      "source_text": "concurrency:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Concurrency map begins.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 14
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 14
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 14
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 15,
+      "source_text": "  group: dic-exclusive-one-use-production-publish",
+      "classification": "setting",
+      "behavior_and_specific_review": "Shared exclusive production publisher group key across release flows.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Setting behavior depends on enclosing event/job; no observed defect solely in this source line. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 15
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 15
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 15
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 16,
+      "source_text": "  cancel-in-progress: false",
+      "classification": "setting",
+      "behavior_and_specific_review": "cancel-in-progress false avoids interrupting active partial release, serializes requests.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Setting behavior depends on enclosing event/job; no observed defect solely in this source line. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 16
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 16
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 16
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 17,
+      "source_text": "jobs:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Jobs mapping begins.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 17
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 17
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 17
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 18,
+      "source_text": "  chat-approved-request:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "chat-approved-request privileged job.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 18
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 18
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 18
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 19,
+      "source_text": "    runs-on: ubuntu-24.04",
+      "classification": "runtime",
+      "behavior_and_specific_review": "Ubuntu24.04 runner OS pin.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Runner image, timeout and dependency reproducibility are date-dependent. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 19
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 19
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 19
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 20,
+      "source_text": "    timeout-minutes: 10",
+      "classification": "runtime",
+      "behavior_and_specific_review": "Ten-minute timeout bounds execution but may interrupt on slow provider actions, inspect runner code.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Runner image, timeout and dependency reproducibility are date-dependent. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 20
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 20
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 20
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 21,
+      "source_text": "    steps:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Steps container.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 21
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 21
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 21
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 22,
+      "source_text": "      - uses: actions/checkout@v7",
+      "classification": "action",
+      "behavior_and_specific_review": "Checkout@v7 runner obtains release source.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Action version/supply-chain and job permissions require exact-source CI review. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 22
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 22
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 22
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 23,
+      "source_text": "        with:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Checkout options mapping.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 23
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 23
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 23
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 24,
+      "source_text": "          fetch-depth: 0",
+      "classification": "setting",
+      "behavior_and_specific_review": "Fetch full git ancestry for commit/branch safety and approval verification.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Setting behavior depends on enclosing event/job; no observed defect solely in this source line. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 24
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 24
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 24
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 25,
+      "source_text": "          persist-credentials: true",
+      "classification": "permission",
+      "behavior_and_specific_review": "Persist credentials true, intentionally supports guarded Git publish but expands compromise risk; one-use gate essential.",
+      "quality": "Sensitive privilege; least-authority requirement must be verified",
+      "bug_security_privacy_performance_risk": "Privilege level can affect confidentiality/integrity; ensure Locked controls and least access. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 25
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 25
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 25
+        },
+        "exact_identical": true
+      },
+      "testability": "Inspect GitHub job token permissions/runner audit logs, never test by production write",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 26,
+      "source_text": "      - uses: actions/setup-node@v7.1.0",
+      "classification": "action",
+      "behavior_and_specific_review": "Setup-node@v7.1.0 for controller.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Action version/supply-chain and job permissions require exact-source CI review. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 26
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 26
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 26
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 27,
+      "source_text": "        with:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Node setup options map.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 27
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 27
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 27
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 28,
+      "source_text": "          node-version: '22'",
+      "classification": "runtime",
+      "behavior_and_specific_review": "Node22 controller runtime.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Runner image, timeout and dependency reproducibility are date-dependent. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 28
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 28
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 28
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 29,
+      "source_text": "      - name: Verify exact chat request commit, owner grant, source CI and guarded nonforce claim",
+      "classification": "label",
+      "behavior_and_specific_review": "Step label names exact request commit/grant/source CI/nonforce claim checks; label not proof.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Human-readable label does not establish executed behavior. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 29
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 29
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 29
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 30,
+      "source_text": "        env:",
+      "classification": "mapping",
+      "behavior_and_specific_review": "Environment passed into release runner begins.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "GitHub Actions YAML hierarchy and parsing require syntax validation. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 30
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 30
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 30
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 31,
+      "source_text": "          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}",
+      "classification": "expression",
+      "behavior_and_specific_review": "GITHUB_TOKEN from secrets; write-capable by job token permissions, only safe with enforced approval.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Ref/branch SHA, token or trigger expression must be validated in exact event context. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 31
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 31
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 31
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 32,
+      "source_text": "          DIC_PUSH_FORCED: ${{ github.event.forced }}",
+      "classification": "expression",
+      "behavior_and_specific_review": "Forced push flag given to fail closed on nonfastforward request.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Ref/branch SHA, token or trigger expression must be validated in exact event context. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 32
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 32
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 32
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 33,
+      "source_text": "          DIC_PUSH_AFTER_SHA: ${{ github.event.after }}",
+      "classification": "expression",
+      "behavior_and_specific_review": "Push after SHA bound to requested commit candidate.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Ref/branch SHA, token or trigger expression must be validated in exact event context. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 33
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 33
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 33
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 34,
+      "source_text": "          DIC_PUSH_BEFORE_SHA: ${{ github.event.before }}",
+      "classification": "expression",
+      "behavior_and_specific_review": "Push before SHA used for ancestry and single-commit validation.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Ref/branch SHA, token or trigger expression must be validated in exact event context. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 34
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 34
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 34
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 35,
+      "source_text": "          DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED: ${{ vars.DIC_PRIVATE_BRANCH_PROTECTION_VERIFIED }}",
+      "classification": "expression",
+      "behavior_and_specific_review": "Branch-protection verified var may be absent on GitHub Free; runner should use compensating mode if authorized.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Ref/branch SHA, token or trigger expression must be validated in exact event context. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 35
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 35
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 35
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 36,
+      "source_text": "          DIC_PRIVATE_FREE_COMPENSATING_MODE: 'YES'",
+      "classification": "setting",
+      "behavior_and_specific_review": "Private GitHub Free compensating mode 'YES' hardcoded; verify controller enforces authorized alternate protections.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Setting behavior depends on enclosing event/job; no observed defect solely in this source line. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 36
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 36
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 36
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 37,
+      "source_text": "          DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED: ${{ vars.DIC_NETLIFY_PRODUCTION_BRANCH_VERIFIED }}",
+      "classification": "expression",
+      "behavior_and_specific_review": "Netlify production branch verified variable gates provider safety, actual readback required.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Ref/branch SHA, token or trigger expression must be validated in exact event context. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 37
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 37
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 37
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 38,
+      "source_text": "          DIC_RELEASE_CONTROLLER_VERIFIED: ${{ vars.DIC_RELEASE_CONTROLLER_VERIFIED }}",
+      "classification": "expression",
+      "behavior_and_specific_review": "Release controller verified variable gates exact one-use publication behavior.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Ref/branch SHA, token or trigger expression must be validated in exact event context. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 38
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 38
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 38
+        },
+        "exact_identical": true
+      },
+      "testability": "Check GitHub Actions syntax, read exact source run steps and dependencies",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    },
+    {
+      "line": 39,
+      "source_text": "        run: node scripts/release/controlled-release-runner.mjs",
+      "classification": "command",
+      "behavior_and_specific_review": "Node controlled-release-runner.mjs runs privileged code; audit caller/side effects separately, never invoke here.",
+      "quality": "Individually read and contextually interpreted exact source line; no automatic correctness inference",
+      "bug_security_privacy_performance_risk": "Script may access privileged state, fail or under-test; caller and run logs required. Privileged production workflow, code review only, no triggering.",
+      "dead_or_obsolete": "Frozen/pinned/live exact identical source; cannot label dead merely because historic branch or comment appears; preserve immutable frozen.",
+      "redundancy_duplicate": "No demonstrated safe-to-delete active duplicate; trace cross-workflow callers and actual CI timing before optimizations.",
+      "counterparts": {
+        "original": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 39
+        },
+        "pinned": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 39
+        },
+        "observed_live": {
+          "path": ".github/workflows/dic-chat-approved-release.yml",
+          "blob_sha": "6e9d973731975c9de65a3628153aba635bbd1d25",
+          "line": 39
+        },
+        "exact_identical": true
+      },
+      "testability": "Run isolated/focused nonproduction test of script, inspect exit code & side effect guard",
+      "safe_fix_or_removal": "No unproven deletion or security weakening; reproduce defect and test protected paths before edits.",
+      "locked_decision_fit": "Sensitive: follow Nov3 #457 owner-only one-command publish and separate release approval; no source audit authority to invoke production.",
+      "reviewer": "AI direct source-line interpretation; not independent human certification"
+    }
+  ],
+  "strict_credit": {
+    "frozen": 39,
+    "pinned": 39,
+    "live_unchanged": 39,
+    "old_v2_increment": 0
+  },
+  "findings": [
+    {
+      "status": "HIGH_RISK_RELEASE_BOUNDARY",
+      "summary": "Read-only review of GitHub main release request workflow with write permissions and persisted credentials. Need trace guarded controller and compare current Locked owner release policy before considering modifications. Never dispatch production."
+    }
+  ],
+  "check": {
+    "source_blobs_exact": "PASS",
+    "line_number_integrity": "PASS",
+    "runtime_tests": "NOT_EXECUTED_DOCS_ONLY",
+    "no_deployment": true
+  },
+  "next_file": ".github/workflows/dic-single-use-release.yml",
+  "review_state": "IN_PROGRESS"
+}

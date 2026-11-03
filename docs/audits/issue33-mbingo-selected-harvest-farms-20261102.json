@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "status": "VERIFIED_SCOPED_SYNTHETIC_REGRESSIONS_NO_READY",
+  "original603_number": 217,
+  "original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "development_base_sha": "733b263839af850bf5dfc03bb8ead3c3febc1c99",
+  "official_product_url": "https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural",
+  "selected_h1": "ETHIOPIA GUJI ORGANIC DAMBI UDDO NATURAL",
+  "selected_quotes": [
+    "The meticulous process of harvesting involves hand-picking ripe, red coffee cherries across approximately 450 smallholder farms.",
+    "These cherries are then delivered to the Dambi Uddo Station, where they undergo a critical floating process to remove any underweight or damaged cherries.",
+    "PROCESS: Natural",
+    "CUPPING NOTES: Strawberry, Dried Fruit, Rose, Green Tea"
+  ],
+  "prior_source_register": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv #217 had blank producer; frozen expected is not live evidence.",
+  "change": "Selected station/H1-corroborated harvesting group; preserve literal approximately 450 smallholder farms, not station as producer.",
+  "test_path": "tests/coffee-issue33-mbingo-selected-harvest-farms.test.mjs",
+  "runtime_path": "src/server/coffee-narrative-evidence.mjs",
+  "source_limit": "Official selected H1 and prose independently read via public web November 2; no DNS-pinned raw HTML/hash, actual official parser replay, all603 or hosted GoTrue PASS.",
+  "boundaries": [
+    "original603 CSV/captures/oracle and 153/29 caveats immutable",
+    "#267 V2 and #96 unchanged",
+    "PR367 excluded",
+    "no READY/deployment/provider/member writes"
+  ],
+  "integration": {
+    "pr": 406,
+    "pr_head_sha": "bcb4b236c090080e012047adf73162343bade099",
+    "merged_sha": "c3a80a1688573a9912cfe9052542083c8b8c5fd1",
+    "tree_parity": "GitHub compare PR head to merge ahead 1 / behind 0 / zero changed files",
+    "checks": {
+      "node_run": 41470274683,
+      "node_pass": 2260,
+      "node_fail": 0,
+      "node_skip": 6,
+      "cloud_run": 41470274923,
+      "cloud_pass": 1734,
+      "cloud_fail": 0,
+      "approval_run": 41470274681,
+      "security_run": 41470274758,
+      "sql_run": 41470274678,
+      "review_run": 41470274725,
+      "exact_source_archive_run": 41470274689,
+      "frozen603_run": 41470274718,
+      "frozen603_conclusion": "SKIPPED"
+    }
+  },
+  "remaining": "Exact current official raw URL HTML/hash and current-page parser replay not performed. Complete original603 acceptance and hosted member GoTrue not claimed. Narrow synthetic source repair integrated, but parent Issue33 remains IN_PROGRESS."
+}

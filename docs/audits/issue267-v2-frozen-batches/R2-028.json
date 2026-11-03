@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "R2-028",
+  "track": "V2_FROZEN_HISTORICAL_SEMANTIC_REREVIEW",
+  "review_date_utc": "2026-11-02",
+  "reviewer": "ChatGPT AI assistant (not human)",
+  "method": "Directly read and semantically interpreted each numbered frozen original line 241–400 in order; machine inventories, previous V1 and automated scans credited zero",
+  "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "source_tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+  "source_inventory": "docs/audits/issue267-frozen-source-inventory.json",
+  "reviewed_files": [
+    {
+      "path": "docs/DECISION_LEDGER.json",
+      "git_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "original_inventory_index_1_based": 59,
+      "first_line": 241,
+      "last_line": 400,
+      "line_count": 160,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 241,
+          "last_line": 247,
+          "interpretation": "Closes prior Admin queue decision and locks simple default equipment setup plus optional remembered additional setups."
+        },
+        {
+          "first_line": 248,
+          "last_line": 253,
+          "interpretation": "Each shot must retain immutable equipment setup/version snapshot, not reinterpret old shots after configuration changes."
+        },
+        {
+          "first_line": 254,
+          "last_line": 259,
+          "interpretation": "Dose required; last actual dose for same coffee+setup takes precedence over setup Usual Dose."
+        },
+        {
+          "first_line": 260,
+          "last_line": 265,
+          "interpretation": "Yield required but must start blank for each new shot, preventing accidental reuse."
+        },
+        {
+          "first_line": 266,
+          "last_line": 271,
+          "interpretation": "Time required and must start blank; do not infer a time from style windows."
+        },
+        {
+          "first_line": 272,
+          "last_line": 277,
+          "interpretation": "Actual grind required; prefill only same coffee+setup+style actual, otherwise blank."
+        },
+        {
+          "first_line": 278,
+          "last_line": 283,
+          "interpretation": "Suggested grind is distinct from actual; explicit Use Recommendation copies suggestion and records provenance."
+        },
+        {
+          "first_line": 284,
+          "last_line": 289,
+          "interpretation": "Optional temperature prefill follows exact-style actual then other-style actual for same coffee/setup; otherwise blank."
+        },
+        {
+          "first_line": 290,
+          "last_line": 295,
+          "interpretation": "Suggested temperature is separate, opt-in to copy; deviation does not trigger automatic judgment."
+        },
+        {
+          "first_line": 296,
+          "last_line": 301,
+          "interpretation": "Recommendation remains visible for user confirmation even if user enters a different actual."
+        },
+        {
+          "first_line": 302,
+          "last_line": 307,
+          "interpretation": "Successful recipe must derive robust range/window and centerpoint from repeated evidence, not one magical value."
+        },
+        {
+          "first_line": 308,
+          "last_line": 313,
+          "interpretation": "Materially different successful recipe families remain separate; do not average across styles/families."
+        },
+        {
+          "first_line": 314,
+          "last_line": 319,
+          "interpretation": "Prior successful alternates remain accessible with current recipe prominent and alternates collapsed."
+        },
+        {
+          "first_line": 320,
+          "last_line": 325,
+          "interpretation": "Taste preferences can select among distinct valid families; line320 closes prior object."
+        },
+        {
+          "first_line": 326,
+          "last_line": 331,
+          "interpretation": "Historical experiment meaningful-change thresholds: dose 0.5g, yield 5g, time 5s, temp 2C/~4F, adaptive grind or style; later scoped Locked supersessions control."
+        },
+        {
+          "first_line": 332,
+          "last_line": 337,
+          "interpretation": "Any single qualifying threshold is sufficient to offer, not automatically begin, an experiment."
+        },
+        {
+          "first_line": 338,
+          "last_line": 343,
+          "interpretation": "Experiment prompt comes after rating, not during shot entry; preserves fast Log Shot flow."
+        },
+        {
+          "first_line": 344,
+          "last_line": 349,
+          "interpretation": "Explicit user confirmation is required before creating an experiment workspace."
+        },
+        {
+          "first_line": 350,
+          "last_line": 355,
+          "interpretation": "Subtle Experiment badge/panel differentiates candidate from established recipe without overwriting established state."
+        },
+        {
+          "first_line": 356,
+          "last_line": 361,
+          "interpretation": "Subsequent shots remain associated with active experiment until explicitly ended or promoted."
+        },
+        {
+          "first_line": 362,
+          "last_line": 367,
+          "interpretation": "First green materially different shot creates candidate; second successful repeat confirms alternate."
+        },
+        {
+          "first_line": 368,
+          "last_line": 373,
+          "interpretation": "Owner can promote candidate as current after first successful shot, separate from two-shot confirmation."
+        },
+        {
+          "first_line": 374,
+          "last_line": 379,
+          "interpretation": "Failed experiment ending returns to prior preferred recipe, retaining historical shot evidence."
+        },
+        {
+          "first_line": 380,
+          "last_line": 385,
+          "interpretation": "Successful nonpreferred green experiment remains valid and Community eligible even when user reverts preference."
+        },
+        {
+          "first_line": 386,
+          "last_line": 391,
+          "interpretation": "Remove rigid automatic styleFromNumbers reclassification; respect intentional shot style."
+        },
+        {
+          "first_line": 392,
+          "last_line": 397,
+          "interpretation": "Style ranges are guidelines/reference points, not mandatory validity bounds."
+        },
+        {
+          "first_line": 398,
+          "last_line": 400,
+          "interpretation": "Begins next Locked style decision; its content continues after line400 and is not yet credited."
+        }
+      ],
+      "current_counterpart": {
+        "paths": [
+          "docs/DECISION_LEDGER.json",
+          "docs/MASTER_SPECIFICATION.md",
+          "site/lib/engine.js",
+          "src/server/coffee-identity-evidence.mjs"
+        ],
+        "ref": "development/backend-foundation",
+        "observed_development_sha": "58652ba00c2444b9e22944f615961b1225d27279",
+        "disposition": "Apply current explicit owner supersessions; engine/shot UI runtime and authenticated persistence not exercised."
+      },
+      "quality_risk_locked_fit": "Preserve immutable setup/shot history, actual-vs-suggested values, fast rating-first experiment consent, separate successful families, privacy-safe Community eligibility and user-selected style.",
+      "verification_and_testability": "Original blob and exact 160 numbered lines directly interpreted; no live member/shot/database, browser, recommendation runtime, or provider test executed.",
+      "disposition": "HISTORICAL_LOCKED_BASELINE_NO_PROVEN_CURRENT_DEFECT",
+      "source_evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9/docs/DECISION_LEDGER.json#L241-L400"
+    }
+  ],
+  "batch_lines": 160,
+  "previous_v2_lines": 5131,
+  "total_v2_lines": 5291,
+  "remaining_frozen_lines": 574670,
+  "next_file_index_1_based": 59,
+  "next_file": "docs/DECISION_LEDGER.json",
+  "next_line_1_based": 401,
+  "findings": [
+    "Historical thresholds and style guidance require explicit later supersession mapping; do not treat this frozen baseline as current runtime proof.",
+    "Equipment snapshots, blank yield/time, separate suggestions, experiments and successful recipe families are preservation requirements; no current defect established."
+  ],
+  "code_changes": 0,
+  "production_changes": 0,
+  "tests_executed": [
+    "Read-only source/blob SHA checks and append-only range arithmetic; no application execution"
+  ]
+}

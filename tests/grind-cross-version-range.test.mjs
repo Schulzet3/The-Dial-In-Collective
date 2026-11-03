@@ -62,3 +62,46 @@ test('unrelated grinder/burr snapshot cannot become a translated old reference',
  assert.equal(advice.value,47.5);
  assert.equal(advice.proven,false);
 });
+
+test('out-of-range historical dial readings do not become invented range endpoints',()=>{
+ for(const grinderSetting of [-0.1,5.1]){
+  const {s,v,coffee,basket}=fixture();
+  v.grinderMin=10;v.grinderMax=60;
+  const sh=prior(coffee,{grindSetting:grinderSetting});
+  const before=structuredClone(sh);
+  assert.equal(translateGrind(sh,v),null);
+  s.shots.push(sh);
+  const guidance=grindGuidance(s,coffee,'Turbo',basket,'standard');
+  assert.equal(guidance.value,47.5);
+  assert.equal(guidance.proven,false);
+  assert.match(guidance.source,/Espresso range starting estimate/);
+  assert.deepEqual(sh,before,'an existing measured shot must not be rewritten');
+ }
+});
+
+test('old same-version calibration also ignores recorded out-of-range grind',()=>{
+ const {s,v,coffee,basket}=fixture();
+ v.grinderMin=10;v.grinderMax=60;
+ s.shots.push(prior(coffee,{
+  setupVersionId:v.id,calibrationId:'previous-cal',timestamp:'2026-10-20T12:00:00Z',
+  grindSetting:5.1
+ }));
+ const guidance=grindGuidance(s,coffee,'Turbo',basket,'standard');
+ assert.equal(guidance.value,47.5);
+ assert.equal(guidance.proven,false);
+ assert.match(guidance.source,/Espresso range starting estimate/);
+});
+
+test('old espresso-scale endpoints remain valid translation evidence',()=>{
+ for(const [grindSetting,expected] of [[0,10],[5,60]]){
+  const {s,v,coffee,basket}=fixture();
+  v.grinderMin=10;v.grinderMax=60;
+  const sh=prior(coffee,{grindSetting});
+  assert.equal(translateGrind(sh,v),expected);
+  s.shots.push(sh);
+  const guidance=grindGuidance(s,coffee,'Turbo',basket,'standard');
+  assert.equal(guidance.value,expected);
+  assert.equal(guidance.proven,false);
+  assert.match(guidance.source,/relative range estimate/);
+ }
+});

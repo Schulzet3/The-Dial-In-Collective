@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - development/backend-foundation
+      - 'release-candidates/**'
       - work/setup-feed-history-recovery-20261014
     paths:
-      - '.github/workflows/dic-ready-batch-certification.yml'
       - 'site/**'
       - 'supabase/migrations/**'
       - 'tests/**'
@@ -15,6 +15,7 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - '.github/workflows/cloud-regression.yml'
+      - 'docs/RELEASE_CANDIDATE.json'
   pull_request:
     branches:
       - development/backend-foundation
@@ -22,6 +23,7 @@ on:
 
 permissions:
   contents: read
+
 
 jobs:
   cloud-tests:
@@ -32,83 +34,99 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Classify documentation-only change (unknown means full CI)
+      - name: Classify cloud/offline changes
         id: scope
         env:
           DIC_CI_EVENT: ${{ github.event_name }}
           DIC_CI_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
-      - name: Explain optimized no-op CI
-        if: steps.scope.outputs.docs_only == 'true'
-        run: echo 'Documentation-only change; expensive suite not applicable; exact-source release guard remains in place.'
-      - uses: actions/setup-node@v6
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Explicit targeted cloud NOT_APPLICABLE
+        if: steps.scope.outputs.cloud_mode == 'none'
+        run: |
+          echo 'NOT_APPLICABLE: cloud-specific tests not needed; high-risk full Node is in validate.'
+      - uses: actions/setup-node@v7.1.0
+        if: steps.scope.outputs.cloud_mode == 'targeted'
         with:
           node-version: '22'
           cache: 'npm'
-      - name: Install locked runtime dependencies
-        if: steps.scope.outputs.docs_only != 'true'
-        run: node scripts/audit/measure-stage.mjs --name install --out qa_artifacts/ci-metrics/cloud.jsonl -- npm ci --ignore-scripts --no-audit --no-fund
-      - name: Cloud unit and regression tests
-        if: steps.scope.outputs.docs_only != 'true'
-        run: node scripts/audit/measure-stage.mjs --name cloud-tests --out qa_artifacts/ci-metrics/cloud.jsonl -- npm run test:cloud
-      - name: Syntax check
-        if: steps.scope.outputs.docs_only != 'true'
-        run: node --check site/cloud/main.js && node --check site/cloud/shot_card.js && node --check site/admin/main.js && node --check site/cloud/coffee-match-ui.js
-      - name: Build allowlisted cloud preview
-        if: steps.scope.outputs.docs_only != 'true'
-        run: node scripts/audit/measure-stage.mjs --name build --out qa_artifacts/ci-metrics/cloud.jsonl -- npm run build:cloud
-        env:
-          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
-          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_build_only_not_for_deployment
-      - name: Retain cloud regression timing receipts even on failure
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: dic-cloud-timing-${{ github.run_id }}
-          path: qa_artifacts/ci-metrics/cloud.jsonl
-          if-no-files-found: warn
-          retention-days: 7
-
+      - name: Install cloud test dependencies once
+        if: steps.scope.outputs.cloud_mode == 'targeted'
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run affected cloud/offline/Admin/coffee UI tests
+        if: steps.scope.outputs.cloud_mode == 'targeted'
+        run: node --test tests/cloud*.test.mjs tests/admin-*.test.mjs tests/offline-*.test.mjs tests/pwa-shell.test.mjs tests/coffee-duplicate-first-client.test.mjs tests/coffee-source-status-ui.test.mjs tests/recipe-family-selection.test.mjs tests/shot-temperature-preservation.test.mjs
   mobile-browser-qa:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 22
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Classify documentation-only change (unknown means full CI)
+      - name: Classify browser, visual and single-build impact
         id: scope
         env:
           DIC_CI_EVENT: ${{ github.event_name }}
           DIC_CI_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
-      - name: Explain optimized no-op CI
-        if: steps.scope.outputs.docs_only == 'true'
-        run: echo 'Documentation-only change; expensive suite not applicable; exact-source release guard remains in place.'
+      - name: Explicit browser NOT_APPLICABLE
+        if: steps.scope.outputs.browser_mode == 'none'
+        run: |
+          echo 'NOT_APPLICABLE: no UI, Auth or browser risk.'
+      - uses: actions/setup-node@v7.1.0
+        if: steps.scope.outputs.build_browser == 'true'
+        with:
+          node-version: '22'
+          cache: 'npm'
+      - name: Install locked dependencies for browser-owned build
+        if: steps.scope.outputs.build_browser == 'true'
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build shipped application ONCE for UI, visual or Auth
+        if: steps.scope.outputs.build_browser == 'true'
+        env:
+          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
+          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_browser_nonfunctional
+        run: npm run build:cloud
+      - name: Verify shipped file graph and transitive imports
+        if: steps.scope.outputs.build_browser == 'true'
+        run: node scripts/audit/site-integrity.mjs --dist
       - uses: actions/setup-python@v6
-        if: steps.scope.outputs.docs_only != 'true'
+        if: steps.scope.outputs.browser_mode != 'none'
         with:
           python-version: '3.12'
-      - name: Install Playwright and Chromium
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Install one isolated Chromium browser for all relevant acceptance
+        if: steps.scope.outputs.browser_mode != 'none'
         run: |
           python -m pip install playwright==1.55.0
           python -m playwright install --with-deps chromium
-      - name: Exercise 390px phone UX with synthetic accounts
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Test actual compiled app assets in browser
+        if: steps.scope.outputs.browser_mode != 'none'
+        run: python tests/browser/built_app_qa.py
+      - name: Focused visual/contrast and responsive regression
+        if: steps.scope.outputs.browser_mode != 'none'
+        run: python tests/browser/visual_review.py
+      - name: Run 390px Log Shot -> Rate -> Recommendation and New Setup
+        if: steps.scope.outputs.browser_mode == 'ui' || steps.scope.outputs.browser_mode == 'high'
         run: python tests/browser/cloud_owner_qa.py
-      - name: Exercise owner-only admin invitations and member access in 390px Chromium
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Test owner-only invitation browser permissions
+        if: steps.scope.outputs.browser_mode == 'high'
         run: python tests/browser/admin_invitation_qa.py
-      - name: Retain synthetic phone screenshots for review
+      - name: Test real service-worker cached offline reopening
+        if: steps.scope.outputs.browser_mode == 'ui' || steps.scope.outputs.browser_mode == 'high'
+        run: python tests/browser/pwa_offline_qa.py
+      - name: High-risk accessibility and admin records browser acceptance
+        if: steps.scope.outputs.browser_mode == 'high'
+        run: |
+          python tests/browser/issue26_accessibility_qa.py
+          python tests/browser/admin_records_qa.py
+      - uses: actions/upload-artifact@v7
         if: always()
-        uses: actions/upload-artifact@v7
         with:
-          name: dic-cloud-phone-qa-${{ github.run_id }}
-          path: qa_artifacts/cloud/
-          if-no-files-found: warn
+          name: dic-risk-browser-${{ github.run_id }}
+          path: qa_artifacts/
           retention-days: 7
+          if-no-files-found: ignore

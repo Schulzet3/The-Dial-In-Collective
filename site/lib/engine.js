@@ -114,7 +114,10 @@ export function translateGrind(sh,v) {
  if(!old||!finite(sh.grindSetting)||!finite(old.grinderMin)||
     !finite(old.grinderMax)||old.grinderMax<=old.grinderMin||
     !finite(v.grinderMin)||!finite(v.grinderMax)||v.grinderMax<=v.grinderMin)return null;
- const pos=clamp((sh.grindSetting-old.grinderMin)/(old.grinderMax-old.grinderMin),0,1);
+ // Do not silently clip an out-of-range historical measurement to a valid
+ // endpoint. Its position on that older espresso scale is not evidence.
+ if(sh.grindSetting<old.grinderMin||sh.grindSetting>old.grinderMax)return null;
+ const pos=(sh.grindSetting-old.grinderMin)/(old.grinderMax-old.grinderMin);
  return round(v.grinderMin+pos*(v.grinderMax-v.grinderMin));
 }
 export function grindGuidance(s,c,style,basket,feed,familyId=null) {

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-10-28",
+  "reconciled_at_utc": "2026-11-03",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
@@ -30,6 +30,7 @@
     "current_owner_beta_member_soft_remove_only_20261018",
     "current_owner_defer_private_hide_shot_retirement_20261021",
     "current_owner_duplicate_first_automatic_catalog_approval_20261021",
+    "current_owner_existing_ssh_backup_key_github_actions_secret_20261102",
     "current_owner_expedited_two_migrations_and_production_20261021",
     "current_owner_extractor_deterministic_only_20261019",
     "current_owner_fast_flow_hybrid_20261022",
@@ -54,6 +55,7 @@
     "current_owner_required_outlier_review",
     "current_owner_retire_hide_shot_backend_20261021",
     "current_owner_retire_screenshot_claude_20261028",
+    "current_owner_risk_based_queue_owner_publishes_only_20261103",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
     "current_owner_single_instruction_development_and_publication_20261022",
@@ -2001,5 +2003,63 @@
     "preserve": "All legacy V1 reviewed-line ledgers and B001+ PR source evidence remain unchanged; never credit V1 as fresh V2.",
     "improvement_scope": "Proven safe current-code dead/obsolete/duplicate removal, bug fixes and optimizations with Locked-decision comparison, focused tests, same-commit journal, nonforce integration and exact-source CI.",
     "limit": "Classification of user instructions only; no V2 line reviewed/tested, no code edits, production changes, existing baseline waiver, queue READY or publication."
+  },
+  "current_owner_existing_ssh_backup_key_github_actions_secret_20261102": {
+    "status": "LOCKED_OWNER_APPROVED_EXISTING_KEY_FIRST_REAL_ARCHIVED_RESTORE_VERIFIED",
+    "date": "2026-11-02",
+    "decision_id": "OPS-OWNER-REUSE-EXISTING-SSH-RECOVERY-KEY-20261102",
+    "issue": 423,
+    "scope": "Existing owner private SSH Ed25519/native age recovery key may be entered DIRECTLY into GitHub encrypted repository Actions secret DIC_ARCHIVE_AGE_IDENTITY by owner. Supersedes only independent automation-only key requirement, not encrypted backups, offline copy or privacy.",
+    "source_verified": "Main ops PR431 merged source 760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c; 137 PR tests included real synthetic SSH key derivation, merged main CI succeeded",
+    "first_live_restore_receipt": "2026-11-03 scheduled GitHub Actions 41709488687, exact main 5b6a056adf9cb6a39ce363f6530859e2239b1970, ZIP SHA256 1cd12b8b9b7ef4dded07cebc96578f2903e9fb3a85195e6afd42e677aa92b746, age decrypt+46-table/Auth+cleanup PASS",
+    "not_yet_verified": [
+      "Original owner private key value is inaccessible through ChatGPT; secure Actions-secret use is verified by actual successful decryption",
+      "Nov1 independently Drive-matched original ciphertext was actually decrypted and 46 tables/Auth restored on Nov3 run 41709488687; future weekly and Drive delivery checks require direct receipts",
+      "Hosted Supabase services, external credentials and Storage file bytes not restored; no production release"
+    ],
+    "preserve": [
+      "Keep owner's offline copy, existing historical archives and encrypted daily backups",
+      "No GitHub source/issues/ChatGPT/Drive uploads of private keys",
+      "Maintain owner-private Drive direct-child destination and existing weekly fresh-snapshot drill",
+      "Never claim production hosted restore or alter Netlify/member/Auth data"
+    ]
+  },
+  "current_owner_risk_based_queue_owner_publishes_only_20261103": {
+    "status": "Locked: risk-based CI and owner-controlled READY publication approved for development only",
+    "issue": 457,
+    "source": "Direct owner November 3 instructions",
+    "approved_scope": "Eliminate routine duplicate tests/builds, source-dependent checks and reuse valid evidence; one-command publication",
+    "rejected_scope": "No proactive release-candidate stage, certify, refresh or deploy",
+    "implementation_paths": [
+      "scripts/audit/ci-scope.mjs",
+      ".github/workflows/cloud-beta-ci.yml",
+      ".github/workflows/cloud-regression.yml",
+      ".github/workflows/isolated-sql-regression.yml",
+      ".github/workflows/visual-review.yml"
+    ],
+    "evidence": "tests/ci-impact.test.mjs and tests/ci-optimization.test.mjs; exact-source CI and provider nonpublication readback must be verified",
+    "verification": {
+      "state": "VERIFIED_NONPUBLISHING",
+      "merged_sha": "7d3418c69120a569c781e91b8e88a4007bb33e4d",
+      "source_tree_sha": "b297c0d658df243cdac82b9b6a110cf5165af229",
+      "pr": 458,
+      "checks": {
+        "approval": 41728785262,
+        "validate": 41728785093,
+        "cloud_and_mobile": 41728785142,
+        "sql": 41728785128,
+        "python_audit": 41728785081,
+        "queue": 41728785159
+      },
+      "node_tests": {
+        "pass": 2297,
+        "fail": 0,
+        "skipped": 6
+      },
+      "original603": "SKIPPED_NOT_PASS",
+      "release": "NOT_AUTHORIZED_NO_CANDIDATE",
+      "netlify_current": "6ae8006cd64b30ae9046e44d",
+      "pending": "FIRST_REAL_OWNER_APPROVED_BATCH_STAGING_AND_PROVIDER_POSTFLIGHT_UNEXERCISED_ISSUE_417"
+    }
   }
 }

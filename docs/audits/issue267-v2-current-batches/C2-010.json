@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "C2-010",
+  "track": "V2_CURRENT_EXECUTABLE_SEMANTIC_REVIEW",
+  "review_date_utc": "2026-11-02",
+  "reviewer": "ChatGPT AI assistant (not human)",
+  "method": "Direct numbered semantic reading of pinned report.py remainder and retention.py first 100 lines; no automated/V1 credit",
+  "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "source_inventory": "docs/audits/issue267-v2-current-code-inventory-20261101.json",
+  "reviewed_files": [
+    {
+      "path": "scripts/audit/coffee-corpus-report.py",
+      "git_blob_sha": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+      "original_inventory_index_1_based": 43,
+      "first_line": 221,
+      "last_line": 370,
+      "line_count": 150,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 221,
+          "last_line": 261,
+          "interpretation": "Adjudication rows are linked only by known case IDs; each candidate is crosschecked against frozen roaster/source, packet SHA, original expected canonical values, baseline, retention labels and context before report assembly."
+        },
+        {
+          "first_line": 262,
+          "last_line": 300,
+          "interpretation": "Assembles timing statistics and hashes, human-readable change descriptions, explicit UNKNOWN integration, evidence limits, non-universal accuracy and no live authenticated/network proof; timing is local replay only."
+        },
+        {
+          "first_line": 301,
+          "last_line": 320,
+          "interpretation": "Optional final audit receipt must match source fingerprint/oracle/counts; preserves separate integration state and output hash, HTML JSON escapes `<` and Unicode separators to avoid inline-script breakouts."
+        },
+        {
+          "first_line": 321,
+          "last_line": 346,
+          "interpretation": "Standalone offline HTML/CSP, mobile CSS, local case filtering, 603 fixed corpus counts and textContent rendering; only explicit HTTPS source links allowed with no credentials; not production UI."
+        },
+        {
+          "first_line": 347,
+          "last_line": 361,
+          "interpretation": "Case detail exposes evidence, canonical/retention differences, ambiguity and capture hashes; DOM is text-created, search/status/reset filter; no network fetch or mutation in report."
+        },
+        {
+          "first_line": 362,
+          "last_line": 370,
+          "interpretation": "CLI accepts only explicit local corpus/receipt paths and writes a report; not an application runtime endpoint."
+        }
+      ],
+      "quality_and_locked_fit": "Preserve immutable original603 oracle/captures and #33 scientific extraction ownership; no production/network/member mutation.",
+      "risk_and_obsolescence": "Local audit-only tools; source quotes, synthetic auth and report timing are not live member or production verification.",
+      "verification_and_testability": "Direct AI-not-human interpretation of immutable GitHub numbered source; no runtime test or performance benchmark executed for this batch.",
+      "current_counterpart": {
+        "path": "scripts/audit/coffee-corpus-report.py; scripts/audit/coffee-corpus-retention.py; docs/workstreams/issue-33.md",
+        "disposition": "No speculative current code deletion or cross-owner change."
+      },
+      "disposition": "SOURCE_REVIEW_ONLY_NO_INDEPENDENTLY_PROVEN_SAFE_EDIT"
+    },
+    {
+      "path": "scripts/audit/coffee-corpus-retention.py",
+      "git_blob_sha": "9b5250457e1e5b6d91e738b54bafcba78df10043",
+      "original_inventory_index_1_based": 44,
+      "first_line": 1,
+      "last_line": 100,
+      "line_count": 100,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 1,
+          "last_line": 20,
+          "interpretation": "Conservative source-retention verifier explicitly separates source quote presence from factual accuracy/variant context; packet attestation pinned and immutable oracle preserved."
+        },
+        {
+          "first_line": 21,
+          "last_line": 36,
+          "interpretation": "Fail-closed assertion helper, SHA256 and Unicode/HTML/punctuation normalization preserve numbers and wording rather than accepting token overlap."
+        },
+        {
+          "first_line": 37,
+          "last_line": 57,
+          "interpretation": "JSON Pointer resolution validates syntax, escapes, list indices and key existence; invalid/absent pointer returns unconfirmed, not a fabricated fact."
+        },
+        {
+          "first_line": 58,
+          "last_line": 81,
+          "interpretation": "Typed JSON equality avoids Python bool/int conflation and checks nested structures; restricted JSONPath-to-pointer conversion rejects unsupported expressions."
+        },
+        {
+          "first_line": 82,
+          "last_line": 100,
+          "interpretation": "Begins lossless structured-record reconstruction grouped by exact observed URL/path, bounded path length, valid pointer escapes and <=128 typed chunk indices; remainder of file not yet reviewed."
+        }
+      ],
+      "quality_and_locked_fit": "Preserve immutable original603 oracle/captures and #33 scientific extraction ownership; no production/network/member mutation.",
+      "risk_and_obsolescence": "Local audit-only tools; source quotes, synthetic auth and report timing are not live member or production verification.",
+      "verification_and_testability": "Direct AI-not-human interpretation of immutable GitHub numbered source; no runtime test or performance benchmark executed for this batch.",
+      "current_counterpart": {
+        "path": "scripts/audit/coffee-corpus-report.py; scripts/audit/coffee-corpus-retention.py; docs/workstreams/issue-33.md",
+        "disposition": "No speculative current code deletion or cross-owner change."
+      },
+      "disposition": "SOURCE_REVIEW_ONLY_NO_INDEPENDENTLY_PROVEN_SAFE_EDIT"
+    }
+  ],
+  "batch_lines": 250,
+  "previous_v2_lines": 3629,
+  "total_v2_lines": 3879,
+  "next_file": "scripts/audit/coffee-corpus-retention.py",
+  "next_line_1_based": 101,
+  "findings": [
+    "Local report builder escapes inline JSON and uses textContent; it distinguishes source-retention evidence from extraction correctness and source integration from deployment.",
+    "Retention verifier uses conservative typed equality, pointer validation and immutable packet attestation; only first 100/427 lines reviewed.",
+    "No independently demonstrated current defect, unused module or measured performance improvement; no #33-owned code changes.",
+    "Pinned source has concurrent post-snapshot changes; they require separate D2 review and do not add to pinned current semantic coverage."
+  ],
+  "code_changes": 0,
+  "production_changes": 0,
+  "tests_executed": []
+}

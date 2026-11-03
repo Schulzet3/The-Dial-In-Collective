@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport}
+import {deployableChangedPaths,queueSchemaErrors,assessReleaseQueue,assessIntakeCoverage,formatQueueReport,assertApprovedReadyBatch}
  from '../scripts/release/release-queue.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40);
 const queued={id:'DIC-Q-100',issue:100,pr:101,title:'Safe shot-page update',
@@ -32,6 +32,16 @@ test('never release mixed Ready+unready merged source, including overlapping pat
   assert.equal(result.ready,false);
   assert.match(result.errors.join(' '),/unready MERGED/);
  }
+});
+test('candidate must descend from published source, including overlapping READY paths',()=>{
+ const disconnected=(from,to)=>from===A&&to===C?false:graph(from,to);
+ const result=assess(q,['site/cloud/shot_card.js'],disconnected);
+ assert.equal(result.ready,false);
+ assert.match(result.errors.join(' '),/Candidate source does not descend from published baseline/);
+ const unavailable=(from,to)=>{if(from===A&&to===C)throw Error('missing Git object');return graph(from,to);};
+ const uncertain=assess(q,['site/cloud/shot_card.js'],unavailable);
+ assert.equal(uncertain.ready,false);
+ assert.match(uncertain.errors.join(' '),/Cannot verify candidate ancestry/);
 });
 test('open unmerged PR stays tracked but does not enter a release batch',()=>{
  const pending={...queued,id:'DIC-Q-102',issue:102,state:'TESTING',merged_source_sha:null,tests:[],ci_runs:[],blockers:['PR open']};
@@ -79,4 +89,20 @@ test('a separately applied Supabase SQL-only migration is covered only by exact 
  assert.equal(assessIntakeCoverage(candidate,['site/cloud/shot_card.js',sql,'supabase/migrations/new.sql'],{currentBlobSha:()=>C}).tracked,false);
  assert.equal(assessIntakeCoverage({...q,items:[queued,{...deployed,scope_paths:['site/cloud/shot_card.js']}]},['site/cloud/shot_card.js'],{currentBlobSha:()=>C}).tracked,true,
   'a separate non-DEPLOYED READY item still covers its own frontend path');
+});
+test('DEPLOYED label cannot launder unpublished merged changes into an approved release',()=>{
+ const premature={...queued,id:'DIC-Q-101',issue:101,state:'DEPLOYED',scope_paths:['site/cloud/shot_card.js']};
+ const result=assess({...q,items:[queued,premature]});
+ assert.equal(result.ready,false);
+ assert.match(result.errors.join(' '),/DEPLOYED-labelled merged work is new/);
+ const baselineDelivered={...premature,merged_source_sha:A};
+ assert.equal(assess({...q,items:[queued,baselineDelivered]}).ready,true);
+});
+
+test('release grant must exactly name READY items, not merely cover overlapping files',()=>{
+ const result=assess();
+ assert.equal(assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},result),true);
+ for(const ids of [undefined,[],['DIC-Q-101'],['DIC-Q-100','DIC-Q-101'],['DIC-Q-100','DIC-Q-100']])
+  assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:ids},result));
+ assert.throws(()=>assertApprovedReadyBatch({approved_ready_item_ids:['DIC-Q-100']},{...result,ready:false}));
 });

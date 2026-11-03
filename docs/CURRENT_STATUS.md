@@ -1,3 +1,107 @@
+## November 3 UTC — Issue #33 selected Buncho origin fix VERIFIED / narrow READY, NOT DEPLOYED
+
+[PR #456](https://github.com/Schulzet3/The-Dial-In-Collective/pull/456) nonforce merged `4f36301cc25ea61e593590b5a59ef13df4227da4`, identical to its exact passing tested Git tree; current [La Terza Ethiopia Sidama Buncho](https://laterzacoffee.com/products/ethiopia-sidama-buncho-honey-processed) directly places selected Buncho station in **Sidama, Ethiopia**, not the founder's former **Girja** station. Five adversarial tests; final PR-head 7/7 applicable CI SUCCESS. Exact merged Node/lint/build [41728038875](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728038875) **2292 PASS / 0 FAIL / 6 configuration SKIP**, cloud/mobile [41728038937](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728038937) **1763 cloud PASS / 0 FAIL**, approval41728039030 and READY intake41728038942 SUCCESS. Real guarded public source [41728039047](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728039047): **20/20 official current selected pages fetched/parsed**, #191 H1 exact, origin Sidama, Ethiopia, process Honey, notes retained, conflicts empty; original603 frozen workflow SKIPPED, not PASS. Durable receipt `docs/audits/issue33-buncho-selected-station-current20-20261103.json`. Narrow `DIC-Q-33-selected-buncho-station-history` READY, NOT DEPLOYED; #33 remains OPEN for 153 contextual/29 literal-qualified cases and other unresolved source certification. No production, SQL/Auth/Edge/member operations; Netlify Release14 remains current. [skip netlify]
+
+---
+
+## November 3, 2026 — #457 OWNER-CONTROLLED RISK-SCOPED CI MERGED / VERIFIED (NO PUBLICATION)
+
+**COMPLETED / VERIFIED:** PR [#458](https://github.com/Schulzet3/The-Dial-In-Collective/pull/458) non-force squash merged into development at `7d3418c69120a569c781e91b8e88a4007bb33e4d` with Git tree `b297c0d658df243cdac82b9b6a110cf5165af229`, byte-identical to final passing PR head `e8d7d8f01c637e9b53a5074f3372ae6fffd33090` (same Git tree). Includes same-commit workstream journal and concurrent approved #33 source preservation.
+
+Exact PR-head and merged-source required GitHub checks **approval, validate, cloud-tests, mobile-browser-qa, sql all SUCCESS**; merged Python audit and lightweight queue certification also SUCCESS. Final merged workflow runs: approval [41728785262](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728785262), validate [41728785093](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728785093) (**2,297 Node PASS / 0 FAIL / 6 intentional SKIP of 2,303; lint PASS**), cloud/browser [41728785142](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728785142), SQL [41728785128](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728785128), Python [41728785081](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728785081), and lightweight queue [41728785159](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728785159). Under risk-based routing, redundant cloud full-suite step was correctly **NOT_APPLICABLE**, not a claimed test PASS. SQL isolated schema/signed JWT/snapshot checks and isolated browser with one build genuinely passed. Original frozen603 source replay was SKIPPED / not PASS.
+
+Owner-approved changes: docs-only approval/continuity, focused low visual, medium Log Shot/recommendation/extractor/cloud, comprehensive high Auth/SQL/CI/unknown; no duplicate routine app build/browser suite, reusable exact-source evidence. **No proactive READY candidate creation/certification, grant or release.** Exact published-to-candidate source risk check enforced. Five required status names and one-use single nonforce Git publisher retained. Queue remains **89 DEPLOYED / 1 READY (#335) / 3 IN_PROGRESS**; Netlify Release14 `6ae8006cd64b30ae9046e44d` READY/current, unchanged; no Supabase/member/backup/provider publication writes. First real owner-authorized READY batch end-to-end stage-and-Netlify proof remains **UNEXERCISED** under #417 until an explicit separate publication instruction. Project Settings require owner manual paste of 7,995-character GitHub Project Instructions; GitHub commits cannot change ChatGPT Settings.
+
+---
+
+## November 3, 2026 — #423 FIRST AUTOMATIC SAVED-ENCRYPTED-ARCHIVE RESTORE VERIFIED PASS
+
+Scheduled GitHub Actions encrypted archive recovery 2026-11-03 20:06:34 UTC, run 41709488687, succeeded on main SHA 5b6a056adf9cb6a39ce363f6530859e2239b1970. Original Nov1 GitHub ZIP (backup 41316998335, artifact 13087632285) independently matches private Google Drive archive SHA-256 1cd12b8b9b7ef4dded07cebc96578f2903e9fb3a85195e6afd42e677aa92b746. Actual age decryption, manifest/payload integrity, offline restore of 46 first-party tables/Auth identities/metadata, and plaintext/DB cleanup PASS. Hosted Supabase services, external credentials and Storage file bytes are OUT OF SCOPE. Later GH artifact restores do not independently verify each Drive delivery; existing watchdog does. GitHub originally scheduled 13:17 UTC but ran 20:06 UTC (6h49m delay). Actual [run 41709488687](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41709488687) success, not inferred from schedule or CI. Issue #423 first-live-restore blocker resolved. Continue monitoring future GH ciphertext restore vs separate private Drive delivery, no app deploy or production DB/member changes.
+
+---
+
+## November 2 UTC — #335 out-of-range historical grinder reading guard READY, NOT DEPLOYED
+
+[#442](https://github.com/Schulzet3/The-Dial-In-Collective/pull/442) merged nonforce at `e2957ab1ada581b593302ceaf56d8f14c6481cce`: discard historical grind-setting translations outside the recorded original espresso range instead of clamping into fabricated current-range endpoint evidence; preserve all shots and valid-range estimates. One new-test fixture typo corrected after preserved initial failing run. Corrected PR-head seven applicable checks SUCCESS, merged-source validate/approval/cloud/mobile/review/READY certification SUCCESS. Frozen603 SKIPPED, not PASS. Scoped `DIC-Q-335-historical-grind-range-evidence` is READY pending separately authorized release. No Netlify, Supabase, member-data writes or empirical taste improvement assertion.
+
+---
+
+## November 2 UTC — Issue #423 encrypted-archive restore AUTOMATED SCHEDULE, real test PENDING
+
+Owner requires automatic isolated restoration without recurring manual GitHub clicks. Operations PR #437 is merged to main `5b6a056adf9cb6a39ce363f6530859e2239b1970` with passing exact-source CI. Tuesday 13:17 UTC GitHub Actions scheduled saved-archive restore: first pin Nov1 independently Drive/GitHub matched ZIP; subsequent recent scheduled GitHub artifacts only, which do not independently prove Drive delivery. Existing Backup Watchdog was extended and confirmed enabled, monitoring both weekly restore jobs and daily courier delivery. **NO actual archived age decryption/isolated PostgreSQL restoration has passed yet**; Issue #423 remains open. No app publication, extra exports or production SQL/Auth/member writes.
+
+---
+
+## November 2 UTC — #423 existing SSH key approved (NO LIVE RESTORE)
+
+Owner authorized using existing private OpenSSH Ed25519/age recovery identity only as encrypted GitHub repository Actions secret DIC_ARCHIVE_AGE_IDENTITY; preserve owner offline copy. Operations PR #431 merged `760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c`, PR CI 137 tests PASS including actual synthetic SSH key pair. Owner-side secret installation and historical saved Drive ciphertext isolated restoration remain BLOCKED/UNTESTED. This changes backup key custody only, not encryption, DB/Auth/privacy, release queue or Netlify. Canonical Locked entry: current_owner_existing_ssh_backup_key_github_actions_secret_20261102.
+
+---
+
+## November 2 UTC — #417 source isolation code and exact CI VERIFIED, no publication
+
+Main PR #424 merged at `827cc068aa8d9a6f186bdaa86684ff732e82531a`; main PR #427 merged at `af9c913d05277b1c4b059e6165fcad6f146849bb`. Exact main GitHub CI verified **129 tests PASS / 0 FAIL**, including real disposable-Git READY-only stage, same-file unready overlap/post-READY source denial, parent/ref/blob checks. Development PR #426 merged at `5e6e32a8cbf86ffd202e1b526ba5de8805cf20c8`; exact merged-source approval, validate, cloud, mobile, SQL, visual and lightweight READY checks all **SUCCESS**. One guarded Git-connected publisher; no immutable API uploader or duplicate READY suite. Queue **89 DEPLOYED / 0 READY / 3 IN_PROGRESS**. No real candidate with READY items exists, so no live candidate GitHub staging or new Netlify publication was performed. Netlify Release14 remains READY/current. Issue #417 tracks first actual READY-batch stage/provider proof and recovery-source pin synchronization; incident #356 is preserved, not backdated. Project Instructions copy updated; only owner may paste into ChatGPT Settings.
+
+---
+
+## November 2 UTC — #417 CI for isolated READY-only source (no deployment)
+
+Nonpublishing candidate-branch check triggers for the existing five mandatory jobs. Source isolation still needs exact-source main integration and a real READY batch before release; current queue has zero READY. This CI-only change does not publish or alter stored member data. See [#417](https://github.com/Schulzet3/The-Dial-In-Collective/issues/417).
+
+---
+
+## November 2 UTC — Owner-authorized streamlined single publisher, no production deployment (#417)
+
+Main PR418 has merged guarded Git-connected controller restoration; latest main exact merged acceptance must be checked before claiming VERIFIED. Dev automatic READY certification will validate queue/intake only; retain existing source-bound Node/cloud/mobile/SQL/approval workflows, eliminate duplicate combined full test/artifact ZIP generation. Exact READY owner IDs and unready/overlapping merged work must block until source isolated and tested. Release14 remains current production; no publication, provider/SQL/Auth/member writes or backup dispatch. This policy is Locked in the Master Spec and Decision Ledger; source-isolation design and active main/provider verification remain tracked under [Issue #417](https://github.com/Schulzet3/The-Dial-In-Collective/issues/417). Historical reports unchanged.
+
+---
+
+## November 2 UTC — #267 V2 R2-016/C2-016 direct source review (PR CI pending)
+
+Frozen original #54 `docs/CURRENT_STATUS.md` lines1–50: **4,132/579,961** fresh V2, **575,829 remaining**, next line51. Pinned current #48 `scripts/audit/coffee-frozen-ci.py` lines611–730: **5,142**, next line731. Distinct ledgers/receipts; 130 inventory line counts pending. No proven safe deletion, current bug, benchmark, app/queue/deploy change. Historic CI/READY not live acceptance; offline guard is in-process and exporter is mocked. See [#267 journal](workstreams/issue-267.md). New exact-source CI pending.
+
+---
+
+## November 2 UTC — #267 V2 R2-015/C2-015 source-bound review (PR CI pending)
+
+Frozen manifest #51–53 **181** newly AI-reviewed original lines: V2 **4,082/579,961**, **575,879 remain**, next #54 `docs/CURRENT_STATUS.md` line1. Independent pinned current #48 `scripts/audit/coffee-frozen-ci.py` **451–610**, +160 = **5,022** current V2; next line611. Frozen/current ledgers and R2-015/C2-015 receipts separate from V1 and post-pin D2. Current inventory **306/436** file counts known, **130 pending**; denominator unknown. Historical October13/18 provider counts and old uppercase password are superseded; selected archive reconstruction bounds preserved. No proven code fix, safe deletion, benchmark, test execution, READY or production change. New exact-source CI pending; see [#267 journal](workstreams/issue-267.md).
+
+---
+
+## November 2 UTC — #267 V2 R2-014/C2-014 source-bound review (PR CI pending)
+
+Frozen manifest #47–50 **180** fresh AI-not-human lines: **3,901/579,961** V2 (**576,060 remain**), next #51 `docs/CROSS_CHAT_HANDOFF_2026-10-13.md` line1. Separate pinned current #48 `scripts/audit/coffee-frozen-ci.py` **201–450**, +250 = **4,862** current V2; next line451. Pinned runner blob matches observed development `22ee8fb7`. Current 436-file inventory 306 line-count verified, 130 pending, full denominator unknown; D2 drift separately uncredited. Historical credit/Community/Corvus observations are not current provider truth. No verified safe deletion, app/runtime edit, benchmark, tests executed, queue or production change. This batch's exact-source CI pending; see [#267 scoped journal](workstreams/issue-267.md).
+
+---
+
+## November 2 UTC — #267 V2 R2-013/C2-013 source-bound review (PR CI pending)
+
+Fresh frozen manifest #42–46 **260** lines, **3,721/579,961** V2 reviewed (**576,240 remain**), next #47 `docs/COMMUNITY_RELEASE_GROUPING_PRODUCTION_READINESS_2026-10-18.md` line1. Separate pinned current #48 `scripts/audit/coffee-frozen-ci.py` lines1–200, **4,612** current V2, next same file line201; 306/436 file line counts verified, 130 pending, full denominator unknown. Fixed stale current inventory metadata from prior C2-012 without changing accepted receipts. Historical credit screenshot, Community count and outlier thresholds are dated; no current code bug/deletion or performance gain proven. Exact PR/merged CI pending; no app/production/READY change. See [#267 journal](workstreams/issue-267.md).
+
+---
+
+## November 2 UTC — #267 V2 R2-011/C2-011 and verified lint correction (PR CI pending)
+
+Frozen V2 **3,217/579,961** (**576,744 remain**), next #37 `docs/BACKEND_CHECKPOINT.md` line1; independent pinned current **4,239**, next #46 `scripts/audit/coffee-extractor-2mb-study.mjs` line1. New R2-011/C2-011 source-bound AI-not-human receipts cover **300 frozen + 360 current** lines, V1 unchanged. D2-003 separately reviewed 51 new Netlify readback/test lines; development `3630797172ed3a98c09f64c4bcd221196170d611` Node CI [41400678018](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41400678018) lint failed unused test mock `opts`; one-line test-only correction is pending exact-source CI. Current inventory 306/436 file line counts known, 130 pending; full denominator unknown. See [#267 journal](workstreams/issue-267.md). No production change.
+
+---
+
+## November 2 UTC — #267 V2 tenth ordered source audit (no app change, exact-source CI pending)
+
+Historical V2 **2,917/579,961** (577,044 remaining), next frozen #34 `docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md` line1; independent pinned current V2 **3,879** lines, next `scripts/audit/coffee-corpus-retention.py` line101. New R2-010/C2-010 source-bound AI-not-human receipts cover **269 historical + 250 current** lines; V1 immutable. Current inventory 306/436 file line counts verified (130 pending), full current denominator unknown. As of development `4566d92aecb0229f470767def4bb0437be8f6f71`, **35** changed/new eligible source paths require separate D2 review, with three previously covered in D2-001/002. PR #358 recovered and merged `4566d92`, exact merged approval CI [41395133937](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41395133937) SUCCESS. This new audit source CI pending. No proven safe code deletion, performance win, app/runtime edit, queue change, publication or provider/member write by #267.
+
+## November 2 UTC — #267 V2 ninth ordered historical/current source audit (not deployed)
+
+Frozen V2 **2,648/579,961** (577,313 remaining), original approval matrix #30 next **line 961**; independent pinned current V2 **3,629** lines, next `scripts/audit/coffee-corpus-report.py` **line 221**. R2-009/C2-009 source-bound receipts cover **320 frozen + 419 current** newly AI-reviewed numbered lines, disjoint from preserved V1. Current snapshot inventory **306/436** line counts verified, **130 pending**; **27** post-pin eligible changed paths remain separately unreviewed as of `61d59c8ef459780a42ea4ab3f887f913e6f16fb5`. No independently established safe deletion or app defect; no runtime/performance/browser/provider acceptance claimed. Release14 isolation issue #356 belongs to its existing owner. Docs-only exact-source CI pending. No queue, production or provider changes.
+
+## November 2 UTC — Issue33 release source isolation discrepancy confirmed (incident #356; no new deployment)
+
+Release14 was already published by its separately authorized controller at SHA `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe` / Netlify `6ae8006cd64b30ae9046e44d` READY/current. Independently verified the published `src/server/coffee-identity-evidence.mjs` blob is identical to PR352's merged #312 locality fix, **although that queue item was TESTING and not one of the 17 authorized release item IDs**. [Issue #356](https://github.com/Schulzet3/The-Dial-In-Collective/issues/356) tracks the release-isolation gate defect. Preserve immutable release grant/item list; classify actual source inclusion as DEPLOYED with explicit out-of-batch caveat rather than falsely claim a new READY or another deployment. Queue 0 READY/89 DEPLOYED/2 IN_PROGRESS. Current official selected 3/3 before/after supports only #312 origin blank → San Jerónimo, Guatemala, all other fields/conflicts unchanged; 153 context-qualified, 29 missing-literal-qualified and original603 acceptance remain unresolved. No hosted authenticated extraction was performed. This was docs/queue reconciliation only; #267 V2 and #96 untouched.
+
+## November 2 UTC — Issue267 V2 eighth ordered batch (documentation-only, no deployment)
+
+Frozen historical V2 **2,328/579,961** (**577,633 remaining**), matrix original #30 next line **641**; independent pinned current-code V2 **3,210** lines, next #41 `scripts/audit/coffee-corpus-replay.mjs` line1. New R2-008/C2-008 receipts record **260+334** freshly AI-reviewed source lines, disjoint from legacy V1. Inventory **306/436** line counts known, **130 pending**; 19 changed eligible source/test/CI paths require separate post-pin delta review. Audit-only image URL malformed-port exception candidate needs #33 fixture; no proven production bug, deletion, or performance change. Existing live READY certification at `8f9ab40b42e48e01be7abd7d17df013e3e1d9cae` failed its queue coverage step; #267 does not change the release queue. Documentation-only exact-source CI pending. No app/provider/production changes by this audit.
+
 ## November 2 UTC — #267 seventh batch exact-source CI repair follow-up
 
 Source `7804151ca701242eb0930d5e1ddac1530dced68b`: approval CI PASS, cloud UX PASS, Python coffee PASS; full Node and automatic READY certification FAILED one existing approval-coverage test because a shortened project-instructions sentence omitted explicit owner no-public-upgrade and branch-protection wording. Restored exact owner policy within 8,000 characters; exact-source Node/certification retest pending. Audit counts remain frozen V2 **2,068/579,961**, current pinned V2 **2,876**; no deployment or queue changes.

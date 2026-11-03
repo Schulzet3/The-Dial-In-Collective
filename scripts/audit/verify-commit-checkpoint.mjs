@@ -5,18 +5,22 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 const work='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
-// Explicit existing READY-batch journal; arbitrary release journal names remain excluded.
-const scopedWork=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+|release-[0-9]{8}|release-ready-batch)\.md$/;
+// Explicit scoped READY and 2026-11-02 queue-preparation journals; arbitrary release names remain excluded.
+const scopedWork=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+|release-[0-9]{8}|release-ready-batch|release-queue-prep-20261102)\.md$/;
 // Exact one-use historical GitHub-generated merge receipt for PR #122 only.
 // This commit has the identical tested PR-head tree, a scoped same-commit
 // work journal, and no publication; GitHub auto-generated its title without
 // the [skip netlify] marker. Never authorize another unmarked merge by pattern.
 const REVIEWED_GITHUB_MERGE_SHA='644870aee66ad5c5f0bcdab0d4eeb66283cdd5fb';
 const REVIEWED_GITHUB_MERGE_SUBJECT='Merge pull request #122 from Schulzet3/work/issue33-presentation-triage-20261026';
-export function auditLatestCommit({paths,subject,sha}){
+export function auditLatestCommit({paths,subject,message=subject,sha}){
  const errors=[],items=[...new Set(paths.map(s=>s.trim()).filter(Boolean))];
  const marker=/^Release DIC: .+ \[dic-publish\]$/.test(subject||'');
- if(!marker&&!String(subject||'').includes('[skip netlify]')&&
+ // Netlify recognizes [skip netlify] anywhere in the complete Git message.
+ // GitHub's merge-commit subject can omit the marker while its body retains it;
+ // check the actual commit message, not PR metadata or a caller-supplied title.
+ const skip=/(?:^|\s)\[skip netlify\](?=\s|$)/i.test(message||'');
+ if(!marker&&!skip&&
     !(sha===REVIEWED_GITHUB_MERGE_SHA&&subject===REVIEWED_GITHUB_MERGE_SUBJECT))
   errors.push('Unmarked commit: use [skip netlify] for nonrelease work; [dic-publish] requires its own owner-approved release');
  const code=items.filter(p=>/^(site\/|src\/|netlify\/functions\/|supabase\/|scripts\/|tests\/|\.github\/(?:workflows|actions)\/|build_cloud\.mjs$|eslint\.config\.mjs$|netlify\.toml$|package(?:-lock)?\.json$)/.test(p));
@@ -56,6 +60,7 @@ export function verifyLatestCommit(){
    const diff=parent?['diff-tree','--no-commit-id','--name-only','-r',parent,hash]:
     ['diff-tree','--root','--no-commit-id','--name-only','-r',hash];
    entries.push({sha:hash,subject:run(['log','-1','--format=%s',hash]),
+    message:run(['log','-1','--format=%B',hash]),
     paths:run(diff).split(/\r?\n/).filter(Boolean)});
   }catch(error){throw Error('Cannot inspect commit '+hash+': '+String(error.message));}
  }
