@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 1097,
-    "first_unvalidated_manifest_file_index": 19,
-    "first_unvalidated_path": ".gitignore",
+    "strict_validated_lines": 1126,
+    "first_unvalidated_manifest_file_index": 20,
+    "first_unvalidated_path": "AGENTS.md",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,15 +15,15 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 1034,
+    "strict_validated_lines": 1086,
     "first_unvalidated_file_index": 19,
     "first_unvalidated_path": ".github/workflows/roaster-source-probe.yml",
-    "first_unvalidated_line": 1,
+    "first_unvalidated_line": 53,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "9d0e9fa77b87dbe7a828951442332f6485ef13cd",
+    "observed_development_commit": "a27c067b7bf37dcb4130ec482f8dacb6e436f012",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
@@ -40,8 +40,12 @@
         "path": ".github/workflows/roaster-source-probe.yml",
         "blob_sha": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
         "total_lines": 146,
-        "strict_individual_line_coverage": 0,
-        "reason": "Full source fetched and inspected for change scope but individual live line review incomplete; explicit noncredit"
+        "strict_individual_line_coverage": 52,
+        "reason": "S2-019 direct review pinned/live identical first 52; live lines 53-146 still open",
+        "strict_coverage_range": [
+          1,
+          52
+        ]
       },
       {
         "path": ".github/workflows/visual-review.yml",
@@ -50,7 +54,8 @@
         "strict_individual_line_coverage": 0,
         "reason": "Historical source reviewed, live refactored manual-only workflow still needs separate per-line evidence"
       }
-    ]
+    ],
+    "latest_partially_validated_live_path": ".github/workflows/roaster-source-probe.yml"
   },
   "batches": [
     {
@@ -486,6 +491,29 @@
           "lines": 56
         }
       ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-019",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-019.json",
+      "frozen_file": ".gitignore",
+      "frozen_lines": [
+        1,
+        29
+      ],
+      "frozen_blob": "cc33dc08440db607da17b3af8f82295036561bec",
+      "pinned_file": ".github/workflows/roaster-source-probe.yml",
+      "pinned_lines": [
+        1,
+        52
+      ],
+      "pinned_blob": "663b8c01f7d164cd732ea5fb047a6c70230dedfe",
+      "pinned_total_lines": 146,
+      "live_partial_lines": [
+        1,
+        52
+      ],
+      "live_blob": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
       "old_v2_extra_credit": 0
     }
   ],
