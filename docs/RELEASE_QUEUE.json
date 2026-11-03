@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "2c8e1ffe3b83a7524968f50efca3ead4da282cf8",
-    "release_sha": "8e3808f0d7532f47ea348ef9a58e5aa87d714ffe",
-    "netlify_deploy_id": "6ae8006cd64b30ae9046e44d"
+    "tested_source_sha": "f1e150a2e7c95764c4a2d8760886aab23c2bfc5e",
+    "release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "netlify_deploy_id": "6aea62463d08ddf08e0bec7b"
   },
   "items": [
     {
@@ -48,7 +48,7 @@
       "id": "DIC-Q-335-historical-grind-range-evidence",
       "issue": 335,
       "title": "Reject out-of-range historic grinder readings as invalid cross-calibration evidence",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "e2957ab1ada581b593302ceaf56d8f14c6481cce",
       "scope_paths": [
         "site/lib/engine.js"
@@ -76,7 +76,10 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/335",
-      "notes": "VERIFIED READY, NOT DEPLOYED. Historic dial outside its own archived snapshot espresso range is not forcibly mapped to today's espresso-range boundary. Within-range endpoints and middle values retain explicitly unproven relative-range starting estimates. Existing shots and all Locked one-change, taste, family, privacy, offline and Community behavior preserved. Does not prove physical grind-transfer equivalence or real-world taste improvement. Not a new release authorization."
+      "notes": "PROVIDER DEPLOYED and CURRENT under Release15, exact unchanged READY engine blob bc8bbcee9ec349145a51552ab5dd3337115feca6. Same-source focused grinder/shot/recommendation/offline GitHub tests SUCCESS. No SQL/Edge/Auth/member writes; previous historical evidence preserved. No empirical dial/taste or real authenticated owner-device observation. Separate #33 READY remains unshipped.",
+      "delivered_release_id": "DIC-20261103-READY335-15",
+      "delivered_provider": "Netlify production",
+      "delivered_at_utc": "2026-11-03T22:38:16.195Z"
     },
     {
       "id": "DIC-Q-33-selected-producer-credit-locality",
@@ -4701,6 +4704,18 @@
         "DIC-Q-33-selected-origin-method-suffix"
       ],
       "receipt": "docs/PRODUCTION_RELEASE_2026-11-02_READY17_14_VERIFIED.json"
+    },
+    {
+      "id": "DIC-20261103-READY335-15",
+      "state": "DEPLOYED",
+      "tested_source_sha": "f1e150a2e7c95764c4a2d8760886aab23c2bfc5e",
+      "release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+      "netlify_deploy_id": "6aea62463d08ddf08e0bec7b",
+      "deployed_at_utc": "2026-11-03T22:38:16.195Z",
+      "item_ids": [
+        "DIC-Q-335-historical-grind-range-evidence"
+      ],
+      "receipt": "docs/PRODUCTION_RELEASE_2026-11-03_READY335_15_VERIFIED.json"
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
