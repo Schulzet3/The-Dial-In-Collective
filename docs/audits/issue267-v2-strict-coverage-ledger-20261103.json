@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "owner_standard": "strict every-original-and-pinned-current source line, 9 review criteria, plus live source drift",
+  "frozen": {
+    "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "denominator": 579961,
+    "strict_validated_lines": 41,
+    "first_unvalidated_manifest_file_index": 2,
+    "first_unvalidated_path": ".github/workflows/cloud-beta-ci.yml",
+    "first_unvalidated_line": 1,
+    "legacy_v2_reported_count": 5451,
+    "legacy_v2_reported_count_is_not_strict_validated": true
+  },
+  "pinned_current": {
+    "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "denominator": 57913,
+    "strict_validated_lines": 41,
+    "first_unvalidated_file_index": 2,
+    "first_unvalidated_path": ".github/workflows/cloud-beta-ci.yml",
+    "first_unvalidated_line": 1,
+    "legacy_v2_reported_count": 6462,
+    "legacy_v2_reported_count_is_not_strict_validated": true
+  },
+  "post_pin_drift": {
+    "observed_development_commit": "b275843b705f35ea381496bca2ae77e5d9393b37",
+    "strict_validated_added_lines": 1,
+    "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
+    "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED"
+  },
+  "batches": [
+    {
+      "batch": "S2-001",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-001.json",
+      "shared_source_blob": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+      "frozen_file": ".github/workflows/approval-continuity.yml",
+      "frozen_lines": [
+        1,
+        41
+      ],
+      "pinned_file": ".github/workflows/approval-continuity.yml",
+      "pinned_lines": [
+        1,
+        41
+      ],
+      "live_added_lines": [
+        9
+      ]
+    }
+  ],
+  "completion": "IN_PROGRESS",
+  "test_limit": "Source-equivalence and per-line integrity only; no new app/runtime CI claims"
+}
