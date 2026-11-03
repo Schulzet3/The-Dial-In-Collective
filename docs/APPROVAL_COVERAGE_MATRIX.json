@@ -2004,16 +2004,17 @@
     "limit": "Classification of user instructions only; no V2 line reviewed/tested, no code edits, production changes, existing baseline waiver, queue READY or publication."
   },
   "current_owner_existing_ssh_backup_key_github_actions_secret_20261102": {
-    "status": "LOCKED_OWNER_APPROVED_MANAGED_EXISTING_KEY_NO_LIVE_RESTORE",
+    "status": "LOCKED_OWNER_APPROVED_EXISTING_KEY_FIRST_REAL_ARCHIVED_RESTORE_VERIFIED",
     "date": "2026-11-02",
     "decision_id": "OPS-OWNER-REUSE-EXISTING-SSH-RECOVERY-KEY-20261102",
     "issue": 423,
     "scope": "Existing owner private SSH Ed25519/native age recovery key may be entered DIRECTLY into GitHub encrypted repository Actions secret DIC_ARCHIVE_AGE_IDENTITY by owner. Supersedes only independent automation-only key requirement, not encrypted backups, offline copy or privacy.",
     "source_verified": "Main ops PR431 merged source 760cc2ee1b97fc476d4d03b88ca76f5d7fa79d2c; 137 PR tests included real synthetic SSH key derivation, merged main CI succeeded",
+    "first_live_restore_receipt": "2026-11-03 scheduled GitHub Actions 41709488687, exact main 5b6a056adf9cb6a39ce363f6530859e2239b1970, ZIP SHA256 1cd12b8b9b7ef4dded07cebc96578f2903e9fb3a85195e6afd42e677aa92b746, age decrypt+46-table/Auth+cleanup PASS",
     "not_yet_verified": [
-      "No actual owner's key has been provisioned into GitHub through this ChatGPT session",
-      "Actual old Drive ciphertext decryption and isolated PostgreSQL restore not run; remain BLOCKED until test PASS",
-      "Current branch changes only docs; no production release"
+      "Original owner private key value is inaccessible through ChatGPT; secure Actions-secret use is verified by actual successful decryption",
+      "Nov1 independently Drive-matched original ciphertext was actually decrypted and 46 tables/Auth restored on Nov3 run 41709488687; future weekly and Drive delivery checks require direct receipts",
+      "Hosted Supabase services, external credentials and Storage file bytes not restored; no production release"
     ],
     "preserve": [
       "Keep owner's offline copy, existing historical archives and encrypted daily backups",
