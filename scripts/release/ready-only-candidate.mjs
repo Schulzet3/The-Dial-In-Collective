@@ -31,10 +31,13 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
  for(const item of selected){
   try{
    if(!SHA.test(item.merged_source_sha||'')||
-      isAncestor(publishedSourceSha,item.merged_source_sha)!==true||
+      // A selected READY merge may predate an isolated published candidate:
+      // the candidate deliberately restored this item's code to older bytes.
+      // Its current source must still descend from the READY merge, and the
+      // actual deployable byte diff and exact READY blob are checked below.
       item.merged_source_sha===publishedSourceSha||
       isAncestor(item.merged_source_sha,developmentSourceSha)!==true)
-    errors.push(item.id+' READY merge is not an unpublished development ancestor');
+    errors.push(item.id+' READY merge is absent from current development ancestry');
   }catch{errors.push(item.id+' READY ancestry unavailable');}
  }
  const changed=deployableChangedPaths(developmentChangedPaths||[]);
