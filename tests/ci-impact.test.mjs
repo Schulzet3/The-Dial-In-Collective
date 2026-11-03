@@ -70,7 +70,7 @@ test('Strict Issue #267 audit-only JSON receipts avoid expensive app/SQL/browser
  assert.equal(v.browser_mode,'none');assert.equal(v.sql,false);
  assert.equal(v.lint,false);assert.equal(v.provider_guard,false);
  assert.equal(v.build_validate,false);assert.equal(v.build_browser,false);
- const run=(name,args)=>{assert.equal(name,'git');return files.join('\n')+'\n';};
+ const run=(name,_args)=>{assert.equal(name,'git');return files.join('\n')+'\n';};
  const tested=classifyChanges({base:A,head:B,event:'pull_request',git:run});
  assert.equal(tested.tier,'docs');assert.equal(tested.node_mode,'none');
 });
