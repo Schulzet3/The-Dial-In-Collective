@@ -37,3 +37,28 @@ test('#261 unrelated SEO and related coffee producer cannot fill selected Guji K
  assert.notEqual(r.fields.process,'Washed',JSON.stringify(r.fields));
  assert.doesNotMatch(JSON.stringify(r.fields),/Other Estate|Former Kenya Lot/i);
 });
+
+test('#261 cup analogy to natural Ethiopian coffees is not primary-process evidence',()=>{
+ const r=parse(producerSection+processSection+cupSection);
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.process,undefined,JSON.stringify(r.fields));
+ assert.equal(r.fields.producer,undefined,JSON.stringify(r.fields));
+});
+
+test('comparison with washed Kenyan coffees cannot fill a selected Ethiopian process',()=>{
+ const r=parse('<p>This coffee tastes like washed Kenyan coffees, with a vivid berry cup.</p>');
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.process,undefined,JSON.stringify(r.fields));
+});
+
+test('an actual selected Process label outranks a different-coffee cup analogy',()=>{
+ const r=parse('<p>Process: Washed</p>'+cupSection);
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.process,'Washed',JSON.stringify(r.fields));
+});
+
+test('a direct selected naturally processed statement remains extractable',()=>{
+ const r=parse('<p>This coffee is naturally processed and dried in the cherry.</p>');
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.process,'Natural',JSON.stringify(r.fields));
+});
