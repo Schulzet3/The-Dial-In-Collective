@@ -680,8 +680,14 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
      new RegExp('\\b(?:current lot|origin|country)\\s*:\\s*(?:[^.!?]{0,65}\\s+)?('+PROCESS+')(?=\\s|[,.)]|$)','gi'),
      /\b(?:fermented|fermentation)\s+(anaerobically)\b/gi
     ];
-    for(const pattern of patterns)for(const match of processSentence.matchAll(pattern))
+    for(const pattern of patterns)for(const match of processSentence.matchAll(pattern)){
+     // A sensory analogy to OTHER coffees is not a method assertion about
+     // this selected lot. Keep direct Process labels and actual method prose.
+     const lead=processSentence.slice(Math.max(0,match.index-130),match.index);
+     const comparison=/\b(?:about|like|similar to|reminiscent of|compared to|typical of|reminds? (?:us )?of)\s+(?:(?:the|a|an|classic|other|traditional)\s+){0,3}$/i.test(lead);
+     if(comparison&&/\bcoffees?\b/i.test(match[0]))continue;
      processes.push({value:processValue(match[1]),quote:sentence});
+    }
     // A direct current-method assertion outranks historical farm methods.
     // Several different current assertions still remain a contradiction.
     if(!/\b(?:in|during|until|before|after)\s+(?:19|20)\d{2}\b/i.test(processSentence)){
