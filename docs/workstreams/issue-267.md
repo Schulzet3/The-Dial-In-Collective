@@ -1,3 +1,13 @@
+## November 3, 2026 — #267 strict S2-003 review of workflow #3 [skip netlify]
+
+**Source evidence:** frozen original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` blob `a8cabb7cd9f81149aa8d363c20c9ebeda6695260` **112/112** lines; pinned `9707553a64f88127826e8f5b2b36cd0651296e83` blob `7dd903e5006f8adc6bdf0bd63b75d7fd3c72b25e` **113/113**; live at `60b33d15acb7ed04ea7a3bcc773204c28408f627` blob `f6dee8efcfdeefdaa28beba8c97d77fe7bd093ef` **132/132**. Per-line source text, nine owner criteria, exact counterpart, classification and independently written AI semantic interpretation recorded [S2-003](../audits/issue267-v2-strict-batches/S2-003.json). Historic old V2 grouped summaries are not nine-criteria line proof; do not double count. Strict totals now **260/579,961** frozen, **262/57,913** pinned; old V2 provisional 5,451/6,462 unchanged. This is not independent human review.
+
+**Post-pin current drift:** full GitHub compare pinned `9707553a...` to live `60b33d15acb7ed04ea7a3bcc773204c28408f627` returned **222 changed paths across 243 commits**; every status/path machine-inventoried in S2-003 but NOT semantically credited. Source complete live workflow #2 106 lines, #3 132 lines, and #1 one inserted trigger are reviewed so far. All other live delta files/new paths remain open, no silent coverage PASS.
+
+**Findings:** original lacked `scripts/pwa/**` trigger (already repaired pinned/live); legacy recovery branch push trigger exists (not safe-to-delete proof); live #457 risk-scoped cloud/compiled mobile browser tests reviewed as tests/config, not proof of hosted signed-in/physical device performance. #33 and #96 owners unmodified. Git blob/line/counterpart verification PASS; no new application tests, member/Supabase/Netlify writes, READY queue changes or deployments. Strict continuation next frozen/pinned manifest #4 `.github/workflows/coffee-audit-python.yml` line1. #267 OPEN.
+
+---
+
 ## November 3, 2026 — #267 strict per-line S2-002 frozen/current/live workflow #2 [skip netlify]
 
 **Recovery source:** development `7d3418c69120a569c781e91b8e88a4007bb33e4d`, main `8b58dbf803a60cc201996f250e71444c03a9e7c8`, release `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe`; checked AGENTS, preflight/entrypoint, issue #267, original and pinned inventories, original R2-001/C2-001 grouped receipts, old V2 and newer strict ledgers, status, Master Spec/Nov3 #457 Lock, Decision Ledger, approval matrix, release queue, #33 and #96 ownership, open #267 V1 draft PRs. No overlapping current strict S2 receipts found after S2-001.
