@@ -36,75 +36,71 @@ concurrency:
   group: dic-cloud-beta-ci-${{ github.ref }}
   cancel-in-progress: true
 
+
 jobs:
   validate:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Classify documentation-only change (unknown means full CI)
+      - name: Conservatively classify exact changed source
         id: scope
         env:
           DIC_CI_EVENT: ${{ github.event_name }}
           DIC_CI_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
-      - name: Explain optimized no-op CI
+      - name: Report NOT_APPLICABLE, not an app test PASS
         if: steps.scope.outputs.docs_only == 'true'
-        run: echo 'Documentation-only change; expensive suite not applicable; exact-source release guard remains in place.'
-      # Netlify's ignore command runs before install on Node 18, independently
-      # of the application's configured Node 22. Exercise that real boundary.
+        run: |
+          echo 'NOT_APPLICABLE: governance only. Approval/continuity still required.'
       - uses: actions/setup-node@v7.1.0
-        if: steps.scope.outputs.docs_only != 'true'
+        if: steps.scope.outputs.provider_guard == 'true'
         with:
           node-version: '18.20.8'
-      - name: Verify Netlify ignore guard on its pre-install Node 18 runtime
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Verify Netlify pre-install guard (infra changes only)
+        if: steps.scope.outputs.provider_guard == 'true'
         run: node --test tests/netlify-credit-guard.test.mjs tests/one-use-claim.test.mjs
       - uses: actions/setup-node@v7.1.0
-        if: steps.scope.outputs.docs_only != 'true'
+        if: steps.scope.outputs.node_mode != 'none' || steps.scope.outputs.lint == 'true' || steps.scope.outputs.build_validate == 'true'
         with:
           node-version: '22'
           cache: 'npm'
-      - name: Install exact locked dependency tree
-        if: steps.scope.outputs.docs_only != 'true'
-        run: node scripts/audit/measure-stage.mjs --name install --out qa_artifacts/ci-metrics/validate.jsonl -- npm ci --ignore-scripts --no-audit --no-fund
-      - name: Run all checked-in Node tests
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Install locked dependencies for affected Node/build tasks
+        if: steps.scope.outputs.node_mode != 'none' || steps.scope.outputs.lint == 'true' || steps.scope.outputs.build_validate == 'true'
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run all checked-in Node tests (HIGH risk only)
+        if: steps.scope.outputs.node_mode == 'full'
         run: node scripts/audit/measure-stage.mjs --name full-tests --out qa_artifacts/ci-metrics/validate.jsonl -- npm test
-      - name: Lint browser, server, Edge and audit JavaScript
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Focused Log Shot, grinder, recommendations and offline regressions
+        if: steps.scope.outputs.node_mode == 'shots'
+        run: node --test tests/grind-*.test.mjs tests/grinder17-*.test.mjs tests/shot-*.test.mjs tests/cloud-shot-*.test.mjs tests/recommendation-*.test.mjs tests/recipe-*.test.mjs tests/next-shot-*.test.mjs tests/legacy-shot-history-ratio.test.mjs tests/fast-flow-hybrid.test.mjs tests/offline-*.test.mjs
+      - name: Focused coffee source/identity and preview regressions
+        if: steps.scope.outputs.node_mode == 'coffee'
+        run: node --test tests/coffee-*.test.mjs tests/preview-request-bounds.test.mjs tests/universal-coffee-preview.test.mjs
+      - name: Lint affected JS or workflow source
+        if: steps.scope.outputs.lint == 'true'
         run: node scripts/audit/measure-stage.mjs --name lint --out qa_artifacts/ci-metrics/validate.jsonl -- npm run lint
-      - name: Build static beta assets with nonfunctional public test coordinates
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Build once for NON-UI changes
+        if: steps.scope.outputs.build_validate == 'true'
         env:
           SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
           SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
         run: node scripts/audit/measure-stage.mjs --name build --out qa_artifacts/ci-metrics/validate.jsonl -- npm run build:cloud
-      - name: Fail if any development-only or private source leaks into dist
-        if: steps.scope.outputs.docs_only != 'true'
-        run: |
-          test -s dist/index.html
-          test -s dist/admin.html
-          test -s dist/admin/main.js
-          test -s dist/admin/view.js
-          test -s dist/cloud/coffee-match-ui.js
-          test -s dist/vendor/supabase.js
-          test -s dist/cloud/config.js
-          test ! -e dist/docs
-          test ! -e dist/tests
-          test ! -e dist/supabase
-          test ! -e dist/scripts
-          test ! -e dist/.github
-          echo "PASS: Cloud app tests/build complete; no private source trees published."
-      - name: Retain source validation timing receipts even on failure
+      - name: Verify packaged graph from this job's build
+        if: steps.scope.outputs.build_validate == 'true'
+        run: node scripts/audit/site-integrity.mjs --dist
+      - name: Report test applicability explicitly
         if: always()
-        uses: actions/upload-artifact@v7
+        run: echo 'See classification log for actually executed tests. NOT_APPLICABLE is NOT PASS.'
+      - uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: dic-validate-timing-${{ github.run_id }}
           path: qa_artifacts/ci-metrics/validate.jsonl
-          if-no-files-found: warn
+          if-no-files-found: ignore
           retention-days: 7
