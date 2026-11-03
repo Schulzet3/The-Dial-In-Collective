@@ -79,3 +79,22 @@ test('later untracked edits in same READY path are never laundered into release'
    validate.sourceObjectAt(sha,path)};
  assert.throws(()=>validateReadyOnlyCandidate(q,bad),/edits after its verified READY merge/);
 });
+
+test('a READY merge already in published candidate ancestry can still be unshipped',()=>{
+ // First READY-only release excludes D's bytes while retaining the Git merge
+ // as an ancestor. After a no-source-change integration merge, a later
+ // publication must use the selected source blobs, not merge recency.
+ const P='e'.repeat(40);
+ const queue={...q,published_base:{...q.published_base,tested_source_sha:P}};
+ const beforePublished=(x,y)=>x===y||
+  (x===D&&(y===P||y===B))||(x===P&&y===B);
+ const input={...opts,publishedSourceSha:P,isAncestor:beforePublished};
+ const plan=planReadyOnlyCandidate(queue,input);
+ assert.equal(plan.ready,true,plan.errors.join('; '));
+ assert.deepEqual(plan.included_paths,['site/card.js']);
+ assert.deepEqual(plan.restored_paths,['src/server/extractor.mjs']);
+ // The source must still have a real unpublished file delta; a READY label
+ // alone never authorizes a redundant build or already published bytes.
+ assert.equal(planReadyOnlyCandidate(queue,{...input,developmentChangedPaths:[]}).ready,false);
+ assert.equal(planReadyOnlyCandidate(queue,{...input,isAncestor:(a,b)=>a===b||(a===P&&b===B)}).ready,false);
+});

@@ -90,3 +90,38 @@ test('zero READY items never creates a staging ref',()=>{
   assert.throws(()=>f.git('rev-parse','release-candidates/empty-denied'));
  }finally{rmSync(f.root,{recursive:true,force:true});}
 });
+
+test('two sequential isolated releases preserve next READY source even when merged before prior publish',()=>{
+ const f=fixture();
+ try{
+  // The second feature was merged and independently READY before the first
+  // feature shipped, but the first candidate intentionally excluded it.
+  const other=f.queue.items[1];
+  f.queue.items[1]={...other,state:'READY',merged_source_sha:f.development,
+   tests:['scoped tests PASS'],ci_runs:[34567],blockers:[]};
+  f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+'\n');
+  f.git('add','-A');f.git('commit','-qm','Certify second READY before first release [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const first=stageReadyOnlyCandidate({repoDir:f.root,developmentSourceSha:f.development,
+   selectedIds:['DIC-Q-100'],branch:'release-candidates/first-ready-published'});
+  assert.deepEqual(first.plan.included_paths,['site/card.js']);
+  assert.deepEqual(first.plan.restored_paths,['src/server/extractor.mjs']);
+  // The source-isolated publication is a child of development, not an
+  // ancestor until we reconcile it with a no-code-change SECOND-parent merge.
+  f.git('merge','-s','ours','--no-ff','-m','Acknowledge published candidate without source changes [skip netlify]',first.candidate_sha);
+  assert.equal(f.git('show','HEAD:src/server/extractor.mjs'),'unready extractor');
+  f.queue.published_base.tested_source_sha=first.candidate_sha;
+  f.queue.items[0].state='DEPLOYED';
+  f.write('docs/RELEASE_QUEUE.json',JSON.stringify(f.queue,null,2)+'\n');
+  f.git('add','-A');f.git('commit','-qm','Settle published baseline and retain unpublished READY [skip netlify]');
+  f.development=f.git('rev-parse','HEAD');
+  const second=stageReadyOnlyCandidate({repoDir:f.root,developmentSourceSha:f.development,
+   selectedIds:['DIC-Q-101'],branch:'release-candidates/second-ready-published'});
+  assert.deepEqual(second.plan.included_paths,['src/server/extractor.mjs']);
+  assert.deepEqual(second.plan.restored_paths,[]);
+  assert.equal(f.git('show',second.candidate_sha+':site/card.js'),'new READY card');
+  assert.equal(f.git('show',second.candidate_sha+':src/server/extractor.mjs'),'unready extractor');
+  assert.equal(f.git('rev-parse','development/backend-foundation'),f.development,
+   'staging did not mutate development');
+ }finally{rmSync(f.root,{recursive:true,force:true});}
+});
