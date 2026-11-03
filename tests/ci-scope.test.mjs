@@ -32,6 +32,7 @@ test('CLI emits a GitHub output value when run with a relative script path',()=>
    encoding:'utf8',env:{...process.env,GITHUB_OUTPUT:path,DIC_CI_BASE:'0'.repeat(40),DIC_CI_HEAD:'1'.repeat(40)},timeout:5000
   });
   assert.equal(result.status,0,result.stderr);
-  assert.equal(readFileSync(path,'utf8').trim(),'docs_only=false');
+  assert.ok(readFileSync(path,'utf8').split('\n').includes('docs_only=false'));
+  assert.ok(readFileSync(path,'utf8').split('\n').includes('tier=high'));
  }finally{rmSync(root,{recursive:true,force:true});}
 });

@@ -1,0 +1,7 @@
+# Issue #457 — risk-based, nonduplicating release CI
+
+Owner November 3: approved deduplicated builds/browser, automatic conservative source-impact classification, reuse of exact-source passing evidence, one-command publication; EXPLICITLY REJECTED proactive READY-candidate assembly/certification. Development only, no production grant or release.
+
+Source base: `0772c65662d776793723cc11559502f1fb9ee779`. Same-commit paths: scripts/audit/ci-scope.mjs, tests/ci-scope.test.mjs, tests/ci-impact.test.mjs, tests/ci-optimization.test.mjs, cloud-beta/cloud-regression/isolated-sql/visual-review workflows, this journal. Candidate CI compares actual published-source to READY-only deployable tree, not its staging manifest. Unknown refs/paths fail closed HIGH. Exact five existing named CI statuses remain; individual suite NOT_APPLICABLE is logged, never claimed PASS. Non-UI build owned by validate; UI/Auth build by mobile browser; no redundant routine build. Deep visual workflow manual-only. Sunday comprehensive/backup scheduled checks unchanged. No automatic staging/claims/provider writes.
+
+Acceptance: adversarial classifiers, CI-level browser/cloud/SQL applicability and dedup contracts, high-risk PR full Node/lint/isolated SQL/browser verification, approval and continuity, noforce merge, merged-source evidence, unchanged Netlify. Current: code STAGED, tests/PR CI and integration pending. Repair failures without force; preserve current #335 READY and Issue #33/#267 source/history, Auth/privacy/SQL/offline data.

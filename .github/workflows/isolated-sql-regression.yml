@@ -22,34 +22,36 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+
 jobs:
   sql:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Classify documentation-only change (unknown means full CI)
+      - name: Classify SQL/Auth/unknown high-risk source
         id: scope
         env:
           DIC_CI_EVENT: ${{ github.event_name }}
           DIC_CI_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
           DIC_CI_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_CI_REF: ${{ github.ref }}
         run: node scripts/audit/ci-scope.mjs
-      - name: Explain optimized no-op CI
-        if: steps.scope.outputs.docs_only == 'true'
-        run: echo 'Documentation-only change; expensive suite not applicable; exact-source release guard remains in place.'
-      - name: Verify all production-applied migration filenames and exact SQL byte hashes
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Explicit SQL NOT_APPLICABLE, not a database PASS
+        if: steps.scope.outputs.sql == 'false'
+        run: echo 'NOT_APPLICABLE: no SQL/Auth/database scope.'
+      - name: Verify applied SQL filename and byte hashes
+        if: steps.scope.outputs.sql == 'true'
         run: node scripts/audit/verify-migration-baseline.mjs
-      - name: Apply and exercise schema in network-isolated PostgreSQL 17.11
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Apply isolated PostgreSQL schema and permissions
+        if: steps.scope.outputs.sql == 'true'
         run: bash scripts/audit/isolated-sql-regression.sh
-      - name: Verify actual signed bearer JWT authorization, held-shot ownership and correction against disposable PostgREST
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Verify signed JWT and per-user HTTP ownership
+        if: steps.scope.outputs.sql == 'true'
         run: bash scripts/audit/isolated-signed-http-regression.sh
-      - name: Verify recovery snapshot consistency under concurrent writes and fail-closed errors
-        if: steps.scope.outputs.docs_only != 'true'
+      - name: Verify backup snapshot concurrency and errors
+        if: steps.scope.outputs.sql == 'true'
         run: bash scripts/audit/isolated-backup-snapshot-regression.sh

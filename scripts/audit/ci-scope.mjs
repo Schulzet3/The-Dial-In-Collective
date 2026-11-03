@@ -1,27 +1,107 @@
-// Fast, fail-closed changed-path classifier. Never treat code, CI config, JSON,
-// SQL, scripts, or unknown Git history as documentation-only.
+// Fail-closed impact classifier for the existing required CI jobs.
+// Published-to-candidate source diff, NOT the staging manifest, controls release CI.
 import {execFileSync} from 'node:child_process';
-import {appendFileSync} from 'node:fs';
+import {readFileSync,appendFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 const SHA=/^[a-f0-9]{40}$/;
+const LEVEL={docs:0,low:1,medium:2,high:3};
+const APP_PREFIX=['site/','src/server/','netlify/functions/','supabase/migrations/','supabase/functions/'];
+const APP_FILES=new Set(['build_cloud.mjs','netlify.toml','package.json','package-lock.json',
+ 'scripts/netlify/should-ignore-build.mjs','scripts/audit/approval-coverage.mjs',
+ 'scripts/release/one-use-claim.mjs','scripts/pwa/service-worker.template.txt']);
+const SAFE_META=new Set(['docs/RELEASE_QUEUE.json','docs/DECISION_LEDGER.json',
+ 'docs/APPROVAL_COVERAGE_MATRIX.json','docs/RELEASE_CANDIDATE.json']);
+export function deployableRiskPaths(paths){
+ return Array.isArray(paths)?paths.filter(p=>typeof p==='string'&&
+  (APP_PREFIX.some(pre=>p.startsWith(pre))||APP_FILES.has(p))):[];
+}
 export function docsOnlyPaths(paths){
  return Array.isArray(paths)&&paths.length>0&&paths.every(path=>
   typeof path==='string'&&(path==='README.md'||/^docs\/[A-Za-z0-9_./-]+\.md$/.test(path))&&
   !path.split('/').includes('..'));
 }
+function impactKind(path){
+ if(!/^[A-Za-z0-9_.\/-]+$/.test(path)||path.includes('..')||path.startsWith('/'))return 'unknown';
+ if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path))
+  return 'docs';
+ if(/^site\/.*\.css$/.test(path))return 'style';
+ if(/^site\/lib\//.test(path))return 'shots';
+ if(/^src\/server\/coffee[-/]/.test(path))return 'coffee';
+ if(/^site\/cloud\/(?:main|auth|session|account|membership|permissions)[^/]*\.js$/.test(path)||
+  /^site\/admin\//.test(path))return 'auth';
+ if(/^site\//.test(path))return 'ui';
+ if(/^supabase\//.test(path))return 'sql';
+ if(/^netlify\/functions\//.test(path))return 'auth';
+ if(/^tests\/(?:grind|grinder|recommendation|shot-|recipe-|next-shot|offline|legacy-shot|fast-flow)/.test(path))
+  return 'shots';
+ if(/^tests\/(?:coffee-|preview-request-bounds|universal-coffee-preview)/.test(path))return 'coffee';
+ if(/^tests\/(?:cloud|pwa-|community-ui|visual-|ui-|site-integrity|browser\/)/.test(path))return 'ui';
+ if(/^tests\/(?:sql\/|admin-|auth|security|edge-|backup)/.test(path))return 'auth';
+ if(/^\.github\/workflows\//.test(path)||/^scripts\/(?:audit|release|backups|netlify|pwa)\//.test(path)||
+  /^tests\//.test(path)||['build_cloud.mjs','netlify.toml','package.json',
+   'package-lock.json','eslint.config.mjs'].includes(path))return 'infrastructure';
+ return 'unknown';
+}
+export function classifyImpactPaths(paths){
+ if(!Array.isArray(paths)||!paths.length)paths=['[unknown]'];
+ const kinds=new Set(paths.map(impactKind));
+ const tier=[...kinds].reduce((v,k)=>{
+  const t=k==='docs'?'docs':k==='style'?'low':
+   ['shots','coffee','ui'].includes(k)?'medium':'high';
+  return LEVEL[t]>LEVEL[v]?t:v;
+ },'docs');
+ const ui=['style','ui','auth','unknown','infrastructure'].some(k=>kinds.has(k));
+ const sql=['sql','auth','unknown','infrastructure'].some(k=>kinds.has(k));
+ const mixedMedium=['shots','coffee','ui'].filter(k=>kinds.has(k)).length>1;
+ const finalTier=mixedMedium?'high':tier;
+ return {
+  tier:finalTier,docs_only:finalTier==='docs',
+  node_mode:finalTier==='high'?'full':kinds.has('shots')?'shots':kinds.has('coffee')?'coffee':'none',
+  cloud_mode:finalTier==='high'?'none':kinds.has('ui')?'targeted':'none',
+  browser_mode:!ui?'none':finalTier==='low'?'visual':finalTier==='high'?'high':'ui',
+  sql:sql||mixedMedium,lint:LEVEL[finalTier]>=LEVEL.medium,
+  build_validate:finalTier!=='docs'&&!ui,build_browser:ui,
+  provider_guard:kinds.has('infrastructure')||kinds.has('unknown'),kinds:[...kinds].sort(),paths
+ };
+}
 export function classifyChanges({base,head,event,git=execFileSync}={}){
+ const fail=reason=>({...classifyImpactPaths(['[unknown]']),reason,paths:[]});
  if(!SHA.test(base||'')||!SHA.test(head||'')||base==='0'.repeat(40))
-  return {docs_only:false,reason:'UNKNOWN_OR_INITIAL_COMMIT',paths:[]};
+  return fail('UNKNOWN_OR_INITIAL_COMMIT');
  try{
   const range=event==='pull_request'?base+'...'+head:base+'..'+head;
-  const text=git('git',['diff','--name-only',range],{encoding:'utf8',timeout:15000,maxBuffer:1048576});
-  const paths=String(text).split(/\r?\n/).filter(Boolean);
-  return {docs_only:docsOnlyPaths(paths),reason:docsOnlyPaths(paths)?'DOCUMENTATION_ONLY':'SOURCE_OR_UNKNOWN',paths};
- }catch{return {docs_only:false,reason:'GIT_DIFF_UNAVAILABLE',paths:[]};}
+  const raw=String(git('git',['diff','--name-only','--no-renames',range],{
+   encoding:'utf8',timeout:15000,maxBuffer:1048576}));
+  const all=raw.split(/\r?\n/).filter(Boolean);
+  const paths=event==='candidate'?deployableRiskPaths(all):all;
+  const impact=classifyImpactPaths(paths);
+  return {...impact,reason:event==='candidate'?'PUBLISHED_TO_CANDIDATE_RUNTIME':
+   impact.docs_only?'NON_RUNTIME_ONLY':'SOURCE_SCOPED',paths,changed_total:all.length};
+ }catch{return fail('GIT_DIFF_UNAVAILABLE');}
+}
+export function selectImpactSource({base,head,event,ref,queue}={}){
+ if(typeof ref==='string'&&ref.startsWith('refs/heads/release-candidates/'))
+  return {base:queue?.published_base?.tested_source_sha,head,event:'candidate'};
+ return {base,head,event};
 }
 if(process.argv[1]&&fileURLToPath(import.meta.url)===resolve(process.argv[1])){
- const out=classifyChanges({base:process.env.DIC_CI_BASE,head:process.env.DIC_CI_HEAD,event:process.env.DIC_CI_EVENT});
- if(process.env.GITHUB_OUTPUT)appendFileSync(process.env.GITHUB_OUTPUT,'docs_only='+out.docs_only+'\n');
- console.log('[DIC CI scope] '+JSON.stringify({docs_only:out.docs_only,reason:out.reason,count:out.paths.length}));
+ let source;
+ try{
+  const q=JSON.parse(readFileSync(new URL('../../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
+  source=selectImpactSource({base:process.env.DIC_CI_BASE,head:process.env.DIC_CI_HEAD,
+   event:process.env.DIC_CI_EVENT,ref:process.env.DIC_CI_REF,queue:q});
+ }catch{source={base:null,head:null,event:'unknown'};}
+ const impact=classifyChanges(source);
+ if(process.env.GITHUB_OUTPUT){
+  const keys=['docs_only','tier','node_mode','cloud_mode','browser_mode','sql','lint',
+   'build_validate','build_browser','provider_guard'];
+  appendFileSync(process.env.GITHUB_OUTPUT,keys.map(k=>k+'='+String(impact[k])).join('\n')+'\n');
+ }
+ const line='[DIC scoped CI] '+JSON.stringify({tier:impact.tier,reason:impact.reason,paths:impact.paths,
+  node:impact.node_mode,cloud:impact.cloud_mode,browser:impact.browser_mode,sql:impact.sql,
+  build:impact.build_browser?'browser':impact.build_validate?'validate':'not_applicable'});
+ console.log(line);
+ if(process.env.GITHUB_STEP_SUMMARY)appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+  '### Source-impact classification\n\n'+line+'\n\nNOT_APPLICABLE is not a test PASS. Unknown refs/paths fail closed.\n');
 }

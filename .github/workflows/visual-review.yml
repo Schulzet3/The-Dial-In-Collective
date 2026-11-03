@@ -1,22 +1,10 @@
 # Final admin invitation visual acceptance includes synthetic 390px private operator portal.
 name: DIC private visual review
 on:
-  push:
-    branches: [work/visual-refresh-20261015, development/backend-foundation, 'release-candidates/**']
-    paths:
-      - 'site/**'
-      - 'tests/browser/**'
-      - 'tests/cloud-fixtures/**'
-      - 'eslint.config.mjs'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'scripts/pwa/**'
-      - 'build_cloud.mjs'
-      - 'scripts/audit/site-integrity.mjs'
-      - '.github/workflows/visual-review.yml'
-  pull_request:
-    branches: [development/backend-foundation]
   workflow_dispatch:
+# Deep visual review is manual-only; routine mobile/visual tests now run once
+# in the required mobile-browser-qa job with its one packaged build.
+
 permissions:
   contents: read
 jobs:
